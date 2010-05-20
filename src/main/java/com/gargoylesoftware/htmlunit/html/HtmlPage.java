@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
@@ -84,6 +82,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS21;
 
@@ -874,8 +873,8 @@ public class HtmlPage extends SgmlPage {
             return new ScriptResult(null, this);
         }
 
-        if (sourceCode.toLowerCase().startsWith(JAVASCRIPT_PREFIX)) {
-            sourceCode = sourceCode.substring(JAVASCRIPT_PREFIX.length());
+        if (sourceCode.toLowerCase().startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            sourceCode = sourceCode.substring(JavaScriptURLConnection.JAVASCRIPT_PREFIX.length());
         }
 
         final Object result = getWebClient().getJavaScriptEngine().execute(this, sourceCode, sourceName, startLine);

@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC;
-import static com.gargoylesoftware.htmlunit.javascript.host.Window.WINDOW_HEIGHT;
-import static com.gargoylesoftware.htmlunit.javascript.host.Window.WINDOW_WIDTH;
 import static org.apache.commons.lang.StringUtils.defaultIfEmpty;
 
 import java.util.Collections;
@@ -33,9 +29,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import org.apache.commons.lang.StringUtils;
 import org.w3c.css.sac.Selector;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Text;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -590,7 +588,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_height() {
-        return pixelString(getElement(), new CssValue(WINDOW_HEIGHT) {
+        return pixelString(getElement(), new CssValue(Window.WINDOW_HEIGHT) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
                 return defaultIfEmpty(style.getStyleAttribute("height", true), "363px");
             }
@@ -1226,9 +1224,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             defaultWidth = "auto";
         }
         else {
-            defaultWidth = WINDOW_WIDTH + "px";
+            defaultWidth = Window.WINDOW_WIDTH + "px";
         }
-        return pixelString(getElement(), new CssValue(WINDOW_WIDTH) {
+        return pixelString(getElement(), new CssValue(Window.WINDOW_WIDTH) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
                 return defaultIfEmpty(style.getStyleAttribute("width", true), defaultWidth);
             }
@@ -1284,10 +1282,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
                 final String parentWidth = getWindow().jsxFunction_getComputedStyle(parentJS, null).jsxGet_width();
                 if (getBrowserVersion().isIE() && "auto".equals(parentWidth)) {
-                    width = WINDOW_WIDTH;
+                    width = Window.WINDOW_WIDTH;
                 }
                 else {
-                    width = pixelValue(parentJS, new CssValue(WINDOW_WIDTH) {
+                    width = pixelValue(parentJS, new CssValue(Window.WINDOW_WIDTH) {
                         @Override public String get(final ComputedCSSStyleDeclaration style) {
                             return style.jsxGet_width();
                         }
@@ -1302,7 +1300,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
-            width = pixelValue(getElement(), new CssValue(WINDOW_WIDTH) {
+            width = pixelValue(getElement(), new CssValue(Window.WINDOW_WIDTH) {
                 @Override public String get(final ComputedCSSStyleDeclaration style) {
                     return style.getStyleAttribute("width", true);
                 }
@@ -1404,14 +1402,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         if (getElement() instanceof HTMLBodyElement) {
-            height2_ = WINDOW_HEIGHT;
+            height2_ = Window.WINDOW_HEIGHT;
             return height2_;
         }
 
         final boolean ie = getBrowserVersion().isIE();
         final int defaultHeight = (ie ? 15 : 20);
 
-        int height = pixelValue(getElement(), new CssValue(WINDOW_HEIGHT) {
+        int height = pixelValue(getElement(), new CssValue(Window.WINDOW_HEIGHT) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
                 return style.getStyleAttribute("height", true);
             }
@@ -1516,7 +1514,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // This is very rough, and doesn't even take position or display types into account.
             // It also doesn't take into account the fact that the parent's height may be hardcoded in CSS.
             top = 0;
-            DomNode child = this.getElement().getDomNodeOrDie().getParentNode().getFirstChild();
+            DomNode child = getElement().getDomNodeOrDie().getParentNode().getFirstChild();
             while (child != null) {
                 if (child instanceof HtmlElement && child.mayBeDisplayed()) {
                     top += 20;
@@ -1528,7 +1526,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         else {
             // Calculate the vertical displacement caused by *previous* siblings.
             top = 0;
-            DomNode prev = this.getElement().getDomNodeOrDie().getPreviousSibling();
+            DomNode prev = getElement().getDomNodeOrDie().getPreviousSibling();
             while (prev != null && !(prev instanceof HtmlElement)) {
                 prev = prev.getPreviousSibling();
             }
@@ -1573,7 +1571,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final String l = getLeftWithInheritance();
         final String r = getRightWithInheritance();
 
-        if ("fixed".equals(p) && getBrowserVersion().hasFeature(TREATS_POSITION_FIXED_LIKE_POSITION_STATIC)) {
+        if ("fixed".equals(p) && getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC)) {
             p = "static";
         }
 
@@ -1642,7 +1641,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getPositionWithInheritance() {
         String p = jsxGet_position();
         if ("inherit".equals(p)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = getElement().getParentHTMLElement();
                 p = (parent != null ? parent.jsxGet_currentStyle().getPositionWithInheritance() : "static");
             }
@@ -1660,7 +1659,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getLeftWithInheritance() {
         String left = jsxGet_left();
         if ("inherit".equals(left)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = getElement().getParentHTMLElement();
                 left = (parent != null ? parent.jsxGet_currentStyle().getLeftWithInheritance() : "auto");
             }
@@ -1678,7 +1677,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getRightWithInheritance() {
         String right = jsxGet_right();
         if ("inherit".equals(right)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = getElement().getParentHTMLElement();
                 right = (parent != null ? parent.jsxGet_currentStyle().getRightWithInheritance() : "auto");
             }
@@ -1696,7 +1695,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getTopWithInheritance() {
         String top = jsxGet_top();
         if ("inherit".equals(top)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = getElement().getParentHTMLElement();
                 top = (parent != null ? parent.jsxGet_currentStyle().getTopWithInheritance() : "auto");
             }
@@ -1714,7 +1713,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getBottomWithInheritance() {
         String bottom = jsxGet_bottom();
         if ("inherit".equals(bottom)) {
-            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = getElement().getParentHTMLElement();
                 bottom = (parent != null ? parent.jsxGet_currentStyle().getBottomWithInheritance() : "auto");
             }

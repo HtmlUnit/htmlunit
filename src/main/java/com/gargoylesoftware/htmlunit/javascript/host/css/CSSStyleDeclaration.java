@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.util.StringUtils.isFloat;
-
 import java.io.IOException;
 import java.io.StringReader;
 import java.text.MessageFormat;
@@ -2714,7 +2712,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         if (getBrowserVersion().isIE()) {
             setStyleAttribute("opacity", opacity);
         }
-        else if (isFloat(opacity, true) || opacity.length() == 0) {
+        else if (com.gargoylesoftware.htmlunit.util.StringUtils.isFloat(opacity, true) || opacity.length() == 0) {
             setStyleAttribute("opacity", opacity.trim());
         }
     }
@@ -4660,11 +4658,11 @@ public class CSSStyleDeclaration extends SimpleScriptable {
          */
         protected StyleElement(final String name, final String value, final String priority,
                 final SelectorSpecificity specificity, final long index) {
-            this.name_ = name;
-            this.value_ = value;
-            this.priority_ = priority;
-            this.index_ = index;
-            this.specificity_ = specificity;
+            name_ = name;
+            value_ = value;
+            priority_ = priority;
+            index_ = index;
+            specificity_ = specificity;
         }
         /**
          * Creates a new instance.

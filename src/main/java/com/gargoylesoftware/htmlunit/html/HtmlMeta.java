@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
-
 import java.net.URL;
 import java.util.Date;
 import java.util.Map;
@@ -77,7 +75,7 @@ public class HtmlMeta extends HtmlElement {
                 path = partValue;
             }
             else if ("expires".equals(partName)) {
-                expires = parseHttpDate(partValue);
+                expires = com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate(partValue);
             }
             else {
                 notifyIncorrectness("set-cookie http-equiv meta tag: unknown attribute '" + partName + "'.");

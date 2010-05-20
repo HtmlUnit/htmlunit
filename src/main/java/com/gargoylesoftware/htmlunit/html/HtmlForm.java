@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -42,6 +40,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -113,12 +112,12 @@ public class HtmlForm extends HtmlElement {
             }
 
             final String action = getActionAttribute();
-            if (TextUtil.startsWithIgnoreCase(action, JAVASCRIPT_PREFIX)) {
+            if (TextUtil.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 return htmlPage.executeJavaScriptIfPossible(action, "Form action", getStartLineNumber()).getNewPage();
             }
         }
         else {
-            if (TextUtil.startsWithIgnoreCase(getActionAttribute(), JAVASCRIPT_PREFIX)) {
+            if (TextUtil.startsWithIgnoreCase(getActionAttribute(), JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // The action is JavaScript but JavaScript isn't enabled.
                 // Return the current page.
                 return htmlPage;

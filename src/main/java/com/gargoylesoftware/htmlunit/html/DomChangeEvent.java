@@ -37,7 +37,7 @@ public class DomChangeEvent extends EventObject {
      */
     public DomChangeEvent(final DomNode parentNode, final DomNode changedNode) {
         super(parentNode);
-        this.changedNode_ = changedNode;
+        changedNode_ = changedNode;
     }
 
     /**

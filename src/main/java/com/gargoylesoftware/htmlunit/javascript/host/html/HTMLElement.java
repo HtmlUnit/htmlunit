@@ -2320,7 +2320,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         else {
             s = "#000000";
         }
-        this.getDomNodeOrDie().setAttribute(name, s);
+        getDomNodeOrDie().setAttribute(name, s);
     }
 
     /**

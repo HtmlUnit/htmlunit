@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,6 +27,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 /**
  * Wrapper for the HTML element "a".
@@ -78,7 +77,7 @@ public class HtmlAnchor extends HtmlElement {
             return;
         }
         final HtmlPage page = (HtmlPage) getPage();
-        if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
+        if (TextUtil.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final StringBuilder builder = new StringBuilder(href.length());
             for (int i = 0; i < href.length(); i++) {
                 final char ch = href.charAt(i);

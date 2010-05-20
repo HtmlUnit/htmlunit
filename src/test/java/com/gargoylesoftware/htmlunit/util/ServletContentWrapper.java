@@ -38,7 +38,7 @@ public abstract class ServletContentWrapper extends HttpServlet {
      * @param content the HTML content of this servlet
      */
     public ServletContentWrapper(final String content) {
-        this.content_ = content;
+        content_ = content;
     }
 
     /**

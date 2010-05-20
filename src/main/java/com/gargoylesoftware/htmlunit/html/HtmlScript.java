@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
-
 import java.io.PrintWriter;
 import java.util.Map;
 
@@ -37,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
+import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -335,10 +334,10 @@ public class HtmlScript extends HtmlElement {
         }
 
         if (src != ATTRIBUTE_NOT_DEFINED) {
-            if (src.startsWith(JAVASCRIPT_PREFIX)) {
+            if (src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // <script src="javascript:'[code]'"></script>
                 if (!ie || browser.getBrowserVersionNumeric() != 7) {
-                    String code = StringUtils.removeStart(src, JAVASCRIPT_PREFIX).trim();
+                    String code = StringUtils.removeStart(src, JavaScriptURLConnection.JAVASCRIPT_PREFIX).trim();
                     final int len = code.length();
                     if (len > 2) {
                         if ((code.charAt(0) == '\'' && code.charAt(len - 1) == '\'')

@@ -65,7 +65,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      * @param functionOrScript the function or script to which this frame corresponds
      */
     public DebugFrameImpl(final DebuggableScript functionOrScript) {
-        this.functionOrScript_ = functionOrScript;
+        functionOrScript_ = functionOrScript;
     }
 
     /**
@@ -175,8 +175,8 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      * @return the name of the function corresponding to this frame
      */
     private String getFunctionName(final Scriptable thisObj) {
-        if (this.functionOrScript_.isFunction()) {
-            final String name = this.functionOrScript_.getFunctionName();
+        if (functionOrScript_.isFunction()) {
+            final String name = functionOrScript_.getFunctionName();
             if (name != null && name.length() > 0) {
                 // A named function -- we can just return the name.
                 return name;
@@ -210,7 +210,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
                         final Object o = obj.get(s, obj);
                         if (o instanceof NativeFunction) {
                             final NativeFunction f = (NativeFunction) o;
-                            if (f.getDebuggableView() == this.functionOrScript_) {
+                            if (f.getDebuggableView() == functionOrScript_) {
                                 return s;
                             }
                         }
@@ -233,8 +233,8 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      * @return the name of the parameter at the specified index, or <tt>???</tt> if there is no corresponding name
      */
     private String getParamName(final int index) {
-        if (index >= 0 && this.functionOrScript_.getParamCount() > index) {
-            return this.functionOrScript_.getParamOrVarName(index);
+        if (index >= 0 && functionOrScript_.getParamCount() > index) {
+            return functionOrScript_.getParamOrVarName(index);
         }
         return "???";
     }

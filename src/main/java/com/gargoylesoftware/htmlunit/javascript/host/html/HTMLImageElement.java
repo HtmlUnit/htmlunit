@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.html.HtmlImage.TAG_NAME;
-
 import java.net.MalformedURLException;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -60,7 +58,8 @@ public class HTMLImageElement extends HTMLElement {
     public void jsConstructor() {
         instantiatedViaJavaScript_ = true;
         final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
-        final HtmlElement fake = HTMLParser.getFactory(TAG_NAME).createElement(page, TAG_NAME, new AttributeList());
+        final HtmlElement fake =
+                HTMLParser.getFactory(HtmlImage.TAG_NAME).createElement(page, HtmlImage.TAG_NAME, new AttributeList());
         setDomNode(fake);
     }
 

@@ -117,7 +117,7 @@ public class SimpleRange implements Range, Serializable {
      * {@inheritDoc}
      */
     public Range cloneRange() throws DOMException {
-        return new SimpleRange(this.startContainer_, this.startOffset_, this.endContainer_, this.endOffset_);
+        return new SimpleRange(startContainer_, startOffset_, endContainer_, endOffset_);
     }
 
     /**

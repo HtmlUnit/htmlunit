@@ -14,14 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
-import static com.gargoylesoftware.htmlunit.WebClient.URL_ABOUT_BLANK;
-import static org.apache.commons.lang.StringUtils.equalsIgnoreCase;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLStreamHandler;
 
 import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Responsible for URL creation.
@@ -60,8 +58,10 @@ abstract class URLCreator {
                 return new URL(null, url, JS_HANDLER);
             }
             else if (TextUtil.startsWithIgnoreCase(url, "about:")) {
-                if (URL_ABOUT_BLANK != null && equalsIgnoreCase(URL_ABOUT_BLANK.toExternalForm(), url)) {
-                    return URL_ABOUT_BLANK;
+                if (WebClient.URL_ABOUT_BLANK != null
+                        && org.apache.commons.lang.StringUtils.equalsIgnoreCase(
+                                WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
+                    return WebClient.URL_ABOUT_BLANK;
                 }
                 return new URL(null, url, ABOUT_HANDLER);
             }
@@ -85,8 +85,10 @@ abstract class URLCreator {
                 return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
             }
             else if (TextUtil.startsWithIgnoreCase(url, "about:")) {
-                if (URL_ABOUT_BLANK != null && equalsIgnoreCase(URL_ABOUT_BLANK.toExternalForm(), url)) {
-                    return URL_ABOUT_BLANK;
+                if (WebClient.URL_ABOUT_BLANK != null
+                        && org.apache.commons.lang.StringUtils.equalsIgnoreCase(
+                                WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
+                    return WebClient.URL_ABOUT_BLANK;
                 }
                 return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
             }

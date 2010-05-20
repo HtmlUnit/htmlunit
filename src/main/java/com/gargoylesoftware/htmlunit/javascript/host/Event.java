@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static java.lang.Boolean.FALSE;
-
 import java.util.LinkedList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -576,7 +574,7 @@ public class Event extends SimpleScriptable {
      */
     public boolean isAborted(final ScriptResult result) {
         final boolean ie = getBrowserVersion().isIE();
-        return ScriptResult.isFalse(result) || (!ie && preventDefault_) || (ie && FALSE.equals(returnValue_));
+        return ScriptResult.isFalse(result) || (!ie && preventDefault_) || (ie && Boolean.FALSE.equals(returnValue_));
     }
 
     /**

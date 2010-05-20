@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection.JAVASCRIPT_PREFIX;
-
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
@@ -31,6 +29,7 @@ import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 /**
  * Wrapper for the HTML element "area".
@@ -73,7 +72,7 @@ public class HtmlArea extends HtmlElement {
         final String href = getHrefAttribute();
         if (href != null && href.length() > 0) {
             final HtmlPage page = (HtmlPage) getPage();
-            if (TextUtil.startsWithIgnoreCase(href, JAVASCRIPT_PREFIX)) {
+            if (TextUtil.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 page.executeJavaScriptIfPossible(
                     href, "javascript url", getStartLineNumber());
                 return;

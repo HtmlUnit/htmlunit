@@ -90,7 +90,7 @@ public class XMLDocument extends Document {
      * @param async Whether or not to send the request to the server asynchronously
      */
     public void jsxSet_async(final boolean async) {
-        this.async_ = async;
+        async_ = async;
     }
 
     /**
@@ -238,7 +238,7 @@ public class XMLDocument extends Document {
      * @param preserveWhiteSpace white space handling
      */
     public void jsxSet_preserveWhiteSpace(final boolean preserveWhiteSpace) {
-        this.preserveWhiteSpace_ = preserveWhiteSpace;
+        preserveWhiteSpace_ = preserveWhiteSpace;
     }
 
     /**

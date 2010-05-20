@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.attachment.Attachment.isAttachment;
-
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -52,6 +50,7 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.CredentialsProvider;
 import org.w3c.css.sac.ErrorHandler;
 
+import com.gargoylesoftware.htmlunit.attachment.Attachment;
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
@@ -413,7 +412,7 @@ public class WebClient implements Serializable {
             return webWindow.getEnclosedPage();
         }
 
-        if (attachmentHandler_ != null && isAttachment(webResponse)) {
+        if (attachmentHandler_ != null && Attachment.isAttachment(webResponse)) {
             final WebWindow w = openWindow(null, null, webWindow);
             final Page page = pageCreator_.createPage(webResponse, w);
             attachmentHandler_.handleAttachment(page);
@@ -1741,7 +1740,7 @@ public class WebClient implements Serializable {
      * @param handler the new attachment handler
      */
     public void setAttachmentHandler(final AttachmentHandler handler) {
-        this.attachmentHandler_ = handler;
+        attachmentHandler_ = handler;
     }
 
     /**

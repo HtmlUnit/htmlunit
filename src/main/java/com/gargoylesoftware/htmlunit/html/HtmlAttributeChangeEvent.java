@@ -40,8 +40,8 @@ public class HtmlAttributeChangeEvent extends EventObject {
      */
     public HtmlAttributeChangeEvent(final HtmlElement element, final String name, final String value) {
         super(element);
-        this.name_ = name;
-        this.value_ = value;
+        name_ = name;
+        value_ = value;
     }
 
     /**

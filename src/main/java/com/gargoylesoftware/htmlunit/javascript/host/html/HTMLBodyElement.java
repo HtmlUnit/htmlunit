@@ -129,7 +129,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533498.aspx">MSDN Documentation</a>
      */
     public void jsxSet_background(final String background) {
-        this.getDomNodeOrDie().setAttribute("background", background);
+        getDomNodeOrDie().setAttribute("background", background);
     }
 
     /**

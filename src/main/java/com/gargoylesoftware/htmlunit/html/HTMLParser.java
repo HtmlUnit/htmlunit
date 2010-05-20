@@ -471,7 +471,7 @@ public final class HTMLParser {
          */
         private HtmlUnitDOMBuilder(final DomNode node, final URL url) {
             super(createConfiguration(node.getPage().getWebClient()));
-            this.page_ = (HtmlPage) node.getPage();
+            page_ = (HtmlPage) node.getPage();
 
             currentNode_ = node;
             for (final Node ancestor : currentNode_.getAncestors(true)) {

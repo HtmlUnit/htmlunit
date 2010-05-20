@@ -16,8 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.util.StringUtils.containsCaseInsensitive;
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
-import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewHost;
-import static com.gargoylesoftware.htmlunit.util.UrlUtils.getUrlWithNewPort;
 
 import java.io.IOException;
 import java.lang.reflect.Member;
@@ -88,6 +86,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.util.Cookie;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * A JavaScript object for a Document.
@@ -707,7 +706,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final boolean file = "file".equals(protocol);
         if (file) {
             try {
-                url = getUrlWithNewPort(getUrlWithNewHost(url, "LOCAL_FILESYSTEM"), 0);
+                url = UrlUtils.getUrlWithNewPort(UrlUtils.getUrlWithNewHost(url, "LOCAL_FILESYSTEM"), 0);
             }
             catch (final MalformedURLException e) {
                 throw new RuntimeException(e);

@@ -61,7 +61,7 @@ public class CSSImportRule extends CSSRule {
      */
     public MediaList jsxGet_media() {
         if (media_ == null) {
-            final CSSStyleSheet parent = this.jsxGet_parentStyleSheet();
+            final CSSStyleSheet parent = jsxGet_parentStyleSheet();
             final org.w3c.dom.stylesheets.MediaList ml = getImportRule().getMedia();
             media_ = new MediaList(parent, ml);
         }
@@ -74,7 +74,7 @@ public class CSSImportRule extends CSSRule {
      */
     public CSSStyleSheet jsxGet_styleSheet() {
         if (importedStylesheet_ == null) {
-            final CSSStyleSheet owningSheet = this.jsxGet_parentStyleSheet();
+            final CSSStyleSheet owningSheet = jsxGet_parentStyleSheet();
             final HTMLElement ownerNode = owningSheet.jsxGet_ownerNode();
             final org.w3c.dom.css.CSSStyleSheet importedStylesheet = getImportRule().getStyleSheet();
             importedStylesheet_ = new CSSStyleSheet(ownerNode, importedStylesheet, owningSheet.getUri());

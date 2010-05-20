@@ -99,30 +99,30 @@ public class XMLDOMParseError extends SimpleScriptable {
     }
 
     void setErrorCode(final int errorCode) {
-        this.errorCode_ = errorCode;
+        errorCode_ = errorCode;
     }
 
     void setFilepos(final int filepos) {
-        this.filepos_ = filepos;
+        filepos_ = filepos;
     }
 
     void setLine(final int line) {
-        this.line_ = line;
+        line_ = line;
     }
 
     void setLinepos(final int linepos) {
-        this.linepos_ = linepos;
+        linepos_ = linepos;
     }
 
     void setReason(final String reason) {
-        this.reason_ = reason;
+        reason_ = reason;
     }
 
     void setSrcText(final String srcText) {
-        this.srcText_ = srcText;
+        srcText_ = srcText;
     }
 
     void setUrl(final String url) {
-        this.url_ = url;
+        url_ = url;
     }
 }

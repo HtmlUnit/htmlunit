@@ -44,7 +44,7 @@ public class DialogWindow extends WebWindowImpl {
      */
     @Override
     protected boolean isJavaScriptInitializationNeeded() {
-        return this.getScriptObject() == null;
+        return getScriptObject() == null;
     }
 
     /**

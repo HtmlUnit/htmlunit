@@ -97,7 +97,7 @@ public class PluginConfiguration implements Serializable {
             return false;
         }
         final PluginConfiguration other = (PluginConfiguration) o;
-        return this.name_.equals(other.name_);
+        return name_.equals(other.name_);
     }
 
     /**
@@ -165,7 +165,7 @@ public class PluginConfiguration implements Serializable {
                 return false;
             }
             final PluginConfiguration.MimeType other = (PluginConfiguration.MimeType) o;
-            return this.type_.equals(other.type_);
+            return type_.equals(other.type_);
         }
     }
 

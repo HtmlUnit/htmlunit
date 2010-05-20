@@ -71,7 +71,7 @@ public class TopLevelWindow extends WebWindowImpl {
     @Override
     protected boolean isJavaScriptInitializationNeeded() {
         final Page enclosedPage = getEnclosedPage();
-        return this.getScriptObject() == null
+        return getScriptObject() == null
             || enclosedPage.getWebResponse().getWebRequest().getUrl() == WebClient.URL_ABOUT_BLANK
             || !(enclosedPage.getWebResponse() instanceof StringWebResponse);
         // TODO: find a better way to distinguish content written by document.open(),...

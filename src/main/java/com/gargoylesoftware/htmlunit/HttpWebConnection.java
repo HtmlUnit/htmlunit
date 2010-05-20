@@ -125,11 +125,11 @@ public class HttpWebConnection implements WebConnection {
             httpMethod = makeHttpMethod(request);
             final HttpHost hostConfiguration = getHostConfiguration(request);
             final HttpHost proxyConfiguration = getProxyConfiguration(request);
-            this.getHttpClient().getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyConfiguration);
+            getHttpClient().getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyConfiguration);
             final long startTime = System.currentTimeMillis();
             final HttpResponse httpResponse = httpClient.execute(hostConfiguration, httpMethod);
             final long endTime = System.currentTimeMillis();
-            webClient_.getCookieManager().updateFromState(this.getHttpClient().getCookieStore());
+            webClient_.getCookieManager().updateFromState(getHttpClient().getCookieStore());
             return makeWebResponse(httpResponse, request, endTime - startTime);
         }
         catch (final URISyntaxException e) {
@@ -447,7 +447,7 @@ public class HttpWebConnection implements WebConnection {
     public void setVirtualHost(final String virtualHost) {
         virtualHost_ = virtualHost;
         if (virtualHost_ != null) {
-            this.getHttpClient().getParams().setParameter(ClientPNames.VIRTUAL_HOST, virtualHost_);
+            getHttpClient().getParams().setParameter(ClientPNames.VIRTUAL_HOST, virtualHost_);
         }
     }
 

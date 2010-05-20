@@ -14,8 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static org.apache.commons.lang.ArrayUtils.contains;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+
+import org.apache.commons.lang.ArrayUtils;
 
 /**
  * The JavaScript object "HTMLBRElement".
@@ -43,7 +44,7 @@ public class HTMLBRElement extends HTMLElement {
      */
     public String jsxGet_clear() {
         final String clear = getDomNodeOrDie().getAttribute("clear");
-        if (!contains(VALID_CLEAR_VALUES, clear) && getBrowserVersion().isIE()) {
+        if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear) && getBrowserVersion().isIE()) {
             return "";
         }
         return clear;
@@ -54,7 +55,7 @@ public class HTMLBRElement extends HTMLElement {
      * @param clear the value of the <tt>clear</tt> property
      */
     public void jsxSet_clear(final String clear) {
-        if (!contains(VALID_CLEAR_VALUES, clear) && getBrowserVersion().isIE()) {
+        if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear) && getBrowserVersion().isIE()) {
             throw Context.reportRuntimeError("Invalid clear property value: '" + clear + "'.");
         }
         getDomNodeOrDie().setAttribute("clear", clear);
