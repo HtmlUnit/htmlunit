@@ -21,7 +21,7 @@ import javax.net.ssl.TrustManager;
 
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
-import org.apache.http.conn.scheme.SocketFactory;
+import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.AbstractHttpClient;
 
@@ -44,7 +44,8 @@ final class HttpWebConnectionInsecureSSL {
         if (useInsecureSSL) {
             final SSLContext sslContext = SSLContext.getInstance("SSL");
             sslContext.init(null, new TrustManager[] {new InsecureTrustManager()}, null);
-            final SocketFactory factory = new SSLSocketFactory(sslContext);
+            final SSLSocketFactory factory = new SSLSocketFactory(sslContext);
+            factory.setHostnameVerifier(new AllowAllHostnameVerifier());
             final Scheme https = new Scheme("https", factory, 443);
 
             final SchemeRegistry schemeRegistry = httpClient.getConnectionManager().getSchemeRegistry();
