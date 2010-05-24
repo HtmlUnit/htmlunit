@@ -48,7 +48,6 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.methods.HttpTrace;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.params.ClientPNames;
-import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.params.ConnRoutePNames;
@@ -394,7 +393,7 @@ public class HttpWebConnection implements WebConnection {
 
         // Tell the client where to get its credentials from
         // (it may have changed on the webClient since last call to getHttpClientFor(...))
-        httpClient_.getParams().setParameter(ClientContext.CREDS_PROVIDER, webClient_.getCredentialsProvider());
+        httpClient_.setCredentialsProvider(webClient_.getCredentialsProvider());
 
         //Set timeouts
         httpClient_.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, webClient_.getTimeout());
