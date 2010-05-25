@@ -128,5 +128,4 @@ public class DefaultCredentialsProvider extends BasicCredentialsProvider impleme
             final int port, final String clientHost, final String clientDomain) {
         addNTLMCredentials(username, password, host, port, clientHost, clientDomain);
     }
- 
 }
