@@ -14,13 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
 
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.auth.NTCredentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.client.CredentialsProvider;
 
 /**
  * Default HtmlUnit implementation of the <tt>CredentialsProvider</tt> interface. Provides
@@ -34,9 +38,11 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
  * @author Ahmed Ashour
  * @author Nicolas Belisle
  */
-public class DefaultCredentialsProvider extends BasicCredentialsProvider implements Serializable {
+public class DefaultCredentialsProvider implements CredentialsProvider, Serializable {
 
     private static final long serialVersionUID = 8243249154922357903L;
+    private final HashMap<AuthScopeProxy, CredentialsFactory> credentialsMap_
+        = new HashMap<AuthScopeProxy, CredentialsFactory>();
 
     /**
      * Adds credentials for the specified username/password for any host/port/realm combination.
@@ -128,4 +134,180 @@ public class DefaultCredentialsProvider extends BasicCredentialsProvider impleme
             final int port, final String clientHost, final String clientDomain) {
         addNTLMCredentials(username, password, host, port, clientHost, clientDomain);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized void setCredentials(final AuthScope authscope, final Credentials credentials) {
+        if (authscope == null) {
+            throw new IllegalArgumentException("Authentication scope may not be null");
+        }
+        final CredentialsFactory factory;
+        if (credentials instanceof UsernamePasswordCredentials) {
+            final UsernamePasswordCredentials userCredentials = (UsernamePasswordCredentials) credentials;
+            factory = new UsernamePasswordCredentialsFactory(userCredentials.getUserName(),
+                        userCredentials.getPassword());
+        }
+        else if (credentials instanceof NTCredentials) {
+            final NTCredentials ntCredentials = (NTCredentials) credentials;
+            factory = new NTCredentialsFactory(ntCredentials.getUserName(), ntCredentials.getPassword(),
+                    ntCredentials.getWorkstation(), ntCredentials.getDomain());
+        }
+        else {
+            throw new IllegalArgumentException("Unsupported Credential type: " + credentials.getClass().getName());
+        }
+        credentialsMap_.put(new AuthScopeProxy(authscope), factory);
+    }
+
+    /**
+     * Find matching {@link Credentials credentials} for the given authentication scope.
+     *
+     * @param map the credentials hash map
+     * @param authscope the {@link AuthScope authentication scope}
+     * @return the credentials
+     */
+    private static Credentials matchCredentials(final HashMap<AuthScopeProxy, CredentialsFactory> map,
+            final AuthScope authscope) {
+        final CredentialsFactory factory = map.get(new AuthScopeProxy(authscope));
+        Credentials creds = null;
+        if (factory == null) {
+            int bestMatchFactor  = -1;
+            AuthScope bestMatch  = null;
+            for (final AuthScopeProxy proxy : map.keySet()) {
+                final AuthScope current = proxy.getAuthScope();
+                final int factor = authscope.match(current);
+                if (factor > bestMatchFactor) {
+                    bestMatchFactor = factor;
+                    bestMatch = current;
+                }
+            }
+            if (bestMatch != null) {
+                creds = map.get(new AuthScopeProxy(bestMatch)).getInstance();
+            }
+        }
+        else {
+            creds = factory.getInstance();
+        }
+        return creds;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized Credentials getCredentials(final AuthScope authscope) {
+        if (authscope == null) {
+            throw new IllegalArgumentException("Authentication scope may not be null");
+        }
+        return matchCredentials(credentialsMap_, authscope);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return credentialsMap_.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized void clear() {
+        credentialsMap_.clear();
+    }
+
+    /**
+     * We have to wrap {@link AuthScope} instances in a serializable proxy so that the
+     * {@link DefaultCredentialsProvider} class can be serialized correctly.
+     */
+    private static class AuthScopeProxy implements Serializable {
+        private static final long serialVersionUID = 1464373861677912537L;
+        private AuthScope authScope_;
+        public AuthScopeProxy(final AuthScope authScope) {
+            authScope_ = authScope;
+        }
+        public AuthScope getAuthScope() {
+            return authScope_;
+        }
+        private void writeObject(final ObjectOutputStream stream) throws IOException {
+            stream.writeObject(authScope_.getHost());
+            stream.writeInt(authScope_.getPort());
+            stream.writeObject(authScope_.getRealm());
+            stream.writeObject(authScope_.getScheme());
+        }
+        private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+            final String host = (String) stream.readObject();
+            final int port = stream.readInt();
+            final String realm = (String) stream.readObject();
+            final String scheme = (String) stream.readObject();
+            authScope_ = new AuthScope(host, port, realm, scheme);
+        }
+        @Override
+        public int hashCode() {
+            return authScope_.hashCode();
+        }
+        @Override
+        public boolean equals(final Object obj) {
+            return obj instanceof AuthScopeProxy && authScope_.equals(((AuthScopeProxy) obj).getAuthScope());
+        }
+    }
+
+    /**
+     * We have to create a factory class, so that credentials can be serialized correctly.
+     */
+    private static class UsernamePasswordCredentialsFactory implements CredentialsFactory, Serializable {
+        private static final long serialVersionUID = 5578356387067132849L;
+
+        private String username_;
+        private String password_;
+
+        public UsernamePasswordCredentialsFactory(final String username, final String password) {
+            username_ = username;
+            password_ = password;
+        }
+
+        public Credentials getInstance() {
+            return new UsernamePasswordCredentials(username_, password_);
+        }
+
+        public String toString() {
+            return getInstance().toString();
+        }
+    }
+
+    /**
+     * We have to create a factory class, so that credentials can be serialized correctly.
+     */
+    private static class NTCredentialsFactory implements CredentialsFactory, Serializable {
+        private static final long serialVersionUID = 5578356387067132849L;
+
+        private String username_;
+        private String password_;
+        private String host_;
+        private String domain_;
+
+        public NTCredentialsFactory(final String username, final String password, final String host,
+                final String domain) {
+            username_ = username;
+            password_ = password;
+            host_ = host;
+            domain_ = domain;
+        }
+
+        public Credentials getInstance() {
+            return new NTCredentials(username_, password_, host_, domain_);
+        }
+
+        public String toString() {
+            return getInstance().toString();
+        }
+    }
+
+    /**
+     * Factory class interface
+     */
+    private interface CredentialsFactory {
+        Credentials getInstance();
+    }
+
 }
