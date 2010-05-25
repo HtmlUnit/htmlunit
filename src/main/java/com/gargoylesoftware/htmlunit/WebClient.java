@@ -83,7 +83,9 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * final {@link HtmlPage} startPage = webClient.getPage("http://htmlunit.sf.net");<br/>
  * assertEquals("HtmlUnit - Welcome to HtmlUnit", startPage.{@link HtmlPage#getTitleText() getTitleText}());
  * </code>
- *
+ * <p>
+ * Note: a {@link WebClient} instance is <b>not thread safe</b>. It is intended to be used from a single thread.
+ * </p>
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:gudujarlson@sf.net">Mike J. Bresnahan</a>
