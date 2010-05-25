@@ -14,18 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
+import org.apache.http.auth.NTCredentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 
 /**
  * Default HtmlUnit implementation of the <tt>CredentialsProvider</tt> interface. Provides
@@ -39,111 +34,99 @@ import org.apache.http.client.CredentialsProvider;
  * @author Ahmed Ashour
  * @author Nicolas Belisle
  */
-public class DefaultCredentialsProvider implements CredentialsProvider, Serializable {
+public class DefaultCredentialsProvider extends BasicCredentialsProvider implements Serializable {
 
-    private static final long serialVersionUID = -1622084425121018024L;
-    private final Map<AuthScopeProxy, CredentialsFactory> credentials_;
+    private static final long serialVersionUID = 8243249154922357903L;
 
     /**
-     * Creates a new <tt>DefaultCredentialsProvider</tt> instance.
+     * Adds credentials for the specified username/password for any host/port/realm combination.
+     * The credentials may be for any authentication scheme, including NTLM, digest and basic
+     * HTTP authentication. If you are using sensitive username/password information, please do
+     * NOT use this method. If you add credentials using this method, any server that requires
+     * authentication may receive the specified username and password.
+     * @param username the username for the new credentials
+     * @param password the password for the new credentials
      */
-    public DefaultCredentialsProvider() {
-        credentials_ = new HashMap<AuthScopeProxy, CredentialsFactory>();
+    public void addCredentials(final String username, final String password) {
+        addCredentials(username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM);
     }
 
     /**
-     * {@inheritDoc}
+     * Adds credentials for the specified username/password on the specified host/port for the
+     * specified realm. The credentials may be for any authentication scheme, including NTLM,
+     * digest and basic HTTP authentication.
+     * @param username the username for the new credentials
+     * @param password the password for the new credentials
+     * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
+     * @param port the port to which to the new credentials apply (negative if applicable to any port)
+     * @param realm the realm to which to the new credentials apply (<tt>null</tt> if applicable to any realm)
      */
-    public void clear() {
-        credentials_.clear();
+    public void addCredentials(final String username, final String password, final String host,
+            final int port, final String realm) {
+        final AuthScope authscope = new AuthScope(host, port, realm, AuthScope.ANY_SCHEME);
+        final Credentials credentials = new UsernamePasswordCredentials(username, password);
+        setCredentials(authscope, credentials);
     }
 
     /**
-     * {@inheritDoc}
+     * Adds proxy credentials for the specified username/password for any host/port/realm combination.
+     * @param username the username for the new credentials
+     * @param password the password for the new credentials
+     * @deprecated as of 2.8, please use {@link #addCredentials(String, String)} instead
      */
-    public Credentials getCredentials(final AuthScope authscope) {
-        for (final Map.Entry<AuthScopeProxy, CredentialsFactory> entry : credentials_.entrySet()) {
-            final AuthScope authScopeEntry = entry.getKey().getAuthScope();
-            if (authScopeEntry.match(authscope) > 0) {
-                return entry.getValue().getInstance();
-            }
-        }
-        return null;
+    @Deprecated
+    public void addProxyCredentials(final String username, final String password) {
+        addCredentials(username, password);
     }
 
     /**
-     * {@inheritDoc}
+     * Adds proxy credentials for the specified username/password on the specified host/port.
+     * @param username the username for the new credentials
+     * @param password the password for the new credentials
+     * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
+     * @param port the port to which to the new credentials apply (negative if applicable to any port)
+     * @deprecated as of 2.8, please use {@link #addCredentials(String, String, String, int, String)} instead
      */
-    public void setCredentials(final AuthScope authScope, final Credentials credentials) {
-        final AuthScopeProxy authScopeProxy =
-            new AuthScopeProxy(authScope.getHost(), authScope.getPort(), authScope.getRealm(), authScope.getScheme());
-        final String username =
-            StringUtils.substringBetween(credentials.getUserPrincipal().toString(), "[principal: ", "]");
-        final UsernamePasswordCredentialsFactory credentialsFactory =
-            new UsernamePasswordCredentialsFactory(username, credentials.getPassword());
-        credentials_.put(authScopeProxy, credentialsFactory);
+    @Deprecated
+    public void addProxyCredentials(final String username, final String password, final String host, final int port) {
+        addCredentials(username, password, host, port, AuthScope.ANY_REALM);
     }
 
     /**
-     * We have to wrap {@link AuthScope} instances in a serializable proxy so that the
-     * {@link DefaultCredentialsProvider} class can be serialized correctly.
+     * Adds NTLM credentials for the specified username/password on the specified host/port.
+     * @param username the username for the new credentials; should not include the domain to authenticate with;
+     *        for example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not
+     * @param password the password for the new credentials
+     * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
+     * @param port the port to which to the new credentials apply (negative if applicable to any port)
+     * @param clientHost the host the authentication request is originating from; essentially, the computer name for
+     *        this machine.
+     * @param clientDomain the domain to authenticate within
      */
-    private static class AuthScopeProxy implements Serializable {
-        private static final long serialVersionUID = 1464373861677912537L;
-        private AuthScope authScope_;
-
-        public AuthScopeProxy(final String host, final int port, final String realm, final String scheme) {
-            authScope_ = new AuthScope(host, port, realm, scheme);
-        }
-        public AuthScope getAuthScope() {
-            return authScope_;
-        }
-        private void writeObject(final ObjectOutputStream stream) throws IOException {
-            stream.writeObject(authScope_.getHost());
-            stream.writeInt(authScope_.getPort());
-            stream.writeObject(authScope_.getRealm());
-            stream.writeObject(authScope_.getScheme());
-        }
-        private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
-            final String host = (String) stream.readObject();
-            final int port = stream.readInt();
-            final String realm = (String) stream.readObject();
-            final String scheme = (String) stream.readObject();
-            authScope_ = new AuthScope(host, port, realm, scheme);
-        }
-        @Override
-        public int hashCode() {
-            return authScope_.hashCode();
-        }
-        @Override
-        public boolean equals(final Object obj) {
-            return obj instanceof AuthScopeProxy && authScope_.equals(((AuthScopeProxy) obj).getAuthScope());
-        }
+    public void addNTLMCredentials(final String username, final String password, final String host,
+            final int port, final String clientHost, final String clientDomain) {
+        final AuthScope authscope = new AuthScope(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
+        final Credentials credentials = new NTCredentials(username, password, clientHost, clientDomain);
+        setCredentials(authscope, credentials);
     }
 
     /**
-     * We have to create a factory class, so that credentials can be serialized correctly.
+     * Adds NTLM proxy credentials for the specified username/password on the specified host/port.
+     * @param username the username for the new credentials; should not include the domain to authenticate with;
+     *        for example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not.
+     * @param password the password for the new credentials
+     * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
+     * @param port the port to which to the new credentials apply (negative if applicable to any port)
+     * @param clientHost the host the authentication request is originating from; essentially, the computer name for
+     *        this machine
+     * @param clientDomain the domain to authenticate within
+     * @deprecated as of 2.8,
+     *             please use {@link #addNTLMCredentials(String, String, String, int, String, String)} instead
      */
-    private static class UsernamePasswordCredentialsFactory implements CredentialsFactory, Serializable {
-        private static final long serialVersionUID = 5578356387067132849L;
-
-        private String username_;
-        private String password_;
-
-        public UsernamePasswordCredentialsFactory(final String username, final String password) {
-            username_ = username;
-            password_ = password;
-        }
-
-        public Credentials getInstance() {
-            return new UsernamePasswordCredentials(username_, password_);
-        }
+    @Deprecated
+    public void addNTLMProxyCredentials(final String username, final String password, final String host,
+            final int port, final String clientHost, final String clientDomain) {
+        addNTLMCredentials(username, password, host, port, clientHost, clientDomain);
     }
-
-    /**
-     * Factory class interface
-     */
-    private interface CredentialsFactory {
-        Credentials getInstance();
-    }
+ 
 }

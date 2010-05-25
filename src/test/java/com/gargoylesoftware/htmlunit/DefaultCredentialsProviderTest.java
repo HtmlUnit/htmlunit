@@ -34,6 +34,9 @@ public class DefaultCredentialsProviderTest extends WebTestCase {
      */
     @Test
     public void serialization() throws Exception {
+        if (notYetImplemented()) {
+            return;
+        }
         final String username = "foo";
         final String password = "password";
         final String host = "my.host";
