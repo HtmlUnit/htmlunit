@@ -28,6 +28,7 @@
         </menu>
         <menu name="User docs">
             <item name="Logging" href="/logging.html"/>
+            <item name="NTLM authentication" href="/NTLM.html"/>
             <item name="FAQ" href="/faq.html"/>
         </menu>
         <menu name="Support">
