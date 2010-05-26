@@ -64,7 +64,6 @@ public class JCIFSEngine implements NTLMEngine {
                 0);
         return Base64.encode(t3m.toByteArray());
     }
-
 }
 ----------------------------------------
 
@@ -92,7 +91,7 @@ webClient.setWebConnection(new HttpWebConnection(webClient) {
 
     protected synchronized AbstractHttpClient getHttpClient() {
         AbstractHttpClient httpClient = super.getHttpClient();
-        httpclient.getAuthSchemes().register("ntlm", new NTLMSchemeFactory());
+        httpClient.getAuthSchemes().register("ntlm", new NTLMSchemeFactory());
         return httpClient;
     }
 });
@@ -102,8 +101,8 @@ webClient.setWebConnection(new HttpWebConnection(webClient) {
 
 ----------------------------------------
 DefaultCredentialsProvider credentialProvider =
-    (DefaultCredentialsProvider) webClient.getCredentialsProvider()
-credentialProvider.addNTLMCredentials("username", "password", "myserver", -1, "MYSTATION", "MYDOMAIN"));
+    (DefaultCredentialsProvider) webClient.getCredentialsProvider();
+credentialProvider.addNTLMCredentials("username", "password", "myServer", -1, "myStation", "myDomain");
 -----------------------------------------------------------
 
     * You are done.
