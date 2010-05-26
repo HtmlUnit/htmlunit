@@ -105,7 +105,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param password the password for the new credentials
      * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
      * @param port the port to which to the new credentials apply (negative if applicable to any port)
-     * @param workstation The workstation the authentication request is originating from. 
+     * @param workstation The workstation the authentication request is originating from.
      *        Essentially, the computer name for this machine.
      * @param domain the domain to authenticate within
      * @see <a href="http://htmlunit.sourceforge.net/NTLM.html">How to use NTML authenticaion</a>
