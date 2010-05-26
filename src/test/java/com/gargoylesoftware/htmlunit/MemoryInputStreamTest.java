@@ -18,6 +18,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -58,5 +59,16 @@ public class MemoryInputStreamTest {
         final MemoryInputStream in = new MemoryInputStream(new ByteArrayInputStream(buff), maximumSize);
         assertTrue(Arrays.equals(buff, IOUtils.toByteArray(in)));
         assertEquals(bufferSize < maximumSize, in.isInMemory());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void negativeNumbers() throws Exception {
+        final InputStream in = new ByteArrayInputStream(new byte[] {(byte) 0xF0});
+        final MemoryInputStream memoryIn = new MemoryInputStream(in, 5);
+        assertEquals(0xF0, memoryIn.read());
+        assertEquals(-1, memoryIn.read());
     }
 }

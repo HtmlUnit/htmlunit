@@ -76,7 +76,7 @@ class MemoryInputStream extends FilterInputStream {
             return -1;
         }
         if (index_ < data_.length) {
-            return data_[index_++];
+            return data_[index_++] & 0xFF;
         }
         return super.read();
     }
