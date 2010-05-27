@@ -72,7 +72,6 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.james.mime4j.util.CharsetUtil;
 
@@ -231,7 +230,7 @@ public class HttpWebConnection implements WebConnection {
 
                 final String body = StringUtils.defaultString(webRequest.getRequestBody());
                 final StringEntity urlEncodedEntity = new StringEntity(body, charset);
-                urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE + HTTP.CHARSET_PARAM + charset);
+                urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE);
                 postMethod.setEntity(urlEncodedEntity);
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {

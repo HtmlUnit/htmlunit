@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks, HttpClient 4, initial FF 3.6">
+            <action type="fix" dev="mguillem">
+                Don't send charset information in Content-Type header for application/x-www-form-urlencoded POST requests.
+            </action>
             <action type="fix" dev="asashour" issue="3007121">
                 Fix MemoryInputStream.read() for negative values.
             </action>

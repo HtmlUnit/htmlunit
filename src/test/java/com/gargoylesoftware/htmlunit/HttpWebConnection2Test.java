@@ -1,0 +1,101 @@
+/*
+ * Copyright (c) 2002-2010 Gargoyle Software Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.gargoylesoftware.htmlunit;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.Map.Entry;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+/**
+ * Tests methods in {@link HttpWebConnection}.
+ *
+ * @version $Revision$
+ * @author Marc Guillemot
+ */
+@RunWith(BrowserRunner.class)
+public class HttpWebConnection2Test extends WebDriverTestCase {
+
+    /**
+     * Tests a simple POST request.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void post() throws Exception {
+        final String html = "<html><body><form action='foo' method='post' accept-charset='iso-8859-1'>\n"
+            + "<input name='text1' value='me &amp;amp; you'>\n"
+            + "<textarea name='text2'>Hello\nworld!</textarea>\n"
+            + "<input type='submit' id='submit'>\n"
+            + "</form></body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html, getDefaultUrl());
+        driver.findElement(By.id("submit")).click();
+
+        // better would be to look at the HTTP traffic directly
+        // rather than to examine a request that has been rebuilt but...
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+
+        assertEquals("ISO-8859-1", lastRequest.getCharset());
+        assertEquals(null, lastRequest.getProxyHost());
+        assertEquals(null, lastRequest.getRequestBody());
+        assertEquals(getDefaultUrl() + "foo", lastRequest.getUrl());
+        final String expectedHeaders = "Connection: keep-alive\n"
+            + "Content-Length: 48\n"
+            + "Content-Type: application/x-www-form-urlencoded\n"
+            + "Host: localhost:12345\n"
+            + "Referer: http://localhost:12345/\n"
+            + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
+        assertEquals(expectedHeaders, headersToString(lastRequest));
+        assertEquals(FormEncodingType.URL_ENCODED, lastRequest.getEncodingType());
+        assertEquals(HttpMethod.POST, lastRequest.getHttpMethod());
+        assertEquals(0, lastRequest.getProxyPort());
+        assertEquals("[text1=me &amp; you, text2=Hello\r\nworld!]", lastRequest.getRequestParameters().toString());
+    }
+
+    private String headersToString(final WebRequest request) {
+        // why doesn't HtmlUnit send these headers whereas Firefox does?
+        final List<String> ignoredHeaders = Arrays.asList("accept", "accept-charset", "accept-encoding",
+            "accept-language", "keep-alive");
+        final List<String> caseInsensitiveHeaders = Arrays.asList("connection");
+
+        // ensure ordering for comparison
+        final Map<String, String> headers = new TreeMap<String, String>(request.getAdditionalHeaders());
+
+        final StringBuilder sb = new StringBuilder();
+        for (final Entry<String, String> headerEntry : headers.entrySet()) {
+            final String headerName = headerEntry.getKey();
+            if (ignoredHeaders.contains(headerName.toLowerCase())) {
+                continue;
+            }
+            sb.append(headerName);
+            sb.append(": ");
+            if (caseInsensitiveHeaders.contains(headerName.toLowerCase())) {
+                sb.append(headerEntry.getValue().toLowerCase());
+            }
+            else {
+                sb.append(headerEntry.getValue());
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+}
