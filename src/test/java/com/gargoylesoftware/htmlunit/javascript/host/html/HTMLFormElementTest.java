@@ -1238,35 +1238,35 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     private void changes_after_call_to_submit(final String id, final String expectedUrlSuffix) throws Exception {
-        final String html = "<html><head><script>"
-            + "function submitForm() {"
-            + "  var f = document.forms[0];"
-            + "  f.action = 'page3.html';"
-            + "  "
-            + "  var h = document.createElement('input');"
-            + "  h.name = 'f1';"
-            + "  h.value = 'v1';"
-            + "  f.appendChild(h);"
-            + "  "
-            + "  f.submit();"
-            + "  "
-            + "  f.action = 'page4.html';"
-            + "  var h = document.createElement('input');"
-            + "  h.name = 'f2';"
-            + "  h.value = 'v2';"
-            + "  f.appendChild(h);"
-            + "  return false;"
-            + "}"
-            + "</script></head><body>"
-            + "<form action='page1.html' name='myForm'>"
+        final String html = "<html><head><script>\n"
+            + "function submitForm() {\n"
+            + "  var f = document.forms[0];\n"
+            + "  f.action = 'page3.html';\n"
+            + "\n"
+            + "  var h = document.createElement('input');\n"
+            + "  h.name = 'f1';\n"
+            + "  h.value = 'v1';\n"
+            + "  f.appendChild(h);\n"
+            + "\n"
+            + "  f.submit();\n"
+            + "\n"
+            + "  f.action = 'page4.html';\n"
+            + "  var h = document.createElement('input');\n"
+            + "  h.name = 'f2';\n"
+            + "  h.value = 'v2';\n"
+            + "  f.appendChild(h);\n"
+            + "  return false;\n"
+            + "}\n"
+            + "</script></head><body>\n"
+            + "<form action='page1.html' name='myForm'>\n"
             + "  <input type='submit' id='inputSubmitReturnTrue' value='With on click on the button, return true' "
-            + "onclick='submitForm(); return true'>"
+            + "onclick='submitForm(); return true'>\n"
             + "  <input type='submit' id='inputSubmitReturnFalse' value='With on click on the button, return false' "
-            + "onclick='submitForm(); return false'>"
+            + "onclick='submitForm(); return false'>\n"
             + "  <input type='submit' id='inputSubmitVoid' value='With on click on the button, no return' "
-            + "onclick='submitForm();'>"
+            + "onclick='submitForm();'>\n"
             + "  <a id='link' href='#'  onclick='return submitForm()'><input type='submit' "
-            + "value='With on click on the link'></a>"
+            + "value='With on click on the link'></a>\n"
             + "</form></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
@@ -1280,15 +1280,15 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     public void submit_twice() throws Exception {
-        final String html = "<html><head><script>"
-            + "function test() {"
-            + "  var f = document.forms[0];"
-            + "  f.submit();"
-            + "  f.submit();"
-            + "}"
-            + "</script></head><body onload='test()'>"
-            + "<form action='page1.html' name='myForm'>"
-            + "  <input name='myField' value='some value'>"
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var f = document.forms[0];\n"
+            + "  f.submit();\n"
+            + "  f.submit();\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form action='page1.html' name='myForm'>\n"
+            + "  <input name='myField' value='some value'>\n"
             + "</form></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
@@ -1301,15 +1301,15 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     public void target_changed_after_submit_call() throws Exception {
-        final String html = "<html><head><script>"
-            + "function test() {"
-            + "  var f = document.forms[0];"
-            + "  f.submit();"
-            + "  f.target = 'foo2';"
-            + "}"
-            + "</script></head><body>"
-            + "<form action='page1.html' name='myForm' target='foo1'>"
-            + "  <input name='myField' value='some value'>"
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var f = document.forms[0];\n"
+            + "  f.submit();\n"
+            + "  f.target = 'foo2';\n"
+            + "}\n"
+            + "</script></head><body>\n"
+            + "<form action='page1.html' name='myForm' target='foo1'>\n"
+            + "  <input name='myField' value='some value'>\n"
             + "</form>\n"
             + "<div id='clickMe' onclick='test()'>click me</div></body></html>";
 
@@ -1358,14 +1358,14 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     private void enctypeTest(final String enctype, final String method, final String expectedCntType) throws Exception {
-        final String html = "<html><head><script>"
-            + "function test() {"
-            + "  var f = document.forms[0];"
-            + "  f.submit();"
-            + "}"
-            + "</script></head><body onload='test()'>"
-            + "<form action='foo.html' enctype='" + enctype + "' method='" + method + "'>"
-            + "  <input name='myField' value='some value'>"
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var f = document.forms[0];\n"
+            + "  f.submit();\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form action='foo.html' enctype='" + enctype + "' method='" + method + "'>\n"
+            + "  <input name='myField' value='some value'>\n"
             + "</form></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
@@ -1427,7 +1427,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    f.submit();\n"
             + "  }\n"
             + "}\n"
-            + "</script></head><body onload='test()'>"
+            + "</script></head><body onload='test()'>\n"
             + "<form>\n"
             + "<input name='foo'>\n"
             + "</form></body></html>";

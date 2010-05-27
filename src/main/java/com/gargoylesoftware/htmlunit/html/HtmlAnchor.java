@@ -97,8 +97,8 @@ public class HtmlAnchor extends HtmlElement {
             return;
         }
         final URL url = page.getFullyQualifiedUrl(href);
-        final WebRequest wrs = new WebRequest(url);
-        wrs.setAdditionalHeader("Referer", page.getWebResponse().getWebRequest().getUrl().toExternalForm());
+        final WebRequest webRequest = new WebRequest(url);
+        webRequest.setAdditionalHeader("Referer", page.getWebResponse().getWebRequest().getUrl().toExternalForm());
         if (LOG.isDebugEnabled()) {
             LOG.debug(
                     "Getting page for " + url.toExternalForm()
@@ -108,7 +108,7 @@ public class HtmlAnchor extends HtmlElement {
         }
         page.getWebClient().download(page.getEnclosingWindow(),
                 page.getResolvedTarget(getTargetAttribute()),
-                wrs, "Link click");
+                webRequest, "Link click");
     }
 
     /**
