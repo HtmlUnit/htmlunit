@@ -221,17 +221,20 @@ public class HttpWebConnection implements WebConnection {
 
             if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED && method instanceof HttpPost) {
                 final HttpPost postMethod = (HttpPost) method;
-                final List<NameValuePair> pairs = webRequest.getRequestParameters();
-                final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
-                final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
-                final URI uri =
-                    URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(), query, null);
-                postMethod.setURI(uri);
-
-                final String body = StringUtils.defaultString(webRequest.getRequestBody());
-                final StringEntity urlEncodedEntity = new StringEntity(body, charset);
-                urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE);
-                postMethod.setEntity(urlEncodedEntity);
+                if (webRequest.getRequestBody() == null) {
+                    final List<NameValuePair> pairs = webRequest.getRequestParameters();
+                    final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
+                    final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
+                    final StringEntity urlEncodedEntity = new StringEntity(query, charset);
+                    urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE);
+                    postMethod.setEntity(urlEncodedEntity);
+                }
+                else {
+                    final String body = StringUtils.defaultString(webRequest.getRequestBody());
+                    final StringEntity urlEncodedEntity = new StringEntity(body, charset);
+                    urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE);
+                    postMethod.setEntity(urlEncodedEntity);
+                }
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
                 final MultipartEntity multipartEntity =

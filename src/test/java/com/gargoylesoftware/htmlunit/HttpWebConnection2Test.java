@@ -25,6 +25,8 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
+
 /**
  * Tests methods in {@link HttpWebConnection}.
  *
@@ -68,7 +70,16 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         assertEquals(FormEncodingType.URL_ENCODED, lastRequest.getEncodingType());
         assertEquals(HttpMethod.POST, lastRequest.getHttpMethod());
         assertEquals(0, lastRequest.getProxyPort());
-        assertEquals("[text1=me &amp; you, text2=Hello\r\nworld!]", lastRequest.getRequestParameters().toString());
+        final List<NameValuePair> parameters = lastRequest.getRequestParameters();
+        assertEquals(2, parameters.size());
+        for (final NameValuePair pair : parameters) {
+            if (pair.getName().equals("text1")) {
+                assertEquals("me &amp; you", pair.getValue());
+            }
+            else {
+                assertEquals("Hello\r\nworld!", pair.getValue());
+            }
+        }
     }
 
     private String headersToString(final WebRequest request) {
