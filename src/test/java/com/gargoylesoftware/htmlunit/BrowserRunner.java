@@ -62,37 +62,55 @@ public class BrowserRunner extends Suite {
         super(klass, Collections.<Runner>emptyList());
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
+            final List<String> browsers = WebDriverTestCase.getBrowsersProperties();
             if (WebDriverTestCase.class.isAssignableFrom(klass)) {
-                final String property = WebDriverTestCase.getBrowsersProperty();
-                if (property.contains("hu")) {
+                if (browsers.contains("hu") || browsers.contains("hu-ie6")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
+                }
+                if (browsers.contains("hu") || browsers.contains("hu-ie7")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7, false));
+                }
+                if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
+                }
+                if (browsers.contains("hu") || browsers.contains("hu-ff2")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, false));
+                }
+                if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
                 }
-                if (property.contains("ie6")) {
+                if (browsers.contains("ie6")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, true));
                 }
-                if (property.contains("ie7")) {
+                if (browsers.contains("ie7")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7, true));
                 }
-                if (property.contains("ie8")) {
+                if (browsers.contains("ie8")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, true));
                 }
-                if (property.contains("ff2")) {
+                if (browsers.contains("ff2")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, true));
                 }
-                if (property.contains("ff3")) {
+                if (browsers.contains("ff3")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, true));
                 }
             }
             else {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7, false));
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, false));
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
+                if (browsers.contains("hu") || browsers.contains("hu-ie6")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
+                }
+                if (browsers.contains("hu") || browsers.contains("hu-ie7")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7, false));
+                }
+                if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
+                }
+                if (browsers.contains("hu") || browsers.contains("hu-ff2")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, false));
+                }
+                if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
+                }
             }
         }
         if (BrowserNoneClassRunner.containsTestMethods(klass)) {

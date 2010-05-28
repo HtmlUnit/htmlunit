@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -71,7 +72,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * </pre>
  * The file should contain three properties: "browsers", "ff2.bin" and "ff3.bin".
  * <ul>
- *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit),
+ *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
+ *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ff2", "hu-ff3",
  *   "ff2", "ff3", "ie6", "ie7", "ie8", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
@@ -87,7 +89,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
-    private static String BROWSERS_PROPERTY_;
+    private static List<String> BROWSERS_PROPERTIES_;
     private static String FF2_BIN_;
     private static String FF3_BIN_;
 
@@ -97,14 +99,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String JSON_;
     private boolean useRealBrowser_;
 
-    static String getBrowsersProperty() {
-        if (BROWSERS_PROPERTY_ == null) {
+    static List<String> getBrowsersProperties() {
+        if (BROWSERS_PROPERTIES_ == null) {
             try {
                 final Properties properties = new Properties();
                 final File file = new File("test.properties");
                 if (file.exists()) {
                     properties.load(new FileInputStream(file));
-                    BROWSERS_PROPERTY_ = properties.getProperty("browsers", "hu").toLowerCase();
+                    BROWSERS_PROPERTIES_
+                        = Arrays.asList(properties.getProperty("browsers", "hu").toLowerCase().split(","));
                     FF2_BIN_ = properties.getProperty("ff2.bin");
                     FF3_BIN_ = properties.getProperty("ff3.bin");
                 }
@@ -112,11 +115,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
             catch (final Exception e) {
                 LOG.info("Error reading htmlunit.properties", e);
             }
-            if (BROWSERS_PROPERTY_ == null) {
-                BROWSERS_PROPERTY_ = "hu";
+            if (BROWSERS_PROPERTIES_ == null) {
+                BROWSERS_PROPERTIES_ = Arrays.asList(new String[] {"hu"});
             }
         }
-        return BROWSERS_PROPERTY_;
+        return BROWSERS_PROPERTIES_;
     }
 
     /**
