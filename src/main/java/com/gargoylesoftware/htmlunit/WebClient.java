@@ -1417,6 +1417,7 @@ public class WebClient implements Serializable {
             else if (!proxyConfig_.shouldBypassProxy(webRequest.getUrl().getHost())) {
                 webRequest.setProxyHost(proxyConfig_.getProxyHost());
                 webRequest.setProxyPort(proxyConfig_.getProxyPort());
+                webRequest.setSocksProxy(proxyConfig_.isSocksProxy());
             }
         }
 

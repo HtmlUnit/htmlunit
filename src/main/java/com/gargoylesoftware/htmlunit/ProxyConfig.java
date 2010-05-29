@@ -33,7 +33,8 @@ public class ProxyConfig implements Serializable {
 
     private String proxyHost_;
     private int proxyPort_;
-    private final Map<String, Pattern> proxyBypassHosts_;
+    private boolean isSocksProxy_;
+    private final Map<String, Pattern> proxyBypassHosts_ = new HashMap<String, Pattern>();
     private String proxyAutoConfigUrl_;
     private String proxyAutoConfigContent_;
 
@@ -50,9 +51,19 @@ public class ProxyConfig implements Serializable {
      * @param proxyPort the proxy port
      */
     public ProxyConfig(final String proxyHost, final int proxyPort) {
+        this(proxyHost, proxyPort, false);
+    }
+
+    /**
+     * Creates a new instance.
+     * @param proxyHost the proxy host
+     * @param proxyPort the proxy port
+     * @param isSocks whether SOCKS proxy or not
+     */
+    public ProxyConfig(final String proxyHost, final int proxyPort, final boolean isSocks) {
         proxyHost_ = proxyHost;
         proxyPort_ = proxyPort;
-        proxyBypassHosts_ = new HashMap<String, Pattern>();
+        isSocksProxy_ = isSocks;
     }
 
     /**
@@ -85,6 +96,22 @@ public class ProxyConfig implements Serializable {
      */
     public void setProxyPort(final int proxyPort) {
         proxyPort_ = proxyPort;
+    }
+
+    /**
+     * Returns whether SOCKS proxy or not.
+     * @return whether SOCKS proxy or not
+     */
+    public boolean isSocksProxy() {
+        return isSocksProxy_;
+    }
+
+    /**
+     * Sets whether SOCKS proxy or not.
+     * @param isSocksProxy whether SOCKS proxy or not
+     */
+    public void setSocksProxy(final boolean isSocksProxy) {
+        isSocksProxy_ = isSocksProxy;
     }
 
     /**

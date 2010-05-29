@@ -119,8 +119,7 @@ public class HttpWebConnection implements WebConnection {
         try {
             httpMethod = makeHttpMethod(request);
             final HttpHost hostConfiguration = getHostConfiguration(request);
-            final HttpHost proxyConfiguration = getProxyConfiguration(request);
-            getHttpClient().getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyConfiguration);
+            setProxy(httpClient, request);
             final long startTime = System.currentTimeMillis();
             final HttpResponse httpResponse = httpClient.execute(hostConfiguration, httpMethod);
             final long endTime = System.currentTimeMillis();
@@ -164,24 +163,20 @@ public class HttpWebConnection implements WebConnection {
         return hostConfiguration;
     }
 
-    /**
-     * Returns a new HttpClient proxy configuration, initialized based on the
-     * specified request settings.
-     *
-     * @param webRequestSettings
-     *            the request settings to use to initialize the returned host
-     *            configuration
-     * @return a new HttpClient proxy configuration, initialized based on the
-     *         specified request settings
-     */
-    private static HttpHost getProxyConfiguration(
-            final WebRequest webRequest) {
+    private static void setProxy(final HttpClient httpClient, final WebRequest webRequest) {
         if (webRequest.getProxyHost() != null) {
             final String proxyHost = webRequest.getProxyHost();
             final int proxyPort = webRequest.getProxyPort();
-            return new HttpHost(proxyHost, proxyPort);
+            final HttpHost proxy = new HttpHost(proxyHost, proxyPort);
+            if (webRequest.isSocksProxy()) {
+                final SocksSocketFactory factory = (SocksSocketFactory)
+                    httpClient.getConnectionManager().getSchemeRegistry().getScheme("http").getSocketFactory();
+                factory.setSocksProxy(proxy);
+            }
+            else {
+                httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+            }
         }
-        return null;
     }
 
     /**
@@ -389,8 +384,10 @@ public class HttpWebConnection implements WebConnection {
 
             if (virtualHost_ != null) {
                 httpClient_.getParams().setParameter(ClientPNames.VIRTUAL_HOST, virtualHost_);
-
             }
+
+            final Scheme httpScheme = new Scheme("http", new SocksSocketFactory(), 80);
+            httpClient_.getConnectionManager().getSchemeRegistry().register(httpScheme);
         }
 
         // Tell the client where to get its credentials from
