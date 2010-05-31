@@ -9,6 +9,9 @@
             <action type="add" dev="asashour" issue="3006350">
                 Add support for SOCKS proxy (at WebClient and WebRequest levels).
             </action>
+            <action type="add" dev="mguillem">
+                Add UrlFetchWebConnection, an experimental WebConnection with limited functionalities but that doesn't require HttpClient.
+            </action>
             <action type="fix" dev="asashour">
                 HtmlArea: set 'Referer' header on clicking.
             </action>
