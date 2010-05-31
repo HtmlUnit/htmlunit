@@ -160,7 +160,9 @@ public class UrlFetchWebConnection implements WebConnection {
                 if (contentString.startsWith("'") && contentString.endsWith("'")) {
                     contentString = contentString.substring(1, contentString.length() - 1);
                 }
-                LOG.debug("special handling of URL, returning (" + contentString + ") for URL " + url);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("special handling of URL, returning (" + contentString + ") for URL " + url);
+                }
                 return new StringWebResponse(contentString, url);
             }
         }
