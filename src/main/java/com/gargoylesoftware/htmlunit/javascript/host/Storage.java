@@ -21,6 +21,7 @@ import java.util.Map;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -128,4 +129,16 @@ public class Storage extends SimpleScriptable {
         StorageImpl.getInstance().clear(type_, (HtmlPage) getWindow().getWebWindow().getEnclosedPage());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        if (getWindow().getWebWindow() != null) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.STORAGE_OBSOLETE)) {
+                return "StorageObsolete";
+            }
+        }
+        return super.getClassName();
+    }
 }

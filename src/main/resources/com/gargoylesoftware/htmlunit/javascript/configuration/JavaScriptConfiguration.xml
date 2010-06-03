@@ -2896,6 +2896,9 @@
         </property>
         <property name="frameElement" readable="true" writable="false"/>
         <property name="frames" readable="true" writable="false"/>
+        <property name="globalStorage" readable="true" writable="false">
+            <browser name="Firefox" min-version="3"/>
+        </property>
         <property name="history" readable="true" writable="false"/>
         <property name="innerHeight" readable="true" writable="false">
             <browser name="Firefox"/>

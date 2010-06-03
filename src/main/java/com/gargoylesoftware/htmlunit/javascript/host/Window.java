@@ -69,8 +69,8 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptFunctionJob
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptStringJob;
 import com.gargoylesoftware.htmlunit.javascript.host.Storage.Type;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
@@ -503,6 +503,17 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         storage.setPrototype(getPrototype(storage.getClass()));
         storage.setType(Type.SESSION_STORAGE);
         return storage;
+    }
+
+    /**
+     * Returns the globalStorage property.
+     * @return the globalStorage property
+     */
+    public StorageList jsxGet_globalStorage() {
+        final StorageList list = new StorageList();
+        list.setParentScope(this);
+        list.setPrototype(getPrototype(list.getClass()));
+        return list;
     }
 
     /**

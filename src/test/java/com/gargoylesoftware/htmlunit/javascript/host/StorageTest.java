@@ -23,8 +23,6 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link Storage}.
@@ -43,7 +41,6 @@ public class StorageTest extends WebDriverTestCase {
             FF = { "undefined", "undefined", "undefined" },
             FF3 = { "[object StorageList]", "undefined", "[object Storage]" })
             //FF3_5 = { "[object StorageList]", "[object Storage]", "[object Storage]" })
-    @NotYetImplemented(Browser.FF3)
     public void storage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -120,4 +117,25 @@ public class StorageTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF3 = { "[object Storage]", "error" })
+            //FF3_5 = { "[object StorageObsolete]", "error" })
+    public void globalStorage() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  if (window.globalStorage) {\n"
+            + "    try {\n"
+            + "      alert(globalStorage['" + URL_FIRST.getHost() + "']);\n"
+            + "      alert(globalStorage['otherHost']);\n"
+            + "    }\n"
+            + "    catch(e) {alert('error')};"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

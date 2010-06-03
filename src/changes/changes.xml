@@ -7,7 +7,7 @@
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks, HttpClient 4, SOCKS proxy, initial FF 3.6">
             <action type="add" dev="asashour" issue="3009368">
-                JavaScript: add support for localStorage and sessionStorage.
+                JavaScript: add support for globalStorage, localStorage and sessionStorage.
             </action>
             <action type="add" dev="asashour">
                 HtmlPage: add .getUrl().
