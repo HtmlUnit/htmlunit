@@ -505,7 +505,7 @@ public final class JavaScriptConfiguration {
         else {
             maxVersion = Float.parseFloat(max);
         }
-        if ((maxVersion > 0) && (browser.getBrowserVersionNumeric() > maxVersion)) {
+        if (maxVersion > 0 && browser.getBrowserVersionNumeric() > maxVersion) {
             return false;
         }
 
@@ -517,7 +517,7 @@ public final class JavaScriptConfiguration {
         else {
             minVersion = Float.parseFloat(min);
         }
-        if ((minVersion > 0) && (browser.getBrowserVersionNumeric() < minVersion)) {
+        if (minVersion > 0 && browser.getBrowserVersionNumeric() < minVersion) {
             return false;
         }
         return true;

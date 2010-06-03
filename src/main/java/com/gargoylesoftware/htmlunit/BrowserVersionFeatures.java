@@ -70,6 +70,9 @@ public enum BrowserVersionFeatures {
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 
     /** */
+    HTMLINPUT_DEFAULT_IS_CHECKED,
+
+    /** */
     HTMLOPTIONGROUP_NO_DISABLED,
 
     /** */
@@ -92,6 +95,9 @@ public enum BrowserVersionFeatures {
 
     /** */
     PAGE_WAIT_LAOD_BEFORE_BODY,
+
+    /** Supports 'data' protocol. */
+    PROTOCOL_DATA,
 
     /** Indicates .querySelectorAll() is supported in only quirks mode. */
     QUERYSELECTORALL_QUIRKS,

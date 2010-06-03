@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.IOException;
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -332,7 +333,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @see HtmlFileInput#setDefaultValue(String)
      */
     public void setDefaultValue(final String defaultValue) {
-        final boolean modifyValue = getPage().getWebClient().getBrowserVersion().isFirefox();
+        final boolean modifyValue = getPage().getWebClient().getBrowserVersion()
+            .hasFeature(BrowserVersionFeatures.HTMLINPUT_DEFAULT_IS_CHECKED);
         setDefaultValue(defaultValue, modifyValue);
     }
 

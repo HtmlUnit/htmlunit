@@ -1350,7 +1350,7 @@ public class WebClient implements Serializable {
             response = makeWebResponseForFileUrl(webRequest.getUrl(), webRequest.getCharset());
         }
         else if (protocol.equals("data")) {
-            if (browserVersion_.isFirefox()) {
+            if (browserVersion_.hasFeature(BrowserVersionFeatures.PROTOCOL_DATA)) {
                 response = makeWebResponseForDataUrl(webRequest);
             }
             else {
