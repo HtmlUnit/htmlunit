@@ -2324,4 +2324,11 @@ public class HtmlPage extends SgmlPage {
         return null;
     }
 
+    /**
+     * Returns the URL of this page.
+     * @return the URL of this page
+     */
+    public URL getUrl() {
+        return getWebResponse().getWebRequest().getUrl();
+    }
 }

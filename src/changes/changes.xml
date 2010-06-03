@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks, HttpClient 4, SOCKS proxy, initial FF 3.6">
+            <action type="add" dev="asashour">
+                HtmlPage: add .getUrl().
+            </action>
             <action type="add" dev="asashour" issue="3006350">
                 Add support for SOCKS proxy (at WebClient and WebRequest levels).
             </action>
