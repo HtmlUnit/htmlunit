@@ -2777,6 +2777,15 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Storage" JSObject="true">
+        <property name="length" readable="true" writable="false"/>
+        <function name="clear">
+        	<browser name="Internet Explorer" min-version="8"/>
+        	<browser name="Firefox" min-version="3.5"/>
+        </function>
+        <function name="getItem"/>
+        <function name="key"/>
+        <function name="removeItem"/>
+        <function name="setItem"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList" JSObject="true">
@@ -2917,6 +2926,10 @@
         <property name="parent" readable="true" writable="false"/>
         <property name="screen" readable="true" writable="false"/>
         <property name="self" readable="true" writable="false"/>
+        <property name="sessionStorage" readable="true" writable="false">
+            <browser name="Internet Explorer" min-version="8"/>
+            <browser name="Firefox" min-version="3"/>
+        </property>
         <property name="status" readable="true" writable="true"/>
         <property name="top" readable="true" writable="false"/>
         <property name="window" readable="true" writable="false"/>

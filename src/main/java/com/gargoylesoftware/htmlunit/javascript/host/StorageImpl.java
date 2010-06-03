@@ -22,6 +22,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -51,13 +52,13 @@ final class StorageImpl implements Serializable {
     }
 
     private Map<String, Map<String, String>> globalStorage_
-        = new LinkedHashMap<String, Map<String, String>>();
+        = new HashMap<String, Map<String, String>>();
 
     private Map<String, Map<String, String>> localStorage_
-        = new LinkedHashMap<String, Map<String, String>>();
+        = new HashMap<String, Map<String, String>>();
 
     private transient Map<String, Map<String, String>> sessionStorage_
-        = new LinkedHashMap<String, Map<String, String>>();
+        = new HashMap<String, Map<String, String>>();
 
     private StorageImpl() { }
 
@@ -66,22 +67,55 @@ final class StorageImpl implements Serializable {
     }
 
     void set(final Type type, final HtmlPage page, final String key, final String data) {
+        set(getStorage(type), getKey(type, page), key, data);
+    }
+
+    Map<String, String> getMap(final Type type, final HtmlPage page) {
+        final Map<String, Map<String, String>>storage = getStorage(type);
+        final String key = getKey(type, page);
+        Map<String, String> map = storage.get(key);
+        if (map == null) {
+            map = new LinkedHashMap<String, String>();
+            storage.put(key, map);
+        }
+        return map;
+    }
+
+    void clear(final Type type, final HtmlPage page) {
+        getStorage(type).remove(getKey(type, page));
+    }
+
+    private String getKey(final Type type, final HtmlPage page) {
         switch (type) {
             case GLOBAL_STORAGE:
-                set(globalStorage_, page.getUrl().getHost(), key, data);
-                break;
+                return page.getUrl().getHost();
 
             case LOCAL_STORAGE:
                 final URL url = page.getUrl();
-                set(localStorage_, url.getProtocol() + "://" + url.getHost() + ':' + url.getProtocol(), key, data);
-                break;
+                return url.getProtocol() + "://" + url.getHost() + ':' + url.getProtocol();
 
             case SESSION_STORAGE:
                 final WebWindow topWindow = page.getEnclosingWindow().getTopWindow();
-                set(sessionStorage_, Integer.toHexString(topWindow.hashCode()), key, data);
-                break;
+                return Integer.toHexString(topWindow.hashCode());
 
             default:
+                return null;
+        }
+    }
+
+    Map<String, Map<String, String>> getStorage(final Type type) {
+        switch (type) {
+            case GLOBAL_STORAGE:
+                return globalStorage_;
+
+            case LOCAL_STORAGE:
+                return localStorage_;
+
+            case SESSION_STORAGE:
+                return sessionStorage_;
+
+            default:
+                return null;
         }
     }
 
@@ -97,21 +131,7 @@ final class StorageImpl implements Serializable {
     }
 
     String get(final Type type, final HtmlPage page, final String key) {
-        switch (type) {
-            case GLOBAL_STORAGE:
-                return get(globalStorage_, page.getUrl().getHost(), key);
-
-            case LOCAL_STORAGE:
-                final URL url = page.getUrl();
-                return get(localStorage_, url.getProtocol() + "://" + url.getHost() + ':' + url.getProtocol(), key);
-
-            case SESSION_STORAGE:
-                final WebWindow topWindow = page.getEnclosingWindow().getTopWindow();
-                return get(sessionStorage_, Integer.toHexString(topWindow.hashCode()), key);
-
-            default:
-        }
-        return null;
+        return get(getStorage(type), getKey(type, page), key);
     }
 
     private static String get(final Map<String, Map<String, String>> storage, final String url,
@@ -141,6 +161,7 @@ final class StorageImpl implements Serializable {
             if (file.exists()) {
                 final ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
                 SINGLETON_ = (StorageImpl) in.readObject();
+                SINGLETON_.sessionStorage_ = new HashMap<String, Map<String, String>>();
                 in.close();
             }
         }

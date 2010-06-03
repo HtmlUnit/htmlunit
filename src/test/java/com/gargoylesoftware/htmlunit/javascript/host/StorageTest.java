@@ -43,7 +43,7 @@ public class StorageTest extends WebDriverTestCase {
             FF = { "undefined", "undefined", "undefined" },
             FF3 = { "[object StorageList]", "undefined", "[object Storage]" })
             //FF3_5 = { "[object StorageList]", "[object Storage]", "[object Storage]" })
-    @NotYetImplemented({ Browser.IE8, Browser.FF3 })
+    @NotYetImplemented(Browser.FF3)
     public void storage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -81,12 +81,43 @@ public class StorageTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
         loadPage2(firstHtml);
-        getMockWebConnection().setResponse(URL_FIRST, secondHtml);
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
         final WebDriver driver = getWebDriver();
-        driver.get(URL_FIRST.toExternalForm());
+        driver.get(URL_SECOND.toExternalForm());
 
         final List<String> actualAlerts = getCollectedAlerts(driver);
         assertEquals(getExpectedAlerts(), actualAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE8 = { "0", "2", "there", "world", "1", "0" },
+            FF3 = { "0", "2", "there", "world", "1" })
+            //FF3_5 = { "0", "2", "there", "world", "1", "0" })
+    public void sessionStorage() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  if (window.sessionStorage) {\n"
+            + "    alert(sessionStorage.length);\n"
+            + "    sessionStorage.hi = 'there';\n"
+            + "    sessionStorage.setItem('hello', 'world');\n"
+            + "    alert(sessionStorage.length);\n"
+            + "    alert(sessionStorage.getItem('hi'));\n"
+            + "    alert(sessionStorage.getItem('hello'));\n"
+            + "    sessionStorage.removeItem(sessionStorage.key(0));\n"
+            + "    alert(sessionStorage.length);\n"
+            + "    if (sessionStorage.clear) {\n"
+            + "      sessionStorage.clear();\n"
+            + "      alert(sessionStorage.length);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

@@ -494,6 +494,18 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * Returns the sessionStorage property.
+     * @return the sessionStorage property
+     */
+    public Storage jsxGet_sessionStorage() {
+        final Storage storage = new Storage();
+        storage.setParentScope(this);
+        storage.setPrototype(getPrototype(storage.getClass()));
+        storage.setType(Type.SESSION_STORAGE);
+        return storage;
+    }
+
+    /**
      * Returns the location property.
      * @return the location property
      */
