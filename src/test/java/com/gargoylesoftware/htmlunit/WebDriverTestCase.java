@@ -107,7 +107,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 if (file.exists()) {
                     properties.load(new FileInputStream(file));
                     BROWSERS_PROPERTIES_
-                        = Arrays.asList(properties.getProperty("browsers", "hu").toLowerCase().split(","));
+                        = Arrays.asList(properties.getProperty("browsers", "hu")
+                            .replaceAll(" ", "").toLowerCase().split(","));
                     FF2_BIN_ = properties.getProperty("ff2.bin");
                     FF3_BIN_ = properties.getProperty("ff3.bin");
                 }

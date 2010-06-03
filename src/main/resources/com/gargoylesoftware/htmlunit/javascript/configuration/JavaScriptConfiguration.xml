@@ -2776,6 +2776,9 @@
         <function name="item"/>
     </class>
 
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.Storage" JSObject="true">
+    </class>
+
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList" JSObject="true">
         <property name="length" readable="true" writable="false"/>
         <function name="item"/>
@@ -2892,6 +2895,10 @@
             <browser name="Firefox"/>
         </property>
         <property name="length" readable="true" writable="false"/>
+        <property name="localStorage" readable="true" writable="false">
+            <browser name="Internet Explorer" min-version="8"/>
+            <browser name="Firefox" min-version="3.5"/>
+        </property>
         <property name="location" readable="true" writable="true"/>
         <property name="name" readable="true" writable="true"/>
         <property name="navigator" readable="true" writable="false"/>

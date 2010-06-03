@@ -67,6 +67,7 @@ import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptFunctionJob;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptStringJob;
+import com.gargoylesoftware.htmlunit.javascript.host.Storage.Type;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
@@ -478,6 +479,18 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public WindowProxy jsxGet_self() {
         return windowProxy_;
+    }
+
+    /**
+     * Returns the localStorage property.
+     * @return the localStorage property
+     */
+    public Storage jsxGet_localStorage() {
+        final Storage storage = new Storage();
+        storage.setParentScope(this);
+        storage.setPrototype(getPrototype(storage.getClass()));
+        storage.setType(Type.LOCAL_STORAGE);
+        return storage;
     }
 
     /**
