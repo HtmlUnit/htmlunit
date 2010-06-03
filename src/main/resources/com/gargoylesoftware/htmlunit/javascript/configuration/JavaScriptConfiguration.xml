@@ -2779,8 +2779,8 @@
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Storage" JSObject="true">
         <property name="length" readable="true" writable="false"/>
         <function name="clear">
-        	<browser name="Internet Explorer" min-version="8"/>
-        	<browser name="Firefox" min-version="3.5"/>
+            <browser name="Internet Explorer" min-version="8"/>
+            <browser name="Firefox" min-version="3.5"/>
         </function>
         <function name="getItem"/>
         <function name="key"/>
