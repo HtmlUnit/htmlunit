@@ -24,6 +24,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -450,7 +451,8 @@ public class HtmlScript extends HtmlElement {
         if (typeAttribute != null && typeAttribute.length() != 0) {
             isJavaScript = typeAttribute.equalsIgnoreCase("text/javascript")
                 || (typeAttribute.equalsIgnoreCase("application/javascript")
-                        && getPage().getWebClient().getBrowserVersion().isFirefox());
+                        && getPage().getWebClient().getBrowserVersion()
+                            .hasFeature(BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT));
         }
         else if (languageAttribute != null && languageAttribute.length() != 0) {
             isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -45,8 +46,9 @@ public abstract class TableRowGroup extends HtmlElement {
     protected TableRowGroup(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-        final boolean ff = getPage().getWebClient().getBrowserVersion().isFirefox();
-        if (ff && !hasAttribute("align")) {
+        final boolean invalidAlign = getPage().getWebClient().getBrowserVersion()
+            .hasFeature(BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID);
+        if (invalidAlign && !hasAttribute("align")) {
             setAttribute("align", "left");
         }
     }

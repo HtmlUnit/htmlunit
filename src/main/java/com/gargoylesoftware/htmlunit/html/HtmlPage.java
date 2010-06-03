@@ -640,7 +640,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         // to handle http: and http:/ in FF (Bug 1714767)
-        if (getWebClient().getBrowserVersion().isFirefox()) {
+        if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.URL_MISSING_SLASHES)) {
             boolean incorrectnessNotified = false;
             while (relativeUrl.startsWith("http:") && !relativeUrl.startsWith("http://")) {
                 if (!incorrectnessNotified) {

@@ -69,6 +69,15 @@ public enum BrowserVersionFeatures {
     /** */
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 
+    /** Allows invalid 'align' values. */
+    HTMLELEMENT_ALIGN_INVALID,
+
+    /** */
+    HTMLELEMENT_CLASS_ATTRIBUTE,
+
+    /** */
+    HTMLIMAGE_NAME_VALUE_PARAMS,
+
     /** */
     HTMLINPUT_DEFAULT_IS_CHECKED,
 
@@ -80,6 +89,9 @@ public enum BrowserVersionFeatures {
 
     /** */
     HTMLOPTION_PREVENT_DISABLED,
+
+    /** */
+    HTMLSCRIPT_APPLICATION_JAVASCRIPT,
 
     /** Indicates that the browser should ignore contents of inner head elements. */
     IGNORE_CONTENTS_OF_INNER_HEAD,
@@ -131,6 +143,9 @@ public enum BrowserVersionFeatures {
 
     /** */
     URL_MINIMAL_QUERY_ENCODING,
+
+    /** */
+    URL_MISSING_SLASHES,
 
     /** */
     WINDOW_ACTIVE_ELEMENT_FOCUSED,

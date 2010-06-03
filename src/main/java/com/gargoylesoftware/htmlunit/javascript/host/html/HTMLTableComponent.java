@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+
 /**
  * Contains attributes common to various table components.
  *
@@ -43,8 +45,8 @@ public class HTMLTableComponent extends HTMLElement {
      * @return the value of the "align" property
      */
     public String jsxGet_align() {
-        final boolean returnInvalidValues = getBrowserVersion().isFirefox();
-        return getAlign(returnInvalidValues);
+        final boolean invalidValues = getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID);
+        return getAlign(invalidValues);
     }
 
     /**
