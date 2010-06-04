@@ -31,16 +31,17 @@ public final class MozillaTestGenerator {
     private MozillaTestGenerator() { }
 
     /**
-     * Outputs java test case for the specefied JavaScript source.
+     * Outputs java test case for the specified JavaScript source.
      * @param author the author name
      * @param htmlunitRoot HtmlUnit root path
      * @param mozillaRoot Mozilla root path
-     * @param jsPath relative JavaScript source path
+     * @param jsPath relative JavaScript source path, e.g. "/js/src/tests/js1_2/regexp/everything.js"
+     * @param initialScript whether another initial script is needed or not
      * @throws IOException if a reading error occurs
      */
     @SuppressWarnings("unchecked")
     public static void printMozillaTest(final String author, final String htmlunitRoot,
-            final String mozillaRoot, final String jsPath) throws IOException {
+            final String mozillaRoot, final String jsPath, final boolean initialScript) throws IOException {
         for (final Object o : FileUtils.readLines(new File(htmlunitRoot, "LICENSE.txt"))) {
             System.out.println(o);
         }
@@ -74,14 +75,21 @@ public final class MozillaTestGenerator {
                     System.out.println("ERROR...... test case ends with ; in " + (i + 1));
                     continue;
                 }
-                final String next = lines.get(i + 1).trim();
+                int x = i + 1;
+                String next = lines.get(x++).trim();
+                while (!next.endsWith(";")) {
+                    next = lines.get(x++).trim();
+                }
                 final String expected = getExpected(next);
                 final String script;
-                if (expected.equals("null")) {
-                    script = next.substring("null, ".length(), next.length() - 2);
+                if (expected.equals("null") || expected.equals("true") || expected.equals("false")) {
+                    script = next.substring(next.indexOf(',') + 1, next.length() - 2).trim();
+                }
+                else if (next.startsWith("\"")) {
+                    script = next.substring(expected.length() + 3, next.length() - 2).trim();
                 }
                 else {
-                    final int p0 = next.indexOf("]), String(") + "]), String(".length();
+                    final int p0 = next.indexOf("String(", 1) + "String(".length();
                     script = next.substring(p0, next.length() - 3);
                 }
                 System.out.println();
@@ -92,39 +100,58 @@ public final class MozillaTestGenerator {
                 System.out.println("    @Test");
                 System.out.println("    @Alerts(\"" + expected + "\")");
                 System.out.println("    public void test" + testNumber++ + "() throws Exception {");
-                System.out.println("        test(\"" + script.replace("\\", "\\\\") + "\");");
+                if (initialScript) {
+                    System.out.print("        test(initialScript, ");
+                }
+                else {
+                    System.out.print("        test(");
+                }
+                System.out.println("\"" + script.replace("\\", "\\\\").replace("\"", "\\\"") + "\");");
                 System.out.println("    }");
             }
         }
         System.out.println();
-        System.out.println("    private void test(final String script) throws Exception {");
-        System.out.println("        final String html = \"<html><head><title>foo</title><script>\\n\"");
-        System.out.println("            + \"  alert(\" + script + \");\\n\"");
-        System.out.println("            + \"</script></head><body>\\n\"");
-        System.out.println("            + \"</body></html>\";");
-        System.out.println("        loadPageWithAlerts2(html);");
-        System.out.println("    }");
+        if (initialScript) {
+            System.out.println("    private void test(final String script) throws Exception {");
+            System.out.println("        test(null, script);");
+            System.out.println("    }");
+            System.out.println("");
+            System.out.println(
+                    "    private void test(final String initialScript, final String script) throws Exception {");
+            System.out.println("        String html = \"<html><head><title>foo</title><script>\\n\";");
+            System.out.println("        if (initialScript != null) {");
+            System.out.println("            html += initialScript + \";\\n\";");
+            System.out.println("        }");
+            System.out.println("        html += \"  alert(\" + script + \");\\n\"");
+            System.out.println("            + \"</script></head><body>\\n\"");
+            System.out.println("            + \"</body></html>\";");
+            System.out.println("        loadPageWithAlerts2(html);");
+            System.out.println("    }");
+        }
+        else {
+            System.out.println("    private void test(final String script) throws Exception {");
+            System.out.println("        final String html = \"<html><head><title>foo</title><script>\\n\"");
+            System.out.println("            + \"  alert(\" + script + \");\\n\"");
+            System.out.println("            + \"</script></head><body>\\n\"");
+            System.out.println("            + \"</body></html>\";");
+            System.out.println("        loadPageWithAlerts2(html);");
+            System.out.println("    }");
+        }
         System.out.println("}");
-        System.out.println();
     }
 
     private static String getExpected(final String line) {
         if (line.startsWith("null")) {
             return "null";
         }
-        if (line.startsWith("String(['")) {
-            final int p0 = "String([\"".length();
-            int p1 = p0 + 1;
-            for (int i = p1; i < line.length() - 1; i++) {
-                if (line.charAt(i) == '\'' && line.charAt(i - 1) != '\\') {
-                    p1 = i;
-                    break;
-                }
-            }
-            return line.substring(p0, p1);
+        if (line.startsWith("true")) {
+            return "true";
         }
-        if (line.startsWith("String([\"")) {
-            final int p0 = "String([\"".length();
+        if (line.startsWith("false")) {
+            return "false";
+        }
+        if (line.startsWith("\"")) {
+            final int p0 = 1;
             int p1 = p0 + 1;
             for (int i = p1; i < line.length() - 1; i++) {
                 if (line.charAt(i) == '"' && line.charAt(i - 1) != '\\') {
@@ -134,8 +161,34 @@ public final class MozillaTestGenerator {
             }
             return line.substring(p0, p1);
         }
+        if (line.startsWith("String([")) {
+            final StringBuilder buffer = new StringBuilder();
+            char terminator = line.charAt("String([".length());
+            int p0 = "String([\"".length();
+            while (true) {
+                int p1 = p0 + 1;
+                int i;
+                for (i = p1; i < line.length() - 1; i++) {
+                    if (line.charAt(i) == terminator && line.charAt(i - 1) != '\\') {
+                        p1 = i;
+                        break;
+                    }
+                }
+                if (buffer.length() > 0) {
+                    buffer.append(',');
+                }
+                buffer.append(line.substring(p0, p1));
+                if (line.charAt(i + 1) == ']') {
+                    break;
+                }
+                terminator = line.charAt(i + 2);
+                p0 = i + 3;
+            }
+            return buffer.toString();
+        }
         else {
             return "UNKNOWN";
         }
     }
+
 }

@@ -22,72 +22,72 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
- * Tests originally in '/js/src/tests/js1_2/regexp/beginLine.js'.
+ * Tests originally in '/js/src/tests/js1_2/regexp/endLine.js'.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class BeginLine extends WebDriverTestCase {
+public class EndLine extends WebDriverTestCase {
 
     /**
-     * Tests 'abcde'.match(new RegExp('^ab')).
+     * Tests 'abcde'.match(new RegExp('de$')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("ab")
+    @Alerts("de")
     public void test1() throws Exception {
-        test("'abcde'.match(new RegExp('^ab'))");
+        test("'abcde'.match(new RegExp('de$'))");
     }
 
     /**
-     * Tests 'ab\ncde'.match(new RegExp('^..^e')).
+     * Tests 'ab\ncde'.match(new RegExp('..$e$')).
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("null")
     public void test2() throws Exception {
-        test("'ab\\ncde'.match(new RegExp('^..^e'))");
+        test("'ab\\ncde'.match(new RegExp('..$e$'))");
     }
 
     /**
-     * Tests 'yyyyy'.match(new RegExp('^xxx')).
+     * Tests 'yyyyy'.match(new RegExp('xxx$')).
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("null")
     public void test3() throws Exception {
-        test("'yyyyy'.match(new RegExp('^xxx'))");
+        test("'yyyyy'.match(new RegExp('xxx$'))");
     }
 
     /**
-     * Tests '^^^x'.match(new RegExp('^\\^+')).
+     * Tests 'a$$$'.match(new RegExp('\\$+$')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("^^^")
+    @Alerts("$$$")
     public void test4() throws Exception {
-        test("'^^^x'.match(new RegExp('^\\\\^+'))");
+        test("'a$$$'.match(new RegExp('\\\\$+$'))");
     }
 
     /**
-     * Tests '^^^x'.match(/^\^+/).
+     * Tests 'a$$$'.match(/\$+$/).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("^^^")
+    @Alerts("$$$")
     public void test5() throws Exception {
-        test("'^^^x'.match(/^\\^+/)");
+        test("'a$$$'.match(/\\$+$/)");
     }
 
     /**
-     * Tests 'abc\n123xyz'.match(new RegExp('^\\d+', 'm')).
+     * Tests 'abc\n123xyz890\nxyz'.match(new RegExp('\\d+$', 'm')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("123")
+    @Alerts("890")
     public void test6() throws Exception {
-        test("'abc\\n123xyz'.match(new RegExp('^\\\\d+', 'm'))");
+        test("'abc\\n123xyz890\\nxyz'.match(new RegExp('\\\\d+$', 'm'))");
     }
 
     private void test(final String script) throws Exception {

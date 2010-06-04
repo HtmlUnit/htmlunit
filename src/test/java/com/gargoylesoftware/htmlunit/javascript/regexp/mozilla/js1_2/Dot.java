@@ -22,142 +22,112 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
- * Tests originally in '/js/src/tests/js1_2/regexp/character_class.js'.
+ * Tests originally in '/js/src/tests/js1_2/regexp/dot.js'.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class Character_class extends WebDriverTestCase {
+public class Dot extends WebDriverTestCase {
 
     /**
-     * Tests 'abcde'.match(new RegExp('ab[ercst]de')).
+     * Tests 'abcde'.match(new RegExp('ab.de')).
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("abcde")
     public void test1() throws Exception {
-        test("'abcde'.match(new RegExp('ab[ercst]de'))");
+        test("'abcde'.match(new RegExp('ab.de'))");
     }
 
     /**
-     * Tests 'abcde'.match(new RegExp('ab[erst]de')).
+     * Tests 'line 1\nline 2'.match(new RegExp('.+')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts("line 1")
     public void test2() throws Exception {
-        test("'abcde'.match(new RegExp('ab[erst]de'))");
+        test("'line 1\\nline 2'.match(new RegExp('.+'))");
     }
 
     /**
-     * Tests 'abcdefghijkl'.match(new RegExp('[d-h]+')).
+     * Tests 'this is a test'.match(new RegExp('.*a.*')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("defgh")
+    @Alerts("this is a test")
     public void test3() throws Exception {
-        test("'abcdefghijkl'.match(new RegExp('[d-h]+'))");
+        test("'this is a test'.match(new RegExp('.*a.*'))");
     }
 
     /**
-     * Tests 'abc6defghijkl'.match(new RegExp('[1234567].{2}')).
+     * Tests 'this is a *&^%$# test'.match(new RegExp('.+')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("6de")
+    @Alerts("this is a *&^%$# test")
     public void test4() throws Exception {
-        test("'abc6defghijkl'.match(new RegExp('[1234567].{2}'))");
+        test("'this is a *&^%$# test'.match(new RegExp('.+'))");
     }
 
     /**
-     * Tests '\n\n\abc324234\n'.match(new RegExp('[a-c\\d]+')).
+     * Tests '....'.match(new RegExp('.+')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("abc324234")
+    @Alerts("....")
     public void test5() throws Exception {
-        test("'\\n\\n\\abc324234\\n'.match(new RegExp('[a-c\\\\d]+'))");
+        test("'....'.match(new RegExp('.+'))");
     }
 
     /**
-     * Tests 'abc'.match(new RegExp('ab[.]?c')).
+     * Tests 'abcdefghijklmnopqrstuvwxyz'.match(new RegExp('.+')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("abc")
+    @Alerts("abcdefghijklmnopqrstuvwxyz")
     public void test6() throws Exception {
-        test("'abc'.match(new RegExp('ab[.]?c'))");
+        test("'abcdefghijklmnopqrstuvwxyz'.match(new RegExp('.+'))");
     }
 
     /**
-     * Tests 'abc'.match(new RegExp('a[b]c')).
+     * Tests 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.match(new RegExp('.+')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("abc")
+    @Alerts("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
     public void test7() throws Exception {
-        test("'abc'.match(new RegExp('a[b]c'))");
+        test("'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.match(new RegExp('.+'))");
     }
 
     /**
-     * Tests 'a1b  b2c  c3d  def  f4g'.match(new RegExp('[a-z][^1-9][a-z]')).
+     * Tests '`1234567890-=~!@#$%^&*()_+'.match(new RegExp('.+')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("def")
+    @Alerts("`1234567890-=~!@#$%^&*()_+")
     public void test8() throws Exception {
-        test("'a1b  b2c  c3d  def  f4g'.match(new RegExp('[a-z][^1-9][a-z]'))");
+        test("'`1234567890-=~!@#$%^&*()_+'.match(new RegExp('.+'))");
     }
 
     /**
-     * Tests '123*&$abc'.match(new RegExp('[*&$]{3}')).
+     * Tests '|\\[{]};:\"\',<>.?/'.match(new RegExp('.+')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("*&$")
+    @Alerts("|\\[{]};:\"\',<>.?/")
     public void test9() throws Exception {
-        test("'123*&$abc'.match(new RegExp('[*&$]{3}'))");
+        test("'|\\\\[{]};:\\\"\\',<>.?/'.match(new RegExp('.+'))");
     }
 
     /**
-     * Tests 'abc'.match(new RegExp('a[^1-9]c')).
+     * Tests '|\\[{]};:\"\',<>.?/'.match(/.+/).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("abc")
+    @Alerts("|\\[{]};:\"\',<>.?/")
     public void test10() throws Exception {
-        test("'abc'.match(new RegExp('a[^1-9]c'))");
-    }
-
-    /**
-     * Tests 'abc'.match(new RegExp('a[^b]c')).
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void test11() throws Exception {
-        test("'abc'.match(new RegExp('a[^b]c'))");
-    }
-
-    /**
-     * Tests 'abc#$%def%&*@ghi)(*&'.match(new RegExp('[^a-z]{4}')).
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("%&*@")
-    public void test12() throws Exception {
-        test("'abc#$%def%&*@ghi)(*&'.match(new RegExp('[^a-z]{4}'))");
-    }
-
-    /**
-     * Tests 'abc#$%def%&*@ghi)(*&'.match(/[^a-z]{4}/).
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("%&*@")
-    public void test13() throws Exception {
-        test("'abc#$%def%&*@ghi)(*&'.match(/[^a-z]{4}/)");
+        test("'|\\\\[{]};:\\\"\\',<>.?/'.match(/.+/)");
     }
 
     private void test(final String script) throws Exception {
@@ -168,4 +138,3 @@ public class Character_class extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 }
-
