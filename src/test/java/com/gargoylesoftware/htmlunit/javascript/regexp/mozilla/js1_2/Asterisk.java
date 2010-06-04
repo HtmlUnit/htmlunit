@@ -122,7 +122,7 @@ public class Asterisk extends WebDriverTestCase {
     }
 
     /**
-     * Tests 'abcdef'.match(/bc..[\\d]*[\\s]*\/).
+     * Tests 'abcdef'.match(/bc..[\d]*[\s]*\/).
      * @throws Exception if the test fails
      */
     @Test
