@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
+import java.net.URL;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
@@ -236,4 +237,11 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
         return new DomAttr(getPage(), null, name, "", false);
     }
 
+    /**
+     * Returns the URL of this page.
+     * @return the URL of this page
+     */
+    public URL getUrl() {
+        return getWebResponse().getWebRequest().getUrl();
+    }
 }

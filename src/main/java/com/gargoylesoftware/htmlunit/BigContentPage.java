@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 /**
  * A page for big content. You must use {@link #getInputStream()} to get the content.
@@ -75,5 +76,12 @@ public class BigContentPage implements Page {
     public WebWindow getEnclosingWindow() {
         return enclosingWindow_;
     }
-}
 
+    /**
+     * Returns the URL of this page.
+     * @return the URL of this page
+     */
+    public URL getUrl() {
+        return getWebResponse().getWebRequest().getUrl();
+    }
+}

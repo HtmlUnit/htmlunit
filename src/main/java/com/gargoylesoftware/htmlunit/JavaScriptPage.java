@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.net.URL;
+
 /**
  * A generic page that will be returned for JavaScript content.
  * Specifically any content types of "text/javascript"
@@ -81,5 +83,12 @@ public class JavaScriptPage implements Page {
     public WebWindow getEnclosingWindow() {
         return enclosingWindow_;
     }
-}
 
+    /**
+     * Returns the URL of this page.
+     * @return the URL of this page
+     */
+    public URL getUrl() {
+        return getWebResponse().getWebRequest().getUrl();
+    }
+}

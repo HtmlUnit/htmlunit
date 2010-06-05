@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
 
 /**
  * An abstract page that represents some content returned from a server.
@@ -54,5 +55,10 @@ public interface Page extends Serializable {
      * @return the enclosing window
      */
     WebWindow getEnclosingWindow();
-}
 
+    /**
+     * Returns the URL of this page.
+     * @return the URL of this page
+     */
+    URL getUrl();
+}

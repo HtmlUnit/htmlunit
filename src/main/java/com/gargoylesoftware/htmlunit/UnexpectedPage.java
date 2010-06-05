@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 /**
  * A generic page that is returned whenever an unexpected content type is
@@ -84,5 +85,12 @@ public class UnexpectedPage implements Page {
     public WebWindow getEnclosingWindow() {
         return enclosingWindow_;
     }
-}
 
+    /**
+     * Returns the URL of this page.
+     * @return the URL of this page
+     */
+    public URL getUrl() {
+        return getWebResponse().getWebRequest().getUrl();
+    }
+}

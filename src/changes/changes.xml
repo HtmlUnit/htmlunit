@@ -10,7 +10,7 @@
                 JavaScript: add support for globalStorage, localStorage and sessionStorage.
             </action>
             <action type="add" dev="asashour">
-                HtmlPage: add .getUrl().
+                Page: add .getUrl().
             </action>
             <action type="add" dev="asashour" issue="3006350">
                 Add support for SOCKS proxy (at WebClient and WebRequest levels).
