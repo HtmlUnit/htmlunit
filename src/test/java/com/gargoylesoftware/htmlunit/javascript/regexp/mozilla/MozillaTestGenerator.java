@@ -82,15 +82,15 @@ public final class MozillaTestGenerator {
                 }
                 final String expected = getExpected(next);
                 final String script;
-                if (expected.equals("null") || expected.equals("true") || expected.equals("false")) {
-                    script = next.substring(next.indexOf(',') + 1, next.length() - 2).trim();
+                if (next.startsWith("String(")) {
+                    final int p0 = next.indexOf("String(", 1) + "String(".length();
+                    script = next.substring(p0, next.length() - 3);
                 }
                 else if (next.startsWith("\"")) {
                     script = next.substring(expected.length() + 3, next.length() - 2).trim();
                 }
                 else {
-                    final int p0 = next.indexOf("String(", 1) + "String(".length();
-                    script = next.substring(p0, next.length() - 3);
+                    script = next.substring(next.indexOf(',') + 1, next.length() - 2).trim();
                 }
                 System.out.println();
                 System.out.println("    /**");
@@ -141,15 +141,6 @@ public final class MozillaTestGenerator {
     }
 
     private static String getExpected(final String line) {
-        if (line.startsWith("null")) {
-            return "null";
-        }
-        if (line.startsWith("true")) {
-            return "true";
-        }
-        if (line.startsWith("false")) {
-            return "false";
-        }
         if (line.startsWith("\"")) {
             final int p0 = 1;
             int p1 = p0 + 1;
@@ -167,12 +158,18 @@ public final class MozillaTestGenerator {
             int p0 = "String([\"".length();
             while (true) {
                 int p1 = p0 + 1;
-                int i;
-                for (i = p1; i < line.length() - 1; i++) {
-                    if (line.charAt(i) == terminator && line.charAt(i - 1) != '\\') {
-                        p1 = i;
-                        break;
+                int i = p1;
+                if (line.charAt(p0) != terminator) {
+                    for (i = p1; i < line.length() - 1; i++) {
+                        if (line.charAt(i) == terminator && line.charAt(i - 1) != '\\') {
+                            p1 = i;
+                            break;
+                        }
                     }
+                }
+                else {
+                    i = p1 - 1;
+                    p1 = p0;
                 }
                 if (buffer.length() > 0) {
                     buffer.append(',');
@@ -187,7 +184,7 @@ public final class MozillaTestGenerator {
             return buffer.toString();
         }
         else {
-            return "UNKNOWN";
+            return line.substring(0, line.indexOf(','));
         }
     }
 
