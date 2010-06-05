@@ -22,72 +22,63 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
- * Tests originally in '/js/src/tests/js1_2/regexp/beginLine.js'.
+ * Tests originally in '/js/src/tests/js1_2/regexp/backslash.js'.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class BeginLine extends WebDriverTestCase {
+public class BackslashTest extends WebDriverTestCase {
 
     /**
-     * Tests 'abcde'.match(new RegExp('^ab')).
+     * Tests 'abcde'.match(new RegExp('\e')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("ab")
+    @Alerts("e")
     public void test1() throws Exception {
-        test("'abcde'.match(new RegExp('^ab'))");
+        test("'abcde'.match(new RegExp('\\e'))");
     }
 
     /**
-     * Tests 'ab\ncde'.match(new RegExp('^..^e')).
+     * Tests 'ab\\cde'.match(new RegExp('\\\\')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts("\\")
     public void test2() throws Exception {
-        test("'ab\\ncde'.match(new RegExp('^..^e'))");
+        test("'ab\\\\cde'.match(new RegExp('\\\\\\\\'))");
     }
 
     /**
-     * Tests 'yyyyy'.match(new RegExp('^xxx')).
+     * Tests 'ab\\cde'.match(/\\/).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
+    @Alerts("\\")
     public void test3() throws Exception {
-        test("'yyyyy'.match(new RegExp('^xxx'))");
+        test("'ab\\\\cde'.match(/\\\\/)");
     }
 
     /**
-     * Tests '^^^x'.match(new RegExp('^\\^+')).
+     * Tests 'before ^$*+?.()|{}[] after'.match(new RegExp('\\^\\$\\*\\+\\?\\.\\(\\)\\|\\{\\}\\[\\]')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("^^^")
+    @Alerts("^$*+?.()|{}[]")
     public void test4() throws Exception {
-        test("'^^^x'.match(new RegExp('^\\\\^+'))");
+        test("'before ^$*+?.()|{}[] after'.match("
+                + "new RegExp('\\\\^\\\\$\\\\*\\\\+\\\\?\\\\.\\\\(\\\\)\\\\|\\\\{\\\\}\\\\[\\\\]'))");
     }
 
     /**
-     * Tests '^^^x'.match(/^\^+/).
+     * Tests 'before ^$*+?.()|{}[] after'.match(/\^\$\*\+\?\.\(\)\|\{\}\[\]/).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("^^^")
+    @Alerts("^$*+?.()|{}[]")
     public void test5() throws Exception {
-        test("'^^^x'.match(/^\\^+/)");
-    }
-
-    /**
-     * Tests 'abc\n123xyz'.match(new RegExp('^\\d+', 'm')).
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("123")
-    public void test6() throws Exception {
-        test("'abc\\n123xyz'.match(new RegExp('^\\\\d+', 'm'))");
+        test("'before ^$*+?.()|{}[] after'.match(/\\^\\$\\*\\+\\?\\.\\(\\)\\|\\{\\}\\[\\]/)");
     }
 
     private void test(final String script) throws Exception {
@@ -95,6 +86,7 @@ public class BeginLine extends WebDriverTestCase {
             + "  alert(" + script + ");\n"
             + "</script></head><body>\n"
             + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }

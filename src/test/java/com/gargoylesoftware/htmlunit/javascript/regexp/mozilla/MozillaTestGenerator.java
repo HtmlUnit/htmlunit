@@ -65,7 +65,7 @@ public final class MozillaTestGenerator {
         System.out.println("@RunWith(BrowserRunner.class)");
         String className = jsPathTokens[jsPathTokens.length - 1];
         className = Character.toUpperCase(className.charAt(0)) + className.substring(1, className.length() - 3);
-        System.out.println("public class " + className + " extends WebDriverTestCase {");
+        System.out.println("public class " + className + "Test extends WebDriverTestCase {");
         final List<String> lines = FileUtils.readLines(new File(mozillaRoot, jsPath));
         int testNumber = 1;
         for (int i = 0; i < lines.size(); i++) {

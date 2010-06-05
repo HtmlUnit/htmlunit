@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class Alphanumeric extends WebDriverTestCase {
+public class AlphanumericTest extends WebDriverTestCase {
 
     private static final String non_alphanumeric = "~`!@#$%^&*()-+={[}]|\\\\:;\\'<,>./?\\f\\n\\r\\t \"\\v";
     private static final String alphanumeric     = "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";

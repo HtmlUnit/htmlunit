@@ -22,86 +22,77 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
- * Tests originally in '/js/src/tests/js1_2/regexp/everything.js'.
+ * Tests originally in '/js/src/tests/js1_2/regexp/beginLine.js'.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class Everything extends WebDriverTestCase {
+public class BeginLineTest extends WebDriverTestCase {
 
     /**
-     * Tests 'Sally and Fred are sure to come'.match(/^[a-z\s]*\/i).
+     * Tests 'abcde'.match(new RegExp('^ab')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Sally and Fred are sure to come")
+    @Alerts("ab")
     public void test1() throws Exception {
-        test("'Sally and Fred are sure to come'.match(/^[a-z\\s]*/i)");
+        test("'abcde'.match(new RegExp('^ab'))");
     }
 
     /**
-     * Tests 'test123W+xyz'.match(new RegExp('^[a-z]*[0-9]+[A-Z]?.(123|xyz)$')).
+     * Tests 'ab\ncde'.match(new RegExp('^..^e')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("test123W+xyz,xyz")
+    @Alerts("null")
     public void test2() throws Exception {
-        test("'test123W+xyz'.match(new RegExp('^[a-z]*[0-9]+[A-Z]?.(123|xyz)$'))");
+        test("'ab\\ncde'.match(new RegExp('^..^e'))");
     }
 
     /**
-     * Tests 'number one 12365 number two 9898'.match(/(\d+)\D+(\d+)/).
+     * Tests 'yyyyy'.match(new RegExp('^xxx')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("12365 number two 9898,12365,9898")
+    @Alerts("null")
     public void test3() throws Exception {
-        test("'number one 12365 number two 9898'.match(/(\\d+)\\D+(\\d+)/)");
+        test("'yyyyy'.match(new RegExp('^xxx'))");
     }
 
     /**
-     * Tests 'See Spot run.'.match(simpleSentence).
+     * Tests '^^^x'.match(new RegExp('^\\^+')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("See Spot run.,See Spot run.")
+    @Alerts("^^^")
     public void test4() throws Exception {
-        final String initialScript = "simpleSentence = /(\\s?[^\\!\\?\\.]+[\\!\\?\\.])+/;";
-        test(initialScript, "'See Spot run.'.match(simpleSentence)");
+        test("'^^^x'.match(new RegExp('^\\\\^+'))");
     }
 
     /**
-     * Tests 'I like it. What\'s up? I said NO!'.match(simpleSentence).
+     * Tests '^^^x'.match(/^\^+/).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("I like it. What's up? I said NO!, I said NO!")
+    @Alerts("^^^")
     public void test5() throws Exception {
-        final String initialScript = "simpleSentence = /(\\s?[^\\!\\?\\.]+[\\!\\?\\.])+/;";
-        test(initialScript, "'I like it. What\\'s up? I said NO!'.match(simpleSentence)");
+        test("'^^^x'.match(/^\\^+/)");
     }
 
     /**
-     * Tests 'the quick brown fox jumped over the lazy dogs'.match(/((\w+)\s*)+/).
+     * Tests 'abc\n123xyz'.match(new RegExp('^\\d+', 'm')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("the quick brown fox jumped over the lazy dogs,dogs,dogs")
+    @Alerts("123")
     public void test6() throws Exception {
-        test("'the quick brown fox jumped over the lazy dogs'.match(/((\\w+)\\s*)+/)");
+        test("'abc\\n123xyz'.match(new RegExp('^\\\\d+', 'm'))");
     }
 
     private void test(final String script) throws Exception {
-        test(null, script);
-    }
-
-    private void test(final String initialScript, final String script) throws Exception {
-        String html = "<html><head><title>foo</title><script>\n";
-        if (initialScript != null) {
-            html += initialScript + ";\n";
-        }
-        html += "  alert(" + script + ");\n"
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  alert(" + script + ");\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class Compile extends WebDriverTestCase {
+public class CompileTest extends WebDriverTestCase {
 
     /**
      * Tests '234X456X7890'.match(regularExpression).

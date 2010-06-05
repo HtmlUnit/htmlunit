@@ -20,114 +20,136 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
- * Tests originally in '/js/src/tests/js1_2/regexp/dot.js'.
+ * Tests originally in '/js/src/tests/js1_2/regexp/asterisk.js'.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class Dot extends WebDriverTestCase {
+public class AsteriskTest extends WebDriverTestCase {
 
     /**
-     * Tests 'abcde'.match(new RegExp('ab.de')).
+     * Tests 'abcddddefg'.match(new RegExp('d*')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("abcde")
+    @Alerts("")
     public void test1() throws Exception {
-        test("'abcde'.match(new RegExp('ab.de'))");
+        test("'abcddddefg'.match(new RegExp('d*'))");
     }
 
     /**
-     * Tests 'line 1\nline 2'.match(new RegExp('.+')).
+     * Tests 'abcddddefg'.match(new RegExp('cd*')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("line 1")
+    @Alerts("cdddd")
     public void test2() throws Exception {
-        test("'line 1\\nline 2'.match(new RegExp('.+'))");
+        test("'abcddddefg'.match(new RegExp('cd*'))");
     }
 
     /**
-     * Tests 'this is a test'.match(new RegExp('.*a.*')).
+     * Tests 'abcdefg'.match(new RegExp('cx*d')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("this is a test")
+    @Alerts("cd")
     public void test3() throws Exception {
-        test("'this is a test'.match(new RegExp('.*a.*'))");
+        test("'abcdefg'.match(new RegExp('cx*d'))");
     }
 
     /**
-     * Tests 'this is a *&^%$# test'.match(new RegExp('.+')).
+     * Tests 'xxxxxxx'.match(new RegExp('(x*)(x+)')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("this is a *&^%$# test")
+    @Alerts("xxxxxxx,xxxxxx,x")
     public void test4() throws Exception {
-        test("'this is a *&^%$# test'.match(new RegExp('.+'))");
+        test("'xxxxxxx'.match(new RegExp('(x*)(x+)'))");
     }
 
     /**
-     * Tests '....'.match(new RegExp('.+')).
+     * Tests '1234567890'.match(new RegExp('(\\d*)(\\d+)')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("....")
+    @Alerts("1234567890,123456789,0")
     public void test5() throws Exception {
-        test("'....'.match(new RegExp('.+'))");
+        test("'1234567890'.match(new RegExp('(\\\\d*)(\\\\d+)'))");
     }
 
     /**
-     * Tests 'abcdefghijklmnopqrstuvwxyz'.match(new RegExp('.+')).
+     * Tests '1234567890'.match(new RegExp('(\\d*)\\d(\\d+)')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("abcdefghijklmnopqrstuvwxyz")
+    @Alerts("1234567890,12345678,0")
     public void test6() throws Exception {
-        test("'abcdefghijklmnopqrstuvwxyz'.match(new RegExp('.+'))");
+        test("'1234567890'.match(new RegExp('(\\\\d*)\\\\d(\\\\d+)'))");
     }
 
     /**
-     * Tests 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.match(new RegExp('.+')).
+     * Tests 'xxxxxxx'.match(new RegExp('(x+)(x*)')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    @Alerts("xxxxxxx,xxxxxxx,")
     public void test7() throws Exception {
-        test("'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.match(new RegExp('.+'))");
+        test("'xxxxxxx'.match(new RegExp('(x+)(x*)'))");
     }
 
     /**
-     * Tests '`1234567890-=~!@#$%^&*()_+'.match(new RegExp('.+')).
+     * Tests 'xxxxxxyyyyyy'.match(new RegExp('x*y+$')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("`1234567890-=~!@#$%^&*()_+")
+    @Alerts("xxxxxxyyyyyy")
     public void test8() throws Exception {
-        test("'`1234567890-=~!@#$%^&*()_+'.match(new RegExp('.+'))");
+        test("'xxxxxxyyyyyy'.match(new RegExp('x*y+$'))");
     }
 
     /**
-     * Tests '|\\[{]};:\"\',<>.?/'.match(new RegExp('.+')).
+     * Tests 'abcdef'.match(/[\d]*[\s]*bc./).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("|\\[{]};:\"\',<>.?/")
+    @Alerts("bcd")
     public void test9() throws Exception {
-        test("'|\\\\[{]};:\\\"\\',<>.?/'.match(new RegExp('.+'))");
+        test("'abcdef'.match(/[\\d]*[\\s]*bc./)");
     }
 
     /**
-     * Tests '|\\[{]};:\"\',<>.?/'.match(/.+/).
+     * Tests 'abcdef'.match(/bc..[\d]*[\s]*\/).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("|\\[{]};:\"\',<>.?/")
+    @Alerts("bcde")
     public void test10() throws Exception {
-        test("'|\\\\[{]};:\\\"\\',<>.?/'.match(/.+/)");
+        test("'abcdef'.match(/bc..[\\d]*[\\s]*/)");
+    }
+
+    /**
+     * Tests 'a1b2c3'.match(/.*\/).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a1b2c3")
+    public void test11() throws Exception {
+        test("'a1b2c3'.match(/.*/)");
+    }
+
+    /**
+     * Tests 'a0.b2.c3'.match(/[xyz]*1/.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    @NotYetImplemented
+    public void test12() throws Exception {
+        test("'a0.b2.c3'.match(/[xyz]*1/");
     }
 
     private void test(final String script) throws Exception {
@@ -135,6 +157,7 @@ public class Dot extends WebDriverTestCase {
             + "  alert(" + script + ");\n"
             + "</script></head><body>\n"
             + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }

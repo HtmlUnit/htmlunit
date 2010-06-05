@@ -22,63 +22,72 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
- * Tests originally in '/js/src/tests/js1_2/regexp/backslash.js'.
+ * Tests originally in '/js/src/tests/js1_2/regexp/backspace.js'.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class Backslash extends WebDriverTestCase {
+public class BackspaceTest extends WebDriverTestCase {
 
     /**
-     * Tests 'abcde'.match(new RegExp('\e')).
+     * Tests 'abc\bdef'.match(new RegExp('.[\\b].')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("e")
+    @Alerts("c\bd")
     public void test1() throws Exception {
-        test("'abcde'.match(new RegExp('\\e'))");
+        test("'abc\bdef'.match(new RegExp('.[\\\\b].'))");
     }
 
     /**
-     * Tests 'ab\\cde'.match(new RegExp('\\\\')).
+     * Tests 'abc\\bdef'.match(new RegExp('.[\\b].')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("\\")
+    @Alerts("null")
     public void test2() throws Exception {
-        test("'ab\\\\cde'.match(new RegExp('\\\\\\\\'))");
+        test("'abc\\\\bdef'.match(new RegExp('.[\\\\b].'))");
     }
 
     /**
-     * Tests 'ab\\cde'.match(/\\/).
+     * Tests 'abc\b\b\bdef'.match(new RegExp('c[\\b]{3}d')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("\\")
+    @Alerts("c\b\b\bd")
     public void test3() throws Exception {
-        test("'ab\\\\cde'.match(/\\\\/)");
+        test("'abc\\b\\b\\bdef'.match(new RegExp('c[\\\\b]{3}d'))");
     }
 
     /**
-     * Tests 'before ^$*+?.()|{}[] after'.match(new RegExp('\\^\\$\\*\\+\\?\\.\\(\\)\\|\\{\\}\\[\\]')).
+     * Tests 'abc\bdef'.match(new RegExp('[^\\[\\b\\]]+')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("^$*+?.()|{}[]")
+    @Alerts("abc")
     public void test4() throws Exception {
-        test("'before ^$*+?.()|{}[] after'.match("
-                + "new RegExp('\\\\^\\\\$\\\\*\\\\+\\\\?\\\\.\\\\(\\\\)\\\\|\\\\{\\\\}\\\\[\\\\]'))");
+        test("'abc\\bdef'.match(new RegExp('[^\\\\[\\\\b\\\\]]+'))");
     }
 
     /**
-     * Tests 'before ^$*+?.()|{}[] after'.match(/\^\$\*\+\?\.\(\)\|\{\}\[\]/).
+     * Tests 'abcdef'.match(new RegExp('[^\\[\\b\\]]+')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("^$*+?.()|{}[]")
+    @Alerts("abcdef")
     public void test5() throws Exception {
-        test("'before ^$*+?.()|{}[] after'.match(/\\^\\$\\*\\+\\?\\.\\(\\)\\|\\{\\}\\[\\]/)");
+        test("'abcdef'.match(new RegExp('[^\\\\[\\\\b\\\\]]+'))");
+    }
+
+    /**
+     * Tests 'abcdef'.match(/[^\[\b\]]+/).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abcdef")
+    public void test6() throws Exception {
+        test("'abcdef'.match(/[^\\[\\b\\]]+/)");
     }
 
     private void test(final String script) throws Exception {

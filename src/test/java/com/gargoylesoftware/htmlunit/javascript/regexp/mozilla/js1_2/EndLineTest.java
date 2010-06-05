@@ -22,72 +22,72 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
- * Tests originally in '/js/src/tests/js1_2/regexp/backspace.js'.
+ * Tests originally in '/js/src/tests/js1_2/regexp/endLine.js'.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class Backspace extends WebDriverTestCase {
+public class EndLineTest extends WebDriverTestCase {
 
     /**
-     * Tests 'abc\bdef'.match(new RegExp('.[\\b].')).
+     * Tests 'abcde'.match(new RegExp('de$')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("c\bd")
+    @Alerts("de")
     public void test1() throws Exception {
-        test("'abc\bdef'.match(new RegExp('.[\\\\b].'))");
+        test("'abcde'.match(new RegExp('de$'))");
     }
 
     /**
-     * Tests 'abc\\bdef'.match(new RegExp('.[\\b].')).
+     * Tests 'ab\ncde'.match(new RegExp('..$e$')).
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("null")
     public void test2() throws Exception {
-        test("'abc\\\\bdef'.match(new RegExp('.[\\\\b].'))");
+        test("'ab\\ncde'.match(new RegExp('..$e$'))");
     }
 
     /**
-     * Tests 'abc\b\b\bdef'.match(new RegExp('c[\\b]{3}d')).
+     * Tests 'yyyyy'.match(new RegExp('xxx$')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("c\b\b\bd")
+    @Alerts("null")
     public void test3() throws Exception {
-        test("'abc\\b\\b\\bdef'.match(new RegExp('c[\\\\b]{3}d'))");
+        test("'yyyyy'.match(new RegExp('xxx$'))");
     }
 
     /**
-     * Tests 'abc\bdef'.match(new RegExp('[^\\[\\b\\]]+')).
+     * Tests 'a$$$'.match(new RegExp('\\$+$')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("abc")
+    @Alerts("$$$")
     public void test4() throws Exception {
-        test("'abc\\bdef'.match(new RegExp('[^\\\\[\\\\b\\\\]]+'))");
+        test("'a$$$'.match(new RegExp('\\\\$+$'))");
     }
 
     /**
-     * Tests 'abcdef'.match(new RegExp('[^\\[\\b\\]]+')).
+     * Tests 'a$$$'.match(/\$+$/).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("abcdef")
+    @Alerts("$$$")
     public void test5() throws Exception {
-        test("'abcdef'.match(new RegExp('[^\\\\[\\\\b\\\\]]+'))");
+        test("'a$$$'.match(/\\$+$/)");
     }
 
     /**
-     * Tests 'abcdef'.match(/[^\[\b\]]+/).
+     * Tests 'abc\n123xyz890\nxyz'.match(new RegExp('\\d+$', 'm')).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("abcdef")
+    @Alerts("890")
     public void test6() throws Exception {
-        test("'abcdef'.match(/[^\\[\\b\\]]+/)");
+        test("'abc\\n123xyz890\\nxyz'.match(new RegExp('\\\\d+$', 'm'))");
     }
 
     private void test(final String script) throws Exception {
@@ -95,7 +95,6 @@ public class Backspace extends WebDriverTestCase {
             + "  alert(" + script + ");\n"
             + "</script></head><body>\n"
             + "</body></html>";
-
         loadPageWithAlerts2(html);
     }
 }
