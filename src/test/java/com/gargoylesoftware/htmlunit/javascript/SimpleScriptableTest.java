@@ -153,6 +153,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("StaticNodeList");
         names.remove("Storage");
         names.remove("StorageImpl");
+        names.remove("StorageList");
         names.remove("StringCustom");
         names.remove("StyleSheetList");
         names.remove("TextRange");
