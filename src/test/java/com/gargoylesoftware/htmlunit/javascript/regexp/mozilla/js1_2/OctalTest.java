@@ -39,7 +39,9 @@ public class OctalTest extends WebDriverTestCase {
     @Alerts("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
     @NotYetImplemented
     public void test1() throws Exception {
-        final String initialScript = "var testPattern = '\\\\101\\\\102\\\\103\\\\104\\\\105\\\\106\\\\107\\\\110\\\\111\\\\112\\\\113\\\\114\\\\115\\\\116\\\\117\\\\120\\\\121\\\\122\\\\123\\\\124\\\\125\\\\126\\\\127\\\\130\\\\131\\\\132';"
+        final String initialScript = "var testPattern = '\\\\101\\\\102\\\\103\\\\104\\\\105\\\\106\\\\107\\\\110"
+            + "\\\\111\\\\112\\\\113\\\\114\\\\115\\\\116\\\\117\\\\120\\\\121\\\\122\\\\123\\\\124\\\\125\\\\126"
+            + "\\\\127\\\\130\\\\131\\\\132';"
             + "var testString = '12345ABCDEFGHIJKLMNOPQRSTUVWXYZ67890';";
         test(initialScript, "testString.match(new RegExp(testPattern))");
     }
@@ -52,7 +54,9 @@ public class OctalTest extends WebDriverTestCase {
     @Alerts("abcdefghijklmnopqrstuvwxyz")
     @NotYetImplemented
     public void test2() throws Exception {
-        final String initialScript = "var testPattern = '\\\\141\\\\142\\\\143\\\\144\\\\145\\\\146\\\\147\\\\150\\\\151\\\\152\\\\153\\\\154\\\\155\\\\156\\\\157\\\\160\\\\161\\\\162\\\\163\\\\164\\\\165\\\\166\\\\167\\\\170\\\\171\\\\172';"
+        final String initialScript = "var testPattern = '\\\\141\\\\142\\\\143\\\\144\\\\145\\\\146\\\\147\\\\150"
+            + "\\\\151\\\\152\\\\153\\\\154\\\\155\\\\156\\\\157\\\\160\\\\161\\\\162\\\\163\\\\164\\\\165\\\\166"
+            + "\\\\167\\\\170\\\\171\\\\172';"
             + "var testString = '12345AabcdefghijklmnopqrstuvwxyzZ67890';";
         test(initialScript, "testString.match(new RegExp(testPattern))");
     }
@@ -65,7 +69,8 @@ public class OctalTest extends WebDriverTestCase {
     @Alerts(" !\"#$%&'()*+,-./0123")
     @NotYetImplemented
     public void test3() throws Exception {
-        final String initialScript = "var testPattern = '\\\\40\\\\41\\\\42\\\\43\\\\44\\\\45\\\\46\\\\47\\\\50\\\\51\\\\52\\\\53\\\\54\\\\55\\\\56\\\\57\\\\60\\\\61\\\\62\\\\63';"
+        final String initialScript = "var testPattern = '\\\\40\\\\41\\\\42\\\\43\\\\44\\\\45\\\\46\\\\47\\\\50"
+            + "\\\\51\\\\52\\\\53\\\\54\\\\55\\\\56\\\\57\\\\60\\\\61\\\\62\\\\63';"
             + "var testString = 'abc !\"#$%&\\'()*+,-./0123ZBC';";
         test(initialScript, "testString.match(new RegExp(testPattern))");
     }
@@ -78,7 +83,8 @@ public class OctalTest extends WebDriverTestCase {
     @Alerts("456789:;<=>?@")
     @NotYetImplemented
     public void test4() throws Exception {
-        final String initialScript = "var testPattern = '\\\\64\\\\65\\\\66\\\\67\\\\70\\\\71\\\\72\\\\73\\\\74\\\\75\\\\76\\\\77\\\\100';"
+        final String initialScript = "var testPattern = '\\\\64\\\\65\\\\66\\\\67\\\\70\\\\71\\\\72\\\\73\\\\74\\\\75"
+            + "\\\\76\\\\77\\\\100';"
             + "var testString = '123456789:;<=>?@ABC';";
         test(initialScript, "testString.match(new RegExp(testPattern))");
     }
