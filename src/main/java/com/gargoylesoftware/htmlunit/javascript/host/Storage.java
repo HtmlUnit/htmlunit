@@ -37,8 +37,8 @@ public class Storage extends SimpleScriptable {
 
     static enum Type { GLOBAL_STORAGE, LOCAL_STORAGE, SESSION_STORAGE };
 
-    private static List<String> RESERVED_NAMES_ = Arrays.asList(
-            new String[] {"clear", "key", "getItem", "length", "removeItem", "setItem"});
+    private static List<String> RESERVED_NAMES_ = Arrays.asList("clear", "key", "getItem", "length", "removeItem",
+        "setItem");
 
     private Type type_;
 
