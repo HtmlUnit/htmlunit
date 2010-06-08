@@ -1338,7 +1338,7 @@
         <property name="URL" readable="true" writable="false"/>
         <property name="vlinkColor" notImplemented="true" readable="true" writable="false"/>
 
-        <function name="clear" notImplemented="true"/>
+        <function name="clear"/>
         <function name="close"/>
         <function name="createEvent">
             <browser name="Firefox"/>
