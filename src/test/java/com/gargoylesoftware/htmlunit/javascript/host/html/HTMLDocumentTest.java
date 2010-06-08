@@ -1137,4 +1137,20 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Even if clear() does nothing, it was missing until HtmlUnit-2.8 and this test was failing.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clear() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "document.clear();\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

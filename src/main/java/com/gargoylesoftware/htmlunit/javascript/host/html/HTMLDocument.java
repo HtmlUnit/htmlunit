@@ -1631,4 +1631,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         return super.get(name, start);
     }
+
+    /**
+     * Does... nothing.
+     * @see <a href="https://developer.mozilla.org/en/DOM/document.clear">Mozilla doc</a>
+     */
+    public void jsxFunction_clear() {
+        // nothing
+    }
 }
