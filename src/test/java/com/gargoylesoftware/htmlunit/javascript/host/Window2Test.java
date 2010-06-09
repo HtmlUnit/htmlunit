@@ -336,6 +336,23 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = "exception", IE = "true")
+    public void execScript_returnValue() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "try {\n"
+            + "  alert(window.execScript('1') === undefined);\n"
+            + "}\n"
+            + "catch(e) { alert('exception') }\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(IE = "function", FF = "undefined")
     public void collectGarbage() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

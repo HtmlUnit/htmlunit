@@ -1229,17 +1229,16 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Executes the specified script code as long as the language is JavaScript or JScript. Does
      * nothing if the language specified is VBScript.
+     * Note: MSDN doc says that the function returns null but in fact this is undefined.
      * @param script the script code to execute
      * @param language the language of the specified code ("JavaScript", "JScript" or "VBScript")
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536420.aspx">MSDN documentation</a>
-     * @return this method always returns <code>null</code>, like Internet Explorer
      */
-    public Object jsxFunction_execScript(final String script, final Object language) {
+    public void jsxFunction_execScript(final String script, final Object language) {
         final String languageStr = Context.toString(language);
         if (language == Undefined.instance
             || "javascript".equalsIgnoreCase(languageStr) || "jscript".equalsIgnoreCase(languageStr)) {
             custom_eval(script);
-            return null;
         }
         else if ("vbscript".equalsIgnoreCase(languageStr)) {
             LOG.warn("VBScript not supported in Window.execScript().");
@@ -1248,7 +1247,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             // Unrecognized language: use the IE error message ("Invalid class string").
             throw Context.reportRuntimeError("Invalid class string");
         }
-        return null;
     }
 
     /**
