@@ -33,16 +33,12 @@
         </section>
         <section name="Noteworthy loggers">
             <p>
-				In htmlunit, each class has its own log named according to the class's fully qualified name.
+				In HtmlUnit, each class has its own log named according to the class's fully qualified name.
 			</p>
 			<p>
-				htmlunit uses jakarta's commons-httpclient which uses following interesting logs:
-				<ul>
-				<li>httpclient.wire.content: log for all content transmitted to and from servers (see <a href="http://jakarta.apache.org/commons/httpclient/logging.html">
-				HttpClient Logging Practices</a>)</li>
-				<li>httpclient.wire.header: log for all headers transmitted to and from servers (see <a href="http://jakarta.apache.org/commons/httpclient/logging.html">
-				HttpClient Logging Practices</a>)</li>
-				</ul>
+				HtmlUnit uses Apache HttpClient which uses "org.apache.http" to log the headers and wire content,
+				please read more in
+				<a href="http://hc.apache.org/httpcomponents-client/logging.html">HttpClient Logging Practices</a>
 			</p>
 		</section>
         <section name="Logging HTML parsing messages">

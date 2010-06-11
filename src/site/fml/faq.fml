@@ -37,6 +37,22 @@
 			</answer>
 		</faq>
 
+		<faq id="configurations">
+			<question>
+				What are the most important configurations?
+			</question>
+			<answer>
+				<p>
+            <source><![CDATA[
+    webClient.setJavaScriptEnabled(...);
+    webClient.setThrowExceptionOnFailingStatusCode(...);
+    webClient.setThrowExceptionOnScriptError(...);
+    webClient.getProxyConfig().set...();
+            ]]></source>
+				</p>
+			</answer>
+		</faq>
+
 		<faq id="AJAXDoesNotWork">
 			<question>
 				Nothing happens when using HtmlUnit with AJAX, although page works correctly in browsers. What's wrong?
@@ -99,19 +115,6 @@
 					HtmlUnit relies on <a href="http://hc.apache.org/httpclient-3.x/index.html">commons-httpclient 3.1</a> for Cookie handling. 
 					The odds are pretty good that whatever cookie problems you're encountering already have a solution as explained in the <a href="http://hc.apache.org/httpclient-3.x/cookies.html">Cookie Guide</a>.
 					If that doesn't help then post something to the HtmlUnit mailing list.
-				</p>
-			</answer>
-		</faq>
-
-		<faq id="SOCKSProxy">
-			<question>
-				How do I configure SOCKS proxy server?
-			</question>
-			<answer>
-				<p>
-					You can configure the SOCKS proxy server at JVM level by setting <tt>socksProxyHost</tt> and optionally <tt>socksProxyPort</tt>
-					system properties.
-					Please read more at "SOCKS" section of <a href="http://java.sun.com/javase/6/docs/technotes/guides/net/proxies.html">Java Networking and Proxies</a>.
 				</p>
 			</answer>
 		</faq>
