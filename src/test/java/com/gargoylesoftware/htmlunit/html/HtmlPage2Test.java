@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -258,6 +257,10 @@ public class HtmlPage2Test extends WebServerTestCase {
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         assertEquals(getExpectedAlerts(), collectedAlerts);
+
+        final HtmlScript sript = page.getFirstByXPath("//script");
+        assertEquals(URL_SECOND.toString(), sript.getSrcAttribute());
+
         final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save.html");
         page.save(file);
         assertTrue(file.exists());
@@ -265,6 +268,8 @@ public class HtmlPage2Test extends WebServerTestCase {
         final String content = FileUtils.readFileToString(file);
         assertFalse(content.contains("<script"));
         file.delete();
+
+        assertEquals(URL_SECOND.toString(), sript.getSrcAttribute());
     }
 
     /**
@@ -275,24 +280,23 @@ public class HtmlPage2Test extends WebServerTestCase {
         final String html = "<html><body><img src='" + URL_SECOND + "'></body></html>";
 
         final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
-        final FileInputStream fis = new FileInputStream(new File(new URI(url.toString())));
+        final FileInputStream fis = new FileInputStream(new File(url.toURI()));
         final byte[] directBytes = IOUtils.toByteArray(fis);
         fis.close();
 
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
 
         webConnection.setResponse(URL_FIRST, html);
         final List< ? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save2.html");
-        final File imgFile = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save2/second.JPEG");
+        final HtmlImage img = page.getFirstByXPath("//img");
+        assertEquals(URL_SECOND.toString(), img.getSrcAttribute());
+        final File tmpFolder = new File(System.getProperty("java.io.tmpdir"));
+        final File file = new File(tmpFolder, "hu_HtmlPageTest_save2.html");
+        final File imgFile = new File(tmpFolder, "hu_HtmlPageTest_save2/second.JPEG");
         try {
             page.save(file);
             assertTrue(file.exists());
@@ -306,6 +310,7 @@ public class HtmlPage2Test extends WebServerTestCase {
             file.delete();
             FileUtils.deleteDirectory(imgFile.getParentFile());
         }
+        assertEquals(URL_SECOND.toString(), img.getSrcAttribute());
     }
 
     /**
@@ -318,17 +323,16 @@ public class HtmlPage2Test extends WebServerTestCase {
 
         final String css = "body {color: blue}";
 
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
 
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(URL_SECOND, css);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
+        final HtmlLink cssLink = page.getFirstByXPath("//link");
+        assertEquals(URL_SECOND.toString(), cssLink.getHrefAttribute());
+
         final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save3.html");
         final File cssFile = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save3/second.css");
         try {
@@ -341,6 +345,8 @@ public class HtmlPage2Test extends WebServerTestCase {
             file.delete();
             FileUtils.deleteDirectory(cssFile.getParentFile());
         }
+
+        assertEquals(URL_SECOND.toString(), cssLink.getHrefAttribute());
     }
 
     /**

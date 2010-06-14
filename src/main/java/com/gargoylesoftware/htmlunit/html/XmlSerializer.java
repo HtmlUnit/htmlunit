@@ -25,9 +25,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebClient;
-
 /**
  * Utility to handle conversion from HTML code to XML string.
  * @version $Revision$
@@ -38,10 +35,8 @@ class XmlSerializer {
     private final StringBuilder buffer_ = new StringBuilder();
     private final StringBuilder indent_ = new StringBuilder();
     private File outputDir_;
-    private WebClient webClient_;
 
     public void save(final HtmlPage page, final File file) throws IOException {
-        webClient_ = page.getWebClient();
         String fileName = file.getName();
         if (!fileName.endsWith(".htm") && !fileName.endsWith(".html")) {
             fileName += ".html";
@@ -116,10 +111,7 @@ class XmlSerializer {
     protected void printOpeningTag(final DomElement node) {
         buffer_.append(node.getTagName());
         final Map<String, DomAttr> attributes;
-        if (node instanceof HtmlScript) {
-            attributes = getAttributesFor((HtmlScript) node);
-        }
-        else if (node instanceof HtmlImage) {
+        if (node instanceof HtmlImage) {
             attributes = getAttributesFor((HtmlImage) node);
         }
         else if (node instanceof HtmlLink) {
@@ -138,28 +130,13 @@ class XmlSerializer {
         }
     }
 
-    protected Map<String, DomAttr> getAttributesFor(final HtmlScript script) {
-        final Map<String, DomAttr> map = new HashMap<String, DomAttr>(script.getAttributesMap());
-        final String src = map.get("src").getValue();
-        try {
-            final File file = createFile(src, ".js");
-            final String content = webClient_.<Page>getPage(src).getWebResponse().getContentAsString();
-            FileUtils.writeStringToFile(file, content);
-            map.get("src").setValue(outputDir_.getName() + File.separatorChar + file.getName());
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
-        return map;
-    }
-
     protected Map<String, DomAttr> getAttributesFor(final HtmlLink link) {
-        final Map<String, DomAttr> map = new HashMap<String, DomAttr>(link.getAttributesMap());
-        final String src = map.get("href").getValue();
+        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(link, "href");
+        final DomAttr hrefAttr = map.get("href");
         try {
-            final File file = createFile(src, ".css");
+            final File file = createFile(hrefAttr.getValue(), ".css");
             FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString());
-            map.get("href").setValue(outputDir_.getName() + File.separatorChar + file.getName());
+            hrefAttr.setValue(outputDir_.getName() + File.separatorChar + file.getName());
         }
         catch (final Exception e) {
             throw new RuntimeException(e);
@@ -168,19 +145,33 @@ class XmlSerializer {
     }
 
     protected Map<String, DomAttr> getAttributesFor(final HtmlImage image) {
-        final Map<String, DomAttr> map = new HashMap<String, DomAttr>(image.getAttributesMap());
-        final String src = map.get("src").getValue();
+        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(image, "src");
+        final DomAttr srcAttr = map.get("src");
         try {
             final ImageReader reader = image.getImageReader();
-            final File file = createFile(src, "." + reader.getFormatName());
+            final File file = createFile(srcAttr.getValue(), "." + reader.getFormatName());
             image.saveAs(file);
             outputDir_.mkdirs();
-            map.get("src").setValue(outputDir_.getName() + File.separatorChar + file.getName());
+            final String valueOnFileSystem = outputDir_.getName() + File.separatorChar + file.getName();
+            srcAttr.setValue(valueOnFileSystem); // this is the clone attribute node, not the original one of the page
         }
         catch (final Exception e) {
             throw new RuntimeException(e);
         }
         return map;
+    }
+
+    private Map<String, DomAttr> createAttributesCopyWithClonedAttribute(final HtmlElement elt, final String attrName) {
+        final Map<String, DomAttr> newMap = new HashMap<String, DomAttr>(elt.getAttributesMap());
+
+        // clone the specified element
+        final DomAttr attr = newMap.get(attrName);
+        final DomAttr clonedAttr = new DomAttr(attr.getPage(), attr.getNamespaceURI(),
+            attr.getQualifiedName(), attr.getValue(), attr.getSpecified());
+
+        newMap.put(attrName, clonedAttr);
+
+        return newMap;
     }
 
     protected boolean isExcluded(final DomElement element) {
