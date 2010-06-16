@@ -15,15 +15,21 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageReader;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+
+import com.gargoylesoftware.htmlunit.Page;
 
 /**
  * Utility to handle conversion from HTML code to XML string.
@@ -54,8 +60,9 @@ class XmlSerializer {
      * Converts an HTML element to XML.
      * @param node a node
      * @return the text representation according to the setting of this serializer
+     * @throws IOException in case of problem saving resources
      */
-    public String asXml(final HtmlElement node) {
+    public String asXml(final HtmlElement node) throws IOException {
         buffer_.setLength(0);
         indent_.setLength(0);
         String charsetName = null;
@@ -71,7 +78,7 @@ class XmlSerializer {
         return response;
     }
 
-    protected void printXml(final DomElement node) {
+    protected void printXml(final DomElement node) throws IOException {
         if (!isExcluded(node)) {
             final boolean hasChildren = node.getFirstChild() != null;
             buffer_.append(indent_).append('<');
@@ -107,8 +114,9 @@ class XmlSerializer {
      * Prints the content between "&lt;" and "&gt;" (or "/&gt;") in the output of the tag name
      * and its attributes in XML format.
      * @param node the node whose opening tag is to be printed
+     * @throws IOException in case of problem saving resources
      */
-    protected void printOpeningTag(final DomElement node) {
+    protected void printOpeningTag(final DomElement node) throws IOException {
         buffer_.append(node.getTagName());
         final Map<String, DomAttr> attributes;
         if (node instanceof HtmlImage) {
@@ -116,6 +124,9 @@ class XmlSerializer {
         }
         else if (node instanceof HtmlLink) {
             attributes = getAttributesFor((HtmlLink) node);
+        }
+        else if (node instanceof BaseFrame) {
+            attributes = getAttributesFor((BaseFrame) node);
         }
         else {
             attributes = node.getAttributesMap();
@@ -130,34 +141,64 @@ class XmlSerializer {
         }
     }
 
-    protected Map<String, DomAttr> getAttributesFor(final HtmlLink link) {
-        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(link, "href");
-        final DomAttr hrefAttr = map.get("href");
-        try {
-            final File file = createFile(hrefAttr.getValue(), ".css");
-            FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString());
-            hrefAttr.setValue(outputDir_.getName() + File.separatorChar + file.getName());
+    private Map<String, DomAttr> getAttributesFor(final BaseFrame frame) throws IOException {
+        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(frame, "src");
+        final DomAttr srcAttr = map.get("src");
+
+        final Page enclosedPage = frame.getEnclosedPage();
+        final String suffix = getFileExtension(enclosedPage);
+        final File file = createFile(srcAttr.getValue(), "." + suffix);
+
+        if (enclosedPage instanceof HtmlPage) {
+            file.delete(); // TODO: refactor as it is stupid to create empty file at one place
+            // and then to complain that it already exists
+            ((HtmlPage) enclosedPage).save(file);
         }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
+        else {
+            final InputStream is = enclosedPage.getWebResponse().getContentAsStream();
+            final FileOutputStream fos = new FileOutputStream(file);
+            IOUtils.copyLarge(is, fos);
+            IOUtils.closeQuietly(is);
+            IOUtils.closeQuietly(fos);
         }
+
+        srcAttr.setValue(file.getParentFile().getName() + "/" + file.getName());
         return map;
     }
 
-    protected Map<String, DomAttr> getAttributesFor(final HtmlImage image) {
+    private String getFileExtension(final Page enclosedPage) {
+        if (enclosedPage instanceof HtmlPage) {
+            return "html";
+        }
+
+        final URL url = enclosedPage.getUrl();
+        if (url.getPath().contains(".")) {
+            return StringUtils.substringAfterLast(url.getPath(), ".");
+        }
+
+        return ".unknown";
+    }
+
+    protected Map<String, DomAttr> getAttributesFor(final HtmlLink link) throws IOException {
+        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(link, "href");
+        final DomAttr hrefAttr = map.get("href");
+        final File file = createFile(hrefAttr.getValue(), ".css");
+        FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString());
+        hrefAttr.setValue(outputDir_.getName() + File.separatorChar + file.getName());
+
+        return map;
+    }
+
+    protected Map<String, DomAttr> getAttributesFor(final HtmlImage image) throws IOException {
         final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(image, "src");
         final DomAttr srcAttr = map.get("src");
-        try {
-            final ImageReader reader = image.getImageReader();
-            final File file = createFile(srcAttr.getValue(), "." + reader.getFormatName());
-            image.saveAs(file);
-            outputDir_.mkdirs();
-            final String valueOnFileSystem = outputDir_.getName() + File.separatorChar + file.getName();
-            srcAttr.setValue(valueOnFileSystem); // this is the clone attribute node, not the original one of the page
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
+        final ImageReader reader = image.getImageReader();
+        final File file = createFile(srcAttr.getValue(), "." + reader.getFormatName());
+        image.saveAs(file);
+        outputDir_.mkdirs();
+        final String valueOnFileSystem = outputDir_.getName() + File.separatorChar + file.getName();
+        srcAttr.setValue(valueOnFileSystem); // this is the clone attribute node, not the original one of the page
+
         return map;
     }
 

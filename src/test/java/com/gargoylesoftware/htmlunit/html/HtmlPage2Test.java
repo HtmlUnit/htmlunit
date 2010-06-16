@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,6 +41,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPage2Test extends WebServerTestCase {
@@ -301,9 +303,7 @@ public class HtmlPage2Test extends WebServerTestCase {
             page.save(file);
             assertTrue(file.exists());
             assertTrue(file.isFile());
-            final FileInputStream fos = new FileInputStream(imgFile);
-            final byte[] loadedBytes = IOUtils.toByteArray(fos);
-            fos.close();
+            final byte[] loadedBytes = FileUtils.readFileToByteArray(imgFile);
             assertTrue(loadedBytes.length > 0);
         }
         finally {
@@ -311,6 +311,71 @@ public class HtmlPage2Test extends WebServerTestCase {
             FileUtils.deleteDirectory(imgFile.getParentFile());
         }
         assertEquals(URL_SECOND.toString(), img.getSrcAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void save_frames() throws Exception {
+        final String mainContent
+            = "<html><head><title>First</title></head>\n"
+            + "<frameset cols='50%,*'>\n"
+            + "  <frame name='left' src='" + URL_SECOND + "' frameborder='1' />\n"
+            + "  <frame name='right' src='" + URL_THIRD + "' frameborder='1' />\n"
+            + "</frameset>\n"
+            + "</html>";
+        final String frameLeftContent = "<html><head><title>Second</title></head><body>\n"
+            + "<iframe src='iframe.html'></iframe>\n"
+            + "<img src='img.jpg'>\n"
+            + "</body></html>";
+        final String frameRightContent = "<html><head><title>Third</title></head><body>frame right</body></html>";
+        final String iframeContent  = "<html><head><title>Iframe</title></head><body>iframe</body></html>";
+
+        final InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img");
+        final byte[] directBytes = IOUtils.toByteArray(is);
+        is.close();
+
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
+
+        webConnection.setResponse(URL_FIRST, mainContent);
+        webConnection.setResponse(URL_SECOND, frameLeftContent);
+        webConnection.setResponse(URL_THIRD, frameRightContent);
+        final URL urlIframe = new URL(URL_SECOND, "iframe.html");
+        webConnection.setResponse(urlIframe, iframeContent);
+
+        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        final URL urlImage = new URL(URL_SECOND, "img.jpg");
+        webConnection.setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final HtmlFrame leftFrame = page.getElementByName("left");
+        assertEquals(URL_SECOND.toString(), leftFrame.getSrcAttribute());
+        final File tmpFolder = new File(System.getProperty("java.io.tmpdir"));
+        final File file = new File(tmpFolder, "hu_HtmlPageTest_saveFrame.html");
+        final File expectedLeftFrameFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/second.html");
+        final File expectedRightFrameFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/third.html");
+        final File expectedIFrameFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/second/iframe.html");
+        final File expectedImgFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/second/img.jpg.JPEG");
+        final File[] allFiles = {file, expectedLeftFrameFile, expectedImgFile, expectedIFrameFile,
+            expectedRightFrameFile};
+        try {
+            page.save(file);
+            for (final File f : allFiles) {
+                assertTrue(f.toString(), f.exists());
+                assertTrue(f.toString(), f.isFile());
+            }
+
+            final byte[] loadedBytes = FileUtils.readFileToByteArray(expectedImgFile);
+            assertTrue(loadedBytes.length > 0);
+        }
+        finally {
+            file.delete();
+            FileUtils.deleteDirectory(expectedLeftFrameFile.getParentFile());
+        }
+        // ensure that saving the page hasn't changed the DOM
+        assertEquals(URL_SECOND.toString(), leftFrame.getSrcAttribute());
     }
 
     /**
