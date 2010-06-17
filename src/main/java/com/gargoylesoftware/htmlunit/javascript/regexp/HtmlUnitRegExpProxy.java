@@ -200,7 +200,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                         i++;
                     }
                     else if (num1digit <= matcher.groupCount()) {
-                        ss = matcher.group(num1digit);
+                        ss = StringUtils.defaultString(matcher.group(num1digit));
                     }
                 }
                 else {

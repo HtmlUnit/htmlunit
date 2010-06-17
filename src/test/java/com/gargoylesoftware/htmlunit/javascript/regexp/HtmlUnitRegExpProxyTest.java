@@ -905,4 +905,14 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     public void replaceUnicode() throws Exception {
         testEvaluate("'\\u003a'.replace(/[\\u00c0-\\u00c1]/, 'cat')");
     }
+
+    /**
+     * Regression test for bug 3005485.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("part1:part2")
+    public void replace_laterFilledGroup() throws Exception {
+        testEvaluate("'#part1\\:part2'.replace(/^#|\\\\(:)/g, '$1')");
+    }
 }
