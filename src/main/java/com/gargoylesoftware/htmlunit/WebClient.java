@@ -1408,6 +1408,14 @@ public class WebClient implements Serializable {
                     if (value.startsWith("PROXY")) {
                         value = value.substring(6);
                         final int colonIndex = value.indexOf(':');
+                        webRequest.setSocksProxy(false);
+                        webRequest.setProxyHost(value.substring(0, colonIndex));
+                        webRequest.setProxyPort(Integer.parseInt(value.substring(colonIndex + 1)));
+                    }
+                    else if (value.startsWith("SOCKS")) {
+                        value = value.substring(6);
+                        final int colonIndex = value.indexOf(':');
+                        webRequest.setSocksProxy(true);
                         webRequest.setProxyHost(value.substring(0, colonIndex));
                         webRequest.setProxyPort(Integer.parseInt(value.substring(colonIndex + 1)));
                     }
