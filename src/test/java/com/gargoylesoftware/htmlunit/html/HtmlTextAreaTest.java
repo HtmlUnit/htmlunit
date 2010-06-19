@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Amit Khanna
  */
 public class HtmlTextAreaTest extends WebTestCase {
 
@@ -122,6 +123,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "<form id='form1'>\n"
             + "<textarea name='textArea1'> foo \n bar </textarea>\n"
             + "<textarea name='textArea2'></textarea>\n"
+            + "<textarea name='textArea3'>1 &lt; 2 &amp; 3 &gt; 2</textarea>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(content);
         final HtmlForm form = page.getHtmlElementById("form1");
@@ -131,6 +133,9 @@ public class HtmlTextAreaTest extends WebTestCase {
 
         final HtmlTextArea textArea2 = form.getTextAreaByName("textArea2");
         assertEquals("<textarea name=\"textArea2\"></textarea>", textArea2.asXml());
+
+        final HtmlTextArea textArea3 = form.getTextAreaByName("textArea3");
+        assertEquals("<textarea name=\"textArea3\">1 &lt; 2 &amp; 3 &gt; 2</textarea>", textArea3.asXml());
     }
 
     /**

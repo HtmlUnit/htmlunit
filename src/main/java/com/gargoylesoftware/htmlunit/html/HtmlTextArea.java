@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.PrintWriter;
 import java.util.Map;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
@@ -36,6 +38,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Amit Khanna
  */
 public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement, SelectableTextInput {
 
@@ -387,7 +390,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         printOpeningTagContentAsXml(printWriter);
 
         printWriter.print(">");
-        printWriter.print(getText());
+        printWriter.print(StringEscapeUtils.escapeXml(getText()));
         printWriter.print(indent + "</textarea>");
     }
 
