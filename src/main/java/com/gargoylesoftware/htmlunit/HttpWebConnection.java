@@ -48,6 +48,7 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.methods.HttpTrace;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.params.ClientPNames;
+import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.params.ConnRoutePNames;
@@ -260,7 +261,7 @@ public class HttpWebConnection implements WebConnection {
         httpMethod.setHeader(new BasicHeader("User-Agent", webClient_.getBrowserVersion().getUserAgent()));
 
         writeRequestHeadersToHttpMethod(httpMethod, webRequest.getAdditionalHeaders());
-        getHttpClient().getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
+//        getHttpClient().getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
 
         if (webRequest.getCredentialsProvider() != null) {
             getHttpClient().setCredentialsProvider(webRequest.getCredentialsProvider());
@@ -421,6 +422,9 @@ public class HttpWebConnection implements WebConnection {
      */
     protected AbstractHttpClient createHttpClient() {
         final HttpParams httpsParams = new BasicHttpParams();
+
+        HttpClientParams.setRedirecting(httpsParams, false);
+
         final SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
         schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));

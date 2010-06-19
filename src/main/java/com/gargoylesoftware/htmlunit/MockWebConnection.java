@@ -315,7 +315,9 @@ public class MockWebConnection implements WebConnection {
             final List< ? extends NameValuePair> responseHeaders) {
 
         final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
-        compiledHeaders.add(new NameValuePair("Content-Type", contentType));
+        if (contentType != null) {
+            compiledHeaders.add(new NameValuePair("Content-Type", contentType));
+        }
         defaultResponse_ = new WebResponseData(TextUtil.stringToByteArray(content),
             statusCode, statusMessage, compiledHeaders);
     }

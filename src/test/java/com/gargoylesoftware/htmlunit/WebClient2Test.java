@@ -29,7 +29,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.SerializationUtils;
-import org.apache.http.client.CircularRedirectException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -315,7 +314,7 @@ public class WebClient2Test extends WebServerTestCase {
             client.getPage("http://localhost:" + PORT + RedirectServlet307.URL);
         }
         catch (final Exception e) {
-            assertTrue(e.getCause().toString(), e.getCause() instanceof CircularRedirectException);
+            assertTrue(e.getMessage(), e.getMessage().contains("Too much redirect"));
         }
     }
 
