@@ -2093,7 +2093,11 @@ public class WebClient implements Serializable {
             }
         }
 
+        // verify if this load job doesn't already exist
         for (final LoadJob loadJob : loadQueue_) {
+            if (loadJob.response_ == null) {
+                continue;
+            }
             final WebRequest otherRequest = loadJob.response_.getWebRequest();
             final URL otherUrl = otherRequest.getUrl();
             // TODO: investigate but it seems that IE considers query string too but not FF

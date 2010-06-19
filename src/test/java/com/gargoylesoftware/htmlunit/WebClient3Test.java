@@ -67,4 +67,26 @@ public class WebClient3Test extends WebDriverTestCase {
         driver.findElement(By.tagName("a")).click();
         assertEquals(url.toString(), driver.getCurrentUrl());
     }
+
+    /**
+     * Regression test for bug 3012067: a null pointer exception was occurring.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void bug3012067_npe() throws Exception {
+        final String html = "<html><body>\n"
+            + "<form action='" + getDefaultUrl() + "#foo' method='post'></form>\n"
+            + "<script>\n"
+            + "function doWork() {\n"
+            + "  var f = document.forms[0];\n"
+            + "  f.submit();\n"
+            + "  f.submit();\n"
+            + "}\n"
+            + "</script>\n"
+            + "<span id='clickMe' onclick='doWork()'>click</span>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("clickMe")).click();
+    }
 }
