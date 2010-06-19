@@ -608,6 +608,12 @@
         <contributor>
             <name>Nicolas Belisle</name>
         </contributor>
+        <contributor>
+            <name>Ronald Brill</name>
+        </contributor>
+        <contributor>
+            <name>Amit Khanna</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
