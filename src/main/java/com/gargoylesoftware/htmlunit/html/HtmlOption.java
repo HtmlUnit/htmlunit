@@ -291,4 +291,15 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
         ser.setIgnoreMaskedElements(false);
         return ser.asText(this);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected DomNode getEventTargetElement() {
+        final HtmlSelect select = getEnclosingSelect();
+        if (select != null) {
+            return select;
+        }
+        return super.getEventTargetElement();
+    }
 }

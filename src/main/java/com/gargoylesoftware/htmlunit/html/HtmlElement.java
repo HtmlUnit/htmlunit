@@ -1213,9 +1213,18 @@ public abstract class HtmlElement extends DomElement {
 
         mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
 
-        final Event event = new MouseEvent(this, MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey,
+        final Event event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey,
                 MouseEvent.BUTTON_LEFT);
         return (P) click(event);
+    }
+
+    /**
+     * Returns the event target element. This could be overridden by subclasses to have other targets.
+     * The default implementation returns 'this'.
+     * @return the event target element.
+     */
+    protected DomNode getEventTargetElement() {
+        return this;
     }
 
     /**
