@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.Collections;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -22,6 +24,8 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlPasswordInput}.
@@ -135,4 +139,39 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         assertEquals("abc", p.getValue());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @NotYetImplemented(Browser.FF2) // test perhaps not correct for FF2 but no matter, FF2 is deprecated
+    @Test
+    public void typeOnChange() throws Exception {
+        final String html =
+              "<html><head></head><body>\n"
+            + "<input type='password' id='p' value='Hello world'"
+            + " onChange='alert(\"foo\");alert(event.type);'"
+            + " onBlur='alert(\"boo\");alert(event.type);'"
+            + "><br>\n"
+            + "<button id='b'>some button</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement p = driver.findElement(By.id("p"));
+        p.sendKeys("HtmlUnit");
+
+        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+
+        // trigger lost focus
+        driver.findElement(By.id("b")).click();
+        final String[] expectedAlerts1 = {"foo", "change", "boo", "blur"};
+        assertEquals(expectedAlerts1, getCollectedAlerts(driver));
+
+        // set only the focus but change nothing
+        p.click();
+        assertEquals(expectedAlerts1, getCollectedAlerts(driver));
+
+        // trigger lost focus
+        driver.findElement(By.id("b")).click();
+        final String[] expectedAlerts2 = {"foo", "change", "boo", "blur", "boo", "blur"};
+        assertEquals(expectedAlerts2, getCollectedAlerts(driver));
+    }
 }

@@ -34,6 +34,8 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
 
     private static final long serialVersionUID = -1074283471317076942L;
 
+    private String valueAtFocus_;
+
     private final SelectionDelegate selectionDelegate_ = new SelectionDelegate(this);
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
@@ -129,6 +131,28 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     protected void doType(final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         doTypeProcessor_.doType(getValueAttribute(), getSelectionStart(), getSelectionEnd(),
             c, shiftKey, ctrlKey, altKey);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void focus() {
+        super.focus();
+        // store current value to trigger onchange when needed at focus lost
+        valueAtFocus_ = getValueAttribute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    void removeFocus() {
+        super.removeFocus();
+        if (!valueAtFocus_.equals(getValueAttribute())) {
+            executeOnChangeHandlerIfAppropriate(this);
+        }
+        valueAtFocus_ = null;
     }
 
     /**
