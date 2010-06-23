@@ -16,9 +16,12 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlPasswordInput}.
@@ -27,7 +30,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlPasswordInputTest extends WebTestCase {
+public class HtmlPasswordInputTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -35,18 +38,18 @@ public class HtmlPasswordInputTest extends WebTestCase {
     @Test
     public void type() throws Exception {
         final String html = "<html><head></head><body><input type='password' id='p'/></body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlPasswordInput p = page.getHtmlElementById("p");
-        p.type("abc");
-        assertEquals("abc", p.getValueAttribute());
-        p.type('\b');
-        assertEquals("ab", p.getValueAttribute());
-        p.type('\b');
-        assertEquals("a", p.getValueAttribute());
-        p.type('\b');
-        assertEquals("", p.getValueAttribute());
-        p.type('\b');
-        assertEquals("", p.getValueAttribute());
+        final WebDriver driver = loadPage2(html);
+        final WebElement p = driver.findElement(By.id("p"));
+        p.sendKeys("abc");
+        assertEquals("abc", p.getValue());
+        p.sendKeys("\b");
+        assertEquals("ab", p.getValue());
+        p.sendKeys("\b");
+        assertEquals("a", p.getValue());
+        p.sendKeys("\b");
+        assertEquals("", p.getValue());
+        p.sendKeys("\b");
+        assertEquals("", p.getValue());
     }
 
     /**
@@ -55,13 +58,14 @@ public class HtmlPasswordInputTest extends WebTestCase {
     @Test
     public void typeWhileDisabled() throws Exception {
         final String html = "<html><body><input type='password' id='p' disabled='disabled'/></body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlPasswordInput p = page.getHtmlElementById("p");
-        p.type("abc");
-        assertEquals("", p.getValueAttribute());
+        final WebDriver driver = loadPage2(html);
+        final WebElement p = driver.findElement(By.id("p"));
+        p.sendKeys("abc");
+        assertEquals("", p.getValue());
     }
 
     /**
+     * How could this test be migrated to WebDriver? How to select the field's content?
      * @throws Exception if an error occurs
      */
     @Test
@@ -91,17 +95,17 @@ public class HtmlPasswordInputTest extends WebTestCase {
             + "      return false;\n"
             + "  }\n"
             + "  function init() {\n"
-            + "    document.getElementById('x').onkeydown = handler;\n"
+            + "    document.getElementById('p').onkeydown = handler;\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='init()'>\n"
-            + "<input type='password' id='x'></input>\n"
+            + "<input type='password' id='p'></input>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlPasswordInput input = page.getHtmlElementById("x");
-        input.type("abcd");
-        assertEquals("abc", input.getValueAttribute());
+        final WebDriver driver = loadPage2(html);
+        final WebElement p = driver.findElement(By.id("p"));
+        p.sendKeys("abcd");
+        assertEquals("abc", p.getValue());
     }
 
     /**
@@ -118,17 +122,17 @@ public class HtmlPasswordInputTest extends WebTestCase {
             + "      return false;\n"
             + "  }\n"
             + "  function init() {\n"
-            + "    document.getElementById('x').onkeypress = handler;\n"
+            + "    document.getElementById('p').onkeypress = handler;\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='init()'>\n"
-            + "<input type='password' id='x'></input>\n"
+            + "<input type='password' id='p'></input>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlPasswordInput input = page.getHtmlElementById("x");
-        input.type("abcd");
-        assertEquals("abc", input.getValueAttribute());
+        final WebDriver driver = loadPage2(html);
+        final WebElement p = driver.findElement(By.id("p"));
+        p.sendKeys("abcd");
+        assertEquals("abc", p.getValue());
     }
 
 }
