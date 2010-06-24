@@ -647,7 +647,7 @@ public abstract class WebTestCase {
      * Returns the WebClient instance for the current test with the current {@link BrowserVersion}.
      * @return a WebClient with the current {@link BrowserVersion}
      */
-    protected final WebClient createNewWebClient() {
+    protected WebClient createNewWebClient() {
         return new WebClient(getBrowserVersion());
     }
 

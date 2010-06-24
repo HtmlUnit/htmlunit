@@ -44,6 +44,10 @@ import org.json.JSONObject;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.mortbay.jetty.Server;
+import org.mortbay.jetty.security.Constraint;
+import org.mortbay.jetty.security.ConstraintMapping;
+import org.mortbay.jetty.security.HashUserRealm;
+import org.mortbay.jetty.security.SecurityHandler;
 import org.mortbay.jetty.webapp.WebAppClassLoader;
 import org.mortbay.jetty.webapp.WebAppContext;
 import org.openqa.selenium.JavascriptExecutor;
@@ -197,11 +201,36 @@ public abstract class WebDriverTestCase extends WebTestCase {
             context.setContextPath("/");
             context.setResourceBase("./");
 
+            if (isBasicAuthentication()) {
+                final Constraint constraint = new Constraint();
+                constraint.setName(Constraint.__BASIC_AUTH);
+                constraint.setRoles(new String[]{ "user" });
+                constraint.setAuthenticate(true);
+
+                final ConstraintMapping constraintMapping = new ConstraintMapping();
+                constraintMapping.setConstraint(constraint);
+                constraintMapping.setPathSpec("/*");
+
+                final SecurityHandler securityHandler = new SecurityHandler();
+                securityHandler.setUserRealm(new HashUserRealm("MyRealm", "./src/test/resources/realm.properties"));
+                securityHandler.setConstraintMappings(new ConstraintMapping[]{ constraintMapping });
+                context.addHandler(securityHandler);
+            }
+
             context.addServlet(MockWebConnectionServlet.class, "/*");
             STATIC_SERVER_.setHandler(context);
             STATIC_SERVER_.start();
         }
         MockWebConnectionServlet.MockConnection_ = mockConnection;
+    }
+
+    /**
+     * Returns whether to use basic authentication for all resources or not.
+     * The default implementation returns false.
+     * @return whether to use basic authentication or not
+     */
+    protected boolean isBasicAuthentication() {
+        return false;
     }
 
     /**
