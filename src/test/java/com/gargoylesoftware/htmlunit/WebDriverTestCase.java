@@ -204,7 +204,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (isBasicAuthentication()) {
                 final Constraint constraint = new Constraint();
                 constraint.setName(Constraint.__BASIC_AUTH);
-                constraint.setRoles(new String[]{ "user" });
+                constraint.setRoles(new String[]{"user"});
                 constraint.setAuthenticate(true);
 
                 final ConstraintMapping constraintMapping = new ConstraintMapping();
@@ -213,7 +213,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
                 final SecurityHandler securityHandler = new SecurityHandler();
                 securityHandler.setUserRealm(new HashUserRealm("MyRealm", "./src/test/resources/realm.properties"));
-                securityHandler.setConstraintMappings(new ConstraintMapping[]{ constraintMapping });
+                securityHandler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
                 context.addHandler(securityHandler);
             }
 
