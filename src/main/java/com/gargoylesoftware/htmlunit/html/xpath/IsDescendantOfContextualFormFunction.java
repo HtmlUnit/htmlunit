@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
  *
  * @version $Revision$
  * @author Daniel Gredler
- * @deprecated since HtmlUnit-2.7 without replacement as there is no internal usage for this classe.
+ * @deprecated since HtmlUnit-2.8 without replacement as there is no internal usage for this classe.
  */
 @Deprecated
 public class IsDescendantOfContextualFormFunction extends FunctionDef1Arg {
