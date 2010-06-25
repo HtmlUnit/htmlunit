@@ -207,7 +207,14 @@ public class DebugFrameImpl extends DebugFrameAdapter {
                                 return "__defineGetter__ " + s;
                             }
                         }
-                        final Object o = obj.get(s, obj);
+                        final Object o;
+                        try {
+                            // within a try block as this sometimes throws (not sure why)
+                            o = obj.get(s, obj);
+                        }
+                        catch (final Exception e) {
+                            return "[anonymous]";
+                        }
                         if (o instanceof NativeFunction) {
                             final NativeFunction f = (NativeFunction) o;
                             if (f.getDebuggableView() == functionOrScript_) {
