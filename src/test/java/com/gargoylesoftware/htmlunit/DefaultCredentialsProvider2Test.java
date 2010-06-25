@@ -49,9 +49,10 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      */
     @Test
     public void basicAuthenticationTwice() throws Exception {
+        getMockWebConnection().setResponse(URL_SECOND, "Hello World");
         WebDriver driver = loadPage2("Hi There");
         assertTrue(driver.getPageSource().contains("Hi There"));
-        driver = loadPage2("Hello World");
+        driver.get(URL_SECOND.toExternalForm());
         assertTrue(driver.getPageSource().contains("Hello World"));
     }
 }
