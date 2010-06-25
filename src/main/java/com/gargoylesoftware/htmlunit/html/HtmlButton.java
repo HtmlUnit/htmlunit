@@ -15,6 +15,9 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -36,13 +39,15 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Dmitri Zoubkov
  */
-public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement {
+public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement, FormFieldWithNameHistory {
 
     private static final long serialVersionUID = 4828725767615187345L;
     private static final Log LOG = LogFactory.getLog(HtmlButton.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "button";
+    private String originalName_;
+    private Collection<String> previousNames_ = Collections.emptySet();
 
     /**
      * Creates a new instance.
@@ -55,6 +60,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     HtmlButton(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+        originalName_ = getNameAttribute();
     }
 
     /**
@@ -258,5 +264,33 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     public final String getOnBlurAttribute() {
         return getAttribute("onblur");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+        if ("name".equals(qualifiedName)) {
+            if (previousNames_.isEmpty()) {
+                previousNames_ = new HashSet<String>();
+            }
+            previousNames_.add(attributeValue);
+        }
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getOriginalName() {
+        return originalName_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Collection<String> getPreviousNames() {
+        return previousNames_;
     }
 }

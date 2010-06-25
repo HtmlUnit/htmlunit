@@ -15,7 +15,9 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -41,12 +43,15 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public class HtmlSelect extends HtmlElement implements DisabledElement, SubmittableElement {
+public class HtmlSelect extends HtmlElement implements DisabledElement, SubmittableElement, FormFieldWithNameHistory {
 
     private static final long serialVersionUID = 7893240015923163203L;
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "select";
+
+    private String originalName_;
+    private Collection<String> previousNames_ = Collections.emptySet();
 
     /**
      * Creates an instance.
@@ -59,6 +64,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     HtmlSelect(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+        originalName_ = getNameAttribute();
     }
 
     /**
@@ -556,5 +562,33 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     public final String getOnChangeAttribute() {
         return getAttribute("onchange");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+        if ("name".equals(qualifiedName)) {
+            if (previousNames_.isEmpty()) {
+                previousNames_ = new HashSet<String>();
+            }
+            previousNames_.add(attributeValue);
+        }
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getOriginalName() {
+        return originalName_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Collection<String> getPreviousNames() {
+        return previousNames_;
     }
 }

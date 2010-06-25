@@ -6,6 +6,13 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, large file download, single thread for JavaScript background tasks, HttpClient 4, SOCKS proxy, initial FF 3.6">
+            <action type="fix" dev="mguillem">
+                JavaScript: make form elements only accessible by their original name (IE)
+                or by all the names they have had (FF).
+            </action>
+            <action type="update" dev="mguillem">
+                Deprecated IsDescendantOfContextualFormFunction.
+            </action>
             <action type="fix" dev="mguillem" issue="3019226" due-to="Ronald Brill">
                 JavaScript: fire onchange for &amp;lt;input type='password' ...&amp;gt; when field loses focus and value has been changed.
             </action>

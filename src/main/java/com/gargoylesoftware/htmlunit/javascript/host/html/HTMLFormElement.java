@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -26,18 +26,17 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.FormFieldWithNameHistory;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
-import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlSelect;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * A JavaScript object for a Form.
@@ -316,81 +315,71 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @Override
     protected Object getWithPreemption(final String name) {
-        final HtmlForm form = getHtmlForm();
-        final Page page = form.getPage();
-        if (page instanceof HtmlPage) {
-            // Try to satisfy this request using a map-backed operation before punting and using XPath.
-            // XPath operations are very expensive, and this method gets invoked quite a bit.
-            // Approach: Try to match the string to a name or ID, accepting only inputs (not type=image),
-            // buttons, selects and textareas that are in this form. We also include img elements
-            // (the second XPath search below) in the search, because any results with more than one element
-            // will end up using the XPath search anyway, so it doesn't hurt when looking for single elements.
-            final List<HtmlElement> elements = ((HtmlPage) page).getElementsByIdAndOrName(name);
-            if (elements.isEmpty()) {
-                return NOT_FOUND;
-            }
+        final List<HtmlElement> elements = findElements(name);
 
-            // filter out elements that can't be accessed this way
-            for (final Iterator<HtmlElement> iter = elements.iterator(); iter.hasNext();) {
-                if (!isAccessibleByIdOrName(form, iter.next())) {
-                    iter.remove();
+        if (elements.isEmpty()) {
+            return NOT_FOUND;
+        }
+        if (elements.size() == 1) {
+            return getScriptableFor(elements.get(0));
+        }
+
+        final HTMLCollection collection = new HTMLCollection(getHtmlForm(), elements) {
+            protected List<Object> computeElements() {
+                return new ArrayList<Object>(findElements(name));
+            };
+        };
+        return collection;
+    }
+
+    private List<HtmlElement> findElements(final String name) {
+        final List<HtmlElement> elements = new ArrayList<HtmlElement>();
+        addElements(name, getHtmlForm().getHtmlElementDescendants(), elements);
+        addElements(name, getHtmlForm().getLostChildren(), elements);
+
+        // If no form fields are found, IE and Firefox are able to find img elements by ID or name.
+        if (elements.isEmpty()) {
+            for (final DomNode node : getHtmlForm().getChildren()) {
+                if (node instanceof HtmlImage) {
+                    final HtmlImage img = (HtmlImage) node;
+                    if (name.equals(img.getId()) || name.equals(img.getNameAttribute())) {
+                        elements.add(img);
+                    }
                 }
             }
-            if (elements.isEmpty()) {
-                return NOT_FOUND;
+        }
+
+        return elements;
+    }
+
+    private void addElements(final String name, final Iterable<HtmlElement> nodes,
+        final List<HtmlElement> addTo) {
+        for (final HtmlElement node : nodes) {
+            if (isAccessibleByIdOrName(node, name)) {
+                addTo.add(node);
             }
-            if (elements.size() == 1) {
-                return getScriptableFor(elements.get(0));
-            }
         }
-        // The shortcut wasn't enough, which means we probably need to perform the XPath operation anyway.
-        // Note that the XPath expression below HAS TO MATCH the tag name checks performed in the shortcut above.
-        // Approach: Try to match the string to a name or ID, accepting only inputs (not type=image),
-        // buttons, selects and textareas that are in this form. We *don't* include img elements, which will
-        // only be searched if the first search fails.
-        // See IsDescendantOfContextualFormFunction for info on the "is-descendant-of-contextual-form()" function.
-        HTMLCollection collection = new HTMLCollection(this);
-        final String xpath = "//*[is-descendant-of-contextual-form()"
-            + " and (@name = '" + name + "' or @id = '" + name + "')"
-            + " and ((name() = 'input' and translate(@type, 'IMAGE', 'image') != 'image') or name() = 'button'"
-            + " or name() = 'select' or name() = 'textarea')]";
-        collection.init(form, xpath);
-        int length = collection.jsxGet_length();
-        // If no form fields are found, IE and Firefox are able to find img elements by ID or name.
-        if (length == 0) {
-            collection = new HTMLCollection(this);
-            final String xpath2 = "//*[is-descendant-of-contextual-form()"
-                + " and (@name = '" + name + "' or @id = '" + name + "')"
-                + " and name() = 'img']";
-            collection.init(form, xpath2);
-        }
-        // Return whatever we have at this point.
-        Object result = collection;
-        length = collection.jsxGet_length();
-        if (length == 0) {
-            result = NOT_FOUND;
-        }
-        else if (length == 1) {
-            result = collection.get(0, collection);
-        }
-        return result;
     }
 
     /**
      * Indicates if the element can be reached by id or name in expressions like "myForm.myField".
-     * @param form the owning form
      * @param element the element to test
+     * @param name the name used to address the element
      * @return <code>true</code> if this element matches the conditions
      */
-    private boolean isAccessibleByIdOrName(final HtmlForm form, final HtmlElement element) {
-        final String tagName = element.getTagName();
-        final String type = element.getAttribute("type").toLowerCase();
-        if ((HtmlInput.TAG_NAME.equals(tagName) && !"image".equals(type))
-                || HtmlButton.TAG_NAME.equals(tagName)
-                || HtmlSelect.TAG_NAME.equals(tagName)
-                || HtmlTextArea.TAG_NAME.equals(tagName)
-                || HtmlImage.TAG_NAME.equals(tagName)) {
-            if (form.isAncestorOf(element) || form.getLostChildren().contains(element)) {
+    private boolean isAccessibleByIdOrName(final HtmlElement element, final String name) {
+        if ((element instanceof FormFieldWithNameHistory && !(element instanceof HtmlImageInput))) {
+            final FormFieldWithNameHistory elementWithNames = (FormFieldWithNameHistory) element;
+            if (name.equals(elementWithNames.getOriginalName())
+                    || name.equals(element.getId())) {
+                return true;
+            }
+
+            if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES)) {
+                return false;
+            }
+            else if (name.equals(element.getAttribute("name"))
+                || elementWithNames.getPreviousNames().contains(name)) {
                 return true;
             }
         }

@@ -115,6 +115,17 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
+     * Constructs an instance with an initial cache value.
+     * @param parentScope the parent scope, on which we listen for changes
+     * @param initialElements the initial content for the cache
+     */
+    HTMLCollection(final DomNode parentScope, final List<?> initialElements) {
+        this(parentScope);
+        init(parentScope, null);
+        cachedElements_ = new ArrayList<Object>(initialElements);
+    }
+
+    /**
      * Only needed to make collections like <tt>document.all</tt> available but "invisible" when simulating Firefox.
      * {@inheritDoc}
      */

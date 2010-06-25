@@ -63,6 +63,9 @@ public enum BrowserVersionFeatures {
     /** */
     FILEINPUT_EMPTY_DEFAULT_VALUE,
 
+    /** Indicates if a form field is directly reachable by its new name once this has been changed. */
+    FORMFIELD_REACHABLE_BY_NEW_NAMES,
+
     /** */
     FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK,
 

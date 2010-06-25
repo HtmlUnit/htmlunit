@@ -15,6 +15,9 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -40,8 +43,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Sudhan Moghe
  * @author Amit Khanna
  */
-public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement, SelectableTextInput {
-
+public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement, SelectableTextInput,
+    FormFieldWithNameHistory {
     private static final long serialVersionUID = 4572856255042499634L;
 
     /** The HTML tag represented by this element. */
@@ -49,6 +52,8 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     private String defaultValue_;
     private String valueAtFocus_;
+    private String originalName_;
+    private Collection<String> previousNames_ = Collections.emptySet();
 
     private final SelectionDelegate selectionDelegate_ = new SelectionDelegate(this);
 
@@ -77,6 +82,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     HtmlTextArea(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+        originalName_ = getNameAttribute();
     }
 
     /**
@@ -452,5 +458,33 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return new HtmlTextArea(getNamespaceURI(), getQualifiedName(), getPage(), getAttributesMap());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+        if ("name".equals(qualifiedName)) {
+            if (previousNames_.isEmpty()) {
+                previousNames_ = new HashSet<String>();
+            }
+            previousNames_.add(attributeValue);
+        }
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getOriginalName() {
+        return originalName_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Collection<String> getPreviousNames() {
+        return previousNames_;
     }
 }
