@@ -50,7 +50,6 @@ class XPathAdapter {
     private void initFunctionTable() {
         funcTable_ = new FunctionTable();
         funcTable_.installFunction("lower-case", LowerCaseFunction.class);
-        funcTable_.installFunction("is-descendant-of-contextual-form", IsDescendantOfContextualFormFunction.class);
     }
 
     /**
