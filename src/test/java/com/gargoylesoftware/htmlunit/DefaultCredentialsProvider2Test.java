@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+
 /**
  * Tests for {@link DefaultCredentialsProvider}.
  *
@@ -27,6 +29,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  */
 @RunWith(BrowserRunner.class)
 public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
+
+    private static String XHRInstantiation_ = "(window.XMLHttpRequest ? "
+        + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
 
     /**
      * {@inheritDoc}
@@ -54,5 +59,26 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
         assertTrue(driver.getPageSource().contains("Hi There"));
         driver.get(URL_SECOND.toExternalForm());
         assertTrue(driver.getPageSource().contains("Hello World"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("Hello World")
+    public void basicAuthenticationXHR() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var handler = function() {\n"
+            + "  if (xhr.readyState == 4)\n"
+            + "    alert(xhr.responseText);\n"
+            + "}\n"
+            + "xhr.onreadystatechange = handler;\n"
+            + "xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "xhr.send('');\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setDefaultResponse("Hello World");
+        loadPageWithAlerts2(html);
     }
 }
