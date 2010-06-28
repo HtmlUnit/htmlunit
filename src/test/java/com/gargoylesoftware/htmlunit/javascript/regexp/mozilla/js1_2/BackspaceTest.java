@@ -37,7 +37,7 @@ public class BackspaceTest extends WebDriverTestCase {
     @Test
     @Alerts("c\bd")
     public void test1() throws Exception {
-        test("'abc\bdef'.match(new RegExp('.[\\\\b].'))");
+        test("'abc\\bdef'.match(new RegExp('.[\\\\b].'))");
     }
 
     /**
