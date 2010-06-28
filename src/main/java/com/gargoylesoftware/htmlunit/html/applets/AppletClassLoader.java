@@ -15,8 +15,10 @@
 package com.gargoylesoftware.htmlunit.html.applets;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,7 +27,6 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -96,7 +97,9 @@ public class AppletClassLoader extends ClassLoader {
     private void readClassesFromJar(final WebResponse webResponse) throws IOException {
         final File tmpFile = File.createTempFile("HtmlUnit", "jar");
         tmpFile.deleteOnExit();
-        FileUtils.writeByteArrayToFile(tmpFile, webResponse.getContentAsBytes());
+        final OutputStream output = new FileOutputStream(tmpFile);
+        IOUtils.copy(webResponse.getContentAsStream(), output);
+        output.close();
         final JarFile jarFile = new JarFile(tmpFile);
         final Enumeration<JarEntry> entries = jarFile.entries();
         while (entries.hasMoreElements()) {
@@ -118,7 +121,12 @@ public class AppletClassLoader extends ClassLoader {
      * @return the full class name
      */
     public static String readClassName(final WebResponse webResponse) {
-        return readClassName(webResponse.getContentAsBytes());
+        try {
+            return readClassName(IOUtils.toByteArray(webResponse.getContentAsStream()));
+        }
+        catch (final IOException e) {
+            return null;
+        }
     }
 
     /**

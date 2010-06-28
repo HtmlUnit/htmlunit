@@ -26,6 +26,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -186,7 +187,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         }
         buffer.append("url: '" + url + "', ");
         buffer.append("loadTime: " + response.getLoadTime() + ", ");
-        final byte[] bytes = response.getContentAsBytes();
+        final byte[] bytes = IOUtils.toByteArray(response.getContentAsStream());
         buffer.append("responseSize: " + ((bytes == null) ? 0 : bytes.length) + ", ");
         buffer.append("responseHeaders: " + nameValueListToJsMap(response.getResponseHeaders()));
         buffer.append("};\n");

@@ -80,8 +80,10 @@ public class WebResponseWrapper extends WebResponse {
     /**
      * {@inheritDoc}
      * The default behavior of this method is to return getContentAsBytes() on the wrapped webResponse object.
+     * @deprecated as of 2.8, use either {@link #getContentAsString()} or {@link #getContentAsStream()}.
      */
     @Override
+    @Deprecated
     public byte[] getContentAsBytes() {
         return wrappedWebResponse_.getContentAsBytes();
     }

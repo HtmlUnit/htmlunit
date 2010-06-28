@@ -29,6 +29,7 @@ import java.util.Map;
 
 import javax.servlet.Servlet;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -209,7 +210,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         Assert.assertEquals(url, response.getWebRequest().getUrl());
         Assert.assertEquals(loadTime, response.getLoadTime());
         Assert.assertEquals(content, response.getContentAsString());
-        assertEquals(content.getBytes(), response.getContentAsBytes());
+        assertEquals(content.getBytes(), IOUtils.toByteArray(response.getContentAsStream()));
         assertEquals(new ByteArrayInputStream(content.getBytes()), response.getContentAsStream());
     }
 

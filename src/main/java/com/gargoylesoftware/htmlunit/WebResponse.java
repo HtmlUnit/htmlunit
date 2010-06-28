@@ -237,7 +237,9 @@ public class WebResponse implements Serializable {
     /**
      * Returns the response content as a byte array.
      * @return the response content as a byte array
+     * @deprecated as of 2.8, use either {@link #getContentAsString()} or {@link #getContentAsStream()}.
      */
+    @Deprecated
     public byte[] getContentAsBytes() {
         return responseData_.getBody();
     }
