@@ -212,11 +212,11 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * Returns true for big content, in which case you must use {@link #getContentAsStream()}.
-     * @return true for big content
+     * Returns true for binary content, in which case you must use {@link #getContentAsStream()}.
+     * @return true for binary content
      */
-    public boolean isBigContent() {
-        return responseData_.isBigContent();
+    public boolean isBinary() {
+        return responseData_.isBinary();
     }
 
     /**
@@ -224,7 +224,7 @@ public class WebResponse implements Serializable {
      * @return the response content as an input stream
      */
     public InputStream getContentAsStream() {
-        if (responseData_.isBigContent()) {
+        if (responseData_.isBinary()) {
             return responseData_.getInputStream();
         }
         final byte[] body = responseData_.getBody();

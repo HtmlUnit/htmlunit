@@ -133,4 +133,19 @@ public class WebResponseDataTest extends WebServerTestCase {
             writer.close();
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void bigContent() throws Exception {
+        final StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < 300; i++) {
+            builder.append(' ');
+        }
+        builder.append("Hello World!");
+        final HtmlPage page = loadPage(builder.toString());
+        System.out.println(page.asText());
+    }
+
 }

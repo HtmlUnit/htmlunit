@@ -667,7 +667,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         }
 
         @Override
-        public boolean isBigContent() {
+        public boolean isBinary() {
             return false;
         }
 

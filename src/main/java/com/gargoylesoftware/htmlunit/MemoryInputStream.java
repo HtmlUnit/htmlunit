@@ -25,7 +25,7 @@ import org.apache.commons.io.output.ByteArrayOutputStream;
  * An {@link InputStream} wrapper which stores initial part in memory, then uses the underlying InputStream
  * for big content.
  *
- * The main usage is for {@link BigContentPage}.
+ * The main usage is for {@link BinaryPage}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -34,7 +34,7 @@ class MemoryInputStream extends FilterInputStream {
 
     private byte[] data_;
     private int index_;
-    private boolean isInMemory_ = true;
+    private boolean isBinary_;
 
     /**
      * Creates a <code>MemoryInputStream</code>.
@@ -46,11 +46,21 @@ class MemoryInputStream extends FilterInputStream {
         super(in);
         if (in != null) {
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
-            isInMemory_ = copy(in, out, maxSize);
+            copy(in, out, maxSize);
             data_ = out.toByteArray();
+            for (int i = data_.length - 1; i >= 0; i--) {
+                final int b = data_[i] & 0xFF;
+                if (b < ' ' && b != '\r' && b != '\n' && b != '\t') {
+                    isBinary_ = true;
+                    break;
+                }
+            }
         }
     }
 
+    /**
+     * @return whether all data is read or still more remains
+     */
     static boolean copy(final InputStream input, final OutputStream output, final int max) throws IOException {
         final byte[] buffer = new byte[1024 * 4];
         int count = 0;
@@ -123,8 +133,8 @@ class MemoryInputStream extends FilterInputStream {
         return super.read(b, off, len);
     }
 
-    public boolean isInMemory() {
-        return isInMemory_;
+    public boolean isBinary() {
+        return isBinary_;
     }
 
     byte[] getData() {

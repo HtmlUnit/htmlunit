@@ -53,12 +53,13 @@ public class MemoryInputStreamTest {
     private void test(final int bufferSize, final int maximumSize) throws Exception {
         final byte[] buff = new byte[bufferSize];
         final Random random = new Random();
-        for (int i = 0; i < bufferSize; i++) {
+        buff[0] = (byte) 5;
+        for (int i = 1; i < bufferSize; i++) {
             buff[i] = (byte) random.nextInt(0xFF);
         }
         final MemoryInputStream in = new MemoryInputStream(new ByteArrayInputStream(buff), maximumSize);
         assertTrue(Arrays.equals(buff, IOUtils.toByteArray(in)));
-        assertEquals(bufferSize < maximumSize, in.isInMemory());
+        assertEquals(true, in.isBinary());
     }
 
     /**

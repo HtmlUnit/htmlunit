@@ -354,7 +354,7 @@ class DummyWebResponse extends WebResponse {
     }
 
     @Override
-    public boolean isBigContent() {
+    public boolean isBinary() {
         throw new RuntimeException("not implemented");
     }
 

@@ -39,11 +39,11 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class WebResponseData implements Serializable {
 
     private static final long serialVersionUID = 2979956380280496543L;
-    private static final int IN_MEMORY_SIZE = 300 * 1024;
+    private static final int IN_MEMORY_SIZE = 300;
 
     private byte[] body_;
     private InputStream inputStream_;
-    private boolean isBigContent_;
+    private boolean isBinary_;
     private int statusCode_;
     private String statusMessage_;
     private List<NameValuePair> responseHeaders_;
@@ -64,7 +64,7 @@ public class WebResponseData implements Serializable {
 
         if (body != null) {
             try {
-                body_ = getBody(new ByteArrayInputStream(body), responseHeaders);
+                body_ = IOUtils.toByteArray(getStream(new ByteArrayInputStream(body), responseHeaders));
             }
             catch (final IOException e) {
                 body_ = body;
@@ -88,29 +88,14 @@ public class WebResponseData implements Serializable {
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
         if (bodyStream != null) {
-            final MemoryInputStream memoryInputStream = new MemoryInputStream(bodyStream, IN_MEMORY_SIZE);
-            if (!memoryInputStream.isInMemory()) {
-                String encoding = null;
-                for (final NameValuePair header : responseHeaders) {
-                    final String headerName = header.getName().trim();
-                    if (headerName.equalsIgnoreCase("content-encoding")) {
-                        encoding = header.getValue();
-                        break;
-                    }
-                }
-                if (encoding != null && StringUtils.contains(encoding, "gzip")) {
-                    inputStream_ = new GZIPInputStream(memoryInputStream);
-                }
-                else if (encoding != null && StringUtils.contains(encoding, "deflate")) {
-                    inputStream_ = new InflaterInputStream(memoryInputStream);
-                }
-                else {
-                    inputStream_ = memoryInputStream;
-                }
-                isBigContent_ = true;
+            final MemoryInputStream memoryInputStream = new MemoryInputStream(
+                    getStream(bodyStream, responseHeaders), IN_MEMORY_SIZE);
+            if (memoryInputStream.isBinary()) {
+                inputStream_ = memoryInputStream;
+                isBinary_ = true;
             }
             else {
-                body_ = getBody(memoryInputStream, responseHeaders);
+                body_ = IOUtils.toByteArray(memoryInputStream);
             }
         }
     }
@@ -131,17 +116,7 @@ public class WebResponseData implements Serializable {
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
     }
 
-    /**
-     * Returns the body byte array contained by the specified input stream.
-     * If the response headers indicate that the data has been compressed,
-     * the data stream is handled appropriately. If the specified stream is
-     * <tt>null</tt>, this method returns <tt>null</tt>.
-     * @param stream the input stream which contains the body
-     * @param headers the response headers
-     * @return the specified body stream, as a byte array
-     * @throws IOException if a stream error occurs
-     */
-    protected byte[] getBody(InputStream stream, final List<NameValuePair> headers) throws IOException {
+    private InputStream getStream(InputStream stream, final List<NameValuePair> headers) throws IOException {
         if (stream == null) {
             return null;
         }
@@ -159,18 +134,15 @@ public class WebResponseData implements Serializable {
         else if (encoding != null && StringUtils.contains(encoding, "deflate")) {
             stream = new InflaterInputStream(stream);
         }
-        if (stream instanceof MemoryInputStream) {
-            return ((MemoryInputStream) stream).getData();
-        }
-        return IOUtils.toByteArray(stream);
+        return stream;
     }
 
     /**
-     * Returns true for big content, in which case you must use {@link #getInputStream()}.
-     * @return true for big content
+     * Returns true for binary content, in which case you must use {@link #getInputStream()}.
+     * @return true for binary content
      */
-    public boolean isBigContent() {
-        return isBigContent_;
+    public boolean isBinary() {
+        return isBinary_;
     }
 
     /**
@@ -178,15 +150,15 @@ public class WebResponseData implements Serializable {
      * @return response body
      */
     public byte[] getBody() {
-        if (isBigContent()) {
+        if (isBinary()) {
             throw new IllegalStateException(
-                "Can not call getBody() for big content WebResponseData, use getInputStream()");
+                "Can not call getBody() for binary content WebResponseData, use getInputStream()");
         }
         return body_;
     }
 
     /**
-     * Returns the InputStream, if {@link #isBigContent()} is true.
+     * Returns the InputStream, if {@link #isBinary()} is true.
      * @return the associated InputStream
      */
     public InputStream getInputStream() {

@@ -19,12 +19,12 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
- * A page for big content. You must use {@link #getInputStream()} to get the content.
+ * A page for binary content. You must use {@link #getInputStream()} to get the content.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class BigContentPage implements Page {
+public class BinaryPage implements Page {
 
     private static final long serialVersionUID = 5140168573900246591L;
     private final WebResponse webResponse_;
@@ -36,7 +36,7 @@ public class BigContentPage implements Page {
      * @param webResponse the response from the server that contains the data required to create this page
      * @param enclosingWindow the window that this page is being loaded into
      */
-    public BigContentPage(final WebResponse webResponse, final WebWindow enclosingWindow) {
+    public BinaryPage(final WebResponse webResponse, final WebWindow enclosingWindow) {
         webResponse_ = webResponse;
         enclosingWindow_ = enclosingWindow;
     }

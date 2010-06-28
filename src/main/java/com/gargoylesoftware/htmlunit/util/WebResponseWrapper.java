@@ -180,11 +180,11 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return isBigContent() on the wrapped webResponse object.
+     * The default behavior of this method is to return isBinary() on the wrapped webResponse object.
      */
     @Override
-    public boolean isBigContent() {
-        return wrappedWebResponse_.isBigContent();
+    public boolean isBinary() {
+        return wrappedWebResponse_.isBinary();
     }
 
     /**
