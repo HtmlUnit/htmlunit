@@ -227,6 +227,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
         // register custom RegExp processing
         ScriptRuntime.setRegExpProxy(cx, new HtmlUnitRegExpProxy(ScriptRuntime.getRegExpProxy(cx)));
 
+        cx.setMaximumInterpreterStackDepth(10000);
+
         return cx;
     }
 

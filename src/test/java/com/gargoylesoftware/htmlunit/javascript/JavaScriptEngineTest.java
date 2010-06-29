@@ -1553,4 +1553,24 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("error")
+    public void recursion() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function recurse(c) {\n"
+            + "    try {\n"
+            + "      recurse(c++);\n"
+            + "    } catch (e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='recurse(1)'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
