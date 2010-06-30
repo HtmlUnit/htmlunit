@@ -59,7 +59,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ProxyAutoConfig;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -133,9 +132,6 @@ public class WebClient implements Serializable {
     private String homePage_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
-
-    /** The eventLoop corresponding to all windows of this Web client */
-    private transient JavaScriptExecutor eventLoop_;
 
     private AlertHandler   alertHandler_;
     private ConfirmHandler confirmHandler_;
@@ -312,7 +308,9 @@ public class WebClient implements Serializable {
         throwFailingHttpStatusCodeExceptionIfNecessary(webResponse);
 
         // start execution here.
-        registerWindowAndMaybeStartEventLoop(webWindow);
+        if (scriptEngine_ != null) {
+            scriptEngine_.registerWindowAndMaybeStartEventLoop(webWindow);
+        }
 
         return (P) webWindow.getEnclosedPage();
     }
@@ -1878,9 +1876,8 @@ public class WebClient implements Serializable {
      * Closes all opened windows, stopping all background JavaScript processing.
      */
     public void closeAllWindows() {
-        if (eventLoop_ != null) {
-            eventLoop_.shutdown();
-            eventLoop_ = null;
+        if (scriptEngine_ != null) {
+            scriptEngine_.shutdownJavaScriptExecutor();
         }
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
         // some JS script while we are closing the others
@@ -1899,13 +1896,6 @@ public class WebClient implements Serializable {
         if (webConnection_ instanceof HttpWebConnection) {
             ((HttpWebConnection) webConnection_).shutdown();
         }
-    }
-
-    void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
-        if (eventLoop_ == null) {
-            eventLoop_ = new JavaScriptExecutor(this);
-        }
-        eventLoop_.addWindow(webWindow);
     }
 
     /**

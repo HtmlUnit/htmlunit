@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -68,6 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Amit Manjhi
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
@@ -82,6 +84,9 @@ public class JavaScriptEngine {
     private transient ThreadLocal<Boolean> javaScriptRunning_;
     private transient ThreadLocal<List<PostponedAction>> postponedActions_;
     private transient ThreadLocal<Boolean> holdPostponedActions_;
+
+    /** The JavaScriptExecutor corresponding to all windows of this Web client */
+    private transient JavaScriptExecutor javaScriptExecutor_;
 
     /**
      * Key used to place the scope in which the execution of some JavaScript code
@@ -360,6 +365,27 @@ public class JavaScriptEngine {
                 throw Context.reportRuntimeError("Cannot get field '" + constant + "' for type: "
                     + config.getHostClass().getName());
             }
+        }
+    }
+
+    /**
+     * Register WebWindow with the JavaScriptExecutor.
+     * @param webWindow the WebWindow to be registered.
+     */
+    public void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
+        if (javaScriptExecutor_ == null) {
+            javaScriptExecutor_ = new JavaScriptExecutor(webClient_);
+        }
+        javaScriptExecutor_.addWindow(webWindow);
+    }
+
+    /**
+     * Shutdown JavaScriptExecutor.
+     */
+    public void shutdownJavaScriptExecutor() {
+        if (javaScriptExecutor_ != null) {
+            javaScriptExecutor_.shutdown();
+            javaScriptExecutor_ = null;
         }
     }
 
