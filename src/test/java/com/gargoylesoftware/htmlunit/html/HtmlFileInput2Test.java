@@ -38,7 +38,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlFileInput}.
@@ -53,7 +52,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void contentType() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/upload1", Upload1Servlet.class);

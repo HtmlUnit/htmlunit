@@ -60,7 +60,6 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.params.CookieSpecPNames;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.InputStreamBody;
@@ -227,8 +226,9 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
-                final MultipartEntity multipartEntity =
-                    new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, CharsetUtil.getCharset(charset));
+                final HtmlUnitMultipartEntity multipartEntity =
+                    new HtmlUnitMultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null,
+                            CharsetUtil.getCharset(charset));
 
                 for (final NameValuePair pair : webRequest.getRequestParameters()) {
                     if (pair instanceof KeyDataPair) {
