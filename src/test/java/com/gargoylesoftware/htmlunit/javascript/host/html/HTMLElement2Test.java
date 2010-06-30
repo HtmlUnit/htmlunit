@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HTMLElement}.
@@ -505,6 +506,26 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "    </div>\n"
             + "    <script>function h(id) { alert(document.getElementById(id).offsetHeight); }</script>\n"
             + "  </body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * offsetWidth doesn't work currently when width is a % of the page.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "true", "true" })
+    @NotYetImplemented
+    public void offsetWidth_calculatedBasedOnPage() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<div id='d1' style='width: 20%'>hello</div>\n"
+            + "<div><div id='d2' style='width: 20%'>hello</div></div>\n"
+            + "<script>\n"
+            + "alert(document.getElementById('d1').offsetWidth != 0);\n"
+            + "alert(document.getElementById('d2').offsetWidth != 0);\n"
+            + "</script></body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
     }
