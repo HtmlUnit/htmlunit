@@ -117,6 +117,24 @@ public class HTMLFormElement extends HTMLElement implements Function {
                     response.addAll(htmlForm.getLostChildren());
                     return response;
                 }
+
+                @Override
+                protected Object getWithPreemption(final String name) {
+                    final List<HtmlElement> matchingElements = new ArrayList<HtmlElement>();
+                    for (final Object o : getElements()) {
+                        final HtmlElement elt = (HtmlElement) o;
+                        if (isAccessibleByIdOrName(elt, name)) {
+                            matchingElements.add(elt);
+                        }
+                    }
+                    if (matchingElements.isEmpty()) {
+                        return NOT_FOUND;
+                    }
+                    else if (matchingElements.size() == 1) {
+                        return matchingElements.get(0).getScriptObject();
+                    }
+                    return new HTMLCollection(htmlForm, matchingElements);
+                }
             };
             final String xpath = ".//*[(name() = 'input' or name() = 'button'"
                     + " or name() = 'select' or name() = 'textarea')]";

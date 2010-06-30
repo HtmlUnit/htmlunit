@@ -5,7 +5,10 @@
     </properties>
 
     <body>
-        <release version="2.8" date="?" description="Bugfixes, (large) binary download, single thread for JavaScript background tasks, HttpClient 4, SOCKS proxy, initial FF 3.6">
+        <release version="2.8" date="?" description="Bugfixes, (large) binary download, single thread for JavaScript background tasks, HttpClient 4, SOCKS proxy, initial support for FF 3.6">
+            <action type="fix" dev="mguillem" issue="2995968">
+                JavaScript: allow access to lost elements per name from HTMLFormElement.elements in invalid HTML code.
+            </action>
             <action type="fix" dev="asashour" issue="3022242">
                 XMLHttpRequest: post method to send query string.
             </action>

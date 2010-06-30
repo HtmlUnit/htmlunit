@@ -1602,4 +1602,25 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         loadPageWithAlerts(html, getDefaultUrl(), 5000);
     }
 
+    /**
+     * Regression test for bug 2995968: lost children should be accessible per name from HTMLFormElement.elements.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "[object HTMLInputElement]", "[object HTMLInputElement]" },
+        IE = { "[object]", "[object]" })
+    public void lostChildrenFromElements() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<div><form name='form1' >\n"
+            + "</div>\n"
+            + "<input name='b'/>\n"
+            + "</form><script>\n"
+            + "  alert(document.form1['b']);\n"
+            + "  alert(document.form1.elements['b']);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
