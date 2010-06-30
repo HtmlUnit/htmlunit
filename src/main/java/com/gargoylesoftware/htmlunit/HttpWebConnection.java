@@ -59,7 +59,10 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.params.CookieSpecPNames;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.HttpMultipart;
 import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MIME;
+import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.InputStreamBody;
@@ -73,6 +76,8 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
+import org.apache.james.mime4j.message.BodyPart;
+import org.apache.james.mime4j.parser.Field;
 import org.apache.james.mime4j.util.CharsetUtil;
 
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
@@ -226,15 +231,15 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
-                final HtmlUnitMultipartEntity multipartEntity =
-                    new HtmlUnitMultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null,
-                            CharsetUtil.getCharset(charset));
+                final MultipartEntity multipartEntity =
+                    new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, CharsetUtil.getCharset(charset));
 
                 for (final NameValuePair pair : webRequest.getRequestParameters()) {
                     if (pair instanceof KeyDataPair) {
                         final KeyDataPair pairWithFile = (KeyDataPair) pair;
                         final ContentBody contentBody = buildFilePart(pairWithFile, charset);
                         multipartEntity.addPart(pair.getName(), contentBody);
+                        fixBugContentType(multipartEntity, contentBody.getMimeType());
                     }
                     else {
                         final StringBody stringBody =
@@ -282,6 +287,39 @@ public class HttpWebConnection implements WebConnection {
             });
         }
         return httpMethod;
+    }
+
+    /**
+     * HttpClient doesn't send Content-Type header for file parts as it should.
+     * See:https://issues.apache.org/jira/browse/HTTPCLIENT-960
+     * This is a hack to fix it and it should be removed once the issue has been fixed.
+     */
+    private void fixBugContentType(final MultipartEntity multipartEntity, final String contentType) {
+        // hack!!
+        try {
+            final java.lang.reflect.Field field = MultipartEntity.class.getDeclaredField("multipart");
+            field.setAccessible(true);
+            final HttpMultipart multipart = (HttpMultipart) field.get(multipartEntity);
+            final BodyPart lastOne = multipart.getBodyParts().get(multipart.getBodyParts().size() - 1);
+            final org.apache.james.mime4j.message.Header header = lastOne.getHeader();
+            final Field cntDispHeader = header.getField(MIME.CONTENT_DISPOSITION);
+            header.removeFields(MIME.CONTENT_DISPOSITION);
+            final Field newCntDispHeader = new Field() {
+                public String getBody() {
+                    return cntDispHeader.getBody() + "\r\nContent-Type: " + contentType;
+                }
+                public String getName() {
+                    return MIME.CONTENT_DISPOSITION;
+                }
+                public org.apache.james.mime4j.util.ByteSequence getRaw() {
+                    throw new RuntimeException("No in the hack");
+                }
+            };
+            header.addField(newCntDispHeader);
+        }
+        catch (final Exception e) {
+            throw new RuntimeException("Hack to fix Content-Type submission failed", e);
+        }
     }
 
     // FIXME Change signature ?
