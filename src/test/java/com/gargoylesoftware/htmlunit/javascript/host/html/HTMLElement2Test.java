@@ -511,7 +511,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * offsetWidth doesn't work currently when width is a % of the page.
+     * Value of offsetWidth is currently wrong when width is a % of the page.
      * @throws Exception if an error occurs
      */
     @Test
