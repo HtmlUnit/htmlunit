@@ -502,7 +502,7 @@ public class DomNodeTest extends WebTestCase {
 
         final String[] expectedValues = {"nodeAdded: p,div", "nodeAdded: p,div"};
         final HtmlPage page = loadPage(htmlContent);
-        System.out.println(page.asXml());
+
         final HtmlElement p1 = page.getHtmlElementById("p1");
         final DomChangeListenerTestImpl listenerImpl = new DomChangeListenerTestImpl();
         p1.addDomChangeListener(listenerImpl);
