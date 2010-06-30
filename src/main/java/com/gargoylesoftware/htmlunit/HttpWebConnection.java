@@ -109,9 +109,7 @@ public class HttpWebConnection implements WebConnection {
     /**
      * {@inheritDoc}
      */
-    public WebResponse getResponse(final WebRequest request)
-        throws IOException {
-
+    public WebResponse getResponse(final WebRequest request) throws IOException {
         final URL url = request.getUrl();
         final HttpClient httpClient = getHttpClient();
         webClient_.getCookieManager().updateState(getHttpClient().getCookieStore());
@@ -195,20 +193,16 @@ public class HttpWebConnection implements WebConnection {
         // chars in the URL.
         final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false);
         final String charset = webRequest.getCharset();
-        final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), url.getPath());
+        URI uri = URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(),
+                url.getQuery(), null);
+        final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
         if (!(httpMethod instanceof HttpEntityEnclosingRequest)) {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
-            if (webRequest.getRequestParameters().isEmpty()) {
-                final URI uri = URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(),
-                        url.getQuery(), null);
-                httpMethod.setURI(uri);
-            }
-            else {
+            if (!webRequest.getRequestParameters().isEmpty()) {
                 final List<NameValuePair> pairs = webRequest.getRequestParameters();
                 final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
                 final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
-                final URI uri =
-                    URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(), query, null);
+                uri = URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(), query, null);
                 httpMethod.setURI(uri);
             }
         }
@@ -325,38 +319,38 @@ public class HttpWebConnection implements WebConnection {
     /**
      * Creates and returns a new HttpClient HTTP method based on the specified parameters.
      * @param submitMethod the submit method being used
-     * @param path the path being used
+     * @param uri the uri being used
      * @return a new HttpClient HTTP method based on the specified parameters
      */
-    private static HttpRequestBase buildHttpMethod(final HttpMethod submitMethod, final String path) {
+    private static HttpRequestBase buildHttpMethod(final HttpMethod submitMethod, final URI uri) {
         final HttpRequestBase method;
         switch (submitMethod) {
             case GET:
-                method = new HttpGet(path);
+                method = new HttpGet(uri);
                 break;
 
             case POST:
-                method = new HttpPost(path);
+                method = new HttpPost(uri);
                 break;
 
             case PUT:
-                method = new HttpPut(path);
+                method = new HttpPut(uri);
                 break;
 
             case DELETE:
-                method = new HttpDelete(path);
+                method = new HttpDelete(uri);
                 break;
 
             case OPTIONS:
-                method = new HttpOptions(path);
+                method = new HttpOptions(uri);
                 break;
 
             case HEAD:
-                method = new HttpHead(path);
+                method = new HttpHead(uri);
                 break;
 
             case TRACE:
-                method = new HttpTrace(path);
+                method = new HttpTrace(uri);
                 break;
 
             default:
