@@ -39,6 +39,7 @@
                     <li>
                         Make sure the new code has automated unit tests written for
                         <a href="http://www.junit.org">JUnit</a>.  No code will get merged without tests.
+                        Whenever possible, tests classes should extend WebDriverTestCase.
                     </li>
                     <li>
                     	If you are fixing a bug but not adding new functionality then we still require
