@@ -29,9 +29,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.http.HttpStatus;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -43,13 +45,14 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class WebResponseTest extends WebServerTestCase {
+public class WebResponseTest extends WebDriverTestCase {
 
     /**
      * Verifies that when no encoding header is provided, encoding may be recognized with its Byte Order Mark.
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("\u6211\u662F\u6211\u7684 \u064A\u0627 \u0623\u0647\u0644\u0627\u064B")
     public void recognizeBOM() throws Exception {
         recognizeBOM("UTF-8",    new byte[] {(byte) 0xef, (byte) 0xbb, (byte) 0xbf});
         recognizeBOM("UTF-16BE", new byte[] {(byte) 0xfe, (byte) 0xff});
@@ -57,27 +60,17 @@ public class WebResponseTest extends WebServerTestCase {
     }
 
     private void recognizeBOM(final String encoding, final byte[] markerBytes) throws Exception {
-        final WebClient webClient = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
 
         final String html = "<html><head><script src='foo.js'></script></head><body></body></html>";
 
         // see http://en.wikipedia.org/wiki/Byte_Order_Mark
-        final String[] expectedAlerts = {"\u6211\u662F\u6211\u7684 "
-                + "\u064A\u0627 \u0623\u0647\u0644\u0627\u064B"};
-        final byte[] script = ("alert('" + expectedAlerts[0]  + "');").getBytes(encoding);
+        final byte[] script = getModifiedContent("alert('" + getExpectedAlerts()[0]  + "');").getBytes(encoding);
 
         webConnection.setDefaultResponse(ArrayUtils.addAll(markerBytes, script), 200, "OK", "text/javascript");
         webConnection.setResponse(URL_FIRST, html);
-        webClient.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        webClient.getPage(URL_FIRST);
-
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -198,5 +191,14 @@ public class WebResponseTest extends WebServerTestCase {
             writer.write("<html/>");
             writer.close();
         }
+    }
+
+    /**
+     * Stop the WebServer.
+     * @throws Exception if it fails
+     */
+    @After
+    public void stopServer() throws Exception {
+        stopWebServer();
     }
 }

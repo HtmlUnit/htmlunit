@@ -36,6 +36,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -102,6 +103,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static String JSON_;
     private boolean useRealBrowser_;
+    private boolean writeContentAsBytes_ = false;
 
     static List<String> getBrowsersProperties() {
         if (BROWSERS_PROPERTIES_ == null) {
@@ -154,6 +156,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
             driver.quit();
         }
         WEB_DRIVERS_.clear();
+        stopWebServer();
+    }
+
+    /**
+     * Stops the WebServer.
+     * @throws Exception if it fails
+     */
+    protected static void stopWebServer() throws Exception {
         if (STATIC_SERVER_ != null) {
             STATIC_SERVER_.stop();
         }
@@ -222,6 +232,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             STATIC_SERVER_.start();
         }
         MockWebConnectionServlet.MockConnection_ = mockConnection;
+        MockWebConnectionServlet.WriteContentAsBytes_ = writeContentAsBytes_;
     }
 
     /**
@@ -274,6 +285,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     public static class MockWebConnectionServlet extends HttpServlet {
         private static final long serialVersionUID = -3417522859381706421L;
         private static MockWebConnection MockConnection_;
+        private static boolean WriteContentAsBytes_ = false;
 
         /**
          * {@inheritDoc}
@@ -353,11 +365,25 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 response.addHeader(responseHeader.getName(), responseHeader.getValue());
             }
 
-            final String newContent = getModifiedContent(resp.getContentAsString());
-
-            response.getWriter().print(newContent);
+            if (WriteContentAsBytes_) {
+                IOUtils.copy(resp.getContentAsStream(), response.getOutputStream());
+            }
+            else {
+                final String newContent = getModifiedContent(resp.getContentAsString());
+                response.getWriter().print(newContent);
+            }
             response.flushBuffer();
         }
+
+    }
+
+    /**
+     * Indicates that MockWebConnectionServlet should send the configured content's bytes directly
+     * without modification.
+     * @param b the new value
+     */
+    public void setWriteContentAsBytes_(final boolean b) {
+        writeContentAsBytes_ = b;
     }
 
     /**
