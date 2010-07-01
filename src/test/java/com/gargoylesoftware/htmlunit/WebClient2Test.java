@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -370,4 +371,49 @@ public class WebClient2Test extends WebServerTestCase {
         }
     }
 
+    /**
+     * Regression test for bug 2903223: body download time is not taken into account
+     * in {@link WebResponse#getLoadTime()}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    public void bodyDowloadTime() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/*", ServeBodySlowlyServlet.class);
+        startWebServer("./", new String[0], servlets);
+
+        final HtmlPage page = getWebClient().getPage(getDefaultUrl());
+        final long loadTime = page.getWebResponse().getLoadTime();
+        assertTrue("Load time: " + loadTime + ", last request time: " + ServeBodySlowlyServlet.LastRequestTime_,
+            loadTime > ServeBodySlowlyServlet.LastRequestTime_);
+    }
+
+    /**
+     * Helper class for {@link #bodyDowloadTime}.
+     */
+    public static class ServeBodySlowlyServlet extends HttpServlet {
+        private static volatile long LastRequestTime_ = -1;
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
+            final long before = System.currentTimeMillis();
+            final Writer writer = resp.getWriter();
+            writeSomeContent(writer); // some content quickly
+            writer.flush();
+            try {
+                Thread.sleep(500);
+            }
+            catch (final InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            writeSomeContent(writer); // and some content later
+            LastRequestTime_ = System.currentTimeMillis() - before;
+        }
+
+        private void writeSomeContent(final Writer writer) throws IOException {
+            for (int i = 0; i < 1000; ++i) {
+                writer.append((char) ('a' + (i % 26)));
+            }
+        }
+    }
 }
