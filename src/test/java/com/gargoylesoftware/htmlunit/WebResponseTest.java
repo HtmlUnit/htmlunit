@@ -60,13 +60,13 @@ public class WebResponseTest extends WebDriverTestCase {
     }
 
     private void recognizeBOM(final String encoding, final byte[] markerBytes) throws Exception {
-        final MockWebConnection webConnection = getMockWebConnection();
-
         final String html = "<html><head><script src='foo.js'></script></head><body></body></html>";
 
         // see http://en.wikipedia.org/wiki/Byte_Order_Mark
         final byte[] script = getModifiedContent("alert('" + getExpectedAlerts()[0]  + "');").getBytes(encoding);
 
+        setWriteContentAsBytes_(true);
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setDefaultResponse(ArrayUtils.addAll(markerBytes, script), 200, "OK", "text/javascript");
         webConnection.setResponse(URL_FIRST, html);
 
