@@ -374,7 +374,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             response.flushBuffer();
         }
-
     }
 
     /**
