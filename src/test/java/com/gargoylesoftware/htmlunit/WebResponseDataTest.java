@@ -73,10 +73,10 @@ public class WebResponseDataTest extends WebServerTestCase {
      */
     @Test
     public void testNullBody() throws Exception {
-        final InputStream body = null;
+        final DownloadedContent downloadedContent = new DownloadedContent.InMemory(new byte[] {});
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
-        final WebResponseData data = new WebResponseData(body, 304, "NOT_MODIFIED", headers);
-        assertNull(data.getBody());
+        final WebResponseData data = new WebResponseData(downloadedContent, 304, "NOT_MODIFIED", headers);
+        assertEquals(0, data.getBody().length);
     }
 
     /**

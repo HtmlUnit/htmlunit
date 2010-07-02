@@ -189,6 +189,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public void makeWebResponse() throws Exception {
         final URL url = new URL("http://htmlunit.sourceforge.net/");
         final String content = "<html><head></head><body></body></html>";
+        final DownloadedContent downloadedContent = new DownloadedContent.InMemory(content.getBytes());
         final int httpStatus = HttpStatus.SC_OK;
         final long loadTime = 500L;
 
@@ -201,10 +202,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
         final HttpWebConnection connection = new HttpWebConnection(getWebClient());
         final Method method = connection.getClass().getDeclaredMethod("makeWebResponse",
-                new Class[] {HttpResponse.class, WebRequest.class, long.class});
+                HttpResponse.class, WebRequest.class, DownloadedContent.class, long.class);
         method.setAccessible(true);
         final WebResponse response = (WebResponse) method.invoke(connection,
-                new Object[] {httpResponse, new WebRequest(url), new Long(loadTime)});
+                httpResponse, new WebRequest(url), downloadedContent, new Long(loadTime));
 
         Assert.assertEquals(httpStatus, response.getStatusCode());
         Assert.assertEquals(url, response.getWebRequest().getUrl());

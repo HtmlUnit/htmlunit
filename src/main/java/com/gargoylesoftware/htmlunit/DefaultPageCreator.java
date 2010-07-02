@@ -15,7 +15,13 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.util.Locale;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -93,11 +99,8 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @return the new page object
      */
     public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        if (webResponse.isBinary()) {
-            return createBinaryPage(webResponse, webWindow);
-        }
-
-        final String contentType = webResponse.getContentType().toLowerCase();
+        final String contentType = determineContentType(webResponse.getContentType().toLowerCase(),
+            webResponse.getContentAsStream());
         final Page newPage;
 
         final String pageType = determinePageType(contentType);
@@ -124,6 +127,90 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
             newPage = createUnexpectedPage(webResponse, webWindow);
         }
         return newPage;
+    }
+
+    /**
+     * Tries to determine the content type.
+     * TODO: implement a content type sniffer based on the
+     * <a href="http://tools.ietf.org/html/draft-abarth-mime-sniff-05">Content-Type Processing Model</a>
+     * @param contentType the contentType header if any
+     * @param contentAsStream stream allowing to read the downloaded content
+     * @return the sniffed mime type
+     * @exception IOException if an IO problem occurs
+     */
+    protected String determineContentType(final String contentType, final InputStream contentAsStream)
+        throws IOException {
+        final byte[] markerUTF8 = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
+        final byte[] markerUTF16BE = {(byte) 0xfe, (byte) 0xff};
+        final byte[] markerUTF16LE = {(byte) 0xff, (byte) 0xfe};
+
+        try {
+            if (!StringUtils.isEmpty(contentType)) {
+                return contentType;
+            }
+
+            final byte[] bytes = read(contentAsStream, 500);
+            if (bytes.length == 0) {
+                return "text/plain";
+            }
+
+            final String asAsciiString = new String(bytes, "ASCII").toUpperCase(Locale.ENGLISH);
+            if (asAsciiString.contains("<HTML")) {
+                return "text/html";
+            }
+            else if (startsWith(bytes, markerUTF8) || startsWith(bytes, markerUTF16BE)
+                    || startsWith(bytes, markerUTF16LE)) {
+                return "text/plain";
+            }
+            else if (isBinary(bytes)) {
+                return "application/octet-stream";
+            }
+        }
+        finally {
+            IOUtils.closeQuietly(contentAsStream);
+        }
+        return "text/plain";
+    }
+
+    /**
+     * See http://tools.ietf.org/html/draft-abarth-mime-sniff-05#section-4
+     * @param bytes the bytes to check
+     */
+    private boolean isBinary(final byte[] bytes) {
+        for (byte b : bytes) {
+            if (b < 0x08
+                || b == 0x0B
+                || (b >= 0x0E && b <= 0x1A)
+                || (b >= 0x1C && b <= 0x1F)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean startsWith(final byte[] bytes, final byte[] lookFor) {
+        if (bytes.length < lookFor.length) {
+            return false;
+        }
+
+        for (int i = 0; i < lookFor.length; ++i) {
+            if (bytes[i] != lookFor[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private byte[] read(final InputStream stream, final int maxNb) throws IOException {
+        final byte[] buffer = new byte[maxNb];
+        final int nbRead = stream.read(buffer);
+        if (nbRead == buffer.length) {
+            return buffer;
+        }
+        else {
+            return ArrayUtils.subarray(buffer, 0, nbRead);
+        }
     }
 
     /**
@@ -190,19 +277,6 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     }
 
     /**
-     * Creates a BinaryPage for this WebResponse.
-     *
-     * @param webResponse the page's source
-     * @param webWindow the WebWindow to place the BinaryPage in
-     * @return the newly created BinaryPage
-     */
-    protected BinaryPage createBinaryPage(final WebResponse webResponse, final WebWindow webWindow) {
-        final BinaryPage newPage = new BinaryPage(webResponse, webWindow);
-        webWindow.setEnclosedPage(newPage);
-        return newPage;
-    }
-
-    /**
      * Creates an XmlPage for this WebResponse.
      *
      * @param webResponse the page's source
@@ -222,7 +296,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @return "xml", "html", "javascript", "text" or "unknown"
      */
     protected String determinePageType(final String contentType) {
-        if (contentType.equals("text/html") || contentType.equals("")) {
+        if (contentType.equals("text/html")) { // || contentType.equals("")) {
             return "html";
         }
         else if (contentType.equals("text/javascript") || contentType.equals("application/x-javascript")) {

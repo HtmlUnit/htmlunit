@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -24,6 +23,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.InflaterInputStream;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -39,14 +39,11 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class WebResponseData implements Serializable {
 
     private static final long serialVersionUID = 2979956380280496543L;
-    private static final int IN_MEMORY_SIZE = 300;
 
-    private byte[] body_;
-    private InputStream inputStream_;
-    private boolean isBinary_;
-    private int statusCode_;
-    private String statusMessage_;
-    private List<NameValuePair> responseHeaders_;
+    private final int statusCode_;
+    private final String statusMessage_;
+    private final List<NameValuePair> responseHeaders_;
+    private final DownloadedContent downloadedContent_;
 
     /**
      * Constructs with a raw byte[] (mostly for testing).
@@ -55,21 +52,11 @@ public class WebResponseData implements Serializable {
      * @param statusCode        Status code from the server
      * @param statusMessage     Status message from the server
      * @param responseHeaders   Headers in this response
+     * @throws IOException on stream errors
      */
     public WebResponseData(final byte[] body, final int statusCode, final String statusMessage,
-            final List<NameValuePair> responseHeaders) {
-        statusCode_ = statusCode;
-        statusMessage_ = statusMessage;
-        responseHeaders_ = Collections.unmodifiableList(responseHeaders);
-
-        if (body != null) {
-            try {
-                body_ = IOUtils.toByteArray(getStream(new ByteArrayInputStream(body), responseHeaders));
-            }
-            catch (final IOException e) {
-                body_ = body;
-            }
-        }
+            final List<NameValuePair> responseHeaders) throws IOException {
+        this(new DownloadedContent.InMemory(body), statusCode, statusMessage, responseHeaders);
     }
 
     /**
@@ -81,23 +68,12 @@ public class WebResponseData implements Serializable {
      * @param responseHeaders   Headers in this response
      *
      * @throws IOException on stream errors
+     * @deprecated As of HtmlUnit-2.8.
      */
+    @Deprecated
     public WebResponseData(final InputStream bodyStream, final int statusCode,
             final String statusMessage, final List<NameValuePair> responseHeaders) throws IOException {
-        statusCode_ = statusCode;
-        statusMessage_ = statusMessage;
-        responseHeaders_ = Collections.unmodifiableList(responseHeaders);
-        if (bodyStream != null) {
-            final MemoryInputStream memoryInputStream = new MemoryInputStream(
-                    getStream(bodyStream, responseHeaders), IN_MEMORY_SIZE);
-            if (memoryInputStream.isBinary()) {
-                inputStream_ = memoryInputStream;
-                isBinary_ = true;
-            }
-            else {
-                body_ = IOUtils.toByteArray(memoryInputStream);
-            }
-        }
+        this(HttpWebConnection.downloadContent(bodyStream), statusCode, statusMessage, responseHeaders);
     }
 
     /**
@@ -114,6 +90,23 @@ public class WebResponseData implements Serializable {
         statusCode_ = statusCode;
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);
+        downloadedContent_ = new DownloadedContent.InMemory(ArrayUtils.EMPTY_BYTE_ARRAY);
+    }
+
+    /**
+     * Constructor.
+     * @param responseBody the downloaded response body
+     * @param statusCode        Status code from the server
+     * @param statusMessage     Status message from the server
+     * @param responseHeaders   Headers in this response
+     * @throws IOException on stream errors
+     */
+    public WebResponseData(final DownloadedContent responseBody, final int statusCode, final String statusMessage,
+            final List<NameValuePair> responseHeaders) throws IOException {
+        statusCode_ = statusCode;
+        statusMessage_ = statusMessage;
+        responseHeaders_ = Collections.unmodifiableList(responseHeaders);
+        downloadedContent_ = responseBody;
     }
 
     private InputStream getStream(InputStream stream, final List<NameValuePair> headers) throws IOException {
@@ -138,31 +131,30 @@ public class WebResponseData implements Serializable {
     }
 
     /**
-     * Returns true for binary content, in which case you must use {@link #getInputStream()}.
-     * @return true for binary content
-     */
-    public boolean isBinary() {
-        return isBinary_;
-    }
-
-    /**
      * Returns the response body.
+     * This may cause memory problem for very large responses.
      * @return response body
      */
     public byte[] getBody() {
-        if (isBinary()) {
-            throw new IllegalStateException(
-                "Can not call getBody() for binary content WebResponseData, use getInputStream()");
+        try {
+            return IOUtils.toByteArray(getInputStream());
         }
-        return body_;
+        catch (final IOException e) {
+            throw new RuntimeException(e); // shouldn't we allow the method to throw IOException?
+        }
     }
 
     /**
-     * Returns the InputStream, if {@link #isBinary()} is true.
+     * Returns a new {@link InputStream} allowing to read the downloaded content.
      * @return the associated InputStream
      */
     public InputStream getInputStream() {
-        return inputStream_;
+        try {
+            return getStream(downloadedContent_.getInputStream(), getResponseHeaders());
+        }
+        catch (final IOException e) {
+            throw new RuntimeException(e); // in fact getInputStream should probably have throw declaration
+        }
     }
 
     /**

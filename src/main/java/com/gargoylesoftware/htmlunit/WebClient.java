@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -52,6 +51,7 @@ import org.w3c.css.sac.ErrorHandler;
 
 import com.gargoylesoftware.htmlunit.attachment.Attachment;
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
+import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
@@ -118,7 +118,7 @@ public class WebClient implements Serializable {
     /** Like the Firefox default value for network.http.redirection-limit. */
     private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
 
-    private transient WebConnection webConnection_ = new HttpWebConnection(this);
+    private transient WebConnection webConnection_ = createWebConnection();
     private boolean printContentOnFailingStatusCode_ = true;
     private boolean throwExceptionOnFailingStatusCode_ = true;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
@@ -1187,7 +1187,8 @@ public class WebClient implements Serializable {
         }
         responseHeaders.add(new NameValuePair("content-type",
             decoder.getMediaType() + ";charset=" + decoder.getCharset()));
-        final WebResponseData data = new WebResponseData(url.openStream(), 200, "OK", responseHeaders);
+        final DownloadedContent downloadedContent = HttpWebConnection.downloadContent(url.openStream());
+        final WebResponseData data = new WebResponseData(downloadedContent, 200, "OK", responseHeaders);
         return new WebResponse(data, url, webRequest.getHttpMethod(), 0);
     }
 
@@ -1208,8 +1209,8 @@ public class WebClient implements Serializable {
      * @return the web response
      * @throws IOException if an IO problem occurs
      */
-    private WebResponse makeWebResponseForFileUrl(final URL url, final String charset) throws IOException {
-        URL cleanUrl = url;
+    private WebResponse makeWebResponseForFileUrl(final WebRequest webRequest) throws IOException {
+        URL cleanUrl = webRequest.getUrl();
         if (cleanUrl.getQuery() != null) {
             // Get rid of the query portion before trying to load the file.
             cleanUrl = UrlUtils.getUrlWithNewQuery(cleanUrl, null);
@@ -1222,47 +1223,11 @@ public class WebClient implements Serializable {
         final File file = FileUtils.toFile(cleanUrl);
         final String contentType = guessContentType(file);
 
-        if (contentType.startsWith("text")) {
-            final String str = IOUtils.toString(new FileInputStream(file), charset);
-            return new StringWebResponse(str, charset, url) {
-                private static final long serialVersionUID = 5713127877370126236L;
-                @Override
-                public String getContentType() {
-                    return contentType;
-                }
-            };
-        }
-        final byte[] data = IOUtils.toByteArray(new FileInputStream(file));
-        return new BinaryWebResponse(data, url, contentType);
-    }
-
-    /**
-     * A simple WebResponse created from a byte array. Content is assumed to be
-     * of some binary type.
-     *
-     * @author Paul King
-     */
-    private static final class BinaryWebResponse extends WebResponse {
-
-        private static final long serialVersionUID = 8000117717229261957L;
-
-        private final byte[] data_;
-
-        private static WebResponseData getWebResponseData(final byte[] data, final String contentType) {
-            final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
-            compiledHeaders.add(new NameValuePair("Content-Type", contentType));
-            return new WebResponseData(data, HttpStatus.SC_OK, "OK", compiledHeaders);
-        }
-
-        private BinaryWebResponse(final byte[] data, final URL originatingURL, final String contentType) {
-            super(getWebResponseData(data, contentType), originatingURL, HttpMethod.GET, 0);
-            data_ = data;
-        }
-
-        @Override
-        public InputStream getContentAsStream() {
-            return new ByteArrayInputStream(data_);
-        }
+        final DownloadedContent content = new DownloadedContent.OnFile(file);
+        final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
+        compiledHeaders.add(new NameValuePair("Content-Type", contentType));
+        final WebResponseData responseData = new WebResponseData(content, 200, "OK", compiledHeaders);
+        return new WebResponse(responseData, webRequest, 0);
     }
 
     /**
@@ -1345,7 +1310,7 @@ public class WebClient implements Serializable {
             response = makeWebResponseForAboutUrl(webRequest.getUrl());
         }
         else if (protocol.equals("file")) {
-            response = makeWebResponseForFileUrl(webRequest.getUrl(), webRequest.getCharset());
+            response = makeWebResponseForFileUrl(webRequest);
         }
         else if (protocol.equals("data")) {
             if (browserVersion_.hasFeature(BrowserVersionFeatures.PROTOCOL_DATA)) {
@@ -2014,8 +1979,16 @@ public class WebClient implements Serializable {
      */
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-        webConnection_ = new HttpWebConnection(this);
+        webConnection_ = createWebConnection();
         scriptEngine_ = new JavaScriptEngine(this);
+    }
+
+    private WebConnection createWebConnection() {
+        if (GAEUtils.isGaeMode()) {
+            return new UrlFetchWebConnection(this);
+        }
+
+        return new HttpWebConnection(this);
     }
 
     private static class LoadJob {

@@ -372,21 +372,20 @@ public class WebClient2Test extends WebServerTestCase {
     }
 
     /**
-     * Regression test for bug 2903223: body download time is not taken into account
+     * Regression test for bug 2903223: body download time was not taken into account
      * in {@link WebResponse#getLoadTime()}.
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void bodyDowloadTime() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/*", ServeBodySlowlyServlet.class);
         startWebServer("./", new String[0], servlets);
 
-        final HtmlPage page = getWebClient().getPage(getDefaultUrl());
+        final Page page = getWebClient().getPage(getDefaultUrl());
         final long loadTime = page.getWebResponse().getLoadTime();
         assertTrue("Load time: " + loadTime + ", last request time: " + ServeBodySlowlyServlet.LastRequestTime_,
-            loadTime > ServeBodySlowlyServlet.LastRequestTime_);
+            loadTime >= ServeBodySlowlyServlet.LastRequestTime_);
     }
 
     /**

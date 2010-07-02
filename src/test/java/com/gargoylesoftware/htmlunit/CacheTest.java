@@ -354,11 +354,6 @@ class DummyWebResponse extends WebResponse {
     }
 
     @Override
-    public boolean isBinary() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
     public URL getRequestUrl() {
         return getWebRequest().getUrl();
     }

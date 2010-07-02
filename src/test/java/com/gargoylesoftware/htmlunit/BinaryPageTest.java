@@ -28,10 +28,8 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
 /**
- * Tests for {@link BinaryPage}.
+ * Tests for binary content.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -53,7 +51,7 @@ public class BinaryPageTest extends WebServerTestCase {
         final WebClient client = getWebClient();
 
         final Page page = client.getPage("http://localhost:" + PORT + "/big");
-        assertTrue(page instanceof BinaryPage);
+        assertTrue(page instanceof UnexpectedPage);
     }
 
     /**
@@ -91,7 +89,7 @@ public class BinaryPageTest extends WebServerTestCase {
         final WebClient client = getWebClient();
 
         final Page page = client.getPage("http://localhost:" + PORT + "/bigChunked");
-        assertTrue(page instanceof BinaryPage);
+        assertTrue(page instanceof UnexpectedPage);
     }
 
     /**
@@ -142,8 +140,8 @@ public class BinaryPageTest extends WebServerTestCase {
         simpleWebServer_.start();
         final WebClient client = getWebClient();
 
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/chunked");
-        assertTrue(page.asText().equals("ABCDEFGHIJKLMNOPQRSTUVWXYZ"));
+        final TextPage page = client.getPage("http://localhost:" + PORT + "/chunked");
+        assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", page.getContent());
     }
 
     /**

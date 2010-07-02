@@ -173,8 +173,18 @@ public class MockWebConnection implements WebConnection {
         if (contentType != null) {
             compiledHeaders.add(new NameValuePair("Content-Type", contentType));
         }
-        final WebResponseData responseEntry = new WebResponseData(content, statusCode, statusMessage, compiledHeaders);
+        final WebResponseData responseEntry = buildWebResponseData(content, statusCode, statusMessage, compiledHeaders);
         responseMap_.put(url.toExternalForm(), responseEntry);
+    }
+
+    private WebResponseData buildWebResponseData(final byte[] content, final int statusCode, final String statusMessage,
+            final List<NameValuePair> compiledHeaders) {
+        try {
+            return new WebResponseData(content, statusCode, statusMessage, compiledHeaders);
+        }
+        catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -263,7 +273,7 @@ public class MockWebConnection implements WebConnection {
         if (contentType != null) {
             compiledHeaders.add(new NameValuePair("Content-Type", contentType));
         }
-        final WebResponseData responseEntry = new WebResponseData(content, statusCode, statusMessage, compiledHeaders);
+        final WebResponseData responseEntry = buildWebResponseData(content, statusCode, statusMessage, compiledHeaders);
         defaultResponse_ = responseEntry;
     }
 
@@ -318,7 +328,7 @@ public class MockWebConnection implements WebConnection {
         if (contentType != null) {
             compiledHeaders.add(new NameValuePair("Content-Type", contentType));
         }
-        defaultResponse_ = new WebResponseData(TextUtil.stringToByteArray(content),
+        defaultResponse_ = buildWebResponseData(TextUtil.stringToByteArray(content),
             statusCode, statusMessage, compiledHeaders);
     }
 
@@ -337,7 +347,7 @@ public class MockWebConnection implements WebConnection {
 
         final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
         compiledHeaders.add(new NameValuePair("Content-Type", contentType));
-        defaultResponse_ = new WebResponseData(TextUtil.stringToByteArray(content, charset),
+        defaultResponse_ = buildWebResponseData(TextUtil.stringToByteArray(content, charset),
             statusCode, statusMessage, compiledHeaders);
     }
 

@@ -15,7 +15,10 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -30,6 +33,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -125,9 +129,10 @@ public class HttpWebConnection implements WebConnection {
             setProxy(httpClient, request);
             final long startTime = System.currentTimeMillis();
             final HttpResponse httpResponse = httpClient.execute(hostConfiguration, httpMethod);
+            final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
             final long endTime = System.currentTimeMillis();
             webClient_.getCookieManager().updateFromState(getHttpClient().getCookieStore());
-            return makeWebResponse(httpResponse, request, endTime - startTime);
+            return makeWebResponse(httpResponse, request, downloadedBody, endTime - startTime);
         }
         catch (final URISyntaxException e) {
             throw new IOException("Unable to create URI from URL: " + url.toExternalForm());
@@ -488,44 +493,72 @@ public class HttpWebConnection implements WebConnection {
      * Converts an HttpMethod into a WebResponse.
      */
     private WebResponse makeWebResponse(final HttpResponse httpResponse,
-            final WebRequest request, final long loadTime) throws IOException {
+            final WebRequest request, final DownloadedContent responseBody, final long loadTime) throws IOException {
 
         String statusMessage = httpResponse.getStatusLine().getReasonPhrase();
         if (statusMessage == null) {
-            statusMessage = "Unknown status code";
+            statusMessage = "Unknown status message";
         }
+        final int statusCode = httpResponse.getStatusLine().getStatusCode();
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
         for (final Header header : httpResponse.getAllHeaders()) {
             headers.add(new NameValuePair(header.getName(), header.getValue()));
         }
-        final WebResponseData responseData = newWebResponseDataInstance(statusMessage, headers, httpResponse);
+        final WebResponseData responseData = new WebResponseData(responseBody, statusCode, statusMessage, headers);
         return newWebResponseInstance(responseData, loadTime, request);
     }
 
+    private static final long MAX_IN_MEMORY = 500 * 1024;
+
     /**
-     * Constructs an appropriate WebResponseData.
-     * May be overridden by subclasses to return a specialized WebResponseData.
-     * @param statusMessage StatusMessage from the response
-     * @param headers response headers
-     * @param httpResponse HTTP response
-     * @return the WebResponseData to use for this response
-     * @throws IOException if there is a problem reading the response body
+     * Downloads the response body.
+     * @param httpResponse the web server's response
+     * @return a wrapper for the downloaded body.
+     * @throws IOException in case of problem reading/saving the body
      */
-    protected WebResponseData newWebResponseDataInstance(
-            final String statusMessage,
-            final List<NameValuePair> headers,
-            final HttpResponse httpResponse
-    ) throws IOException {
+    protected DownloadedContent downloadResponseBody(final HttpResponse httpResponse) throws IOException {
         final HttpEntity httpEntity = httpResponse.getEntity();
-        final InputStream inputStream;
-        if (httpEntity != null) {
-            inputStream = httpEntity.getContent();
+        if (httpEntity == null) {
+            return new DownloadedContent.InMemory(new byte[] {});
         }
-        else {
-            inputStream = null;
+
+        return downloadContent(httpEntity.getContent());
+    }
+
+    /**
+     * Reads the content of the stream and saves it in memory or on the file system.
+     * @param is the stream to read
+     * @return a wrapper around the downloaded content
+     * @throws IOException in case of read issues
+     */
+    public static DownloadedContent downloadContent(final InputStream is) throws IOException {
+        if (is == null) {
+            return new DownloadedContent.InMemory(new byte[] {});
         }
-        return new WebResponseData(inputStream, httpResponse.getStatusLine().getStatusCode(),
-            statusMessage, headers);
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+        final byte[] buffer = new byte[1024];
+        int nbRead;
+        try {
+            while ((nbRead = is.read(buffer)) != -1) {
+                bos.write(buffer, 0, nbRead);
+                if (bos.size() > MAX_IN_MEMORY) {
+                    // we have exceeded the max for memory, let's write everything to a temporary file
+                    final File file = File.createTempFile("htmlunit", ".tmp");
+                    file.deleteOnExit();
+                    final FileOutputStream fos = new FileOutputStream(file);
+                    bos.writeTo(fos); // what we have already read
+                    IOUtils.copyLarge(is, fos); // what remains from the server response
+                    fos.close();
+                    return new DownloadedContent.OnFile(file);
+                }
+            }
+        }
+        finally {
+            IOUtils.closeQuietly(is);
+        }
+
+        return new DownloadedContent.InMemory(bos.toByteArray());
     }
 
     /**

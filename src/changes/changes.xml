@@ -6,6 +6,16 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, (large) binary download, single thread for JavaScript background tasks, HttpClient 4, SOCKS proxy, initial support for FF 3.6">
+            <action type="update" dev="mguillem">
+                Google App Engine support: WebClient uses per default UrlFetchWebConnection when Google App Engine is detected.
+            </action>
+            <action type="fix" dev="mguillem" issue="2903223">
+                WebResponse.getLoadTime(): take body download time into account.
+            </action>
+            <action type="update" dev="mguillem">
+                Remove MemoryInputStream and BinaryPage introduced since release 2.7.
+                Download large binary content to a temporary file.
+            </action>
             <action type="fix" dev="asashour" issue="3019557">
                 FileUpload: send Content-Type headers for file parts.
             </action>

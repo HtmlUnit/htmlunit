@@ -2259,7 +2259,7 @@ public class WebClientTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
-        final HtmlPage page2 = client.getPage("http://localhost:" + PORT + "/test");
+        final TextPage page2 = client.getPage("http://localhost:" + PORT + "/test");
         assertNotNull(page);
         assertNotNull(page2);
     }

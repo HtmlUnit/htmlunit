@@ -14,15 +14,21 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertArrayEquals;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -88,5 +94,37 @@ public class WebClient3Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
+    }
+
+    /**
+     * Ensure that response stream can be read more than one time.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void readStreamTwice() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<iframe src='binaryFile.bin'></iframe>\n"
+            + "<iframe src='foo.html'></iframe>\n"
+            + "</body></html>";
+
+        final MockWebConnection mockConnection = getMockWebConnection();
+        final byte[] binaryContent = new byte[4818];
+        for (int i = 0; i < binaryContent.length; ++i) {
+            binaryContent[i] = (byte) (Math.random() * Byte.MAX_VALUE);
+        }
+        mockConnection.setDefaultResponse(binaryContent, 200, "OK", "application/octet-stream");
+        final URL urlFoo = new URL(getDefaultUrl(), "foo.html");
+        mockConnection.setResponse(urlFoo, "<html></html>");
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement iframe1 = driver.findElement(By.tagName("iframe"));
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlInlineFrame htmlUnitIFrame1 = (HtmlInlineFrame) toHtmlElement(iframe1);
+            final WebResponse iframeWebResponse = htmlUnitIFrame1.getEnclosedPage().getWebResponse();
+            byte[] receivedBytes = IOUtils.toByteArray(iframeWebResponse.getContentAsStream());
+            receivedBytes = IOUtils.toByteArray(iframeWebResponse.getContentAsStream());
+            assertArrayEquals(binaryContent, receivedBytes);
+        }
     }
 }
