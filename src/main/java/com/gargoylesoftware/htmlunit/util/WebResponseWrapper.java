@@ -182,15 +182,6 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return isBinary() on the wrapped webResponse object.
-     */
-    @Override
-    public boolean isBinary() {
-        return wrappedWebResponse_.isBinary();
-    }
-
-    /**
-     * {@inheritDoc}
      */
     @Override
     public URL getRequestUrl() {

@@ -667,11 +667,6 @@ public class XMLHttpRequest extends SimpleScriptable {
         }
 
         @Override
-        public boolean isBinary() {
-            return false;
-        }
-
-        @Override
         public URL getRequestUrl() {
             return getWebRequest().getUrl();
         }
