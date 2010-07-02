@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -66,5 +70,116 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "foo,")
+    @NotYetImplemented(Browser.IE)
+    public void onchangeFires() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function debug(string) {\n"
+            + "    document.getElementById('myTextarea').value += string + ',';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<form>\n"
+            + "<input type='checkbox' id='chkbox' onchange='debug(\"foo\")'>\n"
+            + "</form>\n"
+            + "<textarea id='myTextarea'></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("chkbox")).toggle();
+
+        assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
+                '[' + driver.findElement(By.id("myTextarea")).getValue() + ']');
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "foo,", IE = "foo,boo,blur,")
+    @NotYetImplemented(Browser.FF)
+    public void onchangeFires2() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function debug(string) {\n"
+            + "    document.getElementById('myTextarea').value += string + ',';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<form>\n"
+            + "<input type='checkbox' id='chkbox' onchange='debug(\"foo\")' "
+            + " onChange='debug(\"foo\");debug(event.type);'"
+            + " onBlur='debug(\"boo\");debug(event.type);'"
+            + ">\n"
+            + "<input type='checkbox' id='chkbox2'>\n"
+            + "</form>\n"
+            + "<textarea id='myTextarea'></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("chkbox")).toggle();
+        driver.findElement(By.id("chkbox2")).toggle();
+
+        assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
+                '[' + driver.findElement(By.id("myTextarea")).getValue() + ']');
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "First", FF = "Second")
+    @NotYetImplemented(Browser.IE)
+    public void setChecked() throws Exception {
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form>\n"
+            + "<input id='myCheckbox' type='checkbox' onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
+            + "</form>\n"
+            + "</body></html>";
+        final String secondHtml
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondHtml);
+        final WebDriver driver = loadPage2(firstHtml);
+
+        driver.findElement(By.id("myCheckbox")).click();
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "First", "Second" }, FF = "Second")
+    @NotYetImplemented(Browser.IE)
+    public void setChecked2() throws Exception {
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form>\n"
+            + "<input id='myCheckbox' type='checkbox' onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
+            + "<input id='myInput' type='text'>\n"
+            + "</form>\n"
+            + "</body></html>";
+        final String secondHtml
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondHtml);
+        final WebDriver driver = loadPage2(firstHtml);
+
+        driver.findElement(By.id("myCheckbox")).click();
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+
+        if (getBrowserVersion().isIE()) {
+            driver.findElement(By.id("myInput")).click();
+            assertEquals(getExpectedAlerts()[1], driver.getTitle());
+        }
     }
 }

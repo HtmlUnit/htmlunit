@@ -24,8 +24,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -132,57 +130,6 @@ public class HtmlCheckBoxInputTest extends WebTestCase {
         assertEquals("uncheckedCheck me", page.asText());
         checkBox.setChecked(true);
         assertEquals("checked", checkBox.asText());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void onchangeFires() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
-            + "</head><body>\n"
-            + "<form>\n"
-            + "<input type='checkbox' id='chkbox' onchange='alert(\"foo\");' />\n"
-            + "</form>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"foo"};
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(html, collectedAlerts);
-        final HtmlCheckBoxInput checkbox = page.getHtmlElementById("chkbox");
-        checkbox.setChecked(true);
-
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void setChecked() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
-            + "<form>\n"
-            + "<input id='myCheckbox' type='checkbox' onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
-            + "</form>\n"
-            + "</body></html>";
-        final String secondHtml
-            = "<html><head><title>Second</title></head><body></body></html>";
-
-        final WebClient client = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstHtml);
-        webConnection.setResponse(URL_SECOND, secondHtml);
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-        final HtmlCheckBoxInput radio = page.getHtmlElementById("myCheckbox");
-
-        final HtmlPage secondPage = (HtmlPage) radio.setChecked(true);
-
-        assertEquals("Second", secondPage.getTitleText());
     }
 
     /**
