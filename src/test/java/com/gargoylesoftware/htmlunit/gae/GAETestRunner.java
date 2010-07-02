@@ -24,7 +24,9 @@ import java.util.Set;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
+import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.runners.model.FrameworkMethod;
 
 /**
  * Test runner for GAE support tests. This runner uses a custom class loader that
@@ -101,5 +103,17 @@ public class GAETestRunner extends BlockJUnit4ClassRunner {
         }
 
         return new HashSet<String>(lines);
+    }
+
+    @Override
+    protected void runChild(final FrameworkMethod method, final RunNotifier notifier) {
+        try {
+            // See http://code.google.com/appengine/docs/java/runtime.html#The_Environment
+            System.setProperty("com.google.appengine.runtime.environment", "Production");
+            super.runChild(method, notifier);
+        }
+        finally {
+            System.clearProperty("com.google.appengine.runtime.environment");
+        }
     }
 }
