@@ -76,8 +76,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "foo,")
-    @NotYetImplemented(Browser.IE)
+    @Alerts("foo,")
     public void onchangeFires() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -136,7 +135,6 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "First", FF = "Second")
-    @NotYetImplemented(Browser.IE)
     public void setChecked() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
@@ -159,7 +157,6 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "First", "Second" }, FF = "Second")
-    @NotYetImplemented(Browser.IE)
     public void setChecked2() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"

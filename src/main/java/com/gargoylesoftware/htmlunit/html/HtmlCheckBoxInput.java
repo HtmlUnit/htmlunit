@@ -39,6 +39,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
     private static final long serialVersionUID = 3567976425357413976L;
 
     private boolean defaultCheckedState_;
+    private boolean valueAtFocus_;
 
     /**
      * Creates an instance.
@@ -84,6 +85,10 @@ public class HtmlCheckBoxInput extends HtmlInput {
         }
         else {
             removeAttribute("checked");
+        }
+
+        if (getPage().getWebClient().getBrowserVersion().isIE()) {
+            return getPage();
         }
         return executeOnChangeHandlerIfAppropriate(this);
     }
@@ -160,4 +165,26 @@ public class HtmlCheckBoxInput extends HtmlInput {
         return defaultCheckedState_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void focus() {
+        super.focus();
+        valueAtFocus_ = isChecked();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    void removeFocus() {
+        super.removeFocus();
+
+        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+        if (ie && valueAtFocus_ != isChecked()) {
+            executeOnChangeHandlerIfAppropriate(this);
+        }
+        valueAtFocus_ = isChecked();
+    }
 }
