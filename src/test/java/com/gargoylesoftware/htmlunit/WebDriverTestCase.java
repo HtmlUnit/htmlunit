@@ -179,10 +179,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (getBrowserVersion().isIE()) {
                 return new InternetExplorerDriver();
             }
-            if (getBrowserVersion().getNickname().equals("FF2")) {
-                return new FirefoxDriver(new FirefoxBinary(new File(FF2_BIN_)), new FirefoxProfile());
+            final String ffBinary;
+            if (getBrowserVersion().getBrowserVersionNumeric() == 2) {
+            	ffBinary = FF2_BIN_;
             }
-            return new FirefoxDriver(new FirefoxBinary(new File(FF3_BIN_)), new FirefoxProfile());
+            else {
+            	ffBinary = FF3_BIN_;
+            }
+            if (ffBinary != null) {
+            	return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());
+            }
+            return new FirefoxDriver();
         }
         final WebClient webClient = getWebClient();
         return new HtmlUnitDriver(true) {
@@ -524,7 +531,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     }
                 }
                 else {
-                    for (final Object alert : (List) object) {
+                    for (final Object alert : (List<Object>) object) {
                         collectedAlerts.add(Context.toString(alert));
                     }
                 }
