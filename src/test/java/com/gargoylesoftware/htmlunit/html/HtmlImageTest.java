@@ -18,7 +18,10 @@ import java.net.URL;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
@@ -29,20 +32,21 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlImageTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testIsMapClick() throws Exception {
-        testIsMapClick("img1", false, "?0,0", "?25,30");
-        testIsMapClick("img2", false, "", "");
-        testIsMapClick("img3", true, "", "");
-        testIsMapClick("img3", true, "", "");
+    public void isMapClick() throws Exception {
+        isMapClick("img1", false, "?0,0", "?25,30");
+        isMapClick("img2", false, "", "");
+        isMapClick("img3", true, "", "");
+        isMapClick("img3", true, "", "");
     }
 
-    private void testIsMapClick(final String imgId, final boolean samePage,
+    private void isMapClick(final String imgId, final boolean samePage,
             final String urlSuffixClick, final String urlSuffixClickXY) throws Exception {
 
         final String htmlContent
@@ -75,18 +79,18 @@ public class HtmlImageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testUseMapClick() throws Exception {
-        testUseMapClick(0, 0, "/");
-        testUseMapClick(10, 10, "a.html");
-        testUseMapClick(20, 10, "a.html");
-        testUseMapClick(29, 10, "b.html");
-        testUseMapClick(50, 50, "/");
+    public void useMapClick() throws Exception {
+        useMapClick(0, 0, "/");
+        useMapClick(10, 10, "a.html");
+        useMapClick(20, 10, "a.html");
+        useMapClick(29, 10, "b.html");
+        useMapClick(50, 50, "/");
     }
 
     /**
      * @throws Exception if the test fails
      */
-    private void testUseMapClick(final int x, final int y, final String urlSuffix) throws Exception {
+    private void useMapClick(final int x, final int y, final String urlSuffix) throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<img id='myImg' src='foo.png' usemap='#map1'>\n"
@@ -109,11 +113,8 @@ public class HtmlImageTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testUseMapClick_CircleRadiusPercentage() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-
+    @NotYetImplemented
+    public void useMapClick_CircleRadiusPercentage() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<img id='myImg' src='foo.png' usemap='#map1'>\n"
