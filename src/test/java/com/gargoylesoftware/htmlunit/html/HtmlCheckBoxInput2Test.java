@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
@@ -76,7 +77,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "foo,")
+    @Alerts(FF = "foo,change,")
     public void onchangeFires() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -86,7 +87,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body>\n"
             + "<form>\n"
-            + "<input type='checkbox' id='chkbox' onchange='debug(\"foo\")'>\n"
+            + "<input type='checkbox' id='chkbox' onchange='debug(\"foo\");debug(event.type);'>\n"
             + "</form>\n"
             + "<textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
@@ -102,7 +103,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "foo,", IE = "foo,boo,blur,")
+    @Alerts(FF = "foo,change,", IE = "foo,change,boo,blur,")
     @NotYetImplemented(Browser.FF)
     public void onchangeFires2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -113,7 +114,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body>\n"
             + "<form>\n"
-            + "<input type='checkbox' id='chkbox' onchange='debug(\"foo\")' "
+            + "<input type='checkbox' id='chkbox'"
             + " onChange='debug(\"foo\");debug(event.type);'"
             + " onBlur='debug(\"boo\");debug(event.type);'"
             + ">\n"

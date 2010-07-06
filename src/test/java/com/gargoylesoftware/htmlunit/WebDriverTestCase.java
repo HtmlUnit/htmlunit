@@ -181,13 +181,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             final String ffBinary;
             if (getBrowserVersion().getBrowserVersionNumeric() == 2) {
-            	ffBinary = FF2_BIN_;
+                ffBinary = FF2_BIN_;
             }
             else {
-            	ffBinary = FF3_BIN_;
+                ffBinary = FF3_BIN_;
             }
             if (ffBinary != null) {
-            	return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());
+                return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());
             }
             return new FirefoxDriver();
         }
