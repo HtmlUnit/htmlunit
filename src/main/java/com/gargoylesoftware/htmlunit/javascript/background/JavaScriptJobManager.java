@@ -95,8 +95,9 @@ public interface JavaScriptJobManager extends Serializable {
     JavaScriptJob getEarliestJob();
 
     /**
-     * Runs the provided job.
+     * Runs the provided job if it is the right time for it.
      * @param job the job to run
+     * @return returns true if the job was run.
      */
-    void runSingleJob(final JavaScriptJob job);
+    boolean runSingleJob(final JavaScriptJob job);
 }

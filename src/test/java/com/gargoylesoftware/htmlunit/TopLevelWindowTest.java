@@ -117,8 +117,9 @@ public class TopLevelWindowTest extends WebTestCase {
                 return null;
             }
             /** {@inheritDoc} */
-            public void runSingleJob(final JavaScriptJob job) {
+            public boolean runSingleJob(final JavaScriptJob job) {
                 // Empty
+                return false;
             }
         };
 

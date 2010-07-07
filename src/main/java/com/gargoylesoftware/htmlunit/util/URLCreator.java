@@ -20,6 +20,7 @@ import java.net.URLStreamHandler;
 
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 
 /**
  * Responsible for URL creation.
@@ -34,12 +35,10 @@ abstract class URLCreator {
      * where custom URLStreamHandler is prohibited.
      */
     static URLCreator getCreator() {
-        try {
+        if (!GAEUtils.isGaeMode()) {
             return new URLCreatorStandard();
         }
-        catch (final NoClassDefFoundError e) {
-            return new URLCreatorGAE();
-        }
+        return new URLCreatorGAE();
     }
 
     /**

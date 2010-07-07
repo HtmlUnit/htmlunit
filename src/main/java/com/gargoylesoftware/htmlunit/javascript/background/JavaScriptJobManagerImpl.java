@@ -269,18 +269,17 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /**
-     * Attempts to run the job passed in.
-     * @param givenJob the job to run
+     * {@inheritDoc}
      */
-    public void runSingleJob(final JavaScriptJob givenJob) {
+    public boolean runSingleJob(final JavaScriptJob givenJob) {
         assert givenJob != null;
         JavaScriptJob job = scheduledJobsQ_.peek();
         if (job != givenJob) {
-            return;
+            return false;
         }
         setCurrentlyRunningJob(job);
         if (currentlyRunningJob_ == null) {
-            return;
+            return false;
         }
         job = currentlyRunningJob_;
         final boolean isIntervalJob = job.getPeriod() != null;
@@ -310,5 +309,6 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             LOG.debug("Finished " + intervalJob + "job " + job);
         }
         currentlyRunningJob_ = null;
+        return true;
     }
 }

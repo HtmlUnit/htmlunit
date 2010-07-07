@@ -36,16 +36,32 @@ public class JavaScriptExecutor implements Runnable, Serializable {
 
     private static final long serialVersionUID = 8525230714555970165L;
 
-    /*
-     * Currently, go for a simple implementation
+    /**
+     * A simple class to store a JavaScriptJobManager and its earliest job.
      */
-    private final class JobExecutor {
+    protected final class JobExecutor {
         private final JavaScriptJobManager jobManager_;
         private final JavaScriptJob earliestJob_;
 
         private JobExecutor(final JavaScriptJobManager jobManager, final JavaScriptJob earliestJob) {
             jobManager_ = jobManager;
             earliestJob_ = earliestJob;
+        }
+
+        /**
+         * Returns the earliest job.
+         * @return the earliest job.
+         */
+        protected JavaScriptJob getEarliestJob() {
+            return earliestJob_;
+        }
+
+        /**
+         * Returns the JavaScriptJobManager.
+         * @return the JavaScriptJobManager.
+         */
+        protected JavaScriptJobManager getJobManager() {
+            return jobManager_;
         }
     }
 
@@ -73,7 +89,7 @@ public class JavaScriptExecutor implements Runnable, Serializable {
     /**
      * Starts the eventLoopThread_.
      */
-    private void startThreadIfNeeded() {
+    protected void startThreadIfNeeded() {
         if (eventLoopThread_ == null) {
             eventLoopThread_ = new Thread(this);
             eventLoopThread_.start();
@@ -101,7 +117,11 @@ public class JavaScriptExecutor implements Runnable, Serializable {
         }
     }
 
-    private synchronized JobExecutor getEarliestJob() {
+    /**
+     * Returns the JobExecutor corresponding to the earliest job.
+     * @return the JobExectuor with the earliest job.
+     */
+    protected synchronized JobExecutor getEarliestJob() {
         JobExecutor jobExecutor = null;
         // iterate over the list and find the earliest job to run.
         for (WeakReference<JavaScriptJobManager> jobManagerRef : jobManagerList_) {
@@ -118,6 +138,16 @@ public class JavaScriptExecutor implements Runnable, Serializable {
             }
         }
         return jobExecutor;
+    }
+
+    /**
+     * Executes the jobs in the eventLoop till timeoutMillis expires or the eventLoop becomes empty.
+     * No use in non-GAE mode.
+     * @param timeoutMillis the timeout in milliseconds
+     * @return the number of jobs executed
+     */
+    public int pumpEventLoop(final long timeoutMillis) {
+        return 0;
     }
 
     /** Runs the eventLoop. */

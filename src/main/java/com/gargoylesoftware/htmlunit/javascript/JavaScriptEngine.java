@@ -43,9 +43,11 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.background.GAEJavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
@@ -151,6 +153,14 @@ public class JavaScriptEngine {
         };
 
         getContextFactory().call(action);
+    }
+
+    /**
+     * Returns the JavaScriptExecutor.
+     * @return the JavaScriptExecutor.
+     */
+    public JavaScriptExecutor getJavaScriptExecutor() {
+        return javaScriptExecutor_;
     }
 
     /**
@@ -374,9 +384,35 @@ public class JavaScriptEngine {
      */
     public void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
         if (javaScriptExecutor_ == null) {
-            javaScriptExecutor_ = new JavaScriptExecutor(webClient_);
+            javaScriptExecutor_ = createJavaScriptExecutor();
         }
         javaScriptExecutor_.addWindow(webWindow);
+    }
+
+    /**
+     * Creates the {@link JavaScriptExecutor} that will be used to handle JS.
+     * @return the executor.
+     */
+    protected JavaScriptExecutor createJavaScriptExecutor() {
+        if (GAEUtils.isGaeMode()) {
+            return new GAEJavaScriptExecutor(webClient_);
+        }
+        else {
+            return new JavaScriptExecutor(webClient_);
+        }
+    }
+
+    /**
+     * Executes the jobs in the eventLoop till timeoutMillis expires or the eventLoop becomes empty.
+     * No use in non-GAE mode (see {@link GAEUtils#isGaeMode}.
+     * @param timeoutMillis the timeout in milliseconds
+     * @return the number of jobs executed
+     */
+    public int pumpEventLoop(final long timeoutMillis) {
+        if (javaScriptExecutor_ == null) {
+            return 0;
+        }
+        return javaScriptExecutor_.pumpEventLoop(timeoutMillis);
     }
 
     /**
