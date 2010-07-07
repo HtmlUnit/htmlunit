@@ -144,8 +144,7 @@ public class WebResponseDataTest extends WebServerTestCase {
             builder.append(' ');
         }
         builder.append("Hello World!");
-        final HtmlPage page = loadPage(builder.toString());
-        System.out.println(page.asText());
+        loadPage(builder.toString());
     }
 
 }
