@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -78,6 +80,10 @@ public class XMLHttpRequest extends SimpleScriptable {
     private static final String[] ALL_PROPERTIES_ = {"onreadystatechange", "readyState", "responseText", "responseXML",
         "status", "statusText", "abort", "getAllResponseHeaders", "getResponseHeader", "open", "send",
         "setRequestHeader"};
+
+    private static Collection<String> PROHIBITED_HEADERS_ = Arrays.asList("accept-charset", "accept-encoding",
+        "connection", "content-length", "cookie", "cookie2", "content-transfer-encoding", "date", "expect",
+        "host", "keep-alive", "referer", "te", "trailer", "transfer-encoding", "upgrade", "user-agent", "via");
 
     private int state_;
     private Function stateChangeHandler_;
@@ -519,7 +525,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         }
         catch (final IOException e) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("IOException: returning a network error response.");
+                LOG.debug("IOException: returning a network error response.", e);
             }
             webResponse_ = new NetworkErrorWebResponse(webRequest_);
             setState(STATE_COMPLETED, context);
@@ -534,12 +540,35 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param value the value of the header being set
      */
     public void jsxFunction_setRequestHeader(final String name, final String value) {
+        if (!isAuthorizedHeader(name)) {
+            LOG.warn("Ignoring XMLHttpRequest.setRequestHeader for " + name
+                + ": it is a restricted error");
+            return;
+        }
+
         if (webRequest_ != null) {
             webRequest_.setAdditionalHeader(name, value);
         }
         else {
             throw Context.reportRuntimeError("The open() method must be called before setRequestHeader().");
         }
+    }
+
+    /**
+     * Not all request headers can be set from JavaScript.
+     * @see <a href="http://www.w3.org/TR/XMLHttpRequest/#the-setrequestheader-method">W3C doc</a>
+     * @param name the header name
+     * @return <code>true</code> if the header can be set from JavaScript
+     */
+    static boolean isAuthorizedHeader(final String name) {
+        final String nameLowerCase = name.toLowerCase();
+        if (PROHIBITED_HEADERS_.contains(nameLowerCase)) {
+            return false;
+        }
+        else if (nameLowerCase.startsWith("proxy-") || nameLowerCase.startsWith("sec-")) {
+            return false;
+        }
+        return true;
     }
 
     /**

@@ -1397,4 +1397,27 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void isAuthorizedHeader() throws Exception {
+        assertTrue(XMLHttpRequest.isAuthorizedHeader("Foo"));
+        assertTrue(XMLHttpRequest.isAuthorizedHeader("Content-Type"));
+
+        final String[] headers = {"accept-charset", "accept-encoding",
+            "connection", "content-length", "cookie", "cookie2", "content-transfer-encoding", "date",
+            "expect", "host", "keep-alive", "referer", "te", "trailer", "transfer-encoding", "upgrade",
+            "user-agent", "via" };
+        for (final String header : headers) {
+            assertFalse(XMLHttpRequest.isAuthorizedHeader(header));
+            assertFalse(XMLHttpRequest.isAuthorizedHeader(header.toUpperCase()));
+        }
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-"));
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-Control"));
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-Hack"));
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("Sec-"));
+        assertFalse(XMLHttpRequest.isAuthorizedHeader("Sec-Hack"));
+    }
 }

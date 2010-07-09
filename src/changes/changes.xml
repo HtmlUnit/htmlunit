@@ -5,7 +5,10 @@
     </properties>
 
     <body>
-        <release version="2.8" date="?" description="Bugfixes, (large) binary download, single thread for JavaScript background tasks, HttpClient 4, SOCKS proxy, initial support for FF 3.6">
+        <release version="2.8" date="?" description="Bugfixes, (large) binary download, single thread for JavaScript background tasks, HttpClient 4, SOCKS proxy, initial support for FF 3.6, support for GoogleAppEngine">
+            <action type="fix" dev="mguillem">
+                JavaScript: XMLHttpRequest.setRequestHeader ignores prohibited headers.
+            </action>
             <action type="fix" dev="asashour" issue="3026194">
                 JavaScript: fix 'typeof window'.
             </action>

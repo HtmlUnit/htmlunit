@@ -128,6 +128,39 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     }
 
     /**
+     * Content-Length header is simply ignored by browsers as it
+     * is the browser's responsibility to set it.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void requestHeader_contentLength() throws Exception {
+        requestHeader_contentLength("1234");
+        requestHeader_contentLength("11");
+        requestHeader_contentLength(null);
+    }
+
+    private void requestHeader_contentLength(final String headerValue) throws Exception {
+        final String body = "hello world";
+        final String setHeader = headerValue == null ? ""
+                : "xhr.setRequestHeader('Content-length', 1234);\n";
+        final String html = "<html><body><script>\n"
+            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "xhr.open('POST', 'second.html', false);\n"
+            + "var body = '" + body + "';\n"
+            + "xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');\n"
+            + setHeader
+            + "xhr.send(body);\n"
+            + "</script></body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html);
+
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+        final Map<String, String> headers = lastRequest.getAdditionalHeaders();
+        assertEquals("" + body.length(), headers.get("Content-Length"));
+    }
+
+    /**
      * XHR.open throws an exception if URL parameter is null or empty string.
      * @throws Exception if an error occurs
      */

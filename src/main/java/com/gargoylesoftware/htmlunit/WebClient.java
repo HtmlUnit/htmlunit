@@ -1350,7 +1350,7 @@ public class WebClient implements Serializable {
         webRequest.setUrl(url);
 
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Load response for " + url.toExternalForm());
+            LOG.debug("Load response for " + method + " " + url.toExternalForm());
         }
 
         // If the request settings don't specify a custom proxy, use the default client proxy...
