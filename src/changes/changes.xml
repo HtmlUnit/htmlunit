@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, (large) binary download, single thread for JavaScript background tasks, HttpClient 4, SOCKS proxy, initial support for FF 3.6">
+            <action type="fix" dev="asashour" issue="3026194">
+                JavaScript: fix 'typeof window'.
+            </action>
             <action type="add" dev="asashour" issue="3025318">
                 JavaScript: add dummy implementation of window.pageXOffset and .pageYOffset.
             </action>

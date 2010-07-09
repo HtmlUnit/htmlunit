@@ -567,7 +567,6 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts
     public void onbeforeunload_setToString() throws Exception {
         final String html
             = "<html><body><script>\n"
@@ -836,6 +835,19 @@ public class Window2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("object")
+    public void typeof() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "  alert(typeof window);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts(html);
     }
 
 }
