@@ -64,6 +64,12 @@ public class BrowserRunner extends Suite {
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             final List<String> browsers = WebDriverTestCase.getBrowsersProperties();
             if (WebDriverTestCase.class.isAssignableFrom(klass)) {
+                if (browsers.contains("hu") || browsers.contains("hu-ff2")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, false));
+                }
+                if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
+                }
                 if (browsers.contains("hu") || browsers.contains("hu-ie6")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
                 }
@@ -73,11 +79,11 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
                 }
-                if (browsers.contains("hu") || browsers.contains("hu-ff2")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, false));
+                if (browsers.contains("ff2")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, true));
                 }
-                if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
+                if (browsers.contains("ff3")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, true));
                 }
                 if (browsers.contains("ie6")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, true));
@@ -88,14 +94,14 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ie8")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, true));
                 }
-                if (browsers.contains("ff2")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, true));
-                }
-                if (browsers.contains("ff3")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, true));
-                }
             }
             else {
+                if (browsers.contains("hu") || browsers.contains("hu-ff2")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, false));
+                }
+                if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
+                }
                 if (browsers.contains("hu") || browsers.contains("hu-ie6")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
                 }
@@ -104,12 +110,6 @@ public class BrowserRunner extends Suite {
                 }
                 if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
-                }
-                if (browsers.contains("hu") || browsers.contains("hu-ff2")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, false));
-                }
-                if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
                 }
             }
         }
