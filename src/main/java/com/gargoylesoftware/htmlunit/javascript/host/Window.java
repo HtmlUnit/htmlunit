@@ -1697,4 +1697,36 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public void jsxFunction_stop() {
         //empty
     }
+
+    /**
+     * Returns the value of "pageXOffset" property.
+     * @return the value of "pageXOffset" property
+     */
+    public int jsxGet_pageXOffset() {
+        return 0;
+    }
+
+    /**
+     * Returns the value of "pageYOffset" property.
+     * @return the value of "pageYOffset" property
+     */
+    public int jsxGet_pageYOffset() {
+        return 0;
+    }
+
+    /**
+     * Returns the value of "scrollX" property.
+     * @return the value of "scrollX" property
+     */
+    public int jsxGet_scrollX() {
+        return 0;
+    }
+
+    /**
+     * Returns the value of "scrollY" property.
+     * @return the value of "scrollY" property
+     */
+    public int jsxGet_scrollY() {
+        return 0;
+    }
 }

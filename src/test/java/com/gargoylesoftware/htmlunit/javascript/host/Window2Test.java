@@ -818,4 +818,24 @@ public class Window2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "0", "0", "0", "0" }, IE = { "undefined", "undefined", "undefined", "undefined" })
+    public void pageXOffset() throws Exception {
+        final String html
+            = "<html><body onload='test()'><script>\n"
+            + "function test() {\n"
+            + "  window.scrollBy(5, 10);\n"
+            + "  alert(window.pageXOffset);\n"
+            + "  alert(window.pageYOffset);\n"
+            + "  alert(window.scrollX);\n"
+            + "  alert(window.scrollY);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

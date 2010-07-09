@@ -2926,8 +2926,20 @@
         <property name="outerWidth" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
+        <property name="pageXOffset" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="pageYOffset" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="parent" readable="true" writable="false"/>
         <property name="screen" readable="true" writable="false"/>
+        <property name="scrollX" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="scrollY" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="self" readable="true" writable="false"/>
         <property name="sessionStorage" readable="true" writable="false">
             <browser name="Internet Explorer" min-version="8"/>

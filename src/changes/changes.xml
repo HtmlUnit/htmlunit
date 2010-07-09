@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.8" date="?" description="Bugfixes, (large) binary download, single thread for JavaScript background tasks, HttpClient 4, SOCKS proxy, initial support for FF 3.6">
+            <action type="add" dev="asashour" issue="3025318">
+                JavaScript: add dummy implementation of window.pageXOffset and .pageYOffset.
+            </action>
             <action type="update" dev="mguillem" issue="2962074" due-to="Amit Manjhi">
                 Add support for Google App Engine.
             </action>
