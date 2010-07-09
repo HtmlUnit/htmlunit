@@ -282,4 +282,16 @@ public class CookieManagerTest extends WebDriverTestCase {
         final String[] expectedAlerts = {"my_key="};
         assertEquals(expectedAlerts, collectedAlerts);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("dog=dalmation")
+    public void trailing_slash() throws Exception {
+        final WebDriver driver = getWebDriver();
+        loadPage2(HTML_ALERT_COOKIE, URL_SECOND);
+        driver.manage().addCookie(new org.openqa.selenium.Cookie("dog", "dalmation", "/second/"));
+        loadPageWithAlerts2(HTML_ALERT_COOKIE, URL_SECOND);
+    }
 }
