@@ -156,6 +156,10 @@ public final class MozillaTestGenerator {
             final StringBuilder buffer = new StringBuilder();
             char terminator = line.charAt("String([".length());
             int p0 = "String([\"".length();
+            if (terminator != '"' && terminator != '\'') {
+                p0--;
+                terminator = ']';
+            }
             while (true) {
                 int p1 = p0 + 1;
                 int i = p1;
@@ -175,6 +179,9 @@ public final class MozillaTestGenerator {
                     buffer.append(',');
                 }
                 buffer.append(line.substring(p0, p1));
+                if (terminator != '"' && terminator != '\'') {
+                    break;
+                }
                 if (line.charAt(i + 1) == ']') {
                     break;
                 }
