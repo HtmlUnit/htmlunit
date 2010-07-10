@@ -75,6 +75,9 @@ public enum BrowserVersionFeatures {
     /** */
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 
+    /** Have a default value of body.link, body.vLink, etc. */
+    HTML_BODY_COLOR,
+
     /** Allows multiple elements with the same 'id'. */
     HTMLCOLLECTION_IDENTICAL_IDS,
 
