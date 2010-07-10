@@ -262,7 +262,7 @@ public class HttpWebConnection implements WebConnection {
             }
         }
 
-        if (!webClient_.getBrowserVersion().isIE()) {
+        if (webClient_.getBrowserVersion().hasFeature(BrowserVersionFeatures.HTTP_HEADER_HOST_FIRST)) {
             final int port = webRequest.getUrl().getPort();
             String host = webRequest.getUrl().getHost();
             if (port != 80 && port > 0) {

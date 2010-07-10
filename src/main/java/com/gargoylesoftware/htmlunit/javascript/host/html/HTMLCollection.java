@@ -31,6 +31,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -343,7 +344,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             if (next instanceof DomElement) {
                 final String id = ((DomElement) next).getAttribute("id");
                 if (id != null && id.equals(name)) {
-                    if (getBrowserVersion().isIE() || "FF3".equals(getBrowserVersion().getNickname())) {
+                    if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_IDENTICAL_IDS)) {
                         int totalIDs = 0;
                         for (final Object o : elements) {
                             if (o instanceof DomElement && name.equals(((DomElement) o).getAttribute("id"))) {

@@ -87,7 +87,8 @@ public class HtmlCheckBoxInput extends HtmlInput {
             removeAttribute("checked");
         }
 
-        if (getPage().getWebClient().getBrowserVersion().isIE()) {
+        if (getPage().getWebClient().getBrowserVersion()
+                .hasFeature(BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS)) {
             return getPage();
         }
         return executeOnChangeHandlerIfAppropriate(this);
@@ -181,8 +182,9 @@ public class HtmlCheckBoxInput extends HtmlInput {
     void removeFocus() {
         super.removeFocus();
 
-        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
-        if (ie && valueAtFocus_ != isChecked()) {
+        final boolean fireOnChange = getPage().getWebClient().getBrowserVersion()
+            .hasFeature(BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS);
+        if (fireOnChange && valueAtFocus_ != isChecked()) {
             executeOnChangeHandlerIfAppropriate(this);
         }
         valueAtFocus_ = isChecked();

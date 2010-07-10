@@ -54,6 +54,9 @@ public enum BrowserVersionFeatures {
     /** Triggers "input" event. */
     EVENT_INPUT,
 
+    /** Triggers "onchange" event handler on losing focus. */
+    EVENT_ONCHANGE_LOSING_FOCUS,
+
     /** Triggers "propertychange" event. */
     EVENT_PROPERTY_CHANGE,
 
@@ -71,6 +74,9 @@ public enum BrowserVersionFeatures {
 
     /** */
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
+
+    /** Allows multiple elements with the same 'id'. */
+    HTMLCOLLECTION_IDENTICAL_IDS,
 
     /** Allows invalid 'align' values. */
     HTMLELEMENT_ALIGN_INVALID,
@@ -95,6 +101,9 @@ public enum BrowserVersionFeatures {
 
     /** */
     HTMLSCRIPT_APPLICATION_JAVASCRIPT,
+
+    /** Indicates that "host" HTTP header should be the first. */
+    HTTP_HEADER_HOST_FIRST,
 
     /** Indicates that the browser should ignore contents of inner head elements. */
     IGNORE_CONTENTS_OF_INNER_HEAD,
