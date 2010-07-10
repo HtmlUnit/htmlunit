@@ -53,7 +53,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
         driver.get("http://localhost:" + PORT + "/test");
         final String body = driver.getPageSource().toLowerCase().replaceAll("\\s", "");
-        System.out.println(body);
         assertTrue(body.contains(getExpectedAlerts()[0]));
     }
 
@@ -72,7 +71,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
-            for( Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {
+            for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {
                 writer.write(en.nextElement() + ",");
             }
             writer.close();
