@@ -499,7 +499,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             map.put("A", "inline");
             map.put("CODE", "inline");
             map.put("SPAN", "inline");
-            if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_14)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DISPLAY_DEFAULT)) {
                 map.put("LI", "list-item");
                 map.put("TABLE", "table");
                 map.put("TBODY", "table-row-group");

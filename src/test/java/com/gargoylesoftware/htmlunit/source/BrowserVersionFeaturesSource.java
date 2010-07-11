@@ -87,7 +87,7 @@ public final class BrowserVersionFeaturesSource {
         boolean modified = false;
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
-            if (line.contains(oldName)) {
+            if (line.equals(oldName) || line.contains(oldName + ")") || line.contains(oldName + ",")) {
                 line = line.replace(oldName, newName);
                 lines.set(i, line);
                 modified = true;
@@ -174,4 +174,38 @@ public final class BrowserVersionFeaturesSource {
             }
         }
     }
+
+    /**
+     * Reverses the specified {@link BrowserVersionFeatures} to the other browsers (by modifying only
+     * the configuration files).
+     * For example, if it is currently defined in IE8 and FF3, the BrowserFeatures will be removed from those browsers
+     * configurations and added to the others ones.
+     *
+     * This is useful if you have something like "!browserVersion.hasFeature()" and you need to reverse the condition.
+     *
+     * @param features the feature to reverse
+     * @throws IOException if an error occurs
+     */
+    @SuppressWarnings("unchecked")
+    public void reverse(final BrowserVersionFeatures features) throws IOException {
+        final File propertiesFolder =  new File(root_,
+                "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration");
+        for (final File f : propertiesFolder.listFiles(new FileFilter() {
+            public boolean accept(final File pathname) {
+                return pathname.getName().endsWith(".properties");
+            }
+        })) {
+            final List<String> list = FileUtils.readLines(f);
+            final String name = features.name();
+            if (list.contains(name)) {
+                list.remove(name);
+            }
+            else {
+                list.add(name);
+            }
+            Collections.sort(list);
+            FileUtils.writeLines(f, list);
+        }
+    }
+
 }

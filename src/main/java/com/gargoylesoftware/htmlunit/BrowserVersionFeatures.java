@@ -207,8 +207,8 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     GENERATED_139,
 
-    /** Was originally .isIE(). */
-    GENERATED_14,
+    /** Was originally .isFirefox(). */
+    CSS_DISPLAY_DEFAULT,
 
     /** Was originally .isIE(). */
     GENERATED_140,
