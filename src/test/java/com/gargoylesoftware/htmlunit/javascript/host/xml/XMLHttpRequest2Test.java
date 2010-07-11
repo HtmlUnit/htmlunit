@@ -14,18 +14,29 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
  * Additional tests for {@link XMLHttpRequest} using already WebDriverTestCase.
@@ -378,5 +389,55 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("hello", "text/plain");
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("a=b,0")
+    public void post() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/test1", PostServlet1.class);
+        servlets.put("/test2", PostServlet2.class);
+        startWebServer("./", new String[0], servlets);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/test1");
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Servlet for {@link #post()}.
+     */
+    public static class PostServlet1 extends ServletContentWrapper {
+        private static final long serialVersionUID = -439785252750617301L;
+
+        /** Constructor. */
+        public PostServlet1() {
+            super(getModifiedContent("<html><head><script>\n"
+                    + "function test() {\n"
+                    + "  var xhr = " + XHRInstantiation_ + ";\n"
+                    + "  xhr.open('POST', '/test2?a=b', false);\n"
+                    + "  xhr.send('');\n"
+                    + "  alert(xhr.responseText);\n"
+                    + "}\n"
+                    + "</script></head><body onload='test()'></body></html>"));
+        }
+    }
+
+    /**
+     * Servlet for {@link #post()}.
+     */
+    public static class PostServlet2 extends HttpServlet {
+        private static final long serialVersionUID = 5286696645520397377L;
+
+        @Override
+        protected void doPost(final HttpServletRequest req, final HttpServletResponse resp)
+            throws ServletException, IOException {
+            final Writer writer = resp.getWriter();
+            writer.write(req.getQueryString() + ',' + req.getContentLength());
+            writer.close();
+        }
     }
 }

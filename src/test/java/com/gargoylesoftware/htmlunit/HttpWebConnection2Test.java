@@ -14,17 +14,27 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Map.Entry;
+
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -32,6 +42,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HttpWebConnection2Test extends WebDriverTestCase {
@@ -108,5 +119,43 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "<body>host,user-agent,", IE = "<body>")
+    public void headerOrder() throws Exception {
+        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        servlets.put("/test", HeaderOrderServlet.class);
+        startWebServer("./", null, servlets);
+        final WebDriver driver = getWebDriver();
+
+        driver.get("http://localhost:" + PORT + "/test");
+        final String body = driver.getPageSource().toLowerCase().replaceAll("\\s", "");
+        assertTrue(body.contains(getExpectedAlerts()[0]));
+    }
+
+    /**
+     * Servlet for {@link #headerOrder()}.
+     */
+    public static class HeaderOrderServlet extends HttpServlet {
+
+        private static final long serialVersionUID = -6422333931337496616L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        @SuppressWarnings("unchecked")
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {
+                writer.write(en.nextElement() + ",");
+            }
+            writer.close();
+        }
     }
 }

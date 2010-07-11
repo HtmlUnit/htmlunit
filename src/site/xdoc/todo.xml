@@ -24,7 +24,6 @@
                 <li>JavaScript: isolate NodeList from HTMLCollection, e.g. node.childNodes is NodeList. Recheck live and static lists.</li>
                 <li>JavaScript: object.getClassName() to be browser specific, e.g. document.querySelectorAll() is NodeList in FF, but StaticNodeList in IE8</li>
                 <li>MockWebConnection: to be used in XMLHttpRequest3Test.post()</li>
-                <li>WebDriverTestCase.startWebServer(servlet) and .startWebServer(MockWebConnection) can not work together</li>
             </ol>
         </section>
 

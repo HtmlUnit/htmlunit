@@ -104,6 +104,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String JSON_;
     private boolean useRealBrowser_;
     private boolean writeContentAsBytes_ = false;
+    private static Boolean LAST_TEST_MockWebConnection_;
 
     static List<String> getBrowsersProperties() {
         if (BROWSERS_PROPERTIES_ == null) {
@@ -157,6 +158,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         WEB_DRIVERS_.clear();
         stopWebServer();
+        LAST_TEST_MockWebConnection_ = null;
     }
 
     /**
@@ -211,6 +213,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if a problem occurs
      */
     private void startWebServer(final MockWebConnection mockConnection) throws Exception {
+        if (LAST_TEST_MockWebConnection_ == Boolean.FALSE) {
+            stopWebServer();
+        }
+        LAST_TEST_MockWebConnection_ = Boolean.TRUE;
         if (STATIC_SERVER_ == null) {
             STATIC_SERVER_ = new Server(PORT);
 
@@ -263,6 +269,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected void startWebServer(final String resourceBase, final String[] classpath,
             final Map<String, Class< ? extends Servlet>> servlets) throws Exception {
+        if (LAST_TEST_MockWebConnection_ == Boolean.TRUE) {
+            stopWebServer();
+        }
+        LAST_TEST_MockWebConnection_ = Boolean.FALSE;
         if (STATIC_SERVER_ == null) {
             STATIC_SERVER_ = new Server(PORT);
 
