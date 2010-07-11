@@ -96,7 +96,8 @@ public class CodeStyleTest {
                 singleAlert(lines, relativePath);
                 staticLoggers(lines, relativePath);
                 loggingEnabled(lines, relativePath);
-                webDriverWebClient(lines, relativePath);
+                //webDriverWebClient(lines, relativePath);
+                browserVersion_isIE(lines, relativePath);
             }
         }
     }
@@ -539,8 +540,26 @@ public class CodeStyleTest {
                     webDriver = true;
                 }
                 if (webDriver && (line.contains("getWebClient()") || line.contains("new WebClient("))) {
-                    //addFailure("getWebClient() can not be used for WebDriverTestCase: "
-                    //        + relativePath + ", line: " + index);
+                    addFailure("getWebClient() can not be used for WebDriverTestCase: "
+                            + relativePath + ", line: " + index);
+                }
+                index++;
+            }
+        }
+    }
+
+    /**
+     * Verifies that not invocation of browserVersion.isIE() or .isFirefox().
+     */
+    private void browserVersion_isIE(final List<String> lines, final String relativePath) {
+        if (relativePath.replace('\\', '/').contains("src/main/java")
+                && !relativePath.contains("JavaScriptConfiguration")
+                && !relativePath.contains("BrowserVersionFeatures")) {
+            int index = 1;
+            for (final String line : lines) {
+                if ((line.contains(".isIE()") || line.contains(".isFirefox()"))) {
+                    addFailure(".isIE() and .isFirefox() should not be used, please use .hasFeature(): "
+                            + relativePath + ", line: " + index);
                 }
                 index++;
             }
