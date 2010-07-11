@@ -20,6 +20,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.w3c.dom.ranges.Range;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -44,7 +45,7 @@ public class Selection extends SimpleScriptable {
      */
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
-        final boolean ff = getBrowserVersion().isFirefox();
+        final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_176);
         if (ff && (String.class.equals(hint) || hint == null)) {
             final StringBuilder sb = new StringBuilder();
             for (Range r : getRanges()) {

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import org.apache.commons.lang.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.InputElementFactory;
@@ -329,7 +330,7 @@ public class HTMLInputElement extends FormField {
      * @param align the value of the "align" property
      */
     public void jsxSet_align(final String align) {
-        final boolean ignoreIfNoError = getBrowserVersion().isIE();
+        final boolean ignoreIfNoError = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_84);
         setAlign(align, ignoreIfNoError);
     }
 

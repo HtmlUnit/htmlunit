@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
 import com.gargoylesoftware.htmlunit.html.HtmlAcronym;
@@ -74,7 +75,7 @@ public class HTMLSpanElement extends HTMLElement {
         super.setDomNode(domNode);
         final HtmlElement element = (HtmlElement) domNode;
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.isIE()) {
+        if (browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_90)) {
             if ((element instanceof HtmlAbbreviated && browserVersion.getBrowserVersionNumeric() > 6)
                 || element instanceof HtmlAcronym
                 || element instanceof HtmlAddress

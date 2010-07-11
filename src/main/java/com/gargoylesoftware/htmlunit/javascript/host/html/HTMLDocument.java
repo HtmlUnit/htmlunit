@@ -258,7 +258,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     private DomNode getDomNodeOrNullFromRealDocument() {
         DomNode node = null;
-        final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+        final boolean ie = getWindow().getWebWindow().getWebClient()
+            .getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_51);
         if (ie) {
             final Scriptable scope = getParentScope();
             if (scope instanceof Window) {
@@ -361,7 +362,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (anchors_ == null) {
             anchors_ = new HTMLCollection(this);
             final String xpath;
-            if (getBrowserVersion().isIE()) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_52)) {
                 xpath = ".//a[@name or @id]";
             }
             else {
@@ -449,7 +450,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         final Window window = getWindow(thisObj);
         final BrowserVersion browser = window.getWebWindow().getWebClient().getBrowserVersion();
-        if (browser.isIE()) {
+        if (browser.hasFeature(BrowserVersionFeatures.GENERATED_53)) {
             return window.getDocument();
         }
         throw Context.reportRuntimeError("Function can't be used detached from document");
@@ -804,7 +805,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public HTMLCollection jsxGet_all() {
         if (all_ == null) {
             all_ = new HTMLCollectionTags(this);
-            all_.setAvoidObjectDetection(!getBrowserVersion().isIE());
+            all_.setAvoidObjectDetection(!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_54));
             all_.init(getDomNodeOrDie(), ".//*");
         }
         return all_;
@@ -872,7 +873,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Closes the document implicitly, i.e. flushes the <tt>document.write</tt> buffer (IE only).
      */
     private void implicitCloseIfNecessary() {
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_55);
         if (!writeInCurrentDocument_ && ie) {
             try {
                 jsxFunction_close();
@@ -896,7 +897,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public Object jsxFunction_appendChild(final Object childObject) {
-        if (limitAppendChildToIE() && !getBrowserVersion().isIE()) {
+        if (limitAppendChildToIE() && !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_56)) {
             // Firefox does not allow insertion at the document level.
             throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy.");
         }
@@ -929,7 +930,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         Object result = NOT_FOUND;
 
         // IE can handle HTML, but it takes only the first tag found
-        if (tagName.startsWith("<") && getBrowserVersion().isIE()) {
+        if (tagName.startsWith("<") && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_57)) {
             final Pattern p = Pattern.compile("<(\\w+)(\\s+[^>]*)?>");
             final Matcher m = p.matcher(tagName);
             if (m.find()) {
@@ -982,7 +983,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         implicitCloseIfNecessary();
         Object result = null;
         try {
-            final boolean caseSensitive = getBrowserVersion().isFirefox();
+            final boolean caseSensitive = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_159);
             final HtmlElement htmlElement = this.<HtmlPage>getDomNodeOrDie().getHtmlElementById(id, caseSensitive);
             final Object jsElement = getScriptableFor(htmlElement);
             if (jsElement == NOT_FOUND) {
@@ -999,7 +1000,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to null
             final BrowserVersion browser = getBrowserVersion();
-            if (browser.isIE()) {
+            if (browser.hasFeature(BrowserVersionFeatures.GENERATED_58)) {
                 final HTMLCollection elements = jsxFunction_getElementsByName(id);
                 result = elements.get(0, elements);
                 if (result instanceof UniqueTag) {
@@ -1037,7 +1038,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public HTMLCollection jsxFunction_getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
         final HTMLCollection collection = new HTMLCollection(this);
-        if (getBrowserVersion().isIE() && (StringUtils.isEmpty(elementName) || elementName.equals("null"))) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_59)
+                && (StringUtils.isEmpty(elementName) || elementName.equals("null"))) {
             return collection;
         }
         // Null must me changed to '' for proper collection initialization.
@@ -1056,7 +1058,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @Override
     protected Object getWithPreemption(final String name) {
         final HtmlPage page = (HtmlPage) getDomNodeOrNull();
-        if (page == null || getBrowserVersion().isFirefox()) {
+        if (page == null || getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_160)) {
             return NOT_FOUND;
         }
         return getIt(name);
@@ -1068,7 +1070,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // XPath operations are very expensive, and this method gets invoked quite a bit.
         // This little shortcut shaves ~35% off the build time (3 min -> 2 min, as of 8/10/2007).
         final List<HtmlElement> elements;
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_60);
         if (ie) {
             elements = page.getElementsByIdAndOrName(name);
         }
@@ -1112,7 +1114,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        if (getBrowserVersion().isFirefox()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_161)) {
             return getIt(name);
         }
         return NOT_FOUND;
@@ -1125,7 +1127,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public HTMLElement jsxGet_body() {
         final HtmlPage page = getHtmlPage();
         // for IE, the body of a not yet loaded page is null whereas it already exists for FF
-        if (getBrowserVersion().isIE() && (page.getEnclosingWindow() instanceof FrameWindow)) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_61)
+                && (page.getEnclosingWindow() instanceof FrameWindow)) {
             final HtmlPage enclosingPage = (HtmlPage) page.getEnclosingWindow().getParentWindow().getEnclosedPage();
             if (WebClient.URL_ABOUT_BLANK.equals(page.getWebResponse().getWebRequest().getUrl())
                     && enclosingPage.getReadyState() != DomNode.READY_STATE_COMPLETE) {
@@ -1213,7 +1216,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
             domain_ = url.getHost();
             final BrowserVersion browser = getBrowserVersion();
-            if (browser.isFirefox()) {
+            if (browser.hasFeature(BrowserVersionFeatures.GENERATED_162)) {
                 domain_ = domain_.toLowerCase();
             }
         }
@@ -1254,7 +1257,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
         // IE (at least 6) doesn't allow to set domain of about:blank
         if (WebClient.URL_ABOUT_BLANK == getPage().getWebResponse().getWebRequest().getUrl()
-            && browserVersion.isIE()) {
+            && browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_62)) {
             throw Context.reportRuntimeError("Illegal domain value, cannot set domain from about:blank to: \""
                     + newDomain + "\"");
         }
@@ -1271,7 +1274,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         // Netscape down shifts the case of the domain
-        if (getBrowserVersion().isFirefox()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_163)) {
             domain_ = newDomain.toLowerCase();
         }
         else {
@@ -1384,7 +1387,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public Object jsxFunction_elementFromPoint(final int x, final int y) {
         // minimal implementation to make simple unit test happy for FF and IE
-        if (getBrowserVersion().isFirefox() && (x <= 0 || y <= 0)) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_164) && (x <= 0 || y <= 0)) {
             return null;
         }
         return jsxGet_body();
@@ -1469,7 +1472,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return <code>true></code> if the command is supported
      */
     public boolean jsxFunction_queryCommandSupported(final String cmd) {
-        final boolean ff = getBrowserVersion().isFirefox();
+        final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_165);
         final String mode = jsxGet_designMode();
         if (!ff) {
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
@@ -1488,7 +1491,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return <code>true</code> if the command can be successfully executed
      */
     public boolean jsxFunction_queryCommandEnabled(final String cmd) {
-        final boolean ff = getBrowserVersion().isFirefox();
+        final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_166);
         final String mode = jsxGet_designMode();
         if (!ff) {
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
@@ -1509,7 +1512,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return <tt>true</tt> if the command was successful, <tt>false</tt> otherwise
      */
     public boolean jsxFunction_execCommand(final String cmd, final boolean userInterface, final Object value) {
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_63);
         if ((ie && !containsCaseInsensitive(EXECUTE_CMDS_IE, cmd))
             || (!ie && !containsCaseInsensitive(EXECUTE_CMDS_FF, cmd))) {
 
@@ -1551,7 +1554,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public SimpleScriptable jsxGet_doctype() {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_64)) {
             return null;
         }
         return super.jsxGet_doctype();

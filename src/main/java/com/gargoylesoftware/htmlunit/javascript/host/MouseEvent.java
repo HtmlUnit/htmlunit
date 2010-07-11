@@ -18,6 +18,7 @@ import java.util.LinkedList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -194,7 +195,7 @@ public class MouseEvent extends UIEvent {
      * @return the button code
      */
     public int jsxGet_button() {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_116)) {
             //In IE7: oncontextmenu event.button is 0
             if (jsxGet_type().equals(TYPE_CONTEXT_MENU)) {
                 return 0;

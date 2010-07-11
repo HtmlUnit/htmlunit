@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+
 /**
  * A JavaScript object for a CSSStyleRule.
  *
@@ -59,7 +61,7 @@ public class CSSStyleRule extends CSSRule {
             if (fixedName.startsWith(".") || fixedName.startsWith("#")) {
                 // nothing
             }
-            else if (getBrowserVersion().isIE()) {
+            else if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_27)) {
                 fixedName = fixedName.toUpperCase();
             }
             else {

@@ -22,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -160,7 +161,7 @@ public class Location extends SimpleScriptable {
         }
         try {
             URL url = page.getWebResponse().getWebRequest().getUrl();
-            final boolean encodeHash = !getBrowserVersion().isIE();
+            final boolean encodeHash = !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_114);
             final String hash = getHash(encodeHash);
             if (hash != null) {
                 url = UrlUtils.getUrlWithNewRef(url, hash);
@@ -269,7 +270,7 @@ public class Location extends SimpleScriptable {
             if (hash.startsWith("#")) {
                 hash = hash.substring(1);
             }
-            final boolean decodeHash = !getBrowserVersion().isIE();
+            final boolean decodeHash = !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_115);
             if (decodeHash) {
                 hash = UrlUtils.decode(hash);
             }
@@ -345,7 +346,7 @@ public class Location extends SimpleScriptable {
      */
     public String jsxGet_pathname() {
         if (WebClient.URL_ABOUT_BLANK == getUrl()) {
-            if (getBrowserVersion().isFirefox()) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_175)) {
                 return "";
             }
             return "/blank";

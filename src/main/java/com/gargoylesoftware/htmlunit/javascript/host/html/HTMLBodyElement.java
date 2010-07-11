@@ -62,7 +62,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @Override
     public void setDefaults(final ComputedCSSStyleDeclaration style) {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_41)) {
             style.setDefaultLocalStyleAttribute("margin", "15px 10px");
             style.setDefaultLocalStyleAttribute("padding", "0px");
         }
@@ -113,7 +113,8 @@ public class HTMLBodyElement extends HTMLElement {
     public String jsxGet_background() {
         final HtmlElement node = getDomNodeOrDie();
         String background = node.getAttribute("background");
-        if (background != DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().isFirefox()) {
+        if (background != DomElement.ATTRIBUTE_NOT_DEFINED
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_158)) {
             try {
                 final HtmlPage page = (HtmlPage) node.getPage();
                 background = page.getFullyQualifiedUrl(background).toExternalForm();

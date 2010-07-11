@@ -275,7 +275,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
 
         final boolean isXmlPage = node_ != null && node_.getOwnerDocument() instanceof XmlPage;
 
-        final boolean isIE = getBrowserVersion().isIE();
+        final boolean isIE = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_45);
 
         for (int i = 0; i < response.size(); i++) {
             final DomNode element = (DomNode) response.get(i);
@@ -354,7 +354,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                         if (totalIDs > 1) {
                             final HTMLCollectionTags collection =
                                 new HTMLCollectionTags((SimpleScriptable) getParentScope());
-                            collection.setAvoidObjectDetection(!getBrowserVersion().isIE());
+                            collection.setAvoidObjectDetection(
+                                    !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_46));
                             collection.init(node_, ".//*[@id='" + id + "']");
                             return collection;
                         }
@@ -374,7 +375,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                     }
                     return getScriptableForElement(window);
                 }
-                if (getBrowserVersion().isIE() && window instanceof FrameWindow
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_47) && window instanceof FrameWindow
                         && ((FrameWindow) window).getFrameElement().getAttribute("id").equals(name)) {
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("Property \"" + name + "\" evaluated (by id) to " + window);
@@ -447,7 +448,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     private Object nullIfNotFound(final Object object) {
         if (object == NOT_FOUND) {
-            if (getBrowserVersion().isIE()) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_48)) {
                 return null;
             }
             return Context.getUndefinedValue();
@@ -557,7 +558,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         if (name.equals("length")) {
             return true;
         }
-        if (!getBrowserVersion().isIE()) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_49)) {
             final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_3);
             for (final String functionName : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 if (name.equals(functionName)) {
@@ -579,7 +580,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         final List<Object> elements = getElements();
         CollectionUtils.transform(elements, transformer_);
 
-        if (!getBrowserVersion().isIE()) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_50)) {
             final int length = getElements().size();
             for (int i = 0; i < length; i++) {
                 idList.add(Integer.toString(i));

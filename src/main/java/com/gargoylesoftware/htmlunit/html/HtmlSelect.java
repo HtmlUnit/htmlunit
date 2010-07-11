@@ -24,6 +24,7 @@ import java.util.Map;
 
 import org.w3c.dom.Node;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -258,7 +259,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             return setSelectedAttribute(getOptionByValue(optionValue), isSelected);
         }
         catch (final ElementNotFoundException e) {
-            if (getPage().getWebClient().getBrowserVersion().isIE()) {
+            if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_11)) {
                 for (final HtmlOption o : getSelectedOptions()) {
                     o.setSelected(false);
                 }

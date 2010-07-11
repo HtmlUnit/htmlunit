@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -141,7 +142,7 @@ public class Attr extends Node {
      */
     @Override
     public Node jsxGet_lastChild() {
-        if (getBrowserVersion().isFirefox()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_151)) {
             final DomText text = new DomText(getDomNodeOrDie().getPage(), jsxGet_nodeValue());
             return (Node) text.getScriptObject();
         }

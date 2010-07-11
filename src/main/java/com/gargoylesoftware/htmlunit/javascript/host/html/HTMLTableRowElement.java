@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -69,7 +70,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         DomNode row = getDomNodeOrDie();
         final HtmlTable table = ((HtmlTableRow) row).getEnclosingTable();
         if (table == null) { // a not attached document.createElement('TR')
-            if (!getBrowserVersion().isIE()) {
+            if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_108)) {
                 return -1;
             }
             // IE 6, 7 and 8 return really strange values: large integers that are not constants
@@ -158,7 +159,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         if (index != Undefined.instance) {
             position = (int) Context.toNumber(index);
         }
-        else if (getBrowserVersion().isFirefox()) {
+        else if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_172)) {
             throw Context.reportRuntimeError("No enough arguments");
         }
 

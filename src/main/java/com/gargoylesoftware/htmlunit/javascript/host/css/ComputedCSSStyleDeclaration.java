@@ -271,7 +271,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (StringUtils.isEmpty(value)) {
             value = "transparent";
         }
-        else if (getBrowserVersion().isFirefox()) {
+        else if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_152)) {
             value = toRGBColor(value);
         }
         return value;
@@ -499,7 +499,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             map.put("A", "inline");
             map.put("CODE", "inline");
             map.put("SPAN", "inline");
-            if (!getBrowserVersion().isIE()) {
+            if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_14)) {
                 map.put("LI", "list-item");
                 map.put("TABLE", "table");
                 map.put("TBODY", "table-row-group");
@@ -1220,7 +1220,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return "auto";
         }
         final String defaultWidth;
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_15)) {
             defaultWidth = "auto";
         }
         else {
@@ -1281,7 +1281,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 // Block elements take up 100% of the parent's width.
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
                 final String parentWidth = getWindow().jsxFunction_getComputedStyle(parentJS, null).jsxGet_width();
-                if (getBrowserVersion().isIE() && "auto".equals(parentWidth)) {
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_16) && "auto".equals(parentWidth)) {
                     width = Window.WINDOW_WIDTH;
                 }
                 else {
@@ -1363,7 +1363,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final int contentHeight = getContentHeight();
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_17);
         final boolean explicitHeightSpecified = (super.jsxGet_height().length() > 0);
 
         int height;
@@ -1406,7 +1406,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return height2_;
         }
 
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_18);
         final int defaultHeight = (ie ? 15 : 20);
 
         int height = pixelValue(getElement(), new CssValue(Window.WINDOW_HEIGHT) {
@@ -1890,7 +1890,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @see #pixelString(HTMLElement, CssValue)
      */
     protected String pixelString(final String value) {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_19)) {
             return value;
         }
         if (value.endsWith("px")) {
@@ -1910,7 +1910,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     protected String pixelString(final HTMLElement element, final CssValue value) {
         final String s = value.get(element);
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_20)) {
             return s;
         }
         if (s.endsWith("px")) {

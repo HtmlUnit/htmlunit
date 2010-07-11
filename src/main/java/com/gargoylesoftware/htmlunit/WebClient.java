@@ -425,7 +425,7 @@ public class WebClient implements Serializable {
             oldPage.cleanUp();
         }
         Page newPage = null;
-        if (windows_.contains(webWindow) || getBrowserVersion().isIE()) {
+        if (windows_.contains(webWindow) || getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_150)) {
             newPage = pageCreator_.createPage(webResponse, webWindow);
 
             if (windows_.contains(webWindow)) {

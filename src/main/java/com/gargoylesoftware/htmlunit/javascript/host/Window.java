@@ -39,6 +39,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -682,7 +683,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param newValue the new value
      */
     public void jsxSet_opener(Object newValue) {
-        if (getBrowserVersion().isFirefox() && newValue != opener_) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_177) && newValue != opener_) {
             if (opener_ == null || newValue == null || newValue == Context.getUndefinedValue()) {
                 newValue = null;
             }
@@ -1063,7 +1064,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     private Object getHandlerForJavaScript(final String eventName) {
         Object handler = getEventListenersContainer().getEventHandlerProp(eventName);
-        if (handler == null && !getBrowserVersion().isIE()) {
+        if (handler == null && !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_129)) {
             handler = Scriptable.NOT_FOUND;
         }
         return handler;
@@ -1080,7 +1081,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * {@inheritDoc}
      */
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (!getBrowserVersion().isIE()) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_130)) {
             throw Context.reportRuntimeError("Window is not a function.");
         }
         if (args.length > 0) {
@@ -1099,7 +1100,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * {@inheritDoc}
      */
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        if (!getBrowserVersion().isIE()) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_131)) {
             throw Context.reportRuntimeError("Window is not a function.");
         }
         return null;
@@ -1147,7 +1148,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 final WebWindow webWindow = ((Window) result).getWebWindow();
                 result = getProxy(webWindow);
             }
-            else if (result instanceof HTMLUnknownElement && getBrowserVersion().isIE()) {
+            else if (result instanceof HTMLUnknownElement && getBrowserVersion()
+                    .hasFeature(BrowserVersionFeatures.GENERATED_132)) {
                 final HtmlElement unknownElement = ((HTMLUnknownElement) result).getDomNodeOrDie();
                 if (unknownElement.getNodeName().equals("xml")) {
                     final XMLDocument document = ActiveXObject.buildXMLDocument(getWebWindow());
@@ -1293,7 +1295,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the id of the created interval
      */
     public int jsxFunction_setInterval(final Object code, int timeout, final Object language) {
-        if (timeout == 0 && getBrowserVersion().isIE()) {
+        if (timeout == 0 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_133)) {
             return jsxFunction_setTimeout(code, timeout, language);
         }
         if (timeout < MIN_TIMER_DELAY) {

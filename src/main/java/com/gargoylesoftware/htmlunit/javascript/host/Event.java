@@ -20,6 +20,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -406,7 +407,7 @@ public class Event extends SimpleScriptable {
      */
     public Object jsxGet_keyCode() {
         if (keyCode_ == null) {
-            if (getBrowserVersion().isFirefox()) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_155)) {
                 return 0;
             }
             return Undefined.instance;
@@ -573,7 +574,7 @@ public class Event extends SimpleScriptable {
      * @return <tt>true</tt> if this event has been aborted
      */
     public boolean isAborted(final ScriptResult result) {
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_38);
         return ScriptResult.isFalse(result) || (!ie && preventDefault_) || (ie && Boolean.FALSE.equals(returnValue_));
     }
 

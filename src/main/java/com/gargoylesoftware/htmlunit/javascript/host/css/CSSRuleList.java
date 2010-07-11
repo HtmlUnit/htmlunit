@@ -19,6 +19,7 @@ import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
@@ -82,7 +83,7 @@ public class CSSRuleList extends SimpleScriptable {
         final List<String> idList = new ArrayList<String>();
 
         final int length = jsxGet_length();
-        if (!getBrowserVersion().isIE()) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_21)) {
             for (int i = 0; i < length; i++) {
                 idList.add(Integer.toString(i));
             }

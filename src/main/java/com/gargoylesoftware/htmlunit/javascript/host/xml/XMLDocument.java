@@ -26,6 +26,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 import org.w3c.dom.Node;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -174,7 +175,7 @@ public class XMLDocument extends Document {
         }
         else if (domNode instanceof DomAttr) {
             final Attr attribute;
-            if (getPage().getWebClient().getBrowserVersion().isIE()) {
+            if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_134)) {
                 attribute = new XMLAttr();
             }
             else {

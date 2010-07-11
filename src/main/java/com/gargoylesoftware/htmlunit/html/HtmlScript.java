@@ -187,7 +187,8 @@ public class HtmlScript extends HtmlElement {
 
         boolean execute = false;
         if (namespaceURI == null && "src".equals(qualifiedName)) {
-            final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+            final boolean ie =
+                getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_5);
             if (ie || (oldValue.length() == 0 && getFirstChild() == null)) {
                 // Always execute if IE; if FF, only execute if the "src" attribute
                 // was undefined and there was no inline code.
@@ -215,7 +216,8 @@ public class HtmlScript extends HtmlElement {
         final PostponedAction action = new PostponedAction(getPage()) {
             @Override
             public void execute() {
-                final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+                final boolean ie =
+                    getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_6);
                 if (ie) {
                     if (!isDeferred()) {
                         if (!getSrcAttribute().equals("//:")) {
@@ -262,7 +264,7 @@ public class HtmlScript extends HtmlElement {
             return;
         }
 
-        final boolean ie = getPage().getWebClient().getBrowserVersion().isIE();
+        final boolean ie = getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_7);
         if (!executeIfDeferred && isDeferred() && ie) {
             return;
         }
@@ -324,7 +326,7 @@ public class HtmlScript extends HtmlElement {
 
         final HtmlPage page = (HtmlPage) getPage();
         final BrowserVersion browser = page.getWebClient().getBrowserVersion();
-        final boolean ie = browser.isIE();
+        final boolean ie = browser.hasFeature(BrowserVersionFeatures.GENERATED_8);
         if (!executeIfDeferred && isDeferred() && ie) {
             return;
         }
@@ -379,7 +381,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     private void executeEventIfNotIE(final String type) {
-        if (!getPage().getWebClient().getBrowserVersion().isIE()) {
+        if (!getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_9)) {
             final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
             final Event event = new Event(HtmlScript.this, type);
             script.executeEvent(event);
@@ -470,7 +472,7 @@ public class HtmlScript extends HtmlElement {
      * @param state this script ready state
      */
     protected void setAndExecuteReadyState(final String state) {
-        if (getPage().getWebClient().getBrowserVersion().isIE()) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_10)) {
             setReadyState(state);
             final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
             final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);

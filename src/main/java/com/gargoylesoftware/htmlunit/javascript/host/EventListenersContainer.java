@@ -20,10 +20,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
@@ -149,7 +151,8 @@ public class EventListenersContainer implements Serializable {
         if (!event.applies(node)) {
             return null;
         }
-        final boolean ie = jsNode_.getWindow().getWebWindow().getWebClient().getBrowserVersion().isIE();
+        final boolean ie = jsNode_.getWindow().getWebWindow().getWebClient()
+            .getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_40);
         ScriptResult allResult = null;
         final List<Function> handlers = getHandlers(event.jsxGet_type(), useCapture);
         if (handlers != null && !handlers.isEmpty()) {

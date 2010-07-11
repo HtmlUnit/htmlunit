@@ -78,7 +78,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      */
     private String[] getValidVAlignValues() {
         String[] valid;
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_91)) {
             valid = VALIGN_VALID_VALUES_IE;
         }
         else {

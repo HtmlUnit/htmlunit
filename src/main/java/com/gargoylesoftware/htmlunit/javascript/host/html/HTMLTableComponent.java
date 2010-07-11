@@ -79,7 +79,7 @@ public class HTMLTableComponent extends HTMLElement {
      */
     private String[] getValidVAlignValues() {
         String[] valid;
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_104)) {
             valid = VALIGN_VALID_VALUES_IE;
         }
         else {

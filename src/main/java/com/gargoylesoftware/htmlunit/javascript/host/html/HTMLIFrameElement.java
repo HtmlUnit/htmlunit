@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
@@ -147,7 +148,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return the value of the "width" property
      */
     public String jsxGet_width() {
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_82);
         final Boolean returnNegativeValues = ie ? true : null;
         return getWidthOrHeight("width", returnNegativeValues);
     }
@@ -165,7 +166,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return the value of the "width" property
      */
     public String jsxGet_height() {
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_83);
         final Boolean returnNegativeValues = ie ? true : null;
         return getWidthOrHeight("height", returnNegativeValues);
     }

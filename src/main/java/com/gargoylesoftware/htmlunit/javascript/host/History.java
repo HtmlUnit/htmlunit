@@ -19,6 +19,7 @@ import java.io.IOException;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -47,7 +48,7 @@ public class History extends SimpleScriptable {
     @Override
     public Object[] getIds() {
         Object[] ids = super.getIds();
-        if (getBrowserVersion().isFirefox()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_156)) {
             final int len = getWindow().getWebWindow().getHistory().getLength();
             if (len > 0) {
                 final Object[] allIds = new Object[ids.length + len];
@@ -66,7 +67,7 @@ public class History extends SimpleScriptable {
      */
     @Override
     public boolean has(final int index, final Scriptable start) {
-        if (getBrowserVersion().isFirefox()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_157)) {
             final History h = (History) start;
             if (index >= 0 && index < h.jsxGet_length()) {
                 return true;

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import org.w3c.dom.NamedNodeMap;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -59,7 +60,7 @@ public class XMLSerializer extends SimpleScriptable {
         }
         if (root instanceof Element) {
             final StringBuilder buffer = new StringBuilder();
-            final boolean isIE = getBrowserVersion().isIE();
+            final boolean isIE = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_139);
             toXml(1, root.getDomNodeOrDie(), buffer, isIE);
             if (isIE) {
                 buffer.append('\r').append('\n');

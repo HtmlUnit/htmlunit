@@ -83,7 +83,7 @@ public class HTMLTextAreaElement extends FormField {
             cols = Integer.parseInt(s);
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().isFirefox()) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_173)) {
                 cols = -1;
             }
             else {
@@ -106,7 +106,7 @@ public class HTMLTextAreaElement extends FormField {
             }
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().isIE()) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_110)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
             i = 0;
@@ -125,7 +125,7 @@ public class HTMLTextAreaElement extends FormField {
             rows = Integer.parseInt(s);
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().isFirefox()) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_174)) {
                 rows = -1;
             }
             else {
@@ -148,7 +148,7 @@ public class HTMLTextAreaElement extends FormField {
             }
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().isIE()) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_111)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
             i = 0;

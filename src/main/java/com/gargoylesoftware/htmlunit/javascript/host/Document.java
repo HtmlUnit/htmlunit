@@ -22,6 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomComment;
@@ -137,7 +138,7 @@ public class Document extends EventNode {
      */
     public String jsxGet_designMode() {
         if (designMode_ == null) {
-            if (getBrowserVersion().isIE()) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_30)) {
                 if (getWindow().getWebWindow() instanceof FrameWindow) {
                     designMode_ = "Inherit";
                 }
@@ -157,7 +158,7 @@ public class Document extends EventNode {
      * @param mode a value which indicates whether or not the document can be edited
      */
     public void jsxSet_designMode(final String mode) {
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_31);
         if (ie) {
             if (!"on".equalsIgnoreCase(mode) && !"off".equalsIgnoreCase(mode) && !"inherit".equalsIgnoreCase(mode)) {
                 throw Context.reportRuntimeError("Invalid document.designMode value '" + mode + "'.");
@@ -364,7 +365,8 @@ public class Document extends EventNode {
         try {
             final BrowserVersion browserVersion = getBrowserVersion();
 
-            if (tagName.startsWith("<") && tagName.endsWith(">") && browserVersion.isFirefox()) {
+            if (tagName.startsWith("<") && tagName.endsWith(">")
+                    && browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_153)) {
                 tagName = tagName.substring(1, tagName.length() - 1);
                 if (!tagName.matches("\\w+")) {
                     LOG.error("Unexpected exception occurred while parsing HTML snippet");
@@ -403,7 +405,7 @@ public class Document extends EventNode {
      */
     public Object jsxFunction_createElementNS(final String namespaceURI, final String qualifiedName) {
         final org.w3c.dom.Element element;
-        if (getBrowserVersion().isFirefox()
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_154)
                 && "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
             // simple hack, no need to implement the XUL objects (at least in a first time)
             element = new HtmlDivision(namespaceURI, qualifiedName, getPage(), null);
@@ -429,7 +431,7 @@ public class Document extends EventNode {
             exp = "//*";
         }
         else {
-            if (getBrowserVersion().isIE()) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_32)) {
                 exp = "//*[lower-case(local-name()) = '" + tagName.toLowerCase() + "']";
             }
             else {

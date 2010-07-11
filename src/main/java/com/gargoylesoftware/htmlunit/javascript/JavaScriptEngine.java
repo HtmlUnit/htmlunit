@@ -181,7 +181,7 @@ public class JavaScriptEngine {
 
         // remove some objects, that Rhino defines in top scope but that we don't want
         deleteProperties(window, "javax", "org", "com", "edu", "net", "JavaAdapter", "JavaImporter", "Continuation");
-        if (browserVersion.isIE()) {
+        if (browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_144)) {
             deleteProperties(window, "Packages", "java", "getClass", "XML", "XMLList", "Namespace", "QName");
         }
 
@@ -199,7 +199,7 @@ public class JavaScriptEngine {
                 final ScriptableObject prototype = configureClass(config, window);
                 if (config.isJsObject()) {
                     // for FF, place object with prototype property in Window scope
-                    if (!browserVersion.isIE()) {
+                    if (!browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_145)) {
                         final SimpleScriptable obj = config.getHostClass().newInstance();
                         prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
                         obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
@@ -270,7 +270,7 @@ public class JavaScriptEngine {
         removePrototypeProperties(window, "Date", "toISOString", "toJSON");
 
         // in IE, not all standard methods exists
-        if (browserVersion.isIE()) {
+        if (browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_146)) {
             deleteProperties(window, "isXMLName", "uneval");
             removePrototypeProperties(window, "Object", "__defineGetter__", "__defineSetter__", "__lookupGetter__",
                     "__lookupSetter__", "toSource");
@@ -352,7 +352,7 @@ public class JavaScriptEngine {
         }
 
         int attributes = ScriptableObject.EMPTY;
-        if (webClient_.getBrowserVersion().isIE()) {
+        if (webClient_.getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_147)) {
             attributes = ScriptableObject.DONTENUM;
         }
         // the functions

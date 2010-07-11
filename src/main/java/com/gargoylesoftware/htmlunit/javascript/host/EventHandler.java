@@ -20,6 +20,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -48,7 +49,8 @@ public class EventHandler extends BaseFunction {
         eventName_ = eventName;
 
         final String functionSignature;
-        if (node.getPage().getEnclosingWindow().getWebClient().getBrowserVersion().isIE()) {
+        if (node.getPage().getEnclosingWindow().getWebClient()
+                .getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_39)) {
             functionSignature = "function()";
         }
         else {

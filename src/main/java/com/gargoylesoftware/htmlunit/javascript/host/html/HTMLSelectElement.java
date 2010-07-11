@@ -19,6 +19,7 @@ import java.util.List;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
@@ -80,7 +81,7 @@ public class HTMLSelectElement extends FormField {
      * for Internet Explorer: the index where the element should be placed (optional).
      */
     public void jsxFunction_add(final HTMLOptionElement newOptionObject, final Object arg2) {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_89)) {
             add_IE(newOptionObject, arg2);
         }
         else {
@@ -223,7 +224,8 @@ public class HTMLSelectElement extends FormField {
     public void jsxSet_selectedIndex(final int index) {
         final HtmlSelect htmlSelect = getHtmlSelect();
 
-        if (index != 0 && getBrowserVersion().isFirefox() && (index < -1 || index >= htmlSelect.getOptionSize())) {
+        if (index != 0 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_171)
+                && (index < -1 || index >= htmlSelect.getOptionSize())) {
             throw Context.reportRuntimeError("Invalid index for select node: " + index);
         }
 

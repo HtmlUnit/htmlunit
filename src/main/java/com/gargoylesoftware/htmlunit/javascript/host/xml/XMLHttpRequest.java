@@ -149,7 +149,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         state_ = state;
 
         //Firefox doesn't trigger onreadystatechange handler for sync requests
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_135);
         if (stateChangeHandler_ != null && (ie || async_)) {
             if (context == null) {
                 context = Context.getCurrentContext();
@@ -236,7 +236,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      *                if <tt>null</tt>, the current thread's context is used.
      */
     private void processError(Context context) {
-        if (errorHandler_ != null && !getBrowserVersion().isIE()) {
+        if (errorHandler_ != null && !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_136)) {
             if (context == null) {
                 context = Context.getCurrentContext();
             }
@@ -296,7 +296,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             try {
                 final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow());
                 final XMLDocument doc;
-                if (getBrowserVersion().isIE()) {
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_137)) {
                     doc = ActiveXObject.buildXMLDocument(null);
                 }
                 else {
@@ -430,7 +430,8 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     private boolean isSameOrigin(final URL originUrl, final URL newUrl) {
-        if (getBrowserVersion().isIE() && "about".equals(newUrl.getProtocol())) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_138)
+                && "about".equals(newUrl.getProtocol())) {
             return true;
         }
         return originUrl.getHost().equals(newUrl.getHost());

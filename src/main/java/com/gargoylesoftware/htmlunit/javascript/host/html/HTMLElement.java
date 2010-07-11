@@ -43,6 +43,7 @@ import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -329,7 +330,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     public String jsxGet_namespaceURI() {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_65)) {
             return getDomNodeOrDie().getNamespaceURI();
         }
         if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
@@ -396,7 +397,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     protected String fixAttributeName(final String attributeName) {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_66)) {
             if ("className".equals(attributeName)) {
                 return "class";
             }
@@ -525,7 +526,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         getDomNodeOrDie().setAttribute(name, value);
 
         //FF: call corresponding event handler jsxSet_onxxx if found
-        if (getBrowserVersion().isFirefox()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_167)) {
             try {
                 final Method method = getClass().getMethod("jsxSet_" + name, new Class[] {Object.class});
                 final String source = "function(){" + value + "}";
@@ -686,7 +687,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the "clientHeight" attribute
      */
     public int jsxGet_clientHeight() {
-        final boolean includePadding = !getBrowserVersion().isIE();
+        final boolean includePadding = !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_67);
         final ComputedCSSStyleDeclaration style = getWindow().jsxFunction_getComputedStyle(this, null);
         return style.getCalculatedHeight(false, includePadding);
     }
@@ -696,7 +697,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the "clientWidth" attribute
      */
     public int jsxGet_clientWidth() {
-        final boolean includePadding = !getBrowserVersion().isIE();
+        final boolean includePadding = !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_68);
         final ComputedCSSStyleDeclaration style = getWindow().jsxFunction_getComputedStyle(this, null);
         return style.getCalculatedWidth(false, includePadding);
     }
@@ -782,7 +783,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         else if (html) {
             // Start the tag name. IE does it in uppercase, FF in lowercase.
             final HtmlElement element = (HtmlElement) node;
-            final boolean ie = getBrowserVersion().isIE();
+            final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_69);
             String tag = element.getTagName();
             if (ie) {
                 tag = tag.toUpperCase();
@@ -828,7 +829,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public void jsxSet_innerHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_70);
 
         if (ie && INNER_HTML_READONLY_IN_IE.contains(domNode.getNodeName())) {
             throw Context.reportRuntimeError("innerHTML is read-only for tag " + domNode.getNodeName());
@@ -876,7 +877,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         //if the parentNode has null parentNode in IE,
         //create a DocumentFragment to be the parentNode's parentNode.
-        if (domNode.getParentNode() == null && getBrowserVersion().isIE()) {
+        if (domNode.getParentNode() == null && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_71)) {
             final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
             fragment.appendChild(domNode);
         }
@@ -1752,7 +1753,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
         final ComputedCSSStyleDeclaration style = htmlElement.jsxGet_currentStyle();
         final String position = style.getPositionWithInheritance();
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_72);
         final boolean staticPos = "static".equals(position);
         final boolean fixedPos = "fixed".equals(position);
         final boolean useTables = ((ie && (staticPos || fixedPos)) || (!ie && staticPos));
@@ -2100,7 +2101,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     public String jsxGet_prefix() {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_73)) {
             return "";
         }
         return null;
@@ -2260,7 +2261,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 }
             }
             catch (final NumberFormatException e) {
-                if (getBrowserVersion().isIE()) {
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_74)) {
                     s = "";
                 }
             }
@@ -2280,7 +2281,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (value.endsWith("px")) {
             value = value.substring(0, value.length() - 2);
         }
-        if (getBrowserVersion().isIE() && value.length() > 0) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_75) && value.length() > 0) {
             boolean error = false;
             if (!value.matches("\\d+%")) {
                 try {
@@ -2358,7 +2359,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected void setAlign(String align, final boolean ignoreIfNoError) {
         align = align.toLowerCase();
-        final boolean ff = getBrowserVersion().isFirefox();
+        final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_168);
         if (ff || align.equals("center") || align.equals("justify") || align.equals("left") || align.equals("right")) {
             if (!ignoreIfNoError) {
                 getDomNodeOrDie().setAttribute("align", align);
@@ -2403,7 +2404,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the "ch" property
      */
     protected String getCh() {
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_76);
         if (ie) {
             return ch_;
         }
@@ -2419,7 +2420,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param ch the value of the "ch" property
      */
     protected void setCh(final String ch) {
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_77);
         if (ie) {
             ch_ = ch;
         }
@@ -2433,7 +2434,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the "chOff" property
      */
     protected String getChOff() {
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_78);
         if (ie) {
             return chOff_;
         }
@@ -2445,7 +2446,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param chOff the value of the "chOff" property
      */
     protected void setChOff(String chOff) {
-        final boolean ie = getBrowserVersion().isIE();
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_79);
         if (ie) {
             chOff_ = chOff;
         }

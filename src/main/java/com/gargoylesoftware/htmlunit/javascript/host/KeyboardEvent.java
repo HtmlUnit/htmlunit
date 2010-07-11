@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
@@ -396,7 +397,7 @@ public class KeyboardEvent extends UIEvent {
     public KeyboardEvent(final DomNode domNode, final String type, final int character,
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         super(domNode, type);
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_113)) {
             if (jsxGet_type().equals(Event.TYPE_KEY_PRESS)) {
                 setKeyCode(character);
             }

@@ -398,7 +398,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 final ContentCondition cc = (ContentCondition) condition;
                 return element.asText().contains(cc.getData());
             case Condition.SAC_LANG_CONDITION:
-                if (browserVersion.isIE()) {
+                if (browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_28)) {
                     return false;
                 }
                 final String lcLang = ((LangCondition) condition).getLang();
@@ -426,7 +426,7 @@ public class CSSStyleSheet extends SimpleScriptable {
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
             final AttributeCondition condition, final HtmlElement element) {
-        if (browserVersion.isIE()) {
+        if (browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_29)) {
             return false;
         }
 

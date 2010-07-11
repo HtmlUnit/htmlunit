@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -139,7 +140,8 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     private boolean useRecursiveAttributeForIE() {
-        return getBrowserVersion().isIE() && this.<DomNode>getDomNodeOrDie() instanceof HtmlElement;
+        return getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_148)
+            && this.<DomNode>getDomNodeOrDie() instanceof HtmlElement;
     }
 
     /**

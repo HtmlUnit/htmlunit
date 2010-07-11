@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+
 /**
  * Base class for list-type elements (<tt>ul</tt>, <tt>ol</tt>, <tt>dir</tt>, etc).
  *
@@ -52,7 +54,7 @@ public class HTMLListElement extends HTMLElement {
      */
     @Override
     public Object jsxFunction_getAttribute(final String attributeName, final Integer flags) {
-        if ("compact".equals(attributeName) && getBrowserVersion().isIE()) {
+        if ("compact".equals(attributeName) && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_85)) {
             return jsxGet_compact();
         }
         return super.jsxFunction_getAttribute(attributeName, flags);

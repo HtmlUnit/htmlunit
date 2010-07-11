@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.ScriptException;

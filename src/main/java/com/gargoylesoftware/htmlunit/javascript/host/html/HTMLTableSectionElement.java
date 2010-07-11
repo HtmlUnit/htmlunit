@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
 
 /**
@@ -65,7 +66,7 @@ public class HTMLTableSectionElement extends RowContainer {
      */
     private String[] getValidVAlignValues() {
         String[] valid;
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_109)) {
             valid = VALIGN_VALID_VALUES_IE;
         }
         else {

@@ -18,6 +18,7 @@ import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
 
@@ -61,7 +62,7 @@ public class HTMLTableElement extends RowContainer {
      * @param o the caption
      */
     public void jsxSet_caption(final Object o) {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_105)) {
             throw Context.reportRuntimeError("Can't set caption");
         }
         else if (!(o instanceof HTMLTableCaptionElement)) {
@@ -93,7 +94,7 @@ public class HTMLTableElement extends RowContainer {
      * @param o the tFoot
      */
     public void jsxSet_tFoot(final Object o) {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_106)) {
             throw Context.reportRuntimeError("Can't set tFoot");
         }
         else if (!(o instanceof HTMLTableSectionElement
@@ -126,7 +127,7 @@ public class HTMLTableElement extends RowContainer {
      * @param o the tHead
      */
     public void jsxSet_tHead(final Object o) {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_107)) {
             throw Context.reportRuntimeError("Can't set tHead");
         }
         else if (!(o instanceof HTMLTableSectionElement

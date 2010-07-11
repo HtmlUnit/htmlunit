@@ -167,7 +167,7 @@ public class CookieManager implements Serializable {
     /**
      * Updates the specified HTTP state's cookie configuration according to the current cookie settings.
      * @param state the HTTP state to update
-     * @see #updateFromState(HttpState)
+     * @see #updateFromState(CookieStore)
      */
     protected synchronized void updateState(final CookieStore state) {
         if (!cookiesEnabled_) {
@@ -182,7 +182,7 @@ public class CookieManager implements Serializable {
     /**
      * Updates the current cookie settings from the specified HTTP state's cookie configuration.
      * @param state the HTTP state to update from
-     * @see #updateState(HttpState)
+     * @see #updateState(CookieStore)
      */
     protected synchronized void updateFromState(final CookieStore state) {
         if (!cookiesEnabled_) {

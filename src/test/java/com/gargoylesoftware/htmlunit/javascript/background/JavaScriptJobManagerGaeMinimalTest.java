@@ -14,14 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.gae.GAETestRunner;
-
-import junit.framework.Assert;
-
 import static org.junit.Assert.assertEquals;
+import junit.framework.Assert;
 
 import org.apache.commons.lang.mutable.MutableInt;
 import org.easymock.EasyMock;
@@ -29,6 +23,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.gae.GAETestRunner;
 
 /**
  * Minimal tests for {@link JavaScriptJobManagerImpl} on GoogleAppEngine.

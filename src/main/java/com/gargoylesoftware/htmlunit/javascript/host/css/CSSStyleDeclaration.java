@@ -37,6 +37,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.ErrorHandler;
 import org.w3c.css.sac.InputSource;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -152,7 +153,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         jsElement_ = htmlElement;
         setDomNode(htmlElement.getDomNodeOrNull(), false);
         // If an IE behavior was specified in the style, apply the behavior.
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_22)) {
             for (final StyleElement element : getStyleMap(true).values()) {
                 if ("behavior".equals(element.getName())) {
                     try {
@@ -2709,7 +2710,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param opacity the new attribute
      */
     public void jsxSet_opacity(final String opacity) {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_23)) {
             setStyleAttribute("opacity", opacity);
         }
         else if (com.gargoylesoftware.htmlunit.util.StringUtils.isFloat(opacity, true) || opacity.length() == 0) {
@@ -4131,7 +4132,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     public Object jsxGet_zIndex() {
         final String value = getStyleAttribute("zIndex", true);
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_24)) {
             if (value == null || value.length() == 0) {
                 return 0;
             }
@@ -4192,7 +4193,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param zIndex the new attribute
      */
     public void jsxSet_zIndex(final Object zIndex) {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_25)) {
             setRoundedStyleAttribute("zIndex", zIndex);
         }
         else {
@@ -4758,7 +4759,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         }
         try {
             final float floatValue = Float.parseFloat(value);
-            if (getBrowserVersion().isIE()) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_26)) {
                 value = Integer.toString((int) floatValue) + "px";
             }
             else {

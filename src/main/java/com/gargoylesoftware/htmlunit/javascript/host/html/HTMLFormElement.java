@@ -162,7 +162,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     public String jsxGet_action() {
         String action = getHtmlForm().getActionAttribute();
-        if (getBrowserVersion().isFirefox()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_169)) {
             try {
                 action = ((HtmlPage) getHtmlForm().getPage()).getFullyQualifiedUrl(action).toExternalForm();
             }
@@ -422,7 +422,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * {@inheritDoc}
      */
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (!getBrowserVersion().isIE()) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_80)) {
             throw Context.reportRuntimeError("Not a function.");
         }
         if (args.length > 0) {
@@ -441,7 +441,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * {@inheritDoc}
      */
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        if (!getBrowserVersion().isIE()) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_81)) {
             throw Context.reportRuntimeError("Not a function.");
         }
         return null;

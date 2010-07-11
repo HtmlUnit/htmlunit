@@ -146,7 +146,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
                     source = source.replaceFirst("<!--", "// <!--");
                 }
                 // IE ignores the last line containing uncommented -->
-                if (browserVersion_.isIE() && sourceCodeTrimmed.endsWith("-->")) {
+                if (browserVersion_.hasFeature(BrowserVersionFeatures.GENERATED_140)
+                        && sourceCodeTrimmed.endsWith("-->")) {
                     final int lastDoubleSlash = source.lastIndexOf("//");
                     final int lastNewLine = Math.max(source.lastIndexOf('\n'), source.lastIndexOf('\r'));
                     if (lastNewLine > lastDoubleSlash) {
@@ -164,7 +165,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             //    .preProcess(page, source, sourceName, lineno, null);
 
             // PreProcess IE Conditional Compilation if needed
-            if (browserVersion_.isIE()) {
+            if (browserVersion_.hasFeature(BrowserVersionFeatures.GENERATED_141)) {
                 final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
                 source = ieCCPreProcessor.preProcess(page, source, sourceName, lineno, null);
 //                sourceCode = IEWeirdSyntaxScriptPreProcessor.getInstance()
@@ -277,9 +278,9 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER:
                 return true;
             case Context.FEATURE_PARENT_PROTO_PROPERTIES:
-                return !browserVersion_.isIE();
+                return !browserVersion_.hasFeature(BrowserVersionFeatures.GENERATED_142);
             case Context.FEATURE_NON_ECMA_GET_YEAR:
-                return browserVersion_.isIE();
+                return browserVersion_.hasFeature(BrowserVersionFeatures.GENERATED_143);
             case Context.FEATURE_HTMLUNIT_WRITE_READONLY_PROPERTIES:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.SET_READONLY_PROPERTIES);
             case Context.FEATURE_HTMLUNIT_JS_CATCH_JAVA_EXCEPTION:

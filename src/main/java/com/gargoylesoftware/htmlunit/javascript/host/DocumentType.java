@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 
 /**
@@ -77,7 +78,7 @@ public class DocumentType extends Node {
      * @return entities
      */
     public String jsxGet_entities() {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_33)) {
             return "";
         }
         return null;
@@ -88,7 +89,7 @@ public class DocumentType extends Node {
      * @return notations
      */
     public String jsxGet_notations() {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_34)) {
             return "";
         }
         return null;

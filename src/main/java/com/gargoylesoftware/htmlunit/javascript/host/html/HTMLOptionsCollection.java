@@ -18,6 +18,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -129,7 +130,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @return {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        if (!getBrowserVersion().isIE() && name.equals("childNodes")) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_87) && name.equals("childNodes")) {
             return NOT_FOUND;
         }
         // If the name was NOT_FOUND on the prototype, then just drop through
@@ -202,7 +203,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
                 final HtmlOption option = (HtmlOption) HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
                         htmlSelect_.getPage(), HtmlOption.TAG_NAME, null);
                 htmlSelect_.appendOption(option);
-                if (!getBrowserVersion().isIE()) {
+                if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_88)) {
                     option.appendChild(new DomText(option.getPage(), ""));
                 }
             }

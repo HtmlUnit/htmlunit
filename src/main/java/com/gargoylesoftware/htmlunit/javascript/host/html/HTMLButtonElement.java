@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.javascript.host.FormField;
 
@@ -51,7 +52,7 @@ public class HTMLButtonElement extends FormField {
      * @param newType the new type to set
      */
     public void jsxSet_type(final String newType) {
-        if (getBrowserVersion().isIE()) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_44)) {
             throw Context.reportRuntimeError("Object doesn't support this action");
         }
         getDomNodeOrDie().setAttribute("type", newType);

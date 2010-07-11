@@ -510,7 +510,7 @@ public final class HTMLParser {
         private static XMLParserConfiguration createConfiguration(final WebClient webClient) {
             final BrowserVersion browserVersion = webClient.getBrowserVersion();
             // for IE we need a special scanner that will be able to understand conditional comments
-            if (browserVersion.isIE()) {
+            if (browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_1)) {
                 return new HTMLConfiguration() {
                     @Override
                     protected HTMLScanner createDocumentScanner() {
@@ -682,7 +682,7 @@ public final class HTMLParser {
         public void characters(final char[] ch, final int start, final int length) throws SAXException {
             if ((characters_ == null || characters_.length() == 0)
                     && new String(ch, start, length).trim().length() == 0
-                    && page_.getWebClient().getBrowserVersion().isIE()) {
+                    && page_.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_2)) {
 
                 DomNode node = currentNode_.getLastChild();
                 if (currentNode_ instanceof HTMLElement.ProxyDomNode) {
@@ -789,7 +789,8 @@ public final class HTMLParser {
         public void comment(final char[] ch, final int start, final int length) {
             handleCharacters();
             final String data = String.valueOf(ch, start, length);
-            if (!data.startsWith("[CDATA") || !page_.getWebClient().getBrowserVersion().isIE()) {
+            if (!data.startsWith("[CDATA")
+                    || !page_.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_3)) {
                 final DomComment comment = new DomComment(page_, data);
                 currentNode_.appendChild(comment);
             }

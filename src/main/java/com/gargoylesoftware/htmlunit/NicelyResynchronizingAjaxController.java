@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.lang.ref.WeakReference;
-import java.io.ObjectInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.lang.ref.WeakReference;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

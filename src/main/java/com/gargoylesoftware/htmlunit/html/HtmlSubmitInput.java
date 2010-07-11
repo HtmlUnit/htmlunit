@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -54,7 +55,8 @@ public class HtmlSubmitInput extends HtmlInput {
     HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-        if (getPage().getWebClient().getBrowserVersion().isIE() && !hasAttribute("value")) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_12)
+                && !hasAttribute("value")) {
             setAttribute("value", DEFAULT_VALUE);
         }
     }

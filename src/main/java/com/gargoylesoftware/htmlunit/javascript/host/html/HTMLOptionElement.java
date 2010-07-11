@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -80,7 +81,8 @@ public class HTMLOptionElement extends FormChild {
      */
     public String jsxGet_value() {
         String value = getDomNodeOrNull().getAttribute("value");
-        if (value == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().isFirefox()) {
+        if (value == DomElement.ATTRIBUTE_NOT_DEFINED
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_170)) {
             value = getDomNodeOrNull().getText();
         }
         return value;

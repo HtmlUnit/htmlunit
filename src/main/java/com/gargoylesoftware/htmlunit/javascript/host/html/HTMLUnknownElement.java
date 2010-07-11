@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -42,7 +43,7 @@ public class HTMLUnknownElement extends HTMLElement {
     @Override
     public String jsxGet_nodeName() {
         final Page page = getDomNodeOrDie().getPage();
-        if (page instanceof XmlPage || (getBrowserVersion().isIE()
+        if (page instanceof XmlPage || (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_112)
             && ((HtmlPage) page).getNamespaces().containsKey(getDomNodeOrDie().getPrefix()))) {
             return getDomNodeOrDie().getLocalName();
         }
