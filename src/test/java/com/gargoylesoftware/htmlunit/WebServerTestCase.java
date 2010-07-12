@@ -64,6 +64,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         server_.setHandler(handlers);
         server_.setHandler(resourceHandler);
         server_.start();
+        server_.join();
     }
 
     /**
@@ -93,6 +94,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         context.setClassLoader(loader);
         server_.setHandler(context);
         server_.start();
+        server_.join();
     }
 
     /**
@@ -129,6 +131,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         context.setClassLoader(loader);
         server_.setHandler(context);
         server_.start();
+        server_.join();
     }
 
     /**

@@ -247,6 +247,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             context.addServlet(MockWebConnectionServlet.class, "/*");
             STATIC_SERVER_.setHandler(context);
             STATIC_SERVER_.start();
+            STATIC_SERVER_.join();
         }
         MockWebConnectionServlet.MockConnection_ = mockConnection;
         MockWebConnectionServlet.WriteContentAsBytes_ = writeContentAsBytes_;
@@ -297,6 +298,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             context.setClassLoader(loader);
             STATIC_SERVER_.setHandler(context);
             STATIC_SERVER_.start();
+            STATIC_SERVER_.join();
         }
     }
 
