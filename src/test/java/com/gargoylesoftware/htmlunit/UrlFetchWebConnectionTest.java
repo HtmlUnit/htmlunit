@@ -81,11 +81,11 @@ public class UrlFetchWebConnectionTest extends WebDriverTestCase {
         final WebRequest referenceRequest = getPostRequest(FormEncodingType.URL_ENCODED);
 
         //TODO: mostly Jetty 7.1.5 issue
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         getWebClient().setWebConnection(new UrlFetchWebConnection(getWebClient()));
         final WebRequest newRequest = getPostRequest(FormEncodingType.URL_ENCODED);
 
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         // compare the two requests
         compareRequests(referenceRequest, newRequest);
     }
