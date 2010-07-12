@@ -36,6 +36,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that document.createEvent() initializes the target property. This is what FF2 does but not FF3. */
     CREATEEVENT_INITALIZES_TARGET,
 
+    /** Was originally .isFirefox(). */
+    CSS_DISPLAY_DEFAULT,
+
     /** */
     DIALOGWINDOW_REFERER,
 
@@ -206,9 +209,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_139,
-
-    /** Was originally .isFirefox(). */
-    CSS_DISPLAY_DEFAULT,
 
     /** Was originally .isIE(). */
     GENERATED_140,
