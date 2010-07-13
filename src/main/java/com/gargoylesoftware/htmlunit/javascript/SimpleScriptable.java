@@ -279,10 +279,10 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
     public Object getDefaultValue(final Class< ? > hint) {
         if (String.class.equals(hint) || hint == null) {
             // TODO: shouldn't we handle this with BrowserVersion.hasFeature?
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_149)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JAVASCRIPT_OBJECT_ONLY)) {
                 return "[object]"; // the super helpful IE solution
             }
-            else if (getBrowserVersion().getBrowserVersionNumeric() >= 3) { // Firefox 3
+            else if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JAVASCRIPT_OBJECT_PREFIX)) {
                 return "[object " + getClassName() + "]";
             }
             else {

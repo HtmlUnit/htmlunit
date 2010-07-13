@@ -238,9 +238,6 @@ public enum BrowserVersionFeatures {
     GENERATED_148,
 
     /** Was originally .isIE(). */
-    GENERATED_149,
-
-    /** Was originally .isIE(). */
     GENERATED_15,
 
     /** Was originally .isIE(). */
@@ -606,6 +603,9 @@ public enum BrowserVersionFeatures {
     /** */
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 
+    /* */
+    HTMLABBREVIATED,
+
     /** Allows multiple elements with the same 'id'. */
     HTMLCOLLECTION_IDENTICAL_IDS,
 
@@ -633,6 +633,9 @@ public enum BrowserVersionFeatures {
     /** */
     HTMLSCRIPT_APPLICATION_JAVASCRIPT,
 
+    /** Runs <script src="javascript:'[code]'">. */
+    HTMLSCRIPT_SRC_JAVASCRIPT,
+
     /** Have a default value of body.link, body.vLink, etc. */
     HTML_BODY_COLOR,
 
@@ -644,6 +647,12 @@ public enum BrowserVersionFeatures {
 
     /** */
     JAVASCRIPT_DEFERRED,
+
+    /** Always "[object]". */
+    JAVASCRIPT_OBJECT_ONLY,
+
+    /** Evaluates to "[object Element]". */
+    JAVASCRIPT_OBJECT_PREFIX,
 
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,

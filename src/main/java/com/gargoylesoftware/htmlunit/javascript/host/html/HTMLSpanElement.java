@@ -74,9 +74,9 @@ public class HTMLSpanElement extends HTMLElement {
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
         final HtmlElement element = (HtmlElement) domNode;
-        final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_90)) {
-            if ((element instanceof HtmlAbbreviated && browserVersion.getBrowserVersionNumeric() > 6)
+        final BrowserVersion browser = getBrowserVersion();
+        if (browser.hasFeature(BrowserVersionFeatures.GENERATED_90)) {
+            if ((element instanceof HtmlAbbreviated && browser.hasFeature(BrowserVersionFeatures.HTMLABBREVIATED))
                 || element instanceof HtmlAcronym
                 || element instanceof HtmlAddress
                 || element instanceof HtmlBidirectionalOverride
@@ -106,7 +106,7 @@ public class HTMLSpanElement extends HTMLElement {
                 || element instanceof HtmlVariable) {
                 ActiveXObject.addProperty(this, "cite", true, true);
             }
-            if ((element instanceof HtmlAbbreviated && browserVersion.getBrowserVersionNumeric() > 6)
+            if ((element instanceof HtmlAbbreviated && browser.hasFeature(BrowserVersionFeatures.HTMLABBREVIATED))
                     || element instanceof HtmlAcronym
                     || element instanceof HtmlBold
                     || element instanceof HtmlBidirectionalOverride

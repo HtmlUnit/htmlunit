@@ -549,7 +549,7 @@ public class CodeStyleTest {
     }
 
     /**
-     * Verifies that not invocation of browserVersion.isIE() or .isFirefox().
+     * Verifies that not invocation of browserVersion.isIE(), .isFirefox() or .getBrowserVersionNumeric().
      */
     private void browserVersion_isIE(final List<String> lines, final String relativePath) {
         if (relativePath.replace('\\', '/').contains("src/main/java")
@@ -559,6 +559,13 @@ public class CodeStyleTest {
             for (final String line : lines) {
                 if ((line.contains(".isIE()") || line.contains(".isFirefox()"))) {
                     addFailure(".isIE() and .isFirefox() should not be used, please use .hasFeature(): "
+                            + relativePath + ", line: " + index);
+                }
+                if (line.contains(".getBrowserVersionNumeric()")
+                        && !relativePath.contains("IEConditionalCommentExpressionEvaluator")
+                        && !relativePath.contains("IEConditionalCompilationScriptPreProcessor")
+                        && !relativePath.contains("Window.java")) {
+                    addFailure(".getBrowserVersionNumeric() should not be used, please use .hasFeature(): "
                             + relativePath + ", line: " + index);
                 }
                 index++;

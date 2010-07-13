@@ -339,7 +339,7 @@ public class HtmlScript extends HtmlElement {
         if (src != ATTRIBUTE_NOT_DEFINED) {
             if (src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // <script src="javascript:'[code]'"></script>
-                if (!ie || browser.getBrowserVersionNumeric() != 7) {
+                if (browser.hasFeature(BrowserVersionFeatures.HTMLSCRIPT_SRC_JAVASCRIPT)) {
                     String code = StringUtils.removeStart(src, JavaScriptURLConnection.JAVASCRIPT_PREFIX).trim();
                     final int len = code.length();
                     if (len > 2) {
