@@ -603,7 +603,7 @@ public enum BrowserVersionFeatures {
     /** */
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 
-    /* */
+    /** */
     HTMLABBREVIATED,
 
     /** Allows multiple elements with the same 'id'. */
