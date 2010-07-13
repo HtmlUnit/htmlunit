@@ -40,18 +40,17 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.eclipse.jetty.http.security.Constraint;
-import org.eclipse.jetty.security.ConstraintMapping;
-import org.eclipse.jetty.security.ConstraintSecurityHandler;
-import org.eclipse.jetty.security.HashLoginService;
-import org.eclipse.jetty.security.LoginService;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.webapp.WebAppClassLoader;
-import org.eclipse.jetty.webapp.WebAppContext;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.mortbay.jetty.Server;
+import org.mortbay.jetty.security.Constraint;
+import org.mortbay.jetty.security.ConstraintMapping;
+import org.mortbay.jetty.security.HashUserRealm;
+import org.mortbay.jetty.security.SecurityHandler;
+import org.mortbay.jetty.webapp.WebAppClassLoader;
+import org.mortbay.jetty.webapp.WebAppContext;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -235,13 +234,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 constraintMapping.setConstraint(constraint);
                 constraintMapping.setPathSpec("/*");
 
-                final LoginService loginService =
-                    new HashLoginService("MyRealm", "./src/test/resources/realm.properties");
-
-                final ConstraintSecurityHandler securityHandler = new ConstraintSecurityHandler();
-                securityHandler.setConstraintMappings(Arrays.asList(new ConstraintMapping[] {constraintMapping}));
-                securityHandler.setLoginService(loginService);
-                context.setHandler(securityHandler);
+                final SecurityHandler securityHandler = new SecurityHandler();
+                securityHandler.setUserRealm(new HashUserRealm("MyRealm", "./src/test/resources/realm.properties"));
+                securityHandler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
+                context.addHandler(securityHandler);
             }
 
             context.addServlet(MockWebConnectionServlet.class, "/*");
