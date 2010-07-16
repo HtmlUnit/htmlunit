@@ -3129,8 +3129,7 @@
         </function>
     </class>
 
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDOMParseError"
-        jsConstructor="jsConstructor" JSObject="true">
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDOMParseError" JSObject="true">
         <browser name="Internet Explorer"/>
         <property name="errorCode" readable="true" writable="false"/>
         <property name="filepos" readable="true" writable="false"/>
@@ -3202,8 +3201,7 @@
         <function name="snapshotItem"/>
     </class>
 
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.XSLTemplate"
-        jsConstructor="jsConstructor" JSObject="true">
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.XSLTemplate" JSObject="true">
         <browser name="Internet Explorer"/>
         <property name="stylesheet" readable="true" writable="true"/>
         <function name="createProcessor"/>
