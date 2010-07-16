@@ -1330,4 +1330,23 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         assertEquals(date, cookie.getExpires());
     }
 
+    /**
+     * Regression test for bug 3030247: expired cookie was saved.
+     * http://sourceforge.net/tracker/?func=detail&aid=3030247&group_id=47038&atid=448266
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "", "test2=1", "" })
+    public void writeCookieExpired() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "alert(document.cookie);\n"
+            + "document.cookie = 'test2=1';\n"
+            + "alert(document.cookie);\n"
+            + "document.cookie = 'test2=;expires=Fri, 02-Jan-1970 00:00:00 GMT';\n"
+            + "alert(document.cookie);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
