@@ -30,13 +30,6 @@ public class XSLTemplate extends SimpleScriptable {
     private Node stylesheet_;
 
     /**
-     * JavaScript constructor.
-     */
-    public void jsConstructor() {
-        // Empty.
-    }
-
-    /**
      * Sets the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
      * @param node the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template
      */

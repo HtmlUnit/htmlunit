@@ -66,14 +66,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * JavaScript constructor. This must be declared in every JavaScript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    public final void jsConstructor() {
-        // Empty.
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
