@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.client.CookieStore;
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Unit tests for {@link CookieManager}.
@@ -256,6 +258,22 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader2);
 
         setExpectedAlerts("first=1; second=2");
+        loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second=2")
+    public void setCookieExpired() throws Exception {
+        final Date aBitLater = new Date(new Date().getTime() + 60 * 60 * 1000); // one hour later
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;expires=Fri, 02-Jan-1970 00:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie",
+            "second=2;expires=" + StringUtils.formatHttpDate(aBitLater)));
+        getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader1);
+
         loadPageWithAlerts2(getDefaultUrl());
     }
 

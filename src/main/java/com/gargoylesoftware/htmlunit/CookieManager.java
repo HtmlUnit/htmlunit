@@ -18,6 +18,7 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -146,7 +147,11 @@ public class CookieManager implements Serializable {
      */
     public synchronized void addCookie(final Cookie cookie) {
         cookies_.remove(cookie);
-        cookies_.add(cookie);
+
+        // don't add expired cookie
+        if (cookie.getExpires() == null || cookie.getExpires().after(new Date())) {
+            cookies_.add(cookie);
+        }
     }
 
     /**
