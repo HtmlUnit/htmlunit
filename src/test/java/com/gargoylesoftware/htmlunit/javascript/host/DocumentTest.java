@@ -14,12 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument.EMPTY_COOKIE_NAME;
-import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
-
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -27,7 +23,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -42,8 +37,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.util.Cookie;
 
 /**
  * Tests for {@link Document}.
@@ -1391,158 +1384,6 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void cookie_read() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final String html
-            = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
-            + "    var cookieSet = document.cookie.split('; ');\n"
-            + "    var setSize = cookieSet.length;\n"
-            + "    var crumbs;\n"
-            + "    var x=0;\n"
-            + "    for (x=0;((x<setSize)); x++) {\n"
-            + "        crumbs = cookieSet[x].split('=');\n"
-            + "        alert (crumbs[0]);\n"
-            + "        alert (crumbs[1]);\n"
-            + "    } \n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
-            + "</body></html>";
-
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, html);
-        webClient.setWebConnection(webConnection);
-
-        final CookieManager mgr = webClient.getCookieManager();
-        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "one", "two", "/", null, false));
-        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "three", "four", "/", null, false));
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
-        assertEquals("First", firstPage.getTitleText());
-
-        final String[] expectedAlerts = {"one", "two", "three", "four" };
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void cookie_write_cookiesEnabled() throws Exception {
-        cookie_write(true);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void cookie_write_cookiesDisabled() throws Exception {
-        cookie_write(false);
-    }
-
-    private void cookie_write(final boolean cookiesEnabled) throws Exception {
-        final String html =
-              "<html>\n"
-            + "    <head>\n"
-            + "        <script>\n"
-            + "            alert(navigator.cookieEnabled);\n"
-            + "            alert(document.cookie);\n"
-            + "            document.cookie = 'foo=bar';\n"
-            + "            alert(document.cookie);\n"
-            + "        </script>\n"
-            + "    </head>\n"
-            + "    <body>abc</body>\n"
-            + "</html>";
-
-        final WebClient client = getWebClient();
-        client.getCookieManager().setCookiesEnabled(cookiesEnabled);
-
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setDefaultResponse(html);
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-
-        final String[] expected;
-        if (cookiesEnabled) {
-            expected = new String[] {"true", "", "foo=bar"};
-        }
-        else {
-            expected = new String[] {"false", "", ""};
-        }
-
-        assertEquals(expected, actual);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void cookie_write2() throws Exception {
-        final String html =
-              "<html>\n"
-            + "    <head>\n"
-            + "        <script>\n"
-            + "            alert(document.cookie);\n"
-            + "            document.cookie = 'a';\n"
-            + "            alert(document.cookie);\n"
-            + "            document.cookie = '';\n"
-            + "            alert(document.cookie);\n"
-            + "            document.cookie = 'b';\n"
-            + "            alert(document.cookie);\n"
-            + "            document.cookie = '';\n"
-            + "            alert(document.cookie);\n"
-            + "        </script>\n"
-            + "    </head>\n"
-            + "    <body>abc</body>\n"
-            + "</html>";
-
-        final WebClient client = getWebClient();
-
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setDefaultResponse(html);
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-
-        final String[] expected = new String[] {"", "a", "", "b", ""};
-        assertEquals(expected, actual);
-    }
-
-    /**
-     * Verifies that cookies work when working with local files (not remote sites with real domains).
-     * Required for local testing of Dojo 1.1.1.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void cookieInLocalFile() throws Exception {
-        final WebClient client = getWebClient();
-
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-
-        final URL url = getClass().getResource("DocumentTest_cookieInLocalFile.html");
-        client.getPage(url);
-
-        final String[] expected = new String[] {"", "", "blah=bleh"};
-        assertEquals(expected, actual);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts({ "value1", "value1", "value2", "value2" })
     public void getElementsByName() throws Exception {
         final String html
@@ -1751,46 +1592,6 @@ public class DocumentTest extends WebTestCase {
             + "</script></body></html>";
 
         loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(Browser.NONE)
-    public void buildCookie() throws Exception {
-        final String domain = URL_FIRST.getHost();
-        checkCookie(HTMLDocument.buildCookie("", URL_FIRST), EMPTY_COOKIE_NAME, "", "", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto", URL_FIRST), EMPTY_COOKIE_NAME, "toto", "", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=", URL_FIRST), "toto", "", "", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "", domain, true, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo;path=/myPath;secure", URL_FIRST),
-                "toto", "foo", "/myPath", domain, true, null);
-
-        // Check that leading and trailing whitespaces are ignored
-        checkCookie(HTMLDocument.buildCookie("   toto=foo;  path=/myPath  ; secure  ", URL_FIRST),
-                "toto", "foo", "/myPath", domain, true, null);
-
-        // Check that we accept reserved attribute names (e.g expires, domain) in any case
-        checkCookie(HTMLDocument.buildCookie("toto=foo; PATH=/myPath; SeCURE", URL_FIRST),
-                "toto", "foo", "/myPath", domain, true, null);
-
-        // Check that we are able to parse and set the expiration date correctly
-        final String dateString = "Fri, 21 Jul 2006 20:47:11 UTC";
-        final Date date = parseHttpDate(dateString);
-        checkCookie(HTMLDocument.buildCookie("toto=foo; expires=" + dateString, URL_FIRST),
-                "toto", "foo", "", domain, false, date);
-    }
-
-    private void checkCookie(final Cookie cookie, final String name, final String value,
-            final String path, final String domain, final boolean secure, final Date date) {
-        assertEquals(name, cookie.getName());
-        assertEquals(value, cookie.getValue());
-        assertEquals(path, cookie.getPath());
-        assertEquals(domain, cookie.getDomain());
-        assertEquals(secure, cookie.isSecure());
-        assertEquals(date, cookie.getExpires());
     }
 
     /**
