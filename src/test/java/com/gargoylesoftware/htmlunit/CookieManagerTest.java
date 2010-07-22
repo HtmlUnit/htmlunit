@@ -312,4 +312,31 @@ public class CookieManagerTest extends WebDriverTestCase {
         driver.manage().addCookie(new org.openqa.selenium.Cookie("dog", "dalmation", "/second/"));
         loadPageWithAlerts2(HTML_ALERT_COOKIE, URL_SECOND);
     }
+
+    /**
+     * Regression test for bug 3032380: expired cookies shouldn't be returned.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "Cookies: cookie1=value1; cookie2=value2", "Cookies: cookie2=value2" })
+    public void cookieExpiresAfterBeingSet() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "function f() {\n"
+            + "  alert('Cookies: ' + document.cookie);\n"
+            + "}\n"
+            + "\n"
+            + "var date1 = new Date();\n"
+            + "date1.setTime(date1.getTime() + 1000);\n"
+            + "document.cookie = 'cookie1=value1; expires=' + date1.toGMTString() + '; path=/';\n"
+            + "var date2 = new Date();\n"
+            + "date2.setTime(date2.getTime() + 60 * 1000);\n"
+            + "document.cookie = 'cookie2=value2; expires=' + date2.toGMTString() + '; path=/';\n"
+            + "f();\n"
+            + "setTimeout(f, 1500);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, 2000);
+    }
 }

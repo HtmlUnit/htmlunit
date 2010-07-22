@@ -448,7 +448,19 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final String html) throws Exception {
-        return loadPageWithAlerts2(html, URL_FIRST);
+        return loadPageWithAlerts2(html, URL_FIRST, 1000);
+    }
+
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * @param html the HTML to use
+     * @param maxWaitTime the maximum time to wait to get the alerts (im ms)
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final String html, final long maxWaitTime) throws Exception {
+        return loadPageWithAlerts2(html, URL_FIRST, maxWaitTime);
     }
 
     /**
@@ -459,6 +471,19 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final String html, final URL url) throws Exception {
+        return loadPageWithAlerts2(html, url, 1000);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * @param html the HTML to use
+     * @param url the URL to use to load the page
+     * @param maxWaitTime the maximum time to wait to get the alerts (im ms)
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final String html, final URL url, final long maxWaitTime)
+        throws Exception {
         expandExpectedAlertsVariables(URL_FIRST);
         final String[] expectedAlerts = getExpectedAlerts();
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts); // still useful sometimes
@@ -467,7 +492,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         // gets the collected alerts, waiting a bit if necessary
         List<String> actualAlerts = getCollectedAlerts(driver);
-        final long maxWait = System.currentTimeMillis() + 1000; // TODO: allow tests to configure the max wait time
+        final long maxWait = System.currentTimeMillis() + maxWaitTime;
         while (actualAlerts.size() < expectedAlerts.length && System.currentTimeMillis() < maxWait) {
             Thread.sleep(30);
             actualAlerts = getCollectedAlerts(driver);

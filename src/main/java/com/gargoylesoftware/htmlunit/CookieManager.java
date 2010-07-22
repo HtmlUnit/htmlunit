@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -110,6 +111,15 @@ public class CookieManager implements Serializable {
         }
         else {
             port = url.getDefaultPort();
+        }
+
+        // discard expired cookies
+        final Date now = new Date();
+        for (final Iterator<Cookie> iter = cookies_.iterator(); iter.hasNext();) {
+            final Cookie cookie = iter.next();
+            if (cookie.getExpires() != null && now.after(cookie.getExpires())) {
+                iter.remove();
+            }
         }
 
         final CookieSpec spec = registry_.getCookieSpec(HTMLUNIT_COOKIE_POLICY);
