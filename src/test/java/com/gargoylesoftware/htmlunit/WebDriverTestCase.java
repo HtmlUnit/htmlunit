@@ -451,7 +451,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return loadPageWithAlerts2(html, URL_FIRST, 1000);
     }
 
-
     /**
      * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
      * @param html the HTML to use
