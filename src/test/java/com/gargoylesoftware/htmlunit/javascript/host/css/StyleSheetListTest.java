@@ -93,7 +93,7 @@ public class StyleSheetListTest extends WebTestCase {
      */
     @Test
     @Alerts({ "0", "undefined", "undefined", "exception for -2" })
-    public void testArrayIndexOutOfBoundAccess() throws Exception {
+    public void arrayIndexOutOfBoundAccess() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"

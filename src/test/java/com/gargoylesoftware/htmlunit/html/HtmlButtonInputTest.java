@@ -20,8 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlButtonInput}.
@@ -29,19 +32,22 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
+@RunWith(BrowserRunner.class)
 public class HtmlButtonInputTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_onClick() throws Exception {
+    @Alerts("foo")
+    public void click_onClick() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")'>\n"
             + "    <input type='button' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"
             + "</form></body></html>";
+
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButtonInput button = page.getHtmlElementById("button");

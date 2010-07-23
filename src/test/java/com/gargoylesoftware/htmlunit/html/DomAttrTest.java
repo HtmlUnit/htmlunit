@@ -15,7 +15,9 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -24,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class DomAttrTest extends WebTestCase {
 
     /**

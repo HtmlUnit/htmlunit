@@ -167,7 +167,7 @@ public class HtmlScript2Test extends WebTestCase {
      */
     @Test
     @Alerts("hello")
-    public void testAsXml() throws Exception {
+    public void asXml() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<script id='script1'>\n"
@@ -230,7 +230,7 @@ public class HtmlScript2Test extends WebTestCase {
      */
     @Test
     @Alerts(IE = "[object]", FF = "[object HTMLScriptElement]")
-    public void testSimpleScriptable() throws Exception {
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"

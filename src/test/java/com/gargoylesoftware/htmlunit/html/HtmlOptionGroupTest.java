@@ -36,7 +36,7 @@ public class HtmlOptionGroupTest extends WebTestCase {
      */
     @Test
     @Alerts(FF = "[object HTMLOptGroupElement]", IE = "[object]")
-    public void testSimpleScriptable() throws Exception {
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"

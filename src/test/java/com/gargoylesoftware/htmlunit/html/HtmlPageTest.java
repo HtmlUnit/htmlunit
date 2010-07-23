@@ -982,7 +982,7 @@ public class HtmlPageTest extends WebServerTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testAsXml() throws Exception {
+    public void asXml() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head>"
             + "<body><p>helloworld</p></body>"
             + "</html>";
@@ -1000,7 +1000,7 @@ public class HtmlPageTest extends WebServerTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testAsXmlValidHtmlOutput() throws Exception {
+    public void asXmlValidHtmlOutput() throws Exception {
         final String html =
             "<html><head><title>foo</title>"
             + "<script src='script.js'></script></head>"
@@ -1029,7 +1029,7 @@ public class HtmlPageTest extends WebServerTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testAsXml2() throws Exception {
+    public void asXml2() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "<script>var test = 15 < 16;</script></head>\n"
             + "</head>\n"
@@ -1047,7 +1047,7 @@ public class HtmlPageTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsXml_unicode() throws Exception {
+    public void asXml_unicode() throws Exception {
         final String unicodeString = "\u064A\u0627 \u0644\u064A\u064A\u0644";
         final String html = "<html>\n"
             + "<head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'></head>\n"
@@ -1758,7 +1758,7 @@ public class HtmlPageTest extends WebServerTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testAsText() throws Exception {
+    public void asText() throws Exception {
         final String htmlContent
             = "<html><head><title>test</title></head>\n"
             + "<body><table>\n"

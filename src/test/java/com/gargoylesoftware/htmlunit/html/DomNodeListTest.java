@@ -18,7 +18,9 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -27,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  */
+@RunWith(BrowserRunner.class)
 public class DomNodeListTest extends WebTestCase {
 
     /**

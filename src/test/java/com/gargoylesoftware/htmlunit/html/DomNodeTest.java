@@ -241,7 +241,7 @@ public class DomNodeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAppendChild() throws Exception {
+    public void appendChild() throws Exception {
         final String content
             = "<html><head></head><body>\n"
             + "<br><div><div id='tag'></div></div><br></body></html>";

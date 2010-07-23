@@ -18,8 +18,10 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Iterator;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -31,13 +33,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @since 1.2
  */
+@RunWith(BrowserRunner.class)
 public class DefaultElementFactoryTest extends WebTestCase {
     /**
      * Test that the attribute order is the same as the provided one.
      * @throws Exception if the test fails
      */
     @Test
-    public void testAttributeOrder() throws Exception {
+    public void attributeOrder() throws Exception {
         // Construct the test page.
         final String html = "<html><head><title>test page</title></head>\n"
                 + "<body><div>test message</div></body></html>";
@@ -86,7 +89,7 @@ public class DefaultElementFactoryTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAttributeOrderLive() throws Exception {
+    public void attributeOrderLive() throws Exception {
         final String html = "<html><body>\n"
             + "<a href='http://www.google.com' tabindex='2' accesskey='F'>foo</a>\n"
             + "</body></html>";

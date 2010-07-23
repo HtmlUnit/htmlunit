@@ -15,8 +15,13 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlHiddenInput}.
@@ -24,23 +29,24 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class HtmlHiddenInputTest extends WebTestCase {
+@RunWith(BrowserRunner.class)
+public class HtmlHiddenInputTest extends WebDriverTestCase {
 
     /**
      * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsText() throws Exception {
+    public void asText() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "    <input type='hidden' name='foo' id='foo' value='bla'>\n"
             + "</form></body></html>";
 
-        final HtmlPage page = loadPage(htmlContent);
+        final WebDriver driver = loadPage2(htmlContent);
 
-        final HtmlInput input = page.getHtmlElementById("foo");
-        assertEquals("", input.asText());
+        final WebElement input = driver.findElement(By.id("foo"));
+        assertEquals("", input.getText());
     }
 }

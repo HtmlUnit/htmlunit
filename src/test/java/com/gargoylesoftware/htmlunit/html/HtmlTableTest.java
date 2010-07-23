@@ -22,9 +22,11 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlTable}.
@@ -34,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class HtmlTableTest extends WebTestCase {
 
     /**
@@ -41,7 +44,7 @@ public class HtmlTableTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testGetTableCell() throws Exception {
+    public void getTableCell() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1' summary='Test table'>\n"
@@ -73,7 +76,7 @@ public class HtmlTableTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testGetCellAt() throws Exception {
+    public void getCellAt() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1'>\n"
@@ -109,7 +112,7 @@ public class HtmlTableTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testGetTableCell_NotFound() throws Exception {
+    public void getTableCell_NotFound() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1' summary='Test table'>\n"
@@ -129,7 +132,7 @@ public class HtmlTableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetTableRows() throws Exception {
+    public void getTableRows() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1'>\n"
@@ -160,7 +163,7 @@ public class HtmlTableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetTableRows_WithHeadBodyFoot() throws Exception {
+    public void getTableRows_WithHeadBodyFoot() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1'>\n"
@@ -197,7 +200,7 @@ public class HtmlTableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRowGroupings_AllDefined() throws Exception {
+    public void rowGroupings_AllDefined() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1'>\n"
@@ -232,7 +235,7 @@ public class HtmlTableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRowGroupings_NoneDefined()
+    public void rowGroupings_NoneDefined()
         throws Exception {
 
         final String htmlContent
@@ -259,7 +262,7 @@ public class HtmlTableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetCaptionText() throws Exception {
+    public void getCaptionText() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table1' summary='Test table'>\n"
@@ -282,7 +285,7 @@ public class HtmlTableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testInsertionOfTbodyTags() throws Exception {
+    public void insertionOfTbodyTags() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<table>\n"
@@ -312,7 +315,7 @@ public class HtmlTableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testJSInTable() throws Exception {
+    public void jsInTable() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<table>\n"
@@ -337,7 +340,8 @@ public class HtmlTableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
+    @Alerts(FF = "[object HTMLTableElement]", IE = "[object]")
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -348,12 +352,8 @@ public class HtmlTableTest extends WebTestCase {
             + "  <table id='myId'/>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLTableElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlTable.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

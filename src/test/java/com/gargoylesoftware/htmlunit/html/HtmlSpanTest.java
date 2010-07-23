@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlSpan}.
@@ -29,12 +28,14 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  */
+@RunWith(BrowserRunner.class)
 public class HtmlSpanTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = "[object HTMLSpanElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -46,11 +47,8 @@ public class HtmlSpanTest extends WebTestCase {
             + "  <span id='myId'>My Span</span>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLSpanElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlSpan.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -58,6 +56,7 @@ public class HtmlSpanTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = "[object HTMLSpanElement]", IE = "[object]")
     public void simpleScriptable_others() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -69,11 +68,8 @@ public class HtmlSpanTest extends WebTestCase {
             + "  <address id='myId'>My Address</address>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLSpanElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlAddress.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

@@ -487,7 +487,7 @@ public class HtmlElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsText_WithComments() throws Exception {
+    public void asText_WithComments() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<p id='p1'>foo<!--bar--></p>\n"
@@ -874,7 +874,7 @@ public class HtmlElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsXml_separateLineforEmptyElements() throws Exception {
+    public void asXml_separateLineforEmptyElements() throws Exception {
         final String html = "<html><head><title>foo</title></head>\n"
             + "<body><table><tr><td></tr></table>\n"
             + "</body></html>";

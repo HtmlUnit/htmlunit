@@ -21,12 +21,14 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -37,6 +39,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlIsIndexTest extends WebTestCase {
 
     /**
@@ -71,7 +74,8 @@ public class HtmlIsIndexTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
+    @Alerts(FF = "[object HTMLIsIndexElement]", IE = "[object]")
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -83,10 +87,7 @@ public class HtmlIsIndexTest extends WebTestCase {
             + "<isindex id='myId' prompt='enterSomeText'></isindex>\n"
             + "</form></body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLIsIndexElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlIsIndex.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

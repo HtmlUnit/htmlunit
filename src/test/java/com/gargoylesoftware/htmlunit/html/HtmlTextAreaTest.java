@@ -19,7 +19,9 @@ import static org.junit.Assert.assertSame;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -36,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Sudhan Moghe
  * @author Amit Khanna
  */
+@RunWith(BrowserRunner.class)
 public class HtmlTextAreaTest extends WebTestCase {
 
     /**
@@ -117,7 +120,7 @@ public class HtmlTextAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsXml() throws Exception {
+    public void asXml() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"

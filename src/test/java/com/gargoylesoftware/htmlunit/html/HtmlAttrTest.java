@@ -22,7 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
@@ -33,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author David K. Taylor
  */
+@RunWith(BrowserRunner.class)
 public class HtmlAttrTest extends WebTestCase {
 
     /** Test object. */

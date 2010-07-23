@@ -126,7 +126,7 @@ public class ClickableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAnchor_onClick() throws Exception {
+    public void anchor_onClick() throws Exception {
         onClickSimpleTest("a");
     }
 
@@ -136,7 +136,7 @@ public class ClickableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAbbreviation_onClick() throws Exception {
+    public void abbreviation_onClick() throws Exception {
         onClickSimpleTest("abbr");
     }
 
@@ -146,7 +146,7 @@ public class ClickableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAcronym_onClick() throws Exception {
+    public void acronym_onClick() throws Exception {
         onClickSimpleTest("acronym");
     }
 
@@ -156,7 +156,7 @@ public class ClickableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAddress_onClick() throws Exception {
+    public void address_onClick() throws Exception {
         onClickSimpleTest("address");
     }
 
@@ -166,7 +166,7 @@ public class ClickableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testArea_onClick() throws Exception {
+    public void area_onClick() throws Exception {
         onClickBodyTest("<body><map><area id='clickId' onClick='alert(\"foo\")'/></map></body>\n");
     }
 

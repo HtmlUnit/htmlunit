@@ -91,7 +91,7 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAnchor_onblur_onfocus() throws Exception {
+    public void anchor_onblur_onfocus() throws Exception {
         onClickSimpleTest("a", "href=\".\"");
     }
 
@@ -101,7 +101,7 @@ public class FocusableElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testArea_onblur_onfocus() throws Exception {
+    public void area_onblur_onfocus() throws Exception {
         onClickBodyTest("<map><area " + COMMON_ATTRIBUTES
                 + " shape=\"rect\" coords=\"0,0,1,1\" href=\".\">\n"
                 + "</area></map>");

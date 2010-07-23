@@ -36,7 +36,7 @@ public class HtmlResetInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReset() throws Exception {
+    public void reset() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -100,7 +100,7 @@ public class HtmlResetInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOutsideForm() throws Exception {
+    public void outsideForm() throws Exception {
         final String html =
             "<html><head></head>\n"
             + "<body>\n"

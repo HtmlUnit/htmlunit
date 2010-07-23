@@ -18,9 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlLabel}.
@@ -29,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlLabelTest extends WebTestCase {
 
     /**
@@ -83,7 +86,8 @@ public class HtmlLabelTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
+    @Alerts(FF = "[object HTMLLabelElement]", IE = "[object]")
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -94,10 +98,7 @@ public class HtmlLabelTest extends WebTestCase {
             + "<label id='myId'>Item</label>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLLabelElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlLabel.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

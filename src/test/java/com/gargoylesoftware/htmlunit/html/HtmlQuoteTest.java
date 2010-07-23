@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlInlineQuotation}, and {@link HtmlBlockQuote}.
@@ -28,13 +27,15 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlQuoteTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
+    @Alerts(FF = { "[object HTMLQuoteElement]", "[object HTMLQuoteElement]" }, IE = { "[object]", "[object]" })
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -47,11 +48,8 @@ public class HtmlQuoteTest extends WebTestCase {
             + "  <blockquote id='myId2'>Second Quote</blockquote>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLQuoteElement]", "[object HTMLQuoteElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlInlineQuotation.class.isInstance(page.getHtmlElementById("myId1")));
         assertTrue(HtmlBlockQuote.class.isInstance(page.getHtmlElementById("myId2")));
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 }

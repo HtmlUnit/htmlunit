@@ -23,7 +23,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -38,6 +40,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class HtmlSelectTest extends WebTestCase {
 
     /**
@@ -526,7 +529,7 @@ public class HtmlSelectTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testAsTextWhenNothingSelected() throws Exception {
+    public void asTextWhenNothingSelected() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form>\n"
             + "<select name='select1' size='1' id='mySelect'>\n"
@@ -546,7 +549,7 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testAsTextWithMultipleSelect() throws Exception {
+    public void asTextWithMultipleSelect() throws Exception {
         final String html = "<html><body><form>\n"
             + "<select name='a' multiple>\n"
             + "<option value='1'>foo</option>\n"
@@ -639,7 +642,7 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsXml_size() throws Exception {
+    public void asXml_size() throws Exception {
         final String content = "<html><head><title>foo</title></head>\n"
             + "<body>\n"
             + "<select/>\n"

@@ -149,7 +149,7 @@ public class HtmlOptionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsText() throws Exception {
+    public void asText() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form><select>\n"
             + "<option id='option1'>option1</option>\n"
@@ -177,7 +177,7 @@ public class HtmlOptionTest extends WebTestCase {
      */
     @Test
     @Alerts(FF = "[object HTMLOptionElement]", IE = "[object]")
-    public void testSimpleScriptable() throws Exception {
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"

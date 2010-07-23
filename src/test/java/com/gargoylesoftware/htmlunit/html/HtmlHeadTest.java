@@ -40,7 +40,7 @@ public class HtmlHeadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("HEAD")
-    public void testAddedWhenMissing() throws Exception {
+    public void addedWhenMissing() throws Exception {
         final String htmlContent = "<html><body>\n"
             + "<script>\n"
             + "  alert(document.firstChild.firstChild.tagName);\n"

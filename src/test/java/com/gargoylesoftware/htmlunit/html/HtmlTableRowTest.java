@@ -20,7 +20,9 @@ import static org.junit.Assert.assertSame;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -33,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class HtmlTableRowTest extends WebTestCase {
 
     private static final String htmlContent = "<html><head><title>foo</title></head><body>\n"

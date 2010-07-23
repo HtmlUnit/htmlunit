@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlTitle}.
@@ -29,13 +28,15 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class HtmlTitleTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testSimpleScriptable() throws Exception {
+    @Alerts(FF = "[object HTMLTitleElement]", IE = "[object]")
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head><title id='myId'>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -45,11 +46,8 @@ public class HtmlTitleTest extends WebTestCase {
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"[object HTMLTitleElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlTitle.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**

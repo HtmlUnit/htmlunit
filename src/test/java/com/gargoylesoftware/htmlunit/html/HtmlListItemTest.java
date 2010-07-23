@@ -35,7 +35,7 @@ public class HtmlListItemTest extends WebTestCase {
      */
     @Test
     @Alerts(IE = "[object]", FF = "[object HTMLLIElement]")
-    public void testSimpleScriptable() throws Exception {
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
