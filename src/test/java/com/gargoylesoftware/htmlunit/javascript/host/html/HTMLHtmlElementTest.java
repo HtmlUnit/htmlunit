@@ -41,7 +41,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "[object HTMLHtmlElement]", IE = "[object]")
-    public void testSimpleScriptable() throws Exception {
+    public void simpleScriptable() throws Exception {
         final String html = "<html id='myId'><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"

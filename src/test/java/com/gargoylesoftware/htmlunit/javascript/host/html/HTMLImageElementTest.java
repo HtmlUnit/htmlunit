@@ -47,7 +47,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "[object HTMLImageElement]", IE = "[object]")
-    public void testSimpleScriptable() throws Exception {
+    public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"

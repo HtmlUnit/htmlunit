@@ -67,7 +67,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             "radio1", "radio1",
             "select1", "select2", "password1", "reset1",
             "reset2", "submit1", "submit2", "textInput1", "textarea1" })
-    public void testElementsAccessor() throws Exception {
+    public void elementsAccessor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -114,7 +114,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "undefined", "undefined" })
-    public void testElementsAccessorOutOfBound() throws Exception {
+    public void elementsAccessorOutOfBound() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -136,7 +136,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "1", "2", "3" })
-    public void testRadioButtonArray() throws Exception {
+    public void radioButtonArray() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -167,7 +167,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    public void testRadioButton_OnlyOne() throws Exception {
+    public void radioButton_OnlyOne() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -187,7 +187,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testActionProperty() throws Exception {
+    public void actionProperty() throws Exception {
         doTestProperty("action", "action", "http://foo.com/", "mailto:me@bar.com");
     }
 
@@ -195,7 +195,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNameProperty() throws Exception {
+    public void nameProperty() throws Exception {
         doTestProperty("name", "name", "myForm", "testForm");
     }
 
@@ -203,7 +203,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testEncodingProperty() throws Exception {
+    public void encodingProperty() throws Exception {
         doTestProperty("encoding", "enctype", "myEncoding", "newEncoding");
     }
 
@@ -211,7 +211,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMethodProperty() throws Exception {
+    public void methodProperty() throws Exception {
         doTestProperty("method", "method", "get", "post");
     }
 
@@ -219,7 +219,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testTargetProperty() throws Exception {
+    public void targetProperty() throws Exception {
         doTestProperty("target", "target", "_top", "_parent");
     }
 
@@ -252,7 +252,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFormReset() throws Exception {
+    public void formReset() throws Exception {
         // As tested with IE 6.0 on Win2k; note that refreshing the page will get you different results;
         // you need to open a new browser instance each time you test this.
         final String[] expectedIE = {
@@ -429,7 +429,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFormSubmit() throws Exception {
+    public void formSubmit() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
@@ -455,7 +455,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testOnSubmitChangesAction() throws Exception {
+    public void onSubmitChangesAction() throws Exception {
         final String html
             = "<html><body>\n"
             + "<form name='form1' action='" + URL_SECOND + "' onsubmit='this.action=\"" + URL_THIRD + "\"' "
@@ -476,7 +476,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFormSubmit_target() throws Exception {
+    public void formSubmit_target() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
@@ -503,7 +503,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFormSubmitDoesntCallOnSubmit() throws Exception {
+    public void formSubmitDoesntCallOnSubmit() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<form name='form1' method='get' action='" + URL_SECOND + "' onsubmit=\"this.action = 'foo.html'\">\n"
@@ -529,7 +529,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "id2", "foo" })
-    public void testInputNamedId() throws Exception {
+    public void inputNamedId() throws Exception {
         doTestInputWithName("id");
     }
 
@@ -538,7 +538,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "action2", "foo" })
-    public void testInputNamedAction() throws Exception {
+    public void inputNamedAction() throws Exception {
         doTestInputWithName("action");
     }
 
@@ -566,7 +566,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("value = 2")
-    public void testAccessingRadioButtonArrayByName_Regression() throws Exception {
+    public void accessingRadioButtonArrayByName_Regression() throws Exception {
         final String html
             = "<html><head><title>Button Test</title></head><body><form name='whatsnew'>\n"
             + "<input type='radio' name='second' value='1'>\n"
@@ -596,7 +596,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("foo")
-    public void testFindInputWithoutTypeDefined() throws Exception {
+    public void findInputWithoutTypeDefined() throws Exception {
         final String html
             = "<html><head><title>foo</title></head>\n"
             + "<body onload='alert(document.simple_form.login.value);'>\n"
@@ -615,7 +615,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFormSubmit_MultipleButtons() throws Exception {
+    public void formSubmit_MultipleButtons() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
@@ -647,7 +647,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    public void testLength() throws Exception {
+    public void length() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -669,7 +669,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("button1")
-    public void testGet() throws Exception {
+    public void get() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -689,7 +689,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     * @throws Exception if the test fails
     */
     @Test
-    public void testLostFunction() throws Exception {
+    public void lostFunction() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
             + " function onSubmit() { alert('hi!'); return false; }\n"
@@ -711,7 +711,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAssignedOnsubmit() throws Exception {
+    public void assignedOnsubmit() throws Exception {
         final String content
             = "<html><head><title>foo</title><script>\n"
             + " function onSubmit() { alert('hi!'); return false; }\n"
@@ -737,7 +737,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     */
     @Test
     @Alerts({ "0", "1", "1", "true" })
-    public void testElementsLive() throws Exception {
+    public void elementsLive() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "<form name='myForm'>\n"
@@ -762,7 +762,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetFormFromFormsById() throws Exception {
+    public void getFormFromFormsById() throws Exception {
         final String html =
             "<html>\n"
             + "<head></head>\n"
@@ -787,7 +787,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("text")
-    public void testGetFieldNamedLikeForm() throws Exception {
+    public void getFieldNamedLikeForm() throws Exception {
         final String html =
             "<html>\n"
             + "<head></head>\n"
@@ -807,18 +807,18 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFieldNamedSubmit() throws Exception {
-        testFieldNamedSubmit("<input type='text' name='submit'>\n", "INPUT");
-        testFieldNamedSubmit("<input type='password' name='submit'>\n", "INPUT");
-        testFieldNamedSubmit("<input type='submit' name='submit'>\n", "INPUT");
-        testFieldNamedSubmit("<input type='radio' name='submit'>\n", "INPUT");
-        testFieldNamedSubmit("<input type='checkbox' name='submit'>\n", "INPUT");
-        testFieldNamedSubmit("<input type='button' name='submit'>\n", "INPUT");
-        testFieldNamedSubmit("<button type='submit' name='submit'>\n", "BUTTON");
-        testFieldNamedSubmit("<textarea name='submit'></textarea>\n", "TEXTAREA");
-        testFieldNamedSubmit("<select name='submit'></select>\n", "SELECT");
-        testFieldNamedSubmit("<input type='image' name='submit'>\n", "function");
-        testFieldNamedSubmit("<input type='IMAGE' name='submit'>\n", "function");
+    public void fieldNamedSubmit() throws Exception {
+        fieldNamedSubmit("<input type='text' name='submit'>\n", "INPUT");
+        fieldNamedSubmit("<input type='password' name='submit'>\n", "INPUT");
+        fieldNamedSubmit("<input type='submit' name='submit'>\n", "INPUT");
+        fieldNamedSubmit("<input type='radio' name='submit'>\n", "INPUT");
+        fieldNamedSubmit("<input type='checkbox' name='submit'>\n", "INPUT");
+        fieldNamedSubmit("<input type='button' name='submit'>\n", "INPUT");
+        fieldNamedSubmit("<button type='submit' name='submit'>\n", "BUTTON");
+        fieldNamedSubmit("<textarea name='submit'></textarea>\n", "TEXTAREA");
+        fieldNamedSubmit("<select name='submit'></select>\n", "SELECT");
+        fieldNamedSubmit("<input type='image' name='submit'>\n", "function");
+        fieldNamedSubmit("<input type='IMAGE' name='submit'>\n", "function");
     }
 
     /**
@@ -826,7 +826,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @param expected the expected alert
      * @throws Exception if the test fails
      */
-    private void testFieldNamedSubmit(final String htmlSnippet, final String expected) throws Exception {
+    private void fieldNamedSubmit(final String htmlSnippet, final String expected) throws Exception {
         final String html =
             "<html>\n"
             + "<head>\n"
@@ -855,7 +855,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "before", "2" })
-    public void testFieldFoundWithID() throws Exception {
+    public void fieldFoundWithID() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -883,7 +883,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "INPUT", "idImg1", "img2", "true" })
-    public void testNonFieldChildFound() throws Exception {
+    public void nonFieldChildFound() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -916,7 +916,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testFormIsNotAConstructor() throws Exception {
+    public void formIsNotAConstructor() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "var Form = {};\n"
@@ -941,7 +941,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "page 1: formPage1", "page 2: formPage2" })
-    public void testFormAccessAfterBrowsing() throws Exception {
+    public void formAccessAfterBrowsing() throws Exception {
         final String html = "<html><head><title>first</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -977,7 +977,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true" },
         IE = { "srcElement null: false", "srcElement==form: true", "target null: true", "target==form: false" })
-    public void testOnSubmitEvent() throws Exception {
+    public void onSubmitEvent() throws Exception {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = getMockWebConnection();
 
@@ -1013,7 +1013,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testThisInJavascriptAction() throws Exception {
+    public void thisInJavascriptAction() throws Exception {
         final String content
             = "<html>\n"
             + "<body>\n"
@@ -1036,7 +1036,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "function handler() {}", "null" })
-    public void testOnsubmitNull() throws Exception {
+    public void onsubmitNull() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
@@ -1484,7 +1484,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "prepare frame", "submit form", "submitted ok" })
-    public void testSubmitWithTargetOnIFrameAndOnload_script() throws Exception {
+    public void submitWithTargetOnIFrameAndOnload_script() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
@@ -1530,7 +1530,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.FF)
     @Alerts({ "submit form", "submitted ok" })
-    public void testSubmitWithTargetOnIFrameAndOnload_bubbling_FF() throws Exception {
+    public void submitWithTargetOnIFrameAndOnload_bubbling_FF() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
@@ -1571,7 +1571,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.IE)
     @Alerts({ "submit form", "submitted ok" })
-    public void testSubmitWithTargetOnIFrameAndOnload_attached_IE() throws Exception {
+    public void submitWithTargetOnIFrameAndOnload_attached_IE() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
