@@ -152,7 +152,18 @@ public final class MozillaTestGenerator {
             }
             return line.substring(p0, p1);
         }
-        if (line.startsWith("String([")) {
+        else if (line.startsWith("'")) {
+            final int p0 = 1;
+            int p1 = p0 + 1;
+            for (int i = p1; i < line.length() - 1; i++) {
+                if (line.charAt(i) == '\'' && line.charAt(i - 1) != '\\') {
+                    p1 = i;
+                    break;
+                }
+            }
+            return line.substring(p0, p1);
+        }
+        else if (line.startsWith("String([")) {
             final StringBuilder buffer = new StringBuilder();
             char terminator = line.charAt("String([".length());
             int p0 = "String([\"".length();
