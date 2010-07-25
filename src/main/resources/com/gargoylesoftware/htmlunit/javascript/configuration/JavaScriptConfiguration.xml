@@ -1158,6 +1158,11 @@
         <property name="alt" readable="true" writable="true"/>
     </class>
 
+    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAudioElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAudio">
+        <browser name="Firefox" min-version="3.6"/>
+    </class>
+
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBase">
         <property name="href" readable="true" writable="true"/>
@@ -1990,6 +1995,11 @@
         <function name="remove"/>
     </class>
 
+    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSourceElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSource">
+        <browser name="Firefox" min-version="3.6"/>
+    </class>
+
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpacerElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSpacer">
     </class>
@@ -2218,6 +2228,11 @@
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlUnknownElement">
+    </class>
+
+    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLVideoElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlVideo">
+        <browser name="Firefox" min-version="3.6"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLWBRElement"

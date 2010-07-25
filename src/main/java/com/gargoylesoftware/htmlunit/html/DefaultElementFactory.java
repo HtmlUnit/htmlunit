@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.xml.sax.Attributes;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
  * Element factory which creates elements by calling the constructor on a
@@ -34,6 +38,46 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author David K. Taylor
  */
 class DefaultElementFactory implements IElementFactory {
+
+    static final List<String> SUPPORTED_TAGS_ = Arrays.asList(HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
+        HtmlAnchor.TAG_NAME, HtmlApplet.TAG_NAME, HtmlAddress.TAG_NAME, HtmlArea.TAG_NAME, HtmlAudio.TAG_NAME,
+            HtmlBackgroundSound.TAG_NAME, HtmlBase.TAG_NAME, HtmlBaseFont.TAG_NAME,
+            HtmlBidirectionalOverride.TAG_NAME, HtmlBig.TAG_NAME, HtmlBlink.TAG_NAME,
+            HtmlBlockQuote.TAG_NAME, HtmlBody.TAG_NAME, HtmlBold.TAG_NAME,
+            HtmlBreak.TAG_NAME, HtmlButton.TAG_NAME, HtmlCanvas.TAG_NAME, HtmlCaption.TAG_NAME,
+            HtmlCenter.TAG_NAME, HtmlCitation.TAG_NAME, HtmlCode.TAG_NAME,
+            HtmlDefinition.TAG_NAME, HtmlDefinitionDescription.TAG_NAME,
+            HtmlDeletedText.TAG_NAME, HtmlDirectory.TAG_NAME,
+            HtmlDivision.TAG_NAME, HtmlDefinitionList.TAG_NAME,
+            HtmlDefinitionTerm.TAG_NAME, HtmlEmbed.TAG_NAME,
+            HtmlEmphasis.TAG_NAME, HtmlFieldSet.TAG_NAME,
+            HtmlFont.TAG_NAME, HtmlForm.TAG_NAME,
+            HtmlFrame.TAG_NAME, HtmlFrameSet.TAG_NAME, HtmlHeading1.TAG_NAME,
+            HtmlHeading2.TAG_NAME, HtmlHeading3.TAG_NAME,
+            HtmlHeading4.TAG_NAME, HtmlHeading5.TAG_NAME,
+            HtmlHeading6.TAG_NAME, HtmlHead.TAG_NAME,
+            HtmlHorizontalRule.TAG_NAME, HtmlHtml.TAG_NAME, HtmlInlineFrame.TAG_NAME,
+            HtmlImage.TAG_NAME, HtmlInsertedText.TAG_NAME, HtmlIsIndex.TAG_NAME,
+            HtmlItalic.TAG_NAME, HtmlKeyboard.TAG_NAME, HtmlLabel.TAG_NAME,
+            HtmlLegend.TAG_NAME, HtmlListing.TAG_NAME, HtmlListItem.TAG_NAME,
+            HtmlLink.TAG_NAME, HtmlMap.TAG_NAME, HtmlMarquee.TAG_NAME,
+            HtmlMenu.TAG_NAME, HtmlMeta.TAG_NAME, HtmlMultiColumn.TAG_NAME,
+            HtmlNoBreak.TAG_NAME, HtmlNoEmbed.TAG_NAME, HtmlNoFrames.TAG_NAME,
+            HtmlNoScript.TAG_NAME, HtmlObject.TAG_NAME, HtmlOrderedList.TAG_NAME,
+            HtmlOptionGroup.TAG_NAME, HtmlOption.TAG_NAME, HtmlParagraph.TAG_NAME,
+            HtmlParameter.TAG_NAME, HtmlPlainText.TAG_NAME, HtmlPreformattedText.TAG_NAME,
+            HtmlInlineQuotation.TAG_NAME, HtmlS.TAG_NAME, HtmlSample.TAG_NAME,
+            HtmlScript.TAG_NAME, HtmlSelect.TAG_NAME, HtmlSmall.TAG_NAME,
+            HtmlSource.TAG_NAME, HtmlSpacer.TAG_NAME, HtmlSpan.TAG_NAME,
+            HtmlStrike.TAG_NAME, HtmlStrong.TAG_NAME, HtmlStyle.TAG_NAME,
+            HtmlSubscript.TAG_NAME, HtmlSuperscript.TAG_NAME, HtmlTitle.TAG_NAME,
+            HtmlTable.TAG_NAME, HtmlTableColumn.TAG_NAME, HtmlTableColumnGroup.TAG_NAME,
+            HtmlTableBody.TAG_NAME, HtmlTableDataCell.TAG_NAME, HtmlTableHeaderCell.TAG_NAME,
+            HtmlTableRow.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlTableFooter.TAG_NAME,
+            HtmlTableHeader.TAG_NAME, HtmlTeletype.TAG_NAME, HtmlUnderlined.TAG_NAME,
+            HtmlUnorderedList.TAG_NAME, HtmlVariable.TAG_NAME, HtmlVideo.TAG_NAME,
+            HtmlWordBreak.TAG_NAME, HtmlExample.TAG_NAME
+    );
 
     /**
      * @param page the owning page
@@ -65,6 +109,25 @@ class DefaultElementFactory implements IElementFactory {
         else {
             tagName = qualifiedName.substring(colonIndex + 1).toLowerCase();
         }
+
+        for (final Class<? extends HtmlElement> klass : JavaScriptConfiguration.getHtmlJavaScriptMapping().keySet()) {
+            try {
+                if (klass.getField("TAG_NAME").get(null).toString().equals(tagName)) {
+                    String jsClassName = JavaScriptConfiguration.getHtmlJavaScriptMapping().get(klass).getName();
+                    jsClassName = jsClassName.substring(jsClassName.lastIndexOf('.') + 1);
+                    final ClassConfiguration config =
+                        JavaScriptConfiguration.getInstance(page.getWebClient().getBrowserVersion())
+                            .getClassConfiguration(jsClassName);
+                    if (config == null) {
+                        return UnknownElementFactory.instance.createElementNS(
+                                page, namespaceURI, qualifiedName, attributes);
+                    }
+                }
+            }
+            catch (final Exception e) {
+                //ignore
+            }
+        }
         if (tagName.equals(HtmlAbbreviated.TAG_NAME)) {
             element = new HtmlAbbreviated(namespaceURI, qualifiedName, page, attributeMap);
         }
@@ -82,6 +145,9 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlArea.TAG_NAME)) {
             element = new HtmlArea(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equals(HtmlAudio.TAG_NAME)) {
+            element = new HtmlAudio(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlBackgroundSound.TAG_NAME)) {
             element = new HtmlBackgroundSound(namespaceURI, qualifiedName, page, attributeMap);
@@ -335,6 +401,9 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlSmall.TAG_NAME)) {
             element = new HtmlSmall(namespaceURI, qualifiedName, page, attributeMap);
         }
+        else if (tagName.equals(HtmlSource.TAG_NAME)) {
+            element = new HtmlSource(namespaceURI, qualifiedName, page, attributeMap);
+        }
         else if (tagName.equals(HtmlSpacer.TAG_NAME)) {
             element = new HtmlSpacer(namespaceURI, qualifiedName, page, attributeMap);
         }
@@ -409,6 +478,9 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlVariable.TAG_NAME)) {
             element = new HtmlVariable(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equals(HtmlVideo.TAG_NAME)) {
+            element = new HtmlVideo(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlWordBreak.TAG_NAME)) {
             element = new HtmlWordBreak(namespaceURI, qualifiedName, page, attributeMap);

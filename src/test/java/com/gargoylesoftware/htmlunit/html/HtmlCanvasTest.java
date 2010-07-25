@@ -47,6 +47,11 @@ public class HtmlCanvasTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlCanvas.class.isInstance(page.getHtmlElementById("myId")));
+        if (getBrowserVersion().isFirefox()) {
+            assertTrue(HtmlCanvas.class.isInstance(page.getHtmlElementById("myId")));
+        }
+        else {
+            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
+        }
     }
 }
