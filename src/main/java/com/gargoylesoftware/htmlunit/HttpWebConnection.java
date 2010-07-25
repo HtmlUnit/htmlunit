@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -237,7 +238,31 @@ public class HttpWebConnection implements WebConnection {
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
                 final MultipartEntity multipartEntity =
-                    new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, CharsetUtil.getCharset(charset));
+                    new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, CharsetUtil.getCharset(charset)) {
+
+                        @Override
+                        protected String generateContentType(final String boundary, final Charset charset) {
+                            final StringBuilder buffer = new StringBuilder();
+                            buffer.append("multipart/form-data; boundary=");
+                            if (boundary != null) {
+                                buffer.append(boundary);
+                            }
+                            else {
+                                buffer.append("---------------------------");
+                                final Random rand = new Random();
+                                final char[] chars =
+                                    "-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+                                for (int i = 0; i < 14; i++) {
+                                    buffer.append(chars[rand.nextInt(chars.length)]);
+                                }
+                            }
+                            if (charset != null) {
+                                buffer.append("; charset=");
+                                buffer.append(charset.name());
+                            }
+                            return buffer.toString();
+                        }
+                    };
 
                 for (final NameValuePair pair : webRequest.getRequestParameters()) {
                     if (pair instanceof KeyDataPair) {

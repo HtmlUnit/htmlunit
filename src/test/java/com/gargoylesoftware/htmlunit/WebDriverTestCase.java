@@ -269,9 +269,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected void startWebServer(final String resourceBase, final String[] classpath,
             final Map<String, Class< ? extends Servlet>> servlets) throws Exception {
-        if (LAST_TEST_MockWebConnection_ == Boolean.TRUE) {
-            stopWebServer();
-        }
+        stopWebServer();
         LAST_TEST_MockWebConnection_ = Boolean.FALSE;
         if (STATIC_SERVER_ == null) {
             STATIC_SERVER_ = new Server(PORT);
