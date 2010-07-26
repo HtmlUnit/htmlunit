@@ -241,13 +241,9 @@ public class HttpWebConnection implements WebConnection {
                     new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, CharsetUtil.getCharset(charset)) {
 
                         @Override
-                        protected String generateContentType(final String boundary, final Charset charset) {
-                            final StringBuilder buffer = new StringBuilder();
-                            buffer.append("multipart/form-data; boundary=");
-                            if (boundary != null) {
-                                buffer.append(boundary);
-                            }
-                            else {
+                        protected String generateContentType(String boundary, final Charset charset) {
+                            if (boundary == null) {
+                                final StringBuilder buffer = new StringBuilder();
                                 buffer.append("---------------------------");
                                 final Random rand = new Random();
                                 final char[] chars =
@@ -255,12 +251,9 @@ public class HttpWebConnection implements WebConnection {
                                 for (int i = 0; i < 14; i++) {
                                     buffer.append(chars[rand.nextInt(chars.length)]);
                                 }
+                                boundary = buffer.toString();
                             }
-                            if (charset != null) {
-                                buffer.append("; charset=");
-                                buffer.append(charset.name());
-                            }
-                            return buffer.toString();
+                            return super.generateContentType(boundary, null);
                         }
                     };
 

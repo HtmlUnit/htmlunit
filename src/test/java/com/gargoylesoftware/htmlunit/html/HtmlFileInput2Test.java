@@ -200,4 +200,73 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             writer.close();
         }
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void contentTypeHeader() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/upload1", ContentTypeHeaderUpload1Servlet.class);
+        servlets.put("/upload2", ContentTypeHeaderUpload2Servlet.class);
+        startWebServer("./", new String[0], servlets);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/upload1");
+        String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
+        if (driver instanceof InternetExplorerDriver) {
+            path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
+        }
+        driver.findElement(By.name("myInput")).sendKeys(path);
+        driver.findElement(By.id("mySubmit")).click();
+        final String source = driver.getPageSource();
+        assertTrue(source.contains("CONTENT_TYPE:"));
+        assertFalse(source.contains("charset"));
+    }
+
+    /**
+     * Servlet for '/upload1'.
+     */
+    public static class ContentTypeHeaderUpload1Servlet extends HttpServlet {
+
+        private static final long serialVersionUID = -6341072475585392695L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            response.getWriter().write("<html>"
+                + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
+                + "Name: <input name='myInput' type='file'><br>\n"
+                + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"
+                + "<input type='submit' value='Upload' id='mySubmit'>\n"
+                + "</form></body></html>\n");
+        }
+    }
+
+    /**
+     * Servlet for '/upload2'.
+     */
+    public static class ContentTypeHeaderUpload2Servlet extends HttpServlet {
+
+        private static final long serialVersionUID = 4063742744610158029L;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            writer.write("CONTENT_TYPE:" + request.getContentType());
+            writer.close();
+        }
+    }
+
 }

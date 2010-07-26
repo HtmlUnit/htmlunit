@@ -10,7 +10,7 @@
                 JavaScript: initial support for HTMLAudioElement, HTMLSourceElement and HTMLVideoElement.
             </action>
             <action type="fix" dev="asashour" issue="3029611">
-                Fix 'boundary' value on posting a form with "multipart/form-data" encoding.
+                Fix Content-Type header value on posting a form with "multipart/form-data" encoding.
             </action>
             <action type="fix" dev="mguillem" issue="3032380">
                 JavaScript: document.cookie should not return cookies that have expired since they have been set.
