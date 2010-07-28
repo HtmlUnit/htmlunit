@@ -100,6 +100,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Brad Clarke
  * @author Ahmed Ashour
  * @author Nicolas Belisle
+ * @author Ronald Brill
  */
 public class HttpWebConnection implements WebConnection {
 
@@ -237,25 +238,16 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
+                final StringBuilder boundary = new StringBuilder();
+                boundary.append("---------------------------");
+                final Random rand = new Random();
+                final char[] chars = "-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+                for (int i = 0; i < 14; i++) {
+                    boundary.append(chars[rand.nextInt(chars.length)]);
+                }
+                final Charset c = getCharset(charset, webRequest.getRequestParameters());
                 final MultipartEntity multipartEntity =
-                    new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, CharsetUtil.getCharset(charset)) {
-
-                        @Override
-                        protected String generateContentType(String boundary, final Charset charset) {
-                            if (boundary == null) {
-                                final StringBuilder buffer = new StringBuilder();
-                                buffer.append("---------------------------");
-                                final Random rand = new Random();
-                                final char[] chars =
-                                    "-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
-                                for (int i = 0; i < 14; i++) {
-                                    buffer.append(chars[rand.nextInt(chars.length)]);
-                                }
-                                boundary = buffer.toString();
-                            }
-                            return super.generateContentType(boundary, null);
-                        }
-                    };
+                    new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, boundary.toString(), c);
 
                 for (final NameValuePair pair : webRequest.getRequestParameters()) {
                     if (pair instanceof KeyDataPair) {
@@ -320,6 +312,23 @@ public class HttpWebConnection implements WebConnection {
         return httpMethod;
     }
 
+    private Charset getCharset(final String charset, final List<NameValuePair> pairs) {
+        for (final NameValuePair pair : pairs) {
+            if (pair instanceof KeyDataPair) {
+                final KeyDataPair pairWithFile = (KeyDataPair) pair;
+                if (pairWithFile.getData() == null && pairWithFile.getFile() != null) {
+                    final String fileName = pairWithFile.getFile().getName();
+                    for (int i = 0; i < fileName.length(); i++) {
+                        if (fileName.codePointAt(i) > 127) {
+                            return CharsetUtil.getCharset(charset);
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     /**
      * HttpClient doesn't send Content-Type header for file parts as it should.
      * See:https://issues.apache.org/jira/browse/HTTPCLIENT-960
@@ -362,10 +371,16 @@ public class HttpWebConnection implements WebConnection {
 
         if (pairWithFile.getData() != null) {
             return new InputStreamBody(
-                    new ByteArrayInputStream(pairWithFile.getData()), contentType, pairWithFile.getName());
+                    new ByteArrayInputStream(pairWithFile.getData()), contentType, "");
         }
         else if (pairWithFile.getFile() == null) {
-            return new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, pairWithFile.getName());
+            return new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, "") {
+                // Overridden in order not to have a chunked response.
+                @Override
+                public long getContentLength() {
+                    return 0;
+                }
+            };
         }
 
         return new FileBody(pairWithFile.getFile(), contentType) {
