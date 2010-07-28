@@ -1821,7 +1821,7 @@ public class WebClientTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(Browser.FF2)
     public void testWindowTracking_SpecialCase1() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
@@ -1854,7 +1854,7 @@ public class WebClientTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(Browser.FF2)
     public void testWindowTracking_SpecialCase2() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
