@@ -42,8 +42,6 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -1173,7 +1171,8 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = submit.click();
 
         String expectedURL = URL_SECOND.toString();
-        if (getBrowserVersion().isFirefox() || getBrowserVersion().equals(BrowserVersion.INTERNET_EXPLORER_6)) {
+        if (getBrowserVersion() == BrowserVersion.FIREFOX_2
+                || getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_6) {
             expectedURL += "?";
         }
         assertEquals(expectedURL, secondPage.getWebResponse().getWebRequest().getUrl());
@@ -1304,7 +1303,6 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF3)
     public void base() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1328,7 +1326,6 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF3)
     public void emptyActionWithBase() throws Exception {
         final String html
             = "<html><head>\n"
