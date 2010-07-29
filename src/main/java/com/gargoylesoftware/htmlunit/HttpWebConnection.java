@@ -137,7 +137,8 @@ public class HttpWebConnection implements WebConnection {
             return makeWebResponse(httpResponse, request, downloadedBody, endTime - startTime);
         }
         catch (final URISyntaxException e) {
-            throw new IOException("Unable to create URI from URL: " + url.toExternalForm());
+            throw new IOException("Unable to create URI from URL: " + url.toExternalForm()
+                + " (reason: " + e.getMessage() + ")");
         }
         finally {
             if (httpMethod != null) {
@@ -168,7 +169,8 @@ public class HttpWebConnection implements WebConnection {
             new URI(url.toExternalForm());
         }
         catch (final URISyntaxException e) {
-            throw new IOException("Unable to create URI from URL: " + url.toExternalForm());
+            throw new IOException("Unable to create URI from URL: " + url.toExternalForm()
+                + " (reason: " + e.getMessage() + ")");
         }
         return hostConfiguration;
     }
