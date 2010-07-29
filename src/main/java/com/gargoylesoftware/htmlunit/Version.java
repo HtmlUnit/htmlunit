@@ -58,11 +58,11 @@ public final class Version {
     }
 
     /**
-     * Returns "HTMLUnit".
-     * @return "HTMLUnit"
+     * Returns "HtmlUnit".
+     * @return "HtmlUnit"
      */
     public static String getProductName() {
-        return "HTMLUnit";
+        return "HtmlUnit";
     }
 
     /**
