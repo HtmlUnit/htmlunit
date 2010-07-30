@@ -21,6 +21,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Tests for {@link BrowserVersionFeatures}.
@@ -28,15 +32,17 @@ import org.junit.Test;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@RunWith(BrowserRunner.class)
 public class BrowserVersionFeaturesTest extends WebTestCase {
 
     /**
      * Test of alphabetical order.
      */
     @Test
+    @Browsers(Browser.NONE)
     public void lexicographicOrder() {
         String lastFeatureName = null;
-        for (BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
+        for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
             final String featureName = feature.name();
             if (lastFeatureName != null && featureName.compareTo(lastFeatureName) < 1) {
                 fail("BrowserVersionFeatures.java: \""
@@ -51,17 +57,8 @@ public class BrowserVersionFeaturesTest extends WebTestCase {
      */
     @Test
     public void lexicographicOrder_properties() throws Exception {
-        lexicographicOrder_properties(BrowserVersion.INTERNET_EXPLORER_6);
-        lexicographicOrder_properties(BrowserVersion.INTERNET_EXPLORER_7);
-        lexicographicOrder_properties(BrowserVersion.INTERNET_EXPLORER_8);
-        lexicographicOrder_properties(BrowserVersion.FIREFOX_2);
-        lexicographicOrder_properties(BrowserVersion.FIREFOX_3);
-        lexicographicOrder_properties(BrowserVersion.FIREFOX_3_6);
-    }
-
-    private void lexicographicOrder_properties(final BrowserVersion browserVersion) throws Exception {
-        final String path = "com/gargoylesoftware/htmlunit/javascript/configuration/" + browserVersion.getNickname()
-            + ".properties";
+        final String path = "com/gargoylesoftware/htmlunit/javascript/configuration/"
+            + getBrowserVersion().getNickname() + ".properties";
         final InputStream is = getClass().getClassLoader().getResourceAsStream(path);
         final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         try {
