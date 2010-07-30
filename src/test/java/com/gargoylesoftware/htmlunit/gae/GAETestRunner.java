@@ -36,15 +36,18 @@ import org.junit.runners.model.FrameworkMethod;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Amit Manjhi
  */
 public class GAETestRunner extends BlockJUnit4ClassRunner {
     private static final Set<String> whitelist = loadWhiteList();
+    private static final Set<String> additionalWhitelist = getAdditionalWhitelist();
 
     static class GAELikeClassLoader extends ClassLoader {
         @Override
         public Class<?> loadClass(final String name) throws ClassNotFoundException {
             final String baseName = StringUtils.substringBefore(name, "$");
-            if (baseName.startsWith("java") && !whitelist.contains(baseName)) {
+            if (baseName.startsWith("java") && !whitelist.contains(baseName)
+                && !additionalWhitelist.contains(baseName)) {
                 throw new NoClassDefFoundError(name + " is a restricted class for GAE");
             }
             if (!name.startsWith("com.gargoylesoftware")) {
@@ -81,6 +84,23 @@ public class GAETestRunner extends BlockJUnit4ClassRunner {
         catch (final ClassNotFoundException e) {
             throw new RuntimeException("Can't find existing test class through GAELikeClassLoader: " + klass.getName());
         }
+    }
+
+    /**
+     * Get list of classes that are not being used
+     * but are loaded by getHtmlJavaScriptMapping() in
+     * {@link com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration}
+     *
+     * @return the list of additional classes.
+     */
+    private static Set<String> getAdditionalWhitelist() {
+        final String additionalClasses[] = {"java.awt.image.RenderedImage",
+            "java.awt.geom.Rectangle2D", "java.awt.geom.Ellipse2D", "java.applet.AppletStub"};
+        final Set<String> classesAsSet = new HashSet<String>();
+        for (String additionalClass : additionalClasses) {
+            classesAsSet.add(additionalClass);
+        }
+        return classesAsSet;
     }
 
     /**
