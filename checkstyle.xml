@@ -44,6 +44,11 @@
         <property name="message" value="Trailing whitespace found."/>
     </module>
 
+    <module name="RegexpMultiline">
+        <property name="format" value="(?&lt;=\r?\n)\r?\n\r?\n"/>
+        <property name="message" value="Two empty contiguous lines"/>
+    </module>
+
     <module name="TreeWalker">
         <property name="tabWidth" value="4"/>
         <module name="LeftCurly">
