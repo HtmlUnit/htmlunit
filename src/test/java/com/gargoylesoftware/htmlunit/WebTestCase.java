@@ -898,7 +898,7 @@ public abstract class WebTestCase {
         Thread.enumerate(threads);
         final List<Thread> jsThreads = new ArrayList<Thread>();
         for (final Thread t : threads) {
-            if (t != null && t.getName().startsWith("event loop")) {
+            if (t != null && t.getName().startsWith("JS executor for")) {
                 jsThreads.add(t);
             }
         }

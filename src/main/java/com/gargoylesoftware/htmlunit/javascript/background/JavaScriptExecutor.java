@@ -91,9 +91,9 @@ public class JavaScriptExecutor implements Runnable, Serializable {
      */
     protected void startThreadIfNeeded() {
         if (eventLoopThread_ == null) {
-            eventLoopThread_ = new Thread(this);
+            eventLoopThread_ = new Thread(this, "JS executor for " + webClient_.get());
+            eventLoopThread_.setDaemon(true);
             eventLoopThread_.start();
-            eventLoopThread_.setName("event loop for client");
         }
     }
 

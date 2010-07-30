@@ -1573,4 +1573,27 @@ public class JavaScriptEngineTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * Ensures that the JS executor thread is a daemon thread.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void daemonExecutorThread() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "function f() { alert('foo'); }\n"
+            + "setTimeout(f, 5);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+
+        Thread.sleep(20);
+        final List<Thread> jsThreads = getJavaScriptThreads();
+        assertEquals(1, jsThreads.size());
+        final Thread jsThread = jsThreads.get(0);
+        assertEquals("JS executor for " + page.getWebClient(), jsThread.getName());
+        assertTrue(jsThread.isDaemon());
+    }
 }
