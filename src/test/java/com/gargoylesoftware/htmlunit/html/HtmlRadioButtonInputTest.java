@@ -83,7 +83,14 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
 
         assertTrue(radio.isChecked());
 
-        assertEquals("newtrue", radio.getValueAttribute());
+        final String expectedValue;
+        if (getBrowserVersion().isIE()) {
+            expectedValue = "on";
+        }
+        else {
+            expectedValue = "newtrue";
+        }
+        assertEquals(expectedValue, radio.getValueAttribute());
     }
 
     /**
@@ -185,7 +192,14 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
 
         final HtmlPage secondPage = (HtmlPage) radio.setChecked(true);
 
-        assertEquals("Second", secondPage.getTitleText());
+        final String expectedValue;
+        if (getBrowserVersion().isIE()) {
+            expectedValue = "First";
+        }
+        else {
+            expectedValue = "Second";
+        }
+        assertEquals(expectedValue, secondPage.getTitleText());
     }
 
     /**

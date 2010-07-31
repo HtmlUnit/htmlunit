@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlRadioButtonInput}.
@@ -28,6 +32,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Benoit Heinrich
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
@@ -74,7 +79,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "send request", "response read" })
-    public void testCheckedOnXmlResponse() throws Exception {
+    public void checkedOnXmlResponse() throws Exception {
         final String html
             = "<html><body>\n"
             + "<script>\n"
@@ -96,5 +101,115 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "foo,change,")
+    public void onchangeFires() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function debug(string) {\n"
+            + "    document.getElementById('myTextarea').value += string + ',';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<form>\n"
+            + "<input type='radio' name='radioGroup' id='radio'"
+            + " onchange='debug(\"foo\");debug(event.type);'>Check me</input>\n"
+            + "</form>\n"
+            + "<textarea id='myTextarea'></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("radio")).setSelected();
+
+        assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
+                '[' + driver.findElement(By.id("myTextarea")).getValue() + ']');
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("foo,change,boo,blur,")
+    public void onchangeFires2() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function debug(string) {\n"
+            + "    document.getElementById('myTextarea').value += string + ',';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "<form>\n"
+            + "<input type='radio' name='radioGroup' id='radio1'"
+            + " onChange='debug(\"foo\");debug(event.type);'"
+            + " onBlur='debug(\"boo\");debug(event.type);'"
+            + ">Check Me</input>\n"
+            + "<input type='radio' name='radioGroup' id='radio2'>Or Check Me</input>\n"
+            + "</form>\n"
+            + "<textarea id='myTextarea'></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("radio1")).click();
+        driver.findElement(By.id("radio2")).click();
+
+        assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
+                '[' + driver.findElement(By.id("myTextarea")).getValue() + ']');
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "First", FF = "Second")
+    public void setChecked() throws Exception {
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form>\n"
+            + "<input type='radio' name='radioGroup' id='radio'"
+            + " onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
+            + "</form>\n"
+            + "</body></html>";
+        final String secondHtml
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondHtml);
+        final WebDriver driver = loadPage2(firstHtml);
+
+        driver.findElement(By.id("radio")).click();
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "First", "Second" }, FF = "Second")
+    public void setChecked2() throws Exception {
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form>\n"
+            + "<input type='radio' name='radioGroup' id='radio'"
+            + " onchange=\"window.location.href='" + URL_SECOND + "'\">\n"
+            + "<input id='myInput' type='text'>\n"
+            + "</form>\n"
+            + "</body></html>";
+        final String secondHtml
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        getMockWebConnection().setDefaultResponse(secondHtml);
+        final WebDriver driver = loadPage2(firstHtml);
+
+        driver.findElement(By.id("radio")).click();
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+
+        if (getBrowserVersion().isIE()) {
+            driver.findElement(By.id("myInput")).click();
+            assertEquals(getExpectedAlerts()[1], driver.getTitle());
+        }
     }
 }

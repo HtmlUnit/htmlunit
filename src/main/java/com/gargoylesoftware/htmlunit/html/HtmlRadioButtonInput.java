@@ -36,12 +36,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  * @author Benoit Heinrich
+ * @author Ronald Brill
  */
 public class HtmlRadioButtonInput extends HtmlInput {
 
     private static final long serialVersionUID = 425993174633373218L;
 
     private boolean defaultCheckedState_;
+    private boolean valueAtFocus_;
 
     /**
      * Creates an instance.
@@ -104,7 +106,8 @@ public class HtmlRadioButtonInput extends HtmlInput {
             removeAttribute("checked");
         }
 
-        if (changed) {
+        if (changed && !getPage().getWebClient().getBrowserVersion()
+                .hasFeature(BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS)) {
             final ScriptResult scriptResult = fireEvent(Event.TYPE_CHANGE);
             if (scriptResult != null) {
                 page = scriptResult.getNewPage();
@@ -186,5 +189,27 @@ public class HtmlRadioButtonInput extends HtmlInput {
         }
     }
 
-}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void focus() {
+        super.focus();
+        valueAtFocus_ = isChecked();
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    void removeFocus() {
+        super.removeFocus();
+
+        final boolean fireOnChange = getPage().getWebClient().getBrowserVersion()
+            .hasFeature(BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS);
+        if (fireOnChange && valueAtFocus_ != isChecked()) {
+            executeOnChangeHandlerIfAppropriate(this);
+        }
+        valueAtFocus_ = isChecked();
+    }
+}
