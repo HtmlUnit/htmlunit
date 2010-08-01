@@ -52,7 +52,8 @@ public class HtmlOptionGroupTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlOptionGroup.class.isInstance(page.getHtmlElementById("myId")));
+        final HtmlOptionGroup optionGroup = page.getHtmlElementById("myId");
+        assertTrue(optionGroup.getEnclosingSelect() instanceof HtmlSelect);
     }
 
     /**

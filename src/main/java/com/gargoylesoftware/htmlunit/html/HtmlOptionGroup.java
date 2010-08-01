@@ -83,4 +83,13 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
     public final String getLabelAttribute() {
         return getAttribute("label");
     }
+
+    /**
+     * Gets the enclosing select of this HtmlOptionGroup.
+     * @return <code>null</code> if no select is found (for instance malformed html)
+     */
+    public HtmlSelect getEnclosingSelect() {
+        return (HtmlSelect) getEnclosingElement("select");
+    }
+
 }

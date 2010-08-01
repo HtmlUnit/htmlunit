@@ -364,14 +364,10 @@ public abstract class HtmlElement extends DomElement {
     public HtmlElement getEnclosingElement(final String tagName) {
         final String tagNameLC = tagName.toLowerCase();
 
-        DomNode currentNode = getParentNode();
-        while (currentNode != null) {
-            if (currentNode instanceof HtmlElement
-                    && currentNode.getNodeName().equals(tagNameLC)) {
-
+        for (DomNode currentNode = getParentNode(); currentNode != null; currentNode = currentNode.getParentNode()) {
+            if (currentNode instanceof HtmlElement && currentNode.getNodeName().equals(tagNameLC)) {
                 return (HtmlElement) currentNode;
             }
-            currentNode = currentNode.getParentNode();
         }
         return null;
     }
