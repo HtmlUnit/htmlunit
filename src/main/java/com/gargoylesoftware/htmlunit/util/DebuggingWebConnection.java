@@ -185,13 +185,17 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         if (request.getHttpMethod() == HttpMethod.POST && request.getEncodingType() == FormEncodingType.URL_ENCODED) {
             buffer.append("postParameters: " + nameValueListToJsMap(request.getRequestParameters()) + ", ");
         }
-        buffer.append("url: '" + url + "', ");
+        buffer.append("url: '" + escapeJSString(url.toString()) + "', ");
         buffer.append("loadTime: " + response.getLoadTime() + ", ");
         final byte[] bytes = IOUtils.toByteArray(response.getContentAsStream());
         buffer.append("responseSize: " + ((bytes == null) ? 0 : bytes.length) + ", ");
         buffer.append("responseHeaders: " + nameValueListToJsMap(response.getResponseHeaders()));
         buffer.append("};\n");
         appendToJSFile(buffer.toString());
+    }
+
+    static String escapeJSString(final String string) {
+        return string.replaceAll("'", "\\\\'");
     }
 
     /**
@@ -273,7 +277,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         }
         final StringBuilder buffer = new StringBuilder("{");
         for (final NameValuePair header : headers) {
-            buffer.append("'" + header.getName() + "': '" + header.getValue().replaceAll("'", "\\'") + "', ");
+            buffer.append("'" + header.getName() + "': '" + escapeJSString(header.getValue()) + "', ");
         }
         buffer.delete(buffer.length() - 2, buffer.length());
         buffer.append("}");

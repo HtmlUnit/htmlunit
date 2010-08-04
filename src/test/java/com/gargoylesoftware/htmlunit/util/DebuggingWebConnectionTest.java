@@ -49,8 +49,18 @@ public class DebuggingWebConnectionTest extends WebTestCase {
         list.add(new NameValuePair("na me", "value1"));
         list.add(new NameValuePair("key", "value 2"));
         list.add(new NameValuePair("key 2", "value 3"));
-        final String expected = "{'na me': 'value1', 'key': 'value 2', 'key 2': 'value 3'}";
+        list.add(new NameValuePair("key 4", "with ' quote")); // can it really happen in header?
+        final String expected = "{'na me': 'value1', 'key': 'value 2', 'key 2': 'value 3', 'key 4': 'with \\' quote'}";
         assertEquals(expected, DebuggingWebConnection.nameValueListToJsMap(list));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeJSString() throws Exception {
+        assertEquals("", DebuggingWebConnection.escapeJSString(""));
+        assertEquals("hello", DebuggingWebConnection.escapeJSString("hello"));
+        assertEquals("I\\'m here", DebuggingWebConnection.escapeJSString("I'm here"));
+    }
 }
