@@ -165,13 +165,7 @@ public class HttpWebConnection implements WebConnection {
         throws IOException {
         final URL url = webRequest.getUrl();
         final HttpHost hostConfiguration = new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
-        try {
-            new URI(url.toExternalForm());
-        }
-        catch (final URISyntaxException e) {
-            throw new IOException("Unable to create URI from URL: " + url.toExternalForm()
-                + " (reason: " + e.getMessage() + ")");
-        }
+
         return hostConfiguration;
     }
 

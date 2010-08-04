@@ -127,4 +127,16 @@ public class WebClient3Test extends WebDriverTestCase {
             assertArrayEquals(binaryContent, receivedBytes);
         }
     }
+
+    /**
+     * Was causing an Exception in IE simulation
+     * as of HtmlUnit-2.8-SNAPSHOT on Aug. 04, 2010.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeRequestQuery() throws Exception {
+        getMockWebConnection().setDefaultResponse("");
+
+        loadPage2("", new URL(getDefaultUrl(), "foo?a=<b>i</b>"));
+    }
 }
