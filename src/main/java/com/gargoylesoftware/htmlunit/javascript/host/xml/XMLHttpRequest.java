@@ -543,7 +543,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     public void jsxFunction_setRequestHeader(final String name, final String value) {
         if (!isAuthorizedHeader(name)) {
             LOG.warn("Ignoring XMLHttpRequest.setRequestHeader for " + name
-                + ": it is a restricted error");
+                + ": it is a restricted header");
             return;
         }
 
