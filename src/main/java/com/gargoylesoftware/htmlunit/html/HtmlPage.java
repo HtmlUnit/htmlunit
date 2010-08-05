@@ -1140,6 +1140,18 @@ public class HtmlPage extends SgmlPage {
         final Window jsWindow = (Window) window.getScriptObject();
         if (jsWindow != null) {
             final HtmlElement element = getDocumentElement();
+            if (element == null) { // should never occur but see bug 3039471
+                // try to give more information as we currently don't know when and why it occurs
+                final StringBuilder sb = new StringBuilder("No document element (");
+                sb.append(getUrl()).append(")\n");
+                try {
+                    sb.append(asXml());
+                }
+                catch (final Exception e) {
+                    // ignore
+                }
+                throw new NullPointerException(sb.toString());
+            }
             final Event event = new Event(element, eventType);
             element.fireEvent(event);
             if (!isOnbeforeunloadAccepted(this, event)) {
