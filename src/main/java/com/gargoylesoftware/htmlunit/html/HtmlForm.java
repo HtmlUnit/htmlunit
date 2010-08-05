@@ -138,7 +138,7 @@ public class HtmlForm extends HtmlElement {
      * Gets the settings for a submission of this form request settings necessary to submit this form.
      * @param submitElement the element that caused the submit to occur
      * @return the request settings
-     * @deprecated as of 2.8, please use {@link #getWebRequest()} instead
+     * @deprecated as of 2.8, please use {@link #getWebRequest(SubmittableElement)} instead
      */
     @Deprecated
     public WebRequest getWebRequestSettings(final SubmittableElement submitElement) {
