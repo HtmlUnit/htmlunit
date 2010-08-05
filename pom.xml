@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.8-SNAPSHOT</version>
+    <version>2.8</version>
     <name>HtmlUnit</name>
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -16,6 +16,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>3</version>
+    </parent>
+    
     <build>
         <plugins>
             <plugin>
@@ -152,6 +158,19 @@
                     <downloadSources>true</downloadSources>
                     <downloadJavadocs>true</downloadJavadocs>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -669,7 +688,7 @@
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit-core-js</artifactId>
-            <version>2.8-SNAPSHOT</version>
+            <version>2.8</version>
         </dependency>
         <!-- This is an indirect dependency, used by Xalan and NekoHtml -->
         <dependency>
@@ -809,32 +828,4 @@
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
-    <repositories>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <id>HtmlUnitSnapshots</id>
-            <name>HtmlUnit Snapshots</name>
-            <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <id>NekoHTMLSnapshots</id>
-            <name>NekoHTML Snapshots</name>
-            <url>http://build.canoo.com/NekoHTML/artifacts/m2-repo</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
 </project>
