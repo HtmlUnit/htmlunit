@@ -67,42 +67,36 @@ public class PropertiesTest extends WebTestCase {
     private static List<String> IE6_;
     private static List<String> IE7_;
     private static List<String> IE8_;
-    private static List<String> FF2_;
     private static List<String> FF3_;
     private static List<String> FF3_6_;
 
     private static List<String> IE6_SIMULATED_;
     private static List<String> IE7_SIMULATED_;
     private static List<String> IE8_SIMULATED_;
-    private static List<String> FF2_SIMULATED_;
     private static List<String> FF3_SIMULATED_;
     private static List<String> FF3_6_SIMULATED_;
 
     private static DefaultCategoryDataset CATEGORY_DATASET_IE6_ = new DefaultCategoryDataset();
     private static DefaultCategoryDataset CATEGORY_DATASET_IE7_ = new DefaultCategoryDataset();
     private static DefaultCategoryDataset CATEGORY_DATASET_IE8_ = new DefaultCategoryDataset();
-    private static DefaultCategoryDataset CATEGORY_DATASET_FF2_ = new DefaultCategoryDataset();
     private static DefaultCategoryDataset CATEGORY_DATASET_FF3_ = new DefaultCategoryDataset();
     private static DefaultCategoryDataset CATEGORY_DATASET_FF3_6_ = new DefaultCategoryDataset();
 
     private static StringBuilder IE6_HTML_ = new StringBuilder();
     private static StringBuilder IE7_HTML_ = new StringBuilder();
     private static StringBuilder IE8_HTML_ = new StringBuilder();
-    private static StringBuilder FF2_HTML_ = new StringBuilder();
     private static StringBuilder FF3_HTML_ = new StringBuilder();
     private static StringBuilder FF3_6_HTML_ = new StringBuilder();
 
     private static MutableInt IE6_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt IE7_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt IE8_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
-    private static MutableInt FF2_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt FF3_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt FF3_6_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
 
     private static MutableInt IE6_REMAINING_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt IE7_REMAINING_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt IE8_REMAINING_PROPERTY_COUNT_ = new MutableInt();
-    private static MutableInt FF2_REMAINING_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt FF3_REMAINING_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt FF3_6_REMAINING_PROPERTY_COUNT_ = new MutableInt();
 
@@ -119,23 +113,19 @@ public class PropertiesTest extends WebTestCase {
         IE6_ = getProperties(BrowserVersion.INTERNET_EXPLORER_6);
         IE7_ = getProperties(BrowserVersion.INTERNET_EXPLORER_7);
         IE8_ = getProperties(BrowserVersion.INTERNET_EXPLORER_8);
-        FF2_ = getProperties(BrowserVersion.FIREFOX_2);
         FF3_ = getProperties(BrowserVersion.FIREFOX_3);
         FF3_6_ = getProperties(BrowserVersion.FIREFOX_3_6);
         Assert.assertEquals(IE6_.size(), IE7_.size());
         Assert.assertEquals(IE6_.size(), IE8_.size());
-        Assert.assertEquals(IE6_.size(), FF2_.size());
         Assert.assertEquals(IE6_.size(), FF3_.size());
         Assert.assertEquals(IE6_.size(), FF3_6_.size());
         IE6_SIMULATED_ = getSimulatedProperties(BrowserVersion.INTERNET_EXPLORER_6);
         IE7_SIMULATED_ = getSimulatedProperties(BrowserVersion.INTERNET_EXPLORER_7);
         IE8_SIMULATED_ = getSimulatedProperties(BrowserVersion.INTERNET_EXPLORER_8);
-        FF2_SIMULATED_ = getSimulatedProperties(BrowserVersion.FIREFOX_2);
         FF3_SIMULATED_ = getSimulatedProperties(BrowserVersion.FIREFOX_3);
         FF3_6_SIMULATED_ = getSimulatedProperties(BrowserVersion.FIREFOX_3_6);
         Assert.assertEquals(IE6_SIMULATED_.size(), IE7_SIMULATED_.size());
         Assert.assertEquals(IE6_SIMULATED_.size(), IE8_SIMULATED_.size());
-        Assert.assertEquals(IE6_SIMULATED_.size(), FF2_SIMULATED_.size());
         Assert.assertEquals(IE6_SIMULATED_.size(), FF3_SIMULATED_.size());
         Assert.assertEquals(IE6_SIMULATED_.size(), FF3_6_SIMULATED_.size());
         final Collection<Object[]> list = new ArrayList<Object[]>();
@@ -144,7 +134,6 @@ public class PropertiesTest extends WebTestCase {
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_6});
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_7});
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
-            list.add(new Object[] {name, BrowserVersion.FIREFOX_2});
             list.add(new Object[] {name, BrowserVersion.FIREFOX_3});
             list.add(new Object[] {name, BrowserVersion.FIREFOX_3_6});
         }
@@ -211,14 +200,6 @@ public class PropertiesTest extends WebTestCase {
             html = IE8_HTML_;
             actualPropertyCount = IE8_ACTUAL_PROPERTY_COUNT_;
             remainingPropertyCount = IE8_REMAINING_PROPERTY_COUNT_;
-        }
-        else if (browserVersion_ == BrowserVersion.FIREFOX_2) {
-            realList = FF2_;
-            simulatedList = FF2_SIMULATED_;
-            dataset = CATEGORY_DATASET_FF2_;
-            html = FF2_HTML_;
-            actualPropertyCount = FF2_ACTUAL_PROPERTY_COUNT_;
-            remainingPropertyCount = FF2_REMAINING_PROPERTY_COUNT_;
         }
         else if (browserVersion_ == BrowserVersion.FIREFOX_3) {
             realList = FF3_;

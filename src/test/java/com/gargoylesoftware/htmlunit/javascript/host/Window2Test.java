@@ -57,7 +57,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "not found", "true" },
-            FF2 = { "found", "true" },
             FF3 = { "found", "exception", "false" })
     @NotYetImplemented(Browser.FF3)
     public void FF_controllers() throws Exception {
@@ -261,8 +260,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(Browser.FF3)
-    @Alerts(FF2 = { "java: object", "getClass: function" },
-            FF3 = { "java: object", "getClass: undefined" },
+    @Alerts(FF3 = { "java: object", "getClass: undefined" },
             IE = { "java: undefined", "getClass: undefined" })
     public void rhino_lazilyNames2() throws Exception {
         doTestRhinoLazilyNames("java", "getClass");
@@ -393,7 +391,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "undefined", "undefined" }, FF2 = { "[Node]", "[Element]" },
+    @Alerts(IE = { "undefined", "undefined" },
             FF3 = { "[object Node]", "[object Element]" })
     public void windowProperties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -502,7 +500,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF2 = "hello", FF3 = "exception", IE = "hello")
+    @Alerts(FF3 = "exception", IE = "hello")
     public void overwriteFunctions_navigator() throws Exception {
         final String html = "<html><head><script language='JavaScript'>\n"
             + "try {\n"

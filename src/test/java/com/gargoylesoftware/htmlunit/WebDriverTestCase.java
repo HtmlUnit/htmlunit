@@ -71,19 +71,19 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * "test.properties" in the HtmlUnit root directory.
  * Sample:
  * <pre>
-   browsers=hu,ff2,ff3,ie8
-   ff2.bin=c:\\location_to_firefox.exe              [Windows]
-   ff3.bin=/use/bin/firefox                         [Unix-like]
+   browsers=hu,ff3,ff3.6,ie8
+   ff3.bin=c:\\location_to_firefox.exe              [Windows]
+   ff3.6.bin=/use/bin/firefox                         [Unix-like]
  * </pre>
- * The file should contain three properties: "browsers", "ff2.bin" and "ff3.bin".
+ * The file should contain three properties: "browsers", "ff3.bin" and "ff3.6.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
- *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ff2", "hu-ff3",
- *   "ff2", "ff3", "ie6", "ie7", "ie8", which will be used to driver real browsers,
+ *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ff3", "hu-ff3.6",
+ *   "ff3", "ff3.6", "ie6", "ie7", "ie8", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
- *   <li>ff2.bin: is the location of the FF2 binary, in Windows use double back-slashes</li>
  *   <li>ff3.bin: is the location of the FF3 binary, in Windows use double back-slashes</li>
+ *   <li>ff3.6.bin: is the location of the FF3.6 binary, in Windows use double back-slashes</li>
  * </ul>
  * </p>
  *
@@ -95,7 +95,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
     private static List<String> BROWSERS_PROPERTIES_;
-    private static String FF2_BIN_;
     private static String FF3_BIN_;
 
     private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
@@ -116,7 +115,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     BROWSERS_PROPERTIES_
                         = Arrays.asList(properties.getProperty("browsers", "hu")
                             .replaceAll(" ", "").toLowerCase().split(","));
-                    FF2_BIN_ = properties.getProperty("ff2.bin");
                     FF3_BIN_ = properties.getProperty("ff3.bin");
                 }
             }
@@ -181,11 +179,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (getBrowserVersion().isIE()) {
                 return new InternetExplorerDriver();
             }
-            final String ffBinary;
-            if (getBrowserVersion().getBrowserVersionNumeric() == 2) {
-                ffBinary = FF2_BIN_;
-            }
-            else {
+            String ffBinary = null;
+            if (getBrowserVersion().getBrowserVersionNumeric() == 3) {
                 ffBinary = FF3_BIN_;
             }
             if (ffBinary != null) {

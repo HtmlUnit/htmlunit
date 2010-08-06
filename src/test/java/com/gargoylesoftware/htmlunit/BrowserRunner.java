@@ -64,9 +64,6 @@ public class BrowserRunner extends Suite {
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             final List<String> browsers = WebDriverTestCase.getBrowsersProperties();
             if (WebDriverTestCase.class.isAssignableFrom(klass)) {
-                if (browsers.contains("hu") || browsers.contains("hu-ff2")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, false));
-                }
                 if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
                 }
@@ -78,9 +75,6 @@ public class BrowserRunner extends Suite {
                 }
                 if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
-                }
-                if (browsers.contains("ff2")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, true));
                 }
                 if (browsers.contains("ff3")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, true));
@@ -96,9 +90,6 @@ public class BrowserRunner extends Suite {
                 }
             }
             else {
-                if (browsers.contains("hu") || browsers.contains("hu-ff2")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_2, false));
-                }
                 if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
                 }
@@ -170,9 +161,6 @@ public class BrowserRunner extends Suite {
         /** All versions of Firefox. */
         FF,
 
-        /** Firefox 2. */
-        FF2,
-
         /** Firefox 3. */
         FF3,
 
@@ -221,9 +209,6 @@ public class BrowserRunner extends Suite {
 
         /** Alerts for any Firefox, it can be overridden by specific FF version. */
         String[] FF() default {EMPTY_DEFAULT };
-
-        /** Alerts for Firefox 2. If not defined, {@link #FF()} is used. */
-        String[] FF2() default {EMPTY_DEFAULT };
 
         /** Alerts for Firefox 3. If not defined, {@link #FF()} is used. */
         String[] FF3() default {EMPTY_DEFAULT };

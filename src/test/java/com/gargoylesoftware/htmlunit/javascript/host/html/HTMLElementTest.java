@@ -2456,7 +2456,6 @@ public class HTMLElementTest extends WebTestCase {
     @Test
     @Alerts(FF3 = { "function", "* => body: 0, div1: 0", "foo => body: 3, div1: 1", "foo red => body: 1, div1: 0",
             "red foo => body: 1, div1: 0", "blue foo => body: 0, div1: 0", "null => body: 0, div1: 0" },
-            FF2 = { "undefined", "exception" },
             IE = { "undefined", "exception" })
     public void getElementsByClassName() throws Exception {
         final String html

@@ -34,7 +34,7 @@ public class OfflineResourceListTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "undefined", FF2 = "undefined", FF3 = "[object OfflineResourceList]")
+    @Alerts(IE = "undefined", FF3 = "[object OfflineResourceList]")
     public void existence() throws Exception {
         final String html
             = "<html><body><script>\n"

@@ -38,9 +38,8 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.IE, Browser.FF2 })
-    @Alerts(FF2 = { "2<>1", "1<>2", "2<>5", "9<>5", "2<>5", "2<>1", "1<>1" },
-            FF3 = { "1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9" },
+    @NotYetImplemented(Browser.IE)
+    @Alerts(FF3 = { "1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9" },
             IE = { "1<>9", "9<>5", "9<>2", "9<>1", "1<>5", "5<>1", "5<>2", "5<>1", "1<>1", "1<>2", "2<>1", "1<>1" })
     public void sort() throws Exception {
         final String html
@@ -81,9 +80,6 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(FF3 = { "every: function", "filter: function", "forEach: function", "indexOf: function",
             "lastIndexOf: function", "map: function", "reduce: function", "reduceRight: function", "some: function",
-            "toSource: function" },
-            FF2 = { "every: function", "filter: function", "forEach: function", "indexOf: function",
-            "lastIndexOf: function", "map: function", "reduce: undefined", "reduceRight: undefined", "some: function",
             "toSource: function" },
             IE = { "every: undefined", "filter: undefined", "forEach: undefined", "indexOf: undefined",
             "lastIndexOf: undefined", "map: undefined", "reduce: undefined", "reduceRight: undefined",

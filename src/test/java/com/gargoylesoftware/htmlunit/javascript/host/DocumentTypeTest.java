@@ -36,8 +36,6 @@ public class DocumentTypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "null",
-            FF2 = { "[object DocumentType]", "true", "html,10,null,null,null,null",
-            "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,,null,null" },
             FF3 = { "[object DocumentType]", "true", "HTML,10,null,null,null,null",
             "HTML,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,,null,null" })
     public void doctype() throws Exception {

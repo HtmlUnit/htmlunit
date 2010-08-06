@@ -204,7 +204,7 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.IE, Browser.FF2 })
+    @NotYetImplemented(Browser.IE)
     @Alerts("exception")
     public void setNonWritableProperty() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

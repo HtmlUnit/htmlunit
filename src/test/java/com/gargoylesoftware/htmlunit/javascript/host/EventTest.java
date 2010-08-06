@@ -27,14 +27,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -647,10 +647,9 @@ public class EventTest extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @NotYetImplemented(Browser.FF3)
     @Test
-    @Alerts(FF2 = {"object", "true" },
-            FF3 = {"object", "false" },
+    @NotYetImplemented(Browser.FF3)
+    @Alerts(FF3 = {"object", "false" },
             IE = {"object", "undefined" })
     public void testBubbles() throws Exception {
         final String html =
@@ -902,8 +901,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FF2)
-    @Alerts(FF2 = "undefined", FF3 = { "true", "I was here" }, IE = { "true", "I was here" })
+    @Alerts(FF3 = { "true", "I was here" }, IE = { "true", "I was here" })
     public void firedEvent_equals_original_event() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"

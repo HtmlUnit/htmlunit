@@ -188,8 +188,7 @@ public class HTMLCollectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF2 = {"true", "false" },
-            FF3 = {"false", "false" },
+    @Alerts(FF3 = {"false", "false" },
             IE = {"true", "true" })
     public void testTags() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

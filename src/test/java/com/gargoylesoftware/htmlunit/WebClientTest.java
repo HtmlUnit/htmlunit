@@ -66,7 +66,6 @@ import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -1821,8 +1820,7 @@ public class WebClientTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FF2)
-    public void testWindowTracking_SpecialCase1() throws Exception {
+    public void windowTracking_SpecialCase1() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
 
@@ -1854,8 +1852,7 @@ public class WebClientTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FF2)
-    public void testWindowTracking_SpecialCase2() throws Exception {
+    public void windowTracking_SpecialCase2() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
 

@@ -1171,8 +1171,7 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage secondPage = submit.click();
 
         String expectedURL = URL_SECOND.toString();
-        if (getBrowserVersion() == BrowserVersion.FIREFOX_2
-                || getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_6) {
+        if (getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_6) {
             expectedURL += "?";
         }
         assertEquals(expectedURL, secondPage.getWebResponse().getWebRequest().getUrl());
@@ -1315,8 +1314,7 @@ public class HtmlFormTest extends WebTestCase {
         page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
 
         String expectedUrl = URL_SECOND.toExternalForm() + "two.html";
-        if (BrowserVersion.FIREFOX_2.equals(getBrowserVersion())
-            || BrowserVersion.INTERNET_EXPLORER_6.equals(getBrowserVersion())) {
+        if (BrowserVersion.INTERNET_EXPLORER_6.equals(getBrowserVersion())) {
             expectedUrl += "?";
         }
         assertEquals(expectedUrl, page.getWebResponse().getWebRequest().getUrl());
@@ -1338,8 +1336,7 @@ public class HtmlFormTest extends WebTestCase {
         page = page.<HtmlSubmitInput>getFirstByXPath("//input").click();
 
         String expectedUrl = getDefaultUrl().toExternalForm();
-        if (BrowserVersion.FIREFOX_2.equals(getBrowserVersion())
-            || BrowserVersion.INTERNET_EXPLORER_6.equals(getBrowserVersion())) {
+        if (BrowserVersion.INTERNET_EXPLORER_6.equals(getBrowserVersion())) {
             expectedUrl += "?";
         }
         assertEquals(expectedUrl, page.getWebResponse().getWebRequest().getUrl());

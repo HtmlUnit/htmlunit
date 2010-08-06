@@ -142,7 +142,6 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @NotYetImplemented(Browser.FF2) // test perhaps not correct for FF2 but no matter, FF2 is deprecated
     @Test
     public void typeOnChange() throws Exception {
         final String html =

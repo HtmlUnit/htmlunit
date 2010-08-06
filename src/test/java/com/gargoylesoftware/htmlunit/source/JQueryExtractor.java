@@ -48,7 +48,6 @@ public final class JQueryExtractor {
     private final Writer writer_;
     private final List<String[]> ie6_;
     private final List<String[]> ie7_;
-    private final List<String[]> ff2_;
     private final List<String[]> ff3_;
 
     /**
@@ -69,7 +68,6 @@ public final class JQueryExtractor {
         writer_ = new BufferedWriter(new FileWriter(output));
         ie6_ = getExpected(dir, BrowserVersion.INTERNET_EXPLORER_6);
         ie7_ = getExpected(dir, BrowserVersion.INTERNET_EXPLORER_7);
-        ff2_ = getExpected(dir, BrowserVersion.FIREFOX_2);
         ff3_ = getExpected(dir, BrowserVersion.FIREFOX_3);
         for (int i = 0; i < ie6_.size(); i++) {
             process(i);

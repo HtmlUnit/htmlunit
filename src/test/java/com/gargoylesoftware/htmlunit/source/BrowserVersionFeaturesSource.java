@@ -116,8 +116,7 @@ public final class BrowserVersionFeaturesSource {
             BrowserVersion.INTERNET_EXPLORER_6, BrowserVersion.INTERNET_EXPLORER_7,
             BrowserVersion.INTERNET_EXPLORER_8 });
         generate(folder, ".isFirefox()", new BrowserVersion[] {
-            BrowserVersion.FIREFOX_2, BrowserVersion.FIREFOX_3,
-            BrowserVersion.FIREFOX_3_6 });
+            BrowserVersion.FIREFOX_3, BrowserVersion.FIREFOX_3_6 });
     }
 
     @SuppressWarnings("unchecked")

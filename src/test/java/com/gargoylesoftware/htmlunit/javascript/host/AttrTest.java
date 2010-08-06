@@ -119,7 +119,6 @@ public class AttrTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "undefined", "undefined", "undefined" },
-            FF2 = { "undefined", "undefined", "undefined" },
             FF3 = { "true", "false", "false" })
     public void isId() throws Exception {
         final String html

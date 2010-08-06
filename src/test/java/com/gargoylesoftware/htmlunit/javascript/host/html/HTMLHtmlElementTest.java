@@ -61,7 +61,6 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "[object]", "exception" },
-            FF2 = { "[object HTMLHtmlElement]", "[HTMLHtmlElement]" },
             FF3 = { "[object HTMLHtmlElement]", "[object HTMLHtmlElement]" })
     public void HTMLHtmlElement_toString() throws Exception {
         final String html = "<html id='myId'><head><title>foo</title><script>\n"
