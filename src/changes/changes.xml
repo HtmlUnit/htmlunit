@@ -5,6 +5,11 @@
     </properties>
 
     <body>
+        <release version="2.9" date="???" description="Bugfixes">
+            <action type="remove" dev="asashour">
+                Remove deprecated DomNode.getAllHtmlChildElements() and WebResponse.getRequestUrl().
+            </action>
+        </release>
         <release version="2.8" date="Aug 5, 2010" description="Bugfixes, (large) binary download, single thread for JavaScript background tasks, HttpClient 4, SOCKS proxy, initial support for FF 3.6, support for GoogleAppEngine">
             <action type="add" dev="asashour" issue="3037585">
                 HtmlOptionGroup: add utility method getEnclosingSelect().

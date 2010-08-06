@@ -1198,18 +1198,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns an {@link Iterable} that will recursively iterate over all of this node's {@link HtmlElement}
-     * descendants.
-     * @return an {@link Iterable} that will recursively iterate over all of this node's {@link HtmlElement}
-     *         descendants
-     * @deprecated as of 2.7, please use {@link #getHtmlElementDescendants()} instead
-     */
-    @Deprecated
-    public final Iterable<HtmlElement> getAllHtmlChildElements() {
-        return getHtmlElementDescendants();
-    }
-
-    /**
      * Iterates over all descendants of a specific type, in document order.
      * @param <T> the type of nodes over which to iterate
      */

@@ -179,12 +179,4 @@ public class WebResponseWrapper extends WebResponse {
     public WebRequest getWebRequest() {
         return wrappedWebResponse_.getWebRequest();
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public URL getRequestUrl() {
-        return getWebRequest().getUrl();
-    }
 }

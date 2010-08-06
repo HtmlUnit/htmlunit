@@ -352,9 +352,4 @@ class DummyWebResponse extends WebResponse {
     public WebRequest getWebRequest() {
         throw new RuntimeException("not implemented");
     }
-
-    @Override
-    public URL getRequestUrl() {
-        return getWebRequest().getUrl();
-    }
 }

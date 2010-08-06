@@ -695,10 +695,5 @@ public class XMLHttpRequest extends SimpleScriptable {
         public WebRequest getWebRequest() {
             return request_;
         }
-
-        @Override
-        public URL getRequestUrl() {
-            return getWebRequest().getUrl();
-        }
     }
 }
