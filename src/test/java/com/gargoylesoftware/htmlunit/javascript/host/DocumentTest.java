@@ -1297,7 +1297,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "exception",
+    @Alerts(FF = "exception",
             IE = { "a", "b", "a", "b", "0" })
     public void all_tags() throws Exception {
         final String html
@@ -1840,7 +1840,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.FF)
-    @Alerts(FF3 = { "null", "null", "[object HTMLDivElement]" })
+    @Alerts(FF = { "null", "null", "[object HTMLDivElement]" })
     public void createEvent_FF_Target() throws Exception {
         final String html =
               "<html>\n"
@@ -2072,7 +2072,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { "true", "false" },
+    @Alerts(FF = { "true", "false" },
             IE = { "true", "command foo not supported" })
     public void execCommand() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

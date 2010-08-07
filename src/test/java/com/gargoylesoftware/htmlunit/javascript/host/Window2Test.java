@@ -57,8 +57,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "not found", "true" },
-            FF3 = { "found", "exception", "false" })
-    @NotYetImplemented(Browser.FF3)
+            FF = { "found", "exception", "false" })
+    @NotYetImplemented(Browser.FF)
     public void FF_controllers() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -103,7 +103,6 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.IE, Browser.FF3 })
     public void showModalDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
@@ -259,8 +258,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF3)
+    @NotYetImplemented(Browser.FF)
     @Alerts(FF3 = { "java: object", "getClass: undefined" },
+            FF3_6 = { "java: undefined", "getClass: undefined" },
             IE = { "java: undefined", "getClass: undefined" })
     public void rhino_lazilyNames2() throws Exception {
         doTestRhinoLazilyNames("java", "getClass");
@@ -392,7 +392,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "undefined", "undefined" },
-            FF3 = { "[object Node]", "[object Element]" })
+            FF = { "[object Node]", "[object Element]" })
     public void windowProperties() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -500,7 +500,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "exception", IE = "hello")
+    @Alerts(FF = "exception", IE = "hello")
     public void overwriteFunctions_navigator() throws Exception {
         final String html = "<html><head><script language='JavaScript'>\n"
             + "try {\n"

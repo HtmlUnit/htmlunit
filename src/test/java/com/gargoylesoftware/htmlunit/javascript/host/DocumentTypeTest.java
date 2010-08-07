@@ -20,6 +20,8 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link DocumentType}.
@@ -36,8 +38,11 @@ public class DocumentTypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "null",
-            FF3 = { "[object DocumentType]", "true", "HTML,10,null,null,null,null",
-            "HTML,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,,null,null" })
+            FF = { "[object DocumentType]", "true", "HTML,10,null,null,null,null",
+            "HTML,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,,null,null" },
+            FF3_6 = { "[object DocumentType]", "true", "HTML,10,null,null,null,null",
+            "HTML,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,null,null,null" })
+    @NotYetImplemented(Browser.FF3_6)
     public void doctype() throws Exception {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
             + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
@@ -71,7 +76,12 @@ public class DocumentTypeTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "[object]", "greeting,10,null,,undefined,", "greeting,undefined,undefined,undefined,," },
         FF = {
-            "[object DocumentType]", "greeting,10,null,null,null,null", "greeting,MyIdentifier,hello.dtd,,null,null" })
+            "[object DocumentType]", "greeting,10,null,null,null,null",
+            "greeting,MyIdentifier,hello.dtd,,null,null" },
+        FF3_6 = {
+            "[object DocumentType]", "greeting,10,null,null,null,null",
+            "greeting,MyIdentifier,hello.dtd,null,null,null" })
+    @NotYetImplemented(Browser.FF3_6)
     public void doctype_xml() throws Exception {
         final String html =
               "<html>\n"

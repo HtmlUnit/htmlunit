@@ -67,6 +67,9 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
                 }
+                if (browsers.contains("hu") || browsers.contains("hu-ff3.6")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3_6, false));
+                }
                 if (browsers.contains("hu") || browsers.contains("hu-ie6")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
                 }
@@ -78,6 +81,9 @@ public class BrowserRunner extends Suite {
                 }
                 if (browsers.contains("ff3")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, true));
+                }
+                if (browsers.contains("ff3.6")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3_6, true));
                 }
                 if (browsers.contains("ie6")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, true));
@@ -92,6 +98,9 @@ public class BrowserRunner extends Suite {
             else {
                 if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
+                }
+                if (browsers.contains("hu") || browsers.contains("hu-ff3.6")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3_6, false));
                 }
                 if (browsers.contains("hu") || browsers.contains("hu-ie6")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
@@ -164,6 +173,9 @@ public class BrowserRunner extends Suite {
         /** Firefox 3. */
         FF3,
 
+        /** Firefox 3.6. */
+        FF3_6,
+
         /** Not Browser-specific, it will run only once. Don't use this with other Browsers. */
         NONE;
     }
@@ -212,6 +224,9 @@ public class BrowserRunner extends Suite {
 
         /** Alerts for Firefox 3. If not defined, {@link #FF()} is used. */
         String[] FF3() default {EMPTY_DEFAULT };
+
+        /** Alerts for Firefox 3.6. If not defined, {@link #FF()} is used. */
+        String[] FF3_6() default {EMPTY_DEFAULT };
     }
 
     /**

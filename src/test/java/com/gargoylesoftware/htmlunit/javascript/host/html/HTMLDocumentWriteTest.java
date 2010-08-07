@@ -698,8 +698,7 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { "STYLE", "SCRIPT" },
-            IE = { "STYLE", "SCRIPT" })
+    @Alerts({ "STYLE", "SCRIPT" })
     public void writeStyle() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "<script>\n"

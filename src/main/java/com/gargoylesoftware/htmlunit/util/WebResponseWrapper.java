@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebRequest;

@@ -92,7 +92,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { "function", "div1", "span2", "span3", "2", "1", "1", "0", "0", "0" },
+    @Alerts(FF = { "function", "div1", "span2", "span3", "2", "1", "1", "0", "0", "0" },
             IE = { "undefined", "exception" })
     public void getElementsByClassName() throws Exception {
         final String html
@@ -520,7 +520,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3 = { "[object HTMLCollection]", "4", "red" },
+    @Alerts(FF = { "[object HTMLCollection]", "4", "red" },
             IE = { "[object]", "4", "red" })
     public void identicalIDs() throws Exception {
         final String html =

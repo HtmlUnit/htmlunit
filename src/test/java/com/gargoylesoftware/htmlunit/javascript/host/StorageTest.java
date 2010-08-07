@@ -23,6 +23,8 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link Storage}.
@@ -39,8 +41,9 @@ public class StorageTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "undefined", "undefined", "undefined" }, IE8 = { "undefined", "[object]", "[object]" },
             FF = { "undefined", "undefined", "undefined" },
-            FF3 = { "[object StorageList]", "undefined", "[object Storage]" })
-            //FF3_5 = { "[object StorageList]", "[object Storage]", "[object Storage]" })
+            FF3 = { "[object StorageList]", "undefined", "[object Storage]" },
+            FF3_6 = { "[object StorageList]", "[object Storage]", "[object Storage]" })
+    @NotYetImplemented(Browser.FF3_6)
     public void storage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -57,8 +60,8 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE8 = { "string", "1" })
-            //FF3_5 = { "string", "1" })
+    @Alerts(IE8 = { "string", "1" },
+            FF3_6 = { "string", "1" })
     public void localStorage() throws Exception {
         final String firstHtml
             = "<html><head></head><body>\n"
@@ -92,8 +95,8 @@ public class StorageTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE8 = { "0", "2", "there", "world", "1", "0" },
-            FF3 = { "0", "2", "there", "world", "1" })
-            //FF3_5 = { "0", "2", "there", "world", "1", "0" })
+            FF3 = { "0", "2", "there", "world", "1" },
+            FF3_6 = { "0", "2", "there", "world", "1", "0" })
     public void sessionStorage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -121,8 +124,8 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { "[object Storage]", "error" })
-            //FF3_5 = { "[object StorageObsolete]", "error" })
+    @Alerts(FF3 = { "[object Storage]", "error" },
+            FF3_6 = { "[object StorageObsolete]", "error" })
     public void globalStorage() throws Exception {
         final String html
             = "<html><head></head><body>\n"

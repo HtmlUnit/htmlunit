@@ -36,7 +36,7 @@ public class CSSPrimitiveValueTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF3 = { "[object CSSPrimitiveValue]", "012345678910111213141516171819202122232425" },
+    @Alerts(FF = { "[object CSSPrimitiveValue]", "012345678910111213141516171819202122232425" },
             IE = { "exception" })
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"

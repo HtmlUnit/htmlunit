@@ -393,7 +393,7 @@ public class WebClient2Test extends WebServerTestCase {
      */
     public static class ServeBodySlowlyServlet extends HttpServlet {
         private static final long serialVersionUID = 3123744432222373088L;
-		private static volatile long LastRequestTime_ = -1;
+        private static volatile long LastRequestTime_ = -1;
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
             final long before = System.currentTimeMillis();

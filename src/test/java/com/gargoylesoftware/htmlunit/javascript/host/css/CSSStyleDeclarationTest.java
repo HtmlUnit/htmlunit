@@ -411,7 +411,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.FF3, Browser.IE7, Browser.IE8 })
+    @NotYetImplemented({ Browser.FF, Browser.IE7, Browser.IE8 })
     public void properties() throws Exception {
         final Map<BrowserVersion, String[]> properties = new HashMap<BrowserVersion, String[]>();
         properties.put(BrowserVersion.INTERNET_EXPLORER_6, new String[]{
@@ -591,7 +591,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.FF3, Browser.IE7, Browser.IE8 })
+    @NotYetImplemented({ Browser.FF, Browser.IE7, Browser.IE8 })
     public void properties2() throws Exception {
         final Map<BrowserVersion, String[]> properties = new HashMap<BrowserVersion, String[]>();
         properties.put(BrowserVersion.INTERNET_EXPLORER_6, new String[]{

@@ -60,7 +60,7 @@ public class JQuery126LocalTest extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.IE8)
+    @NotYetImplemented({ Browser.IE8, Browser.FF3_6 }) // FF 3.6 needs the expectation file
     @Tries(3)
     public void test() throws Exception {
         runTest();

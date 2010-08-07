@@ -808,7 +808,7 @@ public class ElementTest extends WebTestCase {
      */
     @Test
     @Alerts(IE = "exception occured",
-            FF3 = { "prototype found", "" })
+            FF = { "prototype found", "" })
     public void enumeratedProperties() throws Exception {
         final String html
             = "<html><head>\n"

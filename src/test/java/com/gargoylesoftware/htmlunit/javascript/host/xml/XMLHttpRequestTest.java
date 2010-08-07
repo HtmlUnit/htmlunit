@@ -1312,7 +1312,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "this == request", IE = "this == request")
+    @Alerts(FF = "this == request", IE = "this == request")
     public void thisValueInHandler() throws Exception {
         final String html =
               "<html>\n"

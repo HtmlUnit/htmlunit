@@ -96,6 +96,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
     private static List<String> BROWSERS_PROPERTIES_;
     private static String FF3_BIN_;
+    private static String FF3_6_BIN_;
 
     private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
     private static Server STATIC_SERVER_;
@@ -116,6 +117,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                         = Arrays.asList(properties.getProperty("browsers", "hu")
                             .replaceAll(" ", "").toLowerCase().split(","));
                     FF3_BIN_ = properties.getProperty("ff3.bin");
+                    FF3_6_BIN_ = properties.getProperty("ff3.6.bin");
                 }
             }
             catch (final Exception e) {
@@ -180,8 +182,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 return new InternetExplorerDriver();
             }
             String ffBinary = null;
-            if (getBrowserVersion().getBrowserVersionNumeric() == 3) {
+            if (getBrowserVersion() == BrowserVersion.FIREFOX_3) {
                 ffBinary = FF3_BIN_;
+            }
+            else if (getBrowserVersion() == BrowserVersion.FIREFOX_3_6) {
+                ffBinary = FF3_6_BIN_;
             }
             if (ffBinary != null) {
                 return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());

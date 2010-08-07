@@ -648,8 +648,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FF3)
-    @Alerts(FF3 = {"object", "false" },
+    @NotYetImplemented(Browser.FF)
+    @Alerts(FF = {"object", "false" },
             IE = {"object", "undefined" })
     public void testBubbles() throws Exception {
         final String html =
@@ -901,7 +901,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3 = { "true", "I was here" }, IE = { "true", "I was here" })
+    @Alerts(FF = { "true", "I was here" }, IE = { "true", "I was here" })
     public void firedEvent_equals_original_event() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"

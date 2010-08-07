@@ -54,15 +54,33 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "anchor: function", "big: function", "blink: function", "bold: function", "charAt: function",
-        "charCodeAt: function", "concat: function", "constructor: function", "equals: undefined",
-        "equalsIgnoreCase: undefined", "fixed: function", "fontcolor: function", "fontsize: function",
-        "fromCharCode: undefined", "indexOf: function", "italics: function", "lastIndexOf: function",
-        "link: function", "localeCompare: function", "match: function", "replace: function", "search: function",
-        "slice: function", "small: function", "split: function", "strike: function", "sub: function",
-        "substr: function", "substring: function", "sup: function", "toLocaleLowerCase: function",
-        "toLocaleUpperCase: function", "toLowerCase: function", "toString: function", "toUpperCase: function",
-        "trim: undefined", "valueOf: function" })
+    @Alerts(IE = { "anchor: function", "big: function", "blink: function", "bold: function", "charAt: function",
+            "charCodeAt: function", "concat: function", "constructor: function", "equals: undefined",
+            "equalsIgnoreCase: undefined", "fixed: function", "fontcolor: function", "fontsize: function",
+            "fromCharCode: undefined", "indexOf: function", "italics: function", "lastIndexOf: function",
+            "link: function", "localeCompare: function", "match: function", "replace: function", "search: function",
+            "slice: function", "small: function", "split: function", "strike: function", "sub: function",
+            "substr: function", "substring: function", "sup: function", "toLocaleLowerCase: function",
+            "toLocaleUpperCase: function", "toLowerCase: function", "toString: function", "toUpperCase: function",
+            "trim: undefined", "valueOf: function" },
+        FF3 = { "anchor: function", "big: function", "blink: function", "bold: function", "charAt: function",
+            "charCodeAt: function", "concat: function", "constructor: function", "equals: undefined",
+            "equalsIgnoreCase: undefined", "fixed: function", "fontcolor: function", "fontsize: function",
+            "fromCharCode: undefined", "indexOf: function", "italics: function", "lastIndexOf: function",
+            "link: function", "localeCompare: function", "match: function", "replace: function", "search: function",
+            "slice: function", "small: function", "split: function", "strike: function", "sub: function",
+            "substr: function", "substring: function", "sup: function", "toLocaleLowerCase: function",
+            "toLocaleUpperCase: function", "toLowerCase: function", "toString: function", "toUpperCase: function",
+            "trim: undefined", "valueOf: function" },
+        FF3_6 = { "anchor: function", "big: function", "blink: function", "bold: function", "charAt: function",
+            "charCodeAt: function", "concat: function", "constructor: function", "equals: undefined",
+            "equalsIgnoreCase: undefined", "fixed: function", "fontcolor: function", "fontsize: function",
+            "fromCharCode: undefined", "indexOf: function", "italics: function", "lastIndexOf: function",
+            "link: function", "localeCompare: function", "match: function", "replace: function", "search: function",
+            "slice: function", "small: function", "split: function", "strike: function", "sub: function",
+            "substr: function", "substring: function", "sup: function", "toLocaleLowerCase: function",
+            "toLocaleUpperCase: function", "toLowerCase: function", "toString: function", "toUpperCase: function",
+            "trim: function", "valueOf: function" })
     public void methods_common() throws Exception {
         final String[] methods = {"anchor", "big", "blink", "bold", "charAt", "charCodeAt", "concat", "constructor",
             "equals", "equalsIgnoreCase", "fixed", "fontcolor", "fontsize", "fromCharCode", "indexOf", "italics",
@@ -89,7 +107,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts(IE = "", FF3 = "", FF3_6 = { "2", "3", "4" })
     public void trim() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
