@@ -63,7 +63,7 @@ public class HtmlFormTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSetSelectedRadioButton_ValueExists() throws Exception {
+    public void setSelectedRadioButton_ValueExists() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -98,7 +98,7 @@ public class HtmlFormTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    public void testSetSelectedRadioButton_ValueDoesNotExist_DoNotForceSelection() throws Exception {
+    public void setSelectedRadioButton_ValueDoesNotExist_DoNotForceSelection() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -121,7 +121,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_String() throws Exception {
+    public void submit_String() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -139,7 +139,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_ExtraParameters() throws Exception {
+    public void submit_ExtraParameters() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -166,7 +166,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_BadSubmitMethod() throws Exception {
+    public void submit_BadSubmitMethod() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='put'>\n"
@@ -183,7 +183,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_onSubmitHandler() throws Exception {
+    public void submit_onSubmitHandler() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' onSubmit='alert(\"clicked\")'>\n"
@@ -215,7 +215,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_onSubmitHandler_returnFalse() throws Exception {
+    public void submit_onSubmitHandler_returnFalse() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' "
@@ -249,7 +249,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_onSubmitHandler_fails() throws Exception {
+    public void submit_onSubmitHandler_fails() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' onSubmit='return null'>\n"
@@ -274,7 +274,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_onSubmitHandler_javascriptDisabled() throws Exception {
+    public void submit_onSubmitHandler_javascriptDisabled() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' onSubmit='alert(\"clicked\")'>\n"
@@ -309,7 +309,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_javascriptAction() throws Exception {
+    public void submit_javascriptAction() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='javascript:alert(\"clicked\")'>\n"
@@ -341,7 +341,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_javascriptAction_javascriptDisabled() throws Exception {
+    public void submit_javascriptAction_javascriptDisabled() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='javascript:alert(\"clicked\")'>\n"
@@ -372,7 +372,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmitRadioButton() throws Exception {
+    public void submitRadioButton() throws Exception {
         final String html
             = "<html><body><form method='POST' action='" + URL_FIRST + "'>\n"
             + "<table><tr> <td ><input type='radio' name='name1' value='foo'> "
@@ -393,7 +393,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReset_onResetHandler() throws Exception {
+    public void reset_onResetHandler() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='get' action='" + URL_SECOND + "' "
@@ -424,7 +424,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_AnchorCausesSubmit_onSubmitHandler_returnFalse() throws Exception {
+    public void submit_AnchorCausesSubmit_onSubmitHandler_returnFalse() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head>\n"
             + "<script>function doalert(message){alert(message);}</script>\n"
@@ -459,7 +459,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_NoDefaultValue() throws Exception {
+    public void submit_NoDefaultValue() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -486,7 +486,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_NoNameOnControl() throws Exception {
+    public void submit_NoNameOnControl() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -512,7 +512,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_NoNameOnButton() throws Exception {
+    public void submit_NoNameOnButton() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -536,7 +536,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_NestedInput() throws Exception {
+    public void submit_NestedInput() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -568,7 +568,7 @@ public class HtmlFormTest extends WebTestCase {
     * @throws Exception if the test fails
     */
     @Test
-    public void testSubmit_IgnoresDisabledControls() throws Exception {
+    public void submit_IgnoresDisabledControls() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -596,7 +596,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_IgnoresResetControls() throws Exception {
+    public void submit_IgnoresResetControls() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
             + "    <button type='reset' name='buttonreset' value='buttonreset'/>\n"
@@ -622,7 +622,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_CheckboxClicked() throws Exception {
+    public void submit_CheckboxClicked() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"
             + "<script language='javascript'>\n"
@@ -671,7 +671,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testGetInputByValue() throws Exception {
+    public void getInputByValue() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -711,7 +711,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test page can't be loaded
      */
     @Test
-    public void testGetTextAreaByName() throws Exception {
+    public void getTextAreaByName() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -744,7 +744,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test page can't be loaded
      */
     @Test
-    public void testGetButtonByName() throws Exception {
+    public void getButtonByName() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -775,7 +775,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmitToTargetWindow() throws Exception {
+    public void submitToTargetWindow() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<form id='form1' target='window2' action='" + URL_SECOND + "' method='post'>\n"
@@ -805,7 +805,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_SelectHasNoOptions() throws Exception {
+    public void submit_SelectHasNoOptions() throws Exception {
         final String html
             = "<html><body><form name='form' method='GET' action='action.html'>\n"
             + "<select name='select'>\n"
@@ -824,7 +824,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_SelectOptionWithoutValueAttribute() throws Exception {
+    public void submit_SelectOptionWithoutValueAttribute() throws Exception {
         final String html
             = "<html><body><form name='form' action='action.html'>\n"
             + "<select name='select'>\n"
@@ -846,7 +846,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_DeepInputs() throws Exception {
+    public void submit_DeepInputs() throws Exception {
         final String html
             = "<html><form method='post' action=''>\n"
             + "<table><tr><td>\n"
@@ -873,7 +873,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit_FormElementOrder() throws Exception {
+    public void submit_FormElementOrder() throws Exception {
         final String html
             = "<html><head></head><body><form method='post' action=''>\n"
             + "<input type='submit' name='dispatch' value='Save' id='submitButton'>\n"
@@ -904,7 +904,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testSubmit_refererHeader() throws Exception {
+    public void submit_refererHeader() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
             + "<form method='post' action='" + URL_SECOND + "'>\n"
@@ -938,7 +938,7 @@ public class HtmlFormTest extends WebTestCase {
       */
     @Test
     @Alerts("clicked")
-    public void testJSSubmit_JavaScriptAction() throws Exception {
+    public void jSSubmit_JavaScriptAction() throws Exception {
         final String html
             = "<html><head><title>First</title></head>\n"
             + "<body onload='document.getElementById(\"aForm\").submit()'>\n"
@@ -953,28 +953,28 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testUrlAfterSubmit()
+    public void urlAfterSubmit()
         throws Exception {
-        testUrlAfterSubmit("get", "foo", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
+        urlAfterSubmit("get", "foo", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
         // for a get submit, query parameters in action are lost in browsers
-        testUrlAfterSubmit("get", "foo?foo=12", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
-        testUrlAfterSubmit("post", "foo", "foo");
-        testUrlAfterSubmit("post", "foo?foo=12", "foo?foo=12");
-        testUrlAfterSubmit("post", "", "");
-        testUrlAfterSubmit("post", "?a=1&b=2", "?a=1&b=2");
+        urlAfterSubmit("get", "foo?foo=12", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
+        urlAfterSubmit("post", "foo", "foo");
+        urlAfterSubmit("post", "foo?foo=12", "foo?foo=12");
+        urlAfterSubmit("post", "", "");
+        urlAfterSubmit("post", "?a=1&b=2", "?a=1&b=2");
         final URL url = new URL(URL_FIRST.toExternalForm() + "?a=1&b=2");
-        testUrlAfterSubmit(url, "post", "", url.toExternalForm());
+        urlAfterSubmit(url, "post", "", url.toExternalForm());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testUrlAfterSubmitWithAnchor() throws Exception {
-        testUrlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
-        testUrlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
-        testUrlAfterSubmit("post", "foo#anchor", "foo#anchor");
-        testUrlAfterSubmit("post", "foo?foo=12#anchor", "foo?foo=12#anchor");
+    public void urlAfterSubmitWithAnchor() throws Exception {
+        urlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
+        urlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
+        urlAfterSubmit("post", "foo#anchor", "foo#anchor");
+        urlAfterSubmit("post", "foo?foo=12#anchor", "foo?foo=12#anchor");
     }
 
     /**
@@ -984,7 +984,7 @@ public class HtmlFormTest extends WebTestCase {
      * @param expectedUrl the expected URL
      * @throws Exception if the test fails
      */
-    private void testUrlAfterSubmit(final URL url, final String method, final String action,
+    private void urlAfterSubmit(final URL url, final String method, final String action,
             final String expectedUrl) throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -1002,40 +1002,40 @@ public class HtmlFormTest extends WebTestCase {
     }
 
     /**
-     * Utility for {@link #testUrlAfterSubmit()}. Calls {@link #testUrlAfterSubmit(URL, String, String, String)} with
+     * Utility for {@link #testUrlAfterSubmit()}. Calls {@link #urlAfterSubmit(URL, String, String, String)} with
      * the default url.
      * @param method the form method to use
      * @param action the form action to use
      * @param expectedUrlEnd the expected URL
      * @throws Exception if the test fails
      */
-    private void testUrlAfterSubmit(final String method, final String action, final String expectedUrlEnd)
+    private void urlAfterSubmit(final String method, final String action, final String expectedUrlEnd)
         throws Exception {
-        testUrlAfterSubmit(getDefaultUrl(), method, action, getDefaultUrl() + expectedUrlEnd);
+        urlAfterSubmit(getDefaultUrl(), method, action, getDefaultUrl() + expectedUrlEnd);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmitRequestCharset() throws Exception {
-        testSubmitRequestCharset("utf-8", null, null, "utf-8");
-        testSubmitRequestCharset(null, "utf-8", null, "utf-8");
-        testSubmitRequestCharset("iso-8859-1", null, "utf-8", "utf-8");
-        testSubmitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "utf-8");
-        testSubmitRequestCharset("utf-8", null, "iso-8859-1 utf-8", "iso-8859-1");
-        testSubmitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "utf-8");
+    public void submitRequestCharset() throws Exception {
+        submitRequestCharset("utf-8", null, null, "utf-8");
+        submitRequestCharset(null, "utf-8", null, "utf-8");
+        submitRequestCharset("iso-8859-1", null, "utf-8", "utf-8");
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "utf-8");
+        submitRequestCharset("utf-8", null, "iso-8859-1 utf-8", "iso-8859-1");
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "utf-8");
     }
 
     /**
-     * Utility for {@link #testSubmitRequestCharset()}
+     * Utility for {@link #submitRequestCharset()}
      * @param headerCharset the charset for the content type header if not null
      * @param metaCharset the charset for the meta http-equiv content type tag if not null
      * @param formCharset the charset for the form's accept-charset attribute if not null
      * @param expectedRequestCharset the charset expected for the form submission
      * @throws Exception if the test fails
      */
-    private void testSubmitRequestCharset(final String headerCharset,
+    private void submitRequestCharset(final String headerCharset,
             final String metaCharset, final String formCharset,
             final String expectedRequestCharset) throws Exception {
 
@@ -1090,7 +1090,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSumbit_submitInputValue() throws Exception {
+    public void sumbit_submitInputValue() throws Exception {
         final String html =
             "<html><head>\n"
             + "</head>\n"
@@ -1111,7 +1111,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmitWithOnClickThatReturnsFalse() throws Exception {
+    public void submitWithOnClickThatReturnsFalse() throws Exception {
         final String firstHtml = "<html><head><title>foo</title></head><body>\n"
             + "<form action='" + URL_SECOND + "' method='post'>\n"
             + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
@@ -1149,7 +1149,7 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmitURLWithoutParameters() throws Exception {
+    public void submitURLWithoutParameters() throws Exception {
         final String firstHtml = "<html><head><title>foo</title></head><body>\n"
             + "<form action='" + URL_SECOND + "'>\n"
             + "  <input type='submit' name='mySubmit' onClick='document.forms[0].submit(); return false;'>\n"
@@ -1365,10 +1365,10 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testUrlAfterSubmit2() throws Exception {
+    public void urlAfterSubmit2() throws Exception {
         final URL url = new URL(getDefaultUrl(), "test.html");
-        testUrlAfterSubmit(url, "post", "?hi", url + "?hi");
-        testUrlAfterSubmit(new URL(getDefaultUrl(), "test.html?there"), "post", "?hi",
+        urlAfterSubmit(url, "post", "?hi", url + "?hi");
+        urlAfterSubmit(new URL(getDefaultUrl(), "test.html?there"), "post", "?hi",
             getDefaultUrl() + "test.html?hi");
     }
 
