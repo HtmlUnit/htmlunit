@@ -94,10 +94,9 @@
 
         new WebConnectionWrapper(webClient) {
 
-            public WebResponse getResponse(WebRequestSettings settings) throws IOException {
-                // modify the request settings
-                WebResponseImpl response = (WebResponseImpl) super.getResponse(settings);
-                // modify the response by creating a new WebResponse/WebResponseImpl
+            public WebResponse getResponse(WebRequest request) throws IOException {
+                WebResponse response = super.getResponse(request);
+                // modify the response by creating a new WebResponse
                 return response;
             }
         };
@@ -112,9 +111,8 @@
 			</question>
 			<answer>
 				<p>
-					HtmlUnit relies on <a href="http://hc.apache.org/httpclient-3.x/index.html">commons-httpclient 3.1</a> for Cookie handling. 
-					The odds are pretty good that whatever cookie problems you're encountering already have a solution as explained in the <a href="http://hc.apache.org/httpclient-3.x/cookies.html">Cookie Guide</a>.
-					If that doesn't help then post something to the HtmlUnit mailing list.
+					HtmlUnit relies on <a href="http://hc.apache.org/">HttpClient 4</a> for Cookie handling. 
+					If you have an issue, please post it to the HtmlUnit mailing list.
 				</p>
 			</answer>
 		</faq>
