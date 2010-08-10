@@ -1125,6 +1125,8 @@
         <property name="pathname" readable="true" writable="true"/>
         <property name="port" readable="true" writable="true"/>
         <property name="protocol" readable="true" writable="true"/>
+        <property name="rel" readable="true" writable="true"/>
+        <property name="rev" readable="true" writable="true"/>
         <property name="search" readable="true" writable="true"/>
         <property name="target" readable="true" writable="true"/>
         <property name="text" notImplemented="true" readable="true" writable="true">
@@ -1854,6 +1856,7 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLink">
         <property name="href" readable="true" writable="true"/>
         <property name="rel" readable="true" writable="true"/>
+        <property name="rev" readable="true" writable="true"/>
         <property name="type" readable="true" writable="true"/>
     </class>
 

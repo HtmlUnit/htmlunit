@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="add" dev="asashour" issue="3040475">
+                JavaScript: add support for anchor.rel, and .rev, and link.rev.
+            </action>
             <action type="remove" dev="asashour">
                 Remove deprecated BrowserVersion.FIREFOX_2, DomNode.getAllHtmlChildElements() and WebResponse.getRequestUrl().
             </action>

@@ -88,6 +88,23 @@ public class HTMLLinkElement extends HTMLElement {
     }
 
     /**
+     * Sets the rev property.
+     * @param rel rev attribute value
+     */
+    public void jsxSet_rev(final String rel) {
+        getDomNodeOrDie().setAttribute("rev", rel);
+    }
+
+    /**
+     * Returns the value of the rev property.
+     * @return the rev property
+     * @throws Exception if an error occurs
+     */
+    public String jsxGet_rev() throws Exception {
+        return ((HtmlLink) getDomNodeOrDie()).getRevAttribute();
+    }
+
+    /**
      * Sets the type property.
      * @param type type attribute value
      */

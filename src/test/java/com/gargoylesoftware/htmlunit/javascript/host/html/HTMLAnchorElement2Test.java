@@ -25,37 +25,32 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Unit tests for {@link HTMLLinkElement}.
  *
  * @version $Revision$
- * @author Daniel Gredler
- * @author Marc Guillemot
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HTMLLinkElementTest extends WebDriverTestCase {
+public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "", "", "", "", "§§URL§§test.css", "text/css", "stylesheet", "stylesheet1" })
-    public void basicLinkAttributes() throws Exception {
+    @Alerts({ "", "", "",  "§§URL§§test.css", "stylesheet", "stylesheet1" })
+    public void attributes() throws Exception {
         final String html =
               "<html>\n"
             + "    <body onload='test()'>\n"
             + "        <script>\n"
             + "            function test() {\n"
-            + "                var s = document.createElement('link');\n"
-            + "                alert(s.href);\n"
-            + "                alert(s.type);\n"
-            + "                alert(s.rel);\n"
-            + "                alert(s.rev);\n"
-            + "                s.href = 'test.css';\n"
-            + "                s.type = 'text/css';\n"
-            + "                s.rel  = 'stylesheet';\n"
-            + "                s.rev  = 'stylesheet1';\n"
-            + "                alert(s.href);\n"
-            + "                alert(s.type);\n"
-            + "                alert(s.rel);\n"
-            + "                alert(s.rev);\n"
+            + "                var a = document.createElement('a');\n"
+            + "                alert(a.href);\n"
+            + "                alert(a.rel);\n"
+            + "                alert(a.rev);\n"
+            + "                a.href = 'test.css';\n"
+            + "                a.rel  = 'stylesheet';\n"
+            + "                a.rev  = 'stylesheet1';\n"
+            + "                alert(a.href);\n"
+            + "                alert(a.rel);\n"
+            + "                alert(a.rev);\n"
             + "            }\n"
             + "        </script>\n"
             + "    </body>\n"

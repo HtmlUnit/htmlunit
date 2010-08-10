@@ -127,6 +127,40 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
+     * Sets the rel property.
+     * @param rel rel attribute value
+     */
+    public void jsxSet_rel(final String rel) {
+        getDomNodeOrDie().setAttribute("rel", rel);
+    }
+
+    /**
+     * Returns the value of the rel property.
+     * @return the rel property
+     * @throws Exception if an error occurs
+     */
+    public String jsxGet_rel() throws Exception {
+        return ((HtmlAnchor) getDomNodeOrDie()).getRelAttribute();
+    }
+
+    /**
+     * Sets the rev property.
+     * @param rel rev attribute value
+     */
+    public void jsxSet_rev(final String rel) {
+        getDomNodeOrDie().setAttribute("rev", rel);
+    }
+
+    /**
+     * Returns the value of the rev property.
+     * @return the rev property
+     * @throws Exception if an error occurs
+     */
+    public String jsxGet_rev() throws Exception {
+        return ((HtmlAnchor) getDomNodeOrDie()).getRevAttribute();
+    }
+
+    /**
      * Returns the search portion of the link's URL (the portion starting with
      * '?' and up to but not including any '#').
      * @return the search portion of the link's URL
