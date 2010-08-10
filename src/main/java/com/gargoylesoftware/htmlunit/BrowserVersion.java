@@ -104,7 +104,11 @@ public class BrowserVersion implements Serializable {
     @Deprecated
     public static final String PLATFORM_WIN32 = "Win32";
 
-    /** Firefox 3. */
+    /**
+     * Firefox 3.0.
+     * @deprecated since HtmlUnit-2.9. This means that no effort will be made to improve
+     * simulation for this browser version until it is definitely removed.
+     */
     public static final BrowserVersion FIREFOX_3 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.19) Gecko/2010031422 Firefox/3.0.19",
@@ -113,7 +117,7 @@ public class BrowserVersion implements Serializable {
     /** Firefox 3.6. */
     public static final BrowserVersion FIREFOX_3_6 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
-        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3",
+        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.8) Gecko/20100722 Firefox/3.6.8",
         (float) 3.6, "FF3.6", null);
 
     /** Internet Explorer 6. */

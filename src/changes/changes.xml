@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                Deprecate BrowserVersion.FIREFOX_3.
+            </action>
             <action type="add" dev="asashour" issue="3040475">
                 JavaScript: add support for anchor.rel, and .rev, and link.rev.
             </action>
