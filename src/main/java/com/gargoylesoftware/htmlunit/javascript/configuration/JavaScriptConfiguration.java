@@ -133,6 +133,9 @@ public final class JavaScriptConfiguration {
 
     private static Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> HtmlJavaScriptMap_;
 
+    /** Key is "tagName" lower case, value is the HtmlElement which corresponds to that tagName. */
+    private static Map<String, Class < ? extends HtmlElement>> HtmlTagsMap_;
+
     private final Map<String, ClassConfiguration> configuration_;
 
     /**
@@ -788,6 +791,29 @@ public final class JavaScriptConfiguration {
         map.put(HtmlTableColumnGroup.class, HTMLTableColElement.class);
 
         HtmlJavaScriptMap_ = Collections.unmodifiableMap(map);
+
+        final Map tagNameMap = new HashMap<String, Class < ? extends HtmlElement>>();
+        for (final Class<? extends HtmlElement> klass : HtmlJavaScriptMap_.keySet()) {
+            try {
+                tagNameMap.put(klass.getField("TAG_NAME").get(null).toString(), klass);
+            }
+            catch (final Exception e) {
+                //ignore
+            }
+        }
+        HtmlTagsMap_ = Collections.unmodifiableMap(tagNameMap);
         return HtmlJavaScriptMap_;
+    }
+
+    /**
+     * Returns an immutable map containing the TagName to mappings.
+     * Keys are string which is 'tagName', and values are java classes for the HTML classes (e.g. HtmlInput.class)
+     * @return the mappings
+     */
+    public static synchronized Map<String, Class < ? extends HtmlElement>> getHtmlTagNameMapping() {
+        if (HtmlTagsMap_ == null) {
+            getHtmlJavaScriptMapping();
+        }
+        return HtmlTagsMap_;
     }
 }
