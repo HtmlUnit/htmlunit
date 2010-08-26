@@ -14,18 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.PrintStream;
-import java.io.PrintWriter;
-
 /**
  * Thrown if an object could not be instantiated for some reason.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ahmed Ashour
  */
 public class ObjectInstantiationException extends RuntimeException {
     private static final long serialVersionUID = 8831953284047722098L;
-    private final Throwable causeException_;
 
     /**
      * Creates a new instance.
@@ -33,45 +30,16 @@ public class ObjectInstantiationException extends RuntimeException {
      * @param cause the exception that was thrown
      */
     public ObjectInstantiationException(final String message, final Throwable cause) {
-        super(message);
-        causeException_ = cause;
+        super(message, cause);
     }
 
     /**
      * Returns the exception that had been thrown during instantiation of the object.
      * @return the cause exception
+     * @deprecated as of 2.9, please use {@link #getCause()} instead
      */
+    @Deprecated
     public Throwable getCauseException() {
-        return causeException_;
-    }
-
-    /**
-     * Print the stack trace. If this exception contains another exception then
-     * the stack traces for both will be printed.
-     *
-     * @param writer  Where the stack trace will be written
-     */
-    @Override
-    public void printStackTrace(final PrintWriter writer) {
-        super.printStackTrace(writer);
-        if (causeException_ != null) {
-            writer.write("Enclosed exception: ");
-            causeException_.printStackTrace(writer);
-        }
-    }
-
-    /**
-     * Print the stack trace. If this exception contains another exception then
-     * the stack traces for both will be printed.
-     *
-     * @param stream Where the stack trace will be written
-     */
-    @Override
-    public void printStackTrace(final PrintStream stream) {
-        super.printStackTrace(stream);
-        if (causeException_ != null) {
-            stream.print("Enclosed exception: ");
-            causeException_.printStackTrace(stream);
-        }
+        return getCause();
     }
 }
