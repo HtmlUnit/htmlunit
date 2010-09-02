@@ -33,7 +33,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -728,11 +727,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     private HTMLCollection getFrames() {
         if (frames_ == null) {
-            final String xpath = ".//*[(name() = 'frame' or name() = 'iframe')]";
-            final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
-            frames_ = new HTMLCollection(this);
-            final Transformer toEnclosedWindow = new FrameToWindowTransformer();
-            frames_.init(page, xpath, toEnclosedWindow);
+            frames_ = new HTMLCollectionFrames(this);
         }
         return frames_;
     }
@@ -1643,19 +1638,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
-     * Transforms frames to windows.
-     */
-    private static class FrameToWindowTransformer implements Transformer, Serializable {
-        private static final long serialVersionUID = -8504605115217901029L;
-        public Object transform(final Object obj) {
-            if (obj instanceof BaseFrame) {
-                return ((BaseFrame) obj).getEnclosedWindow();
-            }
-            return ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
-        }
-    }
-
-    /**
      * Gets the name of the scripting engine.
      * @see <a href="http://msdn.microsoft.com/en-us/library/efy5bay1.aspx">MSDN doc</a>
      * @return "JScript"
@@ -1732,3 +1714,65 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         return 0;
     }
 }
+
+class HTMLCollectionFrames extends HTMLCollection {
+    private static final Log LOG = LogFactory.getLog(HTMLCollectionFrames.class);
+
+    public HTMLCollectionFrames(final Window window) {
+        super(window);
+        final String xpath = ".//*[(name() = 'frame' or name() = 'iframe')]";
+        final HtmlPage page = (HtmlPage) window.getWebWindow().getEnclosedPage();
+        init(page, xpath);
+    }
+
+    @Override
+    protected Scriptable getScriptableForElement(final Object obj) {
+        final WebWindow window;
+        if (obj instanceof BaseFrame) {
+            window = ((BaseFrame) obj).getEnclosedWindow();
+        }
+        else {
+            window = ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
+        }
+
+        return Window.getProxy(window);
+    }
+
+    @Override
+    protected Object getWithPreemption(final String name) {
+        final List<Object> elements = getElements();
+
+        for (final Object next : elements) {
+            final BaseFrame frameElt = (BaseFrame) next;
+            final WebWindow window = frameElt.getEnclosedWindow();
+            if (name.equals(window.getName())) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Property \"" + name + "\" evaluated (by name) to " + window);
+                }
+                return getScriptableForElement(window);
+            }
+            else if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_47)
+                    && frameElt.getAttribute("id").equals(name)) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Property \"" + name + "\" evaluated (by id) to " + window);
+                }
+                return getScriptableForElement(window);
+            }
+        }
+
+        return NOT_FOUND;
+    }
+
+    @Override
+    protected void addElementIds(final List<String> idList, final List<Object> elements) {
+        for (final Object next : elements) {
+            final BaseFrame frameElt = (BaseFrame) next;
+            final WebWindow window = frameElt.getEnclosedWindow();
+            final String windowName = window.getName();
+            if (windowName != null) {
+                idList.add(windowName);
+            }
+        }
+    }
+}
+

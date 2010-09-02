@@ -22,9 +22,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Transformer;
-import org.apache.commons.collections.functors.NOPTransformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Node;
@@ -32,13 +29,11 @@ import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
-import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -46,7 +41,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -72,12 +66,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     private String xpath_;
     private DomNode node_;
     private boolean avoidObjectDetection_ = false;
-
-    /**
-     * The transformer used to get the element to return from the HTML element.
-     * It returns the HTML element itself except for frames where it returns the nested window.
-     */
-    private Transformer transformer_;
 
     /**
      * Cache collection elements when possible, so as to avoid expensive XPath expression evaluations.
@@ -143,29 +131,15 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Initializes the content of this collection. The elements will be "calculated" at each
-     * access using the specified XPath expression, applied to the specified node.
+     * Initializes the content of this collection. The elements will be "calculated" and cached
+     * before first access using the specified XPath expression.
      * @param node the node to serve as root for the XPath expression
      * @param xpath the XPath expression which determines the elements of the collection
      */
     public void init(final DomNode node, final String xpath) {
-        init(node, xpath, NOPTransformer.INSTANCE);
-    }
-
-    /**
-     * Initializes the content of this collection. The elements will be "calculated" at each
-     * access using the specified XPath expression, applied to the specified node, and
-     * transformed using the specified transformer.
-     * @param node the node to serve as root for the XPath expression
-     * @param xpath the XPath expression which determines the elements of the collection
-     * @param transformer the transformer enabling the retrieval of the expected objects from
-     *        the results of the XPath evaluation
-     */
-    public void init(final DomNode node, final String xpath, final Transformer transformer) {
         if (node != null) {
             node_ = node;
             xpath_ = xpath;
-            transformer_ = transformer;
             final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
             node_.addDomChangeListener(listener);
             if (node_ instanceof HtmlElement) {
@@ -189,7 +163,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 cachedElements_ = null;
             }
         }
-        transformer_ = NOPTransformer.INSTANCE;
     }
 
     /**
@@ -234,7 +207,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         final HTMLCollection array = (HTMLCollection) start;
         final List<Object> elements = array.getElements();
         if (index >= 0 && index < elements.size()) {
-            return getScriptableForElement(transformer_.transform(elements.get(index)));
+            return getScriptableForElement(elements.get(index));
         }
         return NOT_FOUND;
     }
@@ -337,7 +310,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         }
 
         final List<Object> elements = getElements();
-        CollectionUtils.transform(elements, transformer_);
 
         // See if there is an element in the element array with the specified id.
         for (final Object next : elements) {
@@ -364,23 +336,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                         LOG.debug("Property \"" + name + "\" evaluated (by id) to " + next);
                     }
                     return getScriptableForElement(next);
-                }
-            }
-            else if (next instanceof WebWindow) {
-                final WebWindow window = (WebWindow) next;
-                final String windowName = window.getName();
-                if (windowName != null && windowName.equals(name)) {
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("Property \"" + name + "\" evaluated (by name) to " + window);
-                    }
-                    return getScriptableForElement(window);
-                }
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_47) && window instanceof FrameWindow
-                        && ((FrameWindow) window).getFrameElement().getAttribute("id").equals(name)) {
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("Property \"" + name + "\" evaluated (by id) to " + window);
-                    }
-                    return getScriptableForElement(window);
                 }
             }
             else {
@@ -527,9 +482,9 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         }
         else if (other instanceof HTMLCollection) {
             final HTMLCollection otherArray = (HTMLCollection) other;
-            if (node_ == otherArray.node_
-                    && xpath_.toString().equals(otherArray.xpath_.toString())
-                    && transformer_.equals(otherArray.transformer_)) {
+            if (getClass() == other.getClass()
+                    && node_ == otherArray.node_
+                    && xpath_.toString().equals(otherArray.xpath_.toString())) {
                 return Boolean.TRUE;
             }
             return NOT_FOUND;
@@ -546,7 +501,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         try {
             final int index = Integer.parseInt(name);
             final List<Object> elements = getElements();
-            CollectionUtils.transform(elements, transformer_);
             if (index >= 0 && index < elements.size()) {
                 return true;
             }
@@ -578,10 +532,9 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         final List<String> idList = new ArrayList<String>();
 
         final List<Object> elements = getElements();
-        CollectionUtils.transform(elements, transformer_);
 
         if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_50)) {
-            final int length = getElements().size();
+            final int length = elements.size();
             for (int i = 0; i < length; i++) {
                 idList.add(Integer.toString(i));
             }
@@ -595,38 +548,35 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         else {
             idList.add("length");
 
-            int index = 0;
-            for (final Object next : elements) {
-                if (next instanceof HtmlElement) {
-                    final HtmlElement element = (HtmlElement) next;
-                    final String name = element.getAttribute("name");
-                    if (name != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-                        idList.add(name);
-                    }
-                    else {
-                        final String id = element.getId();
-                        if (id != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
-                            idList.add(id);
-                        }
-                        else {
-                            idList.add(Integer.toString(index));
-                        }
-                    }
-                    index++;
-                }
-                else if (next instanceof WebWindow) {
-                    final WebWindow window = (WebWindow) next;
-                    final String windowName = window.getName();
-                    if (windowName != null) {
-                        idList.add(windowName);
-                    }
-                }
-                else if (LOG.isDebugEnabled()) {
-                    LOG.debug("Unrecognized type in array: \"" + next.getClass().getName() + "\"");
-                }
-            }
+            addElementIds(idList, elements);
         }
         return idList.toArray();
+    }
+
+    /**
+     * Adds the ids of the collection's elements to the idList.
+     * @param idList the list to add the ids to
+     * @param elements the collection's elements
+     */
+    protected void addElementIds(final List<String> idList, final List<Object> elements) {
+        int index = 0;
+        for (final Object next : elements) {
+            final HtmlElement element = (HtmlElement) next;
+            final String name = element.getAttribute("name");
+            if (name != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+                idList.add(name);
+            }
+            else {
+                final String id = element.getId();
+                if (id != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+                    idList.add(id);
+                }
+                else {
+                    idList.add(Integer.toString(index));
+                }
+            }
+            index++;
+        }
     }
 
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
@@ -680,7 +630,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * {@inheritDoc}
      */
     public Node item(final int index) {
-        return (DomNode) transformer_.transform(getElements().get(index));
+        return (DomNode) getElements().get(index);
     }
 
     /**
@@ -691,9 +641,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     protected Scriptable getScriptableForElement(final Object object) {
         if (object instanceof Scriptable) {
             return (Scriptable) object;
-        }
-        else if (object instanceof WebWindow) {
-            return Window.getProxy((WebWindow) object);
         }
         return getScriptableFor(object);
     }
