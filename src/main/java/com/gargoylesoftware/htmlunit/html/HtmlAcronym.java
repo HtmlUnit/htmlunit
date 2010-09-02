@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlAcronym extends HtmlElement {
 
-    private static final long serialVersionUID = 8859651553051178256L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "acronym";
 

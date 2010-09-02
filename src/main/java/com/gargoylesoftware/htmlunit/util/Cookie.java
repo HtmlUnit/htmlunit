@@ -33,8 +33,6 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class Cookie implements Serializable {
 
-    private static final long serialVersionUID = 1960945152963263900L;
-
     /** The cookie name. */
     private final String name_;
 

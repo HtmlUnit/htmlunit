@@ -27,8 +27,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class HTMLUnknownElement extends HTMLElement {
 
-    private static final long serialVersionUID = 2898724046094626048L;
-
     /**
      * Creates an instance.
      */

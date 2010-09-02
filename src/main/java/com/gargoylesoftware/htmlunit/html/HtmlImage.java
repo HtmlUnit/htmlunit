@@ -49,7 +49,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
  */
 public class HtmlImage extends HtmlElement {
 
-    private static final long serialVersionUID = -2304247017681577696L;
     private static final Log LOG = LogFactory.getLog(HtmlImage.class);
 
     /** The HTML tag represented by this element. */

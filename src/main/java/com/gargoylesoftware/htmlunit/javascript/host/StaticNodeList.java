@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class StaticNodeList extends SimpleScriptable {
 
-    private static final long serialVersionUID = -9198113809743670670L;
-
     private final List<Node> elements_;
 
     /**

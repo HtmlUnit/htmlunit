@@ -41,7 +41,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement, FormFieldWithNameHistory {
 
-    private static final long serialVersionUID = 4828725767615187345L;
     private static final Log LOG = LogFactory.getLog(HtmlButton.class);
 
     /** The HTML tag represented by this element. */

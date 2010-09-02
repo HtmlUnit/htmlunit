@@ -56,7 +56,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class XMLDocument extends Document {
 
-    private static final long serialVersionUID = 1225601711396578064L;
     private static final Log LOG = LogFactory.getLog(XMLDocument.class);
 
     private boolean async_ = true;

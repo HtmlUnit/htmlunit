@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.WebWindowImpl;
  */
 public class FrameWindow extends WebWindowImpl {
 
-    private static final long serialVersionUID = -4767759560108055220L;
     private final BaseFrame frame_;
 
     /**

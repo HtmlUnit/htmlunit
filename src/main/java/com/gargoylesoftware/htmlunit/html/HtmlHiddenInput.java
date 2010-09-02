@@ -31,8 +31,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlHiddenInput extends HtmlInput {
 
-    private static final long serialVersionUID = -8139303691659609858L;
-
     /**
      * Creates an instance.
      *

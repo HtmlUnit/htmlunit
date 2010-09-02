@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.html.DomCharacterData;
  */
 public class CharacterDataImpl extends Node {
 
-    private static final long serialVersionUID = 5413850371617638797L;
-
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */

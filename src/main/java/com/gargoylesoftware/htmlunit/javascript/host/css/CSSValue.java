@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  */
 public class CSSValue extends SimpleScriptable {
 
-    private static final long serialVersionUID = 5433037821970827600L;
-
     /**
      * The value is inherited and the <code>cssText</code> contains "inherit".
      */

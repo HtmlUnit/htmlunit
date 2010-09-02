@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlAddress extends HtmlElement {
 
-    private static final long serialVersionUID = -4032894099500840750L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "address";
 

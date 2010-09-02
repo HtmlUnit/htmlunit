@@ -48,7 +48,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  */
 public class SimpleScriptable extends ScriptableObject implements Cloneable {
 
-    private static final long serialVersionUID = 3120000176890886780L;
     private static final Log LOG = LogFactory.getLog(SimpleScriptable.class);
 
     private DomNode domNode_;

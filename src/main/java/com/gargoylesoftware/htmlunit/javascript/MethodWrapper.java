@@ -33,7 +33,6 @@ import org.apache.commons.lang.ArrayUtils;
  */
 public class MethodWrapper extends ScriptableObject implements Function {
 
-    private static final long serialVersionUID = 6106771000496895783L;
     private final Class< ? > clazz_;
     private final Method method_;
     private final int[] jsTypeTags_;

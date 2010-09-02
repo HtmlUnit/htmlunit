@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class XMLDOMParseError extends SimpleScriptable {
 
-    private static final long serialVersionUID = 8435555857574741660L;
-
     private int errorCode_;
     private int filepos_;
     private int line_;

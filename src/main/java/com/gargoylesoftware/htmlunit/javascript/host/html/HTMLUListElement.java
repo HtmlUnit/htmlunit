@@ -22,8 +22,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  */
 public class HTMLUListElement extends HTMLListElement {
 
-    private static final long serialVersionUID = 5693185995604704981L;
-
     /**
      * Creates an instance.
      */

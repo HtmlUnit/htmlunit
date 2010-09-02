@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlBlockQuote extends HtmlElement {
 
-    private static final long serialVersionUID = -4797226665422415103L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "blockquote";
 

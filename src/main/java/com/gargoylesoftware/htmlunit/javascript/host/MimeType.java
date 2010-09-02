@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @see <a href="http://www.xulplanet.com/references/objref/MimeType.html">XUL Planet</a>
  */
 public final class MimeType extends SimpleScriptable {
-    private static final long serialVersionUID = -4673239005661544554L;
     private String description_;
     private String suffixes_;
     private String type_;

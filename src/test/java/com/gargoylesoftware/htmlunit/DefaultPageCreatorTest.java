@@ -115,7 +115,6 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
      * Servlet for {@link #contentTypes()}.
      */
     public static class ContentTypeServlet extends HttpServlet {
-        private static final long serialVersionUID = -7902362480804725117L;
         private static final String XHTML_DOCTYPE =
               "<!DOCTYPE html PUBLIC\n"
             + "\"-//W3C//DTD XHTML 1.0 Transitional//EN\"\n"
@@ -157,7 +156,6 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
      * Servlet for {@link #noContentType()}.
      */
     public static class NoContentTypeServlet extends HttpServlet {
-        private static final long serialVersionUID = 249364661058883744L;
         /** {@inheritDoc} */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {

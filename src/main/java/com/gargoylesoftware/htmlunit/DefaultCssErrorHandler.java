@@ -29,10 +29,6 @@ import org.w3c.css.sac.ErrorHandler;
  * @see SilentCssErrorHandler
  */
 public class DefaultCssErrorHandler implements ErrorHandler, Serializable {
-
-    /**Serial version UID. */
-    private static final long serialVersionUID = 4655126263007765782L;
-
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(DefaultCssErrorHandler.class);
 

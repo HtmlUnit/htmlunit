@@ -40,8 +40,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
  */
 public class HtmlRadioButtonInput extends HtmlInput {
 
-    private static final long serialVersionUID = 425993174633373218L;
-
     private boolean defaultCheckedState_;
     private boolean valueAtFocus_;
 

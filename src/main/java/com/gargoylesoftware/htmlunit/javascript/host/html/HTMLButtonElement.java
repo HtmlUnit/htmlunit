@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  */
 public class HTMLButtonElement extends FormField {
 
-    private static final long serialVersionUID = 7075194404850135839L;
-
     /**
      * Creates an instance.
      */

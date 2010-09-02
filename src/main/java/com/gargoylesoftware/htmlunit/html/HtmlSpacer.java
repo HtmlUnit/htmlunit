@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlSpacer extends HtmlElement {
 
-    private static final long serialVersionUID = -680661741943644813L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "spacer";
 

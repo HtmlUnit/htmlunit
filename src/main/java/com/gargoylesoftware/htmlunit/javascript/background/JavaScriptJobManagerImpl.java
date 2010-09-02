@@ -40,9 +40,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  */
 public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
-    /** Serial version UID. */
-    private static final long serialVersionUID = -8550108829091685593L;
-
     /**
      * The window to which this job manager belongs (weakly referenced, so as not
      * to leak memory).

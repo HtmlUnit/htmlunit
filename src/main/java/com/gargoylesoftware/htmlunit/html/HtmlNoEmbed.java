@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlNoEmbed extends HtmlElement {
 
-    private static final long serialVersionUID = 5022410958279401431L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "noembed";
 

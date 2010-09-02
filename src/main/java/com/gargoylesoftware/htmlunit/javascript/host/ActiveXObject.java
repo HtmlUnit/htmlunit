@@ -47,8 +47,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
  */
 public class ActiveXObject extends SimpleScriptable {
 
-    private static final long serialVersionUID = 7327032075131452226L;
-
     private static final Log LOG = LogFactory.getLog(ActiveXObject.class);
 
     /**

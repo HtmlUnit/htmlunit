@@ -31,8 +31,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public abstract class HtmlTableCell extends HtmlElement {
 
-    private static final long serialVersionUID = -6362606593038086865L;
-
     /**
      * Creates an instance.
      *

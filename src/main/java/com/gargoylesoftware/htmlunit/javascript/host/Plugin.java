@@ -22,7 +22,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
  */
 public class Plugin extends SimpleArray {
-    private static final long serialVersionUID = -6829501824595761156L;
     private String description_;
     private String filename_;
     private String name_;

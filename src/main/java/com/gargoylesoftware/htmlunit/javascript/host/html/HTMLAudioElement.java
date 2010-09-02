@@ -22,6 +22,4 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  */
 public class HTMLAudioElement extends HTMLElement {
 
-    private static final long serialVersionUID = -5296235307319854045L;
-
 }

@@ -24,8 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  */
 public class HTMLLegendElement extends FormChild {
 
-    private static final long serialVersionUID = -6536306776315347201L;
-
     /**
      * Creates an instance.
      */

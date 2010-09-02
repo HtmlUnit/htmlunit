@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  */
 public class CSSPrimitiveValue extends CSSValue {
 
-    private static final long serialVersionUID = -1742690770021576031L;
-
     /**
      * The value is not a recognized CSS2 value. The value can only be
      * obtained by using the <code>cssText</code> attribute.

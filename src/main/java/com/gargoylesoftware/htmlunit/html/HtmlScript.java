@@ -62,7 +62,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class HtmlScript extends HtmlElement {
 
-    private static final long serialVersionUID = 5736570536821513938L;
     private static final Log LOG = LogFactory.getLog(HtmlScript.class);
 
     /** The HTML tag represented by this element. */

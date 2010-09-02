@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  */
 public class HTMLObjectElement extends FormChild {
 
-    private static final long serialVersionUID = -916091257587937486L;
-
     private SimpleScriptable wrappedActiveX_;
 
     /**

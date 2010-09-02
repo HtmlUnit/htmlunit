@@ -25,8 +25,6 @@ import java.net.URL;
  */
 public class FailingHttpStatusCodeException extends RuntimeException {
 
-    private static final long serialVersionUID = 4080165207084775250L;
-
     private final WebResponse response_;
 
     /**

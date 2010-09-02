@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  */
 public class XPathNSResolver extends SimpleScriptable {
 
-    private static final long serialVersionUID = -6737970273175202932L;
-
     private Object element_;
 
     /**

@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlMultiColumn extends HtmlElement {
 
-    private static final long serialVersionUID = 8652950102614375612L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "multicol";
 

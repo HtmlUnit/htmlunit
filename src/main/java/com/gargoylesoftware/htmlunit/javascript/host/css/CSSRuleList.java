@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class CSSRuleList extends SimpleScriptable {
 
-    private static final long serialVersionUID = 6068213884501456020L;
-
     private final CSSStyleSheet stylesheet_;
     private final org.w3c.dom.css.CSSRuleList rules_;
 

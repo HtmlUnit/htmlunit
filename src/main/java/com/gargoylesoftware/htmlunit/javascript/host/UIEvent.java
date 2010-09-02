@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  */
 public class UIEvent extends Event {
 
-    private static final long serialVersionUID = 269569851849033800L;
-
     /** Specifies some detail information about the event. */
     private long detail_;
 

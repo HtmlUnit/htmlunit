@@ -35,8 +35,6 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  */
 public class DomText extends DomCharacterData implements Text {
 
-    private static final long serialVersionUID = 6589779086230288951L;
-
     /** The symbolic node name. */
     public static final String NODE_NAME = "#text";
 

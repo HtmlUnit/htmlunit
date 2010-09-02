@@ -109,9 +109,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class WebClient implements Serializable {
 
-    /** Serial version UID. */
-    private static final long serialVersionUID = -7214321203864969635L;
-
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(WebClient.class);
 
@@ -1764,7 +1761,6 @@ public class WebClient implements Serializable {
      * Keeps track of the current window. Inspired by WebTest's logic to track the current response.
      */
     class CurrentWindowTracker implements WebWindowListener, Serializable {
-        private static final long serialVersionUID = -987538223249485123L;
         /**
          * {@inheritDoc}
          */

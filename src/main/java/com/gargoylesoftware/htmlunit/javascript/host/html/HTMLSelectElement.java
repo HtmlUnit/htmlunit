@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  */
 public class HTMLSelectElement extends FormField {
 
-    private static final long serialVersionUID = 4332789476842114628L;
     private HTMLOptionsCollection optionsArray_;
 
     /**

@@ -36,8 +36,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlApplet;
  */
 public class HTMLAppletElement extends HTMLElement {
 
-    private static final long serialVersionUID = 1869359649341296910L;
-
     /**
      * Creates an instance.
      */
@@ -72,8 +70,6 @@ public class HTMLAppletElement extends HTMLElement {
         // Rhino should provide the possibility to declare delegate for Functions as it does for properties!!!
         for (final Method method : applet.getClass().getMethods()) {
             final Function f = new BaseFunction() {
-                private static final long serialVersionUID = 1748611972272176674L;
-
                 @Override
                 public Object call(final Context cx, final Scriptable scope,
                         final Scriptable thisObj, final Object[] args) {

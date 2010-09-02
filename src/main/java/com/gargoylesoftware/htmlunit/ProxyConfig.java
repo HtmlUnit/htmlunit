@@ -29,8 +29,6 @@ import java.util.regex.Pattern;
  */
 public class ProxyConfig implements Serializable {
 
-    private static final long serialVersionUID = -9164636437071690421L;
-
     private String proxyHost_;
     private int proxyPort_;
     private boolean isSocksProxy_;

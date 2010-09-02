@@ -46,8 +46,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  */
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
-    private static final long serialVersionUID = -1883166331827717255L;
-
     /** The number of (horizontal) pixels to assume that each character occupies. */
     private static final int PIXELS_PER_CHAR = 10;
 

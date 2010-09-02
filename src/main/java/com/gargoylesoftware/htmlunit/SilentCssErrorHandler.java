@@ -28,9 +28,6 @@ import org.w3c.css.sac.ErrorHandler;
  */
 public class SilentCssErrorHandler implements ErrorHandler, Serializable {
 
-    /** Serial version UID. */
-    private static final long serialVersionUID = -1338175203288447931L;
-
     /**
      * {@inheritDoc}
      */

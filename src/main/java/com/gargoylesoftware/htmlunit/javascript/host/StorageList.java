@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Storage.Type;
  */
 public class StorageList extends SimpleScriptable {
 
-    private static final long serialVersionUID = -7105465959490778967L;
-
     private Storage storage_;
 
     /**

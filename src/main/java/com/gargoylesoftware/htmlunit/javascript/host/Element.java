@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  */
 public class Element extends EventNode {
 
-    private static final long serialVersionUID = 5616690634173934926L;
     private NamedNodeMap attributes_;
 
     /**

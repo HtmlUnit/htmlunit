@@ -47,7 +47,6 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
  */
 public abstract class BaseFrame extends HtmlElement {
 
-    private static final long serialVersionUID = -7658106924909626296L;
     private static final Log LOG = LogFactory.getLog(BaseFrame.class);
     private final WebWindow enclosedWindow_;
     private boolean contentLoaded_ = false;

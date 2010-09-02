@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlCenter extends HtmlElement {
 
-    private static final long serialVersionUID = 3248794004926373269L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "center";
 

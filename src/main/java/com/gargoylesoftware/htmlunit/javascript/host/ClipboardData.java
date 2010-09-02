@@ -24,8 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public final class ClipboardData extends SimpleScriptable {
 
-    private static final long serialVersionUID = -7216035253095396931L;
-
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */

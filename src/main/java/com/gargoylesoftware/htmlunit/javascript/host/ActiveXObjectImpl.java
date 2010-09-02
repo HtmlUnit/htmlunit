@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class ActiveXObjectImpl extends SimpleScriptable {
 
-    private static final long serialVersionUID = 6954481782205807262L;
-
     private static final Class< ? > activeXComponentClass_;
 
     /** ActiveXComponent.getProperty(String) */

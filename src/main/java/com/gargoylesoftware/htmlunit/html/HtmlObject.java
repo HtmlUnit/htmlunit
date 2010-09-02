@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
  */
 public class HtmlObject extends HtmlElement {
 
-    private static final long serialVersionUID = 1203763133530358990L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "object";
 

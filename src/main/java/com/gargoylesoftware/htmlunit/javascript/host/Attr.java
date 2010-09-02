@@ -32,8 +32,6 @@ import com.gargoylesoftware.htmlunit.html.DomText;
  */
 public class Attr extends Node {
 
-    private static final long serialVersionUID = 3256441425892750900L;
-
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */

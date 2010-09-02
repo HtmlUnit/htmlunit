@@ -40,8 +40,6 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
  */
 public class HTMLImageElement extends HTMLElement {
 
-    private static final long serialVersionUID = 5630843390548382869L;
-
     private boolean instantiatedViaJavaScript_ = false;
 
     /**

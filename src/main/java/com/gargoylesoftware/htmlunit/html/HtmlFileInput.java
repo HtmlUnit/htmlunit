@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public class HtmlFileInput extends HtmlInput {
 
-    private static final long serialVersionUID = 7925479292349207154L;
     private String contentType_;
     private byte[] data_;
     private String valueAtFocus_;

@@ -26,8 +26,6 @@ import java.util.List;
  */
 public class CollectingAlertHandler implements AlertHandler, Serializable {
 
-    private static final long serialVersionUID = 6617913244195961483L;
-
     private final List<String> collectedAlerts_;
 
     /**

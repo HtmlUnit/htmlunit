@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
  */
 public class HTMLListElement extends HTMLElement {
 
-    private static final long serialVersionUID = -7951473922719370327L;
-
     /**
      * Returns the value of the <tt>compact</tt> attribute.
      * @return the value of the <tt>compact</tt> attribute

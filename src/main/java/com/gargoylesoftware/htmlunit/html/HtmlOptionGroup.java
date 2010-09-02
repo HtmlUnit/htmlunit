@@ -32,8 +32,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
 
-    private static final long serialVersionUID = 7854731553754432321L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "optgroup";
 

@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlDeletedText extends HtmlElement {
 
-    private static final long serialVersionUID = 6790105329776696420L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "del";
 

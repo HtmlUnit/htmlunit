@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlDirectory extends HtmlElement {
 
-    private static final long serialVersionUID = 7234953475940770872L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "dir";
 

@@ -22,8 +22,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  */
 public class HTMLDelElement extends HTMLElement {
 
-    private static final long serialVersionUID = -6385497788596150488L;
-
     /**
      * Creates an instance.
      */

@@ -59,8 +59,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public class HtmlForm extends HtmlElement {
 
-    private static final long serialVersionUID = 5338964478788825866L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "form";
 

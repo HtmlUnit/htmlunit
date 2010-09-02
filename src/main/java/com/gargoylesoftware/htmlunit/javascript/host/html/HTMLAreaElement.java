@@ -24,8 +24,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  */
 public class HTMLAreaElement extends HTMLElement {
 
-    private static final long serialVersionUID = -6024985411914294862L;
-
     /**
      * Creates an instance.
      */

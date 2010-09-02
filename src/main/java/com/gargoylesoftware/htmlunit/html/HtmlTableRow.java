@@ -34,8 +34,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlTableRow extends HtmlElement {
 
-    private static final long serialVersionUID = 1296770669696592851L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "tr";
 

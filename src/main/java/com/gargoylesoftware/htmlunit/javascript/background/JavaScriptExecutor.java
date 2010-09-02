@@ -34,8 +34,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  */
 public class JavaScriptExecutor implements Runnable, Serializable {
 
-    private static final long serialVersionUID = 8525230714555970165L;
-
     /**
      * A simple class to store a JavaScriptJobManager and its earliest job.
      */

@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlTitle extends HtmlElement {
 
-    private static final long serialVersionUID = 5463879100333678376L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "title";
 

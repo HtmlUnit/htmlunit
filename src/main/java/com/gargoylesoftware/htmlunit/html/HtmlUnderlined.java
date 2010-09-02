@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlUnderlined extends HtmlElement {
 
-    private static final long serialVersionUID = 4959353391566177951L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "u";
 

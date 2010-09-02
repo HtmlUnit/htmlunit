@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlHeading6 extends HtmlElement {
 
-    private static final long serialVersionUID = -1216345014921616866L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "h6";
 

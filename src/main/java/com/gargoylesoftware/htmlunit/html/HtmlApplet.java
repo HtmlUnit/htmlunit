@@ -38,8 +38,6 @@ import com.gargoylesoftware.htmlunit.html.applets.AppletStubImpl;
  */
 public class HtmlApplet extends HtmlElement {
 
-    private static final long serialVersionUID = -2868018454095564791L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "applet";
 

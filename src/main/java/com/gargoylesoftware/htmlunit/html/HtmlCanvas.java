@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlCanvas extends HtmlElement {
 
-    private static final long serialVersionUID = 7109786069688698579L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "canvas";
 

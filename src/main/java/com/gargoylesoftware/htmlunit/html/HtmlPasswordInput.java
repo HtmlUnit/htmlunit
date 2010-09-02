@@ -32,14 +32,11 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
  */
 public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput {
 
-    private static final long serialVersionUID = -1074283471317076942L;
-
     private String valueAtFocus_;
 
     private final SelectionDelegate selectionDelegate_ = new SelectionDelegate(this);
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
-        private static final long serialVersionUID = -1938284467263013958L;
         @Override
         void typeDone(final String newValue, final int newCursorPosition) {
             setAttribute("value", newValue);

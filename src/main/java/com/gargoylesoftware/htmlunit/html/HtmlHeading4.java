@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlHeading4 extends HtmlElement {
 
-    private static final long serialVersionUID = 1954618351075181327L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "h4";
 

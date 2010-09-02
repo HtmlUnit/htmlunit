@@ -71,8 +71,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /** Indicates a tab. */
     protected static final String AS_TEXT_TAB = "§tab§";
 
-    private static final long serialVersionUID = -2013573303678006763L;
-
     /** A ready state constant for IE (state 1). */
     public static final String READY_STATE_UNINITIALIZED = "uninitialized";
 

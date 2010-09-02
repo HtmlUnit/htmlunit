@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlMarquee extends HtmlElement {
 
-    private static final long serialVersionUID = -8889956363167966069L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "marquee";
 

@@ -27,8 +27,6 @@ import com.gargoylesoftware.htmlunit.html.DomText;
  */
 public class HTMLScriptElement extends HTMLElement {
 
-    private static final long serialVersionUID = -4626517931702326308L;
-
     /**
      * Creates an instance.
      */

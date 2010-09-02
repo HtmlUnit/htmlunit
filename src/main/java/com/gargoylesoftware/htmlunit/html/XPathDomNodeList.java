@@ -34,8 +34,6 @@ import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
  */
 class XPathDomNodeList<E extends DomNode> extends AbstractList<E> implements DomNodeList<E>, Serializable {
 
-    private static final long serialVersionUID = 1541399090797298342L;
-
     /** The XPath expression which dictates the contents of this node list. */
     private String xpath_;
 
@@ -138,8 +136,6 @@ class XPathDomNodeList<E extends DomNode> extends AbstractList<E> implements Dom
      * DOM change listener which clears the node cache when necessary.
      */
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
-
-        private static final long serialVersionUID = 3586393389945802774L;
 
         /**
          * {@inheritDoc}

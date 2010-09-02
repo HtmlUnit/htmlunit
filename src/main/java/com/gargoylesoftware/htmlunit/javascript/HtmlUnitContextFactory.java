@@ -45,8 +45,6 @@ import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
  */
 public class HtmlUnitContextFactory extends ContextFactory {
 
-    private static final long serialVersionUID = -1282169475857079041L;
-
     private static final int INSTRUCTION_COUNT_THRESHOLD = 10000;
 
     private final BrowserVersion browserVersion_;

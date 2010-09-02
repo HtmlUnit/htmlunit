@@ -25,6 +25,4 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  */
 public class MutationEvent extends Event {
 
-    private static final long serialVersionUID = 4542119950659582338L;
-
 }

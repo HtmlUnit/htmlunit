@@ -81,8 +81,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class DefaultPageCreator implements PageCreator, Serializable  {
 
-    private static final long serialVersionUID = -4420355214574495577L;
-
     /**
      * Creates an instance.
      */

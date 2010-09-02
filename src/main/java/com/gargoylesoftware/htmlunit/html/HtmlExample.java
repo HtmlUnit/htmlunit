@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlExample extends HtmlElement {
 
-    private static final long serialVersionUID = 7789806977925266910L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "xmp";
 

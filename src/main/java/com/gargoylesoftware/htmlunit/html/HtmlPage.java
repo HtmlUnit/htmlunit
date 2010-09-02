@@ -127,7 +127,6 @@ import com.steadystate.css.parser.SACParserCSS21;
  */
 public class HtmlPage extends SgmlPage {
 
-    private static final long serialVersionUID = 1779746292119944291L;
     private static final Log LOG = LogFactory.getLog(HtmlPage.class);
 
     private HtmlUnitDOMBuilder builder_;

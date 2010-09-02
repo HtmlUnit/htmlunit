@@ -904,7 +904,6 @@ public class XMLHttpRequestTest extends WebServerTestCase {
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final DomChangeListener listener = new DomChangeListener() {
-            private static final long serialVersionUID = 1978591653173770574L;
             public void nodeAdded(final DomChangeEvent event) {
                 // Empty.
             }
@@ -1158,7 +1157,6 @@ public class XMLHttpRequestTest extends WebServerTestCase {
      * Custom servlet which streams content to the client little by little.
      */
     public static final class StreamingServlet extends HttpServlet {
-        private static final long serialVersionUID = -5892710154241871545L;
         /** {@inheritDoc} */
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {

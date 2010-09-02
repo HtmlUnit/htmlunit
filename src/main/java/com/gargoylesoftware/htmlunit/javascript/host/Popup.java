@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  */
 public class Popup extends SimpleScriptable {
 
-    private static final long serialVersionUID = 2016351591254223906L;
     private boolean opened_;
     private HTMLDocument document_;
 
@@ -110,9 +109,6 @@ public class Popup extends SimpleScriptable {
  * with a {@link Popup}.
  */
 class PopupPseudoWebWindow implements WebWindow {
-
-    /** Serial version UID. */
-    private static final long serialVersionUID = 8592029101424531167L;
 
     private final WebClient webClient_;
     private Object scriptObject_;

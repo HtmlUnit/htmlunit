@@ -28,8 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Attr;
  */
 public class XMLAttr extends Attr {
 
-    private static final long serialVersionUID = -9062357417620766444L;
-
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */

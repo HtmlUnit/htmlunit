@@ -40,7 +40,6 @@ import org.apache.http.client.CredentialsProvider;
  */
 public class DefaultCredentialsProvider implements CredentialsProvider, Serializable {
 
-    private static final long serialVersionUID = 8243249154922357903L;
     private final HashMap<AuthScopeProxy, CredentialsFactory> credentialsMap_
         = new HashMap<AuthScopeProxy, CredentialsFactory>();
 
@@ -222,7 +221,6 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * {@link DefaultCredentialsProvider} class can be serialized correctly.
      */
     private static class AuthScopeProxy implements Serializable {
-        private static final long serialVersionUID = 1464373861677912537L;
         private AuthScope authScope_;
         public AuthScopeProxy(final AuthScope authScope) {
             authScope_ = authScope;
@@ -257,8 +255,6 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * We have to create a factory class, so that credentials can be serialized correctly.
      */
     private static class UsernamePasswordCredentialsFactory implements CredentialsFactory, Serializable {
-        private static final long serialVersionUID = 5578356387067132849L;
-
         private String username_;
         private String password_;
 
@@ -280,8 +276,6 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * We have to create a factory class, so that credentials can be serialized correctly.
      */
     private static class NTCredentialsFactory implements CredentialsFactory, Serializable {
-        private static final long serialVersionUID = 5578356387067132849L;
-
         private String username_;
         private String password_;
         private String workstation_;

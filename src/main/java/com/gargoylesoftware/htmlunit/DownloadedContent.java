@@ -35,7 +35,6 @@ public interface DownloadedContent extends Serializable {
      * Implementation keeping content in memory.
      */
     static class InMemory implements DownloadedContent {
-        private static final long serialVersionUID = -3297925685606468344L;
         private final byte[] bytes_;
         public InMemory(final byte[] byteArray) {
             if (byteArray == null) {
@@ -55,7 +54,6 @@ public interface DownloadedContent extends Serializable {
      * Implementation keeping content on the file system.
      */
     static class OnFile implements DownloadedContent {
-        private static final long serialVersionUID = 8385310409274828198L;
         private final File file_;
         public OnFile(final File file) {
             file_ = file;

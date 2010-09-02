@@ -22,8 +22,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  */
 public class HTMLPreElement extends HTMLElement {
 
-    private static final long serialVersionUID = 1869359649341296910L;
-
     /**
      * Creates an instance.
      */

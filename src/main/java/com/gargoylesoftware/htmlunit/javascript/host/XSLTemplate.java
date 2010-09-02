@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class XSLTemplate extends SimpleScriptable {
 
-    private static final long serialVersionUID = 2820794481694666278L;
-
     private Node stylesheet_;
 
     /**

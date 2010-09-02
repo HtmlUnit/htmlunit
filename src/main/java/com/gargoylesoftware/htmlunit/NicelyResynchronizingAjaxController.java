@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class NicelyResynchronizingAjaxController extends AjaxController {
 
-    private static final long serialVersionUID = -5406000795046341395L;
     private static final Log LOG = LogFactory.getLog(NicelyResynchronizingAjaxController.class);
 
     private transient WeakReference<Thread> originatedThread_;

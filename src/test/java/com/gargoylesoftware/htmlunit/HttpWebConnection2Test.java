@@ -142,8 +142,6 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      */
     public static class HeaderOrderServlet extends HttpServlet {
 
-        private static final long serialVersionUID = -6422333931337496616L;
-
         /**
          * {@inheritDoc}
          */

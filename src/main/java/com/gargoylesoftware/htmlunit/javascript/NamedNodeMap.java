@@ -39,8 +39,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
  */
 public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFallbackGetter {
 
-    private static final long serialVersionUID = -1910087049570242560L;
-
     private final org.w3c.dom.NamedNodeMap attributes_;
 
     /**

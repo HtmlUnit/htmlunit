@@ -44,9 +44,6 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  */
 public class CookieManager implements Serializable {
 
-    /** Serial version UID. */
-    private static final long serialVersionUID = 4145377365165079425L;
-
     /**
      * HtmlUnit's cookie policy is to be browser-compatible. Code which requires access to
      * HtmlUnit's cookie policy should use this constant, rather than making assumptions and using

@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class ScriptException extends RuntimeException {
 
-    private static final long serialVersionUID = 4788896649084231283L;
     private final String scriptSourceCode_;
     private final HtmlPage page_;
 

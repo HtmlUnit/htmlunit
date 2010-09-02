@@ -43,8 +43,6 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  */
 public class HtmlArea extends HtmlElement {
 
-    private static final long serialVersionUID = 8933911141016200386L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "area";
 

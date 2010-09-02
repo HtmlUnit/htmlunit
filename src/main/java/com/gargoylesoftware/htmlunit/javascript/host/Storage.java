@@ -33,8 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class Storage extends SimpleScriptable {
 
-    private static final long serialVersionUID = 7181399874147128543L;
-
     static enum Type { GLOBAL_STORAGE, LOCAL_STORAGE, SESSION_STORAGE };
 
     private static List<String> RESERVED_NAMES_ = Arrays.asList("clear", "key", "getItem", "length", "removeItem",

@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
  */
 public class GAEJavaScriptExecutor extends JavaScriptExecutor {
 
-    private static final long serialVersionUID = 6720347050164623356L;
-
     /** Creates an EventLoop for the webClient.
      *
      * @param webClient the provided webClient

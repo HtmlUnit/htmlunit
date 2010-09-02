@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlBlink extends HtmlElement {
 
-    private static final long serialVersionUID = 5968651790284866362L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "blink";
 

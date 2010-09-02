@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlAbbreviated extends HtmlElement {
 
-    private static final long serialVersionUID = 5776052132369544501L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "abbr";
 

@@ -39,8 +39,6 @@ import org.w3c.dom.NodeList;
  * @author Marc Guillemot
  */
 public class ScriptableWrapper extends ScriptableObject {
-    private static final long serialVersionUID = 1736378450382368760L;
-
     private final Map<String, Method> properties_ = new HashMap<String, Method>();
 
     private Method getByIndexMethod_;

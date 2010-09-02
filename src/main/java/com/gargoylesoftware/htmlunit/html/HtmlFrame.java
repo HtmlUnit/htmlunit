@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlFrame extends BaseFrame {
 
-    private static final long serialVersionUID = -6889609773688233917L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "frame";
 

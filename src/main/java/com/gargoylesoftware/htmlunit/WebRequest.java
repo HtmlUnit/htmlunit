@@ -46,7 +46,6 @@ public class WebRequest implements Serializable {
 
     private static final Log LOG = LogFactory.getLog(WebRequest.class);
 
-    private static final long serialVersionUID = -7405507885099274031L;
     private String url_; // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
     private String proxyHost_;
     private int proxyPort_;

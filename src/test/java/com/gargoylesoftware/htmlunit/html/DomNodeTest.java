@@ -465,7 +465,6 @@ public class DomNodeTest extends WebTestCase {
     }
 
     static class DomChangeListenerTestImpl implements DomChangeListener {
-        private static final long serialVersionUID = 2228905954098558835L;
         private final List<String> collectedValues_ = new ArrayList<String>();
         public void nodeAdded(final DomChangeEvent event) {
             collectedValues_.add("nodeAdded: " + event.getParentNode().getNodeName() + ','
@@ -601,14 +600,12 @@ public class DomNodeTest extends WebTestCase {
 
         final List<String> l = new ArrayList<String>();
         final DomChangeListener listener2 = new DomChangeListenerTestImpl() {
-            private static final long serialVersionUID = 5171149877443701905L;
             @Override
             public void nodeAdded(final DomChangeEvent event) {
                 l.add("in listener 2");
             }
         };
         final DomChangeListener listener1 = new DomChangeListenerTestImpl() {
-            private static final long serialVersionUID = -4088677323425875498L;
             @Override
             public void nodeAdded(final DomChangeEvent event) {
                 l.add("in listener 1");

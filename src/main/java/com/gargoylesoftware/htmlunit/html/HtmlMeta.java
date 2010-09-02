@@ -33,8 +33,6 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  */
 public class HtmlMeta extends HtmlElement {
 
-    private static final long serialVersionUID = 7408601325303605790L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "meta";
 

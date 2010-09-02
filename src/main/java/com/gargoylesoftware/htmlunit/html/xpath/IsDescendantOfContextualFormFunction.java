@@ -39,9 +39,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 @Deprecated
 public class IsDescendantOfContextualFormFunction extends FunctionDef1Arg {
 
-    /** Serial version UID. */
-    private static final long serialVersionUID = -7865865499040147609L;
-
     /**
      * {@inheritDoc}
      */

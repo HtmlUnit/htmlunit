@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlDefinition extends HtmlElement {
 
-    private static final long serialVersionUID = 4139591667031530755L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "dfn";
 

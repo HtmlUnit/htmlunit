@@ -39,8 +39,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class HTMLAnchorElement extends HTMLElement {
 
-    private static final long serialVersionUID = -816365374422492967L;
-
     /**
      * Creates an instance.
      */

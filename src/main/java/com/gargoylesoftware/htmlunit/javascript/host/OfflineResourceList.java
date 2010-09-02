@@ -33,8 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class OfflineResourceList extends SimpleScriptable {
 
-    private static final long serialVersionUID = -1003302627764098209L;
-
     /** The object isn't associated with an application cache. */
     public static final short STATUS_UNCACHED = 0;
     /** The application cache is not in the process of being updated. */

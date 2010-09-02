@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  */
 public class RowContainer extends HTMLElement {
 
-    private static final long serialVersionUID = 3258129146093056308L;
     private HTMLCollection rows_; // has to be a member to have equality (==) working
 
     /**

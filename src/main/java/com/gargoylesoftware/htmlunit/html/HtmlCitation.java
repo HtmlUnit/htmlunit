@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlCitation extends HtmlElement {
 
-    private static final long serialVersionUID = 2087929241497523503L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "cite";
 

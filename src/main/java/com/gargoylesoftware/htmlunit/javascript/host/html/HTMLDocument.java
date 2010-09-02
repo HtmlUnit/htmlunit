@@ -111,7 +111,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class HTMLDocument extends Document implements ScriptableWithFallbackGetter {
 
-    private static final long serialVersionUID = -7646789903352066465L;
     private static final Log LOG = LogFactory.getLog(HTMLDocument.class);
 
     /** The cookie name used for cookies with no name (HttpClient doesn't like empty names). */
@@ -1424,8 +1423,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         NodeFilter filterWrapper = null;
         if (filter != null) {
             filterWrapper = new NodeFilter() {
-                private static final long serialVersionUID = -7572357836681155579L;
-
                 @Override
                 public short acceptNode(final Node n) {
                     final Object[] args = new Object[] {n};

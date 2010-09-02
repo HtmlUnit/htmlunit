@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlButtonInput extends HtmlInput {
 
-    private static final long serialVersionUID = 6218252462789212481L;
-
     /**
      * Creates an instance.
      *

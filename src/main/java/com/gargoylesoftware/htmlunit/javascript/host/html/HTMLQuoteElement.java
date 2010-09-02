@@ -22,8 +22,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  */
 public class HTMLQuoteElement extends HTMLElement {
 
-    private static final long serialVersionUID = -2939057085304041436L;
-
     /**
      * Creates an instance.
      */

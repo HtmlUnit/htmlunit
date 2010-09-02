@@ -25,8 +25,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  */
 public class DocumentFragment extends Node {
 
-    private static final long serialVersionUID = -9081976556072827541L;
-
     /**
      * {@inheritDoc}
      */

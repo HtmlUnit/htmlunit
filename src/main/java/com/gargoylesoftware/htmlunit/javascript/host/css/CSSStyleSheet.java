@@ -85,7 +85,6 @@ import com.steadystate.css.parser.SelectorListImpl;
  */
 public class CSSStyleSheet extends SimpleScriptable {
 
-    private static final long serialVersionUID = -8341675386925348206L;
     private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);
 
     /** The parsed stylesheet which this host object wraps. */

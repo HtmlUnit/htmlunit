@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
  */
 public class SimpleArray extends SimpleScriptable implements ScriptableWithFallbackGetter {
-    private static final long serialVersionUID = 8025124211062703153L;
     private final List<Object> elements_ = new ArrayList<Object>();
 
     /**

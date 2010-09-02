@@ -31,9 +31,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class History implements Serializable {
 
-    /** Serial version UID. */
-    private static final long serialVersionUID = 2913698177338034112L;
-
     /** The window to which this navigation history belongs. */
     private final WebWindow window_;
 

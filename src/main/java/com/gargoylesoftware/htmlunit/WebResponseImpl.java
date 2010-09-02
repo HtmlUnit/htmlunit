@@ -30,8 +30,6 @@ import java.net.URL;
 @Deprecated
 public class WebResponseImpl extends WebResponse {
 
-    private static final long serialVersionUID = -4419537702781437059L;
-
     /**
      * Constructs with all data.
      *

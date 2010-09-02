@@ -28,8 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class CanvasRenderingContext2D extends SimpleScriptable {
 
-    private static final long serialVersionUID = -693023667459214244L;
-
     /**
      * Returns the "fillStyle" property.
      * @return the "fillStyle" property

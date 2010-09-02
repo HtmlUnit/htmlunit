@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class TopLevelWindow extends WebWindowImpl {
 
-    private static final long serialVersionUID = 2448888802967514906L;
-
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(TopLevelWindow.class);
 

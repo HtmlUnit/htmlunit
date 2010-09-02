@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
  */
 public class Enumerator extends SimpleScriptable {
 
-    private static final long serialVersionUID = -7030539919126620376L;
-
     private int index_;
 
     private HTMLCollection collection_;

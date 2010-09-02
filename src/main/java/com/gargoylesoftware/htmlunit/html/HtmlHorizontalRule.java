@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlHorizontalRule extends HtmlElement {
 
-    private static final long serialVersionUID = 8279554478346712943L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "hr";
 

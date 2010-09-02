@@ -44,8 +44,6 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class BrowserVersion implements Serializable {
 
-    private static final long serialVersionUID = 594005988985654117L;
-
     private String applicationCodeName_ = APP_CODE_NAME;
     private String applicationMinorVersion_ = "0";
     private String applicationName_;

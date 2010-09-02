@@ -34,8 +34,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public class StringWebResponse extends WebResponse {
 
-    private static final long serialVersionUID = 8001886227379566491L;
-
     /**
      * Helper method for constructors. Converts the specified string into {@link WebResponseData}
      * with other defaults specified.

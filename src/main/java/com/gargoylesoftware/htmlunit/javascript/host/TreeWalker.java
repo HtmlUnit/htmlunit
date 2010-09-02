@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class TreeWalker extends SimpleScriptable {
 
-    private static final long serialVersionUID = 9110192216193735497L;
     private Node root_, currentNode_;
     private int whatToShow_;
     private NodeFilter filter_;

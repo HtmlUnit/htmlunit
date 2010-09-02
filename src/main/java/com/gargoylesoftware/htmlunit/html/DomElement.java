@@ -39,8 +39,6 @@ import com.gargoylesoftware.htmlunit.util.MapWrapper;
  */
 public class DomElement extends DomNamespaceNode implements Element {
 
-    private static final long serialVersionUID = 8573853996234946066L;
-
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
 
@@ -461,7 +459,6 @@ public class DomElement extends DomNamespaceNode implements Element {
  * The {@link NamedNodeMap} to store the node attributes.
  */
 class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedNodeMap, Serializable {
-    private static final long serialVersionUID = -450637965125944616L;
     private final List<String> attrPositions_ = new ArrayList<String>();
     private final DomElement domNode_;
     public static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();

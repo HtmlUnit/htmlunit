@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public class WebResponse implements Serializable {
 
-    private static final long serialVersionUID = -7055986365446501010L;
     private static final Log LOG = LogFactory.getLog(WebResponse.class);
 
     private long loadTime_;

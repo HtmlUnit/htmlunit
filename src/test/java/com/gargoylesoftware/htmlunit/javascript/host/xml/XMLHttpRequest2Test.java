@@ -411,7 +411,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * Servlet for {@link #post()}.
      */
     public static class PostServlet1 extends ServletContentWrapper {
-        private static final long serialVersionUID = -439785252750617301L;
 
         /** Constructor. */
         public PostServlet1() {
@@ -430,7 +429,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * Servlet for {@link #post()}.
      */
     public static class PostServlet2 extends HttpServlet {
-        private static final long serialVersionUID = 5286696645520397377L;
 
         @Override
         protected void doPost(final HttpServletRequest req, final HttpServletResponse resp)

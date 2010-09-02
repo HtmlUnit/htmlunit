@@ -27,8 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
  * @author Ahmed Ashour
  */
 public class HTMLFrameElement extends HTMLElement {
-    private static final long serialVersionUID = 3761121622400448304L;
-
     /**
      * Creates an instance. A default constructor is required for all JavaScript objects.
      */

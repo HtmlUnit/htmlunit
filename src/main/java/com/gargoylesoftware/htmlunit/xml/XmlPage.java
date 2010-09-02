@@ -54,7 +54,6 @@ import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
  */
 public class XmlPage extends SgmlPage {
 
-    private static final long serialVersionUID = -1430136241030261308L;
     private static final Log LOG = LogFactory.getLog(XmlPage.class);
 
     private Node node_;

@@ -61,7 +61,6 @@ import com.steadystate.css.parser.SACParserCSS21;
  */
 public class CSSStyleDeclaration extends SimpleScriptable {
 
-    private static final long serialVersionUID = -1976370264911039311L;
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static Map<String, String> CSSColors_ = new HashMap<String, String>();
 

@@ -24,8 +24,6 @@ import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
  */
 public final class ProcessingInstruction extends Node {
 
-    private static final long serialVersionUID = -1812065915680827446L;
-
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */

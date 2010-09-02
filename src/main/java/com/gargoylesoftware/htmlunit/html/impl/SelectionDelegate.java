@@ -35,8 +35,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class SelectionDelegate implements Serializable {
 
-    private static final long serialVersionUID = -5611492671640559880L;
-
     /** The owner element. */
     private final SelectableTextInput element_;
 

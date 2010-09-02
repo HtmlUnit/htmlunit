@@ -33,8 +33,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
 
-    private static final long serialVersionUID = -7566440323983487259L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "isindex";
 

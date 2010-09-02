@@ -113,9 +113,6 @@ public class WebResponseDataTest extends WebServerTestCase {
      * Servlet for {@link #redirection()}.
      */
     public static class RedirectionServlet extends HttpServlet {
-
-        private static final long serialVersionUID = 2865392611660286450L;
-
         /**
          * {@inheritDoc}
          */

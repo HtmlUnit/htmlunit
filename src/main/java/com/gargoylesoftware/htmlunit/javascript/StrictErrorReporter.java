@@ -31,7 +31,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class StrictErrorReporter implements ErrorReporter, Serializable {
 
-    private static final long serialVersionUID = 2165290829783324770L;
     private static final Log LOG = LogFactory.getLog(StrictErrorReporter.class);
 
     /**

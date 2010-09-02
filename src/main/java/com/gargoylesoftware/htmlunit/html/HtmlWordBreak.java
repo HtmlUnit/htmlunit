@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlWordBreak extends HtmlElement {
 
-    private static final long serialVersionUID = 2739312641527017852L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "wbr";
 

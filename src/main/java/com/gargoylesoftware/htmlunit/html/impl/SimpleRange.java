@@ -42,8 +42,6 @@ import com.gargoylesoftware.htmlunit.html.DomText;
  */
 public class SimpleRange implements Range, Serializable {
 
-    private static final long serialVersionUID = 5779974839466976193L;
-
     /** The start (anchor) container. */
     private Node startContainer_;
 

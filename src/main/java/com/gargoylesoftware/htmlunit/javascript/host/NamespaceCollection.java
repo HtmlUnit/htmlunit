@@ -35,9 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  */
 public class NamespaceCollection extends SimpleScriptable implements Function {
 
-    /** Serial version UID. */
-    private static final long serialVersionUID = 3414897723813218653L;
-
     /** The HTML document to which this namespace collection belongs. */
     private final HTMLDocument doc_;
 

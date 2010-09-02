@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlFieldSet extends HtmlElement {
 
-    private static final long serialVersionUID = 4444607415016780539L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "fieldset";
 

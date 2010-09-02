@@ -27,8 +27,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class DomDocumentType extends DomNode implements DocumentType {
 
-    private static final long serialVersionUID = -5089258626822609432L;
-
     private final String name_;
     private final String publicId_;
     private final String systemId_;

@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class DOMImplementation extends SimpleScriptable {
 
-    private static final long serialVersionUID = -6824157544527299635L;
-
     /**
      * Test if the DOM implementation implements a specific feature.
      * @param feature the name of the feature to test (case-insensitive)

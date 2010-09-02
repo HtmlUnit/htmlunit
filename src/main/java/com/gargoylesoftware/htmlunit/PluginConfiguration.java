@@ -28,8 +28,6 @@ import java.util.Set;
  */
 public class PluginConfiguration implements Serializable {
 
-    private static final long serialVersionUID = -3160049910272683027L;
-
     private final String description_;
     private final String filename_;
     private final String name_;
@@ -104,8 +102,6 @@ public class PluginConfiguration implements Serializable {
      * Holds information about a single mime type associated with a plugin.
      */
     public static class MimeType implements Serializable {
-
-        private static final long serialVersionUID = 3775313058008352464L;
 
         private final String description_;
         private final String suffixes_;

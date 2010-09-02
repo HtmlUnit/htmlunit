@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlPreformattedText extends HtmlElement {
 
-    private static final long serialVersionUID = -4118494375778640477L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "pre";
 

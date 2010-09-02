@@ -323,7 +323,6 @@ public class WebClient2Test extends WebServerTestCase {
      * Helper class for {@link #redirectInfinite303And307}.
      */
     public static class RedirectServlet extends HttpServlet {
-        private static final long serialVersionUID = -140725579463205715L;
         private int count_;
         private int status_;
         private String location_;
@@ -351,7 +350,6 @@ public class WebClient2Test extends WebServerTestCase {
      * Helper class for {@link #redirectInfinite303And307}.
      */
     public static class RedirectServlet303 extends RedirectServlet {
-        private static final long serialVersionUID = 3744682108187160138L;
         static final String URL = "/test";
         /** Creates a new instance. */
         public RedirectServlet303() {
@@ -363,7 +361,6 @@ public class WebClient2Test extends WebServerTestCase {
      * Helper class for {@link #redirectInfinite303And307}.
      */
     public static class RedirectServlet307 extends RedirectServlet {
-        private static final long serialVersionUID = 3670046341988874716L;
         static final String URL = "/test2";
         /** Creates a new instance. */
         public RedirectServlet307() {
@@ -392,7 +389,6 @@ public class WebClient2Test extends WebServerTestCase {
      * Helper class for {@link #bodyDowloadTime}.
      */
     public static class ServeBodySlowlyServlet extends HttpServlet {
-        private static final long serialVersionUID = 3123744432222373088L;
         private static volatile long LastRequestTime_ = -1;
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {

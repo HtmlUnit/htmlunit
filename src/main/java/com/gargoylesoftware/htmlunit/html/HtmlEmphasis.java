@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlEmphasis extends HtmlElement {
 
-    private static final long serialVersionUID = -6006882326625788314L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "em";
 

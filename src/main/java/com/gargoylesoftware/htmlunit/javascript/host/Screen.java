@@ -31,8 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class Screen extends SimpleScriptable {
 
-    private static final long serialVersionUID = 7775024295042666245L;
-
     private int left_;
     private int top_;
     private int width_;

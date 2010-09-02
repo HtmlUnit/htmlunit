@@ -60,7 +60,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  */
 public class Document extends EventNode {
 
-    private static final long serialVersionUID = 3700830050839613384L;
     private static final Log LOG = LogFactory.getLog(Document.class);
 
     private Window window_;

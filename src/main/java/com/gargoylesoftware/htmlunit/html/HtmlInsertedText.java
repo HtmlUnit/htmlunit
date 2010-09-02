@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlInsertedText extends HtmlElement {
 
-    private static final long serialVersionUID = -1385486713192118686L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "ins";
 

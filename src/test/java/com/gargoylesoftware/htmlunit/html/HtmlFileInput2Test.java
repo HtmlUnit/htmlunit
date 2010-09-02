@@ -75,8 +75,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      */
     public static class Upload1Servlet extends HttpServlet {
 
-        private static final long serialVersionUID = 6693252829875297263L;
-
         /**
          * {@inheritDoc}
          */
@@ -98,8 +96,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * Servlet for '/upload2'.
      */
     public static class ContentTypeUpload2Servlet extends HttpServlet {
-
-        private static final long serialVersionUID = 9040072936161269041L;
 
         /**
          * {@inheritDoc}
@@ -157,8 +153,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      */
     public static class PrintRequestServlet extends HttpServlet {
 
-        private static final long serialVersionUID = 40153839021613234L;
-
         /**
          * {@inheritDoc}
          */
@@ -204,8 +198,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * Servlet for '/upload2'.
      */
     public static class ContentTypeHeaderUpload2Servlet extends HttpServlet {
-
-        private static final long serialVersionUID = 4063742744610158029L;
 
         /**
          * {@inheritDoc}
@@ -257,9 +249,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * Servlet for '/upload2'.
      */
     public static class ChunkedUpload2Servlet extends HttpServlet {
-
-        private static final long serialVersionUID = -980728270976349919L;
-
         /**
          * {@inheritDoc}
          */

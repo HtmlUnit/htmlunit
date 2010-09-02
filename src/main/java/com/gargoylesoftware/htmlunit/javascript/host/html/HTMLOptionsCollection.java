@@ -40,7 +40,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class HTMLOptionsCollection extends SimpleScriptable implements ScriptableWithFallbackGetter {
 
-    private static final long serialVersionUID = -4790255174217201235L;
     private HtmlSelect htmlSelect_;
 
     /**

@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlInlineFrame extends BaseFrame {
 
-    private static final long serialVersionUID = -5915482404176705506L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "iframe";
 

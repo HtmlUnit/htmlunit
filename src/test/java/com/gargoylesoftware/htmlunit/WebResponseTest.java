@@ -177,9 +177,6 @@ public class WebResponseTest extends WebDriverTestCase {
      * Servlet for {@link #responseHeaders()}.
      */
     public static class ResponseHeadersServlet extends HttpServlet {
-
-        private static final long serialVersionUID = -8815307540281233182L;
-
         /**
          * {@inheritDoc}
          */

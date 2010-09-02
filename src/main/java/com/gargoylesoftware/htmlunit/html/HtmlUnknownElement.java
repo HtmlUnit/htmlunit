@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlUnknownElement extends HtmlElement {
 
-    private static final long serialVersionUID = 5504784230513084888L;
-
     /**
      * Creates an instance.
      *

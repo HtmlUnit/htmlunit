@@ -26,8 +26,6 @@ import java.util.EventObject;
  */
 public class HtmlAttributeChangeEvent extends EventObject {
 
-    private static final long serialVersionUID = -7432080435641028075L;
-
     private final String name_;
     private final String value_;
 

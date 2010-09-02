@@ -101,7 +101,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
  */
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
-    private static final long serialVersionUID = -6864034414262085851L;
     private static final Log LOG = LogFactory.getLog(HTMLElement.class);
 
     private static final int BEHAVIOR_ID_UNKNOWN = -1;
@@ -938,7 +937,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public static class ProxyDomNode extends HtmlDivision {
 
-        private static final long serialVersionUID = -7816775277187498538L;
         private final DomNode target_;
         private boolean append_;
 

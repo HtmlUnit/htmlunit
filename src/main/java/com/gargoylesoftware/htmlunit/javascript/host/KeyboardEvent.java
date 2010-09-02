@@ -28,8 +28,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  */
 public class KeyboardEvent extends UIEvent {
 
-    private static final long serialVersionUID = -2422855531523175841L;
-
     /** Constant for DOM_VK_MULTIPLY. */
     public static final int DOM_VK_MULTIPLY = 106;
 

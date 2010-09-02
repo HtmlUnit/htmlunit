@@ -99,8 +99,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
  */
 public class Window extends SimpleScriptable implements ScriptableWithFallbackGetter, Function {
 
-    private static final long serialVersionUID = -7730298149962810325L;
-
     private static final Log LOG = LogFactory.getLog(Window.class);
 
     /** HtmlUnit's "window" width, in pixels. */
@@ -1566,8 +1564,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener,
         Serializable {
-
-        private static final long serialVersionUID = -4651000523078926322L;
 
         /**
          * {@inheritDoc}

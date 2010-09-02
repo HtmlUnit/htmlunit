@@ -379,7 +379,6 @@ public class WindowConcurrencyTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(client_, html, collectedAlerts);
         final Function mySpecialFunction = new BaseFunction() {
-            private static final long serialVersionUID = -2445994102698852899L;
             @Override
             public Object call(final Context cx, final Scriptable scope,
                     final Scriptable thisObj, final Object[] args) {
@@ -526,7 +525,6 @@ public class WindowConcurrencyTest extends WebTestCase {
         // Recreating what can occur with two threads requires
         // to know a bit about the style invalidation used in Window.DomHtmlAttributeChangeListenerImpl
         final HtmlElement elt = new HtmlDivision("", "div", page1, new HashMap<String, DomAttr>()) {
-            private static final long serialVersionUID = 7744039421294716167L;
             @Override
             public DomNode getParentNode() {
                 // this gets called by CSS invalidation logic

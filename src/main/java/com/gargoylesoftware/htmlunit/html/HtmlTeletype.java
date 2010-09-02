@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlTeletype extends HtmlElement {
 
-    private static final long serialVersionUID = 2191631628558786918L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "tt";
 

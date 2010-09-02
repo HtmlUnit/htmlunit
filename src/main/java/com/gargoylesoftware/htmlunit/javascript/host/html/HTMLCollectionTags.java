@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class HTMLCollectionTags extends HTMLCollection {
 
-    private static final long serialVersionUID = -1772897974886997756L;
-
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      * Don't call.

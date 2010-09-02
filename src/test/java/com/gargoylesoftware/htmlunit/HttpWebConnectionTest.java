@@ -305,8 +305,6 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      * Servlet for {@link #emptyPut()}.
      */
     public static class EmptyPutServlet extends ServletContentWrapper {
-        private static final long serialVersionUID = -8674500186401667484L;
-
         /** Constructor. */
         public EmptyPutServlet() {
             super("<html>\n"

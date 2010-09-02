@@ -24,9 +24,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
  */
 public class HTMLTableComponent extends HTMLElement {
 
-    /** Serial version UID. */
-    private static final long serialVersionUID = 8789769971205129198L;
-
     /** The valid "vAlign" values for this element, when emulating IE. */
     private static final String[] VALIGN_VALID_VALUES_IE = {"top", "bottom", "middle", "baseline"};
 

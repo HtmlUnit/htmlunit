@@ -22,8 +22,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  */
 public class HTMLWBRElement extends HTMLElement {
 
-    private static final long serialVersionUID = -6989618335825502149L;
-
     /**
      * Creates an instance.
      */

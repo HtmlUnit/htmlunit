@@ -57,8 +57,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  */
 public class HTMLSpanElement extends HTMLElement {
 
-    private static final long serialVersionUID = -1837052392526933150L;
-
     /**
      * Creates an instance.
      */

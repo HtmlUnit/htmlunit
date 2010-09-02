@@ -222,8 +222,6 @@ public class Event extends SimpleScriptable {
     /** Constant. */
     public static final int XFER_DONE = 0x200000;
 
-    private static final long serialVersionUID = 4050485607908455730L;
-
     private Object srcElement_;        // IE-only writable equivalent of target.
     private Object target_;            // W3C standard read-only equivalent of srcElement.
     private Object currentTarget_;     // Changes during event capturing and bubbling.

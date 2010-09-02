@@ -46,8 +46,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public class HtmlSelect extends HtmlElement implements DisabledElement, SubmittableElement, FormFieldWithNameHistory {
 
-    private static final long serialVersionUID = 7893240015923163203L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "select";
 

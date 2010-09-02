@@ -22,6 +22,4 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  */
 public class HTMLVideoElement extends HTMLElement {
 
-    private static final long serialVersionUID = -5530746410299975302L;
-
 }

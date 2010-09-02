@@ -608,7 +608,6 @@ public class HTMLParserTest extends WebServerTestCase {
      * Servlet for {@link #headerVsMetaTagContentType(boolean)}.
      */
     public static class HeaderVsMetaTagContentTypeServlet extends HttpServlet {
-        private static final long serialVersionUID = -2575819782522464907L;
         private static final String utf8String = "\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u0644";
         private static String HEADER_ENCODING_;
         private static String META_TAG_ENCODING_;

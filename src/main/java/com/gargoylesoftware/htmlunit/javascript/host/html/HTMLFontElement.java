@@ -24,8 +24,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  */
 public class HTMLFontElement extends HTMLElement {
 
-    private static final long serialVersionUID = 2438742206022221826L;
-
     /**
      * Creates an instance.
      */

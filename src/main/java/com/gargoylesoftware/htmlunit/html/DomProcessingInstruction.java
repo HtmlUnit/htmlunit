@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class DomProcessingInstruction extends DomNode implements ProcessingInstruction {
 
-    private static final long serialVersionUID = -4400111815012912413L;
-
     private final String target_;
     private String data_;
 

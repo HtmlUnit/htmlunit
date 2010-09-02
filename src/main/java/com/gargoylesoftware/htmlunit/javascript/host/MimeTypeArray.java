@@ -23,8 +23,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  */
 public class MimeTypeArray extends SimpleArray {
 
-    private static final long serialVersionUID = 6216803993814539605L;
-
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */

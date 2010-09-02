@@ -27,8 +27,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  */
 public class XHtmlPage extends HtmlPage {
 
-    private static final long serialVersionUID = -8217258738281561778L;
-
     /**
      * Creates a new XHTML page instance. An XHTML page instance is normally retrieved
      * with {@link com.gargoylesoftware.htmlunit.WebClient#getPage(String)}.

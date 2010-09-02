@@ -29,7 +29,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class ServletContentWrapper extends HttpServlet {
 
-    private static final long serialVersionUID = 3748434763930101158L;
     private final String content_;
 
     /**

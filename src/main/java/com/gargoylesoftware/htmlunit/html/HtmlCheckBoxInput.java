@@ -36,8 +36,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlCheckBoxInput extends HtmlInput {
 
-    private static final long serialVersionUID = 3567976425357413976L;
-
     private boolean defaultCheckedState_;
     private boolean valueAtFocus_;
 

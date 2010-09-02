@@ -40,8 +40,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
  */
 public class StyleSheetList extends SimpleScriptable {
 
-    private static final long serialVersionUID = -8607630805490604483L;
-
     /**
      * We back the stylesheet list with an {@link HTMLCollection} of styles/links because this list
      * must be "live".

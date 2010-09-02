@@ -41,8 +41,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Storage.Type;
  */
 final class StorageImpl implements Serializable {
 
-    private static final long serialVersionUID = -3161682908440199425L;
-
     private static final Log LOG = LogFactory.getLog(Storage.class);
 
     private static StorageImpl SINGLETON_ = new StorageImpl();

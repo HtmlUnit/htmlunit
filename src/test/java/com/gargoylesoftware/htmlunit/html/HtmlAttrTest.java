@@ -53,8 +53,6 @@ public class HtmlAttrTest extends WebTestCase {
     static {
         final Map<String, DomAttr> emptyMap = Collections.emptyMap();
         HTML_ELEMENT = new HtmlElement(null, "dummy", null, emptyMap) {
-            private static final long serialVersionUID = -3099722791571459332L;
-
             @Override
             public HtmlPage getPage() {
                 return null;

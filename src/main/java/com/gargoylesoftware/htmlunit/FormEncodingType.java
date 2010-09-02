@@ -25,8 +25,6 @@ import java.io.Serializable;
  */
 public final class FormEncodingType implements Serializable {
 
-    private static final long serialVersionUID = -7341913381207910442L;
-
     /** URL-encoded form encoding. */
     public static final FormEncodingType URL_ENCODED = new FormEncodingType("application/x-www-form-urlencoded");
 

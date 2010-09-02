@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlTableColumnGroup extends HtmlElement {
 
-    private static final long serialVersionUID = 4418469397230369347L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "colgroup";
 

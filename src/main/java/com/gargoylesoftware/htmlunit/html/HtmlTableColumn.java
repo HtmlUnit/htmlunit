@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlTableColumn extends HtmlElement {
 
-    private static final long serialVersionUID = 1171825103356965818L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "col";
 

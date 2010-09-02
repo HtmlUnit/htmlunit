@@ -31,8 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  */
 public class HTMLStyleElement extends HTMLElement {
 
-    private static final long serialVersionUID = 944381786297995169L;
-
     private CSSStyleSheet sheet_;
 
     /**

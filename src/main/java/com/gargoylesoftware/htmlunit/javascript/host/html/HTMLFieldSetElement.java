@@ -24,8 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  */
 public class HTMLFieldSetElement extends FormChild {
 
-    private static final long serialVersionUID = -5222303197991907832L;
-
     /**
      * Creates an instance.
      */

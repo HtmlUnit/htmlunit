@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlBold extends HtmlElement {
 
-    private static final long serialVersionUID = 7257383827767937681L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "b";
 

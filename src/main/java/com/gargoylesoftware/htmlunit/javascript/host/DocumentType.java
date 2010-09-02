@@ -27,8 +27,6 @@ import com.gargoylesoftware.htmlunit.html.DomDocumentType;
  */
 public class DocumentType extends Node {
 
-    private static final long serialVersionUID = -927596204137079990L;
-
     /**
      * Returns the name.
      * @return the name

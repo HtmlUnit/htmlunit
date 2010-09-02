@@ -27,8 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Marc Guillemot
  */
 public class DOMException extends SimpleScriptable {
-    /** Serial version UID. */
-    private static final long serialVersionUID = 5758391763325220491L;
     /** If the specified range of text does not fit into a DOMString. */
     public static final short DOMSTRING_SIZE_ERR = org.w3c.dom.DOMException.DOMSTRING_SIZE_ERR;
     /** If any node is inserted somewhere it doesn't belong. */

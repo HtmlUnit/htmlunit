@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlDefinitionList extends HtmlElement {
 
-    private static final long serialVersionUID = -943498809957878042L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "dl";
 

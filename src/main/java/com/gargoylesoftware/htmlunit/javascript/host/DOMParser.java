@@ -27,8 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
  */
 public class DOMParser extends SimpleScriptable {
 
-    private static final long serialVersionUID = 3143102490697686971L;
-
     /**
      * JavaScript constructor.
      */

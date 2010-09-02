@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
  */
 public class HTMLTableSectionElement extends RowContainer {
 
-    private static final long serialVersionUID = -3564660687852337070L;
-
     /** The valid "vAlign" values for this element, when emulating IE. */
     private static final String[] VALIGN_VALID_VALUES_IE = {"top", "bottom", "middle", "baseline"};
 

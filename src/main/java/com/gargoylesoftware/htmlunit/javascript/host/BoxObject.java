@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  */
 public class BoxObject extends SimpleScriptable {
 
-    private static final long serialVersionUID = -6650009325965623469L;
-
     /** The element to which this box object corresponds. */
     private final HTMLElement element_;
 

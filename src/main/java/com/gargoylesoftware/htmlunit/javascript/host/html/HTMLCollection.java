@@ -60,7 +60,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class HTMLCollection extends SimpleScriptable implements Function, NodeList {
 
-    private static final long serialVersionUID = 4049916048017011764L;
     private static final Log LOG = LogFactory.getLog(HTMLCollection.class);
 
     private String xpath_;
@@ -580,8 +579,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
-
-        private static final long serialVersionUID = -6690451155079053212L;
 
         /**
          * {@inheritDoc}

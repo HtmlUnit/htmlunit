@@ -77,7 +77,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  */
 public class JavaScriptEngine {
 
-    private static final long serialVersionUID = -5414040051465432088L;
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
 
     private final WebClient webClient_;
@@ -720,8 +719,6 @@ public class JavaScriptEngine {
     }
 
     private static class FallbackCaller extends ScriptableObject {
-        private static final long serialVersionUID = -7124423159070941606L;
-
         @Override
         public Object get(final String name, final Scriptable start) {
             if (start instanceof ScriptableWithFallbackGetter) {

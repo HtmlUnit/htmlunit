@@ -54,8 +54,6 @@ public class CacheTest extends WebTestCase {
         final Cache cache = new Cache();
         final Map<String, String> headers = new HashMap<String, String>();
         final WebResponse response = new DummyWebResponse() {
-            private static final long serialVersionUID = -6348248989643945290L;
-
             @Override
             public String getResponseHeaderValue(final String headerName) {
                 return headers.get(headerName);
@@ -97,7 +95,6 @@ public class CacheTest extends WebTestCase {
         final String[] contentType = {""};
         final URL[] url = {URL_FIRST};
         final WebResponse response = new DummyWebResponse() {
-            private static final long serialVersionUID = 321295926712072159L;
             @Override
             public String getContentType() {
                 return contentType[0];
@@ -276,8 +273,6 @@ public class CacheTest extends WebTestCase {
 }
 
 class DummyWebResponse extends WebResponse {
-
-    private static final long serialVersionUID = 631259170130126480L;
 
     DummyWebResponse() {
         super(null, null, 0);

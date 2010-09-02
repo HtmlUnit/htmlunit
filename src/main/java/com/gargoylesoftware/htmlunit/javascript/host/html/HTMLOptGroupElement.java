@@ -22,8 +22,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  */
 public class HTMLOptGroupElement extends HTMLElement {
 
-    private static final long serialVersionUID = 6950601049517489309L;
-
     /**
      * Creates an instance.
      */

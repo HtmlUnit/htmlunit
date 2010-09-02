@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  */
 public class CSSImportRule extends CSSRule {
 
-    private static final long serialVersionUID = -3352769444872087531L;
-
     private MediaList media_;
     private CSSStyleSheet importedStylesheet_;
 

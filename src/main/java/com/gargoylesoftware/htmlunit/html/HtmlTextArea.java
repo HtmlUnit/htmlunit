@@ -45,7 +45,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement, SelectableTextInput,
     FormFieldWithNameHistory {
-    private static final long serialVersionUID = 4572856255042499634L;
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "textarea";
@@ -58,7 +57,6 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     private final SelectionDelegate selectionDelegate_ = new SelectionDelegate(this);
 
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
-        private static final long serialVersionUID = 2906652041039202266L;
         @Override
         void typeDone(final String newValue, final int newCursorPosition) {
             setTextInternal(newValue);

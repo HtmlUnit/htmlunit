@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlSample extends HtmlElement {
 
-    private static final long serialVersionUID = -4103370281596823785L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "samp";
 

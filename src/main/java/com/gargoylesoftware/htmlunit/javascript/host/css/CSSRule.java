@@ -53,8 +53,6 @@ public class CSSRule extends SimpleScriptable {
      */
     public static final short PAGE_RULE                 = org.w3c.dom.css.CSSRule.PAGE_RULE;
 
-    private static final long serialVersionUID = -8392071769970424557L;
-
     private final CSSStyleSheet stylesheet_;
 
     private final org.w3c.dom.css.CSSRule rule_;

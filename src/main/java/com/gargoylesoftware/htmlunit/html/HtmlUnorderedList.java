@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlUnorderedList extends HtmlElement {
 
-    private static final long serialVersionUID = -6921066357090632169L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "ul";
 

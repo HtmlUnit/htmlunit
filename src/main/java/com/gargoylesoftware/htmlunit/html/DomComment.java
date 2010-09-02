@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class DomComment extends DomCharacterData implements Comment {
 
-    private static final long serialVersionUID = -7728247579175928593L;
-
     /** The symbolic node name. */
     public static final String NODE_NAME = "#comment";
 

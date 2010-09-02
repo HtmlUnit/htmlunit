@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptableProxy;
  */
 public class WindowProxy extends SimpleScriptableProxy<Window> {
 
-    private static final long serialVersionUID = -9124838618636683398L;
-
     private final WebWindow webWindow_;
 
     /**

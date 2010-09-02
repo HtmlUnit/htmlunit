@@ -313,8 +313,6 @@ public class HtmlFileInputTest extends WebServerTestCase {
      */
     public static class Upload1Servlet extends HttpServlet {
 
-        private static final long serialVersionUID = 6693252829875297263L;
-
         /**
          * {@inheritDoc}
          */
@@ -336,8 +334,6 @@ public class HtmlFileInputTest extends WebServerTestCase {
      * Servlet for '/upload2'.
      */
     public static class Upload2Servlet extends HttpServlet {
-
-        private static final long serialVersionUID = -1350878755076138012L;
 
         /**
          * {@inheritDoc}

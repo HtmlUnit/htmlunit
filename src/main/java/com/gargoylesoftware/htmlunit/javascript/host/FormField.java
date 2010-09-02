@@ -32,8 +32,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
  */
 public class FormField extends FormChild {
 
-    private static final long serialVersionUID = 3712016051364495710L;
-
     /**
      * Sets the associated DOM node and sets the enclosing form as parent scope of the current element.
      * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#setDomNode(DomNode)

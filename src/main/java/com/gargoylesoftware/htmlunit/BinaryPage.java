@@ -26,7 +26,6 @@ import java.net.URL;
  */
 public class BinaryPage implements Page {
 
-    private static final long serialVersionUID = 5140168573900246591L;
     private final WebResponse webResponse_;
     private WebWindow enclosingWindow_;
 

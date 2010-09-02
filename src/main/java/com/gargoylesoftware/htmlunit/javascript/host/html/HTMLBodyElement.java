@@ -34,8 +34,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
  */
 public class HTMLBodyElement extends HTMLElement {
 
-    private static final long serialVersionUID = -915040139319661419L;
-
     /**
      * Creates a new instance.
      */

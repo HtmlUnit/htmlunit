@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlStrong extends HtmlElement {
 
-    private static final long serialVersionUID = -8607466215671297849L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "strong";
 

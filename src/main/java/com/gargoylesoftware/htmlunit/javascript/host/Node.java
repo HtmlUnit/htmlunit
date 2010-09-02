@@ -56,8 +56,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class Node extends SimpleScriptable {
 
-    private static final long serialVersionUID = -5695262053081637445L;
-
     /** "Live" child nodes collection; has to be a member to have equality (==) working. */
     private HTMLCollection childNodes_;
 

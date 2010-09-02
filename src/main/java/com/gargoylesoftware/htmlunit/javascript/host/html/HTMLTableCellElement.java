@@ -37,8 +37,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
  */
 public class HTMLTableCellElement extends HTMLTableComponent {
 
-    private static final long serialVersionUID = -4321684413510290017L;
-
     /**
      * {@inheritDoc}
      */

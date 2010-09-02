@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  */
 public class HTMLDocumentProxy extends SimpleScriptableProxy<HTMLDocument> {
 
-    private static final long serialVersionUID = -6997147276828365589L;
-
     private final WebWindow webWindow_;
 
     /**

@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlNoBreak extends HtmlElement {
 
-    private static final long serialVersionUID = -66463230199087310L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "nobr";
 

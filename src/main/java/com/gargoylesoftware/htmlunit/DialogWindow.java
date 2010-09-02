@@ -23,9 +23,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 public class DialogWindow extends WebWindowImpl {
 
-    /** Serial version UID. */
-    private static final long serialVersionUID = -8851612155741170131L;
-
     /** The arguments object exposed via the <tt>dialogArguments</tt> JavaScript property. */
     private Object arguments_;
 

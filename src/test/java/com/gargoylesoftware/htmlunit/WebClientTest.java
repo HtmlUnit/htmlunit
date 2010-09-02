@@ -1298,9 +1298,7 @@ public class WebClientTest extends WebServerTestCase {
         final WebClient webClient = getWebClient();
         assertTrue(ImmediateRefreshHandler.class.isInstance(webClient.getRefreshHandler()));
 
-        final RefreshHandler handler = new ImmediateRefreshHandler() {
-            private static final long serialVersionUID = 5357553245330318812L;
-        };
+        final RefreshHandler handler = new ImmediateRefreshHandler();
         webClient.setRefreshHandler(handler);
         assertSame(handler, webClient.getRefreshHandler());
     }
@@ -1577,7 +1575,6 @@ public class WebClientTest extends WebServerTestCase {
     public void testGetPageWithStringArg() throws Exception {
         final URL[] calledUrls = {null};
         final WebClient wc = new WebClient() {
-            private static final long serialVersionUID = -8065766721260679248L;
             @Override
             @SuppressWarnings("unchecked")
             public Page getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
@@ -2021,9 +2018,6 @@ public class WebClientTest extends WebServerTestCase {
      * Servlet for {@link #testUseProxy()}.
      */
     public static class UseProxyHeaderServlet extends HttpServlet {
-
-        private static final long serialVersionUID = -1562905626726293900L;
-
         /**
          * {@inheritDoc}
          */
@@ -2214,7 +2208,6 @@ public class WebClientTest extends WebServerTestCase {
      * First servlet for {@link #testNoContent()}.
      */
     public static class NoContentServlet1 extends HttpServlet {
-        private static final long serialVersionUID = -3998557854927897924L;
         /**
          * {@inheritDoc}
          */
@@ -2233,7 +2226,6 @@ public class WebClientTest extends WebServerTestCase {
      * Second servlet for {@link #testNoContent()}.
      */
     public static class NoContentServlet2 extends HttpServlet {
-        private static final long serialVersionUID = -6586001348289174362L;
         /**
          * {@inheritDoc}
          */
@@ -2265,7 +2257,6 @@ public class WebClientTest extends WebServerTestCase {
      * Servlet for {@link #testNotModified()}.
      */
     public static class NotModifiedServlet extends HttpServlet {
-        private static final long serialVersionUID = 8257177452886409761L;
         private boolean first_ = true;
         /**
          * {@inheritDoc}

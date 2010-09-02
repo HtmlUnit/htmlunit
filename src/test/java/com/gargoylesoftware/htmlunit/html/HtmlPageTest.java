@@ -1536,14 +1536,12 @@ public class HtmlPageTest extends WebServerTestCase {
 
         final List<String> collector = new ArrayList<String>();
         final HtmlAttributeChangeListener listener2 = new HtmlAttributeChangeListenerTestImpl() {
-            private static final long serialVersionUID = 3234623604670201391L;
             @Override
             public void attributeReplaced(final HtmlAttributeChangeEvent event) {
                 collector.add("in listener 2");
             }
         };
         final HtmlAttributeChangeListener listener1 = new HtmlAttributeChangeListenerTestImpl() {
-            private static final long serialVersionUID = 1955007276078013337L;
             @Override
             public void attributeReplaced(final HtmlAttributeChangeEvent event) {
                 collector.add("in listener 1");
@@ -1852,8 +1850,6 @@ public class HtmlPageTest extends WebServerTestCase {
     public static class RefreshServlet extends HttpServlet {
 
         private int counter_;
-
-        private static final long serialVersionUID = 4970162835902592484L;
 
         /**
          * {@inheritDoc}

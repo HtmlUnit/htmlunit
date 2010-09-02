@@ -77,8 +77,6 @@ public class TopLevelWindowTest extends WebTestCase {
     public void useCustomJobManager() throws Exception {
         final MutableInt jobCount = new MutableInt(0);
         final JavaScriptJobManager mgr = new JavaScriptJobManager() {
-            /** Serial version UID. */
-            private static final long serialVersionUID = 4189494067589390155L;
             /** {@inheritDoc} */
             public int waitForJobsStartingBefore(final long delayMillis) {
                 return jobCount.intValue();

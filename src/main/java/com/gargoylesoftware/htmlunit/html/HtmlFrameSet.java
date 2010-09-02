@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlFrameSet extends HtmlElement {
 
-    private static final long serialVersionUID = 4559070965860885794L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "frameset";
 

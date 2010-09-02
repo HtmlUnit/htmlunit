@@ -38,8 +38,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public class WebResponseData implements Serializable {
 
-    private static final long serialVersionUID = 2979956380280496543L;
-
     private final int statusCode_;
     private final String statusMessage_;
     private final List<NameValuePair> responseHeaders_;

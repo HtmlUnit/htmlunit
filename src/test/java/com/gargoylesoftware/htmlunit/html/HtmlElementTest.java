@@ -509,7 +509,6 @@ public class HtmlElementTest extends WebTestCase {
     }
 
     static class HtmlAttributeChangeListenerTestImpl implements HtmlAttributeChangeListener {
-        private static final long serialVersionUID = 5634666277880857402L;
         private final List<String> collectedValues_ = new ArrayList<String>();
         @Test
         public void attributeAdded(final HtmlAttributeChangeEvent event) {

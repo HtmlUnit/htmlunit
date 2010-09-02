@@ -47,7 +47,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class Location extends SimpleScriptable {
 
-    private static final long serialVersionUID = -2907220432378132233L;
     private static final Log LOG = LogFactory.getLog(Location.class);
     private static final String UNKNOWN = "null";
 

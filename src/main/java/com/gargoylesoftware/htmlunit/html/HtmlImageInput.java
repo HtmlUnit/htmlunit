@@ -38,8 +38,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public class HtmlImageInput extends HtmlInput {
 
-    private static final long serialVersionUID = -2955826367201282767L;
-
     // For click with x, y position.
     private boolean wasPositionSpecified_;
     private int xPosition_;

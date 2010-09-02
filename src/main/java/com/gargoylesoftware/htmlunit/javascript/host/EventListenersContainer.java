@@ -41,11 +41,9 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class EventListenersContainer implements Serializable {
 
-    private static final long serialVersionUID = -4612648636521726975L;
     private static final Log LOG = LogFactory.getLog(EventListenersContainer.class);
 
     static class Handlers implements Serializable {
-        private static final long serialVersionUID = -5322935816539773122L;
         private final List<Function> capturingHandlers_ = new ArrayList<Function>();
         private final List<Function> bubblingHandlers_ = new ArrayList<Function>();
         private Object handler_;

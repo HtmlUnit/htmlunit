@@ -22,8 +22,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  */
 public class HTMLMapElement extends HTMLElement {
 
-    private static final long serialVersionUID = 1163437293365889923L;
-
     /**
      * Creates an instance.
      */

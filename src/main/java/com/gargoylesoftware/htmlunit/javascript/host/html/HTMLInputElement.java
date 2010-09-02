@@ -37,8 +37,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  */
 public class HTMLInputElement extends FormField {
 
-    private static final long serialVersionUID = 3712016051364495710L;
-
     /**
      * Creates an instance.
      */

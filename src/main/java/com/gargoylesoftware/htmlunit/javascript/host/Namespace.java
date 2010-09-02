@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class Namespace extends SimpleScriptable {
 
-    private static final long serialVersionUID = -5554898606769625960L;
     private String name_;
     private String urn_;
 

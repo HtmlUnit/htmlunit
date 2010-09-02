@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingConte
  */
 public class HTMLCanvasElement extends HTMLElement {
 
-    private static final long serialVersionUID = 2198667710163712419L;
-
     /**
      * Creates an instance.
      */

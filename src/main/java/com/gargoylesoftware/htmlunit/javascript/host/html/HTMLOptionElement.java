@@ -36,8 +36,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  */
 public class HTMLOptionElement extends FormChild {
 
-    private static final long serialVersionUID = 947015932373556314L;
-
     /**
      * Creates an instance.
      */

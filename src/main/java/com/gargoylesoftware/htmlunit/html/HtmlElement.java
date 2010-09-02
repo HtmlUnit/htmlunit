@@ -75,7 +75,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  */
 public abstract class HtmlElement extends DomElement {
 
-    private static final long serialVersionUID = -2841932584831342634L;
     private static final Log LOG = LogFactory.getLog(HtmlElement.class);
 
     /**

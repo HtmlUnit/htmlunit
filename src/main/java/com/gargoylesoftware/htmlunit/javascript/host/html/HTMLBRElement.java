@@ -28,8 +28,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
  */
 public class HTMLBRElement extends HTMLElement {
 
-    private static final long serialVersionUID = -3785200238092986918L;
-
     /** Valid values for the {@link #jsxGet_clear() clear} property. */
     private static final String[] VALID_CLEAR_VALUES = new String[] {"left", "right", "all", "none"};
 

@@ -31,8 +31,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlResetInput extends HtmlInput {
 
-    private static final long serialVersionUID = 1055766612574450754L;
-
     /**
      * Creates an instance.
      *

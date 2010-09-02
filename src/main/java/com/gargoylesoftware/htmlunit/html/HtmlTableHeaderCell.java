@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlTableHeaderCell extends HtmlTableCell {
 
-    private static final long serialVersionUID = -8210579268968959585L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "th";
 

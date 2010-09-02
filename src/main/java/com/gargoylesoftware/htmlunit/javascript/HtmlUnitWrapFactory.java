@@ -30,8 +30,6 @@ import org.w3c.dom.NodeList;
  * @author Marc Guillemot
  */
 public class HtmlUnitWrapFactory extends WrapFactory implements Serializable {
-    private static final long serialVersionUID = 1779982280511278636L;
-
     /**
      * Constructor.
      */

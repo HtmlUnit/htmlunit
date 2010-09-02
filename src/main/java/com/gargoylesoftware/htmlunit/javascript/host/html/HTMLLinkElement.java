@@ -28,8 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  */
 public class HTMLLinkElement extends HTMLElement {
 
-    private static final long serialVersionUID = -6381573516360300401L;
-
     /**
      * The associated style sheet (only valid for links of type
      * <tt>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</tt>).

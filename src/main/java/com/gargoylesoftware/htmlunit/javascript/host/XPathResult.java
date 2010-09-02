@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class XPathResult extends SimpleScriptable {
 
-    private static final long serialVersionUID = 261617209266957657L;
-
     /**
      * This code does not represent a specific type.
      * An evaluation of an XPath expression will never produce this type. If this type is requested,

@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlPlainText extends HtmlElement {
 
-    private static final long serialVersionUID = -7141120556684360795L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "plaintext";
 

@@ -23,8 +23,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  */
 public class HTMLParagraphElement extends HTMLElement {
 
-    private static final long serialVersionUID = 5587606872788054898L;
-
     /**
      * Creates an instance.
      */

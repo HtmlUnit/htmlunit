@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  */
 public class HTMLLabelElement extends FormChild {
 
-    private static final long serialVersionUID = -7412506443200373632L;
-
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */

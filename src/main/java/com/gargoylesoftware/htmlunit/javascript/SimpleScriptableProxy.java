@@ -29,7 +29,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends Delegator implements
     ScriptableWithFallbackGetter, Serializable {
-    private static final long serialVersionUID = -3836061858668746684L;
 
     /**
      * {@inheritDoc}

@@ -18,8 +18,6 @@ import java.io.Serializable;
 
 abstract class DoTypeProcessor implements Serializable {
 
-    private static final long serialVersionUID = -1857188321096014188L;
-
     void doType(final String currentValue, final int selectionStart, final int selectionEnd,
             final char c, final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
 

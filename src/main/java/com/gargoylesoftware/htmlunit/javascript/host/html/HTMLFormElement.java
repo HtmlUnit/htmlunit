@@ -54,8 +54,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class HTMLFormElement extends HTMLElement implements Function {
 
-    private static final long serialVersionUID = -1860993922147246513L;
-
     private HTMLCollection elements_; // has to be a member to have equality (==) working
 
     /**
@@ -101,8 +99,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
             final HtmlForm htmlForm = getHtmlForm();
 
             elements_ = new HTMLCollection(this) {
-                private static final long serialVersionUID = -2554743215194459203L;
-
                 @Override
                 protected List<Object> computeElements() {
                     final List<Object> response = super.computeElements();
@@ -286,8 +282,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
         final HtmlForm htmlForm = getHtmlForm();
 
         final HTMLCollection elements = new HTMLCollection(this) {
-            private static final long serialVersionUID = -2554743215194459203L;
-
             @Override
             protected List<Object> computeElements() {
                 final List<Object> response = super.computeElements();

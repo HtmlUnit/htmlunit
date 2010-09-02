@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  */
 public class MediaList extends SimpleScriptable {
 
-    private static final long serialVersionUID = 1766588734264714462L;
-
     private final org.w3c.dom.stylesheets.MediaList wrappedList_;
 
     /**

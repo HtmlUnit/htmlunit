@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlNoFrames extends HtmlElement {
 
-    private static final long serialVersionUID = 4274843483412977205L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "noframes";
 

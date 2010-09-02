@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlBidirectionalOverride extends HtmlElement {
 
-    private static final long serialVersionUID = 5258353980344461550L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "bdo";
 

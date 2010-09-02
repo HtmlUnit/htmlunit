@@ -37,8 +37,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public class HtmlSubmitInput extends HtmlInput {
 
-    private static final long serialVersionUID = -615974535731910492L;
-
     /**
      * Value to use if no specified <tt>value</tt> attribute.
      */

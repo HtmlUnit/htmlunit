@@ -36,8 +36,6 @@ import org.w3c.dom.css.CSSStyleSheet;
  */
 public class Cache implements Serializable {
 
-    private static final long serialVersionUID = -3864114727885057419L;
-
     /** The maximum size of the cache. */
     private int maxSize_ = 40;
 
@@ -54,8 +52,6 @@ public class Cache implements Serializable {
      * A cache entry.
      */
     private class Entry implements Comparable<Entry>, Serializable {
-
-        private static final long serialVersionUID = 588400350259242484L;
         private final String key_;
         private final Object value_;
         private long lastAccess_;

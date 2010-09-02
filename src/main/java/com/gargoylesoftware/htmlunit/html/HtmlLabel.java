@@ -33,8 +33,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlLabel extends HtmlElement {
 
-    private static final long serialVersionUID = -3007176633287091652L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "label";
 

@@ -22,8 +22,6 @@ package com.gargoylesoftware.htmlunit;
  */
 public class ElementNotFoundException extends RuntimeException {
 
-    private static final long serialVersionUID = 22133747152805455L;
-
     private final String elementName_;
     private final String attributeName_;
     private final String attributeValue_;

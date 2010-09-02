@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  */
 public class NodeFilter extends SimpleScriptable {
-    private static final long serialVersionUID = 4450195578297327871L;
     // Constants returned by acceptNode
     /**
      * Accept the node. TreeWalker navigation will return this node.

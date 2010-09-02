@@ -49,8 +49,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  */
 public class XSLTProcessor extends SimpleScriptable {
 
-    private static final long serialVersionUID = -5870183094839129375L;
-
     private Node style_;
     private Node input_;
     private Object output_;

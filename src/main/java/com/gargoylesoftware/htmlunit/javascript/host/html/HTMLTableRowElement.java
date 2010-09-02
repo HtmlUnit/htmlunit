@@ -34,8 +34,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
  */
 public class HTMLTableRowElement extends HTMLTableComponent {
 
-    private static final long serialVersionUID = 3256441404401397812L;
-
     private HTMLCollection cells_; // has to be a member to have equality (==) working
 
     /**

@@ -24,7 +24,6 @@ import java.util.EventObject;
  * @author David K. Taylor
  */
 public final class WebWindowEvent extends EventObject {
-    private static final long serialVersionUID = 6693838158619061745L;
     private final Page oldPage_;
     private final Page newPage_;
     private final int type_;

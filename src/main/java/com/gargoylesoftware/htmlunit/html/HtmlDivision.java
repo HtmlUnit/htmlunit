@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlDivision extends HtmlElement {
 
-    private static final long serialVersionUID = -8669455470526154631L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "div";
 

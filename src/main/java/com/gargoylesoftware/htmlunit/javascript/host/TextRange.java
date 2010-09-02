@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  */
 public class TextRange extends SimpleScriptable {
 
-    private static final long serialVersionUID = -3763822832184277966L;
     private static final Log LOG = LogFactory.getLog(TextRange.class);
 
     /** The wrapped selection range. */

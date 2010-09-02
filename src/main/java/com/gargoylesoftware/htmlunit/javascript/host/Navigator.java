@@ -31,8 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public final class Navigator extends SimpleScriptable {
 
-    private static final long serialVersionUID = 6741787912716453833L;
-
     private PluginArray plugins_;
     private MimeTypeArray mimeTypes_;
 

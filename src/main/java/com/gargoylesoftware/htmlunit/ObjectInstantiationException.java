@@ -22,8 +22,6 @@ package com.gargoylesoftware.htmlunit;
  * @author Ahmed Ashour
  */
 public class ObjectInstantiationException extends RuntimeException {
-    private static final long serialVersionUID = 8831953284047722098L;
-
     /**
      * Creates a new instance.
      * @param message a message explaining the failure

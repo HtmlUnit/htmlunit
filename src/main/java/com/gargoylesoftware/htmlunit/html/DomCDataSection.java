@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class DomCDataSection extends DomText implements CDATASection {
 
-    private static final long serialVersionUID = 4941214369614888520L;
-
     /** The symbolic node name. */
     public static final String NODE_NAME = "#cdata-section";
 

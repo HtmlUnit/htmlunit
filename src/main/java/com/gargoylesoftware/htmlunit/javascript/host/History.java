@@ -33,8 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class History extends SimpleScriptable {
 
-    private static final long serialVersionUID = -285158453206844475L;
-
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */

@@ -59,8 +59,6 @@ public class BinaryPageTest extends WebServerTestCase {
      */
     public static class BinaryServlet extends HttpServlet {
 
-        private static final long serialVersionUID = -7979736717576809489L;
-
         /**
          * {@inheritDoc}
          */
@@ -96,8 +94,6 @@ public class BinaryPageTest extends WebServerTestCase {
      * Servlet for {@link #chunkedBigContent()}.
      */
     public static class ChunkedBigContentServlet extends HttpServlet {
-
-        private static final long serialVersionUID = 8341425725771441517L;
 
         /**
          * {@inheritDoc}

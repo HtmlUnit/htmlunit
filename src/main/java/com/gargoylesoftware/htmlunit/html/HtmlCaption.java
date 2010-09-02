@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlCaption extends HtmlElement {
 
-    private static final long serialVersionUID = -1292861851761402027L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "caption";
 

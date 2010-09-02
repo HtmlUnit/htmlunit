@@ -22,8 +22,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  */
 public class HTMLSpacerElement extends HTMLElement {
 
-    private static final long serialVersionUID = -4572072874881902422L;
-
     /**
      * Creates an instance.
      */

@@ -27,9 +27,6 @@ import org.apache.commons.lang.StringUtils;
  */
 public class EventNode extends Node {
 
-    /** Serial version UID. */
-    private static final long serialVersionUID = 4894810197917509182L;
-
     /**
      * Sets the <tt>onclick</tt> event handler for this element.
      * @param handler the <tt>onclick</tt> event handler for this element

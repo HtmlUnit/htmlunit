@@ -63,7 +63,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  */
 public class XMLHttpRequest extends SimpleScriptable {
 
-    private static final long serialVersionUID = 2369039843039430664L;
     private static final Log LOG = LogFactory.getLog(XMLHttpRequest.class);
 
     /** The object has been created, but not initialized (the open() method has not been called). */
@@ -514,7 +513,6 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             else {
                 webResponse_ = new WebResponseWrapper(webResponse) {
-                    private static final long serialVersionUID = -3359539772772336918L;
                     @Override
                     public String getContentType() {
                         return overriddenMimeType_;
@@ -616,9 +614,6 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     private static final class NetworkErrorWebResponse extends WebResponse {
-
-        private static final long serialVersionUID = 6354426394575804571L;
-
         private final WebRequest request_;
 
         private NetworkErrorWebResponse(final WebRequest webRequest) {

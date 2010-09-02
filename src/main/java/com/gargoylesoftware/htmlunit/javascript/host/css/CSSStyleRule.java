@@ -28,8 +28,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
  */
 public class CSSStyleRule extends CSSRule {
 
-    private static final long serialVersionUID = 207943879569003822L;
-
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
      */

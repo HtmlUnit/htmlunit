@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlStrike extends HtmlElement {
 
-    private static final long serialVersionUID = 3065283467995414494L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "strike";
 

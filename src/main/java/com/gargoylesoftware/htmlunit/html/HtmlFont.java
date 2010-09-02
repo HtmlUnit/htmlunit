@@ -30,8 +30,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlFont extends HtmlElement {
 
-    private static final long serialVersionUID = -3134589337466409730L;
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "font";
 

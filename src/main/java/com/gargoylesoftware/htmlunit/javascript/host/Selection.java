@@ -36,8 +36,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class Selection extends SimpleScriptable {
 
-    private static final long serialVersionUID = 3712755502782559551L;
-
     private String type_ = "None";
 
     /**

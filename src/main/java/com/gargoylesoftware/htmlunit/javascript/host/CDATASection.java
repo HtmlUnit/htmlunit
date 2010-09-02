@@ -22,8 +22,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  */
 public final class CDATASection extends Text {
 
-    private static final long serialVersionUID = -4867436967489711775L;
-
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */

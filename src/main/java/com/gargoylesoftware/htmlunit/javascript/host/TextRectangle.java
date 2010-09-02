@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class TextRectangle extends SimpleScriptable {
 
-    private static final long serialVersionUID = 8045028432279353283L;
-
     private int bottom_;
     private int left_;
     private int right_;

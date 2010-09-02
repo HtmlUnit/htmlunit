@@ -33,8 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  */
 public class MouseEvent extends UIEvent {
 
-    private static final long serialVersionUID = 1990705559211878370L;
-
     /** The click event type, triggered by "onclick" event handlers. */
     public static final String TYPE_CLICK = "click";
 

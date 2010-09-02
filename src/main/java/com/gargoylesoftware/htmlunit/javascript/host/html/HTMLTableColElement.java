@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
  */
 public class HTMLTableColElement extends HTMLTableComponent {
 
-    private static final long serialVersionUID = -886020322532732229L;
-
     /**
      * Creates an instance.
      */

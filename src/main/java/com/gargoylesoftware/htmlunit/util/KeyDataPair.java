@@ -26,8 +26,6 @@ import java.io.File;
  */
 public class KeyDataPair extends NameValuePair {
 
-    private static final long serialVersionUID = -1129314696176851675L;
-
     private final File fileObject_;
     private final String contentType_;
     private final String charset_;
