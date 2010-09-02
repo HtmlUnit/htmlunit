@@ -44,7 +44,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public abstract class HtmlInput extends HtmlElement implements DisabledElement, SubmittableElement,
     FormFieldWithNameHistory {
-
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "input";
 
