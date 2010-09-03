@@ -33,15 +33,12 @@ import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
-import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -89,14 +86,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * Creates an instance.
      * @param parentScope parent scope
      */
-    public HTMLCollection(final DomNode parentScope) {
-        this(parentScope.getScriptObject());
-    }
-
-    /**
-     * Creates an instance.
-     * @param parentScope parent scope
-     */
     public HTMLCollection(final ScriptableObject parentScope) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
@@ -108,25 +97,9 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @param initialElements the initial content for the cache
      */
     HTMLCollection(final DomNode parentScope, final List<?> initialElements) {
-        this(parentScope);
+        this(parentScope.getScriptObject());
         init(parentScope, null);
         cachedElements_ = new ArrayList<Object>(initialElements);
-    }
-
-    /**
-     * Only needed to make collections like <tt>document.all</tt> available but "invisible" when simulating Firefox.
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean avoidObjectDetection() {
-        return avoidObjectDetection_;
-    }
-
-    /**
-     * @param newValue the new value
-     */
-    public void setAvoidObjectDetection(final boolean newValue) {
-        avoidObjectDetection_ = newValue;
     }
 
     /**
@@ -149,19 +122,19 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     }
 
     /**
-     * Initializes the collection. The elements will be "calculated" as the children of the node.
-     * @param node the node to grab children from
+     * Only needed to make collections like <tt>document.all</tt> available but "invisible" when simulating Firefox.
+     * {@inheritDoc}
      */
-    public void initFromChildren(final DomNode node) {
-        if (node != null) {
-            node_ = node;
-            final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
-            node_.addDomChangeListener(listener);
-            if (node_ instanceof HtmlElement) {
-                ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
-                cachedElements_ = null;
-            }
-        }
+    @Override
+    public boolean avoidObjectDetection() {
+        return avoidObjectDetection_;
+    }
+
+    /**
+     * @param newValue the new value
+     */
+    public void setAvoidObjectDetection(final boolean newValue) {
+        avoidObjectDetection_ = newValue;
     }
 
     /**
@@ -229,67 +202,13 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     protected List<Object> computeElements() {
         final List<Object> response;
         if (node_ != null) {
-            if (xpath_ != null) {
-                response = XPathUtils.getByXPath(node_, xpath_);
-            }
-            else {
-                response = new ArrayList<Object>();
-                Node node = node_.getFirstChild();
-                while (node != null) {
-                    response.add(node);
-                    node = node.getNextSibling();
-                }
-            }
+            response = XPathUtils.getByXPath(node_, xpath_);
         }
         else {
             response = new ArrayList<Object>();
         }
 
-        final boolean isXmlPage = node_ != null && node_.getOwnerDocument() instanceof XmlPage;
-
-        final boolean isIE = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_45);
-
-        for (int i = 0; i < response.size(); i++) {
-            final DomNode element = (DomNode) response.get(i);
-
-            //IE: XmlPage ignores all empty text nodes
-            if (isIE && isXmlPage && element instanceof DomText
-                && ((DomText) element).getNodeValue().trim().length() == 0) { //and 'xml:space' is 'default'
-                final Boolean xmlSpaceDefault = isXMLSpaceDefault(element.getParentNode());
-                if (xmlSpaceDefault != Boolean.FALSE) {
-                    response.remove(i--);
-                    continue;
-                }
-            }
-            for (DomNode parent = element.getParentNode(); parent != null;
-                parent = parent.getParentNode()) {
-                if (parent instanceof HtmlNoScript) {
-                    response.remove(i--);
-                    break;
-                }
-            }
-        }
-
         return response;
-    }
-
-    /**
-     * Recursively checks whether "xml:space" attribute is set to "default".
-     * @param node node to start checking from
-     * @return {@link Boolean#TRUE} if "default" is set, {@link Boolean#FALSE} for other value,
-     *         or null if nothing is set.
-     */
-    private static Boolean isXMLSpaceDefault(DomNode node) {
-        for ( ; node instanceof DomElement; node = node.getParentNode()) {
-            final String value = ((DomElement) node).getAttribute("xml:space");
-            if (value.length() != 0) {
-                if (value.equals("default")) {
-                    return Boolean.TRUE;
-                }
-                return Boolean.FALSE;
-            }
-        }
-        return null;
     }
 
     /**

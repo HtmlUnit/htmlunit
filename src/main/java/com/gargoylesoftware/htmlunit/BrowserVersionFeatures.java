@@ -657,6 +657,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
 
+    /** Body of a &lt;noscript&gt; tag is not totally ignored but considered as a (not displayed) text node. */
+    NOSCRIPT_BODY_AS_TEXT,
+
     /** */
     PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT,
 

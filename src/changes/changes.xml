@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                Consider &lt;noscript&gt;'s body as plain text for FF and discard it totally for IE.
+            </action>
             <action type="fix" dev="asashour" issue="3053473">
                 ObjectInstantiationException: updated to expose the underlying 'cause' excpetion.
             </action>

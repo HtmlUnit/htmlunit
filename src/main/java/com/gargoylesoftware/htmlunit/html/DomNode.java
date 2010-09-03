@@ -1274,10 +1274,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         private DomNode getFirstChildElement(final DomNode parent) {
-            if (parent instanceof HtmlNoScript
-                    && getPage().getEnclosingWindow().getWebClient().isJavaScriptEnabled()) {
-                return null;
-            }
             DomNode node = parent.getFirstChild();
             while (node != null && !type_.isAssignableFrom(node.getClass())) {
                 node = node.getNextSibling();

@@ -1696,18 +1696,8 @@ public class HtmlPage extends SgmlPage {
      */
     void notifyNodeAdded(final DomNode node) {
         if (node instanceof HtmlElement) {
-            boolean insideNoScript = false;
-            if (getWebClient().isJavaScriptEnabled()) {
-                for (DomNode parent = node.getParentNode(); parent != null; parent = parent.getParentNode()) {
-                    if (parent instanceof HtmlNoScript) {
-                        insideNoScript = true;
-                        break;
-                    }
-                }
-            }
-            if (!insideNoScript) {
-                addMappedElement((HtmlElement) node, true);
-            }
+            addMappedElement((HtmlElement) node, true);
+
             if (node.getNodeName().equals("base")) {
                 calculateBase();
             }

@@ -32,7 +32,9 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
@@ -410,10 +412,50 @@ public class Node extends SimpleScriptable {
      */
     public HTMLCollection jsxGet_childNodes() {
         if (childNodes_ == null) {
-            childNodes_ = new HTMLCollection(this);
-            childNodes_.initFromChildren(getDomNodeOrDie());
+            final DomNode node = getDomNodeOrDie();
+            final boolean isXmlPage = node.getOwnerDocument() instanceof XmlPage;
+            final boolean isIE = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_45);
+            final Boolean xmlSpaceDefault = isXMLSpaceDefault(node);
+            final boolean skipEmptyTextNode = isIE && isXmlPage && (xmlSpaceDefault != Boolean.FALSE);
+
+            childNodes_ = new HTMLCollection(this) {
+                @Override
+                protected List<Object> computeElements() {
+                    final List<Object> response = new ArrayList<Object>();
+                    for (final DomNode child : node.getChildren()) {
+                        //IE: XmlPage ignores all empty text nodes
+                        if (skipEmptyTextNode && child instanceof DomText
+                            && ((DomText) child).getNodeValue().trim().length() == 0) { //and 'xml:space' is 'default'
+                            continue;
+                        }
+                        response.add(child);
+                    }
+
+                    return response;
+                }
+            };
+            childNodes_.init(node, null);
         }
         return childNodes_;
+    }
+
+    /**
+     * Recursively checks whether "xml:space" attribute is set to "default".
+     * @param node node to start checking from
+     * @return {@link Boolean#TRUE} if "default" is set, {@link Boolean#FALSE} for other value,
+     *         or null if nothing is set.
+     */
+    private static Boolean isXMLSpaceDefault(DomNode node) {
+        for ( ; node instanceof DomElement; node = node.getParentNode()) {
+            final String value = ((DomElement) node).getAttribute("xml:space");
+            if (value.length() != 0) {
+                if (value.equals("default")) {
+                    return Boolean.TRUE;
+                }
+                return Boolean.FALSE;
+            }
+        }
+        return null;
     }
 
     /**

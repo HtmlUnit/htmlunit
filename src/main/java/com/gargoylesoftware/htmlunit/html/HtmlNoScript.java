@@ -16,7 +16,11 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import org.w3c.dom.Node;
+
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Wrapper for the HTML element "noscript".
@@ -43,5 +47,15 @@ public class HtmlNoScript extends HtmlElement {
     HtmlNoScript(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+    }
+
+    @Override
+    public DomNode appendChild(final Node node) {
+        final WebClient webClient = getPage().getWebClient();
+        if (!webClient.isJavaScriptEnabled()
+            || webClient.getBrowserVersion().hasFeature(BrowserVersionFeatures.NOSCRIPT_BODY_AS_TEXT)) {
+            return super.appendChild(node);
+        }
+        return null;
     }
 }
