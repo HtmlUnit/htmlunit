@@ -60,15 +60,15 @@ public class HTMLParserTest extends WebServerTestCase {
     public void simpleHTMLString() throws Exception {
         final WebClient webClient = getWebClient();
         final WebResponse webResponse = new StringWebResponse(
-            "<html><head><title>TITLE</title><noscript>TEST</noscript></head><body></body></html>", getDefaultUrl());
+            "<html><head><title>TITLE</title><div>TEST</div></head><body></body></html>", getDefaultUrl());
 
         final HtmlPage page = HTMLParser.parseHtml(webResponse, webClient.getCurrentWindow());
 
-        final String stringVal = page.<HtmlNoScript>getFirstByXPath("//noscript").getFirstChild().getNodeValue();
+        final String stringVal = page.<HtmlDivision>getFirstByXPath("//div").getFirstChild().getNodeValue();
         assertEquals("TEST", stringVal);
 
         final HtmlElement node = (HtmlElement) page.getFirstByXPath("//*[./text() = 'TEST']");
-        assertEquals(node.getTagName(), HtmlNoScript.TAG_NAME);
+        assertEquals(node.getTagName(), HtmlDivision.TAG_NAME);
     }
 
     /**
