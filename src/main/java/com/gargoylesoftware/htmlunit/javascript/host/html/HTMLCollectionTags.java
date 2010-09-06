@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 
 /**
  * An array of elements. It is very similar to {@link HTMLCollection}, but with 'tags' property for Firefox.
@@ -37,9 +37,10 @@ public class HTMLCollectionTags extends HTMLCollection {
     /**
      * Creates an instance.
      * @param parentScope parent scope
+     * @param description a text useful for debugging
      */
-    public HTMLCollectionTags(final SimpleScriptable parentScope) {
-        super(parentScope);
+    public HTMLCollectionTags(final DomNode parentScope, final String description) {
+        super(parentScope, false, description);
     }
 
     /**

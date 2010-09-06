@@ -32,11 +32,16 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FormFieldWithNameHistory;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * A JavaScript object for a Form.
@@ -98,7 +103,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         if (elements_ == null) {
             final HtmlForm htmlForm = getHtmlForm();
 
-            elements_ = new HTMLCollection(this) {
+            elements_ = new HTMLCollection(htmlForm, false, "HTMLFormElement.elements") {
                 @Override
                 protected List<Object> computeElements() {
                     final List<Object> response = super.computeElements();
@@ -108,27 +113,22 @@ public class HTMLFormElement extends HTMLElement implements Function {
 
                 @Override
                 protected Object getWithPreemption(final String name) {
-                    final List<HtmlElement> matchingElements = new ArrayList<HtmlElement>();
-                    for (final Object o : getElements()) {
-                        final HtmlElement elt = (HtmlElement) o;
-                        if (isAccessibleByIdOrName(elt, name)) {
-                            matchingElements.add(elt);
-                        }
-                    }
-                    if (matchingElements.isEmpty()) {
-                        return NOT_FOUND;
-                    }
-                    else if (matchingElements.size() == 1) {
-                        return matchingElements.get(0).getScriptObject();
-                    }
-                    return new HTMLCollection(htmlForm, matchingElements);
+                    return HTMLFormElement.this.getWithPreemption(name);
+                }
+
+                @Override
+                public EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                    return EffectOnCache.NONE;
+                }
+
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlInput || node instanceof HtmlButton
+                        || node instanceof HtmlTextArea || node instanceof HtmlSelect;
                 }
             };
-            final String xpath = ".//*[(name() = 'input' or name() = 'button'"
-                    + " or name() = 'select' or name() = 'textarea')]";
-            elements_.init(htmlForm, xpath);
-
         }
+
         return elements_;
     }
 

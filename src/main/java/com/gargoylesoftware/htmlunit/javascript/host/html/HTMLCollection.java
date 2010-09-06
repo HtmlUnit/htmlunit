@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -22,8 +23,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -39,6 +38,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -56,12 +56,21 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * @author Ahmed Ashour
  */
 public class HTMLCollection extends SimpleScriptable implements Function, NodeList {
+    /**
+     * Cache effect of some changes.
+     */
+    protected enum EffectOnCache {
+        /** No effect, cache is still valid. */
+        NONE,
+        /** Cache is not valid anymore and should be reset. */
+        RESET
+    }
 
-    private static final Log LOG = LogFactory.getLog(HTMLCollection.class);
-
-    private String xpath_;
+    private String xpath_; // should slowly disappear to increase performance
     private DomNode node_;
     private boolean avoidObjectDetection_ = false;
+    private String description_;
+    private boolean attributeChangeSensitive_ = true;
 
     /**
      * Cache collection elements when possible, so as to avoid expensive XPath expression evaluations.
@@ -72,6 +81,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * IE provides a way of enumerating through some element collections; this counter supports that functionality.
      */
     private int currentIndex_ = 0;
+
+    private boolean listenerRegistered_;
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
@@ -89,6 +100,22 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     public HTMLCollection(final ScriptableObject parentScope) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
+    }
+
+    /**
+     * Creates an instance.
+     * @param parentScope parent scope
+     * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
+     * of a descendant node of parentScope changes (attribute added, modified or removed)
+     * @param description a text useful for debugging
+     */
+    public HTMLCollection(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
+        node_ = parentScope;
+        description_ = description;
+        attributeChangeSensitive_ = attributeChangeSensitive;
+        setParentScope(parentScope.getScriptObject());
+        setPrototype(getPrototype(getClass()));
+        setDomNode(node_, false);
     }
 
     /**
@@ -112,13 +139,22 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         if (node != null) {
             node_ = node;
             xpath_ = xpath;
-            final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
-            node_.addDomChangeListener(listener);
-            if (node_ instanceof HtmlElement) {
-                ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
-                cachedElements_ = null;
-            }
         }
+    }
+
+    /**
+     * Gets an empty collection.
+     * @param window the current scope
+     * @return an empty collection
+     */
+    public static HTMLCollection emptyCollection(final Window window) {
+        final List<Object> list = Collections.emptyList();
+        return new HTMLCollection(window) {
+            @Override
+            protected List<Object> getElements() {
+                return list;
+            }
+        };
     }
 
     /**
@@ -191,6 +227,14 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     protected List<Object> getElements() {
         if (cachedElements_ == null) {
             cachedElements_ = computeElements();
+            final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+            if (!listenerRegistered_) {
+                node_.addDomChangeListener(listener);
+                if (node_ instanceof HtmlElement) {
+                    ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
+                }
+                listenerRegistered_ = true;
+            }
         }
         return cachedElements_;
     }
@@ -202,13 +246,33 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     protected List<Object> computeElements() {
         final List<Object> response;
         if (node_ != null) {
-            response = XPathUtils.getByXPath(node_, xpath_);
+            if (xpath_ != null) {
+                response = XPathUtils.getByXPath(node_, xpath_);
+            }
+            else {
+                response = new ArrayList<Object>();
+                for (final DomNode node : node_.getDescendants()) {
+                    if (node instanceof DomElement && isMatching(node)) {
+                        response.add(node);
+                    }
+                }
+            }
         }
         else {
             response = new ArrayList<Object>();
         }
 
         return response;
+    }
+
+    /**
+     * Indicates if the node should belong to the collection.
+     * Belongs to the refactoring effort to improve HTMLCollection's performance.
+     * @param node the node to test. Will be a child node of the reference node.
+     * @return <code>false</code> here as subclasses for concrete collections should decide it.
+     */
+    protected boolean isMatching(final DomNode node) {
+        return false;
     }
 
     /**
@@ -223,74 +287,60 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     protected Object getWithPreemption(final String name) {
         // Test to see if we are trying to get the length of this collection?
         // If so return NOT_FOUND here to let the property be retrieved using the prototype
-        if (xpath_ == null || "length".equals(name)) {
+        if (/*xpath_ == null || */"length".equals(name)) {
             return NOT_FOUND;
         }
 
         final List<Object> elements = getElements();
 
         // See if there is an element in the element array with the specified id.
+        final List<Object> matchingElements = new ArrayList<Object>();
+
         for (final Object next : elements) {
             if (next instanceof DomElement) {
                 final String id = ((DomElement) next).getAttribute("id");
-                if (id != null && id.equals(name)) {
-                    if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_IDENTICAL_IDS)) {
-                        int totalIDs = 0;
-                        for (final Object o : elements) {
-                            if (o instanceof DomElement && name.equals(((DomElement) o).getAttribute("id"))) {
-                                totalIDs++;
-                            }
-                        }
-                        if (totalIDs > 1) {
-                            final HTMLCollectionTags collection =
-                                new HTMLCollectionTags((SimpleScriptable) getParentScope());
-                            collection.setAvoidObjectDetection(
-                                    !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_46));
-                            collection.init(node_, ".//*[@id='" + id + "']");
-                            return collection;
-                        }
+                if (name.equals(id)) {
+                    if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_IDENTICAL_IDS)) {
+                        return getScriptableForElement(next);
                     }
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("Property \"" + name + "\" evaluated (by id) to " + next);
-                    }
-                    return getScriptableForElement(next);
+                    matchingElements.add(next);
                 }
             }
-            else {
-                LOG.warn("Unrecognized type in collection: " + next + " (" + next.getClass().getName() + ")");
+        }
+
+        if (matchingElements.size() == 1) {
+            return getScriptableForElement(matchingElements.get(0));
+        }
+        else if (!matchingElements.isEmpty()) {
+            final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), matchingElements);
+            collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_46));
+            return collection;
+        }
+
+        // no element found by id, let's search by name
+        for (final Object next : elements) {
+            if (next instanceof DomElement) {
+                final String nodeName = ((DomElement) next).getAttribute("name");
+                if (name.equals(nodeName)) {
+                    if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_IDENTICAL_IDS)) {
+                        return getScriptableForElement(next);
+                    }
+                    matchingElements.add(next);
+                }
             }
         }
 
-        // See if there are any elements in the element array with the specified name.
-        final HTMLCollection array = new HTMLCollection(this);
-        final String newCondition = "@name = '" + name.replaceAll("\\$", "\\\\\\$") + "'";
-        final String xpathExpr;
-        if (xpath_.endsWith("]")) {
-            xpathExpr = xpath_.replaceAll("\\[([^\\]]*)\\]$", "[($1) and " + newCondition + "]");
+        if (matchingElements.isEmpty()) {
+            return NOT_FOUND;
         }
-        else {
-            xpathExpr = xpath_ + "[" + newCondition + "]";
-        }
-        array.init(node_, xpathExpr);
-
-        final List<Object> subElements = array.getElements();
-        if (subElements.size() > 1) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Property \"" + name + "\" evaluated (by name) to " + array + " with "
-                    + subElements.size() + " elements");
-            }
-            return array;
-        }
-        else if (subElements.size() == 1) {
-            final Scriptable singleResult = getScriptableForElement(subElements.get(0));
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Property \"" + name + "\" evaluated (by name) to " + singleResult);
-            }
-            return singleResult;
+        else if (matchingElements.size() == 1) {
+            return getScriptableForElement(matchingElements.get(0));
         }
 
-        // Nothing was found.
-        return NOT_FOUND;
+        // many elements => build a sub collection
+        final HTMLCollection collection = new HTMLCollection(node_, matchingElements);
+        collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_46));
+        return collection;
     }
 
     /**
@@ -373,9 +423,14 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536776.aspx">MSDN doc</a>
      */
     public Object jsxFunction_tags(final String tagName) {
-        final HTMLCollection array = new HTMLCollection(this);
-        array.init(node_, xpath_ + "[name() = '" + tagName.toLowerCase() + "']");
-        return array;
+        final String tagNameLC = tagName.toLowerCase();
+        final HTMLCollection collection = new HTMLSubCollection(this, ".tags('" + tagName + "')") {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return tagNameLC.equalsIgnoreCase(node.getLocalName());
+            }
+        };
+        return collection;
     }
 
     /**
@@ -386,7 +441,9 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         if (xpath_ != null) {
             return super.toString() + '<' + xpath_ + '>';
         }
-        return super.toString();
+        else {
+            return description_;
+        }
     }
 
     /**
@@ -416,6 +473,11 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     @Override
     public boolean has(final String name, final Scriptable start) {
+        // let's Rhino work normally if current instance is the prototype
+        if (isPrototype()) {
+            return super.has(name, start);
+        }
+
         try {
             final int index = Integer.parseInt(name);
             final List<Object> elements = getElements();
@@ -447,6 +509,11 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     @Override
     public Object[] getIds() {
+        // let's Rhino work normally if current instance is the prototype
+        if (isPrototype()) {
+            return super.getIds();
+        }
+
         final List<String> idList = new ArrayList<String>();
 
         final List<Object> elements = getElements();
@@ -469,6 +536,10 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             addElementIds(idList, elements);
         }
         return idList.toArray();
+    }
+
+    private boolean isPrototype() {
+        return !(getPrototype() instanceof HTMLCollection);
     }
 
     /**
@@ -517,21 +588,36 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
          * {@inheritDoc}
          */
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            cachedElements_ = null;
+            if (attributeChangeSensitive_) {
+                handleChangeOnCache(getEffectOnCache(event), event.getHtmlElement());
+            }
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            cachedElements_ = null;
+            if (attributeChangeSensitive_) {
+                handleChangeOnCache(getEffectOnCache(event), event.getHtmlElement());
+            }
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
-            cachedElements_ = null;
+            if (attributeChangeSensitive_) {
+                handleChangeOnCache(getEffectOnCache(event), event.getHtmlElement());
+            }
+        }
+
+        private void handleChangeOnCache(final EffectOnCache effectOnCache, final HtmlElement htmlElement) {
+            if (EffectOnCache.NONE == effectOnCache) {
+                return;
+            }
+            else if (EffectOnCache.RESET == effectOnCache) {
+                cachedElements_ = null;
+            }
         }
     }
 
@@ -540,6 +626,16 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     public int getLength() {
         return jsxGet_length();
+    }
+
+    /**
+     * Gets the effect of the change on an attribute of the reference node
+     * on this collection's cache.
+     * @param event the change event
+     * @return the effect on cache
+     */
+    protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+        return EffectOnCache.RESET;
     }
 
     /**
@@ -567,5 +663,25 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     @Override
     public String getClassName() {
         return "HTMLCollection";
+    }
+}
+
+class HTMLSubCollection extends HTMLCollection {
+    private final HTMLCollection mainCollection_;
+
+    public HTMLSubCollection(final HTMLCollection mainCollection, final String subDescription) {
+        super(mainCollection.getDomNodeOrDie(), false, mainCollection.toString() + subDescription);
+        mainCollection_ = mainCollection;
+    }
+
+    @Override
+    protected List<Object> computeElements() {
+        final List<Object> list = new ArrayList<Object>();
+        for (final Object o : mainCollection_.getElements()) {
+            if (isMatching((DomNode) o)) {
+                list.add(o);
+            }
+        }
+        return list;
     }
 }

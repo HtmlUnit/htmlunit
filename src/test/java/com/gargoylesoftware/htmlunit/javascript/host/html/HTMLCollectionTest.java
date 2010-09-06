@@ -62,7 +62,7 @@ public class HTMLCollectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(Browser.IE)
     @Alerts(IE = "object", FF = "function")
     public void testToStringFunction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

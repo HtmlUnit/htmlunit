@@ -60,7 +60,10 @@ import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
+import com.gargoylesoftware.htmlunit.html.HtmlArea;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
@@ -286,8 +289,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public Object jsxGet_forms() {
         if (forms_ == null) {
-            forms_ = new HTMLCollection(this);
-            forms_.init(getDomNodeOrDie(), ".//form");
+            final HtmlPage page = getHtmlPage();
+            forms_ = new HTMLCollection(page, false, "HTMLDocument.forms") {
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlForm;
+                }
+            };
         }
         return forms_;
     }
@@ -299,7 +306,22 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public Object jsxGet_links() {
         if (links_ == null) {
-            links_ = new HTMLCollection(this);
+            links_ = new HTMLCollection(getDomNodeOrDie(), true, "HTMLDocument.links") {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return (node instanceof HtmlAnchor || node instanceof HtmlArea)
+                        && ((HtmlElement) node).hasAttribute("href");
+                }
+
+                @Override
+                protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                    final HtmlElement node = event.getHtmlElement();
+                    if ((node  instanceof HtmlAnchor || node instanceof HtmlArea) && "href".equals(event.getName())) {
+                        return EffectOnCache.RESET;
+                    }
+                    return EffectOnCache.NONE;
+                }
+            };
             links_.init(getDomNodeOrDie(), ".//a[@href] | .//area[@href]");
         }
         return links_;
@@ -795,9 +817,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public HTMLCollection jsxGet_all() {
         if (all_ == null) {
-            all_ = new HTMLCollectionTags(this);
+            all_ = new HTMLCollectionTags(getDomNodeOrDie(), "HTMLDocument.all") {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return true;
+                }
+            };
             all_.setAvoidObjectDetection(!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_54));
-            all_.init(getDomNodeOrDie(), ".//*");
         }
         return all_;
     }
@@ -1028,14 +1054,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public HTMLCollection jsxFunction_getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
-        final HTMLCollection collection = new HTMLCollection(this);
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_59)
                 && (StringUtils.isEmpty(elementName) || elementName.equals("null"))) {
-            return collection;
+            return HTMLCollection.emptyCollection(getWindow());
         }
         // Null must me changed to '' for proper collection initialization.
         final String expElementName = elementName.equals("null") ? "" : elementName;
         final String exp = ".//*[@name='" + expElementName + "']";
+        final HTMLCollection collection = new HTMLCollection(this);
         collection.init(getDomNodeOrDie(), exp);
         return collection;
     }

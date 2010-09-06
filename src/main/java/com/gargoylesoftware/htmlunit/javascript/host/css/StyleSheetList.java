@@ -17,6 +17,11 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlLink;
+import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -62,11 +67,27 @@ public class StyleSheetList extends SimpleScriptable {
         setParentScope(document);
         setPrototype(getPrototype(getClass()));
 
-        nodes_ = new HTMLCollection(document);
-
         final boolean cssEnabled = getWindow().getWebWindow().getWebClient().isCssEnabled();
         if (cssEnabled) {
-            nodes_.init(document.getHtmlPage(), ".//style | .//link[lower-case(@rel)='stylesheet']");
+            nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true, "stylesheets") {
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlStyle
+                        || (node instanceof HtmlLink
+                            && "stylesheet".equalsIgnoreCase(((HtmlLink) node).getAttribute("rel")));
+                }
+
+                @Override
+                protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                    final HtmlElement node = event.getHtmlElement();
+                    if (node instanceof HtmlLink && "rel".equalsIgnoreCase(event.getName())) {
+                        return EffectOnCache.RESET;
+                    }
+                    return EffectOnCache.NONE;
+                }
+            };
+        }
+        else {
+            nodes_ = HTMLCollection.emptyCollection(getWindow());
         }
     }
 
