@@ -76,9 +76,6 @@ public enum BrowserVersionFeatures {
     FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK,
 
     /** Was originally .isIE(). */
-    GENERATED_1,
-
-    /** Was originally .isIE(). */
     GENERATED_10,
 
     /** Was originally .isIE(). */
@@ -608,6 +605,12 @@ public enum BrowserVersionFeatures {
 
     /** Allows multiple elements with the same 'id'. */
     HTMLCOLLECTION_IDENTICAL_IDS,
+
+    /**
+     * Supports Conditional Comments
+     * @see <a href="http://en.wikipedia.org/wiki/Conditional_comment">Conditional comment</a>
+     */
+    HTMLCONDITIONAL_COMMENTS,
 
     /** Allows invalid 'align' values. */
     HTMLELEMENT_ALIGN_INVALID,
