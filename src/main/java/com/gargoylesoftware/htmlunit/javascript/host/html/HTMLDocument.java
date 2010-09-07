@@ -373,15 +373,31 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public Object jsxGet_anchors() {
         if (anchors_ == null) {
-            anchors_ = new HTMLCollection(this);
-            final String xpath;
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_52)) {
-                xpath = ".//a[@name or @id]";
-            }
-            else {
-                xpath = ".//a[@name]";
-            }
-            anchors_.init(getDomNodeOrDie(), xpath);
+            anchors_ = new HTMLCollection(getDomNodeOrDie(), true, "HTMLDocument.anchors") {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    if (!(node instanceof HtmlAnchor)) {
+                        return false;
+                    }
+                    final HtmlAnchor anchor = (HtmlAnchor) node;
+                    if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_52)) {
+                        return anchor.hasAttribute("name") || anchor.hasAttribute("id");
+                    }
+                    return anchor.hasAttribute("name");
+                }
+
+                @Override
+                protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                    final HtmlElement node = event.getHtmlElement();
+                    if (!(node instanceof HtmlAnchor)) {
+                        return EffectOnCache.NONE;
+                    }
+                    if ("name".equals(event.getName()) || "id".equals(event.getName())) {
+                        return EffectOnCache.RESET;
+                    }
+                    return EffectOnCache.NONE;
+                }
+            };
         }
         return anchors_;
     }
@@ -396,8 +412,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public Object jsxGet_applets() {
         if (applets_ == null) {
-            applets_ = new HTMLCollection(this);
-            applets_.init(getDomNodeOrDie(), ".//applet");
+            applets_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.applets") {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlApplet;
+                }
+            };
         }
         return applets_;
     }
@@ -785,8 +805,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public Object jsxGet_images() {
         if (images_ == null) {
-            images_ = new HTMLCollection(this);
-            images_.init(getDomNodeOrDie(), ".//img");
+            images_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.images") {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlImage;
+                }
+            };
         }
         return images_;
     }
@@ -1305,8 +1329,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public Object jsxGet_scripts() {
         if (scripts_ == null) {
-            scripts_ = new HTMLCollection(this);
-            scripts_.init(getDomNodeOrDie(), ".//script");
+            scripts_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.scripts") {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlScript;
+                }
+            };
         }
         return scripts_;
     }

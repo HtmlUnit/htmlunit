@@ -725,7 +725,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     private HTMLCollection getFrames() {
         if (frames_ == null) {
-            frames_ = new HTMLCollectionFrames(this);
+            final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
+            frames_ = new HTMLCollectionFrames(page);
         }
         return frames_;
     }
@@ -1714,11 +1715,13 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 class HTMLCollectionFrames extends HTMLCollection {
     private static final Log LOG = LogFactory.getLog(HTMLCollectionFrames.class);
 
-    public HTMLCollectionFrames(final Window window) {
-        super(window);
-        final String xpath = ".//*[(name() = 'frame' or name() = 'iframe')]";
-        final HtmlPage page = (HtmlPage) window.getWebWindow().getEnclosedPage();
-        init(page, xpath);
+    public HTMLCollectionFrames(final HtmlPage page) {
+        super(page, false, "Window.frames");
+    }
+
+    @Override
+    protected boolean isMatching(final DomNode node) {
+        return node instanceof BaseFrame;
     }
 
     @Override

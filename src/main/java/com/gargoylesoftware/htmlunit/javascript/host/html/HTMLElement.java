@@ -181,8 +181,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public HTMLCollection jsxGet_all() {
         if (all_ == null) {
-            all_ = new HTMLCollection(this);
-            all_.init(getDomNodeOrDie(), ".//*");
+            all_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLElement.all") {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return true;
+                }
+            };
         }
         return all_;
     }
@@ -656,20 +660,31 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return all the descendant elements with the specified class name
      */
     public HTMLCollection jsxFunction_getElementsByClassName(final String className) {
-        final HTMLCollection collection = new HTMLCollection(this);
+        final HtmlElement elt = getDomNodeOrDie();
+        final String description = "HTMLElement.getElementsByClassName('" + className + "')";
         final String[] classNames = className.split("\\s");
-        final StringBuilder exp = new StringBuilder();
-        for (final String name : classNames) {
-            if (exp.length() != 0) {
-                exp.append(" and ");
+
+        final HTMLCollection collection = new HTMLCollection(elt, true, description) {
+            protected boolean isMatching(final DomNode node) {
+                if (!(node instanceof HtmlElement)) {
+                    return false;
+                }
+                final HtmlElement elt = (HtmlElement) node;
+                String classAttribute = elt.getAttribute("class");
+                if (classAttribute == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+                    return false; // probably better performance as most of elements won't have a class attribute
+                }
+
+                classAttribute = " " + classAttribute + " ";
+                for (final String aClassName : classNames) {
+                    if (!classAttribute.contains(" " + aClassName + " ")) {
+                        return false;
+                    }
+                }
+                return true;
             }
-            exp.append("contains(concat(' ', @class, ' '), ' ");
-            exp.append(name);
-            exp.append(" ')");
-        }
-        exp.insert(0, ".//*[");
-        exp.append("]");
-        collection.init(getDomNodeOrDie(), exp.toString());
+        };
+
         return collection;
     }
 
@@ -1535,9 +1550,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the child at the given position
      */
     public HTMLCollection jsxGet_children() {
-        final HTMLCollection children = new HTMLCollection(this);
-        children.init(getDomNodeOrDie(), "./*");
-        return children;
+        final HtmlElement node = getDomNodeOrDie();
+        final HTMLCollection collection = new HTMLCollection(node, false, "HTMLElement.children") {
+            protected List<Object> computeElements() {
+                return new ArrayList<Object>(node.getChildNodes());
+            };
+        };
+        return collection;
     }
 
     /**

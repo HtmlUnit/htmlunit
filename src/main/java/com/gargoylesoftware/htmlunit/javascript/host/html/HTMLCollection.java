@@ -251,7 +251,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             }
             else {
                 response = new ArrayList<Object>();
-                for (final DomNode node : node_.getDescendants()) {
+                for (final DomNode node : getCandidates()) {
                     if (node instanceof DomElement && isMatching(node)) {
                         response.add(node);
                     }
@@ -263,6 +263,15 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         }
 
         return response;
+    }
+
+    /**
+     * Gets the DOM node that have to be examined to see if they are matching.
+     * Default implementation looks at all descendants of reference node.
+     * @return the nodes
+     */
+    protected Iterable<DomNode> getCandidates() {
+        return node_.getDescendants();
     }
 
     /**

@@ -418,7 +418,7 @@ public class Node extends SimpleScriptable {
             final Boolean xmlSpaceDefault = isXMLSpaceDefault(node);
             final boolean skipEmptyTextNode = isIE && isXmlPage && (xmlSpaceDefault != Boolean.FALSE);
 
-            childNodes_ = new HTMLCollection(this) {
+            childNodes_ = new HTMLCollection(node, false, "Node.childNodes") {
                 @Override
                 protected List<Object> computeElements() {
                     final List<Object> response = new ArrayList<Object>();
@@ -434,7 +434,6 @@ public class Node extends SimpleScriptable {
                     return response;
                 }
             };
-            childNodes_.init(node, null);
         }
         return childNodes_;
     }

@@ -20,6 +20,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -51,18 +52,24 @@ public class RowContainer extends HTMLElement {
      */
     public Object jsxGet_rows() {
         if (rows_ == null) {
-            rows_ = new HTMLCollection(this);
-            rows_.init(getDomNodeOrDie(), getXPathRows());
+            rows_ = new HTMLCollection(getDomNodeOrDie(), false, "rows") {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlTableRow && isContainedRow((HtmlTableRow) node);
+                }
+
+            };
         }
         return rows_;
     }
 
     /**
-     * Returns the XPath expression, relative to this node, enabling the retrieval of this container's rows.
-     * @return the XPath expression, relative to this node, enabling the retrieval of this container's rows
+     * Indicates if the row belongs to this container.
+     * @param row the row to test
+     * @return <code>true</code> if it belongs to this container
      */
-    protected String getXPathRows() {
-        return "./tr";
+    protected boolean isContainedRow(final HtmlTableRow row) {
+        return row.getParentNode() == getDomNodeOrDie();
     }
 
     /**

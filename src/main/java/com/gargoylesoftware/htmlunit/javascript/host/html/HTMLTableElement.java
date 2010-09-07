@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
+import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
 
 /**
@@ -147,8 +151,13 @@ public class HTMLTableElement extends RowContainer {
      */
     public Object jsxGet_tBodies() {
         if (tBodies_ == null) {
-            tBodies_ = new HTMLCollection(this);
-            tBodies_.init(getDomNodeOrDie(), "./tbody");
+            final HtmlTable table = (HtmlTable) getDomNodeOrDie();
+            tBodies_ = new HTMLCollection(table, false, "HTMLTableElement.tBodies") {
+                @Override
+                protected List<Object> computeElements() {
+                    return new ArrayList<Object>(table.getBodies());
+                }
+            };
         }
         return tBodies_;
     }
@@ -226,11 +235,13 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
-     * {@inheritDoc}
+     * Indicates if the row belongs to this container.
+     * @param row the row to test
+     * @return <code>true</code> if it belongs to this container
      */
-    @Override
-    protected String getXPathRows() {
-        return "./node()/tr";
+    protected boolean isContainedRow(final HtmlTableRow row) {
+        final DomNode parent = row.getParentNode(); // the tbody, thead or tfoo
+        return (parent != null) && parent.getParentNode() == getDomNodeOrDie();
     }
 
     /**

@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -91,8 +94,13 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      */
     public Object jsxGet_cells() {
         if (cells_ == null) {
-            cells_ = new HTMLCollection(this);
-            cells_.init(getDomNodeOrDie(), "./td|th");
+            final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
+            cells_ = new HTMLCollection(row, false, "cells") {
+                @Override
+                protected List<Object> computeElements() {
+                    return new ArrayList<Object>(row.getCells());
+                }
+            };
         }
         return cells_;
     }

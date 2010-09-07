@@ -14,6 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlArea;
+import com.gargoylesoftware.htmlunit.html.HtmlMap;
+
 /**
  * The JavaScript object "HTMLMapElement".
  *
@@ -21,6 +28,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
  * @author Ahmed Ashour
  */
 public class HTMLMapElement extends HTMLElement {
+    private HTMLCollection areas_;
 
     /**
      * Creates an instance.
@@ -34,8 +42,21 @@ public class HTMLMapElement extends HTMLElement {
      * @return the value of this attribute
      */
     public HTMLCollection jsxGet_areas() {
-        final HTMLCollection areas = new HTMLCollection(this);
-        areas.init(getDomNodeOrDie(), "./area");
-        return areas;
+        if (areas_ == null) {
+            final HtmlMap map = (HtmlMap) getDomNodeOrDie();
+            areas_ = new HTMLCollection(map, false, "HTMLMapElement.areas") {
+                @Override
+                protected List<Object> computeElements() {
+                    final List<Object> list = new ArrayList<Object>();
+                    for (final DomNode node : map.getChildElements()) {
+                        if (node instanceof HtmlArea) {
+                            list.add(node);
+                        }
+                    }
+                    return list;
+                }
+            };
+        }
+        return areas_;
     }
 }
