@@ -215,11 +215,13 @@ public class BrowserVersion implements Serializable {
             props.load(getClass().getResourceAsStream("/com/gargoylesoftware/htmlunit/javascript/configuration/"
                     + nickname_ + ".properties"));
             for (final Object key : props.keySet()) {
-                features_.add(BrowserVersionFeatures.valueOf(key.toString()));
+                try {
+                    features_.add(BrowserVersionFeatures.valueOf(key.toString()));
+                }
+                catch (final IllegalArgumentException iae) {
+                    throw new RuntimeException("Invalid entry '" + key.toString() + "' found in configuration file for BrowserVersion: " + nickname_);
+                }
             }
-        }
-        catch (final IllegalArgumentException iae) {
-            throw new RuntimeException("Invalid entry found in configuration file for BrowserVersion: " + nickname_);
         }
         catch (final Exception e) {
             throw new RuntimeException("Configuration file not found for BrowserVersion: " + nickname_);
