@@ -454,6 +454,13 @@
             <email>sudhan_moghe@users.sourceforge.net</email>
             <timezone>+5.5</timezone>
         </developer>
+        <developer>
+            <name>Ronald Brill</name>
+            <id>rbri</id>
+            <email>rbri@rbri.de</email>
+            <url>http://www.wetator.org/</url>
+            <timezone>+1</timezone>
+        </developer>
     </developers>
     <contributors>
         <contributor>
@@ -636,9 +643,6 @@
         </contributor>
         <contributor>
             <name>Nicolas Belisle</name>
-        </contributor>
-        <contributor>
-            <name>Ronald Brill</name>
         </contributor>
         <contributor>
             <name>Amit Khanna</name>
