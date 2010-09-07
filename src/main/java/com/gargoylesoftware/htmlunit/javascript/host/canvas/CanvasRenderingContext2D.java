@@ -37,6 +37,24 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
+     * Changes the transformation matrix to apply a translation transformation with the given characteristics.
+     * @param x the translation distance in the horizontal direction
+     * @param y the translation distance in the vertical direction
+     */
+    public void jsxFunction_translate(final Object x, final Object y) {
+      // empty
+    }
+
+    /**
+     * Changes the transformation matrix to apply a scaling transformation with the given characteristics.
+     * @param x the scale factor in the horizontal direction
+     * @param y the scale factor in the vertical direction
+     */
+    public void jsxFunction_scale(final Object x, final Object y) {
+      //empty
+    }
+
+    /**
      * Sets the "fillStyle" property.
      * @param fillStyle the "fillStyle" property
      */

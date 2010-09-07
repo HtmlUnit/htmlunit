@@ -74,8 +74,10 @@
         <function name="moveTo"/>
         <function name="restore"/>
         <function name="save"/>
+        <function name="scale"/>
         <function name="stroke"/>
         <function name="strokeRect"/>
+        <function name="translate"/>
     </class>
 
     <class extends="Text" classname="com.gargoylesoftware.htmlunit.javascript.host.CDATASection"

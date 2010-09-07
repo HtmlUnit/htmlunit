@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="add" dev="mguillem" issue="3030203">
+                JavaScript: add empty implementations of CanvasRenderingContext2D.translate and scale (FF).
+            </action>
             <action type="fix" dev="mguillem">
                 Consider &lt;noscript&gt;'s body as plain text for FF and discard it totally for IE.
             </action>
