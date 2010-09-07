@@ -21,6 +21,7 @@ package com.gargoylesoftware.htmlunit;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 public enum BrowserVersionFeatures {
 
@@ -666,8 +667,8 @@ public enum BrowserVersionFeatures {
     /** */
     PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT,
 
-    /** */
-    PAGE_WAIT_LAOD_BEFORE_BODY,
+    /** wait for the whole page to load before initializing bodies for frames */
+    PAGE_WAIT_LOAD_BEFORE_BODY,
 
     /** Supports 'data' protocol. */
     PROTOCOL_DATA,
