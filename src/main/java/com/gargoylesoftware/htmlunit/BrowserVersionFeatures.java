@@ -608,7 +608,7 @@ public enum BrowserVersionFeatures {
     HTMLCOLLECTION_IDENTICAL_IDS,
 
     /**
-     * Supports Conditional Comments
+     * Supports Conditional Comments.
      * @see <a href="http://en.wikipedia.org/wiki/Conditional_comment">Conditional comment</a>
      */
     HTMLCONDITIONAL_COMMENTS,
@@ -667,7 +667,7 @@ public enum BrowserVersionFeatures {
     /** */
     PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT,
 
-    /** wait for the whole page to load before initializing bodies for frames */
+    /** Wait for the whole page to load before initializing bodies for frames. */
     PAGE_WAIT_LOAD_BEFORE_BODY,
 
     /** Supports 'data' protocol. */
