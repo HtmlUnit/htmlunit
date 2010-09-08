@@ -61,6 +61,9 @@ public enum BrowserVersionFeatures {
     /** Triggers "onchange" event handler on losing focus. */
     EVENT_ONCHANGE_LOSING_FOCUS,
 
+    /** Triggers "onreadystatechange" event. */
+    EVENT_ONREADY_STATE_CHANGE,
+
     /** Triggers "propertychange" event. */
     EVENT_PROPERTY_CHANGE,
 
@@ -75,9 +78,6 @@ public enum BrowserVersionFeatures {
 
     /** */
     FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK,
-
-    /** Was originally .isIE(). */
-    GENERATED_10,
 
     /** Was originally .isIE(). */
     GENERATED_100,
