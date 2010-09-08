@@ -57,21 +57,18 @@ net.sourceforge.htmlunit.corejs.javascript.EcmaError: TypeError: Cannot call met
             <source><![CDATA[
 @Test
 public void dojoTest() throws Exception {
-    WebClient webClient = new WebClient();
-    List<String> collectedAlerts = new ArrayList<String>();
+    final WebClient webClient = new WebClient();
+    final List<String> collectedAlerts = new ArrayList<String>();
     webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
     try {
         webClient.getPage("http://localhost/dojo/dijit/tests/form/test_Button.html");
     }
-    catch(Exception e){
-        e.printStackTrace();
-    }
     finally {
         webClient.closeAllWindows();
-    }
-    for (String alert : collectedAlerts) {
-        System.out.println("ALERT: " + alert);
+        for (final String alert : collectedAlerts) {
+            System.out.println("ALERT: " + alert);
+        }
     }
 }
 ]]></source>
