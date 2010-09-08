@@ -143,9 +143,6 @@ public enum BrowserVersionFeatures {
     GENERATED_119,
 
     /** Was originally .isIE(). */
-    GENERATED_12,
-
-    /** Was originally .isIE(). */
     GENERATED_120,
 
     /** Was originally .isIE(). */
@@ -696,6 +693,9 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is null. */
     STYLESHEET_HREF_STYLE_NULL,
+
+    /** Set the value attribute of a submit input to 'Submit Query' if no value attribute specified. */
+    SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
 
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
     TEXTAREA_CRNL,

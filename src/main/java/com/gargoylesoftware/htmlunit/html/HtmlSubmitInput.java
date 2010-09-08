@@ -53,7 +53,7 @@ public class HtmlSubmitInput extends HtmlInput {
     HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_12)
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED)
                 && !hasAttribute("value")) {
             setAttribute("value", DEFAULT_VALUE);
         }
