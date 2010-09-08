@@ -219,7 +219,8 @@ public class BrowserVersion implements Serializable {
                     features_.add(BrowserVersionFeatures.valueOf(key.toString()));
                 }
                 catch (final IllegalArgumentException iae) {
-                    throw new RuntimeException("Invalid entry '" + key.toString() + "' found in configuration file for BrowserVersion: " + nickname_);
+                    throw new RuntimeException("Invalid entry '"
+                        + key + "' found in configuration file for BrowserVersion: " + nickname_);
                 }
             }
         }
