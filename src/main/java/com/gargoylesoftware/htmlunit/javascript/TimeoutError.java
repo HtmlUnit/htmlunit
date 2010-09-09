@@ -22,8 +22,8 @@ package com.gargoylesoftware.htmlunit.javascript;
  */
 public class TimeoutError extends Error {
 
-    TimeoutError(final long allowedTimeout, final long executionTime) {
-        super("Javascript execution takes too long (allowed: " + allowedTimeout
+    TimeoutError(final long allowedTime, final long executionTime) {
+        super("Javascript execution takes too long (allowed: " + allowedTime
                 + ", already elapsed: " + executionTime + ")");
     }
 }
