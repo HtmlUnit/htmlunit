@@ -471,7 +471,8 @@ public class HtmlScript extends HtmlElement {
      * @param state this script ready state
      */
     protected void setAndExecuteReadyState(final String state) {
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.EVENT_ONREADY_STATE_CHANGE)) {
+        if (getPage().getWebClient().getBrowserVersion()
+                .hasFeature(BrowserVersionFeatures.EVENT_ONREADY_STATE_CHANGE)) {
             setReadyState(state);
             final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
             final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
