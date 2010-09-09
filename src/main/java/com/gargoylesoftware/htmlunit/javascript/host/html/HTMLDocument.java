@@ -1084,7 +1084,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // Null must me changed to '' for proper collection initialization.
         final String expElementName = elementName.equals("null") ? "" : elementName;
 
-        final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
+        final HtmlPage page = (HtmlPage) getPage();
         final String description = "HTMLDocument.getElementsByName('" + elementName + "')";
         final HTMLCollection collection = new HTMLCollection(page, true, description) {
             @Override
