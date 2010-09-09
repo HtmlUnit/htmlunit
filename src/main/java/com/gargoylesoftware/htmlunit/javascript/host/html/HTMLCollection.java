@@ -468,7 +468,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             final HTMLCollection otherArray = (HTMLCollection) other;
             if (getClass() == other.getClass()
                     && node_ == otherArray.node_
-                    && xpath_.toString().equals(otherArray.xpath_.toString())) {
+                    && getElements().equals(otherArray.getElements())) {
                 return Boolean.TRUE;
             }
             return NOT_FOUND;

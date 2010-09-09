@@ -14,7 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -47,8 +49,15 @@ public class Element extends EventNode {
      * @return list of the found elements
      */
     public HTMLCollection jsxFunction_selectNodes(final String expression) {
-        final HTMLCollection collection = new HTMLCollection(this);
-        collection.init(getDomNodeOrDie(), expression);
+        final DomElement domNode = getDomNodeOrDie();
+        final boolean attributeChangeSensitive = expression.contains("@");
+        final String description = "Element.selectNodes('" + expression + "')";
+        final HTMLCollection collection = new HTMLCollection(domNode, attributeChangeSensitive, description) {
+            protected List<Object> computeElements() {
+                final List<Object> list = new ArrayList<Object>(domNode.getByXPath(expression));
+                return list;
+            };
+        };
         return collection;
     }
 

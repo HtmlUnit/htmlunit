@@ -424,20 +424,34 @@ public class Document extends EventNode {
      * @return all the descendant elements with the specified tag name
      */
     public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
-        final HTMLCollection collection = new HTMLCollection(this);
-        final String exp;
+        final String description = "Document.getElementsByTagName('" + tagName + "')";
+
+        final HTMLCollection collection;
         if (tagName.equals("*")) {
-            exp = "//*";
+            collection = new HTMLCollection(getDomNodeOrDie(), false, description) {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return true;
+                }
+            };
         }
         else {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_32)) {
-                exp = "//*[lower-case(local-name()) = '" + tagName.toLowerCase() + "']";
-            }
-            else {
-                exp = "//*[lower-case(name()) = '" + tagName.toLowerCase() + "']";
-            }
+            final boolean useLocalName = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_32);
+            final String tagNameLC = tagName.toLowerCase();
+
+            collection = new HTMLCollection(getDomNodeOrDie(), false, description) {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    if (useLocalName) {
+                        return tagNameLC.equalsIgnoreCase(node.getLocalName());
+                    }
+                    else {
+                        return tagNameLC.equalsIgnoreCase(node.getNodeName());
+                    }
+                }
+            };
         }
-        collection.init(getDomNodeOrDie(), exp);
+
         return collection;
     }
 
@@ -449,17 +463,30 @@ public class Document extends EventNode {
      * @return a live NodeList of found elements in the order they appear in the tree
      */
     public Object jsxFunction_getElementsByTagNameNS(final Object namespaceURI, final String localName) {
-        final DomNode domNode = getDomNodeOrDie();
-        final HTMLCollection collection = new HTMLCollection(this);
-        final String xpath;
-        if (namespaceURI == null || namespaceURI.equals("*")) {
-            xpath = ".//*[local-name()='" + localName + "']";
+        final String description = "Document.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
+        final DomElement domNode = getPage().getDocumentElement();
+
+        final String prefix;
+        if (namespaceURI != null && !"*".equals("*")) {
+            prefix = XmlUtil.lookupPrefix(domNode, Context.toString(namespaceURI));
         }
         else {
-            final String prefix = XmlUtil.lookupPrefix((DomElement) domNode, Context.toString(namespaceURI));
-            xpath = ".//" + prefix + ':' + localName;
+            prefix = null;
         }
-        collection.init(domNode, xpath);
+
+        final HTMLCollection collection = new HTMLCollection(domNode, false, description) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                if (!localName.equals(node.getLocalName())) {
+                    return false;
+                }
+                if (prefix == null) {
+                    return true;
+                }
+                return true;
+            }
+        };
+
         return collection;
     }
 }

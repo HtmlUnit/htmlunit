@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,6 +29,7 @@ import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.HttpMethod;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
@@ -259,8 +261,16 @@ public class XMLDocument extends Document {
      * @return list of the found elements
      */
     public HTMLCollection jsxFunction_selectNodes(final String expression) {
-        final HTMLCollection collection = new HTMLCollection(this);
-        collection.init(getDomNodeOrDie(), expression);
+        final boolean attributeChangeSensitive = expression.contains("@");
+        final String description = "XMLDocument.selectNodes('" + expression + "')";
+        final SgmlPage page = getPage();
+        final HTMLCollection collection = new HTMLCollection(page.getDocumentElement(),
+                attributeChangeSensitive, description) {
+            protected List<Object> computeElements() {
+                final List<Object> list = new ArrayList<Object>(page.getByXPath(expression));
+                return list;
+            };
+        };
         return collection;
     }
 
