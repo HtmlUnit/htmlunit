@@ -163,28 +163,34 @@ public class Element extends EventNode {
      * @param tagName the name to search for
      * @return all the descendant elements with the specified tag name
      */
-    public Object jsxFunction_getElementsByTagName(String tagName) {
-        tagName = tagName.toLowerCase();
+    public Object jsxFunction_getElementsByTagName(final String tagName) {
+        final String tagNameLC = tagName.toLowerCase();
 
         if (elementsByTagName_ == null) {
             elementsByTagName_ = new HashMap<String, HTMLCollection>();
         }
 
-        HTMLCollection collection = elementsByTagName_.get(tagName);
+        HTMLCollection collection = elementsByTagName_.get(tagNameLC);
         if (collection != null) {
             return collection;
         }
 
         final DomNode node = getDomNodeOrDie();
-        collection = new HTMLCollection(this);
-        final String xpath;
+        final String description = "Element.getElementsByTagName('" + tagNameLC + "')";
         if ("*".equals(tagName)) {
-            xpath = ".//*";
+            collection = new HTMLCollection(node, false, description) {
+                protected boolean isMatching(final DomNode node) {
+                    return true;
+                };
+            };
         }
         else {
-            xpath = ".//*[local-name() = '" + tagName + "']";
+            collection = new HTMLCollection(node, false, description) {
+                protected boolean isMatching(final DomNode node) {
+                    return tagNameLC.equalsIgnoreCase(node.getLocalName());
+                };
+            };
         }
-        collection.init(node, xpath);
 
         elementsByTagName_.put(tagName, collection);
 
@@ -252,17 +258,30 @@ public class Element extends EventNode {
      * @return a live NodeList of found elements in the order they appear in the tree
      */
     public Object jsxFunction_getElementsByTagNameNS(final Object namespaceURI, final String localName) {
-        final DomNode domNode = getDomNodeOrDie();
-        final HTMLCollection collection = new HTMLCollection(this);
-        final String xpath;
-        if (namespaceURI == null || namespaceURI.equals("*")) {
-            xpath = ".//" + localName;
+        final String description = "Element.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
+        final DomElement domNode = getDomNodeOrDie();
+
+        final String prefix;
+        if (namespaceURI != null && !"*".equals("*")) {
+            prefix = XmlUtil.lookupPrefix(domNode, Context.toString(namespaceURI));
         }
         else {
-            final String prefix = XmlUtil.lookupPrefix((DomElement) domNode, Context.toString(namespaceURI));
-            xpath = ".//" + prefix + ':' + localName;
+            prefix = null;
         }
-        collection.init(domNode, xpath);
+
+        final HTMLCollection collection = new HTMLCollection(domNode, false, description) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                if (!localName.equals(node.getLocalName())) {
+                    return false;
+                }
+                if (prefix == null) {
+                    return true;
+                }
+                return true;
+            }
+        };
+
         return collection;
     }
 

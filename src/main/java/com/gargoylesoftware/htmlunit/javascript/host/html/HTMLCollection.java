@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -66,7 +65,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         RESET
     }
 
-    private String xpath_; // should slowly disappear to increase performance
     private DomNode node_;
     private boolean avoidObjectDetection_ = false;
     private String description_;
@@ -97,7 +95,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * Creates an instance.
      * @param parentScope parent scope
      */
-    public HTMLCollection(final ScriptableObject parentScope) {
+    private HTMLCollection(final ScriptableObject parentScope) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
     }
@@ -125,21 +123,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     HTMLCollection(final DomNode parentScope, final List<?> initialElements) {
         this(parentScope.getScriptObject());
-        init(parentScope, null);
         cachedElements_ = new ArrayList<Object>(initialElements);
-    }
-
-    /**
-     * Initializes the content of this collection. The elements will be "calculated" and cached
-     * before first access using the specified XPath expression.
-     * @param node the node to serve as root for the XPath expression
-     * @param xpath the XPath expression which determines the elements of the collection
-     */
-    public void init(final DomNode node, final String xpath) {
-        if (node != null) {
-            node_ = node;
-            xpath_ = xpath;
-        }
     }
 
     /**
@@ -230,7 +214,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
             if (!listenerRegistered_) {
                 node_.addDomChangeListener(listener);
-                if (node_ instanceof HtmlElement) {
+                if (attributeChangeSensitive_ && node_ instanceof HtmlElement) {
                     ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
                 }
                 listenerRegistered_ = true;
@@ -246,15 +230,10 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     protected List<Object> computeElements() {
         final List<Object> response;
         if (node_ != null) {
-            if (xpath_ != null) {
-                response = XPathUtils.getByXPath(node_, xpath_);
-            }
-            else {
-                response = new ArrayList<Object>();
-                for (final DomNode node : getCandidates()) {
-                    if (node instanceof DomElement && isMatching(node)) {
-                        response.add(node);
-                    }
+            response = new ArrayList<Object>();
+            for (final DomNode node : getCandidates()) {
+                if (node instanceof DomElement && isMatching(node)) {
+                    response.add(node);
                 }
             }
         }
@@ -447,12 +426,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     @Override
     public String toString() {
-        if (xpath_ != null) {
-            return super.toString() + '<' + xpath_ + '>';
-        }
-        else {
-            return description_;
-        }
+        return description_;
     }
 
     /**
@@ -597,18 +571,14 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
          * {@inheritDoc}
          */
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            if (attributeChangeSensitive_) {
-                handleChangeOnCache(getEffectOnCache(event), event.getHtmlElement());
-            }
+            handleChangeOnCache(getEffectOnCache(event), event.getHtmlElement());
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            if (attributeChangeSensitive_) {
-                handleChangeOnCache(getEffectOnCache(event), event.getHtmlElement());
-            }
+            handleChangeOnCache(getEffectOnCache(event), event.getHtmlElement());
         }
 
         /**

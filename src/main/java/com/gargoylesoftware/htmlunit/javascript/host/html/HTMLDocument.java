@@ -1120,47 +1120,59 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     private Object getIt(final String name) {
         final HtmlPage page = (HtmlPage) getDomNodeOrNull();
-        // Try to satisfy this request using a map-backed operation before punting and using XPath.
-        // XPath operations are very expensive, and this method gets invoked quite a bit.
-        // This little shortcut shaves ~35% off the build time (3 min -> 2 min, as of 8/10/2007).
-        final List<HtmlElement> elements;
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_60);
-        if (ie) {
-            elements = page.getElementsByIdAndOrName(name);
-        }
-        else {
-            elements = page.getElementsByName(name);
-        }
-        if (elements.isEmpty()) {
+
+        final boolean isIE = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_60);
+        final HTMLCollection collection = new HTMLCollection(page, true, "HTMLDocument." + name) {
+            @Override
+            protected List<Object> computeElements() {
+                final List<HtmlElement> elements;
+                if (isIE) {
+                    elements = page.getElementsByIdAndOrName(name);
+                }
+                else {
+                    elements = page.getElementsByName(name);
+                }
+                final List<Object> matchingElements = new ArrayList<Object>();
+                for (final HtmlElement elt : elements) {
+                    if (elt instanceof HtmlForm || elt instanceof HtmlImage || elt instanceof HtmlApplet
+                            || (isIE && elt instanceof BaseFrame)) {
+                        matchingElements.add(elt);
+                    }
+                }
+                return matchingElements;
+            }
+
+            @Override
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                final String attributeName = event.getName();
+                if ("name".equals(attributeName)) {
+                    return EffectOnCache.RESET;
+                }
+                else if (isIE && "id".equals(attributeName)) {
+                    return EffectOnCache.RESET;
+                }
+
+                return EffectOnCache.NONE;
+            }
+
+            @Override
+            protected SimpleScriptable getScriptableFor(final Object object) {
+                if (isIE && object instanceof BaseFrame) {
+                    return (SimpleScriptable) ((BaseFrame) object).getEnclosedWindow().getScriptObject();
+                }
+                return super.getScriptableFor(object);
+            }
+        };
+
+        final int length = collection.jsxGet_length();
+        if (length == 0) {
             return NOT_FOUND;
         }
-        if (elements.size() == 1) {
-            final HtmlElement element = elements.get(0);
-            final String tagName = element.getTagName();
-            if (HtmlImage.TAG_NAME.equals(tagName)
-                || HtmlForm.TAG_NAME.equals(tagName)
-                || HtmlApplet.TAG_NAME.equals(tagName)) {
-                return getScriptableFor(element);
-            }
-            else if (ie && element instanceof BaseFrame) {
-                return ((BaseFrame) element).getEnclosedWindow().getScriptObject();
-            }
-            return NOT_FOUND;
+        else if (length == 1) {
+            return collection.jsxFunction_item(0);
         }
-        // The shortcut wasn't enough, which means we probably need to perform the XPath operation anyway.
-        // Note that the XPath expression below HAS TO MATCH the tag name checks performed in the shortcut above.
-        // TODO: Behavior for iframe seems to differ between IE and Mozilla.
-        final HTMLCollection collection = new HTMLCollection(this);
-        final String xpath = ".//*[(@name = '" + name + "' and (name() = 'img' or name() = 'form'))]";
-        collection.init(page, xpath);
-        final int size = collection.jsxGet_length();
-        if (size == 1) {
-            return collection.get(0, collection);
-        }
-        else if (size > 1) {
-            return collection;
-        }
-        return NOT_FOUND;
+
+        return collection;
     }
 
     /**
