@@ -21,7 +21,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -131,7 +130,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private int scrollLeft_;
     private int scrollTop_;
     private String uniqueID_;
-    private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)
     private CSSStyleDeclaration style_;
 
     /**
@@ -167,13 +165,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         Arrays.asList(new String[] {
             "caption", "col", "colgroup", "frameset", "html",
             "tbody", "td", "tfoot", "th", "thead", "tr"});
-
-    /**
-     * Creates an instance.
-     */
-    public HTMLElement() {
-        elementsByTagName_ = new HashMap<String, HTMLCollection>();
-    }
 
     /**
      * Returns the value of the "all" property.
@@ -622,36 +613,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
         getDomNodeOrDie().setAttribute(name, value);
         return replacedAtt;
-    }
-
-    /**
-     * Returns all the descendant elements with the specified tag name.
-     * @param tagName the name to search for
-     * @return all the descendant elements with the specified tag name
-     */
-    @Override
-    public Object jsxFunction_getElementsByTagName(String tagName) {
-        tagName = tagName.toLowerCase();
-
-        HTMLCollection collection = elementsByTagName_.get(tagName);
-        if (collection != null) {
-            return collection;
-        }
-
-        final DomNode node = getDomNodeOrDie();
-        collection = new HTMLCollection(this);
-        final String xpath;
-        if ("*".equals(tagName)) {
-            xpath = ".//*";
-        }
-        else {
-            xpath = ".//*[local-name() = '" + tagName + "']";
-        }
-        collection.init(node, xpath);
-
-        elementsByTagName_.put(tagName, collection);
-
-        return collection;
     }
 
     /**

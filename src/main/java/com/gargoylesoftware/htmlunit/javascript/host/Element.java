@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -38,6 +39,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 public class Element extends EventNode {
 
     private NamedNodeMap attributes_;
+    private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)
 
     /**
      * Applies the specified XPath expression to this node's context and returns the generated list of matching nodes.
@@ -152,10 +154,31 @@ public class Element extends EventNode {
      * @param tagName the name to search for
      * @return all the descendant elements with the specified tag name
      */
-    public Object jsxFunction_getElementsByTagName(final String tagName) {
-        final DomNode domNode = getDomNodeOrDie();
-        final HTMLCollection collection = new HTMLCollection(this);
-        collection.init(domNode, ".//*[local-name()='" + tagName + "']");
+    public Object jsxFunction_getElementsByTagName(String tagName) {
+        tagName = tagName.toLowerCase();
+
+        if (elementsByTagName_ == null) {
+            elementsByTagName_ = new HashMap<String, HTMLCollection>();
+        }
+
+        HTMLCollection collection = elementsByTagName_.get(tagName);
+        if (collection != null) {
+            return collection;
+        }
+
+        final DomNode node = getDomNodeOrDie();
+        collection = new HTMLCollection(this);
+        final String xpath;
+        if ("*".equals(tagName)) {
+            xpath = ".//*";
+        }
+        else {
+            xpath = ".//*[local-name() = '" + tagName + "']";
+        }
+        collection.init(node, xpath);
+
+        elementsByTagName_.put(tagName, collection);
+
         return collection;
     }
 

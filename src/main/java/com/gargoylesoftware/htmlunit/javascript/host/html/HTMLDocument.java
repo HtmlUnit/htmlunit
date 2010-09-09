@@ -322,7 +322,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     return EffectOnCache.NONE;
                 }
             };
-            links_.init(getDomNodeOrDie(), ".//a[@href] | .//area[@href]");
         }
         return links_;
     }
@@ -1084,9 +1083,23 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         // Null must me changed to '' for proper collection initialization.
         final String expElementName = elementName.equals("null") ? "" : elementName;
-        final String exp = ".//*[@name='" + expElementName + "']";
-        final HTMLCollection collection = new HTMLCollection(this);
-        collection.init(getDomNodeOrDie(), exp);
+
+        final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
+        final String description = "HTMLDocument.getElementsByName('" + elementName + "')";
+        final HTMLCollection collection = new HTMLCollection(page, true, description) {
+            @Override
+            protected List<Object> computeElements() {
+                return new ArrayList<Object>(page.getElementsByName(expElementName));
+            }
+
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                if ("name".equals(event.getName())) {
+                    return EffectOnCache.RESET;
+                }
+                return EffectOnCache.NONE;
+            }
+        };
+
         return collection;
     }
 

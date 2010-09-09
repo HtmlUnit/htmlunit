@@ -279,29 +279,14 @@ public class HTMLFormElement extends HTMLElement implements Function {
         if (index instanceof Number) {
             return jsxGet_elements().jsxFunction_item(index);
         }
-        final HtmlForm htmlForm = getHtmlForm();
 
-        final HTMLCollection elements = new HTMLCollection(this) {
-            @Override
-            protected List<Object> computeElements() {
-                final List<Object> response = super.computeElements();
-                response.addAll(htmlForm.getLostChildren());
-                return response;
-            }
-        };
-        final String xpath = ".//*[((name() = 'input' or name() = 'button'"
-                + " or name() = 'select' or name() = 'textarea')) and @name='" + index + "']";
-        elements.init(htmlForm, xpath);
-        if (elements.getLength() == 0) {
-            return null;
+        final String name = Context.toString(index);
+        final Object response = getWithPreemption(name);
+        if (subIndex instanceof Number && response instanceof HTMLCollection) {
+            return ((HTMLCollection) response).jsxFunction_item(subIndex);
         }
-        else if (elements.getLength() == 1) {
-            return elements.jsxFunction_item(0);
-        }
-        if (subIndex instanceof Number) {
-            return elements.jsxFunction_item(subIndex);
-        }
-        return elements;
+
+        return response;
     }
 
     /**
