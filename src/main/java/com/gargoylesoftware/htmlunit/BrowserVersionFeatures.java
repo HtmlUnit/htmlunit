@@ -262,9 +262,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isFirefox(). */
     GENERATED_158,
 
-    /** Was originally .isFirefox(). */
-    GENERATED_159,
-
     /** Was originally .isIE(). */
     GENERATED_16,
 
@@ -648,6 +645,9 @@ public enum BrowserVersionFeatures {
 
     /** */
     JAVASCRIPT_DEFERRED,
+
+    /** Javascript function getElementById compares the id's case sensitive. */
+    JAVASCRIPT_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
 
     /** Always "[object]". */
     JAVASCRIPT_OBJECT_ONLY,
