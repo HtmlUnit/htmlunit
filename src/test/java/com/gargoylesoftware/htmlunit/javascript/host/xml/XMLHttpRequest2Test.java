@@ -29,14 +29,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
  * Additional tests for {@link XMLHttpRequest} using already WebDriverTestCase.
@@ -397,32 +395,19 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Test
     @Alerts("a=b,0")
     public void post() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  xhr.open('POST', '/test2?a=b', false);\n"
+            + "  xhr.send('');\n"
+            + "  alert(xhr.responseText);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
-        servlets.put("/test1", PostServlet1.class);
         servlets.put("/test2", PostServlet2.class);
-        startWebServer("./", new String[0], servlets);
 
-        final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/test1");
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
-    }
-
-    /**
-     * Servlet for {@link #post()}.
-     */
-    public static class PostServlet1 extends ServletContentWrapper {
-
-        /** Constructor. */
-        public PostServlet1() {
-            super(getModifiedContent("<html><head><script>\n"
-                    + "function test() {\n"
-                    + "  var xhr = " + XHRInstantiation_ + ";\n"
-                    + "  xhr.open('POST', '/test2?a=b', false);\n"
-                    + "  xhr.send('');\n"
-                    + "  alert(xhr.responseText);\n"
-                    + "}\n"
-                    + "</script></head><body onload='test()'></body></html>"));
-        }
+        loadPageWithAlerts2(html, servlets);
     }
 
     /**

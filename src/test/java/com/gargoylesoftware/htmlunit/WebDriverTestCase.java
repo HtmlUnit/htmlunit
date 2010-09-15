@@ -271,27 +271,25 @@ public abstract class WebDriverTestCase extends WebTestCase {
             final Map<String, Class< ? extends Servlet>> servlets) throws Exception {
         stopWebServer();
         LAST_TEST_MockWebConnection_ = Boolean.FALSE;
-        if (STATIC_SERVER_ == null) {
-            STATIC_SERVER_ = new Server(PORT);
+        STATIC_SERVER_ = new Server(PORT);
 
-            final WebAppContext context = new WebAppContext();
-            context.setContextPath("/");
-            context.setResourceBase(resourceBase);
+        final WebAppContext context = new WebAppContext();
+        context.setContextPath("/");
+        context.setResourceBase(resourceBase);
 
-            for (final String pathSpec : servlets.keySet()) {
-                final Class< ? extends Servlet> servlet = servlets.get(pathSpec);
-                context.addServlet(servlet, pathSpec);
-            }
-            final WebAppClassLoader loader = new WebAppClassLoader(context);
-            if (classpath != null) {
-                for (final String path : classpath) {
-                    loader.addClassPath(path);
-                }
-            }
-            context.setClassLoader(loader);
-            STATIC_SERVER_.setHandler(context);
-            STATIC_SERVER_.start();
+        for (final String pathSpec : servlets.keySet()) {
+            final Class< ? extends Servlet> servlet = servlets.get(pathSpec);
+            context.addServlet(servlet, pathSpec);
         }
+        final WebAppClassLoader loader = new WebAppClassLoader(context);
+        if (classpath != null) {
+            for (final String path : classpath) {
+                loader.addClassPath(path);
+            }
+        }
+        context.setClassLoader(loader);
+        STATIC_SERVER_.setHandler(context);
+        STATIC_SERVER_.start();
     }
 
     /**
@@ -482,10 +480,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
         throws Exception {
         expandExpectedAlertsVariables(URL_FIRST);
         final String[] expectedAlerts = getExpectedAlerts();
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts); // still useful sometimes
 
         final WebDriver driver = loadPage2(html, url);
 
+        verifyAlerts(maxWaitTime, expectedAlerts, driver);
+        return driver;
+    }
+
+    private void verifyAlerts(final long maxWaitTime, final String[] expectedAlerts, final WebDriver driver)
+        throws Exception {
         // gets the collected alerts, waiting a bit if necessary
         List<String> actualAlerts = getCollectedAlerts(driver);
         final long maxWait = System.currentTimeMillis() + maxWaitTime;
@@ -495,6 +498,45 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
 
         assertEquals(expectedAlerts, actualAlerts);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * @param html the HTML to use for the default response
+     * @param servlets the additional servlets to configure with their mapping
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final String html,
+            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
+        return loadPageWithAlerts2(html, getDefaultUrl(), 1000, servlets);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * @param html the HTML to use for the default page
+     * @param url the URL to use to load the page
+     * @param maxWaitTime the maximum time to wait to get the alerts (im ms)
+     * @param servlets the additional servlets to configure with their mapping
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final String html, final URL url, final long maxWaitTime,
+            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
+
+        expandExpectedAlertsVariables(getDefaultUrl());
+        final String[] expectedAlerts = getExpectedAlerts();
+
+        servlets.put("/*", MockWebConnectionServlet.class);
+        getMockWebConnection().setResponse(url, html);
+        MockWebConnectionServlet.MockConnection_ = getMockWebConnection();
+
+        startWebServer("./", null, servlets);
+
+        final WebDriver driver = getWebDriver();
+        driver.get(url.toExternalForm());
+
+        verifyAlerts(maxWaitTime, expectedAlerts, driver);
         return driver;
     }
 
