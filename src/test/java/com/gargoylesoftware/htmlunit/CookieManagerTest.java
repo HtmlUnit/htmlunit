@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.http.client.CookieStore;
 import org.apache.http.impl.client.BasicCookieStore;
@@ -338,5 +339,19 @@ public class CookieManagerTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html, 2000);
+    }
+
+    /**
+     * Regression test for bug 3053526: HtmlUnit was throwing an Exception when asking for cookies
+     * of "about:blank".
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cookiesForAboutBlank() throws Exception {
+        final WebClient webClient = getWebClient();
+        final HtmlPage htmlPage = webClient.getPage("about:blank");
+
+        final Set<Cookie> cookies = webClient.getCookieManager().getCookies(htmlPage.getUrl());
+        assertTrue(cookies.toString(), cookies.isEmpty());
     }
 }

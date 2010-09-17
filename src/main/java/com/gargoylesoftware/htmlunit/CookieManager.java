@@ -100,7 +100,14 @@ public class CookieManager implements Serializable {
     public synchronized Set<Cookie> getCookies(final URL url) {
         final String host = url.getHost();
         final String path = url.getPath();
-        final boolean secure = "https".equals(url.getProtocol());
+        final String protocol = url.getProtocol();
+        final boolean secure = "https".equals(protocol);
+
+        // URLs like "about:blank" don't have cookies and we need to catch these
+        // cases here before HttpClient complains
+        if (!"http".equals(protocol) && !"https".equals(protocol)) {
+            return Collections.emptySet();
+        }
 
         final int port;
         if (url.getPort() != -1) {
