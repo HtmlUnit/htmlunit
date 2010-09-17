@@ -19,7 +19,7 @@
                 Consider &lt;noscript&gt;'s body as plain text for FF and discard it totally for IE.
             </action>
             <action type="fix" dev="asashour" issue="3053473">
-                ObjectInstantiationException: updated to expose the underlying 'cause' excpetion.
+                ObjectInstantiationException: updated to expose the underlying 'cause' exception.
             </action>
             <action type="update" dev="asashour">
                 Deprecate BrowserVersion.FIREFOX_3.
