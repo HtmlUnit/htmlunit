@@ -15,17 +15,18 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.security.GeneralSecurityException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.AbstractHttpClient;
-
-import com.gargoylesoftware.htmlunit.ssl.InsecureTrustManager;
 
 /**
  * Ideally should be part of {@link HttpWebConnection},
@@ -55,5 +56,36 @@ final class HttpWebConnectionInsecureSSL {
             final SchemeRegistry schemeRegistry = httpClient.getConnectionManager().getSchemeRegistry();
             schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
         }
+    }
+}
+
+/**
+ * A completely insecure (yet very easy to use) x509 trust manager. This manager trusts all servers
+ * and all clients, regardless of credentials or lack thereof.
+ *
+ * @version $Revision$
+ * @author Daniel Gredler
+ */
+class InsecureTrustManager implements X509TrustManager {
+
+    /**
+     * {@inheritDoc}
+     */
+    public void checkClientTrusted(final X509Certificate[] chain, final String authType) throws CertificateException {
+        // Everyone is trusted!
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void checkServerTrusted(final X509Certificate[] chain, final String authType) throws CertificateException {
+        // Everyone is trusted!
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public X509Certificate[] getAcceptedIssuers() {
+        return new X509Certificate[0];
     }
 }
