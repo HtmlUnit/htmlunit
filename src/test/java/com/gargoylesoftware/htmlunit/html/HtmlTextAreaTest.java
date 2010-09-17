@@ -132,7 +132,9 @@ public class HtmlTextAreaTest extends WebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlTextArea textArea1 = form.getTextAreaByName("textArea1");
-        assertEquals("<textarea name=\"textArea1\"> foo \n bar </textarea>", textArea1.asXml());
+        final String expected1 = "<textarea name=\"textArea1\"> foo \n bar </textarea>";
+        assertEquals(expected1, textArea1.asXml());
+        assertTrue(form.asXml(), form.asXml().contains(expected1));
 
         final HtmlTextArea textArea2 = form.getTextAreaByName("textArea2");
         assertEquals("<textarea name=\"textArea2\"></textarea>", textArea2.asXml());
@@ -146,11 +148,6 @@ public class HtmlTextAreaTest extends WebTestCase {
      */
     @Test
     public void testPreventDefault() throws Exception {
-        testPreventDefault(BrowserVersion.FIREFOX_3);
-        testPreventDefault(BrowserVersion.INTERNET_EXPLORER_7);
-    }
-
-    private void testPreventDefault(final BrowserVersion browserVersion) throws Exception {
         final String html =
               "<html><head><script>\n"
             + "  function handler(e) {\n"
@@ -167,7 +164,7 @@ public class HtmlTextAreaTest extends WebTestCase {
             + "<textarea id='text1'></textarea>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(browserVersion, html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlTextArea text1 = page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abc", text1.getText());
