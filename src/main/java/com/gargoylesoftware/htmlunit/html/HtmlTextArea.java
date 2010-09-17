@@ -394,7 +394,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
         printWriter.print(">");
         printWriter.print(StringEscapeUtils.escapeXml(getText()));
-        printWriter.print(indent + "</textarea>");
+        printWriter.print("</textarea>");
     }
 
     /**

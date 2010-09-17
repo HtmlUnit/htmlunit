@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3058241">
+                HtmlTextArea.asXml(): don't append indent spaces before closing tag.
+            </action>
             <action type="fix" dev="mguillem" issue="3053526">
                 Fix exception when asking CookieManager for cookies of "about:blank".
             </action>
