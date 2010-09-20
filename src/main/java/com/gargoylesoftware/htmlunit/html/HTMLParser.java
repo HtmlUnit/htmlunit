@@ -445,6 +445,9 @@ public final class HTMLParser {
 
             handleCharacters();
 
+            if (namespaceURI != null) {
+                namespaceURI = namespaceURI.trim();
+            }
             final String tagLower = localName.toLowerCase();
 
             if (page_.isParsingHtmlSnippet() && (tagLower.equals("html") || tagLower.equals("body"))) {

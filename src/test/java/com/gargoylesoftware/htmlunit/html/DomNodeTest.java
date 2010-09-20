@@ -348,6 +348,22 @@ public class DomNodeTest extends WebTestCase {
     }
 
     /**
+     * Regression test for bug 3035213: xmlns value has to be trimmed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getByXPath_trim_namespace() throws Exception {
+        final String html = "<html xmlns=' http://www.w3.org/1999/xhtml'>\n"
+            + "<body>\n"
+            + "<div><span>bla</span></div>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final List< ? > results = page.getByXPath("//div");
+        assertEquals(1, results.size());
+    }
+
+    /**
      * Test that element.selectNodes("/tagName") searches from root of the tree, not from that specific element.
      * @throws Exception if the test fails
      */
