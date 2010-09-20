@@ -7,7 +7,7 @@
     <body>
         <release version="2.9" date="???" description="Bugfixes">
             <action type="fix" dev="mguillem" issue="3035213">
-                Ignore leading and trailing spaces in namespace values. 
+                Ignore leading and trailing spaces in namespace values.
             </action>
             <action type="fix" dev="mguillem" issue="3058241">
                 HtmlTextArea.asXml(): don't append indent spaces before closing tag.
