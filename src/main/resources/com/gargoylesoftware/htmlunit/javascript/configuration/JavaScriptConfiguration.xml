@@ -1943,6 +1943,9 @@
         <property name="length" readable="true" writable="true"/>
         <function name="add"/>
         <function name="item"/>
+        <function name="remove">
+            <browser name="Internet Explorer"/>
+        </function>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParagraphElement"

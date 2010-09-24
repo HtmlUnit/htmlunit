@@ -260,4 +260,18 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         // depending on the value of index
         put(index, null, newOptionObject);
     }
+
+    /**
+     * Removes the option at the specified index.
+     * @param index the option index
+     */
+    public void jsxFunction_remove(final int index) {
+        if (index < 0) {
+            Context.reportRuntimeError("Invalid index: " + index);
+        }
+
+        if (index < jsxGet_length()) {
+            htmlSelect_.removeOption(index);
+        }
+    }
 }

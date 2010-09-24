@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="update" dev="mguillem" issue="3074641">
+                JavaScript: add support for function HTMLOptionsCollection.remove (IE only).
+            </action>
             <action type="update" dev="mguillem" issue="3074609">
                 Escape only &lt;, &amp; and &quot; in attribute values where it was not yet the case (for instance HtmlSubmitInput).
             </action>

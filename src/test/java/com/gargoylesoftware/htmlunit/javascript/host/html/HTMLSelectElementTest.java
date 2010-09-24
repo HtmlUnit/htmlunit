@@ -474,11 +474,41 @@ public class HTMLSelectElementTest extends WebTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "    var options = document.form1.select1;\n"
+            + "    var select = document.form1.select1;\n"
+            + "    select.remove(1);\n"
+            + "    alert(select.length);\n"
+            + "    alert(select[1].text);\n"
+            + "    alert(select[1].value);\n"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option name='option1' value='value1'>One</option>\n"
+            + "        <option name='option2' value='value2' selected>Two</option>\n"
+            + "        <option name='option3' value='value3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Method remove on the options collection exists only for IE.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "exception", IE = { "2", "Three", "value3" })
+    public void optionsRemoveMethod() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var options = document.form1.select1.options;\n"
+            + "  try {\n"
             + "    options.remove(1);\n"
             + "    alert(options.length);\n"
             + "    alert(options[1].text);\n"
             + "    alert(options[1].value);\n"
+            + "  } catch(e) { alert('exception'); }\n"
             + "}</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
