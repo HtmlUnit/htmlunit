@@ -227,4 +227,24 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
 
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
+
+    /**
+     * Test that attributes values are not escaped
+     * See bug 3074609.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXmlNoEscape() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='Content-Type' content='text/html; charset=Cp1251'>\n"
+            + "</head><body>\n"
+            + "<input type='submit' value='&#1083;'/>\n"
+            + "<input type='reset' value='&#1083;'/>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final String xml = page.asXml();
+        assertTrue("\u043B" + xml, xml.contains("<input type=\"submit\" value=\"\u043B\"/>"));
+        assertTrue(xml, xml.contains("<input type=\"reset\" value=\"\u043B\"/>"));
+    }
 }

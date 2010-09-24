@@ -58,6 +58,42 @@ public final class StringUtils {
     }
 
     /**
+     * Escape the string to be used as attribute value.
+     * Only <, & and " have to be escaped (see http://www.w3.org/TR/REC-xml/#d0e888).
+     * @param attValue the attribute value
+     * @return the escaped value
+     */
+    public static String escapeXmlAttributeValue(final String attValue) {
+        final int len = attValue.length();
+        StringBuilder sb = null;
+        for (int i = len - 1; i >= 0; --i) {
+            final char c = attValue.charAt(i);
+            String replacement = null;
+            if (c == '<') {
+                replacement = "&lt;";
+            }
+            else if (c == '&') {
+                replacement = "&amp;";
+            }
+            else if (c == '\"') {
+                replacement = "&quot;";
+            }
+
+            if (replacement != null) {
+                if (sb == null) {
+                    sb = new StringBuilder(attValue);
+                }
+                sb.replace(i, i + 1, replacement);
+            }
+        }
+
+        if (sb != null) {
+            return sb.toString();
+        }
+        return attValue;
+    }
+
+    /**
      * Returns <tt>true</tt> if the specified string contains whitespace, <tt>false</tt> otherwise.
      *
      * @param s the string to check for whitespace

@@ -26,7 +26,6 @@ import javax.imageio.ImageReader;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
@@ -136,8 +135,9 @@ class XmlSerializer {
             buffer_.append(" ");
             buffer_.append(name);
             buffer_.append("=\"");
-            buffer_.append(StringEscapeUtils.escapeXml(attributes.get(name).getNodeValue()));
-            buffer_.append("\"");
+            final String value = attributes.get(name).getNodeValue();
+            buffer_.append(com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlAttributeValue(value));
+            buffer_.append('"');
         }
     }
 

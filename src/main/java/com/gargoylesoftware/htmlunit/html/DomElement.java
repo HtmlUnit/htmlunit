@@ -30,6 +30,7 @@ import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.util.MapWrapper;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * @version $Revision$
@@ -138,40 +139,9 @@ public class DomElement extends DomNamespaceNode implements Element {
             printWriter.print(" ");
             printWriter.print(name);
             printWriter.print("=\"");
-            printWriter.print(escapeXmlAttributeValue(attributes_.get(name).getNodeValue()));
+            printWriter.print(StringUtils.escapeXmlAttributeValue(attributes_.get(name).getNodeValue()));
             printWriter.print("\"");
         }
-    }
-
-    private String escapeXmlAttributeValue(final String attValue) {
-        // only <, & and " have to be escaped (see http://www.w3.org/TR/REC-xml/#d0e888)
-        final int len = attValue.length();
-        StringBuilder sb = null;
-        for (int i = len - 1; i >= 0; --i) {
-            final char c = attValue.charAt(i);
-            String replacement = null;
-            if (c == '<') {
-                replacement = "&lt;";
-            }
-            else if (c == '&') {
-                replacement = "&amp;";
-            }
-            else if (c == '\"') {
-                replacement = "&quot;";
-            }
-
-            if (replacement != null) {
-                if (sb == null) {
-                    sb = new StringBuilder(attValue);
-                }
-                sb.replace(i, i + 1, replacement);
-            }
-        }
-
-        if (sb != null) {
-            return sb.toString();
-        }
-        return attValue;
     }
 
     /**

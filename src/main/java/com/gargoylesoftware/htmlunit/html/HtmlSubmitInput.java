@@ -18,11 +18,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
-import org.apache.commons.lang.StringEscapeUtils;
-
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Wrapper for the HTML element "input".
@@ -107,12 +106,13 @@ public class HtmlSubmitInput extends HtmlInput {
         printWriter.print(getTagName());
 
         for (final DomAttr attribute : getAttributesMap().values()) {
-            if (!attribute.getNodeName().equals("value") || !attribute.getValue().equals(DEFAULT_VALUE)) {
+            final String name = attribute.getNodeName();
+            final String value = attribute.getValue();
+            if (!name.equals("value") || !value.equals(DEFAULT_VALUE)) {
                 printWriter.print(" ");
-                final String name = attribute.getNodeName();
                 printWriter.print(name);
                 printWriter.print("=\"");
-                printWriter.print(StringEscapeUtils.escapeXml(attribute.getNodeValue()));
+                printWriter.print(StringUtils.escapeXmlAttributeValue(value));
                 printWriter.print("\"");
             }
         }

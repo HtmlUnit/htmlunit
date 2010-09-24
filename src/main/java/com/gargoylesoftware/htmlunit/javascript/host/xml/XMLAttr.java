@@ -14,9 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import org.apache.commons.lang.StringEscapeUtils;
-
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for an Attribute of XMLElement.
@@ -58,7 +57,7 @@ public class XMLAttr extends Attr {
         sb.append(jsxGet_name());
         sb.append('=');
         sb.append('"');
-        sb.append(StringEscapeUtils.escapeXml(jsxGet_value()));
+        sb.append(StringUtils.escapeXmlAttributeValue(jsxGet_value()));
         sb.append('"');
         return sb.toString();
     }

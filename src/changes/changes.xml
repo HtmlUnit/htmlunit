@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="update" dev="mguillem" issue="3074609">
+                Escape only &lt;, &amp; and &quot; in attribute values where it was not yet the case (for instance HtmlSubmitInput).
+            </action>
             <action type="fix" dev="mguillem" issue="3035213">
                 Ignore leading and trailing spaces in namespace values.
             </action>
