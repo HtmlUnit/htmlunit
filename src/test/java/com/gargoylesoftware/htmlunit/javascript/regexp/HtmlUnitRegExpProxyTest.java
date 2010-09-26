@@ -686,7 +686,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("INPUT")
-    @NotYetImplemented
     public void test2() throws Exception {
         final String html = buildHtml("var description = 'INPUT#BasisRenameInput';\n"
                 + "if(description.match(/^\\s*([a-z0-9\\_\\-]+)/i)) {\n"

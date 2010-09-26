@@ -26,6 +26,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.NativeRegExp;
 import net.sourceforge.htmlunit.corejs.javascript.regexp.RegExpImpl;
+import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -37,6 +38,7 @@ import org.apache.commons.logging.LogFactory;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlUnitRegExpProxy extends RegExpImpl {
 
@@ -90,17 +92,14 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                     final int flags = reData.getJavaFlags();
                     final Pattern pattern = Pattern.compile(regex, flags);
                     final Matcher matcher = pattern.matcher(thisString);
-                    if (reData.hasFlag('g')) {
-                        return doReplacement(thisString, replacement, matcher, true);
-                    }
-                    return doReplacement(thisString, replacement, matcher, false);
+                    return doReplacement(thisString, replacement, matcher, reData.hasFlag('g'));
                 }
                 catch (final PatternSyntaxException e) {
                     LOG.warn(e.getMessage(), e);
                 }
             }
         }
-        else if (RA_MATCH == actionType) {
+        else if (RA_MATCH == actionType || RA_SEARCH == actionType) {
             if (args.length == 0) {
                 return null;
             }
@@ -116,15 +115,28 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
             final Pattern pattern = Pattern.compile(reData.getJavaPattern(), reData.getJavaFlags());
             final Matcher matcher = pattern.matcher(thisString);
-            if (!matcher.find()) {
+
+            final boolean found = matcher.find();
+            if (RA_SEARCH == actionType) {
+                if (found) {
+                    setProperties(matcher, thisString, matcher.start(), matcher.end());
+                    return matcher.start();
+                }
+                return -1;
+            }
+
+            if (!found) {
                 return null;
             }
             final int index = matcher.start(0);
             final List<Object> groups = new ArrayList<Object>();
             if (reData.hasFlag('g')) { // has flag g
                 groups.add(matcher.group(0));
+                setProperties(matcher, thisString, matcher.start(0), matcher.end(0));
+
                 while (matcher.find()) {
                     groups.add(matcher.group(0));
+                    setProperties(matcher, thisString, matcher.start(0), matcher.end(0));
                 }
             }
             else {
@@ -135,6 +147,8 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
                     }
                     groups.add(group);
                 }
+
+                setProperties(matcher, thisString, matcher.start(), matcher.end());
             }
             final Scriptable response = cx.newArray(scope, groups.toArray());
             // the additional properties (cf ECMA script reference 15.10.6.2 13)
@@ -161,6 +175,8 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             }
             sb.append(localReplacement);
             previousIndex = matcher.end();
+
+            setProperties(matcher, originalString, matcher.start(), previousIndex);
             if (!replaceAll) {
                 break;
             }
@@ -265,6 +281,57 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         }
         finally {
             ScriptRuntime.setRegExpProxy(cx, this);
+        }
+    }
+
+    private void setProperties(final Matcher matcher, final String thisString, final int startPos, final int endPos) {
+        // lastMatch
+        final String match = matcher.group();
+        if (match == null) {
+            lastMatch = SubString.emptySubString;
+        }
+        else {
+            lastMatch = new FixedSubString(match);
+        }
+
+        // parens
+        final int count = Math.min(9, matcher.groupCount());
+        parens = new SubString[count];
+        for (int i = 0; i < count; i++) {
+            final String group = matcher.group(i + 1);
+            if (group == null) {
+                parens[i] = SubString.emptySubString;
+            }
+            else {
+                parens[i] = new FixedSubString(group);
+            }
+        }
+
+        // lastParen
+        if (matcher.groupCount() > 0) {
+            final String last = matcher.group(matcher.groupCount());
+            if (last == null) {
+                lastParen = SubString.emptySubString;
+            }
+            else {
+                lastParen = new FixedSubString(last);
+            }
+        }
+
+        // leftContext
+        if (startPos > 0) {
+            leftContext = new FixedSubString(thisString.substring(0, startPos));
+        }
+        else {
+            leftContext = SubString.emptySubString;
+        }
+
+        // rightContext
+        if (endPos < thisString.length()) {
+            rightContext = new FixedSubString(thisString.substring(endPos));
+        }
+        else {
+            rightContext = SubString.emptySubString;
         }
     }
 
@@ -375,5 +442,31 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         re = re.replaceAll("(?<!\\\\)\\{(?!\\d)", "\\\\{");
         re = re.replaceAll("(?<!(\\d,?|\\\\))\\}", "\\\\}");
         return re;
+    }
+
+    /**
+     *  Static version of a SubString that does not fill the
+     *  chars array. This helps in some situations to solve
+     *  performance issues.
+     *  Use this only if you sure, that the chars are no longer
+     *  needed.
+     */
+    private static class FixedSubString extends SubString {
+
+        private String value_;
+
+        /**
+         * Constructor.
+         *
+         * @param str the value
+         */
+        public FixedSubString(final String str) {
+            value_ = str;
+        }
+
+        @Override
+        public String toString() {
+            return value_;
+        }
     }
 }

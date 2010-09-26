@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                JavaScript: add support for RegExp.$1..9, RegExp.lastMatch, RegExp.lastParen, RegExp.leftContext and RegExp.rightContext.
+            </action>
             <action type="update" dev="mguillem" issue="3074641">
                 JavaScript: add support for function HTMLOptionsCollection.remove (IE only).
             </action>
