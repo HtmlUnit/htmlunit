@@ -288,7 +288,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         // lastMatch
         final String match = matcher.group();
         if (match == null) {
-            lastMatch = SubString.emptySubString;
+            lastMatch = new SubString();
         }
         else {
             lastMatch = new FixedSubString(match);
@@ -300,7 +300,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         for (int i = 0; i < count; i++) {
             final String group = matcher.group(i + 1);
             if (group == null) {
-                parens[i] = SubString.emptySubString;
+                parens[i] = new SubString();
             }
             else {
                 parens[i] = new FixedSubString(group);
@@ -311,7 +311,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         if (matcher.groupCount() > 0) {
             final String last = matcher.group(matcher.groupCount());
             if (last == null) {
-                lastParen = SubString.emptySubString;
+                lastParen = new SubString();
             }
             else {
                 lastParen = new FixedSubString(last);
@@ -323,7 +323,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             leftContext = new FixedSubString(thisString.substring(0, startPos));
         }
         else {
-            leftContext = SubString.emptySubString;
+            leftContext = new SubString();
         }
 
         // rightContext
@@ -331,7 +331,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             rightContext = new FixedSubString(thisString.substring(endPos));
         }
         else {
-            rightContext = SubString.emptySubString;
+            rightContext = new SubString();
         }
     }
 
