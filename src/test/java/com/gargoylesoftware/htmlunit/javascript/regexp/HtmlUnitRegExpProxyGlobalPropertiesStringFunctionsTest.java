@@ -32,16 +32,11 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebDriverTestCase {
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("HtmlUnit, $n, , , , , , , , , , -, HtmlUnit, , 1234, xyz")
-    public void regExpMatchNoGroups() throws Exception {
+    private void testMatch(final String string, final String regexp) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit');\n"
+            + "    var str = '" + string + "'\n;"
+            + "    var myRegExp = " + regexp + ";\n"
             + "    alert(str.match(myRegExp));\n"
             + "    alert('$n');\n"
             + "    alert(RegExp.$1);\n"
@@ -63,6 +58,15 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("HtmlUnit, $n, , , , , , , , , , -, HtmlUnit, , 1234, xyz")
+    public void regExpMatchNoGroups() throws Exception {
+        testMatch("1234HtmlUnitxyz", "new RegExp('HtmlUnit')");
     }
 
     /**
@@ -71,31 +75,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("HtmlUnit,Html, $n, Html, , , , , , , , , -, HtmlUnit, Html, 1234, xyz")
     public void regExpMatchOneGroup() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Html)Unit');\n"
-            + "    alert(str.match(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testMatch("1234HtmlUnitxyz", "new RegExp('(Html)Unit')");
     }
 
     /**
@@ -104,31 +84,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("HtmlUnit,Ht,lU, $n, Ht, lU, , , , , , , , -, HtmlUnit, lU, 1234, xyz")
     public void regExpMatchManyGroups() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Ht)m(lU)nit');\n"
-            + "    alert(str.match(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testMatch("1234HtmlUnitxyz", "new RegExp('(Ht)m(lU)nit')");
     }
 
     /**
@@ -137,31 +93,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("HtmlUnitxy,H,t,m,l,U,n,i,t,x,y, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z")
     public void regExpMatchTooManyGroups() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)');\n"
-            + "    alert(str.match(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testMatch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)')");
     }
 
     /**
@@ -170,31 +102,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("HtmlUnit, $n, , , , , , , , , , -, HtmlUnit, , 1234, xyz")
     public void regExpMatchNoGroupsIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'i');\n"
-            + "    alert(str.match(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testMatch("1234HtmlUnitxyz", "new RegExp('HtmlUnit', 'i')");
     }
 
     /**
@@ -203,31 +111,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("HtmlUnit,Html, $n, Html, , , , , , , , , -, HtmlUnit, Html, 1234, xyz")
     public void regExpMatchOneGroupIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Html)Unit', 'i');\n"
-            + "    alert(str.match(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testMatch("1234HtmlUnitxyz", "new RegExp('(Html)Unit', 'i')");
     }
 
     /**
@@ -236,31 +120,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("HtmlUnit,Ht,lU, $n, Ht, lU, , , , , , , , -, HtmlUnit, lU, 1234, xyz")
     public void regExpMatchManyGroupsIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Ht)m(lU)nit', 'i');\n"
-            + "    alert(str.match(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testMatch("1234HtmlUnitxyz", "new RegExp('(Ht)m(lU)nit', 'i')");
     }
 
     /**
@@ -269,31 +129,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("HtmlUnitxy,H,t,m,l,U,n,i,t,x,y, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z")
     public void regExpMatchTooManyGroupsIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'i');\n"
-            + "    alert(str.match(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testMatch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'i')");
     }
 
     /**
@@ -302,31 +138,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("HtmlUnit, $n, , , , , , , , , , -, HtmlUnit, , 1234, xyz")
     public void regExpMatchNoGroupsGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'g');\n"
-            + "    alert(str.match(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testMatch("1234HtmlUnitxyz", "new RegExp('HtmlUnit', 'g')");
     }
 
     /**
@@ -335,31 +147,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("HtmlUnit, $n, Html, , , , , , , , , -, HtmlUnit, Html, 1234, xyz")
     public void regExpMatchOneGroupGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Html)Unit', 'g');\n"
-            + "    alert(str.match(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testMatch("1234HtmlUnitxyz", "new RegExp('(Html)Unit', 'g')");
     }
 
     /**
@@ -368,31 +156,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("Html,Htnl,Htol, $n, Htol, , , , , , , , , -, Htol, Htol, 1234HtmlUnit for Htnl; , xyz")
     public void regExpMatchOneGroupGlobalManyMatches() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnit for Htnl; Htolxyz'\n;"
-            + "    var myRegExp=new RegExp('(Ht.l)', 'g');\n"
-            + "    alert(str.match(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testMatch("1234HtmlUnit for Htnl; Htolxyz", "new RegExp('(Ht.l)', 'g')");
     }
 
     /**
@@ -401,31 +165,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("HtmlUnit, $n, Ht, lU, , , , , , , , -, HtmlUnit, lU, 1234, xyz")
     public void regExpMatchManyGroupsGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Ht)m(lU)nit', 'g');\n"
-            + "    alert(str.match(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testMatch("1234HtmlUnitxyz", "new RegExp('(Ht)m(lU)nit', 'g')");
     }
 
     /**
@@ -434,11 +174,15 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("HtmlUnitxy, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z")
     public void regExpMatchTooManyGroupsGlobal() throws Exception {
+        testMatch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'g')");
+    }
+
+    private void testSearch(final String string, final String regexp) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'g');\n"
-            + "    alert(str.match(myRegExp));\n"
+            + "    var str = '" + string + "'\n;"
+            + "    var myRegExp = " + regexp + ";\n"
+            + "    alert(str.search(myRegExp));\n"
             + "    alert('$n');\n"
             + "    alert(RegExp.$1);\n"
             + "    alert(RegExp.$2);\n"
@@ -467,31 +211,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, , , , , , , , , , -, HtmlUnit, , 1234, xyz")
     public void regExpSearchNoGroups() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit');\n"
-            + "    alert(str.search(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testSearch("1234HtmlUnitxyz", "new RegExp('HtmlUnit')");
     }
 
     /**
@@ -500,31 +220,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, Html, , , , , , , , , -, HtmlUnit, Html, 1234, xyz")
     public void regExpSearchOneGroup() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Html)Unit');\n"
-            + "    alert(str.search(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testSearch("1234HtmlUnitxyz", "new RegExp('(Html)Unit')");
     }
 
     /**
@@ -533,31 +229,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, Ht, lU, , , , , , , , -, HtmlUnit, lU, 1234, xyz")
     public void regExpSearchManyGroups() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Ht)m(lU)nit');\n"
-            + "    alert(str.search(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testSearch("1234HtmlUnitxyz", "new RegExp('(Ht)m(lU)nit')");
     }
 
     /**
@@ -566,31 +238,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z")
     public void regExpSearchTooManyGroups() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)');\n"
-            + "    alert(str.search(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testSearch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)')");
     }
 
     /**
@@ -599,31 +247,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, , , , , , , , , , -, HtmlUnit, , 1234, xyz")
     public void regExpSearchNoGroupsIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'i');\n"
-            + "    alert(str.search(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testSearch("1234HtmlUnitxyz", "new RegExp('HtmlUnit', 'i')");
     }
 
     /**
@@ -632,31 +256,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, Html, , , , , , , , , -, HtmlUnit, Html, 1234, xyz")
     public void regExpSearchOneGroupIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Html)Unit', 'i');\n"
-            + "    alert(str.search(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testSearch("1234HtmlUnitxyz", "new RegExp('(Html)Unit', 'i')");
     }
 
     /**
@@ -665,31 +265,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, Ht, lU, , , , , , , , -, HtmlUnit, lU, 1234, xyz")
     public void regExpSearchManyGroupsIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Ht)m(lU)nit', 'i');\n"
-            + "    alert(str.search(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testSearch("1234HtmlUnitxyz", "new RegExp('(Ht)m(lU)nit', 'i')");
     }
 
     /**
@@ -698,31 +274,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z")
     public void regExpSearchTooManyGroupsIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'i');\n"
-            + "    alert(str.search(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testSearch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'i')");
     }
 
     /**
@@ -731,31 +283,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, , , , , , , , , , -, HtmlUnit, , 1234, xyz")
     public void regExpSearchNoGroupsGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'g');\n"
-            + "    alert(str.search(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testSearch("1234HtmlUnitxyz", "new RegExp('HtmlUnit', 'g')");
     }
 
     /**
@@ -764,31 +292,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, Html, , , , , , , , , -, HtmlUnit, Html, 1234, xyz")
     public void regExpSearchOneGroupGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Html)Unit', 'g');\n"
-            + "    alert(str.search(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testSearch("1234HtmlUnitxyz", "new RegExp('(Html)Unit', 'g')");
     }
 
     /**
@@ -797,31 +301,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, Html, , , , , , , , , -, Html, Html, 1234, Unit for Html; Htmlxyz")
     public void regExpSearchOneGroupGlobalManyMatches() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnit for Html; Htmlxyz'\n;"
-            + "    var myRegExp=new RegExp('(Html)', 'g');\n"
-            + "    alert(str.search(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testSearch("1234HtmlUnit for Html; Htmlxyz", "new RegExp('(Html)', 'g')");
     }
 
     /**
@@ -830,31 +310,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, Ht, lU, , , , , , , , -, HtmlUnit, lU, 1234, xyz")
     public void regExpSearchManyGroupsGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Ht)m(lU)nit', 'g');\n"
-            + "    alert(str.search(myRegExp));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testSearch("1234HtmlUnitxyz", "new RegExp('(Ht)m(lU)nit', 'g')");
     }
 
     /**
@@ -863,11 +319,15 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("4, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z")
     public void regExpSearchTooManyGroupsGlobal() throws Exception {
+        testSearch("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'g')");
+    }
+
+    private void testReplace(final String string, final String regexp) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'g');\n"
-            + "    alert(str.search(myRegExp));\n"
+            + "    var str = '" + string + "'\n;"
+            + "    var myRegExp = " + regexp + ";\n"
+            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
             + "    alert('$n');\n"
             + "    alert(RegExp.$1);\n"
             + "    alert(RegExp.$2);\n"
@@ -896,31 +356,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("1234RegularExpressionsxyz, $n, , , , , , , , , , -, HtmlUnit, , 1234, xyz")
     public void regExpReplaceNoGroups() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnitxyz", "new RegExp('HtmlUnit')");
     }
 
     /**
@@ -929,31 +365,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("1234RegularExpressionsxyz, $n, Html, , , , , , , , , -, HtmlUnit, Html, 1234, xyz")
     public void regExpReplaceOneGroup() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Html)Unit');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnitxyz", "new RegExp('(Html)Unit')");
     }
 
     /**
@@ -962,31 +374,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("1234RegularExpressionsxyz, $n, Ht, lU, , , , , , , , -, HtmlUnit, lU, 1234, xyz")
     public void regExpReplaceManyGroups() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Ht)m(lU)nit');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnitxyz", "new RegExp('(Ht)m(lU)nit')");
     }
 
     /**
@@ -995,31 +383,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("1234RegularExpressionsz, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z")
     public void regExpReplaceTooManyGroups() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)')");
     }
 
     /**
@@ -1028,31 +392,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("1234RegularExpressionsxyz, $n, , , , , , , , , , -, HtmlUnit, , 1234, xyz")
     public void regExpReplaceNoGroupsIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'i');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnitxyz", "new RegExp('HtmlUnit', 'i')");
     }
 
     /**
@@ -1061,31 +401,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("1234RegularExpressionsxyz, $n, Html, , , , , , , , , -, HtmlUnit, Html, 1234, xyz")
     public void regExpReplaceOneGroupIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Html)Unit', 'i');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnitxyz", "new RegExp('(Html)Unit', 'i')");
     }
 
     /**
@@ -1094,31 +410,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("1234RegularExpressionsxyz, $n, Ht, lU, , , , , , , , -, HtmlUnit, lU, 1234, xyz")
     public void regExpReplaceManyGroupsIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Ht)m(lU)nit', 'i');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnitxyz", "new RegExp('(Ht)m(lU)nit', 'i')");
     }
 
     /**
@@ -1127,31 +419,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("1234RegularExpressionsz, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z")
     public void regExpReplaceTooManyGroupsIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'i');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'i')");
     }
 
     /**
@@ -1160,31 +428,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("1234RegularExpressionsxyz, $n, , , , , , , , , , -, HtmlUnit, , 1234, xyz")
     public void regExpReplaceNoGroupsGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'g');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnitxyz", "new RegExp('HtmlUnit', 'g')");
     }
 
     /**
@@ -1193,31 +437,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("1234RegularExpressionsxyz, $n, Html, , , , , , , , , -, HtmlUnit, Html, 1234, xyz")
     public void regExpReplaceOneGroupGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Html)Unit', 'g');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnitxyz", "new RegExp('(Html)Unit', 'g')");
     }
 
     /**
@@ -1227,31 +447,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Alerts("1234RegularExpressionsUnit for RegularExpressions; RegularExpressionsxyz, "
                + "$n, Html, , , , , , , , , -, Html, Html, 1234HtmlUnit for Html; , xyz")
     public void regExpReplaceOneGroupGlobalManyMatches() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnit for Html; Htmlxyz'\n;"
-            + "    var myRegExp=new RegExp('(Html)', 'g');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnit for Html; Htmlxyz", "new RegExp('(Html)', 'g')");
     }
 
     /**
@@ -1260,31 +456,7 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("1234RegularExpressionsxyz, $n, Ht, lU, , , , , , , , -, HtmlUnit, lU, 1234, xyz")
     public void regExpReplaceManyGroupsGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(Ht)m(lU)nit', 'g');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnitxyz", "new RegExp('(Ht)m(lU)nit', 'g')");
     }
 
     /**
@@ -1293,30 +465,6 @@ public class HtmlUnitRegExpProxyGlobalPropertiesStringFunctionsTest extends WebD
     @Test
     @Alerts("1234RegularExpressionsz, $n, H, t, m, l, U, n, i, t, x, -, HtmlUnitxy, y, 1234, z")
     public void regExpReplaceTooManyGroupsGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='1234HtmlUnitxyz'\n;"
-            + "    var myRegExp=new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'g');\n"
-            + "    alert(str.replace(myRegExp, 'RegularExpressions'));\n"
-            + "    alert('$n');\n"
-            + "    alert(RegExp.$1);\n"
-            + "    alert(RegExp.$2);\n"
-            + "    alert(RegExp.$3);\n"
-            + "    alert(RegExp.$4);\n"
-            + "    alert(RegExp.$5);\n"
-            + "    alert(RegExp.$6);\n"
-            + "    alert(RegExp.$7);\n"
-            + "    alert(RegExp.$8);\n"
-            + "    alert(RegExp.$9);\n"
-            + "    alert('-');\n"
-            + "    alert(RegExp.lastMatch);\n"
-            + "    alert(RegExp.lastParen);\n"
-            + "    alert(RegExp.leftContext);\n"
-            + "    alert(RegExp.rightContext);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testReplace("1234HtmlUnitxyz", "new RegExp('(H)(t)(m)(l)(U)(n)(i)(t)(x)(y)', 'g')");
     }
 }
