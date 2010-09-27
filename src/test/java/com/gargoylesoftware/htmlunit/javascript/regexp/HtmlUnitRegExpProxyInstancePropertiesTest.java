@@ -32,17 +32,17 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase {
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("HtmlUnit")
-    public void regExpPropertySource() throws Exception {
+    private void testProperties(final String string, final String regexp) throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit');\n"
+            + "    var str = '" + string + "'\n;"
+            + "    var myRegExp = " + regexp + ";\n"
+            + "    alert(myRegExp.exec(str));\n"
             + "    alert(myRegExp.source);\n"
+            + "    alert(myRegExp.ignoreCase);\n"
+            + "    alert(myRegExp.global);\n"
+            + "    alert(myRegExp.multiline);\n"
+            + "    alert(myRegExp.lastIndex);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -54,384 +54,36 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("HtmlUnit")
-    public void regExpPropertySourceIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'i');\n"
-            + "    alert(myRegExp.source);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    @Alerts("HtmlUnit, HtmlUnit, false, false, false, 0")
+    public void regExpPropertyNone() throws Exception {
+        testProperties("HtmlUnit", "new RegExp('HtmlUnit')");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("HtmlUnit")
-    public void regExpPropertySourceGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'g');\n"
-            + "    alert(myRegExp.source);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("HtmlUnit")
-    public void regExpPropertySourceMultiline() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'm');\n"
-            + "    alert(myRegExp.source);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
+    @Alerts("HtmlUnit, HtmlUnit, true, false, false, 0")
     public void regExpPropertyIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit');\n"
-            + "    alert(myRegExp.ignoreCase);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testProperties("HtmlUnit", "new RegExp('HtmlUnit', 'i')");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    public void regExpPropertyIgnoreCaseIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'i');\n"
-            + "    alert(myRegExp.ignoreCase);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void regExpPropertyIgnoreCaseGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'g');\n"
-            + "    alert(myRegExp.ignoreCase);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void regExpPropertyIgnoreCaseMultiline() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'm');\n"
-            + "    alert(myRegExp.ignoreCase);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
+    @Alerts("HtmlUnit, HtmlUnit, false, true, false, 8")
     public void regExpPropertyGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit');\n"
-            + "    alert(myRegExp.global);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testProperties("HtmlUnit", "new RegExp('HtmlUnit', 'g')");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void regExpPropertyGlobalIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'i');\n"
-            + "    alert(myRegExp.global);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void regExpPropertyGlobalGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'g');\n"
-            + "    alert(myRegExp.global);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void regExpPropertyGlobalMultiline() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'm');\n"
-            + "    alert(myRegExp.global);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
+    @Alerts("HtmlUnit, HtmlUnit, false, false, true, 0")
     public void regExpPropertyMultiline() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit');\n"
-            + "    alert(myRegExp.multiline);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void regExpPropertyMultilineIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'i');\n"
-            + "    alert(myRegExp.multiline);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void regExpPropertyMultilineGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'g');\n"
-            + "    alert(myRegExp.multiline);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void regExpPropertyMultilineMultiline() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'm');\n"
-            + "    alert(myRegExp.multiline);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void regExpPropertyLastIndex() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit is great'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit');\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0, true, 0")
-    public void regExpPropertyLastIndexTest() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit is great'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit');\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "    alert(myRegExp.test(str));\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void regExpPropertyLastIndexIgnoreCase() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'i');\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0, true, 0")
-    public void regExpPropertyLastIndexIgnoreCaseTest() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit is great'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'i');\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "    alert(myRegExp.test(str));\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void regExpPropertyLastIndexGlobal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'g');\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0, true, 8")
-    public void regExpPropertyLastIndexGlobalTest() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit is great'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'g');\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "    alert(myRegExp.test(str));\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        testProperties("HtmlUnit", "new RegExp('HtmlUnit', 'm')");
     }
 
     /**
@@ -479,44 +131,6 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
             + "    var myRegExp=new RegExp('HtmlUnit', 'g');\n"
             + "    alert(myRegExp.lastIndex);\n"
             + "    alert(myRegExp.exec(str));\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void regExpPropertyLastIndexMultiline() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'm');\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0, true, 0")
-    public void regExpPropertyLastIndexMultilineTest() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var str='HtmlUnit is great'\n;"
-            + "    var myRegExp=new RegExp('HtmlUnit', 'm');\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "    alert(myRegExp.test(str));\n"
             + "    alert(myRegExp.lastIndex);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
