@@ -149,7 +149,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
             + "</head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts(html);
     }
 
     /**
@@ -174,6 +174,20 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
             + "eval('function f() { isMSIE=eval(\"false;/*@cc_on@if(@' + '_win32)isMSIE=true@end@*/\") }');\n"
             + "f();\n"
             + "alert(isMSIE);";
+        testScript(script);
+    }
+
+    /**
+     * Regression test for bug 3076667.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "Alert")
+    public void bug3076667() throws Exception {
+        final String script =
+            "/*@cc_on @*/\n"
+            + "/*@if (true) alert('Alert');\n"
+            + "@end @*/ ";
         testScript(script);
     }
 }

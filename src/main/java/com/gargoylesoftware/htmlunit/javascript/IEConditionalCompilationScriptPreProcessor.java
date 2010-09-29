@@ -85,6 +85,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             }
             sb.append(remaining);
         }
+        System.out.println(sb);
         return sb.toString();
     }
 
@@ -94,9 +95,13 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         if (body.startsWith("cc_on")) {
             body = body.substring(5);
         }
+        body = "@" + body;
         //TODO: StringScriptPreProcessor.indexOf() should be used (in order to ignore string literals)
-        body = body.replaceAll("/\\*@end", "");
         body = processIfs(body);
+        if (body.startsWith("@")) {
+            body = body.substring(1);
+        }
+        body = body.replaceAll("/\\*@end", "");
         body = replaceCompilationVariables(body, browserVersion);
         body = processSet(body);
         body = replaceCustomCompilationVariables(body);
@@ -144,7 +149,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         code = code.replaceAll("@if\\s*\\(([^\\)]+)\\)", "if ($1) {");
         code = code.replaceAll("@elif\\s*\\(([^\\)]+)\\)", "} else if ($1) {");
         code = code.replaceAll("@else", "} else {");
-        code = code.replaceAll("@end", "}");
+        code = code.replaceAll("(/\\*)?@end", "}");
         return code;
     }
 

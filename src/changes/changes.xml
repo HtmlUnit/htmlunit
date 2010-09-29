@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3076667">
+                Fix IE conditional compilation bug (IE only).
+            </action>
             <action type="update" dev="rbri">
                 JavaScript: add support for RegExp.$1..9, RegExp.lastMatch, RegExp.lastParen, RegExp.leftContext and RegExp.rightContext.
             </action>
