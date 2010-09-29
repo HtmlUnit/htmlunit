@@ -85,7 +85,6 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             }
             sb.append(remaining);
         }
-        System.out.println(sb);
         return sb.toString();
     }
 
