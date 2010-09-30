@@ -924,4 +924,14 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     public void replace_EscapeBrackets() throws Exception {
         testEvaluate("'[ab](xy){z} {[(o}])'.replace(/([.*+?^${}()|[\\]\\/\\\\])/g, \"\\\\$1\")");
     }
+
+    /**
+     * Test for bug 3000784.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("><")
+    public void replace_T() throws Exception {
+        testEvaluate("'>' + 'a\\\\.b'.replace(/([\\u00C0-\\uFFFF]|[\\w]|\\\\.)+/, '') + '<'");
+    }
 }
