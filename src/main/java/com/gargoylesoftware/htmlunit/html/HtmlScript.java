@@ -361,14 +361,14 @@ public class HtmlScript extends HtmlElement {
                 try {
                     final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, getCharsetAttribute());
                     if (result == JavaScriptLoadResult.SUCCESS) {
-                        executeEventIfNotIE(Event.TYPE_LOAD);
+                        executeEventIfBrowserHasFeature(Event.TYPE_LOAD, BrowserVersionFeatures.EVENT_ONLOAD_EXTERNAL_JAVASCRIPT);
                     }
                     else if (result == JavaScriptLoadResult.DOWNLOAD_ERROR) {
-                        executeEventIfNotIE(Event.TYPE_ERROR);
+                        executeEventIfBrowserHasFeature(Event.TYPE_ERROR, BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
                     }
                 }
                 catch (final FailingHttpStatusCodeException e) {
-                    executeEventIfNotIE(Event.TYPE_ERROR);
+                    executeEventIfBrowserHasFeature(Event.TYPE_ERROR, BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
                     throw e;
                 }
             }
@@ -379,8 +379,8 @@ public class HtmlScript extends HtmlElement {
         }
     }
 
-    private void executeEventIfNotIE(final String type) {
-        if (!getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_9)) {
+    private void executeEventIfBrowserHasFeature(final String type, final BrowserVersionFeatures feature) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(feature)) {
             final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
             final Event event = new Event(HtmlScript.this, type);
             script.executeEvent(event);
