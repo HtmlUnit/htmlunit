@@ -296,14 +296,19 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
         // parens
         final int count = Math.min(9, matcher.groupCount());
-        parens = new SubString[count];
-        for (int i = 0; i < count; i++) {
-            final String group = matcher.group(i + 1);
-            if (group == null) {
-                parens[i] = new SubString();
-            }
-            else {
-                parens[i] = new FixedSubString(group);
+        if (count == 0) {
+            parens = null;
+        }
+        else {
+            parens = new SubString[count];
+            for (int i = 0; i < count; i++) {
+                final String group = matcher.group(i + 1);
+                if (group == null) {
+                    parens[i] = SubString.emptySubString;
+                }
+                else {
+                    parens[i] = new FixedSubString(group);
+                }
             }
         }
 
