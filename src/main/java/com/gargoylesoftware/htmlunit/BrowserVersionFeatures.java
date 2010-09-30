@@ -61,6 +61,12 @@ public enum BrowserVersionFeatures {
     /** Triggers "onchange" event handler on losing focus. */
     EVENT_ONCHANGE_LOSING_FOCUS,
 
+    /** Triggers "onerror" if external loading of an external javascript failed. */
+    EVENT_ONERROR_EXTERNAL_JAVASCRIPT,
+
+    /** Triggers "onload" event if external javascript successfully loaded. */
+    EVENT_ONLOAD_EXTERNAL_JAVASCRIPT,
+
     /** Triggers "onreadystatechange" event. */
     EVENT_ONREADY_STATE_CHANGE,
 
@@ -558,9 +564,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_89,
-
-    /** Was originally .isIE(). */
-    GENERATED_9,
 
     /** Was originally .isIE(). */
     GENERATED_90,
