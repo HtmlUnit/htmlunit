@@ -23,13 +23,15 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
@@ -38,7 +40,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
-import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 
 /**
  * Tests for {@link HTMLSelectElement}.
@@ -52,7 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class HTMLSelectElementTest extends WebTestCase {
+public class HTMLSelectElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -76,7 +77,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -96,7 +97,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    document.form1.select1.selectedIndex = -1;\n"
             + "}</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
-            + "<form name='form1' action='http://test' method='get'>\n"
+            + "<form name='form1' action='/foo' method='get'>\n"
             + "    <select name='select1'>\n"
             + "        <option value='option1' name='option1'>One</option>\n"
             + "        <option value='option2' name='option2' selected>Two</option>\n"
@@ -106,13 +107,12 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
         getMockWebConnection().setDefaultResponse("");
 
-        final HtmlSubmitInput button = page.getHtmlElementById("clickMe");
-        final HtmlPage newPage = button.click();
+        final WebDriver webdriver = loadPageWithAlerts2(html);
+        webdriver.findElement(By.id("clickMe")).click();
 
-        assertEquals("http://test/?submit=button", newPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals(getDefaultUrl() + "foo?submit=button", webdriver.getCurrentUrl());
         assertSame("method", HttpMethod.GET, getMockWebConnection().getLastMethod());
     }
 
@@ -120,7 +120,8 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "-1", "2", "exception", "2", "exception", "2" },
+    @Alerts(FF3 = { "-1", "2", "exception", "2", "exception", "2" },
+            FF3_6 = { "-1", "2", "-1", "-1" },
             IE = { "-1", "2", "-1", "-1" })
     public void testSetSelectedIndexInvalidValue() throws Exception {
         final String html
@@ -147,7 +148,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -174,7 +175,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -201,7 +203,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -230,7 +233,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -252,7 +256,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<OPTION value='A'>111</OPTION>\n"
             + "<OPTION value='B'>222</OPTION>\n"
             + "</SELECT></form></body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -278,7 +283,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</form></body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -306,7 +312,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -343,7 +350,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -372,7 +380,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -405,7 +414,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -435,7 +445,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<select name='testSelect'></select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -462,7 +473,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -489,7 +501,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -519,7 +532,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -544,7 +558,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -577,7 +592,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -602,7 +618,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -640,7 +657,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -703,7 +721,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -742,21 +761,22 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "2-2", "1-1", "2-2", "0-0", "2-2", "1-1" })
-    @Browsers(Browser.IE)
+    @Alerts(FF = "exception", IE = { "2-2", "1-1", "2-2", "0-0", "2-2", "1-1" })
     public void testOptionsDelegateToSelect() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
             + "function doTest() {\n"
-            + "  var s = document.getElementById('select1');\n"
-            + "  doAlerts(s);\n"
-            + "  \n"
-            + "  s.selectedIndex = 0;\n"
-            + "  doAlerts(s);\n"
-            + "  \n"
-            + "  s.options.selectedIndex = 1;\n"
-            + "  doAlerts(s);\n"
+            + "  try {\n"
+            + "    var s = document.getElementById('select1');\n"
+            + "    doAlerts(s);\n"
+            + "\n"
+            + "    s.selectedIndex = 0;\n"
+            + "    doAlerts(s);\n"
+            + "\n"
+            + "    s.options.selectedIndex = 1;\n"
+            + "    doAlerts(s);\n"
+            + "  } catch (e) { alert('exception') }\n"
             + "}\n"
             + "function doAlerts(s) {\n"
             + "  alert(s.childNodes.length + '-' + s.options.childNodes.length);\n"
@@ -771,7 +791,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<option selected='selected'>b</option>"
             + "</select></form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -806,7 +827,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<option selected='selected'>b</option>\n"
             + "</select></form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -881,7 +903,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "<select id='mySelect'><option>hello</option></select>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -916,8 +939,8 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     public void testDefaultSelectedValue_SizeTwo() throws Exception {
-        testDefaultSelectedValue("2", false, new String[] {"2", "false", "false", "false", "-1"});
-        testDefaultSelectedValue("2", true, new String[] {"2", "false", "false", "false", "-1"});
+        testDefaultSelectedValue("2", false, "2", "false", "false", "false", "-1");
+        testDefaultSelectedValue("2", true, "2", "false", "false", "false", "-1");
     }
 
     /**
@@ -925,8 +948,8 @@ public class HTMLSelectElementTest extends WebTestCase {
      */
     @Test
     public void testDefaultSelectedValue_SizeInvalid() throws Exception {
-        testDefaultSelectedValue("x", false, new String[] {"0", "true", "false", "false", "0"});
-        testDefaultSelectedValue("x", true, new String[] {"0", "false", "false", "false", "-1"});
+        testDefaultSelectedValue("x", false, "0", "true", "false", "false", "0");
+        testDefaultSelectedValue("x", true, "0", "false", "false", "false", "-1");
     }
 
     /**
@@ -937,8 +960,10 @@ public class HTMLSelectElementTest extends WebTestCase {
      * @param expected the expected alerts
      * @throws Exception if the test fails
      */
-    private void testDefaultSelectedValue(final String size, final boolean multiple, final String[] expected)
+    private void testDefaultSelectedValue(final String size, final boolean multiple, final String... expected)
         throws Exception {
+
+        setExpectedAlerts(expected);
         final String m;
         if (multiple) {
             m = " multiple";
@@ -963,9 +988,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "   </select>\n"
             + "</form>\n"
             + "</body></html>";
-        final List<String> actual = new ArrayList<String>();
-        loadPage(getBrowserVersion(), html, actual);
-        assertEquals(expected, actual);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -982,7 +1006,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "<select id='mySelect'/>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1012,7 +1037,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "    </select>\n"
             + "</form>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1032,7 +1058,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "<select id='mySelect' onfocus='alert(1)'><option>hello</option><option>there</option></select>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1057,7 +1084,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "<select id='mySelect'></select>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1082,7 +1110,8 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "<select id='mySelect'></select>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1110,6 +1139,7 @@ public class HTMLSelectElementTest extends WebTestCase {
             + "<body onload='test()'>\n"
             + "<select id='mySelect'></select>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 }

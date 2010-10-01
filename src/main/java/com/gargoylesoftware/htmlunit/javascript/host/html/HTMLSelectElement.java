@@ -223,7 +223,7 @@ public class HTMLSelectElement extends FormField {
     public void jsxSet_selectedIndex(final int index) {
         final HtmlSelect htmlSelect = getHtmlSelect();
 
-        if (index != 0 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_171)
+        if (index != 0 && getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD)
                 && (index < -1 || index >= htmlSelect.getOptionSize())) {
             throw Context.reportRuntimeError("Invalid index for select node: " + index);
         }
