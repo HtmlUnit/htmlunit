@@ -2000,6 +2000,7 @@
         <property name="size" readable="true" writable="true"/>
 
         <function name="add"/>
+        <function name="item"/>
         <function name="remove"/>
     </class>
 

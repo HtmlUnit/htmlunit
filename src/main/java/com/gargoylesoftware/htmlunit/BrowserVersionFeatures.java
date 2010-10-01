@@ -661,6 +661,9 @@ public enum BrowserVersionFeatures {
     /** Indicates if setting an out of bound value for HTMLSelectElement.selectedIndex should throw. */
     JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD,
 
+    /** Indicates if calling HTMLSelectElement.item with a negative value should throw. */
+    JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
+
     /** Body of a &lt;noscript&gt; tag is not totally ignored but considered as a (not displayed) text node. */
     NOSCRIPT_BODY_AS_TEXT,
 

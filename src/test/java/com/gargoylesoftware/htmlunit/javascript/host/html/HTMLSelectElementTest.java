@@ -1142,4 +1142,28 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "first", "null", "null" }, IE = { "first", "null", "exception" })
+    public void item() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<body>\n"
+            + "<select id='mySelect'>\n"
+            + "  <option>first</option>\n"
+            + "  <option>second</option>\n"
+            + "</select>\n"
+            + "<script>\n"
+            + "var s = document.getElementById('mySelect');\n"
+            + "alert(s.item(0).text);\n"
+            + "alert(s.item(300));\n"
+            + "try { alert(s.item(-5)); } catch(e) { alert('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

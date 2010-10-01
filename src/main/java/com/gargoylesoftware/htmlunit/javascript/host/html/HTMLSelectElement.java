@@ -110,6 +110,27 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
+     * Gets the item at the specified index.
+     * @param index the position of the option to retrieve
+     * @return the option
+     */
+    public HTMLOptionElement jsxFunction_item(final int index) {
+        if (index < 0) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_ITEM_THROWS_IF_NEGATIVE)) {
+                throw Context.reportRuntimeError("Invalid index for select node: " + index);
+            }
+            return null;
+        }
+
+        final int length = jsxGet_length();
+        if (index > length) {
+            return null;
+        }
+
+        return (HTMLOptionElement) getHtmlSelect().getOption(index).getScriptObject();
+    }
+
+    /**
      * Adds a new item to the list (optionally) at the specified index in IE way.
      * @param newOptionObject the DomNode to insert
      * @param index (optional) the index where the node should be inserted
