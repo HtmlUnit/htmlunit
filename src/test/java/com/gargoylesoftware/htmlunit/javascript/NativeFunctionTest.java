@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Function is a native JavaScript object and therefore provided by Rhino but some tests are needed here
@@ -74,6 +75,25 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "Array.prototype.myFunction = f2;\n"
             + "var a = (function() { return arguments;})();\n"
             + "alert(a.myFunction == f1);\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Regression test for bug 3076362.
+     * @see <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=600479">Rhino Bug 600479</a>
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    @NotYetImplemented
+    public void newFunctionWithSlashSlash() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "var f1 = new Function('alert(true) //');\n"
+            + "f1.call();\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
