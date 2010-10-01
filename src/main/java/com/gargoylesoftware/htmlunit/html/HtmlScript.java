@@ -361,14 +361,17 @@ public class HtmlScript extends HtmlElement {
                 try {
                     final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, getCharsetAttribute());
                     if (result == JavaScriptLoadResult.SUCCESS) {
-                        executeEventIfBrowserHasFeature(Event.TYPE_LOAD, BrowserVersionFeatures.EVENT_ONLOAD_EXTERNAL_JAVASCRIPT);
+                        executeEventIfBrowserHasFeature(Event.TYPE_LOAD,
+                            BrowserVersionFeatures.EVENT_ONLOAD_EXTERNAL_JAVASCRIPT);
                     }
                     else if (result == JavaScriptLoadResult.DOWNLOAD_ERROR) {
-                        executeEventIfBrowserHasFeature(Event.TYPE_ERROR, BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
+                        executeEventIfBrowserHasFeature(Event.TYPE_ERROR,
+                            BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
                     }
                 }
                 catch (final FailingHttpStatusCodeException e) {
-                    executeEventIfBrowserHasFeature(Event.TYPE_ERROR, BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
+                    executeEventIfBrowserHasFeature(Event.TYPE_ERROR,
+                        BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
                     throw e;
                 }
             }
