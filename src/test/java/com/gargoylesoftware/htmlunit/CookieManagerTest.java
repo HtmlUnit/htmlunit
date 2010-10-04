@@ -20,8 +20,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.http.Header;
 import org.apache.http.client.CookieStore;
+import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.cookie.BrowserCompatSpec;
+import org.apache.http.message.BasicHeader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -156,10 +160,10 @@ public class CookieManagerTest extends WebDriverTestCase {
      * Regression test for issue 2973040.
      * When a cookie is set with value within quotes, this value should be sent within quotes
      * in the following requests. This is a problem (bug?) in HttpClient which is not fixed in HttpClient-4.0.1.
+     * @see <a href="https://issues.apache.org/jira/browse/HTTPCLIENT-1006">HttpClient bug 1006</a>
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void valueQuoted() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
         responseHeader.add(new NameValuePair("Set-Cookie", "key=value"));
@@ -172,6 +176,24 @@ public class CookieManagerTest extends WebDriverTestCase {
         driver.get(URL_SECOND.toExternalForm());
 
         assertEquals("key=value; test=\"aa= xx==\"", getMockWebConnection().getLastAdditionalHeaders().get("Cookie"));
+    }
+
+    /**
+     * Test that " are not discarded.
+     * Once this test passes, our hack in HttpWebConnection.HtmlUnitBrowserCompatCookieSpec can safely be removed.
+     * @see <a href="https://issues.apache.org/jira/browse/HTTPCLIENT-1006">HttpClient bug 1006</a>
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    @NotYetImplemented
+    public void httpClientParsesCookiesQuotedValuesCorrectly() throws Exception {
+        final Header header = new BasicHeader("Set-Cookie", "first=\"hello world\"");
+        final BrowserCompatSpec spec = new BrowserCompatSpec();
+        final CookieOrigin origin = new CookieOrigin("localhost", 80, "/", false);
+        final List<org.apache.http.cookie.Cookie> list = spec.parse(header, origin);
+        assertEquals(1, list.size());
+        assertEquals("\"hello world\"", list.get(0).getValue());
     }
 
     /**

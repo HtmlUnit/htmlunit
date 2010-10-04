@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="2973040">
+                Cookies: consider quotes surrounding the value as part of the cookie value.
+            </action>
             <action type="fix" dev="mguillem" issue="3076362">
                 JavaScript: allow "//" in argument string of "new Function(...)".
             </action>

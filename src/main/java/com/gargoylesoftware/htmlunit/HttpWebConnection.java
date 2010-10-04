@@ -62,6 +62,10 @@ import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.cookie.Cookie;
+import org.apache.http.cookie.CookieOrigin;
+import org.apache.http.cookie.CookieSpec;
+import org.apache.http.cookie.CookieSpecFactory;
+import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.cookie.params.CookieSpecPNames;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.HttpMultipart;
@@ -76,6 +80,8 @@ import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.DefaultRedirectHandler;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
@@ -104,6 +110,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class HttpWebConnection implements WebConnection {
 
+    private static final String HACKED_COOKIE_POLICY = "mine";
     private AbstractHttpClient httpClient_;
     private final WebClient webClient_;
     private String virtualHost_;
@@ -289,7 +296,7 @@ public class HttpWebConnection implements WebConnection {
             // Cookies are enabled. Note that it's important that we enable single cookie headers,
             // for compatibility purposes.
             getHttpClient().getParams().setParameter(CookieSpecPNames.SINGLE_COOKIE_HEADER, true);
-            getHttpClient().getParams().setParameter(ClientPNames.COOKIE_POLICY, CookieManager.HTMLUNIT_COOKIE_POLICY);
+            getHttpClient().getParams().setParameter(ClientPNames.COOKIE_POLICY, HACKED_COOKIE_POLICY);
         }
         else {
             // Cookies are disabled.
@@ -463,6 +470,13 @@ public class HttpWebConnection implements WebConnection {
 
             final Scheme httpScheme = new Scheme("http", new SocksSocketFactory(), 80);
             httpClient_.getConnectionManager().getSchemeRegistry().register(httpScheme);
+
+            final CookieSpecFactory factory = new CookieSpecFactory() {
+                public CookieSpec newInstance(final HttpParams params) {
+                    return new HtmlUnitBrowserCompatCookieSpec();
+                }
+            };
+            httpClient_.getCookieSpecs().register(HACKED_COOKIE_POLICY, factory);
         }
 
         // Tell the client where to get its credentials from
@@ -642,5 +656,26 @@ public class HttpWebConnection implements WebConnection {
             httpClient_.getConnectionManager().shutdown();
             httpClient_ = null;
         }
+    }
+}
+
+/**
+ * Workaround for <a href="https://issues.apache.org/jira/browse/HTTPCLIENT-1006">HttpClient bug 1006</a>:
+ * quotes are wrongly removed in cookie's values.
+ */
+class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Cookie> parse(final Header header, final CookieOrigin origin) throws MalformedCookieException {
+        final List<Cookie> cookies = super.parse(header, origin);
+        for (final Cookie c : cookies) {
+            // re-add quotes around value if parsing as incorrectly trimmed them
+            if (header.getValue().contains(c.getName() + "=\"" + c.getValue())) {
+                ((BasicClientCookie) c).setValue('"' + c.getValue() + '"');
+            }
+        }
+        return cookies;
     }
 }

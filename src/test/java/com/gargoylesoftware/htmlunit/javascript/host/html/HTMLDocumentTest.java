@@ -35,7 +35,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.CookieManager;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -1165,8 +1164,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     public void cookie_read() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+        final WebClient webClient = getWebClientWithMockWebConnection();
 
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -1184,18 +1182,17 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, html);
-        webClient.setWebConnection(webConnection);
+        final URL url = getDefaultUrl();
+        getMockWebConnection().setResponse(url, html);
 
         final CookieManager mgr = webClient.getCookieManager();
-        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "one", "two", "/", null, false));
-        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "three", "four", "/", null, false));
+        mgr.addCookie(new Cookie(url.getHost(), "one", "two", "/", null, false));
+        mgr.addCookie(new Cookie(url.getHost(), "three", "four", "/", null, false));
 
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+        final HtmlPage firstPage = webClient.getPage(url);
         assertEquals("First", firstPage.getTitleText());
 
         final String[] expectedAlerts = {"one", "two", "three", "four" };
@@ -1206,7 +1203,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "true", "", "foo=bar" })
+    @Alerts({ "true", "", "foo=bar", "foo=hello world" })
     public void cookie_write_cookiesEnabled() throws Exception {
         loadPageWithAlerts2(getCookieWriteHtmlCode());
     }
@@ -1216,7 +1213,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "false", "", "" })
+    @Alerts({ "false", "", "", "" })
     public void cookie_write_cookiesDisabled() throws Exception {
         final String html = getCookieWriteHtmlCode();
 
@@ -1228,16 +1225,16 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
     private String getCookieWriteHtmlCode() {
         final String html =
-              "<html>\n"
-            + "    <head>\n"
-            + "        <script>\n"
-            + "            alert(navigator.cookieEnabled);\n"
-            + "            alert(document.cookie);\n"
-            + "            document.cookie = 'foo=bar';\n"
-            + "            alert(document.cookie);\n"
-            + "        </script>\n"
-            + "    </head>\n"
-            + "    <body>abc</body>\n"
+              "<html><head><script>\n"
+            + "  alert(navigator.cookieEnabled);\n"
+            + "  alert(document.cookie);\n"
+            + "  document.cookie = 'foo=bar';\n"
+            + "  alert(document.cookie);\n"
+            + "  document.cookie = 'foo=hello world';\n"
+            + "  alert(document.cookie);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>abc</body>\n"
             + "</html>";
         return html;
     }
