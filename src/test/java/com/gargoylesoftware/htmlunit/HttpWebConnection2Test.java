@@ -74,8 +74,8 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         final String expectedHeaders = "Connection: keep-alive\n"
             + "Content-Length: 48\n"
             + "Content-Type: application/x-www-form-urlencoded\n"
-            + "Host: localhost:12345\n"
-            + "Referer: http://localhost:12345/\n"
+            + "Host: localhost:" + PORT + "\n"
+            + "Referer: http://localhost:" + PORT + "/\n"
             + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
         assertEquals(expectedHeaders, headersToString(lastRequest));
         assertEquals(FormEncodingType.URL_ENCODED, lastRequest.getEncodingType());
