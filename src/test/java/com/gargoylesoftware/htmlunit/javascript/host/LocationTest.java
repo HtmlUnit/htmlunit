@@ -65,7 +65,7 @@ public class LocationTest extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -100,7 +100,7 @@ public class LocationTest extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setResponse(new URL(getDefaultUrl(), "foo.html"), html2);
-        loadPageWithAlerts(html1);
+        loadPageWithAlerts2(html1);
     }
 
     /**
@@ -117,7 +117,7 @@ public class LocationTest extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -201,7 +201,7 @@ public class LocationTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "<iframe src='about:blank'></iframe></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -258,7 +258,8 @@ public class LocationTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -278,7 +279,7 @@ public class LocationTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -289,7 +290,7 @@ public class LocationTest extends WebDriverTestCase {
     @Test
     public void testSetHrefWithOnlyHash() throws Exception {
         final String html = "<html><body><script>document.location.href = '#x';</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -301,7 +302,7 @@ public class LocationTest extends WebDriverTestCase {
     @Test
     public void testSetHrefWithOnlyHash2() throws Exception {
         final String html = "<script>document.location.href = '" + getDefaultUrl() + "#x';</script>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -442,10 +443,7 @@ public class LocationTest extends WebDriverTestCase {
      */
     @Test
     public void testReplace() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final String firstContent
+        final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
             + "    location.replace('" + URL_SECOND + "');\n"
@@ -455,12 +453,10 @@ public class LocationTest extends WebDriverTestCase {
 
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-        webClient.setWebConnection(webConnection);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        final WebDriver webdriver = loadPageWithAlerts2(html);
 
-        final HtmlPage page = webClient.getPage(URL_FIRST);
-        assertEquals("Second", page.getTitleText());
+        assertEquals("Second", webdriver.getTitle());
     }
 
     /**
@@ -609,7 +605,7 @@ public class LocationTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -626,7 +622,7 @@ public class LocationTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
