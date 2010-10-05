@@ -244,8 +244,10 @@ public class LocationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b" },
-            IE = { "#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b" })
+    @Alerts(FF = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
+            "#% ^[]|\"<>{}\\" },
+            IE = { "#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
+            "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C" })
     public void testSetHash_Encoding() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
@@ -255,6 +257,10 @@ public class LocationTest extends WebDriverTestCase {
             + "    window.location.hash = 'a%20b';\n"
             + "    alert(window.location.hash);\n"
             + "    alert(window.location.href);\n"
+            + "    window.location.hash = 'abc;,/?:@&=+$-_.!~*()ABC123foo';\n"
+            + "    alert(window.location.hash);\n"
+            + "    window.location.hash = '%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C';\n"
+            + "    alert(window.location.hash);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

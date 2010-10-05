@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -271,13 +273,33 @@ public class Location extends SimpleScriptable {
             }
             final boolean decodeHash = !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_115);
             if (decodeHash) {
-                hash = UrlUtils.decode(hash);
+                hash = decodeHash(hash);
             }
             hash_ = hash;
         }
         else {
             hash_ = null;
         }
+    }
+
+    private String decodeHash(final String hash) {
+        if (hash.indexOf('%') == -1) {
+            return hash;
+        }
+        final StringBuffer sb = new StringBuffer();
+        final Pattern p = Pattern.compile("%([\\dA-F]{2})");
+        final Matcher m = p.matcher(hash);
+        while (m.find()) {
+            final String code = m.group(1);
+            final int u = (char) Character.digit(code.charAt(0), 16);
+            final int l = (char) Character.digit(code.charAt(1), 16);
+            final char replacement = (char) ((u << 4) + l);
+            m.appendReplacement(sb, "");
+            sb.append(replacement);
+        }
+        m.appendTail(sb);
+
+        return sb.toString();
     }
 
     /**
