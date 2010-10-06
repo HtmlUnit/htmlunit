@@ -301,6 +301,23 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /**
+     * Regression test for bug 3081652: it seems that expiration date should be ignored if format is incorrect.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first=1; second=2; third=3")
+    @NotYetImplemented
+    public void setCookieExpired_badDateFormat() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;expires=Dec-1-94 16:00:00"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "second=2;expires=Dec-1-1994 16:00:00"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "third=3;expires=Dec-1-2094 16:00:00"));
+        getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader1);
+
+        loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
