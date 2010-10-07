@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3033189">
+                Parsing: &lt;ins&gt; is an inline element.
+            </action>
             <action type="fix" dev="mguillem" issue="3063896">
                 JavaScript: don't escape "+" in hash value (FF).
             </action>
