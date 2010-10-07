@@ -706,7 +706,7 @@
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
-            <version>1.9.14</version>
+            <version>1.9.15-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>xerces</groupId>
@@ -847,6 +847,19 @@
             <id>HtmlUnitSnapshots</id>
             <name>HtmlUnit Snapshots</name>
             <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <id>NekoHTMLSnapshots</id>
+            <name>NekoHTML Snapshots</name>
+            <url>http://build.canoo.com/NekoHTML/artifacts/m2-repo</url>
             <layout>default</layout>
         </repository>
     </repositories>
