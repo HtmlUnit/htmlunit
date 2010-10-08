@@ -256,7 +256,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final String optionValue, final boolean isSelected) {
         try {
-            return setSelectedAttribute(getOptionByValue(optionValue), isSelected);
+            return (P) setSelectedAttribute(getOptionByValue(optionValue), isSelected);
         }
         catch (final ElementNotFoundException e) {
             if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_11)) {
@@ -280,8 +280,9 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the page contained in the current window as returned
      * by {@link com.gargoylesoftware.htmlunit.WebClient#getCurrentWindow()}
      */
+    @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
-        return setSelectedAttribute(selectedOption, isSelected, true);
+        return (P) setSelectedAttribute(selectedOption, isSelected, true);
     }
 
     /**
