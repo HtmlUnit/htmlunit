@@ -249,10 +249,12 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      *
      * @param isSelected true if the option is to become selected
      * @param optionValue the value of the option that is to change
-     * @return the page that occupies this window after this change is made (may or
-     *         may not be the same as the original page)
+     * @param <P> the page type
+     * @return the page contained in the current window as returned
+     * by {@link com.gargoylesoftware.htmlunit.WebClient#getCurrentWindow()}
      */
-    public Page setSelectedAttribute(final String optionValue, final boolean isSelected) {
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P setSelectedAttribute(final String optionValue, final boolean isSelected) {
         try {
             return setSelectedAttribute(getOptionByValue(optionValue), isSelected);
         }
@@ -262,7 +264,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
                     o.setSelected(false);
                 }
             }
-            return getPage();
+            return (P) getPage();
         }
     }
 
@@ -274,10 +276,11 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      *
      * @param isSelected true if the option is to become selected
      * @param selectedOption the value of the option that is to change
-     * @return the page that occupies this window after this change is made (may or
-     *         may not be the same as the original page)
+     * @param <P> the page type
+     * @return the page contained in the current window as returned
+     * by {@link com.gargoylesoftware.htmlunit.WebClient#getCurrentWindow()}
      */
-    public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
+    public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
         return setSelectedAttribute(selectedOption, isSelected, true);
     }
 
@@ -292,10 +295,12 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param isSelected true if the option is to become selected
      * @param selectedOption the value of the option that is to change
      * @param invokeOnFocus whether to set focus or no.
-     * @return the page that occupies this window after this change is made (may or
-     *         may not be the same as the original page)
+     * @param <P> the page type
+     * @return the page contained in the current window as returned
+     * by {@link com.gargoylesoftware.htmlunit.WebClient#getCurrentWindow()}
      */
-    public Page setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected,
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected,
         final boolean invokeOnFocus) {
         if (isSelected && invokeOnFocus) {
             ((HtmlPage) getPage()).setFocusedElement(this);
@@ -305,10 +310,10 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
         if (changeSelectedState) {
             doSelectOption(selectedOption, isSelected);
-            return HtmlInput.executeOnChangeHandlerIfAppropriate(this);
+            HtmlInput.executeOnChangeHandlerIfAppropriate(this);
         }
-        // nothing to do
-        return getPage();
+
+        return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
     }
 
     private void doSelectOption(final HtmlOption selectedOption,

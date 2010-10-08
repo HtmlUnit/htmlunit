@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="update" dev="mguillem" issue="3034581">
+                HtmlSelect.setSelectedAttribute now returns the page in the WebClient's current window.
+            </action>
             <action type="fix" dev="mguillem" issue="3033189">
                 Parsing: &lt;ins&gt; is an inline element.
             </action>

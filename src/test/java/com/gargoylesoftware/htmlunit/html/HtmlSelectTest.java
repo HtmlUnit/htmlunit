@@ -618,6 +618,28 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void onChange_resultPage_newCurrentWindow() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "<select name='select1' id='select1' onchange='open(\"about:blank\", \"_blank\")'>\n"
+            + "     <option id='option1'>Option1</option>\n"
+            + "     <option id='option2' selected>Number Two</option>\n"
+            + "</select>\n"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlSelect select = page.getHtmlElementById("select1");
+        final HtmlOption option1 = page.getHtmlElementById("option1");
+        final HtmlPage page2 = select.setSelectedAttribute(option1, true);
+        assertEquals("about:blank", page2.getUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void testSelectedIndex() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
