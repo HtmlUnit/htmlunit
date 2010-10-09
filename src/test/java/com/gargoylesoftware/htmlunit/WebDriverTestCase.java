@@ -280,6 +280,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
         for (final String pathSpec : servlets.keySet()) {
             final Class< ? extends Servlet> servlet = servlets.get(pathSpec);
             context.addServlet(servlet, pathSpec);
+
+            // disable defaults if someone likes to register his own root servlet
+            if ("/".equals(pathSpec)) {
+                context.setDefaultsDescriptor(null);
+            }
         }
         final WebAppClassLoader loader = new WebAppClassLoader(context);
         if (classpath != null) {
