@@ -49,6 +49,7 @@ import org.mortbay.jetty.security.Constraint;
 import org.mortbay.jetty.security.ConstraintMapping;
 import org.mortbay.jetty.security.HashUserRealm;
 import org.mortbay.jetty.security.SecurityHandler;
+import org.mortbay.jetty.servlet.DefaultServlet;
 import org.mortbay.jetty.webapp.WebAppClassLoader;
 import org.mortbay.jetty.webapp.WebAppContext;
 import org.openqa.selenium.JavascriptExecutor;
@@ -284,6 +285,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             // disable defaults if someone likes to register his own root servlet
             if ("/".equals(pathSpec)) {
                 context.setDefaultsDescriptor(null);
+                context.addServlet(DefaultServlet.class, "/favicon.ico");
             }
         }
         final WebAppClassLoader loader = new WebAppClassLoader(context);
