@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Wrapper for the HTML element "form".
@@ -56,6 +57,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Kent Tong
  * @author Ahmed Ashour
  * @author Philip Graf
+ * @author Ronald Brill
  */
 public class HtmlForm extends HtmlElement {
 
@@ -126,7 +128,9 @@ public class HtmlForm extends HtmlElement {
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        webClient.download(webWindow, target, request, "JS form.submit()");
+        final String action = getActionAttribute();
+        final boolean isHashJump = HttpMethod.GET.equals(request.getHttpMethod()) && action.endsWith("#");
+        webClient.download(webWindow, target, request, isHashJump, "JS form.submit()");
         return htmlPage;
     }
 
@@ -165,6 +169,7 @@ public class HtmlForm extends HtmlElement {
             method = HttpMethod.GET;
         }
 
+        final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
         String actionUrl = getActionAttribute();
         if (HttpMethod.GET == method) {
             final String anchor = StringUtils.substringAfter(actionUrl, "#");
@@ -175,25 +180,32 @@ public class HtmlForm extends HtmlElement {
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "#");
             actionUrl = StringUtils.substringBefore(actionUrl, "?");
-            final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
             if (browser.hasFeature(BrowserVersionFeatures.FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK)
                     || queryFromFields.length() > 0) {
                 actionUrl += "?" + queryFromFields;
             }
-            if (anchor.length() > 0) {
+            if (anchor.length() > 0
+                    && !browser.hasFeature(BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH)) {
                 actionUrl += "#" + anchor;
             }
             parameters.clear(); // parameters have been added to query
         }
-        final URL url;
+        URL url;
         try {
             if (actionUrl.length() == 0) {
                 url = htmlPage.getWebResponse().getWebRequest().getUrl();
+                if (browser.hasFeature(BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH)) {
+                    url = UrlUtils.getUrlWithNewRef(url, null);
+                }
             }
             else if (actionUrl.startsWith("?")) {
                 String urlString = htmlPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
                 if (urlString.indexOf('?') != -1) {
                     urlString = urlString.substring(0, urlString.indexOf('?'));
+                }
+                else if (urlString.indexOf('#') != -1
+                        && browser.hasFeature(BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH)) {
+                    urlString = urlString.substring(0, urlString.indexOf('#'));
                 }
                 url = new URL(urlString + actionUrl);
             }

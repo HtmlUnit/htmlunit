@@ -27,6 +27,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -54,6 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Ronald Brill
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535249.aspx">MSDN documentation</a>
  */
@@ -261,7 +263,9 @@ public class HTMLFormElement extends HTMLElement implements Function {
             // download should be done ASAP, response will be loaded into a window later
             final WebRequest request = getHtmlForm().getWebRequest(null);
             final String target = page.getResolvedTarget(jsxGet_target());
-            webClient.download(page.getEnclosingWindow(), target, request, "JS form.submit()");
+            final boolean isHashJump = HttpMethod.GET.equals(request.getHttpMethod()) && action.endsWith("#");
+            webClient.download(page.getEnclosingWindow(), target, request,
+                    isHashJump, "JS form.submit()");
         }
     }
 

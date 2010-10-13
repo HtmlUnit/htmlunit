@@ -45,6 +45,8 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Daniel Gredler
  * @author David K. Taylor
  * @author Ahmed Ashour
+ * @author Ronald Brill
+ *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535866.aspx">MSDN Documentation</a>
  */
 public class Location extends SimpleScriptable {
@@ -195,16 +197,25 @@ public class Location extends SimpleScriptable {
             return;
         }
         try {
-            final URL url = page.getFullyQualifiedUrl(newLocation);
-            final URL oldUrl = page.getWebResponse().getWebRequest().getUrl();
-            if (url.sameFile(oldUrl) && !StringUtils.equals(url.getRef(), oldUrl.getRef())) {
-                // If we're just setting or modifying the hash, avoid a server hit.
-                jsxSet_hash(newLocation);
-                return;
+            URL url = page.getFullyQualifiedUrl(newLocation);
+            // fix for empty url
+            if (StringUtils.isEmpty(newLocation)) {
+                final boolean dropFilename = page.getWebClient().getBrowserVersion().
+                        hasFeature(BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME);
+                if (dropFilename) {
+                    String path = url.getPath();
+                    path = path.substring(0, path.lastIndexOf('/') + 1);
+                    url = UrlUtils.getUrlWithNewPath(url, path);
+                    url = UrlUtils.getUrlWithNewRef(url, null);
+                }
+                else {
+                    url = UrlUtils.getUrlWithNewRef(url, null);
+                }
             }
 
             final WebWindow webWindow = getWindow().getWebWindow();
-            webWindow.getWebClient().download(webWindow, "", new WebRequest(url), "JS set location");
+            webWindow.getWebClient().download(webWindow, "", new WebRequest(url),
+                    newLocation.endsWith("#"), "JS set location");
         }
         catch (final MalformedURLException e) {
             LOG.error("jsxSet_location('" + newLocation + "') Got MalformedURLException", e);

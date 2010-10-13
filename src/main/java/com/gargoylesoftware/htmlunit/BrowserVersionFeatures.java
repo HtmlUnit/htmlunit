@@ -25,6 +25,14 @@ package com.gargoylesoftware.htmlunit;
  */
 public enum BrowserVersionFeatures {
 
+    /**
+     * If the "href" attribute of HtmlAnchor is defined but empty then IE interprets this as an empty filename.
+     * Example: The page http://htmlunit.sourceforge.net/test/myFile.html contains an anchor with an empty
+     * href attribute. Clicking the link in IE force the load of page http://htmlunit.sourceforge.net/test/.
+     * In Firefox the url is unchanged.
+     */
+    ANCHOR_EMPTY_HREF_NO_FILENAME,
+
     /** Indicates that a blur event should be triggered before an onchange event. */
     BLUR_BEFORE_ONCHANGE,
 
@@ -82,8 +90,14 @@ public enum BrowserVersionFeatures {
     /** Indicates if a form field is directly reachable by its new name once this has been changed. */
     FORMFIELD_REACHABLE_BY_NEW_NAMES,
 
-    /** */
+    /**
+     * Special behavior of IE6; the URL submitted by a form with method type 'GET' has
+     * a question mark at the end if there are no parameters.
+     */
     FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK,
+
+    /** Form submit is done without the hash part of the form action url. */
+    FORM_SUBMISSION_URL_WITHOUT_HASH,
 
     /** Was originally .isIE(). */
     GENERATED_100,

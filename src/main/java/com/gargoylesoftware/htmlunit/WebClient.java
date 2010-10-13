@@ -60,6 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.ProxyAutoConfig;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
@@ -106,6 +107,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Martin Tamme
  * @author Amit Manjhi
  * @author Nicolas Belisle
+ * @author Ronald Brill
  */
 public class WebClient implements Serializable {
 
@@ -2034,20 +2036,24 @@ public class WebClient implements Serializable {
      * @param requestingWindow the window from which the request comes
      * @param target the name of the target window
      * @param request the request to perform
+     * @param isHashJump in at least one case (achor url is '#') it is not possible
+     *        to decide that this is only a hash jump; in this case you can provide
+     *        true here; otherwise use false
      * @param description information about the origin of the request. Useful for debugging.
      */
     public void download(final WebWindow requestingWindow, final String target,
-        final WebRequest request, final String description) {
+        final WebRequest request, final boolean isHashJump, final String description) {
         final WebWindow win = resolveWindow(requestingWindow, target);
         final URL url = request.getUrl();
-        boolean justHashJump = false;
-        if (win != null) {
+        boolean justHashJump = isHashJump;
+
+        if (win != null && (HttpMethod.POST != request.getHttpMethod())) {
             final Page page = win.getEnclosedPage();
             if (page instanceof HtmlPage && !((HtmlPage) page).isOnbeforeunloadAccepted()) {
                 return;
             }
             final URL current = page.getWebResponse().getWebRequest().getUrl();
-            if (url.sameFile(current) && !StringUtils.equals(current.getRef(), url.getRef())) {
+            if (!justHashJump && url.sameFile(current) && StringUtils.isNotEmpty(url.getRef())) {
                 justHashJump = true;
             }
         }
@@ -2112,6 +2118,13 @@ public class WebClient implements Serializable {
                 final HtmlPage page = (HtmlPage) window.getEnclosedPage();
                 page.getWebResponse().getWebRequest().setUrl(downloadedResponse.urlWithOnlyHashChange_);
                 window.getHistory().addPage(page);
+
+                // update location.hash
+                final Window jsWindow = (Window) window.getScriptObject();
+                if (null != jsWindow) {
+                    final Location location = jsWindow.jsxGet_location();
+                    location.jsxSet_hash(downloadedResponse.urlWithOnlyHashChange_.getRef());
+                }
             }
             else {
                 final WebWindow window = resolveWindow(downloadedResponse.requestingWindow_,

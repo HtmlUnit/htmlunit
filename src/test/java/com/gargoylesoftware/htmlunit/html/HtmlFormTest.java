@@ -42,6 +42,8 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -54,6 +56,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Philip Graf
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlFormTest extends WebTestCase {
@@ -970,9 +973,22 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers({ Browser.FF })
     public void urlAfterSubmitWithAnchor() throws Exception {
         urlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
         urlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
+        urlAfterSubmit("post", "foo#anchor", "foo#anchor");
+        urlAfterSubmit("post", "foo?foo=12#anchor", "foo?foo=12#anchor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ Browser.IE })
+    public void urlAfterSubmitWithAnchor_IE() throws Exception {
+        urlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
+        urlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
         urlAfterSubmit("post", "foo#anchor", "foo#anchor");
         urlAfterSubmit("post", "foo?foo=12#anchor", "foo?foo=12#anchor");
     }
@@ -995,7 +1011,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<input type='button' name='inputButton' value='foo'/>\n"
             + "<button type='button' name='buttonButton' value='foo'/>\n"
             + "</form></body></html>";
-        final HtmlPage page = loadPage(html, null, url);
+        final HtmlPage page = loadPage(getBrowserVersion(), html, null, url);
         final Page page2 = page.<HtmlElement>getHtmlElementById("submitButton").click();
 
         assertEquals(expectedUrl, page2.getWebResponse().getWebRequest().getUrl());

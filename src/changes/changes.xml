@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JS location.href returns the right value after clicking on a link that jumps only to a different hash.
+            </action>
+            <action type="fix" dev="rbri" issue="3056617">
+                Fixed reload handling if only the hash part of a url changed.
+            </action>
             <action type="update" dev="mguillem" issue="3034581">
                 HtmlSelect.setSelectedAttribute now returns the page in the WebClient's current window.
             </action>

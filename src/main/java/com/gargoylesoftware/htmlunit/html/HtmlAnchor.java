@@ -19,15 +19,18 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Wrapper for the HTML element "a".
@@ -72,7 +75,7 @@ public class HtmlAnchor extends HtmlElement {
             final String w = getPage().getEnclosingWindow().getName();
             LOG.debug("do click action in window '" + w + "', using href '" + href + "'");
         }
-        if (href.length() == 0) {
+        if (ATTRIBUTE_NOT_DEFINED == getHrefAttribute()) {
             return;
         }
         final HtmlPage page = (HtmlPage) getPage();
@@ -95,7 +98,22 @@ public class HtmlAnchor extends HtmlElement {
             page.executeJavaScriptIfPossible(builder.toString(), "javascript url", getStartLineNumber());
             return;
         }
-        final URL url = page.getFullyQualifiedUrl(href);
+        URL url = page.getFullyQualifiedUrl(href);
+        // fix for empty url
+        if (StringUtils.isEmpty(href)) {
+            final boolean dropFilename = page.getWebClient().getBrowserVersion().
+                                    hasFeature(BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME);
+            if (dropFilename) {
+                String path = url.getPath();
+                path = path.substring(0, path.lastIndexOf('/') + 1);
+                url = UrlUtils.getUrlWithNewPath(url, path);
+                url = UrlUtils.getUrlWithNewRef(url, null);
+            }
+            else {
+                url = UrlUtils.getUrlWithNewRef(url, null);
+            }
+        }
+
         final WebRequest webRequest = new WebRequest(url);
         webRequest.setAdditionalHeader("Referer", page.getWebResponse().getWebRequest().getUrl().toExternalForm());
         if (LOG.isDebugEnabled()) {
@@ -107,7 +125,7 @@ public class HtmlAnchor extends HtmlElement {
         }
         page.getWebClient().download(page.getEnclosingWindow(),
                 page.getResolvedTarget(getTargetAttribute()),
-                webRequest, "Link click");
+                webRequest, href.endsWith("#"), "Link click");
     }
 
     /**
