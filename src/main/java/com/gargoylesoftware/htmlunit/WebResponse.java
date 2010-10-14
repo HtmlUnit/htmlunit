@@ -234,4 +234,14 @@ public class WebResponse implements Serializable {
     public long getLoadTime() {
         return loadTime_;
     }
+
+    /**
+     * Returns the URL that was used to load this page.
+     * @return the URL that was used to load this page
+     * @deprecated as of 2.6, please use {@link #getWebRequest()}.getUrl()
+     */
+    @Deprecated
+    public URL getRequestUrl() {
+        return getWebRequest().getUrl();
+    }
 }

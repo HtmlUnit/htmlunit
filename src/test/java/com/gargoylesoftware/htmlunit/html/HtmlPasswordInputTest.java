@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Collections;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -62,7 +63,13 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final String html = "<html><body><input type='password' id='p' disabled='disabled'/></body></html>";
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
-        p.sendKeys("abc");
+        try {
+            p.sendKeys("abc");
+            Assert.fail();
+        }
+        catch (final UnsupportedOperationException e) {
+            // as expected
+        }
         assertEquals("", p.getValue());
     }
 
