@@ -100,7 +100,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     @Override
     public WebResponse getResponse(final WebRequest request) throws IOException {
         WebResponse response = wrappedWebConnection_.getResponse(request);
-        if (isUncompressJavaScript() && isJavaScript(response)) {
+        if (isUncompressJavaScript() && isJavaScript(response.getContentType())) {
             response = uncompressJavaScript(response);
         }
         saveResponse(response, request);
@@ -161,16 +161,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     protected void saveResponse(final WebResponse response, final WebRequest request)
         throws IOException {
         counter_++;
-        final String extension;
-        if (isJavaScript(response)) {
-            extension = ".js";
-        }
-        else if ("text/html".equals(response.getContentType())) {
-            extension = ".html";
-        }
-        else {
-            extension = ".txt";
-        }
+        final String extension = chooseExtension(response.getContentType());
         final File f = createFile(request.getUrl(), extension);
         final String content = response.getContentAsString();
         final URL url = response.getWebRequest().getUrl();
@@ -198,13 +189,28 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         return string.replaceAll("'", "\\\\'");
     }
 
+    static String chooseExtension(final String contentType) {
+        if (isJavaScript(contentType)) {
+            return ".js";
+        }
+        else if ("text/html".equals(contentType)) {
+            return ".html";
+        }
+        else if ("text/css".equals(contentType)) {
+            return ".css";
+        }
+        else if ("text/xml".equals(contentType)) {
+            return ".xml";
+        }
+        return ".txt";
+    }
+
     /**
      * Indicates if the response contains JavaScript content.
-     * @param response the response to inspect
+     * @param contentType the response's content type
      * @return <code>false</code> if it is not recognized as JavaScript
      */
-    protected boolean isJavaScript(final WebResponse response) {
-        final String contentType = response.getContentType();
+    static boolean isJavaScript(final String contentType) {
         return contentType.contains("javascript") || contentType.contains("ecmascript")
             || (contentType.startsWith("text/") && contentType.endsWith("js"));
     }

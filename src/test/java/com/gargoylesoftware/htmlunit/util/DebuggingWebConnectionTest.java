@@ -63,4 +63,20 @@ public class DebuggingWebConnectionTest extends WebTestCase {
         assertEquals("hello", DebuggingWebConnection.escapeJSString("hello"));
         assertEquals("I\\'m here", DebuggingWebConnection.escapeJSString("I'm here"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void chooseExtension() throws Exception {
+        assertEquals(".html", DebuggingWebConnection.chooseExtension("text/html"));
+
+        assertEquals(".js", DebuggingWebConnection.chooseExtension("text/javascript"));
+
+        assertEquals(".css", DebuggingWebConnection.chooseExtension("text/css"));
+
+        assertEquals(".xml", DebuggingWebConnection.chooseExtension("text/xml"));
+
+        assertEquals(".txt", DebuggingWebConnection.chooseExtension("text/plain"));
+    }
 }
