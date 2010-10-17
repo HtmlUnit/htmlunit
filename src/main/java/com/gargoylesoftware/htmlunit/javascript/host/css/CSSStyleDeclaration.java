@@ -63,6 +63,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static Map<String, String> CSSColors_ = new HashMap<String, String>();
+    private static Map<String, String> CamelizeCache_ = new HashMap<String, String>();
 
     /** The different types of shorthand values. */
     private enum Shorthand {
@@ -402,14 +403,31 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         if (string == null) {
             return null;
         }
+
+        String result = CamelizeCache_.get(string);
+        if (null != result) {
+            return result;
+        }
+
+        final int pos = string.indexOf('-');
+        if (pos == -1 || pos >= string.length() - 1) {
+            return string;
+        }
+
         final StringBuilder buffer = new StringBuilder(string);
-        for (int i = 0; i < buffer.length() - 1; i++) {
+        buffer.deleteCharAt(pos);
+        buffer.setCharAt(pos, Character.toUpperCase(buffer.charAt(pos)));
+
+        for (int i = pos + 1; i < buffer.length() - 1; i++) {
             if (buffer.charAt(i) == '-') {
                 buffer.deleteCharAt(i);
                 buffer.setCharAt(i, Character.toUpperCase(buffer.charAt(i)));
             }
         }
-        return buffer.toString();
+        result = buffer.toString();
+        CamelizeCache_.put(string, result);
+
+        return result;
     }
 
     /**
