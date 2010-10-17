@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static org.apache.commons.lang.StringUtils.defaultIfEmpty;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -48,6 +49,50 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /** The number of (horizontal) pixels to assume that each character occupies. */
     private static final int PIXELS_PER_CHAR = 10;
+
+    /** The set of 'inheritable' attributes. */
+    private static final Set<String> INHERITABLE_ATTRIBUTES = new HashSet<String>(Arrays.asList(new String[] {
+        "azimuth",
+        "borderCollapse",
+        "borderSpacing",
+        "captionSide",
+        "color",
+        "cursor",
+        "direction",
+        "elevation",
+        "emptyCells",
+        "fontFamily",
+        "fontSize",
+        "fontStyle",
+        "fontVariant",
+        "fontWeight",
+        "font",
+        "letterSpacing",
+        "lineHeight",
+        "listStyleImage",
+        "listStylePosition",
+        "listStyleType",
+        "listStyle",
+        "orphans",
+        "pitchRange",
+        "pitch",
+        "quotes",
+        "richness",
+        "speakHeader",
+        "speakNumeral",
+        "speakPunctuation",
+        "speak",
+        "speechRate",
+        "stress",
+        "textAlign",
+        "textIndent",
+        "textTransform",
+        "visibility",
+        "voiceFamily",
+        "volume",
+        "whiteSpace",
+        "widows",
+        "wordSpacing"}));
 
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
@@ -128,47 +173,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (!camelCase) {
             name = camelize(name);
         }
-        return    "azimuth".equals(name)
-               || "borderCollapse".equals(name)
-               || "borderSpacing".equals(name)
-               || "captionSide".equals(name)
-               || "color".equals(name)
-               || "cursor".equals(name)
-               || "direction".equals(name)
-               || "elevation".equals(name)
-               || "emptyCells".equals(name)
-               || "fontFamily".equals(name)
-               || "fontSize".equals(name)
-               || "fontStyle".equals(name)
-               || "fontVariant".equals(name)
-               || "fontWeight".equals(name)
-               || "font".equals(name)
-               || "letterSpacing".equals(name)
-               || "lineHeight".equals(name)
-               || "listStyleImage".equals(name)
-               || "listStylePosition".equals(name)
-               || "listStyleType".equals(name)
-               || "listStyle".equals(name)
-               || "orphans".equals(name)
-               || "pitchRange".equals(name)
-               || "pitch".equals(name)
-               || "quotes".equals(name)
-               || "richness".equals(name)
-               || "speakHeader".equals(name)
-               || "speakNumeral".equals(name)
-               || "speakPunctuation".equals(name)
-               || "speak".equals(name)
-               || "speechRate".equals(name)
-               || "stress".equals(name)
-               || "textAlign".equals(name)
-               || "textIndent".equals(name)
-               || "textTransform".equals(name)
-               || "visibility".equals(name)
-               || "voiceFamily".equals(name)
-               || "volume".equals(name)
-               || "whiteSpace".equals(name)
-               || "widows".equals(name)
-               || "wordSpacing".equals(name);
+        return INHERITABLE_ATTRIBUTES.contains(name);
     }
 
     /**
