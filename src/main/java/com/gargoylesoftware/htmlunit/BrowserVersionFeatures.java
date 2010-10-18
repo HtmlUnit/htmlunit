@@ -145,12 +145,6 @@ public enum BrowserVersionFeatures {
     GENERATED_113,
 
     /** Was originally .isIE(). */
-    GENERATED_114,
-
-    /** Was originally .isIE(). */
-    GENERATED_115,
-
-    /** Was originally .isIE(). */
     GENERATED_116,
 
     /** Was originally .isIE(). */
@@ -262,9 +256,6 @@ public enum BrowserVersionFeatures {
     GENERATED_151,
 
     /** Was originally .isFirefox(). */
-    GENERATED_152,
-
-    /** Was originally .isFirefox(). */
     GENERATED_153,
 
     /** Was originally .isFirefox(). */
@@ -331,9 +322,6 @@ public enum BrowserVersionFeatures {
     GENERATED_174,
 
     /** Was originally .isFirefox(). */
-    GENERATED_175,
-
-    /** Was originally .isFirefox(). */
     GENERATED_176,
 
     /** Was originally .isFirefox(). */
@@ -343,13 +331,7 @@ public enum BrowserVersionFeatures {
     GENERATED_18,
 
     /** Was originally .isIE(). */
-    GENERATED_19,
-
-    /** Was originally .isIE(). */
     GENERATED_2,
-
-    /** Was originally .isIE(). */
-    GENERATED_20,
 
     /** Was originally .isIE(). */
     GENERATED_21,
@@ -660,8 +642,22 @@ public enum BrowserVersionFeatures {
     /** */
     JAVASCRIPT_DEFERRED,
 
+    /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
+    JAVASCRIPT_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB,
+
     /** Javascript function getElementById compares the id's case sensitive. */
     JAVASCRIPT_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
+
+    /** Javascript function returning a length (e.g. getWidth) without 'px' at the end. */
+    JAVASCRIPT_LENGTH_WITHOUT_PX,
+
+    /**
+     * Set this property if the browser evaluates<br>
+     * window.location.hash to #&uuml; (like Firefox)<br>
+     * for url 'http://localhost/something/#%C3%BC'.<br>
+     * IE evaluates to #%C3%BC.
+     */
+    JAVASCRIPT_LOCATION_HASH_IS_DECODED,
 
     /** Always "[object]". */
     JAVASCRIPT_OBJECT_ONLY,
@@ -722,6 +718,12 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that the browser treats "position: fixed" as if it were "position: static". */
     TREATS_POSITION_FIXED_LIKE_POSITION_STATIC,
+
+    /**
+     * Indicates, that the pathname for the url 'about:blank' is empty;
+     * instead of '/blank'.
+     */
+    URL_ABOUT_BLANK_HAS_EMPTY_PATH,
 
     /** */
     URL_MINIMAL_QUERY_ENCODING,

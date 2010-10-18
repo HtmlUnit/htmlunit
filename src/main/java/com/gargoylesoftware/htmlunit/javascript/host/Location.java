@@ -164,7 +164,8 @@ public class Location extends SimpleScriptable {
         }
         try {
             URL url = page.getWebResponse().getWebRequest().getUrl();
-            final boolean encodeHash = !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_114);
+            final boolean encodeHash = getBrowserVersion().
+                    hasFeature(BrowserVersionFeatures.JAVASCRIPT_LOCATION_HASH_IS_DECODED);
             final String hash = getHash(encodeHash);
             if (hash != null) {
                 url = UrlUtils.getUrlWithNewRef(url, hash);
@@ -282,7 +283,8 @@ public class Location extends SimpleScriptable {
             if (hash.startsWith("#")) {
                 hash = hash.substring(1);
             }
-            final boolean decodeHash = !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_115);
+            final boolean decodeHash = getBrowserVersion().
+                hasFeature(BrowserVersionFeatures.JAVASCRIPT_LOCATION_HASH_IS_DECODED);
             if (decodeHash) {
                 hash = decodeHash(hash);
             }
@@ -378,7 +380,7 @@ public class Location extends SimpleScriptable {
      */
     public String jsxGet_pathname() {
         if (WebClient.URL_ABOUT_BLANK == getUrl()) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_175)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_EMPTY_PATH)) {
                 return "";
             }
             return "/blank";
