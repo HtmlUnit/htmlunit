@@ -51,7 +51,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private static final int PIXELS_PER_CHAR = 10;
 
     /** The set of 'inheritable' attributes. */
-    private static final Set<String> INHERITABLE_ATTRIBUTES = new HashSet<String>(Arrays.asList(new String[] {
+    private static final Set<String> INHERITABLE_ATTRIBUTES = new HashSet<String>(Arrays.asList(
         "azimuth",
         "borderCollapse",
         "borderSpacing",
@@ -92,7 +92,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         "volume",
         "whiteSpace",
         "widows",
-        "wordSpacing"}));
+        "wordSpacing"));
 
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
