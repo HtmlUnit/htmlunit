@@ -484,4 +484,14 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     public Collection<String> getPreviousNames() {
         return previousNames_;
     }
+
+    /**
+     * {@inheritDoc}
+     * @return <code>true</code> to make generated XML readable as HTML
+     */
+    @Override
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
+    }
+
 }

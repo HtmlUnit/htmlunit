@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                XMLSerializer should expand empty 'textarea'.
+            </action>
             <action type="fix" dev="rbri">
                 JS location.href returns the right value after clicking on a link that jumps only to a different hash.
             </action>

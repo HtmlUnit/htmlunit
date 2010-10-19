@@ -83,7 +83,7 @@ class XmlSerializer {
             buffer_.append(indent_).append('<');
             printOpeningTag(node);
 
-            if (!hasChildren && !isEmptyXmlTagExpanded(node)) {
+            if (!hasChildren && !node.isEmptyXmlTagExpanded()) {
                 buffer_.append("/>").append('\n');
             }
             else {
@@ -101,12 +101,6 @@ class XmlSerializer {
                 buffer_.append(indent_).append("</").append(node.getTagName()).append('>').append('\n');
             }
         }
-    }
-
-    protected boolean isEmptyXmlTagExpanded(final DomNode node) {
-        return node instanceof HtmlDivision || node instanceof HtmlInlineFrame || node instanceof HtmlOrderedList
-            || node instanceof HtmlScript || node instanceof HtmlSpan || node instanceof HtmlStyle
-            || node instanceof HtmlTable || node instanceof HtmlTitle || node instanceof HtmlUnorderedList;
     }
 
     /**

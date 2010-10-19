@@ -29,11 +29,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -485,4 +485,30 @@ public class HtmlPage2Test extends WebServerTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void save_emptyTextArea() throws Exception {
+        final String html = "<html>\n"
+            + "<head/>\n"
+            + "<body>\n"
+            + "<textarea></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(html);
+        final File tmpFolder = new File(System.getProperty("java.io.tmpdir"));
+        final File file = new File(tmpFolder, "hu_HtmlPage2Test_save_emptyTextArea.html");
+        try {
+            page.save(file);
+            assertTrue(file.exists());
+            assertTrue(file.isFile());
+            assertTrue(page.asXml().contains("</textarea>"));
+            assertTrue(FileUtils.readFileToString(file).contains("</textarea>"));
+        }
+        finally {
+            file.delete();
+        }
+    }
 }
