@@ -43,6 +43,7 @@ public class HtmlForm2Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented
     public void linkUrlEncoding() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"
