@@ -43,14 +43,13 @@ public class HtmlForm2Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void linkUrlEncoding() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"
             + "  <meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>\n"
             + "</head>\n"
             + "<body>\n"
-            + "   <a href='bug.html?könig' id='myLink'>Click me</a>\n"
+            + "   <a href='bug.html?k\u00F6nig' id='myLink'>Click me</a>\n"
             + "</body></html>";
 
         final WebClient client = getWebClientWithMockWebConnection();
@@ -66,7 +65,7 @@ public class HtmlForm2Test extends WebTestCase {
         final HtmlPage linkPage = page.<HtmlElement>getHtmlElementById("myLink").click();
         final String linkSuffix;
         if (getBrowserVersion().isIE()) {
-            linkSuffix = "bug.html?könig";
+            linkSuffix = "bug.html?k\u00F6nig";
         }
         else {
             linkSuffix = "bug.html?k%F6nig";
