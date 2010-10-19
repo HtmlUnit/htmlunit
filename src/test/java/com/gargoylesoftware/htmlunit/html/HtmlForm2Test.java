@@ -43,6 +43,40 @@ public class HtmlForm2Test extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void linkUrlEncoding() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "  <meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "   <a href='bug.html?könig' id='myLink'>Click me</a>\n"
+            + "</body></html>";
+
+        final WebClient client = getWebClientWithMockWebConnection();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final URL url = getDefaultUrl();
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setDefaultResponse(html, "text/html", "ISO-8859-1");
+
+        final HtmlPage page = client.getPage(url);
+        assertEquals(url.toExternalForm(), page.getWebResponse().getWebRequest().getUrl());
+        final HtmlPage linkPage = page.<HtmlElement>getHtmlElementById("myLink").click();
+        final String linkSuffix;
+        if (getBrowserVersion().isIE()) {
+            linkSuffix = "bug.html?könig";
+        }
+        else {
+            linkSuffix = "bug.html?k%F6nig";
+        }
+        assertEquals(url.toExternalForm() + linkSuffix, linkPage.getWebResponse().getWebRequest().getUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @NotYetImplemented(Browser.FF)
     public void encoding() throws Exception {
         final String html = "<html>\n"
@@ -74,10 +108,6 @@ public class HtmlForm2Test extends WebTestCase {
         if (getBrowserVersion().isIE()) {
             submitSuffix = "?par%C3%B6m=Hello+G%C3%BCnter";
             linkSuffix = "bug.html?h\u00F6=G\u00FCnter";
-        }
-        else if (getBrowserVersion().getBrowserVersionNumeric() == 2) {
-            submitSuffix = "?par%C3%B6m=Hello+G%C3%BCnter";
-            linkSuffix = "bug.html?h%C3%B6=G%C3%BCnter";
         }
         else {
             submitSuffix = "?par\u00F6m=Hello+G\u00FCnter";
