@@ -54,7 +54,8 @@ public final class StringUtils {
      * @return the escaped form of the specified string
      */
     public static String escapeXmlChars(final String s) {
-        return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+        return org.apache.commons.lang.StringUtils.
+                replaceEach(s, new String[] {"&", "<", ">"}, new String[] {"&amp;", "&lt;", "&gt;"});
     }
 
     /**
