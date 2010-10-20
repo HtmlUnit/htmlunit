@@ -725,7 +725,7 @@ public enum BrowserVersionFeatures {
      */
     URL_ABOUT_BLANK_HAS_EMPTY_PATH,
 
-    /** */
+    /** Replace only ' ' with %20 when encode the query part of an url. */
     URL_MINIMAL_QUERY_ENCODING,
 
     /** */
