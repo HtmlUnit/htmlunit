@@ -39,6 +39,9 @@ public enum BrowserVersionFeatures {
     /** If the "type" attribute of HtmlButton should be evaluated to 'button' if not specified. */
     BUTTON_EMPTY_TYPE_BUTTON,
 
+    /** Is canvas supported? */
+    CANVAS,
+
     /** Indicates that the browser can inherit CSS property values. */
     CAN_INHERIT_CSS_PROPERTY_VALUES,
 
@@ -590,6 +593,9 @@ public enum BrowserVersionFeatures {
 
     /** */
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
+
+    /** Indicates if HTML5 tags source, video and audio are recognized. */
+    HTML5_TAGS,
 
     /** */
     HTMLABBREVIATED,

@@ -2699,4 +2699,24 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "undefined", "true" }, IE = "exception")
+    public void prototype_innerHTML() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  alert(HTMLElement.prototype.innerHTML);\n"
+            + "  var myFunc = function() {};\n"
+            + "  HTMLElement.prototype.innerHTML = myFunc;\n"
+            + "  alert(HTMLElement.prototype.innerHTML == myFunc);\n"
+            + "} catch (e) { alert('exception') }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

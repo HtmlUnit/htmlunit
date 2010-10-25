@@ -81,6 +81,7 @@ public class JavaScriptEngine {
 
     private final WebClient webClient_;
     private final HtmlUnitContextFactory contextFactory_;
+    private final JavaScriptConfiguration jsConfig_;
 
     private transient ThreadLocal<Boolean> javaScriptRunning_;
     private transient ThreadLocal<List<PostponedAction>> postponedActions_;
@@ -112,6 +113,7 @@ public class JavaScriptEngine {
         webClient_ = webClient;
         contextFactory_ = new HtmlUnitContextFactory(webClient);
         initTransientFields();
+        jsConfig_ = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
     }
 
     /**
@@ -175,7 +177,6 @@ public class JavaScriptEngine {
             new HashMap<Class< ? extends SimpleScriptable>, Scriptable>();
         final Map<String, Scriptable> prototypesPerJSName = new HashMap<String, Scriptable>();
         final Window window = new Window();
-        final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(browserVersion);
         context.initStandardObjects(window);
 
         // remove some objects, that Rhino defines in top scope but that we don't want
@@ -188,8 +189,7 @@ public class JavaScriptEngine {
         final Scriptable fallbackCaller = new FallbackCaller();
         ScriptableObject.getObjectPrototype(window).setPrototype(fallbackCaller);
 
-        for (final String jsClassName : jsConfig.keySet()) {
-            final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
+        for (final ClassConfiguration config : jsConfig_.getAll()) {
             final boolean isWindow = Window.class.getName().equals(config.getHostClass().getName());
             if (isWindow) {
                 configureConstantsPropertiesAndFunctions(config, window);
@@ -223,7 +223,7 @@ public class JavaScriptEngine {
         final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
         for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
             final String name = entry.getKey();
-            final ClassConfiguration config = jsConfig.getClassConfiguration(name);
+            final ClassConfiguration config = jsConfig_.getClassConfiguration(name);
             Scriptable prototype = entry.getValue();
             if (prototype.getPrototype() != null) {
                 prototype = prototype.getPrototype(); // "double prototype" hack for FF
@@ -242,10 +242,10 @@ public class JavaScriptEngine {
         final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
         window.associateValue("custom_eval", jsCustomEval);
 
-        for (final String jsClassName : jsConfig.keySet()) {
-            final ClassConfiguration config = jsConfig.getClassConfiguration(jsClassName);
+        for (final ClassConfiguration config : jsConfig_.getAll()) {
             final Method jsConstructor = config.getJsConstructor();
             if (jsConstructor != null) {
+                final String jsClassName = config.getHostClass().getSimpleName();
                 final Scriptable prototype = prototypesPerJSName.get(jsClassName);
                 if (prototype != null) {
                     final FunctionObject jsCtor = new FunctionObject(jsClassName, jsConstructor, window);
@@ -731,6 +731,14 @@ public class JavaScriptEngine {
         public String getClassName() {
             return "htmlUnitHelper-fallbackCaller";
         }
-    };
+    }
 
+    /**
+     * Gets the class of the JavaScript object for the node class.
+     * @param c the node class {@link DomNode} or some subclass.
+     * @return <code>null</code> if none found
+     */
+    public Class<? extends SimpleScriptable> getJavaScriptClass(final Class<?> c) {
+        return jsConfig_.getHtmlJavaScriptMapping().get(c);
+    }
 }

@@ -20,11 +20,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.WeakHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -131,10 +129,7 @@ public final class JavaScriptConfiguration {
 
     private static Map<String, String> ClassnameMap_ = new HashMap<String, String>();
 
-    private static Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> HtmlJavaScriptMap_;
-
-    /** Key is "tagName" lower case, value is the HtmlElement which corresponds to that tagName. */
-    private static Map<String, Class < ? extends HtmlElement>> HtmlTagsMap_;
+    private Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> htmlJavaScriptMap_;
 
     private final Map<String, ClassConfiguration> configuration_;
 
@@ -283,25 +278,46 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Gets the set of keys for the class configurations.
-     * @return the set of keys for the class configurations
+     * Gets all the configurations.
+     * @return the class configurations
      */
-    public Set<String> keySet() {
-        return configuration_.keySet();
+    public Iterable<ClassConfiguration> getAll() {
+        return configuration_.values();
     }
 
     private Map<String, ClassConfiguration> buildUsageMap(final BrowserVersion browser) {
         final Map<String, ClassConfiguration> classMap = new HashMap<String, ClassConfiguration>(30);
         Node node = XmlDocument_.getDocumentElement().getFirstChild();
+
+        final Map<String, ClassConfiguration> virtualClasses = new HashMap<String, ClassConfiguration>();
+
         while (node != null) {
             if (node instanceof Element) {
                 final Element element = (Element) node;
                 if (element.getTagName().equals("class")) {
                     if (!testToExcludeElement(element, browser)) {
+                        final String hostClassName = element.getAttribute("classname");
+                        if (hostClassName.startsWith("#")) {
+                            // this is not a real class but a facility for configuration
+                            final String extendsClassName = element.getAttribute("extends");
+                            final ClassConfiguration parentConfig = classMap.get(extendsClassName);
+                            if (parentConfig == null) {
+                                throw new RuntimeException(extendsClassName
+                                    + " should be specified before " + hostClassName);
+                            }
+                            element.setAttribute("classname", parentConfig.getHostClass().getName());
+                        }
+
                         try {
                             final ClassConfiguration config = parseClassElement(element, browser);
                             if (config != null) {
-                                classMap.put(config.getHostClass().getSimpleName(), config);
+                                if (hostClassName.startsWith("#")) {
+                                    virtualClasses.put(hostClassName, config);
+                                    element.setAttribute("classname", hostClassName); // restore it
+                                }
+                                else {
+                                    classMap.put(config.getHostClass().getSimpleName(), config);
+                                }
                             }
                         }
                         catch (final ClassNotFoundException e) {
@@ -313,6 +329,22 @@ public final class JavaScriptConfiguration {
             }
             node = node.getNextSibling();
         }
+
+        // add properties and methods from the virtual classes directly to the classes that "inherit" from them
+        for (final ClassConfiguration config : classMap.values()) {
+            final String extendsClassName = config.getExtendedClassName();
+            if (extendsClassName.startsWith("#")) {
+                final ClassConfiguration virtualClassConfig = virtualClasses.get(extendsClassName);
+                if (virtualClassConfig == null) {
+                    throw new RuntimeException("Virtual config >" + extendsClassName + "< doesn't exist!");
+                }
+
+                config.addAllDefinitions(virtualClassConfig);
+                // only one level of virtual classes allowed
+                config.setExtendedClassName(virtualClassConfig.getExtendedClassName());
+            }
+        }
+
         return Collections.unmodifiableMap(classMap);
     }
 
@@ -474,19 +506,6 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Test to see if the supplied configuration matches for the parsed configuration for the named class
-     * This is a method for testing.
-     *
-     * @param classname - the parsed classname to test
-     * @param config - the expected configuration
-     * @return true if they match
-     */
-    protected boolean classConfigEquals(final String classname, final ClassConfiguration config) {
-        final ClassConfiguration myConfig = configuration_.get(classname);
-        return config.equals(myConfig);
-    }
-
-    /**
      * Gets the class configuration for the supplied JavaScript class name.
      * @param classname the js class name
      * @return the class configuration for the supplied JavaScript class name
@@ -527,157 +546,6 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Returns the class for the given class name.
-     * @param classname the classname that you want the implementing class for  (for testing only)
-     * @return the class for the given class name
-     */
-    protected Class< ? > getClassObject(final String classname) {
-        final ClassConfiguration config = configuration_.get(classname);
-        return config.getHostClass();
-    }
-
-    /**
-     * Gets the method that implements the getter for the given property based upon the class object.
-     * @param clazz the actual class to use as reference
-     * @param propertyName the property to find the getter for
-     * @return the method that implements the getter for the given property based upon the class object
-     */
-    public Method getPropertyReadMethod(final Class< ? > clazz, final String propertyName) {
-        final String classname = getClassnameForClass(clazz);
-        return getPropertyReadMethod(classname, propertyName);
-    }
-
-    /**
-     * Returns the method that implements the get function for in the class for the given class.
-     *
-     * @param classname the name of the class to work with
-     * @param propertyName the property to find the getter for
-     * @return the method that implements the get function for in the class for the given class
-     */
-    public Method getPropertyReadMethod(String classname, final String propertyName) {
-        ClassConfiguration config;
-        Method theMethod;
-        while (classname.length() > 0) {
-            config = configuration_.get(classname);
-            if (config == null) {
-                return null;
-            }
-            theMethod = config.getPropertyReadMethod(propertyName);
-            if (theMethod != null) {
-                return theMethod;
-            }
-            classname = config.getExtendedClassName();
-        }
-        return null;
-    }
-
-    private ClassConfiguration.PropertyInfo findPropertyInChain(final String classname, final String propertyName) {
-        String workname = classname;
-        ClassConfiguration config;
-        while (workname.length() > 0) {
-            config = configuration_.get(workname);
-            final ClassConfiguration.PropertyInfo info = config.getPropertyInfo(propertyName);
-            if (info != null) {
-                return info;
-            }
-            workname = config.getExtendedClassName();
-        }
-        return null;
-    }
-
-    /**
-     * Gets the method that implements the setter for the given property based upon the class object.
-     * @param clazz the actual class to use as reference
-     * @param propertyName the property to find the getter for
-     * @return the method that implements the setter for the given property based upon the class object
-     */
-    public Method getPropertyWriteMethod(final Class< ? > clazz, final String propertyName) {
-        final String classname = getClassnameForClass(clazz);
-        return getPropertyWriteMethod(classname, propertyName);
-    }
-
-    /**
-     * Returns the method that implements the set function in the class for the given class.
-     *
-     * @param classname the name of the class to work with
-     * @param propertyName the property to find the setter for
-     * @return the method that implements the set function in the class for the given class
-     */
-    public Method getPropertyWriteMethod(String classname, final String propertyName) {
-        ClassConfiguration config;
-        Method theMethod;
-        while (classname.length() > 0) {
-            config = configuration_.get(classname);
-            theMethod = config.getPropertyWriteMethod(propertyName);
-            if (theMethod != null) {
-                return theMethod;
-            }
-            classname = config.getExtendedClassName();
-        }
-        return null;
-    }
-
-    /**
-     * Gets the method that implements the setter for the given property based upon the class object.
-     *
-     * @param clazz the actual class to use as reference
-     * @param functionName the function to find the method for
-     * @return the method that implements the setter for the given property based upon the class object
-     */
-    public Method getFunctionMethod(final Class< ? > clazz, final String functionName) {
-        final String classname = getClassnameForClass(clazz);
-        return getFunctionMethod(classname, functionName);
-    }
-
-    /**
-     * Returns the method that implements the given function in the class for the given class.
-     *
-     * @param classname the name of the class to work with
-     * @param functionName the function to find the method for
-     * @return the method that implements the given function in the class for the given class
-     */
-    public Method getFunctionMethod(String classname, final String functionName) {
-        ClassConfiguration config;
-        Method theMethod;
-        while (classname.length() > 0) {
-            config = configuration_.get(classname);
-            theMethod = config.getFunctionMethod(functionName);
-            if (theMethod != null) {
-                return theMethod;
-            }
-            classname = config.getExtendedClassName();
-        }
-        return null;
-    }
-
-    /**
-     * Checks to see if there is an entry for the given property.
-     *
-     * @param clazz the class the property is for
-     * @param propertyName the name of the property
-     * @return boolean <tt>true</tt> if the property exists
-     */
-    public boolean propertyExists(final Class< ? > clazz, final String propertyName) {
-        final String classname = getClassnameForClass(clazz);
-        return propertyExists(classname, propertyName);
-    }
-
-    /**
-     * Checks to see if there is an entry for the given property.
-     *
-     * @param classname the class the property is for
-     * @param propertyName the name of the property
-     * @return boolean <tt>true</tt> if the property exists
-     */
-    public boolean propertyExists(final String classname, final String propertyName) {
-        final ClassConfiguration.PropertyInfo info = findPropertyInChain(classname, propertyName);
-        if (info == null) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Returns the classname that the given class implements. If the class is
      * the input class, then the name is extracted from the type that the Input class
      * is masquerading as.
@@ -685,7 +553,7 @@ public final class JavaScriptConfiguration {
      * @param clazz
      * @return the classname
      */
-    private String getClassnameForClass(final Class< ? > clazz) {
+    String getClassnameForClass(final Class< ? > clazz) {
         final String name = ClassnameMap_.get(clazz.getName());
         if (name == null) {
             throw new IllegalStateException("Did not find the mapping of the class to the classname for "
@@ -701,18 +569,17 @@ public final class JavaScriptConfiguration {
      * @return the mappings
      */
     @SuppressWarnings("unchecked")
-    public static synchronized Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>>
+    public Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>>
     getHtmlJavaScriptMapping() {
-        if (HtmlJavaScriptMap_ != null) {
-            return HtmlJavaScriptMap_;
+        if (htmlJavaScriptMap_ != null) {
+            return htmlJavaScriptMap_;
         }
-        final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
 
         final Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> map =
             new HashMap<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>>();
 
-        for (String jsClassname : configuration.keySet()) {
-            ClassConfiguration classConfig = configuration.getClassConfiguration(jsClassname);
+        for (String jsClassname : configuration_.keySet()) {
+            ClassConfiguration classConfig = getClassConfiguration(jsClassname);
             final String htmlClassname = classConfig.getHtmlClassname();
             if (htmlClassname != null) {
                 try {
@@ -724,7 +591,7 @@ public final class JavaScriptConfiguration {
                     }
                     while (!classConfig.isJsObject()) {
                         jsClassname = classConfig.getExtendedClassName();
-                        classConfig = configuration.getClassConfiguration(jsClassname);
+                        classConfig = getClassConfiguration(jsClassname);
                     }
                     map.put(htmlClass, classConfig.getHostClass());
                 }
@@ -790,30 +657,8 @@ public final class JavaScriptConfiguration {
         map.put(HtmlTableColumn.class, HTMLTableColElement.class);
         map.put(HtmlTableColumnGroup.class, HTMLTableColElement.class);
 
-        HtmlJavaScriptMap_ = Collections.unmodifiableMap(map);
+        htmlJavaScriptMap_ = Collections.unmodifiableMap(map);
 
-        final Map tagNameMap = new HashMap<String, Class < ? extends HtmlElement>>();
-        for (final Class<? extends HtmlElement> klass : HtmlJavaScriptMap_.keySet()) {
-            try {
-                tagNameMap.put(klass.getField("TAG_NAME").get(null).toString(), klass);
-            }
-            catch (final Exception e) {
-                //ignore
-            }
-        }
-        HtmlTagsMap_ = Collections.unmodifiableMap(tagNameMap);
-        return HtmlJavaScriptMap_;
-    }
-
-    /**
-     * Returns an immutable map containing the TagName to mappings.
-     * Keys are string which is 'tagName', and values are java classes for the HTML classes (e.g. HtmlInput.class)
-     * @return the mappings
-     */
-    public static synchronized Map<String, Class < ? extends HtmlElement>> getHtmlTagNameMapping() {
-        if (HtmlTagsMap_ == null) {
-            getHtmlJavaScriptMapping();
-        }
-        return HtmlTagsMap_;
+        return htmlJavaScriptMap_;
     }
 }

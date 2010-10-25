@@ -180,6 +180,20 @@ public final class ClassConfiguration {
     }
 
     /**
+     * Adds properties and function definitions from the provided configuration.
+     * @param virtualClassConfig the config to take definitions from.
+     */
+    void addAllDefinitions(final ClassConfiguration virtualClassConfig) {
+        if (!virtualClassConfig.getHostClass().isAssignableFrom(getHostClass())) {
+            throw new RuntimeException("Can't configure " + getHostClass() + " with info from "
+                + virtualClassConfig.getHostClass());
+        }
+        propertyMap_.putAll(virtualClassConfig.propertyMap_);
+        functionMap_.putAll(virtualClassConfig.functionMap_);
+        constants_.addAll(virtualClassConfig.constants_);
+    }
+
+    /**
      * Sets the browser information for this named property.
      * @param propertyName - Name of the property to set
      * @param browserName - Browser name to set

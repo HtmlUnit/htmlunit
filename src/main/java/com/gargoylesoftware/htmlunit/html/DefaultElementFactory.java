@@ -20,9 +20,8 @@ import java.util.Map;
 
 import org.xml.sax.Attributes;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
  * Element factory which creates elements by calling the constructor on a
@@ -110,18 +109,18 @@ class DefaultElementFactory implements IElementFactory {
             tagName = qualifiedName.substring(colonIndex + 1).toLowerCase();
         }
 
-        final Class<? extends HtmlElement> klass = JavaScriptConfiguration.getHtmlTagNameMapping().get(tagName);
-        if (klass != null) {
-            String jsClassName = JavaScriptConfiguration.getHtmlJavaScriptMapping().get(klass).getName();
-            jsClassName = jsClassName.substring(jsClassName.lastIndexOf('.') + 1);
-            final ClassConfiguration config =
-                JavaScriptConfiguration.getInstance(page.getWebClient().getBrowserVersion())
-                    .getClassConfiguration(jsClassName);
-            if (config == null) {
-                return UnknownElementFactory.instance.createElementNS(
-                        page, namespaceURI, qualifiedName, attributes);
-            }
-        }
+//        final Class<? extends HtmlElement> klass = JavaScriptConfiguration.getHtmlTagNameMapping().get(tagName);
+//        if (klass != null) {
+//            String jsClassName = JavaScriptConfiguration.getHtmlJavaScriptMapping().get(klass).getName();
+//            jsClassName = jsClassName.substring(jsClassName.lastIndexOf('.') + 1);
+//            final ClassConfiguration config =
+//                JavaScriptConfiguration.getInstance(page.getWebClient().getBrowserVersion())
+//                    .getClassConfiguration(jsClassName);
+//            if (config == null) {
+//                return UnknownElementFactory.instance.createElementNS(
+//                        page, namespaceURI, qualifiedName, attributes);
+//            }
+//        }
         if (tagName.equals(HtmlAbbreviated.TAG_NAME)) {
             element = new HtmlAbbreviated(namespaceURI, qualifiedName, page, attributeMap);
         }
@@ -141,7 +140,12 @@ class DefaultElementFactory implements IElementFactory {
             element = new HtmlArea(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlAudio.TAG_NAME)) {
-            element = new HtmlAudio(namespaceURI, qualifiedName, page, attributeMap);
+            if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML5_TAGS)) {
+                element = new HtmlAudio(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
         }
         else if (tagName.equals(HtmlBackgroundSound.TAG_NAME)) {
             element = new HtmlBackgroundSound(namespaceURI, qualifiedName, page, attributeMap);
@@ -180,7 +184,12 @@ class DefaultElementFactory implements IElementFactory {
             element = new HtmlButtonInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlCanvas.TAG_NAME)) {
-            element = new HtmlCanvas(namespaceURI, qualifiedName, page, attributeMap);
+            if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.CANVAS)) {
+                element = new HtmlCanvas(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
         }
         else if (tagName.equals(HtmlCaption.TAG_NAME)) {
             element = new HtmlCaption(namespaceURI, qualifiedName, page, attributeMap);
@@ -396,7 +405,12 @@ class DefaultElementFactory implements IElementFactory {
             element = new HtmlSmall(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSource.TAG_NAME)) {
-            element = new HtmlSource(namespaceURI, qualifiedName, page, attributeMap);
+            if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML5_TAGS)) {
+                element = new HtmlSource(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
         }
         else if (tagName.equals(HtmlSpacer.TAG_NAME)) {
             element = new HtmlSpacer(namespaceURI, qualifiedName, page, attributeMap);
@@ -474,7 +488,12 @@ class DefaultElementFactory implements IElementFactory {
             element = new HtmlVariable(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlVideo.TAG_NAME)) {
-            element = new HtmlVideo(namespaceURI, qualifiedName, page, attributeMap);
+            if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML5_TAGS)) {
+                element = new HtmlVideo(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
         }
         else if (tagName.equals(HtmlWordBreak.TAG_NAME)) {
             element = new HtmlWordBreak(namespaceURI, qualifiedName, page, attributeMap);

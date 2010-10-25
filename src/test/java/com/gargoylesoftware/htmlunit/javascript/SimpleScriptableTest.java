@@ -31,6 +31,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
@@ -87,10 +88,10 @@ public class SimpleScriptableTest extends WebTestCase {
      * Test.
      */
     @Test
-    @Browsers(Browser.NONE)
     public void htmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
-        final Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> map =
-            JavaScriptConfiguration.getHtmlJavaScriptMapping();
+        final JavaScriptConfiguration jsConfiguration = JavaScriptConfiguration.getInstance(getBrowserVersion());
+        final Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> map
+            = jsConfiguration.getHtmlJavaScriptMapping();
         String directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host";
         final Set<String> names = getFileNames(directoryName.replace('/', File.separatorChar));
         directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host/html";
@@ -171,6 +172,16 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("XSLTProcessor");
         names.remove("XSLTemplate");
         names.remove("XMLAttr");
+
+        if (getBrowserVersion() != BrowserVersion.FIREFOX_3_6) {
+            names.remove("HTMLAudioElement");
+            names.remove("HTMLSourceElement");
+            names.remove("HTMLVideoElement");
+
+            if (getBrowserVersion().isIE()) {
+                names.remove("HTMLCanvasElement");
+            }
+        }
 
         final Collection<String> hostClassNames = new ArrayList<String>();
         for (final Class< ? extends SimpleScriptable> clazz : map.values()) {

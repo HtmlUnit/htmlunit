@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -200,7 +199,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
         // Walk up the inheritance chain if necessary.
         Class< ? extends SimpleScriptable> javaScriptClass = null;
         for (Class< ? > c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
-            javaScriptClass = JavaScriptConfiguration.getHtmlJavaScriptMapping().get(c);
+            javaScriptClass = getWindow().getWebWindow().getWebClient().getJavaScriptEngine().getJavaScriptClass(c);
         }
 
         final SimpleScriptable scriptable;
