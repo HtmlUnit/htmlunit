@@ -104,7 +104,7 @@ public abstract class HtmlElement extends DomElement {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         if (page != null && page.getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.HTMLELEMENT_CLASS_ATTRIBUTE)) {
+                .hasFeature(BrowserVersionFeatures.HTMLELEMENT_TRIM_CLASS_ATTRIBUTE)) {
             final String value = getAttribute("class");
             if (value != ATTRIBUTE_NOT_DEFINED) {
                 getAttributeNode("class").setValue(value.trim());

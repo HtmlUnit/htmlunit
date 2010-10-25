@@ -749,7 +749,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
         else if (node instanceof DomCharacterData) {
             // Remove whitespace sequences, possibly escape XML characters.
-            String s = node.getNodeValue().replaceAll("  ", " ");
+            String s = node.getNodeValue();
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES)) {
+                s = s.replaceAll("  ", " ");
+            }
             if (html) {
                 s = com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlChars(s);
             }
@@ -1725,7 +1728,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
      */
     public Object jsxGet_offsetParent() {
-        Object offsetParent = Context.getUndefinedValue();
+        Object offsetParent = null;
         DomNode currentElement = getDomNodeOrDie();
 
         final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
@@ -1761,6 +1764,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             currentElement = currentElement.getParentNode();
         }
 
+        if (offsetParent == null) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED)) {
+                throw Context.reportRuntimeError("Unspecified error");
+            }
+        }
         return offsetParent;
     }
 

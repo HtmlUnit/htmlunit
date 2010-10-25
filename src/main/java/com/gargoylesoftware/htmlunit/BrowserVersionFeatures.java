@@ -607,7 +607,7 @@ public enum BrowserVersionFeatures {
     HTMLELEMENT_ALIGN_INVALID,
 
     /** */
-    HTMLELEMENT_CLASS_ATTRIBUTE,
+    HTMLELEMENT_TRIM_CLASS_ATTRIBUTE,
 
     /** */
     HTMLIMAGE_NAME_VALUE_PARAMS,
@@ -667,6 +667,14 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
+
+    /** Indicates if multiple spaces are replaced by a single one when accessing innerHTML. */
+    JS_INNER_HTML_REDUCE_WHITESPACES,
+
+    /** Indicates that someObj.offsetParent throws an exception when called on an object that is not yet attached
+     *  to the page's DOM.
+     */
+    JS_OFFSET_PARENT_THROWS_NOT_ATTACHED,
 
     /** Indicates if calling HTMLSelectElement.item with a negative value should throw. */
     JS_SELECT_ITEM_THROWS_IF_NEGATIVE,

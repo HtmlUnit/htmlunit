@@ -6,11 +6,17 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                Don't trim class attribute for FF3.6.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: don't reduce multiple white spaces when reading innerHTML (FF only).
+            </action>
             <action type="fix" dev="asashour">
                 XMLSerializer should expand empty 'textarea'.
             </action>
             <action type="fix" dev="rbri">
-                JS location.href returns the right value after clicking on a link that jumps only to a different hash.
+                JavaScript: location.href returns the right value after clicking on a link that jumps only to a different hash.
             </action>
             <action type="fix" dev="rbri" issue="3056617">
                 Fixed reload handling if only the hash part of a url changed.
