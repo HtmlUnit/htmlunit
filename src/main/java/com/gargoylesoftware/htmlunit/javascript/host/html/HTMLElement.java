@@ -1728,9 +1728,16 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
      */
     public Object jsxGet_offsetParent() {
-        Object offsetParent = null;
         DomNode currentElement = getDomNodeOrDie();
 
+        if (currentElement.getParentNode() == null) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED)) {
+                throw Context.reportRuntimeError("Unspecified error");
+            }
+            return null;
+        }
+
+        Object offsetParent = null;
         final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
         final ComputedCSSStyleDeclaration style = htmlElement.jsxGet_currentStyle();
         final String position = style.getPositionWithInheritance();
@@ -1764,11 +1771,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             currentElement = currentElement.getParentNode();
         }
 
-        if (offsetParent == null) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED)) {
-                throw Context.reportRuntimeError("Unspecified error");
-            }
-        }
         return offsetParent;
     }
 

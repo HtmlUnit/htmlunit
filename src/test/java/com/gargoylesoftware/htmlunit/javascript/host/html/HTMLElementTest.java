@@ -1585,7 +1585,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "null", IE = "exception")
+    @Alerts(FF = { "null", "null" }, IE = { "exception", "null" })
     public void offsetParent_newElement() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -1593,6 +1593,9 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  var oNew = document.createElement('span');\n"
             + "  alert(oNew.offsetParent);\n"
             + "} catch(e) { alert('exception') }\n"
+            + "var fragment = document.createDocumentFragment();\n"
+            + "fragment.appendChild(oNew);\n"
+            + "alert(oNew.offsetParent);\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
