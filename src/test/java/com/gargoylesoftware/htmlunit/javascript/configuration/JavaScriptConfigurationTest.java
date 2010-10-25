@@ -749,7 +749,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     //@Test // do we really want to check it? It is easier to have definitions ordered by usage.
-    public void lexicographicOrder() throws Exception {
+    protected void lexicographicOrder() throws Exception {
         final String directory = "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration/";
 
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
