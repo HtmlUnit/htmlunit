@@ -119,7 +119,7 @@ public class ExtJS22Test extends WebTestCase {
     }
 
     private boolean core_spotlight_isDisabled(final HtmlButton button) {
-        final HtmlTable table = (HtmlTable) button.getParentNode().getParentNode().getParentNode().getParentNode();
+        final HtmlTable table = (HtmlTable) button.getEnclosingElement("table");
         if (getBrowserVersion().isIE()) {
             return table.hasAttribute("disabled");
         }
