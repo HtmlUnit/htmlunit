@@ -7,7 +7,10 @@
     <body>
         <release version="2.9" date="???" description="Bugfixes">
             <action type="fix" dev="mguillem">
-                JavaScript: HTMLElement.prototype.innertHTML should be unddefined (FF).
+                JavaScript: fixed internal error occurring in XMLDocument.loadXML with ill formed XML code.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: HTMLElement.prototype.innertHTML should be undefined (FF).
             </action>
             <action type="fix" dev="mguillem">
                 Don't trim class attribute for FF3.6.

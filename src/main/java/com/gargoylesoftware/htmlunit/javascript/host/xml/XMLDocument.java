@@ -150,7 +150,8 @@ public class XMLDocument extends Document {
         try {
             final List<NameValuePair> emptyList = Collections.emptyList();
             final WebResponseData data = new WebResponseData(strXML.getBytes(), HttpStatus.SC_OK, null, emptyList);
-            final WebResponse webResponse = new WebResponse(data, (URL) null, (HttpMethod) null, 0);
+            final URL hackUrl = new URL("http://-htmlunit-internal/XMLDocument.loadXML"); // hack! better solution?
+            final WebResponse webResponse = new WebResponse(data, hackUrl, (HttpMethod) null, 0);
             final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow());
             setDomNode(page);
             return true;

@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class DOMParserTest extends WebTestCase {
+public class DOMParserTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -61,14 +61,37 @@ public class DOMParserTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts2(content);
+    }
+
+    /**
+     * In 2.9-SNAPSHOT on 26.10.2010 this was causing an internal error in DOMParser.jsxFunction_parseFromString.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("end")
+    public void parseFromString_invalidXml() throws Exception {
+        final String content = "<html><head><title>foo</title><script>\n"
+            + "var text = '</notvalid> ';\n"
+            + "if (window.ActiveXObject) {\n"
+            + "  var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  doc.async = false;\n"
+            + "  doc.loadXML(text);\n"
+            + "} else {\n"
+            + "  var parser=new DOMParser();\n"
+            + "  var doc=parser.parseFromString(text,'text/xml');\n"
+            + "}\n"
+            + "alert('end');\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(content);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts()
     public void parseFromString_emptyString() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -85,7 +108,7 @@ public class DOMParserTest extends WebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts(content);
+        loadPageWithAlerts2(content);
     }
 
     /**
@@ -111,7 +134,7 @@ public class DOMParserTest extends WebTestCase {
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }
