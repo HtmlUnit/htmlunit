@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Amit Manjhi
+ * @author Ronald Brill
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
@@ -601,6 +602,10 @@ public class JavaScriptEngine {
                 return null;
             }
             catch (final TimeoutError e) {
+                final JavaScriptErrorListener javaScriptErrorListener = getWebClient().getJavaScriptErrorListener();
+                if (javaScriptErrorListener != null) {
+                    javaScriptErrorListener.timeoutError(htmlPage_, e.getAllowedTime(), e.getExecutionTime());
+                }
                 if (getWebClient().isThrowExceptionOnScriptError()) {
                     throw new RuntimeException(e);
                 }
@@ -678,6 +683,10 @@ public class JavaScriptEngine {
                     w.triggerOnError(scriptException);
                 }
             }
+        }
+        final JavaScriptErrorListener javaScriptErrorListener = getWebClient().getJavaScriptErrorListener();
+        if (javaScriptErrorListener != null) {
+            javaScriptErrorListener.scriptException(page, scriptException);
         }
         // Throw a Java exception if the user wants us to.
         if (getWebClient().isThrowExceptionOnScriptError()) {

@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.ProxyAutoConfig;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
@@ -166,6 +167,7 @@ public class WebClient implements Serializable {
     private boolean activeXNative_;
     private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
     private boolean throwExceptionOnScriptError_ = true;
+    private JavaScriptErrorListener javaScriptErrorListener_;
 
     /**
      * Creates a web client instance using the browser version returned by
@@ -780,6 +782,22 @@ public class WebClient implements Serializable {
      */
     public StatusHandler getStatusHandler() {
         return statusHandler_;
+    }
+
+    /**
+     * Sets the javascript error listener for this webclient.
+     * @param javaScriptErrorListener the new javaScriptErrorHandler or null if none is specified
+     */
+    public void setJavaScriptErrorListener(final JavaScriptErrorListener javaScriptErrorListener) {
+        javaScriptErrorListener_ = javaScriptErrorListener;
+    }
+
+    /**
+     * Returns the javascript error listener for this webclient.
+     * @return the javascript error listener or null if one hasn't been set
+     */
+    public JavaScriptErrorListener getJavaScriptErrorListener() {
+        return javaScriptErrorListener_;
     }
 
     /**

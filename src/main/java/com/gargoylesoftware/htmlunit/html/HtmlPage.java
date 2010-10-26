@@ -77,6 +77,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
@@ -947,6 +948,10 @@ public class HtmlPage extends SgmlPage {
         }
         catch (final MalformedURLException e) {
             LOG.error("Unable to build URL for script src tag [" + srcAttribute + "]");
+            final JavaScriptErrorListener javaScriptErrorListener = client.getJavaScriptErrorListener();
+            if (javaScriptErrorListener != null) {
+                javaScriptErrorListener.malformedScriptURL(this, srcAttribute, e);
+            }
             if (client.isThrowExceptionOnScriptError()) {
                 throw new ScriptException(this, e);
             }
@@ -959,7 +964,19 @@ public class HtmlPage extends SgmlPage {
         }
         catch (final IOException e) {
             LOG.error("Error loading JavaScript from [" + scriptURL + "].", e);
+            final JavaScriptErrorListener javaScriptErrorListener = client.getJavaScriptErrorListener();
+            if (javaScriptErrorListener != null) {
+                javaScriptErrorListener.loadScriptError(this, scriptURL, e);
+            }
             return JavaScriptLoadResult.DOWNLOAD_ERROR;
+        }
+        catch (final FailingHttpStatusCodeException e) {
+            LOG.error("Error loading JavaScript from [" + scriptURL + "].", e);
+            final JavaScriptErrorListener javaScriptErrorListener = client.getJavaScriptErrorListener();
+            if (javaScriptErrorListener != null) {
+                javaScriptErrorListener.loadScriptError(this, scriptURL, e);
+            }
+            throw e;
         }
 
         if (script == null) {
