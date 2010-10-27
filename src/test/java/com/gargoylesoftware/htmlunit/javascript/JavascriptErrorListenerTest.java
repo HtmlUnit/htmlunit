@@ -159,7 +159,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
 
         assertEquals("com.gargoylesoftware.htmlunit.ScriptException: "
                 + "ReferenceError: \"unknown\" is not defined. "
-                + "(script in http://localhost:12345/ from (1, 58) to (1, 81)#1)",
+                + "(script in http://localhost:" + PORT + "/ from (1, 58) to (1, 81)#1)",
                 scriptExceptions.toString());
         assertEquals("", loadScriptErrors.toString());
         assertEquals("", malformedScriptURLErrors.toString());
@@ -181,11 +181,11 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
 
         assertEquals("com.gargoylesoftware.htmlunit.ScriptException: "
                 + "ReferenceError: \"unknown\" is not defined. "
-                + "(script in http://localhost:12345/ from (1, 58) to (1, 81)#1)",
+                + "(script in http://localhost:" + PORT + "/ from (1, 58) to (1, 81)#1)",
                 scriptExceptions.toString());
-        assertEquals("http://localhost:12345/second/, "
+        assertEquals("http://localhost:" + PORT + "/second/, "
                 + "com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException: "
-                + "500 BOOM for http://localhost:12345/second/", loadScriptErrors.toString());
+                + "500 BOOM for http://localhost:" + PORT + "/second/", loadScriptErrors.toString());
         assertEquals("", malformedScriptURLErrors.toString());
         assertEquals("", timeoutErrors.toString());
 
@@ -199,11 +199,11 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
 
         assertEquals("com.gargoylesoftware.htmlunit.ScriptException: "
                 + "ReferenceError: \"unknown\" is not defined. "
-                + "(script in http://localhost:12345/ from (1, 58) to (1, 81)#1)",
+                + "(script in http://localhost:" + PORT + "/ from (1, 58) to (1, 81)#1)",
                 scriptExceptions.toString());
-        assertEquals("http://localhost:12345/second/, "
+        assertEquals("http://localhost:" + PORT + "/second/, "
                 + "com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException: "
-                + "500 BOOM for http://localhost:12345/second/", loadScriptErrors.toString());
+                + "500 BOOM for http://localhost:" + PORT + "/second/", loadScriptErrors.toString());
         assertEquals("unknown://nowhere, java.net.MalformedURLException: unknown protocol: unknown",
                 malformedScriptURLErrors.toString());
         assertEquals("", timeoutErrors.toString());
@@ -227,11 +227,11 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
 
             assertEquals("com.gargoylesoftware.htmlunit.ScriptException: "
                     + "ReferenceError: \"unknown\" is not defined. "
-                    + "(script in http://localhost:12345/ from (1, 58) to (1, 81)#1)",
+                    + "(script in http://localhost:" + PORT + "/ from (1, 58) to (1, 81)#1)",
                     scriptExceptions.toString());
-            assertEquals("http://localhost:12345/second/, "
+            assertEquals("http://localhost:" + PORT + "/second/, "
                     + "com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException: "
-                    + "500 BOOM for http://localhost:12345/second/", loadScriptErrors.toString());
+                    + "500 BOOM for http://localhost:" + PORT + "/second/", loadScriptErrors.toString());
             assertEquals("unknown://nowhere, java.net.MalformedURLException: unknown protocol: unknown",
                     malformedScriptURLErrors.toString());
             assertEquals("Timeout allowed: 100", timeoutErrors.toString());
