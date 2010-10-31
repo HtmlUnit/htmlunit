@@ -127,7 +127,6 @@ public abstract class HtmlElement extends DomElement {
             final String attributeValue) {
 
         final String oldAttributeValue = getAttribute(qualifiedName);
-        String value = attributeValue;
 
         final boolean mappedElement = HtmlPage.isMappedElement(getOwnerDocument(), qualifiedName);
         if (mappedElement) {
@@ -135,9 +134,6 @@ public abstract class HtmlElement extends DomElement {
         }
 
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
-        if (value.length() == 0) {
-            value = ATTRIBUTE_VALUE_EMPTY;
-        }
 
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
         if (!(getOwnerDocument() instanceof HtmlPage)) {
@@ -345,7 +341,7 @@ public abstract class HtmlElement extends DomElement {
         try {
             final long l = Long.parseLong(index);
             if (l >= 0 && l <= Short.MAX_VALUE) {
-                return new Short(new Long(l).shortValue());
+                return Short.valueOf((short) l);
             }
             return TAB_INDEX_OUT_OF_BOUNDS;
         }

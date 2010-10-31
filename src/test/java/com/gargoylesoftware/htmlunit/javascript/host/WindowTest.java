@@ -1771,9 +1771,9 @@ public class WindowTest extends WebTestCase {
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
-        final String secondContent = new String("<html><head><title>Second</title></head><body>\n"
+        final String secondContent = "<html><head><title>Second</title></head><body>\n"
             + "<p>Hello World</p>\n"
-            + "</body></html>");
+            + "</body></html>";
 
         final EventCatcher eventCatcher = new EventCatcher();
 

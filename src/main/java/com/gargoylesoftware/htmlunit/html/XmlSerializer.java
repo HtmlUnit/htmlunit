@@ -125,11 +125,11 @@ class XmlSerializer {
             attributes = node.getAttributesMap();
         }
 
-        for (final String name : attributes.keySet()) {
+        for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
             buffer_.append(" ");
-            buffer_.append(name);
+            buffer_.append(entry.getKey());
             buffer_.append("=\"");
-            final String value = attributes.get(name).getNodeValue();
+            final String value = entry.getValue().getNodeValue();
             buffer_.append(com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlAttributeValue(value));
             buffer_.append('"');
         }

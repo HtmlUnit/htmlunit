@@ -688,7 +688,7 @@ public final class UrlUtils {
         //         appended in its place.  The following operations are
         //         then applied, in order, to the new path:
         final String basePath = baseUrl.path_;
-        String path = new String();
+        String path = "";
 
         if (basePath != null) {
             final int lastSlashIndex = basePath.lastIndexOf('/');

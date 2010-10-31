@@ -363,7 +363,7 @@ public class HTMLAnchorElement extends HTMLElement {
         final String href = element.getAttribute("href").trim();
 
         final String response;
-        if (href == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+        if (HtmlElement.ATTRIBUTE_NOT_DEFINED == href) {
             response = ""; // for example for named anchors
         }
         else {

@@ -178,7 +178,7 @@ public class ScriptableWrapper extends ScriptableObject {
     public Object get(final int index, final Scriptable start) {
         if (getByIndexMethod_ != null) {
             final Object byIndex = invoke(getByIndexMethod_,
-                    new Object[] {new Integer(index)});
+                    new Object[] {Integer.valueOf(index)});
             return Context.javaToJS(byIndex, ScriptableObject
                     .getTopLevelScope(start));
         }

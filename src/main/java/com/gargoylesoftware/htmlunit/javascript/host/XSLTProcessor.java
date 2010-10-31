@@ -275,23 +275,23 @@ public class XSLTProcessor extends SimpleScriptable {
         transform(input_, ((Node) output_).getDomNodeOrDie());
         final XMLSerializer serializer = new XMLSerializer();
         serializer.setParentScope(getParentScope());
-        String output = "";
+        final StringBuilder output = new StringBuilder();
         for (final DomNode child : ((Node) output_).<DomNode>getDomNodeOrDie().getChildren()) {
             if (child instanceof DomText) {
                 //IE: XmlPage ignores all empty text nodes (if 'xml:space' is 'default')
                 //Maybe this should be changed for 'xml:space' = preserve
                 //See XMLDocumentTest.testLoadXML_XMLSpaceAttribute()
                 if (((DomText) child).getData().trim().length() != 0) {
-                    output += ((DomText) child).getData();
+                    output.append(((DomText) child).getData());
                 }
             }
             else {
                 //remove trailing "\r\n"
                 final String serializedString =
                     serializer.jsxFunction_serializeToString((Node) child.getScriptObject());
-                output += serializedString.substring(0, serializedString.length() - 2);
+                output.append(serializedString.substring(0, serializedString.length() - 2));
             }
         }
-        output_ = output;
+        output_ = output.toString();
     }
 }

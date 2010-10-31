@@ -731,7 +731,7 @@ public class HtmlPageTest extends WebServerTestCase {
         // avoid using equals() on URL because it takes to much time (due to ip resolution)
         assertEquals("first", collectedItems.get(0));
         assertEquals(URL_FIRST, (URL) collectedItems.get(1));
-        assertEquals(new Integer(1), collectedItems.get(2));
+        assertEquals(Integer.valueOf(1), collectedItems.get(2));
     }
 
     /**
@@ -850,7 +850,7 @@ public class HtmlPageTest extends WebServerTestCase {
         // avoid using equals() on URL because it takes to much time (due to ip resolution)
         assertEquals("first", collectedItems.get(0));
         assertEquals(URL_SECOND, ((URL) collectedItems.get(1)));
-        assertEquals(new Integer(3), collectedItems.get(2));
+        assertEquals(Integer.valueOf(3), collectedItems.get(2));
     }
 
     /**

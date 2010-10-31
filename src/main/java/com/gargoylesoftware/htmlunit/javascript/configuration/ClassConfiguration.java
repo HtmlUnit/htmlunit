@@ -354,7 +354,7 @@ public final class ClassConfiguration {
      * Class used to contain the property information if the property is readable, writable and the
      * methods that implement the get and set functions.
      */
-    protected class PropertyInfo {
+    protected static class PropertyInfo {
         private boolean readable_ = false;
         private boolean writable_ = false;
         private boolean hasBrowsers_ = false;
@@ -444,7 +444,7 @@ public final class ClassConfiguration {
         }
     }
 
-    private class FunctionInfo {
+    private static class FunctionInfo {
         private boolean hasBrowsers_ = false;
         private Map<String, BrowserInfo> browserMap_;
         private Method functionMethod_;
@@ -468,8 +468,8 @@ public final class ClassConfiguration {
                 if (browserMap_.size() != info.browserMap_.size()) {
                     return false;
                 }
-                for (final String key : browserMap_.keySet()) {
-                    if (browserMap_.get(key).valueEquals(info.browserMap_.get(key))) {
+                for (final Map.Entry<String, BrowserInfo> entry : browserMap_.entrySet()) {
+                    if (entry.getValue().valueEquals(info.browserMap_.get(entry.getKey()))) {
                         return false;
                     }
                 }
@@ -493,7 +493,7 @@ public final class ClassConfiguration {
         }
     }
 
-    private final class BrowserInfo {
+    private static final class BrowserInfo {
         private String browserName_;
         private String minVersion_;
         private String maxVersion_;

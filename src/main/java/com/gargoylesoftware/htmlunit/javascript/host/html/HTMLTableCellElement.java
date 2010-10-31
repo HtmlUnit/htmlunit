@@ -103,7 +103,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         if (row == null) { // a not attached document.createElement('TD')
             return -1;
         }
-        return new Integer(row.getCells().indexOf(cell));
+        return Integer.valueOf(row.getCells().indexOf(cell));
     }
 
     /**

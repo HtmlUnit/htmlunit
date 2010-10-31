@@ -116,8 +116,9 @@ public abstract class WebServerTestCase extends WebTestCase {
         context.setContextPath("/");
         context.setResourceBase(resourceBase);
 
-        for (final String pathSpec : servlets.keySet()) {
-            final Class< ? extends Servlet> servlet = servlets.get(pathSpec);
+        for (final Map.Entry<String, Class< ? extends Servlet>> entry : servlets.entrySet()) {
+            final String pathSpec = entry.getKey();
+            final Class< ? extends Servlet> servlet = entry.getValue();
             context.addServlet(servlet, pathSpec);
         }
         final WebAppClassLoader loader = new WebAppClassLoader(context);

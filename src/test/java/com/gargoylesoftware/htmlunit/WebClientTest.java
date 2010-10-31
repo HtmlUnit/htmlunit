@@ -726,7 +726,7 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /** A PageCreator that collects data. */
-    private class CollectingPageCreator implements PageCreator {
+    private static class CollectingPageCreator implements PageCreator {
         private final List<Page> collectedPages_;
         /**
          * Creates an instance.

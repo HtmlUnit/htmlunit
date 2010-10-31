@@ -47,6 +47,6 @@ public class LoggingRefreshHandler implements RefreshHandler {
     public void handleRefresh(final Page page, final URL url, final int seconds) {
         list_.add(((HtmlPage) page).getTitleText());
         list_.add(url);
-        list_.add(new Integer(seconds));
+        list_.add(Integer.valueOf(seconds));
     }
 }

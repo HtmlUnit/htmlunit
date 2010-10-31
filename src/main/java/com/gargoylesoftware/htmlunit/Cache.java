@@ -51,7 +51,7 @@ public class Cache implements Serializable {
     /**
      * A cache entry.
      */
-    private class Entry implements Comparable<Entry>, Serializable {
+    private static class Entry implements Comparable<Entry>, Serializable {
         private final String key_;
         private final Object value_;
         private long lastAccess_;
