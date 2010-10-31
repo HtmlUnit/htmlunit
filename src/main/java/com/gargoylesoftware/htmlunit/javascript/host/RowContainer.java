@@ -85,7 +85,7 @@ public class RowContainer extends HTMLElement {
         }
         final boolean rowIndexValid = (rowIndex >= 0 && rowIndex < rowCount);
         if (rowIndexValid) {
-            final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(new Integer(rowIndex));
+            final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(Integer.valueOf(rowIndex));
             row.<DomNode>getDomNodeOrDie().remove();
         }
     }
@@ -135,7 +135,7 @@ public class RowContainer extends HTMLElement {
             getDomNodeOrDie().appendChild(newRow);
         }
         else {
-            final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(new Integer(index));
+            final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(Integer.valueOf(index));
             // if at the end, then in the same "sub-container" as the last existing row
             if (index >= rowCount - 1) {
                 row.<DomNode>getDomNodeOrDie().getParentNode().appendChild(newRow);
@@ -160,8 +160,8 @@ public class RowContainer extends HTMLElement {
         final boolean sourceIndexValid = (sourceIndex >= 0 && sourceIndex < rowCount);
         final boolean targetIndexValid = (targetIndex >= 0 && targetIndex < rowCount);
         if (sourceIndexValid && targetIndexValid) {
-            final SimpleScriptable sourceRow = (SimpleScriptable) rows.jsxFunction_item(new Integer(sourceIndex));
-            final SimpleScriptable targetRow = (SimpleScriptable) rows.jsxFunction_item(new Integer(targetIndex));
+            final SimpleScriptable sourceRow = (SimpleScriptable) rows.jsxFunction_item(Integer.valueOf(sourceIndex));
+            final SimpleScriptable targetRow = (SimpleScriptable) rows.jsxFunction_item(Integer.valueOf(targetIndex));
             targetRow.<DomNode>getDomNodeOrDie().insertBefore(sourceRow.<DomNode>getDomNodeOrDie());
             return sourceRow;
         }

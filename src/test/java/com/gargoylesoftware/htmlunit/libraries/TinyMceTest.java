@@ -77,14 +77,15 @@ public class TinyMceTest extends WebDriverTestCase {
         assertEquals(expectedTotal, total);
 
         final List<HtmlElement> failures = (List<HtmlElement>) page.getByXPath("//li[@class='fail']");
-        String msg = "";
+        final StringBuilder msg = new StringBuilder();
         for (HtmlElement failure : failures) {
-            msg += failure.asXml() + "\n\n";
+            msg.append(failure.asXml());
+            msg.append("\n\n");
         }
 
         final HtmlSpan failedSpan = result.getFirstByXPath("span[@class='bad']");
         final int failed = Integer.parseInt(failedSpan.asText());
-        Assert.assertEquals(msg, expectedFailed, failed);
+        Assert.assertEquals(msg.toString(), expectedFailed, failed);
     }
 
 }

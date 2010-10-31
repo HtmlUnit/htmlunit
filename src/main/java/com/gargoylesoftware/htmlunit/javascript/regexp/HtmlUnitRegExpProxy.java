@@ -152,7 +152,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             }
             final Scriptable response = cx.newArray(scope, groups.toArray());
             // the additional properties (cf ECMA script reference 15.10.6.2 13)
-            response.put("index", response, new Integer(index));
+            response.put("index", response, Integer.valueOf(index));
             response.put("input", response, thisString);
             return response;
         }

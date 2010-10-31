@@ -4759,7 +4759,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
          */
         public int compareTo(final StyleElement e) {
             if (e != null) {
-                return new Long(index_).compareTo(e.index_);
+                final long styleIndex = e.index_;
+                // avoid conversion to long
+                return (index_ < styleIndex) ? -1 : (index_ == styleIndex) ? 0 : 1;
             }
             return 1;
         }

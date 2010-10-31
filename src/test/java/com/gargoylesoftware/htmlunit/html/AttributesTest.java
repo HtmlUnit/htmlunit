@@ -194,7 +194,7 @@ public class AttributesTest extends TestCase {
      */
     @Override
     protected void runTest() throws Exception {
-        final String value = new String("value");
+        final String value = "value";
 
         final HtmlElement objectToTest = getNewInstanceForClassUnderTest();
         objectToTest.setAttribute(attributeName_, value);

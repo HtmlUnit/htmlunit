@@ -114,7 +114,7 @@ public class StyleSheetList extends SimpleScriptable {
             return Context.getUndefinedValue();
         }
 
-        final HTMLElement element = (HTMLElement) nodes_.jsxFunction_item(new Integer(index));
+        final HTMLElement element = (HTMLElement) nodes_.jsxFunction_item(Integer.valueOf(index));
 
         final CSSStyleSheet sheet;
         // <style type="text/css"> ... </style>

@@ -52,7 +52,7 @@ public class History extends SimpleScriptable {
                 final Object[] allIds = new Object[ids.length + len];
                 System.arraycopy(ids, 0, allIds, 0, ids.length);
                 for (int i = 0; i < len; i++) {
-                    allIds[ids.length + i] = new Integer(i);
+                    allIds[ids.length + i] = Integer.valueOf(i);
                 }
                 ids = allIds;
             }
