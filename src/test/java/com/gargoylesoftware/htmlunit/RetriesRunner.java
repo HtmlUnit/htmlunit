@@ -48,7 +48,7 @@ public class RetriesRunner extends BlockJUnit4ClassRunner {
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
-    public static @interface Reries {
+    public static @interface Retries {
 
         /**
          * The value.
@@ -67,7 +67,7 @@ public class RetriesRunner extends BlockJUnit4ClassRunner {
     }
 
     private int getRetries(final FrameworkMethod method) {
-        final Reries retries = method.getAnnotation(Reries.class);
+        final Retries retries = method.getAnnotation(Retries.class);
         return retries != null ? retries.value() : 1;
     }
 }
