@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -53,7 +55,7 @@ public class HtmlOptionGroupTest extends WebTestCase {
 
         final HtmlPage page = loadPageWithAlerts(html);
         final HtmlOptionGroup optionGroup = page.getHtmlElementById("myId");
-        assertTrue(optionGroup.getEnclosingSelect() instanceof HtmlSelect);
+        Assert.assertNotNull(optionGroup.getEnclosingSelect());
     }
 
     /**

@@ -858,8 +858,7 @@ public class HtmlElementTest extends WebTestCase {
             + "  <textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
 
-        final String expected = getBrowserVersion().isFirefox() ? "mousedown-1-mouseup-1-"
-                : "mousedown-1-mouseup-1-";
+        final String expected = "mousedown-1-mouseup-1-";
 
         final HtmlPage page = loadPage(html);
         final HtmlDivision div = page.getHtmlElementById("myDiv");
