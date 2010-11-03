@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.util.StringUtils.containsCaseInsensi
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 
 import java.io.IOException;
-import java.lang.reflect.Member;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -1671,31 +1670,18 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public Object get(final String name, final Scriptable start) {
-        if ("querySelectorAll".equals(name)
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.QUERYSELECTORALL_QUIRKS)
-                && !getHtmlPage().isQuirksMode()) {
-            try {
-                final Member function =
-                    HTMLDocument.class.getMethod("jsxFunction_querySelectorAll", new Class[]{String.class});
-                return new FunctionObject("querySelectorAll", function, start);
-            }
-            catch (final NoSuchMethodException e) {
-                Context.throwAsScriptRuntimeEx(e);
-            }
+        final Object response = super.get(name, start);
+
+        // IE8 support .querySelector(All) but not in quirks mode
+        // => TODO: find a better way to handle this!
+        if (response instanceof FunctionObject
+            && ("querySelectorAll".equals(name) || "querySelector".equals(name))
+            && getBrowserVersion().hasFeature(BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS)
+            && getHtmlPage().isQuirksMode()) {
+            return NOT_FOUND;
         }
-        if ("querySelector".equals(name)
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.QUERYSELECTORALL_QUIRKS)
-                && !getHtmlPage().isQuirksMode()) {
-            try {
-                final Member function =
-                    HTMLDocument.class.getMethod("jsxFunction_querySelector", new Class[]{String.class});
-                return new FunctionObject("querySelector", function, start);
-            }
-            catch (final NoSuchMethodException e) {
-                Context.throwAsScriptRuntimeEx(e);
-            }
-        }
-        return super.get(name, start);
+
+        return response;
     }
 
     /**

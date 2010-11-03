@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: add support for HTMLDocument.querySelector and querySelectorAll for FF3.6.
+            </action>
             <action type="fix" dev="rbri" issue="3055542">
                 JavaScriptErrorListener added (WebClient.setJavaScriptErrorListener(JavaScriptErrorListener)).
             </action>

@@ -700,8 +700,8 @@ public enum BrowserVersionFeatures {
     /** Supports 'data' protocol. */
     PROTOCOL_DATA,
 
-    /** Indicates .querySelectorAll() is supported in only quirks mode. */
-    QUERYSELECTORALL_QUIRKS,
+    /** Indicates .querySelectorAll() is not supported in quirks mode. */
+    QUERYSELECTORALL_NOT_IN_QUIRKS,
 
     /** Indicates that a read only JS property can be... set as done by IE and FF2 but not FF3. */
     SET_READONLY_PROPERTIES,
