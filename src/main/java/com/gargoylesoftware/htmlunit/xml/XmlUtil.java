@@ -259,8 +259,10 @@ public final class XmlUtil {
      */
     public static String lookupPrefix(final DomElement element, final String namespace) {
         final Map<String, DomAttr> attributes = element.getAttributesMap();
-        for (final String name : attributes.keySet()) {
-            if (name.startsWith("xmlns:") && attributes.get(name).getValue().equals(namespace)) {
+        for (final Map.Entry<String, DomAttr>entry : attributes.entrySet()) {
+            final String name = entry.getKey();
+            final DomAttr value = entry.getValue();
+            if (name.startsWith("xmlns:") && value.getValue().equals(namespace)) {
                 return name.substring(6);
             }
         }
