@@ -85,8 +85,8 @@ public class JavaScriptJobManagerMinimalTest {
         manager_.addJob(job, page_);
         assertEquals(1, manager_.getJobCount());
         final int remainingJobs = manager_.waitForJobs(1000);
-        Assert.assertTrue(remainingJobs >= 1);
-        Assert.assertTrue(count.intValue() >= 10);
+        Assert.assertTrue("At least one remaining job expected.", remainingJobs >= 1);
+        Assert.assertTrue("Less than 11 jobs (" + count.intValue() + ") processed.", count.intValue() >= 10);
     }
 
     /**
