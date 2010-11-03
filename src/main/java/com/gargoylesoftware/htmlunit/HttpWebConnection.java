@@ -651,7 +651,7 @@ public class HttpWebConnection implements WebConnection {
     /**
      * Shutdown the connection manager.
      */
-    public void shutdown() {
+    public synchronized void shutdown() {
         if (httpClient_ != null) {
             httpClient_.getConnectionManager().shutdown();
             httpClient_ = null;
