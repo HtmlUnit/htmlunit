@@ -44,7 +44,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
 
     /** Constant meaning that the specified attribute was found but its value was empty. */
-    public static final String ATTRIBUTE_VALUE_EMPTY = new String("");
+    public static final String ATTRIBUTE_VALUE_EMPTY = new String();
 
     /** The map holding the attributes, keyed by name. */
     private NamedAttrNodeMapImpl attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
