@@ -177,7 +177,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     public void jsxSet_colSpan(final String colSpan) {
         String s;
         try {
-            final int i = new Double(Double.parseDouble(colSpan)).intValue();
+            final int i = (int) Double.parseDouble(colSpan);
             if (i > 0) {
                 s = String.valueOf(i);
             }
@@ -215,7 +215,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     public void jsxSet_rowSpan(final String rowSpan) {
         String s;
         try {
-            final int i = new Double(Double.parseDouble(rowSpan)).intValue();
+            final int i = (int) Double.parseDouble(rowSpan);
             if (i > 0) {
                 s = String.valueOf(i);
             }
