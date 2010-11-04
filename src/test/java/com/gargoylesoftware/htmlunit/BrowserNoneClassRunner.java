@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.internal.runners.model.ReflectiveCallable;
 import org.junit.internal.runners.statements.Fail;
@@ -63,9 +64,9 @@ class BrowserNoneClassRunner extends BlockJUnit4ClassRunner {
         Statement statement = methodInvoker(method, test);
         statement = possiblyExpectingExceptions(method, test, statement);
         statement = withPotentialTimeout(method, test, statement);
-        statement = withRules(method, test, statement);
         statement = withBefores(method, test, statement);
         statement = withAfters(method, test, statement);
+        statement = withRules(method, test, statement);
 
         final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
         final boolean notYetImplemented = notYetImplementedBrowsers != null;
@@ -136,7 +137,7 @@ class BrowserNoneClassRunner extends BlockJUnit4ClassRunner {
 
     private Statement withRules(final FrameworkMethod method, final Object target, final Statement statement) {
         Statement result = statement;
-        for (final MethodRule each : rules(target)) {
+        for (final MethodRule each : getTestClass().getAnnotatedFieldValues(target, Rule.class, MethodRule.class)) {
             result = each.apply(result, method, target);
         }
         return result;

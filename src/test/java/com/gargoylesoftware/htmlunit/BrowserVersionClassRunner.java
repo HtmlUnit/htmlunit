@@ -22,6 +22,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.internal.runners.model.ReflectiveCallable;
 import org.junit.internal.runners.statements.Fail;
@@ -317,7 +318,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     private Statement withRules(final FrameworkMethod method, final Object target, final Statement statement) {
         Statement result = statement;
-        for (final MethodRule each : rules(target)) {
+        for (final MethodRule each : getTestClass().getAnnotatedFieldValues(target, Rule.class, MethodRule.class)) {
             result = each.apply(result, method, target);
         }
         return result;
