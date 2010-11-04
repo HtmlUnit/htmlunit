@@ -59,9 +59,10 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
         setPrototype(getPrototype(getClass()));
 
         final Map<String, String> namespacesMap = doc_.getHtmlPage().getNamespaces();
-        for (final String key : namespacesMap.keySet()) {
+        for (final Map.Entry <String, String> entry : namespacesMap.entrySet()) {
+            final String key = entry.getKey();
             if (key.length() != 0) {
-                namespaces_.add(new Namespace(doc_, key, namespacesMap.get(key)));
+                namespaces_.add(new Namespace(doc_, key, entry.getValue()));
             }
         }
     }

@@ -135,11 +135,11 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         printWriter.print(getTagName());
-        for (final String name : attributes_.keySet()) {
+        for (final Map.Entry <String, DomAttr> entry : attributes_.entrySet()) {
             printWriter.print(" ");
-            printWriter.print(name);
+            printWriter.print(entry.getKey());
             printWriter.print("=\"");
-            printWriter.print(StringUtils.escapeXmlAttributeValue(attributes_.get(name).getNodeValue()));
+            printWriter.print(StringUtils.escapeXmlAttributeValue(entry.getValue().getNodeValue()));
             printWriter.print("\"");
         }
     }

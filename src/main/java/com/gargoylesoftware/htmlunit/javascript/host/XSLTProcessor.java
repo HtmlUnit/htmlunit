@@ -116,8 +116,8 @@ public class XSLTProcessor extends SimpleScriptable {
             final DOMResult result = new DOMResult(containerElement);
 
             final Transformer transformer = TransformerFactory.newInstance().newTransformer(xsltSource);
-            for (final String qualifiedName : parameters_.keySet()) {
-                transformer.setParameter(qualifiedName, parameters_.get(qualifiedName));
+            for (final Map.Entry<String, Object> entry : parameters_.entrySet()) {
+                transformer.setParameter(entry.getKey(), entry.getValue());
             }
             transformer.transform(xmlSource, result);
 

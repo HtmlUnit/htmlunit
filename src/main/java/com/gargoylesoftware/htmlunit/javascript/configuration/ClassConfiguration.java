@@ -418,8 +418,8 @@ public final class ClassConfiguration {
                 if (browserMap_.size() != info.browserMap_.size()) {
                     return false;
                 }
-                for (final String key : browserMap_.keySet()) {
-                    if (!browserMap_.get(key).valueEquals(info.browserMap_.get(key))) {
+                for (final Map.Entry<String, BrowserInfo> entry : browserMap_.entrySet()) {
+                    if (!entry.getValue().valueEquals(info.browserMap_.get(entry.getKey()))) {
                         return false;
                     }
                 }
