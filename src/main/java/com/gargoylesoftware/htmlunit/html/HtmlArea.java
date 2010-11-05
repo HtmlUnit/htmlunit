@@ -216,7 +216,7 @@ public class HtmlArea extends HtmlElement {
             return true;
         }
         else if ("rect".equals(shape) && getCoordsAttribute() != null) {
-            final String[] coords = getCoordsAttribute().split(",");
+            final String[] coords = StringUtils.split(getCoordsAttribute(), ',');
             final double leftX = Double.parseDouble(coords[0].trim());
             final double topY = Double.parseDouble(coords[1].trim());
             final double rightX = Double.parseDouble(coords[2].trim());
@@ -228,7 +228,7 @@ public class HtmlArea extends HtmlElement {
             }
         }
         else if ("circle".equals(shape) && getCoordsAttribute() != null) {
-            final String[] coords = getCoordsAttribute().split(",");
+            final String[] coords = StringUtils.split(getCoordsAttribute(), ',');
             final double centerX = Double.parseDouble(coords[0].trim());
             final double centerY = Double.parseDouble(coords[1].trim());
             final String radiusString = coords[2].trim();
@@ -247,7 +247,7 @@ public class HtmlArea extends HtmlElement {
             }
         }
         else if ("poly".equals(shape) && getCoordsAttribute() != null) {
-            final String[] coords = getCoordsAttribute().split(",");
+            final String[] coords = StringUtils.split(getCoordsAttribute(), ',');
             final GeneralPath path = new GeneralPath();
             for (int i = 0; i + 1 < coords.length; i += 2) {
                 if (i == 0) {

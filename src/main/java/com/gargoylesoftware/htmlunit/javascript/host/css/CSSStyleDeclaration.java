@@ -351,7 +351,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     protected Map<String, StyleElement> getStyleMap(final boolean camelCase) {
         final Map<String, StyleElement> styleMap = new LinkedHashMap<String, StyleElement>();
         final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
-        for (final String token : styleAttribute.split(";")) {
+        for (final String token : StringUtils.split(styleAttribute, ';')) {
             final int index = token.indexOf(":");
             if (index != -1) {
                 String key = token.substring(0, index).trim().toLowerCase();
@@ -4421,7 +4421,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         if (m.find()) {
             return m.group(1);
         }
-        final String[] tokens = text.split(" ");
+        final String[] tokens = StringUtils.split(text, ' ');
         for (final String token : tokens) {
             if (isColorKeyword(token)) {
                 return token;
@@ -4439,7 +4439,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the border style if found, null otherwise
      */
     private static String findBorderStyle(final String text) {
-        for (final String token : text.split(" ")) {
+        for (final String token : StringUtils.split(text, ' ')) {
             if (isBorderStyle(token)) {
                 return token;
             }
@@ -4453,7 +4453,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the border width if found, null otherwise
      */
     private static String findBorderWidth(final String text) {
-        for (final String token : text.split(" ")) {
+        for (final String token : StringUtils.split(text, ' ')) {
             if (isBorderWidth(token)) {
                 return token;
             }
