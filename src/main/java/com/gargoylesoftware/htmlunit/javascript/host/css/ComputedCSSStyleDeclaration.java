@@ -245,8 +245,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     key = camelize(key);
                 }
                 final StyleElement existent = styleMap.get(key);
-                final StyleElement element = new StyleElement(key, e.getValue(), e.getIndex());
                 if (existent == null) {
+                    final StyleElement element = new StyleElement(key, e.getValue(), e.getIndex());
                     // Local modifications represent either default style elements or style elements
                     // defined in stylesheets; either way, they shouldn't overwrite any style
                     // elements derived directly from the HTML element's "style" attribute.
