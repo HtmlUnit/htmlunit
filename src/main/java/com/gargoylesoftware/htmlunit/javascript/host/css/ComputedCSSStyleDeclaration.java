@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
@@ -53,46 +54,46 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /** The set of 'inheritable' attributes. */
     private static final Set<String> INHERITABLE_ATTRIBUTES = new HashSet<String>(Arrays.asList(
         "azimuth",
-        "borderCollapse",
-        "borderSpacing",
-        "captionSide",
+        "border-collapse",
+        "border-spacing",
+        "caption-side",
         "color",
         "cursor",
         "direction",
         "elevation",
-        "emptyCells",
-        "fontFamily",
-        "fontSize",
-        "fontStyle",
-        "fontVariant",
-        "fontWeight",
+        "empty-cells",
+        "font-family",
+        "font-size",
+        "font-style",
+        "font-variant",
+        "font-weight",
         "font",
-        "letterSpacing",
-        "lineHeight",
-        "listStyleImage",
-        "listStylePosition",
-        "listStyleType",
-        "listStyle",
+        "letter-spacing",
+        "line-height",
+        "list-style-image",
+        "list-style-position",
+        "list-style-type",
+        "list-style",
         "orphans",
-        "pitchRange",
+        "pitch-range",
         "pitch",
         "quotes",
         "richness",
-        "speakHeader",
-        "speakNumeral",
-        "speakPunctuation",
+        "speak-header",
+        "speak-numeral",
+        "speak-punctuation",
         "speak",
-        "speechRate",
+        "speech-rate",
         "stress",
-        "textAlign",
-        "textIndent",
-        "textTransform",
+        "text-align",
+        "text-indent",
+        "text-transform",
         "visibility",
-        "voiceFamily",
+        "voice-fFamily",
         "volume",
-        "whiteSpace",
+        "white-space",
         "widows",
-        "wordSpacing"));
+        "word-spacing"));
 
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
@@ -151,12 +152,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * Overridden because some CSS properties are inherited from parent elements.
      */
     @Override
-    protected String getStyleAttribute(final String name, final boolean camelCase) {
-        String s = super.getStyleAttribute(name, camelCase);
-        if (s.length() == 0 && isInheritable(name, camelCase)) {
+    protected String getStyleAttribute(final String name) {
+        String s = super.getStyleAttribute(name);
+        if (s.length() == 0 && isInheritable(name)) {
             final HTMLElement parent = getElement().getParentHTMLElement();
             if (parent != null) {
-                s = getWindow().jsxFunction_getComputedStyle(parent, null).getStyleAttribute(name, camelCase);
+                s = getWindow().jsxFunction_getComputedStyle(parent, null).getStyleAttribute(name);
             }
         }
         return s;
@@ -165,14 +166,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /**
      * Returns <tt>true</tt> if the specified CSS property is inheritable from parent elements.
      * @param name the name of the style attribute to check for inheritability
-     * @param camelCase whether or not the name is expected to be in camel case
      * @return <tt>true</tt> if the specified CSS property is inheritable from parent elements
      * @see <a href="http://www.w3.org/TR/CSS21/propidx.html">CSS Property Table</a>
      */
-    private boolean isInheritable(String name, final boolean camelCase) {
-        if (!camelCase) {
-            name = camelize(name);
-        }
+    private boolean isInheritable(final String name) {
         return INHERITABLE_ATTRIBUTES.contains(name);
     }
 
@@ -236,14 +233,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    protected Map<String, StyleElement> getStyleMap(final boolean camelCase) {
-        final Map<String, StyleElement> styleMap = super.getStyleMap(camelCase);
+    protected Map<String, StyleElement> getStyleMap() {
+        final Map<String, StyleElement> styleMap = super.getStyleMap();
         if (localModifications_ != null) {
             for (final StyleElement e : localModifications_.values()) {
-                String key = e.getName();
-                if (camelCase) {
-                    key = camelize(key);
-                }
+                final String key = e.getName();
                 final StyleElement existent = styleMap.get(key);
                 if (existent == null) {
                     final StyleElement element = new StyleElement(key, e.getValue(), e.getIndex());
@@ -594,7 +588,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String jsxGet_height() {
         return pixelString(getElement(), new CssValue(Window.WINDOW_HEIGHT) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
-                return defaultIfEmpty(style.getStyleAttribute("height", true), "363px");
+                return defaultIfEmpty(style.getStyleAttribute("height"), "363px");
             }
         });
     }
@@ -1232,7 +1226,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         return pixelString(getElement(), new CssValue(Window.WINDOW_WIDTH) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
-                return defaultIfEmpty(style.getStyleAttribute("width", true), defaultWidth);
+                return defaultIfEmpty(style.getStyleAttribute("width"), defaultWidth);
             }
         });
     }
@@ -1306,7 +1300,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
             width = pixelValue(getElement(), new CssValue(Window.WINDOW_WIDTH) {
                 @Override public String get(final ComputedCSSStyleDeclaration style) {
-                    return style.getStyleAttribute("width", true);
+                    return style.getStyleAttribute("width");
                 }
             });
         }
@@ -1415,7 +1409,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         int height = pixelValue(getElement(), new CssValue(Window.WINDOW_HEIGHT) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
-                return style.getStyleAttribute("height", true);
+                return style.getStyleAttribute("height");
             }
         });
         if (height == 0 || (ie && height < defaultHeight)) {
