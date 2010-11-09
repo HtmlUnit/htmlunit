@@ -71,6 +71,10 @@ public abstract class PrototypeTestBase extends WebServerTestCase {
         expected = expected.replaceAll("Info:.*", "Info: -- skipped for comparison --");
         actual = actual.replaceAll("Info:.*", "Info: -- skipped for comparison --");
 
+        // normalize line break
+        expected = expected.replaceAll("\r\n", "\n");
+        actual = actual.replaceAll("\r\n", "\n");
+
         // dump the result page if not ok
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null && !expected.equals(actual)) {
             final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
