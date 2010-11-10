@@ -139,7 +139,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     private int endColumnNumber_ = -1;
 
     private List<DomChangeListener> domListeners_;
-    private final Integer domListeners_lock_ = 0;
+    private final Object domListeners_lock_ = new Serializable() { };
 
     /**
      * Never call this, used for Serialization.
