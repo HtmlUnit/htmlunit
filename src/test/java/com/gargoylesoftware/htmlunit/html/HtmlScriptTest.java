@@ -154,4 +154,49 @@ public class HtmlScriptTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "hello", IE = "exception")
+    public void addedFromDocumentFragment() throws Exception {
+        final String html = "<html><body>\n"
+            + "<span id='A'></span>\n"
+            + "<script>\n"
+            + "var text = '<script>alert(\"hello\");</sc' + 'ript>';\n"
+            + "var element = document.getElementById('A');\n"
+            + "try {\n"
+            + "  var range = element.ownerDocument.createRange();\n"
+            + "  range.selectNode(element);\n"
+            + "  var fragment = range.createContextualFragment(text);\n"
+            + "  element.parentNode.replaceChild(fragment, element);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Regression test for replaceChild.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "false", "false" })
+    public void appendChild_newIdAndScriptAddedInOnce() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<script>\n"
+            + "var div1 = document.createElement('div');\n"
+            + "div1.id = 'div1';\n"
+            + "var script = document.createElement('script');\n"
+            + "script.text = 'alert(document.getElementById(\"div1\") == null)';\n"
+            + "div1.appendChild(script);\n"
+            + "document.body.appendChild(div1);\n"
+            + "alert(document.getElementById('div1') == null);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

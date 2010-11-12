@@ -60,6 +60,18 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
      */
     @Override
     public String asXml() {
-        return getFirstChild().asXml();
+        final StringBuilder sb = new StringBuilder();
+        for (final DomNode node : getChildren()) {
+            sb.append(node.asXml());
+        }
+        return sb.toString();
+    }
+
+    /**
+     * @return <code>false</code>
+     */
+    @Override
+    protected boolean isDirectlyAttachedToPage() {
+        return false;
     }
 }

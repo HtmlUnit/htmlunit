@@ -2341,4 +2341,9 @@ public class HtmlPage extends SgmlPage {
         }
         return null;
     }
+
+    @Override
+    protected boolean isDirectlyAttachedToPage() {
+        return true;
+    }
 }

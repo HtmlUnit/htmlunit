@@ -138,6 +138,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     private int endColumnNumber_ = -1;
 
+    private boolean directlyAttachedToPage_;
+
     private List<DomChangeListener> domListeners_;
     private final Object domListeners_lock_ = new Serializable() { };
 
@@ -841,6 +843,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public DomNode appendChild(final Node node) {
         final DomNode domNode = (DomNode) node;
+
         if (domNode instanceof DomDocumentFragment) {
             final DomDocumentFragment fragment = (DomDocumentFragment) domNode;
             for (final DomNode child : fragment.getChildren()) {
@@ -854,18 +857,41 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
             // move the node
             basicAppend(domNode);
-            if (domNode.getStartLineNumber() == -1) { // dynamically added node, not parsed
-                domNode.onAddedToPage();
-                domNode.onAllChildrenAddedToPage(true);
-            }
 
-            // trigger events
-            if (!(this instanceof DomDocumentFragment) && (getPage() instanceof HtmlPage)) {
-                ((HtmlPage) getPage()).notifyNodeAdded(domNode);
-            }
-            fireNodeAdded(this, domNode);
+            fireAddition(domNode);
         }
+
         return domNode;
+    }
+
+    private void fireAddition(final DomNode domNode) {
+        final boolean wasAlreadyAttached = domNode.isDirectlyAttachedToPage();
+        domNode.directlyAttachedToPage_ = isDirectlyAttachedToPage();
+
+        // trigger events
+        if (!(this instanceof DomDocumentFragment) && (getPage() instanceof HtmlPage)) {
+            ((HtmlPage) getPage()).notifyNodeAdded(domNode);
+        }
+
+        // a node that is already "complete" (ie not being parsed) and not yet attached
+        if (!domNode.isBodyParsed() && isDirectlyAttachedToPage() && !wasAlreadyAttached) {
+            domNode.onAddedToPage();
+            for (final DomNode child : domNode.getDescendants()) {
+                child.directlyAttachedToPage_ = true;
+                child.onAllChildrenAddedToPage(true);
+            }
+            domNode.onAllChildrenAddedToPage(true);
+        }
+
+        fireNodeAdded(this, domNode);
+    }
+
+    /**
+     * Indicates if the current node is being parsed. This means that the opening tag has already been
+     * parsed but not the body and end tag.
+     */
+    private boolean isBodyParsed() {
+        return getStartLineNumber() != -1 && getEndLineNumber() == -1;
     }
 
     /**
@@ -984,15 +1010,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         newNode.parent_ = parent_;
         newNode.setPage(page_);
 
-        if (newNode.getStartLineNumber() == -1) { // dynamically added node, not parsed
-            newNode.onAddedToPage();
-            newNode.onAllChildrenAddedToPage(true);
-        }
+        fireAddition(newNode);
 
-        if (getPage() instanceof HtmlPage) {
-            ((HtmlPage) getPage()).notifyNodeAdded(newNode);
-        }
-        fireNodeAdded(this, newNode);
         if (exParent != null) {
             fireNodeDeleted(exParent, newNode);
             exParent.fireNodeDeleted(exParent, this);
@@ -1464,4 +1483,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
     }
 
+    /**
+     * Indicates if this node is currently directly attached to the page.
+     * @return <code>true</code> if the page is one ancestor of the node.
+     */
+    protected boolean isDirectlyAttachedToPage() {
+        return directlyAttachedToPage_;
+    }
 }

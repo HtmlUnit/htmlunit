@@ -235,7 +235,7 @@ public class HtmlScript extends HtmlElement {
                 }
             }
         };
-        if (postponed && getTextContent().length() == 0) {
+        if (postponed && getTextContent().trim().length() == 0) {
             final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
             engine.addPostponedAction(action);
         }
@@ -308,6 +308,7 @@ public class HtmlScript extends HtmlElement {
             final int col2 = getEndColumnNumber();
             final String desc = "script in " + url + " from (" + line1 + ", " + col1
                 + ") to (" + line2 + ", " + col2 + ")";
+            System.out.println("Executing: " + asXml());
             ((HtmlPage) getPage()).executeJavaScriptIfPossible(scriptCode, desc, line1);
         }
     }
@@ -397,6 +398,10 @@ public class HtmlScript extends HtmlElement {
      */
     private boolean isExecutionNeeded() {
         final SgmlPage page = getPage();
+
+        if (!isDirectlyAttachedToPage()) {
+            return false;
+        }
 
         // If JavaScript is disabled, we don't need to execute.
         if (!page.getWebClient().isJavaScriptEnabled()) {
