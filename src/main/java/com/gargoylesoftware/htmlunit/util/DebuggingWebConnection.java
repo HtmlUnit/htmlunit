@@ -15,8 +15,11 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.List;
 
@@ -163,9 +166,17 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         counter_++;
         final String extension = chooseExtension(response.getContentType());
         final File f = createFile(request.getUrl(), extension);
-        final String content = response.getContentAsString();
+        final InputStream input = response.getContentAsStream();
+        final OutputStream output = new FileOutputStream(f);
+        try {
+            IOUtils.copy(response.getContentAsStream(), output);
+        }
+        finally {
+            IOUtils.closeQuietly(input);
+            IOUtils.closeQuietly(output);
+        }
+
         final URL url = response.getWebRequest().getUrl();
-        FileUtils.writeStringToFile(f, content, response.getContentCharset());
         LOG.info("Created file " + f.getAbsolutePath() + " for response " + counter_ + ": " + url);
 
         final StringBuilder buffer = new StringBuilder();
@@ -202,6 +213,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         else if ("text/xml".equals(contentType)) {
             return ".xml";
         }
+        else if ("image/gif".equals(contentType)) {
+            return ".gif";
+        }
         return ".txt";
     }
 
@@ -236,6 +250,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     private void appendToJSFile(final String str) throws IOException {
         final FileWriter jsFileWriter = new FileWriter(javaScriptFile_, true);
         jsFileWriter.write(str);
+        jsFileWriter.flush();
 
         jsFileWriter.close();
     }
