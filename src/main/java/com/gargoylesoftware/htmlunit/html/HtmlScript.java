@@ -308,7 +308,6 @@ public class HtmlScript extends HtmlElement {
             final int col2 = getEndColumnNumber();
             final String desc = "script in " + url + " from (" + line1 + ", " + col1
                 + ") to (" + line2 + ", " + col2 + ")";
-            System.out.println("Executing: " + asXml());
             ((HtmlPage) getPage()).executeJavaScriptIfPossible(scriptCode, desc, line1);
         }
     }
