@@ -49,6 +49,15 @@
         <property name="message" value="Two empty contiguous lines"/>
     </module>
 
+    <!-- at the moment there is a problem with disabling this check for some files
+         without disabling all RegexpMultiline checks; for this reason this is not active
+    <module name="RegexpMultiline">
+        <property name="id" value="sysout"/>
+        <property name="format" value="System\s*\.\s*(out)|(err)\s*\.\s*print(ln)?\("/>
+        <property name="message" value="System.out.print/ln found"/>
+    </module>
+    -->
+
     <module name="TreeWalker">
         <property name="tabWidth" value="4"/>
         <module name="LeftCurly">
