@@ -353,41 +353,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     }
 
     /**
-     * Verifies that curly braces can be used non escaped in JS regexp.
-     */
-    @Test
-    @Browsers(Browser.NONE)
-    public void testEscapeCurlyBraces() {
-        assertEquals("\\{", HtmlUnitRegExpProxy.escapeJSCurly("{"));
-        assertEquals("\\{", HtmlUnitRegExpProxy.escapeJSCurly("\\{"));
-        assertEquals("\\}", HtmlUnitRegExpProxy.escapeJSCurly("}"));
-        assertEquals("\\}", HtmlUnitRegExpProxy.escapeJSCurly("\\}"));
-        assertEquals("(^|\\{)#([^\\}]+)(\\}|$)", HtmlUnitRegExpProxy.escapeJSCurly("(^|{)#([^}]+)(}|$)"));
-
-        assertEquals("a{5}", HtmlUnitRegExpProxy.escapeJSCurly("a{5}"));
-        assertEquals("a{5,}", HtmlUnitRegExpProxy.escapeJSCurly("a{5,}"));
-        assertEquals("a{5,10}", HtmlUnitRegExpProxy.escapeJSCurly("a{5,10}"));
-    }
-
-    /**
-     * Verifies that curly braces can be used non escaped in JS regexp.
-     */
-    @Test
-    @Browsers(Browser.NONE)
-    public void escapeOpeningSquareBracketInCharacterClass() {
-        assertEquals("[ab\\[]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[ab[]"));
-        assertEquals("[\\[]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[[]"));
-        assertEquals("[a\\[b]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[a[b]"));
-        assertEquals("[ab][a\\[b][ab]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[ab][a[b][ab]"));
-
-        // with already escaped [
-        assertEquals("[ab\\[]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[ab\\[]"));
-        assertEquals("[\\[]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[\\[]"));
-        assertEquals("[a\\[b]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[a\\[b]"));
-        assertEquals("[ab][a\\[b][ab]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("[ab][a\\[b][ab]"));
-    }
-
-    /**
      * Compute replacement value. Following cases occur:
      * - Invalid back references are treated as it in JS but not in Java.
      * - $$: should be replaced by $
@@ -412,22 +377,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         assertEquals("$", HtmlUnitRegExpProxy.computeReplacementValue("$", theString, matcher1group));
         assertEquals("\\\\$", HtmlUnitRegExpProxy.computeReplacementValue("\\\\$", theString, matcher1group));
         assertEquals("$", HtmlUnitRegExpProxy.computeReplacementValue("$", theString, matcher1group));
-    }
-
-    /**
-     * A \ before a character doesn't necessarily escape it.
-     */
-    @Test
-    @Browsers(Browser.NONE)
-    public void isEscaped() {
-        assertFalse(HtmlUnitRegExpProxy.isEscaped("x", 0));
-        assertTrue(HtmlUnitRegExpProxy.isEscaped("\\x", 1));
-
-        assertFalse(HtmlUnitRegExpProxy.isEscaped("\\a x", 3));
-        assertTrue(HtmlUnitRegExpProxy.isEscaped("\\a \\x", 4));
-
-        assertFalse(HtmlUnitRegExpProxy.isEscaped("\\\\x", 2));
-        assertTrue(HtmlUnitRegExpProxy.isEscaped("\\\\\\x", 3));
     }
 
     /**

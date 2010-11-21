@@ -162,8 +162,6 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
     private String doReplacement(final String originalString, final String replacement, final Matcher matcher,
         final boolean replaceAll) {
-//        replacement = replacement.replaceAll("\\\\", "\\\\\\\\"); // \\ -> \\\\
-//        replacement = replacement.replaceAll("(?<!\\$)\\$(?!\\d)", "\\\\\\$"); // \$ -> \\\$
 
         final StringBuffer sb = new StringBuffer();
         int previousIndex = 0;
@@ -250,21 +248,6 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         result.append(replacement.substring(lastIndex));
 
         return result.toString();
-    }
-
-    /**
-     * Indicates if the character at the given position is escaped or not.
-     * @param characters the characters to consider
-     * @param position the position
-     * @return <code>true</code> if escaped
-     */
-    static boolean isEscaped(final String characters, final int position) {
-        int p = position;
-        int nbBackslash = 0;
-        while (p > 0 && characters.charAt(--p) == '\\') {
-            nbBackslash++;
-        }
-        return (nbBackslash % 2 == 1);
     }
 
     /**
@@ -422,31 +405,10 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
      * @param re the JavaScript regular expression to transform
      * @return the transformed expression
      */
-    static String jsRegExpToJavaRegExp(String re) {
-        re = re.replaceAll("\\[\\^\\\\\\d\\]", ".");
-        re = re.replaceAll("\\[([^\\]]*)\\\\b([^\\]]*)\\]", "[$1\\\\cH$2]"); // [...\b...] -> [...\cH...]
-        re = re.replaceAll("(?<!\\\\)\\[([^((?<!\\\\)\\[)\\]]*)\\[", "[$1\\\\["); // [...[...] -> [...\[...]
-
-        // back reference in character classes are simply ignored by browsers
-        re = re.replaceAll("(?<!\\\\)\\[([^\\]]*)(?<!\\\\)\\\\\\d", "[$1"); // [...ab\5cd...] -> [...abcd...]
-
-        // characters escaped without need should be "un-escaped"
-        re = re.replaceAll("(?<!\\\\)\\\\([ACE-RT-VX-Zaeg-mpqyz])", "$1");
-
-        re = escapeJSCurly(re);
-        return re;
-    }
-
-    /**
-     * Escape curly braces that are not used in an expression like "{n}", "{n,}" or "{n,m}"
-     * (where n and m are positive integers).
-     * @param re the regular expression to escape
-     * @return the escaped expression
-     */
-    static String escapeJSCurly(String re) {
-        re = re.replaceAll("(?<!\\\\)\\{(?!\\d)", "\\\\{");
-        re = re.replaceAll("(?<!(\\d,?|\\\\))\\}", "\\\\}");
-        return re;
+    static String jsRegExpToJavaRegExp(final String re) {
+        final RegExpJsToJavaConverter regExpJsToJavaFSM = new RegExpJsToJavaConverter();
+        final String tmpNew = regExpJsToJavaFSM.convert(re);
+        return tmpNew;
     }
 
     /**
