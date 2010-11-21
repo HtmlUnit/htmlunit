@@ -18,9 +18,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests originally in '/js/src/tests/js1_2/regexp/octal.js'.
@@ -37,7 +36,6 @@ public class OctalTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    @NotYetImplemented
     public void test1() throws Exception {
         final String initialScript = "var testPattern = '\\\\101\\\\102\\\\103\\\\104\\\\105\\\\106\\\\107\\\\110"
             + "\\\\111\\\\112\\\\113\\\\114\\\\115\\\\116\\\\117\\\\120\\\\121\\\\122\\\\123\\\\124\\\\125\\\\126"
@@ -52,7 +50,6 @@ public class OctalTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("abcdefghijklmnopqrstuvwxyz")
-    @NotYetImplemented
     public void test2() throws Exception {
         final String initialScript = "var testPattern = '\\\\141\\\\142\\\\143\\\\144\\\\145\\\\146\\\\147\\\\150"
             + "\\\\151\\\\152\\\\153\\\\154\\\\155\\\\156\\\\157\\\\160\\\\161\\\\162\\\\163\\\\164\\\\165\\\\166"
@@ -67,7 +64,6 @@ public class OctalTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(" !\"#$%&'()*+,-./0123")
-    @NotYetImplemented
     public void test3() throws Exception {
         final String initialScript = "var testPattern = '\\\\40\\\\41\\\\42\\\\43\\\\44\\\\45\\\\46\\\\47\\\\50"
             + "\\\\51\\\\52\\\\53\\\\54\\\\55\\\\56\\\\57\\\\60\\\\61\\\\62\\\\63';"
@@ -81,7 +77,6 @@ public class OctalTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("456789:;<=>?@")
-    @NotYetImplemented
     public void test4() throws Exception {
         final String initialScript = "var testPattern = '\\\\64\\\\65\\\\66\\\\67\\\\70\\\\71\\\\72\\\\73\\\\74\\\\75"
             + "\\\\76\\\\77\\\\100';"
@@ -95,7 +90,6 @@ public class OctalTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("{|}~")
-    @NotYetImplemented
     public void test5() throws Exception {
         final String initialScript = "var testPattern = '\\\\173\\\\174\\\\175\\\\176';"
             + "var testString = '1234{|}~ABC';";
@@ -108,7 +102,6 @@ public class OctalTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("FOUND")
-    @NotYetImplemented
     public void test6() throws Exception {
         test("'canthisbeFOUND'.match(new RegExp('[A-\\\\132]+'))");
     }
@@ -119,7 +112,6 @@ public class OctalTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("canthisbe")
-    @NotYetImplemented
     public void test7() throws Exception {
         test("'canthisbeFOUND'.match(new RegExp('[\\\\141-\\\\172]+'))");
     }
@@ -130,7 +122,6 @@ public class OctalTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("canthisbe")
-    @NotYetImplemented
     public void test8() throws Exception {
         test("'canthisbeFOUND'.match(/[\\141-\\172]+/)");
     }
