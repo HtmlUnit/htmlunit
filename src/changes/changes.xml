@@ -10,7 +10,7 @@
                 JavaScript: octal support added to the regular expressions.
             </action>
             <action type="fix" dev="rbri" issue="3110733">
-				HtmlImage; reset image reader also if image is reloaded because of src attribute change.
+                HtmlImage; reset image reader also if image is reloaded because of src attribute change.
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: add support for HTMLDocument.querySelector and querySelectorAll for FF3.6.
