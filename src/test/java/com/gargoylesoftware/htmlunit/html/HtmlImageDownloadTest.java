@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.IOException;
 import java.net.URL;
 
+import javax.imageio.ImageReader;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Assert;
@@ -35,6 +37,7 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * @author Knut Johannes Dahle
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Lukas Botsch
  */
 @RunWith(BrowserRunner.class)
 public class HtmlImageDownloadTest extends WebServerTestCase {
@@ -113,6 +116,19 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
         final WebResponse resp = htmlimage.getWebResponse(true);
         Assert.assertNotNull(resp);
         assertEquals(url.toExternalForm(), resp.getWebRequest().getAdditionalHeaders().get("Referer"));
+    }
+
+    /**
+     * The image should be redownloaded when the src attribute changes.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void redownloadOnSrcAttributeChanged() throws Exception {
+        final HtmlImage htmlimage = getHtmlElementToTest("image1");
+        final ImageReader imagereader = htmlimage.getImageReader();
+        htmlimage.setAttribute("src", htmlimage.getAttribute("src") + "#changed");
+        Assert.assertFalse("Src attribute changed but ImageReader was not reloaded",
+                imagereader.equals(htmlimage.getImageReader()));
     }
 
     /**

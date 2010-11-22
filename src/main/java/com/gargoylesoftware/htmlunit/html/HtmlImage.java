@@ -365,6 +365,7 @@ public class HtmlImage extends HtmlElement {
             final WebRequest request = new WebRequest(url);
             request.setAdditionalHeader("Referer", page.getWebResponse().getWebRequest().getUrl().toExternalForm());
             imageWebResponse_ = webclient.loadWebResponse(request);
+            imageReader_ = null;
             downloaded_ = true;
         }
     }
