@@ -570,7 +570,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                         tagState = PARSING_STATUS.START;
                         tagIsOpen = true;
                     }
-                    else if (currentChar == '\'' || currentChar == '"') {
+                    else if (scriptTagCount > 0 && (currentChar == '\'' || currentChar == '"')) {
                         tagState = PARSING_STATUS.IN_STRING;
                         stringBoundary = currentChar;
                         stringSkipNextChar = false;

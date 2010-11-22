@@ -916,7 +916,21 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void canAlreadyBeParsed() {
+        assertTrue(HTMLDocument.canAlreadyBeParsed("<p>hallo</p>"));
         assertTrue(HTMLDocument.canAlreadyBeParsed("<img src='foo' alt=\"<'>\"></img>"));
+
+        // double close is ok
+        assertTrue(HTMLDocument.canAlreadyBeParsed("<script></script></script>"));
+
+        // check for correct string quoting in script
+        assertTrue(HTMLDocument.canAlreadyBeParsed("<script>var test ='abc';</script>"));
+        assertTrue(HTMLDocument.canAlreadyBeParsed("<script>var test =\"abc\";</script>"));
+        assertFalse(HTMLDocument.canAlreadyBeParsed("<script>var test ='abc\";</script>"));
+        assertFalse(HTMLDocument.canAlreadyBeParsed("<script>var test ='abc;</script>"));
+        assertFalse(HTMLDocument.canAlreadyBeParsed("<script>var test =\"abc;</script>"));
+
+        // check quoting only inside script tags
+        assertTrue(HTMLDocument.canAlreadyBeParsed("<script>var test ='abc';</script><p>it's fun</p>"));
     }
 
     /**
