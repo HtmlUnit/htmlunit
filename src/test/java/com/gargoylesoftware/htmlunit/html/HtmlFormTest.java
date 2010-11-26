@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -224,6 +225,60 @@ public class HtmlFormTest extends WebTestCase {
             + "<form method='get' action='" + URL_SECOND + "' "
             + "onSubmit='alert(\"clicked\");return false;'>\n"
             + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
+            + "</body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
+
+        client.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
+
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+        final HtmlPage secondPage = button.click();
+        assertEquals(firstPage.getTitleText(), secondPage.getTitleText());
+
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
+    }
+
+    /**
+     * Testcase for 3072010.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented(Browser.FF)
+    public void submit_onSubmitHandler_preventDefaultOnly() throws Exception {
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form method='POST' action='" + URL_SECOND + "' >"
+            + "<input name='button' type='submit' value='PushMe' id='button'/>\n"
+            + "</form>\n"
+            + "<script type=\"text/javascript\" charset=\"utf-8\">\n"
+            + "function foo(e) {\n"
+            + "  alert(\"clicked\");\n"
+            + "  e.returnValue = false;\n"
+            + "  if(e.preventDefault) {\n"
+            + "    e.preventDefault()\n"
+            + "  }\n"
+            + "}\n"
+            + "var obj = document.forms[0];\n"
+            + "if (obj.addEventListener) {\n"
+            + "  document.forms[0].addEventListener('submit',foo,false);\n"
+            + "}"
+            + "if (obj.attachEvent) {\n"
+            + "  obj['esubmit' + foo] = foo;\n"
+            + "  obj['submit'+foo] = function() { obj['esubmit'+foo]( window.event ); }\n"
+            + "  obj.attachEvent('onsubmit', obj['submit'+foo] );\n"
+            + "}"
+            + "</script>\n"
             + "</body></html>";
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
