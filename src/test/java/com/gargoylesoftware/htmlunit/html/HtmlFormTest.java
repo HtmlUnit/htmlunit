@@ -255,51 +255,46 @@ public class HtmlFormTest extends WebTestCase {
      */
     @Test
     @NotYetImplemented(Browser.FF)
+    @Alerts("clicked")
     public void submit_onSubmitHandler_preventDefaultOnly() throws Exception {
         final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
-            + "<form method='POST' action='" + URL_SECOND + "' >"
-            + "<input name='button' type='submit' value='PushMe' id='button'/>\n"
+            = "<html><body>\n"
+            + "<form method='post' action='/foo' >"
+            + "<input type='submit' id='button'/>\n"
             + "</form>\n"
-            + "<script type=\"text/javascript\" charset=\"utf-8\">\n"
+            + "<script>\n"
             + "function foo(e) {\n"
-            + "  alert(\"clicked\");\n"
+            + "  alert('clicked');\n"
             + "  e.returnValue = false;\n"
-            + "  if(e.preventDefault) {\n"
+            + "  if (e.preventDefault) {\n"
             + "    e.preventDefault()\n"
             + "  }\n"
             + "}\n"
-            + "var obj = document.forms[0];\n"
-            + "if (obj.addEventListener) {\n"
-            + "  document.forms[0].addEventListener('submit',foo,false);\n"
+            + "var oForm = document.forms[0];\n"
+            + "if (oForm.addEventListener) {\n"
+            + "  oForm.addEventListener('submit', foo, false);\n"
             + "}"
-            + "if (obj.attachEvent) {\n"
-            + "  obj['esubmit' + foo] = foo;\n"
-            + "  obj['submit'+foo] = function() { obj['esubmit'+foo]( window.event ); }\n"
-            + "  obj.attachEvent('onsubmit', obj['submit'+foo] );\n"
+            + "else if (oForm.attachEvent) {\n"
+            + "  oForm.attachEvent('onsubmit', foo);\n"
             + "}"
             + "</script>\n"
             + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstHtml);
-        webConnection.setResponse(URL_SECOND, secondHtml);
+        getMockWebConnection().setResponse(getDefaultUrl(), firstHtml);
+        getMockWebConnection().setDefaultResponse("");
 
-        client.setWebConnection(webConnection);
-
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlPage firstPage = client.getPage(getDefaultUrl());
         final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         final HtmlPage secondPage = button.click();
-        assertEquals(firstPage.getTitleText(), secondPage.getTitleText());
+        assertSame(firstPage, secondPage);
 
-        assertEquals(new String[] {"clicked"}, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
