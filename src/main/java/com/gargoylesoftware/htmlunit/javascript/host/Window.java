@@ -132,6 +132,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private EventListenersContainer eventListenersContainer_;
     private Object controllers_;
     private Object opener_;
+    private Object top_ = NOT_FOUND; // top can be set from JS to any value!
 
     /**
      * Cache computed styles when possible, because their calculation is very expensive.
@@ -649,9 +650,21 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the value of the top property.
      * @return the value of "top"
      */
-    public WindowProxy jsxGet_top() {
+    public Object jsxGet_top() {
+        if (top_ != NOT_FOUND) {
+            return top_;
+        }
+
         final WebWindow top = webWindow_.getTopWindow();
         return getProxy(top);
+    }
+
+    /**
+     * Sets the value of the top property.
+     * @param o the new value
+     */
+    public void jsxSet_top(final Object o) {
+        top_ = o;
     }
 
     /**

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="update" dev="mguillem">
+                JavaScript: make window.top writable.
+            </action>
             <action type="update" dev="rbri">
                 JavaScript: octal support added to the regular expressions.
             </action>

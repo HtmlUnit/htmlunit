@@ -2982,7 +2982,7 @@
             <browser name="Firefox" min-version="3"/>
         </property>
         <property name="status" readable="true" writable="true"/>
-        <property name="top" readable="true" writable="false"/>
+        <property name="top" readable="true" writable="true"/>
         <property name="window" readable="true" writable="false"/>
 
         <function name="addEventListener">
