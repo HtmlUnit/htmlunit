@@ -31,6 +31,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -74,6 +75,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
+import com.gargoylesoftware.htmlunit.javascript.host.StaticNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.TextRectangle;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -2069,6 +2071,60 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             final HtmlElement element = getDomNodeOrDie();
             ((HtmlPage) element.getPage()).setFocusedElement(element);
         }
+    }
+
+    /**
+     * Retrieves all element nodes from descendants of the starting element node that match any selector
+     * within the supplied selector strings.
+     * The NodeList object returned by the querySelectorAll() method must be static, not live.
+     * @param selectors the selectors
+     * @return the static node list
+     */
+    public StaticNodeList jsxFunction_querySelectorAll(final String selectors) {
+        final List<Node> nodes = new ArrayList<Node>();
+        for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
+            nodes.add((Node) domNode.getScriptObject());
+        }
+        return new StaticNodeList(nodes, this);
+    }
+
+    /**
+     * Returns the first element within the document that matches the specified group of selectors.
+     * @param selectors the selectors
+     * @return null if no matches are found; otherwise, it returns the first matching element
+     */
+    public Node jsxFunction_querySelector(final String selectors) {
+        final DomNode node = getDomNodeOrDie().querySelector(selectors);
+        if (node != null) {
+            return (Node) node.getScriptObject();
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final String name, final Scriptable start) {
+        final Object response = super.get(name, start);
+
+        // IE8 support .querySelector(All) but not in quirks mode
+        // => TODO: find a better way to handle this!
+        if (response instanceof FunctionObject
+            && ("querySelectorAll".equals(name) || "querySelector".equals(name))
+            && getBrowserVersion().hasFeature(BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS)) {
+
+            final DomNode domNode = getDomNodeOrNull();
+            if (null == domNode) {
+                return response;
+            }
+            final SgmlPage sgmlPage = domNode.getPage();
+            if ((sgmlPage instanceof HtmlPage) && ((HtmlPage) sgmlPage).isQuirksMode()) {
+                return NOT_FOUND;
+            }
+        }
+
+        return response;
     }
 
     /**

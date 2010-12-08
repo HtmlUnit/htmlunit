@@ -521,19 +521,15 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public String toString() {
-        final StringBuilder buffer = new StringBuilder();
-
-        buffer.append(ClassUtils.getShortClassName(getClass()));
-        buffer.append("[<");
-
         final StringWriter writer = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(writer);
+
+        printWriter.print(ClassUtils.getShortClassName(getClass()));
+        printWriter.print("[<");
         printOpeningTagContentAsXml(printWriter);
-        buffer.append(writer.toString());
-
-        buffer.append(">]");
-
-        return buffer.toString();
+        printWriter.print(">]");
+        printWriter.flush();
+        return writer.toString();
     }
 
     /**
@@ -1515,5 +1511,24 @@ public abstract class HtmlElement extends DomElement {
             return getNodeName();
         }
         return getNodeName() + '[' + nodeIndex + ']';
+    }
+
+    /**
+     * Retrieves all element nodes from descendants of the starting element node that match any selector
+     * within the supplied selector strings.
+     * @param selectors one or more CSS selectors separated by commas
+     * @return list of all found nodes
+     */
+    public DomNodeList<DomNode> querySelectorAll(final String selectors) {
+        return super.querySelectorAll(selectors);
+    }
+
+    /**
+     * Returns the first element within the document that matches the specified group of selectors.
+     * @param selectors one or more CSS selectors separated by commas
+     * @return null if no matches are found; otherwise, it returns the first matching element
+     */
+    public DomNode querySelector(final String selectors) {
+        return super.querySelector(selectors);
     }
 }

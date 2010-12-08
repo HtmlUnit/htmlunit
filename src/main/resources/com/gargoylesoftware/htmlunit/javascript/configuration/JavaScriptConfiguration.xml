@@ -233,6 +233,14 @@
                 descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
         </function>
+        <function name="querySelector">
+            <browser name="Internet Explorer" min-version="8"/>
+            <browser name="Firefox" min-version="3.5"/>
+        </function>
+        <function name="querySelectorAll">
+            <browser name="Internet Explorer" min-version="8"/>
+            <browser name="Firefox" min-version="3.5"/>
+        </function>
     </class>
 
     <!--  the virtual classes that simplify configuration -->

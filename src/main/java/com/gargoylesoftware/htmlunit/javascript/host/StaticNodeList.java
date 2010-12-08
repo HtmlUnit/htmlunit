@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -47,6 +48,16 @@ public class StaticNodeList extends SimpleScriptable {
         elements_ = elements;
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
+    }
+
+    @Override
+    public Object get(final int index, final Scriptable start) {
+        final StaticNodeList staticNodeList = (StaticNodeList) start;
+        final Object result = staticNodeList.jsxFunction_item(index);
+        if (null == result) {
+            return NOT_FOUND;
+        }
+        return result;
     }
 
     /**

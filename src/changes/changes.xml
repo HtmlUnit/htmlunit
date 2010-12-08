@@ -6,6 +6,13 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: support addressing a StaticNodeList like an array (e.g. node = staticNodeList[i]).
+                This is done by prototype 1.6.1 if the querySelector API is available.
+            </action>
+            <action type="fix" dev="rbri" issue="3104700">
+                JavaScript: add support for HTMLElement.querySelector and querySelectorAll for FF3.6 and IE8.
+            </action>
             <action type="remove" dev="mguillem">
                 DefaultCredentialsProvider: removed addNTLMCredentials and addNTLMProxyCredentials as HtmlUnit doesn't provide NTLM
                 support out of the box anymore since release 2.8. See "NTLM authentication" documentation for details on how to work with NTLM.
@@ -20,7 +27,7 @@
                 HtmlImage; reset image reader also if image is reloaded because of src attribute change.
             </action>
             <action type="fix" dev="mguillem">
-                JavaScript: add support for HTMLDocument.querySelector and querySelectorAll for FF3.6.
+                JavaScript: add support for HTMLDocument.querySelector and querySelectorAll for FF3.6 and IE8.
             </action>
             <action type="fix" dev="rbri" issue="3055542">
                 JavaScriptErrorListener added (WebClient.setJavaScriptErrorListener(JavaScriptErrorListener)).

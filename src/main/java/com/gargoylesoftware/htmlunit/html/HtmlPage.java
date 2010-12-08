@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -37,10 +36,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
-import org.w3c.css.sac.ErrorHandler;
-import org.w3c.css.sac.InputSource;
-import org.w3c.css.sac.Selector;
-import org.w3c.css.sac.SelectorList;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -56,7 +51,6 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.ranges.Range;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -82,10 +76,7 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACParserCSS21;
 
 /**
  * A representation of an HTML page returned from a server.
@@ -2305,28 +2296,7 @@ public class HtmlPage extends SgmlPage {
      * @return list of all found nodes
      */
     public DomNodeList<DomNode> querySelectorAll(final String selectors) {
-        final List<DomNode> elements = new ArrayList<DomNode>();
-        try {
-            final ErrorHandler errorHandler = getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
-            parser.setErrorHandler(errorHandler);
-            final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
-            final BrowserVersion browserVersion = getWebClient().getBrowserVersion();
-            for (final HtmlElement child : getHtmlElementDescendants()) {
-                for (int i = 0; i < selectorList.getLength(); i++) {
-                    final Selector selector = selectorList.item(i);
-                    if (CSSStyleSheet.selects(browserVersion, selector, child)) {
-                        elements.add(child);
-                    }
-                }
-            }
-        }
-        catch (final IOException e) {
-            if (LOG.isInfoEnabled()) {
-                LOG.info("Error retrieving selectors: " + selectors, e);
-            }
-        }
-        return new StaticDomNodeList(elements);
+        return super.querySelectorAll(selectors);
     }
 
     /**
@@ -2335,11 +2305,7 @@ public class HtmlPage extends SgmlPage {
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
     public DomNode querySelector(final String selectors) {
-        final DomNodeList<DomNode> list = querySelectorAll(selectors);
-        if (!list.isEmpty()) {
-            return list.get(0);
-        }
-        return null;
+        return super.querySelector(selectors);
     }
 
     @Override

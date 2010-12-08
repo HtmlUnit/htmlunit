@@ -14,8 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,12 +27,19 @@ import java.util.NoSuchElementException;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.w3c.css.sac.ErrorHandler;
+import org.w3c.css.sac.InputSource;
+import org.w3c.css.sac.Selector;
+import org.w3c.css.sac.SelectorList;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.UserDataHandler;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.Page;
@@ -40,7 +49,10 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.parser.SACParserCSS21;
 
 /**
  * Base class for nodes in the HTML DOM tree. This class is modeled after the
@@ -62,6 +74,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  */
 public abstract class DomNode implements Cloneable, Serializable, Node {
+
+    private static final Log LOG = LogFactory.getLog(DomNode.class);
+
     /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
     protected static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
     /** Indicates a new line. Will be rendered as line separator. */
@@ -1481,6 +1496,51 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
             return null;
         }
+    }
+
+    /**
+     * Retrieves all element nodes from descendants of the starting element node that match any selector
+     * within the supplied selector strings.
+     * @param selectors one or more CSS selectors separated by commas
+     * @return list of all found nodes
+     */
+    protected DomNodeList<DomNode> querySelectorAll(final String selectors) {
+        final List<DomNode> elements = new ArrayList<DomNode>();
+        try {
+            final WebClient webClient = getPage().getWebClient();
+            final ErrorHandler errorHandler = webClient.getCssErrorHandler();
+            final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
+            parser.setErrorHandler(errorHandler);
+            final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
+            final BrowserVersion browserVersion = webClient.getBrowserVersion();
+            for (final HtmlElement child : getPage().getHtmlElementDescendants()) {
+                for (int i = 0; i < selectorList.getLength(); i++) {
+                    final Selector selector = selectorList.item(i);
+                    if (CSSStyleSheet.selects(browserVersion, selector, child)) {
+                        elements.add(child);
+                    }
+                }
+            }
+        }
+        catch (final IOException e) {
+            if (LOG.isInfoEnabled()) {
+                LOG.info("Error retrieving selectors: " + selectors, e);
+            }
+        }
+        return new StaticDomNodeList(elements);
+    }
+
+    /**
+     * Returns the first element within the document that matches the specified group of selectors.
+     * @param selectors one or more CSS selectors separated by commas
+     * @return null if no matches are found; otherwise, it returns the first matching element
+     */
+    protected DomNode querySelector(final String selectors) {
+        final DomNodeList<DomNode> list = querySelectorAll(selectors);
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+        return null;
     }
 
     /**
