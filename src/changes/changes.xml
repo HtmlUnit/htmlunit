@@ -7,8 +7,8 @@
     <body>
         <release version="2.9" date="???" description="Bugfixes">
             <action type="remove" dev="mguillem">
-            	DefaultCredentialsProvider: removed addNTLMCredentials and addNTLMProxyCredentials as HtmlUnit doesn't provide NTLM
-            	support out of the box anymore since release 2.8. See "NTLM authentication" documentation for details on how to work with NTLM.
+                DefaultCredentialsProvider: removed addNTLMCredentials and addNTLMProxyCredentials as HtmlUnit doesn't provide NTLM
+                support out of the box anymore since release 2.8. See "NTLM authentication" documentation for details on how to work with NTLM.
             </action>
             <action type="update" dev="mguillem">
                 JavaScript: make window.top writable.
