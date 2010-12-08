@@ -17,8 +17,6 @@ package com.gargoylesoftware.htmlunit;
 import static org.junit.Assert.assertNotNull;
 
 import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.NTCredentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.impl.auth.BasicScheme;
 import org.junit.Test;
@@ -32,35 +30,6 @@ import org.junit.Test;
 public class DefaultCredentialsProviderTest extends WebTestCase {
 
     /**
-     * Test for NTLM credentials.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void addNTLMCredentials() throws Exception {
-        final String username = "foo";
-        final String domain = "MYDOMAIN";
-        final String password = "password";
-        final String host = "my.host";
-        final String clientHost = "CLIENT.HOST";
-        final int port = 1234;
-        final String realm = AuthScope.ANY_REALM;
-        final String scheme = "NTLM";
-
-        final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
-        provider.addNTLMCredentials(username, password, host, port, clientHost, domain);
-
-        final Credentials credentials = provider.getCredentials(new AuthScope(host, port, realm, scheme));
-        assertNotNull(credentials);
-        assertTrue(NTCredentials.class.isInstance(credentials));
-
-        final NTCredentials ntCredentials = (NTCredentials) credentials;
-        assertEquals(username, ntCredentials.getUserName());
-        assertEquals(password, ntCredentials.getPassword());
-        assertEquals(clientHost, ntCredentials.getWorkstation());
-        assertEquals(domain, ntCredentials.getDomain());
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -70,13 +39,10 @@ public class DefaultCredentialsProviderTest extends WebTestCase {
         final String host = "my.host";
         final int port = 1234;
         final String realm = "blah";
-        final String clientDomain = "MYDOMAIN";
-        final String clientHost = "CLIENT.HOST";
         final String scheme = "NTLM";
 
         DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
         provider.addCredentials(username, password, host, port, realm);
-        provider.addNTLMCredentials(username, password, host, port, clientHost, clientDomain);
 
         assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
         assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
