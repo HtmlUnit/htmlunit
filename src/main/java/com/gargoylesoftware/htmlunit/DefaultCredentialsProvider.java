@@ -28,9 +28,10 @@ import org.apache.http.client.CredentialsProvider;
 
 /**
  * Default HtmlUnit implementation of the <tt>CredentialsProvider</tt> interface. Provides
- * credentials for both web servers and proxies. Supports NTLM authentication, Digest
+ * credentials for both web servers and proxies. Supports Digest
  * authentication, and Basic HTTP authentication.
  *
+ * @see See <a href="http://htmlunit.sourceforge.net/ntlm.html">NTLM authentication</a> to use NTLM from HtlmUnit.
  * @version $Revision$
  * @author Daniel Gredler
  * @author Vikram Shitole
