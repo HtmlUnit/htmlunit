@@ -176,9 +176,11 @@ class XmlSerializer {
     protected Map<String, DomAttr> getAttributesFor(final HtmlLink link) throws IOException {
         final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(link, "href");
         final DomAttr hrefAttr = map.get("href");
-        final File file = createFile(hrefAttr.getValue(), ".css");
-        FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString());
-        hrefAttr.setValue(outputDir_.getName() + File.separatorChar + file.getName());
+        if ((null != hrefAttr) && StringUtils.isNotBlank(hrefAttr.getValue())) {
+            final File file = createFile(hrefAttr.getValue(), ".css");
+            FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString());
+            hrefAttr.setValue(outputDir_.getName() + File.separatorChar + file.getName());
+        }
 
         return map;
     }
@@ -186,12 +188,14 @@ class XmlSerializer {
     protected Map<String, DomAttr> getAttributesFor(final HtmlImage image) throws IOException {
         final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(image, "src");
         final DomAttr srcAttr = map.get("src");
-        final ImageReader reader = image.getImageReader();
-        final File file = createFile(srcAttr.getValue(), "." + reader.getFormatName());
-        image.saveAs(file);
-        outputDir_.mkdirs();
-        final String valueOnFileSystem = outputDir_.getName() + File.separatorChar + file.getName();
-        srcAttr.setValue(valueOnFileSystem); // this is the clone attribute node, not the original one of the page
+        if ((null != srcAttr) && StringUtils.isNotBlank(srcAttr.getValue())) {
+            final ImageReader reader = image.getImageReader();
+            final File file = createFile(srcAttr.getValue(), "." + reader.getFormatName());
+            image.saveAs(file);
+            outputDir_.mkdirs();
+            final String valueOnFileSystem = outputDir_.getName() + File.separatorChar + file.getName();
+            srcAttr.setValue(valueOnFileSystem); // this is the clone attribute node, not the original one of the page
+        }
 
         return map;
     }
@@ -199,8 +203,12 @@ class XmlSerializer {
     private Map<String, DomAttr> createAttributesCopyWithClonedAttribute(final HtmlElement elt, final String attrName) {
         final Map<String, DomAttr> newMap = new HashMap<String, DomAttr>(elt.getAttributesMap());
 
-        // clone the specified element
+        // clone the specified element, if possible
         final DomAttr attr = newMap.get(attrName);
+        if (null == attr) {
+            return newMap;
+        }
+
         final DomAttr clonedAttr = new DomAttr(attr.getPage(), attr.getNamespaceURI(),
             attr.getQualifiedName(), attr.getValue(), attr.getSpecified());
 

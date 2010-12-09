@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3121315">
+                NPE in XMLSerializer.save(page) if the page contains an image tag without src attribute or link without href.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: support addressing a StaticNodeList like an array (e.g. node = staticNodeList[i]).
                 This is done by prototype 1.6.1 if the querySelector API is available.

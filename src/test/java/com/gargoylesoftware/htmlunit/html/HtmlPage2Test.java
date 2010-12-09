@@ -317,6 +317,60 @@ public class HtmlPage2Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void save_image_without_src() throws Exception {
+        final String html = "<html><body><img></body></html>";
+
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
+
+        webConnection.setResponse(URL_FIRST, html);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final File tmpFolder = new File(System.getProperty("java.io.tmpdir"));
+        final File file = new File(tmpFolder, "hu_HtmlPageTest_save3.html");
+        try {
+            page.save(file);
+            assertTrue(file.exists());
+            assertTrue(file.isFile());
+        }
+        finally {
+            file.delete();
+        }
+        final HtmlImage img = page.getFirstByXPath("//img");
+        assertEquals(DomElement.ATTRIBUTE_NOT_DEFINED, img.getSrcAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void save_image_empty_src() throws Exception {
+        final String html = "<html><body><img src=''></body></html>";
+
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
+
+        webConnection.setResponse(URL_FIRST, html);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final File tmpFolder = new File(System.getProperty("java.io.tmpdir"));
+        final File file = new File(tmpFolder, "hu_HtmlPageTest_save3.html");
+        try {
+            page.save(file);
+            assertTrue(file.exists());
+            assertTrue(file.isFile());
+        }
+        finally {
+            file.delete();
+        }
+        final HtmlImage img = page.getFirstByXPath("//img");
+        assertEquals(DomElement.ATTRIBUTE_NOT_DEFINED, img.getSrcAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void save_frames() throws Exception {
         final String mainContent
             = "<html><head><title>First</title></head>\n"
@@ -398,8 +452,8 @@ public class HtmlPage2Test extends WebServerTestCase {
         final HtmlLink cssLink = page.getFirstByXPath("//link");
         assertEquals(URL_SECOND.toString(), cssLink.getHrefAttribute());
 
-        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save3.html");
-        final File cssFile = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save3/second.css");
+        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save4.html");
+        final File cssFile = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save4/second.css");
         try {
             page.save(file);
             assertTrue(file.exists());
@@ -412,6 +466,62 @@ public class HtmlPage2Test extends WebServerTestCase {
         }
 
         assertEquals(URL_SECOND.toString(), cssLink.getHrefAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void save_css_without_href() throws Exception {
+        final String html = "<html><head>"
+            + "<link rel='stylesheet' type='text/css' /></head></html>";
+
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
+
+        webConnection.setResponse(URL_FIRST, html);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save5.html");
+        try {
+            page.save(file);
+            assertTrue(file.exists());
+            assertTrue(file.isFile());
+        }
+        finally {
+            file.delete();
+        }
+
+        final HtmlLink cssLink = page.getFirstByXPath("//link");
+        assertEquals(DomElement.ATTRIBUTE_NOT_DEFINED, cssLink.getHrefAttribute());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void save_css_empty_href() throws Exception {
+        final String html = "<html><head>"
+            + "<link rel='stylesheet' type='text/css' href='' /></head></html>";
+
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
+
+        webConnection.setResponse(URL_FIRST, html);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save5.html");
+        try {
+            page.save(file);
+            assertTrue(file.exists());
+            assertTrue(file.isFile());
+        }
+        finally {
+            file.delete();
+        }
+
+        final HtmlLink cssLink = page.getFirstByXPath("//link");
+        assertEquals(DomElement.ATTRIBUTE_NOT_DEFINED, cssLink.getHrefAttribute());
     }
 
     /**
