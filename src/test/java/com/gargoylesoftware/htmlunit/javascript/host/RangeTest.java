@@ -18,10 +18,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link Range}.
@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class RangeTest extends WebTestCase {
+public class RangeTest extends WebDriverTestCase {
 
     private static final String contentStart = "<html><head><title>Range Test</title>\n"
         + "<script>\n"
@@ -64,7 +64,7 @@ public class RangeTest extends WebTestCase {
     @Browsers(Browser.FF)
     @Alerts({ "true", "[object HTMLDocument]", "[object HTMLDocument]", "0", "[object HTMLDocument]", "0" })
     public void testEmptyRange() throws Exception {
-        loadPageWithAlerts(contentStart + "alertRange(r);" + contentEnd);
+        loadPageWithAlerts2(contentStart + "alertRange(r);" + contentEnd);
     }
 
     /**
@@ -77,7 +77,7 @@ public class RangeTest extends WebTestCase {
         final String script = "r.selectNode(document.getElementById('theDiv'));"
             + "alertRange(r);";
 
-        loadPageWithAlerts(contentStart + script + contentEnd);
+        loadPageWithAlerts2(contentStart + script + contentEnd);
     }
 
     /**
@@ -90,7 +90,7 @@ public class RangeTest extends WebTestCase {
         final String script = "r.selectNodeContents(document.getElementById('theDiv'));"
             + "alertRange(r);";
 
-        loadPageWithAlerts(contentStart + script + contentEnd);
+        loadPageWithAlerts2(contentStart + script + contentEnd);
     }
 
     /**
@@ -113,7 +113,7 @@ public class RangeTest extends WebTestCase {
             + "  <div id='myDiv'><div id='myDiv2'></div><div id='myDiv3'></div></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -139,7 +139,7 @@ public class RangeTest extends WebTestCase {
             + "alert(s.innerHTML);\n"
             + "alert(document.getElementById('s'));\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -177,7 +177,46 @@ public class RangeTest extends WebTestCase {
             + "alert('6 ' + f2.childNodes.length + ': ' + f2.childNodes[0] + ': ' + f2.childNodes[0].innerHTML);\n"
             + "alert('7 ' + d.innerHTML);\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "0", "1", "2", "3" })
+    public void constants() throws Exception {
+        final String html =
+              "<html><body><script>\n"
+            + "alert(Range.START_TO_START);\n"
+            + "alert(Range.START_TO_END);\n"
+            + "alert(Range.END_TO_END);\n"
+            + "alert(Range.END_TO_START);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "-1", "1", "1", "-1", "0" })
+    public void compareBoundaryPoints() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='d1'><div id='d2'></div></div>\n"
+            + "<script>\n"
+            + "var range = document.createRange();\n"
+            + "range.selectNode(document.getElementById('d1'));\n"
+            + "var sourceRange = document.createRange();\n"
+            + "sourceRange.selectNode(document.getElementById('d2'));\n"
+            + "alert(range.compareBoundaryPoints(Range.START_TO_START, sourceRange));\n"
+            + "alert(range.compareBoundaryPoints(Range.START_TO_END, sourceRange));\n"
+            + "alert(range.compareBoundaryPoints(Range.END_TO_END, sourceRange));\n"
+            + "alert(range.compareBoundaryPoints(Range.END_TO_START, sourceRange));\n"
+            + "alert(range.compareBoundaryPoints(Range.START_TO_START, range));\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

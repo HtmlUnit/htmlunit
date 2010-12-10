@@ -7,6 +7,10 @@
     <body>
         <release version="2.9" date="???" description="Bugfixes">
             <action type="update" dev="mguillem">
+                JavaScript: added Range constants START_TO_START, START_TO_END, END_TO_START and END_TO_END as well as
+                basic implementation of Range.compareBoundaryPoints (FF only).
+            </action>
+            <action type="update" dev="mguillem">
                 Accept cookies set by server responses even if the path doesn't match the one of the requested content.
             </action>
             <action type="fix" dev="rbri" issue="3121315">

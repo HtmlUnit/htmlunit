@@ -44,6 +44,18 @@ public class Range extends SimpleScriptable {
     private Node startContainer_, endContainer_;
     private int startOffset_, endOffset_;
 
+    /** Comparison mode for compareBoundaryPoints. */
+    public static final short START_TO_START = 0;
+
+    /** Comparison mode for compareBoundaryPoints. */
+    public static final short START_TO_END = 1;
+
+    /** Comparison mode for compareBoundaryPoints. */
+    public static final short END_TO_END = 2;
+
+    /** Comparison mode for compareBoundaryPoints. */
+    public static final short END_TO_START = 3;
+
     /**
      * Creates a new instance.
      */
@@ -315,4 +327,57 @@ public class Range extends SimpleScriptable {
             endContainer_.getDomNodeOrDie(), endOffset_);
     }
 
+    /**
+     * Compares the boundary points of two Ranges.
+     * @param how a constant describing the comparison method
+     * @param sourceRange the Range to compare boundary points with this range
+     * @return -1, 0, or 1, indicating whether the corresponding boundary-point of range is respectively before,
+     * equal to, or after the corresponding boundary-point of sourceRange.
+     */
+    public Object jsxFunction_compareBoundaryPoints(final int how, final Range sourceRange) {
+        final Node nodeForThis;
+        final int offsetForThis;
+        final int containingMoficator;
+        if (START_TO_START == how || END_TO_START == how) {
+            nodeForThis = startContainer_;
+            offsetForThis = startOffset_;
+            containingMoficator = 1;
+        }
+        else {
+            nodeForThis = endContainer_;
+            offsetForThis = endOffset_;
+            containingMoficator = -1;
+        }
+
+        final Node nodeForOther;
+        final int offsetForOther;
+        if (START_TO_END == how || START_TO_START == how) {
+            nodeForOther = sourceRange.startContainer_;
+            offsetForOther = sourceRange.startOffset_;
+        }
+        else {
+            nodeForOther = sourceRange.endContainer_;
+            offsetForOther = sourceRange.endOffset_;
+        }
+
+        if (nodeForThis == nodeForOther) {
+            if (offsetForThis < offsetForOther) {
+                return -1;
+            }
+            else if (offsetForThis < offsetForOther) {
+                return 1;
+            }
+            return 0;
+        }
+
+        final byte nodeComparision = (byte) nodeForThis.jsxFunction_compareDocumentPosition(nodeForOther);
+        if ((nodeComparision & DomNode.DOCUMENT_POSITION_CONTAINED_BY) != 0) {
+            return -1 * containingMoficator;
+        }
+        else if ((nodeComparision & DomNode.DOCUMENT_POSITION_PRECEDING) != 0) {
+            return -1;
+        }
+        // TODO: handle other cases!
+        return 1;
+    }
 }

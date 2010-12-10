@@ -2681,6 +2681,10 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Range" JSObject="true">
+        <constant name="START_TO_START"/>
+        <constant name="START_TO_END"/>
+        <constant name="END_TO_END"/>
+        <constant name="END_TO_START"/>
         <property name="collapsed" readable="true" writable="false"/>
         <property name="commonAncestorContainer" readable="true" writable="false"/>
         <property name="endContainer" readable="true" writable="false"/>
@@ -2689,6 +2693,7 @@
         <property name="startOffset" readable="true" writable="false"/>
 
         <function name="collapse"/>
+        <function name="compareBoundaryPoints"/>
         <function name="createContextualFragment"/>
         <function name="extractContents"/>
         <function name="selectNode"/>
