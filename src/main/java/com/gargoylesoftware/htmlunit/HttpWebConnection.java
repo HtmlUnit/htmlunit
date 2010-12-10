@@ -61,6 +61,7 @@ import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
@@ -81,6 +82,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.DefaultRedirectHandler;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.http.impl.cookie.BasicPathHandler;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.params.BasicHttpParams;
@@ -664,6 +666,17 @@ public class HttpWebConnection implements WebConnection {
  * quotes are wrongly removed in cookie's values.
  */
 class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
+    HtmlUnitBrowserCompatCookieSpec() {
+        super();
+        final BasicPathHandler pathHandler = new BasicPathHandler() {
+            @Override
+            public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
+                // nothing, browsers seem not to perform any validation
+            }
+        };
+        registerAttribHandler(ClientCookie.PATH_ATTR, pathHandler);
+    }
+
     /**
      * {@inheritDoc}
      */

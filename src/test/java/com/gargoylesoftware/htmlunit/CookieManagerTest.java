@@ -393,4 +393,39 @@ public class CookieManagerTest extends WebDriverTestCase {
         final Set<Cookie> cookies = webClient.getCookieManager().getCookies(htmlPage.getUrl());
         assertTrue(cookies.toString(), cookies.isEmpty());
     }
+
+    /**
+     * Response to / sets cookie to /foo/blah.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first=1")
+    public void setCookieSubPath() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo/blah"));
+        responseHeader1.add(new NameValuePair("Location", "/foo/blah"));
+
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE);
+        getMockWebConnection().setResponse(getDefaultUrl(), "", 302, "Moved", "text/html", responseHeader1);
+
+        loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
+     * Response to /a/b sets cookie to /foo/blah.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first=1")
+    public void setCookieDifferentPath() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo/blah"));
+        responseHeader1.add(new NameValuePair("Location", "/foo/blah"));
+
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE);
+        final URL firstUrl = new URL(getDefaultUrl(), "/a/b");
+        getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", "text/html", responseHeader1);
+
+        loadPageWithAlerts2(firstUrl);
+    }
 }
