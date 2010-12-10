@@ -780,4 +780,36 @@ public class HTMLElement2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF3 = "undefined", FF3_6 = { "3", "div1" },
+            IE = "undefined", IE8 = { "3", "div1" })
+    public void querySelectorAll() throws Exception {
+        final String html = "<html><head><title>Test</title>\n"
+            + "<style>\n"
+            + "  .red   {color:#FF0000;}\n"
+            + "  .green {color:#00FF00;}\n"
+            + "  .blue  {color:#0000FF;}\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if(document.body.querySelectorAll) {\n"
+            + "    var redTags = document.body.querySelectorAll('.green,.red');\n"
+            + "    alert(redTags.length);\n"
+            + "    alert(redTags.item(0).id);\n"
+            + "  }\n"
+            + "  else\n"
+            + "    alert('undefined');\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='div1' class='red'>First</div>\n"
+            + "  <div id='div2' class='red'>Second</div>\n"
+            + "  <div id='div3' class='green'>Third</div>\n"
+            + "  <div id='div4' class='blue'>Fourth</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
