@@ -471,6 +471,9 @@ public class JavaScriptEngine {
                            final int startLine) {
 
         final Script script = compile(htmlPage, sourceCode, sourceName, startLine);
+        if (script == null) { // happens with syntax error + throwExceptionOnScriptError = false
+            return null;
+        }
         return execute(htmlPage, script);
     }
 
