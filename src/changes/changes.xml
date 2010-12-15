@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3128042">
+                JavaScript: added support for CSSCharsetRule.
+            </action>
             <action type="fix" dev="mguillem" issue="3060157">
                 HtmlElement.type: respect maxLength (if any) for text and password input fields.
             </action>
@@ -20,7 +23,7 @@
                 basic implementation of Range.compareBoundaryPoints (FF only).
             </action>
             <action type="update" dev="mguillem">
-                Accept cookies set by server responses even if the path doesn't match the one of the requested content.
+                Accept cookies set by server responses even 9if the path doesn't match the one of the requested content.
             </action>
             <action type="fix" dev="rbri" issue="3121315">
                 NPE in XMLSerializer.save(page) if the page contains an image tag without src attribute or link without href.

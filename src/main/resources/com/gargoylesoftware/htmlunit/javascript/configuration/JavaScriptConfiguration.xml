@@ -340,6 +340,10 @@
         JSObject="true">
     </class>
 
+    <class extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule" JSObject="true">
+        <property name="encoding" readable="true" writable="true"/>
+    </class>
+
     <class extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule" JSObject="true">
         <property name="href" readable="true" writable="false"/>
         <property name="media" readable="true" writable="false"/>
