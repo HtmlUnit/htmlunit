@@ -198,21 +198,6 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Returns <tt>true</tt> if the provided response is JavaScript content. This method
-     * checks file extensions in addition to content types, because many web applications
-     * are badly configured and have incorrect headers.
-     *
-     * @param webResponse the response to analyze
-     * @return <code>true</code> if it can be considered as JavaScript
-     */
-    protected boolean isJavaScript(final WebResponse webResponse) {
-        final String contentType = webResponse.getContentType().toLowerCase();
-        return "text/javascript".equals(contentType)
-                || "application/x-javascript".equals(contentType)
-                || webResponse.getWebRequest().getUrl().getPath().endsWith(".js");
-    }
-
-    /**
      * Returns the cached object corresponding to the specified request. If there is
      * no corresponding cached object, this method returns <tt>null</tt>.
      *

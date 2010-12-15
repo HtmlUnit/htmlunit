@@ -85,49 +85,6 @@ public class CacheTest extends WebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(Browser.NONE)
-    public void isJavascript() throws Exception {
-        final Cache cache = new Cache();
-
-        final String[] contentType = {""};
-        final URL[] url = {URL_FIRST};
-        final WebResponse response = new DummyWebResponse() {
-            @Override
-            public String getContentType() {
-                return contentType[0];
-            }
-            @Override
-            public WebRequest getRequestSettings() {
-                return new WebRequest(url[0]);
-            }
-            @Override
-            public WebRequest getWebRequest() {
-                return new WebRequest(url[0]);
-            }
-        };
-
-        assertFalse(cache.isJavaScript(response));
-
-        contentType[0] = "text/javascript";
-        assertTrue(cache.isJavaScript(response));
-
-        contentType[0] = "application/x-javascript";
-        assertTrue(cache.isJavaScript(response));
-
-        contentType[0] = "text/plain";
-        assertFalse(cache.isJavaScript(response));
-
-        url[0] = new URL(URL_FIRST, "foo.js");
-        assertTrue(cache.isJavaScript(response));
-
-        url[0] = new URL(URL_FIRST, "foo.js?1_1_40C");
-        assertTrue(cache.isJavaScript(response));
-    }
-
-    /**
      *@throws Exception if the test fails
      */
     @Test
