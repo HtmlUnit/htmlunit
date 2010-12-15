@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 import com.steadystate.css.dom.CSSValueImpl;
@@ -4742,6 +4743,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             final HTMLElement parent = element.getParentHTMLElement();
             final int absoluteValue = (parent == null) ? value.getWindowDefaultValue() : pixelValue(parent, value);
             return (int) ((i / 100D) * absoluteValue);
+        }
+        else if (s.length() == 0 && element instanceof HTMLCanvasElement) {
+            return value.getWindowDefaultValue();
         }
         return pixelValue(s);
     }

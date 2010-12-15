@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="add" dev="mguillem" issue="3126728">
+                JavaScript: add dummy implementation of HTMLCanvasElement.toDataURL.
+            </action>
+            <action type="fix" dev="mguillem" issue="3126728">
+                JavaScript: HTMLCanvasElement's width and height are of type Number not String.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: added Range constants START_TO_START, START_TO_END, END_TO_START and END_TO_END as well as
                 basic implementation of Range.compareBoundaryPoints (FF only).

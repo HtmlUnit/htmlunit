@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
 
 /**
@@ -35,12 +34,8 @@ public class HTMLCanvasElement extends HTMLElement {
      * Returns the "width" property.
      * @return the "width" property
      */
-    public String jsxGet_width() {
-        String width = getDomNodeOrDie().getAttribute("width");
-        if (width == DomElement.ATTRIBUTE_NOT_DEFINED) {
-            width = "300";
-        }
-        return width;
+    public int jsxGet_width() {
+        return jsxGet_currentStyle().getCalculatedWidth(false, false);
     }
 
     /**
@@ -55,12 +50,8 @@ public class HTMLCanvasElement extends HTMLElement {
      * Returns the "height" property.
      * @return the "height" property
      */
-    public String jsxGet_height() {
-        String height = getDomNodeOrDie().getAttribute("height");
-        if (height == DomElement.ATTRIBUTE_NOT_DEFINED) {
-            height = "150";
-        }
-        return height;
+    public int jsxGet_height() {
+        return jsxGet_currentStyle().getCalculatedHeight(false, false);
     }
 
     /**
@@ -85,5 +76,18 @@ public class HTMLCanvasElement extends HTMLElement {
             return context;
         }
         return null;
+    }
+
+    /**
+     * Get the data: URL representation of the Canvas element.
+     * Here we return an empty image.
+     * @param type the type (optional)
+     * @return the data URL
+     */
+    public String jsxFunction_toDataURL(final String type) {
+        return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAxUlEQVR4nO3BMQEAAADCoPVPbQhf"
+            + "oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            + "AAAAAAAAAAAAAAAAAAAAAAAAAAAOA1v9QAATX68/0AAAAASUVORK5CYII=";
     }
 }

@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
@@ -1269,6 +1270,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final String styleWidth = super.jsxGet_width();
         final DomNode parent = node.getParentNode();
         if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
+            // hack: TODO find a way to specify default values for different tags
+            if (getElement() instanceof HTMLCanvasElement) {
+                return 300;
+            }
+
             // Width not explicitly set.
             final String cssFloat = jsxGet_cssFloat();
             if ("right".equals(cssFloat) || "left".equals(cssFloat)) {
@@ -1407,7 +1413,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_18);
         final int defaultHeight = (ie ? 15 : 20);
 
-        int height = pixelValue(getElement(), new CssValue(Window.WINDOW_HEIGHT) {
+        final int defaultValue = getElement() instanceof HTMLCanvasElement ? 150 : Window.WINDOW_HEIGHT;
+
+        int height = pixelValue(getElement(), new CssValue(defaultValue) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
                 return style.getStyleAttribute("height");
             }
