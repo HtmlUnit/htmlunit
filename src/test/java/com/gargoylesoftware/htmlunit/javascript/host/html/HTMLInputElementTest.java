@@ -623,6 +623,30 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void typeMaxLength() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<form>\n"
+            + "<input type='text' id='text1' maxlength='5'/>\n"
+            + "<input type='password' id='password1' maxlength='6'/>\n"
+            + "</form></body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        final WebElement textField = webDriver.findElement(By.id("text1"));
+        textField.sendKeys("123456789");
+        assertEquals("12345", textField.getValue());
+
+        final WebElement passwordField = webDriver.findElement(By.id("password1"));
+        passwordField.sendKeys("123456789");
+        assertEquals("123456", passwordField.getValue());
+        passwordField.sendKeys("\b7");
+        assertEquals("123457", passwordField.getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Browsers(Browser.FF)
     @Alerts("hello")
     public void selectionRange() throws Exception {

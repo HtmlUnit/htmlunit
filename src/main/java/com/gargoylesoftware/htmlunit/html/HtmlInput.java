@@ -192,6 +192,24 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * Gets the max length if defined, -1 if none.
+     * @return the max length
+     */
+    protected int getMaxLength() {
+        final String maxLength = getMaxLengthAttribute();
+        if (maxLength.length() == 0) {
+            return -1;
+        }
+
+        try {
+            return Integer.parseInt(maxLength);
+        }
+        catch (final NumberFormatException e) {
+            return -1;
+        }
+    }
+
+    /**
      * Returns the value of the attribute "src". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.

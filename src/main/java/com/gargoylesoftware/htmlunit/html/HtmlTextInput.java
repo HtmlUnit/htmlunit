@@ -40,6 +40,9 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
     private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor() {
         @Override
         void typeDone(final String newValue, final int newCursorPosition) {
+            if (newValue.length() > getMaxLength()) {
+                return;
+            }
             setAttribute("value", newValue);
             setSelectionStart(newCursorPosition);
             setSelectionEnd(newCursorPosition);

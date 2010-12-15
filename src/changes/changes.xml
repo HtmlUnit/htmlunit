@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3060157">
+                HtmlElement.type: respect maxLength (if any) for text and password input fields.
+            </action>
             <action type="add" dev="mguillem" issue="3126728">
                 JavaScript: add dummy implementation of HTMLCanvasElement.toDataURL.
             </action>
