@@ -31,6 +31,8 @@ public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJo
 
     /** The amount of time to wait between executions of this job (may be <tt>null</tt>). */
     private final Integer period_;
+    
+    private final boolean executeAsap_;
 
     /**
      * The time at which this job should be executed.
@@ -55,6 +57,7 @@ public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJo
         initialDelay_ = initialDelay;
         period_ = period;
         setTargetExecutionTime(initialDelay + System.currentTimeMillis());
+        executeAsap_ = (initialDelay == 0); // XHR are currently run as jobs and should be prioritary
     }
 
     /**
@@ -105,6 +108,19 @@ public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJo
 
     /** {@inheritDoc} */
     public int compareTo(final JavaScriptJob other) {
+        final boolean xhr1 = executeAsap_;
+        final boolean xhr2 = other.executeAsap_;
+        
+        if (xhr1 && xhr2) {
+            return getId() - other.getId();
+        }
+        else if (xhr1) {
+            return -1;
+        }
+        else if (xhr2) {
+            return 1;
+        }
+        
         return (int) (targetExecutionTime_ - other.getTargetExecutionTime());
     }
 

@@ -390,6 +390,40 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     }
 
     /**
+     * Ensures that XHR callback is executed before a timeout, even if it is time
+     * to execute this one.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "hello", "in timeout" })
+    public void xhrCallbackBeforeTimeout() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function wait() {\n"
+            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  xhr.open('GET', '/delay200/foo.txt', false);\n"
+            + "  xhr.send('');\n"
+            + "}\n"
+            + "function doTest() {\n"
+            + "  setTimeout(function(){ alert('in timeout');}, 5);\n"
+            + "  wait();\n"
+            + "  var xhr2 = " + XHRInstantiation_ + ";\n"
+            + "  var handler = function() {\n"
+            + "    if (xhr2.readyState == 4)\n"
+            + "      alert(xhr2.responseText);\n"
+            + "  }\n"
+            + "  xhr2.onreadystatechange = handler;\n"
+            + "  xhr2.open('GET', '/foo.txt', true);\n"
+            + "  xhr2.send('');\n"
+            + "  wait();\n"
+            + "}\n"
+            + "setTimeout(doTest, 10);\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setDefaultResponse("hello", "text/plain");
+        loadPageWithAlerts2(html, 2000);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
