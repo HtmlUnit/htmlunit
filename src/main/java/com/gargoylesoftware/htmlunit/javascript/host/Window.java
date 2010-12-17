@@ -27,6 +27,7 @@ import java.util.WeakHashMap;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -405,17 +406,26 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final int id;
         final WebWindow w = getWebWindow();
         final Page page = (Page) getDomNodeOrNull();
-        final String description = "window.setTimeout(" + timeout + ")";
         if (code == null) {
             throw Context.reportRuntimeError("Function not provided.");
         }
         else if (code instanceof String) {
             final String s = (String) code;
+            final String description = "window.setTimeout(" + s + ", " + timeout + ")";
             final JavaScriptStringJob job = new JavaScriptStringJob(timeout, null, description, w, s);
             id = getWebWindow().getJobManager().addJob(job, page);
         }
         else if (code instanceof Function) {
             final Function f = (Function) code;
+            final String functionName;
+            if (f instanceof FunctionObject) {
+                functionName = ((FunctionObject) f).getFunctionName();
+            }
+            else {
+                functionName = String.valueOf(f); // can this happen?
+            }
+            
+            String description = "window.setTimeout(" + functionName + ", " + timeout + ")";
             final JavaScriptFunctionJob job = new JavaScriptFunctionJob(timeout, null, description, w, f);
             id = getWebWindow().getJobManager().addJob(job, page);
         }
