@@ -31,7 +31,7 @@ public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJo
 
     /** The amount of time to wait between executions of this job (may be <tt>null</tt>). */
     private final Integer period_;
-    
+
     private final boolean executeAsap_;
 
     /**
@@ -110,7 +110,7 @@ public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJo
     public int compareTo(final JavaScriptJob other) {
         final boolean xhr1 = executeAsap_;
         final boolean xhr2 = other.executeAsap_;
-        
+
         if (xhr1 && xhr2) {
             return getId() - other.getId();
         }
@@ -120,7 +120,7 @@ public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJo
         else if (xhr2) {
             return 1;
         }
-        
+
         return (int) (targetExecutionTime_ - other.getTargetExecutionTime());
     }
 

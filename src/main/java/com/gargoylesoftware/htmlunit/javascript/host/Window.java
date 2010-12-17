@@ -424,8 +424,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             else {
                 functionName = String.valueOf(f); // can this happen?
             }
-            
-            String description = "window.setTimeout(" + functionName + ", " + timeout + ")";
+
+            final String description = "window.setTimeout(" + functionName + ", " + timeout + ")";
             final JavaScriptFunctionJob job = new JavaScriptFunctionJob(timeout, null, description, w, f);
             id = getWebWindow().getJobManager().addJob(job, page);
         }
