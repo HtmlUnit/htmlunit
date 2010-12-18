@@ -58,10 +58,17 @@ public class XMLSerializer extends SimpleScriptable {
         }
         if (root instanceof Element) {
             final StringBuilder buffer = new StringBuilder();
-            final boolean isIE = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_139);
-            toXml(1, root.getDomNodeOrDie(), buffer, isIE);
-            if (isIE) {
-                buffer.append('\r').append('\n');
+            final DomNode node = root.getDomNodeOrDie();
+            final boolean nodeNameAsUpperCase =
+                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SERIALIZER_NODE_AS_UPPERCASE)
+                && (node.getPage() instanceof HtmlPage);
+            final boolean appendCrlf =
+                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF);
+
+            toXml(1, node, buffer, nodeNameAsUpperCase, appendCrlf);
+
+            if (appendCrlf) {
+                buffer.append("\r\n");
             }
             return buffer.toString();
         }
@@ -71,22 +78,27 @@ public class XMLSerializer extends SimpleScriptable {
         return root.<DomNode>getDomNodeOrDie().asXml();
     }
 
-    private void toXml(final int indent, final DomNode node, final StringBuilder buffer, final boolean isIE) {
+    private void toXml(final int indent,
+            final DomNode node, final StringBuilder buffer,
+            final boolean nodeNameAsUpperCase, final boolean appendCrLf) {
         String nodeName = node.getNodeName();
-        if (!isIE && (node.getPage() instanceof HtmlPage)) {
+        if (nodeNameAsUpperCase) {
             nodeName = nodeName.toUpperCase();
         }
         buffer.append('<').append(nodeName);
-        if (node.getNamespaceURI() != null && node.getPrefix() != null) {
+
+        final String namespaceURI = node.getNamespaceURI();
+        final String prefix = node.getPrefix();
+        if (namespaceURI != null && prefix != null) {
             boolean sameNamespace = false;
             for (DomNode parentNode = node.getParentNode(); parentNode instanceof DomElement;
                     parentNode = parentNode.getParentNode()) {
-                if (node.getNamespaceURI().equals(parentNode.getNamespaceURI())) {
+                if (namespaceURI.equals(parentNode.getNamespaceURI())) {
                     sameNamespace = true;
                 }
             }
             if (node.getParentNode() == null || !sameNamespace) {
-                ((DomElement) node).setAttribute("xmlns:" + node.getPrefix(), node.getNamespaceURI());
+                ((DomElement) node).setAttribute("xmlns:" + prefix, namespaceURI);
             }
         }
         final NamedNodeMap attributesMap = node.getAttributes();
@@ -103,14 +115,14 @@ public class XMLSerializer extends SimpleScriptable {
             }
             switch (child.getNodeType()) {
                 case Node.ELEMENT_NODE:
-                    toXml(indent + 1, child, buffer, isIE);
+                    toXml(indent + 1, child, buffer, nodeNameAsUpperCase, appendCrLf);
                     break;
 
                 case Node.TEXT_NODE:
                     String value = child.getNodeValue();
                     value = StringUtils.escapeXmlChars(value);
-                    if (isIE && value.trim().length() == 0) {
-                        buffer.append('\r').append('\n');
+                    if (appendCrLf && value.trim().length() == 0) {
+                        buffer.append("\r\n");
                         final DomNode sibling = child.getNextSibling();
                         if (sibling != null && sibling.getNodeType() == Node.ELEMENT_NODE) {
                             for (int i = 0; i < indent; i++) {
