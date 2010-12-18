@@ -128,7 +128,7 @@ public class JavaScriptExecutor implements Runnable, Serializable {
                 final JavaScriptJob newJob = jobManager.getEarliestJob();
                 if (newJob != null) {
                     if (jobExecutor == null
-                        || jobExecutor.earliestJob_.compareTo(newJob) < 0) {
+                        || jobExecutor.earliestJob_.compareTo(newJob) > 0) {
                         jobExecutor = new JobExecutor(jobManager, newJob);
                     }
                 }

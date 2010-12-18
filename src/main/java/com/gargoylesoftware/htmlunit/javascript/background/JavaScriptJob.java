@@ -114,10 +114,12 @@ public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJo
         if (xhr1 && xhr2) {
             return getId() - other.getId();
         }
-        else if (xhr1) {
+
+        if (xhr1) {
             return -1;
         }
-        else if (xhr2) {
+
+        if (xhr2) {
             return 1;
         }
 
