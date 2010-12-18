@@ -635,12 +635,66 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final WebElement textField = webDriver.findElement(By.id("text1"));
         textField.sendKeys("123456789");
         assertEquals("12345", textField.getValue());
+        textField.sendKeys("\b7");
+        assertEquals("12347", textField.getValue());
 
         final WebElement passwordField = webDriver.findElement(By.id("password1"));
         passwordField.sendKeys("123456789");
         assertEquals("123456", passwordField.getValue());
         passwordField.sendKeys("\b7");
         assertEquals("123457", passwordField.getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeMaxLengthZero() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<form>\n"
+            + "<input type='text' id='text1' maxlength='0'/>\n"
+            + "<input type='password' id='password1' maxlength='0'/>\n"
+            + "</form></body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        final WebElement textField = webDriver.findElement(By.id("text1"));
+        textField.sendKeys("123456789");
+        assertEquals("", textField.getValue());
+        textField.sendKeys("\b7");
+        assertEquals("", textField.getValue());
+
+        final WebElement passwordField = webDriver.findElement(By.id("password1"));
+        passwordField.sendKeys("123456789");
+        assertEquals("", passwordField.getValue());
+        passwordField.sendKeys("\b7");
+        assertEquals("", passwordField.getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeMaxLengthAndBlanks() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<form>\n"
+            + "<input type='text' id='text1' maxlength=' 2 '/>\n"
+            + "<input type='password' id='password1' maxlength='    4  '/>\n"
+            + "</form></body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        final WebElement textField = webDriver.findElement(By.id("text1"));
+        textField.sendKeys("123456789");
+        assertEquals("12", textField.getValue());
+        textField.sendKeys("\b7");
+        assertEquals("17", textField.getValue());
+
+        final WebElement passwordField = webDriver.findElement(By.id("password1"));
+        passwordField.sendKeys("123456789");
+        assertEquals("1234", passwordField.getValue());
+        passwordField.sendKeys("\b7");
+        assertEquals("1237", passwordField.getValue());
     }
 
     /**

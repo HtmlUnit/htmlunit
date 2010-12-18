@@ -192,20 +192,20 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Gets the max length if defined, -1 if none.
+     * Gets the max length if defined, Integer.MAX_VALUE if none.
      * @return the max length
      */
     protected int getMaxLength() {
         final String maxLength = getMaxLengthAttribute();
         if (maxLength.length() == 0) {
-            return -1;
+            return Integer.MAX_VALUE;
         }
 
         try {
-            return Integer.parseInt(maxLength);
+            return Integer.parseInt(maxLength.trim());
         }
         catch (final NumberFormatException e) {
-            return -1;
+            return Integer.MAX_VALUE;
         }
     }
 
