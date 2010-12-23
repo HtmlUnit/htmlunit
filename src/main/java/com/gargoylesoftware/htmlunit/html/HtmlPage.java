@@ -177,7 +177,6 @@ public class HtmlPage extends SgmlPage {
         if (getWebResponse().getWebRequest().getUrl() == WebClient.URL_ABOUT_BLANK) {
             // a frame contains first a faked "about:blank" before its real content specified by src gets loaded
             if (enclosingWindow instanceof FrameWindow
-                    && getWebResponse().getWebRequest().getUrl() == WebClient.URL_ABOUT_BLANK
                     && !((FrameWindow) enclosingWindow).getFrameElement().isContentLoaded()) {
                 return;
             }
