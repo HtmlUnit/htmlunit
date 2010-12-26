@@ -162,7 +162,7 @@ public final class StringUtils {
     public static boolean containsCaseInsensitive(final Collection<String> strings, String string) {
         string = string.toLowerCase();
         for (String s : strings) {
-            if (s.toLowerCase().equals(string)) {
+            if (s.equalsIgnoreCase(string)) {
                 return true;
             }
         }
