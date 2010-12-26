@@ -304,7 +304,7 @@ public final class HTMLParser {
         if (namespaceURI == null || namespaceURI.length() == 0
             || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
             String tagName = qualifiedName;
-            final int index = tagName.indexOf(":");
+            final int index = tagName.indexOf(':');
             if (index != -1) {
                 tagName = tagName.substring(index + 1);
             }
