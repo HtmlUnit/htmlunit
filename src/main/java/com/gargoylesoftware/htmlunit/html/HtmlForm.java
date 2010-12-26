@@ -34,7 +34,6 @@ import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -112,12 +111,12 @@ public class HtmlForm extends HtmlElement {
             }
 
             final String action = getActionAttribute();
-            if (TextUtil.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            if (StringUtils.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 return htmlPage.executeJavaScriptIfPossible(action, "Form action", getStartLineNumber()).getNewPage();
             }
         }
         else {
-            if (TextUtil.startsWithIgnoreCase(getActionAttribute(), JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            if (StringUtils.startsWithIgnoreCase(getActionAttribute(), JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // The action is JavaScript but JavaScript isn't enabled.
                 // Return the current page.
                 return htmlPage;
@@ -163,7 +162,7 @@ public class HtmlForm extends HtmlElement {
             method = HttpMethod.POST;
         }
         else {
-            if (!"get".equalsIgnoreCase(methodAttribute) && methodAttribute.trim().length() > 0) {
+            if (!"get".equalsIgnoreCase(methodAttribute) && StringUtils.isNotBlank(methodAttribute)) {
                 notifyIncorrectness("Incorrect submit method >" + getMethodAttribute() + "<. Using >GET<.");
             }
             method = HttpMethod.GET;

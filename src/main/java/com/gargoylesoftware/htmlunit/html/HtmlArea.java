@@ -25,7 +25,6 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -70,7 +69,7 @@ public class HtmlArea extends HtmlElement {
         final String href = getHrefAttribute();
         if (href != null && href.length() > 0) {
             final HtmlPage page = (HtmlPage) getPage();
-            if (TextUtil.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 page.executeJavaScriptIfPossible(
                     href, "javascript url", getStartLineNumber());
                 return;

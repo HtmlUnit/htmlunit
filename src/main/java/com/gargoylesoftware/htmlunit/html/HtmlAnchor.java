@@ -26,7 +26,6 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
@@ -79,7 +78,7 @@ public class HtmlAnchor extends HtmlElement {
             return;
         }
         final HtmlPage page = (HtmlPage) getPage();
-        if (TextUtil.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+        if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final StringBuilder builder = new StringBuilder(href.length());
             for (int i = 0; i < href.length(); i++) {
                 final char ch = href.charAt(i);

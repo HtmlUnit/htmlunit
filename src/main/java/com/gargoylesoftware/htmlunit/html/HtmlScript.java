@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
@@ -463,7 +462,7 @@ public class HtmlScript extends HtmlElement {
                             .hasFeature(BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT));
         }
         else if (languageAttribute != null && languageAttribute.length() != 0) {
-            isJavaScript = TextUtil.startsWithIgnoreCase(languageAttribute, "javascript");
+            isJavaScript = StringUtils.startsWithIgnoreCase(languageAttribute, "javascript");
         }
         else {
             isJavaScript = true;

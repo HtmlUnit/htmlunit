@@ -40,27 +40,6 @@ public final class TextUtil {
     private TextUtil() { }
 
     /**
-     * Returns true if the string starts with the specified prefix, irrespective of case.
-     * @param stringToCheck the string to check
-     * @param prefix the prefix
-     * @return true if the string starts with the prefix
-     */
-    public static boolean startsWithIgnoreCase(final String stringToCheck, final String prefix) {
-        WebAssert.notNull("stringToCheck", stringToCheck);
-        WebAssert.notNull("prefix", prefix);
-
-        if (prefix.length() == 0) {
-            throw new IllegalArgumentException("Prefix may not be empty");
-        }
-
-        final int prefixLength = prefix.length();
-        if (stringToCheck.length() < prefixLength) {
-            return false;
-        }
-        return stringToCheck.substring(0, prefixLength).toLowerCase().equals(prefix.toLowerCase());
-    }
-
-    /**
      * Convert a string into an input stream.
      * @param content the string
      * @return the resulting input stream
