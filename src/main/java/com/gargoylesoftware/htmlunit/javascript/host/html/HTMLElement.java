@@ -383,7 +383,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // can name be an attribute of current element?
         // first approximation: attribute are all lowercase
         // this should be improved because it's wrong. For instance: tabIndex, hideFocus, acceptCharset
-        return StringUtils.isAllLowerCase(name);
+        return name.toLowerCase().equals(name);
     }
 
     /**
