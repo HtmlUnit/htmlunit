@@ -508,7 +508,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param value the attribute value
      */
     private void replaceStyleAttribute(final String name, final String value) {
-        if (value.trim().length() == 0) {
+        if (StringUtils.isBlank(value)) {
             removeStyleAttribute(name);
         }
         else {

@@ -525,7 +525,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         writeBuffer_.setLength(0);
-        page.writeInParsedStream(bufferedContent.toString());
+        page.writeInParsedStream(bufferedContent);
     }
 
     private void scheduleImplicitClose() {
@@ -769,7 +769,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // Custom attribute values.
         while (st.hasMoreTokens()) {
             final String token = st.nextToken();
-            final int indexEqual = token.indexOf("=");
+            final int indexEqual = token.indexOf('=');
             if (indexEqual > -1) {
                 atts.put(token.substring(0, indexEqual).toLowerCase().trim(), token.substring(indexEqual + 1).trim());
             }
@@ -1327,7 +1327,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return;
         }
 
-        if (newDomain.indexOf(".") == -1
+        if (newDomain.indexOf('.') == -1
                 || !currentDomain.toLowerCase().endsWith("." + newDomain.toLowerCase())) {
             throw Context.reportRuntimeError("Illegal domain value, cannot set domain from: \""
                     + currentDomain + "\" to: \"" + newDomain + "\"");

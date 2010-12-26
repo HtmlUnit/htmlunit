@@ -60,7 +60,7 @@ public class Attachment {
             return null;
         }
         start += "filename=".length();
-        int end = disp.indexOf(";", start);
+        int end = disp.indexOf(';', start);
         if (end == -1) {
             end = disp.length();
         }
