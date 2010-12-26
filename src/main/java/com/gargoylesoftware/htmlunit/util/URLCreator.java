@@ -18,7 +18,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLStreamHandler;
 
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 
@@ -53,10 +52,10 @@ abstract class URLCreator {
 
         @Override
         URL toUrlUnsafeClassic(final String url) throws MalformedURLException {
-            if (TextUtil.startsWithIgnoreCase(url, "javascript:")) {
+            if (org.apache.commons.lang.StringUtils.startsWithIgnoreCase(url, "javascript:")) {
                 return new URL(null, url, JS_HANDLER);
             }
-            else if (TextUtil.startsWithIgnoreCase(url, "about:")) {
+            else if (org.apache.commons.lang.StringUtils.startsWithIgnoreCase(url, "about:")) {
                 if (WebClient.URL_ABOUT_BLANK != null
                         && org.apache.commons.lang.StringUtils.equalsIgnoreCase(
                                 WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
@@ -64,7 +63,7 @@ abstract class URLCreator {
                 }
                 return new URL(null, url, ABOUT_HANDLER);
             }
-            else if (TextUtil.startsWithIgnoreCase(url, "data:")) {
+            else if (org.apache.commons.lang.StringUtils.startsWithIgnoreCase(url, "data:")) {
                 return new URL(null, url, DATA_HANDLER);
             }
             else {
@@ -80,10 +79,10 @@ abstract class URLCreator {
 
         @Override
         URL toUrlUnsafeClassic(final String url) throws MalformedURLException {
-            if (TextUtil.startsWithIgnoreCase(url, "javascript:")) {
+            if (org.apache.commons.lang.StringUtils.startsWithIgnoreCase(url, "javascript:")) {
                 return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
             }
-            else if (TextUtil.startsWithIgnoreCase(url, "about:")) {
+            else if (org.apache.commons.lang.StringUtils.startsWithIgnoreCase(url, "about:")) {
                 if (WebClient.URL_ABOUT_BLANK != null
                         && org.apache.commons.lang.StringUtils.equalsIgnoreCase(
                                 WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
@@ -91,7 +90,7 @@ abstract class URLCreator {
                 }
                 return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
             }
-            else if (TextUtil.startsWithIgnoreCase(url, "data:")) {
+            else if (org.apache.commons.lang.StringUtils.startsWithIgnoreCase(url, "data:")) {
                 return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
             }
             else {

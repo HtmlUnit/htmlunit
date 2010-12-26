@@ -377,7 +377,7 @@ public final class UrlUtils {
             s.append(":").append(port);
         }
         if (path != null && path.length() > 0) {
-            if (!path.startsWith("/")) {
+            if (!('/' == path.charAt(0))) {
                 s.append("/");
             }
             s.append(path);
@@ -386,7 +386,7 @@ public final class UrlUtils {
             s.append("?").append(query);
         }
         if (ref != null) {
-            if (!ref.startsWith("#")) {
+            if (!((ref.length() > 0) && ('#' == ref.charAt(0)))) {
                 s.append("#");
             }
             s.append(ref);
@@ -657,7 +657,7 @@ public final class UrlUtils {
         url.location_ = baseUrl.location_;
         // Step 4: If the embedded URL path is preceded by a slash "/", the
         //         path is not relative and we skip to Step 7.
-        if ((url.path_ != null) && url.path_.startsWith("/")) {
+        if ((url.path_ != null) && ((url.path_.length() > 0) && ('/' == url.path_.charAt(0)))) {
             url.path_ = removeLeadingSlashPoints(url.path_);
             return url;
         }

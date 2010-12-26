@@ -121,7 +121,7 @@ public class XMLSerializer extends SimpleScriptable {
                 case Node.TEXT_NODE:
                     String value = child.getNodeValue();
                     value = StringUtils.escapeXmlChars(value);
-                    if (appendCrLf && value.trim().length() == 0) {
+                    if (appendCrLf && org.apache.commons.lang.StringUtils.isBlank(value)) {
                         buffer.append("\r\n");
                         final DomNode sibling = child.getNextSibling();
                         if (sibling != null && sibling.getNodeType() == Node.ELEMENT_NODE) {
