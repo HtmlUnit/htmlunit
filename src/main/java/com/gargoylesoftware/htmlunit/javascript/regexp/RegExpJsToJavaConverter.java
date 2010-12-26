@@ -29,6 +29,8 @@ package com.gargoylesoftware.htmlunit.javascript.regexp;
  */
 public class RegExpJsToJavaConverter {
 
+    private static final String DIGITS = "0123456789";
+
     /**
      * Helper to encapsulate the transformations.
      */
@@ -173,7 +175,7 @@ public class RegExpJsToJavaConverter {
                 }
                 if ('\\' == next) {
                     next = tape_.read();
-                    if ("0123456789".indexOf(next) < 0) {
+                    if (DIGITS.indexOf(next) < 0) {
                         tape_.move(-2);
                         return;
                     }
@@ -210,7 +212,7 @@ public class RegExpJsToJavaConverter {
             return;
         }
 
-        if ("0123456789".indexOf(next) > -1) {
+        if (DIGITS.indexOf(next) > -1) {
             insideRepetition_ = true;
         }
         else if ('}' == next) {
@@ -290,24 +292,24 @@ public class RegExpJsToJavaConverter {
             return;
         }
 
-        if ("0123456789".indexOf(escapeSequence) > -1) {
+        if (DIGITS.indexOf(escapeSequence) > -1) {
             handleBackReferenceOrOctal(escapeSequence);
         }
     }
 
     private boolean handleBackReferenceOrOctal(final int aFirstChar) {
         // first try to figure out what the number is
-        String tmpNo = "" + (char) aFirstChar;
+        final StringBuilder tmpNo = new StringBuilder(Character.toString((char) aFirstChar));
         int tmpInsertPos = -1;
         int next = tape_.read();
         if (next > -1) {
-            if ("0123456789".indexOf(next) > -1) {
-                tmpNo += next;
+            if (DIGITS.indexOf(next) > -1) {
+                tmpNo.append(next);
                 tmpInsertPos--;
                 next = tape_.read();
                 if (next > -1) {
-                    if ("0123456789".indexOf(next) > -1) {
-                        tmpNo += next;
+                    if (DIGITS.indexOf(next) > -1) {
+                        tmpNo.append(next);
                         tmpInsertPos--;
                     }
                     else {
@@ -320,7 +322,7 @@ public class RegExpJsToJavaConverter {
             }
         }
 
-        final int value = Integer.parseInt(tmpNo);
+        final int value = Integer.parseInt(tmpNo.toString());
         if (value > noOfSubexpressions_) {
             // we have a octal here
             tape_.insert("0", tmpInsertPos);
