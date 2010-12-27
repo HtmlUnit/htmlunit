@@ -20,6 +20,7 @@ import java.net.URLStreamHandler;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.gae.GAEUtils;
+import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 /**
  * Responsible for URL creation.
@@ -52,7 +53,8 @@ abstract class URLCreator {
 
         @Override
         URL toUrlUnsafeClassic(final String url) throws MalformedURLException {
-            if (org.apache.commons.lang.StringUtils.startsWithIgnoreCase(url, "javascript:")) {
+            if (org.apache.commons.lang.StringUtils.startsWithIgnoreCase(url,
+                    JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 return new URL(null, url, JS_HANDLER);
             }
             else if (org.apache.commons.lang.StringUtils.startsWithIgnoreCase(url, "about:")) {
@@ -79,7 +81,8 @@ abstract class URLCreator {
 
         @Override
         URL toUrlUnsafeClassic(final String url) throws MalformedURLException {
-            if (org.apache.commons.lang.StringUtils.startsWithIgnoreCase(url, "javascript:")) {
+            if (org.apache.commons.lang.StringUtils.startsWithIgnoreCase(url,
+                    JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
             }
             else if (org.apache.commons.lang.StringUtils.startsWithIgnoreCase(url, "about:")) {
