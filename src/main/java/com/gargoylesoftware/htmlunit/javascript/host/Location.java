@@ -51,6 +51,8 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class Location extends SimpleScriptable {
 
+    private static final Pattern DECODE_HASH_PATTERN = Pattern.compile("%([\\dA-F]{2})");
+
     private static final Log LOG = LogFactory.getLog(Location.class);
     private static final String UNKNOWN = "null";
 
@@ -280,7 +282,7 @@ public class Location extends SimpleScriptable {
         // IMPORTANT: This method must not call setUrl(), because
         // we must not hit the server just to change the hash!
         if (hash != null) {
-            if (hash.startsWith("#")) {
+            if (hash.length() > 0 && ('#' == hash.charAt(0))) {
                 hash = hash.substring(1);
             }
             final boolean decodeHash = getBrowserVersion().
@@ -300,8 +302,7 @@ public class Location extends SimpleScriptable {
             return hash;
         }
         final StringBuffer sb = new StringBuffer();
-        final Pattern p = Pattern.compile("%([\\dA-F]{2})");
-        final Matcher m = p.matcher(hash);
+        final Matcher m = DECODE_HASH_PATTERN.matcher(hash);
         while (m.find()) {
             final String code = m.group(1);
             final int u = (char) Character.digit(code.charAt(0), 16);
