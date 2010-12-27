@@ -41,6 +41,8 @@ import org.apache.xpath.res.XPATHErrorResources;
  * @author Ahmed Ashour
  */
 class XPathAdapter {
+    private static final Pattern PREPROCESS_XPATH_PATTERN = Pattern.compile("(@[a-zA-Z]+)");
+
     private Expression mainExp_;
     private FunctionTable funcTable_;
 
@@ -100,8 +102,7 @@ class XPathAdapter {
         processOutsideBrackets(charArray);
         xpath = new String(charArray);
 
-        final Pattern pattern = Pattern.compile("(@[a-zA-Z]+)");
-        final Matcher matcher = pattern.matcher(xpath);
+        final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(xpath);
         while (matcher.find()) {
             final String attribute = matcher.group(1);
             xpath = xpath.replace(attribute, attribute.toLowerCase());

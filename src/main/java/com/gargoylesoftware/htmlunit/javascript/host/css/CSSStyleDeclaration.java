@@ -270,6 +270,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     private static final String Z_INDEX = "z-index";
     private static final String ZOOM = "zoom";
 
+    private static final Pattern COLOR_PATTERN =
+        Pattern.compile("(rgb.*?\\(.*?\\d{1,3}.*?,.*?\\d{1,3}.*?,.*?\\d{1,3}.*?\\))");
+
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static Map<String, String> CSSColors_ = new HashMap<String, String>();
     private static Map<String, String> CamelizeCache_ = new HashMap<String, String>();
@@ -4600,8 +4603,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the string of the color if found, null otherwise
      */
     private static String findColor(final String text) {
-        final Pattern p = Pattern.compile("(rgb.*?\\(.*?\\d{1,3}.*?,.*?\\d{1,3}.*?,.*?\\d{1,3}.*?\\))");
-        final Matcher m = p.matcher(text);
+        final Matcher m = COLOR_PATTERN.matcher(text);
         if (m.find()) {
             return m.group(1);
         }

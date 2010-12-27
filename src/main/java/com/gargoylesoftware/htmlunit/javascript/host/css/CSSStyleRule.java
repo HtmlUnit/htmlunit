@@ -27,6 +27,8 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
  * @author Marc Guillemot
  */
 public class CSSStyleRule extends CSSRule {
+    private static final Pattern SELECTOR_PARTS_PATTERN = Pattern.compile("[\\.#]?[a-zA-Z]+");
+    private static final Pattern SELECTOR_REPLACE_PATTERN = Pattern.compile("\\*([\\.#])");
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -50,13 +52,13 @@ public class CSSStyleRule extends CSSRule {
      */
     public String jsxGet_selectorText() {
         String selectorText = ((org.w3c.dom.css.CSSStyleRule) getRule()).getSelectorText();
-        final Pattern p = Pattern.compile("[\\.#]?[a-zA-Z]+");
-        final Matcher m = p.matcher(selectorText);
+        final Matcher m = SELECTOR_PARTS_PATTERN.matcher(selectorText);
         final StringBuffer sb = new StringBuffer();
         while (m.find()) {
             String fixedName = m.group();
             // this should be handled with the right regex but...
-            if (fixedName.startsWith(".") || fixedName.startsWith("#")) {
+            if ((fixedName.length() > 0)
+                    && (('.' == fixedName.charAt(0)) || ('#' == fixedName.charAt(0)))) {
                 // nothing
             }
             else if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_27)) {
@@ -69,7 +71,8 @@ public class CSSStyleRule extends CSSRule {
         }
         m.appendTail(sb);
 
-        selectorText = sb.toString().replaceAll("\\*([\\.#])", "$1"); // ".foo" and not "*.foo"
+        // ".foo" and not "*.foo"
+        selectorText = SELECTOR_REPLACE_PATTERN.matcher(sb.toString()).replaceAll("$1");
         return selectorText;
     }
 
