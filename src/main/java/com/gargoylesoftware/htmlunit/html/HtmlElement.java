@@ -301,12 +301,12 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public String getNodeName() {
-        String name = getLocalName();
+        final StringBuilder name = new StringBuilder();
         if (getPrefix() != null) {
-            name = getPrefix() + ':' + name;
+            name.append(getPrefix() + ':');
         }
-        name = name.toLowerCase();
-        return name;
+        name.append(getLocalName());
+        return name.toString().toLowerCase();
     }
 
     /**

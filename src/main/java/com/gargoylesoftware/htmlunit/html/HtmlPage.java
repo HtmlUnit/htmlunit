@@ -808,7 +808,7 @@ public class HtmlPage extends SgmlPage {
     public List<HtmlElement> getElementsByAccessKey(final char accessKey) {
         final List<HtmlElement> elements = new ArrayList<HtmlElement>();
 
-        final String searchString = ("" + accessKey).toLowerCase();
+        final String searchString = Character.toString(accessKey).toLowerCase();
         final List<String> acceptableTagNames = Arrays.asList(
                 new String[]{"a", "area", "button", "input", "label", "legend", "textarea"});
 
@@ -2217,10 +2217,11 @@ public class HtmlPage extends SgmlPage {
             final Attr attr = (Attr) attributes.item(i);
             String name = attr.getName();
             if (name.startsWith("xmlns")) {
-                name = name.substring(5);
-                if (name.startsWith(":")) {
-                    name = name.substring(1);
+                int startPos = 5;
+                if ((name.length() > 5) && (name.charAt(5) == ':')) {
+                    startPos = 6;
                 }
+                name = name.substring(startPos);
                 namespaces.put(name, attr.getValue());
             }
         }
