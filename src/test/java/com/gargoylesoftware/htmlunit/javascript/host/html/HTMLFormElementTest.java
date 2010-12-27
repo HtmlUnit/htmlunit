@@ -455,6 +455,78 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void formSubmitWithJavascript() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1' method='get' action='javascript:alert(\"javaScript\")'>\n"
+            + "    <input type='button' name='button1' />\n"
+            + "    <input type='button' name='button2' />\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final String[] expectedAlerts = {"javaScript"};
+
+        final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page2 = (HtmlPage) page1.executeJavaScript("document.form1.submit()").getNewPage();
+
+        assertEquals(page1, page2);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void formSubmitWithJavascriptLeadingWhitespace() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1' method='get' action='  javascript:alert(\"javaScript\")'>\n"
+            + "    <input type='button' name='button1' />\n"
+            + "    <input type='button' name='button2' />\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final String[] expectedAlerts = {"javaScript"};
+
+        final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page2 = (HtmlPage) page1.executeJavaScript("document.form1.submit()").getNewPage();
+
+        assertEquals(page1, page2);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void formSubmitWithJavascriptMixedCase() throws Exception {
+        final String html
+            = "<html><head><title>first</title></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1' method='get' action='javaSCript:alert(\"javaScript\")'>\n"
+            + "    <input type='button' name='button1' />\n"
+            + "    <input type='button' name='button2' />\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final String[] expectedAlerts = {"javaScript"};
+
+        final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page2 = (HtmlPage) page1.executeJavaScript("document.form1.submit()").getNewPage();
+
+        assertEquals(page1, page2);
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void onSubmitChangesAction() throws Exception {
         final String html
             = "<html><body>\n"

@@ -234,6 +234,50 @@ public class HtmlAnchorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void testClick_javascriptUrlMixedCase() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<a href='JAVAscrIpt:alert(\"clicked\")' id='a2'>link to foo2</a>\n"
+            + "</body></html>";
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+
+        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+
+        final HtmlPage secondPage = anchor.click();
+
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
+        assertSame(page, secondPage);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testClick_javascriptUrlLeadingWhitespace() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<a href='  javascript:alert(\"clicked\")' id='a2'>link to foo2</a>\n"
+            + "</body></html>";
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+
+        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+
+        final HtmlPage secondPage = anchor.click();
+
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
+        assertSame(page, secondPage);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void testClick_javascriptUrl_javascriptDisabled() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"

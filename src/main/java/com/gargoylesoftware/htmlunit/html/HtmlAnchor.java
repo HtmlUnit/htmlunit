@@ -69,7 +69,7 @@ public class HtmlAnchor extends HtmlElement {
      * @throws IOException if an IO error occurs
      */
     protected void doClickAction(final String hrefSuffix) throws IOException {
-        final String href = getHrefAttribute() + hrefSuffix;
+        final String href = (getHrefAttribute() + hrefSuffix).trim();
         if (LOG.isDebugEnabled()) {
             final String w = getPage().getEnclosingWindow().getName();
             LOG.debug("do click action in window '" + w + "', using href '" + href + "'");
@@ -80,7 +80,8 @@ public class HtmlAnchor extends HtmlElement {
         final HtmlPage page = (HtmlPage) getPage();
         if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final StringBuilder builder = new StringBuilder(href.length());
-            for (int i = 0; i < href.length(); i++) {
+            builder.append(JavaScriptURLConnection.JAVASCRIPT_PREFIX);
+            for (int i = JavaScriptURLConnection.JAVASCRIPT_PREFIX.length(); i < href.length(); i++) {
                 final char ch = href.charAt(i);
                 if (ch == '%' && i + 2 < href.length()) {
                     final char ch1 = Character.toUpperCase(href.charAt(i + 1));

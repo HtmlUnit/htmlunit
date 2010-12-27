@@ -394,6 +394,70 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void submit_javascriptActionMixedCase() throws Exception {
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form method='get' action='jaVAscrIpt:alert(\"clicked\")'>\n"
+            + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
+            + "</body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
+
+        client.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
+
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+        final HtmlPage secondPage = button.click();
+        assertEquals(firstPage.getTitleText(), secondPage.getTitleText());
+
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void submit_javascriptActionLeadingWhitespace() throws Exception {
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form method='get' action=' javascript:alert(\"clicked\")'>\n"
+            + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
+            + "</body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
+
+        client.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
+
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+        final HtmlPage secondPage = button.click();
+        assertEquals(firstPage.getTitleText(), secondPage.getTitleText());
+
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void submit_javascriptAction_javascriptDisabled() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body>\n"

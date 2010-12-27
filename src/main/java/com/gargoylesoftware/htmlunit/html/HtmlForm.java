@@ -110,7 +110,7 @@ public class HtmlForm extends HtmlElement {
                 }
             }
 
-            final String action = getActionAttribute();
+            final String action = getActionAttribute().trim();
             if (StringUtils.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 return htmlPage.executeJavaScriptIfPossible(action, "Form action", getStartLineNumber()).getNewPage();
             }

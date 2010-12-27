@@ -138,6 +138,50 @@ public class HtmlAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void testClick_javascriptUrlMixedCas() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body><map>\n"
+            + "<area href='javasCRIpT:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
+            + "</map></body></html>";
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+
+        final HtmlArea area = page.getHtmlElementById("a2");
+
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+
+        final HtmlPage secondPage = area.click();
+
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
+        assertSame(page, secondPage);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testClick_javascriptUrlLeadingWhitespace() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body><map>\n"
+            + "<area href='     javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
+            + "</map></body></html>";
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+
+        final HtmlArea area = page.getHtmlElementById("a2");
+
+        assertEquals(Collections.EMPTY_LIST, collectedAlerts);
+
+        final HtmlPage secondPage = area.click();
+
+        assertEquals(new String[] {"clicked"}, collectedAlerts);
+        assertSame(page, secondPage);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void testClick_javascriptUrl_javascriptDisabled() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body><map>\n"

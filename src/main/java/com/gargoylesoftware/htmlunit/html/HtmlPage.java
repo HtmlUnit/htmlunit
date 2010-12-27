@@ -863,7 +863,7 @@ public class HtmlPage extends SgmlPage {
             return new ScriptResult(null, this);
         }
 
-        if (sourceCode.toLowerCase().startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+        if (StringUtils.startsWithIgnoreCase(sourceCode, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             sourceCode = sourceCode.substring(JavaScriptURLConnection.JAVASCRIPT_PREFIX.length());
         }
 

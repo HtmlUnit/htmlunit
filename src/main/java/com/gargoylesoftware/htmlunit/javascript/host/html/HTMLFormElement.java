@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 /**
  * A JavaScript object for a Form.
@@ -254,9 +255,9 @@ public class HTMLFormElement extends HTMLElement implements Function {
         final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
         final WebClient webClient = page.getWebClient();
 
-        final String action = getHtmlForm().getActionAttribute();
-        if (action.startsWith("javascript:")) {
-            final String js = StringUtils.substringAfter(action, "javascript:");
+        final String action = getHtmlForm().getActionAttribute().trim();
+        if (StringUtils.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            final String js = action.substring(JavaScriptURLConnection.JAVASCRIPT_PREFIX.length());
             webClient.getJavaScriptEngine().execute(page, js, "Form action", 0);
         }
         else {
