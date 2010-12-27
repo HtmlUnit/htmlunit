@@ -179,7 +179,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         try {
             final int i = (int) Double.parseDouble(colSpan);
             if (i > 0) {
-                s = String.valueOf(i);
+                s = Integer.toString(i);
             }
             else {
                 throw new NumberFormatException(colSpan);
@@ -217,7 +217,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         try {
             final int i = (int) Double.parseDouble(rowSpan);
             if (i > 0) {
-                s = String.valueOf(i);
+                s = Integer.toString(i);
             }
             else {
                 throw new NumberFormatException(rowSpan);

@@ -2288,7 +2288,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (!s.matches("\\d+%")) {
             try {
                 final Float f = Float.parseFloat(s);
-                final Integer i = f.intValue();
+                final int i = f.intValue();
                 if (i < 0) {
                     if (returnNegativeValues == null) {
                         s = "0";
@@ -2297,11 +2297,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                         s = "";
                     }
                     else {
-                        s = String.valueOf(i);
+                        s = Integer.toString(i);
                     }
                 }
                 else {
-                    s = String.valueOf(i);
+                    s = Integer.toString(i);
                 }
             }
             catch (final NumberFormatException e) {
@@ -2500,7 +2500,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 if (f < 0) {
                     f = 0f;
                 }
-                chOff = String.valueOf(f.intValue());
+                chOff = Integer.toString(f.intValue());
             }
             catch (final NumberFormatException e) {
                 // Ignore.

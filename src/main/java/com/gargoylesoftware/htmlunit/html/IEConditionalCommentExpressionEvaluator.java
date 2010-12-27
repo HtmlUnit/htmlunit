@@ -63,7 +63,7 @@ public final class IEConditionalCommentExpressionEvaluator {
             return !evaluate(condition.substring(1), browserVersion);
         }
         else if (condition.startsWith("IE")) {
-            final String currentVersion = String.valueOf(browserVersion.getBrowserVersionNumeric());
+            final String currentVersion = Float.toString(browserVersion.getBrowserVersionNumeric());
             return currentVersion.startsWith(condition.substring(2).trim());
         }
         else if (condition.startsWith("lte IE")) {

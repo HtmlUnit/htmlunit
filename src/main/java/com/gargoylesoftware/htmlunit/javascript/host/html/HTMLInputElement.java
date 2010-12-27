@@ -246,7 +246,7 @@ public class HTMLInputElement extends FormField {
      * @param length the new value
      */
     public void jsxSet_maxLength(final int length) {
-        getDomNodeOrDie().setAttribute("maxLength", String.valueOf(length));
+        getDomNodeOrDie().setAttribute("maxLength", Integer.toString(length));
     }
 
     /**

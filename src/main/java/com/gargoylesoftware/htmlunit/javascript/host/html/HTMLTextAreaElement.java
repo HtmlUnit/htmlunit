@@ -109,7 +109,7 @@ public class HTMLTextAreaElement extends FormField {
             }
             i = 0;
         }
-        getDomNodeOrDie().setAttribute("cols", String.valueOf(i));
+        getDomNodeOrDie().setAttribute("cols", Integer.toString(i));
     }
 
     /**
@@ -151,7 +151,7 @@ public class HTMLTextAreaElement extends FormField {
             }
             i = 0;
         }
-        getDomNodeOrDie().setAttribute("rows", String.valueOf(i));
+        getDomNodeOrDie().setAttribute("rows", Integer.toString(i));
     }
 
     /**

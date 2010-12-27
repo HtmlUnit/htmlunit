@@ -691,7 +691,7 @@ public final class HTMLParser {
         /** {@inheritDoc} */
         public void comment(final char[] ch, final int start, final int length) {
             handleCharacters();
-            final String data = String.valueOf(ch, start, length);
+            final String data = new String(ch, start, length);
             if (!data.startsWith("[CDATA")
                     || !page_.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_3)) {
                 final DomComment comment = new DomComment(page_, data);

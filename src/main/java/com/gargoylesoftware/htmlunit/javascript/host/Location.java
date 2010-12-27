@@ -408,7 +408,7 @@ public class Location extends SimpleScriptable {
         if (port == -1) {
             return "";
         }
-        return String.valueOf(port);
+        return Integer.toString(port);
     }
 
     /**

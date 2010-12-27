@@ -310,7 +310,7 @@ public class HTMLAnchorElement extends HTMLElement {
         if (port == -1) {
             return "";
         }
-        return String.valueOf(port);
+        return Integer.toString(port);
     }
 
     /**

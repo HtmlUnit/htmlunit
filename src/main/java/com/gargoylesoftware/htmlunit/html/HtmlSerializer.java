@@ -343,7 +343,7 @@ class HtmlSerializer {
                 doAppendBlockSeparator();
             }
             first = false;
-            doAppend(String.valueOf(i++));
+            doAppend(Integer.toString(i++));
             doAppend(". ");
             appendChildren(item);
         }
