@@ -443,8 +443,8 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testGetEnclosingForm() throws Exception {
-        final String htmlContent = ""
-            + "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent =
+            "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<table><tr><td><input type='text' id='foo'/></td></tr></table>\n"
             + "</form></body></html>";
@@ -460,8 +460,8 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testGetEnclosing() throws Exception {
-        final String htmlContent = ""
-            + "<html><head><title>foo</title></head><body>\n"
+        final String htmlContent =
+            "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<table id='table1'>\n"
             + "<tr id='tr1'><td id='td1'>foo</td></tr>\n"
