@@ -341,14 +341,17 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @Override
     public String jsxGet_localName() {
         final DomNode domNode = getDomNodeOrDie();
-        String localName = domNode.getLocalName();
         if (domNode.getPage() instanceof HtmlPage) {
-            if (domNode.getPrefix() != null) {
-                localName = domNode.getPrefix() + ':' + localName;
+            final StringBuilder localName = new StringBuilder();
+            final String prefix = domNode.getPrefix();
+            if (prefix != null) {
+                localName.append(prefix);
+                localName.append(':');
             }
-            return localName.toUpperCase();
+            localName.append(domNode.getLocalName());
+            return localName.toString().toUpperCase();
         }
-        return localName;
+        return domNode.getLocalName();
     }
 
     /**
