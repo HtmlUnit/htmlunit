@@ -279,11 +279,12 @@ public class HttpWebConnection implements WebConnection {
 
         if (webClient_.getBrowserVersion().hasFeature(BrowserVersionFeatures.HTTP_HEADER_HOST_FIRST)) {
             final int port = webRequest.getUrl().getPort();
-            String host = webRequest.getUrl().getHost();
+            final StringBuilder host = new StringBuilder(webRequest.getUrl().getHost());
             if (port != 80 && port > 0) {
-                host += ":" + port;
+                host.append(':');
+                host.append(Integer.toString(port));
             }
-            httpMethod.setHeader(new BasicHeader("Host", host));
+            httpMethod.setHeader(new BasicHeader("Host", host.toString()));
         }
         httpMethod.setHeader(new BasicHeader("User-Agent", webClient_.getBrowserVersion().getUserAgent()));
 
