@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Utility to handle conversion from HTML code to string.
  * TODO: simplify it (it is just copied from what was available in DomNode and subclasses).
@@ -53,13 +55,13 @@ class HtmlSerializer {
 
     private String cleanUp(String text) {
         // ignore <br/> at the end of a block
-        text = text.replaceAll(AS_TEXT_NEW_LINE + AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_BLOCK_SEPARATOR);
+        text = StringUtils.replace(text, AS_TEXT_NEW_LINE + AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_BLOCK_SEPARATOR);
         text = reduceWhitespace(text);
-        text = text.replaceAll(AS_TEXT_BLANK, " ");
+        text = StringUtils.replace(text, AS_TEXT_BLANK, " ");
         final String ls = System.getProperty("line.separator");
-        text = text.replaceAll(AS_TEXT_NEW_LINE, ls);
+        text = StringUtils.replace(text, AS_TEXT_NEW_LINE, ls);
         text = text.replaceAll("(?:" + AS_TEXT_BLOCK_SEPARATOR + ")+", ls); // many block sep => 1 new line
-        text = text.replaceAll(AS_TEXT_TAB, "\t");
+        text = StringUtils.replace(text, AS_TEXT_TAB, "\t");
 
         return text;
     }
@@ -249,9 +251,9 @@ class HtmlSerializer {
     private void appendHtmlTextArea(final HtmlTextArea htmlTextArea) {
         if (isVisible(htmlTextArea)) {
             String text = htmlTextArea.getText();
-            text = text.replaceAll(" ", AS_TEXT_BLANK);
+            text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
             text = text.replaceAll("\r?\n", AS_TEXT_NEW_LINE);
-            text = text.replaceAll("\r", AS_TEXT_NEW_LINE);
+            text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
             doAppend(text);
         }
     }

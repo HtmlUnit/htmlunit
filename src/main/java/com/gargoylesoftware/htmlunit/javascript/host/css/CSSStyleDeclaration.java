@@ -4467,9 +4467,12 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             newValue.setFloatValue(CSSPrimitiveValue.CSS_PX, 0);
             cssValue = newValue;
         }
+
         // FF has spaces next to ","
-        if (cssValue.getCssText().startsWith("rgb(")) {
-            cssValue.setCssText(cssValue.getCssText().replaceAll(",", ", "));
+        final String cssText = cssValue.getCssText();
+        if (cssText.startsWith("rgb(")) {
+            final String formatedCssText = StringUtils.replace(cssText, ",", ", ");
+            cssValue.setCssText(formatedCssText);
         }
 
         return new CSSPrimitiveValue(jsElement_, (org.w3c.dom.css.CSSPrimitiveValue) cssValue);
