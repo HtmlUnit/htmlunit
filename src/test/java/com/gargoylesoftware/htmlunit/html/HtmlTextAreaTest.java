@@ -197,6 +197,28 @@ public class HtmlTextAreaTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void typeWithSelection() throws Exception {
+        final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
+        final HtmlPage page = loadPage(html, null);
+        final HtmlTextArea t = page.getHtmlElementById("t");
+        t.type("abc");
+        assertEquals("abc", t.getText());
+
+        t.setSelectionStart(1);
+        t.setSelectionEnd(3);
+        t.type('x');
+        assertEquals("ax", t.getText());
+
+        t.setSelectionStart(0);
+        t.setSelectionEnd(0);
+        t.type('y');
+        assertEquals("yax", t.getText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void typeWhileDisabled() throws Exception {
         final String html = "<html><body><textarea id='t' disabled='disabled'></textarea></body></html>";
         final HtmlPage page = loadPage(html);
