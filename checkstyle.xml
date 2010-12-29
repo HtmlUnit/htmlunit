@@ -182,6 +182,7 @@
             <property name="logLoadErrors" value="true"/>
             <property name="suppressLoadErrors" value="true"/>
         </module>
+        <module name="EqualsAvoidNull"/>
 
         <module name="SimplifyBooleanReturn"/>
 
