@@ -725,7 +725,7 @@ public final class UrlUtils {
             if (slashIndex < 0) {
                 continue;
             }
-            if (!pathSegment.substring(slashIndex).equals("..")) {
+            if (!"..".equals(pathSegment.substring(slashIndex))) {
                 path = path.substring(0, slashIndex + 1).concat(path.substring(pathSegmentIndex + 4));
             }
         }

@@ -931,7 +931,7 @@ public class HtmlPage extends SgmlPage {
         final URL scriptURL;
         try {
             scriptURL = getFullyQualifiedUrl(srcAttribute);
-            if (scriptURL.getProtocol().equals("javascript")) {
+            if ("javascript".equals(scriptURL.getProtocol())) {
                 LOG.info("Ignoring script src [" + srcAttribute + "]");
                 return JavaScriptLoadResult.NOOP;
             }
@@ -1023,7 +1023,7 @@ public class HtmlPage extends SgmlPage {
         final String contentType = response.getContentType();
         if (!contentType.equalsIgnoreCase("application/javascript")
             && !contentType.equalsIgnoreCase("application/ecmascript")) {
-            if (contentType.equals("text/javascript") || contentType.equals("text/ecmascript")) {
+            if ("text/javascript".equals(contentType) || "text/ecmascript".equals(contentType)) {
                 getWebClient().getIncorrectnessListener().notify(
                     "Obsolete content type encountered: '" + contentType + "'.", this);
             }
@@ -1705,7 +1705,7 @@ public class HtmlPage extends SgmlPage {
         if (node instanceof HtmlElement) {
             addMappedElement((HtmlElement) node, true);
 
-            if (node.getNodeName().equals("base")) {
+            if ("base".equals(node.getNodeName())) {
                 calculateBase();
             }
         }
@@ -1737,7 +1737,7 @@ public class HtmlPage extends SgmlPage {
     void notifyNodeRemoved(final DomNode node) {
         if (node instanceof HtmlElement) {
             removeMappedElement((HtmlElement) node, true, true);
-            if (node.getNodeName().equals("base")) {
+            if ("base".equals(node.getNodeName())) {
                 calculateBase();
             }
         }
@@ -2269,19 +2269,19 @@ public class HtmlPage extends SgmlPage {
             final String publicId = docType.getPublicId();
             final String systemId = docType.getSystemId();
             if (systemId != null) {
-                if (systemId.equals("http://www.w3.org/TR/html4/strict.dtd")) {
+                if ("http://www.w3.org/TR/html4/strict.dtd".equals(systemId)) {
                     quirks = false;
                 }
-                else if (systemId.equals("http://www.w3.org/TR/html4/loose.dtd")) {
-                    if (publicId.equals("-//W3C//DTD HTML 4.01 Transitional//EN")
-                        || (publicId.equals("-//W3C//DTD HTML 4.0 Transitional//EN")
+                else if ("http://www.w3.org/TR/html4/loose.dtd".equals(systemId)) {
+                    if ("-//W3C//DTD HTML 4.01 Transitional//EN".equals(publicId)
+                        || ("-//W3C//DTD HTML 4.0 Transitional//EN".equals(publicId)
                                 && getWebClient().getBrowserVersion()
                                     .hasFeature(BrowserVersionFeatures.DOCTYPE_4_0_TRANSITIONAL_STANDARDS))) {
                         quirks = false;
                     }
                 }
-                else if (systemId.equals("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd")
-                    || systemId.equals("http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd")) {
+                else if ("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd".equals(systemId)
+                    || "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd".equals(systemId)) {
                     quirks = false;
                 }
             }

@@ -92,34 +92,34 @@ public final class InputElementFactory implements IElementFactory {
             HtmlElement.addAttributeToMap(page, attributeMap, null, "type", "text");
             result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (type.equals("submit")) {
+        else if ("submit".equals(type)) {
             result = new HtmlSubmitInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (type.equals("checkbox")) {
+        else if ("checkbox".equals(type)) {
             result = new HtmlCheckBoxInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (type.equals("radio")) {
+        else if ("radio".equals(type)) {
             result = new HtmlRadioButtonInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (type.equals("text")) {
+        else if ("text".equals(type)) {
             result = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (type.equals("hidden")) {
+        else if ("hidden".equals(type)) {
             result = new HtmlHiddenInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (type.equals("password")) {
+        else if ("password".equals(type)) {
             result = new HtmlPasswordInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (type.equals("image")) {
+        else if ("image".equals(type)) {
             result = new HtmlImageInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (type.equals("reset")) {
+        else if ("reset".equals(type)) {
             result = new HtmlResetInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (type.equals("button")) {
+        else if ("button".equals(type)) {
             result = new HtmlButtonInput(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (type.equals("file")) {
+        else if ("file".equals(type)) {
             result = new HtmlFileInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else {

@@ -108,7 +108,7 @@ public class HtmlSubmitInput extends HtmlInput {
         for (final DomAttr attribute : getAttributesMap().values()) {
             final String name = attribute.getNodeName();
             final String value = attribute.getValue();
-            if (!name.equals("value") || !value.equals(DEFAULT_VALUE)) {
+            if (!"value".equals(name) || !value.equals(DEFAULT_VALUE)) {
                 printWriter.print(" ");
                 printWriter.print(name);
                 printWriter.print("=\"");

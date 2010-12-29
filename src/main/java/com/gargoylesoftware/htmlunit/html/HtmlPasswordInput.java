@@ -169,7 +169,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
-        if (qualifiedName.equals("value") && getPage() instanceof HtmlPage) {
+        if ("value".equals(qualifiedName) && getPage() instanceof HtmlPage) {
             setSelectionStart(attributeValue.length());
             setSelectionEnd(attributeValue.length());
         }

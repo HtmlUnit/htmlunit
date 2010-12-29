@@ -218,7 +218,7 @@ public class HtmlScript extends HtmlElement {
                     getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_6);
                 if (ie) {
                     if (!isDeferred()) {
-                        if (!getSrcAttribute().equals("//:")) {
+                        if (!"//:".equals(getSrcAttribute())) {
                             setAndExecuteReadyState(READY_STATE_LOADING);
                             executeScriptIfNeeded(true);
                             setAndExecuteReadyState(READY_STATE_LOADED);
