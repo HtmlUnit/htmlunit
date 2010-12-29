@@ -220,7 +220,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             field.setAccessible(true);
             final WebWindow webWindow = (WebWindow) field.get(huDriver);
             final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
-            assertEquals(getExpectedAlerts()[0].equals("BackCompat"), page.isQuirksMode());
+            assertEquals("BackCompat".equals(getExpectedAlerts()[0]), page.isQuirksMode());
         }
     }
 

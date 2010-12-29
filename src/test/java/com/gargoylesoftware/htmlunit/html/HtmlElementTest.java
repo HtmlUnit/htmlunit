@@ -161,7 +161,7 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
-            if (attr.getName().equals("ns:foo")) {
+            if ("ns:foo".equals(attr.getName())) {
                 Assert.assertEquals("Element should have a namespace URI", "http://foobar", attr.getNamespaceURI());
                 return;
             }
@@ -181,7 +181,7 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
-            if (attr.getName().equals("id")) {
+            if ("id".equals(attr.getName())) {
                 Assert.assertEquals("Element should not have a namespace URI", null, attr.getNamespaceURI());
                 return;
             }
@@ -201,7 +201,7 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
-            if (attr.getName().equals("ns:foo")) {
+            if ("ns:foo".equals(attr.getName())) {
                 Assert.assertEquals("Element should have a local name", "foo", attr.getLocalName());
                 return;
             }
@@ -221,7 +221,7 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
-            if (attr.getName().equals("id")) {
+            if ("id".equals(attr.getName())) {
                 // This is not standard, but to change it now would break backwards compatibility.
                 Assert.assertEquals("Element should not have a local name", "id", attr.getLocalName());
                 return;
@@ -242,7 +242,7 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
-            if (attr.getName().equals("ns:foo")) {
+            if ("ns:foo".equals(attr.getName())) {
                 Assert.assertEquals("Element should have a prefix", "ns", attr.getPrefix());
                 return;
             }
@@ -262,7 +262,7 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
-            if (attr.getName().equals("id")) {
+            if ("id".equals(attr.getName())) {
                 Assert.assertEquals("Element should not have a prefix", null, attr.getPrefix());
                 return;
             }
@@ -282,7 +282,7 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlElement node = page.getDocumentElement().getElementById("tag");
         for (final DomAttr attr : node.getAttributesMap().values()) {
-            if (attr.getName().equals("ns:foo")) {
+            if ("ns:foo".equals(attr.getName())) {
                 attr.setPrefix("other");
                 Assert.assertEquals("Element should have a changed prefix", "other", attr.getPrefix());
                 Assert.assertEquals("setPrefix should change qualified name", "other:foo", attr.getName());

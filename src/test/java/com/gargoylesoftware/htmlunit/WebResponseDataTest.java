@@ -118,7 +118,7 @@ public class WebResponseDataTest extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            if (request.getRequestURI().equals("/folder1/page1")) {
+            if ("/folder1/page1".equals(request.getRequestURI())) {
                 response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
                 final String location = request.getRequestURL().toString().replace("page1", "../folder2/page2");
                 response.setHeader("Location", location);

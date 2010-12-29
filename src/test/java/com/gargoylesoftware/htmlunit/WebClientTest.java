@@ -108,7 +108,7 @@ public class WebClientTest extends WebServerTestCase {
     private void testTests(final File dir) throws Exception {
         for (final File file : dir.listFiles()) {
             if (file.isDirectory()) {
-                if (!file.getName().equals(".svn")) {
+                if (!".svn".equals(file.getName())) {
                     testTests(file);
                 }
             }

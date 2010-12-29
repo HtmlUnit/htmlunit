@@ -37,7 +37,7 @@ public final class SVN {
     public static void deleteSVN(final File dir) throws IOException {
         for (final File f : dir.listFiles()) {
             if (f.isDirectory()) {
-                if (f.getName().equals(".svn")) {
+                if (".svn".equals(f.getName())) {
                     FileUtils.deleteDirectory(f);
                 }
                 else {
@@ -55,7 +55,7 @@ public final class SVN {
     public static void consistentNewlines(final File dir) throws IOException {
         for (final File f : dir.listFiles()) {
             if (f.isDirectory()) {
-                if (!f.getName().equals(".svn")) {
+                if (!".svn".equals(f.getName())) {
                     consistentNewlines(f);
                 }
             }

@@ -127,25 +127,25 @@ public class AttributesTest extends TestCase {
                 && !EXCLUDED_METHODS.contains(methodName)) {
 
                 String attributeName = methodName.substring(3, methodName.length() - 9).toLowerCase();
-                if (attributeName.equals("xmllang")) {
+                if ("xmllang".equals(attributeName)) {
                     attributeName = "xml:lang";
                 }
-                else if (attributeName.equals("columns")) {
+                else if ("columns".equals(attributeName)) {
                     attributeName = "cols";
                 }
-                else if (attributeName.equals("columnspan")) {
+                else if ("columnspan".equals(attributeName)) {
                     attributeName = "colspan";
                 }
-                else if (attributeName.equals("textdirection")) {
+                else if ("textdirection".equals(attributeName)) {
                     attributeName = "dir";
                 }
-                else if (attributeName.equals("httpequiv")) {
+                else if ("httpequiv".equals(attributeName)) {
                     attributeName = "http-equiv";
                 }
-                else if (attributeName.equals("acceptcharset")) {
+                else if ("acceptcharset".equals(attributeName)) {
                     attributeName = "accept-charset";
                 }
-                else if (attributeName.equals("htmlfor")) {
+                else if ("htmlfor".equals(attributeName)) {
                     attributeName = "for";
                 }
                 suite.addTest(new AttributesTest(attributeName, clazz, method, page));

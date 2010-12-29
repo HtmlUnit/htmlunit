@@ -84,7 +84,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         final List<NameValuePair> parameters = lastRequest.getRequestParameters();
         assertEquals(2, parameters.size());
         for (final NameValuePair pair : parameters) {
-            if (pair.getName().equals("text1")) {
+            if ("text1".equals(pair.getName())) {
                 assertEquals("me &amp; you", pair.getValue());
             }
             else {

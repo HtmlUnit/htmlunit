@@ -1631,7 +1631,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
-        assertFalse(collectedAlerts.get(0).equals("null"));
+        assertFalse("null".equals(collectedAlerts.get(0)));
     }
 
     /**
@@ -1651,7 +1651,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(content, collectedAlerts);
-        assertTrue(collectedAlerts.get(0).equals("null"));
+        assertTrue("null".equals(collectedAlerts.get(0)));
     }
 
     /**

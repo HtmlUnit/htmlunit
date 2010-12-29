@@ -367,7 +367,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
             }
 
-            if (request.getMethod().equals("PUT") && request.getContentLength() > 0) {
+            if ("PUT".equals(request.getMethod()) && request.getContentLength() > 0) {
                 final byte[] buffer = new byte[request.getContentLength()];
                 request.getInputStream().readLine(buffer, 0, buffer.length);
                 webRequest.setRequestBody(new String(buffer));

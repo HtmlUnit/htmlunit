@@ -71,7 +71,7 @@ public final class BrowserVersionFeaturesSource {
         throws IOException {
         for (final File f : dir.listFiles()) {
             if (f.isDirectory()) {
-                if (!f.getName().equals(".svn")) {
+                if (!".svn".equals(f.getName())) {
                     rename(f, features, newName);
                 }
             }
@@ -128,11 +128,11 @@ public final class BrowserVersionFeaturesSource {
             "src/main/java/com/gargoylesoftware/htmlunit/BrowserVersionFeatures.java");
         for (final File f : dir.listFiles()) {
             if (f.isDirectory()) {
-                if (!f.getName().equals(".svn")) {
+                if (!".svn".equals(f.getName())) {
                     generate(f, toSearchFor, versions);
                 }
             }
-            else if (!f.getName().equals("JavaScriptConfiguration.java")) {
+            else if (!"JavaScriptConfiguration.java".equals(f.getName())) {
                 final List<String> lines = FileUtils.readLines(f);
                 boolean modified = false;
                 for (int i = 0; i < lines.size(); i++) {

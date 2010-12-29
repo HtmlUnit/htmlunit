@@ -236,7 +236,7 @@ public class HtmlButtonTest extends WebTestCase {
         final HtmlPage page2 = button.click();
         final List<NameValuePair> expectedParameters;
         final String expectedSecondPageTitle;
-        if (expectedType.equals("submit")) {
+        if ("submit".equals(expectedType)) {
             expectedParameters = Collections.singletonList(new NameValuePair("button", "pushme"));
             expectedSecondPageTitle = "Second";
         }

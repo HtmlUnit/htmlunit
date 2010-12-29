@@ -74,7 +74,7 @@ public class CodeStyleTest {
 
     private void process(final File dir) throws IOException {
         for (final File file : dir.listFiles()) {
-            if (file.isDirectory() && !file.getName().equals(".svn")) {
+            if (file.isDirectory() && !".svn".equals(file.getName())) {
                 process(file);
             }
             else if (file.getName().endsWith(".java")) {
@@ -108,7 +108,7 @@ public class CodeStyleTest {
     private void openingCurlyBracket(final List<String> lines, final String path) {
         int index = 1;
         for (final String line : lines) {
-            if (line.trim().equals("{")) {
+            if ("{".equals(line.trim())) {
                 addFailure("Opening curly bracket is alone at " + path + ", line: " + index);
             }
             index++;
@@ -132,8 +132,8 @@ public class CodeStyleTest {
         for (int index = 1; index < lines.size(); index++) {
             final String previousLine = lines.get(index - 1);
             final String currentLine = lines.get(index);
-            if (previousLine.trim().equals("/**")) {
-                if (currentLine.trim().equals("*") || currentLine.contains("*/")) {
+            if ("/**".equals(previousLine.trim())) {
+                if ("*".equals(currentLine.trim()) || currentLine.contains("*/")) {
                     addFailure("Empty line in " + relativePath + ", line: " + (index + 1));
                 }
                 if (currentLine.trim().startsWith("*")) {
@@ -171,7 +171,7 @@ public class CodeStyleTest {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
             final String nextLine = lines.get(index + 1);
-            if (line.trim().length() == 0 && nextLine.equals("    }")) {
+            if (line.trim().length() == 0 && "    }".equals(nextLine)) {
                 addFailure("Empty line in " + relativePath + ", line: " + (index + 1));
             }
         }
@@ -184,7 +184,7 @@ public class CodeStyleTest {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
             final String nextLine = lines.get(index + 1);
-            if (line.equals("    }") && nextLine.length() != 0 && !nextLine.equals("}")) {
+            if ("    }".equals(line) && nextLine.length() != 0 && !"}".equals(nextLine)) {
                 addFailure("Non-empty line in " + relativePath + ", line: " + (index + 1));
             }
         }
@@ -209,10 +209,10 @@ public class CodeStyleTest {
             for (int i = 0; i + 2 < lines.size(); i++) {
                 final String line = lines.get(i);
                 final String nextLine = lines.get(i + 2);
-                if (line.equals("svn:eol-style") && nextLine.equals("native")) {
+                if ("svn:eol-style".equals(line) && "native".equals(nextLine)) {
                     eolStyleDefined = true;
                 }
-                else if (line.equals("svn:keywords") && nextLine.equals("Author Date Id Revision")) {
+                else if ("svn:keywords".equals(line) && "Author Date Id Revision".equals(nextLine)) {
                     keywordsDefined = true;
                 }
             }
@@ -254,7 +254,7 @@ public class CodeStyleTest {
 
     private void processXML(final File dir, final boolean recursive) throws Exception {
         for (final File file : dir.listFiles()) {
-            if (file.isDirectory() && !file.getName().equals(".svn")) {
+            if (file.isDirectory() && !".svn".equals(file.getName())) {
                 if (recursive) {
                     processXML(file, true);
                 }

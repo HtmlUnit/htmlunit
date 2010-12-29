@@ -767,7 +767,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         while (node != null) {
             if (node instanceof Element) {
                 final Element element = (Element) node;
-                if (element.getTagName().equals("class")) {
+                if ("class".equals(element.getTagName())) {
                     String className = element.getAttribute("classname");
                     className = className.substring(className.lastIndexOf('.') + 1);
                     if (lastClassName != null && className.compareToIgnoreCase(lastClassName) < 1) {
@@ -808,13 +808,13 @@ public class JavaScriptConfigurationTest extends WebTestCase {
     }
 
     private static int getType(final String tagName) {
-        if (tagName.equals("constant")) {
+        if ("constant".equals(tagName)) {
             return 0;
         }
-        if (tagName.equals("property")) {
+        if ("property".equals(tagName)) {
             return 1;
         }
-        if (tagName.equals("function")) {
+        if ("function".equals(tagName)) {
             return 2;
         }
         return -1;

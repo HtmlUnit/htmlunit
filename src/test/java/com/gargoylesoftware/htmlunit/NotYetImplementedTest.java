@@ -46,13 +46,13 @@ public class NotYetImplementedTest {
 
     private void process(final File dir) throws IOException {
         for (final File file : dir.listFiles()) {
-            if (file.isDirectory() && !file.getName().equals(".svn")) {
+            if (file.isDirectory() && !".svn".equals(file.getName())) {
                 process(file);
             }
             else {
-                if (file.getName().endsWith(".java") && !file.getName().equals("WebTestCase.java")
-                        && !file.getName().equals("NotYetImplementedTest.java")
-                        && !file.getName().equals("CodeStyleTest.java")) {
+                if (file.getName().endsWith(".java") && !"WebTestCase.java".equals(file.getName())
+                        && !"NotYetImplementedTest.java".equals(file.getName())
+                        && !"CodeStyleTest.java".equals(file.getName())) {
                     final List<String> lines = CodeStyleTest.getLines(file);
                     final String relativePath = file.getAbsolutePath().substring(
                         new File(".").getAbsolutePath().length() - 1).replace('\\', '/');
