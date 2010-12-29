@@ -1168,7 +1168,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             else if (result instanceof HTMLUnknownElement && getBrowserVersion()
                     .hasFeature(BrowserVersionFeatures.GENERATED_132)) {
                 final HtmlElement unknownElement = ((HTMLUnknownElement) result).getDomNodeOrDie();
-                if (unknownElement.getNodeName().equals("xml")) {
+                if ("xml".equals(unknownElement.getNodeName())) {
                     final XMLDocument document = ActiveXObject.buildXMLDocument(getWebWindow());
                     document.setParentScope(this);
                     final Iterator<HtmlElement> children = unknownElement.getHtmlElementDescendants().iterator();

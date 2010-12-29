@@ -294,7 +294,7 @@ public final class JavaScriptConfiguration {
         while (node != null) {
             if (node instanceof Element) {
                 final Element element = (Element) node;
-                if (element.getTagName().equals("class")) {
+                if ("class".equals(element.getTagName())) {
                     if (!testToExcludeElement(element, browser)) {
                         final String hostClassName = element.getAttribute("classname");
                         if (hostClassName.startsWith("#")) {
@@ -380,21 +380,21 @@ public final class JavaScriptConfiguration {
             if (node instanceof Element) {
                 final Element childElement = (Element) node;
                 final String tagName = childElement.getTagName();
-                if (tagName.equals("property")) {
+                if ("property".equals(tagName)) {
                     parsePropertyElement(classConfiguration, childElement, browser);
                 }
-                else if (tagName.equals("function")) {
+                else if ("function".equals(tagName)) {
                     parseFunctionElement(classConfiguration, childElement, browser);
                 }
-                else if (tagName.equals("constant")) {
+                else if ("constant".equals(tagName)) {
                     parseConstantElement(classConfiguration, childElement, browser);
                 }
-                else if (tagName.equals("browser")) {
+                else if ("browser".equals(tagName)) {
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("browser tag not yet handled for class " + hostClassName);
                     }
                 }
-                else if (tagName.equals("doclink")) {
+                else if ("doclink".equals(tagName)) {
                     // ignore this link
                 }
                 else {
@@ -490,7 +490,7 @@ public final class JavaScriptConfiguration {
         while (node != null) {
             if (node instanceof Element) {
                 final Element childElement = (Element) node;
-                if (childElement.getTagName().equals("browser")) {
+                if ("browser".equals(childElement.getTagName())) {
                     browserConstraint = true;
                     if (testToIncludeForBrowserConstraint(childElement, browser)) {
                         allowBrowser = true;

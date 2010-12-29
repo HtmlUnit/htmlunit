@@ -251,7 +251,7 @@ public final class ProxyAutoConfig {
         //actual values length
         int length;
         for (length = values.length - 1; length >= 0; length--) {
-            if (Context.toString(values[length]).equals("GMT")) {
+            if ("GMT".equals(Context.toString(values[length]))) {
                 timezone = TimeZone.getTimeZone("GMT");
                 break;
             }
@@ -396,7 +396,7 @@ public final class ProxyAutoConfig {
         //actual values length
         int length;
         for (length = values.length - 1; length >= 0; length--) {
-            if (Context.toString(values[length]).equals("GMT")) {
+            if ("GMT".equals(Context.toString(values[length]))) {
                 timezone = TimeZone.getTimeZone("GMT");
                 break;
             }

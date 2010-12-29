@@ -448,7 +448,7 @@ public class Node extends SimpleScriptable {
         for ( ; node instanceof DomElement; node = node.getParentNode()) {
             final String value = ((DomElement) node).getAttribute("xml:space");
             if (value.length() != 0) {
-                if (value.equals("default")) {
+                if ("default".equals(value)) {
                     return Boolean.TRUE;
                 }
                 return Boolean.FALSE;

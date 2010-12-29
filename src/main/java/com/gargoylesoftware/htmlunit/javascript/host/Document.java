@@ -427,7 +427,7 @@ public class Document extends EventNode {
         final String description = "Document.getElementsByTagName('" + tagName + "')";
 
         final HTMLCollection collection;
-        if (tagName.equals("*")) {
+        if ("*".equals(tagName)) {
             collection = new HTMLCollection(getDomNodeOrDie(), false, description) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
