@@ -472,7 +472,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             // Ignore.
         }
 
-        if (name.equals("length")) {
+        if ("length".equals(name)) {
             return true;
         }
         if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_49)) {

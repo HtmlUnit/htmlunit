@@ -104,7 +104,7 @@ public class CSSRuleList extends SimpleScriptable {
      */
     @Override
     public boolean has(final String name, final Scriptable start) {
-        if (name.equals("length") || name.equals("item")) {
+        if ("length".equals(name) || "item".equals(name)) {
             return true;
         }
         try {

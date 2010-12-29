@@ -65,10 +65,10 @@ public class HTMLOptionElement extends FormChild {
         htmlOption.setSelected(selected);
         setDomNode(htmlOption);
 
-        if (newText != null && !newText.equals("undefined")) {
+        if (!"undefined".equals(newText)) {
             htmlOption.appendChild(new DomText(page, newText));
         }
-        if (newValue != null && !newValue.equals("undefined")) {
+        if (!"undefined".equals(newValue)) {
             htmlOption.setValueAttribute(newValue);
         }
     }

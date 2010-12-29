@@ -69,7 +69,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * or null if the given context ID is not supported
      */
     public Object jsxFunction_getContext(final String contextId) {
-        if (contextId.equals("2d")) {
+        if ("2d".equals(contextId)) {
             final CanvasRenderingContext2D context = new CanvasRenderingContext2D();
             context.setParentScope(getParentScope());
             context.setPrototype(getPrototype(context.getClass()));

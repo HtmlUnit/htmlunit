@@ -359,7 +359,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        if (!name.equals("class")) {
+        if (!"class".equals(name)) {
             final HtmlElement htmlElement = getDomNodeOrNull();
             if (htmlElement != null && isAttributeName(name)) {
                 final String value = htmlElement.getAttribute(name);
@@ -797,10 +797,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
         else {
             final HtmlElement element = (HtmlElement) node;
-            if (element.getTagName().equals("p")) {
+            if ("p".equals(element.getTagName())) {
                 buffer.append("\r\n"); // \r\n because it's to implement something IE specific
             }
-            if (!element.getTagName().equals("script")) {
+            if (!"script".equals(element.getTagName())) {
                 printChildren(buffer, node, html);
             }
         }
@@ -2388,10 +2388,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected String getAlign(final boolean returnInvalidValues) {
         final String align = getDomNodeOrDie().getAttribute("align");
-        if (align.equals("center")
-            || align.equals("justify")
-            || align.equals("left")
-            || align.equals("right")
+        if ("center".equals(align)
+            || "justify".equals(align)
+            || "left".equals(align)
+            || "right".equals(align)
             || returnInvalidValues) {
             return align;
         }
@@ -2407,7 +2407,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     protected void setAlign(String align, final boolean ignoreIfNoError) {
         align = align.toLowerCase();
         final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_168);
-        if (ff || align.equals("center") || align.equals("justify") || align.equals("left") || align.equals("right")) {
+        if (ff
+                || "center".equals(align)
+                || "justify".equals(align)
+                || "left".equals(align)
+                || "right".equals(align)) {
             if (!ignoreIfNoError) {
                 getDomNodeOrDie().setAttribute("align", align);
             }
