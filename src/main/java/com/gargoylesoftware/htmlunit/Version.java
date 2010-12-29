@@ -37,7 +37,7 @@ public final class Version {
      * @throws Exception if an error occurs
      */
     public static void main(final String[] args) throws Exception {
-        if (args.length == 1 && args[0].equals("-SanityCheck")) {
+        if (args.length == 1 && "-SanityCheck".equals(args[0])) {
             runSanityCheck();
             return;
         }

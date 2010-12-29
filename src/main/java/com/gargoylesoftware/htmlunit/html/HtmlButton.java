@@ -80,10 +80,10 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
-            if (type.equals("submit")) {
+            if ("submit".equals(type)) {
                 form.submit(this);
             }
-            else if (type.equals("reset")) {
+            else if ("reset".equals(type)) {
                 form.reset();
             }
         }

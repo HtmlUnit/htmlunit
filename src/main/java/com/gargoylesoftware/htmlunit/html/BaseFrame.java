@@ -306,13 +306,13 @@ public abstract class BaseFrame extends HtmlElement {
      */
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName,  String attributeValue) {
-        if (qualifiedName.equals("src")) {
+        if ("src".equals(qualifiedName)) {
             attributeValue = attributeValue.trim();
         }
 
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
-        if (qualifiedName.equals("src")) {
+        if ("src".equals(qualifiedName)) {
             final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
             // When src is set from a script, loading is postponed until script finishes
             // in fact this implementation is probably wrong: JavaScript URL should be

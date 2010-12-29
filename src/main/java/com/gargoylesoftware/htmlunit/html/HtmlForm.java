@@ -325,21 +325,21 @@ public class HtmlForm extends HtmlElement {
             return true;
         }
 
-        if (!tagName.equals("isindex") && !element.hasAttribute("name")) {
+        if (!"isindex".equals(tagName) && !element.hasAttribute("name")) {
             return false;
         }
 
-        if (!tagName.equals("isindex") && element.getAttribute("name").equals("")) {
+        if (!"isindex".equals(tagName) && "".equals(element.getAttribute("name"))) {
             return false;
         }
 
         if (element instanceof HtmlInput) {
             final String type = element.getAttribute("type").toLowerCase();
-            if (type.equals("radio") || type.equals("checkbox")) {
+            if ("radio".equals(type) || "checkbox".equals(type)) {
                 return element.hasAttribute("checked");
             }
         }
-        if (tagName.equals("select")) {
+        if ("select".equals(tagName)) {
             return ((HtmlSelect) element).isValidForSubmission();
         }
         return true;
@@ -367,11 +367,11 @@ public class HtmlForm extends HtmlElement {
         if (element instanceof HtmlInput) {
             final HtmlInput input = (HtmlInput) element;
             final String type = input.getTypeAttribute().toLowerCase();
-            if (type.equals("submit") || type.equals("image") || type.equals("reset") || type.equals("button")) {
+            if ("submit".equals(type) || "image".equals(type) || "reset".equals(type) || "button".equals(type)) {
                 return false;
             }
         }
-        if (tagName.equals("button")) {
+        if ("button".equals(tagName)) {
             return false;
         }
 

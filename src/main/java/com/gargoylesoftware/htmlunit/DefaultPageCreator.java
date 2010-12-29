@@ -102,13 +102,13 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
         final Page newPage;
 
         final String pageType = determinePageType(contentType);
-        if (pageType.equals("html")) {
+        if ("html".equals(pageType)) {
             newPage = createHtmlPage(webResponse, webWindow);
         }
-        else if (pageType.equals("javascript")) {
+        else if ("javascript".equals(pageType)) {
             newPage = createJavaScriptPage(webResponse, webWindow);
         }
-        else if (pageType.equals("xml")) {
+        else if ("xml".equals(pageType)) {
             final XmlPage xml = createXmlPage(webResponse, webWindow);
             final DomElement doc = xml.getDocumentElement();
             if (doc != null && HTMLParser.XHTML_NAMESPACE.equals(doc.getNamespaceURI())) {
@@ -118,7 +118,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
                 newPage = xml;
             }
         }
-        else if (pageType.equals("text")) {
+        else if ("text".equals(pageType)) {
             newPage = createTextPage(webResponse, webWindow);
         }
         else {
@@ -294,15 +294,15 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
      * @return "xml", "html", "javascript", "text" or "unknown"
      */
     protected String determinePageType(final String contentType) {
-        if (contentType.equals("text/html")) { // || contentType.equals("")) {
+        if ("text/html".equals(contentType)) { // || contentType.equals("")) {
             return "html";
         }
-        else if (contentType.equals("text/javascript") || contentType.equals("application/x-javascript")) {
+        else if ("text/javascript".equals(contentType) || "application/x-javascript".equals(contentType)) {
             return "javascript";
         }
-        else if (contentType.equals("text/xml")
-                || contentType.equals("application/xml")
-                || contentType.equals("text/vnd.wap.wml")
+        else if ("text/xml".equals(contentType)
+                || "application/xml".equals(contentType)
+                || "text/vnd.wap.wml".equals(contentType)
                 || contentType.matches(".*\\+xml")) {
             return "xml";
         }

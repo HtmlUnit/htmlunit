@@ -293,7 +293,7 @@ public class WebClient implements Serializable {
 
         final WebResponse webResponse;
         final String protocol = parameters.getUrl().getProtocol();
-        if (protocol.equals("javascript")) {
+        if ("javascript".equals(protocol)) {
             webResponse = makeWebResponseForJavaScriptUrl(webWindow, parameters.getUrl(), parameters.getCharset());
             if (webWindow.getEnclosedPage() != null && webWindow.getEnclosedPage().getWebResponse() == webResponse) {
                 // a javascript:... url with result of type undefined didn't changed the page
@@ -987,16 +987,16 @@ public class WebClient implements Serializable {
     }
 
     private WebWindow resolveWindow(final WebWindow opener, final String name) {
-        if (name == null || name.length() == 0 || name.equals("_self")) {
+        if (name == null || name.length() == 0 || "_self".equals(name)) {
             return opener;
         }
-        else if (name.equals("_parent")) {
+        else if ("_parent".equals(name)) {
             return opener.getParentWindow();
         }
-        else if (name.equals("_top")) {
+        else if ("_top".equals(name)) {
             return opener.getTopWindow();
         }
-        else if (name.equals("_blank")) {
+        else if ("_blank".equals(name)) {
             return null;
         }
         else if (name.length() != 0) {
@@ -1323,13 +1323,13 @@ public class WebClient implements Serializable {
 
         final WebResponse response;
         final String protocol = webRequest.getUrl().getProtocol();
-        if (protocol.equals("about")) {
+        if ("about".equals(protocol)) {
             response = makeWebResponseForAboutUrl(webRequest.getUrl());
         }
-        else if (protocol.equals("file")) {
+        else if ("file".equals(protocol)) {
             response = makeWebResponseForFileUrl(webRequest);
         }
-        else if (protocol.equals("data")) {
+        else if ("data".equals(protocol)) {
             if (browserVersion_.hasFeature(BrowserVersionFeatures.PROTOCOL_DATA)) {
                 response = makeWebResponseForDataUrl(webRequest);
             }

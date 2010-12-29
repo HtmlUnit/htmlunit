@@ -450,7 +450,7 @@ public final class HTMLParser {
             }
             final String tagLower = localName.toLowerCase();
 
-            if (page_.isParsingHtmlSnippet() && (tagLower.equals("html") || tagLower.equals("body"))) {
+            if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
                 return;
             }
 
@@ -459,7 +459,7 @@ public final class HTMLParser {
                 return;
             }
 
-            if (tagLower.equals("head")) {
+            if ("head".equals(tagLower)) {
                 if (headParsed_ || page_.isParsingHtmlSnippet()) {
                     parsingInnerHead_ = true;
                     return;
@@ -467,7 +467,7 @@ public final class HTMLParser {
                 headParsed_ = true;
             }
             // add a head if none was there
-            else if (!headParsed_ && (tagLower.equals("body") || tagLower.equals("frameset"))) {
+            else if (!headParsed_ && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
                 final IElementFactory factory = getElementFactory(namespaceURI, "head");
                 final HtmlElement newElement = factory.createElement(page_, "head", null);
                 currentNode_.appendChild(newElement);
@@ -477,7 +477,7 @@ public final class HTMLParser {
             // If we're adding a body element, keep track of any temporary synthetic ones
             // that we may have had to create earlier (for document.write(), for example).
             HtmlBody oldBody = null;
-            if (qName.equals("body") && page_.getBody() instanceof HtmlBody) {
+            if ("body".equals(qName) && page_.getBody() instanceof HtmlBody) {
                 oldBody = (HtmlBody) page_.getBody();
             }
 
@@ -498,10 +498,10 @@ public final class HTMLParser {
                 oldBody.quietlyRemoveAndMoveChildrenTo(newElement);
             }
 
-            if (tagLower.equals("body")) {
+            if ("body".equals(tagLower)) {
                 body_ = newElement;
             }
-            else if (tagLower.equals("head")) {
+            else if ("head".equals(tagLower)) {
                 head_ = newElement;
             }
 
@@ -547,15 +547,15 @@ public final class HTMLParser {
 
             final String tagLower = localName.toLowerCase();
 
-            if (page_.isParsingHtmlSnippet() && (tagLower.equals("html") || tagLower.equals("body"))) {
+            if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
                 return;
             }
 
             if (parsingInnerHead_) {
-                if (tagLower.equals("head")) {
+                if ("head".equals(tagLower)) {
                     parsingInnerHead_ = false;
                 }
-                if (tagLower.equals("head") || page_.getWebClient().getBrowserVersion().hasFeature(
+                if ("head".equals(tagLower) || page_.getWebClient().getBrowserVersion().hasFeature(
                         BrowserVersionFeatures.IGNORE_CONTENTS_OF_INNER_HEAD)) {
                     return;
                 }
