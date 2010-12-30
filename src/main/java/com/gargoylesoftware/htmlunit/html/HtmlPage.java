@@ -1021,8 +1021,8 @@ public class HtmlPage extends SgmlPage {
 
         //http://www.ietf.org/rfc/rfc4329.txt
         final String contentType = response.getContentType();
-        if (!contentType.equalsIgnoreCase("application/javascript")
-            && !contentType.equalsIgnoreCase("application/ecmascript")) {
+        if (!"application/javascript".equalsIgnoreCase(contentType)
+            && !"application/ecmascript".equalsIgnoreCase(contentType)) {
             if ("text/javascript".equals(contentType) || "text/ecmascript".equals(contentType)) {
                 getWebClient().getIncorrectnessListener().notify(
                     "Obsolete content type encountered: '" + contentType + "'.", this);

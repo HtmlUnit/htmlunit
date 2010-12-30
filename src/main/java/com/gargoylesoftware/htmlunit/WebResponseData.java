@@ -114,7 +114,7 @@ public class WebResponseData implements Serializable {
         String encoding = null;
         for (final NameValuePair header : headers) {
             final String headerName = header.getName().trim();
-            if (headerName.equalsIgnoreCase("content-encoding")) {
+            if ("content-encoding".equalsIgnoreCase(headerName)) {
                 encoding = header.getValue();
                 break;
             }

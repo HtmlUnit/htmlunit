@@ -260,7 +260,7 @@ public class YuiTest extends WebTestCase {
             assertTrue(colonIdx > 0 && colonIdx < testResult.length() - 1);
             final String result = span.asText();
             final String testName = testResult.substring(0, colonIdx).trim();
-            if (result.equalsIgnoreCase("pass")) {
+            if ("pass".equalsIgnoreCase(result)) {
                 assertTrue("Test case '" + testName + "' is in the known failing list, but passes!", !knownFailingTests
                                 .contains(testName));
             }

@@ -456,8 +456,8 @@ public class HtmlScript extends HtmlElement {
     boolean isJavaScript(final String typeAttribute, final String languageAttribute) {
         final boolean isJavaScript;
         if (typeAttribute != null && typeAttribute.length() != 0) {
-            isJavaScript = typeAttribute.equalsIgnoreCase("text/javascript")
-                || (typeAttribute.equalsIgnoreCase("application/javascript")
+            isJavaScript = "text/javascript".equalsIgnoreCase(typeAttribute)
+                || ("application/javascript".equalsIgnoreCase(typeAttribute)
                         && getPage().getWebClient().getBrowserVersion()
                             .hasFeature(BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT));
         }

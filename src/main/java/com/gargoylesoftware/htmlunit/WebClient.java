@@ -1211,7 +1211,7 @@ public class WebClient implements Serializable {
 
     private WebResponse makeWebResponseForAboutUrl(final URL url) {
         final String urlWithoutQuery = StringUtils.substringBefore(url.toExternalForm(), "?");
-        if (!StringUtils.substringAfter(urlWithoutQuery, "about:").equalsIgnoreCase("blank")) {
+        if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, "about:"))) {
             throw new IllegalArgumentException(url + " is not supported, only about:blank is supported now.");
         }
         return WEB_RESPONSE_FOR_ABOUT_BLANK;

@@ -589,7 +589,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 case IN_NAME:
                     if (Character.isWhitespace(currentChar) || currentChar == '>') {
                         final String tagName = content.substring(tagNameBeginIndex, index);
-                        if (tagName.equalsIgnoreCase("script")) {
+                        if ("script".equalsIgnoreCase(tagName)) {
                             if (tagIsOpen) {
                                 scriptTagCount++;
                             }
