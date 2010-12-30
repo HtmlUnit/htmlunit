@@ -402,7 +402,33 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
-            + "<div id='div1' style='border-width: 1px 2px 3px 4px';'>foo</div></body></html>";
+            + "<div id='div1' style='border-width: 1px 2px 3px 4px'>foo</div></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "thin", "medium", "thick", "thick" })
+    public void borderXxxWidthConstants() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var oDiv = document.getElementById('div1');\n"
+            + "    alert(oDiv.style.borderRightWidth);\n"
+            + "    oDiv = document.getElementById('div2');\n"
+            + "    alert(oDiv.style.borderLeftWidth);\n"
+            + "    oDiv = document.getElementById('div3');\n"
+            + "    alert(oDiv.style.borderBottomWidth);\n"
+            + "    alert(oDiv.style.borderTopWidth);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<div id='div1' style='border: thin'>foo</div>"
+            + "<div id='div2' style='border: medium'>foo</div>"
+            + "<div id='div3' style='border: thick'>foo</div>"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 

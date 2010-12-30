@@ -4688,11 +4688,11 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return whether the token is a border style or not
      */
     private static boolean isBorderStyle(final String token) {
-        return token.equalsIgnoreCase("none") || token.equalsIgnoreCase("hidden")
-            || token.equalsIgnoreCase("dotted") || token.equalsIgnoreCase("dashed")
-            || token.equalsIgnoreCase("solid") || token.equalsIgnoreCase("double")
-            || token.equalsIgnoreCase("groove") || token.equalsIgnoreCase("ridge")
-            || token.equalsIgnoreCase("inset") || token.equalsIgnoreCase("outset");
+        return "none".equalsIgnoreCase(token) || "hidden".equalsIgnoreCase(token)
+            || "dotted".equalsIgnoreCase(token) || "dashed".equalsIgnoreCase(token)
+            || "solid".equalsIgnoreCase(token) || "double".equalsIgnoreCase(token)
+            || "groove".equalsIgnoreCase(token) || "ridge".equalsIgnoreCase(token)
+            || "inset".equalsIgnoreCase(token) || "outset".equalsIgnoreCase(token);
     }
 
     /**
@@ -4701,8 +4701,8 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return whether the token is a border width or not
      */
     private static boolean isBorderWidth(final String token) {
-        return token.equalsIgnoreCase("thin") || token.equalsIgnoreCase("medium")
-            || token.equalsIgnoreCase("thick ") || isLength(token);
+        return "thin".equalsIgnoreCase(token) || "medium".equalsIgnoreCase(token)
+            || "thick".equalsIgnoreCase(token) || isLength(token);
     }
 
     /**
