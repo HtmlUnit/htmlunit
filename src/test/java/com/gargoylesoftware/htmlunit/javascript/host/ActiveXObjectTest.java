@@ -85,7 +85,7 @@ public class ActiveXObjectTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.IE)
-    @Alerts("exception: Automation server can't create object")
+    @Alerts("exception: Automation server can't create object for 'InternetExplorer.Application'.")
     @NotYetImplemented
     public void activex() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
