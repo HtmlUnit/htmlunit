@@ -4875,6 +4875,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             index_ = index;
             specificity_ = specificity;
         }
+
         /**
          * Creates a new instance.
          * @param name the style element's name
@@ -4901,6 +4902,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         public String getName() {
             return name_;
         }
+
         /**
          * Returns the style element's value.
          * @return the style element's value
@@ -4908,6 +4910,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         public String getValue() {
             return value_;
         }
+
         /**
          * Returns the style element's priority.
          * @return the style element's priority
@@ -4915,6 +4918,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         public String getPriority() {
             return priority_;
         }
+
         /**
          * Returns the specificity of the rule specifying this element.
          * @return the specificity
@@ -4922,6 +4926,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         public SelectorSpecificity getSpecificity() {
             return specificity_;
         }
+
         /**
          * Returns the style element's index.
          * @return the style element's index
@@ -4929,6 +4934,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         public long getIndex() {
             return index_;
         }
+
         /**
          * Returns <tt>true</tt> if this style element contains a default value. This method isn't
          * currently used anywhere because default style elements are applied before non-default
@@ -4940,6 +4946,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         public boolean isDefault() {
             return index_ == Long.MIN_VALUE;
         }
+
         /**
          * {@inheritDoc}
          */
@@ -4947,6 +4954,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         public String toString() {
             return "[" + index_ + "]" + name_  + "=" + value_;
         }
+
         /**
          * {@inheritDoc}
          */

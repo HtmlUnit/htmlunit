@@ -37,7 +37,7 @@ public class JavaScriptExecutor implements Runnable, Serializable {
     /**
      * A simple class to store a JavaScriptJobManager and its earliest job.
      */
-    protected final class JobExecutor {
+    protected static final class JobExecutor {
         private final JavaScriptJobManager jobManager_;
         private final JavaScriptJob earliestJob_;
 

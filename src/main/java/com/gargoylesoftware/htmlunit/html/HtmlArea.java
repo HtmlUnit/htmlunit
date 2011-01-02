@@ -239,7 +239,7 @@ public class HtmlArea extends HtmlElement {
             catch (final NumberFormatException nfe) {
                 throw new NumberFormatException("Circle radius of " + radiusString + " is not yet implemented.");
             }
-            final Ellipse2D ellipse = new Ellipse2D.Double(centerX - radius / 2, centerY - radius / 2,
+            final Ellipse2D ellipse = new Ellipse2D.Double(centerX - (double) radius / 2, centerY - (double) radius / 2,
                     radius, radius);
             if (ellipse.contains(x, y)) {
                 return true;

@@ -34,7 +34,7 @@ public class RegExpJsToJavaConverter {
     /**
      * Helper to encapsulate the transformations.
      */
-    private class Tape {
+    private static class Tape {
         private StringBuilder tape_;
         private int currentPos_;
 
