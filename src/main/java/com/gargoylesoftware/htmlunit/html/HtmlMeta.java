@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.net.URL;
 import java.util.Date;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  * @author Ahmed Ashour
  */
 public class HtmlMeta extends HtmlElement {
+    private static final Pattern COOKIES_SPLIT_PATTERN = Pattern.compile("\\s*;\\s*");
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "meta";
@@ -58,7 +60,7 @@ public class HtmlMeta extends HtmlElement {
      * like <tt>&lt;meta http-equiv='set-cookie' content='webm=none; path=/;'&gt;</tt>.
      */
     protected void performSetCookie() {
-        final String[] parts = getContentAttribute().split("\\s*;\\s*");
+        final String[] parts = COOKIES_SPLIT_PATTERN.split(getContentAttribute(), 0);
         final String name = StringUtils.substringBefore(parts[0], "=");
         final String value = StringUtils.substringAfter(parts[0], "=");
         final URL url = getPage().getWebResponse().getWebRequest().getUrl();

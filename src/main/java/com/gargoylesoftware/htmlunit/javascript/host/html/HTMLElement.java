@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -115,6 +116,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private static final String BEHAVIOR_CLIENT_CAPS = "#default#clientCaps";
     private static final String BEHAVIOR_HOMEPAGE = "#default#homePage";
     private static final String BEHAVIOR_DOWNLOAD = "#default#download";
+
+    private static final Pattern CLASS_NAMES_SPLIT_PATTERN = Pattern.compile("\\s");
 
     static final String POSITION_BEFORE_BEGIN = "beforeBegin";
     static final String POSITION_AFTER_BEGIN = "afterBegin";
@@ -628,7 +631,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public HTMLCollection jsxFunction_getElementsByClassName(final String className) {
         final HtmlElement elt = getDomNodeOrDie();
         final String description = "HTMLElement.getElementsByClassName('" + className + "')";
-        final String[] classNames = className.split("\\s");
+        final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
 
         final HTMLCollection collection = new HTMLCollection(elt, true, description) {
             protected boolean isMatching(final DomNode node) {

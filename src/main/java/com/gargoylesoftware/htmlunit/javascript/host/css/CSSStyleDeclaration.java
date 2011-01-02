@@ -272,6 +272,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
 
     private static final Pattern COLOR_PATTERN =
         Pattern.compile("(rgb.*?\\(.*?\\d{1,3}.*?,.*?\\d{1,3}.*?,.*?\\d{1,3}.*?\\))");
+    private static final Pattern VALUES_SPLIT_PATTERN = Pattern.compile("\\s+");
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static Map<String, String> CSSColors_ = new HashMap<String, String>();
@@ -460,7 +461,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             return value;
         }
 
-        final String[] values = value.split("\\s+");
+        final String[] values = VALUES_SPLIT_PATTERN.split(value, 0);
         switch (shorthand) {
             case TOP:
                 return values[0];
@@ -1033,7 +1034,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             if (value == null) {
                 final String borderWidth = getStyleAttribute(BORDER_WIDTH);
                 if (!StringUtils.isEmpty(borderWidth)) {
-                    final String[] values = borderWidth.split("\\s");
+                    final String[] values = VALUES_SPLIT_PATTERN.split(borderWidth, 0);
                     if (values.length > side.ordinal()) {
                         value = values[side.ordinal()];
                     }
