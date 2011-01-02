@@ -70,15 +70,13 @@ public class JQueryExtractorSample extends WebTestCase {
         itemIndex_ = 0;
     }
 
-    @SuppressWarnings("unchecked")
     private void assertResult(final String expectedTestResult) {
-        final String actual = ((HtmlElement) ((List) listItem_.getByXPath("./strong")).get(0)).asText();
+        final String actual = ((HtmlElement) ((List<?>) listItem_.getByXPath("./strong")).get(0)).asText();
         assertEquals(expectedTestResult, actual);
     }
 
-    @SuppressWarnings("unchecked")
     private void assertAssertion(final String expectedAssertion) {
-        final String actual = ((HtmlListItem) ((List) listItem_.getByXPath("./ol/li")).get(itemIndex_++)).asText();
+        final String actual = ((HtmlListItem) ((List<?>) listItem_.getByXPath("./ol/li")).get(itemIndex_++)).asText();
         assertEquals(expectedAssertion, actual);
     }
 

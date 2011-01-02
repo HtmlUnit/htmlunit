@@ -143,10 +143,9 @@ public class ActiveXObjectTest extends WebTestCase {
      * Returns true if Jacob is installed, so we can use {@link WebClient#setActiveXNative(boolean)}.
      * @return whether Jacob is installed or not
      */
-    @SuppressWarnings("unchecked")
     public static boolean isJacobInstalled() {
         try {
-            final Class clazz = Class.forName("com.jacob.activeX.ActiveXComponent");
+            final Class<?> clazz = Class.forName("com.jacob.activeX.ActiveXComponent");
             final Method method = clazz.getMethod("getProperty", String.class);
             final Object activXComponenet =
                 clazz.getConstructor(String.class).newInstance("InternetExplorer.Application");
@@ -158,9 +157,8 @@ public class ActiveXObjectTest extends WebTestCase {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private Object getProperty(final String activeXName, final String property) throws Exception {
-        final Class clazz = Class.forName("com.jacob.activeX.ActiveXComponent");
+        final Class<?> clazz = Class.forName("com.jacob.activeX.ActiveXComponent");
         final Method method = clazz.getMethod("getProperty", String.class);
         final Object activXComponenet = clazz.getConstructor(String.class).newInstance(activeXName);
         return method.invoke(activXComponenet, property);

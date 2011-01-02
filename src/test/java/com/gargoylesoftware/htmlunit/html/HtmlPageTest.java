@@ -1875,7 +1875,6 @@ public class HtmlPageTest extends WebServerTestCase {
          * {@inheritDoc}
          */
         @Override
-        @SuppressWarnings("unchecked")
         protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
             resp.setContentType("text/html");
             final StringBuilder builder = new StringBuilder();

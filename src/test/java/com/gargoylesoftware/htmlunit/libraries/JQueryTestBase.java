@@ -97,7 +97,6 @@ public abstract class JQueryTestBase extends WebServerTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @SuppressWarnings("unchecked")
     protected void runTest() throws Exception {
         final Iterator<HtmlElement> it = loadPage();
         final List<String> lines = FileUtils.readLines(new File(getExpectedPath()), "UTF-8");

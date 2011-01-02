@@ -96,7 +96,6 @@ public class ObjectsTest extends WebTestCase {
         return list;
     }
 
-    @SuppressWarnings("unchecked")
     private static List<String> getObjects(final BrowserVersion browserVersion) throws Exception {
         final URL url = ObjectsTest.class.getClassLoader().getResource(
                 "objects/objects." + browserVersion.getNickname() + ".txt");

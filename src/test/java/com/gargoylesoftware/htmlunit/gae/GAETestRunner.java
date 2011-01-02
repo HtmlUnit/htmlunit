@@ -107,7 +107,6 @@ public class GAETestRunner extends BlockJUnit4ClassRunner {
      * Loads the white list.
      * @return the list of classes in the white list
      */
-    @SuppressWarnings("unchecked")
     private static Set<String> loadWhiteList() {
         final InputStream is = GAETestRunner.class.getResourceAsStream("whitelist.txt");
         Assert.assertNotNull(is);

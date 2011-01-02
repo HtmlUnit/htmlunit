@@ -39,7 +39,6 @@ public final class MozillaTestGenerator {
      * @param initialScript whether another initial script is needed or not
      * @throws IOException if a reading error occurs
      */
-    @SuppressWarnings("unchecked")
     public static void printMozillaTest(final String author, final String htmlunitRoot,
             final String mozillaRoot, final String jsPath, final boolean initialScript) throws IOException {
         for (final Object o : FileUtils.readLines(new File(htmlunitRoot, "LICENSE.txt"))) {

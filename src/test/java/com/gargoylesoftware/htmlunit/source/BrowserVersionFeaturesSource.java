@@ -81,7 +81,6 @@ public final class BrowserVersionFeaturesSource {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void rename(final File file, final String oldName, final String newName) throws IOException {
         final List<String> lines = FileUtils.readLines(file);
         boolean modified = false;
@@ -119,7 +118,6 @@ public final class BrowserVersionFeaturesSource {
             BrowserVersion.FIREFOX_3, BrowserVersion.FIREFOX_3_6 });
     }
 
-    @SuppressWarnings("unchecked")
     private void generate(final File dir, final String toSearchFor, final BrowserVersion[] versions)
         throws IOException {
         final File propertiesFolder =  new File(root_,
@@ -185,7 +183,6 @@ public final class BrowserVersionFeaturesSource {
      * @param features the feature to reverse
      * @throws IOException if an error occurs
      */
-    @SuppressWarnings("unchecked")
     public void reverse(final BrowserVersionFeatures features) throws IOException {
         final File propertiesFolder =  new File(root_,
                 "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration");

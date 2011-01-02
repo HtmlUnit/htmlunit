@@ -140,7 +140,6 @@ public class PropertiesTest extends WebTestCase {
         return list;
     }
 
-    @SuppressWarnings("unchecked")
     private static List<String> getProperties(final BrowserVersion browserVersion) throws Exception {
         final URL url = PropertiesTest.class.getClassLoader().getResource(
                 "objects/properties." + browserVersion.getNickname() + ".txt");

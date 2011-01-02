@@ -98,7 +98,6 @@ public final class JQueryExtractor {
         writer_.write("    }\n");
     }
 
-    @SuppressWarnings("unchecked")
     private static List<String[]> getExpected(final File dir, final BrowserVersion browserVersion) throws IOException {
         final List<String[]> list = new ArrayList<String[]>();
         final List<String> lines = FileUtils.readLines(
