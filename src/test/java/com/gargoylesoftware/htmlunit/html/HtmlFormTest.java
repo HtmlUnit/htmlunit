@@ -925,13 +925,14 @@ public class HtmlFormTest extends WebTestCase {
     public void submit_SelectHasNoOptions() throws Exception {
         final String html
             = "<html><body><form name='form' method='GET' action='action.html'>\n"
-            + "<select name='select'>\n"
-            + "</select>\n"
+            + "  <select name='select'>\n"
+            + "  </select>\n"
+            + "  <input type='submit' id='clickMe'>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").submit((SubmittableElement) null);
+        final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").<HtmlElement>getElementById("clickMe").click();
 
         assertNotNull(secondPage);
         Assert.assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());

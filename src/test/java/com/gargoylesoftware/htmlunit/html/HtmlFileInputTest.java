@@ -97,10 +97,11 @@ public class HtmlFileInputTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetData() throws Exception {
+    public void setData() throws Exception {
         final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
-            + "  <input type='file' name='image' />\n"
+            + "  <input type='file' name='image'>\n"
+            + "  <input type='submit' id='mySubmit'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
@@ -119,7 +120,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         fileInput.setValueAttribute("dummy.txt");
         fileInput.setContentType("text/csv");
         fileInput.setData("My file data".getBytes());
-        f.submit((SubmittableElement) null);
+        firstPage.getHtmlElementById("mySubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getData());
         assertTrue(pair.getData().length != 0);
@@ -128,7 +129,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
     private void testFileInput(final String fileURL) throws Exception {
         final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
-            + "  <input type='file' name='image' />\n"
+            + "  <input type='file' name='image'>\n"
             + "  <input type='submit' id='clickMe'>\n"
             + "</form>\n"
             + "</body>\n"
@@ -161,6 +162,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
             + "  <input type='file' name='image' />\n"
+            + "  <input type='submit' id='clickMe'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
@@ -175,7 +177,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlForm f = firstPage.getForms().get(0);
-        f.submit(null);
+        f.<HtmlElement>getElementById("clickMe").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertEquals("image", pair.getName());
         assertNull(pair.getFile());

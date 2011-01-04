@@ -50,7 +50,8 @@ public class HtmlIsIndexTest extends WebTestCase {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
-            + "<isindex prompt='enterSomeText'></isindex>\n"
+            + "  <isindex prompt='enterSomeText'></isindex>\n"
+            + "  <input type='submit' id='clickMe'>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
@@ -60,7 +61,7 @@ public class HtmlIsIndexTest extends WebTestCase {
         final HtmlIsIndex isInput = form.<HtmlIsIndex>getElementsByAttribute(
                 "isindex", "prompt", "enterSomeText").get(0);
         isInput.setValue("Flintstone");
-        final Page secondPage = form.submit((SubmittableElement) null);
+        final Page secondPage = form.<HtmlElement>getElementById("clickMe").click();
 
         final List<NameValuePair> expectedParameters = new ArrayList<NameValuePair>();
         expectedParameters.add(new NameValuePair("enterSomeText", "Flintstone"));
