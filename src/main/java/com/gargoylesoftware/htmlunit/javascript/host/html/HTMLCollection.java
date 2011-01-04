@@ -476,7 +476,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             return true;
         }
         if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_49)) {
-            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_3);
+            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_3_6);
             for (final String functionName : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 if (name.equals(functionName)) {
                     return true;
@@ -508,7 +508,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             }
 
             idList.add("length");
-            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_3);
+            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_3_6);
             for (final String name : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 idList.add(name);
             }

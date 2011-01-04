@@ -120,7 +120,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         fileInput.setValueAttribute("dummy.txt");
         fileInput.setContentType("text/csv");
         fileInput.setData("My file data".getBytes());
-        firstPage.getHtmlElementById("mySubmit").click();
+        firstPage.<HtmlElement>getHtmlElementById("mySubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getData());
         assertTrue(pair.getData().length != 0);
