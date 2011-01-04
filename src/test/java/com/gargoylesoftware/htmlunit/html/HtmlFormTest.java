@@ -932,7 +932,8 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
 
-        final HtmlPage secondPage = (HtmlPage) page.getFormByName("form").<HtmlElement>getElementById("clickMe").click();
+        final HtmlPage secondPage =
+            (HtmlPage) page.getFormByName("form").<HtmlElement>getElementById("clickMe").click();
 
         assertNotNull(secondPage);
         Assert.assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());
