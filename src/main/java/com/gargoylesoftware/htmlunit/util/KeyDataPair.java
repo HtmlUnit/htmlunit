@@ -56,6 +56,28 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object object) {
+        // this is overwritten to make FindBugs happy
+        // and to make it clear, that we really want to have
+        // the same equals semantic like our parent class
+        return super.equals(object);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        // this is overwritten to make FindBugs happy
+        // and to make it clear, that we really want to have
+        // the same hashCode like our parent class
+        return super.hashCode();
+    }
+
+    /**
      * @return the {@link File} object if the file exists, else <tt>null</tt>
      */
     public File getFile() {

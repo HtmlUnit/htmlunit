@@ -19,6 +19,7 @@ import static org.junit.Assert.assertArrayEquals;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -110,8 +111,9 @@ public class WebClient3Test extends WebDriverTestCase {
 
         final MockWebConnection mockConnection = getMockWebConnection();
         final byte[] binaryContent = new byte[4818];
+        final Random random = new Random();
         for (int i = 0; i < binaryContent.length; ++i) {
-            binaryContent[i] = (byte) (Math.random() * Byte.MAX_VALUE);
+            binaryContent[i] = (byte) (random.nextInt(Byte.MAX_VALUE));
         }
         mockConnection.setDefaultResponse(binaryContent, 200, "OK", "application/octet-stream");
         final URL urlFoo = new URL(getDefaultUrl(), "foo.html");

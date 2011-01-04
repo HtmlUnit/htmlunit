@@ -71,7 +71,12 @@ public class Enumerator extends SimpleScriptable {
     public Object jsxFunction_item() {
         if (!jsxFunction_atEnd()) {
             SimpleScriptable scriptable = (SimpleScriptable) collection_.get(index_, collection_);
-            scriptable = scriptable.clone();
+            try {
+                scriptable = scriptable.clone();
+            }
+            catch (final CloneNotSupportedException e) {
+                return Undefined.instance;
+            }
             scriptable.setCaseSensitive(false);
             return scriptable;
         }

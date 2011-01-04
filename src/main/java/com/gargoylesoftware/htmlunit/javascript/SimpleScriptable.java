@@ -427,13 +427,8 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public SimpleScriptable clone() {
-        try {
-            return (SimpleScriptable) super.clone();
-        }
-        catch (final Exception e) {
-            return null;
-        }
+    public SimpleScriptable clone() throws CloneNotSupportedException {
+        return (SimpleScriptable) super.clone();
     }
 
     /**
