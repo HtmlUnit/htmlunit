@@ -103,6 +103,7 @@ public abstract class HtmlElement extends DomElement {
     protected HtmlElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+        attributeListeners_ = new ArrayList<HtmlAttributeChangeListener>();
         if (page != null && page.getWebClient().getBrowserVersion()
                 .hasFeature(BrowserVersionFeatures.HTMLELEMENT_TRIM_CLASS_ATTRIBUTE)) {
             final String value = getAttribute("class");
@@ -233,11 +234,9 @@ public abstract class HtmlElement extends DomElement {
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     protected void fireHtmlAttributeAdded(final HtmlAttributeChangeEvent event) {
-        if (attributeListeners_ != null) {
-            synchronized (this) {
-                for (final HtmlAttributeChangeListener listener : attributeListeners_) {
-                    listener.attributeAdded(event);
-                }
+        synchronized (attributeListeners_) {
+            for (final HtmlAttributeChangeListener listener : attributeListeners_) {
+                listener.attributeAdded(event);
             }
         }
         final DomNode parentNode = getParentNode();
@@ -258,11 +257,9 @@ public abstract class HtmlElement extends DomElement {
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     protected void fireHtmlAttributeReplaced(final HtmlAttributeChangeEvent event) {
-        if (attributeListeners_ != null) {
-            synchronized (this) {
-                for (final HtmlAttributeChangeListener listener : attributeListeners_) {
-                    listener.attributeReplaced(event);
-                }
+        synchronized (attributeListeners_) {
+            for (final HtmlAttributeChangeListener listener : attributeListeners_) {
+                listener.attributeReplaced(event);
             }
         }
         final DomNode parentNode = getParentNode();
@@ -283,11 +280,9 @@ public abstract class HtmlElement extends DomElement {
      * @see #addHtmlAttributeChangeListener(HtmlAttributeChangeListener)
      */
     protected void fireHtmlAttributeRemoved(final HtmlAttributeChangeEvent event) {
-        if (attributeListeners_ != null) {
-            synchronized (this) {
-                for (final HtmlAttributeChangeListener listener : attributeListeners_) {
-                    listener.attributeRemoved(event);
-                }
+        synchronized (attributeListeners_) {
+            for (final HtmlAttributeChangeListener listener : attributeListeners_) {
+                listener.attributeRemoved(event);
             }
         }
         final DomNode parentNode = getParentNode();
@@ -822,10 +817,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public void addHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
         WebAssert.notNull("listener", listener);
-        synchronized (this) {
-            if (attributeListeners_ == null) {
-                attributeListeners_ = new ArrayList<HtmlAttributeChangeListener>();
-            }
+        synchronized (attributeListeners_) {
             attributeListeners_.add(listener);
         }
     }
@@ -840,10 +832,8 @@ public abstract class HtmlElement extends DomElement {
      */
     public void removeHtmlAttributeChangeListener(final HtmlAttributeChangeListener listener) {
         WebAssert.notNull("listener", listener);
-        synchronized (this) {
-            if (attributeListeners_ != null) {
-                attributeListeners_.remove(listener);
-            }
+        synchronized (attributeListeners_) {
+            attributeListeners_.remove(listener);
         }
     }
 
