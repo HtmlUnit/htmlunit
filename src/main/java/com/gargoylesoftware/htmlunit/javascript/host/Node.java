@@ -416,7 +416,7 @@ public class Node extends SimpleScriptable {
             final boolean isXmlPage = node.getOwnerDocument() instanceof XmlPage;
             final boolean isIE = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_45);
             final Boolean xmlSpaceDefault = isXMLSpaceDefault(node);
-            final boolean skipEmptyTextNode = isIE && isXmlPage && (Boolean.FALSE.equals(xmlSpaceDefault));
+            final boolean skipEmptyTextNode = isIE && isXmlPage && !(Boolean.FALSE.equals(xmlSpaceDefault));
 
             childNodes_ = new HTMLCollection(node, false, "Node.childNodes") {
                 @Override
