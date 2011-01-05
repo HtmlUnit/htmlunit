@@ -1146,7 +1146,7 @@ public class XMLHttpRequestTest extends WebServerTestCase {
         /** {@inheritDoc} */
         @Override
         public WebResponse getResponse(final WebRequest request) throws IOException {
-            if (request.getUrl().equals(URL_SECOND)) {
+            if (URL_SECOND.equals(request.getUrl())) {
                 throw new IOException("Connection refused");
             }
             return super.getResponse(request);

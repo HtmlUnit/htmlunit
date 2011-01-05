@@ -214,7 +214,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if a problem occurs
      */
     private void startWebServer(final MockWebConnection mockConnection) throws Exception {
-        if (LAST_TEST_MockWebConnection_ == Boolean.FALSE) {
+        if (Boolean.FALSE.equals(LAST_TEST_MockWebConnection_)) {
             stopWebServer();
         }
         LAST_TEST_MockWebConnection_ = Boolean.TRUE;
