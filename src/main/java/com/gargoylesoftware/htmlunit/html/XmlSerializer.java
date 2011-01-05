@@ -144,12 +144,8 @@ class XmlSerializer {
         final File file = createFile(srcAttr.getValue(), "." + suffix);
 
         if (enclosedPage instanceof HtmlPage) {
-            // TODO: refactor as it is stupid to create empty file at one place
+            file.delete(); // TODO: refactor as it is stupid to create empty file at one place
             // and then to complain that it already exists
-            final boolean success = file.delete();
-            if (!success) {
-                throw new IOException("Can't delete file '" + file.getAbsolutePath() + "'.");
-            }
             ((HtmlPage) enclosedPage).save(file);
         }
         else {
@@ -196,12 +192,7 @@ class XmlSerializer {
             final ImageReader reader = image.getImageReader();
             final File file = createFile(srcAttr.getValue(), "." + reader.getFormatName());
             image.saveAs(file);
-
-            final boolean success = outputDir_.mkdirs();
-            if (!success) {
-                throw new IOException("Can't create directory '" + outputDir_.getAbsolutePath() + "'.");
-            }
-
+            outputDir_.mkdirs();
             final String valueOnFileSystem = outputDir_.getName() + File.separatorChar + file.getName();
             srcAttr.setValue(valueOnFileSystem); // this is the clone attribute node, not the original one of the page
         }
@@ -254,12 +245,7 @@ class XmlSerializer {
             else {
                 fileName = name;
             }
-
-            final boolean success = outputDir_.mkdirs();
-            if (!success) {
-                throw new IOException("Can't create directory '" + outputDir_.getAbsolutePath() + "'.");
-            }
-
+            outputDir_.mkdirs();
             final File f = new File(outputDir_, fileName);
             if (f.createNewFile()) {
                 return f;
