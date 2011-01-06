@@ -360,34 +360,32 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     static String getDefaultValue(final HtmlElement element) {
-        final String href = element.getAttribute("href").trim();
+        String href = element.getAttribute("href");
 
-        final String response;
         if (HtmlElement.ATTRIBUTE_NOT_DEFINED == href) {
-            response = ""; // for example for named anchors
+            return ""; // for example for named anchors
+        }
+
+        href = href.trim();
+        final int indexAnchor = href.indexOf('#');
+        final String beforeAnchor;
+        final String anchorPart;
+        if (indexAnchor == -1) {
+            beforeAnchor = href;
+            anchorPart = "";
         }
         else {
-            final int indexAnchor = href.indexOf('#');
-            final String beforeAnchor;
-            final String anchorPart;
-            if (indexAnchor == -1) {
-                beforeAnchor = href;
-                anchorPart = "";
-            }
-            else {
-                beforeAnchor = href.substring(0, indexAnchor);
-                anchorPart = href.substring(indexAnchor);
-            }
-
-            try {
-                response =
-                    ((HtmlPage) element.getPage()).getFullyQualifiedUrl(beforeAnchor).toExternalForm() + anchorPart;
-            }
-            catch (final MalformedURLException e) {
-                return href;
-            }
+            beforeAnchor = href.substring(0, indexAnchor);
+            anchorPart = href.substring(indexAnchor);
         }
 
-        return response;
+        try {
+            final String response =
+                ((HtmlPage) element.getPage()).getFullyQualifiedUrl(beforeAnchor).toExternalForm() + anchorPart;
+            return response;
+        }
+        catch (final MalformedURLException e) {
+            return href;
+        }
     }
 }
