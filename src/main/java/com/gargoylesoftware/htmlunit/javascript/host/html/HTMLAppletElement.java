@@ -102,10 +102,7 @@ public class HTMLAppletElement extends HTMLElement {
      * @return the value of the "alt" property
      */
     public String jsxGet_alt() {
-        String alt = getDomNodeOrDie().getAttribute("alt");
-        if (alt == NOT_FOUND) {
-            alt = "";
-        }
+        final String alt = getDomNodeOrDie().getAttribute("alt");
         return alt;
     }
 
@@ -122,10 +119,7 @@ public class HTMLAppletElement extends HTMLElement {
      * @return the "border" attribute
      */
     public String jsxGet_border() {
-        String border = getDomNodeOrDie().getAttribute("border");
-        if (border == NOT_FOUND) {
-            border = "";
-        }
+        final String border = getDomNodeOrDie().getAttribute("border");
         return border;
     }
 

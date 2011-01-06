@@ -313,10 +313,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the <tt>border</tt> attribute
      */
     public String jsxGet_border() {
-        String border = getDomNodeOrDie().getAttribute("border");
-        if (border == NOT_FOUND) {
-            border = "";
-        }
+        final String border = getDomNodeOrDie().getAttribute("border");
         return border;
     }
 

@@ -137,10 +137,7 @@ public class HTMLSpanElement extends HTMLElement {
      * @return the value of the "cite" property
      */
     public String jsxGet_cite() {
-        String cite = getDomNodeOrDie().getAttribute("cite");
-        if (cite == NOT_FOUND) {
-            cite = "";
-        }
+        final String cite = getDomNodeOrDie().getAttribute("cite");
         return cite;
     }
 
@@ -157,10 +154,7 @@ public class HTMLSpanElement extends HTMLElement {
      * @return the value of the "dateTime" property
      */
     public String jsxGet_dateTime() {
-        String dateTime = getDomNodeOrDie().getAttribute("datetime");
-        if (dateTime == NOT_FOUND) {
-            dateTime = "";
-        }
+        final String dateTime = getDomNodeOrDie().getAttribute("datetime");
         return dateTime;
     }
 

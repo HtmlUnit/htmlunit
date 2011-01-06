@@ -51,10 +51,7 @@ public class HTMLAreaElement extends HTMLElement {
      * @return the value of the "alt" property
      */
     public String jsxGet_alt() {
-        String alt = getDomNodeOrDie().getAttribute("alt");
-        if (alt == NOT_FOUND) {
-            alt = "";
-        }
+        final String alt = getDomNodeOrDie().getAttribute("alt");
         return alt;
     }
 
