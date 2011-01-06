@@ -427,8 +427,13 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public SimpleScriptable clone() throws CloneNotSupportedException {
-        return (SimpleScriptable) super.clone();
+    public SimpleScriptable clone() {
+        try {
+            return (SimpleScriptable) super.clone();
+        }
+        catch (final Exception e) {
+            throw new IllegalStateException("Clone not supported");
+        }
     }
 
     /**
