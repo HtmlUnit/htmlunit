@@ -119,6 +119,33 @@ public class WebClient2Test extends WebServerTestCase {
     }
 
     /**
+     * Test for 3151939. The Browser removes leading '/..' from the path.
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void loadPage_HandleDoubleDotsAtRoot() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "</body></html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(htmlContent);
+        client.setWebConnection(webConnection);
+
+        HtmlPage page = client.getPage("http://www.somewhere.org/..");
+        assertEquals("http://www.somewhere.org/", page.getWebResponse().getWebRequest().getUrl());
+
+        page = client.getPage("http://www.somewhere.org/../test");
+        assertEquals("http://www.somewhere.org/test", page.getWebResponse().getWebRequest().getUrl());
+
+        // many
+        page = client.getPage("http://www.somewhere.org/../../..");
+        assertEquals("http://www.somewhere.org/", page.getWebResponse().getWebRequest().getUrl());
+    }
+
+    /**
      * Verifies that a WebClient can be serialized and deserialized before it has been used.
      * @throws Exception if an error occurs
      */

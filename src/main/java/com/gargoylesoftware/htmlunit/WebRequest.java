@@ -111,7 +111,7 @@ public class WebRequest implements Serializable {
             if (path.length() == 0) {
                 url = buildUrlWithNewFile(url, "/" + url.getFile());
             }
-            else if (path.contains("./")) {
+            else if (path.contains("/.")) {
                 final String query = (url.getQuery() != null) ? "?" + url.getQuery() : "";
                 url = buildUrlWithNewFile(url, removeDots(path) + query);
             }
@@ -151,6 +151,9 @@ public class WebRequest implements Serializable {
 
         // remove occurrences at the beginning
         newPath = newPath.replaceAll("^/(\\.\\.?/)*", "/");
+        if ("/..".equals(newPath)) {
+            newPath = "/";
+        }
 
         // single dots have no effect, so just remove them
         final Pattern dotPattern = Pattern.compile("/\\./");
