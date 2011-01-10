@@ -7,7 +7,7 @@
     <body>
         <release version="2.9" date="???" description="Bugfixes">
             <action type="fix" dev="rbri" issue="3151939">
-               Url's like 'http://www.google.com/..' reduced to 'http://www.google.com/'. 
+               Url's like 'http://www.google.com/..' reduced to 'http://www.google.com/'.
             </action>
             <action type="fix" dev="mguillem" issue="3128042">
                 JavaScript: added support for CSSCharsetRule.
