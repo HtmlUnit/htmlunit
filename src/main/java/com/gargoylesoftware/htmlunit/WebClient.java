@@ -2076,20 +2076,22 @@ public class WebClient implements Serializable {
             }
         }
 
-        // verify if this load job doesn't already exist
-        for (final LoadJob loadJob : loadQueue_) {
-            if (loadJob.response_ == null) {
-                continue;
-            }
-            final WebRequest otherRequest = loadJob.response_.getWebRequest();
-            final URL otherUrl = otherRequest.getUrl();
-            // TODO: investigate but it seems that IE considers query string too but not FF
-            if (url.getPath().equals(otherUrl.getPath())
-                && url.getHost().equals(otherUrl.getHost())
-                && url.getProtocol().equals(otherUrl.getProtocol())
-                && url.getPort() == otherUrl.getPort()
-                && request.getHttpMethod() == otherRequest.getHttpMethod()) {
-                return; // skip it;
+        synchronized (loadQueue_) {
+            // verify if this load job doesn't already exist
+            for (final LoadJob loadJob : loadQueue_) {
+                if (loadJob.response_ == null) {
+                    continue;
+                }
+                final WebRequest otherRequest = loadJob.response_.getWebRequest();
+                final URL otherUrl = otherRequest.getUrl();
+                // TODO: investigate but it seems that IE considers query string too but not FF
+                if (url.getPath().equals(otherUrl.getPath())
+                    && url.getHost().equals(otherUrl.getHost())
+                    && url.getProtocol().equals(otherUrl.getProtocol())
+                    && url.getPort() == otherUrl.getPort()
+                    && request.getHttpMethod() == otherRequest.getHttpMethod()) {
+                    return; // skip it;
+                }
             }
         }
 
@@ -2106,7 +2108,9 @@ public class WebClient implements Serializable {
                 throw new RuntimeException(e);
             }
         }
-        loadQueue_.add(loadJob);
+        synchronized (loadQueue_) {
+            loadQueue_.add(loadJob);
+        }
     }
 
     /**
@@ -2118,11 +2122,17 @@ public class WebClient implements Serializable {
      * @throws FailingHttpStatusCodeException in case of exception
      */
     public void loadDownloadedResponses() throws FailingHttpStatusCodeException, IOException {
-        if (loadQueue_.isEmpty()) {
-            return;
+        final List<LoadJob> queue;
+
+        // synchronize access to the loadQueue_,
+        // to be sure no job is ignored
+        synchronized (loadQueue_) {
+            if (loadQueue_.isEmpty()) {
+                return;
+            }
+            queue = new ArrayList<LoadJob>(loadQueue_);
+            loadQueue_.clear();
         }
-        final List<LoadJob> queue = new ArrayList<LoadJob>(loadQueue_);
-        loadQueue_.clear();
 
         final HashSet<WebWindow> updatedWindows = new HashSet<WebWindow>();
         for (int i = queue.size() - 1; i >= 0; --i) {
