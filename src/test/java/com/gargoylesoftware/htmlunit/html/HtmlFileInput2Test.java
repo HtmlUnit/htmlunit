@@ -20,6 +20,8 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -45,6 +47,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlFileInput2Test extends WebDriverTestCase {
@@ -226,7 +229,60 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
         final WebDriver driver = getWebDriver();
         driver.get("http://localhost:" + PORT + "/upload1");
         driver.findElement(By.id("mySubmit")).click();
-        assertTrue(driver.getPageSource().contains("filename=\"\""));
+
+        assertTrue(driver.getPageSource()
+                .contains("Content-Disposition: form-data; name=\"myInput\"; filename=\"\""));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void realFile() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/upload1", Upload1Servlet.class);
+        servlets.put("/upload2", PrintRequestServlet.class);
+        startWebServer("./", new String[0], servlets);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/upload1");
+        String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
+        if (driver instanceof InternetExplorerDriver) {
+            path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
+        }
+        driver.findElement(By.name("myInput")).sendKeys(path);
+        driver.findElement(By.id("mySubmit")).click();
+
+        if (getBrowserVersion().isIE()) {
+            final Pattern pattern = Pattern
+                .compile("Content-Disposition: form-data; name=\"myInput\";"
+                        + " filename=\".*test-classes[\\\\/]realm\\.properties\"");
+            final Matcher matcher = pattern.matcher(driver.getPageSource());
+            assertTrue(matcher.find());
+        }
+        else if (getBrowserVersion().isFirefox()) {
+            assertTrue(driver.getPageSource()
+                    .contains("Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\""));
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void unknownFile() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/upload1", Upload1Servlet.class);
+        servlets.put("/upload2", PrintRequestServlet.class);
+        startWebServer("./", new String[0], servlets);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/upload1");
+        driver.findElement(By.name("myInput")).sendKeys("unknown.txt");
+        driver.findElement(By.id("mySubmit")).click();
+
+        assertTrue(driver.getPageSource()
+                .contains("Content-Disposition: form-data; name=\"myInput\"; filename=\"unknown.txt\""));
     }
 
     /**

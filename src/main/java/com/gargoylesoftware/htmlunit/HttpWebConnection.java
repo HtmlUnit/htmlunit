@@ -375,12 +375,26 @@ public class HttpWebConnection implements WebConnection {
             contentType = "application/octet-stream";
         }
 
+        final File file = pairWithFile.getFile();
+
         if (pairWithFile.getData() != null) {
+            if (file == null) {
+                return new InputStreamBody(
+                        new ByteArrayInputStream(pairWithFile.getData()), contentType, pairWithFile.getValue());
+            }
+
+            if (webClient_.getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
+                return new InputStreamBody(
+                        new ByteArrayInputStream(pairWithFile.getData()), contentType, file.getAbsolutePath());
+            }
+
             return new InputStreamBody(
-                    new ByteArrayInputStream(pairWithFile.getData()), contentType, "");
+                    new ByteArrayInputStream(pairWithFile.getData()), contentType, file.getName());
         }
-        else if (pairWithFile.getFile() == null) {
-            return new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, "") {
+
+        if (file == null) {
+            return new InputStreamBody(new ByteArrayInputStream(new byte[0]), contentType, pairWithFile.getValue()) {
                 // Overridden in order not to have a chunked response.
                 @Override
                 public long getContentLength() {

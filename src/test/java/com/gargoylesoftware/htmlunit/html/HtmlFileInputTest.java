@@ -16,16 +16,20 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
+import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -51,11 +55,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.HttpWebConnection;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 
 /**
@@ -64,6 +70,7 @@ import com.gargoylesoftware.htmlunit.util.KeyDataPair;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlFileInputTest extends WebServerTestCase {
@@ -92,40 +99,6 @@ public class HtmlFileInputTest extends WebServerTestCase {
         testFileInput("file:///" + path);
     }
 
-    /**
-     * Tests setData method.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void setData() throws Exception {
-        final String firstContent = "<html><head></head><body>\n"
-            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
-            + "  <input type='file' name='image'>\n"
-            + "  <input type='submit' id='mySubmit'>\n"
-            + "</form>\n"
-            + "</body>\n"
-            + "</html>";
-        final String secondContent = "<html><head><title>second</title></head></html>";
-        final WebClient client = getWebClient();
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-
-        client.setWebConnection(webConnection);
-
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlForm f = firstPage.getForms().get(0);
-        final HtmlFileInput fileInput = f.getInputByName("image");
-        fileInput.setValueAttribute("dummy.txt");
-        fileInput.setContentType("text/csv");
-        fileInput.setData("My file data".getBytes());
-        firstPage.<HtmlElement>getHtmlElementById("mySubmit").click();
-        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
-        assertNotNull(pair.getData());
-        assertTrue(pair.getData().length != 0);
-    }
-
     private void testFileInput(final String fileURL) throws Exception {
         final String firstContent = "<html><head></head><body>\n"
             + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
@@ -151,6 +124,156 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getFile());
         assertTrue(pair.getFile().length() != 0);
+    }
+
+    /**
+     * Tests setData method.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setValueAttributeAndSetDataDummyFile() throws Exception {
+        final String firstContent = "<html><head></head><body>\n"
+            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
+            + "  <input type='file' name='image'>\n"
+            + "  <input type='submit' id='mySubmit'>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondContent = "<html><head><title>second</title></head></html>";
+        final WebClient client = getWebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        client.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlForm f = firstPage.getForms().get(0);
+        final HtmlFileInput fileInput = f.getInputByName("image");
+        fileInput.setValueAttribute("dummy.txt");
+        fileInput.setContentType("text/csv");
+        fileInput.setData("My file data".getBytes());
+        firstPage.<HtmlElement>getHtmlElementById("mySubmit").click();
+        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
+
+        assertNotNull(pair.getData());
+        assertTrue(pair.getData().length > 10);
+
+        final Method makeHttpMethod = HttpWebConnection.class.getDeclaredMethod("makeHttpMethod", WebRequest.class);
+        makeHttpMethod.setAccessible(true);
+        final HttpPost httpPost = (HttpPost) makeHttpMethod
+            .invoke(new HttpWebConnection(client), webConnection.getLastWebRequest());
+        final MultipartEntity multipartEntity = (MultipartEntity) httpPost.getEntity();
+
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        multipartEntity.writeTo(out);
+        out.close();
+
+        Assert.assertTrue(
+                out.toString().contains("Content-Disposition: form-data; name=\"image\"; filename=\"dummy.txt\""));
+    }
+
+    /**
+     * Tests setData method.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setValueAttributeAndSetDataRealFile() throws Exception {
+        final String firstContent = "<html><head></head><body>\n"
+            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
+            + "  <input type='file' name='image'>\n"
+            + "  <input type='submit' id='mySubmit'>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondContent = "<html><head><title>second</title></head></html>";
+        final WebClient client = getWebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        client.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlForm f = firstPage.getForms().get(0);
+        final HtmlFileInput fileInput = f.getInputByName("image");
+        final String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toExternalForm();
+        fileInput.setValueAttribute(path);
+        fileInput.setData("My file data".getBytes());
+        firstPage.<HtmlElement>getHtmlElementById("mySubmit").click();
+        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
+
+        assertNotNull(pair.getData());
+        assertTrue(pair.getData().length > 10);
+
+        final Method makeHttpMethod = HttpWebConnection.class.getDeclaredMethod("makeHttpMethod", WebRequest.class);
+        makeHttpMethod.setAccessible(true);
+        final HttpPost httpPost = (HttpPost) makeHttpMethod
+            .invoke(new HttpWebConnection(client), webConnection.getLastWebRequest());
+        final MultipartEntity multipartEntity = (MultipartEntity) httpPost.getEntity();
+
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        multipartEntity.writeTo(out);
+        out.close();
+
+        if (getBrowserVersion().isIE()) {
+            final Pattern pattern = Pattern
+                .compile("Content-Disposition: form-data; name=\"image\";"
+                        + " filename=\".*testfiles[\\\\/]tiny-png\\.img\"");
+            final Matcher matcher = pattern.matcher(out.toString());
+            assertTrue(matcher.find());
+        }
+        else if (getBrowserVersion().isFirefox()) {
+            assertTrue(out.toString()
+                    .contains("Content-Disposition: form-data; name=\"image\"; filename=\"tiny-png.img\""));
+        }
+    }
+
+    /**
+     * Tests setData method.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setDataOnly() throws Exception {
+        final String firstContent = "<html><head></head><body>\n"
+            + "<form enctype='multipart/form-data' action='" + URL_SECOND + "' method='POST'>\n"
+            + "  <input type='file' name='image'>\n"
+            + "  <input type='submit' id='mySubmit'>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondContent = "<html><head><title>second</title></head></html>";
+        final WebClient client = getWebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, firstContent);
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        client.setWebConnection(webConnection);
+
+        final HtmlPage firstPage = client.getPage(URL_FIRST);
+        final HtmlForm f = firstPage.getForms().get(0);
+        final HtmlFileInput fileInput = f.getInputByName("image");
+        fileInput.setData("My file data".getBytes());
+        firstPage.<HtmlElement>getHtmlElementById("mySubmit").click();
+        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
+
+        assertNull(pair.getData());
+
+        final Method makeHttpMethod = HttpWebConnection.class.getDeclaredMethod("makeHttpMethod", WebRequest.class);
+        makeHttpMethod.setAccessible(true);
+        final HttpPost httpPost = (HttpPost) makeHttpMethod
+            .invoke(new HttpWebConnection(client), webConnection.getLastWebRequest());
+        final MultipartEntity multipartEntity = (MultipartEntity) httpPost.getEntity();
+
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        multipartEntity.writeTo(out);
+        out.close();
+
+        assertTrue(out.toString()
+                .contains("Content-Disposition: form-data; name=\"image\"; filename=\"\""));
     }
 
     /**
