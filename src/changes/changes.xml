@@ -6,8 +6,8 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
-            <action type="fix" dev="rbri" issue="3151939">
-                URLs like 'http://www.google.com/..' reduced to 'http://www.google.com/'.
+            <action type="fix" dev="rbri" issue="3156627">
+                File name is send to server if HtmlFileInput.setData was called.
             </action>
             <action type="fix" dev="mguillem" issue="3128042">
                 JavaScript: added support for CSSCharsetRule.
