@@ -37,7 +37,8 @@ public class ExternalTest extends WebTestCase {
      */
     @Test
     @Browsers(Browser.IE)
-    public void AutoCompleteSaveForm() throws Exception {
+//    public void AutoCompleteSaveForm() throws Exception {
+    public void autoCompleteSaveForm() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function fnSaveForm() {\n"
             + "  window.external.AutoCompleteSaveForm(oForm);\n"

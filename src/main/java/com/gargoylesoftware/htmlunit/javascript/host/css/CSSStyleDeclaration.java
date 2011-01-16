@@ -438,27 +438,19 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             return "";
         }
 
-        final String value;
-        final boolean mayBeShorthand;
         if (element1 != null && element2 == null) {
-            value = element1.getValue();
-            mayBeShorthand = false;
+            return element1.getValue();
         }
-        else if (element1 == null && element2 != null) {
+
+        final String value;
+        if (element1 == null && element2 != null) {
             value = element2.getValue();
-            mayBeShorthand = true;
         }
         else if (element1.getIndex() > element2.getIndex()) {
-            value = element1.getValue();
-            mayBeShorthand = false;
+            return element1.getValue();
         }
         else {
             value = element2.getValue();
-            mayBeShorthand = true;
-        }
-
-        if (!mayBeShorthand) {
-            return value;
         }
 
         final String[] values = VALUES_SPLIT_PATTERN.split(value, 0);
