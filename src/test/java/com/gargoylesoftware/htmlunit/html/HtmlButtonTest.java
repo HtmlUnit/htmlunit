@@ -265,7 +265,7 @@ public class HtmlButtonTest extends WebTestCase {
 
         final String[] expectedAlerts = {"[object HTMLButtonElement]"};
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3, html, collectedAlerts);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3_6, html, collectedAlerts);
         assertTrue(HtmlButton.class.isInstance(page.getHtmlElementById("myId")));
         assertEquals(expectedAlerts, collectedAlerts);
     }

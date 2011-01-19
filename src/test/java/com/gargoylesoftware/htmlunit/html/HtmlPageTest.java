@@ -1880,7 +1880,7 @@ public class HtmlPageTest extends WebServerTestCase {
             final StringBuilder builder = new StringBuilder();
             builder.append(counter_++).append("\n");
             builder.append(req.getMethod()).append("\n");
-            for (final Enumeration en = req.getParameterNames(); en.hasMoreElements();) {
+            for (final Enumeration<?> en = req.getParameterNames(); en.hasMoreElements();) {
                 final String name = (String) en.nextElement();
                 final String value = req.getParameter(name);
                 builder.append(name).append(' ').append(value).append('\n');
