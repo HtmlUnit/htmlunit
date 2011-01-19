@@ -82,8 +82,7 @@ public final class TextUtil {
         catch (final IOException e) {
             // Theoretically impossible since all the "IO" is in memory but it's a
             // checked exception so we have to catch it.
-            e.printStackTrace();
-            throw new IllegalStateException("Exception when converting a string to an input stream: " + e);
+            throw new IllegalStateException("Exception when converting a string to an input stream: '" + e + "'", e);
         }
     }
 
