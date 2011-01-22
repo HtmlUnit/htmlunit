@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Daniel Gredler
  * @author Katharina Probst
  * @author Amit Manjhi
+ * @author Ronald Brill
  * @see MemoryLeakTest
  */
 public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
@@ -77,7 +78,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /** {@inheritDoc} */
-    public synchronized int addJob(final JavaScriptJob job, final Page page) {
+    public int addJob(final JavaScriptJob job, final Page page) {
         final WebWindow w = getWindow();
         if (w == null) {
             /*
@@ -96,13 +97,17 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         final int id = NEXT_JOB_ID_.getAndIncrement();
         job.setId(id);
 
-        scheduledJobsQ_.add(job);
+        synchronized (this) {
+            scheduledJobsQ_.add(job);
 
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("\twindow is: " + getWindow());
-            LOG.debug("\tadded job: " + job.toString());
-            LOG.debug("after adding job to the queue, the queue is: ");
-            printQueue();
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("\twindow is: " + getWindow());
+                LOG.debug("\tadded job: " + job.toString());
+                LOG.debug("after adding job to the queue, the queue is: ");
+                printQueue();
+            }
+
+            notify();
         }
 
         return id;
@@ -117,6 +122,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             }
         }
         cancelledJobs_.add(id);
+        notify();
     }
 
     /** {@inheritDoc} */
@@ -129,6 +135,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             }
         }
         cancelledJobs_.add(id);
+        notify();
     }
 
     /** {@inheritDoc} */
@@ -140,6 +147,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             cancelledJobs_.add(job.getId());
         }
         scheduledJobsQ_.clear();
+        notify();
     }
 
     /** {@inheritDoc} */
@@ -152,11 +160,12 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             final long interval = Math.min(timeoutMillis, 100);
             while (getJobCount() > 0 && System.currentTimeMillis() - start < timeoutMillis) {
                 try {
-                    Thread.sleep(interval);
+                    synchronized (this) {
+                        wait(interval);
+                    }
                 }
                 catch (final InterruptedException e) {
-                    e.printStackTrace();
-                    LOG.error("InterruptedException while in waitForJobs");
+                    LOG.error("InterruptedException while in waitForJobs", e);
                 }
             }
         }
@@ -174,20 +183,29 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         }
         final long targetExecutionTime = System.currentTimeMillis() + delayMillis;
         JavaScriptJob earliestJob = getEarliestJob();
-        JavaScriptJob currentlyRunningJob = currentlyRunningJob_;
-        while ((currentlyRunningJob != null && currentlyRunningJob.getTargetExecutionTime() < targetExecutionTime)
+
+        boolean currentJob;
+        synchronized (this) {
+            currentJob = currentlyRunningJob_ != null
+                && currentlyRunningJob_.getTargetExecutionTime() < targetExecutionTime;
+        }
+
+        final long interval = Math.max(40, delayMillis);
+        while (currentJob
             || (earliestJob != null && earliestJob.getTargetExecutionTime() < targetExecutionTime)) {
             try {
-                /* TODO (amitmanjhi): how to set this value? For tests in WebClientWaitForBackgroundJobsTest to
-                 * pass reliably, this value must be less than 50. */
-                Thread.sleep(40);
+                synchronized (this) {
+                    wait(interval);
+                }
             }
             catch (final InterruptedException e) {
-                e.printStackTrace();
-                LOG.error("InterruptedException while in waitForJobsStartingBefore");
+                LOG.error("InterruptedException while in waitForJobsStartingBefore", e);
             }
             earliestJob = getEarliestJob();
-            currentlyRunningJob = currentlyRunningJob_;
+            synchronized (this) {
+                currentJob = currentlyRunningJob_ != null
+                    && currentlyRunningJob_.getTargetExecutionTime() < targetExecutionTime;
+            }
         }
         final int jobs = getJobCount();
         if (LOG.isDebugEnabled()) {
@@ -200,6 +218,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /** {@inheritDoc} */
     public synchronized void shutdown() {
         scheduledJobsQ_.clear();
+        notify();
     }
 
     /**
@@ -211,20 +230,6 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      */
     private WebWindow getWindow() {
         return window_.get();
-    }
-
-    /**
-     * Runs a JavaScript job that is non-null and ready to be executed.
-     *
-     * @param job
-     */
-    private void runJob(final JavaScriptJob job) {
-        try {
-            job.run();
-        }
-        catch (final RuntimeException e) {
-            LOG.error("Job run failed with unexpected RuntimeException: " + e.getMessage(), e);
-        }
     }
 
     /**
@@ -244,21 +249,6 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     }
 
     /**
-     * Sets currentlyRunningJob to job.
-     *
-     * @return true if succeeds, false otherwise.
-     */
-    private synchronized boolean setCurrentlyRunningJob(final JavaScriptJob job) {
-        if (job.getTargetExecutionTime() < System.currentTimeMillis()) {
-            if (scheduledJobsQ_.remove(job)) {
-                currentlyRunningJob_ = job;
-            }
-            return currentlyRunningJob_ != null;
-        }
-        return false;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public JavaScriptJob getEarliestJob() {
@@ -270,18 +260,24 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      */
     public boolean runSingleJob(final JavaScriptJob givenJob) {
         assert givenJob != null;
-        JavaScriptJob job = scheduledJobsQ_.peek();
+        final JavaScriptJob job = scheduledJobsQ_.peek();
         if (job != givenJob) {
             return false;
         }
-        setCurrentlyRunningJob(job);
-        if (currentlyRunningJob_ == null) {
+
+        final long currentTime = System.currentTimeMillis();
+        if (job.getTargetExecutionTime() > currentTime) {
             return false;
         }
-        job = currentlyRunningJob_;
-        final boolean isIntervalJob = job.getPeriod() != null;
-        if (isIntervalJob) {
-            final long currentTime = System.currentTimeMillis();
+        synchronized (this) {
+            if (scheduledJobsQ_.remove(job)) {
+                currentlyRunningJob_ = job;
+            }
+            notify();
+        }
+
+        final boolean isPeriodicJob = job.isPeriodic();
+        if (isPeriodicJob) {
             long timeDifference = currentTime - job.getTargetExecutionTime();
             if (timeDifference % job.getPeriod() > 0) {
                 timeDifference = (timeDifference / job.getPeriod()) * job.getPeriod()
@@ -290,22 +286,38 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             // reference: http://ejohn.org/blog/how-javascript-timers-work/
             job.setTargetExecutionTime(job.getTargetExecutionTime() + timeDifference);
             // queue
-            if (!cancelledJobs_.contains(job.getId())) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Reschedulling job " + job);
+            synchronized (this) {
+                if (!cancelledJobs_.contains(job.getId())) {
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Reschedulling job " + job);
+                    }
+                    scheduledJobsQ_.add(job);
+                    notify();
                 }
-                scheduledJobsQ_.add(job);
             }
         }
-        final String intervalJob = (isIntervalJob ? "interval " : "");
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Starting " + intervalJob + "job " + job);
+            final String periodicJob = isPeriodicJob ? "interval " : "";
+            LOG.debug("Starting " + periodicJob + "job " + job);
         }
-        runJob(job);
+        try {
+            job.run();
+        }
+        catch (final RuntimeException e) {
+            LOG.error("Job run failed with unexpected RuntimeException: " + e.getMessage(), e);
+        }
+        finally {
+            synchronized (this) {
+                if (job == currentlyRunningJob_) {
+                    currentlyRunningJob_ = null;
+                }
+                notify();
+            }
+        }
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Finished " + intervalJob + "job " + job);
+            final String periodicJob = isPeriodicJob ? "interval " : "";
+            LOG.debug("Finished " + periodicJob + "job " + job);
         }
-        currentlyRunningJob_ = null;
         return true;
     }
 }
