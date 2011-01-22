@@ -211,7 +211,7 @@ public class WebClient implements Serializable {
 
         scriptEngine_ = new JavaScriptEngine(this);
         // The window must be constructed AFTER the script engine.
-        addWebWindowListener(new CurrentWindowTracker());
+        addWebWindowListener(new CurrentWindowTracker(this));
         currentWindow_ = new TopLevelWindow("", this);
         fireWindowOpened(new WebWindowEvent(currentWindow_, WebWindowEvent.OPEN, null, null));
     }
@@ -1780,7 +1780,13 @@ public class WebClient implements Serializable {
     /**
      * Keeps track of the current window. Inspired by WebTest's logic to track the current response.
      */
-    class CurrentWindowTracker implements WebWindowListener, Serializable {
+    private static final class CurrentWindowTracker implements WebWindowListener, Serializable {
+        private WebClient webClient_;
+
+        private CurrentWindowTracker(final WebClient webClient) {
+            webClient_ = webClient;
+        }
+
         /**
          * {@inheritDoc}
          */
@@ -1788,23 +1794,23 @@ public class WebClient implements Serializable {
             final WebWindow window = event.getWebWindow();
             if (window instanceof TopLevelWindow) {
                 final TopLevelWindow tlw = (TopLevelWindow) event.getWebWindow();
-                topLevelWindows_.remove(tlw);
-                if (tlw.equals(getCurrentWindow())) {
-                    if (topLevelWindows_.isEmpty()) {
+                webClient_.topLevelWindows_.remove(tlw);
+                if (tlw.equals(webClient_.getCurrentWindow())) {
+                    if (webClient_.topLevelWindows_.isEmpty()) {
                         // Must always have at least window, and there are no top-level windows left; must create one.
-                        final TopLevelWindow newWindow = new TopLevelWindow("", WebClient.this);
-                        topLevelWindows_.push(newWindow);
-                        setCurrentWindow(newWindow);
+                        final TopLevelWindow newWindow = new TopLevelWindow("", webClient_);
+                        webClient_.topLevelWindows_.push(newWindow);
+                        webClient_.setCurrentWindow(newWindow);
                     }
                     else {
                         // The current window is now the previous top-level window.
-                        setCurrentWindow(topLevelWindows_.peek());
+                        webClient_.setCurrentWindow(webClient_.topLevelWindows_.peek());
                     }
                 }
             }
-            else if (event.getWebWindow() == getCurrentWindow()) {
+            else if (event.getWebWindow() == webClient_.getCurrentWindow()) {
                 // The current window is now the last top-level window.
-                setCurrentWindow(topLevelWindows_.peek());
+                webClient_.setCurrentWindow(webClient_.topLevelWindows_.peek());
             }
         }
         /**
@@ -1837,7 +1843,7 @@ public class WebClient implements Serializable {
                 }
             }
             if (use) {
-                setCurrentWindow(window);
+                webClient_.setCurrentWindow(window);
             }
         }
         /**
@@ -1847,7 +1853,7 @@ public class WebClient implements Serializable {
             final WebWindow window = event.getWebWindow();
             if (window instanceof TopLevelWindow) {
                 final TopLevelWindow tlw = (TopLevelWindow) event.getWebWindow();
-                topLevelWindows_.push(tlw);
+                webClient_.topLevelWindows_.push(tlw);
             }
             // Page is not loaded yet, don't set it now as current window.
         }
