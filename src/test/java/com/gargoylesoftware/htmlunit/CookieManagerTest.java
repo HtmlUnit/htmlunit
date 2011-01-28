@@ -132,11 +132,26 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("my_key=\"Hello, big, big, world\"; another_key=Hi")
+    @Alerts("my_key=\"Hello, big, big, world\"; yet_another_key=Hi")
     public void comma() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
         responseHeader.add(new NameValuePair("Set-Cookie", "my_key=\"Hello, big, big, world\""));
-        responseHeader.add(new NameValuePair("Set-Cookie", "another_key=Hi"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "yet_another_key=Hi"));
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
+
+        loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("c_key=helloC; a_key=helloA; b_key=helloB")
+    public void order() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "c_key=helloC"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "a_key=helloA"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "b_key=helloB"));
         getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
 
         loadPageWithAlerts2(getDefaultUrl());
