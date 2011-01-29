@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Daniel Gredler
  * @author Dmitri Zoubkov
  * @author Sudhan Moghe
+ * @author Ronald Brill
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">DOM Level 1</a>
  * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">DOM Level 2</a>
  */
@@ -448,27 +449,35 @@ public class HtmlScript extends HtmlElement {
     /**
      * Returns true if a script with the specified type and language attributes is actually JavaScript.
      * According to <a href="http://www.w3.org/TR/REC-html40/types.html#h-6.7">W3C recommendation</a>
-     * are content types case insensitive.
+     * are content types case insensitive.<b>
+     * IE supports only a limited number of values for the type attribute. For testing you can
+     * use http://www.robinlionheart.com/stds/html4/scripts.
      * @param typeAttribute the type attribute specified in the script tag
      * @param languageAttribute the language attribute specified in the script tag
      * @return true if the script is JavaScript
      */
     boolean isJavaScript(final String typeAttribute, final String languageAttribute) {
-        final boolean isJavaScript;
-        if (typeAttribute != null && typeAttribute.length() != 0) {
-            isJavaScript = "text/javascript".equalsIgnoreCase(typeAttribute)
-                || ("application/javascript".equalsIgnoreCase(typeAttribute)
-                        && getPage().getWebClient().getBrowserVersion()
-                            .hasFeature(BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT));
-        }
-        else if (languageAttribute != null && languageAttribute.length() != 0) {
-            isJavaScript = StringUtils.startsWithIgnoreCase(languageAttribute, "javascript");
-        }
-        else {
-            isJavaScript = true;
+        if (StringUtils.isNotEmpty(typeAttribute)) {
+            if ("text/javascript".equalsIgnoreCase(typeAttribute)
+                    || "text/ecmascript".equalsIgnoreCase(typeAttribute)) {
+                return true;
+            }
+
+            final boolean appJavascriptSupported = getPage().getWebClient().getBrowserVersion()
+                                .hasFeature(BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT);
+            if (appJavascriptSupported
+                    && ("application/javascript".equalsIgnoreCase(typeAttribute)
+                            || "application/ecmascript".equalsIgnoreCase(typeAttribute)
+                            || "application/x-javascript".equalsIgnoreCase(typeAttribute))) {
+                return true;
+            }
+            return false;
         }
 
-        return isJavaScript;
+        if (languageAttribute != null && languageAttribute.length() != 0) {
+            return StringUtils.startsWithIgnoreCase(languageAttribute, "javascript");
+        }
+        return true;
     }
 
     /**

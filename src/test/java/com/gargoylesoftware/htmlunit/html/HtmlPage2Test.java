@@ -544,6 +544,22 @@ public class HtmlPage2Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = "Hello")
+    public void application_x_javascript_type() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <script type='application/x-javascript'>\n"
+            + "    alert('Hello');\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void serialization_attributeListenerLock() throws Exception {
         final String html = "<html><head><script>"
             + "function foo() {"

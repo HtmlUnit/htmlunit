@@ -1023,7 +1023,10 @@ public class HtmlPage extends SgmlPage {
         final String contentType = response.getContentType();
         if (!"application/javascript".equalsIgnoreCase(contentType)
             && !"application/ecmascript".equalsIgnoreCase(contentType)) {
-            if ("text/javascript".equals(contentType) || "text/ecmascript".equals(contentType)) {
+            // warn about obsolete or not supported content types
+            if ("text/javascript".equals(contentType)
+                    || "text/ecmascript".equals(contentType)
+                    || "application/x-javascript".equalsIgnoreCase(contentType)) {
                 getWebClient().getIncorrectnessListener().notify(
                     "Obsolete content type encountered: '" + contentType + "'.", this);
             }

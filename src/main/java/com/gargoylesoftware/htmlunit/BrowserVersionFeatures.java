@@ -627,7 +627,10 @@ public enum BrowserVersionFeatures {
     /** */
     HTMLOPTION_PREVENT_DISABLED,
 
-    /** */
+    /**
+     * Set this property if the script tag supports the
+     * types 'application/javascript' and 'application/x-javascript'.
+     */
     HTMLSCRIPT_APPLICATION_JAVASCRIPT,
 
     /** Runs <script src="javascript:'[code]'">. */
