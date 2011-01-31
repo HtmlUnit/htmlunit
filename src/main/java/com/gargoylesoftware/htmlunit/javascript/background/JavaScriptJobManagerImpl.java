@@ -156,13 +156,17 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             LOG.debug("Waiting for all jobs to finish (will wait max " + timeoutMillis + " millis).");
         }
         if (timeoutMillis > 0) {
-            final long start = System.currentTimeMillis();
-            final long interval = Math.min(timeoutMillis, 100);
-            while (getJobCount() > 0 && System.currentTimeMillis() - start < timeoutMillis) {
+            long now = System.currentTimeMillis();
+            final long end = now + timeoutMillis;
+            while (getJobCount() > 0 && now < end) {
                 try {
                     synchronized (this) {
-                        wait(interval);
+                        wait(end - now);
                     }
+
+                    // maybe a change triggers the wakup; we have to recalculate the
+                    // wait time
+                    now = System.currentTimeMillis();
                 }
                 catch (final InterruptedException e) {
                     LOG.error("InterruptedException while in waitForJobs", e);
@@ -273,7 +277,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             if (scheduledJobsQ_.remove(job)) {
                 currentlyRunningJob_ = job;
             }
-            notify();
+            // no need to notify if processing is started
         }
 
         final boolean isPeriodicJob = job.isPeriodic();

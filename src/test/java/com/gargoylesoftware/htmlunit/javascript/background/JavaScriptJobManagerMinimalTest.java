@@ -284,6 +284,7 @@ public class JavaScriptJobManagerMinimalTest {
     }
 
     private void waitForComplexJobs(final WaitingMode waitingMode, final int expectedFinalJobCount) {
+        final long start = System.currentTimeMillis();
         final JavaScriptJob job1 = new JavaScriptJob(50, null) {
             // This job takes 30ms to complete.
             public void run() {
@@ -303,7 +304,9 @@ public class JavaScriptJobManagerMinimalTest {
         Assert.assertEquals(0, manager_.getJobCount());
         manager_.addJob(job1, page_);
         manager_.addJob(job2, page_);
-        final long delayMillis = 70;
+        // sometimes it takes some time to reach this point
+        // to make this test stable we have to take care of that
+        final long delayMillis = 70 - (System.currentTimeMillis() - start);
         switch (waitingMode) {
             case WAIT_STARTING_BEFORE:
                 manager_.waitForJobsStartingBefore(delayMillis);
