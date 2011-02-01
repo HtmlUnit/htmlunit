@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="update" dev="mguillem">
+                Upgrade Apache HttpClient to 4.1.
+            </action>
             <action type="fix" dev="rbri" issue="3156627">
                 File name is send to server if HtmlFileInput.setData was called.
             </action>

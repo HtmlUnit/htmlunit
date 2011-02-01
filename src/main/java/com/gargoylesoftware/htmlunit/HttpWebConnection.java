@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -63,15 +65,18 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
+import org.apache.http.cookie.CookieIdentityComparator;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.CookieSpecFactory;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.cookie.params.CookieSpecPNames;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.FormBodyPart;
 import org.apache.http.entity.mime.HttpMultipart;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MIME;
+import org.apache.http.entity.mime.MinimalField;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
@@ -89,9 +94,6 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HttpContext;
-import org.apache.james.mime4j.message.BodyPart;
-import org.apache.james.mime4j.parser.Field;
-import org.apache.james.mime4j.util.CharsetUtil;
 
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -326,7 +328,7 @@ public class HttpWebConnection implements WebConnection {
                     final String fileName = pairWithFile.getFile().getName();
                     for (int i = 0; i < fileName.length(); i++) {
                         if (fileName.codePointAt(i) > 127) {
-                            return CharsetUtil.getCharset(charset);
+                            return Charset.forName(charset);
                         }
                     }
                 }
@@ -346,22 +348,22 @@ public class HttpWebConnection implements WebConnection {
             final java.lang.reflect.Field field = MultipartEntity.class.getDeclaredField("multipart");
             field.setAccessible(true);
             final HttpMultipart multipart = (HttpMultipart) field.get(multipartEntity);
-            final BodyPart lastOne = multipart.getBodyParts().get(multipart.getBodyParts().size() - 1);
-            final org.apache.james.mime4j.message.Header header = lastOne.getHeader();
-            final Field cntDispHeader = header.getField(MIME.CONTENT_DISPOSITION);
-            header.removeFields(MIME.CONTENT_DISPOSITION);
-            final Field newCntDispHeader = new Field() {
-                public String getBody() {
-                    return cntDispHeader.getBody() + "\r\nContent-Type: " + contentType;
-                }
-                public String getName() {
-                    return MIME.CONTENT_DISPOSITION;
-                }
-                public org.apache.james.mime4j.util.ByteSequence getRaw() {
-                    throw new RuntimeException("No in the hack");
-                }
-            };
-            header.addField(newCntDispHeader);
+            final FormBodyPart lastOne = multipart.getBodyParts().get(multipart.getBodyParts().size() - 1);
+            final org.apache.http.entity.mime.Header header = lastOne.getHeader();
+            final MinimalField cntDispHeader = header.getField(MIME.CONTENT_DISPOSITION);
+//            header.removeFields(MIME.CONTENT_DISPOSITION);
+//            final Field newCntDispHeader = new Field() {
+//                public String getBody() {
+//                    return cntDispHeader.getBody() + "\r\nContent-Type: " + contentType;
+//                }
+//                public String getName() {
+//                    return MIME.CONTENT_DISPOSITION;
+//                }
+//                public org.apache.james.mime4j.util.ByteSequence getRaw() {
+//                    throw new RuntimeException("No in the hack");
+//                }
+//            };
+//            header.addField(newCntDispHeader);
         }
         catch (final Exception e) {
             throw new RuntimeException("Hack to fix Content-Type submission failed", e);
@@ -535,7 +537,10 @@ public class HttpWebConnection implements WebConnection {
         schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
         final ThreadSafeClientConnManager connectionManager =
             new ThreadSafeClientConnManager(httpsParams, schemeRegistry);
-        return new DefaultHttpClient(connectionManager, httpsParams);
+
+        final DefaultHttpClient httpClient = new DefaultHttpClient(connectionManager, httpsParams);
+        httpClient.setCookieStore(new HtmlUnitCookieStore());
+        return httpClient;
     }
 
     /**
@@ -705,5 +710,79 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
             }
         }
         return cookies;
+    }
+}
+
+/**
+ * Implementation of {@link CookieStore} like {@link org.apache.http.impl.client.BasicCookieStore}
+ * BUT storing cookies in the order of addition.
+ * @author Marc Guillemot
+ * @version $Revision$
+ */
+class HtmlUnitCookieStore implements CookieStore, Serializable {
+    private final List<Cookie> cookies_ = new ArrayList<Cookie>();
+    private final CookieIdentityComparator comparator_ = new CookieIdentityComparator();
+
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized void addCookie(final Cookie cookie) {
+        if (cookie == null) {
+            return;
+        }
+
+        if (cookie.isExpired(new Date())) {
+            cookies_.remove(cookie);
+            return;
+        }
+
+        final int index = findCookieIndex(cookie);
+        if (index == -1) {
+            cookies_.add(cookie);
+        }
+        else {
+            cookies_.set(index, cookie); // replace by new version (equals doesn't test all fields)
+        }
+    }
+
+    private int findCookieIndex(final Cookie cookie) {
+        for (int i = 0; i < cookies_.size(); ++i) {
+            final Cookie curCookie = cookies_.get(i);
+            if (comparator_.compare(cookie, curCookie) == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized List<Cookie> getCookies() {
+        return new ArrayList<Cookie>(cookies_);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized boolean clearExpired(final Date date) {
+        if (date == null) {
+            return false;
+        }
+        boolean removed = false;
+        for (final Iterator<Cookie> it = cookies_.iterator(); it.hasNext();) {
+            if (it.next().isExpired(date)) {
+                it.remove();
+                removed = true;
+            }
+        }
+        return removed;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public synchronized void clear() {
+        cookies_.clear();
     }
 }

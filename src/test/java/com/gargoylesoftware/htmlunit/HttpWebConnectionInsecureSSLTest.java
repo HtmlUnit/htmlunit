@@ -63,7 +63,7 @@ public class HttpWebConnectionInsecureSSLTest extends WebTestCase {
         final SSLContext serverSSLContext = SSLContext.getInstance("TLS");
         serverSSLContext.init(keyManagers, trustManagers, null);
 
-        localServer_ = new LocalTestServer(null, null, null, serverSSLContext);
+        localServer_ = new LocalTestServer(serverSSLContext);
         localServer_.registerDefaultHandlers();
 
         localServer_.start();
@@ -106,7 +106,8 @@ public class HttpWebConnectionInsecureSSLTest extends WebTestCase {
     @Test(expected = SSLPeerUnverifiedException.class)
     public void normal() throws Exception {
         final WebClient webClient = getWebClient();
-        webClient.getPage("https://" + localServer_.getServiceHostName() + ':' + localServer_.getServicePort()
+        webClient.getPage("https://" + localServer_.getServiceAddress().getHostName()
+                + ':' + localServer_.getServiceAddress().getPort()
                 + "/random/100");
     }
 
@@ -117,7 +118,8 @@ public class HttpWebConnectionInsecureSSLTest extends WebTestCase {
     public void insecureSSL() throws Exception {
         final WebClient webClient = getWebClient();
         webClient.setUseInsecureSSL(true);
-        webClient.getPage("https://" + localServer_.getServiceHostName() + ':' + localServer_.getServicePort()
+        webClient.getPage("https://" + localServer_.getServiceAddress().getHostName()
+                + ':' + localServer_.getServiceAddress().getPort()
                 + "/random/100");
     }
 }

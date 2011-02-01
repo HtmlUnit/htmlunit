@@ -201,7 +201,6 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(Browser.NONE)
-    @NotYetImplemented
     public void httpClientParsesCookiesQuotedValuesCorrectly() throws Exception {
         final Header header = new BasicHeader("Set-Cookie", "first=\"hello world\"");
         final BrowserCompatSpec spec = new BrowserCompatSpec();
