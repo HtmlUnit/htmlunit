@@ -474,7 +474,7 @@ public class HtmlScript extends HtmlElement {
             return false;
         }
 
-        if (languageAttribute != null && languageAttribute.length() != 0) {
+        if (StringUtils.isNotEmpty(languageAttribute)) {
             return StringUtils.startsWithIgnoreCase(languageAttribute, "javascript");
         }
         return true;
