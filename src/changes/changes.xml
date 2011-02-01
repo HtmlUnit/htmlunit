@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-lang to 2.6.
+            </action>
             <action type="update" dev="mguillem">
                 Upgrade Apache HttpClient to 4.1.
             </action>
