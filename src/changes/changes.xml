@@ -6,6 +6,14 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3167335">
+                The script tag supports now the type 'application/x-javascript'
+                in Firefox mode.
+            </action>
+            <action type="fix" dev="rbri" issue="3159858">
+                Improved syncronization and sleep() replaced by wait()
+                in JavaScriptJobManagerImpl.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-lang to 2.6.
             </action>
