@@ -25,6 +25,7 @@ import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,6 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.james.mime4j.util.CharsetUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -369,7 +369,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final HttpPost filePost = new HttpPost("http://localhost:" + PORT + "/upload2");
 
         final MultipartEntity reqEntity =
-            new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, CharsetUtil.getCharset("UTF-8"));
+            new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, null, Charset.forName("UTF-8"));
         reqEntity.addPart("myInput", new FileBody(file, "application/octet-stream"));
 
         filePost.setEntity(reqEntity);
