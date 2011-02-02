@@ -721,7 +721,7 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
         }
         return cookies;
     }
-    
+
     @Override
     public List<Header> formatCookies(final List<Cookie> cookies) {
         Collections.sort(cookies, COOKIE_COMPARATOR);
