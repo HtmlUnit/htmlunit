@@ -68,6 +68,7 @@ import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieIdentityComparator;
 import org.apache.http.cookie.CookieOrigin;
+import org.apache.http.cookie.CookiePathComparator;
 import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.CookieSpecFactory;
 import org.apache.http.cookie.MalformedCookieException;
@@ -693,13 +694,7 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
      * - RFC2109 (#4.3.4) http://www.ietf.org/rfc/rfc2109.txt
      * - RFC2965 (#3.3.4) http://www.ietf.org/rfc/rfc2965.txt http://www.ietf.org/rfc/rfc2109.txt
      */
-    private static final Comparator<Cookie> COOKIE_COMPARATOR = new Comparator<Cookie>() {
-        public int compare(final Cookie cookie1, final Cookie cookie2) {
-            // this only gets called with cookie matching a request
-            
-            return cookie2.getPath().length() - cookie1.getPath().length();
-        };
-    };
+    private static final Comparator<Cookie> COOKIE_COMPARATOR = new CookiePathComparator();
 
     HtmlUnitBrowserCompatCookieSpec() {
         super();
