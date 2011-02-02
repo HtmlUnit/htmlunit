@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3107395">
+            	Send cookies ordered by more specific path attribute.
+        	</action>
             <action type="fix" dev="rbri" issue="3167335">
                 The script tag supports now the type 'application/x-javascript'
                 in Firefox mode.

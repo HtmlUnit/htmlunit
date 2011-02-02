@@ -28,6 +28,7 @@ import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.message.BasicHeader;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -147,7 +148,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("c_key=helloC; a_key=helloA; b_key=helloB")
-    public void order() throws Exception {
+    public void orderFromServer() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
         responseHeader.add(new NameValuePair("Set-Cookie", "c_key=helloC"));
         responseHeader.add(new NameValuePair("Set-Cookie", "a_key=helloA"));
@@ -155,6 +156,26 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
 
         loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void orderCookiesByPath_fromJs() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "document.cookie = 'exampleCookie=rootPath;path=/';\n"
+            + "document.cookie = 'exampleCookie=currentPath;path=/testpages/';\n"
+            + "</script>\n"
+            + "<a href='/testpages/next.html'>next page</a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver webDriver = loadPage2(html);
+        webDriver.findElement(By.linkText("next page")).click();
+
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+        assertEquals("exampleCookie=currentPath; exampleCookie=rootPath", lastRequest.getAdditionalHeaders().get("Cookie"));
     }
 
     /**

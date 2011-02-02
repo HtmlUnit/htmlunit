@@ -30,6 +30,7 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -686,6 +687,20 @@ public class HttpWebConnection implements WebConnection {
  * quotes are wrongly removed in cookie's values.
  */
 class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
+    /**
+     * Comparator for sending cookies in right order.
+     * See specification:
+     * - RFC2109 (#4.3.4) http://www.ietf.org/rfc/rfc2109.txt
+     * - RFC2965 (#3.3.4) http://www.ietf.org/rfc/rfc2965.txt http://www.ietf.org/rfc/rfc2109.txt
+     */
+    private static final Comparator<Cookie> COOKIE_COMPARATOR = new Comparator<Cookie>() {
+        public int compare(final Cookie cookie1, final Cookie cookie2) {
+            // this only gets called with cookie matching a request
+            
+            return cookie2.getPath().length() - cookie1.getPath().length();
+        };
+    };
+
     HtmlUnitBrowserCompatCookieSpec() {
         super();
         final BasicPathHandler pathHandler = new BasicPathHandler() {
@@ -710,6 +725,13 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
             }
         }
         return cookies;
+    }
+    
+    @Override
+    public List<Header> formatCookies(final List<Cookie> cookies) {
+        Collections.sort(cookies, COOKIE_COMPARATOR);
+
+        return super.formatCookies(cookies);
     }
 }
 

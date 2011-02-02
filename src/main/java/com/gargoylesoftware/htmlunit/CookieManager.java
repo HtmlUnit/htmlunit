@@ -24,6 +24,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.collections.set.ListOrderedSet;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.params.CookiePolicy;
@@ -55,7 +56,8 @@ public class CookieManager implements Serializable {
     private boolean cookiesEnabled_;
 
     /** The cookies added to this cookie manager. */
-    private final Set<Cookie> cookies_;
+    @SuppressWarnings("unchecked")
+    private final Set<Cookie> cookies_ = new ListOrderedSet();
 
     /** The cookies spec registry */
     private final transient CookieSpecRegistry registry_ = new DefaultHttpClient().getCookieSpecs();
@@ -65,7 +67,6 @@ public class CookieManager implements Serializable {
      */
     public CookieManager() {
         cookiesEnabled_ = true;
-        cookies_ = new LinkedHashSet<Cookie>();
     }
 
     /**
