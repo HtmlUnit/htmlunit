@@ -1253,7 +1253,7 @@ public class HtmlPage extends SgmlPage {
                 return;
             }
             final StringBuilder buffer = new StringBuilder(refreshString.substring(index + 4));
-            if (buffer.toString().trim().length() == 0) {
+            if (StringUtils.isBlank(buffer.toString())) {
                 //content='10; URL=' is treated as content='10'
                 url = getWebResponse().getWebRequest().getUrl();
             }

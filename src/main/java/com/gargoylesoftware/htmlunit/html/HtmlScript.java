@@ -235,7 +235,7 @@ public class HtmlScript extends HtmlElement {
                 }
             }
         };
-        if (postponed && getTextContent().trim().length() == 0) {
+        if (postponed && StringUtils.isBlank(getTextContent())) {
             final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
             engine.addPostponedAction(action);
         }

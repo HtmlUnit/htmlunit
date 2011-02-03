@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.junit.After;
 import org.junit.Test;
@@ -152,7 +153,7 @@ public class CodeStyleTest {
     private void methodFirstLine(final List<String> lines, final String relativePath) {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
-            if (lines.get(index + 1).trim().length() == 0
+            if (StringUtils.isBlank(lines.get(index + 1))
                 && line.length() > 4
                 && Character.isWhitespace(line.charAt(0)) && line.endsWith("{")
                 && !line.contains(" class ") && !line.contains(" interface ") && !line.contains(" @interface ")
@@ -171,7 +172,7 @@ public class CodeStyleTest {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
             final String nextLine = lines.get(index + 1);
-            if (line.trim().length() == 0 && "    }".equals(nextLine)) {
+            if (StringUtils.isBlank(line) && "    }".equals(nextLine)) {
                 addFailure("Empty line in " + relativePath + ", line: " + (index + 1));
             }
         }
@@ -374,7 +375,7 @@ public class CodeStyleTest {
         for (int i = 1; i < lines.size(); i++) {
             final String previousLine = lines.get(i - 1);
             final String line = lines.get(i);
-            if (previousLine.trim().length() == 0 && line.trim().length() == 0) {
+            if (StringUtils.isBlank(previousLine) && StringUtils.isBlank(line)) {
                 addFailure("Two empty contiguous lines at " + relativePath + ", line: " + (i + 1));
             }
         }

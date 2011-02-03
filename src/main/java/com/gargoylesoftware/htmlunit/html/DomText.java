@@ -126,9 +126,9 @@ public class DomText extends DomCharacterData implements Text {
      */
     @Override
     protected void printXml(final String indent, final PrintWriter printWriter) {
-        if (getData().trim().length() != 0) {
+        String data = getData();
+        if (org.apache.commons.lang.StringUtils.isNotBlank(data)) {
             printWriter.print(indent);
-            String data = getData();
             if (!(getParentNode() instanceof HtmlStyle) || !data.startsWith("<!--") || !data.endsWith("-->")) {
                 data = StringUtils.escapeXmlChars(data);
             }

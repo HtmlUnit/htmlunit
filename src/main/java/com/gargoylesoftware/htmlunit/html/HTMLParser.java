@@ -585,7 +585,7 @@ public final class HTMLParser {
         public void characters(final char[] ch, final int start, final int length) throws SAXException {
             if ((characters_ == null || characters_.length() == 0)
                     && page_.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_2)
-                    && new String(ch, start, length).trim().length() == 0) {
+                    && StringUtils.isBlank(new String(ch, start, length))) {
 
                 DomNode node = currentNode_.getLastChild();
                 if (currentNode_ instanceof HTMLElement.ProxyDomNode) {
