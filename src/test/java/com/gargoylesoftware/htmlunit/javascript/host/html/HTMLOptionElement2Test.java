@@ -100,4 +100,32 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("s")).click();
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
+
+    /**
+     * Regression test for 3171569: unselecting the selected option should select the first one (FF)
+     * or have no effect (IE).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "1", "option1", "0" }, IE = { "1", "option2", "1" })
+    public void unselectResetToFirstOption() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var sel = document.form1.select1;\n"
+            + "  alert(sel.selectedIndex);\n"
+            + "  sel.options[1].selected = false;\n"
+            + "  alert(sel.value);\n"
+            + "  alert(sel.selectedIndex);\n"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "        <option value='option1' name='option1'>One</option>\n"
+            + "        <option value='option2' name='option2' selected>Two</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

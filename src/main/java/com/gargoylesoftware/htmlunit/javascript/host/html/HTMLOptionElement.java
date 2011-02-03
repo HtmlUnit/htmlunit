@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 
 /**
@@ -132,7 +133,19 @@ public class HTMLOptionElement extends FormChild {
      * @param selected the new selected property
      */
     public void jsxSet_selected(final boolean selected) {
-        getDomNodeOrNull().setSelected(selected);
+        final HtmlOption optionNode = getDomNodeOrNull();
+        final HtmlSelect enclosingSelect = optionNode.getEnclosingSelect();
+        if (!selected && optionNode.isSelected()
+                && enclosingSelect != null & !enclosingSelect.isMultipleSelectEnabled()) {
+
+            // un-selecting selected option has no effect in IE and selects first option in FF
+            if (getBrowserVersion().isFirefox()) {
+                enclosingSelect.getOption(0).setSelected(true);
+            }
+        }
+        else {
+            optionNode.setSelected(selected);
+        }
     }
 
     /**
