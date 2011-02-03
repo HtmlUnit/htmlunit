@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3166477">
+                JavaScript: Use the right encoding for the implementation
+                of the loadXML and parseFromString methods.
+            </action>
             <action type="fix" dev="mguillem" issue="3171569">
                 JavaScript: un-selecting selected option in a (single) select
                 causes the first option to be selected (FF) or is ignored (IE).

@@ -30,6 +30,7 @@ import org.w3c.dom.Node;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
@@ -148,11 +149,26 @@ public class XMLDocument extends Document {
      */
     public boolean jsxFunction_loadXML(final String strXML) {
         try {
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            final WebResponseData data = new WebResponseData(strXML.getBytes(), HttpStatus.SC_OK, null, emptyList);
+            final WebWindow webWindow = getWindow().getWebWindow();
+            
+            // determine the charset of the page
+            String charset = TextUtil.DEFAULT_CHARSET;
+            final SgmlPage sgmlPage = (SgmlPage) webWindow.getEnclosedPage();
+            if (sgmlPage != null) {
+                final String contentCharset = sgmlPage.getWebResponse().getContentCharset();
+                if (contentCharset != null) {
+                    charset = contentCharset;
+                }
+            }
+
+            // build a dummy WebResponse
+            List<NameValuePair> headers = Collections.emptyList();
+            final WebResponseData data = new WebResponseData(TextUtil.stringToByteArray(strXML, charset), HttpStatus.SC_OK, null, headers);
             final URL hackUrl = new URL("http://-htmlunit-internal/XMLDocument.loadXML"); // hack! better solution?
             final WebResponse webResponse = new WebResponse(data, hackUrl, (HttpMethod) null, 0);
-            final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow());
+            webResponse.getWebRequest().setCharset(charset);
+
+            final XmlPage page = new XmlPage(webResponse, webWindow);
             setDomNode(page);
             return true;
         }

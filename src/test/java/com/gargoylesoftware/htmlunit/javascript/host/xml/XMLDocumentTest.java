@@ -23,14 +23,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -532,6 +532,86 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"230", "230"})
+    public void parseIso88591Encoding() throws Exception {
+        final String html = "<html>\n"
+            + "  <head><title>foo</title>\n"
+        	+ "<script>\n"
+            + "  function test(encoding) {\n"
+            + "    var text=\"<?xml version='1.0' encoding='\" + encoding + \"'?><body>\u00e6</body>\";\n"
+            + "    if (window.ActiveXObject) {\n"
+            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "      doc.async=false;\n"
+            + "      doc.loadXML(text);\n"
+            + "    } else {\n"
+            + "      var parser=new DOMParser();\n"
+            + "      var doc=parser.parseFromString(text,'text/xml');\n"
+            + "    }\n"
+            + "    var value = doc.documentElement.firstChild.nodeValue;\n"
+            + "    for (var i=0; i < value.length; i++ ) {\n"
+            + "      alert(value.charCodeAt(i));\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test(\"ISO-8859-1\");test(\"UTF8\");'>\n"
+            + "</body></html>";
+        
+        final WebClient client = getWebClientWithMockWebConnection();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(URL_FIRST, html, "text/html; charset=ISO-8859-1", "ISO-8859-1");
+
+        client.getPage(URL_FIRST);
+        
+        // javascript ignores the encoding defined in the xml, the xml is parsed as string
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1044", "1044"})
+    public void parseUtf8Encoding() throws Exception {
+        final String html = "<html>\n"
+            + "  <head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test(encoding) {\n"
+            + "    var text=\"<?xml version='1.0' encoding='\" + encoding + \"'?><body>\u0414</body>\";\n"
+            + "    if (window.ActiveXObject) {\n"
+            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "      doc.async=false;\n"
+            + "      doc.loadXML(text);\n"
+            + "    } else {\n"
+            + "      var parser=new DOMParser();\n"
+            + "      var doc=parser.parseFromString(text,'text/xml');\n"
+            + "    }\n"
+            + "    var value = doc.documentElement.firstChild.nodeValue;\n"
+            + "    for (var i=0; i < value.length; i++ ) {\n"
+            + "      alert(value.charCodeAt(i));\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script></head><body onload='test(\"UTF-8\");test(\"ISO-8859-1\");'>\n"
+            + "</body></html>";
+        
+        final WebClient client = getWebClientWithMockWebConnection();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(URL_FIRST, html, "text/html; charset=UTF-8", "UTF-8");
+
+        client.getPage(URL_FIRST);
+
+        // javascript ignores the encoding defined in the xml, the xml is parsed as string
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(FF = "exception", IE = "columns")
     public void xmlInsideHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -770,5 +850,4 @@ public class XMLDocumentTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
         loadPageWithAlerts2(html);
     }
-
 }
