@@ -22,6 +22,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -231,7 +232,7 @@ public class ActiveXObject extends SimpleScriptable {
         final JavaScriptConfiguration jsConfig =
             JavaScriptConfiguration.getInstance(BrowserVersion.INTERNET_EXPLORER_7);
 
-        for (String className = "Document"; className.trim().length() != 0;) {
+        for (String className = "Document"; StringUtils.isNotBlank(className);) {
             final ClassConfiguration classConfig = jsConfig.getClassConfiguration(className);
             for (final String function : classConfig.functionKeys()) {
                 addFunction(document, function);

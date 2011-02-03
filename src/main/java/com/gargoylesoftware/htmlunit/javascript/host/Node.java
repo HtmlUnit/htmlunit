@@ -425,7 +425,7 @@ public class Node extends SimpleScriptable {
                     for (final DomNode child : node.getChildren()) {
                         //IE: XmlPage ignores all empty text nodes
                         if (skipEmptyTextNode && child instanceof DomText
-                            && ((DomText) child).getNodeValue().trim().length() == 0) { //and 'xml:space' is 'default'
+                            && StringUtils.isBlank(((DomText) child).getNodeValue())) { //and 'xml:space' is 'default'
                             continue;
                         }
                         response.add(child);

@@ -29,6 +29,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
+import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -281,7 +282,7 @@ public class XSLTProcessor extends SimpleScriptable {
                 //IE: XmlPage ignores all empty text nodes (if 'xml:space' is 'default')
                 //Maybe this should be changed for 'xml:space' = preserve
                 //See XMLDocumentTest.testLoadXML_XMLSpaceAttribute()
-                if (((DomText) child).getData().trim().length() != 0) {
+                if (StringUtils.isNotBlank(((DomText) child).getData())) {
                     output.append(((DomText) child).getData());
                 }
             }
