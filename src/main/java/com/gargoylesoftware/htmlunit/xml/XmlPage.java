@@ -20,6 +20,7 @@ import java.util.HashMap;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
@@ -102,8 +103,7 @@ public class XmlPage extends SgmlPage {
         super(webResponse, enclosingWindow);
 
         try {
-            if (webResponse == null || webResponse.getContentAsString() == null
-                    || webResponse.getContentAsString().trim().length() == 0) {
+            if (webResponse == null || StringUtils.isBlank(webResponse.getContentAsString())) {
                 node_ = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument().getDocumentElement();
             }
             else {
