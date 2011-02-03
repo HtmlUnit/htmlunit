@@ -175,7 +175,8 @@ public class CookieManagerTest extends WebDriverTestCase {
         webDriver.findElement(By.linkText("next page")).click();
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
-        assertEquals("exampleCookie=currentPath; exampleCookie=rootPath", lastRequest.getAdditionalHeaders().get("Cookie"));
+        assertEquals("exampleCookie=currentPath; exampleCookie=rootPath",
+            lastRequest.getAdditionalHeaders().get("Cookie"));
     }
 
     /**
