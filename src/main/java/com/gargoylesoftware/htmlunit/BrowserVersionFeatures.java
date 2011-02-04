@@ -133,9 +133,6 @@ public enum BrowserVersionFeatures {
     GENERATED_109,
 
     /** Was originally .isIE(). */
-    GENERATED_11,
-
-    /** Was originally .isIE(). */
     GENERATED_110,
 
     /** Was originally .isIE(). */
@@ -618,7 +615,10 @@ public enum BrowserVersionFeatures {
     /** */
     HTMLINPUT_DEFAULT_IS_CHECKED,
 
-    /** */
+    /**
+     * Set this property if the browser does NOT
+     * support the disabling of an individual option group.
+     */
     HTMLOPTIONGROUP_NO_DISABLED,
 
     /** */
@@ -710,6 +710,12 @@ public enum BrowserVersionFeatures {
     /** Indicates .querySelectorAll() is not supported in quirks mode. */
     QUERYSELECTORALL_NOT_IN_QUIRKS,
 
+    /**
+     * Indicates that all options of a select are deselected,
+     * if the select state is changed for an unknown option.
+     */
+    SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN,
+    
     /** Indicates that a read only JS property can be... set as done by IE and FF2 but not FF3. */
     SET_READONLY_PROPERTIES,
 

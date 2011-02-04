@@ -259,7 +259,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             return (P) setSelectedAttribute(getOptionByValue(optionValue), isSelected);
         }
         catch (final ElementNotFoundException e) {
-            if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_11)) {
+            if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN)) {
                 for (final HtmlOption o : getSelectedOptions()) {
                     o.setSelected(false);
                 }
