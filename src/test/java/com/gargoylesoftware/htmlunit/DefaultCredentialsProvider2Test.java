@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -53,6 +55,36 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    public void basicAuthenticationWrongUserName() throws Exception {
+        getMockWebConnection().setResponse(URL_SECOND, "Hello World");
+
+        // wrong user name
+        getWebClient().getCredentialsProvider().clear();
+        ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("joe", "jetty");
+
+        final WebDriver driver = loadPage2("Hi There");
+        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void basicAuthenticationWrongPassword() throws Exception {
+        getMockWebConnection().setResponse(URL_SECOND, "Hello World");
+
+        // wrong user name
+        getWebClient().getCredentialsProvider().clear();
+        ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "secret");
+
+        final WebDriver driver = loadPage2("Hi There");
+        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     public void basicAuthenticationTwice() throws Exception {
         getMockWebConnection().setResponse(URL_SECOND, "Hello World");
         final WebDriver driver = loadPage2("Hi There");
@@ -80,5 +112,53 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("Hello World");
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void basicAuthenticationXHRWithUsername() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var handler = function() {\n"
+            + "  if (xhr.readyState == 4)\n"
+            + "    alert(xhr.responseText);\n"
+            + "}\n"
+            + "xhr.onreadystatechange = handler;\n"
+            + "xhr.open('GET', '" + URL_SECOND + "', true, 'joe');\n"
+            + "xhr.send('');\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setDefaultResponse("Hello World");
+        final WebDriver driver = loadPage2(html);
+        List<String> actualAlerts = readAlerts(1000, 1, driver);
+
+        assertEquals(1, actualAlerts.size());
+        assertTrue(actualAlerts.get(0).contains("HTTP ERROR 401"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void basicAuthenticationXHRWithUser() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "var xhr = " + XHRInstantiation_ + ";\n"
+            + "var handler = function() {\n"
+            + "  if (xhr.readyState == 4)\n"
+            + "    alert(xhr.responseText);\n"
+            + "}\n"
+            + "xhr.onreadystatechange = handler;\n"
+            + "xhr.open('GET', '" + URL_SECOND + "', true, 'joe', 'secret');\n"
+            + "xhr.send('');\n"
+            + "</script></head><body></body></html>";
+
+        getMockWebConnection().setDefaultResponse("Hello World");
+        final WebDriver driver = loadPage2(html);
+        List<String> actualAlerts = readAlerts(1000, 1, driver);
+
+        assertEquals(1, actualAlerts.size());
+        assertTrue(actualAlerts.get(0).contains("HTTP ERROR 401"));
     }
 }

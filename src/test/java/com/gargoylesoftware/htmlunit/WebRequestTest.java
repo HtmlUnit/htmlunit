@@ -118,4 +118,43 @@ public class WebRequestTest {
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
         assertEquals("secret", credentials.getPassword());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void credentialsOnlyUsernameInURL() throws Exception {
+        final URL url = new URL("http://john.smith@localhost/");
+        final WebRequest request = new WebRequest(url);
+        final Credentials credentials =
+            request.getCredentialsProvider().getCredentials(AuthScope.ANY);
+        assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
+        assertEquals("", credentials.getPassword());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void credentialsOnlyPasswordInURL() throws Exception {
+        final URL url = new URL("http://:secret@localhost/");
+        final WebRequest request = new WebRequest(url);
+        final Credentials credentials =
+            request.getCredentialsProvider().getCredentials(AuthScope.ANY);
+        assertEquals(new BasicUserPrincipal(""), credentials.getUserPrincipal());
+        assertEquals("secret", credentials.getPassword());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void credentialsEmptyURL() throws Exception {
+        final URL url = new URL("http://:@localhost/");
+        final WebRequest request = new WebRequest(url);
+        final Credentials credentials =
+            request.getCredentialsProvider().getCredentials(AuthScope.ANY);
+        assertEquals(new BasicUserPrincipal(""), credentials.getUserPrincipal());
+        assertEquals("", credentials.getPassword());
+    }
 }

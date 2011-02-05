@@ -295,19 +295,24 @@ public class HttpWebConnection implements WebConnection {
         writeRequestHeadersToHttpMethod(httpMethod, webRequest.getAdditionalHeaders());
 //        getHttpClient().getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
 
+        final AbstractHttpClient httpClient = getHttpClient();
+        
+        // usually the CredentialProvider is defined by the WebClient.
+        // this initialization is done as part of the getHttpClient() method call
+        // but if the used url contains credentials, then we have t overwrite this
         if (webRequest.getCredentialsProvider() != null) {
-            getHttpClient().setCredentialsProvider(webRequest.getCredentialsProvider());
+            httpClient.setCredentialsProvider(webRequest.getCredentialsProvider());
         }
 
         if (webClient_.getCookieManager().isCookiesEnabled()) {
             // Cookies are enabled. Note that it's important that we enable single cookie headers,
             // for compatibility purposes.
-            getHttpClient().getParams().setParameter(CookieSpecPNames.SINGLE_COOKIE_HEADER, true);
-            getHttpClient().getParams().setParameter(ClientPNames.COOKIE_POLICY, HACKED_COOKIE_POLICY);
+            httpClient.getParams().setParameter(CookieSpecPNames.SINGLE_COOKIE_HEADER, true);
+            httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY, HACKED_COOKIE_POLICY);
         }
         else {
             // Cookies are disabled.
-            getHttpClient().setCookieStore(new CookieStore() {
+            httpClient.setCookieStore(new CookieStore() {
                 public void addCookie(final Cookie cookie) { }
                 public void clear() { }
                 public boolean clearExpired(final Date date) {

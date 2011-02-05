@@ -6,6 +6,16 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: user and password parameters for the
+                XMLHttpRequest.open method are optional; the check
+                of there existence is fixed. Only if a user is set,
+                a CredentialProvider is associated with the request
+                (witch overwrites the one from the WebClient). 
+            </action>
+            <action type="fix" dev="rbri" issue="3165357">
+                NPE if URL contains basic auth info without password.
+            </action>
             <action type="fix" dev="rbri" issue="3166477">
                 JavaScript: Use the right encoding for the implementation
                 of the loadXML and parseFromString methods.
@@ -22,7 +32,7 @@
                 in Firefox mode.
             </action>
             <action type="fix" dev="rbri" issue="3159858">
-                Improved syncronization and sleep() replaced by wait()
+                Improved synchronization and sleep() replaced by wait()
                 in JavaScriptJobManagerImpl.
             </action>
             <action type="update" dev="rbri">

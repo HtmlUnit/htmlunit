@@ -28,6 +28,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
@@ -389,7 +390,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param password If authentication is needed for the specified URL, the password to use to authenticate
      */
     public void jsxFunction_open(final String method, final Object urlParam, final boolean async,
-        final String user, final String password) {
+        final Object user, final Object password) {
         if (urlParam == null || "".equals(urlParam)) {
             throw Context.reportRuntimeError("URL for XHR.open can't be empty!");
         }
@@ -398,6 +399,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
         // (URL + Method + User + Password) become a WebRequest instance.
         containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final URL originUrl = containingPage_.getWebResponse().getWebRequest().getUrl();
@@ -411,9 +413,17 @@ public class XMLHttpRequest extends SimpleScriptable {
                     .toExternalForm());
             final HttpMethod submitMethod = HttpMethod.valueOf(method.toUpperCase());
             request.setHttpMethod(submitMethod);
-            if (user != null) {
+            if (Undefined.instance != user || Undefined.instance != password) {
+                String userCred = "";
+                String passwordCred = "";
+                if (Undefined.instance != user) {
+                    userCred = user.toString();
+                }
+                if (Undefined.instance != password) {
+                    passwordCred = user.toString();
+                }
                 final DefaultCredentialsProvider dcp = new DefaultCredentialsProvider();
-                dcp.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(user, password));
+                dcp.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(userCred, passwordCred));
                 request.setCredentialsProvider(dcp);
             }
             webRequest_ = request;

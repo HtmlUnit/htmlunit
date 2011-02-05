@@ -116,16 +116,25 @@ public class WebRequest implements Serializable {
                 url = buildUrlWithNewFile(url, removeDots(path) + query);
             }
             url_ = url.toExternalForm();
-            if (url.getUserInfo() != null) {
+
+            // http://john.smith:secret@localhost
+            final String userInfo = url.getUserInfo(); 
+            if (userInfo != null) {
                 if (getCredentialsProvider() == null) {
                     setCredentialsProvider(new DefaultCredentialsProvider());
                 }
                 if (getCredentialsProvider() instanceof DefaultCredentialsProvider) {
-                    final String userInfo = url.getUserInfo();
-                    final String username = userInfo.substring(0, userInfo.indexOf(':'));
-                    final String password = userInfo.substring(userInfo.indexOf(':') + 1);
-                    ((DefaultCredentialsProvider) getCredentialsProvider()).setCredentials(
-                            AuthScope.ANY, new UsernamePasswordCredentials(username, password));
+                    int splitPos = userInfo.indexOf(':');
+                    if (splitPos == -1) {
+                        ((DefaultCredentialsProvider) getCredentialsProvider()).setCredentials(
+                                AuthScope.ANY, new UsernamePasswordCredentials(userInfo, ""));
+                    } else {
+                        final String username = userInfo.substring(0, splitPos);
+                        final String password = userInfo.substring(splitPos + 1);
+
+                        ((DefaultCredentialsProvider) getCredentialsProvider()).setCredentials(
+                                AuthScope.ANY, new UsernamePasswordCredentials(username, password));
+                    }
                 }
                 else {
                     LOG.warn("URL userInfo is defined for a WebRequest "
