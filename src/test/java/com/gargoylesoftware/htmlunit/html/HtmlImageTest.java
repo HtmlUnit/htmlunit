@@ -127,4 +127,36 @@ public class HtmlImageTest extends WebTestCase {
         final HtmlImage img = page.getHtmlElementById("myImg");
         img.click(0, 0);
     }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml() throws Exception {
+        final String content
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<img id='img1' src='foo.png'>"
+            + "<img id='img2' name='testName' src='foo.png' alt='young'>"
+            + "<img id='img3' src='foo.png' width='11' height='17px' >"
+            + "<img id='img4' src='foo.png' width='11em' height='17%' >"
+            + "</body></html>";
+        final HtmlPage page = loadPage(content);
+
+        HtmlImage img = page.getHtmlElementById("img1");
+        String expected = "<img id=\"img1\" src=\"foo.png\"/>";
+        assertEquals(expected, img.asXml().trim());
+
+        img = page.getHtmlElementById("img2");
+        expected = "<img id=\"img2\" name=\"testName\" src=\"foo.png\" alt=\"young\"/>";
+        assertEquals(expected, img.asXml().trim());
+
+        img = page.getHtmlElementById("img3");
+        expected = "<img id=\"img3\" src=\"foo.png\" width=\"11\" height=\"17px\"/>";
+        assertEquals(expected, img.asXml().trim());
+
+        img = page.getHtmlElementById("img4");
+        expected = "<img id=\"img4\" src=\"foo.png\" width=\"11em\" height=\"17%\"/>";
+        assertEquals(expected, img.asXml().trim());
+    }
 }
