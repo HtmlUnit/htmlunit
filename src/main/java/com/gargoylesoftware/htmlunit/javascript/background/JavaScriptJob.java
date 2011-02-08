@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
+import java.io.Serializable;
+
 /**
  * A JavaScript-triggered background job managed by a {@link JavaScriptJobManager}.
  *
@@ -21,7 +23,7 @@ package com.gargoylesoftware.htmlunit.javascript.background;
  * @author Daniel Gredler
  * @author Amit Manjhi
  */
-public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJob> {
+public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJob>, Serializable {
 
     /** The job ID. */
     private Integer id_;

@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.ref.WeakReference;
 
 import org.apache.commons.logging.Log;
@@ -38,7 +41,7 @@ public abstract class JavaScriptExecutionJob extends JavaScriptJob {
     private final String label_;
 
     /** The window to which this job belongs (weakly referenced, so as not to leak memory). */
-    private final WeakReference<WebWindow> window_;
+    private transient WeakReference<WebWindow> window_;
 
     /**
      * Creates a new JavaScript execution job, where the JavaScript code to execute is a string.
@@ -102,4 +105,39 @@ public abstract class JavaScriptExecutionJob extends JavaScriptJob {
      */
     protected abstract void runJavaScript(final HtmlPage page);
 
+    /**
+     * Our own serialization (to handle the weak reference)
+     * 
+     * @param out the stream to write to
+     * @throws IOException in case of error
+     */
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        
+        final WebWindow w = window_.get();
+        if (w != null) {
+            out.writeBoolean(true);
+            out.writeObject(w);
+        } else {
+            out.writeBoolean(false);
+        }
+    }
+    
+
+    /**
+     * Our own serialization (to handle the weak reference)
+     * 
+     * @param in the stream to read form
+     * @throws IOException in case of error
+     * @throws ClassNotFoundException in case of error
+     */
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        final boolean hasWindow = in.readBoolean();
+        
+        if (hasWindow) {
+            final WebWindow window = (WebWindow) in.readObject();
+            window_ = new WeakReference<WebWindow>(window);
+        }
+    }
 }

@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3103703">
+                Serialization support fixed for JavaScriptJob and
+                JavaScriptExecutionJob. 
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: user and password parameters for the
                 XMLHttpRequest.open method are optional; the check

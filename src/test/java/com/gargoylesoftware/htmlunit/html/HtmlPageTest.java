@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,6 +50,8 @@ import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -63,8 +66,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeListenerTestImpl;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -1321,13 +1322,30 @@ public class HtmlPageTest extends WebServerTestCase {
         final String content =
               "<html><body>\n"
             + "<div id='myId'>Hello there!</div>\n"
-            + "<script>var x = document.all;</script>\n"
+            + "<script>"
+            + "  var x = document.all;"
+            + "  window.onload=function(){alert('foo')};"
+
+            // this tests 3103703
+            + "  var aktiv = window.setInterval('foo()', 1000);\n"
+            + "  var i = 0;\n"
+            + "  function foo() {\n"
+            + "    i = i + 1;\n"
+            + "    if (i >= 10)\n"
+            + "      window.clearInterval(aktiv);\n"
+            + "  }"
+            + "</script>\n"  
+            
             + "<form name='f' id='f'></form>\n"
             + "<script>var y = document.getElementById('f').elements;</script>\n"
             + "</body></html>";
 
-        final HtmlPage page1 = loadPage(content);
+        // waiting for the alerts creates some more js objects associatied with the page
+        // this tests 3103703
+        final List<String> expectedAlerts = new LinkedList<String>();
+        expectedAlerts.add("foo");
 
+        final HtmlPage page1 = loadPage(content, expectedAlerts);
         final ByteArrayOutputStream byteOS = new ByteArrayOutputStream();
         final ObjectOutputStream objectOS = new ObjectOutputStream(byteOS);
         objectOS.writeObject(page1);
