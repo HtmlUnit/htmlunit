@@ -7,15 +7,15 @@
     <body>
         <release version="2.9" date="???" description="Bugfixes">
             <action type="fix" dev="rbri" issue="3103703">
-                Serialization support fixed for JavaScriptJob and
-                JavaScriptExecutionJob. 
+                Serialization support fixed for Pages with unfinished
+                JavaScriptJob's. These jobs are NOT serialized.
             </action>
             <action type="fix" dev="rbri">
                 JavaScript: user and password parameters for the
                 XMLHttpRequest.open method are optional; the check
                 of there existence is fixed. Only if a user is set,
                 a CredentialProvider is associated with the request
-                (witch overwrites the one from the WebClient). 
+                (witch overwrites the one from the WebClient).
             </action>
             <action type="fix" dev="rbri" issue="3165357">
                 NPE if URL contains basic auth info without password.
