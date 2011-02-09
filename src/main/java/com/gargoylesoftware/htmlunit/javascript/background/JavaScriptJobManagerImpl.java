@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -51,11 +54,11 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      * Queue of jobs that are scheduled to run. This is a priority queue, sorted
      * by closest target execution time.
      */
-    private final PriorityQueue<JavaScriptJob> scheduledJobsQ_ = new PriorityQueue<JavaScriptJob>();
+    private transient PriorityQueue<JavaScriptJob> scheduledJobsQ_ = new PriorityQueue<JavaScriptJob>();
 
-    private final ArrayList<Integer> cancelledJobs_ = new ArrayList<Integer>();
+    private transient ArrayList<Integer> cancelledJobs_ = new ArrayList<Integer>();
 
-    private JavaScriptJob currentlyRunningJob_ = null;
+    private transient JavaScriptJob currentlyRunningJob_ = null;
 
     /** A counter used to generate the IDs assigned to {@link JavaScriptJob}s. */
     private static final AtomicInteger NEXT_JOB_ID_ = new AtomicInteger(1);
@@ -323,5 +326,31 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             LOG.debug("Finished " + periodicJob + "job " + job);
         }
         return true;
+    }
+
+    /**
+     * Our own serialization (to handle the weak reference)
+     * 
+     * @param out the stream to write to
+     * @throws IOException in case of error
+     */
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+    }
+
+    /**
+     * Our own serialization (to handle the weak reference)
+     * 
+     * @param in the stream to read form
+     * @throws IOException in case of error
+     * @throws ClassNotFoundException in case of error
+     */
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        
+        // we do not store the jobs (at the moment)
+        scheduledJobsQ_ = new PriorityQueue<JavaScriptJob>();
+        cancelledJobs_ = new ArrayList<Integer>();
+        currentlyRunningJob_ = null;
     }
 }

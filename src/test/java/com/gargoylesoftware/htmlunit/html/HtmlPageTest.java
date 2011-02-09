@@ -44,6 +44,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.lang.SerializationUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -1327,6 +1328,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "  window.onload=function(){alert('foo')};"
 
             // this tests 3103703
+            // we don't store the jobs are pending at the moment of serialization
             + "  var aktiv = window.setInterval('foo()', 1000);\n"
             + "  var i = 0;\n"
             + "  function foo() {\n"
@@ -1340,19 +1342,15 @@ public class HtmlPageTest extends WebServerTestCase {
             + "<script>var y = document.getElementById('f').elements;</script>\n"
             + "</body></html>";
 
-        // waiting for the alerts creates some more js objects associatied with the page
+        // waiting for the alerts creates some more js objects associated with the page
         // this tests 3103703
         final List<String> expectedAlerts = new LinkedList<String>();
         expectedAlerts.add("foo");
 
         final HtmlPage page1 = loadPage(content, expectedAlerts);
-        final ByteArrayOutputStream byteOS = new ByteArrayOutputStream();
-        final ObjectOutputStream objectOS = new ObjectOutputStream(byteOS);
-        objectOS.writeObject(page1);
+        final byte[] bytes = SerializationUtils.serialize(page1);
 
-        final ByteArrayInputStream byteIS = new ByteArrayInputStream(byteOS.toByteArray());
-        final ObjectInputStream objectIS = new ObjectInputStream(byteIS);
-        final HtmlPage page2 = (HtmlPage) objectIS.readObject();
+        final HtmlPage page2 = (HtmlPage) SerializationUtils.deserialize(bytes);
 
         final Iterator<HtmlElement> iterator1 = page1.getHtmlElementDescendants().iterator();
         final Iterator<HtmlElement> iterator2 = page2.getHtmlElementDescendants().iterator();

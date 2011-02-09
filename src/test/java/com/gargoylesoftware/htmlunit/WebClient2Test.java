@@ -256,7 +256,7 @@ public class WebClient2Test extends WebServerTestCase {
             + "      clearInterval(intervalId);\n"
             + "    }\n"
             + "  }\n"
-            + "  var intervalId = setInterval(foo, 10);\n"
+            + "  var intervalId = setInterval('foo()', 10);\n"
             + "</script></head>\n"
             + "<body></body></html>";
         final HtmlPage page = loadPageWithAlerts(html);

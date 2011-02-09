@@ -23,7 +23,7 @@ import java.io.Serializable;
  * @author Daniel Gredler
  * @author Amit Manjhi
  */
-public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJob>, Serializable {
+public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJob> {
 
     /** The job ID. */
     private Integer id_;
