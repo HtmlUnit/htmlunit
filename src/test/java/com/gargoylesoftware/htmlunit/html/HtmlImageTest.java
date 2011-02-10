@@ -128,7 +128,6 @@ public class HtmlImageTest extends WebTestCase {
         img.click(0, 0);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
