@@ -150,7 +150,7 @@ public class XMLDocument extends Document {
     public boolean jsxFunction_loadXML(final String strXML) {
         try {
             final WebWindow webWindow = getWindow().getWebWindow();
-            
+
             // determine the charset of the page
             String charset = TextUtil.DEFAULT_CHARSET;
             final SgmlPage sgmlPage = (SgmlPage) webWindow.getEnclosedPage();
@@ -162,8 +162,9 @@ public class XMLDocument extends Document {
             }
 
             // build a dummy WebResponse
-            List<NameValuePair> headers = Collections.emptyList();
-            final WebResponseData data = new WebResponseData(TextUtil.stringToByteArray(strXML, charset), HttpStatus.SC_OK, null, headers);
+            final List<NameValuePair> headers = Collections.emptyList();
+            final byte[] bytes = TextUtil.stringToByteArray(strXML, charset);
+            final WebResponseData data = new WebResponseData(bytes, HttpStatus.SC_OK, null, headers);
             final URL hackUrl = new URL("http://-htmlunit-internal/XMLDocument.loadXML"); // hack! better solution?
             final WebResponse webResponse = new WebResponse(data, hackUrl, (HttpMethod) null, 0);
             webResponse.getWebRequest().setCharset(charset);

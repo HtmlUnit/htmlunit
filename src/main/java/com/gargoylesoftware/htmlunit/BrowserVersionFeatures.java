@@ -627,7 +627,7 @@ public enum BrowserVersionFeatures {
     /** */
     HTMLOPTION_PREVENT_DISABLED,
 
-    /** Un-selecting an option in a (single-value) select causes the first option to become selected */
+    /** Un-selecting an option in a (single-value) select causes the first option to become selected. */
     HTMLOPTION_UNSELECT_SELECTS_FIRST,
 
     /**
@@ -718,7 +718,7 @@ public enum BrowserVersionFeatures {
      * if the select state is changed for an unknown option.
      */
     SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN,
-    
+
     /** Indicates that a read only JS property can be... set as done by IE and FF2 but not FF3. */
     SET_READONLY_PROPERTIES,
 

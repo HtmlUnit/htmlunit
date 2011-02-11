@@ -532,11 +532,11 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"230", "230"})
+    @Alerts({ "230", "230" })
     public void parseIso88591Encoding() throws Exception {
         final String html = "<html>\n"
             + "  <head><title>foo</title>\n"
-        	+ "<script>\n"
+            + "<script>\n"
             + "  function test(encoding) {\n"
             + "    var text=\"<?xml version='1.0' encoding='\" + encoding + \"'?><body>\u00e6</body>\";\n"
             + "    if (window.ActiveXObject) {\n"
@@ -554,7 +554,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test(\"ISO-8859-1\");test(\"UTF8\");'>\n"
             + "</body></html>";
-        
+
         final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -563,7 +563,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
         webConnection.setResponse(URL_FIRST, html, "text/html; charset=ISO-8859-1", "ISO-8859-1");
 
         client.getPage(URL_FIRST);
-        
+
         // javascript ignores the encoding defined in the xml, the xml is parsed as string
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -572,7 +572,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"1044", "1044"})
+    @Alerts({ "1044", "1044" })
     public void parseUtf8Encoding() throws Exception {
         final String html = "<html>\n"
             + "  <head><title>foo</title>\n"
@@ -594,7 +594,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test(\"UTF-8\");test(\"ISO-8859-1\");'>\n"
             + "</body></html>";
-        
+
         final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

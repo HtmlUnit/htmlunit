@@ -118,17 +118,18 @@ public class WebRequest implements Serializable {
             url_ = url.toExternalForm();
 
             // http://john.smith:secret@localhost
-            final String userInfo = url.getUserInfo(); 
+            final String userInfo = url.getUserInfo();
             if (userInfo != null) {
                 if (getCredentialsProvider() == null) {
                     setCredentialsProvider(new DefaultCredentialsProvider());
                 }
                 if (getCredentialsProvider() instanceof DefaultCredentialsProvider) {
-                    int splitPos = userInfo.indexOf(':');
+                    final int splitPos = userInfo.indexOf(':');
                     if (splitPos == -1) {
                         ((DefaultCredentialsProvider) getCredentialsProvider()).setCredentials(
                                 AuthScope.ANY, new UsernamePasswordCredentials(userInfo, ""));
-                    } else {
+                    }
+                    else {
                         final String username = userInfo.substring(0, splitPos);
                         final String password = userInfo.substring(splitPos + 1);
 

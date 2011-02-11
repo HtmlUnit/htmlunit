@@ -296,7 +296,7 @@ public class HttpWebConnection implements WebConnection {
 //        getHttpClient().getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
 
         final AbstractHttpClient httpClient = getHttpClient();
-        
+
         // usually the CredentialProvider is defined by the WebClient.
         // this initialization is done as part of the getHttpClient() method call
         // but if the used url contains credentials, then we have t overwrite this

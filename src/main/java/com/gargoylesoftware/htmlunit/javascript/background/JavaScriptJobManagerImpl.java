@@ -330,24 +330,22 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /**
      * Our own serialization (to handle the weak reference)
-     * 
      * @param out the stream to write to
      * @throws IOException in case of error
      */
-    private void writeObject(ObjectOutputStream out) throws IOException {
+    private void writeObject(final ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
     }
 
     /**
      * Our own serialization (to handle the weak reference)
-     * 
      * @param in the stream to read form
      * @throws IOException in case of error
      * @throws ClassNotFoundException in case of error
      */
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-        
+
         // we do not store the jobs (at the moment)
         scheduledJobsQ_ = new PriorityQueue<JavaScriptJob>();
         cancelledJobs_ = new ArrayList<Integer>();

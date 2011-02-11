@@ -399,7 +399,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
         // (URL + Method + User + Password) become a WebRequest instance.
         containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
-        
+
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final URL originUrl = containingPage_.getWebResponse().getWebRequest().getUrl();

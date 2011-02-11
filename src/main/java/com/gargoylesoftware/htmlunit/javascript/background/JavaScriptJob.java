@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
-import java.io.Serializable;
 
 /**
  * A JavaScript-triggered background job managed by a {@link JavaScriptJobManager}.
