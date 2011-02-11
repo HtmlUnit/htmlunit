@@ -495,22 +495,16 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return driver;
     }
 
-    protected List<String> readAlerts(final long maxWaitTime, int expectedNoOfAlerts, final WebDriver driver)
+    private void verifyAlerts(final long maxWaitTime, final String[] expectedAlerts, final WebDriver driver)
         throws Exception {
         // gets the collected alerts, waiting a bit if necessary
         List<String> actualAlerts = getCollectedAlerts(driver);
         final long maxWait = System.currentTimeMillis() + maxWaitTime;
-        while (actualAlerts.size() < expectedNoOfAlerts && System.currentTimeMillis() < maxWait) {
+        while (actualAlerts.size() < expectedAlerts.length && System.currentTimeMillis() < maxWait) {
             Thread.sleep(30);
             actualAlerts = getCollectedAlerts(driver);
         }
-    
-        return actualAlerts;
-    }
 
-    private void verifyAlerts(final long maxWaitTime, final String[] expectedAlerts, final WebDriver driver)
-        throws Exception {
-        List<String> actualAlerts = readAlerts(maxWaitTime, expectedAlerts.length, driver);
         assertEquals(expectedAlerts, actualAlerts);
     }
 

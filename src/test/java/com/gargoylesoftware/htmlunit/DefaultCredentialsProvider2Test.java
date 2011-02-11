@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -118,47 +116,47 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("HTTP ERROR 401")
     public void basicAuthenticationXHRWithUsername() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"
             + "var handler = function() {\n"
-            + "  if (xhr.readyState == 4)\n"
-            + "    alert(xhr.responseText);\n"
+            + "  if (xhr.readyState == 4) {\n"
+            + "    var s = xhr.responseText.replace(/[\\r\\n]/g, '')"
+            + ".replace(/.*(HTTP ERROR \\d+).*/g, '$1');\n"
+            + "    alert(s);\n"
+            + "  }\n"
             + "}\n"
             + "xhr.onreadystatechange = handler;\n"
-            + "xhr.open('GET', '" + URL_SECOND + "', true, 'joe');\n"
+            + "xhr.open('GET', '/foo', true, 'joe');\n"
             + "xhr.send('');\n"
             + "</script></head><body></body></html>";
 
         getMockWebConnection().setDefaultResponse("Hello World");
-        final WebDriver driver = loadPage2(html);
-        List<String> actualAlerts = readAlerts(1000, 1, driver);
-
-        assertEquals(1, actualAlerts.size());
-        assertTrue(actualAlerts.get(0).contains("HTTP ERROR 401"));
+        loadPageWithAlerts2(html, 1000);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("HTTP ERROR 401")
     public void basicAuthenticationXHRWithUser() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"
             + "var handler = function() {\n"
-            + "  if (xhr.readyState == 4)\n"
-            + "    alert(xhr.responseText);\n"
+            + "  if (xhr.readyState == 4) {\n"
+            + "    var s = xhr.responseText.replace(/[\\r\\n]/g, '')"
+            + ".replace(/.*(HTTP ERROR \\d+).*/g, '$1');\n"
+            + "    alert(s);\n"
+            + "  }\n"
             + "}\n"
             + "xhr.onreadystatechange = handler;\n"
-            + "xhr.open('GET', '" + URL_SECOND + "', true, 'joe', 'secret');\n"
+            + "xhr.open('GET', '/foo', true, 'joe', 'secret');\n"
             + "xhr.send('');\n"
             + "</script></head><body></body></html>";
 
         getMockWebConnection().setDefaultResponse("Hello World");
-        final WebDriver driver = loadPage2(html);
-        List<String> actualAlerts = readAlerts(1000, 1, driver);
-
-        assertEquals(1, actualAlerts.size());
-        assertTrue(actualAlerts.get(0).contains("HTTP ERROR 401"));
+        loadPageWithAlerts2(html, 1000);
     }
 }
