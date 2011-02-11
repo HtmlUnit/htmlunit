@@ -139,7 +139,7 @@ public class HTMLOptionElement extends FormChild {
                 && enclosingSelect != null & !enclosingSelect.isMultipleSelectEnabled()) {
 
             // un-selecting selected option has no effect in IE and selects first option in FF
-            if (getBrowserVersion().isFirefox()) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLOPTION_UNSELECT_SELECTS_FIRST)) {
                 enclosingSelect.getOption(0).setSelected(true);
             }
         }
