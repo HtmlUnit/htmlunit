@@ -1332,8 +1332,7 @@ public class HtmlPageTest extends WebServerTestCase {
             + "    if (i >= 10)\n"
             + "      window.clearInterval(aktiv);\n"
             + "  }"
-            + "</script>\n"  
-            
+            + "</script>\n"
             + "<form name='f' id='f'></form>\n"
             + "<script>var y = document.getElementById('f').elements;</script>\n"
             + "</body></html>";
