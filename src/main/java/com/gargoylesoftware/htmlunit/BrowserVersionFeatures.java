@@ -621,14 +621,14 @@ public enum BrowserVersionFeatures {
      */
     HTMLOPTIONGROUP_NO_DISABLED,
 
-    /** Un-selecting an option in a (single-value) select causes the first option to become selected */
-    HTMLOPTION_UNSELECT_SELECTS_FIRST,
-
     /** */
     HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN,
 
     /** */
     HTMLOPTION_PREVENT_DISABLED,
+
+    /** Un-selecting an option in a (single-value) select causes the first option to become selected */
+    HTMLOPTION_UNSELECT_SELECTS_FIRST,
 
     /**
      * Set this property if the script tag supports the
