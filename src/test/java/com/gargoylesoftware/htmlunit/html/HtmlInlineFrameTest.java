@@ -23,11 +23,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Unit tests for {@link HtmlInlineFrame}.
@@ -325,7 +325,8 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final HtmlPage page = webClient.getPage(URL_FIRST);
 
         final HtmlPage enclosedPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
-        final String content = enclosedPage.getHtmlElementById("myContent").asText();
+        final HtmlElement element = enclosedPage.getHtmlElementById("myContent");
+        final String content = element.asText();
         assertEquals("Hi Folks!", content);
     }
 
@@ -365,7 +366,8 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final HtmlPage page = webClient.getPage(URL_FIRST);
 
         final HtmlPage enclosedPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
-        final String content = enclosedPage.getHtmlElementById("myContent").asText();
+        final HtmlElement element = enclosedPage.getHtmlElementById("myContent");
+        final String content = element.asText();
         assertEquals("Hi Folks!", content);
     }
 }
