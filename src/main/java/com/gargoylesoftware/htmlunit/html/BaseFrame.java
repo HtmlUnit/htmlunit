@@ -115,11 +115,20 @@ public abstract class BaseFrame extends HtmlElement {
     }
 
     /**
+     * Changes the state of the contentLoaded_ attribute to true.
+     * This is needed, if the content is set from javascript to avoid
+     * later overwriting from method com.gargoylesoftware.htmlunit.html.HtmlPage.loadFrames().
+     */
+    public void setContentLoaded() {
+        contentLoaded_ = true;
+    }
+
+    /**
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      */
     private void loadInnerPageIfPossible(final String src) throws FailingHttpStatusCodeException {
-        contentLoaded_ = true;
+        setContentLoaded();
         if (src.length() != 0) {
             final URL url;
             try {

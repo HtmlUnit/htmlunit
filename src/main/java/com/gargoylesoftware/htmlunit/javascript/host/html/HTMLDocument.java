@@ -897,6 +897,15 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
             webClient.loadWebResponseInto(webResponse, window);
 
+            if (window instanceof FrameWindow) {
+                // we have updated a frame window; so we have to disable future
+                // updates during initialization
+                // see com.gargoylesoftware.htmlunit.html.HtmlPage.loadFrames()
+                final FrameWindow frameWindow = (FrameWindow) window;
+                final BaseFrame baseFrame = frameWindow.getFrameElement();
+                baseFrame.setContentLoaded();
+            }
+
             writeInCurrentDocument_ = true;
             writeBuffer_.setLength(0);
         }
