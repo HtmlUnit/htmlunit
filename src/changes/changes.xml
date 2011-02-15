@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3046109">
+                Initialization of iframes corrected, if content was
+                written from javascript.
+            </action>
             <action type="fix" dev="mguillem" issue="3181695" due-to="Nikolai Avteniev">
                 Remove expired cookies.
             </action>
