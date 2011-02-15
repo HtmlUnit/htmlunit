@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3181695" due-to="Nikolai Avteniev">
+                Remove expired cookies.
+            </action>
             <action type="fix" dev="rbri" issue="3103703">
                 Serialization support fixed for Pages with unfinished
                 JavaScriptJob's. These jobs are NOT serialized.

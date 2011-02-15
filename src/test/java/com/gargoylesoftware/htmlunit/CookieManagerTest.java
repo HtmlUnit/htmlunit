@@ -417,6 +417,28 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /**
+     * Regression test for bug 3181695 (introduced during 2.9-SNAPSHOT).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void removeExpiredCookies() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "key1=value1"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "key2=value2"));
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
+        setExpectedAlerts("key1=value1; key2=value2");
+        loadPageWithAlerts2(getDefaultUrl());
+
+        responseHeader.clear();
+        responseHeader.add(new NameValuePair("Set-Cookie", "key1=; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "key2=value2"));
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
+
+        setExpectedAlerts("key2=value2");
+        loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
      * Regression test for bug 3053526: HtmlUnit was throwing an Exception when asking for cookies
      * of "about:blank".
      * @throws Exception if the test fails

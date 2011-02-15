@@ -647,6 +647,9 @@
         <contributor>
             <name>Amit Khanna</name>
         </contributor>
+        <contributor>
+            <name>Nikolai Avteniev</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

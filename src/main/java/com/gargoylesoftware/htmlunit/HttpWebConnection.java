@@ -753,13 +753,13 @@ class HtmlUnitCookieStore implements CookieStore, Serializable {
             return;
         }
 
-        if (cookie.isExpired(new Date())) {
-            cookies_.remove(cookie);
-            return;
-        }
-
         final int index = findCookieIndex(cookie);
-        if (index == -1) {
+        if (cookie.isExpired(new Date())) {
+            if (index != -1) {
+                cookies_.remove(index);
+            }
+        }
+        else if (index == -1) {
             cookies_.add(cookie);
         }
         else {
