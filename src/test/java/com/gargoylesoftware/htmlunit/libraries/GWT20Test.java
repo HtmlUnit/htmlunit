@@ -58,7 +58,7 @@ public class GWT20Test extends WebServerTestCase {
     @Test
     public void hello() throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadGWTPage("Hello", collectedAlerts);
+        final HtmlPage page = loadGWTPage("Hello", collectedAlerts, "//button");
         final HtmlButton button = page.getFirstByXPath("//button");
         final DomText buttonLabel = (DomText) button.getChildren().iterator().next();
         assertEquals("Click me", buttonLabel.getData());
@@ -114,7 +114,7 @@ public class GWT20Test extends WebServerTestCase {
      */
     @Test
     public void mail() throws Exception {
-        final HtmlPage page = loadGWTPage("Mail", null);
+        final HtmlPage page = loadGWTPage("Mail", null, "//div[@class='MBB']");
         Assert.assertSame(page.getEnclosingWindow(), page.getWebClient().getCurrentWindow());
         final HtmlDivision cell = page.getFirstByXPath("//div[@class='MBB']");
         assertElementValue(cell, "Welcome back, foo@example.com");
@@ -153,7 +153,7 @@ public class GWT20Test extends WebServerTestCase {
      */
     @Test
     public void json() throws Exception {
-        final HtmlPage page = loadGWTPage("JSON", null);
+        final HtmlPage page = loadGWTPage("JSON", null, "//button");
         final HtmlButton button = page.getFirstByXPath("//button");
         button.click();
 
@@ -202,10 +202,13 @@ public class GWT20Test extends WebServerTestCase {
      *
      * @param testName the test name
      * @param collectedAlerts the List to collect alerts into
+     * @param elementXPath the XPath for an element that is dynamically added to the page.
+     * if not null than this method waits until this element is there (but max. 30s)
      * @throws Exception if an error occurs
      * @return the loaded page
      */
-    protected HtmlPage loadGWTPage(final String testName, final List<String> collectedAlerts) throws Exception {
+    protected HtmlPage loadGWTPage(final String testName, final List<String> collectedAlerts,
+            final String elementXPath) throws Exception {
         final String resource = "libraries/GWT/" + getDirectory() + "/" + testName + "/" + testName + ".html";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
@@ -216,7 +219,17 @@ public class GWT20Test extends WebServerTestCase {
         }
 
         final HtmlPage page = client.getPage(url);
-        client.waitForBackgroundJavaScriptStartingBefore(2000);
+
+        // wait because the integration build machine is sometimes busy
+        if (null == elementXPath) {
+            client.waitForBackgroundJavaScriptStartingBefore(2000);
+        }
+        else {
+            final long endTime = System.currentTimeMillis() + 30000L;
+            while (null == page.getFirstByXPath(elementXPath) && System.currentTimeMillis() < endTime) {
+                client.waitForBackgroundJavaScriptStartingBefore(1000);
+            }
+        }
         return page;
     }
 
@@ -226,7 +239,7 @@ public class GWT20Test extends WebServerTestCase {
     @Test
     public void showcase() throws Exception {
         final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadGWTPage("Showcase", collectedAlerts);
+        final HtmlPage page = loadGWTPage("Showcase", collectedAlerts, "id('gwt-debug-cwCheckBox-Monday-label')");
         assertEquals("Monday",
             page.<HtmlElement>getHtmlElementById("gwt-debug-cwCheckBox-Monday-label").getFirstChild().getNodeValue());
         assertEquals("Tuesday",
