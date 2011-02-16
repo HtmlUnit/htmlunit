@@ -14,7 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowImpl;
 
@@ -24,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebWindowImpl;
  * @version $Revision$
  * @author Brad Clarke
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class FrameWindow extends WebWindowImpl {
 
@@ -89,6 +92,25 @@ public class FrameWindow extends WebWindowImpl {
      */
     public HtmlPage getEnclosingPage() {
         return (HtmlPage) frame_.getPage();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setEnclosedPage(final Page page) {
+        super.setEnclosedPage(page);
+
+        // we have updated a frame window by javascript write();
+        // so we have to disable future updates during initialization
+        // see com.gargoylesoftware.htmlunit.html.HtmlPage.loadFrames()
+        final WebResponse webResponse = page.getWebResponse();
+        if (webResponse instanceof StringWebResponse) {
+            final StringWebResponse response = (StringWebResponse) webResponse;
+            if (response.isFromJavascript()) {
+                final BaseFrame frame = getFrameElement();
+                frame.setContentLoaded();
+            }
+        }
     }
 
     /**

@@ -250,7 +250,7 @@ public class WebClient implements Serializable {
      * {@link TextPage} for other text content and {@link UnexpectedPage} for anything else.
      *
      * @param webWindow the WebWindow to load the result of the request into
-     * @param parameters Parameter object for the web request
+     * @param webRequest the web request
      * @param <P> the page type
      * @return the page returned by the server when the specified request was made in the specified window
      * @throws IOException if an IO error occurs
@@ -260,14 +260,14 @@ public class WebClient implements Serializable {
      * @see WebRequest
      */
     @SuppressWarnings("unchecked")
-    public <P extends Page> P getPage(final WebWindow webWindow, final WebRequest parameters)
+    public <P extends Page> P getPage(final WebWindow webWindow, final WebRequest webRequest)
         throws IOException, FailingHttpStatusCodeException {
 
         final Page page = webWindow.getEnclosedPage();
 
         if (page != null) {
             final URL prev = page.getWebResponse().getWebRequest().getUrl();
-            final URL current = parameters.getUrl();
+            final URL current = webRequest.getUrl();
             if (current.sameFile(prev) && current.getRef() != null
                 && !StringUtils.equals(current.getRef(), prev.getRef())) {
                 // We're just navigating to an anchor within the current page.
@@ -288,20 +288,20 @@ public class WebClient implements Serializable {
         }
 
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Get page for window named '" + webWindow.getName() + "', using " + parameters);
+            LOG.debug("Get page for window named '" + webWindow.getName() + "', using " + webRequest);
         }
 
         final WebResponse webResponse;
-        final String protocol = parameters.getUrl().getProtocol();
+        final String protocol = webRequest.getUrl().getProtocol();
         if ("javascript".equals(protocol)) {
-            webResponse = makeWebResponseForJavaScriptUrl(webWindow, parameters.getUrl(), parameters.getCharset());
+            webResponse = makeWebResponseForJavaScriptUrl(webWindow, webRequest.getUrl(), webRequest.getCharset());
             if (webWindow.getEnclosedPage() != null && webWindow.getEnclosedPage().getWebResponse() == webResponse) {
                 // a javascript:... url with result of type undefined didn't changed the page
                 return (P) webWindow.getEnclosedPage();
             }
         }
         else {
-            webResponse = loadWebResponse(parameters);
+            webResponse = loadWebResponse(webRequest);
         }
 
         printContentIfNecessary(webResponse);
@@ -1309,7 +1309,9 @@ public class WebClient implements Serializable {
         }
 
         final String contentString = r.getJavaScriptResult().toString();
-        return new StringWebResponse(contentString, charset, url);
+        final StringWebResponse response = new StringWebResponse(contentString, charset, url);
+        response.setFromJavascript(true);
+        return response;
     }
 
     /**

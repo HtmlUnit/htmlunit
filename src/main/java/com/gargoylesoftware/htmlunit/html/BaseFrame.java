@@ -119,7 +119,7 @@ public abstract class BaseFrame extends HtmlElement {
      * This is needed, if the content is set from javascript to avoid
      * later overwriting from method com.gargoylesoftware.htmlunit.html.HtmlPage.loadFrames().
      */
-    public void setContentLoaded() {
+    protected void setContentLoaded() {
         contentLoaded_ = true;
     }
 

@@ -891,20 +891,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         else {
             final HtmlPage page = getHtmlPage();
             final URL url = page.getWebResponse().getWebRequest().getUrl();
-            final WebResponse webResponse = new StringWebResponse(writeBuffer_.toString(), url);
+            final StringWebResponse webResponse = new StringWebResponse(writeBuffer_.toString(), url);
+            webResponse.setFromJavascript(true);
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
 
             webClient.loadWebResponseInto(webResponse, window);
-
-            if (window instanceof FrameWindow) {
-                // we have updated a frame window; so we have to disable future
-                // updates during initialization
-                // see com.gargoylesoftware.htmlunit.html.HtmlPage.loadFrames()
-                final FrameWindow frameWindow = (FrameWindow) window;
-                final BaseFrame baseFrame = frameWindow.getFrameElement();
-                baseFrame.setContentLoaded();
-            }
 
             writeInCurrentDocument_ = true;
             writeBuffer_.setLength(0);

@@ -31,8 +31,11 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Brad Clarke
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class StringWebResponse extends WebResponse {
+
+    private boolean fromJavascript_;
 
     /**
      * Helper method for constructors. Converts the specified string into {@link WebResponseData}
@@ -76,5 +79,23 @@ public class StringWebResponse extends WebResponse {
         final WebRequest webRequest = new WebRequest(originatingURL, HttpMethod.GET);
         webRequest.setCharset(charset);
         return webRequest;
+    }
+
+    /**
+     * Returns the fromJavascript property. This is true, if the response was created
+     * from javascript (usually document.write).
+     * @return the from fromJavascript_
+     */
+    public boolean isFromJavascript() {
+        return fromJavascript_;
+    }
+
+    /**
+     * Sets the fromJavascript_ property. Set this to true, if the response was created
+     * from javascript (usually document.write).
+     * @param fromJavascript the new fromJavascript
+     */
+    public void setFromJavascript(final boolean fromJavascript) {
+        fromJavascript_ = fromJavascript;
     }
 }
