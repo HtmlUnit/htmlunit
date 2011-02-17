@@ -17,23 +17,19 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpStatus;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCDataSection;
@@ -46,7 +42,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
-import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -56,6 +51,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 public class XMLDocument extends Document {
 
@@ -151,23 +147,9 @@ public class XMLDocument extends Document {
         try {
             final WebWindow webWindow = getWindow().getWebWindow();
 
-            // determine the charset of the page
-            String charset = TextUtil.DEFAULT_CHARSET;
-            final SgmlPage sgmlPage = (SgmlPage) webWindow.getEnclosedPage();
-            if (sgmlPage != null) {
-                final String contentCharset = sgmlPage.getWebResponse().getContentCharset();
-                if (contentCharset != null) {
-                    charset = contentCharset;
-                }
-            }
-
             // build a dummy WebResponse
-            final List<NameValuePair> headers = Collections.emptyList();
-            final byte[] bytes = TextUtil.stringToByteArray(strXML, charset);
-            final WebResponseData data = new WebResponseData(bytes, HttpStatus.SC_OK, null, headers);
             final URL hackUrl = new URL("http://-htmlunit-internal/XMLDocument.loadXML"); // hack! better solution?
-            final WebResponse webResponse = new WebResponse(data, hackUrl, (HttpMethod) null, 0);
-            webResponse.getWebRequest().setCharset(charset);
+            final WebResponse webResponse = new StringWebResponse(strXML, hackUrl);
 
             final XmlPage page = new XmlPage(webResponse, webWindow);
             setDomNode(page);
