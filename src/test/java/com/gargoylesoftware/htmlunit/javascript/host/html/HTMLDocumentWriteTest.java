@@ -525,6 +525,48 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void writeUnicode() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "document.open();\n"
+            + "document.write('Hello worl\u0414');\n"
+            + "document.close();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebClient client = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(URL_FIRST, html, "text/html; charset=UTF-8", "UTF-8");
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+
+        assertTrue(page.asText().contains("Hello worl\u0414"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void writeISO_8859_1() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "document.open();\n"
+            + "document.write('äöüßÄöü');\n"
+            + "document.close();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebClient client = getWebClientWithMockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(URL_FIRST, html, "text/html; charset=ISO-8859-1", "ISO-8859-1");
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+
+        assertTrue(page.asText().contains("äöüßÄöü"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void writeWithSplitAnchorTag() throws Exception {
         final String html = "<html><body><script>\n"
             + "document.write(\"<a href=\'start.html\");\n"
