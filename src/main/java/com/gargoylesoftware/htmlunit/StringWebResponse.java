@@ -62,7 +62,8 @@ public class StringWebResponse extends WebResponse {
      * @param originatingURL the URL that this should be associated with
      */
     public StringWebResponse(final String content, final URL originatingURL) {
-        super(getWebResponseData(content, TextUtil.DEFAULT_CHARSET), originatingURL, HttpMethod.GET, 0);
+        // use UTF-8 here to be sure, all chars in the string are part of the charset
+        this(content, "UTF-8", originatingURL);
     }
 
     /**
