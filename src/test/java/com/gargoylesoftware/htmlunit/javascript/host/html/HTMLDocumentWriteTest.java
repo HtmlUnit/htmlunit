@@ -549,7 +549,7 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
     public void writeISO_8859_1() throws Exception {
         final String html = "<html><body><script>\n"
             + "document.open();\n"
-            + "document.write('äöüßÄöü');\n"
+            + "document.write('\u00e4\u00f6\u00fc\u00c4\u00d6\u00dc');\n"
             + "document.close();\n"
             + "</script>\n"
             + "</body></html>";
@@ -560,7 +560,7 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
 
-        assertTrue(page.asText().contains("äöüßÄöü"));
+        assertEquals("\u00e4\u00f6\u00fc\u00c4\u00d6\u00dc", page.asText());
     }
 
     /**
