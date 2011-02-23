@@ -390,6 +390,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             else {
                 final String newContent = getModifiedContent(resp.getContentAsString());
+                final String contentCharset = resp.getContentCharset();
+                response.setCharacterEncoding(contentCharset);
                 response.getWriter().print(newContent);
             }
             response.flushBuffer();
@@ -434,8 +436,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPage2(final String html, final URL url) throws Exception {
+        return loadPage2(html, url, "text/html", TextUtil.DEFAULT_CHARSET);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * @param html the HTML to use
+     * @param url the url to use to load the page
+     * @param contentType the content type to return
+     * @param charset the name of a supported charset
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPage2(final String html, final URL url,
+            final String contentType, final String charset) throws Exception {
         final MockWebConnection mockWebConnection = getMockWebConnection();
-        mockWebConnection.setResponse(url, html);
+        mockWebConnection.setResponse(url, html, contentType, charset);
         startWebServer(mockWebConnection);
 
         final WebDriver driver = getWebDriver();
