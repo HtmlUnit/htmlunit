@@ -528,18 +528,14 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
     public void writeUnicode() throws Exception {
         final String html = "<html><body><script>\n"
             + "document.open();\n"
-            + "document.write('Hello worl\u0414');\n"
+            + "document.write('<div id=\"assert\">Hello worl\u0414</div>');\n"
             + "document.close();\n"
             + "</script>\n"
             + "</body></html>";
 
-        final WebClient client = getWebClientWithMockWebConnection();
-        final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setResponse(URL_FIRST, html, "text/html; charset=UTF-8", "UTF-8");
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-
-        assertTrue(page.asText().contains("Hello worl\u0414"));
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html; charset=UTF-8", "UTF-8");
+        final String result = driver.findElement(By.id("assert")).getText();
+        assertEquals("Hello worl\u0414", result);
     }
 
     /**
@@ -549,18 +545,14 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
     public void writeISO_8859_1() throws Exception {
         final String html = "<html><body><script>\n"
             + "document.open();\n"
-            + "document.write('\u00e4\u00f6\u00fc\u00c4\u00d6\u00dc');\n"
+            + "document.write('<div id=\"assert\">\u00e4\u00f6\u00fc\u00c4\u00d6\u00dc</div>');\n"
             + "document.close();\n"
             + "</script>\n"
             + "</body></html>";
 
-        final WebClient client = getWebClientWithMockWebConnection();
-        final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setResponse(URL_FIRST, html, "text/html; charset=ISO-8859-1", "ISO-8859-1");
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-
-        assertEquals("\u00e4\u00f6\u00fc\u00c4\u00d6\u00dc", page.asText());
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html; charset=ISO-8859-1", "ISO-8859-1");
+        final String result = driver.findElement(By.id("assert")).getText();
+        assertEquals("\u00e4\u00f6\u00fc\u00c4\u00d6\u00dc", result);
     }
 
     /**
