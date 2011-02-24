@@ -14,10 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -76,5 +79,46 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         driver.findElement(By.id("myAnchor")).click();
         driver.findElement(By.id("myButton")).click();
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickNestedElement() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "<a href='page2.html'>"
+            + "<span id='theSpan'>My Link</span></a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        final WebElement span = driver.findElement(By.id("theSpan"));
+        assertEquals("span", span.getTagName());
+        span.click();
+        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickNestedElement_jsDisabled() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "<a href='page2.html'>"
+            + "<span id='theSpan'>My Link</span></a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        getWebClient().setJavaScriptEnabled(false);
+        final HtmlPage page = loadPage(html);
+        final HtmlElement span = page.getElementById("theSpan");
+        assertEquals("span", span.getTagName());
+        final HtmlPage page2 = span.click();
+        assertEquals(new URL(getDefaultUrl(), "page2.html"), page2.getUrl());
     }
 }

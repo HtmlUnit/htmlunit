@@ -1307,13 +1307,20 @@ public abstract class HtmlElement extends DomElement {
      * there was one, but the result of that handler wasn't <tt>false</tt>. This is the default
      * behavior of clicking the element.<p>
      *
-     * <p>The default implementation returns the current page. Subclasses requiring different
-     * behavior (like {@link HtmlSubmitInput}) will override this method.</p>
+     * <p>The default implementation only calls doClickAction on parent's HtmlElement (if any).
+     * Subclasses requiring different behavior (like {@link HtmlSubmitInput}) will override this method.</p>
      *
      * @throws IOException if an IO error occurs
      */
     protected void doClickAction() throws IOException {
-        // nothing
+        final DomNode parent = getParentNode();
+
+        // needed for instance to perform link doClickActoin when a nested element is clicked
+        // it should probably be changed to do this at the event level but currently
+        // this wouldn't work with JS disabled as events are propagated in the host object tree.
+        if (parent instanceof HtmlElement) {
+            ((HtmlElement) parent).doClickAction();
+        }
     }
 
     /**
