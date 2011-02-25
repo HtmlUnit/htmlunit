@@ -117,6 +117,35 @@ public class RangeTest extends WebDriverTestCase {
     }
 
     /**
+     * Same fragment should be parsed differently depending on the context.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "[object Text]", "[object HTMLTableRowElement]" }, IE = "exception")
+    public void createContextualFragment() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id ='d'></div>\n"
+            + "<table><tr id='t'><td>old</td></tr></table>\n"
+            + "<script>\n"
+            + "function test(id) {\n"
+            + "  var element = document.getElementById(id);\n"
+            + "  var range = element.ownerDocument.createRange();\n"
+            + "  range.selectNode(element);\n"
+            + "  var str = '<tr>  <td>new</td></tr>'\n" // space between <tr> and <td> important here!
+            + "  var fragment = range.createContextualFragment(str);\n"
+            + "  alert(fragment.firstChild);\n"
+            + "}\n"
+            + "try {\n"
+            + "  test('d');\n"
+            + "  test('t');\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

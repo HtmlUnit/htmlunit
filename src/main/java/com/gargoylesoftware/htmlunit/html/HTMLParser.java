@@ -118,13 +118,27 @@ public final class HTMLParser {
      * @throws IOException if an IO error occurs
      */
     public static void parseFragment(final DomNode parent, final String source) throws SAXException, IOException {
+        parseFragment(parent, parent, source);
+    }
+
+    /**
+     * Parses the HTML content from the given string into an object tree representation.
+     *
+     * @param parent where the new parsed nodes will be added to
+     * @param context the context to build the fragment context stack
+     * @param source the (X)HTML to be parsed
+     * @throws SAXException if a SAX error occurs
+     * @throws IOException if an IO error occurs
+     */
+    public static void parseFragment(final DomNode parent, final DomNode context, final String source)
+        throws SAXException, IOException {
         final HtmlPage page = (HtmlPage) parent.getPage();
         final URL url = page.getWebResponse().getWebRequest().getUrl();
 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, url);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
         // build fragment context stack
-        DomNode node = parent;
+        DomNode node = context;
         final List<QName> ancestors = new ArrayList<QName>();
         while (node != null && node.getNodeType() != Node.DOCUMENT_NODE) {
             ancestors.add(0, new QName(null, node.getNodeName(), null, null));
@@ -654,7 +668,10 @@ public final class HTMLParser {
                     // malformed HTML: </td>some text</tr> => text comes before the table
                     if (currentNode_ instanceof HtmlTableRow) {
                         final HtmlTableRow row = (HtmlTableRow) currentNode_;
-                        row.getEnclosingTable().insertBefore(text);
+                        final HtmlTable enclosingTable = row.getEnclosingTable();
+                        if (enclosingTable != null) { // may be null when called from Range.createContextualFragment
+                            enclosingTable.insertBefore(text);
+                        }
                     }
                     else {
                         currentNode_.appendChild(text);

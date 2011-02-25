@@ -20,14 +20,15 @@ import java.util.List;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.collections.ListUtils;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * The JavaScript object that represents a Range.
@@ -306,7 +307,15 @@ public class Range extends SimpleScriptable {
     public Object jsxFunction_createContextualFragment(final String valueAsString) {
         final SgmlPage page = startContainer_.<DomNode>getDomNodeOrDie().getPage();
         final DomDocumentFragment fragment = new DomDocumentFragment(page);
-        HTMLElement.parseHtmlSnippet(fragment, true, valueAsString);
+        try {
+            HTMLParser.parseFragment(fragment, startContainer_.getDomNodeOrDie(), valueAsString);
+        }
+        catch (final Exception e) {
+            LogFactory.getLog(Range.class).error("Unexpected exception occurred in createContextualFragment", e);
+            throw Context.reportRuntimeError("Unexpected exception occurred in createContextualFragment: "
+                    + e.getMessage());
+        }
+
         return fragment.getScriptObject();
     }
 
