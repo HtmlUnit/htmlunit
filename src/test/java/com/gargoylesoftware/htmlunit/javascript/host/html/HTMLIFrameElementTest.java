@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLIFrameElementTest extends WebTestCase {
@@ -597,7 +598,6 @@ public class HTMLIFrameElementTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void settingInnerHtmlTriggersFrameLoad() throws Exception {
         final String html
             = "<html><body><div id='d' onclick='loadFrame()'>Click me to show frame</div><script>\n"

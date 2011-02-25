@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
  * Unit tests for {@link HtmlInlineFrame}.
@@ -37,6 +38,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlInlineFrameTest extends WebTestCase {
@@ -282,7 +284,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
               "<html><body>\n"
             + "<script>document.write('<iframe id=\"f\" src=\"" + URL_SECOND + "\"></iframe>')</script>\n"
             + "</body></html>";
-        final String html2 = "<html><body>abc</body></html>";
+        final String html2 = "<html><body>iframe content</body></html>";
 
         final WebClient client = getWebClient();
 
@@ -292,9 +294,107 @@ public class HtmlInlineFrameTest extends WebTestCase {
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals("iframe", page.getElementById("f").getTagName());
+        final HtmlElement iFrame = page.getElementById("f");
+
+        assertEquals("iframe", iFrame.getTagName());
+
+        final HtmlPage enclosedPage = (HtmlPage) ((HtmlInlineFrame) iFrame).getEnclosedPage();
+        assertEquals("iframe content", enclosedPage.asText());
 
         assertEquals(2, conn.getRequestCount());
+    }
+
+    /**
+     * Verifies that frames added via element.innerHtml() are resolved.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testFrameSetInnerHtmlDoesLoadFrame() throws Exception {
+        final String html1 =
+              "<html><body>\n"
+            + "<iframe id='myFrame' src='" + URL_THIRD + "'></iframe>';\n"
+            + "<span id='A'></span>\n"
+            + "<script>\n"
+            + "  var frame='<iframe id=\"f\" src=\"" + URL_SECOND + "\"></iframe>';\n"
+            + "  document.getElementById('A').innerHTML=frame;\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String html2 = "<html><body>iframe content</body></html>";
+        final String html3 = "<html><head></head><body>Third content</body></html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html1);
+        conn.setResponse(URL_SECOND, html2);
+        conn.setResponse(URL_THIRD, html3);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+
+        final HtmlElement myFrame = page.getElementById("myFrame");
+        assertEquals("iframe", myFrame.getTagName());
+
+        HtmlPage enclosedPage = (HtmlPage) ((HtmlInlineFrame) myFrame).getEnclosedPage();
+        assertEquals("Third content", enclosedPage.asText());
+
+        final HtmlElement iFrame = page.getElementById("f");
+        assertEquals("iframe", iFrame.getTagName());
+
+        enclosedPage = (HtmlPage) ((HtmlInlineFrame) iFrame).getEnclosedPage();
+        assertEquals("iframe content", enclosedPage.asText());
+
+        assertEquals(3, conn.getRequestCount());
+    }
+
+    /**
+     * Verifies that frames added via element.innerHtml() are resolved.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testFrameSetInnerHtmlDoesLoadFrameContentTimeout() throws Exception {
+        final String html1 =
+              "<html><body>\n"
+            + "<iframe id='myFrame' src='" + URL_THIRD + "'></iframe>';\n"
+            + "<span id='A'></span>\n"
+            + "<script>\n"
+            + "  function createIframe(){\n"
+            + "    var frame='<iframe id=\"f\" src=\"" + URL_SECOND + "\"></iframe>';\n"
+            + "    document.getElementById('A').innerHTML=frame;\n"
+            + "  }\n"
+            + "  setTimeout('createIframe()', 100);\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String html2 = "<html><body>iframe content</body></html>";
+        final String html3 = "<html><head></head><body>Third content</body></html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html1);
+        conn.setResponse(URL_SECOND, html2);
+        conn.setResponse(URL_THIRD, html3);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+
+        final HtmlElement myFrame = page.getElementById("myFrame");
+        assertEquals("iframe", myFrame.getTagName());
+
+        HtmlPage enclosedPage = (HtmlPage) ((HtmlInlineFrame) myFrame).getEnclosedPage();
+        assertEquals("Third content", enclosedPage.asText());
+
+        // wait for the timer
+        final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
+        jobManager.waitForJobs(1000);
+
+        final HtmlElement iFrame = page.getElementById("f");
+        assertEquals("iframe", iFrame.getTagName());
+
+        enclosedPage = (HtmlPage) ((HtmlInlineFrame) iFrame).getEnclosedPage();
+        assertEquals("iframe content", enclosedPage.asText());
+
+        assertEquals(3, conn.getRequestCount());
     }
 
     /**
@@ -328,6 +428,72 @@ public class HtmlInlineFrameTest extends WebTestCase {
         final HtmlElement element = enclosedPage.getHtmlElementById("myContent");
         final String content = element.asText();
         assertEquals("Hi Folks!", content);
+    }
+
+    /**
+     * The iframe has no source and is filled from javascript.
+     * The javascript writes unicode charactes into the iframe content.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testFrameContentCreationViaJavascriptUnicode() throws Exception {
+        final String html =
+            "<html><head><title>frames</title></head>\n"
+            + "<body>\n"
+            + "<iframe name='foo'></iframe>\n"
+            + "<script type='text/javascript'>\n"
+            + "var doc = window.frames['foo'].document;\n"
+            + "doc.open();\n"
+            + "doc.write('<html><body><div id=\"myContent\">Hello worl\u0414</div></body></html>');\n"
+            + "doc.close();\n"
+            + "</script>\n"
+            + "<body>\n"
+            + "</html>";
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        webClient.setWebConnection(conn);
+
+        conn.setResponse(URL_FIRST, html, "text/html; charset=UTF-8", "UTF-8");
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+
+        final HtmlPage enclosedPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
+        final HtmlElement element = enclosedPage.getHtmlElementById("myContent");
+        final String content = element.asText();
+        assertEquals("Hello worl\u0414", content);
+    }
+
+    /**
+     * The iframe has no source and is filled from javascript.
+     * The javascript writes windows charactes into the iframe content.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testFrameContentCreationViaJavascriptISO_8859_1() throws Exception {
+        final String html =
+            "<html><head><title>frames</title></head>\n"
+            + "<body>\n"
+            + "<iframe name='foo'></iframe>\n"
+            + "<script type='text/javascript'>\n"
+            + "var doc = window.frames['foo'].document;\n"
+            + "doc.open();\n"
+            + "doc.write('<html><body><div id=\"myContent\">\u00e4\u00f6\u00fc</div></body></html>');\n"
+            + "doc.close();\n"
+            + "</script>\n"
+            + "<body>\n"
+            + "</html>";
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection conn = new MockWebConnection();
+        webClient.setWebConnection(conn);
+
+        conn.setResponse(URL_FIRST, html, "text/html; charset=ISO-8859-1", "ISO-8859-1");
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+
+        final HtmlPage enclosedPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
+        final HtmlElement element = enclosedPage.getHtmlElementById("myContent");
+        final String content = element.asText();
+        assertEquals("\u00e4\u00f6\u00fc", content);
     }
 
     /**

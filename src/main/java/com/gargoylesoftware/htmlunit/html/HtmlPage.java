@@ -116,6 +116,7 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  * @author Sudhan Moghe
  * @author Ethan Glasser-Camp
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Ronald Brill
  */
 public class HtmlPage extends SgmlPage {
 
@@ -2120,6 +2121,11 @@ public class HtmlPage extends SgmlPage {
      */
     void registerSnippetParsingEnd() {
         snippetParserCount_--;
+
+        // maybe the stream has added a iframe tag
+        if (0 == snippetParserCount_) {
+            loadFrames();
+        }
     }
 
     /**
