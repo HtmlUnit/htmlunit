@@ -68,4 +68,11 @@ public class WebConnectionWrapper implements WebConnection {
         return wrappedWebConnection_.getResponse(request);
     }
 
+    /**
+     * Gets the wrapped {@link WebConnection}.
+     * @return the wrapped connection
+     */
+    public WebConnection getWrappedWebConnection() {
+        return wrappedWebConnection_;
+    }
 }

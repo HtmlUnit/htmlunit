@@ -31,6 +31,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
+
 /**
  * Tests for insecure SSL.
  *
@@ -117,6 +119,19 @@ public class HttpWebConnectionInsecureSSLTest extends WebTestCase {
     @Test
     public void insecureSSL() throws Exception {
         final WebClient webClient = getWebClient();
+        webClient.setUseInsecureSSL(true);
+        webClient.getPage("https://" + localServer_.getServiceAddress().getHostName()
+                + ':' + localServer_.getServiceAddress().getPort()
+                + "/random/100");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void insecureSSL_withWrapper() throws Exception {
+        final WebClient webClient = getWebClient();
+        webClient.setWebConnection(new WebConnectionWrapper(webClient.getWebConnection()));
         webClient.setUseInsecureSSL(true);
         webClient.getPage("https://" + localServer_.getServiceAddress().getHostName()
                 + ':' + localServer_.getServiceAddress().getPort()

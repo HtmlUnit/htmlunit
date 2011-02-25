@@ -69,6 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
+import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
 
 /**
  * The main starting point in HtmlUnit: this class simulates a web browser.
@@ -1060,17 +1061,28 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * If set to <tt>true</tt>, the client will accept connections to any host, regardless of
+     * If set to <code>true</code>, the client will accept connections to any host, regardless of
      * whether they have valid certificates or not. This is especially useful when you are trying to
      * connect to a server with expired or corrupt certificates.
-     *
+     * <p>
+     * This method works only if {@link #getWebConnection()} returns an {@link HttpWebConnection}
+     * (which is the default) or a {@link WebConnectionWrapper} wrapping an {@link HttpWebConnection}.
+     * </p>
      * @param useInsecureSSL whether or not to use insecure SSL
      * @throws GeneralSecurityException if a security error occurs
      */
     public void setUseInsecureSSL(final boolean useInsecureSSL) throws GeneralSecurityException {
         //FIXME Depends on the implementation.
-        if (webConnection_ instanceof HttpWebConnection) {
-            ((HttpWebConnection) webConnection_).setUseInsecureSSL(useInsecureSSL);
+        WebConnection webConnection = getWebConnection();
+        while (webConnection instanceof WebConnectionWrapper) {
+            webConnection = ((WebConnectionWrapper) webConnection).getWrappedWebConnection();
+        }
+
+        if (webConnection instanceof HttpWebConnection) {
+            ((HttpWebConnection) webConnection).setUseInsecureSSL(useInsecureSSL);
+        }
+        else {
+            LOG.warn("Can't configure useInsecureSSL on " + webConnection_);
         }
     }
 
