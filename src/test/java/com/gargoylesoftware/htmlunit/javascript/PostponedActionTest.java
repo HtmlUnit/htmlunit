@@ -18,94 +18,85 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for the {@link PostponedAction}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class PostponedActionTest extends WebTestCase {
+public class PostponedActionTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "before", "after", "second.html", "third.html" })
     public void loadingJavaScript() throws Exception {
         final String firstContent = "<html>\n"
             + "<head><title>First Page</title>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    document.getElementById('debugDiv').innerHTML += 'before, ';\n"
+            + "    alert('before');\n"
             + "    var iframe2 = document.createElement('iframe');\n"
             + "    iframe2.src = '" + URL_SECOND + "';\n"
             + "    document.body.appendChild(iframe2);\n"
             + "    var iframe3 = document.createElement('iframe');\n"
             + "    document.body.appendChild(iframe3);\n"
             + "    iframe3.src = '" + URL_THIRD + "';\n"
-            + "    document.getElementById('debugDiv').innerHTML += 'after, ';\n"
+            + "    alert('after');\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "<div id='debugDiv'></div>\n"
             + "</body>\n"
             + "</html>";
         final String secondContent
-            = "<script>parent.document.getElementById('debugDiv').innerHTML += 'second.html, ';</script>";
+            = "<script>alert('second.html');</script>";
         final String thirdContent
-            = "<script>parent.document.getElementById('debugDiv').innerHTML += 'third.html, ';</script>";
+            = "<script>alert('third.html');</script>";
 
-        final WebClient client = getWebClient();
-        final MockWebConnection conn = new MockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, firstContent);
         conn.setResponse(URL_SECOND, secondContent);
         conn.setResponse(URL_THIRD, thirdContent);
-        client.setWebConnection(conn);
 
-        final HtmlPage page = client.getPage(URL_FIRST);
-        final HtmlDivision div = page.getHtmlElementById("debugDiv");
-        assertEquals("before, after, second.html, third.html, ", div.getFirstChild().getNodeValue());
+        loadPageWithAlerts2(URL_FIRST);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "before", "after", "second.html" })
     public void loadingJavaScript2() throws Exception {
         final String firstContent = "<html>\n"
             + "<head><title>First Page</title>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    document.getElementById('debugDiv').innerHTML += 'before, ';\n"
+            + "    alert('before');\n"
             + "    var iframe = document.createElement('iframe');\n"
             + "    document.body.appendChild(iframe);\n"
             + "    iframe.contentWindow.location.replace('" + URL_SECOND + "');\n"
-            + "    document.getElementById('debugDiv').innerHTML += 'after, ';\n"
+            + "    alert('after');\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "<div id='debugDiv'></div>\n"
             + "</body>\n"
             + "</html>";
         final String secondContent
-            = "<script>parent.document.getElementById('debugDiv').innerHTML += 'second.html, ';</script>";
+            = "<script>alert('second.html');</script>";
 
-        final WebClient client = getWebClient();
-        final MockWebConnection conn = new MockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, firstContent);
         conn.setResponse(URL_SECOND, secondContent);
-        client.setWebConnection(conn);
 
-        final HtmlPage page = client.getPage(URL_FIRST);
-        final HtmlDivision div = page.getHtmlElementById("debugDiv");
-        assertEquals("before, after, second.html, ", div.getFirstChild().getNodeValue());
+        loadPageWithAlerts2(URL_FIRST);
     }
 }
