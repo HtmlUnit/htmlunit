@@ -300,6 +300,9 @@ public class CSSStyleSheet extends SimpleScriptable {
                     return false;
                 }
                 final DescendantSelector cs = (DescendantSelector) selector;
+                if (!(element.getParentNode() instanceof HtmlElement)) {
+                    return false; // for instance parent is a DocumentFragment
+                }
                 final HtmlElement parent = (HtmlElement) element.getParentNode();
                 return selects(browserVersion, cs.getSimpleSelector(), element) && parent != null
                     && selects(browserVersion, cs.getAncestorSelector(), parent);
