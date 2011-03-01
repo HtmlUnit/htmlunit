@@ -13,6 +13,9 @@
             <action type="fix" dev="mguillem" issue="3165159">
                 Follow hyperlink when click is performed on a nested element.
             </action>
+            <action type="fix" dev="rbri" issue="3107075">
+                IFrame created from javascript doesn't load source'.
+            </action>
             <action type="fix" dev="rbri" issue="3046109">
                 Initialization of iframes corrected, if content was
                 written from javascript.
