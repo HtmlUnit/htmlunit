@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" due-to="Nikolai Avteniev">
+                Calculation for the next execution time of jobs (setInterval)
+                fixed for some cases. 
+            </action>
             <action type="fix" dev="mguillem" issue="3191431">
                 JavaScript: fix exception in getComputedStyle occurring while evaluating child selector
                 for node within a DocumentFragment.

@@ -285,13 +285,12 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
         final boolean isPeriodicJob = job.isPeriodic();
         if (isPeriodicJob) {
-            long timeDifference = currentTime - job.getTargetExecutionTime();
-            if (timeDifference % job.getPeriod() > 0) {
-                timeDifference = (timeDifference / job.getPeriod()) * job.getPeriod()
-                    + job.getPeriod();
-            }
             // reference: http://ejohn.org/blog/how-javascript-timers-work/
+            long timeDifference = currentTime - job.getTargetExecutionTime();
+            timeDifference = (timeDifference / job.getPeriod()) * job.getPeriod()
+                    + job.getPeriod();
             job.setTargetExecutionTime(job.getTargetExecutionTime() + timeDifference);
+
             // queue
             synchronized (this) {
                 if (!cancelledJobs_.contains(job.getId())) {
