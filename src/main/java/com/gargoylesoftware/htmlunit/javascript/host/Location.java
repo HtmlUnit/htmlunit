@@ -82,7 +82,7 @@ public class Location extends SimpleScriptable {
     public void initialize(final Window window) {
         window_ = window;
         if (window_ != null && window_.getWebWindow().getEnclosedPage() != null) {
-            hash_ = window_.getWebWindow().getEnclosedPage().getWebResponse().getWebRequest().getUrl().getRef();
+            jsxSet_hash(window_.getWebWindow().getEnclosedPage().getWebResponse().getWebRequest().getUrl().getRef());
         }
     }
 

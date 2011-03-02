@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class LocationTest extends WebDriverTestCase {
@@ -246,6 +247,8 @@ public class LocationTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
             "#% ^[]|\"<>{}\\" },
+            IE8 = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
+            "#% ^[]|\"<>{}\\" },
             IE = { "#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
             "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C" })
     public void testSetHash_Encoding() throws Exception {
@@ -266,6 +269,26 @@ public class LocationTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "#<a>foobar</a>",
+            IE8 = "#<a>foobar</a>",
+            IE = "#%3Ca%3Efoobar%3C/a%3E")
+    public void hash() throws Exception {
+        final String html = "<html><body onload='test()'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(document.location.hash);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        loadPageWithAlerts2(html, new URL(getDefaultUrl().toExternalForm() + "?#<a>foobar</a>"));
     }
 
     /**
