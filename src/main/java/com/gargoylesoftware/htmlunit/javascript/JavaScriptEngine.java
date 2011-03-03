@@ -199,7 +199,7 @@ public class JavaScriptEngine {
                 final ScriptableObject prototype = configureClass(config, window);
                 if (config.isJsObject()) {
                     // for FF, place object with prototype property in Window scope
-                    if (!browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_145)) {
+                    if (browserVersion.hasFeature(BrowserVersionFeatures.JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE)) {
                         final SimpleScriptable obj = config.getHostClass().newInstance();
                         prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
                         obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!

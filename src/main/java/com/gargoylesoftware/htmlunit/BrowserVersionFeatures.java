@@ -232,9 +232,6 @@ public enum BrowserVersionFeatures {
     GENERATED_144,
 
     /** Was originally .isIE(). */
-    GENERATED_145,
-
-    /** Was originally .isIE(). */
     GENERATED_146,
 
     /** Was originally .isIE(). */
@@ -676,6 +673,9 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
+
+    /** Indicates that objects with prototype property available in window scope; Firefox does this. */
+    JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
 
     /** Indicates if multiple spaces are replaced by a single one when accessing innerHTML. */
     JS_INNER_HTML_REDUCE_WHITESPACES,
