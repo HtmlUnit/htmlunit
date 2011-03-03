@@ -43,8 +43,13 @@ import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpHost;
+import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
+import org.apache.http.ProtocolException;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.Credentials;
 import org.apache.http.client.CookieStore;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
@@ -86,7 +91,7 @@ import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.DefaultRedirectHandler;
+import org.apache.http.impl.client.DefaultRedirectStrategy;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.impl.cookie.BasicPathHandler;
@@ -134,8 +139,8 @@ public class HttpWebConnection implements WebConnection {
      */
     public WebResponse getResponse(final WebRequest request) throws IOException {
         final URL url = request.getUrl();
-        final HttpClient httpClient = getHttpClient();
-        webClient_.getCookieManager().updateState(getHttpClient().getCookieStore());
+        final AbstractHttpClient httpClient = getHttpClient();
+        webClient_.getCookieManager().updateState(httpClient.getCookieStore());
 
         HttpUriRequest httpMethod = null;
         try {
@@ -146,7 +151,7 @@ public class HttpWebConnection implements WebConnection {
             final HttpResponse httpResponse = httpClient.execute(hostConfiguration, httpMethod);
             final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
             final long endTime = System.currentTimeMillis();
-            webClient_.getCookieManager().updateFromState(getHttpClient().getCookieStore());
+            webClient_.getCookieManager().updateFromState(httpClient.getCookieStore());
             return makeWebResponse(httpResponse, request, downloadedBody, endTime - startTime);
         }
         catch (final URISyntaxException e) {
@@ -297,12 +302,19 @@ public class HttpWebConnection implements WebConnection {
 
         final AbstractHttpClient httpClient = getHttpClient();
 
-        // usually the CredentialProvider is defined by the WebClient.
-        // this initialization is done as part of the getHttpClient() method call
-        // but if the used url contains credentials, then we have t overwrite this
-        if (webRequest.getCredentialsProvider() != null) {
-            httpClient.setCredentialsProvider(webRequest.getCredentialsProvider());
+        // Tell the client where to get its credentials from
+        // (it may have changed on the webClient since last call to getHttpClientFor(...))
+        final CredentialsProvider credentialsProvider = webClient_.getCredentialsProvider();
+
+        // if the used url contains credentials, then we have to add this
+        final Credentials requestCredentials = webRequest.getCredentials();
+        if (null != requestCredentials) {
+            final URL requestUrl = webRequest.getUrl();
+            final AuthScope authScope = new AuthScope(requestUrl.getHost(), requestUrl.getPort());
+            // updating our client to keep the credentials for the next request
+            credentialsProvider.setCredentials(authScope, requestCredentials);
         }
+        httpClient.setCredentialsProvider(credentialsProvider);
 
         if (webClient_.getCookieManager().isCookiesEnabled()) {
             // Cookies are enabled. Note that it's important that we enable single cookie headers,
@@ -480,15 +492,13 @@ public class HttpWebConnection implements WebConnection {
     protected synchronized AbstractHttpClient getHttpClient() {
         if (httpClient_ == null) {
             httpClient_ = createHttpClient();
-            httpClient_.setRedirectHandler(new DefaultRedirectHandler() {
-                public boolean isRedirectRequested(final HttpResponse response,
-                        final HttpContext context) {
-                    return super.isRedirectRequested(response, context) && response.getFirstHeader("location") != null;
+            httpClient_.setRedirectStrategy(new DefaultRedirectStrategy() {
+                public boolean isRedirected(final HttpRequest request, final HttpResponse response,
+                        final HttpContext context) throws ProtocolException {
+                    return super.isRedirected(request, response, context)
+                            && response.getFirstHeader("location") != null;
                 }
             });
-
-            httpClient_.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, getTimeout());
-            httpClient_.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, getTimeout());
 
             if (virtualHost_ != null) {
                 httpClient_.getParams().setParameter(ClientPNames.VIRTUAL_HOST, virtualHost_);
@@ -504,10 +514,6 @@ public class HttpWebConnection implements WebConnection {
             };
             httpClient_.getCookieSpecs().register(HACKED_COOKIE_POLICY, factory);
         }
-
-        // Tell the client where to get its credentials from
-        // (it may have changed on the webClient since last call to getHttpClientFor(...))
-        httpClient_.setCredentialsProvider(webClient_.getCredentialsProvider());
 
         //Set timeouts
         httpClient_.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, webClient_.getTimeout());

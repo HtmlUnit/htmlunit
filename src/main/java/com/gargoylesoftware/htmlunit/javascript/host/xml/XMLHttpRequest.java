@@ -33,12 +33,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -60,6 +58,8 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Stuart Begg
+ * @author Ronald Brill
+ *
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
  */
 public class XMLHttpRequest extends SimpleScriptable {
@@ -414,7 +414,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             final HttpMethod submitMethod = HttpMethod.valueOf(method.toUpperCase());
             request.setHttpMethod(submitMethod);
             if (Undefined.instance != user || Undefined.instance != password) {
-                String userCred = "";
+                String userCred = null;
                 String passwordCred = "";
                 if (Undefined.instance != user) {
                     userCred = user.toString();
@@ -422,9 +422,11 @@ public class XMLHttpRequest extends SimpleScriptable {
                 if (Undefined.instance != password) {
                     passwordCred = user.toString();
                 }
-                final DefaultCredentialsProvider dcp = new DefaultCredentialsProvider();
-                dcp.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(userCred, passwordCred));
-                request.setCredentialsProvider(dcp);
+
+                // password is ignored if no user defined
+                if (null != userCred) {
+                    request.setCredentials(new UsernamePasswordCredentials(userCred, passwordCred));
+                }
             }
             webRequest_ = request;
         }

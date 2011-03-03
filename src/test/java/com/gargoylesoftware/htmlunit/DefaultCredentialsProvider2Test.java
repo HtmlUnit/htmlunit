@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -26,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
@@ -38,15 +41,6 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      */
     protected boolean isBasicAuthentication() {
         return getWebDriver() instanceof HtmlUnitDriver;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected WebClient createNewWebClient() {
-        final WebClient webClient = super.createNewWebClient();
-        ((DefaultCredentialsProvider) webClient.getCredentialsProvider()).addCredentials("jetty", "jetty");
-        return webClient;
     }
 
     /**
@@ -84,11 +78,138 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      */
     @Test
     public void basicAuthenticationTwice() throws Exception {
+        ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
+
         getMockWebConnection().setResponse(URL_SECOND, "Hello World");
         final WebDriver driver = loadPage2("Hi There");
         assertTrue(driver.getPageSource().contains("Hi There"));
         driver.get(URL_SECOND.toExternalForm());
         assertTrue(driver.getPageSource().contains("Hello World"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("SecRet")
+    public void basicAuthenticationUserFromUrl() throws Exception {
+        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        getMockWebConnection().setDefaultResponse(html);
+
+        getWebClient().getCredentialsProvider().clear();
+
+        // no credentials
+        final WebDriver driver = loadPage2(html, new URL("http://localhost:" + PORT + "/"));
+        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+
+        // now a url with credentials
+        URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
+        loadPageWithAlerts2(url);
+
+        // next step without credentials but the credentials are still known
+        url = new URL("http://localhost:" + PORT + "/");
+        loadPageWithAlerts2(url);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("SecRet")
+    public void basicAuthenticationUserFromUrlUsedForNextSteps() throws Exception {
+        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        getMockWebConnection().setDefaultResponse(html);
+
+        getWebClient().getCredentialsProvider().clear();
+
+        // no credentials
+        final WebDriver driver = loadPage2(html, new URL("http://localhost:" + PORT + "/"));
+        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+
+        // now a url with credentials
+        URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
+        loadPageWithAlerts2(url);
+
+        // next step without credentials but the credentials are still known
+        url = new URL("http://localhost:" + PORT + "/");
+        loadPageWithAlerts2(url);
+
+        // different path
+        url = new URL("http://localhost:" + PORT + "/somewhere");
+        loadPageWithAlerts2(url);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("SecRet")
+    public void basicAuthenticationUserFromUrlOverwrite() throws Exception {
+        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        getMockWebConnection().setDefaultResponse(html);
+
+        getWebClient().getCredentialsProvider().clear();
+
+        // no credentials
+        final WebDriver driver = loadPage2(html, new URL("http://localhost:" + PORT + "/"));
+        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+
+        // now a url with credentials
+        URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
+        loadPageWithAlerts2(url);
+
+        // next step without credentials but the credentials are still known
+        url = new URL("http://localhost:" + PORT + "/");
+        loadPageWithAlerts2(url);
+
+        // and now with wrong credentials
+        url = new URL("http://jetty:wrong@localhost:" + PORT + "/");
+        loadPage2(html, url);
+        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("SecRet")
+    public void basicAuthenticationUserFromUrlOverwriteDefaultCredentials() throws Exception {
+        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        getMockWebConnection().setDefaultResponse(html);
+
+        getWebClient().getCredentialsProvider().clear();
+        ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
+
+        // use default credentials
+        URL url = new URL("http://localhost:" + PORT + "/");
+        final WebDriver driver = loadPageWithAlerts2(url);
+
+        // now a url with wrong credentials
+        url = new URL("http://joe:jetty@localhost:" + PORT + "/");
+        loadPage2(html, url);
+        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("SecRet")
+    public void basicAuthenticationUserFromUrlOverwriteWrongDefaultCredentials() throws Exception {
+        final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
+        getMockWebConnection().setDefaultResponse(html);
+
+        getWebClient().getCredentialsProvider().clear();
+        ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("joe", "hack");
+
+        // use default wrong credentials
+        URL url = new URL("http://localhost:" + PORT + "/");
+        final WebDriver driver = loadPage2(html, url);
+        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+
+        // now a url with correct credentials
+        url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
+        loadPageWithAlerts2(url);
     }
 
     /**
@@ -108,6 +229,7 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
             + "xhr.send('');\n"
             + "</script></head><body></body></html>";
 
+        ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
         getMockWebConnection().setDefaultResponse("Hello World");
         loadPageWithAlerts2(html);
     }
@@ -132,6 +254,7 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
             + "xhr.send('');\n"
             + "</script></head><body></body></html>";
 
+        ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
         getMockWebConnection().setDefaultResponse("Hello World");
         loadPageWithAlerts2(html, 1000);
     }
@@ -156,6 +279,7 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
             + "xhr.send('');\n"
             + "</script></head><body></body></html>";
 
+        ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
         getMockWebConnection().setDefaultResponse("Hello World");
         loadPageWithAlerts2(html, 1000);
     }

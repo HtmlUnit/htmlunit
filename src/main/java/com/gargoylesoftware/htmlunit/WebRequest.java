@@ -23,11 +23,8 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.ClassUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -41,10 +38,11 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Rodney Gitzel
+ * @author Ronald Brill
  */
 public class WebRequest implements Serializable {
 
-    private static final Log LOG = LogFactory.getLog(WebRequest.class);
+    // private static final Log LOG = LogFactory.getLog(WebRequest.class);
 
     private String url_; // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
     private String proxyHost_;
@@ -53,7 +51,7 @@ public class WebRequest implements Serializable {
     private HttpMethod httpMethod_ = HttpMethod.GET;
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
     private Map<String, String> additionalHeaders_ = new HashMap<String, String>();
-    private CredentialsProvider credentialsProvider_;
+    private Credentials credentials_;
     private String charset_ = TextUtil.DEFAULT_CHARSET;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
@@ -120,26 +118,14 @@ public class WebRequest implements Serializable {
             // http://john.smith:secret@localhost
             final String userInfo = url.getUserInfo();
             if (userInfo != null) {
-                if (getCredentialsProvider() == null) {
-                    setCredentialsProvider(new DefaultCredentialsProvider());
-                }
-                if (getCredentialsProvider() instanceof DefaultCredentialsProvider) {
-                    final int splitPos = userInfo.indexOf(':');
-                    if (splitPos == -1) {
-                        ((DefaultCredentialsProvider) getCredentialsProvider()).setCredentials(
-                                AuthScope.ANY, new UsernamePasswordCredentials(userInfo, ""));
-                    }
-                    else {
-                        final String username = userInfo.substring(0, splitPos);
-                        final String password = userInfo.substring(splitPos + 1);
-
-                        ((DefaultCredentialsProvider) getCredentialsProvider()).setCredentials(
-                                AuthScope.ANY, new UsernamePasswordCredentials(username, password));
-                    }
+                final int splitPos = userInfo.indexOf(':');
+                if (splitPos == -1) {
+                    credentials_ = new UsernamePasswordCredentials(userInfo, "");
                 }
                 else {
-                    LOG.warn("URL userInfo is defined for a WebRequest "
-                            + "without an underlying DefaultCredentialsProvider");
+                    final String username = userInfo.substring(0, splitPos);
+                    final String password = userInfo.substring(splitPos + 1);
+                    credentials_ = new UsernamePasswordCredentials(username, password);
                 }
             }
         }
@@ -390,19 +376,19 @@ public class WebRequest implements Serializable {
     }
 
     /**
-     * Returns the credentials provider to use.
-     * @return the credentials provider to use
+     * Returns the credentials to use.
+     * @return the credentials if set as part of the url
      */
-    public CredentialsProvider getCredentialsProvider() {
-        return credentialsProvider_;
+    public Credentials getCredentials() {
+        return credentials_;
     }
 
     /**
-     * Sets the credentials provider to use.
-     * @param credentialsProvider the credentials provider to use
+     * Sets the credentials to use.
+     * @param credentials the credentials to use
      */
-    public void setCredentialsProvider(final CredentialsProvider credentialsProvider) {
-        credentialsProvider_ = credentialsProvider;
+    public void setCredentials(final Credentials credentials) {
+        credentials_ = credentials;
     }
 
     /**
@@ -436,9 +422,8 @@ public class WebRequest implements Serializable {
         buffer.append(", " + encodingType_);
         buffer.append(", " + requestParameters_);
         buffer.append(", " + additionalHeaders_);
-        buffer.append(", " + credentialsProvider_);
+        buffer.append(", " + credentials_);
         buffer.append(">]");
         return buffer.toString();
     }
-
 }
