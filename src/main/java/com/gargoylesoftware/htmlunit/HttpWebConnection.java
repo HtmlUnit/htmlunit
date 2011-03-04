@@ -194,7 +194,7 @@ public class HttpWebConnection implements WebConnection {
             final HttpHost proxy = new HttpHost(proxyHost, proxyPort);
             if (webRequest.isSocksProxy()) {
                 final SocksSocketFactory factory = (SocksSocketFactory)
-                    httpClient.getConnectionManager().getSchemeRegistry().getScheme("http").getSocketFactory();
+                    httpClient.getConnectionManager().getSchemeRegistry().getScheme("http").getSchemeSocketFactory();
                 factory.setSocksProxy(proxy);
             }
             else {
