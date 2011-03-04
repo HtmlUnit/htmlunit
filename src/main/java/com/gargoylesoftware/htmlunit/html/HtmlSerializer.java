@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -25,6 +26,7 @@ import org.apache.commons.lang.StringUtils;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 class HtmlSerializer {
     private final StringBuilder buffer_ = new StringBuilder();
@@ -36,6 +38,11 @@ class HtmlSerializer {
     protected static final String AS_TEXT_BLANK = "§blank§";
     /** Indicates a tab. */
     protected static final String AS_TEXT_TAB = "§tab§";
+
+    private static final Pattern CLEAN_UP_PATTERN = Pattern.compile("(?:" + AS_TEXT_BLOCK_SEPARATOR + ")+");
+    private static final Pattern REDUCE_WHITESPACE_PATTERN = Pattern.compile("\\s*" + AS_TEXT_BLOCK_SEPARATOR + "\\s*");
+    private static final Pattern TEXT_AREA_PATTERN = Pattern.compile("\r?\n");
+
     private boolean appletEnabled_;
     private boolean ignoreMaskedElements_ = true;
 
@@ -60,7 +67,7 @@ class HtmlSerializer {
         text = StringUtils.replace(text, AS_TEXT_BLANK, " ");
         final String ls = System.getProperty("line.separator");
         text = StringUtils.replace(text, AS_TEXT_NEW_LINE, ls);
-        text = text.replaceAll("(?:" + AS_TEXT_BLOCK_SEPARATOR + ")+", ls); // many block sep => 1 new line
+        text = CLEAN_UP_PATTERN.matcher(text).replaceAll(ls); // many block sep => 1 new line
         text = StringUtils.replace(text, AS_TEXT_TAB, "\t");
 
         return text;
@@ -70,7 +77,7 @@ class HtmlSerializer {
         text = text.trim();
 
         // remove white spaces before or after block separators
-        text = text.replaceAll("\\s*" + AS_TEXT_BLOCK_SEPARATOR + "\\s*", AS_TEXT_BLOCK_SEPARATOR);
+        text = REDUCE_WHITESPACE_PATTERN.matcher(text).replaceAll(AS_TEXT_BLOCK_SEPARATOR);
 
         // remove leading block separators
         while (text.startsWith(AS_TEXT_BLOCK_SEPARATOR)) {
@@ -252,7 +259,7 @@ class HtmlSerializer {
         if (isVisible(htmlTextArea)) {
             String text = htmlTextArea.getText();
             text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
-            text = text.replaceAll("\r?\n", AS_TEXT_NEW_LINE);
+            text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
             text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
             doAppend(text);
         }

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import java.util.regex.Pattern;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
@@ -29,8 +31,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class HTMLTextAreaElement extends FormField {
+
+    private static final Pattern NORMALIZE_VALUE_PATTERN = Pattern.compile("([^\\r])\\n");
 
     /**
      * Creates an instance.
@@ -56,7 +61,7 @@ public class HTMLTextAreaElement extends FormField {
     public String jsxGet_value() {
         String value = ((HtmlTextArea) getDomNodeOrDie()).getText();
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.TEXTAREA_CRNL)) {
-            value = value.replaceAll("([^\\r])\\n", "$1\r\n");
+            value = NORMALIZE_VALUE_PATTERN.matcher(value).replaceAll("$1\r\n");
         }
         return value;
     }
@@ -162,7 +167,7 @@ public class HTMLTextAreaElement extends FormField {
     public String jsxGet_defaultValue() {
         String value = ((HtmlTextArea) getDomNodeOrDie()).getDefaultValue();
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.TEXTAREA_CRNL)) {
-            value = value.replaceAll("([^\\r])\\n", "$1\r\n");
+            value = NORMALIZE_VALUE_PATTERN.matcher(value).replaceAll("$1\r\n");
         }
         return value;
     }

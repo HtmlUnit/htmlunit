@@ -43,6 +43,9 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 public class WebRequest implements Serializable {
 
     // private static final Log LOG = LogFactory.getLog(WebRequest.class);
+    private static final Pattern DOT_PATTERN = Pattern.compile("/\\./");
+    private static final Pattern DOT_DOT_PATTERN = Pattern.compile("/(?!\\.\\.)[^/]*/\\.\\./");
+    private static final Pattern REMOVE_DOTS_PATTERN = Pattern.compile("^/(\\.\\.?/)*");
 
     private String url_; // String instead of java.net.URL because "about:blank" URLs don't serialize correctly
     private String proxyHost_;
@@ -146,22 +149,20 @@ public class WebRequest implements Serializable {
         String newPath = path;
 
         // remove occurrences at the beginning
-        newPath = newPath.replaceAll("^/(\\.\\.?/)*", "/");
+        newPath = REMOVE_DOTS_PATTERN.matcher(newPath).replaceAll("/");
         if ("/..".equals(newPath)) {
             newPath = "/";
         }
 
         // single dots have no effect, so just remove them
-        final Pattern dotPattern = Pattern.compile("/\\./");
-        while (dotPattern.matcher(newPath).find()) {
-            newPath = dotPattern.matcher(newPath).replaceAll("/");
+        while (DOT_PATTERN.matcher(newPath).find()) {
+            newPath = DOT_PATTERN.matcher(newPath).replaceAll("/");
         }
 
         // mid-path double dots should be removed WITH the previous subdirectory and replaced
         //  with "/" BUT ONLY IF that subdirectory's not also ".." (a regex lookahead helps with this)
-        final Pattern dotDotPattern = Pattern.compile("/(?!\\.\\.)[^/]*/\\.\\./");
-        while (dotDotPattern.matcher(newPath).find()) {
-            newPath = dotDotPattern.matcher(newPath).replaceAll("/");
+        while (DOT_DOT_PATTERN.matcher(newPath).find()) {
+            newPath = DOT_DOT_PATTERN.matcher(newPath).replaceAll("/");
         }
 
         return newPath;

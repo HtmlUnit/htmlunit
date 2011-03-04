@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -63,9 +64,12 @@ import com.gargoylesoftware.htmlunit.WebResponseData;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class DebuggingWebConnection extends WebConnectionWrapper {
     private static final Log LOG = LogFactory.getLog(DebuggingWebConnection.class);
+
+    private static final Pattern ESCAPE_QUOTE_PATTERN = Pattern.compile("'");
 
     private int counter_;
     private final WebConnection wrappedWebConnection_;
@@ -197,7 +201,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     }
 
     static String escapeJSString(final String string) {
-        return string.replaceAll("'", "\\\\'");
+        return ESCAPE_QUOTE_PATTERN.matcher(string).replaceAll("\\\\'");
     }
 
     static String chooseExtension(final String contentType) {

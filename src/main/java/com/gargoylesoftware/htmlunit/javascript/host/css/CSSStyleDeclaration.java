@@ -273,6 +273,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     private static final Pattern COLOR_PATTERN =
         Pattern.compile("(rgb.*?\\(.*?\\d{1,3}.*?,.*?\\d{1,3}.*?,.*?\\d{1,3}.*?\\))");
     private static final Pattern VALUES_SPLIT_PATTERN = Pattern.compile("\\s+");
+    private static final Pattern TO_INT_PATTERN = Pattern.compile("(\\d+).*");
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static Map<String, String> CSSColors_ = new HashMap<String, String>();
@@ -4737,7 +4738,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     protected static int pixelValue(final HTMLElement element, final CssValue value) {
         final String s = value.get(element);
         if (s.endsWith("%") || (s.length() == 0 && element instanceof HTMLHtmlElement)) {
-            final int i = NumberUtils.toInt(s.replaceAll("(\\d+).*", "$1"), 100);
+            final int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(s).replaceAll("$1"), 100);
             final HTMLElement parent = element.getParentHTMLElement();
             final int absoluteValue = (parent == null) ? value.getWindowDefaultValue() : pixelValue(parent, value);
             return (int) ((i / 100D) * absoluteValue);
@@ -4758,7 +4759,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @see #pixelValue(HTMLElement, CssValue)
      */
     protected static int pixelValue(final String value) {
-        final int i = NumberUtils.toInt(value.replaceAll("(\\d+).*", "$1"), 0);
+        final int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(value).replaceAll("$1"), 0);
         if (value.endsWith("px")) {
             return i;
         }

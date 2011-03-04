@@ -100,6 +100,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
@@ -118,6 +119,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private static final String BEHAVIOR_DOWNLOAD = "#default#download";
 
     private static final Pattern CLASS_NAMES_SPLIT_PATTERN = Pattern.compile("\\s");
+    private static final Pattern PRINT_NODE_PATTERN = Pattern.compile("  ");
+    private static final Pattern PRINT_NODE_QUOTE_PATTERN = Pattern.compile("\"");
 
     static final String POSITION_BEFORE_BEGIN = "beforeBegin";
     static final String POSITION_AFTER_BEGIN = "afterBegin";
@@ -752,14 +755,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private void printNode(final StringBuilder buffer, final DomNode node, final boolean html) {
         if (node instanceof DomComment) {
             // Remove whitespace sequences.
-            final String s = node.getNodeValue().replaceAll("  ", " ");
+            final String s = PRINT_NODE_PATTERN.matcher(node.getNodeValue()).replaceAll(" ");
             buffer.append("<!--").append(s).append("-->");
         }
         else if (node instanceof DomCharacterData) {
             // Remove whitespace sequences, possibly escape XML characters.
             String s = node.getNodeValue();
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES)) {
-                s = s.replaceAll("  ", " ");
+                s = PRINT_NODE_PATTERN.matcher(s).replaceAll(" ");
             }
             if (html) {
                 s = com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlChars(s);
@@ -778,7 +781,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             // Add the attributes. IE does not use quotes, FF does.
             for (final DomAttr attr : element.getAttributesMap().values()) {
                 final String name = attr.getName();
-                final String value = attr.getValue().replaceAll("\"", "&quot;");
+                final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
                 final boolean quote = !ie
                     || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value)
                     || value.length() == 0

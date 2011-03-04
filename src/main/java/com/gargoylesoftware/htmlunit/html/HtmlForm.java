@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -65,6 +66,8 @@ public class HtmlForm extends HtmlElement {
 
     private static final Collection<String> SUBMITTABLE_ELEMENT_NAMES =
         Arrays.asList(new String[]{"input", "button", "select", "textarea", "isindex"});
+
+    private static final Pattern SUBMIT_CHARSET_PATTERN = Pattern.compile("[ ,].*");
 
     private final List<HtmlElement> lostChildren_ = new ArrayList<HtmlElement>();
 
@@ -235,7 +238,7 @@ public class HtmlForm extends HtmlElement {
      */
     private String getSubmitCharset() {
         if (getAcceptCharsetAttribute().length() > 0) {
-            return getAcceptCharsetAttribute().trim().replaceAll("[ ,].*", "");
+            return SUBMIT_CHARSET_PATTERN.matcher(getAcceptCharsetAttribute().trim()).replaceAll("");
         }
         return getPage().getPageEncoding();
     }

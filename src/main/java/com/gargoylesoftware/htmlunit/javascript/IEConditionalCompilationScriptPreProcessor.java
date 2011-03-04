@@ -38,10 +38,21 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  *
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ahx1z4fs.aspx">Microsoft Docs</a>
  */
 public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProcessor {
+
+    private static final Pattern CC_VARIABLE_PATTERN = Pattern.compile("@\\w+|'[^']*'|\"[^\"]*\"");
+    private static final Pattern SET_PATTERN = Pattern.compile("@set\\s+(@\\w+)(\\s*=\\s*[\\d\\.]+)");
+    private static final Pattern C_VARIABLE_PATTERN = Pattern.compile("(@_\\w+)|'[^']*'|\"[^\"]*\"");
+    private static final Pattern CC_PROCESS_PATTERN = Pattern.compile("/\\*@end");
+
+    private static final Pattern IF1_PATTERN = Pattern.compile("@if\\s*\\(([^\\)]+)\\)");
+    private static final Pattern IF2_PATTERN = Pattern.compile("@elif\\s*\\(([^\\)]+)\\)");
+    private static final Pattern IF3_PATTERN = Pattern.compile("@else");
+    private static final Pattern IF4_PATTERN = Pattern.compile("(/\\*)?@end");
 
     private static final String CC_VARIABLE_PREFIX = "htmlunit_cc_variable_";
     private enum PARSING_STATUS { NORMAL, IN_MULTI_LINE_COMMENT, IN_SINGLE_LINE_COMMENT, IN_STRING, IN_REG_EXP }
@@ -100,7 +111,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         if (body.startsWith("@")) {
             body = body.substring(1);
         }
-        body = body.replaceAll("/\\*@end", "");
+        body = CC_PROCESS_PATTERN.matcher(body).replaceAll("");
         body = replaceCompilationVariables(body, browserVersion);
         body = processSet(body);
         body = replaceCustomCompilationVariables(body);
@@ -108,8 +119,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     }
 
     private String replaceCustomCompilationVariables(final String body) {
-        final Pattern p = Pattern.compile("@\\w+|'[^']*'|\"[^\"]*\"");
-        final Matcher m = p.matcher(body);
+        final Matcher m = CC_VARIABLE_PATTERN.matcher(body);
         final StringBuffer sb = new StringBuffer();
         while (m.find()) {
             final String match = m.group();
@@ -132,8 +142,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     }
 
     private String processSet(final String body) {
-        final Pattern p = Pattern.compile("@set\\s+(@\\w+)(\\s*=\\s*[\\d\\.]+)");
-        final Matcher m = p.matcher(body);
+        final Matcher m = SET_PATTERN.matcher(body);
         final StringBuffer sb = new StringBuffer();
         while (m.find()) {
             setVariables_.add(m.group(1));
@@ -145,16 +154,15 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
 
     private static String processIfs(String code) {
         //TODO: StringScriptPreProcessor.indexOf() should be used (in order to ignore string literals)
-        code = code.replaceAll("@if\\s*\\(([^\\)]+)\\)", "if ($1) {");
-        code = code.replaceAll("@elif\\s*\\(([^\\)]+)\\)", "} else if ($1) {");
-        code = code.replaceAll("@else", "} else {");
-        code = code.replaceAll("(/\\*)?@end", "}");
+        code = IF1_PATTERN.matcher(code).replaceAll("if ($1) {");
+        code = IF2_PATTERN.matcher(code).replaceAll("} else if ($1) {");
+        code = IF3_PATTERN.matcher(code).replaceAll("} else {");
+        code = IF4_PATTERN.matcher(code).replaceAll("}");
         return code;
     }
 
     String replaceCompilationVariables(final String source, final BrowserVersion browserVersion) {
-        final Pattern p = Pattern.compile("(@_\\w+)|'[^']*'|\"[^\"]*\"");
-        final Matcher m = p.matcher(source);
+        final Matcher m = C_VARIABLE_PATTERN.matcher(source);
         final StringBuffer sb = new StringBuffer();
         while (m.find()) {
             final String match = m.group();

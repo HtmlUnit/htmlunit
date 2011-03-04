@@ -44,6 +44,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
     private static final Log LOG = LogFactory.getLog(HtmlUnitRegExpProxy.class);
 
+    private static final Pattern REPLACE_PATTERN = Pattern.compile("\\$\\$");
     private final RegExpProxy wrapped_;
 
     /**
@@ -80,7 +81,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             String replacement = (String) args[1];
             final Object arg0 = args[0];
             if (arg0 instanceof String) {
-                replacement = replacement.replaceAll("\\$\\$", "\\$");
+                replacement = REPLACE_PATTERN.matcher(replacement).replaceAll("\\$");
                 // arg0 should *not* be interpreted as a RegExp
                 return StringUtils.replaceOnce(thisString, (String) arg0, replacement);
             }

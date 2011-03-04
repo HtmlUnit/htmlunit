@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.imageio.ImageReader;
 
@@ -34,8 +35,11 @@ import com.gargoylesoftware.htmlunit.Page;
  * Utility to handle conversion from HTML code to XML string.
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 class XmlSerializer {
+
+    private static final Pattern CREATE_FILE_PATTERN = Pattern.compile(".*/");
 
     private final StringBuilder buffer_ = new StringBuilder();
     private final StringBuilder indent_ = new StringBuilder();
@@ -229,7 +233,8 @@ class XmlSerializer {
      * @throws IOException if a problem occurs creating the file
      */
     private File createFile(final String url, final String extension) throws IOException {
-        String name = url.replaceFirst("/$", "").replaceAll(".*/", "");
+        String name = url.replaceFirst("/$", "");
+        name = CREATE_FILE_PATTERN.matcher(name).replaceAll("");
         name = StringUtils.substringBefore(name, "?"); // remove query
         name = StringUtils.substringBefore(name, ";"); // remove additional info
         if (!name.endsWith(extension)) {
