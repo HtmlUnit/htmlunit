@@ -466,7 +466,7 @@ public class HttpWebConnection implements WebConnection {
                 httpClient_.getParams().setParameter(ClientPNames.VIRTUAL_HOST, virtualHost_);
             }
 
-            final Scheme httpScheme = new Scheme("http", new SocksSocketFactory(), 80);
+            final Scheme httpScheme = new Scheme("http", 80, new SocksSocketFactory());
             httpClient_.getConnectionManager().getSchemeRegistry().register(httpScheme);
 
             final CookieSpecFactory factory = new CookieSpecFactory() {

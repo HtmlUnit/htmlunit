@@ -15,15 +15,15 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 
 import org.apache.http.HttpHost;
 import org.apache.http.conn.ConnectTimeoutException;
-import org.apache.http.conn.scheme.SocketFactory;
+import org.apache.http.conn.scheme.SchemeSocketFactory;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
@@ -33,7 +33,7 @@ import org.apache.http.params.HttpParams;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-class SocksSocketFactory implements SocketFactory {
+class SocksSocketFactory implements SchemeSocketFactory {
 
     private HttpHost socksProxy_;
 
@@ -44,7 +44,7 @@ class SocksSocketFactory implements SocketFactory {
     /**
      * {@inheritDoc}
      */
-    public Socket createSocket() {
+    public Socket createSocket(final HttpParams params) {
         if (socksProxy_ != null) {
             final InetSocketAddress address = new InetSocketAddress(socksProxy_.getHostName(), socksProxy_.getPort());
             final Proxy proxy = new Proxy(Proxy.Type.SOCKS, address);
@@ -58,10 +58,13 @@ class SocksSocketFactory implements SocketFactory {
     /**
      * {@inheritDoc}
      */
-    public Socket connectSocket(Socket sock, final String host, final int port, final InetAddress localAddress,
-            int localPort, final HttpParams params)
-        throws IOException {
+    public Socket connectSocket(
+            Socket sock,
+            final InetSocketAddress remoteAddress,
+            final InetSocketAddress localAddress,
+            final HttpParams params) throws IOException, UnknownHostException, ConnectTimeoutException {
 
+        final String host = remoteAddress.getHostName();
         if (host == null) {
             throw new IllegalArgumentException("Target host may not be null.");
         }
@@ -70,20 +73,20 @@ class SocksSocketFactory implements SocketFactory {
         }
 
         if (sock == null) {
-            sock = createSocket();
+            sock = createSocket(params);
         }
 
-        if (localAddress != null || localPort > 0) {
+        if (localAddress != null) {
+            int localPort = localAddress.getPort();
             if (localPort < 0) {
                 localPort = 0; // indicates "any"
             }
 
-            sock.bind(new InetSocketAddress(localAddress, localPort));
+            sock.bind(new InetSocketAddress(localAddress.getHostName(), localPort));
         }
 
         final int timeout = HttpConnectionParams.getConnectionTimeout(params);
 
-        final InetSocketAddress remoteAddress = new InetSocketAddress(host, port);
         try {
             sock.connect(remoteAddress, timeout);
         }
