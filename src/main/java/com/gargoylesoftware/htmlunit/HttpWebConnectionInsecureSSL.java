@@ -45,16 +45,15 @@ final class HttpWebConnectionInsecureSSL {
         if (useInsecureSSL) {
             final SSLContext sslContext = SSLContext.getInstance("SSL");
             sslContext.init(null, new TrustManager[] {new InsecureTrustManager()}, null);
-            final SSLSocketFactory factory = new SSLSocketFactory(sslContext);
-            factory.setHostnameVerifier(new AllowAllHostnameVerifier());
-            final Scheme https = new Scheme("https", factory, 443);
+            final SSLSocketFactory factory = new SSLSocketFactory(sslContext, new AllowAllHostnameVerifier());
+            final Scheme https = new Scheme("https", 443, factory);
 
             final SchemeRegistry schemeRegistry = httpClient.getConnectionManager().getSchemeRegistry();
             schemeRegistry.register(https);
         }
         else {
             final SchemeRegistry schemeRegistry = httpClient.getConnectionManager().getSchemeRegistry();
-            schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
+            schemeRegistry.register(new Scheme("https", 443, SSLSocketFactory.getSocketFactory()));
         }
     }
 }

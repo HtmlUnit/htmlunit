@@ -79,11 +79,7 @@ import org.apache.http.cookie.CookieSpecFactory;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.cookie.params.CookieSpecPNames;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.FormBodyPart;
-import org.apache.http.entity.mime.HttpMultipart;
 import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MIME;
-import org.apache.http.entity.mime.MinimalField;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.FileBody;
@@ -268,7 +264,6 @@ public class HttpWebConnection implements WebConnection {
                         final KeyDataPair pairWithFile = (KeyDataPair) pair;
                         final ContentBody contentBody = buildFilePart(pairWithFile, charset);
                         multipartEntity.addPart(pair.getName(), contentBody);
-                        fixBugContentType(multipartEntity, contentBody.getMimeType());
                     }
                     else {
                         final StringBody stringBody =
@@ -354,39 +349,6 @@ public class HttpWebConnection implements WebConnection {
             }
         }
         return null;
-    }
-
-    /**
-     * HttpClient doesn't send Content-Type header for file parts as it should.
-     * See:https://issues.apache.org/jira/browse/HTTPCLIENT-960
-     * This is a hack to fix it and it should be removed once the issue has been fixed.
-     */
-    private void fixBugContentType(final MultipartEntity multipartEntity, final String contentType) {
-        // hack!!
-        try {
-            final java.lang.reflect.Field field = MultipartEntity.class.getDeclaredField("multipart");
-            field.setAccessible(true);
-            final HttpMultipart multipart = (HttpMultipart) field.get(multipartEntity);
-            final FormBodyPart lastOne = multipart.getBodyParts().get(multipart.getBodyParts().size() - 1);
-            final org.apache.http.entity.mime.Header header = lastOne.getHeader();
-            final MinimalField cntDispHeader = header.getField(MIME.CONTENT_DISPOSITION);
-//            header.removeFields(MIME.CONTENT_DISPOSITION);
-//            final Field newCntDispHeader = new Field() {
-//                public String getBody() {
-//                    return cntDispHeader.getBody() + "\r\nContent-Type: " + contentType;
-//                }
-//                public String getName() {
-//                    return MIME.CONTENT_DISPOSITION;
-//                }
-//                public org.apache.james.mime4j.util.ByteSequence getRaw() {
-//                    throw new RuntimeException("No in the hack");
-//                }
-//            };
-//            header.addField(newCntDispHeader);
-        }
-        catch (final Exception e) {
-            throw new RuntimeException("Hack to fix Content-Type submission failed", e);
-        }
     }
 
     // FIXME Change signature ?
@@ -546,10 +508,10 @@ public class HttpWebConnection implements WebConnection {
         HttpClientParams.setRedirecting(httpsParams, false);
 
         final SchemeRegistry schemeRegistry = new SchemeRegistry();
-        schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-        schemeRegistry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
+        schemeRegistry.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
+        schemeRegistry.register(new Scheme("https", 443, SSLSocketFactory.getSocketFactory()));
         final ThreadSafeClientConnManager connectionManager =
-            new ThreadSafeClientConnManager(httpsParams, schemeRegistry);
+            new ThreadSafeClientConnManager(schemeRegistry);
 
         final DefaultHttpClient httpClient = new DefaultHttpClient(connectionManager, httpsParams);
         httpClient.setCookieStore(new HtmlUnitCookieStore());
