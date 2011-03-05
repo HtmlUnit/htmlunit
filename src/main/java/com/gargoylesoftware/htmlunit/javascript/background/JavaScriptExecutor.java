@@ -150,13 +150,16 @@ public class JavaScriptExecutor implements Runnable, Serializable {
                 break;
             }
             if (jobManager != null) {
-                // execute the earliest job.
-                if (LOG.isTraceEnabled()) {
-                    LOG.trace("started executing job at " + System.currentTimeMillis());
-                }
-                jobManager.runSingleJob(jobManager.getEarliestJob());
-                if (LOG.isTraceEnabled()) {
-                    LOG.trace("stopped executing job at " + System.currentTimeMillis());
+                final JavaScriptJob earliestJob = jobManager.getEarliestJob();
+                if (earliestJob != null) {
+                    // execute the earliest job.
+                    if (LOG.isTraceEnabled()) {
+                        LOG.trace("started executing job at " + System.currentTimeMillis());
+                    }
+                    jobManager.runSingleJob(jobManager.getEarliestJob());
+                    if (LOG.isTraceEnabled()) {
+                        LOG.trace("stopped executing job at " + System.currentTimeMillis());
+                    }
                 }
             }
         }
