@@ -650,6 +650,9 @@
         <contributor>
             <name>Nikolai Avteniev</name>
         </contributor>
+        <contributor>
+            <name>Kostadin Chikov</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

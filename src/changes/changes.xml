@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" due-to="Kostadin Chikov">
+                Improved memory handling of JavaScriptExecutor.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.0.1.
             </action>

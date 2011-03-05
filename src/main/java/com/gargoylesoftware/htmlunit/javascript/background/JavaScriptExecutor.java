@@ -30,38 +30,10 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  *
  * @version $Revision$
  * @author Amit Manjhi
- *
+ * @author Kostadin Chikov
+ * @author Ronald Brill
  */
 public class JavaScriptExecutor implements Runnable, Serializable {
-
-    /**
-     * A simple class to store a JavaScriptJobManager and its earliest job.
-     */
-    protected static final class JobExecutor {
-        private final JavaScriptJobManager jobManager_;
-        private final JavaScriptJob earliestJob_;
-
-        private JobExecutor(final JavaScriptJobManager jobManager, final JavaScriptJob earliestJob) {
-            jobManager_ = jobManager;
-            earliestJob_ = earliestJob;
-        }
-
-        /**
-         * Returns the earliest job.
-         * @return the earliest job.
-         */
-        protected JavaScriptJob getEarliestJob() {
-            return earliestJob_;
-        }
-
-        /**
-         * Returns the JavaScriptJobManager.
-         * @return the JavaScriptJobManager.
-         */
-        protected JavaScriptJobManager getJobManager() {
-            return jobManager_;
-        }
-    }
 
     // TODO: is there utility in not having these as transient?
     private transient WeakReference<WebClient> webClient_;
@@ -119,22 +91,23 @@ public class JavaScriptExecutor implements Runnable, Serializable {
      * Returns the JobExecutor corresponding to the earliest job.
      * @return the JobExectuor with the earliest job.
      */
-    protected synchronized JobExecutor getEarliestJob() {
-        JobExecutor jobExecutor = null;
+    protected synchronized JavaScriptJobManager getJobManagerWithEarliestJob() {
+        JavaScriptJobManager javaScriptJobManager = null;
+        JavaScriptJob earliestJob = null;
         // iterate over the list and find the earliest job to run.
         for (WeakReference<JavaScriptJobManager> jobManagerRef : jobManagerList_) {
             final JavaScriptJobManager jobManager = jobManagerRef.get();
             if (jobManager != null) {
                 final JavaScriptJob newJob = jobManager.getEarliestJob();
                 if (newJob != null) {
-                    if (jobExecutor == null
-                        || jobExecutor.earliestJob_.compareTo(newJob) > 0) {
-                        jobExecutor = new JobExecutor(jobManager, newJob);
+                    if (earliestJob == null || earliestJob.compareTo(newJob) > 0) {
+                        earliestJob = newJob;
+                        javaScriptJobManager = jobManager;
                     }
                 }
             }
         }
-        return jobExecutor;
+        return javaScriptJobManager;
     }
 
     /**
@@ -149,18 +122,23 @@ public class JavaScriptExecutor implements Runnable, Serializable {
 
     /** Runs the eventLoop. */
     public void run() {
+        final long sleepInterval = 10;
         while (!shutdown_ && webClient_.get() != null) {
             if (LOG.isTraceEnabled()) {
                 LOG.trace("started finding earliestJob at " + System.currentTimeMillis());
             }
-            final JobExecutor jobExecutor = getEarliestJob();
+            final JavaScriptJobManager jobManager = getJobManagerWithEarliestJob();
             if (LOG.isTraceEnabled()) {
                 LOG.trace("stopped finding earliestJob at " + System.currentTimeMillis());
             }
 
-            final long sleepInterval = 10;
-            if (jobExecutor == null
-                || jobExecutor.earliestJob_.getTargetExecutionTime() - System.currentTimeMillis() > sleepInterval) {
+            boolean wait = jobManager == null;
+            if (!wait) {
+                final JavaScriptJob earliestJob = jobManager.getEarliestJob();
+                wait = earliestJob == null
+                        || earliestJob.getTargetExecutionTime() - System.currentTimeMillis() > sleepInterval;
+            }
+            if (wait) {
                 try {
                     Thread.sleep(sleepInterval);
                 }
@@ -171,12 +149,12 @@ public class JavaScriptExecutor implements Runnable, Serializable {
             if (shutdown_ || webClient_.get() == null) {
                 break;
             }
-            if (jobExecutor != null) {
+            if (jobManager != null) {
                 // execute the earliest job.
                 if (LOG.isTraceEnabled()) {
                     LOG.trace("started executing job at " + System.currentTimeMillis());
                 }
-                jobExecutor.jobManager_.runSingleJob(jobExecutor.earliestJob_);
+                jobManager.runSingleJob(jobManager.getEarliestJob());
                 if (LOG.isTraceEnabled()) {
                     LOG.trace("stopped executing job at " + System.currentTimeMillis());
                 }

@@ -21,7 +21,8 @@ import com.gargoylesoftware.htmlunit.WebClient;
  *
  * @version $Revision$
  * @author Amit Manjhi
- *
+ * @author Kostadin Chikov
+ * @author Ronald Brill
  */
 public class GAEJavaScriptExecutor extends JavaScriptExecutor {
 
@@ -49,18 +50,25 @@ public class GAEJavaScriptExecutor extends JavaScriptExecutor {
     @Override
     public int pumpEventLoop(final long timeoutMillis) {
         int count = 0;
-        final long expirationTime = System.currentTimeMillis() + timeoutMillis;
-        while (System.currentTimeMillis() < expirationTime) {
-            final JobExecutor jobExecutor = getEarliestJob();
-            if (jobExecutor == null) {
+        long currentTime = System.currentTimeMillis();
+        final long expirationTime = currentTime + timeoutMillis;
+
+        while (currentTime < expirationTime) {
+            final JavaScriptJobManager jobManager = getJobManagerWithEarliestJob();
+            if (jobManager == null) {
                 break;
             }
-            if (expirationTime < jobExecutor.getEarliestJob().getTargetExecutionTime()) {
+
+            final JavaScriptJob earliestJob = jobManager.getEarliestJob();
+            if (earliestJob == null) {
                 break;
             }
+            if (expirationTime < earliestJob.getTargetExecutionTime()) {
+                break;
+            }
+
             // sleep if there is time remaining in the earliestJob.
-            final long sleepTime = jobExecutor.getEarliestJob().getTargetExecutionTime()
-                - System.currentTimeMillis();
+            final long sleepTime = earliestJob.getTargetExecutionTime() - currentTime;
             if (sleepTime > 0) {
                 try {
                     Thread.sleep(sleepTime);
@@ -69,10 +77,11 @@ public class GAEJavaScriptExecutor extends JavaScriptExecutor {
                     e.printStackTrace();
                 }
             }
-            final boolean ran = jobExecutor.getJobManager().runSingleJob(jobExecutor.getEarliestJob());
+            final boolean ran = jobManager.runSingleJob(earliestJob);
             if (ran) {
                 count++;
             }
+            currentTime = System.currentTimeMillis();
         }
         return count;
     }
