@@ -122,6 +122,8 @@ public class JavaScriptExecutor implements Runnable, Serializable {
 
     /** Runs the eventLoop. */
     public void run() {
+        // this has to be a multiple of 10ms
+        // otherwise the VM has to fight with the OS to get such small periods
         final long sleepInterval = 10;
         while (!shutdown_ && webClient_.get() != null) {
             if (LOG.isTraceEnabled()) {
@@ -132,35 +134,39 @@ public class JavaScriptExecutor implements Runnable, Serializable {
                 LOG.trace("stopped finding earliestJob at " + System.currentTimeMillis());
             }
 
-            boolean wait = jobManager == null;
-            if (!wait) {
-                final JavaScriptJob earliestJob = jobManager.getEarliestJob();
-                wait = earliestJob == null
-                        || earliestJob.getTargetExecutionTime() - System.currentTimeMillis() > sleepInterval;
-            }
-            if (wait) {
-                try {
-                    Thread.sleep(sleepInterval);
-                }
-                catch (final InterruptedException e) {
-                    // nothing, probably a shutdown notification
-                }
-            }
-            if (shutdown_ || webClient_.get() == null) {
-                break;
-            }
             if (jobManager != null) {
                 final JavaScriptJob earliestJob = jobManager.getEarliestJob();
                 if (earliestJob != null) {
-                    // execute the earliest job.
-                    if (LOG.isTraceEnabled()) {
-                        LOG.trace("started executing job at " + System.currentTimeMillis());
-                    }
-                    jobManager.runSingleJob(jobManager.getEarliestJob());
-                    if (LOG.isTraceEnabled()) {
-                        LOG.trace("stopped executing job at " + System.currentTimeMillis());
+                    final long waitTime = earliestJob.getTargetExecutionTime() - System.currentTimeMillis();
+
+                    // do we have to execute the earliest job
+                    if (waitTime < 1) {
+                        // execute the earliest job
+                        if (LOG.isTraceEnabled()) {
+                            LOG.trace("started executing job at " + System.currentTimeMillis());
+                        }
+                        jobManager.runSingleJob(earliestJob);
+                        if (LOG.isTraceEnabled()) {
+                            LOG.trace("stopped executing job at " + System.currentTimeMillis());
+                        }
+
+                        // job is done, have a look for another one
+                        continue;
                     }
                 }
+            }
+
+            // check for cancel
+            if (shutdown_ || webClient_.get() == null) {
+                break;
+            }
+
+            // nothing to do, let's sleep a bit
+            try {
+                Thread.sleep(sleepInterval);
+            }
+            catch (final InterruptedException e) {
+                // nothing, probably a shutdown notification
             }
         }
     }
