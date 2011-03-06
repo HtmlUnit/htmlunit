@@ -755,6 +755,12 @@ public enum BrowserVersionFeatures {
      */
     URL_ABOUT_BLANK_HAS_EMPTY_PATH,
 
+    /**
+     * Indicates, that the browser supports username and password as
+     * part of the url (e.g. http://john.smith:secret@localhost).
+     */
+    URL_AUTH_CREDENTIALS,
+
     /** Replace only ' ' with %20 when encode the query part of an url. */
     URL_MINIMAL_QUERY_ENCODING,
 

@@ -301,7 +301,17 @@ public class HttpWebConnection implements WebConnection {
         // (it may have changed on the webClient since last call to getHttpClientFor(...))
         final CredentialsProvider credentialsProvider = webClient_.getCredentialsProvider();
 
-        // if the used url contains credentials, then we have to add this
+        // if the used url contains credentials, we have to add this
+        final Credentials requestUrlCredentials = webRequest.getUrlCredentials();
+        if (null != requestUrlCredentials
+                && webClient_.getBrowserVersion().hasFeature(BrowserVersionFeatures.URL_AUTH_CREDENTIALS)) {
+            final URL requestUrl = webRequest.getUrl();
+            final AuthScope authScope = new AuthScope(requestUrl.getHost(), requestUrl.getPort());
+            // updating our client to keep the credentials for the next request
+            credentialsProvider.setCredentials(authScope, requestUrlCredentials);
+        }
+
+        // if someone has set credentials to this request, we have to add this
         final Credentials requestCredentials = webRequest.getCredentials();
         if (null != requestCredentials) {
             final URL requestUrl = webRequest.getUrl();

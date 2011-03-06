@@ -91,7 +91,7 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SecRet")
+    @Alerts(FF = "SecRet")
     public void basicAuthenticationUserFromUrl() throws Exception {
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -115,7 +115,7 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SecRet")
+    @Alerts(FF = "SecRet")
     public void basicAuthenticationUserFromUrlUsedForNextSteps() throws Exception {
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -143,7 +143,7 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SecRet")
+    @Alerts(FF = "SecRet")
     public void basicAuthenticationUserFromUrlOverwrite() throws Exception {
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -187,14 +187,20 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
         // now a url with wrong credentials
         url = new URL("http://joe:jetty@localhost:" + PORT + "/");
         loadPage2(html, url);
-        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+
+        if (getBrowserVersion().isIE()) {
+            assertTrue(driver.getPageSource().contains("SecRet"));
+        }
+        else {
+            assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+        }
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("SecRet")
+    @Alerts(FF = "SecRet")
     public void basicAuthenticationUserFromUrlOverwriteWrongDefaultCredentials() throws Exception {
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
@@ -216,7 +222,7 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("Hello World")
+    @Alerts(FF = "Hello World")
     public void basicAuthenticationXHR() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"
@@ -263,7 +269,7 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("HTTP ERROR 401")
+    @Alerts(FF = "HTTP ERROR 401")
     public void basicAuthenticationXHRWithUser() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"

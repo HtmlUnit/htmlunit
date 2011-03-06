@@ -54,6 +54,7 @@ public class WebRequest implements Serializable {
     private HttpMethod httpMethod_ = HttpMethod.GET;
     private FormEncodingType encodingType_ = FormEncodingType.URL_ENCODED;
     private Map<String, String> additionalHeaders_ = new HashMap<String, String>();
+    private Credentials urlCredentials_;
     private Credentials credentials_;
     private String charset_ = TextUtil.DEFAULT_CHARSET;
 
@@ -123,12 +124,12 @@ public class WebRequest implements Serializable {
             if (userInfo != null) {
                 final int splitPos = userInfo.indexOf(':');
                 if (splitPos == -1) {
-                    credentials_ = new UsernamePasswordCredentials(userInfo, "");
+                    urlCredentials_ = new UsernamePasswordCredentials(userInfo, "");
                 }
                 else {
                     final String username = userInfo.substring(0, splitPos);
                     final String password = userInfo.substring(splitPos + 1);
-                    credentials_ = new UsernamePasswordCredentials(username, password);
+                    urlCredentials_ = new UsernamePasswordCredentials(username, password);
                 }
             }
         }
@@ -379,6 +380,14 @@ public class WebRequest implements Serializable {
     /**
      * Returns the credentials to use.
      * @return the credentials if set as part of the url
+     */
+    public Credentials getUrlCredentials() {
+        return urlCredentials_;
+    }
+
+    /**
+     * Returns the credentials to use.
+     * @return the credentials if set from the external builder
      */
     public Credentials getCredentials() {
         return credentials_;

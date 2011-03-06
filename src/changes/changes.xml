@@ -6,6 +6,13 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGES: the WebRequest no longer has a CredentialProvider as attribute.
+                No there are two attributes of type Credentials named urlCredentials and credentials.
+                The attribute credentials has a getter and a setter method; the urlCredentials are
+                only addressable via getter call. This change was needed to support credentials as part
+                of the url.
+            </action>
             <action type="fix" dev="rbri" due-to="Kostadin Chikov">
                 Improved memory handling of JavaScriptExecutor.
             </action>

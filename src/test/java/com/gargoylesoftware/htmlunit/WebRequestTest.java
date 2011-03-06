@@ -113,7 +113,7 @@ public class WebRequestTest {
     public void credentials() throws Exception {
         final URL url = new URL("http://john.smith:secret@localhost/");
         final WebRequest request = new WebRequest(url);
-        final Credentials credentials = request.getCredentials();
+        final Credentials credentials = request.getUrlCredentials();
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
         assertEquals("secret", credentials.getPassword());
     }
@@ -125,7 +125,7 @@ public class WebRequestTest {
     public void credentialsOnlyUsernameInURL() throws Exception {
         final URL url = new URL("http://john.smith@localhost/");
         final WebRequest request = new WebRequest(url);
-        final Credentials credentials = request.getCredentials();
+        final Credentials credentials = request.getUrlCredentials();
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
         assertEquals("", credentials.getPassword());
     }
@@ -137,7 +137,7 @@ public class WebRequestTest {
     public void credentialsOnlyPasswordInURL() throws Exception {
         final URL url = new URL("http://:secret@localhost/");
         final WebRequest request = new WebRequest(url);
-        final Credentials credentials = request.getCredentials();
+        final Credentials credentials = request.getUrlCredentials();
         assertEquals(new BasicUserPrincipal(""), credentials.getUserPrincipal());
         assertEquals("secret", credentials.getPassword());
     }
@@ -149,7 +149,7 @@ public class WebRequestTest {
     public void credentialsEmptyURL() throws Exception {
         final URL url = new URL("http://:@localhost/");
         final WebRequest request = new WebRequest(url);
-        final Credentials credentials = request.getCredentials();
+        final Credentials credentials = request.getUrlCredentials();
         assertEquals(new BasicUserPrincipal(""), credentials.getUserPrincipal());
         assertEquals("", credentials.getPassword());
     }
