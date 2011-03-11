@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -140,5 +141,27 @@ public class WebClient3Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
 
         loadPage2("", new URL(getDefaultUrl(), "foo?a=<b>i</b>"));
+    }
+
+    /**
+     * Regression test for issue 3193004. 
+     * Ensure that the click returns once the target page has been loaded into the target window.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickReturnsWhenThePageHasBeenCompleteLoaded() throws Exception {
+        final String firstContent = "<html><head>\n"
+            + "<script>window.setInterval(\'',1);</script></head>\n"
+            + "<body><a href='" + URL_SECOND + "'>to second</a></body></html>";
+        final String secondContent = "<html><body></body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(URL_SECOND, secondContent);
+
+        for (int i = 1; i < 100; i++) {
+            WebDriver webDriver = loadPage2(firstContent);
+            webDriver.findElement(By.tagName("a")).click();
+            Assert.assertEquals("Run " + i, URL_SECOND.toExternalForm(), webDriver.getCurrentUrl());
+        }
     }
 }

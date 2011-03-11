@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3193004" due-to="Nikolai Avteniev">
+                Fix synchronization problem causing wrong page to be occasionally loaded into a window.
+            </action>
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGES: the WebRequest no longer has a CredentialProvider as attribute.
                 No there are two attributes of type Credentials named urlCredentials and credentials.
