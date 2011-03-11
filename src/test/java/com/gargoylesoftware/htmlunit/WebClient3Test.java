@@ -144,7 +144,7 @@ public class WebClient3Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for issue 3193004. 
+     * Regression test for issue 3193004.
      * Ensure that the click returns once the target page has been loaded into the target window.
      * @throws Exception if an error occurs
      */
@@ -159,7 +159,7 @@ public class WebClient3Test extends WebDriverTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
 
         for (int i = 1; i < 100; i++) {
-            WebDriver webDriver = loadPage2(firstContent);
+            final WebDriver webDriver = loadPage2(firstContent);
             webDriver.findElement(By.tagName("a")).click();
             Assert.assertEquals("Run " + i, URL_SECOND.toExternalForm(), webDriver.getCurrentUrl());
         }
