@@ -196,7 +196,7 @@ public class HtmlScript extends HtmlElement {
         }
 
         if (execute) {
-            executeScriptIfNeeded(true);
+            executeScriptIfNeeded();
         }
     }
 
@@ -221,17 +221,17 @@ public class HtmlScript extends HtmlElement {
                     if (!isDeferred()) {
                         if (!"//:".equals(getSrcAttribute())) {
                             setAndExecuteReadyState(READY_STATE_LOADING);
-                            executeScriptIfNeeded(true);
+                            executeScriptIfNeeded();
                             setAndExecuteReadyState(READY_STATE_LOADED);
                         }
                         else {
                             setAndExecuteReadyState(READY_STATE_COMPLETE);
-                            executeScriptIfNeeded(true);
+                            executeScriptIfNeeded();
                         }
                     }
                 }
                 else {
-                    executeScriptIfNeeded(true);
+                    executeScriptIfNeeded();
                 }
             }
         };
@@ -255,16 +255,10 @@ public class HtmlScript extends HtmlElement {
     /**
      * Executes this script node as inline script if necessary and/or possible.
      *
-     * @param executeIfDeferred if <tt>false</tt>, and we are emulating IE, and the <tt>defer</tt>
      * attribute is defined, the script is not executed
      */
-    private void executeInlineScriptIfNeeded(final boolean executeIfDeferred) {
+    private void executeInlineScriptIfNeeded() {
         if (!isExecutionNeeded()) {
-            return;
-        }
-
-        final boolean ie = getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_7);
-        if (!executeIfDeferred && isDeferred() && ie) {
             return;
         }
 
@@ -281,6 +275,7 @@ public class HtmlScript extends HtmlElement {
             event = event.substring(0, event.length() - 2);
         }
 
+        final boolean ie = getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_7);
         final String scriptCode = textNode.getData();
         if (ie && event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
             if ("window".equals(forr)) {
@@ -318,17 +313,13 @@ public class HtmlScript extends HtmlElement {
      * @param executeIfDeferred if <tt>false</tt>, and we are emulating IE, and the <tt>defer</tt>
      * attribute is defined, the script is not executed
      */
-    void executeScriptIfNeeded(final boolean executeIfDeferred) {
+    void executeScriptIfNeeded() {
         if (!isExecutionNeeded()) {
             return;
         }
 
         final HtmlPage page = (HtmlPage) getPage();
         final BrowserVersion browser = page.getWebClient().getBrowserVersion();
-        final boolean ie = browser.hasFeature(BrowserVersionFeatures.GENERATED_8);
-        if (!executeIfDeferred && isDeferred() && ie) {
-            return;
-        }
 
         final String src = getSrcAttribute();
         if (src.equals(SLASH_SLASH_COLON)) {
@@ -378,7 +369,7 @@ public class HtmlScript extends HtmlElement {
         }
         else if (getFirstChild() != null) {
             // <script>[code]</script>
-            executeInlineScriptIfNeeded(executeIfDeferred);
+            executeInlineScriptIfNeeded();
         }
     }
 
@@ -407,7 +398,7 @@ public class HtmlScript extends HtmlElement {
             return false;
         }
 
-        //If innerHTML or outerHTML is being parsed
+        // If innerHTML or outerHTML is being parsed
         if (page instanceof HtmlPage && ((HtmlPage) page).isParsingHtmlSnippet()) {
             return false;
         }
