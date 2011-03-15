@@ -184,19 +184,15 @@ public class HtmlScript extends HtmlElement {
         final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
-        boolean execute = false;
         if (namespaceURI == null && "src".equals(qualifiedName)) {
             final boolean ie =
                 getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_5);
             if (ie || (oldValue.length() == 0 && getFirstChild() == null)) {
-                // Always execute if IE; if FF, only execute if the "src" attribute
+                // Always execute if IE;
+                // if FF, only execute if the "src" attribute
                 // was undefined and there was no inline code.
-                execute = true;
+                executeScriptIfNeeded();
             }
-        }
-
-        if (execute) {
-            executeScriptIfNeeded();
         }
     }
 
@@ -219,7 +215,7 @@ public class HtmlScript extends HtmlElement {
                     getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_6);
                 if (ie) {
                     if (!isDeferred()) {
-                        if (!"//:".equals(getSrcAttribute())) {
+                        if (!SLASH_SLASH_COLON.equals(getSrcAttribute())) {
                             setAndExecuteReadyState(READY_STATE_LOADING);
                             executeScriptIfNeeded();
                             setAndExecuteReadyState(READY_STATE_LOADED);
