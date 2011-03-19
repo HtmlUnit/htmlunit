@@ -45,14 +45,14 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser can inherit CSS property values. */
     CAN_INHERIT_CSS_PROPERTY_VALUES,
 
+    /** Was originally .isFirefox(). */
+    CSS_DISPLAY_DEFAULT,
+
     /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets
      * you use CSS to attach a script to a specific element in order to implement
      * DHTML (Dynamic HTML) components.
      */
     CSS_SUPPORTS_BEHAVIOR_PROPERTY,
-
-    /** Was originally .isFirefox(). */
-    CSS_DISPLAY_DEFAULT,
 
     /** */
     DIALOGWINDOW_REFERER,
