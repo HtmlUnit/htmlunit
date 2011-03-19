@@ -1411,9 +1411,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         try {
             final Event event = clazz.newInstance();
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CREATEEVENT_INITALIZES_TARGET)) {
-                event.setTarget(this);
-            }
             event.setEventType(eventType);
             event.setParentScope(getWindow());
             event.setPrototype(getPrototype(clazz));

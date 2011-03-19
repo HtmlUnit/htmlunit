@@ -367,7 +367,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         jsElement_ = htmlElement;
         setDomNode(htmlElement.getDomNodeOrNull(), false);
         // If an IE behavior was specified in the style, apply the behavior.
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_22)) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY)) {
             for (final StyleElement element : getStyleMap().values()) {
                 if (BEHAVIOR.equals(element.getName())) {
                     try {
