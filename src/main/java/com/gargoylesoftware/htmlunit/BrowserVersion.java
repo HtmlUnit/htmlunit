@@ -192,7 +192,7 @@ public class BrowserVersion implements Serializable {
      * @param userAgent the user agent string that will be sent to the server
      * @param javaScriptVersion the version of JavaScript
      * @param browserVersionNumeric the floating number version of the browser
-     * @param nickname the short name of the browser (like "FF2", "FF3", "IE6", ...)
+     * @param nickname the short name of the browser (like "FF3", "IE6", ...)
      * @param features the browser features
      */
     private BrowserVersion(final String applicationName, final String applicationVersion,
@@ -258,7 +258,7 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
-     * version of Firefox like {@link #FIREFOX_2} or {@link #FIREFOX_3}.
+     * version of Firefox like {@link #FIREFOX_3} or {@link #FIREFOX_3_6}.
      * @return whether or not this version is a version of a Firefox browser
      */
     public final boolean isFirefox() {

@@ -281,9 +281,6 @@ public class JavaScriptEngine {
             removePrototypeProperties(window, "Number", "toSource");
             removePrototypeProperties(window, "String", "toSource");
         }
-        else if ("FF2".equals(browserVersion.getNickname())) {
-            removePrototypeProperties(window, "Array", "reduce", "reduceRight");
-        }
 
         window.setPrototypes(prototypes);
         window.initialize(webWindow);
