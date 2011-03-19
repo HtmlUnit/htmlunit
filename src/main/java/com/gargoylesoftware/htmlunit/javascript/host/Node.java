@@ -353,7 +353,7 @@ public class Node extends SimpleScriptable {
                 appendedChild = newChildObject;
             }
 
-            //if parentNode is null in IE, create a DocumentFragment to be the parentNode
+            // if parentNode is null in IE, create a DocumentFragment to be the parentNode
             if (domNode.getParentNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion()
                     .hasFeature(BrowserVersionFeatures.GENERATED_122)) {
@@ -885,7 +885,8 @@ public class Node extends SimpleScriptable {
                 final XMLSerializer serializer = new XMLSerializer();
                 serializer.setParentScope(getParentScope());
                 String xml = serializer.jsxFunction_serializeToString(this);
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_128) && xml.endsWith("\r\n")) {
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF)
+                        && xml.endsWith("\r\n")) {
                     xml = xml.substring(0, xml.length() - 2);
                 }
                 return xml;

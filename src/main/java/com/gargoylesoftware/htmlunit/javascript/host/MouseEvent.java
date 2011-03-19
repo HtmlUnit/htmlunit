@@ -194,7 +194,7 @@ public class MouseEvent extends UIEvent {
      */
     public int jsxGet_button() {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_116)) {
-            //In IE7: oncontextmenu event.button is 0
+            // In IE7: oncontextmenu event.button is 0
             if (jsxGet_type().equals(TYPE_CONTEXT_MENU)) {
                 return 0;
             }
