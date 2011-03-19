@@ -6,6 +6,13 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                XMLSerializer.serializeToString() generate lower case tags for FF 3.6.
+            </action>
+            <action type="fix" dev="rbri" issue="3139076">
+                XMLSerializer.serializeToString() generates self closing tags as
+                defined by xhtml (only FF 3.6).
+            </action>
             <action type="fix" dev="mguillem" issue="3193004" due-to="Nikolai Avteniev">
                 Fix synchronization problem causing wrong page to be occasionally loaded into a window.
             </action>
