@@ -643,16 +643,25 @@ public enum BrowserVersionFeatures {
     IGNORE_CONTENTS_OF_INNER_HEAD,
 
     /** */
-    JAVASCRIPT_DEFERRED,
+    JS_DEFERRED,
+
+    /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
+    JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
 
     /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
-    JAVASCRIPT_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB,
+    JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB,
 
     /** Javascript function getElementById compares the id's case sensitive. */
-    JAVASCRIPT_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
+    JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
+
+    /** Indicates that objects with prototype property available in window scope; Firefox does this. */
+    JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
+
+    /** Indicates if multiple spaces are replaced by a single one when accessing innerHTML. */
+    JS_INNER_HTML_REDUCE_WHITESPACES,
 
     /** Javascript function returning a length (e.g. getWidth) without 'px' at the end. */
-    JAVASCRIPT_LENGTH_WITHOUT_PX,
+    JS_LENGTH_WITHOUT_PX,
 
     /**
      * Set this property if the browser evaluates<br>
@@ -660,22 +669,13 @@ public enum BrowserVersionFeatures {
      * for url 'http://localhost/something/#%C3%BC'.<br>
      * IE evaluates to #%C3%BC.
      */
-    JAVASCRIPT_LOCATION_HASH_IS_DECODED,
+    JS_LOCATION_HASH_IS_DECODED,
 
     /** Always "[object]". */
-    JAVASCRIPT_OBJECT_ONLY,
+    JS_OBJECT_ONLY,
 
     /** Evaluates to "[object Element]". */
-    JAVASCRIPT_OBJECT_PREFIX,
-
-    /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
-    JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
-
-    /** Indicates that objects with prototype property available in window scope; Firefox does this. */
-    JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
-
-    /** Indicates if multiple spaces are replaced by a single one when accessing innerHTML. */
-    JS_INNER_HTML_REDUCE_WHITESPACES,
+    JS_OBJECT_PREFIX,
 
     /** Indicates that someObj.offsetParent throws an exception when called on an object that is not yet attached
      *  to the page's DOM.

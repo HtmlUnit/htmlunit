@@ -276,21 +276,10 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
     @Override
     public Object getDefaultValue(final Class< ? > hint) {
         if (String.class.equals(hint) || hint == null) {
-            // TODO: shouldn't we handle this with BrowserVersion.hasFeature?
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JAVASCRIPT_OBJECT_ONLY)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OBJECT_ONLY)) {
                 return "[object]"; // the super helpful IE solution
             }
-            else if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JAVASCRIPT_OBJECT_PREFIX)) {
-                return "[object " + getClassName() + "]";
-            }
-            else {
-                // Firefox2 is not fully coherent here (see WindowTest#windowProperties)
-                final Window window = (Window) getTopLevelScope(this);
-                if (ScriptableObject.getProperty(window, getClassName()) == this) {
-                    return "[" + getClassName() + "]";
-                }
-                return "[object " + getClassName() + "]";
-            }
+            return "[object " + getClassName() + "]";
         }
         return super.getDefaultValue(hint);
     }

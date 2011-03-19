@@ -1299,7 +1299,7 @@ public class HtmlPage extends SgmlPage {
         if (!getWebClient().isJavaScriptEnabled()) {
             return;
         }
-        if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.JAVASCRIPT_DEFERRED)) {
+        if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DEFERRED)) {
             final HtmlElement doc = getDocumentElement();
             final List<HtmlElement> elements = doc.getHtmlElementsByTagName("script");
             for (final HtmlElement e : elements) {
@@ -1318,7 +1318,7 @@ public class HtmlPage extends SgmlPage {
      */
     private void setReadyStateOnDeferredScriptsIfNeeded() {
         if (getWebClient().isJavaScriptEnabled() && getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.JAVASCRIPT_DEFERRED)) {
+                .hasFeature(BrowserVersionFeatures.JS_DEFERRED)) {
             final List<HtmlElement> elements = getDocumentElement().getHtmlElementsByTagName("script");
             for (final HtmlElement e : elements) {
                 if (e instanceof HtmlScript) {

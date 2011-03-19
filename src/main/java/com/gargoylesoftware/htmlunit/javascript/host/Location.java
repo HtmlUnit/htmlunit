@@ -167,7 +167,7 @@ public class Location extends SimpleScriptable {
         try {
             URL url = page.getWebResponse().getWebRequest().getUrl();
             final boolean encodeHash = getBrowserVersion().
-                    hasFeature(BrowserVersionFeatures.JAVASCRIPT_LOCATION_HASH_IS_DECODED);
+                    hasFeature(BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED);
             final String hash = getHash(encodeHash);
             if (hash != null) {
                 url = UrlUtils.getUrlWithNewRef(url, hash);
@@ -286,7 +286,7 @@ public class Location extends SimpleScriptable {
                 hash = hash.substring(1);
             }
             final boolean decodeHash = getBrowserVersion().
-                hasFeature(BrowserVersionFeatures.JAVASCRIPT_LOCATION_HASH_IS_DECODED);
+                hasFeature(BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED);
             if (decodeHash) {
                 hash = decodeHash(hash);
             }

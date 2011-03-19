@@ -270,7 +270,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             value = "transparent";
         }
         else if (getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.JAVASCRIPT_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB)) {
+                .hasFeature(BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB)) {
             value = toRGBColor(value);
         }
         return value;
@@ -1896,7 +1896,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @see #pixelString(HTMLElement, CssValue)
      */
     protected String pixelString(final String value) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JAVASCRIPT_LENGTH_WITHOUT_PX)) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX)) {
             return value;
         }
         if (value.endsWith("px")) {
@@ -1916,7 +1916,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     protected String pixelString(final HTMLElement element, final CssValue value) {
         final String s = value.get(element);
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JAVASCRIPT_LENGTH_WITHOUT_PX)) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX)) {
             return s;
         }
         if (s.endsWith("px")) {
