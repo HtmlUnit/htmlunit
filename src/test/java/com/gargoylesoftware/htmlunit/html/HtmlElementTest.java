@@ -502,10 +502,10 @@ public class HtmlElementTest extends WebTestCase {
      */
     @Test
     public void testConstants() {
-        assertEquals("", HtmlElement.ATTRIBUTE_NOT_DEFINED);
-        assertEquals("", HtmlElement.ATTRIBUTE_VALUE_EMPTY);
+        assertEquals("", DomElement.ATTRIBUTE_NOT_DEFINED);
+        assertEquals("", DomElement.ATTRIBUTE_VALUE_EMPTY);
         assertTrue("Not the same object",
-            HtmlElement.ATTRIBUTE_NOT_DEFINED != HtmlElement.ATTRIBUTE_VALUE_EMPTY);
+                DomElement.ATTRIBUTE_NOT_DEFINED != DomElement.ATTRIBUTE_VALUE_EMPTY);
     }
 
     static class HtmlAttributeChangeListenerTestImpl implements HtmlAttributeChangeListener {
@@ -639,7 +639,7 @@ public class HtmlElementTest extends WebTestCase {
 
         myButton.click();
         assertEquals(expectedValues, listenerImpl.getCollectedValues());
-        assertSame(HtmlElement.ATTRIBUTE_NOT_DEFINED, p1.getAttribute("title"));
+        assertSame(DomElement.ATTRIBUTE_NOT_DEFINED, p1.getAttribute("title"));
     }
 
     /**

@@ -21,7 +21,6 @@ import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 
-import org.apache.xalan.res.XSLMessages;
 import org.apache.xml.utils.DefaultErrorHandler;
 import org.apache.xml.utils.PrefixResolver;
 import org.apache.xml.utils.WrappedRuntimeException;
@@ -33,6 +32,8 @@ import org.apache.xpath.compiler.FunctionTable;
 import org.apache.xpath.compiler.XPathParser;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.res.XPATHErrorResources;
+
+import com.sun.org.apache.xpath.internal.res.XPATHMessages;
 
 /**
  * XPath adapter implementation for HtmlUnit.
@@ -175,7 +176,7 @@ class XPathAdapter {
             String msg = e.getMessage();
 
             if (msg == null || msg.length() == 0) {
-                msg = XSLMessages.createXPATHMessage(XPATHErrorResources.ER_XPATH_ERROR, null);
+                msg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_XPATH_ERROR, null);
             }
             final TransformerException te = new TransformerException(msg, mainExp_, e);
             final ErrorListener el = xpathContext.getErrorListener();

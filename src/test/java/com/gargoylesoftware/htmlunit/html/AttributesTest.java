@@ -225,7 +225,7 @@ public class AttributesTest extends TestCase {
         }
         else {
             final String tagName = (String) classUnderTest_.getField("TAG_NAME").get(null);
-            newInstance = new DefaultElementFactory().createElement(page_, tagName, null);
+            newInstance = HTMLParser.getFactory(tagName).createElement(page_, tagName, null);
         }
 
         return newInstance;

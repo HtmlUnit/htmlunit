@@ -445,9 +445,7 @@ public class Document extends EventNode {
                     if (useLocalName) {
                         return tagNameLC.equalsIgnoreCase(node.getLocalName());
                     }
-                    else {
-                        return tagNameLC.equalsIgnoreCase(node.getNodeName());
-                    }
+                    return tagNameLC.equalsIgnoreCase(node.getNodeName());
                 }
             };
         }

@@ -198,7 +198,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     public final String getTypeAttribute() {
         String type = getAttribute("type");
-        if (type == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+        if (type == DomElement.ATTRIBUTE_NOT_DEFINED) {
             if (getPage().getWebClient().getBrowserVersion()
                     .hasFeature(BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON)) {
                 type = "button";

@@ -206,9 +206,7 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
         if (nbRead == buffer.length) {
             return buffer;
         }
-        else {
-            return ArrayUtils.subarray(buffer, 0, nbRead);
-        }
+        return ArrayUtils.subarray(buffer, 0, nbRead);
     }
 
     /**

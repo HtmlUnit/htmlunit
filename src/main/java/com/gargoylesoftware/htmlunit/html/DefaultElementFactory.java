@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author David K. Taylor
+ * @author Ronald Brill
  */
 class DefaultElementFactory implements IElementFactory {
 
@@ -180,9 +181,6 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlButton.TAG_NAME)) {
             element = new HtmlButton(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlButtonInput.TAG_NAME)) {
-            element = new HtmlButtonInput(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlCanvas.TAG_NAME)) {
             if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.CANVAS)) {
                 element = new HtmlCanvas(namespaceURI, qualifiedName, page, attributeMap);
@@ -196,9 +194,6 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlCenter.TAG_NAME)) {
             element = new HtmlCenter(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlCheckBoxInput.TAG_NAME)) {
-            element = new HtmlCheckBoxInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlCitation.TAG_NAME)) {
             element = new HtmlCitation(namespaceURI, qualifiedName, page, attributeMap);
@@ -232,9 +227,6 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlFieldSet.TAG_NAME)) {
             element = new HtmlFieldSet(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlFileInput.TAG_NAME)) {
-            element = new HtmlFileInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlFont.TAG_NAME)) {
             element = new HtmlFont(namespaceURI, qualifiedName, page, attributeMap);
@@ -275,9 +267,6 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlHeading6.TAG_NAME)) {
             element = new HtmlHeading6(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlHiddenInput.TAG_NAME)) {
-            element = new HtmlHiddenInput(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlHorizontalRule.TAG_NAME)) {
             element = new HtmlHorizontalRule(namespaceURI, qualifiedName, page, attributeMap);
         }
@@ -286,9 +275,6 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlImage.TAG_NAME)) {
             element = new HtmlImage(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlImageInput.TAG_NAME)) {
-            element = new HtmlImageInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlInlineFrame.TAG_NAME)) {
             if (attributeMap != null) {
@@ -374,20 +360,11 @@ class DefaultElementFactory implements IElementFactory {
         else if (tagName.equals(HtmlParameter.TAG_NAME)) {
             element = new HtmlParameter(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equals(HtmlPasswordInput.TAG_NAME)) {
-            element = new HtmlPasswordInput(namespaceURI, qualifiedName, page, attributeMap);
-        }
         else if (tagName.equals(HtmlPlainText.TAG_NAME)) {
             element = new HtmlPlainText(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlPreformattedText.TAG_NAME)) {
             element = new HtmlPreformattedText(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlRadioButtonInput.TAG_NAME)) {
-            element = new HtmlRadioButtonInput(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlResetInput.TAG_NAME)) {
-            element = new HtmlResetInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlS.TAG_NAME)) {
             element = new HtmlS(namespaceURI, qualifiedName, page, attributeMap);
@@ -426,9 +403,6 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlStyle.TAG_NAME)) {
             element = new HtmlStyle(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlSubmitInput.TAG_NAME)) {
-            element = new HtmlSubmitInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSubscript.TAG_NAME)) {
             element = new HtmlSubscript(namespaceURI, qualifiedName, page, attributeMap);
@@ -471,9 +445,6 @@ class DefaultElementFactory implements IElementFactory {
         }
         else if (tagName.equals(HtmlDirectory.TAG_NAME)) {
             element = new HtmlDirectory(namespaceURI, qualifiedName, page, attributeMap);
-        }
-        else if (tagName.equals(HtmlTextInput.TAG_NAME)) {
-            element = new HtmlTextInput(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlTitle.TAG_NAME)) {
             element = new HtmlTitle(namespaceURI, qualifiedName, page, attributeMap);

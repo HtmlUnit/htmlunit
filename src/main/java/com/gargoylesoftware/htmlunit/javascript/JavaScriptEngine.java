@@ -394,9 +394,7 @@ public class JavaScriptEngine {
         if (GAEUtils.isGaeMode()) {
             return new GAEJavaScriptExecutor(webClient_);
         }
-        else {
-            return new JavaScriptExecutor(webClient_);
-        }
+        return new JavaScriptExecutor(webClient_);
     }
 
     /**

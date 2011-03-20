@@ -19,6 +19,7 @@ import java.net.URL;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -62,7 +63,7 @@ public class HTMLAnchorElement extends HTMLElement {
         final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
         final String hrefAttr = anchor.getHrefAttribute();
 
-        if (hrefAttr == HtmlAnchor.ATTRIBUTE_NOT_DEFINED) {
+        if (hrefAttr == DomElement.ATTRIBUTE_NOT_DEFINED) {
             return "";
         }
 
@@ -362,7 +363,7 @@ public class HTMLAnchorElement extends HTMLElement {
     static String getDefaultValue(final HtmlElement element) {
         String href = element.getAttribute("href");
 
-        if (HtmlElement.ATTRIBUTE_NOT_DEFINED == href) {
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == href) {
             return ""; // for example for named anchors
         }
 

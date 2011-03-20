@@ -259,7 +259,7 @@ public class HtmlScript extends HtmlElement {
         }
 
         final String src = getSrcAttribute();
-        if (src != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+        if (src != DomElement.ATTRIBUTE_NOT_DEFINED) {
             return;
         }
 

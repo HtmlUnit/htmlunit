@@ -535,12 +535,12 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         for (final Object next : elements) {
             final HtmlElement element = (HtmlElement) next;
             final String name = element.getAttribute("name");
-            if (name != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+            if (name != DomElement.ATTRIBUTE_NOT_DEFINED) {
                 idList.add(name);
             }
             else {
                 final String id = element.getId();
-                if (id != HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+                if (id != DomElement.ATTRIBUTE_NOT_DEFINED) {
                     idList.add(id);
                 }
                 else {

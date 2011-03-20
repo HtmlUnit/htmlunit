@@ -1644,7 +1644,7 @@ public class HtmlPage extends SgmlPage {
     private void addElement(final Map<String, List<HtmlElement>> map, final HtmlElement element,
             final String attribute, final boolean recurse) {
         final String value = element.getAttribute(attribute);
-        if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
+        if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
             List<HtmlElement> elements = map.get(value);
             if (elements == null) {
                 elements = new ArrayList<HtmlElement>();

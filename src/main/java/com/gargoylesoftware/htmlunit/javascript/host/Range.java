@@ -380,10 +380,10 @@ public class Range extends SimpleScriptable {
         }
 
         final byte nodeComparision = (byte) nodeForThis.jsxFunction_compareDocumentPosition(nodeForOther);
-        if ((nodeComparision & DomNode.DOCUMENT_POSITION_CONTAINED_BY) != 0) {
+        if ((nodeComparision & Node.DOCUMENT_POSITION_CONTAINED_BY) != 0) {
             return -1 * containingMoficator;
         }
-        else if ((nodeComparision & DomNode.DOCUMENT_POSITION_PRECEDING) != 0) {
+        else if ((nodeComparision & Node.DOCUMENT_POSITION_PRECEDING) != 0) {
             return -1;
         }
         // TODO: handle other cases!

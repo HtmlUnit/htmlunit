@@ -45,9 +45,7 @@ public class StorageList extends SimpleScriptable {
             }
             return storage_;
         }
-        else {
-            Context.reportError("Security error: can not access the specified host");
-            return null;
-        }
+        Context.reportError("Security error: can not access the specified host");
+        return null;
     }
 }

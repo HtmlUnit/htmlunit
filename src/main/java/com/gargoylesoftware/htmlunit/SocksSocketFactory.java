@@ -50,9 +50,7 @@ class SocksSocketFactory implements SchemeSocketFactory {
             final Proxy proxy = new Proxy(Proxy.Type.SOCKS, address);
             return new Socket(proxy);
         }
-        else {
-            return new Socket();
-        }
+        return new Socket();
     }
 
     /**

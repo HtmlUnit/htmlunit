@@ -308,7 +308,7 @@ class HtmlSerializer {
 
     private void appendHtmlSubmitInput(final HtmlSubmitInput htmlSubmitInput) {
         String value = htmlSubmitInput.getValueAttribute();
-        if (value == HtmlOption.ATTRIBUTE_NOT_DEFINED) {
+        if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
             value = "Submit Query";
         }
 

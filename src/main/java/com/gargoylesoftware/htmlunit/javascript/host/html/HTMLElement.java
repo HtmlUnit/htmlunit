@@ -369,7 +369,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             final HtmlElement htmlElement = getDomNodeOrNull();
             if (htmlElement != null && isAttributeName(name)) {
                 final String value = htmlElement.getAttribute(name);
-                if (HtmlElement.ATTRIBUTE_NOT_DEFINED != value) {
+                if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("Found attribute for evaluation of property \"" + name
                             + "\" for of " + this);
@@ -643,7 +643,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 }
                 final HtmlElement elt = (HtmlElement) node;
                 String classAttribute = elt.getAttribute("class");
-                if (classAttribute == HtmlElement.ATTRIBUTE_NOT_DEFINED) {
+                if (classAttribute == DomElement.ATTRIBUTE_NOT_DEFINED) {
                     return false; // probably better performance as most of elements won't have a class attribute
                 }
 
@@ -1529,7 +1529,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final HTMLCollection collection = new HTMLCollection(node, false, "HTMLElement.children") {
             protected List<Object> computeElements() {
                 return new ArrayList<Object>(node.getChildNodes());
-            };
+            }
         };
         return collection;
     }
