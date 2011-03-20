@@ -269,7 +269,7 @@ public class XMLDocument extends Document {
             protected List<Object> computeElements() {
                 final List<Object> list = new ArrayList<Object>(page.getByXPath(expression));
                 return list;
-            };
+            }
         };
         return collection;
     }

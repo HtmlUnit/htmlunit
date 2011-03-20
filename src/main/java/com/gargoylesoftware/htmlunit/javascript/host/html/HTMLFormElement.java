@@ -321,7 +321,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         final HTMLCollection collection = new HTMLCollection(getHtmlForm(), elements) {
             protected List<Object> computeElements() {
                 return new ArrayList<Object>(findElements(name));
-            };
+            }
         };
         return collection;
     }

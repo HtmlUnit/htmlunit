@@ -56,7 +56,7 @@ public class Element extends EventNode {
             protected List<Object> computeElements() {
                 final List<Object> list = new ArrayList<Object>(domNode.getByXPath(expression));
                 return list;
-            };
+            }
         };
         return collection;
     }
@@ -181,14 +181,14 @@ public class Element extends EventNode {
             collection = new HTMLCollection(node, false, description) {
                 protected boolean isMatching(final DomNode node) {
                     return true;
-                };
+                }
             };
         }
         else {
             collection = new HTMLCollection(node, false, description) {
                 protected boolean isMatching(final DomNode node) {
                     return tagNameLC.equalsIgnoreCase(node.getLocalName());
-                };
+                }
             };
         }
 
