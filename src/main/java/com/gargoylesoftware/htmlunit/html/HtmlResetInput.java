@@ -58,7 +58,9 @@ public class HtmlResetInput extends HtmlInput {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
             form.reset();
+            return;
         }
+        super.doClickAction();
     }
 
     /**

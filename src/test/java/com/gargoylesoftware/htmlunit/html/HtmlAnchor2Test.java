@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlAnchor2Test extends WebDriverTestCase {
@@ -98,6 +99,166 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         final WebElement span = driver.findElement(By.id("theSpan"));
         assertEquals("span", span.getTagName());
         span.click();
+        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickNestedButtonElement() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "<a href='page2.html'>"
+            + "<button id='theButton' /></a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        final WebElement button = driver.findElement(By.id("theButton"));
+        assertEquals("button", button.getTagName());
+        button.click();
+        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickNestedCheckboxElement() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "<a href='page2.html'>"
+            + "<input type='checkbox' id='theCheckbox' name='myCheckbox' value='Milk'></a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        final WebElement checkbox = driver.findElement(By.id("theCheckbox"));
+        assertEquals("input", checkbox.getTagName());
+        checkbox.click();
+        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickNestedImageElement() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "<a href='page2.html'>"
+            + "<img id='theImage' src='test.png' /></a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        final WebElement img = driver.findElement(By.id("theImage"));
+        assertEquals("img", img.getTagName());
+        img.click();
+        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickNestedInputElement() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "<a href='page2.html'>"
+            + "<input type='image' id='theInput' /></a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        final WebElement input = driver.findElement(By.id("theInput"));
+        assertEquals("input", input.getTagName());
+        input.click();
+        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickNestedOptionElement() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "<a href='page2.html'>"
+            + "<select><option id='theOption'>test</option></select></a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        final WebElement option = driver.findElement(By.id("theOption"));
+        assertEquals("option", option.getTagName());
+        option.click();
+        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickNestedRadioElement() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "<a href='page2.html'>"
+            + "<input type='radio' id='theRadio' name='myRadio' value='Milk'></a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        final WebElement radio = driver.findElement(By.id("theRadio"));
+        assertEquals("input", radio.getTagName());
+        radio.click();
+        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickNestedResetElement() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "<a href='page2.html'>"
+            + "<input type='reset' id='theInput' /></a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        final WebElement input = driver.findElement(By.id("theInput"));
+        assertEquals("input", input.getTagName());
+        input.click();
+        assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickNestedSubmitElement() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "<a href='page2.html'>"
+            + "<input type='submit' id='theInput' /></a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html);
+        final WebElement input = driver.findElement(By.id("theInput"));
+        assertEquals("input", input.getTagName());
+        input.click();
         assertEquals(new URL(getDefaultUrl(), "page2.html").toString(), driver.getCurrentUrl());
     }
 

@@ -73,7 +73,9 @@ public class HtmlSubmitInput extends HtmlInput {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
             form.submit(this);
+            return;
         }
+        super.doClickAction();
     }
 
     /**

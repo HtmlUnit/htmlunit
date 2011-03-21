@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3232488">
+                Follow hyperlink when click is performed on a nested element.
+            </action>
             <action type="fix" dev="rbri">
                 XMLSerializer.serializeToString() generate lower case tags for FF 3.6.
             </action>

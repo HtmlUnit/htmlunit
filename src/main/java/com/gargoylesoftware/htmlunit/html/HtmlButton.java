@@ -86,7 +86,9 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
             else if ("reset".equals(type)) {
                 form.reset();
             }
+            return;
         }
+        super.doClickAction();
     }
 
     /**

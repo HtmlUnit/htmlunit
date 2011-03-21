@@ -112,6 +112,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
     @Override
     protected void doClickAction() throws IOException {
         setChecked(!isChecked());
+        super.doClickAction();
     }
 
     /**

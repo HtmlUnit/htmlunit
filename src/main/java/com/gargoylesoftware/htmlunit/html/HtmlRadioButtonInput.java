@@ -134,6 +134,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     protected void doClickAction() throws IOException {
         setChecked(true);
+        super.doClickAction();
     }
 
     /**

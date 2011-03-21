@@ -223,6 +223,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
         if (!isSelected()) {
             setSelected(true);
         }
+        super.doClickAction();
     }
 
     /**
