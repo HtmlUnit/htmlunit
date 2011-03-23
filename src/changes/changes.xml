@@ -21,7 +21,7 @@
             </action>
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGES: the WebRequest no longer has a CredentialProvider as attribute.
-                No there are two attributes of type Credentials named urlCredentials and credentials.
+                Now there are two attributes of type Credentials named urlCredentials and credentials.
                 The attribute credentials has a getter and a setter method; the urlCredentials are
                 only addressable via getter call. This change was needed to support credentials as part
                 of the url.
