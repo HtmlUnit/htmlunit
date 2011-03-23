@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 class DefaultElementFactory implements IElementFactory {
 
     static final List<String> SUPPORTED_TAGS_ = Arrays.asList(HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
-        HtmlAnchor.TAG_NAME, HtmlApplet.TAG_NAME, HtmlAddress.TAG_NAME, HtmlArea.TAG_NAME, HtmlAudio.TAG_NAME,
+   	    HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlApplet.TAG_NAME, HtmlArea.TAG_NAME, HtmlAudio.TAG_NAME,
             HtmlBackgroundSound.TAG_NAME, HtmlBase.TAG_NAME, HtmlBaseFont.TAG_NAME,
             HtmlBidirectionalOverride.TAG_NAME, HtmlBig.TAG_NAME, HtmlBlink.TAG_NAME,
             HtmlBlockQuote.TAG_NAME, HtmlBody.TAG_NAME, HtmlBold.TAG_NAME,
@@ -57,6 +57,7 @@ class DefaultElementFactory implements IElementFactory {
             HtmlHeading4.TAG_NAME, HtmlHeading5.TAG_NAME,
             HtmlHeading6.TAG_NAME, HtmlHead.TAG_NAME,
             HtmlHorizontalRule.TAG_NAME, HtmlHtml.TAG_NAME, HtmlInlineFrame.TAG_NAME,
+            HtmlInlineQuotation.TAG_NAME,
             HtmlImage.TAG_NAME, HtmlInsertedText.TAG_NAME, HtmlIsIndex.TAG_NAME,
             HtmlItalic.TAG_NAME, HtmlKeyboard.TAG_NAME, HtmlLabel.TAG_NAME,
             HtmlLegend.TAG_NAME, HtmlListing.TAG_NAME, HtmlListItem.TAG_NAME,
@@ -66,16 +67,17 @@ class DefaultElementFactory implements IElementFactory {
             HtmlNoScript.TAG_NAME, HtmlObject.TAG_NAME, HtmlOrderedList.TAG_NAME,
             HtmlOptionGroup.TAG_NAME, HtmlOption.TAG_NAME, HtmlParagraph.TAG_NAME,
             HtmlParameter.TAG_NAME, HtmlPlainText.TAG_NAME, HtmlPreformattedText.TAG_NAME,
-            HtmlInlineQuotation.TAG_NAME, HtmlS.TAG_NAME, HtmlSample.TAG_NAME,
+            HtmlS.TAG_NAME, HtmlSample.TAG_NAME,
             HtmlScript.TAG_NAME, HtmlSelect.TAG_NAME, HtmlSmall.TAG_NAME,
             HtmlSource.TAG_NAME, HtmlSpacer.TAG_NAME, HtmlSpan.TAG_NAME,
             HtmlStrike.TAG_NAME, HtmlStrong.TAG_NAME, HtmlStyle.TAG_NAME,
-            HtmlSubscript.TAG_NAME, HtmlSuperscript.TAG_NAME, HtmlTitle.TAG_NAME,
+            HtmlSubscript.TAG_NAME, HtmlSuperscript.TAG_NAME,
             HtmlTable.TAG_NAME, HtmlTableColumn.TAG_NAME, HtmlTableColumnGroup.TAG_NAME,
             HtmlTableBody.TAG_NAME, HtmlTableDataCell.TAG_NAME, HtmlTableHeaderCell.TAG_NAME,
             HtmlTableRow.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlTableFooter.TAG_NAME,
-            HtmlTableHeader.TAG_NAME, HtmlTeletype.TAG_NAME, HtmlUnderlined.TAG_NAME,
-            HtmlUnorderedList.TAG_NAME, HtmlVariable.TAG_NAME, HtmlVideo.TAG_NAME,
+            HtmlTableHeader.TAG_NAME, HtmlTeletype.TAG_NAME, HtmlTitle.TAG_NAME,
+            HtmlUnderlined.TAG_NAME, HtmlUnorderedList.TAG_NAME,
+            HtmlVariable.TAG_NAME, HtmlVideo.TAG_NAME,
             HtmlWordBreak.TAG_NAME, HtmlExample.TAG_NAME
     );
 
