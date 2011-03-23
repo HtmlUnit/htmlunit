@@ -71,7 +71,7 @@ public class AttributesTest extends TestCase {
 
         final TestSuite suite = new TestSuite();
         final String[] classesToTest = {
-        	"HtmlAbbreviated", "HtmlAcronym",
+            "HtmlAbbreviated", "HtmlAcronym",
             "HtmlAddress", "HtmlAnchor", "HtmlApplet", "HtmlArea",
             "HtmlAudio", "HtmlBackgroundSound",
             "HtmlBase", "HtmlBaseFont", "HtmlBidirectionalOverride",
@@ -100,9 +100,9 @@ public class AttributesTest extends TestCase {
             "HtmlPlainText",
             "HtmlPreformattedText", "HtmlRadioButtonInput", "HtmlResetInput",
             "HtmlS", "HtmlSample", "HtmlScript", "HtmlSelect", "HtmlSmall",
-        	"HtmlSpacer", "HtmlSpan", "HtmlSource", "HtmlStrike",
-        	"HtmlStrong", "HtmlStyle", "HtmlSubmitInput",
-        	"HtmlSubscript", "HtmlSuperscript",
+            "HtmlSpacer", "HtmlSpan", "HtmlSource", "HtmlStrike",
+            "HtmlStrong", "HtmlStyle", "HtmlSubmitInput",
+            "HtmlSubscript", "HtmlSuperscript",
             "HtmlTable", "HtmlTableBody", /*"HtmlTableCell",*/ "HtmlTableColumn",
             "HtmlTableColumnGroup", "HtmlTableDataCell",
             "HtmlTableFooter", "HtmlTableHeader", "HtmlTableHeaderCell",
