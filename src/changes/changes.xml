@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3238326">
+                Use correct separator for 'src' and 'href' attributes.
+            </action>
             <action type="fix" dev="rbri" issue="3232488">
                 Follow hyperlink when click is performed on a nested element.
             </action>

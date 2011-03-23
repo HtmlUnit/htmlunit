@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.Page;
  */
 class XmlSerializer {
 
+    private static final String FILE_SEPARATOR = "/";
     private static final Pattern CREATE_FILE_PATTERN = Pattern.compile(".*/");
 
     private final StringBuilder buffer_ = new StringBuilder();
@@ -160,7 +161,7 @@ class XmlSerializer {
             IOUtils.closeQuietly(fos);
         }
 
-        srcAttr.setValue(file.getParentFile().getName() + "/" + file.getName());
+        srcAttr.setValue(file.getParentFile().getName() + FILE_SEPARATOR + file.getName());
         return map;
     }
 
@@ -183,7 +184,7 @@ class XmlSerializer {
         if ((null != hrefAttr) && StringUtils.isNotBlank(hrefAttr.getValue())) {
             final File file = createFile(hrefAttr.getValue(), ".css");
             FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString());
-            hrefAttr.setValue(outputDir_.getName() + File.separatorChar + file.getName());
+            hrefAttr.setValue(outputDir_.getName() + FILE_SEPARATOR + file.getName());
         }
 
         return map;
@@ -197,7 +198,7 @@ class XmlSerializer {
             final File file = createFile(srcAttr.getValue(), "." + reader.getFormatName());
             image.saveAs(file);
             outputDir_.mkdirs();
-            final String valueOnFileSystem = outputDir_.getName() + File.separatorChar + file.getName();
+            final String valueOnFileSystem = outputDir_.getName() + FILE_SEPARATOR + file.getName();
             srcAttr.setValue(valueOnFileSystem); // this is the clone attribute node, not the original one of the page
         }
 
