@@ -71,32 +71,46 @@ public class AttributesTest extends TestCase {
 
         final TestSuite suite = new TestSuite();
         final String[] classesToTest = {
+        	"HtmlAbbreviated", "HtmlAcronym",
             "HtmlAddress", "HtmlAnchor", "HtmlApplet", "HtmlArea",
+            "HtmlAudio", "HtmlBackgroundSound",
             "HtmlBase", "HtmlBaseFont", "HtmlBidirectionalOverride",
-            "HtmlBlockQuote", "HtmlBody", "HtmlBreak", "HtmlButton",
-            "HtmlButtonInput", "HtmlCaption", "HtmlCenter",
-            "HtmlCheckBoxInput", "HtmlDefinitionDescription",
+            "HtmlBig", "HtmlBlink",
+            "HtmlBlockQuote", "HtmlBody", "HtmlBold", "HtmlBreak", "HtmlButton",
+            "HtmlButtonInput", "HtmlCanvas", "HtmlCaption", "HtmlCenter",
+            "HtmlCheckBoxInput", "HtmlCitation", "HtmlCode",
+            "HtmlDefinition", "HtmlDefinitionDescription",
             "HtmlDefinitionList", "HtmlDefinitionTerm",
-            "HtmlDeletedText", "HtmlDivision", /*"HtmlElement", */
+            "HtmlDeletedText", "HtmlDirectory", "HtmlDivision", /*"HtmlElement", */
+            "HtmlEmbed", "HtmlEmphasis", "HtmlExample",
             "HtmlFieldSet", "HtmlFileInput", "HtmlFont", "HtmlForm",
             "HtmlFrame", "HtmlFrameSet", "HtmlHead", "HtmlHeading1",
             "HtmlHeading2", "HtmlHeading3", "HtmlHeading4", "HtmlHeading5",
             "HtmlHeading6", "HtmlHiddenInput", "HtmlHorizontalRule",
-            "HtmlImage", "HtmlImageInput", "HtmlInlineFrame",
+            "HtmlHtml", "HtmlImage", "HtmlImageInput", "HtmlInlineFrame",
             "HtmlInlineQuotation",
-            "HtmlInsertedText", "HtmlIsIndex", "HtmlLabel",
-            "HtmlLegend", "HtmlLink", "HtmlListItem", "HtmlMap",
-            "HtmlMenu", "HtmlMeta", "HtmlNoFrames", "HtmlNoScript",
+            "HtmlInsertedText", "HtmlIsIndex", "HtmlItalic",
+            "HtmlKeyboard", "HtmlLabel",
+            "HtmlLegend", "HtmlLink", "HtmlListing", "HtmlListItem", "HtmlMap",
+            "HtmlMarquee",
+            "HtmlMenu", "HtmlMeta", "HtmlMultiColumn",
+            "HtmlNoBreak", "HtmlNoEmbed", "HtmlNoFrames", "HtmlNoScript",
             "HtmlObject", "HtmlOption", "HtmlOptionGroup", "HtmlOrderedList",
             /*"HtmlPage",*/ "HtmlParagraph", "HtmlParameter", "HtmlPasswordInput",
+            "HtmlPlainText",
             "HtmlPreformattedText", "HtmlRadioButtonInput", "HtmlResetInput",
-            "HtmlScript", "HtmlSelect", "HtmlSpan", "HtmlStyle", "HtmlSubmitInput",
+            "HtmlS", "HtmlSample", "HtmlScript", "HtmlSelect", "HtmlSmall",
+        	"HtmlSpacer", "HtmlSpan", "HtmlSource", "HtmlStrike",
+        	"HtmlStrong", "HtmlStyle", "HtmlSubmitInput",
+        	"HtmlSubscript", "HtmlSuperscript",
             "HtmlTable", "HtmlTableBody", /*"HtmlTableCell",*/ "HtmlTableColumn",
             "HtmlTableColumnGroup", "HtmlTableDataCell",
             "HtmlTableFooter", "HtmlTableHeader", "HtmlTableHeaderCell",
-            "HtmlTableRow", "HtmlTextArea", "HtmlDirectory", "HtmlTextInput",
-            "HtmlTitle", "HtmlUnorderedList"
+            "HtmlTableRow", "HtmlTeletype", "HtmlTextArea", "HtmlTextInput",
+            "HtmlTitle", "HtmlUnderlined", "HtmlUnorderedList",
+            "HtmlVariable", "HtmlVideo", "HtmlWordBreak"
         };
+
         for (final String testClass : classesToTest) {
             final Class< ? > clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);
             addTestsForClass(clazz, page, suite);
