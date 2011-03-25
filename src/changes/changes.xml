@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="add" dev="mguillem">
+                DefaultCredentialsProvider: reactivate removed addNTLMCredentials and addNTLMProxyCredentials
+                as HttpClient 4.1 now provides full support for NTLM authentication.
+            </action>
             <action type="update" dev="mguillem">
                 Upgrade Apache HttpClient to 4.1.1.
             </action>

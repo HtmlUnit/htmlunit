@@ -99,6 +99,44 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     }
 
     /**
+     * Adds NTLM credentials for the specified username/password on the specified host/port.
+     * @param username the username for the new credentials; should not include the domain to authenticate with;
+     *        for example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not
+     * @param password the password for the new credentials
+     * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
+     * @param port the port to which to the new credentials apply (negative if applicable to any port)
+     * @param workstation The workstation the authentication request is originating from.
+     *        Essentially, the computer name for this machine.
+     * @param domain the domain to authenticate within
+     * @see <a href="http://htmlunit.sourceforge.net/ntlm.html">How to use NTML authenticaion</a>
+     */
+    public void addNTLMCredentials(final String username, final String password, final String host,
+            final int port, final String workstation, final String domain) {
+        final AuthScope authscope = new AuthScope(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
+        final Credentials credentials = new NTCredentials(username, password, workstation, domain);
+        setCredentials(authscope, credentials);
+    }
+
+    /**
+     * Adds NTLM proxy credentials for the specified username/password on the specified host/port.
+     * @param username the username for the new credentials; should not include the domain to authenticate with;
+     *        for example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not.
+     * @param password the password for the new credentials
+     * @param host the host to which to the new credentials apply (<tt>null</tt> if applicable to any host)
+     * @param port the port to which to the new credentials apply (negative if applicable to any port)
+     * @param workstation the host the authentication request is originating from; essentially, the computer name for
+     *        this machine
+     * @param domain the domain to authenticate within
+     * @deprecated as of 2.8,
+     *             please use {@link #addNTLMCredentials(String, String, String, int, String, String)} instead
+     */
+    @Deprecated
+    public void addNTLMProxyCredentials(final String username, final String password, final String host,
+            final int port, final String workstation, final String domain) {
+        addNTLMCredentials(username, password, host, port, workstation, domain);
+    }
+
+    /**
      * {@inheritDoc}
      */
     public synchronized void setCredentials(final AuthScope authscope, final Credentials credentials) {
