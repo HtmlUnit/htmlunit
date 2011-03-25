@@ -110,13 +110,7 @@ public class CookieManager implements Serializable {
             return Collections.emptySet();
         }
 
-        final int port;
-        if (url.getPort() != -1) {
-            port = url.getPort();
-        }
-        else {
-            port = url.getDefaultPort();
-        }
+        final int port = getPort(url);
 
         // discard expired cookies
         final Date now = new Date();
@@ -140,6 +134,23 @@ public class CookieManager implements Serializable {
         final Set<Cookie> cookies = new LinkedHashSet<Cookie>();
         cookies.addAll(Cookie.fromHttpClient(matches));
         return Collections.unmodifiableSet(cookies);
+    }
+
+    /**
+     * Gets the port of the URL.
+     * This functionality is implemented here as protected method to allow subclass to change it
+     * as workaround to <a href="http://code.google.com/p/googleappengine/issues/detail?id=4784>
+     * Google App Engine bug 4784</a>.
+     * @param url the URL
+     * @return the port use to connect the server
+     */
+    protected int getPort(final URL url) {
+        if (url.getPort() != -1) {
+            return url.getPort();
+        }
+        else {
+            return url.getDefaultPort();
+        }
     }
 
     /**
