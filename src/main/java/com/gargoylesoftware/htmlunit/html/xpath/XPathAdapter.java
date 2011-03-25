@@ -32,8 +32,7 @@ import org.apache.xpath.compiler.FunctionTable;
 import org.apache.xpath.compiler.XPathParser;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.res.XPATHErrorResources;
-
-import com.sun.org.apache.xpath.internal.res.XPATHMessages;
+import org.apache.xpath.res.XPATHMessages;
 
 /**
  * XPath adapter implementation for HtmlUnit.
