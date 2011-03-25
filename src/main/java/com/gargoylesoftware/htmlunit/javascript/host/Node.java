@@ -905,6 +905,22 @@ public class Node extends SimpleScriptable {
     }
 
     /**
+     * Gets the innerText attribute.
+     * @return the contents of this node as text
+     */
+    public String jsxGet_innerText() {
+        return ""; // currently just as place holder, correct implementation in subclasses
+    }
+
+    /**
+     * Currently just as place holder, correct implementation in subclasses.
+     * @param value the new value for the contents of this node
+     */
+    public void jsxSet_innerText(final String value) {
+     // nothing, currently just as place holder, correct implementation in subclasses
+    }
+
+    /**
      * Replace all children elements of this element with the supplied value.
      * @param value - the new value for the contents of this node
      */

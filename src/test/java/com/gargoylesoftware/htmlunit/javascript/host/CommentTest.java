@@ -46,4 +46,39 @@ public class CommentTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "after", "comment" },
+            IE = { "undefined", "undefined" } )
+    public void textContent() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<div id='it'><!--comment-->after</div>"
+            + "<script>\n"
+            + "var node = document.getElementById('it');\n"
+            + "alert(node.textContent);\n"
+            + "alert(node.firstChild.textContent);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "undefined", "undefined" },
+            IE = { "after", "" } )
+    public void innerText() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<div id='it'><!--comment-->after</div>"
+            + "<script>\n"
+            + "var node = document.getElementById('it');\n"
+            + "alert(node.innerText);\n"
+            + "alert(node.firstChild.innerText);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

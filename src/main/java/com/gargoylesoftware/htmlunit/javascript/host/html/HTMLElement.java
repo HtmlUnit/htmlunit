@@ -754,9 +754,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     private void printNode(final StringBuilder buffer, final DomNode node, final boolean html) {
         if (node instanceof DomComment) {
-            // Remove whitespace sequences.
-            final String s = PRINT_NODE_PATTERN.matcher(node.getNodeValue()).replaceAll(" ");
-            buffer.append("<!--").append(s).append("-->");
+            if (html) {
+                // Remove whitespace sequences.
+                final String s = PRINT_NODE_PATTERN.matcher(node.getNodeValue()).replaceAll(" ");
+                buffer.append("<!--").append(s).append("-->");
+            }
         }
         else if (node instanceof DomCharacterData) {
             // Remove whitespace sequences, possibly escape XML characters.
