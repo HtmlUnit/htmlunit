@@ -51,7 +51,7 @@ public class CommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "after", "comment" },
-            IE = { "undefined", "undefined" } )
+            IE = { "undefined", "undefined" })
     public void textContent() throws Exception {
         final String html
             = "<html><body>\n"
@@ -69,7 +69,7 @@ public class CommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "undefined", "undefined" },
-            IE = { "after", "" } )
+            IE = { "after", "" })
     public void innerText() throws Exception {
         final String html
             = "<html><body>\n"
