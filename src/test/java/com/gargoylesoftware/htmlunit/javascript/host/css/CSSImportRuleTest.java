@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CSSImportRuleTest extends WebDriverTestCase {
@@ -121,6 +122,83 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final URL urlCss2 = new URL(urlPage, "dir1/dir2/file2.css");
         getMockWebConnection().setResponse(urlCss1, css1, "text/css");
         getMockWebConnection().setResponse(urlCss2, css2, "text/css");
+
+        loadPageWithAlerts2(html, urlPage);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void testCircularImportedStylesheets() throws Exception {
+        final String html = "<html><head>\n"
+            + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
+            + "<body>\n"
+            + "<div id='d'>foo</div>\n"
+            + "<script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var s = window.getComputedStyle ? window.getComputedStyle(d, null) : d.currentStyle;\n"
+            + "alert(s.color.indexOf('128') > 0);\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String css1 = "@import url('file2.css');";
+        final String css2 = "@import url('file1.css');\n"
+            + "#d { color: rgb(0, 128, 0); }";
+
+        final URL urlPage = URL_FIRST;
+        final URL urlCss1 = new URL(urlPage, "dir1/dir2/file1.css");
+        final URL urlCss2 = new URL(urlPage, "dir1/dir2/file2.css");
+        getMockWebConnection().setResponse(urlCss1, css1, "text/css");
+        getMockWebConnection().setResponse(urlCss2, css2, "text/css");
+
+        loadPageWithAlerts2(html, urlPage);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "true", "true", "true" })
+    public void testCircularImportedStylesheetsComplexCase() throws Exception {
+        final String html = "<html><head>\n"
+            + "<link rel='stylesheet' type='text/css' href='dir1/dir2/file1.css'></link>\n"
+            + "<body>\n"
+            + "<div id='d'>foo</div>\n"
+            + "<div id='e'>foo</div>\n"
+            + "<div id='f'>foo</div>\n"
+            + "<script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var s = window.getComputedStyle ? window.getComputedStyle(d, null) : d.currentStyle;\n"
+            + "alert(s.color.indexOf('128') > 0);\n"
+            + "var e = document.getElementById('e');\n"
+            + "s = window.getComputedStyle ? window.getComputedStyle(e, null) : e.currentStyle;\n"
+            + "alert(s.color.indexOf('127') > 0);\n"
+            + "var f = document.getElementById('f');\n"
+            + "s = window.getComputedStyle ? window.getComputedStyle(f, null) : f.currentStyle;\n"
+            + "alert(s.color.indexOf('126') > 0);\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String css1 = "@import url('file2.css');";
+        final String css2 = "@import url('file3.css');\n"
+            + "@import url('file4.css');";
+        final String css3 = "#d { color: rgb(0, 128, 0); }";
+        final String css4 = "@import url('file5.css');\n"
+            + "#e { color: rgb(0, 127, 0); }";
+        final String css5 = "@import url('file2.css');\n"
+            + "#f { color: rgb(0, 126, 0); }";
+
+        final URL urlPage = URL_FIRST;
+        final URL urlCss1 = new URL(urlPage, "dir1/dir2/file1.css");
+        final URL urlCss2 = new URL(urlPage, "dir1/dir2/file2.css");
+        final URL urlCss3 = new URL(urlPage, "dir1/dir2/file3.css");
+        final URL urlCss4 = new URL(urlPage, "dir1/dir2/file4.css");
+        final URL urlCss5 = new URL(urlPage, "dir1/dir2/file5.css");
+        getMockWebConnection().setResponse(urlCss1, css1, "text/css");
+        getMockWebConnection().setResponse(urlCss2, css2, "text/css");
+        getMockWebConnection().setResponse(urlCss3, css3, "text/css");
+        getMockWebConnection().setResponse(urlCss4, css4, "text/css");
+        getMockWebConnection().setResponse(urlCss5, css5, "text/css");
 
         loadPageWithAlerts2(html, urlPage);
     }

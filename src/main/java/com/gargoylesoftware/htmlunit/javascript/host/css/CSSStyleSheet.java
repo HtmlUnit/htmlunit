@@ -19,7 +19,9 @@ import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -157,11 +159,11 @@ public class CSSStyleSheet extends SimpleScriptable {
      */
     public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final HTMLElement element) {
         final CSSRuleList rules = getWrappedSheet().getCssRules();
-        modifyIfNecessary(style, element, rules);
+        modifyIfNecessary(style, element, rules, new HashSet<String>());
     }
 
     private void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final HTMLElement element,
-        final CSSRuleList rules) {
+        final CSSRuleList rules, final Set<String> alreadyProcessing) {
         if (rules == null) {
             return;
         }
@@ -192,14 +194,19 @@ public class CSSStyleSheet extends SimpleScriptable {
                     sheet = loadStylesheet(getWindow(), ownerNode_, null, url);
                     imports_.put(importRule, sheet);
                 }
-                sheet.modifyIfNecessary(style, element);
+                System.out.println(getUri());
+                if (!alreadyProcessing.contains(sheet.getUri())) {
+                    final CSSRuleList sheetRules = sheet.getWrappedSheet().getCssRules();
+                    alreadyProcessing.add(getUri());
+                    sheet.modifyIfNecessary(style, element, sheetRules, alreadyProcessing);
+                }
             }
             else if (rule.getType() == CSSRule.MEDIA_RULE) {
                 final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
                 final String media = mediaRule.getMedia().getMediaText();
                 if (isActive(media)) {
                     final CSSRuleList internalRules = mediaRule.getCssRules();
-                    modifyIfNecessary(style, element, internalRules);
+                    modifyIfNecessary(style, element, internalRules, alreadyProcessing);
                 }
             }
         }
@@ -245,8 +252,9 @@ public class CSSStyleSheet extends SimpleScriptable {
                 client.printContentIfNecessary(response);
                 client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
                 // CSS content must have downloaded OK; go ahead and build the corresponding stylesheet.
-                final String css = response.getContentAsString();
-                final InputSource source = new InputSource(new StringReader(css));
+                final InputSource source = new InputSource();
+                source.setByteStream(response.getContentAsStream());
+                source.setEncoding(response.getContentCharset());
                 sheet = new CSSStyleSheet(element, source, uri);
                 cache.cacheIfPossible(request, response, sheet.getWrappedSheet());
             }
