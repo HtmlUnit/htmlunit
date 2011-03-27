@@ -39,6 +39,7 @@ public class FrameWindow extends WebWindowImpl {
         super(frame.getPage().getWebClient());
         frame_ = frame;
         final WebWindowImpl parent = (WebWindowImpl) getParentWindow();
+        performRegistration();
         parent.addChildWindow(this);
     }
 

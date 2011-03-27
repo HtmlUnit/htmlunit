@@ -45,6 +45,7 @@ public class TopLevelWindow extends WebWindowImpl {
         super(webClient);
         WebAssert.notNull("name", name);
         setName(name);
+        performRegistration();
     }
 
     /**

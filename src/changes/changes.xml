@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3247986" due-to="Kohsuke Kawaguchi">
+                Fix order of steps during Window initialization to avoid NPE in later access.
+            </action>
             <action type="add" dev="mguillem">
                 DefaultCredentialsProvider: reactivate removed addNTLMCredentials and addNTLMProxyCredentials
                 as HttpClient 4.1 now provides full support for NTLM authentication.
