@@ -43,7 +43,7 @@ public final class XPathUtils {
     private static ThreadLocal<Boolean> PROCESS_XPATH_ = new ThreadLocal<Boolean>() {
         @Override
         protected synchronized Boolean initialValue() {
-            return false;
+            return Boolean.FALSE;
         }
     };
 
@@ -66,7 +66,7 @@ public final class XPathUtils {
             throw new NullPointerException("Null is not a valid XPath expression");
         }
 
-        PROCESS_XPATH_.set(true);
+        PROCESS_XPATH_.set(Boolean.TRUE);
         final List<Object> list = new ArrayList<Object>();
         try {
             final XObject result = evaluateXPath(node, xpathExpr);
@@ -94,7 +94,7 @@ public final class XPathUtils {
             throw new RuntimeException("Could not retrieve XPath >" + xpathExpr + "< on " + node, e);
         }
         finally {
-            PROCESS_XPATH_.set(false);
+            PROCESS_XPATH_.set(Boolean.FALSE);
         }
         return list;
     }

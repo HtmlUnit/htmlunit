@@ -148,9 +148,7 @@ public class CookieManager implements Serializable {
         if (url.getPort() != -1) {
             return url.getPort();
         }
-        else {
-            return url.getDefaultPort();
-        }
+        return url.getDefaultPort();
     }
 
     /**
