@@ -194,7 +194,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                     sheet = loadStylesheet(getWindow(), ownerNode_, null, url);
                     imports_.put(importRule, sheet);
                 }
-                System.out.println(getUri());
+
                 if (!alreadyProcessing.contains(sheet.getUri())) {
                     final CSSRuleList sheetRules = sheet.getWrappedSheet().getCssRules();
                     alreadyProcessing.add(getUri());
