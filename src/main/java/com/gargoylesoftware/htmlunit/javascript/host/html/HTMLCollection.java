@@ -206,11 +206,12 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @return the list of {@link HtmlElement} contained in this collection
      */
     protected List<Object> getElements() {
-    	// a bit strange but we like to avoid sync
-    	List<Object> cachedElements = cachedElements_;
+        // a bit strange but we like to avoid sync
+        List<Object> cachedElements = cachedElements_;
 
         if (cachedElements == null) {
-        	cachedElements_ = cachedElements = computeElements();
+            cachedElements = computeElements();
+            cachedElements_ = cachedElements;
             if (!listenerRegistered_) {
                 final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
                 getDomNodeOrNull().addDomChangeListener(listener);
