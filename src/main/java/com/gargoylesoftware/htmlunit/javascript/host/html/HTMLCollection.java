@@ -216,7 +216,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
                 final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
                 final DomNode domNode = getDomNodeOrNull();
                 domNode.addDomChangeListener(listener);
-                if (attributeChangeSensitive_ &&  getDomNodeOrNull() instanceof HtmlElement) {
+                if (attributeChangeSensitive_ &&  domNode instanceof HtmlElement) {
                     ((HtmlElement) domNode).addHtmlAttributeChangeListener(listener);
                 }
                 listenerRegistered_ = true;
@@ -233,19 +233,16 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @return the elements whose associated host objects are available through this collection
      */
     protected List<Object> computeElements() {
-        final List<Object> response;
-        if (getDomNodeOrNull() != null) {
-            response = new ArrayList<Object>();
-            for (final DomNode node : getCandidates()) {
-                if (node instanceof DomElement && isMatching(node)) {
-                    response.add(node);
-                }
+        final List<Object> response = new ArrayList<Object>();
+        final DomNode domNode = getDomNodeOrNull();
+        if (domNode == null) {
+            return response;
+        }
+        for (final DomNode node : getCandidates()) {
+            if (node instanceof DomElement && isMatching(node)) {
+                response.add(node);
             }
         }
-        else {
-            response = new ArrayList<Object>();
-        }
-
         return response;
     }
 
@@ -255,7 +252,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @return the nodes
      */
     protected Iterable<DomNode> getCandidates() {
-        return getDomNodeOrNull().getDescendants();
+        final DomNode domNode = getDomNodeOrNull();
+        return domNode.getDescendants();
     }
 
     /**
@@ -331,7 +329,8 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         }
 
         // many elements => build a sub collection
-        final HTMLCollection collection = new HTMLCollection(getDomNodeOrNull(), matchingElements);
+        final DomNode domNode = getDomNodeOrNull();
+        final HTMLCollection collection = new HTMLCollection(domNode, matchingElements);
         collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_46));
         return collection;
     }
@@ -445,8 +444,10 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         }
         else if (other instanceof HTMLCollection) {
             final HTMLCollection otherArray = (HTMLCollection) other;
+            final DomNode domNode = getDomNodeOrNull();
+            final DomNode domNodeOther = otherArray.getDomNodeOrNull();
             if (getClass() == other.getClass()
-                    && getDomNodeOrNull() == otherArray.getDomNodeOrNull()
+                    && domNode == domNodeOther
                     && getElements().equals(otherArray.getElements())) {
                 return Boolean.TRUE;
             }
