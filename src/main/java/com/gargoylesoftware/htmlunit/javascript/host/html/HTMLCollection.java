@@ -65,7 +65,6 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         RESET
     }
 
-    private DomNode node_;
     private boolean avoidObjectDetection_ = false;
     private String description_;
     private boolean attributeChangeSensitive_ = true;
@@ -108,12 +107,10 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @param description a text useful for debugging
      */
     public HTMLCollection(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
-        node_ = parentScope;
+        this(parentScope.getScriptObject());
+        setDomNode(parentScope, false);
         description_ = description;
         attributeChangeSensitive_ = attributeChangeSensitive;
-        setParentScope(parentScope.getScriptObject());
-        setPrototype(getPrototype(getClass()));
-        setDomNode(node_, false);
     }
 
     /**
@@ -209,18 +206,24 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @return the list of {@link HtmlElement} contained in this collection
      */
     protected List<Object> getElements() {
-        if (cachedElements_ == null) {
-            cachedElements_ = computeElements();
-            final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+    	// a bit strange but we like to avoid sync
+    	List<Object> cachedElements = cachedElements_;
+
+        if (cachedElements == null) {
+        	cachedElements_ = cachedElements = computeElements();
             if (!listenerRegistered_) {
-                node_.addDomChangeListener(listener);
-                if (attributeChangeSensitive_ && node_ instanceof HtmlElement) {
-                    ((HtmlElement) node_).addHtmlAttributeChangeListener(listener);
+                final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+                getDomNodeOrNull().addDomChangeListener(listener);
+                if (attributeChangeSensitive_ &&  getDomNodeOrNull() instanceof HtmlElement) {
+                    ((HtmlElement)  getDomNodeOrNull()).addHtmlAttributeChangeListener(listener);
                 }
                 listenerRegistered_ = true;
             }
         }
-        return cachedElements_;
+
+        // maybe the cache was cleared in between
+        // then this returns the old state and never null
+        return cachedElements;
     }
 
     /**
@@ -229,7 +232,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      */
     protected List<Object> computeElements() {
         final List<Object> response;
-        if (node_ != null) {
+        if (getDomNodeOrNull() != null) {
             response = new ArrayList<Object>();
             for (final DomNode node : getCandidates()) {
                 if (node instanceof DomElement && isMatching(node)) {
@@ -250,7 +253,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
      * @return the nodes
      */
     protected Iterable<DomNode> getCandidates() {
-        return node_.getDescendants();
+        return getDomNodeOrNull().getDescendants();
     }
 
     /**
@@ -326,7 +329,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         }
 
         // many elements => build a sub collection
-        final HTMLCollection collection = new HTMLCollection(node_, matchingElements);
+        final HTMLCollection collection = new HTMLCollection(getDomNodeOrNull(), matchingElements);
         collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_46));
         return collection;
     }
@@ -441,7 +444,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         else if (other instanceof HTMLCollection) {
             final HTMLCollection otherArray = (HTMLCollection) other;
             if (getClass() == other.getClass()
-                    && node_ == otherArray.node_
+                    && getDomNodeOrNull() == otherArray.getDomNodeOrNull()
                     && getElements().equals(otherArray.getElements())) {
                 return Boolean.TRUE;
             }
