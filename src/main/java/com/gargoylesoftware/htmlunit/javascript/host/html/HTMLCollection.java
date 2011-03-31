@@ -214,9 +214,10 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             cachedElements_ = cachedElements;
             if (!listenerRegistered_) {
                 final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
-                getDomNodeOrNull().addDomChangeListener(listener);
+                final DomNode domNode = getDomNodeOrNull();
+                domNode.addDomChangeListener(listener);
                 if (attributeChangeSensitive_ &&  getDomNodeOrNull() instanceof HtmlElement) {
-                    ((HtmlElement)  getDomNodeOrNull()).addHtmlAttributeChangeListener(listener);
+                    ((HtmlElement) domNode).addHtmlAttributeChangeListener(listener);
                 }
                 listenerRegistered_ = true;
             }
