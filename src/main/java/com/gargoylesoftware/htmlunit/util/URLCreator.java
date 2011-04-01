@@ -18,6 +18,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLStreamHandler;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
@@ -29,6 +31,14 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  */
 abstract class URLCreator {
     abstract URL toUrlUnsafeClassic(final String url) throws MalformedURLException;
+
+    protected URL toNormalUrl(final String url) throws MalformedURLException {
+        final URL response = new URL(url);
+        if (response.getProtocol().startsWith("http") && StringUtils.isEmpty(response.getHost())) {
+            throw new MalformedURLException("Missing host name in url: " + url);
+        }
+        return response;
+    }
 
     /**
      * Gets the instance responsible for URL creating, detecting if we are running on GoogleAppEngine
@@ -69,7 +79,7 @@ abstract class URLCreator {
                 return new URL(null, url, DATA_HANDLER);
             }
             else {
-                return new URL(url);
+                return toNormalUrl(url);
             }
         }
     }
@@ -97,7 +107,7 @@ abstract class URLCreator {
                 return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
             }
             else {
-                return new URL(url);
+                return toNormalUrl(url);
             }
         }
     }

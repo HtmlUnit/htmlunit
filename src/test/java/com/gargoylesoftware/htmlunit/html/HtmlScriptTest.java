@@ -80,6 +80,19 @@ public class HtmlScriptTest extends WebTestCase {
     }
 
     /**
+     * Regression test for bug 3236689.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void badSrcUrl() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script src='http://'>alert(1)</script>\n"
+                + "</head><body></body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

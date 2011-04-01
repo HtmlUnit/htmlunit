@@ -21,6 +21,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -381,6 +382,17 @@ public class HtmlPageTest extends WebServerTestCase {
 
         assertEquals(baseUrl + "/bbb", page.getFullyQualifiedUrl("aaa/../bbb"));
         assertEquals(baseUrl + "/c/d", page.getFullyQualifiedUrl("c/./d"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test(expected = MalformedURLException.class)
+    public void getFullQualifiedUrl_invalid() throws Exception {
+        final String htmlContent = "<html><body></body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+
+        page.getFullyQualifiedUrl("http://");
     }
 
     /**

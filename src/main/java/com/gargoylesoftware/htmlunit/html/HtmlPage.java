@@ -57,7 +57,6 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TextUtil;
@@ -942,9 +941,6 @@ public class HtmlPage extends SgmlPage {
             final JavaScriptErrorListener javaScriptErrorListener = client.getJavaScriptErrorListener();
             if (javaScriptErrorListener != null) {
                 javaScriptErrorListener.malformedScriptURL(this, srcAttribute, e);
-            }
-            if (client.isThrowExceptionOnScriptError()) {
-                throw new ScriptException(this, e);
             }
             return JavaScriptLoadResult.NOOP;
         }

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillemo" issue="3236689">
+                Avoid exception occurring when script's src attribute is only "http://".
+            </action>
             <action type="fix" dev="rbri" issue="3003087">
                 Recursion in css import causes stack overflow.
             </action>
