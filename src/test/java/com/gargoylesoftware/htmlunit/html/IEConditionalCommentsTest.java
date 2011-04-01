@@ -100,4 +100,31 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "hello", "><" },
+            IE6 = { "hello", ">ltIE8ltIE7<" },
+            IE7 = { "hello", ">ltIE8<" },
+            IE8 = { "hello", "><" })
+    public void nested() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>alert('hello')</script>\n"
+            + "<div id='div1'>\n"
+            + "<!--[if lt IE 8]>\n"
+            + "ltIE8\n"
+            + "<!--[if lt IE 7]>\n"
+            + "ltIE7\n"
+            + "<![endif]-->\n"
+            + "<![endif]-->\n"
+            + "</div>\n"
+            + "<script>\n"
+            + "var div = document.getElementById('div1');\n"
+            + "alert('>' + (div.textContent || div.innerText).replace(/\\W*/g, '') + '<');\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
