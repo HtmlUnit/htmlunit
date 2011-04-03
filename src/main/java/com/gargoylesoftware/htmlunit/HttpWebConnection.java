@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -262,7 +261,7 @@ public class HttpWebConnection implements WebConnection {
                 for (final NameValuePair pair : webRequest.getRequestParameters()) {
                     if (pair instanceof KeyDataPair) {
                         final KeyDataPair pairWithFile = (KeyDataPair) pair;
-                        final ContentBody contentBody = buildFilePart(pairWithFile, charset);
+                        final ContentBody contentBody = buildFilePart(pairWithFile);
                         multipartEntity.addPart(pair.getName(), contentBody);
                     }
                     else {
@@ -324,7 +323,7 @@ public class HttpWebConnection implements WebConnection {
         if (webClient_.getCookieManager().isCookiesEnabled()) {
             // Cookies are enabled. Note that it's important that we enable single cookie headers,
             // for compatibility purposes.
-            httpClient.getParams().setParameter(CookieSpecPNames.SINGLE_COOKIE_HEADER, true);
+            httpClient.getParams().setParameter(CookieSpecPNames.SINGLE_COOKIE_HEADER, Boolean.TRUE);
             httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY, HACKED_COOKIE_POLICY);
         }
         else {
@@ -361,8 +360,7 @@ public class HttpWebConnection implements WebConnection {
         return null;
     }
 
-    // FIXME Change signature ?
-    ContentBody buildFilePart(final KeyDataPair pairWithFile, final String charset) throws FileNotFoundException {
+    ContentBody buildFilePart(final KeyDataPair pairWithFile) {
         String contentType = pairWithFile.getContentType();
         if (contentType == null) {
             contentType = "application/octet-stream";

@@ -511,7 +511,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         else {
             final Map<String, StyleElement> styleMap = getStyleMap();
             final StyleElement old = styleMap.get(name);
-            final Long index;
+            final long index;
             if (old != null) {
                 index = old.getIndex();
             }
@@ -527,16 +527,14 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     /**
      * Removes the specified style attribute, returning the element index of the removed attribute.
      * @param name the attribute name (delimiter-separated, not camel-cased)
-     * @return the style element index of the removed attribute, or <tt>null</tt> if no attribute was removed
      */
-    private Long removeStyleAttribute(final String name) {
+    private void removeStyleAttribute(final String name) {
         final Map<String, StyleElement> styleMap = getStyleMap();
         if (!styleMap.containsKey(name)) {
-            return null;
+            return;
         }
-        final StyleElement removed = styleMap.remove(name);
+        styleMap.remove(name);
         writeToElement(styleMap);
-        return removed.getIndex();
     }
 
     /**
@@ -4332,9 +4330,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         final String value = getStyleAttribute(Z_INDEX);
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_24)) {
             if (value == null || value.length() == 0) {
-                return 0;
+                return Integer.valueOf(0);
             }
-            return Integer.parseInt(value);
+            return Integer.valueOf(value);
         }
         return value;
     }
@@ -4355,9 +4353,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 d = (Double) value;
             }
             else {
-                d = Double.parseDouble(value.toString());
+                d = Double.valueOf(value.toString());
             }
-            setStyleAttribute(name, ((Integer) Math.round(d.floatValue())).toString());
+            setStyleAttribute(name, Integer.toString(Math.round(d.floatValue())));
         }
     }
 
@@ -4369,19 +4367,19 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     protected void setIntegerStyleAttribute(final String name, final Object value) {
         if ((value == null) || value.toString().length() == 0) {
             setStyleAttribute(name, "0");
+            return;
+        }
+
+        if (value instanceof Number) {
+            final Number number = (Number) value;
+            if (number.doubleValue() % 1 == 0) {
+                setStyleAttribute(name, (Integer.toString(number.intValue())));
+            }
         }
         else {
             final String valueString = value.toString();
-            if (value instanceof Number) {
-                final Number number = (Number) value;
-                if (number.doubleValue() % 1 == 0) {
-                    setStyleAttribute(name, ((Integer) number.intValue()).toString());
-                }
-            }
-            else {
-                if (valueString.indexOf('.') == -1) {
-                    setStyleAttribute(name, valueString);
-                }
+            if (valueString.indexOf('.') == -1) {
+                setStyleAttribute(name, valueString);
             }
         }
     }

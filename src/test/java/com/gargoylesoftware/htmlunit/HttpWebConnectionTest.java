@@ -264,7 +264,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final String encoding = "ISO8859-1";
         final KeyDataPair pair = new KeyDataPair("myFile", new File("this/doesnt_exist.txt"), "text/plain", encoding);
         final InputStreamBody part = (InputStreamBody) new HttpWebConnection(
-                getWebClient()).buildFilePart(pair, encoding);
+                getWebClient()).buildFilePart(pair);
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         part.writeTo(baos);
         //FIMXE Last changes does not make it a very useful test...
