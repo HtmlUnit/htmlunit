@@ -523,12 +523,6 @@ public enum BrowserVersionFeatures {
     GENERATED_81,
 
     /** Was originally .isIE(). */
-    GENERATED_82,
-
-    /** Was originally .isIE(). */
-    GENERATED_83,
-
-    /** Was originally .isIE(). */
     GENERATED_84,
 
     /** Was originally .isIE(). */
@@ -653,6 +647,12 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that objects with prototype property available in window scope; Firefox does this. */
     JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
+
+    /** Javascript method getHeight of IFrames may return negative values. */
+    JS_IFRAME_GET_HEIGHT_NEGATIVE_VALUES,
+
+    /** Javascript method getWidth of IFrames may return negative values. */
+    JS_IFRAME_GET_WIDTH_NEGATIVE_VALUES,
 
     /** Indicates if multiple spaces are replaced by a single one when accessing innerHTML. */
     JS_INNER_HTML_REDUCE_WHITESPACES,

@@ -436,7 +436,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // Remove custom attributes defined at runtime via JavaScript.
         for (final Object id : this.getAllIds()) {
             if (id instanceof Integer) {
-                delete((Integer) id);
+                final int i = ((Integer) id).intValue();
+                delete(i);
             }
             else if (id instanceof String) {
                 delete((String) id);
@@ -468,7 +469,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // Merge custom attributes defined at runtime via JavaScript.
         for (final Object id : source.getAllIds()) {
             if (id instanceof Integer) {
-                final Integer i = (Integer) id;
+                final int i = ((Integer) id).intValue();
                 put(i, this, source.get(i, source));
             }
             else if (id instanceof String) {
@@ -478,7 +479,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         // Merge ID and name if we aren't preserving identity.
-        if (preserveIdentity instanceof Boolean && ((Boolean) preserveIdentity) == false) {
+        if (preserveIdentity instanceof Boolean && !((Boolean) preserveIdentity).booleanValue()) {
             target.setId(src.getId());
             target.setAttribute("name", src.getAttribute("name"));
         }
@@ -592,7 +593,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 final HTMLCollection collection = jsxGet_childNodes();
                 final int length = collection.jsxGet_length();
                 for (int i = 0; i < length; i++) {
-                    final Node object = (Node) collection.jsxFunction_item(0);
+                    final Node object = (Node) collection.jsxFunction_item(Integer.valueOf(0));
                     parent.jsxFunction_appendChild(object);
                 }
             }
@@ -2298,13 +2299,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         String s = getDomNodeOrDie().getAttribute(attributeName);
         if (!s.matches("\\d+%")) {
             try {
-                final Float f = Float.parseFloat(s);
+                final Float f = Float.valueOf(s);
                 final int i = f.intValue();
                 if (i < 0) {
                     if (returnNegativeValues == null) {
                         s = "0";
                     }
-                    else if (!returnNegativeValues) {
+                    else if (!returnNegativeValues.booleanValue()) {
                         s = "";
                     }
                     else {
@@ -2340,13 +2341,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             boolean error = false;
             if (!value.matches("\\d+%")) {
                 try {
-                    final Float f = Float.parseFloat(value);
-                    final Integer i = f.intValue();
+                    final Float f = Float.valueOf(value);
+                    final int i = f.intValue();
                     if (i < 0) {
                         if (allowNegativeValues == null) {
                             value = "0";
                         }
-                        else if (!allowNegativeValues) {
+                        else if (!allowNegativeValues.booleanValue()) {
                             error = true;
                         }
                     }
@@ -2511,9 +2512,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
         else {
             try {
-                Float f = new Float(chOff);
-                if (f < 0) {
-                    f = 0f;
+                Float f = Float.valueOf(chOff);
+                if (f.floatValue() < 0) {
+                    f = Float.valueOf(0f);
                 }
                 chOff = Integer.toString(f.intValue());
             }

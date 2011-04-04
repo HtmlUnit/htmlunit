@@ -143,8 +143,8 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return the value of the "width" property
      */
     public String jsxGet_width() {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_82);
-        final Boolean returnNegativeValues = ie ? true : null;
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_IFRAME_GET_WIDTH_NEGATIVE_VALUES);
+        final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("width", returnNegativeValues);
     }
 
@@ -153,7 +153,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @param width the value of the "width" property
      */
     public void jsxSet_width(final String width) {
-        setWidthOrHeight("width", width, true);
+        setWidthOrHeight("width", width, Boolean.TRUE);
     }
 
     /**
@@ -161,8 +161,8 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return the value of the "width" property
      */
     public String jsxGet_height() {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_83);
-        final Boolean returnNegativeValues = ie ? true : null;
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_IFRAME_GET_HEIGHT_NEGATIVE_VALUES);
+        final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("height", returnNegativeValues);
     }
 
@@ -171,7 +171,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @param width the value of the "width" property
      */
     public void jsxSet_height(final String width) {
-        setWidthOrHeight("height", width, true);
+        setWidthOrHeight("height", width, Boolean.TRUE);
     }
 
 }
