@@ -347,6 +347,10 @@
         <property name="styleSheet" readable="true" writable="false"/>
     </class>
 
+    <class extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSMediaRule" JSObject="true">
+        <property name="media" readable="true" writable="false"/>
+    </class>
+
     <class extends="CSSValue" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSPrimitiveValue" JSObject="true">
         <browser name="Firefox"/>
         <constant name="CSS_UNKNOWN"/>
@@ -2419,6 +2423,8 @@
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.MediaList"
         JSObject="true">
         <property name="length" readable="true" writable="false"/>
+        <property name="mediaText" readable="true" writable="false"/>
+        <function name="item" />
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.MimeType"

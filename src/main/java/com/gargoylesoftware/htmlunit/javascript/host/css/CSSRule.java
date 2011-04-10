@@ -80,6 +80,8 @@ public class CSSRule extends SimpleScriptable {
                 return new CSSImportRule(stylesheet, rule);
             case CHARSET_RULE:
                 return new CSSCharsetRule(stylesheet, (org.w3c.dom.css.CSSCharsetRule) rule);
+            case MEDIA_RULE:
+                return new CSSMediaRule(stylesheet, (org.w3c.dom.css.CSSMediaRule) rule);
             default:
                 throw new UnsupportedOperationException("CSSRule "
                     + rule.getClass().getName() + " is not yet supported.");

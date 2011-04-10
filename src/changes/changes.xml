@@ -6,7 +6,13 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
-            <action type="fix" dev="mguillemo" issue="3236689">
+            <action type="add" dev="rbri">
+                Javascript property mediaText and function item added to class MediaList.
+            </action>
+            <action type="add" dev="rbri">
+                Javascript support for class CSSMediaRule added.
+            </action>
+            <action type="fix" dev="mguillem" issue="3236689">
                 Avoid exception occurring when script's src attribute is only "http://".
             </action>
             <action type="fix" dev="rbri" issue="3003087">

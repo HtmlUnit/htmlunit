@@ -47,6 +47,18 @@ public class MediaList extends SimpleScriptable {
     }
 
     /**
+     * Returns the item or items corresponding to the specified index or key.
+     * @param index the index or key corresponding to the element or elements to return
+     * @return the element or elements corresponding to the specified index or key
+     */
+    public String jsxFunction_item(final int index) {
+        if (index < 0 || index >= jsxGet_length()) {
+            return null;
+        }
+        return wrappedList_.item(index);
+    }
+
+    /**
      * Returns the number of media in the list.
      * @return the number of media in the list
      */
@@ -54,4 +66,12 @@ public class MediaList extends SimpleScriptable {
         return wrappedList_.getLength();
     }
 
+    /**
+     * The parsable textual representation of the media list.
+     * This is a comma-separated list of media.
+     * @return the parsable textual representation.
+     */
+    public String jsxGet_mediaText() {
+        return wrappedList_.getMediaText();
+    }
 }
