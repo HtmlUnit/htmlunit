@@ -6,6 +6,16 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                NPE fixed when css style declarations are addressed from javascript.
+            </action>
+            <action type="fix" dev="rbri" issue="3236689">
+                INCOMPATIBLE CHANGE: The whole construction/setup of the AbstractHttpClient is now done
+                by the factory method com.gargoylesoftware.htmlunit.HttpWebConnection.createHttpClient().
+                Only the setup of our cookie spec factory is done outside this call because this is
+                really required later on. This gives you more flexibility setting up your own client.
+                If you already do this, please check your implementation for compatibility.
+            </action>
             <action type="add" dev="rbri">
                 Javascript property mediaText and function item added to class MediaList.
             </action>
@@ -45,7 +55,7 @@
                 Fix synchronization problem causing wrong page to be occasionally loaded into a window.
             </action>
             <action type="update" dev="rbri">
-                INCOMPATIBLE CHANGES: the WebRequest no longer has a CredentialProvider as attribute.
+                INCOMPATIBLE CHANGE: The WebRequest no longer has a CredentialProvider as attribute.
                 Now there are two attributes of type Credentials named urlCredentials and credentials.
                 The attribute credentials has a getter and a setter method; the urlCredentials are
                 only addressable via getter call. This change was needed to support credentials as part

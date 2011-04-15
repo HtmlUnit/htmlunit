@@ -121,6 +121,12 @@ public class HttpWebConnection implements WebConnection {
     private final WebClient webClient_;
     private String virtualHost_;
 
+    private final CookieSpecFactory htmlUnitCookieSpecFactory_ = new CookieSpecFactory() {
+        public CookieSpec newInstance(final HttpParams params) {
+            return new HtmlUnitBrowserCompatCookieSpec();
+        }
+    };
+
     /**
      * Creates a new HTTP web connection instance.
      * @param webClient the WebClient that is using this connection
@@ -462,32 +468,11 @@ public class HttpWebConnection implements WebConnection {
     protected synchronized AbstractHttpClient getHttpClient() {
         if (httpClient_ == null) {
             httpClient_ = createHttpClient();
-            httpClient_.setRedirectStrategy(new DefaultRedirectStrategy() {
-                public boolean isRedirected(final HttpRequest request, final HttpResponse response,
-                        final HttpContext context) throws ProtocolException {
-                    return super.isRedirected(request, response, context)
-                            && response.getFirstHeader("location") != null;
-                }
-            });
 
-            if (virtualHost_ != null) {
-                httpClient_.getParams().setParameter(ClientPNames.VIRTUAL_HOST, virtualHost_);
-            }
-
-            final Scheme httpScheme = new Scheme("http", 80, new SocksSocketFactory());
-            httpClient_.getConnectionManager().getSchemeRegistry().register(httpScheme);
-
-            final CookieSpecFactory factory = new CookieSpecFactory() {
-                public CookieSpec newInstance(final HttpParams params) {
-                    return new HtmlUnitBrowserCompatCookieSpec();
-                }
-            };
-            httpClient_.getCookieSpecs().register(HACKED_COOKIE_POLICY, factory);
+            // this factory is required later
+            // to be sure this is done, we do it outside the createHttpClient() call
+            httpClient_.getCookieSpecs().register(HACKED_COOKIE_POLICY, htmlUnitCookieSpecFactory_);
         }
-
-        //Set timeouts
-        httpClient_.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, webClient_.getTimeout());
-        httpClient_.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, webClient_.getTimeout());
 
         return httpClient_;
     }
@@ -523,6 +508,27 @@ public class HttpWebConnection implements WebConnection {
 
         final DefaultHttpClient httpClient = new DefaultHttpClient(connectionManager, httpsParams);
         httpClient.setCookieStore(new HtmlUnitCookieStore());
+
+        httpClient.setRedirectStrategy(new DefaultRedirectStrategy() {
+            public boolean isRedirected(final HttpRequest request, final HttpResponse response,
+                    final HttpContext context) throws ProtocolException {
+                return super.isRedirected(request, response, context)
+                        && response.getFirstHeader("location") != null;
+            }
+        });
+
+        if (getVirtualHost() != null) {
+            httpClient.getParams().setParameter(ClientPNames.VIRTUAL_HOST, virtualHost_);
+        }
+
+        final Scheme httpScheme = new Scheme("http", 80, new SocksSocketFactory());
+        httpClient.getConnectionManager().getSchemeRegistry().register(httpScheme);
+
+        // Set timeouts
+        httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, Integer.valueOf(webClient_.getTimeout()));
+        httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,
+                Integer.valueOf(webClient_.getTimeout()));
+
         return httpClient;
     }
 
