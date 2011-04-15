@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CSSStyleRuleTest extends WebDriverTestCase {
@@ -36,8 +37,8 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "red" },
-            IE = { "[object]", "H1", "", "red" })
+    @Alerts(FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" },
+            IE = { "[object]", "H1", "", "10px, ", "red" })
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -63,9 +64,42 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "    } else {\n"
                 + "      alert(r.selectorText);\n"
                 + "    }\n"
+                + "    alert(r.style.marginTop);\n"
+                + "    r.style.marginTop = '10px';\n"
+                + "    alert(r.style.marginTop);\n"
                 + "    alert(r.style.backgroundColor);\n"
                 + "    r.style.backgroundColor = 'red';\n"
                 + "    alert(r.style.backgroundColor);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = { "4px", "4px", "4px", "4px" },
+            IE = { "4px", "4px", "4px", "4px" })
+    public void testStyleSheet() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+                + "<style>\n"
+                + "  BODY { margin: 4px; }\n"
+                + "</style>\n"
+                + "<script>\n"
+                + "  function test(){\n"
+                + "    var rules;\n"
+                + "    if (document.styleSheets[0].cssRules)\n"
+                + "      rules = document.styleSheets[0].cssRules;\n"
+                + "    else\n"
+                + "      rules = document.styleSheets[0].rules;\n"
+                + "    var r = rules[0];\n"
+                + "    alert(r.style.marginTop);\n"
+                + "    alert(r.style.marginRight);\n"
+                + "    alert(r.style.marginBottom);\n"
+                + "    alert(r.style.marginLeft);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"

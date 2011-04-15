@@ -432,26 +432,39 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the value of one of the two named style attributes
      */
     private String getStyleAttribute(final String name1, final String name2, final Shorthand shorthand) {
-        final Map<String, StyleElement> styleMap = getStyleMap();
-        final StyleElement element1 = styleMap.get(name1);
-        final StyleElement element2 = styleMap.get(name2);
-        if (element1 == null && element2 == null) {
-            return "";
-        }
-
-        if (element1 != null && element2 == null) {
-            return element1.getValue();
-        }
-
         final String value;
-        if (element1 == null && element2 != null) {
-            value = element2.getValue();
-        }
-        else if (element1.getIndex() > element2.getIndex()) {
-            return element1.getValue();
+        if (styleDeclaration_ != null) {
+            final String value1 = styleDeclaration_.getPropertyValue(name1);
+            final String value2 = styleDeclaration_.getPropertyValue(name2);
+
+            if ("".equals(value1) && "".equals(value2)) {
+                return "";
+            }
+            if (!"".equals(value1) && "".equals(value2)) {
+                return value1;
+            }
+            value = value2;
         }
         else {
-            value = element2.getValue();
+            final Map<String, StyleElement> styleMap = getStyleMap();
+            final StyleElement element1 = styleMap.get(name1);
+            final StyleElement element2 = styleMap.get(name2);
+
+            if (element1 == null && element2 == null) {
+                return "";
+            }
+            if (element1 != null && element2 == null) {
+                return element1.getValue();
+            }
+            if (element1 == null && element2 != null) {
+                value = element2.getValue();
+            }
+            else if (element1.getIndex() > element2.getIndex()) {
+                return element1.getValue();
+            }
+            else {
+                value = element2.getValue();
+            }
         }
 
         final String[] values = VALUES_SPLIT_PATTERN.split(value, 0);
@@ -491,10 +504,10 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     protected void setStyleAttribute(final String name, final String newValue) {
         if (styleDeclaration_ != null) {
             styleDeclaration_.setProperty(name, newValue, null);
+            return;
         }
-        else {
-            replaceStyleAttribute(name, newValue);
-        }
+
+        replaceStyleAttribute(name, newValue);
     }
 
     /**
@@ -529,6 +542,11 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param name the attribute name (delimiter-separated, not camel-cased)
      */
     private void removeStyleAttribute(final String name) {
+        if (null != styleDeclaration_) {
+            styleDeclaration_.removeProperty(name);
+            return;
+        }
+
         final Map<String, StyleElement> styleMap = getStyleMap();
         if (!styleMap.containsKey(name)) {
             return;
