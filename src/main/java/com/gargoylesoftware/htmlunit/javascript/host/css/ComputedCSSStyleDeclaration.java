@@ -1251,19 +1251,19 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private int getCalculatedWidth() {
         if (width_ != null) {
-            return width_;
+            return width_.intValue();
         }
 
         final DomNode node = getElement().getDomNodeOrDie();
         if (!node.mayBeDisplayed()) {
-            width_ = 0;
-            return width_;
+            width_ = Integer.valueOf(0);
+            return 0;
         }
 
         final String display = jsxGet_display();
         if ("none".equals(display)) {
-            width_ = 0;
-            return width_;
+            width_ = Integer.valueOf(0);
+            return 0;
         }
 
         int width;
@@ -1311,7 +1311,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             });
         }
 
-        width_ = width;
+        width_ = Integer.valueOf(width);
         return width;
     }
 
@@ -1357,13 +1357,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     private int getCalculatedHeight() {
         if (height_ != null) {
-            return height_;
+            return height_.intValue();
         }
 
         final int elementHeight = getEmptyHeight();
         if (elementHeight == 0) {
-            height_ = elementHeight;
-            return height_;
+            height_ = Integer.valueOf(elementHeight);
+            return elementHeight;
         }
 
         final int contentHeight = getContentHeight();
@@ -1378,8 +1378,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             height = elementHeight;
         }
 
-        height_ = height;
-        return height_;
+        height_ = Integer.valueOf(height);
+        return height;
     }
 
     /**
@@ -1391,23 +1391,23 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     private int getEmptyHeight() {
         if (height2_ != null) {
-            return height2_;
+            return height2_.intValue();
         }
 
         final DomNode node = getElement().getDomNodeOrDie();
         if (!node.mayBeDisplayed()) {
-            height2_ = 0;
-            return height2_;
+            height2_ = Integer.valueOf(0);
+            return 0;
         }
 
         if ("none".equals(jsxGet_display())) {
-            height2_ = 0;
-            return height2_;
+            height2_ = Integer.valueOf(0);
+            return 0;
         }
 
         if (getElement() instanceof HTMLBodyElement) {
-            height2_ = Window.WINDOW_HEIGHT;
-            return height2_;
+            height2_ = Integer.valueOf(Window.WINDOW_HEIGHT);
+            return Window.WINDOW_HEIGHT;
         }
 
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_18);
@@ -1424,8 +1424,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             height = defaultHeight;
         }
 
-        height2_ = height;
-        return height2_;
+        height2_ = Integer.valueOf(height);
+        return height;
     }
 
     /**
@@ -1796,16 +1796,18 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private int getPaddingHorizontal() {
         if (paddingHorizontal_ == null) {
-            paddingHorizontal_ = "none".equals(jsxGet_display()) ? 0 : getPaddingLeft() + getPaddingRight();
+            paddingHorizontal_ =
+                Integer.valueOf("none".equals(jsxGet_display()) ? 0 : getPaddingLeft() + getPaddingRight());
         }
-        return paddingHorizontal_;
+        return paddingHorizontal_.intValue();
     }
 
     private int getPaddingVertical() {
         if (paddingVertical_ == null) {
-            paddingVertical_ = "none".equals(jsxGet_display()) ? 0 : getPaddingTop() + getPaddingBottom();
+            paddingVertical_ =
+                Integer.valueOf("none".equals(jsxGet_display()) ? 0 : getPaddingTop() + getPaddingBottom());
         }
-        return paddingVertical_;
+        return paddingVertical_.intValue();
     }
 
     /**
@@ -1842,16 +1844,18 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private int getBorderHorizontal() {
         if (borderHorizontal_ == null) {
-            borderHorizontal_ = "none".equals(jsxGet_display()) ? 0 : getBorderLeft() + getBorderRight();
+            borderHorizontal_ =
+                Integer.valueOf("none".equals(jsxGet_display()) ? 0 : getBorderLeft() + getBorderRight());
         }
-        return borderHorizontal_;
+        return borderHorizontal_.intValue();
     }
 
     private int getBorderVertical() {
         if (borderVertical_ == null) {
-            borderVertical_ = "none".equals(jsxGet_display()) ? 0 : getBorderTop() + getBorderBottom();
+            borderVertical_ =
+                Integer.valueOf("none".equals(jsxGet_display()) ? 0 : getBorderTop() + getBorderBottom());
         }
-        return borderVertical_;
+        return borderVertical_.intValue();
     }
 
     /**
