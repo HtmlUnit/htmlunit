@@ -318,7 +318,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
         boolean replaceCurrentEntryInBrowsingHistory = false;
         if (replace != Undefined.instance) {
-            replaceCurrentEntryInBrowsingHistory = (Boolean) replace;
+            replaceCurrentEntryInBrowsingHistory = ((Boolean) replace).booleanValue();
         }
         final WebClient webClient = webWindow_.getWebClient();
 
@@ -1074,7 +1074,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             final String msg = e.getMessage();
             final String url = e.getPage().getWebResponse().getWebRequest().getUrl().toExternalForm();
             final int line = e.getFailingLineNumber();
-            final Object[] args = new Object[] {msg, url, line};
+            final Object[] args = new Object[] {msg, url, Integer.valueOf(line)};
             f.call(Context.getCurrentContext(), this, this, args);
         }
     }
@@ -1193,7 +1193,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         if (index >= frames.jsxGet_length()) {
             return Context.getUndefinedValue();
         }
-        return frames.jsxFunction_item(index);
+        return frames.jsxFunction_item(Integer.valueOf(index));
     }
 
     /**
@@ -1327,12 +1327,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
         else if (code instanceof String) {
             final String s = (String) code;
-            final JavaScriptStringJob job = new JavaScriptStringJob(timeout, timeout, description, w, s);
+            final JavaScriptStringJob job =
+                new JavaScriptStringJob(timeout, Integer.valueOf(timeout), description, w, s);
             id = getWebWindow().getJobManager().addJob(job, page);
         }
         else if (code instanceof Function) {
             final Function f = (Function) code;
-            final JavaScriptFunctionJob job = new JavaScriptFunctionJob(timeout, timeout, description, w, f);
+            final JavaScriptFunctionJob job =
+                new JavaScriptFunctionJob(timeout, Integer.valueOf(timeout), description, w, f);
             id = getWebWindow().getJobManager().addJob(job, page);
         }
         else {

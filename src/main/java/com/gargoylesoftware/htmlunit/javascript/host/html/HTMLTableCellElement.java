@@ -101,7 +101,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         final HtmlTableCell cell = (HtmlTableCell) getDomNodeOrDie();
         final HtmlTableRow row = cell.getEnclosingRow();
         if (row == null) { // a not attached document.createElement('TD')
-            return -1;
+            return Integer.valueOf(-1);
         }
         return Integer.valueOf(row.getCells().indexOf(cell));
     }
@@ -274,7 +274,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     public String jsxGet_width() {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_98);
-        final Boolean returnNegativeValues = ie ? true : null;
+        final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("width", returnNegativeValues);
     }
 
@@ -292,7 +292,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     public String jsxGet_height() {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_100);
-        final Boolean returnNegativeValues = ie ? true : null;
+        final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("height", returnNegativeValues);
     }
 

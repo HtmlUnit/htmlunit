@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class Storage extends SimpleScriptable {
 
-    static enum Type { GLOBAL_STORAGE, LOCAL_STORAGE, SESSION_STORAGE };
+    static enum Type { GLOBAL_STORAGE, LOCAL_STORAGE, SESSION_STORAGE }
 
     private static List<String> RESERVED_NAMES_ = Arrays.asList("clear", "key", "getItem", "length", "removeItem",
         "setItem");

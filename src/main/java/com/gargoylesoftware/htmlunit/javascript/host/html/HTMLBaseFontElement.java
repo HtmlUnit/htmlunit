@@ -76,6 +76,6 @@ public class HTMLBaseFontElement extends HTMLElement {
      * @param size the "size" attribute
      */
     public void jsxSet_size(final int size) {
-        getDomNodeOrDie().setAttribute("size", Context.toString(size));
+        getDomNodeOrDie().setAttribute("size", Context.toString(Integer.valueOf(size)));
     }
 }

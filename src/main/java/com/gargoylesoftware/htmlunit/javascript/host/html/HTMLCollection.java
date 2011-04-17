@@ -577,14 +577,14 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
          * {@inheritDoc}
          */
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            handleChangeOnCache(getEffectOnCache(event), event.getHtmlElement());
+            handleChangeOnCache(getEffectOnCache(event));
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            handleChangeOnCache(getEffectOnCache(event), event.getHtmlElement());
+            handleChangeOnCache(getEffectOnCache(event));
         }
 
         /**
@@ -592,11 +592,11 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
          */
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
             if (attributeChangeSensitive_) {
-                handleChangeOnCache(getEffectOnCache(event), event.getHtmlElement());
+                handleChangeOnCache(getEffectOnCache(event));
             }
         }
 
-        private void handleChangeOnCache(final EffectOnCache effectOnCache, final HtmlElement htmlElement) {
+        private void handleChangeOnCache(final EffectOnCache effectOnCache) {
             if (EffectOnCache.NONE == effectOnCache) {
                 return;
             }

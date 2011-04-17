@@ -126,7 +126,7 @@ class HtmlSerializer {
             appendText((DomText) node);
         }
         else if (node instanceof DomComment) {
-            appendComment((DomComment) node);
+            // nothing to do
         }
         else if ((node instanceof HtmlApplet) && appletEnabled_) {
             // nothing
@@ -363,10 +363,6 @@ class HtmlSerializer {
         if (isVisible(domText.getParentNode())) {
             append(domText.getData());
         }
-    }
-
-    private void appendComment(final DomComment child) {
-        // nothing to do
     }
 
     private boolean isVisible(final DomNode node) {

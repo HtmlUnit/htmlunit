@@ -397,10 +397,10 @@ public class KeyboardEvent extends UIEvent {
         super(domNode, type);
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_113)) {
             if (jsxGet_type().equals(Event.TYPE_KEY_PRESS)) {
-                setKeyCode(character);
+                setKeyCode(Integer.valueOf(character));
             }
             else {
-                setKeyCode(charToKeyCode(character));
+                setKeyCode(Integer.valueOf(charToKeyCode(character)));
             }
         }
         else {
@@ -408,7 +408,7 @@ public class KeyboardEvent extends UIEvent {
                 charCode_ = character;
             }
             else {
-                setKeyCode(charToKeyCode(character));
+                setKeyCode(Integer.valueOf(charToKeyCode(character)));
             }
         }
         setShiftKey(shiftKey);
@@ -446,7 +446,7 @@ public class KeyboardEvent extends UIEvent {
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
         setShiftKey(shiftKey);
-        setKeyCode(keyCode);
+        setKeyCode(Integer.valueOf(keyCode));
         setMetaKey(metaKey);
         charCode_ = 0;
     }
@@ -464,7 +464,7 @@ public class KeyboardEvent extends UIEvent {
      * @return the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed
      */
     public Object jsxGet_which() {
-        return charCode_ != 0 ? charCode_ : jsxGet_keyCode();
+        return charCode_ != 0 ? Integer.valueOf(charCode_) : jsxGet_keyCode();
     }
 
     /**

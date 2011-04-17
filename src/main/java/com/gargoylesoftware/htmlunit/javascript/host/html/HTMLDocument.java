@@ -1166,7 +1166,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return NOT_FOUND;
         }
         else if (length == 1) {
-            return collection.jsxFunction_item(0);
+            return collection.jsxFunction_item(Integer.valueOf(0));
         }
 
         return collection;
@@ -1408,6 +1408,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (clazz == null) {
             Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
                 "Event Type is not supported: " + eventType));
+            return null; // to stop eclipse warning
         }
         try {
             final Event event = clazz.newInstance();
@@ -1511,7 +1512,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             };
         }
 
-        final TreeWalker t = new TreeWalker(root, whatToShow, filterWrapper, expandEntityReferences);
+        final TreeWalker t = new TreeWalker(root, whatToShow, filterWrapper, Boolean.valueOf(expandEntityReferences));
         t.setParentScope(getWindow(this));
         t.setPrototype(staticGetPrototype(getWindow(this), TreeWalker.class));
         return t;
