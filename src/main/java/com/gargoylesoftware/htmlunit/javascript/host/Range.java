@@ -371,22 +371,22 @@ public class Range extends SimpleScriptable {
 
         if (nodeForThis == nodeForOther) {
             if (offsetForThis < offsetForOther) {
-                return -1;
+                return Integer.valueOf(-1);
             }
             else if (offsetForThis < offsetForOther) {
-                return 1;
+                return Integer.valueOf(1);
             }
-            return 0;
+            return Integer.valueOf(0);
         }
 
         final byte nodeComparision = (byte) nodeForThis.jsxFunction_compareDocumentPosition(nodeForOther);
         if ((nodeComparision & Node.DOCUMENT_POSITION_CONTAINED_BY) != 0) {
-            return -1 * containingMoficator;
+            return Integer.valueOf(-1 * containingMoficator);
         }
         else if ((nodeComparision & Node.DOCUMENT_POSITION_PRECEDING) != 0) {
-            return -1;
+            return Integer.valueOf(-1);
         }
         // TODO: handle other cases!
-        return 1;
+        return Integer.valueOf(1);
     }
 }

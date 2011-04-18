@@ -99,7 +99,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_anyNodeSelector() throws Exception {
-        testSelects("* { color: red; }", true, true, true, true);
+        testSelects("* { color: red; }", true, true, true);
     }
 
     /**
@@ -108,7 +108,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_childSelector() throws Exception {
-        testSelects("body > div { color: red; }", false, true, false, false);
+        testSelects("body > div { color: red; }", false, true, false);
     }
 
     /**
@@ -117,7 +117,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_descendantSelector() throws Exception {
-        testSelects("body span { color: red; }", false, false, true, false);
+        testSelects("body span { color: red; }", false, false, true);
     }
 
     /**
@@ -126,7 +126,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_elementSelector() throws Exception {
-        testSelects("div { color: red; }", false, true, false, false);
+        testSelects("div { color: red; }", false, true, false);
     }
 
     /**
@@ -135,7 +135,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_directAdjacentSelector() throws Exception {
-        testSelects("span + span { color: red; }", false, false, true, false);
+        testSelects("span + span { color: red; }", false, false, true);
     }
 
     /**
@@ -144,9 +144,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_conditionalSelector_idCondition() throws Exception {
-        testSelects("span#s { color: red; }", false, false, true, false);
-        testSelects("#s { color: red; }", false, false, true, false);
-        testSelects("span[id=s] { color: red; }", false, false, true, false);
+        testSelects("span#s { color: red; }", false, false, true);
+        testSelects("#s { color: red; }", false, false, true);
+        testSelects("span[id=s] { color: red; }", false, false, true);
     }
 
     /**
@@ -155,9 +155,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_conditionalSelector_classCondition() throws Exception {
-        testSelects("div.bar { color: red; }", false, true, false, false);
-        testSelects(".bar { color: red; }", false, true, false, false);
-        testSelects("div[class~=bar] { color: red; }", false, true, false, false);
+        testSelects("div.bar { color: red; }", false, true, false);
+        testSelects(".bar { color: red; }", false, true, false);
+        testSelects("div[class~=bar] { color: red; }", false, true, false);
     }
 
     /**
@@ -166,7 +166,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_pseudoClass_root() throws Exception {
-        testSelects(":root { color: red; }", false, false, false, true);
+        testSelects(":root { color: red; }", false, false, false);
     }
 
     /**
@@ -176,11 +176,11 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Browsers(Browser.NONE)
     @NotYetImplemented
     public void selects_pseudoClass_negation() throws Exception {
-        testSelects(":not(div)", true, false, true, true);
+        testSelects(":not(div)", true, false, true);
     }
 
     private void testSelects(final String css, final boolean selectBody, final boolean selectDivD,
-        final boolean selectSpanS, final boolean selectHtml) throws Exception {
+        final boolean selectSpanS) throws Exception {
         final String html =
               "<html><body id='b'><style></style>\n"
             + "<div id='d' class='foo bar'><span>x</span><span id='s'>a</span>b</div>\n"

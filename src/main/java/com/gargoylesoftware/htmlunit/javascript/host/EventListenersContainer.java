@@ -170,7 +170,7 @@ public class EventListenersContainer implements Serializable {
                     else {
                         final Object eventReturnValue = event.jsxGet_returnValue();
                         if (eventReturnValue instanceof Boolean && !((Boolean) eventReturnValue).booleanValue()) {
-                            allResult = new ScriptResult(false, page);
+                            allResult = new ScriptResult(Boolean.FALSE, page);
                         }
                     }
                 }

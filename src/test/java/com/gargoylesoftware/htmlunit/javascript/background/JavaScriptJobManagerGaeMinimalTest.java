@@ -100,7 +100,7 @@ public class JavaScriptJobManagerGaeMinimalTest {
     public void addJob_multipleExecution_removeJob() throws Exception {
         final MutableInt id = new MutableInt();
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(50, 50) {
+        final JavaScriptJob job = new JavaScriptJob(50, Integer.valueOf(50)) {
             public void run() {
                 count.increment();
                 if (count.intValue() >= 5) {
@@ -120,7 +120,7 @@ public class JavaScriptJobManagerGaeMinimalTest {
     @Test
     public void addJob_multipleExecution_removeAllJobs() throws Exception {
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(50, 50) {
+        final JavaScriptJob job = new JavaScriptJob(50, Integer.valueOf(50)) {
             public void run() {
                 count.increment();
                 if (count.intValue() >= 5) {

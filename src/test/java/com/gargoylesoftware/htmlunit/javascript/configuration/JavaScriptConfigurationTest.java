@@ -740,7 +740,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         final long max = rt.maxMemory() / 1024;
         final long used = total - free;
         final String format = "used: {0,number,0}K, free: {1,number,0}K, total: {2,number,0}K, max: {3,number,0}K";
-        return MessageFormat.format(format, used, free, total, max);
+        return MessageFormat.format(format,
+                Long.valueOf(used), Long.valueOf(free), Long.valueOf(total), Long.valueOf(max));
     }
 
     /**

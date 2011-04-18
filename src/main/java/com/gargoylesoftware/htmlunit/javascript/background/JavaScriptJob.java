@@ -112,7 +112,7 @@ public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJo
         final boolean xhr2 = other.executeAsap_;
 
         if (xhr1 && xhr2) {
-            return getId() - other.getId();
+            return getId().intValue() - other.getId().intValue();
         }
 
         if (xhr1) {

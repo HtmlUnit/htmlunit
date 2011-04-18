@@ -77,7 +77,7 @@ public class JavaScriptJobManagerMinimalTest {
     @Test
     public void addJob_periodicJob() throws Exception {
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(5, 100) {
+        final JavaScriptJob job = new JavaScriptJob(5, Integer.valueOf(100)) {
             public void run() {
                 count.increment();
             }
@@ -98,7 +98,7 @@ public class JavaScriptJobManagerMinimalTest {
     @Test
     public void addJob_periodicJob2() throws Exception {
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(5, 200) {
+        final JavaScriptJob job = new JavaScriptJob(5, Integer.valueOf(200)) {
             public void run() {
                 if (count.intValue() == 0) {
                     try {
@@ -145,7 +145,7 @@ public class JavaScriptJobManagerMinimalTest {
     public void addJob_multipleExecution_removeJob() throws Exception {
         final MutableInt id = new MutableInt();
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(50, 50) {
+        final JavaScriptJob job = new JavaScriptJob(50, Integer.valueOf(50)) {
             public void run() {
                 count.increment();
                 if (count.intValue() >= 5) {
@@ -164,7 +164,7 @@ public class JavaScriptJobManagerMinimalTest {
     @Test
     public void addJob_multipleExecution_removeAllJobs() throws Exception {
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(50, 50) {
+        final JavaScriptJob job = new JavaScriptJob(50, Integer.valueOf(50)) {
             public void run() {
                 count.increment();
                 if (count.intValue() >= 5) {

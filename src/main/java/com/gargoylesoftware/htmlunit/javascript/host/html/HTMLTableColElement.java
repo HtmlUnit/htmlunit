@@ -57,8 +57,8 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * @param span the value of the "span" property
      */
     public void jsxSet_span(final Object span) {
-        final Double d = Context.toNumber(span);
-        Integer i = d.intValue();
+        final double d = Context.toNumber(span);
+        int i = (int) d;
         if (i < 1) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_102)) {
                 final Exception e = new Exception("Cannot set the span property to invalid value: " + span);
@@ -68,7 +68,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
                 i = 1;
             }
         }
-        getDomNodeOrDie().setAttribute("span", i.toString());
+        getDomNodeOrDie().setAttribute("span", Integer.toString(i));
     }
 
     /**
@@ -77,7 +77,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      */
     public String jsxGet_width() {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_103);
-        final Boolean returnNegativeValues = ie ? false : null;
+        final Boolean returnNegativeValues = ie ? Boolean.FALSE : null;
         return getWidthOrHeight("width", returnNegativeValues);
     }
 
@@ -86,7 +86,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * @param width the value of the "width" property
      */
     public void jsxSet_width(final Object width) {
-        setWidthOrHeight("width", (width == null ? "" : Context.toString(width)), false);
+        setWidthOrHeight("width", (width == null ? "" : Context.toString(width)), Boolean.FALSE);
     }
 
 }

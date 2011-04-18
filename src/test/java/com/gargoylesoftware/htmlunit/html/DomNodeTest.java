@@ -53,7 +53,7 @@ public class DomNodeTest extends WebTestCase {
         final HtmlPage page = loadPage(content);
 
         final DomNode node = page.getDocumentElement().getElementById("tag");
-        Assert.assertEquals("Element should have attribute", true, node.hasAttributes());
+        Assert.assertTrue("Element should have attribute", node.hasAttributes());
     }
 
     /**
@@ -67,7 +67,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentElement().getElementById("tag");
         final DomNode parent = node.getParentNode();
-        Assert.assertEquals("Element should not have attribute", false, parent.hasAttributes());
+        Assert.assertFalse("Element should not have attribute", parent.hasAttributes());
     }
 
     /**
@@ -81,7 +81,7 @@ public class DomNodeTest extends WebTestCase {
 
         final DomNode node = page.getDocumentElement().getElementById("tag");
         final DomNode child = node.getFirstChild();
-        Assert.assertEquals("Text should not have attribute", false, child.hasAttributes());
+        Assert.assertFalse("Text should not have attribute", child.hasAttributes());
     }
 
     /**

@@ -69,7 +69,7 @@ public abstract class WebTestCase {
     private static final Log LOG = LogFactory.getLog(WebTestCase.class);
 
     /** The listener port for the web server. */
-    public static final int PORT = Integer.valueOf(System.getProperty("htmlunit.test.port", "12345"));
+    public static final int PORT = Integer.parseInt(System.getProperty("htmlunit.test.port", "12345"));
 
     /** Constant for the URL which is used in the tests. */
     public static final URL URL_FIRST;
@@ -295,6 +295,24 @@ public abstract class WebTestCase {
      */
     protected void assertEquals(final Object expected, final Object actual) {
         Assert.assertEquals(expected, actual);
+    }
+
+    /**
+     * Asserts the two ints are equal.
+     * @param expected the expected int
+     * @param actual the int to test
+     */
+    protected void assertEquals(final int expected, final int actual) {
+        Assert.assertEquals(expected, actual);
+    }
+
+    /**
+     * Asserts the two boolean are equal.
+     * @param expected the expected boolean
+     * @param actual the boolean to test
+     */
+    protected void assertEquals(final boolean expected, final boolean actual) {
+        Assert.assertEquals(Boolean.valueOf(expected), Boolean.valueOf(actual));
     }
 
     /**

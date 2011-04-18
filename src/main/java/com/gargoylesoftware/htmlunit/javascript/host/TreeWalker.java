@@ -33,7 +33,7 @@ public class TreeWalker extends SimpleScriptable {
     private Node root_, currentNode_;
     private int whatToShow_;
     private NodeFilter filter_;
-    private Boolean expandEntityReferences_;
+    private boolean expandEntityReferences_;
 
     /**
      * Creates an instance.
@@ -67,7 +67,7 @@ public class TreeWalker extends SimpleScriptable {
         root_ = root;
         whatToShow_ = whatToShow;
         filter_ = filter;
-        expandEntityReferences_ = expandEntityReferences;
+        expandEntityReferences_ = expandEntityReferences.booleanValue();
         currentNode_ = root_;
     }
 

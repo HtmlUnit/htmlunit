@@ -98,7 +98,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             return 0;
         }
         final int id = NEXT_JOB_ID_.getAndIncrement();
-        job.setId(id);
+        job.setId(Integer.valueOf(id));
 
         synchronized (this) {
             scheduledJobsQ_.add(job);
@@ -119,25 +119,27 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     /** {@inheritDoc} */
     public synchronized void removeJob(final int id) {
         for (JavaScriptJob job : scheduledJobsQ_) {
-            if (job.getId() == id) {
+            final int jobId = job.getId().intValue();
+            if (jobId == id) {
                 scheduledJobsQ_.remove(job);
                 break;
             }
         }
-        cancelledJobs_.add(id);
+        cancelledJobs_.add(Integer.valueOf(id));
         notify();
     }
 
     /** {@inheritDoc} */
     public synchronized void stopJob(final int id) {
         for (JavaScriptJob job : scheduledJobsQ_) {
-            if (job.getId() == id) {
+            final int jobId = job.getId().intValue();
+            if (jobId == id) {
                 scheduledJobsQ_.remove(job);
                 // TODO: should we try to interrupt the job if it is running?
                 break;
             }
         }
-        cancelledJobs_.add(id);
+        cancelledJobs_.add(Integer.valueOf(id));
         notify();
     }
 
@@ -285,10 +287,11 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
         final boolean isPeriodicJob = job.isPeriodic();
         if (isPeriodicJob) {
+            final long jobPeriod = job.getPeriod().longValue();
+
             // reference: http://ejohn.org/blog/how-javascript-timers-work/
             long timeDifference = currentTime - job.getTargetExecutionTime();
-            timeDifference = (timeDifference / job.getPeriod()) * job.getPeriod()
-                    + job.getPeriod();
+            timeDifference = (timeDifference / jobPeriod) * jobPeriod + jobPeriod;
             job.setTargetExecutionTime(job.getTargetExecutionTime() + timeDifference);
 
             // queue

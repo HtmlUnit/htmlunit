@@ -78,10 +78,10 @@ public final class XPathUtils {
                 }
             }
             else if (result instanceof XNumber) {
-                list.add(result.num());
+                list.add(Double.valueOf(result.num()));
             }
             else if (result instanceof XBoolean) {
-                list.add(result.bool());
+                list.add(Boolean.valueOf(result.bool()));
             }
             else if (result instanceof XString) {
                 list.add(result.str());
@@ -104,7 +104,7 @@ public final class XPathUtils {
      * @return whether the thread is currently evaluating XPath expression or no
      */
     public static boolean isProcessingXPath() {
-        return PROCESS_XPATH_.get();
+        return PROCESS_XPATH_.get().booleanValue();
     }
 
     /**

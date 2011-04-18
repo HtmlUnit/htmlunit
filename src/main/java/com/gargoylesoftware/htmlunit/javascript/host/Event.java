@@ -406,7 +406,7 @@ public class Event extends SimpleScriptable {
     public Object jsxGet_keyCode() {
         if (keyCode_ == null) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_155)) {
-                return 0;
+                return Integer.valueOf(0);
             }
             return Undefined.instance;
         }

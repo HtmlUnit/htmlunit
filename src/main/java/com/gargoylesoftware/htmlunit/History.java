@@ -150,7 +150,7 @@ public class History implements Serializable {
      */
     protected void addPage(final Page page) {
         final Boolean ignoreNewPages = ignoreNewPages_.get();
-        if (ignoreNewPages != null && ignoreNewPages) {
+        if (ignoreNewPages != null && ignoreNewPages.booleanValue()) {
             return;
         }
         index_++;
@@ -169,7 +169,7 @@ public class History implements Serializable {
         final WebRequest wrs = new WebRequest(url);
         final Boolean old = ignoreNewPages_.get();
         try {
-            ignoreNewPages_.set(true);
+            ignoreNewPages_.set(Boolean.TRUE);
             window_.getWebClient().getPage(window_, wrs);
         }
         finally {

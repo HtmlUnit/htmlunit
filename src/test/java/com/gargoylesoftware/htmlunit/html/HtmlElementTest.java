@@ -53,7 +53,7 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getDocumentElement().getElementById("tag");
-        Assert.assertEquals("Element should have attribute", true, node.hasAttribute("id"));
+        Assert.assertTrue("Element should have attribute", node.hasAttribute("id"));
     }
 
     /**
@@ -66,7 +66,7 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlElement node = page.getDocumentElement().getElementById("tag");
-        Assert.assertEquals("Element should not have attribute", false, node.hasAttribute("foo"));
+        Assert.assertFalse("Element should not have attribute", node.hasAttribute("foo"));
     }
 
     /**

@@ -82,8 +82,8 @@ public class MouseEvent extends UIEvent {
      * Used to build the prototype.
      */
     public MouseEvent() {
-        screenX_ = 0;
-        screenY_ = 0;
+        screenX_ = Integer.valueOf(0);
+        screenY_ = Integer.valueOf(0);
         setDetail(1);
     }
 
@@ -124,9 +124,9 @@ public class MouseEvent extends UIEvent {
      */
     public int jsxGet_clientX() {
         if (clientX_ == null) {
-            clientX_ = jsxGet_screenX();
+            clientX_ = Integer.valueOf(jsxGet_screenX());
         }
-        return clientX_;
+        return clientX_.intValue();
     }
 
     /**
@@ -139,9 +139,9 @@ public class MouseEvent extends UIEvent {
     public int jsxGet_screenX() {
         if (screenX_ == null) {
             final HTMLElement target = (HTMLElement) jsxGet_target();
-            screenX_ = target.getPosX() + 10;
+            screenX_ = Integer.valueOf(target.getPosX() + 10);
         }
-        return screenX_;
+        return screenX_.intValue();
     }
 
     /**
@@ -159,9 +159,9 @@ public class MouseEvent extends UIEvent {
      */
     public int jsxGet_clientY() {
         if (clientY_ == null) {
-            clientY_ = jsxGet_screenY();
+            clientY_ = Integer.valueOf(jsxGet_screenY());
         }
-        return clientY_;
+        return clientY_.intValue();
     }
 
     /**
@@ -174,9 +174,9 @@ public class MouseEvent extends UIEvent {
     public int jsxGet_screenY() {
         if (screenY_ == null) {
             final HTMLElement target = (HTMLElement) jsxGet_target();
-            screenY_ = target.getPosY() + 10;
+            screenY_ = Integer.valueOf(target.getPosY() + 10);
         }
-        return screenY_;
+        return screenY_.intValue();
     }
 
     /**
@@ -251,10 +251,10 @@ public class MouseEvent extends UIEvent {
             final int button,
             final Object relatedTarget) {
         jsxFunction_initUIEvent(type, bubbles, cancelable, view, detail);
-        screenX_ = screenX;
-        screenY_ = screenY;
-        clientX_ = clientX;
-        clientY_ = clientY;
+        screenX_ = Integer.valueOf(screenX);
+        screenY_ = Integer.valueOf(screenY);
+        clientX_ = Integer.valueOf(clientX);
+        clientY_ = Integer.valueOf(clientY);
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
         setShiftKey(shiftKey);

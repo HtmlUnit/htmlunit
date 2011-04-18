@@ -40,13 +40,13 @@ public class HtmlImageTest extends WebTestCase {
      */
     @Test
     public void isMapClick() throws Exception {
-        isMapClick("img1", false, "?0,0", "?25,30");
-        isMapClick("img2", false, "", "");
-        isMapClick("img3", true, "", "");
-        isMapClick("img3", true, "", "");
+        isMapClick("img1", Boolean.FALSE, "?0,0", "?25,30");
+        isMapClick("img2", Boolean.FALSE, "", "");
+        isMapClick("img3", Boolean.TRUE, "", "");
+        isMapClick("img3", Boolean.TRUE, "", "");
     }
 
-    private void isMapClick(final String imgId, final boolean samePage,
+    private void isMapClick(final String imgId, final Boolean samePage,
             final String urlSuffixClick, final String urlSuffixClickXY) throws Exception {
 
         final String htmlContent
@@ -63,14 +63,14 @@ public class HtmlImageTest extends WebTestCase {
         final HtmlImage img = page.getHtmlElementById(imgId);
 
         final Page page2 = img.click();
-        Assert.assertEquals("same page after click", samePage, (page == page2));
-        if (!samePage) {
+        Assert.assertEquals("same page after click", samePage, Boolean.valueOf(page == page2));
+        if (!samePage.booleanValue()) {
             assertEquals("http://server/foo" + urlSuffixClick, page2.getWebResponse().getWebRequest().getUrl());
         }
 
         final Page page3 = img.click(25, 30);
-        Assert.assertEquals("same page after click(25, 30)", samePage, (page == page3));
-        if (!samePage) {
+        Assert.assertEquals("same page after click(25, 30)", samePage, Boolean.valueOf(page == page3));
+        if (!samePage.booleanValue()) {
             assertEquals("http://server/foo" + urlSuffixClickXY, page3.getWebResponse().getWebRequest().getUrl());
         }
     }
