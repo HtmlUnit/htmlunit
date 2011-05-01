@@ -76,7 +76,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
         final CSSStyleSheet sheet = host.jsxGet_sheet();
 
-        Selector selector = parseSelector(sheet, "*.yui-log input { }");
+        Selector selector = parseSelector(sheet, "*.yui-log input");
         assertFalse(sheet.selects(selector, body));
         assertFalse(sheet.selects(selector, form));
         assertTrue(sheet.selects(selector, input1));
@@ -84,7 +84,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         assertFalse(sheet.selects(selector, button1));
         assertFalse(sheet.selects(selector, button2));
 
-        selector = parseSelector(sheet, "#m1 { margin: 3px; }");
+        selector = parseSelector(sheet, "#m1");
         assertTrue(sheet.selects(selector, input1));
         assertFalse(sheet.selects(selector, input2));
     }
@@ -99,7 +99,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_anyNodeSelector() throws Exception {
-        testSelects("* { color: red; }", true, true, true);
+        testSelects("*", true, true, true);
     }
 
     /**
@@ -108,7 +108,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_childSelector() throws Exception {
-        testSelects("body > div { color: red; }", false, true, false);
+        testSelects("body > div", false, true, false);
     }
 
     /**
@@ -117,7 +117,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_descendantSelector() throws Exception {
-        testSelects("body span { color: red; }", false, false, true);
+        testSelects("body span", false, false, true);
     }
 
     /**
@@ -126,7 +126,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_elementSelector() throws Exception {
-        testSelects("div { color: red; }", false, true, false);
+        testSelects("div", false, true, false);
     }
 
     /**
@@ -135,7 +135,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_directAdjacentSelector() throws Exception {
-        testSelects("span + span { color: red; }", false, false, true);
+        testSelects("span + span", false, false, true);
     }
 
     /**
@@ -144,9 +144,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_conditionalSelector_idCondition() throws Exception {
-        testSelects("span#s { color: red; }", false, false, true);
-        testSelects("#s { color: red; }", false, false, true);
-        testSelects("span[id=s] { color: red; }", false, false, true);
+        testSelects("span#s", false, false, true);
+        testSelects("#s", false, false, true);
+        testSelects("span[id=s]", false, false, true);
     }
 
     /**
@@ -155,9 +155,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_conditionalSelector_classCondition() throws Exception {
-        testSelects("div.bar { color: red; }", false, true, false);
-        testSelects(".bar { color: red; }", false, true, false);
-        testSelects("div[class~=bar] { color: red; }", false, true, false);
+        testSelects("div.bar", false, true, false);
+        testSelects(".bar", false, true, false);
+        testSelects("div[class~=bar]", false, true, false);
     }
 
     /**
@@ -166,7 +166,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void selects_pseudoClass_root() throws Exception {
-        testSelects(":root { color: red; }", false, false, false);
+        testSelects(":root", false, false, false);
     }
 
     /**
@@ -356,8 +356,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final InputSource source = new InputSource(new StringReader(""));
         final org.w3c.dom.css.CSSStyleSheet ss = parser.parseStyleSheet(source, null, null);
 
-        ss.insertRule(".testStyle { width: 24px;}", 0);
-        ss.insertRule(" .testStyleDef { height: 42px; }", 0);
+        ss.insertRule(".testStyle", 0);
+        ss.insertRule(" .testStyleDef", 0);
     }
 
     /**
