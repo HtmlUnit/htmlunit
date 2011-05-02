@@ -71,8 +71,15 @@ class SelectorSpecificity implements Comparable<SelectorSpecificity> {
                 return;
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
-                final String name = es.getLocalName();
-                if (name != null) {
+                final String esName = es.getLocalName();
+                if (esName != null) {
+                    fieldD_++;
+                }
+                return;
+            case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
+                final ElementSelector pes = (ElementSelector) selector;
+                final String pesName = pes.getLocalName();
+                if (pesName != null) {
                     fieldD_++;
                 }
                 return;
