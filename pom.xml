@@ -795,7 +795,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-htmlunit-driver</artifactId>
-            <version>2.0b1</version>
+            <version>2.0b3</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -807,13 +807,13 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-ie-driver</artifactId>
-            <version>2.0b1</version>
+            <version>2.0b3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-firefox-driver</artifactId>
-            <version>2.0b1</version>
+            <version>2.0b3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
