@@ -14,21 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.NamedNodeMap}.
@@ -39,7 +32,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class NamedNodeMapTest extends WebTestCase {
+public class NamedNodeMapTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -65,7 +58,7 @@ public class NamedNodeMapTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts(html); // properties order is the reverse of what I get with FF3.6
     }
 
     /**
@@ -97,22 +90,20 @@ public class NamedNodeMapTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "name", "y", "name", "y", "null", "undefined", "null" })
     public void testGetNamedItem_XML() throws Exception {
-        final URL firstURL = new URL("http://htmlunit/first.html");
-        final URL secondURL = new URL("http://htmlunit/second.xml");
-
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var doc = createXmlDocument();\n"
             + "    doc.async = false;\n"
-            + "    doc.load('" + "second.xml" + "');\n"
+            + "    doc.load('second.xml');\n"
             + "    alert(doc.documentElement.attributes.getNamedItem('name').nodeName);\n"
             + "    alert(doc.documentElement.attributes.getNamedItem('name').nodeValue);\n"
             + "    alert(doc.documentElement.attributes.name.nodeName);\n"
@@ -132,17 +123,8 @@ public class NamedNodeMapTest extends WebTestCase {
 
         final String xml = "<blah name='y'></blah>";
 
-        final String[] expectedAlerts = new String[] {"name", "y", "name", "y", "null", "undefined", "null"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = getWebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(firstURL, html);
-        conn.setResponse(secondURL, xml, "text/xml");
-        client.setWebConnection(conn);
-
-        client.getPage(firstURL);
-        assertEquals(expectedAlerts, collectedAlerts);
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -166,6 +148,6 @@ public class NamedNodeMapTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
