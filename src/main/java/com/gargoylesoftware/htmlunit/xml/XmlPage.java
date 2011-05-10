@@ -107,22 +107,30 @@ public class XmlPage extends SgmlPage {
                 node_ = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument().getDocumentElement();
             }
             else {
-                node_ = XmlUtil.buildDocument(webResponse).getDocumentElement();
-            }
-            if (node_ != null) {
-                XmlUtil.appendChild(this, this, node_);
-            }
-        }
-        catch (final SAXException e) {
-            LOG.warn("Failed parsing XML document " + webResponse.getWebRequest().getUrl()
-                    + ": " + e.getMessage());
-            if (!ignoreSAXException) {
-                throw new IOException(e.getMessage());
+                try {
+                    node_ = XmlUtil.buildDocument(webResponse).getDocumentElement();
+                }
+                catch (final SAXException e) {
+                    LOG.warn("Failed parsing XML document " + webResponse.getWebRequest().getUrl()
+                            + ": " + e.getMessage());
+                    if (!ignoreSAXException) {
+                        throw new IOException(e.getMessage());
+                    }
+                }
             }
         }
         catch (final ParserConfigurationException e) {
-            LOG.warn("Failed parsing XML document " + webResponse.getWebRequest().getUrl()
+            if (null == webResponse) {
+                LOG.warn("Failed parsing XML empty document: " + e.getMessage());
+            }
+            else {
+                LOG.warn("Failed parsing XML empty document " + webResponse.getWebRequest().getUrl()
                     + ": " + e.getMessage());
+            }
+        }
+
+        if (node_ != null) {
+            XmlUtil.appendChild(this, this, node_);
         }
     }
 
