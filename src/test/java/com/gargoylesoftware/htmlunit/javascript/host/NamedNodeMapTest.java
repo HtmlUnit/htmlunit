@@ -150,4 +150,26 @@ public class NamedNodeMapTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "div1", "" })
+    public void removeNamedItem() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "<div id='div1' style='background-color:#FFFFC1;'>div1</div>\n"
+            + "<script>\n"
+            + "  var el = document.getElementById('div1');\n"
+            + "  alert(el.id);\n"
+            + "  el.attributes.removeNamedItem('id');\n"
+            + "  alert(el.id);\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

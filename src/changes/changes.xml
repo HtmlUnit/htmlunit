@@ -6,8 +6,11 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3240867">
+                JavaScript: add support for NamedNodeMap.removeNamedItem.
+            </action>
             <action type="fix" dev="rbri">
-                NPE fixed when css style declarations are addressed from javascript.
+                NPE fixed when CSS style declarations are addressed from JavaScript.
             </action>
             <action type="fix" dev="rbri" issue="3236689">
                 INCOMPATIBLE CHANGE: The whole construction/setup of the AbstractHttpClient is now done
@@ -17,16 +20,16 @@
                 If you already do this, please check your implementation for compatibility.
             </action>
             <action type="add" dev="rbri">
-                Javascript property mediaText and function item added to class MediaList.
+                JavaScript property mediaText and function item added to class MediaList.
             </action>
             <action type="add" dev="rbri">
-                Javascript support for class CSSMediaRule added.
+                JavaScript support for class CSSMediaRule added.
             </action>
             <action type="fix" dev="mguillem" issue="3236689">
                 Avoid exception occurring when script's src attribute is only "http://".
             </action>
             <action type="fix" dev="rbri" issue="3003087">
-                Recursion in css import causes stack overflow.
+                Recursion in CSS import causes stack overflow.
             </action>
             <action type="fix" dev="rbri" issue="3247986" due-to="Kohsuke Kawaguchi">
                 Fix order of steps during Window initialization to avoid NPE in later access.

@@ -118,6 +118,14 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     /**
+     * Removes the specified attribute.
+     * @param node the attribute
+     */
+    public void jsxFunction_removeNamedItem(final String name) {
+        attributes_.removeNamedItem(name);
+    }
+
+    /**
      * Returns the item at the specified index.
      * @param index the index
      * @return the item at the specified index

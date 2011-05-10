@@ -2479,6 +2479,7 @@
         <property name="length" readable="true" writable="false"/>
         <function name="getNamedItem"/>
         <function name="item"/>
+        <function name="removeNamedItem"/>
         <function name="setNamedItem"/>
     </class>
 
