@@ -184,7 +184,7 @@ public final class StringUtils {
             return DateUtils.parseDate(s);
         }
         catch (final DateParseException e) {
-            LOG.warn("Unable to parse date: '" + s + "'");
+            LOG.warn("Unable to parse http date: '" + s + "'");
             return null;
         }
     }
