@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringReader;
@@ -1512,20 +1511,21 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
             parser.setErrorHandler(errorHandler);
             final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
-            final BrowserVersion browserVersion = webClient.getBrowserVersion();
-            for (final HtmlElement child : getPage().getHtmlElementDescendants()) {
-                for (int i = 0; i < selectorList.getLength(); i++) {
-                    final Selector selector = selectorList.item(i);
-                    if (CSSStyleSheet.selects(browserVersion, selector, child)) {
-                        elements.add(child);
+            // in case of error parseSelectors returns null
+            if (null != selectorList) {
+                final BrowserVersion browserVersion = webClient.getBrowserVersion();
+                for (final HtmlElement child : getPage().getHtmlElementDescendants()) {
+                    for (int i = 0; i < selectorList.getLength(); i++) {
+                        final Selector selector = selectorList.item(i);
+                        if (CSSStyleSheet.selects(browserVersion, selector, child)) {
+                            elements.add(child);
+                        }
                     }
                 }
             }
         }
-        catch (final IOException e) {
-            if (LOG.isInfoEnabled()) {
-                LOG.info("Error retrieving selectors: " + selectors, e);
-            }
+        catch (final Exception e) {
+            LOG.error("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage(), e);
         }
         return new StaticDomNodeList(elements);
     }

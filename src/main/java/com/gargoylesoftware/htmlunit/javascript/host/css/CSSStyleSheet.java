@@ -497,6 +497,10 @@ public class CSSStyleSheet extends SimpleScriptable {
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
             parser.setErrorHandler(errorHandler);
             selectors = parser.parseSelectors(source);
+            // in case of error parseSelectors returns null
+            if (null == selectors) {
+                selectors = new SelectorListImpl();
+            }
         }
         catch (final Exception e) {
             LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + e.getMessage(), e);
