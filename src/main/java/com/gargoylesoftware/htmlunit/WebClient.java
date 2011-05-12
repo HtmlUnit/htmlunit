@@ -2075,7 +2075,7 @@ public class WebClient implements Serializable {
      * @param requestingWindow the window from which the request comes
      * @param target the name of the target window
      * @param request the request to perform
-     * @param isHashJump in at least one case (achor url is '#') it is not possible
+     * @param isHashJump in at least one case (anchor url is '#') it is not possible
      *        to decide that this is only a hash jump; in this case you can provide
      *        true here; otherwise use false
      * @param description information about the origin of the request. Useful for debugging.
