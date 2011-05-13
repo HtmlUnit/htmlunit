@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * Tests for CSS selectors.
  *
- * @version $Revision: 6386 $
+ * @version $Revision$
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
