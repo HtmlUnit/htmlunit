@@ -59,14 +59,15 @@ public class DefaultCssErrorHandler implements ErrorHandler, Serializable {
      * @return a message for the specified CSS parsing exception
      */
     private String buildMessage(final CSSParseException exception) {
-        String uri = exception.getURI();
-        if (null != uri) {
-            uri = "";
-        }
-
+        final String uri = exception.getURI();
         final int line = exception.getLineNumber();
         final int col = exception.getColumnNumber();
-        return uri + "[" + line + ":" + col + "]";
+
+        if (null == uri) {
+            return "[" + line + ":" + col + "] " + exception.getMessage();
+        }
+        return "'" + uri + "' [" + line + ":" + col + "] " + exception.getMessage();
+
     }
 
 }
