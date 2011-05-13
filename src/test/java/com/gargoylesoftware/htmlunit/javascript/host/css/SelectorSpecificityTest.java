@@ -47,6 +47,7 @@ public class SelectorSpecificityTest extends WebTestCase {
         final SelectorSpecificity specificy2a = selectorSpecifity("li:first-line", "0,0,0,2");
         final SelectorSpecificity specificy2b = selectorSpecifity("ul li", "0,0,0,2");
         final SelectorSpecificity specificy3 = selectorSpecifity("ul ol+li", "0,0,0,3");
+        selectorSpecifity("body > p", "0,0,1,1");
         final SelectorSpecificity specificy11 = selectorSpecifity("h1 + *[rel=up]", "0,0,1,1");
         final SelectorSpecificity specificy13 = selectorSpecifity("ul ol li.red", "0,0,1,3");
         final SelectorSpecificity specificy21 = selectorSpecifity("li.red.level", "0,0,2,1");

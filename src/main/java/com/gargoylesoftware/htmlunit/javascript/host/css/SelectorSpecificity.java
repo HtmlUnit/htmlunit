@@ -27,7 +27,7 @@ import org.w3c.css.sac.SiblingSelector;
 
 /**
  * Calculates a selector's specificity.
- * @see <a href="http://www.w3.org/TR/CSS2/cascade.html#specificity">W3C CSS2</a>
+ * @see <a href="http://www.w3.org/TR/CSS21/cascade.html#specificity">W3C CSS21</a>
  * @version $Revision$
  * @author Marc Guillemot
  */
@@ -62,6 +62,11 @@ class SelectorSpecificity implements Comparable<SelectorSpecificity> {
                 final DescendantSelector ds = (DescendantSelector) selector;
                 readSelectorSpecificity(ds.getAncestorSelector());
                 readSelectorSpecificity(ds.getSimpleSelector());
+                return;
+            case Selector.SAC_CHILD_SELECTOR:
+                final DescendantSelector cs = (DescendantSelector) selector;
+                readSelectorSpecificity(cs.getAncestorSelector());
+                readSelectorSpecificity(cs.getSimpleSelector());
                 return;
             case Selector.SAC_CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
