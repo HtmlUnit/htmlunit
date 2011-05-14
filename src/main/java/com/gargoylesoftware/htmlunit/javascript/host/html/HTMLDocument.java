@@ -1037,7 +1037,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to null
             final BrowserVersion browser = getBrowserVersion();
-            if (browser.hasFeature(BrowserVersionFeatures.GENERATED_58)) {
+            if (browser.hasFeature(BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME)) {
                 final HTMLCollection elements = jsxFunction_getElementsByName(id);
                 result = elements.get(0, elements);
                 if (result instanceof UniqueTag) {

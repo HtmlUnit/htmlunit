@@ -445,9 +445,6 @@ public enum BrowserVersionFeatures {
     GENERATED_57,
 
     /** Was originally .isIE(). */
-    GENERATED_58,
-
-    /** Was originally .isIE(). */
     GENERATED_59,
 
     /** Was originally .isIE(). */
@@ -641,6 +638,9 @@ public enum BrowserVersionFeatures {
 
     /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
     JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB,
+
+    /** Javascript function getElementById calls getElementByName if nothing found by id. */
+    JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME,
 
     /** Javascript function getElementById compares the id's case sensitive. */
     JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
