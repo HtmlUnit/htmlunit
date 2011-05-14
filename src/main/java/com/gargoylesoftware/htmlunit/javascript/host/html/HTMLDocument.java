@@ -375,6 +375,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public Object jsxGet_anchors() {
         if (anchors_ == null) {
+            final boolean checkId =
+                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID);
+
             anchors_ = new HTMLCollection(getDomNodeOrDie(), true, "HTMLDocument.anchors") {
                 @Override
                 protected boolean isMatching(final DomNode node) {
@@ -382,7 +385,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                         return false;
                     }
                     final HtmlAnchor anchor = (HtmlAnchor) node;
-                    if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_52)) {
+                    if (checkId) {
                         return anchor.hasAttribute("name") || anchor.hasAttribute("id");
                     }
                     return anchor.hasAttribute("name");

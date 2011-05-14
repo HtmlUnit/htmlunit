@@ -427,9 +427,6 @@ public enum BrowserVersionFeatures {
     GENERATED_51,
 
     /** Was originally .isIE(). */
-    GENERATED_52,
-
-    /** Was originally .isIE(). */
     GENERATED_53,
 
     /** Was originally .isIE(). */
@@ -629,6 +626,12 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that the browser should ignore contents of inner head elements. */
     IGNORE_CONTENTS_OF_INNER_HEAD,
+
+    /**
+     * Javascript property anchors includes all anchors with a name or an id property.
+     * If not set name property is required
+     */
+    JS_ANCHORS_REQUIRES_NAME_OR_ID,
 
     /** */
     JS_DEFERRED,
