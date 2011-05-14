@@ -67,7 +67,5 @@ public class DefaultCssErrorHandler implements ErrorHandler, Serializable {
             return "[" + line + ":" + col + "] " + exception.getMessage();
         }
         return "'" + uri + "' [" + line + ":" + col + "] " + exception.getMessage();
-
     }
-
 }
