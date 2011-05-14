@@ -46,8 +46,8 @@ public class SelectorSpecificityTest extends WebTestCase {
         final SelectorSpecificity specificy1 = selectorSpecifity("li", "0,0,0,1");
         final SelectorSpecificity specificy2a = selectorSpecifity("li:first-line", "0,0,0,2");
         final SelectorSpecificity specificy2b = selectorSpecifity("ul li", "0,0,0,2");
+        final SelectorSpecificity specificy2c = selectorSpecifity("body > p", "0,0,0,2");
         final SelectorSpecificity specificy3 = selectorSpecifity("ul ol+li", "0,0,0,3");
-        selectorSpecifity("body > p", "0,0,1,1");
         final SelectorSpecificity specificy11 = selectorSpecifity("h1 + *[rel=up]", "0,0,1,1");
         final SelectorSpecificity specificy13 = selectorSpecifity("ul ol li.red", "0,0,1,3");
         final SelectorSpecificity specificy21 = selectorSpecifity("li.red.level", "0,0,2,1");
@@ -64,6 +64,7 @@ public class SelectorSpecificityTest extends WebTestCase {
         Assert.assertTrue(specificy1.compareTo(specificy13) < 0);
 
         Assert.assertEquals(0, specificy2a.compareTo(specificy2b));
+        Assert.assertEquals(0, specificy2a.compareTo(specificy2c));
         Assert.assertTrue(specificy2a.compareTo(specificy0) > 0);
         Assert.assertTrue(specificy2a.compareTo(specificy3) < 0);
         Assert.assertTrue(specificy2a.compareTo(specificy11) < 0);
