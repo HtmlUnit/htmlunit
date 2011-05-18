@@ -48,6 +48,9 @@ public enum BrowserVersionFeatures {
     /** Was originally .isFirefox(). */
     CSS_DISPLAY_DEFAULT,
 
+    /** Indicates that the :lang(..) selector is supported. */
+    CSS_SELECTOR_LANG,
+
     /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets
      * you use CSS to attach a script to a specific element in order to implement
      * DHTML (Dynamic HTML) components.
@@ -344,9 +347,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_27,
-
-    /** Was originally .isIE(). */
-    GENERATED_28,
 
     /** Was originally .isIE(). */
     GENERATED_29,

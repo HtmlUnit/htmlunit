@@ -173,6 +173,21 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    public void selects_pseudoClass_lang() throws Exception {
+        if (getBrowserVersion().isFirefox()) {
+            testSelects(":lang(en)", false, true, true);
+            testSelects(":lang(de)", false, false, false);
+        }
+        else {
+            testSelects(":lang(en)", false, false, false);
+            testSelects(":lang(de)", false, false, false);
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Browsers(Browser.NONE)
     @NotYetImplemented
     public void selects_pseudoClass_negation() throws Exception {
@@ -183,7 +198,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final boolean selectSpanS) throws Exception {
         final String html =
               "<html><body id='b'><style></style>\n"
-            + "<div id='d' class='foo bar'><span>x</span><span id='s'>a</span>b</div>\n"
+            + "<div id='d' class='foo bar' lang='en-GB'>"
+            + "<span>x</span>"
+            + "<span id='s'>a</span>b</div>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
@@ -465,6 +482,34 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "</style>\n"
             + "</head><body onload='doTest()'>\n"
             + "<div id='style1'>Hello</div>"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for handling/ignoring @font-face.
+     * @see bug 2984265
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts("none")
+    public void fontFace() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var e = document.getElementById('div1');\n"
+            + "  alert(getComputedStyle(e).display);\n"
+            + "}\n"
+            + "</script>\n"
+            + "<style>\n"
+            + "  @font-face { font-family: YanoneKaffeesatz; src: url(/YanoneKaffeesatz-Regular.otf); }\n"
+            + "  body { font-family: YanoneKaffeesatz; }\n"
+            + "  div { display: none; }\n"
+            + "</style>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "<div id='div1'>invisible</div>"
+            + "visible"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

@@ -299,7 +299,6 @@ public class CSSStyleSheet extends SimpleScriptable {
      */
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
             final HtmlElement element) {
-        final String tagName = element.getTagName();
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
                 return true;
@@ -334,9 +333,9 @@ public class CSSStyleSheet extends SimpleScriptable {
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalName();
-                return name == null || tagName.equalsIgnoreCase(name);
+                return name == null || name.equalsIgnoreCase(element.getTagName());
             case Selector.SAC_ROOT_NODE_SELECTOR:
-                return HtmlHtml.TAG_NAME.equalsIgnoreCase(tagName);
+                return HtmlHtml.TAG_NAME.equalsIgnoreCase(element.getTagName());
             case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
                 final SiblingSelector ss = (SiblingSelector) selector;
                 final DomNode prev = element.getPreviousSibling();
@@ -409,7 +408,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 final ContentCondition cc = (ContentCondition) condition;
                 return element.asText().contains(cc.getData());
             case Condition.SAC_LANG_CONDITION:
-                if (browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_28)) {
+                if (!browserVersion.hasFeature(BrowserVersionFeatures.CSS_SELECTOR_LANG)) {
                     return false;
                 }
                 final String lcLang = ((LangCondition) condition).getLang();
