@@ -77,6 +77,27 @@ public class WebClient3Test extends WebDriverTestCase {
     }
 
     /**
+     * Regression test for bug 3035155.
+     * Bug was fixes in HttpClient 4.1.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void redirect302UrlsInQuery() throws Exception {
+        final String html = "<html><body><a href='redirect.html'>redirect</a></body></html>";
+
+        final URL url = new URL(getDefaultUrl(), "page2.html");
+        getMockWebConnection().setResponse(url, html);
+
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Location", "/page2.html?param=http%3A//somwhere.org"));
+        getMockWebConnection().setDefaultResponse("", 302, "Found", null, headers);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.tagName("a")).click();
+        assertEquals(url.toString() + "?param=http%3A//somwhere.org", driver.getCurrentUrl());
+    }
+
+    /**
      * Regression test for bug 3012067: a null pointer exception was occurring.
      * @throws Exception if an error occurs
      */
