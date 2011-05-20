@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
@@ -56,7 +57,7 @@ public class HtmlTitleTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void pageAsText() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<title>Dummy</title>\n"
@@ -71,5 +72,85 @@ public class HtmlTitleTest extends WebTestCase {
         final String expected = "Dummy" + LINE_SEPARATOR
             + "Dummy page";
         assertEquals(expected, page.asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>Title\nText     Test</title>\n"
+            + "</head>\n"
+            + "\n"
+            + "<body>\n"
+            + "Dummy page\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals("Title Text Test", page.getTitleText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asTextEmptyTitle() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title></title>\n"
+            + "</head>\n"
+            + "\n"
+            + "<body>\n"
+            + "Dummy page\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals("", page.getTitleText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asTextContainingTags() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>My<br>Title<p>Text</p></title>\n"
+            + "</head>\n"
+            + "\n"
+            + "<body>\n"
+            + "Dummy page\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals("My<br>Title<p>Text</p>", page.getTitleText());
+    }
+
+    /**
+     * Test for bug 3103101.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asTextDontLoadCss() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<title>Title</title>\n"
+            + "<link href='styles.css' type='text/css' rel='stylesheet'>"
+            + "</head>\n"
+            + "\n"
+            + "<body>\n"
+            + "Dummy page\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals("Title", page.getTitleText());
+        final MockWebConnection conn = (MockWebConnection) page.getWebClient().getWebConnection();
+        assertEquals(1, conn.getRequestCount());
     }
 }

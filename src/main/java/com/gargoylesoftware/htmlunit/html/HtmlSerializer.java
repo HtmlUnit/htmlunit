@@ -232,8 +232,16 @@ class HtmlSerializer {
     }
 
     private void appendHtmlTitle(final HtmlTitle htmlTitle) {
-        appendChildren(htmlTitle);
-        doAppendBlockSeparator();
+        // optimized version
+        // for the title there is no need to check the visibility
+        // of the containing dom text;
+        // this optimization defers the load of the style sheets
+        final DomNode child = htmlTitle.getFirstChild();
+        if (child instanceof DomText) {
+            doAppend(((DomText) child).getData());
+            doAppendBlockSeparator();
+            return;
+        }
     }
 
     private void appendChildren(final DomNode node) {
