@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3103101">
+                CCS parsing not required for Page.getTitleText().
+            </action>
             <action type="fix" dev="mguillem" issue="3240867">
                 JavaScript: add support for NamedNodeMap.removeNamedItem.
             </action>
