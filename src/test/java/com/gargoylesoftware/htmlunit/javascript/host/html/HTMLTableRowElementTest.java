@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HTMLTableRowElement}.
@@ -304,6 +305,34 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  alert(tr3.rowIndex);\n"
             + "  alert(tr3.sectionRowIndex == -1);\n"
             + "  alert(tr3.sectionRowIndex > 1000);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for 3180939; same left offset for both
+     * rows is expected.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "530", "530" })
+    @NotYetImplemented
+    public void offsetLeftDifferentRows() throws Exception {
+        final String html
+            = "<html><body><table>\n"
+            + "  <tr>\n"
+            + "    <td id='td_1_1'>1_1</td>\n"
+            + "    <td id='td_1_2'>1_2</td>\n"
+            + "  </tr>\n"
+            + "  <tr>\n"
+            + "    <td id='td_2_1'>2_1</td>\n"
+            + "    <td id='td_2_2'>2_2</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + "  alert(document.getElementById('td_1_1').offsetLeft);\n"
+            + "  alert(document.getElementById('td_2_1').offsetLeft);\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
