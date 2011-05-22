@@ -662,11 +662,12 @@ public final class HTMLParser {
                 }
                 else {
                     // Use the normal behavior: append a text node for the accumulated text.
-                    final DomText text = new DomText(page_, characters_.toString());
+                    final String textValue = characters_.toString();
+                    final DomText text = new DomText(page_, textValue);
                     characters_.setLength(0);
 
                     // malformed HTML: </td>some text</tr> => text comes before the table
-                    if (currentNode_ instanceof HtmlTableRow) {
+                    if (currentNode_ instanceof HtmlTableRow && StringUtils.isNotBlank(textValue)) {
                         final HtmlTableRow row = (HtmlTableRow) currentNode_;
                         final HtmlTable enclosingTable = row.getEnclosingTable();
                         if (enclosingTable != null) { // may be null when called from Range.createContextualFragment

@@ -14,17 +14,21 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Test class for {@link HTMLParser}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLParser2Test extends WebDriverTestCase {
@@ -40,4 +44,56 @@ public class HTMLParser2Test extends WebDriverTestCase {
         loadPage2(html);
     }
 
+    /**
+     * Malformed HTML:
+     * &lt;/td&gt;some text&lt;/tr&gt; =&gt; text comes before the table.
+     *
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({ "before", "after", "TABLE" })
+    public void testHtmlTableTextAroundTD() throws Exception {
+        final String html = "<html><head><title>test_Table</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var tmp = document.getElementById('testDiv');\n"
+            + "  tmp = tmp.firstChild;\n"
+            + "  alert(tmp.data)\n"
+            + "  tmp = tmp.nextSibling;\n"
+            + "  alert(tmp.data)\n"
+            + "  tmp = tmp.nextSibling;\n"
+            + "  alert(tmp.tagName)\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><div id='testDiv'>"
+            + "<table><tr>before<td></td>after</tr></table>"
+            + "</div></body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertNotNull(page);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("TABLE")
+    public void testHtmlTableWhitespaceAroundTD() throws Exception {
+        final String html = "<html><head><title>test_Table</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var tmp = document.getElementById('testDiv');\n"
+            + "  tmp = tmp.firstChild;\n"
+            + "  alert(tmp.tagName)\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><div id='testDiv'>"
+            + "<table><tr> <td></td> </tr></table>"
+            + "</div></body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertNotNull(page);
+    }
 }
