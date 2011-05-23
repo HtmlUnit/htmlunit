@@ -665,7 +665,7 @@ public class CSSStyleSheet extends SimpleScriptable {
             return true;
         }
         for (String s : StringUtils.split(media, ',')) {
-            final String mediaType = s.trim(); 
+            final String mediaType = s.trim();
             if ("screen".equals(mediaType) || "all".equals(mediaType)) {
                 return true;
             }
