@@ -1219,7 +1219,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return "auto";
         }
         final String defaultWidth;
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_15)) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO)) {
             defaultWidth = "auto";
         }
         else {
@@ -1285,7 +1285,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 // Block elements take up 100% of the parent's width.
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
                 final String parentWidth = getWindow().jsxFunction_getComputedStyle(parentJS, null).jsxGet_width();
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_16) && "auto".equals(parentWidth)) {
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO)
+                        && "auto".equals(parentWidth)) {
                     width = Window.WINDOW_WIDTH;
                 }
                 else {

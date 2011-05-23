@@ -57,6 +57,9 @@ public enum BrowserVersionFeatures {
      */
     CSS_SUPPORTS_BEHAVIOR_PROPERTY,
 
+    /** Indicates that the default value for width is 'auto'. */
+    CSS_DEFAULT_WIDTH_AUTO,
+
     /** */
     DIALOGWINDOW_REFERER,
 
@@ -244,9 +247,6 @@ public enum BrowserVersionFeatures {
     GENERATED_148,
 
     /** Was originally .isIE(). */
-    GENERATED_15,
-
-    /** Was originally .isIE(). */
     GENERATED_150,
 
     /** Was originally .isFirefox(). */
@@ -269,9 +269,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isFirefox(). */
     GENERATED_158,
-
-    /** Was originally .isIE(). */
-    GENERATED_16,
 
     /** Was originally .isFirefox(). */
     GENERATED_160,
