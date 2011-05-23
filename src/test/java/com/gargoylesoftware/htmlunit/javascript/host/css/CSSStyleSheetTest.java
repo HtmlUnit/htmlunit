@@ -493,14 +493,14 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
     @Alerts("none")
     @NotYetImplemented
     public void fontFace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  var e = document.getElementById('div1');\n"
-            + "  alert(getComputedStyle(e).display);\n"
+            + "  var s = window.getComputedStyle ? window.getComputedStyle(e,'') : e.currentStyle; \n"
+            + "  alert(s.display);\n"
             + "}\n"
             + "</script>\n"
             + "<style>\n"
@@ -611,6 +611,24 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "none", "1" })
+    public void mediaOnStyleTag_whitespace() throws Exception {
+        mediaOnStyleTag(" ");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaOnStyleTag_all() throws Exception {
+        mediaOnStyleTag("all");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
     public void mediaOnStyleTag_screen() throws Exception {
         mediaOnStyleTag("screen");
     }
@@ -665,6 +683,24 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Alerts({ "none", "1" })
     public void mediaOnLinkTag_noMedia() throws Exception {
         mediaOnLinkTag("");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaOnLinkTag_whitespace() throws Exception {
+        mediaOnLinkTag(" ");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "none", "1" })
+    public void mediaOnLinkTag_all() throws Exception {
+        mediaOnLinkTag("all");
     }
 
     /**

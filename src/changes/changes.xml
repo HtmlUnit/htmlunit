@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Support for media="all" added.
+            </action>
             <action type="fix" dev="rbri" issue="3241279">
                 Wrong dom node generated for tables.
             </action>

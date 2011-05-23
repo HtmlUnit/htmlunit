@@ -661,11 +661,12 @@ public class CSSStyleSheet extends SimpleScriptable {
     }
 
     private static boolean isActive(final String media) {
-        if (media.length() == 0) {
+        if (StringUtils.isBlank(media)) {
             return true;
         }
         for (String s : StringUtils.split(media, ',')) {
-            if ("screen".equals(s.trim())) {
+            final String mediaType = s.trim(); 
+            if ("screen".equals(mediaType) || "all".equals(mediaType)) {
                 return true;
             }
         }
