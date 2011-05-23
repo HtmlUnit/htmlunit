@@ -45,6 +45,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser can inherit CSS property values. */
     CAN_INHERIT_CSS_PROPERTY_VALUES,
 
+    /** Indicates that the default value for width is 'auto'. */
+    CSS_DEFAULT_WIDTH_AUTO,
+
     /** Was originally .isFirefox(). */
     CSS_DISPLAY_DEFAULT,
 
@@ -56,9 +59,6 @@ public enum BrowserVersionFeatures {
      * DHTML (Dynamic HTML) components.
      */
     CSS_SUPPORTS_BEHAVIOR_PROPERTY,
-
-    /** Indicates that the default value for width is 'auto'. */
-    CSS_DEFAULT_WIDTH_AUTO,
 
     /** */
     DIALOGWINDOW_REFERER,
