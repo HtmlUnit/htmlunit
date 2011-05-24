@@ -16,18 +16,16 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static org.junit.Assert.assertNotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
@@ -41,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlInlineFrameTest extends WebTestCase {
+public class HtmlInlineFrameTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -202,6 +200,7 @@ public class HtmlInlineFrameTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("2")
     public void testScriptUnderIFrame() throws Exception {
         final String firstContent
             = "<html><body>\n"
@@ -212,23 +211,12 @@ public class HtmlInlineFrameTest extends WebTestCase {
             + "</body></html>";
         final String secondContent
             = "<html><body><script>alert(2);</script></body></html>";
-        final String thirdContent
-            = "alert('3');";
-        final WebClient client = getWebClient();
+        final String thirdContent = "alert('3');";
 
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-        webConnection.setResponse(URL_THIRD, thirdContent, "text/javascript");
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        getMockWebConnection().setResponse(URL_THIRD, thirdContent, "text/javascript");
 
-        client.setWebConnection(webConnection);
-
-        final String[] expectedAlerts = {"2"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(firstContent);
     }
 
     /**
@@ -247,8 +235,12 @@ public class HtmlInlineFrameTest extends WebTestCase {
             + "  <iframe id='myId'>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlInlineFrame.class.isInstance(page.getHtmlElementById("myId")));
+        loadPageWithAlerts2(html);
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            final HtmlElement element = toHtmlElement(getWebDriver().findElement(By.id("myId")));
+            assertTrue(HtmlInlineFrame.class.isInstance(element));
+        }
     }
 
     /**
