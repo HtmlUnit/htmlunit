@@ -19,6 +19,7 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -235,10 +236,10 @@ public class HtmlInlineFrameTest extends WebDriverTestCase {
             + "  <iframe id='myId'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver webDriver = loadPageWithAlerts2(html);
 
-        if (getWebDriver() instanceof HtmlUnitDriver) {
-            final HtmlElement element = toHtmlElement(getWebDriver().findElement(By.id("myId")));
+        if (webDriver instanceof HtmlUnitDriver) {
+            final HtmlElement element = toHtmlElement(webDriver.findElement(By.id("myId")));
             assertTrue(HtmlInlineFrame.class.isInstance(element));
         }
     }
