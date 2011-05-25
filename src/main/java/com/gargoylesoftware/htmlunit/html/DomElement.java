@@ -18,6 +18,7 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -435,28 +436,24 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
     private final boolean caseSensitive_;
 
     private NamedAttrNodeMapImpl() {
-        super(new HashMap<String, DomAttr>());
+        super(new LinkedHashMap<String, DomAttr>());
         domNode_ = null;
         caseSensitive_ = true;
     }
 
-    NamedAttrNodeMapImpl(final DomElement domNode, final boolean caseSensitive,
-            final Map<String, DomAttr> attributes) {
-        super(attributes);
+    NamedAttrNodeMapImpl(final DomElement domNode, final boolean caseSensitive) {
+        super(new LinkedHashMap<String, DomAttr>());
         if (domNode == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Provided domNode can't be null.");
         }
         domNode_ = domNode;
         caseSensitive_ = caseSensitive;
-
-        // register positions of attributes
-        for (final String name : keySet()) {
-            attrPositions_.add(name);
-        }
     }
 
-    NamedAttrNodeMapImpl(final DomElement domElement, final boolean caseSensitive) {
-        this(domElement, caseSensitive, new HashMap<String, DomAttr>());
+    NamedAttrNodeMapImpl(final DomElement domNode, final boolean caseSensitive,
+            final Map<String, DomAttr> attributes) {
+        this(domNode, caseSensitive);
+        putAll(attributes);
     }
 
     /**
@@ -470,7 +467,7 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
      * {@inheritDoc}
      */
     public DomAttr getNamedItem(final String name) {
-        return get(fixName(name));
+        return get(name);
     }
 
     private String fixName(final String name) {
@@ -497,14 +494,14 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
         if (index < 0 || index >= attrPositions_.size()) {
             return null;
         }
-        return get(attrPositions_.get(index));
+        return super.get(attrPositions_.get(index));
     }
 
     /**
      * {@inheritDoc}
      */
     public Node removeNamedItem(final String name) throws DOMException {
-        return remove(fixName(name));
+        return remove(name);
     }
 
     /**
@@ -521,26 +518,26 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
      * {@inheritDoc}
      */
     public DomAttr setNamedItem(final Node node) {
-        return put(fixName(node.getLocalName()), (DomAttr) node);
+        return put(node.getLocalName(), (DomAttr) node);
     }
 
     /**
      * {@inheritDoc}
      */
     public Node setNamedItemNS(final Node node) throws DOMException {
-        return put(fixName(node.getNodeName()), (DomAttr) node);
+        return put(node.getNodeName(), (DomAttr) node);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public DomAttr put(String key, final DomAttr value) {
-        key = fixName(key);
-        if (!containsKey(key)) {
-            attrPositions_.add(key);
+    public DomAttr put(final String key, final DomAttr value) {
+        final String name = fixName(key);
+        if (!containsKey(name)) {
+            attrPositions_.add(name);
         }
-        return super.put(key, value);
+        return super.put(name, value);
     }
 
     /**

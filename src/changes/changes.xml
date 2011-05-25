@@ -6,7 +6,10 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
-            <action type="fix" dev="rbri">
+            <action type="fix" dev="rbri" issue="3306491">
+                Fix a NPE because of bugs in NamedAttrNodeMapImpl.
+            </action>
+            <action type="fix" dev="rbri" issue="3306851">
                 Support for media="all" added.
             </action>
             <action type="fix" dev="rbri" issue="3241279">
