@@ -392,7 +392,8 @@ public final class HTMLParser {
                 stack_.push((DomNode) ancestor);
             }
 
-            final HTMLParserListener listener = page_.getWebClient().getHTMLParserListener();
+            final WebClient webClient = page_.getWebClient();
+            final HTMLParserListener listener = webClient.getHTMLParserListener();
             final boolean reportErrors;
             if (listener != null) {
                 reportErrors = true;
@@ -406,7 +407,9 @@ public final class HTMLParser {
                 setFeature(FEATURE_AUGMENTATIONS, true);
                 setProperty("http://cyberneko.org/html/properties/names/elems", "default");
                 setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
-                setFeature(FEATURE_PARSE_NOSCRIPT, !page_.getWebClient().isJavaScriptEnabled());
+                setFeature(FEATURE_PARSE_NOSCRIPT, !webClient.isJavaScriptEnabled());
+                setFeature(HTMLScanner.ALLOW_SELFCLOSING_IFRAME,
+                    !webClient.getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING));
 
                 setContentHandler(this);
                 setLexicalHandler(this); //comments and CDATA

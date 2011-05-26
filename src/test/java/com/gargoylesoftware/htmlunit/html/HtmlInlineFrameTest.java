@@ -529,4 +529,28 @@ public class HtmlInlineFrameTest extends WebDriverTestCase {
         final String content = element.asText();
         assertEquals("Hi Folks!", content);
     }
+
+    /**
+     * Selfclosing iframe tag is accepted by IE but not by FF.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "1", "[object HTMLIFrameElement]", "null" },
+            IE = { "2", "[object]", "[object]" })
+    public void selfClosingIFrame() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(window.frames.length);\n"
+            + "    alert(document.getElementById('frame1'));\n"
+            + "    alert(document.getElementById('frame2'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <iframe id='frame1'/>\n"
+            + "  <iframe id='frame2'/>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

@@ -585,6 +585,11 @@ public enum BrowserVersionFeatures {
     /** */
     HTMLELEMENT_TRIM_CLASS_ATTRIBUTE,
 
+    /**
+     * Indicates if a selfclosing &lt;iframe/&gt; tag should be considered as an opening tag.
+     **/
+    HTMLIFRAME_IGNORE_SELFCLOSING,
+
     /** */
     HTMLIMAGE_NAME_VALUE_PARAMS,
 

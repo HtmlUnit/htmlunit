@@ -6,14 +6,17 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                Parsing: accept self closing &lt;iframe/&gt; tags when simulating IE.
+            </action>
             <action type="fix" dev="rbri" issue="3306491">
                 Fix a NPE because of bugs in NamedAttrNodeMapImpl.
             </action>
             <action type="fix" dev="rbri" issue="3306851">
-                Support for media="all" added.
+                CSS: support for media="all" added.
             </action>
             <action type="fix" dev="rbri" issue="3241279">
-                Wrong dom node generated for tables.
+                Wrong DOM node generated for tables.
             </action>
             <action type="fix" dev="rbri" issue="3103101">
                 CCS parsing not required for Page.getTitleText().
