@@ -966,7 +966,7 @@ public class HtmlPageTest extends WebServerTestCase {
         final String htmlContent = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
-            + "<iframe />\n"
+            + "<iframe></iframe>\n"
             + "<a href='about:blank'>link</a>\n"
             + "</body></html>";
 
