@@ -2142,7 +2142,7 @@ public class WebClient implements Serializable {
      * @throws IOException in case of exception
      * @throws FailingHttpStatusCodeException in case of exception
      */
-    public synchronized void loadDownloadedResponses() throws FailingHttpStatusCodeException, IOException {
+    public void loadDownloadedResponses() throws FailingHttpStatusCodeException, IOException {
         final List<LoadJob> queue;
 
         // synchronize access to the loadQueue_,
