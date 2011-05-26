@@ -1501,7 +1501,6 @@ public class JavaScriptEngineTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts("0")
     public void function_toStringValue() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

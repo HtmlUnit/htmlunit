@@ -7,6 +7,9 @@
     <body>
         <release version="2.9" date="???" description="Bugfixes">
             <action type="fix" dev="mguillem">
+                JavaScript: fix string conversion of native functions.
+            </action>
+            <action type="fix" dev="mguillem">
                 Parsing: accept self closing &lt;iframe/&gt; tags when simulating IE.
             </action>
             <action type="fix" dev="rbri" issue="3306491">

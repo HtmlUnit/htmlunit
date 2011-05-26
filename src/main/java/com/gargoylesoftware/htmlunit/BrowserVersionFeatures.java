@@ -673,6 +673,11 @@ public enum BrowserVersionFeatures {
      */
     JS_LOCATION_HASH_IS_DECODED,
 
+    /**
+     * Indicates if the String representation of a native function begins and ends with a \n.
+     */
+    JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
+
     /** Always "[object]". */
     JS_OBJECT_ONLY,
 

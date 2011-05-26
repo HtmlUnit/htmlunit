@@ -97,4 +97,41 @@ public class NativeFunctionTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * For the first test of this kind, we take a special case to have
+     * correct expectations for IE as IE (at least IE6) seems to just return
+     * the original string.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function anonymous() {\n    var x = 1;\n}")
+    public void newFunctionToString() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "var f1 = new Function('    var x = 1;');\n"
+            + "alert(f1);\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function foo() {\n    return 1;\n}")
+    public void functionToString() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function foo() {\n"
+            + "    return 1;\n"
+            + "};\n"
+            + "alert(foo);\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

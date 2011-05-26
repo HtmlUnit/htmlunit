@@ -282,6 +282,8 @@ public class JavaScriptEngine {
             removePrototypeProperties(window, "String", "toSource");
         }
 
+        NativeFunctionToStringFunction.installFix(window, webClient.getBrowserVersion());
+
         window.setPrototypes(prototypes);
         window.initialize(webWindow);
     }

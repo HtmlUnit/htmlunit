@@ -48,6 +48,7 @@ import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -574,19 +575,16 @@ public class HtmlPageTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("function () {\n}")
     public void testOnLoadHandler_ScriptNameRead() throws Exception {
-        final String htmlContent = "<html><head><title>foo</title>\n"
+        final String html = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
             + "load=function(){};\n"
             + "onload=load;\n"
             + "alert(onload);\n"
             + "</script></head><body></body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        assertEquals("foo", page.getTitleText());
 
-        final String[] expectedAlerts = {"\nfunction () {\n}\n"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPageWithAlerts(html);
     }
 
     /**

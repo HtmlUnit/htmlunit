@@ -113,4 +113,21 @@ public class NativeArrayTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "function Array() {\n    [native code]\n}",
+            IE = "\nfunction Array() {\n    [native code]\n}\n")
+    public void constructorToString() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "alert([].constructor.toString());\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

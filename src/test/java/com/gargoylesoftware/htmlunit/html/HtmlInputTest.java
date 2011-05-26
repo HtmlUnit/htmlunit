@@ -243,7 +243,7 @@ public final class HtmlInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "\nfunction handler() {\n}\n", "null" })
+    @Alerts({ "function handler() {\n}", "null" })
     public void onchangeNull() throws Exception {
         final String html =
             "<html><head>\n"
