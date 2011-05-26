@@ -146,7 +146,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<iframe id='iframe1' src='"
             + URL_SECOND
-            + "'>\n"
+            + "'></iframe>\n"
             + "<a href='"
             + URL_THIRD.toExternalForm()
             + "' id='clickme'>click me</a>\n"

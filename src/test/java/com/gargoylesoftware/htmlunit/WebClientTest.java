@@ -260,7 +260,7 @@ public class WebClientTest extends WebServerTestCase {
     public void testHtmlWindowEvents_closedFromFrame() throws Exception {
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
-            + "<iframe src='" + URL_THIRD + "' id='frame1'>\n"
+            + "<iframe src='" + URL_THIRD + "' id='frame1'></iframe>\n"
             + "<a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
             + "</body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
