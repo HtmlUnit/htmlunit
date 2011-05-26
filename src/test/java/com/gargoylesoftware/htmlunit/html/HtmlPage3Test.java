@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -27,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPage3Test extends WebDriverTestCase {
@@ -42,5 +46,40 @@ public class HtmlPage3Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
+    }
+
+    /**
+     * Test for 3306491.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void formElementCreatedFromJavascript() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script type='text/javascript'>\n"
+            + "  function modifyForm() {\n"
+            + "  var myForm = document.forms['test_form'];\n"
+            + "  var el = document.createElement('input');\n"
+            + "  el.setAttribute('addedBy','js');\n"
+            + "  el.name = 'myHiddenField';\n"
+            + "  el.value = 'myValue';\n"
+            + "  el.type = 'hidden';\n"
+            + "  myForm.appendChild(el);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onLoad='modifyForm()'>\n"
+            + "  <form id='test_form' action='http://www.sourceforge.com/' method='post'>\n"
+            + "    <input type='submit' value='click'/>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage htmlPage = loadPage(html);
+        final List< ? > elements = htmlPage.getByXPath("//*");
+        Assert.assertEquals(7, elements.size());
+        Assert.assertEquals(
+                "<input type=\"hidden\" addedby=\"js\" name=\"myHiddenField\" value=\"myValue\"/>",
+                ((HtmlElement) elements.get(6)).asXml().trim());
     }
 }
