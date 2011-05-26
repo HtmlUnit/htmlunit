@@ -25,7 +25,7 @@ import org.junit.Test;
 /**
  * Tests for {@link NamedAttrNodeMapImpl}.
  *
- * @version $Revision: 6204 $
+ * @version $Revision$
  * @author Ronald Brill
  */
 public class NamedAttrNodeMapImplTest {
