@@ -23,19 +23,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import javax.imageio.ImageReader;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Utility to handle conversion from HTML code to XML string.
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Marc Guillemot
  */
 class XmlSerializer {
 
@@ -143,6 +144,9 @@ class XmlSerializer {
     private Map<String, DomAttr> getAttributesFor(final BaseFrame frame) throws IOException {
         final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(frame, "src");
         final DomAttr srcAttr = map.get("src");
+        if (srcAttr == null) {
+            return map;
+        }
 
         final Page enclosedPage = frame.getEnclosedPage();
         final String suffix = getFileExtension(enclosedPage);
@@ -194,15 +198,29 @@ class XmlSerializer {
         final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(image, "src");
         final DomAttr srcAttr = map.get("src");
         if ((null != srcAttr) && StringUtils.isNotBlank(srcAttr.getValue())) {
-            final ImageReader reader = image.getImageReader();
-            final File file = createFile(srcAttr.getValue(), "." + reader.getFormatName());
-            image.saveAs(file);
-            outputDir_.mkdirs();
+            final WebResponse response = image.getWebResponse(true);
+
+            final File file = createFile(srcAttr.getValue(), "." + getSuffix(response));
+            FileUtils.copyInputStreamToFile(response.getContentAsStream(), file);
             final String valueOnFileSystem = outputDir_.getName() + FILE_SEPARATOR + file.getName();
             srcAttr.setValue(valueOnFileSystem); // this is the clone attribute node, not the original one of the page
         }
 
         return map;
+    }
+
+    private String getSuffix(final WebResponse response) {
+        // first try to take the one from the requested file
+        final String url = response.getWebRequest().getUrl().toString();
+        final String fileName = StringUtils.substringAfterLast(StringUtils.substringBefore(url, "?"), "/");
+        // if there is a suffix with 2-4 letters, the take it
+        final String suffix = StringUtils.substringAfterLast(fileName, ".");
+        if (suffix.length() > 1 && suffix.length() < 5) {
+            return suffix;
+        }
+
+        // use content type
+        return MimeType.getFileExtension(response.getContentType());
     }
 
     private Map<String, DomAttr> createAttributesCopyWithClonedAttribute(final HtmlElement elt, final String attrName) {

@@ -30,4 +30,8 @@
     <suppress checks="ParameterNumber" files="HtmlUnitRegExpProxy.java"/>
     <suppress checks="ParameterNumber" files="KeyboardEvent.java"/>
     <suppress checks="ParameterNumber" files="MouseEvent.java"/>
+
+    <!-- JUnit Rules require the rules field to have public visibility. -->
+    <!-- See http://checkstyle.sourceforge.net/config_design.html#VisibilityModifier -->
+    <suppress files=".*(?:Test|TestBase)\.java$" checks="VisibilityModifier"/>
 </suppressions>

@@ -25,7 +25,9 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -45,6 +47,12 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPage2Test extends WebServerTestCase {
+    /**
+     * Utility for temporary folders.
+     * Has to be public due to JUnit's constraints for @Rule.
+     */
+    @Rule
+    public final TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();
 
     /**
      * @exception Exception If the test fails
@@ -263,13 +271,13 @@ public class HtmlPage2Test extends WebServerTestCase {
         final HtmlScript sript = page.getFirstByXPath("//script");
         assertEquals(URL_SECOND.toString(), sript.getSrcAttribute());
 
-        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save.html");
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File file = new File(tmpFolder, "hu_HtmlPageTest_save.html");
         page.save(file);
         assertTrue(file.exists());
         assertTrue(file.isFile());
         final String content = FileUtils.readFileToString(file);
         assertFalse(content.contains("<script"));
-        file.delete();
 
         assertEquals(URL_SECOND.toString(), sript.getSrcAttribute());
     }
@@ -296,21 +304,40 @@ public class HtmlPage2Test extends WebServerTestCase {
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlImage img = page.getFirstByXPath("//img");
         assertEquals(URL_SECOND.toString(), img.getSrcAttribute());
-        final File tmpFolder = new File(System.getProperty("java.io.tmpdir"));
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save2.html");
-        final File imgFile = new File(tmpFolder, "hu_HtmlPageTest_save2/second.JPEG");
-        try {
-            page.save(file);
-            assertTrue(file.exists());
-            assertTrue(file.isFile());
-            final byte[] loadedBytes = FileUtils.readFileToByteArray(imgFile);
-            assertTrue(loadedBytes.length > 0);
-        }
-        finally {
-            file.delete();
-            FileUtils.deleteDirectory(imgFile.getParentFile());
-        }
+        final File imgFile = new File(tmpFolder, "hu_HtmlPageTest_save2/second.jpeg");
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
+        final byte[] loadedBytes = FileUtils.readFileToByteArray(imgFile);
+        assertTrue(loadedBytes.length > 0);
         assertEquals(URL_SECOND.toString(), img.getSrcAttribute());
+    }
+
+    /**
+     * As of 24.05.2011 an IOException was occurring when saving a page where
+     * the response to the request for an image was not an image.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void save_imageNotImage() throws Exception {
+        final String html = "<html><body><img src='foo.txt'></body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+
+        webConnection.setDefaultResponse("hello", "text/plain");
+
+        final HtmlPage page = loadPageWithAlerts(html);
+
+        final File folder = tmpFolderProvider_.newFolder("hu");
+        final File file = new File(folder, "hu_save.html");
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
+
+        final File imgFile = new File(folder, "hu_save/foo.txt");
+        assertEquals("hello", FileUtils.readFileToString(imgFile, "UTF-8"));
     }
 
     /**
@@ -326,16 +353,12 @@ public class HtmlPage2Test extends WebServerTestCase {
         webConnection.setResponse(URL_FIRST, html);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final File tmpFolder = new File(System.getProperty("java.io.tmpdir"));
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save3.html");
-        try {
-            page.save(file);
-            assertTrue(file.exists());
-            assertTrue(file.isFile());
-        }
-        finally {
-            file.delete();
-        }
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
+
         final HtmlImage img = page.getFirstByXPath("//img");
         assertEquals(DomElement.ATTRIBUTE_NOT_DEFINED, img.getSrcAttribute());
     }
@@ -353,16 +376,12 @@ public class HtmlPage2Test extends WebServerTestCase {
         webConnection.setResponse(URL_FIRST, html);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final File tmpFolder = new File(System.getProperty("java.io.tmpdir"));
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
         final File file = new File(tmpFolder, "hu_HtmlPageTest_save3.html");
-        try {
-            page.save(file);
-            assertTrue(file.exists());
-            assertTrue(file.isFile());
-        }
-        finally {
-            file.delete();
-        }
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
+
         final HtmlImage img = page.getFirstByXPath("//img");
         assertEquals(DomElement.ATTRIBUTE_NOT_DEFINED, img.getSrcAttribute());
     }
@@ -377,6 +396,7 @@ public class HtmlPage2Test extends WebServerTestCase {
             + "<frameset cols='50%,*'>\n"
             + "  <frame name='left' src='" + URL_SECOND + "' frameborder='1' />\n"
             + "  <frame name='right' src='" + URL_THIRD + "' frameborder='1' />\n"
+            + "  <frame name='withoutsrc' />\n"
             + "</frameset>\n"
             + "</html>";
         final String frameLeftContent = "<html><head><title>Second</title></head><body>\n"
@@ -406,28 +426,24 @@ public class HtmlPage2Test extends WebServerTestCase {
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlFrame leftFrame = page.getElementByName("left");
         assertEquals(URL_SECOND.toString(), leftFrame.getSrcAttribute());
-        final File tmpFolder = new File(System.getProperty("java.io.tmpdir"));
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
         final File file = new File(tmpFolder, "hu_HtmlPageTest_saveFrame.html");
         final File expectedLeftFrameFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/second.html");
         final File expectedRightFrameFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/third.html");
         final File expectedIFrameFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/second/iframe.html");
-        final File expectedImgFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/second/img.jpg.JPEG");
+        final File expectedImgFile = new File(tmpFolder, "hu_HtmlPageTest_saveFrame/second/img.jpg");
         final File[] allFiles = {file, expectedLeftFrameFile, expectedImgFile, expectedIFrameFile,
             expectedRightFrameFile};
-        try {
-            page.save(file);
-            for (final File f : allFiles) {
-                assertTrue(f.toString(), f.exists());
-                assertTrue(f.toString(), f.isFile());
-            }
 
-            final byte[] loadedBytes = FileUtils.readFileToByteArray(expectedImgFile);
-            assertTrue(loadedBytes.length > 0);
+        page.save(file);
+        for (final File f : allFiles) {
+            assertTrue(f.toString(), f.exists());
+            assertTrue(f.toString(), f.isFile());
         }
-        finally {
-            file.delete();
-            FileUtils.deleteDirectory(expectedLeftFrameFile.getParentFile());
-        }
+
+        final byte[] loadedBytes = FileUtils.readFileToByteArray(expectedImgFile);
+        assertTrue(loadedBytes.length > 0);
+
         // ensure that saving the page hasn't changed the DOM
         assertEquals(URL_SECOND.toString(), leftFrame.getSrcAttribute());
     }
@@ -452,18 +468,13 @@ public class HtmlPage2Test extends WebServerTestCase {
         final HtmlLink cssLink = page.getFirstByXPath("//link");
         assertEquals(URL_SECOND.toString(), cssLink.getHrefAttribute());
 
-        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save4.html");
-        final File cssFile = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save4/second.css");
-        try {
-            page.save(file);
-            assertTrue(file.exists());
-            assertTrue(file.isFile());
-            assertEquals(css, FileUtils.readFileToString(cssFile));
-        }
-        finally {
-            file.delete();
-            FileUtils.deleteDirectory(cssFile.getParentFile());
-        }
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File file = new File(tmpFolder, "hu_HtmlPageTest_save4.html");
+        final File cssFile = new File(tmpFolder, "hu_HtmlPageTest_save4/second.css");
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
+        assertEquals(css, FileUtils.readFileToString(cssFile));
 
         assertEquals(URL_SECOND.toString(), cssLink.getHrefAttribute());
     }
@@ -482,15 +493,11 @@ public class HtmlPage2Test extends WebServerTestCase {
         webConnection.setResponse(URL_FIRST, html);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save5.html");
-        try {
-            page.save(file);
-            assertTrue(file.exists());
-            assertTrue(file.isFile());
-        }
-        finally {
-            file.delete();
-        }
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File file = new File(tmpFolder, "hu_HtmlPageTest_save5.html");
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
 
         final HtmlLink cssLink = page.getFirstByXPath("//link");
         assertEquals(DomElement.ATTRIBUTE_NOT_DEFINED, cssLink.getHrefAttribute());
@@ -510,15 +517,11 @@ public class HtmlPage2Test extends WebServerTestCase {
         webConnection.setResponse(URL_FIRST, html);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        final File file = new File(System.getProperty("java.io.tmpdir"), "hu_HtmlPageTest_save5.html");
-        try {
-            page.save(file);
-            assertTrue(file.exists());
-            assertTrue(file.isFile());
-        }
-        finally {
-            file.delete();
-        }
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File file = new File(tmpFolder, "hu_HtmlPageTest_save5.html");
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
 
         final HtmlLink cssLink = page.getFirstByXPath("//link");
         assertEquals(DomElement.ATTRIBUTE_NOT_DEFINED, cssLink.getHrefAttribute());

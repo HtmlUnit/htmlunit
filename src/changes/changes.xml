@@ -7,6 +7,9 @@
     <body>
         <release version="2.9" date="???" description="Bugfixes">
             <action type="fix" dev="mguillem">
+                HtmlPage.save: fix exception occurring when a referenced image is not an image.
+            </action>
+            <action type="fix" dev="mguillem">
                 JavaScript: fix string conversion of native functions.
             </action>
             <action type="fix" dev="mguillem">
