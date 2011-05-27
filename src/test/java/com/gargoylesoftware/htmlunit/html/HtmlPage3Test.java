@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -75,11 +76,21 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final HtmlPage htmlPage = loadPage(html);
-        final List< ? > elements = htmlPage.getByXPath("//*");
+        final WebDriver driver = loadPage2(html);
+        final List<WebElement> elements = driver.findElements(By.xpath("//*"));
         Assert.assertEquals(7, elements.size());
-        Assert.assertEquals(
-                "<input type=\"hidden\" addedby=\"js\" name=\"myHiddenField\" value=\"myValue\"/>",
-                ((HtmlElement) elements.get(6)).asXml().trim());
+
+        Assert.assertEquals("html", elements.get(0).getTagName());
+        Assert.assertEquals("head", elements.get(1).getTagName());
+        Assert.assertEquals("script", elements.get(2).getTagName());
+        Assert.assertEquals("body", elements.get(3).getTagName());
+        Assert.assertEquals("form", elements.get(4).getTagName());
+        Assert.assertEquals("input", elements.get(5).getTagName());
+
+        final WebElement input = elements.get(6);
+        Assert.assertEquals("input", input.getTagName());
+        Assert.assertEquals("myHiddenField", input.getAttribute("name"));
+        Assert.assertEquals("js", input.getAttribute("addedBy"));
+        Assert.assertEquals("js", input.getAttribute("addedby"));
     }
 }
