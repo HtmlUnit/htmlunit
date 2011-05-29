@@ -113,4 +113,47 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_THIRD, thirdHtml);
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Another regression test for for bug
+     * <a href="http://sf.net/support/tracker.php?aid=2819477">2819477</a>: frame content
+     * sometimes not loaded.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("myInputName")
+    public void iframeContentNotLoaded() throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>FooBar</title></head>\n"
+            + "<body>\n"
+            + "<iframe id='myFrame' name='myFrame'></iframe>\n"
+
+            + "<script type='text/javascript'>\n"
+            + "function writeForm(frame) {\n"
+            + "  var div=frame.document.getElementById('div');\n"
+            + "  div.innerHTML=\"<form id='myForm'><input type='text' id='myInput' name='myInputName'/></form>\";\n"
+            + "};\n"
+
+            + "function writeFrame(frame) {\n"
+            + "  var frameHtml=\"<html><head><title>Inner Frame</title></head>"
+            + "<body><div id='div'></div></body></html>\";\n"
+            + "  frame.document.write(frameHtml);\n"
+            + "  frame.document.close();\n"
+            + "};\n"
+
+            + "function loadFrame() {\n"
+            + "  var frame=parent.frames['myFrame'];\n"
+            + "  writeFrame(frame);\n"
+            + "  writeForm(frame);\n"
+            + "  alert(frame.document.getElementById('myInput').name);"
+            + "};\n"
+
+            + "loadFrame();\n"
+            + "</script>\n"
+
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
