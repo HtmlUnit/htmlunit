@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
@@ -210,10 +212,12 @@ public class BrowserVersion implements Serializable {
     }
 
     private void initDefaultFeatures() {
+        InputStream stream = null;
         try {
             final Properties props = new Properties();
-            props.load(getClass().getResourceAsStream("/com/gargoylesoftware/htmlunit/javascript/configuration/"
-                    + nickname_ + ".properties"));
+            stream = getClass().getResourceAsStream("/com/gargoylesoftware/htmlunit/javascript/configuration/"
+                + nickname_ + ".properties");
+            props.load(stream);
             for (final Object key : props.keySet()) {
                 try {
                     features_.add(BrowserVersionFeatures.valueOf(key.toString()));
@@ -226,6 +230,9 @@ public class BrowserVersion implements Serializable {
         }
         catch (final Exception e) {
             throw new RuntimeException("Configuration file not found for BrowserVersion: " + nickname_);
+        }
+        finally {
+            IOUtils.closeQuietly(stream);
         }
     }
 
