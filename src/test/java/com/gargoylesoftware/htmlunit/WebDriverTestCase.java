@@ -68,7 +68,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 /**
  * Base class for tests using WebDriver.
  * <p>
- * By default, this test runs with HtmlUnit, but this behaviour can be changed by having a property file named
+ * By default, this test runs with HtmlUnit, but this behavior can be changed by having a property file named
  * "test.properties" in the HtmlUnit root directory.
  * Sample:
  * <pre>
