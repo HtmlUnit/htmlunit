@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                In some cases a new window was not attached to the JavaScript
+                background worker thread.
+            </action>
             <action type="fix" dev="mguillem">
                 HtmlPage.save: fix exception occurring when a referenced image is not an image.
             </action>

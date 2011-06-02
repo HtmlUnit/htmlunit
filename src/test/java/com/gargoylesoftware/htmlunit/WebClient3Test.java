@@ -30,6 +30,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -184,5 +185,190 @@ public class WebClient3Test extends WebDriverTestCase {
             webDriver.findElement(By.tagName("a")).click();
             Assert.assertEquals("Run " + i, URL_SECOND.toExternalForm(), webDriver.getCurrentUrl());
         }
+    }
+
+    /**
+     * Ensures, that a window opened by an anchor with target attribute is attached
+     * to the javascript event loop.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts ({ "open", "first", "second" })
+    public void windowOpendByAnchorTargetIsAttachedToJavascriptEventLoop() throws Exception {
+        final String firstContent = "<html>"
+            + "<head>"
+            + "<script type='text/javascript'>"
+            + "  function info(msg) {"
+            + "    alert(msg);"
+            + "  }"
+            + "</script>"
+            + "</head>"
+            + "<body>"
+            + " <a id='testAnchor' href='" + URL_SECOND + "' target='_blank' onclick='info(\"open\")'>to second</a>"
+            + "</body></html>";
+        final String secondContent = "<html><head>"
+            + "<script type='text/javascript'>"
+            + "  function first() {"
+            + "    window.opener.info('first');"
+            + "    window.setTimeout(second, 10);"
+            + "  }"
+            + "  function second() {"
+            + "    window.opener.info('second');"
+            + "    window.close();"
+            + "  }"
+            + "</script>"
+            + "</head>"
+
+            + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, firstContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent);
+        driver.findElement(By.id("testAnchor")).click();
+        Thread.sleep(1000);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Ensures, that a window opened by a form with target attribute is attached
+     * to the javascript event loop.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts ({ "open", "first", "second" })
+    public void windowOpendByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
+        final String firstContent = "<html>"
+            + "<head>"
+            + "<script type='text/javascript'>"
+            + "  function info(msg) {"
+            + "    alert(msg);"
+            + "  }"
+            + "</script>"
+            + "</head>"
+            + "<body>"
+            + "<form action='" + URL_SECOND + "' target='_blank'>"
+            + " <input id='testSubmit' type='submit' value='Submit' onclick='info(\"open\")'>"
+            + "</form>"
+            + "</body></html>";
+        final String secondContent = "<html><head>"
+            + "<script type='text/javascript'>"
+            + "  function first() {"
+            + "    window.opener.info('first');"
+            + "    window.setTimeout(second, 10);"
+            + "  }"
+            + "  function second() {"
+            + "    window.opener.info('second');"
+            + "    window.close();"
+            + "  }"
+            + "</script>"
+            + "</head>"
+
+            + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, firstContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent);
+        driver.findElement(By.id("testSubmit")).click();
+        Thread.sleep(1000);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Ensures, that a window opened by javascript window.open is attached
+     * to the javascript event loop.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts ({ "open", "first", "second" })
+    public void windowOpendByJavascriptIsAttachedToJavascriptEventLoop() throws Exception {
+        final String firstContent = "<html>"
+            + "<head>"
+            + "<script type='text/javascript'>"
+            + "  function info(msg) {"
+            + "    alert(msg);"
+            + "  }"
+            + "</script>"
+            + "</head>"
+            + "<body>"
+            + " <a id='testAnchor' href='#'"
+            +      " onclick='info(\"open\");window.open(\"" + URL_SECOND + "\", \"Popup\", \"\");'>open window</a>"
+            + "</body></html>";
+        final String secondContent = "<html><head>"
+            + "<script type='text/javascript'>"
+            + "  function first() {"
+            + "    window.opener.info('first');"
+            + "    window.setTimeout(second, 10);"
+            + "  }"
+            + "  function second() {"
+            + "    window.opener.info('second');"
+            + "    window.close();"
+            + "  }"
+            + "</script>"
+            + "</head>"
+
+            + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, firstContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent);
+        driver.findElement(By.id("testAnchor")).click();
+        Thread.sleep(1000);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Ensures, that a window opened by javascript and than filled by an form with target attribute
+     * is attached to the javascript event loop.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts ({ "open", "first", "second" })
+    public void windowOpendByJavascriptFilledByFormTargetIsAttachedToJavascriptEventLoop() throws Exception {
+        final String firstContent = "<html>"
+            + "<head>"
+            + "<script type='text/javascript'>"
+            + "  function info(msg) {"
+            + "    alert(msg);"
+            + "  }"
+            + "</script>"
+            + "</head>"
+            + "<body>"
+            + "<form action='" + URL_SECOND + "' name='myForm'>"
+            + " <input id='testSubmit' type='button' value='Submit' "
+            + "   onclick='info(\"open\");"
+            +     "window.open(\"" + URL_SECOND + "\", \"Popup\");"
+            +     "document.myForm.target = \"Popup\";'"
+            +   ">"
+            + "</form>"
+            + "</body></html>";
+        final String secondContent = "<html><head>"
+            + "<script type='text/javascript'>"
+            + "  function first() {"
+            + "    window.opener.info('first');"
+            + "    window.setTimeout(second, 10);"
+            + "  }"
+            + "  function second() {"
+            + "    window.opener.info('second');"
+            + "    window.close();"
+            + "  }"
+            + "</script>"
+            + "</head>"
+
+            + "<body onLoad='window.setTimeout(first, 5);'></body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, firstContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent);
+        driver.findElement(By.id("testSubmit")).click();
+        Thread.sleep(1000);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 }
