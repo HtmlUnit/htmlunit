@@ -428,7 +428,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param name1 the name of the first style attribute
      * @param name2 the name of the second style attribute
      * @param shorthand the type of shorthand value to return, if any
-     * @param camelCase whether or not the names are expected to be in camel case
      * @return the value of one of the two named style attributes
      */
     private String getStyleAttribute(final String name1, final String name2, final Shorthand shorthand) {
