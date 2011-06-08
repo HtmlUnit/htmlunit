@@ -26,7 +26,9 @@ import java.util.Locale;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1141,8 +1143,8 @@ public class JavaScriptEngineTest extends WebTestCase {
         /** {@inheritDoc} */
         @Override
         public Object callFunction(
-                final HtmlPage htmlPage, final Object javaScriptFunction,
-                final Object thisObject, final Object[] args,
+                final HtmlPage htmlPage, final Function javaScriptFunction,
+                final Scriptable thisObject, final Object[] args,
                 final DomNode htmlElementScope) {
             scriptCallCount_++;
             return super.callFunction(htmlPage, javaScriptFunction, thisObject, args, htmlElementScope);
@@ -1351,8 +1353,8 @@ public class JavaScriptEngineTest extends WebTestCase {
             }
             @Override
             public Object callFunction(
-                    final HtmlPage htmlPage, final Object javaScriptFunction,
-                    final Object thisObject, final Object [] args,
+                    final HtmlPage htmlPage, final Function javaScriptFunction,
+                    final Scriptable thisObject, final Object [] args,
                     final DomNode htmlElement) {
                 return null;
             }

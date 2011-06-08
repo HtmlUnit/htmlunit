@@ -178,7 +178,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Calling onreadystatechange handler for state " + state);
                 }
-                jsEngine.callFunction(containingPage_, stateChangeHandler_, context,
+                jsEngine.callFunction(containingPage_, stateChangeHandler_,
                         scope, thisValue, ArrayUtils.EMPTY_OBJECT_ARRAY);
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
@@ -194,7 +194,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             final Scriptable scope = loadHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
-            jsEngine.callFunction(containingPage_, loadHandler_, context, scope, this, ArrayUtils.EMPTY_OBJECT_ARRAY);
+            jsEngine.callFunction(containingPage_, loadHandler_, scope, this, ArrayUtils.EMPTY_OBJECT_ARRAY);
         }
     }
 
@@ -246,7 +246,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onerror handler");
             }
-            jsEngine.callFunction(containingPage_, errorHandler_, context, this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
+            jsEngine.callFunction(containingPage_, errorHandler_, this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("onerror handler: " + context.decompileFunction(errorHandler_, 4));
                 LOG.debug("Calling onerror handler done.");

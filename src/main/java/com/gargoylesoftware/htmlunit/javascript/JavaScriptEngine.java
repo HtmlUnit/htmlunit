@@ -510,18 +510,32 @@ public class JavaScriptEngine {
      */
     public Object callFunction(
             final HtmlPage htmlPage,
-            final Object javaScriptFunction,
-            final Object thisObject,
+            final Function javaScriptFunction,
+            final Scriptable thisObject,
             final Object [] args,
             final DomNode htmlElement) {
 
         final Scriptable scope = getScope(htmlPage, htmlElement);
 
-        final Function function = (Function) javaScriptFunction;
+        return callFunction(htmlPage, javaScriptFunction, scope, thisObject, args);
+    }
+
+    /**
+     * Calls the given function taking care of synchronization issues.
+     * @param htmlPage the HTML page that caused this script to executed
+     * @param function the JavaScript function to execute
+     * @param scope the execution scope
+     * @param thisObject the 'this' object
+     * @param args the function's arguments
+     * @return the function result
+     */
+    public Object callFunction(final HtmlPage htmlPage, final Function function,
+            final Scriptable scope, final Scriptable thisObject, final Object[] args) {
+
         final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {
             @Override
             public Object doRun(final Context cx) {
-                return callFunction(htmlPage, function, cx, scope, (Scriptable) thisObject, args);
+                return function.call(cx, scope, thisObject, args);
             }
             @Override
             protected String getSourceCode(final Context cx) {
@@ -540,26 +554,6 @@ public class JavaScriptEngine {
             scope = (Window) htmlPage.getEnclosingWindow().getScriptObject();
         }
         return scope;
-    }
-
-    /**
-     * Calls the given function taking care of synchronization issues.
-     * @param htmlPage the HTML page that caused this script to executed
-     * @param function the JavaScript function to execute
-     * @param context the context in which execution should occur
-     * @param scope the execution scope
-     * @param thisObject the 'this' object
-     * @param args the function's arguments
-     * @return the function result
-     */
-    public Object callFunction(final HtmlPage htmlPage, final Function function, final Context context,
-            final Scriptable scope, final Scriptable thisObject, final Object[] args) {
-
-        synchronized (htmlPage) { // 2 scripts can't be executed in parallel for one page
-            final Object result = function.call(context, scope, thisObject, args);
-            doProcessPostponedActions();
-            return result;
-        }
     }
 
     /**
