@@ -758,12 +758,13 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "button", "error" }, FF = { "button", "true", "button", "false" })
+    @Alerts(IE = { "true", "button", "error" }, FF = { "true", "button", "true", "button", "false" })
     public void removeAttributeNode() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "  function test() {\n"
             + "    var e = document.getElementById('foo');\n"
+            + "    alert(e.removeAttributeNode != null);\n"
             + "    alert(e.getAttribute('type'));\n"
             + "    try {\n"
             + "      alert(e.hasAttribute('type'));\n"

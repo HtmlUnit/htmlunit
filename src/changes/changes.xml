@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="add" dev="mguillem" issue="3310121">
+                JavaScript: add support for element.removeAttributeNode() for IE too.
+            </action>
             <action type="fix" dev="rbri">
                 In some cases a new window was not attached to the JavaScript
                 background worker thread.
