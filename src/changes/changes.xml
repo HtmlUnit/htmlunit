@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" due-to="Peter Wilkinson">
+                JavaScript: IndexOutOfBounds exception when accessing the CSSRuleList.
+            </action>
+            <action type="fix" dev="rbri" issue="3314489" due-to="Peter Wilkinson">
+                JavaScript: add support for CssStyleSheet removeRule & deleteRule.
+            </action>
             <action type="add" dev="mguillem" issue="3310121">
                 JavaScript: add support for element.removeAttributeNode() for IE too.
             </action>
