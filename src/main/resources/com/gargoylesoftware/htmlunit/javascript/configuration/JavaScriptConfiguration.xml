@@ -989,6 +989,12 @@
         <function name="insertRule">
             <browser name="Firefox"/>
         </function>
+        <function name="removeRule">
+            <browser name="Internet Explorer"/>
+        </function>
+        <function name="deleteRule">
+            <browser name="Firefox"/>
+        </function>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue" JSObject="true">

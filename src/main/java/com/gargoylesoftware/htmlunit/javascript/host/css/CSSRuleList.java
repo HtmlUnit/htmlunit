@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A JavaScript object for a CSSRuleList.
@@ -125,6 +124,9 @@ public class CSSRuleList extends SimpleScriptable {
      */
     @Override
     public Object get(final int index, final Scriptable start) {
+        if (index < 0 || jsxGet_length() <= index) {
+            return NOT_FOUND;
+        }
         return CSSRule.create(stylesheet_, rules_.item(index));
     }
 

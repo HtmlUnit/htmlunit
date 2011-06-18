@@ -619,6 +619,15 @@ public class CSSStyleSheet extends SimpleScriptable {
     }
 
     /**
+     * Deletes an existing rule.
+     * @param position the position of the rule to be deleted
+     * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
+     */
+    public void jsxFunction_deleteRule(final int position) {
+        wrapped_.deleteRule(position);
+    }
+
+    /**
      * Adds a new rule.
      * @see <a href="http://msdn.microsoft.com/en-us/library/aa358796.aspx">MSDN</a>
      * @param selector the selector name
@@ -629,6 +638,15 @@ public class CSSStyleSheet extends SimpleScriptable {
         final String completeRule = selector.trim() + " {" + rule + "}";
         wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
         return -1;
+    }
+
+    /**
+     * Deletes an existing rule.
+     * @param position the position of the rule to be deleted
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms531195(v=VS.85).aspx">MSDN</a>
+     */
+    public void jsxFunction_removeRule(final int position) {
+        wrapped_.deleteRule(position);
     }
 
     /**

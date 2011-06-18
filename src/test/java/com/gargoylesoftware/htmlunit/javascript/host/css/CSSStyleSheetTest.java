@@ -335,6 +335,36 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     }
 
     /**
+     * Minimal test for removeRule / deleteRule.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "2", "false", "true", "undefined", "1", "div" },
+            IE = { "2", "true", "false", "undefined", "1", "DIV" })
+    public void removeRule_deleteRule() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var f = document.getElementById('myStyle');\n"
+            + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
+            + "  var rules = s.cssRules || s.rules;\n"
+            + "  alert(rules.length);\n"
+            + "  alert(s.deleteRule == undefined);\n"
+            + "  alert(s.removeRule == undefined);\n"
+            + "  if (s.deleteRule)\n"
+            + "    alert(s.deleteRule(0));\n"
+            + "  else\n"
+            + "    alert(s.removeRule(0));\n"
+            + "  alert(rules.length);\n"
+            + "  alert(rules[0].selectorText);\n"
+            + "}</script>\n"
+            + "<style id='myStyle'>p { vertical-align:top } div { color: red; }</style>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test that we have a workaround for a bug in CSSParser.
      * @throws Exception if an error occurs
      * @see #npe_root()
@@ -489,7 +519,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
 
     /**
      * Test for handling/ignoring @font-face.
-     * @see bug 2984265
+     * see bug 2984265
      * @throws Exception if an error occurs
      */
     @Test
