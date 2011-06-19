@@ -899,6 +899,37 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = {"0", "0", "1", "0" },
+            FF = {"", "", "1", ""  })
+    public void zIndexSetNull() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  var style = document.getElementById('myDiv').style;\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style.zIndex = null;\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style.zIndex = 1;\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style.zIndex = null;\n"
+            + "  alert(style.zIndex);\n"
+
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'/>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(IE = {"0", "7", "8", "0", "error", "4", "error", "1" },
             FF = {"", "7", "7", "", "4", "1" })
     public void zIndexSetString() throws Exception {
