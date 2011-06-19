@@ -419,6 +419,35 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Test for bug 3319397.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "exception" },
+            FF = { "0", "test", "testValue" })
+    public void testAddOptionTooEmptySelectWithAddMethod_IE() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var oSelect = document.form1.select1;\n"
+            + "  try {\n"
+            + "    alert(oSelect.length);\n"
+            + "    oSelect.add(new Option('test', 'testValue'), null);\n"
+            + "    alert(oSelect[oSelect.length-1].text);\n"
+            + "    alert(oSelect[oSelect.length-1].value);\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1'>\n"
+            + "    </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Regression test for bug 1304741.
      * See https://sourceforge.net/tracker/index.php?func=detail&aid=1304741&group_id=47038&atid=448266.
      * @throws Exception if the test fails

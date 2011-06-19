@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
@@ -139,6 +140,10 @@ public class HTMLSelectElement extends FormField {
     protected void add_IE(final HTMLOptionElement newOptionObject, final Object index) {
         final HtmlSelect select = getHtmlSelect();
         final HtmlOption beforeOption;
+        if (index == null) {
+            throw new EvaluatorException("Null not supported as index.");
+        }
+
         if (Context.getUndefinedValue().equals(index)) {
             beforeOption = null;
         }

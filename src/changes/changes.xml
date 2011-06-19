@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3319397">
+                JavaScript: Fix for null index handling when adding an select option.
+            </action>
             <action type="fix" dev="rbri" issue="3319448">
                 JavaScript: zIndex handling fixed in many ways.
             </action>
