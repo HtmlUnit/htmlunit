@@ -779,8 +779,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"number", "0", "1", "2", "3", "5", "5", "6", "7", "9" },
-            FF = {"string", "", "1", "2", "2", "2", "5", "5", "5", "5" })
+    @Alerts(IE = {"number", "0", "1", "2", "3", "4", "5", "5", "6", "7", "9" },
+            FF = {"string", "", "1", "2", "2", "2", "2", "5", "5", "5", "5" })
     public void zIndex() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -794,6 +794,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "  alert(style.zIndex);\n"
             + "  style.zIndex = 3.1;\n"
             + "  alert(style.zIndex);\n"
+            + "  style.zIndex = 4.5;\n"
+            + "  alert(style.zIndex);\n"
             + "  style.zIndex = 4.6;\n"
             + "  alert(style.zIndex);\n"
             + "  style.zIndex = '5';\n"
@@ -805,6 +807,165 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "  style.zIndex = '8.6';\n"
             + "  alert(style.zIndex);\n"
             + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'/>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"number", "0", "number", "0", "number", "4", "number", "4", "number", "4", "number", "0" },
+            FF = {"string", "", "string", "", "string", "4", "string", "", "string", "" , "string", "" })
+    public void zIndexDefault() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  var style = document.getElementById('divUndefined').style;\n"
+            + "  alert(typeof style.zIndex);\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style = document.getElementById('divBlank').style;\n"
+            + "  alert(typeof style.zIndex);\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style = document.getElementById('divInteger').style;\n"
+            + "  alert(typeof style.zIndex);\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style = document.getElementById('divFloat').style;\n"
+            + "  alert(typeof style.zIndex);\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style = document.getElementById('divFloat2').style;\n"
+            + "  alert(typeof style.zIndex);\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style = document.getElementById('invalidDiv').style;\n"
+            + "  alert(typeof style.zIndex);\n"
+            + "  alert(style.zIndex);\n"
+
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='divUndefined'/>\n"
+            + "  <div id='divBlank' style='z-index: '/>\n"
+            + "  <div id='divInteger' style='z-index: 4'/>\n"
+            + "  <div id='divFloat' style='z-index: 4.2'/>\n"
+            + "  <div id='divFloat2' style='z-index: 4.7'/>\n"
+            + "  <div id='invalidDiv' style='z-index: unfug'/>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"0", "0", "1", "0" },
+            FF = {"", "", "1", "1"  })
+    public void zIndexSetUnknown() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  var style = document.getElementById('myDiv').style;\n"
+            + "  var unknown;\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style.zIndex = unknown;\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style.zIndex = 1;\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style.zIndex = unknown;\n"
+            + "  alert(style.zIndex);\n"
+
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'/>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"0", "7", "8", "0", "error", "4", "error", "1" },
+            FF = {"", "7", "7", "", "4", "1" })
+    public void zIndexSetString() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  var style = document.getElementById('myDiv').style;\n"
+            + "  var unknown;\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style.zIndex = '7';\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style.zIndex = '7.6';\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style.zIndex = '';\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style.zIndex = '4';\n"
+            + "  try {\n"
+            + "    style.zIndex = '   ';\n"
+            + "  } catch (e) { alert('error'); }\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style.zIndex = '1';\n"
+            + "  try {\n"
+            + "    style.zIndex = 'NAN';\n"
+            + "  } catch (e) { alert('error'); }\n"
+            + "  alert(style.zIndex);\n"
+
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'/>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"0", "error", "0", "1", "error", "1" },
+            FF = {"", "", "", "1", "1", "1" })
+    public void zIndexSetInvalid() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  var style = document.getElementById('myDiv').style;\n"
+            + "  alert(style.zIndex);\n"
+            + "  try {\n"
+            + "    style.zIndex = 'hallo';\n"
+            + "    alert(style.zIndex);\n"
+            + "  } catch (e) { alert('error'); }\n"
+            + "  alert(style.zIndex);\n"
+
+            + "  style.zIndex = 1;\n"
+            + "  alert(style.zIndex);\n"
+            + "  try {\n"
+            + "    style.zIndex = 'hallo';\n"
+            + "    alert(style.zIndex);\n"
+            + "  } catch (e) { alert('error'); }\n"
+            + "  alert(style.zIndex);\n"
+            + "}\n"
+
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'/>\n"

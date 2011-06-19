@@ -60,6 +60,15 @@ public enum BrowserVersionFeatures {
      */
     CSS_SUPPORTS_BEHAVIOR_PROPERTY,
 
+    /** Values for the zIndex are rounded to integer. */
+    CSS_ZINDEX_ROUNDED,
+
+    /** IE uses the type Number for the zIndex Values (instead of String). */
+    CSS_ZINDEX_TYPE_NUMBER,
+
+    /** If values for the zIndex is undefined than set the zindex to the default value. */
+    CSS_ZINDEX_UNDEFINED_FORCES_RESET,
+
     /** */
     DIALOGWINDOW_REFERER,
 
@@ -332,12 +341,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_23,
-
-    /** Was originally .isIE(). */
-    GENERATED_24,
-
-    /** Was originally .isIE(). */
-    GENERATED_25,
 
     /** Was originally .isIE(). */
     GENERATED_26,

@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import net.sourceforge.htmlunit.corejs.javascript.WrappedException;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
@@ -4345,59 +4346,28 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     public Object jsxGet_zIndex() {
         final String value = getStyleAttribute(Z_INDEX);
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_24)) {
-            if (value == null || value.length() == 0) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_TYPE_NUMBER)) {
+            if (value == null
+                    || Context.getUndefinedValue().equals(value)
+                    || StringUtils.isEmpty(value.toString())) {
                 return Integer.valueOf(0);
             }
-            return Integer.valueOf(value);
-        }
-        return value;
-    }
-
-    /**
-     * Sets the specified style attribute, which is presumed to be a numeric, taking into consideration
-     * its {@link Math#round(float)}ed value.
-     * @param name the attribute name (camel-cased)
-     * @param value the attribute value
-     */
-    protected void setRoundedStyleAttribute(final String name, final Object value) {
-        if (value == null || value.toString().length() == 0) {
-            setStyleAttribute(name, "0");
-        }
-        else {
-            final Double d;
-            if (value instanceof Double) {
-                d = (Double) value;
+            try {
+                final Double numericValue = Double.valueOf(value);
+                return Integer.valueOf(numericValue.intValue());
             }
-            else {
-                d = Double.valueOf(value.toString());
+            catch (final NumberFormatException e) {
+                return Integer.valueOf(0);
             }
-            setStyleAttribute(name, Integer.toString(Math.round(d.floatValue())));
-        }
-    }
-
-    /**
-     * Sets the specified style attribute, if it's only an integer.
-     * @param name the attribute name (camel-cased)
-     * @param value the attribute value
-     */
-    protected void setIntegerStyleAttribute(final String name, final Object value) {
-        if ((value == null) || value.toString().length() == 0) {
-            setStyleAttribute(name, "0");
-            return;
         }
 
-        if (value instanceof Number) {
-            final Number number = (Number) value;
-            if (number.doubleValue() % 1 == 0) {
-                setStyleAttribute(name, (Integer.toString(number.intValue())));
-            }
+        // zIndex is string
+        try {
+            Integer.parseInt(value);
+            return value;
         }
-        else {
-            final String valueString = value.toString();
-            if (valueString.indexOf('.') == -1) {
-                setStyleAttribute(name, valueString);
-            }
+        catch (final NumberFormatException e) {
+            return "";
         }
     }
 
@@ -4406,11 +4376,51 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param zIndex the new attribute
      */
     public void jsxSet_zIndex(final Object zIndex) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_25)) {
-            setRoundedStyleAttribute(Z_INDEX, zIndex);
+        // empty
+        if (zIndex == null || StringUtils.isEmpty(zIndex.toString())) {
+            setStyleAttribute(Z_INDEX, "");
+            return;
         }
-        else {
-            setIntegerStyleAttribute(Z_INDEX, zIndex);
+        // undefined
+        if (Context.getUndefinedValue().equals(zIndex)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_FORCES_RESET)) {
+                setStyleAttribute(Z_INDEX, "");
+            }
+            return;
+        }
+
+        // numeric (IE)
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_TYPE_NUMBER)) {
+            final Double d;
+            if (zIndex instanceof Double) {
+                d = (Double) zIndex;
+            }
+            else {
+                try {
+                    d = Double.valueOf(zIndex.toString());
+                }
+                catch (final NumberFormatException e) {
+                    throw new WrappedException(e);
+                }
+            }
+            setStyleAttribute(Z_INDEX, Integer.toString(Math.round(d.floatValue() - 0.00001f)));
+            return;
+        }
+
+        // string (FF)
+        if (zIndex instanceof Number) {
+            final Number number = (Number) zIndex;
+            if (number.doubleValue() % 1 == 0) {
+                setStyleAttribute(Z_INDEX, (Integer.toString(number.intValue())));
+            }
+            return;
+        }
+        try {
+            final int i = Integer.parseInt(zIndex.toString());
+            setStyleAttribute(Z_INDEX, (Integer.toString(i)));
+        }
+        catch (final NumberFormatException e) {
+            // ignore
         }
     }
 

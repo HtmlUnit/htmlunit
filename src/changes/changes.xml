@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3319448">
+                JavaScript: zIndex handling fixed in many ways.
+            </action>
             <action type="fix" dev="rbri" due-to="Peter Wilkinson">
                 JavaScript: IndexOutOfBounds exception when accessing the CSSRuleList.
             </action>
