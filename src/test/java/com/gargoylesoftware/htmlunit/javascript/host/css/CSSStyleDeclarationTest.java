@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Ahmed Ashour
  * @author Rodney Gitzel
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CSSStyleDeclarationTest extends WebDriverTestCase {
@@ -869,21 +870,21 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"0", "0", "1", "0" },
             FF = {"", "", "1", "1"  })
-    public void zIndexSetUnknown() throws Exception {
+    public void zIndexSetUndefined() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function test() {\n"
             + "  var style = document.getElementById('myDiv').style;\n"
-            + "  var unknown;\n"
+            + "  var un_defined;\n"
             + "  alert(style.zIndex);\n"
 
-            + "  style.zIndex = unknown;\n"
+            + "  style.zIndex = un_defined;\n"
             + "  alert(style.zIndex);\n"
 
             + "  style.zIndex = 1;\n"
             + "  alert(style.zIndex);\n"
 
-            + "  style.zIndex = unknown;\n"
+            + "  style.zIndex = un_defined;\n"
             + "  alert(style.zIndex);\n"
 
             + "}\n"
