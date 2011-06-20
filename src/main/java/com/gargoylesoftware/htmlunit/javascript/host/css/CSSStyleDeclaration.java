@@ -27,6 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import net.sourceforge.htmlunit.corejs.javascript.WrappedException;
@@ -4376,6 +4377,11 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param zIndex the new attribute
      */
     public void jsxSet_zIndex(final Object zIndex) {
+        if (zIndex == null
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR)) {
+            throw new EvaluatorException("Null is invalid for z-index.");
+        }
+
         // empty
         if (zIndex == null || StringUtils.isEmpty(zIndex.toString())) {
             setStyleAttribute(Z_INDEX, "");
@@ -4383,6 +4389,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         }
         // undefined
         if (Context.getUndefinedValue().equals(zIndex)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR)) {
+                throw new EvaluatorException("Undefind is invalid for z-index.");
+            }
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_FORCES_RESET)) {
                 setStyleAttribute(Z_INDEX, "");
             }
@@ -4403,7 +4412,12 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                     throw new WrappedException(e);
                 }
             }
-            setStyleAttribute(Z_INDEX, Integer.toString(Math.round(d.floatValue() - 0.00001f)));
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_ROUNDED)) {
+                setStyleAttribute(Z_INDEX, Integer.toString(Math.round(d.floatValue() - 0.00001f)));
+            }
+            else {
+                setStyleAttribute(Z_INDEX, Integer.toString(d.intValue()));
+            }
             return;
         }
 

@@ -780,7 +780,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"number", "0", "1", "2", "3", "4", "5", "5", "6", "7", "9" },
+    @Alerts(IE6 = {"number", "0", "1", "2", "3", "4", "5", "5", "6", "7", "9" },
+            IE7 = {"number", "0", "1", "2", "3", "4", "5", "5", "6", "7", "9" },
+            IE8 = {"number", "0", "1", "2", "3", "4", "4", "5", "6", "7", "8" },
             FF = {"string", "", "1", "2", "2", "2", "2", "5", "5", "5", "5" })
     public void zIndex() throws Exception {
         final String html
@@ -868,8 +870,10 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"0", "0", "1", "0" },
-            FF = {"", "", "1", "1"  })
+    @Alerts(IE6 = { "0", "0", "1", "0" },
+            IE7 = { "0", "0", "1", "0" },
+            IE8 = { "0", "error", "0", "1", "error", "1" },
+            FF = { "", "", "1", "1" })
     public void zIndexSetUndefined() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -878,13 +882,17 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "  var un_defined;\n"
             + "  alert(style.zIndex);\n"
 
-            + "  style.zIndex = un_defined;\n"
+            + "  try {\n"
+            + "    style.zIndex = un_defined;\n"
+            + "  } catch (e) { alert('error'); }\n"
             + "  alert(style.zIndex);\n"
 
             + "  style.zIndex = 1;\n"
             + "  alert(style.zIndex);\n"
 
-            + "  style.zIndex = un_defined;\n"
+            + "  try {\n"
+            + "    style.zIndex = un_defined;\n"
+            + "  } catch (e) { alert('error'); }\n"
             + "  alert(style.zIndex);\n"
 
             + "}\n"
@@ -900,8 +908,10 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"0", "0", "1", "0" },
-            FF = {"", "", "1", ""  })
+    @Alerts(IE6 = { "0", "0", "1", "0" },
+            IE7 = { "0", "0", "1", "0" },
+            IE8 = { "0", "error", "0", "1", "error", "1" },
+            FF = { "", "", "1", "" })
     public void zIndexSetNull() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -909,13 +919,17 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "  var style = document.getElementById('myDiv').style;\n"
             + "  alert(style.zIndex);\n"
 
-            + "  style.zIndex = null;\n"
+            + "  try {\n"
+            + "    style.zIndex = null;\n"
+            + "  } catch (e) { alert('error'); }\n"
             + "  alert(style.zIndex);\n"
 
             + "  style.zIndex = 1;\n"
             + "  alert(style.zIndex);\n"
 
-            + "  style.zIndex = null;\n"
+            + "  try {\n"
+            + "    style.zIndex = null;\n"
+            + "  } catch (e) { alert('error'); }\n"
             + "  alert(style.zIndex);\n"
 
             + "}\n"
@@ -932,6 +946,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = {"0", "7", "8", "0", "error", "4", "error", "1" },
+            IE7 = {"0", "7", "8", "0", "error", "4", "error", "1" },
+            IE8 = {"0", "7", "7", "0", "error", "4", "error", "1" },
             FF = {"", "7", "7", "", "4", "1" })
     public void zIndexSetString() throws Exception {
         final String html
@@ -976,7 +992,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = {"0", "error", "0", "1", "error", "1" },
-            FF = {"", "", "", "1", "1", "1" })
+            FF = {"", "", "1", "1" })
     public void zIndexSetInvalid() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -985,7 +1001,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "  alert(style.zIndex);\n"
             + "  try {\n"
             + "    style.zIndex = 'hallo';\n"
-            + "    alert(style.zIndex);\n"
             + "  } catch (e) { alert('error'); }\n"
             + "  alert(style.zIndex);\n"
 
@@ -993,7 +1008,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "  alert(style.zIndex);\n"
             + "  try {\n"
             + "    style.zIndex = 'hallo';\n"
-            + "    alert(style.zIndex);\n"
             + "  } catch (e) { alert('error'); }\n"
             + "  alert(style.zIndex);\n"
             + "}\n"

@@ -69,6 +69,9 @@ public enum BrowserVersionFeatures {
     /** If values for the zIndex is undefined than set the zindex to the default value. */
     CSS_ZINDEX_UNDEFINED_FORCES_RESET,
 
+    /** If values for the zIndex is undefined or null than set the zindex throws an error. */
+    CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR,
+
     /** */
     DIALOGWINDOW_REFERER,
 
