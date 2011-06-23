@@ -14,7 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -520,7 +523,25 @@ public class CSSStyleSheet extends SimpleScriptable {
      */
     private static String toString(final InputSource source) {
         try {
-            return IOUtils.toString(source.getCharacterStream());
+            final Reader reader = source.getCharacterStream();
+            if (null != reader) {
+                // try to reset to produce some output
+                if (reader instanceof StringReader) {
+                    final StringReader sr = (StringReader) reader;
+                    sr.reset();
+                }
+                return IOUtils.toString(reader);
+            }
+            final InputStream is = source.getByteStream();
+            if (null != is) {
+                // try to reset to produce some output
+                if (is instanceof ByteArrayInputStream) {
+                    final ByteArrayInputStream bis = (ByteArrayInputStream) is;
+                    bis.reset();
+                }
+                return IOUtils.toString(is);
+            }
+            return "";
         }
         catch (final IOException e) {
             return "";

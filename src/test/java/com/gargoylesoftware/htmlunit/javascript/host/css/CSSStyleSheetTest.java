@@ -21,19 +21,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Selector;
+import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS21;
@@ -837,6 +839,24 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  alert(document.styleSheets.length);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for 3325124.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void brokenExternalCSS() throws Exception {
+        final String html = "<html><head>"
+            + "<link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/></head></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, "body { font-weight: 900\\9; }");
+        final HtmlPage htmlPage = loadPage(html);
+
+        final NodeList list = htmlPage.getElementsByTagName("body");
+        final HtmlElement element = (HtmlElement) list.item(0);
+        final ComputedCSSStyleDeclaration style = ((HTMLElement) element.getScriptObject()).jsxGet_currentStyle();
+        assertEquals("CSSStyleDeclaration for ''", style.toString());
     }
 
 }
