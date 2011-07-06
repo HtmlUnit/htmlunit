@@ -23,16 +23,13 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -49,76 +46,33 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class LocationTest extends WebDriverTestCase {
+public class LocationTest extends WebTestCase {
 
     /**
-     * Regression test for bug 742902.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§")
-    public void testDocumentLocationGet() throws Exception {
-        final String html
+    public void href() throws Exception {
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        final String content
             = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
-            + "    alert(top.document.location);\n"
+            + "function test() {\n"
+            + "  alert(window.location.href);\n"
             + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
-    }
+        webConnection.setResponse(new URL("http://myHostName/"), content);
+        webClient.setWebConnection(webConnection);
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("ok")
-    public void testDocumentLocationSet() throws Exception {
-        final String html1 =
-              "<html>\n"
-            + "<head>\n"
-            + "  <title>test1</title>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      document.location = 'foo.html';\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'></body>\n"
-            + "</html>";
-        final String html2 =
-              "<html>\n"
-            + "<head>\n"
-            + "  <title>test2</title>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      alert('ok');\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'></body>\n"
-            + "</html>";
+        final List<String> collectedAlerts = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "foo.html"), html2);
-        loadPageWithAlerts2(html1);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("§§URL§§")
-    public void testDocumentLocationHref() throws Exception {
-        final String html
-            = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
-            + "    alert(top.document.location.href);\n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        webClient.getPage("http://myHostName");
+        final String[] expectedAlerts = {"http://myHostName/" };
+        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -180,158 +134,6 @@ public class LocationTest extends WebDriverTestCase {
         // Try page with only a server name
         client.getPage(url);
         assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = { "", "about:blank", "", "", "about:", "" },
-            IE = { "", "about:blank", "/blank", "", "about:", "" })
-    public void about_blank_attributes() throws Exception {
-        final String html = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
-            + "    var location = frames[0].document.location;\n"
-            + "    alert(location.hash);\n"
-            + "    alert(location.href);\n"
-            + "    alert(location.pathname);\n"
-            + "    alert(location.port);\n"
-            + "    alert(location.protocol);\n"
-            + "    alert(location.search);\n"
-            + "}\n</script></head>\n"
-            + "<body onload='doTest()'>\n"
-            + "<iframe src='about:blank'></iframe></body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * Verifies that modifying <tt>window.location.hash</tt> works, but that it doesn't
-     * force the page to reload from the server. This is very important for the Dojo
-     * unit tests, which will keep reloading themselves if the page gets reloaded.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testSetHash() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection conn = new MockWebConnection();
-
-        final String html
-            = "<html><head><title>Test</title></head><body>\n"
-            + "<a id='a' onclick='alert(location.hash);location.hash=\"b\";alert(location.hash);'>go</a>\n"
-            + "<h2 id='b'>...</h2></body></html>";
-
-        conn.setResponse(URL_FIRST, html);
-        webClient.setWebConnection(conn);
-
-        final List<String> actual = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(actual));
-
-        final HtmlPage page = webClient.getPage(URL_FIRST);
-        final HtmlAnchor anchor = page.getHtmlElementById("a");
-        final HtmlPage page2 = anchor.click();
-
-        // Verify that it worked.
-        final String[] expected = new String[] {"", "#b"};
-        assertEquals(expected, actual);
-
-        // Verify that we didn't reload the page.
-        assertTrue(page == page2);
-        assertEquals(URL_FIRST, conn.getLastWebRequest().getUrl());
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-            "#% ^[]|\"<>{}\\" },
-            IE8 = { "#a b", "§§URL§§#a%20b", "#a b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-            "#% ^[]|\"<>{}\\" },
-            IE = { "#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
-            "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C" })
-    public void testSetHash_Encoding() throws Exception {
-        final String html = "<html><head><title>First</title><script>\n"
-            + "  function test() {\n"
-            + "    window.location.hash = 'a b';\n"
-            + "    alert(window.location.hash);\n"
-            + "    alert(window.location.href);\n"
-            + "    window.location.hash = 'a%20b';\n"
-            + "    alert(window.location.hash);\n"
-            + "    alert(window.location.href);\n"
-            + "    window.location.hash = 'abc;,/?:@&=+$-_.!~*()ABC123foo';\n"
-            + "    alert(window.location.hash);\n"
-            + "    window.location.hash = '%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C';\n"
-            + "    alert(window.location.hash);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = "#<a>foobar</a>",
-            IE8 = "#<a>foobar</a>",
-            IE = "#%3Ca%3Efoobar%3C/a%3E")
-    public void hash() throws Exception {
-        final String html = "<html><body onload='test()'>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  alert(document.location.hash);\n"
-            + "}\n"
-            + "</script>\n"
-            + "</body></html>";
-
-        getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts2(html, new URL(getDefaultUrl().toExternalForm() + "?#<a>foobar</a>"));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "#hello", "#hi" })
-    public void testSetHash2() throws Exception {
-        final String html
-            = "<html><head><title>First</title><script>\n"
-            + "  function test() {\n"
-            + "    window.location.hash = 'hello';\n"
-            + "    alert(window.location.hash);\n"
-            + "    window.location.hash = '#hi';\n"
-            + "    alert(window.location.hash);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * Verifies that setting <tt>location.href</tt> to a hash behaves like setting <tt>location.hash</tt>
-     * (ie doesn't result in a server hit). See bug 2089341.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void testSetHrefWithOnlyHash() throws Exception {
-        final String html = "<html><body><script>document.location.href = '#x';</script></body></html>";
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * Verifies that setting <tt>location.href</tt> to a new URL with a hash, where the only difference between the
-     * new URL and the old URL is the hash, behaves like setting <tt>location.hash</tt> (ie doesn't result in a
-     * server hit). See bug 2101735.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void testSetHrefWithOnlyHash2() throws Exception {
-        final String html = "<script>document.location.href = '" + getDefaultUrl() + "#x';</script>";
-        loadPageWithAlerts2(html);
     }
 
     /**
@@ -467,92 +269,39 @@ public class LocationTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for <tt>replace</tt>.
+     * Verifies that modifying <tt>window.location.hash</tt> works, but that it doesn't
+     * force the page to reload from the server. This is very important for the Dojo
+     * unit tests, which will keep reloading themselves if the page gets reloaded.
+     *
      * @throws Exception if the test fails
      */
     @Test
-    public void testReplace() throws Exception {
-        final String html
-            = "<html><head><title>First</title><script>\n"
-            + "function doTest() {\n"
-            + "    location.replace('" + URL_SECOND + "');\n"
-            + "}\n"
-            + "</script></head><body onload='doTest()'>\n"
-            + "</body></html>";
-
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
-
-        getMockWebConnection().setResponse(URL_SECOND, secondContent);
-        final WebDriver webdriver = loadPageWithAlerts2(html);
-
-        assertEquals("Second", webdriver.getTitle());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testAssign() throws Exception {
+    public void testSetHash() throws Exception {
         final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection conn = new MockWebConnection();
 
-        final String firstContent
-            = "<html><head><title>First</title><script>\n"
-            + "  function test() {\n"
-            + "    location.assign('" + URL_SECOND + "');\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
+        final String html
+            = "<html><head><title>Test</title></head><body>\n"
+            + "<a id='a' onclick='alert(location.hash);location.hash=\"b\";alert(location.hash);'>go</a>\n"
+            + "<h2 id='b'>...</h2></body></html>";
 
-        final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
+        conn.setResponse(URL_FIRST, html);
+        webClient.setWebConnection(conn);
 
-        webConnection.setResponse(URL_FIRST, firstContent);
-        webConnection.setResponse(URL_SECOND, secondContent);
-        webClient.setWebConnection(webConnection);
+        final List<String> actual = new ArrayList<String>();
+        webClient.setAlertHandler(new CollectingAlertHandler(actual));
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        assertEquals("Second", page.getTitleText());
-    }
+        final HtmlAnchor anchor = page.getHtmlElementById("a");
+        final HtmlPage page2 = anchor.click();
 
-    /**
-     * Tests that location.reload() works correctly.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testReload() throws Exception {
-        final String content =
-              "<html>\n"
-            + "  <head><title>test</title></head>\n"
-            + "  <body>\n"
-            + "    <a href='javascript:window.location.reload();' id='link1'>reload</a>\n"
-            + "  </body>\n"
-            + "</html>";
+        // Verify that it worked.
+        final String[] expected = new String[] {"", "#b"};
+        assertEquals(expected, actual);
 
-        final HtmlPage page1 = loadPage(getBrowserVersion(), content, null);
-        final HtmlAnchor link = page1.getHtmlElementById("link1");
-        final HtmlPage page2 = link.click();
-
-        assertEquals(page1.getTitleText(), page2.getTitleText());
-        assertNotSame(page1, page2);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("c")
-    public void testLocationWithTarget() throws Exception {
-        final WebClient client = getWebClient();
-        final List<String> alerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(alerts));
-
-        final URL url = getClass().getResource("LocationTest_locationWithTarget_a.html");
-        assertNotNull(url);
-
-        final HtmlPage a = client.getPage(url);
-        final HtmlPage c = (HtmlPage) a.getFrameByName("c").getEnclosedPage();
-        c.getElementById("anchor").click();
-        assertEquals(getExpectedAlerts(), alerts);
+        // Verify that we didn't reload the page.
+        assertTrue(page == page2);
+        assertEquals(URL_FIRST, conn.getLastWebRequest().getUrl());
     }
 
     /**
@@ -597,141 +346,44 @@ public class LocationTest extends WebDriverTestCase {
     }
 
     /**
+     * Tests that location.reload() works correctly.
      * @throws Exception if the test fails
      */
     @Test
-    public void testChangeLocationToNonHtml() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+    public void testReload() throws Exception {
+        final String content =
+              "<html>\n"
+            + "  <head><title>test</title></head>\n"
+            + "  <body>\n"
+            + "    <a href='javascript:window.location.reload();' id='link1'>reload</a>\n"
+            + "  </body>\n"
+            + "</html>";
 
-        final String html =
-              "<html><head>\n"
-            + "  <script>\n"
-            + "      document.location.href = 'foo.txt';\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body></body></html>";
+        final HtmlPage page1 = loadPage(getBrowserVersion(), content, null);
+        final HtmlAnchor link = page1.getHtmlElementById("link1");
+        final HtmlPage page2 = link.click();
 
-        webConnection.setResponse(URL_FIRST, html);
-        webConnection.setResponse(new URL(URL_FIRST + "foo.txt"), "bla bla", "text/plain");
-        webClient.setWebConnection(webConnection);
-
-        final Page page = webClient.getPage(URL_FIRST);
-        assertEquals("bla bla", page.getWebResponse().getContentAsString());
+        assertEquals(page1.getTitleText(), page2.getTitleText());
+        assertNotSame(page1, page2);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("foo")
-    public void jsLocation() throws Exception {
-        final String html =
-              "<html><head>\n"
-            + "  <script>\n"
-            + "      document.location.href = 'javascript:alert(\"foo\")';\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body></body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("§§URL§§")
-    public void testToString() throws Exception {
-        final String html =
-            "<html><head>\n"
-            + "<script>\n"
-            + " alert(window.location.toString());\n"
-            + "</script>\n"
-            + "<body>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void href() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final String content
-            = "<html><head><title>First</title><script>\n"
-            + "function test() {\n"
-            + "  alert(window.location.href);\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        webConnection.setResponse(new URL("http://myHostName/"), content);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        webClient.getPage("http://myHostName");
-        final String[] expectedAlerts = {"http://myHostName/" };
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void href_postponed() throws Exception {
-        final String firstHtml =
-            "<html><head><script>\n"
-            + "function test() {\n"
-            + "  alert('1');\n"
-            + "  self.frames['frame1'].document.location.href='" + URL_SECOND + "';\n"
-            + "  alert('2');\n"
-            + "}\n"
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "  <iframe name='frame1' id='frame1'/>\n"
-            + "</body></html>";
-        final String secondHtml = "<html><body><script>alert('3');</script></body></html>";
-
+    @Alerts("c")
+    public void testLocationWithTarget() throws Exception {
         final WebClient client = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstHtml);
-        webConnection.setResponse(URL_SECOND, secondHtml);
-        client.setWebConnection(webConnection);
-        final ArrayList<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final List<String> alerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(alerts));
 
-        final String[] expectedAlerts = {"1", "2", "3"};
-        client.getPage(URL_FIRST);
+        final URL url = getClass().getResource("LocationTest_locationWithTarget_a.html");
+        assertNotNull(url);
 
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void onlick_set_location() throws Exception {
-        final String html =
-            "<html><head></head>\n"
-            + "<body>\n"
-            + "<a href='foo2.html' onclick='document.location = \"foo3.html\"'>click me</a>\n"
-            + "</body></html>";
-
-        getMockWebConnection().setDefaultResponse("");
-        final WebDriver driver = loadPageWithAlerts2(html);
-        driver.findElement(By.tagName("a")).click();
-
-        final String[] expectedRequests = {"", "foo3.html", "foo2.html"};
-        assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
-
-        assertEquals(new URL(getDefaultUrl(), "foo2.html").toString(), driver.getCurrentUrl());
+        final HtmlPage a = client.getPage(url);
+        final HtmlPage c = (HtmlPage) a.getFrameByName("c").getEnclosedPage();
+        c.getElementById("anchor").click();
+        assertEquals(getExpectedAlerts(), alerts);
     }
 
     /**
@@ -750,5 +402,4 @@ public class LocationTest extends WebDriverTestCase {
         assertEquals(1, alerts.size());
         assertTrue(alerts.get(0).startsWith("file:///"));
     }
-
 }

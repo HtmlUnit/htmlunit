@@ -145,6 +145,16 @@ public class History implements Serializable {
     }
 
     /**
+     * Pops the last URL from the history.
+     */
+    public void pop() {
+        if(index_ >= 0) {
+            urls_.remove(index_);
+            index_--;
+        }
+    }
+
+    /**
      * Adds a new page to the navigation history.
      * @param page the page to add to the navigation history
      */

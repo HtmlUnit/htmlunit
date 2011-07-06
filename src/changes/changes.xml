@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3354317" due-to="Hartmut Arlt">
+                Missing history update during window.location.replace(newUrl) fixed.
+            </action>
             <action type="fix" dev="rbri" issue="3325124">
                 NullPointer in css parser error handler fixed.
             </action>

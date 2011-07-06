@@ -278,17 +278,20 @@ public abstract class WebDriverTestCase extends WebTestCase {
         context.setContextPath("/");
         context.setResourceBase(resourceBase);
 
-        for (final Map.Entry<String, Class< ? extends Servlet>> entry : servlets.entrySet()) {
-            final String pathSpec = entry.getKey();
-            final Class< ? extends Servlet> servlet = entry.getValue();
-            context.addServlet(servlet, pathSpec);
-
-            // disable defaults if someone likes to register his own root servlet
-            if ("/".equals(pathSpec)) {
-                context.setDefaultsDescriptor(null);
-                context.addServlet(DefaultServlet.class, "/favicon.ico");
+        if (servlets != null) {
+            for (final Map.Entry<String, Class< ? extends Servlet>> entry : servlets.entrySet()) {
+                final String pathSpec = entry.getKey();
+                final Class< ? extends Servlet> servlet = entry.getValue();
+                context.addServlet(servlet, pathSpec);
+    
+                // disable defaults if someone likes to register his own root servlet
+                if ("/".equals(pathSpec)) {
+                    context.setDefaultsDescriptor(null);
+                    context.addServlet(DefaultServlet.class, "/favicon.ico");
+                }
             }
         }
+
         final WebAppClassLoader loader = new WebAppClassLoader(context);
         if (classpath != null) {
             for (final String path : classpath) {
