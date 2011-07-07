@@ -252,7 +252,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testReplaceWithHistory() throws Exception {
+    public void testReplaceLastInHistory() throws Exception {
         final String startContent = "<html><head><title>First Page</title></head><body></body></html>";
         getMockWebConnection().setResponse(URL_FIRST, startContent);
 
@@ -277,6 +277,30 @@ public class Location2Test extends WebDriverTestCase {
         // navigate back
         webdriver.navigate().back();
         assertEquals("First Page", webdriver.getTitle());
+    }
+
+    /**
+     * Test for <tt>replace</tt>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testReplaceFirstInHistory() throws Exception {
+        final String firstContent
+            = "<html><head><title>First Page</title><script>\n"
+            + "function doTest() {\n"
+            + "    location.replace('" + URL_SECOND + "');\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final String secondContent = "<html><head><title>Second Page</title></head><body></body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, firstContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver webdriver = loadPageWithAlerts2(URL_FIRST);
+
+        assertEquals("Second Page", webdriver.getTitle());
     }
 
     /**
@@ -315,7 +339,7 @@ public class Location2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST + "foo.txt"), "bla bla", "text/plain");
         final WebDriver driver = loadPage2(html, URL_FIRST);
-        assert(driver.getPageSource().contains("bla bla"));
+        assertTrue(driver.getPageSource().contains("bla bla"));
     }
 
     /**
@@ -356,7 +380,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"1", "2", "3"})
+    @Alerts( {"1", "2", "3"} )
     public void href_postponed() throws Exception {
         final String firstHtml =
             "<html><head><script>\n"

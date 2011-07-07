@@ -143,7 +143,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536712.aspx">MSDN Documentation</a>
      */
     public void jsxFunction_replace(final String url) throws IOException {
-        window_.getWebWindow().getHistory().pop();
+        window_.getWebWindow().getHistory().removeCurrent();
         jsxSet_href(url);
     }
 

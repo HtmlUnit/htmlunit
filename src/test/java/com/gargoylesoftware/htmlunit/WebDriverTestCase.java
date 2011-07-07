@@ -283,7 +283,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 final String pathSpec = entry.getKey();
                 final Class< ? extends Servlet> servlet = entry.getValue();
                 context.addServlet(servlet, pathSpec);
-    
+
                 // disable defaults if someone likes to register his own root servlet
                 if ("/".equals(pathSpec)) {
                     context.setDefaultsDescriptor(null);

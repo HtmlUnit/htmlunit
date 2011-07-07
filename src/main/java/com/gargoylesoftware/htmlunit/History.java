@@ -145,12 +145,14 @@ public class History implements Serializable {
     }
 
     /**
-     * Pops the last URL from the history.
+     * Removes the current URL from the history.
      */
-    public void pop() {
-        if(index_ >= 0) {
+    public void removeCurrent() {
+        if (index_ >= 0 && index_ < urls_.size()) {
             urls_.remove(index_);
-            index_--;
+            if (index_ > 0) {
+                index_--;
+            }
         }
     }
 
