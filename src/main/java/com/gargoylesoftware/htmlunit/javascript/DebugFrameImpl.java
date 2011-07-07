@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.IdFunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
@@ -142,14 +143,12 @@ public class DebugFrameImpl extends DebugFrameAdapter {
     @Override
     public void onExceptionThrown(final Context cx, final Throwable t) {
         if (LOG.isTraceEnabled()) {
-            if (t instanceof JavaScriptException) {
+            if (t instanceof JavaScriptException || t instanceof EcmaError) {
                 final JavaScriptException e = (JavaScriptException) t;
-                if (LOG.isTraceEnabled()) {
-                    LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
-                        + " Exception thrown: " + Context.toString(e.getValue()));
-                }
+                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
+                    + " Exception thrown: " + Context.toString(e.details()));
             }
-            else if (LOG.isTraceEnabled()) {
+            else {
                 LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx) + " Exception thrown: " + t.getCause());
             }
         }
@@ -273,10 +272,13 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      */
     private String getFirstLine(final Context cx) {
         final Object line = cx.getThreadLocal(KEY_LAST_LINE);
+        String result;
         if (line == null) {
-            return "unknown";
+            result = "??";
         }
-        return String.valueOf(line);
+        else {
+            result = String.valueOf(line);
+        }
+        return StringUtils.leftPad(result, 5);
     }
-
 }
