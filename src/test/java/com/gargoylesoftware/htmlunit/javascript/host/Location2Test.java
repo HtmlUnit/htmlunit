@@ -380,7 +380,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts( {"1", "2", "3"} )
+    @Alerts({ "1", "2", "3" })
     public void href_postponed() throws Exception {
         final String firstHtml =
             "<html><head><script>\n"
