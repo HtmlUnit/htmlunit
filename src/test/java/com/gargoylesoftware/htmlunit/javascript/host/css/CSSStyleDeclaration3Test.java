@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -35,7 +36,10 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "", "", "", "" })
+    @Alerts(
+            FF = { "", "", "", "", "" },
+            IE = { "transparent", "none", "repeat", "0% 0%", "scroll" })
+    @NotYetImplemented(Browser.IE)
     public void backgroundEmpty() throws Exception {
         background("");
     }
@@ -66,7 +70,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(
             FF3 = { "transparent", "url(myImage.png)", "repeat", "0% 0%", "scroll" },
-            FF3_6 = { "transparent", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" })
+            FF3_6 = { "transparent", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
+            IE = { "transparent", "url(myImage.png)", "repeat", "0% 0%", "scroll" })
     @NotYetImplemented
     public void backgroundImage() throws Exception {
         background("url(myImage.png)");
@@ -136,7 +141,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll" })
+    @Alerts(
+            FF = { "rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll" },
+            IE = { "#ffccdd", "none", "repeat", "0% 0%", "scroll" })
     @NotYetImplemented
     public void backgroundColorHex() throws Exception {
         background("#ffccdd");
@@ -148,7 +155,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(
             FF3 = { "red", "url(myImage.png)", "repeat", "0% 0%", "scroll" },
-            FF3_6 = { "red", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" })
+            FF3_6 = { "red", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
+            IE = { "red", "url(myImage.png)", "repeat", "0% 0%", "scroll" })
     @NotYetImplemented
     public void backgroundMixed() throws Exception {
         background("red url(\"myImage.png\")");
@@ -158,7 +166,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "rgb(255, 255, 255)", "none", "no-repeat", "20px 100px", "scroll" })
+    @Alerts(
+            FF = { "rgb(255, 255, 255)", "none", "no-repeat", "20px 100px", "scroll" },
+            IE = { "#fff", "none", "no-repeat", "20px 100px", "scroll" })
     @NotYetImplemented
     public void backgroundMixed2() throws Exception {
         background("#fff no-repeat 20px 100px");
@@ -187,7 +197,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "transparent", "none", "repeat", "0% 0%", "scroll" })
+    @Alerts(
+            FF = { "transparent", "none", "repeat", "0% 0%", "scroll" },
+            IE = { "transparent", "none", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssEmpty() throws Exception {
         backgroundCss("");
@@ -197,7 +209,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "rgb(255, 0, 0)", "none", "repeat", "0% 0%", "scroll" })
+    @Alerts(
+            FF = { "rgb(255, 0, 0)", "none", "repeat", "0% 0%", "scroll" },
+            IE = { "red", "none", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssColorRed() throws Exception {
         backgroundCss("red");
@@ -207,7 +221,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "rgb(20, 40, 60)", "none", "repeat", "0% 0%", "scroll" })
+    @Alerts(
+            FF = { "rgb(20, 40, 60)", "none", "repeat", "0% 0%", "scroll" },
+            IE = { "rgb(20,40,60)", "none", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssColorRgb() throws Exception {
         backgroundCss("rgb(20, 40, 60)");
@@ -219,7 +235,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(
             FF3 = { "transparent", "url(http://localhost:12345/myImage.png)", "repeat", "0% 0%", "scroll" },
-            FF3_6 = { "transparent", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" })
+            FF3_6 = { "transparent", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
+            IE = { "transparent", "url(\"http://localhost:12346/myImage.png\")", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssImage() throws Exception {
         backgroundCss("url(myImage.png)");
@@ -229,7 +246,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "transparent", "none", "repeat-x", "0% 0%", "scroll" })
+    @Alerts(
+            FF = { "transparent", "none", "repeat-x", "0% 0%", "scroll" },
+            IE = { "transparent", "none", "repeat-x", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssRepeat() throws Exception {
         backgroundCss("repeat-x");
@@ -239,7 +258,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "transparent", "none", "repeat", "20px 100%", "scroll" })
+    @Alerts(
+            FF = { "transparent", "none", "repeat", "20px 100%", "scroll" },
+            IE = { "transparent", "none", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssPosition() throws Exception {
         backgroundCss("20px 100%");
@@ -249,7 +270,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "transparent", "none", "repeat", "100% 100%", "scroll" })
+    @Alerts(
+            FF = { "transparent", "none", "repeat", "100% 100%", "scroll" },
+            IE = { "transparent", "none", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssPosition2() throws Exception {
         backgroundCss("bottom right");
@@ -259,7 +282,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "transparent", "none", "repeat", "160px 100%", "scroll" })
+    @Alerts(
+            FF = { "transparent", "none", "repeat", "160px 100%", "scroll" },
+            IE = { "transparent", "none", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssPosition3() throws Exception {
         backgroundCss("10em bottom");
@@ -269,7 +294,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "transparent", "none", "repeat", "160px 50%", "scroll" })
+    @Alerts(
+            FF = { "transparent", "none", "repeat", "160px 50%", "scroll" },
+            IE = { "transparent", "none", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssPosition4() throws Exception {
         backgroundCss("10em center");
@@ -279,7 +306,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "transparent", "none", "repeat", "0% 0%", "fixed" })
+    @Alerts(
+            FF = { "transparent", "none", "repeat", "0% 0%", "fixed" },
+            IE = { "transparent", "none", "repeat", "undefined", "fixed" })
     @NotYetImplemented
     public void backgroundCssAttachment() throws Exception {
         backgroundCss("fixed");
@@ -289,7 +318,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll" })
+    @Alerts(
+            FF = { "rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll" },
+            IE = { "#ffccdd", "none", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssColorHex() throws Exception {
         backgroundCss("#ffccdd");
@@ -301,7 +332,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(
             FF3 = { "rgb(255, 0, 0)", "url(http://localhost:12345/myImage.png)", "repeat", "0% 0%", "scroll" },
-            FF3_6 = { "rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" })
+            FF3_6 = { "rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
+            IE = { "red", "url(\"http://localhost:12346/myImage.png\")", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssMixed() throws Exception {
         backgroundCss("red url(\"myImage.png\")");
@@ -311,7 +343,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "rgb(255, 255, 255)", "none", "no-repeat", "20px 100px", "scroll" })
+    @Alerts(
+            FF = { "rgb(255, 255, 255)", "none", "no-repeat", "20px 100px", "scroll" },
+            IE = { "#fff", "none", "no-repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssMixed2() throws Exception {
         backgroundCss("#fff no-repeat 20px 100px");
