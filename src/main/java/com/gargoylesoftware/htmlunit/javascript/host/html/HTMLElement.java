@@ -104,7 +104,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
  */
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
-    private static final String PERCENT_VALUE = "\\d+%";
+    private static final Pattern PERCENT_VALUE = Pattern.compile("\\d+%");
 
     private static final Log LOG = LogFactory.getLog(HTMLElement.class);
 
@@ -2299,7 +2299,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected String getWidthOrHeight(final String attributeName, final Boolean returnNegativeValues) {
         String s = getDomNodeOrDie().getAttribute(attributeName);
-        if (!s.matches(PERCENT_VALUE)) {
+        if (!PERCENT_VALUE.matcher(s).matches()) {
             try {
                 final Float f = Float.valueOf(s);
                 final int i = f.intValue();
@@ -2341,7 +2341,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_75) && value.length() > 0) {
             boolean error = false;
-            if (!value.matches(PERCENT_VALUE)) {
+            if (!PERCENT_VALUE.matcher(value).matches()) {
                 try {
                     final Float f = Float.valueOf(value);
                     final int i = f.intValue();

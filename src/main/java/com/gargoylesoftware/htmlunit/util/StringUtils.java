@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.util;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  */
 public final class StringUtils {
 
+    private static final Pattern HEX_COLOR = Pattern.compile("#([0-9a-f]{3}|[0-9a-f]{6})");
     private static final Log LOG = LogFactory.getLog(StringUtils.class);
 
     /**
@@ -195,7 +197,7 @@ public final class StringUtils {
      * @return whether the token is a color in hexadecimal notation or not
      */
     public static boolean isColorHexadecimal(final String token) {
-        return token.toLowerCase().matches("#([0-9a-f]{3}|[0-9a-f]{6})");
+        return HEX_COLOR.matcher(token).matches();
     }
 
     /**
