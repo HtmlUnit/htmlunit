@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 /**
  * Tests for {@link StringUtils}.
  *
- * @version $Revision:  $
+ * @version $Revision$
  * @author Ronald Brill
  */
 public class StringUtilsTest extends WebTestCase {
