@@ -190,6 +190,15 @@ public final class StringUtils {
     }
 
     /**
+     * Returns if the specified token is an RGB in hexadecimal notation.
+     * @param token the token to check
+     * @return whether the token is a color in hexadecimal notation or not
+     */
+    public static boolean isColorHexadecimal(final String token) {
+        return token.toLowerCase().matches("#([0-9a-f]{3}|[0-9a-f]{6})");
+    }
+
+    /**
      * Formats the specified date according to RFC 1123.
      *
      * @param date the date to format

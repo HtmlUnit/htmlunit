@@ -104,6 +104,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
  */
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
+    private static final String PERCENT_VALUE = "\\d+%";
+
     private static final Log LOG = LogFactory.getLog(HTMLElement.class);
 
     private static final int BEHAVIOR_ID_UNKNOWN = -1;
@@ -2297,7 +2299,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected String getWidthOrHeight(final String attributeName, final Boolean returnNegativeValues) {
         String s = getDomNodeOrDie().getAttribute(attributeName);
-        if (!s.matches("\\d+%")) {
+        if (!s.matches(PERCENT_VALUE)) {
             try {
                 final Float f = Float.valueOf(s);
                 final int i = f.intValue();
@@ -2339,7 +2341,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_75) && value.length() > 0) {
             boolean error = false;
-            if (!value.matches("\\d+%")) {
+            if (!value.matches(PERCENT_VALUE)) {
                 try {
                     final Float f = Float.valueOf(value);
                     final int i = f.intValue();
@@ -2371,22 +2373,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected void setColorAttribute(final String name, final String value) {
         final String s;
-        if (isHexadecimalColor(value)) {
+        if (com.gargoylesoftware.htmlunit.util.StringUtils.isColorHexadecimal(value)) {
             s = value;
         }
         else {
             s = "#000000";
         }
         getDomNodeOrDie().setAttribute(name, s);
-    }
-
-    /**
-     * Returns <tt>true</tt> if the specified string is an RGB color in hexadecimal notation.
-     * @param s the string to check
-     * @return <tt>true</tt> if the specified string is an RGB color in hexadecimal notation
-     */
-    private static boolean isHexadecimalColor(final String s) {
-        return s.toLowerCase().matches("#([0-9a-f]{6})");
     }
 
     /**
