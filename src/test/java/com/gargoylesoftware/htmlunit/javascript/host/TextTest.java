@@ -18,8 +18,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link Text}.
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class TextTest extends WebTestCase {
+public class TextTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -43,6 +43,6 @@ public class TextTest extends WebTestCase {
             + "}\n"
             + "</script></head><body onload='test()'> </body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
