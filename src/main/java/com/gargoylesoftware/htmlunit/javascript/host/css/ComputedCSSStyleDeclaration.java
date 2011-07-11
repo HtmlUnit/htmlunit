@@ -33,6 +33,7 @@ import org.w3c.css.sac.Selector;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.javascript.host.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
@@ -1615,6 +1616,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 }
                 else if (n.getScriptObject() instanceof Text) {
                     left += n.getTextContent().length() * PIXELS_PER_CHAR;
+                }
+                if (n instanceof HtmlTableRow) {
+                    break;
                 }
             }
         }

@@ -6,20 +6,23 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3180939">
+                JavaScript: ensure that first cell off each row has the same offsetLeft.
+            </action>
             <action type="fix" dev="rbri" issue="3354317" due-to="Hartmut Arlt">
                 Missing history update during window.location.replace(newUrl) fixed.
             </action>
             <action type="fix" dev="rbri" issue="3325124">
-                NullPointer in css parser error handler fixed.
+                Fixed NullPointerException in css parser error handler fixed.
             </action>
             <action type="fix" dev="rbri" issue="3319397">
-                JavaScript: Fix for null index handling when adding an select option.
+                JavaScript: Fix for null index handling when adding a select option.
             </action>
             <action type="fix" dev="rbri" issue="3319448">
                 JavaScript: zIndex handling fixed in many ways.
             </action>
             <action type="fix" dev="rbri" due-to="Peter Wilkinson">
-                JavaScript: IndexOutOfBounds exception when accessing the CSSRuleList.
+                JavaScript: fixed IndexOutOfBoundsException when accessing the CSSRuleList.
             </action>
             <action type="fix" dev="rbri" issue="3314489" due-to="Peter Wilkinson">
                 JavaScript: add support for CssStyleSheet removeRule & deleteRule.
