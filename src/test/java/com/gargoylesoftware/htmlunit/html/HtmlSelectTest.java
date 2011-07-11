@@ -640,30 +640,6 @@ public class HtmlSelectTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSelectedIndex() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var oSelect = document.getElementById('main');\n"
-            + "    var oOption = new Option('bla', 1);\n"
-            + "    oSelect.options[oSelect.options.length] = oOption;\n"
-            + "    oOption.selected = false;\n"
-            + "    alert(oSelect.selectedIndex);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<form action=''>\n"
-            + "  <select id='main'/>\n"
-            + "</form>\n"
-            + "</body></html>";
-        final String[] expectedAlerts = {"0"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void asXml_size() throws Exception {
         final String content = "<html><head><title>foo</title></head>\n"
             + "<body>\n"

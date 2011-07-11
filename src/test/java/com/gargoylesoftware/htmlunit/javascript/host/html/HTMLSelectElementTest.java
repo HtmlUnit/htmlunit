@@ -120,6 +120,29 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("0")
+    public void testSelectedIndex2() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var oSelect = document.getElementById('main');\n"
+            + "    var oOption = new Option('bla', 1);\n"
+            + "    oSelect.options[oSelect.options.length] = oOption;\n"
+            + "    oOption.selected = false;\n"
+            + "    alert(oSelect.selectedIndex);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form action=''>\n"
+            + "  <select id='main'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(FF3 = { "-1", "2", "exception", "2", "exception", "2" },
             FF3_6 = { "-1", "2", "-1", "-1" },
             IE = { "-1", "2", "-1", "-1" })
@@ -1245,4 +1268,5 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
 }
