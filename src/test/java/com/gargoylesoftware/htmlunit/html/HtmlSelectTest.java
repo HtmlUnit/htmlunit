@@ -17,12 +17,16 @@ package com.gargoylesoftware.htmlunit.html;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -42,6 +46,9 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlSelectTest extends WebTestCase {
+    /** JUnit rule must be public fields :-(. */
+    @Rule
+    public TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();
 
     /**
      * Test the good path of submitting a select.
@@ -705,4 +712,36 @@ public class HtmlSelectTest extends WebTestCase {
         assertEquals(select.getOption(2), select.getOptionByText("s2o3"));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void savePageSavesSelectedOption() throws Exception {
+        final String content = "<html><body>\n"
+            + "<form action=''>\n"
+            + "  <select id='main'>\n"
+            + "    <option value='1'>option 1</option>\n"
+            + "    <option value='2'>option 2</option>\n"
+            + "    <option value='3' selected>option 3</option>\n"
+            + "  </select>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + "var oSelect = document.getElementById('main');\n"
+            + "oSelect.options[1].selected = true;\n"
+            + "alert(oSelect.options[1].getAttribute('selected'));\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+        final HtmlSelect select = (HtmlSelect) page.getElementById("main");
+        assertEquals("option 2", select.getSelectedOptions().get(0).getText());
+
+        // save the file and reload it
+        final File file = new File(tmpFolderProvider_.newFolder("tmp"), "test.html");
+        page.save(file);
+        final String html2 = FileUtils.readFileToString(file, "UTF-8");
+        final HtmlPage page2 = loadPage(html2);
+        final HtmlSelect select2 = (HtmlSelect) page2.getElementById("main");
+        assertEquals("option 2", select2.getSelectedOptions().get(0).getText());
+    }
 }

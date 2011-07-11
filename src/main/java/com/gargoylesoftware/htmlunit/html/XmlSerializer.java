@@ -117,19 +117,7 @@ class XmlSerializer {
      */
     protected void printOpeningTag(final DomElement node) throws IOException {
         buffer_.append(node.getTagName());
-        final Map<String, DomAttr> attributes;
-        if (node instanceof HtmlImage) {
-            attributes = getAttributesFor((HtmlImage) node);
-        }
-        else if (node instanceof HtmlLink) {
-            attributes = getAttributesFor((HtmlLink) node);
-        }
-        else if (node instanceof BaseFrame) {
-            attributes = getAttributesFor((BaseFrame) node);
-        }
-        else {
-            attributes = node.getAttributesMap();
-        }
+        final Map<String, DomAttr> attributes = readAttributes(node);
 
         for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
             buffer_.append(" ");
@@ -139,6 +127,33 @@ class XmlSerializer {
             buffer_.append(com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlAttributeValue(value));
             buffer_.append('"');
         }
+    }
+
+    private Map<String, DomAttr> readAttributes(final DomElement node) throws IOException {
+        if (node instanceof HtmlImage) {
+            return getAttributesFor((HtmlImage) node);
+        }
+        else if (node instanceof HtmlLink) {
+            return getAttributesFor((HtmlLink) node);
+        }
+        else if (node instanceof BaseFrame) {
+            return getAttributesFor((BaseFrame) node);
+        }
+
+        Map<String, DomAttr> attributes = node.getAttributesMap();
+        if (node instanceof HtmlOption) {
+            attributes = new HashMap<String, DomAttr>(attributes);
+            final HtmlOption option = (HtmlOption) node;
+            if (option.isSelected()) {
+                if (!attributes.containsKey("selected")) {
+                    attributes.put("selected", new DomAttr(node.getPage(), null, "selectected", "selected", false));
+                }
+            }
+            else {
+                attributes.remove("selected");
+            }
+        }
+        return attributes;
     }
 
     private Map<String, DomAttr> getAttributesFor(final BaseFrame frame) throws IOException {
