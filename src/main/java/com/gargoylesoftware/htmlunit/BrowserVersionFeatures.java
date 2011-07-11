@@ -268,9 +268,6 @@ public enum BrowserVersionFeatures {
     GENERATED_153,
 
     /** Was originally .isFirefox(). */
-    GENERATED_154,
-
-    /** Was originally .isFirefox(). */
     GENERATED_155,
 
     /** Was originally .isFirefox(). */
@@ -759,6 +756,9 @@ public enum BrowserVersionFeatures {
     /** Set the value attribute of a submit input to 'Submit Query' if no value attribute specified. */
     SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
 
+    /** Indicates if SVG is supported. */
+    SVG_SUPPORT,
+
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
     TEXTAREA_CRNL,
 
@@ -787,6 +787,8 @@ public enum BrowserVersionFeatures {
     WINDOW_ACTIVE_ELEMENT_FOCUSED,
 
     /** Indicates that 'this' corresponds to the handler function when a XMLHttpRequest handler is executed. */
-    XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION;
+    XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION,
 
+    /** Indicates if XUL is supported (FF only). */
+    XUL_SUPPORT;
 }

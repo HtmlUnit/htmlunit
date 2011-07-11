@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3313921">
+                JavaScript: make getAttribute work on SVG elements created with createElementNS (FF).
+            </action>
             <action type="fix" dev="mguillem" issue="3180939">
                 JavaScript: ensure that first cell off each row has the same offsetLeft.
             </action>

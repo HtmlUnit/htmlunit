@@ -404,13 +404,19 @@ public class Document extends EventNode {
      */
     public Object jsxFunction_createElementNS(final String namespaceURI, final String qualifiedName) {
         final org.w3c.dom.Element element;
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_154)
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.hasFeature(BrowserVersionFeatures.XUL_SUPPORT)
                 && "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
             // simple hack, no need to implement the XUL objects (at least in a first time)
             element = new HtmlDivision(namespaceURI, qualifiedName, getPage(), null);
         }
         else if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI)) {
             element = getPage().createElementNS(namespaceURI, qualifiedName);
+        }
+        else if (browserVersion.hasFeature(BrowserVersionFeatures.SVG_SUPPORT)
+                && "http://www.w3.org/2000/svg".equals(namespaceURI)) {
+            // simple hack, no need to implement the SVG objects (at least in a first time)
+            element = new HtmlDivision(namespaceURI, qualifiedName, getPage(), null);
         }
         else {
             element = new DomElement(namespaceURI, qualifiedName, getPage(), null);
