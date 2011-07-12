@@ -146,7 +146,7 @@ class XmlSerializer {
             final HtmlOption option = (HtmlOption) node;
             if (option.isSelected()) {
                 if (!attributes.containsKey("selected")) {
-                    attributes.put("selected", new DomAttr(node.getPage(), null, "selectected", "selected", false));
+                    attributes.put("selected", new DomAttr(node.getPage(), null, "selected", "selected", false));
                 }
             }
             else {
