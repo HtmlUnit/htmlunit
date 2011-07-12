@@ -256,10 +256,16 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
     public String jsxGet_hash() {
-        final String hash = getHash(false);
-        if (hash != null) {
+        final boolean decodeHash = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED);
+        String hash = hash_;
+        if (decodeHash && hash_ != null) {
+            hash = decodeHash(hash);
+        }
+
+        if (!StringUtils.isEmpty(hash)) {
             return "#" + hash;
         }
+
         return "";
     }
 
@@ -286,16 +292,8 @@ public class Location extends SimpleScriptable {
             if (hash.length() > 0 && ('#' == hash.charAt(0))) {
                 hash = hash.substring(1);
             }
-            final boolean decodeHash = getBrowserVersion().
-                hasFeature(BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED);
-            if (decodeHash) {
-                hash = decodeHash(hash);
-            }
-            hash_ = hash;
         }
-        else {
-            hash_ = null;
-        }
+        hash_ = hash;
     }
 
     private String decodeHash(final String hash) {

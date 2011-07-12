@@ -142,7 +142,7 @@ public class Location2Test extends WebDriverTestCase {
             "#% ^[]|\"<>{}\\" },
             IE = { "#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
             "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C" })
-    public void testSetHash_Encoding() throws Exception {
+    public void hashEncoding() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "  function test() {\n"
             + "    window.location.hash = 'a b';\n"
@@ -158,6 +158,40 @@ public class Location2Test extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" },
+            IE = { "#myDataTable=foo%3Dojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" },
+            IE8 = { "#myDataTable=foo=ojkoj", "§§URL§§#myDataTable=foo%3Dojkoj" })
+    public void hashEncoding2() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "window.location.hash = 'myDataTable=foo%3Dojkoj';\n"
+            + "alert(window.location.hash);\n"
+            + "alert(window.location.href);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" },
+            IE = { "#üöä", "§§URL§§#üöä" },
+            IE8 = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" })
+    public void hashEncoding3() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "window.location.hash = 'üöä';\n"
+            + "alert(window.location.hash);\n"
+            + "alert(window.location.href);\n"
+            + "</script></body></html>";
 
         loadPageWithAlerts2(html);
     }

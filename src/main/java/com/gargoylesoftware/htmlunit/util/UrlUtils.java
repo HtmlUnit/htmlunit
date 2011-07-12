@@ -138,7 +138,7 @@ public final class UrlUtils {
 
         final BitSet allowedFragment = new BitSet(256);
         allowedFragment.or(uric);
-        allowedFragment.clear('%');
+//        allowedFragment.clear('%');
 
         final BitSet allowedQuery = new BitSet(256);
         allowedQuery.or(uric);

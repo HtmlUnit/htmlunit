@@ -7,6 +7,9 @@
     <body>
         <release version="2.9" date="???" description="Bugfixes">
             <action type="fix" dev="mguillem">
+                JavaScript: avoid encoding of % in Location.href when set as part of Location.hash.
+            </action>
+            <action type="fix" dev="mguillem">
                 HtmlPage.savePage: ensure that the right option is saved as selected.
             </action>
             <action type="fix" dev="mguillem" issue="3313921">
