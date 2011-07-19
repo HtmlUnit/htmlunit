@@ -413,11 +413,6 @@ public class Document extends EventNode {
         else if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI)) {
             element = getPage().createElementNS(namespaceURI, qualifiedName);
         }
-        else if (browserVersion.hasFeature(BrowserVersionFeatures.SVG_SUPPORT)
-                && "http://www.w3.org/2000/svg".equals(namespaceURI)) {
-            // simple hack, no need to implement the SVG objects (at least in a first time)
-            element = new HtmlDivision(namespaceURI, qualifiedName, getPage(), null);
-        }
         else {
             element = new DomElement(namespaceURI, qualifiedName, getPage(), null);
         }
