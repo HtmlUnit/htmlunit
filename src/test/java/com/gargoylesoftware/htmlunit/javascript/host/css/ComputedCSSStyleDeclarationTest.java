@@ -91,7 +91,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
         final String expectedText = "cssText=:,azimuth=:,background=:,"
             + "backgroundAttachment=:scroll,backgroundColor=:transparent,backgroundImage=:none,"
-            + "backgroundPosition=:,backgroundRepeat=:repeat,border=:,borderCollapse=:separate,borderColor=:,"
+            + "backgroundPosition=:0% 0%,backgroundRepeat=:repeat,border=:,borderCollapse=:separate,borderColor=:,"
             + "borderSpacing=:0px 0px,borderStyle=:,borderTop=:,borderRight=:,borderBottom=:,borderLeft=:,"
             + "borderTopColor=:rgb(0, 0, 0),borderRightColor=:rgb(0, 0, 0),borderBottomColor=:rgb(0, 0, 0),"
             + "borderLeftColor=:rgb(0, 0, 0),borderTopStyle=:none,borderRightStyle=:none,borderBottomStyle=:none,"

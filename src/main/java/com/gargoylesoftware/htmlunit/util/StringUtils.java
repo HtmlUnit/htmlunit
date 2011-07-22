@@ -14,8 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import java.awt.Color;
 import java.util.Collection;
 import java.util.Date;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
@@ -32,10 +34,13 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Martin Tamme
+ * @author Ronald Brill
  */
 public final class StringUtils {
 
-    private static final Pattern HEX_COLOR = Pattern.compile("#([0-9a-f]{3}|[0-9a-f]{6})");
+    private static final Pattern HEX_COLOR = Pattern.compile("#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})");
+    private static final Pattern RGB_COLOR =
+        Pattern.compile("rgb\\s*?\\(\\s*?(\\d{1,3})\\s*?,\\s*?(\\d{1,3})\\s*?,\\s*?(\\d{1,3})\\s*?\\)");
     private static final Log LOG = LogFactory.getLog(StringUtils.class);
 
     /**
@@ -192,12 +197,112 @@ public final class StringUtils {
     }
 
     /**
-     * Returns if the specified token is an RGB in hexadecimal notation.
+     * Returns true if the specified token is an RGB in hexadecimal notation.
      * @param token the token to check
      * @return whether the token is a color in hexadecimal notation or not
      */
     public static boolean isColorHexadecimal(final String token) {
-        return HEX_COLOR.matcher(token).matches();
+        if (token == null) {
+            return false;
+        }
+        return HEX_COLOR.matcher(token.trim()).matches();
+    }
+
+    /**
+     * Returns a Color parsed from the given RGB in hexadecimal notation.
+     * @param token the token to parse
+     * @return a Color whether the token is a color RGB in hexadecimal notation; otherwise null
+     */
+    public static Color asColorHexadecimal(final String token) {
+        if (token == null) {
+            return null;
+        }
+        final Matcher tmpMatcher = HEX_COLOR.matcher(token);
+        final boolean tmpFound = tmpMatcher.matches();
+        if (!tmpFound) {
+            return null;
+        }
+
+        final String tmpHex = tmpMatcher.group(1);
+        if (tmpHex.length() == 6) {
+            final int tmpRed = Integer.parseInt(tmpHex.substring(0, 2), 16);
+            final int tmpGreen = Integer.parseInt(tmpHex.substring(2, 4), 16);
+            final int tmpBlue = Integer.parseInt(tmpHex.substring(4, 6), 16);
+            final Color tmpColor = new Color(tmpRed, tmpGreen, tmpBlue);
+            return tmpColor;
+        }
+
+        final int tmpRed = Integer.parseInt(tmpHex.substring(0, 1) + tmpHex.substring(0, 1), 16);
+        final int tmpGreen = Integer.parseInt(tmpHex.substring(1, 2) + tmpHex.substring(1, 2), 16);
+        final int tmpBlue = Integer.parseInt(tmpHex.substring(2, 3) + tmpHex.substring(2, 3), 16);
+        final Color tmpColor = new Color(tmpRed, tmpGreen, tmpBlue);
+        return tmpColor;
+    }
+
+    /**
+     * Returns true if the specified token is in RGB notation.
+     * @param token the token to check
+     * @return whether the token is a color in RGB notation or not
+     */
+    public static boolean isColorRGB(final String token) {
+        if (token == null) {
+            return false;
+        }
+        return RGB_COLOR.matcher(token.trim()).matches();
+    }
+
+    /**
+     * Returns a Color parsed from the given rgb notation.
+     * @param token the token to parse
+     * @return a Color whether the token is a color in RGB notation; otherwise null
+     */
+    public static Color asColorRGB(final String token) {
+        if (token == null) {
+            return null;
+        }
+        final Matcher tmpMatcher = RGB_COLOR.matcher(token);
+        final boolean tmpFound = tmpMatcher.matches();
+        if (!tmpFound) {
+            return null;
+        }
+
+        final int tmpRed = Integer.parseInt(tmpMatcher.group(1));
+        final int tmpGreen = Integer.parseInt(tmpMatcher.group(2));
+        final int tmpBlue = Integer.parseInt(tmpMatcher.group(3));
+        final Color tmpColor = new Color(tmpRed, tmpGreen, tmpBlue);
+        return tmpColor;
+    }
+
+    /**
+     * Returns a Color parsed from the given rgb notation.
+     * @param token the token to parse
+     * @return a Color whether the token is a color in RGB notation; otherwise null
+     */
+    public static Color findColorRGB(final String token) {
+        if (token == null) {
+            return null;
+        }
+        final Matcher tmpMatcher = RGB_COLOR.matcher(token);
+        final boolean tmpFound = tmpMatcher.find();
+        if (!tmpFound) {
+            return null;
+        }
+
+        final int tmpRed = Integer.parseInt(tmpMatcher.group(1));
+        final int tmpGreen = Integer.parseInt(tmpMatcher.group(2));
+        final int tmpBlue = Integer.parseInt(tmpMatcher.group(3));
+        final Color tmpColor = new Color(tmpRed, tmpGreen, tmpBlue);
+        return tmpColor;
+    }
+
+    /**
+     * Formats the specified color.
+     *
+     * @param aColor the color to format
+     * @return the specified color, formatted
+     */
+    public static String formatColor(final Color aColor) {
+        return "rgb(" + aColor.getRed() + ", " + aColor.getGreen() + ", " + aColor.getBlue() + ")";
     }
 
     /**
@@ -210,5 +315,4 @@ public final class StringUtils {
         WebAssert.notNull("date", date);
         return DateUtils.formatDate(date);
     }
-
 }

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import java.awt.Color;
+
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.WebTestCase;
@@ -31,10 +33,80 @@ public class StringUtilsTest extends WebTestCase {
      */
     @Test
     public void isColorHexadecimal() throws Exception {
+        assertFalse(StringUtils.isColorHexadecimal(null));
+        assertFalse(StringUtils.isColorHexadecimal(""));
+        assertFalse(StringUtils.isColorHexadecimal("    "));
+
         assertFalse(StringUtils.isColorHexadecimal("#a1"));
         assertTrue(StringUtils.isColorHexadecimal("#1a1"));
         assertFalse(StringUtils.isColorHexadecimal("#1a11"));
         assertFalse(StringUtils.isColorHexadecimal("#1a111"));
         assertTrue(StringUtils.isColorHexadecimal("#11aa11"));
+        assertTrue(StringUtils.isColorHexadecimal("#11aaAF"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asColorHexadecimal() throws Exception {
+        assertNull(StringUtils.asColorHexadecimal(null));
+        assertNull(StringUtils.asColorHexadecimal(""));
+        assertNull(StringUtils.asColorHexadecimal("    "));
+
+        assertNull(StringUtils.asColorHexadecimal("#a1"));
+        assertEquals(new Color(0, 17, 170), StringUtils.asColorHexadecimal("#0011aa"));
+        assertEquals(new Color(0, 17, 170), StringUtils.asColorHexadecimal("#01A"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isColorRGB() throws Exception {
+        assertFalse(StringUtils.isColorRGB(null));
+        assertFalse(StringUtils.isColorRGB(""));
+        assertFalse(StringUtils.isColorRGB("    "));
+
+        assertFalse(StringUtils.isColorRGB("#a1"));
+        assertTrue(StringUtils.isColorRGB("rgb(1,12,13)"));
+        assertTrue(StringUtils.isColorRGB("  rgb(1,12,13)   "));
+        assertTrue(StringUtils.isColorRGB("rgb  ( 1,  12,  13        )"));
+        assertFalse(StringUtils.isColorRGB("rgb(a1,12,13)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asColorRGB() throws Exception {
+        assertNull(StringUtils.asColorRGB(null));
+        assertNull(StringUtils.asColorRGB(""));
+        assertNull(StringUtils.asColorRGB("    "));
+
+        assertNull(StringUtils.asColorRGB("#a1"));
+        assertEquals(new Color(1, 12, 13), StringUtils.asColorRGB("rgb(1,12,13)"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void findColorRGB() throws Exception {
+        assertNull(StringUtils.findColorRGB(null));
+        assertNull(StringUtils.findColorRGB(""));
+        assertNull(StringUtils.findColorRGB("    "));
+
+        assertNull(StringUtils.findColorRGB("#a1"));
+        assertEquals(new Color(1, 12, 13), StringUtils.findColorRGB("rgb(1,12,13)"));
+        assertEquals(new Color(1, 12, 13), StringUtils.findColorRGB("beforergb(1,12,13)after"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void formatColor() throws Exception {
+        assertEquals("rgb(1, 12, 13)", StringUtils.formatColor(new Color(1, 12, 13)));
     }
 }

@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.javascript.host.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration.StyleElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -154,12 +155,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * Overridden because some CSS properties are inherited from parent elements.
      */
     @Override
-    protected String getStyleAttribute(final String name) {
-        String s = super.getStyleAttribute(name);
+    protected String getStyleAttribute(final String name, final Map<String, StyleElement> styleMap) {
+        String s = super.getStyleAttribute(name, null);
         if (s.length() == 0 && isInheritable(name)) {
             final HTMLElement parent = getElement().getParentHTMLElement();
             if (parent != null) {
-                s = getWindow().jsxFunction_getComputedStyle(parent, null).getStyleAttribute(name);
+                s = getWindow().jsxFunction_getComputedStyle(parent, null).getStyleAttribute(name, null);
             }
         }
         return s;
@@ -283,6 +284,24 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String jsxGet_backgroundImage() {
         return defaultIfEmpty(super.jsxGet_backgroundImage(), "none");
+    }
+
+    /**
+     * Gets the "backgroundPosition" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_backgroundPosition() {
+        String bg = super.jsxGet_backgroundPosition();
+        if (StringUtils.isNotBlank(bg)) {
+            bg = StringUtils.replace(bg, "left", "0%");
+            bg = StringUtils.replace(bg, "right", "100%");
+            bg = StringUtils.replace(bg, "center", "50%");
+
+            bg = StringUtils.replace(bg, "top", "0%");
+            bg = StringUtils.replace(bg, "bottom", "100%");
+        }
+
+        return defaultIfEmpty(bg, "0% 0%");
     }
 
     /**
@@ -590,7 +609,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String jsxGet_height() {
         return pixelString(getElement(), new CssValue(Window.WINDOW_HEIGHT) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
-                return defaultIfEmpty(style.getStyleAttribute("height"), "363px");
+                return defaultIfEmpty(style.getStyleAttribute("height", null), "363px");
             }
         });
     }
@@ -1228,7 +1247,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         return pixelString(getElement(), new CssValue(Window.WINDOW_WIDTH) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
-                return defaultIfEmpty(style.getStyleAttribute("width"), defaultWidth);
+                return defaultIfEmpty(style.getStyleAttribute(WIDTH, null), defaultWidth);
             }
         });
     }
@@ -1308,7 +1327,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
             width = pixelValue(getElement(), new CssValue(Window.WINDOW_WIDTH) {
                 @Override public String get(final ComputedCSSStyleDeclaration style) {
-                    return style.getStyleAttribute("width");
+                    return style.getStyleAttribute(WIDTH, null);
                 }
             });
         }
@@ -1419,7 +1438,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         int height = pixelValue(getElement(), new CssValue(defaultValue) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
-                return style.getStyleAttribute("height");
+                return style.getStyleAttribute("height", null);
             }
         });
         if (height == 0 || (ie && height < defaultHeight)) {

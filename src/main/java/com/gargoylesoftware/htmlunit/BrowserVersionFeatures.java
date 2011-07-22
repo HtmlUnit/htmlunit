@@ -51,6 +51,9 @@ public enum BrowserVersionFeatures {
     /** Was originally .isFirefox(). */
     CSS_DISPLAY_DEFAULT,
 
+    /** Indicates that the browser can surrounds image url's with quotes. */
+    CSS_IMAGE_URL_QUOTED,
+
     /** Indicates that the :lang(..) selector is supported. */
     CSS_SELECTOR_LANG,
 
