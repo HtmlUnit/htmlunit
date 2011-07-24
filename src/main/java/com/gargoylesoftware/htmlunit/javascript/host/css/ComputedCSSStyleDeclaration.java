@@ -1388,11 +1388,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final int contentHeight = getContentHeight();
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_17);
-        final boolean explicitHeightSpecified = (super.jsxGet_height().length() > 0);
+        final boolean useDefaultHeight = getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN);
+        final boolean explicitHeightSpecified = super.jsxGet_height().length() > 0;
 
         int height;
-        if (contentHeight > 0 && ((ie && contentHeight > elementHeight) || (!ie && !explicitHeightSpecified))) {
+        if (contentHeight > 0
+                && ((useDefaultHeight && contentHeight > elementHeight)
+                        || (!useDefaultHeight && !explicitHeightSpecified))) {
             height = contentHeight;
         }
         else {
@@ -1431,8 +1434,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return Window.WINDOW_HEIGHT;
         }
 
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_18);
-        final int defaultHeight = (ie ? 15 : 20);
+        final boolean explicitHeightSpecified = super.jsxGet_height().length() > 0;
+
+        int defaultHeight = 20;
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_15)) {
+            defaultHeight = 15;
+        }
 
         final int defaultValue = getElement() instanceof HTMLCanvasElement ? 150 : Window.WINDOW_HEIGHT;
 
@@ -1441,7 +1448,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 return style.getStyleAttribute("height", null);
             }
         });
-        if (height == 0 || (ie && height < defaultHeight)) {
+
+        final boolean useDefaultHeight = getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN);
+        if (height == 0 && !explicitHeightSpecified || (useDefaultHeight && height < defaultHeight)) {
             height = defaultHeight;
         }
 

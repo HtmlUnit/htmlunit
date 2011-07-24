@@ -6,6 +6,12 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3306325">
+                JavaScript: Wrong offsetHeight for elements with height set to 0px fixed.
+            </action>
+            <action type="add" dev="rbri" issue="3308994">
+                Initial support for css background shorthand added.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: avoid encoding of % in Location.href when set as part of Location.hash.
             </action>

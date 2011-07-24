@@ -45,6 +45,13 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser can inherit CSS property values. */
     CAN_INHERIT_CSS_PROPERTY_VALUES,
 
+    /** Indicates that the default value for height of elements is 15 instead of 20. */
+    CSS_DEFAULT_ELMENT_HEIGHT_15,
+
+    /** Indicates that the default value for height of elements is used instance
+     * of the calculated value, if the calculated value is smaller. */
+    CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN,
+
     /** Indicates that the default value for width is 'auto'. */
     CSS_DEFAULT_WIDTH_AUTO,
 
@@ -332,9 +339,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isFirefox(). */
     GENERATED_177,
-
-    /** Was originally .isIE(). */
-    GENERATED_18,
 
     /** Was originally .isIE(). */
     GENERATED_2,

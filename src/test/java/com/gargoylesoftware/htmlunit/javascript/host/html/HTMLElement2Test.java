@@ -489,11 +489,29 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * Regression test for bug 3306325.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "0", "20" },
+            IE = { "15", "15" })
+    public void offsetHeight_explicitHeightZero() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<div id='d1' style='height: 0px;'><div id='d2'>x</div></div>\n"
+            + "<script>alert(document.getElementById('d1').offsetHeight);</script>\n"
+            + "<script>alert(document.getElementById('d2').offsetHeight);</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Partial regression test for bug 2892939.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "77", "2", "5", "20", "50", "50", "20" }, IE = { "100", "15", "20", "20", "50", "50", "15" })
+    @Alerts(FF = { "77", "2", "5", "20", "50", "50", "20" },
+            IE = { "100", "15", "20", "20", "50", "50", "15" })
     public void offsetHeight_calculatedBasedOnChildren() throws Exception {
         final String html
             = "<html>\n"
