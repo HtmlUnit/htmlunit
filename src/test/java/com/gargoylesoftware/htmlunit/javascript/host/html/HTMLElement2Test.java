@@ -747,7 +747,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
         driver.findElement(By.id("input")).click();
         final WebElement log = driver.findElement(By.id("log"));
         log.click();
-        final String text = log.getValue().trim().replaceAll("\r", "");
+        final String text = log.getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
     }
 

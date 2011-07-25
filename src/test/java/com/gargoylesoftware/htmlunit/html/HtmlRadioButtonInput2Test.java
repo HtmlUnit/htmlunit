@@ -124,10 +124,10 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("radio")).setSelected();
+        driver.findElement(By.id("radio")).click();
 
         assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
-                '[' + driver.findElement(By.id("myTextarea")).getValue() + ']');
+                '[' + driver.findElement(By.id("myTextarea")).getText() + ']');
     }
 
     /**
@@ -158,7 +158,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("radio2")).click();
 
         assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
-                '[' + driver.findElement(By.id("myTextarea")).getValue() + ']');
+                '[' + driver.findElement(By.id("myTextarea")).getText() + ']');
     }
 
     /**

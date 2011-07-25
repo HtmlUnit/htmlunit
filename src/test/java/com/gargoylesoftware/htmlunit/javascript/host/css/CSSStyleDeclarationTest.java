@@ -606,7 +606,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         Collections.sort(expectedStyles);
 
         final List<String> collectedStyles =
-            Arrays.asList(driver.findElement(By.id("myTextarea")).getValue().split(" "));
+            Arrays.asList(driver.findElement(By.id("myTextarea")).getText().split(" "));
         Collections.sort(collectedStyles);
 
         assertEquals(expectedStyles, collectedStyles);
@@ -770,7 +770,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         Collections.sort(expectedStyles);
 
         final List<String> collectedStyles =
-            Arrays.asList(driver.findElement(By.id("myTextarea")).getValue().split(" "));
+            Arrays.asList(driver.findElement(By.id("myTextarea")).getText().split(" "));
         Collections.sort(collectedStyles);
 
         assertEquals(expectedStyles, collectedStyles);

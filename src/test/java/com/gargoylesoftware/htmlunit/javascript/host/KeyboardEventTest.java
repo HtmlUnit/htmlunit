@@ -179,7 +179,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("keyId")).sendKeys(keysToSend);
 
-        final String[] actual = driver.findElement(By.id("myTextarea")).getValue().split("\r\n|\n");
+        final String[] actual = driver.findElement(By.id("myTextarea")).getAttribute("value").split("\r\n|\n");
         assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(actual).toString());
     }
 

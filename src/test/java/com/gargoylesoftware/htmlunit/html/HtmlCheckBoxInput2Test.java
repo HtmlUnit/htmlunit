@@ -93,10 +93,10 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("chkbox")).toggle();
+        driver.findElement(By.id("chkbox")).click();
 
         assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
-                '[' + driver.findElement(By.id("myTextarea")).getValue() + ']');
+                '[' + driver.findElement(By.id("myTextarea")).getText() + ']');
     }
 
     /**
@@ -124,11 +124,11 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("chkbox")).toggle();
-        driver.findElement(By.id("chkbox2")).toggle();
+        driver.findElement(By.id("chkbox")).click();
+        driver.findElement(By.id("chkbox2")).click();
 
         assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
-                '[' + driver.findElement(By.id("myTextarea")).getValue() + ']');
+                '[' + driver.findElement(By.id("myTextarea")).getText() + ']');
     }
 
     /**

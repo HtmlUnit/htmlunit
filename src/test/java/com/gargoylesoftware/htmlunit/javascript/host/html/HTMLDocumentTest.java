@@ -796,7 +796,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "<input id='i'></input></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        final String lastModified = driver.findElement(By.id("i")).getValue();
+        final String lastModified = driver.findElement(By.id("i")).getAttribute("value");
 
         try {
             new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(lastModified);

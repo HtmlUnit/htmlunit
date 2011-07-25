@@ -143,7 +143,7 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
         final String expected = "mousedown span,mouseup span,click span,mousedown text,focus text,mouseup text,"
             + "click text,mousedown image,focus image,mouseup image,click image,mousedown textarea,focus textarea,"
             + "mouseup textarea,click textarea,";
-        assertEquals(expected, driver.findElement(By.id("myTextarea")).getValue());
+        assertEquals(expected, driver.findElement(By.id("myTextarea")).getText());
     }
 
     /**
@@ -180,7 +180,7 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("div1")).click();
         webDriver.findElement(By.id("div2")).click();
-        assertEquals(getExpectedAlerts()[0], webDriver.findElement(By.id("myTextarea")).getValue());
+        assertEquals(getExpectedAlerts()[0], webDriver.findElement(By.id("myTextarea")).getText());
     }
 
     /**
@@ -221,6 +221,6 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
             expected = "focus,keydown,keypress,keyup,change,blur,";
         }
 
-        assertEquals(expected, webDriver.findElement(By.id("myTextarea")).getValue());
+        assertEquals(expected, webDriver.findElement(By.id("myTextarea")).getText());
     }
 }

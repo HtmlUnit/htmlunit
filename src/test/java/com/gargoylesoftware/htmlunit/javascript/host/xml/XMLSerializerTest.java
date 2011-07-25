@@ -64,7 +64,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(expectedString, textArea.getValue());
+        assertEquals(expectedString, textArea.getText());
     }
 
     /**
@@ -79,7 +79,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
         final String serializationText = "<a><!-- abc --></a>";
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(expectedString, textArea.getValue());
+        assertEquals(expectedString, textArea.getText());
     }
 
     /**
@@ -94,7 +94,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
         final String serializationText = "<a>&lt;&gt;&amp;</a>";
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(expectedString, textArea.getValue());
+        assertEquals(expectedString, textArea.getText());
     }
 
     /**
@@ -128,7 +128,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(expectedString, textArea.getValue());
+        assertEquals(expectedString, textArea.getText());
     }
 
     /**
@@ -153,7 +153,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(expectedString, textArea.getValue());
+        assertEquals(expectedString, textArea.getText());
     }
 
     /**
@@ -189,7 +189,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(expectedString, textArea.getValue());
+        assertEquals(expectedString, textArea.getText());
     }
 
     /**

@@ -20,8 +20,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HTMLOptionElement}.
@@ -96,7 +96,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("opb")).setSelected();
+        driver.findElement(By.id("opb")).click();
         driver.findElement(By.id("s")).click();
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }

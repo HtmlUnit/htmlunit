@@ -20,6 +20,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -44,15 +45,15 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
         p.sendKeys("abc");
-        assertEquals("abc", p.getValue());
+        assertEquals("abc", p.getAttribute("value"));
         p.sendKeys("\b");
-        assertEquals("ab", p.getValue());
+        assertEquals("ab", p.getAttribute("value"));
         p.sendKeys("\b");
-        assertEquals("a", p.getValue());
+        assertEquals("a", p.getAttribute("value"));
         p.sendKeys("\b");
-        assertEquals("", p.getValue());
+        assertEquals("", p.getAttribute("value"));
         p.sendKeys("\b");
-        assertEquals("", p.getValue());
+        assertEquals("", p.getAttribute("value"));
     }
 
     /**
@@ -67,10 +68,10 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             p.sendKeys("abc");
             Assert.fail();
         }
-        catch (final UnsupportedOperationException e) {
+        catch (final InvalidElementStateException e) {
             // as expected
         }
-        assertEquals("", p.getValue());
+        assertEquals("", p.getAttribute("value"));
     }
 
     /**
@@ -114,7 +115,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
         p.sendKeys("abcd");
-        assertEquals("abc", p.getValue());
+        assertEquals("abc", p.getAttribute("value"));
     }
 
     /**
@@ -141,7 +142,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
         p.sendKeys("abcd");
-        assertEquals("abc", p.getValue());
+        assertEquals("abc", p.getAttribute("value"));
     }
 
     /**

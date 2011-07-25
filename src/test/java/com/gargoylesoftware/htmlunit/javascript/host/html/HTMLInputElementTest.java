@@ -387,7 +387,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         textinput.sendKeys("foo");
         final WebElement button = driver.findElement(By.name("myButton"));
         button.click();
-        assertEquals("from button", textinput.getValue());
+        assertEquals("from button", textinput.getAttribute("value"));
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
@@ -416,7 +416,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         textinput.sendKeys("foo");
         final WebElement button = driver.findElement(By.name("myButton"));
         button.click();
-        assertEquals("from button", textinput.getValue());
+        assertEquals("from button", textinput.getAttribute("value"));
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
@@ -634,15 +634,15 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         final WebElement textField = webDriver.findElement(By.id("text1"));
         textField.sendKeys("123456789");
-        assertEquals("12345", textField.getValue());
+        assertEquals("12345", textField.getAttribute("value"));
         textField.sendKeys("\b7");
-        assertEquals("12347", textField.getValue());
+        assertEquals("12347", textField.getAttribute("value"));
 
         final WebElement passwordField = webDriver.findElement(By.id("password1"));
         passwordField.sendKeys("123456789");
-        assertEquals("123456", passwordField.getValue());
+        assertEquals("123456", passwordField.getAttribute("value"));
         passwordField.sendKeys("\b7");
-        assertEquals("123457", passwordField.getValue());
+        assertEquals("123457", passwordField.getAttribute("value"));
     }
 
     /**
@@ -660,15 +660,15 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         final WebElement textField = webDriver.findElement(By.id("text1"));
         textField.sendKeys("123456789");
-        assertEquals("", textField.getValue());
+        assertEquals("", textField.getAttribute("value"));
         textField.sendKeys("\b7");
-        assertEquals("", textField.getValue());
+        assertEquals("", textField.getAttribute("value"));
 
         final WebElement passwordField = webDriver.findElement(By.id("password1"));
         passwordField.sendKeys("123456789");
-        assertEquals("", passwordField.getValue());
+        assertEquals("", passwordField.getAttribute("value"));
         passwordField.sendKeys("\b7");
-        assertEquals("", passwordField.getValue());
+        assertEquals("", passwordField.getAttribute("value"));
     }
 
     /**
@@ -686,15 +686,15 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         final WebElement textField = webDriver.findElement(By.id("text1"));
         textField.sendKeys("123456789");
-        assertEquals("12", textField.getValue());
+        assertEquals("12", textField.getAttribute("value"));
         textField.sendKeys("\b7");
-        assertEquals("17", textField.getValue());
+        assertEquals("17", textField.getAttribute("value"));
 
         final WebElement passwordField = webDriver.findElement(By.id("password1"));
         passwordField.sendKeys("123456789");
-        assertEquals("1234", passwordField.getValue());
+        assertEquals("1234", passwordField.getAttribute("value"));
         passwordField.sendKeys("\b7");
-        assertEquals("1237", passwordField.getValue());
+        assertEquals("1237", passwordField.getAttribute("value"));
     }
 
     /**
