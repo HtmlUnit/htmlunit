@@ -21,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -72,7 +73,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("b")
+    @Alerts({ "a", "b" })
+    @NotYetImplemented
+    //TODO: Needs further investigation of clicking an option without clicking the select
+    //See the first comment in http://code.google.com/p/selenium/issues/detail?id=2131#c1
     public void click2() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -96,8 +100,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("opb")).click();
         driver.findElement(By.id("s")).click();
+        driver.findElement(By.id("opb")).click();
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
