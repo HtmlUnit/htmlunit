@@ -347,8 +347,8 @@ public class HTMLSelectElement extends FormField {
      * @param newValue the value of the option to select
      */
     @Override
-    public void jsxSet_value(final String newValue) {
-        getHtmlSelect().setSelectedAttribute(newValue, true);
+    public void jsxSet_value(final Object newValue) {
+        getHtmlSelect().setSelectedAttribute(Context.toString(newValue), true);
     }
 
     /**

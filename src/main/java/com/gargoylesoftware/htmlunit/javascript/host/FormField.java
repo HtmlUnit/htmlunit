@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -61,8 +62,8 @@ public class FormField extends FormChild {
      *
      * @param newValue  the new value
      */
-    public void jsxSet_value(final String newValue) {
-        getDomNodeOrDie().setAttribute("value", newValue);
+    public void jsxSet_value(final Object newValue) {
+        getDomNodeOrDie().setAttribute("value", Context.toString(newValue));
     }
 
     /**
