@@ -71,7 +71,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param value the new value
      */
     @Override
-    public void jsxSet_value(String value) {
+    public void jsxSet_value(final String value) {
         ((HtmlTextArea) getDomNodeOrDie()).setText(value);
     }
 
