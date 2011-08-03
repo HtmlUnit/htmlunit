@@ -6,9 +6,6 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
-            <action type="fix" dev="asashour">
-                JavaScript: textArea to properly handle setting null value.
-            </action>
             <action type="fix" dev="rbri" issue="3306325">
                 JavaScript: Wrong offsetHeight for elements with height set to 0px fixed.
             </action>

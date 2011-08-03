@@ -769,9 +769,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
     TEXTAREA_CRNL,
 
-    /** Considers null values as 'null' string. */
-    TEXTAREA_NULL_AS_STRING,
-
     /** Indicates that the browser treats "position: fixed" as if it were "position: static". */
     TREATS_POSITION_FIXED_LIKE_POSITION_STATIC,
 
