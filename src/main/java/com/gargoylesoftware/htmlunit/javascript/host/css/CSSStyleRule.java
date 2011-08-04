@@ -61,7 +61,7 @@ public class CSSStyleRule extends CSSRule {
                     && (('.' == fixedName.charAt(0)) || ('#' == fixedName.charAt(0)))) {
                 // nothing
             }
-            else if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_27)) {
+            else if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECTOR_TEXT_UPPERCASE)) {
                 fixedName = fixedName.toUpperCase();
             }
             else {

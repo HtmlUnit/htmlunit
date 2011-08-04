@@ -353,9 +353,6 @@ public enum BrowserVersionFeatures {
     GENERATED_26,
 
     /** Was originally .isIE(). */
-    GENERATED_27,
-
-    /** Was originally .isIE(). */
     GENERATED_29,
 
     /** Was originally .isIE(). */
@@ -698,6 +695,9 @@ public enum BrowserVersionFeatures {
      *  to the page's DOM.
      */
     JS_OFFSET_PARENT_THROWS_NOT_ATTACHED,
+
+    /** Javascript selectorText property returns selectors in uppercase. */
+    JS_SELECTOR_TEXT_UPPERCASE,
 
     /** Indicates if calling HTMLSelectElement.item with a negative value should throw. */
     JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
