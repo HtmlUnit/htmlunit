@@ -314,7 +314,7 @@ public abstract class BaseFrame extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    public void setAttributeNS(final String namespaceURI, final String qualifiedName,  String attributeValue) {
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, String attributeValue) {
         if ("src".equals(qualifiedName)) {
             attributeValue = attributeValue.trim();
         }

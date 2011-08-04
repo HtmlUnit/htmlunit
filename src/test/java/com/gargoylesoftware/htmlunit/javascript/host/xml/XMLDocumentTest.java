@@ -850,4 +850,38 @@ public class XMLDocumentTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "[object XMLDocument]", "OK"} , IE = "[object]")
+    //TODO: in my real IE8 (without WebDriver), I got [object HTMLDocument]
+    //so it should be HTMLDocument not XMLDocument for IE 
+    public void test() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var ifr = document.getElementById('ifr');\n"
+            + "    ifr.onload = function() {\n"
+            + "        var xml = ifr.contentWindow.document;\n"
+            + "        alert(xml);\n"
+            + "        if(xml.getElementsByTagName) {\n"
+            + "          alert(xml.getElementsByTagName('status')[0].textContent);\n"
+            + "        }\n"
+            + "    };"
+            + "    ifr.src = '" + URL_SECOND + "';\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <iframe id='ifr'></iframe>\n"
+            + "</body></html>";
+
+        final String xml
+            = "<response>\n"
+            + "  <status>OK</status>\n"
+            + "</response>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
 }

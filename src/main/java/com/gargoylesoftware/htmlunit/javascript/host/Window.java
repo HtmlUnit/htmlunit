@@ -76,10 +76,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocumentProxy;
+import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * A JavaScript object for a Window.
@@ -115,8 +116,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     private static final int MIN_TIMER_DELAY = 1;
 
-    private HTMLDocument document_;
-    private HTMLDocumentProxy documentProxy_;
+    private Document document_;
+    private DocumentProxy documentProxy_;
     private Navigator navigator_;
     private WebWindow webWindow_;
     private WindowProxy windowProxy_;
@@ -191,7 +192,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             LOG.warn("window.alert(\"" + stringMessage + "\") no alert handler installed");
         }
         else {
-            handler.handleAlert(document_.getHtmlPage(), stringMessage);
+            handler.handleAlert(((HTMLDocument) document_).getHtmlPage(), stringMessage);
         }
     }
 
@@ -225,7 +226,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     + message + "\") no confirm handler installed, simulating the OK button");
             return true;
         }
-        return handler.handleConfirm(document_.getHtmlPage(), message);
+        return handler.handleConfirm(((HTMLDocument) document_).getHtmlPage(), message);
     }
 
     /**
@@ -239,14 +240,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
             return null;
         }
-        return handler.handlePrompt(document_.getHtmlPage(), message);
+        return handler.handlePrompt(((HTMLDocument) document_).getHtmlPage(), message);
     }
 
     /**
      * Returns the JavaScript property "document".
      * @return the document
      */
-    public HTMLDocumentProxy jsxGet_document() {
+    public DocumentProxy jsxGet_document() {
         return documentProxy_;
     }
 
@@ -254,7 +255,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the window's current document.
      * @return the window's current document
      */
-    public HTMLDocument getDocument() {
+    public Document getDocument() {
         return document_;
     }
 
@@ -579,10 +580,16 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         windowProxy_ = new WindowProxy(webWindow_);
 
-        document_ = new HTMLDocument();
+        if (webWindow.getEnclosedPage() instanceof XmlPage) {
+            document_ = new XMLDocument();
+        }
+        else {
+            document_ = new HTMLDocument();
+        }
         document_.setParentScope(this);
         document_.setPrototype(getPrototype(document_.getClass()));
         document_.setWindow(this);
+
         if (webWindow.getEnclosedPage() instanceof SgmlPage) {
             final SgmlPage page = (SgmlPage) webWindow.getEnclosedPage();
             document_.setDomNode(page);
@@ -595,7 +602,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             }
         }
 
-        documentProxy_ = new HTMLDocumentProxy(webWindow_);
+        documentProxy_ = new DocumentProxy(webWindow_);
 
         navigator_ = new Navigator();
         navigator_.setParentScope(this);
@@ -858,7 +865,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical distance to scroll by
      */
     public void jsxFunction_scrollBy(final int x, final int y) {
-        final HTMLElement body = document_.jsxGet_body();
+        final HTMLElement body = ((HTMLDocument) document_).jsxGet_body();
         if (body != null) {
             body.jsxSet_scrollLeft(body.jsxGet_scrollLeft() + x);
             body.jsxSet_scrollTop(body.jsxGet_scrollTop() + y);
@@ -870,7 +877,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param lines the number of lines to scroll down
      */
     public void jsxFunction_scrollByLines(final int lines) {
-        final HTMLElement body = document_.jsxGet_body();
+        final HTMLElement body = ((HTMLDocument) document_).jsxGet_body();
         if (body != null) {
             body.jsxSet_scrollTop(body.jsxGet_scrollTop() + (19 * lines));
         }
@@ -881,7 +888,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param pages the number of pages to scroll down
      */
     public void jsxFunction_scrollByPages(final int pages) {
-        final HTMLElement body = document_.jsxGet_body();
+        final HTMLElement body = ((HTMLDocument) document_).jsxGet_body();
         if (body != null) {
             body.jsxSet_scrollTop(body.jsxGet_scrollTop() + (WINDOW_HEIGHT * pages));
         }
@@ -893,7 +900,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical position to scroll to
      */
     public void jsxFunction_scrollTo(final int x, final int y) {
-        final HTMLElement body = document_.jsxGet_body();
+        final HTMLElement body = ((HTMLDocument) document_).jsxGet_body();
         if (body != null) {
             body.jsxSet_scrollLeft(x);
             body.jsxSet_scrollTop(y);
@@ -1147,7 +1154,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     result = getScriptableFor(elements.get(0));
                 }
                 else if (elements.size() > 1) {
-                    result = document_.jsxFunction_getElementsByName(name);
+                    result = ((HTMLDocument) document_).jsxFunction_getElementsByName(name);
                 }
                 else {
                     // May be attempting to retrieve element by ID (try map-backed operation again instead of XPath).
@@ -1442,7 +1449,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final CSSStyleDeclaration original = element.jsxGet_style();
         style = new ComputedCSSStyleDeclaration(original);
 
-        final StyleSheetList sheets = document_.jsxGet_styleSheets();
+        final StyleSheetList sheets = ((HTMLDocument) document_).jsxGet_styleSheets();
         for (int i = 0; i < sheets.jsxGet_length(); i++) {
             final CSSStyleSheet sheet = (CSSStyleSheet) sheets.jsxFunction_item(i);
             if (sheet.isActive()) {

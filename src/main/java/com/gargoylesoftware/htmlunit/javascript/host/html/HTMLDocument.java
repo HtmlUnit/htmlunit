@@ -261,7 +261,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             final Scriptable scope = getParentScope();
             if (scope instanceof Window) {
                 final Window w = (Window) scope;
-                final HTMLDocument realDocument = w.getDocument();
+                final Document realDocument = w.getDocument();
                 if (realDocument != this) {
                     node = realDocument.getDomNodeOrDie();
                 }
@@ -483,13 +483,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (thisObj instanceof HTMLDocument && thisObj.getPrototype() instanceof HTMLDocument) {
             return (HTMLDocument) thisObj;
         }
-        else if (thisObj instanceof HTMLDocumentProxy && thisObj.getPrototype() instanceof HTMLDocument) {
-            return ((HTMLDocumentProxy) thisObj).getDelegee();
+        else if (thisObj instanceof DocumentProxy && thisObj.getPrototype() instanceof HTMLDocument) {
+            return (HTMLDocument) ((DocumentProxy) thisObj).getDelegee();
         }
         final Window window = getWindow(thisObj);
         final BrowserVersion browser = window.getWebWindow().getWebClient().getBrowserVersion();
         if (browser.hasFeature(BrowserVersionFeatures.GENERATED_53)) {
-            return window.getDocument();
+            return (HTMLDocument) window.getDocument();
         }
         throw Context.reportRuntimeError("Function can't be used detached from document");
     }

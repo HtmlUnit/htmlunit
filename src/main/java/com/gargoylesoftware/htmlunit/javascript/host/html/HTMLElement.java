@@ -311,7 +311,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Returns the document.
      * @return the document
      */
-    public HTMLDocumentProxy jsxGet_document() {
+    public DocumentProxy jsxGet_document() {
         return getWindow().jsxGet_document();
     }
 
@@ -2079,7 +2079,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public void jsxFunction_setActive() {
         final Window window = getWindow();
-        final HTMLDocument document = window.getDocument();
+        final HTMLDocument document = (HTMLDocument) window.getDocument();
         document.setActiveElement(this);
         if (window.getWebWindow() == window.getWebWindow().getWebClient().getCurrentWindow()) {
             final HtmlElement element = getDomNodeOrDie();

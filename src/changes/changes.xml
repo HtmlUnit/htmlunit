@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour" issue="3386186">
+                JavaScript: properly handle XML inside frame.
+            </action>
             <action type="fix" dev="rbri" issue="3306325">
                 JavaScript: Wrong offsetHeight for elements with height set to 0px fixed.
             </action>

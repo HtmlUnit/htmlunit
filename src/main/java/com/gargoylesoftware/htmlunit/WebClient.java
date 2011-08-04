@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -847,7 +848,8 @@ public class WebClient implements Serializable {
             final Window jsWindow = (Window) currentWindow_.getScriptObject();
             if (jsWindow != null) {
                 if (getBrowserVersion().hasFeature(BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
-                    final HTMLElement activeElement = (HTMLElement) jsWindow.getDocument().jsxGet_activeElement();
+                    final HTMLElement activeElement =
+                            (HTMLElement) ((HTMLDocument) jsWindow.getDocument()).jsxGet_activeElement();
                     if (activeElement != null) {
                         ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
                     }

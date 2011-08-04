@@ -16,11 +16,12 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptableProxy;
+import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- * Proxy for a {@link HTMLDocument} script object. In theory we could satisfy single-document requirements
- * without a proxy, by reusing (with appropriate cleanup and re-initialization) a single {@link HTMLDocument}
+ * Proxy for a {@link Document} script object. In theory we could satisfy single-document requirements
+ * without a proxy, by reusing (with appropriate cleanup and re-initialization) a single {@link Document}
  * instance across various pages. However, we allow users to keep references to old pages as they navigate
  * across a series of pages, and all of these pages need to be usable -- so we can't just leave these old
  * pages without a <tt>window.document</tt> object.
@@ -28,15 +29,15 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @version $Revision$
  * @author Daniel Gredler
  */
-public class HTMLDocumentProxy extends SimpleScriptableProxy<HTMLDocument> {
+public class DocumentProxy extends SimpleScriptableProxy<Document> {
 
     private final WebWindow webWindow_;
 
     /**
-     * Construct a proxy for the {@link HTMLDocument} of the {@link WebWindow}.
+     * Construct a proxy for the {@link Document} of the {@link WebWindow}.
      * @param webWindow the window
      */
-    public HTMLDocumentProxy(final WebWindow webWindow) {
+    public DocumentProxy(final WebWindow webWindow) {
         webWindow_ = webWindow;
     }
 
@@ -44,7 +45,7 @@ public class HTMLDocumentProxy extends SimpleScriptableProxy<HTMLDocument> {
      * {@inheritDoc}
      */
     @Override
-    public HTMLDocument getDelegee() {
+    public Document getDelegee() {
         final Window w = (Window) webWindow_.getScriptObject();
         return w.getDocument();
     }

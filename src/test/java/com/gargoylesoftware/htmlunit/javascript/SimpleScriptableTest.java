@@ -109,6 +109,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("CSSStyleDeclaration");
         names.remove("CSSStyleRule");
         names.remove("Document");
+        names.remove("DocumentProxy");
         names.remove("DOMException");
         names.remove("DOMImplementation");
         names.remove("DOMParser");
@@ -124,7 +125,6 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("HTMLCollection");
         names.remove("HTMLCollectionTags");
         names.remove("HTMLDocument");
-        names.remove("HTMLDocumentProxy");
         names.remove("HTMLListElement");
         names.remove("HTMLOptionsCollection");
         names.remove("HTMLTableComponent");

@@ -46,7 +46,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return <code>null</code> if no document is contained
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">Gecko DOM Reference</a>
      */
-    public HTMLDocumentProxy jsxGet_contentDocument() {
+    public DocumentProxy jsxGet_contentDocument() {
         return ((Window) getFrame().getEnclosedWindow().getScriptObject()).jsxGet_document();
     }
 
