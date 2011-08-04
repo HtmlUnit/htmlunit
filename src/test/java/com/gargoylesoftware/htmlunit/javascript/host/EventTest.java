@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * Tests that when DOM events such as "onclick" have access
@@ -942,28 +941,27 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(Browser.FF)
+    @Alerts("400000,1,20000000,2000,8000,40,2,80,800,800000,1000,8000000,10000000,100,400,200,80000,1000000,"
+            + "8,1,20,10,8,4,2,2000000,10000,4000000,40000,4000,4,20000,100000,200000,")
     public void constants() throws Exception {
         final String html =
-              "<html><body onload='test()'><script>\n"
-            + "  function test() {\n"
+              "<html><body>\n"
+            + "<script>\n"
             + "    var constants = [Event.ABORT, Event.ALT_MASK, Event.BACK, Event.BLUR, Event.CHANGE, Event.CLICK, "
             + "Event.CONTROL_MASK, Event.DBLCLICK, Event.DRAGDROP, Event.ERROR, Event.FOCUS, Event.FORWARD, "
             + "Event.HELP, Event.KEYDOWN, Event.KEYPRESS, Event.KEYUP, Event.LOAD, Event.LOCATE, Event.META_MASK, "
             + "Event.MOUSEDOWN, Event.MOUSEDRAG, Event.MOUSEMOVE, Event.MOUSEOUT, Event.MOUSEOVER, Event.MOUSEUP, "
             + "Event.MOVE, Event.RESET, Event.RESIZE, Event.SCROLL, Event.SELECT, Event.SHIFT_MASK, Event.SUBMIT, "
             + "Event.UNLOAD, Event.XFER_DONE];\n"
+            + "    var str = '';\n"
             + "    for (var x in constants) {\n"
-            + "      document.getElementById('myTextarea').value += constants[x].toString(16) + ',';\n"
+            + "      str += constants[x].toString(16) + ',';\n"
             + "    }\n"
-            + "  }\n"
+            + "    alert(str);\n"
             + "</script>\n"
-            + "<textarea id='myTextarea' cols='120' rows='40'></textarea>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final String value = page.<HtmlTextArea>getHtmlElementById("myTextarea").getText();
-        assertEquals("400000,1,20000000,2000,8000,40,2,80,800,800000,1000,8000000,10000000,100,400,200,80000,1000000,"
-            + "8,1,20,10,8,4,2,2000000,10000,4000000,40000,4000,4,20000,100000,200000,", value);
+        loadPageWithAlerts2(html);
     }
 
     /**
