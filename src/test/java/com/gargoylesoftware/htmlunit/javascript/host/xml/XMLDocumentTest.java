@@ -855,7 +855,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object XMLDocument]", "OK"} , IE = "[object]")
+    @Alerts(FF = { "[object XMLDocument]", "OK" } , IE = "[object]")
     //TODO: in my real IE8 (without WebDriver), I got [object HTMLDocument]
     //so it should be HTMLDocument not XMLDocument for IE
     //Also, IE8 with WebDriver gives "" (empty Alert)
