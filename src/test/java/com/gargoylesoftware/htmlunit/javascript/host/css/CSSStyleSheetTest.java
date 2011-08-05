@@ -458,6 +458,18 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts(FF = { "false", "false", "true", "false", "true" }, IE = { "false", "false", "false", "false", "false" })
+    public void css3_disabled() throws Exception {
+        final String htmlSnippet = "<input id='elt2' disabled>\n"
+            + "<input id='elt3'>\n"
+            + "<input id='elt4' type='checkbox' disabled>\n";
+        doTest(":disabled", htmlSnippet);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
     @Alerts(FF = { "false", "false", "false", "false", "true", "false", "true", "false" },
             IE = { "false", "false", "false", "false", "false", "false", "false", "false" })
     public void css3_checked() throws Exception {

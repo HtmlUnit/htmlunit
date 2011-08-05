@@ -439,7 +439,7 @@ public class CSSStyleSheet extends SimpleScriptable {
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
             final AttributeCondition condition, final HtmlElement element) {
-        if (browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_29)) {
+        if (!browserVersion.hasFeature(BrowserVersionFeatures.CSS_SPECIAL_PSEUDO_CLASSES)) {
             return false;
         }
 
@@ -450,6 +450,10 @@ public class CSSStyleSheet extends SimpleScriptable {
         else if ("enabled".equals(value)) {
             return (element instanceof HtmlInput && !((HtmlInput) element).isDisabled())
                 || (element instanceof HtmlSelect && !((HtmlSelect) element).isDisabled());
+        }
+        else if ("disabled".equals(value)) {
+            return (element instanceof HtmlInput && ((HtmlInput) element).isDisabled())
+                || (element instanceof HtmlSelect && ((HtmlSelect) element).isDisabled());
         }
         else if ("checked".equals(value)) {
             return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())

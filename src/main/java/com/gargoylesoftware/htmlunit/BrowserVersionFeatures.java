@@ -64,6 +64,12 @@ public enum BrowserVersionFeatures {
     /** Indicates that the :lang(..) selector is supported. */
     CSS_SELECTOR_LANG,
 
+    /**
+     * Indicates that the pseudo classes 'root', 'enabled', 'disabled'
+     * and 'checked' are supported.
+     */
+    CSS_SPECIAL_PSEUDO_CLASSES,
+
     /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets
      * you use CSS to attach a script to a specific element in order to implement
      * DHTML (Dynamic HTML) components.
@@ -351,9 +357,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_26,
-
-    /** Was originally .isIE(). */
-    GENERATED_29,
 
     /** Was originally .isIE(). */
     GENERATED_3,

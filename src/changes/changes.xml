@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.9" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                CSS: pseudo class 'disabled' now supported in FF mode.
+            </action>
             <action type="fix" dev="asashour" issue="3386186">
                 JavaScript: properly handle XML inside frame.
             </action>
