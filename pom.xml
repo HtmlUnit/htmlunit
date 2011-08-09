@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.9-SNAPSHOT</version>
+    <version>2.9</version>
     <name>HtmlUnit</name>
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -852,32 +852,4 @@
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
-    <repositories>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <id>HtmlUnitSnapshots</id>
-            <name>HtmlUnit Snapshots</name>
-            <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <id>NekoHTMLSnapshots</id>
-            <name>NekoHTML Snapshots</name>
-            <url>http://build.canoo.com/NekoHTML/artifacts/m2-repo</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
 </project>
