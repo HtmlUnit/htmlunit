@@ -62,7 +62,7 @@ svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .]]>
 
         <section name="Compiling the code">
             <p>
-                The preferred way to build HtmlUnit is with <a href="http://maven.apache.org">maven 2</a>.
+                The preferred way to build HtmlUnit is with <a href="http://maven.apache.org">maven 3</a>.
             </p>
             <source>mvn compile</source>
             <p>
