@@ -5,6 +5,12 @@
     </properties>
 
     <body>
+        <release version="2.10" date="???" description="Bugfixes">
+            <action type="remove" dev="asashour">
+                Remove deprecated WebRequestSettings, WebResponseImpl, some BrowserVersion constants,
+                DefaultCredentialsProvider.addProxyCredentials() and WebResponse.getContentAsBytes().
+            </action>
+        </release>
         <release version="2.9" date="Aug 9, 2011" description="Bugfixes, performance improvements">
             <action type="fix" dev="rbri">
                 CSS: pseudo class 'disabled' now supported in FF mode.

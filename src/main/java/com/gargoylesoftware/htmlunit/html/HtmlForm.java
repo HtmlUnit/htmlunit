@@ -139,19 +139,6 @@ public class HtmlForm extends HtmlElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Gets the settings for a submission of this form request settings necessary to submit this form.
-     * @param submitElement the element that caused the submit to occur
-     * @return the request settings
-     * @deprecated as of 2.8, please use {@link #getWebRequest(SubmittableElement)} instead
-     */
-    @Deprecated
-    public WebRequest getWebRequestSettings(final SubmittableElement submitElement) {
-        return getWebRequest(submitElement);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
      * Gets the request for a submission of this form with the specified SubmittableElement.
      * @param submitElement the element that caused the submit to occur
      * @return the request

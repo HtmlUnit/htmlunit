@@ -366,18 +366,6 @@ public class MockWebConnection implements WebConnection {
      * to {@link #getResponse(WebRequest)}.
      * @return the {@link WebRequest} that was used in the in the last call
      *         to {@link #getResponse(WebRequest)}
-     * @deprecated as of 2.8, please use {@link #getLastWebRequest()} instead
-     */
-    @Deprecated
-    public WebRequest getLastWebRequestSettings() {
-        return lastRequest_;
-    }
-
-    /**
-     * Returns the {@link WebRequest} that was used in the in the last call
-     * to {@link #getResponse(WebRequest)}.
-     * @return the {@link WebRequest} that was used in the in the last call
-     *         to {@link #getResponse(WebRequest)}
      */
     public WebRequest getLastWebRequest() {
         return lastRequest_;

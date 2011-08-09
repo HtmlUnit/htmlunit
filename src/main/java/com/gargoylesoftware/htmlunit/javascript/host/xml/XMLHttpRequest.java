@@ -664,11 +664,6 @@ public class XMLHttpRequest extends SimpleScriptable {
         }
 
         @Override
-        public byte[] getContentAsBytes() {
-            return new byte[0];
-        }
-
-        @Override
         public List<NameValuePair> getResponseHeaders() {
             return Collections.emptyList();
         }
@@ -691,11 +686,6 @@ public class XMLHttpRequest extends SimpleScriptable {
         @Override
         public String getContentCharsetOrNull() {
             return "";
-        }
-
-        @Override
-        public WebRequest getRequestSettings() {
-            return request_;
         }
 
         @Override

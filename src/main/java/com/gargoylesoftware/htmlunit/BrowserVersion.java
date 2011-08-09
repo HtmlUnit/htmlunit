@@ -46,7 +46,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class BrowserVersion implements Serializable {
 
-    private String applicationCodeName_ = APP_CODE_NAME;
+    private String applicationCodeName_ = "Mozilla";
     private String applicationMinorVersion_ = "0";
     private String applicationName_;
     private String applicationVersion_;
@@ -63,46 +63,29 @@ public class BrowserVersion implements Serializable {
     private final String nickname_;
 
     /**
-     * Application code name for both Internet Explorer and Netscape series.
-     * @deprecated as of 2.8, without replacement
-     */
-    @Deprecated
-    public static final String APP_CODE_NAME = "Mozilla";
-
-    /**
      * Application name for the Internet Explorer series of browsers.
-     * @deprecated as of 2.8, without replacement
      */
-    @Deprecated
-    public static final String INTERNET_EXPLORER = "Microsoft Internet Explorer";
+    private static final String INTERNET_EXPLORER = "Microsoft Internet Explorer";
 
     /**
      * Application name the Netscape navigator series of browsers.
-     * @deprecated as of 2.8, without replacement
      */
-    @Deprecated
-    public static final String NETSCAPE = "Netscape";
+    private static final String NETSCAPE = "Netscape";
 
     /**
      * United States English language identifier.
-     * @deprecated as of 2.8, without replacement
      */
-    @Deprecated
-    public static final String LANGUAGE_ENGLISH_US = "en-us";
+    private static final String LANGUAGE_ENGLISH_US = "en-us";
 
     /**
      * The X86 CPU class.
-     * @deprecated as of 2.8, without replacement
      */
-    @Deprecated
-    public static final String CPU_CLASS_X86 = "x86";
+    private static final String CPU_CLASS_X86 = "x86";
 
     /**
      * The WIN32 platform.
-     * @deprecated as of 2.8, without replacement
      */
-    @Deprecated
-    public static final String PLATFORM_WIN32 = "Win32";
+    private static final String PLATFORM_WIN32 = "Win32";
 
     /**
      * Firefox 3.0.

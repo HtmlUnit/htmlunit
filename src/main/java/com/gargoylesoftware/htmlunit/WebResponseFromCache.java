@@ -41,14 +41,6 @@ class WebResponseFromCache extends WebResponseWrapper {
      * {@inheritDoc}
      */
     @Override
-    public WebRequest getRequestSettings() {
-        return request_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public WebRequest getWebRequest() {
         return request_;
     }

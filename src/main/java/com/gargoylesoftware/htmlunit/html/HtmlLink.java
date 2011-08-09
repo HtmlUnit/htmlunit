@@ -169,17 +169,6 @@ public class HtmlLink extends HtmlElement {
     }
 
     /**
-     * Returns the request settings which will allow us to retrieve the content referenced by the "href" attribute.
-     * @return the request settings which will allow us to retrieve the content referenced by the "href" attribute
-     * @throws MalformedURLException in case of problem resolving the URL
-     * @deprecated as of 2.8, please use {@link #getWebRequest()} instead
-     */
-    @Deprecated
-    public WebRequest getWebRequestSettings() throws MalformedURLException {
-        return getWebRequest();
-    }
-
-    /**
      * Returns the request which will allow us to retrieve the content referenced by the "href" attribute.
      * @return the request which will allow us to retrieve the content referenced by the "href" attribute
      * @throws MalformedURLException in case of problem resolving the URL

@@ -75,16 +75,6 @@ public class WebResponse implements Serializable {
     /**
      * Returns the request used to load this response.
      * @return the request used to load this response
-     * @deprecated as of 2.8, please use {@link #getWebRequest()} instead
-     */
-    @Deprecated
-    public WebRequest getRequestSettings() {
-        return request_;
-    }
-
-    /**
-     * Returns the request used to load this response.
-     * @return the request used to load this response
      */
     public WebRequest getWebRequest() {
         return request_;
@@ -215,16 +205,6 @@ public class WebResponse implements Serializable {
      */
     public InputStream getContentAsStream() {
         return responseData_.getInputStream();
-    }
-
-    /**
-     * Returns the response content as a byte array.
-     * @return the response content as a byte array
-     * @deprecated as of 2.8, use either {@link #getContentAsString()} or {@link #getContentAsStream()}.
-     */
-    @Deprecated
-    public byte[] getContentAsBytes() {
-        return responseData_.getBody();
     }
 
     /**

@@ -58,23 +58,6 @@ public class WebResponseData implements Serializable {
     }
 
     /**
-     * Constructs with a data stream to minimize copying of the entire body.
-     *
-     * @param bodyStream        Stream of this response's body
-     * @param statusCode        Status code from the server
-     * @param statusMessage     Status message from the server
-     * @param responseHeaders   Headers in this response
-     *
-     * @throws IOException on stream errors
-     * @deprecated As of HtmlUnit-2.8.
-     */
-    @Deprecated
-    public WebResponseData(final InputStream bodyStream, final int statusCode,
-            final String statusMessage, final List<NameValuePair> responseHeaders) throws IOException {
-        this(HttpWebConnection.downloadContent(bodyStream), statusCode, statusMessage, responseHeaders);
-    }
-
-    /**
      * Constructs without data stream for subclasses that override getBody().
      *
      * @param statusCode        Status code from the server

@@ -76,17 +76,6 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getContentAsBytes() on the wrapped webResponse object.
-     * @deprecated as of 2.8, use either {@link #getContentAsString()} or {@link #getContentAsStream()}.
-     */
-    @Override
-    @Deprecated
-    public byte[] getContentAsBytes() {
-        return wrappedWebResponse_.getContentAsBytes();
-    }
-
-    /**
-     * {@inheritDoc}
      * The default behavior of this method is to return getContentCharsetOrNull() on the wrapped webResponse object.
      */
     @Override
@@ -155,17 +144,6 @@ public class WebResponseWrapper extends WebResponse {
     @Override
     public String getStatusMessage() {
         return wrappedWebResponse_.getStatusMessage();
-    }
-
-    /**
-     * {@inheritDoc}
-     * The default behavior of this method is to return getRequestSettings() on the wrapped webResponse object.
-     * @deprecated as of 2.8, please use {@link #getWebRequest()} instead
-     */
-    @Override
-    @Deprecated
-    public WebRequest getRequestSettings() {
-        return wrappedWebResponse_.getWebRequest();
     }
 
     /**

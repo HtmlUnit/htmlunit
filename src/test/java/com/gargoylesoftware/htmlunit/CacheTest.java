@@ -251,11 +251,6 @@ class DummyWebResponse extends WebResponse {
     }
 
     @Override
-    public byte[] getContentAsBytes() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
     public String getContentCharset() {
         throw new RuntimeException("not implemented");
     }
@@ -292,11 +287,6 @@ class DummyWebResponse extends WebResponse {
 
     @Override
     public String getStatusMessage() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public WebRequest getRequestSettings() {
         throw new RuntimeException("not implemented");
     }
 
