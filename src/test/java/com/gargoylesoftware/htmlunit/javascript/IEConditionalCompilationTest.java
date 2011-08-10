@@ -18,8 +18,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Test for {@link IEConditionalCompilationScriptPreProcessor}.
@@ -188,6 +188,23 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
             "/*@cc_on @*/\n"
             + "/*@if (true) alert('Alert');\n"
             + "@end @*/ ";
+        testScript(script);
+    }
+
+    /**
+    * As of HtmlUnit-2.9, escaped double quote \" was altered.
+    * @throws Exception if the test fails
+    */
+    @Test
+    @Alerts(IE = "1")
+    public void escapedDoubleQuote() throws Exception {
+        final String script =
+            "/*@cc_on\n"
+            + "document.write(\"\\\"\\\"\");\n"
+            + "alert(1)\n"
+            + "@*/\n"
+            + "</script></html>";
+
         testScript(script);
     }
 }

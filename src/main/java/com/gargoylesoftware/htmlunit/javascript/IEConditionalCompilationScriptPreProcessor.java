@@ -44,9 +44,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProcessor {
 
-    private static final Pattern CC_VARIABLE_PATTERN = Pattern.compile("@\\w+|'[^']*'|\"[^\"]*\"");
+    private static final Pattern CC_VARIABLE_PATTERN = Pattern.compile("@\\w+|'[^']*'");
     private static final Pattern SET_PATTERN = Pattern.compile("@set\\s+(@\\w+)(\\s*=\\s*[\\d\\.]+)");
-    private static final Pattern C_VARIABLE_PATTERN = Pattern.compile("(@_\\w+)|'[^']*'|\"[^\"]*\"");
+    private static final Pattern C_VARIABLE_PATTERN = Pattern.compile("(@_\\w+)|'[^']*'");
     private static final Pattern CC_PROCESS_PATTERN = Pattern.compile("/\\*@end");
 
     private static final Pattern IF1_PATTERN = Pattern.compile("@if\\s*\\(([^\\)]+)\\)");
