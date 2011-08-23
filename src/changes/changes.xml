@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-lang to 3.0.1.
+            </action>
             <action type="remove" dev="asashour">
                 Remove deprecated WebRequestSettings, WebResponseImpl, some BrowserVersion constants,
                 DefaultCredentialsProvider.addProxyCredentials() and WebResponse.getContentAsBytes().

@@ -53,15 +53,15 @@ public final class StringUtils {
     /**
      * Escapes the characters '<', '>' and '&' into their XML entity equivalents. Note that
      * sometimes we have to use this method instead of
-     * {@link org.apache.commons.lang.StringEscapeUtils#escapeXml(String)} or
-     * {@link org.apache.commons.lang.StringEscapeUtils#escapeHtml(String)} because those methods
+     * {@link org.apache.commons.lang3.StringEscapeUtils#escapeXml(String)} or
+     * {@link org.apache.commons.lang3.StringEscapeUtils#escapeHtml(String)} because those methods
      * escape some unicode characters as well.
      *
      * @param s the string to escape
      * @return the escaped form of the specified string
      */
     public static String escapeXmlChars(final String s) {
-        return org.apache.commons.lang.StringUtils.
+        return org.apache.commons.lang3.StringUtils.
                 replaceEach(s, new String[] {"&", "<", ">"}, new String[] {"&amp;", "&lt;", "&gt;"});
     }
 

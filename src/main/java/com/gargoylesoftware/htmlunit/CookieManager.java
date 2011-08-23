@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.collections.set.ListOrderedSet;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.cookie.CookieOrigin;

@@ -160,6 +160,32 @@
                 <configuration>
                     <downloadSources>true</downloadSources>
                     <downloadJavadocs>true</downloadJavadocs>
+                    <additionalBuildcommands>
+                        <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
+                    </additionalBuildcommands>
+                    <additionalProjectnatures>
+                        <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
+                    </additionalProjectnatures>
+                    <additionalConfig>
+                        <file>
+                            <name>.checkstyle</name>
+                            <content>
+<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="false">
+  <local-check-config name="HtmlUnit" location="checkstyle.xml" type="project" description="HtmlUnit">
+    <property name="checkstyle.suppressions.file" value="$${project_loc}/checkstyle_suppressions.xml"/>
+    <property name="checkstyle.header.file" value="$${project_loc}/LICENSE.txt"/>
+    <additional-data name="protect-config-file" value="false"/>
+  </local-check-config>
+  <fileset name="all" enabled="true" check-config-name="HtmlUnit" local="true">
+    <file-match-pattern match-pattern="." include-pattern="true"/>
+  </fileset>
+  <filter name="NonSrcDirs" enabled="true"/>
+</fileset-config>
+]]>
+                            </content>
+                        </file>
+                    </additionalConfig>
                 </configuration>
             </plugin>
             <plugin>
@@ -683,9 +709,9 @@
             <version>3.2.1</version>
         </dependency>
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

@@ -19,7 +19,7 @@ import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.Main;
 import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.ScopeProvider;
 import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.SourceProvider;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;

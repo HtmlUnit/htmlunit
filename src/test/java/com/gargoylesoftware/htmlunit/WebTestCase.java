@@ -39,8 +39,8 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.SerializationUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.SerializationUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
@@ -805,9 +805,8 @@ public abstract class WebTestCase {
      * @param object the object being cloned
      * @return a clone of the specified object
      */
-    @SuppressWarnings("unchecked")
     protected <T extends Serializable> T clone(final T object) {
-        return (T) SerializationUtils.clone(object);
+        return SerializationUtils.clone(object);
     }
 
     /**

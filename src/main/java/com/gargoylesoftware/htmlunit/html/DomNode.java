@@ -25,7 +25,6 @@ import java.util.NoSuchElementException;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.ErrorHandler;
@@ -1396,7 +1395,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see #getByXPath(String)
      */
     public String getCanonicalXPath() {
-        throw new NotImplementedException("Not implemented for nodes of type " + getNodeType());
+        throw new RuntimeException("Method getCanonicalXPath() not implemented for nodes of type " + getNodeType());
     }
 
     /**

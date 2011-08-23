@@ -217,7 +217,7 @@ public final class UrlUtils {
             String query = url.getQuery();
             if (query != null) {
                 if (minimalQueryEncoding) {
-                    query = org.apache.commons.lang.StringUtils.replace(query, " ", "%20");
+                    query = org.apache.commons.lang3.StringUtils.replace(query, " ", "%20");
                 }
                 else {
                     query = encode(query, QUERY_ALLOWED_CHARS, "windows-1252");

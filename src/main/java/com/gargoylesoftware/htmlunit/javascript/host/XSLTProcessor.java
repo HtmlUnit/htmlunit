@@ -29,7 +29,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
