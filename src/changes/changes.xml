@@ -40,7 +40,7 @@
                 Missing history update during window.location.replace(newUrl) fixed.
             </action>
             <action type="fix" dev="rbri" issue="3325124">
-                Fixed NullPointerException in css parser error handler fixed.
+                NullPointerException in css parser error handler fixed.
             </action>
             <action type="fix" dev="rbri" issue="3319397">
                 JavaScript: Fix for null index handling when adding a select option.
