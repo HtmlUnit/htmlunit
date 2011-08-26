@@ -1573,6 +1573,7 @@
         <property name="plugins" notImplemented="true" readable="true" writable="false"/>
         <property name="readyState" readable="true" writable="false">
             <browser name="Internet Explorer"/>
+            <browser name="Firefox" min-version="3.6"/>
         </property>
         <property name="scripts" readable="true" writable="false">
             <browser name="Internet Explorer"/>

@@ -1537,10 +1537,13 @@ public class DocumentTest extends WebTestCase {
 
     /**
      * Test the ReadyState which is an IE feature.
+     * FF supports this since 3.6.
+     * http://sourceforge.net/tracker/?func=detail&aid=3030247&group_id=47038&atid=448266
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "undefined", "undefined" },
+    @Alerts(FF3 = { "undefined", "undefined" },
+            FF3_6 = { "loading", "complete" },
             IE = { "loading", "complete" })
     public void readyState() throws Exception {
         final String html = "<html><head>\n"

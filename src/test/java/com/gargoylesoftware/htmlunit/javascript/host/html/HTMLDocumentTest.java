@@ -24,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
@@ -453,6 +454,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(Browser.IE)
+    @Alerts(
+            FF3 = { "undefined,[object HTMLBodyElement]-undefined,[object HTMLBodyElement]-" },
+            FF3_6 = { "loading,[object HTMLBodyElement]-loading,[object HTMLBodyElement]-" })
     public void readyState() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -479,11 +483,13 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        final String expected = getBrowserVersion().isIE() ? "loading,null-complete,[object]-"
-                : "undefined,[object HTMLBodyElement]-undefined,[object HTMLBodyElement]-";
+        final HtmlPage page = loadPage(html);
         page.getWebClient().waitForBackgroundJavaScript(500);
-        assertEquals(expected, page.<HtmlTextArea>getHtmlElementById("myTextarea").getText());
+
+        final List<String> actual = new LinkedList<String>();
+        actual.add(page.<HtmlTextArea>getHtmlElementById("myTextarea").getText());
+
+        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3397538" due-to="Hartmut Arlt">
+                JavaScript: document property 'readyState' is now available in FF3.6 mode.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-lang to 3.0.1.
             </action>

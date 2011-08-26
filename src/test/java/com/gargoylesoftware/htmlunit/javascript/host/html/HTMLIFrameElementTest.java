@@ -500,7 +500,8 @@ public class HTMLIFrameElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "undefined", "undefined" },
+    @Alerts(FF3 = { "undefined", "undefined" },
+            FF3_6 = { "loading", "complete" },
             IE = { "loading", "complete" })
     public void readyState_IFrame() throws Exception {
         final String html = "<html><head></head>\n"
