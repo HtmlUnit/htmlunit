@@ -298,7 +298,8 @@ public abstract class HtmlElement extends DomElement {
     public String getNodeName() {
         final StringBuilder name = new StringBuilder();
         if (getPrefix() != null) {
-            name.append(getPrefix() + ':');
+            name.append(getPrefix());
+            name.append(':');
         }
         name.append(getLocalName());
         return name.toString().toLowerCase();

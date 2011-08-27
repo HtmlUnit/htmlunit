@@ -19,6 +19,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.impl.cookie.DateParseException;
 import org.apache.http.impl.cookie.DateUtils;
@@ -37,6 +39,8 @@ public class Cache implements Serializable {
 
     /** The maximum size of the cache. */
     private int maxSize_ = 40;
+
+    private static final Pattern DATE_HEADER_PATTERN = Pattern.compile("-?\\d+");
 
     /**
      * The map which holds the cached responses. Note that when keying on URLs, we key on the string version
@@ -191,7 +195,8 @@ public class Cache implements Serializable {
         if (value == null) {
             return null;
         }
-        else if (value.matches("-?\\d+")) {
+        final Matcher matcher = DATE_HEADER_PATTERN.matcher(value);
+        if (matcher.matches()) {
             return new Date();
         }
         try {
