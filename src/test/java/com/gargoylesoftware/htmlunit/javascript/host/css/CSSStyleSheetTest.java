@@ -538,7 +538,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("none")
-    @NotYetImplemented
     public void fontFace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"

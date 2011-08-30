@@ -1984,7 +1984,7 @@ public class WebClientTest extends WebServerTestCase {
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, "<html><body><style></style></body></html>");
         conn.setResponse(URL_SECOND, "<html><body><style>.x{color:red;}</style></body></html>");
-        conn.setResponse(URL_THIRD, "<html><body><style>.x{color</style></body></html>");
+        conn.setResponse(URL_THIRD, "<html><body><style>.x{color{}}}</style></body></html>");
         client.setWebConnection(conn);
 
         final HtmlPage page1 = client.getPage(URL_FIRST);
@@ -1997,7 +1997,7 @@ public class WebClientTest extends WebServerTestCase {
 
         final HtmlPage page3 = client.getPage(URL_THIRD);
         ((HTMLStyleElement) page3.getBody().getFirstChild().getScriptObject()).jsxGet_sheet();
-        assertEquals(3, errors.intValue());
+        assertEquals(2, errors.intValue());
     }
 
     /**
