@@ -668,7 +668,6 @@ public class Node extends SimpleScriptable {
      */
     public ScriptResult fireEvent(final Event event) {
         final HtmlPage page = (HtmlPage) this.<DomNode>getDomNodeOrDie().getPage();
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_124);
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();
         final Object[] args = new Object[] {event};
 
@@ -693,6 +692,8 @@ public class Node extends SimpleScriptable {
                 parents.add(node);
                 node = node.getParentNode();
             }
+
+            final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_124);
             for (int i = parents.size() - 1; i >= 0; i--) {
                 final DomNode curNode = parents.get(i);
                 final Node jsNode = (Node) curNode.getScriptObject();
