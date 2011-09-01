@@ -309,13 +309,16 @@ public class WebClient implements Serializable {
 
         printContentIfNecessary(webResponse);
         loadWebResponseInto(webResponse, webWindow);
-        throwFailingHttpStatusCodeExceptionIfNecessary(webResponse);
 
-        // start execution here.
+        // start execution here
+        // note: we have to do this also of the server reports an error!
+        //       e.g. if the server returns a 404 error page that includes javascript
         if (scriptEngine_ != null) {
             scriptEngine_.registerWindowAndMaybeStartEventLoop(webWindow);
         }
 
+        // check and report problems if needed
+        throwFailingHttpStatusCodeExceptionIfNecessary(webResponse);
         return (P) webWindow.getEnclosedPage();
     }
 
@@ -2185,12 +2188,14 @@ public class WebClient implements Serializable {
                             downloadedResponse.target_, "_self");
                     final Page pageBeforeLoad = win.getEnclosedPage();
                     loadWebResponseInto(downloadedResponse.response_, win);
-                    throwFailingHttpStatusCodeExceptionIfNecessary(downloadedResponse.response_);
 
                     // start execution here.
                     if (scriptEngine_ != null) {
                         scriptEngine_.registerWindowAndMaybeStartEventLoop(win);
                     }
+
+                    // check and report problems if needed
+                    throwFailingHttpStatusCodeExceptionIfNecessary(downloadedResponse.response_);
 
                     if (pageBeforeLoad != win.getEnclosedPage()) {
                         updatedWindows.add(win);

@@ -575,6 +575,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final URL url) throws Exception {
+        return loadPageWithAlerts2(url, 0);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts2(URL)}, but using with timeout.
+     * @param url the URL to use to load the page
+     * @param maxWaitTime the maximum time to wait to get the alerts (im ms)
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final URL url, final long maxWaitTime) throws Exception {
         expandExpectedAlertsVariables(url);
         final String[] expectedAlerts = getExpectedAlerts();
 
@@ -583,7 +594,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final WebDriver driver = getWebDriver();
         driver.get(url.toExternalForm());
 
-        assertEquals(expectedAlerts, getCollectedAlerts(driver));
+        verifyAlerts(maxWaitTime, expectedAlerts, driver);
         return driver;
     }
 

@@ -371,4 +371,26 @@ public class WebClient3Test extends WebDriverTestCase {
         Thread.sleep(1000);
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts ({ "Executed", "later" })
+    public void execJavascriptOnErrorPages() throws Exception {
+        final String errorHtml = "<html>"
+                + "<head>"
+                + "</head>"
+                + "<body>"
+                + "<script type='text/javascript'>"
+                + "  alert('Executed');"
+                + "  setTimeout(\"alert('later')\", 10);"
+                + "</script>"
+                + "</body></html>";
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(URL_FIRST, errorHtml, 404, "not found", "text/html", new ArrayList<NameValuePair>());
+
+        loadPageWithAlerts2(URL_FIRST, 42);
+    }
 }
