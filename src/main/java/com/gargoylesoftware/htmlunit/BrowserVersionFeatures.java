@@ -630,6 +630,9 @@ public enum BrowserVersionFeatures {
     /** Runs <script src="javascript:'[code]'">. */
     HTMLSCRIPT_SRC_JAVASCRIPT,
 
+    /** Trims the value of the type attribute before to verify it. */
+    HTMLSCRIPT_TRIM_TYPE,
+
     /** Have a default value of body.link, body.vLink, etc. */
     HTML_BODY_COLOR,
 

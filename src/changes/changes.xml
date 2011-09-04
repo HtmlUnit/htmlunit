@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3403860">
+                JavaScript: trim value of type attribute before to verify it (FF only).
+            </action>
             <action type="update" dev="rbri">
                 CSS: cssparser updated to 0.9.6-SNAPSHOT.
             </action>

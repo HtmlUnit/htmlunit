@@ -443,14 +443,20 @@ public class HtmlScript extends HtmlElement {
      * @param languageAttribute the language attribute specified in the script tag
      * @return true if the script is JavaScript
      */
-    boolean isJavaScript(final String typeAttribute, final String languageAttribute) {
+    boolean isJavaScript(String typeAttribute, final String languageAttribute) {
+        final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
+
+        if (browserVersion.hasFeature(BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE)) {
+            typeAttribute = typeAttribute.trim();
+        }
+
         if (StringUtils.isNotEmpty(typeAttribute)) {
             if ("text/javascript".equalsIgnoreCase(typeAttribute)
                     || "text/ecmascript".equalsIgnoreCase(typeAttribute)) {
                 return true;
             }
 
-            final boolean appJavascriptSupported = getPage().getWebClient().getBrowserVersion()
+            final boolean appJavascriptSupported = browserVersion
                                 .hasFeature(BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT);
             if (appJavascriptSupported
                     && ("application/javascript".equalsIgnoreCase(typeAttribute)

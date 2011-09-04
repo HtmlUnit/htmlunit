@@ -248,4 +248,27 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Regression test for bug 47038.
+     * http://sourceforge.net/tracker/?func=detail&atid=448266&aid=3403860&group_id=47038
+     * TODO: IE check only done with IE6, check with other versions
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "1", "2", "3" }, IE = "1")
+    public void scriptType() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script type='text/javascript'>alert(1)</script>\n"
+            + "<script type=' text/javascript'>alert(2)</script>\n"
+            + "<script type=' text/javascript '>alert(3)</script>\n"
+            + "<script type=' text / javascript '>alert(4)</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
