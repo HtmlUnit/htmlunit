@@ -18,10 +18,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Unit tests for {@link HTMLScriptElement}.
@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HTMLScriptElementTest extends WebTestCase {
+public class HTMLScriptElementTest extends WebDriverTestCase {
 
     /**
      * Verifies that the <tt>onreadystatechange</tt> handler is invoked correctly.
@@ -76,7 +76,7 @@ public class HTMLScriptElementTest extends WebTestCase {
         final String js = "document.getElementById('myTextarea').value += '4 ';";
 
         getMockWebConnection().setDefaultResponse(js, JAVASCRIPT_MIME_TYPE);
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -85,10 +85,10 @@ public class HTMLScriptElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "1", IE6 = "1", IE8 = "1")
+    @Alerts(FF = "", IE6 = "1", IE8 = "1")
     public void srcWithJavaScriptProtocol_Static() throws Exception {
         final String html = "<html><head><script src='javascript:\"alert(1)\"'></script></head><body></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -97,7 +97,7 @@ public class HTMLScriptElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "1", IE6 = "1", IE8 = "1")
+    @Alerts(FF = "", IE6 = "1", IE8 = "1")
     public void srcWithJavaScriptProtocol_Dynamic() throws Exception {
         final String html =
               "<html><head><title>foo</title><script>\n"
@@ -109,7 +109,7 @@ public class HTMLScriptElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -133,7 +133,7 @@ public class HTMLScriptElementTest extends WebTestCase {
             + "</script></head><body>\n"
             + "<form name='form1'><input type=text name='txt'></form></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -159,7 +159,7 @@ public class HTMLScriptElementTest extends WebTestCase {
             + "  </head>\n"
             + "  <body onload='alert(5)'></body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -175,7 +175,7 @@ public class HTMLScriptElementTest extends WebTestCase {
             + "s.onreadystatechange = function() {alert(window.event);};\n"
             + "document.body.appendChild(s);\n"
             + "</script></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -199,7 +199,7 @@ public class HTMLScriptElementTest extends WebTestCase {
             + "    <script>alert('2')</script>\n"
             + "  </head>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -227,7 +227,7 @@ public class HTMLScriptElementTest extends WebTestCase {
             + "  <body onload='test()'>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -246,6 +246,6 @@ public class HTMLScriptElementTest extends WebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
