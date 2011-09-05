@@ -301,33 +301,6 @@
                 </testResources>
             </build>
         </profile>
-        <profile>
-            <id>mikeCI</id>
-            <activation>
-                <property>
-                    <name>mikeCI</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.7.1</version>
-                        <configuration>
-                            <excludes>
-                                <exclude>**/H*Applet*Test.java</exclude>
-                                <exclude>**/HtmlFileInputTest.java</exclude>
-                            </excludes>
-                            <argLine>-Xmx512m -Xms128m</argLine>
-                            <systemPropertyVariables>
-                                <htmlunit.maven>maven</htmlunit.maven>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
     <reporting>
         <plugins>
