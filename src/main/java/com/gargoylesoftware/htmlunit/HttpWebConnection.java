@@ -36,6 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.net.ssl.SSLPeerUnverifiedException;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
@@ -120,6 +122,7 @@ public class HttpWebConnection implements WebConnection {
     private AbstractHttpClient httpClient_;
     private final WebClient webClient_;
     private String virtualHost_;
+    private boolean isUseInsecureSsl_;
 
     private final CookieSpecFactory htmlUnitCookieSpecFactory_ = new CookieSpecFactory() {
         public CookieSpec newInstance(final HttpParams params) {
@@ -145,19 +148,41 @@ public class HttpWebConnection implements WebConnection {
 
         HttpUriRequest httpMethod = null;
         try {
-            httpMethod = makeHttpMethod(request);
+            try {
+                httpMethod = makeHttpMethod(request);
+            }
+            catch (final URISyntaxException e) {
+                throw new IOException("Unable to create URI from URL: " + url.toExternalForm()
+                        + " (reason: " + e.getMessage() + ")");
+            }
             final HttpHost hostConfiguration = getHostConfiguration(request);
             setProxy(httpClient, request);
             final long startTime = System.currentTimeMillis();
-            final HttpResponse httpResponse = httpClient.execute(hostConfiguration, httpMethod);
+
+            HttpResponse httpResponse = null;
+            try {
+                httpResponse = httpClient.execute(hostConfiguration, httpMethod);
+            }
+            catch (final SSLPeerUnverifiedException s) {
+                //Try to use only SSLv3 instead
+                if (isUseInsecureSsl_) {
+                    try {
+                        HttpWebConnectionInsecureSSL.setUseInsecureSSL(getHttpClient(), true, true);
+                    }
+                    catch (final GeneralSecurityException e) {
+                        throw new RuntimeException(e);
+                    }
+                    httpResponse = httpClient.execute(hostConfiguration, httpMethod);
+                }
+                else {
+                    throw s;
+                }
+            }
+
             final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
             final long endTime = System.currentTimeMillis();
             webClient_.getCookieManager().updateFromState(httpClient.getCookieStore());
             return makeWebResponse(httpResponse, request, downloadedBody, endTime - startTime);
-        }
-        catch (final URISyntaxException e) {
-            throw new IOException("Unable to create URI from URL: " + url.toExternalForm()
-                + " (reason: " + e.getMessage() + ")");
         }
         finally {
             if (httpMethod != null) {
@@ -656,7 +681,8 @@ public class HttpWebConnection implements WebConnection {
      * @throws GeneralSecurityException if a security error occurs
      */
     public void setUseInsecureSSL(final boolean useInsecureSSL) throws GeneralSecurityException {
-        HttpWebConnectionInsecureSSL.setUseInsecureSSL(getHttpClient(), useInsecureSSL);
+        isUseInsecureSsl_ = useInsecureSSL;
+        HttpWebConnectionInsecureSSL.setUseInsecureSSL(getHttpClient(), useInsecureSSL, false);
     }
 
     /**
