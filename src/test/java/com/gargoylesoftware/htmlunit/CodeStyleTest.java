@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -37,6 +39,7 @@ import org.junit.Test;
  */
 public class CodeStyleTest {
 
+    private static final Pattern leadingWhitespace = Pattern.compile("^\\s+");
     private List<String> failures_ = new ArrayList<String>();
 
     /**
@@ -526,7 +529,11 @@ public class CodeStyleTest {
     }
 
     private int getIndentation(final String line) {
-        return line.length() - line.trim().length();
+        final Matcher matcher = leadingWhitespace.matcher(line);
+        if (matcher.find()) {
+            return matcher.end() - matcher.start();
+        }
+        return 0;
     }
 
     /**
