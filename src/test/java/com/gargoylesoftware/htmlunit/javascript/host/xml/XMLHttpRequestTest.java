@@ -970,55 +970,6 @@ public class XMLHttpRequestTest extends WebServerTestCase {
     }
 
     /**
-     * Firefox does not call onreadystatechange handler if sync.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(IE = { "1", "2", "3", "4" })
-    public void testOnreadystatechange_sync() throws Exception {
-        final String html =
-              "<html>\n"
-            + "  <head>\n"
-            + "    <title>XMLHttpRequest Test</title>\n"
-            + "    <script>\n"
-            + "      var request;\n"
-            + "      function test() {\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
-            + "        request.onreadystatechange = onStateChange;\n"
-            + "        request.send('');\n"
-            + "      }\n"
-            + "      function onStateChange() {\n"
-            + "        alert(request.readyState);\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='test()'>\n"
-            + "  </body>\n"
-            + "</html>";
-
-        final String xml =
-              "<xml>\n"
-            + "<content>blah</content>\n"
-            + "<content>blah2</content>\n"
-            + "</xml>";
-
-        final WebClient client = getWebClient();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, xml, "text/xml");
-        client.setWebConnection(conn);
-        client.getPage(URL_FIRST);
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test

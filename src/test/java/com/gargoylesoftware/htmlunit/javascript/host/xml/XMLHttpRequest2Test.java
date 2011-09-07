@@ -31,10 +31,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebRequest;
 
 /**
  * Additional tests for {@link XMLHttpRequest} using already WebDriverTestCase.
@@ -456,5 +456,46 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             writer.write(req.getQueryString() + ',' + req.getContentLength());
             writer.close();
         }
+    }
+
+    /**
+     * Firefox up to 3.6 does not call onreadystatechange handler if sync.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "2", "3", "4" })
+    public void testOnreadystatechange_sync() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var request;\n"
+            + "      function test() {\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        request.onreadystatechange = onStateChange;\n"
+            + "        request.send('');\n"
+            + "      }\n"
+            + "      function onStateChange() {\n"
+            + "        alert(request.readyState);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "<content>blah2</content>\n"
+            + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
     }
 }
