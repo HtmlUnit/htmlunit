@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3405349" due-to="Hartmut Arlt">
+                JavaScript: document property 'activeElement' is now available in FF3.6 mode.
+            </action>
             <action type="fix" dev="asashour">
                 SSL: for web servers which support only SSLv3, try to explicitly reconnect with that version.
             </action>

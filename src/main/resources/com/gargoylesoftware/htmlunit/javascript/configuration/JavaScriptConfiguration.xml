@@ -1525,6 +1525,7 @@
         <property name="activeElement" readable="true" writable="false">
             <doclink url="http://msdn.microsoft.com/en-us/library/ms533065.aspx" descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
+            <browser name="Firefox" min-version="3.6" />
         </property>
         <property name="alinkColor" notImplemented="true" readable="true" writable="false"/>
         <property name="all" readable="true" writable="false"/>

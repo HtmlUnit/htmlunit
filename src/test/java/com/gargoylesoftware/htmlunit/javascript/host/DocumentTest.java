@@ -2272,8 +2272,30 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers({ Browser.IE, Browser.FF3_6 })
     public void activeElement() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  alert(document.activeElement);"
+            + "  function test() { \n"
+            + "     alert(document.activeElement.id);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<input id='text1' onclick='test()'>\n"
+            + "</body></html>";
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlTextInput text1 = page.getHtmlElementById("text1");
+        text1.click();
+        assertEquals(new String[]{"null", "text1"}, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ Browser.IE })
+    public void setActive() throws Exception {
         final String html = "<html><head><script>\n"
             + "  alert(document.activeElement);"
             + "  function test() { \n"
