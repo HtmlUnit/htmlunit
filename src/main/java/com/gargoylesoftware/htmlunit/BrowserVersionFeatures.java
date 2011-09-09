@@ -185,9 +185,6 @@ public enum BrowserVersionFeatures {
     GENERATED_116,
 
     /** Was originally .isIE(). */
-    GENERATED_119,
-
-    /** Was originally .isIE(). */
     GENERATED_120,
 
     /** Was originally .isIE(). */
@@ -649,6 +646,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that the appendChild call throws no exception
      * if the provided note cannot be inserted. */
     JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE,
+
+    /** Indicates that the cloneNode call copies all event listeners. */
+    JS_CLONE_NODE_COPIES_EVENT_LISTENERS,
 
     /** */
     JS_DEFERRED,

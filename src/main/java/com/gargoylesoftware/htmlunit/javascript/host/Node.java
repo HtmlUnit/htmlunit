@@ -246,7 +246,7 @@ public class Node extends SimpleScriptable {
         final DomNode clonedNode = domNode.cloneNode(deep);
 
         final Node jsClonedNode = getJavaScriptNode(clonedNode);
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_119)) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS)) {
             // need to copy the event listener when they exist
             copyEventListenersWhenNeeded(domNode, clonedNode);
         }
