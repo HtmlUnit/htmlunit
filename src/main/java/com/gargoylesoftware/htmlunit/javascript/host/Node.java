@@ -307,8 +307,10 @@ public class Node extends SimpleScriptable {
 
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_120)) {
-                    return newChildNode; // IE silently ignores it
+                // IE silently ignores it
+                if (getBrowserVersion().hasFeature(
+                        BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE)) {
+                    return newChildNode;
                 }
                 throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy");
             }
@@ -359,7 +361,8 @@ public class Node extends SimpleScriptable {
             // if parentNode is null in IE, create a DocumentFragment to be the parentNode
             if (domNode.getParentNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion()
-                    .hasFeature(BrowserVersionFeatures.GENERATED_122)) {
+                    .hasFeature(BrowserVersionFeatures.
+                            JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT_IF_PARENT_IS_NULL)) {
                 final DomDocumentFragment fragment = domNode.getPage().createDomDocumentFragment();
                 fragment.appendChild(domNode);
             }
