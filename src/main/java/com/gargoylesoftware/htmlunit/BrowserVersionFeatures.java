@@ -185,9 +185,6 @@ public enum BrowserVersionFeatures {
     GENERATED_116,
 
     /** Was originally .isIE(). */
-    GENERATED_118,
-
-    /** Was originally .isIE(). */
     GENERATED_119,
 
     /** Was originally .isIE(). */
@@ -644,6 +641,10 @@ public enum BrowserVersionFeatures {
      * If not set name property is required
      */
     JS_ANCHORS_REQUIRES_NAME_OR_ID,
+
+    /** Indicates that the appendChild call create a DocumentFragment to be
+     * the parentNode's parentNode if this was null. */
+    JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT_IF_PARENT_IS_NULL,
 
     /** Indicates that the appendChild call throws no exception
      * if the provided note cannot be inserted. */

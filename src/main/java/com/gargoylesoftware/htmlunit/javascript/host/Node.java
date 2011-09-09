@@ -190,11 +190,12 @@ public class Node extends SimpleScriptable {
             parentNode.appendChild(childDomNode);
             appendedChild = childObject;
 
-            //if the parentNode has null parentNode in IE,
-            //create a DocumentFragment to be the parentNode's parentNode.
+            // if the parentNode has null parentNode in IE,
+            // create a DocumentFragment to be the parentNode's parentNode.
             if (!(parentNode instanceof SgmlPage)
                     && !(this instanceof DocumentFragment) && parentNode.getParentNode() == null
-                    && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_118)) {
+                    && getBrowserVersion().hasFeature(
+                            BrowserVersionFeatures.JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT_IF_PARENT_IS_NULL)) {
                 final DomDocumentFragment fragment = parentNode.getPage().createDomDocumentFragment();
                 fragment.appendChild(parentNode);
             }
