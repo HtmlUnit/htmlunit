@@ -185,9 +185,6 @@ public enum BrowserVersionFeatures {
     GENERATED_116,
 
     /** Was originally .isIE(). */
-    GENERATED_117,
-
-    /** Was originally .isIE(). */
     GENERATED_118,
 
     /** Was originally .isIE(). */
@@ -647,6 +644,10 @@ public enum BrowserVersionFeatures {
      * If not set name property is required
      */
     JS_ANCHORS_REQUIRES_NAME_OR_ID,
+
+    /** Indicates that the appendChild call throws no exception
+     * if the provided note cannot be inserted. */
+    JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE,
 
     /** */
     JS_DEFERRED,

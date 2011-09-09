@@ -169,8 +169,10 @@ public class Node extends SimpleScriptable {
 
             // is the node allowed here?
             if (!isNodeInsertable(childNode)) {
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_117)) {
-                    return childObject; // IE silently ignores it
+                // IE silently ignores it
+                if (getBrowserVersion().hasFeature(
+                        BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE)) {
+                    return childObject;
                 }
 
                 throw asJavaScriptException(
