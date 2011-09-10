@@ -20,12 +20,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * A basic implementation for IE Conditional Compilation.
@@ -125,14 +125,15 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         final StringBuffer sb = new StringBuffer();
         while (m.find()) {
             final String match = m.group();
-            final String toReplace;
+            String toReplace;
             if (match.startsWith("@")) {
                 toReplace = replaceOneCustomCompilationVariable(match);
             }
             else {
                 toReplace = match;
             }
-            m.appendReplacement(sb, sanitizeForAppendReplacement(toReplace));
+            toReplace = StringUtils.sanitizeForAppendReplacement(toReplace);
+            m.appendReplacement(sb, toReplace);
         }
         m.appendTail(sb);
         return sb.toString();
@@ -170,14 +171,15 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
         final StringBuffer sb = new StringBuffer();
         while (m.find()) {
             final String match = m.group();
-            final String toReplace;
+            String toReplace;
             if (match.startsWith("@")) {
                 toReplace = replaceOneVariable(match, browserVersion);
             }
             else {
                 toReplace = match;
             }
-            m.appendReplacement(sb, sanitizeForAppendReplacement(toReplace));
+            toReplace = StringUtils.sanitizeForAppendReplacement(toReplace);
+            m.appendReplacement(sb, toReplace);
         }
         m.appendTail(sb);
         return sb.toString();
@@ -309,19 +311,5 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             }
         }
         return -1;
-    }
-
-    /**
-     * Sanitize a string for use in Matcher.appendReplacement.
-     * Replaces all \ with \\ and $ as \$ because they are used as control
-     * characters in appendReplacement.
-     *
-     * @param toSanitize the string to sanitize
-     * @return sanitized version of the given string
-     */
-    private String sanitizeForAppendReplacement(final String toSanitize) {
-        final String toReplace = StringUtils.replaceEach(toSanitize,
-                new String[] {"\\", "$"}, new String[]{"\\\\", "\\$"});
-        return toReplace;
     }
 }

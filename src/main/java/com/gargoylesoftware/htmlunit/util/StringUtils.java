@@ -315,4 +315,18 @@ public final class StringUtils {
         WebAssert.notNull("date", date);
         return DateUtils.formatDate(date);
     }
+
+    /**
+     * Sanitize a string for use in Matcher.appendReplacement.
+     * Replaces all \ with \\ and $ as \$ because they are used as control
+     * characters in appendReplacement.
+     *
+     * @param toSanitize the string to sanitize
+     * @return sanitized version of the given string
+     */
+    public static String sanitizeForAppendReplacement(final String toSanitize) {
+        final String toReplace = org.apache.commons.lang3.StringUtils.replaceEach(toSanitize,
+                new String[] {"\\", "$"}, new String[]{"\\\\", "\\$"});
+        return toReplace;
+    }
 }

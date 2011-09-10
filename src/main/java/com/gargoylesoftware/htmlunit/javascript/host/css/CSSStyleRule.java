@@ -18,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * A JavaScript object for a CSSStyleRule.
@@ -67,6 +68,7 @@ public class CSSStyleRule extends CSSRule {
             else {
                 fixedName = fixedName.toLowerCase();
             }
+            fixedName = StringUtils.sanitizeForAppendReplacement(fixedName);
             m.appendReplacement(sb, fixedName);
         }
         m.appendTail(sb);

@@ -109,4 +109,19 @@ public class StringUtilsTest extends WebTestCase {
     public void formatColor() throws Exception {
         assertEquals("rgb(1, 12, 13)", StringUtils.formatColor(new Color(1, 12, 13)));
     }
+
+    /**
+     * Test for method {@link StringUtils#sanitizeForAppendReplacement(String)}.
+     */
+    @Test
+    public void sanitizeForAppendReplacement() {
+        assertNull(StringUtils.sanitizeForAppendReplacement(null));
+        assertEquals("", StringUtils.sanitizeForAppendReplacement(""));
+        assertEquals("aBc", StringUtils.sanitizeForAppendReplacement("aBc"));
+
+        assertEquals("\\$1", StringUtils.sanitizeForAppendReplacement("$1"));
+        assertEquals("\\$1\\$2 \\$3", StringUtils.sanitizeForAppendReplacement("$1$2 $3"));
+        assertEquals("\\\\1", StringUtils.sanitizeForAppendReplacement("\\1"));
+        assertEquals("\\\\1\\$2 \\\\3", StringUtils.sanitizeForAppendReplacement("\\1$2 \\3"));
+    }
 }
