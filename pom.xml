@@ -663,6 +663,9 @@
         <contributor>
             <name>Kostadin Chikov</name>
         </contributor>
+        <contributor>
+            <name>Adam Doupe</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

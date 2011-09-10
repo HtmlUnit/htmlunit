@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Adam Doupe
  */
 @RunWith(BrowserRunner.class)
 public class IEConditionalCompilationTest extends WebDriverTestCase {
@@ -137,6 +138,46 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
     @Alerts(IE = "win")
     public void elif() throws Exception {
         final String script = "/*@cc_on @if(@_win32)type='win';@elif(@_mac)type='mac';@end alert(type); @*/";
+        testScript(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "$2")
+    public void dollar_single_quote_in_string() throws Exception {
+        final String script = "/*@cc_on var test='$2'; alert(test);@*/";
+        testScript(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "$2")
+    public void dollar_double_quote_in_string() throws Exception {
+        final String script = "/*@cc_on var test=\"$2\"; alert(test);@*/";
+        testScript(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "\\")
+    public void slashes_in_single_quotes() throws Exception {
+        final String script = "/*@cc_on var test='\\\\\'; alert(test);@*/";
+        testScript(script);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "$")
+    public void slash_dollar_in_single_quotes() throws Exception {
+        final String script = "/*@cc_on var test='\\$\'; alert(test);@*/";
         testScript(script);
     }
 
