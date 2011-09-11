@@ -122,6 +122,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "oneItem.checked: false twoItems.checked: true", "oneItem.checked: true twoItems.checked: false" })
     public void updateStateFirstForOnclickHandler() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -160,10 +161,7 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         assertTrue(oneItem.isChecked());
         assertFalse(twoItems.isChecked());
 
-        final String[] expectedAlerts = {
-            "oneItem.checked: false twoItems.checked: true",
-            "oneItem.checked: true twoItems.checked: false"};
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
