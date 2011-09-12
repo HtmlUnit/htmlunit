@@ -933,7 +933,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public static class ProxyDomNode extends HtmlDivision {
 
         private final DomNode target_;
-        private boolean append_;
+        private final boolean append_;
 
         /**
          * Constructor.
