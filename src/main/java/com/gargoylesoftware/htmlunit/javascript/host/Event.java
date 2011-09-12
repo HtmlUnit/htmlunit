@@ -260,7 +260,7 @@ public class Event extends SimpleScriptable {
     /**
      * The time at which the event was created.
      */
-    private long timeStamp_ = System.currentTimeMillis();
+    private final long timeStamp_ = System.currentTimeMillis();
 
     /**
      * Creates a new event instance.
