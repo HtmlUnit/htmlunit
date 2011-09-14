@@ -20,7 +20,10 @@ import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 
 /**
  * Wrapper for the HTML element "option".
@@ -219,11 +222,36 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * {@inheritDoc}
      */
     @Override
-    protected void doClickAction() throws IOException {
+    protected boolean doClickStateUpdate() throws IOException {
+        boolean changed = false;
         if (!isSelected()) {
             setSelected(true);
+            changed = true;
         }
-        super.doClickAction();
+        super.doClickStateUpdate();
+        return changed;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected ScriptResult doClickFireClickEvent(final Event event) throws IOException {
+        final ScriptResult scriptResult = super.doClickFireClickEvent(event);
+        final boolean triggerClickOption = getPage().getWebClient().getBrowserVersion()
+                .hasFeature(BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO);
+        if (!triggerClickOption) {
+            return scriptResult;
+        }
+
+        if (event.isAborted(scriptResult)) {
+            return scriptResult;
+        }
+
+        final Event optionClickEvent = new MouseEvent(this, MouseEvent.TYPE_CLICK,
+                event.jsxGet_shiftKey(), event.jsxGet_ctrlKey(), event.jsxGet_altKey(),
+            MouseEvent.BUTTON_LEFT);
+        return super.doClickFireClickEvent(optionClickEvent);
     }
 
     /**
@@ -300,5 +328,14 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
             return select;
         }
         return super.getEventTargetElement();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isStateUpdateFirst() {
+        return getPage().getWebClient().getBrowserVersion()
+                .hasFeature(BrowserVersionFeatures.GENERATED_103);
     }
 }

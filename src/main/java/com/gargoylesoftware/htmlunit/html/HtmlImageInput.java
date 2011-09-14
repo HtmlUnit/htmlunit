@@ -100,22 +100,18 @@ public class HtmlImageInput extends HtmlInput {
     }
 
     /**
-     * This method will be called if there either wasn't an onclick handler or there was
-     * but the result of that handler was true. This is the default behavior of clicking
-     * the element. The default implementation returns the current page - subclasses
-     * requiring different behavior (like {@link HtmlSubmitInput}) will override this
-     * method.
-     *
+     * {@inheritDoc}
      * @throws IOException if an IO error occurred
      */
     @Override
-    protected void doClickAction() throws IOException {
+    protected boolean doClickStateUpdate() throws IOException {
         final HtmlForm form = getEnclosingForm();
         if (form != null) {
             form.submit(this);
-            return;
+            return false;
         }
-        super.doClickAction();
+        super.doClickStateUpdate();
+        return false;
     }
 
     /**

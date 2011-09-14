@@ -638,9 +638,14 @@ public class ClickableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "foo", "foo" }, IE8 = { "foo", "foo" }, IE = "foo")
     public void option_onClick() throws Exception {
-        onClickBodyTest("<body><form><select><option id='clickId' onClick='alert(\"foo\")'>\n"
-            + "Option</option></select></form></body>\n");
+        final String htmlContent = "<html><head><title>foo</title></head>\n"
+                + "<body><form><select><option id='clickId' onClick='alert(\"foo\")'>\n"
+                + "Option</option></select></form></body>\n"
+                + "</html>";
+
+        onClickPageTest(htmlContent, 1);
     }
 
     /**

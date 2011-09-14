@@ -75,7 +75,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    protected void doClickAction() throws IOException {
+    protected boolean doClickStateUpdate() throws IOException {
         final String type = getTypeAttribute().toLowerCase();
 
         final HtmlForm form = getEnclosingForm();
@@ -86,9 +86,10 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
             else if ("reset".equals(type)) {
                 form.reset();
             }
-            return;
+            return false;
         }
-        super.doClickAction();
+        super.doClickStateUpdate();
+        return false;
     }
 
     /**

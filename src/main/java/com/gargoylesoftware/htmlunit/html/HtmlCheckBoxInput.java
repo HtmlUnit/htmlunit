@@ -104,15 +104,30 @@ public class HtmlCheckBoxInput extends HtmlInput {
     }
 
     /**
-     * Override so that checkbox can change its state correctly when its
-     * click() method is called.
-     *
      * {@inheritDoc}
      */
     @Override
-    protected void doClickAction() throws IOException {
-        setChecked(!isChecked());
-        super.doClickAction();
+    protected boolean doClickStateUpdate() throws IOException {
+        final boolean isChecked = !isChecked();
+        if (isChecked) {
+            setAttribute("checked", "checked");
+        }
+        else {
+            removeAttribute("checked");
+        }
+        super.doClickStateUpdate();
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doClickFireChangeEvent() throws IOException {
+        if (!getPage().getWebClient().getBrowserVersion()
+                .hasFeature(BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS)) {
+            executeOnChangeHandlerIfAppropriate(this);
+        }
     }
 
     /**

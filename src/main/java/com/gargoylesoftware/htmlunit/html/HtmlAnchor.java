@@ -129,16 +129,18 @@ public class HtmlAnchor extends HtmlElement {
     }
 
     /**
-     * This method will be called if there either wasn't an <tt>onclick</tt> handler, or
-     * there was but the result of that handler was <tt>true</tt>. This is the default
-     * behavior of clicking the element. For this anchor element, the default behavior is
-     * to open the HREF page, or execute the HREF if it is a <tt>javascript:</tt> URL.
-     *
-     * @throws IOException if an IO error occurs
+     * {@inheritDoc}
      */
     @Override
-    protected void doClickAction() throws IOException {
+    protected boolean doClickStateUpdate() throws IOException {
         doClickAction("");
+        return false;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        // TODO Auto-generated method stub
+        return super.clone();
     }
 
     /**

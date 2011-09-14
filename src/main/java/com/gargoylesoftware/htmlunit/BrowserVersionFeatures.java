@@ -109,6 +109,9 @@ public enum BrowserVersionFeatures {
     /** Triggers "onchange" event handler on losing focus. */
     EVENT_ONCHANGE_LOSING_FOCUS,
 
+    /** Triggers "onclick" event handler also for the select option. */
+    EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO,
+
     /** Triggers "onerror" if external loading of an external javascript failed. */
     EVENT_ONERROR_EXTERNAL_JAVASCRIPT,
 

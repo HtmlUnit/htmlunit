@@ -416,10 +416,11 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Performs the click action on the enclosing A tag (if any).
+     * {@inheritDoc}
      * @throws IOException if an IO error occurred
      */
     @Override
-    protected void doClickAction() throws IOException {
+    protected boolean doClickStateUpdate() throws IOException {
         if (getUseMapAttribute() != ATTRIBUTE_NOT_DEFINED) {
             // remove initial '#'
             final String mapName = getUseMapAttribute().substring(1);
@@ -429,22 +430,23 @@ public class HtmlImage extends HtmlElement {
                 if (element instanceof HtmlArea) {
                     final HtmlArea area = (HtmlArea) element;
                     if (area.containsPoint(lastClickX_, lastClickY_)) {
-                        area.doClickAction();
-                        return;
+                        area.doClickStateUpdate();
+                        return false;
                     }
                 }
             }
         }
         final HtmlAnchor anchor = (HtmlAnchor) getEnclosingElement("a");
         if (anchor == null) {
-            return;
+            return false;
         }
         if (getIsmapAttribute() != ATTRIBUTE_NOT_DEFINED) {
             final String suffix = "?" + lastClickX_ + "," + lastClickY_;
             anchor.doClickAction(suffix);
-            return;
+            return false;
         }
-        anchor.doClickAction();
+        anchor.doClickStateUpdate();
+        return false;
     }
 
     /**

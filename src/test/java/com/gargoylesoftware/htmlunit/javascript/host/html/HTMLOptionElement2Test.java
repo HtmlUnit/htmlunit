@@ -21,7 +21,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -73,8 +72,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "a", "b" })
-    @NotYetImplemented
+    @Alerts(FF = { "a", "a", "a" }, IE8 = { "a", "b", "b" }, IE = { "a", "b" })
     //TODO: Needs further investigation of clicking an option without clicking the select
     //See the first comment in http://code.google.com/p/selenium/issues/detail?id=2131#c1
     public void click2() throws Exception {

@@ -62,7 +62,7 @@ public class HtmlArea extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    protected void doClickAction() throws IOException {
+    protected boolean doClickStateUpdate() throws IOException {
         final HtmlPage enclosingPage = (HtmlPage) getPage();
         final WebClient webClient = enclosingPage.getWebClient();
 
@@ -72,7 +72,7 @@ public class HtmlArea extends HtmlElement {
             if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 page.executeJavaScriptIfPossible(
                     href, "javascript url", getStartLineNumber());
-                return;
+                return false;
             }
             final URL url;
             try {
@@ -90,6 +90,7 @@ public class HtmlArea extends HtmlElement {
                     enclosingPage.getResolvedTarget(getTargetAttribute()),
                     request);
         }
+        return false;
     }
 
     /**

@@ -115,6 +115,40 @@ public class HtmlRadioButtonInput extends HtmlInput {
     }
 
     /**
+     * Override of default clickAction that makes this radio button the selected
+     * one when it is clicked.
+     * {@inheritDoc}
+     *
+     * @throws IOException if an IO error occurred
+     */
+    @Override
+    protected boolean doClickStateUpdate() throws IOException {
+        final HtmlForm form = getEnclosingForm();
+        final boolean changed = isChecked() != true;
+
+        final Page page = getPage();
+        if (form != null) {
+            form.setCheckedRadioButton(this);
+        }
+        else if (page instanceof HtmlPage) {
+            ((HtmlPage) page).setCheckedRadioButton(this);
+        }
+        super.doClickStateUpdate();
+        return changed;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doClickFireChangeEvent() throws IOException {
+        if (!getPage().getWebClient().getBrowserVersion()
+                .hasFeature(BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS)) {
+            executeOnChangeHandlerIfAppropriate(this);
+        }
+    }
+
+    /**
      * A radio button does not have a textual representation,
      * but we invent one for it because it is useful for testing.
      * @return "checked" or "unchecked" according to the radio state
@@ -123,18 +157,6 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     public String asText() {
         return super.asText();
-    }
-
-    /**
-     * Override of default clickAction that makes this radio button the selected
-     * one when it is clicked.
-     *
-     * @throws IOException if an IO error occurred
-     */
-    @Override
-    protected void doClickAction() throws IOException {
-        setChecked(true);
-        super.doClickAction();
     }
 
     /**

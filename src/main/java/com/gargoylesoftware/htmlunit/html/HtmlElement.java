@@ -86,7 +86,7 @@ public abstract class HtmlElement extends DomElement {
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
 
     /** The listeners which are to be notified of attribute changes. */
-    private List<HtmlAttributeChangeListener> attributeListeners_;
+    private final List<HtmlAttributeChangeListener> attributeListeners_;
 
     /** The owning form for lost form children. */
     private HtmlForm owningForm_;
@@ -1231,22 +1231,74 @@ public abstract class HtmlElement extends DomElement {
         final Page contentPage = page.getEnclosingWindow().getEnclosedPage();
 
         boolean stateUpdated = false;
+        boolean changed = false;
         if (isStateUpdateFirst()) {
-            doClickAction();
+            changed = doClickStateUpdate();
             stateUpdated = true;
         }
 
         final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
         jsEngine.holdPosponedActions();
-        final ScriptResult scriptResult = fireEvent(event);
+        final ScriptResult scriptResult = doClickFireClickEvent(event);
+
+        boolean eventIsAborted = false;
+        if (null != scriptResult) {
+            eventIsAborted = event.isAborted(scriptResult);
+        }
 
         final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
-        if (!pageAlreadyChanged && !stateUpdated && !event.isAborted(scriptResult)) {
-            doClickAction();
+        if (!pageAlreadyChanged && !stateUpdated && !eventIsAborted) {
+            changed = doClickStateUpdate();
         }
         jsEngine.processPostponedActions();
 
+        if (changed) {
+            doClickFireChangeEvent();
+        }
+
         return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
+    }
+
+    /**
+     * This method implements the control state update part of the click action.
+     *
+     * <p>The default implementation only calls doClickAction on parent's HtmlElement (if any).
+     * Subclasses requiring different behavior (like {@link HtmlSubmitInput}) will override this method.</p>
+     *
+     * @return true if doClickFireEvent method has to be called later on (to signal,
+     * that the value was changed)
+     * @throws IOException if an IO error occurs
+     */
+    protected boolean doClickStateUpdate() throws IOException {
+        final DomNode parent = getParentNode();
+
+        // needed for instance to perform link doClickActoin when a nested element is clicked
+        // it should probably be changed to do this at the event level but currently
+        // this wouldn't work with JS disabled as events are propagated in the host object tree.
+        if (parent instanceof HtmlElement) {
+            return ((HtmlElement) parent).doClickStateUpdate();
+        }
+
+        return false;
+    }
+
+    /**
+     * This method implements the control onchange handler call during the click action.
+     *
+     * @throws IOException if an IO error occurs
+     */
+    protected void doClickFireChangeEvent() throws IOException {
+        // nothing to do, in the default case
+    }
+
+    /**
+     * This method implements the control onclick handler call during the click action.
+     * @param event the click event used
+     * @return the script result
+     * @throws IOException if an IO error occurs
+     */
+    protected ScriptResult doClickFireClickEvent(final Event event) throws IOException {
+        return fireEvent(event);
     }
 
     /**
@@ -1301,27 +1353,6 @@ public abstract class HtmlElement extends DomElement {
             return (P) clickPage;
         }
         return (P) scriptResult.getNewPage();
-    }
-
-    /**
-     * <p>This method will be called if there either wasn't an <tt>onclick</tt> handler, or if
-     * there was one, but the result of that handler wasn't <tt>false</tt>. This is the default
-     * behavior of clicking the element.<p>
-     *
-     * <p>The default implementation only calls doClickAction on parent's HtmlElement (if any).
-     * Subclasses requiring different behavior (like {@link HtmlSubmitInput}) will override this method.</p>
-     *
-     * @throws IOException if an IO error occurs
-     */
-    protected void doClickAction() throws IOException {
-        final DomNode parent = getParentNode();
-
-        // needed for instance to perform link doClickActoin when a nested element is clicked
-        // it should probably be changed to do this at the event level but currently
-        // this wouldn't work with JS disabled as events are propagated in the host object tree.
-        if (parent instanceof HtmlElement) {
-            ((HtmlElement) parent).doClickAction();
-        }
     }
 
     /**
