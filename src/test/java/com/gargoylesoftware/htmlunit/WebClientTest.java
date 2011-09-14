@@ -125,7 +125,7 @@ public class WebClientTest extends WebServerTestCase {
                     catch (final Exception e) {
                         continue;
                     }
-                    for (Constructor< ? > ctor : clazz.getConstructors()) {
+                    for (final Constructor< ? > ctor : clazz.getConstructors()) {
                         if (ctor.getParameterTypes().length == 0) {
                             for (final Method method : clazz.getDeclaredMethods()) {
                                 if (Modifier.isPublic(method.getModifiers())
@@ -1967,6 +1967,7 @@ public class WebClientTest extends WebServerTestCase {
         assertTrue(client.getCssErrorHandler() instanceof DefaultCssErrorHandler);
 
         final MutableInt errors = new MutableInt();
+        final StringBuilder errorUri = new StringBuilder();
         final ErrorHandler handler = new ErrorHandler() {
             public void warning(final CSSParseException exception) throws CSSException {
                 errors.increment();
@@ -1976,6 +1977,7 @@ public class WebClientTest extends WebServerTestCase {
             }
             public void error(final CSSParseException exception) throws CSSException {
                 errors.increment();
+                errorUri.append(exception.getURI());
             }
         };
         client.setCssErrorHandler(handler);
@@ -1998,6 +2000,7 @@ public class WebClientTest extends WebServerTestCase {
         final HtmlPage page3 = client.getPage(URL_THIRD);
         ((HTMLStyleElement) page3.getBody().getFirstChild().getScriptObject()).jsxGet_sheet();
         assertEquals(2, errors.intValue());
+        assertEquals("http://127.0.0.1:" + PORT + "/third/http://127.0.0.1:" + PORT + "/third/", errorUri.toString());
     }
 
     /**

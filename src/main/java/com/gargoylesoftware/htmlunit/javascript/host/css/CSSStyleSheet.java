@@ -103,7 +103,7 @@ public class CSSStyleSheet extends SimpleScriptable {
     private com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList cssRules_;
 
     /** The CSS import rules and their corresponding stylesheets. */
-    private Map<CSSImportRule, CSSStyleSheet> imports_ = new HashMap<CSSImportRule, CSSStyleSheet>();
+    private final Map<CSSImportRule, CSSStyleSheet> imports_ = new HashMap<CSSImportRule, CSSStyleSheet>();
 
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;
@@ -125,6 +125,9 @@ public class CSSStyleSheet extends SimpleScriptable {
     public CSSStyleSheet(final HTMLElement element, final InputSource source, final String uri) {
         setParentScope(element.getWindow());
         setPrototype(getPrototype(CSSStyleSheet.class));
+        if (source != null) {
+            source.setURI(uri);
+        }
         wrapped_ = parseCSS(source);
         uri_ = uri;
         ownerNode_ = element;
@@ -707,7 +710,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         if (StringUtils.isBlank(media)) {
             return true;
         }
-        for (String s : StringUtils.split(media, ',')) {
+        for (final String s : StringUtils.split(media, ',')) {
             final String mediaType = s.trim();
             if ("screen".equals(mediaType) || "all".equals(mediaType)) {
                 return true;

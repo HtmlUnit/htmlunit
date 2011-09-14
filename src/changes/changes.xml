@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3408437" due-to="Anton Kozak">
+                CSS: forward the uri of an style sheet to the cssparser for better error messages.
+            </action>
             <action type="fix" dev="rbri" issue="3401043" due-to="Adam Doupe">
                 JavaScript: IEConditionalCompilationScriptPreProcessor throws exceptions for some scripts.
             </action>
