@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -61,6 +63,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 public class Document extends EventNode {
 
     private static final Log LOG = LogFactory.getLog(Document.class);
+    private static final Pattern TAG_NAME_PATTERN = Pattern.compile("\\w+");
 
     private Window window_;
     private DOMImplementation implementation_;
@@ -364,10 +367,15 @@ public class Document extends EventNode {
         try {
             final BrowserVersion browserVersion = getBrowserVersion();
 
-            if (tagName.startsWith("<") && tagName.endsWith(">")
-                    && browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_153)) {
+            // FF supports document.createElement('div') or supports document.createElement('<div>')
+            // but not document.createElement('<div name="test">')
+            // IE supports also document.createElement('<div name="test">')
+            if (!browserVersion.hasFeature(BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX)
+                  && tagName.startsWith("<") && tagName.endsWith(">")) {
                 tagName = tagName.substring(1, tagName.length() - 1);
-                if (!tagName.matches("\\w+")) {
+
+                final Matcher matcher = TAG_NAME_PATTERN.matcher(tagName);
+                if (!matcher.matches()) {
                     LOG.error("Unexpected exception occurred while parsing HTML snippet");
                     throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                             + tagName);

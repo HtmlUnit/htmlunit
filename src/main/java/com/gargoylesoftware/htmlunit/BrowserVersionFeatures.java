@@ -269,9 +269,6 @@ public enum BrowserVersionFeatures {
     GENERATED_151,
 
     /** Was originally .isFirefox(). */
-    GENERATED_153,
-
-    /** Was originally .isFirefox(). */
     GENERATED_155,
 
     /** Was originally .isFirefox(). */
@@ -649,6 +646,12 @@ public enum BrowserVersionFeatures {
 
     /** */
     JS_DEFERRED,
+
+    /** Javascript function document.createElement can process html code.
+     * e.g. document.createElement("<INPUT TYPE='RADIO' NAME='RADIOTEST' VALUE='First Choice'>")
+     * @see "http://msdn.microsoft.com/en-us/library/ms536389%28v=VS.85%29.aspx"
+     */
+    JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX,
 
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
