@@ -1906,50 +1906,6 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void createElementWithAngleBrackets() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var select = document.createElement('<select>');\n"
-            + "    alert(select.add == undefined);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = { "DIV", "exception" },
-            IE = { "DIV", "false", "mySelect", "0", "OPTION", "myOption", "0" })
-    public void createElementWithHtml() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      alert(document.createElement('<div>').tagName);\n"
-            + "      var select = document.createElement(\"<select id='mySelect'><option>hello</option>\");\n"
-            + "      alert(select.add == undefined);\n"
-            + "      alert(select.id);\n"
-            + "      alert(select.childNodes.length);\n"
-            + "      var option = document.createElement(\"<option id='myOption'>\");\n"
-            + "      alert(option.tagName);\n"
-            + "      alert(option.id);\n"
-            + "      alert(option.childNodes.length);\n"
-            + "    }\n"
-            + "    catch (e) { alert('exception') }\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(FF = { "[object StyleSheetList]", "0", "true" },
             IE = { "[object]", "0", "true" })
     public void styleSheets() throws Exception {
