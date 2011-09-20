@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: StringIndexOutOfBoundsException when calling TextRange.jsxGet_text.
+            </action>
             <action type="fix" dev="rbri" issue="3408437" due-to="Anton Kozak">
                 CSS: forward the uri of an style sheet to the cssparser for better error messages.
             </action>

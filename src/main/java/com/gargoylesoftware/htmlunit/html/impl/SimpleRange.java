@@ -19,6 +19,7 @@ import java.util.Iterator;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.w3c.dom.DOMException;
@@ -442,7 +443,10 @@ public class SimpleRange implements Range, Serializable {
                 return;
             }
             else if (isOffsetChars(startContainer_)) {
-                sb.append(getText(startContainer_).substring(startOffset_, endOffset_));
+                String text = getText(startContainer_);
+                // use commons to deal with wrong offsets
+                text = StringUtils.substring(text, Math.abs(startOffset_), Math.abs(endOffset_));
+                sb.append(text);
                 return;
             }
         }
