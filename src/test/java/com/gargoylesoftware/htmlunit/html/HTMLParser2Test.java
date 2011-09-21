@@ -14,14 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Test class for {@link HTMLParser}.
@@ -70,8 +68,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "<table><tr>before<td></td>after</tr></table>"
             + "</div></body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertNotNull(page);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -93,7 +90,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "<table><tr> <td></td> </tr></table>"
             + "</div></body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertNotNull(page);
+        loadPageWithAlerts2(html);
     }
 }
