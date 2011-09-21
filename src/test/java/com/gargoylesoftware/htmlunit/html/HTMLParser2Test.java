@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -27,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class HTMLParser2Test extends WebDriverTestCase {
@@ -89,6 +91,26 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "<body onload='test()'><div id='testDiv'>"
             + "<table><tr> <td></td> </tr></table>"
             + "</div></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     *
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = "Hi!")
+    @NotYetImplemented
+    public void unclosedCommentsInScript() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script><!--\n"
+            + "alert('Hi!');\n"
+            + "</script>\n"
+            + "<h1>Ho!</h1>\n"
+            + "<!-- some comment -->\n"
+            + "<h1>Hu!</h1>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
