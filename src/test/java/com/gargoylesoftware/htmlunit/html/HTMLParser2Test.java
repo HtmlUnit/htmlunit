@@ -96,7 +96,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
     }
 
     /**
-     *
      * @throws Exception on test failure
      */
     @Test
