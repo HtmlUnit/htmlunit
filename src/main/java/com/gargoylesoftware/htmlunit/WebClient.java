@@ -450,7 +450,7 @@ public class WebClient implements Serializable {
                             if (LOG.isDebugEnabled()) {
                                 LOG.debug("Executing onload handler for " + frame);
                             }
-                            final Event event = new Event(frame, "load");
+                            final Event event = new Event(frame, Event.TYPE_LOAD);
                             ((Node) frame.getScriptObject()).executeEvent(event);
                         }
                     }
