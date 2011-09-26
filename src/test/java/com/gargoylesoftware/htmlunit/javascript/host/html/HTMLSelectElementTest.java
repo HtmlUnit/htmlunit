@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -1091,6 +1092,28 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void deselectMultiple() throws Exception {
+        final String html = "<html><body>\n"
+            + "<form name='f'>\n"
+            + "    <select name='s1' multiple>\n"
+            + "        <option name='option1'>One</option>\n"
+            + "        <option id='it' name='option2' selected='true'>Two</option>\n"
+            + "        <option name='option3'>Three</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver webdriver = loadPageWithAlerts2(html);
+        final WebElement firstOption = webdriver.findElement(By.id("it"));
+        assertTrue(firstOption.isSelected());
+        firstOption.click();
+        assertFalse(firstOption.isSelected());
     }
 
     /**

@@ -6,11 +6,14 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                Click on a selected option in a multiple select element unselects it.
+            </action>
             <action type="fix" dev="rbri">
-                JavaScript: StringIndexOutOfBoundsException when calling TextRange.jsxGet_text.
+                JavaScript: StringIndexOutOfBoundsException when calling TextRange.text.
             </action>
             <action type="fix" dev="rbri" issue="3408437" due-to="Anton Kozak">
-                CSS: forward the uri of an style sheet to the cssparser for better error messages.
+                CSS: forward the URI of an style sheet to the CSS parser for better error messages.
             </action>
             <action type="fix" dev="rbri" issue="3401043" due-to="Adam Doupe">
                 JavaScript: IEConditionalCompilationScriptPreProcessor throws exceptions for some scripts.

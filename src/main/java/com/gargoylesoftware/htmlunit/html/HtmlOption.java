@@ -228,6 +228,10 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
             setSelected(true);
             changed = true;
         }
+        else if (getEnclosingSelect().isMultipleSelectEnabled()) {
+            setSelected(false);
+            changed = true;
+        }
         super.doClickStateUpdate();
         return changed;
     }
