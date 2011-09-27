@@ -190,6 +190,7 @@ public class JavaScriptEngine {
         final Scriptable fallbackCaller = new FallbackCaller();
         ScriptableObject.getObjectPrototype(window).setPrototype(fallbackCaller);
 
+        final boolean putPrototypeInWindowScope = browserVersion.hasFeature(BrowserVersionFeatures.JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE);
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final boolean isWindow = Window.class.getName().equals(config.getHostClass().getName());
             if (isWindow) {
@@ -199,7 +200,7 @@ public class JavaScriptEngine {
                 final ScriptableObject prototype = configureClass(config, window);
                 if (config.isJsObject()) {
                     // for FF, place object with prototype property in Window scope
-                    if (browserVersion.hasFeature(BrowserVersionFeatures.JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE)) {
+                    if (putPrototypeInWindowScope) {
                         final SimpleScriptable obj = config.getHostClass().newInstance();
                         prototype.defineProperty("__proto__", prototype, ScriptableObject.DONTENUM);
                         obj.defineProperty("prototype", prototype, ScriptableObject.DONTENUM); // but not setPrototype!
