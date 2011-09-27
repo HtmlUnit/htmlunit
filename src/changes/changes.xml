@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="add" dev="mguillem" issue="3026460">
+                Add NiceRefreshHandler.
+            </action>
             <action type="fix" dev="mguillem">
                 Click on a selected option in a multiple select element unselects it.
             </action>
