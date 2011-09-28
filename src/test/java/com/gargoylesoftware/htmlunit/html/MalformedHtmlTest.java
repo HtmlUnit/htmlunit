@@ -16,11 +16,12 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Set of tests for ill formed HTML code.
@@ -30,7 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class MalformedHtmlTest extends WebTestCase {
+public class MalformedHtmlTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -48,7 +49,7 @@ public class MalformedHtmlTest extends WebTestCase {
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts2(content);
     }
 
     /**
@@ -77,7 +78,7 @@ public class MalformedHtmlTest extends WebTestCase {
             + "<input type='text' name='text4' id='text4'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts2(content);
     }
 
     /**
@@ -93,7 +94,7 @@ public class MalformedHtmlTest extends WebTestCase {
             + "foo"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts2(content);
     }
 
     /**
@@ -109,7 +110,7 @@ public class MalformedHtmlTest extends WebTestCase {
             + "foo"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts2(content);
     }
 
     /**
@@ -157,7 +158,7 @@ public class MalformedHtmlTest extends WebTestCase {
             + "<tr><td>world</td></tr></table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -172,7 +173,7 @@ public class MalformedHtmlTest extends WebTestCase {
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(content);
+        loadPageWithAlerts2(content);
     }
 
     /**
@@ -194,8 +195,8 @@ public class MalformedHtmlTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("foo", page.getTitleText());
+        final WebDriver webdriver = loadPageWithAlerts2(html);
+        assertEquals("foo", webdriver.getTitle());
     }
 
     /**
@@ -210,7 +211,7 @@ public class MalformedHtmlTest extends WebTestCase {
             + "Go to <a href='http://blah.com>blah</a> now."
             + "<script>alert(document.links.length)</script>"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -225,7 +226,7 @@ public class MalformedHtmlTest extends WebTestCase {
             + "Go to <a href=\"http://blah.com>blah</a> now."
             + "<script>alert(document.links.length)</script>"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
