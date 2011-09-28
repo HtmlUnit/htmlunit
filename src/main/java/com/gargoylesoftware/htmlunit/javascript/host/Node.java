@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +30,18 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
@@ -55,6 +62,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Chris Erskine
  * @author Bruce Faulkner
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class Node extends SimpleScriptable {
 
@@ -199,8 +207,47 @@ public class Node extends SimpleScriptable {
                 final DomDocumentFragment fragment = parentNode.getPage().createDomDocumentFragment();
                 fragment.appendChild(parentNode);
             }
+
+            initInlineFrameIfNeeded(childDomNode);
+            for (final DomNode domNode : childDomNode.getChildren()) {
+                initInlineFrameIfNeeded(domNode);
+            }
+
         }
         return appendedChild;
+    }
+
+    /**
+     * If we have added a new iframe that
+     * had no source attribute, we have to take care the
+     * 'onload' handler is triggered.
+     *
+     * @param childDomNode
+     */
+    private void initInlineFrameIfNeeded(final DomNode childDomNode) {
+        if (childDomNode instanceof HtmlInlineFrame) {
+            final HtmlInlineFrame frame = (HtmlInlineFrame) childDomNode;
+            if (DomElement.ATTRIBUTE_NOT_DEFINED == frame.getSrcAttribute()) {
+                final Page page = frame.getEnclosedPage();
+                if (page instanceof HtmlPage) {
+                    final HtmlPage htmlPage = (HtmlPage) page;
+                    final WebWindow enclosingWindow = htmlPage.getEnclosingWindow();
+                    final WebClient webClient = enclosingWindow.getWebClient();
+                    try {
+                        frame.setContentLoaded();
+                        final HtmlPage temporaryPage = webClient.getPage(
+                            enclosingWindow, new WebRequest(WebClient.URL_ABOUT_BLANK));
+                        temporaryPage.setReadyState(DomNode.READY_STATE_LOADING);
+                    }
+                    catch (final FailingHttpStatusCodeException e) {
+                        // should never occur
+                    }
+                    catch (final IOException e) {
+                        // should never occur
+                    }
+                }
+            }
+        }
     }
 
     private RhinoException asJavaScriptException(final DOMException exception) {

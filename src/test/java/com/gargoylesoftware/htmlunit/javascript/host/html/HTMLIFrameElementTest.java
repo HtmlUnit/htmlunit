@@ -626,21 +626,4 @@ public class HTMLIFrameElementTest extends WebTestCase {
         final HtmlPage framePage = (HtmlPage) frame.getEnclosedPage();
         assertEquals("foo", framePage.getBody().asText());
     }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("loaded")
-    public void onLoad_textFile() throws Exception {
-        final String html =
-              "<html>\n"
-            + "  <body>\n"
-            + "    <iframe id='i' onload='alert(\"loaded\");' src='foo.txt'></iframe>\n"
-            + "  </body>\n"
-            + "</html>";
-
-        getMockWebConnection().setDefaultResponse("hello", "text/plain");
-        loadPageWithAlerts(html);
-    }
 }

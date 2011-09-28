@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
  * @author Ahmed Ashour
  * @author Dmitri Zoubkov
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public abstract class BaseFrame extends HtmlElement {
 
@@ -69,7 +70,7 @@ public abstract class BaseFrame extends HtmlElement {
                 enclosedWindow = new FrameWindow(this);
                 // put about:blank in the window to allow JS to run on this frame before the
                 // real content is loaded
-                final WebClient webClient = getPage().getEnclosingWindow().getWebClient();
+                final WebClient webClient = getPage().getWebClient();
                 final HtmlPage temporaryPage = webClient.getPage(enclosedWindow,
                     new WebRequest(WebClient.URL_ABOUT_BLANK));
                 temporaryPage.setReadyState(READY_STATE_LOADING);
@@ -115,11 +116,13 @@ public abstract class BaseFrame extends HtmlElement {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
      * Changes the state of the contentLoaded_ attribute to true.
      * This is needed, if the content is set from javascript to avoid
      * later overwriting from method com.gargoylesoftware.htmlunit.html.HtmlPage.loadFrames().
      */
-    protected void setContentLoaded() {
+    public void setContentLoaded() {
         contentLoaded_ = true;
     }
 

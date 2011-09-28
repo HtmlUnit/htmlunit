@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3406772">
+                JavaScript: 'onload' handler for iframes was not called if an iframe without
+                src attribute was added from javascript.
+            </action>
             <action type="fix" dev="mguillem">
                 Malformed HTML code: handle nested forms.
             </action>
