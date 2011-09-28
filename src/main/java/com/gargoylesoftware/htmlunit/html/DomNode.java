@@ -1296,7 +1296,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 return null;
             }
             DomNode next = parent.getNextSibling();
-            while (next != null && !type_.isAssignableFrom(next.getClass())) {
+            while (next != null && !isAccepted(next)) {
                 next = next.getNextSibling();
             }
             if (next == null) {
@@ -1307,15 +1307,24 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         private DomNode getFirstChildElement(final DomNode parent) {
             DomNode node = parent.getFirstChild();
-            while (node != null && !type_.isAssignableFrom(node.getClass())) {
+            while (node != null && !isAccepted(node)) {
                 node = node.getNextSibling();
             }
             return node;
         }
 
+        /**
+         * Indicates if the node is accepted. If not it won't be explored at all.
+         * @param node the node to test
+         * @return <code>true</code> if accepted
+         */
+        protected boolean isAccepted(final DomNode node) {
+            return type_.isAssignableFrom(node.getClass());
+        }
+
         private DomNode getNextDomSibling(final DomNode element) {
             DomNode node = element.getNextSibling();
-            while (node != null && !type_.isAssignableFrom(node.getClass())) {
+            while (node != null && !isAccepted(node)) {
                 node = node.getNextSibling();
             }
             return node;

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -247,5 +248,32 @@ public class MalformedHtmlTest extends WebDriverTestCase {
         final String expectedText = "some text" + LINE_SEPARATOR
             + "1\t2";
         assertEquals(expectedText, page.asText());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "inFirst", "inSecond" })
+    public void nestedForms() throws Exception {
+        final String html = "<html><body>\n"
+            + "<form name='TransSearch'>\n"
+            + "<input type='submit' id='button'>\n"
+            + "<table>\n"
+            + "<tr><td><input name='FromDate' value='inFirst'></form></td></tr>\n"
+            + "</table>\n"
+            + "<table>\n"
+            + "<tr><td><form name='ImageSearch'></td></tr>\n"
+            + "<tr><td><input name='FromDate' value='inSecond'></form></td></tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + "alert(document.forms[0].elements['FromDate'].value);\n"
+            + "alert(document.forms[1].elements['FromDate'].value);\n"
+            + "</script>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPageWithAlerts2(html);
+        driver.findElement(By.id("button")).click();
+
+        assertEquals(getDefaultUrl() + "?FromDate=inFirst", driver.getCurrentUrl());
     }
 }

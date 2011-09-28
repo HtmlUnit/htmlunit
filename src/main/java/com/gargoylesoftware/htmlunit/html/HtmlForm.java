@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -287,7 +288,7 @@ public class HtmlForm extends HtmlElement {
     Collection<SubmittableElement> getSubmittableElements(final SubmittableElement submitElement) {
         final List<SubmittableElement> submittableElements = new ArrayList<SubmittableElement>();
 
-        for (final HtmlElement element : getHtmlElementDescendants()) {
+        for (final HtmlElement element : getFormHtmlElementDescendants()) {
             if (isSubmittable(element, submitElement)) {
                 submittableElements.add((SubmittableElement) element);
             }
@@ -375,7 +376,7 @@ public class HtmlForm extends HtmlElement {
      * @return all input elements which are members of this form and have the specified name
      */
     public List<HtmlInput> getInputsByName(final String name) {
-        final List<HtmlInput> list = getElementsByAttribute("input", "name", name);
+        final List<HtmlInput> list = getFormElementsByAttribute("input", "name", name);
 
         // collect inputs from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -384,6 +385,59 @@ public class HtmlForm extends HtmlElement {
             }
         }
         return list;
+    }
+
+    /**
+     * Same as {@link #getElementsByAttribute(String, String, String)} but
+     * ignoring elements that are contained in a nested form.
+     */
+    @SuppressWarnings("unchecked")
+    private <E extends HtmlElement> List<E> getFormElementsByAttribute(
+            final String elementName,
+            final String attributeName,
+            final String attributeValue) {
+
+        final List<E> list = new ArrayList<E>();
+        final String lowerCaseTagName = elementName.toLowerCase();
+
+        for (final HtmlElement next : getFormHtmlElementDescendants()) {
+            if (next.getTagName().equals(lowerCaseTagName)) {
+                final String attValue = next.getAttribute(attributeName);
+                if (attValue != null && attValue.equals(attributeValue)) {
+                    list.add((E) next);
+                }
+            }
+        }
+        return list;
+    }
+
+    /**
+     * Same as {@link #getHtmlElementDescendants} but
+     * ignoring elements that are contained in a nested form.
+     */
+    private Iterable<HtmlElement> getFormHtmlElementDescendants() {
+        final Iterator<HtmlElement> iter = new DescendantElementsIterator<HtmlElement>(HtmlElement.class) {
+            private boolean filterChildrenOfNestedForms_;
+
+            @Override
+            protected boolean isAccepted(final DomNode node) {
+                if (node instanceof HtmlForm) {
+                    filterChildrenOfNestedForms_ = true;
+                    return false;
+                }
+
+                final boolean accepted = super.isAccepted(node);
+                if (accepted && filterChildrenOfNestedForms_) {
+                    return ((HtmlElement) node).getEnclosingForm() == HtmlForm.this;
+                }
+                return accepted;
+            }
+        };
+        return new Iterable<HtmlElement>() {
+            public Iterator<HtmlElement> iterator() {
+                return iter;
+            }
+        };
     }
 
     /**
@@ -411,7 +465,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlSelect} elements in this form that have the specified name
      */
     public List<HtmlSelect> getSelectsByName(final String name) {
-        final List<HtmlSelect> list = getElementsByAttribute("select", "name", name);
+        final List<HtmlSelect> list = getFormElementsByAttribute("select", "name", name);
 
         // collect selects from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -445,7 +499,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlButton} elements in this form that have the specified name
      */
     public List<HtmlButton> getButtonsByName(final String name) {
-        final List<HtmlButton> list = getElementsByAttribute("button", "name", name);
+        final List<HtmlButton> list = getFormElementsByAttribute("button", "name", name);
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -479,7 +533,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlTextArea} elements in this form that have the specified name
      */
     public List<HtmlTextArea> getTextAreasByName(final String name) {
-        final List<HtmlTextArea> list = getElementsByAttribute("textarea", "name", name);
+        final List<HtmlTextArea> list = getFormElementsByAttribute("textarea", "name", name);
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
@@ -744,7 +798,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the inputs in this form with the specified value
      */
     public List<HtmlInput> getInputsByValue(final String value) {
-        final List<HtmlInput> results = getElementsByAttribute("input", "value", value);
+        final List<HtmlInput> results = getFormElementsByAttribute("input", "value", value);
 
         for (final HtmlElement element : getLostChildren()) {
             if (element instanceof HtmlInput && value.equals(element.getAttribute("value"))) {

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -107,9 +108,24 @@ public class HTMLFormElement extends HTMLElement implements Function {
             final HtmlForm htmlForm = getHtmlForm();
 
             elements_ = new HTMLCollection(htmlForm, false, "HTMLFormElement.elements") {
+                private boolean filterChildrenOfNestedForms_;
+
                 @Override
                 protected List<Object> computeElements() {
                     final List<Object> response = super.computeElements();
+                    // it would be more performant to avoid iterating through
+                    // nested forms but as it is a corner case of ill formed HTML
+                    // the needed refactoring would take too much time
+                    // => filter here and not in isMatching as it won't be needed in most
+                    // of the cases
+                    if (filterChildrenOfNestedForms_) {
+                        for (final Iterator<Object> iter = response.iterator(); iter.hasNext();) {
+                            final HtmlElement field = (HtmlElement) iter.next();
+                            if (field.getEnclosingForm() != htmlForm) {
+                                iter.remove();
+                            }
+                        }
+                    }
                     response.addAll(htmlForm.getLostChildren());
                     return response;
                 }
@@ -126,6 +142,11 @@ public class HTMLFormElement extends HTMLElement implements Function {
 
                 @Override
                 protected boolean isMatching(final DomNode node) {
+                    if (node instanceof HtmlForm) {
+                        filterChildrenOfNestedForms_ = true;
+                        return false;
+                    }
+
                     return node instanceof HtmlInput || node instanceof HtmlButton
                         || node instanceof HtmlTextArea || node instanceof HtmlSelect;
                 }
@@ -363,6 +384,9 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     private boolean isAccessibleByIdOrName(final HtmlElement element, final String name) {
         if ((element instanceof FormFieldWithNameHistory && !(element instanceof HtmlImageInput))) {
+            if (element.getEnclosingForm() != getHtmlForm()) {
+                return false; // nested forms
+            }
             final FormFieldWithNameHistory elementWithNames = (FormFieldWithNameHistory) element;
             if (name.equals(elementWithNames.getOriginalName())
                     || name.equals(element.getId())) {

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                Malformed HTML code: handle nested forms.
+            </action>
             <action type="add" dev="mguillem" issue="3026460">
                 Add NiceRefreshHandler.
             </action>
