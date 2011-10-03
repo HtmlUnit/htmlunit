@@ -174,10 +174,13 @@ public class HtmlPage extends SgmlPage {
     @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         final WebWindow enclosingWindow = getEnclosingWindow();
-        if (getWebResponse().getWebRequest().getUrl() == WebClient.URL_ABOUT_BLANK) {
+        final boolean isAboutBlank = getWebResponse().getWebRequest().getUrl() == WebClient.URL_ABOUT_BLANK;
+        boolean isContentLoaded = false;
+        if (isAboutBlank) {
             // a frame contains first a faked "about:blank" before its real content specified by src gets loaded
             if (enclosingWindow instanceof FrameWindow
                     && !((FrameWindow) enclosingWindow).getFrameElement().isContentLoaded()) {
+                isContentLoaded = true;
                 return;
             }
 
@@ -192,8 +195,13 @@ public class HtmlPage extends SgmlPage {
             }
         }
         loadFrames();
-        setReadyState(READY_STATE_COMPLETE);
-        getDocumentElement().setReadyState(READY_STATE_COMPLETE);
+        // don't set the ready state if we really load the blank page into the window
+        // see Node.initInlineFrameIfNeeded()
+        if (!isAboutBlank || isContentLoaded) {
+            setReadyState(READY_STATE_COMPLETE);
+            getDocumentElement().setReadyState(READY_STATE_COMPLETE);
+        }
+
         if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED)) {
             executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         }

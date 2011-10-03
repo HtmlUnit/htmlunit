@@ -86,12 +86,14 @@ public abstract class BaseFrame extends HtmlElement {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
      * Called after the node for the &lt;frame&gt; or &lt;iframe&gt; has been added to the containing page.
      * The node needs to be added first to allow JavaScript in the frame to see the frame in the parent.
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
      *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      */
-    void loadInnerPage() throws FailingHttpStatusCodeException {
+    public void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
         if (source.length() == 0) {
             source = "about:blank";
@@ -101,7 +103,20 @@ public abstract class BaseFrame extends HtmlElement {
 
         final Page enclosedPage = getEnclosedPage();
         if (enclosedPage instanceof HtmlPage) {
-            ((HtmlPage) enclosedPage).setReadyState(READY_STATE_COMPLETE);
+            final HtmlPage htmlPage = (HtmlPage) enclosedPage;
+            final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
+            if (!jsEngine.isScriptRunning()) { 
+                htmlPage.setReadyState(READY_STATE_COMPLETE);
+            }
+            else {
+                final PostponedAction action = new PostponedAction(getPage()) {
+                    @Override
+                    public void execute() throws Exception {
+                        htmlPage.setReadyState(READY_STATE_COMPLETE);
+                    }
+                };
+                jsEngine.addPostponedAction(action);
+            }
         }
     }
 
@@ -116,13 +131,11 @@ public abstract class BaseFrame extends HtmlElement {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
      * Changes the state of the contentLoaded_ attribute to true.
      * This is needed, if the content is set from javascript to avoid
      * later overwriting from method com.gargoylesoftware.htmlunit.html.HtmlPage.loadFrames().
      */
-    public void setContentLoaded() {
+    void setContentLoaded() {
         contentLoaded_ = true;
     }
 

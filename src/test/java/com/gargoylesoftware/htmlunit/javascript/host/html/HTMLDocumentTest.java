@@ -456,7 +456,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @NotYetImplemented(Browser.IE)
     @Alerts(
             FF3 = { "undefined,[object HTMLBodyElement]-undefined,[object HTMLBodyElement]-" },
-            FF3_6 = { "loading,[object HTMLBodyElement]-loading,[object HTMLBodyElement]-" })
+            FF3_6 = { "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-" })
     public void readyState() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

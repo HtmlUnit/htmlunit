@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,13 +29,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -228,24 +222,7 @@ public class Node extends SimpleScriptable {
         if (childDomNode instanceof HtmlInlineFrame) {
             final HtmlInlineFrame frame = (HtmlInlineFrame) childDomNode;
             if (DomElement.ATTRIBUTE_NOT_DEFINED == frame.getSrcAttribute()) {
-                final Page page = frame.getEnclosedPage();
-                if (page instanceof HtmlPage) {
-                    final HtmlPage htmlPage = (HtmlPage) page;
-                    final WebWindow enclosingWindow = htmlPage.getEnclosingWindow();
-                    final WebClient webClient = enclosingWindow.getWebClient();
-                    try {
-                        frame.setContentLoaded();
-                        final HtmlPage temporaryPage = webClient.getPage(
-                            enclosingWindow, new WebRequest(WebClient.URL_ABOUT_BLANK));
-                        temporaryPage.setReadyState(DomNode.READY_STATE_LOADING);
-                    }
-                    catch (final FailingHttpStatusCodeException e) {
-                        // should never occur
-                    }
-                    catch (final IOException e) {
-                        // should never occur
-                    }
-                }
+                frame.loadInnerPage();
             }
         }
     }
