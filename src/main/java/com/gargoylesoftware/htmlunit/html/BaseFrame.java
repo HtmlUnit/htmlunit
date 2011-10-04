@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
+import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 /**
  * Base class for frame and iframe.
@@ -342,7 +343,7 @@ public abstract class BaseFrame extends HtmlElement {
             // When src is set from a script, loading is postponed until script finishes
             // in fact this implementation is probably wrong: JavaScript URL should be
             // first evaluated and only loading, when any, should be postponed.
-            if (!jsEngine.isScriptRunning() || attributeValue.startsWith("javascript:")) {
+            if (!jsEngine.isScriptRunning() || attributeValue.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 loadInnerPageIfPossible(attributeValue);
             }
             else {
