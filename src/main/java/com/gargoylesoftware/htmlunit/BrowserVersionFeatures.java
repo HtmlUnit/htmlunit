@@ -118,6 +118,9 @@ public enum BrowserVersionFeatures {
     /** Triggers "onload" event if external javascript successfully loaded. */
     EVENT_ONLOAD_EXTERNAL_JAVASCRIPT,
 
+    /** Triggers "onload" event if an iframe was created by javascript and added to the page. */
+    EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT,
+
     /** Triggers "onreadystatechange" event. */
     EVENT_ONREADY_STATE_CHANGE,
 

@@ -52,6 +52,7 @@ public abstract class BaseFrame extends HtmlElement {
     private static final Log LOG = LogFactory.getLog(BaseFrame.class);
     private final WebWindow enclosedWindow_;
     private boolean contentLoaded_ = false;
+    private boolean createdByJavascript_ = false;
 
     /**
      * Creates an instance of BaseFrame.
@@ -106,7 +107,7 @@ public abstract class BaseFrame extends HtmlElement {
         if (enclosedPage instanceof HtmlPage) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
             final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
-            if (!jsEngine.isScriptRunning()) { 
+            if (!jsEngine.isScriptRunning()) {
                 htmlPage.setReadyState(READY_STATE_COMPLETE);
             }
             else {
@@ -361,4 +362,24 @@ public abstract class BaseFrame extends HtmlElement {
         }
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Marks this frame as created by javascript. This is needed to handle
+     * some special IE behavior.
+     */
+    public void markAsCreatedByJavascript() {
+        createdByJavascript_ = true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns true if this frame was created by javascript. This is needed to handle
+     * some special IE behavior.
+     * @return true or false
+     */
+    public boolean wasCreatedByJavascript() {
+        return createdByJavascript_;
+    }
 }

@@ -175,12 +175,10 @@ public class HtmlPage extends SgmlPage {
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         final WebWindow enclosingWindow = getEnclosingWindow();
         final boolean isAboutBlank = getWebResponse().getWebRequest().getUrl() == WebClient.URL_ABOUT_BLANK;
-        boolean isContentLoaded = false;
         if (isAboutBlank) {
             // a frame contains first a faked "about:blank" before its real content specified by src gets loaded
             if (enclosingWindow instanceof FrameWindow
                     && !((FrameWindow) enclosingWindow).getFrameElement().isContentLoaded()) {
-                isContentLoaded = true;
                 return;
             }
 
@@ -197,7 +195,7 @@ public class HtmlPage extends SgmlPage {
         loadFrames();
         // don't set the ready state if we really load the blank page into the window
         // see Node.initInlineFrameIfNeeded()
-        if (!isAboutBlank || isContentLoaded) {
+        if (!isAboutBlank) {
             setReadyState(READY_STATE_COMPLETE);
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         }
@@ -1175,6 +1173,18 @@ public class HtmlPage extends SgmlPage {
 
         // If this page was loaded in a frame, execute the version of the event specified on the frame tag.
         if (window instanceof FrameWindow) {
+            if (Event.TYPE_LOAD.equals(eventType)) {
+                // FF always triggers this event for frame windows
+                if (!getWebClient().getBrowserVersion().hasFeature(
+                    BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT)) {
+                    final BaseFrame frame = ((FrameWindow) window).getFrameElement();
+                    // IE triggers this event only in some cases
+                    if (frame.wasCreatedByJavascript()) {
+                        return true;
+                    }
+                }
+            }
+
             final FrameWindow fw = (FrameWindow) window;
             final BaseFrame frame = fw.getFrameElement();
             if (frame.hasEventHandlers("on" + eventType)) {
