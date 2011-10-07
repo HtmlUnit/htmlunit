@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3420124" due-to="Marco Cova">
+                Better error message if browser configuration contains an unknown key.
+            </action>
             <action type="fix" dev="rbri" issue="3406772">
                 JavaScript: 'onload' handler for iframes was not called if an iframe without
                 src attribute was added from javascript.

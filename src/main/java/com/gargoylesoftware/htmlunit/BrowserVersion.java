@@ -58,7 +58,7 @@ public class BrowserVersion implements Serializable {
     private String userAgent_;
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
     private float browserVersionNumeric_;
-    private Set<PluginConfiguration> plugins_ = new HashSet<PluginConfiguration>();
+    private final Set<PluginConfiguration> plugins_ = new HashSet<PluginConfiguration>();
     private final List<BrowserVersionFeatures> features_ = new ArrayList<BrowserVersionFeatures>();
     private final String nickname_;
 
@@ -196,26 +196,27 @@ public class BrowserVersion implements Serializable {
 
     private void initDefaultFeatures() {
         InputStream stream = null;
+        final Properties props = new Properties();
         try {
-            final Properties props = new Properties();
             stream = getClass().getResourceAsStream("/com/gargoylesoftware/htmlunit/javascript/configuration/"
-                + nickname_ + ".properties");
+                    + nickname_ + ".properties");
             props.load(stream);
-            for (final Object key : props.keySet()) {
-                try {
-                    features_.add(BrowserVersionFeatures.valueOf(key.toString()));
-                }
-                catch (final IllegalArgumentException iae) {
-                    throw new RuntimeException("Invalid entry '"
-                        + key + "' found in configuration file for BrowserVersion: " + nickname_);
-                }
-            }
         }
         catch (final Exception e) {
             throw new RuntimeException("Configuration file not found for BrowserVersion: " + nickname_);
         }
         finally {
             IOUtils.closeQuietly(stream);
+        }
+
+        for (final Object key : props.keySet()) {
+            try {
+                features_.add(BrowserVersionFeatures.valueOf(key.toString()));
+            }
+            catch (final IllegalArgumentException iae) {
+                throw new RuntimeException("Invalid entry '"
+                        + key + "' found in configuration file for BrowserVersion: " + nickname_);
+            }
         }
     }
 
