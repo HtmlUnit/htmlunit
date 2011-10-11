@@ -293,9 +293,6 @@ public enum BrowserVersionFeatures {
     GENERATED_162,
 
     /** Was originally .isFirefox(). */
-    GENERATED_163,
-
-    /** Was originally .isFirefox(). */
     GENERATED_164,
 
     /** Was originally .isFirefox(). */
@@ -447,9 +444,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_61,
-
-    /** Was originally .isIE(). */
-    GENERATED_62,
 
     /** Was originally .isIE(). */
     GENERATED_63,
@@ -655,6 +649,14 @@ public enum BrowserVersionFeatures {
      * @see "http://msdn.microsoft.com/en-us/library/ms536389%28v=VS.85%29.aspx"
      */
     JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX,
+
+    /** Javascript property document.domain is lowercase. */
+    JS_DOCUMENT_DOMAIN_IS_LOWERCASE,
+
+    /** Javascript property document.domain
+     * doesn't allow to set domain of about:blank.
+     */
+    JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
 
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,

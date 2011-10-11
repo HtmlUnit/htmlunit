@@ -938,26 +938,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public Object jsxFunction_appendChild(final Object childObject) {
-        if (limitAppendChildToIE() && !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_56)) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_56)) {
             // Firefox does not allow insertion at the document level.
             throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy.");
         }
         // We're emulating IE; we can allow insertion.
         return super.jsxFunction_appendChild(childObject);
-    }
-
-    /**
-     * Returns <tt>true</tt> if this document only allows <tt>appendChild</tt> to be called on
-     * it when emulating IE.
-     *
-     * @return <tt>true</tt> if this document only allows <tt>appendChild</tt> to be called on
-     *         it when emulating IE
-     *
-     * @see HTMLDocument#limitAppendChildToIE()
-     * @see com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument#limitAppendChildToIE()
-     */
-    protected boolean limitAppendChildToIE() {
-        return true;
     }
 
     /**
@@ -1282,7 +1268,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
             domain_ = url.getHost();
             final BrowserVersion browser = getBrowserVersion();
-            if (browser.hasFeature(BrowserVersionFeatures.GENERATED_162)) {
+            if (browser.hasFeature(BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
                 domain_ = domain_.toLowerCase();
             }
         }
@@ -1323,8 +1309,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
         // IE (at least 6) doesn't allow to set domain of about:blank
         if (WebClient.URL_ABOUT_BLANK == getPage().getWebResponse().getWebRequest().getUrl()
-            && browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_62)) {
-            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from about:blank to: \""
+            && browserVersion.hasFeature(BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK)) {
+            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from \"about:blank\" to: \""
                     + newDomain + "\"");
         }
 
@@ -1340,7 +1326,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         // Netscape down shifts the case of the domain
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_163)) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
             domain_ = newDomain.toLowerCase();
         }
         else {
