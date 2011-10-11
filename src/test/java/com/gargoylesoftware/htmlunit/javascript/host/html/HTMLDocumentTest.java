@@ -617,6 +617,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com", "d1.gargoylesoftware.com" })
     public void domainLong() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -630,18 +631,16 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts =
-        {"d4.d3.d2.d1.gargoylesoftware.com", "d4.d3.d2.d1.gargoylesoftware.com", "d1.gargoylesoftware.com"};
-
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(getWebClient(), html, collectedAlerts, new URL("http://d4.d3.d2.d1.gargoylesoftware.com"));
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "localhost", "localhost" })
     public void domainSetSelf() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest(){\n"
@@ -653,11 +652,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"localhost", "localhost"};
-
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(getWebClient(), html, collectedAlerts, new URL("http://localhost"));
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
@@ -1184,6 +1181,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "one", "two", "three", "four" })
     public void cookie_read() throws Exception {
         final WebClient webClient = getWebClientWithMockWebConnection();
 
@@ -1216,8 +1214,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final HtmlPage firstPage = webClient.getPage(url);
         assertEquals("First", firstPage.getTitleText());
 
-        final String[] expectedAlerts = {"one", "two", "three", "four" };
-        assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
