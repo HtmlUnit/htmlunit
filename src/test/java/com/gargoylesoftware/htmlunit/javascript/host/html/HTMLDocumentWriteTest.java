@@ -919,4 +919,26 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * This was causing a StackOverflowError in HtmlUnit-2.10-SNAPSHOT when simulating IE as of 14.10.2011
+     * and probably in release 2.9 as well.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void writeInFrameWithOnload() throws Exception {
+        final String html = "<html><head></head>\n"
+            + "<body>\n"
+            + "<iframe id='theIframe' src='about:blank'></iframe>\n"
+            + "<script>\n"
+            + "var doc = document.getElementById('theIframe').contentWindow.document;\n"
+            + "doc.open();\n"
+            + "doc.write('<html>');\n"
+            + "doc.write('<body onload=\"document.getElementById(\\'foo\\')\">');\n"
+            + "doc.write('</body></html>');\n"
+            + "doc.close();\n"
+            + "</script>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

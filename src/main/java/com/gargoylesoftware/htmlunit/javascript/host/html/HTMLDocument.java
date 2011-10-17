@@ -900,13 +900,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             final URL url = page.getWebResponse().getWebRequest().getUrl();
             final StringWebResponse webResponse = new StringWebResponse(writeBuffer_.toString(), url);
             webResponse.setFromJavascript(true);
-            final WebClient webClient = page.getWebClient();
-            final WebWindow window = page.getEnclosingWindow();
-
-            webClient.loadWebResponseInto(webResponse, window);
-
             writeInCurrentDocument_ = true;
             writeBuffer_.setLength(0);
+
+            final WebClient webClient = page.getWebClient();
+            final WebWindow window = page.getEnclosingWindow();
+            webClient.loadWebResponseInto(webResponse, window);
         }
     }
 

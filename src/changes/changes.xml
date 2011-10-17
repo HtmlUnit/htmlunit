@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3418880">
+                JavaScript: fixed StackOverflowError occurring with onload handlers in documents created with document.write (IE only).
+            </action>
             <action type="fix" dev="rbri" issue="3420124" due-to="Marco Cova">
                 Better error message if browser configuration contains an unknown key.
             </action>
