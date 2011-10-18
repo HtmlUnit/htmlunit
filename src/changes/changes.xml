@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.1.
+            </action>
             <action type="fix" dev="mguillem" issue="3418880">
                 JavaScript: fixed StackOverflowError occurring with onload handlers in documents created with document.write (IE only).
             </action>
