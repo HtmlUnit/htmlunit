@@ -521,9 +521,6 @@ public enum BrowserVersionFeatures {
     GENERATED_88,
 
     /** Was originally .isIE(). */
-    GENERATED_89,
-
-    /** Was originally .isIE(). */
     GENERATED_90,
 
     /** Was originally .isIE(). */
@@ -711,6 +708,11 @@ public enum BrowserVersionFeatures {
 
     /** Javascript selectorText property returns selectors in uppercase. */
     JS_SELECTOR_TEXT_UPPERCASE,
+
+    /** Indicates if calling HTMLSelectElement.add the second parameter
+     * is treated as index like IE does.
+     */
+    JS_SELECT_ADD_SECOND_PARAM_IS_INDEX,
 
     /** Indicates if calling HTMLSelectElement.item with a negative value should throw. */
     JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
