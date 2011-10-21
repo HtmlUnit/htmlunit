@@ -17,7 +17,10 @@ package com.gargoylesoftware.htmlunit.html;
 import java.applet.Applet;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -25,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.applets.AppletClassLoader;
 import com.gargoylesoftware.htmlunit.html.applets.AppletStubImpl;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Wrapper for the HTML element "applet".
@@ -35,14 +39,13 @@ import com.gargoylesoftware.htmlunit.html.applets.AppletStubImpl;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class HtmlApplet extends HtmlElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "applet";
 
-    private boolean downloaded_;
-    private WebResponse appletWebResponse_;
     private Applet applet_;
     private AppletClassLoader appletClassLoader_;
 
@@ -186,7 +189,7 @@ public class HtmlApplet extends HtmlElement {
      * @throws IOException in case of problem
      */
     public Applet getApplet() throws IOException {
-        downloadContentIfNeeded();
+        setupAppletIfNeeded();
         return applet_;
     }
 
@@ -196,38 +199,98 @@ public class HtmlApplet extends HtmlElement {
      * @throws IOException if an error occurs while downloading the content
      */
     @SuppressWarnings("unchecked")
-    private void downloadContentIfNeeded() throws IOException {
-        if (!downloaded_) {
+    private synchronized void setupAppletIfNeeded() throws IOException {
+        final HashMap<String, String> params = new HashMap<String, String>();
+        params.put("name", getNameAttribute());
+
+        params.put("object", getObjectAttribute());
+        params.put("align", getAlignAttribute());
+        params.put("alt", getAltAttribute());
+        params.put("height", getHeightAttribute());
+        params.put("hspace", getHspaceAttribute());
+        params.put("vspace", getVspaceAttribute());
+        params.put("width", getWidthAttribute());
+
+        final DomNodeList<HtmlElement> paramTags = getElementsByTagName("param");
+        for (HtmlElement paramTag : paramTags) {
+            final HtmlParameter parameter = (HtmlParameter) paramTag;
+            params.put(parameter.getNameAttribute(), parameter.getValueAttribute());
+        }
+
+        String codebaseProperty = getCodebaseAttribute();
+        if (StringUtils.isNotEmpty(codebaseProperty)) {
+            params.put("codebase", codebaseProperty);
+        }
+        codebaseProperty = params.get("codebase");
+
+        String archiveProperty = getArchiveAttribute();
+        if (StringUtils.isNotEmpty(archiveProperty)) {
+            params.put("archive", archiveProperty);
+        }
+        archiveProperty = params.get("archive");
+
+        if (null == applet_) {
             final HtmlPage page = (HtmlPage) getPage();
             final WebClient webclient = page.getWebClient();
 
-            final String src = getArchiveAttribute();
-            final URL url = page.getFullyQualifiedUrl(src);
-            appletWebResponse_ = webclient.loadWebResponse(new WebRequest(url));
+            String appletClassName = getCodeAttribute();
+            if (appletClassName.endsWith(".class")) {
+                appletClassName = appletClassName.substring(0, appletClassName.length() - 6);
+            }
 
-            downloaded_ = true;
-        }
+            appletClassLoader_ = new AppletClassLoader();
 
-        appletClassLoader_ = new AppletClassLoader();
-        appletClassLoader_.addToClassPath(appletWebResponse_);
+            final String documentUrl = page.getWebResponse().getWebRequest().getUrl().toExternalForm();
+            String baseUrl = documentUrl;
+            if (StringUtils.isNotEmpty(getCodebaseAttribute())) {
+                // codebase can be relative to the page
+                baseUrl = UrlUtils.resolveUrl(baseUrl, getCodebaseAttribute());
+            }
+            if (!baseUrl.endsWith("/")) {
+                baseUrl = baseUrl + "/";
+            }
 
-        // simple case in a first time: only one class, the applet
-        final String appletClassName = getCodeAttribute();
-        try {
-            final Class<Applet> appletClass = (Class<Applet>) appletClassLoader_.loadClass(appletClassName);
-            applet_ = appletClass.newInstance();
-            applet_.setStub(new AppletStubImpl(this));
-            applet_.init();
-            applet_.start();
-        }
-        catch (final ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        catch (final InstantiationException e) {
-            throw new RuntimeException(e);
-        }
-        catch (final IllegalAccessException e) {
-            throw new RuntimeException(e);
+            // check archive
+            final String[] archives = StringUtils.split(archiveProperty, ',');
+            if (null != archives) {
+                for (int i = 0; i < archives.length; i++) {
+                    String tmpArchive = archives[i].trim();
+                    final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive);
+                    final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
+
+                    WebResponse response = webclient.loadWebResponse(new WebRequest(archiveUrl));
+                    webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
+                    appletClassLoader_.addArchiveToClassPath(response);
+                }
+            }
+
+            // no archive attribute, single class
+            if (null == archives || archives.length == 0)  {
+                final String tempUrl = UrlUtils.resolveUrl(baseUrl, getCodeAttribute());
+                final URL classUrl = UrlUtils.toUrlUnsafe(tempUrl);
+
+                WebResponse response = webclient.loadWebResponse(new WebRequest(classUrl));
+                webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
+                appletClassLoader_.addClassToClassPath(appletClassName, response);
+            }
+
+            try {
+                final Class<Applet> appletClass = (Class<Applet>) appletClassLoader_.loadClass(appletClassName);
+                applet_ = appletClass.newInstance();
+                applet_.setStub(new AppletStubImpl(this, params,
+                        UrlUtils.toUrlUnsafe(baseUrl), UrlUtils.toUrlUnsafe(documentUrl)));
+                applet_.init();
+                applet_.start();
+            }
+            catch (final ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            catch (final InstantiationException e) {
+                throw new RuntimeException(e);
+            }
+            catch (final IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
