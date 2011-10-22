@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlAppletTest extends WebTestCase {
