@@ -131,8 +131,10 @@ public class HtmlAppletTest extends WebTestCase {
 
         final HtmlPage page = webClient.getPage(url);
 
-        page.getHtmlElementById("buttonShowCodeBase").click();
-        page.getHtmlElementById("buttonShowDocumentBase").click();
+        HtmlButton button = page.getHtmlElementById("buttonShowCodeBase");
+        button.click();
+        button = page.getHtmlElementById("buttonShowDocumentBase");
+        button.click();
 
         assertEquals(getExpectedAlerts(), collectedStatus);
     }
