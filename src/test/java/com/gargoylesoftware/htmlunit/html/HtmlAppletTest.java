@@ -114,8 +114,6 @@ public class HtmlAppletTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "CodeBase: 'file:/F:/rbri_work/wet/HtmlUnit/target/test-classes/applets/'",
-              "DocumentBase: 'file:/F:/rbri_work/wet/HtmlUnit/target/test-classes/applets/simpleAppletDoIt.html'" })
     public void callAppletMethodFromJS() throws Exception {
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
@@ -136,6 +134,12 @@ public class HtmlAppletTest extends WebTestCase {
         button = page.getHtmlElementById("buttonShowDocumentBase");
         button.click();
 
-        assertEquals(getExpectedAlerts(), collectedStatus);
+        assertEquals(2, collectedStatus.size());
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).startsWith("CodeBase: 'file:"));
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).endsWith("target/test-classes/applets/'"));
+
+        assertTrue(collectedStatus.get(1), collectedStatus.get(1).startsWith("DocumentBase: 'file:"));
+        assertTrue(collectedStatus.get(1),
+                collectedStatus.get(1).endsWith("target/test-classes/applets/simpleAppletDoIt.html'"));
     }
 }
