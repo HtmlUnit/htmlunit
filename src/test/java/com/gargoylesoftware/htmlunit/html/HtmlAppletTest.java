@@ -111,11 +111,11 @@ public class HtmlAppletTest extends WebTestCase {
     }
 
     /**
-     * Tests calling applet method from JavaScript code.
+     * Tests the codebase and documentbase properties.
      * @throws Exception if the test fails
      */
     @Test
-    public void callAppletMethodFromJS() throws Exception {
+    public void checkAppletBaseWithoutCodebase() throws Exception {
         final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
 
         final WebClient webClient = getWebClient();
@@ -142,5 +142,107 @@ public class HtmlAppletTest extends WebTestCase {
         assertTrue(collectedStatus.get(1), collectedStatus.get(1).startsWith("DocumentBase: 'file:"));
         assertTrue(collectedStatus.get(1),
                 collectedStatus.get(1).endsWith("target/test-classes/applets/simpleAppletDoIt.html'"));
+    }
+
+    /**
+     * Tests the codebase and documentbase properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkAppletBase() throws Exception {
+        final URL url = getClass().getResource("/applets/codebaseApplet.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<String>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        HtmlButton button = page.getHtmlElementById("buttonShowCodeBase");
+        button.click();
+        button = page.getHtmlElementById("buttonShowDocumentBase");
+        button.click();
+
+        assertEquals(2, collectedStatus.size());
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).startsWith("CodeBase: 'file:"));
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).endsWith("target/test-classes/applets/'"));
+
+        assertTrue(collectedStatus.get(1), collectedStatus.get(1).startsWith("DocumentBase: 'file:"));
+        assertTrue(collectedStatus.get(1),
+                collectedStatus.get(1).endsWith("target/test-classes/applets/codebaseApplet.html'"));
+    }
+
+    /**
+     * Tests the codebase and documentbase properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkSubdirAppletBase() throws Exception {
+        final URL url = getClass().getResource("/applets/subdir/codebaseApplet.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<String>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        HtmlButton button = page.getHtmlElementById("buttonShowCodeBase");
+        button.click();
+        button = page.getHtmlElementById("buttonShowDocumentBase");
+        button.click();
+
+        assertEquals(2, collectedStatus.size());
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).startsWith("CodeBase: 'file:"));
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).endsWith("target/test-classes/applets/'"));
+
+        assertTrue(collectedStatus.get(1), collectedStatus.get(1).startsWith("DocumentBase: 'file:"));
+        assertTrue(collectedStatus.get(1),
+                collectedStatus.get(1).endsWith("target/test-classes/applets/subdir/codebaseApplet.html'"));
+    }
+
+    /**
+     * Tests the codebase and documentbase properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkSubdirRelativeAppletBase() throws Exception {
+        final URL url = getClass().getResource("/applets/subdir/archiveRelativeApplet.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<String>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        HtmlButton button = page.getHtmlElementById("buttonShowCodeBase");
+        button.click();
+        button = page.getHtmlElementById("buttonShowDocumentBase");
+        button.click();
+
+        assertEquals(2, collectedStatus.size());
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).startsWith("CodeBase: 'file:"));
+        assertTrue(collectedStatus.get(0), collectedStatus.get(0).endsWith("target/test-classes/applets/subdir/'"));
+
+        assertTrue(collectedStatus.get(1), collectedStatus.get(1).startsWith("DocumentBase: 'file:"));
+        assertTrue(collectedStatus.get(1),
+                collectedStatus.get(1).endsWith("target/test-classes/applets/subdir/archiveRelativeApplet.html'"));
     }
 }
