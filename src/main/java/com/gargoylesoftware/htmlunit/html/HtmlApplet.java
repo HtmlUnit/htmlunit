@@ -212,7 +212,7 @@ public class HtmlApplet extends HtmlElement {
         params.put("width", getWidthAttribute());
 
         final DomNodeList<HtmlElement> paramTags = getElementsByTagName("param");
-        for (HtmlElement paramTag : paramTags) {
+        for (final HtmlElement paramTag : paramTags) {
             final HtmlParameter parameter = (HtmlParameter) paramTag;
             params.put(parameter.getNameAttribute(), parameter.getValueAttribute());
         }
@@ -241,7 +241,7 @@ public class HtmlApplet extends HtmlElement {
             appletClassLoader_ = new AppletClassLoader();
 
             final String documentUrl = page.getWebResponse().getWebRequest().getUrl().toExternalForm();
-            String baseUrl = documentUrl;
+            String baseUrl = UrlUtils.resolveUrl(documentUrl, ".");
             if (StringUtils.isNotEmpty(getCodebaseAttribute())) {
                 // codebase can be relative to the page
                 baseUrl = UrlUtils.resolveUrl(baseUrl, getCodebaseAttribute());
@@ -254,11 +254,11 @@ public class HtmlApplet extends HtmlElement {
             final String[] archives = StringUtils.split(archiveProperty, ',');
             if (null != archives) {
                 for (int i = 0; i < archives.length; i++) {
-                    String tmpArchive = archives[i].trim();
+                    final String tmpArchive = archives[i].trim();
                     final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive);
                     final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
-                    WebResponse response = webclient.loadWebResponse(new WebRequest(archiveUrl));
+                    final WebResponse response = webclient.loadWebResponse(new WebRequest(archiveUrl));
                     webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
                     appletClassLoader_.addArchiveToClassPath(response);
                 }
@@ -269,7 +269,7 @@ public class HtmlApplet extends HtmlElement {
                 final String tempUrl = UrlUtils.resolveUrl(baseUrl, getCodeAttribute());
                 final URL classUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
-                WebResponse response = webclient.loadWebResponse(new WebRequest(classUrl));
+                final WebResponse response = webclient.loadWebResponse(new WebRequest(classUrl));
                 webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
                 appletClassLoader_.addClassToClassPath(appletClassName, response);
             }

@@ -15,12 +15,16 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -103,5 +107,33 @@ public class HtmlAppletTest extends WebTestCase {
         final HtmlApplet appletNode = page.getHtmlElementById("myApp");
 
         assertEquals("net.sourceforge.htmlunit.testapplets.EmptyApplet", appletNode.getApplet().getClass().getName());
+    }
+
+    /**
+     * Tests calling applet method from JavaScript code.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "CodeBase: 'file:/F:/rbri_work/wet/HtmlUnit/target/test-classes/applets/'",
+              "DocumentBase: 'file:/F:/rbri_work/wet/HtmlUnit/target/test-classes/applets/simpleAppletDoIt.html'" })
+    public void callAppletMethodFromJS() throws Exception {
+        final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<String>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        page.getHtmlElementById("buttonShowCodeBase").click();
+        page.getHtmlElementById("buttonShowDocumentBase").click();
+
+        assertEquals(getExpectedAlerts(), collectedStatus);
     }
 }
