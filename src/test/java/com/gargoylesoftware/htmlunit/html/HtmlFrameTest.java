@@ -167,7 +167,7 @@ public class HtmlFrameTest extends WebTestCase {
         final WebClient webClient = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse(failingHtml, 404, "No Found", "text/html");
+        webConnection.setDefaultResponse(failingHtml, 404, "Not Found", "text/html");
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);
         webConnection.setResponse(URL_THIRD, thirdHtml);

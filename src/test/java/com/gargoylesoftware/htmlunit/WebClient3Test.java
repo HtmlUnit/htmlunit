@@ -389,7 +389,7 @@ public class WebClient3Test extends WebDriverTestCase {
                 + "</body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_FIRST, errorHtml, 404, "not found", "text/html", new ArrayList<NameValuePair>());
+        conn.setResponse(URL_FIRST, errorHtml, 404, "Not Found", "text/html", new ArrayList<NameValuePair>());
 
         loadPageWithAlerts2(URL_FIRST, 42);
     }

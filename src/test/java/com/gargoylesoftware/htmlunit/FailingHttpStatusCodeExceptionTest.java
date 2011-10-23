@@ -57,7 +57,7 @@ public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
      */
     @Test(expected = FailingHttpStatusCodeException.class)
     public void failureByGetPage() throws Exception {
-        getMockWebConnection().setDefaultResponse("", 404, "Not found", "text/html");
+        getMockWebConnection().setDefaultResponse("", 404, "Not Found", "text/html");
         getWebClientWithMockWebConnection().getPage(getDefaultUrl());
     }
 
@@ -67,7 +67,7 @@ public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
     @Test(expected = FailingHttpStatusCodeException.class)
     public void failureByClickLink() throws Exception {
         final String html = "<html><body><a href='doesntExist'>go</a></body></html>";
-        getMockWebConnection().setDefaultResponse("", 404, "Not found", "text/html");
+        getMockWebConnection().setDefaultResponse("", 404, "Not Found", "text/html");
         final HtmlPage page = loadPageWithAlerts(html);
         page.getAnchors().get(0).click();
     }

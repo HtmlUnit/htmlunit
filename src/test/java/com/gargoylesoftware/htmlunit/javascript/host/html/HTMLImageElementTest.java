@@ -295,7 +295,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, "foo", 404, "not found", "text/html", new ArrayList<NameValuePair>());
+        conn.setResponse(URL_SECOND, "foo", 404, "Not Found", "text/html", new ArrayList<NameValuePair>());
         client.setWebConnection(conn);
 
         final List<String> actual = new ArrayList<String>();
