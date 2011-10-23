@@ -8,6 +8,8 @@ A simple applet (without display) with a method called doIt(String message) that
    archive='simpleAppletDoIt.jar'
    code='net.sourceforge.htmlunit.testapplets.AppletDoIt'
    width='50' height='50'>
+   <param name='param1' value='value1'>
+   <param name='param2' value='value2'>
  Your browser does not support the applet tag.
 </applet>
 
@@ -16,5 +18,10 @@ A simple applet (without display) with a method called doIt(String message) that
 
 <button onclick="document.applets[0].showCodeBase()" id="buttonShowCodeBase">ShowCodeBase</button>
 <button onclick="document.applets[0].showDocumentBase()" id="buttonShowDocumentBase">ShowDocumentBase</button>
+
+<button onclick="document.applets[0].showParam('param1')" id="buttonParam1">ShowParam1</button>
+<button onclick="document.applets[0].showParam('param2')" id="buttonParam2">ShowParam2</button>
+<button onclick="document.applets[0].showParam('codebase')" id="buttonParamCodebase">ShowParamCodebase</button>
+<button onclick="document.applets[0].showParam('archive')" id="buttonParamArchive">ShowParamArchive</button>
 
 </body></html>

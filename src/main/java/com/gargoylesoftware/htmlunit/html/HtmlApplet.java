@@ -43,6 +43,9 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class HtmlApplet extends HtmlElement {
 
+    private static final String ARCHIVE = "archive";
+    private static final String CODEBASE = "codebase";
+
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "applet";
 
@@ -70,7 +73,7 @@ public class HtmlApplet extends HtmlElement {
      * @return the value of the attribute "codebase" or an empty string if that attribute isn't defined
      */
     public final String getCodebaseAttribute() {
-        return getAttribute("codebase");
+        return getAttribute(CODEBASE);
     }
 
     /**
@@ -81,7 +84,7 @@ public class HtmlApplet extends HtmlElement {
      * @return the value of the attribute "archive" or an empty string if that attribute isn't defined
      */
     public final String getArchiveAttribute() {
-        return getAttribute("archive");
+        return getAttribute(ARCHIVE);
     }
 
     /**
@@ -217,17 +220,18 @@ public class HtmlApplet extends HtmlElement {
             params.put(parameter.getNameAttribute(), parameter.getValueAttribute());
         }
 
-        String codebaseProperty = getCodebaseAttribute();
-        if (StringUtils.isNotEmpty(codebaseProperty)) {
-            params.put("codebase", codebaseProperty);
+        if (StringUtils.isEmpty(params.get(CODEBASE))) {
+            if (StringUtils.isNotEmpty(getCodebaseAttribute())) {
+                params.put(CODEBASE, getCodebaseAttribute());
+            }
         }
-        codebaseProperty = params.get("codebase");
+        final String codebaseProperty = params.get(CODEBASE);
 
-        String archiveProperty = getArchiveAttribute();
-        if (StringUtils.isNotEmpty(archiveProperty)) {
-            params.put("archive", archiveProperty);
+        if (StringUtils.isEmpty(params.get(ARCHIVE))) {
+            if (StringUtils.isNotEmpty(getArchiveAttribute())) {
+                params.put(ARCHIVE, getArchiveAttribute());
+            }
         }
-        archiveProperty = params.get("archive");
 
         if (null == applet_) {
             final HtmlPage page = (HtmlPage) getPage();
@@ -242,16 +246,16 @@ public class HtmlApplet extends HtmlElement {
 
             final String documentUrl = page.getWebResponse().getWebRequest().getUrl().toExternalForm();
             String baseUrl = UrlUtils.resolveUrl(documentUrl, ".");
-            if (StringUtils.isNotEmpty(getCodebaseAttribute())) {
+            if (StringUtils.isNotEmpty(codebaseProperty)) {
                 // codebase can be relative to the page
-                baseUrl = UrlUtils.resolveUrl(baseUrl, getCodebaseAttribute());
+                baseUrl = UrlUtils.resolveUrl(baseUrl, codebaseProperty);
             }
             if (!baseUrl.endsWith("/")) {
                 baseUrl = baseUrl + "/";
             }
 
             // check archive
-            final String[] archives = StringUtils.split(archiveProperty, ',');
+            final String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
             if (null != archives) {
                 for (int i = 0; i < archives.length; i++) {
                     final String tmpArchive = archives[i].trim();

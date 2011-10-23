@@ -245,4 +245,76 @@ public class HtmlAppletTest extends WebTestCase {
         assertTrue(collectedStatus.get(1),
                 collectedStatus.get(1).endsWith("target/test-classes/applets/subdir/archiveRelativeApplet.html'"));
     }
+
+    /**
+     * Tests the parameter support.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkAppletParams() throws Exception {
+        final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<String>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        HtmlButton button = page.getHtmlElementById("buttonParam1");
+        button.click();
+        button = page.getHtmlElementById("buttonParam2");
+        button.click();
+        button = page.getHtmlElementById("buttonParamCodebase");
+        button.click();
+        button = page.getHtmlElementById("buttonParamArchive");
+        button.click();
+
+        assertEquals(4, collectedStatus.size());
+        assertEquals("param1: 'value1'", collectedStatus.get(0));
+        assertEquals("param2: 'value2'", collectedStatus.get(1));
+        assertEquals("codebase: 'null'", collectedStatus.get(2));
+        assertEquals("archive: 'simpleAppletDoIt.jar'", collectedStatus.get(3));
+    }
+
+    /**
+     * Tests the codebase and documentbase properties.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkAppletOverwriteArchive() throws Exception {
+        final URL url = getClass().getResource("/applets/subdir/codebaseParamApplet.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<String>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        HtmlButton button = page.getHtmlElementById("buttonParam1");
+        button.click();
+        button = page.getHtmlElementById("buttonParam2");
+        button.click();
+        button = page.getHtmlElementById("buttonParamCodebase");
+        button.click();
+        button = page.getHtmlElementById("buttonParamArchive");
+        button.click();
+
+        assertEquals(4, collectedStatus.size());
+        assertEquals("param1: 'value1'", collectedStatus.get(0));
+        assertEquals("param2: 'value2'", collectedStatus.get(1));
+        assertEquals("codebase: '..'", collectedStatus.get(2));
+        assertEquals("archive: 'simpleAppletDoIt.jar'", collectedStatus.get(3));
+    }
 }
