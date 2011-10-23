@@ -21,7 +21,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -42,6 +45,8 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  */
 public class HtmlApplet extends HtmlElement {
+
+    private static final Log LOG = LogFactory.getLog(HtmlApplet.class);
 
     private static final String ARCHIVE = "archive";
     private static final String CODEBASE = "codebase";
@@ -263,8 +268,15 @@ public class HtmlApplet extends HtmlElement {
                     final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
                     final WebResponse response = webclient.loadWebResponse(new WebRequest(archiveUrl));
-                    webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
-                    appletClassLoader_.addArchiveToClassPath(response);
+                    try {
+                        webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
+                        appletClassLoader_.addArchiveToClassPath(response);
+                    }
+                    catch (final FailingHttpStatusCodeException e) {
+                        // that is what the browser does, the applet only fails, if
+                        // the main class is not loadable
+                        LOG.error(e.getMessage(), e);
+                    }
                 }
             }
 
@@ -274,8 +286,15 @@ public class HtmlApplet extends HtmlElement {
                 final URL classUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
                 final WebResponse response = webclient.loadWebResponse(new WebRequest(classUrl));
-                webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
-                appletClassLoader_.addClassToClassPath(appletClassName, response);
+                try {
+                    webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
+                    appletClassLoader_.addClassToClassPath(appletClassName, response);
+                }
+                catch (final FailingHttpStatusCodeException e) {
+                    // that is what the browser does, the applet only fails, if
+                    // the main class is not loadable
+                    LOG.error(e.getMessage(), e);
+                }
             }
 
             try {

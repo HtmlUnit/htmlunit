@@ -247,7 +247,7 @@ public class HtmlAppletTest extends WebTestCase {
     }
 
     /**
-     * Tests the parameter support.
+     * Tests the handling of parameters.
      * @throws Exception if the test fails
      */
     @Test
@@ -283,7 +283,7 @@ public class HtmlAppletTest extends WebTestCase {
     }
 
     /**
-     * Tests the codebase and documentbase properties.
+     * Tests the handling of parameters.
      * @throws Exception if the test fails
      */
     @Test
@@ -316,5 +316,63 @@ public class HtmlAppletTest extends WebTestCase {
         assertEquals("param2: 'value2'", collectedStatus.get(1));
         assertEquals("codebase: '..'", collectedStatus.get(2));
         assertEquals("archive: 'simpleAppletDoIt.jar'", collectedStatus.get(3));
+    }
+
+    /**
+     * Tests the processing of an applet definition with wrong archive.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkAppletUnknownArchive() throws Exception {
+        final URL url = getClass().getResource("/applets/unknownArchiveApplet.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<String>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+        final DomNodeList<HtmlElement> applets = page.getElementsByTagName("applet");
+        assertEquals(1, applets.size());
+
+        final HtmlApplet htmlApplet = (HtmlApplet) applets.get(0);
+        try {
+            htmlApplet.getApplet();
+        }
+        catch (final Exception e) {
+            assertEquals("java.lang.ClassNotFoundException: net.sourceforge.htmlunit.testapplets.EmptyApplet",
+                e.getMessage());
+        }
+    }
+
+    /**
+     * Tests the processing of an applet definition with one valid and one wrong archive.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void checkAppletIgnoreUnknownArchive() throws Exception {
+        final URL url = getClass().getResource("/applets/ignoreUnknownArchiveApplet.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<String>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+        final DomNodeList<HtmlElement> applets = page.getElementsByTagName("applet");
+        assertEquals(1, applets.size());
+
+        final HtmlApplet htmlApplet = (HtmlApplet) applets.get(0);
+        htmlApplet.getApplet();
     }
 }

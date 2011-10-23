@@ -1256,6 +1256,16 @@ public class WebClient implements Serializable {
         }
 
         final File file = FileUtils.toFile(cleanUrl);
+        if (!file.exists()) {
+            // construct 404
+            final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
+            compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
+            final WebResponseData responseData =
+                new WebResponseData(
+                    TextUtil.stringToByteArray("File: " + file.getAbsolutePath()), 404, "Not Found", compiledHeaders);
+            return new WebResponse(responseData, webRequest, 0);
+        }
+
         final String contentType = guessContentType(file);
 
         final DownloadedContent content = new DownloadedContent.OnFile(file);
@@ -1482,7 +1492,7 @@ public class WebClient implements Serializable {
                 && method.equals(HttpMethod.GET)) {
                 final WebRequest wrs = new WebRequest(newUrl);
                 wrs.setRequestParameters(parameters);
-                for (Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
+                for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
@@ -1490,7 +1500,7 @@ public class WebClient implements Serializable {
             else if (status <= HttpStatus.SC_SEE_OTHER) {
                 final WebRequest wrs = new WebRequest(newUrl);
                 wrs.setHttpMethod(HttpMethod.GET);
-                for (Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
+                for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
@@ -1801,7 +1811,7 @@ public class WebClient implements Serializable {
      * Keeps track of the current window. Inspired by WebTest's logic to track the current response.
      */
     private static final class CurrentWindowTracker implements WebWindowListener, Serializable {
-        private WebClient webClient_;
+        private final WebClient webClient_;
 
         private CurrentWindowTracker(final WebClient webClient) {
             webClient_ = webClient;
