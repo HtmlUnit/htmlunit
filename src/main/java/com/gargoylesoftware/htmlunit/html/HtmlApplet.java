@@ -202,7 +202,7 @@ public class HtmlApplet extends HtmlElement {
     }
 
     /**
-     * Downloads the associated content specified in the code attribute.
+     * Download the associated content specified in the code attribute.
      *
      * @throws IOException if an error occurs while downloading the content
      */

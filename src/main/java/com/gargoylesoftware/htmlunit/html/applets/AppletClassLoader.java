@@ -50,18 +50,13 @@ public class AppletClassLoader extends URLClassLoader {
     public void addArchiveToClassPath(final WebResponse webResponse) throws IOException {
         // normally content type should be "application/java-archive"
         // but it works when it is not the case
-        try {
-            final File tmpFile = File.createTempFile("HtmlUnit", ".jar");
-            tmpFile.deleteOnExit();
-            final OutputStream output = new FileOutputStream(tmpFile);
-            IOUtils.copy(webResponse.getContentAsStream(), output);
-            output.close();
-            final URL jarUrl = new URL("jar", "", "file:" + tmpFile.getAbsolutePath() + "!/");
-            addURL(jarUrl);
-        }
-        catch (final IOException e) {
-            throw new RuntimeException(e);
-        }
+        final File tmpFile = File.createTempFile("HtmlUnit", ".jar");
+        tmpFile.deleteOnExit();
+        final OutputStream output = new FileOutputStream(tmpFile);
+        IOUtils.copy(webResponse.getContentAsStream(), output);
+        output.close();
+        final URL jarUrl = new URL("jar", "", "file:" + tmpFile.getAbsolutePath() + "!/");
+        addURL(jarUrl);
     }
 
     /**
@@ -76,18 +71,13 @@ public class AppletClassLoader extends URLClassLoader {
         final OutputStream output = new FileOutputStream(tmpFile);
         IOUtils.copy(webResponse.getContentAsStream(), output);
         output.close();
+        final FileInputStream is = new FileInputStream(tmpFile);
         try {
-            final FileInputStream is = new FileInputStream(tmpFile);
-            try {
-                final byte[] bytes = IOUtils.toByteArray(is);
-                defineClass(className, bytes, 0, bytes.length);
-            }
-            finally {
-                is.close();
-            }
+            final byte[] bytes = IOUtils.toByteArray(is);
+            defineClass(className, bytes, 0, bytes.length);
         }
-        catch (final IOException e) {
-            throw new RuntimeException(e);
+        finally {
+            is.close();
         }
     }
 }
