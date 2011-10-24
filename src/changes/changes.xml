@@ -7,6 +7,11 @@
     <body>
         <release version="2.10" date="???" description="Bugfixes">
             <action type="update" dev="rbri">
+                Rewritten applet support; we support now many jar archive files, the codebase attribute, parameters,
+                access to the codebase, documentbase and the parameters from the applet and LiveConnect (at the moment
+                this is only a small stub).
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.1.
             </action>
             <action type="fix" dev="mguillem" issue="3418880">
