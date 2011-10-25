@@ -622,6 +622,12 @@ public enum BrowserVersionFeatures {
     IGNORE_CONTENTS_OF_INNER_HEAD,
 
     /**
+     * The function addEventListener or attachEvent(IE) accepts null as listner
+     * instead of throwing an exception.
+     */
+    JS_ADD_EVENT_LISTENER_ACCEPTS_NULL_LISTENER,
+
+    /**
      * Javascript property anchors includes all anchors with a name or an id property.
      * If not set name property is required
      */

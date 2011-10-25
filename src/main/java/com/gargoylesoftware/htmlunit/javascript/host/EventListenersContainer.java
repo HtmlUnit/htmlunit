@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 import org.apache.commons.logging.Log;
@@ -78,6 +79,15 @@ public class EventListenersContainer implements Serializable {
      * @return <code>true</code> if the listener has been added
      */
     public boolean addEventListener(final String type, final Function listener, final boolean useCapture) {
+        if (null == listener) {
+            final boolean accept = jsNode_.getWindow().getWebWindow().getWebClient()
+                    .getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ADD_EVENT_LISTENER_ACCEPTS_NULL_LISTENER);
+            if (accept) {
+                return true;
+            }
+            throw new EvaluatorException("Could not convert JavaScript argument (Listner was null).");
+        }
+
         final List<Function> listeners = getHandlersOrCreateIt(type).getHandlers(useCapture);
         if (listeners.contains(listener)) {
             if (LOG.isDebugEnabled()) {

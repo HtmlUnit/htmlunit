@@ -203,6 +203,31 @@ public class EventTest extends WebDriverTestCase {
     }
 
     /**
+     * When adding a null event listener browsers react different.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "error", IE = "true")
+    public void testAddEventListener_HandlerNull() throws Exception {
+        final String content
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  if (window.addEventListener) {\n"
+            + "    window.addEventListener('mousedown', null, true);\n"
+            + "  }\n"
+            + "  if (window.attachEvent) {\n"
+            + "    alert(window.attachEvent('mousedown', null));\n"
+            + "  }\n"
+            + "} catch (err) {\n"
+            + "  alert('error');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(content);
+    }
+
+    /**
      * Tests that event fires on key press.
      * @throws Exception if the test fails
      */
