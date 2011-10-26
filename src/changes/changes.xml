@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" due-to="rmillet">
+                JavaScript: JavaScriptExecutor had a memory leak; the list of jobs was never cleaned.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: addEventListener/attachEvent are behaving like the browser if called with
                 null event handler.

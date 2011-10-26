@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -95,9 +96,13 @@ public class JavaScriptExecutor implements Runnable, Serializable {
         JavaScriptJobManager javaScriptJobManager = null;
         JavaScriptJob earliestJob = null;
         // iterate over the list and find the earliest job to run.
-        for (WeakReference<JavaScriptJobManager> jobManagerRef : jobManagerList_) {
-            final JavaScriptJobManager jobManager = jobManagerRef.get();
-            if (jobManager != null) {
+        final Iterator<WeakReference<JavaScriptJobManager>> it = jobManagerList_.iterator();
+        while (it.hasNext()) {
+            final JavaScriptJobManager jobManager = it.next().get();
+            if (jobManager == null) {
+                it.remove();
+            }
+            else {
                 final JavaScriptJob newJob = jobManager.getEarliestJob();
                 if (newJob != null) {
                     if (earliestJob == null || earliestJob.compareTo(newJob) > 0) {
@@ -184,7 +189,7 @@ public class JavaScriptExecutor implements Runnable, Serializable {
     }
 
     private boolean contains(final JavaScriptJobManager newJobManager) {
-        for (WeakReference<JavaScriptJobManager> jobManagerRef : jobManagerList_) {
+        for (final WeakReference<JavaScriptJobManager> jobManagerRef : jobManagerList_) {
             if (jobManagerRef.get() == newJobManager) {
                 return true;
             }
