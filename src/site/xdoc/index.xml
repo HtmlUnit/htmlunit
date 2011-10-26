@@ -31,8 +31,12 @@
                 for an introduction.
             </p>
             <p>
-                HtmlUnit is used as the underlying "browser" by different Open Source tools like <a href="http://webtest.canoo.com/">Canoo WebTest</a>,
-                <a href="http://jwebunit.sourceforge.net/">JWebUnit</a>, <a href="http://webdriver.googlecode.com/">WebDriver</a>, <a href="http://www.jboss.org/jsfunit/">JSFUnit</a>,
+                HtmlUnit is used as the underlying "browser" by different Open Source tools like
+                <a href="http://webtest.canoo.com/">Canoo WebTest</a>,
+                <a href="http://jwebunit.sourceforge.net/">JWebUnit</a>,
+                <a href="http://webdriver.googlecode.com/">WebDriver</a>,
+                <a href="http://www.jboss.org/jsfunit/">JSFUnit</a>,
+                <a href="http://www.wetator.org/">WETATOR</a>,
                 <a href="http://celerity.rubyforge.org/">Celerity</a>, ...
             </p>
             <p>
