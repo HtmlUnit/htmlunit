@@ -129,4 +129,30 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"function goo() {}", "function foo() {}" },
+            FF = {"function goo() {\n}", "foo error" })
+    @NotYetImplemented
+    public void functionForwardDeclartion() throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  if (true) {\n"
+            + "    alert(goo);\n"
+            + "    try {\n"
+            + "      alert(foo);\n"
+            + "    } catch (e) {\n"
+            + "      alert('foo error');\n"
+            + "    }\n"
+            + "    function foo() {}\n"
+            + "  }\n"
+            + "  function goo() {}\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
