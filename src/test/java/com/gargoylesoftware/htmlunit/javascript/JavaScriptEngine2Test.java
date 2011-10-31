@@ -163,17 +163,21 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "undefined", "foo error" })
+    @Alerts(FF = { "undefined", "foo error" },
+            IE = {"function foo() {}", "function foo() {}" })
     @NotYetImplemented
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
+            + "if (true) {\n"
             + "  try {\n"
             + "    alert(window.foo);\n"
             + "    alert(foo);\n"
             + "  } catch (e) {\n"
             + "    alert('foo error');\n"
             + "  }\n"
+            + "  function foo() {}\n"
+            + "}\n"
             + "</script>\n"
             + "</body></html>";
 
