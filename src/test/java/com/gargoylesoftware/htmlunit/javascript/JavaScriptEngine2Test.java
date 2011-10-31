@@ -21,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
@@ -134,22 +135,45 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"function goo() {}", "function foo() {}" },
-            FF = {"function goo() {\n}", "foo error" })
-    @NotYetImplemented
-    public void functionForwardDeclartion() throws Exception {
+    @Alerts(IE = {"in goo", "in hoo", "in foo" },
+            FF = {"in goo", "in hoo", "foo error" })
+    @NotYetImplemented(Browser.IE)
+    public void functionDeclaredForwardInBlock() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
             + "  if (true) {\n"
-            + "    alert(goo);\n"
+            + "    goo();\n"
+            + "    function hoo() { alert('in hoo'); };\n"
             + "    try {\n"
-            + "      alert(foo);\n"
+            + "      hoo();\n"
+            + "      foo();\n"
             + "    } catch (e) {\n"
             + "      alert('foo error');\n"
             + "    }\n"
-            + "    function foo() {}\n"
+            + "    function foo() { alert('in foo'); };\n"
             + "  }\n"
-            + "  function goo() {}\n"
+            + "  function goo() { alert('in goo'); };\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "undefined", "foo error" })
+    @NotYetImplemented
+    public void variableNotDefined() throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    alert(window.foo);\n"
+            + "    alert(foo);\n"
+            + "  } catch (e) {\n"
+            + "    alert('foo error');\n"
+            + "  }\n"
             + "</script>\n"
             + "</body></html>";
 
