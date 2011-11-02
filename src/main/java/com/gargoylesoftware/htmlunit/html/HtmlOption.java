@@ -76,21 +76,35 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @return the page that occupies this window after this change is made (may or
      *         may not be the same as the original page)
      */
-    public Page setSelected(boolean selected) {
+    public Page setSelected(final boolean selected) {
+        setSelected(selected, true);
+        return getPage();
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Sets the selected state of this option. This will possibly also change the
+     * selected properties of sibling option elements.
+     *
+     * @param selected true if this option should be selected
+     * @param invokeOnFocus whether to set focus or not.
+     */
+    public void setSelected(boolean selected, final boolean invokeOnFocus) {
         if (selected == isSelected()) {
-            return getPage();
+            return;
         }
         final HtmlSelect select = getEnclosingSelect();
         if (select != null) {
             if (!select.isMultipleSelectEnabled() && select.getOptionSize() == 1) {
                 selected = true;
             }
-            return select.setSelectedAttribute(this, selected);
+            select.setSelectedAttribute(this, selected, invokeOnFocus);
+            return;
         }
         // for instance from JS for an option created by document.createElement('option')
         // and not yet added to a select
         setSelectedInternal(selected);
-        return getPage();
     }
 
     /**

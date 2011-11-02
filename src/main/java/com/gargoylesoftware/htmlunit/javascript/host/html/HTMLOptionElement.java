@@ -136,15 +136,15 @@ public class HTMLOptionElement extends FormChild {
         final HtmlOption optionNode = getDomNodeOrNull();
         final HtmlSelect enclosingSelect = optionNode.getEnclosingSelect();
         if (!selected && optionNode.isSelected()
-                && enclosingSelect != null & !enclosingSelect.isMultipleSelectEnabled()) {
+                && enclosingSelect != null && !enclosingSelect.isMultipleSelectEnabled()) {
 
             // un-selecting selected option has no effect in IE and selects first option in FF
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLOPTION_UNSELECT_SELECTS_FIRST)) {
-                enclosingSelect.getOption(0).setSelected(true);
+                enclosingSelect.getOption(0).setSelected(true, false);
             }
         }
         else {
-            optionNode.setSelected(selected);
+            optionNode.setSelected(selected, false);
         }
     }
 

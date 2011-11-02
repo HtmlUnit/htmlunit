@@ -130,4 +130,28 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void selectFromJSTriggersNoFocusEvent() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var sel = document.form1.select1;\n"
+            + "  sel.options[1].selected = true;\n"
+            + "  alert(sel.selectedIndex);\n"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'>\n"
+            + "    <select name='select1' onfocus='alert(\"focus\")'>\n"
+            + "        <option value='option1' name='option1'>One</option>\n"
+            + "        <option value='option2' name='option2'>Two</option>\n"
+            + "    </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
