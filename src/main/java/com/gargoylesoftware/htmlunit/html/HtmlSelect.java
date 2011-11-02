@@ -49,7 +49,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "select";
 
-    private String originalName_;
+    private final String originalName_;
     private Collection<String> previousNames_ = Collections.emptySet();
 
     /**
@@ -296,7 +296,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      *
      * @param isSelected true if the option is to become selected
      * @param selectedOption the value of the option that is to change
-     * @param invokeOnFocus whether to set focus or no.
+     * @param invokeOnFocus whether to set focus or not.
      * @param <P> the page type
      * @return the page contained in the current window as returned
      * by {@link com.gargoylesoftware.htmlunit.WebClient#getCurrentWindow()}
