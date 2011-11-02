@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: Selecting an option via javascript (e.g. sel.options[1].selected = true)
+                no longer triggers the focus event.
+            </action>
             <action type="fix" dev="rbri" due-to="rmillet">
                 JavaScript: JavaScriptExecutor had a memory leak; the list of jobs was never cleaned.
             </action>
