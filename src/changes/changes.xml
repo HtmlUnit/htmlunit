@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3072010">
+                JavaScript: NPE when the event handler performs only preventDefault().
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: Selecting an option via javascript (e.g. sel.options[1].selected = true)
                 no longer triggers the focus event.

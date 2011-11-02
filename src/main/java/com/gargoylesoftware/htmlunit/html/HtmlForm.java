@@ -110,6 +110,10 @@ public class HtmlForm extends HtmlElement {
                 isPreventDefault_ = false;
                 final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
                 if (isPreventDefault_) {
+                    // null means 'nothing executed'
+                    if (scriptResult == null) {
+                        return htmlPage;
+                    }
                     return scriptResult.getNewPage();
                 }
             }

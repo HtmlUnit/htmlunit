@@ -44,7 +44,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -254,7 +253,6 @@ public class HtmlFormTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
     @Alerts("clicked")
     public void submit_onSubmitHandler_preventDefaultOnly() throws Exception {
         final String firstHtml
