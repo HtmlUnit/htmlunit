@@ -72,12 +72,14 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
+import org.apache.http.cookie.CookieAttributeHandler;
 import org.apache.http.cookie.CookieIdentityComparator;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookiePathComparator;
 import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.CookieSpecFactory;
 import org.apache.http.cookie.MalformedCookieException;
+import org.apache.http.cookie.SetCookie;
 import org.apache.http.cookie.params.CookieSpecPNames;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -124,11 +126,7 @@ public class HttpWebConnection implements WebConnection {
     private String virtualHost_;
     private boolean isUseInsecureSsl_;
 
-    private final CookieSpecFactory htmlUnitCookieSpecFactory_ = new CookieSpecFactory() {
-        public CookieSpec newInstance(final HttpParams params) {
-            return new HtmlUnitBrowserCompatCookieSpec();
-        }
-    };
+    private final CookieSpecFactory htmlUnitCookieSpecFactory_;
 
     /**
      * Creates a new HTTP web connection instance.
@@ -136,6 +134,11 @@ public class HttpWebConnection implements WebConnection {
      */
     public HttpWebConnection(final WebClient webClient) {
         webClient_ = webClient;
+        htmlUnitCookieSpecFactory_ = new CookieSpecFactory() {
+            public CookieSpec newInstance(final HttpParams params) {
+                return new HtmlUnitBrowserCompatCookieSpec(webClient_.getIncorrectnessListener());
+            }
+        };
     }
 
     /**
@@ -709,7 +712,7 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
      */
     private static final Comparator<Cookie> COOKIE_COMPARATOR = new CookiePathComparator();
 
-    HtmlUnitBrowserCompatCookieSpec() {
+    HtmlUnitBrowserCompatCookieSpec(final IncorrectnessListener incorrectnessListener) {
         super();
         final BasicPathHandler pathHandler = new BasicPathHandler() {
             @Override
@@ -718,6 +721,30 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
             }
         };
         registerAttribHandler(ClientCookie.PATH_ATTR, pathHandler);
+
+        final CookieAttributeHandler original = getAttribHandler(ClientCookie.EXPIRES_ATTR);
+        final CookieAttributeHandler wrapper = new CookieAttributeHandler() {
+            public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
+                original.validate(cookie, origin);
+            }
+
+            public void parse(final SetCookie cookie, String value) throws MalformedCookieException {
+                if (value.startsWith("\"") && value.endsWith("\"")) {
+                    value = value.substring(1, value.length() - 1);
+                }
+                try {
+                    original.parse(cookie, value);
+                }
+                catch (final MalformedCookieException e) {
+                    incorrectnessListener.notify("Incorrect cookie expriation time: " + value, this);
+                }
+            }
+
+            public boolean match(final Cookie cookie, final CookieOrigin origin) {
+                return original.match(cookie, origin);
+            }
+        };
+        registerAttribHandler(ClientCookie.EXPIRES_ATTR, wrapper);
     }
 
     /**

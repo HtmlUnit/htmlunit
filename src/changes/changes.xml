@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3421201">
+                Ignore expiration date if the format is incorrect for cookies set by the remote server.
+                Accept expiration dates enclosed with double quote.
+            </action>
             <action type="fix" dev="rbri" issue="3072010">
                 JavaScript: NPE when the event handler performs only preventDefault().
             </action>
@@ -297,7 +301,7 @@
                 basic implementation of Range.compareBoundaryPoints (FF only).
             </action>
             <action type="update" dev="mguillem">
-                Accept cookies set by server responses even 9if the path doesn't match the one of the requested content.
+                Accept cookies set by server responses even if the path doesn't match the one of the requested content.
             </action>
             <action type="fix" dev="rbri" issue="3121315">
                 NPE in XMLSerializer.save(page) if the page contains an image tag without src attribute or link without href.
