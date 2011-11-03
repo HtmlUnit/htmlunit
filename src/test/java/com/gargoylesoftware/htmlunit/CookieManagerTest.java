@@ -345,7 +345,6 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("first=1; second=2; third=3")
-//    @NotYetImplemented
     public void setCookieExpired_badDateFormat() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;expires=Dec-1-94 16:00:00"));
