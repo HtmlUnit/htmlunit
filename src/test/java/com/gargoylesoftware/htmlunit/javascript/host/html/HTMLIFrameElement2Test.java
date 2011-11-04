@@ -205,6 +205,37 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(FF = { "createIFrame", "loaded", "" }, IE = { "createIFrame" })
+    public void documentCreateElement_onLoad2_noSrc() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script type='text/javascript'>\n"
+            + "  function createIFrame() {\n"
+            + "      alert('createIFrame');\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'myFrame';\n"
+            + "      myFrame.onload = handleFrameLoad\n"
+            + "      var body = document.getElementsByTagName('body')[0];\n"
+            + "      body.appendChild(myFrame);\n"
+            + "  }\n"
+            + "  function handleFrameLoad() {\n"
+            + "    alert('loaded');\n"
+            + "    var myFrame = document.getElementById('myFrame');\n"
+            + "    alert(myFrame.contentWindow.document.body.innerHTML);\n"
+            + "  }\n"
+            + "</script></head>\n"
+
+            + "  <body onload='createIFrame();' >\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(FF = { "createIFrame", "loaded", "foo" }, IE = { "createIFrame" })
     public void documentCreateElement_onLoad3() throws Exception {
         final String html =
@@ -240,7 +271,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "createIFrame", "loaded", "" }, IE = { "createIFrame" })
-    public void documentCreateElement_onLoad2_noSrc() throws Exception {
+    public void documentCreateElement_onLoad3_noSrc() throws Exception {
         final String html =
               "<html>\n"
             + "<head><script type='text/javascript'>\n"
@@ -270,8 +301,97 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "createIFrame", "loaded", "" }, IE = { "createIFrame" })
-    public void documentCreateElement_onLoad3_noSrc() throws Exception {
+    public void documentFragmentCreateElement_onLoad() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script type='text/javascript'>\n"
+            + "  function handleFrameLoad() {\n"
+            + "    alert('loaded');\n"
+            + "  }\n"
+            + "</script></head>\n"
+
+            + "  <body>\n"
+            + "    <script>\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'myFrame';\n"
+            + "      myFrame.src = '" + URL_SECOND + "';\n"
+            + "      myFrame.onload = handleFrameLoad\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      fragment.appendChild(myFrame);\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+        final String html2 = "<html><body>foo</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void documentFragmentCreateElement_onLoad_noSrc() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script type='text/javascript'>\n"
+            + "  function handleFrameLoad() {\n"
+            + "    alert('loaded');\n"
+            + "  }\n"
+            + "</script></head>\n"
+
+            + "  <body>\n"
+            + "    <script>\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'myFrame';\n"
+            + "      myFrame.onload = handleFrameLoad\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      fragment.appendChild(myFrame);\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("createIFrame")
+    public void documentFragmentCreateElement_onLoad2() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script type='text/javascript'>\n"
+            + "  function createIFrame() {\n"
+            + "      alert('createIFrame');\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'myFrame';\n"
+            + "      myFrame.src = '" + URL_SECOND + "';\n"
+            + "      myFrame.onload = handleFrameLoad\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      fragment.appendChild(myFrame);\n"
+            + "  }\n"
+            + "  function handleFrameLoad() {\n"
+            + "    alert('loaded');\n"
+            + "  }\n"
+            + "</script></head>\n"
+
+            + "  <body onload='createIFrame();' >\n"
+            + "  </body>\n"
+            + "</html>";
+        final String html2 = "<html><body>foo</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("createIFrame")
+    public void documentFragmentCreateElement_onLoad2_noSrc() throws Exception {
         final String html =
               "<html>\n"
             + "<head><script type='text/javascript'>\n"
@@ -280,13 +400,274 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "      var myFrame = document.createElement('iframe');\n"
             + "      myFrame.id = 'myFrame';\n"
             + "      myFrame.onload = handleFrameLoad\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      fragment.appendChild(myFrame);\n"
+            + "  }\n"
+            + "  function handleFrameLoad() {\n"
+            + "    alert('loaded');\n"
+            + "  }\n"
+            + "</script></head>\n"
+
+            + "  <body onload='createIFrame();' >\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("createIFrame")
+    public void documentFragmentCreateElement_onLoad3() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script type='text/javascript'>\n"
+            + "  function createIFrame() {\n"
+            + "      alert('createIFrame');\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'myFrame';\n"
+            + "      myFrame.onload = handleFrameLoad\n"
+            + "      myFrame.src = '" + URL_SECOND + "';\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      fragment.appendChild(myFrame);\n"
+            + "  }\n"
+            + "  function handleFrameLoad() {\n"
+            + "    alert('loaded');\n"
+            + "  }\n"
+            + "</script></head>\n"
+
+            + "  <body onload='createIFrame();' >\n"
+            + "  </body>\n"
+            + "</html>";
+        final String html2 = "<html><body>foo</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("createIFrame")
+    public void documentFragmentCreateElement_onLoad3_noSrc() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script type='text/javascript'>\n"
+            + "  function createIFrame() {\n"
+            + "      alert('createIFrame');\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'myFrame';\n"
+            + "      myFrame.onload = handleFrameLoad\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      fragment.appendChild(myFrame);\n"
+            + "  }\n"
+            + "  function handleFrameLoad() {\n"
+            + "    alert('loaded');\n"
+            + "  }\n"
+            + "</script></head>\n"
+
+            + "  <body onload='createIFrame();' >\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "fragment append done", "loaded" },
+            IE = "fragment append done")
+    public void documentDocumentFragmentCreateElement_onLoad() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script type='text/javascript'>\n"
+            + "  function handleFrameLoad() {\n"
+            + "    alert('loaded');\n"
+            + "  }\n"
+            + "</script></head>\n"
+
+            + "  <body>\n"
+            + "    <script>\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'myFrame';\n"
+            + "      myFrame.src = '" + URL_SECOND + "';\n"
+            + "      myFrame.onload = handleFrameLoad\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      fragment.appendChild(myFrame);\n"
+            + "      alert('fragment append done');\n"
+            + "      var body = document.getElementsByTagName('body')[0];\n"
+            + "      body.appendChild(myFrame);\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+        final String html2 = "<html><body>foo</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "fragment append done", "loaded" })
+    public void documentDocumentFragmentCreateElement_onLoad_noSrc() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script type='text/javascript'>\n"
+            + "  function handleFrameLoad() {\n"
+            + "    alert('loaded');\n"
+            + "  }\n"
+            + "</script></head>\n"
+
+            + "  <body>\n"
+            + "    <script>\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'myFrame';\n"
+            + "      myFrame.onload = handleFrameLoad\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      fragment.appendChild(myFrame);\n"
+            + "      alert('fragment append done');\n"
+            + "      var body = document.getElementsByTagName('body')[0];\n"
+            + "      body.appendChild(myFrame);\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "createIFrame", "fragment append done", "loaded" },
+            IE = { "createIFrame", "fragment append done" })
+    public void documentDocumentFragmentCreateElement_onLoad2() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script type='text/javascript'>\n"
+            + "  function createIFrame() {\n"
+            + "      alert('createIFrame');\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'myFrame';\n"
+            + "      myFrame.src = '" + URL_SECOND + "';\n"
+            + "      myFrame.onload = handleFrameLoad\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      fragment.appendChild(myFrame);\n"
+            + "      alert('fragment append done');\n"
             + "      var body = document.getElementsByTagName('body')[0];\n"
             + "      body.appendChild(myFrame);\n"
             + "  }\n"
             + "  function handleFrameLoad() {\n"
             + "    alert('loaded');\n"
-            + "    var myFrame = document.getElementById('myFrame');\n"
-            + "    alert(myFrame.contentWindow.document.body.innerHTML);\n"
+            + "  }\n"
+            + "</script></head>\n"
+
+            + "  <body onload='createIFrame();' >\n"
+            + "  </body>\n"
+            + "</html>";
+        final String html2 = "<html><body>foo</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "createIFrame", "fragment append done", "loaded" })
+    public void documentDocumentFragmentCreateElement_onLoad2_noSrc() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script type='text/javascript'>\n"
+            + "  function createIFrame() {\n"
+            + "      alert('createIFrame');\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'myFrame';\n"
+            + "      myFrame.onload = handleFrameLoad\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      fragment.appendChild(myFrame);\n"
+            + "      alert('fragment append done');\n"
+            + "      var body = document.getElementsByTagName('body')[0];\n"
+            + "      body.appendChild(myFrame);\n"
+            + "  }\n"
+            + "  function handleFrameLoad() {\n"
+            + "    alert('loaded');\n"
+            + "  }\n"
+            + "</script></head>\n"
+
+            + "  <body onload='createIFrame();' >\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "createIFrame", "fragment append done", "loaded" },
+            IE = { "createIFrame", "fragment append done" })
+    public void documentDocumentFragmentCreateElement_onLoad3() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script type='text/javascript'>\n"
+            + "  function createIFrame() {\n"
+            + "      alert('createIFrame');\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'myFrame';\n"
+            + "      myFrame.onload = handleFrameLoad\n"
+            + "      myFrame.src = '" + URL_SECOND + "';\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      fragment.appendChild(myFrame);\n"
+            + "      alert('fragment append done');\n"
+            + "      var body = document.getElementsByTagName('body')[0];\n"
+            + "      body.appendChild(myFrame);\n"
+            + "  }\n"
+            + "  function handleFrameLoad() {\n"
+            + "    alert('loaded');\n"
+            + "  }\n"
+            + "</script></head>\n"
+
+            + "  <body onload='createIFrame();' >\n"
+            + "  </body>\n"
+            + "</html>";
+        final String html2 = "<html><body>foo</body></html>";
+        getMockWebConnection().setResponse(URL_SECOND, html2);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "createIFrame", "fragment append done", "loaded" })
+    public void documentDocumentFragmentCreateElement_onLoad3_noSrc() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head><script type='text/javascript'>\n"
+            + "  function createIFrame() {\n"
+            + "      alert('createIFrame');\n"
+            + "      var myFrame = document.createElement('iframe');\n"
+            + "      myFrame.id = 'myFrame';\n"
+            + "      myFrame.onload = handleFrameLoad\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      fragment.appendChild(myFrame);\n"
+            + "      alert('fragment append done');\n"
+            + "      var body = document.getElementsByTagName('body')[0];\n"
+            + "      body.appendChild(myFrame);\n"
+            + "  }\n"
+            + "  function handleFrameLoad() {\n"
+            + "    alert('loaded');\n"
             + "  }\n"
             + "</script></head>\n"
 

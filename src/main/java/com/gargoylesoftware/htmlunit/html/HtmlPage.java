@@ -131,7 +131,7 @@ public class HtmlPage extends SgmlPage {
     private int inlineSnippetParserCount_;
     private List<HtmlAttributeChangeListener> attributeListeners_;
     private final Object lock_ = new String(); // used for synchronization
-    private List<Range> selectionRanges_ = new ArrayList< Range >(3);
+    private final List<Range> selectionRanges_ = new ArrayList< Range >(3);
     private final List<PostponedAction> afterLoadActions_ = new ArrayList<PostponedAction>();
     private boolean cleaning_;
     private HtmlBase base_;
@@ -1180,6 +1180,7 @@ public class HtmlPage extends SgmlPage {
                     final BaseFrame frame = ((FrameWindow) window).getFrameElement();
                     // IE triggers this event only in some cases
                     if (frame.wasCreatedByJavascript()) {
+                        frame.unmarkAsCreatedByJavascript();
                         return true;
                     }
                 }
@@ -1187,6 +1188,12 @@ public class HtmlPage extends SgmlPage {
 
             final FrameWindow fw = (FrameWindow) window;
             final BaseFrame frame = fw.getFrameElement();
+
+            // if part of an document fragment, then the load event is not triggered
+            if (Event.TYPE_LOAD.equals(eventType) && (frame.getParentNode() instanceof DomDocumentFragment)) {
+                return true;
+            }
+
             if (frame.hasEventHandlers("on" + eventType)) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Executing on" + eventType + " handler for " + frame);

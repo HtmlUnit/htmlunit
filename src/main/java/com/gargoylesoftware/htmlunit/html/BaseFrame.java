@@ -375,6 +375,16 @@ public abstract class BaseFrame extends HtmlElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
+     * Unmarks this frame as created by javascript. This is needed to handle
+     * some special IE behavior.
+     */
+    public void unmarkAsCreatedByJavascript() {
+        createdByJavascript_ = false;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
      * Returns true if this frame was created by javascript. This is needed to handle
      * some special IE behavior.
      * @return true or false
