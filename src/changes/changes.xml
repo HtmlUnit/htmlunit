@@ -43,11 +43,11 @@
                 src attribute was added from javascript.
             </action>
             <action type="fix" dev="rbri" issue="3406772">
-                JavaScript: 'onload' handler for iframes was called if an iframe was added 
+                JavaScript: 'onload' handler for iframes was called if an iframe was added
                 to an document fragment.
             </action>
             <action type="fix" dev="rbri" issue="3406772">
-                JavaScript: 'onload' handler for iframes was not called in IE mode if an iframe was added 
+                JavaScript: 'onload' handler for iframes was not called in IE mode if an iframe was added
                 to an document fragment and after that the iframe was added to the document itself.
             </action>
             <action type="fix" dev="mguillem">
