@@ -194,9 +194,6 @@ public enum BrowserVersionFeatures {
     GENERATED_121,
 
     /** Was originally .isIE(). */
-    GENERATED_123,
-
-    /** Was originally .isIE(). */
     GENERATED_124,
 
     /** Was originally .isIE(). */
@@ -660,6 +657,11 @@ public enum BrowserVersionFeatures {
      * doesn't allow to set domain of about:blank.
      */
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
+
+    /** Javascript event handlers declared as property on a node
+     * don't receive the event as argument.
+     */
+    JS_EVENT_HANDLER_DECLARED_AS_PROPERTY_DONT_RECEIVE_EVENT,
 
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,

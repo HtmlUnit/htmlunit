@@ -206,7 +206,6 @@ public class Node extends SimpleScriptable {
             for (final DomNode domNode : childDomNode.getChildren()) {
                 initInlineFrameIfNeeded(domNode);
             }
-
         }
         return appendedChild;
     }
@@ -666,13 +665,14 @@ public class Node extends SimpleScriptable {
         if (eventListenersContainer_ != null) {
 
             final HtmlPage page = (HtmlPage) this.<DomNode>getDomNodeOrDie().getPage();
-            final boolean isIE = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_123);
+            final boolean eventParam = getBrowserVersion().hasFeature(
+                    BrowserVersionFeatures.JS_EVENT_HANDLER_DECLARED_AS_PROPERTY_DONT_RECEIVE_EVENT);
             final Window window = (Window) page.getEnclosingWindow().getScriptObject();
             final Object[] args = new Object[] {event};
 
             // handlers declared as property on a node don't receive the event as argument for IE
             final Object[] propHandlerArgs;
-            if (isIE) {
+            if (eventParam) {
                 propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
             }
             else {
