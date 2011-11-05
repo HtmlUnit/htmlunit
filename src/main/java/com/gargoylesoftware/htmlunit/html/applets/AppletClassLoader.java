@@ -14,11 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html.applets;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -43,41 +39,22 @@ public class AppletClassLoader extends URLClassLoader {
     }
 
     /**
-     * Adds the content of specified WebResponse to the classpath for the applet.
-     * @param webResponse the web response
+     * Adds the jar file to the classpath for the applet.
+     * @param jarUrl the url of the jar file
      * @throws IOException in case of problem working with the response content
      */
-    public void addArchiveToClassPath(final WebResponse webResponse) throws IOException {
-        // normally content type should be "application/java-archive"
-        // but it works when it is not the case
-        final File tmpFile = File.createTempFile("HtmlUnit", ".jar");
-        tmpFile.deleteOnExit();
-        final OutputStream output = new FileOutputStream(tmpFile);
-        IOUtils.copy(webResponse.getContentAsStream(), output);
-        output.close();
-        final URL jarUrl = new URL("jar", "", "file:" + tmpFile.getAbsolutePath() + "!/");
+    public void addArchiveToClassPath(final URL jarUrl) throws IOException {
         addURL(jarUrl);
     }
 
     /**
-     * Adds the content of specified WebResponse to the classpath for the applet.
+     * Adds the class defined by the WebResponse to the classpath for the applet.
      * @param className the name of the class to load
      * @param webResponse the web response
      * @throws IOException in case of problem working with the response content
      */
     public void addClassToClassPath(final String className, final WebResponse webResponse) throws IOException {
-        final File tmpFile = File.createTempFile("HtmlUnit", ".class");
-        tmpFile.deleteOnExit();
-        final OutputStream output = new FileOutputStream(tmpFile);
-        IOUtils.copy(webResponse.getContentAsStream(), output);
-        output.close();
-        final FileInputStream is = new FileInputStream(tmpFile);
-        try {
-            final byte[] bytes = IOUtils.toByteArray(is);
-            defineClass(className, bytes, 0, bytes.length);
-        }
-        finally {
-            is.close();
-        }
+        final byte[] bytes = IOUtils.toByteArray(webResponse.getContentAsStream());
+        defineClass(className, bytes, 0, bytes.length);
     }
 }

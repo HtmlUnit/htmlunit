@@ -267,16 +267,7 @@ public class HtmlApplet extends HtmlElement {
                     final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive);
                     final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
-                    final WebResponse response = webclient.loadWebResponse(new WebRequest(archiveUrl));
-                    try {
-                        webclient.throwFailingHttpStatusCodeExceptionIfNecessary(response);
-                        appletClassLoader_.addArchiveToClassPath(response);
-                    }
-                    catch (final FailingHttpStatusCodeException e) {
-                        // that is what the browser does, the applet only fails, if
-                        // the main class is not loadable
-                        LOG.error(e.getMessage(), e);
-                    }
+                    appletClassLoader_.addArchiveToClassPath(archiveUrl);
                 }
             }
 
