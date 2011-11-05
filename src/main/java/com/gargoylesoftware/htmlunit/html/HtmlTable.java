@@ -14,8 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +34,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlTable extends HtmlElement {
 
@@ -53,6 +56,8 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * Returns the first cell that matches the specified row and column, searching left to right, top to bottom.
+     * This method returns different values than getRow(rowIndex).getCell(cellIndex) because this takes cellspan
+     * and rowspan into account.
      *
      * @param rowIndex the row index
      * @param columnIndex the column index
@@ -60,17 +65,32 @@ public class HtmlTable extends HtmlElement {
      */
     public final HtmlTableCell getCellAt(final int rowIndex, final int columnIndex) {
         final RowIterator rowIterator = getRowIterator();
-        for (int rowNo = 0; rowIterator.hasNext(); rowNo++) {
-            final HtmlTableRow row = rowIterator.nextRow();
-            final HtmlTableRow.CellIterator cellIterator = row.getCellIterator();
-            for (int colNo = 0; cellIterator.hasNext(); colNo++) {
-                final HtmlTableCell cell = cellIterator.nextCell();
-                if (rowNo <= rowIndex && rowNo + cell.getRowSpan() > rowIndex) {
-                    if (colNo <= columnIndex && colNo + cell.getColumnSpan() > columnIndex) {
+        final HashSet<Point> occupied = new HashSet<Point>();
+        int row = 0;
+        for (final HtmlTableRow htmlTableRow : rowIterator) {
+            final HtmlTableRow.CellIterator cellIterator = htmlTableRow.getCellIterator();
+            int col = 0;
+            for (final HtmlTableCell cell : cellIterator) {
+                while (occupied.contains(new Point(row, col))) {
+                    col++;
+                }
+                final int nextRow = row + cell.getRowSpan();
+                if (row <= rowIndex && nextRow > rowIndex) {
+                    final int nextCol = col + cell.getColumnSpan();
+                    if (col <= columnIndex && nextCol > columnIndex) {
                         return cell;
                     }
                 }
+                if (cell.getRowSpan() > 1 || cell.getColumnSpan() > 1) {
+                    for (int i = 0; i < cell.getRowSpan(); i++) {
+                        for (int j = 0; j < cell.getColumnSpan(); j++) {
+                            occupied.add(new Point(row + i, col + j));
+                        }
+                    }
+                }
+                col++;
             }
+            row++;
         }
         return null;
     }
@@ -88,8 +108,8 @@ public class HtmlTable extends HtmlElement {
      */
     public List<HtmlTableRow> getRows() {
         final List<HtmlTableRow> result = new ArrayList<HtmlTableRow>();
-        for (final RowIterator iterator = getRowIterator(); iterator.hasNext();) {
-            result.add(iterator.next());
+        for (final HtmlTableRow row : getRowIterator()) {
+            result.add(row);
         }
         return Collections.unmodifiableList(result);
     }
@@ -102,11 +122,11 @@ public class HtmlTable extends HtmlElement {
      */
     public HtmlTableRow getRow(final int index) throws IndexOutOfBoundsException {
         int count = 0;
-        for (final RowIterator iterator = getRowIterator(); iterator.hasNext(); count++) {
-            final HtmlTableRow next = iterator.nextRow();
+        for (final HtmlTableRow row : getRowIterator()) {
             if (count == index) {
-                return next;
+                return row;
             }
+            count++;
         }
         throw new IndexOutOfBoundsException();
     }
@@ -133,9 +153,7 @@ public class HtmlTable extends HtmlElement {
      * @exception ElementNotFoundException If the row cannot be found.
      */
     public final HtmlTableRow getRowById(final String id) throws ElementNotFoundException {
-        final RowIterator iterator = new RowIterator();
-        while (iterator.hasNext()) {
-            final HtmlTableRow row = iterator.next();
+        for (final HtmlTableRow row : getRowIterator()) {
             if (row.getAttribute("id").equals(id)) {
                 return row;
             }

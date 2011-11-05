@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author David K. Taylor
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlTableRow extends HtmlElement {
 
@@ -63,8 +64,8 @@ public class HtmlTableRow extends HtmlElement {
      */
     public List<HtmlTableCell> getCells() {
         final List<HtmlTableCell> result = new ArrayList<HtmlTableCell>();
-        for (final CellIterator iterator = getCellIterator(); iterator.hasNext();) {
-            result.add(iterator.next());
+        for (final HtmlTableCell cell : getCellIterator()) {
+            result.add(cell);
         }
         return Collections.unmodifiableList(result);
     }
@@ -76,11 +77,11 @@ public class HtmlTableRow extends HtmlElement {
      */
     public HtmlTableCell getCell(final int index) throws IndexOutOfBoundsException {
         int count = 0;
-        for (final CellIterator iterator = getCellIterator(); iterator.hasNext(); count++) {
-            final HtmlTableCell next = iterator.nextCell();
+        for (final HtmlTableCell cell : getCellIterator()) {
             if (count == index) {
-                return next;
+                return cell;
             }
+            count++;
         }
         throw new IndexOutOfBoundsException();
     }
@@ -157,7 +158,7 @@ public class HtmlTableRow extends HtmlElement {
      * An Iterator over the HtmlTableCells contained in this row. It will also dive
      * into nested forms, even though that is illegal HTML.
      */
-    public class CellIterator implements Iterator<HtmlTableCell> {
+    public class CellIterator implements Iterator<HtmlTableCell>, Iterable<HtmlTableCell>  {
         private HtmlTableCell nextCell_;
         private HtmlForm currentForm_;
 
@@ -230,6 +231,15 @@ public class HtmlTableRow extends HtmlElement {
                 currentForm_ = null;
                 setNextCell(form.getNextSibling());
             }
+        }
+
+        /**
+         * Returns an HtmlTableCell iterator.
+         *
+         * @return an HtmlTableCell Iterator.
+         */
+        public Iterator<HtmlTableCell> iterator() {
+            return this;
         }
     }
 }

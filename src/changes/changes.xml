@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3433589">
+                HtmlTable.getCellAt() now works id complex situations with colspan and rowspan.
+            </action>
             <action type="fix" dev="mguillem" issue="3421201">
                 Ignore expiration date if the format is incorrect for cookies set by the remote server.
                 Accept expiration dates enclosed with double quote.
