@@ -368,9 +368,6 @@ public enum BrowserVersionFeatures {
     GENERATED_37,
 
     /** Was originally .isIE(). */
-    GENERATED_38,
-
-    /** Was originally .isIE(). */
     GENERATED_39,
 
     /** Was originally .isIE(). */
@@ -657,6 +654,11 @@ public enum BrowserVersionFeatures {
      * doesn't allow to set domain of about:blank.
      */
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
+
+    /** Javascript event aborted check is based on the event handler return value (IE);
+     * (standards-compliant browsers doing this via preventDefault).
+     */
+    JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE,
 
     /** Javascript event handlers declared as property on a node
      * don't receive the event as argument.

@@ -572,8 +572,11 @@ public class Event extends SimpleScriptable {
      * @return <tt>true</tt> if this event has been aborted
      */
     public boolean isAborted(final ScriptResult result) {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_38);
-        return ScriptResult.isFalse(result) || (!ie && preventDefault_) || (ie && Boolean.FALSE.equals(returnValue_));
+        final boolean checkReturnValue = getBrowserVersion().
+                hasFeature(BrowserVersionFeatures.JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE);
+        return ScriptResult.isFalse(result)
+                || (!checkReturnValue && preventDefault_)
+                || (checkReturnValue && Boolean.FALSE.equals(returnValue_));
     }
 
     /**
