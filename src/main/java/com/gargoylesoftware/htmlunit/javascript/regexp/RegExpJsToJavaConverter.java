@@ -35,7 +35,7 @@ public class RegExpJsToJavaConverter {
      * Helper to encapsulate the transformations.
      */
     private static class Tape {
-        private StringBuilder tape_;
+        private final StringBuilder tape_;
         private int currentPos_;
 
         /**
@@ -215,12 +215,9 @@ public class RegExpJsToJavaConverter {
         if (DIGITS.indexOf(next) > -1) {
             insideRepetition_ = true;
         }
-        else if ('}' == next) {
-            tape_.insert("\\", -2);
-            tape_.insert("\\", -1);
-        }
         else {
             tape_.insert("\\", -2);
+            tape_.move(-1);
         }
     }
 

@@ -377,10 +377,14 @@ public class RegExpJsToJavaConverterTest {
         Assert.assertEquals("a{5}", regExpJsToJavaConverter.convert("a{5}"));
         Assert.assertEquals("a{5,}", regExpJsToJavaConverter.convert("a{5,}"));
         Assert.assertEquals("a{5,10}", regExpJsToJavaConverter.convert("a{5,10}"));
+
+        // issue 3434548
+        Assert.assertEquals("\\{\\{abc\\}\\}", regExpJsToJavaConverter.convert("{{abc}}"));
+        Assert.assertEquals("\\{{2}\\}{2}", regExpJsToJavaConverter.convert("{{2}}{2}"));
     }
 
     /**
-     * Verifies that curly braces can be used non escaped in JS regexp.
+     * Verifies that square braces can be used non escaped in JS regexp.
      */
     @Test
     public void escapeOpeningSquareBracketInCharacterClass() {
