@@ -57,7 +57,15 @@ public class HtmlTable extends HtmlElement {
     /**
      * Returns the first cell that matches the specified row and column, searching left to right, top to bottom.
      * This method returns different values than getRow(rowIndex).getCell(cellIndex) because this takes cellspan
-     * and rowspan into account.
+     * and rowspan into account.<br>
+     * This means, a cell with colspan='2' consumes two columns; a cell with rowspan='3' consumes three rows. The
+     * index is based on the 'background' model of the table; if you have a row like<br>
+     * <td>cell1</td> <td colspan='2'>cell2</td> then this row is treated as a row with
+     * three cells.<br>
+     * getCellAt(rowIndex, 0).asText() returns "cell1";<br>
+     * getCellAt(rowIndex, 1).asText() returns "cell2";<br>
+     * getCellAt(rowIndex, 2).asText() returns "cell2"; and<br>
+     * getCellAt(rowIndex, 3).asText() returns null;
      *
      * @param rowIndex the row index
      * @param columnIndex the column index
