@@ -104,6 +104,20 @@ public class HtmlScriptTest extends WebTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void asXml_scriptNestedInCData() throws Exception {
+        final String script = "//<![CDATA[\n"
+            + "var foo = 132;\n"
+            + "//]]>";
+        final String html = "<html><body><script id='s'>" + script + "</script></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlScript scriptElement = page.getHtmlElementById("s");
+        assertEquals("<script id=\"s\">\n" + script + "\n</script>\n", scriptElement.asXml());
+    }
+
+    /**
      * Verifies that the weird script src attribute used by the jQuery JavaScript library is
      * ignored silently (bug 1695279).
      * @throws Exception if the test fails

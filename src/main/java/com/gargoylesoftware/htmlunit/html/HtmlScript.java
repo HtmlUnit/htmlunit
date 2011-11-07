@@ -514,9 +514,17 @@ public class HtmlScript extends HtmlElement {
     @Override
     protected void printChildrenAsXml(final String indent, final PrintWriter printWriter) {
         final DomCharacterData textNode = (DomCharacterData) getFirstChild();
-        if (textNode != null) {
+        if (textNode == null) {
+            return;
+        }
+
+        final String data = textNode.getData();
+        if (data.contains("//<![CDATA[")) {
+            printWriter.println(data);
+        }
+        else {
             printWriter.println("//<![CDATA[");
-            printWriter.println(textNode.getData());
+            printWriter.println(data);
             printWriter.println("//]]>");
         }
     }
