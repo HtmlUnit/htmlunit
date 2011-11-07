@@ -474,7 +474,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
 
     /**
      * RegExp used in JQuery 1.3.1 that wasn't correctly transformed to Java RegExp in HtmlUnit-2.4.
-     * @see #escapeOpeningSquareBracketInCharacterClass()
      * @throws Exception if the test fails
      */
     @Test
@@ -494,7 +493,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
 
     /**
      * RegExp used in JQuery 1.3.1 that wasn't correctly transformed to Java RegExp in HtmlUnit-2.4.
-     * @see #escapeOpeningSquareBracketInCharacterClass()
      * @throws Exception if the test fails
      */
     @Test
