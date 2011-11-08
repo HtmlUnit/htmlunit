@@ -187,7 +187,7 @@ public class Document extends EventNode {
                 if (page instanceof HtmlPage) {
                     final HtmlPage htmlPage = (HtmlPage) page;
                     final DomNode child = htmlPage.getBody().getFirstChild();
-                    final DomNode rangeNode = child != null ? child : htmlPage.getBody();
+                    final DomNode rangeNode = child == null ? htmlPage.getBody() : child;
                     htmlPage.setSelectionRange(new SimpleRange(rangeNode, 0));
                 }
             }

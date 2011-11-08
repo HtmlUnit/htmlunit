@@ -107,10 +107,7 @@ public abstract class BaseFrame extends HtmlElement {
         if (enclosedPage instanceof HtmlPage) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
             final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
-            if (!jsEngine.isScriptRunning()) {
-                htmlPage.setReadyState(READY_STATE_COMPLETE);
-            }
-            else {
+            if (jsEngine.isScriptRunning()) {
                 final PostponedAction action = new PostponedAction(getPage()) {
                     @Override
                     public void execute() throws Exception {
@@ -118,6 +115,9 @@ public abstract class BaseFrame extends HtmlElement {
                     }
                 };
                 jsEngine.addPostponedAction(action);
+            }
+            else {
+                htmlPage.setReadyState(READY_STATE_COMPLETE);
             }
         }
     }
