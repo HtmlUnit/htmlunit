@@ -7,7 +7,7 @@
     <body>
         <release version="2.10" date="???" description="Bugfixes">
             <action type="fix" dev="rbri" issue="3434548">
-                JavaScript: fix transformation of regular expressions like '{{something}}' into 
+                JavaScript: fix transformation of regular expressions like '{{something}}' into
                 java regular expressions.
             </action>
             <action type="fix" dev="mguillem" issue="3414140">
