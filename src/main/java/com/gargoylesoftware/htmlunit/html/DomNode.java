@@ -918,7 +918,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (destination.getPage() != getPage()) {
             throw new RuntimeException("Cannot perform quiet move on nodes from different pages.");
         }
-        for (DomNode child : getChildren()) {
+        for (final DomNode child : getChildren()) {
             child.basicRemove();
             destination.basicAppend(child);
         }
@@ -1235,7 +1235,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         private DomNode currentNode_;
         private DomNode nextNode_;
-        private Class<T> type_;
+        private final Class<T> type_;
 
         /**
          * Creates a new instance which iterates over the specified node type.

@@ -523,9 +523,9 @@ public class Node extends SimpleScriptable {
 
             // Get XML nodes for the DOM nodes passed in
             final DomNode newChildNode = newChild.getDomNodeOrDie();
-            final DomNode oldChildNode;
+            final DomNode oldChildNode = ((Node) oldChildObject).getDomNodeOrDie();
+
             // Replace the old child with the new child.
-            oldChildNode = ((Node) oldChildObject).getDomNodeOrDie();
             oldChildNode.replace(newChildNode);
             removedChild = oldChildObject;
         }

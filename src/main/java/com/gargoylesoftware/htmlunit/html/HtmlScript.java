@@ -383,13 +383,12 @@ public class HtmlScript extends HtmlElement {
      * @return <code>true</code> if the script should be executed
      */
     private boolean isExecutionNeeded() {
-        final SgmlPage page = getPage();
-
         if (!isDirectlyAttachedToPage()) {
             return false;
         }
 
         // If JavaScript is disabled, we don't need to execute.
+        final SgmlPage page = getPage();
         if (!page.getWebClient().isJavaScriptEnabled()) {
             return false;
         }
