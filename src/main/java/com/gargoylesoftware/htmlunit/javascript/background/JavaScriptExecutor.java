@@ -37,9 +37,9 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 public class JavaScriptExecutor implements Runnable, Serializable {
 
     // TODO: is there utility in not having these as transient?
-    private transient WeakReference<WebClient> webClient_;
+    private transient final WeakReference<WebClient> webClient_;
 
-    private transient List<WeakReference<JavaScriptJobManager>> jobManagerList_;
+    private transient final List<WeakReference<JavaScriptJobManager>> jobManagerList_;
 
     private volatile boolean shutdown_ = false;
 
@@ -77,7 +77,7 @@ public class JavaScriptExecutor implements Runnable, Serializable {
             eventLoopThread_.join(10000);
         }
         catch (final InterruptedException e) {
-            LOG.warn("InterruptedException while waiting for the eventLoop thread to join " + e);
+            LOG.warn("InterruptedException while waiting for the eventLoop thread to join ", e);
             // ignore, this doesn't matter, we want to stop it
         }
         if (eventLoopThread_.isAlive()) {
@@ -96,11 +96,11 @@ public class JavaScriptExecutor implements Runnable, Serializable {
         JavaScriptJobManager javaScriptJobManager = null;
         JavaScriptJob earliestJob = null;
         // iterate over the list and find the earliest job to run.
-        final Iterator<WeakReference<JavaScriptJobManager>> it = jobManagerList_.iterator();
-        while (it.hasNext()) {
-            final JavaScriptJobManager jobManager = it.next().get();
+        final Iterator<WeakReference<JavaScriptJobManager>> managers = jobManagerList_.iterator();
+        while (managers.hasNext()) {
+            final JavaScriptJobManager jobManager = managers.next().get();
             if (jobManager == null) {
-                it.remove();
+                managers.remove();
             }
             else {
                 final JavaScriptJob newJob = jobManager.getEarliestJob();
