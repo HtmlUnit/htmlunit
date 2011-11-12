@@ -119,7 +119,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public synchronized void removeJob(final int id) {
-        for (JavaScriptJob job : scheduledJobsQ_) {
+        for (final JavaScriptJob job : scheduledJobsQ_) {
             final int jobId = job.getId().intValue();
             if (jobId == id) {
                 scheduledJobsQ_.remove(job);
@@ -132,7 +132,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public synchronized void stopJob(final int id) {
-        for (JavaScriptJob job : scheduledJobsQ_) {
+        for (final JavaScriptJob job : scheduledJobsQ_) {
             final int jobId = job.getId().intValue();
             if (jobId == id) {
                 scheduledJobsQ_.remove(job);
@@ -149,7 +149,7 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         if (currentlyRunningJob_ != null) {
             cancelledJobs_.add(currentlyRunningJob_.getId());
         }
-        for (JavaScriptJob job : scheduledJobsQ_) {
+        for (final JavaScriptJob job : scheduledJobsQ_) {
             cancelledJobs_.add(job.getId());
         }
         scheduledJobsQ_.clear();
@@ -190,7 +190,8 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
     public int waitForJobsStartingBefore(final long delayMillis) {
         final long latestExecutionTime = System.currentTimeMillis() + delayMillis;
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Waiting for all jobs that have execution time before " + delayMillis + " (" + latestExecutionTime + ") to finish");
+            LOG.debug("Waiting for all jobs that have execution time before "
+                  + delayMillis + " (" + latestExecutionTime + ") to finish");
         }
 
         JavaScriptJob earliestJob;
@@ -253,13 +254,14 @@ public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             LOG.debug("------ printing JavaScript job queue -----");
             LOG.debug("  number of jobs on the queue: " + scheduledJobsQ_.size());
             int count = 1;
-            for (JavaScriptJob job : scheduledJobsQ_) {
+            for (final JavaScriptJob job : scheduledJobsQ_) {
                 LOG.debug("  " + count + ")  Job target execution time: " + job.getTargetExecutionTime());
                 LOG.debug("      job to string: " + job.toString());
                 LOG.debug("      job id: " + job.getId());
                 if (job.isPeriodic()) {
                     LOG.debug("      period: " + job.getPeriod().longValue());
                 }
+                count++;
             }
             LOG.debug("------------------------------------------");
         }
