@@ -70,6 +70,7 @@ import com.steadystate.css.parser.SACParserCSS21;
  * @author Rodney Gitzel
  * @author Sudhan Moghe
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
+ * @author Ronald Brill
  */
 public abstract class DomNode implements Cloneable, Serializable, Node {
 
@@ -1557,5 +1558,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     protected boolean isDirectlyAttachedToPage() {
         return directlyAttachedToPage_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Lifecycle method to support special processing for js method importNode.
+     * @see com.gargoylesoftware.htmlunit.javascript.host.Document#jsxFunction_importNode(
+     *             com.gargoylesoftware.htmlunit.javascript.host.Node, boolean)
+     * @see HtmlScript#processImportNode()
+     */
+    public void processImportNode() {
+        // empty default impl
     }
 }

@@ -331,7 +331,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "imported: [object HTMLScriptElement]", IE = "exception")
-    @NotYetImplemented(Browser.FF)
     public void importNode_script() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"

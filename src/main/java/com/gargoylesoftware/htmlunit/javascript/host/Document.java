@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Ahmed Ashour
  * @author Rob Di Marco
+ * @author Ronald Brill
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms531073.aspx">MSDN documentation</a>
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">W3C Dom Level 1</a>
  */
@@ -256,7 +257,10 @@ public class Document extends EventNode {
      * @return the imported node that belongs to this Document
      */
     public Object jsxFunction_importNode(final Node importedNode, final boolean deep) {
-        return importedNode.<DomNode>getDomNodeOrDie().cloneNode(deep).getScriptObject();
+        DomNode domNode = importedNode.getDomNodeOrDie();
+        domNode = domNode.cloneNode(deep);
+        domNode.processImportNode();
+        return domNode.getScriptObject();
     }
 
     /**

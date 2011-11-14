@@ -70,6 +70,8 @@ public class HtmlScript extends HtmlElement {
     /** Invalid source attribute which should be ignored (used by JS libraries like jQuery). */
     private static final String SLASH_SLASH_COLON = "//:";
 
+    private boolean executeScriptOnAttach_ = true;
+
     /**
      * Creates an instance of HtmlScript
      *
@@ -383,6 +385,10 @@ public class HtmlScript extends HtmlElement {
      * @return <code>true</code> if the script should be executed
      */
     private boolean isExecutionNeeded() {
+        if (!executeScriptOnAttach_) {
+            return false;
+        }
+
         if (!isDirectlyAttachedToPage()) {
             return false;
         }
@@ -526,5 +532,10 @@ public class HtmlScript extends HtmlElement {
             printWriter.println(data);
             printWriter.println("//]]>");
         }
+    }
+
+    @Override
+    public void processImportNode() {
+        executeScriptOnAttach_ = false;
     }
 }
