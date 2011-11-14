@@ -37,9 +37,9 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 public class JavaScriptExecutor implements Runnable, Serializable {
 
     // TODO: is there utility in not having these as transient?
-    private transient final WeakReference<WebClient> webClient_;
+    private final transient WeakReference<WebClient> webClient_;
 
-    private transient final List<WeakReference<JavaScriptJobManager>> jobManagerList_;
+    private final transient List<WeakReference<JavaScriptJobManager>> jobManagerList_;
 
     private volatile boolean shutdown_ = false;
 
