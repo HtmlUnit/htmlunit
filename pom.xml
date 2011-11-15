@@ -666,6 +666,9 @@
         <contributor>
             <name>Adam Doupe</name>
         </contributor>
+        <contributor>
+            <name>Daniel Wagner-Hall</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
