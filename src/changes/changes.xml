@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3438310" due-to="Daniel Wagner-Hall">
+                JavaScript: document.getElementsByClassNameNS("*", "html") now returns 
+                the HTML tag for a page.
+            </action>
             <action type="fix" dev="rbri" issue="3438311" due-to="Daniel Wagner-Hall">
                 JavaScript: concatenate all text nodes under a &lt;script&gt; tag when
                 calculating the script code.

@@ -18,6 +18,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
@@ -93,6 +95,28 @@ public class Document2Test extends WebDriverTestCase {
             + "  })();\n"
             + "  alert(HAS_EXTENDED_CREATE_ELEMENT_SYNTAX)\n"
             + "</script></head><body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    @Browsers(Browser.FF)
+    public void getElementByTagNameNS_includesHtml() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>"
+            + "<script>\n"
+            + "  function doTest(){\n"
+            + "    alert(document.getElementsByTagNameNS('*', 'html').length);\n"
+            + "  }\n"
+            + "</script>"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <p>hello world</p>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

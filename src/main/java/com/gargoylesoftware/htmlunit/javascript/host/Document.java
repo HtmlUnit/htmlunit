@@ -479,17 +479,16 @@ public class Document extends EventNode {
      */
     public Object jsxFunction_getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final String description = "Document.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
-        final DomElement domNode = getPage().getDocumentElement();
 
         final String prefix;
-        if (namespaceURI != null && !"*".equals("*")) {
-            prefix = XmlUtil.lookupPrefix(domNode, Context.toString(namespaceURI));
+        if (namespaceURI != null && !"*".equals(namespaceURI)) {
+            prefix = XmlUtil.lookupPrefix(getPage().getDocumentElement(), Context.toString(namespaceURI));
         }
         else {
             prefix = null;
         }
 
-        final HTMLCollection collection = new HTMLCollection(domNode, false, description) {
+        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false, description) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 if (!localName.equals(node.getLocalName())) {
