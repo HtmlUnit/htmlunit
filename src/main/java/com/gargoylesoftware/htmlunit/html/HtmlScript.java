@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Dmitri Zoubkov
  * @author Sudhan Moghe
  * @author Ronald Brill
+ * @author Daniel Wagner-Hall
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-81598695">DOM Level 1</a>
  * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-81598695">DOM Level 2</a>
  */
@@ -252,8 +253,6 @@ public class HtmlScript extends HtmlElement {
 
     /**
      * Executes this script node as inline script if necessary and/or possible.
-     *
-     * attribute is defined, the script is not executed
      */
     private void executeInlineScriptIfNeeded() {
         if (!isExecutionNeeded()) {
@@ -265,7 +264,6 @@ public class HtmlScript extends HtmlElement {
             return;
         }
 
-        final DomCharacterData textNode = (DomCharacterData) getFirstChild();
         final String forr = getHtmlForAttribute();
         String event = getEventAttribute();
         // The event name can be like "onload" or "onload()".
@@ -274,7 +272,7 @@ public class HtmlScript extends HtmlElement {
         }
 
         final boolean ie = getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_7);
-        final String scriptCode = textNode.getData();
+        final String scriptCode = getScriptCode();
         if (ie && event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
             if ("window".equals(forr)) {
                 // everything fine, accepted by IE and FF
@@ -303,6 +301,21 @@ public class HtmlScript extends HtmlElement {
                 + ") to (" + line2 + ", " + col2 + ")";
             ((HtmlPage) getPage()).executeJavaScriptIfPossible(scriptCode, desc, line1);
         }
+    }
+
+    /**
+     * Gets the script held within the script tag.
+     */
+    private String getScriptCode() {
+        final Iterable<DomNode> textNodes = getChildren();
+        final StringBuilder scriptCode = new StringBuilder();
+        for (final DomNode node : textNodes) {
+            if (node instanceof DomText) {
+                final DomText domText = (DomText) node;
+                scriptCode.append(domText.getData());
+            }
+        }
+        return scriptCode.toString();
     }
 
     /**

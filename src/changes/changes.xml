@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3438311" due-to="Daniel Wagner-Hall">
+                JavaScript: concatenate all text nodes under a &lt;script&gt; tag when
+                calculating the script code.
+            </action>
             <action type="fix" dev="rbri" issue="3434548">
                 JavaScript: fix transformation of regular expressions like '{{something}}' into
                 java regular expressions.

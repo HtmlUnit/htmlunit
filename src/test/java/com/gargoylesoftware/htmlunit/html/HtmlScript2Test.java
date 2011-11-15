@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Daniel Wagner-Hall
  */
 @RunWith(BrowserRunner.class)
 public class HtmlScript2Test extends WebDriverTestCase {
@@ -192,13 +193,32 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
             + "<script>\n"
-            + "var div1 = document.createElement('div');\n"
-            + "div1.id = 'div1';\n"
-            + "var script = document.createElement('script');\n"
-            + "script.text = 'alert(document.getElementById(\"div1\") == null)';\n"
-            + "div1.appendChild(script);\n"
-            + "document.body.appendChild(div1);\n"
-            + "alert(document.getElementById('div1') == null);\n"
+            + "  var div1 = document.createElement('div');\n"
+            + "  div1.id = 'div1';\n"
+            + "  var script = document.createElement('script');\n"
+            + "  script.text = 'alert(document.getElementById(\"div1\") == null)';\n"
+            + "  div1.appendChild(script);\n"
+            + "  document.body.appendChild(div1);\n"
+            + "  alert(document.getElementById('div1') == null);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "1", "2" })
+    public void executesMultipleTextNodes() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<script>\n"
+            + "  var script = document.createElement('script');"
+            + "  script.appendChild(document.createTextNode('alert(\"1\");'));\n;"
+            + "  script.appendChild(document.createTextNode('alert(\"2\");'));\n;"
+            + "  document.body.appendChild(script);\n"
             + "</script>\n"
             + "</body></html>";
 
