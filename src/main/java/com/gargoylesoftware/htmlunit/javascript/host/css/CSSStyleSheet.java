@@ -47,6 +47,7 @@ import org.w3c.css.sac.NegativeSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 import org.w3c.css.sac.SiblingSelector;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
@@ -643,7 +644,12 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @return the position of the inserted rule
      */
     public int jsxFunction_insertRule(final String rule, final int position) {
-        return wrapped_.insertRule(rule.trim(), position);
+        try {
+            return wrapped_.insertRule(rule, position);
+        }
+        catch (final DOMException e) {
+            throw Context.throwAsScriptRuntimeEx(e);
+        }
     }
 
     /**
@@ -652,7 +658,12 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
      */
     public void jsxFunction_deleteRule(final int position) {
-        wrapped_.deleteRule(position);
+        try {
+            wrapped_.deleteRule(position);
+        }
+        catch (final DOMException e) {
+            throw Context.throwAsScriptRuntimeEx(e);
+        }
     }
 
     /**
@@ -663,8 +674,13 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @return always return -1 as of MSDN documentation
      */
     public int jsxFunction_addRule(final String selector, final String rule) {
-        final String completeRule = selector.trim() + " {" + rule + "}";
-        wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
+        final String completeRule = selector + " {" + rule + "}";
+        try {
+            wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
+        }
+        catch (final DOMException e) {
+            throw Context.throwAsScriptRuntimeEx(e);
+        }
         return -1;
     }
 
@@ -674,7 +690,12 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531195(v=VS.85).aspx">MSDN</a>
      */
     public void jsxFunction_removeRule(final int position) {
-        wrapped_.deleteRule(position);
+        try {
+            wrapped_.deleteRule(position);
+        }
+        catch (final DOMException e) {
+            throw Context.throwAsScriptRuntimeEx(e);
+        }
     }
 
     /**

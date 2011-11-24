@@ -6,6 +6,14 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: StyleSheet insertRule/addRule and deleteRule/removeRule
+                exception handling fixed. Now we reporting syntax errors back to
+                javascript.
+            </action>
+            <action type="update" dev="rbri">
+                CSS: cssparser updated to 0.9.7-SNAPSHOT.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-lang to 3.1.
             </action>
@@ -97,9 +105,6 @@
             </action>
             <action type="fix" dev="mguillem" issue="3403860">
                 JavaScript: trim value of type attribute before to verify it (FF only).
-            </action>
-            <action type="update" dev="rbri">
-                CSS: cssparser updated to 0.9.6-SNAPSHOT.
             </action>
             <action type="fix" dev="rbri" issue="2984265">
                 CSS: support for @font-face fixed.

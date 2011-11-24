@@ -37,8 +37,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACParserCSS21;
 
 /**
  * Unit tests for {@link CSSStyleSheet}.
@@ -367,22 +365,24 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     }
 
     /**
-     * Test that we have a workaround for a bug in CSSParser.
+     * Test that exception handling in insertRule.
      * @throws Exception if an error occurs
-     * @see #npe_root()
      */
     @Test
-    @Alerts("2")
-    @Browsers(Browser.FF)
-    public void npe() throws Exception {
+    @Alerts("exception")
+    public void deleteRuleInvalidParam() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "  var f = document.getElementById('myStyle');\n"
             + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
             + "  var rules = s.cssRules || s.rules;\n"
-            + "  s.insertRule('.testStyle { width: 24px; }', 0);\n"
-            + "  s.insertRule(' .testStyleDef { height: 42px; }', 0);\n"
-            + "  alert(rules.length);\n"
+            + "  try {\n"
+            + "    if (s.deleteRule)\n"
+            + "      s.deleteRule(19);\n"
+            + "    else\n"
+            + "      s.removeRule(19);\n"
+            + "    alert('deleted');\n"
+            + "  } catch(err) { alert('exception'); }\n"
             + "}</script>\n"
             + "<style id='myStyle'></style>\n"
             + "</head><body onload='doTest()'>\n"
@@ -392,21 +392,56 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     }
 
     /**
-     * This seems to be a bug in CSSParser. This test can be removed once the problem in CSSParser is fixed.
-     * @see <a href="http://sourceforge.net/tracker/index.php?func=detail&aid=2123264&group_id=82996&atid=567969">
-     * CSSParser bug [2123264] NPE in insertRule</a>
+     * Test that CSSParser can handle leading whitspace in insertRule.
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
-    @NotYetImplemented
-    public void npe_root() throws Exception {
-        final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
-        final InputSource source = new InputSource(new StringReader(""));
-        final org.w3c.dom.css.CSSStyleSheet ss = parser.parseStyleSheet(source, null, null);
+    @Alerts({ "2", ".testStyleDef", ".testStyle" })
+    @Browsers(Browser.FF)
+    public void insertRuleLeadingWhitespace() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var f = document.getElementById('myStyle');\n"
+            + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
+            + "  var rules = s.cssRules || s.rules;\n"
+            + "  s.insertRule('.testStyle { width: 24px; }', 0);\n"
+            + "  s.insertRule(' .testStyleDef { height: 42px; }', 0);\n"
+            + "  alert(rules.length);\n"
+            + "  alert(rules[0].selectorText);\n"
+            + "  alert(rules[1].selectorText);\n"
+            + "}</script>\n"
+            + "<style id='myStyle'></style>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
 
-        ss.insertRule(".testStyle", 0);
-        ss.insertRule(" .testStyleDef", 0);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test that exception handling in insertRule.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("exception")
+    public void insertInvalidRule() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var f = document.getElementById('myStyle');\n"
+            + "  var s = f.sheet ? f.sheet : f.styleSheet;\n"
+            + "  var rules = s.cssRules || s.rules;\n"
+            + "  try {\n"
+            + "    if (s.insertRule)\n"
+            + "      s.insertRule('.testStyle1', 0);\n"
+            + "    else\n"
+            + "      s.addRule('.testStyle1;', '', 1);\n"
+            + "    alert('inserted');\n"
+            + "  } catch(err) { alert('exception'); }\n"
+            + "}</script>\n"
+            + "<style id='myStyle'></style>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 
     /**
