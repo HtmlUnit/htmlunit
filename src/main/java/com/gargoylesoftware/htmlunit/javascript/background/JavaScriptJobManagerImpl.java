@@ -106,7 +106,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("job added to queue");
-                LOG.debug("    window is: " + getWindow());
+                LOG.debug("    window is: " + w);
                 LOG.debug("    added job: " + job.toString());
                 LOG.debug("after adding job to the queue, the queue is: ");
                 printQueue();
