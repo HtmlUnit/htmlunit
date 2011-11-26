@@ -29,10 +29,30 @@ import com.gargoylesoftware.htmlunit.gae.GAEUtils;
  * JavaScript engine.
  * TODO make configurable
  *
- * @version $Revision: $
+ * @version $Revision$
  * @author Ronald Brill
  */
 public final class BackgroundJavaScriptFactory {
+
+    private static BackgroundJavaScriptFactory Factory_ = new BackgroundJavaScriptFactory();
+
+    /**
+     * Returns the current factory.
+     *
+     * @return the active factory
+     */
+    public static BackgroundJavaScriptFactory theFactory() {
+        return Factory_;
+    }
+
+    /**
+     * Set the factory to a new one.
+     *
+     * @param factory the new factory.
+     */
+    public static void setFactory(final BackgroundJavaScriptFactory factory) {
+        Factory_ = factory;
+    }
 
     /**
      * Creates a new JavaScript execution job, where the JavaScript code to execute is a string.
@@ -44,7 +64,7 @@ public final class BackgroundJavaScriptFactory {
      *
      * @return JavaScriptJob the created job
      */
-    public static JavaScriptJob createJavaScriptJob(final int initialDelay, final Integer period, final String label,
+    public JavaScriptJob createJavaScriptJob(final int initialDelay, final Integer period, final String label,
             final WebWindow window, final String script) {
         return new JavaScriptStringJob(initialDelay, period, label, window, script);
     }
@@ -59,7 +79,7 @@ public final class BackgroundJavaScriptFactory {
      *
      * @return JavaScriptJob the created job
      */
-    public static JavaScriptFunctionJob createJavaScriptJob(final int initialDelay,
+    public JavaScriptFunctionJob createJavaScriptJob(final int initialDelay,
             final Integer period, final String label,
             final WebWindow window, final Function function) {
         return new JavaScriptFunctionJob(initialDelay, period, label, window, function);
@@ -72,7 +92,7 @@ public final class BackgroundJavaScriptFactory {
      *
      * @return JavaScriptJob the created job
      */
-    public static JavaScriptJob createJavascriptXMLHttpRequestJob(final ContextFactory contextFactory,
+    public JavaScriptJob createJavascriptXMLHttpRequestJob(final ContextFactory contextFactory,
             final ContextAction action) {
         return new JavascriptXMLHttpRequestJob(contextFactory, action);
     }
@@ -85,7 +105,7 @@ public final class BackgroundJavaScriptFactory {
      *
      * @return JavaScriptJob the created job
      */
-    public static JavaScriptJob  createDownloadBehaviorJob(final URL url,
+    public JavaScriptJob  createDownloadBehaviorJob(final URL url,
             final Function callback, final WebClient client) {
         return new DownloadBehaviorJob(url, callback, client);
     }
@@ -95,7 +115,7 @@ public final class BackgroundJavaScriptFactory {
      * @param webClient the WebClient of the executor
      * @return the executor.
      */
-    public static JavaScriptExecutor createJavaScriptExecutor(final WebClient webClient) {
+    public JavaScriptExecutor createJavaScriptExecutor(final WebClient webClient) {
         if (GAEUtils.isGaeMode()) {
             return new GAEJavaScriptExecutor(webClient);
         }
@@ -107,7 +127,7 @@ public final class BackgroundJavaScriptFactory {
      * @param webWindow the window the JavaScriptJobManager will work for
      * @return the new JavaScriptJobManager
      */
-    public static JavaScriptJobManager createJavaScriptJobManager(final WebWindow webWindow) {
+    public JavaScriptJobManager createJavaScriptJobManager(final WebWindow webWindow) {
         return new JavaScriptJobManagerImpl(webWindow);
     }
 

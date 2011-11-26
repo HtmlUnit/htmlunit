@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 /**
  * A JavaScript-triggered background job managed by a {@link JavaScriptJobManager}.
  *
- * @version $Revision: 6392 $
+ * @version $Revision$
  * @author Daniel Gredler
  * @author Amit Manjhi
  */
