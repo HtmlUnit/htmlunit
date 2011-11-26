@@ -1418,8 +1418,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (!page.getWebResponse().getWebRequest().getUrl().getHost().equals(url.getHost())) {
             throw Context.reportRuntimeError("Not authorized url: " + url);
         }
-        final JavaScriptJob job = BackgroundJavaScriptFactory.createDownloadBehaviorJob(url, callback,
-                getWindow().getWebWindow().getWebClient());
+        final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
+                createDownloadBehaviorJob(url, callback, getWindow().getWebWindow().getWebClient());
         page.getEnclosingWindow().getJobManager().addJob(job, page);
     }
 

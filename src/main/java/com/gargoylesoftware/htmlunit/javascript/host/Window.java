@@ -413,7 +413,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         else if (code instanceof String) {
             final String s = (String) code;
             final String description = "window.setTimeout(" + s + ", " + timeout + ")";
-            final JavaScriptJob job = BackgroundJavaScriptFactory.createJavaScriptJob(timeout, null, description, w, s);
+            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
+                    createJavaScriptJob(timeout, null, description, w, s);
             id = getWebWindow().getJobManager().addJob(job, page);
         }
         else if (code instanceof Function) {
@@ -427,7 +428,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             }
 
             final String description = "window.setTimeout(" + functionName + ", " + timeout + ")";
-            final JavaScriptJob job = BackgroundJavaScriptFactory.createJavaScriptJob(timeout, null, description, w, f);
+            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
+                    createJavaScriptJob(timeout, null, description, w, f);
             id = getWebWindow().getJobManager().addJob(job, page);
         }
         else {
@@ -1334,13 +1336,13 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
         else if (code instanceof String) {
             final String s = (String) code;
-            final JavaScriptJob job = BackgroundJavaScriptFactory.
+            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
                 createJavaScriptJob(timeout, Integer.valueOf(timeout), description, w, s);
             id = getWebWindow().getJobManager().addJob(job, page);
         }
         else if (code instanceof Function) {
             final Function f = (Function) code;
-            final JavaScriptJob job = BackgroundJavaScriptFactory.
+            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
                 createJavaScriptJob(timeout, Integer.valueOf(timeout), description, w, f);
             id = getWebWindow().getJobManager().addJob(job, page);
         }

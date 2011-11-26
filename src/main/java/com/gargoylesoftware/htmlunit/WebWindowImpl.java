@@ -69,7 +69,7 @@ public abstract class WebWindowImpl implements WebWindow {
     public WebWindowImpl(final WebClient webClient) {
         WebAssert.notNull("webClient", webClient);
         webClient_ = webClient;
-        jobManager_ = BackgroundJavaScriptFactory.createJavaScriptJobManager(this);
+        jobManager_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptJobManager(this);
     }
 
     /**

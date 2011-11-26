@@ -474,7 +474,8 @@ public class XMLHttpRequest extends SimpleScriptable {
                     return null;
                 }
             };
-            final JavaScriptJob job = BackgroundJavaScriptFactory.createJavascriptXMLHttpRequestJob(cf, action);
+            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
+                    createJavascriptXMLHttpRequestJob(cf, action);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Starting XMLHttpRequest thread for asynchronous request");
             }

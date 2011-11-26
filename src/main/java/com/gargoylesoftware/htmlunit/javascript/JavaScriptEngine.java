@@ -383,7 +383,7 @@ public class JavaScriptEngine {
      */
     public void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
         if (javaScriptExecutor_ == null) {
-            javaScriptExecutor_ = BackgroundJavaScriptFactory.createJavaScriptExecutor(webClient_);
+            javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient_);
         }
         javaScriptExecutor_.addWindow(webWindow);
     }
