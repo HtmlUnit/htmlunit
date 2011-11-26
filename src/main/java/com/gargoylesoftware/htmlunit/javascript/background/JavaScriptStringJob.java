@@ -18,11 +18,11 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * A {@link JavaScriptExecutionJob} created from a string of code.
- * @author Brad Clarke
+ * A {@link JavaScriptJob} created from a string of code.
  * @version $Revision$
+ * @author Brad Clarke
  */
-public class JavaScriptStringJob extends JavaScriptExecutionJob {
+class JavaScriptStringJob extends JavaScriptExecutionJob {
 
     /** The JavaScript code to execute. */
     private final String script_;

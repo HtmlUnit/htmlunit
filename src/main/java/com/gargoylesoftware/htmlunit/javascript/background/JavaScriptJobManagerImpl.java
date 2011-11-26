@@ -42,7 +42,8 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Ronald Brill
  * @see MemoryLeakTest
  */
-public class JavaScriptJobManagerImpl implements JavaScriptJobManager {
+class JavaScriptJobManagerImpl implements JavaScriptJobManager {
+    private static final long serialVersionUID = -4681836475956316533L;
 
     /**
      * The window to which this job manager belongs (weakly referenced, so as not

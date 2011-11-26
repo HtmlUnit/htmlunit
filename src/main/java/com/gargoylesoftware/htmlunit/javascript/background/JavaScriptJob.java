@@ -20,126 +20,49 @@ package com.gargoylesoftware.htmlunit.javascript.background;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Amit Manjhi
+ * @author Ronald Brill
  */
-public abstract class JavaScriptJob implements Runnable, Comparable<JavaScriptJob> {
-
-    /** The job ID. */
-    private Integer id_;
-
-    /** The initial amount of time to wait before executing this job. */
-    private final int initialDelay_;
-
-    /** The amount of time to wait between executions of this job (may be <tt>null</tt>). */
-    private final Integer period_;
-
-    private final boolean executeAsap_;
-
-    /**
-     * The time at which this job should be executed.
-     * Note: the browser will make its best effort to execute the job at the target
-     * time, as specified by the timeout/interval.  However, depending on other
-     * scheduled jobs, this target time may not be the actual time at which the job
-     * is executed.
-     */
-    private long targetExecutionTime_;
-
-    /** Creates a new job instance that executes once, immediately. */
-    public JavaScriptJob() {
-        this(0, null);
-    }
-
-    /**
-     * Creates a new job instance.
-     * @param initialDelay the initial amount of time to wait before executing this job
-     * @param period the amount of time to wait between executions of this job (may be <tt>null</tt>)
-     */
-    public JavaScriptJob(final int initialDelay, final Integer period) {
-        initialDelay_ = initialDelay;
-        period_ = period;
-        setTargetExecutionTime(initialDelay + System.currentTimeMillis());
-        executeAsap_ = (initialDelay == 0); // XHR are currently run as jobs and should be prioritary
-    }
-
-    /**
-     * Sets the job ID.
-     * @param id the job ID
-     */
-    public void setId(final Integer id) {
-        id_ = id;
-    }
+public interface JavaScriptJob extends Runnable, Comparable<JavaScriptJob> {
 
     /**
      * Returns the job ID.
      * @return the job ID
      */
-    public Integer getId() {
-        return id_;
-    }
+    Integer getId();
 
     /**
-     * Returns the initial amount of time to wait before executing this job.
-     * @return the initial amount of time to wait before executing this job
+     * Sets the job ID.
+     * @param id the job ID
      */
-    public int getInitialDelay() {
-        return initialDelay_;
-    }
-
-    /**
-     * Returns the amount of time to wait between executions of this job (may be <tt>null</tt>).
-     * @return the amount of time to wait between executions of this job (may be <tt>null</tt>)
-     */
-    public Integer getPeriod() {
-        return period_;
-    }
-
-    /**
-     * Returns <tt>true</tt> if this job executes periodically.
-     * @return <tt>true</tt> if this job executes periodically
-     */
-    public boolean isPeriodic() {
-        return period_  != null;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String toString() {
-        return "JavaScript Job " + id_;
-    }
-
-    /** {@inheritDoc} */
-    public int compareTo(final JavaScriptJob other) {
-        final boolean xhr1 = executeAsap_;
-        final boolean xhr2 = other.executeAsap_;
-
-        if (xhr1 && xhr2) {
-            return getId().intValue() - other.getId().intValue();
-        }
-
-        if (xhr1) {
-            return -1;
-        }
-
-        if (xhr2) {
-            return 1;
-        }
-
-        return (int) (targetExecutionTime_ - other.getTargetExecutionTime());
-    }
+    void setId(final Integer id);
 
     /**
      * Returns the target execution time of the job.
      * @return the target execution time in ms
      */
-    public long getTargetExecutionTime() {
-        return targetExecutionTime_;
-    }
+    long getTargetExecutionTime();
 
     /**
      * Sets the target execution time of the job.
      * @param targetExecutionTime the new target execution time.
      */
-    public void setTargetExecutionTime(final long targetExecutionTime) {
-        targetExecutionTime_ = targetExecutionTime;
-    }
+    void setTargetExecutionTime(final long targetExecutionTime);
 
+    /**
+     * Returns the amount of time to wait between executions of this job (may be <tt>null</tt>).
+     * @return the amount of time to wait between executions of this job (may be <tt>null</tt>)
+     */
+    Integer getPeriod();
+
+    /**
+     * Returns <tt>true</tt> if this job executes periodically.
+     * @return <tt>true</tt> if this job executes periodically
+     */
+    boolean isPeriodic();
+
+    /**
+     * Returns <tt>true</tt> if has to be executed asap.
+     * @return <tt>true</tt> if has to be executed asap
+     */
+    boolean isExecuteAsap();
 }

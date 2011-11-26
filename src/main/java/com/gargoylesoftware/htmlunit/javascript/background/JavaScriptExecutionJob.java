@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @see MemoryLeakTest
  */
-public abstract class JavaScriptExecutionJob extends JavaScriptJob {
+abstract class JavaScriptExecutionJob extends BasicJavaScriptJob {
 
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(JavaScriptExecutionJob.class);

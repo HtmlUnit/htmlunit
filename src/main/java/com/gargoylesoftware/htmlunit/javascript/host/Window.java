@@ -66,17 +66,17 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptFunctionJob;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptStringJob;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
+import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.host.Storage.Type;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
+import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
@@ -413,7 +413,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         else if (code instanceof String) {
             final String s = (String) code;
             final String description = "window.setTimeout(" + s + ", " + timeout + ")";
-            final JavaScriptStringJob job = new JavaScriptStringJob(timeout, null, description, w, s);
+            final JavaScriptJob job = BackgroundJavaScriptFactory.createJavaScriptJob(timeout, null, description, w, s);
             id = getWebWindow().getJobManager().addJob(job, page);
         }
         else if (code instanceof Function) {
@@ -427,7 +427,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             }
 
             final String description = "window.setTimeout(" + functionName + ", " + timeout + ")";
-            final JavaScriptFunctionJob job = new JavaScriptFunctionJob(timeout, null, description, w, f);
+            final JavaScriptJob job = BackgroundJavaScriptFactory.createJavaScriptJob(timeout, null, description, w, f);
             id = getWebWindow().getJobManager().addJob(job, page);
         }
         else {
@@ -1334,14 +1334,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
         else if (code instanceof String) {
             final String s = (String) code;
-            final JavaScriptStringJob job =
-                new JavaScriptStringJob(timeout, Integer.valueOf(timeout), description, w, s);
+            final JavaScriptJob job = BackgroundJavaScriptFactory.
+                createJavaScriptJob(timeout, Integer.valueOf(timeout), description, w, s);
             id = getWebWindow().getJobManager().addJob(job, page);
         }
         else if (code instanceof Function) {
             final Function f = (Function) code;
-            final JavaScriptFunctionJob job =
-                new JavaScriptFunctionJob(timeout, Integer.valueOf(timeout), description, w, f);
+            final JavaScriptJob job = BackgroundJavaScriptFactory.
+                createJavaScriptJob(timeout, Integer.valueOf(timeout), description, w, f);
             id = getWebWindow().getJobManager().addJob(job, page);
         }
         else {

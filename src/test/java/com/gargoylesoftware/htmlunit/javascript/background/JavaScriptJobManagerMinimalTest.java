@@ -41,7 +41,7 @@ public class JavaScriptJobManagerMinimalTest {
     private WebWindow window_;
     private Page page_;
     private JavaScriptJobManagerImpl manager_;
-    private JavaScriptExecutor eventLoop_;
+    private DefaultJavaScriptExecutor eventLoop_;
     enum WaitingMode {
         WAIT_STARTING_BEFORE, WAIT_TIMELIMIT,
     }
@@ -58,7 +58,7 @@ public class JavaScriptJobManagerMinimalTest {
         EasyMock.expect(window_.getEnclosedPage()).andReturn(page_).anyTimes();
         EasyMock.expect(window_.getJobManager()).andReturn(manager_).anyTimes();
         EasyMock.replay(window_, page_);
-        eventLoop_ = new JavaScriptExecutor(client_);
+        eventLoop_ = new DefaultJavaScriptExecutor(client_);
         eventLoop_.addWindow(window_);
     }
 
@@ -77,7 +77,7 @@ public class JavaScriptJobManagerMinimalTest {
     @Test
     public void addJob_periodicJob() throws Exception {
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(5, Integer.valueOf(100)) {
+        final JavaScriptJob job = new BasicJavaScriptJob(5, Integer.valueOf(100)) {
             public void run() {
                 count.increment();
             }
@@ -98,7 +98,7 @@ public class JavaScriptJobManagerMinimalTest {
     @Test
     public void addJob_periodicJob2() throws Exception {
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(5, Integer.valueOf(200)) {
+        final JavaScriptJob job = new BasicJavaScriptJob(5, Integer.valueOf(200)) {
             public void run() {
                 if (count.intValue() == 0) {
                     try {
@@ -127,7 +127,7 @@ public class JavaScriptJobManagerMinimalTest {
     @Test
     public void addJob_singleExecution() throws Exception {
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(5, null) {
+        final JavaScriptJob job = new BasicJavaScriptJob(5, null) {
             public void run() {
                 count.increment();
             }
@@ -145,7 +145,7 @@ public class JavaScriptJobManagerMinimalTest {
     public void addJob_multipleExecution_removeJob() throws Exception {
         final MutableInt id = new MutableInt();
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(50, Integer.valueOf(50)) {
+        final JavaScriptJob job = new BasicJavaScriptJob(50, Integer.valueOf(50)) {
             public void run() {
                 count.increment();
                 if (count.intValue() >= 5) {
@@ -164,7 +164,7 @@ public class JavaScriptJobManagerMinimalTest {
     @Test
     public void addJob_multipleExecution_removeAllJobs() throws Exception {
         final MutableInt count = new MutableInt(0);
-        final JavaScriptJob job = new JavaScriptJob(50, Integer.valueOf(50)) {
+        final JavaScriptJob job = new BasicJavaScriptJob(50, Integer.valueOf(50)) {
             public void run() {
                 count.increment();
                 if (count.intValue() >= 5) {
@@ -183,7 +183,7 @@ public class JavaScriptJobManagerMinimalTest {
     @Test
     public void getJobCount() throws Exception {
         final MutableInt count = new MutableInt();
-        final JavaScriptJob job = new JavaScriptJob(50, null) {
+        final JavaScriptJob job = new BasicJavaScriptJob(50, null) {
             public void run() {
                 count.setValue(manager_.getJobCount());
             }
@@ -196,7 +196,7 @@ public class JavaScriptJobManagerMinimalTest {
     }
 
     private void waitForCurrentLongJob(final WaitingMode waitingMode, final int expectedFinalJobCount) {
-        final JavaScriptJob job = new JavaScriptJob(50, null) {
+        final JavaScriptJob job = new BasicJavaScriptJob(50, null) {
             // Long job
             public void run() {
                 try {
@@ -240,12 +240,12 @@ public class JavaScriptJobManagerMinimalTest {
     }
 
     private void waitForSimpleJobs(final WaitingMode waitingMode, final int expectedFinalJobCount) {
-        final JavaScriptJob job1 = new JavaScriptJob(50, null) {
+        final JavaScriptJob job1 = new BasicJavaScriptJob(50, null) {
             public void run() {
             // Empty.
             }
         };
-        final JavaScriptJob job2 = new JavaScriptJob(1000, null) {
+        final JavaScriptJob job2 = new BasicJavaScriptJob(1000, null) {
             public void run() {
             // Empty.
             }
@@ -285,7 +285,7 @@ public class JavaScriptJobManagerMinimalTest {
 
     private void waitForComplexJobs(final WaitingMode waitingMode, final int expectedFinalJobCount) {
         final long start = System.currentTimeMillis();
-        final JavaScriptJob job1 = new JavaScriptJob(50, null) {
+        final JavaScriptJob job1 = new BasicJavaScriptJob(50, null) {
             // This job takes 30ms to complete.
             public void run() {
                 try {
@@ -296,7 +296,7 @@ public class JavaScriptJobManagerMinimalTest {
                 }
             }
         };
-        final JavaScriptJob job2 = new JavaScriptJob(60, null) {
+        final JavaScriptJob job2 = new BasicJavaScriptJob(60, null) {
             public void run() {
             // Empty.
             }

@@ -29,8 +29,6 @@ import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
@@ -38,7 +36,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
@@ -48,8 +45,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
@@ -69,6 +64,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
+import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -1422,59 +1418,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (!page.getWebResponse().getWebRequest().getUrl().getHost().equals(url.getHost())) {
             throw Context.reportRuntimeError("Not authorized url: " + url);
         }
-        final JavaScriptJob job = new DownloadBehaviorJob(url, callback);
+        final JavaScriptJob job = BackgroundJavaScriptFactory.createDownloadBehaviorJob(url, callback,
+                getWindow().getWebWindow().getWebClient());
         page.getEnclosingWindow().getJobManager().addJob(job, page);
-    }
-
-    /**
-     * A helper class for the IE behavior #default#download
-     * This represents a download action. The download is handled
-     * asynchronously, when the download is finished, the method specified
-     * by callback is called with one argument - the content of the response as string.
-     * @see #startDownload(String, Function)
-     * @author <a href="mailto:stefan@anzinger.net">Stefan Anzinger</a>
-     */
-    private final class DownloadBehaviorJob extends JavaScriptJob {
-        private final  URL url_;
-        private final Function callback_;
-
-        /**
-         * Creates a new instance.
-         * @param url the URL to download
-         * @param callback the callback function to call
-         */
-        private DownloadBehaviorJob(final URL url, final Function callback) {
-            url_ = url;
-            callback_ = callback;
-        }
-
-        /**
-         * Performs the download and calls the callback method.
-         */
-        public void run() {
-            final WebClient client = getWindow().getWebWindow().getWebClient();
-            final Scriptable scope = callback_.getParentScope();
-            final WebRequest request = new WebRequest(url_);
-            try {
-                final WebResponse webResponse = client.loadWebResponse(request);
-                final String content = webResponse.getContentAsString();
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("Downloaded content: " + StringUtils.abbreviate(content, 512));
-                }
-                final Object[] args = new Object[] {content};
-                final ContextAction action = new ContextAction() {
-                    public Object run(final Context cx) {
-                        callback_.call(cx, scope, scope, args);
-                        return null;
-                    }
-                };
-                final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
-                cf.call(action);
-            }
-            catch (final IOException e) {
-                LOG.error("Behavior #default#download: Cannot download " + url_, e);
-            }
-        }
     }
 
     //----------------------- END #default#download BEHAVIOR -----------------------

@@ -43,12 +43,11 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.background.GAEJavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
+import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -384,25 +383,14 @@ public class JavaScriptEngine {
      */
     public void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
         if (javaScriptExecutor_ == null) {
-            javaScriptExecutor_ = createJavaScriptExecutor();
+            javaScriptExecutor_ = BackgroundJavaScriptFactory.createJavaScriptExecutor(webClient_);
         }
         javaScriptExecutor_.addWindow(webWindow);
     }
 
     /**
-     * Creates the {@link JavaScriptExecutor} that will be used to handle JS.
-     * @return the executor.
-     */
-    protected JavaScriptExecutor createJavaScriptExecutor() {
-        if (GAEUtils.isGaeMode()) {
-            return new GAEJavaScriptExecutor(webClient_);
-        }
-        return new JavaScriptExecutor(webClient_);
-    }
-
-    /**
      * Executes the jobs in the eventLoop till timeoutMillis expires or the eventLoop becomes empty.
-     * No use in non-GAE mode (see {@link GAEUtils#isGaeMode}.
+     * No use in non-GAE mode (see {@link com.gargoylesoftware.htmlunit.gae.GAEUtils#isGaeMode}.
      * @param timeoutMillis the timeout in milliseconds
      * @return the number of jobs executed
      */
@@ -723,6 +711,8 @@ public class JavaScriptEngine {
     }
 
     private static class FallbackCaller extends ScriptableObject {
+        private static final long serialVersionUID = 5142592186670858001L;
+
         @Override
         public Object get(final String name, final Scriptable start) {
             if (start instanceof ScriptableWithFallbackGetter) {

@@ -23,8 +23,8 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManagerImpl;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManagerI
  * @author Ahmed Ashour
  */
 public abstract class WebWindowImpl implements WebWindow {
+    private static final long serialVersionUID = 1272747208915903553L;
 
     private static final Log LOG = LogFactory.getLog(WebWindowImpl.class);
 
@@ -46,9 +47,9 @@ public abstract class WebWindowImpl implements WebWindow {
     private Page enclosedPage_;
     private Object scriptObject_;
     private JavaScriptJobManager jobManager_;
-    private List<WebWindowImpl> childWindows_ = new ArrayList<WebWindowImpl>();
+    private final List<WebWindowImpl> childWindows_ = new ArrayList<WebWindowImpl>();
     private String name_ = "";
-    private History history_ = new History(this);
+    private final History history_ = new History(this);
     private boolean closed_;
 
     /**
@@ -68,7 +69,7 @@ public abstract class WebWindowImpl implements WebWindow {
     public WebWindowImpl(final WebClient webClient) {
         WebAssert.notNull("webClient", webClient);
         webClient_ = webClient;
-        jobManager_ = new JavaScriptJobManagerImpl(this);
+        jobManager_ = BackgroundJavaScriptFactory.createJavaScriptJobManager(this);
     }
 
     /**

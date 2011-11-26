@@ -23,10 +23,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * A {@link JavaScriptJob} created from a {@link Function} object.
- * @author Brad Clarke
  * @version $Revision$
+ * @author Brad Clarke
  */
-public class JavaScriptFunctionJob extends JavaScriptExecutionJob {
+class JavaScriptFunctionJob extends JavaScriptExecutionJob {
 
     /** The JavaScript code to execute. */
     private final Function function_;

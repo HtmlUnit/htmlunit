@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
+import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
@@ -95,7 +96,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private WebResponse webResponse_;
     private String overriddenMimeType_;
     private HtmlPage containingPage_;
-    private boolean caseSensitiveProperties_;
+    private final boolean caseSensitiveProperties_;
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -473,15 +474,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                     return null;
                 }
             };
-            final JavaScriptJob job = new JavaScriptJob() {
-                public void run() {
-                    cf.call(action);
-                }
-                @Override
-                public String toString() {
-                    return "XMLHttpRequest Job " + getId();
-                }
-            };
+            final JavaScriptJob job = BackgroundJavaScriptFactory.createJavascriptXMLHttpRequestJob(cf, action);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Starting XMLHttpRequest thread for asynchronous request");
             }
