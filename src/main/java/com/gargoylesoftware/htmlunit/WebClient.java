@@ -311,7 +311,7 @@ public class WebClient implements Serializable {
         loadWebResponseInto(webResponse, webWindow);
 
         // start execution here
-        // note: we have to do this also of the server reports an error!
+        // note: we have to do this also if the server reports an error!
         //       e.g. if the server returns a 404 error page that includes javascript
         if (scriptEngine_ != null) {
             scriptEngine_.registerWindowAndMaybeStartEventLoop(webWindow);
