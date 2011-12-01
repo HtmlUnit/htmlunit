@@ -19,6 +19,7 @@ import java.lang.ref.WeakReference;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -67,21 +68,37 @@ abstract class JavaScriptExecutionJob extends BasicJavaScriptJob {
         }
 
         try {
-            // Verify that the window is still open and the current page is the same.
-            final HtmlPage page = (HtmlPage) w.getEnclosedPage();
-            if (w.getEnclosedPage() != page || !w.getWebClient().getWebWindows().contains(w)) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("The page that originated this job doesn't exist anymore. Execution cancelled.");
-                }
-                return;
-            }
-            else if (w.isClosed()) {
+            // Verify that the window is still open
+            if (w.isClosed()) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Enclosing window is now closed. Execution cancelled.");
                 }
                 return;
             }
-            runJavaScript(page);
+            if (!w.getWebClient().getWebWindows().contains(w)) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Enclosing window is now closed. Execution cancelled.");
+                }
+                return;
+            }
+
+            // Verify that the current page is still available and a html page
+            final Page enclosedPage = w.getEnclosedPage();
+            if (!(enclosedPage instanceof HtmlPage)) {
+                if (enclosedPage == null) {
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("The page that originated this job doesn't exist anymore. Execution cancelled.");
+                    }
+                    return;
+                }
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("The page that originated this job is no html page ("
+                                + enclosedPage.getClass().getName() + "). Execution cancelled.");
+                }
+                return;
+            }
+
+            runJavaScript((HtmlPage) enclosedPage);
         }
         finally {
             if (LOG.isDebugEnabled()) {

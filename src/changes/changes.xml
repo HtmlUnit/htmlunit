@@ -6,6 +6,11 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3432334" due-to="rmillet42">
+                JavaScript: possible ClassCastException fixed in JavaScriptExecutionJob.
+                Additionally cleaned up the code a bit and some more details added to the
+                error messages.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: StyleSheet insertRule/addRule and deleteRule/removeRule
                 exception handling fixed. Now we reporting syntax errors back to
