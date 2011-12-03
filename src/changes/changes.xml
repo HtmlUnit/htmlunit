@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: script.text works correct now for script nodes with more
+                than one child node.
+            </action>
             <action type="fix" dev="rbri" issue="3432334" due-to="rmillet42">
                 JavaScript: possible ClassCastException fixed in JavaScriptExecutionJob.
                 Additionally cleaned up the code a bit and some more details added to the

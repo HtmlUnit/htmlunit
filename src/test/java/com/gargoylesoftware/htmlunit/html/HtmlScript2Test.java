@@ -20,8 +20,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlScript}, but as WebDriverTestCase.
@@ -218,6 +218,46 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "  var script = document.createElement('script');"
             + "  script.appendChild(document.createTextNode('alert(\"1\");'));\n;"
             + "  script.appendChild(document.createTextNode('alert(\"2\");'));\n;"
+            + "  document.body.appendChild(script);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("var x=1;x=2;")
+    public void getTextMultipleTextNodes() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<script>\n"
+            + "  var script = document.createElement('script');"
+            + "  script.appendChild(document.createTextNode('var x=1;'));\n;"
+            + "  script.appendChild(document.createTextNode('x=2;'));\n;"
+            + "  document.body.appendChild(script);\n"
+            + "  alert(script.text);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("3")
+    public void setTextMultipleTextNodes() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<script>\n"
+            + "  var script = document.createElement('script');"
+            + "  script.appendChild(document.createTextNode('alert(\"1\");'));\n;"
+            + "  script.appendChild(document.createTextNode('alert(\"2\");'));\n;"
+            + "  script.text = 'alert(\"3\");';\n;"
             + "  document.body.appendChild(script);\n"
             + "</script>\n"
             + "</body></html>";

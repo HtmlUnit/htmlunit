@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HTMLScriptElement extends HTMLElement {
 
@@ -56,11 +57,14 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @Override
     public String jsxGet_text() {
-        final DomNode firstChild = getDomNodeOrDie().getFirstChild();
-        if (firstChild != null) {
-            return firstChild.getNodeValue();
+        final StringBuilder scriptCode = new StringBuilder();
+        for (final DomNode node : getDomNodeOrDie().getChildren()) {
+            if (node instanceof DomText) {
+                final DomText domText = (DomText) node;
+                scriptCode.append(domText.getData());
+            }
         }
-        return "";
+        return scriptCode.toString();
     }
 
     /**
@@ -69,14 +73,9 @@ public class HTMLScriptElement extends HTMLElement {
      */
     public void jsxSet_text(final String text) {
         final DomNode htmlElement = getDomNodeOrDie();
-        DomNode firstChild = htmlElement.getFirstChild();
-        if (firstChild == null) {
-            firstChild = new DomText(htmlElement.getPage(), text);
-            htmlElement.appendChild(firstChild);
-        }
-        else {
-            firstChild.setNodeValue(text);
-        }
+        htmlElement.removeAllChildren();
+        final DomNode textChild = new DomText(htmlElement.getPage(), text);
+        htmlElement.appendChild(textChild);
     }
 
     /**
