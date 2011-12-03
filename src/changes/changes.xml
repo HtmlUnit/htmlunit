@@ -30,6 +30,10 @@
                 JavaScript: concatenate all text nodes under a &lt;script&gt; tag when
                 calculating the script code.
             </action>
+            <action type="fix" dev="rbri" issue="3006858">
+                JavaScript: No execution of javascript, if script tag 
+                imported (replaceChild) from different dom (xml).
+            </action>
             <action type="fix" dev="rbri" issue="3434548">
                 JavaScript: fix transformation of regular expressions like '{{something}}' into
                 java regular expressions.
