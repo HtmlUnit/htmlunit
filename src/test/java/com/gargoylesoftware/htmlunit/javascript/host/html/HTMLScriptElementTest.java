@@ -113,6 +113,27 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Test for bug 2993940.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "start", "end" }, IE = { "start", "executed", "end" })
+    @NotYetImplemented(Browser.IE)
+    public void reexecuteModifiedScriptWhenReappending() throws Exception {
+        final String html =
+              "<html><head><title>foo</title></head><body>\n"
+            + "<script>\n"
+            + "  alert('start');\n"
+            + "  var script = document.getElementsByTagName('script')[0];\n"
+            + "  script.text = \"alert('executed');\";\n"
+            + "  alert('end');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
