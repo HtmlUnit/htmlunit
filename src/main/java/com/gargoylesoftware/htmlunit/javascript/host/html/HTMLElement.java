@@ -63,8 +63,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -672,7 +672,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the "clientHeight" attribute
      */
     public int jsxGet_clientHeight() {
-        final boolean includePadding = !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_67);
+        final boolean includePadding =
+            !getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING);
         final ComputedCSSStyleDeclaration style = getWindow().jsxFunction_getComputedStyle(this, null);
         return style.getCalculatedHeight(false, includePadding);
     }
@@ -682,7 +683,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the "clientWidth" attribute
      */
     public int jsxGet_clientWidth() {
-        final boolean includePadding = !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_68);
+        final boolean includePadding =
+            !getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING);
         final ComputedCSSStyleDeclaration style = getWindow().jsxFunction_getComputedStyle(this, null);
         return style.getCalculatedWidth(false, includePadding);
     }

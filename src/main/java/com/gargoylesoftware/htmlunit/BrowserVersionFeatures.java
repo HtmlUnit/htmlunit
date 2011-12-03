@@ -452,12 +452,6 @@ public enum BrowserVersionFeatures {
     GENERATED_66,
 
     /** Was originally .isIE(). */
-    GENERATED_67,
-
-    /** Was originally .isIE(). */
-    GENERATED_68,
-
-    /** Was originally .isIE(). */
     GENERATED_69,
 
     /** Was originally .isIE(). */
@@ -654,6 +648,11 @@ public enum BrowserVersionFeatures {
      * doesn't allow to set domain of about:blank.
      */
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
+
+    /** Javascript calculation of element clientHeight/Width does not
+     * include the padding.
+     */
+    JS_ELEMENT_EXTENT_WITHOUT_PADDING,
 
     /** Javascript event aborted check is based on the event handler return value (IE);
      * (standards-compliant browsers doing this via preventDefault).
