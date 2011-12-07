@@ -23,6 +23,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -30,10 +34,6 @@ import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -759,6 +759,35 @@ public class Window2Test extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Regression test for bug 2944261.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "605", "1256", "705", "1256" })
+    public void changeHeightsAndWidths() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script language='javascript'>\n"
+            + "  function test() {\n"
+            + "    var oldHeight = document.body.clientHeight;\n"
+            + "    var oldWidth = document.body.clientWidth;\n"
+            + "    alert(document.body.clientHeight);\n"
+            + "    alert(document.body.clientWidth);\n"
+            + "    newDiv = document.createElement('div');\n"
+            + "    document.body.appendChild(newDiv);\n"
+            + "    newDiv.style['height'] = oldHeight + 100 + 'px';\n"
+            + "    newDiv.style['width'] = oldWidth + 100 + 'px';\n"
+            + "    alert(document.body.clientHeight);\n"
+            + "    alert(document.body.clientWidth);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
         loadPageWithAlerts2(html);
     }
 

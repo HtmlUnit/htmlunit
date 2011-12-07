@@ -66,8 +66,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.host.Storage.Type;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
@@ -1660,7 +1660,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     final DomNode node = entry.getKey().getDomNodeOrDie();
                     if (changed == node
                         || changed.getParentNode() == node.getParentNode()
-                        || changed.isAncestorOf(node)) {
+                        || changed.isAncestorOf(node)
+                        || node.isAncestorOf(changed)) {
                         i.remove();
                     }
                 }

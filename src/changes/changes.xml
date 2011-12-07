@@ -6,6 +6,11 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="2944261">
+                JavaScript: Remove also the node parents from style cache when changing
+                a node, because some styles have an effect for the parent properties
+                also (e.g. height, width).
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: script.text works correct now for script nodes with more
                 than one child node.
