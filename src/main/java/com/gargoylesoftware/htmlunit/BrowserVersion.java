@@ -119,10 +119,18 @@ public class BrowserVersion implements Serializable {
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 8.0; Windows NT 6.0)",
         "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)", 8, "IE8", null);
 
+    /** Chrome 15. Warning: highly experimental!!! */
+    public static final BrowserVersion CHROME_15 = new BrowserVersion(
+        "Netscape", "5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.2"
+        + " (KHTML, like Gecko) Chrome/15.0.874.121 Safari/535.2",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.2"
+        + " (KHTML, like Gecko) Chrome/15.0.874.121 Safari/535.2",
+        15, "Chrome15", null);
+
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7;
 
-    /** Register plugins for the Firefox browser versions. */
+    /** Register plugins for the browser versions. */
     static {
         INTERNET_EXPLORER_6.initDefaultFeatures();
         INTERNET_EXPLORER_7.initDefaultFeatures();
@@ -135,6 +143,12 @@ public class BrowserVersion implements Serializable {
             "Shockwave Flash", "swf"));
         FIREFOX_3.getPlugins().add(flash);
         FIREFOX_3_6.getPlugins().add(flash);
+        CHROME_15.initDefaultFeatures();
+        CHROME_15.setApplicationCodeName("Mozilla");
+        CHROME_15.setPlatform("MacIntel");
+        CHROME_15.setCpuClass(null);
+        CHROME_15.setBrowserLanguage("undefined");
+        // there are other issues with Chrome; a different productSub, etc.
     }
 
     /**

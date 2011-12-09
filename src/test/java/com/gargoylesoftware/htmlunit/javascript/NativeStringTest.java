@@ -46,7 +46,7 @@ public class NativeStringTest extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -54,7 +54,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "anchor: function", "big: function", "blink: function", "bold: function", "charAt: function",
+    @Alerts({ "anchor: function", "big: function", "blink: function", "bold: function", "charAt: function",
             "charCodeAt: function", "concat: function", "constructor: function", "equals: undefined",
             "equalsIgnoreCase: undefined", "fixed: function", "fontcolor: function", "fontsize: function",
             "fromCharCode: undefined", "indexOf: function", "italics: function", "lastIndexOf: function",
@@ -62,31 +62,13 @@ public class NativeStringTest extends WebDriverTestCase {
             "slice: function", "small: function", "split: function", "strike: function", "sub: function",
             "substr: function", "substring: function", "sup: function", "toLocaleLowerCase: function",
             "toLocaleUpperCase: function", "toLowerCase: function", "toString: function", "toUpperCase: function",
-            "trim: undefined", "valueOf: function" },
-        FF3 = { "anchor: function", "big: function", "blink: function", "bold: function", "charAt: function",
-            "charCodeAt: function", "concat: function", "constructor: function", "equals: undefined",
-            "equalsIgnoreCase: undefined", "fixed: function", "fontcolor: function", "fontsize: function",
-            "fromCharCode: undefined", "indexOf: function", "italics: function", "lastIndexOf: function",
-            "link: function", "localeCompare: function", "match: function", "replace: function", "search: function",
-            "slice: function", "small: function", "split: function", "strike: function", "sub: function",
-            "substr: function", "substring: function", "sup: function", "toLocaleLowerCase: function",
-            "toLocaleUpperCase: function", "toLowerCase: function", "toString: function", "toUpperCase: function",
-            "trim: undefined", "valueOf: function" },
-        FF3_6 = { "anchor: function", "big: function", "blink: function", "bold: function", "charAt: function",
-            "charCodeAt: function", "concat: function", "constructor: function", "equals: undefined",
-            "equalsIgnoreCase: undefined", "fixed: function", "fontcolor: function", "fontsize: function",
-            "fromCharCode: undefined", "indexOf: function", "italics: function", "lastIndexOf: function",
-            "link: function", "localeCompare: function", "match: function", "replace: function", "search: function",
-            "slice: function", "small: function", "split: function", "strike: function", "sub: function",
-            "substr: function", "substring: function", "sup: function", "toLocaleLowerCase: function",
-            "toLocaleUpperCase: function", "toLowerCase: function", "toString: function", "toUpperCase: function",
-            "trim: function", "valueOf: function" })
+            "valueOf: function" })
     public void methods_common() throws Exception {
         final String[] methods = {"anchor", "big", "blink", "bold", "charAt", "charCodeAt", "concat", "constructor",
             "equals", "equalsIgnoreCase", "fixed", "fontcolor", "fontsize", "fromCharCode", "indexOf", "italics",
             "lastIndexOf", "link", "localeCompare", "match", "replace", "search", "slice", "small", "split",
             "strike", "sub", "substr", "substring", "sup", "toLocaleLowerCase", "toLocaleUpperCase", "toLowerCase",
-            "toString", "toUpperCase", "trim", "valueOf"};
+            "toString", "toUpperCase", "valueOf"};
         final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);
         loadPageWithAlerts2(html);
     }
@@ -96,9 +78,12 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "toSource: function", IE = "toSource: undefined")
+    @Alerts(FF = { "toSource: function", "trim: function" },
+            FF3 = { "toSource: function", "trim: undefined" },
+            IE = { "toSource: undefined", "trim: undefined" },
+            CHROME = { "toSource: undefined", "trim: function" })
     public void methods_differences() throws Exception {
-        final String[] methods = {"toSource"};
+        final String[] methods = {"toSource", "trim" };
         final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);
         loadPageWithAlerts2(html);
     }
@@ -107,7 +92,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "", FF3 = "", FF3_6 = { "2", "3", "4" })
+    @Alerts(IE = "", FF3 = "", DEFAULT = { "2", "3", "4" })
     public void trim() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -122,7 +107,7 @@ public class NativeStringTest extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }

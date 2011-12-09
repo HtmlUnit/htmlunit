@@ -97,7 +97,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "string", "true" }, IE = { "undefined", "false" })
+    @Alerts(DEFAULT = { "string", "true" }, IE = { "undefined", "false" })
     public void productSub() throws Exception {
         final String html = "<html><head><script>\n"
             + "alert(typeof(navigator.productSub));\n"
@@ -258,33 +258,18 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Test closing using JavaScript.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = "Netscape", IE = "Microsoft Internet Explorer")
-    public void testUseConfiguredBrowser() throws Exception {
-        final String html
-            = "<html><head><title>First</title></head>\n"
-            + "<body onload='alert(window.navigator.appName)'></body>\n"
-            + "</html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
      * Test language property (only for Mozilla).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "en-us", IE = "undefined")
+    @Alerts(FF = "en-us", IE = "undefined", CHROME = "undefined")
     public void testLanguage() throws Exception {
         final String html
             = "<html><head><title>First</title></head>\n"
             + "<body onload='alert(window.navigator.language)'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -305,7 +290,7 @@ public class NavigatorTest extends WebDriverTestCase {
             + "</head><body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -313,7 +298,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "Gecko", IE = "undefined")
+    @Alerts(FF = "Gecko", IE = "undefined", CHROME = "Gecko")
     public void product() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -325,6 +310,6 @@ public class NavigatorTest extends WebDriverTestCase {
             + "</head><body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }

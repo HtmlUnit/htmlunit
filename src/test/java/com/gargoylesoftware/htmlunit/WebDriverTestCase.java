@@ -55,6 +55,8 @@ import org.mortbay.jetty.webapp.WebAppContext;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -75,8 +77,9 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
    browsers=hu,ff3,ff3.6,ie8
    ff3.bin=c:\\location_to_firefox.exe              [Windows]
    ff3.6.bin=/use/bin/firefox                         [Unix-like]
+   chrome15.bin=/path/to/chromedriver                 [Unix-like]
  * </pre>
- * The file should contain three properties: "browsers", "ff3.bin" and "ff3.6.bin".
+ * The file should contain four properties: "browsers", "ff3.bin", "ff3.6.bin", and "chrome15.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
  *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ff3", "hu-ff3.6",
@@ -85,6 +88,9 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *   to have multiple IEs on the same machine</li>
  *   <li>ff3.bin: is the location of the FF3 binary, in Windows use double back-slashes</li>
  *   <li>ff3.6.bin: is the location of the FF3.6 binary, in Windows use double back-slashes</li>
+ *   <li>chrome15.bin: is the location of the ChromeDriver binary (see
+ *   <a href="http://code.google.com/p/selenium/downloads/detail?name=chromedriver%20downloads.txt">
+ *   WebDriver downloads</a></li>
  * </ul>
  * </p>
  *
@@ -98,9 +104,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static List<String> BROWSERS_PROPERTIES_;
     private static String FF3_BIN_;
     private static String FF3_6_BIN_;
+    private static String CHROME15_BIN_;
 
     private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
     private static Server STATIC_SERVER_;
+    private static ChromeDriverService CHROME_SERVICE_;
 
     private static String JSON_;
     private boolean useRealBrowser_;
@@ -119,13 +127,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
                             .replaceAll(" ", "").toLowerCase().split(","));
                     FF3_BIN_ = properties.getProperty("ff3.bin");
                     FF3_6_BIN_ = properties.getProperty("ff3.6.bin");
+                    CHROME15_BIN_ = properties.getProperty("chrome15.bin");
                 }
             }
             catch (final Exception e) {
-                LOG.info("Error reading htmlunit.properties", e);
+                LOG.error("Error reading htmlunit.properties. Ignoring!", e);
             }
             if (BROWSERS_PROPERTIES_ == null) {
-                BROWSERS_PROPERTIES_ = Arrays.asList(new String[] {"hu"});
+                BROWSERS_PROPERTIES_ = Arrays.asList("hu");
             }
         }
         return BROWSERS_PROPERTIES_;
@@ -139,7 +148,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final BrowserVersion browserVersion = getBrowserVersion();
         WebDriver driver = WEB_DRIVERS_.get(browserVersion);
         if (driver == null) {
-            driver = buildWebDriver();
+            try {
+                driver = buildWebDriver();
+            }
+            catch (final IOException e) {
+                throw new RuntimeException(e);
+            }
             // cache driver instances for real browsers but not for HtmlUnit
             if (!(driver instanceof HtmlUnitDriver)) {
                 WEB_DRIVERS_.put(browserVersion, driver);
@@ -177,11 +191,25 @@ public abstract class WebDriverTestCase extends WebTestCase {
         useRealBrowser_ = useWebDriver;
     }
 
-    private WebDriver buildWebDriver() {
+    private WebDriver buildWebDriver() throws IOException {
         if (useRealBrowser_) {
             if (getBrowserVersion().isIE()) {
                 return new InternetExplorerDriver();
             }
+            if (BrowserVersion.CHROME_15.equals(getBrowserVersion())) {
+                if (CHROME_SERVICE_ == null) {
+                    CHROME_SERVICE_ = new ChromeDriverService.Builder()
+                        .usingChromeDriverExecutable(new File(CHROME15_BIN_))
+                        .usingAnyFreePort()
+                        .build();
+                    CHROME_SERVICE_.start();
+                }
+                return new ChromeDriver(CHROME_SERVICE_);
+            }
+            if (!getBrowserVersion().isFirefox()) {
+                throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
+            }
+
             String ffBinary = null;
             if (getBrowserVersion() == BrowserVersion.FIREFOX_3) {
                 ffBinary = FF3_BIN_;

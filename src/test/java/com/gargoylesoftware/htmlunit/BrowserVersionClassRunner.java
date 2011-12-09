@@ -67,48 +67,37 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             if (isDefined(alerts.value())) {
                 expectedAlerts = alerts.value();
             }
-            else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6) {
-                if (isDefined(alerts.IE6())) {
-                    expectedAlerts = alerts.IE6();
+            else {
+                if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6) {
+                    expectedAlerts = firstDefined(alerts.IE6(), alerts.IE(), alerts.DEFAULT());
                 }
-                else if (isDefined(alerts.IE())) {
-                    expectedAlerts = alerts.IE();
+                else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7) {
+                    expectedAlerts = firstDefined(alerts.IE7(), alerts.IE(), alerts.DEFAULT());
                 }
-            }
-            else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7) {
-                if (isDefined(alerts.IE7())) {
-                    expectedAlerts = alerts.IE7();
+                else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
+                    expectedAlerts = firstDefined(alerts.IE8(), alerts.IE(), alerts.DEFAULT());
                 }
-                else if (isDefined(alerts.IE())) {
-                    expectedAlerts = alerts.IE();
+                else if (browserVersion_ == BrowserVersion.FIREFOX_3) {
+                    expectedAlerts = firstDefined(alerts.FF3(), alerts.FF(), alerts.DEFAULT());
                 }
-            }
-            else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
-                if (isDefined(alerts.IE8())) {
-                    expectedAlerts = alerts.IE8();
+                else if (browserVersion_ == BrowserVersion.FIREFOX_3_6) {
+                    expectedAlerts = firstDefined(alerts.FF3_6(), alerts.FF(), alerts.DEFAULT());
                 }
-                else if (isDefined(alerts.IE())) {
-                    expectedAlerts = alerts.IE();
-                }
-            }
-            else if (browserVersion_ == BrowserVersion.FIREFOX_3) {
-                if (isDefined(alerts.FF3())) {
-                    expectedAlerts = alerts.FF3();
-                }
-                else if (isDefined(alerts.FF())) {
-                    expectedAlerts = alerts.FF();
-                }
-            }
-            else if (browserVersion_ == BrowserVersion.FIREFOX_3_6) {
-                if (isDefined(alerts.FF3_6())) {
-                    expectedAlerts = alerts.FF3_6();
-                }
-                else if (isDefined(alerts.FF())) {
-                    expectedAlerts = alerts.FF();
+                else if (browserVersion_ == BrowserVersion.CHROME_15) {
+                    expectedAlerts = firstDefined(alerts.CHROME15(), alerts.CHROME(), alerts.DEFAULT());
                 }
             }
         }
         testCase.setExpectedAlerts(expectedAlerts);
+    }
+
+    private String[] firstDefined(final String[]... variants) {
+        for (final String[] var : variants) {
+            if (isDefined(var)) {
+                return var;
+            }
+        }
+        return new String[] {};
     }
 
     @Override

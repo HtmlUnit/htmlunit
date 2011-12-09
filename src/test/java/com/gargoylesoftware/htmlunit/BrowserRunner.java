@@ -63,22 +63,27 @@ public class BrowserRunner extends Suite {
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             final List<String> browsers = WebDriverTestCase.getBrowsersProperties();
+            if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
+            }
+            if (browsers.contains("hu") || browsers.contains("hu-ff3.6")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3_6, false));
+            }
+            if (browsers.contains("hu") || browsers.contains("hu-ie6")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
+            }
+            if (browsers.contains("hu") || browsers.contains("hu-ie7")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7, false));
+            }
+            if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
+            }
+            // in a first time, chrome can be specified but is not integrated in the default run
+            if (/*browsers.contains("hu") || */browsers.contains("hu-chrome15")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME_15, false));
+            }
+
             if (WebDriverTestCase.class.isAssignableFrom(klass)) {
-                if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
-                }
-                if (browsers.contains("hu") || browsers.contains("hu-ff3.6")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3_6, false));
-                }
-                if (browsers.contains("hu") || browsers.contains("hu-ie6")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
-                }
-                if (browsers.contains("hu") || browsers.contains("hu-ie7")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7, false));
-                }
-                if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
-                }
                 if (browsers.contains("ff3")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, true));
                 }
@@ -94,22 +99,8 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ie8")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, true));
                 }
-            }
-            else {
-                if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
-                }
-                if (browsers.contains("hu") || browsers.contains("hu-ff3.6")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3_6, false));
-                }
-                if (browsers.contains("hu") || browsers.contains("hu-ie6")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
-                }
-                if (browsers.contains("hu") || browsers.contains("hu-ie7")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7, false));
-                }
-                if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
+                if (browsers.contains("chrome15")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME_15, true));
                 }
             }
         }
@@ -155,6 +146,12 @@ public class BrowserRunner extends Suite {
      * @see Browsers
      */
     public enum Browser {
+        /** all versions of Chrome. */
+        CHROME,
+
+        /** Chrome 15. */
+        CHROME15,
+
         /** All versions of Internet Explorer. */
         IE,
 
@@ -193,7 +190,7 @@ public class BrowserRunner extends Suite {
          * The browsers which the case succeeds (but fails with remaining ones).
          */
         Browser[] value() default {
-            Browser.IE, Browser.FF
+            Browser.IE, Browser.FF, Browser.CHROME
         };
     }
 
@@ -227,6 +224,15 @@ public class BrowserRunner extends Suite {
 
         /** Alerts for Firefox 3.6. If not defined, {@link #FF()} is used. */
         String[] FF3_6() default {EMPTY_DEFAULT };
+
+        /** Alerts for any Chrome  If not defined, it can be overriden by a specific chrome version. */
+        String[] CHROME() default{EMPTY_DEFAULT };
+
+        /** Alerts for Chrome 15. If not defined, {@Link #CHROME()} is used. */
+        String[] CHROME15() default{EMPTY_DEFAULT };
+
+        /** The default alerts, if nothing more specific is defined. */
+        String[] DEFAULT() default{EMPTY_DEFAULT };
     }
 
     /**
@@ -241,7 +247,7 @@ public class BrowserRunner extends Suite {
          * The browsers with which the case is not yet implemented.
          */
         Browser[] value() default {
-            Browser.IE, Browser.FF
+            Browser.IE, Browser.FF, Browser.CHROME
         };
     }
 
