@@ -166,6 +166,7 @@
                     <additionalProjectnatures>
                         <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
                     </additionalProjectnatures>
+                    <useProjectReferences>false</useProjectReferences>
                     <additionalConfig>
                         <file>
                             <name>.checkstyle</name>
