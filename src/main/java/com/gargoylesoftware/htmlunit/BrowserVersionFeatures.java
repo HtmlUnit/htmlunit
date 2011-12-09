@@ -422,9 +422,6 @@ public enum BrowserVersionFeatures {
     GENERATED_55,
 
     /** Was originally .isIE(). */
-    GENERATED_56,
-
-    /** Was originally .isIE(). */
     GENERATED_57,
 
     /** Was originally .isIE(). */
@@ -634,6 +631,9 @@ public enum BrowserVersionFeatures {
 
     /** */
     JS_DEFERRED,
+
+    /** Javascript document.appendChild is allowed (IE). */
+    JS_DOCUMENT_APPEND_CHILD_SUPPORTED,
 
     /** Javascript function document.createElement can process html code.
      * e.g. document.createElement("<INPUT TYPE='RADIO' NAME='RADIOTEST' VALUE='First Choice'>")

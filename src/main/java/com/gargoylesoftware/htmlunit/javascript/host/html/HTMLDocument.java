@@ -937,12 +937,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public Object jsxFunction_appendChild(final Object childObject) {
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_56)) {
-            // Firefox does not allow insertion at the document level.
-            throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy.");
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED)) {
+            // We're emulating IE; we can allow insertion.
+            return super.jsxFunction_appendChild(childObject);
         }
-        // We're emulating IE; we can allow insertion.
-        return super.jsxFunction_appendChild(childObject);
+
+        // Firefox does not allow insertion at the document level.
+        throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy.");
     }
 
     /**
