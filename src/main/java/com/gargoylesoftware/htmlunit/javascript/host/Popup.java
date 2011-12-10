@@ -180,6 +180,7 @@ class PopupPseudoWebWindow implements WebWindow {
      */
     public void setEnclosedPage(final Page page) {
         enclosedPage_ = page;
+        webClient_.initialize(page);
     }
 
     /**

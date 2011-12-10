@@ -23,9 +23,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -37,40 +36,20 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 @RunWith(BrowserRunner.class)
 public class PopupTest extends WebTestCase {
-
-    /**
-     * Just test that a standard use of popup works without exception.
-     * @throws Exception if the test fails
-     * TODO: it should fail when simulating FF as createPopup() is only for IE
-     */
-    @Test
-    @Browsers(Browser.IE)
-    public void testPopup() throws Exception {
-        final String html = "<html><head><title>First</title><body>\n"
-            + "<script>\n"
-            + "var oPopup = window.createPopup();\n"
-            + "var oPopupBody = oPopup.document.body;\n"
-            + "oPopupBody.innerHTML = 'bla bla';\n"
-            + "oPopup.show(100, 100, 200, 50, document.body);\n"
-            + "</script>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
     /**
      * Test that the opened window becomes the current one.
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("Pop-up window is Open")
     public void testPopupWindowBecomesCurrent() throws Exception {
         final String content = "<html><head><title>First</title><body>\n"
             + "<span id='button' onClick='openPopup()'>Push me</span>\n"
-            + "<SCRIPT>\n"
-            + "function openPopup()  { \n "
-            + "window.open('', '_blank', 'width=640, height=600, scrollbars=yes'); "
-            + "alert('Pop-up window is Open');\n "
-            + "}\n"
+            + "<script>\n"
+            + "  function openPopup()  { \n "
+            + "    window.open('', '_blank', 'width=640, height=600, scrollbars=yes'); "
+            + "    alert('Pop-up window is Open');\n "
+            + "  }\n"
             + "</script>\n"
             + "</body></html>";
 
