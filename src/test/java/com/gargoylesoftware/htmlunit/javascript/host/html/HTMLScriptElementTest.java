@@ -118,7 +118,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "start", "end" }, IE = { "start", "executed", "end" })
-    @NotYetImplemented(Browser.IE)
     public void reexecuteModifiedScriptWhenReappending() throws Exception {
         final String html =
               "<html><head><title>foo</title></head><body>\n"
@@ -126,6 +125,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "  alert('start');\n"
             + "  var script = document.getElementsByTagName('script')[0];\n"
             + "  script.text = \"alert('executed');\";\n"
+            + "  document.body.appendChild(script);\n"
             + "  alert('end');\n"
             + "</script>\n"
             + "</body></html>";
