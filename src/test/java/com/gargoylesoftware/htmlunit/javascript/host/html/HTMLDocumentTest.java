@@ -34,16 +34,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLDocumentTest extends WebDriverTestCase {
@@ -344,6 +345,35 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  alert('imported: ' + importedScript);\n"
             + "  var theSpan = document.getElementById('s1');\n"
             + "  document.body.replaceChild(importedScript, theSpan);\n"
+            + " } catch (e) { alert('exception') }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <span id='s1'></span>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * This one is like {@link #importNode_script()}, but the script is
+     * a child of the imported node.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "imported: [object HTMLDivElement]", IE = "exception")
+    public void importNode_scriptChild() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + " try {\n"
+            + "  var d = document.implementation.createDocument(null, null, null);\n"
+            + "  var xhtml = \"<html xmlns='http://www.w3.org/1999/xhtml'><div id='myDiv'><sc\" "
+            + "   + \"ript>alert('o'); _scriptEvaluated=true;</scr\" + \"ipt></div></html>\";\n"
+            + "  var newDoc = (new DOMParser()).parseFromString(xhtml, 'text/xml');\n"
+            + "  var theDiv = newDoc.getElementById('myDiv');\n"
+            + "  var importedDiv = window.document.importNode(theDiv, true);\n"
+            + "  alert('imported: ' + importedDiv);\n"
+            + "  var theSpan = document.getElementById('s1');\n"
+            + "  document.body.replaceChild(importedDiv, theSpan);\n"
             + " } catch (e) { alert('exception') }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"

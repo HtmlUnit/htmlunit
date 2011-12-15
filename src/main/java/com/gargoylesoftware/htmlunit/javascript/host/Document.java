@@ -260,6 +260,9 @@ public class Document extends EventNode {
         DomNode domNode = importedNode.getDomNodeOrDie();
         domNode = domNode.cloneNode(deep);
         domNode.processImportNode();
+        for (final DomNode childNode : domNode.getChildren()) {
+            childNode.processImportNode();
+        }
         return domNode.getScriptObject();
     }
 
