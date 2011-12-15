@@ -25,10 +25,10 @@ import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Unit tests for {@link HtmlElement}.
@@ -1066,6 +1066,7 @@ public class HtmlElementTest extends WebTestCase {
     public void getNodeName() throws Exception {
         final String html
             = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:app='http://www.appcelerator.org'>\n"
+            + "<head>\n"
             + "<script>\n"
             + "</script>\n"
             + "</head>\n"
@@ -1090,6 +1091,7 @@ public class HtmlElementTest extends WebTestCase {
     public void getElementsByTagName() throws Exception {
         final String html
             = "<html>\n"
+            + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var form = document.getElementById('myForm');\n"
@@ -1108,6 +1110,56 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlPage page = loadPageWithAlerts(html);
         assertEquals(1, page.getElementById("myForm").getElementsByTagName("input").getLength());
         assertEquals(2, page.getBody().getElementsByTagName("input").getLength());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getElementsByAttribute() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='myForm'>\n"
+            + "  <input type='button' name='buttonName' value='pushme'>\n"
+            + "  <select id='selectId' multiple>\n"
+            + "    <option value='option1' id='option1' selected>Option1</option>\n"
+            + "    <option value='option2' id='option2' selected='selected'>Option2</option>\n"
+            + "  </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        final HtmlElement form = page.getElementById("myForm");
+
+        List<HtmlElement> elements = form.getElementsByAttribute("input", "value", "pushme");
+        assertEquals(1, elements.size());
+        assertEquals("<input type=\"button\" name=\"buttonName\" value=\"pushme\"/>",
+            elements.get(0).asXml().replaceAll("\\r|\\n", ""));
+
+        // ignore case
+        elements = form.getElementsByAttribute("iNPuT", "value", "pushme");
+        assertEquals(1, elements.size());
+        assertEquals("<input type=\"button\" name=\"buttonName\" value=\"pushme\"/>",
+                elements.get(0).asXml().replaceAll("\\r|\\n", ""));
+
+        // attribute value is case sensitive
+        elements = form.getElementsByAttribute("input", "value", "pushMe");
+        assertEquals(0, elements.size());
+
+        // selected='selected'
+        elements = form.getElementsByAttribute("option", "selected", "selected");
+        assertEquals(1, elements.size());
+        assertEquals("<option value=\"option2\" id=\"option2\" selected=\"selected\">  Option2</option>",
+                elements.get(0).asXml().replaceAll("\\r|\\n", ""));
+
+        // selected
+        elements = form.getElementsByAttribute("option", "selected", "");
+        assertEquals(1, elements.size());
+        assertEquals("<option value=\"option1\" id=\"option1\" selected=\"\">  Option1</option>",
+                elements.get(0).asXml().replaceAll("\\r|\\n", ""));
     }
 
     /**
