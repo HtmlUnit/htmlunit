@@ -25,11 +25,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -176,6 +176,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "0", "1" })
     public void onLoad_calledWhenImageDownloaded_static() throws Exception {
         final String html = "<html><body><img src='foo.png' onload='test()'>\n"
             + "<script>\n"
@@ -201,9 +202,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         client.getPage(getDefaultUrl());
         assertEquals(imageUrl, conn.getLastWebRequest().getUrl());
-
-        final String[] expected = {"0", "1"};
-        assertEquals(expected, actual);
+        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
@@ -212,6 +211,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("1")
     public void onLoad_calledWhenImageDownloaded_dynamic() throws Exception {
         final String html = "<html><body><script>\n"
             + "var i = document.createElement('img');\n"
@@ -233,9 +233,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         client.getPage(URL_FIRST);
         assertEquals(URL_THIRD, conn.getLastWebRequest().getUrl());
-
-        final String[] expected = {"1"};
-        assertEquals(expected, actual);
+        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
@@ -303,9 +301,33 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         client.getPage(URL_FIRST);
         assertEquals(URL_SECOND, conn.getLastWebRequest().getUrl());
+        assertEquals(getExpectedAlerts(), actual);
+    }
 
-        final String[] expected = {};
-        assertEquals(expected, actual);
+    /**
+     * Verifies that if an image has an <tt>onload</tt> attribute but javascript is disabled,
+     * the image is not downloaded.
+     * Issue: 3123380
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onLoad_notDownloadedWhenJavascriptDisabled() throws Exception {
+        final String html = "<html><body><img src='" + URL_SECOND + "' onload='alert(1)'></body></html>";
+
+        final WebClient client = getWebClient();
+        client.setJavaScriptEnabled(false);
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html);
+        conn.setResponse(URL_SECOND, "foo", "image/png");
+        client.setWebConnection(conn);
+
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        client.getPage(URL_FIRST);
+        assertEquals(URL_FIRST, conn.getLastWebRequest().getUrl());
+        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**

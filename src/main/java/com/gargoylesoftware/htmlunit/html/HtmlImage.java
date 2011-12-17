@@ -118,11 +118,18 @@ public class HtmlImage extends HtmlElement {
         if (!(getPage() instanceof HtmlPage)) {
             return; // nothing to do if embedded in XML code
         }
-        else if (onloadInvoked_) {
+
+        if (onloadInvoked_) {
             return;
         }
         onloadInvoked_ = true;
+
         final HtmlPage htmlPage = (HtmlPage) getPage();
+        final WebClient client = htmlPage.getWebClient();
+        if (!client.isJavaScriptEnabled()) {
+            return;
+        }
+
         if (hasEventHandlers("onload")) {
             // An onload handler is defined; we need to download the image and then call the onload handler.
             boolean ok;
@@ -149,7 +156,7 @@ public class HtmlImage extends HtmlElement {
                     htmlPage.addAfterLoadAction(action);
                 }
                 else {
-                    htmlPage.getWebClient().getJavaScriptEngine().addPostponedAction(action);
+                    client.getJavaScriptEngine().addPostponedAction(action);
                 }
             }
             else {

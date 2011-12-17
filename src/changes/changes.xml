@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3123380">
+                If JavaScript is disabled, don't download the image even if an onload
+                handler is defined.
+            </action>
             <action type="fix" dev="rbri" issue="2902442">
                 JavaScript: document.forms(0) is not valid in FF.
             </action>
