@@ -648,6 +648,9 @@ public enum BrowserVersionFeatures {
     /** Javascript property document.domain is lowercase. */
     JS_DOCUMENT_DOMAIN_IS_LOWERCASE,
 
+    /** Javascript document.forms(...) supported (IE). */
+    JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,
+
     /** Javascript property document.domain
      * doesn't allow to set domain of about:blank.
      */

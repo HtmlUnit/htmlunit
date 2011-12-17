@@ -157,7 +157,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
     /**
      * {@inheritDoc}
      */
-    public final Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (args.length == 0) {
             throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
         }

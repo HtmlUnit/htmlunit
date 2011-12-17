@@ -293,9 +293,22 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public Object jsxGet_forms() {
         if (forms_ == null) {
             final HtmlPage page = getHtmlPage();
+            final boolean allowFunctionCall =
+                    getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED);
+
             forms_ = new HTMLCollection(page, false, "HTMLDocument.forms") {
+                @Override
                 protected boolean isMatching(final DomNode node) {
                     return node instanceof HtmlForm;
+                }
+
+                @Override
+                public final Object call(final Context cx, final Scriptable scope,
+                        final Scriptable thisObj, final Object[] args) {
+                    if (allowFunctionCall) {
+                        return super.call(cx, scope, thisObj, args);
+                    }
+                    throw Context.reportRuntimeError("TypeError: document.forms is not a function");
                 }
             };
         }

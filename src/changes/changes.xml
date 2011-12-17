@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="2902442">
+                JavaScript: document.forms(0) is not valid in FF.
+            </action>
             <action type="fix" dev="rbri" issue="3029277">
                 JavaScript: Initialization of the popup window misses some steps.
             </action>
