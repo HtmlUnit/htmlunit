@@ -104,6 +104,12 @@ public class BrowserVersion implements Serializable {
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.8) Gecko/20100722 Firefox/3.6.8",
         (float) 3.6, "FF3.6", null);
 
+    /** Firefox Warning: highly experimental!!! */
+    public static final BrowserVersion FIREFOX_8 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows; en-US)",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:8.0.1) Gecko/20100101 Firefox/8.0.1",
+        (float) 8.0, "FF8", null);
+
     /** Internet Explorer 6. */
     public static final BrowserVersion INTERNET_EXPLORER_6 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
@@ -119,13 +125,13 @@ public class BrowserVersion implements Serializable {
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 8.0; Windows NT 6.0)",
         "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)", 8, "IE8", null);
 
-    /** Chrome 15. Warning: highly experimental!!! */
-    public static final BrowserVersion CHROME_15 = new BrowserVersion(
-        "Netscape", "5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.2"
-        + " (KHTML, like Gecko) Chrome/15.0.874.121 Safari/535.2",
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.2"
-        + " (KHTML, like Gecko) Chrome/15.0.874.121 Safari/535.2",
-        15, "Chrome15", null);
+    /** Chrome 16. Warning: highly experimental!!! */
+    public static final BrowserVersion CHROME_16 = new BrowserVersion(
+        "Netscape", "5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.7"
+        + " (KHTML, like Gecko) Chrome/16.0.912.63 Safari/535.7",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.7"
+        + " (KHTML, like Gecko) Chrome/16.0.912.63 Safari/535.7",
+        15, "Chrome16", null);
 
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7;
@@ -137,17 +143,18 @@ public class BrowserVersion implements Serializable {
         INTERNET_EXPLORER_8.initDefaultFeatures();
         FIREFOX_3.initDefaultFeatures();
         FIREFOX_3_6.initDefaultFeatures();
+        FIREFOX_8.initDefaultFeatures();
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
             "Shockwave Flash", "swf"));
         FIREFOX_3.getPlugins().add(flash);
         FIREFOX_3_6.getPlugins().add(flash);
-        CHROME_15.initDefaultFeatures();
-        CHROME_15.setApplicationCodeName("Mozilla");
-        CHROME_15.setPlatform("MacIntel");
-        CHROME_15.setCpuClass(null);
-        CHROME_15.setBrowserLanguage("undefined");
+        CHROME_16.initDefaultFeatures();
+        CHROME_16.setApplicationCodeName("Mozilla");
+        CHROME_16.setPlatform("MacIntel");
+        CHROME_16.setCpuClass(null);
+        CHROME_16.setBrowserLanguage("undefined");
         // there are other issues with Chrome; a different productSub, etc.
     }
 
@@ -263,11 +270,21 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
+     * version of Google Chrome. Note that Google Chrome does not return 'Chrome'
+     * in the application name, we have to look in the nickname.
+     * @return whether or not this version is a version of a Chrome browser.
+     */
+    public final boolean isCHROME() {
+        return getNickname().startsWith("Chrome");
+    }
+
+    /**
+     * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
      * version of Firefox like {@link #FIREFOX_3} or {@link #FIREFOX_3_6}.
      * @return whether or not this version is a version of a Firefox browser
      */
     public final boolean isFirefox() {
-        return NETSCAPE.equals(getApplicationName());
+        return !isCHROME() && NETSCAPE.equals(getApplicationName());
     }
 
     /**

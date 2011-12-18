@@ -104,7 +104,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static List<String> BROWSERS_PROPERTIES_;
     private static String FF3_BIN_;
     private static String FF3_6_BIN_;
-    private static String CHROME15_BIN_;
+    private static String FF8_BIN_;
+    private static String CHROME16_BIN_;
 
     private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
     private static Server STATIC_SERVER_;
@@ -127,7 +128,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                             .replaceAll(" ", "").toLowerCase().split(","));
                     FF3_BIN_ = properties.getProperty("ff3.bin");
                     FF3_6_BIN_ = properties.getProperty("ff3.6.bin");
-                    CHROME15_BIN_ = properties.getProperty("chrome15.bin");
+                    FF8_BIN_ = properties.getProperty("ff8.bin");
+                    CHROME16_BIN_ = properties.getProperty("chrome16.bin");
                 }
             }
             catch (final Exception e) {
@@ -196,10 +198,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (getBrowserVersion().isIE()) {
                 return new InternetExplorerDriver();
             }
-            if (BrowserVersion.CHROME_15.equals(getBrowserVersion())) {
+            if (BrowserVersion.CHROME_16.equals(getBrowserVersion())) {
                 if (CHROME_SERVICE_ == null) {
                     CHROME_SERVICE_ = new ChromeDriverService.Builder()
-                        .usingChromeDriverExecutable(new File(CHROME15_BIN_))
+                        .usingChromeDriverExecutable(new File(CHROME16_BIN_))
                         .usingAnyFreePort()
                         .build();
                     CHROME_SERVICE_.start();
@@ -216,6 +218,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             else if (getBrowserVersion() == BrowserVersion.FIREFOX_3_6) {
                 ffBinary = FF3_6_BIN_;
+            }
+            else if (getBrowserVersion() == BrowserVersion.FIREFOX_8) {
+                ffBinary = FF8_BIN_;
             }
             if (ffBinary != null) {
                 return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());
