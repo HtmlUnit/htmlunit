@@ -1045,7 +1045,7 @@
             <doclink
                 url="http://www.xulplanet.com/references/xpcomref/ifaces/nsIDOMNSDocument.html#method_getBoxObjectFor"
                 descr="XUL Planet"/>
-            <browser name="Firefox"/>
+            <browser name="Firefox" max-version="3"/>
         </function>
         <function name="getElementsByTagName"/>
         <function name="getElementsByTagNameNS">
@@ -1438,9 +1438,7 @@
 
     <class extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButton">
-        <property name="accessKey" readable="true" writable="true">
-            <browser name="Firefox"/>
-        </property>
+        <property name="accessKey" readable="true" writable="true"/>
         <property name="type" readable="true" writable="true"/>
         <function name="click">
             <browser name="Firefox"/>

@@ -280,14 +280,11 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
-    @Alerts("Hello")
+    @Alerts(DEFAULT = "exception", FF = "Hello", FF8 = "exception")
     public void createDocumentNS_xul() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<title>Test</title>\n"
+        final String html = "<html><body>\n"
             + "<script>\n"
-            + "function test() {\n"
+            + "try {\n"
             + "  var inner = document.createElementNS('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul',"
             + "'label');\n"
             + "  inner.setAttribute('value', 'Hello');\n"
@@ -295,9 +292,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  document.body.appendChild(inner);\n"
             + "  alert(document.body.lastChild.value);\n"
             + "}\n"
+            + "catch (e) { alert('exception'); }\n"
             + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 
@@ -525,8 +521,11 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"#ffffff", "#ffffff", "#0000aa", "#0000aa", "#000000", "#000000" },
-            IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" })
+    @Alerts(FF3 = {"#ffffff", "#ffffff", "#0000aa", "#0000aa", "#000000", "#000000" },
+            FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
+            IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
+            DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" })
+    @NotYetImplemented({ Browser.FF3_6, Browser.FF8, Browser.CHROME })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -839,10 +838,11 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     }
 
     /**
+     * Warning: this test works fine in real FF8 when started manually but fails through WebDriver.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "1", "[object HTMLBodyElement]" }, IE = "exception")
+    @Alerts(FF = { "1", "[object HTMLBodyElement]" }, CHROME = { "0", "exception" }, IE = "exception")
     public void designMode_selectionRange_empty() throws Exception {
         designMode_selectionRange("");
     }
@@ -851,7 +851,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "1", "[object Text]" }, IE = "exception")
+    @Alerts(FF = { "1", "[object Text]" }, CHROME = { "0", "exception" }, IE = "exception")
     public void designMode_selectionRange_text() throws Exception {
         designMode_selectionRange("hello");
     }
@@ -983,7 +983,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object BoxObject]", "true", "true", "true" }, IE = "exception")
+    @Alerts(DEFAULT = "exception", FF3 = { "[object BoxObject]", "true", "true", "true" })
     public void getBoxObjectFor() throws Exception {
         final String html = "<html><head><title>Test</title><script>\n"
             + "function doTest() {\n"
@@ -1115,7 +1115,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "undefined", FF3_6 = { "div1", "null" },
+    @Alerts(DEFAULT = { "div1", "null" }, FF3 = "undefined",
             IE = "undefined", IE8 = { "div1", "null" })
     public void querySelector() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"

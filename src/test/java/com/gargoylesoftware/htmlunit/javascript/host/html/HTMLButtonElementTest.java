@@ -63,7 +63,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "button", "exception", "button", "button" }, FF = { "submit", "button", "submit" })
+    @Alerts(IE = { "button", "exception", "button", "button" }, FF = { "submit", "button", "submit" },
+            CHROME = { "submit", "submit", "submit" })
     public void type() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
