@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -70,6 +71,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -169,12 +171,12 @@ public class CSSStyleSheet extends SimpleScriptable {
         modifyIfNecessary(style, element, rules, new HashSet<String>());
     }
 
-    private void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final HTMLElement element,
+    private void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element,
         final CSSRuleList rules, final Set<String> alreadyProcessing) {
         if (rules == null) {
             return;
         }
-        final HtmlElement e = element.getDomNodeOrDie();
+        final DomElement e = element.getDomNodeOrDie();
         for (int i = 0; i < rules.getLength(); i++) {
             final CSSRule rule = rules.item(i);
             if (rule.getType() == CSSRule.STYLE_RULE) {
@@ -292,7 +294,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @param element the element to test
      * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
      */
-    boolean selects(final Selector selector, final HtmlElement element) {
+    boolean selects(final Selector selector, final DomElement element) {
         return selects(getBrowserVersion(), selector, element);
     }
 
@@ -305,7 +307,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
      */
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
-            final HtmlElement element) {
+            final DomElement element) {
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
                 return true;
@@ -372,7 +374,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @param element the element to test
      * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
      */
-    static boolean selects(final BrowserVersion browserVersion, final Condition condition, final HtmlElement element) {
+    static boolean selects(final BrowserVersion browserVersion, final Condition condition, final DomElement element) {
         switch (condition.getConditionType()) {
             case Condition.SAC_ID_CONDITION:
                 final AttributeCondition ac4 = (AttributeCondition) condition;
@@ -442,7 +444,7 @@ public class CSSStyleSheet extends SimpleScriptable {
     }
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
-            final AttributeCondition condition, final HtmlElement element) {
+            final AttributeCondition condition, final DomElement element) {
         if (!browserVersion.hasFeature(BrowserVersionFeatures.CSS_SPECIAL_PSEUDO_CLASSES)) {
             return false;
         }

@@ -424,6 +424,13 @@ public class DomElement extends DomNamespaceNode implements Element {
         clone.attributes_.putAll(attributes_);
         return clone;
     }
+
+    /**
+     * @return the identifier of this element
+     */
+    public final String getId() {
+        return getAttribute("id");
+    }
 }
 
 /**

@@ -306,13 +306,6 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * @return the identifier of this element
-     */
-    public final String getId() {
-        return getAttribute("id");
-    }
-
-    /**
      * Sets the identifier this element.
      *
      * @param newId the new identifier of this element
