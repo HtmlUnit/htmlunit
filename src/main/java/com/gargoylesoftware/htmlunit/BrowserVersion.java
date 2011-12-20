@@ -274,7 +274,7 @@ public class BrowserVersion implements Serializable {
      * in the application name, we have to look in the nickname.
      * @return whether or not this version is a version of a Chrome browser.
      */
-    public final boolean isCHROME() {
+    public final boolean isChrome() {
         return getNickname().startsWith("Chrome");
     }
 
@@ -284,7 +284,7 @@ public class BrowserVersion implements Serializable {
      * @return whether or not this version is a version of a Firefox browser
      */
     public final boolean isFirefox() {
-        return !isCHROME() && NETSCAPE.equals(getApplicationName());
+        return !isChrome() && NETSCAPE.equals(getApplicationName());
     }
 
     /**

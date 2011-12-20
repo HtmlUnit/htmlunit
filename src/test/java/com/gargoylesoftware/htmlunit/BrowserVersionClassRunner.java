@@ -267,7 +267,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     break;
 
                 case CHROME:
-                    if (browserVersion_.isCHROME()) {
+                    if (browserVersion_.isChrome()) {
                         return true;
                     }
                     break;
