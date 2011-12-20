@@ -905,4 +905,18 @@ public class ElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = "function", IE = "exception")
+    @Test
+    public void getBoundingClientRect() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "try {\n"
+            + "  alert(typeof Element.prototype.getBoundingClientRect);\n"
+            + "} catch (e) { alert('exception');}\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

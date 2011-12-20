@@ -59,8 +59,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTable;
-import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -74,9 +72,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.StaticNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.TextRange;
-import com.gargoylesoftware.htmlunit.javascript.host.TextRectangle;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
 /**
@@ -136,7 +132,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private int scrollLeft_;
     private int scrollTop_;
     private String uniqueID_;
-    private CSSStyleDeclaration style_;
 
     /**
      * The value of the "ch" JavaScript attribute for browsers that say that they support it, but do not really
@@ -189,49 +184,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the style object for this element.
-     * @return the style object for this element
-     */
-    public CSSStyleDeclaration jsxGet_style() {
-        return style_;
-    }
-
-    /**
-     * Returns the current (calculated) style object for this element.
-     * @return the current (calculated) style object for this element
-     */
-    public ComputedCSSStyleDeclaration jsxGet_currentStyle() {
-        return getWindow().jsxFunction_getComputedStyle(this, null);
-    }
-
-    /**
-     * Callback method which allows different HTML element types to perform custom
-     * initialization of computed styles. For example, body elements in most browsers
-     * have default values for their margins.
-     *
-     * @param style the style to initialize
-     */
-    public void setDefaults(final ComputedCSSStyleDeclaration style) {
-        // Empty by default; override as necessary.
-    }
-
-    /**
-     * Returns the runtime style object for this element.
-     * @return the runtime style object for this element
-     */
-    public CSSStyleDeclaration jsxGet_runtimeStyle() {
-        return style_;
-    }
-
-    /**
      * Sets the DOM node that corresponds to this JavaScript object.
      * @param domNode the DOM node
      */
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
-
-        style_ = new CSSStyleDeclaration(this);
 
         /**
          * Convert JavaScript snippets defined in the attribute map to executable event handlers.
@@ -687,22 +645,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             !getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING);
         final ComputedCSSStyleDeclaration style = getWindow().jsxFunction_getComputedStyle(this, null);
         return style.getCalculatedWidth(false, includePadding);
-    }
-
-    /**
-     * Returns "clientLeft" attribute.
-     * @return the "clientLeft" attribute
-     */
-    public int jsxGet_clientLeft() {
-        return 2; // TODO!!!
-    }
-
-    /**
-     * Returns "clientTop" attribute.
-     * @return the "clientTop" attribute
-     */
-    public int jsxGet_clientTop() {
-        return 2; // TODO!!!
     }
 
     /**
@@ -1538,207 +1480,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns this element's X position.
-     * @return this element's X position
-     */
-    public int getPosX() {
-        int cumulativeOffset = 0;
-        HTMLElement element = this;
-        while (element != null) {
-            cumulativeOffset += element.jsxGet_offsetLeft();
-            if (element != this) {
-                cumulativeOffset += element.jsxGet_currentStyle().getBorderLeft();
-            }
-            element = element.getOffsetParent();
-        }
-        return cumulativeOffset;
-    }
-
-    /**
-     * Gets the offset parent or <code>null</code> if this is not an {@link HTMLElement}.
-     * @return the offset parent or <code>null</code>
-     */
-    private HTMLElement getOffsetParent() {
-        final Object offsetParent = jsxGet_offsetParent();
-        if (offsetParent instanceof HTMLElement) {
-            return (HTMLElement) offsetParent;
-        }
-        return null;
-    }
-
-    /**
-     * Returns this element's Y position.
-     * @return this element's Y position
-     */
-    public int getPosY() {
-        int cumulativeOffset = 0;
-        HTMLElement element = this;
-        while (element != null) {
-            cumulativeOffset += element.jsxGet_offsetTop();
-            if (element != this) {
-                cumulativeOffset += element.jsxGet_currentStyle().getBorderTop();
-            }
-            element = element.getOffsetParent();
-        }
-        return cumulativeOffset;
-    }
-
-    /**
-     * Returns this element's <tt>offsetLeft</tt>, which is the calculated left position of this
-     * element relative to the <tt>offsetParent</tt>.
-     *
-     * @return this element's <tt>offsetLeft</tt>
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534200.aspx">MSDN Documentation</a>
-     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
-     * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
-     */
-    public int jsxGet_offsetLeft() {
-        if (this instanceof HTMLBodyElement) {
-            return 0;
-        }
-
-        int left = 0;
-        final HTMLElement offsetParent = getOffsetParent();
-
-        // Add the offset for this node.
-        DomNode node = getDomNodeOrDie();
-        HTMLElement element = (HTMLElement) node.getScriptObject();
-        left += element.jsxGet_currentStyle().getLeft(true, false, false);
-
-        // If this node is absolutely positioned, we're done.
-        final String position = element.jsxGet_currentStyle().getPositionWithInheritance();
-        if ("absolute".equals(position)) {
-            return left;
-        }
-
-        // Add the offset for the ancestor nodes.
-        node = node.getParentNode();
-        while (node != null && node.getScriptObject() != offsetParent) {
-            if (node.getScriptObject() instanceof HTMLElement) {
-                element = (HTMLElement) node.getScriptObject();
-                left += element.jsxGet_currentStyle().getLeft(true, true, true);
-            }
-            node = node.getParentNode();
-        }
-
-        if (offsetParent != null) {
-            left += offsetParent.jsxGet_currentStyle().getMarginLeft();
-            left += offsetParent.jsxGet_currentStyle().getPaddingLeft();
-        }
-
-        return left;
-    }
-
-    /**
-     * Returns this element's <tt>offsetTop</tt>, which is the calculated top position of this
-     * element relative to the <tt>offsetParent</tt>.
-     *
-     * @return this element's <tt>offsetTop</tt>
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534303.aspx">MSDN Documentation</a>
-     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
-     * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
-     */
-    public int jsxGet_offsetTop() {
-        if (this instanceof HTMLBodyElement) {
-            return 0;
-        }
-
-        int top = 0;
-        final HTMLElement offsetParent = getOffsetParent();
-
-        // Add the offset for this node.
-        DomNode node = getDomNodeOrDie();
-        HTMLElement element = (HTMLElement) node.getScriptObject();
-        top += element.jsxGet_currentStyle().getTop(true, false, false);
-
-        // If this node is absolutely positioned, we're done.
-        final String position = element.jsxGet_currentStyle().getPositionWithInheritance();
-        if ("absolute".equals(position)) {
-            return top;
-        }
-
-        // Add the offset for the ancestor nodes.
-        node = node.getParentNode();
-        while (node != null && node.getScriptObject() != offsetParent) {
-            if (node.getScriptObject() instanceof HTMLElement) {
-                element = (HTMLElement) node.getScriptObject();
-                top += element.jsxGet_currentStyle().getTop(false, true, true);
-            }
-            node = node.getParentNode();
-        }
-
-        if (offsetParent != null) {
-            final HTMLElement thiz = (HTMLElement) getDomNodeOrDie().getScriptObject();
-            final boolean thisElementHasTopMargin = (thiz.jsxGet_currentStyle().getMarginTop() != 0);
-            if (!thisElementHasTopMargin) {
-                top += offsetParent.jsxGet_currentStyle().getMarginTop();
-            }
-            top += offsetParent.jsxGet_currentStyle().getPaddingTop();
-        }
-
-        return top;
-    }
-
-    /**
-     * Returns this element's <tt>offsetParent</tt>. The <tt>offsetLeft</tt> and
-     * <tt>offsetTop</tt> attributes are relative to the <tt>offsetParent</tt>.
-     *
-     * @return this element's <tt>offsetParent</tt>. This may be <code>undefined</code> when this node is
-     * not attached or <code>null</code> for <code>body</code>.
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534302.aspx">MSDN Documentation</a>
-     * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html">Gecko DOM Reference</a>
-     * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
-     * @see <a href="http://www.w3.org/TR/REC-CSS2/box.html">Box Model</a>
-     * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
-     */
-    public Object jsxGet_offsetParent() {
-        DomNode currentElement = getDomNodeOrDie();
-
-        if (currentElement.getParentNode() == null) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED)) {
-                throw Context.reportRuntimeError("Unspecified error");
-            }
-            return null;
-        }
-
-        Object offsetParent = null;
-        final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
-        final ComputedCSSStyleDeclaration style = htmlElement.jsxGet_currentStyle();
-        final String position = style.getPositionWithInheritance();
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_72);
-        final boolean staticPos = "static".equals(position);
-        final boolean fixedPos = "fixed".equals(position);
-        final boolean useTables = ((ie && (staticPos || fixedPos)) || (!ie && staticPos));
-
-        while (currentElement != null) {
-
-            final DomNode parentNode = currentElement.getParentNode();
-            if (parentNode instanceof HtmlBody
-                || (useTables && parentNode instanceof HtmlTableDataCell)
-                || (useTables && parentNode instanceof HtmlTable)) {
-                offsetParent = parentNode.getScriptObject();
-                break;
-            }
-
-            if (parentNode != null && parentNode.getScriptObject() instanceof HTMLElement) {
-                final HTMLElement parentElement = (HTMLElement) parentNode.getScriptObject();
-                final ComputedCSSStyleDeclaration parentStyle = parentElement.jsxGet_currentStyle();
-                final String parentPosition = parentStyle.getPositionWithInheritance();
-                final boolean parentIsStatic = "static".equals(parentPosition);
-                final boolean parentIsFixed = "fixed".equals(parentPosition);
-                if ((ie && !parentIsStatic && !parentIsFixed) || (!ie && !parentIsStatic)) {
-                    offsetParent = parentNode.getScriptObject();
-                    break;
-                }
-            }
-
-            currentElement = currentElement.getParentNode();
-        }
-
-        return offsetParent;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -1880,19 +1621,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * is just to prevent scripts that call that method from failing
      */
     public void jsxFunction_scrollIntoView() { }
-
-    /**
-     * Retrieves an object that specifies the bounds of a collection of TextRectangle objects.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536433.aspx">MSDN doc</a>
-     * @return an object that specifies the bounds of a collection of TextRectangle objects
-     */
-    public TextRectangle jsxFunction_getBoundingClientRect() {
-        final TextRectangle textRectangle = new TextRectangle(0, getPosX() + jsxGet_clientLeft(), 0,
-            getPosY() + jsxGet_clientTop());
-        textRectangle.setParentScope(getWindow());
-        textRectangle.setPrototype(getPrototype(textRectangle.getClass()));
-        return textRectangle;
-    }
 
     /**
      * Retrieves a collection of rectangles that describes the layout of the contents of an object

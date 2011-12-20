@@ -1819,21 +1819,39 @@ public class HTMLElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts({ "402", "102" })
+    @Alerts(DEFAULT = { "400", "100" }, IE = { "402", "102" }, FF3 = "exception")
     @Test
-    @Browsers(Browser.IE)
-    public void getBoundingClientRect() throws Exception {
+    @NotYetImplemented({ Browser.FF3_6, Browser.FF8, Browser.CHROME })
+    public void getBoundingClientRect2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
+            + "    try {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    var pos = d1.getBoundingClientRect();\n"
             + "    alert(pos.left);\n"
             + "    alert(pos.top);\n"
+            + "    } catch (e) { alert('exception');}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='outer' style='position: absolute; left: 400px; top: 100px; width: 50px; height: 80px;'>"
             + "<div id='div1'></div></div>"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = "[object ClientRect]", IE = "[object]", FF3 = "exception")
+    @Test
+    public void getBoundingClientRect() throws Exception {
+        final String html = "<html><body><div id='div1'>hello</div><script>\n"
+            + "try {\n"
+            + "  var d1 = document.getElementById('div1');\n"
+            + "  var pos = d1.getBoundingClientRect();\n"
+            + "  alert(pos);\n"
+            + "} catch (e) { alert('exception');}\n"
+            + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
 

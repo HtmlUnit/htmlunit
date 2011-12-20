@@ -148,12 +148,6 @@
         <function name="getAttributeNS">
             <browser name="Firefox"/>
         </function>
-        <function name="getBoundingClientRect">
-            <doclink
-                url="http://msdn2.microsoft.com/en-us/library/ms536433.aspx"
-                descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
         <function name="getClientRects">
             <doclink
                 url="http://msdn2.microsoft.com/en-us/library/ms536435.aspx"
@@ -320,6 +314,14 @@
         <function name="insertData"/>
         <function name="replaceData"/>
         <function name="substringData"/>
+    </class>
+
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.ClientRect"
+        JSObject="true">
+        <property name="bottom" readable="true" writable="true"/>
+        <property name="left" readable="true" writable="true"/>
+        <property name="right" readable="true" writable="true"/>
+        <property name="top" readable="true" writable="true"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.ClipboardData"
@@ -1135,6 +1137,11 @@
 
         <function name="getAttribute"/>
         <function name="getAttributeNode"/>
+        <function name="getBoundingClientRect">
+            <doclink
+                url="http://msdn2.microsoft.com/en-us/library/ms536433.aspx"
+                descr="MSDN documentation"/>
+        </function>
         <function name="getElementsByTagName"/>
         <function name="getElementsByTagNameNS">
             <browser name="Firefox"/>
@@ -2875,22 +2882,6 @@
         <function name="parentElement"/>
         <function name="select"/>
         <function name="setEndPoint"/>
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.TextRectangle"
-        JSObject="true">
-        <property name="bottom" readable="true" writable="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="left" readable="true" writable="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="right" readable="true" writable="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="top" readable="true" writable="true">
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.TreeWalker" JSObject="true">

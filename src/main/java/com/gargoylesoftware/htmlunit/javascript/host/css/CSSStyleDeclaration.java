@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
@@ -314,7 +315,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     private static final MessageFormat URL_FORMAT = new MessageFormat("url({0})");
 
     /** The element to which this style belongs. */
-    private HTMLElement jsElement_;
+    private Element jsElement_;
 
     /** The wrapped CSSStyleDeclaration (if created from CSSStyleRule). */
     private org.w3c.dom.css.CSSStyleDeclaration styleDeclaration_;
@@ -352,7 +353,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Creates an instance and sets its parent scope to the one of the provided element.
      * @param element the element to which this style is bound
      */
-    public CSSStyleDeclaration(final HTMLElement element) {
+    public CSSStyleDeclaration(final Element element) {
         setParentScope(element.getParentScope());
         setPrototype(getPrototype(getClass()));
         initialize(element);
@@ -373,24 +374,27 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Initializes the object.
      * @param htmlElement the element that this style describes
      */
-    void initialize(final HTMLElement htmlElement) {
+    void initialize(final Element element) {
         // Initialize.
-        WebAssert.notNull("htmlElement", htmlElement);
-        jsElement_ = htmlElement;
-        setDomNode(htmlElement.getDomNodeOrNull(), false);
+        WebAssert.notNull("htmlElement", element);
+        jsElement_ = element;
+        setDomNode(element.getDomNodeOrNull(), false);
+
         // If an IE behavior was specified in the style, apply the behavior.
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY)) {
-            for (final StyleElement element : getStyleMap().values()) {
-                if (BEHAVIOR.equals(element.getName())) {
+        if (element instanceof HTMLElement
+            && getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY)) {
+            final HTMLElement htmlElement = (HTMLElement) element;
+            for (final StyleElement styleElement : getStyleMap().values()) {
+                if (BEHAVIOR.equals(styleElement.getName())) {
                     try {
-                        final Object[] url = URL_FORMAT.parse(element.getValue());
+                        final Object[] url = URL_FORMAT.parse(styleElement.getValue());
                         if (url.length > 0) {
-                            jsElement_.jsxFunction_addBehavior((String) url[0]);
+                            htmlElement.jsxFunction_addBehavior((String) url[0]);
                             break;
                         }
                     }
                     catch (final ParseException e) {
-                        LOG.warn("Invalid behavior: '" + element.getValue() + "'.");
+                        LOG.warn("Invalid behavior: '" + styleElement.getValue() + "'.");
                     }
                 }
             }
@@ -401,7 +405,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Returns the element to which this style belongs.
      * @return the element to which this style belongs
      */
-    protected HTMLElement getElement() {
+    protected Element getElement() {
         return jsElement_;
     }
 
@@ -913,14 +917,22 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     public void jsxSet_behavior(final String behavior) {
         setStyleAttribute(BEHAVIOR, behavior);
-        jsElement_.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_CLIENT_CAPS);
-        jsElement_.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_HOMEPAGE);
-        jsElement_.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_DOWNLOAD);
+
+        // many methods/properties need to be moved from HTMLElement to Element
+        // is it the case for behavior related methods? Assuming not in a first time...
+        if (!(jsElement_ instanceof HTMLElement)) {
+            throw new RuntimeException("Bug! behavior can be set for Element too!!!");
+        }
+
+        final HTMLElement htmlElement = (HTMLElement) jsElement_;
+        htmlElement.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_CLIENT_CAPS);
+        htmlElement.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_HOMEPAGE);
+        htmlElement.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_DOWNLOAD);
         if (behavior.length() != 0) {
             try {
                 final Object[] url = URL_FORMAT.parse(behavior);
                 if (url.length > 0) {
-                    jsElement_.jsxFunction_addBehavior((String) url[0]);
+                    htmlElement.jsxFunction_addBehavior((String) url[0]);
                 }
             }
             catch (final ParseException e) {
@@ -4996,11 +5008,11 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the integer number of pixels corresponding to the specified length CSS attribute value
      * @see #pixelValue(String)
      */
-    protected static int pixelValue(final HTMLElement element, final CssValue value) {
+    protected static int pixelValue(final Element element, final CssValue value) {
         final String s = value.get(element);
         if (s.endsWith("%") || (s.length() == 0 && element instanceof HTMLHtmlElement)) {
             final int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(s).replaceAll("$1"), 100);
-            final HTMLElement parent = element.getParentHTMLElement();
+            final Element parent = element.getParentElement();
             final int absoluteValue = (parent == null) ? value.getWindowDefaultValue() : pixelValue(parent, value);
             return (int) ((i / 100D) * absoluteValue);
         }
@@ -5077,7 +5089,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
          * @param element the element for which the CSS attribute value is to be retrieved
          * @return the CSS attribute value for the specified element
          */
-        public final String get(final HTMLElement element) {
+        public final String get(final Element element) {
             final ComputedCSSStyleDeclaration style = element.jsxGet_currentStyle();
             final String value = get(style);
             return value;

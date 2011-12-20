@@ -166,7 +166,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @param element the element to which style rules must apply in order for them to be added to
      *        the specified style
      */
-    public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final HTMLElement element) {
+    public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element) {
         final CSSRuleList rules = getWrappedSheet().getCssRules();
         modifyIfNecessary(style, element, rules, new HashSet<String>());
     }

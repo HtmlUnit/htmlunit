@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 /**
  * A JavaScript object for a CSSValue.
@@ -68,7 +68,7 @@ public class CSSValue extends SimpleScriptable {
      * Creates an instance and sets its parent scope to the one of the provided element.
      * @param element the element to which this style is bound
      */
-    CSSValue(final HTMLElement element, final org.w3c.dom.css.CSSValue cssValue) {
+    CSSValue(final Element element, final org.w3c.dom.css.CSSValue cssValue) {
         setParentScope(element.getParentScope());
         setPrototype(getPrototype(getClass()));
         setDomNode(element.getDomNodeOrNull(), false);

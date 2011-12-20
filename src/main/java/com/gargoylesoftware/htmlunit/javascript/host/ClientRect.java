@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Ahmed Ashour
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535906.aspx">MSDN Documentation</a>
  */
-public class TextRectangle extends SimpleScriptable {
+public class ClientRect extends SimpleScriptable {
 
     private int bottom_;
     private int left_;
@@ -33,7 +33,7 @@ public class TextRectangle extends SimpleScriptable {
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */
-    public TextRectangle() {
+    public ClientRect() {
         // Empty.
     }
 
@@ -45,7 +45,7 @@ public class TextRectangle extends SimpleScriptable {
      * @param right the right coordinate of the rectangle surrounding the object content
      * @param top the top coordinate of the rectangle surrounding the object content
      */
-    public TextRectangle(final int bottom, final int left, final int right, final int top) {
+    public ClientRect(final int bottom, final int left, final int right, final int top) {
         bottom_ = bottom;
         left_ = left;
         right_ = right;

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: make Element.getBoundingRect available when simulating FF too.
+            </action>
             <action type="fix" dev="rbri" issue="3123380">
                 If JavaScript is disabled, don't download the image even if an onload
                 handler is defined.
