@@ -37,7 +37,7 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "-13", "84", "109" }, IE = { "1887", "84", "2009" })
+    @Alerts(DEFAULT = { "-13", "84", "109" }, IE = { "1887", "84", "2009" })
     public void getYear() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -66,8 +66,8 @@ public class NativeDateTest extends WebDriverTestCase {
             "setMilliseconds: function", "setMinutes: function", "setMonth: function", "setSeconds: function",
             "setTime: function", "setUTCDate: function", "setUTCFullYear: function", "setUTCHours: function",
             "setUTCMilliseconds: function", "setUTCMinutes: function", "setUTCMonth: function",
-            "setUTCSeconds: function", "setYear: function", "toDateString: function", "toISOString: undefined",
-            "toJSON: undefined", "toLocaleDateString: function", "toLocaleString: function",
+            "setUTCSeconds: function", "setYear: function", "toDateString: function",
+            "toLocaleDateString: function", "toLocaleString: function",
             "toLocaleTimeString: function", "toString: function", "toTimeString: function",
             "toUTCString: function", "valueOf: function", "UTC: undefined" })
     public void methods_common() throws Exception {
@@ -77,7 +77,7 @@ public class NativeDateTest extends WebDriverTestCase {
             "getYear", "now", "parse", "setDate", "setFullYear", "setHours", "setMilliseconds", "setMinutes",
             "setMonth", "setSeconds", "setTime", "setUTCDate", "setUTCFullYear", "setUTCHours",
             "setUTCMilliseconds", "setUTCMinutes", "setUTCMonth", "setUTCSeconds", "setYear", "toDateString",
-            "toISOString", "toJSON", "toLocaleDateString", "toLocaleString", "toLocaleTimeString", "toString",
+            "toLocaleDateString", "toLocaleString", "toLocaleTimeString", "toString",
             "toTimeString", "toUTCString", "valueOf", "UTC"};
         final String html = createHTMLTestMethods("new Date()", methods);
         loadPageWithAlerts2(html);
@@ -88,9 +88,23 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "toSource: function", IE = "toSource: undefined")
-    public void methods_differences() throws Exception {
+    @Alerts(FF = "toSource: function", DEFAULT = "toSource: undefined")
+    public void methods_toSource() throws Exception {
         final String[] methods = {"toSource"};
+        final String html = createHTMLTestMethods("new Date()", methods);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for the methods with different expectations depending on the browsers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"toISOString: function", "toJSON: function" },
+            FF3 = {"toISOString: undefined", "toJSON: undefined" },
+            IE = {"toISOString: undefined", "toJSON: undefined" })
+    public void methods_differences() throws Exception {
+        final String[] methods = {"toISOString", "toJSON"};
         final String html = createHTMLTestMethods("new Date()", methods);
         loadPageWithAlerts2(html);
     }

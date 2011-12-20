@@ -656,6 +656,10 @@ public enum BrowserVersionFeatures {
      */
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
 
+    /** Enables Javascript ECMA5 functions (like Date.toISOString or Date.toJSON).
+     */
+    JS_ECMA5_FUNCTIONS,
+
     /** Javascript calculation of element clientHeight/Width does not
      * include the padding.
      */
@@ -735,6 +739,10 @@ public enum BrowserVersionFeatures {
 
     /** Indicates if setting an out of bound value for HTMLSelectElement.selectedIndex should throw. */
     JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD,
+
+    /** Indicates if the method toSource exists on the native objects.
+     */
+    JS_FUNCTION_TOSOURCE,
 
     /** Indicates that new XMLSerializer().serializeToString(..) adds the xhtml namespace to the root element. */
     JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE,
