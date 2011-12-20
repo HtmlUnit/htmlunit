@@ -57,13 +57,24 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "__defineGetter__: function", "__defineSetter__: function", "__lookupGetter__: function",
-            "__lookupSetter__: function", "toSource: function" },
+    @Alerts(DEFAULT = { "__defineGetter__: function", "__defineSetter__: function", "__lookupGetter__: function",
+            "__lookupSetter__: function" },
             IE = { "__defineGetter__: undefined", "__defineSetter__: undefined", "__lookupGetter__: undefined",
-            "__lookupSetter__: undefined", "toSource: undefined" })
+            "__lookupSetter__: undefined" })
     public void methods_different() throws Exception {
-        final String[] methods = {"__defineGetter__", "__defineSetter__", "__lookupGetter__", "__lookupSetter__",
-            "toSource"};
+        final String[] methods = {"__defineGetter__", "__defineSetter__", "__lookupGetter__", "__lookupSetter__"};
+        final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for the methods with the different expectations depending on the browsers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "toSource: function", DEFAULT = "toSource: undefined")
+    public void methods_toSource() throws Exception {
+        final String[] methods = {"toSource"};
         final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);
         loadPageWithAlerts2(html);
     }

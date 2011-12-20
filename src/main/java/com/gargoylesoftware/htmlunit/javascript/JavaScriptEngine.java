@@ -266,14 +266,15 @@ public class JavaScriptEngine {
         else {
             removePrototypeProperties(window, "String", "trim");
         }
-        removePrototypeProperties(window, "Function", "bind");
+        if (!browserVersion.hasFeature(BrowserVersionFeatures.JS_FUNCTION_BIND)) {
+            removePrototypeProperties(window, "Function", "bind");
+        }
         if (!browserVersion.hasFeature(BrowserVersionFeatures.JS_ECMA5_FUNCTIONS)) {
             removePrototypeProperties(window, "Date", "toISOString", "toJSON");
         }
 
         // in IE, not all standard methods exists
         if (browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_146)) {
-            deleteProperties(window, "isXMLName", "uneval");
             removePrototypeProperties(window, "Object", "__defineGetter__", "__defineSetter__", "__lookupGetter__",
                     "__lookupSetter__");
             removePrototypeProperties(window, "Array", "every", "filter", "forEach", "indexOf", "lastIndexOf", "map",
@@ -282,6 +283,7 @@ public class JavaScriptEngine {
 
         // only FF has toSource
         if (!browserVersion.hasFeature(BrowserVersionFeatures.JS_FUNCTION_TOSOURCE)) {
+            deleteProperties(window, "isXMLName", "uneval");
             removePrototypeProperties(window, "Object", "toSource");
             removePrototypeProperties(window, "Array", "toSource");
             removePrototypeProperties(window, "Date", "toSource");

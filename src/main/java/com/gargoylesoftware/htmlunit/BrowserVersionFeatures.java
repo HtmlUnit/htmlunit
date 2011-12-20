@@ -678,6 +678,12 @@ public enum BrowserVersionFeatures {
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
 
+    /** Indicates if Function.bind is available. */
+    JS_FUNCTION_BIND,
+
+    /** Indicates if the method toSource exists on the native objects. */
+    JS_FUNCTION_TOSOURCE,
+
     /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
     JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB,
 
@@ -739,10 +745,6 @@ public enum BrowserVersionFeatures {
 
     /** Indicates if setting an out of bound value for HTMLSelectElement.selectedIndex should throw. */
     JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD,
-
-    /** Indicates if the method toSource exists on the native objects.
-     */
-    JS_FUNCTION_TOSOURCE,
 
     /** Indicates that new XMLSerializer().serializeToString(..) adds the xhtml namespace to the root element. */
     JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE,

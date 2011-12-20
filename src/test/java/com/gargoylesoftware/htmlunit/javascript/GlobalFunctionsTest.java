@@ -73,7 +73,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "isXMLName: function", "uneval: function" },
-            IE = { "isXMLName: undefined", "uneval: undefined" })
+            DEFAULT = { "isXMLName: undefined", "uneval: undefined" })
     public void methods_different() throws Exception {
         final String[] methods = {"isXMLName", "uneval"};
         final String html = NativeDateTest.createHTMLTestMethods("this", methods);

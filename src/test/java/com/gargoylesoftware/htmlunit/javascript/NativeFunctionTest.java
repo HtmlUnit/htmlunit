@@ -38,22 +38,33 @@ public class NativeFunctionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "apply: function", "arguments: object", "bind: undefined", "call: function", "constructor: function",
+    @Alerts({ "apply: function", "arguments: object", "call: function", "constructor: function",
             "toString: function" })
     public void methods_common() throws Exception {
-        final String[] methods = {"apply", "arguments", "bind", "call", "constructor", "toString"};
+        final String[] methods = {"apply", "arguments", "call", "constructor", "toString"};
         final String html = NativeDateTest.createHTMLTestMethods("function() {}", methods);
         loadPageWithAlerts2(html);
     }
 
     /**
-     * Test for the methods with the different expectations depending on the browsers.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "toSource: function", IE = "toSource: undefined")
-    public void methods_different() throws Exception {
+    @Alerts(FF = "toSource: function", DEFAULT = "toSource: undefined")
+    public void methods_toSource() throws Exception {
         final String html = NativeDateTest.createHTMLTestMethods("function() {}", "toSource");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "bind: undefined",
+            FF8 = "bind: function",
+            CHROME = "bind: function")
+    public void methods_bind() throws Exception {
+        final String html = NativeDateTest.createHTMLTestMethods("function() {}", "bind");
         loadPageWithAlerts2(html);
     }
 
