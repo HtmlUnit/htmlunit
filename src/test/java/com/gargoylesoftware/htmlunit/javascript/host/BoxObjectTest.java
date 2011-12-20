@@ -35,7 +35,7 @@ public class BoxObjectTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "true", "true", "true", "true", "true" }, IE = "exception")
+    @Alerts(FF3 = { "true", "true", "true", "true", "true" }, DEFAULT = "exception")
     public void testElementAttributes() throws Exception {
         final String html =
               "<html>\n"
@@ -69,7 +69,7 @@ public class BoxObjectTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "73-123", "73-244", "510-410" }, IE = "exception")
+    @Alerts(FF3 = { "73-123", "73-244", "510-410" }, DEFAULT = "exception")
     public void testPositionAndSizeAttributes() throws Exception {
         final String html =
               "<html>\n"
