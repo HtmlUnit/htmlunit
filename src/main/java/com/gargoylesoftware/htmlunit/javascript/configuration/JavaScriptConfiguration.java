@@ -516,7 +516,8 @@ public final class JavaScriptConfiguration {
 
     private boolean testToIncludeForBrowserConstraint(final Element element, final BrowserVersion browser) {
         if ((!browser.isIE() || !"Internet Explorer".equals(element.getAttribute("name")))
-            && (!browser.isFirefox() || !"Firefox".equals(element.getAttribute("name")))) {
+            && (!browser.isFirefox() || !"Firefox".equals(element.getAttribute("name")))
+            && (!browser.isChrome() || !"Chrome".equals(element.getAttribute("name")))) {
             return false;
         }
         final String max = element.getAttribute("max-version");
