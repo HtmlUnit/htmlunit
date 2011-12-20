@@ -21,7 +21,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link Element}.
@@ -31,7 +32,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class ElementTest extends WebTestCase {
+public class ElementTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -77,7 +78,7 @@ public class ElementTest extends WebTestCase {
             + "</books>";
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -114,7 +115,7 @@ public class ElementTest extends WebTestCase {
             + "</books>";
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -145,7 +146,7 @@ public class ElementTest extends WebTestCase {
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -202,7 +203,7 @@ public class ElementTest extends WebTestCase {
             + "</responsexml>";
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -234,15 +235,14 @@ public class ElementTest extends WebTestCase {
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
-    @Alerts({ "1", "1" })
+    @Alerts(DEFAULT = { "1", "1" }, IE = "exception")
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -263,13 +263,15 @@ public class ElementTest extends WebTestCase {
             + "      var parser=new DOMParser();\n"
             + "      var doc=parser.parseFromString(text,'text/xml');\n"
             + "    }\n"
+            + "    try {\n"
             + "    alert(doc.documentElement.getElementsByTagNameNS('http://myNS', 'template').length);\n"
             + "    alert(doc.documentElement.getElementsByTagNameNS(null, 'html').length);\n"
+            + "    } catch (e) { alert('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -304,7 +306,7 @@ public class ElementTest extends WebTestCase {
             + "</books>";
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -338,7 +340,7 @@ public class ElementTest extends WebTestCase {
             + "</books>";
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -346,7 +348,7 @@ public class ElementTest extends WebTestCase {
      */
     @Test
     @Alerts(IE = { "<a><b c=\"d\">e</b></a>\r\n", "<a><b c=\"d\">e</b></a>" },
-            FF = { "undefined", "undefined" })
+            DEFAULT = { "undefined", "undefined" })
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -365,7 +367,7 @@ public class ElementTest extends WebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -378,7 +380,7 @@ public class ElementTest extends WebTestCase {
                 "[object],DIV",
                 "[object],APP:DIV"
                 },
-            FF = {"[object HTMLDivElement],DIV",
+            DEFAULT = {"[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
@@ -398,7 +400,7 @@ public class ElementTest extends WebTestCase {
                 "[object],DIV",
                 "[object],APP:DIV"
                 },
-            FF = {"[object HTMLDivElement],DIV",
+            DEFAULT = {"[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object Element],app:dIv",
                 "[object HTMLDivElement],DIV",
@@ -418,7 +420,7 @@ public class ElementTest extends WebTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 },
-            FF = {"[object HTMLDivElement],null",
+            DEFAULT = {"[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object Element],app",
                 "[object HTMLDivElement],null",
@@ -438,12 +440,19 @@ public class ElementTest extends WebTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 },
-            FF = {"[object HTMLDivElement],DIV",
+            FF3 = {"[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object Element],dIv",
                 "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV"
+                },
+            DEFAULT = {"[object HTMLDivElement],div",
+                "[object HTMLUnknownElement],app:div",
+                "[object Element],dIv",
+                "[object HTMLDivElement],div",
+                "[object HTMLUnknownElement],app:div"
                 })
+    @NotYetImplemented({ Browser.FF3_6, Browser.FF8 })
     public void html_localName() throws Exception {
         html("localName");
     }
@@ -458,12 +467,19 @@ public class ElementTest extends WebTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 },
-            FF = {"[object HTMLDivElement],null",
+            FF3 = {"[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object Element],http://www.appcelerator.org",
                 "[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null"
+                },
+            DEFAULT = {"[object HTMLDivElement],http://www.w3.org/1999/xhtml",
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
+                "[object Element],http://www.appcelerator.org",
+                "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
                 })
+    @NotYetImplemented({ Browser.FF3_6, Browser.FF8 })
     public void html_namespaceURI() throws Exception {
         html("namespaceURI");
     }
@@ -491,7 +507,7 @@ public class ElementTest extends WebTestCase {
             + "<app:dIv id='dIv2'>alert(2)</app:dIv>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -506,7 +522,7 @@ public class ElementTest extends WebTestCase {
                 "[object],dIv",
                 "[object],ANOTHER:DIV"
                 },
-            FF = {"[object HTMLDivElement],DIV",
+            DEFAULT = {"[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object HTMLUnknownElement],ANOTHER:DIV",
                 "[object Element],app:dIv",
@@ -530,7 +546,7 @@ public class ElementTest extends WebTestCase {
                 "[object],dIv",
                 "[object],ANOTHER:DIV"
                 },
-            FF = {"[object HTMLDivElement],DIV",
+            DEFAULT = {"[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object HTMLUnknownElement],ANOTHER:DIV",
                 "[object Element],app:dIv",
@@ -554,7 +570,7 @@ public class ElementTest extends WebTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 },
-            FF = {"[object HTMLDivElement],null",
+            DEFAULT = {"[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object Element],app",
@@ -578,14 +594,23 @@ public class ElementTest extends WebTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 },
-            FF = {"[object HTMLDivElement],DIV",
+            FF3 = {"[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object HTMLUnknownElement],ANOTHER:DIV",
                 "[object Element],dIv",
                 "[object HTMLDivElement],DIV",
                 "[object HTMLUnknownElement],APP:DIV",
                 "[object HTMLUnknownElement],ANOTHER:DIV"
+                },
+            DEFAULT = {"[object HTMLDivElement],div",
+                "[object HTMLUnknownElement],app:div",
+                "[object HTMLUnknownElement],another:div",
+                "[object Element],dIv",
+                "[object HTMLDivElement],div",
+                "[object HTMLUnknownElement],app:div",
+                "[object HTMLUnknownElement],another:div"
                 })
+    @NotYetImplemented({ Browser.FF3_6, Browser.FF8 })
     public void namespace_localName() throws Exception {
         namespace("localName");
     }
@@ -602,14 +627,23 @@ public class ElementTest extends WebTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 },
-            FF = {"[object HTMLDivElement],null",
+            FF3 = {"[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object Element],http://www.appcelerator.org",
                 "[object HTMLDivElement],null",
                 "[object HTMLUnknownElement],null",
                 "[object HTMLUnknownElement],null"
+                },
+            DEFAULT = {"[object HTMLDivElement],http://www.w3.org/1999/xhtml",
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
+                "[object Element],http://www.appcelerator.org",
+                "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
+                "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
                 })
+    @NotYetImplemented({ Browser.FF3_6, Browser.FF8 })
     public void namespace_namespaceURI() throws Exception {
         namespace("namespaceURI");
     }
@@ -640,7 +674,7 @@ public class ElementTest extends WebTestCase {
             + "<another:dIv id='dIv3'></another:dIv>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -652,7 +686,7 @@ public class ElementTest extends WebTestCase {
             "[object]", "div",
             "[object]", "dIv"
             },
-        FF = {"[object Element]", "dIv",
+        DEFAULT = {"[object Element]", "dIv",
             "[object HTMLHtmlElement]", "html",
             "[object HTMLDivElement]", "div",
             "[object HTMLUnknownElement]", "dIv"
@@ -670,7 +704,7 @@ public class ElementTest extends WebTestCase {
             "[object]", "div",
             "[object]", "dIv"
             },
-        FF = {"[object Element]", "dIv",
+        DEFAULT = {"[object Element]", "dIv",
             "[object HTMLHtmlElement]", "html",
             "[object HTMLDivElement]", "div",
             "[object HTMLUnknownElement]", "dIv"
@@ -688,7 +722,7 @@ public class ElementTest extends WebTestCase {
             "[object]", "",
             "[object]", ""
             },
-        FF = {"[object Element]", "null",
+        DEFAULT = {"[object Element]", "null",
             "[object HTMLHtmlElement]", "null",
             "[object HTMLDivElement]", "null",
             "[object HTMLUnknownElement]", "null"
@@ -706,7 +740,7 @@ public class ElementTest extends WebTestCase {
             "[object]", "undefined",
             "[object]", "undefined"
             },
-        FF = {"[object Element]", "dIv",
+        DEFAULT = {"[object Element]", "dIv",
             "[object HTMLHtmlElement]", "html",
             "[object HTMLDivElement]", "div",
             "[object HTMLUnknownElement]", "dIv"
@@ -724,7 +758,7 @@ public class ElementTest extends WebTestCase {
             "[object]", "http://www.w3.org/1999/xhtml",
             "[object]", "http://www.w3.org/1999/xhtml"
             },
-        FF = {"[object Element]", "null",
+        DEFAULT = {"[object Element]", "null",
             "[object HTMLHtmlElement]", "http://www.w3.org/1999/xhtml",
             "[object HTMLDivElement]", "http://www.w3.org/1999/xhtml",
             "[object HTMLUnknownElement]", "http://www.w3.org/1999/xhtml"
@@ -772,14 +806,14 @@ public class ElementTest extends WebTestCase {
             + "</xml>";
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "button", "getAttributeNS() not supported" }, FF = { "button", "", "false", "true" })
+    @Alerts(IE = { "button", "getAttributeNS() not supported" }, DEFAULT = { "button", "", "false", "true" })
     public void attributeNS() throws Exception {
         final String html
             = "<html><head>\n"
@@ -800,7 +834,7 @@ public class ElementTest extends WebTestCase {
             + "  <input id='foo' type='button' value='someValue'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -829,7 +863,7 @@ public class ElementTest extends WebTestCase {
             + "  <input id='foo' type='button' value='someValue'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -869,6 +903,6 @@ public class ElementTest extends WebTestCase {
             + "</books>";
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
