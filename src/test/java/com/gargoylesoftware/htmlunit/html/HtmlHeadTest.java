@@ -47,14 +47,14 @@ public class HtmlHeadTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(htmlContent);
+        loadPageWithAlerts2(htmlContent);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLHeadElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLHeadElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head id='myId'><script>\n"
             + "  function test() {\n"

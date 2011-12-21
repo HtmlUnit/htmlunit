@@ -34,7 +34,7 @@ public class DomDocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "<div/>", "undefined" }, FF = { "undefined", "undefined" })
+    @Alerts(IE = { "<div/>", "undefined" }, DEFAULT = { "undefined", "undefined" })
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

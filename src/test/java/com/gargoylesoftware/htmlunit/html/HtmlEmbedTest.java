@@ -37,7 +37,7 @@ public class HtmlEmbedTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLEmbedElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLEmbedElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

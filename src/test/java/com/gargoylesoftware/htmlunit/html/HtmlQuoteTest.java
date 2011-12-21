@@ -16,10 +16,13 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlInlineQuotation}, and {@link HtmlBlockQuote}.
@@ -28,13 +31,13 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlQuoteTest extends WebTestCase {
+public class HtmlQuoteTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object HTMLQuoteElement]", "[object HTMLQuoteElement]" }, IE = { "[object]", "[object]" })
+    @Alerts(DEFAULT = { "[object HTMLQuoteElement]", "[object HTMLQuoteElement]" }, IE = { "[object]", "[object]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -48,8 +51,10 @@ public class HtmlQuoteTest extends WebTestCase {
             + "  <blockquote id='myId2'>Second Quote</blockquote>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlInlineQuotation.class.isInstance(page.getHtmlElementById("myId1")));
-        assertTrue(HtmlBlockQuote.class.isInstance(page.getHtmlElementById("myId2")));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            assertTrue(toHtmlElement(driver.findElement(By.id("myId1"))) instanceof HtmlInlineQuotation);
+            assertTrue(toHtmlElement(driver.findElement(By.id("myId2"))) instanceof HtmlBlockQuote);
+        }
     }
 }

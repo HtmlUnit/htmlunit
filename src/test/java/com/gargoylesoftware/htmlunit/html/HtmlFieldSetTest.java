@@ -39,7 +39,7 @@ public class HtmlFieldSetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "[object]", "[object]" },
-        FF = { "[object HTMLFieldSetElement]", "[object HTMLFormElement]" })
+        DEFAULT = { "[object HTMLFieldSetElement]", "[object HTMLFormElement]" })
     public void simpleScriptable() throws Exception {
         final String html
             = "<html><head>\n"
@@ -68,7 +68,7 @@ public class HtmlFieldSetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "undefined", "undefined", "undefined", "center", "8", "foo" },
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "center", "8", "foo" },
         IE = { "left", "right", "", "error", "error", "center", "right", "" })
     public void align() throws Exception {
         final String html

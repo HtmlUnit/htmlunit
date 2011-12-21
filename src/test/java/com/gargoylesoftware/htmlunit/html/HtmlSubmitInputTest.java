@@ -69,6 +69,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "foo", "bar" })
     public void testClick_onClick() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
@@ -76,13 +77,12 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
             + "    <input type='submit' name='button' value='foo' onClick='alert(\"foo\")'/>\n"
             + "</form></body></html>";
 
-        final WebDriver wd = loadPageWithAlerts2(html);
+        final WebDriver wd = loadPage2(html);
 
         final WebElement button = wd.findElement(By.name("button"));
         button.click();
 
-        final String[] expectedAlerts = {"foo", "bar"};
-        assertEquals(expectedAlerts, getCollectedAlerts(wd));
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(wd));
     }
 
     /**
@@ -162,6 +162,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("1")
     public void testOutsideForm() throws Exception {
         final String html =
             "<html><head></head>\n"
@@ -169,12 +170,11 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
             + "<input id='myInput' type='submit' onclick='alert(1)'>\n"
             + "</body></html>";
 
-        final WebDriver wd = loadPageWithAlerts2(html);
-        final String[] expectedAlerts = {"1"};
+        final WebDriver wd = loadPage2(html);
         final WebElement input = wd.findElement(By.id("myInput"));
         input.click();
 
-        assertEquals(expectedAlerts, getCollectedAlerts(wd));
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(wd));
     }
 
     /**
