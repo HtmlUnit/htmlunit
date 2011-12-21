@@ -40,7 +40,7 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "<SPAN onclick=\"var f = &quot;hello&quot; + 'world'\">test span</SPAN>",
-            FF = "<span onclick=\"var f = &quot;hello&quot; + 'world'\">test span</span>")
+            DEFAULT = "<span onclick=\"var f = &quot;hello&quot; + 'world'\">test span</span>")
     public void innerHTMLwithQuotes() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -61,7 +61,7 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "true", "[object]", "true" },
-            FF = { "true", "undefined", "false" })
+            DEFAULT = { "true", "undefined", "false" })
     public void document_xxx_formAccess() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -107,9 +107,17 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
     }
 
     /**
+     * Note concerning Chrome: "focus textarea" is generated when testing manually but
+     * not through the driver. A bug in the driver?
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "mousedown span,mouseup span,click span,mousedown text,focus text,mouseup text,"
+            + "click text,mousedown image,focus image,mouseup image,click image,mousedown textarea,focus textarea,"
+            + "mouseup textarea,click textarea,",
+            CHROME = "mousedown span,mouseup span,click span,mousedown text,focus text,mouseup text,"
+                + "click text,mousedown image,mouseup image,click image,mousedown textarea,focus textarea,"
+                + "mouseup textarea,click textarea,focus textarea,")
     public void clickEvents() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -135,15 +143,13 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
             + "  <textarea id='myTextarea' cols='80' rows='10'></textarea>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("testSpan")).click();
         driver.findElement(By.id("testInput")).click();
         driver.findElement(By.id("testImage")).click();
         driver.findElement(By.id("testTextarea")).click();
-        final String expected = "mousedown span,mouseup span,click span,mousedown text,focus text,mouseup text,"
-            + "click text,mousedown image,focus image,mouseup image,click image,mousedown textarea,focus textarea,"
-            + "mouseup textarea,click textarea,";
-        assertEquals(expected, driver.findElement(By.id("myTextarea")).getText());
+        final String expected = getExpectedAlerts()[0];
+        assertEquals(expected, driver.findElement(By.id("myTextarea")).getAttribute("value"));
     }
 
     /**
@@ -152,7 +158,7 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "onload for window,onclick for div1,", FF = "onload for window,")
+    @Alerts(IE = "onload for window,onclick for div1,", DEFAULT = "onload for window,")
     public void scriptEventFor() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -180,7 +186,7 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("div1")).click();
         webDriver.findElement(By.id("div2")).click();
-        assertEquals(getExpectedAlerts()[0], webDriver.findElement(By.id("myTextarea")).getText());
+        assertEquals(getExpectedAlerts()[0], webDriver.findElement(By.id("myTextarea")).getAttribute("value"));
     }
 
     /**
@@ -221,6 +227,6 @@ public class SimpleWebDriverTest extends WebDriverTestCase {
             expected = "focus,keydown,keypress,keyup,change,blur,";
         }
 
-        assertEquals(expected, webDriver.findElement(By.id("myTextarea")).getText());
+        assertEquals(expected, webDriver.findElement(By.id("myTextarea")).getAttribute("value"));
     }
 }
