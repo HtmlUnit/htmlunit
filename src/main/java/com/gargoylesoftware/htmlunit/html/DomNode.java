@@ -19,7 +19,9 @@ import java.io.Serializable;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -154,7 +156,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     private boolean directlyAttachedToPage_;
 
-    private List<DomChangeListener> domListeners_;
+    private Collection<DomChangeListener> domListeners_;
     private final Object domListeners_lock_ = new Serializable() { };
 
     /**
@@ -1431,11 +1433,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         WebAssert.notNull("listener", listener);
         synchronized (domListeners_lock_) {
             if (domListeners_ == null) {
-                domListeners_ = new ArrayList<DomChangeListener>();
+                domListeners_ = new LinkedHashSet<DomChangeListener>();
             }
-            if (!domListeners_.contains(listener)) {
-                domListeners_.add(listener);
-            }
+            domListeners_.add(listener);
         }
     }
 
