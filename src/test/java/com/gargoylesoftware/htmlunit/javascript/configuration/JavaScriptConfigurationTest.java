@@ -36,7 +36,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
@@ -49,6 +48,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -460,7 +460,8 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Now testing for class " + classname);
             }
-            if (classConfig.getHostClass() == HTMLElement.class) {
+            if (classConfig.getHostClass() == HTMLElement.class
+                || classConfig.getHostClass() == Element.class) {
                 continue; // hack! In fact this test prohibits defining a method in a base class but using
                 // it only in subclasses when the base class is a JS object too. This is not good :-(
             }
@@ -767,7 +768,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         Node node = doc.getDocumentElement().getFirstChild();
         while (node != null) {
             if (node instanceof Element) {
-                final Element element = (Element) node;
+                final org.w3c.dom.Element element = (org.w3c.dom.Element) node;
                 if ("class".equals(element.getTagName())) {
                     String className = element.getAttribute("classname");
                     className = className.substring(className.lastIndexOf('.') + 1);
@@ -782,7 +783,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
                     Node child = element.getFirstChild();
                     while (child != null) {
                         if (child instanceof Element) {
-                            final Element childE = (Element) child;
+                            final org.w3c.dom.Element childE = (org.w3c.dom.Element) child;
                             final String name = childE.getAttribute("name");
                             final String tagName = childE.getTagName();
                             final int childType = getType(tagName);
