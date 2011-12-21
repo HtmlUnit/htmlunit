@@ -1413,6 +1413,7 @@
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAudioElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAudio">
         <browser name="Firefox" min-version="3.6"/>
+        <browser name="Chrome"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseElement"
@@ -1455,6 +1456,7 @@
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCanvas">
         <browser name="Firefox"/>
+        <browser name="Chrome"/>
         <property name="height" readable="true" writable="true"/>
         <property name="width" readable="true" writable="true"/>
         <function name="getContext"/>
@@ -2043,6 +2045,7 @@
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSourceElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSource">
         <browser name="Firefox" min-version="3.6"/>
+        <browser name="Chrome"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpacerElement"
@@ -2278,6 +2281,7 @@
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLVideoElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlVideo">
         <browser name="Firefox" min-version="3.6"/>
+        <browser name="Chrome"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLWBRElement"

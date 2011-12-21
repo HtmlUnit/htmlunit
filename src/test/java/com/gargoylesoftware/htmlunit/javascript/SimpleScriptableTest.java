@@ -31,12 +31,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
@@ -101,6 +101,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("ActiveXObject");
         names.remove("ActiveXObjectImpl");
         names.remove("BoxObject");
+        names.remove("ClientRect");
         names.remove("ClipboardData");
         names.remove("ComputedCSSStyleDeclaration");
         names.remove("CSSImportRule");
@@ -158,7 +159,6 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("StringCustom");
         names.remove("StyleSheetList");
         names.remove("TextRange");
-        names.remove("TextRectangle");
         names.remove("TreeWalker");
         names.remove("UIEvent");
         names.remove("Window");
@@ -173,14 +173,13 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("XSLTemplate");
         names.remove("XMLAttr");
 
-        if (getBrowserVersion() != BrowserVersion.FIREFOX_3_6) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML5_TAGS)) {
             names.remove("HTMLAudioElement");
             names.remove("HTMLSourceElement");
             names.remove("HTMLVideoElement");
-
-            if (getBrowserVersion().isIE()) {
-                names.remove("HTMLCanvasElement");
-            }
+        }
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.CANVAS)) {
+            names.remove("HTMLCanvasElement");
         }
 
         final Collection<String> hostClassNames = new ArrayList<String>();
