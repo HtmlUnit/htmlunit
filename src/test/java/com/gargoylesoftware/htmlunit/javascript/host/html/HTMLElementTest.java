@@ -1842,7 +1842,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = "[object ClientRect]", IE = "[object]", FF3 = "exception")
+    @Alerts(DEFAULT = "[object ClientRect]", IE = "[object]")
     @Test
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body><div id='div1'>hello</div><script>\n"
