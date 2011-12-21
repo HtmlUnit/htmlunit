@@ -86,7 +86,7 @@ public class HtmlLabelTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLLabelElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLLabelElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
