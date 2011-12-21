@@ -44,7 +44,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
     @Test
     @NotYetImplemented(Browser.IE)
     @Alerts(IE = { "true", "false", "false", "false", "false", "false" },
-            FF = { "true", "true", "true", "true", "true", "true" })
+            DEFAULT = { "true", "true", "true", "true", "true", "true" })
     public void checked_on_attachment() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -77,7 +77,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "foo,change,")
+    @Alerts(DEFAULT = "foo,change,", IE = { })
     public void onchangeFires() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -96,15 +96,15 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("chkbox")).click();
 
         assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
-                '[' + driver.findElement(By.id("myTextarea")).getText() + ']');
+                '[' + driver.findElement(By.id("myTextarea")).getAttribute("value") + ']');
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "foo,change,", IE = "foo,change,boo,blur,")
-    @NotYetImplemented(Browser.FF)
+    @Alerts(CHROME = "foo,change,", DEFAULT = "foo,change,boo,blur,")
+    @NotYetImplemented(Browser.CHROME)
     public void onchangeFires2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -128,14 +128,14 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("chkbox2")).click();
 
         assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
-                '[' + driver.findElement(By.id("myTextarea")).getText() + ']');
+                '[' + driver.findElement(By.id("myTextarea")).getAttribute("value") + ']');
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "First", FF = "Second")
+    @Alerts(IE = "First", DEFAULT = "Second")
     public void setChecked() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
@@ -157,7 +157,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "First", "Second" }, FF = "Second")
+    @Alerts(IE = { "First", "Second" }, DEFAULT = "Second")
     public void setChecked2() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
