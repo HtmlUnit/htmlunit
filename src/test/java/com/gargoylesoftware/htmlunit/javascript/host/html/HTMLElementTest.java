@@ -1821,7 +1821,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Alerts(DEFAULT = { "400", "100" }, IE = { "402", "102" })
     @Test
-    @NotYetImplemented({ Browser.FF3, Browser.CHROME })
+    @NotYetImplemented({ Browser.FF, Browser.CHROME })
     public void getBoundingClientRect2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
