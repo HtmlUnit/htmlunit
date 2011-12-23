@@ -859,7 +859,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     return true;
                 }
             };
-            all_.setAvoidObjectDetection(!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_54));
+            all_.setAvoidObjectDetection(!getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION));
         }
         return all_;
     }

@@ -304,7 +304,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         }
         else if (!matchingElements.isEmpty()) {
             final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), matchingElements);
-            collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_46));
+            collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION));
             return collection;
         }
 
@@ -331,7 +331,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         // many elements => build a sub collection
         final DomNode domNode = getDomNodeOrNull();
         final HTMLCollection collection = new HTMLCollection(domNode, matchingElements);
-        collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_46));
+        collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION));
         return collection;
     }
 

@@ -137,12 +137,6 @@ public class HtmlAnchor extends HtmlElement {
         return false;
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        // TODO Auto-generated method stub
-        return super.clone();
-    }
-
     /**
      * Returns the value of the attribute "charset". Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>

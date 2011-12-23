@@ -392,9 +392,6 @@ public enum BrowserVersionFeatures {
     GENERATED_45,
 
     /** Was originally .isIE(). */
-    GENERATED_46,
-
-    /** Was originally .isIE(). */
     GENERATED_47,
 
     /** Was originally .isIE(). */
@@ -414,9 +411,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_53,
-
-    /** Was originally .isIE(). */
-    GENERATED_54,
 
     /** Was originally .isIE(). */
     GENERATED_55,
@@ -546,6 +540,9 @@ public enum BrowserVersionFeatures {
 
     /** Allows multiple elements with the same 'id'. */
     HTMLCOLLECTION_IDENTICAL_IDS,
+
+    /** Allow detection of object type for collection elements */
+    HTMLCOLLECTION_OBJECT_DETECTION,
 
     /**
      * Supports Conditional Comments.
