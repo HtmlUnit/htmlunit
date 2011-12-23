@@ -541,7 +541,7 @@ public enum BrowserVersionFeatures {
     /** Allows multiple elements with the same 'id'. */
     HTMLCOLLECTION_IDENTICAL_IDS,
 
-    /** Allow detection of object type for collection elements */
+    /** Allow detection of object type for collection elements. */
     HTMLCOLLECTION_OBJECT_DETECTION,
 
     /**
