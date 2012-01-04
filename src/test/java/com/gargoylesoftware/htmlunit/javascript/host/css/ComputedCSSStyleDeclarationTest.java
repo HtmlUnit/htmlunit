@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
@@ -537,6 +538,28 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  alert(h.offsetHeight > 0);\n"
             + "</script>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "red", "blue" })
+    public void getPropertyValue() throws Exception {
+        final String html = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var d = document.getElementById('div1');\n"
+            + "    var s = window.getComputedStyle(d, null);\n"
+            + "    alert(s.getPropertyValue('test'));\n"
+            + "    alert(s.getPropertyValue('color'));\n"
+            + "}\n"
+            + "</script>\n"
+            + "<style>#div1 { test: red }</style>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "<div id='div1' style='color: blue'>foo</div></body></html>";
         loadPageWithAlerts2(html);
     }
 }

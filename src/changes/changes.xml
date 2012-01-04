@@ -6,6 +6,11 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: fix strange return value
+                'net.sourceforge.htmlunit.corejs.javascript.UniqueTag.NOT_FOUND'
+                of ComputedStyle.getPropertyValue.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: make Element.getBoundingRect available when simulating FF too.
             </action>

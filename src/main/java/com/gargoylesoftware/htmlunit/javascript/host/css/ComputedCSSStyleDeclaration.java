@@ -1918,20 +1918,20 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String jsxFunction_getPropertyValue(final String name) {
         // need to invoke the getter to take care of the default value
-        final String response = Context.toString(getProperty(this, camelize(name)));
-        if (response == NOT_FOUND) {
+        final Object property = getProperty(this, camelize(name));
+        if (property == NOT_FOUND) {
             return super.jsxFunction_getPropertyValue(name);
         }
-        return response;
+        return Context.toString(property);
     }
 
     /**
      * Returns the specified length value as a pixel length value, as long as we're not emulating IE.
-     * This method does <b>NOT</b> handle percentages correctly; use {@link #pixelValue(HTMLElement, CssValue)}
+     * This method does <b>NOT</b> handle percentages correctly; use {@link #pixelValue(Element, CssValue)}
      * if you need percentage support).
      * @param value the length value to convert to a pixel length value
      * @return the specified length value as a pixel length value
-     * @see #pixelString(HTMLElement, CssValue)
+     * @see #pixelString(Element, CssValue)
      */
     protected String pixelString(final String value) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX)) {
