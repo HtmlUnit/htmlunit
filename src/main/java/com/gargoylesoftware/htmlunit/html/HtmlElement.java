@@ -297,8 +297,9 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public String getNodeName() {
         final StringBuilder name = new StringBuilder();
-        if (getPrefix() != null) {
-            name.append(getPrefix());
+        final String prefix = getPrefix();
+        if (prefix != null) {
+            name.append(prefix);
             name.append(':');
         }
         name.append(getLocalName());
