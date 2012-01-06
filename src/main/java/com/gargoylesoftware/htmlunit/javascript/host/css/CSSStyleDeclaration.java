@@ -289,8 +289,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         Pattern.compile("(top|bottom|center)\\s*(\\d+\\s*(%|px|cm|mm|in|pt|pc|em|ex)|left|right|center)");
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
-    private static Map<String, String> CSSColors_ = new HashMap<String, String>();
-    private static Map<String, String> CamelizeCache_ = new HashMap<String, String>();
+    private static final Map<String, String> CSSColors_ = new HashMap<String, String>();
+    private static final Map<String, String> CamelizeCache_ = new HashMap<String, String>();
+    private static final Map<String, Integer> pixelValuesCache_ = new HashMap<String, Integer>();
 
     /** The different types of shorthand values. */
     private enum Shorthand {
@@ -5024,42 +5025,47 @@ public class CSSStyleDeclaration extends SimpleScriptable {
 
     /**
      * Converts the specified length string value into an integer number of pixels. This method does
-     * <b>NOT</b> handle percentages correctly; use {@link #pixelValue(HTMLElement, CssValue)} if you
+     * <b>NOT</b> handle percentages correctly; use {@link #pixelValue(Element, CssValue)} if you
      * need percentage support).
      * @param value the length string value to convert to an integer number of pixels
      * @return the integer number of pixels corresponding to the specified length string value
      * @see <a href="http://htmlhelp.com/reference/css/units.html">CSS Units</a>
-     * @see #pixelValue(HTMLElement, CssValue)
+     * @see #pixelValue(Element, CssValue)
      */
     protected static int pixelValue(final String value) {
-        final int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(value).replaceAll("$1"), 0);
+        final Integer result = pixelValuesCache_.get(value);
+        if (null != result) {
+            return result.intValue();
+        }
+
+        int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(value).replaceAll("$1"), 0);
         if (value.endsWith("px")) {
-            return i;
+            // nothing to do
         }
         else if (value.endsWith("em")) {
-            return i * 16;
+            i = i * 16;
         }
         else if (value.endsWith("ex")) {
-            return i * 10;
+            i = i * 10;
         }
         else if (value.endsWith("in")) {
-            return i * 150;
+            i = i * 150;
         }
         else if (value.endsWith("cm")) {
-            return i * 50;
+            i = i * 50;
         }
         else if (value.endsWith("mm")) {
-            return i * 5;
+            i = i * 5;
         }
         else if (value.endsWith("pt")) {
-            return i * 2;
+            i = i * 2;
         }
         else if (value.endsWith("pc")) {
-            return i * 24;
+            i = i * 24;
         }
-        else {
-            return i;
-        }
+
+        pixelValuesCache_.put(value, Integer.valueOf(i));
+        return i;
     }
 
     /**
