@@ -276,7 +276,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     /** The width style attribute. **/
     protected static final String WIDTH = "width";
 
-    private static final Pattern VALUES_SPLIT_PATTERN = Pattern.compile("\\s+");
     private static final Pattern TO_INT_PATTERN = Pattern.compile("(\\d+).*");
     private static final Pattern URL_PATTERN =
         Pattern.compile("url\\(\\s*[\"']?(.*?)[\"']?\\s*\\)");
@@ -489,7 +488,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             }
         }
 
-        final String[] values = VALUES_SPLIT_PATTERN.split(value, 0);
+        final String[] values = StringUtils.split(value);
         switch (shorthand) {
             case TOP:
                 return values[0];
@@ -1188,7 +1187,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             if (value == null) {
                 final String borderWidth = getStyleAttribute(BORDER_WIDTH, style);
                 if (!StringUtils.isEmpty(borderWidth)) {
-                    final String[] values = VALUES_SPLIT_PATTERN.split(borderWidth, 0);
+                    final String[] values = StringUtils.split(borderWidth);
                     if (values.length > side.ordinal()) {
                         value = values[side.ordinal()];
                     }
