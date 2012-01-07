@@ -383,13 +383,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 final AttributeCondition ac3 = (AttributeCondition) condition;
                 final String v3 = ac3.getValue();
                 final String a3 = element.getAttribute("class");
-                return a3.equals(v3)
-                        || // a3.startsWith(v3 + " ")
-                           (a3.startsWith(v3) && a3.length() > v3.length() && ' ' == a3.charAt(v3.length()))
-                        || // a3.endsWith(" " + v3)
-                           (a3.endsWith(v3) && a3.length() > v3.length()
-                                   && ' ' == a3.charAt(a3.length() - v3.length() - 1))
-                        || a3.contains(" " + v3 + " ");
+                return selects(v3, a3, ' ');
             case Condition.SAC_AND_CONDITION:
                 final CombinatorCondition cc1 = (CombinatorCondition) condition;
                 return selects(browserVersion, cc1.getFirstCondition(), element)
@@ -404,23 +398,12 @@ public class CSSStyleSheet extends SimpleScriptable {
                 final AttributeCondition ac2 = (AttributeCondition) condition;
                 final String v = ac2.getValue();
                 final String a = element.getAttribute(ac2.getLocalName());
-                return a.equals(v)
-                        || // a.startsWith(v + "-")
-                           (a.startsWith(v) && a.length() > v.length() && '-' == a.charAt(v.length()))
-                        || // a.endsWith("-" + v)
-                           (a.endsWith(v) && a.length() > v.length() && '-' == a.charAt(a.length() - v.length() - 1))
-                        || a.contains("-" + v + "-");
+                return selects(v, a, '-');
             case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac5 = (AttributeCondition) condition;
                 final String v2 = ac5.getValue();
                 final String a2 = element.getAttribute(ac5.getLocalName());
-                return a2.equals(v2)
-                        || // a2.startsWith(v2 + " ")
-                           (a2.startsWith(v2) && a2.length() > v2.length() && ' ' == a2.charAt(v2.length()))
-                        || // a2.endsWith(" " + v2)
-                           (a2.endsWith(v2) && a2.length() > v2.length()
-                                   && ' ' == a2.charAt(a2.length() - v2.length() - 1))
-                        || a2.contains(" " + v2 + " ");
+                return selects(v2, a2, ' ');
             case Condition.SAC_OR_CONDITION:
                 final CombinatorCondition cc2 = (CombinatorCondition) condition;
                 return selects(browserVersion, cc2.getFirstCondition(), element)
@@ -458,6 +441,32 @@ public class CSSStyleSheet extends SimpleScriptable {
                 LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
                 return false;
         }
+    }
+
+    private static boolean selects(final String condition, final String attribute, final char separator) {
+        // attribute.equals(condition)
+        // || attribute.startsWith(condition + " ") || attriubte.endsWith(" " + condition)
+        // || attribute.contains(" " + condition + " ");
+
+        final int attribLength = attribute.length();
+        final int conditionLength = condition.length();
+        if (attribLength > conditionLength) {
+            if (separator == attribute.charAt(conditionLength)
+                    && attribute.startsWith(condition)) {
+                return true;
+            }
+            if (separator == attribute.charAt(attribLength - conditionLength - 1)
+                    && attribute.endsWith(condition)) {
+                return true;
+            }
+            if (attribLength + 1 > conditionLength) {
+                final StringBuilder tmp = new StringBuilder(separator);
+                tmp.append(condition).append(separator);
+                return attribute.contains(tmp);
+            }
+            return false;
+        }
+        return attribute.equals(condition);
     }
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
