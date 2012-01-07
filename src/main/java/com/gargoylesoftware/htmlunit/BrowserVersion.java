@@ -16,10 +16,9 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.InputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -59,7 +58,7 @@ public class BrowserVersion implements Serializable {
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
     private float browserVersionNumeric_;
     private final Set<PluginConfiguration> plugins_ = new HashSet<PluginConfiguration>();
-    private final List<BrowserVersionFeatures> features_ = new ArrayList<BrowserVersionFeatures>();
+    private final Set<BrowserVersionFeatures> features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
     private final String nickname_;
 
     /**
