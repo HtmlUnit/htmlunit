@@ -19,10 +19,13 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.WeakHashMap;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -1564,6 +1567,13 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         controllers_ = value;
     }
 
+    /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl **/
+    private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<String>(Arrays.asList(
+            "style",
+            "class",
+            "height",
+            "width"));
+
     /**
      * <p>Listens for changes anywhere in the document and evicts cached computed styles whenever something relevant
      * changes. Note that the very lazy way of doing this (completely clearing the cache every time something happens)
@@ -1604,38 +1614,38 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
          * {@inheritDoc}
          */
         public void nodeAdded(final DomChangeEvent event) {
-            nodeChanged(event.getChangedNode());
+            nodeChanged(event.getChangedNode(), null);
         }
 
         /**
          * {@inheritDoc}
          */
         public void nodeDeleted(final DomChangeEvent event) {
-            nodeChanged(event.getChangedNode());
+            nodeChanged(event.getChangedNode(), null);
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            nodeChanged(event.getHtmlElement());
+            nodeChanged(event.getHtmlElement(), event.getName());
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            nodeChanged(event.getHtmlElement());
+            nodeChanged(event.getHtmlElement(), event.getName());
         }
 
         /**
          * {@inheritDoc}
          */
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
-            nodeChanged(event.getHtmlElement());
+            nodeChanged(event.getHtmlElement(), event.getName());
         }
 
-        private void nodeChanged(final DomNode changed) {
+        private void nodeChanged(final DomNode changed, final String attribName) {
             // If a stylesheet was changed, all of our calculations could be off; clear the cache.
             if (changed instanceof HtmlStyle) {
                 synchronized (computedStyles_) {
@@ -1654,6 +1664,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             }
             // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
             synchronized (computedStyles_) {
+                final boolean clearParents = ATTRIBUTES_AFFECTING_PARENT.contains(attribName);
                 final Iterator<Map.Entry<Node, ComputedCSSStyleDeclaration>> i = computedStyles_.entrySet().iterator();
                 while (i.hasNext()) {
                     final Map.Entry<Node, ComputedCSSStyleDeclaration> entry = i.next();
@@ -1661,7 +1672,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     if (changed == node
                         || changed.getParentNode() == node.getParentNode()
                         || changed.isAncestorOf(node)
-                        || node.isAncestorOf(changed)) {
+                        || (clearParents && node.isAncestorOf(changed))) {
                         i.remove();
                     }
                 }
