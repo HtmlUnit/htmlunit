@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3470364">
+                Cookies: add support for Set-Cookie attribute httpOnly.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: fix strange return value
                 'net.sourceforge.htmlunit.corejs.javascript.UniqueTag.NOT_FOUND'

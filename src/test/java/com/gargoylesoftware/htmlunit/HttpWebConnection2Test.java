@@ -125,7 +125,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "<body>host,user-agent,", IE = "<body>")
+    @Alerts(DEFAULT = "<body>host,user-agent,", IE = "<body>")
     public void headerOrder() throws Exception {
         final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
         servlets.put("/test", HeaderOrderServlet.class);
@@ -134,7 +134,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
 
         driver.get("http://localhost:" + PORT + "/test");
         final String body = driver.getPageSource().toLowerCase().replaceAll("\\s", "");
-        assertTrue(body.contains(getExpectedAlerts()[0]));
+        assertTrue(body, body.contains(getExpectedAlerts()[0]));
     }
 
     /**

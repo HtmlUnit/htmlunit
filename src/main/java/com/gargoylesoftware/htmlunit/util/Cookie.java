@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.http.impl.cookie.BasicClientCookie;
 
 /**
  * A cookie. This class is immutable.
@@ -50,6 +51,9 @@ public class Cookie implements Serializable {
 
     /** Whether or not this cookie is secure (i.e. HTTPS vs HTTP). */
     private final boolean secure_;
+
+    /** Whether or not this cookie is HTTP only (i.e. not available from JS). */
+    private final boolean httponly_;
 
     /**
      * Creates a new cookie with the specified name and value. The new cookie applies to all
@@ -84,12 +88,29 @@ public class Cookie implements Serializable {
      */
     public Cookie(final String domain, final String name, final String value, final String path, final Date expires,
         final boolean secure) {
+        this(domain, name, value, path, expires, secure, false);
+    }
+
+    /**
+     * Creates a new cookie with the specified name and value which applies to the specified domain,
+     * the specified path, and expires on the specified date.
+     * @param domain the domain to which this cookie applies
+     * @param name the cookie name
+     * @param value the cookie name
+     * @param path the path to which this cookie applies
+     * @param expires the date on which this cookie expires
+     * @param secure whether or not this cookie is secure (i.e. HTTPS vs HTTP)
+     * @param httpOnly whether or not this cookie should be only used for HTTP(S) headers
+     */
+    public Cookie(final String domain, final String name, final String value, final String path, final Date expires,
+        final boolean secure, final boolean httpOnly) {
         domain_ = domain;
         name_ = name;
         value_ = (value != null ? value : ""); // HttpClient 3.1 doesn't like null cookie values
         path_ = path;
         expires_ = expires;
         secure_ = secure;
+        httponly_ = httpOnly;
     }
 
     /**
@@ -111,6 +132,7 @@ public class Cookie implements Serializable {
         value_ = (value != null ? value : ""); // HttpClient 3.1 doesn't like null cookie values
         path_ = path;
         secure_ = secure;
+        httponly_ = false;
 
         if (maxAge < -1) {
             throw new IllegalArgumentException("invalid max age:  " + maxAge);
@@ -172,6 +194,15 @@ public class Cookie implements Serializable {
     }
 
     /**
+     * Returns whether or not this cookie is HttpOnly (i.e. not available in JS).
+     * @see <a href="http://en.wikipedia.org/wiki/HTTP_cookie#Secure_and_HttpOnly">Wikipedia</a>
+     * @return whether or not this cookie is HttpOnly (i.e. not available in JS).
+     */
+    public boolean isHttpOnly() {
+        return httponly_;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -180,7 +211,8 @@ public class Cookie implements Serializable {
             + (domain_ != null ? ";domain=" + domain_ : "")
             + (path_ != null ? ";path=" + path_ : "")
             + (expires_ != null ? ";expires=" + expires_ : "")
-            + (secure_ ? ";secure" : "");
+            + (secure_ ? ";secure" : "")
+            + (httponly_ ? ";httpOnly" : "");
     }
 
     /**
@@ -215,6 +247,9 @@ public class Cookie implements Serializable {
         cookie.setPath(path_);
         cookie.setExpiryDate(expires_);
         cookie.setSecure(secure_);
+        if (httponly_) {
+            cookie.setAttribute("httponly", "true");
+        }
         return cookie;
     }
 
@@ -240,11 +275,12 @@ public class Cookie implements Serializable {
     public static List< Cookie > fromHttpClient(final List< org.apache.http.cookie.Cookie > cookies) {
         final List< Cookie > list = new ArrayList< Cookie >(cookies.size());
         for (org.apache.http.cookie.Cookie c : cookies) {
+            final boolean httpOnly = ((BasicClientCookie) c).getAttribute("httponly") != null;
             final Cookie cookie =
-                new Cookie(c.getDomain(), c.getName(), c.getValue(), c.getPath(), c.getExpiryDate(), c.isSecure());
+                new Cookie(c.getDomain(), c.getName(), c.getValue(), c.getPath(), c.getExpiryDate(),
+                    c.isSecure(), httpOnly);
             list.add(cookie);
         }
         return list;
     }
-
 }

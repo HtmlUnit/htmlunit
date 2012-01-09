@@ -14,10 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.http.Header;
@@ -30,6 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
@@ -488,5 +491,44 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", "text/html", responseHeader1);
 
         loadPageWithAlerts2(firstUrl);
+    }
+
+    /**
+     * HttpOnly cookies should not be available from JS.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second=2")
+    public void httpOnly() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "first=1; path=/; HttpOnly"));
+        responseHeader.add(new NameValuePair("Set-Cookie", "second=2; path=/;"));
+
+        getMockWebConnection().setDefaultResponse("");
+        getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
+
+        final WebDriver driver = loadPageWithAlerts2(getDefaultUrl());
+        driver.get(getDefaultUrl().toString() + "foo");
+
+        final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertEquals("first=1; second=2", lastHeaders.get("Cookie"));
+
+        if (driver instanceof HtmlUnitDriver) {
+            final CookieManager mgr = getWebClient((HtmlUnitDriver) driver).getCookieManager();
+            assertEquals(2, mgr.getCookies().size());
+            assertTrue(mgr.getCookie("first").isHttpOnly());
+            assertFalse(mgr.getCookie("second").isHttpOnly());
+        }
+    }
+
+    private WebClient getWebClient(final HtmlUnitDriver driver) {
+        try {
+            final Field field = HtmlUnitDriver.class.getDeclaredField("webClient");
+            field.setAccessible(true);
+            return (WebClient) field.get(driver);
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

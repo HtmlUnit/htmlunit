@@ -745,6 +745,21 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
             }
         };
         registerAttribHandler(ClientCookie.EXPIRES_ATTR, wrapper);
+
+        final CookieAttributeHandler httpOnlyHandler = new CookieAttributeHandler() {
+            public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
+                // nothing
+            }
+
+            public void parse(final SetCookie cookie, final String value) throws MalformedCookieException {
+                ((BasicClientCookie) cookie).setAttribute("httponly", "true");
+            }
+
+            public boolean match(final Cookie cookie, final CookieOrigin origin) {
+                return true;
+            }
+        };
+        registerAttribHandler("httponly", httpOnlyHandler);
     }
 
     /**
