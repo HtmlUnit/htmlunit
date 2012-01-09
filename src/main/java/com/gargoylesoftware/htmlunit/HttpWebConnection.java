@@ -736,7 +736,7 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
                     original.parse(cookie, value);
                 }
                 catch (final MalformedCookieException e) {
-                    incorrectnessListener.notify("Incorrect cookie expriation time: " + value, this);
+                    incorrectnessListener.notify("Incorrect cookie expiration time: " + value, this);
                 }
             }
 
