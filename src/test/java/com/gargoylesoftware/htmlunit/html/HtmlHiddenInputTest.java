@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlHiddenInputTest extends WebDriverTestCase {
@@ -48,5 +49,20 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
 
         final WebElement input = driver.findElement(By.id("foo"));
         assertEquals("", input.getText());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void isDisplayed() throws Exception {
+        final String html = "<html><head><title>Page A</title></head><body>"
+                + "<form id='theForm'>"
+                + "  <input type='hidden' id='myHiddenInput' value='HiddenValue'/>"
+                + "</form>"
+                + "</body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        final HtmlElement hidden = page.getElementById("myHiddenInput");
+        assertFalse(hidden.isDisplayed());
     }
 }

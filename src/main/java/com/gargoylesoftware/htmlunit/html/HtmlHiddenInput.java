@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlHiddenInput extends HtmlInput {
 
@@ -52,5 +53,13 @@ public class HtmlHiddenInput extends HtmlInput {
     @Override
     public String asText() {
         return "";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean mayBeDisplayed() {
+        return false;
     }
 }

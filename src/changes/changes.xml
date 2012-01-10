@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3471836" due-to="Hartmut Arlt">
+                isDisplayed() has to return false for hidden form fields.
+            </action>
             <action type="fix" dev="mguillem" issue="3470364">
                 Cookies: add support for Set-Cookie attribute httpOnly.
             </action>
