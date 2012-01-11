@@ -62,13 +62,13 @@ public class HtmlAnchor extends HtmlElement {
     }
 
     /**
-     * Same as {@link #doClickAction()}, except that it accepts an href suffix, needed when a click is
+     * Same as {@link #doClickStateUpdate()}, except that it accepts an href suffix, needed when a click is
      * performed on an image map to pass information on the click position.
      *
      * @param hrefSuffix the suffix to add to the anchor's href attribute (for instance coordinates from an image map)
      * @throws IOException if an IO error occurs
      */
-    protected void doClickAction(final String hrefSuffix) throws IOException {
+    protected void doClickStateUpdate(final String hrefSuffix) throws IOException {
         final String href = (getHrefAttribute() + hrefSuffix).trim();
         if (LOG.isDebugEnabled()) {
             final String w = getPage().getEnclosingWindow().getName();
@@ -133,7 +133,7 @@ public class HtmlAnchor extends HtmlElement {
      */
     @Override
     protected boolean doClickStateUpdate() throws IOException {
-        doClickAction("");
+        doClickStateUpdate("");
         return false;
     }
 
