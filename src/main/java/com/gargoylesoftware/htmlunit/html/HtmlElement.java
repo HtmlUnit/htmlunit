@@ -1256,7 +1256,7 @@ public abstract class HtmlElement extends DomElement {
     /**
      * This method implements the control state update part of the click action.
      *
-     * <p>The default implementation only calls doClickAction on parent's HtmlElement (if any).
+     * <p>The default implementation only calls doClickStateUpdate on parent's HtmlElement (if any).
      * Subclasses requiring different behavior (like {@link HtmlSubmitInput}) will override this method.</p>
      *
      * @return true if doClickFireEvent method has to be called later on (to signal,
