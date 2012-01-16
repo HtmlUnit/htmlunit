@@ -80,12 +80,15 @@
                 url="http://msdn.microsoft.com/en-us/library/ms534310.aspx"
                 descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
+            <browser name="Chrome"/>
         </property>
         <property name="outerText" notImplemented="true" readable="true" writable="true">
             <browser name="Internet Explorer"/>
         </property>
         <property name="parentElement" readable="true" writable="false">
             <browser name="Internet Explorer"/>
+            <browser name="Firefox" min-version="8"/>
+            <browser name="Chrome"/>
         </property>
         <property name="runtimeStyle" readable="true" writable="false">
             <browser name="Internet Explorer"/>
@@ -126,6 +129,8 @@
         </function>
         <function name="contains">
             <browser name="Internet Explorer"/>
+            <browser name="Chrome"/>
+            <browser name="Firefox" min-version="8"/>
         </function>
         <function name="createTextRange">
             <browser name="Internet Explorer"/>
@@ -135,6 +140,7 @@
                 url="http://developer.mozilla.org/en/docs/DOM:element.dispatchEvent"
                 descr="Gecko DOM Reference"/>
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </function>
         <function name="doScroll">
             <browser name="Internet Explorer"/>
@@ -144,9 +150,11 @@
         <function name="getAttributeNode"/>
         <function name="getAttributeNodeNS">
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </function>
         <function name="getAttributeNS">
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </function>
         <function name="getClientRects">
             <doclink
@@ -156,13 +164,16 @@
         </function>
         <function name="getElementsByClassName">
             <browser name="Firefox" min-version="3"/>
+            <browser name="Chrome"/>
         </function>
         <function name="handleEvent" notImplemented="true"/>
         <function name="hasAttribute">
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </function>
         <function name="hasAttributeNS">
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </function>
         <function name="insertAdjacentElement">
             <doclink
@@ -191,6 +202,7 @@
         <function name="removeAttributeNode"/>
         <function name="removeAttributeNS">
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </function>
         <function name="removeBehavior">
             <browser name="Internet Explorer"/>
@@ -215,6 +227,7 @@
         <function name="setAttributeNode"/>
         <function name="setAttributeNS">
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </function>
         <function name="setExpression">
             <doclink
@@ -1035,6 +1048,7 @@
         <function name="createElement"/>
         <function name="createElementNS">
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </function>
         <function name="createNSResolver">
             <browser name="Firefox"/>
@@ -1601,6 +1615,7 @@
         <function name="close"/>
         <function name="createEvent">
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </function>
         <function name="createEventObject">
             <browser name="Internet Explorer"/>
@@ -1625,6 +1640,7 @@
                 url="http://developer.mozilla.org/en/docs/DOM:element.dispatchEvent"
                 descr="Gecko DOM Reference"/>
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </function>
         <function name="elementFromPoint"/>
         <function name="execCommand"/>
@@ -2484,6 +2500,7 @@
         </property>
         <function name="initMouseEvent">
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </function>
     </class>
 
@@ -2576,6 +2593,7 @@
         <property name="firstChild" readable="true" writable="false"/>
         <property name="innerText" readable="true" writable="true">
             <browser name="Internet Explorer"/>
+            <browser name="Chrome"/>
         </property>
         <property name="lastChild" readable="true" writable="false"/>
         <property name="localName" readable="true" writable="false">
