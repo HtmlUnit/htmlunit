@@ -62,7 +62,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "1", "[object Text]" }, IE = { "0", "null" })
+    @Alerts(DEFAULT = { "1", "[object Text]" }, IE = { "0", "null" })
     public void testChildNodes() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"
