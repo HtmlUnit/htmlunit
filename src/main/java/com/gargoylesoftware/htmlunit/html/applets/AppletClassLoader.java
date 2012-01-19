@@ -41,9 +41,8 @@ public class AppletClassLoader extends URLClassLoader {
     /**
      * Adds the jar file to the classpath for the applet.
      * @param jarUrl the url of the jar file
-     * @throws IOException in case of problem working with the response content
      */
-    public void addArchiveToClassPath(final URL jarUrl) throws IOException {
+    public void addArchiveToClassPath(final URL jarUrl) {
         addURL(jarUrl);
     }
 
