@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -100,9 +99,8 @@ public class HtmlForm extends HtmlElement {
      *
      * @param submitElement the element that caused the submit to occur
      * @return a new page that reflects the results of this submission
-     * @exception IOException if an IO error occurs
      */
-    Page submit(final SubmittableElement submitElement) throws IOException {
+    Page submit(final SubmittableElement submitElement) {
         final HtmlPage htmlPage = (HtmlPage) getPage();
         final WebClient webClient = htmlPage.getWebClient();
         if (webClient.isJavaScriptEnabled()) {

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,12 +47,7 @@ public class StringWebResponse extends WebResponse {
         final byte[] content = TextUtil.stringToByteArray(contentString, charset);
         final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
         compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
-        try {
-            return new WebResponseData(content, HttpStatus.SC_OK, "OK", compiledHeaders);
-        }
-        catch (final IOException e) {
-            throw new RuntimeException(e);
-        }
+        return new WebResponseData(content, HttpStatus.SC_OK, "OK", compiledHeaders);
     }
 
     /**

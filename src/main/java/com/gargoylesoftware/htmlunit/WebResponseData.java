@@ -50,10 +50,9 @@ public class WebResponseData implements Serializable {
      * @param statusCode        Status code from the server
      * @param statusMessage     Status message from the server
      * @param responseHeaders   Headers in this response
-     * @throws IOException on stream errors
      */
     public WebResponseData(final byte[] body, final int statusCode, final String statusMessage,
-            final List<NameValuePair> responseHeaders) throws IOException {
+            final List<NameValuePair> responseHeaders) {
         this(new DownloadedContent.InMemory(body), statusCode, statusMessage, responseHeaders);
     }
 
@@ -63,15 +62,10 @@ public class WebResponseData implements Serializable {
      * @param statusCode        Status code from the server
      * @param statusMessage     Status message from the server
      * @param responseHeaders   Headers in this response
-     *
-     * @throws IOException on stream errors
      */
     protected WebResponseData(final int statusCode,
-            final String statusMessage, final List<NameValuePair> responseHeaders) throws IOException {
-        statusCode_ = statusCode;
-        statusMessage_ = statusMessage;
-        responseHeaders_ = Collections.unmodifiableList(responseHeaders);
-        downloadedContent_ = new DownloadedContent.InMemory(ArrayUtils.EMPTY_BYTE_ARRAY);
+            final String statusMessage, final List<NameValuePair> responseHeaders) {
+        this(ArrayUtils.EMPTY_BYTE_ARRAY, statusCode, statusMessage, responseHeaders);
     }
 
     /**
@@ -80,10 +74,9 @@ public class WebResponseData implements Serializable {
      * @param statusCode        Status code from the server
      * @param statusMessage     Status message from the server
      * @param responseHeaders   Headers in this response
-     * @throws IOException on stream errors
      */
     public WebResponseData(final DownloadedContent responseBody, final int statusCode, final String statusMessage,
-            final List<NameValuePair> responseHeaders) throws IOException {
+            final List<NameValuePair> responseHeaders) {
         statusCode_ = statusCode;
         statusMessage_ = statusMessage;
         responseHeaders_ = Collections.unmodifiableList(responseHeaders);

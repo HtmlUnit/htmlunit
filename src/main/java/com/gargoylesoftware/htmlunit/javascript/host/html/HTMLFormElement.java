@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -267,12 +266,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
 
     /**
      * Submits the form (at the end of the current script execution).
-     *
-     * @throws IOException if an IO error occurs
      */
-    public void jsxFunction_submit()
-        throws IOException {
-
+    public void jsxFunction_submit() {
         final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
         final WebClient webClient = page.getWebClient();
 

@@ -206,10 +206,8 @@ public class HttpWebConnection implements WebConnection {
      * Returns a new HttpClient host configuration, initialized based on the specified request.
      * @param webRequest the request to use to initialize the returned host configuration
      * @return a new HttpClient host configuration, initialized based on the specified request
-     * @throws IOException if the specified request contains an invalid URL
      */
-    private static HttpHost getHostConfiguration(final WebRequest webRequest)
-        throws IOException {
+    private static HttpHost getHostConfiguration(final WebRequest webRequest) {
         final URL url = webRequest.getUrl();
         final HttpHost hostConfiguration = new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
 
@@ -583,7 +581,7 @@ public class HttpWebConnection implements WebConnection {
      * Converts an HttpMethod into a WebResponse.
      */
     private WebResponse makeWebResponse(final HttpResponse httpResponse,
-            final WebRequest request, final DownloadedContent responseBody, final long loadTime) throws IOException {
+            final WebRequest request, final DownloadedContent responseBody, final long loadTime) {
 
         String statusMessage = httpResponse.getStatusLine().getReasonPhrase();
         if (statusMessage == null) {

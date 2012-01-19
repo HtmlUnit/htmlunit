@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3475974">
+                Some not needed exception declarations are gone.
+            </action>
             <action type="fix" dev="rbri" issue="3471836" due-to="Hartmut Arlt">
                 isDisplayed() has to return false for hidden form fields.
             </action>

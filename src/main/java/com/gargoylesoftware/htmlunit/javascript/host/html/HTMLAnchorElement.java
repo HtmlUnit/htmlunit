@@ -136,9 +136,8 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the value of the rel property.
      * @return the rel property
-     * @throws Exception if an error occurs
      */
-    public String jsxGet_rel() throws Exception {
+    public String jsxGet_rel() {
         return ((HtmlAnchor) getDomNodeOrDie()).getRelAttribute();
     }
 
@@ -153,9 +152,8 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * Returns the value of the rev property.
      * @return the rev property
-     * @throws Exception if an error occurs
      */
-    public String jsxGet_rev() throws Exception {
+    public String jsxGet_rev() {
         return ((HtmlAnchor) getDomNodeOrDie()).getRevAttribute();
     }
 

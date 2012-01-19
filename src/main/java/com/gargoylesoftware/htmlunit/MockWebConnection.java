@@ -179,12 +179,7 @@ public class MockWebConnection implements WebConnection {
 
     private WebResponseData buildWebResponseData(final byte[] content, final int statusCode, final String statusMessage,
             final List<NameValuePair> compiledHeaders) {
-        try {
-            return new WebResponseData(content, statusCode, statusMessage, compiledHeaders);
-        }
-        catch (final IOException e) {
-            throw new RuntimeException(e);
-        }
+        return new WebResponseData(content, statusCode, statusMessage, compiledHeaders);
     }
 
     /**
