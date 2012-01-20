@@ -322,7 +322,8 @@ public class HTMLInputElement extends FormField {
      * @param align the value of the "align" property
      */
     public void jsxSet_align(final String align) {
-        final boolean ignoreIfNoError = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_84);
+        final boolean ignoreIfNoError =
+                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES);
         setAlign(align, ignoreIfNoError);
     }
 

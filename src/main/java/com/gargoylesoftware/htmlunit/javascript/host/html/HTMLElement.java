@@ -2084,8 +2084,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected void setAlign(String align, final boolean ignoreIfNoError) {
         align = align.toLowerCase();
-        final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_168);
-        if (ff
+        final boolean acceptArbitraryValues =
+                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
+        if (acceptArbitraryValues
                 || "center".equals(align)
                 || "justify".equals(align)
                 || "left".equals(align)
@@ -2093,10 +2094,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if (!ignoreIfNoError) {
                 getDomNodeOrDie().setAttribute("align", align);
             }
+            return;
         }
-        else {
-            throw Context.reportRuntimeError("Cannot set the align property to invalid value: " + align);
-        }
+
+        throw Context.reportRuntimeError("Cannot set the align property to invalid value: '" + align + "'");
     }
 
     /**

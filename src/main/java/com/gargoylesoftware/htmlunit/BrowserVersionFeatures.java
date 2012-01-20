@@ -302,9 +302,6 @@ public enum BrowserVersionFeatures {
     GENERATED_167,
 
     /** Was originally .isFirefox(). */
-    GENERATED_168,
-
-    /** Was originally .isFirefox(). */
     GENERATED_169,
 
     /** Was originally .isIE(). */
@@ -485,9 +482,6 @@ public enum BrowserVersionFeatures {
     GENERATED_81,
 
     /** Was originally .isIE(). */
-    GENERATED_84,
-
-    /** Was originally .isIE(). */
     GENERATED_85,
 
     /** Was originally .isIE(). */
@@ -604,10 +598,19 @@ public enum BrowserVersionFeatures {
     IGNORE_CONTENTS_OF_INNER_HEAD,
 
     /**
-     * The function addEventListener or attachEvent(IE) accepts null as listner
+     * The function addEventListener or attachEvent(IE) accepts null as listener
      * instead of throwing an exception.
      */
     JS_ADD_EVENT_LISTENER_ACCEPTS_NULL_LISTENER,
+
+    /** Setting the property align to arbitrary values is allowed. */
+    JS_ALIGN_ACCEPTS_ARBITRARY_VALUES,
+
+    /** Setting the property align of an input element ignores the value
+     * if the value is one of center, justify, left or right.
+     * For all other values an exception is still thrown.
+     */
+    JS_ALIGN_FOR_INPUT_IGNORES_VALUES,
 
     /**
      * Javascript property anchors includes all anchors with a name or an id property.
