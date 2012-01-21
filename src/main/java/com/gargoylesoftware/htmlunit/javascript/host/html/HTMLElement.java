@@ -288,13 +288,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     public String jsxGet_namespaceURI() {
+        final HtmlElement domNode = getDomNodeOrDie();
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_65)) {
-            return getDomNodeOrDie().getNamespaceURI();
+            return domNode.getNamespaceURI();
         }
-        if (getDomNodeOrDie().getPage() instanceof HtmlPage) {
+        if (domNode.getPage() instanceof HtmlPage) {
             return null;
         }
-        return getDomNodeOrDie().getNamespaceURI();
+        return domNode.getNamespaceURI();
     }
 
     /**
@@ -362,7 +363,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             if ("className".equals(attributeName)) {
                 return "class";
             }
-            else if ("class".equals(attributeName)) {
+            if ("class".equals(attributeName)) {
                 return "_class"; // attribute should not be retrieved with "class"
             }
         }
@@ -2150,7 +2151,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param ch the value of the "ch" property
      */
     protected void setCh(final String ch) {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_77);
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_76);
         if (ie) {
             ch_ = ch;
         }

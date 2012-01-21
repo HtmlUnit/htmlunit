@@ -464,9 +464,6 @@ public enum BrowserVersionFeatures {
     GENERATED_76,
 
     /** Was originally .isIE(). */
-    GENERATED_77,
-
-    /** Was originally .isIE(). */
     GENERATED_78,
 
     /** Was originally .isIE(). */
