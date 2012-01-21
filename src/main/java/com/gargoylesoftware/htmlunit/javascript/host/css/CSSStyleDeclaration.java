@@ -3088,11 +3088,22 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param opacity the new attribute
      */
     public void jsxSet_opacity(final String opacity) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_23)) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OPACITY_ACCEPTS_ARBITRARY_VALUES)) {
+            setStyleAttribute(OPACITY, opacity);
+            return;
+        }
+
+        if (opacity.length() == 0) {
             setStyleAttribute(OPACITY, opacity);
         }
-        else if (com.gargoylesoftware.htmlunit.util.StringUtils.isFloat(opacity, true) || opacity.length() == 0) {
-            setStyleAttribute(OPACITY, opacity.trim());
+
+        final String trimedOpacity = opacity.trim();
+        try {
+            Float.parseFloat(trimedOpacity);
+            setStyleAttribute(OPACITY, trimedOpacity);
+        }
+        catch (final NumberFormatException e) {
+            // ignore wrong value
         }
     }
 

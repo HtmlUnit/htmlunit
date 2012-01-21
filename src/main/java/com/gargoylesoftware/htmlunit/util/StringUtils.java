@@ -136,30 +136,6 @@ public final class StringUtils {
     }
 
     /**
-     * Returns <tt>true</tt> if the specified string is a valid float, possibly trimming the string before checking.
-     *
-     * @param s the string to check
-     * @param trim whether or not to trim the string before checking
-     * @return <tt>true</tt> if the specified string is a valid float, <tt>false</tt> otherwise
-     */
-    public static boolean isFloat(String s, final boolean trim) {
-        if (trim) {
-            s = s.trim();
-        }
-
-        boolean ok;
-        try {
-            Float.parseFloat(s);
-            ok = true;
-        }
-        catch (final NumberFormatException e) {
-            ok = false;
-        }
-
-        return ok;
-    }
-
-    /**
      * Returns <tt>true</tt> if the specified collection of strings contains the specified string, ignoring case.
      *
      * @param strings the strings to search

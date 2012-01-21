@@ -332,9 +332,6 @@ public enum BrowserVersionFeatures {
     GENERATED_21,
 
     /** Was originally .isIE(). */
-    GENERATED_23,
-
-    /** Was originally .isIE(). */
     GENERATED_26,
 
     /** Was originally .isIE(). */
@@ -731,6 +728,11 @@ public enum BrowserVersionFeatures {
      *  to the page's DOM.
      */
     JS_OFFSET_PARENT_THROWS_NOT_ATTACHED,
+
+    /** Setting the property opacity  of an css style declaration to arbitrary values is allowed.
+     * FF accepts only valid floats.
+     */
+    JS_OPACITY_ACCEPTS_ARBITRARY_VALUES,
 
     /** Javascript selectorText property returns selectors in uppercase. */
     JS_SELECTOR_TEXT_UPPERCASE,
