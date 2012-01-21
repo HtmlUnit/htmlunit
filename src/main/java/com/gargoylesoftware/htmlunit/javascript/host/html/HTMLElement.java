@@ -2177,7 +2177,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param chOff the value of the "chOff" property
      */
     protected void setChOff(String chOff) {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_79);
+        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_78);
         if (ie) {
             chOff_ = chOff;
         }

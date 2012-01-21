@@ -296,9 +296,6 @@ public enum BrowserVersionFeatures {
     GENERATED_165,
 
     /** Was originally .isFirefox(). */
-    GENERATED_166,
-
-    /** Was originally .isFirefox(). */
     GENERATED_167,
 
     /** Was originally .isFirefox(). */
@@ -465,9 +462,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_78,
-
-    /** Was originally .isIE(). */
-    GENERATED_79,
 
     /** Was originally .isIE(). */
     GENERATED_80,

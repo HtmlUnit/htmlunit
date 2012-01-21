@@ -1560,7 +1560,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return <code>true</code> if the command can be successfully executed
      */
     public boolean jsxFunction_queryCommandEnabled(final String cmd) {
-        final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_166);
+        final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_165);
         final String mode = jsxGet_designMode();
         if (!ff) {
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
