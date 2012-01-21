@@ -176,9 +176,6 @@ public enum BrowserVersionFeatures {
     GENERATED_109,
 
     /** Was originally .isIE(). */
-    GENERATED_110,
-
-    /** Was originally .isIE(). */
     GENERATED_111,
 
     /** Was originally .isIE(). */
@@ -309,9 +306,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isFirefox(). */
     GENERATED_172,
-
-    /** Was originally .isFirefox(). */
-    GENERATED_173,
 
     /** Was originally .isFirefox(). */
     GENERATED_174,
@@ -720,7 +714,7 @@ public enum BrowserVersionFeatures {
      */
     JS_OFFSET_PARENT_THROWS_NOT_ATTACHED,
 
-    /** Setting the property opacity  of an css style declaration to arbitrary values is allowed.
+    /** Setting the property opacity of an css style declaration to arbitrary values is allowed.
      * FF accepts only valid floats.
      */
     JS_OPACITY_ACCEPTS_ARBITRARY_VALUES,
@@ -738,6 +732,17 @@ public enum BrowserVersionFeatures {
 
     /** Indicates if setting an out of bound value for HTMLSelectElement.selectedIndex should throw. */
     JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD,
+
+    /** Getting the property cols 20, if the defined value is not convertable into an integer (IE).
+     * FF returns -1 in this case.
+     */
+    JS_TEXT_AREA_COLS_RETURNS_20,
+
+    /** Setting the property cols throws an exception, if the provided value is not
+     * convertable into an integer (IE).
+     * FF ignores the provided value in this case and sets cols to 0.
+     */
+    JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
 
     /** Indicates that new XMLSerializer().serializeToString(..) adds the xhtml namespace to the root element. */
     JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE,

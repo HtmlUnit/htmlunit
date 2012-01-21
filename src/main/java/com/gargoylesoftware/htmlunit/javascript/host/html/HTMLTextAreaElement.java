@@ -80,20 +80,16 @@ public class HTMLTextAreaElement extends FormField {
      * @return the number of columns in this text area
      */
     public int jsxGet_cols() {
-        int cols;
+        final String s = getDomNodeOrDie().getAttribute("cols");
         try {
-            final String s = getDomNodeOrDie().getAttribute("cols");
-            cols = Integer.parseInt(s);
+            return Integer.parseInt(s);
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_173)) {
-                cols = -1;
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_TEXT_AREA_COLS_RETURNS_20)) {
+                return 20;
             }
-            else {
-                cols = 20;
-            }
+            return -1;
         }
-        return cols;
     }
 
     /**
@@ -103,13 +99,13 @@ public class HTMLTextAreaElement extends FormField {
     public void jsxSet_cols(final String cols) {
         int i;
         try {
-            i = new Float(cols).intValue();
+            i = Float.valueOf(cols).intValue();
             if (i < 0) {
-                throw new NumberFormatException();
+                throw new NumberFormatException("New value for cols smaller than zero.");
             }
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_110)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
             i = 0;
