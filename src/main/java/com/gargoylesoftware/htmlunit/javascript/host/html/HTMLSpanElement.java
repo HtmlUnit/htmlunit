@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlCenter;
 import com.gargoylesoftware.htmlunit.html.HtmlCitation;
 import com.gargoylesoftware.htmlunit.html.HtmlCode;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinition;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlEmphasis;
 import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlItalic;
@@ -71,64 +70,45 @@ public class HTMLSpanElement extends HTMLElement {
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
-        final HtmlElement element = (HtmlElement) domNode;
         final BrowserVersion browser = getBrowserVersion();
-        if (browser.hasFeature(BrowserVersionFeatures.GENERATED_90)) {
-            if ((element instanceof HtmlAbbreviated && browser.hasFeature(BrowserVersionFeatures.HTMLABBREVIATED))
-                || element instanceof HtmlAcronym
-                || element instanceof HtmlAddress
-                || element instanceof HtmlBidirectionalOverride
-                || element instanceof HtmlBig
-                || element instanceof HtmlBold
-                || element instanceof HtmlBlink
-                || element instanceof HtmlCenter
-                || element instanceof HtmlCitation
-                || element instanceof HtmlCode
-                || element instanceof HtmlDefinition
-                || element instanceof HtmlExample
-                || element instanceof HtmlEmphasis
-                || element instanceof HtmlItalic
-                || element instanceof HtmlKeyboard
-                || element instanceof HtmlListing
-                || element instanceof HtmlNoBreak
-                || element instanceof HtmlPlainText
-                || element instanceof HtmlS
-                || element instanceof HtmlSample
-                || element instanceof HtmlSmall
-                || element instanceof HtmlStrike
-                || element instanceof HtmlStrong
-                || element instanceof HtmlSubscript
-                || element instanceof HtmlSuperscript
-                || element instanceof HtmlTeletype
-                || element instanceof HtmlUnderlined
-                || element instanceof HtmlVariable) {
-                ActiveXObject.addProperty(this, "cite", true, true);
-            }
-            if ((element instanceof HtmlAbbreviated && browser.hasFeature(BrowserVersionFeatures.HTMLABBREVIATED))
-                    || element instanceof HtmlAcronym
-                    || element instanceof HtmlBold
-                    || element instanceof HtmlBidirectionalOverride
-                    || element instanceof HtmlBig
-                    || element instanceof HtmlBlink
-                    || element instanceof HtmlCitation
-                    || element instanceof HtmlCode
-                    || element instanceof HtmlDefinition
-                    || element instanceof HtmlEmphasis
-                    || element instanceof HtmlItalic
-                    || element instanceof HtmlKeyboard
-                    || element instanceof HtmlNoBreak
-                    || element instanceof HtmlS
-                    || element instanceof HtmlSample
-                    || element instanceof HtmlSmall
-                    || element instanceof HtmlStrike
-                    || element instanceof HtmlStrong
-                    || element instanceof HtmlSubscript
-                    || element instanceof HtmlSuperscript
-                    || element instanceof HtmlTeletype
-                    || element instanceof HtmlUnderlined
-                    || element instanceof HtmlVariable) {
-                ActiveXObject.addProperty(this, "dateTime", true, true);
-            }
+        if (!browser.hasFeature(BrowserVersionFeatures.GENERATED_90)) {
+            return;
+        }
+
+        if ((domNode instanceof HtmlAbbreviated && browser.hasFeature(BrowserVersionFeatures.HTMLABBREVIATED))
+            || domNode instanceof HtmlAcronym
+            || domNode instanceof HtmlBidirectionalOverride
+            || domNode instanceof HtmlBig
+            || domNode instanceof HtmlBold
+            || domNode instanceof HtmlBlink
+            || domNode instanceof HtmlCitation
+            || domNode instanceof HtmlCode
+            || domNode instanceof HtmlDefinition
+            || domNode instanceof HtmlEmphasis
+            || domNode instanceof HtmlItalic
+            || domNode instanceof HtmlKeyboard
+            || domNode instanceof HtmlNoBreak
+            || domNode instanceof HtmlS
+            || domNode instanceof HtmlSample
+            || domNode instanceof HtmlSmall
+            || domNode instanceof HtmlStrike
+            || domNode instanceof HtmlStrong
+            || domNode instanceof HtmlSubscript
+            || domNode instanceof HtmlSuperscript
+            || domNode instanceof HtmlTeletype
+            || domNode instanceof HtmlUnderlined
+            || domNode instanceof HtmlVariable) {
+            ActiveXObject.addProperty(this, "cite", true, true);
+            ActiveXObject.addProperty(this, "dateTime", true, true);
+            return;
+        }
+
+        if (domNode instanceof HtmlAddress
+            || domNode instanceof HtmlCenter
+            || domNode instanceof HtmlExample
+            || domNode instanceof HtmlListing
+            || domNode instanceof HtmlPlainText) {
+            ActiveXObject.addProperty(this, "cite", true, true);
         }
     }
 
