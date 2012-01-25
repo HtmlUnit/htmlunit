@@ -1823,9 +1823,8 @@ public class WebClient implements Serializable {
         public void webWindowClosed(final WebWindowEvent event) {
             final WebWindow window = event.getWebWindow();
             if (window instanceof TopLevelWindow) {
-                final TopLevelWindow tlw = (TopLevelWindow) event.getWebWindow();
-                webClient_.topLevelWindows_.remove(tlw);
-                if (tlw.equals(webClient_.getCurrentWindow())) {
+                webClient_.topLevelWindows_.remove(window);
+                if (window == webClient_.getCurrentWindow()) {
                     if (webClient_.topLevelWindows_.isEmpty()) {
                         // Must always have at least window, and there are no top-level windows left; must create one.
                         final TopLevelWindow newWindow = new TopLevelWindow("", webClient_);
@@ -1838,7 +1837,7 @@ public class WebClient implements Serializable {
                     }
                 }
             }
-            else if (event.getWebWindow() == webClient_.getCurrentWindow()) {
+            else if (window == webClient_.getCurrentWindow()) {
                 // The current window is now the last top-level window.
                 webClient_.setCurrentWindow(webClient_.topLevelWindows_.peek());
             }
@@ -1882,7 +1881,7 @@ public class WebClient implements Serializable {
         public void webWindowOpened(final WebWindowEvent event) {
             final WebWindow window = event.getWebWindow();
             if (window instanceof TopLevelWindow) {
-                final TopLevelWindow tlw = (TopLevelWindow) event.getWebWindow();
+                final TopLevelWindow tlw = (TopLevelWindow) window;
                 webClient_.topLevelWindows_.push(tlw);
             }
             // Page is not loaded yet, don't set it now as current window.
