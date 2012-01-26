@@ -559,21 +559,22 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     }
 
     /**
-     * Removes the specified style attribute, returning the element index of the removed attribute.
+     * Removes the specified style attribute, returning the value of the removed attribute.
      * @param name the attribute name (delimiter-separated, not camel-cased)
      */
-    private void removeStyleAttribute(final String name) {
+    private String removeStyleAttribute(final String name) {
         if (null != styleDeclaration_) {
-            styleDeclaration_.removeProperty(name);
-            return;
+            return styleDeclaration_.removeProperty(name);
         }
 
         final Map<String, StyleElement> styleMap = getStyleMap();
-        if (!styleMap.containsKey(name)) {
-            return;
+        final StyleElement value = styleMap.get(name);
+        if (value == null) {
+            return "";
         }
         styleMap.remove(name);
         writeToElement(styleMap);
+        return value.getValue();
     }
 
     /**
@@ -4683,6 +4684,15 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         }
 
         return new CSSPrimitiveValue(jsElement_, (org.w3c.dom.css.CSSPrimitiveValue) cssValue);
+    }
+
+    /**
+     * Removes the named property.
+     * @param name the name of the property to remove
+     * @return the value deleted
+     */
+    public String jsxFunction_removeProperty(final String name) {
+        return removeStyleAttribute(name);
     }
 
     /**

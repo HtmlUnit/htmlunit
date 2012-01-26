@@ -962,6 +962,13 @@
                 descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
         </function>
+        <function name="removeProperty">
+            <doclink
+                url="https://developer.mozilla.org/en/DOM/CSSStyleDeclaration#Methods"
+                descr="Gecko DOM reference"/>
+            <browser name="Firefox"/>
+            <browser name="Chrome"/>
+        </function>
         <function name="setAttribute">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms536739.aspx"

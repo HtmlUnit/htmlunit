@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: CSSStyleDeclaration.removeProperty is now available in FF mode.
+            </action>
             <action type="fix" dev="rbri" issue="3475974">
                 Some not needed exception declarations are gone.
             </action>
