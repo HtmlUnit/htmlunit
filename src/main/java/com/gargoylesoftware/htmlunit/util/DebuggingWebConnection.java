@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.WebResponseData;
  * client.setWebConnection(connection);
  * </pre>
  * In this example an overview page will be generated under the name myTest/index.html in the temp directory
- * and all received responses will be saved int the myTest folder.<br>
+ * and all received responses will be saved into the myTest folder.<br>
  * <br>
  * <em>This class is only intended as an help during the conception.</em>
  *
