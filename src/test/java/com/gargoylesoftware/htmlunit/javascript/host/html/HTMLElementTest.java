@@ -1834,9 +1834,75 @@ public class HTMLElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Alerts({ "0", "0" })
+    @Test
+    public void clientLeftTop() throws Exception {
+        final String html = "<html><body>"
+            + "<div id='div1'>hello</div><script>\n"
+            + "  var d1 = document.getElementById('div1');\n"
+            + "  alert(d1.clientLeft);\n"
+            + "  alert(d1.clientTop);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Another nice feature of the IE.
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = { "0", "0" }, IE = { "2", "2" })
+    @Test
+    public void clientLeftTop_documentElement() throws Exception {
+        final String html =
+              "<!DOCTYPE HTML "
+            +      "PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n"
+            + "<html>\n"
+            + "<body>"
+            + "<div id='div1'>hello</div><script>\n"
+            + "  var d1 = document.documentElement;\n"
+            + "  alert(d1.clientLeft);\n"
+            + "  alert(d1.clientTop);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = { "4", "4" }, IE = { "0", "0" })
+    @Test
+    public void clientLeftTopWithBorder() throws Exception {
+        final String html = "<html><body>"
+            + "<div id='div1' style='border: 4px solid black;'>hello</div><script>\n"
+            + "  var d1 = document.getElementById('div1');\n"
+            + "  alert(d1.clientLeft);\n"
+            + "  alert(d1.clientTop);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = "[object ClientRect]", IE = "[object]")
+    @Test
+    public void getBoundingClientRect() throws Exception {
+        final String html = "<html><body><div id='div1'>hello</div><script>\n"
+            + "try {\n"
+            + "  var d1 = document.getElementById('div1');\n"
+            + "  var pos = d1.getBoundingClientRect();\n"
+            + "  alert(pos);\n"
+            + "} catch (e) { alert('exception');}\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     @Alerts(DEFAULT = { "400", "100" }, IE = { "402", "102" })
     @Test
-    @NotYetImplemented({ Browser.FF, Browser.CHROME })
+//    @NotYetImplemented({ Browser.FF, Browser.CHROME })
     public void getBoundingClientRect2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1857,16 +1923,36 @@ public class HTMLElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = "[object ClientRect]", IE = "[object]")
+    @Alerts(DEFAULT = { "0", "100", "100", "50" }, IE = { "2", "102", "102", "52" })
     @Test
-    public void getBoundingClientRect() throws Exception {
-        final String html = "<html><body><div id='div1'>hello</div><script>\n"
-            + "try {\n"
-            + "  var d1 = document.getElementById('div1');\n"
-            + "  var pos = d1.getBoundingClientRect();\n"
-            + "  alert(pos);\n"
-            + "} catch (e) { alert('exception');}\n"
-            + "</script></body></html>";
+    public void getBoundingClientRect_Scroll() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var d1 = document.getElementById('outer');\n"
+            + "      d1.scrollTop=150;\n"
+            + "      var pos = d1.getBoundingClientRect();\n"
+            + "      alert(pos.left);\n"
+            + "      alert(pos.top);\n"
+
+            + "      d1 = document.getElementById('div1');\n"
+            + "      pos = d1.getBoundingClientRect();\n"
+            + "      alert(pos.left);\n"
+            + "      alert(pos.top);\n"
+            + "    } catch (e) { alert('exception');}\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='outer' "
+               + "style='position: absolute; height: 500px; width: 500px; top: 100px; left: 0px; overflow:auto'>\n"
+            + "  <div id='div1' "
+               + "style='position: absolute; height: 100px; width: 100px; top: 100px; left: 100px; z-index:99;'>"
+               + "</div>\n"
+            + "  <div id='div2' "
+              + "style='position: absolute; height: 100px; width: 100px; top: 100px; left: 300px; z-index:99;'></div>\n"
+            + "  <div style='position: absolute; top: 1000px;'>way down</div>\n"
+            + "</div>"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 

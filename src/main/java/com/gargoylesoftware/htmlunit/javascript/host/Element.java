@@ -330,8 +330,27 @@ public class Element extends EventNode {
      * @return an object that specifies the bounds of a collection of TextRectangle objects
      */
     public ClientRect jsxFunction_getBoundingClientRect() {
-        final ClientRect textRectangle = new ClientRect(0, getPosX() + jsxGet_clientLeft(), 0,
-            getPosY() + jsxGet_clientTop());
+        int left = getPosX();
+        int top = getPosY();
+
+        // account for any scrolled ancestors
+        Object parentNode = jsxGet_offsetParent();
+        while (parentNode != null
+                && (parentNode instanceof HTMLElement)
+                && !(parentNode instanceof HTMLBodyElement)) {
+            final HTMLElement elem = (HTMLElement) parentNode;
+            left -= elem.jsxGet_scrollLeft();
+            top -= elem.jsxGet_scrollTop();
+
+            parentNode = elem.jsxGet_parentNode();
+        }
+
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
+            left += 2;
+            top += 2;
+        }
+
+        final ClientRect textRectangle = new ClientRect(0, left, 0, top);
         textRectangle.setParentScope(getWindow());
         textRectangle.setPrototype(getPrototype(textRectangle.getClass()));
         return textRectangle;
@@ -388,7 +407,10 @@ public class Element extends EventNode {
      * @return the "clientLeft" attribute
      */
     public int jsxGet_clientLeft() {
-        return 2; // TODO!!!
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CLIENT_LEFT_TOP_ZERO)) {
+            return 0;
+        }
+        return jsxGet_currentStyle().getBorderLeft();
     }
 
     /**
@@ -396,7 +418,10 @@ public class Element extends EventNode {
      * @return the "clientTop" attribute
      */
     public int jsxGet_clientTop() {
-        return 2; // TODO!!!
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CLIENT_LEFT_TOP_ZERO)) {
+            return 0;
+        }
+        return jsxGet_currentStyle().getBorderTop();
     }
 
     /**

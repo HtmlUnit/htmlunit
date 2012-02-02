@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+
 /**
  * The JavaScript object "HTMLHtmlElement".
  *
@@ -47,4 +49,29 @@ public class HTMLHtmlElement extends HTMLElement {
     public int jsxGet_clientHeight() {
         return getWindow().jsxGet_innerHeight();
     }
+
+    /**
+     * IE has some special idea here.
+     * {@inheritDoc}
+     */
+    @Override
+    public int jsxGet_clientLeft() {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
+            return 2;
+        }
+        return super.jsxGet_clientLeft();
+    }
+
+    /**
+     * IE has some special idea here.
+     * {@inheritDoc}
+     */
+    @Override
+    public int jsxGet_clientTop() {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
+            return 2;
+        }
+        return super.jsxGet_clientTop();
+    }
 }
+

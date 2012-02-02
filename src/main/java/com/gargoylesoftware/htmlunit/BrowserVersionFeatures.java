@@ -612,6 +612,12 @@ public enum BrowserVersionFeatures {
      * if the provided note cannot be inserted. */
     JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE,
 
+    /** Indicates that the getBoundingClientRect adds an offset of 2. */
+    JS_BOUNDING_CLIENT_RECT_OFFSET_TWO,
+
+    /** Indicates that the clientLeft and clientTop returning zero in all cases. */
+    JS_CLIENT_LEFT_TOP_ZERO,
+
     /** Indicates that the cloneNode call copies all event listeners. */
     JS_CLONE_NODE_COPIES_EVENT_LISTENERS,
 
