@@ -18,6 +18,8 @@ import java.applet.Applet;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -56,6 +58,7 @@ public class HtmlApplet extends HtmlElement {
 
     private Applet applet_;
     private AppletClassLoader appletClassLoader_;
+    private List<URL> archiveUrls_;
 
     /**
      * Creates a new instance.
@@ -260,6 +263,7 @@ public class HtmlApplet extends HtmlElement {
             }
 
             // check archive
+            archiveUrls_ = new LinkedList<URL>();
             final String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
             if (null != archives) {
                 for (int i = 0; i < archives.length; i++) {
@@ -268,6 +272,7 @@ public class HtmlApplet extends HtmlElement {
                     final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
                     appletClassLoader_.addArchiveToClassPath(archiveUrl);
+                    archiveUrls_.add(archiveUrl);
                 }
             }
 
@@ -306,5 +311,15 @@ public class HtmlApplet extends HtmlElement {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    /**
+     * Returns the list of used jar file urls.
+     * This returns null, if the applet was not initialized before.
+     *
+     * @return the list of jar urls
+     */
+    public List<URL> getArchiveUrls() {
+        return archiveUrls_;
     }
 }
