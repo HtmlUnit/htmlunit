@@ -17,10 +17,11 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -185,18 +186,29 @@ public class WebResponse implements Serializable {
      * @return the response content as a string
      */
     public String getContentAsString(final String encoding) {
-        final byte[] body = responseData_.getBody();
-        if (body != null) {
+        final InputStream in = responseData_.getInputStream();
+        if (null == in) {
+            return null;
+        }
+
+        try {
+            // first verify the charset because we can't read the
+            // input stream twice
             try {
-                return new String(body, encoding);
+                Charset.forName(encoding);
             }
-            catch (final UnsupportedEncodingException e) {
+            catch (final Exception e) {
                 LOG.warn("Attempted to use unsupported encoding '"
                         + encoding + "'; using default system encoding.");
-                return new String(body);
+                return IOUtils.toString(in);
             }
+
+            return IOUtils.toString(in, encoding);
         }
-        return null;
+        catch (final IOException e) {
+            LOG.warn(e);
+            return null;
+        }
     }
 
     /**

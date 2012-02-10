@@ -96,6 +96,9 @@ public class WebResponseTest extends WebDriverTestCase {
         request.setCharset("UTF-8");
         final HtmlPage page = client.getPage(request);
         assertEquals(title, page.getTitleText());
+
+        assertEquals(content, page.getWebResponse().getContentAsString());
+        assertEquals(content, page.getWebResponse().getContentAsString("UTF-8"));
     }
 
     /**
@@ -133,6 +136,7 @@ public class WebResponseTest extends WebDriverTestCase {
             + "</html>";
         final HtmlPage page = loadPage(html);
         assertEquals("utf-8", page.getWebResponse().getContentCharsetOrNull());
+        assertEquals(html, page.getWebResponse().getContentAsString());
     }
 
     /**
@@ -158,6 +162,7 @@ public class WebResponseTest extends WebDriverTestCase {
         final Page page = webClient.getPage(URL_FIRST);
         assertEquals(expectedCharset, page.getWebResponse().getContentCharset());
         assertEquals(cntTypeHeader, page.getWebResponse().getResponseHeaderValue("Content-Type"));
+        assertEquals("<html/>", page.getWebResponse().getContentAsString());
     }
 
     /**
@@ -188,6 +193,21 @@ public class WebResponseTest extends WebDriverTestCase {
             writer.write("<html/>");
             writer.close();
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getContentAsStringIllegalCharset() throws Exception {
+        final MockWebConnection conn = new MockWebConnection();
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        conn.setDefaultResponse("<html/>", 200, "OK", "text/html", headers);
+        final WebClient webClient = getWebClient();
+        webClient.setWebConnection(conn);
+
+        final Page page = webClient.getPage(URL_FIRST);
+        assertEquals("<html/>", page.getWebResponse().getContentAsString("EUROPE"));
     }
 
     /**
