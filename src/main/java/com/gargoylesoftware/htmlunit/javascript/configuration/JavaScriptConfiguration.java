@@ -252,7 +252,7 @@ public final class JavaScriptConfiguration {
 
     private static Reader getConfigurationFileAsReader() {
         final Class< ? > clazz = JavaScriptConfiguration.class;
-        final String name = clazz.getPackage().getName().replace('.', '/') + '/' + "JavaScriptConfiguration.xml";
+        final String name = clazz.getName().replace('.', '/') + ".xml";
         InputStream inputStream = clazz.getClassLoader().getResourceAsStream(name);
         if (inputStream == null) {
             try {
