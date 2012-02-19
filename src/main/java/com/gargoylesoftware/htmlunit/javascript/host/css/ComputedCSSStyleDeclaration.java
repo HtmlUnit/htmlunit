@@ -207,10 +207,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private void applyLocalStyleAttribute(final String name, final String newValue, final String priority,
             final SelectorSpecificity specificity) {
-        if (!"important".equals(priority)) {
+        if (!PRIORITY_IMPORTANT.equals(priority)) {
             final StyleElement existingElement = localModifications_.get(name);
             if (existingElement != null) {
-                if ("important".equals(existingElement.getPriority())) {
+                if (PRIORITY_IMPORTANT.equals(existingElement.getPriority())) {
                     return; // can't override a !important rule by a normal rule. Ignore it!
                 }
                 else if (specificity.compareTo(existingElement.getSpecificity()) < 0) {
@@ -242,15 +242,33 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     protected Map<String, StyleElement> getStyleMap() {
         final Map<String, StyleElement> styleMap = super.getStyleMap();
         if (localModifications_ != null) {
-            for (final StyleElement e : localModifications_.values()) {
-                final String key = e.getName();
+            for (final StyleElement localStyleMod : localModifications_.values()) {
+                final String key = localStyleMod.getName();
                 final StyleElement existent = styleMap.get(key);
                 if (existent == null) {
-                    final StyleElement element = new StyleElement(key, e.getValue(), e.getIndex());
                     // Local modifications represent either default style elements or style elements
                     // defined in stylesheets; either way, they shouldn't overwrite any style
                     // elements derived directly from the HTML element's "style" attribute.
+                    final StyleElement element =
+                            new StyleElement(key, localStyleMod.getValue(), localStyleMod.getIndex());
                     styleMap.put(key, element);
+                }
+                else {
+                    // replace if !IMPORTANT
+                    if (PRIORITY_IMPORTANT.equals(localStyleMod.getPriority())) {
+                        if (PRIORITY_IMPORTANT.equals(existent.getPriority())) {
+                            if (existent.getSpecificity().compareTo(localStyleMod.getSpecificity()) < 0) {
+                                final StyleElement element =
+                                        new StyleElement(key, localStyleMod.getValue(), localStyleMod.getIndex());
+                                styleMap.put(key, element);
+                            }
+                        }
+                        else {
+                            final StyleElement element =
+                                    new StyleElement(key, localStyleMod.getValue(), localStyleMod.getIndex());
+                            styleMap.put(key, element);
+                        }
+                    }
                 }
             }
         }

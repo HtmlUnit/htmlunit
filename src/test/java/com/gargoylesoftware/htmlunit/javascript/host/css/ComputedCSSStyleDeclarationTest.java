@@ -562,4 +562,37 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "<div id='div1' style='color: blue'>foo</div></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "roman", "swiss", "roman" })
+    public void handleImportant() throws Exception {
+        final String html = "<html><head><title>First</title><script>\n"
+            + "  function doTest() {\n"
+            + "    alertFF(document.getElementById('div1'));\n"
+            + "    alertFF(document.getElementById('div2'));\n"
+            + "    alertFF(document.getElementById('div3'));\n"
+            + "  }\n"
+            + "  function alertFF(e) {\n"
+            + "    if (window.getComputedStyle) {\n"
+            + "      var s = window.getComputedStyle(e, null);\n"
+            + "      alert(s.getPropertyValue('font-family'));\n"
+            + "    } else {\n"
+            + "      alert(e.currentStyle.fontFamily);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "  <style>#div1 { font-family: swiss }</style>\n"
+            + "  <style>#div2 { font-family: swiss !important }</style>\n"
+            + "  <style>#div3 { font-family: swiss !important }</style>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <div id='div1' style='font-family: roman'>foo</div>"
+            + "  <div id='div2' style='font-family: roman'>foo</div>"
+            + "  <div id='div3' style='font-family: roman !important'>foo</div>"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

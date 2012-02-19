@@ -66,6 +66,9 @@ import com.steadystate.css.parser.SACParserCSS21;
  * @author Ronald Brill
  */
 public class CSSStyleDeclaration extends SimpleScriptable {
+    /** Css important property constant. */
+    protected static final String PRIORITY_IMPORTANT = "important";
+
     private static final String AZIMUTH = "azimuth";
     private static final String BACKGROUND = "background";
     private static final String BACKGROUND_ATTACHMENT = "background-attachment";
@@ -590,8 +593,15 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             final int index = token.indexOf(":");
             if (index != -1) {
                 final String key = token.substring(0, index).trim().toLowerCase();
-                final String value = token.substring(index + 1).trim();
-                final StyleElement element = new StyleElement(key, value, getCurrentElementIndex());
+                String value = token.substring(index + 1).trim();
+                String priority = "";
+                if (StringUtils.endsWithIgnoreCase(value, "!important")) {
+                    priority = PRIORITY_IMPORTANT;
+                    value = value.substring(0, value.length() - 10);
+                    value = value.trim();
+                }
+                final StyleElement element = new StyleElement(key, value, priority,
+                        SelectorSpecificity.FROM_STYLE_ATTRIBUTE, getCurrentElementIndex());
                 styleMap.put(key, element);
             }
         }

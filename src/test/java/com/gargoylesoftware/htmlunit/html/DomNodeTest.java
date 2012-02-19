@@ -744,16 +744,19 @@ public class DomNodeTest extends WebTestCase {
             + "<style>\n"
             + "#d2 { display: none; }\n"
             + "#d3 { visibility: hidden; }\n"
+            + "#d4 { display: block !important; }\n"
             + "</style>\n"
             + "<div id='d1'>hello</div>\n"
             + "<div id='d2'>world</div>\n"
             + "<div id='d3'>again</div>\n"
+            + "<div id='d4' style='display: none' >important</div>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
         assertTrue(page.getElementById("d1").isDisplayed());
         assertFalse(page.getElementById("d2").isDisplayed());
         assertFalse(page.getElementById("d3").isDisplayed());
+        assertTrue(page.getElementById("d4").isDisplayed());
 
         getWebClient().setCssEnabled(false);
         assertTrue(page.getElementById("d1").isDisplayed());
