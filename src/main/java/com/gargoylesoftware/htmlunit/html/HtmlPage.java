@@ -205,7 +205,32 @@ public class HtmlPage extends SgmlPage {
         }
         executeDeferredScriptsIfNeeded();
         setReadyStateOnDeferredScriptsIfNeeded();
-        executeEventHandlersIfNeeded(Event.TYPE_LOAD);
+
+        // frame initialization has a different order
+        final boolean framesetFirst = getWebClient().getBrowserVersion().
+                hasFeature(BrowserVersionFeatures.EVENT_ONLOAD_FRAMESET_FIRST);
+        boolean isFrameWindow = enclosingWindow instanceof FrameWindow;
+        if (isFrameWindow) {
+            isFrameWindow = ((FrameWindow) enclosingWindow).getFrameElement() instanceof HtmlFrame;
+        }
+
+        if (framesetFirst && !isFrameWindow) {
+            executeEventHandlersIfNeeded(Event.TYPE_LOAD);
+        }
+
+        for (final FrameWindow frameWindow : getFrames()) {
+            if (frameWindow.getFrameElement() instanceof HtmlFrame) {
+                final Page page = frameWindow.getEnclosedPage();
+                if (page instanceof HtmlPage) {
+                    ((HtmlPage) page).executeEventHandlersIfNeeded(Event.TYPE_LOAD);
+                }
+            }
+        }
+
+        if (!framesetFirst && !isFrameWindow) {
+            executeEventHandlersIfNeeded(Event.TYPE_LOAD);
+        }
+
         final List<PostponedAction> actions = new ArrayList<PostponedAction>(afterLoadActions_);
         afterLoadActions_.clear();
         try {

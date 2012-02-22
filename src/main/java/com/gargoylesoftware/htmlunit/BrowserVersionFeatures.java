@@ -118,6 +118,9 @@ public enum BrowserVersionFeatures {
     /** Triggers "onload" event if external javascript successfully loaded. */
     EVENT_ONLOAD_EXTERNAL_JAVASCRIPT,
 
+    /** Triggers "onload" event of the frameset before the one from the frames. */
+    EVENT_ONLOAD_FRAMESET_FIRST,
+
     /** Triggers "onload" event if an iframe was created by javascript and added to the page. */
     EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT,
 

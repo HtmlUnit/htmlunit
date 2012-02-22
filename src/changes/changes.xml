@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="2873802">
+                Call onload event for frames in the correct order.
+            </action>
             <action type="fix" dev="rbri" issue="3487948">
                 Implement some more fixes for handling of '!important' rules.
             </action>

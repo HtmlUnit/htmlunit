@@ -14,13 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.net.URL;
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlFrame}.
@@ -84,22 +90,24 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     }
 
     /**
+     * Regression test for for bug
+     * <a href="http://sf.net/support/tracker.php?aid=2873802">2873802</a>.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "second [object]", "third [object]", "parent [object]" },
-            FF = { "third [object HTMLFormElement]", "second [object HTMLFormElement]",
+    @Alerts(IE = { "parent [object]", "second [object]", "third [object]" },
+            FF = { "second [object HTMLFormElement]", "third [object HTMLFormElement]",
             "parent [object HTMLFormElement]" })
-    @NotYetImplemented
-    //real FF sometimes alerts 'second' before 'third'
+    // real FF sometimes alerts 'third' before 'second'
     public void postponeLoading() throws Exception {
         final String html = "<FRAMESET onload=\"alert('parent ' + window.parent.frames.third.document.frm)\">\n"
             + "  <FRAME name=second frameborder=0 src='" + URL_SECOND + "'>\n"
             + "  <FRAME name=third frameborder=0 src='" + URL_THIRD + "'>\n"
-            + "</FRAMSET>";
+            + "</FRAMESET>";
 
         final String secondHtml = "<html>\n"
             + "<body onload=\"alert('second ' + window.parent.frames.third.document.frm)\">\n"
+            + "  <h1>second</h1>\n"
             + "</body></html>";
 
         final String thirdHtml = "<html>\n"
@@ -112,6 +120,94 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
         getMockWebConnection().setResponse(URL_THIRD, thirdHtml);
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void frameOnload() throws Exception {
+        final String html = "<FRAMESET rows='50%,50%' onload=\"alert('first')\">\n"
+            + "  <FRAME name='second' src='" + URL_SECOND + "'>\n"
+            + "  <FRAME name='third' src='" + URL_THIRD + "'>\n"
+            + "</FRAMESET>";
+
+        final String secondHtml = "<html>\n"
+            + "<body onload=\"alert('second')\">\n"
+            + "  <h1>second</h1>\n"
+            + "</body></html>";
+
+        final String thirdHtml = "<html>\n"
+                + "<body onload=\"alert('third')\">\n"
+                + "  <h1>third</h1>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
+        getMockWebConnection().setResponse(URL_THIRD, thirdHtml);
+
+        final WebDriver driver = loadPage2(html);
+        final List<String> actualAlerts = getCollectedAlerts(driver);
+
+        // tested with real ff and ie6; running in selenium returns different results
+        Assert.assertEquals(3, actualAlerts.size());
+
+        // ignore order of frame windows
+        if (getBrowserVersion().isIE()) {
+            // returns 'first' 'third' 'second'
+            Assert.assertEquals("first", actualAlerts.get(0));
+        }
+        else {
+            // returns 'third' 'second' 'first'
+            Assert.assertEquals("first", actualAlerts.get(2));
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented(Browser.IE)
+    public void frameOnloadFrameInFrame() throws Exception {
+        final URL urlFourth = new URL("http://127.0.0.1:" + PORT + "/fourth/");
+
+        final String html = "<FRAMESET rows='50%,50%' onload=\"alert('first')\">\n"
+            + "  <FRAME name='second' src='" + URL_SECOND + "'>\n"
+            + "  <FRAME name='third' src='" + URL_THIRD + "'>\n"
+            + "</FRAMESET>";
+
+        final String secondHtml = "<html>\n"
+            + "<body onload=\"alert('second')\">\n"
+            + "  <h1>second</h1>\n"
+            + "</body></html>";
+
+        final String thirdHtml = "<FRAMESET cols='100%' onload=\"alert('third')\">\n"
+                + "  <FRAME name='fourth' src='" + urlFourth + "'>\n"
+                + "</FRAMESET>";
+
+        final String fourthHtml = "<html>\n"
+            + "<body onload=\"alert('fourth')\">\n"
+            + "  <h1>fourth</h1>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
+        getMockWebConnection().setResponse(URL_THIRD, thirdHtml);
+        getMockWebConnection().setResponse(urlFourth, fourthHtml);
+
+        final WebDriver driver = loadPage2(html);
+        final List<String> actualAlerts = getCollectedAlerts(driver);
+
+        // tested with real ff and ie6; running in selenium returns different results
+        Assert.assertEquals(4, actualAlerts.size());
+
+        // ignore order of frame windows
+        if (getBrowserVersion().isIE()) {
+            // returns 'first' 'third' 'fourth' 'second'
+            Assert.assertEquals("first", actualAlerts.get(0));
+        }
+        else {
+            // returns 'second' 'fourth' 'third' 'first'
+            Assert.assertEquals("first", actualAlerts.get(3));
+        }
     }
 
     /**
