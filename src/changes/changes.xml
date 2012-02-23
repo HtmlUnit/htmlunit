@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache HttpClient to 4.1.3.
+            </action>
             <action type="fix" dev="rbri" issue="2873802">
                 Call onload event for frames in the correct order.
             </action>
