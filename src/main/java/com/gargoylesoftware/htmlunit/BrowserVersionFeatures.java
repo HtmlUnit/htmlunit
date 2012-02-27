@@ -212,12 +212,6 @@ public enum BrowserVersionFeatures {
     GENERATED_13,
 
     /** Was originally .isIE(). */
-    GENERATED_130,
-
-    /** Was originally .isIE(). */
-    GENERATED_131,
-
-    /** Was originally .isIE(). */
     GENERATED_132,
 
     /** Was originally .isIE(). */
@@ -752,6 +746,9 @@ public enum BrowserVersionFeatures {
      * FF ignores the provided value in this case and sets cols to 0.
      */
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
+
+    /** Window property not usable as function. */
+    JS_WINDOW_IS_NOT_A_FUNCTION,
 
     /** Indicates that new XMLSerializer().serializeToString(..) adds the xhtml namespace to the root element. */
     JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE,

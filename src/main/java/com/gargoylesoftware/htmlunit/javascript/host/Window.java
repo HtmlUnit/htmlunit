@@ -1110,7 +1110,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * {@inheritDoc}
      */
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_130)) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_WINDOW_IS_NOT_A_FUNCTION)) {
             throw Context.reportRuntimeError("Window is not a function.");
         }
         if (args.length > 0) {
@@ -1129,7 +1129,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * {@inheritDoc}
      */
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_131)) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_WINDOW_IS_NOT_A_FUNCTION)) {
             throw Context.reportRuntimeError("Window is not a function.");
         }
         return null;
