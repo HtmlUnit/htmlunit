@@ -288,7 +288,7 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns the application code name, for example "Mozilla".
-     * Default value is {@link #APP_CODE_NAME} if not explicitly configured.
+     * Default value is "Mozilla" if not explicitly configured.
      * @return the application code name
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533077.aspx">MSDN documentation</a>
      */
