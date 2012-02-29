@@ -868,7 +868,8 @@ public class Node extends SimpleScriptable {
      */
     public String jsxGet_namespaceURI() {
         final String namespaceURI = this.<DomNode>getDomNodeOrDie().getNamespaceURI();
-        if (namespaceURI == null && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_126)) {
+        if (namespaceURI == null && getBrowserVersion()
+                .hasFeature(BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
             return "";
         }
         return namespaceURI;
@@ -880,7 +881,7 @@ public class Node extends SimpleScriptable {
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_127)
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)
                 && !(this.<DomNode>getDomNodeOrDie().getPage() instanceof HtmlPage)) {
             ActiveXObject.addProperty(this, "namespaceURI", true, false);
             ActiveXObject.addProperty(this, "prefix", true, false);

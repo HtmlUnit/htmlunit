@@ -297,7 +297,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             try {
                 final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow());
                 final XMLDocument doc;
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_137)) {
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
                     doc = ActiveXObject.buildXMLDocument(null);
                 }
                 else {

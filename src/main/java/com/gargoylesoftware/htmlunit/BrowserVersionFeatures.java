@@ -200,19 +200,10 @@ public enum BrowserVersionFeatures {
     GENERATED_125,
 
     /** Was originally .isIE(). */
-    GENERATED_126,
-
-    /** Was originally .isIE(). */
-    GENERATED_127,
-
-    /** Was originally .isIE(). */
     GENERATED_129,
 
     /** Was originally .isIE(). */
     GENERATED_13,
-
-    /** Was originally .isIE(). */
-    GENERATED_132,
 
     /** Was originally .isIE(). */
     GENERATED_133,
@@ -222,9 +213,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_136,
-
-    /** Was originally .isIE(). */
-    GENERATED_137,
 
     /** Was originally .isIE(). */
     GENERATED_138,
@@ -762,6 +750,9 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that new XMLSerializer().serializeToString(..) respects the XHTML definition for non empty tags. */
     JS_XML_SERIALIZER_NON_EMPTY_TAGS,
+
+    /** Indicates that the browser uses the ActiveXObject for implementing XML support (IE). */
+    JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
 
     /** Body of a &lt;noscript&gt; tag is not totally ignored but considered as a (not displayed) text node. */
     NOSCRIPT_BODY_AS_TEXT,

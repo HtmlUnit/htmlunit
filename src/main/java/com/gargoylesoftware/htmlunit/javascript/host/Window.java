@@ -1178,7 +1178,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 result = getProxy(webWindow);
             }
             else if (result instanceof HTMLUnknownElement && getBrowserVersion()
-                    .hasFeature(BrowserVersionFeatures.GENERATED_132)) {
+                    .hasFeature(BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
                 final HtmlElement unknownElement = ((HTMLUnknownElement) result).getDomNodeOrDie();
                 if ("xml".equals(unknownElement.getNodeName())) {
                     final XMLDocument document = ActiveXObject.buildXMLDocument(getWebWindow());
