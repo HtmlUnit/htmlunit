@@ -740,7 +740,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts({ "1", "0", "1", "0" })
     public void getElementsByTagName() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -748,6 +748,10 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "    doc.async = false;\n"
             + "    doc.load('" + URL_SECOND + "');\n"
             + "    alert(doc.getElementsByTagName('book').length);\n"
+            + "    alert(doc.getElementsByTagName('soap:book').length);\n"
+            + "    var elem = doc.getElementsByTagName('book')[0];\n"
+            + "    alert(elem.getElementsByTagName('title').length);\n"
+            + "    alert(elem.getElementsByTagName('soap:title').length);\n"
             + "  }\n"
             + "  function createXmlDocument() {\n"
             + "    if (document.implementation && document.implementation.createDocument)\n"
@@ -765,6 +769,46 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "      <title>Immortality</title>\n"
             + "      <author>John Smith</author>\n"
             + "    </book>\n"
+            + "  </books>\n"
+            + "</soap:Envelope>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "1", "0", "1" })
+    public void getElementsByTagNameWithNamespace() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var doc = createXmlDocument();\n"
+            + "    doc.async = false;\n"
+            + "    doc.load('" + URL_SECOND + "');\n"
+            + "    alert(doc.getElementsByTagName('book').length);\n"
+            + "    alert(doc.getElementsByTagName('soap:book').length);\n"
+            + "    var elem = doc.getElementsByTagName('soap:book')[0];\n"
+            + "    alert(elem.getElementsByTagName('title').length);\n"
+            + "    alert(elem.getElementsByTagName('soap:title').length);\n"
+            + "  }\n"
+            + "  function createXmlDocument() {\n"
+            + "    if (document.implementation && document.implementation.createDocument)\n"
+            + "      return document.implementation.createDocument('', '', null);\n"
+            + "    else if (window.ActiveXObject)\n"
+            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String xml
+            = "<soap:Envelope xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'>\n"
+            + "  <books xmlns='http://www.example.com/ns1'>\n"
+            + "    <soap:book>\n"
+            + "      <soap:title>Immortality</soap:title>\n"
+            + "      <author>John Smith</author>\n"
+            + "    </soap:book>\n"
             + "  </books>\n"
             + "</soap:Envelope>";
 
@@ -803,10 +847,10 @@ public class XMLDocumentTest extends WebDriverTestCase {
         final String xml
             = "<soap:Envelope xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'>\n"
             + "  <books xmlns='http://www.example.com/ns1'>\n"
-            + "    <book>\n"
+            + "    <soap:book>\n"
             + "      <title>Immortality</title>\n"
             + "      <author>John Smith</author>\n"
-            + "    </book>\n"
+            + "    </soap:book>\n"
             + "  </books>\n"
             + "</soap:Envelope>";
 

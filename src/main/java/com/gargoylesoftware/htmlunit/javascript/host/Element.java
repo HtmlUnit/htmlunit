@@ -195,7 +195,7 @@ public class Element extends EventNode {
         else {
             collection = new HTMLCollection(node, false, description) {
                 protected boolean isMatching(final DomNode node) {
-                    return tagNameLC.equalsIgnoreCase(node.getLocalName());
+                    return tagNameLC.equalsIgnoreCase(node.getNodeName());
                 }
             };
         }

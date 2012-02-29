@@ -301,7 +301,7 @@ public class XMLDocument extends Document {
         final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false,
                 "XMLDocument.getElementsByTagName") {
             protected boolean isMatching(final DomNode node) {
-                return node.getLocalName().equals(tagName);
+                return node.getNodeName().equals(tagName);
             }
         };
 

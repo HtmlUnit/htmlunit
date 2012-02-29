@@ -7,6 +7,10 @@
     <body>
         <release version="2.10" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Methods element.getElementsByTagName() and XMLDocument.getElementsByTagName()
+                are now namespace aware.
+            </action>
+            <action type="fix" dev="rbri">
                 Method element.querySelectorAll() now only selects descended
                 nodes of the element.
             </action>
