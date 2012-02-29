@@ -53,10 +53,8 @@ public class XMLAttr extends Attr {
      */
     @Override
     public String jsxGet_xml() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(jsxGet_name());
-        sb.append('=');
-        sb.append('"');
+        final StringBuilder sb = new StringBuilder(jsxGet_name());
+        sb.append('=').append('"');
         sb.append(StringUtils.escapeXmlAttributeValue(jsxGet_value()));
         sb.append('"');
         return sb.toString();

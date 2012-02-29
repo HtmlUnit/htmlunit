@@ -175,14 +175,13 @@ public class XMLDocument extends Document {
             scriptable = new Element();
         }
         else if (domNode instanceof DomAttr) {
-            final Attr attribute;
-            if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_134)) {
-                attribute = new XMLAttr();
+            if (getPage().getWebClient().getBrowserVersion().
+                    hasFeature(BrowserVersionFeatures.JS_XML_ATTRIBUTE_HAS_TEXT_PROPERTY)) {
+                scriptable = new XMLAttr();
             }
             else {
-                attribute = new Attr();
+                scriptable = new Attr();
             }
-            scriptable = attribute;
         }
         else {
             return super.makeScriptableFor(domNode);

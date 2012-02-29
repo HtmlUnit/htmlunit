@@ -218,9 +218,6 @@ public enum BrowserVersionFeatures {
     GENERATED_133,
 
     /** Was originally .isIE(). */
-    GENERATED_134,
-
-    /** Was originally .isIE(). */
     GENERATED_135,
 
     /** Was originally .isIE(). */
@@ -749,6 +746,9 @@ public enum BrowserVersionFeatures {
 
     /** Window property not usable as function. */
     JS_WINDOW_IS_NOT_A_FUNCTION,
+
+    /** Indicates that a xml attribute supports the text property. */
+    JS_XML_ATTRIBUTE_HAS_TEXT_PROPERTY,
 
     /** Indicates that new XMLSerializer().serializeToString(..) adds the xhtml namespace to the root element. */
     JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE,
