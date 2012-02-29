@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Method element.querySelectorAll() now only selects descended
+                nodes of the element.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache HttpClient to 4.1.3.
             </action>

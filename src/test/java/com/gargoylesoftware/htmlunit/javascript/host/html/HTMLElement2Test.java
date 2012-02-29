@@ -831,4 +831,31 @@ public class HTMLElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF3 = "undefined", FF3_6 = { "1", "p1" },
+            IE = "undefined", IE8 = { "1", "p1" })
+    public void querySelectorAllOnDisconnectedElement() throws Exception {
+        final String html = "<html><head><title>Test</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if(document.body.querySelectorAll) {\n"
+            + "    var myDiv = document.createElement('div');\n"
+            + "    myDiv.innerHTML = '<p id=\"p1\" class=\"TEST\"></p>';\n"
+            + "    var found = myDiv.querySelectorAll('.TEST');\n"
+            + "    alert(found.length);\n"
+            + "    alert(found.item(0).id);\n"
+            + "  }\n"
+            + "  else\n"
+            + "    alert('undefined');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

@@ -1525,7 +1525,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // in case of error parseSelectors returns null
             if (null != selectorList) {
                 final BrowserVersion browserVersion = webClient.getBrowserVersion();
-                for (final HtmlElement child : getPage().getHtmlElementDescendants()) {
+                for (final HtmlElement child : getHtmlElementDescendants()) {
                     for (int i = 0; i < selectorList.getLength(); i++) {
                         final Selector selector = selectorList.item(i);
                         if (CSSStyleSheet.selects(browserVersion, selector, child)) {
