@@ -296,14 +296,16 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public String getNodeName() {
-        final StringBuilder name = new StringBuilder();
         final String prefix = getPrefix();
         if (prefix != null) {
+            // create string builder only if needed (performance)
+            final StringBuilder name = new StringBuilder();
             name.append(prefix);
             name.append(':');
+            name.append(getLocalName());
+            return name.toString().toLowerCase();
         }
-        name.append(getLocalName());
-        return name.toString().toLowerCase();
+        return getLocalName().toLowerCase();
     }
 
     /**
