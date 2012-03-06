@@ -651,8 +651,11 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             return result;
         }
 
+        // not found in CamelizeCache_; convert and store in cache
         final int pos = string.indexOf('-');
         if (pos == -1 || pos >= string.length() - 1) {
+            // cache also this strings for performance
+            CamelizeCache_.put(string, result);
             return string;
         }
 
