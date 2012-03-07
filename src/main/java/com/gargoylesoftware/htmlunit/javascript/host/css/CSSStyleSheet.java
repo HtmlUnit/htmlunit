@@ -274,11 +274,21 @@ public class CSSStyleSheet extends SimpleScriptable {
             final InputSource source = new InputSource(new StringReader(""));
             sheet = new CSSStyleSheet(element, source, uri);
         }
-        catch (final IOException e) {
-            // Got a basic IO error; behave nicely.
-            LOG.error(e.getMessage());
-            final InputSource source = new InputSource(new StringReader(""));
-            sheet = new CSSStyleSheet(element, source, uri);
+        catch (final RuntimeException e) {
+            // response.getContentAsStream() throws a runtime exception
+            // instead of IOException
+            // see com.gargoylesoftware.htmlunit.WebResponseData.getInputStream()
+            final Throwable cause = e.getCause();
+            if (null != cause && cause instanceof IOException) {
+                // Got a basic IO error; behave nicely.
+                LOG.error(cause.getMessage());
+                final InputSource source = new InputSource(new StringReader(""));
+                sheet = new CSSStyleSheet(element, source, uri);
+            }
+            else {
+                // Got something unexpected; we can throw an exception in this case.
+                throw Context.reportRuntimeError("Exception: " + e);
+            }
         }
         catch (final Exception e) {
             // Got something unexpected; we can throw an exception in this case.

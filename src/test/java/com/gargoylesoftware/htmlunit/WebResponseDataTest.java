@@ -67,6 +67,24 @@ public class WebResponseDataTest extends WebServerTestCase {
     }
 
     /**
+     * Tests that broken gzipped content is handled correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testBrokenGZippedContent() throws Exception {
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
+
+        final WebResponseData data = new WebResponseData("Plain Content".getBytes(), HttpStatus.SC_OK, "OK", headers);
+        try {
+            data.getBody();
+        }
+        catch (final RuntimeException e) {
+            assertTrue(StringUtils.contains(e.getMessage(), "Not in GZIP format"));
+        }
+    }
+
+    /**
      * Verifies that a null body input stream is handled correctly. A null body may be sent, for
      * example, when a 304 (Not Modified) response is sent to the client. See bug 1706505.
      * @throws Exception if the test fails

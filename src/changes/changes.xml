@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3498578">
+                Ignore gzip encoding problems when downloading external css content.
+            </action>
             <action type="fix" dev="rbri">
                 Methods element.getElementsByTagName() and XMLDocument.getElementsByTagName()
                 are now namespace aware.

@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Unit tests for {@link StyleSheetList}.
@@ -141,6 +145,38 @@ public class StyleSheetListTest extends WebTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse("Not Found", 404, "Not Found", "text/html");
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Test for a stylesheet link which points to a broken gzip encoded file (bug 3498578).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" }, IE = { "1", "[object]", "[object]" })
+    public void testBrokenGZipEncodedStylesheet() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        alert(document.styleSheets.length);\n"
+            + "        alert(document.styleSheets.item(0));\n"
+            + "        alert(document.styleSheets[0]);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>abc</body>\n"
+            + "</html>";
+
+        final String css = "div {color:red}";
+
+        getMockWebConnection().setDefaultResponse(css, "text/css");
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
+        getMockWebConnection().setDefaultResponse(css, 200, "OK", "text/css", headers);
+
         loadPageWithAlerts(html);
     }
 }
