@@ -31,7 +31,7 @@ import org.apache.http.client.CredentialsProvider;
  * credentials for both web servers and proxies. Supports Digest
  * authentication, and Basic HTTP authentication.
  *
- * @see See <a href="http://htmlunit.sourceforge.net/ntlm.html">NTLM authentication</a> to use NTLM from HtlmUnit.
+ * See <a href="http://htmlunit.sourceforge.net/ntlm.html">NTLM authentication</a> to use NTLM from HtlmUnit.
  * @version $Revision$
  * @author Daniel Gredler
  * @author Vikram Shitole
