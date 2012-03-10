@@ -756,13 +756,75 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "null", "klazz" })
-    public void setAttributeNode() throws Exception {
+    public void setAttributeNodeUnknown() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var attribute = document.createAttribute('unknown');\n"
+            + "    attribute.nodeValue = 'klazz';\n"
+            + "    alert(document.body.setAttributeNode(attribute));\n"
+            + "    alert(document.body.getAttributeNode('unknown').nodeValue);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "null", "klazz" })
+    public void setAttributeNodeUnknown2() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var attribute = document.createAttribute('unknown');\n"
+            + "    alert(document.body.setAttributeNode(attribute));\n"
+            + "    attribute.nodeValue = 'klazz';\n"
+            + "    alert(document.body.getAttributeNode('unknown').nodeValue);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "klazz" },
+            IE = { "[object]", "klazz" })
+    public void setAttributeNodeClass() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var attribute = document.createAttribute('class');\n"
             + "    attribute.nodeValue = 'klazz';\n"
             + "    alert(document.body.setAttributeNode(attribute));\n"
+            + "    alert(document.body.getAttributeNode('class').nodeValue);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "klazz" },
+            IE = { "[object]", "klazz" })
+    public void setAttributeNode2() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var attribute = document.createAttribute('class');\n"
+            + "    alert(document.body.setAttributeNode(attribute));\n"
+            + "    attribute.nodeValue = 'klazz';\n"
             + "    alert(document.body.getAttributeNode('class').nodeValue);\n"
             + "  }\n"
             + "</script></head>\n"

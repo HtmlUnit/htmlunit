@@ -575,12 +575,18 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public Attr jsxFunction_setAttributeNode(final Attr newAtt) {
         final String name = newAtt.jsxGet_name();
-        final String value = newAtt.jsxGet_value();
         final Attr replacedAtt = (Attr) jsxFunction_getAttributeNode(name);
         if (replacedAtt != null) {
             replacedAtt.detachFromParent();
         }
-        getDomNodeOrDie().setAttribute(name, value);
+
+        final DomAttr newDomAttr = newAtt.getDomNodeOrDie();
+        if (null == newDomAttr) {
+            final String value = newAtt.jsxGet_value();
+            getDomNodeOrDie().setAttribute(name, value);
+            return replacedAtt;
+        }
+        getDomNodeOrDie().setAttributeNode(newDomAttr);
         return replacedAtt;
     }
 
