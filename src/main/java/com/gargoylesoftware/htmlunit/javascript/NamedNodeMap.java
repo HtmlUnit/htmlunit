@@ -106,6 +106,9 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (!"className".equals(name) && useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
             return getUnspecifiedAttributeNode(name);
         }
+//        if ("class".equals(name) && useRecursiveAttributeForIE()) {
+//            return getUnspecifiedAttributeNode(name);
+//        }
         return null;
     }
 
@@ -146,7 +149,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     private boolean useRecursiveAttributeForIE() {
-        return getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_148)
+        return getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES)
             && this.<DomNode>getDomNodeOrDie() instanceof HtmlElement;
     }
 

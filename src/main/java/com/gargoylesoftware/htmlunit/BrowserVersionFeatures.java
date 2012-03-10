@@ -239,9 +239,6 @@ public enum BrowserVersionFeatures {
     GENERATED_147,
 
     /** Was originally .isIE(). */
-    GENERATED_148,
-
-    /** Was originally .isIE(). */
     GENERATED_150,
 
     /** Was originally .isFirefox(). */
@@ -587,12 +584,16 @@ public enum BrowserVersionFeatures {
     JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT_IF_PARENT_IS_NULL,
 
     /** Indicates that re-appending script elements executes
-     * the script code again (like ie does). */
+     * the script code again (like IE does). */
     JS_APPEND_CHILD_REEXECUTES_SCRIPT,
 
     /** Indicates that the appendChild call throws no exception
      * if the provided note cannot be inserted. */
     JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE,
+
+    /** Indicates that the attributes map contains empty attr
+     * objects for all properties of the object (like IE does). */
+    JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES,
 
     /** Indicates that the getBoundingClientRect adds an offset of 2. */
     JS_BOUNDING_CLIENT_RECT_OFFSET_TWO,
