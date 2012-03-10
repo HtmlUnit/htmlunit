@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1780488922">DOM Level 2 Core Spec</a>
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
@@ -106,9 +107,9 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (!"className".equals(name) && useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
             return getUnspecifiedAttributeNode(name);
         }
-//        if ("class".equals(name) && useRecursiveAttributeForIE()) {
-//            return getUnspecifiedAttributeNode(name);
-//        }
+        if ("class".equals(name) && useRecursiveAttributeForIE()) {
+            return getUnspecifiedAttributeNode(name);
+        }
         return null;
     }
 

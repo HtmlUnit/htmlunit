@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class AttrTest extends WebDriverTestCase {
@@ -149,6 +150,52 @@ public class AttrTest extends WebDriverTestCase {
             + "  alert(a.textContent);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "[object]", "[object]", "null", "null" },
+            DEFAULT = {"null", "null", "null", "null" })
+    public void getAttributeNodeUndefinedAttribute() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var elem = document.getElementById('myDiv');\n"
+            + "  alert(elem.getAttributeNode('class'));\n"
+            + "  alert(elem.getAttributeNode('style'));\n"
+            + "  alert(elem.getAttributeNode('unknown'));\n"
+            + "  alert(elem.getAttributeNode('name'));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='myDiv'></div>"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "[object]", "[object]", "null", "null" },
+            DEFAULT = {"null", "null", "null", "null" })
+    public void getAttributesUndefinedAttribute() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var elem = document.getElementById('myDiv');\n"
+            + "  alert(elem.attributes.getNamedItem('class'));\n"
+            + "  alert(elem.attributes.getNamedItem('style'));\n"
+            + "  alert(elem.attributes.getNamedItem('unknown'));\n"
+            + "  alert(elem.attributes.getNamedItem('name'));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='myDiv'></div>"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
