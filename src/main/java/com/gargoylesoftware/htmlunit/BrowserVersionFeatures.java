@@ -592,6 +592,10 @@ public enum BrowserVersionFeatures {
     JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE,
 
     /** Indicates that the attributes map contains empty attr
+     * objects for 'class' (IE6/7). */
+    JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_CLASS,
+
+    /** Indicates that the attributes map contains empty attr
      * objects for all properties of the object (like IE does). */
     JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES,
 
