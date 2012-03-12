@@ -159,8 +159,10 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "[object]", "[object]", "null", "null" },
-            DEFAULT = {"null", "null", "null", "null" })
+    @Alerts(DEFAULT = {"null", "null", "null", "null" },
+            IE6 = { "[object]", "[object]", "null", "null" },
+            IE7 = { "[object]", "[object]", "null", "null" },
+            IE8 = { "null", "[object]", "null", "null" })
     public void getAttributeNodeUndefinedAttribute() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -182,8 +184,10 @@ public class AttrTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "[object]", "[object]", "null", "null" },
-            DEFAULT = {"null", "null", "null", "null" })
+    @Alerts(DEFAULT = {"null", "null", "null", "null" },
+            IE6 = { "[object]", "[object]", "null", "null" },
+            IE7 = { "[object]", "[object]", "null", "null" },
+            IE8 = { "null", "[object]", "null", "null" })
     public void getAttributesUndefinedAttribute() throws Exception {
         final String html
             = "<html><head><script>\n"

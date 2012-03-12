@@ -796,7 +796,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "klazz" },
-            IE = { "[object]", "klazz" })
+            IE6 = { "[object]", "klazz" },
+            IE7 = { "[object]", "klazz" })
     public void setAttributeNodeClass() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -817,8 +818,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "null", "klazz" },
-            IE = { "[object]", "klazz" })
-    public void setAttributeNode2() throws Exception {
+            IE6 = { "[object]", "klazz" },
+            IE7 = { "[object]", "klazz" })
+    public void setAttributeNodeClass2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
