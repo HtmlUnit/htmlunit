@@ -592,10 +592,6 @@ public enum BrowserVersionFeatures {
     JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE,
 
     /** Indicates that the attributes map contains empty attr
-     * objects for 'class' (IE6/7). */
-    JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_CLASS,
-
-    /** Indicates that the attributes map contains empty attr
      * objects for all properties of the object (like IE does). */
     JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES,
 
@@ -725,6 +721,10 @@ public enum BrowserVersionFeatures {
 
     /** Indicates if setting an out of bound value for HTMLSelectElement.selectedIndex should throw. */
     JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD,
+
+    /** Indicates that the set attribute method treads the synthetic
+     * empty attr for 'class' (IE6/7) as a normal one. */
+    JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL,
 
     /** Getting the property cols 20, if the defined value is not convertable into an integer (IE).
      * FF returns -1 in this case.

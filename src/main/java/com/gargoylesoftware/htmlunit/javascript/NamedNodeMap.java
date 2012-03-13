@@ -95,11 +95,16 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     /**
-     * Gets the specified attribute.
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Gets the specified attribute but does not handle the synthetic class attribute for IE.
+     * @see #jsxFunction_getNamedItem(String)
+     *
      * @param name attribute name
      * @return the attribute node, <code>null</code> if the attribute is not defined
      */
-    public Object jsxFunction_getNamedItem(final String name) {
+    public Object getNamedItemWithoutSytheticClassAttr(final String name) {
+
         final DomNode attr = (DomNode) attributes_.getNamedItem(name);
         if (attr != null) {
             return attr.getScriptObject();
@@ -107,9 +112,26 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
         if (!"className".equals(name) && useRecursiveAttributeForIE() && isRecursiveAttribute(name)) {
             return getUnspecifiedAttributeNode(name);
         }
+
+        return null;
+    }
+
+    /**
+     * Gets the specified attribute.
+     * @param name attribute name
+     * @return the attribute node, <code>null</code> if the attribute is not defined
+     */
+    public Object jsxFunction_getNamedItem(final String name) {
+        final Object attr = getNamedItemWithoutSytheticClassAttr(name);
+        if (null != attr) {
+            return attr;
+        }
+
+        // for IE we have to add the sythetic class attribute
         if ("class".equals(name) && useRecursiveAttributeForIE()) {
             return getUnspecifiedAttributeNode(name);
         }
+
         return null;
     }
 

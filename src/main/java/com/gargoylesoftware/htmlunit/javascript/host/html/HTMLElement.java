@@ -575,7 +575,17 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public Attr jsxFunction_setAttributeNode(final Attr newAtt) {
         final String name = newAtt.jsxGet_name();
-        final Attr replacedAtt = (Attr) jsxFunction_getAttributeNode(name);
+
+        final Attr replacedAtt;
+        final boolean undefForClass = getBrowserVersion().
+                hasFeature(BrowserVersionFeatures.JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL);
+        if (undefForClass) {
+            replacedAtt = (Attr) jsxFunction_getAttributeNode(name);
+        }
+        else {
+            final NamedNodeMap nodes = (NamedNodeMap) jsxGet_attributes();
+            replacedAtt = (Attr) nodes.getNamedItemWithoutSytheticClassAttr(name);
+        }
         if (replacedAtt != null) {
             replacedAtt.detachFromParent();
         }
