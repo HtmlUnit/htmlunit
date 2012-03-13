@@ -69,7 +69,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Browsers(Browser.IE)
-    @Alerts({ "onclick" })
+    @Alerts("onclick")
     public void javaScriptPreventDefaultIE() throws Exception {
         final String html
             = "<html><head><title>Test</title>\n"
@@ -97,7 +97,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Browsers({ Browser.FF, Browser.CHROME })
-    @Alerts({ "onclick" })
+    @Alerts("onclick")
     public void javaScriptPreventDefault() throws Exception {
         final String html
             = "<html><head><title>Test</title>\n"
