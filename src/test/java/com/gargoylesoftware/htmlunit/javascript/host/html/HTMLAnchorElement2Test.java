@@ -16,9 +16,13 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -26,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLAnchorElement2Test extends WebDriverTestCase {
@@ -59,4 +64,59 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts({ "onclick" })
+    public void javaScriptPreventDefaultIE() throws Exception {
+        final String html
+            = "<html><head><title>Test</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var a = document.getElementById('link');\n"
+            + "    a.attachEvent('onclick', handler);\n"
+            + "  }\n"
+            + "  function handler() {\n"
+            + "    event.returnValue = false;\n"
+            + "    alert('onclick');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<a id='link' href='javascript: alert(\"href\");'>link</a>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("link")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers({ Browser.FF, Browser.CHROME })
+    @Alerts({ "onclick" })
+    public void javaScriptPreventDefault() throws Exception {
+        final String html
+            = "<html><head><title>Test</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var a = document.getElementById('link');\n"
+            + "    a.addEventListener('click', handler);\n"
+            + "  }\n"
+            + "  function handler(event) {\n"
+            + "    event.preventDefault();\n"
+            + "    alert('onclick');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<a id='link' href='javascript: alert(\"href\");'>link</a>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("link")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
 }

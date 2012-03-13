@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Daniel Gredler
  * @author Dmitri Zoubkov
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 public abstract class HtmlElement extends DomElement {
 
@@ -1234,12 +1235,9 @@ public abstract class HtmlElement extends DomElement {
 
         final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
         jsEngine.holdPosponedActions();
-        final ScriptResult scriptResult = doClickFireClickEvent(event);
 
-        boolean eventIsAborted = false;
-        if (null != scriptResult) {
-            eventIsAborted = event.isAborted(scriptResult);
-        }
+        final ScriptResult scriptResult = doClickFireClickEvent(event);
+        final boolean eventIsAborted = event.isAborted(scriptResult);
 
         final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
         if (!pageAlreadyChanged && !stateUpdated && !eventIsAborted) {
