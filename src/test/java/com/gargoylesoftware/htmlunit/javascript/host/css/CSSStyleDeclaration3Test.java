@@ -362,4 +362,29 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0px", IE = "auto")
+    public void widthAbsolute() throws Exception {
+        final String html =
+            "<html>\n"
+            + "</head>\n"
+            + "  <style type='text/css'>div {position: absolute;}</style>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <div id='tester'></div>\n"
+            + "  <script>\n"
+            + "    var myDiv = document.getElementById('tester');\n"
+            + "    var myDivStyle = myDiv.currentStyle;\n"
+            + "    if(!myDivStyle) myDivStyle = window.getComputedStyle(myDiv, null);\n"
+            + "    alert(myDivStyle.width);\n"
+            + "  </script>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

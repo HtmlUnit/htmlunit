@@ -1268,7 +1268,20 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         return pixelString(getElement(), new CssValue(Window.WINDOW_WIDTH) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
-                return defaultIfEmpty(style.getStyleAttribute(WIDTH, null), defaultWidth);
+                final String value = style.getStyleAttribute(WIDTH, null);
+                if (StringUtils.isEmpty(value)) {
+                    if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO)
+                            && "absolute".equals(getStyleAttribute("position", null))) {
+                        final String content = getDomNodeOrDie().getTextContent();
+                        // do this only for small content
+                        // at least for empty div's this is more correct
+                        if (null != content && (content.length() < 13)) {
+                            return (content.length() * 7) + "px";
+                        }
+                    }
+                    return defaultWidth;
+                }
+                return value;
             }
         });
     }
