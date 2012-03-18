@@ -154,6 +154,25 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(Browser.NONE)
+    @NotYetImplemented
+    public void selectsIdConditionWithColon() throws Exception {
+        final String html =
+                "<html><body><style></style>\n"
+              + "<div id='d:e'>"
+              + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
+        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
+        final CSSStyleSheet sheet = host.jsxGet_sheet();
+        final Selector selector = sheet.parseSelectors(new InputSource(new StringReader("#d\\:e"))).item(0);
+        assertTrue(sheet.selects(selector, page.getHtmlElementById("d:e")));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.NONE)
     public void selects_conditionalSelector_classCondition() throws Exception {
         testSelects("div.bar", false, true, false);
         testSelects(".bar", false, true, false);
