@@ -155,17 +155,22 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.NONE)
     @NotYetImplemented
-    public void selectsIdConditionWithColon() throws Exception {
+    public void selectsIdConditionWithSpecialChars() throws Exception {
         final String html =
                 "<html><body><style></style>\n"
-              + "<div id='d:e'>"
+              + "<div id='d:e'></div>"
+              + "<div id='d-e'></div>"
               + "</body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
         final CSSStyleSheet sheet = host.jsxGet_sheet();
-        final Selector selector = sheet.parseSelectors(new InputSource(new StringReader("#d\\:e"))).item(0);
+
+        Selector selector = sheet.parseSelectors(new InputSource(new StringReader("#d\\:e"))).item(0);
         assertTrue(sheet.selects(selector, page.getHtmlElementById("d:e")));
+
+        selector = sheet.parseSelectors(new InputSource(new StringReader("#d-e"))).item(0);
+        assertTrue(sheet.selects(selector, page.getHtmlElementById("d-e")));
     }
 
     /**
