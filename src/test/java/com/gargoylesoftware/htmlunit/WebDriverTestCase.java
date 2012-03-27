@@ -128,7 +128,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                             .replaceAll(" ", "").toLowerCase().split(","));
                     FF3_BIN_ = properties.getProperty("ff3.bin");
                     FF3_6_BIN_ = properties.getProperty("ff3.6.bin");
-                    FF10_BIN_ = properties.getProperty("ff8.bin");
+                    FF10_BIN_ = properties.getProperty("ff10.bin");
                     CHROME16_BIN_ = properties.getProperty("chrome16.bin");
                 }
             }
