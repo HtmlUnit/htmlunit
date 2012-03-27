@@ -104,7 +104,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static List<String> BROWSERS_PROPERTIES_;
     private static String FF3_BIN_;
     private static String FF3_6_BIN_;
-    private static String FF8_BIN_;
+    private static String FF10_BIN_;
     private static String CHROME16_BIN_;
 
     private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
@@ -128,7 +128,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                             .replaceAll(" ", "").toLowerCase().split(","));
                     FF3_BIN_ = properties.getProperty("ff3.bin");
                     FF3_6_BIN_ = properties.getProperty("ff3.6.bin");
-                    FF8_BIN_ = properties.getProperty("ff8.bin");
+                    FF10_BIN_ = properties.getProperty("ff8.bin");
                     CHROME16_BIN_ = properties.getProperty("chrome16.bin");
                 }
             }
@@ -219,8 +219,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             else if (getBrowserVersion() == BrowserVersion.FIREFOX_3_6) {
                 ffBinary = FF3_6_BIN_;
             }
-            else if (getBrowserVersion() == BrowserVersion.FIREFOX_8) {
-                ffBinary = FF8_BIN_;
+            else if (getBrowserVersion() == BrowserVersion.FIREFOX_10) {
+                ffBinary = FF10_BIN_;
             }
             if (ffBinary != null) {
                 return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());

@@ -176,9 +176,6 @@ public enum BrowserVersionFeatures {
     GENERATED_108,
 
     /** Was originally .isIE(). */
-    GENERATED_109,
-
-    /** Was originally .isIE(). */
     GENERATED_111,
 
     /** Was originally .isIE(). */
@@ -431,12 +428,6 @@ public enum BrowserVersionFeatures {
     GENERATED_75,
 
     /** Was originally .isIE(). */
-    GENERATED_76,
-
-    /** Was originally .isIE(). */
-    GENERATED_78,
-
-    /** Was originally .isIE(). */
     GENERATED_80,
 
     /** Was originally .isIE(). */
@@ -598,6 +589,19 @@ public enum BrowserVersionFeatures {
     /** Indicates that the getBoundingClientRect adds an offset of 2. */
     JS_BOUNDING_CLIENT_RECT_OFFSET_TWO,
 
+    /** Indicates that the browser emulates the char attribute. */
+    JS_CHAR_EMULATED,
+
+    /** Indicates that the browser emulates the charOff attribute. */
+    JS_CHAR_OFF_EMULATED,
+
+    /** Indicates that the browser tries to convert the char attribute values
+     * to integer. */
+    JS_CHAR_OFF_INTEGER,
+
+    /** Indicates that the browser returns a dot if the char attribute is not defined. */
+    JS_CHAR_UNDEFINED_DOT,
+
     /** Indicates that the clientLeft and clientTop returning zero in all cases. */
     JS_CLIENT_LEFT_TOP_ZERO,
 
@@ -721,6 +725,9 @@ public enum BrowserVersionFeatures {
 
     /** Indicates if setting an out of bound value for HTMLSelectElement.selectedIndex should throw. */
     JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD,
+
+    /** Indicates that table elements supports the values "top", "bottom", "middle", "baseline" (IE). */
+    JS_TABLE_VALIGN_SUPPORTS_IE_VALUES,
 
     /** Indicates that the set attribute method treads the synthetic
      * empty attr for 'class' (IE6/7) as a normal one. */

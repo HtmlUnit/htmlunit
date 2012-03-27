@@ -104,10 +104,10 @@ public class BrowserVersion implements Serializable {
         (float) 3.6, "FF3.6", null);
 
     /** Firefox Warning: highly experimental!!! */
-    public static final BrowserVersion FIREFOX_8 = new BrowserVersion(
+    public static final BrowserVersion FIREFOX_10 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:8.0.1) Gecko/20100101 Firefox/8.0.1",
-        (float) 8.0, "FF8", null);
+        (float) 8.0, "FF10", null);
 
     /** Internet Explorer 6. */
     public static final BrowserVersion INTERNET_EXPLORER_6 = new BrowserVersion(
@@ -140,15 +140,19 @@ public class BrowserVersion implements Serializable {
         INTERNET_EXPLORER_6.initDefaultFeatures();
         INTERNET_EXPLORER_7.initDefaultFeatures();
         INTERNET_EXPLORER_8.initDefaultFeatures();
+
         FIREFOX_3.initDefaultFeatures();
         FIREFOX_3_6.initDefaultFeatures();
-        FIREFOX_8.initDefaultFeatures();
+        FIREFOX_10.initDefaultFeatures();
+
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
             "Shockwave Flash", "swf"));
         FIREFOX_3.getPlugins().add(flash);
         FIREFOX_3_6.getPlugins().add(flash);
+        FIREFOX_10.getPlugins().add(flash);
+
         CHROME_16.initDefaultFeatures();
         CHROME_16.setApplicationCodeName("Mozilla");
         CHROME_16.setPlatform("MacIntel");
