@@ -726,12 +726,12 @@ public enum BrowserVersionFeatures {
     /** Indicates if setting an out of bound value for HTMLSelectElement.selectedIndex should throw. */
     JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD,
 
-    /** Indicates that table elements supports the values "top", "bottom", "middle", "baseline" (IE). */
-    JS_TABLE_VALIGN_SUPPORTS_IE_VALUES,
-
     /** Indicates that the set attribute method treads the synthetic
      * empty attr for 'class' (IE6/7) as a normal one. */
     JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL,
+
+    /** Indicates that table elements supports the values "top", "bottom", "middle", "baseline" (IE). */
+    JS_TABLE_VALIGN_SUPPORTS_IE_VALUES,
 
     /** Getting the property cols 20, if the defined value is not convertable into an integer (IE).
      * FF returns -1 in this case.
