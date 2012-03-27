@@ -2652,7 +2652,7 @@
         <function name="hasChildNodes"/>
         <function name="insertBefore"/>
         <function name="isSameNode">
-            <browser name="Firefox"/>
+            <browser name="Firefox" max-version="9" />
         </function>
         <function name="normalize"/>
         <function name="removeChild"/>
