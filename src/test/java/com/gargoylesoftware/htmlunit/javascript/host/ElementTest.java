@@ -452,7 +452,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div"
                 })
-    @NotYetImplemented({ Browser.FF3_6, Browser.FF8 })
+    @NotYetImplemented({ Browser.FF3_6, Browser.FF10 })
     public void html_localName() throws Exception {
         html("localName");
     }
@@ -479,7 +479,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
                 })
-    @NotYetImplemented({ Browser.FF3_6, Browser.FF8 })
+    @NotYetImplemented({ Browser.FF3_6, Browser.FF10 })
     public void html_namespaceURI() throws Exception {
         html("namespaceURI");
     }
@@ -610,7 +610,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLUnknownElement],app:div",
                 "[object HTMLUnknownElement],another:div"
                 })
-    @NotYetImplemented({ Browser.FF3_6, Browser.FF8 })
+    @NotYetImplemented({ Browser.FF3_6, Browser.FF10 })
     public void namespace_localName() throws Exception {
         namespace("localName");
     }
@@ -643,7 +643,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
                 })
-    @NotYetImplemented({ Browser.FF3_6, Browser.FF8 })
+    @NotYetImplemented({ Browser.FF3_6, Browser.FF10 })
     public void namespace_namespaceURI() throws Exception {
         namespace("namespaceURI");
     }
