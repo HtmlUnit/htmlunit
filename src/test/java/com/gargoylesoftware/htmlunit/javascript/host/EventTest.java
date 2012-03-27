@@ -534,6 +534,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Browsers(Browser.IE)
     @NotYetImplemented // TODO: in IE no click event can be registered for the window
     @Alerts({ "span bubbling", "div", "div bubbling" })
     public void testIE_EventBubbling() throws Exception {

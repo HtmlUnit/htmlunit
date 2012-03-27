@@ -37,7 +37,7 @@ public class Popup2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers({ Browser.IE, Browser.FF10 })
     public void testPopup() throws Exception {
         final String html = "<html><head><title>First</title><body>\n"
             + "<script>\n"
@@ -57,7 +57,7 @@ public class Popup2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers({ Browser.IE, Browser.FF10 })
     public void testPopupBodyStyle() throws Exception {
         final String html = "<html><head><title>First</title><body>\n"
             + "<script language='javascript'>\n"
