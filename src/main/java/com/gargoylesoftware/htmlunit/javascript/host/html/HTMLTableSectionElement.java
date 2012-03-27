@@ -64,7 +64,7 @@ public class HTMLTableSectionElement extends RowContainer {
      */
     private String[] getValidVAlignValues() {
         String[] valid;
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_109)) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)) {
             valid = VALIGN_VALID_VALUES_IE;
         }
         else {

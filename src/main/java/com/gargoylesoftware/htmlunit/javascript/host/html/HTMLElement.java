@@ -2151,13 +2151,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the "ch" property
      */
     protected String getCh() {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_76);
-        if (ie) {
+        final boolean emulated = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_EMULATED);
+        if (emulated) {
             return ch_;
         }
-        String ch = getDomNodeOrDie().getAttribute("char");
-        if (ch == DomElement.ATTRIBUTE_NOT_DEFINED) {
-            ch = ".";
+
+        final String ch = getDomNodeOrDie().getAttribute("char");
+        if ((ch == DomElement.ATTRIBUTE_NOT_DEFINED)
+                && (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_UNDEFINED_DOT))) {
+            return ".";
         }
         return ch;
     }
@@ -2167,8 +2169,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param ch the value of the "ch" property
      */
     protected void setCh(final String ch) {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_76);
-        if (ie) {
+        final boolean emulated = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_EMULATED);
+        if (emulated) {
             ch_ = ch;
         }
         else {
@@ -2181,8 +2183,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the "chOff" property
      */
     protected String getChOff() {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_78);
-        if (ie) {
+        final boolean emulated = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_OFF_EMULATED);
+        if (emulated) {
             return chOff_;
         }
         return getDomNodeOrDie().getAttribute("charOff");
@@ -2193,17 +2195,27 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param chOff the value of the "chOff" property
      */
     protected void setChOff(String chOff) {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_78);
-        if (ie) {
+        final boolean emulated = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_OFF_EMULATED);
+        if (emulated) {
             chOff_ = chOff;
         }
         else {
             try {
                 Float f = Float.valueOf(chOff);
-                if (f.floatValue() < 0) {
-                    f = Float.valueOf(0f);
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_OFF_INTEGER)) {
+                    if (f.floatValue() < 0) {
+                        f = Float.valueOf(0f);
+                    }
+                    chOff = Integer.toString(f.intValue());
                 }
-                chOff = Integer.toString(f.intValue());
+                else {
+                    if (f.intValue() == f) {
+                        chOff = Integer.toString(f.intValue());
+                    }
+                    else {
+                        chOff = Float.toString(f);
+                    }
+                }
             }
             catch (final NumberFormatException e) {
                 // Ignore.
