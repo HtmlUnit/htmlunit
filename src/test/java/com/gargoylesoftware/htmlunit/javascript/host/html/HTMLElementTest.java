@@ -2834,7 +2834,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF3 = { "undefined", "true" }, FF3_6 = { "undefined", "true" }, CHROME = { "undefined", "true" },
             DEFAULT = "exception")
-    @NotYetImplemented(Browser.FF8)
+    @NotYetImplemented(Browser.FF10)
     public void prototype_innerHTML() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
