@@ -103,11 +103,11 @@ public class BrowserVersion implements Serializable {
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.8) Gecko/20100722 Firefox/3.6.8",
         (float) 3.6, "FF3.6", null);
 
-    /** Firefox Warning: highly experimental!!! */
+    /** Firefox Warning: experimental!!! */
     public static final BrowserVersion FIREFOX_10 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:8.0.1) Gecko/20100101 Firefox/8.0.1",
-        (float) 8.0, "FF10", null);
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:10.0.3) Gecko/20100101 Firefox/10.0.3",
+        (float) 10.0, "FF10", null);
 
     /** Internet Explorer 6. */
     public static final BrowserVersion INTERNET_EXPLORER_6 = new BrowserVersion(
