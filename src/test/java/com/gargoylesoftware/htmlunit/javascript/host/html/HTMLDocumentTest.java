@@ -280,7 +280,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", FF = "Hello", FF8 = "exception")
+    @Alerts(DEFAULT = "exception", FF = "Hello", FF10 = "exception")
     public void createDocumentNS_xul() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -481,7 +481,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @NotYetImplemented(Browser.IE)
     @Alerts(
             FF3 = { "undefined,[object HTMLBodyElement]-undefined,[object HTMLBodyElement]-" },
-            FF3_6 = { "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-" })
+            FF = { "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-" })
     public void readyState() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -525,7 +525,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" })
-    @NotYetImplemented({ Browser.FF3_6, Browser.FF8, Browser.CHROME })
+    @NotYetImplemented({ Browser.FF3_6, Browser.FF10, Browser.CHROME })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
@@ -1049,8 +1049,10 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "undefined", FF3_6 = { "3", "div1" },
-            IE = "undefined", IE8 = { "3", "div1" })
+    @Alerts(FF3 = "undefined",
+            FF = { "3", "div1" },
+            IE = "undefined",
+            IE8 = { "3", "div1" })
     public void querySelectorAll() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
             + "<style>\n"
@@ -1082,8 +1084,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "undefined", FF3_6 = { "3", "div1" },
-        IE = "undefined")
+    @Alerts(FF3 = "undefined",
+            FF = { "3", "div1" },
+            IE = "undefined")
     public void querySelectorAll_quirks() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<style>\n"
