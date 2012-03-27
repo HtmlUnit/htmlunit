@@ -145,7 +145,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF3 = { "-1", "2", "exception", "2", "exception", "2" },
-            FF3_6 = { "-1", "2", "-1", "-1" },
+            FF = { "-1", "2", "-1", "-1" },
             IE = { "-1", "2", "-1", "-1" })
     public void testSetSelectedIndexInvalidValue() throws Exception {
         final String html
@@ -413,7 +413,9 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = { "4", "Four", "value4", "Three b", "value3b" })
+    @Alerts(FF3 = "exception",
+            FF3_6 = "exception",
+            DEFAULT = { "4", "Four", "value4", "Three b", "value3b" })
     public void testAddOptionWithAddMethod_IE() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -477,7 +479,9 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0", "exception" }, IE = { "0", "1" })
+    @Alerts(FF3 = { "0", "exception" },
+            FF3_6 = { "0", "exception" },
+            DEFAULT = { "0", "1" })
     public void testAddWith1Arg() throws Exception {
         final String html
             = "<html><head>\n"
@@ -563,7 +567,9 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = { "2", "Three", "value3" })
+    @Alerts(FF3 = "exception",
+            FF3_6 = "exception",
+            DEFAULT = { "2", "Three", "value3" })
     public void optionsRemoveMethod() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

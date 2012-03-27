@@ -37,7 +37,9 @@ public class NamedNodeMap2Test extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(Browser.FF)
-    @Alerts(IE = { "myAttr", "myAttr" }, FF = { "myAttr", "myattr" })
+    @Alerts(DEFAULT = { "myAttr", "myAttr" },
+            FF3 = { "myAttr", "myattr" },
+            FF3_6 = { "myAttr", "myattr" })
     public void setNamedItem() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

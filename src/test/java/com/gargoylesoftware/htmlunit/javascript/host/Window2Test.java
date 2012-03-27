@@ -57,7 +57,9 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "not found", "true" },
-            FF = { "found", "exception", "false" })
+            FF3 = { "found", "exception", "false" },
+            FF3_6 = { "found", "exception", "false" },
+            FF = { "found", "true" })
     @NotYetImplemented(Browser.FF)
     public void FF_controllers() throws Exception {
         final String html
@@ -608,7 +610,10 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(Browser.FF)
-    @Alerts(IE = { "true", "true", "object" }, FF = { "false", "false", "undefined" })
+    @Alerts(IE = { "true", "true", "object" },
+            FF3 = { "false", "false", "undefined" },
+            FF3_6 = { "false", "false", "undefined" },
+            FF = { "true", "true", "undefined" })
     public void onbeforeunload_notDefined() throws Exception {
         onbeforeunload("onbeforeunload", null);
     }

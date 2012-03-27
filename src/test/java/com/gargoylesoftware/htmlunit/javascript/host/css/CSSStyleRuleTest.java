@@ -37,7 +37,9 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" },
+    @Alerts(FF3 = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" },
+            FF3_6 = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" },
+            FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px, ", "red" },
             IE = { "[object]", "H1", "", "10px, ", "red" })
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -143,7 +145,9 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" },
+    @Alerts(FF3 = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" },
+            FF3_6 = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" },
+            FF = { "BoDY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
             IE = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" })
     public void selectorText() throws Exception {
         final String html = "<html><head><title>First</title>\n"

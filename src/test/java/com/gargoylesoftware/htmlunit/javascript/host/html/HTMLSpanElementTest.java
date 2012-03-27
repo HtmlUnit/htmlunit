@@ -64,8 +64,11 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE6 = {"[object] undefined", "[object] undefined" }, IE = {"[object] ", "[object] undefined" },
-            FF = {"[object HTMLSpanElement] undefined", "[object HTMLSpanElement] undefined" })
+    @Alerts(IE6 = {"[object] undefined", "[object] undefined" },
+            IE = {"[object] ", "[object] undefined" },
+            FF3 = {"[object HTMLSpanElement] undefined", "[object HTMLSpanElement] undefined" },
+            FF3_6 = {"[object HTMLSpanElement] undefined", "[object HTMLSpanElement] undefined" },
+            FF = {"[object HTMLElement] undefined", "[object HTMLSpanElement] undefined" })
     public void cite() throws Exception {
         final String html =
             "<html>\n"

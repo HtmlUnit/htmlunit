@@ -36,7 +36,10 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object ComputedCSSStyleDeclaration]", IE = "exception")
+    @Alerts(FF3 = "[object ComputedCSSStyleDeclaration]",
+            FF3_6 = "[object ComputedCSSStyleDeclaration]",
+            FF = "[object CSSStyleDeclaration]",
+            IE = "exception")
     public void getComputedStyleOnChild() throws Exception {
         final String html = "<html><head><style>\n"
             + "body > div { background-color: green#FF0000; }\n"

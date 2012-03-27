@@ -174,7 +174,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "exception", "exception", "pass", "pass" })
+    @Alerts(DEFAULT = { "exception", "exception", "pass", "pass" },
+            FF10 = { "pass", "pass", "pass", "pass" })
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -289,7 +290,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception", FF10 = "ok")
     public void sameOriginPolicy() throws Exception {
         sameOriginPolicy(URL_THIRD.toString());
     }
@@ -298,7 +299,10 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = "ok")
+    @Alerts(FF3 = "exception",
+            FF3_6 = "exception",
+            FF = "ok",
+            IE = "ok")
     public void sameOriginPolicy_aboutBlank() throws Exception {
         sameOriginPolicy("about:blank");
     }

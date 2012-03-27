@@ -68,7 +68,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(
             FF3 = { "transparent", "url(myImage.png)", "repeat", "0% 0%", "scroll" },
-            FF3_6 = { "transparent", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
+            FF = { "transparent", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
             IE = { "transparent", "url(myImage.png)", "repeat", "0% 0%", "scroll" })
     public void backgroundImage() throws Exception {
         background("url(myImage.png)");
@@ -145,7 +145,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(
             FF3 = { "red", "url(myImage.png)", "repeat", "0% 0%", "scroll" },
-            FF3_6 = { "red", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
+            FF = { "red", "url(\"myImage.png\")", "repeat", "0% 0%", "scroll" },
             IE = { "red", "url(myImage.png)", "repeat", "0% 0%", "scroll" })
     public void backgroundMixed() throws Exception {
         background("red url(\"myImage.png\")");
@@ -223,7 +223,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(
             FF3 = { "transparent", "url(http://localhost:12345/myImage.png)", "repeat", "0% 0%", "scroll" },
-            FF3_6 = { "transparent", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
+            FF = { "transparent", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
             IE = { "transparent", "url(\"http://localhost:12346/myImage.png\")", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssImage() throws Exception {
@@ -320,7 +320,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Test
     @Alerts(
             FF3 = { "rgb(255, 0, 0)", "url(http://localhost:12345/myImage.png)", "repeat", "0% 0%", "scroll" },
-            FF3_6 = { "rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
+            FF = { "rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll" },
             IE = { "red", "url(\"http://localhost:12346/myImage.png\")", "repeat", "undefined", "scroll" })
     @NotYetImplemented
     public void backgroundCssMixed() throws Exception {

@@ -255,7 +255,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF3 = { "<img/>", "<IMG/>", "<?myTarget myData?>" },
-            FF3_6 = { "<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>" })
+            FF = { "<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>" })
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -321,7 +321,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF3 = "<TEXTAREA/>",
-            FF3_6 = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
+            FF = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
     public void mixedCase() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -340,7 +340,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF3 = "<AREA/>, <BASE/>, <BASEFONT/>, <BR/>, <HR/>, <INPUT type=\"text\"/>, <LINK/>, <META/>",
-            FF3_6 = "<area xmlns=\"http://www.w3.org/1999/xhtml\" />, "
+            FF = "<area xmlns=\"http://www.w3.org/1999/xhtml\" />, "
                     + "<base xmlns=\"http://www.w3.org/1999/xhtml\" />, "
                     + "<basefont xmlns=\"http://www.w3.org/1999/xhtml\" />, "
                     + "<br xmlns=\"http://www.w3.org/1999/xhtml\" />, "
@@ -416,7 +416,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF3 = "<DIV/>, <H1/>, <P/>, <LI/>, <TEXTAREA/>",
-            FF3_6 = "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>, "
+            FF = "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>, "
                     + "<h1 xmlns=\"http://www.w3.org/1999/xhtml\"></h1>, "
                     + "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>, "
                     + "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>, "
@@ -447,7 +447,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF3 = "<IMG href=\"mypage.htm\"/>",
-            FF3_6 = "<img xmlns=\"http://www.w3.org/1999/xhtml\" href=\"mypage.htm\" />")
+            FF = "<img xmlns=\"http://www.w3.org/1999/xhtml\" href=\"mypage.htm\" />")
     public void noClosingTagWithAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
