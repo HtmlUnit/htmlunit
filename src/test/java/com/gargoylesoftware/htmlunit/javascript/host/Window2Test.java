@@ -262,7 +262,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @NotYetImplemented(Browser.FF)
     @Alerts(FF3 = { "java: object", "getClass: undefined" },
-            FF3_6 = { "java: undefined", "getClass: undefined" },
+            FF = { "java: undefined", "getClass: undefined" },
             IE = { "java: undefined", "getClass: undefined" })
     public void rhino_lazilyNames2() throws Exception {
         doTestRhinoLazilyNames("java", "getClass");
@@ -274,8 +274,12 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(Browser.FF)
-    @Alerts(FF = { "Packages: object", "XML: function", "XMLList: function",
+    @Alerts(FF3 = { "Packages: object", "XML: function", "XMLList: function",
             "Namespace: function", "QName: function" },
+            FF3_6 = { "Packages: object", "XML: function", "XMLList: function",
+                    "Namespace: function", "QName: function" },
+            FF = { "Packages: undefined", "XML: function", "XMLList: function",
+                            "Namespace: function", "QName: function" },
             IE = { "Packages: undefined", "XML: undefined", "XMLList: undefined",
             "Namespace: undefined", "QName: undefined" })
     public void rhino_lazilyNames3() throws Exception {
@@ -750,7 +754,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Browsers(Browser.FF)
-    @Alerts(FF = { "true", "true", "true", "true", "true", "true" })
+    @Alerts(FF = { "true", "true", "true", "true", "true", "true" },
+            FF10 = { "true", "true", "false", "true", "true", "true" })
     public void heightsAndWidths() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"

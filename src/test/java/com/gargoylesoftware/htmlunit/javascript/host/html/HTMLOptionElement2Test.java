@@ -74,7 +74,12 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "ab", IE8 = "abb", IE = "ab", CHROME = "")
+    @Alerts(DEFAULT = "aab",
+            FF3 = "ab",
+            FF3_6 = "ab",
+            IE6 = "ab",
+            IE7 = "ab",
+            CHROME = "")
     @NotYetImplemented(Browser.FF)
     //TODO: Needs further investigation of clicking an option without clicking the select
     //See the first comment in http://code.google.com/p/selenium/issues/detail?id=2131#c1
