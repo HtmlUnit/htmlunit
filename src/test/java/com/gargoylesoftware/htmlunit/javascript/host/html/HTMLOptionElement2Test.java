@@ -74,7 +74,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "aab",
+    @Alerts(DEFAULT = "abb",
             FF3 = "ab",
             FF3_6 = "ab",
             IE6 = "ab",
