@@ -154,7 +154,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(Browser.NONE)
-    @NotYetImplemented
     public void selectsIdConditionWithSpecialChars() throws Exception {
         final String html =
                 "<html><body><style></style>\n"
