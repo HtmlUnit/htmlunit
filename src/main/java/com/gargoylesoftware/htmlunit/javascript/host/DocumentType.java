@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.NamedNodeMap;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 
@@ -68,28 +73,52 @@ public class DocumentType extends Node {
      * @return the internal subset
      */
     public String jsxGet_internalSubset() {
-        return ((DomDocumentType) getDomNodeOrDie()).getInternalSubset();
+        final String subset = ((DomDocumentType) getDomNodeOrDie()).getInternalSubset();
+        if (StringUtils.isNotEmpty(subset)) {
+            return subset;
+        }
+
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCTYPE_INTERNALSUBSET_EMPTY_STRING)) {
+            return "";
+        }
+        return null;
     }
 
     /**
      * Returns entities.
      * @return entities
      */
-    public String jsxGet_entities() {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_33)) {
+    public Object jsxGet_entities() {
+        final NamedNodeMap entities = ((DomDocumentType) getDomNodeOrDie()).getEntities();
+        if (null != entities) {
+            return entities;
+        }
+
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_NULL)) {
+            return null;
+        }
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_EMPTY_STRING)) {
             return "";
         }
-        return null;
+        return Context.getUndefinedValue();
     }
 
     /**
      * Returns notations.
      * @return notations
      */
-    public String jsxGet_notations() {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_34)) {
+    public Object jsxGet_notations() {
+        final NamedNodeMap notations = ((DomDocumentType) getDomNodeOrDie()).getNotations();
+        if (null != notations) {
+            return notations;
+        }
+
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_NULL)) {
+            return null;
+        }
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_EMPTY_STRING)) {
             return "";
         }
-        return null;
+        return Context.getUndefinedValue();
     }
 }

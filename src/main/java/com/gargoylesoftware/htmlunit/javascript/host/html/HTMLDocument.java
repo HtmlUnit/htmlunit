@@ -1623,7 +1623,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public SimpleScriptable jsxGet_doctype() {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_64)) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCUMENT_DOCTYPE_NULL)) {
             return null;
         }
         return super.jsxGet_doctype();

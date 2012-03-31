@@ -87,7 +87,6 @@ public class DocumentTypeTest extends WebDriverTestCase {
         FF = {
             "[object DocumentType]", "greeting,10,null,null,null,null",
             "greeting,MyIdentifier,hello.dtd,null,undefined,undefined" })
-    @NotYetImplemented(Browser.FF3_6)
     public void doctype_xml() throws Exception {
         final String html =
               "<html>\n"

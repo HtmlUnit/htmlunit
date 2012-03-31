@@ -314,12 +314,6 @@ public enum BrowserVersionFeatures {
     GENERATED_32,
 
     /** Was originally .isIE(). */
-    GENERATED_33,
-
-    /** Was originally .isIE(). */
-    GENERATED_34,
-
-    /** Was originally .isIE(). */
     GENERATED_35,
 
     /** Was originally .isIE(). */
@@ -393,9 +387,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_63,
-
-    /** Was originally .isIE(). */
-    GENERATED_64,
 
     /** Was originally .isIE(). */
     GENERATED_65,
@@ -611,6 +602,21 @@ public enum BrowserVersionFeatures {
     /** */
     JS_DEFERRED,
 
+    /** Javascript doctyp.entities returns an empty string (IE). */
+    JS_DOCTYPE_ENTITIES_EMPTY_STRING,
+
+    /** Javascript doctyp.entities returns null (FF10). */
+    JS_DOCTYPE_ENTITIES_NULL,
+
+    /** Javascript doctyp.internalSubset returns an empty string (IE). */
+    JS_DOCTYPE_INTERNALSUBSET_EMPTY_STRING,
+
+    /** Javascript doctyp.notations returns an empty string (IE). */
+    JS_DOCTYPE_NOTATIONS_EMPTY_STRING,
+
+    /** Javascript doctyp.notations returns null (FF10). */
+    JS_DOCTYPE_NOTATIONS_NULL,
+
     /** Javascript document.appendChild is allowed (IE). */
     JS_DOCUMENT_APPEND_CHILD_SUPPORTED,
 
@@ -619,6 +625,9 @@ public enum BrowserVersionFeatures {
      * @see "http://msdn.microsoft.com/en-us/library/ms536389%28v=VS.85%29.aspx"
      */
     JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX,
+
+    /** Javascript document.doctype returns null (IE). */
+    JS_DOCUMENT_DOCTYPE_NULL,
 
     /** Javascript property document.domain is lowercase. */
     JS_DOCUMENT_DOMAIN_IS_LOWERCASE,
