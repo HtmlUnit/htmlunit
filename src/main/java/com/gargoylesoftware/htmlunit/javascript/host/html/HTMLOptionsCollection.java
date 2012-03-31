@@ -129,7 +129,8 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @return {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_87) && "childNodes".equals(name)) {
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY)
+                && "childNodes".equals(name)) {
             return NOT_FOUND;
         }
         // If the name was NOT_FOUND on the prototype, then just drop through

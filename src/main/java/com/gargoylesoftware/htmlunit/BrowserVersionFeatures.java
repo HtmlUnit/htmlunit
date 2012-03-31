@@ -431,9 +431,6 @@ public enum BrowserVersionFeatures {
     GENERATED_86,
 
     /** Was originally .isIE(). */
-    GENERATED_87,
-
-    /** Was originally .isIE(). */
     GENERATED_88,
 
     /** Was originally .isIE(). */
@@ -731,6 +728,9 @@ public enum BrowserVersionFeatures {
 
     /** Indicates if calling HTMLSelectElement.item with a negative value should throw. */
     JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
+
+    /** Indicates that select.options.childNodes is a valid property (IE). */
+    JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY,
 
     /** Indicates if setting an out of bound value for HTMLSelectElement.selectedIndex should throw. */
     JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD,
