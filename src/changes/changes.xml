@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.2.
+            </action>
             <action type="fix" dev="rbri">
                 Check the onclick event for preventDefault/returnValue also when
                 the handler produces no result.
