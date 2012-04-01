@@ -671,14 +671,14 @@ public enum BrowserVersionFeatures {
     /** Indicates that objects with prototype property available in window scope; Firefox does this. */
     JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
 
-    /** IE ignores the last line containing uncommented. */
-    JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED,
-
     /** Javascript method getHeight of IFrames may return negative values. */
     JS_IFRAME_GET_HEIGHT_NEGATIVE_VALUES,
 
     /** Javascript method getWidth of IFrames may return negative values. */
     JS_IFRAME_GET_WIDTH_NEGATIVE_VALUES,
+
+    /** IE ignores the last line containing uncommented. */
+    JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED,
 
     /** Indicates if multiple spaces are replaced by a single one when accessing innerHTML. */
     JS_INNER_HTML_REDUCE_WHITESPACES,
