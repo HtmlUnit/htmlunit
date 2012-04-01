@@ -60,7 +60,7 @@ public class Window2Test extends WebDriverTestCase {
             FF3 = { "found", "exception", "false" },
             FF3_6 = { "found", "exception", "false" },
             FF = { "found", "true" })
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented({ Browser.FF3, Browser.FF3_6 })
     public void FF_controllers() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -613,7 +613,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented({ Browser.FF3, Browser.FF3_6 })
     @Alerts(IE = { "true", "true", "object" },
             FF3 = { "false", "false", "undefined" },
             FF3_6 = { "false", "false", "undefined" },

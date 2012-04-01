@@ -36,7 +36,7 @@ public class NamedNodeMap2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented({ Browser.FF3, Browser.FF3_6 })
     @Alerts(DEFAULT = { "myAttr", "myAttr" },
             FF3 = { "myAttr", "myattr" },
             FF3_6 = { "myAttr", "myattr" })

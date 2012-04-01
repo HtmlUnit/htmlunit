@@ -1543,8 +1543,7 @@ public class DocumentTest extends WebTestCase {
      */
     @Test
     @Alerts(FF3 = { "undefined", "undefined" },
-            FF3_6 = { "loading", "complete" },
-            IE = { "loading", "complete" })
+            DEFAULT = { "loading", "complete" })
     public void readyState() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2228,7 +2227,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE, Browser.FF3_6 })
+    @Browsers({ Browser.IE, Browser.FF3_6, Browser.FF10 })
     public void activeElement() throws Exception {
         final String html = "<html><head><script>\n"
             + "  alert(document.activeElement);"
