@@ -144,7 +144,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
                     source = source.replaceFirst("<!--", "// <!--");
                 }
                 // IE ignores the last line containing uncommented -->
-                if (browserVersion_.hasFeature(BrowserVersionFeatures.GENERATED_140)
+                if (browserVersion_.hasFeature(BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED)
                         && sourceCodeTrimmed.endsWith("-->")) {
                     final int lastDoubleSlash = source.lastIndexOf("//");
                     final int lastNewLine = Math.max(source.lastIndexOf('\n'), source.lastIndexOf('\r'));
@@ -163,7 +163,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             //    .preProcess(page, source, sourceName, lineno, null);
 
             // PreProcess IE Conditional Compilation if needed
-            if (browserVersion_.hasFeature(BrowserVersionFeatures.GENERATED_141)) {
+            if (browserVersion_.hasFeature(BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS)) {
                 final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
                 source = ieCCPreProcessor.preProcess(page, source, sourceName, lineno, null);
 //                sourceCode = IEWeirdSyntaxScriptPreProcessor.getInstance()
