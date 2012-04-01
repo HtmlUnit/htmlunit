@@ -2006,6 +2006,7 @@
         <function name="item"/>
         <function name="remove">
             <browser name="Internet Explorer"/>
+            <browser name="Firefox" min-version="10" />
         </function>
     </class>
 

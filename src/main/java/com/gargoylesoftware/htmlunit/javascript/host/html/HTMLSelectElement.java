@@ -138,7 +138,6 @@ public class HTMLSelectElement extends FormField {
      * @param index (optional) the index where the node should be inserted
      */
     protected void add_IE(final HTMLOptionElement newOptionObject, final Object index) {
-        final HtmlSelect select = getHtmlSelect();
         final HtmlOption beforeOption;
         if (index == null) {
             throw new EvaluatorException("Null not supported as index.");
@@ -148,6 +147,7 @@ public class HTMLSelectElement extends FormField {
             beforeOption = null;
         }
         else {
+            final HtmlSelect select = getHtmlSelect();
             final int intIndex = ((Integer) Context.jsToJava(index, Integer.class)).intValue();
             if (intIndex >= select.getOptionSize()) {
                 beforeOption = null;
@@ -171,7 +171,20 @@ public class HTMLSelectElement extends FormField {
             beforeOption = null;
         }
         else if (Context.getUndefinedValue().equals(beforeOptionObject)) {
-            throw Context.reportRuntimeError("Not enough arguments [SelectElement.add]");
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_REQUIRED)) {
+                throw Context.reportRuntimeError("Not enough arguments [SelectElement.add]");
+            }
+            beforeOption = null;
+        }
+        else if (beforeOptionObject instanceof Number) {
+            final HtmlSelect select = getHtmlSelect();
+            final int intIndex = ((Integer) Context.jsToJava(beforeOptionObject, Integer.class)).intValue();
+            if (intIndex >= select.getOptionSize()) {
+                beforeOption = null;
+            }
+            else {
+                beforeOption = select.getOption(intIndex);
+            }
         }
         else {
             beforeOption = (HtmlOption) ((HTMLOptionElement) beforeOptionObject).getDomNodeOrDie();

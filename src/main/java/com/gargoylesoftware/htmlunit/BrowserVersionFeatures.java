@@ -726,6 +726,11 @@ public enum BrowserVersionFeatures {
      */
     JS_SELECT_ADD_SECOND_PARAM_IS_INDEX,
 
+    /** Indicates if calling HTMLSelectElement.add without second parameter
+     * throws an exception.
+     */
+    JS_SELECT_ADD_SECOND_PARAM_IS_REQUIRED,
+
     /** Indicates if calling HTMLSelectElement.item with a negative value should throw. */
     JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
 
