@@ -206,9 +206,6 @@ public enum BrowserVersionFeatures {
     GENERATED_133,
 
     /** Was originally .isIE(). */
-    GENERATED_135,
-
-    /** Was originally .isIE(). */
     GENERATED_136,
 
     /** Was originally .isIE(). */
@@ -854,6 +851,12 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that 'this' corresponds to the handler function when a XMLHttpRequest handler is executed. */
     XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION,
+
+    /** Indicates that the onreadystatechange handler is not triggered for sync requests. */
+    XMLHTTPREQUEST_NO_ONREADYSTATECANGE_TRIGGERED_FOR_SYNC_REQUESTS,
+
+    /** Indicates that the onload handler is not triggered if completed (FF). */
+    XMLHTTPREQUEST_TRIGGER_ONLOAD_ON_COMPLETED,
 
     /** Indicates if XUL is supported (FF only). */
     XUL_SUPPORT;

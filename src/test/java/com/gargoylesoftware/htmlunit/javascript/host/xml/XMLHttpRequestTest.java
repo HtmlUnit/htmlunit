@@ -486,10 +486,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "ibcdefg", "xxxxxfg" },
+    @Alerts(DEFAULT = { "ibcdefg", "xxxxxfg" },
             FF3 = { },
-            FF3_6 = { },
-            FF = { "ibcdefg", "xxxxxfg" })
+            FF3_6 = { })
     public void testReplaceOnTextData() throws Exception {
         final String html =
               "<html>\n"
@@ -497,11 +496,12 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
             + "      var request;\n"
-            + "      function testAsync() {\n"
-            + "        if (window.XMLHttpRequest)\n"
+            + "      function testReplace() {\n"
+            + "        if (window.XMLHttpRequest) {\n"
             + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
+            + "        } else if (window.ActiveXObject) {\n"
             + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        }\n"
             + "        request.onreadystatechange = onReadyStateChange;\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
@@ -521,7 +521,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
-            + "  <body onload='testAsync()'>\n"
+            + "  <body onload='testReplace()'>\n"
             + "  </body>\n"
             + "</html>";
 
@@ -1157,7 +1157,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "this == request", IE = "this == request")
+    @Alerts("this == request")
     public void thisValueInHandler() throws Exception {
         final String html =
               "<html>\n"

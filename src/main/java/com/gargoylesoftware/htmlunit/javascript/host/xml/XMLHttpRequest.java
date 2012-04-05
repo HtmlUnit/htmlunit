@@ -149,9 +149,10 @@ public class XMLHttpRequest extends SimpleScriptable {
     private void setState(final int state, Context context) {
         state_ = state;
 
-        //Firefox doesn't trigger onreadystatechange handler for sync requests
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_135);
-        if (stateChangeHandler_ != null && (ie || async_)) {
+        // Firefox doesn't trigger onreadystatechange handler for sync requests
+        final boolean noTriggerForSync = getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.XMLHTTPREQUEST_NO_ONREADYSTATECANGE_TRIGGERED_FOR_SYNC_REQUESTS);
+        if (stateChangeHandler_ != null && (!noTriggerForSync || async_)) {
             if (context == null) {
                 context = Context.getCurrentContext();
             }
@@ -189,7 +190,9 @@ public class XMLHttpRequest extends SimpleScriptable {
         }
 
         // Firefox has a separate onload handler, too.
-        if (!ie && loadHandler_ != null && state == STATE_COMPLETED) {
+        final boolean triggerOnload = getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.XMLHTTPREQUEST_TRIGGER_ONLOAD_ON_COMPLETED);
+        if (triggerOnload && loadHandler_ != null && state == STATE_COMPLETED) {
             if (context == null) {
                 context = Context.getCurrentContext();
             }
