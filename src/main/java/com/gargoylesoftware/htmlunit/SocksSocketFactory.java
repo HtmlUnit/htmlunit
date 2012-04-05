@@ -32,6 +32,7 @@ import org.apache.http.params.HttpParams;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 class SocksSocketFactory implements SchemeSocketFactory {
 
@@ -62,10 +63,6 @@ class SocksSocketFactory implements SchemeSocketFactory {
             final InetSocketAddress localAddress,
             final HttpParams params) throws IOException, UnknownHostException, ConnectTimeoutException {
 
-        final String host = remoteAddress.getHostName();
-        if (host == null) {
-            throw new IllegalArgumentException("Target host may not be null.");
-        }
         if (params == null) {
             throw new IllegalArgumentException("Parameters may not be null.");
         }
