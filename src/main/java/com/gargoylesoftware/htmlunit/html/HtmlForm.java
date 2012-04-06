@@ -134,7 +134,7 @@ public class HtmlForm extends HtmlElement {
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
         final String action = getActionAttribute();
-        final boolean isHashJump = HttpMethod.GET.equals(request.getHttpMethod()) && action.endsWith("#");
+        final boolean isHashJump = HttpMethod.GET == request.getHttpMethod() && action.endsWith("#");
         webClient.download(webWindow, target, request, isHashJump, "JS form.submit()");
         return htmlPage;
     }

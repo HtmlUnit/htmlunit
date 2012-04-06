@@ -1038,7 +1038,8 @@ public class WebClient implements Serializable {
 
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         final WebRequest request = new WebRequest(url);
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.DIALOGWINDOW_REFERER)) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.DIALOGWINDOW_REFERER)
+                && openerPage != null) {
             final String referer = openerPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
             request.setAdditionalHeader("Referer", referer);
         }
@@ -1489,7 +1490,7 @@ public class WebClient implements Serializable {
                     + webResponse.getWebRequest().getUrl(), webResponse);
             }
             else if ((status == HttpStatus.SC_MOVED_PERMANENTLY || status == HttpStatus.SC_TEMPORARY_REDIRECT)
-                && method.equals(HttpMethod.GET)) {
+                && method == HttpMethod.GET) {
                 final WebRequest wrs = new WebRequest(newUrl);
                 wrs.setRequestParameters(parameters);
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
@@ -2100,7 +2101,7 @@ public class WebClient implements Serializable {
         final URL url = request.getUrl();
         boolean justHashJump = isHashJump;
 
-        if (win != null && (HttpMethod.POST != request.getHttpMethod())) {
+        if (win != null && HttpMethod.POST != request.getHttpMethod()) {
             final Page page = win.getEnclosedPage();
             if (page instanceof HtmlPage && !((HtmlPage) page).isOnbeforeunloadAccepted()) {
                 return;
