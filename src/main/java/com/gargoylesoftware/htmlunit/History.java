@@ -178,11 +178,11 @@ public class History implements Serializable {
      */
     private void goToUrlAtCurrentIndex() throws IOException {
         final URL url = UrlUtils.toUrlSafe(urls_.get(index_));
-        final WebRequest wrs = new WebRequest(url);
+        final WebRequest request = new WebRequest(url);
         final Boolean old = ignoreNewPages_.get();
         try {
             ignoreNewPages_.set(Boolean.TRUE);
-            window_.getWebClient().getPage(window_, wrs);
+            window_.getWebClient().getPage(window_, request);
         }
         finally {
             ignoreNewPages_.set(old);
