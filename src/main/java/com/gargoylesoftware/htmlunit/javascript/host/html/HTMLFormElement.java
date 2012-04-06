@@ -280,7 +280,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
             // download should be done ASAP, response will be loaded into a window later
             final WebRequest request = getHtmlForm().getWebRequest(null);
             final String target = page.getResolvedTarget(jsxGet_target());
-            final boolean isHashJump = HttpMethod.GET.equals(request.getHttpMethod()) && action.endsWith("#");
+            final boolean isHashJump = HttpMethod.GET == request.getHttpMethod() && action.endsWith("#");
             webClient.download(page.getEnclosingWindow(), target, request,
                     isHashJump, "JS form.submit()");
         }
