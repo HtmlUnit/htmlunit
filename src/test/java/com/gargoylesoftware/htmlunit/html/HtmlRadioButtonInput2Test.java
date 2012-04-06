@@ -107,7 +107,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "foo,change,")
+    @Alerts(FF3 = "foo,change,", FF3_6 = "foo,change,")
     public void onchangeFires() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
