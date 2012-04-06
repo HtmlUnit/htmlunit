@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.xml;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -111,7 +112,9 @@ public final class XmlUtil {
 
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
-        final InputSource source = new InputSource(new StringReader(webResponse.getContentAsString()));
+        final InputStreamReader reader = new InputStreamReader(webResponse.getContentAsStream(),
+                webResponse.getContentCharset());
+        final InputSource source = new InputSource(reader);
         final DocumentBuilder builder = factory.newDocumentBuilder();
         builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);
         builder.setEntityResolver(new EntityResolver() {
