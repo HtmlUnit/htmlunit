@@ -206,9 +206,6 @@ public enum BrowserVersionFeatures {
     GENERATED_133,
 
     /** Was originally .isIE(). */
-    GENERATED_136,
-
-    /** Was originally .isIE(). */
     GENERATED_138,
 
     /** Was originally .isIE(). */
@@ -848,6 +845,9 @@ public enum BrowserVersionFeatures {
 
     /** */
     WINDOW_ACTIVE_ELEMENT_FOCUSED,
+
+    /** XMLHttpRequest does not trigger the error handler (IE). */
+    XMLHTTPREQUEST_ERRORHANDLER_NOT_SUPPORTED,
 
     /** Indicates that 'this' corresponds to the handler function when a XMLHttpRequest handler is executed. */
     XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION,

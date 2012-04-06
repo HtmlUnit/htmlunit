@@ -240,7 +240,8 @@ public class XMLHttpRequest extends SimpleScriptable {
      *                if <tt>null</tt>, the current thread's context is used.
      */
     private void processError(Context context) {
-        if (errorHandler_ != null && !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_136)) {
+        if (errorHandler_ != null && !getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.XMLHTTPREQUEST_ERRORHANDLER_NOT_SUPPORTED)) {
             if (context == null) {
                 context = Context.getCurrentContext();
             }
