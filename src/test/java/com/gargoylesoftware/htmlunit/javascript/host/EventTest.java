@@ -654,8 +654,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
-    @Alerts(FF = "undefined", IE = "null")
+    @NotYetImplemented({ Browser.FF3, Browser.FF3_6 })
+    @Alerts(DEFAULT = "null", FF3 = "undefined", FF3_6 = "undefined")
     public void testNullEventHandler() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
