@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.3.
+            </action>
             <action type="fix" dev="rbri" due-to="Gareth Doutch">
                 Fix a possible performance problem caused by a code fragment
                 no longer needed after the update to HttpClient 4.1.
