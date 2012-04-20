@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3496236" due-to="James Phillpotts">
+                Fixed cookie threading issue.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.3.
             </action>

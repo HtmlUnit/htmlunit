@@ -23,9 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.http.Header;
-import org.apache.http.client.CookieStore;
 import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.message.BasicHeader;
 import org.junit.Test;
@@ -73,62 +71,36 @@ public class CookieManagerTest extends WebDriverTestCase {
         mgr.addCookie(cookie);
         assertFalse(mgr.getCookies().isEmpty());
 
-        // Update an HTTP state.
-        final CookieStore state = new BasicCookieStore();
-        mgr.updateState(state);
-        assertEquals(1, state.getCookies().size());
-
         // Remove the cookie from the manager.
         mgr.removeCookie(cookie);
         assertTrue(mgr.getCookies().isEmpty());
-
-        // Update an HTTP state after removing the cookie.
-        mgr.updateState(state);
-        assertEquals(0, state.getCookies().size());
 
         // Add the cookie back to the manager.
         mgr.addCookie(cookie);
         assertFalse(mgr.getCookies().isEmpty());
 
-        // Update an HTTP state after adding the cookie back to the manager.
-        mgr.updateState(state);
-        assertEquals(1, state.getCookies().size());
-
         // Clear all cookies from the manager.
         mgr.clearCookies();
         assertTrue(mgr.getCookies().isEmpty());
-
-        // Update an HTTP state after clearing all cookies from the manager.
-        mgr.updateState(state);
-        assertEquals(0, state.getCookies().size());
 
         // Disable cookies.
         mgr.setCookiesEnabled(false);
         assertFalse(mgr.isCookiesEnabled());
 
+        final Cookie cookie2 = new Cookie("a", "b", "c", "d", new Date(System.currentTimeMillis() + 5000), false);
+
         // Add a cookie after disabling cookies.
         mgr.addCookie(cookie);
-        assertFalse(mgr.getCookies().isEmpty());
-
-        // Update an HTTP state after adding a cookie while cookies are disabled.
-        mgr.updateState(state);
-        assertEquals(0, state.getCookies().size());
+        mgr.addCookie(cookie2);
+        assertEquals(2, mgr.getCookies().size());
 
         // Enable cookies again.
         mgr.setCookiesEnabled(true);
         assertTrue(mgr.isCookiesEnabled());
 
-        // Update an HTTP state after enabling cookies again.
-        mgr.updateState(state);
-        assertEquals(1, state.getCookies().size());
-
-        // Update the manager with a new state.
-        final Cookie cookie2 = new Cookie("x", "y");
-        final CookieStore state2 = new BasicCookieStore();
-        state2.addCookie(cookie2.toHttpClient());
-        mgr.updateFromState(state2);
+        // Clear expired cookies
+        assertTrue(mgr.clearExpired(new Date(System.currentTimeMillis() + 10000)));
         assertEquals(1, mgr.getCookies().size());
-        assertEquals(cookie2, mgr.getCookies().iterator().next());
     }
 
     /**

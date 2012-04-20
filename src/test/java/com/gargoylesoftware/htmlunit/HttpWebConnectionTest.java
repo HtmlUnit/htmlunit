@@ -28,6 +28,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
@@ -256,6 +259,23 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     }
 
     /**
+     * Test that the HttpClient is reinitialised after being shutdown.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void reinitialiseAfterShutdown() throws Exception {
+        startWebServer("./");
+
+        final WebClient webClient = getWebClient();
+        final HttpWebConnection webConnection = new HttpWebConnection(webClient);
+
+        webClient.setWebConnection(webConnection);
+        webClient.getPage("http://localhost:" + PORT + "/LICENSE.txt");
+        webConnection.shutdown();
+        webClient.getPage("http://localhost:" + PORT + "/pom.xml");
+    }
+
+    /**
      * Test that the right file part is built for a file that doesn't exist.
      * @throws Exception if the test fails
      */
@@ -297,8 +317,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
+        assertEquals(0, client.getCookieManager().getCookies().size());
         client.getPage("http://localhost:" + PORT + "/test");
         assertEquals(expectedAlerts, collectedAlerts);
+        assertEquals(1, client.getCookieManager().getCookies().size());
     }
 
     /**
@@ -320,6 +342,14 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 + "</head>\n"
                 + "<body onload='test()'></body>\n"
                 + "</html>");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest request,
+                final HttpServletResponse response)
+            throws ServletException, IOException {
+            request.getSession().setAttribute("trigger", "session");
+            super.doGet(request, response);
         }
     }
 }

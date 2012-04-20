@@ -31,7 +31,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -73,7 +72,6 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieAttributeHandler;
-import org.apache.http.cookie.CookieIdentityComparator;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookiePathComparator;
 import org.apache.http.cookie.CookieSpec;
@@ -147,7 +145,6 @@ public class HttpWebConnection implements WebConnection {
     public WebResponse getResponse(final WebRequest request) throws IOException {
         final URL url = request.getUrl();
         final AbstractHttpClient httpClient = getHttpClient();
-        webClient_.getCookieManager().updateState(httpClient.getCookieStore());
 
         HttpUriRequest httpMethod = null;
         try {
@@ -184,7 +181,6 @@ public class HttpWebConnection implements WebConnection {
 
             final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
             final long endTime = System.currentTimeMillis();
-            webClient_.getCookieManager().updateFromState(httpClient.getCookieStore());
             return makeWebResponse(httpResponse, request, downloadedBody, endTime - startTime);
         }
         finally {
@@ -533,7 +529,7 @@ public class HttpWebConnection implements WebConnection {
             new ThreadSafeClientConnManager(schemeRegistry);
 
         final DefaultHttpClient httpClient = new DefaultHttpClient(connectionManager, httpsParams);
-        httpClient.setCookieStore(new HtmlUnitCookieStore());
+        httpClient.setCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
 
         httpClient.setRedirectStrategy(new DefaultRedirectStrategy() {
             public boolean isRedirected(final HttpRequest request, final HttpResponse response,
@@ -790,69 +786,42 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
  * @version $Revision$
  */
 class HtmlUnitCookieStore implements CookieStore, Serializable {
-    private final List<Cookie> cookies_ = new ArrayList<Cookie>();
-    private final CookieIdentityComparator comparator_ = new CookieIdentityComparator();
+    private CookieManager manager_;
+
+    HtmlUnitCookieStore(final CookieManager manager) {
+        manager_ = manager;
+    }
 
     /**
      * {@inheritDoc}
      */
     public synchronized void addCookie(final Cookie cookie) {
-        if (cookie == null) {
-            return;
-        }
-
-        final int index = findCookieIndex(cookie);
-        if (cookie.isExpired(new Date())) {
-            if (index != -1) {
-                cookies_.remove(index);
-            }
-        }
-        else if (index == -1) {
-            cookies_.add(cookie);
-        }
-        else {
-            cookies_.set(index, cookie); // replace by new version (equals doesn't test all fields)
-        }
-    }
-
-    private int findCookieIndex(final Cookie cookie) {
-        for (int i = 0; i < cookies_.size(); ++i) {
-            final Cookie curCookie = cookies_.get(i);
-            if (comparator_.compare(cookie, curCookie) == 0) {
-                return i;
-            }
-        }
-        return -1;
+        manager_.addCookie(new com.gargoylesoftware.htmlunit.util.Cookie(cookie));
     }
 
     /**
      * {@inheritDoc}
      */
     public synchronized List<Cookie> getCookies() {
-        return new ArrayList<Cookie>(cookies_);
+        if (manager_.isCookiesEnabled()) {
+            return Arrays.asList(com.gargoylesoftware.htmlunit.util.Cookie.toHttpClient(manager_.getCookies()));
+        }
+        else {
+            return Collections.<Cookie>emptyList();
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public synchronized boolean clearExpired(final Date date) {
-        if (date == null) {
-            return false;
-        }
-        boolean removed = false;
-        for (final Iterator<Cookie> it = cookies_.iterator(); it.hasNext();) {
-            if (it.next().isExpired(date)) {
-                it.remove();
-                removed = true;
-            }
-        }
-        return removed;
+        return manager_.clearExpired(date);
     }
 
     /**
      * {@inheritDoc}
      */
     public synchronized void clear() {
-        cookies_.clear();
+        manager_.clearCookies();
     }
 }

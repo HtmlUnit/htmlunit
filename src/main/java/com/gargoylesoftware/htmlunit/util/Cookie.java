@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.http.cookie.ClientCookie;
 
 /**
  * A cookie. This class is immutable.
@@ -111,6 +111,15 @@ public class Cookie implements Serializable {
         expires_ = expires;
         secure_ = secure;
         httponly_ = httpOnly;
+    }
+
+    /**
+     * Creates a new HtmlUnit cookie from the HttpClient cookie provided.
+     * @param c the HttpClient cookie
+     */
+    public Cookie(final org.apache.http.cookie.Cookie c) {
+        this(c.getDomain(), c.getName(), c.getValue(), c.getPath(), c.getExpiryDate(),
+                c.isSecure(), ((ClientCookie) c).getAttribute("httponly") != null);
     }
 
     /**
@@ -275,11 +284,7 @@ public class Cookie implements Serializable {
     public static List< Cookie > fromHttpClient(final List< org.apache.http.cookie.Cookie > cookies) {
         final List< Cookie > list = new ArrayList< Cookie >(cookies.size());
         for (org.apache.http.cookie.Cookie c : cookies) {
-            final boolean httpOnly = ((BasicClientCookie) c).getAttribute("httponly") != null;
-            final Cookie cookie =
-                new Cookie(c.getDomain(), c.getName(), c.getValue(), c.getPath(), c.getExpiryDate(),
-                    c.isSecure(), httpOnly);
-            list.add(cookie);
+            list.add(new Cookie(c));
         }
         return list;
     }

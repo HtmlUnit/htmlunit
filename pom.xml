@@ -670,6 +670,9 @@
         <contributor>
             <name>Daniel Wagner-Hall</name>
         </contributor>
+        <contributor>
+            <name>James Phillpotts</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

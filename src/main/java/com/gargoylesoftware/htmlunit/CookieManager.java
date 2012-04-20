@@ -26,7 +26,6 @@ import java.util.Set;
 
 import org.apache.commons.collections.set.ListOrderedSet;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.client.CookieStore;
 import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
@@ -113,13 +112,7 @@ public class CookieManager implements Serializable {
         final int port = getPort(url);
 
         // discard expired cookies
-        final Date now = new Date();
-        for (final Iterator<Cookie> iter = cookies_.iterator(); iter.hasNext();) {
-            final Cookie cookie = iter.next();
-            if (cookie.getExpires() != null && now.after(cookie.getExpires())) {
-                iter.remove();
-            }
-        }
+        clearExpired(new Date());
 
         final CookieSpec spec = registry_.getCookieSpec(HTMLUNIT_COOKIE_POLICY);
         final org.apache.http.cookie.Cookie[] all = Cookie.toHttpClient(cookies_);
@@ -134,6 +127,27 @@ public class CookieManager implements Serializable {
         final Set<Cookie> cookies = new LinkedHashSet<Cookie>();
         cookies.addAll(Cookie.fromHttpClient(matches));
         return Collections.unmodifiableSet(cookies);
+    }
+
+    /**
+     * Clears all cookies that have expired before supplied date.
+     * @param date the date to use for comparison when clearing expired cookies
+     * @return whether any cookies were found expired, and were cleared
+     */
+    public synchronized boolean clearExpired(final Date date) {
+        if (date == null) {
+            return false;
+        }
+
+        boolean foundExpired = false;
+        for (final Iterator<Cookie> iter = cookies_.iterator(); iter.hasNext();) {
+            final Cookie cookie = iter.next();
+            if (cookie.getExpires() != null && date.after(cookie.getExpires())) {
+                iter.remove();
+                foundExpired = true;
+            }
+        }
+        return foundExpired;
     }
 
     /**
@@ -191,34 +205,6 @@ public class CookieManager implements Serializable {
      */
     public synchronized void clearCookies() {
         cookies_.clear();
-    }
-
-    /**
-     * Updates the specified HTTP state's cookie configuration according to the current cookie settings.
-     * @param state the HTTP state to update
-     * @see #updateFromState(CookieStore)
-     */
-    protected synchronized void updateState(final CookieStore state) {
-        if (!cookiesEnabled_) {
-            return;
-        }
-        state.clear();
-        for (Cookie cookie : cookies_) {
-            state.addCookie(cookie.toHttpClient());
-        }
-    }
-
-    /**
-     * Updates the current cookie settings from the specified HTTP state's cookie configuration.
-     * @param state the HTTP state to update from
-     * @see #updateState(CookieStore)
-     */
-    protected synchronized void updateFromState(final CookieStore state) {
-        if (!cookiesEnabled_) {
-            return;
-        }
-        cookies_.clear();
-        cookies_.addAll(Cookie.fromHttpClient(state.getCookies()));
     }
 
 }
