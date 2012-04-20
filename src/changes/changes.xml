@@ -9,9 +9,6 @@
             <action type="fix" dev="mguillem" issue="3496236" due-to="James Phillpotts">
                 Fixed cookie threading issue.
             </action>
-            <action type="update" dev="rbri">
-                Upgrade Apache commons-io to 2.3.
-            </action>
             <action type="fix" dev="rbri" due-to="Gareth Doutch">
                 Fix a possible performance problem caused by a code fragment
                 no longer needed after the update to HttpClient 4.1.
