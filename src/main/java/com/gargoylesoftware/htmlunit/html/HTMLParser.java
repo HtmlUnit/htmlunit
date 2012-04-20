@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Marc Guillemot
  * @author Ethan Glasser-Camp
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 public final class HTMLParser {
 
@@ -176,7 +177,7 @@ public final class HTMLParser {
      */
     public static HtmlPage parseHtml(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         final HtmlPage page = new HtmlPage(webResponse.getWebRequest().getUrl(), webResponse, webWindow);
-        parse(webResponse, webWindow, page);
+        parse(webResponse, webWindow, page, false);
         return page;
     }
 
@@ -190,11 +191,12 @@ public final class HTMLParser {
      */
     public static XHtmlPage parseXHtml(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         final XHtmlPage page = new XHtmlPage(webResponse.getWebRequest().getUrl(), webResponse, webWindow);
-        parse(webResponse, webWindow, page);
+        parse(webResponse, webWindow, page, true);
         return page;
     }
 
-    private static void parse(final WebResponse webResponse, final WebWindow webWindow, final HtmlPage page)
+    private static void parse(final WebResponse webResponse, final WebWindow webWindow, final HtmlPage page,
+            final boolean xhtml)
         throws IOException {
 
         webWindow.setEnclosedPage(page);
@@ -205,6 +207,11 @@ public final class HTMLParser {
         if (charset != null) {
             try {
                 domBuilder.setFeature(HTMLScanner.IGNORE_SPECIFIED_CHARSET, true);
+                if (xhtml) {
+                    domBuilder.setFeature(
+                        "http://cyberneko.org/html/features/balance-tags/allow-selfclosing-tags",
+                        true);
+                }
             }
             catch (final Exception e) {
                 throw new ObjectInstantiationException("Error setting HTML parser feature", e);

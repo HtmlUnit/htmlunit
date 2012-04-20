@@ -21,7 +21,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -40,7 +39,6 @@ public class XHtmlPage2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    @NotYetImplemented
     public void selfClosingDiv() throws Exception {
         final String html
             = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
