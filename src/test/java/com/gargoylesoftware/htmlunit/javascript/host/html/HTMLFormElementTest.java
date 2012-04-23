@@ -31,6 +31,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -1691,6 +1692,26 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "  alert(document.form1['b']);\n"
             + "  alert(document.form1.elements['b']);\n"
             + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "function", IE = "string")
+    @NotYetImplemented(Browser.FF)
+    public void onchangeHandler() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + " var form = document.getElementsByTagName('form')[0];\n"
+            + " alert(typeof form.onchange);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form onchange='cat=true'></form>"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
