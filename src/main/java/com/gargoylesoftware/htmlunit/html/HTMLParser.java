@@ -208,9 +208,7 @@ public final class HTMLParser {
             try {
                 domBuilder.setFeature(HTMLScanner.IGNORE_SPECIFIED_CHARSET, true);
                 if (xhtml) {
-                    domBuilder.setFeature(
-                        "http://cyberneko.org/html/features/balance-tags/allow-selfclosing-tags",
-                        true);
+                    domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);
                 }
             }
             catch (final Exception e) {
