@@ -889,6 +889,19 @@
             <releases>
                 <enabled>false</enabled>
             </releases>
+            <id>SonatypeSnapshots</id>
+            <name>Sonatype Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
             <id>NekoHTMLSnapshots</id>
             <name>NekoHTML Snapshots</name>
             <url>http://build.canoo.com/NekoHTML/artifacts/m2-repo</url>
