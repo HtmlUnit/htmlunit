@@ -35,7 +35,7 @@ public class CommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object]", FF = "[object Comment]")
+    @Alerts(IE = "[object]", DEFAULT = "[object Comment]")
     public void simpleScriptable() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -50,7 +50,7 @@ public class CommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "after", "comment" },
+    @Alerts(DEFAULT = { "after", "comment" },
             IE = { "undefined", "undefined" })
     public void textContent() throws Exception {
         final String html
@@ -69,6 +69,7 @@ public class CommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "undefined", "undefined" },
+            CHROME = { "after", "undefined" },
             IE = { "after", "" })
     public void innerText() throws Exception {
         final String html
