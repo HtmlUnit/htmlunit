@@ -19,6 +19,7 @@ import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -366,6 +367,12 @@ public class HTMLAnchorElement extends HTMLElement {
         }
 
         href = href.trim();
+
+        final SgmlPage sgmlPage = element.getPage();
+        if (!(sgmlPage instanceof HtmlPage)) {
+            return href;
+        }
+
         final int indexAnchor = href.indexOf('#');
         final String beforeAnchor;
         final String anchorPart;
@@ -379,8 +386,9 @@ public class HTMLAnchorElement extends HTMLElement {
         }
 
         try {
+            final HtmlPage htmlPage = (HtmlPage) sgmlPage;
             final String response =
-                ((HtmlPage) element.getPage()).getFullyQualifiedUrl(beforeAnchor).toExternalForm() + anchorPart;
+                htmlPage.getFullyQualifiedUrl(beforeAnchor).toExternalForm() + anchorPart;
             return response;
         }
         catch (final MalformedURLException e) {
