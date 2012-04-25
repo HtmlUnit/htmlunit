@@ -3229,6 +3229,7 @@
         jsConstructor="jsConstructor" JSObject="true">
         <doclink url="http://developer.apple.com/internet/webcontent/xmlhttpreq.html" descr="Safari documentation"/>
         <browser name="Firefox"/>
+        <browser name="Chrome"/>
         <browser name="Internet Explorer" min-version="7"/>
         <property name="onerror" readable="true" writable="true"/>
         <property name="onload" readable="true" writable="true">

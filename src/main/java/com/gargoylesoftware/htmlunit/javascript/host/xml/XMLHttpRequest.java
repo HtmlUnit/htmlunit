@@ -149,10 +149,13 @@ public class XMLHttpRequest extends SimpleScriptable {
     private void setState(final int state, Context context) {
         state_ = state;
 
-        // Firefox doesn't trigger onreadystatechange handler for sync requests
+        // Firefox doesn't trigger onreadystatechange handler for sync requests except for completed for FF10
         final boolean noTriggerForSync = getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.XMLHTTPREQUEST_NO_ONREADYSTATECANGE_TRIGGERED_FOR_SYNC_REQUESTS);
-        if (stateChangeHandler_ != null && (!noTriggerForSync || async_)) {
+                BrowserVersionFeatures.XMLHTTPREQUEST_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED);
+        final boolean triggerForSyncCompleted = (state == STATE_COMPLETED)
+            && getBrowserVersion().hasFeature(
+                        BrowserVersionFeatures.XMLHTTPREQUEST_ONREADYSTATECANGE_SYNC_REQUESTS_TRIGGER_COMPLETED);
+        if (stateChangeHandler_ != null && (async_ || !noTriggerForSync || triggerForSyncCompleted)) {
             if (context == null) {
                 context = Context.getCurrentContext();
             }
@@ -446,10 +449,15 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     private boolean isSameOrigin(final URL originUrl, final URL newUrl) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_138)
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.XMLHTTPREQUEST_IGNORE_SAME_ORIGIN)) {
+            return true;
+        }
+
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.XMLHTTPREQUEST_IGNORE_SAME_ORIGIN_TO_ABOUT)
                 && "about".equals(newUrl.getProtocol())) {
             return true;
         }
+
         return originUrl.getHost().equals(newUrl.getHost());
     }
 

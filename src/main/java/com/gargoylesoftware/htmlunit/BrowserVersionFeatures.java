@@ -206,9 +206,6 @@ public enum BrowserVersionFeatures {
     GENERATED_133,
 
     /** Was originally .isIE(). */
-    GENERATED_138,
-
-    /** Was originally .isIE(). */
     GENERATED_142,
 
     /** Was originally .isIE(). */
@@ -852,8 +849,17 @@ public enum BrowserVersionFeatures {
     /** Indicates that 'this' corresponds to the handler function when a XMLHttpRequest handler is executed. */
     XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION,
 
+    /** Indicates if a same origin check should be skipped. */
+    XMLHTTPREQUEST_IGNORE_SAME_ORIGIN,
+
+    /** Indicates if a request to a about URL is allowed. */
+    XMLHTTPREQUEST_IGNORE_SAME_ORIGIN_TO_ABOUT,
+
     /** Indicates that the onreadystatechange handler is not triggered for sync requests. */
-    XMLHTTPREQUEST_NO_ONREADYSTATECANGE_TRIGGERED_FOR_SYNC_REQUESTS,
+    XMLHTTPREQUEST_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED,
+
+    /** Indicates that the onreadystatechange handler is triggered for sync requests for COMPLETED (4). */
+    XMLHTTPREQUEST_ONREADYSTATECANGE_SYNC_REQUESTS_TRIGGER_COMPLETED,
 
     /** Indicates that the onload handler is not triggered if completed (FF). */
     XMLHTTPREQUEST_TRIGGER_ONLOAD_ON_COMPLETED,

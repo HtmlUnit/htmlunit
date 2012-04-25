@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: don't restrict XMLHttpRequest to same origin for FF 3.6 and upper.
+            </action>
             <action type="update" dev="asashour">
                 Upgrade CSS Parser to 0.9.7.
             </action>
