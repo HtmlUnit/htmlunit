@@ -32,7 +32,9 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
 
@@ -175,7 +177,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "exception", "exception", "pass", "pass" },
-            FF10 = { "pass", "pass", "pass", "pass" })
+            FF10 = { "pass", "pass", "pass", "pass" },
+            CHROME = { "pass", "pass", "pass", "pass" })
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -193,7 +196,14 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "<body></body>\n</html>";
 
         loadPageWithAlerts2(html);
-        assertEquals(3, getMockWebConnection().getRequestCount());
+        final int expectedRequests;
+        if (getBrowserVersion().isChrome() || BrowserVersion.FIREFOX_10 == getBrowserVersion()) {
+            expectedRequests = 5;
+        }
+        else {
+            expectedRequests = 3;
+        }
+        assertEquals(expectedRequests, getMockWebConnection().getRequestCount());
     }
 
     /**
@@ -290,7 +300,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", FF10 = "ok")
+    @Alerts(DEFAULT = "ok", FF3 = "exception", IE = "exception")
     public void sameOriginPolicy() throws Exception {
         sameOriginPolicy(URL_THIRD.toString());
     }
@@ -299,10 +309,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "exception",
-            FF3_6 = "exception",
-            FF = "ok",
-            IE = "ok")
+    @Alerts(DEFAULT = "ok", FF3 = "exception")
     public void sameOriginPolicy_aboutBlank() throws Exception {
         sameOriginPolicy("about:blank");
     }
@@ -352,12 +359,12 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "[object XMLDocument]", IE = "[object]")
+    @Alerts(FF = "[object XMLDocument]", IE = "[object]", CHROME = "[object Document]")
     public void iframeInResponse() throws Exception {
         final String html = "<html><head><script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"
             + "xhr.open('GET', 'foo.xml', false);\n"
-            + "xhr.send();\n"
+            + "xhr.send('');\n"
             + "alert(xhr.responseXML);\n"
             + "</script></head><body></body></html>";
 
@@ -399,7 +406,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "hello", "in timeout" })
+    @Alerts(DEFAULT = { "hello", "in timeout" }, FF3 = { "in timeout", "hello" })
+    @NotYetImplemented(Browser.FF3)
     public void xhrCallbackBeforeTimeout() throws Exception {
         final String html = "<html><head><script>\n"
             + "function wait() {\n"
@@ -463,11 +471,11 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     }
 
     /**
-     * Firefox up to 3.6 does not call onreadystatechange handler if sync.
+     * Firefox up to 3.6 does not call "onreadystatechange" handler if sync.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "2", "3", "4" })
+    @Alerts(IE = { "1", "2", "3", "4" }, FF10 = "4", CHROME = "4")
     public void testOnreadystatechange_sync() throws Exception {
         final String html =
               "<html>\n"
