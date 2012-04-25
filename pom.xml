@@ -743,7 +743,7 @@
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>
             <artifactId>cssparser</artifactId>
-            <version>0.9.7-SNAPSHOT</version>
+            <version>0.9.7</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -879,19 +879,6 @@
             <id>HtmlUnitSnapshots</id>
             <name>HtmlUnit Snapshots</name>
             <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <id>SonatypeSnapshots</id>
-            <name>Sonatype Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
             <layout>default</layout>
         </repository>
         <repository>

@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                Upgrade CSS Parser to 0.9.7.
+            </action>
             <action type="fix" dev="rbri">
                 Fix missing support for different handling of self closing tags
                 in HTML and XHTML.
