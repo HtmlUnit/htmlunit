@@ -124,7 +124,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object]", IE6 = "activeX created", FF = "[object XMLHttpRequest]")
+    @Alerts(IE = "[object]", IE6 = "activeX created", DEFAULT = "[object XMLHttpRequest]")
     public void creation() throws Exception {
         final String html =
             "<html>\n"
@@ -452,12 +452,12 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
-    @Alerts({ "true", "false" })
+    @Alerts(DEFAULT = { "true", "false" }, IE = { "true", "exception" }, IE6 = "exception")
     public void testOverrideMimeType() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
+            + "try {\n"
             + "  var request = new XMLHttpRequest();\n"
             + "  request.open('GET', 'foo.xml.txt', false);\n"
             + "  request.send('');\n"
@@ -466,6 +466,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  request.open('GET', 'foo.xml.txt', false);\n"
             + "  request.send('');\n"
             + "  alert(request.responseXML == null);\n"
+            + "} catch (e) { alert('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -900,6 +901,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "[object Element]", "[object Element]", "[object HTMLBodyElement]",
             "[object HTMLSpanElement]", "[object XMLDocument]", "undefined" },
+            CHROME = { "[object Element]", "[object Element]", "[object HTMLBodyElement]",
+                    "[object HTMLSpanElement]", "[object Document]", "undefined" },
             IE = { "[object]", "[object]", "[object]",
             "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>" })
     public void testResponseXML_getElementById() throws Exception {
@@ -1040,8 +1043,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
-    @Alerts("myID")
+    @Alerts(DEFAULT = "myID", IE = "exception")
     public void responseXML_html_select() throws Exception {
         final String html =
               "<html>\n"
@@ -1049,6 +1051,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
             + "      function test() {\n"
+            + "        try {\n"
             + "        var request;\n"
             + "        if (window.XMLHttpRequest)\n"
             + "          request = new XMLHttpRequest();\n"
@@ -1057,6 +1060,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
             + "        alert(request.responseXML.getElementById('myID').id);\n"
+            + "        } catch (e) { alert('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1081,8 +1085,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
-    @Alerts("myInput")
+    @Alerts(DEFAULT = "myInput", IE = "exception")
     public void responseXML_html_form() throws Exception {
         final String html =
               "<html>\n"
@@ -1090,6 +1093,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
             + "      function test() {\n"
+            + "        try {\n"
             + "        var request;\n"
             + "        if (window.XMLHttpRequest)\n"
             + "          request = new XMLHttpRequest();\n"
@@ -1098,6 +1102,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        request.send('');\n"
             + "        alert(request.responseXML.getElementById('myID').myInput.name);\n"
+            + "        } catch (e) { alert('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1139,13 +1144,14 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.IE7, Browser.IE8, Browser.FF })
-    @Alerts("undefined")
+    @Alerts(IE6 = "exception", DEFAULT = "undefined")
     public void caseSensitivity_XMLHttpRequest() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
+            + "try {\n"
             + "  var req = new XMLHttpRequest();\n"
             + "  alert(req.reAdYsTaTe);\n"
+            + "} catch (e) { alert('exception'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
