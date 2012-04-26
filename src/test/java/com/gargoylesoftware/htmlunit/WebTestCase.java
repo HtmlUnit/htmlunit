@@ -71,6 +71,12 @@ public abstract class WebTestCase {
     /** The listener port for the web server. */
     public static final int PORT = Integer.parseInt(System.getProperty("htmlunit.test.port", "12345"));
 
+    /** The second listener port for the web server, used for cross-origin tests. */
+    public static final int PORT2 = Integer.parseInt(System.getProperty("htmlunit.test.port2", "12346"));
+
+    /** The second listener port for the web server, used for cross-origin tests. */
+    public static final int PORT3 = Integer.parseInt(System.getProperty("htmlunit.test.port3", "12347"));
+
     /** Constant for the URL which is used in the tests. */
     public static final URL URL_FIRST;
 
@@ -82,6 +88,22 @@ public abstract class WebTestCase {
      * This URL doesn't use the same host name as {@link #URL_FIRST} and {@link #URL_SECOND}.
      **/
     public static final URL URL_THIRD;
+
+    /**
+     * Constant for a URL used in tests that responds with Access-Control-Allow-Origin.
+     */
+    public static final URL URL_CROSS_ORIGIN;
+
+    /**
+     * To get an origin header with two things in it, there needs to be a chain of two
+     * cross-origin referers. So we need a second extra origin.
+     */
+    public static final URL URL_CROSS_ORIGIN2;
+
+    /**
+     * Constant for the base URL for cross-origin tests.
+     */
+    public static final URL URL_CROSS_ORIGIN_BASE;
 
     /**
      * The content type for JavaScript.
@@ -117,6 +139,9 @@ public abstract class WebTestCase {
             URL_FIRST = new URL("http://localhost:" + PORT + "/");
             URL_SECOND = new URL("http://localhost:" + PORT + "/second/");
             URL_THIRD = new URL("http://127.0.0.1:" + PORT + "/third/");
+            URL_CROSS_ORIGIN = new URL("http://127.0.0.1:" + PORT2 + "/corsAllowAll");
+            URL_CROSS_ORIGIN2 = new URL("http://localhost:" + PORT3 + "/");
+            URL_CROSS_ORIGIN_BASE = new URL("http://localhost:" + PORT2 + "/");
         }
         catch (final MalformedURLException e) {
             // This is theoretically impossible.

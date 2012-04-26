@@ -109,12 +109,24 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
     private static Server STATIC_SERVER_;
+    // second server for cross-origin tests.
+    private static Server STATIC_SERVER2_;
+    // third server for multi-origin cross-origin tests.
+    private static Server STATIC_SERVER3_;
     private static ChromeDriverService CHROME_SERVICE_;
 
     private static String JSON_;
     private boolean useRealBrowser_;
     private boolean writeContentAsBytes_ = false;
     private static Boolean LAST_TEST_MockWebConnection_;
+
+    /**
+     * Override this function in a test class to ask for STATIC_SERVER2_ to be set up.
+     * @return true if two servers are needed.
+     */
+    protected boolean needThreeConnections() {
+        return false;
+    }
 
     static List<String> getBrowsersProperties() {
         if (BROWSERS_PROPERTIES_ == null) {
@@ -186,7 +198,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (STATIC_SERVER_ != null) {
             STATIC_SERVER_.stop();
         }
+        if (STATIC_SERVER2_ != null) {
+            STATIC_SERVER2_.stop();
+        }
+        if (STATIC_SERVER3_ != null) {
+            STATIC_SERVER3_.stop();
+        }
         STATIC_SERVER_ = null;
+        STATIC_SERVER2_ = null;
+        STATIC_SERVER3_ = null;
     }
 
     void setUseRealBrowser(final boolean useWebDriver) {
@@ -246,7 +266,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param mockConnection the sources for responses
      * @throws Exception if a problem occurs
      */
-    private void startWebServer(final MockWebConnection mockConnection) throws Exception {
+    protected void startWebServer(final MockWebConnection mockConnection) throws Exception {
         if (Boolean.FALSE.equals(LAST_TEST_MockWebConnection_)) {
             stopWebServer();
         }
@@ -280,6 +300,28 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         MockWebConnectionServlet.MockConnection_ = mockConnection;
         MockWebConnectionServlet.WriteContentAsBytes_ = writeContentAsBytes_;
+
+        if (STATIC_SERVER2_ == null && needThreeConnections()) {
+            STATIC_SERVER2_ = new Server(PORT2);
+            final WebAppContext context2 = new WebAppContext();
+            context2.setContextPath("/");
+            context2.setResourceBase("./");
+            context2.addServlet(MockWebConnectionServlet.class, "/*");
+            STATIC_SERVER2_.setHandler(context2);
+            STATIC_SERVER2_.start();
+
+            STATIC_SERVER3_ = new Server(PORT3);
+            final WebAppContext context3 = new WebAppContext();
+            context3.setContextPath("/");
+            context3.setResourceBase("./");
+            context3.addServlet(MockWebConnectionServlet.class, "/*");
+            STATIC_SERVER3_.setHandler(context3);
+            STATIC_SERVER3_.start();
+            /*
+             * The mock connection servlet call sit under both servers, so long as tests
+             * keep the URLs distinct.
+             */
+        }
     }
 
     /**
@@ -547,7 +589,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return driver;
     }
 
-    private void verifyAlerts(final long maxWaitTime, final String[] expectedAlerts, final WebDriver driver)
+    /**
+     * Verifies the captured alerts.
+     * @param maxWaitTime the maximum time to wait for the expected alert to be found
+     * @param expectedAlerts the expected alerts
+     * @param driver the driver instance
+     * @throws Exception in case of failure
+     */
+    protected void verifyAlerts(final long maxWaitTime, final String[] expectedAlerts, final WebDriver driver)
         throws Exception {
         // gets the collected alerts, waiting a bit if necessary
         List<String> actualAlerts = getCollectedAlerts(driver);

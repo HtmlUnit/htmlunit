@@ -17,7 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
@@ -37,6 +39,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Additional tests for {@link XMLHttpRequest} using already WebDriverTestCase.
@@ -509,5 +512,44 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test the simplest CORS case. A cross-origin simple request,
+     * server replies "allow *". FF3.6 succeeds because of its old weird cross-origin policy.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(FF3 = "exception", IE = "exception", DEFAULT = { "ok", "4" })
+    public void sameOriginCorsSimple() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var xhr = " + XHRInstantiation_ + ";\n"
+            + "  try {\n"
+            + "    xhr.open('GET', '" + URL_CROSS_ORIGIN + "', false);\n"
+            + "    alert('ok');\n"
+            + "    xhr.send();\n"
+            + "    alert(xhr.readyState)\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>();
+        responseHeaders.add(new NameValuePair("access-control-allow-origin", "*"));
+        getMockWebConnection().setResponse(URL_CROSS_ORIGIN,
+                                           "<empty/>",
+                                           200,
+                                           "OK",
+                                           "text/xml",
+                                           "utf-8", responseHeaders);
+        loadPageWithAlerts2(html);
+    }
+
+    @Override
+    protected boolean needThreeConnections() {
+        return true;
     }
 }
