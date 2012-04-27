@@ -17,10 +17,8 @@ package com.gargoylesoftware.htmlunit.xml;
 import java.io.IOException;
 import java.util.HashMap;
 
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
@@ -103,19 +101,14 @@ public class XmlPage extends SgmlPage {
         super(webResponse, enclosingWindow);
 
         try {
-            if (webResponse == null || StringUtils.isBlank(webResponse.getContentAsString())) {
-                node_ = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument().getDocumentElement();
+            try {
+                node_ = XmlUtil.buildDocument(webResponse).getDocumentElement();
             }
-            else {
-                try {
-                    node_ = XmlUtil.buildDocument(webResponse).getDocumentElement();
-                }
-                catch (final SAXException e) {
-                    LOG.warn("Failed parsing XML document " + webResponse.getWebRequest().getUrl()
-                            + ": " + e.getMessage());
-                    if (!ignoreSAXException) {
-                        throw new IOException(e.getMessage());
-                    }
+            catch (final SAXException e) {
+                LOG.warn("Failed parsing XML document " + webResponse.getWebRequest().getUrl()
+                        + ": " + e.getMessage());
+                if (!ignoreSAXException) {
+                    throw new IOException(e.getMessage());
                 }
             }
         }

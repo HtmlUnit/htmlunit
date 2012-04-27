@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.xml;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -111,10 +112,19 @@ public final class XmlUtil {
         throws IOException, SAXException, ParserConfigurationException {
 
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+        if (webResponse == null) {
+            return factory.newDocumentBuilder().newDocument();
+        }
+
         factory.setNamespaceAware(true);
         final InputStreamReader reader = new InputStreamReader(webResponse.getContentAsStream(),
                 webResponse.getContentCharset());
-        final InputSource source = new InputSource(reader);
+
+        // we have to do the blank input check and the parsing in one step
+        final TrackBlankContentReader tracker = new TrackBlankContentReader(reader);
+
+        final InputSource source = new InputSource(tracker);
         final DocumentBuilder builder = factory.newDocumentBuilder();
         builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);
         builder.setEntityResolver(new EntityResolver() {
@@ -123,7 +133,53 @@ public final class XmlUtil {
                 return new InputSource(new StringReader(""));
             }
         });
-        return builder.parse(source);
+        try {
+            return builder.parse(source);
+        }
+        catch (final SAXException e) {
+            if (tracker.wasBlank()) {
+                return factory.newDocumentBuilder().newDocument();
+            }
+            throw e;
+        }
+    }
+
+    /**
+     * Helper for memory and performance optimization.
+     */
+    private static final class TrackBlankContentReader extends Reader {
+        private Reader reader_;
+        private boolean wasBlank_ = true;
+
+        public TrackBlankContentReader(final Reader characterStream) {
+            reader_ = characterStream;
+        }
+
+        public boolean wasBlank() {
+            return wasBlank_;
+        }
+
+        @Override
+        public void close() throws IOException {
+            reader_.close();
+        }
+
+        @Override
+        public int read(final char[] cbuf, final int off, final int len) throws IOException {
+            final int result = reader_.read(cbuf, off, len);
+
+            if (wasBlank_ && result > -1) {
+                for (int i = 0; i < result; i++) {
+                    final char ch = cbuf[off + i];
+                    if (!Character.isWhitespace(ch)) {
+                        wasBlank_ = false;
+                        break;
+                    }
+
+                }
+            }
+            return result;
+        }
     }
 
     /**
