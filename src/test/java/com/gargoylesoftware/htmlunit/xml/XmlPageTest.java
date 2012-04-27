@@ -141,6 +141,58 @@ public class XmlPageTest extends WebServerTestCase {
     }
 
     /**
+     * Tests a simple empty XML document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void emptyDocument() throws Exception {
+        final WebClient client = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        final String content = "";
+
+        webConnection.setDefaultResponse(content, 200, "OK", "text/xml");
+        client.setWebConnection(webConnection);
+
+        final Page page = client.getPage(URL_FIRST);
+        assertEquals(URL_FIRST, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("OK", page.getWebResponse().getStatusMessage());
+        assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
+        assertEquals("text/xml", page.getWebResponse().getContentType());
+
+        assertTrue(Page.class.isInstance(page));
+        final XmlPage xmlPage = (XmlPage) page;
+        assertEquals(content, xmlPage.getContent());
+        assertNull(xmlPage.getXmlDocument());
+    }
+
+    /**
+     * Tests a simple empty XML document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void blankDocument() throws Exception {
+        final WebClient client = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        final String content = "\t  \n\r\n";
+
+        webConnection.setDefaultResponse(content, 200, "OK", "text/xml");
+        client.setWebConnection(webConnection);
+
+        final Page page = client.getPage(URL_FIRST);
+        assertEquals(URL_FIRST, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("OK", page.getWebResponse().getStatusMessage());
+        assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
+        assertEquals("text/xml", page.getWebResponse().getContentType());
+
+        assertTrue(Page.class.isInstance(page));
+        final XmlPage xmlPage = (XmlPage) page;
+        assertEquals(content, xmlPage.getContent());
+        assertNull(xmlPage.getXmlDocument());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
