@@ -24,6 +24,8 @@
                 <li>JavaScript: isolate NodeList from HTMLCollection, e.g. node.childNodes is NodeList. Recheck live and static lists.</li>
                 <li>JavaScript: object.getClassName() to be browser specific, e.g. document.querySelectorAll() is NodeList in FF, but StaticNodeList in IE8</li>
                 <li>MockWebConnection: to be used in XMLHttpRequest3Test.post()</li>
+                <li>*.htmlunit.util.Cookie with null domain is not sent for all domains!</li>
+                <li>Location2Test.hashEncoding3 fails on Windows</li>
             </ol>
         </section>
 
