@@ -806,9 +806,7 @@ class HtmlUnitCookieStore implements CookieStore, Serializable {
         if (manager_.isCookiesEnabled()) {
             return Arrays.asList(com.gargoylesoftware.htmlunit.util.Cookie.toHttpClient(manager_.getCookies()));
         }
-        else {
-            return Collections.<Cookie>emptyList();
-        }
+        return Collections.<Cookie>emptyList();
     }
 
     /**
