@@ -31,6 +31,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.DefaultPageCreator.PageType;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.XHtmlPage;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -51,29 +52,30 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
     @Test
     @Browsers(Browser.NONE)
     public void determinePageType() {
-        final DefaultPageCreator creator = new DefaultPageCreator();
+        assertEquals(PageType.HTML, DefaultPageCreator.determinePageType("text/html"));
 
-        assertEquals("html", creator.determinePageType("text/html"));
+        assertEquals(PageType.JAVASCRIPT, DefaultPageCreator.determinePageType("text/javascript"));
+        assertEquals(PageType.JAVASCRIPT, DefaultPageCreator.determinePageType("application/x-javascript"));
 
-        assertEquals("javascript", creator.determinePageType("text/javascript"));
-        assertEquals("javascript", creator.determinePageType("application/x-javascript"));
+        assertEquals(PageType.XML, DefaultPageCreator.determinePageType("text/xml"));
+        assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/xml"));
+        assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/xhtml+xml"));
+        assertEquals(PageType.XML, DefaultPageCreator.determinePageType("text/vnd.wap.wml"));
+        assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/vnd.mozilla.xul+xml"));
+        assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/vnd.wap.xhtml+xml"));
+        assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/rdf+xml"));
+        assertEquals(PageType.XML, DefaultPageCreator.determinePageType("image/svg+xml"));
 
-        assertEquals("xml", creator.determinePageType("text/xml"));
-        assertEquals("xml", creator.determinePageType("application/xml"));
-        assertEquals("xml", creator.determinePageType("application/xhtml+xml"));
-        assertEquals("xml", creator.determinePageType("text/vnd.wap.wml"));
-        assertEquals("xml", creator.determinePageType("application/vnd.mozilla.xul+xml"));
-        assertEquals("xml", creator.determinePageType("application/vnd.wap.xhtml+xml"));
-        assertEquals("xml", creator.determinePageType("application/rdf+xml"));
-        assertEquals("xml", creator.determinePageType("image/svg+xml"));
+        assertEquals(PageType.TEXT, DefaultPageCreator.determinePageType("text/plain"));
+        assertEquals(PageType.TEXT, DefaultPageCreator.determinePageType("text/csv"));
+        assertEquals(PageType.TEXT, DefaultPageCreator.determinePageType("text/css"));
+        assertEquals(PageType.TEXT, DefaultPageCreator.determinePageType("text/xhtml"));
 
-        assertEquals("text", creator.determinePageType("text/plain"));
-        assertEquals("text", creator.determinePageType("text/csv"));
-        assertEquals("text", creator.determinePageType("text/css"));
-        assertEquals("text", creator.determinePageType("text/xhtml"));
-
-        assertEquals("unknown", creator.determinePageType("application/pdf"));
-        assertEquals("unknown", creator.determinePageType("application/x-shockwave-flash"));
+        assertEquals(PageType.UNKNOWN, DefaultPageCreator.determinePageType(null));
+        assertEquals(PageType.UNKNOWN, DefaultPageCreator.determinePageType(""));
+        assertEquals(PageType.UNKNOWN, DefaultPageCreator.determinePageType(" \t"));
+        assertEquals(PageType.UNKNOWN, DefaultPageCreator.determinePageType("application/pdf"));
+        assertEquals(PageType.UNKNOWN, DefaultPageCreator.determinePageType("application/x-shockwave-flash"));
     }
 
     /**

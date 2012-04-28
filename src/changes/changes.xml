@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3385410">
+                Fix default content encoding for XML files.
+            </action>
+            <action type="fix" dev="mguillem" issue="3496236" due-to="James Phillpotts">
             <action type="fix" dev="mguillem">
                 JavaScript: don't restrict XMLHttpRequest to same origin for FF 3.6 and upper.
             </action>

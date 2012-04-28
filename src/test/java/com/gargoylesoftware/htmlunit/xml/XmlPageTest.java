@@ -32,6 +32,7 @@ import org.w3c.dom.Node;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
@@ -41,6 +42,7 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XmlPageTest extends WebServerTestCase {
@@ -85,6 +87,36 @@ public class XmlPageTest extends WebServerTestCase {
     }
 
     /**
+     * Test that UTF-8 is used as default encoding for xml responses
+     * (issue 3385410).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void defaultEncoding() throws Exception {
+        final String content
+            = "<?xml version=\"1.0\"?>\n"
+             + "<foo>\n"
+             +   "\u0434\n"
+             + "</foo>";
+
+        final byte[] bytes = TextUtil.stringToByteArray(content, "UTF8");
+
+        final WebClient client = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(bytes, 200, "OK", "text/xml");
+        client.setWebConnection(webConnection);
+
+        final Page page = client.getPage(URL_FIRST);
+        assertTrue(XmlPage.class.isInstance(page));
+
+        final XmlPage xmlPage = (XmlPage) page;
+        assertEquals(content, xmlPage.getContent());
+        Assert.assertNotNull(xmlPage.getXmlDocument());
+
+        assertEquals("foo", xmlPage.getXmlDocument().getFirstChild().getNodeName());
+    }
+
+    /**
      * Utility method to test XML page of different MIME types.
      * @param content the XML content
      * @param mimeType the MIME type
@@ -103,7 +135,7 @@ public class XmlPageTest extends WebServerTestCase {
         assertEquals(mimeType, page.getWebResponse().getContentType());
         assertTrue(XmlPage.class.isInstance(page));
         final XmlPage xmlPage = (XmlPage) page;
-        assertEquals(content, xmlPage.getContent());
+        Assert.assertEquals(content, xmlPage.getContent());
         Assert.assertNotNull(xmlPage.getXmlDocument());
         return xmlPage;
     }

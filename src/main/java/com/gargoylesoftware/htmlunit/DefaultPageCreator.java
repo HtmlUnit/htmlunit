@@ -78,8 +78,57 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class DefaultPageCreator implements PageCreator, Serializable  {
+
+    /**
+     * The different supported page types.
+     */
+    public enum PageType {
+        /** html. */
+        HTML,
+        /** javascript. */
+        JAVASCRIPT,
+        /** xml. */
+        XML,
+        /** text. */
+        TEXT,
+        /** unknown. */
+        UNKNOWN
+    }
+
+    /**
+     * Determines the kind of page to create from the content type.
+     * @param contentType the content type to evaluate
+     * @return "xml", "html", "javascript", "text" or "unknown"
+     */
+    public static PageType determinePageType(final String contentType) {
+        if (null == contentType) {
+            return PageType.UNKNOWN;
+        }
+
+        if ("text/html".equals(contentType)) {
+            return PageType.HTML;
+        }
+
+        if ("text/javascript".equals(contentType) || "application/x-javascript".equals(contentType)) {
+            return PageType.JAVASCRIPT;
+        }
+
+        if ("text/xml".equals(contentType)
+            || "application/xml".equals(contentType)
+            || "text/vnd.wap.wml".equals(contentType)
+            || contentType.endsWith("+xml")) {
+            return PageType.XML;
+        }
+
+        if (contentType.startsWith("text/")) {
+            return PageType.TEXT;
+        }
+
+        return PageType.UNKNOWN;
+    }
 
     /**
      * Creates an instance.
@@ -99,32 +148,29 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
     public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
         final String contentType = determineContentType(webResponse.getContentType().toLowerCase(),
             webResponse.getContentAsStream());
-        final Page newPage;
 
-        final String pageType = determinePageType(contentType);
-        if ("html".equals(pageType)) {
-            newPage = createHtmlPage(webResponse, webWindow);
+        final PageType pageType = determinePageType(contentType);
+        switch (pageType) {
+            case HTML:
+                return createHtmlPage(webResponse, webWindow);
+
+            case JAVASCRIPT:
+                return createJavaScriptPage(webResponse, webWindow);
+
+            case XML:
+                final XmlPage xml = createXmlPage(webResponse, webWindow);
+                final DomElement doc = xml.getDocumentElement();
+                if (doc != null && HTMLParser.XHTML_NAMESPACE.equals(doc.getNamespaceURI())) {
+                    return createXHtmlPage(webResponse, webWindow);
+                }
+                return xml;
+
+            case TEXT:
+                return createTextPage(webResponse, webWindow);
+
+            default:
+                return createUnexpectedPage(webResponse, webWindow);
         }
-        else if ("javascript".equals(pageType)) {
-            newPage = createJavaScriptPage(webResponse, webWindow);
-        }
-        else if ("xml".equals(pageType)) {
-            final XmlPage xml = createXmlPage(webResponse, webWindow);
-            final DomElement doc = xml.getDocumentElement();
-            if (doc != null && HTMLParser.XHTML_NAMESPACE.equals(doc.getNamespaceURI())) {
-                newPage = createXHtmlPage(webResponse, webWindow);
-            }
-            else {
-                newPage = xml;
-            }
-        }
-        else if ("text".equals(pageType)) {
-            newPage = createTextPage(webResponse, webWindow);
-        }
-        else {
-            newPage = createUnexpectedPage(webResponse, webWindow);
-        }
-        return newPage;
     }
 
     /**
@@ -284,31 +330,5 @@ public class DefaultPageCreator implements PageCreator, Serializable  {
         final XmlPage newPage = new XmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(newPage);
         return newPage;
-    }
-
-    /**
-     * Determines the kind of page to create from the content type.
-     * @param contentType the content type to evaluate
-     * @return "xml", "html", "javascript", "text" or "unknown"
-     */
-    protected String determinePageType(final String contentType) {
-        if ("text/html".equals(contentType)) { // || contentType.equals("")) {
-            return "html";
-        }
-        else if ("text/javascript".equals(contentType) || "application/x-javascript".equals(contentType)) {
-            return "javascript";
-        }
-        else if ("text/xml".equals(contentType)
-                || "application/xml".equals(contentType)
-                || "text/vnd.wap.wml".equals(contentType)
-                || contentType.matches(".*\\+xml")) {
-            return "xml";
-        }
-        else if (contentType.startsWith("text/")) {
-            return "text";
-        }
-        else {
-            return "unknown";
-        }
     }
 }
