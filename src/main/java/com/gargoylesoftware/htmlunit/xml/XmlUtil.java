@@ -64,8 +64,14 @@ import com.gargoylesoftware.htmlunit.html.IElementFactory;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 public final class XmlUtil {
+
+    /**
+     * Default encoding used.
+     */
+    public static final String DEFAULT_CHARSET = "UTF-8";
 
     private static final Log LOG = LogFactory.getLog(XmlUtil.class);
 
