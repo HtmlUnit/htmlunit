@@ -184,6 +184,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" },
+            CHROME = { "#üöä", "§§URL§§#üöä" },
             IE = { "#üöä", "§§URL§§#üöä" },
             IE8 = { "#üöä", "§§URL§§#%C3%BC%C3%B6%C3%A4" })
     public void hashEncoding3() throws Exception {
