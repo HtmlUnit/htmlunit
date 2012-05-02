@@ -89,7 +89,7 @@ public class WebResponseTest extends WebDriverTestCase {
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, content.getBytes("UTF-8"), 200, "OK", "text/html", emptyList);
         client.setWebConnection(webConnection);
         final WebRequest request = new WebRequest(URL_FIRST);
@@ -118,7 +118,7 @@ public class WebResponseTest extends WebDriverTestCase {
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<? extends NameValuePair> emptyList = Collections.emptyList();
         conn.setResponse(URL_FIRST, xml, HttpStatus.SC_OK, "OK", "text/xml; charset=\"ISO-8859-1\"", emptyList);
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
@@ -170,7 +170,7 @@ public class WebResponseTest extends WebDriverTestCase {
      */
     @Test
     public void responseHeaders() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/test", ResponseHeadersServlet.class);
         startWebServer("./", null, servlets);
         final WebClient client = getWebClient();

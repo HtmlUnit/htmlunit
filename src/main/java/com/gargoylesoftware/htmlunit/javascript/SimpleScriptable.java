@@ -197,8 +197,8 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
         // Get the JS class name for the specified DOM node.
         // Walk up the inheritance chain if necessary.
-        Class< ? extends SimpleScriptable> javaScriptClass = null;
-        for (Class< ? > c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
+        Class<? extends SimpleScriptable> javaScriptClass = null;
+        for (Class<?> c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
             javaScriptClass = getWindow().getWebWindow().getWebClient().getJavaScriptEngine().getJavaScriptClass(c);
         }
 
@@ -247,10 +247,10 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      * @return the prototype
      */
     @SuppressWarnings("unchecked")
-    protected Scriptable getPrototype(final Class< ? extends SimpleScriptable> javaScriptClass) {
+    protected Scriptable getPrototype(final Class<? extends SimpleScriptable> javaScriptClass) {
         final Scriptable prototype = getWindow().getPrototype(javaScriptClass);
         if (prototype == null && javaScriptClass != SimpleScriptable.class) {
-            return getPrototype((Class< ? extends SimpleScriptable>) javaScriptClass.getSuperclass());
+            return getPrototype((Class<? extends SimpleScriptable>) javaScriptClass.getSuperclass());
         }
         return prototype;
     }
@@ -274,7 +274,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      * @return the default value
      */
     @Override
-    public Object getDefaultValue(final Class< ? > hint) {
+    public Object getDefaultValue(final Class<?> hint) {
         if (String.class.equals(hint) || hint == null) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OBJECT_ONLY)) {
                 return "[object]"; // the super helpful IE solution
@@ -321,7 +321,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      * Same as base implementation, but includes all methods inherited from super classes as well.
      */
     @Override
-    public void defineProperty(final String propertyName, final Class< ? > clazz, int attributes) {
+    public void defineProperty(final String propertyName, final Class<?> clazz, int attributes) {
         final int length = propertyName.length();
         if (length == 0) {
             throw new IllegalArgumentException();
@@ -350,7 +350,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      * Same as base implementation, but includes all methods inherited from super classes as well.
      */
     @Override
-    public void defineFunctionProperties(final String[] names, final Class< ? > clazz, final int attributes) {
+    public void defineFunctionProperties(final String[] names, final Class<?> clazz, final int attributes) {
         final Method[] methods = clazz.getMethods();
         for (final String name : names) {
             final Method method = findMethod(methods, name);

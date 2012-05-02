@@ -90,7 +90,7 @@ public class SimpleScriptableTest extends WebTestCase {
     @Test
     public void htmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
         final JavaScriptConfiguration jsConfiguration = JavaScriptConfiguration.getInstance(getBrowserVersion());
-        final Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> map
+        final Map<Class<? extends HtmlElement>, Class<? extends SimpleScriptable>> map
             = jsConfiguration.getHtmlJavaScriptMapping();
         String directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host";
         final Set<String> names = getFileNames(directoryName.replace('/', File.separatorChar));
@@ -183,7 +183,7 @@ public class SimpleScriptableTest extends WebTestCase {
         }
 
         final Collection<String> hostClassNames = new ArrayList<String>();
-        for (final Class< ? extends SimpleScriptable> clazz : map.values()) {
+        for (final Class<? extends SimpleScriptable> clazz : map.values()) {
             hostClassNames.add(ClassUtils.getShortClassName(clazz));
         }
         assertEquals(new TreeSet<String>(names).toString(), new TreeSet<String>(hostClassNames).toString());

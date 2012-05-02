@@ -105,7 +105,7 @@ public final class WebAssert {
      * @param xpath the XPath expression which is expected to match an element in the page
      */
     public static void assertElementPresentByXPath(final HtmlPage page, final String xpath) {
-        final List< ? > elements = page.getByXPath(xpath);
+        final List<?> elements = page.getByXPath(xpath);
         if (elements.isEmpty()) {
             final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
                             + "'.";
@@ -138,7 +138,7 @@ public final class WebAssert {
      * @param xpath the XPath expression which is expected to not match an element in the page
      */
     public static void assertElementNotPresentByXPath(final HtmlPage page, final String xpath) {
-        final List< ? > elements = page.getByXPath(xpath);
+        final List<?> elements = page.getByXPath(xpath);
         if (!elements.isEmpty()) {
             final String msg = "The page does not contain any elements matching the XPath expression '" + xpath
                             + "'.";
@@ -335,7 +335,7 @@ public final class WebAssert {
      */
     public static void assertInputPresent(final HtmlPage page, final String name) {
         final String xpath = "//input[@name='" + name + "']";
-        final List< ? > list = page.getByXPath(xpath);
+        final List<?> list = page.getByXPath(xpath);
         if (list.isEmpty()) {
             throw new AssertionError("Unable to find an input element named '" + name + "'.");
         }
@@ -349,7 +349,7 @@ public final class WebAssert {
      */
     public static void assertInputNotPresent(final HtmlPage page, final String name) {
         final String xpath = "//input[@name='" + name + "']";
-        final List< ? > list = page.getByXPath(xpath);
+        final List<?> list = page.getByXPath(xpath);
         if (!list.isEmpty()) {
             throw new AssertionError("Unable to find an input element named '" + name + "'.");
         }
@@ -365,7 +365,7 @@ public final class WebAssert {
      */
     public static void assertInputContainsValue(final HtmlPage page, final String name, final String value) {
         final String xpath = "//input[@name='" + name + "']";
-        final List< ? > list = page.getByXPath(xpath);
+        final List<?> list = page.getByXPath(xpath);
         if (list.isEmpty()) {
             throw new AssertionError("Unable to find an input element named '" + name + "'.");
         }
@@ -387,7 +387,7 @@ public final class WebAssert {
      */
     public static void assertInputDoesNotContainValue(final HtmlPage page, final String name, final String value) {
         final String xpath = "//input[@name='" + name + "']";
-        final List< ? > list = page.getByXPath(xpath);
+        final List<?> list = page.getByXPath(xpath);
         if (list.isEmpty()) {
             throw new AssertionError("Unable to find an input element named '" + name + "'.");
         }

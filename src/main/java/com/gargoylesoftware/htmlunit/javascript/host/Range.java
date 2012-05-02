@@ -87,7 +87,7 @@ public class Range extends SimpleScriptable {
      * {@inheritDoc}
      */
     @Override
-    public Object getDefaultValue(final Class< ? > hint) {
+    public Object getDefaultValue(final Class<?> hint) {
         return toW3C().toString();
     }
 

@@ -146,8 +146,8 @@ public class CodeChecker {
 
     private static boolean shouldOverride(final MethodDeclaration method) throws Exception {
         final TypeDeclaration type = (TypeDeclaration) method.getParent();
-        final Class< ? > klass = Class.forName(getFullyQualifiedName(type));
-        final Class< ? >[] types = new Class[method.parameters().size()];
+        final Class<?> klass = Class.forName(getFullyQualifiedName(type));
+        final Class<?>[] types = new Class[method.parameters().size()];
         for (int i = 0; i < types.length; i++) {
             final SingleVariableDeclaration parameter = (SingleVariableDeclaration) method.parameters().get(i);
             types[i] = getClassOf(parameter.getType(), method.isVarargs() && i == method.parameters().size() - 1);
@@ -156,7 +156,7 @@ public class CodeChecker {
         // Check we have the method
         assertNotNull(klass.getDeclaredMethod(method.getName().getFullyQualifiedName(), types));
 
-        for (Class< ? > c = klass.getSuperclass(); c != null; c = c.getSuperclass()) {
+        for (Class<?> c = klass.getSuperclass(); c != null; c = c.getSuperclass()) {
             try {
                 c.getDeclaredMethod(method.getName().getFullyQualifiedName(), types);
                 return true;
@@ -168,12 +168,12 @@ public class CodeChecker {
         return false;
     }
 
-    private static Class< ? > getClassOf(final Type type, final boolean isVararg) {
-        Class< ? > klass = null;
+    private static Class<?> getClassOf(final Type type, final boolean isVararg) {
+        Class<?> klass = null;
         String name = null;
         if (isVararg) {
             if (type instanceof SimpleType) {
-                final Class< ? > elemntClass = getClassOf(type, false);
+                final Class<?> elemntClass = getClassOf(type, false);
                 klass = getArrayClassOf(elemntClass.getName(), 1, false);
             }
             else if (type instanceof PrimitiveType) {
@@ -192,7 +192,7 @@ public class CodeChecker {
             final ArrayType arrayType = (ArrayType) type;
             final Type elementType = arrayType.getElementType();
             if (elementType instanceof SimpleType) {
-                final Class< ? > elemntClass = getClassOf(elementType, false);
+                final Class<?> elemntClass = getClassOf(elementType, false);
                 klass = getArrayClassOf(elemntClass.getName(), arrayType.getDimensions(), false);
             }
             else if (elementType instanceof PrimitiveType) {
@@ -260,7 +260,7 @@ public class CodeChecker {
         return klass;
     }
 
-    private static Class< ? > tryClassName(final String className) {
+    private static Class<?> tryClassName(final String className) {
         try {
             return Class.forName(className);
         }
@@ -269,8 +269,8 @@ public class CodeChecker {
         }
     }
 
-    private static Class< ? > searchClassInAllTypes(final TypeDeclaration typeDeclaration, final String name) {
-        Class< ? > klass = tryClassName(getFullyQualifiedName(typeDeclaration) + '$' + name);
+    private static Class<?> searchClassInAllTypes(final TypeDeclaration typeDeclaration, final String name) {
+        Class<?> klass = tryClassName(getFullyQualifiedName(typeDeclaration) + '$' + name);
         if (klass != null) {
             return klass;
         }
@@ -283,7 +283,7 @@ public class CodeChecker {
         return null;
     }
 
-    private static Class< ? > getPrimitiveArrayType(final String name, final int dimensions) {
+    private static Class<?> getPrimitiveArrayType(final String name, final int dimensions) {
         final String className;
         if (name.equals("byte")) {
             className = "B";
@@ -316,7 +316,7 @@ public class CodeChecker {
         return getArrayClassOf(className, dimensions, true);
     }
 
-    private static Class< ? > getArrayClassOf(final String className, final int dimensions, final boolean primitive) {
+    private static Class<?> getArrayClassOf(final String className, final int dimensions, final boolean primitive) {
         final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < dimensions; i++) {
             builder.append('[');
@@ -331,7 +331,7 @@ public class CodeChecker {
         return tryClassName(builder.toString());
     }
 
-    private static Class< ? > getPrimitiveType(final String name) {
+    private static Class<?> getPrimitiveType(final String name) {
         if (name.equals("byte")) {
             return byte.class;
         }

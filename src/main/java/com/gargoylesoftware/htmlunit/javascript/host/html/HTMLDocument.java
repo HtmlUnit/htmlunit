@@ -132,7 +132,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * the static initializer. The map is unmodifiable. Any class that is a value in this map MUST
      * have a no-arg constructor.
      */
-    private static final Map<String, Class< ? extends Event>> SUPPORTED_EVENT_TYPE_MAP;
+    private static final Map<String, Class<? extends Event>> SUPPORTED_EVENT_TYPE_MAP;
 
     private static final List<String> EXECUTE_CMDS_IE = Arrays.asList(new String[] {
         "2D-Position", "AbsolutePosition", "BackColor", "BackgroundImageCache" /* Undocumented */,
@@ -190,7 +190,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     /** Initializes the supported event type map. */
     static {
-        final Map<String, Class< ? extends Event>> eventMap = new HashMap<String, Class< ? extends Event>>();
+        final Map<String, Class<? extends Event>> eventMap = new HashMap<String, Class<? extends Event>>();
         eventMap.put("Event", Event.class);
         eventMap.put("Events", Event.class);
         eventMap.put("KeyboardEvent", KeyboardEvent.class);
@@ -1410,7 +1410,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      *         DOMException.NOT_SUPPORTED_ERR)
      */
     public Event jsxFunction_createEvent(final String eventType) throws DOMException {
-        final Class< ? extends Event> clazz = SUPPORTED_EVENT_TYPE_MAP.get(eventType);
+        final Class<? extends Event> clazz = SUPPORTED_EVENT_TYPE_MAP.get(eventType);
         if (clazz == null) {
             Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
                 "Event Type is not supported: " + eventType));
@@ -1526,10 +1526,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
     @SuppressWarnings("unchecked")
     private static Scriptable staticGetPrototype(final Window window,
-            final Class< ? extends SimpleScriptable> javaScriptClass) {
+            final Class<? extends SimpleScriptable> javaScriptClass) {
         final Scriptable prototype = window.getPrototype(javaScriptClass);
         if (prototype == null && javaScriptClass != SimpleScriptable.class) {
-            return staticGetPrototype(window, (Class< ? extends SimpleScriptable>) javaScriptClass.getSuperclass());
+            return staticGetPrototype(window, (Class<? extends SimpleScriptable>) javaScriptClass.getSuperclass());
         }
         return prototype;
     }

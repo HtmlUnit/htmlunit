@@ -327,7 +327,7 @@ public class DomNodeTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final List< ? > results = page.getByXPath("//title");
+        final List<?> results = page.getByXPath("//title");
         assertEquals(1, results.size());
         final HtmlTitle title = (HtmlTitle) results.get(0);
         assertEquals("my title", title.asText());
@@ -340,7 +340,7 @@ public class DomNodeTest extends WebTestCase {
 
         final HtmlParagraph p = page.getFirstByXPath("//p");
         assertSame(p, page.getHtmlElementById("p1"));
-        final List< ? > lis = p.getByXPath("ul/li");
+        final List<?> lis = p.getByXPath("ul/li");
         assertEquals(2, lis.size());
         assertEquals(lis, page.getByXPath("//ul/li"));
 
@@ -359,7 +359,7 @@ public class DomNodeTest extends WebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(html);
 
-        final List< ? > results = page.getByXPath("//div");
+        final List<?> results = page.getByXPath("//div");
         assertEquals(1, results.size());
     }
 
@@ -660,7 +660,7 @@ public class DomNodeTest extends WebTestCase {
         final WebClient client = getWebClientWithMockWebConnection();
         final XmlPage page = (XmlPage) client.getPage(URL_FIRST);
 
-        final List< ? > results = page.getByXPath("//title");
+        final List<?> results = page.getByXPath("//title");
         assertEquals(1, results.size());
     }
 
@@ -700,7 +700,7 @@ public class DomNodeTest extends WebTestCase {
         final String content = "<html><head></head><body><div id='div1'/><div id='div2'/></body></html>";
         final HtmlPage page = loadPage(content);
         for (final HtmlElement element : page.getHtmlElementDescendants()) {
-            final List< ? extends Object> foundElements = page.getByXPath(element.getCanonicalXPath());
+            final List<? extends Object> foundElements = page.getByXPath(element.getCanonicalXPath());
             assertEquals(1, foundElements.size());
             assertSame(element, foundElements.get(0));
         }

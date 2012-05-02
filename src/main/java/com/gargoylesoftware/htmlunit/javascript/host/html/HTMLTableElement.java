@@ -251,7 +251,7 @@ public class HTMLTableElement extends RowContainer {
     @Override
     public Object insertRow(final int index) {
         // check if a tbody should be created
-        final List< ? > rowContainers =
+        final List<?> rowContainers =
             getDomNodeOrDie().getByXPath("//tbody | //thead | //tfoot");
         if (rowContainers.isEmpty() || index == 0) {
             final HtmlElement tBody = getDomNodeOrDie().appendChildIfNoneExists("tbody");

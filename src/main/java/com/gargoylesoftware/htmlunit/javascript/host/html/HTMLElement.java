@@ -1072,7 +1072,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             return 0;
         }
 
-        final Class< ? extends HTMLElement> c = getClass();
+        final Class<? extends HTMLElement> c = getClass();
         if (BEHAVIOR_CLIENT_CAPS.equalsIgnoreCase(behavior)) {
             defineProperty("availHeight", c, 0);
             defineProperty("availWidth", c, 0);

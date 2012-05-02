@@ -298,7 +298,7 @@ public class HtmlPage2Test extends WebServerTestCase {
         final MockWebConnection webConnection = getMockWebConnection();
 
         webConnection.setResponse(URL_FIRST, html);
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
@@ -419,7 +419,7 @@ public class HtmlPage2Test extends WebServerTestCase {
         final URL urlIframe = new URL(URL_SECOND, "iframe.html");
         webConnection.setResponse(urlIframe, iframeContent);
 
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<? extends NameValuePair> emptyList = Collections.emptyList();
         final URL urlImage = new URL(URL_SECOND, "img.jpg");
         webConnection.setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
 

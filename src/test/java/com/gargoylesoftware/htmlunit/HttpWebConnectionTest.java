@@ -307,7 +307,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      */
     @Test
     public void emptyPut() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/test", EmptyPutServlet.class);
         startWebServer("./", null, servlets);
 

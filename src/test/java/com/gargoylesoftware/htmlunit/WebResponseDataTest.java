@@ -116,7 +116,7 @@ public class WebResponseDataTest extends WebServerTestCase {
      */
     @Test
     public void redirection() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/folder1/page1", RedirectionServlet.class);
         servlets.put("/folder2/page2", RedirectionServlet.class);
         startWebServer("./", null, servlets);

@@ -91,7 +91,7 @@ public class HtmlUnitXPathTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(content);
-        final List< ? > list = page.getByXPath("//*");
+        final List<?> list = page.getByXPath("//*");
 
         final String[] expected = {"html", "head", "title", "script", "body"};
         final List<String> actualNames = new ArrayList<String>();
@@ -152,8 +152,8 @@ public class HtmlUnitXPathTest extends WebTestCase {
 
         final HtmlPage page = loadPage(content);
 
-        final List< ? > nameList = page.getByXPath("//img/@src");
-        final List< ? > valueList = new ArrayList<Object>(nameList);
+        final List<?> nameList = page.getByXPath("//img/@src");
+        final List<?> valueList = new ArrayList<Object>(nameList);
 
         final String[] expectedNames = {"src", "src", "src"};
 

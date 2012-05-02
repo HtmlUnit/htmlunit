@@ -131,7 +131,7 @@ public class HtmlPage extends SgmlPage {
     private int inlineSnippetParserCount_;
     private List<HtmlAttributeChangeListener> attributeListeners_;
     private final Object lock_ = new String(); // used for synchronization
-    private final List<Range> selectionRanges_ = new ArrayList< Range >(3);
+    private final List<Range> selectionRanges_ = new ArrayList<Range>(3);
     private final List<PostponedAction> afterLoadActions_ = new ArrayList<PostponedAction>();
     private boolean cleaning_;
     private HtmlBase base_;
@@ -1137,7 +1137,7 @@ public class HtmlPage extends SgmlPage {
      * @param clazz the class to search for
      * @return <code>null</code> if no child found
      */
-    private HtmlElement getFirstChildElement(final HtmlElement startElement, final Class< ? > clazz) {
+    private HtmlElement getFirstChildElement(final HtmlElement startElement, final Class<?> clazz) {
         for (final HtmlElement element : startElement.getChildElements()) {
             if (clazz.isInstance(element)) {
                 return element;

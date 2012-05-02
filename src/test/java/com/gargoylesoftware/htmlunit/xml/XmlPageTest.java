@@ -265,7 +265,7 @@ public class XmlPageTest extends WebServerTestCase {
      */
     @Test
     public void noResponse() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/test", NoResponseServlet.class);
         startWebServer("./", null, servlets);
 

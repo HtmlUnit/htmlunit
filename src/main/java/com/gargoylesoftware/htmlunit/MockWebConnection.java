@@ -122,7 +122,7 @@ public class MockWebConnection implements WebConnection {
      */
     public void setResponse(final URL url, final String content, final int statusCode,
             final String statusMessage, final String contentType,
-            final List< ? extends NameValuePair> responseHeaders) {
+            final List<? extends NameValuePair> responseHeaders) {
 
         setResponse(
                 url,
@@ -145,7 +145,7 @@ public class MockWebConnection implements WebConnection {
      */
     public void setResponse(final URL url, final String content, final int statusCode,
             final String statusMessage, final String contentType, final String charset,
-            final List< ? extends NameValuePair> responseHeaders) {
+            final List<? extends NameValuePair> responseHeaders) {
 
         setResponse(
                 url,
@@ -167,7 +167,7 @@ public class MockWebConnection implements WebConnection {
      */
     public void setResponse(final URL url, final byte[] content, final int statusCode,
             final String statusMessage, final String contentType,
-            final List< ? extends NameValuePair> responseHeaders) {
+            final List<? extends NameValuePair> responseHeaders) {
 
         final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
         if (contentType != null) {
@@ -191,7 +191,7 @@ public class MockWebConnection implements WebConnection {
      * @param content the content to return
      */
     public void setResponse(final URL url, final String content) {
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<? extends NameValuePair> emptyList = Collections.emptyList();
         setResponse(url, content, 200, "OK", "text/html", emptyList);
     }
 
@@ -205,7 +205,7 @@ public class MockWebConnection implements WebConnection {
      * @param contentType the content type to return
      */
     public void setResponse(final URL url, final String content, final String contentType) {
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<? extends NameValuePair> emptyList = Collections.emptyList();
         setResponse(url, content, 200, "OK", contentType, emptyList);
     }
 
@@ -220,7 +220,7 @@ public class MockWebConnection implements WebConnection {
      * @param charset the name of a supported charset
      */
     public void setResponse(final URL url, final String content, final String contentType, final String charset) {
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<? extends NameValuePair> emptyList = Collections.emptyList();
         setResponse(url, content, 200, "OK", contentType, charset, emptyList);
     }
 
@@ -290,7 +290,7 @@ public class MockWebConnection implements WebConnection {
      * @param contentType the content type to return
      */
     public void setDefaultResponse(final String content, final String contentType) {
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<? extends NameValuePair> emptyList = Collections.emptyList();
         setDefaultResponse(content, 200, "OK", contentType, emptyList);
     }
 
@@ -303,7 +303,7 @@ public class MockWebConnection implements WebConnection {
      * @param charset the name of a supported charset
      */
     public void setDefaultResponse(final String content, final String contentType, final String charset) {
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<? extends NameValuePair> emptyList = Collections.emptyList();
         setDefaultResponse(content, 200, "OK", contentType, charset, emptyList);
     }
 
@@ -317,7 +317,7 @@ public class MockWebConnection implements WebConnection {
      */
     public void setDefaultResponse(final String content, final int statusCode,
             final String statusMessage, final String contentType,
-            final List< ? extends NameValuePair> responseHeaders) {
+            final List<? extends NameValuePair> responseHeaders) {
 
         final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
         if (contentType != null) {
@@ -338,7 +338,7 @@ public class MockWebConnection implements WebConnection {
      */
     public void setDefaultResponse(final String content, final int statusCode,
             final String statusMessage, final String contentType, final String charset,
-            final List< ? extends NameValuePair> responseHeaders) {
+            final List<? extends NameValuePair> responseHeaders) {
 
         final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
         compiledHeaders.add(new NameValuePair("Content-Type", contentType));

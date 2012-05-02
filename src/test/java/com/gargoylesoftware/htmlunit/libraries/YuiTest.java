@@ -248,12 +248,12 @@ public class YuiTest extends WebTestCase {
 
         client_.waitForBackgroundJavaScript(timeToWait);
 
-        final List< ? > tests = doc.getByXPath("//span[@class='pass' or @class='fail']");
+        final List<?> tests = doc.getByXPath("//span[@class='pass' or @class='fail']");
         if (tests.size() == 0) {
             fail("No tests were executed!");
         }
 
-        for (final Iterator< ? > i = tests.iterator(); i.hasNext();) {
+        for (final Iterator<?> i = tests.iterator(); i.hasNext();) {
             final HtmlSpan span = (HtmlSpan) i.next();
             final String testResult = span.getNextSibling().asText();
             final int colonIdx = testResult.indexOf(":");

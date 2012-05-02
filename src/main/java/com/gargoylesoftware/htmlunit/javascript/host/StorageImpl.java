@@ -69,7 +69,7 @@ final class StorageImpl implements Serializable {
     }
 
     Map<String, String> getMap(final Type type, final HtmlPage page) {
-        final Map<String, Map<String, String>>storage = getStorage(type);
+        final Map<String, Map<String, String>> storage = getStorage(type);
         final String key = getKey(type, page);
         Map<String, String> map = storage.get(key);
         if (map == null) {

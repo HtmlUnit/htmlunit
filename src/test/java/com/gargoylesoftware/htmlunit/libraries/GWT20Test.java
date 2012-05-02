@@ -121,7 +121,7 @@ public class GWT20Test extends WebServerTestCase {
 
         final String[] selectedRow = {"markboland05", "mark@example.com", "URGENT -[Mon, 24 Apr 2006 02:17:27 +0000]"};
 
-        final List< ? > selectedRowCells = page.getByXPath("//tr[@class='MG']/td");
+        final List<?> selectedRowCells = page.getByXPath("//tr[@class='MG']/td");
         assertEquals(selectedRow.length, selectedRowCells.size());
         for (int i = 0; i < selectedRow.length; i++) {
             final HtmlTableDataCell selectedRowCell = (HtmlTableDataCell) selectedRowCells.get(i);
@@ -141,7 +141,7 @@ public class GWT20Test extends WebServerTestCase {
     }
 
     private void verifyStartMailBody(final HtmlPage page, final String... details) {
-        final List< ? > detailsCells = page.getByXPath("//div[@class='MC']/text()");
+        final List<?> detailsCells = page.getByXPath("//div[@class='MC']/text()");
         for (int i = 0; i < details.length; i++) {
             final DomText text = (DomText) detailsCells.get(i);
             assertEquals(details[i], text.asText());
@@ -181,7 +181,7 @@ public class GWT20Test extends WebServerTestCase {
         final String[] firstRow = {"Inman Mendez",
             "Majoring in Phrenology", "Mon 9:45-10:35, Tues 2:15-3:05, Fri 8:45-9:35, Fri 9:45-10:35"};
 
-        final List< ? > detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
+        final List<?> detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
         assertEquals(firstRow.length, detailsCells.size());
         for (int i = 0; i < firstRow.length; i++) {
             final HtmlTableDataCell cell = (HtmlTableDataCell) detailsCells.get(i);

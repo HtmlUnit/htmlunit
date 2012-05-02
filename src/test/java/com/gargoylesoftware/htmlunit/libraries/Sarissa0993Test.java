@@ -154,7 +154,7 @@ public class Sarissa0993Test extends WebServerTestCase {
     }
 
     private void test(final String testName) throws Exception {
-        final List< ? > divList =
+        final List<?> divList =
             Page_.getByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']/../div[last()]");
         assertEquals(1, divList.size());
         final HtmlDivision div = (HtmlDivision) divList.get(0);

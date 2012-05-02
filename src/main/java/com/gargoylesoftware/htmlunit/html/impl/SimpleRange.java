@@ -173,7 +173,7 @@ public class SimpleRange implements Range, Serializable {
         if (end == ancestor) {
             endClone = ancestorClone;
         }
-        final Iterable< DomNode > descendants = ancestor.getDescendants();
+        final Iterable<DomNode> descendants = ancestor.getDescendants();
         if (startClone == null || endClone == null) {
             final Iterator<DomNode> i = descendants.iterator();
             final Iterator<DomNode> ci = ancestorClone.getDescendants().iterator();
@@ -251,7 +251,7 @@ public class SimpleRange implements Range, Serializable {
                         setText(n, text);
                     }
                     else {
-                        final DomNodeList< DomNode > children = n.getChildNodes();
+                        final DomNodeList<DomNode> children = n.getChildNodes();
                         for (int j = endOffset_ - 1; j >= 0; j--) {
                             children.get(j).remove();
                         }

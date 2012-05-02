@@ -1147,7 +1147,7 @@ public class PageReloadTest extends WebDriverTestCase {
             final String expectedPathname,
             final String expectedHash) throws Exception {
 
-        final Map<String, Class< ? extends Servlet>> map = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> map = new HashMap<String, Class<? extends Servlet>>();
         map.put("/", ReloadServlet.class);
         map.put("/reload.html", ReloadServlet.class);
         map.put("/reload2.html", ReloadServlet.class);

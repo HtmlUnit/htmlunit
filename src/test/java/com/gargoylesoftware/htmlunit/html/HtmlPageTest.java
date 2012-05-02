@@ -608,7 +608,7 @@ public class HtmlPageTest extends WebServerTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("foo", page.getTitleText());
 
-        final List< ? > expectedAlerts = Collections.EMPTY_LIST;
+        final List<?> expectedAlerts = Collections.EMPTY_LIST;
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1852,7 +1852,7 @@ public class HtmlPageTest extends WebServerTestCase {
      */
     @Test
     public void refresh() throws Exception {
-        final Map<String, Class< ? extends Servlet>> map = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> map = new HashMap<String, Class<? extends Servlet>>();
         map.put("/one.html", RefreshServlet.class);
         map.put("/two.html", RefreshServlet.class);
         startWebServer(".", null, map);

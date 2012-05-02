@@ -129,7 +129,7 @@ public final class JavaScriptConfiguration {
 
     private static Map<String, String> ClassnameMap_ = new HashMap<String, String>();
 
-    private Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> htmlJavaScriptMap_;
+    private Map<Class<? extends HtmlElement>, Class<? extends SimpleScriptable>> htmlJavaScriptMap_;
 
     private final Map<String, ClassConfiguration> configuration_;
 
@@ -251,7 +251,7 @@ public final class JavaScriptConfiguration {
     }
 
     private static Reader getConfigurationFileAsReader() {
-        final Class< ? > clazz = JavaScriptConfiguration.class;
+        final Class<?> clazz = JavaScriptConfiguration.class;
         final String name = clazz.getName().replace('.', '/') + ".xml";
         InputStream inputStream = clazz.getClassLoader().getResourceAsStream(name);
         if (inputStream == null) {
@@ -554,7 +554,7 @@ public final class JavaScriptConfiguration {
      * @param clazz
      * @return the classname
      */
-    String getClassnameForClass(final Class< ? > clazz) {
+    String getClassnameForClass(final Class<?> clazz) {
         final String name = ClassnameMap_.get(clazz.getName());
         if (name == null) {
             throw new IllegalStateException("Did not find the mapping of the class to the classname for "
@@ -570,22 +570,22 @@ public final class JavaScriptConfiguration {
      * @return the mappings
      */
     @SuppressWarnings("unchecked")
-    public Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>>
+    public Map<Class<? extends HtmlElement>, Class<? extends SimpleScriptable>>
     getHtmlJavaScriptMapping() {
         if (htmlJavaScriptMap_ != null) {
             return htmlJavaScriptMap_;
         }
 
-        final Map<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>> map =
-            new HashMap<Class < ? extends HtmlElement>, Class < ? extends SimpleScriptable>>();
+        final Map<Class<? extends HtmlElement>, Class<? extends SimpleScriptable>> map =
+            new HashMap<Class<? extends HtmlElement>, Class<? extends SimpleScriptable>>();
 
         for (String jsClassname : configuration_.keySet()) {
             ClassConfiguration classConfig = getClassConfiguration(jsClassname);
             final String htmlClassname = classConfig.getHtmlClassname();
             if (htmlClassname != null) {
                 try {
-                    final Class< ? extends HtmlElement> htmlClass =
-                        (Class< ? extends HtmlElement>) Class.forName(htmlClassname);
+                    final Class<? extends HtmlElement> htmlClass =
+                        (Class<? extends HtmlElement>) Class.forName(htmlClassname);
                     // preload and validate that the class exists
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("Mapping " + htmlClass.getName() + " to " + jsClassname);

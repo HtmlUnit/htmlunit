@@ -33,7 +33,7 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public class MethodWrapper extends ScriptableObject implements Function {
 
-    private final Class< ? > clazz_;
+    private final Class<?> clazz_;
     private final Method method_;
     private final int[] jsTypeTags_;
 
@@ -43,7 +43,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
      * @param clazz the class declaring the method
      * @throws NoSuchMethodException if the method is no found
      */
-    MethodWrapper(final String methodName, final Class< ? > clazz) throws NoSuchMethodException {
+    MethodWrapper(final String methodName, final Class<?> clazz) throws NoSuchMethodException {
         this(methodName, clazz, ArrayUtils.EMPTY_CLASS_ARRAY);
     }
 
@@ -54,14 +54,14 @@ public class MethodWrapper extends ScriptableObject implements Function {
      * @param parameterTypes the types of the method's parameter
      * @throws NoSuchMethodException if the method is no found
      */
-    MethodWrapper(final String methodName, final Class< ? > clazz, final Class< ? >[] parameterTypes)
+    MethodWrapper(final String methodName, final Class<?> clazz, final Class<?>[] parameterTypes)
         throws NoSuchMethodException {
 
         clazz_ = clazz;
         method_ = clazz.getMethod(methodName, parameterTypes);
         jsTypeTags_ = new int[parameterTypes.length];
         int i = 0;
-        for (final Class< ? > klass : parameterTypes) {
+        for (final Class<?> klass : parameterTypes) {
             jsTypeTags_[i++] = FunctionObject.getTypeTag(klass);
         }
     }

@@ -40,7 +40,7 @@ public final class ClassConfiguration {
     private Map<String, FunctionInfo> functionMap_ = new HashMap<String, FunctionInfo>();
     private List<String> constants_ = new ArrayList<String>();
     private String extendedClassName_;
-    private final Class< ? extends SimpleScriptable> hostClass_;
+    private final Class<? extends SimpleScriptable> hostClass_;
     /**
      * The constructor method in the {@link #hostClass_}
      */
@@ -63,7 +63,7 @@ public final class ClassConfiguration {
         final String extendedClassName, final String htmlClassName, final boolean jsObject)
         throws ClassNotFoundException {
         extendedClassName_ = extendedClassName;
-        hostClass_ = (Class< ? extends SimpleScriptable>) Class.forName(hostClassName);
+        hostClass_ = (Class<? extends SimpleScriptable>) Class.forName(hostClassName);
         if (jsConstructor != null && jsConstructor.length() != 0) {
             Method foundCtor = null;
             for (final Method method : hostClass_.getMethods()) {
@@ -324,7 +324,7 @@ public final class ClassConfiguration {
      * Gets the class of the JavaScript host object.
      * @return the class of the JavaScript host object
      */
-    public Class< ? extends SimpleScriptable> getHostClass() {
+    public Class<? extends SimpleScriptable> getHostClass() {
         return hostClass_;
     }
 

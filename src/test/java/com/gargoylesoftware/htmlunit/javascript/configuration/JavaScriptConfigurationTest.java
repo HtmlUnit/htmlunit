@@ -465,7 +465,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
                 continue; // hack! In fact this test prohibits defining a method in a base class but using
                 // it only in subclasses when the base class is a JS object too. This is not good :-(
             }
-            final Class< ? > clazz = classConfig.getHostClass();
+            final Class<?> clazz = classConfig.getHostClass();
             final Method[] methods = clazz.getMethods();
 
             for (final Method method : methods) {
@@ -629,7 +629,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @param propertyName the name of the property
      * @return boolean <tt>true</tt> if the property exists
      */
-    private boolean propertyExists(final JavaScriptConfiguration configuration, final Class< ? > clazz,
+    private boolean propertyExists(final JavaScriptConfiguration configuration, final Class<?> clazz,
             final String propertyName) {
         final String classname = configuration.getClassnameForClass(clazz);
         return propertyExists(configuration, classname, propertyName);
@@ -707,7 +707,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         // get a reference to the leaky map
         final Field field = JavaScriptConfiguration.class.getDeclaredField("ConfigurationMap_");
         field.setAccessible(true);
-        final Map< ? , ? > leakyMap = (Map< ? , ? >) field.get(null);
+        final Map<?, ?> leakyMap = (Map<? , ?>) field.get(null);
         for (int i = 0; i < 3; i++) {
             final BrowserVersion browserVersion = new BrowserVersion("App", "Version", "User agent", 1);
             JavaScriptConfiguration.getInstance(browserVersion);

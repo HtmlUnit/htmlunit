@@ -44,7 +44,7 @@ public class HtmlUnitWrapFactory extends WrapFactory implements Serializable {
      */
     @Override
     public Scriptable wrapAsJavaObject(final Context context,
-            final Scriptable scope, final Object javaObject, final Class< ? > staticType) {
+            final Scriptable scope, final Object javaObject, final Class<?> staticType) {
 
         // TODO: should depend on the js configuration file
         final Scriptable resp;

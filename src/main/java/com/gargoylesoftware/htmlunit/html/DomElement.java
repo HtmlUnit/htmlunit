@@ -136,7 +136,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         printWriter.print(getTagName());
-        for (final Map.Entry <String, DomAttr> entry : attributes_.entrySet()) {
+        for (final Map.Entry<String, DomAttr> entry : attributes_.entrySet()) {
             printWriter.print(" ");
             printWriter.print(entry.getKey());
             printWriter.print("=\"");
@@ -573,9 +573,9 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
      * {@inheritDoc}
      */
     @Override
-    public void putAll(final Map< ? extends String, ? extends DomAttr> t) {
+    public void putAll(final Map<? extends String, ? extends DomAttr> t) {
         // add one after the other to save the positions
-        for (final Map.Entry< ? extends String, ? extends DomAttr> entry : t.entrySet()) {
+        for (final Map.Entry<? extends String, ? extends DomAttr> entry : t.entrySet()) {
             put(entry.getKey(), entry.getValue());
         }
     }

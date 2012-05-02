@@ -344,7 +344,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if the test fails
      */
     protected void startWebServer(final String resourceBase, final String[] classpath,
-            final Map<String, Class< ? extends Servlet>> servlets) throws Exception {
+            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
         stopWebServer();
         LAST_TEST_MockWebConnection_ = Boolean.FALSE;
         STATIC_SERVER_ = new Server(PORT);
@@ -354,9 +354,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
         context.setResourceBase(resourceBase);
 
         if (servlets != null) {
-            for (final Map.Entry<String, Class< ? extends Servlet>> entry : servlets.entrySet()) {
+            for (final Map.Entry<String, Class<? extends Servlet>> entry : servlets.entrySet()) {
                 final String pathSpec = entry.getKey();
-                final Class< ? extends Servlet> servlet = entry.getValue();
+                final Class<? extends Servlet> servlet = entry.getValue();
                 context.addServlet(servlet, pathSpec);
 
                 // disable defaults if someone likes to register his own root servlet

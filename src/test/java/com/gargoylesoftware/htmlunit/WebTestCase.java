@@ -609,8 +609,8 @@ public abstract class WebTestCase {
      * @throws RuntimeException if no method could be found
      */
     private Method findRunningJUnitTestMethod() {
-        final Class< ? > cl = getClass();
-        final Class< ? >[] args = new Class[] {};
+        final Class<?> cl = getClass();
+        final Class<?>[] args = new Class[] {};
 
         // search the initial junit test
         final Throwable t = new Exception();

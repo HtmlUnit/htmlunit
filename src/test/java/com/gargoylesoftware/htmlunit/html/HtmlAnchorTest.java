@@ -198,7 +198,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage secondPage = anchor.click();
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
-        final List< ? > expectedParameters = Collections.EMPTY_LIST;
+        final List<?> expectedParameters = Collections.EMPTY_LIST;
 
         assertEquals("url", "http://www.foo2.com/", secondPage.getWebResponse().getWebRequest().getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());

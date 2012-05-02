@@ -173,8 +173,8 @@ public class JavaScriptEngine {
     private void init(final WebWindow webWindow, final Context context) throws Exception {
         final WebClient webClient = webWindow.getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
-        final Map<Class< ? extends SimpleScriptable>, Scriptable> prototypes =
-            new HashMap<Class< ? extends SimpleScriptable>, Scriptable>();
+        final Map<Class<? extends SimpleScriptable>, Scriptable> prototypes =
+            new HashMap<Class<? extends SimpleScriptable>, Scriptable>();
         final Map<String, Scriptable> prototypesPerJSName = new HashMap<String, Scriptable>();
         final Window window = new Window();
         context.initStandardObjects(window);
@@ -333,7 +333,7 @@ public class JavaScriptEngine {
     private ScriptableObject configureClass(final ClassConfiguration config, final Scriptable window)
         throws InstantiationException, IllegalAccessException {
 
-        final Class< ? > jsHostClass = config.getHostClass();
+        final Class<?> jsHostClass = config.getHostClass();
         final ScriptableObject prototype = (ScriptableObject) jsHostClass.newInstance();
         prototype.setParentScope(window);
 
@@ -375,7 +375,7 @@ public class JavaScriptEngine {
     private void configureConstants(final ClassConfiguration config,
             final ScriptableObject scriptable) {
         for (final String constant : config.constants()) {
-            final Class< ? > linkedClass = config.getHostClass();
+            final Class<?> linkedClass = config.getHostClass();
             try {
                 final Object value = linkedClass.getField(constant).get(null);
                 scriptable.defineProperty(constant, value, ScriptableObject.EMPTY);

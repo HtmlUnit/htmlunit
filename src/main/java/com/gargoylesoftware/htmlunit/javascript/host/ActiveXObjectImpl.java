@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  */
 public class ActiveXObjectImpl extends SimpleScriptable {
 
-    private static final Class< ? > activeXComponentClass_;
+    private static final Class<?> activeXComponentClass_;
 
     /** ActiveXComponent.getProperty(String) */
     private static final Method METHOD_getProperty_;
@@ -49,9 +49,9 @@ public class ActiveXObjectImpl extends SimpleScriptable {
         try {
             activeXComponentClass_ = Class.forName("com.jacob.activeX.ActiveXComponent");
             METHOD_getProperty_ = activeXComponentClass_.getMethod("getProperty", String.class);
-            final Class< ? > dispatchClass = Class.forName("com.jacob.com.Dispatch");
+            final Class<?> dispatchClass = Class.forName("com.jacob.com.Dispatch");
             METHOD_callN_ = dispatchClass.getMethod("callN", dispatchClass, String.class, Object[].class);
-            final Class< ? > variantClass = Class.forName("com.jacob.com.Variant");
+            final Class<?> variantClass = Class.forName("com.jacob.com.Variant");
             METHOD_getvt_ = variantClass.getMethod("getvt");
             METHOD_getDispatch_ = variantClass.getMethod("getDispatch");
         }
@@ -120,7 +120,7 @@ public class ActiveXObjectImpl extends SimpleScriptable {
                     throw new UnsupportedOperationException();
                 }
 
-                public Object getDefaultValue(final Class< ? > arg0) {
+                public Object getDefaultValue(final Class<?> arg0) {
                     throw new UnsupportedOperationException();
                 }
 

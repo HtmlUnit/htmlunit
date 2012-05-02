@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  */
 public class AttributesTest extends TestCase {
 
-    private final Class< ? > classUnderTest_;
+    private final Class<?> classUnderTest_;
     private final Method method_;
     private final HtmlPage page_;
     private final String attributeName_;
@@ -112,7 +112,7 @@ public class AttributesTest extends TestCase {
         };
 
         for (final String testClass : classesToTest) {
-            final Class< ? > clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);
+            final Class<?> clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);
             addTestsForClass(clazz, page, suite);
         }
         return suite;
@@ -127,7 +127,7 @@ public class AttributesTest extends TestCase {
      * @throws Exception if the tests cannot be created
      */
     private static void addTestsForClass(
-            final Class< ? > clazz,
+            final Class<?> clazz,
             final HtmlPage page,
             final TestSuite suite)
         throws
@@ -177,7 +177,7 @@ public class AttributesTest extends TestCase {
      */
     public AttributesTest(
             final String attributeName,
-            final Class< ? > classUnderTest,
+            final Class<?> classUnderTest,
             final Method method,
             final HtmlPage page) {
 
@@ -194,7 +194,7 @@ public class AttributesTest extends TestCase {
      * @param method the getter method for the attribute
      * @return the test name
      */
-    private static String createTestName(final Class< ? > clazz, final Method method) {
+    private static String createTestName(final Class<?> clazz, final Method method) {
         String className = clazz.getName();
         final int index = className.lastIndexOf('.');
         className = className.substring(index + 1);

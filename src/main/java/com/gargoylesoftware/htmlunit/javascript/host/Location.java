@@ -90,7 +90,7 @@ public class Location extends SimpleScriptable {
      * {@inheritDoc}
      */
     @Override
-    public Object getDefaultValue(final Class< ? > hint) {
+    public Object getDefaultValue(final Class<?> hint) {
         if (hint == null || String.class.equals(hint)) {
             return jsxGet_href();
         }

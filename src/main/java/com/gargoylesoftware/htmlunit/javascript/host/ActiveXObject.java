@@ -106,7 +106,7 @@ public class ActiveXObject extends SimpleScriptable {
                 final String xClassString = (String) mapValue;
                 Object object = null;
                 try {
-                    final Class< ? > xClass = Class.forName(xClassString);
+                    final Class<?> xClass = Class.forName(xClassString);
                     object = xClass.newInstance();
                 }
                 catch (final Exception e) {
@@ -293,7 +293,7 @@ public class ActiveXObject extends SimpleScriptable {
      * @param name the name of the searched method
      * @return <code>null</code> if not found
      */
-    static Method getMethod(final Class < ? extends SimpleScriptable> clazz, final String name) {
+    static Method getMethod(final Class<? extends SimpleScriptable> clazz, final String name) {
         if (name == null) {
             return null;
         }

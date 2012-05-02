@@ -1377,7 +1377,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public int getContentWidth() {
         int width = 0;
-        for (DomNode child : this.<DomNode> getDomNodeOrDie().getChildren()) {
+        for (DomNode child : this.<DomNode>getDomNodeOrDie().getChildren()) {
             if (child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
                 final int w = e.jsxGet_currentStyle().getCalculatedWidth(true, true);

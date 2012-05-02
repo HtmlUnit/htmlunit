@@ -106,7 +106,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @throws Exception if the test fails
      */
     protected void startWebServer(final String resourceBase, final String[] classpath,
-            final Map<String, Class< ? extends Servlet>> servlets) throws Exception {
+            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
         if (server_ != null) {
             throw new IllegalStateException("startWebServer() can not be called twice");
         }
@@ -116,9 +116,9 @@ public abstract class WebServerTestCase extends WebTestCase {
         context.setContextPath("/");
         context.setResourceBase(resourceBase);
 
-        for (final Map.Entry<String, Class< ? extends Servlet>> entry : servlets.entrySet()) {
+        for (final Map.Entry<String, Class<? extends Servlet>> entry : servlets.entrySet()) {
             final String pathSpec = entry.getKey();
-            final Class< ? extends Servlet> servlet = entry.getValue();
+            final Class<? extends Servlet> servlet = entry.getValue();
             context.addServlet(servlet, pathSpec);
         }
         final WebAppClassLoader loader = new WebAppClassLoader(context);

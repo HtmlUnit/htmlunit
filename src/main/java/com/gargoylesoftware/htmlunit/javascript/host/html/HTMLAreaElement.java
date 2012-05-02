@@ -38,7 +38,7 @@ public class HTMLAreaElement extends HTMLElement {
      * @return the default value
      */
     @Override
-    public Object getDefaultValue(final Class< ? > hint) {
+    public Object getDefaultValue(final Class<?> hint) {
         final HtmlElement element = getDomNodeOrNull();
         if (element == null) {
             return super.getDefaultValue(null);

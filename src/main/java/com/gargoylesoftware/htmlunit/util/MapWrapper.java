@@ -123,7 +123,7 @@ public class MapWrapper<K, V> implements Map<K, V>, Serializable {
     /**
      * {@inheritDoc}
      */
-    public void putAll(final Map< ? extends K, ? extends V> t) {
+    public void putAll(final Map<? extends K, ? extends V> t) {
         wrappedMap_.putAll(t);
     }
 

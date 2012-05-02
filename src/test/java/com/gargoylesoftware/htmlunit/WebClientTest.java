@@ -121,14 +121,14 @@ public class WebClientTest extends WebServerTestCase {
                     String name = file.getAbsolutePath();
                     name = name.substring(index + 1, name.length() - 5);
                     name = name.replace(File.separatorChar, '.');
-                    final Class< ? > clazz;
+                    final Class<?> clazz;
                     try {
                         clazz = Class.forName(name);
                     }
                     catch (final Exception e) {
                         continue;
                     }
-                    for (final Constructor< ? > ctor : clazz.getConstructors()) {
+                    for (final Constructor<?> ctor : clazz.getConstructors()) {
                         if (ctor.getParameterTypes().length == 0) {
                             for (final Method method : clazz.getDeclaredMethods()) {
                                 if (Modifier.isPublic(method.getModifiers())
@@ -923,7 +923,7 @@ public class WebClientTest extends WebServerTestCase {
         Assert.assertNull("previous", page.tabToPreviousElement());
         Assert.assertNull("accesskey", page.pressAccessKey('a'));
 
-        final List< ? > expectedAlerts = Collections.EMPTY_LIST;
+        final List<?> expectedAlerts = Collections.EMPTY_LIST;
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1116,7 +1116,7 @@ public class WebClientTest extends WebServerTestCase {
         final WebClient webClient = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        final List< ? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 500, "BOOM", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -2011,7 +2011,7 @@ public class WebClientTest extends WebServerTestCase {
      */
     @Test
     public void testUseProxy() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/test", UseProxyHeaderServlet.class);
         startWebServer("./", null, servlets);
 
@@ -2200,7 +2200,7 @@ public class WebClientTest extends WebServerTestCase {
      */
     @Test
     public void testNoContent() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/test1", NoContentServlet1.class);
         servlets.put("/test2", NoContentServlet2.class);
         startWebServer("./", null, servlets);
@@ -2249,7 +2249,7 @@ public class WebClientTest extends WebServerTestCase {
      */
     @Test
     public void testNotModified() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/test", NotModifiedServlet.class);
         startWebServer("./", null, servlets);
         final WebClient client = getWebClient();
@@ -2336,7 +2336,7 @@ public class WebClientTest extends WebServerTestCase {
     @Test
     @NotYetImplemented
     public void addRequestHeader() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/test1", HeaderLog1Servlet.class);
         servlets.put("/test2", HeaderLog2Servlet.class);
         startWebServer("./", null, servlets);

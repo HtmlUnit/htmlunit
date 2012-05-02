@@ -398,7 +398,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
      */
     @Test
     public void testUploadFileWithNonASCIIName() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/upload1", Upload1Servlet.class);
         servlets.put("/upload2", Upload2Servlet.class);
         startWebServer("./", null, servlets);

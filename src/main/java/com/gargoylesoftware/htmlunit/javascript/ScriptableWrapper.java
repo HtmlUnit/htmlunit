@@ -53,7 +53,7 @@ public class ScriptableWrapper extends ScriptableObject {
      * @param staticType the static type of the object
      */
     public ScriptableWrapper(final Scriptable scope, final Object javaObject,
-            final Class< ? > staticType) {
+            final Class<?> staticType) {
         javaObject_ = javaObject;
         setParentScope(scope);
 
@@ -190,7 +190,7 @@ public class ScriptableWrapper extends ScriptableObject {
      * @see ScriptableObject#getDefaultValue(java.lang.Class)
      */
     @Override
-    public Object getDefaultValue(final Class< ? > hint) {
+    public Object getDefaultValue(final Class<?> hint) {
         if (String.class.equals(hint) || hint == null) {
             return jsToString();
         }

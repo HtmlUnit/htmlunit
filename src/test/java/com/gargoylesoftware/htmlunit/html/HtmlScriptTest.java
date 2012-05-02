@@ -439,7 +439,7 @@ public class HtmlScriptTest extends WebTestCase {
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, "var foo;", JAVASCRIPT_MIME_TYPE);
         conn.setResponse(URL_THIRD, "varrrr foo;", JAVASCRIPT_MIME_TYPE);
-        conn.setResponse(fourOhFour, "", 404, "Missing", JAVASCRIPT_MIME_TYPE, new ArrayList< NameValuePair >());
+        conn.setResponse(fourOhFour, "", 404, "Missing", JAVASCRIPT_MIME_TYPE, new ArrayList<NameValuePair>());
         client.setWebConnection(conn);
         final List<String> actual = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(actual));

@@ -42,7 +42,7 @@ public class Selection extends SimpleScriptable {
      * {@inheritDoc}
      */
     @Override
-    public Object getDefaultValue(final Class< ? > hint) {
+    public Object getDefaultValue(final Class<?> hint) {
         final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_176);
         if (ff && (String.class.equals(hint) || hint == null)) {
             final StringBuilder sb = new StringBuilder();

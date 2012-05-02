@@ -85,7 +85,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
      */
     @Test
     public void contentTypes() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/x", ContentTypeServlet.class);
         startWebServer("./", null, servlets);
 
@@ -145,7 +145,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
      */
     @Test
     public void noContentType() throws Exception {
-        final Map<String, Class< ? extends Servlet>> servlets = new HashMap<String, Class< ? extends Servlet>>();
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/test", NoContentTypeServlet.class);
         startWebServer("./", null, servlets);
 
