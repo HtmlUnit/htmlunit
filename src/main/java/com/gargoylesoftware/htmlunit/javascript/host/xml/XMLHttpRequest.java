@@ -156,9 +156,6 @@ public class XMLHttpRequest extends SimpleScriptable {
             && getBrowserVersion().hasFeature(
                         BrowserVersionFeatures.XMLHTTPREQUEST_ONREADYSTATECANGE_SYNC_REQUESTS_TRIGGER_COMPLETED);
         if (stateChangeHandler_ != null && (async_ || !noTriggerForSync || triggerForSyncCompleted)) {
-            if (context == null) {
-                context = Context.getCurrentContext();
-            }
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
@@ -186,6 +183,9 @@ public class XMLHttpRequest extends SimpleScriptable {
                 jsEngine.callFunction(containingPage_, stateChangeHandler_,
                         scope, thisValue, ArrayUtils.EMPTY_OBJECT_ARRAY);
                 if (LOG.isDebugEnabled()) {
+                    if (context == null) {
+                        context = Context.getCurrentContext();
+                    }
                     LOG.debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
                     LOG.debug("Calling onreadystatechange handler for state " + state + ". Done.");
                 }
@@ -196,9 +196,6 @@ public class XMLHttpRequest extends SimpleScriptable {
         final boolean triggerOnload = getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.XMLHTTPREQUEST_TRIGGER_ONLOAD_ON_COMPLETED);
         if (triggerOnload && loadHandler_ != null && state == STATE_COMPLETED) {
-            if (context == null) {
-                context = Context.getCurrentContext();
-            }
             final Scriptable scope = loadHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
             jsEngine.callFunction(containingPage_, loadHandler_, scope, this, ArrayUtils.EMPTY_OBJECT_ARRAY);
@@ -245,9 +242,6 @@ public class XMLHttpRequest extends SimpleScriptable {
     private void processError(Context context) {
         if (errorHandler_ != null && !getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.XMLHTTPREQUEST_ERRORHANDLER_NOT_SUPPORTED)) {
-            if (context == null) {
-                context = Context.getCurrentContext();
-            }
             final Scriptable scope = errorHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
@@ -256,6 +250,9 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             jsEngine.callFunction(containingPage_, errorHandler_, this, scope, ArrayUtils.EMPTY_OBJECT_ARRAY);
             if (LOG.isDebugEnabled()) {
+                if (context == null) {
+                    context = Context.getCurrentContext();
+                }
                 LOG.debug("onerror handler: " + context.decompileFunction(errorHandler_, 4));
                 LOG.debug("Calling onerror handler done.");
             }
