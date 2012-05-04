@@ -302,9 +302,6 @@ public enum BrowserVersionFeatures {
     GENERATED_35,
 
     /** Was originally .isIE(). */
-    GENERATED_36,
-
-    /** Was originally .isIE(). */
     GENERATED_37,
 
     /** Was originally .isIE(). */
@@ -649,6 +646,9 @@ public enum BrowserVersionFeatures {
 
     /** Indicates if the method toSource exists on the native objects. */
     JS_FUNCTION_TOSOURCE,
+
+    /** Indicates that the getAttribute method supports ie style flags. */
+    JS_GET_ATTRIBUTE_SUPPORTS_FLAGS,
 
     /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
     JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB,

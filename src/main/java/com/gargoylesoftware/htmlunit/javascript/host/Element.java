@@ -120,11 +120,12 @@ public class Element extends EventNode {
      * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
      */
     public Object jsxFunction_getAttribute(String attributeName, final Integer flags) {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_36);
+        final boolean supportsFlags =
+                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_GET_ATTRIBUTE_SUPPORTS_FLAGS);
         attributeName = fixAttributeName(attributeName);
 
         Object value;
-        if (ie && flags != null && flags == 2 && "style".equalsIgnoreCase(attributeName)) {
+        if (supportsFlags && flags != null && flags == 2 && "style".equalsIgnoreCase(attributeName)) {
             value = "";
         }
         else {
@@ -133,7 +134,7 @@ public class Element extends EventNode {
 
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
             value = null;
-            if (ie) {
+            if (supportsFlags) {
                 for (Scriptable object = this; object != null; object = object.getPrototype()) {
                     final Object property = object.get(attributeName, this);
                     if (property != NOT_FOUND) {
