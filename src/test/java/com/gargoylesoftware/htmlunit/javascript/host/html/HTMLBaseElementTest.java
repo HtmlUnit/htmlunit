@@ -33,7 +33,8 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "http://www.foo.com/images/", "", "", "_blank" })
+    @Alerts(DEFAULT = { "http://www.foo.com/images/", "", "", "_blank" },
+            FF10 = { "http://www.foo.com/images/", "§§URL§§", "", "_blank" })
     public void hrefAndTarget() throws Exception {
         final String html =
             "<html>\n"
