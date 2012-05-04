@@ -124,6 +124,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"#ee0000", "#0000aa", "#000000" },
+            FF10 = {"", "#0000aa", "x" },
             IE = {"", "#0000aa", "#000000" })
     public void aLink() throws Exception {
         final String html =
@@ -149,8 +150,9 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "http://www.foo.com/blah.gif", "§§URL§§blah.gif" },
-            IE = {"", "http://www.foo.com/blah.gif", "blah.gif" })
+    @Alerts(FF3 = {"", "http://www.foo.com/blah.gif", "§§URL§§blah.gif" },
+            FF3_6 = {"", "http://www.foo.com/blah.gif", "§§URL§§blah.gif" },
+            DEFAULT = {"", "http://www.foo.com/blah.gif", "blah.gif" })
     public void background() throws Exception {
         final String html =
             "<html>\n"
@@ -176,6 +178,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"#ffffff", "#0000aa", "#000000" },
+            FF10 = {"", "#0000aa", "x" },
             IE = {"", "#0000aa", "#000000" })
     public void bgColor() throws Exception {
         final String html =
@@ -202,6 +205,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"#0000ee", "#0000aa", "#000000" },
+            FF10 = {"", "#0000aa", "x" },
             IE = {"", "#0000aa", "#000000" })
     public void link() throws Exception {
         final String html =
@@ -228,6 +232,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"#000000", "#0000aa", "#000000" },
+            FF10 = {"", "#0000aa", "x" },
             IE = {"", "#0000aa", "#000000" })
     public void text() throws Exception {
         final String html =
@@ -254,6 +259,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"#551a8b", "#0000aa", "#000000" },
+            FF10 = {"", "#0000aa", "x" },
             IE = {"", "#0000aa", "#000000" })
     public void vLink() throws Exception {
         final String html =
