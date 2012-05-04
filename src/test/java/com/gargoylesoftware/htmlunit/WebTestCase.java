@@ -854,12 +854,7 @@ public abstract class WebTestCase {
 
             final File outFile = new File(targetDir, generateTest_testName_);
 
-            // replace alert(x) by a storage in window's scope
-            // Convert to string here due to: http://code.google.com/p/webdriver/issues/detail?id=209
-            final String newContent = StringUtils.replace(generateTest_content_, "alert(",
-                "(function(t){var x = window.__huCatchedAlerts; x = x ? x : []; "
-                + "window.__huCatchedAlerts = x; x.push(String(t))})(");
-
+            final String newContent = getModifiedContent(generateTest_content_);
             FileUtils.writeStringToFile(outFile, newContent);
 
             // write the expected alerts
@@ -946,5 +941,18 @@ public abstract class WebTestCase {
         }
 
         return jsThreads;
+    }
+
+    /**
+     * Returns the modified JavaScript after changing how 'alerts' are called.
+     * @param html the html
+     * @return the modified html
+     */
+    protected static String getModifiedContent(final String html) {
+        // replace alert(x) by a storage in top scope
+        // Convert to string here due to: http://code.google.com/p/webdriver/issues/detail?id=209
+        return StringUtils.replace(html, "alert(",
+                "(function(t){var x = top.__huCatchedAlerts; x = x ? x : []; "
+                + "top.__huCatchedAlerts = x; x.push(String(t))})(");
     }
 }

@@ -486,17 +486,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Returns the modified JavaScript after changing how 'alerts' are called.
-     * @param html the html
-     * @return the modified html
-     */
-    protected static String getModifiedContent(final String html) {
-        return StringUtils.replace(html, "alert(",
-                "(function(t){var x = top.__huCatchedAlerts; x = x ? x : []; "
-                + "top.__huCatchedAlerts = x; x.push(String(t))})(");
-    }
-
-    /**
      * Same as {@link #loadPageWithAlerts2(String)}... but doesn't verify the alerts.
      * @param html the HTML to use
      * @return the web driver
