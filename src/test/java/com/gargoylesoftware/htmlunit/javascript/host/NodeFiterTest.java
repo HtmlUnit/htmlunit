@@ -35,6 +35,8 @@ public class NodeFiterTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "1", "2", "3", "-1", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024", "2048" },
+            FF10 = { "1", "2", "3", "4294967295",
+                    "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024", "2048" },
             IE = "exception")
     public void constants() throws Exception {
         final String html = "<html><head>\n"
