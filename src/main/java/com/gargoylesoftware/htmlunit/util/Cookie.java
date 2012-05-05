@@ -31,6 +31,7 @@ import org.apache.http.cookie.ClientCookie;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Nicolas Belisle
+ * @author Ahmed Ashour
  */
 public class Cookie implements Serializable {
 
@@ -40,7 +41,7 @@ public class Cookie implements Serializable {
     /** The cookie value. */
     private final String value_;
 
-    /** The domain to which this cookie applies (<tt>null</tt> for all domains). */
+    /** The domain to which this cookie applies. */
     private final String domain_;
 
     /** The path to which this cookie applies (<tt>null</tt> for all paths). */
@@ -60,7 +61,9 @@ public class Cookie implements Serializable {
      * domains and all paths, never expires and is not secure.
      * @param name the cookie name
      * @param value the cookie name
+     * @deprecated as of 2.10, specify the domain
      */
+    @Deprecated
     public Cookie(final String name, final String value) {
         this(null, name, value);
     }
@@ -104,6 +107,9 @@ public class Cookie implements Serializable {
      */
     public Cookie(final String domain, final String name, final String value, final String path, final Date expires,
         final boolean secure, final boolean httpOnly) {
+        if (domain == null) {
+            throw new IllegalArgumentException("Cookie domain must be specified");
+        }
         domain_ = domain;
         name_ = name;
         value_ = (value != null ? value : ""); // HttpClient 3.1 doesn't like null cookie values

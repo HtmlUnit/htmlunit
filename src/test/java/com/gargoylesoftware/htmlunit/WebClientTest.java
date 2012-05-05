@@ -151,6 +151,23 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
+     * Tests if all JUnit 4 candidate test methods declare <tt>@Test</tt> annotation.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.NONE)
+    public void addRequestHeader_Cookie() throws Exception {
+        final WebClient client = new WebClient();
+        try {
+            client.addRequestHeader("Cookie", "some_value");
+            fail("Should have thrown an exception ");
+        }
+        catch (final IllegalArgumentException e) {
+            //success
+        }
+    }
+
+    /**
      * Test the situation where credentials are required but they haven't been specified.
      *
      * @throws Exception if something goes wrong

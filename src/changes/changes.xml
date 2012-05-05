@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: do not allow WebClient.addRequestHeader(&quot;Cookie&quot;, value)
+                and Cookie must have a domain.
+            </action>
             <action type="fix" dev="rbri" issue="3385410">
                 Fix default content encoding for XML files.
             </action>

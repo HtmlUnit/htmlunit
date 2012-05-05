@@ -52,7 +52,8 @@ public class HtmlUnitCookieStoreTest {
      */
     @Test
     public void addCookie() {
-        final org.apache.http.cookie.Cookie c = new BasicClientCookie("myname", "myvalue");
+        final BasicClientCookie c = new BasicClientCookie("myname", "myvalue");
+        c.setDomain("localhost");
         store_.addCookie(c);
 
         assertEquals(1, mgr_.getCookies().size());
@@ -64,8 +65,8 @@ public class HtmlUnitCookieStoreTest {
      */
     @Test
     public void getCookies() {
-        mgr_.addCookie(new Cookie("myname", "myvalue"));
-        mgr_.addCookie(new Cookie("myname2", "myvalue2"));
+        mgr_.addCookie(new Cookie("localhost", "myname", "myvalue"));
+        mgr_.addCookie(new Cookie("localhost", "myname2", "myvalue2"));
 
         final List<org.apache.http.cookie.Cookie> cookies = store_.getCookies();
         assertEquals(2, cookies.size());
@@ -81,8 +82,8 @@ public class HtmlUnitCookieStoreTest {
      */
     @Test
     public void clearExpired() {
-        mgr_.addCookie(new Cookie("myname", "myvalue"));
-        final Cookie cookie = new Cookie(null, "myname2", "myvalue2", null,
+        mgr_.addCookie(new Cookie("localhost", "myname", "myvalue"));
+        final Cookie cookie = new Cookie("localhost", "myname2", "myvalue2", null,
                 new Date(System.currentTimeMillis() + 10000), false);
         mgr_.addCookie(cookie);
 
@@ -99,8 +100,8 @@ public class HtmlUnitCookieStoreTest {
      */
     @Test
     public void clear() {
-        mgr_.addCookie(new Cookie("myname", "myvalue"));
-        mgr_.addCookie(new Cookie("myname2", "myvalue2"));
+        mgr_.addCookie(new Cookie("localhost", "myname", "myvalue"));
+        mgr_.addCookie(new Cookie("localhost", "myname2", "myvalue2"));
 
         assertFalse(store_.getCookies().isEmpty());
 

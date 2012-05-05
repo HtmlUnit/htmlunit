@@ -546,6 +546,9 @@ public class WebClient implements Serializable {
      * @see #removeRequestHeader(String)
      */
     public void addRequestHeader(final String name, final String value) {
+        if ("cookie".equalsIgnoreCase(name)) {
+            throw new IllegalArgumentException("Do not add 'Cookie' header, use .getCookieManager() instead");
+        }
         requestHeaders_.put(name, value);
     }
 

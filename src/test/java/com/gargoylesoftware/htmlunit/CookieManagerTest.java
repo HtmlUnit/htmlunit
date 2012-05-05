@@ -67,7 +67,7 @@ public class CookieManagerTest extends WebDriverTestCase {
         assertTrue(mgr.getCookies().isEmpty());
 
         // Add a cookie to the manager.
-        final Cookie cookie = new Cookie("a", "b");
+        final Cookie cookie = new Cookie("localhost", "a", "b");
         mgr.addCookie(cookie);
         assertFalse(mgr.getCookies().isEmpty());
 
