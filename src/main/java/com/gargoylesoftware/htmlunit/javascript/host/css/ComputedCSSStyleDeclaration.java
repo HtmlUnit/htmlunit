@@ -102,7 +102,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * Local modifications maintained here rather than in the element. We use a sorted
      * map so that results are deterministic and thus easily testable.
      */
-    private SortedMap<String, StyleElement> localModifications_ = new TreeMap<String, StyleElement>();
+    private final SortedMap<String, StyleElement> localModifications_ = new TreeMap<String, StyleElement>();
 
     /** Maps element types to custom display types (display types that are not "block". */
     private Map<String, String> defaultDisplays_;
@@ -1377,7 +1377,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public int getContentWidth() {
         int width = 0;
-        for (DomNode child : this.<DomNode>getDomNodeOrDie().getChildren()) {
+        for (final DomNode child : this.<DomNode>getDomNodeOrDie().getChildren()) {
             if (child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
                 final int w = e.jsxGet_currentStyle().getCalculatedWidth(true, true);
@@ -1510,7 +1510,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         HTMLElement lastFlowing = null;
         final Set<HTMLElement> independent = new HashSet<HTMLElement>();
-        for (DomNode child : node.getChildren()) {
+        for (final DomNode child : node.getChildren()) {
             if (child.mayBeDisplayed() && child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
                 final ComputedCSSStyleDeclaration style = e.jsxGet_currentStyle();
@@ -1531,7 +1531,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         int max = 0;
-        for (HTMLElement e : relevant) {
+        for (final HTMLElement e : relevant) {
             final ComputedCSSStyleDeclaration style = e.jsxGet_currentStyle();
             final int h = style.getTop(true, false, false) + style.getCalculatedHeight(true, true);
             if (h > max) {
