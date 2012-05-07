@@ -115,27 +115,29 @@ public class HTMLParser2Test extends WebDriverTestCase {
     }
 
     /**
-     * This tests for an bug in nekohtml.
+     * This tests for an bug in NekoHTML.
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "[object HTMLParagraphElement]", "[object HTMLButtonElement]", "[object HTMLDivElement]" })
+    @Alerts({ "P", "BUTTON", "DIV" })
     @NotYetImplemented
-    public void divInsideButtonInsideParagraph() throws Exception {
+    public void divInsideButton() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
+            + "try {\n"
             + "  var tmp = document.getElementById('myP');\n"
-            + "  alert(tmp)\n"
+            + "  alert(tmp.tagName)\n"
             + "  tmp = tmp.firstChild;\n"
+            + "  alert(tmp.tagName)\n"
+            + "  tmp = tmp.firstChild.tagName;\n"
             + "  alert(tmp)\n"
-            + "  tmp = tmp.firstChild;\n"
-            + "  alert(tmp)\n"
+            + "} catch(e) { alert('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "<p id='myP'><button><div>Test<div></button></p>\n"
+            + "<p id='myP'><button><div>Test</div></button></p>\n"
             + "</p>\n"
             + "</body></html>";
 
