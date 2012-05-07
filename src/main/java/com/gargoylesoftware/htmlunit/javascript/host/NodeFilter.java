@@ -43,7 +43,7 @@ public class NodeFilter extends SimpleScriptable {
 
     // Constants for whatToShow
     /** Show all nodes. */
-    public static final int SHOW_ALL = 0xFFFFFFFF;
+    public static final long SHOW_ALL = 4294967295L;
     /** Show Element nodes. */
     public static final int SHOW_ELEMENT = 0x00000001;
     /** Show Attr nodes. Only useful when creating a TreeWalker with an

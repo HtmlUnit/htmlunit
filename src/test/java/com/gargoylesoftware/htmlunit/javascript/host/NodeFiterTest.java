@@ -18,8 +18,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link NodeFilter}.
@@ -34,21 +36,37 @@ public class NodeFiterTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "1", "2", "3", "-1", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024", "2048" },
-            FF10 = { "1", "2", "3", "4294967295",
-                    "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024", "2048" },
+    @Alerts(DEFAULT = { "1", "2", "3", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024", "2048" },
             IE = "exception")
     public void constants() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  var properties = ['FILTER_ACCEPT', 'FILTER_REJECT', 'FILTER_SKIP',\n"
-            + "'SHOW_ALL', 'SHOW_ELEMENT', 'SHOW_ATTRIBUTE', 'SHOW_TEXT', 'SHOW_CDATA_SECTION',\n"
+            + "'SHOW_ELEMENT', 'SHOW_ATTRIBUTE', 'SHOW_TEXT', 'SHOW_CDATA_SECTION',\n"
             + "'SHOW_ENTITY_REFERENCE', 'SHOW_ENTITY', 'SHOW_PROCESSING_INSTRUCTION', 'SHOW_COMMENT',\n"
             + "'SHOW_DOCUMENT', 'SHOW_DOCUMENT_TYPE', 'SHOW_DOCUMENT_FRAGMENT', 'SHOW_NOTATION'];\n"
             + "  try {\n"
             + "    for (var i=0; i<properties.length; ++i) {\n"
             + "      alert(NodeFilter[properties[i]]);\n"
             + "    }\n"
+            + "  } catch(e) { alert('exception');}\n"
+            + "</script></head>\n"
+            + "<body></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented({ Browser.FF3, Browser.CHROME16 })
+    @Alerts(DEFAULT = "-1", FF3_6 = "4294967295", FF10 = "4294967295", IE = "exception")
+    public void constants_SHOW_ALL() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "      alert(NodeFilter.SHOW_ALL);\n"
             + "  } catch(e) { alert('exception');}\n"
             + "</script></head>\n"
             + "<body></body></html>";
