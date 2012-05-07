@@ -88,8 +88,7 @@ public class TreeWalker extends SimpleScriptable {
      * @return the value of the whatToShow attribute of the TreeWalker
      */
     public long jsxGet_whatToShow() {
-        // strange, SHOW_ALL is returned as long here whereas is is not the case for NodeFilter.SHOW_ALL
-        return whatToShow_ == NodeFilter.SHOW_ALL ? 0xFFFFFFFFL : whatToShow_;
+        return NodeFilter.SHOW_ALL;
     }
 
     /**
