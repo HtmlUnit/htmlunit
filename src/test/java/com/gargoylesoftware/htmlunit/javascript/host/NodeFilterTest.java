@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class NodeFiterTest extends WebDriverTestCase {
+public class NodeFilterTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
