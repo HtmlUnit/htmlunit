@@ -120,7 +120,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "P", "BUTTON", "DIV" })
-    @NotYetImplemented
     public void divInsideButton() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
