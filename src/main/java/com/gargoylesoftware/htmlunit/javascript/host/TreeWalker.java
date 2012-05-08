@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 public class TreeWalker extends SimpleScriptable {
 
     private Node root_, currentNode_;
-    private int whatToShow_;
+    private long whatToShow_;
     private NodeFilter filter_;
     private boolean expandEntityReferences_;
 
@@ -57,7 +57,7 @@ public class TreeWalker extends SimpleScriptable {
      *          is <code>null</code>.
      */
     public TreeWalker(final Node root,
-                      final int whatToShow,
+                      final long whatToShow,
                       final NodeFilter filter,
                       final Boolean expandEntityReferences) throws DOMException {
         if (root == null) {
@@ -88,7 +88,10 @@ public class TreeWalker extends SimpleScriptable {
      * @return the value of the whatToShow attribute of the TreeWalker
      */
     public long jsxGet_whatToShow() {
-        return NodeFilter.SHOW_ALL;
+        if (whatToShow_ != NodeFilter.SHOW_ALL) {
+            return 1;
+        }
+        return whatToShow_;
     }
 
     /**

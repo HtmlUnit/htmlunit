@@ -1641,6 +1641,7 @@
                 url="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html"
                 descr="DOM-Level-2-Traversal-Range"/>
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </function>
         <function name="dispatchEvent">
             <doclink

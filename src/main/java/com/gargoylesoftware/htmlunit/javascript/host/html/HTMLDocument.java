@@ -1497,9 +1497,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @throws DOMException on attempt to create a TreeWalker with a root that is <code>null</code>
      * @return a new TreeWalker
      */
-    public Object jsxFunction_createTreeWalker(final Node root, final int whatToShow, final Scriptable filter,
+    public Object jsxFunction_createTreeWalker(final Node root, final double whatToShow, final Scriptable filter,
             final boolean expandEntityReferences) throws DOMException {
 
+        // seems that Rhino doesn't like long as parameter type
+        final long whatToShowL = Double.valueOf(whatToShow).longValue();
         NodeFilter filterWrapper = null;
         if (filter != null) {
             filterWrapper = new NodeFilter() {
@@ -1518,7 +1520,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             };
         }
 
-        final TreeWalker t = new TreeWalker(root, whatToShow, filterWrapper, Boolean.valueOf(expandEntityReferences));
+        final TreeWalker t = new TreeWalker(root, whatToShowL, filterWrapper, Boolean.valueOf(expandEntityReferences));
         t.setParentScope(getWindow(this));
         t.setPrototype(staticGetPrototype(getWindow(this), TreeWalker.class));
         return t;
