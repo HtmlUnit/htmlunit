@@ -485,18 +485,15 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "  <head>\n"
             + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
-            + "      var request;\n"
+            + "      var xhr;\n"
             + "      function test() {\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
-            + "        request.onreadystatechange = onStateChange;\n"
-            + "        request.send('');\n"
+            + "        xhr = " + XHRInstantiation_ + ";\n"
+            + "        xhr.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
             + "      }\n"
             + "      function onStateChange() {\n"
-            + "        alert(request.readyState);\n"
+            + "        alert(xhr.readyState);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -512,6 +509,90 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Firefox up to 3.6 does not call "onreadystatechange" handler if sync.
+     * Firefox provides an event parameter.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF10 = "[object Event]#[object XMLHttpRequest]", IE = "no param")
+    @NotYetImplemented(Browser.FF10)
+    public void testOnreadystatechangeSyncWithParam() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = " + XHRInstantiation_ + ";\n"
+            + "        xhr.open('GET', '" + URL_SECOND + "', false);\n"
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          if(e) alert(e + '#' + e.target);\n"
+            + "          else alert('no param');\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Firefox up to 3.6 does not call "onreadystatechange" handler if sync.
+     * Firefox provides an event parameter.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object Event]#[object XMLHttpRequest]", IE = "no param")
+    @NotYetImplemented(Browser.FF)
+    public void testOnreadystatechangeAsyncWithParam() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = " + XHRInstantiation_ + ";\n"
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          if(e) alert(e + '#' + e.target);\n"
+            + "          else alert('no param');\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        loadPageWithAlerts2(html, 2000);
     }
 
     /**
