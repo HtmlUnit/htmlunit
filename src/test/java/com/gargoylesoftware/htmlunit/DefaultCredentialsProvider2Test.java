@@ -15,7 +15,13 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.log4j.AppenderSkeleton;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggingEvent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -85,6 +91,74 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
         assertTrue(driver.getPageSource().contains("Hi There"));
         driver.get(URL_SECOND.toExternalForm());
         assertTrue(driver.getPageSource().contains("Hello World"));
+    }
+
+    /**
+     * Tests that on calling the website twice, only the first time unauthorized response is returned.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void basicAuthentication_singleAuthenticaiton() throws Exception {
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            final Logger logger = Logger.getLogger("org.apache.http.headers");
+            final Level oldLevel = logger.getLevel();
+            logger.setLevel(Level.DEBUG);
+
+            final InMemoryAppender appender = new InMemoryAppender();
+            logger.addAppender(appender);
+            try {
+                ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
+
+                final WebDriver driver = loadPage2("Hi There");
+                driver.get(URL_FIRST.toExternalForm());
+                int unauthorizedCount = 0;
+                for (final String message : appender.getMessages()) {
+                    if (message.contains("HTTP/1.1 401")) {
+                        unauthorizedCount++;
+                    }
+                }
+                assertEquals(1, unauthorizedCount);
+            }
+            finally {
+                logger.removeAppender(appender);
+                logger.setLevel(oldLevel);
+            }
+        }
+    }
+
+    private static class InMemoryAppender extends AppenderSkeleton {
+
+        private List<String> messages_ = new ArrayList<String>();
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void append(final LoggingEvent event) {
+            messages_.add(event.getMessage().toString());
+        }
+
+        /**
+         * Returns the saved messages.
+         * @return the saved messages
+         */
+        public List<String> getMessages() {
+            return messages_;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void close() {
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public boolean requiresLayout() {
+            return false;
+        }
     }
 
     /**

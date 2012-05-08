@@ -151,7 +151,6 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
-     * Tests if all JUnit 4 candidate test methods declare <tt>@Test</tt> annotation.
      * @throws Exception if the test fails
      */
     @Test

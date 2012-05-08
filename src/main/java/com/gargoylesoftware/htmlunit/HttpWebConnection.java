@@ -97,6 +97,7 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
@@ -121,9 +122,11 @@ public class HttpWebConnection implements WebConnection {
     private static final String HACKED_COOKIE_POLICY = "mine";
     private AbstractHttpClient httpClient_;
     private final WebClient webClient_;
+
+    /** Use single HttpContext, so there is no need to re-send authentication for each and every request. */
+    private HttpContext httpContext_ = new BasicHttpContext();
     private String virtualHost_;
     private boolean isUseInsecureSsl_;
-
     private final CookieSpecFactory htmlUnitCookieSpecFactory_;
 
     /**
@@ -161,7 +164,7 @@ public class HttpWebConnection implements WebConnection {
 
             HttpResponse httpResponse = null;
             try {
-                httpResponse = httpClient.execute(hostConfiguration, httpMethod);
+                httpResponse = httpClient.execute(hostConfiguration, httpMethod, httpContext_);
             }
             catch (final SSLPeerUnverifiedException s) {
                 //Try to use only SSLv3 instead

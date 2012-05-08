@@ -7,6 +7,10 @@
     <body>
         <release version="2.10" date="???" description="Bugfixes">
             <action type="update" dev="asashour">
+                Unauthorized response should be received only once, and subsequent
+                requests should have the Authentication string.
+            </action>
+            <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: do not allow WebClient.addRequestHeader(&quot;Cookie&quot;, value)
                 and Cookie must have a domain.
             </action>
