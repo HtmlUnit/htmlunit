@@ -268,14 +268,22 @@ public class Event extends SimpleScriptable {
      * @param type the event type
      */
     public Event(final DomNode domNode, final String type) {
-        final Object target = domNode.getScriptObject();
-        srcElement_ = target;
-        target_ = target;
-        currentTarget_ = target;
-        type_ = type;
-        setParentScope((SimpleScriptable) target);
-        setPrototype(getPrototype(getClass()));
+        this((SimpleScriptable) domNode.getScriptObject(), type);
         setDomNode(domNode, false);
+    }
+
+    /**
+     * Creates a new event instance.
+     * @param scriptable the SimpleScriptable that triggered the event
+     * @param type the event type
+     */
+    public Event(final SimpleScriptable scriptable, final String type) {
+        srcElement_ = scriptable;
+        target_ = scriptable;
+        currentTarget_ = scriptable;
+        type_ = type;
+        setParentScope(scriptable);
+        setPrototype(getPrototype(getClass()));
     }
 
     /**

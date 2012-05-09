@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequest2Test extends WebDriverTestCase {
@@ -518,7 +519,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF10 = "[object Event]#[object XMLHttpRequest]", IE = "no param")
-    @NotYetImplemented(Browser.FF10)
     public void testOnreadystatechangeSyncWithParam() throws Exception {
         final String html =
               "<html>\n"
@@ -560,7 +560,6 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Event]#[object XMLHttpRequest]", IE = "no param")
-    @NotYetImplemented(Browser.FF)
     public void testOnreadystatechangeAsyncWithParam() throws Exception {
         final String html =
               "<html>\n"

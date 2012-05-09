@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -180,8 +181,14 @@ public class XMLHttpRequest extends SimpleScriptable {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Calling onreadystatechange handler for state " + state);
                 }
-                jsEngine.callFunction(containingPage_, stateChangeHandler_,
-                        scope, thisValue, ArrayUtils.EMPTY_OBJECT_ARRAY);
+                Object[] params = ArrayUtils.EMPTY_OBJECT_ARRAY;
+                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.XMLHTTPREQUEST_ONREADYSTATECHANGE_WITH_EVENT_PARAM)) {
+                    params = new Object[1];
+                    final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
+                    params[0] = event;
+                }
+
+                jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, thisValue, params);
                 if (LOG.isDebugEnabled()) {
                     if (context == null) {
                         context = Context.getCurrentContext();

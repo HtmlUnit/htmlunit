@@ -861,6 +861,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that the onreadystatechange handler is triggered for sync requests for COMPLETED (4). */
     XMLHTTPREQUEST_ONREADYSTATECANGE_SYNC_REQUESTS_TRIGGER_COMPLETED,
 
+    /** Indicates that the onreadystatechange handler is triggered with an event parameter (FF). */
+    XMLHTTPREQUEST_ONREADYSTATECHANGE_WITH_EVENT_PARAM,
+
     /** Indicates that the onload handler is not triggered if completed (FF). */
     XMLHTTPREQUEST_TRIGGER_ONLOAD_ON_COMPLETED,
 

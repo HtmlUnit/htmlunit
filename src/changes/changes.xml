@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="3440181">
+                Fix XHR.onreadystatechange now supplies an event argument if simulating FF.
+            </action>
             <action type="update" dev="asashour">
                 Unauthorized response should be received only once, and subsequent
                 requests should have the Authentication string.
