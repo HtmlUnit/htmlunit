@@ -127,31 +127,6 @@ public class HTMLAnchorElementTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "", "§§URL§§foo.html", "javascript:void(0)", "§§URL§§#", "mailto:" })
-    public void defaultConversionToString() throws Exception {
-        final String html
-            = "<html><head><title>AnchorTest</title><script>\n"
-            + "function test() {\n"
-            + "  alert(document.getElementById('myAnchor'));\n"
-            + "  for (var i=0; i<document.links.length; ++i)\n"
-            + "  {\n"
-            + "    alert(document.links[i]);\n"
-            + "  }\n"
-            + "}</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "<a name='start' id='myAnchor'/>\n"
-            + "<a href='foo.html'>foo</a>\n"
-            + "<a href='javascript:void(0)'>void</a>\n"
-            + "<a href='#'>#</a>\n"
-            + "<a href='mailto:'>mail</a>\n"
-            + "</body></html>";
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void onClickAnchorHref() throws Exception {
         final String html
             = "<html><body>\n"
