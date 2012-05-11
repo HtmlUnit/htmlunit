@@ -18,10 +18,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link TextRange}.
@@ -31,20 +29,20 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class TextRangeTest extends WebTestCase {
+public class TextRangeTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts({ "", "bla bla", "bla blabli bli" })
+    @Alerts(DEFAULT = "exception", IE = { "", "bla bla", "bla blabli bli" })
     public void text() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
             + "    function test() {\n"
+            + "      try {\n"
             + "      var f = document.getElementById('foo');\n"
             + "      f.focus();\n"
             + "      var r = document.selection.createRange();\n"
@@ -53,6 +51,7 @@ public class TextRangeTest extends WebTestCase {
             + "      alert(f.value);\n"
             + "      r.duplicate().text = 'bli bli';\n"
             + "      alert(f.value);\n"
+            + "      } catch(e) { alert('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -61,22 +60,23 @@ public class TextRangeTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts("BODY")
+    @Alerts(DEFAULT = "exception", IE = "BODY")
     public void parentElement() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      alert(document.body.createTextRange().parentElement().tagName);\n"
+            + "      try {\n"
+            + "        alert(document.body.createTextRange().parentElement().tagName);\n"
+            + "      } catch(e) { alert('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -84,21 +84,21 @@ public class TextRangeTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts({ "hello", "" })
+    @Alerts(DEFAULT = "exception", IE = { "hello", "" })
     public void collapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
             + "    function test() {\n"
+            + "      try {\n"
             + "      var f = document.getElementById('foo');\n"
             + "      f.focus();\n"
             + "      f.select();\n"
@@ -106,6 +106,7 @@ public class TextRangeTest extends WebTestCase {
             + "      alert(r.text);\n"
             + "      r.collapse();\n"
             + "      alert(r.text);\n"
+            + "      } catch(e) { alert('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -114,7 +115,7 @@ public class TextRangeTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -122,17 +123,18 @@ public class TextRangeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts("")
+    @Alerts(DEFAULT = "exception", IE = "")
     public void select() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
             + "    function test() {\n"
+            + "      try {\n"
             + "      var r = document.selection.createRange();\n"
             + "      r.select();\n"
-             + "    }\n"
+            + "      } catch(e) {  alert('exception'); }\n"
+            + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
@@ -140,21 +142,21 @@ public class TextRangeTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts({ "hello", "hell", "ell" })
+    @Alerts(DEFAULT = "exception", IE = { "hello", "hell", "ell" })
     public void moveEnd() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
             + "    function test() {\n"
+            + "      try {\n"
             + "      var f = document.getElementById('foo');\n"
             + "      f.focus();\n"
             + "      f.select();\n"
@@ -164,6 +166,7 @@ public class TextRangeTest extends WebTestCase {
             + "      alert(r.text);\n"
             + "      r.moveStart('character');\n"
             + "      alert(r.text);\n"
+            + "      } catch(e) { alert('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -172,21 +175,21 @@ public class TextRangeTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts({ "true", "true", "false", "true" })
+    @Alerts(DEFAULT = "exception", IE = { "true", "true", "false", "true" })
     public void inRange() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
             + "    function test() {\n"
+            + "      try {\n"
             + "      var r1 = document.body.createTextRange();\n"
             + "      var r2 = r1.duplicate();\n"
             + "      alert(r1.inRange(r2));\n"
@@ -194,6 +197,7 @@ public class TextRangeTest extends WebTestCase {
             + "      r1.collapse();\n"
             + "      alert(r1.inRange(r2));\n"
             + "      alert(r2.inRange(r1));\n"
+            + "      } catch(e) { alert('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -202,7 +206,7 @@ public class TextRangeTest extends WebTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -211,50 +215,52 @@ public class TextRangeTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts("false")
+    @Alerts(DEFAULT = "exception", IE = "false")
     public void inRange2() throws Exception {
         final String html = "<html><body>"
             + "<form name='f'><input name='q' value=''></form>"
             + "<script>"
+            + "try {\n"
             + "  var range = document.f.q.createTextRange();\n"
             + "  var selectionRange = document.selection.createRange();\n"
             + "  alert(range.inRange(selectionRange));\n"
+            + "} catch(e) { alert('exception'); }\n"
             + "</script>"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts("s3 foo <SPAN id=s3>foo</SPAN>")
+    @Alerts(DEFAULT = "exception", IE = "s3 foo <SPAN id=s3>foo</SPAN>")
     public void moveToElementText() throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo</span>\n"
             + "<script>\n"
             + "  function test() {\n"
+            + "    try {\n"
             + "    var r = document.selection.createRange();\n"
             + "    r.moveToElementText(document.getElementById('s3'));\n"
             + "    alert(r.parentElement().id + ' ' + r.text + ' ' + r.htmlText);\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
-    @Alerts({ "hello", "world", "hello world" })
+    @Alerts(DEFAULT = "exception", IE = { "hello", "world", "hello world" })
     public void setEndRange() throws Exception {
         final String html = "<html><body>\n"
             + "<form name='f'><input name='q' value='hello world'></form>\n"
             + "<script>\n"
+            + "try {\n"
             + "var range1 = document.f.q.createTextRange();\n"
             + "var range2 = range1.duplicate();\n"
             + "range1.moveEnd('character', -6);\n"
@@ -262,10 +268,11 @@ public class TextRangeTest extends WebTestCase {
             + "range2.moveStart('character', 6);\n"
             + "alert(range2.text);\n"
             + "var r3 = range1.duplicate();\n"
-            + "r3.setEndPoint('EndToEnd',  range2)\n"
-            + "alert(r3.text)\n"
+            + "r3.setEndPoint('EndToEnd',  range2);\n"
+            + "alert(r3.text);\n"
+            + "} catch(e) { alert('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
