@@ -21,15 +21,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.utils.URLEncodedUtils;
 
+import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -42,7 +45,9 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @version $Revision$
  * @author Amit Manjhi
  * @author Marc Guillemot
+ * @author Pieter Herroelen
  * @since HtmlUnit 2.8
+ * @see http://code.google.com/p/googleappengine/issues/detail?id=3379
  */
 public class UrlFetchWebConnection implements WebConnection {
 
@@ -90,6 +95,7 @@ public class UrlFetchWebConnection implements WebConnection {
             for (final Entry<String, String> header : webRequest.getAdditionalHeaders().entrySet()) {
                 connection.addRequestProperty(header.getKey(), header.getValue());
             }
+            addCookies(connection);
 
             final HttpMethod httpMethod = webRequest.getHttpMethod();
             connection.setRequestMethod(httpMethod.name());
@@ -143,11 +149,41 @@ public class UrlFetchWebConnection implements WebConnection {
             final long duration = System.currentTimeMillis() - startTime;
             final WebResponseData responseData = new WebResponseData(byteArray, responseCode,
                 connection.getResponseMessage(), headers);
+            saveCookies(url.getHost(), headers);
             return new WebResponse(responseData, webRequest, duration);
         }
         catch (final IOException e) {
             LOG.error("Exception while tyring to fetch " + url, e);
             throw new RuntimeException(e);
+        }
+    }
+
+    private void addCookies(final HttpURLConnection connection) {
+        final StringBuilder cookieHeader = new StringBuilder();
+        final Set<Cookie> cookies = webClient_.getCookieManager().getCookies();
+        if (cookies.isEmpty()) {
+            return;
+        }
+
+        int cookieNb = 1;
+        for (Cookie cookie : webClient_.getCookieManager().getCookies()) {
+            cookieHeader.append(cookie.getName()).append('=').append(cookie.getValue());
+            if (cookieNb < cookies.size()) {
+                cookieHeader.append("; ");
+            }
+            cookieNb++;
+        }
+        connection.setRequestProperty("Cookie", cookieHeader.toString());
+    }
+
+    private void saveCookies(final String domain, final List<NameValuePair> headers) {
+        for (final NameValuePair nvp : headers) {
+            if (nvp.getName().equalsIgnoreCase("Set-Cookie")) {
+                final Set<Cookie> cookies = parseCookies(domain, nvp.getValue());
+                for (Cookie cookie : cookies) {
+                    webClient_.getCookieManager().addCookie(cookie);
+                }
+            }
         }
     }
 
@@ -167,5 +203,27 @@ public class UrlFetchWebConnection implements WebConnection {
             }
         }
         return null;
+    }
+
+    /**
+     * Parses the given string into cookies.
+     * Very limited implementation.
+     * All created cookies apply to all paths, never expire and are not secure.
+     * Will not work when there's a comma in the cookie value (because there's a bug in the Url Fetch Service)
+     * @see http://code.google.com/p/googleappengine/issues/detail?id=3379
+     * @param cookieHeaderString The cookie string to parse
+     * @param domain the domain of the current request
+     * @return The parsed cookies
+     */
+    static Set<Cookie> parseCookies(final String domain, final String cookieHeaderString) {
+        final Set<Cookie> cookies = new HashSet<Cookie>();
+        final String[] cookieStrings = cookieHeaderString.split(",");
+        for (int i = 0; i < cookieStrings.length; i++) {
+            final String[] nameAndValue = cookieStrings[i].split(";")[0].split("=");
+            if (nameAndValue.length > 1) {
+                cookies.add(new Cookie(domain, nameAndValue[0], nameAndValue[1]));
+            }
+        }
+        return cookies;
     }
 }

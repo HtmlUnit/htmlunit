@@ -15,24 +15,30 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.Map.Entry;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.Cookie;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Unit tests for {@link UrlFetchWebConnection}.
  *
  * @author Marc Guillemot
+ * @author Pieter Herroelen
  * @version $Revision$
  */
 @RunWith(BrowserRunner.class)
@@ -118,6 +124,25 @@ public class UrlFetchWebConnectionTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("my_key=Hello")
+    public void cookie() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<NameValuePair>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "my_key=Hello"));
+        getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE,
+                200, "OK", "text/html", responseHeader);
+
+        // verify expectations with "normal" HTMLUnit
+        loadPageWithAlerts2(getDefaultUrl());
+
+        getWebClient().getCookieManager().clearCookies();
+        getWebClient().setWebConnection(new UrlFetchWebConnection(getWebClient()));
+        loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
      * Test a HEAD request with additional headers.
      * @throws Exception if the test fails
      */
@@ -182,5 +207,37 @@ public class UrlFetchWebConnectionTest extends WebDriverTestCase {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    /**
+     * Tests that an empty string is parsed into zero cookies.
+     */
+    @Test
+    public void emptyStringHasNoCookies() {
+        assertEquals(0, UrlFetchWebConnection.parseCookies("www.foo.com", "").size());
+    }
+
+    /**
+     * Tests that a string with one cookie is parsed into one cookie with the right name and value.
+     */
+    @Test
+    public void oneCookieStringHasOneCookie() {
+        final String cookieHeader = "Name=Value; expires=Fri, 18-Nov-2011 21:13:50 GMT";
+        final Set<Cookie> cookies = UrlFetchWebConnection.parseCookies("www.foo.com", cookieHeader);
+        final Cookie cookie = cookies.iterator().next();
+        assertEquals(1, cookies.size());
+        assertEquals("Name", cookie.getName());
+        assertEquals("Value", cookie.getValue());
+    }
+
+    /**
+     * Tests that a string with three cookies is parsed into three cookies.
+     */
+    @Test
+    public void threeCookiesStringHasThreeCookies() {
+        final String cookieHeader = ".ASPXANONYMOUS=sl7T9zamzAEkAAAAY2RmY2U1MWEtMzllYy00MDk1LThmNDMtM2U0MzBiMmEyMTFi0;"
+            + " expires=Fri, 18-Nov-2011 21:13:50 GMT; path=/; HttpOnly, ASP.NET_SessionId=dqsvrc45gpj51f45n0c1q4qa;"
+            + " path=/; HttpOnly, language=en-US; path=/; HttpOnly";
+        assertEquals(3, UrlFetchWebConnection.parseCookies("www.foo.com", cookieHeader).size());
     }
 }

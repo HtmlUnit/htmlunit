@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3407199" due-to="Pieter Herroelen">
+                Google App Engine support: added basic cookie support.
+            </action>
             <action type="fix" dev="rbri" issue="3440181">
                 Fix XHR.onreadystatechange now supplies an event argument if simulating FF.
             </action>

@@ -51,7 +51,8 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  */
 @RunWith(BrowserRunner.class)
 public class CookieManagerTest extends WebDriverTestCase {
-    private static final String HTML_ALERT_COOKIE = "<html><head><script>alert(document.cookie)</script>"
+    /** HTML code with JS code <code>alert(document.cookie)</code>. */
+    public static final String HTML_ALERT_COOKIE = "<html><head><script>alert(document.cookie)</script>"
         + "<body></body></html>";
 
     /**
