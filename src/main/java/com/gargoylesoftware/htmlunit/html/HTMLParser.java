@@ -203,23 +203,27 @@ public final class HTMLParser {
 
         final URL url = webResponse.getWebRequest().getUrl();
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, url);
+
         String charset = webResponse.getContentCharsetOrNull();
-        if (charset != null) {
-            try {
+        try {
+            // handle charset
+            if (charset != null) {
                 domBuilder.setFeature(HTMLScanner.IGNORE_SPECIFIED_CHARSET, true);
-                if (xhtml) {
-                    domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);
+            }
+            else {
+                final String specifiedCharset = webResponse.getWebRequest().getCharset();
+                if (specifiedCharset != null) {
+                    charset = specifiedCharset;
                 }
             }
-            catch (final Exception e) {
-                throw new ObjectInstantiationException("Error setting HTML parser feature", e);
+
+            // xml content is different
+            if (xhtml) {
+                domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);
             }
         }
-        else {
-            final String specifiedCharset = webResponse.getWebRequest().getCharset();
-            if (specifiedCharset != null) {
-                charset = specifiedCharset;
-            }
+        catch (final Exception e) {
+            throw new ObjectInstantiationException("Error setting HTML parser feature", e);
         }
 
         final InputStream content = webResponse.getContentAsStream();
