@@ -182,7 +182,8 @@ public class XMLHttpRequest extends SimpleScriptable {
                     LOG.debug("Calling onreadystatechange handler for state " + state);
                 }
                 Object[] params = ArrayUtils.EMPTY_OBJECT_ARRAY;
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.XMLHTTPREQUEST_ONREADYSTATECHANGE_WITH_EVENT_PARAM)) {
+                if (getBrowserVersion().hasFeature(
+                        BrowserVersionFeatures.XMLHTTPREQUEST_ONREADYSTATECHANGE_WITH_EVENT_PARAM)) {
                     params = new Object[1];
                     final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
                     params[0] = event;
