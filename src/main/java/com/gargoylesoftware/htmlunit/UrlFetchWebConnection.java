@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Pieter Herroelen
  * @since HtmlUnit 2.8
- * @see http://code.google.com/p/googleappengine/issues/detail?id=3379
+ * @see "http://code.google.com/p/googleappengine/issues/detail?id=3379"
  */
 public class UrlFetchWebConnection implements WebConnection {
 
@@ -178,7 +178,7 @@ public class UrlFetchWebConnection implements WebConnection {
 
     private void saveCookies(final String domain, final List<NameValuePair> headers) {
         for (final NameValuePair nvp : headers) {
-            if (nvp.getName().equalsIgnoreCase("Set-Cookie")) {
+            if ("Set-Cookie".equalsIgnoreCase(nvp.getName())) {
                 final Set<Cookie> cookies = parseCookies(domain, nvp.getValue());
                 for (Cookie cookie : cookies) {
                     webClient_.getCookieManager().addCookie(cookie);
@@ -210,7 +210,7 @@ public class UrlFetchWebConnection implements WebConnection {
      * Very limited implementation.
      * All created cookies apply to all paths, never expire and are not secure.
      * Will not work when there's a comma in the cookie value (because there's a bug in the Url Fetch Service)
-     * @see http://code.google.com/p/googleappengine/issues/detail?id=3379
+     * @see "http://code.google.com/p/googleappengine/issues/detail?id=3379"
      * @param cookieHeaderString The cookie string to parse
      * @param domain the domain of the current request
      * @return The parsed cookies
