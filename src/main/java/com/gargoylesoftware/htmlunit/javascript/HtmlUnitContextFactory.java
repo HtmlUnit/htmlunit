@@ -234,7 +234,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     /**
      * Configures the {@link ErrorReporter} on the context.
      * @param context the context to configure
-     * @see {@link Context#setErrorReporter(ErrorReporter)}
+     * @see Context#setErrorReporter(ErrorReporter)
      */
     protected void configureErrorReporter(final Context context) {
         context.setErrorReporter(errorReporter_);
