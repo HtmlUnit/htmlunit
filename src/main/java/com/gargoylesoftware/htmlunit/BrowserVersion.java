@@ -130,7 +130,7 @@ public class BrowserVersion implements Serializable {
         + " (KHTML, like Gecko) Chrome/16.0.912.63 Safari/535.7",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.7"
         + " (KHTML, like Gecko) Chrome/16.0.912.63 Safari/535.7",
-        15, "Chrome16", null);
+        16, "Chrome16", null);
 
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7;
