@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author David Gileadi
  */
 public class TextRange extends SimpleScriptable {
 
@@ -162,6 +163,7 @@ public class TextRange extends SimpleScriptable {
         if (range_.getStartContainer() == range_.getEndContainer()
             && range_.getStartContainer() instanceof SelectableTextInput) {
             final SelectableTextInput input = (SelectableTextInput) range_.getStartContainer();
+            c = constrainMoveBy(c, range_.getStartOffset(), input.getText().length());
             range_.setStart(input, range_.getStartOffset() + c);
         }
         return c;
@@ -185,6 +187,7 @@ public class TextRange extends SimpleScriptable {
         if (range_.getStartContainer() == range_.getEndContainer()
             && range_.getStartContainer() instanceof SelectableTextInput) {
             final SelectableTextInput input = (SelectableTextInput) range_.getStartContainer();
+            c = constrainMoveBy(c, range_.getEndOffset(), input.getText().length());
             range_.setEnd(input, range_.getEndOffset() + c);
         }
         return c;
@@ -259,5 +262,23 @@ public class TextRange extends SimpleScriptable {
         else {
             range_.setEnd(target, offset);
         }
+    }
+
+    /**
+     * Constrain the given amount to move the range by to the limits of the given current offset and text length.
+     * @param moveBy the amount to move by
+     * @param current the current index
+     * @param textLength the text length
+     * @return the moveBy amount constrained to the text length
+     */
+    protected int constrainMoveBy(int moveBy, final int current, final int textLength) {
+        final int to = current + moveBy;
+        if (to < 0) {
+            moveBy -= to;
+        }
+        else if (to >= textLength) {
+            moveBy -= (to - textLength);
+        }
+        return moveBy;
     }
 }

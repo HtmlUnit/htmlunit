@@ -671,6 +671,15 @@
         <contributor>
             <name>James Phillpotts</name>
         </contributor>
+        <contributor>
+            <name>Benson Margulies</name>
+        </contributor>
+        <contributor>
+            <name>Pieter Herroelen</name>
+        </contributor>
+        <contributor>
+            <name>David Gileadi</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

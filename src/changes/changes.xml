@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem" issue="3432442" due-to="David Gileadi">
+                JavaScript: handle out of bound moves for TextRange (IE only).
+            </action>
             <action type="fix" dev="mguillem" issue="3407199" due-to="Pieter Herroelen">
                 Google App Engine support: added basic cookie support.
             </action>

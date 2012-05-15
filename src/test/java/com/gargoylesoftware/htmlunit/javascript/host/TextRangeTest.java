@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author David Gileadi
  */
 @RunWith(BrowserRunner.class)
 public class TextRangeTest extends WebDriverTestCase {
@@ -172,6 +173,42 @@ public class TextRangeTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "<textarea id='foo'>hello</textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception", IE = { "hello", "hell", "ell", "1", "-1", "hello" })
+    public void moveOutOfBounds_input() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      try {\n"
+            + "      var f = document.getElementById('foo');\n"
+            + "      f.focus();\n"
+            + "      f.select();\n"
+            + "      var r = document.selection.createRange();\n"
+            + "      alert(r.text);\n"
+            + "      r.moveEnd('character', -1);\n"
+            + "      alert(r.text);\n"
+            + "      r.moveStart('character');\n"
+            + "      alert(r.text);\n"
+            + "      alert(r.moveEnd('character', 100));\n"
+            + "      alert(r.moveStart('character', -100));\n"
+            + "      alert(r.text);\n"
+            + "      } catch(e) { alert('exception'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<input id='foo' value='hello'/>\n"
             + "</body>\n"
             + "</html>";
 
