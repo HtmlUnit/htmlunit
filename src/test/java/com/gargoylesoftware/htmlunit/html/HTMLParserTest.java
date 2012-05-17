@@ -605,7 +605,7 @@ public class HTMLParserTest extends WebServerTestCase {
     }
 
     /**
-     * Servlet for {@link #headerVsMetaTagContentType(boolean)}.
+     * Servlet for headerVsMetaTagContentType(boolean).
      */
     public static class HeaderVsMetaTagContentTypeServlet extends HttpServlet {
         private static final String utf8String = "\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u0644";
