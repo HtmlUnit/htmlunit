@@ -33,7 +33,7 @@
             <action type="update" dev="asashour">
                 Upgrade CSS Parser to 0.9.7.
             </action>
-            <action type="fix" dev="rbri">
+            <action type="fix" dev="rbri" issue="3112678">
                 Fix missing support for different handling of self closing tags
                 in HTML and XHTML.
             </action>

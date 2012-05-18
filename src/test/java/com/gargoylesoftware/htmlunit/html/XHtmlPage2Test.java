@@ -57,4 +57,31 @@ public class XHtmlPage2Test extends WebDriverTestCase {
         assertEquals("", driver.findElement(By.id("div1")).getText());
         assertEquals("not empty", driver.findElement(By.id("div2")).getText());
     }
+
+    /**
+     * Regression test for bug 3112678.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("false")
+    public void selfClosingTextarea() throws Exception {
+        final String html
+            = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            + "<!DOCTYPE html PUBLIC \n"
+            + "    \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \n"
+            + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n"
+            + "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
+            + "<body>\n"
+            + "  <form action='javascript:void(0)' enctype='application/x-www-form-urlencoded' id='j_id27'>\n"
+            + "    <textarea id='myText'/>\n"
+            + "    <div id='div2'>not empty</div>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html, URL_FIRST, "application/xhtml+xml", TextUtil.DEFAULT_CHARSET);
+
+        assertEquals("", driver.findElement(By.id("myText")).getText());
+    }
 }
