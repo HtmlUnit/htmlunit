@@ -1328,6 +1328,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         if (timeout == 0 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_133)) {
             return jsxFunction_setTimeout(code, timeout, language);
         }
+
         if (timeout < MIN_TIMER_DELAY) {
             timeout = MIN_TIMER_DELAY;
         }

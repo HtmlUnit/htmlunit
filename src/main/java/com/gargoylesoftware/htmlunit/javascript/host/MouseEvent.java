@@ -198,7 +198,7 @@ public class MouseEvent extends UIEvent {
             if (jsxGet_type().equals(TYPE_CONTEXT_MENU)) {
                 return 0;
             }
-            else if (jsxGet_type().equals(TYPE_CLICK)) {
+            if (jsxGet_type().equals(TYPE_CLICK)) {
                 return button_;
             }
             return buttonCodeToIE[button_];
