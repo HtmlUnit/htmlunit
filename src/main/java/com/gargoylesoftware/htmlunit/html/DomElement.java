@@ -17,10 +17,12 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
@@ -30,7 +32,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.util.MapWrapper;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
@@ -436,20 +437,24 @@ public class DomElement extends DomNamespaceNode implements Element {
 /**
  * The {@link NamedNodeMap} to store the node attributes.
  */
-class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedNodeMap, Serializable {
+class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serializable {
+    public static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
+
+    private final Map<String, DomAttr> map_;
     private final List<String> attrPositions_ = new ArrayList<String>();
     private final DomElement domNode_;
-    public static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
     private final boolean caseSensitive_;
 
     private NamedAttrNodeMapImpl() {
-        super(new LinkedHashMap<String, DomAttr>());
+        super();
+        map_ = new LinkedHashMap<String, DomAttr>();
         domNode_ = null;
         caseSensitive_ = true;
     }
 
     NamedAttrNodeMapImpl(final DomElement domNode, final boolean caseSensitive) {
-        super(new LinkedHashMap<String, DomAttr>());
+        super();
+        map_ = new LinkedHashMap<String, DomAttr>();
         if (domNode == null) {
             throw new IllegalArgumentException("Provided domNode can't be null.");
         }
@@ -501,7 +506,7 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
         if (index < 0 || index >= attrPositions_.size()) {
             return null;
         }
-        return super.get(attrPositions_.get(index));
+        return map_.get(attrPositions_.get(index));
     }
 
     /**
@@ -538,41 +543,37 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
     /**
      * {@inheritDoc}
      */
-    @Override
     public DomAttr put(final String key, final DomAttr value) {
         final String name = fixName(key);
-        if (!containsKey(name)) {
+        if (!map_.containsKey(name)) {
             attrPositions_.add(name);
         }
-        return super.put(name, value);
+        return map_.put(name, value);
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
     public DomAttr remove(final Object key) {
         if (!(key instanceof String)) {
             return null;
         }
         final String name = fixName((String) key);
         attrPositions_.remove(name);
-        return super.remove(name);
+        return map_.remove(name);
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
     public void clear() {
         attrPositions_.clear();
-        super.clear();
+        map_.clear();
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
     public void putAll(final Map<? extends String, ? extends DomAttr> t) {
         // add one after the other to save the positions
         for (final Map.Entry<? extends String, ? extends DomAttr> entry : t.entrySet()) {
@@ -583,24 +584,64 @@ class NamedAttrNodeMapImpl extends MapWrapper<String, DomAttr> implements NamedN
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean containsKey(final Object key) {
         if (!(key instanceof String)) {
             return false;
         }
         final String name = fixName((String) key);
-        return super.containsKey(name);
+        return map_.containsKey(name);
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
     public DomAttr get(final Object key) {
         if (!(key instanceof String)) {
             return null;
         }
         final String name = fixName((String) key);
-        return super.get(name);
+        return map_.get(name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean containsValue(final Object value) {
+        return map_.containsValue(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Set<java.util.Map.Entry<String, DomAttr>> entrySet() {
+        return map_.entrySet();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean isEmpty() {
+        return map_.isEmpty();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Set<String> keySet() {
+        return map_.keySet();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int size() {
+        return map_.size();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Collection<DomAttr> values() {
+        return map_.values();
     }
 }
