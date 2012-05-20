@@ -205,7 +205,8 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     @Override
     protected void onAddedToPage() {
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_4)) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED_TO_PAGE)) {
             setChecked(isDefaultChecked());
         }
     }

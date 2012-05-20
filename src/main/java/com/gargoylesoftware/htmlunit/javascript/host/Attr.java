@@ -140,11 +140,12 @@ public class Attr extends Node {
      */
     @Override
     public Node jsxGet_lastChild() {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_151)) {
-            final DomText text = new DomText(getDomNodeOrDie().getPage(), jsxGet_nodeValue());
-            return (Node) text.getScriptObject();
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL)) {
+            return null;
         }
-        return null;
+
+        final DomText text = new DomText(getDomNodeOrDie().getPage(), jsxGet_nodeValue());
+        return (Node) text.getScriptObject();
     }
 
     /**

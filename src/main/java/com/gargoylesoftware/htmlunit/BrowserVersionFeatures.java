@@ -224,9 +224,6 @@ public enum BrowserVersionFeatures {
     GENERATED_150,
 
     /** Was originally .isFirefox(). */
-    GENERATED_151,
-
-    /** Was originally .isFirefox(). */
     GENERATED_155,
 
     /** Was originally .isFirefox(). */
@@ -306,9 +303,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_39,
-
-    /** Was originally .isIE(). */
-    GENERATED_4,
 
     /** Was originally .isIE(). */
     GENERATED_40,
@@ -498,6 +492,9 @@ public enum BrowserVersionFeatures {
     /** Un-selecting an option in a (single-value) select causes the first option to become selected. */
     HTMLOPTION_UNSELECT_SELECTS_FIRST,
 
+    /** Set this checked state back to default when added to page (IE). */
+    HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED_TO_PAGE,
+
     /**
      * Set this property if the script tag supports the
      * types 'application/javascript' and 'application/x-javascript'.
@@ -555,6 +552,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that the attributes map contains empty attr
      * objects for all properties of the object (like IE does). */
     JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES,
+
+    /** firstChild and lastChild returns null for Attr (like IE does). */
+    JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
 
     /** Indicates that the getBoundingClientRect adds an offset of 2. */
     JS_BOUNDING_CLIENT_RECT_OFFSET_TWO,
