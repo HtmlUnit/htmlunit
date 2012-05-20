@@ -59,16 +59,15 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.DisabledElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
-import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -322,15 +321,16 @@ public class CSSStyleSheet extends SimpleScriptable {
             case Selector.SAC_ANY_NODE_SELECTOR:
                 return true;
             case Selector.SAC_CHILD_SELECTOR:
-                if (element.getParentNode() == element.getPage()) {
+                final DomNode parentNode = element.getParentNode();
+                if (parentNode == element.getPage()) {
                     return false;
                 }
-                final DescendantSelector cs = (DescendantSelector) selector;
-                if (!(element.getParentNode() instanceof HtmlElement)) {
+                if (!(parentNode instanceof HtmlElement)) {
                     return false; // for instance parent is a DocumentFragment
                 }
-                final HtmlElement parent = (HtmlElement) element.getParentNode();
-                return selects(browserVersion, cs.getSimpleSelector(), element) && parent != null
+                final DescendantSelector cs = (DescendantSelector) selector;
+                final HtmlElement parent = (HtmlElement) parentNode;
+                return selects(browserVersion, cs.getSimpleSelector(), element)
                     && selects(browserVersion, cs.getAncestorSelector(), parent);
             case Selector.SAC_DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
@@ -490,12 +490,10 @@ public class CSSStyleSheet extends SimpleScriptable {
             return element == element.getPage().getDocumentElement();
         }
         else if ("enabled".equals(value)) {
-            return (element instanceof HtmlInput && !((HtmlInput) element).isDisabled())
-                || (element instanceof HtmlSelect && !((HtmlSelect) element).isDisabled());
+            return (element instanceof DisabledElement && !((DisabledElement) element).isDisabled());
         }
         else if ("disabled".equals(value)) {
-            return (element instanceof HtmlInput && ((HtmlInput) element).isDisabled())
-                || (element instanceof HtmlSelect && ((HtmlSelect) element).isDisabled());
+            return (element instanceof DisabledElement && ((DisabledElement) element).isDisabled());
         }
         else if ("checked".equals(value)) {
             return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())

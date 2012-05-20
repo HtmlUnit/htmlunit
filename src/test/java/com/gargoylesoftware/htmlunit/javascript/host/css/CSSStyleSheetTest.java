@@ -504,11 +504,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "false", "false", "true", "false", "true" }, IE = { "false", "false", "false", "false", "false" })
+    @Alerts(FF = { "false", "false", "true", "false", "true", "true", "true", "true" },
+            IE = { "false", "false", "false", "false", "false", "false", "false", "false" })
     public void css3_enabled() throws Exception {
         final String htmlSnippet = "<input id='elt2'>\n"
             + "<input id='elt3' disabled>\n"
-            + "<input id='elt4' type='checkbox'>\n";
+            + "<input id='elt4' type='checkbox'>\n"
+            + "<button id='elt5' ></button>\n"
+            + "<select id='elt6' ></select>"
+            + "<textarea id='elt7' ></textarea>\n";
         doTest(":enabled", htmlSnippet);
     }
 
@@ -516,11 +520,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "false", "false", "true", "false", "true" }, IE = { "false", "false", "false", "false", "false" })
+    @Alerts(FF = { "false", "false", "true", "false", "true", "true", "true", "true" },
+            IE = { "false", "false", "false", "false", "false", "false", "false", "false" })
     public void css3_disabled() throws Exception {
         final String htmlSnippet = "<input id='elt2' disabled>\n"
             + "<input id='elt3'>\n"
-            + "<input id='elt4' type='checkbox' disabled>\n";
+            + "<input id='elt4' type='checkbox' disabled>\n"
+            + "<button id='elt5' disabled></button>\n"
+            + "<select id='elt6' disabled></select>"
+            + "<textarea id='elt7' disabled></textarea>\n";
         doTest(":disabled", htmlSnippet);
     }
 

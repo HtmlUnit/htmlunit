@@ -6,6 +6,11 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                CSS: The ':disabled' and the ':enabled' selector now works for all HtmlElements
+                implementing the DisabledElement interface. Now the selector
+                also checks e.g. Button and Textarea elements.
+            </action>
             <action type="fix" dev="mguillem" issue="3432442" due-to="David Gileadi">
                 JavaScript: handle out of bound moves for TextRange (IE only).
             </action>
