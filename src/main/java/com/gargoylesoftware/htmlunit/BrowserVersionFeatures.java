@@ -271,9 +271,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isFirefox(). */
     GENERATED_176,
 
-    /** Was originally .isFirefox(). */
-    GENERATED_177,
-
     /** Was originally .isIE(). */
     GENERATED_2,
 
@@ -745,6 +742,11 @@ public enum BrowserVersionFeatures {
      * FF ignores the provided value in this case and sets cols to 0.
      */
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
+
+    /** Changing the opener of an window to something not null
+     * is not valid (in FF).
+     */
+    JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED,
 
     /** Window property not usable as function. */
     JS_WINDOW_IS_NOT_A_FUNCTION,

@@ -715,7 +715,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param newValue the new value
      */
     public void jsxSet_opener(Object newValue) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_177) && newValue != opener_) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED)
+                && newValue != opener_) {
             if (opener_ == null || newValue == null || newValue == Context.getUndefinedValue()) {
                 newValue = null;
             }
