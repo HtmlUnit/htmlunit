@@ -159,7 +159,8 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public int waitForJobs(final long timeoutMillis) {
-        if (LOG.isDebugEnabled()) {
+        final boolean debug = LOG.isDebugEnabled();
+        if (debug) {
             LOG.debug("Waiting for all jobs to finish (will wait max " + timeoutMillis + " millis).");
         }
         if (timeoutMillis > 0) {
@@ -181,7 +182,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             }
         }
         final int jobs = getJobCount();
-        if (LOG.isDebugEnabled()) {
+        if (debug) {
             LOG.debug("Finished waiting for all jobs to finish (final job count is " + jobs + ").");
         }
         return jobs;
@@ -189,8 +190,10 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     public int waitForJobsStartingBefore(final long delayMillis) {
+        final boolean debug = LOG.isDebugEnabled();
+
         final long latestExecutionTime = System.currentTimeMillis() + delayMillis;
-        if (LOG.isDebugEnabled()) {
+        if (debug) {
             LOG.debug("Waiting for all jobs that have execution time before "
                   + delayMillis + " (" + latestExecutionTime + ") to finish");
         }
@@ -223,7 +226,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             }
         }
         final int jobs = getJobCount();
-        if (LOG.isDebugEnabled()) {
+        if (debug) {
             LOG.debug("Finished waiting for all jobs that have target execution time earlier than "
                 + latestExecutionTime + ", final job count is " + jobs);
         }
@@ -296,6 +299,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             // no need to notify if processing is started
         }
 
+        final boolean debug = LOG.isDebugEnabled();
         final boolean isPeriodicJob = job.isPeriodic();
         if (isPeriodicJob) {
             final long jobPeriod = job.getPeriod().longValue();
@@ -308,7 +312,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             // queue
             synchronized (this) {
                 if (!cancelledJobs_.contains(job.getId())) {
-                    if (LOG.isDebugEnabled()) {
+                    if (debug) {
                         LOG.debug("Reschedulling job " + job);
                     }
                     scheduledJobsQ_.add(job);
@@ -316,7 +320,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 }
             }
         }
-        if (LOG.isDebugEnabled()) {
+        if (debug) {
             final String periodicJob = isPeriodicJob ? "interval " : "";
             LOG.debug("Starting " + periodicJob + "job " + job);
         }
@@ -334,7 +338,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 notify();
             }
         }
-        if (LOG.isDebugEnabled()) {
+        if (debug) {
             final String periodicJob = isPeriodicJob ? "interval " : "";
             LOG.debug("Finished " + periodicJob + "job " + job);
         }
