@@ -21,28 +21,25 @@ import java.security.NoSuchAlgorithmException;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLPeerUnverifiedException;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
-import org.apache.http.localserver.LocalTestServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
-
 /**
- * Tests for insecure SSL.
+ * Tests for insecure SSL, with client certificate.
  *
  * @version $Revision$
+ * @author Martin Huber
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HttpWebConnectionInsecureSSLTest extends WebTestCase {
+public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends WebTestCase {
 
-    private LocalTestServer localServer_;
+    private LocalTestServerWithClientCerts localServer_;
 
     /**
      * @throws Exception if an error occurs
@@ -65,7 +62,7 @@ public class HttpWebConnectionInsecureSSLTest extends WebTestCase {
         final SSLContext serverSSLContext = SSLContext.getInstance("TLS");
         serverSSLContext.init(keyManagers, trustManagers, null);
 
-        localServer_ = new LocalTestServer(serverSSLContext);
+        localServer_ = new LocalTestServerWithClientCerts(serverSSLContext);
         localServer_.registerDefaultHandlers();
 
         localServer_.start();
@@ -77,7 +74,7 @@ public class HttpWebConnectionInsecureSSLTest extends WebTestCase {
             return KeyManagerFactory.getInstance(algorithm);
         }
         catch (final NoSuchAlgorithmException e) {
-            return KeyManagerFactory.getInstance("SunX509");
+            return KeyManagerFactory.getInstance("SunX");
         }
     }
 
@@ -87,7 +84,7 @@ public class HttpWebConnectionInsecureSSLTest extends WebTestCase {
             return TrustManagerFactory.getInstance(algorithm);
         }
         catch (final NoSuchAlgorithmException e) {
-            return TrustManagerFactory.getInstance("SunX509");
+            return TrustManagerFactory.getInstance("SunX");
         }
     }
 
@@ -105,33 +102,11 @@ public class HttpWebConnectionInsecureSSLTest extends WebTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    @Test(expected = SSLPeerUnverifiedException.class)
-    public void normal() throws Exception {
-        final WebClient webClient = getWebClient();
-        webClient.getPage("https://" + localServer_.getServiceAddress().getHostName()
-                + ':' + localServer_.getServiceAddress().getPort()
-                + "/random/100");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
     @Test
-    public void insecureSSL() throws Exception {
+    public void insecureSSL_clientCertificates() throws Exception {
         final WebClient webClient = getWebClient();
-        webClient.setUseInsecureSSL(true);
-        webClient.getPage("https://" + localServer_.getServiceAddress().getHostName()
-                + ':' + localServer_.getServiceAddress().getPort()
-                + "/random/100");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void insecureSSL_withWrapper() throws Exception {
-        final WebClient webClient = getWebClient();
-        webClient.setWebConnection(new WebConnectionWrapper(webClient.getWebConnection()));
+        webClient.setSSLClientCertificate(getClass().getClassLoader().getResource("insecureSSL.keystore"),
+                "nopassword", "jks");
         webClient.setUseInsecureSSL(true);
         webClient.getPage("https://" + localServer_.getServiceAddress().getHostName()
                 + ':' + localServer_.getServiceAddress().getPort()

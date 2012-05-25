@@ -680,6 +680,9 @@
         <contributor>
             <name>David Gileadi</name>
         </contributor>
+        <contributor>
+            <name>Martin Huber</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

@@ -172,6 +172,10 @@ public class WebClient implements Serializable {
     private boolean throwExceptionOnScriptError_ = true;
     private JavaScriptErrorListener javaScriptErrorListener_;
 
+    private URL sslClientCertificateUrl_;
+    private String sslClientCertificatePassword_;
+    private String sslClientCertificateType_;
+
     /**
      * Creates a web client instance using the browser version returned by
      * {@link BrowserVersion#getDefault()}.
@@ -2006,6 +2010,32 @@ public class WebClient implements Serializable {
             return waitForBackgroundJavaScriptStartingBefore(newDelay);
         }
         return count;
+    }
+
+    /**
+     * Sets the SSL client certificate to use.
+     * The needed parameters are used to construct a {@link java.security.KeyStore}.
+     * @param certificateUrl the URL which locates the certificate
+     * @param certificatePassword the certificate password
+     * @param certificateType the type of certificate, usually "jks" or "pkcs12".
+     */
+    public void setSSLClientCertificate(final URL certificateUrl, final String certificatePassword,
+            final String certificateType) {
+        this.sslClientCertificateUrl_ = certificateUrl;
+        this.sslClientCertificatePassword_ = certificatePassword;
+        this.sslClientCertificateType_ = certificateType;
+    }
+
+    URL getSSLClientCertificateUrl() {
+        return sslClientCertificateUrl_;
+    }
+
+    String getSSLClientCertificatePassword() {
+        return sslClientCertificatePassword_;
+    }
+
+    String getSSLClientCertificateType() {
+        return sslClientCertificateType_;
     }
 
     /**

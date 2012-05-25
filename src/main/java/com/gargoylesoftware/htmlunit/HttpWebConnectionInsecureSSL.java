@@ -17,14 +17,19 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.net.Socket;
 import java.security.GeneralSecurityException;
+import java.security.KeyStore;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
@@ -39,29 +44,35 @@ import org.apache.http.params.HttpParams;
  * @version $Revision$
  * @author Nicolas Belisle
  * @author Ahmed Ashour
+ * @author Martin Huber
  */
 final class HttpWebConnectionInsecureSSL {
 
-    private HttpWebConnectionInsecureSSL() { }
+    private static final Log LOG = LogFactory.getLog(HttpWebConnectionInsecureSSL.class);
+
+    private HttpWebConnectionInsecureSSL() {
+    }
 
     /**
      * Sets Insecure SSL.
-     * @param httpClient the client
+     *
+     * @param webClient      the webClient
+     * @param httpClient     the client
      * @param useInsecureSSL whether to use insecure SSL or not
-     * @param ssl3Only whether to allow only SSLv3
+     * @param ssl3Only       whether to allow only SSLv3
      * @throws GeneralSecurityException if an error occurs
      */
-    static void setUseInsecureSSL(final AbstractHttpClient httpClient,
-            final boolean useInsecureSSL, final boolean ssl3Only) throws GeneralSecurityException {
+    static void setUseInsecureSSL(final WebClient webClient, final AbstractHttpClient httpClient,
+                          final boolean useInsecureSSL, final boolean ssl3Only) throws GeneralSecurityException {
         if (useInsecureSSL) {
             final SSLContext sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null, new TrustManager[] {new InsecureTrustManager()}, null);
+            sslContext.init(getKeyManagers(webClient), new TrustManager[]{new InsecureTrustManager()}, null);
             final SSLSocketFactory factory = new SSLSocketFactory(sslContext, new AllowAllHostnameVerifier()) {
                 @Override
                 public Socket createSocket(final HttpParams params) throws IOException {
                     final SSLSocket sslSocket = (SSLSocket) super.createSocket(params);
                     if (ssl3Only) {
-                        sslSocket.setEnabledProtocols(new String[] {"SSLv3"});
+                        sslSocket.setEnabledProtocols(new String[]{"SSLv3"});
                     }
                     return sslSocket;
                 }
@@ -73,7 +84,27 @@ final class HttpWebConnectionInsecureSSL {
         }
         else {
             final SchemeRegistry schemeRegistry = httpClient.getConnectionManager().getSchemeRegistry();
-            schemeRegistry.register(new Scheme("https", 443, SSLSocketFactory.getSocketFactory()));
+            schemeRegistry.register(new Scheme("https", 443, HttpWebConnection.getSSLSocketFactory(webClient)));
+        }
+    }
+
+    private static KeyManager[] getKeyManagers(final WebClient webClient) {
+        if (webClient.getSSLClientCertificateUrl() == null) {
+            return null;
+        }
+        try {
+            final KeyStore keyStore = KeyStore.getInstance(webClient.getSSLClientCertificateType());
+            final String password = webClient.getSSLClientCertificatePassword();
+            final char[] passwordChars = password != null ? password.toCharArray() : null;
+            keyStore.load(webClient.getSSLClientCertificateUrl().openStream(), passwordChars);
+
+            final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
+            keyManagerFactory.init(keyStore, passwordChars);
+            return keyManagerFactory.getKeyManagers();
+        }
+        catch (final Exception e) {
+            LOG.error(e);
+            return null;
         }
     }
 }

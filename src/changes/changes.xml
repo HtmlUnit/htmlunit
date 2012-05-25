@@ -5,7 +5,10 @@
     </properties>
 
     <body>
-        <release version="2.10" date="???" description="Bugfixes">
+        <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+            <action type="add" dev="asashour" due-to="Martin Huber">
+                WebClient: add .setSSLClientCertificate() for client certificate authentication.
+            </action>
             <action type="fix" dev="rbri">
                 CSS: The ':disabled' and the ':enabled' selector now works for all HtmlElements
                 implementing the DisabledElement interface. Now the selector

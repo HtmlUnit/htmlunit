@@ -26,6 +26,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
+import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -99,6 +100,7 @@ import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.jfree.util.Log;
 
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -170,7 +172,7 @@ public class HttpWebConnection implements WebConnection {
                 //Try to use only SSLv3 instead
                 if (isUseInsecureSsl_) {
                     try {
-                        HttpWebConnectionInsecureSSL.setUseInsecureSSL(getHttpClient(), true, true);
+                        HttpWebConnectionInsecureSSL.setUseInsecureSSL(webClient_, getHttpClient(), true, true);
                     }
                     catch (final GeneralSecurityException e) {
                         throw new RuntimeException(e);
@@ -527,7 +529,7 @@ public class HttpWebConnection implements WebConnection {
 
         final SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
-        schemeRegistry.register(new Scheme("https", 443, SSLSocketFactory.getSocketFactory()));
+        schemeRegistry.register(new Scheme("https", 443, getSSLSocketFactory(webClient_)));
         final ThreadSafeClientConnManager connectionManager =
             new ThreadSafeClientConnManager(schemeRegistry);
 
@@ -555,6 +557,29 @@ public class HttpWebConnection implements WebConnection {
                 Integer.valueOf(webClient_.getTimeout()));
 
         return httpClient;
+    }
+
+    /**
+     * Returns the SSLSocketFactory to use.
+     * @return the SSLSocketFactory
+     */
+    static SSLSocketFactory getSSLSocketFactory(final WebClient webClient) {
+        if (webClient.getSSLClientCertificateUrl() == null) {
+            return SSLSocketFactory.getSocketFactory();
+        }
+        else {
+            try {
+                final KeyStore keyStore = KeyStore.getInstance(webClient.getSSLClientCertificateType());
+                final String password = webClient.getSSLClientCertificatePassword();
+                final char[] passwordChars = password != null ? password.toCharArray() : null;
+                keyStore.load(webClient.getSSLClientCertificateUrl().openStream(), passwordChars);
+                return new SSLSocketFactory(keyStore, password);
+            }
+            catch (final Exception e) {
+                Log.error(e);
+                return null;
+            }
+        }
     }
 
     /**
@@ -682,7 +707,7 @@ public class HttpWebConnection implements WebConnection {
      */
     public void setUseInsecureSSL(final boolean useInsecureSSL) throws GeneralSecurityException {
         isUseInsecureSsl_ = useInsecureSSL;
-        HttpWebConnectionInsecureSSL.setUseInsecureSSL(getHttpClient(), useInsecureSSL, false);
+        HttpWebConnectionInsecureSSL.setUseInsecureSSL(webClient_, getHttpClient(), useInsecureSSL, false);
     }
 
     /**
