@@ -2015,6 +2015,12 @@ public class WebClient implements Serializable {
     /**
      * Sets the SSL client certificate to use.
      * The needed parameters are used to construct a {@link java.security.KeyStore}.
+     *
+     * If the web server requires Renegotiation, you have to set sytem property
+     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
+     * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
+     * TLS Renegotiation Issue</a>.
+     *
      * @param certificateUrl the URL which locates the certificate
      * @param certificatePassword the certificate password
      * @param certificateType the type of certificate, usually "jks" or "pkcs12".

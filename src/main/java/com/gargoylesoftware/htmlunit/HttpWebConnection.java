@@ -40,6 +40,8 @@ import javax.net.ssl.SSLPeerUnverifiedException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
@@ -100,7 +102,6 @@ import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
-import org.jfree.util.Log;
 
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -120,6 +121,8 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  */
 public class HttpWebConnection implements WebConnection {
+
+    private static final Log LOG = LogFactory.getLog(HttpWebConnection.class);
 
     private static final String HACKED_COOKIE_POLICY = "mine";
     private AbstractHttpClient httpClient_;
@@ -576,7 +579,7 @@ public class HttpWebConnection implements WebConnection {
                 return new SSLSocketFactory(keyStore, password);
             }
             catch (final Exception e) {
-                Log.error(e);
+                LOG.error(e);
                 return null;
             }
         }
