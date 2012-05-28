@@ -1881,7 +1881,6 @@ public class HtmlPageTest extends WebServerTestCase {
             resp.setContentType("text/html");
             final String response = "<html>\n"
                 + "<body>\n"
-                + "  <div id='counter'>" + counter_++ + "</div>\n"
                 + "  <form action='two.html' method='post'>\n"
                 + "  <input type='hidden' name='some_name' value='some_value'>\n"
                 + "  <input id='myButton' type='submit'>\n"

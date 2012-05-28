@@ -40,18 +40,18 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.eclipse.jetty.security.ConstraintMapping;
+import org.eclipse.jetty.security.ConstraintSecurityHandler;
+import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.DefaultServlet;
+import org.eclipse.jetty.util.security.Constraint;
+import org.eclipse.jetty.webapp.WebAppClassLoader;
+import org.eclipse.jetty.webapp.WebAppContext;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.AfterClass;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.security.Constraint;
-import org.mortbay.jetty.security.ConstraintMapping;
-import org.mortbay.jetty.security.HashUserRealm;
-import org.mortbay.jetty.security.SecurityHandler;
-import org.mortbay.jetty.servlet.DefaultServlet;
-import org.mortbay.jetty.webapp.WebAppClassLoader;
-import org.mortbay.jetty.webapp.WebAppContext;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -288,10 +288,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 constraintMapping.setConstraint(constraint);
                 constraintMapping.setPathSpec("/*");
 
-                final SecurityHandler securityHandler = new SecurityHandler();
-                securityHandler.setUserRealm(new HashUserRealm("MyRealm", "./src/test/resources/realm.properties"));
-                securityHandler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
-                context.addHandler(securityHandler);
+                final ConstraintSecurityHandler handler = (ConstraintSecurityHandler) context.getSecurityHandler();
+                handler.setLoginService(new HashLoginService("MyRealm", "./src/test/resources/realm.properties"));
+                handler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
             }
 
             context.addServlet(MockWebConnectionServlet.class, "/*");

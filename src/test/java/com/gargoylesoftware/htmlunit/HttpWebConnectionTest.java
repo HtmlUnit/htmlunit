@@ -44,10 +44,14 @@ import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider2Test.InMemoryAppender;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
@@ -350,6 +354,33 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             throws ServletException, IOException {
             request.getSession().setAttribute("trigger", "session");
             super.doGet(request, response);
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"Host", "User-Agent" }, IE = { })
+    public void hostHeaderFirst() throws Exception {
+        final Logger logger = Logger.getLogger("org.apache.http.headers");
+        final Level oldLevel = logger.getLevel();
+        logger.setLevel(Level.DEBUG);
+
+        final InMemoryAppender appender = new InMemoryAppender();
+        logger.addAppender(appender);
+        try {
+            startWebServer("./");
+
+            final WebClient webClient = getWebClient();
+            webClient.getPage("http://localhost:" + PORT + "/LICENSE.txt");
+            for (int i = 0; i < getExpectedAlerts().length; i++) {
+                assertTrue(appender.getMessages().get(i + 1).contains(getExpectedAlerts()[i]));
+            }
+        }
+        finally {
+            logger.removeAppender(appender);
+            logger.setLevel(oldLevel);
         }
     }
 }

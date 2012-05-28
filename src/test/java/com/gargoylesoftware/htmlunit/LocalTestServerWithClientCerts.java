@@ -387,7 +387,6 @@ public class LocalTestServerWithClientCerts {
         public Exception getException() {
             return this.exception_;
         }
-
     }
 
     class Worker extends Thread {

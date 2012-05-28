@@ -127,7 +127,10 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
         }
     }
 
-    private static class InMemoryAppender extends AppenderSkeleton {
+    /**
+     * An in memory appender, used to save all Log messages in memory.
+     */
+    public static class InMemoryAppender extends AppenderSkeleton {
 
         private List<String> messages_ = new ArrayList<String>();
 
