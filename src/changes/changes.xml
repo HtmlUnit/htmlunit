@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+            <action type="update" dev="asashour">
+                Upgrade Apache HttpClient to 4.2.
+            </action>
             <action type="add" dev="asashour" due-to="Martin Huber">
                 WebClient: add .setSSLClientCertificate() for client certificate authentication.
             </action>
