@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+            <action type="update" dev="rbri">
+                Upgrade commons-codec to 1.6
+            </action>
             <action type="update" dev="asashour">
                 Upgrade Apache HttpClient to 4.2.
             </action>
