@@ -92,7 +92,7 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.DefaultRedirectStrategy;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.impl.cookie.BasicPathHandler;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
@@ -533,8 +533,8 @@ public class HttpWebConnection implements WebConnection {
         final SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
         schemeRegistry.register(new Scheme("https", 443, getSSLSocketFactory(webClient_)));
-        final ThreadSafeClientConnManager connectionManager =
-            new ThreadSafeClientConnManager(schemeRegistry);
+        final PoolingClientConnectionManager connectionManager =
+            new PoolingClientConnectionManager(schemeRegistry);
 
         final DefaultHttpClient httpClient = new DefaultHttpClient(connectionManager, httpsParams);
         httpClient.setCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
@@ -570,18 +570,16 @@ public class HttpWebConnection implements WebConnection {
         if (webClient.getSSLClientCertificateUrl() == null) {
             return SSLSocketFactory.getSocketFactory();
         }
-        else {
-            try {
-                final KeyStore keyStore = KeyStore.getInstance(webClient.getSSLClientCertificateType());
-                final String password = webClient.getSSLClientCertificatePassword();
-                final char[] passwordChars = password != null ? password.toCharArray() : null;
-                keyStore.load(webClient.getSSLClientCertificateUrl().openStream(), passwordChars);
-                return new SSLSocketFactory(keyStore, password);
-            }
-            catch (final Exception e) {
-                LOG.error(e);
-                return null;
-            }
+        try {
+            final KeyStore keyStore = KeyStore.getInstance(webClient.getSSLClientCertificateType());
+            final String password = webClient.getSSLClientCertificatePassword();
+            final char[] passwordChars = password != null ? password.toCharArray() : null;
+            keyStore.load(webClient.getSSLClientCertificateUrl().openStream(), passwordChars);
+            return new SSLSocketFactory(keyStore, password);
+        }
+        catch (final Exception e) {
+            LOG.error(e);
+            return null;
         }
     }
 
