@@ -391,7 +391,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         // Remove custom attributes defined at runtime via JavaScript.
-        for (final Object id : this.getAllIds()) {
+        for (final Object id : getAllIds()) {
             if (id instanceof Integer) {
                 final int i = ((Integer) id).intValue();
                 delete(i);

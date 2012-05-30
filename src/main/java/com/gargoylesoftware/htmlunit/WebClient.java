@@ -2027,9 +2027,9 @@ public class WebClient implements Serializable {
      */
     public void setSSLClientCertificate(final URL certificateUrl, final String certificatePassword,
             final String certificateType) {
-        this.sslClientCertificateUrl_ = certificateUrl;
-        this.sslClientCertificatePassword_ = certificatePassword;
-        this.sslClientCertificateType_ = certificateType;
+        sslClientCertificateUrl_ = certificateUrl;
+        sslClientCertificatePassword_ = certificatePassword;
+        sslClientCertificateType_ = certificateType;
     }
 
     URL getSSLClientCertificateUrl() {
