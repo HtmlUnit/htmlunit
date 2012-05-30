@@ -48,6 +48,7 @@ import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.eclipse.jetty.websocket.WebSocketHandler;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
@@ -344,6 +345,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected void startWebServer(final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
+        startWebServer(resourceBase, classpath, servlets, null);
+    }
+
+    /**
+     * Starts the web server on the default {@link #PORT}.
+     * The given resourceBase is used to be the ROOT directory that serves the default context.
+     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
+     *
+     * @param resourceBase the base of resources for the default context
+     * @param classpath additional classpath entries to add (may be null)
+     * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
+     * @param handler websocket handler (can be null)
+     * @throws Exception if the test fails
+     */
+    protected void startWebServer(final String resourceBase, final String[] classpath,
+            final Map<String, Class<? extends Servlet>> servlets, final WebSocketHandler handler) throws Exception {
         stopWebServer();
         LAST_TEST_MockWebConnection_ = Boolean.FALSE;
         STATIC_SERVER_ = new Server(PORT);
@@ -373,7 +390,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         }
         context.setClassLoader(loader);
-        STATIC_SERVER_.setHandler(context);
+        if (handler != null) {
+            handler.setHandler(context);
+            STATIC_SERVER_.setHandler(handler);
+        }
+        else {
+            STATIC_SERVER_.setHandler(context);
+        }
         STATIC_SERVER_.start();
     }
 
