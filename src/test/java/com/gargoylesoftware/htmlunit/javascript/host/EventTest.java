@@ -207,7 +207,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "error", IE = "true")
+    @Alerts(IE = "true", FF10 = "", FF3 = "error", FF3_6 = "error")
     public void testAddEventListener_HandlerNull() throws Exception {
         final String content
             = "<html><head></head><body>\n"
