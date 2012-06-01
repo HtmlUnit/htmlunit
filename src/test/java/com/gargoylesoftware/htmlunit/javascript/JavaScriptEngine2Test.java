@@ -119,7 +119,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("123")
+    @Alerts(DEFAULT = "123", FF10 = "undefined")
     @NotYetImplemented
     public void undefined() throws Exception {
         final String html = "<html><head><script>\n"

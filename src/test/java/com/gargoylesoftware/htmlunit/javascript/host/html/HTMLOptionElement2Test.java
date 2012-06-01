@@ -77,6 +77,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "abb",
             FF3 = "ab",
             FF3_6 = "ab",
+            FF10 = "aab",
             IE6 = "ab",
             IE7 = "ab",
             CHROME = "")
