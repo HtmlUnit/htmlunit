@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -104,6 +105,7 @@ public class JavaScriptJobManagerTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Tries(3)
     public void setClearIntervalUsesManager() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
