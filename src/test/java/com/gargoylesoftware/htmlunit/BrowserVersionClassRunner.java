@@ -87,7 +87,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     expectedAlerts = firstDefined(alerts.FF10(), alerts.FF(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.CHROME_16) {
-                    expectedAlerts = firstDefined(alerts.CHROME15(), alerts.CHROME(), alerts.DEFAULT());
+                    expectedAlerts = firstDefined(alerts.CHROME16(), alerts.CHROME(), alerts.DEFAULT());
                 }
             }
         }
