@@ -179,7 +179,10 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = {"undefined,undefined", "3,undefined", "3,10" },
-            FF = {"11,11", "3,11", "3,10" })
+            FF3 = {"11,11", "3,11", "3,10" },
+            FF3_6 = {"11,11", "3,11", "3,10" },
+            FF10 = {"0,0", "3,3", "3,10" }
+            )
     public void selection() throws Exception {
         selection(3, 10);
     }
@@ -189,7 +192,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = {"undefined,undefined", "-3,undefined", "-3,15" },
-            FF = {"11,11", "0,11", "0,11" })
+            FF3 = {"11,11", "0,11", "0,11" },
+            FF3_6 = {"11,11", "0,11", "0,11" },
+            FF10 = {"0,0", "0,0", "0,11" })
     public void selection_outOfBounds() throws Exception {
         selection(-3, 15);
     }
@@ -199,7 +204,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = {"undefined,undefined", "10,undefined", "10,5" },
-            FF = {"11,11", "10,11", "5,5" })
+            FF3 = {"11,11", "10,11", "5,5" },
+            FF3_6 = {"11,11", "10,11", "5,5" },
+            FF10 = {"0,0", "10,10", "5,5" })
     public void selection_reverseOrder() throws Exception {
         selection(10, 5);
     }
@@ -364,7 +371,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "-1", "5", "8", "2", "0", "0", "0", "3" },
+    @Alerts(FF3 = { "-1", "5", "8", "2", "0", "0", "0", "3" },
+            FF3_6 = { "-1", "5", "8", "2", "0", "0", "0", "3" },
+            FF10 = { "20", "5", "8", "2", "error", "error", "8", "2", "20", "3" },
             IE = { "20", "5", "8", "2", "error", "error", "8", "2", "error", "8", "3" })
     public void cols() throws Exception {
         final String html
@@ -399,7 +408,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "-1", "5", "8", "2", "0", "0", "0", "3" },
+    @Alerts(FF3 = { "-1", "5", "8", "2", "0", "0", "0", "3" },
+            FF3_6 = { "-1", "5", "8", "2", "0", "0", "0", "3" },
+            FF10 = { "2", "5", "8", "2", "error", "error", "8", "2", "2", "3" },
             IE = { "2", "5", "8", "2", "error", "error", "8", "2", "error", "8", "3" })
     public void rows() throws Exception {
         final String html

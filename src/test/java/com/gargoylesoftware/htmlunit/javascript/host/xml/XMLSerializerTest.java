@@ -394,7 +394,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF3 = "<INPUT/>",
-            FF3_6 = "<input xmlns=\"http://www.w3.org/1999/xhtml\" />")
+            FF3_6 = "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
+            FF10 = "<input xmlns=\"http://www.w3.org/1999/xhtml\" />")
     @NotYetImplemented(Browser.FF)
     public void imputTagWithoutType() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

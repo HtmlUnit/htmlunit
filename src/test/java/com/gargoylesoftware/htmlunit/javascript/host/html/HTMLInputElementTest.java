@@ -724,8 +724,10 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"text text", "password password", "hidden hidden",
-            "checkbox checkbox", "radio radio", "file file", "checkbox checkbox" })
+    @Alerts(DEFAULT = {"text text", "password password", "hidden hidden",
+            "checkbox checkbox", "radio radio", "file file", "checkbox checkbox" },
+            FF10 = {"text TeXt", "password PassWord", "hidden Hidden",
+            "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" })
     public void typeCase() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
