@@ -5,7 +5,10 @@
     </properties>
 
     <body>
-        <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+        <release version="2.10" date="???" description="Bugfixes, SSL client certificate, initial WebSocket support">
+            <action type="add" dev="asashour">
+                WebSocket: initial support.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade commons-codec to 1.6
             </action>

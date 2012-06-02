@@ -133,6 +133,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("JavaScriptBackgroundJob");
         names.remove("Location");
         names.remove("MediaList");
+        names.remove("MessageEvent");
         names.remove("MimeType");
         names.remove("MimeTypeArray");
         names.remove("MouseEvent");
@@ -161,6 +162,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("TextRange");
         names.remove("TreeWalker");
         names.remove("UIEvent");
+        names.remove("WebSocket");
         names.remove("Window");
         names.remove("WindowProxy");
         names.remove("XMLDocument");

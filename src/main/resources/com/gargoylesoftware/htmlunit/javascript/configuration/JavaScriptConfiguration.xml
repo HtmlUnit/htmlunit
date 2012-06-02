@@ -2467,6 +2467,10 @@
         <function name="item" />
     </class>
 
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.MessageEvent" JSObject="true">
+        <property name="data" readable="true" writable="false"/>
+    </class>
+
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.MimeType"
         JSObject="true">
         <browser name="Firefox"/>
@@ -2956,6 +2960,23 @@
         <function name="initUIEvent">
             <browser name="Firefox"/>
         </function>
+    </class>
+
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.WebSocket"
+        jsConstructor="jsConstructor" JSObject="true">
+        <doclink url="http://dev.w3.org/html5/websockets/" descr="W3C documentation"/>
+        <browser name="Firefox"/>
+        <constant name="CONNECTING"/>
+        <constant name="OPEN"/>
+        <constant name="CLOSING"/>
+        <constant name="CLOSED"/>
+        <property name="onerror" readable="true" writable="true"/>
+        <property name="onopen" readable="true" writable="true"/>
+        <property name="onmessage" readable="true" writable="true"/>
+        <property name="onclose" readable="true" writable="true"/>
+        <property name="readyState" readable="true" writable="false"/>
+        <function name="close"/>
+        <function name="send"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Window" JSObject="true">
