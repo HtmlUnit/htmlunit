@@ -46,7 +46,7 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      * {@inheritDoc}
      */
     protected boolean isBasicAuthentication() {
-        return getWebDriver() instanceof HtmlUnitDriver;
+        return true;
     }
 
     /**
@@ -54,6 +54,12 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      */
     @Test
     public void basicAuthenticationWrongUserName() throws Exception {
+        // this test is not running in real browser because there
+        // in no support for basic auth in selenimum
+        if (!(getWebDriver() instanceof HtmlUnitDriver)) {
+            return;
+        }
+
         getMockWebConnection().setResponse(URL_SECOND, "Hello World");
 
         // wrong user name
@@ -69,6 +75,12 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      */
     @Test
     public void basicAuthenticationWrongPassword() throws Exception {
+        // this test is not running in real browser because there
+        // in no support for basic auth in selenimum
+        if (!(getWebDriver() instanceof HtmlUnitDriver)) {
+            return;
+        }
+
         getMockWebConnection().setResponse(URL_SECOND, "Hello World");
 
         // wrong user name
@@ -84,6 +96,12 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
      */
     @Test
     public void basicAuthenticationTwice() throws Exception {
+        // this test is not running in real browser because there
+        // in no support for basic auth in selenimum
+        if (!(getWebDriver() instanceof HtmlUnitDriver)) {
+            return;
+        }
+
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
 
         getMockWebConnection().setResponse(URL_SECOND, "Hello World");
@@ -175,9 +193,13 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
 
         getWebClient().getCredentialsProvider().clear();
 
-        // no credentials
-        final WebDriver driver = loadPage2(html, new URL("http://localhost:" + PORT + "/"));
-        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+        // this test is not running in real browser because there
+        // in no support for basic auth in selenimum
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            // no credentials
+            final WebDriver driver = loadPage2(html, new URL("http://localhost:" + PORT + "/"));
+            assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+        }
 
         // now a url with credentials
         URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
@@ -199,9 +221,13 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
 
         getWebClient().getCredentialsProvider().clear();
 
-        // no credentials
-        final WebDriver driver = loadPage2(html, new URL("http://localhost:" + PORT + "/"));
-        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+        // this test is not running in real browser because there
+        // in no support for basic auth in selenimum
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            // no credentials
+            final WebDriver driver = loadPage2(html, new URL("http://localhost:" + PORT + "/"));
+            assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+        }
 
         // now a url with credentials
         URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
@@ -226,23 +252,30 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(html);
 
         getWebClient().getCredentialsProvider().clear();
+        WebDriver driver = null;
 
-        // no credentials
-        final WebDriver driver = loadPage2(html, new URL("http://localhost:" + PORT + "/"));
-        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+        // this test is not running in real browser because there
+        // in no support for basic auth in selenimum
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            // no credentials
+            driver = loadPage2(html, new URL("http://localhost:" + PORT + "/"));
+            assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+        }
 
         // now a url with credentials
         URL url = new URL("http://jetty:jetty@localhost:" + PORT + "/");
-        loadPageWithAlerts2(url);
+        driver = loadPageWithAlerts2(url);
 
         // next step without credentials but the credentials are still known
         url = new URL("http://localhost:" + PORT + "/");
         loadPageWithAlerts2(url);
 
-        // and now with wrong credentials
-        url = new URL("http://jetty:wrong@localhost:" + PORT + "/");
-        loadPage2(html, url);
-        assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            // and now with wrong credentials
+            url = new URL("http://jetty:wrong@localhost:" + PORT + "/");
+            loadPage2(html, url);
+            assertTrue(driver.getPageSource().contains("HTTP ERROR 401"));
+        }
     }
 
     /**
@@ -251,6 +284,12 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
     @Test
     @Alerts("SecRet")
     public void basicAuthenticationUserFromUrlOverwriteDefaultCredentials() throws Exception {
+        // this test is not running in real browser because there
+        // in no support for basic auth in selenimum
+        if (!(getWebDriver() instanceof HtmlUnitDriver)) {
+            return;
+        }
+
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
@@ -279,6 +318,12 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = "SecRet")
     public void basicAuthenticationUserFromUrlOverwriteWrongDefaultCredentials() throws Exception {
+        // this test is not running in real browser because there
+        // in no support for basic auth in selenimum
+        if (!(getWebDriver() instanceof HtmlUnitDriver)) {
+            return;
+        }
+
         final String html = "<html><body onload='alert(\"SecRet\")'></body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
@@ -323,6 +368,12 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
     @Test
     @Alerts("HTTP ERROR 401")
     public void basicAuthenticationXHRWithUsername() throws Exception {
+        // this test is not running in real browser because there
+        // in no support for basic auth in selenimum
+        if (!(getWebDriver() instanceof HtmlUnitDriver)) {
+            return;
+        }
+
         final String html = "<html><head><script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"
             + "var handler = function() {\n"
@@ -348,6 +399,12 @@ public class DefaultCredentialsProvider2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = "HTTP ERROR 401")
     public void basicAuthenticationXHRWithUser() throws Exception {
+        // this test is not running in real browser because there
+        // in no support for basic auth in selenimum
+        if (!(getWebDriver() instanceof HtmlUnitDriver)) {
+            return;
+        }
+
         final String html = "<html><head><script>\n"
             + "var xhr = " + XHRInstantiation_ + ";\n"
             + "var handler = function() {\n"
