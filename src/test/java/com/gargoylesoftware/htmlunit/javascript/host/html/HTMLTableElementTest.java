@@ -615,7 +615,8 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"", "#0000aa", "#000000" })
+    @Alerts(DEFAULT = {"", "#0000aa", "#000000" },
+            FF10 = {"", "#0000aa", "x" })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
