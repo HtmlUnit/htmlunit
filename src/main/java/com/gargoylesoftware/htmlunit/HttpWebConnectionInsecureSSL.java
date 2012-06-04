@@ -20,6 +20,9 @@ import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
@@ -115,14 +118,17 @@ final class HttpWebConnectionInsecureSSL {
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 class InsecureTrustManager implements X509TrustManager {
+    private final Set<X509Certificate> acceptedIssuers_ = new HashSet<X509Certificate>();
 
     /**
      * {@inheritDoc}
      */
     public void checkClientTrusted(final X509Certificate[] chain, final String authType) throws CertificateException {
         // Everyone is trusted!
+        acceptedIssuers_.addAll(Arrays.asList(chain));
     }
 
     /**
@@ -130,12 +136,20 @@ class InsecureTrustManager implements X509TrustManager {
      */
     public void checkServerTrusted(final X509Certificate[] chain, final String authType) throws CertificateException {
         // Everyone is trusted!
+        acceptedIssuers_.addAll(Arrays.asList(chain));
     }
 
     /**
      * {@inheritDoc}
      */
     public X509Certificate[] getAcceptedIssuers() {
-        return new X509Certificate[0];
+        // it seems to be OK for Java <= 6 to return an empty array but not for Java 7 (at least 1.7.0_04-b20):
+        // requesting an URL with a valid certificate (working without WebClient.setUseInsecureSSL(true)) throws a
+        //  javax.net.ssl.SSLPeerUnverifiedException: peer not authenticated
+        // when the array returned here is empty
+        if (acceptedIssuers_.isEmpty()) {
+            return new X509Certificate[0];
+        }
+        return acceptedIssuers_.toArray(new X509Certificate[acceptedIssuers_.size()]);
     }
 }
