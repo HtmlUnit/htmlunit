@@ -384,9 +384,8 @@ public class Document extends EventNode {
 
                 final Matcher matcher = TAG_NAME_PATTERN.matcher(tagName);
                 if (!matcher.matches()) {
-                    LOG.error("Unexpected exception occurred while parsing HTML snippet");
-                    throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
-                            + tagName);
+                    LOG.info("createElement: String contains an invalid character: ");
+                    throw Context.reportRuntimeError("String contains an invalid character");
                 }
             }
 

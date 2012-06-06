@@ -1394,4 +1394,25 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Only IE accepts more than the tag name.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception", IE = "INPUT")
+    public void createElement_notOnlyTagName() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  var t = document.createElement('<input name=x>');\n"
+            + "  alert(t.tagName);\n"
+            + "} catch(e) {"
+            + "  alert('exception');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
