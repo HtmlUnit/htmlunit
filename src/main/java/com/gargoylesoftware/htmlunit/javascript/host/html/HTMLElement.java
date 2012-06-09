@@ -2198,30 +2198,33 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final boolean emulated = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_OFF_EMULATED);
         if (emulated) {
             chOff_ = chOff;
+            return;
         }
-        else {
-            try {
-                Float f = Float.valueOf(chOff);
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_OFF_INTEGER)) {
-                    if (f.floatValue() < 0) {
-                        f = Float.valueOf(0f);
-                    }
-                    chOff = Integer.toString(f.intValue());
+
+        try {
+            final float f = Float.parseFloat(chOff);
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_OFF_INTEGER)) {
+                if (f < 0) {
+                    chOff = "0";
                 }
                 else {
-                    if (f.intValue() == f) {
-                        chOff = Integer.toString(f.intValue());
-                    }
-                    else {
-                        chOff = Float.toString(f);
-                    }
+                    chOff = Integer.toString((int) f);
                 }
             }
-            catch (final NumberFormatException e) {
-                // Ignore.
+            else {
+                final int i = (int) f;
+                if (i == f) {
+                    chOff = Integer.toString(i);
+                }
+                else {
+                    chOff = Float.toString(f);
+                }
             }
-            getDomNodeOrDie().setAttribute("charOff", chOff);
         }
+        catch (final NumberFormatException e) {
+            // Ignore.
+        }
+        getDomNodeOrDie().setAttribute("charOff", chOff);
     }
 
 }
