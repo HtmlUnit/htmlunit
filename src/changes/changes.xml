@@ -5,12 +5,9 @@
     </properties>
 
     <body>
-        <release version="2.10" date="???" description="Bugfixes, SSL client certificate, initial WebSocket support">
+        <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
             <action type="fix" dev="mguillem">
                 Java 7: fix SSLPeerUnverifiedException for valid certificates when WebClient.setUseInsecureSSL(true) is used.
-            </action>
-            <action type="add" dev="asashour">
-                WebSocket: initial support.
             </action>
             <action type="update" dev="rbri">
                 Upgrade commons-codec to 1.6
