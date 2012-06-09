@@ -280,7 +280,7 @@ public class Range extends SimpleScriptable {
         if (commonAncestors.isEmpty()) {
             return null;
         }
-        return commonAncestors.get(commonAncestors.size() - 1);
+        return commonAncestors.get(0);
     }
 
     /**
@@ -292,7 +292,7 @@ public class Range extends SimpleScriptable {
         final List<Node> ancestors = new ArrayList<Node>();
         Node ancestor = node;
         while (ancestor != null) {
-            ancestors.add(0, ancestor);
+            ancestors.add(ancestor);
             ancestor = ancestor.getParent();
         }
         return ancestors;
