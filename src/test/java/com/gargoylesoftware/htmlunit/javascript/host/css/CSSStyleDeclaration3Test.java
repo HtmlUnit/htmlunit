@@ -175,7 +175,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
             + "    alert(myDivStyle.backgroundPosition);\n"
             + "    alert(myDivStyle.backgroundAttachment);\n"
             + "  </script>\n"
-            + "<body>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -357,7 +356,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
             + "    alert(myDivStyle.backgroundPosition);\n"
             + "    alert(myDivStyle.backgroundAttachment);\n"
             + "  </script>\n"
-            + "<body>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -382,7 +380,6 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
             + "    if(!myDivStyle) myDivStyle = window.getComputedStyle(myDiv, null);\n"
             + "    alert(myDivStyle.width);\n"
             + "  </script>\n"
-            + "<body>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
