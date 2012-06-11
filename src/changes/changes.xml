@@ -7,6 +7,9 @@
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
             <action type="fix" dev="mguillem">
+                JavaScript: querySelector(All) throws for invalid selectors.
+            </action>
+            <action type="fix" dev="mguillem">
                 Java 7: fix SSLPeerUnverifiedException for valid certificates when WebClient.setUseInsecureSSL(true) is used.
             </action>
             <action type="update" dev="rbri">

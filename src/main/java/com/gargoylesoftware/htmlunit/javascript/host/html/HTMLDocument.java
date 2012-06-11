@@ -44,6 +44,7 @@ import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.css.sac.CSSException;
 import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -1654,11 +1655,16 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the static node list
      */
     public StaticNodeList jsxFunction_querySelectorAll(final String selectors) {
-        final List<Node> nodes = new ArrayList<Node>();
-        for (final DomNode domNode : getHtmlPage().querySelectorAll(selectors)) {
-            nodes.add((Node) domNode.getScriptObject());
+        try {
+            final List<Node> nodes = new ArrayList<Node>();
+            for (final DomNode domNode : getHtmlPage().querySelectorAll(selectors)) {
+                nodes.add((Node) domNode.getScriptObject());
+            }
+            return new StaticNodeList(nodes, this);
         }
-        return new StaticNodeList(nodes, this);
+        catch (final CSSException e) {
+            throw Context.reportRuntimeError("An invalid or illegal string was specified");
+        }
     }
 
     /**
@@ -1667,11 +1673,16 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
     public Node jsxFunction_querySelector(final String selectors) {
-        final DomNode node = getHtmlPage().querySelector(selectors);
-        if (node != null) {
-            return (Node) node.getScriptObject();
+        try {
+            final DomNode node = getHtmlPage().querySelector(selectors);
+            if (node != null) {
+                return (Node) node.getScriptObject();
+            }
+            return null;
         }
-        return null;
+        catch (final CSSException e) {
+            throw Context.reportRuntimeError("An invalid or illegal string was specified");
+        }
     }
 
     /**

@@ -60,6 +60,12 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLDocumentTest extends WebDriverTestCase {
+    /** jQuery selectors that aren't CSS selectors. */
+    public static final String[] JQUERY_CUSTOM_SELECTORS = {"div.submenu-last:last",
+        "*#__sizzle__ div.submenu-last:last", "div:animated",  "div:animated", "*:button", "*:checkbox", "div:even",
+        "*:file", "div:first", "td:gt(4)", "div:has(p)", ":header", ":hidden", ":image", ":input", "td:lt(4)",
+        ":odd", ":password", ":radio", ":reset", ":selected", ":submit", ":text", ":visible"
+    };
 
     /**
      * @throws Exception if the test fails
@@ -1076,6 +1082,50 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  <div id='div3' class='green'>Third</div>\n"
             + "  <div id='div4' class='blue'>Fourth</div>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void querySelectorAll_badSelector() throws Exception {
+        for (final String selector : JQUERY_CUSTOM_SELECTORS) {
+            doTestQuerySelectorAll_badSelector(selector);
+        }
+    }
+
+    private void doTestQuerySelectorAll_badSelector(final String selector) throws Exception {
+        final String html = "<html><body><script>\n"
+            + "try {\n"
+            + "  document.querySelectorAll('" + selector + "');\n"
+            + "  alert('working: ' + selector);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void querySelector_badSelector() throws Exception {
+        for (final String selector : JQUERY_CUSTOM_SELECTORS) {
+            doTestQuerySelector_badSelector(selector);
+        }
+    }
+
+    private void doTestQuerySelector_badSelector(final String selector) throws Exception {
+        final String html = "<html><body><script>\n"
+            + "try {\n"
+            + "  document.querySelector('" + selector + "');\n"
+            + "  alert('working: ' + selector);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
 
         loadPageWithAlerts2(html);
     }

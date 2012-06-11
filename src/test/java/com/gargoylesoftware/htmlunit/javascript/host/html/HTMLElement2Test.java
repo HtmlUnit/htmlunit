@@ -925,4 +925,48 @@ public class HTMLElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void querySelectorAll_badSelector() throws Exception {
+        for (final String selector : HTMLDocumentTest.JQUERY_CUSTOM_SELECTORS) {
+            doTestQuerySelectorAll_badSelector(selector);
+        }
+    }
+
+    private void doTestQuerySelectorAll_badSelector(final String selector) throws Exception {
+        final String html = "<html><body><div id='it'></div><script>\n"
+            + "try {\n"
+            + "  document.getElementById('it').querySelectorAll('" + selector + "');\n"
+            + "  alert('working: ' + selector);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void querySelector_badSelector() throws Exception {
+        for (final String selector : HTMLDocumentTest.JQUERY_CUSTOM_SELECTORS) {
+            doTestQuerySelector_badSelector(selector);
+        }
+    }
+
+    private void doTestQuerySelector_badSelector(final String selector) throws Exception {
+        final String html = "<html><body><div id='it'></div><script>\n"
+            + "try {\n"
+            + "  document.getElementById('it').querySelector('" + selector + "');\n"
+            + "  alert('working: ' + selector);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

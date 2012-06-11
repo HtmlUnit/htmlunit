@@ -38,6 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.css.sac.CSSException;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -1788,11 +1789,16 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the static node list
      */
     public StaticNodeList jsxFunction_querySelectorAll(final String selectors) {
-        final List<Node> nodes = new ArrayList<Node>();
-        for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
-            nodes.add((Node) domNode.getScriptObject());
+        try {
+            final List<Node> nodes = new ArrayList<Node>();
+            for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
+                nodes.add((Node) domNode.getScriptObject());
+            }
+            return new StaticNodeList(nodes, this);
         }
-        return new StaticNodeList(nodes, this);
+        catch (final CSSException e) {
+            throw Context.reportRuntimeError("An invalid or illegal string was specified");
+        }
     }
 
     /**
@@ -1801,11 +1807,16 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
     public Node jsxFunction_querySelector(final String selectors) {
-        final DomNode node = getDomNodeOrDie().querySelector(selectors);
-        if (node != null) {
-            return (Node) node.getScriptObject();
+        try {
+            final DomNode node = getDomNodeOrDie().querySelector(selectors);
+            if (node != null) {
+                return (Node) node.getScriptObject();
+            }
+            return null;
         }
-        return null;
+        catch (final CSSException e) {
+            throw Context.reportRuntimeError("An invalid or illegal string was specified");
+        }
     }
 
     /**

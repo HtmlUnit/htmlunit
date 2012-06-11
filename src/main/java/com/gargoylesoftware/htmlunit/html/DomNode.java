@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringReader;
@@ -29,6 +30,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.ErrorHandler;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Selector;
@@ -1524,6 +1526,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
             // in case of error parseSelectors returns null
             if (null != selectorList) {
+                CSSStyleSheet.validateSelectors(selectorList);
+
                 final BrowserVersion browserVersion = webClient.getBrowserVersion();
                 for (final HtmlElement child : getHtmlElementDescendants()) {
                     for (int i = 0; i < selectorList.getLength(); i++) {
@@ -1535,8 +1539,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 }
             }
         }
-        catch (final Exception e) {
-            LOG.error("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage(), e);
+        catch (final IOException e) {
+            throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
         }
         return new StaticDomNodeList(elements);
     }

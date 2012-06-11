@@ -21,6 +21,8 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -33,6 +35,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.AttributeCondition;
+import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.ConditionalSelector;
@@ -81,6 +84,8 @@ import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS21;
 import com.steadystate.css.parser.SelectorListImpl;
+import com.steadystate.css.parser.selectors.ChildSelectorImpl;
+import com.steadystate.css.parser.selectors.PseudoClassConditionImpl;
 
 /**
  * A JavaScript object for a Stylesheet.
@@ -109,6 +114,9 @@ public class CSSStyleSheet extends SimpleScriptable {
 
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;
+
+    private static final Collection<String> PSEUDO_CLASSES = Arrays.asList("link", "visited", "hover", "active", "focus",
+            "target", "lang", "disabled", "checked", "indeterminated", "root", "nth-child()");
 
     /**
      * Creates a new empty stylesheet.
@@ -776,4 +784,52 @@ public class CSSStyleSheet extends SimpleScriptable {
         return false;
     }
 
+    /**
+     * Validates the list of selectors.
+     * @param selectorList the selectors
+     * @throws CSSException if a selector is invalid
+     */
+    public static void validateSelectors(final SelectorList selectorList) throws CSSException {
+        for (int i = 0; i < selectorList.getLength(); ++i) {
+            final Selector item = selectorList.item(i);
+            if (!isValidSelector(item)) {
+                throw new CSSException("Invalid selector: " + item);
+            }
+        }
+    }
+
+    private static boolean isValidSelector(final Selector selector) {
+        switch (selector.getSelectorType()) {
+            case Selector.SAC_ELEMENT_NODE_SELECTOR:
+                return true;
+            case Selector.SAC_CONDITIONAL_SELECTOR:
+                final ConditionalSelector conditional = (ConditionalSelector) selector;
+                return isValidSelector(conditional.getSimpleSelector()) && isValidSelector(conditional.getCondition());
+            case Selector.SAC_DESCENDANT_SELECTOR:
+            case Selector.SAC_CHILD_SELECTOR:
+                final DescendantSelector ds = (DescendantSelector) selector;
+                return isValidSelector(ds.getAncestorSelector()) && isValidSelector(ds.getSimpleSelector());
+            default:
+                LOG.warn("Unhandled CSS selector type '" + selector.getSelectorType() + "'. Accepting it silently.");
+                return true; // at least in a first time to break less stuff
+        }
+    }
+
+    private static boolean isValidSelector(final Condition condition) {
+        switch (condition.getConditionType()) {
+            case Condition.SAC_AND_CONDITION:
+                final CombinatorCondition cc1 = (CombinatorCondition) condition;
+                return isValidSelector(cc1.getFirstCondition()) && isValidSelector(cc1.getSecondCondition());
+            case Condition.SAC_ATTRIBUTE_CONDITION:
+            case Condition.SAC_ID_CONDITION:
+            case Condition.SAC_CLASS_CONDITION:
+                return true;
+            case Condition.SAC_PSEUDO_CLASS_CONDITION:
+                final PseudoClassConditionImpl pcc = (PseudoClassConditionImpl) condition;
+                return PSEUDO_CLASSES.contains(pcc.getValue());
+            default:
+                LOG.warn("Unhandled CSS condition type '" + condition.getConditionType() + "'. Accepting it silently.");
+                return true;
+        }
+    }
 }
