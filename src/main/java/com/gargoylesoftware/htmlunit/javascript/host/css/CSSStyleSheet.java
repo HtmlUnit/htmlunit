@@ -84,7 +84,6 @@ import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS21;
 import com.steadystate.css.parser.SelectorListImpl;
-import com.steadystate.css.parser.selectors.ChildSelectorImpl;
 import com.steadystate.css.parser.selectors.PseudoClassConditionImpl;
 
 /**
@@ -115,8 +114,8 @@ public class CSSStyleSheet extends SimpleScriptable {
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;
 
-    private static final Collection<String> PSEUDO_CLASSES = Arrays.asList("link", "visited", "hover", "active", "focus",
-            "target", "lang", "disabled", "checked", "indeterminated", "root", "nth-child()");
+    private static final Collection<String> PSEUDO_CLASSES = Arrays.asList("link", "visited", "hover", "active",
+        "focus", "target", "lang", "disabled", "checked", "indeterminated", "root", "nth-child()");
 
     /**
      * Creates a new empty stylesheet.
