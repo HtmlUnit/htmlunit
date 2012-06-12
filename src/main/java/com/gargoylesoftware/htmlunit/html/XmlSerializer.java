@@ -271,6 +271,7 @@ class XmlSerializer {
         name = CREATE_FILE_PATTERN.matcher(name).replaceAll("");
         name = StringUtils.substringBefore(name, "?"); // remove query
         name = StringUtils.substringBefore(name, ";"); // remove additional info
+        name = StringUtils.substring(name, 0, 30); // many file systems have a limit at 255, let's limit it
         if (!name.endsWith(extension)) {
             name += extension;
         }

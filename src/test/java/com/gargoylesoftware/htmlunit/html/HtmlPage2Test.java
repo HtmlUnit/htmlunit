@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -525,6 +526,32 @@ public class HtmlPage2Test extends WebServerTestCase {
 
         final HtmlLink cssLink = page.getFirstByXPath("//link");
         assertEquals(DomElement.ATTRIBUTE_NOT_DEFINED, cssLink.getHrefAttribute());
+    }
+
+    /**
+     * This was producing java.io.IOException: File name too long as of HtmlUnit-2.9.
+     * Many file systems have a limit 255 byte for file names.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void saveShouldStripLongFileNames() throws Exception {
+        final String longName = RandomStringUtils.randomAlphabetic(500) + ".html";
+        final String html = "<html><body><iframe src='" + longName + "'></iframe></body></html>";
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        webConnection.setDefaultResponse("<html/>");
+        webConnection.setResponse(URL_FIRST, html);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File file = new File(tmpFolder, "hu_HtmlPageTest_save.html");
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
     }
 
     /**

@@ -7,6 +7,9 @@
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
             <action type="fix" dev="mguillem">
+                Truncate file names in HtmlPage.savePage and DebuggingWebConnection to avoid exception due to too long file names.
+            </action>
+            <action type="fix" dev="mguillem">
                 JavaScript: querySelector(All) throws for invalid selectors.
             </action>
             <action type="fix" dev="mguillem">
