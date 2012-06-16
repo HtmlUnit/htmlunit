@@ -1062,7 +1062,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param borderBottomWidth the new attribute
      */
     public void jsxSet_borderBottomWidth(final String borderBottomWidth) {
-        setStyleAttributePixelInt(BORDER_BOTTOM_WIDTH, borderBottomWidth);
+        setStyleAttributePixel(BORDER_BOTTOM_WIDTH, borderBottomWidth);
     }
 
     /**
@@ -1222,7 +1222,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param borderLeftWidth the new attribute
      */
     public void jsxSet_borderLeftWidth(final String borderLeftWidth) {
-        setStyleAttributePixelInt(BORDER_LEFT_WIDTH, borderLeftWidth);
+        setStyleAttributePixel(BORDER_LEFT_WIDTH, borderLeftWidth);
     }
 
     /**
@@ -1316,7 +1316,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param borderRightWidth the new attribute
      */
     public void jsxSet_borderRightWidth(final String borderRightWidth) {
-        setStyleAttributePixelInt(BORDER_RIGHT_WIDTH, borderRightWidth);
+        setStyleAttributePixel(BORDER_RIGHT_WIDTH, borderRightWidth);
     }
 
     /**
@@ -1442,7 +1442,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param borderTopWidth the new attribute
      */
     public void jsxSet_borderTopWidth(final String borderTopWidth) {
-        setStyleAttributePixelInt(BORDER_TOP_WIDTH, borderTopWidth);
+        setStyleAttributePixel(BORDER_TOP_WIDTH, borderTopWidth);
     }
 
     /**
@@ -1474,7 +1474,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param bottom the new attribute
      */
     public void jsxSet_bottom(final String bottom) {
-        setStyleAttributePixelInt(BOTTOM, bottom);
+        setStyleAttributePixel(BOTTOM, bottom);
     }
 
     /**
@@ -1814,7 +1814,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param fontSize the new attribute
      */
     public void jsxSet_fontSize(final String fontSize) {
-        setStyleAttributePixelInt(FONT_SIZE, fontSize);
+        setStyleAttributePixel(FONT_SIZE, fontSize);
     }
 
     /**
@@ -1910,7 +1910,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param height the new attribute
      */
     public void jsxSet_height(final String height) {
-        setStyleAttributePixelInt(HEIGHT, height);
+        setStyleAttributePixel(HEIGHT, height);
     }
 
     /**
@@ -2038,7 +2038,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param left the new attribute
      */
     public void jsxSet_left(final String left) {
-        setStyleAttributePixelInt(LEFT, left);
+        setStyleAttributePixel(LEFT, left);
     }
 
     /**
@@ -2062,7 +2062,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param letterSpacing the new attribute
      */
     public void jsxSet_letterSpacing(final String letterSpacing) {
-        setStyleAttributePixelInt(LETTER_SPACING, letterSpacing);
+        setStyleAttributePixel(LETTER_SPACING, letterSpacing);
     }
 
     /**
@@ -2190,7 +2190,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param marginBottom the new attribute
      */
     public void jsxSet_marginBottom(final String marginBottom) {
-        setStyleAttributePixelInt(MARGIN_BOTTOM, marginBottom);
+        setStyleAttributePixel(MARGIN_BOTTOM, marginBottom);
     }
 
     /**
@@ -2206,7 +2206,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param marginLeft the new attribute
      */
     public void jsxSet_marginLeft(final String marginLeft) {
-        setStyleAttributePixelInt(MARGIN_LEFT, marginLeft);
+        setStyleAttributePixel(MARGIN_LEFT, marginLeft);
     }
 
     /**
@@ -2222,7 +2222,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param marginRight the new attribute
      */
     public void jsxSet_marginRight(final String marginRight) {
-        setStyleAttributePixelInt(MARGIN_RIGHT, marginRight);
+        setStyleAttributePixel(MARGIN_RIGHT, marginRight);
     }
 
     /**
@@ -2238,7 +2238,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param marginTop the new attribute
      */
     public void jsxSet_marginTop(final String marginTop) {
-        setStyleAttributePixelInt(MARGIN_TOP, marginTop);
+        setStyleAttributePixel(MARGIN_TOP, marginTop);
     }
 
     /**
@@ -2286,7 +2286,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param maxHeight the new attribute
      */
     public void jsxSet_maxHeight(final String maxHeight) {
-        setStyleAttributePixelInt(MAX_HEIGHT, maxHeight);
+        setStyleAttributePixel(MAX_HEIGHT, maxHeight);
     }
 
     /**
@@ -2302,7 +2302,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param maxWidth the new attribute
      */
     public void jsxSet_maxWidth(final String maxWidth) {
-        setStyleAttributePixelInt(MAX_WIDTH, maxWidth);
+        setStyleAttributePixel(MAX_WIDTH, maxWidth);
     }
 
     /**
@@ -2318,7 +2318,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param minHeight the new attribute
      */
     public void jsxSet_minHeight(final String minHeight) {
-        setStyleAttributePixelInt(MIN_HEIGHT, minHeight);
+        setStyleAttributePixel(MIN_HEIGHT, minHeight);
     }
 
     /**
@@ -2334,7 +2334,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param minWidth the new attribute
      */
     public void jsxSet_minWidth(final String minWidth) {
-        setStyleAttributePixelInt(MIN_WIDTH, minWidth);
+        setStyleAttributePixel(MIN_WIDTH, minWidth);
     }
 
     /**
@@ -3214,7 +3214,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param outlineWidth the new attribute
      */
     public void jsxSet_outlineWidth(final String outlineWidth) {
-        setStyleAttributePixelInt(OUTLINE_WIDTH, outlineWidth);
+        setStyleAttributePixel(OUTLINE_WIDTH, outlineWidth);
     }
 
     /**
@@ -3294,7 +3294,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param paddingBottom the new attribute
      */
     public void jsxSet_paddingBottom(final String paddingBottom) {
-        setStyleAttributePixelInt(PADDING_BOTTOM, paddingBottom);
+        setStyleAttributePixel(PADDING_BOTTOM, paddingBottom);
     }
 
     /**
@@ -3310,7 +3310,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param paddingLeft the new attribute
      */
     public void jsxSet_paddingLeft(final String paddingLeft) {
-        setStyleAttributePixelInt(PADDING_LEFT, paddingLeft);
+        setStyleAttributePixel(PADDING_LEFT, paddingLeft);
     }
 
     /**
@@ -3326,7 +3326,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param paddingRight the new attribute
      */
     public void jsxSet_paddingRight(final String paddingRight) {
-        setStyleAttributePixelInt(PADDING_RIGHT, paddingRight);
+        setStyleAttributePixel(PADDING_RIGHT, paddingRight);
     }
 
     /**
@@ -3342,7 +3342,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param paddingTop the new attribute
      */
     public void jsxSet_paddingTop(final String paddingTop) {
-        setStyleAttributePixelInt(PADDING_TOP, paddingTop);
+        setStyleAttributePixel(PADDING_TOP, paddingTop);
     }
 
     /**
@@ -3710,7 +3710,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param right the new attribute
      */
     public void jsxSet_right(final String right) {
-        setStyleAttributePixelInt(RIGHT, right);
+        setStyleAttributePixel(RIGHT, right);
     }
 
     /**
@@ -4190,7 +4190,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param textIndent the new attribute
      */
     public void jsxSet_textIndent(final String textIndent) {
-        setStyleAttributePixelInt(TEXT_INDENT, textIndent);
+        setStyleAttributePixel(TEXT_INDENT, textIndent);
     }
 
     /**
@@ -4334,7 +4334,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param top the new attribute
      */
     public void jsxSet_top(final String top) {
-        setStyleAttributePixelInt(TOP, top);
+        setStyleAttributePixel(TOP, top);
     }
 
     /**
@@ -4366,7 +4366,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param verticalAlign the new attribute
      */
     public void jsxSet_verticalAlign(final String verticalAlign) {
-        setStyleAttributePixelInt(VERTICAL_ALIGN, verticalAlign);
+        setStyleAttributePixel(VERTICAL_ALIGN, verticalAlign);
     }
 
     /**
@@ -4462,7 +4462,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param width the new attribute
      */
     public void jsxSet_width(final String width) {
-        setStyleAttributePixelInt(WIDTH, width);
+        setStyleAttributePixel(WIDTH, width);
     }
 
     /**
@@ -4494,7 +4494,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param wordSpacing the new attribute
      */
     public void jsxSet_wordSpacing(final String wordSpacing) {
-        setStyleAttributePixelInt(WORD_SPACING, wordSpacing);
+        setStyleAttributePixel(WORD_SPACING, wordSpacing);
     }
 
     /**
@@ -5278,13 +5278,13 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param name the attribute name
      * @param value the attribute value
      */
-    protected void setStyleAttributePixelInt(final String name, String value) {
+    protected void setStyleAttributePixel(final String name, String value) {
         if (value.endsWith("px")) {
             value = value.substring(0, value.length() - 2);
         }
         try {
             final float floatValue = Float.parseFloat(value);
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_26)) {
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_PIXEL_VALUES_INT_ONLY)) {
                 value = Integer.toString((int) floatValue) + "px";
             }
             else {

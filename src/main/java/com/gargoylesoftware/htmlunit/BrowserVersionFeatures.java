@@ -61,6 +61,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser can surrounds image url's with quotes. */
     CSS_IMAGE_URL_QUOTED,
 
+    /** Indicates that only integers are allowed for pixel value. */
+    CSS_PIXEL_VALUES_INT_ONLY,
+
     /** Indicates that the :lang(..) selector is supported. */
     CSS_SELECTOR_LANG,
 
@@ -276,9 +279,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_21,
-
-    /** Was originally .isIE(). */
-    GENERATED_26,
 
     /** Was originally .isIE(). */
     GENERATED_3,
