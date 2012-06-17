@@ -6,11 +6,15 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+            <action type="fix" dev="rbri">
+                Some more style properties are now supported; IE8 simulation now supports the
+                same set of properties like the real one.
+            </action>
             <action type="fix" dev="rbri" issue="3534330">
                 Correct the formating of the opacity style value.
             </action>
             <action type="fix" dev="rbri">
-                Correct the handling of unsupported style properties when simulation IE. 
+                Correct the handling of unsupported style properties when simulation IE.
             </action>
             <action type="fix" dev="mguillem">
                 Truncate file names in HtmlPage.savePage and DebuggingWebConnection to avoid exception due to too long file names.

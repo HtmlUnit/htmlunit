@@ -530,7 +530,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.FF, Browser.IE7, Browser.IE8 })
+    @NotYetImplemented({ Browser.FF, Browser.IE7 })
     public void properties() throws Exception {
         final Map<BrowserVersion, String[]> properties = new HashMap<BrowserVersion, String[]>();
         properties.put(BrowserVersion.INTERNET_EXPLORER_6, new String[]{
@@ -662,6 +662,156 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             "verticalAlign",
             "visibility",
             "whiteSpace",
+            "width",
+            "wordBreak",
+            "wordSpacing",
+            "wordWrap",
+            "writingMode",
+            "zIndex",
+            "zoom"
+        });
+
+        properties.put(BrowserVersion.INTERNET_EXPLORER_8, new String[]{
+            "background",
+            "backgroundAttachment",
+            "backgroundColor",
+            "backgroundImage",
+            "backgroundPosition",
+            "backgroundPositionX",
+            "backgroundPositionY",
+            "backgroundRepeat",
+            "behavior",
+            "border",
+            "borderBottom",
+            "borderBottomColor",
+            "borderBottomStyle",
+            "borderBottomWidth",
+            "borderCollapse",
+            "borderColor",
+            "borderLeft",
+            "borderLeftColor",
+            "borderLeftStyle",
+            "borderLeftWidth",
+            "borderRight",
+            "borderRightColor",
+            "borderRightStyle",
+            "borderRightWidth",
+            "borderSpacing",
+            "borderStyle",
+            "borderTop",
+            "borderTopColor",
+            "borderTopStyle",
+            "borderTopWidth",
+            "borderWidth",
+            "bottom",
+            "boxSizing",
+            "captionSide",
+            "clear",
+            "clip",
+            "color",
+            "cssText",
+            "content",
+            "counterIncrement",
+            "counterReset",
+            "cursor",
+            "direction",
+            "display",
+            "emptyCells",
+            "filter",
+            "font",
+            "fontFamily",
+            "fontSize",
+            "fontStyle",
+            "fontVariant",
+            "fontWeight",
+            "height",
+            "imeMode",
+            "layoutFlow",
+            "layoutGrid",
+            "layoutGridChar",
+            "layoutGridLine",
+            "layoutGridMode",
+            "layoutGridType",
+            "left",
+            "letterSpacing",
+            "lineBreak",
+            "lineHeight",
+            "listStyle",
+            "listStyleImage",
+            "listStylePosition",
+            "listStyleType",
+            "margin",
+            "marginBottom",
+            "marginLeft",
+            "marginRight",
+            "marginTop",
+            "maxHeight",
+            "maxWidth",
+            "minHeight",
+            "minWidth",
+            "msBlockProgression",
+            "msInterpolationMode",
+            "orphans",
+            "outline",
+            "outlineColor",
+            "outlineStyle",
+            "outlineWidth",
+            "overflow",
+            "overflowX",
+            "overflowY",
+            "padding",
+            "paddingBottom",
+            "paddingLeft",
+            "paddingRight",
+            "paddingTop",
+            "pageBreakAfter",
+            "pageBreakBefore",
+            "pageBreakInside",
+            "position",
+            "posBottom",
+            "posHeight",
+            "posLeft",
+            "posRight",
+            "posTop",
+            "posWidth",
+            "quotes",
+            "right",
+            "rubyAlign",
+            "rubyOverhang",
+            "rubyPosition",
+            "scrollbar3dLightColor",
+            "scrollbarArrowColor",
+            "scrollbarBaseColor",
+            "scrollbarDarkShadowColor",
+            "scrollbarFaceColor",
+            "scrollbarHighlightColor",
+            "scrollbarShadowColor",
+            "scrollbarTrackColor",
+            "styleFloat",
+            "tableLayout",
+            "textAlign",
+            "textAlignLast",
+            "textAutospace",
+            "textDecoration",
+            "textDecorationBlink",
+            "textDecorationLineThrough",
+            "textDecorationNone",
+            "textDecorationOverline",
+            "textDecorationUnderline",
+            "textIndent",
+            "textJustify",
+            "textJustifyTrim",
+            "textKashida",
+            "textKashidaSpace",
+            "textOverflow",
+            "textTransform",
+            "textUnderlinePosition",
+            "top",
+            "unicodeBidi",
+            "verticalAlign",
+            "visibility",
+            "whiteSpace",
+            "widows",
             "width",
             "wordBreak",
             "wordSpacing",
@@ -872,8 +1022,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "undefined" },
-            IE = { "foo" })
+    @Alerts(DEFAULT = "undefined", IE = "foo")
     public void initUnsupportdProperty() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='my' style='htmlunit: foo'>d</div>\n"
@@ -1544,8 +1693,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "5px", "5", "1em", "16", "30px", "30" },
-            FF = { "5px", "undefined", "1em", "undefined" })
+    @Alerts(IE6 = { "5px", "5", "1em", "16", "30px", "30" },
+            IE7 = { "5px", "5", "1em", "16", "30px", "30" },
+            DEFAULT = { "5px", "undefined", "1em", "undefined" })
     public void pixelLeft() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='left: 5px; border: 1px solid black;'>a</div>\n"
@@ -1571,8 +1721,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "5px", "5", "1em", "16", "30px", "30" },
-            FF = { "5px", "undefined", "1em", "undefined" })
+    @Alerts(IE6 = { "5px", "5", "1em", "16", "30px", "30" },
+            IE7 = { "5px", "5", "1em", "16", "30px", "30" },
+            DEFAULT = { "5px", "undefined", "1em", "undefined" })
     public void pixelRight() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='right: 5px; border: 1px solid black;'>a</div>\n"
@@ -1598,8 +1749,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "5px", "5", "1em", "16", "30px", "30" },
-            FF = { "5px", "undefined", "1em", "undefined" })
+    @Alerts(IE6 = { "5px", "5", "1em", "16", "30px", "30" },
+            IE7 = { "5px", "5", "1em", "16", "30px", "30" },
+            DEFAULT = { "5px", "undefined", "1em", "undefined" })
     public void pixelTop() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='top: 5px; border: 1px solid black;'>a</div>\n"
@@ -1625,8 +1777,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "5px", "5", "1em", "16", "30px", "30" },
-            FF = { "5px", "undefined", "1em", "undefined" })
+    @Alerts(IE6 = { "5px", "5", "1em", "16", "30px", "30" },
+            IE7 = { "5px", "5", "1em", "16", "30px", "30" },
+            DEFAULT = { "5px", "undefined", "1em", "undefined" })
     public void pixelBottom() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='a' style='bottom: 5px; border: 1px solid black;'>a</div>\n"

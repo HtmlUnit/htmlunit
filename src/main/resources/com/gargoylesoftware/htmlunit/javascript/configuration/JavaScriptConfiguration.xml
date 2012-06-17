@@ -463,6 +463,7 @@
         <property name="borderRightWidth" readable="true" writable="true"/>
         <property name="borderSpacing" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="borderStyle" readable="true" writable="true"/>
         <property name="borderTop" readable="true" writable="true"/>
@@ -471,20 +472,27 @@
         <property name="borderTopWidth" readable="true" writable="true"/>
         <property name="borderWidth" readable="true" writable="true"/>
         <property name="bottom" readable="true" writable="true"/>
+        <property name="boxSizing" readable="true" writable="true">
+            <browser name="Internet Explorer" min-version="8" />
+        </property>
         <property name="captionSide" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="clear" readable="true" writable="true"/>
         <property name="clip" readable="true" writable="true"/>
         <property name="color" readable="true" writable="true"/>
         <property name="content" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="counterIncrement" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="counterReset" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="cssFloat" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -507,6 +515,7 @@
         </property>
         <property name="emptyCells" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="filter" readable="true" writable="true">
             <browser name="Internet Explorer"/>
@@ -711,6 +720,9 @@
         <property name="MozUserSelect" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
+        <property name="msBlockProgression" readable="true" writable="true">
+            <browser name="Internet Explorer" min-version="8" />
+        </property>
         <property name="msInterpolationMode" readable="true" writable="true">
             <browser name="Internet Explorer"/>
         </property>
@@ -719,18 +731,22 @@
         </property>
         <property name="orphans" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="outline" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="outlineColor" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="outlineOffset" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
         <property name="outlineStyle" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="outlineWidth" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -751,6 +767,7 @@
         <property name="pageBreakBefore" readable="true" writable="true"/>
         <property name="pageBreakInside" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="pause" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -768,16 +785,16 @@
             <browser name="Firefox"/>
         </property>
         <property name="pixelBottom" readable="true" writable="true">
-            <browser name="Internet Explorer"/>
+            <browser name="Internet Explorer" max-version="7" />
         </property>
         <property name="pixelLeft" readable="true" writable="true">
-            <browser name="Internet Explorer"/>
+            <browser name="Internet Explorer" max-version="7" />
         </property>
         <property name="pixelRight" readable="true" writable="true">
-            <browser name="Internet Explorer"/>
+            <browser name="Internet Explorer" max-version="7" />
         </property>
         <property name="pixelTop" readable="true" writable="true">
-            <browser name="Internet Explorer"/>
+            <browser name="Internet Explorer" max-version="7" />
         </property>
         <property name="posBottom" readable="true" writable="true">
             <browser name="Internet Explorer"/>
@@ -800,6 +817,7 @@
         </property>
         <property name="quotes" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="richness" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -922,6 +940,7 @@
         <property name="whiteSpace" readable="true" writable="true"/>
         <property name="widows" readable="true" writable="true">
             <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
         </property>
         <property name="width" readable="true" writable="true"/>
         <property name="wordBreak" readable="true" writable="true">

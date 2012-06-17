@@ -103,6 +103,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String BORDER_TOP_STYLE = "border-top-style";
     private static final String BORDER_TOP_WIDTH = "border-top-width";
     private static final String BOTTOM = "bottom";
+    private static final String BOX_SIZING = "box-sizing";
     private static final String CAPTION_SIDE = "caption-side";
     private static final String CLEAR = "clear";
     private static final String CLIP = "clip";
@@ -200,6 +201,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String MOZ_USER_INPUT = "-moz-user-input";
     private static final String MOZ_USER_MODIFY = "-moz-user-modify";
     private static final String MOZ_USER_SELECT = "-moz-user-select";
+    private static final String MS_BLOCK_PROGRESSION = "ms-block-progression";
     private static final String MS_INTERPOLATION_MODE = "ms-interpolation-mode";
     private static final String OPACITY = "opacity";
     private static final String ORPHANS = "orphans";
@@ -1496,6 +1498,22 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     public void jsxSet_bottom(final String bottom) {
         setStyleAttributePixel(BOTTOM, bottom);
+    }
+
+    /**
+     * Gets the "boxSizing" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_boxSizing() {
+        return getStyleAttribute(BOX_SIZING, null);
+    }
+
+    /**
+     * Sets the "boxSizing" style attribute.
+     * @param boxSizing the new attribute
+     */
+    public void jsxSet_boxSizing(final String boxSizing) {
+        setStyleAttribute(BOX_SIZING, boxSizing);
     }
 
     /**
@@ -3092,6 +3110,22 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     public void jsxSet_MozUserSelect(final String mozUserSelect) {
         setStyleAttribute(MOZ_USER_SELECT, mozUserSelect);
+    }
+
+    /**
+     * Gets the "msBlockProgression" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_msBlockProgression() {
+        return getStyleAttribute(MS_BLOCK_PROGRESSION, null);
+    }
+
+    /**
+     * Sets the "msBlockProgression" style attribute.
+     * @param msBlockProgression the new attribute
+     */
+    public void jsxSet_msBlockProgression(final String msBlockProgression) {
+        setStyleAttribute(MS_BLOCK_PROGRESSION, msBlockProgression);
     }
 
     /**
