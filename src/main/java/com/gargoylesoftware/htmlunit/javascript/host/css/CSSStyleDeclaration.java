@@ -43,6 +43,7 @@ import org.w3c.css.sac.InputSource;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
@@ -65,7 +66,7 @@ import com.steadystate.css.parser.SACParserCSS21;
  * @author Sudhan Moghe
  * @author Ronald Brill
  */
-public class CSSStyleDeclaration extends SimpleScriptable {
+public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableWithFallbackGetter {
     /** Css important property constant. */
     protected static final String PRIORITY_IMPORTANT = "important";
 
@@ -402,6 +403,26 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 }
             }
         }
+    }
+
+    /**
+     * IE makes unknown style properties accessible.
+     * @param name the name of the requested property
+     * @return the object value, {@link #NOT_FOUND} if nothing is found
+     */
+    public Object getWithFallback(final String name) {
+        // TODO
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER)) {
+            if (null != jsElement_) {
+                final Map<String, StyleElement> style = getStyleMap();
+                final StyleElement element = style.get(name);
+                if (element != null && element.getValue() != null) {
+                    return element.getValue();
+                }
+            }
+        }
+
+        return NOT_FOUND;
     }
 
     /**
@@ -3094,7 +3115,27 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the style attribute
      */
     public String jsxGet_opacity() {
-        return getStyleAttribute(OPACITY, null);
+        final String opacity = getStyleAttribute(OPACITY, null);
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OPACITY_ACCEPTS_ARBITRARY_VALUES)) {
+            return opacity;
+        }
+
+        if (opacity == null || opacity.length() == 0) {
+            return "";
+        }
+
+        final String trimedOpacity = opacity.trim();
+        try {
+            final float value = Float.parseFloat(trimedOpacity);
+            if (value % 1 == 0) {
+                return Integer.toString((int) value);
+            }
+            return Float.toString(value);
+        }
+        catch (final NumberFormatException e) {
+            // ignore wrong value
+        }
+        return "";
     }
 
     /**

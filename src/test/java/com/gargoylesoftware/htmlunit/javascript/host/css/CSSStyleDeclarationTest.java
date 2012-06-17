@@ -338,14 +338,44 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     }
 
     /**
+     * Verifies that initializing <tt>opacity</tt> attribute to various values behaves correctly.
+     * The whitespace in the various expected alerts is VERY important.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = { "", "0.5", ".4", "0.33333", "-3", "3", "10px", "foo", "auto" },
+            FF = { "", "0.5", "0.4", "0.33333", "-3", "3", "", "", "" })
+    public void initOpacity() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='o1' style='opacity: '>d</div>\n"
+            + "<div id='o2' style='opacity:0.5'>d</div>\n"
+            + "<div id='o3' style='opacity:.4'>d</div>\n"
+            + "<div id='o4' style='opacity: 0.33333'>d</div>\n"
+            + "<div id='o5' style='opacity: -3'>d</div>\n"
+            + "<div id='o6' style='opacity: 3'>d</div>\n"
+            + "<div id='o7' style='opacity: 10px'>d</div>\n"
+            + "<div id='o8' style='opacity: foo'>d</div>\n"
+            + "<div id='o9' style='opacity: auto'>d</div>\n"
+
+            + "<script>\n"
+            + "for (i=1; i<10; i++) {\n"
+            + "  d = document.getElementById('o'+i);\n"
+            + "  alert(d.style.opacity);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Verifies that setting <tt>element.style.opacity</tt> to various values behaves correctly.
      * The whitespace in the various expected alerts is VERY important.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "undefined 0.5 0.33333 -3 3 8  7  10px foo auto ",
-            FF = " 0.5 0.33333 -3 3 8 7 7 7 7 ")
-    public void opacity() throws Exception {
+    @Alerts(IE = "undefined 0.5 0.4 0.33333 -3 3 8  7  10px foo auto ",
+            FF = " 0.5 0.4 0.33333 -3 3 8 7 7 7 7 ")
+    public void setOpacity() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d'>d</div>\n"
             + "<script>\n"
@@ -353,6 +383,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "var s = '';\n"
             + "s += d.style.opacity + ' ';\n"
             + "d.style.opacity = 0.5;\n"
+            + "s += d.style.opacity + ' ';\n"
+            + "d.style.opacity = .4;\n"
             + "s += d.style.opacity + ' ';\n"
             + "d.style.opacity = 0.33333;\n"
             + "s += d.style.opacity + ' ';\n"
@@ -834,6 +866,43 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         Collections.sort(collectedStyles);
 
         assertEquals(expectedStyles, collectedStyles);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined" },
+            IE = { "foo" })
+    public void initUnsupportdProperty() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='my' style='htmlunit: foo'>d</div>\n"
+
+            + "<script>\n"
+            + "  d = document.getElementById('my');\n"
+            + "  alert(d.style.htmlunit);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "undefined", "foo" })
+    public void setUnsupportdProperty() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='my' style=''>d</div>\n"
+
+            + "<script>\n"
+            + "  d = document.getElementById('my');\n"
+            + "  alert(d.style.htmlunit);\n"
+            + "  d.style.htmlunit='foo';\n"
+            + "  alert(d.style.htmlunit);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
     }
 
     /**

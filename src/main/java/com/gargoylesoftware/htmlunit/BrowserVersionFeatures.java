@@ -729,6 +729,11 @@ public enum BrowserVersionFeatures {
      * empty attr for 'class' (IE6/7) as a normal one. */
     JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL,
 
+    /** IE supports accessing unsupported style elements via getter
+     * like val = elem.style.htmlunit;.
+     */
+    JS_STYLE_UNSUPPORTED_PROPERTY_GETTER,
+
     /** Indicates that table elements supports the values "top", "bottom", "middle", "baseline" (IE). */
     JS_TABLE_VALIGN_SUPPORTS_IE_VALUES,
 
