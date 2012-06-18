@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+            <action type="fix" dev="rbri" issue="3534371" due-to="Hartmut Arlt">
+                Fixed error processing when the onerror handler throws an error.
+            </action>
             <action type="update" dev="asashour" issue="3535811">
                 JavaScript: add DocumentFragment.createAttribute(), createComment(), createDocumentFragment(),
                 createElement() and createTextNode() (IE only)
@@ -18,7 +21,7 @@
                 Correct the formating of the opacity style value.
             </action>
             <action type="fix" dev="rbri">
-                Correct the handling of unsupported style properties when simulation IE.
+                Correct the handling of unsupported style properties when simulating IE.
             </action>
             <action type="fix" dev="mguillem">
                 Truncate file names in HtmlPage.savePage and DebuggingWebConnection to avoid exception due to too long file names.

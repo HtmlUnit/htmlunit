@@ -591,7 +591,7 @@ public class JavaScriptEngine {
                 }
             }
             catch (final Exception e) {
-                handleJavaScriptException(new ScriptException(htmlPage_, e, getSourceCode(cx)));
+                handleJavaScriptException(new ScriptException(htmlPage_, e, getSourceCode(cx)), true);
                 return null;
             }
             catch (final TimeoutError e) {
@@ -664,16 +664,22 @@ public class JavaScriptEngine {
     /**
      * Handles an exception that occurred during execution of JavaScript code.
      * @param scriptException the exception
+     * @param triggerOnError if true, this triggers the onerror handler
      */
-    protected void handleJavaScriptException(final ScriptException scriptException) {
+    protected void handleJavaScriptException(final ScriptException scriptException, final boolean triggerOnError) {
         // Trigger window.onerror, if it has been set.
         final HtmlPage page = scriptException.getPage();
-        if (page != null) {
+        if (triggerOnError && page != null) {
             final WebWindow window = page.getEnclosingWindow();
             if (window != null) {
                 final Window w = (Window) window.getScriptObject();
                 if (w != null) {
-                    w.triggerOnError(scriptException);
+                    try {
+                        w.triggerOnError(scriptException);
+                    }
+                    catch (final Exception e) {
+                        handleJavaScriptException(new ScriptException(page, e, null), false);
+                    }
                 }
             }
         }

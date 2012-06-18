@@ -2374,6 +2374,29 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
+     * Tests that setThrowExceptionOnScriptError also works,
+     * if an exception is thrown from onerror handler.
+     * Regression test for bug 3534371.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void test() throws Exception {
+        final String html = "<html><body>"
+            + "<script type='application/javascript'>"
+            + "  window.onerror = function(){ foo.bar() };"
+            + "  doit();"
+            + "</script>"
+            + "</body></html>";
+
+        final WebClient webClient = getWebClient();
+        webClient.setJavaScriptEnabled(true);
+        webClient.setThrowExceptionOnScriptError(false);
+
+        loadPage(html);
+    }
+
+    /**
      * Servlet for {@link #addRequestHeader()}.
      */
     public static class HeaderLog1Servlet extends HttpServlet {
