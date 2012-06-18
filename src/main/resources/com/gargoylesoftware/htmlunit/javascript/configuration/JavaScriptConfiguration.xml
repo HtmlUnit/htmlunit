@@ -1100,6 +1100,24 @@
 
     <class extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.DocumentFragment"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomDocumentFragment">
+
+        <!-- TODO: In IE, DocumentFragment should extends HTMLDocument -->
+
+        <function name="createAttribute">
+            <browser name="Internet Explorer"/>
+        </function>
+        <function name="createComment">
+            <browser name="Internet Explorer"/>
+        </function>
+        <function name="createDocumentFragment">
+            <browser name="Internet Explorer"/>
+        </function>
+        <function name="createElement">
+            <browser name="Internet Explorer"/>
+        </function>
+        <function name="createTextNode">
+            <browser name="Internet Explorer"/>
+        </function>
     </class>
 
     <class extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.DocumentType"

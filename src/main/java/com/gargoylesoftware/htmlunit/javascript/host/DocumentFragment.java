@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+
 /**
  * A JavaScript object for DocumentFragment.
  *
@@ -25,6 +27,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  */
 public class DocumentFragment extends Node {
 
+    //TODO: seems that in IE, DocumentFragment extends HTMLDocument 
+
     /**
      * {@inheritDoc}
      */
@@ -35,5 +39,60 @@ public class DocumentFragment extends Node {
             return node.jsxGet_xml();
         }
         return "";
+    }
+
+    /**
+     * Creates a new HTML attribute with the specified name.
+     *
+     * @param attributeName the name of the attribute to create
+     * @return an attribute with the specified name
+     */
+    public Object jsxFunction_createAttribute(final String attributeName) {
+        return getDocument().jsxFunction_createAttribute(attributeName);
+    }
+
+    /**
+     * Create a new HTML element with the given tag name.
+     *
+     * @param tagName the tag name
+     * @return the new HTML element, or NOT_FOUND if the tag is not supported
+     */
+    public Object jsxFunction_createElement(final String tagName) {
+        return getDocument().jsxFunction_createElement(tagName);
+    }
+
+    /**
+     * Returns HTML document.
+     * @return HTML document
+     */
+    protected HTMLDocument getDocument() {
+        return (HTMLDocument) getDomNodeOrDie().getPage().getScriptObject();
+    }
+
+    /**
+     * Creates a new Comment.
+     * @param comment the comment text
+     * @return the new Comment
+     */
+    public Object jsxFunction_createComment(final String comment) {
+        return getDocument().jsxFunction_createComment(comment);
+    }
+
+    /**
+     * Creates a new document fragment.
+     * @return a newly created document fragment
+     */
+    public Object jsxFunction_createDocumentFragment() {
+        return getDocument().jsxFunction_createDocumentFragment();
+    }
+
+    /**
+     * Create a new DOM text node with the given data.
+     *
+     * @param newData the string value for the text node
+     * @return the new text node or NOT_FOUND if there is an error
+     */
+    public Object jsxFunction_createTextNode(final String newData) {
+        return getDocument().jsxFunction_createTextNode(newData);
     }
 }

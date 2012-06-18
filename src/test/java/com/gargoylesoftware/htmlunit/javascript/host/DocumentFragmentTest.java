@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class DocumentFragmentTest extends WebDriverTestCase {
@@ -59,4 +60,29 @@ public class DocumentFragmentTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "", IE = "DIV")
+    public void createElement() throws Exception {
+        final String html
+            = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var frag = document.createDocumentFragment();\n"
+            + "        if (frag.createElement) {\n"
+            + "          var d = frag.createElement('div');\n"
+            + "          alert(d.tagName);\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

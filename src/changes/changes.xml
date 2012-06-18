@@ -6,6 +6,10 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+            <action type="update" dev="asashour" issue="3535811">
+                JavaScript: add DocumentFragment.createAttribute(), createComment(), createDocumentFragment(),
+                createElement() and createTextNode() (IE only)
+            </action>
             <action type="fix" dev="rbri">
                 Some more style properties are now supported; IE8 simulation now supports the
                 same set of properties like the real one.
