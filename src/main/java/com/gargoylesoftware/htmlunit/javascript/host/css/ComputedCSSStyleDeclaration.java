@@ -481,6 +481,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String jsxGet_content() {
+        return defaultIfEmpty(super.jsxGet_content(), "none");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String jsxGet_color() {
         return defaultIfEmpty(super.jsxGet_color(), "rgb(0, 0, 0)");
     }
@@ -603,6 +611,19 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String jsxGet_fontStretch() {
+        String defaultStretch = "";
+        if (getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL)) {
+            defaultStretch = "normal";
+        }
+        return defaultIfEmpty(super.jsxGet_fontStretch(), defaultStretch);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String jsxGet_fontStyle() {
         return defaultIfEmpty(super.jsxGet_fontStyle(), "normal");
     }
@@ -630,9 +651,17 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String jsxGet_height() {
         return pixelString(getElement(), new CssValue(Window.WINDOW_HEIGHT) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
-                return defaultIfEmpty(style.getStyleAttribute("height", null), "363px");
+                return defaultIfEmpty(style.getStyleAttribute("height", null), "362px");
             }
         });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_imeMode() {
+        return defaultIfEmpty(super.jsxGet_imeMode(), "auto");
     }
 
     /**
@@ -656,7 +685,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_lineHeight() {
-        return defaultIfEmpty(super.jsxGet_lineHeight(), "normal");
+        return defaultIfEmpty(super.jsxGet_lineHeight(), "20px");
     }
 
     /**
@@ -720,7 +749,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_markerOffset() {
-        return defaultIfEmpty(super.jsxGet_markerOffset(), "none");
+        return defaultIfEmpty(super.jsxGet_markerOffset(), "auto");
     }
 
     /**
@@ -791,6 +820,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String jsxGet_MozBackgroundSize() {
+        return defaultIfEmpty(super.jsxGet_MozBackgroundSize(), "auto auto");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String jsxGet_MozBinding() {
         return defaultIfEmpty(super.jsxGet_MozBinding(), "none");
     }
@@ -801,6 +838,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String jsxGet_MozBorderBottomColors() {
         return defaultIfEmpty(super.jsxGet_MozBorderBottomColors(), "none");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_MozBorderImage() {
+        return defaultIfEmpty(super.jsxGet_MozBorderImage(), "none");
     }
 
     /**
@@ -903,6 +948,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String jsxGet_MozBoxShadow() {
+        return defaultIfEmpty(super.jsxGet_MozBoxShadow(), "none");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String jsxGet_MozBoxPack() {
         return defaultIfEmpty(super.jsxGet_MozBoxPack(), "start");
     }
@@ -928,7 +981,31 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_MozColumnGap() {
-        return defaultIfEmpty(super.jsxGet_MozColumnGap(), "0px");
+        return defaultIfEmpty(super.jsxGet_MozColumnGap(), "16px");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_MozColumnRuleColor() {
+        return defaultIfEmpty(super.jsxGet_MozColumnRuleColor(), "rgb(0, 0, 0)");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_MozColumnRuleStyle() {
+        return defaultIfEmpty(super.jsxGet_MozColumnRuleStyle(), "none");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_MozColumnRuleWidth() {
+        return defaultIfEmpty(super.jsxGet_MozColumnRuleWidth(), "0px");
     }
 
     /**
@@ -945,6 +1022,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String jsxGet_MozFloatEdge() {
         return defaultIfEmpty(super.jsxGet_MozFloatEdge(), "content-box");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_MozForceBrokenImageIcon() {
+        return defaultIfEmpty(super.jsxGet_MozForceBrokenImageIcon(), "0");
     }
 
     /**
@@ -1031,6 +1116,30 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String jsxGet_MozStackSizing() {
+        return defaultIfEmpty(super.jsxGet_MozStackSizing(), "stretch-to-fit");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_MozTransform() {
+        return defaultIfEmpty(super.jsxGet_MozTransform(), "none");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_MozTransformOrigin() {
+        return defaultIfEmpty(super.jsxGet_MozTransformOrigin(), "50% 50%");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String jsxGet_MozUserFocus() {
         return defaultIfEmpty(super.jsxGet_MozUserFocus(), "none");
     }
@@ -1057,6 +1166,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String jsxGet_MozUserSelect() {
         return defaultIfEmpty(super.jsxGet_MozUserSelect(), "auto");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_MozWindowShadow() {
+        return defaultIfEmpty(super.jsxGet_MozWindowShadow(), "default");
     }
 
     /**
@@ -1127,6 +1244,22 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String jsxGet_pageBreakAfter() {
+        return defaultIfEmpty(super.jsxGet_pageBreakAfter(), "auto");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_pageBreakBefore() {
+        return defaultIfEmpty(super.jsxGet_pageBreakBefore(), "auto");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String jsxGet_paddingBottom() {
         return pixelString(defaultIfEmpty(super.jsxGet_paddingBottom(), "0px"));
     }
@@ -1153,6 +1286,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String jsxGet_paddingTop() {
         return pixelString(defaultIfEmpty(super.jsxGet_paddingTop(), "0px"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_pointerEvents() {
+        return defaultIfEmpty(super.jsxGet_pointerEvents(), "auto");
     }
 
     /**
@@ -1207,6 +1348,19 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
+    public String jsxGet_textShadow() {
+        String shadow = "";
+        if (getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.CSS_TEXT_SHADOW_DEFAULT_NONE)) {
+            shadow = "none";
+        }
+        return defaultIfEmpty(super.jsxGet_textShadow(), shadow);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String jsxGet_textTransform() {
         return defaultIfEmpty(super.jsxGet_textTransform(), "none");
     }
@@ -1224,7 +1378,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_unicodeBidi() {
-        return defaultIfEmpty(super.jsxGet_unicodeBidi(), "normal");
+        String unicodeBidi = "embed";
+        if (getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.CSS_UNICODE_BIDI_DEFAULT_NORMAL)) {
+            unicodeBidi = "normal";
+        }
+
+        return defaultIfEmpty(super.jsxGet_unicodeBidi(), unicodeBidi);
     }
 
     /**
@@ -1938,7 +2098,21 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String jsxGet_wordSpacing() {
-        return defaultIfEmpty(super.jsxGet_wordSpacing(), "normal");
+        String wordSpacing = "0px";
+        if (getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.CSS_WORD_SPACING_DEFAULT_NORMAL)) {
+            wordSpacing = "normal";
+        }
+
+        return defaultIfEmpty(super.jsxGet_wordSpacing(), wordSpacing);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String jsxGet_wordWrap() {
+        return defaultIfEmpty(super.jsxGet_wordWrap(), "normal");
     }
 
     /**

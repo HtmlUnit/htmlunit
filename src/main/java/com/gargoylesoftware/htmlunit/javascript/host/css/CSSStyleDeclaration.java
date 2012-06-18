@@ -159,8 +159,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String MOZ_BACKGROUND_CLIP = "-moz-background-clip";
     private static final String MOZ_BACKGROUND_INLINE_POLICY = "-moz-background-inline-policy";
     private static final String MOZ_BACKGROUND_ORIGIN = "-moz-background-origin";
+    private static final String MOZ_BACKGROUND_SIZE = "-moz-background-size";
     private static final String MOZ_BINDING = "-moz-binding";
     private static final String MOZ_BORDER_BOTTOM_COLORS = "-moz-border-bottom-colors";
+    private static final String MOZ_BORDER_END = "-moz-border-end";
+    private static final String MOZ_BORDER_END_COLOR = "-moz-border-end-color";
+    private static final String MOZ_BORDER_END_STYLE = "-moz-border-end-style";
+    private static final String MOZ_BORDER_END_WIDTH = "-moz-border-end-width";
+    private static final String MOZ_BORDER_IMAGE = "-moz-border-image";
     private static final String MOZ_BORDER_LEFT_COLORS = "-moz-border-left-colors";
     private static final String MOZ_BORDER_RADIUS = "-moz-border-radius";
     private static final String MOZ_BORDER_RADIUS_BOTTOMLEFT = "-moz-border-radius-bottomleft";
@@ -168,6 +174,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String MOZ_BORDER_RADIUS_TOPLEFT = "-moz-border-radius-topleft";
     private static final String MOZ_BORDER_RADIUS_TOPRIGHT = "-moz-border-radius-topright";
     private static final String MOZ_BORDER_RIGHT_COLORS = "-moz-border-right-colors";
+    private static final String MOZ_BORDER_START = "-moz-border-start";
+    private static final String MOZ_BORDER_START_COLOR = "-moz-border-start-color";
+    private static final String MOZ_BORDER_START_STYLE = "-moz-border-start-style";
+    private static final String MOZ_BORDER_START_WIDTH = "-moz-border-start-width";
     private static final String MOZ_BORDER_TOP_COLORS = "-moz-border-top-colors";
     private static final String MOZ_BOX_ALIGN = "-moz-box-align";
     private static final String MOZ_BOX_DIRECTION = "-moz-box-direction";
@@ -175,9 +185,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String MOZ_BOX_ORDINAL_GROUP = "-moz-box-ordinal-group";
     private static final String MOZ_BOX_ORIENT = "-moz-box-orient";
     private static final String MOZ_BOX_PACK = "-moz-box-pack";
+    private static final String MOZ_BOX_SHADOW = "-moz-box-shadow";
     private static final String MOZ_BOX_SIZING = "-moz-box-sizing";
     private static final String MOZ_COLUMN_COUNT = "-moz-column-count";
     private static final String MOZ_COLUMN_GAP = "-moz-column-gap";
+    private static final String MOZ_COLUMN_RULE = "-moz-column-rule";
+    private static final String MOZ_COLUMN_RULE_COLOR = "-moz-column-rule-color";
+    private static final String MOZ_COLUMN_RULE_STYLE = "-moz-column-rule-style";
+    private static final String MOZ_COLUMN_RULE_WIDTH = "-moz-column-rule-width";
     private static final String MOZ_COLUMN_WIDTH = "-moz-column-width";
     private static final String MOZ_FLOAT_EDGE = "-moz-float-edge";
     private static final String MOZ_FORCE_BROKEN_IMAGE_ICON = "-moz-force-broken-image-icon";
@@ -197,10 +212,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String MOZ_OUTLINE_WIDTH = "-moz-outline-width";
     private static final String MOZ_PADDING_END = "-moz-padding-end";
     private static final String MOZ_PADDING_START = "-moz-padding-start";
+    private static final String MOZ_STACK_SIZING = "-moz-stack-sizing";
+    private static final String MOZ_TRANSFORM = "-moz-transform";
+    private static final String MOZ_TRANSFORM_ORIGIN = "-moz-transform-origin";
     private static final String MOZ_USER_FOCUS = "-moz-user-focus";
     private static final String MOZ_USER_INPUT = "-moz-user-input";
     private static final String MOZ_USER_MODIFY = "-moz-user-modify";
     private static final String MOZ_USER_SELECT = "-moz-user-select";
+    private static final String MOZ_WINDOW_SHADOW = "-moz-window-shadow";
     private static final String MS_BLOCK_PROGRESSION = "ms-block-progression";
     private static final String MS_INTERPOLATION_MODE = "ms-interpolation-mode";
     private static final String OPACITY = "opacity";
@@ -227,6 +246,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String PAUSE_BEFORE = "pause-before";
     private static final String PITCH = "pitch";
     private static final String PITCH_RANGE = "pitch-range";
+    private static final String POINTER_EVENTS = "pointer-events";
     private static final String POSITION = "position";
     private static final String QUOTES = "quotes";
     private static final String RICHNESS = "richness";
@@ -2441,6 +2461,22 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
+     * Gets the "MozBackgroundSize" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozBackgroundSize() {
+        return getStyleAttribute(MOZ_BACKGROUND_SIZE, null);
+    }
+
+    /**
+     * Sets the "MozBackgroundSize" style attribute.
+     * @param mozBackgroundSize the new attribute
+     */
+    public void jsxSet_MozBackgroundSize(final String mozBackgroundSize) {
+        setStyleAttribute(MOZ_BACKGROUND_SIZE, mozBackgroundSize);
+    }
+
+    /**
      * Gets the "MozBinding" style attribute.
      * @return the style attribute
      */
@@ -2470,6 +2506,86 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     public void jsxSet_MozBorderBottomColors(final String mozBorderBottomColors) {
         setStyleAttribute(MOZ_BORDER_BOTTOM_COLORS, mozBorderBottomColors);
+    }
+
+    /**
+     * Gets the "MozBorderEnd" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozBorderEnd() {
+        return getStyleAttribute(MOZ_BORDER_END, null);
+    }
+
+    /**
+     * Sets the "MozBorderEnd" style attribute.
+     * @param mozBorderEnd the new attribute
+     */
+    public void jsxSet_MozBorderEnd(final String mozBorderEnd) {
+        setStyleAttribute(MOZ_BORDER_END, mozBorderEnd);
+    }
+
+    /**
+     * Gets the "MozBorderEndColor" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozBorderEndColor() {
+        return getStyleAttribute(MOZ_BORDER_END_COLOR, null);
+    }
+
+    /**
+     * Sets the "MozBorderEndColor" style attribute.
+     * @param mozBorderEndColor the new attribute
+     */
+    public void jsxSet_MozBorderEndColor(final String mozBorderEndColor) {
+        setStyleAttribute(MOZ_BORDER_END_COLOR, mozBorderEndColor);
+    }
+
+    /**
+     * Gets the "MozBorderEndStyle" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozBorderEndStyle() {
+        return getStyleAttribute(MOZ_BORDER_END_STYLE, null);
+    }
+
+    /**
+     * Sets the "MozBorderEndStyle" style attribute.
+     * @param mozBorderEndStyle the new attribute
+     */
+    public void jsxSet_MozBorderEndStyle(final String mozBorderEndStyle) {
+        setStyleAttribute(MOZ_BORDER_END_STYLE, mozBorderEndStyle);
+    }
+
+    /**
+     * Gets the "MozBorderEndWidth" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozBorderEndWidth() {
+        return getStyleAttribute(MOZ_BORDER_END_WIDTH, null);
+    }
+
+    /**
+     * Sets the "MozBorderEndWidth" style attribute.
+     * @param mozBorderEndWidth the new attribute
+     */
+    public void jsxSet_MozBorderEndWidth(final String mozBorderEndWidth) {
+        setStyleAttribute(MOZ_BORDER_END_WIDTH, mozBorderEndWidth);
+    }
+
+    /**
+     * Gets the "MozBorderImage" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozBorderImage() {
+        return getStyleAttribute(MOZ_BORDER_IMAGE, null);
+    }
+
+    /**
+     * Sets the "MozBorderImage" style attribute.
+     * @param mozBorderImage the new attribute
+     */
+    public void jsxSet_MozBorderImage(final String mozBorderImage) {
+        setStyleAttribute(MOZ_BORDER_IMAGE, mozBorderImage);
     }
 
     /**
@@ -2585,6 +2701,70 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
+     * Gets the "MozBorderStart" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozBorderStart() {
+        return getStyleAttribute(MOZ_BORDER_START, null);
+    }
+
+    /**
+     * Sets the "MozBorderStart" style attribute.
+     * @param mozBorderStart the new attribute
+     */
+    public void jsxSet_MozBorderStart(final String mozBorderStart) {
+        setStyleAttribute(MOZ_BORDER_START, mozBorderStart);
+    }
+
+    /**
+     * Gets the "MozBorderStartColor" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozBorderStartColor() {
+        return getStyleAttribute(MOZ_BORDER_START_COLOR, null);
+    }
+
+    /**
+     * Sets the "MozBorderStartColor" style attribute.
+     * @param mozBorderStartColor the new attribute
+     */
+    public void jsxSet_MozBorderStartColor(final String mozBorderStartColor) {
+        setStyleAttribute(MOZ_BORDER_START_COLOR, mozBorderStartColor);
+    }
+
+    /**
+     * Gets the "MozBorderStartStyle" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozBorderStartStyle() {
+        return getStyleAttribute(MOZ_BORDER_START_STYLE, null);
+    }
+
+    /**
+     * Sets the "MozBorderStartStyle" style attribute.
+     * @param mozBorderStartStyle the new attribute
+     */
+    public void jsxSet_MozBorderStartStyle(final String mozBorderStartStyle) {
+        setStyleAttribute(MOZ_BORDER_START_STYLE, mozBorderStartStyle);
+    }
+
+    /**
+     * Gets the "MozBorderStartWidth" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozBorderStartWidth() {
+        return getStyleAttribute(MOZ_BORDER_START_WIDTH, null);
+    }
+
+    /**
+     * Sets the "MozBorderStartWidth" style attribute.
+     * @param mozBorderStartWidth the new attribute
+     */
+    public void jsxSet_MozBorderStartWidth(final String mozBorderStartWidth) {
+        setStyleAttribute(MOZ_BORDER_START_WIDTH, mozBorderStartWidth);
+    }
+
+    /**
      * Gets the "MozBorderTopColors" style attribute.
      * @return the style attribute
      */
@@ -2697,6 +2877,22 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
+     * Gets the "MozBoxShadow" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozBoxShadow() {
+        return getStyleAttribute(MOZ_BOX_SHADOW, null);
+    }
+
+    /**
+     * Sets the "MozBoxShadow" style attribute.
+     * @param mozBoxShadow the new attribute
+     */
+    public void jsxSet_MozBoxShadow(final String mozBoxShadow) {
+        setStyleAttribute(MOZ_BOX_SHADOW, mozBoxShadow);
+    }
+
+    /**
      * Gets the "MozBoxSizing" style attribute.
      * @return the style attribute
      */
@@ -2742,6 +2938,70 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     public void jsxSet_MozColumnGap(final String mozColumnGap) {
         setStyleAttribute(MOZ_COLUMN_GAP, mozColumnGap);
+    }
+
+    /**
+     * Gets the "MozColumnRule" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozColumnRule() {
+        return getStyleAttribute(MOZ_COLUMN_RULE, null);
+    }
+
+    /**
+     * Sets the "MozColumnRule" style attribute.
+     * @param mozColumnRule the new attribute
+     */
+    public void jsxSet_MozColumnRule(final String mozColumnRule) {
+        setStyleAttribute(MOZ_COLUMN_RULE, mozColumnRule);
+    }
+
+    /**
+     * Gets the "MozColumnRuleColor" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozColumnRuleColor() {
+        return getStyleAttribute(MOZ_COLUMN_RULE_COLOR, null);
+    }
+
+    /**
+     * Sets the "MozColumnRuleColor" style attribute.
+     * @param mozColumnRuleColor the new attribute
+     */
+    public void jsxSet_MozColumnRuleColor(final String mozColumnRuleColor) {
+        setStyleAttribute(MOZ_COLUMN_RULE_COLOR, mozColumnRuleColor);
+    }
+
+    /**
+     * Gets the "MozColumnRuleStyle" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozColumnRuleStyle() {
+        return getStyleAttribute(MOZ_COLUMN_RULE_STYLE, null);
+    }
+
+    /**
+     * Sets the "MozColumnRuleStyle" style attribute.
+     * @param mozColumnRuleStyle the new attribute
+     */
+    public void jsxSet_MozColumnRuleStyle(final String mozColumnRuleStyle) {
+        setStyleAttribute(MOZ_COLUMN_RULE_STYLE, mozColumnRuleStyle);
+    }
+
+    /**
+     * Gets the "MozColumnRuleWidth" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozColumnRuleWidth() {
+        return getStyleAttribute(MOZ_COLUMN_RULE_WIDTH, null);
+    }
+
+    /**
+     * Sets the "MozColumnRuleWidth" style attribute.
+     * @param mozColumnRuleWidth the new attribute
+     */
+    public void jsxSet_MozColumnRuleWidth(final String mozColumnRuleWidth) {
+        setStyleAttribute(MOZ_COLUMN_RULE_WIDTH, mozColumnRuleWidth);
     }
 
     /**
@@ -3049,6 +3309,54 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
+     * Gets the "MozStackSizing" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozStackSizing() {
+        return getStyleAttribute(MOZ_STACK_SIZING, null);
+    }
+
+    /**
+     * Sets the "MozStackSizing" style attribute.
+     * @param mozStackSizing the new attribute
+     */
+    public void jsxSet_MozStackSizing(final String mozStackSizing) {
+        setStyleAttribute(MOZ_STACK_SIZING, mozStackSizing);
+    }
+
+    /**
+     * Gets the "MozTransform" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozTransform() {
+        return getStyleAttribute(MOZ_TRANSFORM, null);
+    }
+
+    /**
+     * Sets the "MozTransform" style attribute.
+     * @param mozTransform the new attribute
+     */
+    public void jsxSet_MozTransform(final String mozTransform) {
+        setStyleAttribute(MOZ_TRANSFORM, mozTransform);
+    }
+
+    /**
+     * Gets the "MozTransformOrigin" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozTransformOrigin() {
+        return getStyleAttribute(MOZ_TRANSFORM_ORIGIN, null);
+    }
+
+    /**
+     * Sets the "MozTransformOrigin" style attribute.
+     * @param mozTransformOrigin the new attribute
+     */
+    public void jsxSet_MozTransformOrigin(final String mozTransformOrigin) {
+        setStyleAttribute(MOZ_TRANSFORM_ORIGIN, mozTransformOrigin);
+    }
+
+    /**
      * Gets the "MozUserFocus" style attribute.
      * @return the style attribute
      */
@@ -3110,6 +3418,22 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     public void jsxSet_MozUserSelect(final String mozUserSelect) {
         setStyleAttribute(MOZ_USER_SELECT, mozUserSelect);
+    }
+
+    /**
+     * Gets the "MozWindowShadow" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_MozWindowShadow() {
+        return getStyleAttribute(MOZ_WINDOW_SHADOW, null);
+    }
+
+    /**
+     * Sets the "MozWindowShadow" style attribute.
+     * @param mozWindowShadow the new attribute
+     */
+    public void jsxSet_MozWindowShadow(final String mozWindowShadow) {
+        setStyleAttribute(MOZ_WINDOW_SHADOW, mozWindowShadow);
     }
 
     /**
@@ -3562,6 +3886,22 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     public void jsxSet_pitchRange(final String pitchRange) {
         setStyleAttribute(PITCH_RANGE, pitchRange);
+    }
+
+    /**
+     * Gets the "pointerEvents" style attribute.
+     * @return the style attribute
+     */
+    public String jsxGet_pointerEvents() {
+        return getStyleAttribute(POINTER_EVENTS, null);
+    }
+
+    /**
+     * Sets the "pointerEvents" style attribute.
+     * @param pointerEvents the new attribute
+     */
+    public void jsxSet_pointerEvents(final String pointerEvents) {
+        setStyleAttribute(POINTER_EVENTS, pointerEvents);
     }
 
     /**

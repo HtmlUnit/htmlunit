@@ -533,9 +533,7 @@
         <property name="fontVariant" readable="true" writable="true"/>
         <property name="fontWeight" readable="true" writable="true"/>
         <property name="height" readable="true" writable="true"/>
-        <property name="imeMode" readable="true" writable="true">
-            <browser name="Internet Explorer"/>
-        </property>
+        <property name="imeMode" readable="true" writable="true"/>
         <property name="layoutFlow" readable="true" writable="true">
             <browser name="Internet Explorer"/>
         </property>
@@ -594,11 +592,29 @@
         <property name="MozBackgroundOrigin" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
+        <property name="MozBackgroundSize" readable="true" writable="true">
+            <browser name="Firefox" min-version="3.6"/>
+        </property>
         <property name="MozBinding" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
         <property name="MozBorderBottomColors" readable="true" writable="true">
             <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderEnd" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderEndColor" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderEndStyle" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderEndWidth" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderImage" readable="true" writable="true">
+            <browser name="Firefox" min-version="3.6"/>
         </property>
         <property name="MozBorderLeftColors" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -619,6 +635,18 @@
             <browser name="Firefox"/>
         </property>
         <property name="MozBorderRightColors" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderStart" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderStartColor" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderStartStyle" readable="true" writable="true">
+            <browser name="Firefox"/>
+        </property>
+        <property name="MozBorderStartWidth" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
         <property name="MozBorderTopColors" readable="true" writable="true">
@@ -642,6 +670,9 @@
         <property name="MozBoxPack" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
+        <property name="MozBoxShadow" readable="true" writable="true">
+            <browser name="Firefox" min-version="3.6"/>
+        </property>
         <property name="MozBoxSizing" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
@@ -650,6 +681,18 @@
         </property>
         <property name="MozColumnGap" readable="true" writable="true">
             <browser name="Firefox"/>
+        </property>
+        <property name="MozColumnRule" readable="true" writable="true">
+            <browser name="Firefox" min-version="3.6"/>
+        </property>
+        <property name="MozColumnRuleColor" readable="true" writable="true">
+            <browser name="Firefox" min-version="3.6"/>
+        </property>
+        <property name="MozColumnRuleStyle" readable="true" writable="true">
+            <browser name="Firefox" min-version="3.6"/>
+        </property>
+        <property name="MozColumnRuleWidth" readable="true" writable="true">
+            <browser name="Firefox" min-version="3.6"/>
         </property>
         <property name="MozColumnWidth" readable="true" writable="true">
             <browser name="Firefox"/>
@@ -708,6 +751,15 @@
         <property name="MozPaddingStart" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
+        <property name="MozStackSizing" readable="true" writable="true">
+            <browser name="Firefox" min-version="3.6"/>
+        </property>
+        <property name="MozTransform" readable="true" writable="true">
+            <browser name="Firefox" min-version="3.6"/>
+        </property>
+        <property name="MozTransformOrigin" readable="true" writable="true">
+            <browser name="Firefox" min-version="3.6"/>
+        </property>
         <property name="MozUserFocus" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
@@ -719,6 +771,9 @@
         </property>
         <property name="MozUserSelect" readable="true" writable="true">
             <browser name="Firefox"/>
+        </property>
+        <property name="MozWindowShadow" readable="true" writable="true">
+            <browser name="Firefox" min-version="3.6"/>
         </property>
         <property name="msBlockProgression" readable="true" writable="true">
             <browser name="Internet Explorer" min-version="8" />
@@ -784,17 +839,20 @@
         <property name="pitchRange" readable="true" writable="true">
             <browser name="Firefox"/>
         </property>
+        <property name="pointerEvents" readable="true" writable="true">
+            <browser name="Firefox" min-version="3.6"/>
+        </property>
         <property name="pixelBottom" readable="true" writable="true">
-            <browser name="Internet Explorer" max-version="7" />
+            <browser name="Internet Explorer"/>
         </property>
         <property name="pixelLeft" readable="true" writable="true">
-            <browser name="Internet Explorer" max-version="7" />
+            <browser name="Internet Explorer"/>
         </property>
         <property name="pixelRight" readable="true" writable="true">
-            <browser name="Internet Explorer" max-version="7" />
+            <browser name="Internet Explorer"/>
         </property>
         <property name="pixelTop" readable="true" writable="true">
-            <browser name="Internet Explorer" max-version="7" />
+            <browser name="Internet Explorer"/>
         </property>
         <property name="posBottom" readable="true" writable="true">
             <browser name="Internet Explorer"/>
@@ -949,6 +1007,7 @@
         <property name="wordSpacing" readable="true" writable="true"/>
         <property name="wordWrap" readable="true" writable="true">
             <browser name="Internet Explorer"/>
+            <browser name="Firefox" min-version="3.6"/>
         </property>
         <property name="writingMode" readable="true" writable="true">
             <browser name="Internet Explorer"/>

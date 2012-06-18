@@ -69,8 +69,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
-    public void stringProperties() throws Exception {
+    @Browsers(Browser.FF3)
+    public void stringPropertiesFF3() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function test() {\n"
@@ -90,7 +90,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "</body></html>";
 
-        final String expectedText = "cssText=:,azimuth=:,background=:,"
+        final String expectedText =
+            "cssText=:,azimuth=:,background=:,"
             + "backgroundAttachment=:scroll,backgroundColor=:transparent,backgroundImage=:none,"
             + "backgroundPosition=:0% 0%,backgroundRepeat=:repeat,border=:,borderCollapse=:separate,borderColor=:,"
             + "borderSpacing=:0px 0px,borderStyle=:,borderTop=:,borderRight=:,borderBottom=:,borderLeft=:,"
@@ -98,33 +99,112 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "borderLeftColor=:rgb(0, 0, 0),borderTopStyle=:none,borderRightStyle=:none,borderBottomStyle=:none,"
             + "borderLeftStyle=:none,borderTopWidth=:0px,borderRightWidth=:0px,borderBottomWidth=:0px,"
             + "borderLeftWidth=:0px,borderWidth=:,bottom=:auto,captionSide=:top,clear=:none,clip=:auto,"
-            + "color=:rgb(0, 0, 0),content=:,counterIncrement=:none,counterReset=:none,cue=:,cueAfter=:,cueBefore=:,"
-            + "cursor=:auto,direction=:ltr,display=:block,elevation=:,emptyCells=:-moz-show-background,cssFloat=:none,"
-            + "font=:,fontFamily=:serif,fontSize=:16px,fontSizeAdjust=:none,fontStretch=:,fontStyle=:normal,"
-            + "fontVariant=:normal,fontWeight=:400,height=:363px,left=:auto,letterSpacing=:normal,lineHeight=:normal,"
-            + "listStyle=:,listStyleImage=:none,listStylePosition=:outside,listStyleType=:disc,margin=:,"
-            + "marginTop=:0px,marginRight=:0px,marginBottom=:0px,marginLeft=:0px,markerOffset=:none,marks=:,"
-            + "maxHeight=:none,maxWidth=:none,minHeight=:0px,minWidth=:0px,orphans=:,outline=:,"
-            + "outlineColor=:rgb(0, 0, 0),outlineStyle=:none,outlineWidth=:0px,overflow=:visible,padding=:,"
-            + "paddingTop=:0px,paddingRight=:0px,paddingBottom=:0px,paddingLeft=:0px,page=:,pageBreakAfter=:,"
-            + "pageBreakBefore=:,pageBreakInside=:,pause=:,pauseAfter=:,pauseBefore=:,pitch=:,pitchRange=:,"
-            + "position=:static,quotes=:,richness=:,right=:auto,size=:,speak=:,speakHeader=:,speakNumeral=:,"
-            + "speakPunctuation=:,speechRate=:,stress=:,tableLayout=:auto,textAlign=:start,textDecoration=:none,"
-            + "textIndent=:0px,textShadow=:,textTransform=:none,top=:auto,unicodeBidi=:normal,verticalAlign=:baseline,"
-            + "visibility=:visible,voiceFamily=:,volume=:,whiteSpace=:normal,widows=:,width=:1256px,"
-            + "wordSpacing=:normal,zIndex=:auto,MozAppearance=:none,MozBackgroundClip=:border,"
+            + "color=:rgb(0, 0, 0),content=:none,counterIncrement=:none,counterReset=:none,cue=:,cueAfter=:,"
+            + "cueBefore=:,cursor=:auto,direction=:ltr,display=:block,elevation=:,emptyCells=:-moz-show-background,"
+            + "cssFloat=:none,font=:,fontFamily=:serif,fontSize=:16px,fontSizeAdjust=:none,fontStretch=:,"
+            + "fontStyle=:normal,fontVariant=:normal,fontWeight=:400,height=:362px,left=:auto,"
+            + "letterSpacing=:normal,lineHeight=:20px,listStyle=:,listStyleImage=:none,listStylePosition=:outside,"
+            + "listStyleType=:disc,margin=:,marginTop=:0px,marginRight=:0px,marginBottom=:0px,marginLeft=:0px,"
+            + "markerOffset=:auto,marks=:,maxHeight=:none,maxWidth=:none,minHeight=:0px,minWidth=:0px,orphans=:,"
+            + "outline=:,outlineColor=:rgb(0, 0, 0),outlineStyle=:none,outlineWidth=:0px,overflow=:visible,padding=:,"
+            + "paddingTop=:0px,paddingRight=:0px,paddingBottom=:0px,paddingLeft=:0px,page=:,pageBreakAfter=:auto,"
+            + "pageBreakBefore=:auto,pageBreakInside=:,pause=:,pauseAfter=:,pauseBefore=:,pitch=:,pitchRange=:,"
+            + "position=:static,quotes=:,richness=:,right=:auto,size=:,speak=:,speakHeader=:," // TODO quotes
+            + "speakNumeral=:,speakPunctuation=:,speechRate=:,stress=:,tableLayout=:auto,textAlign=:start,"
+            + "textDecoration=:none,textIndent=:0px,textShadow=:,textTransform=:none,top=:auto,"
+            + "unicodeBidi=:normal,verticalAlign=:baseline,visibility=:visible,voiceFamily=:,volume=:,"
+            + "whiteSpace=:normal,widows=:,width=:1256px,wordSpacing=:normal,zIndex=:auto,"
+            + "MozAppearance=:none,MozBackgroundClip=:border,MozBackgroundInlinePolicy=:continuous,"
+            + "MozBackgroundOrigin=:padding,MozBinding=:none,MozBorderBottomColors=:none,MozBorderLeftColors=:none,"
+            + "MozBorderRightColors=:none,MozBorderTopColors=:none,MozBorderRadius=:,MozBorderRadiusTopleft=:0px,"
+            + "MozBorderRadiusTopright=:0px,MozBorderRadiusBottomleft=:0px,MozBorderRadiusBottomright=:0px,"
+            + "MozBoxAlign=:stretch,MozBoxDirection=:normal,MozBoxFlex=:0,MozBoxOrient=:horizontal,"
+            + "MozBoxOrdinalGroup=:1,MozBoxPack=:start,MozBoxSizing=:content-box,MozColumnCount=:auto,"
+            + "MozColumnWidth=:auto,MozColumnGap=:16px,MozFloatEdge=:content-box,MozForceBrokenImageIcon=:0,"
+            + "MozImageRegion=:auto,MozMarginEnd=:,MozMarginStart=:,MozOpacity=:1,MozOutline=:,"
+            + "MozOutlineColor=:rgb(0, 0, 0),MozOutlineRadius=:,MozOutlineRadiusTopleft=:0px,"
+            + "MozOutlineRadiusTopright=:0px,MozOutlineRadiusBottomleft=:0px,MozOutlineRadiusBottomright=:0px,"
+            + "MozOutlineStyle=:none,MozOutlineWidth=:0px,MozOutlineOffset=:0px,MozPaddingEnd=:,"
+            + "MozPaddingStart=:,MozUserFocus=:none,MozUserInput=:auto,MozUserModify=:read-only,MozUserSelect=:auto,"
+            + "opacity=:1,outlineOffset=:0px,overflowX=:visible,overflowY=:visible,imeMode=:auto,MozBorderEnd=:,"
+            + "MozBorderEndColor=:,MozBorderEndStyle=:,MozBorderEndWidth=:,MozBorderStart=:,MozBorderStartColor=:,"
+            + "MozBorderStartStyle=:,MozBorderStartWidth=:,";
+
+        final WebDriver driver = loadPage2(html);
+        final List<String> expectedValues = stringProperties(expectedText);
+        final List<String> collectedValues = stringProperties(driver.findElement(By.id("myTextarea")).getText());
+        assertEquals(expectedValues.toString(), collectedValues.toString());
+    }
+
+    /**
+     * Compares all style and getComputedStle.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF3_6)
+    public void stringPropertiesFF3_6() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  var e = document.getElementById('myDiv');\n"
+            + "  var str = '';\n"
+            + "  for (var i in e.style) {\n"
+            + "    var s1 = eval('e.style.' + i);\n"
+            + "    var s2 = eval('window.getComputedStyle(e,null).' + i);\n"
+            + "    if(typeof s1 == 'string')\n"
+            + "      str += i + '=' + s1 + ':' + s2 + ',';\n"
+            + "  }\n"
+            + "  document.getElementById('myTextarea').value = str;\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'><br>\n"
+            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+            + "</body></html>";
+
+        final String expectedText =
+            "opacity=:1,background=:,"
+            + "height=:362px,textAlign=:start,right=:auto,bottom=:auto,fontSize=:16px,backgroundColor=:transparent,"
+            + "letterSpacing=:normal,verticalAlign=:baseline,color=:rgb(0, 0, 0),top=:auto,width=:1256px,"
+            + "display=:block,zIndex=:auto,position=:static,left=:auto,visibility=:visible,cssText=:,azimuth=:,"
+            + "backgroundAttachment=:scroll,backgroundImage=:none,backgroundPosition=:0% 0%,backgroundRepeat=:repeat,"
+            + "border=:,borderCollapse=:separate,borderColor=:,borderSpacing=:0px 0px,borderStyle=:,borderTop=:,"
+            + "borderRight=:,borderBottom=:,borderLeft=:,borderTopColor=:rgb(0, 0, 0),borderRightColor=:rgb(0, 0, 0),"
+            + "borderBottomColor=:rgb(0, 0, 0),borderLeftColor=:rgb(0, 0, 0),borderTopStyle=:none,"
+            + "borderRightStyle=:none,borderBottomStyle=:none,borderLeftStyle=:none,borderTopWidth=:0px,"
+            + "borderRightWidth=:0px,borderBottomWidth=:0px,borderLeftWidth=:0px,borderWidth=:,captionSide=:top,"
+            + "clear=:none,clip=:auto,content=:none,counterIncrement=:none,counterReset=:none,cue=:,cueAfter=:,"
+            + "cueBefore=:,cursor=:auto,direction=:ltr,elevation=:,emptyCells=:-moz-show-background,cssFloat=:none,"
+            + "font=:,fontFamily=:serif,fontSizeAdjust=:none,fontStretch=:normal,fontStyle=:normal,fontVariant=:normal,"
+            + "fontWeight=:400,lineHeight=:20px,listStyle=:,listStyleImage=:none,listStylePosition=:outside,"
+            + "listStyleType=:disc,margin=:,marginTop=:0px,marginRight=:0px,marginBottom=:0px,marginLeft=:0px,"
+            + "markerOffset=:auto,marks=:,maxHeight=:none,maxWidth=:none,minHeight=:0px,minWidth=:0px,orphans=:,"
+            + "outline=:,outlineColor=:rgb(0, 0, 0),outlineStyle=:none,outlineWidth=:0px,overflow=:visible,padding=:,"
+            + "paddingTop=:0px,paddingRight=:0px,paddingBottom=:0px,paddingLeft=:0px,page=:,pageBreakAfter=:auto,"
+            + "pageBreakBefore=:auto,pageBreakInside=:,pause=:,pauseAfter=:,pauseBefore=:,pitch=:,pitchRange=:,"
+            + "quotes=:,richness=:,size=:,speak=:,speakHeader=:," // TODO quotes
+            + "speakNumeral=:,speakPunctuation=:,speechRate=:,stress=:,tableLayout=:auto,textDecoration=:none,"
+            + "textIndent=:0px,textShadow=:none,textTransform=:none,unicodeBidi=:embed,voiceFamily=:,volume=:,"
+            + "whiteSpace=:normal,widows=:,wordSpacing=:0px,MozAppearance=:none,MozBackgroundClip=:border,"
             + "MozBackgroundInlinePolicy=:continuous,MozBackgroundOrigin=:padding,MozBinding=:none,"
-            + "MozBorderBottomColors=:none,MozBorderLeftColors=:none,MozBorderRightColors=:none,"
-            + "MozBorderTopColors=:none,MozBorderRadius=:,MozBorderRadiusTopleft=:0px,MozBorderRadiusTopright=:0px,"
-            + "MozBorderRadiusBottomleft=:0px,MozBorderRadiusBottomright=:0px,MozBoxAlign=:stretch,"
-            + "MozBoxDirection=:normal,MozBoxFlex=:0,MozBoxOrient=:horizontal,MozBoxOrdinalGroup=:1,MozBoxPack=:start,"
-            + "MozBoxSizing=:content-box,MozColumnCount=:auto,MozColumnWidth=:auto,MozColumnGap=:0px,"
-            + "MozFloatEdge=:content-box,MozForceBrokenImageIcon=:,MozImageRegion=:auto,MozMarginEnd=:,"
-            + "MozMarginStart=:,MozOpacity=:1,MozOutline=:,MozOutlineColor=:rgb(0, 0, 0),MozOutlineRadius=:,"
-            + "MozOutlineRadiusTopleft=:0px,MozOutlineRadiusTopright=:0px,MozOutlineRadiusBottomleft=:0px,"
-            + "MozOutlineRadiusBottomright=:0px,MozOutlineStyle=:none,MozOutlineWidth=:0px,MozOutlineOffset=:0px,"
-            + "MozPaddingEnd=:,MozPaddingStart=:,MozUserFocus=:none,MozUserInput=:auto,MozUserModify=:read-only,"
-            + "MozUserSelect=:auto,opacity=:1,outlineOffset=:0px,overflowX=:visible,overflowY=:visible,";
+            + "MozBorderBottomColors=:none,"
+            + "MozBorderLeftColors=:none,MozBorderRightColors=:none,MozBorderTopColors=:none,MozBorderRadius=:,"
+            + "MozBorderRadiusTopleft=:0px,MozBorderRadiusTopright=:0px,MozBorderRadiusBottomleft=:0px,"
+            + "MozBorderRadiusBottomright=:0px,MozBoxAlign=:stretch,MozBoxDirection=:normal,MozBoxFlex=:0,"
+            + "MozBoxOrient=:horizontal,MozBoxOrdinalGroup=:1,MozBoxPack=:start,MozBoxSizing=:content-box,"
+            + "MozColumnCount=:auto,MozColumnWidth=:auto,MozColumnGap=:16px,MozFloatEdge=:content-box,"
+            + "MozForceBrokenImageIcon=:0,MozImageRegion=:auto,MozMarginEnd=:,MozMarginStart=:,MozOpacity=:1,"
+            + "MozOutline=:,MozOutlineColor=:rgb(0, 0, 0),MozOutlineRadius=:,MozOutlineRadiusTopleft=:0px,"
+            + "MozOutlineRadiusTopright=:0px,MozOutlineRadiusBottomleft=:0px,MozOutlineRadiusBottomright=:0px,"
+            + "MozOutlineStyle=:none,MozOutlineWidth=:0px,"
+            + "MozOutlineOffset=:0px,MozPaddingEnd=:,MozPaddingStart=:,MozUserFocus=:none,MozUserInput=:auto,"
+            + "MozUserModify=:read-only,MozUserSelect=:auto,outlineOffset=:0px,overflowX=:visible,overflowY=:visible,"
+            + "imeMode=:auto,MozBorderEnd=:,MozBorderEndColor=:,MozBorderEndStyle=:,MozBorderEndWidth=:,"
+            + "MozBorderStart=:,MozBorderStartColor=:,MozBorderStartStyle=:,MozBorderStartWidth=:,"
+            + "MozStackSizing=:stretch-to-fit,MozBoxShadow=:none,MozBorderImage=:none,MozColumnRule=:,"
+            + "MozColumnRuleWidth=:0px,MozColumnRuleStyle=:none,"
+            + "MozColumnRuleColor=:rgb(0, 0, 0),wordWrap=:normal,MozTransform=:none,MozTransformOrigin=:50% 50%,"
+            + "MozWindowShadow=:default,MozBackgroundSize=:auto auto,pointerEvents=:auto,";
 
         final WebDriver driver = loadPage2(html);
         final List<String> expectedValues = stringProperties(expectedText);

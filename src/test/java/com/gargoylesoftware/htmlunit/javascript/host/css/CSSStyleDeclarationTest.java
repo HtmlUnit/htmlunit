@@ -14,24 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link CSSStyleDeclaration}.
@@ -523,499 +516,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<div id='div3' style='border: thick'>foo</div>"
             + "</body></html>";
         loadPageWithAlerts2(html);
-    }
-
-    /**
-     * Expected values are missing for FF3, IE7 and IE8.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented({ Browser.FF, Browser.IE7 })
-    public void properties() throws Exception {
-        final Map<BrowserVersion, String[]> properties = new HashMap<BrowserVersion, String[]>();
-        properties.put(BrowserVersion.INTERNET_EXPLORER_6, new String[]{
-            "background",
-            "backgroundAttachment",
-            "backgroundColor",
-            "backgroundImage",
-            "backgroundPosition",
-            "backgroundPositionX",
-            "backgroundPositionY",
-            "backgroundRepeat",
-            "behavior",
-            "border",
-            "borderBottom",
-            "borderBottomColor",
-            "borderBottomStyle",
-            "borderBottomWidth",
-            "borderCollapse",
-            "borderColor",
-            "borderLeft",
-            "borderLeftColor",
-            "borderLeftStyle",
-            "borderLeftWidth",
-            "borderRight",
-            "borderRightColor",
-            "borderRightStyle",
-            "borderRightWidth",
-            "borderStyle",
-            "borderTop",
-            "borderTopColor",
-            "borderTopStyle",
-            "borderTopWidth",
-            "borderWidth",
-            "bottom",
-            "clear",
-            "clip",
-            "color",
-            "cssText",
-            "cursor",
-            "direction",
-            "display",
-            "filter",
-            "font",
-            "fontFamily",
-            "fontSize",
-            "fontStyle",
-            "fontVariant",
-            "fontWeight",
-            "height",
-            "imeMode",
-            "layoutFlow",
-            "layoutGrid",
-            "layoutGridChar",
-            "layoutGridLine",
-            "layoutGridMode",
-            "layoutGridType",
-            "left",
-            "letterSpacing",
-            "lineBreak",
-            "lineHeight",
-            "listStyle",
-            "listStyleImage",
-            "listStylePosition",
-            "listStyleType",
-            "margin",
-            "marginBottom",
-            "marginLeft",
-            "marginRight",
-            "marginTop",
-            "maxHeight",
-            "maxWidth",
-            "minHeight",
-            "minWidth",
-            "msInterpolationMode",
-            "overflow",
-            "overflowX",
-            "overflowY",
-            "padding",
-            "paddingBottom",
-            "paddingLeft",
-            "paddingRight",
-            "paddingTop",
-            "pageBreakAfter",
-            "pageBreakBefore",
-            "pixelBottom",
-            "pixelLeft",
-            "pixelRight",
-            "pixelTop",
-            "position",
-            "posBottom",
-            "posHeight",
-            "posLeft",
-            "posRight",
-            "posTop",
-            "posWidth",
-            "right",
-            "rubyAlign",
-            "rubyOverhang",
-            "rubyPosition",
-            "scrollbar3dLightColor",
-            "scrollbarArrowColor",
-            "scrollbarBaseColor",
-            "scrollbarDarkShadowColor",
-            "scrollbarFaceColor",
-            "scrollbarHighlightColor",
-            "scrollbarShadowColor",
-            "scrollbarTrackColor",
-            "styleFloat",
-            "tableLayout",
-            "textAlign",
-            "textAlignLast",
-            "textAutospace",
-            "textDecoration",
-            "textDecorationBlink",
-            "textDecorationLineThrough",
-            "textDecorationNone",
-            "textDecorationOverline",
-            "textDecorationUnderline",
-            "textIndent",
-            "textJustify",
-            "textJustifyTrim",
-            "textKashida",
-            "textKashidaSpace",
-            "textOverflow",
-            "textTransform",
-            "textUnderlinePosition",
-            "top",
-            "unicodeBidi",
-            "verticalAlign",
-            "visibility",
-            "whiteSpace",
-            "width",
-            "wordBreak",
-            "wordSpacing",
-            "wordWrap",
-            "writingMode",
-            "zIndex",
-            "zoom"
-        });
-
-        properties.put(BrowserVersion.INTERNET_EXPLORER_8, new String[]{
-            "background",
-            "backgroundAttachment",
-            "backgroundColor",
-            "backgroundImage",
-            "backgroundPosition",
-            "backgroundPositionX",
-            "backgroundPositionY",
-            "backgroundRepeat",
-            "behavior",
-            "border",
-            "borderBottom",
-            "borderBottomColor",
-            "borderBottomStyle",
-            "borderBottomWidth",
-            "borderCollapse",
-            "borderColor",
-            "borderLeft",
-            "borderLeftColor",
-            "borderLeftStyle",
-            "borderLeftWidth",
-            "borderRight",
-            "borderRightColor",
-            "borderRightStyle",
-            "borderRightWidth",
-            "borderSpacing",
-            "borderStyle",
-            "borderTop",
-            "borderTopColor",
-            "borderTopStyle",
-            "borderTopWidth",
-            "borderWidth",
-            "bottom",
-            "boxSizing",
-            "captionSide",
-            "clear",
-            "clip",
-            "color",
-            "cssText",
-            "content",
-            "counterIncrement",
-            "counterReset",
-            "cursor",
-            "direction",
-            "display",
-            "emptyCells",
-            "filter",
-            "font",
-            "fontFamily",
-            "fontSize",
-            "fontStyle",
-            "fontVariant",
-            "fontWeight",
-            "height",
-            "imeMode",
-            "layoutFlow",
-            "layoutGrid",
-            "layoutGridChar",
-            "layoutGridLine",
-            "layoutGridMode",
-            "layoutGridType",
-            "left",
-            "letterSpacing",
-            "lineBreak",
-            "lineHeight",
-            "listStyle",
-            "listStyleImage",
-            "listStylePosition",
-            "listStyleType",
-            "margin",
-            "marginBottom",
-            "marginLeft",
-            "marginRight",
-            "marginTop",
-            "maxHeight",
-            "maxWidth",
-            "minHeight",
-            "minWidth",
-            "msBlockProgression",
-            "msInterpolationMode",
-            "orphans",
-            "outline",
-            "outlineColor",
-            "outlineStyle",
-            "outlineWidth",
-            "overflow",
-            "overflowX",
-            "overflowY",
-            "padding",
-            "paddingBottom",
-            "paddingLeft",
-            "paddingRight",
-            "paddingTop",
-            "pageBreakAfter",
-            "pageBreakBefore",
-            "pageBreakInside",
-            "position",
-            "posBottom",
-            "posHeight",
-            "posLeft",
-            "posRight",
-            "posTop",
-            "posWidth",
-            "quotes",
-            "right",
-            "rubyAlign",
-            "rubyOverhang",
-            "rubyPosition",
-            "scrollbar3dLightColor",
-            "scrollbarArrowColor",
-            "scrollbarBaseColor",
-            "scrollbarDarkShadowColor",
-            "scrollbarFaceColor",
-            "scrollbarHighlightColor",
-            "scrollbarShadowColor",
-            "scrollbarTrackColor",
-            "styleFloat",
-            "tableLayout",
-            "textAlign",
-            "textAlignLast",
-            "textAutospace",
-            "textDecoration",
-            "textDecorationBlink",
-            "textDecorationLineThrough",
-            "textDecorationNone",
-            "textDecorationOverline",
-            "textDecorationUnderline",
-            "textIndent",
-            "textJustify",
-            "textJustifyTrim",
-            "textKashida",
-            "textKashidaSpace",
-            "textOverflow",
-            "textTransform",
-            "textUnderlinePosition",
-            "top",
-            "unicodeBidi",
-            "verticalAlign",
-            "visibility",
-            "whiteSpace",
-            "widows",
-            "width",
-            "wordBreak",
-            "wordSpacing",
-            "wordWrap",
-            "writingMode",
-            "zIndex",
-            "zoom"
-        });
-
-        final String[] expectedProperties = properties.get(getBrowserVersion());
-        properties(expectedProperties);
-    }
-
-    private void properties(final String[] expectedProperties) throws Exception {
-        final String html
-            = "<html><head><title>First</title><script>\n"
-            + "function test() {\n"
-            + "  var style = document.getElementById('myDiv').style;\n"
-            + "  var s = '';\n"
-            + "  for (var i in style) {\n"
-            + "    if (eval('style.' + i) == '')\n"
-            + "      s += i + ' ';\n"
-            + "  }\n"
-            + "  document.getElementById('myTextarea').value = s;\n"
-            + "}\n"
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "  <div id='myDiv'><br>\n"
-            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
-            + "</body></html>";
-
-        final WebDriver driver = loadPage2(html);
-        final List<String> expectedStyles = Arrays.asList(expectedProperties);
-        Collections.sort(expectedStyles);
-
-        final List<String> collectedStyles =
-            Arrays.asList(driver.findElement(By.id("myTextarea")).getText().split(" "));
-        Collections.sort(collectedStyles);
-
-        assertEquals(expectedStyles, collectedStyles);
-    }
-
-    /**
-     * Test types of properties.
-     * Expected values are missing for FF3, IE7 and IE8.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented({ Browser.FF, Browser.IE7, Browser.IE8 })
-    public void properties2() throws Exception {
-        final Map<BrowserVersion, String[]> properties = new HashMap<BrowserVersion, String[]>();
-        properties.put(BrowserVersion.INTERNET_EXPLORER_6, new String[]{
-            "background",
-            "backgroundAttachment",
-            "backgroundColor",
-            "backgroundImage",
-            "backgroundPosition",
-            "backgroundPositionX",
-            "backgroundPositionY",
-            "backgroundRepeat",
-            "behavior",
-            "border",
-            "borderBottom",
-            "borderBottomColor",
-            "borderBottomStyle",
-            "borderBottomWidth",
-            "borderCollapse",
-            "borderColor",
-            "borderLeft",
-            "borderLeftColor",
-            "borderLeftStyle",
-            "borderLeftWidth",
-            "borderRight",
-            "borderRightColor",
-            "borderRightStyle",
-            "borderRightWidth",
-            "borderStyle",
-            "borderTop",
-            "borderTopColor",
-            "borderTopStyle",
-            "borderTopWidth",
-            "borderWidth",
-            "bottom",
-            "clear",
-            "clip",
-            "color",
-            "cssText",
-            "cursor",
-            "direction",
-            "display",
-            "filter",
-            "font",
-            "fontFamily",
-            "fontSize",
-            "fontStyle",
-            "fontVariant",
-            "fontWeight",
-            "height",
-            "imeMode",
-            "layoutFlow",
-            "layoutGrid",
-            "layoutGridChar",
-            "layoutGridLine",
-            "layoutGridMode",
-            "layoutGridType",
-            "left",
-            "letterSpacing",
-            "lineBreak",
-            "lineHeight",
-            "listStyle",
-            "listStyleImage",
-            "listStylePosition",
-            "listStyleType",
-            "margin",
-            "marginBottom",
-            "marginLeft",
-            "marginRight",
-            "marginTop",
-            "maxHeight",
-            "maxWidth",
-            "minHeight",
-            "minWidth",
-            "msInterpolationMode",
-            "overflow",
-            "overflowX",
-            "overflowY",
-            "padding",
-            "paddingBottom",
-            "paddingLeft",
-            "paddingRight",
-            "paddingTop",
-            "pageBreakAfter",
-            "pageBreakBefore",
-            "position",
-            "right",
-            "rubyAlign",
-            "rubyOverhang",
-            "rubyPosition",
-            "scrollbar3dLightColor",
-            "scrollbarArrowColor",
-            "scrollbarBaseColor",
-            "scrollbarDarkShadowColor",
-            "scrollbarFaceColor",
-            "scrollbarHighlightColor",
-            "scrollbarShadowColor",
-            "scrollbarTrackColor",
-            "styleFloat",
-            "tableLayout",
-            "textAlign",
-            "textAlignLast",
-            "textAutospace",
-            "textDecoration",
-            "textIndent",
-            "textJustify",
-            "textJustifyTrim",
-            "textKashida",
-            "textKashidaSpace",
-            "textOverflow",
-            "textTransform",
-            "textUnderlinePosition",
-            "top",
-            "unicodeBidi",
-            "verticalAlign",
-            "visibility",
-            "whiteSpace",
-            "width",
-            "wordBreak",
-            "wordSpacing",
-            "wordWrap",
-            "writingMode",
-            "zoom"
-        });
-
-        final String[] expectedProperties = properties.get(getBrowserVersion());
-        properties2(expectedProperties);
-    }
-
-    private void properties2(final String[] expectedProperties) throws Exception {
-        final String html
-            = "<html><head><title>First</title><script>\n"
-            + "function test() {\n"
-            + "  var style = document.getElementById('myDiv').style;\n"
-            + "  var s = '';\n"
-            + "  for (var i in style) {\n"
-            + "    if (eval('style.' + i) === '')\n"
-            + "      s += i + ' ';\n"
-            + "  }\n"
-            + "  document.getElementById('myTextarea').value = s;\n"
-            + "}\n"
-            + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "  <div id='myDiv'><br>\n"
-            + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
-            + "</body></html>";
-
-        final WebDriver driver = loadPage2(html);
-        final List<String> expectedStyles = Arrays.asList(expectedProperties);
-        Collections.sort(expectedStyles);
-
-        final List<String> collectedStyles =
-            Arrays.asList(driver.findElement(By.id("myTextarea")).getText().split(" "));
-        Collections.sort(collectedStyles);
-
-        assertEquals(expectedStyles, collectedStyles);
     }
 
     /**
@@ -1693,8 +1193,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE6 = { "5px", "5", "1em", "16", "30px", "30" },
-            IE7 = { "5px", "5", "1em", "16", "30px", "30" },
+    @Alerts(IE = { "5px", "5", "1em", "16", "30px", "30" },
             DEFAULT = { "5px", "undefined", "1em", "undefined" })
     public void pixelLeft() throws Exception {
         final String html = "<html><body>\n"
@@ -1721,8 +1220,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE6 = { "5px", "5", "1em", "16", "30px", "30" },
-            IE7 = { "5px", "5", "1em", "16", "30px", "30" },
+    @Alerts(IE = { "5px", "5", "1em", "16", "30px", "30" },
             DEFAULT = { "5px", "undefined", "1em", "undefined" })
     public void pixelRight() throws Exception {
         final String html = "<html><body>\n"
@@ -1749,8 +1247,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE6 = { "5px", "5", "1em", "16", "30px", "30" },
-            IE7 = { "5px", "5", "1em", "16", "30px", "30" },
+    @Alerts(IE = { "5px", "5", "1em", "16", "30px", "30" },
             DEFAULT = { "5px", "undefined", "1em", "undefined" })
     public void pixelTop() throws Exception {
         final String html = "<html><body>\n"
@@ -1777,8 +1274,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE6 = { "5px", "5", "1em", "16", "30px", "30" },
-            IE7 = { "5px", "5", "1em", "16", "30px", "30" },
+    @Alerts(IE = { "5px", "5", "1em", "16", "30px", "30" },
             DEFAULT = { "5px", "undefined", "1em", "undefined" })
     public void pixelBottom() throws Exception {
         final String html = "<html><body>\n"
@@ -1827,5 +1323,4 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
-
 }

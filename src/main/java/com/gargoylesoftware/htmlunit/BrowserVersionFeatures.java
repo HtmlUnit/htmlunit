@@ -58,6 +58,9 @@ public enum BrowserVersionFeatures {
     /** Was originally .isFirefox(). */
     CSS_DISPLAY_DEFAULT,
 
+    /** Default is 'normal'. */
+    CSS_FONT_STRECH_DEFAULT_NORMAL,
+
     /** Indicates that the browser can surrounds image url's with quotes. */
     CSS_IMAGE_URL_QUOTED,
 
@@ -78,6 +81,15 @@ public enum BrowserVersionFeatures {
      * DHTML (Dynamic HTML) components.
      */
     CSS_SUPPORTS_BEHAVIOR_PROPERTY,
+
+    /** Default is 'none'. */
+    CSS_TEXT_SHADOW_DEFAULT_NONE,
+
+    /** Default is 'normal'. */
+    CSS_UNICODE_BIDI_DEFAULT_NORMAL,
+
+    /** Default is 'normal'. */
+    CSS_WORD_SPACING_DEFAULT_NORMAL,
 
     /** Values for the zIndex are rounded to integer. */
     CSS_ZINDEX_ROUNDED,
