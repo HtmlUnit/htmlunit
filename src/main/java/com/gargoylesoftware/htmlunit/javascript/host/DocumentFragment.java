@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 /**
@@ -27,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  */
 public class DocumentFragment extends Node {
 
-    //TODO: seems that in IE, DocumentFragment extends HTMLDocument 
+    //TODO: seems that in IE, DocumentFragment extends HTMLDocument
 
     /**
      * {@inheritDoc}
@@ -66,7 +67,7 @@ public class DocumentFragment extends Node {
      * @return HTML document
      */
     protected HTMLDocument getDocument() {
-        return (HTMLDocument) getDomNodeOrDie().getPage().getScriptObject();
+        return (HTMLDocument) this.<DomNode>getDomNodeOrDie().getPage().getScriptObject();
     }
 
     /**
