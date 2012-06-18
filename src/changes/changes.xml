@@ -126,7 +126,13 @@
                 Some not needed exception declarations are gone.
             </action>
             <action type="fix" dev="rbri" issue="3471836" due-to="Hartmut Arlt">
-                isDisplayed() has to return false for hidden form fields.xccfdfdfd
+                isDisplayed() has to return false for hidden form fields.
+            </action>
+            <action type="fix" dev="mguillem" issue="3470364">
+                Cookies: add support for Set-Cookie attribute httpOnly.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: fix strange return value
                 'net.sourceforge.htmlunit.corejs.javascript.UniqueTag.NOT_FOUND'
                 of ComputedStyle.getPropertyValue.
             </action>
