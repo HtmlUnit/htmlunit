@@ -1401,9 +1401,10 @@ public class JavaScriptEngineTest extends WebTestCase {
         final List<ScriptException> jsExceptions = new ArrayList<ScriptException>();
         final JavaScriptEngine myEngine = new JavaScriptEngine(webClient) {
             @Override
-            protected void handleJavaScriptException(final ScriptException scriptException) {
+            protected void handleJavaScriptException(final ScriptException scriptException,
+                    final boolean triggerOnError) {
                 jsExceptions.add(scriptException);
-                super.handleJavaScriptException(scriptException);
+                super.handleJavaScriptException(scriptException, triggerOnError);
             }
         };
         webClient.setJavaScriptEngine(myEngine);
