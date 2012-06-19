@@ -36,12 +36,15 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts(DEFAULT = "false", FF10 = "exception")
     public void createElementWithAngleBrackets() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var select = document.createElement('<select>');\n"
-            + "    alert(select.add == undefined);\n"
+            + "    try {\n"
+            + "      var select = document.createElement('<select>');\n"
+            + "      alert(select.add == undefined);\n"
+            + "    }\n"
+            + "    catch (e) { alert('exception') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -53,6 +56,7 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "DIV", "exception" },
+            FF10 = "exception",
             IE = { "DIV", "false", "mySelect", "0", "OPTION", "myOption", "0" })
     public void createElementWithHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
