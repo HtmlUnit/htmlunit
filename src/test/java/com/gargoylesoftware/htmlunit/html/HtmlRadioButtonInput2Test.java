@@ -158,7 +158,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("radio2")).click();
 
         assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
-                '[' + driver.findElement(By.id("myTextarea")).getText() + ']');
+                '[' + driver.findElement(By.id("myTextarea")).getAttribute("value") + ']');
     }
 
     /**
