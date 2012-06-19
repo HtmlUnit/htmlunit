@@ -177,7 +177,8 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='rightCorner.gif',sizingMethod='crop')" },
-            FF = { "undefined" })
+            FF = { "undefined" },
+            FF10 = { "" })
     @NotYetImplemented(Browser.IE)
     public void colon() throws Exception {
         final String html = "<html><head><title>First</title>\n"
