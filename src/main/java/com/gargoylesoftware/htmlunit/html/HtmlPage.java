@@ -1582,7 +1582,7 @@ public class HtmlPage extends SgmlPage {
     public <E extends HtmlElement> E getHtmlElementById(final String id, final boolean caseSensitive)
         throws ElementNotFoundException {
         String usedID = id;
-        if (!caseSensitive) {
+        if (!caseSensitive && !idMap_.containsKey(usedID)) {
             for (final String key : idMap_.keySet()) {
                 if (key.equalsIgnoreCase(usedID)) {
                     usedID = key;
