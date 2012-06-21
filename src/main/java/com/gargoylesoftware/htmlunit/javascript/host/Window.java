@@ -1569,6 +1569,30 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         controllers_ = value;
     }
 
+    /**
+     * Returns the value of "mozInnerScreenX" property.
+     * @return the value of "mozInnerScreenX" property
+     */
+    public int jsxGet_mozInnerScreenX() {
+        return 0;
+    }
+
+    /**
+     * Returns the value of "mozInnerScreenY" property.
+     * @return the value of "mozInnerScreenY" property
+     */
+    public int jsxGet_mozInnerScreenY() {
+        return 82;
+    }
+
+    /**
+     * Returns the value of "mozPaintCount" property.
+     * @return the value of "mozPaintCount" property
+     */
+    public int jsxGet_mozPaintCount() {
+        return 23;
+    }
+
     /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl **/
     private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<String>(Arrays.asList(
             "style",
@@ -1822,4 +1846,3 @@ class HTMLCollectionFrames extends HTMLCollection {
         }
     }
 }
-

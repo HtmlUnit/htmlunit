@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+            <action type="add" dev="asashour" issue="3536790">
+                JavaScript: add window.mozInnerScreenX, .mozInnerScreenY and .mozPaintCount (FF only).
+            </action>
             <action type="update" dev="asashour">
                 WebRequest: add default value for "Accept-Encoding" HTTP header.
             </action>

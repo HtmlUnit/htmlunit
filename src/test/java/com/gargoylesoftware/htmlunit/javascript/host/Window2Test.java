@@ -904,4 +904,23 @@ public class Window2Test extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "0", "82", "23" }, IE = { "undefined", "undefined", "undefined" })
+    public void mozInnerScreenX() throws Exception {
+        final String html
+            = "<html><body onload='test()'><script>\n"
+            + "function test() {\n"
+            + "  alert(window.mozInnerScreenX);\n"
+            + "  alert(window.mozInnerScreenY);\n"
+            + "  alert(window.mozPaintCount);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

@@ -3116,6 +3116,15 @@
             <browser name="Firefox" min-version="3.5"/>
         </property>
         <property name="location" readable="true" writable="true"/>
+        <property name="mozInnerScreenX" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="mozInnerScreenY" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="mozPaintCount" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="name" readable="true" writable="true"/>
         <property name="navigator" readable="true" writable="false"/>
         <property name="onbeforeunload" readable="true" writable="true"/>
