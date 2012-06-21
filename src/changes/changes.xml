@@ -6,6 +6,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+            <action type="update" dev="asashour">
+                WebRequest: add default value for "Accept-Encoding" HTTP header.
+            </action>
             <action type="fix" dev="rbri" issue="3534371" due-to="Hartmut Arlt">
                 Fixed error processing when the onerror handler throws an error.
             </action>

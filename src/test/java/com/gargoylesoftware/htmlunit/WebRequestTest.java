@@ -153,4 +153,14 @@ public class WebRequestTest {
         assertEquals(new BasicUserPrincipal(""), credentials.getUserPrincipal());
         assertEquals("", credentials.getPassword());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void accept_encoding() throws Exception {
+        final URL url = new URL("http://localhost/");
+        final WebRequest request = new WebRequest(url);
+        assertEquals("gzip, deflate", request.getAdditionalHeaders().get("Accept-Encoding"));
+    }
 }
