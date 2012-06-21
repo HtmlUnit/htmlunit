@@ -1581,16 +1581,19 @@ public class HtmlPage extends SgmlPage {
     @SuppressWarnings("unchecked")
     public <E extends HtmlElement> E getHtmlElementById(final String id, final boolean caseSensitive)
         throws ElementNotFoundException {
-        String usedID = id;
-        if (!caseSensitive && !idMap_.containsKey(usedID)) {
+
+        List<HtmlElement> elements = idMap_.get(id);
+
+        // not found maybe we have to search case insensitive
+        if (null == elements && !caseSensitive) {
             for (final String key : idMap_.keySet()) {
-                if (key.equalsIgnoreCase(usedID)) {
-                    usedID = key;
+                if (key.equalsIgnoreCase(id)) {
+                    elements = idMap_.get(key);
                     break;
                 }
             }
         }
-        final List<HtmlElement> elements = idMap_.get(usedID);
+
         if (elements != null) {
             return (E) elements.get(0);
         }
