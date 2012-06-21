@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<document>
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
     <properties>
         <title>Changes</title>
     </properties>
@@ -1561,13 +1563,13 @@
             <action type="fix" dev="asashour">
                 Handle HTML pages with empty 'Content-Type' HTTP header.
             </action>
-            <action type="fix" dev="sdanig" issues="2803378">
+            <action type="fix" dev="sdanig" issue="2803378">
                 Handle 204 (No Content) HTTP responses correctly.
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: implement TextRange.inRange (IE only).
             </action>
-            <action type="fix" dev="sdanig" issues="2804850">
+            <action type="fix" dev="sdanig" issue="2804850">
                 Check meta tags inside HTML pages for encoding information.
             </action>
             <action type="add" dev="sdanig">
@@ -1576,7 +1578,7 @@
             <action type="add" dev="sdanig">
                 JavaScript: add support for option.form, legend.form, object.form and label.form attributes.
             </action>
-            <action type="fix" dev="sdanig" issues="2515806">
+            <action type="fix" dev="sdanig" issue="2515806">
                 Add better support for XHTML pages (new XHtmlPage class extends HtmlPage class).
             </action>
             <action type="add" dev="sdanig">
@@ -1589,31 +1591,31 @@
             <action type="add" dev="sdanig">
                 JavaScript: add support for attr.isId attribute (Firefox 3 only).
             </action>
-            <action type="fix" dev="sdanig" issues="2794667">
+            <action type="fix" dev="sdanig" issue="2794667">
                 Update page URL when navigating to a local anchor.
             </action>
-            <action type="fix" dev="sdanig" issues="1337174">
+            <action type="fix" dev="sdanig" issue="1337174">
                 JavaScript: implement placeholder functions history.back(), history.forward() and history.go().
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix setting select.value.
             </action>
-            <action type="update" dev="asashour" issues="2129288">
+            <action type="update" dev="asashour" issue="2129288">
                 Extending NodeList to implement List&lt;E extends DomNode&gt;.
             </action>
-            <action type="fix" dev="asashour" issues="2800211">
+            <action type="fix" dev="asashour" issue="2800211">
                 JavaScript: fix document.referrer.
             </action>
             <action type="update" dev="asashour">
                 JavaScript: fix document.createAttribute().
             </action>
-            <action type="update" dev="asashour" issues="2799550">
+            <action type="update" dev="asashour" issue="2799550">
                 HtmlObject: "classid" is supported (using Jacob).
             </action>
-            <action type="add" dev="asashour" issues="2674431">
+            <action type="add" dev="asashour" issue="2674431">
                 HtmlSelect: add .getOptionByText().
             </action>
-            <action type="add" dev="asashour" issues="2486331">
+            <action type="add" dev="asashour" issue="2486331">
                 HtmlPage and HtmlImage: add .save().
             </action>
             <action type="update" dev="asashour">
@@ -6010,7 +6012,7 @@
             <action type="add" due-to="Mabel Chow" dev="mbowler">
                 Added support for document.all.tags()
             </action>
-            <action type="update" due-to="Dominique Broeglin" patch-author="Dominique Broeglin" dev="mbowler">
+            <action type="update" due-to="Dominique Broeglin" dev="mbowler">
                 Fixed bug in expansion of relative URLs
             </action>
             <action type="add" issue="709740" due-to="David K. Taylor" dev="mbowler">
@@ -6163,7 +6165,7 @@
             <action type="update" dev="mbowler">
                 Fixed bug where javascript:Window.open() was not returning the new window object
             </action>
-            <action type="add" developer="Mike J. Bresnahan" dev="mbowler">
+            <action type="add" due-to="Mike J. Bresnahan" dev="mbowler">
                 Added support for onchange handler in HtmlSelect
             </action>
             <action type="update" dev="mbowler">
