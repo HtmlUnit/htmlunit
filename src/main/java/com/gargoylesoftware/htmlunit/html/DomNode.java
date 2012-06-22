@@ -1299,7 +1299,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 return null;
             }
             final DomNode parent = startingNode.getParentNode();
-            if (parent == DomNode.this) {
+            if (parent == null || parent == DomNode.this) {
                 return null;
             }
             DomNode next = parent.getNextSibling();
