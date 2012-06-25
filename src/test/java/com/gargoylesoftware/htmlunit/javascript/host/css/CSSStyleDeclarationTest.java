@@ -314,7 +314,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"", "alpha(opacity=50)" }, FF = {"undefined", "undefined" })
+    @Alerts(IE = {"", "alpha(opacity=50)" }, FF = {"undefined", "undefined" }, FF10 = {"", "" })
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test(){\n"
@@ -407,7 +407,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers({ Browser.IE, Browser.FF10 })
     public void setExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -424,7 +424,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers({ Browser.IE, Browser.FF10 })
     public void removeExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
