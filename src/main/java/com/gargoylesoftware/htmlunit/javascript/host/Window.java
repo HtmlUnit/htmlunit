@@ -37,6 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -49,6 +50,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.ScriptException;
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
@@ -975,6 +977,23 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * Returns the onhashchange property (caution this is not necessary a function if something else has
+     * been set).
+     * @return the onhashchange property
+     */
+    public Object jsxGet_onhashchange() {
+        return getEventListenersContainer().getEventHandlerProp(Event.TYPE_HASH_CHANGE);
+    }
+
+    /**
+     * Sets the value of the onhashchange event handler.
+     * @param newHandler the new handler
+     */
+    public void jsxSet_onhashchange(final Object newHandler) {
+        getEventListenersContainer().setEventHandlerProp(Event.TYPE_HASH_CHANGE, newHandler);
+    }
+
+    /**
      * Gets the container for event listeners.
      * @return the container (newly created if needed)
      */
@@ -1781,6 +1800,50 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public int jsxGet_scrollY() {
         return 0;
+    }
+
+    /**
+     * Executes the event on this object only (needed for instance for onload on (i)frame tags).
+     * @param event the event
+     * @return the result
+     */
+    public ScriptResult executeEvent(final Event event) {
+        return executeEvent(event, eventListenersContainer_);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Executes the event on this window only. Internal helper to share the impl with
+     * Node.java.
+     * @param event the event
+     * @param eventListenersContainer the container with the listeners
+     * @return the result
+     */
+    protected ScriptResult executeEvent(final Event event, final EventListenersContainer eventListenersContainer) {
+        if (eventListenersContainer != null) {
+            final boolean eventParam = getBrowserVersion().hasFeature(
+                    BrowserVersionFeatures.JS_EVENT_HANDLER_DECLARED_AS_PROPERTY_DONT_RECEIVE_EVENT);
+            final Object[] args = new Object[] {event};
+
+            // handlers declared as property on a node don't receive the event as argument for IE
+            final Object[] propHandlerArgs;
+            if (eventParam) {
+                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
+            }
+            else {
+                propHandlerArgs = args;
+            }
+
+            setCurrentEvent(event);
+            try {
+                return eventListenersContainer.executeListeners(event, args, propHandlerArgs);
+            }
+            finally {
+                setCurrentEvent(null); // reset event
+            }
+        }
+        return null;
     }
 }
 

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * JavaScript object representing a UI event. For general information on which properties and functions should be
@@ -47,6 +48,15 @@ public class UIEvent extends Event {
      */
     public UIEvent(final DomNode domNode, final String type) {
         super(domNode, type);
+    }
+
+    /**
+     * Creates a new event instance.
+     * @param scriptable the SimpleScriptable that triggered the event
+     * @param type the event type
+     */
+    public UIEvent(final SimpleScriptable scriptable, final String type) {
+        super(scriptable, type);
     }
 
     /**

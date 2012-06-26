@@ -102,6 +102,9 @@ public class Event extends SimpleScriptable {
     /** The event type triggered by "onpropertychange" event handlers. */
     public static final String TYPE_PROPERTY_CHANGE = "propertychange";
 
+    /** The event type triggered by "onhashchange" event handlers. */
+    public static final String TYPE_HASH_CHANGE = "hashchange";
+
     /** The event type triggered by "onreadystatechange" event handlers. */
     public static final String TYPE_READY_STATE_CHANGE = "readystatechange";
 

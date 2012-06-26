@@ -123,6 +123,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("FormChild");
         names.remove("FormField");
         names.remove("History");
+        names.remove("HashChangeEvent");
         names.remove("HTMLCollection");
         names.remove("HTMLCollectionTags");
         names.remove("HTMLDocument");

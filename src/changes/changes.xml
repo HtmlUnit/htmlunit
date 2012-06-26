@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+            <action type="add" dev="asashour" issue="3536790">
+                JavaScript: window.onhashchange support added.
+            </action>
             <action type="update" dev="asashour" issue="3532769">
                 DomNode: fix potential NPE in DomNode.DescendantElementsIterator.
             </action>

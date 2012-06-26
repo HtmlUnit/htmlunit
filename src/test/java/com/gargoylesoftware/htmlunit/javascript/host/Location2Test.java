@@ -456,4 +456,70 @@ public class Location2Test extends WebDriverTestCase {
 
         assertEquals(new URL(getDefaultUrl(), "foo2.html").toString(), driver.getCurrentUrl());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "supported", "onhashchange undefined  undefined" },
+            FF3 = { },
+            FF10 = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
+            IE6 = { },
+            IE7 = { },
+            IE8 = { "supported", "onhashchange -" })
+    public void onHashChange() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + " if ('onhashchange' in window) { alert('supported') }\n"
+            + " function locationHashChanged(event) {\n"
+            + "  if (event) {"
+            + "    alert('onhashchange ' + event.newURL + '  ' + event.oldURL);\n"
+            + "  } else {\n"
+            + "    alert('onhashchange -');\n"
+            + "  }\n"
+            + " }\n"
+            + " window.onhashchange = locationHashChanged;\n"
+            + "</script>\n"
+            + "<body>\n"
+            + " <a id='click' href='#1'>change hash</a>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("click")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "supported", "onhashchange undefined  undefined" },
+            FF3 = { },
+            FF10 = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
+            IE6 = { },
+            IE7 = { },
+            IE8 = { "supported", "onhashchange -" })
+    public void onHashChangeJS() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + " if ('onhashchange' in window) { alert('supported') }\n"
+            + " function locationHashChanged(event) {\n"
+            + "  if (event) {"
+            + "    alert('onhashchange ' + event.newURL + '  ' + event.oldURL);\n"
+            + "  } else {\n"
+            + "    alert('onhashchange -');\n"
+            + "  }\n"
+            + " }\n"
+            + " window.onhashchange = locationHashChanged;\n"
+            + "</script>\n"
+            + "<body>\n"
+            + " <button id='click' onclick='location.hash=1'>change hash</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("click")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
 }

@@ -20,6 +20,8 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -293,7 +295,14 @@ public class Location extends SimpleScriptable {
                 hash = hash.substring(1);
             }
         }
+        final boolean hasChanged = hash != null && hash.equals(hash_);
         hash_ = hash;
+
+        if (hasChanged) {
+            final HashChangeEvent event = new HashChangeEvent(getWindow(), Event.TYPE_HASH_CHANGE,
+                    Undefined.instance, Undefined.instance);
+            getWindow().executeEvent(event);
+        }
     }
 
     private String decodeHash(final String hash) {

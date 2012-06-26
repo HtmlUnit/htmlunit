@@ -663,29 +663,9 @@ public class Node extends SimpleScriptable {
      */
     public ScriptResult executeEvent(final Event event) {
         if (eventListenersContainer_ != null) {
-
             final HtmlPage page = (HtmlPage) this.<DomNode>getDomNodeOrDie().getPage();
-            final boolean eventParam = getBrowserVersion().hasFeature(
-                    BrowserVersionFeatures.JS_EVENT_HANDLER_DECLARED_AS_PROPERTY_DONT_RECEIVE_EVENT);
             final Window window = (Window) page.getEnclosingWindow().getScriptObject();
-            final Object[] args = new Object[] {event};
-
-            // handlers declared as property on a node don't receive the event as argument for IE
-            final Object[] propHandlerArgs;
-            if (eventParam) {
-                propHandlerArgs = ArrayUtils.EMPTY_OBJECT_ARRAY;
-            }
-            else {
-                propHandlerArgs = args;
-            }
-
-            window.setCurrentEvent(event);
-            try {
-                return eventListenersContainer_.executeListeners(event, args, propHandlerArgs);
-            }
-            finally {
-                window.setCurrentEvent(null); // reset event
-            }
+            return window.executeEvent(event, eventListenersContainer_);
         }
 
         return null;

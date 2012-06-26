@@ -2541,6 +2541,14 @@
         </function>
     </class>
 
+    <class extends="UIEvent" classname="com.gargoylesoftware.htmlunit.javascript.host.HashChangeEvent" JSObject="true">
+        <browser name="Internet Explorer" min-version="8"/>
+        <browser name="Firefox" min-version="3.6"/>
+
+        <property name="newURL" readable="true" writable="false" />
+        <property name="oldURL" readable="true" writable="false" />
+    </class>
+
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Location"
         JSObject="true">
         <property name="hash" readable="true" writable="true"/>
@@ -3134,6 +3142,10 @@
         <property name="ondblclick" readable="true" writable="true"/>
         <property name="onerror" readable="true" writable="true"/>
         <property name="onload" readable="true" writable="true"/>
+        <property name="onhashchange" readable="true" writable="true">
+            <browser name="Internet Explorer" min-version="8"/>
+            <browser name="Firefox" min-version="3.6"/>
+        </property>
         <property name="opener" readable="true" writable="true"/>
         <property name="outerHeight" readable="true" writable="false">
             <browser name="Firefox"/>
