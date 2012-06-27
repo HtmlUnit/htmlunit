@@ -295,7 +295,7 @@ public class Location extends SimpleScriptable {
                 hash = hash.substring(1);
             }
         }
-        final boolean hasChanged = hash != null && hash.equals(hash_);
+        final boolean hasChanged = hash != null && !hash.equals(hash_);
         hash_ = hash;
 
         if (hasChanged) {
