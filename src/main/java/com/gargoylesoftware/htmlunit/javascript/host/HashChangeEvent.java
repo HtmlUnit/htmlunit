@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * <a href="http://www.w3c.org/TR/DOM-Level-3-Events/#Events-KeyboardEvents-Interfaces">
  * DOM Level 3 Events</a>.
  *
- * @version $Revision: $
+ * @version $Revision$
  * @author Ronald Brill
  */
 public class HashChangeEvent extends UIEvent {
