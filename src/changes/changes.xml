@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+            <action type="fix" dev="asashour">
+                Cookie: null path is treated as "/" in .equals() and .hashCode()
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache HttpClient to 4.2.1.
             </action>

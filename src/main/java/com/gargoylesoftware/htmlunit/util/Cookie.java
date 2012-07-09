@@ -239,7 +239,9 @@ public class Cookie implements Serializable {
             return false;
         }
         final Cookie other = (Cookie) o;
-        return new EqualsBuilder().append(name_, other.name_).append(domain_, other.domain_).append(path_, other.path_)
+        final String path = path_ == null ? "/" : path_;
+        final String otherPath = other.path_ == null ? "/" : other.path_;
+        return new EqualsBuilder().append(name_, other.name_).append(domain_, other.domain_).append(path, otherPath)
             .isEquals();
     }
 
@@ -248,7 +250,8 @@ public class Cookie implements Serializable {
      */
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(name_).append(domain_).append(path_).toHashCode();
+        final String path = path_ == null ? "/" : path_;
+        return new HashCodeBuilder().append(name_).append(domain_).append(path).toHashCode();
     }
 
     /**
