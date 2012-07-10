@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLScriptElementTest extends WebDriverTestCase {
@@ -129,6 +130,253 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "  alert('end');\n"
             + "</script>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Creates a new script element and adds the source using <code>createTextNode</code> and <code>appendChild</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "start", "end" },
+            IE = { "start", "exception", "end" })
+    @NotYetImplemented(Browser.IE)
+    public void createElementWithCreateTextNode() throws Exception {
+        // IE (at least IE6 and IE8) does not support script.appendChild(source)
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.createElement('script');\n"
+              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  try {\n"
+              + "    script.appendChild(source);\n"
+              + "  } catch(e) {alert('exception'); }\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Creates a new script element and adds the source using <code>createTextNode</code> and <code>appendChild</code>.
+     * After that it appends the script element to the body.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "start", "middle", "executed", "end" },
+            IE = { "start", "exception", "middle", "end" })
+    @NotYetImplemented(Browser.IE)
+    public void createElementWithCreateTextNodeAndAppend() throws Exception {
+        // IE (at least IE6 and IE8) does not support script.appendChild(source)
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.createElement('script');\n"
+              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  try {\n"
+              + "    script.appendChild(source);\n"
+              + "  } catch(e) {alert('exception'); }\n"
+              + "  alert('middle');\n"
+              + "  document.body.appendChild(script);\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Creates a new script element and adds the source using <code>.text</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "start", "end" })
+    public void createElementWithSetText() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.createElement('script');\n"
+              + "  script.text = \"alert('executed');\";\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Creates a new script element and adds the source using <code>.text</code>.
+     * After that it appends the script element to the body.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "start", "middle", "executed", "end" })
+    public void createElementWithSetTextAndAppend() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.createElement('script');\n"
+              + "  script.text = \"alert('executed');\";\n"
+              + "  alert('middle');\n"
+              + "  document.body.appendChild(script);\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Replaces the source of the current script element using <code>createTextNode</code> and <code>appendChild</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "start", "end" },
+            IE = { "start", "exception", "end" })
+    @NotYetImplemented(Browser.IE)
+    public void replaceSelfWithCreateTextNode() throws Exception {
+        // IE (at least IE6 and IE8) does not support script.appendChild(source)
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementsByTagName('script')[0];\n"
+              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  try {\n"
+              + "    script.appendChild(source);\n"
+              + "  } catch(e) {alert('exception'); }\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Replaces the source of the current script element using <code>.text</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "start", "end" },
+            IE = { "start", "executed", "end" })
+    @NotYetImplemented(Browser.IE)
+    public void replaceSelfWithSetText() throws Exception {
+        // TODO this test is the same as #reexecuteModifiedScriptWhenReappending()
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementsByTagName('script')[0];\n"
+              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  script.text = \"alert('executed');\";\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Replaces the source of another script element using <code>createTextNode</code> and <code>appendChild</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "start", "executed", "end" },
+            IE = { "start", "exception", "end" })
+    @NotYetImplemented
+    public void replaceWithCreateTextNode() throws Exception {
+        // IE (at least IE6 and IE8) does not support script.appendChild(source)
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script id='js1'></script>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementById('js1');\n"
+              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  try {\n"
+              + "    script.appendChild(source);\n"
+              + "  } catch(e) {alert('exception'); }\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Replaces the source of another script element using <code>.text</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "start", "executed", "end" })
+    @NotYetImplemented
+    public void replaceWithSetText() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script id='js1'></script>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementById('js1');\n"
+              + "  script.text = \"alert('executed');\";\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Moves a script element from a div element to the body element using <code>appendChild</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "executed", "start", "end" })
+    public void moveWithAppend() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<div>\n"
+              + "<script id='js1'>\n"
+              + "  alert('executed');\n"
+              + "</script>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementById('js1');\n"
+              + "  document.body.appendChild(script);\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</div>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Moves a script element from a div element to the body element using <code>insertBefore</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "executed", "start", "end" })
+    public void moveWithInsert() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<div>\n"
+              + "<script id='js1'>\n"
+              + "  alert('executed');\n"
+              + "</script>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementById('js1');\n"
+              + "  document.body.insertBefore(script, null);\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</div>\n"
+              + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
@@ -289,6 +537,58 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test exception throw by IE when calling <code>appendChild</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {  },
+            IE = { "Unexpected call to method or property access" })
+    @NotYetImplemented(Browser.IE)
+    public void appendChild_UnexpectedCall() throws Exception {
+        // IE (at least IE6 and IE8) does not support script.appendChild(source)
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script>\n"
+              + "  var script = document.createElement('script');\n"
+              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  try {\n"
+              + "    script.appendChild(source);\n"
+              + "  } catch(e) {\n"
+              + "    alert(e.message);\n"
+              + "  };\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test exception throw by IE when calling <code>insertBefore</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {  },
+            IE = { "Unexpected call to method or property access" })
+    @NotYetImplemented(Browser.IE)
+    public void insertBefore_UnexpectedCall() throws Exception {
+        // IE (at least IE6 and IE8) does not support script.insertBefore(source, null)
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script>\n"
+              + "  var script = document.createElement('script');\n"
+              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  try {\n"
+              + "    script.insertBefore(source, null);\n"
+              + "  } catch(e) {\n"
+              + "    alert(e.message);\n"
+              + "  };\n"
+              + "</script>\n"
+              + "</body></html>";
 
         loadPageWithAlerts2(html);
     }

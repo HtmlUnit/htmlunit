@@ -683,6 +683,9 @@
         <contributor>
             <name>Martin Huber</name>
         </contributor>
+        <contributor>
+            <name>Frank Danek</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
