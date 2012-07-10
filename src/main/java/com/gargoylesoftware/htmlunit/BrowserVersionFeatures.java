@@ -550,10 +550,6 @@ public enum BrowserVersionFeatures {
      * the parentNode's parentNode if this was null. */
     JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT_IF_PARENT_IS_NULL,
 
-    /** Indicates that re-appending script elements executes
-     * the script code again (like IE does). */
-    JS_APPEND_CHILD_REEXECUTES_SCRIPT,
-
     /** Indicates that the appendChild call throws no exception
      * if the provided note cannot be inserted. */
     JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE,

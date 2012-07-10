@@ -172,10 +172,6 @@
             <action type="fix" dev="rbri" issue="3029277">
                 JavaScript: Initialization of the popup window misses some steps.
             </action>
-            <action type="fix" dev="rbri" issue="2993940">
-                JavaScript: Re-appending a script element now re-executes the script
-                (in IE mode).
-            </action>
             <action type="fix" dev="rbri" issue="2944261">
                 JavaScript: Remove also the node parents from style cache when changing
                 a node, because some styles have an effect for the parent properties

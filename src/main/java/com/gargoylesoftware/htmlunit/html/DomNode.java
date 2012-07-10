@@ -892,9 +892,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         // a node that is already "complete" (ie not being parsed) and not yet attached
-        final boolean reexecute = getPage().getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.JS_APPEND_CHILD_REEXECUTES_SCRIPT);
-        if (!domNode.isBodyParsed() && isDirectlyAttachedToPage() && (reexecute || !wasAlreadyAttached)) {
+        if (!domNode.isBodyParsed() && isDirectlyAttachedToPage() && !wasAlreadyAttached) {
             domNode.onAddedToPage();
             for (final DomNode child : domNode.getDescendants()) {
                 child.directlyAttachedToPage_ = true;
