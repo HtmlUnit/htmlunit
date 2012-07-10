@@ -21,6 +21,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -216,8 +218,12 @@ public class HtmlScript2Test extends WebDriverTestCase {
             = "<html><body>\n"
             + "<script>\n"
             + "  var script = document.createElement('script');"
-            + "  script.appendChild(document.createTextNode('alert(\"1\");'));\n;"
-            + "  script.appendChild(document.createTextNode('alert(\"2\");'));\n;"
+            + "  try {"
+            + "    script.appendChild(document.createTextNode('alert(\"1\");'));\n;"
+            + "    script.appendChild(document.createTextNode('alert(\"2\");'));\n;"
+            + "  } catch(e) {\n"
+            + "    script.text = 'alert(\"1\");alert(\"2\");';\n;"
+            + "  }\n"
             + "  document.body.appendChild(script);\n"
             + "</script>\n"
             + "</body></html>";
@@ -235,8 +241,12 @@ public class HtmlScript2Test extends WebDriverTestCase {
             = "<html><body>\n"
             + "<script>\n"
             + "  var script = document.createElement('script');"
+            + "  try {\n"
             + "  script.appendChild(document.createTextNode('var x=1;'));\n;"
             + "  script.appendChild(document.createTextNode('x=2;'));\n;"
+            + "  } catch(e) {\n"
+            + "    script.text = 'var x=1;x=2;';\n;"
+            + "  }\n"
             + "  document.body.appendChild(script);\n"
             + "  alert(script.text);\n"
             + "</script>\n"
@@ -250,6 +260,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @Browsers({ Browser.FF, Browser.CHROME })
     public void setTextMultipleTextNodes() throws Exception {
         final String html
             = "<html><body>\n"

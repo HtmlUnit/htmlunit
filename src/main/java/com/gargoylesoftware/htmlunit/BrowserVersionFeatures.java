@@ -711,6 +711,12 @@ public enum BrowserVersionFeatures {
      */
     JS_OPACITY_ACCEPTS_ARBITRARY_VALUES,
 
+    /** Javascript script.appendChild throws an error (IE6-IE8). */
+    JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION,
+
+    /** Javascript script.insertBefore throws an error (IE6-IE8). */
+    JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION,
+
     /** Javascript selectorText property returns selectors in uppercase. */
     JS_SELECTOR_TEXT_UPPERCASE,
 

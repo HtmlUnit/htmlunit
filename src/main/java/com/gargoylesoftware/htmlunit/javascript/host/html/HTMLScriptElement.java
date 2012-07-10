@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 
@@ -140,4 +143,31 @@ public class HTMLScriptElement extends HTMLElement {
         return node.getReadyState();
     }
 
+    /**
+     * Overwritten for special IE handling.
+     *
+     * @param childObject the node to add to this node
+     * @return the newly added child node
+     */
+    public Object jsxFunction_appendChild(final Object childObject) {
+        if (getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION)) {
+            throw Context.reportRuntimeError("Unexpected call to method or property access");
+        }
+        return super.jsxFunction_appendChild(childObject);
+    }
+
+    /**
+     * Overwritten for special IE handling.
+     *
+     * @param args the arguments
+     * @return the newly added child node
+     */
+    protected Object jsxFunction_insertBefore(final Object[] args) {
+        if (getBrowserVersion().hasFeature(
+                BrowserVersionFeatures.JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION)) {
+            throw Context.reportRuntimeError("Unexpected call to method or property access");
+        }
+        return super.jsxFunction_insertBefore(args);
+    }
 }

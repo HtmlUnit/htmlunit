@@ -141,7 +141,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "start", "end" },
             IE = { "start", "exception", "end" })
-    @NotYetImplemented(Browser.IE)
     public void createElementWithCreateTextNode() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -168,7 +167,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "start", "middle", "executed", "end" },
             IE = { "start", "exception", "middle", "end" })
-    @NotYetImplemented(Browser.IE)
     public void createElementWithCreateTextNodeAndAppend() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -239,7 +237,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "start", "end" },
             IE = { "start", "exception", "end" })
-    @NotYetImplemented(Browser.IE)
     public void replaceSelfWithCreateTextNode() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -289,7 +286,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "start", "executed", "end" },
             IE = { "start", "exception", "end" })
-    @NotYetImplemented
+    @NotYetImplemented(Browser.FF)
     public void replaceWithCreateTextNode() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -546,9 +543,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {  },
-            IE = { "Unexpected call to method or property access" })
-    @NotYetImplemented(Browser.IE)
+    @Alerts(IE = "Unexpected call to method or property access")
     public void appendChild_UnexpectedCall() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
@@ -559,7 +554,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  try {\n"
               + "    script.appendChild(source);\n"
               + "  } catch(e) {\n"
-              + "    alert(e.message);\n"
+              + "    alert(e.message.slice(0,44));\n"
               + "  };\n"
               + "</script>\n"
               + "</body></html>";
@@ -572,10 +567,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {  },
-            IE = { "Unexpected call to method or property access" })
-    @NotYetImplemented(Browser.IE)
-    public void insertBefore_UnexpectedCall() throws Exception {
+    @Alerts(IE = "Unexpected call to method or property access")
+    public void insertBeforeUnexpectedCall() throws Exception {
         // IE (at least IE6 and IE8) does not support script.insertBefore(source, null)
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -585,7 +578,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  try {\n"
               + "    script.insertBefore(source, null);\n"
               + "  } catch(e) {\n"
-              + "    alert(e.message);\n"
+              + "    alert(e.message.slice(0,44));\n"
               + "  };\n"
               + "</script>\n"
               + "</body></html>";
