@@ -187,10 +187,11 @@ public class HtmlScript extends HtmlElement {
         final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
+        // special additional processding for the 'src'
         if (namespaceURI == null && "src".equals(qualifiedName)) {
-            final boolean ie =
-                getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_5);
-            if (ie || (oldValue.length() == 0 && getFirstChild() == null)) {
+            final boolean alwaysReexecute = getPage().getWebClient().getBrowserVersion().
+                hasFeature(BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
+            if (alwaysReexecute || (oldValue.length() == 0 && getFirstChild() == null)) {
                 // Always execute if IE;
                 // if FF, only execute if the "src" attribute
                 // was undefined and there was no inline code.

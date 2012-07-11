@@ -341,9 +341,6 @@ public enum BrowserVersionFeatures {
     GENERATED_49,
 
     /** Was originally .isIE(). */
-    GENERATED_5,
-
-    /** Was originally .isIE(). */
     GENERATED_50,
 
     /** Was originally .isIE(). */
@@ -710,6 +707,12 @@ public enum BrowserVersionFeatures {
      * FF accepts only valid floats.
      */
     JS_OPACITY_ACCEPTS_ARBITRARY_VALUES,
+
+    /** Always execute the script if IE;
+     *  in FF, only execute if the old "src" attribute was undefined
+     *  and there was no inline code.
+     */
+    JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE,
 
     /** Javascript script.appendChild throws an error (IE6-IE8). */
     JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION,
