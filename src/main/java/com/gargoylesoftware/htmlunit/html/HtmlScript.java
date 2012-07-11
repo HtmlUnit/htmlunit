@@ -272,11 +272,12 @@ public class HtmlScript extends HtmlElement {
             event = event.substring(0, event.length() - 2);
         }
 
-        final boolean ie = getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_7);
+        final boolean supportsEventFor = getPage().getWebClient().getBrowserVersion()
+                .hasFeature(BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT);
         final String scriptCode = getScriptCode();
-        if (ie && event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
+        if (supportsEventFor
+                && event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
             if ("window".equals(forr)) {
-                // everything fine, accepted by IE and FF
                 final Window window = (Window) getPage().getEnclosingWindow().getScriptObject();
                 final BaseFunction function = new EventHandler(this, event, scriptCode);
                 window.jsxFunction_attachEvent(event, function);

@@ -377,9 +377,6 @@ public enum BrowserVersionFeatures {
     GENERATED_69,
 
     /** Was originally .isIE(). */
-    GENERATED_7,
-
-    /** Was originally .isIE(). */
     GENERATED_70,
 
     /** Was originally .isIE(). */
@@ -716,6 +713,11 @@ public enum BrowserVersionFeatures {
 
     /** Javascript script.insertBefore throws an error (IE6-IE8). */
     JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION,
+
+    /** Javascript script tags supports the 'for' and the 'event'
+     * attribute (IE).
+     */
+    JS_SCRIPT_SUPPORTS_FOR_AND_EVENT,
 
     /** Javascript script object supports the onreadystatechange event (IE). */
     JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE,
