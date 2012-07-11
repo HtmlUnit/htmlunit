@@ -215,18 +215,18 @@ public class HtmlScript extends HtmlElement {
         final PostponedAction action = new PostponedAction(getPage()) {
             @Override
             public void execute() {
-                final boolean ie =
-                    getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_6);
-                if (ie) {
+                final boolean onReady = getPage().getWebClient().getBrowserVersion()
+                        .hasFeature(BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE);
+                if (onReady) {
                     if (!isDeferred()) {
-                        if (!SLASH_SLASH_COLON.equals(getSrcAttribute())) {
+                        if (SLASH_SLASH_COLON.equals(getSrcAttribute())) {
+                            setAndExecuteReadyState(READY_STATE_COMPLETE);
+                            executeScriptIfNeeded();
+                        }
+                        else {
                             setAndExecuteReadyState(READY_STATE_LOADING);
                             executeScriptIfNeeded();
                             setAndExecuteReadyState(READY_STATE_LOADED);
-                        }
-                        else {
-                            setAndExecuteReadyState(READY_STATE_COMPLETE);
-                            executeScriptIfNeeded();
                         }
                     }
                 }
@@ -243,10 +243,10 @@ public class HtmlScript extends HtmlElement {
             try {
                 action.execute();
             }
+            catch (final RuntimeException e) {
+                throw e;
+            }
             catch (final Exception e) {
-                if (e instanceof RuntimeException) {
-                    throw (RuntimeException) e;
-                }
                 throw new RuntimeException(e);
             }
         }

@@ -359,9 +359,6 @@ public enum BrowserVersionFeatures {
     GENERATED_59,
 
     /** Was originally .isIE(). */
-    GENERATED_6,
-
-    /** Was originally .isIE(). */
     GENERATED_60,
 
     /** Was originally .isIE(). */
@@ -719,6 +716,9 @@ public enum BrowserVersionFeatures {
 
     /** Javascript script.insertBefore throws an error (IE6-IE8). */
     JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION,
+
+    /** Javascript script object supports the onreadystatechange event (IE). */
+    JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE,
 
     /** Javascript selectorText property returns selectors in uppercase. */
     JS_SELECTOR_TEXT_UPPERCASE,
