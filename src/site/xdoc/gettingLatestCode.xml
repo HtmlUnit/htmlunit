@@ -27,7 +27,7 @@
 
         <section name="Maven snapshot">
             <p>
-            There is a local Maven repository used to host HtmlUnit snapshots, which is manually updated by the team once in a while.
+            Sonatype OSS repository hosts HtmlUnit snapshot, which is manually updated by the team once in a while.
             To use that, you can include the below in your POM:
             <source><![CDATA[<project>
     ...
@@ -40,9 +40,9 @@
             <releases>
                 <enabled>false</enabled>
             </releases>
-            <id>HtmlUnitSnapshots</id>
-            <name>HtmlUnit Snapshots</name>
-            <url>http://htmlunit.sourceforge.net/m2-repo-snapshots</url>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
             <layout>default</layout>
         </repository>
     </repositories>
