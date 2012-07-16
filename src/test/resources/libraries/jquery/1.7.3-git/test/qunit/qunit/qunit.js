@@ -772,7 +772,8 @@ extend( QUnit, {
 			return "object";
 		}
 		return undefined;
-	},
+	},
+
 
 	push: function( result, actual, expected, message ) {
 		if ( !config.current ) {
