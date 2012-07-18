@@ -931,6 +931,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
+    @NotYetImplemented({ Browser.FF3_6, Browser.IE8 })
     public void querySelectorAll_badSelector() throws Exception {
         for (final String selector : HTMLDocumentTest.JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelectorAll_badSelector(selector);
@@ -941,7 +942,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
         final String html = "<html><body><div id='it'></div><script>\n"
             + "try {\n"
             + "  document.getElementById('it').querySelectorAll('" + selector + "');\n"
-            + "  alert('working: ' + selector);\n"
+            + "  alert('working');\n"
             + "} catch(e) { alert('exception'); }\n"
             + "</script></body></html>";
 
@@ -953,6 +954,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
+    @NotYetImplemented({ Browser.FF3_6, Browser.IE8 })
     public void querySelector_badSelector() throws Exception {
         for (final String selector : HTMLDocumentTest.JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelector_badSelector(selector);
@@ -963,7 +965,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
         final String html = "<html><body><div id='it'></div><script>\n"
             + "try {\n"
             + "  document.getElementById('it').querySelector('" + selector + "');\n"
-            + "  alert('working: ' + selector);\n"
+            + "  alert('working');\n"
             + "} catch(e) { alert('exception'); }\n"
             + "</script></body></html>";
 
