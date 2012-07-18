@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -190,5 +191,29 @@ public class GAELoadPageTest {
         executedJobs = client.getJavaScriptEngine().pumpEventLoop(200);
         assertEquals(Arrays.asList("hello", "hello again"), collectedAlerts);
         assertEquals(1, executedJobs);
+    }
+
+    /**
+     * Test that frames are loaded (issue #3544647).
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Ignore // we don't have @NotYetImplemented here as it is not running with our BrowserRunner
+    public void frameShouldBeLoaded() throws Exception {
+        final String html = "<html><body>\n"
+            + "<iframe src='foo.html'></iframe>\n"
+            + "</body></html>";
+
+        final String frame = "<html><body><script>alert('in frame');</script></body></html>";
+
+        final WebClient client = new WebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setDefaultResponse(frame);
+        conn.setResponse(FIRST_URL, html);
+        client.setWebConnection(conn);
+        client.getPage(FIRST_URL);
+
+        assertEquals(Arrays.asList("in frame"), collectedAlerts);
     }
 }
