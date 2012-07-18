@@ -14,12 +14,24 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static org.junit.Assert.fail;
+
+import java.io.File;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
+import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for compatibility with web server loading of
@@ -29,7 +41,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class JQuery173GitTest extends WebDriverTestCase {
+public class JQuery173GitTest extends WebServerTestCase {
 
     /**
      * Returns the jQuery version being tested.
@@ -40,28 +52,81 @@ public class JQuery173GitTest extends WebDriverTestCase {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    protected String getExpectedPath() throws Exception {
+        final String resource = "libraries/jquery/" + getVersion() + "/" + getBrowserVersion().getNickname() + ".txt";
+        final URL url = getClass().getClassLoader().getResource(resource);
+        return url.toURI().getPath();
+    }
+
+    private static final int TESTS_TO_RUN_ = 50;
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("Unit Testing Environment (0, 2, 2)")
-    public void test_1() throws Exception {
-//        long time = System.currentTimeMillis();
-//        startWebServer("src/test/resources/libraries/jquery/" + getVersion(), null, null);
-//        final WebDriver driver = getWebDriver();
-//        driver.get("http://localhost:" + PORT + "/test/index.html?testNumber=1");
-//        WebElement element = null;
-//        while (element == null) {
-//            try {
-//                element = driver.findElement(By.xpath("//ol[@id='qunit-tests']"));
-//                Thread.sleep(100);
-//                System.out.println("x");
-//            }
-//            catch (final Exception e) {
-//                // ignore
-//            }
-//        }
-//        assertTrue(element.getText().contains(getExpectedAlerts()[0]));
-//        System.out.println(System.currentTimeMillis() - time);
+    @NotYetImplemented
+    public void test() throws Exception {
+        final List<String> lines = FileUtils.readLines(new File(getExpectedPath()), "UTF-8");
+
+        startWebServer("src/test/resources/libraries/jquery/" + getVersion(), null);
+        final WebClient webClient = getWebClient();
+        final HtmlPage page = webClient.getPage("http://localhost:" + PORT + "/test/index.html");
+        HtmlElement element = null;
+        final String xpath = "//li[@id='qunit-test-output" + (TESTS_TO_RUN_ - 1) + "']";
+        boolean allFound;
+        do {
+            if (element == null) {
+                final List<?> list = page.getByXPath(xpath);
+                if (!list.isEmpty()) {
+                    element = (HtmlElement) list.get(0);
+                }
+            }
+            Thread.sleep(10 * 1000);
+            allFound = true;
+            for (int i = 0; i < TESTS_TO_RUN_; i++) {
+                try {
+                    if (!((HtmlElement) page.getByXPath("//li[@id='qunit-test-output" + i + "']").get(0)).asText()
+                            .contains(",")) {
+                        allFound = false;
+                        break;
+                    }
+                }
+                catch (final Exception e) {
+                    allFound = false;
+                }
+            }
+        } while (!allFound);
+
+        final List<String> failures = new ArrayList<String>();
+
+        for (int i = 0; i < TESTS_TO_RUN_; i++) {
+            String expected = lines.get(i);
+            expected = expected.substring(expected.indexOf('.') + 1);
+            if (expected.charAt(0) == ' ') {
+                expected = expected.substring(1);
+            }
+
+            String result = ((HtmlElement) page.getByXPath("//li[@id='qunit-test-output" + i + "']").get(0)).asText();
+            result = result.substring(0, result.indexOf("Rerun")).trim();
+            if (!result.equals(expected)) {
+                failures.add(new ComparisonFailure("", expected, result).getMessage());
+            }
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        for (final String error : failures) {
+            sb.append('\n').append(error);
+        }
+
+        final int errorsNumber = failures.size();
+        if (errorsNumber == 1) {
+            fail("Failure: " + sb);
+        }
+        else if (errorsNumber > 1) {
+            fail(errorsNumber + " failures: " + sb);
+        }
     }
 
 }
