@@ -79,7 +79,23 @@ public abstract class WebServerTestCase extends WebTestCase {
         if (server_ != null) {
             throw new IllegalStateException("startWebServer() can not be called twice");
         }
-        server_ = new Server(PORT);
+        server_ = createWebServer(resourceBase, classpath);
+    }
+
+    /**
+     * This is usually needed if you want to have a running server during many tests invocation.
+     *
+     * Creates Starts the web server on the default {@link #PORT}.
+     * The given resourceBase is used to be the ROOT directory that serves the default context.
+     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
+     *
+     * @param resourceBase the base of resources for the default context
+     * @param classpath additional classpath entries to add (may be null)
+     * @return the newly created server
+     * @throws Exception if the test fails
+     */
+    protected static Server createWebServer(final String resourceBase, final String[] classpath) throws Exception {
+        final Server server = new Server(PORT);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
@@ -91,8 +107,9 @@ public abstract class WebServerTestCase extends WebTestCase {
             }
         }
         context.setClassLoader(loader);
-        server_.setHandler(context);
-        server_.start();
+        server.setHandler(context);
+        server.start();
+        return server;
     }
 
     /**
