@@ -1170,14 +1170,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "undefined", FF = "2", IE = "undefined")
+    @Alerts(FF3 = "undefined", FF = "3", IE = "undefined")
     @NotYetImplemented(Browser.FF3_6)
-    public void querySelectorAll_parent() throws Exception {
+    public void querySelectorAll_implicitAttribute() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  if(document.querySelectorAll) {\n"
-            + "    var result = document.querySelectorAll('#select4 > [disabled]');\n"
+            + "    var result = document.querySelectorAll('[disabled]');\n"
             + "    alert(result.length);\n"
             + "  }\n"
             + "  else\n"

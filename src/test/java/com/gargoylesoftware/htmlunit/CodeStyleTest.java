@@ -31,8 +31,6 @@ import org.apache.commons.logging.Log;
 import org.junit.After;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-
 /**
  * Test of coding style for things that cannot be detected by Checkstyle.
  *
