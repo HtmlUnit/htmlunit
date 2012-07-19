@@ -1170,6 +1170,38 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF3 = "undefined", FF = "2", IE = "undefined")
+    @NotYetImplemented(Browser.FF3_6)
+    public void querySelectorAll_parent() throws Exception {
+        final String html = "<html><head><title>Test</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if(document.querySelectorAll) {\n"
+            + "    var result = document.querySelectorAll('#select4 > [disabled]');\n"
+            + "    alert(result.length);\n"
+            + "  }\n"
+            + "  else\n"
+            + "    alert('undefined');\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <select name='select4' id='select4' multiple='multiple'>\n"
+            + "    <optgroup disabled='disabled'>\n"
+            + "      <option id='option4a' class='emptyopt' value=''>Nothing</option>\n"
+            + "      <option id='option4b' disabled='disabled' selected='selected' value='1'>1</option>\n"
+            + "      <option id='option4c' selected='selected' value='2'>2</option>\n"
+            + "    </optgroup>\n"
+            + "    <option selected='selected' disabled='disabled' id='option4d' value='3'>3</option>\n"
+            + "    <option id='option4e'>no value</option>\n"
+            + "    </select>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = { "div1", "null" }, FF3 = "undefined",
             IE = "undefined", IE8 = { "div1", "null" })
     public void querySelector() throws Exception {
