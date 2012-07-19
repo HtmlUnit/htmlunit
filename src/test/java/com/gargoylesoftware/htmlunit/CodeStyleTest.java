@@ -31,6 +31,8 @@ import org.apache.commons.logging.Log;
 import org.junit.After;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+
 /**
  * Test of coding style for things that cannot be detected by Checkstyle.
  *
@@ -458,7 +460,7 @@ public class CodeStyleTest {
     private void singleAlert(final List<String> lines, final String relativePath) {
         int i = 0;
         for (final String line : lines) {
-            if (line.trim().startsWith("@Alerts") && line.contains("{") && line.contains("}")) {
+            if (line.trim().startsWith("@Alerts") && line.contains("@Alerts({") && line.contains("})")) {
                 final String alert = line.substring(line.indexOf('{'), line.indexOf('}'));
                 if (!alert.contains(",") && alert.contains("\"")
                         && alert.indexOf('"', alert.indexOf('"') + 1) != -1) {
