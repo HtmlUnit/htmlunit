@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.libraries;
+package com.gargoylesoftware.html unit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3;
