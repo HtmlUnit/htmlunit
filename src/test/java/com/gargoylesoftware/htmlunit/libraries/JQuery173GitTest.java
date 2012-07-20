@@ -77,7 +77,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     protected void runTest(final int testNumber) throws Exception {
-        final long end_time = System.currentTimeMillis() + 60 * 1000;
+        final long endTime = System.currentTimeMillis() + 60 * 1000;
         try {
             final HtmlPage page = WEBCLIENT_.getPage("http://localhost:" + PORT + "/test/index.html?testNumber="
                     + testNumber);
@@ -92,7 +92,7 @@ public class JQuery173GitTest extends WebServerTestCase {
                     }
                 }
                 Thread.sleep(100);
-            } while (System.currentTimeMillis() < end_time && (element == null || !element.asText().contains(",")));
+            } while (System.currentTimeMillis() < endTime && (element == null || !element.asText().contains(",")));
             String result = element.asText();
             result = result.substring(0, result.indexOf("Rerun")).trim();
             final String expected = getExpectedAlerts()[0];
@@ -6818,7 +6818,8 @@ public class JQuery173GitTest extends WebServerTestCase {
 //     */
 //    @Test
 //    @Alerts(FF3_6 = "dimensions: box-sizing:border-box child "
-//            + "of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #10413 (0, 16, 16)",
+//            + "of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #10413 "
+//            + "(0, 16, 16)",
 //        IE8 = "dimensions: box-sizing:border-box child "
 //            + "of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #10413 "
 //            + "(16, 0, 16)")
