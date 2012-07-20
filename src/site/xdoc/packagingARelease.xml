@@ -76,7 +76,7 @@
                     </li>
                     <li>
                         Upload the two zip files (htmlunit-x.x-bin.zip and htmlunit-x.x-src.zip) to
-                        <a href="https://sourceforge.net/project/admin/explorer.php?group_id=47038">SourceForge</a>,
+                        <a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/">SourceForge</a>,
                         and make sure the binary file is the default download for all platforms.
                     </li>
                     <li>
