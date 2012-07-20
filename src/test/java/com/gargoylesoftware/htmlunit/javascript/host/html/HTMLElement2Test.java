@@ -931,7 +931,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented({ Browser.FF3_6, Browser.IE8 })
     public void querySelectorAll_badSelector() throws Exception {
         for (final String selector : HTMLDocumentTest.JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelectorAll_badSelector(selector);
