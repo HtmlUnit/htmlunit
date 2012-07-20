@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="11.3">
+  <zoom_level>8</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>280</x>
+      <y>120</y>
+      <w>240</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>JavaScriptEngine
+com.gargoylesoftware.htmlunit.javascript
+--
+javaScriptExecutor_
+webClient_
+--
+pumpEventLoop(long)
+registerWindowAndMaybeStartEventLoop(WebWindow)
+shutdownJavaScriptExecutor()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Interface</type>
+    <coordinates>
+      <x>688</x>
+      <y>272</y>
+      <w>128</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>JavaScriptJobManager
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>864</x>
+      <y>136</y>
+      <w>144</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>DefaultJavaScriptExecutor
+--
+webClient_
+jobManagerList_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>760</x>
+      <y>128</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>24;24;104;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Interface</type>
+    <coordinates>
+      <x>264</x>
+      <y>272</y>
+      <w>96</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>WebWindow
+--
+getJobManager()
+getWebClient()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>424</x>
+      <y>272</y>
+      <w>112</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>WebWindowImpl
+--
+jobManager_
+webClient_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>344</x>
+      <y>264</y>
+      <w>96</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>24;24;80;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Interface</type>
+    <coordinates>
+      <x>704</x>
+      <y>152</y>
+      <w>96</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>JavaScriptExecutor
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>864</x>
+      <y>264</y>
+      <w>144</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>JavaScriptJobManagerImpl
+--
+window_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>768</x>
+      <y>256</y>
+      <w>112</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>24;24;96;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>648</x>
+      <y>72</y>
+      <w>400</w>
+      <h>256</h>
+    </coordinates>
+    <panel_attributes>com.gargoylesoftware.htmlunit.javascript.background</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>88</x>
+      <y>176</y>
+      <w>88</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>WebClient
+--
+scriptEngine_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>512</x>
+      <y>256</y>
+      <w>192</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m2=1
+</panel_attributes>
+    <additional_attributes>24;40;176;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>376</x>
+      <y>136</y>
+      <w>328</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m2=1
+</panel_attributes>
+    <additional_attributes>24;24;312;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>768</x>
+      <y>152</y>
+      <w>112</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m2=0..n
+</panel_attributes>
+    <additional_attributes>96;24;24;104</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>152</x>
+      <y>128</y>
+      <w>144</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m2=1
+</panel_attributes>
+    <additional_attributes>128;24;24;56</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>144</x>
+      <y>192</y>
+      <w>144</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m2=1
+</panel_attributes>
+    <additional_attributes>128;136;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>152</x>
+      <y>144</y>
+      <w>144</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m2=1
+</panel_attributes>
+    <additional_attributes>24;56;128;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>488</x>
+      <y>272</y>
+      <w>408</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1
+</panel_attributes>
+    <additional_attributes>24;48;24;80;392;80;392;24</additional_attributes>
+  </element>
+</diagram>

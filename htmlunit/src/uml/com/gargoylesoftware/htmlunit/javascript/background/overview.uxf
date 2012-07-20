@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="11.3">
+  <zoom_level>9</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>126</x>
+      <y>531</y>
+      <w>189</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>JavaScriptJobManagerImpl
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>108</x>
+      <y>297</y>
+      <w>225</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>_Interface_
+JavaScriptJobManager
+--
+addJob(JavaScriptJob, Page)
+getEarliestJob()
+getJobCount()
+removeAllJobs()
+removeJob(int)
+runSingleJob(JavaScriptJob)
+shutdown()
+stopJob(int)
+waitForJobs(long)
+waitForJobsStartingBefore(long)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>414</x>
+      <y>297</y>
+      <w>189</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>_Interface_
+JavaScriptExecutor
+--
+addWindow(WebWindow)
+pumpEventLoop(long)
+shutdown()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>675</x>
+      <y>297</y>
+      <w>207</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>/JavaScriptJob/
+--
+getId()
+getPeriod()
+getTargetExecutionTime()
+isExecuteAsap()
+isPeriodic()
+setId(Integer)
+setTargetExecutionTime(long)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>702</x>
+      <y>468</y>
+      <w>135</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>/BasicJavaScriptJob/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>189</x>
+      <y>468</y>
+      <w>44</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;27;63</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>738</x>
+      <y>405</y>
+      <w>44</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;27;63</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>729</x>
+      <y>531</y>
+      <w>153</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>/JavaScriptExecutionJob/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>756</x>
+      <y>477</y>
+      <w>44</w>
+      <h>71</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;27;54</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>639</x>
+      <y>585</y>
+      <w>153</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>/JavaScriptFunctionJob/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>738</x>
+      <y>531</y>
+      <w>80</w>
+      <h>71</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>63;27;63;45;27;54</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>810</x>
+      <y>585</y>
+      <w>126</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>/JavaScriptStringJob/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>774</x>
+      <y>549</y>
+      <w>80</w>
+      <h>53</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;63;36</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>810</x>
+      <y>639</y>
+      <w>189</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>/JavascriptXMLHttpRequestJob/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>639</x>
+      <y>639</y>
+      <w>153</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>/DownloadBehaviorJob/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>747</x>
+      <y>549</y>
+      <w>71</w>
+      <h>107</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>54;27;54;72;27;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>774</x>
+      <y>594</y>
+      <w>71</w>
+      <h>62</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;54;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>405</x>
+      <y>531</y>
+      <w>189</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>/DefaultJavaScriptExecutor/
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>468</x>
+      <y>360</y>
+      <w>44</w>
+      <h>188</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>27;27;27;171</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>108</x>
+      <y>117</y>
+      <w>414</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>BackgroundJavaScriptFactory
+--
+createDownloadBehaviorJob(URL, Function, WebClient)
+createJavaScriptExecutor(WebClient)
+createJavaScriptJob(int, Integer, String, WebWindow, Function)
+createJavaScriptJob(int, Integer, String, WebWindow, String)
+createJavaScriptJobManager(WebWindow)
+createJavascriptXMLHttpRequestJob(ContextFactory, ContextAction)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>81</x>
+      <y>63</y>
+      <w>954</w>
+      <h>639</h>
+    </coordinates>
+    <panel_attributes>com.gargoylesoftware.htmlunit.javascript.background</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

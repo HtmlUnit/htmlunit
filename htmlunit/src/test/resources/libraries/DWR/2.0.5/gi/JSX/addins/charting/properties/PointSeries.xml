@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+	<record group="object" include="master.xml"/>
+		
+	<record group="series_xy" include="master.xml">
+		<record docdefault="DEFAULT_MAGNITUDE (&lt;code&gt;jsx3.chart.PointSeries.DEFAULT_MAGNITUDE&lt;/code&gt;)" docgetter="getMagnitude" docsetter="setMagnitude" eval="1" jsxid="magnitude" jsxmask="jsxtext" jsxtext="Magnitude" jsxtip="Sets the magnitude value to use for all points in this series."/>
+	</record>
+		
+	<record group="pointsonly" include="master.xml">
+    <record children="1" group="colorFunction" include="master.xml"/>
+  </record>
+  
+  <record group="component" include="master.xml"/>
+	<record group="interaction" include="master.xml"/>
+</data>

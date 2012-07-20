@@ -1,0 +1,829 @@
+/*
+ * Copyright (c) 2002-2012 Gargoyle Software Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.gargoylesoftware.htmlunit;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.eclipse.jetty.security.ConstraintMapping;
+import org.eclipse.jetty.security.ConstraintSecurityHandler;
+import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.DefaultServlet;
+import org.eclipse.jetty.util.security.Constraint;
+import org.eclipse.jetty.webapp.WebAppClassLoader;
+import org.eclipse.jetty.webapp.WebAppContext;
+import org.eclipse.jetty.websocket.WebSocketHandler;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
+
+/**
+ * Base class for tests using WebDriver.
+ * <p>
+ * By default, this test runs with HtmlUnit, but this behavior can be changed by having a property file named
+ * "test.properties" in the HtmlUnit root directory.
+ * Sample:
+ * <pre>
+   browsers=hu,ff3,ff3.6,ie8
+   ff3.bin=c:\\location_to_firefox.exe              [Windows]
+   ff3.6.bin=/use/bin/firefox                         [Unix-like]
+   chrome15.bin=/path/to/chromedriver                 [Unix-like]
+ * </pre>
+ * The file should contain four properties: "browsers", "ff3.bin", "ff3.6.bin", and "chrome15.bin".
+ * <ul>
+ *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
+ *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ff3", "hu-ff3.6",
+ *   "ff3", "ff3.6", "ie6", "ie7", "ie8", which will be used to driver real browsers,
+ *   note that you can't define more than one IE as there is no standard way
+ *   to have multiple IEs on the same machine</li>
+ *   <li>ff3.bin: is the location of the FF3 binary, in Windows use double back-slashes</li>
+ *   <li>ff3.6.bin: is the location of the FF3.6 binary, in Windows use double back-slashes</li>
+ *   <li>chrome15.bin: is the location of the ChromeDriver binary (see
+ *   <a href="http://code.google.com/p/selenium/downloads/detail?name=chromedriver%20downloads.txt">
+ *   WebDriver downloads</a></li>
+ * </ul>
+ * </p>
+ *
+ * @version $Revision$
+ * @author Marc Guillemot
+ * @author Ahmed Ashour
+ */
+public abstract class WebDriverTestCase extends WebTestCase {
+
+    private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
+    private static List<String> BROWSERS_PROPERTIES_;
+    private static String FF3_BIN_;
+    private static String FF3_6_BIN_;
+    private static String FF10_BIN_;
+    private static String CHROME16_BIN_;
+
+    private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
+    private static Server STATIC_SERVER_;
+    // second server for cross-origin tests.
+    private static Server STATIC_SERVER2_;
+    // third server for multi-origin cross-origin tests.
+    private static Server STATIC_SERVER3_;
+    private static ChromeDriverService CHROME_SERVICE_;
+
+    private static String JSON_;
+    private boolean useRealBrowser_;
+    private boolean writeContentAsBytes_ = false;
+    private static Boolean LAST_TEST_MockWebConnection_;
+
+    /**
+     * Override this function in a test class to ask for STATIC_SERVER2_ to be set up.
+     * @return true if two servers are needed.
+     */
+    protected boolean needThreeConnections() {
+        return false;
+    }
+
+    static List<String> getBrowsersProperties() {
+        if (BROWSERS_PROPERTIES_ == null) {
+            try {
+                final Properties properties = new Properties();
+                final File file = new File("test.properties");
+                if (file.exists()) {
+                    properties.load(new FileInputStream(file));
+                    BROWSERS_PROPERTIES_
+                        = Arrays.asList(properties.getProperty("browsers", "hu")
+                            .replaceAll(" ", "").toLowerCase().split(","));
+                    FF3_BIN_ = properties.getProperty("ff3.bin");
+                    FF3_6_BIN_ = properties.getProperty("ff3.6.bin");
+                    FF10_BIN_ = properties.getProperty("ff10.bin");
+                    CHROME16_BIN_ = properties.getProperty("chrome16.bin");
+                }
+            }
+            catch (final Exception e) {
+                LOG.error("Error reading htmlunit.properties. Ignoring!", e);
+            }
+            if (BROWSERS_PROPERTIES_ == null) {
+                BROWSERS_PROPERTIES_ = Arrays.asList("hu");
+            }
+        }
+        return BROWSERS_PROPERTIES_;
+    }
+
+    /**
+     * Configure the driver only once.
+     * @return the driver
+     */
+    protected WebDriver getWebDriver() {
+        final BrowserVersion browserVersion = getBrowserVersion();
+        WebDriver driver = WEB_DRIVERS_.get(browserVersion);
+        if (driver == null) {
+            try {
+                driver = buildWebDriver();
+            }
+            catch (final IOException e) {
+                throw new RuntimeException(e);
+            }
+            // cache driver instances for real browsers but not for HtmlUnit
+            if (!(driver instanceof HtmlUnitDriver)) {
+                WEB_DRIVERS_.put(browserVersion, driver);
+            }
+        }
+        return driver;
+    }
+
+    /**
+     * Closes the drivers.
+     * @throws Exception If an error occurs
+     */
+    @AfterClass
+    public static void shutDownAll() throws Exception {
+        for (WebDriver driver : WEB_DRIVERS_.values()) {
+            driver.quit();
+        }
+        WEB_DRIVERS_.clear();
+        stopWebServer();
+        LAST_TEST_MockWebConnection_ = null;
+    }
+
+    /**
+     * Stops the WebServer.
+     * @throws Exception if it fails
+     */
+    protected static void stopWebServer() throws Exception {
+        if (STATIC_SERVER_ != null) {
+            STATIC_SERVER_.stop();
+        }
+        if (STATIC_SERVER2_ != null) {
+            STATIC_SERVER2_.stop();
+        }
+        if (STATIC_SERVER3_ != null) {
+            STATIC_SERVER3_.stop();
+        }
+        STATIC_SERVER_ = null;
+        STATIC_SERVER2_ = null;
+        STATIC_SERVER3_ = null;
+    }
+
+    void setUseRealBrowser(final boolean useWebDriver) {
+        useRealBrowser_ = useWebDriver;
+    }
+
+    private WebDriver buildWebDriver() throws IOException {
+        if (useRealBrowser_) {
+            if (getBrowserVersion().isIE()) {
+                return new InternetExplorerDriver();
+            }
+            if (BrowserVersion.CHROME_16.equals(getBrowserVersion())) {
+                if (CHROME_SERVICE_ == null) {
+                    CHROME_SERVICE_ = new ChromeDriverService.Builder()
+                        .usingChromeDriverExecutable(new File(CHROME16_BIN_))
+                        .usingAnyFreePort()
+                        .build();
+                    CHROME_SERVICE_.start();
+                }
+                return new ChromeDriver(CHROME_SERVICE_);
+            }
+            if (!getBrowserVersion().isFirefox()) {
+                throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
+            }
+
+            String ffBinary = null;
+            if (getBrowserVersion() == BrowserVersion.FIREFOX_3) {
+                ffBinary = FF3_BIN_;
+            }
+            else if (getBrowserVersion() == BrowserVersion.FIREFOX_3_6) {
+                ffBinary = FF3_6_BIN_;
+            }
+            else if (getBrowserVersion() == BrowserVersion.FIREFOX_10) {
+                ffBinary = FF10_BIN_;
+            }
+            if (ffBinary != null) {
+                return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());
+            }
+            return new FirefoxDriver();
+        }
+        final WebClient webClient = getWebClient();
+        return new HtmlUnitDriver(true) {
+            @Override
+            protected WebClient newWebClient(final BrowserVersion browserVersion) {
+                return webClient;
+            }
+
+            @Override
+            protected WebElement newHtmlUnitWebElement(final HtmlElement element) {
+                return new FixedWebDriverHtmlUnitWebElement(this, element);
+            }
+        };
+    }
+
+    /**
+     * Starts the web server delivering response from the provided connection.
+     * @param mockConnection the sources for responses
+     * @throws Exception if a problem occurs
+     */
+    protected void startWebServer(final MockWebConnection mockConnection) throws Exception {
+        if (Boolean.FALSE.equals(LAST_TEST_MockWebConnection_)) {
+            stopWebServer();
+        }
+        LAST_TEST_MockWebConnection_ = Boolean.TRUE;
+        if (STATIC_SERVER_ == null) {
+            STATIC_SERVER_ = new Server(PORT);
+
+            final WebAppContext context = new WebAppContext();
+            context.setContextPath("/");
+            context.setResourceBase("./");
+
+            if (isBasicAuthentication()) {
+                final Constraint constraint = new Constraint();
+                constraint.setName(Constraint.__BASIC_AUTH);
+                constraint.setRoles(new String[]{"user"});
+                constraint.setAuthenticate(true);
+
+                final ConstraintMapping constraintMapping = new ConstraintMapping();
+                constraintMapping.setConstraint(constraint);
+                constraintMapping.setPathSpec("/*");
+
+                final ConstraintSecurityHandler handler = (ConstraintSecurityHandler) context.getSecurityHandler();
+                handler.setLoginService(new HashLoginService("MyRealm", "./src/test/resources/realm.properties"));
+                handler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
+            }
+
+            context.addServlet(MockWebConnectionServlet.class, "/*");
+            STATIC_SERVER_.setHandler(context);
+            STATIC_SERVER_.start();
+        }
+        MockWebConnectionServlet.MockConnection_ = mockConnection;
+        MockWebConnectionServlet.WriteContentAsBytes_ = writeContentAsBytes_;
+
+        if (STATIC_SERVER2_ == null && needThreeConnections()) {
+            STATIC_SERVER2_ = new Server(PORT2);
+            final WebAppContext context2 = new WebAppContext();
+            context2.setContextPath("/");
+            context2.setResourceBase("./");
+            context2.addServlet(MockWebConnectionServlet.class, "/*");
+            STATIC_SERVER2_.setHandler(context2);
+            STATIC_SERVER2_.start();
+
+            STATIC_SERVER3_ = new Server(PORT3);
+            final WebAppContext context3 = new WebAppContext();
+            context3.setContextPath("/");
+            context3.setResourceBase("./");
+            context3.addServlet(MockWebConnectionServlet.class, "/*");
+            STATIC_SERVER3_.setHandler(context3);
+            STATIC_SERVER3_.start();
+            /*
+             * The mock connection servlet call sit under both servers, so long as tests
+             * keep the URLs distinct.
+             */
+        }
+    }
+
+    /**
+     * Returns whether to use basic authentication for all resources or not.
+     * The default implementation returns false.
+     * @return whether to use basic authentication or not
+     */
+    protected boolean isBasicAuthentication() {
+        return false;
+    }
+
+    /**
+     * Starts the web server on the default {@link #PORT}.
+     * The given resourceBase is used to be the ROOT directory that serves the default context.
+     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
+     *
+     * @param resourceBase the base of resources for the default context
+     * @param classpath additional classpath entries to add (may be null)
+     * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
+     * @throws Exception if the test fails
+     */
+    protected void startWebServer(final String resourceBase, final String[] classpath,
+            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
+        startWebServer(resourceBase, classpath, servlets, null);
+    }
+
+    /**
+     * Starts the web server on the default {@link #PORT}.
+     * The given resourceBase is used to be the ROOT directory that serves the default context.
+     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
+     *
+     * @param resourceBase the base of resources for the default context
+     * @param classpath additional classpath entries to add (may be null)
+     * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
+     * @param handler websocket handler (can be null)
+     * @throws Exception if the test fails
+     */
+    protected void startWebServer(final String resourceBase, final String[] classpath,
+            final Map<String, Class<? extends Servlet>> servlets, final WebSocketHandler handler) throws Exception {
+        stopWebServer();
+        LAST_TEST_MockWebConnection_ = Boolean.FALSE;
+        STATIC_SERVER_ = new Server(PORT);
+
+        final WebAppContext context = new WebAppContext();
+        context.setContextPath("/");
+        context.setResourceBase(resourceBase);
+
+        if (servlets != null) {
+            for (final Map.Entry<String, Class<? extends Servlet>> entry : servlets.entrySet()) {
+                final String pathSpec = entry.getKey();
+                final Class<? extends Servlet> servlet = entry.getValue();
+                context.addServlet(servlet, pathSpec);
+
+                // disable defaults if someone likes to register his own root servlet
+                if ("/".equals(pathSpec)) {
+                    context.setDefaultsDescriptor(null);
+                    context.addServlet(DefaultServlet.class, "/favicon.ico");
+                }
+            }
+        }
+
+        final WebAppClassLoader loader = new WebAppClassLoader(context);
+        if (classpath != null) {
+            for (final String path : classpath) {
+                loader.addClassPath(path);
+            }
+        }
+        context.setClassLoader(loader);
+        if (handler != null) {
+            handler.setHandler(context);
+            STATIC_SERVER_.setHandler(handler);
+        }
+        else {
+            STATIC_SERVER_.setHandler(context);
+        }
+        STATIC_SERVER_.start();
+    }
+
+    /**
+     * Servlet delivering content from a MockWebConnection.
+     */
+    public static class MockWebConnectionServlet extends HttpServlet {
+        private static MockWebConnection MockConnection_;
+        private static boolean WriteContentAsBytes_ = false;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void service(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+
+            try {
+                doService(request, response);
+            }
+            catch (final ServletException e) {
+                throw e;
+            }
+            catch (final IOException e) {
+                throw e;
+            }
+            catch (final Exception e) {
+                throw new ServletException(e);
+            }
+        }
+
+        @SuppressWarnings("unchecked")
+        private void doService(final HttpServletRequest request, final HttpServletResponse response)
+            throws Exception {
+            final String url = request.getRequestURL().toString();
+            if (url.endsWith("/favicon.ico")) {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                return;
+            }
+
+            if (url.contains("/delay")) {
+                final String delay = StringUtils.substringBetween(url, "/delay", "/");
+                final int ms = Integer.parseInt(delay);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Sleeping for " + ms + " before to deliver " + url);
+                }
+                Thread.sleep(ms);
+            }
+
+            final URL requestedUrl = new URL(url);
+            final WebRequest webRequest = new WebRequest(requestedUrl);
+            webRequest.setHttpMethod(HttpMethod.valueOf(request.getMethod()));
+
+            // copy headers
+            for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {
+                final String headerName = en.nextElement();
+                final String headerValue = request.getHeader(headerName);
+                webRequest.setAdditionalHeader(headerName, headerValue);
+            }
+
+            // copy parameters
+            final List<NameValuePair> requestParameters = new ArrayList<NameValuePair>();
+            for (final Enumeration<String> paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
+                final String name = paramNames.nextElement();
+                final String[] values = request.getParameterValues(name);
+                for (final String value : values) {
+                    requestParameters.add(new NameValuePair(name, value));
+                }
+            }
+
+            if ("PUT".equals(request.getMethod()) && request.getContentLength() > 0) {
+                final byte[] buffer = new byte[request.getContentLength()];
+                request.getInputStream().readLine(buffer, 0, buffer.length);
+                webRequest.setRequestBody(new String(buffer));
+            }
+            else {
+                webRequest.setRequestParameters(requestParameters);
+            }
+
+            final WebResponse resp = MockConnection_.getResponse(webRequest);
+
+            // write WebResponse to HttpServletResponse
+            response.setStatus(resp.getStatusCode());
+
+            for (final NameValuePair responseHeader : resp.getResponseHeaders()) {
+                response.addHeader(responseHeader.getName(), responseHeader.getValue());
+            }
+
+            if (WriteContentAsBytes_) {
+                IOUtils.copy(resp.getContentAsStream(), response.getOutputStream());
+            }
+            else {
+                final String newContent = getModifiedContent(resp.getContentAsString());
+                final String contentCharset = resp.getContentCharset();
+                response.setCharacterEncoding(contentCharset);
+                response.getWriter().print(newContent);
+            }
+            response.flushBuffer();
+        }
+    }
+
+    /**
+     * Indicates that MockWebConnectionServlet should send the configured content's bytes directly
+     * without modification.
+     * @param b the new value
+     */
+    public void setWriteContentAsBytes_(final boolean b) {
+        writeContentAsBytes_ = b;
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts2(String)}... but doesn't verify the alerts.
+     * @param html the HTML to use
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPage2(final String html) throws Exception {
+        return loadPage2(html, URL_FIRST);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * @param html the HTML to use
+     * @param url the url to use to load the page
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPage2(final String html, final URL url) throws Exception {
+        return loadPage2(html, url, "text/html", TextUtil.DEFAULT_CHARSET);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * @param html the HTML to use
+     * @param url the url to use to load the page
+     * @param contentType the content type to return
+     * @param charset the name of a supported charset
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPage2(final String html, final URL url,
+            final String contentType, final String charset) throws Exception {
+        final MockWebConnection mockWebConnection = getMockWebConnection();
+        mockWebConnection.setResponse(url, html, contentType, charset);
+        startWebServer(mockWebConnection);
+
+        final WebDriver driver = getWebDriver();
+        driver.get(url.toExternalForm());
+
+        return driver;
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * @param html the HTML to use
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final String html) throws Exception {
+        return loadPageWithAlerts2(html, URL_FIRST, 1000);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * @param html the HTML to use
+     * @param maxWaitTime the maximum time to wait to get the alerts (im ms)
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final String html, final long maxWaitTime) throws Exception {
+        return loadPageWithAlerts2(html, URL_FIRST, maxWaitTime);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * @param html the HTML to use
+     * @param url the URL to use to load the page
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final String html, final URL url) throws Exception {
+        return loadPageWithAlerts2(html, url, 1000);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * @param html the HTML to use
+     * @param url the URL to use to load the page
+     * @param maxWaitTime the maximum time to wait to get the alerts (im ms)
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final String html, final URL url, final long maxWaitTime)
+        throws Exception {
+        expandExpectedAlertsVariables(URL_FIRST);
+        final String[] expectedAlerts = getExpectedAlerts();
+
+        final WebDriver driver = loadPage2(html, url);
+
+        verifyAlerts(maxWaitTime, expectedAlerts, driver);
+        return driver;
+    }
+
+    /**
+     * Verifies the captured alerts.
+     * @param maxWaitTime the maximum time to wait for the expected alert to be found
+     * @param expectedAlerts the expected alerts
+     * @param driver the driver instance
+     * @throws Exception in case of failure
+     */
+    protected void verifyAlerts(final long maxWaitTime, final String[] expectedAlerts, final WebDriver driver)
+        throws Exception {
+        // gets the collected alerts, waiting a bit if necessary
+        List<String> actualAlerts = getCollectedAlerts(driver);
+        final long maxWait = System.currentTimeMillis() + maxWaitTime;
+        while (actualAlerts.size() < expectedAlerts.length && System.currentTimeMillis() < maxWait) {
+            Thread.sleep(30);
+            actualAlerts = getCollectedAlerts(driver);
+        }
+
+        assertEquals(expectedAlerts, actualAlerts);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * @param html the HTML to use for the default response
+     * @param servlets the additional servlets to configure with their mapping
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final String html,
+            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
+        return loadPageWithAlerts2(html, getDefaultUrl(), 1000, servlets);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * @param html the HTML to use for the default page
+     * @param url the URL to use to load the page
+     * @param maxWaitTime the maximum time to wait to get the alerts (im ms)
+     * @param servlets the additional servlets to configure with their mapping
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final String html, final URL url, final long maxWaitTime,
+            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
+
+        expandExpectedAlertsVariables(getDefaultUrl());
+        final String[] expectedAlerts = getExpectedAlerts();
+
+        servlets.put("/*", MockWebConnectionServlet.class);
+        getMockWebConnection().setResponse(url, html);
+        MockWebConnectionServlet.MockConnection_ = getMockWebConnection();
+
+        startWebServer("./", null, servlets);
+
+        final WebDriver driver = getWebDriver();
+        driver.get(url.toExternalForm());
+
+        verifyAlerts(maxWaitTime, expectedAlerts, driver);
+        return driver;
+    }
+
+    /**
+     * Loads the provided URL serving responses from {@link #getMockWebConnection()}
+     * and verifies that the captured alerts are correct.
+     * @param url the URL to use to load the page
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final URL url) throws Exception {
+        return loadPageWithAlerts2(url, 0);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts2(URL)}, but using with timeout.
+     * @param url the URL to use to load the page
+     * @param maxWaitTime the maximum time to wait to get the alerts (im ms)
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPageWithAlerts2(final URL url, final long maxWaitTime) throws Exception {
+        expandExpectedAlertsVariables(url);
+        final String[] expectedAlerts = getExpectedAlerts();
+
+        startWebServer(getMockWebConnection());
+
+        final WebDriver driver = getWebDriver();
+        driver.get(url.toExternalForm());
+
+        verifyAlerts(maxWaitTime, expectedAlerts, driver);
+        return driver;
+    }
+
+    /**
+     * Gets the alerts collected by the driver.
+     * Note: it currently works only if no new page has been loaded in the window
+     * @param driver the driver
+     * @return the collected alerts
+     * @throws Exception in case of problem
+     */
+    @SuppressWarnings("unchecked")
+    protected List<String> getCollectedAlerts(final WebDriver driver) throws Exception {
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        if (driver instanceof HtmlUnitDriver) {
+            final Object result = jsExecutor.executeScript("return top.__huCatchedAlerts");
+            if (result != null) {
+                return (List<String>) result;
+            }
+        }
+        else if (driver instanceof InternetExplorerDriver) {
+            final String jsonResult = (String) jsExecutor
+                .executeScript(getJSON() + ";return JSON.stringify(top.__huCatchedAlerts)");
+            if (jsonResult != null) {
+                final JSONArray array = new JSONArray(jsonResult);
+                for (int i = 0; i < array.length(); i++) {
+                    collectedAlerts.add(Context.toString(array.get(i)));
+                }
+            }
+        }
+        else {
+            final Object object = jsExecutor.executeScript("return top.__huCatchedAlerts");
+
+            if (object != null) {
+                if (object instanceof JSONObject) {
+                    final JSONObject jsonObject = (JSONObject) object;
+                    for (int i = 0; i < jsonObject.length(); i++) {
+                        collectedAlerts.add(Context.toString(jsonObject.get(String.valueOf(i))));
+                    }
+                }
+                else if (object instanceof JSONArray) {
+                    final JSONArray array = (JSONArray) object;
+                    for (int i = 0; i < array.length(); i++) {
+                        collectedAlerts.add(Context.toString(array.get(i)));
+                    }
+                }
+                else {
+                    for (final Object alert : (List<Object>) object) {
+                        collectedAlerts.add(Context.toString(alert));
+                    }
+                }
+            }
+        }
+        return collectedAlerts;
+    }
+
+    private String getJSON() {
+        if (JSON_ == null) {
+            try {
+                final StringBuilder builder = new StringBuilder();
+                final File file = new File(getClass().getClassLoader().getResource("json2.js").toURI());
+                for (final Object line : FileUtils.readLines(file)) {
+                    builder.append(line).append('\n');
+                }
+                JSON_ = builder.toString();
+            }
+            catch (final Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return JSON_;
+    }
+
+    /**
+     * Returns the HtmlElement of the specified WebElement.
+     * @param webElement the webElement
+     * @return the HtmlElement
+     */
+    protected HtmlElement toHtmlElement(final WebElement webElement) {
+        try {
+            final Field field = HtmlUnitWebElement.class.getDeclaredField("element");
+            field.setAccessible(true);
+            return (HtmlElement) field.get(webElement);
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Release resources but DON'T close the browser if we are running with a real browser.
+     * Note that HtmlUnitDriver instances are not cached.
+     */
+    @After
+    @Override
+    public void releaseResources() {
+        super.releaseResources();
+
+        if (useRealBrowser_) {
+            final WebDriver driver = getWebDriver();
+            final String currentWindow = driver.getWindowHandle();
+
+            // close all windows except the current one
+            for (final String handle : driver.getWindowHandles()) {
+                if (!currentWindow.equals(handle)) {
+                    driver.switchTo().window(handle).close();
+                }
+            }
+
+            // reset cookies to have a clean state
+            driver.manage().deleteAllCookies();
+
+            // in the remaining window, load a blank page
+            driver.get("about:blank");
+        }
+    }
+}
+
+/**
+ * As HtmlUnit didn't generate the right events, WebDriver did it for us, but now that we do it correctly,
+ * WebDriver shouldn't do it anymore
+ * http://code.google.com/p/webdriver/issues/detail?id=93
+ */
+class FixedWebDriverHtmlUnitWebElement extends HtmlUnitWebElement {
+
+    public FixedWebDriverHtmlUnitWebElement(final HtmlUnitDriver parent, final HtmlElement element) {
+        super(parent, element);
+    }
+
+    @Override
+    public void click() {
+        try {
+            getElement().click();
+        }
+        catch (final IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}

@@ -1,0 +1,21 @@
+
+#tabList { padding:3px 20px; margin:0.1em 0 0 0; line-height:1em; }
+#tabList li { list-style:none; display:inline; margin:0; }
+
+#tabList li a { border:1px solid #bbb; padding:3px 0.5em; margin:0px;
+  -moz-border-radius-topleft:7px; -moz-border-radius-topright:7px;
+}
+
+#tabList li a.linkSelected { background:#fff; border-bottom:2px solid white;
+  padding-top:5px; font-size:110%;
+}
+#tabList li a.linkUnselected { background:#eee; border-bottom:1px solid #eee; }
+
+#tabList li a:link, #tablist li a:visited { color:navy; text-decoration:none; }
+
+/* Insert height/width here to give all the content a unified size */
+#tabContents { padding:20px; border-top:1px solid #BBCCDD; }
+
+.tabcontent { display:none; }
+
+#tabList li.tabInvisible { display:none; }

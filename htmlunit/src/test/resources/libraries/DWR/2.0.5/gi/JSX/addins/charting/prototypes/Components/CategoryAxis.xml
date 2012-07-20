@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Axis - Category]]></name>
+ <icon><![CDATA[icons/categoryAxis.gif]]></icon>
+ <description><![CDATA[an axis that displays a category for each record in the CDF data provider]]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.CategoryAxis">
+   <dynamics/>
+   <variants displayWidth="35" horizontal="1" labelGap="3" minorTickDivisions="2" minorTickLength="3" numCategories="5" numSeries="3" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+   <strings axisStroke="#000000 1 1" categoryField="cat" jsxname="categoryAxis" labelPlacement="low" minorTickPlacement="none" minorTickStroke="#999999 1 1" tickAlignment="between" tickPlacement="outside" tickStroke="#000000 1 1"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants jsxfontsize="12" labelRotation="270"/>
+     <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="catAxisTitle" jsxtext="Category Axis" jsxtextalign="center"/>
+    </object>
+  </object>
+</serialization>

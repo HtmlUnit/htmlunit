@@ -1,0 +1,6 @@
+This directory contains the resources necessary to run the Google Web Toolkit tests.
+
+Each subdirectory corresponds to a specific version of GWT. Each of these subdirectories
+was created by downloading the distribution and copying the 'war' of sample directories.
+
+gwt-servlet.jar is added at parent directory to be reused by different samples.

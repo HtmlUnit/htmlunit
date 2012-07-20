@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Grid Lines]]></name>
+ <icon><![CDATA[icons/gridLines.gif]]></icon>
+ <description><![CDATA[grid lines that display either in front of or behind the data series in a Cartesian chart]]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.GridLines">
+   <dynamics/>
+   <variants fillV="['#E8E8E8 1']" horizontalAbove="1" strokeMajorH="['#FFFFFF 1 1']" strokeMajorV="['#FFFFFF 1 1']" strokeMinorV="['#EEEEEE 1 1']" useXPrimary="1" useYPrimary="1"/>
+   <strings borderStroke="#CCCCCC 1" jsxname="gridLines"/>
+  </object>
+</serialization>

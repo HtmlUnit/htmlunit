@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+	<record group="object" include="master.xml"/>
+		
+	<record group="series_xy" include="master.xml">
+		<record docgetter="getMagnitudeField" docsetter="setMagnitudeField" eval="0" jsxid="magnitudeField" jsxmask="jsxtext" jsxtext="Magnitude Field" jsxtip="Sets the attribute of the data provider containing the magnitude value." validate="^([_a-zA-Z]\w*|)$"/>
+	</record>
+		
+	<record group="pointsonly" include="master.xml">
+    <record children="1" group="colorFunction" include="master.xml"/>
+  </record>
+  
+  <record group="component" include="master.xml"/>
+	<record group="interaction" include="master.xml"/>
+</data>

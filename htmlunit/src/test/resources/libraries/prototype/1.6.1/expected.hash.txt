@@ -1,0 +1,19 @@
+17 tests, 92 assertions, 0 failures, 0 errors
+Status	Test	Message
+testSet	passed	4 assertions, 0 failures, 0 errors
+testGet	passed	5 assertions, 0 failures, 0 errors
+testUnset	passed	6 assertions, 0 failures, 0 errors
+testToObject	passed	4 assertions, 0 failures, 0 errors
+testConstruct	passed	10 assertions, 0 failures, 0 errors
+testKeys	passed	4 assertions, 0 failures, 0 errors
+testValues	passed	6 assertions, 0 failures, 0 errors
+testIndex	passed	6 assertions, 0 failures, 0 errors
+testMerge	passed	9 assertions, 0 failures, 0 errors
+testUpdate	passed	7 assertions, 0 failures, 0 errors
+testToQueryString	passed	16 assertions, 0 failures, 0 errors
+testInspect	passed	3 assertions, 0 failures, 0 errors
+testClone	passed	3 assertions, 0 failures, 0 errors
+testToJSON	passed	1 assertions, 0 failures, 0 errors
+testAbilityToContainAnyKey	passed	3 assertions, 0 failures, 0 errors
+testHashToTemplateReplacements	passed	3 assertions, 0 failures, 0 errors
+testPreventIterationOverShadowedProperties	passed	2 assertions, 0 failures, 0 errors

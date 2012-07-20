@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Line - Stacked 100%]]></name>
+ <icon><![CDATA[icons/stacked100Line.gif]]></icon>
+ <description><![CDATA[a sample line chart of type 'Stacked 100%']]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.LineChart">
+   <dynamics/>
+   <variants alpha="1" borderAlpha="1" borderWidth="1" jsxheight="300" jsxleft="0" jsxrelativeposition="1" jsxtop="0" jsxwidth="400" loadState="1"/>
+   <strings borderColor="#999999" dataPadding="14 10 6 6" jsxbgcolor="#FFFFFF" jsxname="stacked100LineChart" jsxxml="&lt;data jsxid=&quot;jsxroot&quot;&gt;&lt;record cat=&quot;Q1 04&quot; y1=&quot;5&quot; y2=&quot;5&quot; y3=&quot;25&quot;/&gt; &lt;record cat=&quot;Q2 04&quot; y1=&quot;8&quot; y2=&quot;6&quot; y3=&quot;20&quot;/&gt; &lt;record cat=&quot;Q3 04&quot; y1=&quot;10&quot; y2=&quot;6&quot; y3=&quot;2&quot;/&gt; &lt;record cat=&quot;Q4 04&quot; y1=&quot;4&quot; y2=&quot;7&quot; y3=&quot;3&quot;/&gt; &lt;record cat=&quot;Q1 05&quot; y1=&quot;20&quot; y2=&quot;7&quot; y3=&quot;18&quot;/&gt; &lt;record cat=&quot;Q2 05&quot; y1=&quot;16&quot; y2=&quot;8&quot; y3=&quot;30&quot;/&gt; &lt;record cat=&quot;Q3 05&quot; y1=&quot;13&quot; y2=&quot;8&quot; y3=&quot;35&quot;/&gt; &lt;record cat=&quot;Q4 05&quot; y1=&quot;10&quot; y2=&quot;9&quot; y3=&quot;5&quot;/&gt; &lt;/data&gt;" legendPlacement="right" titlePlacement="top" type="stacked100"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants jsxfontsize="14" labelRotation="0"/>
+     <strings jsxbgcolor="#666666" jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="title" jsxpadding="4 0 0 0" jsxtext="Stacked 100% Line Chart" jsxtextalign="center"/>
+    </object>
+    <object type="jsx3.chart.CategoryAxis">
+     <dynamics/>
+     <variants horizontal="1" labelGap="3" minorTickDivisions="4" minorTickLength="2" numCategories="8" numSeries="3" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" categoryField="cat" jsxname="xAxis" labelPlacement="axis" labelStyle="font-size: 8px; font-family: Verdana;" minorTickPlacement="outside" tickAlignment="aligned" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0" preferredHeight="14"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="xTitle" jsxtext="Quarter" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.LinearAxis">
+     <dynamics/>
+     <variants autoAdjust="1" baseAtZero="1" displayWidth="25" horizontal="0" labelGap="3" max="105" minorTickDivisions="4" minorTickLength="3" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" jsxname="yAxis" labelFunction="jsx3.chart.Axis.percent" labelPlacement="axis" labelStyle="font-size: 8px; font-family: Verdana; text-align: right;" minorTickPlacement="none" minorTickStroke="#000000 1 1" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="270"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="ytitle" jsxtext="Earnings" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.GridLines">
+     <dynamics/>
+     <variants fillH="['#FFEEF5','#FFFFFF']" horizontalAbove="0" inForeground="0" strokeMajorV="['#990000 1 .05']" strokeMinorH="['#990000 1 .05']" useXPrimary="1" useYPrimary="1"/>
+     <strings borderStroke="#CCCCCC 1" jsxname="grid"/>
+    </object>
+    <object type="jsx3.chart.LineSeries">
+     <dynamics/>
+     <variants index="0" interpolateValues="1" usePrimaryX="1" usePrimaryY="1"/>
+     <strings form="segment" jsxname="series1" pointGradient="#66CCFF 225" pointStroke="#336699" seriesName="Europe" stroke="#FF66CC 2" tooltipFunction="jsx3.chart.LineSeries.tooltip" yField="y1"/>
+    </object>
+    <object type="jsx3.chart.LineSeries">
+     <dynamics/>
+     <variants index="1" interpolateValues="1" usePrimaryX="1" usePrimaryY="1"/>
+     <strings form="segment" jsxname="series2" pointGradient="#CCFF00 225" pointStroke="#33CC66" seriesName="N. America" stroke="#CC0066 2" tooltipFunction="jsx3.chart.LineSeries.tooltip" yField="y2"/>
+    </object>
+    <object type="jsx3.chart.Legend">
+     <dynamics/>
+     <variants boxHeight="13" boxSpace="6" lineHeight="20" titleSpace="8"/>
+     <strings backgroundStroke="#BBBBBB" jsxmargin="10 10 10 4" jsxname="legend" jsxpadding="4 4 0 4" labelStyle="font-size: 9px; font-weight: bold;"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="legendTitle" jsxtext="Legend" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.LineSeries">
+     <dynamics/>
+     <variants index="2" interpolateValues="0" usePrimaryX="1" usePrimaryY="1"/>
+     <strings form="segment" jsxname="series3" seriesName="Asia" stroke="#FF6699 2" tooltipFunction="jsx3.chart.LineSeries.tooltip" yField="y3"/>
+    </object>
+  </object>
+</serialization>

@@ -1,0 +1,5 @@
+This directory contains the resources necessary to run the Prototype JavaScript library unit tests.
+
+Each subdirectory corresponds to a specific version of the Prototype library. Each of these subdirectories
+was created by copying all the files at http://dev.rubyonrails.org/svn/rails/spinoffs/prototype/test/
+into the "test" subdirectory, then copying the released "prototype.js" file into the "dist" subdirectory.

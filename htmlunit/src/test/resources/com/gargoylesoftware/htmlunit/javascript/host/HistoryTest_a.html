@@ -1,0 +1,19 @@
+<html><body>
+<a name='b' href='HistoryTest_b.html'>b</a><br>
+<a name='x' href='#x'>x</a><br>
+<a name='back' href='' onclick='history.back();return false;'>back</a><br>
+<a name='forward' href='' onclick='history.forward();return false;'>forward</a><br>
+<a name='minusTwo' href='' onclick='history.go(-2);return false;'>go(-2)</a><br>
+<a name='minusOne' href='' onclick='history.go(-1);return false;'>go(-1)</a><br>
+<a name='zero' href='' onclick='history.go(0);return false;'>go(0)</a><br>
+<a name='plusOne' href='' onclick='history.go(+1);return false;'>go(+1)</a><br>
+<a name='plusTwo' href='' onclick='history.go(+2);return false;'>go(+2)</a><br>
+<a name='length' href='' onclick='alert(history.length);return false;'>length</a><br>
+<a name='current' href='' onclick='try{alert(history.current);}catch(e){alert("error");}return false;'>current</a><br>
+<a name='next' href='' onclick='try{alert(history.next);}catch(e){alert("error");}return false;'>next</a><br>
+<a name='previous' href='' onclick='try{alert(history.previous);}catch(e){alert("error");}return false;'>previous</a><br>
+<a name='itemZero' href='' onclick='try{if(history.item)alert(history.item(0));}catch(e){alert("error");}return false;'>item zero</a><br>
+<a name='hasNegativeOne' href='' onclick='alert("-1" in history);alert(-1 in history);return false;'>has negative one</a><br>
+<a name='hasZero' href='' onclick='alert("0" in history);alert(0 in history);return false;'>has zero</a><br>
+<a name='hasPositiveOne' href='' onclick='alert("1" in history);alert(1 in history);return false;'>has positive one</a><br>
+</body></html>

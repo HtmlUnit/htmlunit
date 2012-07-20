@@ -1,0 +1,9 @@
+unknown:unknown [script]()
+unknown:unknown       [anonymous](event: [object Event]<load>)
+unknown:unknown    test(text: undefined)
+debugFrameImplTest.html:19    bar()
+debugFrameImplTest.html:20    bli(x: [function anonymous])
+debugFrameImplTest.html:21    bli(x: [function split])
+debugFrameImplTest.html:22    [anonymous]()
+debugFrameImplTest.html:25    throwMe(x: [object Object])
+debugFrameImplTest.html:36 Exception thrown: [object Object]

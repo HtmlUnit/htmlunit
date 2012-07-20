@@ -1,0 +1,118 @@
+Passed: 116
+Failed: 0
+ok - addToCallStack has a function
+ok - callStack length 3
+ok - callStack in correct order
+ok - set to null
+ok - callStack in correct order (abort)
+ok - callStack in correct order (again)
+ok - escapeHTML
+ok - updateNodeAttributes
+ok - updateNodeAttributes updates value property
+ok - updateNodeAttributes updates value attribute
+ok - appendChildNodes
+ok - removeElement using DOM Coercion Rules
+ok - replaceChildNodes
+ok - insertSiblingNodesBefore
+ok - insertSiblingNodesAfter
+ok - createDOM empty
+ok - createDOM attributes
+ok - createDOM attribute
+ok - createDOM attribute
+ok - getNodeAttribute on IE added attribute
+ok - getNodeAttribute invalid node id
+ok - createDOM contents
+ok - createDOM contents
+ok - createDOM function call
+ok - createDOM this.dom() call
+ok - createDOM this.__dom__() call
+ok - createDOM iterable
+ok - createDOM with custom converter
+ok - createDOMFunc vs createDOM
+ok - scrape OK
+ok - scrape Array OK
+ok - scrape in-order
+ok - getElement might work
+ok - $ alias might work
+ok - getElement invalid id
+ok - swapDOM
+ok - swapDOM using DOM Coercion Rules
+ok - multi-node scrapeText
+ok - setElementClass
+ok - toggleElementClass: baz
+ok - toggleElementClass 2: baz bar
+ok - toggleElementClass 3: baz bar
+ok - addElementClass return
+ok - addElementClass action
+ok - hasElementClass single
+ok - hasElementClass multiple
+ok - removeElementClass
+ok - removeElementClass again
+ok - removeElementClass again (hasElement)
+ok - false swapElementClass
+ok - false swapElementClass from
+ok - false swapElementClass to
+ok - swapElementClass
+ok - swapElementClass has toClass
+ok - swapElementClass !has fromClass
+ok - swapElementClass twice
+ok - swapElementClass has toClass
+ok - swapElementClass !has fromClass
+ok - hasElementClass invalid node id
+ok - getElementsByTagAndClassName found all tags with foo class
+ok - getElementsByTagAndClassName found all tr tags with foo class
+ok - getElementsByTagAndClassName found all tr tags
+ok - getElementsByTagAndClassName no match found
+ok - getElementsByTagAndClassName invalid parent id
+ok - getFirstElementByTagAndClassName class name
+ok - getFirstElementByTagAndClassName tag and class name
+ok - getFirstElementByTagAndClassName tag name
+ok - getFirstElementByTagAndClassName no matching tag
+ok - getFirstElementByTagAndClassName no matching class
+ok - getFirstElementByTagAndClassName invalid parent id
+ok - currentDocument() correct
+ok - global doc unchanged
+ok - currentDocument() correct
+ok - doc restored
+ok - doc has one child
+ok - body has one child
+ok - only child is SPAN
+ok - SPAN has two childNodes
+ok - first node is text
+ok - second child is H1
+ok - currentDocument() correct
+ok - global doc unchanged
+ok - currentDocument() correct
+ok - threw
+ok - currentWindow ok
+ok - withWindow ok
+ok - currentWindow ok
+ok - mock formContents names
+ok - mock formContents values
+ok - mock queryString hook
+ok - formContents names
+ok - formContents values
+ok - queryString hook
+ok - formContents names empty option values
+ok - formContents empty option values
+ok - queryString empty option values
+ok - removeEmptyNodes test conditions correct
+ok - removeEmptyNodes
+ok - getFirstParentByTagAndClassName found parent
+ok - getFirstParentByTagAndClassName found parent (any class)
+ok - getFirstParentByTagAndClassName found parent (any tag)
+ok - getFirstParentByTagAndClassName found parent (any tag + any class)
+ok - getFirstParentByTagAndClassName found null parent (no match)
+ok - getFirstParentByTagAndClassName invalid elem id
+ok - isChildNode of itself
+ok - isChildNode direct child
+ok - isChildNode sub child
+ok - isChildNode wrong child
+ok - isChildNode no parent
+ok - isChildNode no parent
+ok - isChildNode of body
+ok - isChildNode text node
+ok - isChildNode child not in DOM
+ok - isChildNode child not in DOM
+ok - isChildNode parent not in DOM
+ok - test suite finished!
