@@ -1169,7 +1169,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF3 = "undefined", FF = "3", IE = "undefined")
-    @NotYetImplemented(Browser.FF3_6)
     public void querySelectorAll_implicitAttribute() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<script>\n"

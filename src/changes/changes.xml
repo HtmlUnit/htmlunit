@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+            <action type="fix" dev="asashour">
+                CSS: handling attributes which do not need explicit values, e.g. [disabled].
+            </action>
             <action type="fix" dev="mguillem" issue="3544647">
                 Google App Engine support: allow frame loading.
             </action>
