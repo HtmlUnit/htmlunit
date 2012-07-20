@@ -27,7 +27,7 @@ mvn2home
         </ant>
         -->
         <maven2 mvnhome="&mvn2home;" pomfile="&basedir;/htmlunit/cruisecontrol/checkout/pom.xml"
-            flags="-e" goal="scm:update clean -Dtest=JQuery173GitTest package checkstyle:checkstyle"/>
+            flags="-e" goal="scm:update clean package checkstyle:checkstyle"/>
     </schedule>
     <listeners>
         <currentbuildstatuslistener file="&basedir;/htmlunit/cruisecontrol/logs/status.txt"/>
