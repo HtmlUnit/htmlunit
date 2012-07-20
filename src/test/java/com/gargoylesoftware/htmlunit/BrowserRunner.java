@@ -240,7 +240,7 @@ public class BrowserRunner extends Suite {
         /** Alerts for any Chrome  If not defined, it can be overridden by a specific chrome version. */
         String[] CHROME() default{EMPTY_DEFAULT };
 
-        /** Alerts for Chrome 16. If not defined, {@Link #CHROME()} is used. */
+        /** Alerts for Chrome 16. If not defined, {@link #CHROME()} is used. */
         String[] CHROME16() default{EMPTY_DEFAULT };
 
         /** The default alerts, if nothing more specific is defined. */

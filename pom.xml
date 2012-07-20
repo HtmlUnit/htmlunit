@@ -856,4 +856,11 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <site>
+            <id>htmlunit-website</id>
+            <name>HtmlUnit WebSite - Sourceforge</name>
+            <url>scp://shell.sourceforge.net/home/project-web/htmlunit/htdocs/</url>
+        </site>
+    </distributionManagement>
 </project>
