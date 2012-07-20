@@ -105,6 +105,7 @@ public class JQuery173GitTest extends WebServerTestCase {
             while ((t = t.getCause()) != null) {
                 t.printStackTrace();
             }
+            throw e;
         }
     }
 
