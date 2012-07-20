@@ -29,21 +29,21 @@
       <id>htmlunit-website</id>
       <username>mguillem,htmlunit</username>
       <!-- optional element:
-        <password>my_login_password</password>
+        <password>your-sourceforge-pwd</password>
       -->
     </server>
     <server>
-      <id>htmlunit-m2-repo</id>
-      <username>mguillem,htmlunit</username>
+      <id>sonatype-nexus-snapshots</id>
+      <username>your-jira-id</username>
       <!-- optional element:
-        <password>my_login_password</password>
+        <password>your-jira-pwd</password>
       -->
     </server>
     <server>
-      <id>htmlunit-m2-repo-snapshots</id>
-      <username>mguillem,htmlunit</username>
+      <id>sonatype-nexus-staging</id>
+      <username>your-jira-id</username>
       <!-- optional element:
-        <password>my_login_password</password>
+        <password>your-jira-pwd</password>
       -->
     </server>
   </servers>
@@ -56,7 +56,7 @@
                 Now do this for each release:
                 <ol>
                     <li>
-                        Update the version number in pom.xml
+                        Update maven to latest version, and delete ~/.m2/repository folder.
                     </li>
                     <li>
                         Update the version number and release date in src/site/xdoc/index.xml

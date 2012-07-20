@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+        <release version="2.10" date="Jul 21, 2012" description="Bugfixes, SSL client certificate">
             <action type="fix" dev="asashour">
                 CSS: handling attributes which do not need explicit values, e.g. [disabled].
             </action>
