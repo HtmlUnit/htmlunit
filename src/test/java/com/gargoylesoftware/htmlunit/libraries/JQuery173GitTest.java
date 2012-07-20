@@ -257,7 +257,6 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: XSS via location.hash (0, 1, 1)")
-    @NotYetImplemented({ FF3_6, IE8, FF10 })
     @Tries(3)
     public void test_13() throws Exception {
         runTest(13);
