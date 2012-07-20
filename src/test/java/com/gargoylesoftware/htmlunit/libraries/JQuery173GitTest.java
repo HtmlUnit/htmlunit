@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.html unit.libraries;
+package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3;
@@ -22,9 +22,8 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE7;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static org.junit.Assert.fail;
 
-import java.util.List;
-
 import org.eclipse.jetty.server.Server;
+import org.junit.After;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,6 +64,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      *
      * {@inheritDoc}
      */
+    @After
     @Override
     public void releaseResources() {
         //nothing
@@ -80,12 +80,13 @@ public class JQuery173GitTest extends WebServerTestCase {
         final HtmlPage page = WEBCLIENT_.getPage("http://localhost:" + PORT + "/test/index.html?testNumber="
                 + testNumber);
         HtmlElement element = null;
-        final String xpath = "//li[@id='qunit-test-output0']";
         do {
             if (element == null) {
-                final List<?> list = page.getByXPath(xpath);
-                if (!list.isEmpty()) {
-                    element = (HtmlElement) list.get(0);
+                try {
+                    element = page.getHtmlElementById("qunit-test-output0");
+                }
+                catch (final Exception e) {
+                    //ignore
                 }
             }
             Thread.sleep(100);
