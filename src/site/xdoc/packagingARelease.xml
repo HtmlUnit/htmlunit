@@ -59,6 +59,9 @@
                         Update maven to latest version, and delete ~/.m2/repository folder.
                     </li>
                     <li>
+                        Update the version number in pom.xml
+                    </li>
+                    <li>
                         Update the version number and release date in src/site/xdoc/index.xml
                     </li>
                     <li>
