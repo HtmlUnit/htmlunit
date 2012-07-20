@@ -31,6 +31,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.RetriesRunner.Retries;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -134,7 +135,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: Unit Testing Environment (0, 2, 2)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_1() throws Exception {
         runTest(1);
     }
@@ -144,7 +145,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: Basic requirements (0, 7, 7)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_2() throws Exception {
         runTest(2);
     }
@@ -155,6 +156,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("core: jQuery() (1, 30, 31)")
     @NotYetImplemented({ IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_3() throws Exception {
         runTest(3);
     }
@@ -164,7 +166,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: selector state (0, 31, 31)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_4() throws Exception {
         runTest(4);
     }
@@ -174,7 +176,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: globalEval (0, 3, 3)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_5() throws Exception {
         runTest(5);
     }
@@ -184,7 +186,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: noConflict (0, 7, 7)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_6() throws Exception {
         runTest(6);
     }
@@ -195,6 +197,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("core: trim (0, 9, 9)")
     @NotYetImplemented({ IE6, IE7, IE8, FF3, FF10 })
+    @Retries(3)
     public void test_7() throws Exception {
         runTest(7);
     }
@@ -204,7 +207,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: type (0, 23, 23)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_8() throws Exception {
         runTest(8);
     }
@@ -214,7 +217,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: isPlainObject (0, 15, 15)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_9() throws Exception {
         runTest(9);
     }
@@ -224,7 +227,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: isFunction (0, 19, 19)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_10() throws Exception {
         runTest(10);
     }
@@ -234,7 +237,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: isNumeric (0, 36, 36)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_11() throws Exception {
         runTest(11);
     }
@@ -244,7 +247,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: isXMLDoc - HTML (0, 4, 4)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_12() throws Exception {
         runTest(12);
     }
@@ -255,6 +258,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("core: XSS via location.hash (0, 1, 1)")
     @NotYetImplemented({ FF3_6, IE8, FF10 })
+    @Retries(3)
     public void test_13() throws Exception {
         runTest(13);
     }
@@ -264,7 +268,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: isXMLDoc - XML (0, 3, 3)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_14() throws Exception {
         runTest(14);
     }
@@ -274,7 +278,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: isWindow (0, 14, 14)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_15() throws Exception {
         runTest(15);
     }
@@ -284,7 +288,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery('html') (0, 18, 18)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_16() throws Exception {
         runTest(16);
     }
@@ -294,7 +298,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery('html', context) (0, 1, 1)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_17() throws Exception {
         runTest(17);
     }
@@ -305,6 +309,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("core: jQuery(selector, xml).text(str) - Loaded via XML document (0, 2, 2)")
     @NotYetImplemented({ IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_18() throws Exception {
         runTest(18);
     }
@@ -314,7 +319,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: end() (0, 3, 3)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_19() throws Exception {
         runTest(19);
     }
@@ -324,7 +329,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: length (0, 1, 1)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_20() throws Exception {
         runTest(20);
     }
@@ -334,7 +339,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: size() (0, 1, 1)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_21() throws Exception {
         runTest(21);
     }
@@ -344,7 +349,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: get() (0, 1, 1)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_22() throws Exception {
         runTest(22);
     }
@@ -354,7 +359,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: toArray() (0, 1, 1)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_23() throws Exception {
         runTest(23);
     }
@@ -364,7 +369,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: inArray() (0, 19, 19)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_24() throws Exception {
         runTest(24);
     }
@@ -374,7 +379,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: get(Number) (0, 2, 2)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_25() throws Exception {
         runTest(25);
     }
@@ -384,7 +389,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: get(-Number) (0, 2, 2)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_26() throws Exception {
         runTest(26);
     }
@@ -394,7 +399,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: each(Function) (0, 1, 1)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_27() throws Exception {
         runTest(27);
     }
@@ -404,7 +409,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: slice() (0, 7, 7)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_28() throws Exception {
         runTest(28);
     }
@@ -414,7 +419,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: first()/last() (0, 4, 4)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_29() throws Exception {
         runTest(29);
     }
@@ -424,7 +429,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: map() (0, 8, 8)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_30() throws Exception {
         runTest(30);
     }
@@ -434,7 +439,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.merge() (0, 8, 8)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_31() throws Exception {
         runTest(31);
     }
@@ -444,7 +449,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.extend(Object, Object) (0, 28, 28)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_32() throws Exception {
         runTest(32);
     }
@@ -454,7 +459,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.each(Object,Function) (0, 14, 14)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_33() throws Exception {
         runTest(33);
     }
@@ -464,7 +469,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.makeArray (0, 17, 17)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_34() throws Exception {
         runTest(34);
     }
@@ -474,7 +479,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.inArray (0, 3, 3)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_35() throws Exception {
         runTest(35);
     }
@@ -484,7 +489,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.isEmptyObject (0, 2, 2)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_36() throws Exception {
         runTest(36);
     }
@@ -494,7 +499,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.proxy (0, 7, 7)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_37() throws Exception {
         runTest(37);
     }
@@ -504,7 +509,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.parseHTML (2, 0, 2)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_38() throws Exception {
         runTest(38);
     }
@@ -514,7 +519,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.parseJSON (0, 8, 8)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_39() throws Exception {
         runTest(39);
     }
@@ -524,7 +529,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.parseXML (0, 8, 8)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_40() throws Exception {
         runTest(40);
     }
@@ -534,7 +539,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.sub() - Static Methods (0, 18, 18)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_41() throws Exception {
         runTest(41);
     }
@@ -544,7 +549,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.sub() - .fn Methods (0, 378, 378)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_42() throws Exception {
         runTest(42);
     }
@@ -554,7 +559,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery.camelCase() (0, 7, 7)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_43() throws Exception {
         runTest(43);
     }
@@ -564,7 +569,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"\" ) - no filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_44() throws Exception {
         runTest(44);
     }
@@ -574,7 +579,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { } ) - no filter (2, 0, 2)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_45() throws Exception {
         runTest(45);
     }
@@ -584,7 +589,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"\" ) - filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_46() throws Exception {
         runTest(46);
     }
@@ -595,6 +600,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { } ) - filter (0, 20, 20)")
     @NotYetImplemented({ FF3_6, FF3, IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_47() throws Exception {
         runTest(47);
     }
@@ -604,7 +610,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"once\" ) - no filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_48() throws Exception {
         runTest(48);
     }
@@ -615,6 +621,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"once\": true } ) - no filter (2, 18, 20)")
     @NotYetImplemented({ FF3_6, FF3, IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_49() throws Exception {
         runTest(49);
     }
@@ -624,7 +631,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"once\" ) - filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_50() throws Exception {
         runTest(50);
     }
@@ -635,6 +642,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"once\": true } ) - filter (2, 18, 20)")
     @NotYetImplemented({ FF3_6, FF3, IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_51() throws Exception {
         runTest(51);
     }
@@ -644,7 +652,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"memory\" ) - no filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_52() throws Exception {
         runTest(52);
     }
@@ -655,6 +663,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true } ) - no filter (5, 15, 20)")
     @NotYetImplemented({ FF3_6, FF3, IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_53() throws Exception {
         runTest(53);
     }
@@ -664,7 +673,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"memory\" ) - filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_54() throws Exception {
         runTest(54);
     }
@@ -675,6 +684,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true } ) - filter (5, 15, 20)")
     @NotYetImplemented({ FF3_6, FF3, IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_55() throws Exception {
         runTest(55);
     }
@@ -684,7 +694,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"unique\" ) - no filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_56() throws Exception {
         runTest(56);
     }
@@ -695,6 +705,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"unique\": true } ) - no filter (2, 18, 20)")
     @NotYetImplemented({ FF3_6, FF3, IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_57() throws Exception {
         runTest(57);
     }
@@ -704,7 +715,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"unique\" ) - filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_58() throws Exception {
         runTest(58);
     }
@@ -715,6 +726,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"unique\": true } ) - filter (2, 18, 20)")
     @NotYetImplemented({ FF3_6, FF3, IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_59() throws Exception {
         runTest(59);
     }
@@ -724,7 +736,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"stopOnFalse\" ) - no filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_60() throws Exception {
         runTest(60);
     }
@@ -735,6 +747,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"stopOnFalse\": true } ) - no filter (1, 19, 20)")
     @NotYetImplemented({ FF3_6, FF3, IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_61() throws Exception {
         runTest(61);
     }
@@ -744,7 +757,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"stopOnFalse\" ) - filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_62() throws Exception {
         runTest(62);
     }
@@ -755,6 +768,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"stopOnFalse\": true } ) - filter (1, 19, 20)")
     @NotYetImplemented({ FF3_6, FF3, IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_63() throws Exception {
         runTest(63);
     }
@@ -764,7 +778,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"once memory\" ) - no filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_64() throws Exception {
         runTest(64);
     }
@@ -775,6 +789,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"memory\": true } ) - no filter (6, 14, 20)")
     @NotYetImplemented({ FF3_6, FF3, IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_65() throws Exception {
         runTest(65);
     }
@@ -784,7 +799,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"once memory\" ) - filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_66() throws Exception {
         runTest(66);
     }
@@ -795,6 +810,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"memory\": true } ) - filter (6, 14, 20)")
     @NotYetImplemented({ FF3_6, FF3, IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_67() throws Exception {
         runTest(67);
     }
@@ -804,7 +820,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"once unique\" ) - no filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_68() throws Exception {
         runTest(68);
     }
@@ -815,6 +831,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"unique\": true } ) - no filter (3, 17, 20)")
     @NotYetImplemented({ FF3_6, FF3, IE6, IE7, IE8, FF10 })
+    @Retries(3)
     public void test_69() throws Exception {
         runTest(69);
     }
@@ -824,7 +841,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"once unique\" ) - filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_70() throws Exception {
         runTest(70);
     }
@@ -835,6 +852,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"unique\": true } ) - filter (3, 17, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF3, FF10 })
+    @Retries(3)
     public void test_71() throws Exception {
         runTest(71);
     }
@@ -844,7 +862,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"once stopOnFalse\" ) - no filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_72() throws Exception {
         runTest(72);
     }
@@ -855,6 +873,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"stopOnFalse\": true } ) - no filter (3, 17, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF3, FF10 })
+    @Retries(3)
     public void test_73() throws Exception {
         runTest(73);
     }
@@ -864,7 +883,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"once stopOnFalse\" ) - filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_74() throws Exception {
         runTest(74);
     }
@@ -875,6 +894,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"stopOnFalse\": true } ) - filter (3, 17, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF3, FF10 })
+    @Retries(3)
     public void test_75() throws Exception {
         runTest(75);
     }
@@ -884,7 +904,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"memory unique\" ) - no filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_76() throws Exception {
         runTest(76);
     }
@@ -895,6 +915,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true, \"unique\": true } ) - no filter (6, 14, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF3, FF10 })
+    @Retries(3)
     public void test_77() throws Exception {
         runTest(77);
     }
@@ -904,7 +925,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"memory unique\" ) - filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_78() throws Exception {
         runTest(78);
     }
@@ -915,6 +936,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true, \"unique\": true } ) - filter (6, 14, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF3, FF10 })
+    @Retries(3)
     public void test_79() throws Exception {
         runTest(79);
     }
@@ -924,7 +946,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"memory stopOnFalse\" ) - no filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_80() throws Exception {
         runTest(80);
     }
@@ -935,6 +957,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true, \"stopOnFalse\": true } ) - no filter (5, 15, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF3, FF10 })
+    @Retries(3)
     public void test_81() throws Exception {
         runTest(81);
     }
@@ -944,7 +967,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"memory stopOnFalse\" ) - filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_82() throws Exception {
         runTest(82);
     }
@@ -955,6 +978,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true, \"stopOnFalse\": true } ) - filter (5, 15, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF3, FF10 })
+    @Retries(3)
     public void test_83() throws Exception {
         runTest(83);
     }
@@ -964,7 +988,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"unique stopOnFalse\" ) - no filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_84() throws Exception {
         runTest(84);
     }
@@ -975,6 +999,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"unique\": true, \"stopOnFalse\": true } ) - no filter (2, 18, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF3, FF10 })
+    @Retries(3)
     public void test_85() throws Exception {
         runTest(85);
     }
@@ -984,7 +1009,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"unique stopOnFalse\" ) - filter (0, 20, 20)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_86() throws Exception {
         runTest(86);
     }
@@ -995,6 +1020,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"unique\": true, \"stopOnFalse\": true } ) - filter (2, 18, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF3, FF10 })
+    @Retries(3)
     public void test_87() throws Exception {
         runTest(87);
     }
@@ -1005,6 +1031,7 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( options ) - options are copied (2, 1, 3)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF3, FF10 })
+    @Retries(3)
     public void test_88() throws Exception {
         runTest(88);
     }
@@ -1014,7 +1041,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks.fireWith - arguments are copied (1, 0, 1)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_89() throws Exception {
         runTest(89);
     }
@@ -1024,7 +1051,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks.remove - should remove all instances (0, 1, 1)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_90() throws Exception {
         runTest(90);
     }
@@ -1034,7 +1061,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("deferred: jQuery.Deferred (1, 20, 21)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_91() throws Exception {
         runTest(91);
     }
@@ -1044,7 +1071,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("deferred: jQuery.Deferred - new operator (1, 20, 21)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_92() throws Exception {
         runTest(92);
     }
@@ -1054,7 +1081,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("deferred: jQuery.Deferred - chainability (0, 10, 10)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_93() throws Exception {
         runTest(93);
     }
@@ -1064,7 +1091,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("deferred: jQuery.Deferred.then - filtering (done) (1, 3, 4)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_94() throws Exception {
         runTest(94);
     }
@@ -1074,7 +1101,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("deferred: jQuery.Deferred.then - filtering (fail) (1, 3, 4)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_95() throws Exception {
         runTest(95);
     }
@@ -1084,7 +1111,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("deferred: jQuery.Deferred.then - filtering (progress) (1, 2, 3)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_96() throws Exception {
         runTest(96);
     }
@@ -1094,7 +1121,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("deferred: jQuery.Deferred.then - deferred (done) (1, 2, 3)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_97() throws Exception {
         runTest(97);
     }
@@ -1104,7 +1131,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("deferred: jQuery.Deferred.then - deferred (fail) (1, 2, 3)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_98() throws Exception {
         runTest(98);
     }
@@ -1114,7 +1141,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("deferred: jQuery.Deferred.then - deferred (progress) (1, 2, 3)")
-    @NotYetImplemented({ FF10 })
+    @Retries(3)
     public void test_99() throws Exception {
         runTest(99);
     }
