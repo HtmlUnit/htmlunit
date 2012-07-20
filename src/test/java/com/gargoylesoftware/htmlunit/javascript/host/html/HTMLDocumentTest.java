@@ -1091,7 +1091,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented(Browser.FF3_6)
     public void querySelectorAll_badSelector() throws Exception {
         for (final String selector : JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelectorAll_badSelector(selector);
@@ -1114,7 +1113,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented(Browser.FF3_6)
     public void querySelector_badSelector() throws Exception {
         for (final String selector : JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelector_badSelector(selector);
@@ -1125,7 +1123,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final String html = "<html><body><script>\n"
             + "try {\n"
             + "  document.querySelector('" + selector + "');\n"
-            + "  alert('working');\n"
+            + "  alert('working: " + selector + "');\n"
             + "} catch(e) { alert('exception'); }\n"
             + "</script></body></html>";
 

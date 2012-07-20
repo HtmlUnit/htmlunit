@@ -18,9 +18,11 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.w3c.css.sac.CSSException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -30,18 +32,19 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class CSSSelectorTest extends WebDriverTestCase {
 
     /**
-     * Test for bug 3300434; don't throw an error
-     * if the css parsing fails.
+     * Test for bug 3300434: CSS3 selector is not yet supported.
      *
      * @throws Exception if an error occurs
      */
     @Test
-    public void simple() throws Exception {
+    @NotYetImplemented
+    public void css3() throws Exception {
         final String html
             = "<html><body>"
             + "</body></html>";
@@ -50,5 +53,18 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String selector = "table:nth-child(1) td";
         final DomNodeList<DomNode> nodes = page.querySelectorAll(selector);
         Assert.assertEquals(0, nodes.size());
+    }
+
+    /**
+     * Exception should be thrown for an invalid selector.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test(expected = CSSException.class)
+    public void invalid() throws Exception {
+        final String html = "<html><body></body></html>";
+
+        final HtmlPage page = loadPage(html);
+        page.querySelectorAll("td:gt(4)");
     }
 }

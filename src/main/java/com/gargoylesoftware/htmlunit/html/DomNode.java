@@ -25,12 +25,12 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Selector;
@@ -77,8 +77,6 @@ import com.steadystate.css.parser.SACParserCSS21;
  * @author Ronald Brill
  */
 public abstract class DomNode implements Cloneable, Serializable, Node {
-
-    private static final Log LOG = LogFactory.getLog(DomNode.class);
 
     /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
     protected static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
@@ -1518,11 +1516,27 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final List<DomNode> elements = new ArrayList<DomNode>();
         try {
             final WebClient webClient = getPage().getWebClient();
-            final ErrorHandler errorHandler = webClient.getCssErrorHandler();
+            final AtomicBoolean errorOccured = new AtomicBoolean(false);
+            final ErrorHandler errorHandler = new ErrorHandler() {
+                public void warning(final CSSParseException exception) throws CSSException {
+                    // ignore
+                }
+
+                public void fatalError(final CSSParseException exception) throws CSSException {
+                    errorOccured.set(true);
+                }
+
+                public void error(final CSSParseException exception) throws CSSException {
+                    errorOccured.set(true);
+                }
+            };
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
             parser.setErrorHandler(errorHandler);
             final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
             // in case of error parseSelectors returns null
+            if (errorOccured.get()) {
+                throw new CSSException("Invalid selectors: " + selectors);
+            }
             if (null != selectorList) {
                 CSSStyleSheet.validateSelectors(selectorList);
 
