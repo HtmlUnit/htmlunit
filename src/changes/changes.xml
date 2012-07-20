@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.10" date="???" description="Bugfixes, SSL client certificate">
+            <action type="fix" dev="mguillem" issue="3544647">
+                Google App Engine support: allow frame loading.
+            </action>
             <action type="fix" dev="asashour">
                 Cookie: null path is treated as "/" in .equals() and .hashCode()
             </action>

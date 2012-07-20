@@ -91,16 +91,16 @@ abstract class URLCreator {
 
         @Override
         URL toUrlUnsafeClassic(final String url) throws MalformedURLException {
-            if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url,
+            if (WebClient.URL_ABOUT_BLANK != null
+                    && org.apache.commons.lang3.StringUtils.equalsIgnoreCase(
+                            WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
+                return WebClient.URL_ABOUT_BLANK;
+            }
+            else if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url,
                     JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
             }
             else if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url, "about:")) {
-                if (WebClient.URL_ABOUT_BLANK != null
-                        && org.apache.commons.lang3.StringUtils.equalsIgnoreCase(
-                                WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
-                    return WebClient.URL_ABOUT_BLANK;
-                }
                 return new URL("http://gaeHack_" + url.replaceFirst(":", "/"));
             }
             else if (org.apache.commons.lang3.StringUtils.startsWithIgnoreCase(url, "data:")) {

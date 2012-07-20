@@ -14,17 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.gae;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
-
 import static org.junit.Assert.assertEquals;
-
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -32,6 +22,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.UrlFetchWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
 
 /**
  * Tests to see if pages can be loaded using <a href="http://code.google.com/appengine/">Google App Engine</a>
@@ -46,10 +48,12 @@ public class GAELoadPageTest {
 
     // can't use constants from {@link WebtestCase} as it forces to load forbidden classes
     private static final URL FIRST_URL;
+    private static final URL FIRST_SECOND;
 
     static {
         try {
             FIRST_URL = new URL("http://localhost:8080/");
+            FIRST_SECOND = new URL("http://localhost:8080/foo.html");
         }
         catch (final MalformedURLException e) {
             throw new Error("Can't create test urls", e);
@@ -198,22 +202,47 @@ public class GAELoadPageTest {
      * @throws Exception if the test fails.
      */
     @Test
-    @Ignore // we don't have @NotYetImplemented here as it is not running with our BrowserRunner
     public void frameShouldBeLoaded() throws Exception {
         final String html = "<html><body>\n"
-            + "<iframe src='foo.html'></iframe>\n"
+            + "<iframe src='" + FIRST_SECOND + "'></iframe>\n"
             + "</body></html>";
 
         final String frame = "<html><body><script>alert('in frame');</script></body></html>";
 
         final WebClient client = new WebClient();
         final List<String> collectedAlerts = new ArrayList<String>();
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setDefaultResponse(frame);
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection conn = new GAEMockWebConnection(client);
         conn.setResponse(FIRST_URL, html);
+        conn.setResponse(FIRST_SECOND, frame);
         client.setWebConnection(conn);
         client.getPage(FIRST_URL);
 
         assertEquals(Arrays.asList("in frame"), collectedAlerts);
+    }
+
+    /**
+     * Use special MockWebConnection here as the UrlFetchWebConnection handles
+     * special URLs that are normally not even requested to the WebConnection (like "about:blank").
+     * @author Marc Guillemot
+     * @version $Revision$
+     */
+    static class GAEMockWebConnection extends MockWebConnection {
+        private final UrlFetchWebConnection urlFetchWebconnection_;
+
+        GAEMockWebConnection(final WebClient webClient) {
+            urlFetchWebconnection_ = new UrlFetchWebConnection(webClient);
+        }
+
+        @Override
+        public WebResponse getResponse(final WebRequest request) throws IOException {
+            if (hasResponse(request.getUrl())) {
+                return super.getResponse(request);
+            }
+            else {
+                return urlFetchWebconnection_.getResponse(request);
+            }
+        }
     }
 }
