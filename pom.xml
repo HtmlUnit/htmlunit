@@ -318,15 +318,16 @@
                     <stylesheet>maven</stylesheet>
                 </configuration>
             </plugin>
+            <!--  gives an error: try "mvn jxr:test-jxr"
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>2.3</version>
-            </plugin>
+            </plugin>  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>2.6</version>
+                <version>2.7.1</version>
                 <configuration>
                     <targetJdk>1.5</targetJdk>
                 </configuration>
