@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.libraries;
+package com.gargoylesoftw are.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3;
@@ -77,25 +77,34 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     protected void runTest(final int testNumber) throws Exception {
         final long end_time = System.currentTimeMillis() + 60 * 1000;
-        final HtmlPage page = WEBCLIENT_.getPage("http://localhost:" + PORT + "/test/index.html?testNumber="
-                + testNumber);
-        HtmlElement element = null;
-        do {
-            if (element == null) {
-                try {
-                    element = page.getHtmlElementById("qunit-test-output0");
+        try {
+            final HtmlPage page = WEBCLIENT_.getPage("http://localhost:" + PORT + "/test/index.html?testNumber="
+                    + testNumber);
+            HtmlElement element = null;
+            do {
+                if (element == null) {
+                    try {
+                        element = page.getHtmlElementById("qunit-test-output0");
+                    }
+                    catch (final Exception e) {
+                        //ignore
+                    }
                 }
-                catch (final Exception e) {
-                    //ignore
-                }
+                Thread.sleep(100);
+            } while (System.currentTimeMillis() < end_time && (element == null || !element.asText().contains(",")));
+            String result = element.asText();
+            result = result.substring(0, result.indexOf("Rerun")).trim();
+            final String expected = getExpectedAlerts()[0];
+            if (!expected.contains(result)) {
+                fail(new ComparisonFailure("", expected, result).getMessage());
             }
-            Thread.sleep(100);
-        } while (System.currentTimeMillis() < end_time && (element == null || !element.asText().contains(",")));
-        String result = element.asText();
-        result = result.substring(0, result.indexOf("Rerun")).trim();
-        final String expected = getExpectedAlerts()[0];
-        if (!expected.contains(result)) {
-            fail(new ComparisonFailure("", expected, result).getMessage());
+        }
+        catch (final Exception e) {
+            e.printStackTrace();
+            Throwable t = e;
+            while ((t = t.getCause()) != null) {
+                t.printStackTrace();
+            }
         }
     }
 
