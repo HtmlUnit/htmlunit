@@ -15,7 +15,7 @@
     <body>
         <menu name="SourceForge.net">
             <item name="Project Page" href="http://www.sourceforge.net/projects/htmlunit"/>
-            <item name="Download" href="http://sourceforge.net/project/showfiles.php?group_id=47038"/>
+            <item name="Download" href="https://sourceforge.net/projects/htmlunit/files/htmlunit/"/>
         </menu>
         <menu name="How do I...">
             <item name="Get started" href="/gettingStarted.html"/>
