@@ -1491,4 +1491,37 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void getElementById_strict() throws Exception {
+        getElementById_strict(true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT="null", IE = "")
+    public void getElementById_quirks() throws Exception {
+        getElementById_strict(false);
+    }
+
+    private void getElementById_strict(final boolean xhtml) throws Exception {
+        final String header = xhtml ? "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
+                + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" : "";
+        final String html = header + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload=test()>\n"
+            + "  <a name='myId'/>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

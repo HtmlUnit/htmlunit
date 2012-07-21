@@ -650,7 +650,7 @@ public enum BrowserVersionFeatures {
     JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB,
 
     /** Javascript function getElementById calls getElementByName if nothing found by id. */
-    JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME,
+    JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE,
 
     /** Javascript function getElementById compares the id's case sensitive. */
     JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
