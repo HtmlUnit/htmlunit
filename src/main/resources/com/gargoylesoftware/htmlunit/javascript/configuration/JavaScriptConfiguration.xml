@@ -3068,7 +3068,6 @@
         </function>
     </class>
 
-<!--
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.WebSocket"
         jsConstructor="jsConstructor" JSObject="true">
         <doclink url="http://dev.w3.org/html5/websockets/" descr="W3C documentation"/>
@@ -3085,7 +3084,7 @@
         <function name="close"/>
         <function name="send"/>
     </class>
--->
+
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Window" JSObject="true">
         <doclink url="http://msdn.microsoft.com/en-us/library/ms535873.aspx" descr="MSDN documentation"/>
         <property name="applicationCache" readable="true" writable="false">

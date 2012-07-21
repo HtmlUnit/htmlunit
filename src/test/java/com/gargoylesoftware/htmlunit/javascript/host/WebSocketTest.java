@@ -14,8 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.io.IOException;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.eclipse.jetty.websocket.WebSocket;
+import org.eclipse.jetty.websocket.WebSocketHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -35,58 +46,58 @@ public class WebSocketTest extends WebDriverTestCase {
      */
     @Test
     public void chat() throws Exception {
-//        //TODO: compatibility of FF and Chrome versions.
-//        if (getBrowserVersion().isFirefox()) {
-//            startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
-//                null, null, new ChatWebSocketHandler());
-//            final WebDriver driver = getWebDriver();
-//            driver.get("http://localhost:" + PORT + "/WebSocketTest_chat.html");
-//
-//            driver.findElement(By.id("username")).sendKeys("Browser");
-//            driver.findElement(By.id("joinB")).click();
-//            Thread.sleep(500);
-//
-//            final WebElement chatE = driver.findElement(By.id("chat"));
-//            assertEquals("Browser: has joined!", chatE.getText());
-//            driver.findElement(By.id("phrase")).sendKeys("Hope you are fine!");
-//            driver.findElement(By.id("sendB")).click();
-//            Thread.sleep(500);
-//
-//            assertEquals("Browser: has joined!\nBrowser: Hope you are fine!", chatE.getText());
-//        }
+        //TODO: compatibility of FF and Chrome versions.
+        if (getBrowserVersion().isFirefox()) {
+            startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
+                null, null, new ChatWebSocketHandler());
+            final WebDriver driver = getWebDriver();
+            driver.get("http://localhost:" + PORT + "/WebSocketTest_chat.html");
+
+            driver.findElement(By.id("username")).sendKeys("Browser");
+            driver.findElement(By.id("joinB")).click();
+            Thread.sleep(500);
+
+            final WebElement chatE = driver.findElement(By.id("chat"));
+            assertEquals("Browser: has joined!", chatE.getText());
+            driver.findElement(By.id("phrase")).sendKeys("Hope you are fine!");
+            driver.findElement(By.id("sendB")).click();
+            Thread.sleep(500);
+
+            assertEquals("Browser: has joined!\nBrowser: Hope you are fine!", chatE.getText());
+        }
     }
 
-//    private static class ChatWebSocketHandler extends WebSocketHandler {
-//
-//        private final Set<ChatWebSocket> webSockets_ = new CopyOnWriteArraySet<ChatWebSocket>();
-//
-//        public WebSocket doWebSocketConnect(final HttpServletRequest request, final String protocol) {
-//            return new ChatWebSocket();
-//        }
-//
-//        private class ChatWebSocket implements WebSocket.OnTextMessage {
-//
-//            private Connection connection_;
-//
-//            public void onOpen(final Connection connection) {
-//                this.connection_ = connection;
-//                webSockets_.add(this);
-//            }
-//
-//            public void onMessage(final String data) {
-//                try {
-//                    for (final ChatWebSocket webSocket : webSockets_) {
-//                        webSocket.connection_.sendMessage(data);
-//                    }
-//                }
-//                catch (final IOException x) {
-//                    this.connection_.close();
-//                }
-//            }
-//
-//            public void onClose(final int closeCode, final String message) {
-//                webSockets_.remove(this);
-//            }
-//        }
-//    }
+    private static class ChatWebSocketHandler extends WebSocketHandler {
+
+        private final Set<ChatWebSocket> webSockets_ = new CopyOnWriteArraySet<ChatWebSocket>();
+
+        public WebSocket doWebSocketConnect(final HttpServletRequest request, final String protocol) {
+            return new ChatWebSocket();
+        }
+
+        private class ChatWebSocket implements WebSocket.OnTextMessage {
+
+            private Connection connection_;
+
+            public void onOpen(final Connection connection) {
+                this.connection_ = connection;
+                webSockets_.add(this);
+            }
+
+            public void onMessage(final String data) {
+                try {
+                    for (final ChatWebSocket webSocket : webSockets_) {
+                        webSocket.connection_.sendMessage(data);
+                    }
+                }
+                catch (final IOException x) {
+                    this.connection_.close();
+                }
+            }
+
+            public void onClose(final int closeCode, final String message) {
+                webSockets_.remove(this);
+            }
+        }
+    }
 }
