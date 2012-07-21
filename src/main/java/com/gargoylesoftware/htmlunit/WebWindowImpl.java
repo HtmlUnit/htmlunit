@@ -54,7 +54,6 @@ public abstract class WebWindowImpl implements WebWindow {
 
     /**
      * Never call this, used for Serialization.
-     * @deprecated
      */
     @Deprecated
     protected WebWindowImpl() {
