@@ -79,7 +79,6 @@ public class NativeStringTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "toSource: function", "trim: function" },
-            FF3 = { "toSource: function", "trim: undefined" },
             IE = { "toSource: undefined", "trim: undefined" },
             CHROME = { "toSource: undefined", "trim: function" })
     public void methods_differences() throws Exception {
@@ -92,7 +91,7 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "", FF3 = "", DEFAULT = { "2", "3", "4" })
+    @Alerts(IE = "", DEFAULT = { "2", "3", "4" })
     public void trim() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

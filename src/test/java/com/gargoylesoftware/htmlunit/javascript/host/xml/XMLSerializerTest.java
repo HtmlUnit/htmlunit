@@ -254,8 +254,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { "<img/>", "<IMG/>", "<?myTarget myData?>" },
-            FF = { "<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>" })
+    @Alerts(FF = { "<img/>", "<img xmlns=\"http://www.w3.org/1999/xhtml\" />", "<?myTarget myData?>" })
     public void xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -320,8 +319,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "<TEXTAREA/>",
-            FF = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
+    @Alerts(FF = "<textarea xmlns=\"http://www.w3.org/1999/xhtml\"></textarea>")
     public void mixedCase() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -339,8 +337,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "<AREA/>, <BASE/>, <BASEFONT/>, <BR/>, <HR/>, <INPUT type=\"text\"/>, <LINK/>, <META/>",
-            FF = "<area xmlns=\"http://www.w3.org/1999/xhtml\" />, "
+    @Alerts(FF = "<area xmlns=\"http://www.w3.org/1999/xhtml\" />, "
                     + "<base xmlns=\"http://www.w3.org/1999/xhtml\" />, "
                     + "<basefont xmlns=\"http://www.w3.org/1999/xhtml\" />, "
                     + "<br xmlns=\"http://www.w3.org/1999/xhtml\" />, "
@@ -393,8 +390,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "<INPUT/>",
-            FF3_6 = "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
+    @Alerts(FF3_6 = "<input xmlns=\"http://www.w3.org/1999/xhtml\" />",
             FF10 = "<input xmlns=\"http://www.w3.org/1999/xhtml\" />")
     @NotYetImplemented(Browser.FF)
     public void imputTagWithoutType() throws Exception {
@@ -416,8 +412,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "<DIV/>, <H1/>, <P/>, <LI/>, <TEXTAREA/>",
-            FF = "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>, "
+    @Alerts(FF = "<div xmlns=\"http://www.w3.org/1999/xhtml\"></div>, "
                     + "<h1 xmlns=\"http://www.w3.org/1999/xhtml\"></h1>, "
                     + "<p xmlns=\"http://www.w3.org/1999/xhtml\"></p>, "
                     + "<li xmlns=\"http://www.w3.org/1999/xhtml\"></li>, "
@@ -447,8 +442,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "<IMG href=\"mypage.htm\"/>",
-            FF = "<img xmlns=\"http://www.w3.org/1999/xhtml\" href=\"mypage.htm\" />")
+    @Alerts(FF = "<img xmlns=\"http://www.w3.org/1999/xhtml\" href=\"mypage.htm\" />")
     public void noClosingTagWithAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

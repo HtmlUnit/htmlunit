@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER_8;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertNotNull;
@@ -1627,7 +1626,7 @@ public class WebClientTest extends WebServerTestCase {
     @Test
     public void testUrlEncoding() throws Exception {
         final URL url = new URL("http://host/x+y\u00E9/a\u00E9 b?c \u00E9 d");
-        final HtmlPage page = loadPage(FIREFOX_3, "<html></html>", new ArrayList<String>(), url);
+        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3_6, "<html></html>", new ArrayList<String>(), url);
         final WebRequest wrs = page.getWebResponse().getWebRequest();
         assertEquals("http://host/x+y%C3%A9/a%C3%A9%20b?c%20%E9%20d", wrs.getUrl());
     }

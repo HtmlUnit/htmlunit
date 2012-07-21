@@ -357,8 +357,7 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { "true", "false" },
-            FF3_6 = { "true", "false" },
+    @Alerts(FF3_6 = { "true", "false" },
             FF = { "isSameNode not supported" },
             IE = { "isSameNode not supported" })
     public void testIsSameNode() throws Exception {

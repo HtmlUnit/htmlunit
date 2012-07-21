@@ -487,9 +487,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "ibcdefg", "xxxxxfg" },
-            FF3 = { },
-            FF3_6 = { })
+    @Alerts(DEFAULT = { "ibcdefg", "xxxxxfg" }, FF3_6 = { })
     public void testReplaceOnTextData() throws Exception {
         final String html =
               "<html>\n"

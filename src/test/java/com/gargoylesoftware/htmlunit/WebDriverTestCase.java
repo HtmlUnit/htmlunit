@@ -103,7 +103,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
     private static List<String> BROWSERS_PROPERTIES_;
-    private static String FF3_BIN_;
     private static String FF3_6_BIN_;
     private static String FF10_BIN_;
     private static String CHROME16_BIN_;
@@ -139,7 +138,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     BROWSERS_PROPERTIES_
                         = Arrays.asList(properties.getProperty("browsers", "hu")
                             .replaceAll(" ", "").toLowerCase().split(","));
-                    FF3_BIN_ = properties.getProperty("ff3.bin");
                     FF3_6_BIN_ = properties.getProperty("ff3.6.bin");
                     FF10_BIN_ = properties.getProperty("ff10.bin");
                     CHROME16_BIN_ = properties.getProperty("chrome16.bin");
@@ -234,10 +232,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             String ffBinary = null;
-            if (getBrowserVersion() == BrowserVersion.FIREFOX_3) {
-                ffBinary = FF3_BIN_;
-            }
-            else if (getBrowserVersion() == BrowserVersion.FIREFOX_3_6) {
+            if (getBrowserVersion() == BrowserVersion.FIREFOX_3_6) {
                 ffBinary = FF3_6_BIN_;
             }
             else if (getBrowserVersion() == BrowserVersion.FIREFOX_10) {

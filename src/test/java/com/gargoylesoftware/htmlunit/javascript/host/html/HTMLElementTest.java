@@ -1777,7 +1777,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "null", "[object]" },
-            FF3 = { "undefined", "undefined" },
             FF3_6 = { "undefined", "undefined" },
             DEFAULT = { "null", "[object HTMLBodyElement]" })
     public void parentElement() throws Exception {
@@ -2517,7 +2516,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "exception", FF3_6 = "exception",
+    @Alerts(FF3_6 = "exception",
             DEFAULT = { "true", "true", "true", "false", "false", "false", "false", "true" })
     public void contains() throws Exception {
         final String html
@@ -2578,8 +2577,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { ">myClass<", "> myId  <" },
-            DEFAULT = { "> myClass <", "> myId  <" })
+    @Alerts({ "> myClass <", "> myId  <" })
     public void attributes_trimmed() throws Exception {
         final String html
             = "<html><head>\n"
@@ -2645,8 +2643,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { "undefined", "undefined" },
-            FF3_6 = { "undefined", "undefined" },
+    @Alerts(FF3_6 = { "undefined", "undefined" },
             DEFAULT = { "null", "[object HTMLDivElement]" },
             IE = { "null", "[object]" })
     public void parentElement2() throws Exception {
@@ -2832,7 +2829,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { "undefined", "true" }, FF3_6 = { "undefined", "true" }, CHROME = { "undefined", "true" },
+    @Alerts(FF3_6 = { "undefined", "true" }, CHROME = { "undefined", "true" },
             DEFAULT = "exception")
     @NotYetImplemented(Browser.FF10)
     public void prototype_innerHTML() throws Exception {

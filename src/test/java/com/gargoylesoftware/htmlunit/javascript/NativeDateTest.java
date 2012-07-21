@@ -101,7 +101,6 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"toISOString: function", "toJSON: function" },
-            FF3 = {"toISOString: undefined", "toJSON: undefined" },
             IE = {"toISOString: undefined", "toJSON: undefined" })
     public void methods_differences() throws Exception {
         final String[] methods = {"toISOString", "toJSON"};

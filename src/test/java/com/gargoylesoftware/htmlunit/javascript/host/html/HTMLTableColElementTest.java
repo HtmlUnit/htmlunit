@@ -78,8 +78,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3 = { "p", "po", ".", "u", "8", "U8" },
-            FF3_6 = { "p", "po", ".", "u", "8", "U8" },
+    @Alerts(FF3_6 = { "p", "po", ".", "u", "8", "U8" },
             FF = { "p", "po", "", "u", "8", "U8" },
             IE = { "", "", "", "u", "8", "U8" })
     public void ch() throws Exception {
@@ -116,8 +115,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3 = { "0", "4", "", "5", "0", "abc" },
-            FF3_6 = { "0", "4", "", "5", "0", "abc" },
+    @Alerts(FF3_6 = { "0", "4", "", "5", "0", "abc" },
             FF = { "0", "4", "", "5.2", "-3", "abc" },
             IE = { "", "", "", "5.2", "-3", "abc" })
     public void chOff() throws Exception {
@@ -196,8 +194,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3 = { "top", "baseline", "3", "middle", "8", "bottom" },
-            FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
+    @Alerts(FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
             FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
     public void vAlign() throws Exception {
@@ -241,8 +238,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3 = { "50", "75%", "foo", "0", "20", "", "80", "40", "abc", "0", "30%", "33" },
-            FF3_6 = { "50", "75%", "foo", "0", "20", "", "80", "40", "abc", "0", "30%", "33" },
+    @Alerts(FF3_6 = { "50", "75%", "foo", "0", "20", "", "80", "40", "abc", "0", "30%", "33" },
             FF = { "50", "75%", "foo", "-7", "20.2", "", "80", "40", "abc", "-10", "30%", "33.3" },
             IE = { "50", "75%", "", "", "20", "", "error", "error", "80", "40", "", "", "30%", "33" })
     public void width() throws Exception {

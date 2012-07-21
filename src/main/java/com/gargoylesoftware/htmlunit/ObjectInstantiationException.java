@@ -30,14 +30,4 @@ public class ObjectInstantiationException extends RuntimeException {
     public ObjectInstantiationException(final String message, final Throwable cause) {
         super(message, cause);
     }
-
-    /**
-     * Returns the exception that had been thrown during instantiation of the object.
-     * @return the cause exception
-     * @deprecated as of 2.9, please use {@link #getCause()} instead
-     */
-    @Deprecated
-    public Throwable getCauseException() {
-        return getCause();
-    }
 }

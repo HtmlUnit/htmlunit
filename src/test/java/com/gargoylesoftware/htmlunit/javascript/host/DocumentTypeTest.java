@@ -78,9 +78,6 @@ public class DocumentTypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "[object]", "greeting,10,null,,undefined,", "greeting,undefined,undefined,undefined,," },
-        FF3 = {
-            "[object DocumentType]", "greeting,10,null,null,null,null",
-            "greeting,MyIdentifier,hello.dtd,,null,null" },
         FF3_6 = {
             "[object DocumentType]", "greeting,10,null,null,null,null",
             "greeting,MyIdentifier,hello.dtd,null,null,null" },

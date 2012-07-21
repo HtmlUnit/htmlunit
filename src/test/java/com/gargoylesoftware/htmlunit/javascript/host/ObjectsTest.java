@@ -47,13 +47,11 @@ public class ObjectsTest extends WebTestCase {
     private static List<String> IE6_;
     private static List<String> IE7_;
     private static List<String> IE8_;
-    private static List<String> FF3_;
     private static List<String> FF3_6_;
 
     private static List<String> IE6_SIMULATED_;
     private static List<String> IE7_SIMULATED_;
     private static List<String> IE8_SIMULATED_;
-    private static List<String> FF3_SIMULATED_;
     private static List<String> FF3_6_SIMULATED_;
 
     private final String name_;
@@ -69,20 +67,16 @@ public class ObjectsTest extends WebTestCase {
         IE6_ = getObjects(BrowserVersion.INTERNET_EXPLORER_6);
         IE7_ = getObjects(BrowserVersion.INTERNET_EXPLORER_7);
         IE8_ = getObjects(BrowserVersion.INTERNET_EXPLORER_8);
-        FF3_ = getObjects(BrowserVersion.FIREFOX_3);
         FF3_6_ = getObjects(BrowserVersion.FIREFOX_3_6);
         Assert.assertEquals(IE6_.size(), IE7_.size());
         Assert.assertEquals(IE6_.size(), IE8_.size());
-        Assert.assertEquals(IE6_.size(), FF3_.size());
         Assert.assertEquals(IE6_.size(), FF3_6_.size());
         IE6_SIMULATED_ = getSimulatedObjects(BrowserVersion.INTERNET_EXPLORER_6);
         IE7_SIMULATED_ = getSimulatedObjects(BrowserVersion.INTERNET_EXPLORER_7);
         IE8_SIMULATED_ = getSimulatedObjects(BrowserVersion.INTERNET_EXPLORER_8);
-        FF3_SIMULATED_ = getSimulatedObjects(BrowserVersion.FIREFOX_3);
         FF3_6_SIMULATED_ = getSimulatedObjects(BrowserVersion.FIREFOX_3_6);
         Assert.assertEquals(IE6_SIMULATED_.size(), IE7_SIMULATED_.size());
         Assert.assertEquals(IE6_SIMULATED_.size(), IE8_SIMULATED_.size());
-        Assert.assertEquals(IE6_SIMULATED_.size(), FF3_SIMULATED_.size());
         Assert.assertEquals(IE6_SIMULATED_.size(), FF3_6_SIMULATED_.size());
         final Collection<Object[]> list = new ArrayList<Object[]>();
         for (final String line : IE6_) {
@@ -90,7 +84,6 @@ public class ObjectsTest extends WebTestCase {
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_6});
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_7});
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
-            list.add(new Object[] {name, BrowserVersion.FIREFOX_3});
             list.add(new Object[] {name, BrowserVersion.FIREFOX_3_6});
         }
         return list;
@@ -138,10 +131,6 @@ public class ObjectsTest extends WebTestCase {
         else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
             realList = IE8_;
             simulatedList = IE8_SIMULATED_;
-        }
-        else if (browserVersion_ == BrowserVersion.FIREFOX_3) {
-            realList = FF3_;
-            simulatedList = FF3_SIMULATED_;
         }
         else if (browserVersion_ == BrowserVersion.FIREFOX_3_6) {
             realList = FF3_6_;

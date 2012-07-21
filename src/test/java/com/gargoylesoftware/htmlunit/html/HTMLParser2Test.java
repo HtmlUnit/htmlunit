@@ -151,9 +151,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF3 = { "<ABBR>", "<ACRONYM>", "<CITE>", "<CODE>",
-                    "<DFN>", "<KBD>", "<LABEL>", "<SAMP>", "<VAR>" },
-            FF3_6 = { "<ABBR>", "<ACRONYM>", "<CITE>", "<CODE>",
+    @Alerts(FF3_6 = { "<ABBR>", "<ACRONYM>", "<CITE>", "<CODE>",
                     "<DFN>", "<KBD>", "<LABEL>", "<SAMP>", "<VAR>" },
             DEFAULT = { }
     )

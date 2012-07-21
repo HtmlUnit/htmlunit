@@ -86,17 +86,6 @@ public class BrowserVersion implements Serializable {
      */
     private static final String PLATFORM_WIN32 = "Win32";
 
-    /**
-     * Firefox 3.0.
-     * @deprecated since HtmlUnit-2.9. This means that no effort will be made to improve
-     * simulation for this browser version until it is definitely removed.
-     */
-    @Deprecated
-    public static final BrowserVersion FIREFOX_3 = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows; en-US)",
-        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.19) Gecko/2010031422 Firefox/3.0.19",
-        3, "FF3", null);
-
     /** Firefox 3.6. */
     public static final BrowserVersion FIREFOX_3_6 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
@@ -141,7 +130,6 @@ public class BrowserVersion implements Serializable {
         INTERNET_EXPLORER_7.initDefaultFeatures();
         INTERNET_EXPLORER_8.initDefaultFeatures();
 
-        FIREFOX_3.initDefaultFeatures();
         FIREFOX_3_6.initDefaultFeatures();
         FIREFOX_10.initDefaultFeatures();
 
@@ -149,7 +137,6 @@ public class BrowserVersion implements Serializable {
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
             "Shockwave Flash", "swf"));
-        FIREFOX_3.getPlugins().add(flash);
         FIREFOX_3_6.getPlugins().add(flash);
         FIREFOX_10.getPlugins().add(flash);
 

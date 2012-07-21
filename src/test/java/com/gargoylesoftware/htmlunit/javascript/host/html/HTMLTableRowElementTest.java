@@ -156,8 +156,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3 = { "p", "po", ".", "u", "8", "U8" },
-            FF3_6 = { "p", "po", ".", "u", "8", "U8" },
+    @Alerts(FF3_6 = { "p", "po", ".", "u", "8", "U8" },
             FF = { "p", "po", "", "u", "8", "U8" },
             IE = { "", "", "", "u", "8", "U8" })
     public void ch() throws Exception {
@@ -189,8 +188,7 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3 = { "0", "4", "", "5", "0", "abc" },
-            FF3_6 = { "0", "4", "", "5", "0", "abc" },
+    @Alerts(FF3_6 = { "0", "4", "", "5", "0", "abc" },
             FF = { "0", "4", "", "5.2", "-3", "abc" },
             IE = { "", "", "", "5.2", "-3", "abc" })
     public void chOff() throws Exception {

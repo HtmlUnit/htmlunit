@@ -39,9 +39,8 @@ public class HtmlTable2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "TBODY->TR->TD->Two", "THEAD->TR->TD->One", "THEAD->TR->TD->Three" },
-            FF3 = { "TBODY->TR->TD->Two", "THEAD->TD->One", "THEAD->TR->TD->Three" },
             FF3_6 = { "TBODY->TR->TD->Two", "THEAD->TD->One", "THEAD->TR->TD->Three" })
-    @NotYetImplemented({ Browser.FF3, Browser.FF3_6 })
+    @NotYetImplemented(Browser.FF3_6)
     public void two_theads() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

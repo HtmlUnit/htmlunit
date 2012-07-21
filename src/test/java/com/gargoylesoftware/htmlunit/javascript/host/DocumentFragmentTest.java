@@ -37,8 +37,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "[object ComputedCSSStyleDeclaration]",
-            FF3_6 = "[object ComputedCSSStyleDeclaration]",
+    @Alerts(FF3_6 = "[object ComputedCSSStyleDeclaration]",
             FF = "[object CSSStyleDeclaration]",
             IE = "exception")
     public void getComputedStyleOnChild() throws Exception {

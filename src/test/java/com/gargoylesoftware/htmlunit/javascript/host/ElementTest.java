@@ -440,12 +440,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 },
-            FF3 = {"[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV",
-                "[object Element],dIv",
-                "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV"
-                },
             DEFAULT = {"[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div",
                 "[object Element],dIv",
@@ -466,12 +460,6 @@ public class ElementTest extends WebDriverTestCase {
                 "createElementNS() is not defined",
                 "[object],undefined",
                 "[object],undefined"
-                },
-            FF3 = {"[object HTMLDivElement],null",
-                "[object HTMLUnknownElement],null",
-                "[object Element],http://www.appcelerator.org",
-                "[object HTMLDivElement],null",
-                "[object HTMLUnknownElement],null"
                 },
             DEFAULT = {"[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
@@ -594,14 +582,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object],undefined",
                 "[object],undefined"
                 },
-            FF3 = {"[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV",
-                "[object HTMLUnknownElement],ANOTHER:DIV",
-                "[object Element],dIv",
-                "[object HTMLDivElement],DIV",
-                "[object HTMLUnknownElement],APP:DIV",
-                "[object HTMLUnknownElement],ANOTHER:DIV"
-                },
             DEFAULT = {"[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div",
                 "[object HTMLUnknownElement],another:div",
@@ -626,14 +606,6 @@ public class ElementTest extends WebDriverTestCase {
                 "[object],undefined",
                 "[object],undefined",
                 "[object],undefined"
-                },
-            FF3 = {"[object HTMLDivElement],null",
-                "[object HTMLUnknownElement],null",
-                "[object HTMLUnknownElement],null",
-                "[object Element],http://www.appcelerator.org",
-                "[object HTMLDivElement],null",
-                "[object HTMLUnknownElement],null",
-                "[object HTMLUnknownElement],null"
                 },
             DEFAULT = {"[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",

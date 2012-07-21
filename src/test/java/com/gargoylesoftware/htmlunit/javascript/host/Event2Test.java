@@ -41,7 +41,6 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF =  { "click [select] [1]", "change [select] [-]", "click [clickMe] [1]" },
             FF3_6 =  { "click [select] [1]", "click [clickMe] [1]", "change [select] [-]" },
-            FF3 =  { "click [select] [1]", "click [clickMe] [1]", "change [select] [-]" },
             IE8 = { "click [select] [1]", "click [clickMe] [1]", "change [select] [-]" },
             IE = { "change [select] [-]", "click [select] [-]" })
     @NotYetImplemented(Browser.IE8)

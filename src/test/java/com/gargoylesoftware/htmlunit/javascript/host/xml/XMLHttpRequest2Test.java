@@ -34,7 +34,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -304,7 +303,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ok", FF3 = "exception", IE = "exception")
+    @Alerts(DEFAULT = "ok", IE = "exception")
     public void sameOriginPolicy() throws Exception {
         sameOriginPolicy(URL_THIRD.toString());
     }
@@ -313,7 +312,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ok", FF3 = "exception")
+    @Alerts(DEFAULT = "ok")
     public void sameOriginPolicy_aboutBlank() throws Exception {
         sameOriginPolicy("about:blank");
     }
@@ -410,8 +409,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "hello", "in timeout" }, FF3 = { "in timeout", "hello" })
-    @NotYetImplemented(Browser.FF3)
+    @Alerts(DEFAULT = { "hello", "in timeout" })
     public void xhrCallbackBeforeTimeout() throws Exception {
         final String html = "<html><head><script>\n"
             + "function wait() {\n"
@@ -600,7 +598,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(FF3 = "exception", IE = "exception", DEFAULT = { "ok", "4" })
+    @Alerts(IE = "exception", DEFAULT = { "ok", "4" })
     public void sameOriginCorsSimple() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

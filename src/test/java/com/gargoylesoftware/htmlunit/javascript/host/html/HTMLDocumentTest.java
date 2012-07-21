@@ -485,9 +485,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(Browser.IE)
-    @Alerts(
-            FF3 = { "undefined,[object HTMLBodyElement]-undefined,[object HTMLBodyElement]-" },
-            FF = { "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-" })
+    @Alerts(FF = { "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-" })
     public void readyState() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -527,8 +525,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3 = {"#ffffff", "#ffffff", "#0000aa", "#0000aa", "#000000", "#000000" },
-            FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
+    @Alerts(FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" })
     @NotYetImplemented({ Browser.FF3_6, Browser.FF10, Browser.CHROME })
@@ -989,7 +986,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", FF3 = { "[object BoxObject]", "true", "true", "true" })
+    @Alerts(DEFAULT = "exception")
     public void getBoxObjectFor() throws Exception {
         final String html = "<html><head><title>Test</title><script>\n"
             + "function doTest() {\n"
@@ -1055,8 +1052,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "undefined",
-            FF = { "3", "div1" },
+    @Alerts(FF = { "3", "div1" },
             IE = "undefined",
             IE8 = { "3", "div1" })
     public void querySelectorAll() throws Exception {
@@ -1134,8 +1130,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "undefined",
-            FF = { "3", "div1" },
+    @Alerts(FF = { "3", "div1" },
             IE = "undefined")
     public void querySelectorAll_quirks() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
@@ -1168,7 +1163,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "undefined", FF = "3", IE = "undefined")
+    @Alerts(FF = "3", IE = "undefined")
     public void querySelectorAll_implicitAttribute() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<script>\n"
@@ -1199,7 +1194,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "div1", "null" }, FF3 = "undefined",
+    @Alerts(DEFAULT = { "div1", "null" },
             IE = "undefined", IE8 = { "div1", "null" })
     public void querySelector() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"

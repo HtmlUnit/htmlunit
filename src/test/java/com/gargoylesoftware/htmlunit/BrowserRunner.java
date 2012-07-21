@@ -63,9 +63,6 @@ public class BrowserRunner extends Suite {
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             final List<String> browsers = WebDriverTestCase.getBrowsersProperties();
-            if (browsers.contains("hu") || browsers.contains("hu-ff3")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, false));
-            }
             if (browsers.contains("hu") || browsers.contains("hu-ff3.6")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3_6, false));
             }
@@ -87,9 +84,6 @@ public class BrowserRunner extends Suite {
             }
 
             if (WebDriverTestCase.class.isAssignableFrom(klass)) {
-                if (browsers.contains("ff3")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3, true));
-                }
                 if (browsers.contains("ff3.6")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_3_6, true));
                 }
@@ -173,9 +167,6 @@ public class BrowserRunner extends Suite {
         /** All versions of Firefox. */
         FF,
 
-        /** Firefox 3. */
-        FF3,
-
         /** Firefox 3.6. */
         FF3_6,
 
@@ -227,9 +218,6 @@ public class BrowserRunner extends Suite {
 
         /** Alerts for any Firefox, it can be overridden by specific FF version. */
         String[] FF() default {EMPTY_DEFAULT };
-
-        /** Alerts for Firefox 3. If not defined, {@link #FF()} is used. */
-        String[] FF3() default {EMPTY_DEFAULT };
 
         /** Alerts for Firefox 3.6. If not defined, {@link #FF()} is used. */
         String[] FF3_6() default {EMPTY_DEFAULT };

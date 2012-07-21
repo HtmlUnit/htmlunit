@@ -1542,8 +1542,7 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { "undefined", "undefined" },
-            DEFAULT = { "loading", "complete" })
+    @Alerts({ "loading", "complete" })
     public void readyState() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

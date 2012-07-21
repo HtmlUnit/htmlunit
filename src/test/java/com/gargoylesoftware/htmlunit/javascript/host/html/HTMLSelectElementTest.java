@@ -144,8 +144,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { "-1", "2", "exception", "2", "exception", "2" },
-            FF = { "-1", "2", "-1", "-1" },
+    @Alerts(FF = { "-1", "2", "-1", "-1" },
             IE = { "-1", "2", "-1", "-1" })
     public void testSetSelectedIndexInvalidValue() throws Exception {
         final String html
@@ -413,8 +412,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "exception",
-            FF3_6 = "exception",
+    @Alerts(FF3_6 = "exception",
             DEFAULT = { "4", "Four", "value4", "Three b", "value3b" })
     public void testAddOptionWithAddMethod_IE() throws Exception {
         final String html
@@ -479,8 +477,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = { "0", "exception" },
-            FF3_6 = { "0", "exception" },
+    @Alerts(FF3_6 = { "0", "exception" },
             DEFAULT = { "0", "1" })
     public void testAddWith1Arg() throws Exception {
         final String html
@@ -567,8 +564,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3 = "exception",
-            FF3_6 = "exception",
+    @Alerts(FF3_6 = "exception",
             DEFAULT = { "2", "Three", "value3" })
     public void optionsRemoveMethod() throws Exception {
         final String html

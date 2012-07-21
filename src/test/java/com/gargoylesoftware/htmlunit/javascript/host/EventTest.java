@@ -207,7 +207,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "true", FF10 = "", FF3 = "error", FF3_6 = "error")
+    @Alerts(IE = "true", FF10 = "", FF3_6 = "error")
     public void testAddEventListener_HandlerNull() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -654,8 +654,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.FF3, Browser.FF3_6 })
-    @Alerts(DEFAULT = "null", FF3 = "undefined", FF3_6 = "undefined")
+    @NotYetImplemented(Browser.FF3_6)
+    @Alerts(DEFAULT = "null", FF3_6 = "undefined")
     public void testNullEventHandler() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
