@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.11" date="???" description="Bugfixes">
+        <release version="2.11" date="???" description="Bugfixes, Java 6">
             <action type="remove" dev="asashour">
                 Remove deprecated BrowserVersion.FIREFOX_3
             </action>
