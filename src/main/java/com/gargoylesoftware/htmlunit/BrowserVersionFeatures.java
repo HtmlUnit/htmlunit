@@ -649,11 +649,14 @@ public enum BrowserVersionFeatures {
     /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
     JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB,
 
-    /** Javascript function getElementById calls getElementByName if nothing found by id. */
+    /** Javascript function getElementById calls getElementByName if nothing found by id, only in quirks mode. */
     JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE,
 
     /** Javascript function getElementById compares the id's case sensitive. */
     JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
+
+    /** Indicates that comment nodes should be treated similar to elements, e.g. getElementsByTagName(). */
+    HTMLCOLLECTION_COMMENT_LIKE_ELEMENT,
 
     /** Indicates that objects with prototype property available in window scope; Firefox does this. */
     JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,

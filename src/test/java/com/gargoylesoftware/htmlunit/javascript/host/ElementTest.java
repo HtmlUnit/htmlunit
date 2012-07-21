@@ -881,13 +881,27 @@ public class ElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = "function", IE = "exception")
     @Test
+    @Alerts(DEFAULT = "function", IE = "exception")
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
             + "  alert(typeof Element.prototype.getBoundingClientRect);\n"
             + "} catch (e) { alert('exception');}\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0", IE = "1")
+    public void commendLikeElement() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='myId'><!-- --></div>\n"
+            + "<script>\n"
+            + "  alert(myId.getElementsByTagName('*').length);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }

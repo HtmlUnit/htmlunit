@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
+import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -239,7 +240,10 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
             return response;
         }
         for (final DomNode node : getCandidates()) {
-            if (node instanceof DomElement && isMatching(node)) {
+            final boolean commentIncluded = node instanceof DomComment
+                    && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_LIKE_ELEMENT);
+
+            if ((node instanceof DomElement || commentIncluded) && isMatching(node)) {
                 response.add(node);
             }
         }
