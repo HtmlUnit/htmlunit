@@ -119,4 +119,29 @@ public class DocumentTypeTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "[object HTMLCommentElement", FF = "[object DocumentType]")
+    @NotYetImplemented
+    public void html_previousSibling() throws Exception {
+        final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
+            + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+            + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n"
+            + "<head>\n"
+            + "  <title>Test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.body.parentElement.previousSibling.data);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

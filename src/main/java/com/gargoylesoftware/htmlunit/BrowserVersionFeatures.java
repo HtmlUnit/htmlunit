@@ -469,9 +469,6 @@ public enum BrowserVersionFeatures {
     /** */
     HTMLELEMENT_TRIM_CLASS_ATTRIBUTE,
 
-    /** HTMLGenericElement instead of HTMLUnknownElemen. */
-    HTML_GENERIC_ELEMENT,
-
     /**
      * Indicates if a selfclosing &lt;iframe/&gt; tag should be considered as an opening tag.
      **/
@@ -515,6 +512,9 @@ public enum BrowserVersionFeatures {
 
     /** Have a default value of body.link, body.vLink, etc. */
     HTML_BODY_COLOR,
+
+    /** HTMLGenericElement instead of HTMLUnknownElement. */
+    HTML_GENERIC_ELEMENT,
 
     /** Indicates that "host" HTTP header should be the first. */
     HTTP_HEADER_HOST_FIRST,
