@@ -56,6 +56,10 @@
             <browser name="Internet Explorer"/>
         </property>
         <property name="id" readable="true" writable="true"/>
+        <property name="innerText" readable="true" writable="true">
+            <browser name="Internet Explorer"/>
+            <browser name="Chrome"/>
+        </property>
         <property name="lang" readable="true" writable="true"/>
         <property name="language" readable="true" writable="true">
             <browser name="Internet Explorer"/>
@@ -352,6 +356,10 @@
         </property>
         <property name="id" readable="true" writable="false">
             <browser name="Internet Explorer"/>
+        </property>
+        <property name="innerText" readable="true" writable="true">
+            <browser name="Internet Explorer"/>
+            <browser name="Chrome"/>
         </property>
         <property name="tagName" readable="true" writable="false">
             <browser name="Internet Explorer"/>
@@ -2731,10 +2739,6 @@
         <constant name="DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC"><browser name="Firefox"/></constant>
         <property name="childNodes" readable="true" writable="false"/>
         <property name="firstChild" readable="true" writable="false"/>
-        <property name="innerText" readable="true" writable="true">
-            <browser name="Internet Explorer"/>
-            <browser name="Chrome"/>
-        </property>
         <property name="lastChild" readable="true" writable="false"/>
         <property name="localName" readable="true" writable="false">
             <browser name="Firefox"/>

@@ -9,6 +9,9 @@
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, initial WebSocket support">
             <action type="fix" dev="asashour">
+                JavaScript: Node should not define '.innerText'.
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: comments are elements, most properties implemented (IE8 only).
             </action>
             <action type="fix" dev="asashour">

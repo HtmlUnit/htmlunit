@@ -897,12 +897,56 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0", IE = "1")
-    public void commendLikeElement() throws Exception {
+    public void commentIsElement() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myId'><!-- --></div>\n"
             + "<script>\n"
             + "  alert(myId.getElementsByTagName('*').length);\n"
             + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Node should not have 'innerText', however HTMLElement should have.
+     * The below case checks if Element (which is Node) doesn't define it.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void nodeHasUndefinedInnerText() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var data = \"<?xml version='1.0' encoding='UTF-8'?>\\\n"
+            + "        <dashboard> \\\n"
+            + "          <locations class='foo'> \\\n"
+            + "            <location for='bar' checked='different'> \\\n"
+            + "              <infowindowtab normal='ab' mixedCase='yes'> \\\n"
+            + "                <tab title='Location'><![CDATA[blabla]]></tab> \\\n"
+            + "                <tab title='Users'><![CDATA[blublu]]></tab> \\\n"
+            + "              </infowindowtab> \\\n"
+            + "            </location> \\\n"
+            + "          </locations> \\\n"
+            + "        </dashboard>\";\n"
+            + "    var xml, tmp;\n"
+            + "    try {\n"
+            + "      if ( window.DOMParser ) {\n"
+            + "        tmp = new DOMParser();\n"
+            + "        xml = tmp.parseFromString( data , 'text/xml' );\n"
+            + "      } else { // IE\n"
+            + "        xml = new ActiveXObject( 'Microsoft.XMLDOM' );\n"
+            + "        xml.async = 'false';\n"
+            + "        xml.loadXML( data );\n"
+            + "      }\n"
+            + "    } catch( e ) {\n"
+            + "      xml = undefined;\n"
+            + "    }\n"
+            + "\n"
+            + "    alert(xml.getElementsByTagName('tab')[0].innerText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'/></html>";
         loadPageWithAlerts2(html);
     }
 }

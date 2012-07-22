@@ -90,7 +90,23 @@ public final class Comment extends CharacterDataImpl {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429.aspx">MSDN Documentation</a>
      * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
      */
-    public Object jsxFunction_getAttribute(String attributeName, final Integer flags) {
+    public Object jsxFunction_getAttribute(final String attributeName, final Integer flags) {
         return null;
+    }
+
+    /**
+     * Gets the innerText attribute.
+     * @return the innerText
+     */
+    public String jsxGet_innerText() {
+        return "";
+    }
+
+    /**
+     * Currently does nothing.
+     * @param value the new value for the contents of this node
+     */
+    public void jsxSet_innerText(final String value) {
+        // nothing
     }
 }

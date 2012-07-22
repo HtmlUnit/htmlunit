@@ -306,7 +306,6 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery(selector, xml).text(str) - Loaded via XML document (0, 2, 2)")
-    @NotYetImplemented({ IE6, IE7, IE8 })
     @Tries(3)
     public void test_18() throws Exception {
         runTest(18);
