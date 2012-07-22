@@ -359,6 +359,12 @@
         <property name="text" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
+        <function name="getAttribute">
+            <browser name="Internet Explorer"/>
+        </function>
+        <function name="getAttributeNode">
+            <browser name="Internet Explorer"/>
+        </function>
     </class>
 
     <class extends="CSSStyleDeclaration" classname="com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration"

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-
-
 /**
  * A JavaScript object for a Comment.
  *
@@ -73,5 +71,26 @@ public final class Comment extends CharacterDataImpl {
      */
     public Object jsxGet_document() {
         return getWindow().jsxGet_document();
+    }
+
+    /**
+     * Gets the attribute node for the specified attribute.
+     * @param attributeName the name of the attribute to retrieve
+     * @return the attribute node for the specified attribute
+     */
+    public Object jsxFunction_getAttributeNode(final String attributeName) {
+        return null;
+    }
+
+    /**
+     * Returns the value of the specified attribute.
+     * @param attributeName attribute name
+     * @param flags IE-specific flags (see the MSDN documentation for more info)
+     * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429.aspx">MSDN Documentation</a>
+     * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
+     */
+    public Object jsxFunction_getAttribute(String attributeName, final Integer flags) {
+        return null;
     }
 }
