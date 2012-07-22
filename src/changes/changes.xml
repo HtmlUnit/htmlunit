@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, initial WebSocket support">
+            <action type="update" dev="asashour">
+                JavaScript: HTMLGenericElement instead of HTMLUnknownElement (IE only).
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: object default value to contain the name, in strict mode (IE only).
             </action>

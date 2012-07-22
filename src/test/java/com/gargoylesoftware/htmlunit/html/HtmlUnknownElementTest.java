@@ -49,4 +49,26 @@ public class HtmlUnknownElementTest extends WebTestCase {
         final HtmlPage page = loadPageWithAlerts(html);
         assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "[object HTMLUnknownElement]", IE = "[object HTMLGenericElement]")
+    public void simpleScriptable_strict() throws Exception {
+        final String header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
+                + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n";
+        final String html = header + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<xml id='myId'/>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
+    }
 }

@@ -47,4 +47,16 @@ public class HTMLUnknownElement extends HTMLElement {
         }
         return super.jsxGet_nodeName();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        if (getWindow().getWebWindow() != null
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_GENERIC_ELEMENT)) {
+            return "HTMLGenericElement";
+        }
+        return super.getClassName();
+    }
 }

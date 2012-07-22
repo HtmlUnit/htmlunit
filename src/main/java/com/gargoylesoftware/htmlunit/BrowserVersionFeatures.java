@@ -469,6 +469,9 @@ public enum BrowserVersionFeatures {
     /** */
     HTMLELEMENT_TRIM_CLASS_ATTRIBUTE,
 
+    /** HTMLGenericElement instead of HTMLUnknownElemen. */
+    HTML_GENERIC_ELEMENT,
+
     /**
      * Indicates if a selfclosing &lt;iframe/&gt; tag should be considered as an opening tag.
      **/

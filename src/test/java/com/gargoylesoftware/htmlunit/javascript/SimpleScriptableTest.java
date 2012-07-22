@@ -480,7 +480,7 @@ public class SimpleScriptableTest extends WebTestCase {
         getDefaultValue(true);
     }
 
-    private void getDefaultValue(boolean xhtml) throws Exception {
+    private void getDefaultValue(final boolean xhtml) throws Exception {
         final String header = xhtml ? "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
                 + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" : "";
         final String html
