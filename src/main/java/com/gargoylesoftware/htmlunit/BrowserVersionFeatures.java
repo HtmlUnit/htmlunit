@@ -112,6 +112,9 @@ public enum BrowserVersionFeatures {
     /** */
     DOCTYPE_4_0_TRANSITIONAL_STANDARDS,
 
+    /** DOCTYPE is a Comment from JavaScript perspective. */
+    DOCTYPE_IS_COMMENT,
+
     /** IE removes all child text nodes, but FF preserves the first. */
     DOM_NORMALIZE_REMOVE_CHILDREN,
 
@@ -512,6 +515,9 @@ public enum BrowserVersionFeatures {
 
     /** Have a default value of body.link, body.vLink, etc. */
     HTML_BODY_COLOR,
+
+    /** HTMLCommentElement instead of Comment. */
+    HTML_COMMENT_ELEMENT,
 
     /** HTMLGenericElement instead of HTMLUnknownElement. */
     HTML_GENERIC_ELEMENT,

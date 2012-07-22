@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+
 /**
  * A JavaScript object for a Comment.
  *
@@ -108,5 +110,17 @@ public final class Comment extends CharacterDataImpl {
      */
     public void jsxSet_innerText(final String value) {
         // nothing
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getClassName() {
+        if (getWindow().getWebWindow() != null
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_COMMENT_ELEMENT)) {
+            return "HTMLCommentElement";
+        }
+        return super.getClassName();
     }
 }

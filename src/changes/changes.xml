@@ -8,8 +8,12 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, initial WebSocket support">
+            <action type="fix" dev="asashour">
+                JavaScript: DocType is handled as Comment (IE only).
+            </action>
             <action type="update" dev="asashour">
-                JavaScript: HTMLGenericElement instead of HTMLUnknownElement (IE only).
+                JavaScript: HTMLGenericElement instead of HTMLUnknownElement,
+                and HTMLCommentElement instead of Comment (IE only).
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: object default value to contain the name, in strict mode (IE only).
