@@ -27,10 +27,12 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -276,8 +278,11 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         if (String.class.equals(hint) || hint == null) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OBJECT_ONLY)) {
-                return "[object]"; // the super helpful IE solution
+            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OBJECT_IN_QUIRKS_MODE)) {
+                final Page page = getWindow().getWebWindow().getEnclosedPage();
+                if (page instanceof HtmlPage && ((HtmlPage) page).isQuirksMode()) {
+                    return "[object]";
+                }
             }
             return "[object " + getClassName() + "]";
         }

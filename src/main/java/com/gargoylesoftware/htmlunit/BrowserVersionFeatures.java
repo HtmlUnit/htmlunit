@@ -689,8 +689,8 @@ public enum BrowserVersionFeatures {
      */
     JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
 
-    /** Always "[object]". */
-    JS_OBJECT_ONLY,
+    /** "[object]" in quirks mode. */
+    JS_OBJECT_IN_QUIRKS_MODE,
 
     /** Evaluates to "[object Element]". */
     JS_OBJECT_PREFIX,

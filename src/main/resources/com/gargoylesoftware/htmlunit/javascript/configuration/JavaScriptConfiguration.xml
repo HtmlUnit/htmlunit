@@ -359,7 +359,6 @@
         </property>
         <property name="innerText" readable="true" writable="true">
             <browser name="Internet Explorer"/>
-            <browser name="Chrome"/>
         </property>
         <property name="tagName" readable="true" writable="false">
             <browser name="Internet Explorer"/>

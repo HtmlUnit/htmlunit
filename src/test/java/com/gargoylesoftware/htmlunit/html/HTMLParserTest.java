@@ -185,9 +185,11 @@ public class HTMLParserTest extends WebServerTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(IE = {"1", "3", "[object]", "[object]", "[object]", "[object]" },
+    @Alerts(IE = {"1", "3", "[object HTMLScriptElement]",
+                "[object HTMLGenericElement]", "[object HTMLGenericElement]", "[object HTMLFormElement]" },
             FF = {"1", "3", "[object HTMLScriptElement]",
                 "[object HTMLUnknownElement]", "[object HTMLUnknownElement]", "[object HTMLFormElement]" })
+    @NotYetImplemented(Browser.IE)
     public void namespace() throws Exception {
         final String html
             = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"

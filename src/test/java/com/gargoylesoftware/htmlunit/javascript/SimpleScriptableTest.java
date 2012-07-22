@@ -461,4 +461,35 @@ public class SimpleScriptableTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "[object]", FF = "[object HTMLDivElement]")
+    public void getDefaultValue() throws Exception {
+        getDefaultValue(false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object HTMLDivElement]")
+    public void getDefaultValue_xhtml() throws Exception {
+        getDefaultValue(true);
+    }
+
+    private void getDefaultValue(boolean xhtml) throws Exception {
+        final String header = xhtml ? "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
+                + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" : "";
+        final String html
+            = header + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "    alert(document.createElement('div'));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts(html);
+    }
 }
