@@ -9,7 +9,7 @@
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, initial WebSocket support">
             <action type="fix" dev="asashour">
-                JavaScript: HTMLCollection treats comments as elements (IE8 only).
+                JavaScript: comments are elements, most properties implemented (IE8 only).
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: document.getElementById() should not search by name, with strict mode (IE8 only).

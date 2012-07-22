@@ -344,6 +344,21 @@
 
     <class extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Comment"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomComment">
+        <property name="className" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
+        <property name="document" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
+        <property name="id" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
+        <property name="tagName" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
+        <property name="text" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
     </class>
 
     <class extends="CSSStyleDeclaration" classname="com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration"

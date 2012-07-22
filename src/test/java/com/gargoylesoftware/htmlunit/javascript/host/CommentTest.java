@@ -82,4 +82,61 @@ public class CommentTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    private void property(final String property) throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<div id='it'><!--abcdefg-->after</div>"
+            + "<script>\n"
+            + "var node = document.getElementById('it');\n"
+            + "alert(node.firstChild." + property + ");\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined", IE = "")
+    public void id() throws Exception {
+        property("id");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined", IE = "")
+    public void className() throws Exception {
+        property("className");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined", IE = "!")
+    public void tagName() throws Exception {
+        property("tagName");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined", IE = "<!--abcdefg-->")
+    public void text() throws Exception {
+        property("text");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined", IE = "[object]")
+    public void document() throws Exception {
+        property("document");
+    }
+
 }

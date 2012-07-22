@@ -448,6 +448,9 @@ public enum BrowserVersionFeatures {
     /** */
     HTMLABBREVIATED,
 
+    /** Indicates that comment nodes should be treated similar to elements, e.g. getElementsByTagName(). */
+    HTMLCOLLECTION_COMMENT_IS_ELEMENT,
+
     /** Allows multiple elements with the same 'id'. */
     HTMLCOLLECTION_IDENTICAL_IDS,
 
@@ -654,9 +657,6 @@ public enum BrowserVersionFeatures {
 
     /** Javascript function getElementById compares the id's case sensitive. */
     JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
-
-    /** Indicates that comment nodes should be treated similar to elements, e.g. getElementsByTagName(). */
-    HTMLCOLLECTION_COMMENT_LIKE_ELEMENT,
 
     /** Indicates that objects with prototype property available in window scope; Firefox does this. */
     JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,

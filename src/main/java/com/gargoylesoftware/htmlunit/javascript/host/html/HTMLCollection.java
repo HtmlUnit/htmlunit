@@ -241,7 +241,7 @@ public class HTMLCollection extends SimpleScriptable implements Function, NodeLi
         }
         for (final DomNode node : getCandidates()) {
             final boolean commentIncluded = node instanceof DomComment
-                    && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_LIKE_ELEMENT);
+                    && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT);
 
             if ((node instanceof DomElement || commentIncluded) && isMatching(node)) {
                 response.add(node);

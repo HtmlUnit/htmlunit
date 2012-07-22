@@ -1505,7 +1505,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT="null", IE = "")
+    @Alerts(DEFAULT = "null", IE = "")
     public void getElementById_quirks() throws Exception {
         getElementById_strict(false);
     }

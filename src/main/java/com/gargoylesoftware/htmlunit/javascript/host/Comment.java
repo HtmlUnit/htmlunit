@@ -14,17 +14,64 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+
+
 /**
  * A JavaScript object for a Comment.
+ *
+ * JavaScript: in IE, Comment is Element, but in FF: Comment is CharacterDataImpl.
+ *
+ * However, in DOM, Comment is CharacterDataImpl.
  *
  * @version $Revision$
  * @author Mirko Friedenhagen
  * @author Ahmed Ashour
  */
 public final class Comment extends CharacterDataImpl {
+
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */
     public Comment() {
+    }
+
+    /**
+     * Returns the element ID.
+     * @return the ID of this element
+     */
+    public String jsxGet_id() {
+        return "";
+    }
+
+    /**
+     * Returns the class defined for this element.
+     * @return the class name
+     */
+    public Object jsxGet_className() {
+        return "";
+    }
+
+    /**
+     * Returns the tag name of this element.
+     * @return the tag name
+     */
+    public Object jsxGet_tagName() {
+        return "!";
+    }
+
+    /**
+     * Returns the text of this element.
+     * @return the text
+     */
+    public String jsxGet_text() {
+        return "<!--" + jsxGet_data() + "-->";
+    }
+
+    /**
+     * Returns the document of this element.
+     * @return the document
+     */
+    public Object jsxGet_document() {
+        return getWindow().jsxGet_document();
     }
 }
