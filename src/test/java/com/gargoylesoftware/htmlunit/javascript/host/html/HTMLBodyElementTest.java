@@ -150,7 +150,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "http://www.foo.com/blah.gif", "§§URL§§blah.gif" },
+    @Alerts(FF3_6 = {"", "http://www.foo.com/blah.gif", "§§URL§§blah.gif" },
             DEFAULT = {"", "http://www.foo.com/blah.gif", "blah.gif" })
     public void background() throws Exception {
         final String html =
