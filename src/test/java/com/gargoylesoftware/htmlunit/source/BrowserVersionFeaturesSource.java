@@ -114,7 +114,8 @@ public final class BrowserVersionFeaturesSource {
         generate(folder, ".isIE()", new BrowserVersion[] {
             BrowserVersion.INTERNET_EXPLORER_6, BrowserVersion.INTERNET_EXPLORER_7,
             BrowserVersion.INTERNET_EXPLORER_8 });
-        generate(folder, ".isFirefox()", new BrowserVersion[] {BrowserVersion.FIREFOX_3_6});
+        generate(folder, ".isFirefox()", new BrowserVersion[] {
+            BrowserVersion.FIREFOX_3_6, BrowserVersion.FIREFOX_10});
     }
 
     private void generate(final File dir, final String toSearchFor, final BrowserVersion[] versions)

@@ -68,31 +68,37 @@ public class PropertiesTest extends WebTestCase {
     private static List<String> IE7_;
     private static List<String> IE8_;
     private static List<String> FF3_6_;
+    private static List<String> FF10_;
 
     private static List<String> IE6_SIMULATED_;
     private static List<String> IE7_SIMULATED_;
     private static List<String> IE8_SIMULATED_;
     private static List<String> FF3_6_SIMULATED_;
+    private static List<String> FF10_SIMULATED_;
 
     private static DefaultCategoryDataset CATEGORY_DATASET_IE6_ = new DefaultCategoryDataset();
     private static DefaultCategoryDataset CATEGORY_DATASET_IE7_ = new DefaultCategoryDataset();
     private static DefaultCategoryDataset CATEGORY_DATASET_IE8_ = new DefaultCategoryDataset();
     private static DefaultCategoryDataset CATEGORY_DATASET_FF3_6_ = new DefaultCategoryDataset();
+    private static DefaultCategoryDataset CATEGORY_DATASET_FF10_ = new DefaultCategoryDataset();
 
     private static StringBuilder IE6_HTML_ = new StringBuilder();
     private static StringBuilder IE7_HTML_ = new StringBuilder();
     private static StringBuilder IE8_HTML_ = new StringBuilder();
     private static StringBuilder FF3_6_HTML_ = new StringBuilder();
+    private static StringBuilder FF10_HTML_ = new StringBuilder();
 
     private static MutableInt IE6_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt IE7_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt IE8_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt FF3_6_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
+    private static MutableInt FF10_ACTUAL_PROPERTY_COUNT_ = new MutableInt();
 
     private static MutableInt IE6_REMAINING_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt IE7_REMAINING_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt IE8_REMAINING_PROPERTY_COUNT_ = new MutableInt();
     private static MutableInt FF3_6_REMAINING_PROPERTY_COUNT_ = new MutableInt();
+    private static MutableInt FF10_REMAINING_PROPERTY_COUNT_ = new MutableInt();
 
     private final String name_;
     private final BrowserVersion browserVersion_;
@@ -108,16 +114,20 @@ public class PropertiesTest extends WebTestCase {
         IE7_ = getProperties(BrowserVersion.INTERNET_EXPLORER_7);
         IE8_ = getProperties(BrowserVersion.INTERNET_EXPLORER_8);
         FF3_6_ = getProperties(BrowserVersion.FIREFOX_3_6);
+        FF10_ = getProperties(BrowserVersion.FIREFOX_10);
         Assert.assertEquals(IE6_.size(), IE7_.size());
         Assert.assertEquals(IE6_.size(), IE8_.size());
         Assert.assertEquals(IE6_.size(), FF3_6_.size());
+        Assert.assertEquals(IE6_.size(), FF10_.size());
         IE6_SIMULATED_ = getSimulatedProperties(BrowserVersion.INTERNET_EXPLORER_6);
         IE7_SIMULATED_ = getSimulatedProperties(BrowserVersion.INTERNET_EXPLORER_7);
         IE8_SIMULATED_ = getSimulatedProperties(BrowserVersion.INTERNET_EXPLORER_8);
         FF3_6_SIMULATED_ = getSimulatedProperties(BrowserVersion.FIREFOX_3_6);
+        FF10_SIMULATED_ = getSimulatedProperties(BrowserVersion.FIREFOX_10);
         Assert.assertEquals(IE6_SIMULATED_.size(), IE7_SIMULATED_.size());
         Assert.assertEquals(IE6_SIMULATED_.size(), IE8_SIMULATED_.size());
         Assert.assertEquals(IE6_SIMULATED_.size(), FF3_6_SIMULATED_.size());
+        Assert.assertEquals(IE6_SIMULATED_.size(), FF10_SIMULATED_.size());
         final Collection<Object[]> list = new ArrayList<Object[]>();
         for (final String line : IE6_) {
             final String name = line.substring(0, line.indexOf(':'));
@@ -125,6 +135,7 @@ public class PropertiesTest extends WebTestCase {
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_7});
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
             list.add(new Object[] {name, BrowserVersion.FIREFOX_3_6});
+            list.add(new Object[] {name, BrowserVersion.FIREFOX_10});
         }
         return list;
     }
@@ -196,6 +207,14 @@ public class PropertiesTest extends WebTestCase {
             html = FF3_6_HTML_;
             actualPropertyCount = FF3_6_ACTUAL_PROPERTY_COUNT_;
             remainingPropertyCount = FF3_6_REMAINING_PROPERTY_COUNT_;
+        }
+        else if (browserVersion_ == BrowserVersion.FIREFOX_10) {
+            realList = FF10_;
+            simulatedList = FF10_SIMULATED_;
+            dataset = CATEGORY_DATASET_FF10_;
+            html = FF10_HTML_;
+            actualPropertyCount = FF10_ACTUAL_PROPERTY_COUNT_;
+            remainingPropertyCount = FF10_REMAINING_PROPERTY_COUNT_;
         }
         else {
             fail("Unknown BrowserVersion " + browserVersion_);
