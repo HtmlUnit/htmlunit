@@ -476,7 +476,7 @@ public class Node extends SimpleScriptable {
     private static Boolean isXMLSpaceDefault(DomNode node) {
         for ( ; node instanceof DomElement; node = node.getParentNode()) {
             final String value = ((DomElement) node).getAttribute("xml:space");
-            if (value.length() != 0) {
+            if (!value.isEmpty()) {
                 if ("default".equals(value)) {
                     return Boolean.TRUE;
                 }

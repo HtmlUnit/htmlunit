@@ -496,7 +496,7 @@ class DefaultElementFactory implements IElementFactory {
                 // browsers consider only first attribute (ex: <div id='foo' id='something'>...</div>)
                 if (!attributeMap.containsKey(qName)) {
                     String namespaceURI = attributes.getURI(i);
-                    if (namespaceURI != null && namespaceURI.length() == 0) {
+                    if (namespaceURI != null && namespaceURI.isEmpty()) {
                         namespaceURI = null;
                     }
                     HtmlElement.addAttributeToMap(page, attributeMap, namespaceURI,

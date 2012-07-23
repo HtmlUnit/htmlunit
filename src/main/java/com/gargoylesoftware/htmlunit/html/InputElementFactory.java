@@ -85,7 +85,7 @@ public final class InputElementFactory implements IElementFactory {
         }
 
         final HtmlInput result;
-        if (type.length() == 0) {
+        if (type.isEmpty()) {
             // This not an illegal value, as it defaults to "text"
             // cf http://www.w3.org/TR/REC-html40/interact/forms.html#adef-type-INPUT
             // and the common browsers seem to treat it as a "text" input so we will as well.

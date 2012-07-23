@@ -191,7 +191,7 @@ public class HtmlScript extends HtmlElement {
         if (namespaceURI == null && "src".equals(qualifiedName)) {
             final boolean alwaysReexecute = getPage().getWebClient().getBrowserVersion().
                 hasFeature(BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
-            if (alwaysReexecute || (oldValue.length() == 0 && getFirstChild() == null)) {
+            if (alwaysReexecute || (oldValue.isEmpty() && getFirstChild() == null)) {
                 // Always execute if IE;
                 // if FF, only execute if the "src" attribute
                 // was undefined and there was no inline code.

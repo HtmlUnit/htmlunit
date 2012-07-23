@@ -174,7 +174,7 @@ class XPathAdapter {
             }
             String msg = e.getMessage();
 
-            if (msg == null || msg.length() == 0) {
+            if (msg == null || msg.isEmpty()) {
                 msg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_XPATH_ERROR, null);
             }
             final TransformerException te = new TransformerException(msg, mainExp_, e);

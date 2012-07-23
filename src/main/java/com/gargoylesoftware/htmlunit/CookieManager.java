@@ -105,7 +105,7 @@ public class CookieManager implements Serializable {
 
         // URLs like "about:blank" don't have cookies and we need to catch these
         // cases here before HttpClient complains
-        if (host.length() == 0) {
+        if (host.isEmpty()) {
             return Collections.emptySet();
         }
 

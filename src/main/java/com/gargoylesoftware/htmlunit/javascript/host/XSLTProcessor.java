@@ -197,7 +197,7 @@ public class XSLTProcessor extends SimpleScriptable {
 
     private String getQualifiedName(final String namespaceURI, final String localName) {
         final String qualifiedName;
-        if (namespaceURI != null && namespaceURI.length() != 0 && !"null".equals(namespaceURI)) {
+        if (namespaceURI != null && !namespaceURI.isEmpty() && !"null".equals(namespaceURI)) {
             qualifiedName = '{' + namespaceURI + '}' + localName;
         }
         else {

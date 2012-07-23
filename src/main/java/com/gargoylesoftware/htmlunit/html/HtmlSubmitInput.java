@@ -122,7 +122,7 @@ public class HtmlSubmitInput extends HtmlInput {
      */
     @Override
     public NameValuePair[] getSubmitKeyValuePairs() {
-        if (getNameAttribute().length() != 0 && !hasAttribute("value")) {
+        if (!getNameAttribute().isEmpty() && !hasAttribute("value")) {
             return new NameValuePair[]{new NameValuePair(getNameAttribute(), DEFAULT_VALUE)};
         }
         return super.getSubmitKeyValuePairs();

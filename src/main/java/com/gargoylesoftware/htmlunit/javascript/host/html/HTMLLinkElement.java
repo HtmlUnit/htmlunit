@@ -56,7 +56,7 @@ public class HTMLLinkElement extends HTMLElement {
     public String jsxGet_href() {
         final HtmlLink link = (HtmlLink) getDomNodeOrDie();
         final String href = link.getHrefAttribute();
-        if (href.length() == 0) {
+        if (href.isEmpty()) {
             return href;
         }
         try {

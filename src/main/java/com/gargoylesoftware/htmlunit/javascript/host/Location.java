@@ -272,7 +272,7 @@ public class Location extends SimpleScriptable {
     }
 
     private String getHash(final boolean encoded) {
-        if (hash_ == null || hash_.length() == 0) {
+        if (hash_ == null || hash_.isEmpty()) {
             return null;
         }
         if (encoded) {

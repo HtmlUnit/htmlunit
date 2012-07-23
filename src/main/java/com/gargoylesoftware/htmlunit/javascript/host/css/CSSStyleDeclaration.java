@@ -985,7 +985,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         htmlElement.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_CLIENT_CAPS);
         htmlElement.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_HOMEPAGE);
         htmlElement.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_DOWNLOAD);
-        if (behavior.length() != 0) {
+        if (!behavior.isEmpty()) {
             try {
                 final Object[] url = URL_FORMAT.parse(behavior);
                 if (url.length > 0) {
@@ -1041,7 +1041,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         String value = getStyleAttribute(BORDER_BOTTOM_COLOR, style);
-        if (value.length() == 0) {
+        if (value.isEmpty()) {
             value = findColor(getStyleAttribute(BORDER_BOTTOM, style));
             if (value == null) {
                 value = findColor(getStyleAttribute(BORDER, style));
@@ -1072,7 +1072,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         String value = getStyleAttribute(BORDER_BOTTOM_STYLE, style);
-        if (value.length() == 0) {
+        if (value.isEmpty()) {
             value = findBorderStyle(getStyleAttribute(BORDER_BOTTOM, style));
             if (value == null) {
                 value = findBorderStyle(getStyleAttribute(BORDER, style));
@@ -1167,7 +1167,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         String value = getStyleAttribute(BORDER_LEFT_COLOR, style);
-        if (value.length() == 0) {
+        if (value.isEmpty()) {
             value = findColor(getStyleAttribute(BORDER_LEFT, style));
             if (value == null) {
                 value = findColor(getStyleAttribute(BORDER, style));
@@ -1198,7 +1198,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         String value = getStyleAttribute(BORDER_LEFT_STYLE, style);
-        if (value.length() == 0) {
+        if (value.isEmpty()) {
             value = findBorderStyle(getStyleAttribute(BORDER_LEFT, style));
             if (value == null) {
                 value = findBorderStyle(getStyleAttribute(BORDER, style));
@@ -1239,7 +1239,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         String value = getStyleAttribute(BORDER + "-" + side + "-width", style);
-        if (value.length() == 0) {
+        if (value.isEmpty()) {
             value = findBorderWidth(getStyleAttribute(BORDER + "-" + side, style));
             if (value == null) {
                 final String borderWidth = getStyleAttribute(BORDER_WIDTH, style);
@@ -1295,7 +1295,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         String value = getStyleAttribute(BORDER_RIGHT_COLOR, style);
-        if (value.length() == 0) {
+        if (value.isEmpty()) {
             value = findColor(getStyleAttribute(BORDER_RIGHT, style));
             if (value == null) {
                 value = findColor(getStyleAttribute(BORDER, style));
@@ -1326,7 +1326,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         String value = getStyleAttribute(BORDER_RIGHT_STYLE, style);
-        if (value.length() == 0) {
+        if (value.isEmpty()) {
             value = findBorderStyle(getStyleAttribute(BORDER_RIGHT, style));
             if (value == null) {
                 value = findBorderStyle(getStyleAttribute(BORDER, style));
@@ -1421,7 +1421,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         String value = getStyleAttribute(BORDER_TOP_COLOR, style);
-        if (value.length() == 0) {
+        if (value.isEmpty()) {
             value = findColor(getStyleAttribute(BORDER_TOP, style));
             if (value == null) {
                 value = findColor(getStyleAttribute(BORDER, style));
@@ -1452,7 +1452,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         String value = getStyleAttribute(BORDER_TOP_STYLE, style);
-        if (value.length() == 0) {
+        if (value.isEmpty()) {
             value = findBorderStyle(getStyleAttribute(BORDER_TOP, style));
             if (value == null) {
                 value = findBorderStyle(getStyleAttribute(BORDER, style));
@@ -3478,7 +3478,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return opacity;
         }
 
-        if (opacity == null || opacity.length() == 0) {
+        if (opacity == null || opacity.isEmpty()) {
             return "";
         }
 
@@ -3506,7 +3506,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return;
         }
 
-        if (opacity.length() == 0) {
+        if (opacity.isEmpty()) {
             setStyleAttribute(OPACITY, opacity);
         }
 
@@ -5459,13 +5459,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     protected static int pixelValue(final Element element, final CssValue value) {
         final String s = value.get(element);
-        if (s.endsWith("%") || (s.length() == 0 && element instanceof HTMLHtmlElement)) {
+        if (s.endsWith("%") || (s.isEmpty() && element instanceof HTMLHtmlElement)) {
             final int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(s).replaceAll("$1"), 100);
             final Element parent = element.getParentElement();
             final int absoluteValue = (parent == null) ? value.getWindowDefaultValue() : pixelValue(parent, value);
             return (int) ((i / 100D) * absoluteValue);
         }
-        else if (s.length() == 0 && element instanceof HTMLCanvasElement) {
+        else if (s.isEmpty() && element instanceof HTMLCanvasElement) {
             return value.getWindowDefaultValue();
         }
         return pixelValue(s);

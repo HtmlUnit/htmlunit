@@ -522,7 +522,7 @@ public final class JavaScriptConfiguration {
         }
         final String max = element.getAttribute("max-version");
         float maxVersion;
-        if (max.length() == 0) {
+        if (max.isEmpty()) {
             maxVersion = 0;
         }
         else {
@@ -534,7 +534,7 @@ public final class JavaScriptConfiguration {
 
         float minVersion;
         final String min = element.getAttribute("min-version");
-        if (min.length() == 0) {
+        if (min.isEmpty()) {
             minVersion = 0;
         }
         else {

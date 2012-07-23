@@ -377,7 +377,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     private URL makeUrlForOpenWindow(final String urlString) {
-        if (urlString.length() == 0) {
+        if (urlString.isEmpty()) {
             return WebClient.URL_ABOUT_BLANK;
         }
 

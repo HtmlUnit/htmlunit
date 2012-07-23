@@ -324,7 +324,7 @@ public final class HTMLParser {
      * @return the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory
      */
     static IElementFactory getElementFactory(final String namespaceURI, final String qualifiedName) {
-        if (namespaceURI == null || namespaceURI.length() == 0
+        if (namespaceURI == null || namespaceURI.isEmpty()
             || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
             String tagName = qualifiedName;
             final int index = tagName.indexOf(':');

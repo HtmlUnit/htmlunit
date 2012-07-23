@@ -160,7 +160,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     protected String getStyleAttribute(final String name, final Map<String, StyleElement> styleMap) {
         String s = super.getStyleAttribute(name, null);
-        if (s.length() == 0 && isInheritable(name)) {
+        if (s.isEmpty() && isInheritable(name)) {
             final Element parent = getElement().getParentElement();
             if (parent != null) {
                 s = getWindow().jsxFunction_getComputedStyle(parent, null).getStyleAttribute(name, null);
@@ -587,13 +587,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String jsxGet_fontSize() {
         String value = super.jsxGet_fontSize();
-        if (value.length() == 0) {
+        if (value.isEmpty()) {
             final Element parent = getElement().getParentElement();
             if (parent != null) {
                 value = parent.jsxGet_currentStyle().jsxGet_fontSize();
             }
         }
-        if (value.length() == 0) {
+        if (value.isEmpty()) {
             value = "16px";
         }
         return value;
@@ -2121,7 +2121,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public Object jsxGet_zIndex() {
         final Object response = super.jsxGet_zIndex();
-        if (response.toString().length() == 0) {
+        if (response.toString().isEmpty()) {
             return "auto";
         }
         return response;

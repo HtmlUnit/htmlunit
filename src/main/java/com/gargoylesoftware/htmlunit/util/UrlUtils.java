@@ -637,7 +637,7 @@ public final class UrlUtils {
         //      a) If the embedded URL is entirely empty, it inherits the
         //         entire base URL (i.e., is set equal to the base URL)
         //         and we are done.
-        if (relativeUrl.length() == 0) {
+        if (relativeUrl.isEmpty()) {
             return new Url(baseUrl);
         }
         //      b) If the embedded URL starts with a scheme name, it is

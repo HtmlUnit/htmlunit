@@ -979,7 +979,7 @@ public class WebClient implements Serializable {
         WebAssert.notNull("defaultName", defaultName);
 
         String windowToOpen = windowName;
-        if (windowToOpen == null || windowToOpen.length() == 0) {
+        if (windowToOpen == null || windowToOpen.isEmpty()) {
             windowToOpen = defaultName;
         }
 
@@ -1001,7 +1001,7 @@ public class WebClient implements Serializable {
     }
 
     private WebWindow resolveWindow(final WebWindow opener, final String name) {
-        if (name == null || name.length() == 0 || "_self".equals(name)) {
+        if (name == null || name.isEmpty() || "_self".equals(name)) {
             return opener;
         }
         else if ("_parent".equals(name)) {
@@ -1013,7 +1013,7 @@ public class WebClient implements Serializable {
         else if ("_blank".equals(name)) {
             return null;
         }
-        else if (name.length() != 0) {
+        else if (!name.isEmpty()) {
             try {
                 return getWebWindowByName(name);
             }
@@ -2104,7 +2104,7 @@ public class WebClient implements Serializable {
             originalPage_ = new WeakReference<Page>(requestingWindow.getEnclosedPage());
         }
         public boolean isOutdated() {
-            if (target_ != null && target_.length() != 0) {
+            if (target_ != null && !target_.isEmpty()) {
                 return false;
             }
             else if (requestingWindow_.isClosed()) {

@@ -223,10 +223,10 @@ public class PropertiesTest extends WebTestCase {
 
         List<String> realProperties = Arrays.asList(getValueOf(realList, name_).split(","));
         List<String> simulatedProperties = Arrays.asList(getValueOf(simulatedList, name_).split(","));
-        if (realProperties.size() == 1 && realProperties.get(0).length() == 0) {
+        if (realProperties.size() == 1 && realProperties.get(0).isEmpty()) {
             realProperties = new ArrayList<String>();
         }
-        if (simulatedProperties.size() == 1 && simulatedProperties.get(0).length() == 0) {
+        if (simulatedProperties.size() == 1 && simulatedProperties.get(0).isEmpty()) {
             simulatedProperties = new ArrayList<String>();
         }
         final List<String> originalRealProperties = new ArrayList<String>(realProperties);

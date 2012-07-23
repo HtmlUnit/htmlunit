@@ -142,7 +142,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
     private List<String> stringProperties(final String string) throws Exception {
         final List<String> values = new ArrayList<String>();
-        if (string.length() == 0) {
+        if (string.isEmpty()) {
             return values;
         }
 

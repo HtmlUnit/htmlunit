@@ -97,7 +97,7 @@ public abstract class BaseFrame extends HtmlElement {
      */
     public void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
-        if (source.length() == 0) {
+        if (source.isEmpty()) {
             source = "about:blank";
         }
 
@@ -147,7 +147,7 @@ public abstract class BaseFrame extends HtmlElement {
      */
     private void loadInnerPageIfPossible(final String src) throws FailingHttpStatusCodeException {
         setContentLoaded();
-        if (src.length() != 0) {
+        if (!src.isEmpty()) {
             final URL url;
             try {
                 url = ((HtmlPage) getPage()).getFullyQualifiedUrl(src);

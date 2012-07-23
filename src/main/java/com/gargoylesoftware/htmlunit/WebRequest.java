@@ -111,7 +111,7 @@ public class WebRequest implements Serializable {
     public void setUrl(URL url) {
         if (url != null) {
             final String path = url.getPath();
-            if (path.length() == 0) {
+            if (path.isEmpty()) {
                 url = buildUrlWithNewFile(url, "/" + url.getFile());
             }
             else if (path.contains("/.")) {

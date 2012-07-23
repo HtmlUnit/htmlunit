@@ -327,7 +327,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public Short getTabIndex() {
         final String index = getAttribute("tabindex");
-        if (index == null || index.length() == 0) {
+        if (index == null || index.isEmpty()) {
             return null;
         }
         try {

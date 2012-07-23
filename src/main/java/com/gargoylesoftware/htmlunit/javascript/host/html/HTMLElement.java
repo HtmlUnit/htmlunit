@@ -747,7 +747,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
                 final boolean quote = !ie
                     || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value)
-                    || value.length() == 0
+                    || value.isEmpty()
                     || (element instanceof HtmlAnchor && "href".equals(name));
                 buffer.append(' ').append(name).append("=");
                 if (quote) {
@@ -823,7 +823,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         domNode.removeAllChildren();
 
-        if (value != null && value.length() != 0) {
+        if (value != null && !value.isEmpty()) {
             domNode.appendChild(new DomText(domNode.getPage(), Context.toString(value)));
         }
 

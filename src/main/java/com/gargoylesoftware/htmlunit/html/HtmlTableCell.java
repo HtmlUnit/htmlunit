@@ -50,7 +50,7 @@ public abstract class HtmlTableCell extends HtmlElement {
      */
     public int getColumnSpan() {
         final String spanString = getAttribute("colspan");
-        if (spanString == null || spanString.length() == 0) {
+        if (spanString == null || spanString.isEmpty()) {
             return 1;
         }
         return Integer.parseInt(spanString);
@@ -62,7 +62,7 @@ public abstract class HtmlTableCell extends HtmlElement {
      */
     public int getRowSpan() {
         final String spanString = getAttribute("rowspan");
-        if (spanString == null || spanString.length() == 0) {
+        if (spanString == null || spanString.isEmpty()) {
             return 1;
         }
         return Integer.parseInt(spanString);

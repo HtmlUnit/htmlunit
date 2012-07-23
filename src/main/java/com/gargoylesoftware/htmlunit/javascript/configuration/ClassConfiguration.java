@@ -64,7 +64,7 @@ public final class ClassConfiguration {
         throws ClassNotFoundException {
         extendedClassName_ = extendedClassName;
         hostClass_ = (Class<? extends SimpleScriptable>) Class.forName(hostClassName);
-        if (jsConstructor != null && jsConstructor.length() != 0) {
+        if (jsConstructor != null && !jsConstructor.isEmpty()) {
             Method foundCtor = null;
             for (final Method method : hostClass_.getMethods()) {
                 if (method.getName().equals(jsConstructor)) {
@@ -82,7 +82,7 @@ public final class ClassConfiguration {
             jsConstructor_ = null;
         }
         jsObject_ = jsObject;
-        if (htmlClassName != null && htmlClassName.length() != 0) {
+        if (htmlClassName != null && !htmlClassName.isEmpty()) {
             htmlClassName_ = htmlClassName;
         }
         else {

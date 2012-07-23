@@ -85,7 +85,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         // give time to the script to execute: normally ~2 seconds when scripts are run sequentially
         int nbWait = 0;
-        while (element.getText().length() == 0) {
+        while (element.getText().isEmpty()) {
             Thread.sleep(100);
             if (nbWait++ > 50) {
                 break;

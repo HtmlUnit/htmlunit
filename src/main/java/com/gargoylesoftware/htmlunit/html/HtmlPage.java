@@ -1265,7 +1265,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         final String refreshString = getRefreshStringOrNull();
-        if (refreshString == null || refreshString.length() == 0) {
+        if (refreshString == null || refreshString.isEmpty()) {
             return;
         }
 

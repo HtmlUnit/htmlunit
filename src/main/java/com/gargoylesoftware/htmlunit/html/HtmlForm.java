@@ -184,7 +184,7 @@ public class HtmlForm extends HtmlElement {
         }
         URL url;
         try {
-            if (actionUrl.length() == 0) {
+            if (actionUrl.isEmpty()) {
                 url = htmlPage.getWebResponse().getWebRequest().getUrl();
                 if (browser.hasFeature(BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH)) {
                     url = UrlUtils.getUrlWithNewRef(url, null);

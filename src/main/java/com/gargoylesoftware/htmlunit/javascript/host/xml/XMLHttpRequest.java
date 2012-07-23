@@ -305,7 +305,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             return null; // send() has not been called
         }
         final String contentType = webResponse_.getContentType();
-        if (contentType.length() == 0 || contentType.contains("xml")) {
+        if (contentType.isEmpty() || contentType.contains("xml")) {
             try {
                 final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow());
                 final XMLDocument doc;

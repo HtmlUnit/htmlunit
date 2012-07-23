@@ -142,7 +142,7 @@ public class CodeStyleTest {
                 }
                 if (currentLine.trim().startsWith("*")) {
                     final String text = currentLine.trim().substring(1).trim();
-                    if (text.length() != 0 && Character.isLowerCase(text.charAt(0))) {
+                    if (!text.isEmpty() && Character.isLowerCase(text.charAt(0))) {
                         addFailure("Lower case start in " + relativePath + ", line: " + (index + 1));
                     }
                 }
@@ -188,7 +188,7 @@ public class CodeStyleTest {
         for (int index = 0; index < lines.size() - 1; index++) {
             final String line = lines.get(index);
             final String nextLine = lines.get(index + 1);
-            if ("    }".equals(line) && nextLine.length() != 0 && !"}".equals(nextLine)) {
+            if ("    }".equals(line) && !nextLine.isEmpty() && !"}".equals(nextLine)) {
                 addFailure("Non-empty line in " + relativePath + ", line: " + (index + 1));
             }
         }
