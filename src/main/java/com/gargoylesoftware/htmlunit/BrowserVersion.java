@@ -30,11 +30,35 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * Objects of this class represent one specific version of a given browser. Predefined
  * constants are provided for common browser versions.
  *
- * If you wish to create a BrowserVersion for a browser that doesn't have a constant defined
- * but aren't sure what values to pass into the constructor then point your browser at
- * <a href="http://htmlunit.sourceforge.net/cgi-bin/browserVersion">
- * http://htmlunit.sourceforge.net/cgi-bin/browserVersion</a>
- * and the code will be generated for you.
+ * <p>You can change the constants by something like:
+ * <pre id='htmlUnitCode'>
+ *      String applicationName = "APPNAME";
+ *      String applicationVersion = "APPVERSION";
+ *      String userAgent = "USERAGENT";
+ *      int browserVersionNumeric = NUMERIC;
+ *
+ *      BrowserVersion browser = new BrowserVersion(applicationName, applicationVersion, userAgent, browserVersionNumeric) {
+ *          public boolean hasFeature(BrowserVersionFeatures property) {
+ *
+ *              // change features here
+ *              return BrowserVersion.BROWSER.hasFeature(property);
+ *          }
+ *      };
+ * </pre>
+ * <script>
+ *     var pre = document.getElementById('htmlUnitCode');
+ *     pre.innerHTML = pre.innerHTML.replace('APPNAME', navigator.appName);
+ *     pre.innerHTML = pre.innerHTML.replace('APPVERSION', navigator.appVersion);
+ *     pre.innerHTML = pre.innerHTML.replace('USERAGENT', navigator.userAgent);
+ *     var isMicrosoft = navigator.appName.indexOf('Microsoft') != -1;
+ *     var numeric = isMicrosoft ? 9 : 14;
+ *     pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
+ *     var browser = isMicrosoft ? "INTERNET_EXPLORER_8" : "FIREFOX_10";
+ *     pre.innerHTML = pre.innerHTML.replace('BROWSER', browser);
+ * </script>
+ * However, note that the constants are not enough to fully customize the browser,
+ *   you also need to look into the browser 'features', and the
+ *   <a href="http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml?view=markup">JavaScriptConfiguration.xml</a>
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -270,7 +294,7 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
-     * version of Firefox like {@link #FIREFOX_3} or {@link #FIREFOX_3_6}.
+     * version of Firefox like {@link #FIREFOX_3_6}.
      * @return whether or not this version is a version of a Firefox browser
      */
     public final boolean isFirefox() {
