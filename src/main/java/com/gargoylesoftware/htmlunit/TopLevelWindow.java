@@ -116,7 +116,9 @@ public class TopLevelWindow extends WebWindowImpl {
                 return;
             }
         }
-        page.cleanUp();
+        if (page != null) {
+            page.cleanUp();
+        }
         getJobManager().shutdown();
         destroyChildren();
         getWebClient().deregisterWebWindow(this);
