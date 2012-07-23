@@ -294,7 +294,7 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
-     * version of Firefox like {@link #FIREFOX_3_6}.
+     * version of Firefox like {@link #FIREFOX_3_6} or {@link #FIREFOX_10}.
      * @return whether or not this version is a version of a Firefox browser
      */
     public final boolean isFirefox() {
