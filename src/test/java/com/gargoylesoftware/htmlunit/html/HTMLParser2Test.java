@@ -51,7 +51,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({ "before", "after", "TABLE" })
+    @Alerts(DEFAULT = { "before", "after", "TABLE" }, FF10 = { "beforeafter", "undefined" })
     public void testHtmlTableTextAroundTD() throws Exception {
         final String html = "<html><head><title>test_Table</title>\n"
             + "<script>\n"

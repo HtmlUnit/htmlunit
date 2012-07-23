@@ -416,9 +416,13 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.FF)
     @NotYetImplemented
-    @Alerts(FF = {
+    @Alerts(FF3_6 = {
             "1:[object Text]/1/[object Text]/2/false/undefined/1/yzfo/yzfo",
             "2:[object Text]/1/[object Text]/2/true/undefined/0/",
+            "false", "true" },
+            FF10 = {
+            "1:[object Text]/1/[object Text]/2/false/undefined/1/yzfo/yzfo",
+            "2:null/0/null/0/true/undefined/0/",
             "false", "true" })
     public void aLittleBitOfEverything_removeRange() throws Exception {
         final String jsSnippet = ""

@@ -261,6 +261,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @NotYetImplemented(Browser.FF)
     @Alerts(FF = { "java: undefined", "getClass: undefined" },
+            FF10 = { "java: function", "getClass: undefined" },
             IE = { "java: undefined", "getClass: undefined" })
     public void rhino_lazilyNames2() throws Exception {
         doTestRhinoLazilyNames("java", "getClass");
@@ -274,7 +275,7 @@ public class Window2Test extends WebDriverTestCase {
     @NotYetImplemented(Browser.FF)
     @Alerts(FF3_6 = { "Packages: object", "XML: function", "XMLList: function",
                     "Namespace: function", "QName: function" },
-            FF = { "Packages: undefined", "XML: function", "XMLList: function",
+            FF = { "Packages: function", "XML: function", "XMLList: function",
                             "Namespace: function", "QName: function" },
             IE = { "Packages: undefined", "XML: undefined", "XMLList: undefined",
             "Namespace: undefined", "QName: undefined" })
