@@ -265,6 +265,7 @@ public class HtmlPage extends SgmlPage {
             return;
         }
         cleaning_ = true;
+        super.cleanUp();
         executeEventHandlersIfNeeded(Event.TYPE_UNLOAD);
         deregisterFramesIfNeeded();
         cleaning_ = false;

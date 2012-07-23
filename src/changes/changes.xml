@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, initial WebSocket support">
+            <action type="fix" dev="asashour" issue="3414170" due-to="Nicolas Belisle">
+                Delete temporary generated files on page.cleanUp().
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: DocType is handled as Comment (IE only).
             </action>

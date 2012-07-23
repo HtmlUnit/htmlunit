@@ -1276,7 +1276,7 @@ public class WebClient implements Serializable {
 
         final String contentType = guessContentType(file);
 
-        final DownloadedContent content = new DownloadedContent.OnFile(file);
+        final DownloadedContent content = new DownloadedContent.OnFile(file, false);
         final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
         compiledHeaders.add(new NameValuePair("Content-Type", contentType));
         final WebResponseData responseData = new WebResponseData(content, 200, "OK", compiledHeaders);

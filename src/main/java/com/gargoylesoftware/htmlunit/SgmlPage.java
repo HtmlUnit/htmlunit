@@ -57,7 +57,8 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
     /**
      * {@inheritDoc}
      */
-    public void cleanUp() throws IOException {
+    public void cleanUp() {
+        webResponse_.cleanUp();
     }
 
     /**

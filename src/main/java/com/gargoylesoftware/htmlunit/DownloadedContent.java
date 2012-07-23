@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 /**
@@ -48,6 +49,9 @@ public interface DownloadedContent extends Serializable {
         public InputStream getInputStream() {
             return new ByteArrayInputStream(bytes_);
         }
+
+        public void cleanUp() {
+        }
     }
 
     /**
@@ -55,12 +59,22 @@ public interface DownloadedContent extends Serializable {
      */
     static class OnFile implements DownloadedContent {
         private final File file_;
-        public OnFile(final File file) {
+        private boolean temporary_;
+        /**
+         * @param file the file
+         * @param temporary if true, the file will be deleted when cleanUp() is called.
+         */
+        public OnFile(final File file, final boolean temporary) {
             file_ = file;
         }
 
         public InputStream getInputStream() throws FileNotFoundException {
             return new FileInputStream(file_);
+        }
+        public void cleanUp() {
+            if (temporary_) {
+                FileUtils.deleteQuietly(file_);
+            }
         }
     }
 
@@ -70,4 +84,10 @@ public interface DownloadedContent extends Serializable {
      * @throws IOException in case of problem accessing the content
      */
     InputStream getInputStream() throws IOException;
+
+    /**
+     * Clean up resources associated to this content.
+     */
+    void cleanUp();
+
 }

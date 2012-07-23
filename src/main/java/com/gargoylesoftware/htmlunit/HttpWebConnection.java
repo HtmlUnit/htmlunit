@@ -663,7 +663,7 @@ public class HttpWebConnection implements WebConnection {
                     bos.writeTo(fos); // what we have already read
                     IOUtils.copyLarge(is, fos); // what remains from the server response
                     fos.close();
-                    return new DownloadedContent.OnFile(file);
+                    return new DownloadedContent.OnFile(file, true);
                 }
             }
         }

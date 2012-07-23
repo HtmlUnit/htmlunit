@@ -52,6 +52,7 @@ public class JavaScriptPage implements Page {
      * Cleans up this page.
      */
     public void cleanUp() {
+        webResponse_.cleanUp();
     }
 
     /**

@@ -238,4 +238,11 @@ public class WebResponse implements Serializable {
     public long getLoadTime() {
         return loadTime_;
     }
+
+    /**
+     * Clean up the response data.
+     */
+    public void cleanUp() {
+        responseData_.cleanUp();
+    }
 }

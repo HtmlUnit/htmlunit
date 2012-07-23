@@ -40,9 +40,8 @@ public interface Page extends Serializable {
      * Clean up this page.
      * This method gets called by the web client when an other page is loaded in the window
      * and you should probably never need to call it directly
-     * @throws IOException if an IO problem occurs
      */
-    void cleanUp() throws IOException;
+    void cleanUp();
 
     /**
      * Returns the web response that was originally used to create this page.

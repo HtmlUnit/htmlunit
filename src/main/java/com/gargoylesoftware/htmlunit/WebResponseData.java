@@ -151,4 +151,11 @@ public class WebResponseData implements Serializable {
     public String getStatusMessage() {
         return statusMessage_;
     }
+
+    /**
+     * Clean up the downloaded content.
+     */
+    public void cleanUp() {
+        downloadedContent_.cleanUp();
+    }
 }

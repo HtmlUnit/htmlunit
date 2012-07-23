@@ -49,6 +49,7 @@ public class BinaryPage implements Page {
      * {@inheritDoc}
      */
     public void cleanUp() {
+        webResponse_.cleanUp();
     }
 
     /**

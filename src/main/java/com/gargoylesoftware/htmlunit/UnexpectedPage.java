@@ -51,6 +51,7 @@ public class UnexpectedPage implements Page {
      * Cleans up this page.
      */
     public void cleanUp() {
+        webResponse_.cleanUp();
     }
 
     /**

@@ -52,6 +52,7 @@ public class TextPage implements Page {
      * Cleans up this page.
      */
     public void cleanUp() {
+        webResponse_.cleanUp();
     }
 
     /**
