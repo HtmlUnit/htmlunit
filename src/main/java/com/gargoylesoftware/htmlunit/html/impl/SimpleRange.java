@@ -19,12 +19,12 @@ import java.util.Iterator;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.ranges.Range;
 import org.w3c.dom.ranges.RangeException;
 
@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author James Phillpotts
  */
 public class SimpleRange implements Range, Serializable {
 
@@ -108,8 +109,69 @@ public class SimpleRange implements Range, Serializable {
     /**
      * {@inheritDoc}
      */
-    public DocumentFragment cloneContents() throws DOMException {
-        throw new RuntimeException("Not implemented!");
+    public DomDocumentFragment cloneContents() throws DOMException {
+        // Clone the common ancestor.
+        final DomNode ancestor = (DomNode) getCommonAncestorContainer();
+        final DomNode ancestorClone = ancestor.cloneNode(true);
+
+        // Find the start container and end container clones.
+        DomNode startClone = null;
+        DomNode endClone = null;
+        final DomNode start = (DomNode) startContainer_;
+        final DomNode end = (DomNode) endContainer_;
+        if (start == ancestor) {
+            startClone = ancestorClone;
+        }
+        if (end == ancestor) {
+            endClone = ancestorClone;
+        }
+        final Iterable<DomNode> descendants = ancestor.getDescendants();
+        if (startClone == null || endClone == null) {
+            final Iterator<DomNode> i = descendants.iterator();
+            final Iterator<DomNode> ci = ancestorClone.getDescendants().iterator();
+            while (i.hasNext()) {
+                final DomNode e = i.next();
+                final DomNode ce = ci.next();
+                if (start == e) {
+                    startClone = ce;
+                }
+                else if (end == e) {
+                    endClone = ce;
+                    break;
+                }
+            }
+        }
+
+        // Do remove from end first so that it can't affect the offset values
+
+        // Remove everything following the selection end from the clones.
+        if (endClone == null) {
+            throw Context.reportRuntimeError("Unable to find end node clone.");
+        }
+        deleteAfter(endClone, endOffset_);
+        for (DomNode n = endClone; n != null; n = n.getParentNode()) {
+            for (DomNode next = n.getNextSibling(); next != null; next = next.getNextSibling()) {
+                next.remove();
+            }
+        }
+
+        // Remove everything prior to the selection start from the clones.
+        if (startClone == null) {
+            throw Context.reportRuntimeError("Unable to find start node clone.");
+        }
+        deleteBefore(startClone, startOffset_);
+        for (DomNode n = startClone; n != null; n = n.getParentNode()) {
+            for (DomNode prev = n.getPreviousSibling(); prev != null; prev = prev.getPreviousSibling()) {
+                prev.remove();
+            }
+        }
+
+        final SgmlPage page = ancestor.getPage();
+        final DomDocumentFragment fragment = new DomDocumentFragment(page);
+        for (DomNode n : ancestorClone.getChildNodes()) {
+            fragment.appendChild(n);
+        }
+        return fragment;
     }
 
     /**
@@ -144,7 +206,57 @@ public class SimpleRange implements Range, Serializable {
      * {@inheritDoc}
      */
     public void deleteContents() throws DOMException {
-        throw new RuntimeException("Not implemented!");
+        final DomNode ancestor = (DomNode) getCommonAncestorContainer();
+        if (ancestor != null) {
+            deleteContents(ancestor);
+        }
+    }
+
+    private void deleteContents(final DomNode ancestor) {
+        final DomNode start;
+        final DomNode end;
+        if (isOffsetChars(startContainer_)) {
+            start = (DomNode) startContainer_;
+            String text = getText(start);
+            text = text.substring(0, startOffset_);
+            setText(start, text);
+        }
+        else if (startContainer_.getChildNodes().getLength() > startOffset_) {
+            start = (DomNode) startContainer_.getChildNodes().item(startOffset_);
+        }
+        else {
+            start = (DomNode) startContainer_.getNextSibling();
+        }
+        if (isOffsetChars(endContainer_)) {
+            end = (DomNode) endContainer_;
+            String text = getText(end);
+            text = text.substring(endOffset_);
+            setText(end, text);
+        }
+        else if (endContainer_.getChildNodes().getLength() > endOffset_) {
+            end = (DomNode) endContainer_.getChildNodes().item(endOffset_);
+        }
+        else {
+            end = (DomNode) endContainer_.getNextSibling();
+        }
+        boolean foundStart = false;
+        boolean started = false;
+        final Iterator<DomNode> i = ancestor.getDescendants().iterator();
+        while (i.hasNext()) {
+            final DomNode n = i.next();
+            if (n == end) {
+                break;
+            }
+            if (n == start) {
+                foundStart = true;
+            }
+            if (foundStart && (n != start || !isOffsetChars(startContainer_))) {
+                started = true;
+            }
+            if (started && !n.isAncestorOf(end)) {
+                i.remove();
+            }
+        }
     }
 
     /**
@@ -158,115 +270,12 @@ public class SimpleRange implements Range, Serializable {
      * {@inheritDoc}
      */
     public DomDocumentFragment extractContents() throws DOMException {
-        // Clone the common ancestor.
-        final DomNode ancestor = (DomNode) getCommonAncestorContainer();
-        final DomNode ancestorClone = ancestor.cloneNode(true);
-
-        // Find the start container and end container clones.
-        DomNode startClone = null;
-        DomNode endClone = null;
-        final DomNode start = (DomNode) startContainer_;
-        final DomNode end = (DomNode) endContainer_;
-        if (start == ancestor) {
-            startClone = ancestorClone;
-        }
-        if (end == ancestor) {
-            endClone = ancestorClone;
-        }
-        final Iterable<DomNode> descendants = ancestor.getDescendants();
-        if (startClone == null || endClone == null) {
-            final Iterator<DomNode> i = descendants.iterator();
-            final Iterator<DomNode> ci = ancestorClone.getDescendants().iterator();
-            while (i.hasNext()) {
-                final DomNode e = i.next();
-                final DomNode ce = ci.next();
-                if (start == e) {
-                    startClone = ce;
-                }
-                else if (end == e) {
-                    endClone = ce;
-                    break;
-                }
-            }
-        }
-
-        // Remove everything prior to the selection start from the clones.
-        if (startClone == null) {
-            throw Context.reportRuntimeError("Unable to find start node clone.");
-        }
-        deleteBefore(startClone, startOffset_);
-        for (DomNode n = startClone; n != null; n = n.getParentNode()) {
-            for (DomNode prev = n.getPreviousSibling(); prev != null; prev = prev.getPreviousSibling()) {
-                prev.remove();
-            }
-        }
-
-        // Remove everything following the selection end from the clones.
-        if (endClone == null) {
-            throw Context.reportRuntimeError("Unable to find end node clone.");
-        }
-        deleteAfter(endClone, endOffset_);
-        for (DomNode n = endClone; n != null; n = n.getParentNode()) {
-            for (DomNode next = n.getNextSibling(); next != null; next = next.getNextSibling()) {
-                next.remove();
-            }
-        }
+        final DomDocumentFragment fragment = cloneContents();
 
         // Remove everything inside the range from the original nodes.
-        boolean foundStartNode = (ancestor == start); // whether or not we have found the start node yet
-        boolean started = false; // whether or not we have found the start node *and* start offset yet
-        boolean foundEndNode = false; // whether or not we have found the end node yet
-        final Iterator<DomNode> i = ancestor.getDescendants().iterator();
-        while (i.hasNext()) {
-            final DomNode n = i.next();
-            if (!foundStartNode) {
-                foundStartNode = (n == start);
-                if (foundStartNode && isOffsetChars(n)) {
-                    started = true;
-                    String text = getText(n);
-                    text = text.substring(0, startOffset_);
-                    setText(n, text);
-                }
-            }
-            else if (!started) {
-                final boolean atStart = (n.getParentNode() == start && n.getIndex() == startOffset_);
-                final boolean beyondStart = !start.isAncestorOf(n);
-                started = (atStart || beyondStart);
-            }
-            if (started) {
-                if (!foundEndNode) {
-                    foundEndNode = (n == end);
-                }
-                if (!foundEndNode) {
-                    // We're inside the range.
-                    if (!n.isAncestorOfAny(start, end)) {
-                        i.remove();
-                    }
-                }
-                else {
-                    // We've reached the end of the range.
-                    if (isOffsetChars(n)) {
-                        String text = getText(n);
-                        text = text.substring(endOffset_);
-                        setText(n, text);
-                    }
-                    else {
-                        final DomNodeList<DomNode> children = n.getChildNodes();
-                        for (int j = endOffset_ - 1; j >= 0; j--) {
-                            children.get(j).remove();
-                        }
-                    }
-                    break;
-                }
-            }
-        }
+        deleteContents();
 
         // Build the document fragment using the cloned nodes, and return it.
-        final SgmlPage page = ancestor.getPage();
-        final DomDocumentFragment fragment = new DomDocumentFragment(page);
-        for (DomNode n : ancestorClone.getChildNodes()) {
-            fragment.appendChild(n);
-        }
         return fragment;
     }
 
@@ -325,7 +334,37 @@ public class SimpleRange implements Range, Serializable {
      * {@inheritDoc}
      */
     public void insertNode(final Node newNode) throws DOMException, RangeException {
-        throw new RuntimeException("Not implemented!");
+        if (isOffsetChars(startContainer_)) {
+            final Node split = startContainer_.cloneNode(false);
+            String text = getText(startContainer_);
+            text = text.substring(0, startOffset_);
+            setText(startContainer_, text);
+            text = getText(split);
+            text = text.substring(startOffset_);
+            setText(split, text);
+            insertNodeOrDocFragment(startContainer_.getParentNode(), split, startContainer_.getNextSibling());
+            insertNodeOrDocFragment(startContainer_.getParentNode(), newNode, split);
+        }
+        else {
+            insertNodeOrDocFragment(startContainer_, newNode, startContainer_.getChildNodes().item(startOffset_));
+        }
+
+        setStart(newNode, 0);
+    }
+
+    private static void insertNodeOrDocFragment(final Node parent, final Node newNode, final Node refNode) {
+        if (newNode instanceof DocumentFragment) {
+            final DocumentFragment fragment = (DocumentFragment) newNode;
+
+            final NodeList childNodes = fragment.getChildNodes();
+            while (childNodes.getLength() > 0) {
+                final Node item = childNodes.item(0);
+                parent.insertBefore(item, refNode);
+            }
+        }
+        else {
+            parent.insertBefore(newNode, refNode);
+        }
     }
 
     /**
@@ -396,7 +435,10 @@ public class SimpleRange implements Range, Serializable {
      * {@inheritDoc}
      */
     public void surroundContents(final Node newParent) throws DOMException, RangeException {
-        throw new RuntimeException("Not implemented!");
+        newParent.appendChild(extractContents());
+        insertNode(newParent);
+        setStart(newParent, 0);
+        setEnd(newParent, getMaxOffset(newParent));
     }
 
     /**
@@ -432,75 +474,7 @@ public class SimpleRange implements Range, Serializable {
      */
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        append(sb);
-        return sb.toString();
-    }
-
-    private void append(final StringBuilder sb) {
-        if (startContainer_ == endContainer_) {
-            if (startOffset_ == endOffset_) {
-                return;
-            }
-            else if (isOffsetChars(startContainer_)) {
-                String text = getText(startContainer_);
-                // use commons to deal with wrong offsets
-                text = StringUtils.substring(text, Math.abs(startOffset_), Math.abs(endOffset_));
-                sb.append(text);
-                return;
-            }
-        }
-
-        final DomNode ancestor = (DomNode) getCommonAncestorContainer();
-        final DomNode start = (DomNode) startContainer_;
-        final DomNode end = (DomNode) endContainer_;
-        boolean foundStartNode = (ancestor == start); // whether or not we have found the start node yet
-        boolean started = false; // whether or not we have found the start node *and* start offset yet
-        boolean foundEndNode = false; // whether or not we have found the end node yet
-        final Iterator<DomNode> i = ancestor.getDescendants().iterator();
-        while (i.hasNext()) {
-            final DomNode n = i.next();
-            if (!foundStartNode) {
-                foundStartNode = (n == start);
-                if (foundStartNode && isOffsetChars(n)) {
-                    started = true;
-                    String text = getText(n);
-                    text = text.substring(startOffset_);
-                    sb.append(text);
-                }
-            }
-            else if (!started) {
-                final boolean atStart = (n.getParentNode() == start && n.getIndex() == startOffset_);
-                final boolean beyondStart = !start.isAncestorOf(n);
-                started = (atStart || beyondStart);
-            }
-            if (started) {
-                if (!foundEndNode) {
-                    foundEndNode = (n == end);
-                }
-                if (!foundEndNode) {
-                    // We're inside the range.
-                    if (!n.isAncestorOfAny(start, end) && isOffsetChars(n)) {
-                        sb.append(getText(n));
-                    }
-                }
-                else {
-                    // We've reached the end of the range.
-                    if (isOffsetChars(n)) {
-                        String text = getText(n);
-                        text = text.substring(0, endOffset_);
-                        sb.append(text);
-                    }
-                    else {
-                        final DomNodeList<DomNode> children = n.getChildNodes();
-                        for (int j = 0; j < endOffset_; j++) {
-                            sb.append(getText(children.get(j)));
-                        }
-                    }
-                    break;
-                }
-            }
-        }
+        return cloneContents().getTextContent();
     }
 
     private static boolean isOffsetChars(final Node node) {
