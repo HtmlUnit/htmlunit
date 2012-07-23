@@ -243,6 +243,8 @@ public class WebResponse implements Serializable {
      * Clean up the response data.
      */
     public void cleanUp() {
-        responseData_.cleanUp();
+        if (responseData_ != null) {
+            responseData_.cleanUp();
+        }
     }
 }
