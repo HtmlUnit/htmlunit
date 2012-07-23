@@ -22,14 +22,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -392,7 +392,7 @@ public class DocumentTest extends WebTestCase {
 
         final HtmlPage page = loadPageWithAlerts(html);
 
-        final DomNode div1 = page.<HtmlElement>getHtmlElementById("body").getLastChild();
+        final DomNode div1 = page.getHtmlElementById("body").getLastChild();
         assertEquals((short) 3, div1.getNodeType());
         assertEquals("Some Text", div1.getNodeValue());
         assertEquals("#text", div1.getNodeName());
@@ -2288,7 +2288,7 @@ public class DocumentTest extends WebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<HtmlElement>getHtmlElementById("theDiv").click();
+        page.getHtmlElementById("theDiv").click();
 
         final String[] expectedAlerts = {"123", "captured"};
         assertEquals(expectedAlerts, collectedAlerts);

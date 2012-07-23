@@ -179,7 +179,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final MockWebConnection webConnection = getMockConnection(page);
-        page.<HtmlElement>getHtmlElementById("button").click();
+        page.getHtmlElementById("button").click();
         assertSame(HttpMethod.GET, webConnection.getLastMethod());
     }
 
@@ -810,7 +810,7 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals("Get all", expectedInputs, actualInputs);
         assertEquals(Collections.EMPTY_LIST, form.getInputsByValue("none-matching"));
 
-        Assert.assertEquals("Get first", "button", form.<HtmlInput>getInputByValue("bar").getNameAttribute());
+        Assert.assertEquals("Get first", "button", form.getInputByValue("bar").getNameAttribute());
         try {
             form.getInputByValue("none-matching");
             fail("Expected ElementNotFoundException");
@@ -932,7 +932,7 @@ public class HtmlFormTest extends WebTestCase {
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlPage secondPage =
-            (HtmlPage) page.getFormByName("form").<HtmlElement>getElementById("clickMe").click();
+            (HtmlPage) page.getFormByName("form").getElementById("clickMe").click();
 
         assertNotNull(secondPage);
         Assert.assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());
@@ -1127,7 +1127,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<button type='button' name='buttonButton' value='foo'/>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null, url);
-        final Page page2 = page.<HtmlElement>getHtmlElementById("submitButton").click();
+        final Page page2 = page.getHtmlElementById("submitButton").click();
 
         assertEquals(expectedUrl, page2.getWebResponse().getWebRequest().getUrl());
     }
@@ -1212,7 +1212,7 @@ public class HtmlFormTest extends WebTestCase {
         assertEquals(firstPageEncoding, page.getPageEncoding());
 
         final HtmlForm form = page.getFormByName("form1");
-        form.<HtmlInput>getInputByName("button").click();
+        form.getInputByName("button").click();
 
         assertEquals(expectedRequestCharset, webConnection.getLastWebRequest().getCharset());
     }
@@ -1355,11 +1355,11 @@ public class HtmlFormTest extends WebTestCase {
         final HtmlPage page = loadPage(html);
         final HtmlForm form = page.getForms().get(0);
 
-        assertEquals("val1", form.<HtmlInput>getInputByName("field3").getValueAttribute());
+        assertEquals("val1", form.getInputByName("field3").getValueAttribute());
         assertEquals(2, form.getInputsByName("radio1").size());
 
         assertEquals(3, form.getInputsByValue("val2").size());
-        assertEquals("radio1", form.<HtmlInput>getInputByValue("val3").getNameAttribute());
+        assertEquals("radio1", form.getInputByValue("val3").getNameAttribute());
 
         assertEquals(2, form.getRadioButtonsByName("radio1").size());
     }
@@ -1526,7 +1526,7 @@ public class HtmlFormTest extends WebTestCase {
 
         final HtmlPage page = client.getPage(url);
         assertEquals(url.toExternalForm(), page.getWebResponse().getWebRequest().getUrl());
-        final HtmlPage linkPage = page.<HtmlElement>getHtmlElementById("myLink").click();
+        final HtmlPage linkPage = page.getHtmlElementById("myLink").click();
         final String linkSuffix;
         if (getBrowserVersion().isIE()) {
             linkSuffix = "bug.html?k\u00F6nig";
@@ -1565,8 +1565,8 @@ public class HtmlFormTest extends WebTestCase {
 
         final HtmlPage page = client.getPage(url);
         assertEquals(url.toExternalForm(), page.getWebResponse().getWebRequest().getUrl());
-        final HtmlPage submitPage = page.<HtmlElement>getHtmlElementById("mySubmit").click();
-        final HtmlPage linkPage = page.<HtmlElement>getHtmlElementById("myLink").click();
+        final HtmlPage submitPage = page.getHtmlElementById("mySubmit").click();
+        final HtmlPage linkPage = page.getHtmlElementById("myLink").click();
         final String submitSuffix;
         final String linkSuffix;
         if (getBrowserVersion().isIE()) {

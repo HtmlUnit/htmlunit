@@ -26,10 +26,10 @@ import org.junit.runner.RunWith;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.DomNode.DescendantElementsIterator;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -195,7 +195,7 @@ public class DomNodeTest extends WebTestCase {
         final DomNode node3 = HTMLParser.getFactory(HtmlSpan.TAG_NAME).createElement(
                 page, HtmlSpan.TAG_NAME, attributes);
         node2.replace(node3);
-        assertEquals("span", page.<HtmlElement>getHtmlElementById("tag2").getTagName());
+        assertEquals("span", page.getHtmlElementById("tag2").getTagName());
     }
 
     /**

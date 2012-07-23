@@ -24,10 +24,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
@@ -56,15 +55,15 @@ public class MouseEventTest extends WebDriverTestCase {
         final HtmlTextArea textarea = page.getHtmlElementById("myTextarea");
         assertEquals("", textarea.asText());
 
-        page.<HtmlElement>getHtmlElementById("div1").click();
+        page.getHtmlElementById("div1").click();
         assertEquals("Click on DIV(id=div1): true, true, false, false" + LINE_SEPARATOR, textarea.asText());
         textarea.reset();
 
-        page.<HtmlElement>getHtmlElementById("span1").click();
+        page.getHtmlElementById("span1").click();
         assertEquals("Click on SPAN(id=span1): true, true, true, false" + LINE_SEPARATOR, textarea.asText());
         textarea.reset();
 
-        page.<HtmlElement>getHtmlElementById("span2").click();
+        page.getHtmlElementById("span2").click();
         assertEquals("Click on SPAN(id=span2): true, false, false, true" + LINE_SEPARATOR, textarea.asText());
         textarea.reset();
 

@@ -31,18 +31,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
@@ -540,7 +539,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html></html>");
 
         final HtmlPage page = loadPageWithAlerts(html);
-        final Page page2 = page.<HtmlElement>getHtmlElementById("button1").click();
+        final Page page2 = page.getHtmlElementById("button1").click();
 
         assertEquals(URL_THIRD.toExternalForm(), page2.getWebResponse().getWebRequest().getUrl());
     }
@@ -1076,7 +1075,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        page.<HtmlElement>getHtmlElementById("theButton").click();
+        page.getHtmlElementById("theButton").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -1098,7 +1097,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"true"};
         final HtmlPage page1 = loadPage(getBrowserVersion(), content, collectedAlerts);
-        final Page page2 = page1.<HtmlElement>getHtmlElementById("theButton").click();
+        final Page page2 = page1.getHtmlElementById("theButton").click();
 
         assertEquals(expectedAlerts, collectedAlerts);
         assertSame(page1, page2);

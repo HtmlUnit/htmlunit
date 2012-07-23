@@ -24,11 +24,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -61,7 +61,7 @@ public class HtmlIsIndexTest extends WebTestCase {
         final HtmlIsIndex isInput = form.<HtmlIsIndex>getElementsByAttribute(
                 "isindex", "prompt", "enterSomeText").get(0);
         isInput.setValue("Flintstone");
-        final Page secondPage = form.<HtmlElement>getElementById("clickMe").click();
+        final Page secondPage = form.getElementById("clickMe").click();
 
         final List<NameValuePair> expectedParameters = new ArrayList<NameValuePair>();
         expectedParameters.add(new NameValuePair("enterSomeText", "Flintstone"));

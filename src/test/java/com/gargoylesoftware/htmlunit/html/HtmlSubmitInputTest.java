@@ -26,8 +26,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -194,7 +194,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-        page.<HtmlInput>getHtmlElementById("myInput").type('\n');
+        page.getHtmlElementById("myInput").type('\n');
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }

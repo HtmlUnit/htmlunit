@@ -1414,7 +1414,7 @@ public class WebClient implements Serializable {
                 if (!proxyConfig_.getProxyAutoConfigUrl().equals(url.toExternalForm())) {
                     String content = proxyConfig_.getProxyAutoConfigContent();
                     if (content == null) {
-                        content = this.<Page>getPage(proxyConfig_.getProxyAutoConfigUrl())
+                        content = getPage(proxyConfig_.getProxyAutoConfigUrl())
                             .getWebResponse().getContentAsString();
                         proxyConfig_.setProxyAutoConfigContent(content);
                     }

@@ -22,10 +22,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlCheckBoxInput}.

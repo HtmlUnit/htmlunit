@@ -1962,7 +1962,7 @@ public class WebClientTest extends WebServerTestCase {
         conn.setResponse(URL_FIRST, html);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        page.<HtmlElement>getHtmlElementById("d").click();
+        page.getHtmlElementById("d").click();
         assertEquals("Test", ((HtmlPage) client.getCurrentWindow().getEnclosedPage()).getTitleText());
     }
 

@@ -35,7 +35,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -270,8 +269,8 @@ public class CookieManagerTest extends WebDriverTestCase {
         final String[] expectedAlerts = {"cookie:button1", "cookie:button2"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
-        page.<HtmlButtonInput>getHtmlElementById("button1").click();
-        page.<HtmlButtonInput>getHtmlElementById("button2").click();
+        page.getHtmlElementById("button1").click();
+        page.getHtmlElementById("button2").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
 

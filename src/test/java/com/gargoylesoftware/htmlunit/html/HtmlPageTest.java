@@ -1106,7 +1106,7 @@ public class HtmlPageTest extends WebServerTestCase {
         assertEquals(page.getElementById("a"), page.getElementByName("a"));
         assertEquals(page.getElementById("b1"), page.getElementByName("b"));
 
-        page.<HtmlElement>getElementByName("b").remove();
+        page.getElementByName("b").remove();
         assertEquals(page.getElementById("b2"), page.getElementByName("b"));
 
         boolean thrown = false;
@@ -1197,7 +1197,7 @@ public class HtmlPageTest extends WebServerTestCase {
         final HtmlElement elt1 = page.getHtmlElementById("id1");
         assertEquals("div", elt1.getNodeName());
         elt1.remove();
-        assertEquals("span", page.<HtmlElement>getHtmlElementById("id1").getNodeName());
+        assertEquals("span", page.getHtmlElementById("id1").getNodeName());
     }
 
     /**
@@ -1366,7 +1366,7 @@ public class HtmlPageTest extends WebServerTestCase {
             assertEquals(element1.getNodeName(), element2.getNodeName());
         }
         assertFalse(iterator2.hasNext());
-        assertEquals("Hello there!", page2.<HtmlElement>getHtmlElementById("myId").getFirstChild().getNodeValue());
+        assertEquals("Hello there!", page2.getHtmlElementById("myId").getFirstChild().getNodeValue());
     }
 
     /**
@@ -1393,7 +1393,7 @@ public class HtmlPageTest extends WebServerTestCase {
         assertNotSame(id1clone, page.getHtmlElementById("id1"));
         assertNotSame(id1, clone.getHtmlElementById("id1"));
 
-        page.<HtmlElement>getHtmlElementById("id2").remove();
+        page.getHtmlElementById("id2").remove();
         try {
             page.getHtmlElementById("id2");
             fail("should have thrown ElementNotFoundException");

@@ -18,8 +18,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Date is a native JavaScript object and therefore provided by Rhino but behavior should be

@@ -14,14 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.IdFunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 
 /**
  * Replacement (in fact a wrapper) for Rhino's native toString function on Function prototype

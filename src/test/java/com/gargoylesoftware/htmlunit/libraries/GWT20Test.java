@@ -241,9 +241,9 @@ public class GWT20Test extends WebServerTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadGWTPage("Showcase", collectedAlerts, "id('gwt-debug-cwCheckBox-Monday-label')");
         assertEquals("Monday",
-            page.<HtmlElement>getHtmlElementById("gwt-debug-cwCheckBox-Monday-label").getFirstChild().getNodeValue());
+            page.getHtmlElementById("gwt-debug-cwCheckBox-Monday-label").getFirstChild().getNodeValue());
         assertEquals("Tuesday",
-            page.<HtmlElement>getHtmlElementById("gwt-debug-cwCheckBox-Tuesday-label").getFirstChild().getNodeValue());
+            page.getHtmlElementById("gwt-debug-cwCheckBox-Tuesday-label").getFirstChild().getNodeValue());
     }
 
 }

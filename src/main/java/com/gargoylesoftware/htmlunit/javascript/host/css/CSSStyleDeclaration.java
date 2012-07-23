@@ -42,7 +42,6 @@ import org.w3c.css.sac.InputSource;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -5082,7 +5081,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         // following is a hack, just to have basic support for getPropertyCSSValue
         // TODO: rework the whole CSS processing here! we should *always* parse the style!
         if (styleDeclaration_ == null) {
-            final String uri = this.<DomNode>getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
+            final String uri = getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
             .getUrl().toExternalForm();
             final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
             final InputSource source = new InputSource(new StringReader(styleAttribute));

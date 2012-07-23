@@ -305,7 +305,7 @@ public class Range extends SimpleScriptable {
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:range.createContextualFragment">Mozilla documentation</a>
      */
     public Object jsxFunction_createContextualFragment(final String valueAsString) {
-        final SgmlPage page = startContainer_.<DomNode>getDomNodeOrDie().getPage();
+        final SgmlPage page = startContainer_.getDomNodeOrDie().getPage();
         final DomDocumentFragment fragment = new DomDocumentFragment(page);
         try {
             HTMLParser.parseFragment(fragment, startContainer_.getDomNodeOrDie(), valueAsString);

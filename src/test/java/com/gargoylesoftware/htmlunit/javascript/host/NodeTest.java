@@ -27,15 +27,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -154,7 +152,7 @@ public class NodeTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body onload='doTest()'><div id='a'><div id='b'/></div></html>";
         final HtmlPage page = loadPageWithAlerts(html);
-        assertNotNull(page.<HtmlElement>getHtmlElementById("b").getParentNode());
+        assertNotNull(page.getHtmlElementById("b").getParentNode());
     }
 
     /**
@@ -621,7 +619,7 @@ public class NodeTest extends WebDriverTestCase {
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        page.<HtmlButtonInput>getHtmlElementById("myInput").click();
+        page.getHtmlElementById("myInput").click();
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
@@ -832,7 +830,7 @@ public class NodeTest extends WebDriverTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-        final HtmlPage page2 = page.<HtmlAnchor>getHtmlElementById("myAnchor").click();
+        final HtmlPage page2 = page.getHtmlElementById("myAnchor").click();
         //IE doesn't have specific order
         Collections.sort(collectedAlerts);
         assertEquals(getExpectedAlerts(), collectedAlerts);
@@ -872,7 +870,7 @@ public class NodeTest extends WebDriverTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-        final HtmlPage page2 = page.<HtmlAnchor>getHtmlElementById("myAnchor").click();
+        final HtmlPage page2 = page.getHtmlElementById("myAnchor").click();
         //IE doesn't have specific order
         Collections.sort(collectedAlerts);
         assertEquals(getExpectedAlerts(), collectedAlerts);
@@ -921,7 +919,7 @@ public class NodeTest extends WebDriverTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-        final HtmlPage page2 = page.<HtmlAnchor>getHtmlElementById("myAnchor").click();
+        final HtmlPage page2 = page.getHtmlElementById("myAnchor").click();
         //IE doesn't have specific order
         Collections.sort(collectedAlerts);
         assertEquals(getExpectedAlerts(), collectedAlerts);

@@ -21,8 +21,8 @@ import org.junit.runner.RunWith;
 import org.w3c.css.sac.CSSException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;

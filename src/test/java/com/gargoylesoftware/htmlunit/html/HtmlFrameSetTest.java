@@ -25,12 +25,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlFrameSet}.
@@ -397,7 +397,7 @@ public class HtmlFrameSetTest extends WebTestCase {
 
         final HtmlPage mainPage = webClient.getPage(URL_FIRST);
         final HtmlPage framePage = (HtmlPage) mainPage.getFrameByName("f1").getEnclosedPage();
-        final HtmlPage page = framePage.<HtmlButton>getHtmlElementById("myButton").click();
+        final HtmlPage page = framePage.getHtmlElementById("myButton").click();
         assertEquals("3", page.getTitleText());
     }
 

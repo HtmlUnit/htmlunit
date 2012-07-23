@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 /**
@@ -67,7 +66,7 @@ public class DocumentFragment extends Node {
      * @return HTML document
      */
     protected HTMLDocument getDocument() {
-        return (HTMLDocument) this.<DomNode>getDomNodeOrDie().getPage().getScriptObject();
+        return (HTMLDocument) getDomNodeOrDie().getPage().getScriptObject();
     }
 
     /**

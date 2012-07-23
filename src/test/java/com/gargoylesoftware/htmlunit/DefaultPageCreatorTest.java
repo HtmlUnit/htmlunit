@@ -92,25 +92,25 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
         final WebClient c = getWebClient();
         final String base = "http://localhost:" + PORT + "/x?";
 
-        assertTrue(c.<Page>getPage(base + "type=text%2Fhtml") instanceof HtmlPage);
-        assertTrue(c.<Page>getPage(base + "type=text%2Fhtml&doctype=1") instanceof HtmlPage);
-        assertTrue(c.<Page>getPage(base + "type=text%2Fhtml&ns=1") instanceof HtmlPage);
-        assertTrue(c.<Page>getPage(base + "type=text%2Fhtml&doctype=1&ns=1") instanceof HtmlPage);
+        assertTrue(c.getPage(base + "type=text%2Fhtml") instanceof HtmlPage);
+        assertTrue(c.getPage(base + "type=text%2Fhtml&doctype=1") instanceof HtmlPage);
+        assertTrue(c.getPage(base + "type=text%2Fhtml&ns=1") instanceof HtmlPage);
+        assertTrue(c.getPage(base + "type=text%2Fhtml&doctype=1&ns=1") instanceof HtmlPage);
 
-        assertTrue(c.<Page>getPage(base + "type=text%2Fxhtml") instanceof TextPage);
-        assertTrue(c.<Page>getPage(base + "type=text%2Fxhtml&doctype=1") instanceof TextPage);
-        assertTrue(c.<Page>getPage(base + "type=text%2Fxhtml&ns=1") instanceof TextPage);
-        assertTrue(c.<Page>getPage(base + "type=text%2Fxhtml&doctype=1&ns=1") instanceof TextPage);
+        assertTrue(c.getPage(base + "type=text%2Fxhtml") instanceof TextPage);
+        assertTrue(c.getPage(base + "type=text%2Fxhtml&doctype=1") instanceof TextPage);
+        assertTrue(c.getPage(base + "type=text%2Fxhtml&ns=1") instanceof TextPage);
+        assertTrue(c.getPage(base + "type=text%2Fxhtml&doctype=1&ns=1") instanceof TextPage);
 
-        assertTrue(c.<Page>getPage(base + "type=text%2Fxml") instanceof XmlPage);
-        assertTrue(c.<Page>getPage(base + "type=text%2Fxml&doctype=1") instanceof XmlPage);
-        assertTrue(c.<Page>getPage(base + "type=text%2Fxml&ns=1") instanceof XHtmlPage);
-        assertTrue(c.<Page>getPage(base + "type=text%2Fxml&doctype=1&ns=1") instanceof XHtmlPage);
+        assertTrue(c.getPage(base + "type=text%2Fxml") instanceof XmlPage);
+        assertTrue(c.getPage(base + "type=text%2Fxml&doctype=1") instanceof XmlPage);
+        assertTrue(c.getPage(base + "type=text%2Fxml&ns=1") instanceof XHtmlPage);
+        assertTrue(c.getPage(base + "type=text%2Fxml&doctype=1&ns=1") instanceof XHtmlPage);
 
-        assertTrue(c.<Page>getPage(base + "type=application%2Fxhtml%2Bxml") instanceof XmlPage);
-        assertTrue(c.<Page>getPage(base + "type=application%2Fxhtml%2Bxml&doctype=1") instanceof XmlPage);
-        assertTrue(c.<Page>getPage(base + "type=application%2Fxhtml%2Bxml&ns=1") instanceof XHtmlPage);
-        assertTrue(c.<Page>getPage(base + "type=application%2Fxhtml%2Bxml&doctype=1&ns=1") instanceof XHtmlPage);
+        assertTrue(c.getPage(base + "type=application%2Fxhtml%2Bxml") instanceof XmlPage);
+        assertTrue(c.getPage(base + "type=application%2Fxhtml%2Bxml&doctype=1") instanceof XmlPage);
+        assertTrue(c.getPage(base + "type=application%2Fxhtml%2Bxml&ns=1") instanceof XHtmlPage);
+        assertTrue(c.getPage(base + "type=application%2Fxhtml%2Bxml&doctype=1&ns=1") instanceof XHtmlPage);
     }
 
     /**

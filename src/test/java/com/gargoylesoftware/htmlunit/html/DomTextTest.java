@@ -120,9 +120,9 @@ public class DomTextTest extends WebTestCase {
 
         final HtmlPage page = loadPage(content);
 
-        assertEquals("b", page.<HtmlElement>getHtmlElementById("cell").asText());
-        assertEquals("b", page.<HtmlElement>getHtmlElementById("row").asText());
-        assertEquals("b", page.<HtmlElement>getHtmlElementById("table").asText());
+        assertEquals("b", page.getHtmlElementById("cell").asText());
+        assertEquals("b", page.getHtmlElementById("row").asText());
+        assertEquals("b", page.getHtmlElementById("table").asText());
     }
 
     private void testPlainText(final String html, final String expectedText) throws Exception {
@@ -165,7 +165,7 @@ public class DomTextTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(getDefaultUrl());
-        final String xml = page.<HtmlElement>getHtmlElementById("foo").getFirstChild().asXml().trim();
+        final String xml = page.getHtmlElementById("foo").getFirstChild().asXml().trim();
         assertEquals(expectedValues.length, xml.length());
         int index = 0;
         for (final int expectedValue : expectedValues) {

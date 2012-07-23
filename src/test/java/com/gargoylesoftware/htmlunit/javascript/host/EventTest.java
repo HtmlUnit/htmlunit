@@ -40,7 +40,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -286,7 +285,7 @@ public class EventTest extends WebDriverTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<HtmlElement>getHtmlElementById("clickId").type('A', shiftKey, ctrlKey, altKey);
+        page.getHtmlElementById("clickId").type('A', shiftKey, ctrlKey, altKey);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -387,8 +386,8 @@ public class EventTest extends WebDriverTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<HtmlElement>getHtmlElementById("textField").focus();
-        page.<HtmlElement>getHtmlElementById("otherField").focus();
+        page.getHtmlElementById("textField").focus();
+        page.getHtmlElementById("otherField").focus();
         final String[] expectedAlerts = {"true"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
@@ -443,7 +442,7 @@ public class EventTest extends WebDriverTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<HtmlElement>getHtmlElementById("clickMe").click();
+        page.getHtmlElementById("clickMe").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -524,7 +523,7 @@ public class EventTest extends WebDriverTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<HtmlElement>getHtmlElementById("theSpan").click();
+        page.getHtmlElementById("theSpan").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -559,7 +558,7 @@ public class EventTest extends WebDriverTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<HtmlElement>getHtmlElementById("theSpan").click();
+        page.getHtmlElementById("theSpan").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
@@ -598,12 +597,12 @@ public class EventTest extends WebDriverTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<HtmlElement>getHtmlElementById("theSpan").click();
+        page.getHtmlElementById("theSpan").click();
         final String[] expectedAlerts1 = {"window capturing", "div capturing", "span capturing", "div"};
         assertEquals(expectedAlerts1, collectedAlerts);
         collectedAlerts.clear();
 
-        page.<HtmlElement>getHtmlElementById("theSpan").click();
+        page.getHtmlElementById("theSpan").click();
         final String[] expectedAlerts2 = {"window capturing"};
         assertEquals(expectedAlerts2, collectedAlerts);
     }
@@ -639,12 +638,12 @@ public class EventTest extends WebDriverTestCase {
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
-        page.<HtmlElement>getHtmlElementById("theSpan").click();
+        page.getHtmlElementById("theSpan").click();
         final String[] expectedAlerts1 = {"w", "w 2", "d", "d 2", "s", "s 2"};
         assertEquals(expectedAlerts1, collectedAlerts);
         collectedAlerts.clear();
 
-        page.<HtmlElement>getHtmlElementById("theSpan").click();
+        page.getHtmlElementById("theSpan").click();
         final String[] expectedAlerts2 = {"w", "w 2"};
         assertEquals(expectedAlerts2, collectedAlerts);
     }
@@ -1034,7 +1033,7 @@ public class EventTest extends WebDriverTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlPage page2 = page.<HtmlInput>getHtmlElementById("mySubmit").click();
+        final HtmlPage page2 = page.getHtmlElementById("mySubmit").click();
         assertEquals(getDefaultUrl(), page2.getWebResponse().getWebRequest().getUrl());
     }
 

@@ -221,7 +221,7 @@ public class HtmlAreaTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final String[] expectedAlerts = {"true"};
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
-        final Page page2 = page.<HtmlArea>getHtmlElementById("a2").click();
+        final Page page2 = page.getHtmlElementById("a2").click();
 
         assertEquals(expectedAlerts, collectedAlerts);
         assertSame(page, page2);

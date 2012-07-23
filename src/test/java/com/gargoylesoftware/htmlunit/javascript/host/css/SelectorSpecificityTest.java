@@ -21,9 +21,9 @@ import org.junit.Test;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Selector;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;

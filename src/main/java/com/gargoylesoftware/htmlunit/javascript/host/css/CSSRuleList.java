@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * A JavaScript object for a CSSRuleList.

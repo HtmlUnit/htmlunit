@@ -844,7 +844,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             }
         };
         page.addDomChangeListener(listener);
-        page.<HtmlElement>getHtmlElementById("p1").click();
+        page.getHtmlElementById("p1").click();
     }
 
     /**

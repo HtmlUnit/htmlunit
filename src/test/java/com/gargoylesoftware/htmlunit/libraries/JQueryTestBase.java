@@ -192,5 +192,4 @@ public abstract class JQueryTestBase extends WebServerTestCase {
             failures_.add(new ComparisonFailure("", expectedLI, actualLI).getMessage());
         }
     }
-
 }

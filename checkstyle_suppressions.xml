@@ -5,6 +5,7 @@
     "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
 
 <suppressions>
+    <suppress checks="AvoidStarImport" files="XMLSerializer.java"/>
     <suppress checks="FileLength" files="WebClient.java"/>
     <suppress checks="FileLength" files="CSSStyleDeclaration.java"/>
     <suppress checks="FileLength" files="HtmlPage.java"/>

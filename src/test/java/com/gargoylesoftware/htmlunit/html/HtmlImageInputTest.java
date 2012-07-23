@@ -186,7 +186,7 @@ public class HtmlImageInputTest extends WebTestCase {
         final String[] expectedAlerts = {"1"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), s, collectedAlerts);
-        page.<HtmlElement>getHtmlElementById("i").click();
+        page.getHtmlElementById("i").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -200,8 +200,7 @@ public class HtmlImageInputTest extends WebTestCase {
         final String[] expectedAlerts = {"1"};
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), s, collectedAlerts);
-        page.<HtmlElement>getHtmlElementById("i").click();
+        page.getHtmlElementById("i").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
-
 }

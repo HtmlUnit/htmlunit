@@ -36,7 +36,7 @@ public class DomAttrTest extends WebTestCase {
     public void getCanonicalXPath() throws Exception {
         final String html = "<html id='foo'><body></body></html>";
         final HtmlPage page = loadPage(html);
-        final DomAttr attr = page.<HtmlElement>getHtmlElementById("foo").getAttributeNode("id");
+        final DomAttr attr = page.getHtmlElementById("foo").getAttributeNode("id");
 
         assertEquals("/html/@id", attr.getCanonicalXPath());
     }

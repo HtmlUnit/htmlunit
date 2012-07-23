@@ -25,17 +25,16 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -2118,8 +2117,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-        page.<HtmlDivision>getHtmlElementById("a").click();
-        page.<HtmlDivision>getHtmlElementById("b").mouseOver();
+        page.getHtmlElementById("a").click();
+        page.getHtmlElementById("b").mouseOver();
         final String[] expected = {"clicked", "clicked"};
         assertEquals(expected, actual);
     }
@@ -2140,9 +2139,9 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-        page.<HtmlDivision>getHtmlElementById("a").click();
-        page.<HtmlDivision>getHtmlElementById("b").mouseOver();
-        page.<HtmlDivision>getHtmlElementById("c").mouseOver();
+        page.getHtmlElementById("a").click();
+        page.getHtmlElementById("b").mouseOver();
+        page.getHtmlElementById("c").mouseOver();
         final String[] expected = {"click", "click", "click"};
         assertEquals(expected, actual);
     }
@@ -2328,7 +2327,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         final HtmlButton button1 = firstPage.getHtmlElementById("button1");
         final HtmlPage secondPage = button1.click();
         assertEquals("Second", secondPage.getTitleText());
-        secondPage.<HtmlButton>getHtmlElementById("button2").click();
+        secondPage.getHtmlElementById("button2").click();
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 

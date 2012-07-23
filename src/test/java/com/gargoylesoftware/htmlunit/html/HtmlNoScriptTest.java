@@ -20,10 +20,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for elements inside {@link HtmlNoScript}.

@@ -28,15 +28,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -934,7 +933,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final Page page2 = page.<HtmlElement>getHtmlElementById("testButton").click();
+        final Page page2 = page.getHtmlElementById("testButton").click();
         final URL url2 = page2.getWebResponse().getWebRequest().getUrl();
         assertTrue("Select in URL " + url2, url2.toExternalForm().contains("testSelect=testValue"));
     }

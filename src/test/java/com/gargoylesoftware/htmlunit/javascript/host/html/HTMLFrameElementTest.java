@@ -24,15 +24,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -327,9 +326,9 @@ public class HTMLFrameElementTest extends WebTestCase {
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);
-        page.<HtmlElement>getHtmlElementById("btn1").click();
-        page.<HtmlElement>getHtmlElementById("btn2").click();
-        page.<HtmlElement>getHtmlElementById("btn3").click();
+        page.getHtmlElementById("btn1").click();
+        page.getHtmlElementById("btn2").click();
+        page.getHtmlElementById("btn3").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }

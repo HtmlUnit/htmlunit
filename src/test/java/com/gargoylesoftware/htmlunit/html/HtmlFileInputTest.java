@@ -120,7 +120,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final HtmlForm f = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = f.getInputByName("image");
         fileInput.setValueAttribute(fileURL);
-        f.<HtmlElement>getElementById("clickMe").click();
+        f.getElementById("clickMe").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getFile());
         assertTrue(pair.getFile().length() != 0);
@@ -154,7 +154,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         fileInput.setValueAttribute("dummy.txt");
         fileInput.setContentType("text/csv");
         fileInput.setData("My file data".getBytes());
-        firstPage.<HtmlElement>getHtmlElementById("mySubmit").click();
+        firstPage.getHtmlElementById("mySubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
 
         assertNotNull(pair.getData());
@@ -202,7 +202,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toExternalForm();
         fileInput.setValueAttribute(path);
         fileInput.setData("My file data".getBytes());
-        firstPage.<HtmlElement>getHtmlElementById("mySubmit").click();
+        firstPage.getHtmlElementById("mySubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
 
         assertNotNull(pair.getData());
@@ -257,7 +257,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final HtmlForm f = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = f.getInputByName("image");
         fileInput.setData("My file data".getBytes());
-        firstPage.<HtmlElement>getHtmlElementById("mySubmit").click();
+        firstPage.getHtmlElementById("mySubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
 
         assertNull(pair.getData());
@@ -300,7 +300,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
         final HtmlForm f = firstPage.getForms().get(0);
-        f.<HtmlElement>getElementById("clickMe").click();
+        f.getElementById("clickMe").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertEquals("image", pair.getName());
         assertNull(pair.getFile());
@@ -334,13 +334,13 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final URL fileURL = getClass().getClassLoader().getResource("testfiles/empty.png");
 
         fileInput.setValueAttribute(fileURL.toExternalForm());
-        f.<HtmlInput>getInputByName("mysubmit").click();
+        f.getInputByName("mysubmit").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getFile());
         Assert.assertFalse("Content type: " + pair.getContentType(), "text/webtest".equals(pair.getContentType()));
 
         fileInput.setContentType("text/webtest");
-        f.<HtmlInput>getInputByName("mysubmit").click();
+        f.getInputByName("mysubmit").click();
         final KeyDataPair pair2 = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair2.getFile());
         assertEquals("text/webtest", pair2.getContentType());

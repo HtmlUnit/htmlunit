@@ -21,12 +21,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -56,8 +55,8 @@ public class UIEventTest extends WebTestCase {
             + "</body></html>";
         final List<String> actual = new ArrayList<String>();
         final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-        page.<HtmlDivision>getHtmlElementById("a").click();
-        page.<HtmlDivision>getHtmlElementById("b").dblClick();
+        page.getHtmlElementById("a").click();
+        page.getHtmlElementById("b").dblClick();
         assertEquals(getExpectedAlerts(), actual);
     }
 

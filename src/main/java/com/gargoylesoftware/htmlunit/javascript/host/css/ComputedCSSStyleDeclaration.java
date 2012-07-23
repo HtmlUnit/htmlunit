@@ -1494,7 +1494,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             final String cssFloat = jsxGet_cssFloat();
             if ("right".equals(cssFloat) || "left".equals(cssFloat)) {
                 // We're floating; simplistic approximation: text content * pixels per character.
-                width = this.<DomNode>getDomNodeOrDie().getTextContent().length() * PIXELS_PER_CHAR;
+                width = getDomNodeOrDie().getTextContent().length() * PIXELS_PER_CHAR;
             }
             else if ("block".equals(display)) {
                 // Block elements take up 100% of the parent's width.
@@ -1537,7 +1537,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public int getContentWidth() {
         int width = 0;
-        for (final DomNode child : this.<DomNode>getDomNodeOrDie().getChildren()) {
+        for (final DomNode child : getDomNodeOrDie().getChildren()) {
             if (child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
                 final int w = e.jsxGet_currentStyle().getCalculatedWidth(true, true);

@@ -928,7 +928,7 @@ public class HtmlElementTest extends WebTestCase {
         final HtmlTextInput input = page.getHtmlElementById("myInput");
         input.type("Hello Cruel World");
         assertEquals("Hello Cruel World", input.getValueAttribute());
-        page.<HtmlButtonInput>getHtmlElementById("myButton").click();
+        page.getHtmlElementById("myButton").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -968,7 +968,7 @@ public class HtmlElementTest extends WebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         final HtmlPage page = loadPage(html, collectedAlerts);
 
-        page.<HtmlElement>getHtmlElementById("textfield1").type('a');
+        page.getHtmlElementById("textfield1").type('a');
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -1077,9 +1077,9 @@ public class HtmlElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals("div", page.<HtmlElement>getHtmlElementById("dIv1").getNodeName());
-        assertEquals("app:div", page.<HtmlElement>getHtmlElementById("dIv2").getNodeName());
-        assertEquals("another:div", page.<HtmlElement>getHtmlElementById("dIv3").getNodeName());
+        assertEquals("div", page.getHtmlElementById("dIv1").getNodeName());
+        assertEquals("app:div", page.getHtmlElementById("dIv2").getNodeName());
+        assertEquals("another:div", page.getHtmlElementById("dIv3").getNodeName());
         assertTrue(page.asXml().contains("<app:div "));
     }
 
