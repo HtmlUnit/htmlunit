@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -63,7 +64,7 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.FF)
     @Alerts({ "true", "[object HTMLDocument]", "[object HTMLDocument]", "0", "[object HTMLDocument]", "0" })
-    public void testEmptyRange() throws Exception {
+    public void emptyRange() throws Exception {
         loadPageWithAlerts2(contentStart + "alertRange(r);" + contentEnd);
     }
 
@@ -73,7 +74,7 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.FF)
     @Alerts({ "false", "BODY", "BODY", "1", "BODY", "2" })
-    public void testSelectNode() throws Exception {
+    public void selectNode() throws Exception {
         final String script = "r.selectNode(document.getElementById('theDiv'));"
             + "alertRange(r);";
 
@@ -86,7 +87,7 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.FF)
     @Alerts({ "false", "DIV", "DIV", "0", "DIV", "2" })
-    public void testSelectNodeContents() throws Exception {
+    public void selectNodeContents() throws Exception {
         final String script = "r.selectNodeContents(document.getElementById('theDiv'));"
             + "alertRange(r);";
 
@@ -99,7 +100,7 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.FF)
     @Alerts("<div id=\"myDiv2\"></div><div>harhar</div><div id=\"myDiv3\"></div>")
-    public void testCreateContextualFragment() throws Exception {
+    public void createContextualFragment() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var element = document.getElementById('myDiv2');\n"
@@ -122,7 +123,7 @@ public class RangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "[object Text]", "[object HTMLTableRowElement]" }, IE = "exception")
-    public void createContextualFragment() throws Exception {
+    public void createContextualFragment2() throws Exception {
         final String html = "<html><body>\n"
             + "<div id ='d'></div>\n"
             + "<table><tr id='t'><td>old</td></tr></table>\n"
@@ -152,7 +153,7 @@ public class RangeTest extends WebDriverTestCase {
     @Browsers(Browser.FF)
     @Alerts({ "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwer",
         "[object HTMLSpanElement]" })
-    public void testExtractContents() throws Exception {
+    public void extractContents() throws Exception {
         final String html =
               "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
             + "var d = document.getElementById('d');\n"
@@ -184,7 +185,7 @@ public class RangeTest extends WebDriverTestCase {
         "5 <p><b id=\"b\"><span id=\"s\">inner</span>text2</b></p>",
         "6 1: [object HTMLParagraphElement]: <b id=\"b\"><span id=\"s\"></span>text2</b>",
         "7 <p><b id=\"b\"><span id=\"s\">inner</span></b></p>" })
-    public void testExtractContents2() throws Exception {
+    public void extractContents2() throws Exception {
         final String html =
               "<html><body><div id='d'><p><b id='b'>text1<span id='s'>inner</span>text2</b></p></div><script>\n"
             + "var d = document.getElementById('d');\n"
@@ -245,6 +246,109 @@ public class RangeTest extends WebDriverTestCase {
             + "alert(range.compareBoundaryPoints(Range.END_TO_END, sourceRange));\n"
             + "alert(range.compareBoundaryPoints(Range.END_TO_START, sourceRange));\n"
             + "alert(range.compareBoundaryPoints(Range.START_TO_START, range));\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "abcd", "bc", "null", "null", "ad", "bc" })
+    public void extractContents3() throws Exception {
+        final String html =
+            "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span>"
+            + "<span id='c'>c</span><span id='d'>d</span></div><script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var s = document.getElementById('s');\n"
+            + "var r = document.createRange();\n"
+            + "r.setStart(d, 1);\n"
+            + "r.setEnd(d, 3);\n"
+            + "alert(d.textContent);\n"
+            + "alert(r.toString());\n"
+            + "var x = r.extractContents();\n"
+            + "alert(document.getElementById('b'));\n"
+            + "alert(document.getElementById('c'));\n"
+            + "alert(d.textContent);\n"
+            + "alert(x.textContent);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwerty",
+        "[object HTMLSpanElement]" })
+    @NotYetImplemented
+    public void cloneContents() throws Exception {
+        final String html =
+            "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var s = document.getElementById('s');\n"
+            + "var r = document.createRange();\n"
+            + "r.setStart(s.firstChild, 4);\n"
+            + "r.setEnd(d.childNodes[2], 2);\n"
+            + "alert(s.innerHTML);\n"
+            + "alert(r);\n"
+            + "var fragment = r.cloneContents();\n"
+            + "alert(fragment);\n"
+            + "alert(fragment.childNodes[0] + ' ' + fragment.childNodes[1]);\n"
+            + "alert(s.innerHTML);\n"
+            + "alert(document.getElementById('s'));\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "qwerty", "bcqwertyxy", "null", "az" })
+    @NotYetImplemented
+    public void deleteContents() throws Exception {
+        final String html =
+            "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var s = document.getElementById('s');\n"
+            + "var r = document.createRange();\n"
+            + "r.setStart(d.firstChild, 1);\n"
+            + "r.setEnd(d.childNodes[2], 2);\n"
+            + "alert(s.innerHTML);\n"
+            + "alert(r.toString());\n"
+            + "r.deleteContents();\n"
+            + "alert(document.getElementById('s'));\n"
+            + "alert(d.textContent);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({ "abcd", "bc", "null", "null", "ad" })
+    @NotYetImplemented
+    public void deleteContents2() throws Exception {
+        final String html =
+            "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"
+            + "<span id='d'>d</span></div><script>\n"
+            + "var d = document.getElementById('d');\n"
+            + "var s = document.getElementById('s');\n"
+            + "var r = document.createRange();\n"
+            + "r.setStart(d, 1);\n"
+            + "r.setEnd(d, 3);\n"
+            + "alert(d.textContent);\n"
+            + "alert(r.toString());\n"
+            + "r.deleteContents();\n"
+            + "alert(document.getElementById('b'));\n"
+            + "alert(document.getElementById('c'));\n"
+            + "alert(d.textContent);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
