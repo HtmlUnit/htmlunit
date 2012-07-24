@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), initial WebSocket support">
+            <action type="fix" dev="asashour" issue="3313921">
+                JavaScript: document.getElementById() finds non-HTML elements.
+            </action>
             <action type="update" dev="asashour">
                 HtmlPage: deprecate .getElementByAccessKey(), use .getHtmlElementByAccessKey() instead.
             </action>

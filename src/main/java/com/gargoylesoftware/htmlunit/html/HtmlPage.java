@@ -1628,8 +1628,19 @@ public class HtmlPage extends SgmlPage {
         return getElementById(id, caseSensitive);
     }
 
+    /**
+     * Returns the element with the specified ID. If more than one element
+     * has this ID, then this method returns the
+     * first one.
+     *
+     * @param id the ID value to search for
+     * @param caseSensitive whether to consider case sensitivity or not
+     * @param <E> the element type
+     * @return the element with the specified ID
+     * @throws ElementNotFoundException if no element was found matching the specified ID
+     */
     @SuppressWarnings("unchecked")
-    private <E extends DomElement> E getElementById(final String id, final boolean caseSensitive)
+    public <E extends DomElement> E getElementById(final String id, final boolean caseSensitive)
         throws ElementNotFoundException {
 
         List<DomElement> elements = idMap_.get(id);
@@ -1651,12 +1662,12 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Returns the HTML element with the specified name. If more than one element
+     * Returns the element with the specified name. If more than one element
      * has this name, then this method returns the first one.
      *
      * @param name the name value to search for
      * @param <E> the element type
-     * @return the HTML element with the specified name
+     * @return the element with the specified name
      * @throws ElementNotFoundException if no element was found matching the specified name
      */
     @SuppressWarnings("unchecked")
@@ -1669,12 +1680,12 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Returns the HTML elements with the specified name attribute. If there are no elements
+     * Returns the elements with the specified name attribute. If there are no elements
      * with the specified name, this method returns an empty list. Please note that
      * the lists returned by this method are immutable.
      *
      * @param name the name value to search for
-     * @return the HTML elements with the specified name attribute
+     * @return the elements with the specified name attribute
      */
     public List<DomElement> getElementsByName(final String name) {
         final List<DomElement> list = nameMap_.get(name);
@@ -1685,11 +1696,11 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Returns the HTML elements with the specified string for their name or ID. If there are
+     * Returns the elements with the specified string for their name or ID. If there are
      * no elements with the specified name or ID, this method returns an empty list.
      *
      * @param idAndOrName the value to search for
-     * @return the HTML elements with the specified string for their name or ID
+     * @return the elements with the specified string for their name or ID
      */
     public List<DomElement> getElementsByIdAndOrName(final String idAndOrName) {
         final List<DomElement> list1 = idMap_.get(idAndOrName);
@@ -1805,8 +1816,8 @@ public class HtmlPage extends SgmlPage {
      * @param node the node that has just been added to the document
      */
     void notifyNodeAdded(final DomNode node) {
-        if (node instanceof HtmlElement) {
-            addMappedElement((HtmlElement) node, true);
+        if (node instanceof DomElement) {
+            addMappedElement((DomElement) node, true);
 
             if ("base".equals(node.getNodeName())) {
                 calculateBase();

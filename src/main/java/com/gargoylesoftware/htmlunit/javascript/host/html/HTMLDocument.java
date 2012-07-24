@@ -1030,7 +1030,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         try {
             final boolean caseSensitive =
                 getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE);
-            final HtmlElement htmlElement = this.<HtmlPage>getDomNodeOrDie().getHtmlElementById(id, caseSensitive);
+            final DomElement htmlElement = getHtmlPage().getElementById(id, caseSensitive);
             final Object jsElement = getScriptableFor(htmlElement);
             if (jsElement == NOT_FOUND) {
                 if (LOG.isDebugEnabled()) {
