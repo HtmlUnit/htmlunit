@@ -8,9 +8,6 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, initial WebSocket support">
-            <action type="add" dev="asashour" issue="3107238" due-to="James Phillpotts">
-                JavaScript: implement more Range methods.
-            </action>
             <action type="update" dev="asashour">
                 Mandate Java 6 as a minimum requirement.
             </action>

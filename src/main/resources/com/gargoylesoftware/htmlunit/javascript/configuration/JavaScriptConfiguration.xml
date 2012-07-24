@@ -2891,16 +2891,6 @@
         <function name="setStart"/>
         <function name="setStartAfter"/>
         <function name="setStartBefore"/>
-
-        <function name="cloneContents"/>
-        <function name="deleteContents"/>
-        <function name="insertNode"/>
-        <function name="surroundContents"/>
-
-        <function name="compareBoundaryPoints"/>
-        <function name="cloneRange"/>
-        <function name="detach"/>
-        <function name="toString"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.RowContainer"
