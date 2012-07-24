@@ -19,8 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -38,7 +36,6 @@ public class SVGTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "svgElem", IE = "exception")
-    @NotYetImplemented(Browser.FF) // a simple hack doesn't work to make it working without breaking anything else
     public void getAttribute() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"
