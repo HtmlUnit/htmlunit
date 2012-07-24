@@ -390,4 +390,59 @@ public class Range extends SimpleScriptable {
         // TODO: handle other cases!
         return Integer.valueOf(1);
     }
+
+    /**
+     * Returns a clone of the range in a document fragment.
+     * @return a clone
+     */
+    public Object jsxFunction_cloneContents() {
+        return toW3C().cloneContents().getScriptObject();
+    }
+
+    /**
+     * Deletes the contents of the range.
+     */
+    public void jsxFunction_deleteContents() {
+        toW3C().deleteContents();
+    }
+
+    /**
+     * Inserts a new node at the beginning of the range. If the range begins at an offset, the node is split.
+     * @param newNode The node to insert
+     * @see https://developer.mozilla.org/en/DOM/range
+     */
+    public void jsxFunction_insertNode(final Node newNode) {
+        toW3C().insertNode(newNode.getDomNodeOrDie());
+    }
+
+    /**
+     * Surrounds the contents of the range in a new node.
+     * @param newNode The node to surround the range in
+     */
+    public void jsxFunction_surroundContents(final Node newNode) {
+        toW3C().surroundContents(newNode.getDomNodeOrDie());
+    }
+
+    /**
+     * Returns a clone of the range.
+     * @return a clone of the range
+     */
+    public Object jsxFunction_cloneRange() {
+        return new Range(toW3C().cloneRange());
+    }
+
+    /**
+     * Releases Range from use to improve performance.
+     */
+    public void jsxFunction_detach() {
+        // Java garbage collection should take care of this for us
+    }
+
+    /**
+     * Returns the text of the Range.
+     * @return the text
+     */
+    public Object jsxFunction_toString() {
+        return toW3C().toString();
+    }
 }

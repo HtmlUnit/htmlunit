@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -257,7 +256,6 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.FF)
     @Alerts({ "abcd", "bc", "null", "null", "ad", "bc" })
-    @NotYetImplemented
     public void extractContents3() throws Exception {
         final String html =
             "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span>"
@@ -285,7 +283,6 @@ public class RangeTest extends WebDriverTestCase {
     @Browsers(Browser.FF)
     @Alerts({ "qwerty", "tyxy", "[object DocumentFragment]", "[object HTMLSpanElement] [object Text]", "qwerty",
         "[object HTMLSpanElement]" })
-    @NotYetImplemented
     public void cloneContents() throws Exception {
         final String html =
             "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
@@ -311,7 +308,6 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.FF)
     @Alerts({ "qwerty", "bcqwertyxy", "null", "az" })
-    @NotYetImplemented
     public void deleteContents() throws Exception {
         final String html =
             "<html><body><div id='d'>abc<span id='s'>qwerty</span>xyz</div><script>\n"
@@ -335,7 +331,6 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Browsers(Browser.FF)
     @Alerts({ "abcd", "bc", "null", "null", "ad" })
-    @NotYetImplemented
     public void deleteContents2() throws Exception {
         final String html =
             "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"

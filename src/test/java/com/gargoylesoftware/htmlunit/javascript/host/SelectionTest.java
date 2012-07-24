@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 
 /**
@@ -319,10 +318,8 @@ public class SelectionTest extends WebDriverTestCase {
         client.setAlertHandler(alertHandler);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        final HtmlSpan s1 = page.getHtmlElementById("s1");
-        final DomNode s1Text = s1.getFirstChild();
-        final HtmlSpan s2 = page.getHtmlElementById("s2");
-        final DomNode s2Text = s2.getFirstChild();
+        final DomNode s1Text = page.getHtmlElementById("s1").getFirstChild();
+        final DomNode s2Text = page.getHtmlElementById("s2").getFirstChild();
         final HtmlInput input = page.getHtmlElementById("b");
 
         final org.w3c.dom.ranges.Range range = new SimpleRange();
