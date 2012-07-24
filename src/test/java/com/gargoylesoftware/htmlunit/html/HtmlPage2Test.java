@@ -601,7 +601,7 @@ public class HtmlPage2Test extends WebServerTestCase {
         final HtmlPage page = loadPageWithAlerts(html);
         final WebClient copy = clone(page.getWebClient());
         final HtmlPage copyPage = (HtmlPage) copy.getCurrentWindow().getTopWindow().getEnclosedPage();
-        copyPage.getElementById("link").click();
+        copyPage.getHtmlElementById("link").click();
         assertEquals(URL_FIRST.toExternalForm(), copyPage.getElementById("aframe").getAttribute("src"));
     }
 

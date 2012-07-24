@@ -329,9 +329,9 @@ public class HtmlPage extends SgmlPage {
     /**
      * {@inheritDoc}
      */
-    public HtmlElement getElementById(final String elementId) {
+    public DomElement getElementById(final String elementId) {
         try {
-            return getHtmlElementById(elementId);
+            return getElementById(elementId, true);
         }
         catch (final ElementNotFoundException e) {
             return null;
@@ -1608,7 +1608,7 @@ public class HtmlPage extends SgmlPage {
      */
     @SuppressWarnings("unchecked")
     public <E extends HtmlElement> E getHtmlElementById(final String id) throws ElementNotFoundException {
-        return (E) getHtmlElementById(id, true);
+        return (E) getElementById(id, true);
     }
 
     /**
@@ -1622,8 +1622,14 @@ public class HtmlPage extends SgmlPage {
      * @return the HTML element with the specified ID
      * @throws ElementNotFoundException if no element was found matching the specified ID
      */
-    @SuppressWarnings("unchecked")
     public <E extends HtmlElement> E getHtmlElementById(final String id, final boolean caseSensitive)
+        throws ElementNotFoundException {
+
+        return getElementById(id, caseSensitive);
+    }
+
+    @SuppressWarnings("unchecked")
+    private <E extends DomElement> E getElementById(final String id, final boolean caseSensitive)
         throws ElementNotFoundException {
 
         List<DomElement> elements = idMap_.get(id);
@@ -1654,7 +1660,7 @@ public class HtmlPage extends SgmlPage {
      * @throws ElementNotFoundException if no element was found matching the specified name
      */
     @SuppressWarnings("unchecked")
-    public <E extends HtmlElement> E getElementByName(final String name) throws ElementNotFoundException {
+    public <E extends DomElement> E getElementByName(final String name) throws ElementNotFoundException {
         final List<DomElement> elements = nameMap_.get(name);
         if (elements != null) {
             return (E) elements.get(0);
@@ -1706,7 +1712,7 @@ public class HtmlPage extends SgmlPage {
      * Adds an element to the ID and name maps, if necessary.
      * @param element the element to be added to the ID and name maps
      */
-    void addMappedElement(final HtmlElement element) {
+    void addMappedElement(final DomElement element) {
         addMappedElement(element, false);
     }
 

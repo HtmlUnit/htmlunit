@@ -319,12 +319,12 @@ public class HtmlRadioButtonInputTest extends WebTestCase {
         Assert.assertSame(page.getEnclosingWindow(), webClient.getCurrentWindow());
 
         // open popup
-        final HtmlPage page2 = page.getElementById("clickMe").click();
+        final HtmlPage page2 = page.getHtmlElementById("clickMe").click();
         Assert.assertNotSame(page, page2);
         Assert.assertSame(page2.getEnclosingWindow(), webClient.getCurrentWindow());
 
         // click radio buttons in the original page
-        final HtmlPage page3 = page.getElementById("radio1").click();
+        final HtmlPage page3 = page.getHtmlElementById("radio1").click();
         Assert.assertSame(page, page3);
         Assert.assertSame(page3.getEnclosingWindow(), webClient.getCurrentWindow());
     }

@@ -381,7 +381,7 @@ public class LocationTest extends WebTestCase {
 
         final HtmlPage a = client.getPage(url);
         final HtmlPage c = (HtmlPage) a.getFrameByName("c").getEnclosedPage();
-        c.getElementById("anchor").click();
+        c.getHtmlElementById("anchor").click();
         assertEquals(getExpectedAlerts(), alerts);
     }
 

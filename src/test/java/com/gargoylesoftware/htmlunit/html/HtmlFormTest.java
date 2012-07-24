@@ -952,7 +952,7 @@ public class HtmlFormTest extends WebTestCase {
             + "<input type='submit' id='mySubmit'>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
-        final HtmlPage secondPage = (HtmlPage) page.getElementById("mySubmit").click();
+        final HtmlPage secondPage = (HtmlPage) page.getHtmlElementById("mySubmit").click();
 
         assertNotNull(secondPage);
         assertEquals(page.getWebResponse().getWebRequest().getUrl() + "action.html?select=second+value",

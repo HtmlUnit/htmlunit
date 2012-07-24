@@ -436,7 +436,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * @return an Iterable over the HtmlElement children of this object, i.e. excluding the non-element nodes
+     * @return an Iterable over the DomElement children of this object, i.e. excluding the non-element nodes
      */
     public final Iterable<DomElement> getChildElements() {
         return new Iterable<DomElement>() {
@@ -447,7 +447,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * An iterator over the HtmlElement children.
+     * An iterator over the DomElement children.
      */
     protected class ChildElementsIterator implements Iterator<DomElement> {
 
@@ -501,10 +501,9 @@ public class DomElement extends DomNamespaceNode implements Element {
             while (next != null && !(next instanceof HtmlElement)) {
                 next = next.getNextSibling();
             }
-            nextElement_ = (HtmlElement) next;
+            nextElement_ = (DomElement) next;
         }
     }
-
 }
 
 /**

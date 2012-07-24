@@ -7,13 +7,14 @@
     </properties>
 
     <body>
-        <release version="2.11" date="???" description="Bugfixes, Java 6, initial WebSocket support">
+        <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), initial WebSocket support">
             <action type="update" dev="asashour">
                 HtmlPage: deprecate .getElementByAccessKey(), use .getHtmlElementByAccessKey() instead.
             </action>
             <action type="update" dev="asashour">
-                INCOMPATIBLE CHANGE: change the return type of HtmlPage.getElementsByTagName(),
-                .getElementsByName(), .getElementsByIdAndOrName()
+                INCOMPATIBLE CHANGE: change the return type of HtmlPage.getElementById(),
+                .getElementByName(), .getElementsByName(),
+                .getElementsByTagName(), .getElementsByIdAndOrName()
                 and HtmlElement.getChildElements()
                 from HtmlElement to DomElement.
             </action>

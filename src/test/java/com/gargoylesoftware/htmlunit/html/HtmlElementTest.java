@@ -1132,7 +1132,7 @@ public class HtmlElementTest extends WebTestCase {
 
         final HtmlPage page = loadPage(html);
 
-        final HtmlElement form = page.getElementById("myForm");
+        final HtmlElement form = page.getHtmlElementById("myForm");
 
         List<HtmlElement> elements = form.getElementsByAttribute("input", "value", "pushme");
         assertEquals(1, elements.size());

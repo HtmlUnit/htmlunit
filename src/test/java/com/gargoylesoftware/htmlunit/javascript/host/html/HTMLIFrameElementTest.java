@@ -618,7 +618,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        page.getElementById("d").click();
+        page.getHtmlElementById("d").click();
 
         final HtmlInlineFrame frame = (HtmlInlineFrame) page.getElementById("i");
         final HtmlPage framePage = (HtmlPage) frame.getEnclosedPage();

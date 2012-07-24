@@ -233,7 +233,7 @@ public class WebClient2Test extends WebServerTestCase {
 
         final WebClient clientCopy = clone(page.getWebClient());
         final HtmlPage pageCopy = (HtmlPage) clientCopy.getCurrentWindow().getTopWindow().getEnclosedPage();
-        pageCopy.getElementById("clicklink").click();
+        pageCopy.getHtmlElementById("clicklink").click();
         assertEquals("hello world", pageCopy.getElementById("mybox").getTextContent());
     }
 

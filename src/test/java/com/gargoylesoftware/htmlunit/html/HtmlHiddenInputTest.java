@@ -62,7 +62,7 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
                 + "</form>"
                 + "</body></html>";
         final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlElement hidden = page.getElementById("myHiddenInput");
+        final HtmlElement hidden = page.getHtmlElementById("myHiddenInput");
         assertFalse(hidden.isDisplayed());
     }
 }

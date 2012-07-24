@@ -86,7 +86,7 @@ public class HtmlTextInputTest extends WebTestCase {
             + "</script>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlElement t = page.getElementById("t2");
+        final HtmlElement t = page.getHtmlElementById("t2");
         t.type("abc");
         assertEquals("abc", t.asText());
     }

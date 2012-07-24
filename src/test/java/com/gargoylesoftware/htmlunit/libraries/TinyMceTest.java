@@ -72,7 +72,7 @@ public class TinyMceTest extends WebDriverTestCase {
         final HtmlPage page = (HtmlPage) client.getPage(url);
         client.waitForBackgroundJavaScript(5000L);
 
-        final HtmlElement result = page.getElementById("testresult");
+        final HtmlElement result = page.getHtmlElementById("testresult");
         final HtmlSpan totalSpan = result.getFirstByXPath("span[@class='all']");
         final int total = Integer.parseInt(totalSpan.asText());
         assertEquals(expectedTotal, total);

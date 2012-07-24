@@ -2221,7 +2221,7 @@ public class WebClientTest extends WebServerTestCase {
         startWebServer("./", null, servlets);
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test1");
-        final HtmlPage page2 = page.getElementById("submit").click();
+        final HtmlPage page2 = page.getHtmlElementById("submit").click();
         assertEquals(page, page2);
     }
 

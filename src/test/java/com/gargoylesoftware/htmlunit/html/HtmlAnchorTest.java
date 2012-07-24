@@ -94,7 +94,7 @@ public class HtmlAnchorTest extends WebTestCase {
         final MockWebConnection conn = (MockWebConnection) page.getWebClient().getWebConnection();
         assertEquals(1, conn.getRequestCount());
 
-        final HtmlPage secondPage = page.getElementById("a1").click();
+        final HtmlPage secondPage = page.getHtmlElementById("a1").click();
         assertEquals(1, conn.getRequestCount()); // no second server hit
         assertSame(page, secondPage);
     }
@@ -379,9 +379,9 @@ public class HtmlAnchorTest extends WebTestCase {
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
 
-        page.getElementById("a1").click();
-        page.getElementById("a2").click();
-        page.getElementById("a3").click();
+        page.getHtmlElementById("a1").click();
+        page.getHtmlElementById("a2").click();
+        page.getHtmlElementById("a3").click();
         assertEquals(new String[] {"hello", "hello", "hello"}, collectedAlerts);
     }
 
@@ -563,7 +563,7 @@ public class HtmlAnchorTest extends WebTestCase {
     public void testHashAnchor() throws Exception {
         final String html = "<html><body><a id='a' href='#a'>a</a></body></html>";
         HtmlPage page = loadPage(html);
-        page = page.getElementById("a").click();
+        page = page.getHtmlElementById("a").click();
         assertEquals(new URL(getDefaultUrl(), "#a"), page.getWebResponse().getWebRequest().getUrl());
     }
 

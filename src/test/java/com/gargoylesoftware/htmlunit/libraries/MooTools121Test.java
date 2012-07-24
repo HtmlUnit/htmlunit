@@ -59,7 +59,7 @@ public class MooTools121Test extends WebTestCase {
         client_ = getWebClient();
         final HtmlPage page = client_.getPage(url);
 
-        final HtmlElement progress = page.getElementById("progress");
+        final HtmlElement progress = page.getHtmlElementById("progress");
         client_.waitForBackgroundJavaScriptStartingBefore(2000 * 100);
 
         final String prevProgress = progress.asText();

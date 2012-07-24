@@ -277,7 +277,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         getWebClient().setJavaScriptEnabled(false);
         final HtmlPage page = loadPage(html);
-        final HtmlElement span = page.getElementById("theSpan");
+        final HtmlElement span = page.getHtmlElementById("theSpan");
         assertEquals("span", span.getTagName());
         final HtmlPage page2 = span.click();
         assertEquals(new URL(getDefaultUrl(), "page2.html"), page2.getUrl());

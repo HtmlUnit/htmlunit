@@ -287,7 +287,7 @@ public class HtmlInlineFrameTest extends WebDriverTestCase {
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        final HtmlElement iFrame = page.getElementById("f");
+        final HtmlElement iFrame = page.getHtmlElementById("f");
 
         assertEquals("iframe", iFrame.getTagName());
 
@@ -325,13 +325,13 @@ public class HtmlInlineFrameTest extends WebDriverTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
 
-        final HtmlElement myFrame = page.getElementById("myFrame");
+        final HtmlElement myFrame = page.getHtmlElementById("myFrame");
         assertEquals("iframe", myFrame.getTagName());
 
         HtmlPage enclosedPage = (HtmlPage) ((HtmlInlineFrame) myFrame).getEnclosedPage();
         assertEquals("Third content", enclosedPage.asText());
 
-        final HtmlElement iFrame = page.getElementById("f");
+        final HtmlElement iFrame = page.getHtmlElementById("f");
         assertEquals("iframe", iFrame.getTagName());
 
         enclosedPage = (HtmlPage) ((HtmlInlineFrame) iFrame).getEnclosedPage();
@@ -371,7 +371,7 @@ public class HtmlInlineFrameTest extends WebDriverTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST);
 
-        final HtmlElement myFrame = page.getElementById("myFrame");
+        final HtmlElement myFrame = page.getHtmlElementById("myFrame");
         assertEquals("iframe", myFrame.getTagName());
 
         HtmlPage enclosedPage = (HtmlPage) ((HtmlInlineFrame) myFrame).getEnclosedPage();
@@ -381,7 +381,7 @@ public class HtmlInlineFrameTest extends WebDriverTestCase {
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         jobManager.waitForJobs(1000);
 
-        final HtmlElement iFrame = page.getElementById("f");
+        final HtmlElement iFrame = page.getHtmlElementById("f");
         assertEquals("iframe", iFrame.getTagName());
 
         enclosedPage = (HtmlPage) ((HtmlInlineFrame) iFrame).getEnclosedPage();
