@@ -18,11 +18,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -657,76 +655,6 @@ public abstract class HtmlElement extends DomElement {
         final List<HtmlElement> children = getHtmlElementsByTagName(tagName);
         if (i >= 0 && i < children.size()) {
             children.get(i).remove();
-        }
-    }
-
-    /**
-     * @return an Iterable over the HtmlElement children of this object, i.e. excluding the non-element nodes
-     */
-    public final Iterable<HtmlElement> getChildElements() {
-        return new Iterable<HtmlElement>() {
-            public Iterator<HtmlElement> iterator() {
-                return new ChildElementsIterator();
-            }
-        };
-    }
-
-    /**
-     * An iterator over the HtmlElement children.
-     */
-    protected class ChildElementsIterator implements Iterator<HtmlElement> {
-
-        private HtmlElement nextElement_;
-
-        /** Constructor. */
-        protected ChildElementsIterator() {
-            if (getFirstChild() != null) {
-                if (getFirstChild() instanceof HtmlElement) {
-                    nextElement_ = (HtmlElement) getFirstChild();
-                }
-                else {
-                    setNextElement(getFirstChild());
-                }
-            }
-        }
-
-        /** @return is there a next one ? */
-        public boolean hasNext() {
-            return nextElement_ != null;
-        }
-
-        /** @return the next one */
-        public HtmlElement next() {
-            return nextElement();
-        }
-
-        /** Removes the current one. */
-        public void remove() {
-            if (nextElement_ == null) {
-                throw new IllegalStateException();
-            }
-            final DomNode sibling = nextElement_.getPreviousSibling();
-            if (sibling != null) {
-                sibling.remove();
-            }
-        }
-
-        /** @return the next element */
-        public HtmlElement nextElement() {
-            if (nextElement_ != null) {
-                final HtmlElement result = nextElement_;
-                setNextElement(nextElement_);
-                return result;
-            }
-            throw new NoSuchElementException();
-        }
-
-        private void setNextElement(final DomNode node) {
-            DomNode next = node.getNextSibling();
-            while (next != null && !(next instanceof HtmlElement)) {
-                next = next.getNextSibling();
-            }
-            nextElement_ = (HtmlElement) next;
         }
     }
 

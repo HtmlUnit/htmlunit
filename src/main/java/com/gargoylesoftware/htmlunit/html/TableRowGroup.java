@@ -59,7 +59,7 @@ public abstract class TableRowGroup extends HtmlElement {
     public final List<HtmlTableRow> getRows() {
         final List<HtmlTableRow> resultList = new ArrayList<HtmlTableRow>();
 
-        for (final HtmlElement element : getChildElements()) {
+        for (final DomElement element : getChildElements()) {
             if (element instanceof HtmlTableRow) {
                 resultList.add((HtmlTableRow) element);
             }

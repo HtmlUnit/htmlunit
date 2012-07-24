@@ -123,8 +123,8 @@ public class HtmlPage extends SgmlPage {
 
     private HtmlUnitDOMBuilder builder_;
     private String originalCharset_;
-    private Map<String, List<HtmlElement>> idMap_ = new HashMap<String, List<HtmlElement>>();
-    private Map<String, List<HtmlElement>> nameMap_ = new HashMap<String, List<HtmlElement>>();
+    private Map<String, List<DomElement>> idMap_ = new HashMap<String, List<DomElement>>();
+    private Map<String, List<DomElement>> nameMap_ = new HashMap<String, List<DomElement>>();
     private HtmlElement elementWithFocus_;
     private int parserCount_;
     private int snippetParserCount_;
@@ -880,7 +880,7 @@ public class HtmlPage extends SgmlPage {
      * @param accessKey the key to look for
      * @return the elements that are assigned to the specified accesskey
      */
-     public List<HtmlElement> getHtmlElementsByAccessKey(final char accessKey) {
+    public List<HtmlElement> getHtmlElementsByAccessKey(final char accessKey) {
         final List<HtmlElement> elements = new ArrayList<HtmlElement>();
 
         final String searchString = Character.toString(accessKey).toLowerCase();
@@ -1181,8 +1181,8 @@ public class HtmlPage extends SgmlPage {
      * @param clazz the class to search for
      * @return <code>null</code> if no child found
      */
-    private HtmlElement getFirstChildElement(final HtmlElement startElement, final Class<?> clazz) {
-        for (final HtmlElement element : startElement.getChildElements()) {
+    private DomElement getFirstChildElement(final DomElement startElement, final Class<?> clazz) {
+        for (final DomElement element : startElement.getChildElements()) {
             if (clazz.isInstance(element)) {
                 return element;
             }
@@ -1626,7 +1626,7 @@ public class HtmlPage extends SgmlPage {
     public <E extends HtmlElement> E getHtmlElementById(final String id, final boolean caseSensitive)
         throws ElementNotFoundException {
 
-        List<HtmlElement> elements = idMap_.get(id);
+        List<DomElement> elements = idMap_.get(id);
 
         // not found maybe we have to search case insensitive
         if (null == elements && !caseSensitive) {
@@ -1655,7 +1655,7 @@ public class HtmlPage extends SgmlPage {
      */
     @SuppressWarnings("unchecked")
     public <E extends HtmlElement> E getElementByName(final String name) throws ElementNotFoundException {
-        final List<HtmlElement> elements = nameMap_.get(name);
+        final List<DomElement> elements = nameMap_.get(name);
         if (elements != null) {
             return (E) elements.get(0);
         }
@@ -1670,8 +1670,8 @@ public class HtmlPage extends SgmlPage {
      * @param name the name value to search for
      * @return the HTML elements with the specified name attribute
      */
-    public List<HtmlElement> getElementsByName(final String name) {
-        final List<HtmlElement> list = nameMap_.get(name);
+    public List<DomElement> getElementsByName(final String name) {
+        final List<DomElement> list = nameMap_.get(name);
         if (list != null) {
             return Collections.unmodifiableList(list);
         }
@@ -1685,15 +1685,15 @@ public class HtmlPage extends SgmlPage {
      * @param idAndOrName the value to search for
      * @return the HTML elements with the specified string for their name or ID
      */
-    public List<HtmlElement> getElementsByIdAndOrName(final String idAndOrName) {
-        final List<HtmlElement> list1 = idMap_.get(idAndOrName);
-        final List<HtmlElement> list2 = nameMap_.get(idAndOrName);
-        final List<HtmlElement> list = new ArrayList<HtmlElement>();
+    public List<DomElement> getElementsByIdAndOrName(final String idAndOrName) {
+        final List<DomElement> list1 = idMap_.get(idAndOrName);
+        final List<DomElement> list2 = nameMap_.get(idAndOrName);
+        final List<DomElement> list = new ArrayList<DomElement>();
         if (list1 != null) {
             list.addAll(list1);
         }
         if (list2 != null) {
-            for (final HtmlElement elt : list2) {
+            for (final DomElement elt : list2) {
                 if (!list.contains(elt)) {
                     list.add(elt);
                 }
@@ -1715,7 +1715,7 @@ public class HtmlPage extends SgmlPage {
      * @param element the element to be added to the ID and name maps
      * @param recurse indicates if children must be added too
      */
-    void addMappedElement(final HtmlElement element, final boolean recurse) {
+    void addMappedElement(final DomElement element, final boolean recurse) {
         if (isDescendant(element)) {
             addElement(idMap_, element, "id", recurse);
             addElement(nameMap_, element, "name", recurse);
@@ -1725,7 +1725,7 @@ public class HtmlPage extends SgmlPage {
     /**
      * Checks whether the specified element is descendant of this HtmlPage or not.
      */
-    private boolean isDescendant(final HtmlElement element) {
+    private boolean isDescendant(final DomElement element) {
         for (DomNode parent = element; parent != null; parent = parent.getParentNode()) {
             if (parent == this) {
                 return true;
@@ -1734,13 +1734,13 @@ public class HtmlPage extends SgmlPage {
         return false;
     }
 
-    private void addElement(final Map<String, List<HtmlElement>> map, final HtmlElement element,
+    private void addElement(final Map<String, List<DomElement>> map, final DomElement element,
             final String attribute, final boolean recurse) {
         final String value = element.getAttribute(attribute);
         if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
-            List<HtmlElement> elements = map.get(value);
+            List<DomElement> elements = map.get(value);
             if (elements == null) {
-                elements = new ArrayList<HtmlElement>();
+                elements = new ArrayList<DomElement>();
                 elements.add(element);
                 map.put(value, elements);
             }
@@ -1749,7 +1749,7 @@ public class HtmlPage extends SgmlPage {
             }
         }
         if (recurse) {
-            for (final HtmlElement child : element.getChildElements()) {
+            for (final DomElement child : element.getChildElements()) {
                 addElement(map, child, attribute, true);
             }
         }
@@ -1769,25 +1769,25 @@ public class HtmlPage extends SgmlPage {
      * @param recurse indicates if children must be removed too
      * @param descendant indicates of the element was descendant of this HtmlPage, but now its parent might be null
      */
-    void removeMappedElement(final HtmlElement element, final boolean recurse, final boolean descendant) {
+    void removeMappedElement(final DomElement element, final boolean recurse, final boolean descendant) {
         if (descendant || isDescendant(element)) {
             removeElement(idMap_, element, "id", recurse);
             removeElement(nameMap_, element, "name", recurse);
         }
     }
 
-    private void removeElement(final Map<String, List<HtmlElement>> map, final HtmlElement element, final String att,
+    private void removeElement(final Map<String, List<DomElement>> map, final DomElement element, final String att,
             final boolean recurse) {
         final String value = element.getAttribute(att);
         if (!StringUtils.isEmpty(value)) {
-            final List<HtmlElement> elements = map.remove(value);
+            final List<DomElement> elements = map.remove(value);
             if (elements != null && (elements.size() != 1 || !elements.contains(element))) {
                 elements.remove(element);
                 map.put(value, elements);
             }
         }
         if (recurse) {
-            for (final HtmlElement child : element.getChildElements()) {
+            for (final DomElement child : element.getChildElements()) {
                 removeElement(map, child, att, true);
             }
         }
@@ -2027,8 +2027,8 @@ public class HtmlPage extends SgmlPage {
     protected HtmlPage clone() {
         final HtmlPage result = (HtmlPage) super.clone();
         result.elementWithFocus_ = null;
-        result.idMap_ = new HashMap<String, List<HtmlElement>>();
-        result.nameMap_ = new HashMap<String, List<HtmlElement>>();
+        result.idMap_ = new HashMap<String, List<DomElement>>();
+        result.nameMap_ = new HashMap<String, List<DomElement>>();
         return result;
     }
 

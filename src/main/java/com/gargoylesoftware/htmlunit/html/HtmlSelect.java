@@ -184,7 +184,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     public void removeOption(final int index) {
         final ChildElementsIterator iterator = new ChildElementsIterator();
         for (int i = 0; iterator.hasNext();) {
-            final HtmlElement element = iterator.nextElement();
+            final DomElement element = iterator.nextElement();
             if (element instanceof HtmlOption) {
                 if (i == index) {
                     element.remove();
@@ -203,7 +203,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     public void replaceOption(final int index, final HtmlOption newOption) {
         final ChildElementsIterator iterator = new ChildElementsIterator();
         for (int i = 0; iterator.hasNext();) {
-            final HtmlElement element = iterator.nextElement();
+            final DomElement element = iterator.nextElement();
             if (element instanceof HtmlOption) {
                 if (i == index) {
                     element.replace(newOption);

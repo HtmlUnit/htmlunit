@@ -19,9 +19,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.w3c.dom.Attr;
@@ -432,6 +434,77 @@ public class DomElement extends DomNamespaceNode implements Element {
     public final String getId() {
         return getAttribute("id");
     }
+
+    /**
+     * @return an Iterable over the HtmlElement children of this object, i.e. excluding the non-element nodes
+     */
+    public final Iterable<DomElement> getChildElements() {
+        return new Iterable<DomElement>() {
+            public Iterator<DomElement> iterator() {
+                return new ChildElementsIterator();
+            }
+        };
+    }
+
+    /**
+     * An iterator over the HtmlElement children.
+     */
+    protected class ChildElementsIterator implements Iterator<DomElement> {
+
+        private DomElement nextElement_;
+
+        /** Constructor. */
+        protected ChildElementsIterator() {
+            if (getFirstChild() != null) {
+                if (getFirstChild() instanceof DomElement) {
+                    nextElement_ = (DomElement) getFirstChild();
+                }
+                else {
+                    setNextElement(getFirstChild());
+                }
+            }
+        }
+
+        /** @return is there a next one ? */
+        public boolean hasNext() {
+            return nextElement_ != null;
+        }
+
+        /** @return the next one */
+        public DomElement next() {
+            return nextElement();
+        }
+
+        /** Removes the current one. */
+        public void remove() {
+            if (nextElement_ == null) {
+                throw new IllegalStateException();
+            }
+            final DomNode sibling = nextElement_.getPreviousSibling();
+            if (sibling != null) {
+                sibling.remove();
+            }
+        }
+
+        /** @return the next element */
+        public DomElement nextElement() {
+            if (nextElement_ != null) {
+                final DomElement result = nextElement_;
+                setNextElement(nextElement_);
+                return result;
+            }
+            throw new NoSuchElementException();
+        }
+
+        private void setNextElement(final DomNode node) {
+            DomNode next = node.getNextSibling();
+            while (next != null && !(next instanceof HtmlElement)) {
+                next = next.getNextSibling();
+            }
+            nextElement_ = (HtmlElement) next;
+        }
+    }
+
 }
 
 /**

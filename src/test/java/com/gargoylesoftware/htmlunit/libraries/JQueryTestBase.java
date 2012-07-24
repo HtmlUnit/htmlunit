@@ -32,6 +32,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlListItem;
 import com.gargoylesoftware.htmlunit.html.HtmlOrderedList;
@@ -98,7 +99,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     protected void runTest() throws Exception {
-        final Iterator<HtmlElement> it = loadPage();
+        final Iterator<DomElement> it = loadPage();
         final List<String> lines = FileUtils.readLines(new File(getExpectedPath()), "UTF-8");
         if (lines.get(0).charAt(0) == 0xFEFF) {
             // The file has a UTF-8 BOM; remove it!
@@ -132,7 +133,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
      * @return a list item iterator containing the test results
      * @throws Exception if an error occurs
      */
-    protected Iterator<HtmlElement> loadPage() throws Exception {
+    protected Iterator<DomElement> loadPage() throws Exception {
         final HtmlPage page = client_.getPage(getUrl());
 
         client_.waitForBackgroundJavaScriptStartingBefore(4 * 60 * 1000);
@@ -150,7 +151,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
 
         final HtmlElement doc = page.getDocumentElement();
         final HtmlOrderedList tests = (HtmlOrderedList) doc.getElementById("tests");
-        final Iterator<HtmlElement> iter = tests.getChildElements().iterator();
+        final Iterator<DomElement> iter = tests.getChildElements().iterator();
         if (!iter.hasNext()) {
             fail("No result found");
         }
@@ -184,7 +185,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
      * @param expected the expected values
      * @throws Exception if an error occurs
      */
-    protected void ok(final Iterator<HtmlElement> iterator, final Iterator<String> expected) throws Exception {
+    protected void ok(final Iterator<DomElement> iterator, final Iterator<String> expected) throws Exception {
         final HtmlListItem li = (HtmlListItem) iterator.next();
         final String expectedLI = getNextExpectedModuleResult(expected);
         final String actualLI = li.<HtmlElement>getFirstByXPath("./strong").asText();

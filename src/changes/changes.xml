@@ -12,7 +12,9 @@
                 HtmlPage: deprecate .getElementByAccessKey(), use .getHtmlElementByAccessKey() instead.
             </action>
             <action type="update" dev="asashour">
-                INCOMPATIBLE CHANGE: change the return type of HtmlPage.getElementsByTagName()
+                INCOMPATIBLE CHANGE: change the return type of HtmlPage.getElementsByTagName(),
+                .getElementsByName(), .getElementsByIdAndOrName()
+                and HtmlElement.getChildElements()
                 from HtmlElement to DomElement.
             </action>
             <action type="update" dev="asashour">

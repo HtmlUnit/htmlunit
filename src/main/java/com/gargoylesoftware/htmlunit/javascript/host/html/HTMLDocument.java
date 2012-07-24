@@ -1132,7 +1132,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final HTMLCollection collection = new HTMLCollection(page, true, "HTMLDocument." + name) {
             @Override
             protected List<Object> computeElements() {
-                final List<HtmlElement> elements;
+                final List<DomElement> elements;
                 if (isIE) {
                     elements = page.getElementsByIdAndOrName(name);
                 }
@@ -1140,7 +1140,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     elements = page.getElementsByName(name);
                 }
                 final List<Object> matchingElements = new ArrayList<Object>();
-                for (final HtmlElement elt : elements) {
+                for (final DomElement elt : elements) {
                     if (elt instanceof HtmlForm || elt instanceof HtmlImage || elt instanceof HtmlApplet
                             || (isIE && elt instanceof BaseFrame)) {
                         matchingElements.add(elt);

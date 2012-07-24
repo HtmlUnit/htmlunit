@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.BaseFrame;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -1174,7 +1175,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 // overhead. We only use an XPath-based operation when we have to (where there is more than one
                 // matching element). This optimization appears to improve performance in certain situations by ~15%
                 // vs using XPath-based operations throughout.
-                final List<HtmlElement> elements = page.getElementsByName(name);
+                final List<DomElement> elements = page.getElementsByName(name);
                 if (elements.size() == 1) {
                     result = getScriptableFor(elements.get(0));
                 }

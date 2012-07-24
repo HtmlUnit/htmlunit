@@ -175,7 +175,7 @@ public class HtmlTable extends HtmlElement {
      * @return the caption text
      */
     public String getCaptionText() {
-        for (final HtmlElement element : getChildElements()) {
+        for (final DomElement element : getChildElements()) {
             if (element instanceof HtmlCaption) {
                 return element.asText();
             }
@@ -189,7 +189,7 @@ public class HtmlTable extends HtmlElement {
      * @return the table header
      */
     public HtmlTableHeader getHeader() {
-        for (final HtmlElement element : getChildElements()) {
+        for (final DomElement element : getChildElements()) {
             if (element instanceof HtmlTableHeader) {
                 return (HtmlTableHeader) element;
             }
@@ -203,7 +203,7 @@ public class HtmlTable extends HtmlElement {
      * @return the table footer
      */
     public HtmlTableFooter getFooter() {
-        for (final HtmlElement element : getChildElements()) {
+        for (final DomElement element : getChildElements()) {
             if (element instanceof HtmlTableFooter) {
                 return (HtmlTableFooter) element;
             }
@@ -219,7 +219,7 @@ public class HtmlTable extends HtmlElement {
      */
     public List<HtmlTableBody> getBodies() {
         final List<HtmlTableBody> bodies = new ArrayList<HtmlTableBody>();
-        for (final HtmlElement element : getChildElements()) {
+        for (final DomElement element : getChildElements()) {
             if (element instanceof HtmlTableBody) {
                 bodies.add((HtmlTableBody) element);
             }

@@ -1422,9 +1422,9 @@ public class HtmlFormTest extends WebTestCase {
             + "\n"
             + "</body></html>";
         final HtmlPage page = loadPage(html);
-        final List<HtmlElement> quantities = page.getElementsByName("Quantity");
+        final List<DomElement> quantities = page.getElementsByName("Quantity");
         assertEquals(3, quantities.size());
-        for (final HtmlElement quantity : quantities) {
+        for (final DomElement quantity : quantities) {
             assertEquals("1", quantity.getAttribute("value"));
         }
     }

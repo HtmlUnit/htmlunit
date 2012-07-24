@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.RetriesRunner;
 import com.gargoylesoftware.htmlunit.RetriesRunner.Retries;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -82,7 +83,7 @@ public class Dojo102Test extends WebServerTestCase {
             }
         }
 
-        final Iterator<HtmlElement> logs = logBody.getChildElements().iterator();
+        final Iterator<DomElement> logs = logBody.getChildElements().iterator();
         eq("345 tests to run in 41 groups", logs);
         eq(GROUP_DELIMITER, logs);
 
@@ -802,7 +803,7 @@ public class Dojo102Test extends WebServerTestCase {
         eq(GROUP_DELIMITER, logs);
     }
 
-    private void eq(final String expected, final Iterator<HtmlElement> i) {
+    private void eq(final String expected, final Iterator<DomElement> i) {
         assertEquals(expected, i.next().asText().trim());
     }
 

@@ -1084,11 +1084,11 @@ public class HtmlPageTest extends WebServerTestCase {
         assertEquals(2, page.getElementsByName("b").size());
         assertEquals(0, page.getElementsByName("c").size());
 
-        final HtmlElement a = page.getElementsByName("a").get(0);
+        final DomElement a = page.getElementsByName("a").get(0);
         a.remove();
         assertEquals(0, page.getElementsByName("a").size());
 
-        final HtmlElement b1 = page.getElementsByName("b").get(0);
+        final DomElement b1 = page.getElementsByName("b").get(0);
         b1.appendChild(a);
         assertEquals(1, page.getElementsByName("a").size());
     }
@@ -1132,11 +1132,11 @@ public class HtmlPageTest extends WebServerTestCase {
         assertEquals(1, page.getElementsByIdAndOrName("c").size());
         assertEquals(1, page.getElementsByIdAndOrName("d").size());
 
-        final HtmlElement a = page.getElementsByIdAndOrName("a").get(0);
+        final DomElement a = page.getElementsByIdAndOrName("a").get(0);
         a.remove();
         assertEquals(0, page.getElementsByIdAndOrName("a").size());
 
-        final HtmlElement b1 = page.getElementsByIdAndOrName("b").get(0);
+        final DomElement b1 = page.getElementsByIdAndOrName("b").get(0);
         b1.appendChild(a);
         assertEquals(1, page.getElementsByIdAndOrName("a").size());
     }

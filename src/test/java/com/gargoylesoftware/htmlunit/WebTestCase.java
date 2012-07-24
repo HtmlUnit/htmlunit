@@ -48,6 +48,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -676,7 +677,7 @@ public abstract class WebTestCase {
 
     private List<String> readChildElementsText(final HtmlElement elt) {
         final List<String> list = new ArrayList<String>();
-        for (final HtmlElement child : elt.getChildElements()) {
+        for (final DomElement child : elt.getChildElements()) {
             list.add(child.asText());
         }
         return list;

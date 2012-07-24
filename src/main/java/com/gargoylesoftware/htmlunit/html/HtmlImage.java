@@ -433,7 +433,7 @@ public class HtmlImage extends HtmlElement {
             final String mapName = getUseMapAttribute().substring(1);
             final HtmlElement doc = ((HtmlPage) getPage()).getDocumentElement();
             final HtmlMap map = doc.getOneHtmlElementByAttribute("map", "name", mapName);
-            for (final HtmlElement element : map.getChildElements()) {
+            for (final DomElement element : map.getChildElements()) {
                 if (element instanceof HtmlArea) {
                     final HtmlArea area = (HtmlArea) element;
                     if (area.containsPoint(lastClickX_, lastClickY_)) {
