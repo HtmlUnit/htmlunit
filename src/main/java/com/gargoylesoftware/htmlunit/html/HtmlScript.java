@@ -261,7 +261,7 @@ public class HtmlScript extends HtmlElement {
         }
 
         final String src = getSrcAttribute();
-        if (src != DomElement.ATTRIBUTE_NOT_DEFINED) {
+        if (src != ATTRIBUTE_NOT_DEFINED) {
             return;
         }
 
@@ -440,7 +440,7 @@ public class HtmlScript extends HtmlElement {
             return false;
         }
 
-        // If the script's root ancestor node is not the page, the the script is not a part of the page.
+        // If the script's root ancestor node is not the page, then the script is not a part of the page.
         // If it isn't yet part of the page, don't execute the script; it's probably just being cloned.
         DomNode root = this;
         while (root.getParentNode() != null) {
