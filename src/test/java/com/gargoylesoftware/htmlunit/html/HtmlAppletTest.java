@@ -337,7 +337,7 @@ public class HtmlAppletTest extends WebTestCase {
         webClient.setAppletEnabled(true);
 
         final HtmlPage page = webClient.getPage(url);
-        final DomNodeList<HtmlElement> applets = page.getElementsByTagName("applet");
+        final DomNodeList<DomElement> applets = page.getElementsByTagName("applet");
         assertEquals(1, applets.size());
 
         final HtmlApplet htmlApplet = (HtmlApplet) applets.get(0);
@@ -369,7 +369,7 @@ public class HtmlAppletTest extends WebTestCase {
         webClient.setAppletEnabled(true);
 
         final HtmlPage page = webClient.getPage(url);
-        final DomNodeList<HtmlElement> applets = page.getElementsByTagName("applet");
+        final DomNodeList<DomElement> applets = page.getElementsByTagName("applet");
         assertEquals(1, applets.size());
 
         final HtmlApplet htmlApplet = (HtmlApplet) applets.get(0);

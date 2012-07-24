@@ -46,7 +46,7 @@ public class DomNodeListTest extends WebTestCase {
 
         final HtmlPage page = loadPage(firstContent);
 
-        final DomNodeList<HtmlElement> divs = page.getElementsByTagName("div");
+        final DomNodeList<DomElement> divs = page.getElementsByTagName("div");
 
         assertEquals(3, divs.getLength());
         validateDomNodeList(divs);

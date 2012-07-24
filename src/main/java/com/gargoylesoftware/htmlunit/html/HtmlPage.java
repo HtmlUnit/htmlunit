@@ -314,15 +314,15 @@ public class HtmlPage extends SgmlPage {
     /**
      * {@inheritDoc}
      */
-    public DomNodeList<HtmlElement> getElementsByTagName(final String tagName) {
-        return new XPathDomNodeList<HtmlElement>(this, "//*[local-name()='" + tagName + "']");
+    public DomNodeList<DomElement> getElementsByTagName(final String tagName) {
+        return new XPathDomNodeList<DomElement>(this, "//*[local-name()='" + tagName + "']");
     }
 
     /**
      * {@inheritDoc}
      * Not yet implemented.
      */
-    public DomNodeList<HtmlElement> getElementsByTagNameNS(final String namespaceURI, final String localName) {
+    public DomNodeList<DomElement> getElementsByTagNameNS(final String namespaceURI, final String localName) {
         throw new UnsupportedOperationException("HtmlPage.getElementsByTagNameNS is not yet implemented.");
     }
 

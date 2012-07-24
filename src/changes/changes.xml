@@ -9,6 +9,10 @@
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, initial WebSocket support">
             <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: change the return type of HtmlPage.getElementsByTagName()
+                to return DomElement instead of HtmlElement.
+            </action>
+            <action type="update" dev="asashour">
                 Mandate Java 6 as a minimum requirement.
             </action>
             <action type="fix" dev="asashour" issue="3414170" due-to="Nicolas Belisle">
