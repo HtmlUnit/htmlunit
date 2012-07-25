@@ -949,4 +949,37 @@ public class ElementTest extends WebDriverTestCase {
             + "<body onload='test()'/></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "", FF = { "first", "third", "3", "second", "second" })
+    public void firstElementChild() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('myDiv');\n"
+            + "    if (e.firstElementChild) {\n"
+            + "      alert(e.firstElementChild.id);\n"
+            + "      alert(e.lastElementChild.id);\n"
+            + "      alert(e.childElementCount);\n"
+            + "      alert(e.firstElementChild.nextElementSibling.id);\n"
+            + "      alert(e.lastElementChild.previousElementSibling.id);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'>\n"
+            + "    <input id='first' type='button' value='someValue'>\n"
+            + "    <br id='second'/>\n"
+            + "    <input id='third' type=button' value='something'>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

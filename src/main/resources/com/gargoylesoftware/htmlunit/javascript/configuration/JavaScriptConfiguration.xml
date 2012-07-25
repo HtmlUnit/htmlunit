@@ -1276,6 +1276,21 @@
     <class extends="EventNode" classname="com.gargoylesoftware.htmlunit.javascript.host.Element"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomElement">
         <property name="attributes" readable="true" writable="false"/>
+        <property name="childElementCount" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="firstElementChild" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="lastElementChild" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="nextElementSibling" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="previousElementSibling" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="tagName" readable="true" writable="false"/>
         <property name="text" readable="true" writable="false">
             <doclink url="http://msdn2.microsoft.com/en-us/library/ms762687.aspx" descr="MSDN documentation"/>

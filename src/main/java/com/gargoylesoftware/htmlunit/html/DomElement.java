@@ -29,6 +29,7 @@ import java.util.Set;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
+import org.w3c.dom.ElementTraversal;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
@@ -42,7 +43,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Marc Guillemot
  * @author <a href="mailto:tom.anderson@univ.oxon.org">Tom Anderson</a>
  */
-public class DomElement extends DomNamespaceNode implements Element {
+public class DomElement extends DomNamespaceNode implements Element, ElementTraversal {
 
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
@@ -433,6 +434,69 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public final String getId() {
         return getAttribute("id");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomElement getFirstElementChild() {
+        final Iterator<DomElement> i = getChildElements().iterator();
+        if (i.hasNext()) {
+            return i.next();
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomElement getLastElementChild() {
+        DomElement lastChild = null;
+        final Iterator<DomElement> i = getChildElements().iterator();
+        while (i.hasNext()) {
+            lastChild = i.next();
+        }
+        return lastChild;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomElement getPreviousElementSibling() {
+        DomNode node = getPreviousSibling();
+        while (node != null && !(node instanceof DomElement)) {
+            node = node.getPreviousSibling();
+        }
+        return (DomElement) node;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomElement getNextElementSibling() {
+        DomNode node = getNextSibling();
+        while (node != null && !(node instanceof DomElement)) {
+            node = node.getNextSibling();
+        }
+        return (DomElement) node;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getChildElementCount() {
+        int counter = 0;
+        final Iterator<DomElement> i = getChildElements().iterator();
+        while (i.hasNext()) {
+            i.next();
+            counter++;
+        }
+        return counter;
     }
 
     /**

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), initial WebSocket support">
+            <action type="add" dev="asashour" issue="3030792">
+                DomElement: now implements ElementTraversal, with the corresponding JavaScript getters (FF only).
+            </action>
             <action type="add" dev="asashour" issue="3107238" due-to="James Phillpotts">
                 JavaScript: implement more Range methods.
             </action>

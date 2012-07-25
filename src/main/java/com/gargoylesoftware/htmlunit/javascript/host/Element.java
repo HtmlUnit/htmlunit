@@ -605,6 +605,62 @@ public class Element extends EventNode {
     }
 
     /**
+     * Returns the current number of child elements.
+     * @return the child element count
+     */
+    public int jsxGet_childElementCount() {
+        return getDomNodeOrDie().getChildElementCount();
+    }
+
+    /**
+     * Returns the first element child.
+     * @return the first element child
+     */
+    public Element jsxGet_firstElementChild() {
+        final DomElement child = getDomNodeOrDie().getFirstElementChild();
+        if (child != null) {
+            return (Element) child.getScriptObject();
+        }
+        return null;
+    }
+
+    /**
+     * Returns the last element child.
+     * @return the last element child
+     */
+    public Element jsxGet_lastElementChild() {
+        final DomElement child = getDomNodeOrDie().getLastElementChild();
+        if (child != null) {
+            return (Element) child.getScriptObject();
+        }
+        return null;
+    }
+
+    /**
+     * Returns the next element sibling.
+     * @return the next element sibling
+     */
+    public Element jsxGet_nextElementSibling() {
+        final DomElement child = getDomNodeOrDie().getNextElementSibling();
+        if (child != null) {
+            return (Element) child.getScriptObject();
+        }
+        return null;
+    }
+
+    /**
+     * Returns the previous element sibling.
+     * @return the previous element sibling
+     */
+    public Element jsxGet_previousElementSibling() {
+        final DomElement child = getDomNodeOrDie().getPreviousElementSibling();
+        if (child != null) {
+            return (Element) child.getScriptObject();
+        }
+        return null;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
