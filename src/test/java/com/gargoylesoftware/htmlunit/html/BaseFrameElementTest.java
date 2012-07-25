@@ -51,8 +51,8 @@ public class BaseFrameElementTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        final BaseFrame frame = page.getHtmlElementById("iframe");
-        final BaseFrame frame2 = ((FrameWindow) frame.getEnclosedWindow()).getFrameElement();
+        final BaseFrameElement frame = page.getHtmlElementById("iframe");
+        final BaseFrameElement frame2 = ((FrameWindow) frame.getEnclosedWindow()).getFrameElement();
         final DomNode parent1 = frame.getParentNode();
         final DomNode parent2 = frame2.getParentNode();
         assertEquals(parent1.getClass().getName(), parent2.getClass().getName());

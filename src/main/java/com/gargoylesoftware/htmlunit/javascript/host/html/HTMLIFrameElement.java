@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.html.BaseFrame;
+import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
@@ -85,8 +85,8 @@ public class HTMLIFrameElement extends HTMLElement {
         getFrame().setNameAttribute(name);
     }
 
-    private BaseFrame getFrame() {
-        return (BaseFrame) getDomNodeOrDie();
+    private BaseFrameElement getFrame() {
+        return (BaseFrameElement) getDomNodeOrDie();
     }
 
     /**

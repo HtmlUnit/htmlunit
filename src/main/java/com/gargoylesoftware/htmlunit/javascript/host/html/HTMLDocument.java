@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.BaseFrame;
+import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -1142,7 +1142,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 final List<Object> matchingElements = new ArrayList<Object>();
                 for (final DomElement elt : elements) {
                     if (elt instanceof HtmlForm || elt instanceof HtmlImage || elt instanceof HtmlApplet
-                            || (isIE && elt instanceof BaseFrame)) {
+                            || (isIE && elt instanceof BaseFrameElement)) {
                         matchingElements.add(elt);
                     }
                 }
@@ -1164,8 +1164,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
             @Override
             protected SimpleScriptable getScriptableFor(final Object object) {
-                if (isIE && object instanceof BaseFrame) {
-                    return (SimpleScriptable) ((BaseFrame) object).getEnclosedWindow().getScriptObject();
+                if (isIE && object instanceof BaseFrameElement) {
+                    return (SimpleScriptable) ((BaseFrameElement) object).getEnclosedWindow().getScriptObject();
                 }
                 return super.getScriptableFor(object);
             }

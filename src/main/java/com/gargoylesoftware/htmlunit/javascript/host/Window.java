@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
-import com.gargoylesoftware.htmlunit.html.BaseFrame;
+import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -1857,14 +1857,14 @@ class HTMLCollectionFrames extends HTMLCollection {
 
     @Override
     protected boolean isMatching(final DomNode node) {
-        return node instanceof BaseFrame;
+        return node instanceof BaseFrameElement;
     }
 
     @Override
     protected Scriptable getScriptableForElement(final Object obj) {
         final WebWindow window;
-        if (obj instanceof BaseFrame) {
-            window = ((BaseFrame) obj).getEnclosedWindow();
+        if (obj instanceof BaseFrameElement) {
+            window = ((BaseFrameElement) obj).getEnclosedWindow();
         }
         else {
             window = ((FrameWindow) obj).getFrameElement().getEnclosedWindow();
@@ -1878,7 +1878,7 @@ class HTMLCollectionFrames extends HTMLCollection {
         final List<Object> elements = getElements();
 
         for (final Object next : elements) {
-            final BaseFrame frameElt = (BaseFrame) next;
+            final BaseFrameElement frameElt = (BaseFrameElement) next;
             final WebWindow window = frameElt.getEnclosedWindow();
             if (name.equals(window.getName())) {
                 if (LOG.isDebugEnabled()) {
@@ -1901,7 +1901,7 @@ class HTMLCollectionFrames extends HTMLCollection {
     @Override
     protected void addElementIds(final List<String> idList, final List<Object> elements) {
         for (final Object next : elements) {
-            final BaseFrame frameElt = (BaseFrame) next;
+            final BaseFrameElement frameElt = (BaseFrameElement) next;
             final WebWindow window = frameElt.getEnclosedWindow();
             final String windowName = window.getName();
             if (windowName != null) {

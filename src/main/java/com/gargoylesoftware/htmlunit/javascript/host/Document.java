@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.html.BaseFrame;
+import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -391,8 +391,8 @@ public class Document extends EventNode {
 
             final SgmlPage page = getPage();
             final org.w3c.dom.Element element = page.createElement(tagName);
-            if (element instanceof BaseFrame) {
-                ((BaseFrame) element).markAsCreatedByJavascript();
+            if (element instanceof BaseFrameElement) {
+                ((BaseFrameElement) element).markAsCreatedByJavascript();
             }
             final Object jsElement = getScriptableFor(element);
 

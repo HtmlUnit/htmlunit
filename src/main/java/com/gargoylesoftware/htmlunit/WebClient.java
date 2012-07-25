@@ -52,7 +52,7 @@ import org.w3c.css.sac.ErrorHandler;
 import com.gargoylesoftware.htmlunit.attachment.Attachment;
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
 import com.gargoylesoftware.htmlunit.gae.GAEUtils;
-import com.gargoylesoftware.htmlunit.html.BaseFrame;
+import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
@@ -449,7 +449,7 @@ public class WebClient implements Serializable {
                     // here is a hack to handle non HTML pages
                     if (webWindow instanceof FrameWindow && !(newPage instanceof HtmlPage)) {
                         final FrameWindow fw = (FrameWindow) webWindow;
-                        final BaseFrame frame = fw.getFrameElement();
+                        final BaseFrameElement frame = fw.getFrameElement();
                         if (frame.hasEventHandlers("onload")) {
                             if (LOG.isDebugEnabled()) {
                                 LOG.debug("Executing onload handler for " + frame);
@@ -1871,7 +1871,7 @@ public class WebClient implements Serializable {
                 }
 
                 // now looks at the visibility of the frame window
-                final BaseFrame frameElement = fw.getFrameElement();
+                final BaseFrameElement frameElement = fw.getFrameElement();
                 if (frameElement.isDisplayed()) {
                     final ScriptableObject scriptableObject = frameElement.getScriptObject();
                     final ComputedCSSStyleDeclaration style = ((HTMLElement) scriptableObject).jsxGet_currentStyle();

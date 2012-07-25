@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), initial WebSocket support">
+            <action type="update" dev="asashour">
+                BaseFrame: is now deprecated, please use BaseFrameElement instead.
+            </action>
             <action type="fix" dev="asashour" issue="3083847">
                 BaseFrameElement: create a WebWindow for the new clone instance.
             </action>

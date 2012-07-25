@@ -30,12 +30,12 @@ import com.gargoylesoftware.htmlunit.WebWindowImpl;
  */
 public class FrameWindow extends WebWindowImpl {
 
-    private final BaseFrame frame_;
+    private final BaseFrameElement frame_;
 
     /**
      * Creates an instance for a given frame.
      */
-    FrameWindow(final BaseFrame frame) {
+    FrameWindow(final BaseFrameElement frame) {
         super(frame.getPage().getWebClient());
         frame_ = frame;
         final WebWindowImpl parent = (WebWindowImpl) getParentWindow();
@@ -108,7 +108,7 @@ public class FrameWindow extends WebWindowImpl {
         if (webResponse instanceof StringWebResponse) {
             final StringWebResponse response = (StringWebResponse) webResponse;
             if (response.isFromJavascript()) {
-                final BaseFrame frame = getFrameElement();
+                final BaseFrameElement frame = getFrameElement();
                 frame.setContentLoaded();
             }
         }
@@ -118,7 +118,7 @@ public class FrameWindow extends WebWindowImpl {
      * Gets the DOM node of the (i)frame containing this window.
      * @return the DOM node
      */
-    public BaseFrame getFrameElement() {
+    public BaseFrameElement getFrameElement() {
         return frame_;
     }
 

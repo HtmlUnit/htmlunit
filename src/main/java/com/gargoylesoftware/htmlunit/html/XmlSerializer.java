@@ -136,8 +136,8 @@ class XmlSerializer {
         else if (node instanceof HtmlLink) {
             return getAttributesFor((HtmlLink) node);
         }
-        else if (node instanceof BaseFrame) {
-            return getAttributesFor((BaseFrame) node);
+        else if (node instanceof BaseFrameElement) {
+            return getAttributesFor((BaseFrameElement) node);
         }
 
         Map<String, DomAttr> attributes = node.getAttributesMap();
@@ -156,7 +156,7 @@ class XmlSerializer {
         return attributes;
     }
 
-    private Map<String, DomAttr> getAttributesFor(final BaseFrame frame) throws IOException {
+    private Map<String, DomAttr> getAttributesFor(final BaseFrameElement frame) throws IOException {
         final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(frame, "src");
         final DomAttr srcAttr = map.get("src");
         if (srcAttr == null) {

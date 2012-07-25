@@ -1246,7 +1246,7 @@ public class HtmlPage extends SgmlPage {
                 // FF always triggers this event for frame windows
                 if (!getWebClient().getBrowserVersion().hasFeature(
                     BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT)) {
-                    final BaseFrame frame = ((FrameWindow) window).getFrameElement();
+                    final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
                     // IE triggers this event only in some cases
                     if (frame.wasCreatedByJavascript()) {
                         frame.unmarkAsCreatedByJavascript();
@@ -1256,7 +1256,7 @@ public class HtmlPage extends SgmlPage {
             }
 
             final FrameWindow fw = (FrameWindow) window;
-            final BaseFrame frame = fw.getFrameElement();
+            final BaseFrameElement frame = fw.getFrameElement();
 
             // if part of an document fragment, then the load event is not triggered
             if (Event.TYPE_LOAD.equals(eventType) && (frame.getParentNode() instanceof DomDocumentFragment)) {
@@ -1865,7 +1865,7 @@ public class HtmlPage extends SgmlPage {
      */
     void loadFrames() throws FailingHttpStatusCodeException {
         for (final FrameWindow w : getFrames()) {
-            final BaseFrame frame = w.getFrameElement();
+            final BaseFrameElement frame = w.getFrameElement();
             // test if the frame should really be loaded:
             // if a script has already changed its content, it should be skipped
             // use == and not equals(...) to identify initial content (versus URL set to "about:blank")
