@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), initial WebSocket support">
+            <action type="fix" dev="asashour" issue="3083847">
+                BaseFrameElement: create a WebWindow for the new clone instance.
+            </action>
             <action type="fix" dev="asashour" issue="3159440">
                 Cookies: enable cookies after being disabled, should work.
             </action>

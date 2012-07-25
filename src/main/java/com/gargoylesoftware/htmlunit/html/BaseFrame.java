@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
 public abstract class BaseFrame extends HtmlElement {
 
     private static final Log LOG = LogFactory.getLog(BaseFrame.class);
-    private final WebWindow enclosedWindow_;
+    private WebWindow enclosedWindow_;
     private boolean contentLoaded_ = false;
     private boolean createdByJavascript_ = false;
 
@@ -66,6 +66,10 @@ public abstract class BaseFrame extends HtmlElement {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
 
+        init();
+    }
+
+    private void init() {
         WebWindow enclosedWindow = null;
         try {
             if (getPage() instanceof HtmlPage) { // if loaded as part of XHR.responseXML, don't load content
@@ -391,5 +395,16 @@ public abstract class BaseFrame extends HtmlElement {
      */
     public boolean wasCreatedByJavascript() {
         return createdByJavascript_;
+    }
+
+    /**
+     * Creates a new {@link WebWindow} for the new clone.
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNode cloneNode(final boolean deep) {
+        final DomNode node = super.cloneNode(deep);
+        ((BaseFrame) node).init();
+        return node;
     }
 }
