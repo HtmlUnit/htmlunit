@@ -69,25 +69,6 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
     /**
      * Assert that the two byte arrays are equal.
-     * @param expected the expected value
-     * @param actual the actual value
-     */
-    public static void assertEquals(final byte[] expected, final byte[] actual) {
-        assertEquals(null, expected, actual);
-    }
-
-    /**
-     * Assert that the two byte arrays are equal.
-     * @param message the message to display on failure
-     * @param expected the expected value
-     * @param actual the actual value
-     */
-    public static void assertEquals(final String message, final byte[] expected, final byte[] actual) {
-        assertEquals(message, expected, actual, expected.length);
-    }
-
-    /**
-     * Assert that the two byte arrays are equal.
      * @param message the message to display on failure
      * @param expected the expected value
      * @param actual the actual value

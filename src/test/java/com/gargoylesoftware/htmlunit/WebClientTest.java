@@ -36,7 +36,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +65,6 @@ import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -74,7 +72,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
-import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -2343,36 +2340,6 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
-     * Tests if using {@link CookieManager#addCookie(Cookie)} behaves as exactly calling
-     * {@link WebClient#addRequestHeader(String, String)}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented
-    public void addRequestHeader() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
-        servlets.put("/test1", HeaderLog1Servlet.class);
-        servlets.put("/test2", HeaderLog2Servlet.class);
-        startWebServer("./", null, servlets);
-
-        final WebClient client = getWebClient();
-
-        // First test the passing scenario of using CookieManager.addCookie()
-        client.getCookieManager().addCookie(new Cookie("localhost", "key1", "value1"));
-        HtmlPage page = client.getPage("http://localhost:" + PORT + "/test1");
-        assertTrue(page.asText().contains("Cookie=key1=value1; key2=value2,"));
-
-        // Clear all cookies
-        client.getCookieManager().clearCookies();
-
-        // Then test setting the .addRequestHeader()
-        client.addRequestHeader("Cookie", "key1=value1");
-        page = client.getPage("http://localhost:" + PORT + "/test1");
-        assertTrue(page.asText().contains("Cookie=key1=value1; key2=value2,"));
-    }
-
-    /**
      * Tests that setThrowExceptionOnScriptError also works,
      * if an exception is thrown from onerror handler.
      * Regression test for bug 3534371.
@@ -2393,46 +2360,5 @@ public class WebClientTest extends WebServerTestCase {
         webClient.setThrowExceptionOnScriptError(false);
 
         loadPage(html);
-    }
-
-    /**
-     * Servlet for {@link #addRequestHeader()}.
-     */
-    public static class HeaderLog1Servlet extends HttpServlet {
-
-        /**
-         * Sets second cookie and redirects the client to the second servlet.
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.addCookie(new javax.servlet.http.Cookie("key2", "value2"));
-            response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-            final String location = request.getRequestURL().toString().replace("test1", "test2");
-            response.setHeader("Location", location);
-        }
-    }
-
-    /**
-     * Servlet for {@link #addRequestHeader()}.
-     */
-    public static class HeaderLog2Servlet extends HttpServlet {
-
-        /**
-         * Prints all headers which contain "cookie".
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setContentType("text/html");
-            final Writer writer = response.getWriter();
-            for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {
-                final String header = en.nextElement();
-                if (header.toLowerCase().contains("cookie")) {
-                    writer.write(header + '=' + request.getHeader(header) + ",");
-                }
-            }
-            writer.close();
-        }
     }
 }
