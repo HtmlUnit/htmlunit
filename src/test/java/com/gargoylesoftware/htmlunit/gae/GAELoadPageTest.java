@@ -240,9 +240,7 @@ public class GAELoadPageTest {
             if (hasResponse(request.getUrl())) {
                 return super.getResponse(request);
             }
-            else {
-                return urlFetchWebconnection_.getResponse(request);
-            }
+            return urlFetchWebconnection_.getResponse(request);
         }
     }
 }
