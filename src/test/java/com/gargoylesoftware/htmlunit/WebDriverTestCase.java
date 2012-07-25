@@ -220,7 +220,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (BrowserVersion.CHROME_16.equals(getBrowserVersion())) {
                 if (CHROME_SERVICE_ == null) {
                     CHROME_SERVICE_ = new ChromeDriverService.Builder()
-                        .usingChromeDriverExecutable(new File(CHROME16_BIN_))
+                        .usingDriverExecutable(new File(CHROME16_BIN_))
                         .usingAnyFreePort()
                         .build();
                     CHROME_SERVICE_.start();
@@ -423,7 +423,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         }
 
-        @SuppressWarnings("unchecked")
         private void doService(final HttpServletRequest request, final HttpServletResponse response)
             throws Exception {
             final String url = request.getRequestURL().toString();

@@ -2423,7 +2423,6 @@ public class WebClientTest extends WebServerTestCase {
          * {@inheritDoc}
          */
         @Override
-        @SuppressWarnings("unchecked")
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             response.setContentType("text/html");
             final Writer writer = response.getWriter();
