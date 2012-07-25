@@ -368,6 +368,7 @@ public class HttpWebConnection implements WebConnection {
             // for compatibility purposes.
             httpClient.getParams().setParameter(CookieSpecPNames.SINGLE_COOKIE_HEADER, Boolean.TRUE);
             httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY, HACKED_COOKIE_POLICY);
+            httpClient.setCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
         }
         else {
             // Cookies are disabled.

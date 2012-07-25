@@ -20,6 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Writer;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import java.util.Map;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -66,6 +68,15 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
  */
 @RunWith(BrowserRunner.class)
 public class HttpWebConnectionTest extends WebServerTestCase {
+
+    /**
+     * Assert that the two byte arrays are equal.
+     * @param expected the expected value
+     * @param actual the actual value
+     */
+    public static void assertEquals(final byte[] expected, final byte[] actual) {
+        assertEquals(null, expected, actual, expected.length);
+    }
 
     /**
      * Assert that the two byte arrays are equal.
@@ -362,6 +373,68 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         finally {
             logger.removeAppender(appender);
             logger.setLevel(oldLevel);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cookiesEnabledAfterDisable() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/test1", Cookie1Servlet.class);
+        servlets.put("/test2", Cookie2Servlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+
+        client.getCookieManager().setCookiesEnabled(false);
+        HtmlPage page = client.getPage("http://localhost:" + PORT + "/test1");
+        assertTrue(page.asText().contains("No Cookies"));
+
+        client.getCookieManager().setCookiesEnabled(true);
+        page = client.getPage("http://localhost:" + PORT + "/test1");
+        assertTrue(page.asText().contains("key1=value1"));
+    }
+
+    /**
+     * Servlet for {@link #cookiesEnabledAfterDisable()}.
+     */
+    public static class Cookie1Servlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.addCookie(new javax.servlet.http.Cookie("key1", "value1"));
+            response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+            final String location = request.getRequestURL().toString().replace("test1", "test2");
+            response.setHeader("Location", location);
+        }
+    }
+
+    /**
+     * Servlet for {@link #cookiesEnabledAfterDisable()}.
+     */
+    public static class Cookie2Servlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            if (request.getCookies().length == 0) {
+                writer.write("No Cookies");
+            }
+            else {
+                for (javax.servlet.http.Cookie c : request.getCookies()) {
+                    writer.write(c.getName() + '=' + c.getValue());
+                }
+            }
+            writer.close();
         }
     }
 }

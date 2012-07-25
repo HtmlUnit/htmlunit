@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), initial WebSocket support">
+            <action type="fix" dev="asashour" issue="3159440">
+                Cookies: enable cookies after being disabled, should work.
+            </action>
             <action type="add" dev="asashour" issue="3030792">
                 DomElement: now implements ElementTraversal, with the corresponding JavaScript getters (FF only).
             </action>
