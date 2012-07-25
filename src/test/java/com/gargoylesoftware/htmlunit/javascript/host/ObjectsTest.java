@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(Parameterized.class)
 public class ObjectsTest extends WebTestCase {
@@ -91,7 +92,7 @@ public class ObjectsTest extends WebTestCase {
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_7});
             list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
             list.add(new Object[] {name, BrowserVersion.FIREFOX_3_6});
-            list.add(new Object[] {name, BrowserVersion.FIREFOX_10});
+            // list.add(new Object[] {name, BrowserVersion.FIREFOX_10});
         }
         return list;
     }
