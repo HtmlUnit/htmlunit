@@ -807,7 +807,6 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"memory\": true } ) - filter (6, 14, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF10 })
-    @Tries(3)
     public void test_67() throws Exception {
         runTest(67);
     }
@@ -828,7 +827,6 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"unique\": true } ) - no filter (3, 17, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF10 })
-    @Tries(3)
     public void test_69() throws Exception {
         runTest(69);
     }
@@ -870,7 +868,6 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"stopOnFalse\": true } ) - no filter (3, 17, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF10 })
-    @Tries(3)
     public void test_73() throws Exception {
         runTest(73);
     }
@@ -891,7 +888,6 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"stopOnFalse\": true } ) - filter (3, 17, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF10 })
-    @Tries(3)
     public void test_75() throws Exception {
         runTest(75);
     }
@@ -912,7 +908,6 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true, \"unique\": true } ) - no filter (6, 14, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF10 })
-    @Tries(3)
     public void test_77() throws Exception {
         runTest(77);
     }
@@ -954,7 +949,6 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true, \"stopOnFalse\": true } ) - no filter (5, 15, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF10 })
-    @Tries(3)
     public void test_81() throws Exception {
         runTest(81);
     }
@@ -975,7 +969,6 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true, \"stopOnFalse\": true } ) - filter (5, 15, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF10 })
-    @Tries(3)
     public void test_83() throws Exception {
         runTest(83);
     }
@@ -996,7 +989,6 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( { \"unique\": true, \"stopOnFalse\": true } ) - no filter (2, 18, 20)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF10 })
-    @Tries(3)
     public void test_85() throws Exception {
         runTest(85);
     }
@@ -1028,7 +1020,6 @@ public class JQuery173GitTest extends WebServerTestCase {
     @Test
     @Alerts("callbacks: jQuery.Callbacks( options ) - options are copied (2, 1, 3)")
     @NotYetImplemented({ FF3_6, IE6, IE7, IE8, FF10 })
-    @Tries(3)
     public void test_88() throws Exception {
         runTest(88);
     }
