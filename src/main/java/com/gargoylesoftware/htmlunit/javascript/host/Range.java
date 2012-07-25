@@ -409,7 +409,7 @@ public class Range extends SimpleScriptable {
     /**
      * Inserts a new node at the beginning of the range. If the range begins at an offset, the node is split.
      * @param newNode The node to insert
-     * @see https://developer.mozilla.org/en/DOM/range
+     * @see <a href="https://developer.mozilla.org/en/DOM/range">https://developer.mozilla.org/en/DOM/range</a>
      */
     public void jsxFunction_insertNode(final Node newNode) {
         toW3C().insertNode(newNode.getDomNodeOrDie());
