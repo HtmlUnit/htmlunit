@@ -40,6 +40,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
@@ -417,7 +418,7 @@ public abstract class HtmlElement extends DomElement {
      * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>'\n'</tt>
      * submits the enclosed form.
      *
-     * @param c the character you with to simulate typing
+     * @param c the character you wish to simulate typing
      * @return the page that occupies this window after typing
      * @exception IOException if an IO error occurs
      */
@@ -431,7 +432,7 @@ public abstract class HtmlElement extends DomElement {
      * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>'\n'</tt>
      * submits the enclosed form.
      *
-     * @param c the character you with to simulate typing
+     * @param c the character you wish to simulate typing
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
      * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
      * @param altKey <tt>true</tt> if ALT is pressed during the typing
@@ -482,6 +483,83 @@ public abstract class HtmlElement extends DomElement {
             form.submit((SubmittableElement) this);
             page.getWebClient().getJavaScriptEngine().processPostponedActions();
         }
+        return page.getWebClient().getCurrentWindow().getEnclosedPage();
+    }
+
+    /**
+     * Simulates typing the specified key code while this element has focus, returning the page contained
+     * by this element's window after typing. Note that it may or may not be the same as the original page,
+     * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>XXXXXXXXXXX</tt>
+     * submits the enclosed form.
+     *
+     * @param keyCode the key code wish to simulate typing
+     * @return the page that occupies this window after typing
+     * @exception IOException if an IO error occurs
+     */
+    public Page type(final int keyCode) throws IOException {
+        return type(keyCode, false, false, false);
+    }
+
+    /**
+     * Simulates typing the specified character while this element has focus, returning the page contained
+     * by this element's window after typing. Note that it may or may not be the same as the original page,
+     * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>XXXXXXXXXXX</tt>
+     * submits the enclosed form.
+     *
+     * @param keyCode the key code wish to simulate typing
+     * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
+     * @param ctrlKey <tt>true</tt> if CTRL is pressed during the typing
+     * @param altKey <tt>true</tt> if ALT is pressed during the typing
+     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
+     * @exception IOException if an IO error occurs
+     */
+    public Page type(final int keyCode, final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
+        throws IOException {
+        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            return getPage();
+        }
+
+        final HtmlPage page = (HtmlPage) getPage();
+        if (page.getFocusedElement() != this) {
+            focus();
+        }
+
+        final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, keyCode, shiftKey, ctrlKey, altKey);
+        final ScriptResult keyDownResult = fireEvent(keyDown);
+
+        final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
+        if (browserVersion.hasFeature(BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS)) {
+            final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, keyCode, shiftKey, ctrlKey, altKey);
+            final ScriptResult keyPressResult = fireEvent(keyPress);
+        }
+
+        //if (!keyDown.isAborted(keyDownResult) && !keyPress.isAborted(keyPressResult)) {
+        //    doType(keyCode, shiftKey, ctrlKey, altKey);
+        //}
+
+        if (browserVersion.hasFeature(BrowserVersionFeatures.EVENT_INPUT)
+            && (this instanceof HtmlTextInput
+            || this instanceof HtmlTextArea
+            || this instanceof HtmlPasswordInput)) {
+            final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, keyCode, shiftKey, ctrlKey, altKey);
+            fireEvent(input);
+        }
+
+        final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, keyCode, shiftKey, ctrlKey, altKey);
+        fireEvent(keyUp);
+
+//        final HtmlForm form = getEnclosingForm();
+//        if (form != null && keyCode == '\n' && isSubmittableByEnter()) {
+//            if (!getPage().getWebClient().getBrowserVersion()
+//                    .hasFeature(BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON)) {
+//                final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
+//                if (submit != null) {
+//                    return submit.click();
+//                }
+//            }
+//            form.submit((SubmittableElement) this);
+//            page.getWebClient().getJavaScriptEngine().processPostponedActions();
+//        }
         return page.getWebClient().getCurrentWindow().getEnclosedPage();
     }
 

@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), initial WebSocket support">
+        <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support">
+            <action type="add" dev="asashour">
+                HtmlElement: support special keys for .type(int).
+            </action>
             <action type="update" dev="asashour">
                 BaseFrame: is now deprecated, please use BaseFrameElement instead.
             </action>

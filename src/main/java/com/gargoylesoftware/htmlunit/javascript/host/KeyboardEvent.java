@@ -374,6 +374,7 @@ public class KeyboardEvent extends UIEvent {
     public static final int DOM_VK_NUMPAD9 = 105;
 
     private int charCode_;
+    private int which_;
 
     /**
      * Creates a new keyboard event instance.
@@ -392,15 +393,18 @@ public class KeyboardEvent extends UIEvent {
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
      */
-    public KeyboardEvent(final DomNode domNode, final String type, final int character,
+    public KeyboardEvent(final DomNode domNode, final String type, final char character,
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         super(domNode, type);
+        int keyCode = 0;
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_113)) {
             if (jsxGet_type().equals(Event.TYPE_KEY_PRESS)) {
-                setKeyCode(Integer.valueOf(character));
+                keyCode = Integer.valueOf(character);
+                setKeyCode(keyCode);
             }
             else {
-                setKeyCode(Integer.valueOf(charToKeyCode(character)));
+                keyCode = Integer.valueOf(charToKeyCode(character));
+                setKeyCode(keyCode);
             }
         }
         else {
@@ -408,12 +412,48 @@ public class KeyboardEvent extends UIEvent {
                 charCode_ = character;
             }
             else {
-                setKeyCode(Integer.valueOf(charToKeyCode(character)));
+                keyCode = Integer.valueOf(charToKeyCode(character));
+                setKeyCode(keyCode);
             }
         }
         setShiftKey(shiftKey);
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
+        which_ = charCode_ != 0 ? Integer.valueOf(charCode_) : keyCode;
+    }
+
+    /**
+     * Creates a new keyboard event instance.
+     *
+     * @param domNode the DOM node that triggered the event
+     * @param type the event type
+     * @param keyCode the key code associated with the event
+     * @param shiftKey true if SHIFT is pressed
+     * @param ctrlKey true if CTRL is pressed
+     * @param altKey true if ALT is pressed
+     */
+    public KeyboardEvent(final DomNode domNode, final String type, final int keyCode,
+            final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
+        super(domNode, type);
+
+        if (isAmbiguousKeyCode(keyCode)) {
+            throw new IllegalArgumentException("Please use the 'char' constructor instead of int");
+        }
+        setKeyCode(keyCode);
+        if (jsxGet_type().equals(Event.TYPE_KEY_PRESS)) {
+            which_ = 0;
+        }
+        else {
+            which_ = keyCode;
+        }
+        setShiftKey(shiftKey);
+        setCtrlKey(ctrlKey);
+        setAltKey(altKey);
+    }
+
+    /** We can not accept DOM_VK_A, because is it 'A' or 'a', so the character constructor should be used. */
+    private static boolean isAmbiguousKeyCode(final int keyCode) {
+        return (keyCode >= DOM_VK_0 && keyCode <= DOM_VK_9) || (keyCode >= DOM_VK_A && keyCode <= DOM_VK_Z);
     }
 
     /**
@@ -464,7 +504,7 @@ public class KeyboardEvent extends UIEvent {
      * @return the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed
      */
     public Object jsxGet_which() {
-        return charCode_ != 0 ? Integer.valueOf(charCode_) : jsxGet_keyCode();
+        return which_;
     }
 
     /**

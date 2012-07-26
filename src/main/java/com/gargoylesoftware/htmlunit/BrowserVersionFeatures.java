@@ -806,6 +806,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser uses the ActiveXObject for implementing XML support (IE). */
     JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
 
+    /** With special keys [in .type(int)], should we trigger onkeypress event or not. */
+    KEYBOARD_EVENT_SPECIAL_KEYPRESS,
+
     /** Body of a &lt;noscript&gt; tag is not totally ignored but considered as a (not displayed) text node. */
     NOSCRIPT_BODY_AS_TEXT,
 
