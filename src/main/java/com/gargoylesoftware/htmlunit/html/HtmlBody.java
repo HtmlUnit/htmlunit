@@ -156,5 +156,4 @@ public class HtmlBody extends HtmlElement {
     public final boolean isTemporary() {
         return temporary_;
     }
-
 }

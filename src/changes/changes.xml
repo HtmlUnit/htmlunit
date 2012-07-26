@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support">
+            <action type="fix" dev="asashour">
+                HtmlPage: cloneNode() should clone the underlying ScriptObject.
+            </action>
             <action type="add" dev="asashour">
                 HtmlElement: support special keys for .type(int).
             </action>

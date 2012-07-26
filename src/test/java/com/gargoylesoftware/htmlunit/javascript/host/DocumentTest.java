@@ -1708,7 +1708,8 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "null",
+    @Alerts(FF = { "[object HTMLDocument]", "[object HTMLBodyElement]",
+            "true", "true", "true", "false", "true", "false" },
             IE = { "[object]", "[object]", "true", "true", "true", "true", "true", "true" })
     @NotYetImplemented
     public void documentCloneNode() throws Exception {

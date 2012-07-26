@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -2056,7 +2057,8 @@ public class HtmlPage extends SgmlPage {
     @Override
     public HtmlPage cloneNode(final boolean deep) {
         final HtmlPage result = (HtmlPage) super.cloneNode(deep);
-        result.setScriptObject(getScriptObject());
+        final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptObject()).clone();
+        jsObjClone.setDomNode(result);
         if (deep) {
             // fix up idMap_ and result's idMap_s
             for (final HtmlElement child : result.getHtmlElementDescendants()) {
