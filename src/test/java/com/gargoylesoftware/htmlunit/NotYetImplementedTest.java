@@ -78,7 +78,7 @@ public class NotYetImplementedTest {
                 final String description = getDescription(lines, index);
                 entries_.add(path + ';' + methodName + ';' + lineNumber + ';' + description);
             }
-            else if (line.contains("@NotYetImplemented")) {
+            else if (line.startsWith("    @NotYetImplemented")) {
                 final String browser;
                 if (line.contains("(")) {
                     browser = line.replaceAll(".*\\((.*)\\).*", "$1").replaceAll("Browser\\.", "")
