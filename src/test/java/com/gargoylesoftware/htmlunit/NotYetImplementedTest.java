@@ -170,7 +170,7 @@ public class NotYetImplementedTest {
                 lastFile = file;
             }
             builder.append("    <td><a href='http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/"
-                    + file + "?view=markup#l_" + line + "'>").append(method).append("</a> ")
+                    + file + "?view=markup#l" + line + "'>").append(method).append("</a> ")
                     .append(browser).append("</td>\n");
             builder.append("    <td>").append(line).append("</td>\n");
             builder.append("    <td>").append(description).append("</td>\n");
