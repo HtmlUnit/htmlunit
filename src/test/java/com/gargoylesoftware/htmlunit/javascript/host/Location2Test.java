@@ -504,7 +504,7 @@ public class Location2Test extends WebDriverTestCase {
             + "<script>\n"
             + " if ('onhashchange' in window) { alert('supported') }\n"
             + " function locationHashChanged(event) {\n"
-            + "  if (event) {"
+            + "  if (event) {\n"
             + "    alert('onhashchange ' + event.newURL + '  ' + event.oldURL);\n"
             + "  } else {\n"
             + "    alert('onhashchange -');\n"
