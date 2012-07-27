@@ -79,7 +79,7 @@ public final class HTMLParser {
     /** XHTML namespace. */
     public static final String XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
 
-    private static final Map<String, IElementFactory> ELEMENT_FACTORIES = new HashMap<String, IElementFactory>();
+    private static final Map<String, ElementFactory> ELEMENT_FACTORIES = new HashMap<String, ElementFactory>();
 
     static {
         ELEMENT_FACTORIES.put(HtmlInput.TAG_NAME, InputElementFactory.instance);
@@ -94,8 +94,8 @@ public final class HTMLParser {
      * @param tagName an HTML element tag name
      * @return a factory for creating HtmlElements representing the given tag
      */
-    public static IElementFactory getFactory(final String tagName) {
-        final IElementFactory result = ELEMENT_FACTORIES.get(tagName);
+    public static ElementFactory getFactory(final String tagName) {
+        final ElementFactory result = ELEMENT_FACTORIES.get(tagName);
 
         if (result != null) {
             return result;
@@ -323,7 +323,7 @@ public final class HTMLParser {
      * @param qualifiedName the qualified name
      * @return the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory
      */
-    static IElementFactory getElementFactory(final String namespaceURI, final String qualifiedName) {
+    static ElementFactory getElementFactory(final String namespaceURI, final String qualifiedName) {
         if (namespaceURI == null || namespaceURI.isEmpty()
             || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
             String tagName = qualifiedName;
@@ -334,7 +334,7 @@ public final class HTMLParser {
             else {
                 tagName = tagName.toLowerCase();
             }
-            final IElementFactory factory = ELEMENT_FACTORIES.get(tagName);
+            final ElementFactory factory = ELEMENT_FACTORIES.get(tagName);
 
             if (factory != null) {
                 return factory;
@@ -494,8 +494,8 @@ public final class HTMLParser {
             }
             // add a head if none was there
             else if (!headParsed_ && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
-                final IElementFactory factory = getElementFactory(namespaceURI, "head");
-                final HtmlElement newElement = factory.createElement(page_, "head", null);
+                final ElementFactory factory = getElementFactory(namespaceURI, "head");
+                final DomElement newElement = factory.createElement(page_, "head", null);
                 currentNode_.appendChild(newElement);
                 headParsed_ = true;
             }
@@ -511,8 +511,8 @@ public final class HTMLParser {
             if (!(page_ instanceof XHtmlPage) && XHTML_NAMESPACE.equals(namespaceURI)) {
                 namespaceURI = null;
             }
-            final IElementFactory factory = getElementFactory(namespaceURI, qName);
-            final HtmlElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts);
+            final ElementFactory factory = getElementFactory(namespaceURI, qName);
+            final DomElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
             // parse can't replace everything as it does not buffer elements while parsing
@@ -525,10 +525,10 @@ public final class HTMLParser {
             }
 
             if ("body".equals(tagLower)) {
-                body_ = newElement;
+                body_ = (HtmlElement) newElement;
             }
             else if ("head".equals(tagLower)) {
-                head_ = newElement;
+                head_ = (HtmlElement) newElement;
             }
 
             currentNode_ = newElement;
@@ -539,7 +539,7 @@ public final class HTMLParser {
          * Adds the new node to the right parent that is not necessary the currentNode in case
          * of malformed HTML code.
          */
-        private void addNodeToRightParent(final DomNode currentNode, final HtmlElement newElement) {
+        private void addNodeToRightParent(final DomNode currentNode, final DomElement newElement) {
             final String currentNodeName = currentNode.getNodeName();
             final String newNodeName = newElement.getNodeName();
 

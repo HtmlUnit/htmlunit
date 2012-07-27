@@ -713,7 +713,7 @@ public abstract class HtmlElement extends DomElement {
         final List<HtmlElement> children = getHtmlElementsByTagName(tagName);
         if (children.isEmpty()) {
             // Add a new child and return it.
-            child = ((HtmlPage) getPage()).createElement(tagName);
+            child = (HtmlElement) ((HtmlPage) getPage()).createElement(tagName);
             appendChild(child);
         }
         else {

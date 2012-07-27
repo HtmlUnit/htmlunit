@@ -210,7 +210,7 @@ public class AttributesTest extends TestCase {
     protected void runTest() throws Exception {
         final String value = "value";
 
-        final HtmlElement objectToTest = getNewInstanceForClassUnderTest();
+        final DomElement objectToTest = getNewInstanceForClassUnderTest();
         objectToTest.setAttribute(attributeName_, value);
 
         final Object noObjects[] = new Object[0];
@@ -223,8 +223,8 @@ public class AttributesTest extends TestCase {
      * @return the new instance
      * @throws Exception if the new object cannot be created
      */
-    private HtmlElement getNewInstanceForClassUnderTest() throws Exception {
-        final HtmlElement newInstance;
+    private DomElement getNewInstanceForClassUnderTest() throws Exception {
+        final DomElement newInstance;
         if (classUnderTest_ == HtmlTableRow.class) {
             newInstance = HTMLParser.getFactory(HtmlTableRow.TAG_NAME).createElement(
                     page_, HtmlTableRow.TAG_NAME, null);

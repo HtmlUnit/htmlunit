@@ -21,8 +21,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
@@ -141,7 +141,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
 
         final boolean indexValid = (position >= -1 && position <= htmlRow.getCells().size());
         if (indexValid) {
-            final HtmlElement newCell = ((HtmlPage) htmlRow.getPage()).createElement("td");
+            final DomElement newCell = ((HtmlPage) htmlRow.getPage()).createElement("td");
             if (position == -1 || position == htmlRow.getCells().size()) {
                 htmlRow.appendChild(newCell);
             }

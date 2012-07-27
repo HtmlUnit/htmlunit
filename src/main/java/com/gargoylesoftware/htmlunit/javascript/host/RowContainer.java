@@ -17,8 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -130,7 +130,7 @@ public class RowContainer extends HTMLElement {
     public Object insertRow(final int index) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final int rowCount = rows.jsxGet_length();
-        final HtmlElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createElement("tr");
+        final DomElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createElement("tr");
         if (rowCount == 0) {
             getDomNodeOrDie().appendChild(newRow);
         }

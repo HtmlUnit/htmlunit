@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author David K. Taylor
  * @author Dmitri Zoubkov
  */
-public final class InputElementFactory implements IElementFactory {
+public final class InputElementFactory implements ElementFactory {
 
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(InputElementFactory.class);

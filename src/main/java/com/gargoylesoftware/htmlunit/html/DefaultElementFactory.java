@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author David K. Taylor
  * @author Ronald Brill
  */
-class DefaultElementFactory implements IElementFactory {
+class DefaultElementFactory implements ElementFactory {
 
     static final List<String> SUPPORTED_TAGS_ = Arrays.asList(HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
         HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlApplet.TAG_NAME, HtmlArea.TAG_NAME, HtmlAudio.TAG_NAME,

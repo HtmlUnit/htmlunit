@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  */
-public interface IElementFactory {
+public interface ElementFactory {
     /**
      * Creates an element according to this factory's specification. Note that even though this method
      * takes a page parameter, the element is <em>not</em> automatically added to the page's DOM tree.
@@ -37,7 +37,7 @@ public interface IElementFactory {
      *        if no attributes specified
      * @return the newly created and initialized element
      */
-    HtmlElement createElement(final SgmlPage page, final String tagName, final Attributes attributes);
+    DomElement createElement(final SgmlPage page, final String tagName, final Attributes attributes);
 
     /**
      * Creates an element according to this factory's specification. Note that even though this method
@@ -50,6 +50,6 @@ public interface IElementFactory {
      *        if no attributes specified
      * @return the newly created and initialized element
      */
-    HtmlElement createElementNS(final SgmlPage page, final String namespaceURI, final String qualifiedName,
+    DomElement createElementNS(final SgmlPage page, final String namespaceURI, final String qualifiedName,
         final Attributes attributes);
 }

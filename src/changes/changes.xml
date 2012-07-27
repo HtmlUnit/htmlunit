@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support">
+            <action type="update" dev="asashour">
+                INCOMPATIBLE CHANGE: rename IElementFactory to ElementFactory,
+                and change the return type of its methods from HtmlElement to DomElement.
+            </action>
             <action type="fix" dev="asashour">
                 HtmlPage: cloneNode() should clone the underlying ScriptObject.
             </action>

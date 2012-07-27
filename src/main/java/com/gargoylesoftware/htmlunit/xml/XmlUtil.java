@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.IElementFactory;
+import com.gargoylesoftware.htmlunit.html.ElementFactory;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -214,7 +214,7 @@ public final class XmlUtil {
         final String ns = source.getNamespaceURI();
         String localName = source.getLocalName();
         if (HTMLParser.XHTML_NAMESPACE.equals(ns)) {
-            final IElementFactory factory = HTMLParser.getFactory(localName);
+            final ElementFactory factory = HTMLParser.getFactory(localName);
             return factory.createElementNS(page, ns, localName, namedNodeMapToSaxAttributes(source.getAttributes()));
         }
         final Map<String, DomAttr> attributes = new HashMap<String, DomAttr>();

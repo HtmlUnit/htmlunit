@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author David K. Taylor
  */
-public final class UnknownElementFactory implements IElementFactory {
+public final class UnknownElementFactory implements ElementFactory {
 
     /** The singleton instance. */
     public static final UnknownElementFactory instance = new UnknownElementFactory();

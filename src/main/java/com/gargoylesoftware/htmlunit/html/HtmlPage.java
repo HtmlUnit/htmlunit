@@ -460,7 +460,7 @@ public class HtmlPage extends SgmlPage {
      * @param tagName the tag name, preferably in lowercase
      */
     @Override
-    public HtmlElement createElement(String tagName) {
+    public DomElement createElement(String tagName) {
         if (tagName.indexOf(':') == -1) {
             tagName = tagName.toLowerCase();
         }
@@ -471,7 +471,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     @Override
-    public HtmlElement createElementNS(final String namespaceURI, final String qualifiedName) {
+    public DomElement createElementNS(final String namespaceURI, final String qualifiedName) {
         return HTMLParser.getElementFactory(namespaceURI, qualifiedName)
             .createElementNS(this, namespaceURI, qualifiedName, null);
     }

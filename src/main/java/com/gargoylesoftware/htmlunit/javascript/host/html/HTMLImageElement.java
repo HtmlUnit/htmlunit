@@ -22,6 +22,7 @@ import org.apache.xalan.xsltc.runtime.AttributeList;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
@@ -56,7 +57,7 @@ public class HTMLImageElement extends HTMLElement {
     public void jsConstructor() {
         instantiatedViaJavaScript_ = true;
         final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
-        final HtmlElement fake =
+        final DomElement fake =
                 HTMLParser.getFactory(HtmlImage.TAG_NAME).createElement(page, HtmlImage.TAG_NAME, new AttributeList());
         setDomNode(fake);
     }
