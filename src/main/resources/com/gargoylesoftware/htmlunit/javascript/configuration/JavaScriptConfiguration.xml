@@ -3052,6 +3052,24 @@
         <function name="item"/>
     </class>
 
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGCircleElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgCircle">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+    </class>
+
+    <class extends="Element" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgElement">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+    </class>
+
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgSvg">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+    </class>
+
     <class extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Text"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomText">
         <function name="splitText"/>

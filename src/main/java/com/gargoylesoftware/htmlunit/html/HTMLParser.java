@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
 
 /**
  * <p>SAX parser implementation that uses the NekoHTML {@link org.cyberneko.html.HTMLConfiguration}
@@ -79,7 +80,11 @@ public final class HTMLParser {
     /** XHTML namespace. */
     public static final String XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
 
+    /** SVG namespace. */
+    public static final String SVG_NAMESPACE = "http://www.w3.org/2000/svg";
     private static final Map<String, ElementFactory> ELEMENT_FACTORIES = new HashMap<String, ElementFactory>();
+
+    private static final ElementFactory SVG_FACTORY = new SvgElementFactory();
 
     static {
         ELEMENT_FACTORIES.put(HtmlInput.TAG_NAME, InputElementFactory.instance);
@@ -319,11 +324,13 @@ public final class HTMLParser {
 
     /**
      * Returns the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory.
+     * @param page the page
      * @param namespaceURI the namespace URI
      * @param qualifiedName the qualified name
      * @return the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory
      */
-    static ElementFactory getElementFactory(final String namespaceURI, final String qualifiedName) {
+    static ElementFactory getElementFactory(final HtmlPage page, final String namespaceURI,
+            final String qualifiedName) {
         if (namespaceURI == null || namespaceURI.isEmpty()
             || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
             String tagName = qualifiedName;
@@ -338,6 +345,10 @@ public final class HTMLParser {
 
             if (factory != null) {
                 return factory;
+            }
+            if (namespaceURI.equals(SVG_NAMESPACE)
+                    && page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.SVG)) {
+                return SVG_FACTORY;
             }
         }
         return UnknownElementFactory.instance;
@@ -494,7 +505,7 @@ public final class HTMLParser {
             }
             // add a head if none was there
             else if (!headParsed_ && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
-                final ElementFactory factory = getElementFactory(namespaceURI, "head");
+                final ElementFactory factory = getElementFactory(page_, namespaceURI, "head");
                 final DomElement newElement = factory.createElement(page_, "head", null);
                 currentNode_.appendChild(newElement);
                 headParsed_ = true;
@@ -511,7 +522,7 @@ public final class HTMLParser {
             if (!(page_ instanceof XHtmlPage) && XHTML_NAMESPACE.equals(namespaceURI)) {
                 namespaceURI = null;
             }
-            final ElementFactory factory = getElementFactory(namespaceURI, qName);
+            final ElementFactory factory = getElementFactory(page_, namespaceURI, qName);
             final DomElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 

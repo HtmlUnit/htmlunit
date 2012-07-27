@@ -855,7 +855,7 @@ public enum BrowserVersionFeatures {
     SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
 
     /** Indicates if SVG is supported. */
-    SVG_SUPPORT,
+    SVG,
 
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
     TEXTAREA_CRNL,
