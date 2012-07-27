@@ -90,8 +90,152 @@ public class SvgElementFactory implements ElementFactory {
         else if (tagName.equalsIgnoreCase(SvgFeComponentTransfer.TAG_NAME)) {
             element = new SvgFeComponentTransfer(namespaceURI, qualifiedName, page, attributeMap);
         }
+        else if (tagName.equalsIgnoreCase(SvgFeComposite.TAG_NAME)) {
+            element = new SvgFeComposite(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeConvolveMatrix.TAG_NAME)) {
+            element = new SvgFeConvolveMatrix(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeDiffuseLighting.TAG_NAME)) {
+            element = new SvgFeDiffuseLighting(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeDisplacementMap.TAG_NAME)) {
+            element = new SvgFeDisplacementMap(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeDistantLight.TAG_NAME)) {
+            element = new SvgFeDistantLight(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeFlood.TAG_NAME)) {
+            element = new SvgFeFlood(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeFuncALight.TAG_NAME)) {
+            element = new SvgFeFuncALight(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeFuncBLight.TAG_NAME)) {
+            element = new SvgFeFuncBLight(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeFuncGLight.TAG_NAME)) {
+            element = new SvgFeFuncGLight(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeFuncRLight.TAG_NAME)) {
+            element = new SvgFeFuncRLight(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeGaussianBlur.TAG_NAME)) {
+            element = new SvgFeGaussianBlur(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeImage.TAG_NAME)) {
+            element = new SvgFeImage(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeMerge.TAG_NAME)) {
+            element = new SvgFeMerge(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeMergeNode.TAG_NAME)) {
+            element = new SvgFeMergeNode(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeMorphology.TAG_NAME)) {
+            element = new SvgFeMorphology(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeOffset.TAG_NAME)) {
+            element = new SvgFeOffset(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFePointLight.TAG_NAME)) {
+            element = new SvgFePointLight(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeSpecularLighting.TAG_NAME)) {
+            element = new SvgFeSpecularLighting(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeSpotLight.TAG_NAME)) {
+            element = new SvgFeSpotLight(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeTile.TAG_NAME)) {
+            element = new SvgFeTile(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFeTurbulence.TAG_NAME)) {
+            element = new SvgFeTurbulence(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgFilter.TAG_NAME)) {
+            element = new SvgFilter(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgForeignObject.TAG_NAME)) {
+            element = new SvgForeignObject(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgGroup.TAG_NAME)) {
+            element = new SvgGroup(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgImage.TAG_NAME)) {
+            element = new SvgImage(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgLine.TAG_NAME)) {
+            element = new SvgLine(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgLinearGradient.TAG_NAME)) {
+            element = new SvgLinearGradient(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgMarker.TAG_NAME)) {
+            element = new SvgMarker(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgMask.TAG_NAME)) {
+            element = new SvgMask(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgMetadata.TAG_NAME)) {
+            element = new SvgMetadata(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgMpath.TAG_NAME)) {
+            element = new SvgMpath(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgPath.TAG_NAME)) {
+            element = new SvgPath(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgPattern.TAG_NAME)) {
+            element = new SvgPattern(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgPolygon.TAG_NAME)) {
+            element = new SvgPolygon(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgPolyline.TAG_NAME)) {
+            element = new SvgPolyline(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgRadialGradient.TAG_NAME)) {
+            element = new SvgRadialGradient(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgRect.TAG_NAME)) {
+            element = new SvgRect(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgScript.TAG_NAME)) {
+            element = new SvgScript(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgSet.TAG_NAME)) {
+            element = new SvgSet(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgStop.TAG_NAME)) {
+            element = new SvgStop(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgStyle.TAG_NAME)) {
+            element = new SvgStyle(namespaceURI, qualifiedName, page, attributeMap);
+        }
         else if (tagName.equalsIgnoreCase(SvgSvg.TAG_NAME)) {
             element = new SvgSvg(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgSwitch.TAG_NAME)) {
+            element = new SvgSwitch(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgSymbol.TAG_NAME)) {
+            element = new SvgSymbol(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgText.TAG_NAME)) {
+            element = new SvgText(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgTextPath.TAG_NAME)) {
+            element = new SvgTextPath(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgTitle.TAG_NAME)) {
+            element = new SvgTitle(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgTSpan.TAG_NAME)) {
+            element = new SvgTSpan(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equalsIgnoreCase(SvgUse.TAG_NAME)) {
+            element = new SvgUse(namespaceURI, qualifiedName, page, attributeMap);
         }
         if (element == null) {
             element = new SvgElement(namespaceURI, qualifiedName, page, attributeMap);

@@ -32,6 +32,7 @@
     <suppress checks="MethodLength" files="DefaultElementFactory.java"/>
     <suppress checks="MethodLength" files="Dojo102Test.java"/>
     <suppress checks="MethodLength" files="CSSStyleDeclaration2Test.java"/>
+    <suppress checks="MethodLength" files="SvgElementFactory.java"/>
     <suppress checks="ParameterNumber" files="HtmlUnitRegExpProxy.java"/>
     <suppress checks="ParameterNumber" files="KeyboardEvent.java"/>
     <suppress checks="ParameterNumber" files="MouseEvent.java"/>

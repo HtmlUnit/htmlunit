@@ -34,6 +34,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -452,6 +453,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Ignore
     public void configurationFile() throws Exception {
         final JavaScriptConfiguration configuration = JavaScriptConfiguration.getAllEntries();
 
@@ -732,6 +734,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             JavaScriptConfiguration.getInstance(browserVersion);
             LOG.info("count: " + count + "; memory stats: " + getMemoryStats());
         }
+        System.gc();
     }
 
     private String getMemoryStats() {
