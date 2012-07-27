@@ -3052,22 +3052,109 @@
         <function name="item"/>
     </class>
 
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgAnchor">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+        <browser name="Chrome"/>
+    </class>
+
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAltGlyphElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgAltGlyph">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+        <browser name="Chrome"/>
+    </class>
+
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgAnimate">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+        <browser name="Chrome"/>
+    </class>
+
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateMotionElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgAnimateMotion">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+        <browser name="Chrome"/>
+    </class>
+
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateTransformElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgAnimateTransform">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+        <browser name="Chrome"/>
+    </class>
+
     <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGCircleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgCircle">
         <browser name="Internet Explorer" min-version="9"/>
         <browser name="Firefox"/>
+        <browser name="Chrome"/>
+    </class>
+
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGClipPathElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgClipPath">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+        <browser name="Chrome"/>
+    </class>
+
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGDefsElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgDefs">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+        <browser name="Chrome"/>
+    </class>
+
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGDescElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgDesc">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+        <browser name="Chrome"/>
     </class>
 
     <class extends="Element" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgElement">
         <browser name="Internet Explorer" min-version="9"/>
         <browser name="Firefox"/>
+        <browser name="Chrome"/>
+    </class>
+
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGEllipseElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgEllipse">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+        <browser name="Chrome"/>
+    </class>
+
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEBlendElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgFeBlend">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+        <browser name="Chrome"/>
+    </class>
+
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEColorMatrixElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgFeColorMatrix">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+        <browser name="Chrome"/>
+    </class>
+
+    <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEComponentTransferElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgFeComponentTransfer">
+        <browser name="Internet Explorer" min-version="9"/>
+        <browser name="Firefox"/>
+        <browser name="Chrome"/>
     </class>
 
     <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.svg.SvgSvg">
         <browser name="Internet Explorer" min-version="9"/>
         <browser name="Firefox"/>
+        <browser name="Chrome"/>
     </class>
 
     <class extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Text"

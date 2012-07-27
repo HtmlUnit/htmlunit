@@ -333,6 +333,12 @@ public final class HTMLParser {
             final String qualifiedName) {
         if (namespaceURI == null || namespaceURI.isEmpty()
             || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
+
+            if (SVG_NAMESPACE.equals(namespaceURI)
+                    && page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.SVG)) {
+                return SVG_FACTORY;
+            }
+
             String tagName = qualifiedName;
             final int index = tagName.indexOf(':');
             if (index != -1) {
@@ -345,10 +351,6 @@ public final class HTMLParser {
 
             if (factory != null) {
                 return factory;
-            }
-            if (namespaceURI.equals(SVG_NAMESPACE)
-                    && page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.SVG)) {
-                return SVG_FACTORY;
             }
         }
         return UnknownElementFactory.instance;
