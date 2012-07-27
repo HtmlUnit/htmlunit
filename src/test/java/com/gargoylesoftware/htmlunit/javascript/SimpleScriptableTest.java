@@ -88,6 +88,7 @@ public class SimpleScriptableTest extends WebTestCase {
      * Test.
      */
     @Test
+    @Browsers(Browser.FF3_6) //it is the only one to support SVG
     public void htmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
         final JavaScriptConfiguration jsConfiguration = JavaScriptConfiguration.getInstance(getBrowserVersion());
         final Map<Class<? extends HtmlElement>, Class<? extends SimpleScriptable>> map

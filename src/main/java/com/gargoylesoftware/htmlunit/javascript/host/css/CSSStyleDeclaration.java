@@ -450,8 +450,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Returns the element to which this style belongs.
      * @return the element to which this style belongs
      */
-    protected Element getElement() {
-        return jsElement_;
+    protected HTMLElement getElement() {
+        return (HTMLElement) jsElement_;
     }
 
     /**
@@ -5456,11 +5456,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the integer number of pixels corresponding to the specified length CSS attribute value
      * @see #pixelValue(String)
      */
-    protected static int pixelValue(final Element element, final CssValue value) {
+    protected static int pixelValue(final HTMLElement element, final CssValue value) {
         final String s = value.get(element);
         if (s.endsWith("%") || (s.isEmpty() && element instanceof HTMLHtmlElement)) {
             final int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(s).replaceAll("$1"), 100);
-            final Element parent = element.getParentElement();
+            final HTMLElement parent = (HTMLElement) element.getParentElement();
             final int absoluteValue = (parent == null) ? value.getWindowDefaultValue() : pixelValue(parent, value);
             return (int) ((i / 100D) * absoluteValue);
         }
@@ -5542,7 +5542,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
          * @param element the element for which the CSS attribute value is to be retrieved
          * @return the CSS attribute value for the specified element
          */
-        public final String get(final Element element) {
+        public final String get(final HTMLElement element) {
             final ComputedCSSStyleDeclaration style = element.jsxGet_currentStyle();
             final String value = get(style);
             return value;

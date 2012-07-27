@@ -161,7 +161,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     protected String getStyleAttribute(final String name, final Map<String, StyleElement> styleMap) {
         String s = super.getStyleAttribute(name, null);
         if (s.isEmpty() && isInheritable(name)) {
-            final Element parent = getElement().getParentElement();
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent != null) {
                 s = getWindow().jsxFunction_getComputedStyle(parent, null).getStyleAttribute(name, null);
             }
@@ -588,7 +588,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String jsxGet_fontSize() {
         String value = super.jsxGet_fontSize();
         if (value.isEmpty()) {
-            final Element parent = getElement().getParentElement();
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent != null) {
                 value = parent.jsxGet_currentStyle().jsxGet_fontSize();
             }
@@ -1821,13 +1821,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else if ("absolute".equals(p) && !"auto".equals(r)) {
             // Need to calculate the horizontal displacement caused by *all* siblings.
-            final Element parent = getElement().getParentElement();
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             final int parentWidth = parent.jsxGet_currentStyle().getCalculatedWidth(false, false);
             left = parentWidth - pixelValue(r);
         }
         else if ("fixed".equals(p) && "auto".equals(l)) {
             // Fixed to the location at which the browser puts it via normal element flowing.
-            final Element parent = getElement().getParentElement();
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             left = pixelValue(parent.jsxGet_currentStyle().getLeftWithInheritance());
         }
         else if ("static".equals(p)) {
@@ -1883,7 +1883,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         String p = jsxGet_position();
         if ("inherit".equals(p)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final Element parent = getElement().getParentElement();
+                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
                 p = (parent != null ? parent.jsxGet_currentStyle().getPositionWithInheritance() : "static");
             }
             else {
@@ -1901,7 +1901,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         String left = jsxGet_left();
         if ("inherit".equals(left)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final Element parent = getElement().getParentElement();
+                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
                 left = (parent != null ? parent.jsxGet_currentStyle().getLeftWithInheritance() : "auto");
             }
             else {
@@ -1919,7 +1919,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         String right = jsxGet_right();
         if ("inherit".equals(right)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final Element parent = getElement().getParentElement();
+                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
                 right = (parent != null ? parent.jsxGet_currentStyle().getRightWithInheritance() : "auto");
             }
             else {
@@ -1937,7 +1937,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         String top = jsxGet_top();
         if ("inherit".equals(top)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final Element parent = getElement().getParentElement();
+                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
                 top = (parent != null ? parent.jsxGet_currentStyle().getTopWithInheritance() : "auto");
             }
             else {
@@ -1955,7 +1955,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         String bottom = jsxGet_bottom();
         if ("inherit".equals(bottom)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
-                final Element parent = getElement().getParentElement();
+                final HTMLElement parent = (HTMLElement) getElement().getParentElement();
                 bottom = (parent != null ? parent.jsxGet_currentStyle().getBottomWithInheritance() : "auto");
             }
             else {
@@ -2167,7 +2167,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the specified length CSS attribute value as a pixel length value
      * @see #pixelString(String)
      */
-    protected String pixelString(final Element element, final CssValue value) {
+    protected String pixelString(final HTMLElement element, final CssValue value) {
         final String s = value.get(element);
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX)) {
             return s;

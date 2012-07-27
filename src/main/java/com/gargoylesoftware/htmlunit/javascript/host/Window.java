@@ -1463,7 +1463,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param pseudo a string specifying the pseudo-element to match (may be <tt>null</tt>)
      * @return the computed style
      */
-    public ComputedCSSStyleDeclaration jsxFunction_getComputedStyle(final Element element, final String pseudo) {
+    public ComputedCSSStyleDeclaration jsxFunction_getComputedStyle(final HTMLElement element, final String pseudo) {
         ComputedCSSStyleDeclaration style;
 
         synchronized (computedStyles_) {
