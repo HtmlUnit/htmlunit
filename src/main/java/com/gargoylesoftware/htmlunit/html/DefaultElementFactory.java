@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -490,7 +491,7 @@ class DefaultElementFactory implements ElementFactory {
     static Map<String, DomAttr> setAttributes(final SgmlPage page, final Attributes attributes) {
         Map<String, DomAttr> attributeMap = null;
         if (attributes != null) {
-            attributeMap = HtmlElement.createAttributeMap(attributes.getLength());
+            attributeMap = new LinkedHashMap<String, DomAttr>(attributes.getLength());
             for (int i = 0; i < attributes.getLength(); i++) {
                 final String qName = attributes.getQName(i);
                 // browsers consider only first attribute (ex: <div id='foo' id='something'>...</div>)
@@ -499,8 +500,8 @@ class DefaultElementFactory implements ElementFactory {
                     if (namespaceURI != null && namespaceURI.isEmpty()) {
                         namespaceURI = null;
                     }
-                    HtmlElement.addAttributeToMap(page, attributeMap, namespaceURI,
-                        qName, attributes.getValue(i));
+                    final DomAttr newAttr = new DomAttr(page, namespaceURI, qName, attributes.getValue(i), true);
+                    attributeMap.put(qName, newAttr);
                 }
             }
         }

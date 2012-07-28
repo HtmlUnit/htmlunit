@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -734,31 +733,6 @@ public abstract class HtmlElement extends DomElement {
         if (i >= 0 && i < children.size()) {
             children.get(i).remove();
         }
-    }
-
-    /**
-     * Creates an attribute map as needed by HtmlElement. This is just used by the element factories.
-     * @param attributeCount the initial number of attributes to be added to the map
-     * @return the attribute map
-     */
-    static Map<String, DomAttr> createAttributeMap(final int attributeCount) {
-        return new LinkedHashMap<String, DomAttr>(attributeCount); // preserve insertion order
-    }
-
-    /**
-     * Adds an attribute to the specified attribute map. This is just used by the element factories.
-     * @param page the page which contains the attribute being created
-     * @param attributeMap the attribute map where the attribute will be added
-     * @param namespaceURI the URI that identifies an XML namespace
-     * @param qualifiedName the qualified name of the attribute
-     * @param value the value of the attribute
-     * @return the new attribute which was added to the specified attribute map
-     */
-    static DomAttr addAttributeToMap(final SgmlPage page, final Map<String, DomAttr> attributeMap,
-            final String namespaceURI, final String qualifiedName, final String value) {
-        final DomAttr newAttr = new DomAttr(page, namespaceURI, qualifiedName, value, true);
-        attributeMap.put(qualifiedName, newAttr);
-        return newAttr;
     }
 
     /**
