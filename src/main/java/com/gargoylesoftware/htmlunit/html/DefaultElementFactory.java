@@ -68,7 +68,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlNoScript.TAG_NAME, HtmlObject.TAG_NAME, HtmlOrderedList.TAG_NAME,
             HtmlOptionGroup.TAG_NAME, HtmlOption.TAG_NAME, HtmlParagraph.TAG_NAME,
             HtmlParameter.TAG_NAME, HtmlPlainText.TAG_NAME, HtmlPreformattedText.TAG_NAME,
-            HtmlS.TAG_NAME, HtmlSample.TAG_NAME,
+            HtmlProgress.TAG_NAME, HtmlS.TAG_NAME, HtmlSample.TAG_NAME,
             HtmlScript.TAG_NAME, HtmlSelect.TAG_NAME, HtmlSmall.TAG_NAME,
             HtmlSource.TAG_NAME, HtmlSpacer.TAG_NAME, HtmlSpan.TAG_NAME,
             HtmlStrike.TAG_NAME, HtmlStrong.TAG_NAME, HtmlStyle.TAG_NAME,
@@ -368,6 +368,9 @@ class DefaultElementFactory implements ElementFactory {
         }
         else if (tagName.equals(HtmlPreformattedText.TAG_NAME)) {
             element = new HtmlPreformattedText(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equals(HtmlProgress.TAG_NAME)) {
+            element = new HtmlProgress(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlS.TAG_NAME)) {
             element = new HtmlS(namespaceURI, qualifiedName, page, attributeMap);

@@ -2886,6 +2886,11 @@
         <property name="target" readable="true" writable="false"/>
     </class>
 
+    <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLProgressElement"
+        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlProgress">
+        <browser name="Firefox" min-version="10"/>
+    </class>
+
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Range" JSObject="true">
         <constant name="START_TO_START"/>
         <constant name="START_TO_END"/>

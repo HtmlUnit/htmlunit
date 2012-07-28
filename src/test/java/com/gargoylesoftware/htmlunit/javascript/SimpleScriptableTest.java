@@ -195,6 +195,9 @@ public class SimpleScriptableTest extends WebTestCase {
                 }
             }
         }
+        if (getBrowserVersion().getNickname().equals("FF3.6")) {
+            names.remove("HTMLProgressElement");
+        }
 
         final Collection<String> hostClassNames = new ArrayList<String>();
         for (final Class<? extends SimpleScriptable> clazz : map.values()) {
