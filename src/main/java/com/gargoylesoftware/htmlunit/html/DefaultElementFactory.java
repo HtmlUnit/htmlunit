@@ -23,6 +23,7 @@ import org.xml.sax.Attributes;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
  * Element factory which creates elements by calling the constructor on a
@@ -101,6 +102,19 @@ class DefaultElementFactory implements ElementFactory {
      */
     public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
+        return createElementNS(page, namespaceURI, qualifiedName, attributes, false);
+    }
+
+    /**
+     * @param page the owning page
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param attributes initial attributes, possibly <code>null</code>
+     * @param checkBrowserCompatibility if true and the page doesn't support this element, return null
+     * @return the newly created element
+     */
+    public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
+            final String qualifiedName, final Attributes attributes, final boolean checkBrowserCompatibility) {
         final Map<String, DomAttr> attributeMap = setAttributes(page, attributes);
 
         final HtmlElement element;
@@ -480,6 +494,12 @@ class DefaultElementFactory implements ElementFactory {
         }
         else {
             throw new IllegalStateException("Cannot find HtmlElement for " + qualifiedName);
+        }
+        final JavaScriptConfiguration config =
+                JavaScriptConfiguration.getInstance(page.getWebClient().getBrowserVersion());
+        if (!"td".equals(tagName) && !"th".equals(tagName)
+                && checkBrowserCompatibility && config.getHtmlJavaScriptMapping().get(element.getClass()) == null) {
+            return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
         }
         return element;
     }

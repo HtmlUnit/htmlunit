@@ -59,6 +59,14 @@ public final class UnknownElementFactory implements ElementFactory {
      */
     public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
+        return createElementNS(page, namespaceURI, qualifiedName, attributes, false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
+            final String qualifiedName, final Attributes attributes, final boolean checkBrowserCompatibility) {
         final Map<String, DomAttr> attributeMap = DefaultElementFactory.setAttributes(page, attributes);
         return new HtmlUnknownElement(page, namespaceURI, qualifiedName, attributeMap);
     }

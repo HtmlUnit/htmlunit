@@ -96,19 +96,6 @@ public final class HTMLParser {
     }
 
     /**
-     * @param tagName an HTML element tag name
-     * @return a factory for creating HtmlElements representing the given tag
-     */
-    public static ElementFactory getFactory(final String tagName) {
-        final ElementFactory result = ELEMENT_FACTORIES.get(tagName);
-
-        if (result != null) {
-            return result;
-        }
-        return UnknownElementFactory.instance;
-    }
-
-    /**
      * You should never need to create one of these!
      */
     private HTMLParser() {
@@ -323,6 +310,19 @@ public final class HTMLParser {
     }
 
     /**
+     * @param tagName an HTML element tag name
+     * @return a factory for creating HtmlElements representing the given tag
+     */
+    public static ElementFactory getFactory(final String tagName) {
+        final ElementFactory result = ELEMENT_FACTORIES.get(tagName);
+
+        if (result != null) {
+            return result;
+        }
+        return UnknownElementFactory.instance;
+    }
+
+    /**
      * Returns the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory.
      * @param page the page
      * @param namespaceURI the namespace URI
@@ -525,7 +525,7 @@ public final class HTMLParser {
                 namespaceURI = null;
             }
             final ElementFactory factory = getElementFactory(page_, namespaceURI, qName);
-            final DomElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts);
+            final DomElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts, true);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
             // parse can't replace everything as it does not buffer elements while parsing

@@ -22,11 +22,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.internal.runners.model.ReflectiveCallable;
 import org.junit.internal.runners.statements.Fail;
-import org.junit.rules.MethodRule;
+import org.junit.rules.RunRules;
+import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runner.manipulation.Filter;
 import org.junit.runner.manipulation.NoTestsRemainException;
@@ -276,6 +276,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     protected Statement methodBlock(final FrameworkMethod method) {
         final Object test;
         final WebTestCase testCase;
@@ -299,6 +300,8 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         statement = withAfters(method, test, statement);
         statement = withRules(method, test, statement);
 
+        //  End of copy & paste from super.methodBlock()  //
+
         final boolean shouldFail = isExpectedToFail(method);
         final boolean notYetImplemented;
         final int tries;
@@ -319,10 +322,36 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     private Statement withRules(final FrameworkMethod method, final Object target, final Statement statement) {
         Statement result = statement;
-        for (final MethodRule each : getTestClass().getAnnotatedFieldValues(target, Rule.class, MethodRule.class)) {
-            result = each.apply(result, method, target);
+        result = withMethodRules(method, target, result);
+        result = withTestRules(method, target, result);
+        return result;
+    }
+
+    @SuppressWarnings("deprecation")
+    private Statement withMethodRules(final FrameworkMethod method, final Object target, Statement result) {
+        final List<TestRule> testRules = getTestRules(target);
+        for (final org.junit.rules.MethodRule each : getMethodRules(target)) {
+            if (!testRules.contains(each)) {
+                result = each.apply(result, method, target);
+            }
         }
         return result;
+    }
+
+    @SuppressWarnings("deprecation")
+    private List<org.junit.rules.MethodRule> getMethodRules(final Object target) {
+        return rules(target);
+    }
+
+    /**
+     * Returns a Statement.
+     *
+     * @param statement The base statement
+     * @return a RunRules statement if any class-level Rule are found, or the base statement
+     */
+    private Statement withTestRules(final FrameworkMethod method, final Object target, final Statement statement) {
+        final List<TestRule> testRules = getTestRules(target);
+        return testRules.isEmpty() ? statement : new RunRules(statement, testRules, describeChild(method));
     }
 
     private boolean isExpectedToFail(final FrameworkMethod method) {

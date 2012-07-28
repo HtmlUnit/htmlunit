@@ -52,4 +52,19 @@ public interface ElementFactory {
      */
     DomElement createElementNS(final SgmlPage page, final String namespaceURI, final String qualifiedName,
         final Attributes attributes);
+
+    /**
+     * Creates an element according to this factory's specification. Note that even though this method
+     * takes a page parameter, the element is <em>not</em> automatically added to the page's DOM tree.
+     *
+     * @param page the enclosing page for the new element
+     * @param namespaceURI the URI that identifies an XML namespace
+     * @param qualifiedName the qualified name of the element type to instantiate
+     * @param attributes the attributes encountered during XML/HTML parsing (possibly <tt>null</tt>
+     *        if no attributes specified
+     * @param checkBrowserCompatibility if true and the page doesn't support this element, return null
+     * @return the newly created and initialized element
+     */
+    DomElement createElementNS(final SgmlPage page, final String namespaceURI, final String qualifiedName,
+        final Attributes attributes, final boolean checkBrowserCompatibility);
 }

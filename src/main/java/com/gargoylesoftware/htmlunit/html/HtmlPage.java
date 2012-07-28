@@ -464,7 +464,7 @@ public class HtmlPage extends SgmlPage {
         if (tagName.indexOf(':') == -1) {
             tagName = tagName.toLowerCase();
         }
-        return HTMLParser.getFactory(tagName).createElement(this, tagName, null);
+        return HTMLParser.getFactory(tagName).createElementNS(this, null, tagName, null, true);
     }
 
     /**
@@ -473,7 +473,7 @@ public class HtmlPage extends SgmlPage {
     @Override
     public DomElement createElementNS(final String namespaceURI, final String qualifiedName) {
         return HTMLParser.getElementFactory(this, namespaceURI, qualifiedName)
-            .createElementNS(this, namespaceURI, qualifiedName, null);
+            .createElementNS(this, namespaceURI, qualifiedName, null, true);
     }
 
     /**

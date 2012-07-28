@@ -34,9 +34,10 @@ public class HtmlProgressTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLProgressElement]", FF3_6 = "[object HTMLElement]", IE = "[object]")
+    @Alerts(FF = "[object HTMLProgressElement]", FF3_6 = "[object HTMLUnknownElement]",
+            IE = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"
@@ -47,6 +48,11 @@ public class HtmlProgressTest extends WebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlProgress.class.isInstance(page.getHtmlElementById("myId")));
+        if ("[object HTMLProgressElement]".equals(getExpectedAlerts()[0])) {
+            assertTrue(HtmlProgress.class.isInstance(page.getHtmlElementById("myId")));
+        }
+        else {
+            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
+        }
     }
 }

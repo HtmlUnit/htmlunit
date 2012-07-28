@@ -66,6 +66,14 @@ public final class InputElementFactory implements ElementFactory {
      */
     public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes) {
+        return createElementNS(page, namespaceURI, qualifiedName, attributes, false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
+            final String qualifiedName, final Attributes attributes, final boolean asdf) {
 
         Map<String, DomAttr> attributeMap = DefaultElementFactory.setAttributes(page, attributes);
         if (attributeMap == null) {

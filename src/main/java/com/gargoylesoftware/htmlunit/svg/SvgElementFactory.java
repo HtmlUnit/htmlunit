@@ -47,6 +47,15 @@ public class SvgElementFactory implements ElementFactory {
     @Override
     public DomElement createElementNS(final SgmlPage page, final String namespaceURI, final String qualifiedName,
             final Attributes attributes) {
+        return createElementNS(page, namespaceURI, qualifiedName, attributes, false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomElement createElementNS(final SgmlPage page, final String namespaceURI, final String qualifiedName,
+            final Attributes attributes, final boolean checkBrowserCompatibility) {
 
         final Map<String, DomAttr> attributeMap = toMap(page, attributes);
         final String tagName = qualifiedName;
