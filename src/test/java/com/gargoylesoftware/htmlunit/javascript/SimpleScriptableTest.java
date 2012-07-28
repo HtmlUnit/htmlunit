@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -88,7 +89,6 @@ public class SimpleScriptableTest extends WebTestCase {
      * Test.
      */
     @Test
-    @Browsers(Browser.FF3_6) //it is the only one to support SVG
     public void htmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
         final JavaScriptConfiguration jsConfiguration = JavaScriptConfiguration.getInstance(getBrowserVersion());
         final Map<Class<? extends HtmlElement>, Class<? extends SimpleScriptable>> map
@@ -186,6 +186,14 @@ public class SimpleScriptableTest extends WebTestCase {
         }
         if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.CANVAS)) {
             names.remove("HTMLCanvasElement");
+        }
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.SVG)) {
+            for (final Iterator<String> iterator = names.iterator(); iterator.hasNext();) {
+                final String name = iterator.next();
+                if (name.startsWith("SVG")) {
+                    iterator.remove();
+                }
+            }
         }
 
         final Collection<String> hostClassNames = new ArrayList<String>();
