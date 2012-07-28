@@ -9,6 +9,9 @@
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support">
             <action type="add" dev="asashour">
+                JavaScript: implement document.scripts for FF 10 (in addition to already implemented IE).
+            </action>
+            <action type="add" dev="asashour">
                 JavaScript: implement node.parentElement (FF 10).
             </action>
             <action type="add" dev="asashour">

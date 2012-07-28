@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
@@ -1633,9 +1634,11 @@ public class DocumentTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "undefined", "exception occured" }, IE = { "[object]", "2" })
+    @Alerts(FF3_6 = { "undefined", "exception occured" },
+            FF = { "[object HTMLCollection]", "2" },
+            IE = { "[object HTMLCollection]", "2" })
     public void scriptsArray() throws Exception {
-        final String html = "<html><head><script lang='JavaScript'>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script lang='JavaScript'>\n"
             + "    function doTest(){\n"
             + "        alert(document.scripts);\n"
             + "        try {\n"

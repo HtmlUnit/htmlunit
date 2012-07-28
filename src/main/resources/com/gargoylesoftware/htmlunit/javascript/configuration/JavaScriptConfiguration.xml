@@ -1747,6 +1747,7 @@
         </property>
         <property name="scripts" readable="true" writable="false">
             <browser name="Internet Explorer"/>
+            <browser name="Firefox" min-version="9"/>
         </property>
         <property name="selection" readable="true" writable="false">
             <browser name="Internet Explorer"/>
