@@ -551,7 +551,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return a reference to the object that is removed
      */
     public HTMLElement jsxFunction_removeNode(final boolean removeChildren) {
-        final HTMLElement parent = jsxGet_parentElement();
+        final HTMLElement parent = (HTMLElement) jsxGet_parentElement();
         if (parent != null) {
             parent.jsxFunction_removeChild(this);
             if (!removeChildren) {
@@ -1614,19 +1614,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Gets the JavaScript property "parentElement".
-     * @return the parent element
-     * @see #jsxGet_parentNode()
-     */
-    public HTMLElement jsxGet_parentElement() {
-        final Node parent = getParent();
-        if (!(parent instanceof HTMLElement)) {
-            return null;
-        }
-        return (HTMLElement) parent;
-    }
-
-    /**
      * Gets the first ancestor instance of {@link HTMLElement}. It is mostly identical
      * to {@link #getParent()} except that it skips XML nodes.
      * @return the parent HTML element
@@ -1759,7 +1746,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return true if the element is contained within this object
      */
     public boolean jsxFunction_contains(final HTMLElement element) {
-        for (HTMLElement parent = element; parent != null; parent = parent.jsxGet_parentElement()) {
+        for (HTMLElement parent = element; parent != null; parent = (HTMLElement) parent.jsxGet_parentElement()) {
             if (this == parent) {
                 return true;
             }

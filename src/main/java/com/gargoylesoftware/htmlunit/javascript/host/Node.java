@@ -923,4 +923,18 @@ public class Node extends SimpleScriptable {
     public void jsxSet_textContent(final Object value) {
         getDomNodeOrDie().setTextContent(value == null ? null : Context.toString(value));
     }
+
+    /**
+     * Gets the JavaScript property "parentElement".
+     * @return the parent element
+     * @see #jsxGet_parentNode()
+     */
+    public Element jsxGet_parentElement() {
+        final Node parent = getParent();
+        if (!(parent instanceof Element)) {
+            return null;
+        }
+        return (Element) parent;
+    }
+
 }

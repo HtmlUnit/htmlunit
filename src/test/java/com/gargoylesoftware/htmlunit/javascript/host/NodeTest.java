@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link Node}.
@@ -1073,6 +1074,33 @@ public class NodeTest extends WebDriverTestCase {
             + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
             + "  }\n"
             + "</script></head><body onload='test()'></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = {"undefined", "[object HTMLHtmlElement]" }, FF = {"[object Element]", "[object HTMLHtmlElement]" },
+            FF3_6 = {"undefined", "undefined" })
+    public void parentElement() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var text = '<hello>hi</hello>';\n"
+            + "  if (window.ActiveXObject) {\n"
+            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    doc.async = false;\n"
+            + "    doc.loadXML(text);\n"
+            + "  } else {\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
+            + "  }\n"
+            + "  alert(doc.documentElement.firstChild.parentElement);\n"
+            + "  alert(document.body.parentElement);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 

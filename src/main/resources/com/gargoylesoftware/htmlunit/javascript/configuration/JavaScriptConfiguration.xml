@@ -2731,8 +2731,7 @@
         <function name="taintEnabled"/>
     </class>
 
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.Node"
-        JSObject="true">
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.Node" JSObject="true">
         <constant name="ELEMENT_NODE"><browser name="Firefox"/></constant>
         <constant name="ATTRIBUTE_NODE"><browser name="Firefox"/></constant>
         <constant name="TEXT_NODE"><browser name="Firefox"/></constant>
@@ -2765,6 +2764,10 @@
         <property name="nodeType" readable="true" writable="false"/>
         <property name="nodeValue" readable="true" writable="true"/>
         <property name="ownerDocument" readable="true" writable="false"/>
+        <property name="parentElement" readable="true" writable="false">
+            <browser name="Firefox" min-version="9"/>
+            <browser name="Chrome"/>
+        </property>
         <property name="parentNode" readable="true" writable="false"/>
         <property name="prefix" readable="true" writable="false">
             <browser name="Firefox"/>
