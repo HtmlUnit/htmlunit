@@ -195,7 +195,9 @@ public class SimpleScriptableTest extends WebTestCase {
                 }
             }
         }
-        if (getBrowserVersion().getNickname().equals("FF3.6")) {
+        final String nickname = getBrowserVersion().getNickname();
+        if ("FF3.6".equals(nickname) || "IE6".equals(nickname) || "IE7".equals(nickname)
+                || "IE8".equals(nickname)) {
             names.remove("HTMLProgressElement");
         }
 
