@@ -154,7 +154,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: jQuery() (1, 30, 31)")
-    @NotYetImplemented({ IE6, IE7, IE8, FF10 })
+    @NotYetImplemented({ IE6, IE7, IE8 })
     @Tries(3)
     public void test_3() throws Exception {
         runTest(3);
@@ -195,7 +195,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     @Alerts("core: trim (0, 9, 9)")
-    @NotYetImplemented({ IE6, IE7, IE8, FF10 })
+    @NotYetImplemented({ IE6, IE7, IE8 })
     public void test_7() throws Exception {
         runTest(7);
     }

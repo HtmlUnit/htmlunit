@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -61,7 +60,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class Node extends SimpleScriptable {
 
     /** "Live" child nodes collection; has to be a member to have equality (==) working. */
-    private HTMLCollection childNodes_;
+    private NodeList childNodes_;
 
     private EventListenersContainer eventListenersContainer_;
 
@@ -439,7 +438,7 @@ public class Node extends SimpleScriptable {
      * Returns the child nodes of the current element.
      * @return the child nodes of the current element
      */
-    public HTMLCollection jsxGet_childNodes() {
+    public NodeList jsxGet_childNodes() {
         if (childNodes_ == null) {
             final DomNode node = getDomNodeOrDie();
             final boolean isXmlPage = node.getOwnerDocument() instanceof XmlPage;
@@ -447,7 +446,7 @@ public class Node extends SimpleScriptable {
             final Boolean xmlSpaceDefault = isXMLSpaceDefault(node);
             final boolean skipEmptyTextNode = isIE && isXmlPage && !Boolean.FALSE.equals(xmlSpaceDefault);
 
-            childNodes_ = new HTMLCollection(node, false, "Node.childNodes") {
+            childNodes_ = new NodeList(node, false, "Node.childNodes") {
                 @Override
                 protected List<Object> computeElements() {
                     final List<Object> response = new ArrayList<Object>();

@@ -147,6 +147,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("Navigator");
         names.remove("Node");
         names.remove("NodeFilter");
+        names.remove("NodeList");
         names.remove("OfflineResourceList");
         names.remove("Plugin");
         names.remove("PluginArray");

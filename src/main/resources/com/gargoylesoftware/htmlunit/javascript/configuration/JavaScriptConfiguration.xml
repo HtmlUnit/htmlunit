@@ -1625,9 +1625,8 @@
         <function name="toDataURL"/>
     </class>
 
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection" JSObject="true">
-        <property name="length" readable="true" writable="false"/>
-        <function name="item"/>
+    <class extends="NodeList" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection"
+        JSObject="true">
         <function name="namedItem"/>
         <function name="nextNode">
             <browser name="Internet Explorer"/>
@@ -2837,6 +2836,11 @@
         <constant name="SHOW_NOTATION"/>
         <constant name="SHOW_PROCESSING_INSTRUCTION"/>
         <constant name="SHOW_TEXT"/>
+    </class>
+
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.NodeList" JSObject="true">
+        <property name="length" readable="true" writable="false"/>
+        <function name="item"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.OfflineResourceList"

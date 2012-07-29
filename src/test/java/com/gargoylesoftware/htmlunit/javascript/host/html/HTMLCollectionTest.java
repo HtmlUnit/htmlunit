@@ -136,13 +136,19 @@ public class HTMLCollectionTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"string 0", "string length", "string item", "string namedItem" },
+    @Alerts(FF = {"string 0", "string item", "string length", "string namedItem" },
             IE = {"string length", "string myForm" })
     public void testFor_in() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
+            + "    var arr = new Array();\n"
+            + "    \n"
             + "    for (i in document.forms) {\n"
-            + "      alert((typeof i) + ' ' + i);\n"
+            + "      arr[arr.length] = (typeof i) + ' ' + i;\n"
+            + "    }\n"
+            + "    arr.sort();\n"
+            + "    for (i = 0; i < arr.length; i++) {\n"
+            + "       alert(arr[i]);\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
@@ -157,16 +163,21 @@ public class HTMLCollectionTest extends WebTestCase {
      */
     @Test
     @Alerts(FF = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
-            "string length", "string item", "string namedItem" },
-            IE = {"string length", "string val1", "string 1", "string val2",
-            "string first_submit", "string second_submit", "string action" })
+            "string item", "string length", "string namedItem" },
+            IE = {"string 1", "string action", "string first_submit", "string length",
+            "string second_submit", "string val1", "string val2" })
     public void testFor_in2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var form = document.getElementById('myForm');\n"
             + "    var x = form.getElementsByTagName('*');\n"
+            + "    var arr = new Array();\n"
             + "    for (i in x){\n"
-            + "      alert((typeof i) + ' ' + i);\n"
+            + "      arr[arr.length] = (typeof i) + ' ' + i;\n"
+            + "    }\n"
+            + "    arr.sort();\n"
+            + "    for (i = 0; i < arr.length; i++) {\n"
+            + "      alert(arr[i]);\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"

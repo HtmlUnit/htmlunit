@@ -12,25 +12,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.html;
+package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import org.w3c.dom.Node;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
+import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
-import com.gargoylesoftware.htmlunit.javascript.host.NodeList;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -47,19 +53,34 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class HTMLCollection extends NodeList {
+public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.NodeList {
+    /**
+     * Cache effect of some changes.
+     */
+    protected enum EffectOnCache {
+        /** No effect, cache is still valid. */
+        NONE,
+        /** Cache is not valid anymore and should be reset. */
+        RESET
+    }
+
+    private boolean avoidObjectDetection_ = false;
+    private String description_;
+
+    private boolean attributeChangeSensitive_ = true;
 
     /**
-     * IE provides a way of enumerating through some element collections; this counter supports that functionality.
+     * Cache collection elements when possible, so as to avoid expensive XPath expression evaluations.
      */
-    private int currentIndex_ = 0;
+    private List<Object> cachedElements_;
+
+    private boolean listenerRegistered_;
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      * Don't call.
      */
-    @Deprecated
-    public HTMLCollection() {
+    public NodeList() {
         // Empty.
     }
 
@@ -67,7 +88,7 @@ public class HTMLCollection extends NodeList {
      * Creates an instance.
      * @param parentScope parent scope
      */
-    private HTMLCollection(final ScriptableObject parentScope) {
+    private NodeList(final ScriptableObject parentScope) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
     }
@@ -79,8 +100,11 @@ public class HTMLCollection extends NodeList {
      * of a descendant node of parentScope changes (attribute added, modified or removed)
      * @param description a text useful for debugging
      */
-    public HTMLCollection(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
-        super(parentScope, attributeChangeSensitive, description);
+    public NodeList(final DomNode parentScope, final boolean attributeChangeSensitive, final String description) {
+        this(parentScope.getScriptObject());
+        setDomNode(parentScope, false);
+        description_ = description;
+        attributeChangeSensitive_ = attributeChangeSensitive;
     }
 
     /**
@@ -88,8 +112,9 @@ public class HTMLCollection extends NodeList {
      * @param parentScope the parent scope, on which we listen for changes
      * @param initialElements the initial content for the cache
      */
-    HTMLCollection(final DomNode parentScope, final List<?> initialElements) {
-        super(parentScope, initialElements);
+    protected NodeList(final DomNode parentScope, final List<?> initialElements) {
+        this(parentScope.getScriptObject());
+        cachedElements_ = new ArrayList<Object>(initialElements);
     }
 
     /**
@@ -97,14 +122,47 @@ public class HTMLCollection extends NodeList {
      * @param window the current scope
      * @return an empty collection
      */
-    public static HTMLCollection emptyCollection(final Window window) {
+    public static NodeList emptyCollection(final Window window) {
         final List<Object> list = Collections.emptyList();
-        return new HTMLCollection(window) {
+        return new NodeList(window) {
             @Override
             public List<Object> getElements() {
                 return list;
             }
         };
+    }
+
+    /**
+     * Only needed to make collections like <tt>document.all</tt> available but "invisible" when simulating Firefox.
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean avoidObjectDetection() {
+        return avoidObjectDetection_;
+    }
+
+    /**
+     * @param newValue the new value
+     */
+    public void setAvoidObjectDetection(final boolean newValue) {
+        avoidObjectDetection_ = newValue;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+        if (args.length == 0) {
+            throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
+        }
+        return nullIfNotFound(getIt(args[0]));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public final Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
+        return null;
     }
 
     /**
@@ -121,6 +179,49 @@ public class HTMLCollection extends NodeList {
         }
         final String key = String.valueOf(o);
         return get(key, this);
+    }
+
+    /**
+     * Returns the element at the specified index, or <tt>NOT_FOUND</tt> if the index is invalid.
+     * {@inheritDoc}
+     */
+    @Override
+    public final Object get(final int index, final Scriptable start) {
+        final NodeList array = (NodeList) start;
+        final List<Object> elements = array.getElements();
+        if (index >= 0 && index < elements.size()) {
+            return getScriptableForElement(elements.get(index));
+        }
+        return NOT_FOUND;
+    }
+
+    /**
+     * Gets the HTML elements from cache or retrieve them at first call.
+     * @return the list of {@link HtmlElement} contained in this collection
+     */
+    public List<Object> getElements() {
+        // a bit strange but we like to avoid sync
+        List<Object> cachedElements = cachedElements_;
+
+        if (cachedElements == null) {
+            cachedElements = computeElements();
+            cachedElements_ = cachedElements;
+            if (!listenerRegistered_) {
+                final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+                final DomNode domNode = getDomNodeOrNull();
+                if (domNode != null) {
+                    domNode.addDomChangeListener(listener);
+                    if (attributeChangeSensitive_ &&  domNode instanceof HtmlElement) {
+                        ((HtmlElement) domNode).addHtmlAttributeChangeListener(listener);
+                    }
+                }
+                listenerRegistered_ = true;
+            }
+        }
+
+        // maybe the cache was cleared in between
+        // then this returns the old state and never null
+        return cachedElements;
     }
 
     /**
@@ -201,7 +302,7 @@ public class HTMLCollection extends NodeList {
             return getScriptableForElement(matchingElements.get(0));
         }
         else if (!matchingElements.isEmpty()) {
-            final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), matchingElements);
+            final NodeList collection = new NodeList(getDomNodeOrDie(), matchingElements);
             collection.setAvoidObjectDetection(
                     !getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION));
             return collection;
@@ -229,10 +330,29 @@ public class HTMLCollection extends NodeList {
 
         // many elements => build a sub collection
         final DomNode domNode = getDomNodeOrNull();
-        final HTMLCollection collection = new HTMLCollection(domNode, matchingElements);
+        final NodeList collection = new NodeList(domNode, matchingElements);
         collection.setAvoidObjectDetection(
                 !getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION));
         return collection;
+    }
+
+    /**
+     * Returns the length of this element array.
+     * @return the length of this element array
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>
+     */
+    public final int jsxGet_length() {
+        return getElements().size();
+    }
+
+    /**
+     * Returns the item or items corresponding to the specified index or key.
+     * @param index the index or key corresponding to the element or elements to return
+     * @return the element or elements corresponding to the specified index or key
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
+     */
+    public final Object jsxFunction_item(final Object index) {
+        return nullIfNotFound(getIt(index));
     }
 
     /**
@@ -253,57 +373,11 @@ public class HTMLCollection extends NodeList {
     }
 
     /**
-     * Retrieves the item or items corresponding to the specified name (checks ids, and if
-     * that does not work, then names).
-     * @param name the name or id the element or elements to return
-     * @return the element or elements corresponding to the specified name or id
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536634.aspx">MSDN doc</a>
+     * {@inheritDoc}
      */
-    public final Object jsxFunction_namedItem(final String name) {
-        return nullIfNotFound(getIt(name));
-    }
-
-    /**
-     * Returns the next node in the collection (supporting iteration in IE only).
-     * @return the next node in the collection
-     */
-    public Object jsxFunction_nextNode() {
-        Object nextNode;
-        final List<Object> elements = getElements();
-        if (currentIndex_ >= 0 && currentIndex_ < elements.size()) {
-            nextNode = elements.get(currentIndex_);
-        }
-        else {
-            nextNode = null;
-        }
-        currentIndex_++;
-        return nextNode;
-    }
-
-    /**
-     * Resets the node iterator accessed via {@link #jsxFunction_nextNode()}.
-     */
-    public void jsxFunction_reset() {
-        currentIndex_ = 0;
-    }
-
-    /**
-     * Returns all the elements in this element array that have the specified tag name.
-     * This method returns an empty element array if there are no elements with the
-     * specified tag name.
-     * @param tagName the name of the tag of the elements to return
-     * @return all the elements in this element array that have the specified tag name
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536776.aspx">MSDN doc</a>
-     */
-    public Object jsxFunction_tags(final String tagName) {
-        final String tagNameLC = tagName.toLowerCase();
-        final HTMLCollection collection = new HTMLSubCollection(this, ".tags('" + tagName + "')") {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return tagNameLC.equalsIgnoreCase(node.getLocalName());
-            }
-        };
-        return collection;
+    @Override
+    public String toString() {
+        return description_;
     }
 
     /**
@@ -315,8 +389,8 @@ public class HTMLCollection extends NodeList {
         if (other == this) {
             return Boolean.TRUE;
         }
-        else if (other instanceof HTMLCollection) {
-            final HTMLCollection otherArray = (HTMLCollection) other;
+        else if (other instanceof NodeList) {
+            final NodeList otherArray = (NodeList) other;
             final DomNode domNode = getDomNodeOrNull();
             final DomNode domNodeOther = otherArray.getDomNodeOrNull();
             if (getClass() == other.getClass()
@@ -401,7 +475,7 @@ public class HTMLCollection extends NodeList {
     }
 
     private boolean isPrototype() {
-        return !(getPrototype() instanceof HTMLCollection);
+        return !(getPrototype() instanceof NodeList);
     }
 
     /**
@@ -430,11 +504,77 @@ public class HTMLCollection extends NodeList {
         }
     }
 
+    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
+
+        /**
+         * {@inheritDoc}
+         */
+        public void nodeAdded(final DomChangeEvent event) {
+            cachedElements_ = null;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void nodeDeleted(final DomChangeEvent event) {
+            cachedElements_ = null;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void attributeAdded(final HtmlAttributeChangeEvent event) {
+            handleChangeOnCache(getEffectOnCache(event));
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void attributeRemoved(final HtmlAttributeChangeEvent event) {
+            handleChangeOnCache(getEffectOnCache(event));
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public void attributeReplaced(final HtmlAttributeChangeEvent event) {
+            if (attributeChangeSensitive_) {
+                handleChangeOnCache(getEffectOnCache(event));
+            }
+        }
+
+        private void handleChangeOnCache(final EffectOnCache effectOnCache) {
+            if (EffectOnCache.NONE == effectOnCache) {
+                return;
+            }
+            else if (EffectOnCache.RESET == effectOnCache) {
+                cachedElements_ = null;
+            }
+        }
+    }
+
     /**
      * {@inheritDoc}
      */
     public int getLength() {
         return jsxGet_length();
+    }
+
+    /**
+     * Gets the effect of the change on an attribute of the reference node
+     * on this collection's cache.
+     * @param event the change event
+     * @return the effect on cache
+     */
+    protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+        return EffectOnCache.RESET;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Node item(final int index) {
+        return (DomNode) getElements().get(index);
     }
 
     /**
@@ -454,26 +594,6 @@ public class HTMLCollection extends NodeList {
      */
     @Override
     public String getClassName() {
-        return "HTMLCollection";
-    }
-}
-
-class HTMLSubCollection extends HTMLCollection {
-    private final HTMLCollection mainCollection_;
-
-    public HTMLSubCollection(final HTMLCollection mainCollection, final String subDescription) {
-        super(mainCollection.getDomNodeOrDie(), false, mainCollection.toString() + subDescription);
-        mainCollection_ = mainCollection;
-    }
-
-    @Override
-    protected List<Object> computeElements() {
-        final List<Object> list = new ArrayList<Object>();
-        for (final Object o : mainCollection_.getElements()) {
-            if (isMatching((DomNode) o)) {
-                list.add(o);
-            }
-        }
-        return list;
+        return "NodeList";
     }
 }

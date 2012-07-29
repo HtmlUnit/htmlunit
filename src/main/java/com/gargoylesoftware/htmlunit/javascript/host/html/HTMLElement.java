@@ -74,6 +74,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
+import com.gargoylesoftware.htmlunit.javascript.host.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.StaticNodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -555,7 +556,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (parent != null) {
             parent.jsxFunction_removeChild(this);
             if (!removeChildren) {
-                final HTMLCollection collection = jsxGet_childNodes();
+                final NodeList collection = jsxGet_childNodes();
                 final int length = collection.jsxGet_length();
                 for (int i = 0; i < length; i++) {
                     final Node object = (Node) collection.jsxFunction_item(Integer.valueOf(0));
