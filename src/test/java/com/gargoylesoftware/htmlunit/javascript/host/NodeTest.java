@@ -1104,4 +1104,35 @@ public class NodeTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hi", "null", "abcd", "null" })
+    public void attributes() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var text = '<hello>hi</hello>';\n"
+            + "  if (window.ActiveXObject) {\n"
+            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    doc.async = false;\n"
+            + "    doc.loadXML(text);\n"
+            + "  } else {\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
+            + "  }\n"
+            + "  var node = doc.documentElement.firstChild;\n"
+            + "  alert(node.nodeValue);\n"
+            + "  alert(node.attributes);\n"
+            + "\n"
+            + "  node = document.getElementById('myId').firstChild;\n"
+            + "  alert(node.nodeValue);\n"
+            + "  alert(node.attributes);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myId'>abcd</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -982,4 +983,34 @@ public class ElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "§§URL§§", "§§URL§§" })
+    @NotYetImplemented //due to XMLDocument.loadXML in the URL
+    public void baseURI() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var text = '<hello><child></child></hello>';\n"
+            + "  if (window.ActiveXObject) {\n"
+            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    doc.async = false;\n"
+            + "    doc.loadXML(text);\n"
+            + "  } else {\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
+            + "  }\n"
+            + "  var e = doc.documentElement.firstChild;\n"
+            + "  alert(e.baseURI);\n"
+            + "\n"
+            + "  e = document.getElementById('myId');\n"
+            + "  alert(e.baseURI);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myId'>abcd</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

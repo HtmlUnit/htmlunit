@@ -937,4 +937,13 @@ public class Node extends SimpleScriptable {
         return (Element) parent;
     }
 
+    /**
+     * Returns the attributes of this XML element.
+     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.attributes">Gecko DOM Reference</a>
+     * @return the attributes of this XML element
+     */
+    public Object jsxGet_attributes() {
+        return null;
+    }
+
 }

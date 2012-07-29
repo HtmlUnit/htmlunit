@@ -540,5 +540,4 @@ public class BrowserVersion implements Serializable {
     public String getNickname() {
         return nickname_;
     }
-
 }

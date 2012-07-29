@@ -97,6 +97,14 @@ public class Element extends EventNode {
     }
 
     /**
+     * Returns the Base URI as a string.
+     * @return the Base URI as a string
+     */
+    public Object jsxGet_baseURI() {
+        return getDomNodeOrDie().getPage().getUrl().toExternalForm();
+    }
+
+    /**
      * Creates the JS object for the property attributes. This object will the be cached.
      * @return the JS object
      */

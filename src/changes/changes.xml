@@ -8,7 +8,10 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support">
-            <action type="Fix" dev="asashour">
+            <action type="add" dev="asashour">
+                JavaScript: add node.attributes and element.baseURI.
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: incompatible objects with the respective BrowserVersion should be HTMLUnknownElement.
             </action>
             <action type="add" dev="asashour">
