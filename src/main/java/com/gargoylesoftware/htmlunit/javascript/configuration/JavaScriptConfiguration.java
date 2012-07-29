@@ -343,6 +343,9 @@ public final class JavaScriptConfiguration {
                 // only one level of virtual classes allowed
                 config.setExtendedClassName(virtualClassConfig.getExtendedClassName());
             }
+            else if (!extendsClassName.isEmpty() && !classMap.keySet().contains(extendsClassName)) {
+                throw new RuntimeException(config.getHostClass() + " extends nonexistent '" + extendsClassName + '\'');
+            }
         }
 
         return Collections.unmodifiableMap(classMap);

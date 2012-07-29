@@ -201,7 +201,7 @@ public class JavaScriptConfigurationTest extends WebTestCase {
             + "<configuration\n"
             + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
             + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
-            + "    <class name=\"Document\" extends=\"Node\" "
+            + "    <class name=\"Document\" "
             + "classname=\"com.gargoylesoftware.htmlunit.javascript.host.Document\" JSObject=\"true\">\n"
             + "    </class>\n"
             + "</configuration>\n";
@@ -822,4 +822,27 @@ public class JavaScriptConfigurationTest extends WebTestCase {
         }
         return -1;
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test(expected = RuntimeException.class)
+    public void incorrectExtends() throws Exception {
+        final String configurationString
+            = "<?xml version=\"1.0\"?>\n"
+            + "<configuration\n"
+            + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
+            + "    xsi:noNamespaceSchemaLocation=\"JavaScriptConfiguration.xsd\">\n"
+            + "    <class name=\"Document\" extends=\"invalid\" "
+            + "classname=\"com.gargoylesoftware.htmlunit.javascript.host.Document\">\n"
+            + "    </class>\n"
+            + "    <class name=\"Node\" "
+            + "classname=\"com.gargoylesoftware.htmlunit.javascript.host.Node\">\n"
+            + "    </class>\n"
+            + "</configuration>\n";
+        final Reader reader = new StringReader(configurationString);
+        JavaScriptConfiguration.loadConfiguration(reader);
+        JavaScriptConfiguration.getInstance(BrowserVersion.INTERNET_EXPLORER_8);
+    }
+
 }
