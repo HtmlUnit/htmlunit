@@ -694,7 +694,10 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "<DIV id=div><SPAN class=\"a b\"></SPAN></DIV>", "<SPAN class=\"a b\"></SPAN>", "" },
             CHROME = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "" },
-            DEFAULT = { "undefined", "<span class=\"a b\"></span>", "undefined" })
+            FF3_6 = { "undefined", "<span class=\"a b\"></span>", "undefined" },
+            FF10 = { "undefined", "<span class=\"a b\"></span>", "undefined" },
+            FF = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined" }
+            )
     public void getSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"

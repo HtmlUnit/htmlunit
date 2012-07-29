@@ -84,6 +84,7 @@
                 descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
             <browser name="Chrome"/>
+            <browser name="Firefox" min-version="11"/>
         </property>
         <property name="outerText" notImplemented="true" readable="true" writable="true">
             <browser name="Internet Explorer"/>

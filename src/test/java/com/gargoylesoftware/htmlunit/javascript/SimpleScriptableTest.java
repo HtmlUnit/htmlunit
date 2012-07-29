@@ -117,6 +117,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("DOMException");
         names.remove("DOMImplementation");
         names.remove("DOMParser");
+        names.remove("DOMTokenList");
         names.remove("Enumerator");
         names.remove("Event");
         names.remove("EventNode");
