@@ -1279,6 +1279,9 @@
         <property name="childElementCount" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
+        <property name="children" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="firstElementChild" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>

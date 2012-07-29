@@ -1441,21 +1441,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     //----------------------- END #default#homePage BEHAVIOR -----------------------
 
     /**
-     * Gets the children of the current node.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537446.aspx">MSDN documentation</a>
-     * @return the child at the given position
-     */
-    public HTMLCollection jsxGet_children() {
-        final HtmlElement node = getDomNodeOrDie();
-        final HTMLCollection collection = new HTMLCollection(node, false, "HTMLElement.children") {
-            protected List<Object> computeElements() {
-                return new ArrayList<Object>(node.getChildNodes());
-            }
-        };
-        return collection;
-    }
-
-    /**
      * Returns this element's <tt>offsetHeight</tt>, which is the element height plus the element's padding
      * plus the element's border. This method returns a dummy value compatible with mouse event coordinates
      * during mouse events.

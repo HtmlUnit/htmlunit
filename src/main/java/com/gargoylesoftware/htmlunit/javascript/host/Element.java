@@ -415,4 +415,20 @@ public class Element extends EventNode {
     public void setDefaults(final ComputedCSSStyleDeclaration style) {
         // Empty by default; override as necessary.
     }
+
+    /**
+     * Gets the children of the current node.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537446.aspx">MSDN documentation</a>
+     * @return the child at the given position
+     */
+    public HTMLCollection jsxGet_children() {
+        final DomElement node = getDomNodeOrDie();
+        final HTMLCollection collection = new HTMLCollection(node, false, "Element.children") {
+            protected List<Object> computeElements() {
+                return new ArrayList<Object>(node.getChildNodes());
+            }
+        };
+        return collection;
+    }
+
 }
