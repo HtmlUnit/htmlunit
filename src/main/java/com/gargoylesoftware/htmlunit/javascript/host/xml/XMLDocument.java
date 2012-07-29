@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -147,9 +146,7 @@ public class XMLDocument extends Document {
         try {
             final WebWindow webWindow = getWindow().getWebWindow();
 
-            // build a dummy WebResponse
-            final URL hackUrl = new URL("http://-htmlunit-internal/XMLDocument.loadXML"); // hack! better solution?
-            final WebResponse webResponse = new StringWebResponse(strXML, hackUrl);
+            final WebResponse webResponse = new StringWebResponse(strXML, webWindow.getEnclosedPage().getUrl());
 
             final XmlPage page = new XmlPage(webResponse, webWindow);
             setDomNode(page);

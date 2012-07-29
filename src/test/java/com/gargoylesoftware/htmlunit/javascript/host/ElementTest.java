@@ -988,7 +988,6 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "§§URL§§", "§§URL§§" })
-    @NotYetImplemented //due to XMLDocument.loadXML in the URL
     public void baseURI() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
