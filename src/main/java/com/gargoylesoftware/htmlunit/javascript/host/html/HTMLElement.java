@@ -69,6 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
+import com.gargoylesoftware.htmlunit.javascript.host.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
@@ -2498,4 +2499,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         return style_;
     }
 
+    /**
+     * Gets the token list of class attribute.
+     * @return the token list of class attribute
+     */
+    public DOMTokenList jsxGet_classList() {
+        return new DOMTokenList(this, "class");
+    }
 }

@@ -1040,4 +1040,32 @@ public class ElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "undefined" },
+            FF = { "null", "a b c" })
+    public void classList() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var text = '<hello><child></child></hello>';\n"
+            + "  if (window.ActiveXObject) {\n"
+            + "    var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "    doc.async = false;\n"
+            + "    doc.loadXML(text);\n"
+            + "  } else {\n"
+            + "    var parser = new DOMParser();\n"
+            + "    var doc = parser.parseFromString(text, 'text/xml');\n"
+            + "  }\n"
+            + "  alert(doc.documentElement.classList);\n"
+            + "  alert(document.body.classList);\n"
+            + "}\n"
+            + "</script></head><body onload='test()' class='a b c'>\n"
+            + "  <div id='myId'>abcd</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

@@ -1272,6 +1272,15 @@
         <function name="parseFromString"/>
     </class>
 
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.DOMTokenList" JSObject="true">
+        <property name="length" readable="true" writable="false"/>
+        <function name="add"/>
+        <function name="contains"/>
+        <function name="item"/>
+        <function name="remove"/>
+        <function name="toggle"/>
+    </class>
+
     <class extends="EventNode" classname="com.gargoylesoftware.htmlunit.javascript.host.Element"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomElement">
         <property name="baseURI" readable="true" writable="false"/>
@@ -1280,6 +1289,9 @@
             <browser name="Firefox"/>
         </property>
         <property name="children" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
+        <property name="classList" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
         <property name="firstElementChild" readable="true" writable="false">

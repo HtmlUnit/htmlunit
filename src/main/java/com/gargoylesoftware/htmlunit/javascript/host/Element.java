@@ -431,4 +431,11 @@ public class Element extends EventNode {
         return collection;
     }
 
+    /**
+     * Gets the token list of class attribute.
+     * @return the token list of class attribute
+     */
+    public DOMTokenList jsxGet_classList() {
+        return null;
+    }
 }
