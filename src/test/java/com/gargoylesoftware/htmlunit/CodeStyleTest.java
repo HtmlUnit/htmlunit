@@ -30,6 +30,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.junit.After;
 import org.junit.Test;
+import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
+import org.tmatesoft.svn.core.wc.ISVNOptions;
+import org.tmatesoft.svn.core.wc.SVNPropertyData;
+import org.tmatesoft.svn.core.wc.SVNRevision;
+import org.tmatesoft.svn.core.wc.SVNWCClient;
+import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 /**
  * Test of coding style for things that cannot be detected by Checkstyle.
@@ -41,12 +47,16 @@ public class CodeStyleTest {
 
     private static final Pattern leadingWhitespace = Pattern.compile("^\\s+");
     private List<String> failures_ = new ArrayList<String>();
+    private SVNWCClient svnWCClient_;
 
     /**
      * After.
      */
     @After
     public void after() {
+        if (svnWCClient_ != null) {
+            svnWCClient_.getOperationsFactory().getRepositoryPool().dispose();
+        }
         final StringBuilder sb = new StringBuilder();
         for (final String error : failures_) {
             sb.append('\n').append(error);
@@ -70,13 +80,16 @@ public class CodeStyleTest {
      */
     @Test
     public void codeStyle() throws Exception {
+        final ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
+        final ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
+        svnWCClient_ = new SVNWCClient(authManager, options);
         process(new File("src/main/java"));
         process(new File("src/test/java"));
         licenseYear();
         versionYear();
     }
 
-    private void process(final File dir) throws IOException {
+    private void process(final File dir) throws Exception {
         for (final File file : dir.listFiles()) {
             if (file.isDirectory() && !".svn".equals(file.getName())) {
                 process(file);
@@ -197,31 +210,28 @@ public class CodeStyleTest {
     /**
      * Checks properties svn:eol-style and svn:keywords.
      */
-    private void svnProperties(final File file, final String relativePath) throws IOException {
-        final File svnBase = new File(file.getParentFile(), ".svn/prop-base/" + file.getName() + ".svn-base");
-        final File svnWork = new File(file.getParentFile(), ".svn/props/" + file.getName() + ".svn-work");
-        if (!isSvnPropertiesDefined(svnBase) && !isSvnPropertiesDefined(svnWork)) {
+    private void svnProperties(final File file, final String relativePath) throws Exception {
+        if (!isSvnPropertiesDefined(file)) {
             addFailure("'svn:eol-style' and 'svn:keywords' properties are not defined for " + relativePath);
         }
     }
 
-    private boolean isSvnPropertiesDefined(final File file) throws IOException {
-        boolean eolStyleDefined = false;
-        boolean keywordsDefined = false;
-        if (file.exists()) {
-            final List<String> lines = getLines(file);
-            for (int i = 0; i + 2 < lines.size(); i++) {
-                final String line = lines.get(i);
-                final String nextLine = lines.get(i + 2);
-                if ("svn:eol-style".equals(line) && "native".equals(nextLine)) {
-                    eolStyleDefined = true;
-                }
-                else if ("svn:keywords".equals(line) && "Author Date Id Revision".equals(nextLine)) {
-                    keywordsDefined = true;
-                }
+    private boolean isSvnPropertiesDefined(final File file) throws Exception {
+        try {
+            SVNPropertyData data = svnWCClient_.doGetProperty(file, "svn:eol-style", SVNRevision.WORKING,
+                    SVNRevision.WORKING);
+            if (data == null || !"native".equals(data.getValue().getString())) {
+                return false;
             }
+            data = svnWCClient_.doGetProperty(file, "svn:keywords", SVNRevision.WORKING, SVNRevision.WORKING);
+            if (data == null || !"Author Date Id Revision".equals(data.getValue().getString())) {
+                return false;
+            }
+            return true;
         }
-        return eolStyleDefined && keywordsDefined;
+        catch (final Exception e) {
+            return false;
+        }
     }
 
     /**
