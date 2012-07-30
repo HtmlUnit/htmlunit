@@ -107,6 +107,7 @@ public class SimpleScriptableTest extends WebTestCase {
         names.remove("ClientRect");
         names.remove("ClipboardData");
         names.remove("ComputedCSSStyleDeclaration");
+        names.remove("Console");
         names.remove("CSSImportRule");
         names.remove("CSSRule");
         names.remove("CSSRuleList");
