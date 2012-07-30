@@ -31,7 +31,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * The default logger uses Apache Commons Logging.
  *
- * @version $Revision: 7122 $
+ * @version $Revision$
  * @author Andrea Martino
  */
 public class WebConsole {

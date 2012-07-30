@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 /**
  * A JavaScript object for a console. This implementation simulates Firefox's console, which utilizes FireBug API.
  *
- * @version $Revision: 7122 $
+ * @version $Revision$
  * @author Andrea Martino
  */
 public class Console extends SimpleScriptable {
