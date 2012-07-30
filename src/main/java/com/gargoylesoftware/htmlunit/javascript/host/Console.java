@@ -246,7 +246,7 @@ public class Console extends SimpleScriptable {
     }
 
     /**
-     * This class is the default formatter used by WebConsole.
+     * This class is the default formatter used by Console.
      */
     private static class ConsoleFormatter implements Formatter {
 
@@ -467,9 +467,7 @@ public class Console extends SimpleScriptable {
                 }
                 return sb.toString();
             }
-            else {
-                return formatToString(o);
-            }
+            return formatToString(o);
         }
 
         @Override
