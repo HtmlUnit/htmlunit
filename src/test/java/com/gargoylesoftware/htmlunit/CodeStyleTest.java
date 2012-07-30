@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,8 +31,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.junit.After;
 import org.junit.Test;
+import org.tmatesoft.svn.core.SVNDepth;
+import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.wc.ISVNOptions;
+import org.tmatesoft.svn.core.wc.ISVNPropertyHandler;
 import org.tmatesoft.svn.core.wc.SVNPropertyData;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNWCClient;
@@ -218,20 +222,38 @@ public class CodeStyleTest {
 
     private boolean isSvnPropertiesDefined(final File file) {
         try {
-            SVNPropertyData data = svnWCClient_.doGetProperty(file, "svn:eol-style", SVNRevision.WORKING,
-                    SVNRevision.WORKING);
-            if (data == null || !"native".equals(data.getValue().getString())) {
-                return false;
+            final AtomicInteger i = new AtomicInteger();
+            svnWCClient_.doGetProperty(file, null, SVNRevision.WORKING, SVNRevision.WORKING, SVNDepth.EMPTY,
+                    new ISVNPropertyHandler() {
+
+                    @Override
+                    public void handleProperty(final long revision, final SVNPropertyData property) {
+                    }
+
+                    @Override
+                    public void handleProperty(final SVNURL url, final SVNPropertyData property) {
+                    }
+
+                    @Override
+                    public void handleProperty(final File path, final SVNPropertyData property) {
+                        final String name = property.getName();
+                        final String value = property.getValue().getString();
+                        if ("svn:eol-style".equals(name) && "native".equals(value)) {
+                            i.set(i.get() + 1);
+                        }
+                        else if ("svn:keywords".equals(name) && "Author Date Id Revision".equals(value)) {
+                            i.set(i.get() + 2);
+                        }
+                    }
+                }, null);
+            if (i.get() == 3) {
+                return true;
             }
-            data = svnWCClient_.doGetProperty(file, "svn:keywords", SVNRevision.WORKING, SVNRevision.WORKING);
-            if (data == null || !"Author Date Id Revision".equals(data.getValue().getString())) {
-                return false;
-            }
-            return true;
         }
         catch (final Exception e) {
-            return false;
+            //nothing
         }
+        return false;
     }
 
     /**
