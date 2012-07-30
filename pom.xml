@@ -21,7 +21,7 @@
     but perhaps should we avoid it?
     -->
     <parent>
-        <groupId>org.sonatype.oss</groupId>
+        <groupId>org.sonatype.osss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>7</version>
     </parent>
@@ -867,6 +867,12 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
             <version>2.25.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.tmatesoft.svnkit</groupId>
+            <artifactId>svnkit</artifactId>
+            <version>1.7.5-v1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
