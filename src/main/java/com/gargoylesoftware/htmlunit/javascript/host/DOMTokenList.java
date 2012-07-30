@@ -114,10 +114,8 @@ public final class DOMTokenList extends SimpleScriptable {
             jsxFunction_remove(token);
             return false;
         }
-        else {
-            jsxFunction_add(token);
-            return true;
-        }
+        jsxFunction_add(token);
+        return true;
     }
 
     /**

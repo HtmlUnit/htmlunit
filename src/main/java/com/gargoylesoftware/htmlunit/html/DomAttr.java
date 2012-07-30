@@ -168,7 +168,7 @@ public class DomAttr extends DomNamespaceNode implements Attr {
         }
         setValue(textContent);
         if (mappedElement) {
-            ((HtmlPage) getPage()).addMappedElement((HtmlElement) getOwnerElement());
+            ((HtmlPage) getPage()).addMappedElement(getOwnerElement());
         }
     }
 }
