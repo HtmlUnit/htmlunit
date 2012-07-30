@@ -74,13 +74,13 @@ System.out.println("Cell (1,2)=" + table.getCellAt(1,2));]]></source>
                 <td>5</td>
                 <td>Bicycle</td>
             </tr>
-        </tbody>>
+        </tbody>
         <tbody>
             <tr>
                 <td>2</td>
                 <td>Tricycle</td>
             </tr>
-        </tbody>>
+        </tbody>
     </table>
 </body></html>]]></source>
 
