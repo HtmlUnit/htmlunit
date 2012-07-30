@@ -378,6 +378,21 @@
         JSObject="true">
     </class>
 
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.Console" JSObject="true">
+        <function name="log"/>
+        <function name="info"/>
+        <function name="warn"/>
+        <function name="error"/>
+        <function name="debug"/>
+        <function name="trace"/>
+        <function name="dir"/>
+        <function name="group"/>
+        <function name="groupEnd"/>
+        <function name="groupCollapsed"/>
+        <function name="time"/>
+        <function name="timeEnd"/>
+    </class>
+
     <class extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule" JSObject="true">
         <property name="encoding" readable="true" writable="true"/>
     </class>
@@ -3643,6 +3658,10 @@
             <browser name="Firefox" min-version="3.5"/>
         </property>
         <property name="location" readable="true" writable="true"/>
+        <property name="console" readable="true" writable="false">
+            <browser name="Internet Explorer" min-version="9"/>
+            <browser name="Firefox" min-version="3.5"/>
+        </property>
         <property name="mozInnerScreenX" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>

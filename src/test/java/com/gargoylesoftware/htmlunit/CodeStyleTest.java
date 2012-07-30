@@ -76,10 +76,10 @@ public class CodeStyleTest {
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws IOException if the test fails
      */
     @Test
-    public void codeStyle() throws Exception {
+    public void codeStyle() throws IOException {
         final ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
         final ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
         svnWCClient_ = new SVNWCClient(authManager, options);
@@ -89,7 +89,7 @@ public class CodeStyleTest {
         versionYear();
     }
 
-    private void process(final File dir) throws Exception {
+    private void process(final File dir) throws IOException {
         for (final File file : dir.listFiles()) {
             if (file.isDirectory() && !".svn".equals(file.getName())) {
                 process(file);
@@ -210,13 +210,13 @@ public class CodeStyleTest {
     /**
      * Checks properties svn:eol-style and svn:keywords.
      */
-    private void svnProperties(final File file, final String relativePath) throws Exception {
+    private void svnProperties(final File file, final String relativePath) {
         if (!isSvnPropertiesDefined(file)) {
             addFailure("'svn:eol-style' and 'svn:keywords' properties are not defined for " + relativePath);
         }
     }
 
-    private boolean isSvnPropertiesDefined(final File file) throws Exception {
+    private boolean isSvnPropertiesDefined(final File file) {
         try {
             SVNPropertyData data = svnWCClient_.doGetProperty(file, "svn:eol-style", SVNRevision.WORKING,
                     SVNRevision.WORKING);
@@ -450,6 +450,9 @@ public class CodeStyleTest {
      * Verifies that no static JavaScript method exists.
      */
     private void staticJSMethod(final List<String> lines, final String relativePath) {
+        if (relativePath.endsWith("Console.java")) {
+            return;
+        }
         int i = 0;
         for (final String line : lines) {
             if (line.contains(" static ")

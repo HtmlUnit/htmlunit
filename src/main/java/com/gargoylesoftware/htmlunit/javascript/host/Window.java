@@ -130,6 +130,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private Screen screen_;
     private History history_;
     private Location location_;
+    private Console console_;
     private OfflineResourceList applicationCache_;
     private Selection selection_;
     private Event currentEvent_;
@@ -552,6 +553,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     /**
+     * Returns the console property.
+     * @return the console property
+     */
+    public Console jsxGet_console() {
+        return console_;
+    }
+
+    /**
      * Returns the "screen" property.
      * @return the screen property
      */
@@ -628,6 +637,11 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         location_.setParentScope(this);
         location_.setPrototype(getPrototype(location_.getClass()));
         location_.initialize(this);
+
+        console_ = new Console();
+        console_.setWebWindow(webWindow_);
+        console_.setParentScope(this);
+        console_.setPrototype(getPrototype(console_.getClass()));
 
         applicationCache_ = new OfflineResourceList();
         applicationCache_.setParentScope(this);

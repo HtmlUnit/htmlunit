@@ -135,6 +135,7 @@ public class WebClient implements Serializable {
     private String homePage_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
+    private WebConsole webConsole_;
 
     private AlertHandler   alertHandler_;
     private ConfirmHandler confirmHandler_;
@@ -1743,6 +1744,17 @@ public class WebClient implements Serializable {
             throw new NullPointerException("Null incorrectness listener.");
         }
         incorrectnessListener_ = listener;
+    }
+
+    /**
+     * Returns the WebConsole.
+     * @return the web console
+     */
+    public WebConsole getWebConsole() {
+        if (webConsole_ == null) {
+            webConsole_ = new WebConsole();
+        }
+        return webConsole_;
     }
 
     /**

@@ -21,7 +21,7 @@
     but perhaps should we avoid it?
     -->
     <parent>
-        <groupId>org.sonatype.osss</groupId>
+        <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>7</version>
     </parent>
@@ -694,6 +694,9 @@
         </contributor>
         <contributor>
             <name>Frank Danek</name>
+        </contributor>
+        <contributor>
+            <name>Andrea Martino</name>
         </contributor>
     </contributors>
     <dependencies>
