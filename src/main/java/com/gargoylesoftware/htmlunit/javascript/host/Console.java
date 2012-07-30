@@ -368,7 +368,7 @@ public class Console extends SimpleScriptable {
             }
             else {
                 // ?!?
-                sb.append(val.toString());
+                sb.append(val);
             }
         }
 

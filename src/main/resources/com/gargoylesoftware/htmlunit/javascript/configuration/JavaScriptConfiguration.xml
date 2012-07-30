@@ -3658,7 +3658,7 @@
             <browser name="Firefox" min-version="3.5"/>
         </property>
         <property name="location" readable="true" writable="true"/>
-        <property name="console" readable="true" writable="false">
+        <property name="console" readable="true" writable="true">
             <browser name="Internet Explorer" min-version="9"/>
             <browser name="Firefox" min-version="3.5"/>
         </property>
