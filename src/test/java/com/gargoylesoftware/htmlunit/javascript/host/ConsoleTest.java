@@ -72,12 +72,13 @@ public class ConsoleTest extends WebDriverTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  if (window.console) {\n"
-            + "    window.console.info('hi');\n"
+            + "    var arr = ['one', 'two', 'three', document.body.children];"
+            + "    window.console.log(arr);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'></body></html>";
 
         loadPage(html);
-        assertEquals("info: hi", messages.get(0));
+        assertEquals("info: [\"one\", \"two\", \"three\", ({})]", messages.get(0));
     }
 }
