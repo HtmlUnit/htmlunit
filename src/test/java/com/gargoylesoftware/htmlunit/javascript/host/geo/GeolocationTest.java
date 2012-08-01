@@ -62,7 +62,7 @@ public class GeolocationTest extends WebServerTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         client.getPage("http://localhost:" + PORT + "/test");
-        client.waitForBackgroundJavaScriptStartingBefore(2000);
+        client.waitForBackgroundJavaScript(4000);
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
