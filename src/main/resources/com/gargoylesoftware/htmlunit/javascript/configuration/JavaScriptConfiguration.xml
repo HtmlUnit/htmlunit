@@ -393,6 +393,12 @@
         <function name="timeEnd"/>
     </class>
 
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates" JSObject="true">
+        <property name="accuracy" readable="true" writable="false"/>
+        <property name="latitude" readable="true" writable="false"/>
+        <property name="longitude" readable="true" writable="false"/>
+    </class>
+
     <class extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule" JSObject="true">
         <property name="encoding" readable="true" writable="true"/>
     </class>
@@ -1524,6 +1530,12 @@
         <property name="onchange" readable="true" writable="true"/>
         <property name="type" readable="true" writable="false"/>
         <property name="value" readable="true" writable="true"/>
+    </class>
+
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation" JSObject="true">
+        <function name="getCurrentPosition"/>
+        <function name="watchPosition"/>
+        <function name="clearWatch"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.History"
@@ -2741,6 +2753,11 @@
         </property>
         <property name="cookieEnabled" readable="true" writable="false"/>
         <property name="cpuClass" readable="true" writable="false"/>
+        <property name="geolocation" readable="true" writable="false">
+            <browser name="Internet Explorer" min-version="9"/>
+            <browser name="Firefox"/>
+            <browser name="Chrome"/>
+        </property>
         <property name="language" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
@@ -2925,6 +2942,10 @@
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLProgressElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlProgress">
         <browser name="Firefox" min-version="10"/>
+    </class>
+
+    <class classname="com.gargoylesoftware.htmlunit.javascript.host.geo.Position" JSObject="true">
+        <property name="coords" readable="true" writable="false"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Range" JSObject="true">

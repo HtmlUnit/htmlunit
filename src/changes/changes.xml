@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support">
+        <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support">
+            <action type="add" dev="asashour" issue="3403601">
+                Geolocation: primitive support (FF only).
+            </action>
             <action type="add" dev="asashour" due-to="Andrea Martino" issue="3518475">
                 Implement WebConsole and JavaScript Console (FF only)
             </action>

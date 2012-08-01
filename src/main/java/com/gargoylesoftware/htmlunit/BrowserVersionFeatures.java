@@ -442,6 +442,9 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     GENERATED_99,
 
+    /** If the class name is [object GeoGeolocation]. */
+    GEO_GEOLOCATION,
+
     /** */
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 

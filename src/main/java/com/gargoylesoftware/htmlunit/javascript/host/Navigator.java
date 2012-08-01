@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 
 /**
  * A JavaScript object for a Navigator.
@@ -223,4 +224,16 @@ public final class Navigator extends SimpleScriptable {
     public boolean jsxFunction_taintEnabled() {
         return false;
     }
+
+    /**
+     * Returns the geolocation.
+     * @return the geolocation
+     */
+    public Geolocation jsxGet_geolocation() {
+        final Geolocation geolocation = new Geolocation();
+        geolocation.setPrototype(getPrototype(geolocation.getClass()));
+        geolocation.setParentScope(getParentScope());
+        return geolocation;
+    }
+
 }

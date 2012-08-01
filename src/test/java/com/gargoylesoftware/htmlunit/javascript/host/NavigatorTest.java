@@ -312,4 +312,24 @@ public class NavigatorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "[object GeoGeolocation]", IE = "undefined", CHROME = "[object Geolocation]")
+    //IE9 = "[object Geolocation]"
+    public void geolocation() throws Exception {
+        final String html
+            = "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(navigator.geolocation);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

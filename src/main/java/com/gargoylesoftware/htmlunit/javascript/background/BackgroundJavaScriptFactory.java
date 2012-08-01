@@ -98,6 +98,23 @@ public final class BackgroundJavaScriptFactory {
     }
 
     /**
+     * Creates a new job.
+     * @param initialDelay the initial amount of time to wait before executing this job
+     * @param period the amount of time to wait between executions of this job (may be <tt>null</tt>)
+     * @param runnable the runnable to run
+     *
+     * @return JavaScriptJob the created job
+     */
+    public JavaScriptJob createJavaScriptJob(final int initialDelay, final Integer period, final Runnable runnable) {
+        return new BasicJavaScriptJob(initialDelay, period) {
+            @Override
+            public void run() {
+                runnable.run();
+            }
+        };
+    }
+
+    /**
      * Creates a new instance.
      * @param url the URL to download
      * @param callback the callback function to call
@@ -105,7 +122,7 @@ public final class BackgroundJavaScriptFactory {
      *
      * @return JavaScriptJob the created job
      */
-    public JavaScriptJob  createDownloadBehaviorJob(final URL url,
+    public JavaScriptJob createDownloadBehaviorJob(final URL url,
             final Function callback, final WebClient client) {
         return new DownloadBehaviorJob(url, callback, client);
     }
