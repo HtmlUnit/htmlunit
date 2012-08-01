@@ -46,6 +46,7 @@ public class Geolocation extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(Geolocation.class);
 
+    /* Do not use this URL without Goolge permission! */
     private static String PROVIDER_URL_ = "https://maps.googleapis.com/maps/api/browserlocation/json";
     private Function successHandler_;
     private Function errorHandler_;

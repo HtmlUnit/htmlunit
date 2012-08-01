@@ -113,13 +113,13 @@ public class BrowserVersion implements Serializable {
     /** Firefox 3.6. */
     public static final BrowserVersion FIREFOX_3_6 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
-        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.8) Gecko/20100722 Firefox/3.6.8",
+        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.28) Gecko/20120306 Firefox/3.6.28",
         (float) 3.6, "FF3.6", null);
 
     /** Firefox Warning: experimental!!! */
     public static final BrowserVersion FIREFOX_10 = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows; en-US)",
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:10.0.3) Gecko/20100101 Firefox/10.0.3",
+        NETSCAPE, "5.0 (Windows)",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:10.0.6) Gecko/20100101 Firefox/10.0.6",
         (float) 10.0, "FF10", null);
 
     /** Internet Explorer 6. */
