@@ -32,6 +32,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
@@ -51,6 +52,7 @@ public class GeolocationTest extends WebServerTestCase {
      */
     @Test
     @Alerts(FF = "12.34567891 98.76543211")
+    @NotYetImplemented //since it runs on Windows only (for now)
     public void getCurrentPosition() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/test", GetCurrentPositionTestServlet.class);
