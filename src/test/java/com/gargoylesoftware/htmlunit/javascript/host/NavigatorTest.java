@@ -41,8 +41,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testAppCodeName() throws Exception {
-        testAttribute("appCodeName", getBrowserVersion().getApplicationCodeName());
+    public void appCodeName() throws Exception {
+        attribute("appCodeName", getBrowserVersion().getApplicationCodeName());
     }
 
     /**
@@ -50,8 +50,9 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testAppMinorVersion() throws Exception {
-        testAttribute("appMinorVersion", getBrowserVersion().getApplicationMinorVersion());
+    @Alerts(IE = "0", DEFAULT = "undefined")
+    public void appMinorVersion() throws Exception {
+        attribute("appMinorVersion", getExpectedAlerts()[0]);
     }
 
     /**
@@ -59,8 +60,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testAppName() throws Exception {
-        testAttribute("appName", getBrowserVersion().getApplicationName());
+    public void appName() throws Exception {
+        attribute("appName", getBrowserVersion().getApplicationName());
     }
 
     /**
@@ -68,8 +69,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testAppVersion() throws Exception {
-        testAttribute("appVersion", getBrowserVersion().getApplicationVersion());
+    public void appVersion() throws Exception {
+        attribute("appVersion", getBrowserVersion().getApplicationVersion());
     }
 
     /**
@@ -78,8 +79,8 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(Browser.IE)
-    public void testBrowserLanguage_IE() throws Exception {
-        testAttribute("browserLanguage", getBrowserVersion().getBrowserLanguage());
+    public void browserLanguage_IE() throws Exception {
+        attribute("browserLanguage", getBrowserVersion().getBrowserLanguage());
     }
 
     /**
@@ -88,8 +89,8 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(Browser.FF)
-    public void testBrowserLanguage_FF() throws Exception {
-        testAttribute("browserLanguage", "undefined");
+    public void browserLanguage_FF() throws Exception {
+        attribute("browserLanguage", "undefined");
     }
 
     /**
@@ -114,12 +115,12 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testCookieEnabled() throws Exception {
-        testCookieEnabled(true);
-        testCookieEnabled(false);
+    public void cookieEnabled() throws Exception {
+        cookieEnabled(true);
+        cookieEnabled(false);
     }
 
-    private void testCookieEnabled(final boolean cookieEnabled) throws Exception {
+    private void cookieEnabled(final boolean cookieEnabled) throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
             + "<script>\n"
@@ -143,8 +144,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testCpuClass() throws Exception {
-        testAttribute("cpuClass", getBrowserVersion().getCpuClass());
+    public void cpuClass() throws Exception {
+        attribute("cpuClass", getBrowserVersion().getCpuClass());
     }
 
     /**
@@ -152,8 +153,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testOnLine() throws Exception {
-        testAttribute("onLine", String.valueOf(getBrowserVersion().isOnLine()));
+    public void onLine() throws Exception {
+        attribute("onLine", String.valueOf(getBrowserVersion().isOnLine()));
     }
 
     /**
@@ -161,8 +162,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testPlatform() throws Exception {
-        testAttribute("platform", getBrowserVersion().getPlatform());
+    public void platform() throws Exception {
+        attribute("platform", getBrowserVersion().getPlatform());
     }
 
     /**
@@ -170,8 +171,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testSystemLanguage() throws Exception {
-        testAttribute("systemLanguage", getBrowserVersion().getSystemLanguage());
+    public void systemLanguage() throws Exception {
+        attribute("systemLanguage", getBrowserVersion().getSystemLanguage());
     }
 
     /**
@@ -179,8 +180,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testUserAgent() throws Exception {
-        testAttribute("userAgent", getBrowserVersion().getUserAgent());
+    public void userAgent() throws Exception {
+        attribute("userAgent", getBrowserVersion().getUserAgent());
     }
 
     /**
@@ -188,8 +189,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testUserLanguage() throws Exception {
-        testAttribute("userLanguage", getBrowserVersion().getUserLanguage());
+    public void userLanguage() throws Exception {
+        attribute("userLanguage", getBrowserVersion().getUserLanguage());
     }
 
     /**
@@ -197,8 +198,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testPlugins() throws Exception {
-        testAttribute("plugins.length", String.valueOf(getBrowserVersion().getPlugins().size()));
+    public void plugins() throws Exception {
+        attribute("plugins.length", String.valueOf(getBrowserVersion().getPlugins().size()));
     }
 
     /**
@@ -206,11 +207,11 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testJavaEnabled() throws Exception {
-        testAttribute("javaEnabled()", "false");
+    public void javaEnabled() throws Exception {
+        attribute("javaEnabled()", "false");
         final WebClient webClient = getWebClient();
         webClient.setAppletEnabled(true);
-        testAttribute(webClient, "javaEnabled()", "true");
+        attribute(webClient, "javaEnabled()", "true");
     }
 
     /**
@@ -218,8 +219,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void testTaintEnabled() throws Exception {
-        testAttribute("taintEnabled()", "false");
+    public void taintEnabled() throws Exception {
+        attribute("taintEnabled()", "false");
     }
 
     /**
@@ -228,8 +229,8 @@ public class NavigatorTest extends WebDriverTestCase {
      * @param value the expected value for the named attribute
      * @throws Exception on test failure
      */
-    private void testAttribute(final String name, final String value) throws Exception {
-        testAttribute(getWebClient(), name, value);
+    private void attribute(final String name, final String value) throws Exception {
+        attribute(getWebClient(), name, value);
     }
 
     /**
@@ -239,7 +240,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @param value the expected value for the named attribute
      * @throws Exception on test failure
      */
-    private void testAttribute(final WebClient webClient, final String name, final String value) throws Exception {
+    private void attribute(final WebClient webClient, final String name, final String value) throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "    <title>test</title>\n"
@@ -263,7 +264,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "en-us", IE = "undefined", CHROME = "undefined")
-    public void testLanguage() throws Exception {
+    public void language() throws Exception {
         final String html
             = "<html><head><title>First</title></head>\n"
             + "<body onload='alert(window.navigator.language)'></body>\n"
@@ -278,7 +279,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "number", "number" })
-    public void testMozilla() throws Exception {
+    public void mozilla() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
             + "<script>\n"

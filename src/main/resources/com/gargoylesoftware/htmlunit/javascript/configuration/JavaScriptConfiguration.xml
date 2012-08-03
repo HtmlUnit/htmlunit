@@ -2745,7 +2745,9 @@
             descr="MSDN documentation"/>
 
         <property name="appCodeName" readable="true" writable="false"/>
-        <property name="appMinorVersion" readable="true" writable="false"/>
+        <property name="appMinorVersion" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
         <property name="appName" readable="true" writable="false"/>
         <property name="appVersion" readable="true" writable="false"/>
         <property name="browserLanguage" readable="true" writable="false">
