@@ -172,8 +172,9 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts(IE = "en-us", DEFAULT = "undefined")
     public void systemLanguage() throws Exception {
-        attribute("systemLanguage", getBrowserVersion().getSystemLanguage());
+        attribute("systemLanguage", getExpectedAlerts()[0]);
     }
 
     /**
