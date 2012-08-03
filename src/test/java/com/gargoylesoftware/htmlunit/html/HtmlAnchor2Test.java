@@ -111,7 +111,7 @@ public class HtmlAnchor2Test extends WebDriverTestCase {
               "<html>\n"
             + "<body>\n"
             + "<a href='page2.html'>"
-            + "<button id='theButton' /></a>\n"
+            + "<button id='theButton'></button></a>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
