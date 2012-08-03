@@ -2754,7 +2754,9 @@
             <browser name="Internet Explorer"/>
         </property>
         <property name="cookieEnabled" readable="true" writable="false"/>
-        <property name="cpuClass" readable="true" writable="false"/>
+        <property name="cpuClass" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
         <property name="geolocation" readable="true" writable="false">
             <browser name="Internet Explorer" min-version="9"/>
             <browser name="Firefox"/>

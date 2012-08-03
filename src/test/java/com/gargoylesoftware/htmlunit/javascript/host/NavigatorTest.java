@@ -144,8 +144,9 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts(IE = "x86", DEFAULT = "undefined")
     public void cpuClass() throws Exception {
-        attribute("cpuClass", getBrowserVersion().getCpuClass());
+        attribute("cpuClass", getExpectedAlerts()[0]);
     }
 
     /**

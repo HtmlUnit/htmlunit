@@ -9,7 +9,7 @@
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support">
             <action type="fix" dev="asashour">
-                JavaScript: fix navigator.appMinorVersion value.
+                JavaScript: fix navigator.appMinorVersion, and .cpuClass values.
             </action>
             <action type="add" dev="asashour" issue="3403601">
                 Geolocation: primitive support (FF only).
