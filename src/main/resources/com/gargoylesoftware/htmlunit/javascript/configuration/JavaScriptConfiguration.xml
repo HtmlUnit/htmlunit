@@ -2779,7 +2779,9 @@
             <browser name="Internet Explorer"/>
         </property>
         <property name="userAgent" readable="true" writable="false"/>
-        <property name="userLanguage" readable="true" writable="false"/>
+        <property name="userLanguage" readable="true" writable="false">
+            <browser name="Internet Explorer"/>
+        </property>
 
         <function name="javaEnabled"/>
         <function name="taintEnabled"/>
