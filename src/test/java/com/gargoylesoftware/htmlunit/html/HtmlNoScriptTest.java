@@ -111,7 +111,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
     public void testFormValues() throws Exception {
         final String html
             = "<html><body>\n"
-            + "<form name='item' method='post'>\n"
+            + "<form name='item' method='get'>\n"
             + "  <noscript>\n"
             + "    <input type=hidden name='__webpage_no_js__' value='1'>\n"
             + "  </noscript>\n"
@@ -123,8 +123,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("clickMe")).click();
 
-        final MockWebConnection mockWebConnection = getMockWebConnection();
-        assertEquals(1, mockWebConnection.getLastParameters().size());
+        assertFalse(webDriver.getCurrentUrl().contains("__webpage_no_js__"));
     }
 
     /**
