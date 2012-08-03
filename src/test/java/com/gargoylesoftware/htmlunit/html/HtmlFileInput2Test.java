@@ -259,11 +259,12 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
                         + " filename=\".*test-classes[\\\\/]realm\\.properties\"");
             final Matcher matcher = pattern.matcher(driver.getPageSource());
             assertTrue(matcher.find());
+            return;
         }
-        else if (getBrowserVersion().isFirefox()) {
-            assertTrue(driver.getPageSource()
-                    .contains("Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\""));
-        }
+
+        // all other browsers
+        assertTrue(driver.getPageSource()
+                .contains("Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\""));
     }
 
     /**
