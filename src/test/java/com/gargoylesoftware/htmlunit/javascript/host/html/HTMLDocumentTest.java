@@ -525,8 +525,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
+    @Alerts(IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
+//            IE9 = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" })
     @NotYetImplemented({ Browser.FF3_6, Browser.FF10, Browser.CHROME })
     public void bgColor() throws Exception {
@@ -1542,5 +1542,4 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
-
 }
