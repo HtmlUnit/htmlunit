@@ -469,8 +469,8 @@ public enum BrowserVersionFeatures {
      */
     HTMLCONDITIONAL_COMMENTS,
 
-    /** Has document.bgColor a value by default. */
-    HTMLDOCUMENT_BG_COLOR,
+    /** Do document.bgColor/.alinkColor/.vlinkColor/.linkColor have value by default. */
+    HTMLDOCUMENT_COLOR,
 
     /** Allows invalid 'align' values. */
     HTMLELEMENT_ALIGN_INVALID,

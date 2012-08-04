@@ -1541,4 +1541,95 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
+//            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" })
+    public void alinkColor() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(document.alinkColor);\n"
+            + "        alert(b.aLink);\n"
+            + "        document.alinkColor = '#0000aa';\n"
+            + "        alert(document.alinkColor);\n"
+            + "        alert(b.aLink);\n"
+            + "        document.alinkColor = 'x';\n"
+            + "        alert(document.alinkColor);\n"
+            + "        alert(b.aLink);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
+//            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" })
+    public void linkColor() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(document.linkColor);\n"
+            + "        alert(b.link);\n"
+            + "        document.linkColor = '#0000aa';\n"
+            + "        alert(document.linkColor);\n"
+            + "        alert(b.link);\n"
+            + "        document.linkColor = 'x';\n"
+            + "        alert(document.linkColor);\n"
+            + "        alert(b.link);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#000000" },
+//            IE9 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" })
+    public void vlinkColor() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(document.vlinkColor);\n"
+            + "        alert(b.vLink);\n"
+            + "        document.vlinkColor = '#0000aa';\n"
+            + "        alert(document.vlinkColor);\n"
+            + "        alert(b.vLink);\n"
+            + "        document.vlinkColor = 'x';\n"
+            + "        alert(document.vlinkColor);\n"
+            + "        alert(b.vLink);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

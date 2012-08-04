@@ -1738,7 +1738,7 @@
             <browser name="Internet Explorer"/>
             <browser name="Firefox" min-version="3.6" />
         </property>
-        <property name="alinkColor" notImplemented="true" readable="true" writable="false"/>
+        <property name="alinkColor"/>
         <property name="all" readable="true" writable="false"/>
         <property name="anchors" readable="true" writable="false">
             <doclink
@@ -1777,7 +1777,7 @@
         </property>
         <property name="images" readable="true" writable="false"/>
         <property name="lastModified" readable="true" writable="false"/>
-        <property name="linkColor" notImplemented="true" readable="true" writable="false"/>
+        <property name="linkColor"/>
         <property name="links" readable="true" writable="false"/>
         <property name="namespaces" readable="true" writable="false">
             <browser name="Internet Explorer"/>
@@ -1803,7 +1803,7 @@
             <browser name="Internet Explorer"/>
         </property>
         <property name="URL" readable="true" writable="false"/>
-        <property name="vlinkColor" notImplemented="true" readable="true" writable="false"/>
+        <property name="vlinkColor"/>
 
         <function name="clear"/>
         <function name="close"/>

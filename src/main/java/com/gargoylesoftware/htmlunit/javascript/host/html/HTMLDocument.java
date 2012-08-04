@@ -1249,22 +1249,88 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     public String jsxGet_bgColor() {
-        String bgColor = getHtmlPage().getBody().getAttribute("bgColor");
-        if (bgColor == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_BG_COLOR)) {
-            bgColor = "#ffffff";
+        String color = getHtmlPage().getBody().getAttribute("bgColor");
+        if (color == DomElement.ATTRIBUTE_NOT_DEFINED
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
+            color = "#ffffff";
         }
-        return bgColor;
+        return color;
     }
 
     /**
      * Sets the value of the <tt>bgColor</tt> attribute.
-     * @param bgColor the value of the <tt>bgColor</tt> attribute
+     * @param color the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
-    public void jsxSet_bgColor(final String bgColor) {
+    public void jsxSet_bgColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
-        body.jsxSet_bgColor(bgColor);
+        body.jsxSet_bgColor(color);
+    }
+
+    /**
+     * Returns the value of the <tt>alinkColor</tt> attribute.
+     * @return the value of the <tt>alinkColor</tt> attribute
+     */
+    public String jsxGet_alinkColor() {
+        String color = getHtmlPage().getBody().getAttribute("aLink");
+        if (color == DomElement.ATTRIBUTE_NOT_DEFINED
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
+            color = "#0000ff";
+        }
+        return color;
+    }
+
+    /**
+     * Sets the value of the <tt>alinkColor</tt> attribute.
+     * @param color the value of the <tt>alinkColor</tt> attribute
+     */
+    public void jsxSet_alinkColor(final String color) {
+        final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
+        body.jsxSet_aLink(color);
+    }
+
+    /**
+     * Returns the value of the <tt>linkColor</tt> attribute.
+     * @return the value of the <tt>linkColor</tt> attribute
+     */
+    public String jsxGet_linkColor() {
+        String color = getHtmlPage().getBody().getAttribute("link");
+        if (color == DomElement.ATTRIBUTE_NOT_DEFINED
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
+            color = "#0000ff";
+        }
+        return color;
+    }
+
+    /**
+     * Sets the value of the <tt>linkColor</tt> attribute.
+     * @param color the value of the <tt>linkColor</tt> attribute
+     */
+    public void jsxSet_linkColor(final String color) {
+        final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
+        body.jsxSet_link(color);
+    }
+
+    /**
+     * Returns the value of the <tt>vlinkColor</tt> attribute.
+     * @return the value of the <tt>vlinkColor</tt> attribute
+     */
+    public String jsxGet_vlinkColor() {
+        String color = getHtmlPage().getBody().getAttribute("vLink");
+        if (color == DomElement.ATTRIBUTE_NOT_DEFINED
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
+            color = "#800080";
+        }
+        return color;
+    }
+
+    /**
+     * Sets the value of the <tt>vlinkColor</tt> attribute.
+     * @param color the value of the <tt>vlinkColor</tt> attribute
+     */
+    public void jsxSet_vlinkColor(final String color) {
+        final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
+        body.jsxSet_vLink(color);
     }
 
     /**
