@@ -110,6 +110,12 @@ public class PropertiesTest extends WebTestCase {
      */
     @Parameters
     public static Collection<Object[]> data() throws Exception {
+        for (final File file : new File(getArtifactsDirectory()).listFiles()) {
+            final String name = file.getName();
+            if (name.startsWith("properties-") && (name.endsWith(".html") || name.endsWith(".png"))) {
+                file.delete();
+            }
+        }
         IE6_ = getProperties(BrowserVersion.INTERNET_EXPLORER_6);
         IE7_ = getProperties(BrowserVersion.INTERNET_EXPLORER_7);
         IE8_ = getProperties(BrowserVersion.INTERNET_EXPLORER_8);
