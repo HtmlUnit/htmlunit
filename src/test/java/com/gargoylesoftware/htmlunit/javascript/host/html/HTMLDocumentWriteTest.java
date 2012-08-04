@@ -847,6 +847,9 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+
+        // for some reason, the selenium driven browser is in an invalid state after this test
+        shutDownAll();
     }
 
     /**
@@ -874,6 +877,9 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
         driver.findElement(By.id("it")).click();
 
         assertEquals(new URL(getDefaultUrl(), "foo"), getMockWebConnection().getLastWebRequest().getUrl());
+
+        // for some reason, the selenium driven browser is in an invalid state after this test
+        shutDownAll();
     }
 
     /**
@@ -895,6 +901,9 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body onload='test()'>foo</body></html>";
         loadPageWithAlerts2(html);
+
+        // for some reason, the selenium driven browser is in an invalid state after this test
+        shutDownAll();
     }
 
     /**
@@ -917,6 +926,9 @@ public class HTMLDocumentWriteTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body onload='test()'>foo</body></html>";
         loadPageWithAlerts2(html);
+
+        // for some reason, the selenium driven browser is in an invalid state after this test
+        shutDownAll();
     }
 
     /**
