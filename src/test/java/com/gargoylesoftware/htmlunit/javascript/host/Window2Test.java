@@ -722,6 +722,8 @@ public class Window2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+        // for some reason, the selenium driven browser is in an invalid state after this test
+        shutDownAll();
     }
 
     /**
