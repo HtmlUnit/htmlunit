@@ -2057,11 +2057,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value the color attribute's value
      */
     protected void setColorAttribute(final String name, final String value) {
-        final String s;
-        if (com.gargoylesoftware.htmlunit.util.StringUtils.isColorHexadecimal(value)) {
-            s = value;
-        }
-        else {
+        String s = value;
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_COLOR_RESTRICT)
+            && !com.gargoylesoftware.htmlunit.util.StringUtils.isColorHexadecimal(value)) {
             s = "#000000";
         }
         getDomNodeOrDie().setAttribute(name, s);

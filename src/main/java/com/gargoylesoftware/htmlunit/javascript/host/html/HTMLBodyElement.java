@@ -86,12 +86,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533070.aspx">MSDN Documentation</a>
      */
     public String jsxGet_aLink() {
-        String aLink = getDomNodeOrDie().getAttribute("aLink");
-        if (aLink == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_BODY_COLOR)) {
-            aLink = "#ee0000";
-        }
-        return aLink;
+        return getDomNodeOrDie().getAttribute("aLink");
     }
 
     /**
@@ -139,12 +134,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     public String jsxGet_bgColor() {
-        String bgColor = getDomNodeOrDie().getAttribute("bgColor");
-        if (bgColor == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_BODY_COLOR)) {
-            bgColor = "#ffffff";
-        }
-        return bgColor;
+        return getDomNodeOrDie().getAttribute("bgColor");
     }
 
     /**
@@ -162,12 +152,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534119.aspx">MSDN Documentation</a>
      */
     public String jsxGet_link() {
-        String link = getDomNodeOrDie().getAttribute("link");
-        if (link == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_BODY_COLOR)) {
-            link = "#0000ee";
-        }
-        return link;
+        return getDomNodeOrDie().getAttribute("link");
     }
 
     /**
@@ -186,12 +171,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @Override
     public String jsxGet_text() {
-        String text = getDomNodeOrDie().getAttribute("text");
-        if (text == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_BODY_COLOR)) {
-            text = "#000000";
-        }
-        return text;
+        return getDomNodeOrDie().getAttribute("text");
     }
 
     /**
@@ -209,12 +189,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
     public String jsxGet_vLink() {
-        String vLink = getDomNodeOrDie().getAttribute("vLink");
-        if (vLink == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_BODY_COLOR)) {
-            vLink = "#551a8b";
-        }
-        return vLink;
+        return getDomNodeOrDie().getAttribute("vLink");
     }
 
     /**

@@ -123,8 +123,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"#ee0000", "#0000aa", "#000000" },
-            FF10 = {"", "#0000aa", "x" },
+    @Alerts(FF = {"", "#0000aa", "x" },
             IE = {"", "#0000aa", "#000000" })
     public void aLink() throws Exception {
         final String html =
@@ -176,8 +175,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"#ffffff", "#0000aa", "#000000" },
-            FF10 = {"", "#0000aa", "x" },
+    @Alerts(FF = {"", "#0000aa", "x" },
             IE = {"", "#0000aa", "#000000" })
     public void bgColor() throws Exception {
         final String html =
@@ -203,8 +201,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"#0000ee", "#0000aa", "#000000" },
-            FF10 = {"", "#0000aa", "x" },
+    @Alerts(FF = {"", "#0000aa", "x" },
             IE = {"", "#0000aa", "#000000" })
     public void link() throws Exception {
         final String html =
@@ -230,8 +227,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"#000000", "#0000aa", "#000000" },
-            FF10 = {"", "#0000aa", "x" },
+    @Alerts(FF = {"", "#0000aa", "x" },
             IE = {"", "#0000aa", "#000000" })
     public void text() throws Exception {
         final String html =
@@ -257,8 +253,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"#551a8b", "#0000aa", "#000000" },
-            FF10 = {"", "#0000aa", "x" },
+    @Alerts(FF = {"", "#0000aa", "x" },
             IE = {"", "#0000aa", "#000000" })
     public void vLink() throws Exception {
         final String html =

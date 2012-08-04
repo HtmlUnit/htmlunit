@@ -1250,7 +1250,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     public String jsxGet_bgColor() {
         String bgColor = getHtmlPage().getBody().getAttribute("bgColor");
-        if (bgColor == DomElement.ATTRIBUTE_NOT_DEFINED) {
+        if (bgColor == DomElement.ATTRIBUTE_NOT_DEFINED
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_BG_COLOR)) {
             bgColor = "#ffffff";
         }
         return bgColor;
@@ -1740,4 +1741,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         return super.makeScriptableFor(domNode);
     }
+
+    /**
+     * Sets the head.
+     * @param head the head
+     */
+    public void jsxSet_head(final ScriptableObject head) {
+        //ignore
+    }
+
 }

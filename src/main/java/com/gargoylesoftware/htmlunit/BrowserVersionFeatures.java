@@ -469,6 +469,9 @@ public enum BrowserVersionFeatures {
      */
     HTMLCONDITIONAL_COMMENTS,
 
+    /** Has document.bgColor a value by default. */
+    HTMLDOCUMENT_BG_COLOR,
+
     /** Allows invalid 'align' values. */
     HTMLELEMENT_ALIGN_INVALID,
 
@@ -516,8 +519,8 @@ public enum BrowserVersionFeatures {
     /** Trims the value of the type attribute before to verify it. */
     HTMLSCRIPT_TRIM_TYPE,
 
-    /** Have a default value of body.link, body.vLink, etc. */
-    HTML_BODY_COLOR,
+    /** Do not allow anything in color, but restrict to valid values only. */
+    HTML_COLOR_RESTRICT,
 
     /** HTMLCommentElement instead of Comment. */
     HTML_COMMENT_ELEMENT,

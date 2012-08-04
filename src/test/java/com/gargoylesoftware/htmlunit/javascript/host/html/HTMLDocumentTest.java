@@ -528,7 +528,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#0" },
             DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" })
-    @NotYetImplemented({ Browser.FF3_6, Browser.FF10, Browser.CHROME })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"
