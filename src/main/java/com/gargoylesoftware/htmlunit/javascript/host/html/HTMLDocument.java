@@ -1208,9 +1208,21 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 return null;
             }
         }
-        final HtmlElement body = getHtmlPage().getBody();
+        final HtmlElement body = page.getBody();
         if (body != null) {
             return (HTMLElement) body.getScriptObject();
+        }
+        return null;
+    }
+
+    /**
+     * Returns this document's <tt>head</tt> element.
+     * @return this document's <tt>head</tt> element
+     */
+    public HTMLElement jsxGet_head() {
+        final HtmlElement head = getHtmlPage().getHead();
+        if (head != null) {
+            return (HTMLElement) head.getScriptObject();
         }
         return null;
     }

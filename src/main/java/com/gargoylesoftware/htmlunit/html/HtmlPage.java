@@ -297,6 +297,22 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
+     * Returns the head element.
+     * @return the head element
+     */
+    public HtmlElement getHead() {
+        final HtmlElement doc = getDocumentElement();
+        if (doc != null) {
+            for (final DomNode node : doc.getChildren()) {
+                if (node instanceof HtmlHead) {
+                    return (HtmlElement) node;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

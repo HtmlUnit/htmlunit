@@ -1772,6 +1772,9 @@
                 descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
         </property>
+        <property name="head" readable="true" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="images" readable="true" writable="false"/>
         <property name="lastModified" readable="true" writable="false"/>
         <property name="linkColor" notImplemented="true" readable="true" writable="false"/>

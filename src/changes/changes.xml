@@ -9,6 +9,9 @@
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support">
             <action type="add" dev="asashour">
+                JavaScript: implement document.head.
+            </action>
+            <action type="add" dev="asashour">
                 DOM: implement text.getWholeText().
             </action>
             <action type="fix" dev="asashour">

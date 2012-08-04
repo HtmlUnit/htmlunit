@@ -1528,4 +1528,19 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "[object HTMLHeadElement]", IE = "undefined")
+    public void head() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "  alert(document.head);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
