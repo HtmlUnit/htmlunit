@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link Text}.
@@ -28,12 +28,12 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class TextTest extends WebServerTestCase {
+public class TextTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
-//    @Test
+    @Test
     @Alerts(IE = "null", FF = "[object Text]")
     public void simpleScriptable() throws Exception {
         final String html
@@ -43,7 +43,7 @@ public class TextTest extends WebServerTestCase {
             + "}\n"
             + "</script></head><body onload='test()'> </body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -59,6 +59,6 @@ public class TextTest extends WebServerTestCase {
             + "  alert(div.firstChild.wholeText);\n"
             + "}\n"
             + "</script></head><body onload='test()'><div id='myId'>abcd</></body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }

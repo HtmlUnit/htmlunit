@@ -18,7 +18,7 @@
 
     <class extends="Element" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlElement">
-        <property name="accessKey" readable="true" writable="true">
+        <property name="accessKey">
             <browser name="Internet Explorer"/>
         </property>
         <property name="all" readable="true" writable="false">
@@ -30,7 +30,7 @@
                 descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
         </property>
-        <property name="className" readable="true" writable="true"/>
+        <property name="className"/>
         <property name="clientHeight" readable="true" writable="false"/>
         <property name="clientLeft" readable="true" writable="false">
             <browser name="Firefox" min-version="3"/>
@@ -44,8 +44,8 @@
         <property name="currentStyle" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dir" readable="true" writable="true"/>
-        <property name="disabled" readable="true" writable="true">
+        <property name="dir"/>
+        <property name="disabled">
             <browser name="Internet Explorer"/>
         </property>
         <property name="document" readable="true" writable="false">
@@ -54,13 +54,13 @@
         <property name="filters" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="id" readable="true" writable="true"/>
-        <property name="innerText" readable="true" writable="true">
+        <property name="id"/>
+        <property name="innerText">
             <browser name="Internet Explorer"/>
             <browser name="Chrome"/>
         </property>
-        <property name="lang" readable="true" writable="true"/>
-        <property name="language" readable="true" writable="true">
+        <property name="lang"/>
+        <property name="language">
             <browser name="Internet Explorer"/>
         </property>
         <property name="offsetHeight" readable="true" writable="false"/>
@@ -78,7 +78,7 @@
         </property>
         <property name="offsetTop" readable="true" writable="false"/>
         <property name="offsetWidth" readable="true" writable="false"/>
-        <property name="outerHTML" readable="true" writable="true">
+        <property name="outerHTML">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms534310.aspx"
                 descr="MSDN documentation"/>
@@ -86,7 +86,7 @@
             <browser name="Chrome"/>
             <browser name="Firefox" min-version="11"/>
         </property>
-        <property name="outerText" notImplemented="true" readable="true" writable="true">
+        <property name="outerText" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
         <property name="parentElement" readable="true" writable="false">
@@ -101,22 +101,22 @@
             <browser name="Internet Explorer"/>
         </property>
         <property name="scrollHeight" readable="true" writable="false"/>
-        <property name="scrollLeft" readable="true" writable="true"/>
-        <property name="scrollTop" readable="true" writable="true"/>
+        <property name="scrollLeft"/>
+        <property name="scrollTop"/>
         <property name="scrollWidth" readable="true" writable="false"/>
         <property name="sourceIndex" notImplemented="true" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="spellcheck" readable="true" writable="true">
+        <property name="spellcheck">
             <browser name="Firefox"/>
         </property>
         <property name="style" readable="true" writable="false"/>
-        <property name="tabIndex" readable="true" writable="true"/>
+        <property name="tabIndex"/>
         <property name="tagName" readable="true" writable="false"/>
-        <property name="tagUrn" readable="true" writable="true">
+        <property name="tagUrn">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="title" readable="true" writable="true"/>
+        <property name="title"/>
         <property name="uniqueID" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
@@ -251,7 +251,7 @@
 
     <!--  the virtual classes that simplify configuration -->
     <class extends="HTMLElement" classname="#HtmlElementBase">
-        <property name="innerHTML" readable="true" writable="true"/>
+        <property name="innerHTML"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject"
@@ -275,7 +275,7 @@
             <browser name="Firefox" min-version="3"/>
         </property>
         <property name="specified" readable="true" writable="false"/>
-        <property name="value" readable="true" writable="true"/>
+        <property name="value"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.BoxObject" JSObject="true">
@@ -293,10 +293,10 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D" JSObject="true">
-        <property name="fillStyle" readable="true" writable="true"/>
-        <property name="globalAlpha" readable="true" writable="true"/>
-        <property name="lineWidth" readable="true" writable="true"/>
-        <property name="strokeStyle" readable="true" writable="true"/>
+        <property name="fillStyle"/>
+        <property name="globalAlpha"/>
+        <property name="lineWidth"/>
+        <property name="strokeStyle"/>
         <function name="arc"/>
         <function name="arcTo"/>
         <function name="beginPath"/>
@@ -324,7 +324,7 @@
 
     <class extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCharacterData">
-        <property name="data" readable="true" writable="true"/>
+        <property name="data"/>
         <property name="length" readable="true" writable="false"/>
         <function name="appendData"/>
         <function name="deleteData"/>
@@ -335,10 +335,10 @@
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.ClientRect"
         JSObject="true">
-        <property name="bottom" readable="true" writable="true"/>
-        <property name="left" readable="true" writable="true"/>
-        <property name="right" readable="true" writable="true"/>
-        <property name="top" readable="true" writable="true"/>
+        <property name="bottom"/>
+        <property name="left"/>
+        <property name="right"/>
+        <property name="top"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.ClipboardData"
@@ -357,7 +357,7 @@
         <property name="id" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="innerText" readable="true" writable="true">
+        <property name="innerText">
             <browser name="Internet Explorer"/>
         </property>
         <property name="tagName" readable="true" writable="false">
@@ -400,7 +400,7 @@
     </class>
 
     <class extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule" JSObject="true">
-        <property name="encoding" readable="true" writable="true"/>
+        <property name="encoding"/>
     </class>
 
     <class extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule" JSObject="true">
@@ -452,7 +452,7 @@
         <constant name="MEDIA_RULE"><browser name="Firefox"/></constant>
         <constant name="FONT_FACE_RULE"><browser name="Firefox"/></constant>
         <constant name="PAGE_RULE"><browser name="Firefox"/></constant>
-        <property name="cssText" readable="true" writable="true">
+        <property name="cssText">
             <browser name="Firefox"/>
         </property>
         <property name="parentRule" readable="true" writable="false">
@@ -477,592 +477,592 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration" JSObject="true">
-        <property name="azimuth" readable="true" writable="true">
+        <property name="azimuth">
             <browser name="Firefox"/>
         </property>
-        <property name="background" readable="true" writable="true"/>
-        <property name="backgroundAttachment" readable="true" writable="true"/>
-        <property name="backgroundColor" readable="true" writable="true"/>
-        <property name="backgroundImage" readable="true" writable="true"/>
-        <property name="backgroundPosition" readable="true" writable="true"/>
-        <property name="backgroundPositionX" readable="true" writable="true">
+        <property name="background"/>
+        <property name="backgroundAttachment"/>
+        <property name="backgroundColor"/>
+        <property name="backgroundImage"/>
+        <property name="backgroundPosition"/>
+        <property name="backgroundPositionX">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="backgroundPositionY" readable="true" writable="true">
+        <property name="backgroundPositionY">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="backgroundRepeat" readable="true" writable="true"/>
-        <property name="behavior" readable="true" writable="true">
+        <property name="backgroundRepeat"/>
+        <property name="behavior">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="border" readable="true" writable="true"/>
-        <property name="borderBottom" readable="true" writable="true"/>
-        <property name="borderBottomColor" readable="true" writable="true"/>
-        <property name="borderBottomStyle" readable="true" writable="true"/>
-        <property name="borderBottomWidth" readable="true" writable="true"/>
-        <property name="borderCollapse" readable="true" writable="true"/>
-        <property name="borderColor" readable="true" writable="true"/>
-        <property name="borderLeft" readable="true" writable="true"/>
-        <property name="borderLeftColor" readable="true" writable="true"/>
-        <property name="borderLeftStyle" readable="true" writable="true"/>
-        <property name="borderLeftWidth" readable="true" writable="true"/>
-        <property name="borderRight" readable="true" writable="true"/>
-        <property name="borderRightColor" readable="true" writable="true"/>
-        <property name="borderRightStyle" readable="true" writable="true"/>
-        <property name="borderRightWidth" readable="true" writable="true"/>
-        <property name="borderSpacing" readable="true" writable="true">
+        <property name="border"/>
+        <property name="borderBottom"/>
+        <property name="borderBottomColor"/>
+        <property name="borderBottomStyle"/>
+        <property name="borderBottomWidth"/>
+        <property name="borderCollapse"/>
+        <property name="borderColor"/>
+        <property name="borderLeft"/>
+        <property name="borderLeftColor"/>
+        <property name="borderLeftStyle"/>
+        <property name="borderLeftWidth"/>
+        <property name="borderRight"/>
+        <property name="borderRightColor"/>
+        <property name="borderRightStyle"/>
+        <property name="borderRightWidth"/>
+        <property name="borderSpacing">
             <browser name="Firefox"/>
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="borderStyle" readable="true" writable="true"/>
-        <property name="borderTop" readable="true" writable="true"/>
-        <property name="borderTopColor" readable="true" writable="true"/>
-        <property name="borderTopStyle" readable="true" writable="true"/>
-        <property name="borderTopWidth" readable="true" writable="true"/>
-        <property name="borderWidth" readable="true" writable="true"/>
-        <property name="bottom" readable="true" writable="true"/>
-        <property name="boxSizing" readable="true" writable="true">
+        <property name="borderStyle"/>
+        <property name="borderTop"/>
+        <property name="borderTopColor"/>
+        <property name="borderTopStyle"/>
+        <property name="borderTopWidth"/>
+        <property name="borderWidth"/>
+        <property name="bottom"/>
+        <property name="boxSizing">
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="captionSide" readable="true" writable="true">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8" />
-        </property>
-        <property name="clear" readable="true" writable="true"/>
-        <property name="clip" readable="true" writable="true"/>
-        <property name="color" readable="true" writable="true"/>
-        <property name="content" readable="true" writable="true">
+        <property name="captionSide">
             <browser name="Firefox"/>
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="counterIncrement" readable="true" writable="true">
+        <property name="clear"/>
+        <property name="clip"/>
+        <property name="color"/>
+        <property name="content">
             <browser name="Firefox"/>
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="counterReset" readable="true" writable="true">
+        <property name="counterIncrement">
             <browser name="Firefox"/>
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="cssFloat" readable="true" writable="true">
-            <browser name="Firefox"/>
-        </property>
-        <property name="cssText" readable="true" writable="true"/>
-        <property name="cue" readable="true" writable="true">
-            <browser name="Firefox"/>
-        </property>
-        <property name="cueAfter" readable="true" writable="true">
-            <browser name="Firefox"/>
-        </property>
-        <property name="cueBefore" readable="true" writable="true">
-            <browser name="Firefox"/>
-        </property>
-        <property name="cursor" readable="true" writable="true"/>
-        <property name="direction" readable="true" writable="true"/>
-        <property name="display" readable="true" writable="true"/>
-        <property name="elevation" readable="true" writable="true">
-            <browser name="Firefox"/>
-        </property>
-        <property name="emptyCells" readable="true" writable="true">
+        <property name="counterReset">
             <browser name="Firefox"/>
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="filter" readable="true" writable="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="font" readable="true" writable="true"/>
-        <property name="fontFamily" readable="true" writable="true"/>
-        <property name="fontSize" readable="true" writable="true"/>
-        <property name="fontSizeAdjust" readable="true" writable="true">
+        <property name="cssFloat">
             <browser name="Firefox"/>
         </property>
-        <property name="fontStretch" readable="true" writable="true">
+        <property name="cssText"/>
+        <property name="cue">
             <browser name="Firefox"/>
         </property>
-        <property name="fontStyle" readable="true" writable="true"/>
-        <property name="fontVariant" readable="true" writable="true"/>
-        <property name="fontWeight" readable="true" writable="true"/>
-        <property name="height" readable="true" writable="true"/>
-        <property name="imeMode" readable="true" writable="true"/>
-        <property name="layoutFlow" readable="true" writable="true">
+        <property name="cueAfter">
+            <browser name="Firefox"/>
+        </property>
+        <property name="cueBefore">
+            <browser name="Firefox"/>
+        </property>
+        <property name="cursor"/>
+        <property name="direction"/>
+        <property name="display"/>
+        <property name="elevation">
+            <browser name="Firefox"/>
+        </property>
+        <property name="emptyCells">
+            <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
+        </property>
+        <property name="filter">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="layoutGrid" readable="true" writable="true">
+        <property name="font"/>
+        <property name="fontFamily"/>
+        <property name="fontSize"/>
+        <property name="fontSizeAdjust">
+            <browser name="Firefox"/>
+        </property>
+        <property name="fontStretch">
+            <browser name="Firefox"/>
+        </property>
+        <property name="fontStyle"/>
+        <property name="fontVariant"/>
+        <property name="fontWeight"/>
+        <property name="height"/>
+        <property name="imeMode"/>
+        <property name="layoutFlow">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="layoutGridChar" readable="true" writable="true">
+        <property name="layoutGrid">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="layoutGridLine" readable="true" writable="true">
+        <property name="layoutGridChar">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="layoutGridMode" readable="true" writable="true">
+        <property name="layoutGridLine">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="layoutGridType" readable="true" writable="true">
+        <property name="layoutGridMode">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="left" readable="true" writable="true"/>
+        <property name="layoutGridType">
+            <browser name="Internet Explorer"/>
+        </property>
+        <property name="left"/>
         <property name="length" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
-        <property name="letterSpacing" readable="true" writable="true"/>
-        <property name="lineBreak" readable="true" writable="true">
+        <property name="letterSpacing"/>
+        <property name="lineBreak">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="lineHeight" readable="true" writable="true"/>
-        <property name="listStyle" readable="true" writable="true"/>
-        <property name="listStyleImage" readable="true" writable="true"/>
-        <property name="listStylePosition" readable="true" writable="true"/>
-        <property name="listStyleType" readable="true" writable="true"/>
-        <property name="margin" readable="true" writable="true"/>
-        <property name="marginBottom" readable="true" writable="true"/>
-        <property name="marginLeft" readable="true" writable="true"/>
-        <property name="marginRight" readable="true" writable="true"/>
-        <property name="marginTop" readable="true" writable="true"/>
-        <property name="markerOffset" readable="true" writable="true">
+        <property name="lineHeight"/>
+        <property name="listStyle"/>
+        <property name="listStyleImage"/>
+        <property name="listStylePosition"/>
+        <property name="listStyleType"/>
+        <property name="margin"/>
+        <property name="marginBottom"/>
+        <property name="marginLeft"/>
+        <property name="marginRight"/>
+        <property name="marginTop"/>
+        <property name="markerOffset">
             <browser name="Firefox"/>
         </property>
-        <property name="marks" readable="true" writable="true">
+        <property name="marks">
             <browser name="Firefox"/>
         </property>
-        <property name="maxHeight" readable="true" writable="true"/>
-        <property name="maxWidth" readable="true" writable="true"/>
-        <property name="minHeight" readable="true" writable="true"/>
-        <property name="minWidth" readable="true" writable="true"/>
-        <property name="MozAppearance" readable="true" writable="true">
+        <property name="maxHeight"/>
+        <property name="maxWidth"/>
+        <property name="minHeight"/>
+        <property name="minWidth"/>
+        <property name="MozAppearance">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBackgroundClip" readable="true" writable="true">
+        <property name="MozBackgroundClip">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBackgroundInlinePolicy" readable="true" writable="true">
+        <property name="MozBackgroundInlinePolicy">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBackgroundOrigin" readable="true" writable="true">
+        <property name="MozBackgroundOrigin">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBackgroundSize" readable="true" writable="true">
+        <property name="MozBackgroundSize">
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="MozBinding" readable="true" writable="true">
+        <property name="MozBinding">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderBottomColors" readable="true" writable="true">
+        <property name="MozBorderBottomColors">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderEnd" readable="true" writable="true">
+        <property name="MozBorderEnd">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderEndColor" readable="true" writable="true">
+        <property name="MozBorderEndColor">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderEndStyle" readable="true" writable="true">
+        <property name="MozBorderEndStyle">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderEndWidth" readable="true" writable="true">
+        <property name="MozBorderEndWidth">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderImage" readable="true" writable="true">
+        <property name="MozBorderImage">
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="MozBorderLeftColors" readable="true" writable="true">
+        <property name="MozBorderLeftColors">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderRadius" readable="true" writable="true">
+        <property name="MozBorderRadius">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderRadiusBottomleft" readable="true" writable="true">
+        <property name="MozBorderRadiusBottomleft">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderRadiusBottomright" readable="true" writable="true">
+        <property name="MozBorderRadiusBottomright">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderRadiusTopleft" readable="true" writable="true">
+        <property name="MozBorderRadiusTopleft">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderRadiusTopright" readable="true" writable="true">
+        <property name="MozBorderRadiusTopright">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderRightColors" readable="true" writable="true">
+        <property name="MozBorderRightColors">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderStart" readable="true" writable="true">
+        <property name="MozBorderStart">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderStartColor" readable="true" writable="true">
+        <property name="MozBorderStartColor">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderStartStyle" readable="true" writable="true">
+        <property name="MozBorderStartStyle">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderStartWidth" readable="true" writable="true">
+        <property name="MozBorderStartWidth">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBorderTopColors" readable="true" writable="true">
+        <property name="MozBorderTopColors">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBoxAlign" readable="true" writable="true">
+        <property name="MozBoxAlign">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBoxDirection" readable="true" writable="true">
+        <property name="MozBoxDirection">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBoxFlex" readable="true" writable="true">
+        <property name="MozBoxFlex">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBoxOrdinalGroup" readable="true" writable="true">
+        <property name="MozBoxOrdinalGroup">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBoxOrient" readable="true" writable="true">
+        <property name="MozBoxOrient">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBoxPack" readable="true" writable="true">
+        <property name="MozBoxPack">
             <browser name="Firefox"/>
         </property>
-        <property name="MozBoxShadow" readable="true" writable="true">
+        <property name="MozBoxShadow">
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="MozBoxSizing" readable="true" writable="true">
+        <property name="MozBoxSizing">
             <browser name="Firefox"/>
         </property>
-        <property name="MozColumnCount" readable="true" writable="true">
+        <property name="MozColumnCount">
             <browser name="Firefox"/>
         </property>
-        <property name="MozColumnGap" readable="true" writable="true">
+        <property name="MozColumnGap">
             <browser name="Firefox"/>
         </property>
-        <property name="MozColumnRule" readable="true" writable="true">
+        <property name="MozColumnRule">
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="MozColumnRuleColor" readable="true" writable="true">
+        <property name="MozColumnRuleColor">
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="MozColumnRuleStyle" readable="true" writable="true">
+        <property name="MozColumnRuleStyle">
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="MozColumnRuleWidth" readable="true" writable="true">
+        <property name="MozColumnRuleWidth">
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="MozColumnWidth" readable="true" writable="true">
+        <property name="MozColumnWidth">
             <browser name="Firefox"/>
         </property>
-        <property name="MozFloatEdge" readable="true" writable="true">
+        <property name="MozFloatEdge">
             <browser name="Firefox"/>
         </property>
-        <property name="MozForceBrokenImageIcon" readable="true" writable="true">
+        <property name="MozForceBrokenImageIcon">
             <browser name="Firefox"/>
         </property>
-        <property name="MozImageRegion" readable="true" writable="true">
+        <property name="MozImageRegion">
             <browser name="Firefox"/>
         </property>
-        <property name="MozMarginEnd" readable="true" writable="true">
+        <property name="MozMarginEnd">
             <browser name="Firefox"/>
         </property>
-        <property name="MozMarginStart" readable="true" writable="true">
+        <property name="MozMarginStart">
             <browser name="Firefox"/>
         </property>
-        <property name="MozOpacity" readable="true" writable="true">
+        <property name="MozOpacity">
             <browser name="Firefox"/>
         </property>
-        <property name="MozOutline" readable="true" writable="true">
+        <property name="MozOutline">
             <browser name="Firefox"/>
         </property>
-        <property name="MozOutlineColor" readable="true" writable="true">
+        <property name="MozOutlineColor">
             <browser name="Firefox"/>
         </property>
-        <property name="MozOutlineOffset" readable="true" writable="true">
+        <property name="MozOutlineOffset">
             <browser name="Firefox"/>
         </property>
-        <property name="MozOutlineRadius" readable="true" writable="true">
+        <property name="MozOutlineRadius">
             <browser name="Firefox"/>
         </property>
-        <property name="MozOutlineRadiusBottomleft" readable="true" writable="true">
+        <property name="MozOutlineRadiusBottomleft">
             <browser name="Firefox"/>
         </property>
-        <property name="MozOutlineRadiusBottomright" readable="true" writable="true">
+        <property name="MozOutlineRadiusBottomright">
             <browser name="Firefox"/>
         </property>
-        <property name="MozOutlineRadiusTopleft" readable="true" writable="true">
+        <property name="MozOutlineRadiusTopleft">
             <browser name="Firefox"/>
         </property>
-        <property name="MozOutlineRadiusTopright" readable="true" writable="true">
+        <property name="MozOutlineRadiusTopright">
             <browser name="Firefox"/>
         </property>
-        <property name="MozOutlineStyle" readable="true" writable="true">
+        <property name="MozOutlineStyle">
             <browser name="Firefox"/>
         </property>
-        <property name="MozOutlineWidth" readable="true" writable="true">
+        <property name="MozOutlineWidth">
             <browser name="Firefox"/>
         </property>
-        <property name="MozPaddingEnd" readable="true" writable="true">
+        <property name="MozPaddingEnd">
             <browser name="Firefox"/>
         </property>
-        <property name="MozPaddingStart" readable="true" writable="true">
+        <property name="MozPaddingStart">
             <browser name="Firefox"/>
         </property>
-        <property name="MozStackSizing" readable="true" writable="true">
+        <property name="MozStackSizing">
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="MozTransform" readable="true" writable="true">
+        <property name="MozTransform">
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="MozTransformOrigin" readable="true" writable="true">
+        <property name="MozTransformOrigin">
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="MozUserFocus" readable="true" writable="true">
+        <property name="MozUserFocus">
             <browser name="Firefox"/>
         </property>
-        <property name="MozUserInput" readable="true" writable="true">
+        <property name="MozUserInput">
             <browser name="Firefox"/>
         </property>
-        <property name="MozUserModify" readable="true" writable="true">
+        <property name="MozUserModify">
             <browser name="Firefox"/>
         </property>
-        <property name="MozUserSelect" readable="true" writable="true">
+        <property name="MozUserSelect">
             <browser name="Firefox"/>
         </property>
-        <property name="MozWindowShadow" readable="true" writable="true">
+        <property name="MozWindowShadow">
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="msBlockProgression" readable="true" writable="true">
+        <property name="msBlockProgression">
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="msInterpolationMode" readable="true" writable="true">
+        <property name="msInterpolationMode">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="opacity" readable="true" writable="true">
+        <property name="opacity">
             <browser name="Firefox"/>
         </property>
-        <property name="orphans" readable="true" writable="true">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8" />
-        </property>
-        <property name="outline" readable="true" writable="true">
+        <property name="orphans">
             <browser name="Firefox"/>
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="outlineColor" readable="true" writable="true">
+        <property name="outline">
             <browser name="Firefox"/>
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="outlineOffset" readable="true" writable="true">
-            <browser name="Firefox"/>
-        </property>
-        <property name="outlineStyle" readable="true" writable="true">
+        <property name="outlineColor">
             <browser name="Firefox"/>
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="outlineWidth" readable="true" writable="true">
+        <property name="outlineOffset">
+            <browser name="Firefox"/>
+        </property>
+        <property name="outlineStyle">
+            <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="8" />
+        </property>
+        <property name="outlineWidth">
             <browser name="Firefox"/>
             <browser name="Internet Explorer" min-version="8"/>
         </property>
-        <property name="overflow" readable="true" writable="true"/>
-        <property name="overflowX" readable="true" writable="true"/>
-        <property name="overflowY" readable="true" writable="true"/>
-        <property name="padding" readable="true" writable="true"/>
-        <property name="paddingBottom" readable="true" writable="true"/>
-        <property name="paddingLeft" readable="true" writable="true"/>
-        <property name="paddingRight" readable="true" writable="true"/>
-        <property name="paddingTop" readable="true" writable="true"/>
-        <property name="page" readable="true" writable="true">
+        <property name="overflow"/>
+        <property name="overflowX"/>
+        <property name="overflowY"/>
+        <property name="padding"/>
+        <property name="paddingBottom"/>
+        <property name="paddingLeft"/>
+        <property name="paddingRight"/>
+        <property name="paddingTop"/>
+        <property name="page">
             <browser name="Firefox"/>
         </property>
-        <property name="pageBreakAfter" readable="true" writable="true"/>
-        <property name="pageBreakBefore" readable="true" writable="true"/>
-        <property name="pageBreakInside" readable="true" writable="true">
+        <property name="pageBreakAfter"/>
+        <property name="pageBreakBefore"/>
+        <property name="pageBreakInside">
             <browser name="Firefox"/>
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="pause" readable="true" writable="true">
+        <property name="pause">
             <browser name="Firefox"/>
         </property>
-        <property name="pauseAfter" readable="true" writable="true">
+        <property name="pauseAfter">
             <browser name="Firefox"/>
         </property>
-        <property name="pauseBefore" readable="true" writable="true">
+        <property name="pauseBefore">
             <browser name="Firefox"/>
         </property>
-        <property name="pitch" readable="true" writable="true">
+        <property name="pitch">
             <browser name="Firefox"/>
         </property>
-        <property name="pitchRange" readable="true" writable="true">
+        <property name="pitchRange">
             <browser name="Firefox"/>
         </property>
-        <property name="pointerEvents" readable="true" writable="true">
+        <property name="pointerEvents">
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="pixelBottom" readable="true" writable="true">
+        <property name="pixelBottom">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="pixelLeft" readable="true" writable="true">
+        <property name="pixelLeft">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="pixelRight" readable="true" writable="true">
+        <property name="pixelRight">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="pixelTop" readable="true" writable="true">
+        <property name="pixelTop">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="posBottom" readable="true" writable="true">
+        <property name="posBottom">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="posHeight" readable="true" writable="true">
+        <property name="posHeight">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="position" readable="true" writable="true"/>
-        <property name="posLeft" readable="true" writable="true">
+        <property name="position"/>
+        <property name="posLeft">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="posRight" readable="true" writable="true">
+        <property name="posRight">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="posTop" readable="true" writable="true">
+        <property name="posTop">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="posWidth" readable="true" writable="true">
+        <property name="posWidth">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="quotes" readable="true" writable="true">
+        <property name="quotes">
             <browser name="Firefox"/>
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="richness" readable="true" writable="true">
+        <property name="richness">
             <browser name="Firefox"/>
         </property>
-        <property name="right" readable="true" writable="true"/>
-        <property name="rubyAlign" readable="true" writable="true">
+        <property name="right"/>
+        <property name="rubyAlign">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="rubyOverhang" readable="true" writable="true">
+        <property name="rubyOverhang">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="rubyPosition" readable="true" writable="true">
+        <property name="rubyPosition">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="scrollbar3dLightColor" readable="true" writable="true">
+        <property name="scrollbar3dLightColor">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="scrollbarArrowColor" readable="true" writable="true">
+        <property name="scrollbarArrowColor">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="scrollbarBaseColor" readable="true" writable="true">
+        <property name="scrollbarBaseColor">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="scrollbarDarkShadowColor" readable="true" writable="true">
+        <property name="scrollbarDarkShadowColor">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="scrollbarFaceColor" readable="true" writable="true">
+        <property name="scrollbarFaceColor">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="scrollbarHighlightColor" readable="true" writable="true">
+        <property name="scrollbarHighlightColor">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="scrollbarShadowColor" readable="true" writable="true">
+        <property name="scrollbarShadowColor">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="scrollbarTrackColor" readable="true" writable="true">
+        <property name="scrollbarTrackColor">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="size" readable="true" writable="true">
+        <property name="size">
             <browser name="Firefox"/>
         </property>
-        <property name="speak" readable="true" writable="true">
+        <property name="speak">
             <browser name="Firefox"/>
         </property>
-        <property name="speakHeader" readable="true" writable="true">
+        <property name="speakHeader">
             <browser name="Firefox"/>
         </property>
-        <property name="speakNumeral" readable="true" writable="true">
+        <property name="speakNumeral">
             <browser name="Firefox"/>
         </property>
-        <property name="speakPunctuation" readable="true" writable="true">
+        <property name="speakPunctuation">
             <browser name="Firefox"/>
         </property>
-        <property name="speechRate" readable="true" writable="true">
+        <property name="speechRate">
             <browser name="Firefox"/>
         </property>
-        <property name="stress" readable="true" writable="true">
+        <property name="stress">
             <browser name="Firefox"/>
         </property>
-        <property name="styleFloat" readable="true" writable="true">
+        <property name="styleFloat">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="tableLayout" readable="true" writable="true"/>
-        <property name="textAlign" readable="true" writable="true"/>
-        <property name="textAlignLast" readable="true" writable="true">
+        <property name="tableLayout"/>
+        <property name="textAlign"/>
+        <property name="textAlignLast">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textAutospace" readable="true" writable="true">
+        <property name="textAutospace">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textDecoration" readable="true" writable="true"/>
-        <property name="textDecorationBlink" readable="true" writable="true">
+        <property name="textDecoration"/>
+        <property name="textDecorationBlink">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textDecorationLineThrough" readable="true" writable="true">
+        <property name="textDecorationLineThrough">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textDecorationNone" readable="true" writable="true">
+        <property name="textDecorationNone">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textDecorationOverline" readable="true" writable="true">
+        <property name="textDecorationOverline">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textDecorationUnderline" readable="true" writable="true">
+        <property name="textDecorationUnderline">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textIndent" readable="true" writable="true"/>
-        <property name="textJustify" readable="true" writable="true">
+        <property name="textIndent"/>
+        <property name="textJustify">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textJustifyTrim" readable="true" writable="true">
+        <property name="textJustifyTrim">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textKashida" readable="true" writable="true">
+        <property name="textKashida">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textKashidaSpace" readable="true" writable="true">
+        <property name="textKashidaSpace">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textOverflow" readable="true" writable="true">
+        <property name="textOverflow">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="textShadow" readable="true" writable="true">
+        <property name="textShadow">
             <browser name="Firefox"/>
         </property>
-        <property name="textTransform" readable="true" writable="true"/>
-        <property name="textUnderlinePosition" readable="true" writable="true">
+        <property name="textTransform"/>
+        <property name="textUnderlinePosition">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="top" readable="true" writable="true"/>
-        <property name="unicodeBidi" readable="true" writable="true"/>
-        <property name="verticalAlign" readable="true" writable="true"/>
-        <property name="visibility" readable="true" writable="true"/>
-        <property name="voiceFamily" readable="true" writable="true">
+        <property name="top"/>
+        <property name="unicodeBidi"/>
+        <property name="verticalAlign"/>
+        <property name="visibility"/>
+        <property name="voiceFamily">
             <browser name="Firefox"/>
         </property>
-        <property name="volume" readable="true" writable="true">
+        <property name="volume">
             <browser name="Firefox"/>
         </property>
-        <property name="whiteSpace" readable="true" writable="true"/>
-        <property name="widows" readable="true" writable="true">
+        <property name="whiteSpace"/>
+        <property name="widows">
             <browser name="Firefox"/>
             <browser name="Internet Explorer" min-version="8" />
         </property>
-        <property name="width" readable="true" writable="true"/>
-        <property name="wordBreak" readable="true" writable="true">
+        <property name="width"/>
+        <property name="wordBreak">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="wordSpacing" readable="true" writable="true"/>
-        <property name="wordWrap" readable="true" writable="true">
+        <property name="wordSpacing"/>
+        <property name="wordWrap">
             <browser name="Internet Explorer"/>
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="writingMode" readable="true" writable="true">
+        <property name="writingMode">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="zIndex" readable="true" writable="true"/>
-        <property name="zoom" readable="true" writable="true">
+        <property name="zIndex"/>
+        <property name="zoom">
             <browser name="Internet Explorer"/>
         </property>
         <function name="getAttribute">
@@ -1113,7 +1113,7 @@
     </class>
 
     <class extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule" JSObject="true">
-        <property name="selectorText" readable="true" writable="true"/>
+        <property name="selectorText"/>
         <property name="style" readable="true" writable="false"/>
     </class>
 
@@ -1161,7 +1161,7 @@
         <property name="defaultView" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
-        <property name="designMode" readable="true" writable="true">
+        <property name="designMode">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms533720.aspx"
                 descr="MSDN documentation"/>
@@ -1169,7 +1169,7 @@
         <property name="doctype" readable="true" writable="false"/>
         <property name="documentElement" readable="true" writable="false"/>
         <property name="implementation" readable="true" writable="false"/>
-        <property name="location" readable="true" writable="true">
+        <property name="location">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms535866.aspx"
                 descr="MSDN documentation"/>
@@ -1425,7 +1425,7 @@
         <property name="cancelable" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
-        <property name="cancelBubble" readable="true" writable="true"/>
+        <property name="cancelBubble"/>
         <property name="ctrlKey" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
@@ -1441,11 +1441,11 @@
         <property name="propertyName" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="returnValue" readable="true" writable="true"/>
+        <property name="returnValue"/>
         <property name="shiftKey" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="srcElement" readable="true" writable="true">
+        <property name="srcElement">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms534638.aspx"
                 descr="MSDN documentation"/>
@@ -1471,30 +1471,30 @@
 
     <class extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.EventNode"
         JSObject="true">
-        <property name="onblur" readable="true" writable="true"/>
-        <property name="onclick" readable="true" writable="true"/>
-        <property name="oncontextmenu" readable="true" writable="true"/>
-        <property name="ondblclick" readable="true" writable="true"/>
-        <property name="onerror" readable="true" writable="true"/>
-        <property name="onfocus" readable="true" writable="true"/>
-        <property name="onfocusin" readable="true" writable="true">
+        <property name="onblur"/>
+        <property name="onclick"/>
+        <property name="oncontextmenu"/>
+        <property name="ondblclick"/>
+        <property name="onerror"/>
+        <property name="onfocus"/>
+        <property name="onfocusin">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="onfocusout" readable="true" writable="true">
+        <property name="onfocusout">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="onkeydown" readable="true" writable="true"/>
-        <property name="onkeypress" readable="true" writable="true"/>
-        <property name="onkeyup" readable="true" writable="true"/>
-        <property name="onmousedown" readable="true" writable="true"/>
-        <property name="onmousemove" readable="true" writable="true"/>
-        <property name="onmouseout" readable="true" writable="true"/>
-        <property name="onmouseover" readable="true" writable="true"/>
-        <property name="onmouseup" readable="true" writable="true"/>
-        <property name="onpropertychange" readable="true" writable="true">
+        <property name="onkeydown"/>
+        <property name="onkeypress"/>
+        <property name="onkeyup"/>
+        <property name="onmousedown"/>
+        <property name="onmousemove"/>
+        <property name="onmouseout"/>
+        <property name="onmouseover"/>
+        <property name="onmouseup"/>
+        <property name="onpropertychange">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="onresize" readable="true" writable="true"/>
+        <property name="onresize"/>
         <function name="fireEvent">
             <doclink
                 url="http://msdn2.microsoft.com/en-us/library/ms536423.aspx"
@@ -1516,20 +1516,20 @@
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField"
         JSObject="false">
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="disabled" readable="true" writable="true"/>
-        <property name="name" readable="true" writable="true"/>
-        <property name="onchange" readable="true" writable="true"/>
+        <property name="disabled"/>
+        <property name="name"/>
+        <property name="onchange"/>
         <property name="type" readable="true" writable="false"/>
-        <property name="value" readable="true" writable="true"/>
+        <property name="value"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation" JSObject="true">
@@ -1560,59 +1560,59 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
-        <property name="accessKey" readable="true" writable="true">
+        <property name="accessKey">
             <browser name="Firefox"/>
         </property>
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="hash" readable="true" writable="true"/>
-        <property name="host" readable="true" writable="true"/>
-        <property name="hostname" readable="true" writable="true"/>
-        <property name="href" readable="true" writable="true"/>
-        <property name="name" readable="true" writable="true"/>
-        <property name="pathname" readable="true" writable="true"/>
-        <property name="port" readable="true" writable="true"/>
-        <property name="protocol" readable="true" writable="true"/>
-        <property name="rel" readable="true" writable="true"/>
-        <property name="rev" readable="true" writable="true"/>
-        <property name="search" readable="true" writable="true"/>
-        <property name="target" readable="true" writable="true"/>
-        <property name="text" notImplemented="true" readable="true" writable="true">
+        <property name="hash"/>
+        <property name="host"/>
+        <property name="hostname"/>
+        <property name="href"/>
+        <property name="name"/>
+        <property name="pathname"/>
+        <property name="port"/>
+        <property name="protocol"/>
+        <property name="rel"/>
+        <property name="rev"/>
+        <property name="search"/>
+        <property name="target"/>
+        <property name="text" notImplemented="true">
             <browser name="Firefox"/>
         </property>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAppletElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlApplet">
-        <property name="align" readable="true" writable="true"/>
-        <property name="alt" readable="true" writable="true"/>
-        <property name="border" readable="true" writable="true">
+        <property name="align"/>
+        <property name="alt"/>
+        <property name="border">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
-        <property name="accessKey" readable="true" writable="true">
+        <property name="accessKey">
             <browser name="Firefox"/>
         </property>
-        <property name="alt" readable="true" writable="true"/>
+        <property name="alt"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAudioElement"
@@ -1623,36 +1623,36 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBase">
-        <property name="href" readable="true" writable="true"/>
-        <property name="target" readable="true" writable="true"/>
+        <property name="href"/>
+        <property name="target"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBaseFont">
-        <property name="color" readable="true" writable="true"/>
-        <property name="face" readable="true" writable="true"/>
-        <property name="size" readable="true" writable="true"/>
+        <property name="color"/>
+        <property name="face"/>
+        <property name="size"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBody">
-        <property name="aLink" readable="true" writable="true"/>
-        <property name="background" readable="true" writable="true"/>
-        <property name="bgColor" readable="true" writable="true"/>
-        <property name="link" readable="true" writable="true"/>
-        <property name="text" readable="true" writable="true"/>
-        <property name="vLink" readable="true" writable="true"/>
+        <property name="aLink"/>
+        <property name="background"/>
+        <property name="bgColor"/>
+        <property name="link"/>
+        <property name="text"/>
+        <property name="vLink"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBRElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBreak">
-        <property name="clear" readable="true" writable="true"/>
+        <property name="clear"/>
     </class>
 
     <class extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButton">
-        <property name="accessKey" readable="true" writable="true"/>
-        <property name="type" readable="true" writable="true"/>
+        <property name="accessKey"/>
+        <property name="type"/>
         <function name="click">
             <browser name="Firefox"/>
         </function>
@@ -1662,8 +1662,8 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCanvas">
         <browser name="Firefox"/>
         <browser name="Chrome"/>
-        <property name="height" readable="true" writable="true"/>
-        <property name="width" readable="true" writable="true"/>
+        <property name="height"/>
+        <property name="width"/>
         <function name="getContext"/>
         <function name="toDataURL"/>
     </class>
@@ -1691,8 +1691,8 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDelElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDeletedText">
-        <property name="cite" readable="true" writable="true"/>
-        <property name="dateTime" readable="true" writable="true"/>
+        <property name="cite"/>
+        <property name="dateTime"/>
     </class>
 
     <class extends="HTMLListElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDirectoryElement"
@@ -1704,17 +1704,17 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement"
         JSObject="true">
-        <property name="align" readable="true" writable="true"/>
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="align"/>
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="noWrap" notImplemented="true" readable="true" writable="true">
+        <property name="noWrap" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
     </class>
@@ -1749,16 +1749,16 @@
                 descr="Gecko DOM reference"/>
         </property>
         <property name="applets" readable="true" writable="false"/>
-        <property name="bgColor" readable="true" writable="true"/>
+        <property name="bgColor"/>
         <property name="body" readable="true" writable="false"/>
         <!-- Note that compatMode is deprecated in Internet Explorer 8 in favor of the documentMode -->
         <property name="compatMode" readable="true" writable="false"/>
-        <property name="cookie" readable="true" writable="true">
+        <property name="cookie">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms533693.aspx"
                 descr="MSDN documentation"/>
         </property>
-        <property name="domain" readable="true" writable="true">
+        <property name="domain">
             <doclink
                 url="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147"
                 descr="WC3 Documentation (Level 1)"/>
@@ -1795,7 +1795,7 @@
             <browser name="Internet Explorer"/>
         </property>
         <property name="styleSheets" readable="true" writable="false"/>
-        <property name="title" readable="true" writable="true"/>
+        <property name="title"/>
         <property name="uniqueID" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
@@ -1870,23 +1870,23 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLEmbedElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlEmbed">
-        <property name="align" notImplemented="true" readable="true" writable="true">
+        <property name="align" notImplemented="true">
             <browser name="Firefox"/>
         </property>
     </class>
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFieldSetElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFieldSet">
-        <property name="align" readable="true" writable="true">
+        <property name="align">
             <browser name="Internet Explorer"/>
         </property>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFontElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFont">
-        <property name="color" readable="true" writable="true"/>
-        <property name="face" readable="true" writable="true"/>
-        <property name="size" readable="true" writable="true"/>
+        <property name="color"/>
+        <property name="face"/>
+        <property name="size"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement"
@@ -1895,14 +1895,14 @@
             url="http://msdn.microsoft.com/en-us/library/ms535249.aspx"
             descr="MSDN documentation"/>
 
-        <property name="action" readable="true" writable="true"/>
+        <property name="action"/>
         <property name="elements" readable="true" writable="false"/>
-        <property name="encoding" readable="true" writable="true"/>
+        <property name="encoding"/>
         <property name="length" readable="true" writable="false"/>
-        <property name="method" readable="true" writable="true"/>
-        <property name="name" readable="true" writable="true"/>
-        <property name="onsubmit" readable="true" writable="true"/>
-        <property name="target" readable="true" writable="true"/>
+        <property name="method"/>
+        <property name="name"/>
+        <property name="onsubmit"/>
+        <property name="target"/>
 
         <function name="item">
             <browser name="Internet Explorer"/>
@@ -1913,34 +1913,34 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrame">
-        <property name="border" readable="true" writable="true">
+        <property name="border">
             <browser name="Internet Explorer"/>
         </property>
         <property name="contentDocument" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
         <property name="contentWindow" readable="true" writable="false"/>
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="name" readable="true" writable="true"/>
-        <property name="onload" readable="true" writable="true"/>
-        <property name="src" readable="true" writable="true"/>
+        <property name="name"/>
+        <property name="onload"/>
+        <property name="src"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrameSet">
-        <property name="border" readable="true" writable="true">
+        <property name="border">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="cols" readable="true" writable="true"/>
-        <property name="rows" readable="true" writable="true"/>
+        <property name="cols"/>
+        <property name="rows"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadElement"
@@ -1952,12 +1952,12 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadingElement"
         JSObject="true">
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="align" notImplemented="true"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHRElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHorizontalRule">
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
+        <property name="align" notImplemented="true"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement"
@@ -1966,83 +1966,83 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
-        <property name="align" readable="true" writable="true"/>
-        <property name="border" readable="true" writable="true">
+        <property name="align"/>
+        <property name="border">
             <browser name="Internet Explorer"/>
         </property>
         <property name="contentDocument" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
         <property name="contentWindow" readable="true" writable="false"/>
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="height" readable="true" writable="true"/>
-        <property name="name" readable="true" writable="true"/>
-        <property name="onload" readable="true" writable="true"/>
-        <property name="src" readable="true" writable="true"/>
-        <property name="width" readable="true" writable="true"/>
+        <property name="height"/>
+        <property name="name"/>
+        <property name="onload"/>
+        <property name="src"/>
+        <property name="width"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
-        <property name="align" readable="true" writable="true"/>
-        <property name="alt" readable="true" writable="true"/>
-        <property name="border" readable="true" writable="true"/>
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="align"/>
+        <property name="alt"/>
+        <property name="border"/>
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="height" readable="true" writable="true"/>
-        <property name="onload" readable="true" writable="true"/>
-        <property name="src" readable="true" writable="true"/>
-        <property name="width" readable="true" writable="true"/>
+        <property name="height"/>
+        <property name="onload"/>
+        <property name="src"/>
+        <property name="width"/>
     </class>
 
     <class extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInput">
-        <property name="accessKey" readable="true" writable="true">
+        <property name="accessKey">
             <browser name="Firefox"/>
         </property>
-        <property name="align" readable="true" writable="true"/>
-        <property name="alt" readable="true" writable="true"/>
-        <property name="border" readable="true" writable="true">
+        <property name="align"/>
+        <property name="alt"/>
+        <property name="border">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="checked" readable="true" writable="true"/>
-        <property name="defaultChecked" readable="true" writable="true">
+        <property name="checked"/>
+        <property name="defaultChecked">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms533715.aspx"
                 descr="MSDN documentation"/>
         </property>
-        <property name="defaultValue" readable="true" writable="true">
+        <property name="defaultValue">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms533718.aspx"
                 descr="MSDN documentation"/>
         </property>
-        <property name="maxLength" readable="true" writable="true"/>
-        <property name="readOnly" readable="true" writable="true"/>
-        <property name="selectionEnd" readable="true" writable="true">
+        <property name="maxLength"/>
+        <property name="readOnly"/>
+        <property name="selectionEnd">
             <browser name="Firefox"/>
         </property>
-        <property name="selectionStart" readable="true" writable="true">
+        <property name="selectionStart">
             <browser name="Firefox"/>
         </property>
         <property name="textLength" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
-        <property name="type" readable="true" writable="true"/>
+        <property name="type"/>
         <function name="click">
             <browser name="Firefox"/>
         </function>
@@ -2054,8 +2054,8 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInsElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInsertedText">
-        <property name="cite" readable="true" writable="true"/>
-        <property name="dateTime" readable="true" writable="true"/>
+        <property name="cite"/>
+        <property name="dateTime"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIsIndexElement"
@@ -2064,34 +2064,34 @@
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
-        <property name="accessKey" readable="true" writable="true">
+        <property name="accessKey">
             <browser name="Firefox"/>
         </property>
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="htmlFor" readable="true" writable="true"/>
+        <property name="htmlFor"/>
     </class>
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLegend">
-        <property name="accessKey" readable="true" writable="true">
+        <property name="accessKey">
             <browser name="Firefox"/>
         </property>
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="align" notImplemented="true"/>
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
     </class>
@@ -2102,15 +2102,15 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLink">
-        <property name="href" readable="true" writable="true"/>
-        <property name="rel" readable="true" writable="true"/>
-        <property name="rev" readable="true" writable="true"/>
-        <property name="type" readable="true" writable="true"/>
+        <property name="href"/>
+        <property name="rel"/>
+        <property name="rev"/>
+        <property name="type"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLListElement"
         JSObject="false">
-        <property name="compact" readable="true" writable="true"/>
+        <property name="compact"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement"
@@ -2124,35 +2124,35 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMeta">
-        <property name="charset" readable="true" writable="true">
+        <property name="charset">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="content" readable="true" writable="true"/>
-        <property name="httpEquiv" readable="true" writable="true"/>
-        <property name="name" readable="true" writable="true"/>
-        <property name="scheme" readable="true" writable="true"/>
-        <property name="url" readable="true" writable="true">
+        <property name="content"/>
+        <property name="httpEquiv"/>
+        <property name="name"/>
+        <property name="scheme"/>
+        <property name="url">
             <browser name="Internet Explorer"/>
         </property>
     </class>
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlObject">
-        <property name="align" notImplemented="true" readable="true" writable="true"/>
-        <property name="alt" readable="true" writable="true">
+        <property name="align" notImplemented="true"/>
+        <property name="alt">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="border" readable="true" writable="true"/>
-        <property name="classid" readable="true" writable="true">
+        <property name="border"/>
+        <property name="classid">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
     </class>
@@ -2163,30 +2163,30 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptGroupElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOptionGroup">
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="disabled" readable="true" writable="true"/>
+        <property name="disabled"/>
     </class>
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
         <property name="defaultSelected" readable="true" writable="false"/>
-        <property name="disabled" readable="true" writable="true"/>
-        <property name="label" readable="true" writable="true"/>
-        <property name="selected" readable="true" writable="true"/>
-        <property name="text" readable="true" writable="true"/>
-        <property name="value" readable="true" writable="true"/>
+        <property name="disabled"/>
+        <property name="label"/>
+        <property name="selected"/>
+        <property name="text"/>
+        <property name="value"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionsCollection" JSObject="true">
-        <property name="length" readable="true" writable="true"/>
+        <property name="length"/>
         <function name="add"/>
         <function name="item"/>
         <function name="remove">
@@ -2197,7 +2197,7 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParagraphElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlParagraph">
-        <property name="align" readable="true" writable="true"/>
+        <property name="align"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParamElement"
@@ -2206,7 +2206,7 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLPreElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPreformattedText">
-        <property name="cite" readable="true" writable="true">
+        <property name="cite">
             <browser name="Internet Explorer"/>
         </property>
     </class>
@@ -2216,35 +2216,35 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement"
         JSObject="true">
-        <property name="cite" readable="true" writable="true"/>
-        <property name="dateTime" readable="true" writable="true">
+        <property name="cite"/>
+        <property name="dateTime">
             <browser name="Internet Explorer"/>
         </property>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement" JSObject="true"
         htmlClass="com.gargoylesoftware.htmlunit.html.HtmlScript" extends="#HtmlElementBase">
-        <property name="onload" readable="true" writable="true">
+        <property name="onload">
             <browser name="Firefox"/>
         </property>
-        <property name="onreadystatechange" readable="true" writable="true">
+        <property name="onreadystatechange">
             <browser name="Internet Explorer"/>
         </property>
         <property name="readyState" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="src" readable="true" writable="true"/>
-        <property name="text" readable="true" writable="true"/>
-        <property name="type" readable="true" writable="true"/>
+        <property name="src"/>
+        <property name="text"/>
+        <property name="type"/>
     </class>
 
     <class extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSelect">
-        <property name="length" readable="true" writable="true"/>
-        <property name="multiple" readable="true" writable="true"/>
+        <property name="length"/>
+        <property name="multiple"/>
         <property name="options" readable="true" writable="false"/>
-        <property name="selectedIndex" readable="true" writable="true"/>
-        <property name="size" readable="true" writable="true"/>
+        <property name="selectedIndex"/>
+        <property name="size"/>
 
         <function name="add"/>
         <function name="item"/>
@@ -2266,13 +2266,13 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement"
         JSObject="true">
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
     </class>
@@ -2289,8 +2289,8 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCaptionElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCaption">
-        <property name="align" readable="true" writable="true"/>
-        <property name="vAlign" readable="true" writable="true">
+        <property name="align"/>
+        <property name="vAlign">
             <browser name="Internet Explorer"/>
         </property>
     </class>
@@ -2306,9 +2306,9 @@
         <doclink
             url="http://msdn.microsoft.com/en-us/library/ms535903.aspx"
             descr="MSDN documentation (TD)"/>
-        <property name="abbr" readable="true" writable="true"/>
-        <property name="axis" readable="true" writable="true"/>
-        <property name="bgColor" readable="true" writable="true"/>
+        <property name="abbr"/>
+        <property name="axis"/>
+        <property name="bgColor"/>
         <property name="cellIndex" readable="true" writable="false">
             <doclink
                 url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-80748363"
@@ -2317,11 +2317,11 @@
                 url="http://msdn.microsoft.com/en-us/library/ms533549.aspx"
                 descr="MSDN documentation"/>
         </property>
-        <property name="colSpan" readable="true" writable="true"/>
-        <property name="height" readable="true" writable="true"/>
-        <property name="noWrap" readable="true" writable="true"/>
-        <property name="rowSpan" readable="true" writable="true"/>
-        <property name="width" readable="true" writable="true"/>
+        <property name="colSpan"/>
+        <property name="height"/>
+        <property name="noWrap"/>
+        <property name="rowSpan"/>
+        <property name="width"/>
     </class>
 
     <!--
@@ -2329,38 +2329,38 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="HTMLTableComponent" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableColElement"
         JSObject="true">
-        <property name="span" readable="true" writable="true"/>
-        <property name="width" readable="true" writable="true"/>
+        <property name="span"/>
+        <property name="width"/>
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableComponent"
         JSObject="false">
-        <property name="align" readable="true" writable="true"/>
-        <property name="ch" readable="true" writable="true"/>
-        <property name="chOff" readable="true" writable="true"/>
-        <property name="vAlign" readable="true" writable="true"/>
+        <property name="align"/>
+        <property name="ch"/>
+        <property name="chOff"/>
+        <property name="vAlign"/>
     </class>
 
     <class extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
-        <property name="bgColor" readable="true" writable="true"/>
-        <property name="border" readable="true" writable="true"/>
-        <property name="caption" readable="true" writable="true"/>
-        <property name="cellPadding" readable="true" writable="true"/>
-        <property name="cellSpacing" readable="true" writable="true"/>
-        <property name="dataFld" notImplemented="true" readable="true" writable="true">
+        <property name="bgColor"/>
+        <property name="border"/>
+        <property name="caption"/>
+        <property name="cellPadding"/>
+        <property name="cellSpacing"/>
+        <property name="dataFld" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataFormatAs" notImplemented="true" readable="true" writable="true">
+        <property name="dataFormatAs" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="dataSrc" notImplemented="true" readable="true" writable="true">
+        <property name="dataSrc" notImplemented="true">
             <browser name="Internet Explorer"/>
         </property>
         <property name="tBodies" readable="true" writable="false"/>
-        <property name="tFoot" readable="true" writable="true"/>
-        <property name="tHead" readable="true" writable="true"/>
-        <property name="width" readable="true" writable="true"/>
+        <property name="tFoot"/>
+        <property name="tHead"/>
+        <property name="width"/>
 
         <function name="createCaption">
             <doclink
@@ -2407,7 +2407,7 @@
         <doclink
             url="http://msdn.microsoft.com/en-us/library/ms535911.aspx"
             descr="MSDN documentation"/>
-        <property name="bgColor" readable="true" writable="true"/>
+        <property name="bgColor"/>
         <property name="cells" readable="true" writable="false"/>
         <property name="rowIndex" readable="true" writable="false">
             <doclink
@@ -2441,28 +2441,28 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElement"
         JSObject="true">
-        <property name="ch" readable="true" writable="true"/>
-        <property name="chOff" readable="true" writable="true"/>
-        <property name="vAlign" readable="true" writable="true"/>
+        <property name="ch"/>
+        <property name="chOff"/>
+        <property name="vAlign"/>
     </class>
 
     <class extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
-        <property name="accessKey" readable="true" writable="true">
+        <property name="accessKey">
             <browser name="Firefox"/>
         </property>
-        <property name="cols" readable="true" writable="true"/>
-        <property name="defaultValue" readable="true" writable="true">
+        <property name="cols"/>
+        <property name="defaultValue">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms533718.aspx"
                 descr="MSDN documentation"/>
         </property>
-        <property name="readOnly" readable="true" writable="true"/>
-        <property name="rows" readable="true" writable="true"/>
-        <property name="selectionEnd" readable="true" writable="true">
+        <property name="readOnly"/>
+        <property name="rows"/>
+        <property name="selectionEnd">
             <browser name="Firefox"/>
         </property>
-        <property name="selectionStart" readable="true" writable="true">
+        <property name="selectionStart">
             <browser name="Firefox"/>
         </property>
         <property name="textLength" readable="true" writable="false">
@@ -2476,7 +2476,7 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTitle">
-        <property name="text" readable="true" writable="true"/>
+        <property name="text"/>
     </class>
 
     <class extends="HTMLListElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUListElement"
@@ -2637,14 +2637,14 @@
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Location"
         JSObject="true">
-        <property name="hash" readable="true" writable="true"/>
-        <property name="host" readable="true" writable="true"/>
-        <property name="hostname" readable="true" writable="true"/>
-        <property name="href" readable="true" writable="true"/>
-        <property name="pathname" readable="true" writable="true"/>
-        <property name="port" readable="true" writable="true"/>
-        <property name="protocol" readable="true" writable="true"/>
-        <property name="search" readable="true" writable="true"/>
+        <property name="hash"/>
+        <property name="host"/>
+        <property name="hostname"/>
+        <property name="href"/>
+        <property name="pathname"/>
+        <property name="port"/>
+        <property name="protocol"/>
+        <property name="search"/>
 
         <function name="assign"/>
         <function name="reload"/>
@@ -2728,7 +2728,7 @@
         <browser name="Internet Explorer"/>
 
         <property name="name" readable="true" writable="false"/>
-        <property name="urn" readable="true" writable="true"/>
+        <property name="urn"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection" JSObject="true">
@@ -2819,7 +2819,7 @@
         <property name="nextSibling" readable="true" writable="false"/>
         <property name="nodeName" readable="true" writable="false"/>
         <property name="nodeType" readable="true" writable="false"/>
-        <property name="nodeValue" readable="true" writable="true"/>
+        <property name="nodeValue"/>
         <property name="ownerDocument" readable="true" writable="false"/>
         <property name="parentElement" readable="true" writable="false">
             <browser name="Firefox" min-version="9"/>
@@ -2830,7 +2830,7 @@
             <browser name="Firefox"/>
         </property>
         <property name="previousSibling" readable="true" writable="false"/>
-        <property name="textContent" readable="true" writable="true">
+        <property name="textContent">
             <browser name="Firefox"/>
         </property>
         <property name="xml" readable="true" writable="false">
@@ -2903,13 +2903,13 @@
         JSObject="true">
         <browser name="Firefox" min-version="3"/>
         <property name="length" readable="true" writable="false"/>
-        <property name="oncached" readable="true" writable="true"/>
-        <property name="onchecking" readable="true" writable="true"/>
-        <property name="ondownloading" readable="true" writable="true"/>
-        <property name="onerror" readable="true" writable="true"/>
-        <property name="onnoupdate" readable="true" writable="true"/>
-        <property name="onprogress" readable="true" writable="true"/>
-        <property name="onupdateready" readable="true" writable="true"/>
+        <property name="oncached"/>
+        <property name="onchecking"/>
+        <property name="ondownloading"/>
+        <property name="onerror"/>
+        <property name="onnoupdate"/>
+        <property name="onprogress"/>
+        <property name="onupdateready"/>
         <property name="status" readable="true" writable="false"/>
         <function name="add"/>
         <function name="hasItem"/>
@@ -2943,7 +2943,7 @@
 
     <class extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.ProcessingInstruction"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomProcessingInstruction">
-        <property name="data" readable="true" writable="true"/>
+        <property name="data"/>
         <property name="target" readable="true" writable="false"/>
     </class>
 
@@ -2992,7 +2992,7 @@
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.RowContainer"
         JSObject="true">
-        <property name="align" readable="true" writable="true"/>
+        <property name="align"/>
         <property name="rows" readable="true" writable="false"/>
         <function name="deleteRow">
             <doclink
@@ -3025,18 +3025,18 @@
         <property name="availLeft" readable="true" writable="false"/>
         <property name="availTop" readable="true" writable="false"/>
         <property name="availWidth" readable="true" writable="false"/>
-        <property name="bufferDepth" readable="true" writable="true"/>
+        <property name="bufferDepth"/>
         <property name="colorDepth" readable="true" writable="false"/>
         <property name="deviceXDPI" readable="true" writable="false"/>
         <property name="deviceYDPI" readable="true" writable="false"/>
         <property name="fontSmoothingEnabled" readable="true" writable="false"/>
         <property name="height" readable="true" writable="false"/>
-        <property name="left" readable="true" writable="true"/>
+        <property name="left"/>
         <property name="logicalXDPI" readable="true" writable="false"/>
         <property name="logicalYDPI" readable="true" writable="false"/>
         <property name="pixelDepth" readable="true" writable="false"/>
-        <property name="top" readable="true" writable="true"/>
-        <property name="updateInterval" readable="true" writable="true"/>
+        <property name="top"/>
+        <property name="updateInterval"/>
         <property name="width" readable="true" writable="false"/>
     </class>
 
@@ -3579,7 +3579,7 @@
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.TextRange" JSObject="true">
         <browser name="Internet Explorer"/>
         <property name="htmlText" readable="true" writable="false"/>
-        <property name="text" readable="true" writable="true"/>
+        <property name="text"/>
         <function name="collapse"/>
         <function name="duplicate"/>
         <function name="inRange"/>
@@ -3592,7 +3592,7 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.TreeWalker" JSObject="true">
-        <property name="currentNode" readable="true" writable="true"/>
+        <property name="currentNode"/>
         <property name="expandEntityReferences" readable="true" writable="false"/>
         <property name="filter" readable="true" writable="false"/>
         <property name="root" readable="true" writable="false"/>
@@ -3642,10 +3642,10 @@
         <constant name="OPEN"/>
         <constant name="CLOSING"/>
         <constant name="CLOSED"/>
-        <property name="onerror" readable="true" writable="true"/>
-        <property name="onopen" readable="true" writable="true"/>
-        <property name="onmessage" readable="true" writable="true"/>
-        <property name="onclose" readable="true" writable="true"/>
+        <property name="onerror"/>
+        <property name="onopen"/>
+        <property name="onmessage"/>
+        <property name="onclose"/>
         <property name="readyState" readable="true" writable="false"/>
         <function name="close"/>
         <function name="send"/>
@@ -3663,7 +3663,7 @@
             <browser name="Internet Explorer"/>
         </property>
         <property name="closed" readable="true" writable="false"/>
-        <property name="controllers" readable="true" writable="true">
+        <property name="controllers">
             <browser name="Firefox"/>
         </property>
         <property name="document" readable="true" writable="false"/>
@@ -3690,8 +3690,8 @@
             <browser name="Internet Explorer" min-version="8"/>
             <browser name="Firefox" min-version="3.5"/>
         </property>
-        <property name="location" readable="true" writable="true"/>
-        <property name="console" readable="true" writable="true">
+        <property name="location"/>
+        <property name="console">
             <browser name="Internet Explorer" min-version="9"/>
             <browser name="Firefox" min-version="3.5"/>
         </property>
@@ -3704,18 +3704,18 @@
         <property name="mozPaintCount" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
-        <property name="name" readable="true" writable="true"/>
+        <property name="name"/>
         <property name="navigator" readable="true" writable="false"/>
-        <property name="onbeforeunload" readable="true" writable="true"/>
-        <property name="onclick" readable="true" writable="true"/>
-        <property name="ondblclick" readable="true" writable="true"/>
-        <property name="onerror" readable="true" writable="true"/>
-        <property name="onload" readable="true" writable="true"/>
-        <property name="onhashchange" readable="true" writable="true">
+        <property name="onbeforeunload"/>
+        <property name="onclick"/>
+        <property name="ondblclick"/>
+        <property name="onerror"/>
+        <property name="onload"/>
+        <property name="onhashchange">
             <browser name="Internet Explorer" min-version="8"/>
             <browser name="Firefox" min-version="3.6"/>
         </property>
-        <property name="opener" readable="true" writable="true"/>
+        <property name="opener"/>
         <property name="outerHeight" readable="true" writable="false">
             <browser name="Firefox"/>
         </property>
@@ -3741,8 +3741,8 @@
             <browser name="Internet Explorer" min-version="8"/>
             <browser name="Firefox" min-version="3"/>
         </property>
-        <property name="status" readable="true" writable="true"/>
-        <property name="top" readable="true" writable="true"/>
+        <property name="status"/>
+        <property name="top"/>
         <property name="window" readable="true" writable="false"/>
 
         <function name="addEventListener">
@@ -3863,7 +3863,7 @@
 
     <class extends="Attr" classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLAttr"
         JSObject="true">
-        <property name="text" readable="true" writable="true">
+        <property name="text">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms762687.aspx"
                 descr="MSDN documentation"/>
@@ -3874,7 +3874,7 @@
     <class extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument"
         JSObject="true">
         <browser name="Firefox"/>
-        <property name="async" readable="true" writable="true">
+        <property name="async">
             <doclink url="http://msdn2.microsoft.com/en-us/library/ms761398.aspx"
                     descr="MSDN documentation"/>
         </property>
@@ -3883,7 +3883,7 @@
                     descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
         </property>
-        <property name="preserveWhiteSpace" readable="true" writable="true">
+        <property name="preserveWhiteSpace">
             <doclink url="http://msdn2.microsoft.com/en-us/library/ms761353.aspx"
                     descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
@@ -3942,11 +3942,11 @@
         <browser name="Firefox"/>
         <browser name="Chrome"/>
         <browser name="Internet Explorer" min-version="7"/>
-        <property name="onerror" readable="true" writable="true"/>
-        <property name="onload" readable="true" writable="true">
+        <property name="onerror"/>
+        <property name="onload">
             <browser name="Firefox"/>
         </property>
-        <property name="onreadystatechange" readable="true" writable="true"/>
+        <property name="onreadystatechange"/>
         <property name="readyState" readable="true" writable="false"/>
         <property name="responseText" readable="true" writable="false"/>
         <property name="responseXML" readable="true" writable="false"/>
@@ -4000,16 +4000,16 @@
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.XSLTemplate" JSObject="true">
         <browser name="Internet Explorer"/>
-        <property name="stylesheet" readable="true" writable="true"/>
+        <property name="stylesheet"/>
         <function name="createProcessor"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.XSLTProcessor"
         jsConstructor="jsConstructor" JSObject="true">
-        <property name="input" readable="true" writable="true">
+        <property name="input">
             <browser name="Internet Explorer"/>
         </property>
-        <property name="output" readable="true" writable="true">
+        <property name="output">
             <browser name="Internet Explorer"/>
         </property>
         <function name="addParameter">

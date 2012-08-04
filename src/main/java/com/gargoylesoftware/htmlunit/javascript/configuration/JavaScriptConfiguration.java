@@ -430,11 +430,11 @@ public final class JavaScriptConfiguration {
         boolean readable = false;
         boolean writable = false;
         final String readFlag = element.getAttribute("readable");
-        if ("true".equalsIgnoreCase(readFlag)) {
+        if ("true".equalsIgnoreCase(readFlag) || readFlag.isEmpty()) {
             readable = true;
         }
         final String writeFlag = element.getAttribute("writable");
-        if ("true".equalsIgnoreCase(writeFlag)) {
+        if ("true".equalsIgnoreCase(writeFlag) || writeFlag.isEmpty()) {
             writable = true;
         }
         classConfiguration.addProperty(propertyName, readable, writable);
