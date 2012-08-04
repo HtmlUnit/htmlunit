@@ -310,6 +310,7 @@ public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Tries(3)
     public void newJobStartedAfterWait() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
