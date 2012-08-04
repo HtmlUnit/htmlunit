@@ -780,6 +780,10 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         responseHeaders.clear();
         responseHeaders.add(new NameValuePair("Date", "Fri, 16 Oct 2009 13:59:47 GMT"));
         testLastModified(responseHeaders);
+
+        // for some strange reasons, the selenium driven browser is in an invalid
+        // state after this test
+        shutDownAll();
     }
 
     private void testLastModified(final List<NameValuePair> responseHeaders) throws Exception {
