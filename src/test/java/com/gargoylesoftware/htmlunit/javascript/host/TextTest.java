@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
  * Tests for {@link Text}.
@@ -28,12 +28,12 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class TextTest extends WebDriverTestCase {
+public class TextTest extends WebServerTestCase {
 
     /**
      * @throws Exception if the test fails
      */
-    @Test
+//    @Test
     @Alerts(IE = "null", FF = "[object Text]")
     public void simpleScriptable() throws Exception {
         final String html
@@ -43,6 +43,22 @@ public class TextTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body onload='test()'> </body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "undefined", FF = "abcd")
+    public void wholeText() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var div = document.getElementById('myId');\n"
+            + "  alert(div.firstChild.wholeText);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'><div id='myId'>abcd</></body></html>";
+        loadPageWithAlerts(html);
     }
 }

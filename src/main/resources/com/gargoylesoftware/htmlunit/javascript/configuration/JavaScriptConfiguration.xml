@@ -3569,6 +3569,10 @@
 
     <class extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Text"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomText">
+        <property name="wholeText" readable="true" writable="false">
+            <browser name="Firefox"/>
+            <browser name="Chrome"/>
+        </property>
         <function name="splitText"/>
     </class>
 

@@ -47,4 +47,12 @@ public class Text extends CharacterDataImpl {
         final DomText domText = (DomText) getDomNodeOrDie();
         return getScriptableFor(domText.splitText(offset));
     }
+
+    /**
+     * Returns wholeText value.
+     * @return wholeText value
+     */
+    public String jsxGet_wholeText() {
+        return ((DomText) getDomNodeOrDie()).getWholeText();
+    }
 }

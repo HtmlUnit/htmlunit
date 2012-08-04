@@ -88,10 +88,11 @@ public class DomText extends DomCharacterData implements Text {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     public String getWholeText() {
-        throw new UnsupportedOperationException("DomText.getWholeText is not yet implemented.");
+        // I couldn't find a way to have a nearby EntityReference node (either sibling or parent)
+        // if this is found, have a look at xerces TextImpl.
+        return getNodeValue();
     }
 
     /**
