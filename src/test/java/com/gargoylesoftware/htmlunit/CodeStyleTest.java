@@ -119,6 +119,7 @@ public class CodeStyleTest {
                 loggingEnabled(lines, relativePath);
                 //webDriverWebClient(lines, relativePath);
                 browserVersion_isIE(lines, relativePath);
+                versionBeforeAuthor(lines, relativePath);
             }
         }
     }
@@ -612,6 +613,21 @@ public class CodeStyleTest {
                             + relativePath + ", line: " + index);
                 }
                 index++;
+            }
+        }
+    }
+
+    /**
+     * Verifies that \@version is always before \@author.
+     */
+    private void versionBeforeAuthor(final List<String> lines, final String relativePath) {
+        boolean versionFound = false;
+        for (final String line : lines) {
+            if (line.startsWith(" * @version")) {
+                versionFound = true;
+            }
+            else if (line.startsWith(" * @author") && !versionFound) {
+                addFailure("@version should exist before @author in: " + relativePath);
             }
         }
     }

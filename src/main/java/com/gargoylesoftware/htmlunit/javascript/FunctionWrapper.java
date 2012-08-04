@@ -20,8 +20,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Wrapper for a {@link Function} delegating all calls to the wrapped instance.
- * @author Marc Guillemot
  * @version $Revision$
+ * @author Marc Guillemot
  */
 class FunctionWrapper implements Function {
     private final Function wrapped_;

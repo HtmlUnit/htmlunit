@@ -26,8 +26,8 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
 
 /**
  * Responsible for URL creation.
- * @author Marc Guillemot
  * @version $Revision$
+ * @author Marc Guillemot
  */
 abstract class URLCreator {
     abstract URL toUrlUnsafeClassic(final String url) throws MalformedURLException;

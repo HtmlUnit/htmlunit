@@ -26,8 +26,8 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 /**
  * Replacement (in fact a wrapper) for Rhino's native toString function on Function prototype
  * allowing to produce the desired formatting.
- * @author Marc Guillemot
  * @version $Revision$
+ * @author Marc Guillemot
  */
 class NativeFunctionToStringFunction extends FunctionWrapper {
     private final String separator_;

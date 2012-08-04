@@ -19,8 +19,8 @@ import java.util.Map;
 
 /**
  * Utility holding information about association between MIME type and file extensions.
- * @author Marc Guillemot
  * @version $Revision$
+ * @author Marc Guillemot
  */
 public final class MimeType {
     private static final Map<String, String> type2extension = buildMap();

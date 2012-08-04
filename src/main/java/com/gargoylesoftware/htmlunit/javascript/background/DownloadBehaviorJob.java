@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * asynchronously, when the download is finished, the method specified
  * by callback is called with one argument - the content of the response as string.
  * @see #startDownload(String, Function)
+ * @version $Revision$
  * @author <a href="mailto:stefan@anzinger.net">Stefan Anzinger</a>
  */
 final class DownloadBehaviorJob extends BasicJavaScriptJob {
