@@ -928,7 +928,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
 
     /**
      * Test types of properties.
-     * Expected values are missing for FF3, IE7 and IE8.
+     * Expected values are missing for IE7 and IE8.
      * @throws Exception if the test fails
      */
     @Test
