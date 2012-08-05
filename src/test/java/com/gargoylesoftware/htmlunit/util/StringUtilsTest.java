@@ -32,23 +32,6 @@ public class StringUtilsTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void isColorHexadecimal() throws Exception {
-        assertFalse(StringUtils.isColorHexadecimal(null));
-        assertFalse(StringUtils.isColorHexadecimal(""));
-        assertFalse(StringUtils.isColorHexadecimal("    "));
-
-        assertFalse(StringUtils.isColorHexadecimal("#a1"));
-        assertTrue(StringUtils.isColorHexadecimal("#1a1"));
-        assertFalse(StringUtils.isColorHexadecimal("#1a11"));
-        assertFalse(StringUtils.isColorHexadecimal("#1a111"));
-        assertTrue(StringUtils.isColorHexadecimal("#11aa11"));
-        assertTrue(StringUtils.isColorHexadecimal("#11aaAF"));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void asColorHexadecimal() throws Exception {
         assertNull(StringUtils.asColorHexadecimal(null));
         assertNull(StringUtils.asColorHexadecimal(""));

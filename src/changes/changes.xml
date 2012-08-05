@@ -12,7 +12,8 @@
                 JavaScript: fix document.bgColor, body.aLink, .bgColor, .link, .text and .vLink.
             </action>
             <action type="add" dev="asashour">
-                JavaScript: implement document.head.
+                JavaScript: implement document.head, .alinkColor, .linkColor
+                and .vlinkColor.
             </action>
             <action type="add" dev="asashour">
                 DOM: implement text.getWholeText().

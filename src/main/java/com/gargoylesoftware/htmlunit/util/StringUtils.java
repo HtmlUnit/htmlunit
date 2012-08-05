@@ -173,18 +173,6 @@ public final class StringUtils {
     }
 
     /**
-     * Returns true if the specified token is an RGB in hexadecimal notation.
-     * @param token the token to check
-     * @return whether the token is a color in hexadecimal notation or not
-     */
-    public static boolean isColorHexadecimal(final String token) {
-        if (token == null) {
-            return false;
-        }
-        return HEX_COLOR.matcher(token.trim()).matches();
-    }
-
-    /**
      * Returns a Color parsed from the given RGB in hexadecimal notation.
      * @param token the token to parse
      * @return a Color whether the token is a color RGB in hexadecimal notation; otherwise null

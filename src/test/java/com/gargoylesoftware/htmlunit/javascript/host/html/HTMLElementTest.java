@@ -2848,4 +2848,37 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = {"", "#0000aa", "#000000", "#ffebcd", "#ab00e0", "#b00e00" },
+//            IE9 = {"", "#0000aa", "#0", "blanchedalmond", "#ab00e", "#b00e0" },
+            FF = {"", "#0000aa", "x", "BlanchedAlmond", "aBlue", "bluex" })
+    public void setColorAttribute() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(b.vLink);\n"
+            + "        document.vlinkColor = '#0000aa';\n"
+            + "        alert(b.vLink);\n"
+            + "        document.vlinkColor = 'x';\n"
+            + "        alert(b.vLink);\n"
+            + "        document.vlinkColor = 'BlanchedAlmond';\n"
+            + "        alert(b.vLink);\n"
+            + "        document.vlinkColor = 'aBlue';\n"
+            + "        alert(b.vLink);\n"
+            + "        document.vlinkColor = 'bluex';\n"
+            + "        alert(b.vLink);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

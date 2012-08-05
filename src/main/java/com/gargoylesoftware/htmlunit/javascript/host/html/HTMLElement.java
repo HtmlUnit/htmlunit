@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -104,6 +105,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
     private static final Pattern PERCENT_VALUE = Pattern.compile("\\d+%");
+    /* http://msdn.microsoft.com/en-us/library/ie/aa358802.aspx */
+    private static final Map<String, String> COLORS_MAP_IE = new HashMap<String, String>();
 
     private static final Log LOG = LogFactory.getLog(HTMLElement.class);
 
@@ -140,6 +143,156 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private int scrollTop_;
     private String uniqueID_;
     private CSSStyleDeclaration style_;
+
+    static {
+        COLORS_MAP_IE.put("AliceBlue", "#F0F8FF");
+        COLORS_MAP_IE.put("AntiqueWhite", "#FAEBD7");
+        COLORS_MAP_IE.put("Aqua", "#00FFFF");
+        COLORS_MAP_IE.put("Aquamarine", "#7FFFD4");
+        COLORS_MAP_IE.put("Azure", "#F0FFFF");
+        COLORS_MAP_IE.put("Beige", "#F5F5DC");
+        COLORS_MAP_IE.put("Bisque", "#FFE4C4");
+        COLORS_MAP_IE.put("Black", "#000000");
+        COLORS_MAP_IE.put("BlanchedAlmond", "#FFEBCD");
+        COLORS_MAP_IE.put("Blue", "#0000FF");
+        COLORS_MAP_IE.put("BlueViolet", "#8A2BE2");
+        COLORS_MAP_IE.put("Brown", "#A52A2A");
+        COLORS_MAP_IE.put("BurlyWood", "#DEB887");
+        COLORS_MAP_IE.put("CadetBlue", "#5F9EA0");
+        COLORS_MAP_IE.put("Chartreuse", "#7FFF00");
+        COLORS_MAP_IE.put("Chocolate", "#D2691E");
+        COLORS_MAP_IE.put("Coral", "#FF7F50");
+        COLORS_MAP_IE.put("CornflowerBlue", "#6495ED");
+        COLORS_MAP_IE.put("Cornsilk", "#FFF8DC");
+        COLORS_MAP_IE.put("Crimson", "#DC143C");
+        COLORS_MAP_IE.put("Cyan", "#00FFFF");
+        COLORS_MAP_IE.put("DarkBlue", "#00008B");
+        COLORS_MAP_IE.put("DarkCyan", "#008B8B");
+        COLORS_MAP_IE.put("DarkGoldenrod", "#B8860B");
+        COLORS_MAP_IE.put("DarkGray", "#A9A9A9");
+        COLORS_MAP_IE.put("DarkGrey", "#A9A9A9");
+        COLORS_MAP_IE.put("DarkGreen", "#006400");
+        COLORS_MAP_IE.put("DarkKhaki", "#BDB76B");
+        COLORS_MAP_IE.put("DarkMagenta", "#8B008B");
+        COLORS_MAP_IE.put("DarkOliveGreen", "#556B2F");
+        COLORS_MAP_IE.put("DarkOrange", "#FF8C00");
+        COLORS_MAP_IE.put("DarkOrchid", "#9932CC");
+        COLORS_MAP_IE.put("DarkRed", "#8B0000");
+        COLORS_MAP_IE.put("DarkSalmon", "#E9967A");
+        COLORS_MAP_IE.put("DarkSeaGreen", "#8FBC8F");
+        COLORS_MAP_IE.put("DarkSlateBlue", "#483D8B");
+        COLORS_MAP_IE.put("DarkSlateGray", "#2F4F4F");
+        COLORS_MAP_IE.put("DarkSlateGrey", "#2F4F4F");
+        COLORS_MAP_IE.put("DarkTurquoise", "#00CED1");
+        COLORS_MAP_IE.put("DarkViolet", "#9400D3");
+        COLORS_MAP_IE.put("DeepPink", "#FF1493");
+        COLORS_MAP_IE.put("DeepSkyBlue", "#00BFFF");
+        COLORS_MAP_IE.put("DimGray", "#696969");
+        COLORS_MAP_IE.put("DimGrey", "#696969");
+        COLORS_MAP_IE.put("DodgerBlue", "#1E90FF");
+        COLORS_MAP_IE.put("FireBrick", "#B22222");
+        COLORS_MAP_IE.put("FloralWhite", "#FFFAF0");
+        COLORS_MAP_IE.put("ForestGreen", "#228B22");
+        COLORS_MAP_IE.put("Fuchsia", "#FF00FF");
+        COLORS_MAP_IE.put("Gainsboro", "#DCDCDC");
+        COLORS_MAP_IE.put("GhostWhite", "#F8F8FF");
+        COLORS_MAP_IE.put("Gold", "#FFD700");
+        COLORS_MAP_IE.put("Goldenrod", "#DAA520");
+        COLORS_MAP_IE.put("Gray", "#808080");
+        COLORS_MAP_IE.put("Grey", "#808080");
+        COLORS_MAP_IE.put("Green", "#008000");
+        COLORS_MAP_IE.put("GreenYellow", "#ADFF2F");
+        COLORS_MAP_IE.put("Honeydew", "#F0FFF0");
+        COLORS_MAP_IE.put("HotPink", "#FF69B4");
+        COLORS_MAP_IE.put("IndianRed", "#CD5C5C");
+        COLORS_MAP_IE.put("Indigo", "#4B0082");
+        COLORS_MAP_IE.put("Ivory", "#FFFFF0");
+        COLORS_MAP_IE.put("Khaki", "#F0E68C");
+        COLORS_MAP_IE.put("Lavender", "#E6E6FA");
+        COLORS_MAP_IE.put("LavenderBlush", "#FFF0F5");
+        COLORS_MAP_IE.put("LawnGreen", "#7CFC00");
+        COLORS_MAP_IE.put("LemonChiffon", "#FFFACD");
+        COLORS_MAP_IE.put("LightBlue", "#ADD8E6");
+        COLORS_MAP_IE.put("LightCoral", "#F08080");
+        COLORS_MAP_IE.put("LightCyan", "#E0FFFF");
+        COLORS_MAP_IE.put("LightGoldenrodYellow", "#FAFAD2");
+        COLORS_MAP_IE.put("LightGreen", "#90EE90");
+        COLORS_MAP_IE.put("LightGray", "#D3D3D3");
+        COLORS_MAP_IE.put("LightGrey", "#D3D3D3");
+        COLORS_MAP_IE.put("LightPink", "#FFB6C1");
+        COLORS_MAP_IE.put("LightSalmon", "#FFA07A");
+        COLORS_MAP_IE.put("LightSeaGreen", "#20B2AA");
+        COLORS_MAP_IE.put("LightSkyBlue", "#87CEFA");
+        COLORS_MAP_IE.put("LightSlateGray", "#778899");
+        COLORS_MAP_IE.put("LightSlateGrey", "#778899");
+        COLORS_MAP_IE.put("LightSteelBlue", "#B0C4DE");
+        COLORS_MAP_IE.put("LightYellow", "#FFFFE0");
+        COLORS_MAP_IE.put("Lime", "#00FF00");
+        COLORS_MAP_IE.put("LimeGreen", "#32CD32");
+        COLORS_MAP_IE.put("Linen", "#FAF0E6");
+        COLORS_MAP_IE.put("Magenta", "#FF00FF");
+        COLORS_MAP_IE.put("Maroon", "#800000");
+        COLORS_MAP_IE.put("MediumAquamarine", "#66CDAA");
+        COLORS_MAP_IE.put("MediumBlue", "#0000CD");
+        COLORS_MAP_IE.put("MediumOrchid", "#BA55D3");
+        COLORS_MAP_IE.put("MediumPurple", "#9370DB");
+        COLORS_MAP_IE.put("MediumSeaGreen", "#3CB371");
+        COLORS_MAP_IE.put("MediumSlateBlue", "#7B68EE");
+        COLORS_MAP_IE.put("MediumSpringGreen", "#00FA9A");
+        COLORS_MAP_IE.put("MediumTurquoise", "#48D1CC");
+        COLORS_MAP_IE.put("MediumVioletRed", "#C71585");
+        COLORS_MAP_IE.put("MidnightBlue", "#191970");
+        COLORS_MAP_IE.put("MintCream", "#F5FFFA");
+        COLORS_MAP_IE.put("MistyRose", "#FFE4E1");
+        COLORS_MAP_IE.put("Moccasin", "#FFE4B5");
+        COLORS_MAP_IE.put("NavajoWhite", "#FFDEAD");
+        COLORS_MAP_IE.put("Navy", "#000080");
+        COLORS_MAP_IE.put("OldLace", "#FDF5E6");
+        COLORS_MAP_IE.put("Olive", "#808000");
+        COLORS_MAP_IE.put("OliveDrab", "#6B8E23");
+        COLORS_MAP_IE.put("Orange", "#FFA500");
+        COLORS_MAP_IE.put("OrangeRed", "#FF4500");
+        COLORS_MAP_IE.put("Orchid", "#DA70D6");
+        COLORS_MAP_IE.put("PaleGoldenrod", "#EEE8AA");
+        COLORS_MAP_IE.put("PaleGreen", "#98FB98");
+        COLORS_MAP_IE.put("PaleTurquoise", "#AFEEEE");
+        COLORS_MAP_IE.put("PaleVioletRed", "#DB7093");
+        COLORS_MAP_IE.put("PapayaWhip", "#FFEFD5");
+        COLORS_MAP_IE.put("PeachPuff", "#FFDAB9");
+        COLORS_MAP_IE.put("Peru", "#CD853F");
+        COLORS_MAP_IE.put("Pink", "#FFC0CB");
+        COLORS_MAP_IE.put("Plum", "#DDA0DD");
+        COLORS_MAP_IE.put("PowderBlue", "#B0E0E6");
+        COLORS_MAP_IE.put("Purple", "#800080");
+        COLORS_MAP_IE.put("Red", "#FF0000");
+        COLORS_MAP_IE.put("RosyBrown", "#BC8F8F");
+        COLORS_MAP_IE.put("RoyalBlue", "#4169E1");
+        COLORS_MAP_IE.put("SaddleBrown", "#8B4513");
+        COLORS_MAP_IE.put("Salmon", "#FA8072");
+        COLORS_MAP_IE.put("SandyBrown", "#F4A460");
+        COLORS_MAP_IE.put("SeaGreen", "#2E8B57");
+        COLORS_MAP_IE.put("Seashell", "#FFF5EE");
+        COLORS_MAP_IE.put("Sienna", "#A0522D");
+        COLORS_MAP_IE.put("Silver", "#C0C0C0");
+        COLORS_MAP_IE.put("SkyBlue", "#87CEEB");
+        COLORS_MAP_IE.put("SlateBlue", "#6A5ACD");
+        COLORS_MAP_IE.put("SlateGray", "#708090");
+        COLORS_MAP_IE.put("SlateGrey", "#708090");
+        COLORS_MAP_IE.put("Snow", "#FFFAFA");
+        COLORS_MAP_IE.put("SpringGreen", "#00FF7F");
+        COLORS_MAP_IE.put("SteelBlue", "#4682B4");
+        COLORS_MAP_IE.put("Tan", "#D2B48C");
+        COLORS_MAP_IE.put("Teal", "#008080");
+        COLORS_MAP_IE.put("Thistle", "#D8BFD8");
+        COLORS_MAP_IE.put("Tomato", "#FF6347");
+        COLORS_MAP_IE.put("Turquoise", "#40E0D0");
+        COLORS_MAP_IE.put("Violet", "#EE82EE");
+        COLORS_MAP_IE.put("Wheat", "#F5DEB3");
+        COLORS_MAP_IE.put("White", "#FFFFFF");
+        COLORS_MAP_IE.put("WhiteSmoke", "#F5F5F5");
+        COLORS_MAP_IE.put("Yellow", "#FFFF00");
+        COLORS_MAP_IE.put("YellowGreen", "#9ACD32");
+    }
 
     /**
      * The value of the "ch" JavaScript attribute for browsers that say that they support it, but do not really
@@ -2058,9 +2211,37 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected void setColorAttribute(final String name, final String value) {
         String s = value;
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_COLOR_RESTRICT)
-            && !com.gargoylesoftware.htmlunit.util.StringUtils.isColorHexadecimal(value)) {
-            s = "#000000";
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_COLOR_RESTRICT) && !s.isEmpty()) {
+            //For IE9, check HTMLElementTest#setColorAttribute
+
+            s = null;
+            for (final String key : COLORS_MAP_IE.keySet()) {
+                if (key.equalsIgnoreCase(value)) {
+                    s = COLORS_MAP_IE.get(key).toLowerCase();
+                    break;
+                }
+            }
+            if (s == null) {
+                s = value.toLowerCase();
+                if (s.charAt(0) == '#') {
+                    s = s.substring(1);
+                }
+                final StringBuilder builder = new StringBuilder(7);
+                for (int x = 0; x < 6 && x < s.length(); x++) {
+                    final char ch = s.charAt(x);
+                    if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'f')) {
+                        builder.append(ch);
+                    }
+                    else {
+                        builder.append('0');
+                    }
+                }
+                while (builder.length() < 6) {
+                    builder.append('0');
+                }
+                builder.insert(0, '#');
+                s = builder.toString();
+            }
         }
         getDomNodeOrDie().setAttribute(name, s);
     }

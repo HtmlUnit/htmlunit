@@ -1631,5 +1631,4 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
-
 }
