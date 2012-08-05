@@ -1773,7 +1773,7 @@
             <browser name="Internet Explorer"/>
         </property>
         <property name="head">
-            <browser name="Firefox"/>
+            <browser name="Firefox" min-version="4.0"/>
         </property>
         <property name="images" readable="true" writable="false"/>
         <property name="lastModified" readable="true" writable="false"/>

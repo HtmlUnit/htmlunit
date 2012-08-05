@@ -1532,7 +1532,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLHeadElement]", IE = "undefined")
+    @Alerts(FF = "[object HTMLHeadElement]",
+            FF3_6 = "undefined",
+            IE = "undefined")
     public void head() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
