@@ -107,7 +107,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3_6 = "foo,change,")
+    @Alerts(FF = "foo,change,")
     public void onchangeFires() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -127,7 +127,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         driver.findElement(By.id("radio")).click();
 
         assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
-                '[' + driver.findElement(By.id("myTextarea")).getText() + ']');
+                '[' + driver.findElement(By.id("myTextarea")).getAttribute("value") + ']');
     }
 
     /**
