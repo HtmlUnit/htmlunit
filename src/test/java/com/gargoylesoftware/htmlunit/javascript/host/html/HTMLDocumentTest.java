@@ -1668,4 +1668,29 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "", "true" }, FF3_6 = { "", "false" }, IE = { })
+    @NotYetImplemented(Browser.FF3_6)
+//            IE9 = {"", "true" }
+    public void getSelection() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        if (document.getSelection) {\n"
+            + "          alert(document.getSelection());\n"
+            + "          alert(document.getSelection() === window.getSelection());\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

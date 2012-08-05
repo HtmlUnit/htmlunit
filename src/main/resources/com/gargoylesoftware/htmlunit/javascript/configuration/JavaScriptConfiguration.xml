@@ -1844,6 +1844,11 @@
             <browser name="Firefox" min-version="3"/>
         </function>
         <function name="getElementsByName"/>
+        <function name="getSelection">
+            <browser name="Firefox"/>
+            <browser name="Internet Explorer" min-version="9"/>
+            <browser name="Chrome"/>
+        </function>
         <function name="open">
             <doclink
                 url="http://msdn.microsoft.com/en-us/library/ms536652.aspx"

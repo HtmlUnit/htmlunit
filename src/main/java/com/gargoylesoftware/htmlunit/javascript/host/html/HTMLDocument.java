@@ -1838,4 +1838,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         //ignore
     }
 
+    /**
+     * Returns the current selection.
+     * @return the current selection
+     */
+    public Selection jsxFunction_getSelection() {
+        return getWindow().jsxFunction_getSelection();
+    }
 }

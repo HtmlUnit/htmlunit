@@ -24,7 +24,7 @@
                 JavaScript: fix document.bgColor, .fgColor, body.aLink, .bgColor, .link, .text and .vLink.
             </action>
             <action type="add" dev="asashour">
-                JavaScript: implement document.head, .alinkColor, .linkColor
+                JavaScript: implement document.getSelection(), .head, .alinkColor, .linkColor
                 and .vlinkColor.
             </action>
             <action type="add" dev="asashour">
