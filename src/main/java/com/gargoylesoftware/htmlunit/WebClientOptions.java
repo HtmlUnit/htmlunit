@@ -42,6 +42,7 @@ public class WebClientOptions  {
     private URL sslClientCertificateUrl_;
     private String sslClientCertificatePassword_;
     private String sslClientCertificateType_;
+    private boolean geolocationEnabled_;
 
     /**
      * Creates an instance.
@@ -202,5 +203,23 @@ public class WebClientOptions  {
      */
     public boolean isPopupBlockerEnabled() {
         return popupBlockerEnabled_;
+    }
+
+    /**
+     * Enables/disables Geolocation support. By default, this property is disabled.
+     *
+     * @param enabled <tt>true</tt> to enable Geolocation support
+     */
+    public void setGeolocationEnabled(final boolean enabled) {
+        geolocationEnabled_ = enabled;
+    }
+
+    /**
+     * Returns <tt>true</tt> if Geolocation is enabled.
+     *
+     * @return <tt>true</tt> if Geolocation is enabled
+     */
+    public boolean isGeolocationEnabled() {
+        return geolocationEnabled_;
     }
 }

@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -73,14 +74,17 @@ public class Geolocation extends SimpleScriptable {
         else {
             errorHandler_ = null;
         }
-        final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory()
-                .createJavaScriptJob(0, null, new Runnable() {
-                    @Override
-                    public void run() {
-                        doGetPosition();
-                    }
-                });
-        getWindow().getWebWindow().getJobManager().addJob(job, getWindow().getWebWindow().getEnclosedPage());
+        final WebWindow webWindow = getWindow().getWebWindow();
+        if (webWindow.getWebClient().getOptions().isGeolocationEnabled()) {
+            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory()
+                    .createJavaScriptJob(0, null, new Runnable() {
+                        @Override
+                        public void run() {
+                            doGetPosition();
+                        }
+                    });
+            webWindow.getJobManager().addJob(job, getWindow().getWebWindow().getEnclosedPage());
+        }
     }
 
     /**
@@ -161,18 +165,14 @@ public class Geolocation extends SimpleScriptable {
                         getParentScope(), new Object[] {position});
             }
             catch (final Exception e) {
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("", e);
-                }
+                LOG.error("", e);
             }
             finally {
                 webClient.closeAllWindows();
             }
         }
         else {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Operation system not supported: " + os);
-            }
+            LOG.error("Operating System not supported: " + os);
         }
     }
 

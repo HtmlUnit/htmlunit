@@ -54,7 +54,19 @@ public class GeolocationTest extends WebServerTestCase {
     @Test
     @Alerts(FF = "12.34567891 98.76543211")
     @NotYetImplemented(Browser.FF) //since it runs on Windows only (for now)
-    public void getCurrentPosition() throws Exception {
+    public void getCurrentPosition_enabled() throws Exception {
+        getCurrentPosition(true);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void getCurrentPosition_disabled() throws Exception {
+        getCurrentPosition(false);
+    }
+
+    private void getCurrentPosition(final boolean geolocationEnabled) throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/test", GetCurrentPositionTestServlet.class);
         servlets.put("/browserLocation", BrowserLocationServlet.class);
@@ -62,6 +74,9 @@ public class GeolocationTest extends WebServerTestCase {
 
         Geolocation.setProviderUrl("http://localhost:" + PORT + "/browserLocation");
         final WebClient client = getWebClient();
+        if (geolocationEnabled) {
+            client.getOptions().setGeolocationEnabled(true);
+        }
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         client.getPage("http://localhost:" + PORT + "/test");
