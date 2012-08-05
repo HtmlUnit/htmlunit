@@ -136,7 +136,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final List<String> expectedValues = stringProperties(expectedText);
-        final List<String> collectedValues = stringProperties(driver.findElement(By.id("myTextarea")).getText());
+        final List<String> collectedValues = stringProperties(driver.findElement(By.id("myTextarea")).
+                getAttribute("value"));
         assertEquals(expectedValues.toString(), collectedValues.toString());
     }
 
