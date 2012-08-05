@@ -1334,6 +1334,28 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
+     * Returns the value of the <tt>fgColor</tt> attribute.
+     * @return the value of the <tt>fgColor</tt> attribute
+     */
+    public String jsxGet_fgColor() {
+        String color = getHtmlPage().getBody().getAttribute("text");
+        if (color == DomElement.ATTRIBUTE_NOT_DEFINED
+                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
+            color = "#000000";
+        }
+        return color;
+    }
+
+    /**
+     * Sets the value of the <tt>fgColor</tt> attribute.
+     * @param color the value of the <tt>fgColor</tt> attribute
+     */
+    public void jsxSet_fgColor(final String color) {
+        final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
+        body.jsxSet_text(color);
+    }
+
+    /**
      * Returns the ready state of the document. This is an IE-only property.
      * @return the ready state of the document
      * @see DomNode#READY_STATE_UNINITIALIZED

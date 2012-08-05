@@ -1548,7 +1548,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
-            DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" })
+            FF = {"", "", "#0000aa", "#0000aa", "x", "x" })
     public void alinkColor() throws Exception {
         final String html =
             "<html>\n"
@@ -1578,7 +1578,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
-            DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" })
+            FF = {"", "", "#0000aa", "#0000aa", "x", "x" })
     public void linkColor() throws Exception {
         final String html =
             "<html>\n"
@@ -1608,7 +1608,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" },
-            DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" })
+            FF = {"", "", "#0000aa", "#0000aa", "x", "x" })
     public void vlinkColor() throws Exception {
         final String html =
             "<html>\n"
@@ -1624,6 +1624,36 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "        document.vlinkColor = 'x';\n"
             + "        alert(document.vlinkColor);\n"
             + "        alert(b.vLink);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body id='body' onload='test()'>blah</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#000000" },
+//            IE9 = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            FF = {"", "", "#0000aa", "#0000aa", "x", "x" })
+    public void fgColor() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var b = document.getElementById('body');\n"
+            + "        alert(document.fgColor);\n"
+            + "        alert(b.text);\n"
+            + "        document.fgColor = '#0000aa';\n"
+            + "        alert(document.fgColor);\n"
+            + "        alert(b.text);\n"
+            + "        document.fgColor = 'x';\n"
+            + "        alert(document.fgColor);\n"
+            + "        alert(b.text);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

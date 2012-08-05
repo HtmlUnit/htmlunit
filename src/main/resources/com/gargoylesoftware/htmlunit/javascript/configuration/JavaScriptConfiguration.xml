@@ -1764,7 +1764,7 @@
                 descr="WC3 Documentation (Level 1)"/>
         </property>
         <property name="embeds" notImplemented="true" readable="true" writable="false"/>
-        <property name="fgColor" notImplemented="true" readable="true" writable="false"/>
+        <property name="fgColor"/>
         <property name="forms" readable="true" writable="false"/>
         <property name="frames" readable="true" writable="false">
             <doclink
