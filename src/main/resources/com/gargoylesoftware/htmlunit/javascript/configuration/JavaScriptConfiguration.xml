@@ -2779,6 +2779,9 @@
             <browser name="Internet Explorer" min-version="9"/>
         </property>
         <property name="onLine" readable="true" writable="false"/>
+        <property name="oscpu" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="platform" readable="true" writable="false"/>
         <property name="plugins" readable="true" writable="false"/>
         <property name="product" readable="true" writable="false">

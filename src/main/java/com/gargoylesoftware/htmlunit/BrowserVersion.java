@@ -563,7 +563,7 @@ public class BrowserVersion implements Serializable {
             return "Windows NT 5.0";
         }
         else if ("mac os x".equals(os)) {
-            return "Macintosh; " + System.getProperty("os.version");
+            return "Macintosh; Intel Mac OS X" + System.getProperty("os.version");
         }
         else if ("linux".equals(os)) {
             return "X11; Linux i686";

@@ -18,7 +18,7 @@
                 setUseInsecureSSL() and setSSLClientCertificate(). Use webClient.getOptions() instead.
             </action>
             <action type="add" dev="asashour">
-                JavaScript: implement navigator.buildID, .vendor and .vendorSub.
+                JavaScript: implement navigator.buildID, .oscpu, .vendor and .vendorSub.
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix document.bgColor, .fgColor, body.aLink, .bgColor, .link, .text and .vLink.

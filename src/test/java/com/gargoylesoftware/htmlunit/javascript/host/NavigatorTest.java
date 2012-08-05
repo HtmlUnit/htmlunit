@@ -375,4 +375,42 @@ public class NavigatorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void oscpu() throws Exception {
+        final String html
+            = "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(navigator.oscpu);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'></body>\n"
+            + "</html>";
+
+        String expectation;
+        if (getBrowserVersion().getNickname().startsWith("FF")) {
+            final String os = System.getProperty("os.name").toLowerCase();
+            if (os.contains("win")) {
+                expectation = "Windows NT 6.1";
+            }
+            else if ("mac os x".equals(os)) {
+                expectation = "Intel Mac OS X " + System.getProperty("os.version");
+            }
+            else if ("linux".equals(os)) {
+                expectation = "Linux i686";
+            }
+            else {
+                expectation = "Windows NT 6.1";
+            }
+        }
+        else {
+            expectation = "undefined";
+        }
+        setExpectedAlerts(expectation);
+        loadPageWithAlerts2(html);
+    }
 }
