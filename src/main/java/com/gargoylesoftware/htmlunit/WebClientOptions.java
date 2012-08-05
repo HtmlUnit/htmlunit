@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 
@@ -28,7 +29,7 @@ import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class WebClientOptions  {
+public class WebClientOptions implements Serializable {
 
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(WebClientOptions.class);
