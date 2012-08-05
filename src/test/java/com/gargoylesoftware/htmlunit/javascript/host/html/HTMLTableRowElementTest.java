@@ -260,7 +260,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "", "#0000aa", "#000000" },
-            FF = { "", "#0000aa", "x" })
+            FF = { "", "#0000aa", "x" },
+            FF3_6 = { "", "#0000aa", "#000000" })
     public void bgColor() throws Exception {
         final String html =
             "<html>\n"

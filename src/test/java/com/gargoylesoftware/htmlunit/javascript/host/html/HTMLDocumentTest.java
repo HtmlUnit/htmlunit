@@ -527,6 +527,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#ffffff", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             DEFAULT = {"", "", "#0000aa", "#0000aa", "x", "x" })
     public void bgColor() throws Exception {
         final String html =
@@ -1550,6 +1551,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             FF = {"", "", "#0000aa", "#0000aa", "x", "x" })
     public void alinkColor() throws Exception {
         final String html =
@@ -1580,6 +1582,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#0000ff", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             FF = {"", "", "#0000aa", "#0000aa", "x", "x" })
     public void linkColor() throws Exception {
         final String html =
@@ -1610,7 +1613,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" },
-            FF = {"", "", "#0000aa", "#0000aa", "x", "x" })
+            FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
+            FF = {"#800080", "", "#0000aa", "#0000aa", "x", "x" })
     public void vlinkColor() throws Exception {
         final String html =
             "<html>\n"
@@ -1640,6 +1644,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#000000", "", "#0000aa", "#0000aa", "#000000", "#0" },
+            FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
             FF = {"", "", "#0000aa", "#0000aa", "x", "x" })
     public void fgColor() throws Exception {
         final String html =

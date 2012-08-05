@@ -2855,7 +2855,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"", "#0000aa", "#000000", "#ffebcd", "#ab00e0", "#b00e00" },
 //            IE9 = {"", "#0000aa", "#0", "blanchedalmond", "#ab00e", "#b00e0" },
-            FF = {"", "#0000aa", "x", "BlanchedAlmond", "aBlue", "bluex" })
+            FF = {"", "#0000aa", "x", "BlanchedAlmond", "aBlue", "bluex" },
+            FF3_6 = {"", "#0000aa", "#000000", "#ffebcd", "#ab00e0", "#b00e00" })
     public void setColorAttribute() throws Exception {
         final String html =
             "<html>\n"

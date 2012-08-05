@@ -124,6 +124,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"", "#0000aa", "x" },
+            FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" })
     public void aLink() throws Exception {
         final String html =
@@ -176,6 +177,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"", "#0000aa", "x" },
+            FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" })
     public void bgColor() throws Exception {
         final String html =
@@ -202,6 +204,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"", "#0000aa", "x" },
+            FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" })
     public void link() throws Exception {
         final String html =
@@ -228,6 +231,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"", "#0000aa", "x" },
+            FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" })
     public void text() throws Exception {
         final String html =
@@ -254,6 +258,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"", "#0000aa", "x" },
+            FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" })
     public void vLink() throws Exception {
         final String html =
