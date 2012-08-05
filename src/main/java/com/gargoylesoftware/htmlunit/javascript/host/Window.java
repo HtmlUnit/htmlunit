@@ -307,7 +307,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param features the features
      * @param replace whether to replace in the history list or no
      * @return the newly opened window, or <tt>null</tt> if popup windows have been disabled
-     * @see WebClient#isPopupBlockerEnabled()
+     * @see WebClientOptions#isPopupBlockerEnabled()
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536651.aspx">MSDN documentation</a>
      */
     public WindowProxy jsxFunction_open(final Object url, final Object name, final Object features,

@@ -188,7 +188,7 @@ public class HtmlAreaTest extends WebTestCase {
             + "<area href='javascript:alert(\"clicked\")' id='a2' coords='0,0,10,10'/>\n"
             + "</map></body></html>";
         final WebClient client = getWebClient();
-        client.setJavaScriptEnabled(false);
+        client.getOptions().setJavaScriptEnabled(false);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

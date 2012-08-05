@@ -50,7 +50,7 @@ public class HTMLAppletElement extends HTMLElement {
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
 
-        if (domNode.getPage().getWebClient().isAppletEnabled()) {
+        if (domNode.getPage().getWebClient().getOptions().isAppletEnabled()) {
             try {
                 createAppletMethodAndProperties();
             }

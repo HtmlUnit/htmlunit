@@ -513,7 +513,7 @@ public class WindowTest extends WebTestCase {
 
         final List<String> actual = new ArrayList<String>();
         final WebClient client = getWebClient();
-        client.setPopupBlockerEnabled(true);
+        client.getOptions().setPopupBlockerEnabled(true);
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
         final MockWebConnection webConnection = new MockWebConnection();

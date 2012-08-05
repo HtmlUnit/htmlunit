@@ -1683,12 +1683,12 @@ public class WebClientTest extends WebServerTestCase {
         assertEquals(new String[]{"1"}, actual);
 
         actual.clear();
-        client.setCssEnabled(false);
+        client.getOptions().setCssEnabled(false);
         client.getPage(URL_FIRST);
         assertEquals(new String[]{"0"}, actual);
 
         actual.clear();
-        client.setCssEnabled(true);
+        client.getOptions().setCssEnabled(true);
         client.getPage(URL_FIRST);
         assertEquals(new String[]{"1"}, actual);
     }
@@ -2356,7 +2356,7 @@ public class WebClientTest extends WebServerTestCase {
             + "</body></html>";
 
         final WebClient webClient = getWebClient();
-        webClient.setJavaScriptEnabled(true);
+        webClient.getOptions().setJavaScriptEnabled(true);
         webClient.setThrowExceptionOnScriptError(false);
 
         loadPage(html);

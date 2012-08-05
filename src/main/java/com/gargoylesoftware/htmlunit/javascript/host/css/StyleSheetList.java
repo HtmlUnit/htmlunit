@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
  * Level 2 Style spec</a> and the <a href="http://developer.mozilla.org/en/docs/DOM:document.styleSheets">Gecko
  * DOM Guide</a>.</p>
  *
- * <p>If CSS is disabled via {@link com.gargoylesoftware.htmlunit.WebClient#setCssEnabled(boolean)}, instances
+ * <p>If CSS is disabled via {@link com.gargoylesoftware.htmlunit.WebClientOptions#setCssEnabled(boolean)}, instances
  * of this class will always be empty. This allows us to check for CSS enablement/disablement in a single
  * location, without having to sprinkle checks throughout the code.</p>
  *
@@ -67,7 +67,7 @@ public class StyleSheetList extends SimpleScriptable {
         setParentScope(document);
         setPrototype(getPrototype(getClass()));
 
-        final boolean cssEnabled = getWindow().getWebWindow().getWebClient().isCssEnabled();
+        final boolean cssEnabled = getWindow().getWebWindow().getWebClient().getOptions().isCssEnabled();
         if (cssEnabled) {
             nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true, "stylesheets") {
                 protected boolean isMatching(final DomNode node) {

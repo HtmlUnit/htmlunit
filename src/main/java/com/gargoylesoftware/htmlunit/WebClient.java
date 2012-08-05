@@ -71,7 +71,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
-import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
 
 /**
  * The main starting point in HtmlUnit: this class simulates a web browser.
@@ -128,10 +127,6 @@ public class WebClient implements Serializable {
     private ProxyConfig proxyConfig_;
     private CookieManager cookieManager_ = new CookieManager();
     private transient JavaScriptEngine scriptEngine_;
-    private boolean javaScriptEnabled_ = true;
-    private boolean cssEnabled_ = true;
-    private boolean appletEnabled_;
-    private boolean popupBlockerEnabled_;
     private String homePage_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
@@ -145,7 +140,6 @@ public class WebClient implements Serializable {
     private AjaxController ajaxController_ = new AjaxController();
 
     private BrowserVersion browserVersion_;
-    private boolean isRedirectEnabled_ = true;
     private PageCreator pageCreator_ = new DefaultPageCreator();
 
     private final Set<WebWindowListener> webWindowListeners_ = new HashSet<WebWindowListener>(5);
@@ -173,9 +167,7 @@ public class WebClient implements Serializable {
     private boolean throwExceptionOnScriptError_ = true;
     private JavaScriptErrorListener javaScriptErrorListener_;
 
-    private URL sslClientCertificateUrl_;
-    private String sslClientCertificatePassword_;
-    private String sslClientCertificateType_;
+    private WebClientOptions options_ = new WebClientOptions(this);
 
     /**
      * Creates a web client instance using the browser version returned by
@@ -611,36 +603,44 @@ public class WebClient implements Serializable {
      * Enables/disables JavaScript support. By default, this property is enabled.
      *
      * @param enabled <tt>true</tt> to enable JavaScript support
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setJavaScriptEnabled instead.
      */
+    @Deprecated
     public void setJavaScriptEnabled(final boolean enabled) {
-        javaScriptEnabled_ = enabled;
+        getOptions().setJavaScriptEnabled(enabled);
     }
 
     /**
      * Returns <tt>true</tt> if JavaScript is enabled and the script engine was loaded successfully.
      *
      * @return <tt>true</tt> if JavaScript is enabled
+     * @deprecated as of 2.11, please use {@link #getOptions()}.isJavaScriptEnabled instead.
      */
+    @Deprecated
     public boolean isJavaScriptEnabled() {
-        return javaScriptEnabled_;
+        return getOptions().isJavaScriptEnabled();
     }
 
     /**
      * Enables/disables CSS support. By default, this property is enabled.
      *
      * @param enabled <tt>true</tt> to enable CSS support
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setCssEnabled instead.
      */
+    @Deprecated
     public void setCssEnabled(final boolean enabled) {
-        cssEnabled_ = enabled;
+        getOptions().setCssEnabled(enabled);
     }
 
     /**
      * Returns <tt>true</tt> if CSS is enabled.
      *
      * @return <tt>true</tt> if CSS is enabled
+     * @deprecated as of 2.11, please use {@link #getOptions()}.isCssEnabled instead.
      */
+    @Deprecated
     public boolean isCssEnabled() {
-        return cssEnabled_;
+        return getOptions().isCssEnabled();
     }
 
     /**
@@ -650,18 +650,22 @@ public class WebClient implements Serializable {
      * </p>
      * @param enabled <tt>true</tt> to enable Applet support
      * @since HtmlUnit-2.4
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setAppletEnabled instead.
      */
+    @Deprecated
     public void setAppletEnabled(final boolean enabled) {
-        appletEnabled_ = enabled;
+        getOptions().setAppletEnabled(enabled);
     }
 
     /**
      * Returns <tt>true</tt> if Applet are enabled.
      *
      * @return <tt>true</tt> if Applet is enabled
+     * @deprecated as of 2.11, please use {@link #getOptions()}.isAppletEnabled instead.
      */
+    @Deprecated
     public boolean isAppletEnabled() {
-        return appletEnabled_;
+        return getOptions().isAppletEnabled();
     }
 
     /**
@@ -670,18 +674,22 @@ public class WebClient implements Serializable {
      * returns <tt>null</tt>.
      *
      * @param enabled <tt>true</tt> to enable the popup window blocker
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setPopupBlockerEnabled instead.
      */
+    @Deprecated
     public void setPopupBlockerEnabled(final boolean enabled) {
-        popupBlockerEnabled_ = enabled;
+        getOptions().setPopupBlockerEnabled(enabled);
     }
 
     /**
      * Returns <tt>true</tt> if the popup window blocker is enabled.
      *
      * @return <tt>true</tt> if the popup window blocker is enabled
+     * @deprecated as of 2.11, please use {@link #getOptions()}.isPopupBlockerEnabled instead.
      */
+    @Deprecated
     public boolean isPopupBlockerEnabled() {
-        return popupBlockerEnabled_;
+        return getOptions().isPopupBlockerEnabled();
     }
 
     /**
@@ -1061,18 +1069,22 @@ public class WebClient implements Serializable {
      * Sets whether or not redirections will be followed automatically on receipt of a redirect
      * status code from the server.
      * @param enabled true to enable automatic redirection
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setRedirectEnabled instead.
      */
+    @Deprecated
     public void setRedirectEnabled(final boolean enabled) {
-        isRedirectEnabled_ = enabled;
+        getOptions().setRedirectEnabled(enabled);
     }
 
     /**
      * Returns whether or not redirections will be followed automatically on receipt of
      * a redirect status code from the server.
      * @return true if automatic redirection is enabled
+     * @deprecated as of 2.11, please use {@link #getOptions()}.isRedirectEnabled instead.
      */
+    @Deprecated
     public boolean isRedirectEnabled() {
-        return isRedirectEnabled_;
+        return getOptions().isRedirectEnabled();
     }
 
     /**
@@ -1081,24 +1093,16 @@ public class WebClient implements Serializable {
      * connect to a server with expired or corrupt certificates.
      * <p>
      * This method works only if {@link #getWebConnection()} returns an {@link HttpWebConnection}
-     * (which is the default) or a {@link WebConnectionWrapper} wrapping an {@link HttpWebConnection}.
+     * (which is the default) or a {@link com.gargoylesoftware.htmlunit.util.WebConnectionWrapper}
+     * wrapping an {@link HttpWebConnection}.
      * </p>
      * @param useInsecureSSL whether or not to use insecure SSL
      * @throws GeneralSecurityException if a security error occurs
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setUseInsecureSSL instead.
      */
+    @Deprecated
     public void setUseInsecureSSL(final boolean useInsecureSSL) throws GeneralSecurityException {
-        //FIXME Depends on the implementation.
-        WebConnection webConnection = getWebConnection();
-        while (webConnection instanceof WebConnectionWrapper) {
-            webConnection = ((WebConnectionWrapper) webConnection).getWrappedWebConnection();
-        }
-
-        if (webConnection instanceof HttpWebConnection) {
-            ((HttpWebConnection) webConnection).setUseInsecureSSL(useInsecureSSL);
-        }
-        else {
-            LOG.warn("Can't configure useInsecureSSL on " + webConnection_);
-        }
+        getOptions().setUseInsecureSSL(useInsecureSSL);
     }
 
     /**
@@ -2036,24 +2040,12 @@ public class WebClient implements Serializable {
      * @param certificateUrl the URL which locates the certificate
      * @param certificatePassword the certificate password
      * @param certificateType the type of certificate, usually "jks" or "pkcs12".
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setSSLClientCertificate instead.
      */
+    @Deprecated
     public void setSSLClientCertificate(final URL certificateUrl, final String certificatePassword,
             final String certificateType) {
-        sslClientCertificateUrl_ = certificateUrl;
-        sslClientCertificatePassword_ = certificatePassword;
-        sslClientCertificateType_ = certificateType;
-    }
-
-    URL getSSLClientCertificateUrl() {
-        return sslClientCertificateUrl_;
-    }
-
-    String getSSLClientCertificatePassword() {
-        return sslClientCertificatePassword_;
-    }
-
-    String getSSLClientCertificateType() {
-        return sslClientCertificateType_;
+        getOptions().setSSLClientCertificate(certificateUrl, certificatePassword, certificateType);
     }
 
     /**
@@ -2267,5 +2259,13 @@ public class WebClient implements Serializable {
                 }
             }
         }
+    }
+
+    /**
+     * Returns the options object of this WebClient.
+     * @return the options object
+     */
+    public WebClientOptions getOptions() {
+        return options_;
     }
 }

@@ -335,7 +335,7 @@ public class HtmlFormTest extends WebTestCase {
         final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
 
         final WebClient client = getWebClient();
-        client.setJavaScriptEnabled(false);
+        client.getOptions().setJavaScriptEnabled(false);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -465,7 +465,7 @@ public class HtmlFormTest extends WebTestCase {
             + "</body></html>";
 
         final WebClient client = getWebClient();
-        client.setJavaScriptEnabled(false);
+        client.getOptions().setJavaScriptEnabled(false);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

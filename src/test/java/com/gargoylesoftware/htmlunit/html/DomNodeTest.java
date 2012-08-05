@@ -758,7 +758,7 @@ public class DomNodeTest extends WebTestCase {
         assertFalse(page.getElementById("d3").isDisplayed());
         assertTrue(page.getElementById("d4").isDisplayed());
 
-        getWebClient().setCssEnabled(false);
+        getWebClient().getOptions().setCssEnabled(false);
         assertTrue(page.getElementById("d1").isDisplayed());
         assertTrue(page.getElementById("d2").isDisplayed());
         assertTrue(page.getElementById("d3").isDisplayed());

@@ -344,7 +344,7 @@ public class HTMLIFrameElementTest extends WebTestCase {
         final String html = "<html><body><iframe src='javascript:false;'></iframe></body></html>";
 
         final WebClient client = getWebClient();
-        client.setJavaScriptEnabled(false);
+        client.getOptions().setJavaScriptEnabled(false);
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setDefaultResponse(html);

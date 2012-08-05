@@ -94,7 +94,7 @@ public class JavaScriptEngineTest extends WebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        getWebClientWithMockWebConnection().setJavaScriptEnabled(false);
+        getWebClientWithMockWebConnection().getOptions().setJavaScriptEnabled(false);
 
         final HtmlPage page = loadPageWithAlerts(html);
 

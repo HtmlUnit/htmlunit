@@ -168,7 +168,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
             + "</body>\n";
 
         final WebClient client = getWebClient();
-        client.setJavaScriptEnabled(false);
+        client.getOptions().setJavaScriptEnabled(false);
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);
@@ -205,7 +205,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
         final String expected = "hello";
 
         final WebClient client = getWebClient();
-        client.setJavaScriptEnabled(false);
+        client.getOptions().setJavaScriptEnabled(false);
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(html);

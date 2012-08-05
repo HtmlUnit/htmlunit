@@ -103,7 +103,7 @@ public class HtmlForm extends HtmlElement {
     Page submit(final SubmittableElement submitElement) {
         final HtmlPage htmlPage = (HtmlPage) getPage();
         final WebClient webClient = htmlPage.getWebClient();
-        if (webClient.isJavaScriptEnabled()) {
+        if (webClient.getOptions().isJavaScriptEnabled()) {
             if (submitElement != null) {
                 isPreventDefault_ = false;
                 final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);

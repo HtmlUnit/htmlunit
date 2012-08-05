@@ -52,7 +52,7 @@ public class HtmlNoScript extends HtmlElement {
     @Override
     public DomNode appendChild(final Node node) {
         final WebClient webClient = getPage().getWebClient();
-        if (!webClient.isJavaScriptEnabled()
+        if (!webClient.getOptions().isJavaScriptEnabled()
             || webClient.getBrowserVersion().hasFeature(BrowserVersionFeatures.NOSCRIPT_BODY_AS_TEXT)) {
             return super.appendChild(node);
         }

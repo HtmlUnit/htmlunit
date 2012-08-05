@@ -181,7 +181,7 @@ public class HtmlAnchorTest extends WebTestCase {
             + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>\n"
             + "</body></html>";
         final WebClient client = getWebClient();
-        client.setJavaScriptEnabled(false);
+        client.getOptions().setJavaScriptEnabled(false);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -286,7 +286,7 @@ public class HtmlAnchorTest extends WebTestCase {
             + "<a href='http://www.foo3.com' id='a3'>link to foo3</a>\n"
             + "</body></html>";
         final WebClient client = getWebClient();
-        client.setJavaScriptEnabled(false);
+        client.getOptions().setJavaScriptEnabled(false);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

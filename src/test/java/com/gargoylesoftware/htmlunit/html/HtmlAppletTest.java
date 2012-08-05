@@ -91,7 +91,7 @@ public class HtmlAppletTest extends WebTestCase {
         final MockWebConnection connection = getMockWebConnection();
         webClient.setWebConnection(connection);
         connection.setDefaultResponse(html);
-        webClient.setAppletEnabled(true);
+        webClient.getOptions().setAppletEnabled(true);
         final HtmlPage page = webClient.getPage(URL_FIRST);
         final HtmlApplet appletNode = page.getHtmlElementById("myId");
         assertEquals("", appletNode.asText()); // should we display something else?
@@ -126,7 +126,7 @@ public class HtmlAppletTest extends WebTestCase {
             }
         };
         webClient.setStatusHandler(statusHandler);
-        webClient.setAppletEnabled(true);
+        webClient.getOptions().setAppletEnabled(true);
 
         final HtmlPage page = webClient.getPage(url);
 
@@ -160,7 +160,7 @@ public class HtmlAppletTest extends WebTestCase {
             }
         };
         webClient.setStatusHandler(statusHandler);
-        webClient.setAppletEnabled(true);
+        webClient.getOptions().setAppletEnabled(true);
 
         final HtmlPage page = webClient.getPage(url);
 
@@ -194,7 +194,7 @@ public class HtmlAppletTest extends WebTestCase {
             }
         };
         webClient.setStatusHandler(statusHandler);
-        webClient.setAppletEnabled(true);
+        webClient.getOptions().setAppletEnabled(true);
 
         final HtmlPage page = webClient.getPage(url);
 
@@ -228,7 +228,7 @@ public class HtmlAppletTest extends WebTestCase {
             }
         };
         webClient.setStatusHandler(statusHandler);
-        webClient.setAppletEnabled(true);
+        webClient.getOptions().setAppletEnabled(true);
 
         final HtmlPage page = webClient.getPage(url);
 
@@ -262,7 +262,7 @@ public class HtmlAppletTest extends WebTestCase {
             }
         };
         webClient.setStatusHandler(statusHandler);
-        webClient.setAppletEnabled(true);
+        webClient.getOptions().setAppletEnabled(true);
 
         final HtmlPage page = webClient.getPage(url);
 
@@ -298,7 +298,7 @@ public class HtmlAppletTest extends WebTestCase {
             }
         };
         webClient.setStatusHandler(statusHandler);
-        webClient.setAppletEnabled(true);
+        webClient.getOptions().setAppletEnabled(true);
 
         final HtmlPage page = webClient.getPage(url);
 
@@ -334,7 +334,7 @@ public class HtmlAppletTest extends WebTestCase {
             }
         };
         webClient.setStatusHandler(statusHandler);
-        webClient.setAppletEnabled(true);
+        webClient.getOptions().setAppletEnabled(true);
 
         final HtmlPage page = webClient.getPage(url);
         final DomNodeList<DomElement> applets = page.getElementsByTagName("applet");
@@ -366,7 +366,7 @@ public class HtmlAppletTest extends WebTestCase {
             }
         };
         webClient.setStatusHandler(statusHandler);
-        webClient.setAppletEnabled(true);
+        webClient.getOptions().setAppletEnabled(true);
 
         final HtmlPage page = webClient.getPage(url);
         final DomNodeList<DomElement> applets = page.getElementsByTagName("applet");

@@ -212,10 +212,10 @@ public final class Navigator extends SimpleScriptable {
 
     /**
      * Indicates if Java is enabled.
-     * @return true/false (see {@link com.gargoylesoftware.htmlunit.WebClient#isAppletEnabled()}
+     * @return true/false (see {@link com.gargoylesoftware.htmlunit.WebClientOptions#isAppletEnabled()}
      */
     public boolean jsxFunction_javaEnabled() {
-        return getWindow().getWebWindow().getWebClient().isAppletEnabled();
+        return getWindow().getWebWindow().getWebClient().getOptions().isAppletEnabled();
     }
 
     /**

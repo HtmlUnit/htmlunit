@@ -921,7 +921,7 @@ public class HtmlPage extends SgmlPage {
      * be achieved to execute JavaScript in the current page by entering "javascript:...some JS code..."
      * in the URL field of a native browser.</p>
      * <p><b>Note:</b> the provided code won't be executed if JavaScript has been disabled on the WebClient
-     * (see {@link WebClient#isJavaScriptEnabled()}.</p>
+     * (see {@link WebClientOptions#isJavaScriptEnabled()}.</p>
      * @param sourceCode the JavaScript code to execute
      * @return a ScriptResult which will contain both the current page (which may be different than
      * the previous page) and a JavaScript result object
@@ -951,7 +951,7 @@ public class HtmlPage extends SgmlPage {
      * the previous page and a JavaScript result object.
      */
     public ScriptResult executeJavaScriptIfPossible(String sourceCode, final String sourceName, final int startLine) {
-        if (!getWebClient().isJavaScriptEnabled()) {
+        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
             return new ScriptResult(null, this);
         }
 
@@ -980,7 +980,7 @@ public class HtmlPage extends SgmlPage {
     public ScriptResult executeJavaScriptFunctionIfPossible(final Function function, final Scriptable thisObject,
             final Object[] args, final DomNode htmlElementScope) {
 
-        if (!getWebClient().isJavaScriptEnabled()) {
+        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
             return new ScriptResult(null, this);
         }
 
@@ -1016,7 +1016,7 @@ public class HtmlPage extends SgmlPage {
         throws FailingHttpStatusCodeException {
 
         final WebClient client = getWebClient();
-        if (StringUtils.isBlank(srcAttribute) || !client.isJavaScriptEnabled()) {
+        if (StringUtils.isBlank(srcAttribute) || !client.getOptions().isJavaScriptEnabled()) {
             return JavaScriptLoadResult.NOOP;
         }
 
@@ -1229,7 +1229,7 @@ public class HtmlPage extends SgmlPage {
      */
     private boolean executeEventHandlersIfNeeded(final String eventType) {
         // If JavaScript isn't enabled, there's nothing for us to do.
-        if (!getWebClient().isJavaScriptEnabled()) {
+        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
             return true;
         }
 
@@ -1403,7 +1403,7 @@ public class HtmlPage extends SgmlPage {
      * Executes any deferred scripts, if necessary.
      */
     private void executeDeferredScriptsIfNeeded() {
-        if (!getWebClient().isJavaScriptEnabled()) {
+        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
             return;
         }
         if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DEFERRED)) {
@@ -1424,7 +1424,7 @@ public class HtmlPage extends SgmlPage {
      * Sets the ready state on any deferred scripts, if necessary.
      */
     private void setReadyStateOnDeferredScriptsIfNeeded() {
-        if (getWebClient().isJavaScriptEnabled() && getWebClient().getBrowserVersion()
+        if (getWebClient().getOptions().isJavaScriptEnabled() && getWebClient().getBrowserVersion()
                 .hasFeature(BrowserVersionFeatures.JS_DEFERRED)) {
             final List<HtmlElement> elements = getDocumentElement().getHtmlElementsByTagName("script");
             for (final HtmlElement e : elements) {

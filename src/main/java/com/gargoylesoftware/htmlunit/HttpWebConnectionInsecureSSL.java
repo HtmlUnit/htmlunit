@@ -92,14 +92,15 @@ final class HttpWebConnectionInsecureSSL {
     }
 
     private static KeyManager[] getKeyManagers(final WebClient webClient) {
-        if (webClient.getSSLClientCertificateUrl() == null) {
+        final WebClientOptions options = webClient.getOptions();
+        if (options.getSSLClientCertificateUrl() == null) {
             return null;
         }
         try {
-            final KeyStore keyStore = KeyStore.getInstance(webClient.getSSLClientCertificateType());
-            final String password = webClient.getSSLClientCertificatePassword();
+            final KeyStore keyStore = KeyStore.getInstance(options.getSSLClientCertificateType());
+            final String password = options.getSSLClientCertificatePassword();
             final char[] passwordChars = password != null ? password.toCharArray() : null;
-            keyStore.load(webClient.getSSLClientCertificateUrl().openStream(), passwordChars);
+            keyStore.load(options.getSSLClientCertificateUrl().openStream(), passwordChars);
 
             final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
             keyManagerFactory.init(keyStore, passwordChars);

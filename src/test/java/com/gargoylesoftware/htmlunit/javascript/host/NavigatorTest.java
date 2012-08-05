@@ -213,7 +213,7 @@ public class NavigatorTest extends WebDriverTestCase {
     public void javaEnabled() throws Exception {
         attribute("javaEnabled()", "false");
         final WebClient webClient = getWebClient();
-        webClient.setAppletEnabled(true);
+        webClient.getOptions().setAppletEnabled(true);
         attribute(webClient, "javaEnabled()", "true");
     }
 

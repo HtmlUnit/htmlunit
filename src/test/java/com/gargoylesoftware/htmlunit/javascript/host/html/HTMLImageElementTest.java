@@ -315,7 +315,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
         final String html = "<html><body><img src='" + URL_SECOND + "' onload='alert(1)'></body></html>";
 
         final WebClient client = getWebClient();
-        client.setJavaScriptEnabled(false);
+        client.getOptions().setJavaScriptEnabled(false);
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);

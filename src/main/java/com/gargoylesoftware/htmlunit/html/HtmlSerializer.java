@@ -52,7 +52,7 @@ class HtmlSerializer {
      * @return the text representation according to the setting of this serializer
      */
     public String asText(final DomNode node) {
-        appletEnabled_ = node.getPage().getWebClient().isAppletEnabled();
+        appletEnabled_ = node.getPage().getWebClient().getOptions().isAppletEnabled();
         buffer_.setLength(0);
         appendNode(node);
         final String response = buffer_.toString();
@@ -187,7 +187,7 @@ class HtmlSerializer {
         else if (node instanceof HtmlUnorderedList) {
             appendHtmlUnorderedList((HtmlUnorderedList) node);
         }
-        else if (node instanceof HtmlNoScript && node.getPage().getWebClient().isJavaScriptEnabled()) {
+        else if (node instanceof HtmlNoScript && node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
             return;
         }
         else {

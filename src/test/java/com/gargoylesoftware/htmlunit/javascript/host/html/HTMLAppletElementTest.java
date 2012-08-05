@@ -55,7 +55,7 @@ public class HTMLAppletElementTest extends WebTestCase {
             }
         };
         webClient.setStatusHandler(statusHandler);
-        webClient.setAppletEnabled(true);
+        webClient.getOptions().setAppletEnabled(true);
 
         final HtmlPage page = webClient.getPage(url);
 

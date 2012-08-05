@@ -575,14 +575,15 @@ public class HttpWebConnection implements WebConnection {
      * @return the SSLSocketFactory
      */
     static SSLSocketFactory getSSLSocketFactory(final WebClient webClient) {
-        if (webClient.getSSLClientCertificateUrl() == null) {
+        final WebClientOptions options = webClient.getOptions();
+        if (options.getSSLClientCertificateUrl() == null) {
             return SSLSocketFactory.getSocketFactory();
         }
         try {
-            final KeyStore keyStore = KeyStore.getInstance(webClient.getSSLClientCertificateType());
-            final String password = webClient.getSSLClientCertificatePassword();
+            final KeyStore keyStore = KeyStore.getInstance(options.getSSLClientCertificateType());
+            final String password = options.getSSLClientCertificatePassword();
             final char[] passwordChars = password != null ? password.toCharArray() : null;
-            keyStore.load(webClient.getSSLClientCertificateUrl().openStream(), passwordChars);
+            keyStore.load(options.getSSLClientCertificateUrl().openStream(), passwordChars);
             return new SSLSocketFactory(keyStore, password);
         }
         catch (final Exception e) {

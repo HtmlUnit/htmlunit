@@ -826,7 +826,7 @@ public class HtmlPageTest extends WebServerTestCase {
         HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("first", page.getTitleText());
 
-        client.setJavaScriptEnabled(false);
+        client.getOptions().setJavaScriptEnabled(false);
         page = client.getPage(URL_FIRST);
         assertEquals("second", page.getTitleText());
     }

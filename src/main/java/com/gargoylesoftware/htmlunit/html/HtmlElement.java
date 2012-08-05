@@ -830,7 +830,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public ScriptResult fireEvent(final Event event) {
         final WebClient client = getPage().getWebClient();
-        if (!client.isJavaScriptEnabled()) {
+        if (!client.getOptions().isJavaScriptEnabled()) {
             return null;
         }
 
