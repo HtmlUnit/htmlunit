@@ -2756,6 +2756,9 @@
         <property name="browserLanguage" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
+        <property name="buildID" writable="false">
+            <browser name="Firefox"/>
+        </property>
         <property name="cookieEnabled" readable="true" writable="false"/>
         <property name="cpuClass" readable="true" writable="false">
             <browser name="Internet Explorer"/>
@@ -2784,6 +2787,14 @@
         <property name="userAgent" readable="true" writable="false"/>
         <property name="userLanguage" readable="true" writable="false">
             <browser name="Internet Explorer"/>
+        </property>
+        <property name="vendor" writable="false">
+            <browser name="Firefox"/>
+            <browser name="Chrome"/>
+        </property>
+        <property name="vendorSub" writable="false">
+            <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </property>
 
         <function name="javaEnabled"/>

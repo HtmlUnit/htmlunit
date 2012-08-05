@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
@@ -236,4 +237,35 @@ public final class Navigator extends SimpleScriptable {
         return geolocation;
     }
 
+    /**
+     * Returns the buildID.
+     * @return the buildID
+     */
+    public String jsxGet_buildID() {
+        final BrowserVersion browser = getBrowserVersion();
+        if ("FF3.6".equals(browser.getNickname())) {
+            return "20120306064154";
+        }
+        return "20120713134347";
+    }
+
+    /**
+     * Returns the vendor.
+     * @return the vendor
+     */
+    public String jsxGet_vendor() {
+        final BrowserVersion browser = getBrowserVersion();
+        if (browser.getNickname().startsWith("FF")) {
+            return "";
+        }
+        return "Google Inc.";
+    }
+
+    /**
+     * Returns the vendorSub.
+     * @return the vendorSub
+     */
+    public String jsxGet_vendorSub() {
+        return "";
+    }
 }

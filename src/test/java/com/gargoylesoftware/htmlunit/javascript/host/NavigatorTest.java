@@ -336,4 +336,43 @@ public class NavigatorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF10 = "20120713134347", FF3_6 = "20120306064154", DEFAULT = "undefined")
+    public void buildID() throws Exception {
+        final String html
+            = "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(navigator.buildID);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "", "" }, IE = { "undefined", "undefined" }, CHROME = { "Google Inc.", "" })
+    public void vendor() throws Exception {
+        final String html
+            = "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(navigator.vendor);\n"
+            + "  alert(navigator.vendorSub);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
