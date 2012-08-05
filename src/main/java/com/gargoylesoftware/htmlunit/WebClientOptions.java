@@ -44,6 +44,7 @@ public class WebClientOptions implements Serializable {
     private String sslClientCertificatePassword_;
     private String sslClientCertificateType_;
     private boolean geolocationEnabled_;
+    private boolean doNotTrackEnabled_;
 
     /**
      * Creates an instance.
@@ -222,5 +223,23 @@ public class WebClientOptions implements Serializable {
      */
     public boolean isGeolocationEnabled() {
         return geolocationEnabled_;
+    }
+
+    /**
+     * Enables/disables "Do Not Track" support. By default, this property is disabled.
+     *
+     * @param enabled <tt>true</tt> to enable "Do Not Track" support
+     */
+    public void setDoNotTrackEnabled(final boolean enabled) {
+        doNotTrackEnabled_ = enabled;
+    }
+
+    /**
+     * Returns <tt>true</tt> if "Do Not Track" is enabled.
+     *
+     * @return <tt>true</tt> if "Do Not Track" is enabled
+     */
+    public boolean isDoNotTrackEnabled() {
+        return doNotTrackEnabled_;
     }
 }

@@ -2763,6 +2763,9 @@
         <property name="cpuClass" readable="true" writable="false">
             <browser name="Internet Explorer"/>
         </property>
+        <property name="doNotTrack" writable="false">
+            <browser name="Firefox" min-version="10"/>
+        </property>
         <property name="geolocation" readable="true" writable="false">
             <browser name="Internet Explorer" min-version="9"/>
             <browser name="Firefox"/>
@@ -2772,6 +2775,9 @@
             <browser name="Firefox"/>
         </property>
         <property name="mimeTypes" readable="true" writable="false"/>
+        <property name="msDoNotTrack" writable="false">
+            <browser name="Internet Explorer" min-version="9"/>
+        </property>
         <property name="onLine" readable="true" writable="false"/>
         <property name="platform" readable="true" writable="false"/>
         <property name="plugins" readable="true" writable="false"/>

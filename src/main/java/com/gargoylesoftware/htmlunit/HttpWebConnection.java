@@ -334,6 +334,10 @@ public class HttpWebConnection implements WebConnection {
         }
         httpMethod.setHeader(new BasicHeader("User-Agent", webClient_.getBrowserVersion().getUserAgent()));
 
+        if (webClient_.getOptions().isDoNotTrackEnabled()) {
+            httpMethod.setHeader(new BasicHeader("DNT", "1"));
+        }
+
         writeRequestHeadersToHttpMethod(httpMethod, webRequest.getAdditionalHeaders());
 //        getHttpClient().getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
 

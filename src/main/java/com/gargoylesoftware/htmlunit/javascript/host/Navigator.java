@@ -268,4 +268,26 @@ public final class Navigator extends SimpleScriptable {
     public String jsxGet_vendorSub() {
         return "";
     }
+
+    /**
+     * Returns the doNotTrack.
+     * @return the doNotTrack
+     */
+    public String jsxGet_doNotTrack() {
+        if (getWindow().getWebWindow().getWebClient().getOptions().isDoNotTrackEnabled()) {
+            return "yes";
+        }
+        return "unspecified";
+    }
+
+    /**
+     * Returns the msDoNotTrack.
+     * @return the msDoNotTrack
+     */
+    public String jsxGet_msDoNotTrack() {
+        if (getWindow().getWebWindow().getWebClient().getOptions().isDoNotTrackEnabled()) {
+            return "1";
+        }
+        return "0";
+    }
 }
