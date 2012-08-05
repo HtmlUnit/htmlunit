@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -62,10 +61,9 @@ public class Console extends SimpleScriptable {
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param funObj the function
-     * @throws IOException if an IO error occurs
      */
     public static void jsxFunction_log(final Context cx, final Scriptable thisObj,
-        final Object[] args, final Function funObj) throws IOException {
+        final Object[] args, final Function funObj) {
         final WebConsole webConsole = ((Console) thisObj).getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
@@ -79,10 +77,9 @@ public class Console extends SimpleScriptable {
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param funObj the function
-     * @throws IOException if an IO error occurs
      */
     public static void jsxFunction_info(final Context cx, final Scriptable thisObj,
-        final Object[] args, final Function funObj) throws IOException {
+        final Object[] args, final Function funObj) {
         final WebConsole webConsole = ((Console) thisObj).getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
@@ -96,10 +93,9 @@ public class Console extends SimpleScriptable {
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param funObj the function
-     * @throws IOException if an IO error occurs
      */
     public static void jsxFunction_warn(final Context cx, final Scriptable thisObj,
-        final Object[] args, final Function funObj) throws IOException {
+        final Object[] args, final Function funObj) {
         final WebConsole webConsole = ((Console) thisObj).getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
@@ -113,10 +109,9 @@ public class Console extends SimpleScriptable {
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param funObj the function
-     * @throws IOException if an IO error occurs
      */
     public static void jsxFunction_error(final Context cx, final Scriptable thisObj,
-        final Object[] args, final Function funObj) throws IOException {
+        final Object[] args, final Function funObj) {
         final WebConsole webConsole = ((Console) thisObj).getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
@@ -130,10 +125,9 @@ public class Console extends SimpleScriptable {
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param funObj the function
-     * @throws IOException if an IO error occurs
      */
     public static void jsxFunction_debug(final Context cx, final Scriptable thisObj,
-        final Object[] args, final Function funObj) throws IOException {
+        final Object[] args, final Function funObj) {
         final WebConsole webConsole = ((Console) thisObj).getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
@@ -147,10 +141,9 @@ public class Console extends SimpleScriptable {
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param funObj the function
-     * @throws IOException if an IO error occurs
      */
     public static void jsxFunction_trace(final Context cx, final Scriptable thisObj,
-        final Object[] args, final Function funObj) throws IOException {
+        final Object[] args, final Function funObj) {
         final WebConsole webConsole = ((Console) thisObj).getWebConsole();
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
@@ -166,9 +159,8 @@ public class Console extends SimpleScriptable {
      * Implementation of console dir function. This method does not enter recursively
      * in the passed object, nor prints the details of objects or functions.
      * @param o the object to be printed
-     * @throws IOException if an IO error occurs
      */
-    public void jsxFunction_dir(final Object o) throws IOException {
+    public void jsxFunction_dir(final Object o) {
         if (o instanceof ScriptableObject) {
             final ScriptableObject obj = (ScriptableObject) o;
             final Object[] ids = obj.getIds();
@@ -196,25 +188,22 @@ public class Console extends SimpleScriptable {
 
     /**
      * Implementation of group. Currently missing.
-     * @throws IOException if an IO error occurs
      */
-    public void jsxFunction_group() throws IOException {
+    public void jsxFunction_group() {
         // TODO not implemented
     }
 
     /**
      * Implementation of endGroup. Currently missing.
-     * @throws IOException if an IO error occurs
      */
-    public void jsxFunction_groupEnd() throws IOException {
+    public void jsxFunction_groupEnd() {
         // TODO not implemented
     }
 
     /**
      * Implementation of groupCollapsed. Currently missing.
-     * @throws IOException if an IO error occurs
      */
-    public void jsxFunction_groupCollapsed() throws IOException {
+    public void jsxFunction_groupCollapsed() {
          // TODO not implemented
     }
 
@@ -223,9 +212,8 @@ public class Console extends SimpleScriptable {
      * the start time is not overwritten. In both cases, the line is printed on the
      * console.
      * @param timerName the name of the timer
-     * @throws IOException if an IO error occurs
      */
-    public void jsxFunction_time(final String timerName) throws IOException {
+    public void jsxFunction_time(final String timerName) {
         if (!TIMERS.containsKey(timerName)) {
             TIMERS.put(timerName, Long.valueOf(System.currentTimeMillis()));
         }
@@ -236,9 +224,8 @@ public class Console extends SimpleScriptable {
      * This method replicates Firefox's behavior: if no timer is found, nothing is
      * logged to the console.
      * @param timerName the name of the timer
-     * @throws IOException if an IO error occurs
      */
-    public void jsxFunction_timeEnd(final String timerName) throws IOException {
+    public void jsxFunction_timeEnd(final String timerName) {
         final Long startTime = TIMERS.remove(timerName);
         if (startTime != null) {
             getWebConsole().info(timerName + ": " + (System.currentTimeMillis() - startTime.longValue()) + "ms");

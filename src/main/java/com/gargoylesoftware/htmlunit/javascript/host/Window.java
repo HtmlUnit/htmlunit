@@ -330,7 +330,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
         final WebClient webClient = webWindow_.getWebClient();
 
-        if (webClient.isPopupBlockerEnabled()) {
+        if (webClient.getOptions().isPopupBlockerEnabled()) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Ignoring window.open() invocation because popups are blocked.");
             }
@@ -566,6 +566,16 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     public void jsxSet_console(final ScriptableObject console) {
         console_ = console;
+    }
+
+    /**
+     * Prints messages to the console.
+     * @param message the message to log
+     */
+    public void jsxFunction_dump(final String message) {
+        if (console_ instanceof Console) {
+            Console.jsxFunction_log(null, console_, new Object[] {message}, null);
+        }
     }
 
     /**

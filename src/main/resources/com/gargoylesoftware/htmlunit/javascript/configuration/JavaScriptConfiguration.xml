@@ -3814,6 +3814,9 @@
                     descr="MSDN documentation"/>
             <browser name="Internet Explorer"/>
         </function>
+        <function name="dump">
+            <browser name="Firefox"/>
+        </function>
         <function name="execScript">
             <doclink url="http://msdn.microsoft.com/en-us/library/ms536420.aspx"
                     descr="MSDN documentation"/>

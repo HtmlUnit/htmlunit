@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
 /**
  * Tests for {@link Console}.
@@ -34,13 +34,13 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class ConsoleTest extends WebDriverTestCase {
+public class ConsoleTest extends WebServerTestCase {
 
     /**
      * @throws Exception if the test fails
      */
-    @Browsers(Browser.FF)
     @Test
+    @Browsers(Browser.FF)
     public void log() throws Exception {
         final WebConsole console = getWebClient().getWebConsole();
         final List<String> messages = new ArrayList<String>();
@@ -72,13 +72,15 @@ public class ConsoleTest extends WebDriverTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  if (window.console) {\n"
-            + "    var arr = ['one', 'two', 'three', document.body.children];"
+            + "    var arr = ['one', 'two', 'three', document.body.children];\n"
             + "    window.console.log(arr);\n"
+            + "    window.dump('hello');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'></body></html>";
 
         loadPage(html);
         assertEquals("info: [\"one\", \"two\", \"three\", ({})]", messages.get(0));
+        assertEquals("info: hello", messages.get(1));
     }
 }
