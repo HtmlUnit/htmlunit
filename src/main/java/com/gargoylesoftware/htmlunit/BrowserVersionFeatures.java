@@ -720,6 +720,9 @@ public enum BrowserVersionFeatures {
      */
     JS_OPACITY_ACCEPTS_ARBITRARY_VALUES,
 
+    /** Javascript script.text(...) reexecutes the script (IE). */
+    JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT,
+
     /** Always execute the script if IE;
      *  in FF, only execute if the old "src" attribute was undefined
      *  and there was no inline code.

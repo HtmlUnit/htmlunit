@@ -71,7 +71,7 @@ public class HtmlScript extends HtmlElement {
     /** Invalid source attribute which should be ignored (used by JS libraries like jQuery). */
     private static final String SLASH_SLASH_COLON = "//:";
 
-    private boolean executeScriptOnAttach_ = true;
+    private boolean executed_;
 
     /**
      * Creates an instance of HtmlScript
@@ -187,14 +187,15 @@ public class HtmlScript extends HtmlElement {
         final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
-        // special additional processding for the 'src'
+        // special additional processing for the 'src'
         if (namespaceURI == null && "src".equals(qualifiedName)) {
             final boolean alwaysReexecute = getPage().getWebClient().getBrowserVersion().
                 hasFeature(BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
             if (alwaysReexecute || (oldValue.isEmpty() && getFirstChild() == null)) {
-                // Always execute if IE;
+                // always execute if IE;
                 // if FF, only execute if the "src" attribute
                 // was undefined and there was no inline code.
+                resetExecuted();
                 executeScriptIfNeeded();
             }
         }
@@ -301,6 +302,8 @@ public class HtmlScript extends HtmlElement {
             final int col2 = getEndColumnNumber();
             final String desc = "script in " + url + " from (" + line1 + ", " + col1
                 + ") to (" + line2 + ", " + col2 + ")";
+
+            executed_ = true;
             ((HtmlPage) getPage()).executeJavaScriptIfPossible(scriptCode, desc, line1);
         }
     }
@@ -321,12 +324,11 @@ public class HtmlScript extends HtmlElement {
     }
 
     /**
-     * Executes this script node if necessary and/or possible.
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * @param executeIfDeferred if <tt>false</tt>, and we are emulating IE, and the <tt>defer</tt>
-     * attribute is defined, the script is not executed
+     * Executes this script node if necessary and/or possible.
      */
-    void executeScriptIfNeeded() {
+    public void executeScriptIfNeeded() {
         if (!isExecutionNeeded()) {
             return;
         }
@@ -400,7 +402,7 @@ public class HtmlScript extends HtmlElement {
      * @return <code>true</code> if the script should be executed
      */
     private boolean isExecutionNeeded() {
-        if (!executeScriptOnAttach_) {
+        if (executed_) {
             return false;
         }
 
@@ -549,8 +551,18 @@ public class HtmlScript extends HtmlElement {
         }
     }
 
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Resets the executed flag.
+     * @see HtmlScript#processImportNode()
+     */
+    public void resetExecuted() {
+        executed_ = false;
+    }
+
     @Override
     public void processImportNode() {
-        executeScriptOnAttach_ = false;
+        executed_ = true;
     }
 }

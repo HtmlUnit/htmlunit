@@ -119,7 +119,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "start", "end" }, IE = { "start", "executed", "end" })
-    @NotYetImplemented(Browser.IE)
     public void reexecuteModifiedScript() throws Exception {
         final String html =
               "<html><head><title>foo</title></head><body>\n"
@@ -262,7 +261,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "start", "end" },
             IE = { "start", "executed", "end" })
-    @NotYetImplemented(Browser.IE)
     public void replaceSelfWithSetText() throws Exception {
         // TODO this test is the same as #reexecuteModifiedScriptWhenReappending()
         final String html =
@@ -307,16 +305,37 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Replaces the source of another script element using <code>.text</code>.
+     * Replaces the source of another empty script element using <code>.text</code>.
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = { "start", "executed", "end" })
-    @NotYetImplemented
-    public void replaceWithSetText() throws Exception {
+    public void replaceEmptyWithSetText() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
               + "<script id='js1'></script>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementById('js1');\n"
+              + "  script.text = \"alert('executed');\";\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Replaces the source of another script element using <code>.text</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "exec1", "start", "end" },
+            IE = { "exec1", "start", "executed", "end" })
+    public void replaceNonEmptyWithSetText() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script id='js1'>alert('exec1');</script>\n"
               + "<script>\n"
               + "  alert('start');\n"
               + "  var script = document.getElementById('js1');\n"
@@ -338,9 +357,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
               + "<div>\n"
-              + "<script id='js1'>\n"
-              + "  alert('executed');\n"
-              + "</script>\n"
+              + "<script id='js1'>alert('executed');</script>\n"
               + "<script>\n"
               + "  alert('start');\n"
               + "  var script = document.getElementById('js1');\n"

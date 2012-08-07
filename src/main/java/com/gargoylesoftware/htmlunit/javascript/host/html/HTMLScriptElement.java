@@ -19,6 +19,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlScript;
 
 /**
  * The JavaScript object that represents an "HTMLScriptElement".
@@ -75,10 +77,16 @@ public class HTMLScriptElement extends HTMLElement {
      * @param text the <tt>text</tt> attribute
      */
     public void jsxSet_text(final String text) {
-        final DomNode htmlElement = getDomNodeOrDie();
+        final HtmlElement htmlElement = getDomNodeOrDie();
         htmlElement.removeAllChildren();
         final DomNode textChild = new DomText(htmlElement.getPage(), text);
         htmlElement.appendChild(textChild);
+
+        final HtmlScript tmpScript = (HtmlScript) htmlElement;
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT)) {
+            tmpScript.resetExecuted();
+        }
+        tmpScript.executeScriptIfNeeded();
     }
 
     /**
@@ -139,8 +147,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @see DomNode#READY_STATE_COMPLETE
      */
     public String jsxGet_readyState() {
-        final DomNode node = getDomNodeOrDie();
-        return node.getReadyState();
+        return getDomNodeOrDie().getReadyState();
     }
 
     /**

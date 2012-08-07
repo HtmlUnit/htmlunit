@@ -333,7 +333,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "imported: [object HTMLScriptElement]", IE = "exception")
+    @Alerts(FF = { "imported: [object HTMLScriptElement]", "replaced" },
+            IE = "exception")
     public void importNode_script() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -347,6 +348,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  alert('imported: ' + importedScript);\n"
             + "  var theSpan = document.getElementById('s1');\n"
             + "  document.body.replaceChild(importedScript, theSpan);\n"
+            + "  alert('replaced');\n"
             + " } catch (e) { alert('exception') }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
@@ -362,7 +364,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "imported: [object HTMLDivElement]", IE = "exception")
+    @Alerts(FF = { "imported: [object HTMLDivElement]", "replaced" },
+            IE = "exception")
     public void importNode_scriptChild() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -376,6 +379,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  alert('imported: ' + importedDiv);\n"
             + "  var theSpan = document.getElementById('s1');\n"
             + "  document.body.replaceChild(importedDiv, theSpan);\n"
+            + "  alert('replaced');\n"
             + " } catch (e) { alert('exception') }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
