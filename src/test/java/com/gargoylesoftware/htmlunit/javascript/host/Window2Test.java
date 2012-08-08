@@ -503,17 +503,19 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = "hello")
+    @Alerts("hello")
+    @NotYetImplemented(Browser.FF)
     public void overwriteFunctions_navigator() throws Exception {
-        final String html = "<html><head><script language='JavaScript'>\n"
-            + "try {\n"
-            + "  function navigator()\n"
-            + "  {\n"
-            + "    alert('hello');\n"
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      function navigator() {\n"
+            + "        alert('hello');\n"
+            + "      }\n"
+            + "      navigator();\n"
+            + "    } catch(e) { alert('exception'); }\n"
             + "  }\n"
-            + "  navigator();\n"
-            + "} catch(e) { alert('exception'); }\n"
-            + "</script></head><body></body></html>";
+            + "</script></head><body onload='test()'></body></html>";
 
         loadPageWithAlerts2(html);
     }
