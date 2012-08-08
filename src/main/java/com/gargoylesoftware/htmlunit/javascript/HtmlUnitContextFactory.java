@@ -279,7 +279,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return !browserVersion_.hasFeature(BrowserVersionFeatures.GENERATED_142);
             case Context.FEATURE_NON_ECMA_GET_YEAR:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.GENERATED_143);
-            case Context.FEATURE_HTMLUNIT_WRITE_READONLY_PROPERTIES:
+            case Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.SET_READONLY_PROPERTIES);
             case Context.FEATURE_HTMLUNIT_JS_CATCH_JAVA_EXCEPTION:
                 return false;
