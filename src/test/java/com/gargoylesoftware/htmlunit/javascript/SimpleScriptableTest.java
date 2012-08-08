@@ -579,7 +579,7 @@ public class SimpleScriptableTest extends WebTestCase {
      */
     @Test
     @Alerts(FF = "function", IE = "exception")
-    public void __lookupGetter__() throws Exception {
+    public void lookupGetter() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
