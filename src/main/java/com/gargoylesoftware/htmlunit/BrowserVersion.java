@@ -57,7 +57,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *     pre.innerHTML = pre.innerHTML.replace('BROWSER', browser);
  * </script>
  * However, note that the constants are not enough to fully customize the browser,
- *   you also need to look into the browser 'features', and the
+ *   you also need to look into the {@link BrowserVersionFeatures}, and the
  *   <a href="http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml?view=markup">JavaScriptConfiguration.xml</a>
  *
  * @version $Revision$
