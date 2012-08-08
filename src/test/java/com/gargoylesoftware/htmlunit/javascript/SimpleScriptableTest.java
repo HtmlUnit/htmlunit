@@ -572,4 +572,24 @@ public class SimpleScriptableTest extends WebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * All functions seem to be able to be set.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "function", IE = "exception")
+    public void __lookupGetter__() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    alert(typeof window.__lookupGetter__('length'));\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
