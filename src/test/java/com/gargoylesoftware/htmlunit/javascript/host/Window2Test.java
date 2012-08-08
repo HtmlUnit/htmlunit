@@ -504,7 +504,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("hello")
-    @NotYetImplemented(Browser.FF)
     public void overwriteFunctions_navigator() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

@@ -511,4 +511,65 @@ public class SimpleScriptableTest extends WebTestCase {
             + "</body></html>";
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    @NotYetImplemented(Browser.IE)
+    public void set_ReadOnly_document_body() throws Exception {
+        set_ReadOnly("document.body");
+    }
+
+    /**
+     * Setting is actually ignored in FF.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "exception", FF = "false")
+    @NotYetImplemented
+    public void set_ReadOnly_window_closed() throws Exception {
+        set_ReadOnly("window.closed");
+    }
+
+    /**
+     * Setting the property works in FF.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "exception", FF = "window.length was set")
+    @NotYetImplemented
+    public void set_ReadOnly_window_length() throws Exception {
+        set_ReadOnly("window.length");
+    }
+
+    /**
+     * All functions seem to be able to be set.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("document.getElementById was set")
+    public void set_ReadOnly_window_document() throws Exception {
+        set_ReadOnly("document.getElementById");
+    }
+
+    private  void set_ReadOnly(final String expression) throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    " + expression + " = '" + expression + " was set" + "';\n"
+            + "    alert(" + expression + ");\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
 }
