@@ -165,7 +165,6 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented
     public void unitTests() throws Exception {
         test("unit_tests.html");
     }

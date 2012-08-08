@@ -394,8 +394,20 @@ public class NavigatorTest extends WebDriverTestCase {
         String expectation;
         if (getBrowserVersion().getNickname().startsWith("FF")) {
             final String os = System.getProperty("os.name").toLowerCase();
-            if (os.contains("win")) {
+            if ("windows 7".equals(os)) {
                 expectation = "Windows NT 6.1";
+            }
+            else if ("windows vista".equals(os)) {
+                expectation = "Windows NT 6.0";
+            }
+            else if ("windows 2003".equals(os)) {
+                expectation = "Windows NT 5.2";
+            }
+            else if ("windows xp".equals(os)) {
+                expectation = "Windows NT 5.1";
+            }
+            else if ("windows 2000".equals(os)) {
+                expectation = "Windows NT 5.0";
             }
             else if ("mac os x".equals(os)) {
                 expectation = "Intel Mac OS X " + System.getProperty("os.version");

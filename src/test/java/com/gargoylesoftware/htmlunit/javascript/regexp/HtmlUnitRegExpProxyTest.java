@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -245,7 +244,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts("boo();")
     public void regExp_exec() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -285,7 +283,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "true", "false", "true" })
-    @NotYetImplemented
     public void test_prototype() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -338,7 +335,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @NotYetImplemented
     public void test_minimal() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
