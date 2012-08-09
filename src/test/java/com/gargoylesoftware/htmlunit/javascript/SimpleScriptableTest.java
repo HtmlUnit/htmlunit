@@ -250,11 +250,10 @@ public class SimpleScriptableTest extends WebTestCase {
     }
 
     /**
-     * Works since Rhino 1.7.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object Object]")
+    @Alerts(FF = "[object Arguments]", IE = "[object Object]")
     public void arguments_toString() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -568,8 +567,6 @@ public class SimpleScriptableTest extends WebTestCase {
     }
 
     /**
-     * All functions seem to be able to be set.
-     *
      * @throws Exception if the test fails
      */
     @Test
@@ -581,6 +578,29 @@ public class SimpleScriptableTest extends WebTestCase {
             + "  try {\n"
             + "    alert(typeof window.__lookupGetter__('length'));\n"
             + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "0", "0", "1", "0" })
+    public void arguments() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  alert(test.arguments.length);\n"
+            + "  test1('hi');\n"
+            + "}\n"
+            + "function test1(hello) {\n"
+            + "  alert(test.arguments.length);\n"
+            + "  alert(test1.arguments.length);\n"
+            + "  alert(arguments.callee.caller.arguments.length);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

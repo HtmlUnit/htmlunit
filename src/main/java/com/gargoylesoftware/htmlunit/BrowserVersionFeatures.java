@@ -563,6 +563,9 @@ public enum BrowserVersionFeatures {
      * if the provided note cannot be inserted. */
     JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE,
 
+    /** Indicates that the class name of "arguments" object is "Object" */
+    JS_ARGUMENTS_IS_OBJECT,
+
     /** Indicates that the attributes map contains empty attr
      * objects for all properties of the object (like IE does). */
     JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES,
