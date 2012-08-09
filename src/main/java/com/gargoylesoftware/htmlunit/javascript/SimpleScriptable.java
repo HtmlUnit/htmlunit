@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -33,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.annotations.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -440,5 +442,34 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
         if (prototype instanceof SimpleScriptable) {
             ((SimpleScriptable) prototype).setCaseSensitive(caseSensitive);
         }
+    }
+
+    @Override
+    protected boolean isReadOnlySettable(final String name, final Object value) {
+        System.out.println("Trying to set " + this.getClassName() + " " + name);
+        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.SET_READONLY_PROPERTIES)) {
+            throw ScriptRuntime.typeError3("msg.set.prop.no.setter",
+                    name, getClassName(), Context.toString(value));
+        }
+        try {
+            final Method m = getClass().getMethod("jsxGet_" + name);
+            switch (m.getAnnotation(CanSetReadOnly.class).value()) {
+                case YES:
+                    return true;
+                case IGNORE:
+                    return false;
+                case EXCEPTION:
+                    throw ScriptRuntime.typeError3("msg.set.prop.no.setter",
+                            name, getClassName(), Context.toString(value));
+                default:
+            }
+        }
+        catch (final NullPointerException e) {
+            //ignore
+        }
+        catch (final NoSuchMethodException e) {
+            //ignore
+        }
+        return true;
     }
 }

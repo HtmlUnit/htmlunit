@@ -1457,7 +1457,7 @@
         <property name="timeStamp" writable="false">
             <browser name="Firefox"/>
         </property>
-        <property name="type" writable="false"/>
+        <property name="type"/>
         <function name="initEvent">
             <browser name="Firefox"/>
         </function>
@@ -2691,9 +2691,9 @@
         <property name="altKey" writable="false">
             <browser name="Firefox"/>
         </property>
-        <property name="button" writable="false"/>
-        <property name="clientX" writable="false"/>
-        <property name="clientY" writable="false"/>
+        <property name="button"/>
+        <property name="clientX"/>
+        <property name="clientY"/>
         <property name="ctrlKey" writable="false">
             <browser name="Firefox"/>
         </property>

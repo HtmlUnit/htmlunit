@@ -388,6 +388,14 @@ public class Event extends SimpleScriptable {
 
     /**
      * Sets the event type.
+     * @param type the event type
+     */
+    public void jsxSet_type(final String type) {
+        type_ = type;
+    }
+
+    /**
+     * Sets the event type.
      * @param eventType the event type
      */
     public void setEventType(final String eventType) {

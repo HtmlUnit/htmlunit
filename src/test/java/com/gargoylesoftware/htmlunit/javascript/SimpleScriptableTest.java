@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -236,7 +235,6 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
     @Alerts("exception")
     public void setNonWritableProperty() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -517,7 +515,6 @@ public class SimpleScriptableTest extends WebTestCase {
      */
     @Test
     @Alerts("exception")
-    @NotYetImplemented(Browser.IE)
     public void set_ReadOnly_document_body() throws Exception {
         set_ReadOnly("document.body");
     }
@@ -529,7 +526,6 @@ public class SimpleScriptableTest extends WebTestCase {
      */
     @Test
     @Alerts(IE = "exception", FF = "false")
-    @NotYetImplemented
     public void set_ReadOnly_window_closed() throws Exception {
         set_ReadOnly("window.closed");
     }
@@ -541,7 +537,6 @@ public class SimpleScriptableTest extends WebTestCase {
      */
     @Test
     @Alerts(IE = "exception", FF = "window.length was set")
-    @NotYetImplemented
     public void set_ReadOnly_window_length() throws Exception {
         set_ReadOnly("window.length");
     }

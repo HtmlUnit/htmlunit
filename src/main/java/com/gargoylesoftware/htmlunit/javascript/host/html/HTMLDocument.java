@@ -74,6 +74,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.CanSetReadOnly;
+import com.gargoylesoftware.htmlunit.javascript.annotations.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
@@ -1197,6 +1199,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns this document's <tt>body</tt> element.
      * @return this document's <tt>body</tt> element
      */
+    @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
     public HTMLElement jsxGet_body() {
         final HtmlPage page = getHtmlPage();
         // for IE, the body of a not yet loaded page is null whereas it already exists for FF

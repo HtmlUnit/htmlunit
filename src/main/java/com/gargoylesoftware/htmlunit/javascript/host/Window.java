@@ -72,6 +72,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.CanSetReadOnly;
+import com.gargoylesoftware.htmlunit.javascript.annotations.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.host.Storage.Type;
@@ -843,6 +845,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Indicates if this window is closed.
      * @return <code>true</code> if this window is closed
      */
+    @CanSetReadOnly(CanSetReadOnlyStatus.IGNORE)
     public boolean jsxGet_closed() {
         return !getWebWindow().getWebClient().getWebWindows().contains(getWebWindow());
     }

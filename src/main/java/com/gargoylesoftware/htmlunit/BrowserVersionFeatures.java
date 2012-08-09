@@ -839,7 +839,12 @@ public enum BrowserVersionFeatures {
      */
     SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN,
 
-    /** Indicates that a read only JS property can be... set as done by IE but not FF3. */
+    /**
+     * Indicates that a read only JS property can potentially be set.
+     * If supported, {@link net.sourceforge.htmlunit.corejs.javascript.ScriptableObject}.isReadOnlySettable()
+     * will be checked,
+     * if not supported, an excpetion will be thrown.
+     */
     SET_READONLY_PROPERTIES,
 
     /** Indicates [object StorageObsolete] instead of [object Storage]. */

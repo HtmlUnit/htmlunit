@@ -130,6 +130,14 @@ public class MouseEvent extends UIEvent {
     }
 
     /**
+     * Sets the clientX value.
+     * @param value the clientX value
+     */
+    public void jsxSet_clientX(final int value) {
+        clientX_ = value;
+    }
+
+    /**
      * The horizontal coordinate at which the event occurred relative to the origin of the screen
      * coordinate system. The value of this attribute is initialized lazily, in order to optimize
      * performance (it requires CSS parsing).
@@ -162,6 +170,14 @@ public class MouseEvent extends UIEvent {
             clientY_ = Integer.valueOf(jsxGet_screenY());
         }
         return clientY_.intValue();
+    }
+
+    /**
+     * Sets the clientY value.
+     * @param value the clientY value
+     */
+    public void jsxSet_clientY(final int value) {
+        clientY_ = value;
     }
 
     /**
@@ -204,6 +220,32 @@ public class MouseEvent extends UIEvent {
             return buttonCodeToIE[button_];
         }
         return button_;
+    }
+
+    /**
+     * Sets the button code.
+     * @param value the button code
+     */
+    public void jsxSet_button(int value) {
+        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_116)
+                && !TYPE_CLICK.equals(jsxGet_type())) {
+            switch (value) {
+                case 1:
+                    value = 0;
+                    break;
+
+                case 4:
+                    value = 1;
+                    break;
+
+                case 2:
+                    value = 2;
+                    break;
+
+                default:
+            }
+        }
+        button_ = value;
     }
 
     /**
