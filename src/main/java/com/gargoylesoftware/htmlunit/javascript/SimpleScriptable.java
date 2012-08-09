@@ -446,7 +446,6 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
 
     @Override
     protected boolean isReadOnlySettable(final String name, final Object value) {
-        System.out.println("Trying to set " + this.getClassName() + " " + name);
         if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.SET_READONLY_PROPERTIES)) {
             throw ScriptRuntime.typeError3("msg.set.prop.no.setter",
                     name, getClassName(), Context.toString(value));
