@@ -48,7 +48,7 @@ public class EventHandler extends BaseFunction {
 
         final String functionSignature;
         if (node.getPage().getEnclosingWindow().getWebClient()
-                .getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_39)) {
+                .getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_EVENT_NO_PARAMETER)) {
             functionSignature = "function()";
         }
         else {

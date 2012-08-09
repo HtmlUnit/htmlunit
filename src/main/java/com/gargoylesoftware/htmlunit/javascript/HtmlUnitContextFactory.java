@@ -276,9 +276,9 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER:
                 return true;
             case Context.FEATURE_PARENT_PROTO_PROPERTIES:
-                return !browserVersion_.hasFeature(BrowserVersionFeatures.GENERATED_142);
+                return !browserVersion_.hasFeature(BrowserVersionFeatures.JS_PARENT_PROTO_PROPERTIES);
             case Context.FEATURE_NON_ECMA_GET_YEAR:
-                return browserVersion_.hasFeature(BrowserVersionFeatures.GENERATED_143);
+                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_NON_ECMA_GET_YEAR);
             case Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY:
                 return true;
             case Context.FEATURE_HTMLUNIT_JS_CATCH_JAVA_EXCEPTION:

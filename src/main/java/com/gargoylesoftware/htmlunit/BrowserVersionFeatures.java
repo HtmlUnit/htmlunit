@@ -224,12 +224,6 @@ public enum BrowserVersionFeatures {
     GENERATED_133,
 
     /** Was originally .isIE(). */
-    GENERATED_142,
-
-    /** Was originally .isIE(). */
-    GENERATED_143,
-
-    /** Was originally .isIE(). */
     GENERATED_144,
 
     /** Was originally .isIE(). */
@@ -312,9 +306,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     GENERATED_37,
-
-    /** Was originally .isIE(). */
-    GENERATED_39,
 
     /** Was originally .isIE(). */
     GENERATED_40,
@@ -563,7 +554,7 @@ public enum BrowserVersionFeatures {
      * if the provided note cannot be inserted. */
     JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE,
 
-    /** Indicates that the class name of "arguments" object is "Object" */
+    /** Indicates that the class name of "arguments" object is "Object". */
     JS_ARGUMENTS_IS_OBJECT,
 
     /** Indicates that the attributes map contains empty attr
@@ -655,6 +646,9 @@ public enum BrowserVersionFeatures {
      */
     JS_EVENT_HANDLER_DECLARED_AS_PROPERTY_DONT_RECEIVE_EVENT,
 
+    /** Do not send parameter in event handlers. */
+    JS_EVENT_NO_PARAMETER,
+
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
 
@@ -707,6 +701,9 @@ public enum BrowserVersionFeatures {
      */
     JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
 
+    /** If <tt>true</tt>, Date.prototype.getYear subtructs 1900 only if 1900 <= date < 2000. */
+    JS_NON_ECMA_GET_YEAR,
+
     /** "[object]" in quirks mode. */
     JS_OBJECT_IN_QUIRKS_MODE,
 
@@ -722,6 +719,9 @@ public enum BrowserVersionFeatures {
      * FF accepts only valid floats.
      */
     JS_OPACITY_ACCEPTS_ARBITRARY_VALUES,
+
+    /** If <tt>true</tt>, then treat <tt>__parent__</tt> and <tt>__proto__</tt> as special properties. */
+    JS_PARENT_PROTO_PROPERTIES,
 
     /** Javascript script.text(...) reexecutes the script (IE). */
     JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT,
