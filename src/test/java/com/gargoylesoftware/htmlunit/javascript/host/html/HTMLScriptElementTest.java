@@ -82,11 +82,10 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
     /**
      * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038.
-     * TODO: check if IE8 really behaves like IE6 and not like IE7.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "", IE6 = "1", IE8 = "1")
+    @Alerts(DEFAULT = "", IE6 = "1")
     public void srcWithJavaScriptProtocol_Static() throws Exception {
         final String html = "<html><head><script src='javascript:\"alert(1)\"'></script></head><body></body></html>";
         loadPageWithAlerts2(html);
@@ -94,11 +93,10 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
     /**
      * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038.
-     * TODO: check if IE8 really behaves like IE6 and not like IE7.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "", IE6 = "1", IE8 = "1")
+    @Alerts(DEFAULT = "", IE6 = "1")
     public void srcWithJavaScriptProtocol_Dynamic() throws Exception {
         final String html =
               "<html><head><title>foo</title><script>\n"
@@ -230,6 +228,55 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Creates a new script element and adds the source using <code>.src</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "start", "end" })
+    public void createElementWithSetSrc() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.createElement('script');\n"
+              + "  script.src = \"" + URL_SECOND + "\";\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        final String js = "alert('executed');";
+        getMockWebConnection().setResponse(URL_SECOND, js);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Creates a new script element and adds the source using <code>.src</code>.
+     * After that it appends the script element to the body.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "start", "middle", "end", "executed" })
+    public void createElementWithSetSrcAndAppend() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.createElement('script');\n"
+              + "  script.src = \"" + URL_SECOND + "\";\n"
+              + "  alert('middle');\n"
+              + "  document.body.appendChild(script);\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        final String js = "alert('executed');";
+        getMockWebConnection().setResponse(URL_SECOND, js);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Replaces the source of the current script element using <code>createTextNode</code> and <code>appendChild</code>.
      * @throws Exception if the test fails
      */
@@ -278,14 +325,38 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Replaces the source of another script element using <code>createTextNode</code> and <code>appendChild</code>.
+     * Replaces the source of the current script element using <code>.src</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "start", "end" },
+            IE = { "start", "end", "executed" })
+    public void replaceSelfWithSetSrc() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementsByTagName('script')[0];\n"
+              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  script.src = \"" + URL_SECOND + "\";\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        final String js = "alert('executed');";
+        getMockWebConnection().setResponse(URL_SECOND, js);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Replaces the empty source of another script element using <code>createTextNode</code> and <code>appendChild</code>.
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = { "start", "executed", "end" },
             IE = { "start", "exception", "end" })
-    @NotYetImplemented(Browser.FF)
-    public void replaceWithCreateTextNode() throws Exception {
+    public void replaceWithCreateTextNodeEmpty() throws Exception {
         // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
@@ -305,12 +376,66 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Replaces the source of another empty script element using <code>.text</code>.
+     * Replaces the source containing just a blank of another script element using <code>createTextNode</code> and <code>appendChild</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "start", "end" },
+            IE = { "start", "exception", "end" })
+    public void replaceWithCreateTextNodeBlank() throws Exception {
+        // IE (at least IE6 and IE8) does not support script.appendChild(source)
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script id='js1'> </script>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementById('js1');\n"
+              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  try {\n"
+              + "    script.appendChild(source);\n"
+              + "  } catch(e) {alert('exception'); }\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Replaces the source containing a script of another script element using <code>createTextNode</code> and <code>appendChild</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "script", "start", "end" },
+            IE = { "script", "start", "exception", "end" })
+    public void replaceWithCreateTextNodeScript() throws Exception {
+        // IE (at least IE6 and IE8) does not support script.appendChild(source)
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script id='js1'>\n"
+              + "  alert('script');\n"
+              + "</script>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementById('js1');\n"
+              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  try {\n"
+              + "    script.appendChild(source);\n"
+              + "  } catch(e) {alert('exception'); }\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Replaces the empty source of another script element using <code>.text</code>.
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = { "start", "executed", "end" })
-    public void replaceEmptyWithSetText() throws Exception {
+    public void replaceWithSetTextEmpty() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
               + "<script id='js1'></script>\n"
@@ -326,16 +451,16 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Replaces the source of another script element using <code>.text</code>.
+     * Replaces the source containing just a blank of another script element using <code>.text</code>.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "exec1", "start", "end" },
-            IE = { "exec1", "start", "executed", "end" })
-    public void replaceNonEmptyWithSetText() throws Exception {
+    @Alerts(DEFAULT = { "start", "end" },
+            IE = { "start", "executed", "end" })
+    public void replaceWithSetTextBlank() throws Exception {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
-              + "<script id='js1'>alert('exec1');</script>\n"
+              + "<script id='js1'> </script>\n"
               + "<script>\n"
               + "  alert('start');\n"
               + "  var script = document.getElementById('js1');\n"
@@ -343,6 +468,106 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
               + "  alert('end');\n"
               + "</script>\n"
               + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Replaces the source containing a script of another script element using <code>.text</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "script", "start", "end" },
+            IE = { "script", "start", "executed", "end" })
+    public void replaceWithSetTextScript() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script id='js1'>\n"
+              + "  alert('script');\n"
+              + "</script>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementById('js1');\n"
+              + "  script.text = \"alert('executed');\";\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Replaces the empty source of another script element using <code>.src</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "start", "end", "executed" })
+    public void replaceWithSetSrcEmpty() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script id='js1'></script>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementById('js1');\n"
+              + "  script.src = \"" + URL_SECOND + "\";\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        final String js = "alert('executed');";
+        getMockWebConnection().setResponse(URL_SECOND, js);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Replaces the source containing just a blank of another script element using <code>.src</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "start", "end" },
+            IE = { "start", "end", "executed" })
+    public void replaceWithSetSrcBlank() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script id='js1'> </script>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementById('js1');\n"
+              + "  script.src = \"" + URL_SECOND + "\";\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        final String js = "alert('executed');";
+        getMockWebConnection().setResponse(URL_SECOND, js);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Replaces the source containing a script of another script element using <code>.text</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "script", "start", "end" },
+            IE = { "script", "start", "end", "executed" })
+    public void replaceWithSetSrcScript() throws Exception {
+        final String html =
+                "<html><head><title>foo</title></head><body>\n"
+              + "<script id='js1'>\n"
+              + "  alert('script');\n"
+              + "</script>\n"
+              + "<script>\n"
+              + "  alert('start');\n"
+              + "  var script = document.getElementById('js1');\n"
+              + "  script.src = \"" + URL_SECOND + "\";\n"
+              + "  alert('end');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        final String js = "alert('executed');";
+        getMockWebConnection().setResponse(URL_SECOND, js);
 
         loadPageWithAlerts2(html);
     }
@@ -535,7 +760,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     /**
      * Regression test for bug 47038.
      * http://sourceforge.net/tracker/?func=detail&atid=448266&aid=3403860&group_id=47038
-     * TODO: IE check only done with IE6, check with other versions
+     * TODO: IE check only done with IE6 and IE8, check with other versions
      * @throws Exception if the test fails
      */
     @Test

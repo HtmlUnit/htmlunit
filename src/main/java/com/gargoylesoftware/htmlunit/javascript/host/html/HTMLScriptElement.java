@@ -161,7 +161,15 @@ public class HTMLScriptElement extends HTMLElement {
                 BrowserVersionFeatures.JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION)) {
             throw Context.reportRuntimeError("Unexpected call to method or property access");
         }
-        return super.jsxFunction_appendChild(childObject);
+
+        final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
+        final boolean wasEmpty = tmpScript.getFirstChild() == null;
+        final Object result = super.jsxFunction_appendChild(childObject);
+
+        if (wasEmpty) {
+            tmpScript.executeScriptIfNeeded();
+        }
+        return result;
     }
 
     /**

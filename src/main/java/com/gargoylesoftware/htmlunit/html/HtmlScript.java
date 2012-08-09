@@ -15,10 +15,12 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -191,12 +193,32 @@ public class HtmlScript extends HtmlElement {
         if (namespaceURI == null && "src".equals(qualifiedName)) {
             final boolean alwaysReexecute = getPage().getWebClient().getBrowserVersion().
                 hasFeature(BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
-            if (alwaysReexecute || (oldValue.isEmpty() && getFirstChild() == null)) {
+
+            if (isDirectlyAttachedToPage()) {
                 // always execute if IE;
+                if (alwaysReexecute) {
+                    resetExecuted();
+                    final PostponedAction action = new PostponedAction(getPage()) {
+                        @Override
+                        public void execute() {
+                            executeScriptIfNeeded();
+                        }
+                    };
+                    final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+                    engine.addPostponedAction(action);
+                }
                 // if FF, only execute if the "src" attribute
                 // was undefined and there was no inline code.
-                resetExecuted();
-                executeScriptIfNeeded();
+                else if (oldValue.isEmpty() && getFirstChild() == null) {
+                    final PostponedAction action = new PostponedAction(getPage()) {
+                        @Override
+                        public void execute() {
+                            executeScriptIfNeeded();
+                        }
+                    };
+                    final JavaScriptEngine engine = getPage().getWebClient().getJavaScriptEngine();
+                    engine.addPostponedAction(action);
+                }
             }
         }
     }
@@ -365,6 +387,7 @@ public class HtmlScript extends HtmlElement {
                     LOG.debug("Loading external JavaScript: " + src);
                 }
                 try {
+                    executed_ = true;
                     final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, getCharsetAttribute());
                     if (result == JavaScriptLoadResult.SUCCESS) {
                         executeEventIfBrowserHasFeature(Event.TYPE_LOAD,
@@ -565,4 +588,24 @@ public class HtmlScript extends HtmlElement {
     public void processImportNode() {
         executed_ = true;
     }
+
+    /**
+     * Returns a string representation of this object.
+     * @return a string representation of this object
+     */
+    @Override
+    public String toString() {
+        final StringWriter writer = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(writer);
+
+        printWriter.print(ClassUtils.getShortClassName(getClass()));
+        printWriter.print("[<");
+        printOpeningTagContentAsXml(printWriter);
+        printWriter.print(">");
+        printWriter.print(getScriptCode());
+        printWriter.print("]");
+        printWriter.flush();
+        return writer.toString();
+    }
+
 }
