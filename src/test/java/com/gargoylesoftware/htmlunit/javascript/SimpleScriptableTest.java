@@ -584,27 +584,4 @@ public class SimpleScriptableTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "0", "0", "1", "0" })
-    public void arguments() throws Exception {
-        final String html
-            = "<html><head><script>\n"
-            + "function test() {\n"
-            + "  alert(test.arguments.length);\n"
-            + "  test1('hi');\n"
-            + "}\n"
-            + "function test1(hello) {\n"
-            + "  alert(test.arguments.length);\n"
-            + "  alert(test1.arguments.length);\n"
-            + "  alert(arguments.callee.caller.arguments.length);\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
 }
