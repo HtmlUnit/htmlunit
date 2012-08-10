@@ -283,8 +283,10 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return true;
             case Context.FEATURE_HTMLUNIT_JS_CATCH_JAVA_EXCEPTION:
                 return false;
-            case Context.FEATURE_HTMLUNIT_ARGUMENT_IS_OBJECT:
+            case Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_OBJECT:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_ARGUMENTS_IS_OBJECT);
+            case Context.FEATURE_HTMLUNIT_FUNCTION_NULL_SETTER:
+                return true;
             default:
                 return super.hasFeature(cx, featureIndex);
         }

@@ -49,10 +49,10 @@ public class EventHandler extends BaseFunction {
         final String functionSignature;
         if (node.getPage().getEnclosingWindow().getWebClient()
                 .getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_EVENT_NO_PARAMETER)) {
-            functionSignature = "function()";
+            functionSignature = "function " + eventName + "()";
         }
         else {
-            functionSignature = "function(event)";
+            functionSignature = "function " + eventName + "(event)";
         }
         jsSnippet_ =  functionSignature + " {" + jsSnippet + "\n}";
 
@@ -78,7 +78,6 @@ public class EventHandler extends BaseFunction {
         }
 
         final Object result = realFunction_.call(cx, scope, thisObj, args);
-
         return result;
     }
 

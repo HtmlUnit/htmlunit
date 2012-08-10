@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support">
+            <action type="fix" dev="asashour">
+                JavaScript: event handler functions should have a name.
+            </action>
             <action type="add" dev="asashour" issue="3545244">
                 JavaScript: implement function.arguments, and correct Arguments default value.
             </action>
