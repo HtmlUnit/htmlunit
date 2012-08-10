@@ -13,7 +13,7 @@
                 (in IE mode).
             </action>
             <action type="fix" dev="rbri" issue="3542056">
-                JavaScript: fix various problems with re-execution of script 
+                JavaScript: fix various problems with re-execution of script
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: event handler functions should have a name.
