@@ -16,13 +16,9 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlHeading1} to {@link HtmlHeading6}.
@@ -31,30 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlHeadingTest extends WebDriverTestCase {
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "[object HTMLHeadingElement]", IE = "[object]")
-    public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <h2 id='myId'>asdf</h2>\n"
-            + "</body></html>";
-
-        final WebDriver driver = loadPageWithAlerts2(html);
-        if (driver instanceof HtmlUnitDriver) {
-            final HtmlElement element = toHtmlElement(driver.findElement(By.id("myId")));
-            assertTrue(element instanceof HtmlHeading2);
-        }
-    }
+public class HtmlHeadingTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

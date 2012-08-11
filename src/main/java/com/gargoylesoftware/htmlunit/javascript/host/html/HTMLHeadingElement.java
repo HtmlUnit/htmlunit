@@ -29,4 +29,19 @@ public class HTMLHeadingElement extends HTMLElement {
         // Empty.
     }
 
+    /**
+     * Returns the value of the <tt>align</tt> property.
+     * @return the value of the <tt>align</tt> property
+     */
+    public String jsxGet_align() {
+        return getAlign(false);
+    }
+
+    /**
+     * Sets the value of the <tt>align</tt> property.
+     * @param align the value of the <tt>align</tt> property
+     */
+    public void jsxSet_align(final String align) {
+        setAlign(align, false);
+    }
 }

@@ -2253,12 +2253,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the "align" property
      */
     protected String getAlign(final boolean returnInvalidValues) {
+        final boolean acceptArbitraryValues =
+                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
+
         final String align = getDomNodeOrDie().getAttribute("align");
         if ("center".equals(align)
             || "justify".equals(align)
             || "left".equals(align)
             || "right".equals(align)
-            || returnInvalidValues) {
+            || returnInvalidValues || acceptArbitraryValues) {
             return align;
         }
         return "";

@@ -1960,7 +1960,7 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadingElement"
         JSObject="true">
-        <property name="align" notImplemented="true"/>
+        <property name="align" />
     </class>
 
     <class extends="#HtmlElementBase" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHRElement"

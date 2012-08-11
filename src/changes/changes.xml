@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support">
+            <action type="add" dev="rbri">
+                JavaScript: align property support added to heading elements
+            </action>
             <action type="fix" dev="rbri" issue="2993940">
                 JavaScript: setting script.text re-executes the script (IE)
                 (in IE mode).
