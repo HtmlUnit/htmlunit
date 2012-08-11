@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
 
 /**
  * A collection of nodes that can be accessed by name. String comparisons in this class are case-insensitive when
- * used with an {@link com.gargoylesoftware.htmlunit.html.HtmlElement},
+ * used with an {@link HtmlElement},
  * but case-sensitive when used with a {@link DomElement}.
  *
  * @version $Revision$
@@ -126,7 +126,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
             return attr;
         }
 
-        // for IE we have to add the sythetic class attribute
+        // for IE we have to add the synthetic class attribute
         if ("class".equals(name) && useRecursiveAttributeForIE()) {
             return getUnspecifiedAttributeNode(name);
         }

@@ -223,7 +223,7 @@ public final class JavaScriptConfiguration {
 
     /**
      * Returns the instance that represents the configuration for the specified {@link BrowserVersion}.
-     * This method is synchronized to allow multithreaded access to the JavaScript configuration.
+     * This method is synchronized to allow multi-threaded access to the JavaScript configuration.
      * @param browserVersion the {@link BrowserVersion}
      * @return the instance for the specified {@link BrowserVersion}
      */
@@ -568,8 +568,8 @@ public final class JavaScriptConfiguration {
 
     /**
      * Returns an immutable map containing the HTML to JavaScript mappings. Keys are
-     * java classes for the various HTML classes (ie HtmlInput.class) and the values
-     * are the JavaScript class names (ie "HTMLAnchorElement").
+     * java classes for the various HTML classes (e.g. HtmlInput.class) and the values
+     * are the JavaScript class names (e.g. "HTMLAnchorElement").
      * @return the mappings
      */
     @SuppressWarnings("unchecked")

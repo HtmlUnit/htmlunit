@@ -29,7 +29,7 @@ public enum BrowserVersionFeatures {
      * If the "href" attribute of HtmlAnchor is defined but empty then IE interprets this as an empty filename.
      * Example: The page http://htmlunit.sourceforge.net/test/myFile.html contains an anchor with an empty
      * href attribute. Clicking the link in IE force the load of page http://htmlunit.sourceforge.net/test/.
-     * In Firefox the url is unchanged.
+     * In Firefox the URL is unchanged.
      */
     ANCHOR_EMPTY_HREF_NO_FILENAME,
 
@@ -470,7 +470,7 @@ public enum BrowserVersionFeatures {
     HTMLELEMENT_TRIM_CLASS_ATTRIBUTE,
 
     /**
-     * Indicates if a selfclosing &lt;iframe/&gt; tag should be considered as an opening tag.
+     * Indicates if a self-closing &lt;iframe/&gt; tag should be considered as an opening tag.
      **/
     HTMLIFRAME_IGNORE_SELFCLOSING,
 
@@ -701,7 +701,7 @@ public enum BrowserVersionFeatures {
      */
     JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
 
-    /** If <tt>true</tt>, Date.prototype.getYear subtructs 1900 only if 1900 <= date < 2000. */
+    /** If <tt>true</tt>, Date.prototype.getYear subtracts 1900 only if 1900 <= date < 2000. */
     JS_NON_ECMA_GET_YEAR,
 
     /** "[object]" in quirks mode. */
@@ -786,7 +786,7 @@ public enum BrowserVersionFeatures {
     JS_TEXT_AREA_COLS_RETURNS_20,
 
     /** Setting the property cols throws an exception, if the provided value is not
-     * convertable into an integer (IE).
+     * convertible into an integer (IE).
      * FF ignores the provided value in this case and sets cols to 0.
      */
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
@@ -846,7 +846,7 @@ public enum BrowserVersionFeatures {
      * Indicates that a read only JS property can potentially be set.
      * If supported, {@link net.sourceforge.htmlunit.corejs.javascript.ScriptableObject}.isReadOnlySettable()
      * will be checked,
-     * if not supported, an excpetion will be thrown.
+     * if not supported, an exception will be thrown.
      */
     SET_READONLY_PROPERTIES,
 

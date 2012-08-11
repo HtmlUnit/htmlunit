@@ -27,7 +27,7 @@ public class StrictErrorHandler implements ErrorHandler {
     /**
      * A warning occurred.
      *
-     * @param rethrow an exception which will be rethrown
+     * @param rethrow an exception which will be re-thrown
      * @throws SAXParseException always
      */
     public void warning(final SAXParseException rethrow) throws SAXParseException {
@@ -37,7 +37,7 @@ public class StrictErrorHandler implements ErrorHandler {
     /**
      * An error occurred.
      *
-     * @param rethrow an exception which will be rethrown
+     * @param rethrow an exception which will be re-thrown
      * @throws SAXParseException always
      */
     public void error(final SAXParseException rethrow) throws SAXParseException {
@@ -47,7 +47,7 @@ public class StrictErrorHandler implements ErrorHandler {
     /**
      * A fatal error occurred.
      *
-     * @param rethrow an exception which will be rethrown
+     * @param rethrow an exception which will be re-thrown
      * @throws SAXParseException always
      */
     public void fatalError(final SAXParseException rethrow) throws SAXParseException {

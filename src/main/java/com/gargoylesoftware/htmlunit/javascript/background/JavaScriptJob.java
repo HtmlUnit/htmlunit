@@ -61,8 +61,8 @@ public interface JavaScriptJob extends Runnable, Comparable<JavaScriptJob> {
     boolean isPeriodic();
 
     /**
-     * Returns <tt>true</tt> if has to be executed asap.
-     * @return <tt>true</tt> if has to be executed asap
+     * Returns <tt>true</tt> if has to be executed ASAP.
+     * @return <tt>true</tt> if has to be executed ASAP
      */
     boolean isExecuteAsap();
 }
