@@ -557,6 +557,9 @@ public enum BrowserVersionFeatures {
     /** Indicates that the class name of "arguments" object is "Object". */
     JS_ARGUMENTS_IS_OBJECT,
 
+    /** Indicates that the "arguments" object is read-only. */
+    JS_ARGUMENTS_IS_READ_ONLY,
+
     /** Indicates that the attributes map contains empty attr
      * objects for all properties of the object (like IE does). */
     JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES,

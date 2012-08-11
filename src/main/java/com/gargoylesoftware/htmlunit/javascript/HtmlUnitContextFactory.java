@@ -287,6 +287,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_ARGUMENTS_IS_OBJECT);
             case Context.FEATURE_HTMLUNIT_FUNCTION_NULL_SETTER:
                 return true;
+            case Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_READ_ONLY:
+                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_ARGUMENTS_IS_READ_ONLY);
             default:
                 return super.hasFeature(cx, featureIndex);
         }

@@ -72,4 +72,31 @@ public class ArgumentsTest extends WebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF3_6 = { "2", "hi", "undefined", "you" }, IE = { "2", "hi", "undefined", "you" },
+            CHROME = { "2", "world", "undefined", "undefined" })
+    //FF14 same as chrome
+    public void readOnly() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  test1('hello', 'world');\n"
+            + "}\n"
+            + "function test1() {\n"
+            + "  test1.arguments[1] = 'hi';\n"
+            + "  test1.arguments[3] = 'you';\n"
+            + "  alert(test1.arguments.length);\n"
+            + "  alert(test1.arguments[1]);\n"
+            + "  alert(test1.arguments[2]);\n"
+            + "  alert(test1.arguments[3]);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }
