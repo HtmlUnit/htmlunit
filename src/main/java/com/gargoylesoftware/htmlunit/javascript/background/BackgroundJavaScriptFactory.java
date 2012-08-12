@@ -27,12 +27,11 @@ import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 /**
  * A factory for all the things we have to construct from outside of the
  * JavaScript engine.
- * TODO make configurable
  *
  * @version $Revision$
  * @author Ronald Brill
  */
-public final class BackgroundJavaScriptFactory {
+public class BackgroundJavaScriptFactory {
 
     private static BackgroundJavaScriptFactory Factory_ = new BackgroundJavaScriptFactory();
 
@@ -149,9 +148,9 @@ public final class BackgroundJavaScriptFactory {
     }
 
     /**
-     * Make the constructor invisible.
+     * The constructor.
      */
-    private BackgroundJavaScriptFactory() {
+    protected BackgroundJavaScriptFactory() {
         super();
     }
 }

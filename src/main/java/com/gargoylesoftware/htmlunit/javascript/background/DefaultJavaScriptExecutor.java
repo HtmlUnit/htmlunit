@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Kostadin Chikov
  * @author Ronald Brill
  */
-class DefaultJavaScriptExecutor implements JavaScriptExecutor {
+public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     private static final long serialVersionUID = 5677978210585334168L;
 
     // TODO: is there utility in not having these as transient?
@@ -62,10 +62,18 @@ class DefaultJavaScriptExecutor implements JavaScriptExecutor {
      */
     protected void startThreadIfNeeded() {
         if (eventLoopThread_ == null) {
-            eventLoopThread_ = new Thread(this, "JS executor for " + webClient_.get());
+            eventLoopThread_ = new Thread(this, getThreadName());
             eventLoopThread_.setDaemon(true);
             eventLoopThread_.start();
         }
+    }
+
+    /**
+     * Defines the thread name; overload if needed.
+     * @return the name of the js executor thread
+     */
+    protected String getThreadName() {
+        return "JS executor for " + webClient_.get();
     }
 
     private void killThread() {
@@ -202,5 +210,4 @@ class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         shutdown_ = true;
         killThread();
     }
-
 }
