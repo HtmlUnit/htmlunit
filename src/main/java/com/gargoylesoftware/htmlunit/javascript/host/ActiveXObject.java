@@ -116,7 +116,7 @@ public class ActiveXObject extends SimpleScriptable {
                 return Context.toObject(object, ctorObj);
             }
         }
-        if (webClient.isActiveXNative() && System.getProperty("os.name").contains("Windows")) {
+        if (webClient.getOptions().isActiveXNative() && System.getProperty("os.name").contains("Windows")) {
             try {
                 return new ActiveXObjectImpl(activeXName);
             }

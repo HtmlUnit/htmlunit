@@ -77,7 +77,7 @@ public class HtmlScriptTest extends WebTestCase {
             assertEquals("Not Found", e.getStatusMessage());
         }
 
-        client.setThrowExceptionOnFailingStatusCode(false);
+        client.getOptions().setThrowExceptionOnFailingStatusCode(false);
 
         try {
             client.getPage(URL_FIRST);
@@ -434,7 +434,7 @@ public class HtmlScriptTest extends WebTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
         final WebClient client = getWebClient();
-        client.setThrowExceptionOnFailingStatusCode(throwOnFailingStatusCode);
+        client.getOptions().setThrowExceptionOnFailingStatusCode(throwOnFailingStatusCode);
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, "var foo;", JAVASCRIPT_MIME_TYPE);
@@ -443,7 +443,7 @@ public class HtmlScriptTest extends WebTestCase {
         client.setWebConnection(conn);
         final List<String> actual = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(actual));
-        client.setThrowExceptionOnScriptError(false);
+        client.getOptions().setThrowExceptionOnScriptError(false);
         client.getPage(URL_FIRST);
         assertEquals(getExpectedAlerts(), actual);
     }

@@ -78,7 +78,7 @@ public class HtmlObjectTest extends WebTestCase {
             + "</body></html>";
 
         final WebClient client = getWebClient();
-        client.setActiveXNative(true);
+        client.getOptions().setActiveXNative(true);
         final List<String> collectedAlerts = new ArrayList<String>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 

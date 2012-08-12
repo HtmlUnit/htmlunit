@@ -173,7 +173,7 @@ public class WebClientTest extends WebServerTestCase {
             = "<html><head><title>foo</title></head><body>\n"
             + "No access</body></html>";
         final WebClient client = getWebClient();
-        client.setPrintContentOnFailingStatusCode(false);
+        client.getOptions().setPrintContentOnFailingStatusCode(false);
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(htmlContent, 401, "Credentials missing or just plain wrong", "text/plain");
@@ -578,7 +578,7 @@ public class WebClientTest extends WebServerTestCase {
         };
         webConnection.setResponse(url, firstContent, 302, "Redirect needed", "text/html", headers);
         webClient.setWebConnection(webConnection);
-        webClient.setThrowExceptionOnFailingStatusCode(false);
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 
         return webClient.getPage(url);
     }
@@ -648,8 +648,8 @@ public class WebClientTest extends WebServerTestCase {
             webClient = getWebClient();
         }
 
-        webClient.setThrowExceptionOnFailingStatusCode(false);
-        webClient.setPrintContentOnFailingStatusCode(false);
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+        webClient.getOptions().setPrintContentOnFailingStatusCode(false);
 
         final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", newLocation));
         final MockWebConnection webConnection = new MockWebConnection();
@@ -686,7 +686,7 @@ public class WebClientTest extends WebServerTestCase {
         //
         // Second time redirection is turned off
         //
-        webClient.setRedirectEnabled(false);
+        webClient.getOptions().setRedirectEnabled(false);
         page = webClient.getPage(new WebRequest(url, initialRequestMethod));
         webResponse = page.getWebResponse();
         assertEquals(statusCode, webResponse.getStatusCode());
@@ -1131,8 +1131,8 @@ public class WebClientTest extends WebServerTestCase {
         final List<? extends NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 500, "BOOM", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
-        webClient.setThrowExceptionOnFailingStatusCode(true);
-        webClient.setPrintContentOnFailingStatusCode(false);
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(true);
+        webClient.getOptions().setPrintContentOnFailingStatusCode(false);
         try {
             webClient.getPage(URL_FIRST);
             fail("Should have thrown");
@@ -1236,8 +1236,8 @@ public class WebClientTest extends WebServerTestCase {
         assertEquals(location2, page2.getWebResponse().getWebRequest().getUrl());
 
         // Make sure default proxy settings are used.
-        webClient.setThrowExceptionOnFailingStatusCode(false);
-        webClient.setRedirectEnabled(false);
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+        webClient.getOptions().setRedirectEnabled(false);
         final Page page1 = webClient.getPage(URL_FIRST);
         assertEquals(defaultProxyHost, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(defaultProxyPort, webConnection.getLastWebRequest().getProxyPort());
@@ -1731,7 +1731,7 @@ public class WebClientTest extends WebServerTestCase {
         client.setJavaScriptTimeout(timeout);
 
         try {
-            client.setThrowExceptionOnScriptError(false);
+            client.getOptions().setThrowExceptionOnScriptError(false);
 
             final String content = "<html><body><script>while(1) {}</script></body></html>";
             final MockWebConnection webConnection = new MockWebConnection();
@@ -2357,7 +2357,7 @@ public class WebClientTest extends WebServerTestCase {
 
         final WebClient webClient = getWebClient();
         webClient.getOptions().setJavaScriptEnabled(true);
-        webClient.setThrowExceptionOnScriptError(false);
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
 
         loadPage(html);
     }

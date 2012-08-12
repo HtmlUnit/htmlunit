@@ -599,7 +599,7 @@ public class JavaScriptEngine {
                 if (javaScriptErrorListener != null) {
                     javaScriptErrorListener.timeoutError(htmlPage_, e.getAllowedTime(), e.getExecutionTime());
                 }
-                if (getWebClient().isThrowExceptionOnScriptError()) {
+                if (getWebClient().getOptions().isThrowExceptionOnScriptError()) {
                     throw new RuntimeException(e);
                 }
                 LOG.info("Caught script timeout error", e);
@@ -688,7 +688,7 @@ public class JavaScriptEngine {
             javaScriptErrorListener.scriptException(page, scriptException);
         }
         // Throw a Java exception if the user wants us to.
-        if (getWebClient().isThrowExceptionOnScriptError()) {
+        if (getWebClient().getOptions().isThrowExceptionOnScriptError()) {
             throw scriptException;
         }
         // Log the error; ScriptException instances provide good debug info.

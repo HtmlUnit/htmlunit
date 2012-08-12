@@ -105,9 +105,9 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends WebTe
     @Test
     public void insecureSSL_clientCertificates() throws Exception {
         final WebClient webClient = getWebClient();
-        webClient.setSSLClientCertificate(getClass().getClassLoader().getResource("insecureSSL.keystore"),
+        webClient.getOptions().setSSLClientCertificate(getClass().getClassLoader().getResource("insecureSSL.keystore"),
                 "nopassword", "jks");
-        webClient.setUseInsecureSSL(true);
+        webClient.getOptions().setUseInsecureSSL(true);
         webClient.getPage("https://" + localServer_.getServiceAddress().getHostName()
                 + ':' + localServer_.getServiceAddress().getPort()
                 + "/random/100");

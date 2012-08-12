@@ -121,13 +121,10 @@ public class WebClient implements Serializable {
     private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
 
     private transient WebConnection webConnection_ = createWebConnection();
-    private boolean printContentOnFailingStatusCode_ = true;
-    private boolean throwExceptionOnFailingStatusCode_ = true;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private ProxyConfig proxyConfig_;
     private CookieManager cookieManager_ = new CookieManager();
     private transient JavaScriptEngine scriptEngine_;
-    private String homePage_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
     private WebConsole webConsole_;
@@ -162,9 +159,7 @@ public class WebClient implements Serializable {
     private ScriptPreProcessor scriptPreProcessor_;
 
     private Map<String, String> activeXObjectMap_ = Collections.emptyMap();
-    private boolean activeXNative_;
     private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
-    private boolean throwExceptionOnScriptError_ = true;
     private JavaScriptErrorListener javaScriptErrorListener_;
 
     private WebClientOptions options_ = new WebClientOptions(this);
@@ -205,7 +200,6 @@ public class WebClient implements Serializable {
      * @param proxyConfig the proxy configuration to use
      */
     private void init(final BrowserVersion browserVersion, final ProxyConfig proxyConfig) {
-        homePage_ = "http://htmlunit.sf.net/";
         browserVersion_ = browserVersion;
         proxyConfig_ = proxyConfig;
 
@@ -463,9 +457,11 @@ public class WebClient implements Serializable {
      * Successful response codes are in the range 200-299. The default is true.
      *
      * @param enabled True to enable this feature
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setPrintContentOnFailingStatusCode instead.
      */
+    @Deprecated
     public void setPrintContentOnFailingStatusCode(final boolean enabled) {
-        printContentOnFailingStatusCode_ = enabled;
+        getOptions().setPrintContentOnFailingStatusCode(enabled);
     }
 
     /**
@@ -475,9 +471,11 @@ public class WebClient implements Serializable {
      * @return <tt>true</tt> if the content of the resulting document will be printed to
      *         the console in the event of a failing response code
      * @see #setPrintContentOnFailingStatusCode
+     * @deprecated as of 2.11, please use {@link #getOptions()}.getPrintContentOnFailingStatusCode instead.
      */
+    @Deprecated
     public boolean getPrintContentOnFailingStatusCode() {
-        return printContentOnFailingStatusCode_;
+        return getOptions().getPrintContentOnFailingStatusCode();
     }
 
     /**
@@ -504,18 +502,22 @@ public class WebClient implements Serializable {
      * The default is true.
      *
      * @param enabled <tt>true</tt> to enable this feature
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setThrowExceptionOnFailingStatusCode instead.
      */
+    @Deprecated
     public void setThrowExceptionOnFailingStatusCode(final boolean enabled) {
-        throwExceptionOnFailingStatusCode_ = enabled;
+        getOptions().setThrowExceptionOnFailingStatusCode(enabled);
     }
 
     /**
      * Returns <tt>true</tt> if an exception will be thrown in the event of a failing response code.
      * @return <tt>true</tt> if an exception will be thrown in the event of a failing response code
      * @see #setThrowExceptionOnFailingStatusCode
+     * @deprecated as of 2.11, please use {@link #getOptions()}.isThrowExceptionOnFailingStatusCode instead.
      */
+    @Deprecated
     public boolean isThrowExceptionOnFailingStatusCode() {
-        return throwExceptionOnFailingStatusCode_;
+        return getOptions().isThrowExceptionOnFailingStatusCode();
     }
 
     /**
@@ -531,7 +533,7 @@ public class WebClient implements Serializable {
         final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES)
             || statusCode == HttpStatus.SC_USE_PROXY
             || statusCode == HttpStatus.SC_NOT_MODIFIED;
-        if (isThrowExceptionOnFailingStatusCode() && !successful) {
+        if (getOptions().isThrowExceptionOnFailingStatusCode() && !successful) {
             throw new FailingHttpStatusCodeException(webResponse);
         }
     }
@@ -695,17 +697,21 @@ public class WebClient implements Serializable {
     /**
      * Returns the client's current homepage.
      * @return the client's current homepage
+     * @deprecated as of 2.11, please use {@link #getOptions()}.getHomePage instead.
      */
+    @Deprecated
     public String getHomePage() {
-        return homePage_;
+        return getOptions().getHomePage();
     }
 
     /**
      * Sets the client's homepage.
      * @param homePage the new homepage URL
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setHomePage instead.
      */
+    @Deprecated
     public void setHomePage(final String homePage) {
-        homePage_ = homePage;
+        getOptions().setHomePage(homePage);
     }
 
     /**
@@ -1619,17 +1625,21 @@ public class WebClient implements Serializable {
      * the JavaScript code, as it is not controlled by the Java Virtual Machine.
      *
      * @param allow whether to allow or no
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setActiveXNative instead.
      */
+    @Deprecated
     public void setActiveXNative(final boolean allow) {
-        activeXNative_ = allow;
+        getOptions().setActiveXNative(allow);
     }
 
     /**
      * Returns whether native ActiveX components are allowed or no.
      * @return whether native ActiveX components are allowed or no
+     * @deprecated as of 2.11, please use {@link #getOptions()}.isActiveXNative instead.
      */
+    @Deprecated
     public boolean isActiveXNative() {
-        return activeXNative_;
+        return getOptions().isActiveXNative();
     }
 
     /**
@@ -1716,17 +1726,21 @@ public class WebClient implements Serializable {
      * (the default) or if it should be caught and just logged to allow page
      * execution to continue.
      * @return <code>true</code> if an exception is thrown on script error (the default)
+     * @deprecated as of 2.11, please use {@link #getOptions()}.isThrowExceptionOnScriptError instead.
      */
+    @Deprecated
     public boolean isThrowExceptionOnScriptError() {
-        return throwExceptionOnScriptError_;
+        return getOptions().isThrowExceptionOnScriptError();
     }
 
     /**
      * Changes the behavior of this webclient when a script error occurs.
      * @param newValue indicates if exception should be thrown or not
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setThrowExceptionOnScriptError instead.
      */
+    @Deprecated
     public void setThrowExceptionOnScriptError(final boolean newValue) {
-        throwExceptionOnScriptError_ = newValue;
+        getOptions().setThrowExceptionOnScriptError(newValue);
     }
 
     /**

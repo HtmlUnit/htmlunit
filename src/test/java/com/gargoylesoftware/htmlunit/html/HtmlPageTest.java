@@ -286,9 +286,9 @@ public class HtmlPageTest extends WebServerTestCase {
             + "</form></body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        assertEquals(page.getHtmlElementById("a"), page.getElementByAccessKey('A'));
-        assertEquals(page.getHtmlElementById("c"), page.getElementByAccessKey('c'));
-        assertNull(page.getElementByAccessKey('z'));
+        assertEquals(page.getHtmlElementById("a"), page.getHtmlElementByAccessKey('A'));
+        assertEquals(page.getHtmlElementById("c"), page.getHtmlElementByAccessKey('c'));
+        assertNull(page.getHtmlElementByAccessKey('z'));
     }
 
     /**
@@ -307,7 +307,7 @@ public class HtmlPageTest extends WebServerTestCase {
 
         final List<HtmlElement> expectedElements = Arrays.asList(new HtmlElement[] {page.getHtmlElementById("a"),
                 page.getHtmlElementById("b")});
-        final List<HtmlElement> collectedElements = page.getElementsByAccessKey('a');
+        final List<HtmlElement> collectedElements = page.getHtmlElementsByAccessKey('a');
         assertEquals(expectedElements, collectedElements);
     }
 

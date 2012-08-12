@@ -37,10 +37,14 @@
                 Add support for "Do Not Track" feature (FF10 only).
             </action>
             <action type="update" dev="asashour">
-                WebClient: deprecate setJavaScriptEnabled(), isJavaScriptEnabled(), setCssEnabled(),
-                isCssEnabled(), setAppletEnabled(), isAppletEnabled(), setPopupBlockerEnabled(),
-                isPopupBlockerEnabled(), setRedirectEnabled(), isRedirectEnabled(),
-                setUseInsecureSSL() and setSSLClientCertificate(). Use webClient.getOptions() instead.
+                WebClient: deprecate setJavaScriptEnabled(), isJavaScriptEnabled(),
+                setThrowExceptionOnScriptError(), isThrowExceptionOnScriptError(),
+                setThrowExceptionOnFailingStatusCode(), isThrowExceptionOnFailingStatusCode(),
+                setCssEnabled(), isCssEnabled(), setAppletEnabled(), isAppletEnabled(),
+                setPopupBlockerEnabled(), isPopupBlockerEnabled(), setRedirectEnabled(), isRedirectEnabled(),
+                setUseInsecureSSL() and setSSLClientCertificate(), setHomePage(), getHomePage(),
+                setPrintContentOnFailingStatusCode(), getPrintContentOnFailingStatusCode(),
+                setActiveXNative(), isActiveXNative(). Use webClient.getOptions() instead.
             </action>
             <action type="add" dev="asashour">
                 JavaScript: implement navigator.buildID, .oscpu, .vendor and .vendorSub.

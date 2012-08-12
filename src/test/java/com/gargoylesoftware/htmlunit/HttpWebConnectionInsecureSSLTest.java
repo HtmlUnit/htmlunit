@@ -119,7 +119,7 @@ public class HttpWebConnectionInsecureSSLTest extends WebTestCase {
     @Test
     public void insecureSSL() throws Exception {
         final WebClient webClient = getWebClient();
-        webClient.setUseInsecureSSL(true);
+        webClient.getOptions().setUseInsecureSSL(true);
         webClient.getPage("https://" + localServer_.getServiceAddress().getHostName()
                 + ':' + localServer_.getServiceAddress().getPort()
                 + "/random/100");
@@ -132,7 +132,7 @@ public class HttpWebConnectionInsecureSSLTest extends WebTestCase {
     public void insecureSSL_withWrapper() throws Exception {
         final WebClient webClient = getWebClient();
         webClient.setWebConnection(new WebConnectionWrapper(webClient.getWebConnection()));
-        webClient.setUseInsecureSSL(true);
+        webClient.getOptions().setUseInsecureSSL(true);
         webClient.getPage("https://" + localServer_.getServiceAddress().getHostName()
                 + ':' + localServer_.getServiceAddress().getPort()
                 + "/random/100");

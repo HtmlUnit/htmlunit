@@ -310,7 +310,7 @@ public class Window2Test extends WebDriverTestCase {
             + "alert(undef);\n"
             + "</script>";
 
-        getWebClientWithMockWebConnection().setThrowExceptionOnScriptError(false);
+        getWebClientWithMockWebConnection().getOptions().setThrowExceptionOnScriptError(false);
         loadPageWithAlerts(html);
     }
 

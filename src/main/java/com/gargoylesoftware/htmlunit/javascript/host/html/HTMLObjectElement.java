@@ -89,7 +89,7 @@ public class HTMLObjectElement extends FormChild {
     public void jsxSet_classid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
         if (classid.indexOf(':') != -1 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_86)
-                && getWindow().getWebWindow().getWebClient().isActiveXNative()
+                && getWindow().getWebWindow().getWebClient().getOptions().isActiveXNative()
                 && System.getProperty("os.name").contains("Windows")) {
             try {
                 wrappedActiveX_ = new ActiveXObjectImpl(classid);

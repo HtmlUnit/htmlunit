@@ -51,7 +51,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
     @Test
     public void testNullJavaScriptErrorListener() throws Exception {
         final WebClient webClient = getWebClient();
-        webClient.setThrowExceptionOnScriptError(false);
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.setJavaScriptErrorListener(null);
         final MockWebConnection webConnection = new MockWebConnection();
         final String errorContent = "<html><head><title>ERROR 500</title></head><body></body></html>";
@@ -109,7 +109,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         final StringBuilder malformedScriptURLErrors = new StringBuilder();
 
         final WebClient webClient = getWebClient();
-        webClient.setThrowExceptionOnScriptError(false);
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.setJavaScriptErrorListener(new JavaScriptErrorListener() {
 
             public void loadScriptError(final HtmlPage htmlPage, final URL scriptUrl, final Exception exception) {
@@ -239,7 +239,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         final StringBuilder scriptExceptions = new StringBuilder();
 
         final WebClient webClient = getWebClientWithMockWebConnection();
-        webClient.setThrowExceptionOnScriptError(false);
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.setJavaScriptErrorListener(new JavaScriptErrorListener() {
 
             public void loadScriptError(final HtmlPage htmlPage, final URL scriptUrl, final Exception exception) {

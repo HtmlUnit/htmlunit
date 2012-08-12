@@ -1000,7 +1000,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         collectedAlerts.clear();
 
         // and with script exception not thrown
-        client.setThrowExceptionOnScriptError(false);
+        client.getOptions().setThrowExceptionOnScriptError(false);
         client.getPage(URL_FIRST);
 
         assertEquals(expectedAlerts, collectedAlerts);
@@ -1068,7 +1068,7 @@ public class JavaScriptEngineTest extends WebTestCase {
         client.setJavaScriptTimeout(timeout);
 
         try {
-            client.setThrowExceptionOnScriptError(false);
+            client.getOptions().setThrowExceptionOnScriptError(false);
 
             final String content = "<html><body><script>while(1) {}</script></body></html>";
             final MockWebConnection webConnection = new MockWebConnection();

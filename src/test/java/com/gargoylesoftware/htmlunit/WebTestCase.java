@@ -207,7 +207,7 @@ public abstract class WebTestCase {
     protected static final HtmlPage loadUrl(final String url) throws Exception {
         try {
             final WebClient client = new WebClient();
-            client.setUseInsecureSSL(true);
+            client.getOptions().setUseInsecureSSL(true);
             return client.getPage(url);
         }
         catch (final ConnectException e) {

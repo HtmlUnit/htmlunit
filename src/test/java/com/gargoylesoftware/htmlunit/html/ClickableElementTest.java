@@ -83,7 +83,7 @@ public class ClickableElementTest extends WebDriverTestCase {
 
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setDefaultResponse(htmlContent);
-        client.setThrowExceptionOnScriptError(exceptionOnError);
+        client.getOptions().setThrowExceptionOnScriptError(exceptionOnError);
 
         final List<String> collectedAlerts = new ArrayList<String>();
         final CollectingAlertHandler alertHandler = new CollectingAlertHandler(collectedAlerts);

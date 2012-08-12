@@ -37,6 +37,9 @@ public class WebClientOptions implements Serializable {
     private WebClient webClient_;
     private boolean javaScriptEnabled_ = true;
     private boolean cssEnabled_ = true;
+    private boolean printContentOnFailingStatusCode_ = true;
+    private boolean throwExceptionOnFailingStatusCode_ = true;
+    private boolean throwExceptionOnScriptError_ = true;
     private boolean appletEnabled_;
     private boolean popupBlockerEnabled_;
     private boolean isRedirectEnabled_ = true;
@@ -45,6 +48,8 @@ public class WebClientOptions implements Serializable {
     private String sslClientCertificateType_;
     private boolean geolocationEnabled_;
     private boolean doNotTrackEnabled_;
+    private boolean activeXNative_;
+    private String homePage_ = "http://htmlunit.sf.net/";
 
     /**
      * Creates an instance.
@@ -242,4 +247,101 @@ public class WebClientOptions implements Serializable {
     public boolean isDoNotTrackEnabled() {
         return doNotTrackEnabled_;
     }
+
+    /**
+     * Specify whether or not the content of the resulting document will be
+     * printed to the console in the event of a failing response code.
+     * Successful response codes are in the range 200-299. The default is true.
+     *
+     * @param enabled True to enable this feature
+     */
+    public void setPrintContentOnFailingStatusCode(final boolean enabled) {
+        printContentOnFailingStatusCode_ = enabled;
+    }
+
+    /**
+     * Returns <tt>true</tt> if the content of the resulting document will be printed to
+     * the console in the event of a failing response code.
+     *
+     * @return <tt>true</tt> if the content of the resulting document will be printed to
+     *         the console in the event of a failing response code
+     * @see #setPrintContentOnFailingStatusCode
+     */
+    public boolean getPrintContentOnFailingStatusCode() {
+        return printContentOnFailingStatusCode_;
+    }
+
+    /**
+     * Specify whether or not an exception will be thrown in the event of a
+     * failing status code. Successful status codes are in the range 200-299.
+     * The default is true.
+     *
+     * @param enabled <tt>true</tt> to enable this feature
+     */
+    public void setThrowExceptionOnFailingStatusCode(final boolean enabled) {
+        throwExceptionOnFailingStatusCode_ = enabled;
+    }
+
+    /**
+     * Returns <tt>true</tt> if an exception will be thrown in the event of a failing response code.
+     * @return <tt>true</tt> if an exception will be thrown in the event of a failing response code
+     * @see #setThrowExceptionOnFailingStatusCode
+     */
+    public boolean isThrowExceptionOnFailingStatusCode() {
+        return throwExceptionOnFailingStatusCode_;
+    }
+
+    /**
+     * Indicates if an exception should be thrown when a script execution fails
+     * (the default) or if it should be caught and just logged to allow page
+     * execution to continue.
+     * @return <code>true</code> if an exception is thrown on script error (the default)
+     */
+    public boolean isThrowExceptionOnScriptError() {
+        return throwExceptionOnScriptError_;
+    }
+
+    /**
+     * Changes the behavior of this webclient when a script error occurs.
+     * @param enabled indicates if exception should be thrown or not
+     */
+    public void setThrowExceptionOnScriptError(final boolean enabled) {
+        throwExceptionOnScriptError_ = enabled;
+    }
+
+    /**
+     * Sets whether to allow native ActiveX or no. Default value is false.
+     * Beware that you should never allow running native ActiveX components unless you fully trust
+     * the JavaScript code, as it is not controlled by the Java Virtual Machine.
+     *
+     * @param allow whether to allow or no
+     */
+    public void setActiveXNative(final boolean allow) {
+        activeXNative_ = allow;
+    }
+
+    /**
+     * Returns whether native ActiveX components are allowed or no.
+     * @return whether native ActiveX components are allowed or no
+     */
+    public boolean isActiveXNative() {
+        return activeXNative_;
+    }
+
+    /**
+     * Returns the client's current homepage.
+     * @return the client's current homepage
+     */
+    public String getHomePage() {
+        return homePage_;
+    }
+
+    /**
+     * Sets the client's homepage.
+     * @param homePage the new homepage URL
+     */
+    public void setHomePage(final String homePage) {
+        homePage_ = homePage;
+    }
+
 }

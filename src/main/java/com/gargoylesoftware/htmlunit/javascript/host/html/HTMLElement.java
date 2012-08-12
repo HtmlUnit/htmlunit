@@ -1563,7 +1563,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         try {
             final URL newUrl = new URL(url);
             final URL currentUrl = getDomNodeOrDie().getPage().getWebResponse().getWebRequest().getUrl();
-            final String home = getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient().getHomePage();
+            final String home = getDomNodeOrDie().getPage().getEnclosingWindow()
+                    .getWebClient().getOptions().getHomePage();
             final boolean sameDomains = newUrl.getHost().equalsIgnoreCase(currentUrl.getHost());
             final boolean isHomePage = (home != null && home.equals(url));
             return (sameDomains && isHomePage);
@@ -1579,7 +1580,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param url the new homepage URL
      */
     public void setHomePage(final String url) {
-        getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient().setHomePage(url);
+        getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient().getOptions().setHomePage(url);
     }
 
     /**
@@ -1589,7 +1590,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public void navigateHomePage() throws IOException {
         final WebClient webClient = getDomNodeOrDie().getPage().getEnclosingWindow().getWebClient();
-        webClient.getPage(webClient.getHomePage());
+        webClient.getPage(webClient.getOptions().getHomePage());
     }
 
     //----------------------- END #default#homePage BEHAVIOR -----------------------
