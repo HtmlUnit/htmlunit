@@ -119,7 +119,7 @@ public class BrowserVersion implements Serializable {
     /** Firefox Warning: experimental!!! */
     public static final BrowserVersion FIREFOX_10 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
-        "Mozilla/5.0 (" + getFFUserAgentVariable() + "; rv:10.0.6) Gecko/20100101 Firefox/10.0.6",
+        "Mozilla/5.0 (Windows NT 6.1; rv:10.0.6) Gecko/20100101 Firefox/10.0.6",
         (float) 10.0, "FF10", null);
 
     /** Internet Explorer 6. */
@@ -539,35 +539,5 @@ public class BrowserVersion implements Serializable {
      */
     public String getNickname() {
         return nickname_;
-    }
-
-    /**
-     * For Firefox only version, starting from 4.0, returns the variable part of the user-agent.
-     * @see <a href="https://developer.mozilla.org/en-US/docs/Gecko_user_agent_string_reference">MDN documentation</a>
-     */
-    private static String getFFUserAgentVariable() {
-        final String os = System.getProperty("os.name").toLowerCase();
-        if ("windows 7".equals(os)) {
-            return "Windows NT 6.1";
-        }
-        else if ("windows vista".equals(os)) {
-            return "Windows NT 6.0";
-        }
-        else if ("windows 2003".equals(os)) {
-            return "Windows NT 5.2";
-        }
-        else if ("windows xp".equals(os)) {
-            return "Windows NT 5.1";
-        }
-        else if ("windows 2000".equals(os)) {
-            return "Windows NT 5.0";
-        }
-        else if ("mac os x".equals(os)) {
-            return "Macintosh; Intel Mac OS X " + System.getProperty("os.version");
-        }
-        else if ("linux".equals(os)) {
-            return "X11; Linux i686";
-        }
-        return "Windows NT 6.1";
     }
 }

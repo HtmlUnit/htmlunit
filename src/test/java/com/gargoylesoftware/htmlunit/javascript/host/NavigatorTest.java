@@ -380,49 +380,18 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = "false", FF = "true")
     public void oscpu() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  alert(navigator.oscpu);\n"
+            + "  alert(navigator.oscpu != undefined);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'></body>\n"
             + "</html>";
 
-        String expectation;
-        if (getBrowserVersion().getNickname().startsWith("FF")) {
-            final String os = System.getProperty("os.name").toLowerCase();
-            if ("windows 7".equals(os)) {
-                expectation = "Windows NT 6.1";
-            }
-            else if ("windows vista".equals(os)) {
-                expectation = "Windows NT 6.0";
-            }
-            else if ("windows 2003".equals(os)) {
-                expectation = "Windows NT 5.2";
-            }
-            else if ("windows xp".equals(os)) {
-                expectation = "Windows NT 5.1";
-            }
-            else if ("windows 2000".equals(os)) {
-                expectation = "Windows NT 5.0";
-            }
-            else if ("mac os x".equals(os)) {
-                expectation = "Intel Mac OS X " + System.getProperty("os.version");
-            }
-            else if ("linux".equals(os)) {
-                expectation = "Linux i686";
-            }
-            else {
-                expectation = "Windows NT 6.1";
-            }
-        }
-        else {
-            expectation = "undefined";
-        }
-        setExpectedAlerts(expectation);
         loadPageWithAlerts2(html);
     }
 }
