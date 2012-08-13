@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -237,11 +236,6 @@ public class JavaScriptEngine {
                 prototype.setPrototype(objectPrototype);
             }
         }
-
-        // eval hack (cf unit tests testEvalScopeOtherWindow and testEvalScopeLocal)
-        final Member evalFn = Window.class.getMethod("custom_eval", new Class[]{String.class});
-        final FunctionObject jsCustomEval = new FunctionObject("eval", evalFn, window);
-        window.associateValue("custom_eval", jsCustomEval);
 
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final Method jsConstructor = config.getJsConstructor();

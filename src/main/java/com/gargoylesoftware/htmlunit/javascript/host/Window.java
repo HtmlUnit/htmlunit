@@ -31,7 +31,7 @@ import java.util.WeakHashMap;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -309,7 +309,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param features the features
      * @param replace whether to replace in the history list or no
      * @return the newly opened window, or <tt>null</tt> if popup windows have been disabled
-     * @see WebClientOptions#isPopupBlockerEnabled()
+     * @see com.gargoylesoftware.htmlunit.WebClientOptions#isPopupBlockerEnabled()
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536651.aspx">MSDN documentation</a>
      */
     public WindowProxy jsxFunction_open(final Object url, final Object name, final Object features,
@@ -1269,30 +1269,13 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @Override
     public Object get(String name, final Scriptable start) {
-        // Hack to make eval work in other window scope when needed.
-        // See unit test testEvalScopeOtherWindow().
-        // TODO: Find a cleaner way to handle this.
-        if ("eval".equals(name)) {
-            final Window w = (Window) getTopScope(getStartingScope());
-            if (w != this) {
-                return getAssociatedValue("custom_eval");
-            }
-        }
-        else if ("Option".equals(name)) {
+        if ("Option".equals(name)) {
             name = "HTMLOptionElement";
         }
         else if ("Image".equals(name)) {
             name = "HTMLImageElement";
         }
         return super.get(name, start);
-    }
-
-    private static Scriptable getTopScope(final Scriptable s) {
-        Scriptable top = s;
-        while (top != null && top.getParentScope() != null) {
-            top = top.getParentScope();
-        }
-        return top;
     }
 
     private static Object getFrameWindowByName(final HtmlPage page, final String name) {
@@ -1325,7 +1308,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final String languageStr = Context.toString(language);
         if (language == Undefined.instance
             || "javascript".equalsIgnoreCase(languageStr) || "jscript".equalsIgnoreCase(languageStr)) {
-            custom_eval(script);
+            ScriptRuntime.evalSpecial(Context.getCurrentContext(), this, this, new Object[] {script}, null, 0);
         }
         else if ("vbscript".equalsIgnoreCase(languageStr)) {
             LOG.warn("VBScript not supported in Window.execScript().");
@@ -1334,18 +1317,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             // Unrecognized language: use the IE error message ("Invalid class string").
             throw Context.reportRuntimeError("Invalid class string");
         }
-    }
-
-    /**
-     * Executes the specified script code in the scope of this window.
-     * This is used only when eval() is called on a Window other than the starting scope
-     * @param scriptCode some JavaScript code
-     * @return the evaluation result
-     */
-    public Object custom_eval(final String scriptCode) {
-        final Context context = Context.getCurrentContext();
-        final Script script = context.compileString(scriptCode, "eval body", 0, null);
-        return script.exec(context, this);
     }
 
     /**

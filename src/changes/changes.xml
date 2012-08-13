@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support">
+            <action type="update" dev="asashour">
+                JavaScript: remove customized "eval", and depend on core-js.
+            </action>
             <action type="fix" dev="rbri" issue="3555655">
                 BackgroundJavaScriptFactory is now configurable.
             </action>
