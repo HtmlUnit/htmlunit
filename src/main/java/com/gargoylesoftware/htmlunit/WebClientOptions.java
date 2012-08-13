@@ -50,6 +50,7 @@ public class WebClientOptions implements Serializable {
     private boolean doNotTrackEnabled_;
     private boolean activeXNative_;
     private String homePage_ = "http://htmlunit.sf.net/";
+    private ProxyConfig proxyConfig_;
 
     /**
      * Creates an instance.
@@ -342,6 +343,23 @@ public class WebClientOptions implements Serializable {
      */
     public void setHomePage(final String homePage) {
         homePage_ = homePage;
+    }
+
+    /**
+     * Returns the proxy configuration for this client.
+     * @return the proxy configuration for this client
+     */
+    public ProxyConfig getProxyConfig() {
+        return proxyConfig_;
+    }
+
+    /**
+     * Sets the proxy configuration for this client.
+     * @param proxyConfig the proxy configuration for this client
+     */
+    public void setProxyConfig(final ProxyConfig proxyConfig) {
+        WebAssert.notNull("proxyConfig", proxyConfig);
+        proxyConfig_ = proxyConfig;
     }
 
 }

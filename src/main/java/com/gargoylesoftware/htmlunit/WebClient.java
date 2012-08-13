@@ -122,7 +122,6 @@ public class WebClient implements Serializable {
 
     private transient WebConnection webConnection_ = createWebConnection();
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
-    private ProxyConfig proxyConfig_;
     private CookieManager cookieManager_ = new CookieManager();
     private transient JavaScriptEngine scriptEngine_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
@@ -201,7 +200,7 @@ public class WebClient implements Serializable {
      */
     private void init(final BrowserVersion browserVersion, final ProxyConfig proxyConfig) {
         browserVersion_ = browserVersion;
-        proxyConfig_ = proxyConfig;
+        getOptions().setProxyConfig(proxyConfig);
 
         scriptEngine_ = new JavaScriptEngine(this);
         // The window must be constructed AFTER the script engine.
@@ -717,18 +716,21 @@ public class WebClient implements Serializable {
     /**
      * Returns the proxy configuration for this client.
      * @return the proxy configuration for this client
+     * @deprecated as of 2.11, please use {@link #getOptions()}.getProxyConfig instead.
      */
+    @Deprecated
     public ProxyConfig getProxyConfig() {
-        return proxyConfig_;
+        return getOptions().getProxyConfig();
     }
 
     /**
      * Sets the proxy configuration for this client.
      * @param proxyConfig the proxy configuration for this client
+     * @deprecated as of 2.11, please use {@link #getOptions()}.setProxyConfig instead.
      */
+    @Deprecated
     public void setProxyConfig(final ProxyConfig proxyConfig) {
-        WebAssert.notNull("proxyConfig", proxyConfig);
-        proxyConfig_ = proxyConfig;
+        getOptions().setProxyConfig(proxyConfig);
     }
 
     /**
@@ -1421,13 +1423,14 @@ public class WebClient implements Serializable {
 
         // If the request settings don't specify a custom proxy, use the default client proxy...
         if (webRequest.getProxyHost() == null) {
-            if (proxyConfig_.getProxyAutoConfigUrl() != null) {
-                if (!proxyConfig_.getProxyAutoConfigUrl().equals(url.toExternalForm())) {
-                    String content = proxyConfig_.getProxyAutoConfigContent();
+            final ProxyConfig proxyConfig = getOptions().getProxyConfig();
+            if (proxyConfig.getProxyAutoConfigUrl() != null) {
+                if (!proxyConfig.getProxyAutoConfigUrl().equals(url.toExternalForm())) {
+                    String content = proxyConfig.getProxyAutoConfigContent();
                     if (content == null) {
-                        content = getPage(proxyConfig_.getProxyAutoConfigUrl())
+                        content = getPage(proxyConfig.getProxyAutoConfigUrl())
                             .getWebResponse().getContentAsString();
-                        proxyConfig_.setProxyAutoConfigContent(content);
+                        proxyConfig.setProxyAutoConfigContent(content);
                     }
                     final String allValue = ProxyAutoConfig.evaluate(content, url);
                     if (LOG.isDebugEnabled()) {
@@ -1451,10 +1454,10 @@ public class WebClient implements Serializable {
                 }
             }
             // ...unless the host needs to bypass the configured client proxy!
-            else if (!proxyConfig_.shouldBypassProxy(webRequest.getUrl().getHost())) {
-                webRequest.setProxyHost(proxyConfig_.getProxyHost());
-                webRequest.setProxyPort(proxyConfig_.getProxyPort());
-                webRequest.setSocksProxy(proxyConfig_.isSocksProxy());
+            else if (!proxyConfig.shouldBypassProxy(webRequest.getUrl().getHost())) {
+                webRequest.setProxyHost(proxyConfig.getProxyHost());
+                webRequest.setProxyPort(proxyConfig.getProxyPort());
+                webRequest.setSocksProxy(proxyConfig.isSocksProxy());
             }
         }
 

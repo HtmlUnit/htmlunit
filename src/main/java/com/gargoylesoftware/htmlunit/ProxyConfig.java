@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
  *
  * @version $Revision$
  * @author Daniel Gredler
- * @see WebClient#getProxyConfig()
+ * @see WebClientOptions#getProxyConfig()
  */
 public class ProxyConfig implements Serializable {
 

@@ -50,7 +50,8 @@
                 setPopupBlockerEnabled(), isPopupBlockerEnabled(), setRedirectEnabled(), isRedirectEnabled(),
                 setUseInsecureSSL() and setSSLClientCertificate(), setHomePage(), getHomePage(),
                 setPrintContentOnFailingStatusCode(), getPrintContentOnFailingStatusCode(),
-                setActiveXNative(), isActiveXNative(). Use webClient.getOptions() instead.
+                getProxyConfig(), getProxyConfig(), setActiveXNative(), isActiveXNative().
+                Use webClient.getOptions() instead.
             </action>
             <action type="add" dev="asashour">
                 JavaScript: implement navigator.buildID, .oscpu, .vendor and .vendorSub.

@@ -1171,8 +1171,8 @@ public class WebClientTest extends WebServerTestCase {
         // Change the webclient default proxy settings.
         final String defaultProxyHost2 = "defaultProxyHost2";
         final int defaultProxyPort2 = 532;
-        webClient.getProxyConfig().setProxyHost(defaultProxyHost2);
-        webClient.getProxyConfig().setProxyPort(defaultProxyPort2);
+        webClient.getOptions().getProxyConfig().setProxyHost(defaultProxyHost2);
+        webClient.getOptions().getProxyConfig().setProxyPort(defaultProxyPort2);
 
         // Make sure the new default proxy settings are used.
         webClient.getPage(URL_FIRST);
@@ -1190,7 +1190,7 @@ public class WebClientTest extends WebServerTestCase {
         assertEquals(customProxyPort, webConnection.getLastWebRequest().getProxyPort());
 
         // Make sure the proxy bypass works with default proxy settings.
-        webClient.getProxyConfig().addHostsToProxyBypass(URL_FIRST.getHost());
+        webClient.getOptions().getProxyConfig().addHostsToProxyBypass(URL_FIRST.getHost());
         webClient.getPage(URL_FIRST);
         assertEquals(null, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(0, webConnection.getLastWebRequest().getProxyPort());
@@ -1201,7 +1201,7 @@ public class WebClientTest extends WebServerTestCase {
         assertEquals(customProxyPort, webConnection.getLastWebRequest().getProxyPort());
 
         // Make sure we can remove proxy bypass filters.
-        webClient.getProxyConfig().removeHostsFromProxyBypass(URL_FIRST.getHost());
+        webClient.getOptions().getProxyConfig().removeHostsFromProxyBypass(URL_FIRST.getHost());
         webClient.getPage(URL_FIRST);
         assertEquals(defaultProxyHost2, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(defaultProxyPort2, webConnection.getLastWebRequest().getProxyPort());
@@ -1220,7 +1220,7 @@ public class WebClientTest extends WebServerTestCase {
         final String html = "<html><head><title>Hello World</title></head><body></body></html>";
         final WebClient webClient = new WebClient(getBrowserVersion(), defaultProxyHost, defaultProxyPort);
 
-        webClient.getProxyConfig().addHostsToProxyBypass("hostToByPass");
+        webClient.getOptions().getProxyConfig().addHostsToProxyBypass("hostToByPass");
 
         final String location2 = "http://hostToByPass/foo.html";
         final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", location2));
@@ -1268,13 +1268,13 @@ public class WebClientTest extends WebServerTestCase {
         assertEquals(defaultProxyPort, webConnection.getLastWebRequest().getProxyPort());
 
         // Make sure proxy bypass works with default proxy settings.
-        webClient.getProxyConfig().addHostsToProxyBypass(URL_FIRST.getHost());
+        webClient.getOptions().getProxyConfig().addHostsToProxyBypass(URL_FIRST.getHost());
         webClient.getPage(URL_FIRST);
         assertEquals(null, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(0, webConnection.getLastWebRequest().getProxyPort());
 
         // Make sure we can remove proxy bypass filters.
-        webClient.getProxyConfig().removeHostsFromProxyBypass(URL_FIRST.getHost());
+        webClient.getOptions().getProxyConfig().removeHostsFromProxyBypass(URL_FIRST.getHost());
         webClient.getPage(URL_FIRST);
         assertEquals(defaultProxyHost, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(defaultProxyPort, webConnection.getLastWebRequest().getProxyPort());
