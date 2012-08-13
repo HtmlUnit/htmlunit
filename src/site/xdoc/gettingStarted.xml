@@ -33,13 +33,13 @@
 public void homePage() throws Exception {
     final WebClient webClient = new WebClient();
     final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
-    assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
+    Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
 
     final String pageAsXml = page.asXml();
-    assertTrue(pageAsXml.contains("<body class=\"composite\">"));
+    Assert.assertTrue(pageAsXml.contains("<body class=\"composite\">"));
 
     final String pageAsText = page.asText();
-    assertTrue(pageAsText.contains("Support for the HTTP and HTTPS protocols"));
+    Assert.assertTrue(pageAsText.contains("Support for the HTTP and HTTPS protocols"));
 
     webClient.closeAllWindows();
 }]]></source>
@@ -55,9 +55,9 @@ public void homePage() throws Exception {
             <source><![CDATA[
 @Test
 public void homePage_Firefox() throws Exception {
-    final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2);
+    final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_10);
     final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
-    assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
+    Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
 
     webClient.closeAllWindows();
 }]]></source>
@@ -113,14 +113,14 @@ public void xpath() throws Exception {
             <source><![CDATA[
 @Test
 public void homePage_proxy() throws Exception {
-    final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_2, "http://myproxyserver", myProxyPort);
+    final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_10, "http://myproxyserver", myProxyPort);
 
     //set proxy username and password 
     final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) webClient.getCredentialsProvider();
-    credentialsProvider.addProxyCredentials("username", "password");
+    credentialsProvider.addCredentials("username", "password");
 
     final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
-    assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
+    Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
 
     webClient.closeAllWindows();
 }]]></source>

@@ -60,7 +60,7 @@ public void documentWrite() throws Exception {
     final HtmlForm form = page.getFormByName("form1");
     for (int i = 1; i <= 5; i++) {
         final String expectedName = "textfield" + i;
-        assertEquals(
+        Assert.assertEquals(
             "text", 
             form.<HtmlInput>getInputByName(expectedName).getTypeAttribute());
     }
@@ -119,7 +119,7 @@ public void alerts() throws Exception {
     webClient.getPage("http://tciludev01/test.html");
 
     final List expectedAlerts = Collections.singletonList("foo");
-    assertEquals(expectedAlerts, collectedAlerts);
+    Assert.assertEquals(expectedAlerts, collectedAlerts);
 }]]></source>
         </section>
         

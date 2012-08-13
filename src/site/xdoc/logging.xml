@@ -48,7 +48,7 @@
         		"com.gargoylesoftware.htmlunit.html.HTMLParserListener" log for instance by calling:
         		<source><![CDATA[
 final WebClient webClient = new WebClient();
-webClient.setHTMLParserListener(HTMLParserListenerare.LOG_REPORTER);]]></source>
+webClient.setHTMLParserListener(HTMLParserListener.LOG_REPORTER);]]></source>
         		The parser (NekoHTML) by default processes the
         		content that is outside of the BODY and HTML tags. This is seen by the logging reporting that the 
         		BODY and HTML tags are not closed properly.  This can be changed by calling

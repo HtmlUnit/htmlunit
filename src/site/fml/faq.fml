@@ -44,10 +44,10 @@
 			<answer>
 				<p>
             <source><![CDATA[
-    webClient.setJavaScriptEnabled(...);
-    webClient.setThrowExceptionOnFailingStatusCode(...);
-    webClient.setThrowExceptionOnScriptError(...);
-    webClient.getProxyConfig().set...();
+    webClient.getOptions().setJavaScriptEnabled(...);
+    webClient.getOptions().setThrowExceptionOnFailingStatusCode(...);
+    webClient.getOptions().setThrowExceptionOnScriptError(...);
+    webClient.getOptions().getProxyConfig().set...();
             ]]></source>
 				</p>
 			</answer>

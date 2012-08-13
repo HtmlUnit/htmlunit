@@ -40,7 +40,7 @@ System.out.println(busy);]]></source>
                 The only thing needed is setting WebClient property:
             </p>
             <source><![CDATA[
-webClient.setActiveXNative(true);
+webClient.getOptions().setActiveXNative(true);
 ]]></source>
             <p>
                 and there you go!
