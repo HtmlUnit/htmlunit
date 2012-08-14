@@ -36,7 +36,7 @@ import org.junit.runners.Suite;
  * For example, write:
  * <pre>
  * &#064;RunWith(BrowserRunner.class)
- * public class SomeTest extends WebTestCase {
+ * public class SomeTest extends AbstractWebTestCase {
  *
  *    &#064;Test
  *    &#064;Browsers({Browser.FIREFOX_2})
@@ -58,7 +58,7 @@ public class BrowserRunner extends Suite {
      * @param klass the test case class
      * @throws Throwable If an exception occurs
      */
-    public BrowserRunner(final Class<WebTestCase> klass) throws Throwable {
+    public BrowserRunner(final Class<AbstractWebTestCase> klass) throws Throwable {
         super(klass, Collections.<Runner>emptyList());
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {

@@ -53,14 +53,14 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     private final boolean realBrowser_;
     static final boolean maven_ = System.getProperty("htmlunit.maven") != null;
 
-    public BrowserVersionClassRunner(final Class<WebTestCase> klass,
+    public BrowserVersionClassRunner(final Class<AbstractWebTestCase> klass,
         final BrowserVersion browserVersion, final boolean realBrowser) throws InitializationError {
         super(klass);
         browserVersion_ = browserVersion;
         realBrowser_ = realBrowser;
     }
 
-    private void setAlerts(final WebTestCase testCase, final Method method) {
+    private void setAlerts(final AbstractWebTestCase testCase, final Method method) {
         final Alerts alerts = method.getAnnotation(Alerts.class);
         String[] expectedAlerts = {};
         if (alerts != null) {
@@ -103,8 +103,8 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     @Override
     protected Object createTest() throws Exception {
         final Object test = super.createTest();
-        assertTrue("Test class must inherit WebTestCase", test instanceof WebTestCase);
-        final WebTestCase object = (WebTestCase) test;
+        assertTrue("Test class must inherit AbstractWebTestCase", test instanceof AbstractWebTestCase);
+        final AbstractWebTestCase object = (AbstractWebTestCase) test;
         object.setBrowserVersion(browserVersion_);
         if (test instanceof WebDriverTestCase) {
             ((WebDriverTestCase) test).setUseRealBrowser(realBrowser_);
@@ -193,7 +193,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return testMethods_;
     }
 
-    static boolean containsTestMethods(final Class<WebTestCase> klass) {
+    static boolean containsTestMethods(final Class<AbstractWebTestCase> klass) {
         for (final Method method : klass.getMethods()) {
             if (method.getAnnotation(Test.class) != null) {
                 final Browsers browsers = method.getAnnotation(Browsers.class);
@@ -279,9 +279,9 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     @SuppressWarnings("deprecation")
     protected Statement methodBlock(final FrameworkMethod method) {
         final Object test;
-        final WebTestCase testCase;
+        final AbstractWebTestCase testCase;
         try {
-            testCase = (WebTestCase) createTest();
+            testCase = (AbstractWebTestCase) createTest();
             test = new ReflectiveCallable() {
                 @Override
                 protected Object runReflectiveCall() throws Throwable {

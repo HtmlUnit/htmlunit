@@ -39,6 +39,7 @@ import org.w3c.dom.Node;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -86,6 +87,14 @@ public class Sarissa0993Test extends WebServerTestCase {
                 LOG.info("Test result written to: " + f.getAbsolutePath());
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected WebClient createNewWebClient() {
+        return new WebClient(BrowserVersion.getDefault());
     }
 
     /**
