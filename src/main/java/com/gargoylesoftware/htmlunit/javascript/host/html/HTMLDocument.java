@@ -337,7 +337,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 @Override
                 protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
                     final HtmlElement node = event.getHtmlElement();
-                    if ((node  instanceof HtmlAnchor || node instanceof HtmlArea) && "href".equals(event.getName())) {
+                    if ((node instanceof HtmlAnchor || node instanceof HtmlArea) && "href".equals(event.getName())) {
                         return EffectOnCache.RESET;
                     }
                     return EffectOnCache.NONE;
@@ -483,7 +483,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536783.aspx">MSDN documentation</a>
      */
     public static void jsxFunction_writeln(
-        final Context context, final Scriptable thisObj, final Object[] args,  final Function function) {
+        final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         final HTMLDocument thisAsDocument = getDocument(thisObj);
         thisAsDocument.write(concatArgsAsString(args) + "\n");
     }

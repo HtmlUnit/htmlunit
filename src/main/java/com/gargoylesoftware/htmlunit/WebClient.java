@@ -128,10 +128,10 @@ public class WebClient implements Serializable {
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
     private WebConsole webConsole_;
 
-    private AlertHandler   alertHandler_;
+    private AlertHandler alertHandler_;
     private ConfirmHandler confirmHandler_;
-    private PromptHandler  promptHandler_;
-    private StatusHandler  statusHandler_;
+    private PromptHandler promptHandler_;
+    private StatusHandler statusHandler_;
     private AttachmentHandler attachmentHandler_;
     private AjaxController ajaxController_ = new AjaxController();
 

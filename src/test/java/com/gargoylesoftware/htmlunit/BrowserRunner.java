@@ -225,7 +225,7 @@ public class BrowserRunner extends Suite {
         /** Alerts for Firefox 10. If not defined, {@link #FF()} is used. */
         String[] FF10() default {EMPTY_DEFAULT };
 
-        /** Alerts for any Chrome  If not defined, it can be overridden by a specific chrome version. */
+        /** Alerts for any Chrome If not defined, it can be overridden by a specific chrome version. */
         String[] CHROME() default{EMPTY_DEFAULT };
 
         /** Alerts for Chrome 16. If not defined, {@link #CHROME()} is used. */

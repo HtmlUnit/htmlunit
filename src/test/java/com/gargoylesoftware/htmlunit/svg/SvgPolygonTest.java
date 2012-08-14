@@ -37,7 +37,7 @@ public class SvgPolygonTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGPolygonElement]",  IE = "[object HTMLGenericElement]")
+    @Alerts(FF = "[object SVGPolygonElement]", IE = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

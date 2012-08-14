@@ -444,7 +444,7 @@ public class HttpWebConnection implements WebConnection {
 
         return new FileBody(pairWithFile.getFile(), contentType) {
             @Override
-            public  String getFilename() {
+            public String getFilename() {
                 if (getFile() == null) {
                     return pairWithFile.getValue();
                 }

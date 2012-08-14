@@ -298,7 +298,7 @@ public class WebClient3Test extends WebDriverTestCase {
             + "</head>"
             + "<body>"
             + " <a id='testAnchor' href='#'"
-            +      " onclick='info(\"open\");window.open(\"" + URL_SECOND + "\", \"Popup\", \"\");'>open window</a>"
+            + "     onclick='info(\"open\");window.open(\"" + URL_SECOND + "\", \"Popup\", \"\");'>open window</a>"
             + "</body></html>";
         final String secondContent = "<html><head>"
             + "<script type='text/javascript'>"
@@ -345,9 +345,9 @@ public class WebClient3Test extends WebDriverTestCase {
             + "<form action='" + URL_SECOND + "' name='myForm'>"
             + " <input id='testSubmit' type='button' value='Submit' "
             + "   onclick='info(\"open\");"
-            +     "window.open(\"" + URL_SECOND + "\", \"Popup\");"
-            +     "document.myForm.target = \"Popup\";'"
-            +   ">"
+            + "   window.open(\"" + URL_SECOND + "\", \"Popup\");"
+            + "   document.myForm.target = \"Popup\";'"
+            + " >"
             + "</form>"
             + "</body></html>";
         final String secondContent = "<html><head>"

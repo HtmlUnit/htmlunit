@@ -158,7 +158,7 @@ public class HtmlTableRow extends HtmlElement {
      * An Iterator over the HtmlTableCells contained in this row. It will also dive
      * into nested forms, even though that is illegal HTML.
      */
-    public class CellIterator implements Iterator<HtmlTableCell>, Iterable<HtmlTableCell>  {
+    public class CellIterator implements Iterator<HtmlTableCell>, Iterable<HtmlTableCell> {
         private HtmlTableCell nextCell_;
         private HtmlForm currentForm_;
 

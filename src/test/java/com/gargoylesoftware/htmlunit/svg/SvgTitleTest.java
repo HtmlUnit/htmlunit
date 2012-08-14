@@ -37,7 +37,7 @@ public class SvgTitleTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGTitleElement]",  IE = "[object HTMLTitleElement]")
+    @Alerts(FF = "[object SVGTitleElement]", IE = "[object HTMLTitleElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

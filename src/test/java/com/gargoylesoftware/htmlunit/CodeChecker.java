@@ -255,7 +255,7 @@ public class CodeChecker {
             }
         }
         if (klass == null) {
-            throw new IllegalStateException("Can not get class of " +  type);
+            throw new IllegalStateException("Can not get class of " + type);
         }
         return klass;
     }

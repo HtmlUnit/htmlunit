@@ -905,7 +905,7 @@ public class HtmlFormTest extends WebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        final WebWindow firstWindow  = client.getCurrentWindow();
+        final WebWindow firstWindow = client.getCurrentWindow();
         Assert.assertEquals("first window name", "", firstWindow.getName());
         assertSame(page, firstWindow.getEnclosedPage());
 

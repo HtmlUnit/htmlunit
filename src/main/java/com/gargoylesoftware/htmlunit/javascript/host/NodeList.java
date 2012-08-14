@@ -211,7 +211,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
                 final DomNode domNode = getDomNodeOrNull();
                 if (domNode != null) {
                     domNode.addDomChangeListener(listener);
-                    if (attributeChangeSensitive_ &&  domNode instanceof HtmlElement) {
+                    if (attributeChangeSensitive_ && domNode instanceof HtmlElement) {
                         ((HtmlElement) domNode).addHtmlAttributeChangeListener(listener);
                     }
                 }

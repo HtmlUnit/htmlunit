@@ -551,7 +551,7 @@ public class SimpleScriptableTest extends WebTestCase {
         set_ReadOnly("document.getElementById");
     }
 
-    private  void set_ReadOnly(final String expression) throws Exception {
+    private void set_ReadOnly(final String expression) throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"

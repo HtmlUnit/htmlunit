@@ -103,7 +103,7 @@ public class WebResponseDataTest extends WebServerTestCase {
     @Test
     public void deflateCompression() throws Exception {
         startWebServer("src/test/resources/pjl-comp-filter", null);
-        final  WebRequest request = new WebRequest(new URL("http://localhost:"
+        final WebRequest request = new WebRequest(new URL("http://localhost:"
             + PORT + "/index.html"));
         request.setAdditionalHeader("Accept-Encoding", "deflate");
         final WebClient webClient = getWebClient();

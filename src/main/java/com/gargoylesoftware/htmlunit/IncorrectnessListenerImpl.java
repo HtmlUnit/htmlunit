@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class IncorrectnessListenerImpl implements IncorrectnessListener, Serializable  {
+public class IncorrectnessListenerImpl implements IncorrectnessListener, Serializable {
 
     private static final Log LOG = LogFactory.getLog(IncorrectnessListenerImpl.class);
 

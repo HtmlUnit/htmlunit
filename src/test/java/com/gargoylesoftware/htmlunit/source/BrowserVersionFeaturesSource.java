@@ -56,7 +56,7 @@ public final class BrowserVersionFeaturesSource {
      */
     public void rename(final BrowserVersionFeatures features, final String newName) throws IOException {
         rename(new File(root_, "src/main/java"), features, newName);
-        final File propertiesFolder =  new File(root_,
+        final File propertiesFolder = new File(root_,
                 "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration");
         for (final File f : propertiesFolder.listFiles(new FileFilter() {
             public boolean accept(final File pathname) {
@@ -120,7 +120,7 @@ public final class BrowserVersionFeaturesSource {
 
     private void generate(final File dir, final String toSearchFor, final BrowserVersion[] versions)
         throws IOException {
-        final File propertiesFolder =  new File(root_,
+        final File propertiesFolder = new File(root_,
             "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration");
         final File featuresFile = new File(root_,
             "src/main/java/com/gargoylesoftware/htmlunit/BrowserVersionFeatures.java");
@@ -184,7 +184,7 @@ public final class BrowserVersionFeaturesSource {
      * @throws IOException if an error occurs
      */
     public void reverse(final BrowserVersionFeatures features) throws IOException {
-        final File propertiesFolder =  new File(root_,
+        final File propertiesFolder = new File(root_,
                 "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration");
         for (final File f : propertiesFolder.listFiles(new FileFilter() {
             public boolean accept(final File pathname) {

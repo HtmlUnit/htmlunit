@@ -24,7 +24,7 @@ package com.gargoylesoftware.htmlunit;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public enum HttpMethod  {
+public enum HttpMethod {
     /** OPTIONS. */
     OPTIONS,
     /** GET. */

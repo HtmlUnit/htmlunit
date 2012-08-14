@@ -37,7 +37,7 @@ public class SvgTextTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGTextElement]",  IE = "[object HTMLGenericElement]")
+    @Alerts(FF = "[object SVGTextElement]", IE = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

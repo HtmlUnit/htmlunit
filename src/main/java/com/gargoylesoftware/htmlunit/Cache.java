@@ -140,7 +140,7 @@ public class Cache implements Serializable {
      * @param response the received response
      * @return <code>true</code> if the response can be cached
      */
-    protected boolean isCacheable(final WebRequest request, final  WebResponse response) {
+    protected boolean isCacheable(final WebRequest request, final WebResponse response) {
         return HttpMethod.GET == response.getWebRequest().getHttpMethod()
             && !isDynamicContent(response);
     }

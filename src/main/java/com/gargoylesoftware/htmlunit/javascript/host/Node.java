@@ -283,8 +283,8 @@ public class Node extends SimpleScriptable {
         }
 
         // look through the children
-        DomNode child =  domNode.getFirstChild();
-        DomNode clonedChild =  clonedNode.getFirstChild();
+        DomNode child = domNode.getFirstChild();
+        DomNode clonedChild = clonedNode.getFirstChild();
         while (child != null && clonedChild != null) {
             copyEventListenersWhenNeeded(child, clonedChild);
             child = child.getNextSibling();

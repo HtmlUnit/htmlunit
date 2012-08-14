@@ -140,7 +140,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
         final HtmlPage page1 = loadPageWithAlerts(html);
         final Page page2 = page1.getAnchorByHref("#").click();
 
-        assertEquals(getDefaultUrl() + "foo.html",  page2.getWebResponse().getWebRequest().getUrl());
+        assertEquals(getDefaultUrl() + "foo.html", page2.getWebResponse().getWebRequest().getUrl());
     }
 
     /**
@@ -174,7 +174,7 @@ public class HTMLAnchorElementTest extends WebTestCase {
         final HtmlButtonInput button = page.getHtmlElementById("button1");
         final HtmlPage page2 = button.click();
 
-        assertEquals("Second",  page2.getTitleText());
+        assertEquals("Second", page2.getTitleText());
     }
 
     /**
@@ -314,9 +314,9 @@ public class HTMLAnchorElementTest extends WebTestCase {
         final String html
             = "<html>\n"
             + "<body onload=\"document.links[0].host += 'motion:8080';\n"
-            +    " document.links[1].host += 'motion';\n"
-            +    " document.links[2].host += '80';\n"
-            +    " document.links[3].host = 'www.gargoylesoftware.com'; \">\n"
+            + "    document.links[1].host += 'motion';\n"
+            + "    document.links[2].host += '80';\n"
+            + "    document.links[3].host = 'www.gargoylesoftware.com'; \">\n"
             + "<a href='foo.html#O'>link 0</a>\n"
             + "<a href='foo.html#O'>link 1</a>\n"
             + "<a href='http://www.gargoylesoftware.com:80/foo.html#O'>link 2</a>\n"

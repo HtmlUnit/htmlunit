@@ -573,7 +573,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("food bar")
-    public void replace_backReference_ampersand()  throws Exception {
+    public void replace_backReference_ampersand() throws Exception {
         testEvaluate("'foo bar'.replace(/foo/g, '$&d')");
         testEvaluate("'foo bar'.replace(/foo/, '$&d')");
     }
@@ -593,7 +593,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(" bar bar")
-    public void replace_backReference_tick()  throws Exception {
+    public void replace_backReference_tick() throws Exception {
         testEvaluate("'foo bar'.replace(/foo/g, '$\\'')");
         testEvaluate("'foo bar'.replace(/foo/, '$\\'')");
     }
@@ -603,7 +603,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("$' bar")
-    public void replace_$backReference_tick()  throws Exception {
+    public void replace_$backReference_tick() throws Exception {
         testEvaluate("'foo bar'.replace(/foo/g, '$$\\'')");
         testEvaluate("'foo bar'.replace(/foo/, '$$\\'')");
     }

@@ -507,7 +507,7 @@ public abstract class WebTestCase {
             }
             final String endScript = "\n<script>htmlunitReserved_addSummaryAfterOnload();</script>\n";
             if (newContent.contains("</body>")) {
-                newContent = StringUtils.replaceOnce(newContent, "</body>",  endScript + "</body>");
+                newContent = StringUtils.replaceOnce(newContent, "</body>", endScript + "</body>");
             }
             else {
                 LOG.info("No test generated: currently only content with a <head> and a </body> is supported");

@@ -129,8 +129,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         final CredentialsFactory factory = map.get(new AuthScopeProxy(authscope));
         Credentials creds = null;
         if (factory == null) {
-            int bestMatchFactor  = -1;
-            AuthScope bestMatch  = null;
+            int bestMatchFactor = -1;
+            AuthScope bestMatch = null;
             for (final AuthScopeProxy proxy : map.keySet()) {
                 final AuthScope current = proxy.getAuthScope();
                 final int factor = authscope.match(current);

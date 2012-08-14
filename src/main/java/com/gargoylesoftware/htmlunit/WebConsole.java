@@ -114,7 +114,7 @@ public class WebConsole {
         String paramterAsFloat(Object o);
     }
 
-    private Formatter formatter_  = new DefaultFormatter();
+    private Formatter formatter_ = new DefaultFormatter();
     private Logger logger_ = new DefaultLogger();
 
     /**
@@ -227,7 +227,7 @@ public class WebConsole {
                         replacement = formatter.paramterAsInteger(pop(args));
                         break;
                     case 'f':
-                        replacement =  formatter.paramterAsFloat(pop(args));
+                        replacement = formatter.paramterAsFloat(pop(args));
                         break;
                     default:
                         replacement = group;

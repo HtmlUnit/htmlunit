@@ -54,7 +54,7 @@ public class EventHandler extends BaseFunction {
         else {
             functionSignature = "function " + eventName + "(event)";
         }
-        jsSnippet_ =  functionSignature + " {" + jsSnippet + "\n}";
+        jsSnippet_ = functionSignature + " {" + jsSnippet + "\n}";
 
         final Window w = (Window) node.getPage().getEnclosingWindow().getScriptObject();
         final Scriptable function = (Scriptable) w.get("Function", w);

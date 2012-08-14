@@ -97,7 +97,7 @@ abstract class BasicJavaScriptJob implements JavaScriptJob {
      * @return <tt>true</tt> if this job executes periodically
      */
     public boolean isPeriodic() {
-        return period_  != null;
+        return period_ != null;
     }
 
     /**

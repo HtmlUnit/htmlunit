@@ -1487,9 +1487,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     public int compareVersions(final String v1, final String v2) {
         final int i = v1.compareTo(v2);
-        if (i == 0)     { return 0;  }
+        if (i == 0) { return 0; }
         else if (i < 0) { return -1; }
-        else           { return 1;  }
+        else { return 1; }
     }
 
     /**

@@ -277,7 +277,7 @@ public class HtmlApplet extends HtmlElement {
             }
 
             // no archive attribute, single class
-            if (null == archives || archives.length == 0)  {
+            if (null == archives || archives.length == 0) {
                 final String tempUrl = UrlUtils.resolveUrl(baseUrl, getCodeAttribute());
                 final URL classUrl = UrlUtils.toUrlUnsafe(tempUrl);
 

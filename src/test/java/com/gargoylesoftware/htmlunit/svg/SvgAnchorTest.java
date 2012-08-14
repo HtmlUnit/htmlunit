@@ -37,7 +37,7 @@ public class SvgAnchorTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGAElement]",  IE = "")
+    @Alerts(FF = "[object SVGAElement]", IE = "")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

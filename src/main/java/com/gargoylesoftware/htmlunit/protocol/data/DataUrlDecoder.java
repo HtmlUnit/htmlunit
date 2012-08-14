@@ -73,7 +73,7 @@ public class DataUrlDecoder {
             throw new IllegalArgumentException("Not a data url: " + url);
         }
         final int comma = url.indexOf(',');
-        final String beforeData =  url.substring("data:".length(), comma);
+        final String beforeData = url.substring("data:".length(), comma);
         final String mediaType = extractMediaType(beforeData);
         final String charset = extractCharset(beforeData);
 

@@ -32,7 +32,7 @@ import java.net.URL;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class ImmediateRefreshHandler implements RefreshHandler, Serializable  {
+public class ImmediateRefreshHandler implements RefreshHandler, Serializable {
 
     /**
      * Immediately refreshes the specified page using the specified URL.

@@ -308,7 +308,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             ((HtmlPage) getPage()).setFocusedElement(this);
         }
 
-        final boolean changeSelectedState  = (selectedOption.isSelected() != isSelected);
+        final boolean changeSelectedState = (selectedOption.isSelected() != isSelected);
 
         if (changeSelectedState) {
             doSelectOption(selectedOption, isSelected);

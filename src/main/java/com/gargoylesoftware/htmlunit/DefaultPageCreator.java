@@ -80,7 +80,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-public class DefaultPageCreator implements PageCreator, Serializable  {
+public class DefaultPageCreator implements PageCreator, Serializable {
 
     /**
      * The different supported page types.

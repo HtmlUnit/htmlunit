@@ -74,14 +74,14 @@ public class IEWeirdSyntaxTest extends WebTestCase {
     private void doTestTryCatchFinally(final String beforeCatch, final String beforeFinally) throws Exception {
         final String html = "<html><script>\n"
             + "try {\n"
-            +  "alert('1');\n"
-            +  "}" + beforeCatch
-            +  "catch(e) {\n"
-            +  "}" + beforeFinally
-            +  "finally {\n"
-            +  "alert('2');\n"
-            +  "}\n"
-            +  "</script></html>";
+            + "  alert('1');\n"
+            + "}" + beforeCatch
+            + "catch(e) {\n"
+            + "}" + beforeFinally
+            + "finally {\n"
+            + "  alert('2');\n"
+            + "}\n"
+            + "</script></html>";
         doTestWithEvaluatorExceptionExceptForIE(html);
     }
 

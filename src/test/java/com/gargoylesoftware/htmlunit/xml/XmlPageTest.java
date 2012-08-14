@@ -96,7 +96,7 @@ public class XmlPageTest extends WebServerTestCase {
         final String content
             = "<?xml version=\"1.0\"?>\n"
              + "<foo>\n"
-             +   "\u0434\n"
+             + "\u0434\n"
              + "</foo>";
 
         final byte[] bytes = TextUtil.stringToByteArray(content, "UTF8");
