@@ -14,28 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link Navigator}.
@@ -47,68 +31,68 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public class Navigator2Test extends WebServerTestCase {
 
     /**
-     * @throws Exception if the test fails
+     * Tests the "cookieEnabled" property.
+     * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF10 = { "yes", "undefined" }, DEFAULT = { "undefined", "undefined" })
-    //IE9 = { "undefined", "1" }
-    public void doNotTrack() throws Exception {
-        doNotTrack(true);
+    public void cookieEnabled() throws Exception {
+        cookieEnabled(true);
+        cookieEnabled(false);
+    }
+
+    private void cookieEnabled(final boolean cookieEnabled) throws Exception {
+        final String html
+            = "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(navigator.cookieEnabled);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'></body>\n"
+            + "</html>";
+
+        setExpectedAlerts(Boolean.toString(cookieEnabled));
+        if (!cookieEnabled) {
+            getWebClient().getCookieManager().setCookiesEnabled(cookieEnabled);
+        }
+
+        loadPageWithAlerts(html);
     }
 
     /**
-     * @throws Exception if the test fails
+     * Tests the "javaEnabled" method.
+     * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF10 = { "unspecified", "undefined" }, DEFAULT = { "undefined", "undefined" })
-    //IE9 = { "undefined", "0" }
-    public void doNotTrack_disabled() throws Exception {
-        doNotTrack(false);
-    }
-
-    private void doNotTrack(final boolean doNotTrack) throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
-        servlets.put("/test", DoNotTrackServlet.class);
-        startWebServer("./", new String[0], servlets);
-
-        final WebClient client = getWebClient();
-        if (doNotTrack) {
-            client.getOptions().setDoNotTrackEnabled(true);
-        }
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-        if (doNotTrack) {
-            assertTrue(page.asText().contains("DNT : 1"));
-        }
-        else {
-            assertTrue(page.asText().contains("DNT : null"));
-        }
+    public void javaEnabled() throws Exception {
+        attribute("javaEnabled()", "false");
+        final WebClient webClient = getWebClient();
+        webClient.getOptions().setAppletEnabled(true);
+        attribute("javaEnabled()", "true");
     }
 
     /**
-     * Servlet for {@link #doNotTrack()}.
+     * Generic method for testing the value of a specific navigator attribute.
+     * @param name the name of the attribute to test
+     * @param value the expected value for the named attribute
+     * @throws Exception on test failure
      */
-    public static class DoNotTrackServlet extends HttpServlet {
+    void attribute(final String name, final String value) throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       alert('" + name + " = ' + window.navigator." + name + ");\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload=\'doTest()\'>\n"
+                + "</body>\n"
+                + "</html>";
 
-        @Override
-        protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
-            throws ServletException, IOException {
-            resp.setContentType("text/html");
-            final Writer writer = resp.getWriter();
-            final String dntHeader = req.getHeader("DNT");
-            writer.write("<html><head><title>First</title>\n"
-                        + "<script>\n"
-                        + "function test() {\n"
-                        + "  alert(navigator.doNotTrack);\n"
-                        + "  alert(navigator.msDoNotTrack);\n"
-                        + "}\n"
-                        + "</script>\n"
-                        + "</head><body onload='test()'>DNT : " + dntHeader + "</body>\n"
-                        + "</html>");
-            writer.close();
-        }
+        setExpectedAlerts(name + " = " + value);
+        loadPageWithAlerts(html);
     }
+
 }

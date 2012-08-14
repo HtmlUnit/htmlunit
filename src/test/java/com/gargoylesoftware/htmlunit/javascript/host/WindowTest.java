@@ -34,10 +34,14 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
+import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.StatusHandler;
@@ -48,8 +52,11 @@ import com.gargoylesoftware.htmlunit.WebWindowEvent;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -2173,4 +2180,208 @@ public class WindowTest extends WebTestCase {
 
         buttonA.click();
     }
+    /**
+     * Basic test for the <tt>showModalDialog</tt> method. See bug 2124916.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void showModalDialog() throws Exception {
+        final String html1
+            = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    alert(window.returnValue);\n"
+            + "    var o = new Object();\n"
+            + "    o.firstName = f.elements.firstName.value;\n"
+            + "    o.lastName = f.elements.lastName.value;\n"
+            + "    var ret = showModalDialog('myDialog.html', o, 'dialogHeight:300px; dialogLeft:200px;');\n"
+            + "    alert(ret);\n"
+            + "    alert('finished');\n"
+            + "  }\n"
+            + "</script></head><body>\n"
+            + "  <button onclick='test()' id='b'>Test</button>\n"
+            + "  <form id='f'>\n"
+            + "    First Name: <input type='text' name='firstName' value='Jane'><br>\n"
+            + "    Last Name: <input type='text' name='lastName' value='Smith'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String html2
+            = "<html><head><script>\n"
+            + "  var o = window.dialogArguments;\n"
+            + "  alert(o.firstName);\n"
+            + "  alert(o.lastName);\n"
+            + "  window.returnValue = 'sdg';\n"
+            + "</script></head>\n"
+            + "<body>foo</body></html>";
+
+        final String[] expected = {"undefined", "Jane", "Smith", "sdg", "finished"};
+
+        final WebClient client = getWebClient();
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html1);
+        conn.setResponse(new URL(URL_FIRST.toExternalForm() + "myDialog.html"), html2);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlElement button = page.getHtmlElementById("b");
+        final HtmlPage dialogPage = button.click();
+        final DialogWindow dialog = (DialogWindow) dialogPage.getEnclosingWindow();
+
+        dialog.close();
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Basic test for the <tt>showModelessDialog</tt> method. See bug 2124916.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.IE)
+    public void showModelessDialog() throws Exception {
+        final String html1
+            = "<html><head><script>\n"
+            + "  var userName = '';\n"
+            + "  function test() {\n"
+            + "    var newWindow = showModelessDialog('myDialog.html', window, 'status:false');\n"
+            + "    alert(newWindow);\n"
+            + "  }\n"
+            + "  function update() { alert(userName); }\n"
+            + "</script></head><body>\n"
+            + "  <input type='button' id='b' value='Test' onclick='test()'>\n"
+            + "</body></html>";
+
+        final String html2
+            = "<html><head><script>\n"
+            + "function update() {\n"
+            + "  var w = dialogArguments;\n"
+            + "  w.userName = document.getElementById('name').value;\n"
+            + "  w.update();\n"
+            + "}\n"
+            + "</script></head><body>\n"
+            + "  Name: <input id='name'><input value='OK' id='b' type='button' onclick='update()'>\n"
+            + "</body></html>";
+
+        final String[] expected = {"[object]", "a"};
+
+        final WebClient client = getWebClient();
+        final List<String> actual = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(actual));
+
+        final MockWebConnection conn = new MockWebConnection();
+        conn.setResponse(URL_FIRST, html1);
+        conn.setResponse(new URL(URL_FIRST.toExternalForm() + "myDialog.html"), html2);
+        client.setWebConnection(conn);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlElement button = page.getHtmlElementById("b");
+        final HtmlPage dialogPage = button.click();
+
+        final HtmlInput input = dialogPage.getHtmlElementById("name");
+        input.setValueAttribute("a");
+
+        final HtmlButtonInput button2 = (HtmlButtonInput) dialogPage.getHtmlElementById("b");
+        button2.click();
+
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "undefined", "function", "3" },
+            IE = { "null", "function", "3" })
+    public void onError() throws Exception {
+        final String html
+            = "<script>\n"
+            + "alert(window.onerror);\n"
+            + "window.onerror=function(){alert(arguments.length);};\n"
+            + "alert(typeof window.onerror);\n"
+            + "try { alert(undef); } catch(e) { /* caught, so won't trigger onerror */ }\n"
+            + "alert(undef);\n"
+            + "</script>";
+
+        getWebClientWithMockWebConnection().getOptions().setThrowExceptionOnScriptError(false);
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266
+     * and https://bugzilla.mozilla.org/show_bug.cgi?id=443491.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void overwriteFunctions_alert() throws Exception {
+        final String html = "<html><head><script language='JavaScript'>\n"
+            + "function alert(x) {\n"
+            + "  document.title = x;\n"
+            + "}\n"
+            + "alert('hello');\n"
+            + "</script></head><body></body></html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertEquals("hello", page.getTitleText());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "true", "123", "123" })
+    public void overwriteProperty_top() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "  alert(window.top == this);\n"
+            + "  var top = 123;\n"
+            + "  alert(top);\n"
+            + "  alert(window.top);\n"
+            + "</script></body></html>";
+        // this can't be tested using WebDriver currently (i.e. using loadPageWithAlerts2)
+        // because the hack currently used to capture alerts needs reference to property "top".
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * Download of next page is done first after onbeforeunload is done.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("x")
+    public void onbeforeunload_calledBeforeDownload() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "  window.onbeforeunload = function() { alert('x'); return 'hello'; };\n"
+            + "  window.location = 'foo.html';\n"
+            + "</script></body></html>";
+
+        final WebClient webClient = getWebClientWithMockWebConnection();
+        getMockWebConnection().setDefaultResponse("");
+
+        final OnbeforeunloadHandler handler = new OnbeforeunloadHandler() {
+            public boolean handleEvent(final Page page, final String returnValue) {
+                final String[] expectedRequests = {""};
+                assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+                return true;
+            }
+        };
+        webClient.setOnbeforeunloadHandler(handler);
+        loadPageWithAlerts(html);
+
+        final String[] expectedRequests = {"", "foo.html"};
+        assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void serialization() throws Exception {
+        final String html = "<html><head></head><body><iframe></iframe><script>window.frames</script></body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        clone(page.getEnclosingWindow());
+    }
+
 }

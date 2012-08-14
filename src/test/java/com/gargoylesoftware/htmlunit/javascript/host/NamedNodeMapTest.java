@@ -58,7 +58,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html); // properties order is the reverse of what I get with FF3.6
+        loadPageWithAlerts2(html); // properties order is the reverse of what I get with FF3.6
     }
 
     /**

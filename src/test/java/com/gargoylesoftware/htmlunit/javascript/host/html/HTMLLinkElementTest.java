@@ -61,7 +61,7 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
             + "    </body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }

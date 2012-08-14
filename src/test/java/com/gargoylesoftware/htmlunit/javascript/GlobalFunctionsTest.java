@@ -49,7 +49,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**

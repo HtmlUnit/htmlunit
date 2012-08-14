@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -111,35 +110,6 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "cookieEnabled" property.
-     * @throws Exception on test failure
-     */
-    @Test
-    public void cookieEnabled() throws Exception {
-        cookieEnabled(true);
-        cookieEnabled(false);
-    }
-
-    private void cookieEnabled(final boolean cookieEnabled) throws Exception {
-        final String html
-            = "<html><head><title>First</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  alert(navigator.cookieEnabled);\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='test()'></body>\n"
-            + "</html>";
-
-        setExpectedAlerts(Boolean.toString(cookieEnabled));
-        if (!cookieEnabled) {
-            getWebClient().getCookieManager().setCookiesEnabled(cookieEnabled);
-        }
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
      * Tests the "cpuClass" property.
      * @throws Exception on test failure
      */
@@ -206,18 +176,6 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests the "javaEnabled" method.
-     * @throws Exception on test failure
-     */
-    @Test
-    public void javaEnabled() throws Exception {
-        attribute("javaEnabled()", "false");
-        final WebClient webClient = getWebClient();
-        webClient.getOptions().setAppletEnabled(true);
-        attribute(webClient, "javaEnabled()", "true");
-    }
-
-    /**
      * Tests the "taintEnabled" property.
      * @throws Exception on test failure
      */
@@ -232,18 +190,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @param value the expected value for the named attribute
      * @throws Exception on test failure
      */
-    private void attribute(final String name, final String value) throws Exception {
-        attribute(getWebClient(), name, value);
-    }
-
-    /**
-     * Generic method for testing the value of a specific navigator attribute.
-     * @param webClient the web client to use to load the page
-     * @param name the name of the attribute to test
-     * @param value the expected value for the named attribute
-     * @throws Exception on test failure
-     */
-    private void attribute(final WebClient webClient, final String name, final String value) throws Exception {
+    void attribute(final String name, final String value) throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "    <title>test</title>\n"

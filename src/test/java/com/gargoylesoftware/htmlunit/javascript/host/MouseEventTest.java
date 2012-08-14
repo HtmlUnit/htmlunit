@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.net.URL;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -25,10 +21,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * Tests for mouse events support.
@@ -39,37 +32,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  */
 @RunWith(BrowserRunner.class)
 public class MouseEventTest extends WebDriverTestCase {
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void eventCoordinates() throws Exception {
-        final URL url = getClass().getClassLoader().getResource("event_coordinates.html");
-        assertNotNull(url);
-
-        final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage(url);
-        assertEquals("Mouse Event coordinates", page.getTitleText());
-
-        final HtmlTextArea textarea = page.getHtmlElementById("myTextarea");
-        assertEquals("", textarea.asText());
-
-        page.getHtmlElementById("div1").click();
-        assertEquals("Click on DIV(id=div1): true, true, false, false" + LINE_SEPARATOR, textarea.asText());
-        textarea.reset();
-
-        page.getHtmlElementById("span1").click();
-        assertEquals("Click on SPAN(id=span1): true, true, true, false" + LINE_SEPARATOR, textarea.asText());
-        textarea.reset();
-
-        page.getHtmlElementById("span2").click();
-        assertEquals("Click on SPAN(id=span2): true, false, false, true" + LINE_SEPARATOR, textarea.asText());
-        textarea.reset();
-
-        textarea.click();
-        assertEquals("Click on TEXTAREA(id=myTextarea): true, false, false, false" + LINE_SEPARATOR, textarea.asText());
-    }
 
     /**
      * @throws Exception if an error occurs

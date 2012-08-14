@@ -61,7 +61,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "    </body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**

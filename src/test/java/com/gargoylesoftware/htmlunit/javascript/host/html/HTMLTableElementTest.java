@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link HTMLTableElement}.
@@ -496,24 +495,6 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void width() throws Exception {
-        final String content
-            = "<html><head></head><body>\n"
-                + "<table id='tableID' style='background:blue'><tr><td></td></tr></table>\n"
-                + "<script language='javascript'>\n"
-                + "    var table = document.getElementById('tableID');\n"
-                + "    table.width = '200';\n"
-                + "</script></body></html>";
-
-        final HtmlPage page = loadPage(getBrowserVersion(), content, null);
-        final String xml = page.asXml();
-        assertTrue(xml.contains("width=\"200\""));
     }
 
     /**

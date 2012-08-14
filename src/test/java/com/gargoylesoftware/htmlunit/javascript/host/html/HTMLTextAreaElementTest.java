@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * Tests for {@link HTMLTextAreaElement}.
@@ -85,46 +83,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
         driver.findElement(By.name("myButton")).click();
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
-    }
-
-    /**
-     * Method type(...) should not trigger onchange!
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void type_onchange() throws Exception {
-        final String content
-            = "<html><head><title>foo</title>\n"
-            + "<script>\n"
-            + "  function changed(e) {\n"
-            + "    log('changed: ' + e.value)\n"
-            + "  }\n"
-            + "  function keypressed(e) {\n"
-            + "    log('keypressed: ' + e.value)\n"
-            + "  }\n"
-            + "  function log(msg) {\n"
-            + "    document.getElementById('log').value += msg + '\\n';\n"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body>\n"
-            + "<form id='form1'>\n"
-            + "<textarea id='textArea1' onchange='changed(this)' onkeypress='keypressed(this)'></textarea>\n"
-            + "<textarea id='log'></textarea>"
-            + "</form>"
-            + "</body></html>";
-        final HtmlPage page = loadPageWithAlerts(content);
-        final HtmlTextArea textArea = page.getHtmlElementById("textArea1");
-        textArea.type("hello");
-        page.setFocusedElement(null); // remove focus on textarea to trigger onchange
-
-        final HtmlTextArea log = page.getHtmlElementById("log");
-        final String expectation = "keypressed: " + LINE_SEPARATOR
-            + "keypressed: h" + LINE_SEPARATOR
-            + "keypressed: he" + LINE_SEPARATOR
-            + "keypressed: hel" + LINE_SEPARATOR
-            + "keypressed: hell" + LINE_SEPARATOR
-            + "changed: hello" + LINE_SEPARATOR;
-        assertEquals(expectation, log.asText());
     }
 
     /**

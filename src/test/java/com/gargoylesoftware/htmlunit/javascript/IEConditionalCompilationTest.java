@@ -190,7 +190,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
             + "</head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**

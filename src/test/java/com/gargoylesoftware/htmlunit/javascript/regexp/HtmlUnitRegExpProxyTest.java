@@ -17,11 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.regexp;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,10 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
@@ -44,16 +36,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
-
-    private final String str_ = "(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)";
-    private final String begin_ = "<div>bla</div>";
-    private final String end_ = "foo\n<span>bla2</span>";
-    private final String text_ = begin_ + "<script>var a = 123;</script>" + end_;
-    private final String expected_ = begin_ + end_;
-    private final String src_ = "var re = new RegExp(str, 'img');\n"
-        + "var s = text.replace(re, '');\n"
-        + "if (s != expected)\n"
-        + " throw 'Expected >' + expected + '< but got >' + s + '<';";
 
     private final String scriptTestMatch_ = "function arrayToString(_arr) {\n"
         + "  if (_arr == null) return null;\n"
@@ -88,47 +70,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         + "var s = '<script>var a = 1;</' + 'script>';\n"
         + "var re = '(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)';\n"
         + "assertArrEquals(s.match(re), [s, 'var a = 1;', ';']);\n";
-
-    /**
-     * Test that string.replace works correctly (?) in HtmlUnit.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void fixedInHtmlUnit() throws Exception {
-        final String html = "<html></html>";
-        final HtmlPage page = loadPage(html);
-        final Window topScope = ((Window) page.getEnclosingWindow().getScriptObject());
-        topScope.put("str", topScope, str_);
-        topScope.put("text", topScope, text_);
-        topScope.put("expected", topScope, expected_);
-        page.executeJavaScript(src_);
-    }
-
-    /**
-     * Tests if custom patch is still needed.
-     */
-    @Test
-    public void needCustomFix() {
-        final WebClient client = getWebClient();
-        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
-        final Context ctx = cf.enterContext();
-        try {
-            final ScriptableObject topScope = ctx.initStandardObjects();
-            topScope.put("str", topScope, str_);
-            topScope.put("text", topScope, text_);
-            topScope.put("expected", topScope, expected_);
-            assertEquals(begin_ + end_, text_.replaceAll(str_, ""));
-            try {
-                ctx.evaluateString(topScope, src_, "test script", 0, null);
-            }
-            catch (final JavaScriptException e) {
-                assertTrue(e.getMessage().indexOf("Expected >") == 0);
-            }
-        }
-        finally {
-            Context.exit();
-        }
-    }
 
     /**
      * Test for bug http://sf.net/tracker/index.php?func=detail&aid=1780089&group_id=47038&atid=448266.
@@ -185,32 +126,6 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
-    }
-
-    /**
-     * Test if the custom fix is needed or not. When this test fails, then it means that the problem is solved in
-     * Rhino and that custom fix for String.match in {@link HtmlUnitRegExpProxy} is not needed anymore (and that
-     * this test can be removed, or turned positive).
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void matchFixNeeded() throws Exception {
-        final WebClient client = getWebClient();
-        final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
-        final Context cx = cf.enterContext();
-        try {
-            final ScriptableObject topScope = cx.initStandardObjects();
-            cx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
-            try {
-                cx.evaluateString(topScope, scriptTestMatch_, "test script String.match", 0, null);
-            }
-            catch (final JavaScriptException e) {
-                assertTrue(e.getMessage().indexOf("Expected >") == 0);
-            }
-        }
-        finally {
-            Context.exit();
-        }
     }
 
     /**

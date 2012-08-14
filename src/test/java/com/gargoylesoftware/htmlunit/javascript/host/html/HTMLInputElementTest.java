@@ -23,12 +23,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 /**
  * Tests for {@link HTMLInputElement} and buttons.
@@ -695,29 +691,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         assertEquals("1234", passwordField.getAttribute("value"));
         passwordField.sendKeys("\b7");
         assertEquals("1237", passwordField.getAttribute("value"));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(Browser.FF)
-    @Alerts("hello")
-    public void selectionRange() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "function test() {\n"
-            + "    var input = document.getElementById('myInput');\n"
-            + "    input.setSelectionRange(2, 7);\n"
-            + "    alert('hello');"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<input id='myInput' value='some test'>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-        final HtmlTextInput input = page.getHtmlElementById("myInput");
-        assertEquals("me te", input.getSelectedText());
     }
 
     /**
