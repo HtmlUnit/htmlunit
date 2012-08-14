@@ -128,7 +128,7 @@ public final class HTMLParser {
         final HtmlPage page = (HtmlPage) parent.getPage();
         final URL url = page.getWebResponse().getWebRequest().getUrl();
 
-        final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, url);
+        final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, url, source);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
         // build fragment context stack
         DomNode node = context;
@@ -194,7 +194,7 @@ public final class HTMLParser {
         webWindow.setEnclosedPage(page);
 
         final URL url = webResponse.getWebRequest().getUrl();
-        final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, url);
+        final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, url, null);
 
         String charset = webResponse.getContentCharsetOrNull();
         try {
@@ -405,7 +405,7 @@ public final class HTMLParser {
          * @param node the location at which to insert the new content
          * @param url the page's URL
          */
-        private HtmlUnitDOMBuilder(final DomNode node, final URL url) {
+        private HtmlUnitDOMBuilder(final DomNode node, final URL url, final String htmlContent) {
             super(createConfiguration(node.getPage().getWebClient()));
             page_ = (HtmlPage) node.getPage();
 
@@ -419,7 +419,7 @@ public final class HTMLParser {
             final boolean reportErrors;
             if (listener != null) {
                 reportErrors = true;
-                fConfiguration.setErrorHandler(new HTMLErrorHandler(listener, url));
+                fConfiguration.setErrorHandler(new HTMLErrorHandler(listener, url, htmlContent));
             }
             else {
                 reportErrors = false;
@@ -823,12 +823,14 @@ public final class HTMLParser {
 class HTMLErrorHandler extends DefaultErrorHandler {
     private final HTMLParserListener listener_;
     private final URL url_;
+    private String html_;
 
-    HTMLErrorHandler(final HTMLParserListener listener, final URL url) {
+    HTMLErrorHandler(final HTMLParserListener listener, final URL url, final String htmlContent) {
         WebAssert.notNull("listener", listener);
         WebAssert.notNull("url", url);
         listener_ = listener;
         url_ = url;
+        html_ = htmlContent;
     }
 
     /** @see DefaultErrorHandler#error(String,String,XMLParseException) */
@@ -837,6 +839,7 @@ class HTMLErrorHandler extends DefaultErrorHandler {
             final XMLParseException exception) throws XNIException {
         listener_.error(exception.getMessage(),
                 url_,
+                html_,
                 exception.getLineNumber(),
                 exception.getColumnNumber(),
                 key);
@@ -848,6 +851,7 @@ class HTMLErrorHandler extends DefaultErrorHandler {
             final XMLParseException exception) throws XNIException {
         listener_.warning(exception.getMessage(),
                 url_,
+                html_,
                 exception.getLineNumber(),
                 exception.getColumnNumber(),
                 key);

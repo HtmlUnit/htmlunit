@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -25,10 +24,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
  * Test class for {@link HTMLParserListener}.<br/>
@@ -44,6 +44,7 @@ public class HTMLParserListenerTest extends WebTestCase {
         private boolean error_; // versus warning
         private String message_;
         private URL url_;
+        private String html_;
         private int line_;
         private int column_;
 
@@ -56,11 +57,12 @@ public class HTMLParserListenerTest extends WebTestCase {
          * @param column the column number
          * @param key Ignored value
          */
-        MessageInfo(final boolean error, final String message, final URL url,
+        MessageInfo(final boolean error, final String message, final URL url, final String html,
                 final int line, final int column, final String key) {
             error_ = error;
             message_ = message;
             url_ = url;
+            html_ = html;
             line_ = line;
             column_ = column;
             // ignore key
@@ -86,7 +88,9 @@ public class HTMLParserListenerTest extends WebTestCase {
             builder.append(error_, other.error_);
             builder.append(message_, other.message_);
             builder.append(url_.toExternalForm(), other.url_.toExternalForm());
+            builder.append(html_, other.html_);
             builder.append(line_, other.line_);
+            builder.append(column_, other.column_);
             return builder.isEquals();
         }
 
@@ -99,7 +103,9 @@ public class HTMLParserListenerTest extends WebTestCase {
             builder.append(error_);
             builder.append(message_);
             builder.append(url_);
+            builder.append(html_);
             builder.append(line_);
+            builder.append(column_);
             return builder.hashCode();
         }
     }
@@ -112,9 +118,8 @@ public class HTMLParserListenerTest extends WebTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @NotYetImplemented
     public void testSimple() throws Exception {
-        testSimple(4, -1);
+        testSimple(5, 7);
     }
 
     /**
@@ -138,14 +143,14 @@ public class HTMLParserListenerTest extends WebTestCase {
         final List<MessageInfo> messages = new ArrayList<MessageInfo>();
         final HTMLParserListener collecter = new HTMLParserListener() {
 
-            public void error(final String message, final URL url,
+            public void error(final String message, final URL url, final String html,
                     final int line, final int column, final String key) {
-                messages.add(new MessageInfo(true, message, url, line, column, key));
+                messages.add(new MessageInfo(true, message, url, html, line, column, key));
             }
 
-            public void warning(final String message, final URL url,
+            public void warning(final String message, final URL url, final String html,
                     final int line, final int column, final String key) {
-                messages.add(new MessageInfo(false, message, url, line, column, key));
+                messages.add(new MessageInfo(false, message, url, html, line, column, key));
             }
         };
         webClient.setHTMLParserListener(collecter);
@@ -160,7 +165,65 @@ public class HTMLParserListenerTest extends WebTestCase {
         // ignore column and key
         final MessageInfo expectedError = new MessageInfo(false,
                 "End element <head> automatically closes element <title>.",
-                URL_FIRST, line, col, null);
-        assertEquals(Collections.singletonList(expectedError), messages);
+                URL_FIRST, null, line, col, null);
+
+        assertEquals(1, messages.size());
+        assertEquals(expectedError, messages.get(0));
+    }
+
+    /**
+     * Test parsing of an fragment.
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    public void parseFragment() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  var oNode = document.getElementById('middle');\n"
+                + "  oNode.insertAdjacentHTML('afterEnd', '<div><span>before end</div>');\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "<span id='middle' style='color: #ff0000'>\n"
+                + "inside\n"
+                + "</span>\n"
+                + "</span>\n"
+                + "</body></html>";
+
+        final WebClient webClient = getWebClient();
+        assertNull(webClient.getHTMLParserListener());
+
+        final List<MessageInfo> messages = new ArrayList<MessageInfo>();
+        final HTMLParserListener collecter = new HTMLParserListener() {
+
+            public void error(final String message, final URL url, final String html,
+                    final int line, final int column, final String key) {
+                messages.add(new MessageInfo(true, message, url, html, line, column, key));
+            }
+
+            public void warning(final String message, final URL url, final String html,
+                    final int line, final int column, final String key) {
+                messages.add(new MessageInfo(false, message, url, html, line, column, key));
+            }
+        };
+        webClient.setHTMLParserListener(collecter);
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(html);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        assertEquals("foo", page.getTitleText());
+
+        // ignore key
+        final MessageInfo expectedError = new MessageInfo(false,
+                "End element <div> automatically closes element <span>.",
+                URL_FIRST, "<div><span>before end</div>", 1, 28, null);
+
+        assertEquals(1, messages.size());
+        assertEquals(expectedError, messages.get(0));
     }
 }
