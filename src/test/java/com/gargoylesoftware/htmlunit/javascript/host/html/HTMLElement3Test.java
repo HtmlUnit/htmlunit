@@ -67,10 +67,10 @@ public class HTMLElement3Test extends WebTestCase {
             "Old = <B>Old innerHTML</B><!-- old comment -->",
             "New = <B><I id=newElt>New cell value</I></B>",
             "I" },
-            DEFAULT = {
+    DEFAULT = {
             "Old = <b>Old innerHTML</b><!-- old comment -->",
             "New =  <b><i id=\"newElt\">New cell value</i></b>",
-             "I" })
+            "I" })
     public void getSetInnerHTMLComplex_FF() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -153,27 +153,27 @@ public class HTMLElement3Test extends WebTestCase {
     private void insertAdjacentHTML(final String beforeEnd,
             final String afterEnd, final String beforeBegin, final String afterBegin) throws Exception {
         final String html = "<html><head><title>First</title>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  var oNode = document.getElementById('middle');\n"
-                + "  oNode.insertAdjacentHTML('" + beforeEnd + "', ' <span id=3>before end</span> ');\n"
-                + "  oNode.insertAdjacentHTML('" + afterEnd + "', ' <span id=4>after end</span> ');\n"
-                + "  oNode.insertAdjacentHTML('" + beforeBegin + "', ' <span id=1>before begin</span> ');\n"
-                + "  oNode.insertAdjacentHTML('" + afterBegin + "', ' <span id=2>after begin</span> ');\n"
-                + "  var coll = document.getElementsByTagName('SPAN');\n"
-                + "  for (var i=0; i<coll.length; i++) {\n"
-                + "    alert(coll[i].id);\n"
-                + "  }\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head>\n"
-                + "<body onload='test()'>\n"
-                + "<span id='outside' style='color: #00ff00'>\n"
-                + "<span id='middle' style='color: #ff0000'>\n"
-                + "inside\n"
-                + "</span>\n"
-                + "</span>\n"
-                + "</body></html>";
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var oNode = document.getElementById('middle');\n"
+            + "  oNode.insertAdjacentHTML('" + beforeEnd + "', ' <span id=3>before end</span> ');\n"
+            + "  oNode.insertAdjacentHTML('" + afterEnd + "', ' <span id=4>after end</span> ');\n"
+            + "  oNode.insertAdjacentHTML('" + beforeBegin + "', ' <span id=1>before begin</span> ');\n"
+            + "  oNode.insertAdjacentHTML('" + afterBegin + "', ' <span id=2>after begin</span> ');\n"
+            + "  var coll = document.getElementsByTagName('SPAN');\n"
+            + "  for (var i=0; i<coll.length; i++) {\n"
+            + "    alert(coll[i].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<span id='outside' style='color: #00ff00'>\n"
+            + "<span id='middle' style='color: #ff0000'>\n"
+            + "inside\n"
+            + "</span>\n"
+            + "</span>\n"
+            + "</body></html>";
         final HtmlPage page = loadPageWithAlerts(html);
         final HtmlElement elt = page.getHtmlElementById("outside");
         assertEquals("before begin after begin inside before end after end", elt.asText());
@@ -193,33 +193,33 @@ public class HTMLElement3Test extends WebTestCase {
     private void insertAdjacentElement(final String beforeEnd,
             final String afterEnd, final String beforeBegin, final String afterBegin) throws Exception {
         final String html = "<html><head><title>First</title>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  var oNode = document.getElementById('middle');\n"
-                + "  oNode.insertAdjacentElement('" + beforeEnd + "', makeElement(3, 'before end'));\n"
-                + "  oNode.insertAdjacentElement('" + afterEnd + "', makeElement(4, ' after end'));\n"
-                + "  oNode.insertAdjacentElement('" + beforeBegin + "', makeElement(1, 'before begin '));\n"
-                + "  oNode.insertAdjacentElement('" + afterBegin + "', makeElement(2, ' after begin'));\n"
-                + "  var coll = document.getElementsByTagName('SPAN');\n"
-                + "  for (var i=0; i<coll.length; i++) {\n"
-                + "    alert(coll[i].id);\n"
-                + "  }\n"
-                + "}\n"
-                + "function makeElement(id, value) {\n"
-                + "  var span = document.createElement('span');\n"
-                + "  span.appendChild(document.createTextNode(value));\n"
-                + "  span.id = id;\n"
-                + "  return span;\n"
-                + "}\n"
-                + "</script>\n"
-                + "</head>\n"
-                + "<body onload='test()'>\n"
-                + "<span id='outside' style='color: #00ff00'>\n"
-                + "<span id='middle' style='color: #ff0000'>\n"
-                + "inside\n"
-                + "</span>\n"
-                + "</span>\n"
-                + "</body></html>";
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var oNode = document.getElementById('middle');\n"
+            + "  oNode.insertAdjacentElement('" + beforeEnd + "', makeElement(3, 'before end'));\n"
+            + "  oNode.insertAdjacentElement('" + afterEnd + "', makeElement(4, ' after end'));\n"
+            + "  oNode.insertAdjacentElement('" + beforeBegin + "', makeElement(1, 'before begin '));\n"
+            + "  oNode.insertAdjacentElement('" + afterBegin + "', makeElement(2, ' after begin'));\n"
+            + "  var coll = document.getElementsByTagName('SPAN');\n"
+            + "  for (var i=0; i<coll.length; i++) {\n"
+            + "    alert(coll[i].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "function makeElement(id, value) {\n"
+            + "  var span = document.createElement('span');\n"
+            + "  span.appendChild(document.createTextNode(value));\n"
+            + "  span.id = id;\n"
+            + "  return span;\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<span id='outside' style='color: #00ff00'>\n"
+            + "<span id='middle' style='color: #ff0000'>\n"
+            + "inside\n"
+            + "</span>\n"
+            + "</span>\n"
+            + "</body></html>";
         final HtmlPage page = loadPageWithAlerts(html);
         final HtmlElement elt = page.getHtmlElementById("outside");
         assertEquals("before begin after begin inside before end after end", elt.asText());
@@ -236,7 +236,7 @@ public class HTMLElement3Test extends WebTestCase {
         final URL url1 = URL_FIRST;
         final URL url2 = URL_SECOND;
         final String html1 =
-              "<html>\n"
+            "<html>\n"
             + "  <head>\n"
             + "    <title>Test</title>\n"
             + "    <script>\n"
@@ -286,487 +286,487 @@ public class HTMLElement3Test extends WebTestCase {
      *
      * @throws Exception if the test fails
      */
-     @Test
-     @Browsers(Browser.IE)
-     @Alerts(IE = { "Refused", "foo" })
-     public void addBehaviorDefaultDownload() throws Exception {
-         final URL url1 = new URL("http://htmlunit.sourceforge.net/");
-         final URL url2 = new URL("http://htmlunit.sourceforge.net/test.txt");
-         // The download behavior doesn't accept downloads from a different domain ...
-         final URL url3 = new URL("http://www.domain2.com/test.txt");
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts(IE = { "Refused", "foo" })
+    public void addBehaviorDefaultDownload() throws Exception {
+        final URL url1 = new URL("http://htmlunit.sourceforge.net/");
+        final URL url2 = new URL("http://htmlunit.sourceforge.net/test.txt");
+        // The download behavior doesn't accept downloads from a different domain ...
+        final URL url3 = new URL("http://www.domain2.com/test.txt");
 
-         final String html1 =
-              "<html>\n"
-             + "  <head>\n"
-             + "    <title>Test</title>\n"
-             + "    <script>\n"
-             + "    function doTest() {\n"
-             + "      try {\n"
-             + "        hp.startDownload('http://www.domain2.com/test.txt', callback);\n"
-             + "      }\n"
-             + "      catch (e)\n"
-             + "      {\n"
-             + "        alert('Refused');\n"
-             + "      }\n"
-             + "      hp.startDownload('test.txt', callback);\n"
-             + "    }\n"
-             + "    function callback(content) {\n"
-             + "      alert(content);\n"
-             + "    }\n"
-             + "    </script>\n"
-             + "  </head>\n"
-             + "  <body onload='doTest()'>\n"
-             + "    <span id='hp' style='behavior:url(#default#download)'></span>\n"
-             + "  </body>\n"
-             + "</html>";
+        final String html1 =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>Test</title>\n"
+            + "    <script>\n"
+            + "    function doTest() {\n"
+            + "      try {\n"
+            + "        hp.startDownload('http://www.domain2.com/test.txt', callback);\n"
+            + "      }\n"
+            + "      catch (e)\n"
+            + "      {\n"
+            + "        alert('Refused');\n"
+            + "      }\n"
+            + "      hp.startDownload('test.txt', callback);\n"
+            + "    }\n"
+            + "    function callback(content) {\n"
+            + "      alert(content);\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='doTest()'>\n"
+            + "    <span id='hp' style='behavior:url(#default#download)'></span>\n"
+            + "  </body>\n"
+            + "</html>";
 
-         final WebClient client = getWebClient();
-         final List<String> collectedAlerts = new ArrayList<String>();
-         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-         final MockWebConnection webConnection = new MockWebConnection();
-         webConnection.setResponse(url1, html1);
-         webConnection.setResponse(url2, "foo");
-         webConnection.setResponse(url3, "foo2");
-         client.setWebConnection(webConnection);
-         client.getPage(url1);
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(url1, html1);
+        webConnection.setResponse(url2, "foo");
+        webConnection.setResponse(url3, "foo2");
+        client.setWebConnection(webConnection);
+        client.getPage(url1);
 
-         final String[] expectedAlerts = getExpectedAlerts();
-         final int waitTime = 50;
-         final int maxTime = 1000;
-         for (int time = 0; time < maxTime; time += waitTime) {
-             if (expectedAlerts.length <= collectedAlerts.size()) {
-                 assertEquals(expectedAlerts, collectedAlerts);
-                 return;
-             }
-             Thread.sleep(waitTime);
-         }
-         fail("Unable to collect expected alerts within " + maxTime + "ms; collected alerts: " + collectedAlerts);
-     }
+        final String[] expectedAlerts = getExpectedAlerts();
+        final int waitTime = 50;
+        final int maxTime = 1000;
+        for (int time = 0; time < maxTime; time += waitTime) {
+            if (expectedAlerts.length <= collectedAlerts.size()) {
+                assertEquals(expectedAlerts, collectedAlerts);
+                return;
+            }
+            Thread.sleep(waitTime);
+        }
+        fail("Unable to collect expected alerts within " + maxTime + "ms; collected alerts: " + collectedAlerts);
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnclick() throws Exception {
-         eventHandlerSetterGetterTest("onclick");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnclick() throws Exception {
+        eventHandlerSetterGetterTest("onclick");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOndblclick() throws Exception {
-         eventHandlerSetterGetterTest("ondblclick");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOndblclick() throws Exception {
+        eventHandlerSetterGetterTest("ondblclick");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnblur() throws Exception {
-         eventHandlerSetterGetterTest("onblur");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnblur() throws Exception {
+        eventHandlerSetterGetterTest("onblur");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnfocus() throws Exception {
-         eventHandlerSetterGetterTest("onfocus");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnfocus() throws Exception {
+        eventHandlerSetterGetterTest("onfocus");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnkeydown() throws Exception {
-         eventHandlerSetterGetterTest("onkeydown");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnkeydown() throws Exception {
+        eventHandlerSetterGetterTest("onkeydown");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnkeypress() throws Exception {
-         eventHandlerSetterGetterTest("onkeypress");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnkeypress() throws Exception {
+        eventHandlerSetterGetterTest("onkeypress");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnkeyup() throws Exception {
-         eventHandlerSetterGetterTest("onkeyup");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnkeyup() throws Exception {
+        eventHandlerSetterGetterTest("onkeyup");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnmousedown() throws Exception {
-         eventHandlerSetterGetterTest("onmousedown");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnmousedown() throws Exception {
+        eventHandlerSetterGetterTest("onmousedown");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnmouseup() throws Exception {
-         eventHandlerSetterGetterTest("onmouseup");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnmouseup() throws Exception {
+        eventHandlerSetterGetterTest("onmouseup");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnmouseover() throws Exception {
-         eventHandlerSetterGetterTest("onmouseover");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnmouseover() throws Exception {
+        eventHandlerSetterGetterTest("onmouseover");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnmouseout() throws Exception {
-         eventHandlerSetterGetterTest("onmouseout");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnmouseout() throws Exception {
+        eventHandlerSetterGetterTest("onmouseout");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnmousemove() throws Exception {
-         eventHandlerSetterGetterTest("onmousemove");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnmousemove() throws Exception {
+        eventHandlerSetterGetterTest("onmousemove");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnresize() throws Exception {
-         eventHandlerSetterGetterTest("onresize");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnresize() throws Exception {
+        eventHandlerSetterGetterTest("onresize");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setOnerror() throws Exception {
-         eventHandlerSetterGetterTest("onerror");
-     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setOnerror() throws Exception {
+        eventHandlerSetterGetterTest("onerror");
+    }
 
-     /**
-      * @param eventName the name of the event
-      * @throws Exception if the test fails
-      */
-     private void eventHandlerSetterGetterTest(final String eventName) throws Exception {
-         final String html = "<html>\n"
-             + "<head>\n"
-             + "<script>\n"
-             + "function handler(event) {}\n"
-             + "function test() {\n"
-             + "    var oDiv = document.getElementById('myDiv');\n"
-             + "    oDiv." + eventName + " = handler;\n"
-             + "    if (oDiv." + eventName + " == handler) {\n"
-             + "        alert('success');\n"
-             + "    } else {\n"
-             + "        alert('fail');\n"
-             + "    }\n"
-             + "}\n"
-             + "</script>\n"
-             + "</head>\n"
-             + "<body onload='test()'>\n"
-             + "<div id='myDiv'><br/><div><span>test</span></div></div>\n"
-             + "</body>\n"
-             + "</html>";
-         final List<String> collectedAlerts = new ArrayList<String>();
-         final String[] expectedAlerts = {"success"};
-         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-         final HtmlElement div = page.getHtmlElementById("myDiv");
+    /**
+     * @param eventName the name of the event
+     * @throws Exception if the test fails
+     */
+    private void eventHandlerSetterGetterTest(final String eventName) throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function handler(event) {}\n"
+            + "function test() {\n"
+            + "    var oDiv = document.getElementById('myDiv');\n"
+            + "    oDiv." + eventName + " = handler;\n"
+            + "    if (oDiv." + eventName + " == handler) {\n"
+            + "        alert('success');\n"
+            + "    } else {\n"
+            + "        alert('fail');\n"
+            + "    }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='myDiv'><br/><div><span>test</span></div></div>\n"
+            + "</body>\n"
+            + "</html>";
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final String[] expectedAlerts = {"success"};
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlElement div = page.getHtmlElementById("myDiv");
 
-         assertTrue("Event handler was not set", div.hasEventHandlers(eventName));
-         assertEquals(expectedAlerts, collectedAlerts);
-     }
+        assertTrue("Event handler was not set", div.hasEventHandlers(eventName));
+        assertEquals(expectedAlerts, collectedAlerts);
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void clickHashAnchor() throws Exception {
-         final String html
-             = "<html><head><title>HashAnchor</title></head>\n"
-             + "<body>\n"
-             + "  <script language='javascript'>\n"
-             + "    function test() {alert('test hash');}\n"
-             + "  </script>\n"
-             + "  <a onClick='javascript:test();' href='#' name='hash'>Click</a>\n"
-             + "</body>\n"
-             + "</html>";
-         final String[] expectedAlerts = {"test hash"};
-         // first use direct load
-         final List<String> loadCollectedAlerts = new ArrayList<String>();
-         final HtmlPage loadPage = loadPage(getBrowserVersion(), html, loadCollectedAlerts);
-         final HtmlAnchor loadHashAnchor = loadPage.getAnchorByName("hash");
-         loadHashAnchor.click();
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickHashAnchor() throws Exception {
+        final String html
+            = "<html><head><title>HashAnchor</title></head>\n"
+            + "<body>\n"
+            + "  <script language='javascript'>\n"
+            + "    function test() {alert('test hash');}\n"
+            + "  </script>\n"
+            + "  <a onClick='javascript:test();' href='#' name='hash'>Click</a>\n"
+            + "</body>\n"
+            + "</html>";
+        final String[] expectedAlerts = {"test hash"};
+        // first use direct load
+        final List<String> loadCollectedAlerts = new ArrayList<String>();
+        final HtmlPage loadPage = loadPage(getBrowserVersion(), html, loadCollectedAlerts);
+        final HtmlAnchor loadHashAnchor = loadPage.getAnchorByName("hash");
+        loadHashAnchor.click();
 
-         assertEquals(expectedAlerts, loadCollectedAlerts);
+        assertEquals(expectedAlerts, loadCollectedAlerts);
 
-         // finally try via the client
-         final WebClient webClient = getWebClient();
-         final MockWebConnection webConnection = new MockWebConnection();
-         webConnection.setResponse(URL_FIRST, html);
-         webClient.setWebConnection(webConnection);
-         final CollectingAlertHandler clientCollectedAlertsHandler = new CollectingAlertHandler();
-         webClient.setAlertHandler(clientCollectedAlertsHandler);
-         final HtmlPage clientPage = webClient.getPage(URL_FIRST);
-         final HtmlAnchor clientHashAnchor = clientPage.getAnchorByName("hash");
-         clientHashAnchor.click();
+        // finally try via the client
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, html);
+        webClient.setWebConnection(webConnection);
+        final CollectingAlertHandler clientCollectedAlertsHandler = new CollectingAlertHandler();
+        webClient.setAlertHandler(clientCollectedAlertsHandler);
+        final HtmlPage clientPage = webClient.getPage(URL_FIRST);
+        final HtmlAnchor clientHashAnchor = clientPage.getAnchorByName("hash");
+        clientHashAnchor.click();
 
-         assertEquals(expectedAlerts, clientCollectedAlertsHandler.getCollectedAlerts());
-     }
+        assertEquals(expectedAlerts, clientCollectedAlertsHandler.getCollectedAlerts());
+    }
 
-     /**
-      * Tests setAttribute() with name of event handler.
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setAttribute_eventHandler() throws Exception {
-         final String html = "<html><head><title>foo</title><script>\n"
-             + "  function test() {\n"
-             + "    var text = document.getElementById('login');\n"
-             + "    var password = document.getElementById('password');\n"
-             + "    text.setAttribute('onfocus', \"alert('onfocus1');\");\n"
-             + "    text.setAttribute('onblur', \"alert('onblur1');\");\n"
-             + "    password.setAttribute('onfocus', \"alert('onfocus2');\");\n"
-             + "    password.setAttribute('onblur', \"alert('onblur2');\");\n"
-             + "  }\n"
-             + "</script></head><body onload='test()'>\n"
-             + "  <form>\n"
-             + "    <input type='text' id='login' name='login'>\n"
-             + "    <input type='password' id='password' name='password'>\n"
-             + "  </form>\n"
-             + "</body></html>";
+    /**
+     * Tests setAttribute() with name of event handler.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setAttribute_eventHandler() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('login');\n"
+            + "    var password = document.getElementById('password');\n"
+            + "    text.setAttribute('onfocus', \"alert('onfocus1');\");\n"
+            + "    text.setAttribute('onblur', \"alert('onblur1');\");\n"
+            + "    password.setAttribute('onfocus', \"alert('onfocus2');\");\n"
+            + "    password.setAttribute('onblur', \"alert('onblur2');\");\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input type='text' id='login' name='login'>\n"
+            + "    <input type='password' id='password' name='password'>\n"
+            + "  </form>\n"
+            + "</body></html>";
 
-         final List<String> collectedAlerts = new ArrayList<String>();
-         final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-         final HtmlForm form = page.getForms().get(0);
-         final HtmlTextInput inputLogin = form.getInputByName("login");
-         final HtmlPasswordInput inputPassword = form.getInputByName("password");
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlForm form = page.getForms().get(0);
+        final HtmlTextInput inputLogin = form.getInputByName("login");
+        final HtmlPasswordInput inputPassword = form.getInputByName("password");
 
-         inputLogin.focus();
-         inputPassword.focus();
+        inputLogin.focus();
+        inputPassword.focus();
 
-         final int expectedAlertNumber;
-         if (getBrowserVersion().isIE()) {
-             expectedAlertNumber = 0;
-         }
-         else {
-             expectedAlertNumber = 3;
-         }
-         assertEquals(expectedAlertNumber, collectedAlerts.size());
-     }
+        final int expectedAlertNumber;
+        if (getBrowserVersion().isIE()) {
+            expectedAlertNumber = 0;
+        }
+        else {
+            expectedAlertNumber = 3;
+        }
+        assertEquals(expectedAlertNumber, collectedAlerts.size());
+    }
 
-     /**
-      * @throws Exception if an error occurs
-      */
-     @Test
-     @Browsers(Browser.IE)
-     public void fireEvent_WithoutTemplate() throws Exception {
-         final String html =
-               "<html><body>\n"
-             + "<div id='a' onclick='alert(\"clicked\")'>foo</div>\n"
-             + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
-             + "</body></html>";
-         final List<String> actual = new ArrayList<String>();
-         final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-         page.getHtmlElementById("a").click();
-         page.getHtmlElementById("b").mouseOver();
-         final String[] expected = {"clicked", "clicked"};
-         assertEquals(expected, actual);
-     }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.IE)
+    public void fireEvent_WithoutTemplate() throws Exception {
+        final String html =
+            "<html><body>\n"
+            + "<div id='a' onclick='alert(\"clicked\")'>foo</div>\n"
+            + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
+            + "</body></html>";
+        final List<String> actual = new ArrayList<String>();
+        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
+        page.getHtmlElementById("a").click();
+        page.getHtmlElementById("b").mouseOver();
+        final String[] expected = {"clicked", "clicked"};
+        assertEquals(expected, actual);
+    }
 
-     /**
-      * @throws Exception if an error occurs
-      */
-     @Test
-     @Browsers(Browser.IE)
-     public void fireEvent_WithTemplate() throws Exception {
-         final String html =
-               "<html><body>\n"
-             + "<script>var template = document.createEventObject();</script>\n"
-             + "<script>function doAlert(e) { alert(e.type); }</script>\n"
-             + "<div id='a' onclick='doAlert(event)'>foo</div>\n"
-             + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
-             + "<div id='c' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\", template)'>baz</div>\n"
-             + "</body></html>";
-         final List<String> actual = new ArrayList<String>();
-         final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
-         page.getHtmlElementById("a").click();
-         page.getHtmlElementById("b").mouseOver();
-         page.getHtmlElementById("c").mouseOver();
-         final String[] expected = {"click", "click", "click"};
-         assertEquals(expected, actual);
-     }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Browsers(Browser.IE)
+    public void fireEvent_WithTemplate() throws Exception {
+        final String html =
+            "<html><body>\n"
+            + "<script>var template = document.createEventObject();</script>\n"
+            + "<script>function doAlert(e) { alert(e.type); }</script>\n"
+            + "<div id='a' onclick='doAlert(event)'>foo</div>\n"
+            + "<div id='b' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\")'>bar</div>\n"
+            + "<div id='c' onmouseover='document.getElementById(\"a\").fireEvent(\"onclick\", template)'>baz</div>\n"
+            + "</body></html>";
+        final List<String> actual = new ArrayList<String>();
+        final HtmlPage page = loadPage(getBrowserVersion(), html, actual);
+        page.getHtmlElementById("a").click();
+        page.getHtmlElementById("b").mouseOver();
+        page.getHtmlElementById("c").mouseOver();
+        final String[] expected = {"click", "click", "click"};
+        assertEquals(expected, actual);
+    }
 
-     /**
-      * @throws Exception if an error occurs
-      */
-     @Test
-     public void dispatchEvent2() throws Exception {
-         testHTMLFile("HTMLElementTest_dispatchEvent2.html");
-     }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void dispatchEvent2() throws Exception {
+        testHTMLFile("HTMLElementTest_dispatchEvent2.html");
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     @Browsers(Browser.IE)
-     @Alerts({"body1", "button1", "text1", "[object]", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
-     public void setActiveAndFocus() throws Exception {
-         final WebClient webClient = getWebClient();
-         final MockWebConnection webConnection = new MockWebConnection();
-         final List<String> collectedAlerts = new ArrayList<String>();
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.IE)
+    @Alerts({"body1", "button1", "text1", "[object]", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
+    public void setActiveAndFocus() throws Exception {
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
-         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-         final String firstHtml = "<html><head><title>First</title>\n"
-             + "<script>var win2;</script></head>\n"
-             + "<body id='body1' onload='alert(document.activeElement.id)'><form name='form1'>\n"
-             + "<input id='text1' onfocus='alert(\"onfocus text1\");win2.focus();'>\n"
-             + "<button id='button1' onClick='win2=window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
-             + "</form></body></html>";
-         webConnection.setResponse(URL_FIRST, firstHtml);
+        final String firstHtml = "<html><head><title>First</title>\n"
+            + "<script>var win2;</script></head>\n"
+            + "<body id='body1' onload='alert(document.activeElement.id)'><form name='form1'>\n"
+            + "<input id='text1' onfocus='alert(\"onfocus text1\");win2.focus();'>\n"
+            + "<button id='button1' onClick='win2=window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
+            + "</form></body></html>";
+        webConnection.setResponse(URL_FIRST, firstHtml);
 
-         final String secondHtml = "<html><head><title>Second</title></head>\n"
-             + "<body id='body2'>\n"
-             + "<input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
-             + "<button id='button2' onClick='doTest();'>Click me</a>\n"
-             + "<script>\n"
-             + "     function doTest() {\n"
-             + "         alert(opener.document.activeElement.id);\n"
-             + "         opener.document.getElementById('text1').setActive();\n"
-             + "         alert(opener.document.activeElement.id);\n"
-             + "         alert(document.activeElement);\n"
-             + "         document.getElementById('text2').setActive();\n"
-             + "         alert(document.activeElement.id);\n"
-             + "         opener.focus();\n"
-             + "    }\n"
-             + "</script></body></html>";
-         webConnection.setResponse(URL_SECOND, secondHtml);
+        final String secondHtml = "<html><head><title>Second</title></head>\n"
+            + "<body id='body2'>\n"
+            + "<input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
+            + "<button id='button2' onClick='doTest();'>Click me</a>\n"
+            + "<script>\n"
+            + "     function doTest() {\n"
+            + "         alert(opener.document.activeElement.id);\n"
+            + "         opener.document.getElementById('text1').setActive();\n"
+            + "         alert(opener.document.activeElement.id);\n"
+            + "         alert(document.activeElement);\n"
+            + "         document.getElementById('text2').setActive();\n"
+            + "         alert(document.activeElement.id);\n"
+            + "         opener.focus();\n"
+            + "    }\n"
+            + "</script></body></html>";
+        webConnection.setResponse(URL_SECOND, secondHtml);
 
-         webClient.setWebConnection(webConnection);
+        webClient.setWebConnection(webConnection);
 
-         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
-         assertEquals("First", firstPage.getTitleText());
+        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
 
-         final HtmlButton button1 = firstPage.getHtmlElementById("button1");
-         final HtmlPage secondPage = button1.click();
-         assertEquals("Second", secondPage.getTitleText());
-         secondPage.getHtmlElementById("button2").click();
-         assertEquals(getExpectedAlerts(), collectedAlerts);
-     }
+        final HtmlButton button1 = firstPage.getHtmlElementById("button1");
+        final HtmlPage secondPage = button1.click();
+        assertEquals("Second", secondPage.getTitleText());
+        secondPage.getHtmlElementById("button2").click();
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     @Alerts({"onfocus text1", "onfocus text2", "onfocus text1", "onfocus text2" })
-     public void onFocusOnWindowFocusGain() throws Exception {
-         final WebClient webClient = getWebClient();
-         final MockWebConnection webConnection = new MockWebConnection();
-         final List<String> collectedAlerts = new ArrayList<String>();
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onfocus text1", "onfocus text2", "onfocus text1", "onfocus text2" })
+    public void onFocusOnWindowFocusGain() throws Exception {
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
-         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-         final String firstHtml = "<html><head><title>First</title></head>\n"
-                 + "<body><form name='form1'>\n"
-                 + "<input id='text1' onfocus='alert(\"onfocus text1\")'>\n"
-                 + "<button type='button' id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
-                 + "</form></body></html>";
-         webConnection.setResponse(URL_FIRST, firstHtml);
+        final String firstHtml = "<html><head><title>First</title></head>\n"
+            + "<body><form name='form1'>\n"
+            + "<input id='text1' onfocus='alert(\"onfocus text1\")'>\n"
+            + "<button type='button' id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
+            + "</form></body></html>";
+        webConnection.setResponse(URL_FIRST, firstHtml);
 
-         final String secondHtml = "<html><head><title>Second</title></head>\n"
-                 + "<body onLoad='doTest()'>\n"
-                 + "<input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
-                 + "<script>\n"
-                 + "     function doTest() {\n"
-                 + "         opener.document.getElementById('text1').focus();\n"
-                 + "         document.getElementById('text2').focus();\n"
-                 + "    }\n"
-                 + "</script></body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head>\n"
+            + "<body onLoad='doTest()'>\n"
+            + "<input id='text2' onfocus='alert(\"onfocus text2\")'>\n"
+            + "<script>\n"
+            + "     function doTest() {\n"
+            + "         opener.document.getElementById('text1').focus();\n"
+            + "         document.getElementById('text2').focus();\n"
+            + "    }\n"
+            + "</script></body></html>";
 
-         webConnection.setResponse(URL_SECOND, secondHtml);
-         webClient.setWebConnection(webConnection);
+        webConnection.setResponse(URL_SECOND, secondHtml);
+        webClient.setWebConnection(webConnection);
 
-         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
-         assertEquals("First", firstPage.getTitleText());
+        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
 
-         final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
-         final HtmlPage secondPage = buttonA.click();
-         assertEquals("Second", secondPage.getTitleText());
-         webClient.setCurrentWindow(firstPage.getEnclosingWindow());
-         webClient.setCurrentWindow(secondPage.getEnclosingWindow());
-         assertEquals(getExpectedAlerts(), collectedAlerts);
-     }
+        final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
+        final HtmlPage secondPage = buttonA.click();
+        assertEquals("Second", secondPage.getTitleText());
+        webClient.setCurrentWindow(firstPage.getEnclosingWindow());
+        webClient.setCurrentWindow(secondPage.getEnclosingWindow());
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
 
-     /**
-      * @throws Exception if the test fails
-      */
-     @Test
-     @Alerts({"onblur text2", "onblur text1" })
-     public void onBlurOnWindowFocusChange() throws Exception {
-         final WebClient webClient = getWebClient();
-         final MockWebConnection webConnection = new MockWebConnection();
-         final List<String> collectedAlerts = new ArrayList<String>();
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"onblur text2", "onblur text1" })
+    public void onBlurOnWindowFocusChange() throws Exception {
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        final List<String> collectedAlerts = new ArrayList<String>();
 
-         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-         final String firstHtml = "<html><head><title>First</title></head>\n"
-                 + "<body><form name='form1'>\n"
-                 + "<input id='text1' onblur='alert(\"onblur text1\")'>\n"
-                 + "<button type='button' id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
-                 + "</form></body></html>";
-         webConnection.setResponse(URL_FIRST, firstHtml);
+        final String firstHtml = "<html><head><title>First</title></head>\n"
+            + "<body><form name='form1'>\n"
+            + "<input id='text1' onblur='alert(\"onblur text1\")'>\n"
+            + "<button type='button' id='clickme' onClick='window.open(\"" + URL_SECOND + "\");'>Click me</a>\n"
+            + "</form></body></html>";
+        webConnection.setResponse(URL_FIRST, firstHtml);
 
-         final String secondHtml = "<html><head><title>Second</title></head>\n"
-                 + "<body onLoad='doTest()'>\n"
-                 + "<input id='text2' onblur='alert(\"onblur text2\")'>\n"
-                 + "<script>\n"
-                 + "     function doTest() {\n"
-                 + "         opener.document.getElementById('text1').focus();\n"
-                 + "         document.getElementById('text2').focus();\n"
-                 + "    }\n"
-                 + "</script></body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head>\n"
+            + "<body onLoad='doTest()'>\n"
+            + "<input id='text2' onblur='alert(\"onblur text2\")'>\n"
+            + "<script>\n"
+            + "     function doTest() {\n"
+            + "         opener.document.getElementById('text1').focus();\n"
+            + "         document.getElementById('text2').focus();\n"
+            + "    }\n"
+            + "</script></body></html>";
 
-         webConnection.setResponse(URL_SECOND, secondHtml);
-         webClient.setWebConnection(webConnection);
+        webConnection.setResponse(URL_SECOND, secondHtml);
+        webClient.setWebConnection(webConnection);
 
-         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
-         assertEquals("First", firstPage.getTitleText());
+        final HtmlPage firstPage = webClient.getPage(URL_FIRST);
+        assertEquals("First", firstPage.getTitleText());
 
-         final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
-         final HtmlPage secondPage = buttonA.click();
-         assertEquals("Second", secondPage.getTitleText());
-         webClient.setCurrentWindow(firstPage.getEnclosingWindow());
-         webClient.setCurrentWindow(secondPage.getEnclosingWindow());
-         assertEquals(getExpectedAlerts(), collectedAlerts);
-     }
+        final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
+        final HtmlPage secondPage = buttonA.click();
+        assertEquals("Second", secondPage.getTitleText());
+        webClient.setCurrentWindow(firstPage.getEnclosingWindow());
+        webClient.setCurrentWindow(secondPage.getEnclosingWindow());
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
 
-     /**
-      * Document.write after setting innerHTML.
-      * @throws Exception if the test fails
-      */
-     @Test
-     public void setInnerHTMLDocumentWrite() throws Exception {
-         final String html = "<html><head><title>test</title></head>\n"
-             + "<body>\n"
-             + "<script>\n"
-             + "     var a = document.createElement('a');\n"
-             + "     a.innerHTML = 'break';\n"
-             + "     document.write('hello');\n"
-             + "</script></body></html>";
-         final HtmlPage page = loadPageWithAlerts(html);
-         assertEquals("test" + LINE_SEPARATOR + "hello", page.asText());
-     }
+    /**
+     * Document.write after setting innerHTML.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setInnerHTMLDocumentWrite() throws Exception {
+        final String html = "<html><head><title>test</title></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "     var a = document.createElement('a');\n"
+            + "     a.innerHTML = 'break';\n"
+            + "     document.write('hello');\n"
+            + "</script></body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertEquals("test" + LINE_SEPARATOR + "hello", page.asText());
+    }
 
 }

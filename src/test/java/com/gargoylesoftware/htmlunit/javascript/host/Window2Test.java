@@ -364,21 +364,6 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("x")
-    public void onbeforeunload_setToFunction() throws Exception {
-        final String html
-            = "<html><body><script>\n"
-            + "  window.onbeforeunload = function() { alert('x'); return 'x'; };\n"
-            + "  window.location = 'about:blank';\n"
-            + "</script></body></html>";
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * Regression test for bug 2808901.
-     * @throws Exception if an error occurs
-     */
-    @Test
     public void onbeforeunload_setToString() throws Exception {
         final String html
             = "<html><body><script>\n"

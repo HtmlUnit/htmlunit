@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class TinyMceTest extends WebDriverTestCase {
+public class TinyMceTest extends WebTestCase {
 
     /**
      * @throws Exception if an error occurs
