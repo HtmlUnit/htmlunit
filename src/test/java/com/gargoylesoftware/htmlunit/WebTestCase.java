@@ -54,7 +54,6 @@ public abstract class WebTestCase extends AbstractWebTestCase {
     private static final Log LOG = LogFactory.getLog(WebTestCase.class);
 
     private WebClient webClient_;
-    private MockWebConnection mockWebConnection_;
 
     private int nbJSThreadsBeforeTest_;
 
@@ -170,14 +169,14 @@ public abstract class WebTestCase extends AbstractWebTestCase {
      * @return the new page
      * @throws Exception if something goes wrong
      */
-    protected static final HtmlPage loadPage(final WebClient client,
+    protected final HtmlPage loadPage(final WebClient client,
             final String html, final List<String> collectedAlerts, final URL url) throws Exception {
 
         if (collectedAlerts != null) {
             client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         }
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setDefaultResponse(html);
         client.setWebConnection(webConnection);
 
@@ -359,25 +358,6 @@ public abstract class WebTestCase extends AbstractWebTestCase {
     }
 
     /**
-     * Returns the mock WebConnection instance for the current test.
-     * @return the mock WebConnection instance for the current test
-     */
-    protected MockWebConnection getMockWebConnection() {
-        if (mockWebConnection_ == null) {
-            mockWebConnection_ = new MockWebConnection();
-        }
-        return mockWebConnection_;
-    }
-
-    /**
-     * Sets the mock WebConnection instance for the current test.
-     * @param connection the connection to use
-     */
-    protected void setMockWebConnection(final MockWebConnection connection) {
-        mockWebConnection_ = connection;
-    }
-
-    /**
      * Defines the provided HTML as the response of the MockWebConnection for {@link #getDefaultUrl()}
      * and loads the page with this URL using the current browser version; finally, asserts that the
      * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
@@ -441,9 +421,9 @@ public abstract class WebTestCase extends AbstractWebTestCase {
     public void releaseResources() {
         if (webClient_ != null) {
             webClient_.closeAllWindows();
+            webClient_.getCookieManager().clearCookies();
         }
         webClient_ = null;
-        mockWebConnection_ = null;
 
         final List<Thread> jsThreads = getJavaScriptThreads();
         // collect stack traces

@@ -99,7 +99,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public abstract class WebDriverTestCase extends WebTestCase {
+public abstract class WebDriverTestCase extends AbstractWebTestCase {
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
     private static List<String> BROWSERS_PROPERTIES_;
@@ -117,8 +117,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static String JSON_;
     private boolean useRealBrowser_;
-    private boolean writeContentAsBytes_ = false;
+    private boolean writeContentAsBytes_;
     private static Boolean LAST_TEST_MockWebConnection_;
+
+    private WebClient webClient_;
 
     /**
      * Override this function in a test class to ask for STATIC_SERVER2_ to be set up.
@@ -243,11 +245,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             return new FirefoxDriver();
         }
-        final WebClient webClient = getWebClient();
+        if (webClient_ == null) {
+            webClient_ = new WebClient(getBrowserVersion());
+        }
         return new HtmlUnitDriver(true) {
             @Override
             protected WebClient newWebClient(final BrowserVersion browserVersion) {
-                return webClient;
+                return webClient_;
             }
 
             @Override
@@ -400,7 +404,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     public static class MockWebConnectionServlet extends HttpServlet {
         private static MockWebConnection MockConnection_;
-        private static boolean WriteContentAsBytes_ = false;
+        private static boolean WriteContentAsBytes_;
+
+        static void setMockconnection(final MockWebConnection connection) {
+            MockConnection_ = connection;
+        }
+
+        static void setWriteContentAsBytes(final boolean status) {
+            WriteContentAsBytes_ = status;
+        }
 
         /**
          * {@inheritDoc}
@@ -630,7 +642,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
      * @param html the HTML to use for the default page
      * @param url the URL to use to load the page
-     * @param maxWaitTime the maximum time to wait to get the alerts (im ms)
+     * @param maxWaitTime the maximum time to wait to get the alerts (in ms)
      * @param servlets the additional servlets to configure with their mapping
      * @return the web driver
      * @throws Exception if something goes wrong
@@ -779,6 +791,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
     @Override
     public void releaseResources() {
         super.releaseResources();
+        if (webClient_ != null) {
+            webClient_.closeAllWindows();
+            webClient_.getCookieManager().clearCookies();
+        }
+        webClient_ = null;
 
         if (useRealBrowser_) {
             final WebDriver driver = getWebDriver();

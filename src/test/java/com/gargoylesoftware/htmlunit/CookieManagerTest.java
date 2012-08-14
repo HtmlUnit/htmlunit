@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.http.Header;
 import org.apache.http.cookie.CookieOrigin;
@@ -35,7 +34,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
@@ -230,54 +228,6 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void resettingCookie() throws Exception {
-        final String html
-            = "<html><head><title>foo</title>"
-            + "<script>\n"
-            + "  function createCookie(name, value, days, path) {\n"
-            + "    if (days) {\n"
-            + "      var date = new Date();\n"
-            + "      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));\n"
-            + "      var expires = '; expires=' + date.toGMTString();\n"
-            + "    }\n"
-            + "    else\n"
-            + "      var expires = '';\n"
-            + "    document.cookie = name + '=' + value + expires + '; path=' + path;\n"
-            + "  }\n"
-            + "\n"
-            + "  function readCookie(name) {\n"
-            + "    var nameEQ = name + '=';\n"
-            + "    var ca = document.cookie.split(';');\n"
-            + "    for(var i = 0; i < ca.length; i++) {\n"
-            + "      var c = ca[i];\n"
-            + "      while (c.charAt(0) == ' ')\n"
-            + "        c = c.substring(1, c.length);\n"
-            + "      if (c.indexOf(nameEQ) == 0)\n"
-            + "        return c.substring(nameEQ.length, c.length);\n"
-            + "    }\n"
-            + "    return null;\n"
-            + "  }\n"
-            + "</script></head><body>\n"
-            + "  <input id='button1' type='button' "
-            + "onclick=\"createCookie('button','button1',1,'/'); alert('cookie:' + readCookie('button'));\" "
-            + "value='Button 1'>\n"
-            + "  <input id='button2' type='button' "
-            + "onclick=\"createCookie('button','button2',1,'/'); alert('cookie:' + readCookie('button'));\" "
-            + "value='Button 2'>\n"
-            + "</form></body></html>";
-
-        final String[] expectedAlerts = {"cookie:button1", "cookie:button2"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(html, collectedAlerts);
-        page.getHtmlElementById("button1").click();
-        page.getHtmlElementById("button2").click();
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("first=1")
     public void cookie2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
@@ -329,30 +279,6 @@ public class CookieManagerTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader1);
 
         loadPageWithAlerts2(getDefaultUrl());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void cookie_nullValue() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        final URL url = URL_FIRST;
-        webConnection.setResponse(url, HTML_ALERT_COOKIE);
-        webClient.setWebConnection(webConnection);
-
-        final CookieManager mgr = webClient.getCookieManager();
-        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_key", null, "/", null, false));
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        webClient.getPage(URL_FIRST);
-
-        final String[] expectedAlerts = {"my_key="};
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -414,20 +340,6 @@ public class CookieManagerTest extends WebDriverTestCase {
 
         setExpectedAlerts("key2=value2");
         loadPageWithAlerts2(getDefaultUrl());
-    }
-
-    /**
-     * Regression test for bug 3053526: HtmlUnit was throwing an Exception when asking for cookies
-     * of "about:blank".
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void cookiesForAboutBlank() throws Exception {
-        final WebClient webClient = getWebClient();
-        final HtmlPage htmlPage = webClient.getPage("about:blank");
-
-        final Set<Cookie> cookies = webClient.getCookieManager().getCookies(htmlPage.getUrl());
-        assertTrue(cookies.toString(), cookies.isEmpty());
     }
 
     /**

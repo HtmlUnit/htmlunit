@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class WebResponseTest extends WebDriverTestCase {
+public class WebResponseTest extends WebServerTestCase {
 
     /**
      * Verifies that when no encoding header is provided, encoding may be recognized with its Byte Order Mark.
@@ -70,7 +70,7 @@ public class WebResponseTest extends WebDriverTestCase {
         webConnection.setDefaultResponse(ArrayUtils.addAll(markerBytes, script), 200, "OK", "text/javascript");
         webConnection.setResponse(URL_FIRST, html);
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts(html, URL_FIRST);
     }
 
     /**

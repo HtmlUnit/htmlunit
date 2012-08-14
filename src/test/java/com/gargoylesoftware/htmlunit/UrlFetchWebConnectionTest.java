@@ -26,11 +26,10 @@ import java.util.TreeMap;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -42,7 +41,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Pieter Herroelen
  */
 @RunWith(BrowserRunner.class)
-public class UrlFetchWebConnectionTest extends WebDriverTestCase {
+public class UrlFetchWebConnectionTest extends WebServerTestCase {
+
     /**
      * Tests a simple GET.
      * @throws Exception if the test fails
@@ -65,7 +65,7 @@ public class UrlFetchWebConnectionTest extends WebDriverTestCase {
     private void doGetTest(final URL url) throws Exception {
         // get with default WebConnection
         getMockWebConnection().setDefaultResponse("");
-        loadPage2("", url);
+        loadPage("", url);
         final WebRequest referenceRequest = getMockWebConnection().getLastWebRequest();
 
         // get with UrlFetchWebConnection
@@ -101,8 +101,8 @@ public class UrlFetchWebConnectionTest extends WebDriverTestCase {
             + "</form></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
-        final WebDriver driver = loadPage2(html, getDefaultUrl());
-        driver.findElement(By.id("submit")).click();
+        final HtmlPage page = loadPage(html, getDefaultUrl());
+        page.getHtmlElementById("submit").click();
         return getMockWebConnection().getLastWebRequest();
     }
 
@@ -135,11 +135,11 @@ public class UrlFetchWebConnectionTest extends WebDriverTestCase {
                 200, "OK", "text/html", responseHeader);
 
         // verify expectations with "normal" HTMLUnit
-        loadPageWithAlerts2(getDefaultUrl());
+        loadPageWithAlerts(getDefaultUrl());
 
         getWebClient().getCookieManager().clearCookies();
         getWebClient().setWebConnection(new UrlFetchWebConnection(getWebClient()));
-        loadPageWithAlerts2(getDefaultUrl());
+        loadPageWithAlerts(getDefaultUrl());
     }
 
     /**
@@ -172,7 +172,7 @@ public class UrlFetchWebConnectionTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
-        loadPage2(html);
+        loadPage(html);
 
         return getMockWebConnection().getLastWebRequest();
     }

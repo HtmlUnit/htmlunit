@@ -14,17 +14,30 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
 
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
+import org.eclipse.jetty.security.ConstraintMapping;
+import org.eclipse.jetty.security.ConstraintSecurityHandler;
+import org.eclipse.jetty.security.HashLoginService;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.After;
+
+import com.gargoylesoftware.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Base class for cases that need real web server.
@@ -36,6 +49,9 @@ import org.junit.After;
 public abstract class WebServerTestCase extends WebTestCase {
 
     private Server server_;
+    private static Boolean LAST_TEST_MockWebConnection_;
+    private static Server STATIC_SERVER_;
+    private boolean writeContentAsBytes_;
 
     /**
      * Starts the web server on the default {@link #PORT}.
@@ -159,5 +175,183 @@ public abstract class WebServerTestCase extends WebTestCase {
             server_.stop();
         }
         server_ = null;
+        stopWebServer();
+        LAST_TEST_MockWebConnection_ = null;
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebServer instead.
+     * @param html the HTML to use
+     * @param url the URL to use to load the page
+     * @return the page
+     * @throws Exception if something goes wrong
+     */
+    protected final HtmlPage loadPageWithAlerts(final String html, final URL url)
+        throws Exception {
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final HtmlPage page = loadPage(html, url);
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(page));
+        return page;
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}, but using WebServer instead.
+     * @param html the HTML to use
+     * @param url the URL to use to load the page
+     * @param maxWaitTime to wait to get the alerts (in ms)
+     * @return the page
+     * @throws Exception if something goes wrong
+     */
+    protected final HtmlPage loadPageWithAlertsWait(final String html, final URL url, final int maxWaitTime)
+        throws Exception {
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        final HtmlPage page = loadPage(html, url);
+
+        List<String> actualAlerts = getCollectedAlerts(page);
+        final long maxWait = System.currentTimeMillis() + maxWaitTime;
+        while (actualAlerts.size() < expectedAlerts.length && System.currentTimeMillis() < maxWait) {
+            Thread.sleep(30);
+            actualAlerts = getCollectedAlerts(page);
+        }
+
+        assertEquals(expectedAlerts, getCollectedAlerts(page));
+        return page;
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * @param html the HTML to use
+     * @param url the url to use to load the page
+     * @return the page
+     * @throws Exception if something goes wrong
+     */
+    protected final HtmlPage loadPage(final String html, final URL url) throws Exception {
+        return loadPage(html, url, "text/html", TextUtil.DEFAULT_CHARSET);
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * @param html the HTML to use
+     * @param url the url to use to load the page
+     * @param contentType the content type to return
+     * @param charset the name of a supported charset
+     * @return the page
+     * @throws Exception if something goes wrong
+     */
+    protected final HtmlPage loadPage(final String html, final URL url,
+            final String contentType, final String charset) throws Exception {
+        final MockWebConnection mockWebConnection = getMockWebConnection();
+        mockWebConnection.setResponse(url, html, contentType, charset);
+        startWebServer(mockWebConnection);
+
+        return getWebClient().getPage(url);
+    }
+    /**
+     * Starts the web server delivering response from the provided connection.
+     * @param mockConnection the sources for responses
+     * @throws Exception if a problem occurs
+     */
+    protected void startWebServer(final MockWebConnection mockConnection) throws Exception {
+        if (Boolean.FALSE.equals(LAST_TEST_MockWebConnection_)) {
+            stopWebServer();
+        }
+        LAST_TEST_MockWebConnection_ = Boolean.TRUE;
+        if (STATIC_SERVER_ == null) {
+            STATIC_SERVER_ = new Server(PORT);
+
+            final WebAppContext context = new WebAppContext();
+            context.setContextPath("/");
+            context.setResourceBase("./");
+
+            if (isBasicAuthentication()) {
+                final Constraint constraint = new Constraint();
+                constraint.setName(Constraint.__BASIC_AUTH);
+                constraint.setRoles(new String[]{"user"});
+                constraint.setAuthenticate(true);
+
+                final ConstraintMapping constraintMapping = new ConstraintMapping();
+                constraintMapping.setConstraint(constraint);
+                constraintMapping.setPathSpec("/*");
+
+                final ConstraintSecurityHandler handler = (ConstraintSecurityHandler) context.getSecurityHandler();
+                handler.setLoginService(new HashLoginService("MyRealm", "./src/test/resources/realm.properties"));
+                handler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
+            }
+
+            context.addServlet(MockWebConnectionServlet.class, "/*");
+            STATIC_SERVER_.setHandler(context);
+            STATIC_SERVER_.start();
+        }
+        MockWebConnectionServlet.setMockconnection(mockConnection);
+        MockWebConnectionServlet.setWriteContentAsBytes(writeContentAsBytes_);
+    }
+
+    /**
+     * Stops the WebServer.
+     * @throws Exception if it fails
+     */
+    protected static void stopWebServer() throws Exception {
+        if (STATIC_SERVER_ != null) {
+            STATIC_SERVER_.stop();
+        }
+        STATIC_SERVER_ = null;
+    }
+
+    /**
+     * Loads the provided URL serving responses from {@link #getMockWebConnection()}
+     * and verifies that the captured alerts are correct.
+     * @param url the URL to use to load the page
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final HtmlPage loadPageWithAlerts(final URL url) throws Exception {
+        expandExpectedAlertsVariables(url);
+        final String[] expectedAlerts = getExpectedAlerts();
+
+        startWebServer(getMockWebConnection());
+
+        final HtmlPage page = getWebClient().getPage(url);
+
+        assertEquals(expectedAlerts, getCollectedAlerts(page));
+        return page;
+    }
+
+    /**
+     * Returns the collected alerts.
+     * @param page the page
+     * @return the alerts
+     */
+    protected List<String> getCollectedAlerts(final HtmlPage page) {
+        final ScriptResult result = page.executeJavaScript("top.__huCatchedAlerts;");
+        final List<String> list = new ArrayList<String>();
+        final Object object = (Object) result.getJavaScriptResult();
+        if (object != Undefined.instance) {
+            final NativeArray arr = (NativeArray) object;
+            for (int i = 0; i < arr.getLength(); i++) {
+                list.add(arr.get(i).toString());
+            }
+        }
+        return list;
+    }
+
+    /**
+     * Returns whether to use basic authentication for all resources or not.
+     * The default implementation returns false.
+     * @return whether to use basic authentication or not
+     */
+    protected boolean isBasicAuthentication() {
+        return false;
+    }
+
+    /**
+     * Indicates that MockWebConnectionServlet should send the configured content's bytes directly
+     * without modification.
+     * @param b the new value
+     */
+    public void setWriteContentAsBytes_(final boolean b) {
+        writeContentAsBytes_ = b;
     }
 }

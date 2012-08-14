@@ -113,6 +113,7 @@ public abstract class AbstractWebTestCase {
     private BrowserVersion browserVersion_;
 
     private String[] expectedAlerts_;
+    private MockWebConnection mockWebConnection_;
 
     /** To be documented. */
     protected static final BrowserVersion FLAG_ALL_BROWSERS = new BrowserVersion("", "", "", 0);
@@ -562,5 +563,32 @@ public abstract class AbstractWebTestCase {
      */
     protected void setGenerateTest_notYetImplemented(final boolean status) {
         generateTest_notYetImplemented_ = status;
+    }
+
+    /**
+     * Returns the mock WebConnection instance for the current test.
+     * @return the mock WebConnection instance for the current test
+     */
+    protected MockWebConnection getMockWebConnection() {
+        if (mockWebConnection_ == null) {
+            mockWebConnection_ = new MockWebConnection();
+        }
+        return mockWebConnection_;
+    }
+
+    /**
+     * Sets the mock WebConnection instance for the current test.
+     * @param connection the connection to use
+     */
+    protected void setMockWebConnection(final MockWebConnection connection) {
+        mockWebConnection_ = connection;
+    }
+
+    /**
+     * Cleanup after a test.
+     */
+    @After
+    public void releaseResources() {
+        mockWebConnection_ = null;
     }
 }
