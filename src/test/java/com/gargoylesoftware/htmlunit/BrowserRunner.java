@@ -173,7 +173,10 @@ public class BrowserRunner extends Suite {
         /** Firefox 10. */
         FF10,
 
-        /** Not Browser-specific, it will run only once. Don't use this with other Browsers. */
+        /**
+         * Not Browser-specific, it will run only once. Don't use this with other Browsers.
+         * And don't call directly or indirectly {@link AbstractWebTestCase#getBrowserVersion()}
+         */
         NONE;
     }
 

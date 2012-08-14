@@ -16,7 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -28,6 +30,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author David D. Kilzer
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
+@RunWith(BrowserRunner.class)
 public class AttributeCaseTest extends WebTestCase {
 
     private static final String ATTRIBUTE_NAME = "randomAttribute";

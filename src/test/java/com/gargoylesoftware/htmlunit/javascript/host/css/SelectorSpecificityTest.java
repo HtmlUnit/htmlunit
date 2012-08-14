@@ -18,11 +18,11 @@ import java.io.StringReader;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Selector;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
@@ -34,13 +34,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
  * @version $Revision$
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class SelectorSpecificityTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
     public void selectorSpecifity() throws Exception {
         final SelectorSpecificity specificy0 = selectorSpecifity("*", "0,0,0,0");
         final SelectorSpecificity specificy1 = selectorSpecifity("li", "0,0,0,1");

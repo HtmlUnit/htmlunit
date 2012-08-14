@@ -452,9 +452,10 @@ public abstract class AbstractWebTestCase {
      * @return current {@link BrowserVersion}
      */
     protected final BrowserVersion getBrowserVersion() {
-//        if (browserVersion_ == null) {
-//            throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
-//        }
+        if (browserVersion_ == null) {
+            throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)', "
+                    + "and test case must NOT be annotated with @Browsers(Browser.NONE)");
+        }
         return browserVersion_;
     }
 

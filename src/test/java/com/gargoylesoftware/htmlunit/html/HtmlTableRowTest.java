@@ -19,10 +19,13 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -55,7 +58,8 @@ public class HtmlTableRowTest extends WebTestCase {
      * Constructor.
      * @throws Exception if an exception occurs
      */
-    public HtmlTableRowTest() throws Exception {
+    @Before
+    public void init() throws Exception {
         page_ = loadPage(htmlContent);
 
         table_ = page_.getHtmlElementById("table");
@@ -230,6 +234,7 @@ public class HtmlTableRowTest extends WebTestCase {
      * Ensure that a script can set the disabled property on a DOM node.
      */
     @Test
+    @NotYetImplemented(Browser.FF)
     public void testCloneScriptCanSetDisabledOnCell() {
         final String cmd = "document.getElementById('cell').disabled='true'";
         page_.executeJavaScript(cmd);
@@ -266,6 +271,7 @@ public class HtmlTableRowTest extends WebTestCase {
      * that same attribute on the clone.
      */
     @Test
+    @NotYetImplemented(Browser.FF)
     public void testCloneScriptSetDisabledIndependentOfOriginal() {
         final String cmd = "document.getElementById('cell').disabled = 'true'";
         page_.executeJavaScript(cmd);

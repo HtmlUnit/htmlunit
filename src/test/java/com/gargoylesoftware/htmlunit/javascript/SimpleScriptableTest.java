@@ -425,7 +425,6 @@ public class SimpleScriptableTest extends WebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
     public void dateGetTimezoneOffset() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

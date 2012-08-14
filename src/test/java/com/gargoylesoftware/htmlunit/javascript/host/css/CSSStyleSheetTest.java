@@ -53,7 +53,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
     public void selects_miscSelectors() throws Exception {
         final String html = "<html><head><title>test</title>\n"
             + "</head><body><style></style>\n"
@@ -98,7 +97,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
     public void selects_anyNodeSelector() throws Exception {
         testSelects("*", true, true, true);
     }
@@ -107,7 +105,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
     public void selects_childSelector() throws Exception {
         testSelects("body > div", false, true, false);
     }
@@ -116,7 +113,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
     public void selects_descendantSelector() throws Exception {
         testSelects("body span", false, false, true);
     }
@@ -125,7 +121,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
     public void selects_elementSelector() throws Exception {
         testSelects("div", false, true, false);
     }
@@ -134,7 +129,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
     public void selects_directAdjacentSelector() throws Exception {
         testSelects("span + span", false, false, true);
     }
@@ -143,7 +137,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
     public void selects_conditionalSelector_idCondition() throws Exception {
         testSelects("span#s", false, false, true);
         testSelects("#s", false, false, true);
@@ -154,7 +147,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
     public void selectsIdConditionWithSpecialChars() throws Exception {
         final String html =
                 "<html><body><style></style>\n"
@@ -177,7 +169,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
     public void selects_conditionalSelector_classCondition() throws Exception {
         testSelects("div.bar", false, true, false);
         testSelects(".bar", false, true, false);
@@ -188,7 +179,6 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
     public void selects_pseudoClass_root() throws Exception {
         testSelects(":root", false, false, false);
     }
