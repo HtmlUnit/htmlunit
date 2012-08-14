@@ -289,6 +289,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return true;
             case Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_READ_ONLY:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_ARGUMENTS_IS_READ_ONLY);
+            case Context.FEATURE_HTMLUNIT_EVAL_LOCAL_SCOPE:
+                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_EVAL_LOCAL_SCOPE);
             default:
                 return super.hasFeature(cx, featureIndex);
         }

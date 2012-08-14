@@ -922,4 +922,31 @@ public class Window2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "exception", "exception", "Success" },
+            IE = { "Success", "Success", "Success" })
+    public void eval() throws Exception {
+        final String html
+            = "<html><body onload='test()'><script>\n"
+            + "function test() {\n"
+            + "  var x = new Object();\n"
+            + "  x.a = 'Success';\n"
+            + "  try {\n"
+            + "    alert(window['eval']('x.a'));\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "  try {\n"
+            + "    alert(window.eval('x.a'));\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "  try {\n"
+            + "    alert(eval('x.a'));\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

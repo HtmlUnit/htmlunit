@@ -639,6 +639,9 @@ public enum BrowserVersionFeatures {
      */
     JS_ELEMENT_EXTENT_WITHOUT_PADDING,
 
+    /** Indicates that "eval" function should have access to the local function scope. */
+    JS_EVAL_LOCAL_SCOPE,
+
     /** Javascript event aborted check is based on the event handler return value (IE);
      * (standards-compliant browsers doing this via preventDefault).
      */
