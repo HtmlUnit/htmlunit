@@ -210,9 +210,8 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     * Returns the object that will resolve all URL requests.
      *
-     * <p>Return the object that will resolve all URL requests<p>
      * @return the connection that will be used
      */
     public WebConnection getWebConnection() {
@@ -220,8 +219,6 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
-     *
      * Sets the object that will resolve all URL requests.
      *
      * @param webConnection the new web connection
