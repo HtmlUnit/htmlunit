@@ -602,4 +602,24 @@ public class HtmlAnchorTest extends WebTestCase {
         return w.getEnclosedPage().getWebResponse().getWebRequest().getUrl().toString();
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clickNestedElement_jsDisabled() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "<a href='page2.html'>"
+            + "<span id='theSpan'>My Link</span></a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        getWebClient().getOptions().setJavaScriptEnabled(false);
+        final HtmlPage page = loadPage(html);
+        final HtmlElement span = page.getHtmlElementById("theSpan");
+        assertEquals("span", span.getTagName());
+        final HtmlPage page2 = span.click();
+        assertEquals(new URL(getDefaultUrl(), "page2.html"), page2.getUrl());
+    }
 }

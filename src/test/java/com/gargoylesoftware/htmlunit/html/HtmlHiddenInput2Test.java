@@ -16,12 +16,9 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link HtmlHiddenInput}.
@@ -31,24 +28,20 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlHiddenInputTest extends WebDriverTestCase {
+public class HtmlHiddenInput2Test extends WebTestCase {
 
     /**
-     * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    public void asText() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'>\n"
-            + "    <input type='hidden' name='foo' id='foo' value='bla'>\n"
-            + "</form></body></html>";
-
-        final WebDriver driver = loadPage2(htmlContent);
-
-        final WebElement input = driver.findElement(By.id("foo"));
-        assertEquals("", input.getText());
+    public void isDisplayed() throws Exception {
+        final String html = "<html><head><title>Page A</title></head><body>"
+                + "<form id='theForm'>"
+                + "  <input type='hidden' id='myHiddenInput' value='HiddenValue'/>"
+                + "</form>"
+                + "</body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        final HtmlElement hidden = page.getHtmlElementById("myHiddenInput");
+        assertFalse(hidden.isDisplayed());
     }
-
 }

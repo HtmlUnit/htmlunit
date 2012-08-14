@@ -21,8 +21,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -126,92 +124,4 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
         assertFalse(webDriver.getCurrentUrl().contains("__webpage_no_js__"));
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void asXml_jsEnabled() throws Exception {
-        final String html
-            = "<html><body>\n"
-            + "<noscript><div>hello</noscript>"
-            + "</body></html>";
-
-        final String expectedFF = "<body>\n"
-            + "  <noscript>\n"
-            + "    &lt;div&gt;hello\n"
-            + "  </noscript>\n"
-            + "</body>\n";
-        final String expectedIE = "<body>\n"
-            + "  <noscript/>\n"
-            + "</body>\n";
-
-        final String expected = getBrowserVersion().isFirefox() ? expectedFF : expectedIE;
-        final HtmlPage page = loadPage(html);
-        assertEquals(expected, page.getBody().asXml().replaceAll("\\r", ""));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void asXml_jsDisabled() throws Exception {
-        final String html = "<html><body>\n"
-            + "<noscript><div>hello</noscript>"
-            + "</body></html>";
-
-        final String expected = "<body>\n"
-            + "  <noscript>\n"
-            + "    <div>\n"
-            + "      hello\n"
-            + "    </div>\n"
-            + "  </noscript>\n"
-            + "</body>\n";
-
-        final WebClient client = getWebClient();
-        client.getOptions().setJavaScriptEnabled(false);
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse(html);
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals(expected, page.getBody().asXml().replaceAll("\\r", ""));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void asText_jsEnabled() throws Exception {
-        final String htmlContent
-            = "<html><body>\n"
-            + "<noscript>hello</noscript>"
-            + "</body></html>";
-
-        final String expected = "";
-        final HtmlPage page = loadPage(htmlContent);
-        assertEquals(expected, page.getBody().asText());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void asText_jsDisabled() throws Exception {
-        final String html = "<html><body>\n"
-            + "<noscript>hello</noscript>"
-            + "</body></html>";
-
-        final String expected = "hello";
-
-        final WebClient client = getWebClient();
-        client.getOptions().setJavaScriptEnabled(false);
-
-        final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse(html);
-        client.setWebConnection(webConnection);
-
-        final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals(expected, page.getBody().asText().replaceAll("\\r", ""));
-    }
 }

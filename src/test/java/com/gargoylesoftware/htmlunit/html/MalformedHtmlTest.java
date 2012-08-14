@@ -115,30 +115,6 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void incompleteEntities() throws Exception {
-        final String html = "<html><head>\n"
-            + "<title>Test document</title>\n"
-            + "</head><body>\n"
-            + "<a href='foo?a=1&copy=2&prod=3' id='myLink'>my link</a>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
-        final HtmlPage page2 = page.getAnchors().get(0).click();
-
-        final String query;
-        if (getBrowserVersion().isIE()) {
-            query = "a=1\u00A9=2&prod=3";
-        }
-        else {
-            query = "a=1%A9=2&prod=3";
-        }
-        assertEquals(query, page2.getWebResponse().getWebRequest().getUrl().getQuery());
-    }
-
-    /**
      * Test for <a href="http://sourceforge.net/support/tracker.php?aid=2767865">Bug 2767865</a>.
      * In fact this is not fully correct because IE (6 at least) does something very strange
      * and keeps the DIV in TABLE but wraps it in a node without name.
@@ -228,26 +204,6 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "<script>alert(document.links.length)</script>"
             + "</body></html>";
         loadPageWithAlerts2(html);
-    }
-
-    /**
-     * Regression test for bug 2940936.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void tableTextOutsideTD() throws Exception {
-        final String html = "<html><body>"
-            + "<table border='1'>\n"
-            + "<tr><td>1</td>\n"
-            + "<td>2</td>\n"
-            + "some text\n"
-            + "</tr>\n"
-            + "</table>\n"
-            + "</body></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
-        final String expectedText = "some text" + LINE_SEPARATOR
-            + "1\t2";
-        assertEquals(expectedText, page.asText());
     }
 
     /**

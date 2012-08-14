@@ -54,7 +54,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             + "</body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
-        loadPageWithAlerts(firstHtml);
+        loadPageWithAlerts2(firstHtml);
     }
 
     /**

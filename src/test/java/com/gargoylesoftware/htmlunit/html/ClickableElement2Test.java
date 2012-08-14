@@ -18,37 +18,39 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
- * Tests for {@link HtmlHiddenInput}.
+ * Tests for various clickable elements.
  *
  * @version $Revision$
+ * @author David K. Taylor
+ * @author Chris Erskine
  * @author Marc Guillemot
- * @author Ronald Brill
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlHiddenInputTest extends WebDriverTestCase {
+public class ClickableElement2Test extends WebDriverTestCase {
 
     /**
-     * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
-        final String htmlContent
+    @Alerts("1")
+    public void clickOnFocus() throws Exception {
+        final String html
             = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'>\n"
-            + "    <input type='hidden' name='foo' id='foo' value='bla'>\n"
-            + "</form></body></html>";
+            + "<form>\n"
+            + "    <input type='button' id='textfield1' onfocus='alert(1)'>\n"
+            + "</form>\n"
+            + "</body></html>";
 
-        final WebDriver driver = loadPage2(htmlContent);
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("textfield1")).click();
 
-        final WebElement input = driver.findElement(By.id("foo"));
-        assertEquals("", input.getText());
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
-
 }

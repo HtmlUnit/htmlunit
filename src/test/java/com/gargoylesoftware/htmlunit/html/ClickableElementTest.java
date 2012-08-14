@@ -19,15 +19,13 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for various clickable elements.
@@ -39,7 +37,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class ClickableElementTest extends WebDriverTestCase {
+public class ClickableElementTest extends WebTestCase {
 
     /**
      * Full page driver for onClick tests.
@@ -1008,22 +1006,4 @@ public class ClickableElementTest extends WebDriverTestCase {
         assertEquals("click-dblclick-", textArea.getText());
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    public void clickOnFocus() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form>\n"
-            + "    <input type='button' id='textfield1' onfocus='alert(1)'>\n"
-            + "</form>\n"
-            + "</body></html>";
-
-        final WebDriver driver = loadPage2(html);
-        driver.findElement(By.id("textfield1")).click();
-
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
-    }
 }
