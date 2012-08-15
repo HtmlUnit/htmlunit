@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -827,4 +829,42 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Firefox should not run scripts with "event" and "for" attributes.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "onload for window,onclick for div1,", DEFAULT = "onload for window,")
+    public void scriptEventFor() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function log(text) {\n"
+            + "      var textarea = document.getElementById('myTextarea');\n"
+            + "      textarea.value += text + ',';\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body>\n"
+            + "  <textarea id='myTextarea' cols='80' rows='10'></textarea>\n"
+            + "  <script event='onload' for='window'>\n"
+            + "    log('onload for window')\n"
+            + "  </script>\n"
+            + "  <div id='div1'>the div 1</div>\n"
+            + "  <div id='div2'>the div 2</div>\n"
+            + "  <script event='onclick' for='div1'>\n"
+            + "    log('onclick for div1')\n"
+            + "  </script>\n"
+            + "  <script event='onclick' for='document.all.div2'>\n"
+            + "    log('onclick for div2')\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        webDriver.findElement(By.id("div1")).click();
+        webDriver.findElement(By.id("div2")).click();
+        assertEquals(getExpectedAlerts()[0], webDriver.findElement(By.id("myTextarea")).getAttribute("value"));
+    }
+
 }

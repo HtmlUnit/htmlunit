@@ -37,7 +37,7 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class BinaryPageTest extends WebServerTestCase {
 
-    private PrimitiveWebServer simpleWebServer_;
+    private PrimitiveWebServer primitiveWebServer_;
 
     /**
      * @throws Exception if the test fails
@@ -132,8 +132,8 @@ public class BinaryPageTest extends WebServerTestCase {
             + "Z\r\n"
             + "0\r\n\r\n";
 
-        simpleWebServer_ = new PrimitiveWebServer(PORT, response.getBytes());
-        simpleWebServer_.start();
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, response.getBytes());
+        primitiveWebServer_.start();
         final WebClient client = getWebClient();
 
         final TextPage page = client.getPage("http://localhost:" + PORT + "/chunked");
@@ -145,8 +145,8 @@ public class BinaryPageTest extends WebServerTestCase {
      */
     @After
     public void stopServer() throws Exception {
-        if (simpleWebServer_ != null) {
-            simpleWebServer_.stop();
+        if (primitiveWebServer_ != null) {
+            primitiveWebServer_.stop();
         }
     }
 }

@@ -2155,4 +2155,26 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "<SPAN onclick=\"var f = &quot;hello&quot; + 'world'\">test span</SPAN>",
+            DEFAULT = "<span onclick=\"var f = &quot;hello&quot; + 'world'\">test span</span>")
+    public void innerHTMLwithQuotes() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.getElementById('foo').innerHTML);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='foo'><span onclick=\"var f = &quot;hello&quot; + 'world'\">test span</span></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

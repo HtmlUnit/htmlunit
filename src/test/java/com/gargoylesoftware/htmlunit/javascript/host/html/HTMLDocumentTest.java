@@ -1419,4 +1419,31 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "true", "[object]", "true" },
+            DEFAULT = { "true", "undefined", "false" })
+    public void document_xxx_formAccess() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.foo == document.forms.foo);\n"
+            + "      alert(document.blah);\n"
+            + "      alert(document.blah == document.forms.foo)\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='foo'>the div 1</div>\n"
+            + "  <form name='foo' id='blah'>\n"
+            + "    <input name='foo'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

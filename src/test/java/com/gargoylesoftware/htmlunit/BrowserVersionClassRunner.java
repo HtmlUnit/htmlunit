@@ -287,7 +287,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 protected Object runReflectiveCall() throws Throwable {
                     return testCase;
                 }
-            }.run();
+            } .run();
         }
         catch (final Throwable e) {
             return new Fail(e);
