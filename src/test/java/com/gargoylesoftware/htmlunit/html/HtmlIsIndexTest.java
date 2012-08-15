@@ -24,7 +24,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -69,26 +68,5 @@ public class HtmlIsIndexTest extends SimpleWebTestCase {
         assertEquals("url", getDefaultUrl(), secondPage.getWebResponse().getWebRequest().getUrl());
         assertSame("method", HttpMethod.POST, webConnection.getLastMethod());
         Assert.assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = "[object HTMLIsIndexElement]", IE = "[object]")
-    public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form id='form1' method='post'>\n"
-            + "<isindex id='myId' prompt='enterSomeText'></isindex>\n"
-            + "</form></body></html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlIsIndex.class.isInstance(page.getHtmlElementById("myId")));
     }
 }

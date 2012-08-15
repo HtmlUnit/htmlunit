@@ -16,10 +16,12 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlCanvas}.
@@ -28,7 +30,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlCanvasTest extends SimpleWebTestCase {
+public class HtmlCanvasTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -46,12 +48,15 @@ public class HtmlCanvasTest extends SimpleWebTestCase {
             + "  <canvas id='myId'/>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        if (getBrowserVersion().isFirefox()) {
-            assertTrue(HtmlCanvas.class.isInstance(page.getHtmlElementById("myId")));
-        }
-        else {
-            assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            if (getBrowserVersion().isFirefox()) {
+                assertTrue(HtmlCanvas.class.isInstance(page.getHtmlElementById("myId")));
+            }
+            else {
+                assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
+            }
         }
     }
 }

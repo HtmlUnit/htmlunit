@@ -20,41 +20,43 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
- * Tests for {@link HtmlMenu}.
+ * Tests for {@link HtmlApplet}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlMenuTest extends WebDriverTestCase {
+public class HtmlApplet2Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLMenuElement]", IE = "[object]")
+    @Alerts(FF = { "[object HTMLAppletElement]", "[object HTMLAppletElement]" },
+            IE = { "[object]", "[object]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"
+            + "    alert(document.applets[0]);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <menu id='myId'>\n"
-            + "    <li>First Item</li>\n"
-            + "    <li>Secong Item</li>\n"
-            + "  </menu>\n"
+            + "  <applet id='myId'></applet>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertTrue(HtmlMenu.class.isInstance(page.getHtmlElementById("myId")));
+            assertTrue(HtmlApplet.class.isInstance(page.getHtmlElementById("myId")));
         }
     }
+
 }

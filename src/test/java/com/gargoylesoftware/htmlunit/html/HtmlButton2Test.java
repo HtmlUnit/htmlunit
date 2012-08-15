@@ -24,19 +24,23 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link HtmlMenu}.
+ * Tests for {@link HtmlButton}.
  *
  * @version $Revision$
+ * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author David K. Taylor
+ * @author Brad Clarke
+ * @author Marc Guillemot
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlMenuTest extends WebDriverTestCase {
+public class HtmlButton2Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLMenuElement]", IE = "[object]")
+    @Alerts(FF = "[object HTMLButtonElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -45,16 +49,13 @@ public class HtmlMenuTest extends WebDriverTestCase {
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <menu id='myId'>\n"
-            + "    <li>First Item</li>\n"
-            + "    <li>Secong Item</li>\n"
-            + "  </menu>\n"
+            + "<button id='myId'/>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertTrue(HtmlMenu.class.isInstance(page.getHtmlElementById("myId")));
+            assertTrue(HtmlButton.class.isInstance(page.getHtmlElementById("myId")));
         }
     }
 }

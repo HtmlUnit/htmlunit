@@ -773,6 +773,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Returns the HtmlElement of the specified WebElement.
      * @param webElement the webElement
      * @return the HtmlElement
+     * @see #getWebWindowOf(HtmlUnitDriver)
      */
     protected HtmlElement toHtmlElement(final WebElement webElement) {
         try {
@@ -826,6 +827,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param driver the driver
      * @return the current web window
      * @throws Exception if an error occurs
+     * @see #toHtmlElement(WebElement)
      */
     protected WebWindow getWebWindowOf(final HtmlUnitDriver driver) throws Exception {
         final Field field = HtmlUnitDriver.class.getDeclaredField("currentWindow");

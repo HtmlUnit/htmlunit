@@ -16,12 +16,14 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlBody}.
@@ -30,7 +32,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlBodyTest extends SimpleWebTestCase {
+public class HtmlBodyTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -48,7 +50,10 @@ public class HtmlBodyTest extends SimpleWebTestCase {
             + "</head><body onload='test()' id='myId'>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlBody.class.isInstance(page.getHtmlElementById("myId")));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertTrue(HtmlBody.class.isInstance(page.getHtmlElementById("myId")));
+        }
     }
 }

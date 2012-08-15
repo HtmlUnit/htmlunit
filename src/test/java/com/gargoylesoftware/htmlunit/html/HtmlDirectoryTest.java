@@ -16,10 +16,12 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlDirectory}.
@@ -28,7 +30,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlDirectoryTest extends SimpleWebTestCase {
+public class HtmlDirectoryTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -49,7 +51,10 @@ public class HtmlDirectoryTest extends SimpleWebTestCase {
             + "  </dir>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlDirectory.class.isInstance(page.getHtmlElementById("myId")));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertTrue(HtmlDirectory.class.isInstance(page.getHtmlElementById("myId")));
+        }
     }
 }

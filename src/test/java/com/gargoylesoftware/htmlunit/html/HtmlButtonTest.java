@@ -26,10 +26,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -248,25 +247,4 @@ public class HtmlButtonTest extends SimpleWebTestCase {
         assertEquals(expectedSecondPageTitle, page2.getTitleText());
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<button id='myId'/>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"[object HTMLButtonElement]"};
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3_6, html, collectedAlerts);
-        assertTrue(HtmlButton.class.isInstance(page.getHtmlElementById("myId")));
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
 }

@@ -21,7 +21,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
@@ -80,25 +79,5 @@ public class HtmlLabelTest extends SimpleWebTestCase {
         assertTrue(checkBox == label.getReferencedElement());
         final HtmlLabel label2 = page.getHtmlElementById("testLabel2");
         assertNull(label2.getReferencedElement());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "[object HTMLLabelElement]", IE = "[object]")
-    public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<label id='myId'>Item</label>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlLabel.class.isInstance(page.getHtmlElementById("myId")));
     }
 }

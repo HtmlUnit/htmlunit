@@ -16,10 +16,12 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlBreak}.
@@ -28,7 +30,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlBreakTest extends SimpleWebTestCase {
+public class HtmlBreakTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -46,8 +48,11 @@ public class HtmlBreakTest extends SimpleWebTestCase {
             + "  <br id='myId'>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlBreak.class.isInstance(page.getHtmlElementById("myId")));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertTrue(HtmlBreak.class.isInstance(page.getHtmlElementById("myId")));
+        }
     }
 
     /**
@@ -60,7 +65,10 @@ public class HtmlBreakTest extends SimpleWebTestCase {
             + "Hello<br/>world\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(html);
-        assertEquals("Hello" + LINE_SEPARATOR + "world", page.getBody().asText());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals("Hello" + LINE_SEPARATOR + "world", page.getBody().asText());
+        }
     }
 }
