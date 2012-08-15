@@ -22,6 +22,8 @@ import java.util.Locale;
 
 import junit.framework.Assert;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -42,6 +44,24 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class JavascriptErrorListenerTest extends WebServerTestCase {
+    private static final Locale locale = Locale.getDefault();
+
+    /**
+     * Sets the locale to US to allow tests to express expectations concerning error messages.
+     */
+    @BeforeClass
+    public static void setupLocale() {
+        // Set the default locale to US because Rhino messages are localized
+        Locale.setDefault(Locale.US);
+    }
+
+    /**
+     * Restore the locale to the original value.
+     */
+    @AfterClass
+    public static void restoreLocale() {
+        Locale.setDefault(locale);
+    }
 
     /**
      * Test for running without a JavaScript error listener.
@@ -201,32 +221,23 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         // test timeout error
         webClient.setJavaScriptTimeout(100);
 
-        final Locale locale = Locale.getDefault();
-        // Set the default locale to US because Rhino messages are localized
-        Locale.setDefault(Locale.US);
+        content = "<html><head><title>Throw JavaScript Timeout Error</title>"
+            + "<script>while(1) {}</script></head>"
+            + "<body></body></html>";
+        webConnection.setResponse(URL_FIRST, content);
+        webClient.setWebConnection(webConnection);
+        webClient.getPage(URL_FIRST);
 
-        try {
-            content = "<html><head><title>Throw JavaScript Timeout Error</title>"
-                + "<script>while(1) {}</script></head>"
-                + "<body></body></html>";
-            webConnection.setResponse(URL_FIRST, content);
-            webClient.setWebConnection(webConnection);
-            webClient.getPage(URL_FIRST);
-
-            assertEquals("com.gargoylesoftware.htmlunit.ScriptException: "
-                    + "ReferenceError: \"unknown\" is not defined. "
-                    + "(script in http://localhost:" + PORT + "/ from (1, 58) to (1, 81)#1)",
-                    scriptExceptions.toString());
-            assertEquals("http://localhost:" + PORT + "/second/, "
-                    + "com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException: "
-                    + "500 BOOM for http://localhost:" + PORT + "/second/", loadScriptErrors.toString());
-            assertEquals("unknown://nowhere, java.net.MalformedURLException: unknown protocol: unknown",
-                    malformedScriptURLErrors.toString());
-            assertEquals("Timeout allowed: 100", timeoutErrors.toString());
-        }
-        finally {
-            Locale.setDefault(locale);
-        }
+        assertEquals("com.gargoylesoftware.htmlunit.ScriptException: "
+                + "ReferenceError: \"unknown\" is not defined. "
+                + "(script in http://localhost:" + PORT + "/ from (1, 58) to (1, 81)#1)",
+                scriptExceptions.toString());
+        assertEquals("http://localhost:" + PORT + "/second/, "
+                + "com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException: "
+                + "500 BOOM for http://localhost:" + PORT + "/second/", loadScriptErrors.toString());
+        assertEquals("unknown://nowhere, java.net.MalformedURLException: unknown protocol: unknown",
+                malformedScriptURLErrors.toString());
+        assertEquals("Timeout allowed: 100", timeoutErrors.toString());
     }
 
 }
