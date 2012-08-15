@@ -61,7 +61,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("joe", "jetty");
 
         try {
-            loadPage("Hi There", URL_FIRST);
+            loadPage("Hi There");
             Assert.fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
@@ -81,7 +81,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "secret");
 
         try {
-            loadPage("Hi There", URL_FIRST);
+            loadPage("Hi There");
             Assert.fail("Should not be authorized");
         }
         catch (final FailingHttpStatusCodeException e) {
@@ -105,7 +105,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
         try {
             ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
 
-            loadPage("Hi There", URL_FIRST);
+            loadPage("Hi There");
             int unauthorizedCount = 0;
             for (final String message : appender.getMessages()) {
                 if (message.contains("HTTP/1.1 401")) {
@@ -427,7 +427,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
         getMockWebConnection().setDefaultResponse("Hello World");
-        loadPageWithAlertsWait(html, URL_FIRST, 100);
+        loadPageWithAlerts(html, URL_FIRST, 100);
     }
 
     /**
@@ -453,7 +453,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
         getMockWebConnection().setDefaultResponse("Hello World");
-        loadPageWithAlertsWait(html, URL_FIRST, 100);
+        loadPageWithAlerts(html, URL_FIRST, 100);
     }
 
     /**
@@ -479,6 +479,6 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
         getMockWebConnection().setDefaultResponse("Hello World");
-        loadPageWithAlertsWait(html, URL_FIRST, 100);
+        loadPageWithAlerts(html, URL_FIRST, 100);
     }
 }

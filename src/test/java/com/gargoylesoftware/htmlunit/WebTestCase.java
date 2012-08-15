@@ -37,7 +37,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Common superclass for HtmlUnit tests.
+ * A simple WebTestCase which doesn't require server to run, and doens't use WebDriver.
+ *
+ * It depends on {@link MockWebConnection} to simulate sending requests to the server.
+ *
+ * <b>Note that {@link WebDriverTestCase} should be used unless HtmlUnit-specific feature
+ * is needed and Selenium does not support it.</b>
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

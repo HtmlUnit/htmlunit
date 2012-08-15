@@ -40,7 +40,10 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Base class for cases that need real web server.
+ * A WebTestCase which starts a local server, and doens't use WebDriver.
+ *
+ * <b>Note that {@link WebDriverTestCase} should be used unless HtmlUnit-specific feature
+ * is needed and Selenium does not support it.</b>
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -189,11 +192,7 @@ public abstract class WebServerTestCase extends AbstractWebTestCase {
      */
     protected final HtmlPage loadPageWithAlerts(final String html, final URL url)
         throws Exception {
-        expandExpectedAlertsVariables(URL_FIRST);
-
-        final HtmlPage page = loadPage(html, url);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(page));
-        return page;
+        return loadPageWithAlerts(html, url, 0);
     }
 
     /**
@@ -204,7 +203,7 @@ public abstract class WebServerTestCase extends AbstractWebTestCase {
      * @return the page
      * @throws Exception if something goes wrong
      */
-    protected final HtmlPage loadPageWithAlertsWait(final String html, final URL url, final int maxWaitTime)
+    protected final HtmlPage loadPageWithAlerts(final String html, final URL url, final int maxWaitTime)
         throws Exception {
         expandExpectedAlertsVariables(URL_FIRST);
 
@@ -220,6 +219,16 @@ public abstract class WebServerTestCase extends AbstractWebTestCase {
 
         assertEquals(expectedAlerts, getCollectedAlerts(page));
         return page;
+    }
+
+    /**
+     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * @param html the HTML to use
+     * @return the page
+     * @throws Exception if something goes wrong
+     */
+    protected final HtmlPage loadPage(final String html) throws Exception {
+        return loadPage(html, getDefaultUrl());
     }
 
     /**
@@ -242,7 +251,7 @@ public abstract class WebServerTestCase extends AbstractWebTestCase {
      * @return the page
      * @throws Exception if something goes wrong
      */
-    protected final HtmlPage loadPage(final String html, final URL url,
+    private HtmlPage loadPage(final String html, final URL url,
             final String contentType, final String charset) throws Exception {
         final MockWebConnection mockWebConnection = getMockWebConnection();
         mockWebConnection.setResponse(url, html, contentType, charset);
