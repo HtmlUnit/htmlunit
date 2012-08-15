@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -398,21 +397,10 @@ public class CookieManagerTest extends WebDriverTestCase {
         assertEquals("first=1; second=2", lastHeaders.get("Cookie"));
 
         if (driver instanceof HtmlUnitDriver) {
-            final CookieManager mgr = getWebClient((HtmlUnitDriver) driver).getCookieManager();
+            final CookieManager mgr = getWebClientOfWebDriver().getCookieManager();
             assertEquals(2, mgr.getCookies().size());
             assertTrue(mgr.getCookie("first").isHttpOnly());
             assertFalse(mgr.getCookie("second").isHttpOnly());
-        }
-    }
-
-    private WebClient getWebClient(final HtmlUnitDriver driver) {
-        try {
-            final Field field = HtmlUnitDriver.class.getDeclaredField("webClient");
-            field.setAccessible(true);
-            return (WebClient) field.get(driver);
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
         }
     }
 }

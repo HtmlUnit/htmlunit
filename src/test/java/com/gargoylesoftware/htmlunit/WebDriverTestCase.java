@@ -94,6 +94,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *   WebDriver downloads</a></li>
  * </ul>
  * </p>
+ * <p>For IE, please download <a href="http://code.google.com/p/selenium/downloads/list">IEDriverServer.exe</a>
+ * and add it to the path.</p>
  *
  * @version $Revision$
  * @author Marc Guillemot
@@ -814,6 +816,20 @@ public abstract class WebDriverTestCase extends WebTestCase {
             // in the remaining window, load a blank page
             driver.get("about:blank");
         }
+    }
+
+    /**
+     * Returns the underlying WebClient, if we are currently running {@link HtmlUnitDriver}.
+     *
+     * <b>Your test shouldn't depend primarily on WebClient</b>
+     *
+     * @return the webClient
+     */
+    protected WebClient getWebClientOfWebDriver() {
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            return webClient_;
+        }
+        return null;
     }
 }
 

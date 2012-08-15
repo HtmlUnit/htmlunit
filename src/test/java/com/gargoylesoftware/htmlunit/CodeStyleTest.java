@@ -117,7 +117,6 @@ public class CodeStyleTest {
                 singleAlert(lines, relativePath);
                 staticLoggers(lines, relativePath);
                 loggingEnabled(lines, relativePath);
-                //webDriverWebClient(lines, relativePath);
                 browserVersion_isIE(lines, relativePath);
                 versionBeforeAuthor(lines, relativePath);
             }
