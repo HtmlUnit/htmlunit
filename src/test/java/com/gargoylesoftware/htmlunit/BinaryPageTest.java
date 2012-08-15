@@ -37,7 +37,7 @@ import org.junit.runner.RunWith;
 @RunWith(BrowserRunner.class)
 public class BinaryPageTest extends WebServerTestCase {
 
-    private SimpleWebServer simpleWebServer_;
+    private PrimitiveWebServer simpleWebServer_;
 
     /**
      * @throws Exception if the test fails
@@ -132,7 +132,7 @@ public class BinaryPageTest extends WebServerTestCase {
             + "Z\r\n"
             + "0\r\n\r\n";
 
-        simpleWebServer_ = new SimpleWebServer(PORT, response.getBytes());
+        simpleWebServer_ = new PrimitiveWebServer(PORT, response.getBytes());
         simpleWebServer_.start();
         final WebClient client = getWebClient();
 

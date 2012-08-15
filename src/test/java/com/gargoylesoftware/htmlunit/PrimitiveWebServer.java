@@ -29,7 +29,7 @@ import java.net.SocketException;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class SimpleWebServer extends SimpleWebTestCase {
+public class PrimitiveWebServer {
 
     private final int port_;
     private final byte[] defaultResponse_;
@@ -40,7 +40,7 @@ public class SimpleWebServer extends SimpleWebTestCase {
      * @param port the port
      * @param defaultResponse the default response, must contain all bytes (to start with "HTTP/1.1 200 OK")
      */
-    public SimpleWebServer(final int port, final byte[] defaultResponse) {
+    public PrimitiveWebServer(final int port, final byte[] defaultResponse) {
         port_ = port;
         defaultResponse_ = defaultResponse;
     }

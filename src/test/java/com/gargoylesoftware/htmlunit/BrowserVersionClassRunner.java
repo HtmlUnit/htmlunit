@@ -103,7 +103,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     @Override
     protected Object createTest() throws Exception {
         final Object test = super.createTest();
-        assertTrue("Test class must inherit AbstractWebTestCase", test instanceof WebTestCase);
+        assertTrue("Test class must inherit WebTestCase", test instanceof WebTestCase);
         final WebTestCase object = (WebTestCase) test;
         object.setBrowserVersion(browserVersion_);
         if (test instanceof WebDriverTestCase) {
@@ -287,7 +287,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 protected Object runReflectiveCall() throws Throwable {
                     return testCase;
                 }
-            } .run();
+            }.run();
         }
         catch (final Throwable e) {
             return new Fail(e);
