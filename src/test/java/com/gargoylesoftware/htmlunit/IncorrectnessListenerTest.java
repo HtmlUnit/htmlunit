@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public final class IncorrectnessListenerTest extends WebTestCase {
+public final class IncorrectnessListenerTest extends SimpleWebTestCase {
     /**
      * @throws Exception if the test fails
      */

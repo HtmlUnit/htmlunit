@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HtmlLabel}.
@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlLabelTest extends WebTestCase {
+public class HtmlLabelTest extends SimpleWebTestCase {
 
     /**
      * Verifies that a checkbox is toggled when the related label is clicked.

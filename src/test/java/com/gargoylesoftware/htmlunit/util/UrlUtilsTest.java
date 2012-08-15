@@ -18,7 +18,7 @@ import java.net.URL;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link UrlUtils}.
@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Sudhan Moghe
  * @author Ahmed Ashour
  */
-public class UrlUtilsTest extends WebTestCase {
+public class UrlUtilsTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

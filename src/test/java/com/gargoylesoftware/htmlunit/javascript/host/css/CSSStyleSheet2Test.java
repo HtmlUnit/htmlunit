@@ -24,7 +24,7 @@ import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class CSSStyleSheet2Test extends WebTestCase {
+public class CSSStyleSheet2Test extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

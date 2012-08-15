@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for compatibility with <a href="http://www.curvycorners.net">curvyCorners</a>.
@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Gareth Davis
  */
 @RunWith(BrowserRunner.class)
-public class CurvyCornersTest extends WebTestCase {
+public class CurvyCornersTest extends SimpleWebTestCase {
 
     private static final String BASE_FILE_PATH = "libraries/curvyCorners/1.2.9-beta/";
 

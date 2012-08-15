@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlScriptTest extends WebTestCase {
+public class HtmlScriptTest extends SimpleWebTestCase {
 
     /**
      * Verifies that a failing HTTP status code for a JavaScript file request (like a 404 response)

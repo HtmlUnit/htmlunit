@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class WebClientWaitForBackgroundJobsTest extends WebTestCase {
+public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
     private static String XHRInstantiation_ = "(window.XMLHttpRequest ? "
         + "new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'))";
 

@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class MockWebConnectionTest extends WebTestCase {
+public class MockWebConnectionTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if an error occurs

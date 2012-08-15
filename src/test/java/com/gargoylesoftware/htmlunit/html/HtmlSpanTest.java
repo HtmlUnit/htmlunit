@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HtmlSpan}.
@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
-public class HtmlSpanTest extends WebTestCase {
+public class HtmlSpanTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

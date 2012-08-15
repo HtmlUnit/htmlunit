@@ -37,7 +37,7 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends WebTestCase {
+public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends SimpleWebTestCase {
 
     private LocalTestServerWithClientCerts localServer_;
 

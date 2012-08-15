@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link XHtmlPage}.
@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class XHtmlPageTest extends WebTestCase {
+public class XHtmlPageTest extends SimpleWebTestCase {
 
     /**
      * Regression test for bug 2515873. Originally located in {@link com.gargoylesoftware.htmlunit.xml.XmlPageTest}.

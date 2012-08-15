@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HtmlPasswordInput}.
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlPasswordInput2Test extends WebTestCase {
+public class HtmlPasswordInput2Test extends SimpleWebTestCase {
 
     /**
      * How could this test be migrated to WebDriver? How to select the field's content?

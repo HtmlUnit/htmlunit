@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HTMLIFrameElementTest extends WebTestCase {
+public class HTMLIFrameElementTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

@@ -48,7 +48,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Sudhan Moghe
  */
 @RunWith(Parameterized.class)
-public class PropertiesTest extends WebTestCase {
+public class PropertiesTest extends SimpleWebTestCase {
 
     private static final Log LOG = LogFactory.getLog(PropertiesTest.class);
 

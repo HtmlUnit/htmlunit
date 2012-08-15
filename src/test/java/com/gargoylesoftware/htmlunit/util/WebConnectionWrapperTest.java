@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link WebConnectionWrapper}.
@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class WebConnectionWrapperTest extends WebTestCase {
+public class WebConnectionWrapperTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

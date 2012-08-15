@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Unit tests for {@link HTMLTitleElement}.
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
-public class HTMLTitleElementTest extends WebTestCase {
+public class HTMLTitleElementTest extends SimpleWebTestCase {
     /**
      * @throws Exception if the test fails
      */

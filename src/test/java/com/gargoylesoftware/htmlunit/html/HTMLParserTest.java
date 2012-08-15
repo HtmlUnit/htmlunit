@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Test class for {@link HTMLParser}.
@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
-public class HTMLParserTest extends WebTestCase {
+public class HTMLParserTest extends SimpleWebTestCase {
 
     /**
      * Tests the new HTMLParser on a simple HTML string.

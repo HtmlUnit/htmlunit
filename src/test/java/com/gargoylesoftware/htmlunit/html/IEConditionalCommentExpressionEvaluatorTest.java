@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link IEConditionalCommentExpressionEvaluator}.
@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class IEConditionalCommentExpressionEvaluatorTest extends WebTestCase {
+public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCase {
 
     /**
      * Test for expression [if IE].

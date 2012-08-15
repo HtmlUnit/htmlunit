@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HtmlTextArea}.
@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Amit Khanna
  */
 @RunWith(BrowserRunner.class)
-public class HtmlTextAreaTest extends WebTestCase {
+public class HtmlTextAreaTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

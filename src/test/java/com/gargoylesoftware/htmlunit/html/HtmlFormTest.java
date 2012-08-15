@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlFormTest extends WebTestCase {
+public class HtmlFormTest extends SimpleWebTestCase {
 
     /**
      * Tests the good case for setCheckedRatdioButton().

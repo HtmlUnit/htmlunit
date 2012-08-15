@@ -22,7 +22,7 @@ import org.w3c.css.sac.CSSException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class CSSSelectorTest extends WebTestCase {
+public class CSSSelectorTest extends SimpleWebTestCase {
 
     /**
      * Test for bug 3300434: CSS3 selector is not yet supported.

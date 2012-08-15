@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HtmlTable}.
@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlTableTest extends WebTestCase {
+public class HtmlTableTest extends SimpleWebTestCase {
 
     /**
      * Tests getTableCell(int,int).

@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HTMLParagraphElement}.
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class HTMLParagraphElementTest extends WebTestCase {
+public class HTMLParagraphElementTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if an error occurs

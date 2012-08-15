@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class Selection2Test extends WebTestCase {
+public class Selection2Test extends SimpleWebTestCase {
 
     /**
      * @throws Exception if an error occurs

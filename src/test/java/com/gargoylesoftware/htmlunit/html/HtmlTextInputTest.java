@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HtmlTextInput}.
@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
-public class HtmlTextInputTest extends WebTestCase {
+public class HtmlTextInputTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

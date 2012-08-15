@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class CookieManager2Test extends WebTestCase {
+public class CookieManager2Test extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class BrowserVersionFeaturesTest extends WebTestCase {
+public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
 
     /**
      * Test of alphabetical order.

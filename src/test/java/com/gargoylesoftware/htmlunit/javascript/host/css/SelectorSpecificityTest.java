@@ -23,7 +23,7 @@ import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.Selector;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class SelectorSpecificityTest extends WebTestCase {
+public class SelectorSpecificityTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

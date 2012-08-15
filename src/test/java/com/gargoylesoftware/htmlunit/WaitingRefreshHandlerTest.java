@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Brad Clarke
  */
 @RunWith(BrowserRunner.class)
-public final class WaitingRefreshHandlerTest extends WebTestCase {
+public final class WaitingRefreshHandlerTest extends SimpleWebTestCase {
 
     /**
      * Trying to cause an interrupt on a JavaScript thread due to meta redirect navigation.

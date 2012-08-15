@@ -23,7 +23,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Unit tests for {@link MimeType}.
@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class MimeTypeTest extends WebTestCase {
+public class MimeTypeTest extends SimpleWebTestCase {
 
     /**
      * Tests default configuration of Flash plugin for Firefox.

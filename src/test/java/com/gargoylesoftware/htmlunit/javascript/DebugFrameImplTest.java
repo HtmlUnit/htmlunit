@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link DebugFrameImpl}.
@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class DebugFrameImplTest extends WebTestCase {
+public class DebugFrameImplTest extends SimpleWebTestCase {
 
     private final Logger loggerDebugFrameImpl_ = Logger.getLogger(DebugFrameImpl.class);
 

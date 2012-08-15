@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link DomComment}.
@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Philip Graf
  */
 @RunWith(BrowserRunner.class)
-public class DomCommentTest extends WebTestCase {
+public class DomCommentTest extends SimpleWebTestCase {
 
     /**
      * Test the comment not visible when viewed by user.

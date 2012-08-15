@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class DefaultCredentialsProviderTest extends WebTestCase {
+public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if an error occurs

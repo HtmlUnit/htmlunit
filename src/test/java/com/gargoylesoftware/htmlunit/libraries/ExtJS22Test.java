@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class ExtJS22Test extends WebTestCase {
+public class ExtJS22Test extends SimpleWebTestCase {
 
     private WebClient webClient_;
 

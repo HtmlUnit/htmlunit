@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HtmlSelect}.
@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlSelectTest extends WebTestCase {
+public class HtmlSelectTest extends SimpleWebTestCase {
     /** JUnit rule must be public fields :-(. */
     @Rule
     public TemporaryFolder tmpFolderProvider_ = new TemporaryFolder();

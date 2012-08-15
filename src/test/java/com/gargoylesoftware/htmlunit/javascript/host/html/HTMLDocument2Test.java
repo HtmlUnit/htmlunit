@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.util.Cookie;
@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HTMLDocument2Test extends WebTestCase {
+public class HTMLDocument2Test extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

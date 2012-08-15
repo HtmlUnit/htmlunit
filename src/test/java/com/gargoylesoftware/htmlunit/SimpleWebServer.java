@@ -29,7 +29,7 @@ import java.net.SocketException;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class SimpleWebServer extends WebTestCase {
+public class SimpleWebServer extends SimpleWebTestCase {
 
     private final int port_;
     private final byte[] defaultResponse_;

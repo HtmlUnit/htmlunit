@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HTMLImageElement}.
@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HTMLImageElement2Test extends WebTestCase {
+public class HTMLImageElement2Test extends SimpleWebTestCase {
 
     /**
      * Verifies that if an image has an <tt>onload</tt> attribute, it gets downloaded

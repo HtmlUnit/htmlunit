@@ -19,7 +19,7 @@ import static org.junit.Assert.fail;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link JavaScriptConfiguration}.
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class ClassConfigurationTest extends WebTestCase {
+public class ClassConfigurationTest extends SimpleWebTestCase {
 
     /**
      * Constructor.

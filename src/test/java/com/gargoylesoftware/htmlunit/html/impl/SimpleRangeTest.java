@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class SimpleRangeTest extends WebTestCase {
+public class SimpleRangeTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if test fails

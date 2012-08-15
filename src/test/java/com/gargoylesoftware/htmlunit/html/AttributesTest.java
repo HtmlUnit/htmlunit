@@ -24,7 +24,7 @@ import junit.framework.TestSuite;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * <p>Tests for all the generated attribute accessors. This test case will
@@ -67,7 +67,7 @@ public class AttributesTest extends TestCase {
         final MockWebConnection connection = new MockWebConnection();
         connection.setDefaultResponse("<html><head><title>foo</title></head><body></body></html>");
         webClient.setWebConnection(connection);
-        final HtmlPage page = webClient.getPage(WebTestCase.URL_FIRST);
+        final HtmlPage page = webClient.getPage(SimpleWebTestCase.URL_FIRST);
 
         final TestSuite suite = new TestSuite();
         final String[] classesToTest = {

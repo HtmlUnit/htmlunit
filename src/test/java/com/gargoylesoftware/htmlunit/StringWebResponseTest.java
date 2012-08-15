@@ -22,7 +22,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class StringWebResponseTest extends WebTestCase {
+public class StringWebResponseTest extends SimpleWebTestCase {
 
     /**
      * Regression test for bug 2998004.

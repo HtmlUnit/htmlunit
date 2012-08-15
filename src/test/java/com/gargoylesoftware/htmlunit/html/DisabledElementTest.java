@@ -26,7 +26,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests the <code>isDisabled()</code> method on all of the elements that must implement the <code>disabled</code>
@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(Parameterized.class)
-public class DisabledElementTest extends WebTestCase {
+public class DisabledElementTest extends SimpleWebTestCase {
 
     /**
      * Tests data.

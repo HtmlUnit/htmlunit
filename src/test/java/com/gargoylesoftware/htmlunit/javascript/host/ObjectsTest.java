@@ -32,7 +32,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 /**
@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
  * @author Ronald Brill
  */
 @RunWith(Parameterized.class)
-public class ObjectsTest extends WebTestCase {
+public class ObjectsTest extends SimpleWebTestCase {
 
     private static List<String> IE6_;
     private static List<String> IE7_;

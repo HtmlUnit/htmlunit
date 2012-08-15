@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link DefaultElementFactory}.
@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @since 1.2
  */
 @RunWith(BrowserRunner.class)
-public class DefaultElementFactoryTest extends WebTestCase {
+public class DefaultElementFactoryTest extends SimpleWebTestCase {
     /**
      * Test that the attribute order is the same as the provided one.
      * @throws Exception if the test fails

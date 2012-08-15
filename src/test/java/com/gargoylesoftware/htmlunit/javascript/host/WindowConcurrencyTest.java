@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Brad Clarke
  * @author Daniel Gredler
  */
-public class WindowConcurrencyTest extends WebTestCase {
+public class WindowConcurrencyTest extends SimpleWebTestCase {
 
     private WebClient client_;
     private long startTime_;

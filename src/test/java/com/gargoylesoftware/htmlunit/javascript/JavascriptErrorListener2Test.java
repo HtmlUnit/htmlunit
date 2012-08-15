@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class JavascriptErrorListener2Test extends WebTestCase {
+public class JavascriptErrorListener2Test extends SimpleWebTestCase {
 
     /**
      * Test for running with a JavaScript error listener.

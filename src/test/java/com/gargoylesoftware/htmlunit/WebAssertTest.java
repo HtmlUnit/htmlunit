@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class WebAssertTest extends WebTestCase {
+public class WebAssertTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if an error occurs

@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HtmlOption}.
@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class HtmlOptionTest extends WebTestCase {
+public class HtmlOptionTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

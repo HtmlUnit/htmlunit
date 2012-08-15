@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
-public class DocumentTest extends WebTestCase {
+public class DocumentTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link DataUrlDecoder}.
@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class DataURLDecoderTest extends WebTestCase {
+public class DataURLDecoderTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

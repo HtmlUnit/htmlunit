@@ -38,7 +38,7 @@ public class WebRequestTest {
      */
     @Test
     public void headers() throws Exception {
-        final WebRequest request = new WebRequest(WebTestCase.getDefaultUrl());
+        final WebRequest request = new WebRequest(SimpleWebTestCase.getDefaultUrl());
         final int initialSize = request.getAdditionalHeaders().size();
         request.setAdditionalHeader("Accept", "nothing");
         assertEquals(initialSize, request.getAdditionalHeaders().size());

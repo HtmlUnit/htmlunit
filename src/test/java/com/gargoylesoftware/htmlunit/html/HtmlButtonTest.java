@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlButtonTest extends WebTestCase {
+public class HtmlButtonTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

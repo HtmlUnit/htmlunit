@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class TopLevelWindowTest extends WebTestCase {
+public class TopLevelWindowTest extends SimpleWebTestCase {
 
     /**
      * Tests closing the only open window.

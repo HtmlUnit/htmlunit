@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class WebClient2Test extends WebTestCase {
+public class WebClient2Test extends SimpleWebTestCase {
 
     /**
      * @throws Exception if an error occurs

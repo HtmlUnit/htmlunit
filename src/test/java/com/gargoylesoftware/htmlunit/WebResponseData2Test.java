@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class WebResponseData2Test extends WebTestCase {
+public class WebResponseData2Test extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

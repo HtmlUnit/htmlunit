@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class SvgSvgTest extends WebTestCase {
+public class SvgSvgTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

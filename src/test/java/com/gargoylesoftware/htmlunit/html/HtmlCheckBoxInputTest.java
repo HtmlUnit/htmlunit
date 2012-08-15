@@ -24,7 +24,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HtmlCheckBoxInput}.
@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlCheckBoxInputTest extends WebTestCase {
+public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
 
     /**
      * Verifies that a HtmlCheckBox is unchecked by default.

@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public final class ScriptExceptionTest extends WebTestCase {
+public final class ScriptExceptionTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

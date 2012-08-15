@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Unit tests for {@link HTMLObjectElement}.
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Daniel Gredler
  */
 @RunWith(BrowserRunner.class)
-public class HTMLObjectElementTest extends WebTestCase {
+public class HTMLObjectElementTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

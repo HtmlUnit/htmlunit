@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
  * @author Pieter Herroelen
  */
 @RunWith(BrowserRunner.class)
-public class UrlFetchWebConnection2Test extends WebTestCase {
+public class UrlFetchWebConnection2Test extends SimpleWebTestCase {
 
     /**
      * Test a HEAD request with additional headers.

@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public final class ImmediateRefreshHandlerTest extends WebTestCase {
+public final class ImmediateRefreshHandlerTest extends SimpleWebTestCase {
 
     /**
      * Regression test for bug 1211980: redirect on the same page after a post.

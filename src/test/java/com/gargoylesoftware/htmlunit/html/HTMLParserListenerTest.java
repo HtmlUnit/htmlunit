@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HTMLParserListenerTest extends WebTestCase {
+public class HTMLParserListenerTest extends SimpleWebTestCase {
     static class MessageInfo {
         private boolean error_; // versus warning
         private String message_;

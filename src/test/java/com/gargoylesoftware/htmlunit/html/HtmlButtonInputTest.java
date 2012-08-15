@@ -24,7 +24,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HtmlButtonInput}.
@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 @RunWith(BrowserRunner.class)
-public class HtmlButtonInputTest extends WebTestCase {
+public class HtmlButtonInputTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

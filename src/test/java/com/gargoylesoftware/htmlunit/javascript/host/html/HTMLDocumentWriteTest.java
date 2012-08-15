@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HTMLDocumentWriteTest extends WebTestCase {
+public class HTMLDocumentWriteTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

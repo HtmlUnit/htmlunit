@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link DebuggingWebConnection}.
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public class DebuggingWebConnectionTest extends WebTestCase {
+public class DebuggingWebConnectionTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
 @RunWith(BrowserRunner.class)
-public class AttributeCaseTest extends WebTestCase {
+public class AttributeCaseTest extends SimpleWebTestCase {
 
     private static final String ATTRIBUTE_NAME = "randomAttribute";
     private static final String ATTRIBUTE_VALUE = "someValue";

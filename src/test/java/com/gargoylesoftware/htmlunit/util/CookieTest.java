@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.util;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link Cookie}.
@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class CookieTest extends WebTestCase {
+public class CookieTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

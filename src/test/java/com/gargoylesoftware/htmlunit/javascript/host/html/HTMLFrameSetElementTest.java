@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Unit tests for {@link HTMLFrameSetElement}.
@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HTMLFrameSetElementTest extends WebTestCase {
+public class HTMLFrameSetElementTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if an error occurs

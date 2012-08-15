@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HttpWebConnectionInsecureSSLTest extends WebTestCase {
+public class HttpWebConnectionInsecureSSLTest extends SimpleWebTestCase {
 
     private InsecureHttpsServer localServer_;
 

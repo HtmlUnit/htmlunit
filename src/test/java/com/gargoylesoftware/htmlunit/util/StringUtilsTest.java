@@ -18,7 +18,7 @@ import java.awt.Color;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link StringUtils}.
@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ronald Brill
  */
-public class StringUtilsTest extends WebTestCase {
+public class StringUtilsTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

@@ -18,7 +18,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.util.MemoryLeakDetector;
 
 /**
@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.util.MemoryLeakDetector;
  * @version $Revision$
  * @author Daniel Gredler
  */
-public class MemoryLeakTest extends WebTestCase {
+public class MemoryLeakTest extends SimpleWebTestCase {
 
     /**
      * Empty test which keeps Maven/JUnit from complaining about a test class with no tests. This test

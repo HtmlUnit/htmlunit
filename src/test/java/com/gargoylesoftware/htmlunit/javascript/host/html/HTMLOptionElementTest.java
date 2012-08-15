@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 
@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HTMLOptionElementTest extends WebTestCase {
+public class HTMLOptionElementTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link HtmlRadioButtonInput}.
@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HtmlRadioButtonInputTest extends WebTestCase {
+public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
 
     /**
      * Verifies that a asText() returns "checked" or "unchecked" according to the state of the radio.

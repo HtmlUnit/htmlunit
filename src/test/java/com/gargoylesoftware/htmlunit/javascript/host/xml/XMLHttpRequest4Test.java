@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
-public class XMLHttpRequest4Test extends WebTestCase {
+public class XMLHttpRequest4Test extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

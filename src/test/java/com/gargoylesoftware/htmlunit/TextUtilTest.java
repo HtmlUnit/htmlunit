@@ -29,7 +29,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public final class TextUtilTest extends WebTestCase {
+public final class TextUtilTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

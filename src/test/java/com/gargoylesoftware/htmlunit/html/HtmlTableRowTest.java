@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HtmlTableRowTest extends WebTestCase {
+public class HtmlTableRowTest extends SimpleWebTestCase {
 
     private static final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<table id='table'><tr id='row'>\n"

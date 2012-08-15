@@ -21,7 +21,7 @@ import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Common functionalities for library tests.
@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public abstract class LibraryTestCase extends WebTestCase {
+public abstract class LibraryTestCase extends SimpleWebTestCase {
 
     /**
      * Loads an expectation file for the given test in the library folder.

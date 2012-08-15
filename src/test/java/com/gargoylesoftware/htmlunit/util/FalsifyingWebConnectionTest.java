@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link FalsifyingWebConnection}.
@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class FalsifyingWebConnectionTest extends WebTestCase {
+public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

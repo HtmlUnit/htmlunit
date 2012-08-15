@@ -84,7 +84,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
-public class WebClientTest extends WebTestCase {
+public class WebClientTest extends SimpleWebTestCase {
 
     /**
      * Tests if all JUnit 4 candidate test methods declare <tt>@Test</tt> annotation.

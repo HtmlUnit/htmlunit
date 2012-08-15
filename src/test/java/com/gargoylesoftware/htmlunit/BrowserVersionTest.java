@@ -22,7 +22,7 @@ import org.junit.Test;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class BrowserVersionTest extends WebTestCase {
+public class BrowserVersionTest extends SimpleWebTestCase {
 
     /**
      * Test of getBrowserVersionNumeric().

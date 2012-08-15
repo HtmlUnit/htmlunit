@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public final class NiceRefreshHandlerTest extends WebTestCase {
+public final class NiceRefreshHandlerTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

@@ -21,7 +21,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for the {@link ProxyAutoConfig}.
@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class ProxyAutoConfigTest extends WebTestCase {
+public class ProxyAutoConfigTest extends SimpleWebTestCase {
 
     /**
      * Test case.

@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for elements inside {@link HtmlNoScript}.
@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HtmlNoScript2Test extends WebTestCase {
+public class HtmlNoScript2Test extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

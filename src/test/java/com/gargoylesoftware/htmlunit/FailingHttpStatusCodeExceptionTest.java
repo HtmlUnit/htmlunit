@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public final class FailingHttpStatusCodeExceptionTest extends WebTestCase {
+public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

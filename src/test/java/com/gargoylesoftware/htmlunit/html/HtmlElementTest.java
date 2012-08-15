@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Unit tests for {@link HtmlElement}.
@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
-public class HtmlElementTest extends WebTestCase {
+public class HtmlElementTest extends SimpleWebTestCase {
 
     /**
      * Test hasAttribute() on an element with the attribute.

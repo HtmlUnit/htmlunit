@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlStyle;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class SvgStyleTest extends WebTestCase {
+public class SvgStyleTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

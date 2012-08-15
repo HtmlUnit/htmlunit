@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class CacheTest extends WebTestCase {
+public class CacheTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

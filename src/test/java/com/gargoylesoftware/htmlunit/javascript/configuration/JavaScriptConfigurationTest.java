@@ -46,7 +46,7 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-public class JavaScriptConfigurationTest extends WebTestCase {
+public class JavaScriptConfigurationTest extends SimpleWebTestCase {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptConfigurationTest.class);
 
