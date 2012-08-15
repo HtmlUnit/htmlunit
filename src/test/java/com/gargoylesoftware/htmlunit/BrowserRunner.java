@@ -58,7 +58,7 @@ public class BrowserRunner extends Suite {
      * @param klass the test case class
      * @throws Throwable If an exception occurs
      */
-    public BrowserRunner(final Class<AbstractWebTestCase> klass) throws Throwable {
+    public BrowserRunner(final Class<WebTestCase> klass) throws Throwable {
         super(klass, Collections.<Runner>emptyList());
 
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {

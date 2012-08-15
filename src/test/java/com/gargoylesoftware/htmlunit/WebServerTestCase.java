@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public abstract class WebServerTestCase extends AbstractWebTestCase {
+public abstract class WebServerTestCase extends WebTestCase {
 
     private Server server_;
     private static Boolean LAST_TEST_MockWebConnection_;

@@ -40,16 +40,16 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  */
 class BrowserNoneClassRunner extends BlockJUnit4ClassRunner {
 
-    public BrowserNoneClassRunner(final Class<AbstractWebTestCase> klass) throws InitializationError {
+    public BrowserNoneClassRunner(final Class<WebTestCase> klass) throws InitializationError {
         super(klass);
     }
 
     @Override
     protected Statement methodBlock(final FrameworkMethod method) {
         final Object test;
-        final AbstractWebTestCase testCase;
+        final WebTestCase testCase;
         try {
-            testCase = (AbstractWebTestCase) createTest();
+            testCase = (WebTestCase) createTest();
             test = new ReflectiveCallable() {
                 @Override
                 protected Object runReflectiveCall() throws Throwable {
@@ -103,7 +103,7 @@ class BrowserNoneClassRunner extends BlockJUnit4ClassRunner {
         return methods;
     }
 
-    static boolean containsTestMethods(final Class<AbstractWebTestCase> klass) {
+    static boolean containsTestMethods(final Class<WebTestCase> klass) {
         for (final Method method : klass.getMethods()) {
             if (method.getAnnotation(Test.class) != null) {
                 final Browsers browsers = method.getAnnotation(Browsers.class);

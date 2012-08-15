@@ -99,7 +99,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public abstract class WebDriverTestCase extends AbstractWebTestCase {
+public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
     private static List<String> BROWSERS_PROPERTIES_;

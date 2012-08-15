@@ -53,10 +53,10 @@ import org.junit.Test;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public abstract class AbstractWebTestCase {
+public abstract class WebTestCase {
 
     /** Logging support. */
-    private static final Log LOG = LogFactory.getLog(AbstractWebTestCase.class);
+    private static final Log LOG = LogFactory.getLog(WebTestCase.class);
 
     /** The listener port for the web server. */
     public static final int PORT = Integer.parseInt(System.getProperty("htmlunit.test.port", "12345"));
@@ -142,7 +142,7 @@ public abstract class AbstractWebTestCase {
     /**
      * Constructor.
      */
-    protected AbstractWebTestCase() {
+    protected WebTestCase() {
         generateTest_browserVersion_.remove();
     }
 

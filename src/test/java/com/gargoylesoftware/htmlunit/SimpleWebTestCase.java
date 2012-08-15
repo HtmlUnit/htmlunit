@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-public abstract class SimpleWebTestCase extends AbstractWebTestCase {
+public abstract class SimpleWebTestCase extends WebTestCase {
 
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(SimpleWebTestCase.class);
