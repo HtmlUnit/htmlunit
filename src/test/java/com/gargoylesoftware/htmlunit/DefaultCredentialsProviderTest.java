@@ -20,6 +20,11 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.impl.auth.BasicScheme;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link DefaultCredentialsProvider}.
@@ -27,12 +32,14 @@ import org.junit.Test;
  * @version $Revision$
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class DefaultCredentialsProviderTest extends WebTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Browsers(Browser.NONE)
     public void serialization() throws Exception {
         final String username = "foo";
         final String password = "password";
@@ -85,4 +92,19 @@ public class DefaultCredentialsProviderTest extends WebTestCase {
         assertEquals("new username", credentials.getUserName());
         assertEquals("other password", credentials.getPassword());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void basicAuthenticationTwice() throws Exception {
+        ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
+
+        getMockWebConnection().setResponse(URL_SECOND, "Hello World");
+        HtmlPage page = loadPage("Hi There");
+        assertTrue(page.asText().contains("Hi There"));
+        page = getWebClient().getPage(URL_SECOND);
+        assertTrue(page.asText().contains("Hello World"));
+    }
+
 }

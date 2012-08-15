@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -191,43 +190,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             }
             return super.getResponse(request);
         }
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testSetLocation() throws Exception {
-        final String content =
-              "<html>\n"
-            + "  <head>\n"
-            + "    <title>Page1</title>\n"
-            + "    <script>\n"
-            + "      var request;\n"
-            + "      function testAsync() {\n"
-            + "        if (window.XMLHttpRequest)\n"
-            + "          request = new XMLHttpRequest();\n"
-            + "        else if (window.ActiveXObject)\n"
-            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "        request.onreadystatechange = onReadyStateChange;\n"
-            + "        request.open('GET', 'foo.xml', true);\n"
-            + "        request.send('');\n"
-            + "      }\n"
-            + "      function onReadyStateChange() {\n"
-            + "        if (request.readyState == 4) {\n"
-            + "          window.location.href = 'about:blank';\n"
-            + "        }\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='testAsync()'>\n"
-            + "  </body>\n"
-            + "</html>";
-
-        getMockWebConnection().setDefaultResponse("");
-        final WebWindow window = loadPage(getBrowserVersion(), content, null).getEnclosingWindow();
-        assertEquals(0, window.getWebClient().waitForBackgroundJavaScriptStartingBefore(1000));
-        assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getWebRequest().getUrl());
     }
 
     /**

@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HtmlPage2Test extends WebServerTestCase {
+public class HtmlPage2Test extends WebTestCase {
     /**
      * Utility for temporary folders.
      * Has to be public due to JUnit's constraints for @Rule.

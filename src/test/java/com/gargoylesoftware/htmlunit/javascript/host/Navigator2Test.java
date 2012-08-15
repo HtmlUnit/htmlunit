@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link Navigator}.
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class Navigator2Test extends WebServerTestCase {
+public class Navigator2Test extends WebTestCase {
 
     /**
      * Tests the "cookieEnabled" property.

@@ -142,42 +142,7 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
         loadPageWithAlerts(getDefaultUrl());
     }
 
-    /**
-     * Test a HEAD request with additional headers.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void head() throws Exception {
-        final WebRequest referenceRequest = getHeadRequest();
-
-        getWebClient().setWebConnection(new UrlFetchWebConnection(getWebClient()));
-        final WebRequest newRequest = getHeadRequest();
-
-        // compare the two requests
-        compareRequests(referenceRequest, newRequest);
-    }
-
-    private WebRequest getHeadRequest() throws Exception {
-        final String html = "<html><head><script>\n"
-            + "  function test() {\n"
-            + "    var request;\n"
-            + "    if (window.XMLHttpRequest)\n"
-            + "      request = new XMLHttpRequest();\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      request = new ActiveXObject('Microsoft.XMLHTTP');\n"
-            + "    request.open('HEAD', 'second.html', false);\n"
-            + "    request.setRequestHeader('X-Foo', '123456');\n"
-            + "    request.send('');\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'></body></html>";
-
-        getMockWebConnection().setDefaultResponse("");
-        loadPage(html);
-
-        return getMockWebConnection().getLastWebRequest();
-    }
-
-    private void compareRequests(final WebRequest referenceRequest, final WebRequest newRequest) {
+    static void compareRequests(final WebRequest referenceRequest, final WebRequest newRequest) {
         assertEquals(referenceRequest.getRequestBody(), newRequest.getRequestBody());
         assertEquals(referenceRequest.getCharset(), newRequest.getCharset());
         assertEquals(referenceRequest.getProxyHost(), newRequest.getProxyHost());
@@ -189,7 +154,7 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
         assertEquals(referenceRequest.getRequestParameters().toString(), newRequest.getRequestParameters().toString());
     }
 
-    private String headersToString(final WebRequest request) {
+    private static String headersToString(final WebRequest request) {
         final Set<String> caseInsensitiveHeaders = new HashSet<String>(Arrays.asList("Connection"));
 
         final StringBuilder sb = new StringBuilder();

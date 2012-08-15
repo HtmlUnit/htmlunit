@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.WebTestCase;
 
 /**
  * Tests for {@link Console}.
@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class ConsoleTest extends WebServerTestCase {
+public class ConsoleTest extends WebTestCase {
 
     /**
      * @throws Exception if the test fails

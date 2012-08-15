@@ -90,20 +90,6 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void basicAuthenticationTwice() throws Exception {
-        ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
-
-        getMockWebConnection().setResponse(URL_SECOND, "Hello World");
-        HtmlPage page = loadPage("Hi There");
-        assertTrue(page.asText().contains("Hi There"));
-        page = getWebClient().getPage(URL_SECOND);
-        assertTrue(page.asText().contains("Hello World"));
-    }
-
-    /**
      * Tests that on calling the website twice, only the first time unauthorized response is returned.
      *
      * @throws Exception if an error occurs
@@ -367,7 +353,6 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
             url = new URL("http://joe:jetty@localhost:" + PORT + "/");
             final HtmlPage page = loadPage(html, url);
             if (getBrowserVersion().isIE()) {
-                System.out.println(page.asXml());
                 assertTrue(getCollectedAlerts(page).contains("SecRet"));
             }
             else {

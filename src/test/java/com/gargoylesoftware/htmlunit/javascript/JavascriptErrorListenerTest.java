@@ -229,43 +229,4 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         }
     }
 
-    /**
-     * Test for running with a JavaScript error listener.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void parsingError() throws Exception {
-        final StringBuilder scriptExceptions = new StringBuilder();
-
-        final WebClient webClient = getWebClientWithMockWebConnection();
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-        webClient.setJavaScriptErrorListener(new JavaScriptErrorListener() {
-
-            public void loadScriptError(final HtmlPage htmlPage, final URL scriptUrl, final Exception exception) {
-                // nothing
-            }
-
-            public void malformedScriptURL(final HtmlPage htmlPage, final String url,
-                    final MalformedURLException malformedURLException) {
-                // nothing
-            }
-
-            public void scriptException(final HtmlPage htmlPage, final ScriptException scriptException) {
-                scriptExceptions.append(scriptException.getCause() + "\n");
-            }
-
-            public void timeoutError(final HtmlPage htmlPage, final long allowedTime, final long executionTime) {
-                // nothing
-            }
-        });
-
-        final String html = "<html><body><script>while (</script></body></html>";
-        getMockWebConnection().setDefaultResponse(html);
-        webClient.getPage(getDefaultUrl());
-
-        assertEquals("net.sourceforge.htmlunit.corejs.javascript.EvaluatorException: "
-            + "Unexpected end of file (script in " + getDefaultUrl() + " from (1, 21) to (1, 37)#1)\n",
-                scriptExceptions.toString());
-    }
 }

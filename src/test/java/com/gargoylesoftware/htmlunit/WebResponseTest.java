@@ -125,21 +125,6 @@ public class WebResponseTest extends WebServerTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void charsetInMetaTag() throws Exception {
-        final String html
-            = "<html>\n"
-            + "<head><meta content='text/html; charset=utf-8' http-equiv='Content-Type'/></head>\n"
-            + "<body>foo</body>\n"
-            + "</html>";
-        final HtmlPage page = loadPage(html);
-        assertEquals("utf-8", page.getWebResponse().getContentCharsetOrNull());
-        assertEquals(html, page.getWebResponse().getContentAsString());
-    }
-
-    /**
      * Test that extracting charset from Content-Type header is forgiving.
      * @throws Exception if the test fails
      */

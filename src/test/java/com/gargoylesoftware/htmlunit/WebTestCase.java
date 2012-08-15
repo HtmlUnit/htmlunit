@@ -419,6 +419,7 @@ public abstract class WebTestCase extends AbstractWebTestCase {
      */
     @After
     public void releaseResources() {
+        super.releaseResources();
         if (webClient_ != null) {
             webClient_.closeAllWindows();
             webClient_.getCookieManager().clearCookies();

@@ -27,7 +27,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -36,14 +35,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -92,7 +84,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Sudhan Moghe
  */
 @RunWith(BrowserRunner.class)
-public class WebClientTest extends WebServerTestCase {
+public class WebClientTest extends WebTestCase {
 
     /**
      * Tests if all JUnit 4 candidate test methods declare <tt>@Test</tt> annotation.
@@ -2022,39 +2014,6 @@ public class WebClientTest extends WebServerTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testUseProxy() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
-        servlets.put("/test", UseProxyHeaderServlet.class);
-        startWebServer("./", null, servlets);
-
-        final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
-        assertEquals("Going anywhere?", page.asText());
-    }
-
-    /**
-     * Servlet for {@link #testUseProxy()}.
-     */
-    public static class UseProxyHeaderServlet extends HttpServlet {
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setStatus(HttpServletResponse.SC_USE_PROXY);
-            //Won't matter!
-            //response.setHeader("Location", "http://www.google.com");
-            response.setContentType("text/html");
-            final Writer writer = response.getWriter();
-            writer.write("<html><body>Going anywhere?</body></html>");
-            writer.close();
-        }
-    }
-
-    /**
      * Tests that the JavaScript parent scope is set correctly when shuffling windows around.
      * @throws Exception if test fails
      */
@@ -2207,94 +2166,6 @@ public class WebClientTest extends WebServerTestCase {
 
         final Page page = client.getPage(urlWithDirectoryUp);
         assertEquals(url, page.getWebResponse().getWebRequest().getUrl());
-    }
-
-    /**
-     * Regression test for bug 2803378: GET or POST to a URL that returns HTTP 204 (No Content).
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void testNoContent() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
-        servlets.put("/test1", NoContentServlet1.class);
-        servlets.put("/test2", NoContentServlet2.class);
-        startWebServer("./", null, servlets);
-        final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test1");
-        final HtmlPage page2 = page.getHtmlElementById("submit").click();
-        assertEquals(page, page2);
-    }
-
-    /**
-     * First servlet for {@link #testNoContent()}.
-     */
-    public static class NoContentServlet1 extends HttpServlet {
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
-            res.setContentType("text/html");
-            final Writer writer = res.getWriter();
-            writer.write("<html><body><form action='test2'>"
-                + "<input id='submit' type='submit' value='submit'></input>"
-                + "</form></body></html>");
-            writer.close();
-        }
-    }
-
-    /**
-     * Second servlet for {@link #testNoContent()}.
-     */
-    public static class NoContentServlet2 extends HttpServlet {
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest req, final HttpServletResponse res) {
-            res.setStatus(HttpServletResponse.SC_NO_CONTENT);
-        }
-    }
-
-    /**
-     * Regression test for bug 2821888: HTTP 304 (Not Modified) was being treated as a redirect. Note that a 304
-     * response doesn't really make sense because we're not sending any If-Modified-Since headers, but we want to
-     * at least make sure that we're not throwing exceptions when we receive one of these responses.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void testNotModified() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
-        servlets.put("/test", NotModifiedServlet.class);
-        startWebServer("./", null, servlets);
-        final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage("http://localhost:" + PORT + "/test");
-        final TextPage page2 = client.getPage("http://localhost:" + PORT + "/test");
-        assertNotNull(page);
-        assertNotNull(page2);
-    }
-
-    /**
-     * Servlet for {@link #testNotModified()}.
-     */
-    public static class NotModifiedServlet extends HttpServlet {
-        private boolean first_ = true;
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
-            if (first_) {
-                first_ = false;
-                res.setContentType("text/html");
-                final Writer writer = res.getWriter();
-                writer.write("<html><body>foo</body></html>");
-                writer.close();
-            }
-            else {
-                res.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-            }
-        }
     }
 
     /**

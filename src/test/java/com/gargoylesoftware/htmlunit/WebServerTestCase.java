@@ -46,12 +46,13 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-public abstract class WebServerTestCase extends WebTestCase {
+public abstract class WebServerTestCase extends AbstractWebTestCase {
 
     private Server server_;
     private static Boolean LAST_TEST_MockWebConnection_;
     private static Server STATIC_SERVER_;
     private boolean writeContentAsBytes_;
+    private WebClient webClient_;
 
     /**
      * Starts the web server on the default {@link #PORT}.
@@ -354,5 +355,37 @@ public abstract class WebServerTestCase extends WebTestCase {
      */
     public void setWriteContentAsBytes_(final boolean b) {
         writeContentAsBytes_ = b;
+    }
+
+    /**
+     * Returns the WebClient instance for the current test with the current {@link BrowserVersion}.
+     * @return a WebClient with the current {@link BrowserVersion}
+     */
+    protected final WebClient getWebClient() {
+        if (webClient_ == null) {
+            webClient_ = createNewWebClient();
+        }
+        return webClient_;
+    }
+
+    /**
+     * Returns the WebClient instance for the current test with the current {@link BrowserVersion}.
+     * @return a WebClient with the current {@link BrowserVersion}
+     */
+    protected WebClient createNewWebClient() {
+        return new WebClient(getBrowserVersion());
+    }
+
+    /**
+     * Cleanup after a test.
+     */
+    @After
+    public void releaseResources() {
+        super.releaseResources();
+        if (webClient_ != null) {
+            webClient_.closeAllWindows();
+            webClient_.getCookieManager().clearCookies();
+        }
+        webClient_ = null;
     }
 }

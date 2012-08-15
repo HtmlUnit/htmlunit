@@ -160,7 +160,7 @@ public abstract class AbstractWebTestCase {
      * @param expectedUrl the expected URL
      * @param actualUrl the URL to test
      */
-    protected void assertEquals(final URL expectedUrl, final URL actualUrl) {
+    protected static void assertEquals(final URL expectedUrl, final URL actualUrl) {
         Assert.assertEquals(expectedUrl.toExternalForm(), actualUrl.toExternalForm());
     }
 
@@ -169,7 +169,7 @@ public abstract class AbstractWebTestCase {
      * @param expected the expected object
      * @param actual the object to test
      */
-    protected void assertEquals(final Object expected, final Object actual) {
+    protected static void assertEquals(final Object expected, final Object actual) {
         Assert.assertEquals(expected, actual);
     }
 
@@ -178,7 +178,7 @@ public abstract class AbstractWebTestCase {
      * @param expected the expected int
      * @param actual the int to test
      */
-    protected void assertEquals(final int expected, final int actual) {
+    protected static void assertEquals(final int expected, final int actual) {
         Assert.assertEquals(expected, actual);
     }
 
