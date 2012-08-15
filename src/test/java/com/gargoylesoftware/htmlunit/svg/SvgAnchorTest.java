@@ -16,10 +16,12 @@ package com.gargoylesoftware.htmlunit.svg;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -31,7 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class SvgAnchorTest extends SimpleWebTestCase {
+public class SvgAnchorTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -52,12 +54,15 @@ public class SvgAnchorTest extends SimpleWebTestCase {
             + "  </svg>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPageWithAlerts(html);
-        if ("[object SVGAElement]".equals(getExpectedAlerts()[0])) {
-            assertTrue(SvgAnchor.class.isInstance(page.getElementById("myId")));
-        }
-        else {
-            assertTrue(HtmlAnchor.class.isInstance(page.getElementById("myId")));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            if ("[object SVGAElement]".equals(getExpectedAlerts()[0])) {
+                assertTrue(SvgAnchor.class.isInstance(page.getElementById("myId")));
+            }
+            else {
+                assertTrue(HtmlAnchor.class.isInstance(page.getElementById("myId")));
+            }
         }
     }
 }

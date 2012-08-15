@@ -819,17 +819,18 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Returns the underlying WebClient, if we are currently running {@link HtmlUnitDriver}.
+     * Returns the underlying WebWindow of the specified driver.
      *
      * <b>Your test shouldn't depend primarily on WebClient</b>
      *
-     * @return the webClient
+     * @param driver the driver
+     * @return the current web window
+     * @throws Exception if an error occurs
      */
-    protected WebClient getWebClientOfWebDriver() {
-        if (getWebDriver() instanceof HtmlUnitDriver) {
-            return webClient_;
-        }
-        return null;
+    protected WebWindow getWebWindowOf(final HtmlUnitDriver driver) throws Exception {
+        final Field field = HtmlUnitDriver.class.getDeclaredField("currentWindow");
+        field.setAccessible(true);
+        return (WebWindow) field.get(driver);
     }
 }
 
