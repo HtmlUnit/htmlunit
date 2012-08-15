@@ -249,6 +249,7 @@ public abstract class WebServerTestCase extends WebTestCase {
 
         return getWebClient().getPage(url);
     }
+
     /**
      * Starts the web server delivering response from the provided connection.
      * @param mockConnection the sources for responses
