@@ -573,26 +573,6 @@ public class CodeStyleTest {
     }
 
     /**
-     * Verifies that WebClient is not used in any WebDriverTestCase.
-     */
-    private void webDriverWebClient(final List<String> lines, final String relativePath) {
-        if (relativePath.replace('\\', '/').contains("src/test/java") && !relativePath.contains("CodeStyleTest")) {
-            boolean webDriver = false;
-            int index = 1;
-            for (final String line : lines) {
-                if (line.contains("extends WebDriverTestCase")) {
-                    webDriver = true;
-                }
-                if (webDriver && (line.contains("getWebClient()") || line.contains("new WebClient("))) {
-                    addFailure("getWebClient() can not be used for WebDriverTestCase: "
-                            + relativePath + ", line: " + index);
-                }
-                index++;
-            }
-        }
-    }
-
-    /**
      * Verifies that not invocation of browserVersion.isIE(), .isFirefox() or .getBrowserVersionNumeric().
      */
     private void browserVersion_isIE(final List<String> lines, final String relativePath) {

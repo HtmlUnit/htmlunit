@@ -124,19 +124,22 @@ public class WebClientTest extends WebServerTestCase {
                     catch (final Exception e) {
                         continue;
                     }
-                    for (final Constructor<?> ctor : clazz.getConstructors()) {
-                        if (ctor.getParameterTypes().length == 0) {
-                            for (final Method method : clazz.getDeclaredMethods()) {
-                                if (Modifier.isPublic(method.getModifiers())
-                                    && method.getAnnotation(Before.class) == null
-                                    && method.getAnnotation(BeforeClass.class) == null
-                                    && method.getAnnotation(After.class) == null
-                                    && method.getAnnotation(AfterClass.class) == null
-                                    && method.getAnnotation(Test.class) == null
-                                    && method.getReturnType() == Void.TYPE
-                                    && method.getParameterTypes().length == 0) {
-                                    fail("Method '" + method.getName()
-                                            + "' in " + name + " does not declare @Test annotation");
+                    name = file.getName();
+                    if (name.endsWith("Test.java") || name.endsWith("TestCase.java")) {
+                        for (final Constructor<?> ctor : clazz.getConstructors()) {
+                            if (ctor.getParameterTypes().length == 0) {
+                                for (final Method method : clazz.getDeclaredMethods()) {
+                                    if (Modifier.isPublic(method.getModifiers())
+                                            && method.getAnnotation(Before.class) == null
+                                            && method.getAnnotation(BeforeClass.class) == null
+                                            && method.getAnnotation(After.class) == null
+                                            && method.getAnnotation(AfterClass.class) == null
+                                            && method.getAnnotation(Test.class) == null
+                                            && method.getReturnType() == Void.TYPE
+                                            && method.getParameterTypes().length == 0) {
+                                        fail("Method '" + method.getName()
+                                                + "' in " + name + " does not declare @Test annotation");
+                                    }
                                 }
                             }
                         }
