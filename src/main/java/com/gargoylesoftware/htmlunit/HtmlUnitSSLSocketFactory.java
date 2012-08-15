@@ -71,7 +71,6 @@ class HtmlUnitSSLSocketFactory extends SSLSocketFactory {
     }
 
     public static SSLSocketFactory buildSSLSocketFactory(final WebClientOptions options) {
-
         try {
             if (!options.isUseInsecureSSL()) {
                 if (options.getSSLClientCertificateUrl() == null) {
