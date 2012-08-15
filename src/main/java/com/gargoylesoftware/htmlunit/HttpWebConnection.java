@@ -25,8 +25,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.security.GeneralSecurityException;
-import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -40,8 +38,6 @@ import javax.net.ssl.SSLPeerUnverifiedException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
@@ -68,7 +64,6 @@ import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.params.ConnRoutePNames;
-import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
@@ -122,8 +117,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class HttpWebConnection implements WebConnection {
 
-    private static final Log LOG = LogFactory.getLog(HttpWebConnection.class);
-
     private static final String HACKED_COOKIE_POLICY = "mine";
     private AbstractHttpClient httpClient_;
     private final WebClient webClient_;
@@ -131,8 +124,8 @@ public class HttpWebConnection implements WebConnection {
     /** Use single HttpContext, so there is no need to re-send authentication for each and every request. */
     private HttpContext httpContext_ = new BasicHttpContext();
     private String virtualHost_;
-    private boolean isUseInsecureSsl_;
     private final CookieSpecFactory htmlUnitCookieSpecFactory_;
+    private final WebClientOptions usedOptions_ = new WebClientOptions();
 
     /**
      * Creates a new HTTP web connection instance.
@@ -172,14 +165,9 @@ public class HttpWebConnection implements WebConnection {
                 httpResponse = httpClient.execute(hostConfiguration, httpMethod, httpContext_);
             }
             catch (final SSLPeerUnverifiedException s) {
-                //Try to use only SSLv3 instead
-                if (isUseInsecureSsl_) {
-                    try {
-                        HttpWebConnectionInsecureSSL.setUseInsecureSSL(webClient_, getHttpClient(), true, true);
-                    }
-                    catch (final GeneralSecurityException e) {
-                        throw new RuntimeException(e);
-                    }
+                // Try to use only SSLv3 instead
+                if (webClient_.getOptions().isUseInsecureSSL()) {
+                    HtmlUnitSSLSocketFactory.setUseSSL3Only(getHttpClient().getParams(), true);
                     httpResponse = httpClient.execute(hostConfiguration, httpMethod);
                 }
                 else {
@@ -220,16 +208,13 @@ public class HttpWebConnection implements WebConnection {
 
     private static void setProxy(final HttpClient httpClient, final WebRequest webRequest) {
         if (webRequest.getProxyHost() != null) {
-            final String proxyHost = webRequest.getProxyHost();
-            final int proxyPort = webRequest.getProxyPort();
-            final HttpHost proxy = new HttpHost(proxyHost, proxyPort);
+            final HttpHost proxy = new HttpHost(webRequest.getProxyHost(), webRequest.getProxyPort());
+            final HttpParams httpClientParams = httpClient.getParams();
             if (webRequest.isSocksProxy()) {
-                final SocksSocketFactory factory = (SocksSocketFactory)
-                    httpClient.getConnectionManager().getSchemeRegistry().getScheme("http").getSchemeSocketFactory();
-                factory.setSocksProxy(proxy);
+                SocksSocketFactory.setSocksProxy(httpClientParams, proxy);
             }
             else {
-                httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+                httpClientParams.setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
             }
         }
     }
@@ -243,6 +228,7 @@ public class HttpWebConnection implements WebConnection {
      */
     private HttpUriRequest makeHttpMethod(final WebRequest webRequest)
         throws IOException, URISyntaxException {
+
         // Make sure that the URL is fully encoded. IE actually sends some Unicode chars in request
         // URLs; because of this we allow some Unicode chars in URLs. However, at this point we're
         // handing things over the HttpClient, and HttpClient will blow up if we leave these Unicode
@@ -342,6 +328,9 @@ public class HttpWebConnection implements WebConnection {
 //        getHttpClient().getParams().setParameter(ClientPNames.HANDLE_REDIRECTS, true);
 
         final AbstractHttpClient httpClient = getHttpClient();
+
+        // reconfigure SSL if needed
+        reconfigureHttpsScheme(httpClient.getConnectionManager().getSchemeRegistry());
 
         // Tell the client where to get its credentials from
         // (it may have changed on the webClient since last call to getHttpClientFor(...))
@@ -538,17 +527,22 @@ public class HttpWebConnection implements WebConnection {
      * @return the <tt>HttpClient</tt> that will be used by this WebConnection
      */
     protected AbstractHttpClient createHttpClient() {
-        final HttpParams httpsParams = new BasicHttpParams();
+        final HttpParams httpParams = new BasicHttpParams();
 
-        HttpClientParams.setRedirecting(httpsParams, false);
+        HttpClientParams.setRedirecting(httpParams, false);
+        // Set timeouts
+        httpParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, Integer.valueOf(webClient_.getTimeout()));
+        httpParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,
+                Integer.valueOf(webClient_.getTimeout()));
 
         final SchemeRegistry schemeRegistry = new SchemeRegistry();
-        schemeRegistry.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
-        schemeRegistry.register(new Scheme("https", 443, getSSLSocketFactory(webClient_)));
+        schemeRegistry.register(new Scheme("http", 80, new SocksSocketFactory()));
+        configureHttpsScheme(schemeRegistry);
+
         final PoolingClientConnectionManager connectionManager =
             new PoolingClientConnectionManager(schemeRegistry);
 
-        final DefaultHttpClient httpClient = new DefaultHttpClient(connectionManager, httpsParams);
+        final DefaultHttpClient httpClient = new DefaultHttpClient(connectionManager, httpParams);
         httpClient.setCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
 
         httpClient.setRedirectStrategy(new DefaultRedirectStrategy() {
@@ -563,37 +557,29 @@ public class HttpWebConnection implements WebConnection {
             httpClient.getParams().setParameter(ClientPNames.VIRTUAL_HOST, virtualHost_);
         }
 
-        final Scheme httpScheme = new Scheme("http", 80, new SocksSocketFactory());
-        httpClient.getConnectionManager().getSchemeRegistry().register(httpScheme);
-
-        // Set timeouts
-        httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, Integer.valueOf(webClient_.getTimeout()));
-        httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,
-                Integer.valueOf(webClient_.getTimeout()));
-
         return httpClient;
     }
 
-    /**
-     * Returns the SSLSocketFactory to use.
-     * @return the SSLSocketFactory
-     */
-    static SSLSocketFactory getSSLSocketFactory(final WebClient webClient) {
-        final WebClientOptions options = webClient.getOptions();
-        if (options.getSSLClientCertificateUrl() == null) {
-            return SSLSocketFactory.getSocketFactory();
+    private void reconfigureHttpsScheme(final SchemeRegistry schemeRegistry) {
+        final WebClientOptions options = webClient_.getOptions();
+
+        // register new SSL factory only if settings have changed
+        if (options.isUseInsecureSSL() != usedOptions_.isUseInsecureSSL()
+                || options.getSSLClientCertificateUrl() != usedOptions_.getSSLClientCertificateUrl()) {
+            configureHttpsScheme(schemeRegistry);
         }
-        try {
-            final KeyStore keyStore = KeyStore.getInstance(options.getSSLClientCertificateType());
-            final String password = options.getSSLClientCertificatePassword();
-            final char[] passwordChars = password != null ? password.toCharArray() : null;
-            keyStore.load(options.getSSLClientCertificateUrl().openStream(), passwordChars);
-            return new SSLSocketFactory(keyStore, password);
-        }
-        catch (final Exception e) {
-            LOG.error(e);
-            return null;
-        }
+    }
+
+    private void configureHttpsScheme(final SchemeRegistry schemeRegistry) {
+        final WebClientOptions options = webClient_.getOptions();
+
+        final SSLSocketFactory socketFactory = HtmlUnitSSLSocketFactory.buildSSLSocketFactory(options);
+
+        schemeRegistry.register(new Scheme("https", 443, socketFactory));
+
+        usedOptions_.setUseInsecureSSL(options.isUseInsecureSSL());
+        usedOptions_.setSSLClientCertificate(options.getSSLClientCertificateUrl(),
+                options.getSSLClientCertificatePassword(), options.getSSLClientCertificateType());
     }
 
     /**
@@ -709,19 +695,6 @@ public class HttpWebConnection implements WebConnection {
                 httpMethod.setHeader(entry.getKey(), entry.getValue());
             }
         }
-    }
-
-    /**
-     * If set to <tt>true</tt>, the client will accept connections to any host, regardless of
-     * whether they have valid certificates or not. This is especially useful when you are trying to
-     * connect to a server with expired or corrupt certificates.
-     *
-     * @param useInsecureSSL whether or not to use insecure SSL
-     * @throws GeneralSecurityException if a security error occurs
-     */
-    public void setUseInsecureSSL(final boolean useInsecureSSL) throws GeneralSecurityException {
-        isUseInsecureSsl_ = useInsecureSSL;
-        HttpWebConnectionInsecureSSL.setUseInsecureSSL(webClient_, getHttpClient(), useInsecureSSL, false);
     }
 
     /**

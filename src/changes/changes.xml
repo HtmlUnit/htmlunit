@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support">
+        <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
+            <action type="add" dev="mguillem" issue="3107078">
+                Add SOCKS proxy support for HTTPS.
+            </action>
+            <action type="update" dev="mguillem">
+                HttpWebConnection: removed setUseInsecureSSL. Settings is now read from WebClientOptions.
+            </action>
             <action type="update" dev="asashour">
                 INCOMPATIBLE CHANGE: The interface HTMLParserListener is enhanced to be able to
                 handle the html source when parsing a snippet.

@@ -67,6 +67,13 @@ public abstract class WebTestCase {
     /** The second listener port for the web server, used for cross-origin tests. */
     public static final int PORT3 = Integer.parseInt(System.getProperty("htmlunit.test.port3", "12347"));
 
+    /** The SOCKS proxy host to use for SOCKS proxy tests. */
+    public static final String SOCKS_PROXY_HOST = System.getProperty("htmlunit.test.socksproxy.host", "localhost");
+
+    /** The SOCKS proxy port to use for SOCKS proxy tests. */
+    public static final int SOCKS_PROXY_PORT = Integer.parseInt(
+            System.getProperty("htmlunit.test.socksproxy.host", "55555"));
+
     /** Constant for the URL which is used in the tests. */
     public static final URL URL_FIRST;
 

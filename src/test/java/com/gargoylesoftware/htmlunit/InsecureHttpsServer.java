@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
 import java.net.URL;
 import java.security.KeyStore;
 import java.security.NoSuchAlgorithmException;
@@ -24,7 +25,14 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
+import org.apache.http.HttpException;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.localserver.LocalTestServer;
+import org.apache.http.protocol.HttpContext;
+import org.apache.http.protocol.HttpRequestHandler;
 
 /**
  * Simple insecure HTTPS server.
@@ -36,6 +44,22 @@ import org.apache.http.localserver.LocalTestServer;
 public class InsecureHttpsServer {
 
     private LocalTestServer localServer_;
+    private final String html_;
+
+    /**
+     * Create a server delivering nothing.
+     */
+    public InsecureHttpsServer() {
+        html_ = null;
+    }
+
+    /**
+     * Create a server delivering the provided HTML content.
+     * @param html the HTML content to deliver
+     */
+    public InsecureHttpsServer(final String html) {
+        html_ = html;
+    }
 
     private KeyManagerFactory createKeyManagerFactory() throws NoSuchAlgorithmException {
         final String algorithm = KeyManagerFactory.getDefaultAlgorithm();
@@ -80,6 +104,17 @@ public class InsecureHttpsServer {
 
         localServer_ = new LocalTestServer(serverSSLContext);
         localServer_.registerDefaultHandlers();
+
+        if (html_ != null) {
+            final HttpRequestHandler handler = new HttpRequestHandler() {
+                @Override
+                public void handle(final HttpRequest request, final HttpResponse response, final HttpContext context)
+                    throws HttpException, IOException {
+                    response.setEntity(new StringEntity(html_, ContentType.TEXT_HTML));
+                }
+            };
+            localServer_.register("*", handler);
+        }
 
         localServer_.start();
     }

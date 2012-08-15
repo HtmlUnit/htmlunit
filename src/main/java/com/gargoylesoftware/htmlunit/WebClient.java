@@ -161,7 +161,7 @@ public class WebClient implements Serializable {
     private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
     private JavaScriptErrorListener javaScriptErrorListener_;
 
-    private WebClientOptions options_ = new WebClientOptions(this);
+    private WebClientOptions options_ = new WebClientOptions();
 
     /**
      * Creates a web client instance using the browser version returned by

@@ -14,101 +14,47 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
 
 import org.apache.http.HttpHost;
-import org.apache.http.conn.ConnectTimeoutException;
-import org.apache.http.conn.scheme.SchemeSocketFactory;
-import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.params.HttpParams;
 
 /**
- * SOCKS {@link SocksSocketFactory}.
+ * SOCKS aware {@link SchemeSocketFactory}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Marc Guillemot
  */
-class SocksSocketFactory implements SchemeSocketFactory {
+class SocksSocketFactory extends PlainSocketFactory {
+    private static final String SOCKS_PROXY = "htmlunit.socksproxy";
 
-    private HttpHost socksProxy_;
+    static void setSocksProxy(final HttpParams parameters, final HttpHost socksProxy) {
+        parameters.setParameter(SOCKS_PROXY, socksProxy);
+    }
 
-    void setSocksProxy(final HttpHost socksProxy) {
-        socksProxy_ = socksProxy;
+    static HttpHost getSocksProxy(final HttpParams parameters) {
+        return (HttpHost) parameters.getParameter(SOCKS_PROXY);
+    }
+
+    static Socket createSocketWithSocksProxy(final HttpHost socksProxy) {
+        final InetSocketAddress address = new InetSocketAddress(socksProxy.getHostName(), socksProxy.getPort());
+        final Proxy proxy = new Proxy(Proxy.Type.SOCKS, address);
+        return new Socket(proxy);
     }
 
     /**
      * {@inheritDoc}
      */
     public Socket createSocket(final HttpParams params) {
-        if (socksProxy_ != null) {
-            final InetSocketAddress address = new InetSocketAddress(socksProxy_.getHostName(), socksProxy_.getPort());
-            final Proxy proxy = new Proxy(Proxy.Type.SOCKS, address);
-            return new Socket(proxy);
+        final HttpHost socksProxy = getSocksProxy(params);
+        if (socksProxy != null) {
+            return createSocketWithSocksProxy(socksProxy);
         }
-        return new Socket();
+        return super.createSocket(params);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Socket connectSocket(
-            Socket sock,
-            final InetSocketAddress remoteAddress,
-            final InetSocketAddress localAddress,
-            final HttpParams params) throws IOException, UnknownHostException, ConnectTimeoutException {
-
-        if (params == null) {
-            throw new IllegalArgumentException("Parameters may not be null.");
-        }
-
-        if (sock == null) {
-            sock = createSocket(params);
-        }
-
-        if (localAddress != null) {
-            int localPort = localAddress.getPort();
-            if (localPort < 0) {
-                localPort = 0; // indicates "any"
-            }
-
-            sock.bind(new InetSocketAddress(localAddress.getHostName(), localPort));
-        }
-
-        final int timeout = HttpConnectionParams.getConnectionTimeout(params);
-
-        try {
-            sock.connect(remoteAddress, timeout);
-        }
-        catch (final SocketTimeoutException ex) {
-            throw new ConnectTimeoutException("Connect to " + remoteAddress + " timed out");
-        }
-        return sock;
-    }
-
-    /**
-     * Checks whether a socket connection is secure.
-     * This factory creates plain socket connections which are not considered secure.
-     *
-     * @param sock the connected socket
-     * @return <code>false</code>
-     * @throws IllegalArgumentException if the argument is invalid
-     */
-    public final boolean isSecure(final Socket sock) throws IllegalArgumentException {
-        if (sock == null) {
-            throw new IllegalArgumentException("Socket may not be null.");
-        }
-        // This check is performed last since it calls a method implemented
-        // by the argument object. getClass() is final in java.lang.Object.
-        if (sock.isClosed()) {
-            throw new IllegalArgumentException("Socket is closed.");
-        }
-        return false;
-    }
-
 }

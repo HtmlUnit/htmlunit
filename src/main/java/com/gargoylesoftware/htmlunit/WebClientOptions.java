@@ -16,25 +16,16 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 import java.net.URL;
-import java.security.GeneralSecurityException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
 
 /**
  * Represents options of a {@link WebClient}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 public class WebClientOptions implements Serializable {
 
-    /** Logging support. */
-    private static final Log LOG = LogFactory.getLog(WebClientOptions.class);
-
-    private WebClient webClient_;
     private boolean javaScriptEnabled_ = true;
     private boolean cssEnabled_ = true;
     private boolean printContentOnFailingStatusCode_ = true;
@@ -52,38 +43,24 @@ public class WebClientOptions implements Serializable {
     private String homePage_ = "http://htmlunit.sf.net/";
     private ProxyConfig proxyConfig_;
 
-    /**
-     * Creates an instance.
-     * @param webClient the webclient to which this options object belong
-     */
-    WebClientOptions(final WebClient webClient) {
-        webClient_ = webClient;
-    }
+    private boolean useInsecureSSL_ = false; // default is secure SSL
 
     /**
      * If set to <code>true</code>, the client will accept connections to any host, regardless of
      * whether they have valid certificates or not. This is especially useful when you are trying to
      * connect to a server with expired or corrupt certificates.
-     * <p>
-     * This method works only if {@link #getWebConnection()} returns an {@link HttpWebConnection}
-     * (which is the default) or a {@link WebConnectionWrapper} wrapping an {@link HttpWebConnection}.
-     * </p>
      * @param useInsecureSSL whether or not to use insecure SSL
-     * @throws GeneralSecurityException if a security error occurs
      */
-    public void setUseInsecureSSL(final boolean useInsecureSSL) throws GeneralSecurityException {
-        //FIXME Depends on the implementation.
-        WebConnection webConnection = webClient_.getWebConnection();
-        while (webConnection instanceof WebConnectionWrapper) {
-            webConnection = ((WebConnectionWrapper) webConnection).getWrappedWebConnection();
-        }
+    public void setUseInsecureSSL(final boolean useInsecureSSL) {
+        useInsecureSSL_ = useInsecureSSL;
+    }
 
-        if (webConnection instanceof HttpWebConnection) {
-            ((HttpWebConnection) webConnection).setUseInsecureSSL(useInsecureSSL);
-        }
-        else {
-            LOG.warn("Can't configure useInsecureSSL on " + webConnection);
-        }
+    /**
+     * Indicates if insecure SSL should be used.
+     * @return <code>true</code> if insecure SSL should be used. Default is <code>false</code>.
+     */
+    public boolean isUseInsecureSSL() {
+        return useInsecureSSL_;
     }
 
     /**
@@ -361,5 +338,4 @@ public class WebClientOptions implements Serializable {
         WebAssert.notNull("proxyConfig", proxyConfig);
         proxyConfig_ = proxyConfig;
     }
-
 }
