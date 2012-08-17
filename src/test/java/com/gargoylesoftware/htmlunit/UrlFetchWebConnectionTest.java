@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -204,5 +205,31 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
             + " expires=Fri, 18-Nov-2011 21:13:50 GMT; path=/; HttpOnly, ASP.NET_SessionId=dqsvrc45gpj51f45n0c1q4qa;"
             + " path=/; HttpOnly, language=en-US; path=/; HttpOnly";
         assertEquals(3, UrlFetchWebConnection.parseCookies("www.foo.com", cookieHeader).size());
+    }
+
+    /**
+     * Test that redirects are handled by the WebClient and not by the UrlFetchWebConnection (issue #3557486).
+     * @throws Exception if the test fails.
+     */
+    @Test
+    public void redirect() throws Exception {
+        final String html = "<html></html>";
+
+        // get with default WebConnection
+        final List<NameValuePair> headers = Collections.singletonList(
+                new NameValuePair("Location", URL_SECOND.toString()));
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(URL_FIRST, "", 302, "Some error", "text/html", headers);
+        conn.setResponse(URL_SECOND, html);
+
+        Page page = loadPageWithAlerts(URL_FIRST);
+        assertEquals(URL_SECOND, page.getUrl());
+
+        // get with UrlFetchWebConnection
+        final WebClient wc = getWebClient();
+        wc.setWebConnection(new UrlFetchWebConnection(wc));
+
+        page = loadPageWithAlerts(URL_FIRST);
+        assertEquals(URL_SECOND, page.getUrl());
     }
 }
