@@ -579,6 +579,9 @@ public class JavaScriptEngine {
                 cx.putThreadLocal(KEY_STARTING_SCOPE, scope_);
                 cx.putThreadLocal(KEY_STARTING_PAGE, htmlPage_);
                 synchronized (htmlPage_) { // 2 scripts can't be executed in parallel for one page
+                    if (htmlPage_ != htmlPage_.getEnclosingWindow().getEnclosedPage()) {
+                        return null; // page has been unloaded
+                    }
                     final Object response = doRun(cx);
                     doProcessPostponedActions();
                     return response;

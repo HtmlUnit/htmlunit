@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
+            <action type="fix" dev="mguillem">
+                JavaScript: improved verifications to avoid that background tasks continue to run when page has been unloaded.
+            </action>
             <action type="fix" dev="mguillem" issue="3557486">
                 Google App Engine support: don't follow redirects automatically in UrlFetchWebConnection.
             </action>
