@@ -273,8 +273,8 @@ public class WebClient2Test extends SimpleWebTestCase {
         final ScriptResult result = p.executeJavaScript("top.foo");
         assertEquals("hello", result.getJavaScriptResult());
 
-        p.getWebClient().getPage("about:blank");
-        final ScriptResult result2 = p.executeJavaScript("String(top.foo)");
+        final HtmlPage page2 = p.getWebClient().getPage("about:blank");
+        final ScriptResult result2 = page2.executeJavaScript("String(top.foo)");
         assertEquals("undefined", result2.getJavaScriptResult());
     }
 
