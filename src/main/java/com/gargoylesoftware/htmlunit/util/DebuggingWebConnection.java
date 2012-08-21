@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -137,8 +138,14 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
 
         try {
             final String decompileScript = (String) factory.call(action);
+            final List<NameValuePair> responseHeaders = new ArrayList<NameValuePair>(response.getResponseHeaders());
+            for (int i = responseHeaders.size() - 1; i >= 0; i--) {
+                if ("content-encoding".equalsIgnoreCase(responseHeaders.get(i).getName())) {
+                    responseHeaders.remove(i);
+                }
+            }
             final WebResponseData wrd = new WebResponseData(decompileScript.getBytes(), response.getStatusCode(),
-                response.getStatusMessage(), response.getResponseHeaders());
+                response.getStatusMessage(), responseHeaders);
             return new WebResponse(wrd, response.getWebRequest().getUrl(),
                 response.getWebRequest().getHttpMethod(), response.getLoadTime());
         }
@@ -325,5 +332,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         FileUtils.copyURLToFile(indexResource, summary);
 
         LOG.info("Summary will be in " + summary.getAbsolutePath());
+    }
+
+    File getReportFolder() {
+        return reportFolder_;
     }
 }

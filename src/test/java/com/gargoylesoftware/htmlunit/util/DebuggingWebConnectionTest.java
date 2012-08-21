@@ -14,13 +14,21 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.zip.GZIPOutputStream;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
  * Tests for {@link DebuggingWebConnection}.
@@ -78,5 +86,33 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
         assertEquals(".xml", DebuggingWebConnection.chooseExtension("text/xml"));
 
         assertEquals(".txt", DebuggingWebConnection.chooseExtension("text/plain"));
+    }
+
+    /**
+     * Ensures that Content-Encoding headers are removed when JavaScript is uncompressed.
+     * (was causing java.io.IOException: Not in GZIP format as of HtmlUnit-2.10).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void gzip() throws Exception {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final GZIPOutputStream gzipOutputStream = new GZIPOutputStream(baos);
+        IOUtils.write("alert(1)", gzipOutputStream, "UTF-8");
+        gzipOutputStream.close();
+
+        final MockWebConnection mockConnection = new MockWebConnection();
+        final List<? extends NameValuePair> responseHeaders = Arrays.asList(
+            new NameValuePair("Content-Encoding", "gzip"));
+        mockConnection.setResponse(getDefaultUrl(), baos.toByteArray(), 200, "OK", "application/javascript",
+            responseHeaders);
+
+        final String dirName = "test-" + getClass().getSimpleName();
+        final DebuggingWebConnection dwc = new DebuggingWebConnection(mockConnection, dirName);
+
+        final WebRequest request = new WebRequest(getDefaultUrl());
+        final WebResponse response = dwc.getResponse(request); // was throwing here
+        assertNull(response.getResponseHeaderValue("Content-Encoding"));
+
+        FileUtils.deleteDirectory(dwc.getReportFolder());
     }
 }
