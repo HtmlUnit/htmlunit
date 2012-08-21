@@ -238,8 +238,11 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
     /**
      * If a reference has been hold on a page and the page is not
-     * anymore the one contained in "its" window, JavaScript execution should
-     * work... a bit
+     * anymore the one contained in "its" window, JavaScript should not be executed.
+     * Up to HtmlUnit-2.10 it could work a little bit without any guarantee but this
+     * has been removed to fix a problem where background JS tasks were still executed
+     * once a page has been unloaded
+     * (see {@link com.gargoylesoftware.htmlunit.javascript.host.WindowConcurrencyTest#cleanSetTimeout}).
      * @throws Exception if the test fails
      */
     @Test
@@ -269,11 +272,15 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final HtmlPage page = client.getPage(URL_FIRST);
         final HtmlElement div = page.getHtmlElementById("testdiv");
 
-        page.getAnchors().get(0).click();
-        // ignore response, and click in the page again
         div.click();
-
         assertEquals(expectedAlerts, collectedAlerts);
+        collectedAlerts.clear();
+
+        page.getAnchors().get(0).click();
+
+        // ignore response, and click in the page again that is not "active" anymore
+        div.click();
+        assertEquals(Collections.emptyList(), collectedAlerts);
     }
 
     /**
