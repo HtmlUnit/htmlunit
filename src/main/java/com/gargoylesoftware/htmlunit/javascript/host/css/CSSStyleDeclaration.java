@@ -42,6 +42,7 @@ import org.w3c.css.sac.InputSource;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -631,6 +632,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     protected Map<String, StyleElement> getStyleMap() {
         final Map<String, StyleElement> styleMap = new LinkedHashMap<String, StyleElement>();
         final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == styleAttribute || DomElement.ATTRIBUTE_VALUE_EMPTY == styleAttribute) {
+            return styleMap;
+        }
+
         for (final String token : StringUtils.split(styleAttribute, ';')) {
             final int index = token.indexOf(":");
             if (index != -1) {
