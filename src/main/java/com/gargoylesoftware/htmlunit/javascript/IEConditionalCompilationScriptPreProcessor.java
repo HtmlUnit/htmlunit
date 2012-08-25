@@ -232,16 +232,17 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
     private static int indexOf(final String sourceCode, final String str, final int fromIndex) {
         PARSING_STATUS parsingStatus = PARSING_STATUS.NORMAL;
         char stringChar = 0;
-        for (int i = 0; i < sourceCode.length(); i++) {
+        final int sourceCodeLength = sourceCode.length();
+        for (int i = 0; i < sourceCodeLength; i++) {
             if ((parsingStatus == PARSING_STATUS.NORMAL || parsingStatus == PARSING_STATUS.IN_MULTI_LINE_COMMENT)
-                    && i >= fromIndex && i + str.length() <= sourceCode.length()
+                    && i >= fromIndex && i + str.length() <= sourceCodeLength
                     && sourceCode.substring(i, i + str.length()).equals(str)) {
                 return i;
             }
             final char ch = sourceCode.charAt(i);
             switch (ch) {
                 case '/':
-                    if (parsingStatus == PARSING_STATUS.NORMAL && i + 1 < sourceCode.length()) {
+                    if (parsingStatus == PARSING_STATUS.NORMAL && i <= sourceCodeLength) {
                         final char nextCh = sourceCode.charAt(i + 1);
                         if (nextCh == '/') {
                             parsingStatus = PARSING_STATUS.IN_SINGLE_LINE_COMMENT;
@@ -261,7 +262,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
                     break;
 
                 case '*':
-                    if (parsingStatus == PARSING_STATUS.IN_MULTI_LINE_COMMENT && i + 1 < sourceCode.length()) {
+                    if (parsingStatus == PARSING_STATUS.IN_MULTI_LINE_COMMENT && i <= sourceCodeLength) {
                         final char nextCh = sourceCode.charAt(i + 1);
                         if (nextCh == '/') {
                             parsingStatus = PARSING_STATUS.NORMAL;
@@ -289,7 +290,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
 
                 case '\\':
                     if (parsingStatus == PARSING_STATUS.IN_STRING) {
-                        if (i + 3 < sourceCode.length() && sourceCode.charAt(i + 1) == 'x') {
+                        if (i + 3 < sourceCodeLength && sourceCode.charAt(i + 1) == 'x') {
                             final char ch1 = Character.toUpperCase(sourceCode.charAt(i + 2));
                             final char ch2 = Character.toUpperCase(sourceCode.charAt(i + 3));
                             if ((ch1 >= '0' && ch1 <= '9' || ch1 >= 'A' && ch1 <= 'F')
@@ -301,7 +302,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
                                 }
                             }
                         }
-                        else if (i + 1 < sourceCode.length()) {
+                        else if (i <= sourceCodeLength) {
                             i++;
                             continue;
                         }

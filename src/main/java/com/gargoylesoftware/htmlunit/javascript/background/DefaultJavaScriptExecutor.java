@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.background;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -53,7 +53,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
      * @param webClient the provided webClient
      */
     public DefaultJavaScriptExecutor(final WebClient webClient) {
-        jobManagerList_ = new ArrayList<WeakReference<JavaScriptJobManager>>();
+        jobManagerList_ = new LinkedList<WeakReference<JavaScriptJobManager>>();
         webClient_ = new WeakReference<WebClient>(webClient);
     }
 
