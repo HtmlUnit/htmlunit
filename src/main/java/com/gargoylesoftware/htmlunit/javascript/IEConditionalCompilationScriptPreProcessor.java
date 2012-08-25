@@ -242,7 +242,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
             final char ch = sourceCode.charAt(i);
             switch (ch) {
                 case '/':
-                    if (parsingStatus == PARSING_STATUS.NORMAL && i <= sourceCodeLength) {
+                    if (parsingStatus == PARSING_STATUS.NORMAL && (i + 1 < sourceCodeLength)) {
                         final char nextCh = sourceCode.charAt(i + 1);
                         if (nextCh == '/') {
                             parsingStatus = PARSING_STATUS.IN_SINGLE_LINE_COMMENT;
@@ -262,7 +262,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
                     break;
 
                 case '*':
-                    if (parsingStatus == PARSING_STATUS.IN_MULTI_LINE_COMMENT && i <= sourceCodeLength) {
+                    if (parsingStatus == PARSING_STATUS.IN_MULTI_LINE_COMMENT && i + 1 < sourceCodeLength) {
                         final char nextCh = sourceCode.charAt(i + 1);
                         if (nextCh == '/') {
                             parsingStatus = PARSING_STATUS.NORMAL;
@@ -302,7 +302,7 @@ public class IEConditionalCompilationScriptPreProcessor implements ScriptPreProc
                                 }
                             }
                         }
-                        else if (i <= sourceCodeLength) {
+                        else if (i + 1 < sourceCodeLength) {
                             i++;
                             continue;
                         }
