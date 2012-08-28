@@ -1582,11 +1582,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Lifecycle method to support special processing for js method importNode.
-     * @see com.gargoylesoftware.htmlunit.javascript.host.Document#jsxFunction_importNode(
+     * @param doc the import target document
+     * @see Document#jsxFunction_importNode(
      *             com.gargoylesoftware.htmlunit.javascript.host.Node, boolean)
-     * @see HtmlScript#processImportNode()
+     * @see HtmlScript#processImportNode(Document)
      */
-    public void processImportNode() {
+    public void processImportNode(final com.gargoylesoftware.htmlunit.javascript.host.Document doc) {
         // empty default impl
     }
 }

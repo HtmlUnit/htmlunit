@@ -259,9 +259,9 @@ public class Document extends EventNode {
     public Object jsxFunction_importNode(final Node importedNode, final boolean deep) {
         DomNode domNode = importedNode.getDomNodeOrDie();
         domNode = domNode.cloneNode(deep);
-        domNode.processImportNode();
-        for (final DomNode childNode : domNode.getChildren()) {
-            childNode.processImportNode();
+        domNode.processImportNode(this);
+        for (final DomNode childNode : domNode.getDescendants()) {
+            childNode.processImportNode(this);
         }
         return domNode.getScriptObject();
     }

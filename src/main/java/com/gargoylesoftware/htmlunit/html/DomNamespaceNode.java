@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
+import com.gargoylesoftware.htmlunit.javascript.host.Document;
 
 /**
  * Intermediate base class for DOM Nodes that have namespaces. That includes HtmlElement and HtmlAttr.
@@ -27,7 +28,7 @@ import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
  */
 public abstract class DomNamespaceNode extends DomNode {
 
-    private final String namespaceURI_;
+    private String namespaceURI_;
     private String qualifiedName_;
     private final String localName_;
     private String prefix_;
@@ -102,5 +103,23 @@ public abstract class DomNamespaceNode extends DomNode {
      */
     public String getQualifiedName() {
         return qualifiedName_;
+    }
+
+   /**
+    * {@inheritDoc}
+    */
+    @Override
+    public void processImportNode(final Document doc) {
+        super.processImportNode(doc);
+
+        // if we importing from an namespace aware source
+        // we have to drop the XHtmlNamespace because we did this already
+        // for the html document itself
+        final SgmlPage page = (SgmlPage) doc.getDomNodeOrDie();
+        if (page instanceof HtmlPage && !(page instanceof XHtmlPage)) {
+            if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI_)) {
+                namespaceURI_ = null;
+            }
+        }
     }
 }

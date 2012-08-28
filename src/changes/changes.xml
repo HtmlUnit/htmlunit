@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
+            <action type="fix" dev="rbri" issue="3560821">
+                JavaScript: fixed namespace handling when nodes imported from an xml document via document.importNode().
+            </action>
             <action type="fix" dev="mguillem">
                 DebuggingWebConnection: fixed IOException occurring while working with gzip encoded JavaScript responses.
             </action>

@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
+import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -578,14 +579,16 @@ public class HtmlScript extends HtmlElement {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Resets the executed flag.
-     * @see HtmlScript#processImportNode()
+     * @see HtmlScript#processImportNode(Document)
      */
     public void resetExecuted() {
         executed_ = false;
     }
 
     @Override
-    public void processImportNode() {
+    public void processImportNode(final Document doc) {
+        super.processImportNode(doc);
+
         executed_ = true;
     }
 

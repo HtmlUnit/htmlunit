@@ -18,11 +18,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -172,7 +171,6 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Browsers(Browser.FF)
     @Alerts({"parent", "child" })
-    @NotYetImplemented
     public void importNodeWithNamespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse(
@@ -203,7 +201,50 @@ public class Document2Test extends WebDriverTestCase {
             + "  <div id='parent'></div>\n"
             + "</body></html>\n";
 
-        loadPageWithAlerts2(html);
-        Thread.sleep(1000);
+        loadPageWithAlerts2(html, 200);
+    }
+
+    /**
+     * Test for issue 3560821.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({"parent", "child", "child3" })
+    public void importNodesWithNamespace() throws Exception {
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setDefaultResponse(
+                "<?xml version=\"1.0\"?><html xmlns=\"http://www.w3.org/1999/xhtml\">"
+                + "<div id='child'><div id='child2'><div id='child3'>-</div></div></div></html>",
+                200, "OK", "text/xml");
+
+        final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>"
+            + "<head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "   var xmlhttp = new XMLHttpRequest();\n"
+            + "   xmlhttp.open(\"GET\",\"content.xhtml\",true);\n"
+            + "   xmlhttp.send();\n"
+            + "   xmlhttp.onreadystatechange = function() {\n"
+            + "     if (xmlhttp.readyState==4 && xmlhttp.status==200) {\n"
+            + "       var child = document.importNode(xmlhttp.responseXML.getElementById(\"child\"), true);\n"
+            + "       document.getElementById(\"parent\").appendChild(child);\n"
+            + "       var found = document.evaluate(\"//div[@id='parent']\", document, null,"
+            +                       "XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
+            + "       alert(found.singleNodeValue.id);\n"
+            + "       found = document.evaluate(\"//div[@id='child']\", document, null,"
+            +                       "XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
+            + "       alert(found.singleNodeValue.id);\n"
+            + "       found = document.evaluate(\"//div[@id='child3']\", document, null,"
+            +                       "XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
+            + "       alert(found.singleNodeValue.id);\n"
+            + "     }\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'></div>\n"
+            + "</body></html>\n";
+
+        loadPageWithAlerts2(html, 200);
     }
 }
