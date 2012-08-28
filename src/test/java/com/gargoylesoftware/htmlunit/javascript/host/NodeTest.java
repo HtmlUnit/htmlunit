@@ -896,7 +896,6 @@ public class NodeTest extends WebDriverTestCase {
     @Alerts({"parent", "child" })
     @NotYetImplemented
     public void appendChildWithNamespace() throws Exception {
-
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse(
                 "<?xml version=\"1.0\"?><html xmlns=\"http://www.w3.org/1999/xhtml\"><div id='child'> </div></html>",
