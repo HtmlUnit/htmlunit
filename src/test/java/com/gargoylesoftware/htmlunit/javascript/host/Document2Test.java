@@ -18,9 +18,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -124,5 +126,84 @@ public class Document2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "div1", "null", "2", "1" })
+    @Browsers(Browser.FF)
+    public void importNode_deep() throws Exception {
+        importNode(true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "div1", "null", "0" })
+    @Browsers(Browser.FF)
+    public void importNode_notDeep() throws Exception {
+        importNode(false);
+    }
+
+    private void importNode(final boolean deep) throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var node = document.importNode(document.getElementById('div1'), " + deep + ");\n"
+            + "    alert(node.id);\n"
+            + "    alert(node.parentNode);\n"
+            + "    alert(node.childNodes.length);\n"
+            + "    if (node.childNodes.length != 0)\n"
+            + "      alert(node.childNodes[0].childNodes.length);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='div1'><div id='div1_1'><div id='div1_1_1'></div></div><div id='div1_2'></div></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for issue 3560821.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(Browser.FF)
+    @Alerts({"parent", "child" })
+    @NotYetImplemented
+    public void importNodeWithNamespace() throws Exception {
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setDefaultResponse(
+                "<?xml version=\"1.0\"?><html xmlns=\"http://www.w3.org/1999/xhtml\"><div id='child'> </div></html>",
+                200, "OK", "text/xml");
+
+        final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>"
+            + "<head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "   var xmlhttp = new XMLHttpRequest();\n"
+            + "   xmlhttp.open(\"GET\",\"content.xhtml\",true);\n"
+            + "   xmlhttp.send();\n"
+            + "   xmlhttp.onreadystatechange = function() {\n"
+            + "     if (xmlhttp.readyState==4 && xmlhttp.status==200) {\n"
+            + "       var child = document.importNode(xmlhttp.responseXML.getElementById(\"child\"), true);\n"
+            + "       document.getElementById(\"parent\").appendChild(child);\n"
+            + "       var found = document.evaluate(\"//div[@id='parent']\", document, null,"
+            +                       "XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
+            + "       alert(found.singleNodeValue.id);\n"
+            + "       found = document.evaluate(\"//div[@id='child']\", document, null,"
+            +                       "XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
+            + "       alert(found.singleNodeValue.id);\n"
+            + "     }\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='parent'></div>\n"
+            + "</body></html>\n";
+
+        loadPageWithAlerts2(html);
+        Thread.sleep(1000);
     }
 }

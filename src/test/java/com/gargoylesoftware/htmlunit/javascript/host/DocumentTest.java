@@ -2095,43 +2095,6 @@ public class DocumentTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "div1", "null", "2", "1" })
-    @Browsers(Browser.FF)
-    public void importNode_deep() throws Exception {
-        importNode(true);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "div1", "null", "0" })
-    @Browsers(Browser.FF)
-    public void importNode_notDeep() throws Exception {
-        importNode(false);
-    }
-
-    private void importNode(final boolean deep) throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var node = document.importNode(document.getElementById('div1'), " + deep + ");\n"
-            + "    alert(node.id);\n"
-            + "    alert(node.parentNode);\n"
-            + "    alert(node.childNodes.length);\n"
-            + "    if (node.childNodes.length != 0)\n"
-            + "      alert(node.childNodes[0].childNodes.length);\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "  <div id='div1'><div id='div1_1'><div id='div1_1_1'></div></div><div id='div1_2'></div></div>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * Verifies that HtmlUnit behaves correctly when a document is missing the <tt>body</tt> tag (it
      * needs to be added once the document has finished loading).
      *
