@@ -96,6 +96,7 @@ public class RegExpJsToJavaConverter {
          *
          * @return tape content
          */
+        @Override
         public String toString() {
             return tape_.toString();
         }
