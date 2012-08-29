@@ -40,6 +40,7 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         final String s = (String) super.call(cx, scope, thisObj, args);
 
