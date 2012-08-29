@@ -311,6 +311,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * Gets the "backgroundPosition" style attribute.
      * @return the style attribute
      */
+    @Override
     public String jsxGet_backgroundPosition() {
         String bg = super.jsxGet_backgroundPosition();
         if (StringUtils.isNotBlank(bg)) {

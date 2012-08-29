@@ -70,6 +70,7 @@ public class StyleSheetList extends SimpleScriptable {
         final boolean cssEnabled = getWindow().getWebWindow().getWebClient().getOptions().isCssEnabled();
         if (cssEnabled) {
             nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true, "stylesheets") {
+                @Override
                 protected boolean isMatching(final DomNode node) {
                     return node instanceof HtmlStyle
                         || (node instanceof HtmlLink
