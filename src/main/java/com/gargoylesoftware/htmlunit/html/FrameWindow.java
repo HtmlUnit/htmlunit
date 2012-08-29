@@ -98,6 +98,7 @@ public class FrameWindow extends WebWindowImpl {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setEnclosedPage(final Page page) {
         super.setEnclosedPage(page);
 

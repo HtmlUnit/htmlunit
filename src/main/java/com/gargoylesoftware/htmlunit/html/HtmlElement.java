@@ -1521,6 +1521,7 @@ public abstract class HtmlElement extends DomElement {
      * @param selectors one or more CSS selectors separated by commas
      * @return list of all found nodes
      */
+    @Override
     public DomNodeList<DomNode> querySelectorAll(final String selectors) {
         return super.querySelectorAll(selectors);
     }
@@ -1530,6 +1531,7 @@ public abstract class HtmlElement extends DomElement {
      * @param selectors one or more CSS selectors separated by commas
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
+    @Override
     public DomNode querySelector(final String selectors) {
         return super.querySelector(selectors);
     }

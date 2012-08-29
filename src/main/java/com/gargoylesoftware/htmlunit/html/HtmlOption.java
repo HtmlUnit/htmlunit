@@ -340,6 +340,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     /**
      * {@inheritDoc}
      */
+    @Override
     protected DomNode getEventTargetElement() {
         final HtmlSelect select = getEnclosingSelect();
         if (select != null) {
