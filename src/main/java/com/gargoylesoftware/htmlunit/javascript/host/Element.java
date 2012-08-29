@@ -54,6 +54,7 @@ public class Element extends EventNode {
         final boolean attributeChangeSensitive = expression.contains("@");
         final String description = "Element.selectNodes('" + expression + "')";
         final HTMLCollection collection = new HTMLCollection(domNode, attributeChangeSensitive, description) {
+            @Override
             protected List<Object> computeElements() {
                 final List<Object> list = new ArrayList<Object>(domNode.getByXPath(expression));
                 return list;
@@ -89,6 +90,7 @@ public class Element extends EventNode {
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.attributes">Gecko DOM Reference</a>
      * @return the attributes of this XML element
      */
+    @Override
     public Object jsxGet_attributes() {
         if (attributes_ == null) {
             attributes_ = createAttributesObject();
@@ -189,6 +191,7 @@ public class Element extends EventNode {
         final String description = "Element.getElementsByTagName('" + tagNameLC + "')";
         if ("*".equals(tagName)) {
             collection = new HTMLCollection(node, false, description) {
+                @Override
                 protected boolean isMatching(final DomNode node) {
                     return true;
                 }
@@ -196,6 +199,7 @@ public class Element extends EventNode {
         }
         else {
             collection = new HTMLCollection(node, false, description) {
+                @Override
                 protected boolean isMatching(final DomNode node) {
                     return tagNameLC.equalsIgnoreCase(node.getNodeName());
                 }
@@ -424,6 +428,7 @@ public class Element extends EventNode {
     public HTMLCollection jsxGet_children() {
         final DomElement node = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(node, false, "Element.children") {
+            @Override
             protected List<Object> computeElements() {
                 return new ArrayList<Object>(node.getChildNodes());
             }
