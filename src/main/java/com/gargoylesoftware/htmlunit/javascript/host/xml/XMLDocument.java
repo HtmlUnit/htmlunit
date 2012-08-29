@@ -262,6 +262,7 @@ public class XMLDocument extends Document {
         final SgmlPage page = getPage();
         final HTMLCollection collection = new HTMLCollection(page.getDocumentElement(),
                 attributeChangeSensitive, description) {
+            @Override
             protected List<Object> computeElements() {
                 final List<Object> list = new ArrayList<Object>(page.getByXPath(expression));
                 return list;
@@ -296,6 +297,7 @@ public class XMLDocument extends Document {
 
         final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false,
                 "XMLDocument.getElementsByTagName") {
+            @Override
             protected boolean isMatching(final DomNode node) {
                 return node.getNodeName().equals(tagName);
             }
