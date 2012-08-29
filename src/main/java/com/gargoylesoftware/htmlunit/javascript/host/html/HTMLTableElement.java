@@ -239,6 +239,7 @@ public class HTMLTableElement extends RowContainer {
      * @param row the row to test
      * @return <code>true</code> if it belongs to this container
      */
+    @Override
     protected boolean isContainedRow(final HtmlTableRow row) {
         final DomNode parent = row.getParentNode(); // the tbody, thead or tfoo
         return (parent != null) && parent.getParentNode() == getDomNodeOrDie();

@@ -156,6 +156,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param childObject the node to add to this node
      * @return the newly added child node
      */
+    @Override
     public Object jsxFunction_appendChild(final Object childObject) {
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION)) {
@@ -178,6 +179,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param args the arguments
      * @return the newly added child node
      */
+    @Override
     protected Object jsxFunction_insertBefore(final Object[] args) {
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION)) {

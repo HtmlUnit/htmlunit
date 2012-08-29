@@ -774,6 +774,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
 
         final HTMLCollection collection = new HTMLCollection(elt, true, description) {
+            @Override
             protected boolean isMatching(final DomNode node) {
                 if (!(node instanceof HtmlElement)) {
                     return false;
@@ -2686,6 +2687,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Gets the token list of class attribute.
      * @return the token list of class attribute
      */
+    @Override
     public DOMTokenList jsxGet_classList() {
         return new DOMTokenList(this, "class");
     }

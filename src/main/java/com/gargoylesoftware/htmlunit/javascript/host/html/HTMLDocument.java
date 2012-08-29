@@ -1101,6 +1101,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 return new ArrayList<Object>(page.getElementsByName(expElementName));
             }
 
+            @Override
             protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
                 if ("name".equals(event.getName())) {
                     return EffectOnCache.RESET;
@@ -1822,6 +1823,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     /**
      * {@inheritDoc}
      */
+    @Override
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
         if (domNode instanceof DomDocumentType
                 && getBrowserVersion().hasFeature(BrowserVersionFeatures.DOCTYPE_IS_COMMENT)) {

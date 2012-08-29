@@ -127,6 +127,7 @@ public class HTMLCollection extends NodeList {
      * Returns the elements whose associated host objects are available through this collection.
      * @return the elements whose associated host objects are available through this collection
      */
+    @Override
     protected List<Object> computeElements() {
         final List<Object> response = new ArrayList<Object>();
         final DomNode domNode = getDomNodeOrNull();
@@ -149,6 +150,7 @@ public class HTMLCollection extends NodeList {
      * Default implementation looks at all descendants of reference node.
      * @return the nodes
      */
+    @Override
     protected Iterable<DomNode> getCandidates() {
         final DomNode domNode = getDomNodeOrNull();
         return domNode.getDescendants();
@@ -160,6 +162,7 @@ public class HTMLCollection extends NodeList {
      * @param node the node to test. Will be a child node of the reference node.
      * @return <code>false</code> here as subclasses for concrete collections should decide it.
      */
+    @Override
     protected boolean isMatching(final DomNode node) {
         return false;
     }
@@ -409,6 +412,7 @@ public class HTMLCollection extends NodeList {
      * @param idList the list to add the ids to
      * @param elements the collection's elements
      */
+    @Override
     protected void addElementIds(final List<String> idList, final List<Object> elements) {
         int index = 0;
         for (final Object next : elements) {
@@ -433,6 +437,7 @@ public class HTMLCollection extends NodeList {
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getLength() {
         return jsxGet_length();
     }
@@ -442,6 +447,7 @@ public class HTMLCollection extends NodeList {
      * @param object the object for which to get the scriptable
      * @return the scriptable
      */
+    @Override
     protected Scriptable getScriptableForElement(final Object object) {
         if (object instanceof Scriptable) {
             return (Scriptable) object;
