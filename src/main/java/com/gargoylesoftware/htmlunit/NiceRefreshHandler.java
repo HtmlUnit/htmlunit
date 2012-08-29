@@ -49,6 +49,7 @@ public class NiceRefreshHandler extends ImmediateRefreshHandler {
      * @param requestedWait the number of seconds to wait before reloading the page
      * @throws IOException if the refresh fails
      */
+    @Override
     public void handleRefresh(final Page page, final URL url, final int requestedWait) throws IOException {
         if (requestedWait > maxDelay_) {
             return;

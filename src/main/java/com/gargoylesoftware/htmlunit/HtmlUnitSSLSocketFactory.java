@@ -124,6 +124,7 @@ class HtmlUnitSSLSocketFactory extends SSLSocketFactory {
      * {@inheritDoc}
      * @throws IOException
      */
+    @Override
     public Socket createSocket(final HttpParams params) throws IOException {
         if (SocksSocketFactory.getSocksProxy(params) != null) {
             // we create the socket in connectSocket has we need to know the destination to open the underlying request

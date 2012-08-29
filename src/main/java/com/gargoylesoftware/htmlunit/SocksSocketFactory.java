@@ -50,6 +50,7 @@ class SocksSocketFactory extends PlainSocketFactory {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Socket createSocket(final HttpParams params) {
         final HttpHost socksProxy = getSocksProxy(params);
         if (socksProxy != null) {

@@ -546,6 +546,7 @@ public class HttpWebConnection implements WebConnection {
         httpClient.setCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
 
         httpClient.setRedirectStrategy(new DefaultRedirectStrategy() {
+            @Override
             public boolean isRedirected(final HttpRequest request, final HttpResponse response,
                     final HttpContext context) throws ProtocolException {
                 return super.isRedirected(request, response, context)

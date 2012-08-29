@@ -225,6 +225,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             return new UsernamePasswordCredentials(username_, password_);
         }
 
+        @Override
         public String toString() {
             return getInstance().toString();
         }
@@ -251,6 +252,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             return new NTCredentials(username_, password_, workstation_, domain_);
         }
 
+        @Override
         public String toString() {
             return getInstance().toString();
         }
