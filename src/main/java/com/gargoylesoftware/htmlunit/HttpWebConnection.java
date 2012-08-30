@@ -61,7 +61,7 @@ import org.apache.http.client.methods.HttpTrace;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.HttpClientParams;
-import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.client.utils.URIUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.conn.scheme.Scheme;
@@ -226,6 +226,7 @@ public class HttpWebConnection implements WebConnection {
      * @throws IOException
      * @throws URISyntaxException
      */
+    @SuppressWarnings("deprecation")
     private HttpUriRequest makeHttpMethod(final WebRequest webRequest)
         throws IOException, URISyntaxException {
 
@@ -234,15 +235,12 @@ public class HttpWebConnection implements WebConnection {
         // handing things over the HttpClient, and HttpClient will blow up if we leave these Unicode
         // chars in the URL.
         final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false);
-        final URIBuilder uriBuilder = new URIBuilder()
-            .setScheme(url.getProtocol())
-            .setHost(url.getHost())
-            .setPort(url.getPort())
-            .setPath(url.getPath())
-            .setQuery(url.getQuery());
 
         final String charset = webRequest.getCharset();
-        URI uri = uriBuilder.build();
+        // URIUtils.createURI is deprecated but as of httpclient-4.2.1, URIBuilder doesn't work here as it encodes path
+        // what shouldn't happen here
+        URI uri = URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(),
+                url.getQuery(), null);
         final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
         if (!(httpMethod instanceof HttpEntityEnclosingRequest)) {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
@@ -250,8 +248,7 @@ public class HttpWebConnection implements WebConnection {
                 final List<NameValuePair> pairs = webRequest.getRequestParameters();
                 final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
                 final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
-                uriBuilder.setQuery(query);
-                uri = uriBuilder.build();
+                uri = URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(), query, null);
                 httpMethod.setURI(uri);
             }
         }

@@ -395,4 +395,22 @@ public class WebClient3Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(URL_FIRST, 42);
     }
+
+    /**
+     * This test was failing due to a change made in revision 7104 (not in any release)
+     * that was transforming %20 into %2520.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("hello")
+    public void urlEncodingPercent20() throws Exception {
+        final String html = "<html><body>"
+                + "<script src='a%20b.js'></script>"
+                + "</body></html>";
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(new URL(getDefaultUrl() + "a%20b.js"), "alert('hello');", "text/javascript");
+
+        loadPageWithAlerts2(html);
+    }
 }
