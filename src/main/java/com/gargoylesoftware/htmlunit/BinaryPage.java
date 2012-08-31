@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -22,6 +23,7 @@ import java.net.URL;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class BinaryPage implements Page {
 
@@ -56,8 +58,9 @@ public class BinaryPage implements Page {
      * Returns an input stream representing all the content that was returned from the server.
      *
      * @return an input stream representing all the content that was returned from the server
+     * @throws IOException in case of IO problems
      */
-    public InputStream getInputStream() {
+    public InputStream getInputStream() throws IOException {
         return webResponse_.getContentAsStream();
     }
 

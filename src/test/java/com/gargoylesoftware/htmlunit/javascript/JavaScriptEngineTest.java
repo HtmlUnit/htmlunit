@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.io.ByteArrayOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.zip.GZIPOutputStream;
 
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -45,9 +47,9 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -72,6 +74,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Chris Erskine
  * @author David K. Taylor
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class JavaScriptEngineTest extends SimpleWebTestCase {
@@ -481,6 +484,69 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         assertNotNull(htmlScript2);
         assertEquals(expectedAlerts, collectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("gZip")
+    public void externalScriptGZipEncoded() throws Exception {
+        final MockWebConnection webConnection = getMockWebConnection();
+
+        final String jsContent = "function doTest() { alert('gZip'); }";
+        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        final GZIPOutputStream gzipper = new GZIPOutputStream(bytes);
+        gzipper.write(jsContent.getBytes("ASCII"));
+        gzipper.close();
+
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
+        webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
+                bytes.toByteArray(), 200, "OK", "text/javascript", headers);
+
+        final String htmlContent
+            = "<html><head>\n"
+            + "<title>foo</title>\n"
+            + "<script src='/foo.js'></script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(htmlContent);
+    }
+
+    /**
+     * Test for a javascript which points to a broken gzip encoded file (bug 3563712).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void externalScriptBrokenGZipEncoded() throws Exception {
+        final MockWebConnection webConnection = getMockWebConnection();
+
+        final String jsContent = "function doTest() { alert('gZip'); }";
+        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bytes.write(jsContent.getBytes("ASCII"));
+        bytes.close();
+
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
+        webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
+                bytes.toByteArray(), 200, "OK", "text/javascript", headers);
+
+        final String htmlContent
+            = "<html><head>\n"
+            + "<title>foo</title>\n"
+            + "<script src='/foo.js'></script>\n"
+            + "</head><body onload='doTest();alert(\"done\");'>\n"
+            + "</body></html>";
+
+        try {
+            loadPageWithAlerts(htmlContent);
+            Assert.fail("ScriptException expected");
+        }
+        catch (final ScriptException e) {
+            // expected
+        }
     }
 
     /**

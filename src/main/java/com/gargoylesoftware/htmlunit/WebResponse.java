@@ -198,12 +198,12 @@ public class WebResponse implements Serializable {
      * @return the response content as a string
      */
     public String getContentAsString(final String encoding) {
-        final InputStream in = responseData_.getInputStream();
-        if (null == in) {
-            return null;
-        }
-
         try {
+            final InputStream in = responseData_.getInputStream();
+            if (null == in) {
+                return null;
+            }
+
             // first verify the charset because we can't read the
             // input stream twice
             try {
@@ -226,8 +226,9 @@ public class WebResponse implements Serializable {
     /**
      * Returns the response content as an input stream.
      * @return the response content as an input stream
+     * @throws IOException in case of IOProblems
      */
-    public InputStream getContentAsStream() {
+    public InputStream getContentAsStream() throws IOException {
         return responseData_.getInputStream();
     }
 

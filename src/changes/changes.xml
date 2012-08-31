@@ -8,6 +8,13 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
+            <action type="fix" dev="rbri" issue="3563712">
+                NPE after decoding/uncompressing of external javascript failed.
+            </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: WebResponseDate.getInputStream(), BinaryPage.getInputStream(), UnexpectedPage.getInputStream(),
+                WebResponse.getContentAsStream(), and WebResponseWrapper.getContentAsStream() are throwing an IOException now.
+            </action>
             <action type="fix" dev="rbri" issue="3560821">
                 JavaScript: fixed namespace handling when nodes imported from an xml document via document.importNode().
             </action>

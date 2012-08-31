@@ -1141,13 +1141,16 @@ public class HtmlPage extends SgmlPage {
         }
 
         final String scriptCode = response.getContentAsString(scriptEncoding);
-        final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
-        final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
-        if (script != null) {
-            cache.cacheIfPossible(request, response, script);
-        }
+        if (null != scriptCode) {
+            final JavaScriptEngine javaScriptEngine = client.getJavaScriptEngine();
+            final Script script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
+            if (script != null) {
+                cache.cacheIfPossible(request, response, script);
+            }
 
-        return script;
+            return script;
+        }
+        return null;
     }
 
     /**

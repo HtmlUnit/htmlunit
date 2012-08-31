@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Brad Clarke
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class WebResponseData implements Serializable {
 
@@ -121,14 +122,10 @@ public class WebResponseData implements Serializable {
     /**
      * Returns a new {@link InputStream} allowing to read the downloaded content.
      * @return the associated InputStream
+     * @throws IOException in case of IO problems
      */
-    public InputStream getInputStream() {
-        try {
-            return getStream(downloadedContent_.getInputStream(), getResponseHeaders());
-        }
-        catch (final IOException e) {
-            throw new RuntimeException(e); // in fact getInputStream should probably have throw declaration
-        }
+    public InputStream getInputStream() throws IOException {
+        return getStream(downloadedContent_.getInputStream(), getResponseHeaders());
     }
 
     /**

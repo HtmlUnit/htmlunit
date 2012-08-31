@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class WebResponseWrapper extends WebResponse {
 
@@ -52,7 +54,7 @@ public class WebResponseWrapper extends WebResponse {
      * The default behavior of this method is to return getContentAsStream() on the wrapped webResponse object.
      */
     @Override
-    public InputStream getContentAsStream() {
+    public InputStream getContentAsStream() throws IOException {
         return wrappedWebResponse_.getContentAsStream();
     }
 
