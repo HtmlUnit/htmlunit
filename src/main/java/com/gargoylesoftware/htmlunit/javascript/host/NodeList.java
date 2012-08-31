@@ -25,7 +25,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.w3c.dom.Node;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -429,7 +428,8 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
             return true;
         }
         if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_49)) {
-            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_3_6);
+            final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
+                    .getJavaScriptEngine().getJavaScriptConfiguration();
             for (final String functionName : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 if (name.equals(functionName)) {
                     return true;
@@ -461,7 +461,8 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
             }
 
             idList.add("length");
-            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_3_6);
+            final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
+                    .getJavaScriptEngine().getJavaScriptConfiguration();
             for (final String name : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 idList.add(name);
             }

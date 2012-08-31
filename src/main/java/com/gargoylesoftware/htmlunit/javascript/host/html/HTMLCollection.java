@@ -22,7 +22,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -358,7 +357,8 @@ public class HTMLCollection extends NodeList {
             return true;
         }
         if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_49)) {
-            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_3_6);
+            final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
+                    .getJavaScriptEngine().getJavaScriptConfiguration();
             for (final String functionName : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 if (name.equals(functionName)) {
                     return true;
@@ -390,7 +390,8 @@ public class HTMLCollection extends NodeList {
             }
 
             idList.add("length");
-            final JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_3_6);
+            final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
+                .getJavaScriptEngine().getJavaScriptConfiguration();
             for (final String name : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
                 idList.add(name);
             }

@@ -495,8 +495,7 @@ class DefaultElementFactory implements ElementFactory {
         else {
             throw new IllegalStateException("Cannot find HtmlElement for " + qualifiedName);
         }
-        final JavaScriptConfiguration config =
-                JavaScriptConfiguration.getInstance(page.getWebClient().getBrowserVersion());
+        final JavaScriptConfiguration config = page.getWebClient().getJavaScriptEngine().getJavaScriptConfiguration();
         if (!"td".equals(tagName) && !"th".equals(tagName)
                 && checkBrowserCompatibility && config.getHtmlJavaScriptMapping().get(element.getClass()) == null) {
             return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);

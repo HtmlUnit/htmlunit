@@ -26,7 +26,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -229,8 +228,8 @@ public class ActiveXObject extends SimpleScriptable {
         addFunction(document, "selectSingleNode");
         addFunction(document, "setProperty");
 
-        final JavaScriptConfiguration jsConfig =
-            JavaScriptConfiguration.getInstance(BrowserVersion.INTERNET_EXPLORER_7);
+        final JavaScriptConfiguration jsConfig = enclosingWindow.getWebClient()
+            .getJavaScriptEngine().getJavaScriptConfiguration();
 
         for (String className = "Document"; StringUtils.isNotBlank(className);) {
             final ClassConfiguration classConfig = jsConfig.getClassConfiguration(className);

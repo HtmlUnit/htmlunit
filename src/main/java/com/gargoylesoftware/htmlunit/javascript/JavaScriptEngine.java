@@ -748,4 +748,12 @@ public class JavaScriptEngine {
     public Class<? extends SimpleScriptable> getJavaScriptClass(final Class<?> c) {
         return jsConfig_.getHtmlJavaScriptMapping().get(c);
     }
+
+    /**
+     * Gets the associated configuration.
+     * @return the configuration
+     */
+    public JavaScriptConfiguration getJavaScriptConfiguration() {
+        return jsConfig_;
+    }
 }
