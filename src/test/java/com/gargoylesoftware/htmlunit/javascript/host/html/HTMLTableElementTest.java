@@ -537,11 +537,21 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "no refresh function", IE = "refreshed")
     public void refresh() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "  function test() {\n"
-            + "    document.getElementById('myTable').refresh();\n"
+            + "    try {\n"
+            + "      if (document.getElementById('myTable').refresh) {\n"
+            + "        document.getElementById('myTable').refresh();\n"
+            + "        alert('refreshed');\n"
+            + "      } else {\n"
+            + "        alert('no refresh function');\n"
+            + "      }\n"
+            + "    } catch (e) {\n"
+            + "      alert('error');\n"
+            + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<table id='myTable'></table>\n"
