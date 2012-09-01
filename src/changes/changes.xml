@@ -8,8 +8,12 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
-            <action type="fix" dev="rbri" issue="3563712">
-                NPE after decoding/uncompressing of external javascript failed.
+            <action type="fix" dev="rbri">
+                JavaScript: HTMLTableElement.refresh is only available when simulation IE.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: HTMLTableElement.moveRow, HTMLTableSectionElement.moveRow, Tfoot.moveRow,
+                and THead.moveRow  are only available when simulation IE.
             </action>
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: WebResponseDate.getInputStream(), BinaryPage.getInputStream(), UnexpectedPage.getInputStream(),

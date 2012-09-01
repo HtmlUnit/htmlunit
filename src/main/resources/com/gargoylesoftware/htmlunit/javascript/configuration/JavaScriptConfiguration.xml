@@ -2404,6 +2404,7 @@
             <doclink
                 url="http://msdn2.microsoft.com/en-us/library/ms536687.aspx"
                 descr="MSDN documentation"/>
+            <browser name="Internet Explorer"/>
         </function>
     </class>
 
@@ -3038,7 +3039,9 @@
                 url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-39872903"
                 descr="W3C Document Object Model (DOM) Level 2"/>
         </function>
-        <function name="moveRow"/>
+        <function name="moveRow">
+            <browser name="Internet Explorer"/>
+        </function>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Screen" JSObject="true">
