@@ -276,13 +276,13 @@ public class CSSStyleSheet extends SimpleScriptable {
         }
         catch (final FailingHttpStatusCodeException e) {
             // Got a 404 response or something like that; behave nicely.
-            LOG.error(e.getMessage());
+            LOG.error("Exception loading " + url, e);
             final InputSource source = new InputSource(new StringReader(""));
             sheet = new CSSStyleSheet(element, source, uri);
         }
         catch (final IOException e) {
             // Got a basic IO error; behave nicely.
-            LOG.error(e.getMessage());
+            LOG.error("Exception loading " + url, e);
             final InputSource source = new InputSource(new StringReader(""));
             sheet = new CSSStyleSheet(element, source, uri);
         }
