@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 /**
  * Tests for SOCKS proxy support.
  * This test expects a SOCKS proxy to be available on port
- * {@link AbstractWebTestCase#SOCKS_PROXY_PORT} of {@link AbstractWebTestCase#SOCKS_PROXY_HOST}.
+ * {@link WebTestCase#SOCKS_PROXY_PORT} of {@link WebTestCase#SOCKS_PROXY_HOST}.
  *
  * @version $Revision$
  * @author Marc Guillemot

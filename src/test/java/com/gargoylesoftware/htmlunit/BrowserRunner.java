@@ -36,7 +36,7 @@ import org.junit.runners.Suite;
  * For example, write:
  * <pre>
  * &#064;RunWith(BrowserRunner.class)
- * public class SomeTest extends AbstractWebTestCase {
+ * public class SomeTest extends WebTestCase {
  *
  *    &#064;Test
  *    &#064;Browsers({Browser.FIREFOX_2})
@@ -175,7 +175,7 @@ public class BrowserRunner extends Suite {
 
         /**
          * Not Browser-specific, it will run only once. Don't use this with other Browsers.
-         * And don't call directly or indirectly {@link AbstractWebTestCase#getBrowserVersion()}
+         * And don't call directly or indirectly {@link WebTestCase#getBrowserVersion()}
          */
         NONE;
     }
