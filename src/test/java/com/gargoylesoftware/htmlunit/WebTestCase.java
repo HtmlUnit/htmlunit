@@ -72,7 +72,7 @@ public abstract class WebTestCase {
 
     /** The SOCKS proxy port to use for SOCKS proxy tests. */
     public static final int SOCKS_PROXY_PORT = Integer.parseInt(
-            System.getProperty("htmlunit.test.socksproxy.host", "55555"));
+            System.getProperty("htmlunit.test.socksproxy.port", "55555"));
 
     /** Constant for the URL which is used in the tests. */
     public static final URL URL_FIRST;
