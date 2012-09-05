@@ -15,9 +15,11 @@
 package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -314,4 +316,51 @@ public class WebClient4Test extends WebServerTestCase {
         }
     }
 
+    /**
+     * .
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testTimeout() throws Exception {
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
+        servlets.put("/*", DelayDeliverServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        client.getOptions().setTimeout(500);
+
+        try {
+            client.getPage(getDefaultUrl());
+            fail("timeout expected!");
+        }
+        catch (final SocketTimeoutException e) {
+            // as expected
+        }
+
+        // now configure higher timeout allowing to get the page
+        client.getOptions().setTimeout(5000);
+        client.getPage(getDefaultUrl());
+    }
+
+    /**
+     * Servlet for {@link #testTimeout()}.
+     */
+    public static class DelayDeliverServlet extends HttpServlet {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
+            try {
+                Thread.sleep(1000);
+            }
+            catch (final InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            res.setContentType("text/html");
+            final Writer writer = res.getWriter();
+            writer.write("<html><head><title>hello</title></head><body>foo</body></html>");
+            writer.close();
+        }
+    }
 }

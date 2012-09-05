@@ -143,7 +143,6 @@ public class WebClient implements Serializable {
     private final List<WebWindow> windows_ = Collections.synchronizedList(new ArrayList<WebWindow>()); // all windows
     private WebWindow currentWindow_;
 
-    private int timeout_;
     private HTMLParserListener htmlParserListener_;
     private ErrorHandler cssErrorHandler_ = new DefaultCssErrorHandler();
     private OnbeforeunloadHandler onbeforeunloadHandler_;
@@ -1704,9 +1703,12 @@ public class WebClient implements Serializable {
      *
      * @return the timeout value in milliseconds
      * @see WebClient#setTimeout(int)
+     * @deprecated as of 2.11, please use {@link #getOptions()}.{@link WebClientOptions#getTimeout getTimeout()}
+     * instead.
      */
+    @Deprecated
     public int getTimeout() {
-        return timeout_;
+        return getOptions().getTimeout();
     }
 
     /**
@@ -1716,9 +1718,12 @@ public class WebClient implements Serializable {
      * for data retrieval. If the time is critical you must allow for twice the time specified here.</p>
      *
      * @param timeout the value of the timeout in milliseconds
+     * @deprecated as of 2.11, please use {@link #getOptions()}.{@link WebClientOptions#setTimeout setTimeout()}
+     * instead.
      */
+    @Deprecated
     public void setTimeout(final int timeout) {
-        timeout_ = timeout;
+        getOptions().setTimeout(timeout);
     }
 
     /**

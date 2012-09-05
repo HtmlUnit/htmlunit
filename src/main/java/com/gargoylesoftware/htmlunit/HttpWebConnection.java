@@ -326,8 +326,7 @@ public class HttpWebConnection implements WebConnection {
 
         final AbstractHttpClient httpClient = getHttpClient();
 
-        // reconfigure SSL if needed
-        reconfigureHttpsScheme(httpClient.getConnectionManager().getSchemeRegistry());
+        reconfigureHttpClientIfNeeded(httpClient);
 
         // Tell the client where to get its credentials from
         // (it may have changed on the webClient since last call to getHttpClientFor(...))
@@ -512,7 +511,7 @@ public class HttpWebConnection implements WebConnection {
      * @return the WebClient's timeout
      */
     protected int getTimeout() {
-        return webClient_.getTimeout();
+        return webClient_.getOptions().getTimeout();
     }
 
     /**
@@ -528,9 +527,7 @@ public class HttpWebConnection implements WebConnection {
 
         HttpClientParams.setRedirecting(httpParams, false);
         // Set timeouts
-        httpParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, Integer.valueOf(webClient_.getTimeout()));
-        httpParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,
-                Integer.valueOf(webClient_.getTimeout()));
+        configureTimeout(httpParams, webClient_.getOptions().getTimeout());
 
         final SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", 80, new SocksSocketFactory()));
@@ -558,13 +555,28 @@ public class HttpWebConnection implements WebConnection {
         return httpClient;
     }
 
-    private void reconfigureHttpsScheme(final SchemeRegistry schemeRegistry) {
+    private void configureTimeout(final HttpParams httpParams, final int timeout) {
+        httpParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, timeout);
+        httpParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, timeout);
+
+        usedOptions_.setTimeout(timeout);
+    }
+
+    /**
+     * React on changes that may have occurred on the WebClient settings.
+     * Registering as a listener would be probably better.
+     */
+    private void reconfigureHttpClientIfNeeded(final AbstractHttpClient httpClient) {
         final WebClientOptions options = webClient_.getOptions();
 
         // register new SSL factory only if settings have changed
         if (options.isUseInsecureSSL() != usedOptions_.isUseInsecureSSL()
                 || options.getSSLClientCertificateUrl() != usedOptions_.getSSLClientCertificateUrl()) {
-            configureHttpsScheme(schemeRegistry);
+            configureHttpsScheme(httpClient.getConnectionManager().getSchemeRegistry());
+        }
+
+        if (options.getTimeout() != usedOptions_.getTimeout()) {
+            configureTimeout(httpClient.getParams(), options.getTimeout());
         }
     }
 

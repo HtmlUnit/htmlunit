@@ -42,6 +42,7 @@ public class WebClientOptions implements Serializable {
     private boolean activeXNative_;
     private String homePage_ = "http://htmlunit.sf.net/";
     private ProxyConfig proxyConfig_;
+    private int timeout_;
 
     private boolean useInsecureSSL_ = false; // default is secure SSL
 
@@ -337,5 +338,27 @@ public class WebClientOptions implements Serializable {
     public void setProxyConfig(final ProxyConfig proxyConfig) {
         WebAssert.notNull("proxyConfig", proxyConfig);
         proxyConfig_ = proxyConfig;
+    }
+
+    /**
+     * Gets the timeout value for the {@link WebConnection}.
+     *
+     * @return the timeout value in milliseconds
+     * @see WebClientOptions#getTimeout(int)
+     */
+    public int getTimeout() {
+        return timeout_;
+    }
+
+    /**
+     * <p>Sets the timeout of the {@link WebConnection}. Set to zero (the default) for an infinite wait.</p>
+     *
+     * <p>Note: The timeout is used twice. The first is for making the socket connection, the second is
+     * for data retrieval. If the time is critical you must allow for twice the time specified here.</p>
+     *
+     * @param timeout the value of the timeout in milliseconds
+     */
+    public void setTimeout(final int timeout) {
+        timeout_ = timeout;
     }
 }
