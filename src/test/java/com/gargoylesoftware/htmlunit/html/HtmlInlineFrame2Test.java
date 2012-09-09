@@ -41,7 +41,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLIFrameElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLIFrameElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -66,7 +66,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "1", "[object HTMLIFrameElement]", "null" },
+    @Alerts(DEFAULT = { "1", "[object HTMLIFrameElement]", "null" },
             IE = { "2", "[object]", "[object]" })
     public void selfClosingIFrame() throws Exception {
         final String html = "<html><head>\n"

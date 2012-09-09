@@ -36,7 +36,7 @@ public class HtmlHorizontalRuleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLHRElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLHRElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

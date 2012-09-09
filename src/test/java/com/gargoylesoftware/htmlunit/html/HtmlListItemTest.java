@@ -36,7 +36,7 @@ public class HtmlListItemTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object]", FF = "[object HTMLLIElement]")
+    @Alerts(DEFAULT = "[object HTMLLIElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
