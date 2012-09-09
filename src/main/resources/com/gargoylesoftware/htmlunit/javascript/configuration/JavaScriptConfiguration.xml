@@ -832,6 +832,7 @@
         </property>
         <property name="opacity">
             <browser name="Firefox"/>
+            <browser name="Chrome"/>
         </property>
         <property name="orphans">
             <browser name="Firefox"/>
