@@ -38,7 +38,7 @@ public class HtmlApplet2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object HTMLAppletElement]", "[object HTMLAppletElement]" },
+    @Alerts(DEFAULT = { "[object HTMLAppletElement]", "[object HTMLAppletElement]" },
             IE = { "[object]", "[object]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"

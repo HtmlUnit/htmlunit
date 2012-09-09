@@ -36,7 +36,7 @@ public class HtmlBreakTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLBRElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLBRElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
