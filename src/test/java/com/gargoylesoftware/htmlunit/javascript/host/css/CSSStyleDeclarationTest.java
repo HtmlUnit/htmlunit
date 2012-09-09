@@ -112,8 +112,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"", "hidden", "" },
-            FF = {"", "hidden", "undefined" })
+    @Alerts(DEFAULT = {"", "hidden", "undefined" },
+            IE = {"", "hidden", "" })
     public void mozillaStyle() throws Exception {
         final String content
             = "<html><head><title>First</title><script>\n"
@@ -314,7 +314,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"", "alpha(opacity=50)" }, FF = {"undefined", "undefined" }, FF10 = {"", "" })
+    @Alerts(DEFAULT = {"", "" }, IE = {"", "alpha(opacity=50)" }, FF = {"undefined", "undefined" })
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test(){\n"
@@ -336,8 +336,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "", "0.5", ".4", "0.33333", "-3", "3", "10px", "foo", "auto" },
-            FF = { "", "0.5", "0.4", "0.33333", "-3", "3", "", "", "" })
+    @Alerts(DEFAULT = { "", "0.5", "0.4", "0.33333", "-3", "3", "", "", "" },
+            IE = { "", "0.5", ".4", "0.33333", "-3", "3", "10px", "foo", "auto" })
     public void initOpacity() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='o1' style='opacity: '>d</div>\n"
@@ -366,8 +366,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "undefined 0.5 0.4 0.33333 -3 3 8  7  10px foo auto ",
-            FF = " 0.5 0.4 0.33333 -3 3 8 7 7 7 7 ")
+    @Alerts(DEFAULT = " 0.5 0.4 0.33333 -3 3 8 7 7 7 7 ",
+            IE = "undefined 0.5 0.4 0.33333 -3 3 8  7  10px foo auto ")
     public void setOpacity() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d'>d</div>\n"
