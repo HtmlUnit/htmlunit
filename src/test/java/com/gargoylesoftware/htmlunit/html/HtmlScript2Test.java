@@ -65,7 +65,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "created", "hello", "replaced" }, IE = "exception")
+    @Alerts(DEFAULT = { "created", "hello", "replaced" }, IE = "exception")
     public void addedFromDocumentFragment() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='A'></span>\n"
@@ -89,7 +89,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object]", FF = "[object HTMLScriptElement]")
+    @Alerts(DEFAULT = "[object HTMLScriptElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -173,7 +173,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "deferred", "normal", "onload" }, IE = { "normal", "deferred", "onload" })
+    @Alerts(DEFAULT = { "deferred", "normal", "onload" }, IE = { "normal", "deferred", "onload" })
     public void testDefer() throws Exception {
         final String html = "<html><head>\n"
             + "<script defer>alert('deferred')</script>\n"

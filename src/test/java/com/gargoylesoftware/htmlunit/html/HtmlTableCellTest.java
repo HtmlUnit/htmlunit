@@ -37,7 +37,8 @@ public class HtmlTableCellTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object HTMLTableCellElement]", "[object HTMLTableCellElement]" }, IE = { "[object]", "[object]" })
+    @Alerts(DEFAULT = { "[object HTMLTableCellElement]", "[object HTMLTableCellElement]" },
+            IE = { "[object]", "[object]" })
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

@@ -41,8 +41,8 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "true", "false", "false", "false", "true", "true" },
-            FF = { "true", "true", "true", "true", "true", "true" })
+    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
+            IE = { "true", "false", "false", "false", "true", "true" })
     public void checked_on_attachment() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -107,7 +107,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "foo,change,")
+    @Alerts(DEFAULT = "foo,change,", IE = "")
     public void onchangeFires() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -134,7 +134,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("foo,change,boo,blur,")
+    @Alerts(DEFAULT = "foo,change,boo,blur,", CHROME = "foo,change,")
     public void onchangeFires2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

@@ -36,7 +36,7 @@ public class HtmlProgressTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLProgressElement]", FF3_6 = "[object HTMLUnknownElement]",
+    @Alerts(DEFAULT = "[object HTMLProgressElement]", FF3_6 = "[object HTMLUnknownElement]",
             IE = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"

@@ -36,7 +36,7 @@ public class HtmlTableColumnTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLTableColElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLTableColElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
