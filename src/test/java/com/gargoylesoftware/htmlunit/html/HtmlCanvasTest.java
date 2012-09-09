@@ -36,7 +36,7 @@ public class HtmlCanvasTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLCanvasElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLCanvasElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

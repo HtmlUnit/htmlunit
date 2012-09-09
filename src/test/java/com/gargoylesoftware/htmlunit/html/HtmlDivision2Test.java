@@ -37,7 +37,7 @@ public class HtmlDivision2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLDivElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLDivElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

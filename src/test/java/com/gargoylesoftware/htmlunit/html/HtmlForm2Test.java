@@ -35,8 +35,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "myForm", "myForm" },
-            FF = { "myForm", "TypeError" })
+    @Alerts(DEFAULT = { "myForm", "TypeError" },
+            IE = { "myForm", "myForm" })
     public void formsAccessor_FormsAsFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -62,8 +62,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "myForm", "myForm" },
-            FF = { "myForm", "TypeError" })
+    @Alerts(DEFAULT = { "myForm", "TypeError" },
+            IE = { "myForm", "myForm" })
     public void formsAccessor_FormsAsFunction2() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -89,8 +89,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "textfieldid", "textfieldname", "textfieldid" },
-            FF = { "error", "error", "error" })
+    @Alerts(DEFAULT = { "error", "error", "error" },
+            IE = { "textfieldid", "textfieldname", "textfieldid" })
     public void asFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -114,8 +114,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "textfieldid", "textfieldname", "textfieldid" },
-            FF = { "TypeError" })
+    @Alerts(DEFAULT = { "TypeError" },
+            IE = { "textfieldid", "textfieldname", "textfieldid" })
     public void asFunctionFormsFunction() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
