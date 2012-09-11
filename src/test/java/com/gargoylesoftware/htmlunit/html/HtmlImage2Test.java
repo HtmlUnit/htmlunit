@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link HtmlImage}.
  *
- * @version $Revision: 7286 $
+ * @version $Revision$
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
@@ -40,8 +40,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
                 "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", "" },
             FF10 = { "left", "right", "middle", "justify", "bottom", "middle",
                 "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
-            IE = { "left", "right", "center", "justify", "bottom", "middle",
-                "top", "absbottom", "absmiddle", "baseline", "texttop", "", "" })
+            IE = { "left", "right", "center", "", "bottom", "middle",
+                "top", "absBottom", "absMiddle", "baseline", "textTop", "", "" })
     @NotYetImplemented(Browser.IE)
     public void getAlign() throws Exception {
         final String html
@@ -63,19 +63,19 @@ public class HtmlImage2Test extends WebDriverTestCase {
             + "</form>\n"
 
             + "<script>\n"
-            + "  alert(i1.align);\n"
-            + "  alert(i2.align);\n"
-            + "  alert(i3.align);\n"
-            + "  alert(i4.align);\n"
-            + "  alert(i5.align);\n"
-            + "  alert(i6.align);\n"
-            + "  alert(i7.align);\n"
-            + "  alert(i8.align);\n"
-            + "  alert(i9.align);\n"
-            + "  alert(i10.align);\n"
-            + "  alert(i11.align);\n"
-            + "  alert(i12.align);\n"
-            + "  alert(i13.align);\n"
+            + "  alert(document.getElementById('i1').align);\n"
+            + "  alert(document.getElementById('i2').align);\n"
+            + "  alert(document.getElementById('i3').align);\n"
+            + "  alert(document.getElementById('i4').align);\n"
+            + "  alert(document.getElementById('i5').align);\n"
+            + "  alert(document.getElementById('i6').align);\n"
+            + "  alert(document.getElementById('i7').align);\n"
+            + "  alert(document.getElementById('i8').align);\n"
+            + "  alert(document.getElementById('i9').align);\n"
+            + "  alert(document.getElementById('i10').align);\n"
+            + "  alert(document.getElementById('i11').align);\n"
+            + "  alert(document.getElementById('i12').align);\n"
+            + "  alert(document.getElementById('i13').align);\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -89,14 +89,14 @@ public class HtmlImage2Test extends WebDriverTestCase {
                 "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop" },
             FF10 = { "CenTer", "8", "foo", "left", "right", "middle", "justify",
                 "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop" },
-            IE = { "center", "error", "center", "error", "center" })
+            IE = { "center", "error", "center", "error", "center", "left", "right",
+                "center", "error", "center", "bottom", "middle", "top", "absBottom",
+                "absMiddle", "baseline", "textTop" })
     @NotYetImplemented
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
-            + "<form>\n"
-            + "  <img id='i1' align='left' />\n"
-            + "</form>\n"
+            + "<img id='i1' align='left' />\n"
 
             + "<script>\n"
             + "  function setAlign(elem, value) {\n"
@@ -112,32 +112,32 @@ public class HtmlImage2Test extends WebDriverTestCase {
             + "  alert(elem.align);\n"
 
             + "  setAlign(i1, '8');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
             + "  setAlign(i1, 'foo');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
 
             + "  setAlign(i1, 'left');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
             + "  setAlign(i1, 'right');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
             + "  setAlign(i1, 'center');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
             + "  setAlign(i1, 'justify');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
             + "  setAlign(i1, 'bottom');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
             + "  setAlign(i1, 'middle');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
             + "  setAlign(i1, 'top');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
             + "  setAlign(i1, 'absbottom');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
             + "  setAlign(i1, 'absmiddle');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
             + "  setAlign(i1, 'baseline');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
             + "  setAlign(i1, 'texttop');\n"
-            + "  alert(i1.align);\n"
+            + "  alert(elem.align);\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
