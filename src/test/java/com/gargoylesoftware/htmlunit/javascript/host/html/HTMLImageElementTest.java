@@ -22,8 +22,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -204,7 +202,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
                 "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
             IE = { "left", "right", "center", "", "bottom", "middle",
                 "top", "absBottom", "absMiddle", "baseline", "textTop", "", "" })
-    @NotYetImplemented(Browser.IE)
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -245,14 +242,13 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "center", "justify",
+    @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "center", "justify",
                 "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop" },
             FF10 = { "CenTer", "8", "foo", "left", "right", "middle", "justify",
                 "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop" },
             IE = { "center", "error", "center", "error", "center", "left", "right",
                 "center", "error", "center", "bottom", "middle", "top", "absBottom",
                 "absMiddle", "baseline", "textTop" })
-    @NotYetImplemented
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
