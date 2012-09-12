@@ -218,7 +218,6 @@ public class HTMLImageElement extends HTMLElement {
         }
 
         throw Context.reportRuntimeError("Cannot set the align property to invalid value: '" + align + "'");
-
     }
 
     /**
