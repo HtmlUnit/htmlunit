@@ -326,10 +326,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         if (features != Undefined.instance) {
             featuresString = Context.toString(features);
         }
-        boolean replaceCurrentEntryInBrowsingHistory = false;
-        if (replace != Undefined.instance) {
-            replaceCurrentEntryInBrowsingHistory = ((Boolean) replace).booleanValue();
-        }
         final WebClient webClient = webWindow_.getWebClient();
 
         if (webClient.getOptions().isPopupBlockerEnabled()) {
@@ -339,6 +335,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             return null;
         }
 
+        boolean replaceCurrentEntryInBrowsingHistory = false;
+        if (replace != Undefined.instance) {
+            replaceCurrentEntryInBrowsingHistory = Context.toBoolean(replace);
+        }
         if (featuresString != null || replaceCurrentEntryInBrowsingHistory) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug(

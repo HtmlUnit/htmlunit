@@ -452,8 +452,112 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
+     * Tests window.open().
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "Hello window", "" })
+    public void open() throws Exception {
+        final String html = "<html><head>"
+            + "<script>\n"
+            + "  function info(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    window.open('" + URL_SECOND + "');\n"
+            + "  }\n"
+            + "  catch(e) { alert('exception') }\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String windowContent = "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  window.opener.info('Hello window');\n"
+                + "  window.opener.info(window.name);\n"
+                + "</script>\n"
+                + "</body></html>";
+        getMockWebConnection().setDefaultResponse(windowContent);
+        loadPageWithAlerts2(html);
+        // for some reason, the selenium driven browser is in an invalid state after this test
+        shutDownAll();
+    }
+
+    /**
+     * Tests window.open(...) with some params.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "Hello window", "New window" })
+    public void openWindowParams() throws Exception {
+        final String html = "<html><head>"
+            + "<script>\n"
+            + "  function info(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    window.open('" + URL_SECOND + "', 'New window', 'width=200,height=100');\n"
+            + "  }\n"
+            + "  catch(e) { alert('exception') }\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String windowContent = "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  window.opener.info('Hello window');\n"
+                + "  window.opener.info(window.name);\n"
+                + "</script>\n"
+                + "</body></html>";
+        getMockWebConnection().setDefaultResponse(windowContent);
+        loadPageWithAlerts2(html);
+        // for some reason, the selenium driven browser is in an invalid state after this test
+        shutDownAll();
+    }
+
+    /**
+     * Tests window.open(...) with replace param.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "window1", "window2" })
+    public void openWindowParamReplace() throws Exception {
+        final String html = "<html><head>"
+            + "<script>\n"
+            + "  function info(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    window.open('" + URL_SECOND + "', 'window1', 'width=200,height=100', true);\n"
+            + "    window.open('" + URL_SECOND + "', 'window2', 'width=200,height=100', 'true');\n"
+            + "  }\n"
+            + "  catch(e) { alert('exception') }\n"
+            + "</script>\n"
+            + "</body></html>";
+        final String windowContent = "<html><head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "  window.opener.info(window.name);\n"
+                + "</script>\n"
+                + "</body></html>";
+        getMockWebConnection().setDefaultResponse(windowContent);
+        loadPageWithAlerts2(html);
+        // for some reason, the selenium driven browser is in an invalid state after this test
+        shutDownAll();
+    }
+
+    /**
      * For FF, window's opener can't be set unless to its current value.
-     * Note: this test causes problems to WebDriver + FF2
      * @throws Exception if an error occurs
      */
     @Test

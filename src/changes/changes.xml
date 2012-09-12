@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
+            <action type="fix" dev="rbri" issue="3566814">
+                JavaScript: ClassCastException in Window.jsxFunction_open() fixed.
+            </action>
             <action type="fix" dev="mguillem">
                 Timeout configuration changes are now taken into account.
             </action>
