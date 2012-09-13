@@ -66,7 +66,7 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "bottom", "top" },
-            IE = { "center", "error", "center", "left", "right", "bottom", "top" })
+            IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "top" })
     @NotYetImplemented(Browser.IE)
     public void setAlign() throws Exception {
         final String html

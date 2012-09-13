@@ -39,7 +39,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "left", "right", "justify", "char", "center", "wrong", "" },
-            IE = { "left", "right", "justify", "char", "center", "", "" })
+            IE = { "left", "right", "", "", "center", "", "" })
     @NotYetImplemented(Browser.IE)
     public void getAlign() throws Exception {
         final String html
@@ -68,7 +68,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "justify", "char", "center" },
-            IE = { "center", "error", "center", "left", "right", "justify", "char", "center" })
+            IE = { "center", "error", "center", "error", "center", "left", "right",
+                    "error", "right", "error", "right", "center" })
     @NotYetImplemented(Browser.IE)
     public void setAlign() throws Exception {
         final String html

@@ -95,7 +95,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "justify", "center" },
-            IE = { "center", "error", "center", "left", "right", "justify", "center" })
+            IE = { "center", "error", "center", "error", "center", "left", "right", "justify", "center" })
     @NotYetImplemented(Browser.IE)
     public void setAlign() throws Exception {
         final String html
