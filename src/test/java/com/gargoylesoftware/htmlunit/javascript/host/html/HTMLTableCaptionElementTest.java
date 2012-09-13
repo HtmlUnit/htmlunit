@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -26,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLTableCaptionElementTest extends WebDriverTestCase {
@@ -34,40 +37,25 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "left", "right", "3", "center", "8", "foo" },
-        IE = { "left", "right", "", "error", "error", "center", "right", "" })
-    public void align() throws Exception {
+    @Alerts(DEFAULT = { "left", "right", "bottom", "top", "wrong", "" },
+            IE = { "left", "right", "bottom", "top", "", "" })
+    @NotYetImplemented(Browser.IE)
+    public void getAlign() throws Exception {
         final String html
-            = "<html><body><table>\n"
-            + "  <caption id='c1' align='left'>a</caption>\n"
-            + "  <caption id='c2' align='right'>b</caption>\n"
-            + "  <caption id='c3' align='3'>c</caption>\n"
-            + "  <tr>\n"
-            + "    <td>a</td>\n"
-            + "    <td>b</td>\n"
-            + "    <td>c</td>\n"
-            + "  </tr>\n"
-            + "</table>\n"
+            = "<html><body>\n"
+            + "  <table>\n"
+            + "    <caption id='c1' align='left' ></caption>\n"
+            + "    <caption id='c2' align='right' ></caption>\n"
+            + "    <caption id='c3' align='bottom' ></caption>\n"
+            + "    <caption id='c4' align='top' ></caption>\n"
+            + "    <caption id='c5' align='wrong' ></caption>\n"
+            + "    <caption id='c6' ></caption>\n"
+            + "  </table>\n"
+
             + "<script>\n"
-            + "  function set(e, value) {\n"
-            + "    try {\n"
-            + "      e.align = value;\n"
-            + "    } catch (e) {\n"
-            + "      alert('error');\n"
-            + "    }\n"
-            + "  }\n"
-            + "  var c1 = document.getElementById('c1');\n"
-            + "  var c2 = document.getElementById('c2');\n"
-            + "  var c3 = document.getElementById('c3');\n"
-            + "  alert(c1.align);\n"
-            + "  alert(c2.align);\n"
-            + "  alert(c3.align);\n"
-            + "  set(c1, 'center');\n"
-            + "  set(c2, '8');\n"
-            + "  set(c3, 'foo');\n"
-            + "  alert(c1.align);\n"
-            + "  alert(c2.align);\n"
-            + "  alert(c3.align);\n"
+            + "  for (i=1; i<=6; i++) {\n"
+            + "    alert(document.getElementById('c'+i).align);\n"
+            + "  };\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
@@ -77,7 +65,44 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "undefined", "undefined", "undefined", "middle", "8", "BOTtom" },
+    @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "bottom", "top" },
+            IE = { "center", "error", "center", "left", "right", "bottom", "top" })
+    @NotYetImplemented(Browser.IE)
+    public void setAlign() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <table>\n"
+            + "    <caption id='c1' align='left' ></caption>\n"
+            + "  </table>\n"
+
+            + "<script>\n"
+            + "  function setAlign(elem, value) {\n"
+            + "    try {\n"
+            + "      elem.align = value;\n"
+            + "    } catch (e) { alert('error'); }\n"
+            + "    alert(elem.align);\n"
+            + "  }\n"
+
+            + "  var elem = document.getElementById('c1');\n"
+            + "  setAlign(elem, 'CenTer');\n"
+
+            + "  setAlign(elem, '8');\n"
+            + "  setAlign(elem, 'foo');\n"
+
+            + "  setAlign(elem, 'left');\n"
+            + "  setAlign(elem, 'right');\n"
+            + "  setAlign(elem, 'bottom');\n"
+            + "  setAlign(elem, 'top');\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "undefined", "undefined", "undefined", "middle", "8", "BOTtom" },
         IE = { "top", "", "", "error", "error", "top", "", "bottom" })
     public void vAlign() throws Exception {
         final String html
@@ -115,5 +140,4 @@ public class HTMLTableCaptionElementTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
-
 }

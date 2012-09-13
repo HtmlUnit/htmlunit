@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
  * @author Chris Erskine
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HTMLImageElement extends HTMLElement {
     private static final Map<String, String> NORMALIZED_ALIGN_VALUES;
