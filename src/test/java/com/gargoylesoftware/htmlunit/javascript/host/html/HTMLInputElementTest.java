@@ -23,6 +23,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
 
@@ -34,6 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLInputElementTest extends WebDriverTestCase {
@@ -757,36 +760,66 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "hello", "left", "hi", "right" },
-            IE = {"", "error", "", "", "error", "", "" })
-    public void align() throws Exception {
-        final String html =
-            "<html>\n"
-            + "  <head>\n"
-            + "    <script>\n"
-            + "      function test() {\n"
-            + "        var i = document.getElementById('i');\n"
-            + "        alert(i.align);\n"
-            + "        set(i, 'hello');\n"
-            + "        alert(i.align);\n"
-            + "        set(i, 'left');\n"
-            + "        alert(i.align);\n"
-            + "        set(i, 'hi');\n"
-            + "        alert(i.align);\n"
-            + "        set(i, 'right');\n"
-            + "        alert(i.align);\n"
-            + "      }\n"
-            + "      function set(e, value) {\n"
-            + "        try {\n"
-            + "          e.align = value;\n"
-            + "        } catch (e) {\n"
-            + "          alert('error');\n"
-            + "        }\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='test()'><input type='text' id='i' /></body>\n"
-            + "</html>";
+    @Alerts(DEFAULT = { "left", "right", "bottom", "middle", "top", "wrong", "" },
+            IE = { "left", "right", "bottom", "middle", "top", "", "" })
+    @NotYetImplemented(Browser.IE)
+    public void getAlign() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <form>\n"
+            + "    <input id='i1' align='left' />\n"
+            + "    <input id='i2' align='right' />\n"
+            + "    <input id='i3' align='bottom' />\n"
+            + "    <input id='i4' align='middle' />\n"
+            + "    <input id='i5' align='top' />\n"
+            + "    <input id='i6' align='wrong' />\n"
+            + "    <input id='i7' />\n"
+            + "  </form>\n"
+
+            + "<script>\n"
+            + "  for (i=1; i<=7; i++) {\n"
+            + "    alert(document.getElementById('i'+i).align);\n"
+            + "  };\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "bottom", "middle", "top" },
+            IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" })
+    @NotYetImplemented(Browser.IE)
+    public void setAlign() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <form>\n"
+            + "    <input id='i1' type='text' align='left' value=''/>\n"
+            + "  </form>\n"
+
+            + "<script>\n"
+            + "  function setAlign(elem, value) {\n"
+            + "    try {\n"
+            + "      elem.align = value;\n"
+            + "    } catch (e) { alert('error'); }\n"
+            + "    alert(elem.align);\n"
+            + "  }\n"
+
+            + "  var elem = document.getElementById('i1');\n"
+            + "  setAlign(elem, 'CenTer');\n"
+
+            + "  setAlign(elem, '8');\n"
+            + "  setAlign(elem, 'foo');\n"
+
+            + "  setAlign(elem, 'left');\n"
+            + "  setAlign(elem, 'right');\n"
+            + "  setAlign(elem, 'bottom');\n"
+            + "  setAlign(elem, 'middle');\n"
+            + "  setAlign(elem, 'top');\n"
+            + "</script>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 

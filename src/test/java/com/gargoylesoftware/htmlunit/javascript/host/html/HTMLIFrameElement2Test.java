@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -108,7 +110,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "loaded", "foo" })
+    @Alerts(DEFAULT = { "loaded", "foo" }, IE = { })
     public void documentCreateElement_onLoad() throws Exception {
         final String html =
               "<html>\n"
@@ -141,7 +143,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "loaded", "" }, IE = { })
+    @Alerts(DEFAULT = { "loaded", "" }, IE = { })
     public void documentCreateElement_onLoad_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -171,7 +173,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "createIFrame", "loaded", "foo" }, IE = { "createIFrame" })
+    @Alerts(DEFAULT = { "createIFrame", "loaded", "foo" }, IE = { "createIFrame" })
     public void documentCreateElement_onLoad2() throws Exception {
         final String html =
               "<html>\n"
@@ -205,7 +207,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "createIFrame", "loaded", "" }, IE = { "createIFrame" })
+    @Alerts(DEFAULT = { "createIFrame", "loaded", "" }, IE = { "createIFrame" })
     public void documentCreateElement_onLoad2_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -236,7 +238,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "createIFrame", "loaded", "foo" }, IE = { "createIFrame" })
+    @Alerts(DEFAULT = { "createIFrame", "loaded", "foo" }, IE = { "createIFrame" })
     public void documentCreateElement_onLoad3() throws Exception {
         final String html =
               "<html>\n"
@@ -270,7 +272,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "createIFrame", "loaded", "" }, IE = { "createIFrame" })
+    @Alerts(DEFAULT = { "createIFrame", "loaded", "" }, IE = { "createIFrame" })
     public void documentCreateElement_onLoad3_noSrc() throws Exception {
         final String html =
               "<html>\n"
@@ -480,7 +482,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "fragment append done", "loaded" },
+    @Alerts(DEFAULT = { "fragment append done", "loaded" },
             IE = "fragment append done")
     public void documentDocumentFragmentCreateElement_onLoad() throws Exception {
         final String html =
@@ -546,7 +548,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "createIFrame", "fragment append done", "loaded" },
+    @Alerts(DEFAULT = { "createIFrame", "fragment append done", "loaded" },
             IE = { "createIFrame", "fragment append done" })
     public void documentDocumentFragmentCreateElement_onLoad2() throws Exception {
         final String html =
@@ -614,7 +616,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "createIFrame", "fragment append done", "loaded" },
+    @Alerts(DEFAULT = { "createIFrame", "fragment append done", "loaded" },
             IE = { "createIFrame", "fragment append done" })
     public void documentDocumentFragmentCreateElement_onLoad3() throws Exception {
         final String html =
@@ -675,6 +677,69 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "left", "right", "bottom", "middle", "top", "wrong", "" },
+            IE = { "left", "right", "bottom", "middle", "top", "", "" })
+    @NotYetImplemented(Browser.IE)
+    public void getAlign() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <iframe id='i1' align='left' ></iframe>\n"
+            + "  <iframe id='i2' align='right' ></iframe>\n"
+            + "  <iframe id='i3' align='bottom' ></iframe>\n"
+            + "  <iframe id='i4' align='middle' ></iframe>\n"
+            + "  <iframe id='i5' align='top' ></iframe>\n"
+            + "  <iframe id='i6' align='wrong' ></iframe>\n"
+            + "  <iframe id='i7' ></iframe>\n"
+
+            + "<script>\n"
+            + "  for (i=1; i<=7; i++) {\n"
+            + "    alert(document.getElementById('i'+i).align);\n"
+            + "  };\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "bottom", "middle", "top" },
+            IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" })
+    @NotYetImplemented(Browser.IE)
+    public void setAlign() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "  <iframe id='i1' align='left' ></iframe>\n"
+
+            + "<script>\n"
+            + "  function setAlign(elem, value) {\n"
+            + "    try {\n"
+            + "      elem.align = value;\n"
+            + "    } catch (e) { alert('error'); }\n"
+            + "    alert(elem.align);\n"
+            + "  }\n"
+
+            + "  var elem = document.getElementById('i1');\n"
+            + "  setAlign(elem, 'CenTer');\n"
+
+            + "  setAlign(elem, '8');\n"
+            + "  setAlign(elem, 'foo');\n"
+
+            + "  setAlign(elem, 'left');\n"
+            + "  setAlign(elem, 'right');\n"
+            + "  setAlign(elem, 'bottom');\n"
+            + "  setAlign(elem, 'middle');\n"
+            + "  setAlign(elem, 'top');\n"
+            + "</script>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 }

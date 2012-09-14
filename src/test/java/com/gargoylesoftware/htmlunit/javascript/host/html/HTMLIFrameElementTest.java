@@ -357,43 +357,6 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "hello", "left", "hi", "right" },
-            IE = {"", "error", "", "left", "error", "left", "right" })
-    public void align() throws Exception {
-        final String html =
-            "<html>\n"
-            + "  <head>\n"
-            + "    <script>\n"
-            + "      function test() {\n"
-            + "        var iframe = document.getElementById('f');\n"
-            + "        alert(iframe.align);\n"
-            + "        set(iframe, 'hello');\n"
-            + "        alert(iframe.align);\n"
-            + "        set(iframe, 'left');\n"
-            + "        alert(iframe.align);\n"
-            + "        set(iframe, 'hi');\n"
-            + "        alert(iframe.align);\n"
-            + "        set(iframe, 'right');\n"
-            + "        alert(iframe.align);\n"
-            + "      }\n"
-            + "      function set(e, value) {\n"
-            + "        try {\n"
-            + "          e.align = value;\n"
-            + "        } catch (e) {\n"
-            + "          alert('error');\n"
-            + "        }\n"
-            + "      }\n"
-            + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='test()'><iframe id='f'></iframe></body>\n"
-            + "</html>";
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
     @Alerts(FF = {"", "100", "foo", "20%", "0", "30", "400", "abc", "0", "100", "10%", "300" },
             IE = {"", "100", "", "20%", "-5", "30", "error", "400", "100", "-5", "100", "10%", "300" })
     public void width() throws Exception {
