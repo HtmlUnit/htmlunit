@@ -516,6 +516,36 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     }
 
     /**
+     * Test for a javascript which points to an empty gzip encoded file (bug 3566999).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("done")
+    public void externalScriptEmptyGZipEncoded() throws Exception {
+        final MockWebConnection webConnection = getMockWebConnection();
+
+        final String jsContent = "";
+        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bytes.write(jsContent.getBytes("ASCII"));
+        bytes.close();
+
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Length", "0"));
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
+        webConnection.setResponse(new URL(getDefaultUrl(), "foo.js"),
+                bytes.toByteArray(), 200, "OK", "text/javascript", headers);
+
+        final String htmlContent
+            = "<html><head>\n"
+            + "<title>foo</title>\n"
+            + "<script src='/foo.js'></script>\n"
+            + "</head><body onload='alert(\"done\");'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(htmlContent);
+    }
+
+    /**
      * Test for a javascript which points to a broken gzip encoded file (bug 3563712).
      * @throws Exception if an error occurs
      */

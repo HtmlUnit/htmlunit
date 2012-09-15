@@ -149,6 +149,39 @@ public class StyleSheetListTest extends SimpleWebTestCase {
     }
 
     /**
+     * Test for a stylesheet link which points to a broken gzip encoded file (bug 3566999).
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = {"1", "[object CSSStyleSheet]", "[object CSSStyleSheet]" }, IE = { "1", "[object]", "[object]" })
+    public void testEmptyGZipEncodedStylesheet() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        alert(document.styleSheets.length);\n"
+            + "        alert(document.styleSheets.item(0));\n"
+            + "        alert(document.styleSheets[0]);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>abc</body>\n"
+            + "</html>";
+
+        final String css = "";
+
+        getMockWebConnection().setDefaultResponse(css, "text/css");
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Length", "0"));
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
+        getMockWebConnection().setDefaultResponse(css, 200, "OK", "text/css", headers);
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
      * Test for a stylesheet link which points to a broken gzip encoded file (bug 3498578).
      * @throws Exception if an error occurs
      */

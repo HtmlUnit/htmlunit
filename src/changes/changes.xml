@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
+            <action type="fix" dev="rbri" issue="3566999">
+                Empty responses marked as GZip encoded no longer throwing an error.
+            </action>
             <action type="fix" dev="asashour" issue="3566348">
                 UrlUtils: fix an infinite loop when base URL is relative.
             </action>

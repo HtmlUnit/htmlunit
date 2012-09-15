@@ -96,11 +96,32 @@ public class WebResponseData implements Serializable {
                 break;
             }
         }
-        if (encoding != null && StringUtils.contains(encoding, "gzip")) {
-            stream = new GZIPInputStream(stream);
-        }
-        else if (encoding != null && StringUtils.contains(encoding, "deflate")) {
-            stream = new InflaterInputStream(stream);
+        if (encoding != null) {
+            // check content length
+            long contentLenght = -1;
+            for (final NameValuePair header : headers) {
+                final String headerName = header.getName().trim();
+                if ("content-length".equalsIgnoreCase(headerName)) {
+                    try {
+                        contentLenght = Long.parseLong(header.getValue());
+                        // don't wrap empty content
+                        if (contentLenght == 0) {
+                            return stream;
+                        }
+                    }
+                    catch (final NumberFormatException e) {
+                        // ignore
+                    }
+                    break;
+                }
+            }
+
+            if (StringUtils.contains(encoding, "gzip")) {
+                stream = new GZIPInputStream(stream);
+            }
+            else if (StringUtils.contains(encoding, "deflate")) {
+                stream = new InflaterInputStream(stream);
+            }
         }
         return stream;
     }

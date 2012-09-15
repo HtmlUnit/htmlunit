@@ -67,6 +67,20 @@ public class WebResponseDataTest extends WebServerTestCase {
     }
 
     /**
+     * Tests that empty gzipped content is handled correctly (bug 3566999).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testEmptyGZippedContent() throws Exception {
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Length", "0"));
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
+
+        final WebResponseData data = new WebResponseData("".getBytes(), HttpStatus.SC_OK, "OK", headers);
+        data.getBody();
+    }
+
+    /**
      * Tests that broken gzipped content is handled correctly.
      * @throws Exception if the test fails
      */
