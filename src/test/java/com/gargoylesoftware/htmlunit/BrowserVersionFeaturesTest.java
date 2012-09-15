@@ -16,10 +16,6 @@ package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.fail;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -52,28 +48,4 @@ public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
         }
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void lexicographicOrder_properties() throws Exception {
-        final String path = "com/gargoylesoftware/htmlunit/javascript/configuration/"
-            + getBrowserVersion().getNickname() + ".properties";
-        final InputStream is = getClass().getClassLoader().getResourceAsStream(path);
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        try {
-            String lastFeatureName = null;
-            String line;
-            while ((line = reader.readLine()) != null) {
-                final String featureName = line.trim();
-                if (lastFeatureName != null && featureName.compareTo(lastFeatureName) < 1) {
-                    fail(path + ": \"" + featureName + "\" should be before \"" + lastFeatureName + '"');
-                }
-                lastFeatureName = featureName;
-            }
-        }
-        finally {
-            reader.close();
-        }
-    }
 }
