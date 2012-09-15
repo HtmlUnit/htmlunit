@@ -81,7 +81,7 @@ public class Element extends EventNode {
      * Returns the tag name of this element.
      * @return the tag name
      */
-    public final String jsxGet_tagName() {
+    public String jsxGet_tagName() {
         return jsxGet_nodeName();
     }
 

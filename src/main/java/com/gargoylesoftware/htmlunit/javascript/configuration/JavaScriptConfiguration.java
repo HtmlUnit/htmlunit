@@ -20,8 +20,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -91,6 +94,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadingElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement;
@@ -407,7 +414,52 @@ public final class JavaScriptConfiguration {
             }
             node = node.getNextSibling();
         }
+        final List<String> allGetters = new ArrayList<String>();
+        final List<String> allSetters = new ArrayList<String>();
+        for (final Method m : classConfiguration.getHostClass().getDeclaredMethods()) {
+            final JsxGetter jsxGetter = m.getAnnotation(JsxGetter.class);
+            if (jsxGetter != null && isSupported(jsxGetter.value(), browser)) {
+                final String getter = m.getName().substring("jsxGet_".length());
+                allGetters.add(getter);
+            }
+
+            final JsxSetter jsxSetter = m.getAnnotation(JsxSetter.class);
+            if (jsxSetter != null && isSupported(jsxSetter.value(), browser)) {
+                final String setter = m.getName().substring("jsxSet_".length());
+                allSetters.add(setter);
+            }
+
+            final JsxFunction jsxFunction = m.getAnnotation(JsxFunction.class);
+            if (jsxFunction != null && isSupported(jsxFunction.value(), browser)) {
+                final String propertyName = m.getName().substring("jsxFunction_".length());
+                classConfiguration.addFunction(propertyName);
+            }
+        }
+        for (final String getter : allGetters) {
+            classConfiguration.addProperty(getter, true, allSetters.contains(getter));
+        }
         return classConfiguration;
+    }
+
+    private static boolean isSupported(final WebBrowser[] browsers, final BrowserVersion browserVersion) {
+        for (final WebBrowser browser : browsers) {
+            final String expectedBrowserName;
+            if (browserVersion.isIE()) {
+                expectedBrowserName = "IE";
+            }
+            else if (browserVersion.isFirefox()) {
+                expectedBrowserName = "FF";
+            }
+            else {
+                expectedBrowserName = "CHROME";
+            }
+            if (browser.value().name().equals(expectedBrowserName)
+                    && browser.minVersion() <= browserVersion.getBrowserVersionNumeric()
+                    && browser.maxVersion() >= browserVersion.getBrowserVersionNumeric()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
