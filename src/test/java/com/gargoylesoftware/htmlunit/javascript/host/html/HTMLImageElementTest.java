@@ -221,19 +221,9 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <img id='i13' />\n"
 
             + "<script>\n"
-            + "  alert(document.getElementById('i1').align);\n"
-            + "  alert(document.getElementById('i2').align);\n"
-            + "  alert(document.getElementById('i3').align);\n"
-            + "  alert(document.getElementById('i4').align);\n"
-            + "  alert(document.getElementById('i5').align);\n"
-            + "  alert(document.getElementById('i6').align);\n"
-            + "  alert(document.getElementById('i7').align);\n"
-            + "  alert(document.getElementById('i8').align);\n"
-            + "  alert(document.getElementById('i9').align);\n"
-            + "  alert(document.getElementById('i10').align);\n"
-            + "  alert(document.getElementById('i11').align);\n"
-            + "  alert(document.getElementById('i12').align);\n"
-            + "  alert(document.getElementById('i13').align);\n"
+            + "  for (i=1; i<=13; i++) {\n"
+            + "    alert(document.getElementById('i'+i).align);\n"
+            + "  };\n"
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
