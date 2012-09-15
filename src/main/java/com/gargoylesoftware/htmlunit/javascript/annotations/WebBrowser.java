@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
  * @author Ahmed Ashour
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.ANNOTATION_TYPE })
+@Target(ElementType.ANNOTATION_TYPE)
 public @interface WebBrowser {
 
     /** The browser name. */

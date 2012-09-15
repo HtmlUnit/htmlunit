@@ -2106,7 +2106,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF3_6 = { "undefined", "true" }, CHROME = { "undefined", "true" },
             DEFAULT = "exception")
-    @NotYetImplemented(Browser.FF10)
+    @NotYetImplemented(Browser.FF)
     public void prototype_innerHTML() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -2118,7 +2118,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "} catch (e) { alert('exception') }\n"
             + "</script>\n"
             + "</body></html>";
-
         loadPageWithAlerts2(html);
     }
 
