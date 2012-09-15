@@ -194,4 +194,13 @@ public class UrlUtilsTest extends SimpleWebTestCase {
         final URL url = new URL("http://localhost/bug%21.html");
         assertEquals("http://localhost/bug%21.html", UrlUtils.encodeUrl(url, false).toExternalForm());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void relativeBase() throws Exception {
+        final String baseUrl = "a/a1/a2";
+        assertEquals("b",      UrlUtils.resolveUrl(baseUrl, "../../b"));
+    }
 }

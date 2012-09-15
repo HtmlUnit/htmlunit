@@ -722,11 +722,13 @@ public final class UrlUtils {
             final String pathSegment = path.substring(0, pathSegmentIndex);
             final int slashIndex = pathSegment.lastIndexOf('/');
 
-            if (slashIndex < 0) {
-                continue;
+            if (slashIndex >= 0) {
+                if (!"..".equals(pathSegment.substring(slashIndex))) {
+                    path = path.substring(0, slashIndex + 1).concat(path.substring(pathSegmentIndex + 4));
+                }
             }
-            if (!"..".equals(pathSegment.substring(slashIndex))) {
-                path = path.substring(0, slashIndex + 1).concat(path.substring(pathSegmentIndex + 4));
+            else {
+                path = path.substring(pathSegmentIndex + 4);
             }
         }
         //      d) If the path ends with "<segment>/..", where <segment> is a
