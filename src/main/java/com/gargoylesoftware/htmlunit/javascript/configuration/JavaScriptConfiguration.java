@@ -414,29 +414,31 @@ public final class JavaScriptConfiguration {
             }
             node = node.getNextSibling();
         }
-        final List<String> allGetters = new ArrayList<String>();
-        final List<String> allSetters = new ArrayList<String>();
-        for (final Method m : classConfiguration.getHostClass().getDeclaredMethods()) {
-            final JsxGetter jsxGetter = m.getAnnotation(JsxGetter.class);
-            if (jsxGetter != null && isSupported(jsxGetter.value(), browser)) {
-                final String getter = m.getName().substring("jsxGet_".length());
-                allGetters.add(getter);
-            }
+        if (browser != null) {
+            final List<String> allGetters = new ArrayList<String>();
+            final List<String> allSetters = new ArrayList<String>();
+            for (final Method m : classConfiguration.getHostClass().getDeclaredMethods()) {
+                final JsxGetter jsxGetter = m.getAnnotation(JsxGetter.class);
+                if (jsxGetter != null && isSupported(jsxGetter.value(), browser)) {
+                    final String getter = m.getName().substring("jsxGet_".length());
+                    allGetters.add(getter);
+                }
 
-            final JsxSetter jsxSetter = m.getAnnotation(JsxSetter.class);
-            if (jsxSetter != null && isSupported(jsxSetter.value(), browser)) {
-                final String setter = m.getName().substring("jsxSet_".length());
-                allSetters.add(setter);
-            }
+                final JsxSetter jsxSetter = m.getAnnotation(JsxSetter.class);
+                if (jsxSetter != null && isSupported(jsxSetter.value(), browser)) {
+                    final String setter = m.getName().substring("jsxSet_".length());
+                    allSetters.add(setter);
+                }
 
-            final JsxFunction jsxFunction = m.getAnnotation(JsxFunction.class);
-            if (jsxFunction != null && isSupported(jsxFunction.value(), browser)) {
-                final String propertyName = m.getName().substring("jsxFunction_".length());
-                classConfiguration.addFunction(propertyName);
+                final JsxFunction jsxFunction = m.getAnnotation(JsxFunction.class);
+                if (jsxFunction != null && isSupported(jsxFunction.value(), browser)) {
+                    final String propertyName = m.getName().substring("jsxFunction_".length());
+                    classConfiguration.addFunction(propertyName);
+                }
             }
-        }
-        for (final String getter : allGetters) {
-            classConfiguration.addProperty(getter, true, allSetters.contains(getter));
+            for (final String getter : allGetters) {
+                classConfiguration.addProperty(getter, true, allSetters.contains(getter));
+            }
         }
         return classConfiguration;
     }

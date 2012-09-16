@@ -14,6 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.CHROME;
+
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
+
 import static com.gargoylesoftware.htmlunit.util.StringUtils.containsCaseInsensitive;
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 
@@ -295,6 +304,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the JavaScript attribute "forms".
      * @return the value of the JavaScript attribute "forms"
      */
+    @JsxGetter
     public Object jsxGet_forms() {
         if (forms_ == null) {
             final HtmlPage page = getHtmlPage();
@@ -325,6 +335,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * <a href="http://msdn.microsoft.com/en-us/library/ms537465.aspx">MSDN documentation</a>.
      * @return the value of this attribute
      */
+    @JsxGetter
     public Object jsxGet_links() {
         if (links_ == null) {
             links_ = new HTMLCollection(getDomNodeOrDie(), true, "HTMLDocument.links") {
@@ -352,6 +363,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="https://developer.mozilla.org/en/DOM/document.lastModified">Mozilla documentation</a>
      * @return the date as string
      */
+    @JsxGetter
     public String jsxGet_lastModified() {
         if (lastModified_ == null) {
             final WebResponse webResponse = getPage().getWebResponse();
@@ -377,6 +389,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the JavaScript attribute "namespaces".
      * @return the value of the JavaScript attribute "namespaces"
      */
+    @JsxGetter(@WebBrowser(IE))
     public Object jsxGet_namespaces() {
         if (namespaces_ == null) {
             namespaces_ = new NamespaceCollection(this);
@@ -391,6 +404,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Gecko DOM reference</a>
      * @return the value of this attribute
      */
+    @JsxGetter
     public Object jsxGet_anchors() {
         if (anchors_ == null) {
             final boolean checkId =
@@ -433,6 +447,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Gecko DOM reference</a>
      * @return the value of this attribute
      */
+    @JsxGetter
     public Object jsxGet_applets() {
         if (applets_ == null) {
             applets_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.applets") {
@@ -454,6 +469,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param function the function
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536782.aspx">MSDN documentation</a>
      */
+    @JsxFunction
     public static void jsxFunction_write(final Context context, final Scriptable thisObj, final Object[] args,
         final Function function) {
         final HTMLDocument thisAsDocument = getDocument(thisObj);
@@ -482,6 +498,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param function the function
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536783.aspx">MSDN documentation</a>
      */
+    @JsxFunction
     public static void jsxFunction_writeln(
         final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         final HTMLDocument thisAsDocument = getDocument(thisObj);
@@ -692,6 +709,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the cookie attribute.
      * @return the cookie attribute
      */
+    @JsxGetter
     public String jsxGet_cookie() {
         final HtmlPage page = getHtmlPage();
 
@@ -722,6 +740,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Note that it is deprecated in Internet Explorer 8 in favor of the documentMode.
      * @return the "compatMode" attribute
      */
+    @JsxGetter
     public String jsxGet_compatMode() {
         return getHtmlPage().isQuirksMode() ? "BackCompat" : "CSS1Compat";
     }
@@ -731,6 +750,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533693.aspx">MSDN documentation</a>
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
      */
+    @JsxSetter
     public void jsxSet_cookie(final String newCookie) {
         final CookieManager cookieManager = getHtmlPage().getWebClient().getCookieManager();
         if (cookieManager.isCookiesEnabled()) {
@@ -823,6 +843,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the "images" property.
      * @return the value of the "images" property
      */
+    @JsxGetter
     public Object jsxGet_images() {
         if (images_ == null) {
             images_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.images") {
@@ -839,6 +860,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the "URL" property.
      * @return the value of the "URL" property
      */
+    @JsxGetter
     public String jsxGet_URL() {
         return getHtmlPage().getWebResponse().getWebRequest().getUrl().toExternalForm();
     }
@@ -848,6 +870,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * <b>Note</b> The unique ID generated is not guaranteed to be the same every time the page is loaded.
      * @return an auto-generated, unique identifier for the object
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_uniqueID() {
         if (uniqueID_ == null) {
             uniqueID_ = "ms__id" + UniqueID_Counter_++;
@@ -859,6 +882,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the "all" property.
      * @return the value of the "all" property
      */
+    @JsxGetter
     public HTMLCollection jsxGet_all() {
         if (all_ == null) {
             all_ = new HTMLCollectionTags(getDomNodeOrDie(), "HTMLDocument.all") {
@@ -887,6 +911,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return a reference to the new document object or the window object.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536652.aspx">MSDN documentation</a>
      */
+    @JsxFunction
     public Object jsxFunction_open(final String url, final Object name, final Object features,
             final Object replace) {
         // Any open() invocations are ignored during the parsing stage, because write() and
@@ -913,6 +938,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      *
      * @throws IOException if an IO problem occurs
      */
+    @JsxFunction
     public void jsxFunction_close() throws IOException {
         if (writeInCurrentDocument_) {
             LOG.warn("close() called when document is not open.");
@@ -950,6 +976,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Gets the window in which this document is contained.
      * @return the window
      */
+    @JsxGetter(@WebBrowser(IE))
     public Object jsxGet_parentWindow() {
         return getWindow();
     }
@@ -1013,6 +1040,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param index where to insert the sheet in the collection
      * @return the newly created stylesheet
      */
+    @JsxFunction(@WebBrowser(IE))
     public CSSStyleSheet jsxFunction_createStyleSheet(final String url, final int index) {
         // minimal implementation
         final CSSStyleSheet stylesheet = new CSSStyleSheet();
@@ -1026,6 +1054,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param id the ID to search for
      * @return the element, or <tt>null</tt> if it could not be found
      */
+    @JsxFunction
     public Object jsxFunction_getElementById(final String id) {
         implicitCloseIfNecessary();
         Object result = null;
@@ -1071,6 +1100,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return all the descendant elements with the specified class name
      * @see <a href="https://developer.mozilla.org/en/DOM/document.getElementsByClassName">Mozilla doc</a>
      */
+    @JsxFunction(@WebBrowser(FF))
     public HTMLCollection jsxFunction_getElementsByClassName(final String className) {
         return ((HTMLElement) jsxGet_documentElement()).jsxFunction_getElementsByClassName(className);
     }
@@ -1084,6 +1114,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param elementName - value of the "name" attribute to look for
      * @return all HTML elements that have a "name" attribute with the specified value
      */
+    @JsxFunction
     public HTMLCollection jsxFunction_getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_59)
@@ -1201,6 +1232,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return this document's <tt>body</tt> element
      */
     @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
+    @JsxGetter
     public HTMLElement jsxGet_body() {
         final HtmlPage page = getHtmlPage();
         // for IE, the body of a not yet loaded page is null whereas it already exists for FF
@@ -1223,6 +1255,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns this document's <tt>head</tt> element.
      * @return this document's <tt>head</tt> element
      */
+    @JsxGetter(@WebBrowser(value = FF, minVersion = 10))
     public HTMLElement jsxGet_head() {
         final HtmlElement head = getHtmlPage().getHead();
         if (head != null) {
@@ -1235,6 +1268,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns this document's title.
      * @return this document's title
      */
+    @JsxGetter
     public String jsxGet_title() {
         return getHtmlPage().getTitleText();
     }
@@ -1243,6 +1277,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Sets this document's title.
      * @param title the new title
      */
+    @JsxSetter
     public void jsxSet_title(final String title) {
         getHtmlPage().setTitleText(title);
     }
@@ -1252,6 +1287,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_bgColor() {
         String color = getHtmlPage().getBody().getAttribute("bgColor");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED
@@ -1266,6 +1302,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param color the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_bgColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
         body.jsxSet_bgColor(color);
@@ -1275,6 +1312,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the <tt>alinkColor</tt> attribute.
      * @return the value of the <tt>alinkColor</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_alinkColor() {
         String color = getHtmlPage().getBody().getAttribute("aLink");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED
@@ -1288,6 +1326,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Sets the value of the <tt>alinkColor</tt> attribute.
      * @param color the value of the <tt>alinkColor</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_alinkColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
         body.jsxSet_aLink(color);
@@ -1297,6 +1336,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the <tt>linkColor</tt> attribute.
      * @return the value of the <tt>linkColor</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_linkColor() {
         String color = getHtmlPage().getBody().getAttribute("link");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED
@@ -1310,6 +1350,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Sets the value of the <tt>linkColor</tt> attribute.
      * @param color the value of the <tt>linkColor</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_linkColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
         body.jsxSet_link(color);
@@ -1319,6 +1360,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the <tt>vlinkColor</tt> attribute.
      * @return the value of the <tt>vlinkColor</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_vlinkColor() {
         String color = getHtmlPage().getBody().getAttribute("vLink");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED
@@ -1332,6 +1374,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Sets the value of the <tt>vlinkColor</tt> attribute.
      * @param color the value of the <tt>vlinkColor</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_vlinkColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
         body.jsxSet_vLink(color);
@@ -1341,6 +1384,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the <tt>fgColor</tt> attribute.
      * @return the value of the <tt>fgColor</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_fgColor() {
         String color = getHtmlPage().getBody().getAttribute("text");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED
@@ -1354,6 +1398,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Sets the value of the <tt>fgColor</tt> attribute.
      * @param color the value of the <tt>fgColor</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_fgColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
         body.jsxSet_text(color);
@@ -1368,6 +1413,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see DomNode#READY_STATE_INTERACTIVE
      * @see DomNode#READY_STATE_COMPLETE
      */
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public String jsxGet_readyState() {
         final DomNode node = getDomNodeOrDie();
         return node.getReadyState();
@@ -1380,6 +1426,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147">
      * W3C documentation</a>
      */
+    @JsxGetter
     public String jsxGet_domain() {
         if (domain_ == null) {
             URL url = getHtmlPage().getWebResponse().getWebRequest().getUrl();
@@ -1430,6 +1477,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * trimming to co.uk should not be possible.
      * @param newDomain the new domain to set
      */
+    @JsxSetter
     public void jsxSet_domain(final String newDomain) {
         final BrowserVersion browserVersion = getBrowserVersion();
 
@@ -1464,6 +1512,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the JavaScript attribute <tt>scripts</tt>.
      * @return the value of the JavaScript attribute <tt>scripts</tt>
      */
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
     public Object jsxGet_scripts() {
         if (scripts_ == null) {
             scripts_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.scripts") {
@@ -1480,6 +1529,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the value of the JavaScript attribute <tt>selection</tt>.
      * @return the value of the JavaScript attribute <tt>selection</tt>
      */
+    @JsxGetter(@WebBrowser(IE))
     public Selection jsxGet_selection() {
         return getWindow().getSelection();
     }
@@ -1489,6 +1539,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537459.aspx">MSDN documentation</a>
      * @return the live collection of frames contained by this document
      */
+    @JsxGetter(@WebBrowser(IE))
     public Object jsxGet_frames() {
         return getWindow().jsxGet_frames();
     }
@@ -1500,6 +1551,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      *
      * @return styleSheet collection
      */
+    @JsxGetter
     public StyleSheetList jsxGet_styleSheets() {
         if (styleSheets_ == null) {
             styleSheets_ = new StyleSheetList(this);
@@ -1518,6 +1570,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @throws DOMException if the event type is not supported (will have a type of
      *         DOMException.NOT_SUPPORTED_ERR)
      */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public Event jsxFunction_createEvent(final String eventType) throws DOMException {
         final Class<? extends Event> clazz = SUPPORTED_EVENT_TYPE_MAP.get(eventType);
         if (clazz == null) {
@@ -1550,6 +1603,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536390.aspx">MSDN Documentation</a>
      * @return an uninitialized event object
      */
+    @JsxFunction(@WebBrowser(IE))
     public Event jsxFunction_createEventObject() {
         final Event event = new MouseEvent();
         event.setParentScope(getWindow());
@@ -1565,6 +1619,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param y the y offset, in pixels
      * @return the element for the specified x coordinate and the specified y coordinate
      */
+    @JsxFunction
     public Object jsxFunction_elementFromPoint(final int x, final int y) {
         // minimal implementation to make simple unit test happy for FF and IE
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_164) && (x <= 0 || y <= 0)) {
@@ -1578,6 +1633,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return a new range
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">XUL Planet</a>
      */
+    @JsxFunction(@WebBrowser(FF))
     public Range jsxFunction_createRange() {
         final Range r = new Range(this);
         r.setParentScope(getWindow());
@@ -1606,6 +1662,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @throws DOMException on attempt to create a TreeWalker with a root that is <code>null</code>
      * @return a new TreeWalker
      */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public Object jsxFunction_createTreeWalker(final Node root, final double whatToShow, final Scriptable filter,
             final boolean expandEntityReferences) throws DOMException {
 
@@ -1651,6 +1708,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param cmd the command identifier
      * @return <code>true></code> if the command is supported
      */
+    @JsxFunction
     public boolean jsxFunction_queryCommandSupported(final String cmd) {
         final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_165);
         final String mode = jsxGet_designMode();
@@ -1670,6 +1728,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param cmd the command identifier
      * @return <code>true</code> if the command can be successfully executed
      */
+    @JsxFunction
     public boolean jsxFunction_queryCommandEnabled(final String cmd) {
         final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_165);
         final String mode = jsxGet_designMode();
@@ -1691,6 +1750,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param value the string, number, or other value to assign (possible values depend on the command)
      * @return <tt>true</tt> if the command was successful, <tt>false</tt> otherwise
      */
+    @JsxFunction
     public boolean jsxFunction_execCommand(final String cmd, final boolean userInterface, final Object value) {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_63);
         if ((ie && !containsCaseInsensitive(EXECUTE_CMDS_IE, cmd))
@@ -1710,6 +1770,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533065.aspx">MSDN documentation</a>
      * @return the value of the "activeElement" property
      */
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public Object jsxGet_activeElement() {
         if (activeElement_ == null) {
             final HtmlElement body = getHtmlPage().getBody();
@@ -1749,6 +1810,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return <tt>false</tt> if at least one of the event handlers which handled the event
      *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
      */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public boolean jsxFunction_dispatchEvent(final Event event) {
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);
@@ -1762,6 +1824,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param selectors the selectors
      * @return the static node list
      */
+    @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
     public StaticNodeList jsxFunction_querySelectorAll(final String selectors) {
         try {
             final List<Node> nodes = new ArrayList<Node>();
@@ -1780,6 +1843,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param selectors the selectors
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
+    @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
     public Node jsxFunction_querySelector(final String selectors) {
         try {
             final DomNode node = getHtmlPage().querySelector(selectors);
@@ -1816,6 +1880,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Does... nothing.
      * @see <a href="https://developer.mozilla.org/en/DOM/document.clear">Mozilla doc</a>
      */
+    @JsxFunction
     public void jsxFunction_clear() {
         // nothing
     }
@@ -1839,6 +1904,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Sets the head.
      * @param head the head
      */
+    @JsxSetter(@WebBrowser(value = FF, minVersion = 10))
     public void jsxSet_head(final ScriptableObject head) {
         //ignore
     }
@@ -1847,6 +1913,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Returns the current selection.
      * @return the current selection
      */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public Selection jsxFunction_getSelection() {
         return getWindow().jsxFunction_getSelection();
     }
