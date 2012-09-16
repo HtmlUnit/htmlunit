@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -94,6 +95,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
@@ -434,6 +436,12 @@ public final class JavaScriptConfiguration {
                 if (jsxFunction != null && isSupported(jsxFunction.value(), browser)) {
                     final String propertyName = m.getName().substring("jsxFunction_".length());
                     classConfiguration.addFunction(propertyName);
+                }
+            }
+            for (final Field f : classConfiguration.getHostClass().getDeclaredFields()) {
+                final JsxConstant jsxConstant = f.getAnnotation(JsxConstant.class);
+                if (jsxConstant != null && isSupported(jsxConstant.value(), browser)) {
+                    classConfiguration.addConstant(f.getName());
                 }
             }
             for (final String getter : allGetters) {
