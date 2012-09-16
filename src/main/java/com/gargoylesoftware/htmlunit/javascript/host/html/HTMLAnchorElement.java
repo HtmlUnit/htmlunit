@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -24,6 +26,9 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -52,6 +57,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the <tt>href</tt> property.
      * @param href the <tt>href</tt> property value
      */
+    @JsxSetter
     public void jsxSet_href(final String href) {
         getDomNodeOrDie().setAttribute("href", href);
     }
@@ -60,6 +66,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the value of this link's <tt>href</tt> property.
      * @return the value of this link's <tt>href</tt> property
      */
+    @JsxGetter
     public String jsxGet_href() {
         final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
         final String hrefAttr = anchor.getHrefAttribute();
@@ -80,6 +87,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the name property.
      * @param name name attribute value
      */
+    @JsxSetter
     public void jsxSet_name(final String name) {
         getDomNodeOrDie().setAttribute("name", name);
     }
@@ -88,6 +96,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the value of the name property of this link.
      * @return the name property
      */
+    @JsxGetter
     public String jsxGet_name() {
         return getDomNodeOrDie().getAttribute("name");
     }
@@ -96,6 +105,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the target property of this link.
      * @param target target attribute value
      */
+    @JsxSetter
     public void jsxSet_target(final String target) {
         getDomNodeOrDie().setAttribute("target", target);
     }
@@ -104,6 +114,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the value of the target property of this link.
      * @return the href property
      */
+    @JsxGetter
     public String jsxGet_target() {
         return getDomNodeOrDie().getAttribute("target");
     }
@@ -130,6 +141,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the rel property.
      * @param rel rel attribute value
      */
+    @JsxSetter
     public void jsxSet_rel(final String rel) {
         getDomNodeOrDie().setAttribute("rel", rel);
     }
@@ -138,6 +150,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the value of the rel property.
      * @return the rel property
      */
+    @JsxGetter
     public String jsxGet_rel() {
         return ((HtmlAnchor) getDomNodeOrDie()).getRelAttribute();
     }
@@ -146,6 +159,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the rev property.
      * @param rel rev attribute value
      */
+    @JsxSetter
     public void jsxSet_rev(final String rel) {
         getDomNodeOrDie().setAttribute("rev", rel);
     }
@@ -154,6 +168,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the value of the rev property.
      * @return the rev property
      */
+    @JsxGetter
     public String jsxGet_rev() {
         return ((HtmlAnchor) getDomNodeOrDie()).getRevAttribute();
     }
@@ -165,6 +180,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_search() throws Exception {
         final String query = getUrl().getQuery();
         if (query == null) {
@@ -180,6 +196,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_search(final String search) throws Exception {
         final String query;
         if (search == null || "?".equals(search) || "".equals(search)) {
@@ -201,6 +218,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_hash() throws Exception {
         final String hash = getUrl().getRef();
         if (hash == null) {
@@ -215,6 +233,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_hash(final String hash) throws Exception {
         setUrl(UrlUtils.getUrlWithNewRef(getUrl(), hash));
     }
@@ -225,6 +244,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_host() throws Exception {
         final URL url = getUrl();
         final int port = url.getPort();
@@ -242,6 +262,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_host(final String host) throws Exception {
         final String hostname;
         final int port;
@@ -265,6 +286,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_hostname() throws Exception {
         return getUrl().getHost();
     }
@@ -275,6 +297,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_hostname(final String hostname) throws Exception {
         setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
     }
@@ -285,6 +308,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_pathname() throws Exception {
         return getUrl().getPath();
     }
@@ -295,6 +319,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_pathname(final String pathname) throws Exception {
         setUrl(UrlUtils.getUrlWithNewPath(getUrl(), pathname));
     }
@@ -305,6 +330,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_port() throws Exception {
         final int port = getUrl().getPort();
         if (port == -1) {
@@ -319,6 +345,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_port(final String port) throws Exception {
         setUrl(UrlUtils.getUrlWithNewPort(getUrl(), Integer.parseInt(port)));
     }
@@ -329,6 +356,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_protocol() throws Exception {
         return getUrl().getProtocol() + ":";
     }
@@ -339,6 +367,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_protocol(final String protocol) throws Exception {
         final String bareProtocol = StringUtils.substringBefore(protocol, ":");
         setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), bareProtocol));
@@ -394,5 +423,23 @@ public class HTMLAnchorElement extends HTMLElement {
         catch (final MalformedURLException e) {
             return href;
         }
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter(@WebBrowser(FF))
+    public String jsxGet_accessKey() {
+        return super.jsxGet_accessKey();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter(@WebBrowser(FF))
+    public void jsxSet_accessKey(final String accessKey) {
+        super.jsxSet_accessKey(accessKey);
     }
 }

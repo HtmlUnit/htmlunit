@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.applet.Applet;
 import java.lang.reflect.Method;
 
@@ -25,6 +27,9 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * The JavaScript object "HTMLAppletElement".
@@ -101,6 +106,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Returns the value of the "alt" property.
      * @return the value of the "alt" property
      */
+    @JsxGetter
     public String jsxGet_alt() {
         final String alt = getDomNodeOrDie().getAttribute("alt");
         return alt;
@@ -110,6 +116,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Returns the value of the "alt" property.
      * @param alt the value
      */
+    @JsxSetter
     public void jsxSet_alt(final String alt) {
         getDomNodeOrDie().setAttribute("alt", alt);
     }
@@ -118,6 +125,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Gets the "border" attribute.
      * @return the "border" attribute
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_border() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
@@ -127,6 +135,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Sets the "border" attribute.
      * @param border the "border" attribute
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
@@ -135,6 +144,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Returns the value of the "align" property.
      * @return the value of the "align" property
      */
+    @JsxGetter
     public String jsxGet_align() {
         return getAlign(true);
     }
@@ -143,6 +153,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Sets the value of the "align" property.
      * @param align the value of the "align" property
      */
+    @JsxSetter
     public void jsxSet_align(final String align) {
         setAlign(align, false);
     }

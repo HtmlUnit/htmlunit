@@ -117,6 +117,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      * @throws Exception - Exception on error
      */
     @Test
+    @Ignore
     public void getInstance() throws Exception {
         final String configurationString
             = "<?xml version='1.0'?>\n"

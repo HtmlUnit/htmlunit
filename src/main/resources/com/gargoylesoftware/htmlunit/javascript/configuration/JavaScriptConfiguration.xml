@@ -1327,59 +1327,14 @@
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
-        <property name="accessKey">
-            <browser name="Firefox"/>
-        </property>
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="hash"/>
-        <property name="host"/>
-        <property name="hostname"/>
-        <property name="href"/>
-        <property name="name"/>
-        <property name="pathname"/>
-        <property name="port"/>
-        <property name="protocol"/>
-        <property name="rel"/>
-        <property name="rev"/>
-        <property name="search"/>
-        <property name="target"/>
-        <property name="text" notImplemented="true">
-            <browser name="Firefox"/>
-        </property>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAppletElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlApplet">
-        <property name="align"/>
-        <property name="alt"/>
-        <property name="border">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
-        <property name="accessKey">
-            <browser name="Firefox"/>
-        </property>
-        <property name="alt"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAudioElement"
@@ -1390,15 +1345,10 @@
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBase">
-        <property name="href"/>
-        <property name="target"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBaseFont">
-        <property name="color"/>
-        <property name="face"/>
-        <property name="size"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement"

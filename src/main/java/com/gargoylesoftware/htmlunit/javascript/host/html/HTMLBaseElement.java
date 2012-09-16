@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+
 /**
  * The JavaScript object "HTMLBaseElement".
  *
@@ -33,6 +36,7 @@ public class HTMLBaseElement extends HTMLElement {
      * Returns the value of the "href" property.
      * @return the value of the "href" property
      */
+    @JsxGetter
     public String jsxGet_href() {
         return getDomNodeOrDie().getAttribute("href");
     }
@@ -41,6 +45,7 @@ public class HTMLBaseElement extends HTMLElement {
      * Sets the value of the "href" property.
      * @param href the value of the "href" property
      */
+    @JsxSetter
     public void jsxSet_href(final String href) {
         getDomNodeOrDie().setAttribute("href", href);
     }
@@ -49,6 +54,7 @@ public class HTMLBaseElement extends HTMLElement {
      * Returns the value of the "target" property.
      * @return the value of the "target" property
      */
+    @JsxGetter
     public String jsxGet_target() {
         return getDomNodeOrDie().getAttribute("target");
     }
@@ -57,6 +63,7 @@ public class HTMLBaseElement extends HTMLElement {
      * Sets the value of the "target" property.
      * @param target the value of the "target" property
      */
+    @JsxSetter
     public void jsxSet_target(final String target) {
         getDomNodeOrDie().setAttribute("target", target);
     }
