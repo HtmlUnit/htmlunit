@@ -14,6 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
+
 /**
  * The JavaScript object "HTMLMetaElement".
  *
@@ -33,6 +39,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Returns "charset" attribute.
      * @return the charset attribute
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_charset() {
         return "";
     }
@@ -41,6 +48,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Sets the "charset" attribute.
      * @param charset the charset attribute
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_charset(final String charset) {
         //empty
     }
@@ -49,6 +57,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Returns "content" attribute.
      * @return the content attribute
      */
+    @JsxGetter
     public String jsxGet_content() {
         return getDomNodeOrDie().getAttribute("content");
     }
@@ -57,6 +66,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Sets the "content" attribute.
      * @param content the content attribute
      */
+    @JsxSetter
     public void jsxSet_content(final String content) {
         getDomNodeOrDie().setAttribute("content", content);
     }
@@ -65,6 +75,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Returns "http-equiv" attribute.
      * @return the http-equiv attribute
      */
+    @JsxGetter
     public String jsxGet_httpEquiv() {
         return getDomNodeOrDie().getAttribute("http-equiv");
     }
@@ -73,6 +84,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Sets the "http-equiv" attribute.
      * @param httpEquiv the http-equiv attribute
      */
+    @JsxSetter
     public void jsxSet_httpEquiv(final String httpEquiv) {
         getDomNodeOrDie().setAttribute("http-equiv", httpEquiv);
     }
@@ -81,6 +93,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Returns "name" attribute.
      * @return the name attribute
      */
+    @JsxGetter
     public String jsxGet_name() {
         return getDomNodeOrDie().getAttribute("name");
     }
@@ -89,6 +102,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Sets the "name" attribute.
      * @param name the name attribute
      */
+    @JsxSetter
     public void jsxSet_name(final String name) {
         getDomNodeOrDie().setAttribute("name", name);
     }
@@ -97,6 +111,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Returns "scheme" attribute.
      * @return the scheme attribute
      */
+    @JsxGetter
     public String jsxGet_scheme() {
         return getDomNodeOrDie().getAttribute("scheme");
     }
@@ -105,6 +120,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Sets the "scheme" attribute.
      * @param scheme the scheme attribute
      */
+    @JsxSetter
     public void jsxSet_scheme(final String scheme) {
         getDomNodeOrDie().setAttribute("scheme", scheme);
     }
@@ -113,6 +129,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Returns "url" attribute.
      * @return the url attribute
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_url() {
         return "";
     }
@@ -121,6 +138,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Sets the "url" attribute.
      * @param url the url attribute
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_url(final String url) {
         //empty
     }

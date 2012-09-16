@@ -1409,70 +1409,22 @@
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFieldSetElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFieldSet">
-        <property name="align">
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFontElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFont">
-        <property name="color"/>
-        <property name="face"/>
-        <property name="size"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlForm">
-        <doclink
-            url="http://msdn.microsoft.com/en-us/library/ms535249.aspx"
-            descr="MSDN documentation"/>
-
-        <property name="action"/>
-        <property name="elements" writable="false"/>
-        <property name="encoding"/>
-        <property name="length" writable="false"/>
-        <property name="method"/>
-        <property name="name"/>
-        <property name="onsubmit"/>
-        <property name="target"/>
-
-        <function name="item">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="reset"/>
-        <function name="submit"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrame">
-        <property name="border">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="contentDocument" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="contentWindow" writable="false"/>
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="name"/>
-        <property name="onload"/>
-        <property name="src"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrameSet">
-        <property name="border">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="cols"/>
-        <property name="rows"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadElement"
@@ -1484,12 +1436,10 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadingElement"
         JSObject="true">
-        <property name="align" />
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHRElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHorizontalRule">
-        <property name="align" notImplemented="true"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement"
@@ -1498,48 +1448,10 @@
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
-        <property name="align"/>
-        <property name="border">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="contentDocument" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="contentWindow" writable="false"/>
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="height"/>
-        <property name="name"/>
-        <property name="onload"/>
-        <property name="src"/>
-        <property name="width"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
-        <property name="align"/>
-        <property name="alt"/>
-        <property name="border"/>
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="height"/>
-        <property name="onload"/>
-        <property name="src"/>
-        <property name="width"/>
     </class>
 
     <class extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement"
@@ -1586,8 +1498,6 @@
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInsElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInsertedText">
-        <property name="cite"/>
-        <property name="dateTime"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIsIndexElement"
@@ -1596,36 +1506,10 @@
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
-        <property name="accessKey">
-            <browser name="Firefox"/>
-        </property>
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="htmlFor"/>
     </class>
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLegend">
-        <property name="accessKey">
-            <browser name="Firefox"/>
-        </property>
-        <property name="align" notImplemented="true"/>
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement"
@@ -1634,20 +1518,14 @@
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLink">
-        <property name="href"/>
-        <property name="rel"/>
-        <property name="rev"/>
-        <property name="type"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLListElement"
         JSObject="false">
-        <property name="compact"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMap">
-        <property name="areas" writable="false"/>
     </class>
 
     <class extends="HTMLListElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuElement"
@@ -1656,37 +1534,10 @@
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMeta">
-        <property name="charset">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="content"/>
-        <property name="httpEquiv"/>
-        <property name="name"/>
-        <property name="scheme"/>
-        <property name="url">
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlObject">
-        <property name="align" notImplemented="true"/>
-        <property name="alt">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="border"/>
-        <property name="classid">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <class extends="HTMLListElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOListElement"
@@ -1695,41 +1546,17 @@
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptGroupElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOptionGroup">
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="disabled"/>
     </class>
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
-        <property name="defaultSelected" writable="false"/>
-        <property name="disabled"/>
-        <property name="label"/>
-        <property name="selected"/>
-        <property name="text"/>
-        <property name="value"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionsCollection" JSObject="true">
-        <property name="length"/>
-        <function name="add"/>
-        <function name="item"/>
-        <function name="remove">
-            <browser name="Internet Explorer"/>
-            <browser name="Firefox" min-version="10"/>
-        </function>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParagraphElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlParagraph">
-        <property name="align"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParamElement"
@@ -1738,9 +1565,6 @@
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLPreElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlPreformattedText">
-        <property name="cite">
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <!--

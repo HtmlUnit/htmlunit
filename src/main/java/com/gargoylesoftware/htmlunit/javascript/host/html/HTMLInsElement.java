@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+
 /**
  * The JavaScript object "HTMLInsElement".
  *
@@ -33,6 +36,7 @@ public class HTMLInsElement extends HTMLElement {
      * Returns the value of the "cite" property.
      * @return the value of the "cite" property
      */
+    @JsxGetter
     public String jsxGet_cite() {
         final String cite = getDomNodeOrDie().getAttribute("cite");
         return cite;
@@ -42,6 +46,7 @@ public class HTMLInsElement extends HTMLElement {
      * Returns the value of the "cite" property.
      * @param cite the value
      */
+    @JsxSetter
     public void jsxSet_cite(final String cite) {
         getDomNodeOrDie().setAttribute("cite", cite);
     }
@@ -50,6 +55,7 @@ public class HTMLInsElement extends HTMLElement {
      * Returns the value of the "dateTime" property.
      * @return the value of the "dateTime" property
      */
+    @JsxGetter
     public String jsxGet_dateTime() {
         final String cite = getDomNodeOrDie().getAttribute("datetime");
         return cite;
@@ -59,6 +65,7 @@ public class HTMLInsElement extends HTMLElement {
      * Returns the value of the "dateTime" property.
      * @param dateTime the value
      */
+    @JsxSetter
     public void jsxSet_dateTime(final String dateTime) {
         getDomNodeOrDie().setAttribute("datetime", dateTime);
     }

@@ -18,6 +18,8 @@ import java.net.MalformedURLException;
 
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 
 /**
@@ -45,6 +47,7 @@ public class HTMLLinkElement extends HTMLElement {
      * Sets the href property.
      * @param href href attribute value
      */
+    @JsxSetter
     public void jsxSet_href(final String href) {
         getDomNodeOrDie().setAttribute("href", href);
     }
@@ -53,6 +56,7 @@ public class HTMLLinkElement extends HTMLElement {
      * Returns the value of the href property.
      * @return the href property
      */
+    @JsxGetter
     public String jsxGet_href() {
         final HtmlLink link = (HtmlLink) getDomNodeOrDie();
         final String href = link.getHrefAttribute();
@@ -71,6 +75,7 @@ public class HTMLLinkElement extends HTMLElement {
      * Sets the rel property.
      * @param rel rel attribute value
      */
+    @JsxSetter
     public void jsxSet_rel(final String rel) {
         getDomNodeOrDie().setAttribute("rel", rel);
     }
@@ -79,6 +84,7 @@ public class HTMLLinkElement extends HTMLElement {
      * Returns the value of the rel property.
      * @return the rel property
      */
+    @JsxGetter
     public String jsxGet_rel() {
         return ((HtmlLink) getDomNodeOrDie()).getRelAttribute();
     }
@@ -87,6 +93,7 @@ public class HTMLLinkElement extends HTMLElement {
      * Sets the rev property.
      * @param rel rev attribute value
      */
+    @JsxSetter
     public void jsxSet_rev(final String rel) {
         getDomNodeOrDie().setAttribute("rev", rel);
     }
@@ -95,6 +102,7 @@ public class HTMLLinkElement extends HTMLElement {
      * Returns the value of the rev property.
      * @return the rev property
      */
+    @JsxGetter
     public String jsxGet_rev() {
         return ((HtmlLink) getDomNodeOrDie()).getRevAttribute();
     }
@@ -103,6 +111,7 @@ public class HTMLLinkElement extends HTMLElement {
      * Sets the type property.
      * @param type type attribute value
      */
+    @JsxSetter
     public void jsxSet_type(final String type) {
         getDomNodeOrDie().setAttribute("type", type);
     }
@@ -111,6 +120,7 @@ public class HTMLLinkElement extends HTMLElement {
      * Returns the value of the type property.
      * @return the type property
      */
+    @JsxGetter
     public String jsxGet_type() {
         return ((HtmlLink) getDomNodeOrDie()).getTypeAttribute();
     }

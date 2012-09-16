@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -26,6 +28,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * This is the array returned by the "options" property of Select.
@@ -145,6 +151,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @param index the index
      * @return the object or NOT_FOUND
      */
+    @JsxFunction
     public Object jsxFunction_item(final int index) {
         return get(index, null);
     }
@@ -183,6 +190,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     *
     * @return the number of elements in the array
     */
+    @JsxGetter
     public int jsxGet_length() {
         return htmlSelect_.getOptionSize();
     }
@@ -193,6 +201,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * new length.
      * @param newLength the new length property value
      */
+    @JsxSetter
     public void jsxSet_length(final int newLength) {
         final int currentLength = htmlSelect_.getOptionSize();
         if (currentLength > newLength) {
@@ -247,6 +256,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      *
      * @see #put(int, Scriptable, Object)
      */
+    @JsxFunction
     public void jsxFunction_add(final Object newOptionObject, final Object newIndex) {
         // If newIndex is undefined, then the item will be appended to the end of
         // the list
@@ -266,6 +276,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * Removes the option at the specified index.
      * @param index the option index
      */
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
     public void jsxFunction_remove(final int index) {
         if (index < 0) {
             Context.reportRuntimeError("Invalid index: " + index);

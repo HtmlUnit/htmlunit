@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 
 /**
@@ -35,6 +40,7 @@ public class HTMLFieldSetElement extends FormChild {
      * Returns the value of the <tt>align</tt> property.
      * @return the value of the <tt>align</tt> property
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_align() {
         return getAlign(false);
     }
@@ -43,6 +49,7 @@ public class HTMLFieldSetElement extends FormChild {
      * Sets the value of the <tt>align</tt> property.
      * @param align the value of the <tt>align</tt> property
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_align(final String align) {
         setAlign(align, false);
     }

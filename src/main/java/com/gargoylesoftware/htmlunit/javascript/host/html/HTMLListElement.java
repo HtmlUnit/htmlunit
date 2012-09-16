@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * Base class for list-type elements (<tt>ul</tt>, <tt>ol</tt>, <tt>dir</tt>, etc).
@@ -30,6 +32,7 @@ public class HTMLListElement extends HTMLElement {
      * Returns the value of the <tt>compact</tt> attribute.
      * @return the value of the <tt>compact</tt> attribute
      */
+    @JsxGetter
     public boolean jsxGet_compact() {
         return getDomNodeOrDie().hasAttribute("compact");
     }
@@ -38,6 +41,7 @@ public class HTMLListElement extends HTMLElement {
      * Sets the value of the <tt>compact</tt> attribute.
      * @param compact the value of the <tt>compact</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_compact(final Object compact) {
         if (Context.toBoolean(compact)) {
             getDomNodeOrDie().setAttribute("compact", "");

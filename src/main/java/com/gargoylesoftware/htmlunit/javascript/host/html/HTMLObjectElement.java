@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectImpl;
 import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 
@@ -43,6 +47,7 @@ public class HTMLObjectElement extends FormChild {
      * Returns the value of the "alt" property.
      * @return the value of the "alt" property
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_alt() {
         final String alt = getDomNodeOrDie().getAttribute("alt");
         return alt;
@@ -52,6 +57,7 @@ public class HTMLObjectElement extends FormChild {
      * Returns the value of the "alt" property.
      * @param alt the value
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_alt(final String alt) {
         getDomNodeOrDie().setAttribute("alt", alt);
     }
@@ -60,6 +66,7 @@ public class HTMLObjectElement extends FormChild {
      * Gets the "border" attribute.
      * @return the "border" attribute
      */
+    @JsxGetter
     public String jsxGet_border() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
@@ -69,6 +76,7 @@ public class HTMLObjectElement extends FormChild {
      * Sets the "border" attribute.
      * @param border the "border" attribute
      */
+    @JsxSetter
     public void jsxSet_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
@@ -77,6 +85,7 @@ public class HTMLObjectElement extends FormChild {
      * Gets the "classid" attribute.
      * @return the "classid" attribute
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_classid() {
         final String classid = getDomNodeOrDie().getAttribute("classid");
         return classid;
@@ -86,6 +95,7 @@ public class HTMLObjectElement extends FormChild {
      * Sets the "classid" attribute.
      * @param classid the "classid" attribute
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_classid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
         if (classid.indexOf(':') != -1 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_86)

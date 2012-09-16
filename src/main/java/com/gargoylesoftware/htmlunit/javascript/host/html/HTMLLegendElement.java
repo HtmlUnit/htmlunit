@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 
 /**
@@ -29,6 +34,24 @@ public class HTMLLegendElement extends FormChild {
      */
     public HTMLLegendElement() {
         // Empty.
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter(@WebBrowser(FF))
+    public String jsxGet_accessKey() {
+        return super.jsxGet_accessKey();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter(@WebBrowser(FF))
+    public void jsxSet_accessKey(final String accessKey) {
+        super.jsxSet_accessKey(accessKey);
     }
 
 }

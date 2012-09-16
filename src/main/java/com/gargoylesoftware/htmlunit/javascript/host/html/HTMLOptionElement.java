@@ -23,6 +23,8 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 
 /**
@@ -78,6 +80,7 @@ public class HTMLOptionElement extends FormChild {
      * Returns the value of the "value" property.
      * @return the value property
      */
+    @JsxGetter
     public String jsxGet_value() {
         String value = getDomNodeOrNull().getAttribute("value");
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED
@@ -91,6 +94,7 @@ public class HTMLOptionElement extends FormChild {
      * Sets the value of the "value" property.
      * @param newValue the value property
      */
+    @JsxSetter
     public void jsxSet_value(final String newValue) {
         getDomNodeOrNull().setValueAttribute(newValue);
     }
@@ -100,6 +104,7 @@ public class HTMLOptionElement extends FormChild {
      * @return the text property
      */
     @Override
+    @JsxGetter
     public String jsxGet_text() {
         return getDomNodeOrNull().getText();
     }
@@ -116,6 +121,7 @@ public class HTMLOptionElement extends FormChild {
      * Sets the value of the "text" property.
      * @param newText the text property
      */
+    @JsxSetter
     public void jsxSet_text(final String newText) {
         getDomNodeOrNull().setText(newText);
     }
@@ -124,6 +130,7 @@ public class HTMLOptionElement extends FormChild {
      * Returns the value of the "selected" property.
      * @return the text property
      */
+    @JsxGetter
     public boolean jsxGet_selected() {
         return getDomNodeOrNull().isSelected();
     }
@@ -132,6 +139,7 @@ public class HTMLOptionElement extends FormChild {
      * Sets the value of the "selected" property.
      * @param selected the new selected property
      */
+    @JsxSetter
     public void jsxSet_selected(final boolean selected) {
         final HtmlOption optionNode = getDomNodeOrNull();
         final HtmlSelect enclosingSelect = optionNode.getEnclosingSelect();
@@ -152,6 +160,7 @@ public class HTMLOptionElement extends FormChild {
      * Returns the value of the "defaultSelected" property.
      * @return the text property
      */
+    @JsxGetter
     public boolean jsxGet_defaultSelected() {
         return getDomNodeOrNull().isDefaultSelected();
     }
@@ -160,6 +169,7 @@ public class HTMLOptionElement extends FormChild {
      * Returns the value of the "label" property.
      * @return the label property
      */
+    @JsxGetter
     public String jsxGet_label() {
         return getDomNodeOrNull().getLabelAttribute();
     }
@@ -168,7 +178,26 @@ public class HTMLOptionElement extends FormChild {
      * Sets the value of the "label" property.
      * @param label the new label property
      */
+    @JsxSetter
     public void jsxSet_label(final String label) {
         getDomNodeOrNull().setLabelAttribute(label);
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter
+    public boolean jsxGet_disabled() {
+        return super.jsxGet_disabled();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter
+    public void jsxSet_disabled(final boolean disabled) {
+        super.jsxSet_disabled(disabled);
     }
 }

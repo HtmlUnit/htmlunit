@@ -14,7 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.html.HtmlLabel;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 
 /**
@@ -36,6 +41,7 @@ public class HTMLLabelElement extends FormChild {
      * Retrieves the object to which the given label object is assigned.
      * @return the identifier of the element to which the label element is assigned
      */
+    @JsxGetter
     public String jsxGet_htmlFor() {
         return ((HtmlLabel) getDomNodeOrDie()).getForAttribute();
     }
@@ -45,7 +51,27 @@ public class HTMLLabelElement extends FormChild {
      * @param id Specifies the identifier of the element to which the label element is assigned
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms533872.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_htmlFor(final String id) {
         ((HtmlLabel) getDomNodeOrDie()).setAttribute("for", id);
     }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter(@WebBrowser(FF))
+    public String jsxGet_accessKey() {
+        return super.jsxGet_accessKey();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter(@WebBrowser(FF))
+    public void jsxSet_accessKey(final String accessKey) {
+        super.jsxSet_accessKey(accessKey);
+    }
+
 }

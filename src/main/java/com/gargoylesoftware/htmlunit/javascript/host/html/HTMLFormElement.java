@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,6 +45,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 /**
@@ -85,6 +91,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the value of the JavaScript attribute "name".
      * @return the value of this attribute
      */
+    @JsxGetter
     public String jsxGet_name() {
         return getHtmlForm().getNameAttribute();
     }
@@ -93,6 +100,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Sets the value of the JavaScript attribute "name".
      * @param name the new value
      */
+    @JsxSetter
     public void jsxSet_name(final String name) {
         WebAssert.notNull("name", name);
         getHtmlForm().setNameAttribute(name);
@@ -102,6 +110,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the value of the JavaScript attribute "elements".
      * @return the value of this attribute
      */
+    @JsxGetter
     public HTMLCollection jsxGet_elements() {
         if (elements_ == null) {
             final HtmlForm htmlForm = getHtmlForm();
@@ -161,6 +170,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * (cf <a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>)
      * @return the value of this attribute
      */
+    @JsxGetter
     public int jsxGet_length() {
         final int all = jsxGet_elements().jsxGet_length();
         final int images = getHtmlForm().getElementsByAttribute("input", "type", "image").size();
@@ -171,6 +181,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the value of the JavaScript attribute "action".
      * @return the value of this attribute
      */
+    @JsxGetter
     public String jsxGet_action() {
         String action = getHtmlForm().getActionAttribute();
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_169)) {
@@ -188,6 +199,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Sets the value of the JavaScript attribute "action".
      * @param action the new value
      */
+    @JsxSetter
     public void jsxSet_action(final String action) {
         WebAssert.notNull("action", action);
         getHtmlForm().setActionAttribute(action);
@@ -197,6 +209,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the value of the JavaScript attribute "method".
      * @return the value of this attribute
      */
+    @JsxGetter
     public String jsxGet_method() {
         return getHtmlForm().getMethodAttribute();
     }
@@ -205,6 +218,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Sets the value of the JavaScript attribute "method".
      * @param method the new value
      */
+    @JsxSetter
     public void jsxSet_method(final String method) {
         WebAssert.notNull("method", method);
         getHtmlForm().setMethodAttribute(method);
@@ -214,6 +228,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the value of the JavaScript attribute "target".
      * @return the value of this attribute
      */
+    @JsxGetter
     public String jsxGet_target() {
         return getHtmlForm().getTargetAttribute();
     }
@@ -222,6 +237,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the <tt>onsubmit</tt> event handler for this element.
      * @return the <tt>onsubmit</tt> event handler for this element
      */
+    @JsxGetter
     public Object jsxGet_onsubmit() {
         return getEventHandlerProp("onsubmit");
     }
@@ -230,6 +246,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Sets the <tt>onsubmit</tt> event handler for this element.
      * @param onsubmit the <tt>onsubmit</tt> event handler for this element
      */
+    @JsxSetter
     public void jsxSet_onsubmit(final Object onsubmit) {
         setEventHandlerProp("onsubmit", onsubmit);
     }
@@ -238,6 +255,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Sets the value of the JavaScript attribute "target".
      * @param target the new value
      */
+    @JsxSetter
     public void jsxSet_target(final String target) {
         WebAssert.notNull("target", target);
         getHtmlForm().setTargetAttribute(target);
@@ -247,6 +265,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the value of the JavaScript attribute "encoding".
      * @return the value of this attribute
      */
+    @JsxGetter
     public String jsxGet_encoding() {
         return getHtmlForm().getEnctypeAttribute();
     }
@@ -255,6 +274,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Sets the value of the JavaScript attribute "encoding".
      * @param encoding the new value
      */
+    @JsxSetter
     public void jsxSet_encoding(final String encoding) {
         WebAssert.notNull("encoding", encoding);
         getHtmlForm().setEnctypeAttribute(encoding);
@@ -267,6 +287,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     /**
      * Submits the form (at the end of the current script execution).
      */
+    @JsxFunction
     public void jsxFunction_submit() {
         final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
         final WebClient webClient = page.getWebClient();
@@ -296,6 +317,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      *              when a collection is returned
      * @return an object or a collection of objects if successful, or null otherwise
      */
+    @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_item(final Object index, final Object subIndex) {
         if (index instanceof Number) {
             return jsxGet_elements().jsxFunction_item(index);
@@ -313,6 +335,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     /**
      * Resets this form.
      */
+    @JsxFunction
     public void jsxFunction_reset() {
         getHtmlForm().reset();
     }

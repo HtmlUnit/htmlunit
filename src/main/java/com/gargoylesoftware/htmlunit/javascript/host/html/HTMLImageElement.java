@@ -31,6 +31,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * The JavaScript object that represents an "Image".
@@ -84,6 +86,7 @@ public class HTMLImageElement extends HTMLElement {
      * Sets the <tt>src</tt> attribute.
      * @param src the <tt>src</tt> attribute value
      */
+    @JsxSetter
     public void jsxSet_src(final String src) {
         final HtmlElement img = getDomNodeOrDie();
         img.setAttribute("src", src);
@@ -95,6 +98,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the <tt>src</tt> attribute.
      * @return the value of the <tt>src</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_src() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         final String src = img.getSrcAttribute();
@@ -115,6 +119,7 @@ public class HTMLImageElement extends HTMLElement {
      * Sets the <tt>onload</tt> event handler for this element.
      * @param onloadHandler the <tt>onload</tt> event handler for this element
      */
+    @JsxSetter
     public void jsxSet_onload(final Object onloadHandler) {
         setEventHandlerProp("onload", onloadHandler);
         getWindow().getWebWindow().getWebClient()
@@ -125,6 +130,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the <tt>onload</tt> event handler for this element.
      * @return the <tt>onload</tt> event handler for this element
      */
+    @JsxGetter
     public Object jsxGet_onload() {
         return getEventHandlerProp("onload");
     }
@@ -149,6 +155,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the "alt" property.
      * @return the value of the "alt" property
      */
+    @JsxGetter
     public String jsxGet_alt() {
         final String alt = getDomNodeOrDie().getAttribute("alt");
         return alt;
@@ -158,6 +165,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the "alt" property.
      * @param alt the value
      */
+    @JsxSetter
     public void jsxSet_alt(final String alt) {
         getDomNodeOrDie().setAttribute("alt", alt);
     }
@@ -166,6 +174,7 @@ public class HTMLImageElement extends HTMLElement {
      * Gets the "border" attribute.
      * @return the "border" attribute
      */
+    @JsxGetter
     public String jsxGet_border() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
@@ -175,6 +184,7 @@ public class HTMLImageElement extends HTMLElement {
      * Sets the "border" attribute.
      * @param border the "border" attribute
      */
+    @JsxSetter
     public void jsxSet_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
@@ -183,6 +193,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the "align" property.
      * @return the value of the "align" property
      */
+    @JsxGetter
     public String jsxGet_align() {
         final boolean acceptArbitraryValues =
                 getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
@@ -203,6 +214,7 @@ public class HTMLImageElement extends HTMLElement {
      * Sets the value of the "align" property.
      * @param align the value of the "align" property
      */
+    @JsxSetter
     public void jsxSet_align(String align) {
         align = align.toLowerCase();
         final boolean acceptArbitraryValues =
@@ -225,6 +237,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the "width" property.
      * @return the value of the "width" property
      */
+    @JsxGetter
     public int jsxGet_width() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         final String width = img.getWidthAttribute();
@@ -240,6 +253,7 @@ public class HTMLImageElement extends HTMLElement {
      * Sets the value of the "width" property.
      * @param width the value of the "width" property
      */
+    @JsxSetter
     public void jsxSet_width(final String width) {
         getDomNodeOrDie().setAttribute("width", width);
     }
@@ -248,6 +262,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the "height" property.
      * @return the value of the "height" property
      */
+    @JsxGetter
     public int jsxGet_height() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         final String height = img.getHeightAttribute();
@@ -263,6 +278,7 @@ public class HTMLImageElement extends HTMLElement {
      * Sets the value of the "height" property.
      * @param height the value of the "height" property
      */
+    @JsxSetter
     public void jsxSet_height(final String height) {
         getDomNodeOrDie().setAttribute("height", height);
     }

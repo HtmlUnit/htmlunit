@@ -14,6 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
+
 /**
  * The JavaScript object "HTMLPreElement".
  *
@@ -33,6 +39,7 @@ public class HTMLPreElement extends HTMLElement {
      * Returns the value of the "cite" property.
      * @return the value of the "cite" property
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_cite() {
         final String cite = getDomNodeOrDie().getAttribute("cite");
         return cite;
@@ -42,6 +49,7 @@ public class HTMLPreElement extends HTMLElement {
      * Returns the value of the "cite" property.
      * @param cite the value
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_cite(final String cite) {
         getDomNodeOrDie().setAttribute("cite", cite);
     }

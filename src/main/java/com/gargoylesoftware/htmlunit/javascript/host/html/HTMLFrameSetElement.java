@@ -14,7 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * Wrapper for the HTML element "frameset".
@@ -37,6 +42,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      *
      * @param rows the rows attribute value
      */
+    @JsxSetter
     public void jsxSet_rows(final String rows) {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         if (htmlFrameSet != null) {
@@ -50,6 +56,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * @return the rows attribute value
      */
 
+    @JsxGetter
     public String jsxGet_rows() {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         return htmlFrameSet.getRowsAttribute();
@@ -60,6 +67,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      *
      * @param cols the cols attribute value
      */
+    @JsxSetter
     public void jsxSet_cols(final String cols) {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         if (htmlFrameSet != null) {
@@ -72,6 +80,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      *
      * @return the cols attribute value
      */
+    @JsxGetter
     public String jsxGet_cols() {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         return htmlFrameSet.getColsAttribute();
@@ -81,6 +90,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Gets the "border" attribute.
      * @return the "border" attribute
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_border() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
@@ -90,6 +100,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the "border" attribute.
      * @param border the "border" attribute
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }

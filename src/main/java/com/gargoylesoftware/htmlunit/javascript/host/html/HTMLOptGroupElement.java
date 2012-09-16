@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+
 /**
  * The JavaScript object "HTMLOptGroupElement".
  *
@@ -27,6 +30,24 @@ public class HTMLOptGroupElement extends HTMLElement {
      */
     public HTMLOptGroupElement() {
         // Empty.
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter
+    public boolean jsxGet_disabled() {
+        return super.jsxGet_disabled();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter
+    public void jsxSet_disabled(final boolean disabled) {
+        super.jsxSet_disabled(disabled);
     }
 
 }

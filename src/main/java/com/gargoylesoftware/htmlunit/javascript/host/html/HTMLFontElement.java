@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+
 /**
  * The JavaScript object "HTMLFontElement".
  *
@@ -35,6 +38,7 @@ public class HTMLFontElement extends HTMLElement {
      * Gets the "color" attribute.
      * @return the "color" attribute
      */
+    @JsxGetter
     public String jsxGet_color() {
         return getDomNodeOrDie().getAttribute("color");
     }
@@ -43,6 +47,7 @@ public class HTMLFontElement extends HTMLElement {
      * Sets the "color" attribute.
      * @param color the "color" attribute
      */
+    @JsxSetter
     public void jsxSet_color(final String color) {
         getDomNodeOrDie().setAttribute("color", color);
     }
@@ -51,6 +56,7 @@ public class HTMLFontElement extends HTMLElement {
      * Gets the typeface family.
      * @return the typeface family
      */
+    @JsxGetter
     public String jsxGet_face() {
         return getDomNodeOrDie().getAttribute("face");
     }
@@ -59,6 +65,7 @@ public class HTMLFontElement extends HTMLElement {
      * Sets the typeface family.
      * @param face the typeface family
      */
+    @JsxSetter
     public void jsxSet_face(final String face) {
         getDomNodeOrDie().setAttribute("face", face);
     }
@@ -67,6 +74,7 @@ public class HTMLFontElement extends HTMLElement {
      * Gets the "size" attribute.
      * @return the "size" attribute
      */
+    @JsxGetter
     public int jsxGet_size() {
         return (int) Context.toNumber(getDomNodeOrDie().getAttribute("size"));
     }
@@ -75,6 +83,7 @@ public class HTMLFontElement extends HTMLElement {
      * Sets the "size" attribute.
      * @param size the "size" attribute
      */
+    @JsxSetter
     public void jsxSet_size(final int size) {
         getDomNodeOrDie().setAttribute("size", Context.toString(size));
     }

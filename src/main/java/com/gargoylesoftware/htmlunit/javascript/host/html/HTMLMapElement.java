@@ -20,6 +20,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.HtmlMap;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 
 /**
  * The JavaScript object "HTMLMapElement".
@@ -41,6 +42,7 @@ public class HTMLMapElement extends HTMLElement {
      * Returns the value of the JavaScript attribute "areas".
      * @return the value of this attribute
      */
+    @JsxGetter
     public HTMLCollection jsxGet_areas() {
         if (areas_ == null) {
             final HtmlMap map = (HtmlMap) getDomNodeOrDie();
