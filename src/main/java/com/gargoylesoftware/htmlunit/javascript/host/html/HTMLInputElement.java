@@ -386,4 +386,14 @@ public class HTMLInputElement extends FormField {
     public void jsxFunction_click() throws IOException {
         super.jsxFunction_click();
     }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter
+    public String jsxGet_type() {
+        return super.jsxGet_type();
+    }
+
 }
