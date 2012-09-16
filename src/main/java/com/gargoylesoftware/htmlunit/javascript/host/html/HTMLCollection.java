@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,6 +29,8 @@ import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -261,6 +265,7 @@ public class HTMLCollection extends NodeList {
      * @return the element or elements corresponding to the specified name or id
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536634.aspx">MSDN doc</a>
      */
+    @JsxFunction
     public final Object jsxFunction_namedItem(final String name) {
         return nullIfNotFound(getIt(name));
     }
@@ -269,6 +274,7 @@ public class HTMLCollection extends NodeList {
      * Returns the next node in the collection (supporting iteration in IE only).
      * @return the next node in the collection
      */
+    @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_nextNode() {
         Object nextNode;
         final List<Object> elements = getElements();
@@ -285,6 +291,7 @@ public class HTMLCollection extends NodeList {
     /**
      * Resets the node iterator accessed via {@link #jsxFunction_nextNode()}.
      */
+    @JsxFunction(@WebBrowser(IE))
     public void jsxFunction_reset() {
         currentIndex_ = 0;
     }
@@ -297,6 +304,7 @@ public class HTMLCollection extends NodeList {
      * @return all the elements in this element array that have the specified tag name
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536776.aspx">MSDN doc</a>
      */
+    @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_tags(final String tagName) {
         final String tagNameLC = tagName.toLowerCase();
         final HTMLCollection collection = new HTMLSubCollection(this, ".tags('" + tagName + "')") {

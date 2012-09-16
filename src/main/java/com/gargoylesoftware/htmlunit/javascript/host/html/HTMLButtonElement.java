@@ -14,10 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
+import java.io.IOException;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.FormField;
 
 /**
@@ -42,6 +50,7 @@ public class HTMLButtonElement extends FormField {
      * so we don't treat it like {@link HTMLInputElement#jsxSet_type(String)}.</p>
      * @param newType the new type to set
      */
+    @JsxSetter
     public void jsxSet_type(final String newType) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_44)) {
             throw Context.reportRuntimeError("Object doesn't support this action");
@@ -53,7 +62,35 @@ public class HTMLButtonElement extends FormField {
      * {@inheritDoc}
      */
     @Override
+    @JsxGetter
     public String jsxGet_type() {
         return ((HtmlButton) getDomNodeOrDie()).getTypeAttribute();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter
+    public String jsxGet_accessKey() {
+        return super.jsxGet_accessKey();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter
+    public void jsxSet_accessKey(final String accessKey) {
+        super.jsxSet_accessKey(accessKey);
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxFunction(@WebBrowser(FF))
+    public void jsxFunction_click() throws IOException {
+        super.jsxFunction_click();
     }
 }

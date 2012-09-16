@@ -1353,63 +1353,32 @@
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBody">
-        <property name="aLink"/>
-        <property name="background"/>
-        <property name="bgColor"/>
-        <property name="link"/>
-        <property name="text"/>
-        <property name="vLink"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBRElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBreak">
-        <property name="clear"/>
     </class>
 
     <class extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButton">
-        <property name="accessKey"/>
-        <property name="type"/>
-        <function name="click">
-            <browser name="Firefox"/>
-        </function>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCanvas">
         <browser name="Firefox"/>
         <browser name="Chrome"/>
-        <property name="height"/>
-        <property name="width"/>
-        <function name="getContext"/>
-        <function name="toDataURL"/>
     </class>
 
     <class extends="NodeList" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection"
         JSObject="true">
-        <function name="namedItem"/>
-        <function name="nextNode">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="reset">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="tags">
-            <browser name="Internet Explorer"/>
-        </function>
     </class>
 
     <class extends="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollectionTags"
         JSObject="true">
-        <function name="tags">
-            <browser name="Firefox" max-version="2"/>
-        </function>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDelElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDeletedText">
-        <property name="cite"/>
-        <property name="dateTime"/>
     </class>
 
     <class extends="HTMLListElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDirectoryElement"
@@ -1421,19 +1390,6 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement"
         JSObject="true">
-        <property name="align"/>
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="noWrap" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <class extends="HTMLListElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDListElement"

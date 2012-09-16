@@ -22,6 +22,8 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
 /**
@@ -85,6 +87,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @return the value of the <tt>aLink</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533070.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_aLink() {
         return getDomNodeOrDie().getAttribute("aLink");
     }
@@ -94,6 +97,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @param aLink the value of the <tt>aLink</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533070.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_aLink(final String aLink) {
         setColorAttribute("aLink", aLink);
     }
@@ -103,6 +107,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @return the value of the <tt>background</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533498.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_background() {
         final HtmlElement node = getDomNodeOrDie();
         String background = node.getAttribute("background");
@@ -124,6 +129,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @param background the value of the <tt>background</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533498.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_background(final String background) {
         getDomNodeOrDie().setAttribute("background", background);
     }
@@ -133,6 +139,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @return the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_bgColor() {
         return getDomNodeOrDie().getAttribute("bgColor");
     }
@@ -142,6 +149,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @param bgColor the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_bgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
     }
@@ -151,6 +159,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @return the value of the <tt>link</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534119.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_link() {
         return getDomNodeOrDie().getAttribute("link");
     }
@@ -160,6 +169,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @param link the value of the <tt>link</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534119.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_link(final String link) {
         setColorAttribute("link", link);
     }
@@ -170,6 +180,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
     @Override
+    @JsxGetter
     public String jsxGet_text() {
         return getDomNodeOrDie().getAttribute("text");
     }
@@ -179,6 +190,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @param text the value of the <tt>text</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_text(final String text) {
         setColorAttribute("text", text);
     }
@@ -188,6 +200,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @return the value of the <tt>vLink</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_vLink() {
         return getDomNodeOrDie().getAttribute("vLink");
     }
@@ -197,6 +210,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @param vLink the value of the <tt>vLink</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_vLink(final String vLink) {
         setColorAttribute("vLink", vLink);
     }

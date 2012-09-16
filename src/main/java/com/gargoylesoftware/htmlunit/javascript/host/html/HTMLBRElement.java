@@ -19,6 +19,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * The JavaScript object "HTMLBRElement".
@@ -42,6 +44,7 @@ public class HTMLBRElement extends HTMLElement {
      * Returns the value of the <tt>clear</tt> property.
      * @return the value of the <tt>clear</tt> property
      */
+    @JsxGetter
     public String jsxGet_clear() {
         final String clear = getDomNodeOrDie().getAttribute("clear");
         if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)
@@ -55,6 +58,7 @@ public class HTMLBRElement extends HTMLElement {
      * Sets the value of the <tt>clear</tt> property.
      * @param clear the value of the <tt>clear</tt> property
      */
+    @JsxSetter
     public void jsxSet_clear(final String clear) {
         if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)
                 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_43)) {

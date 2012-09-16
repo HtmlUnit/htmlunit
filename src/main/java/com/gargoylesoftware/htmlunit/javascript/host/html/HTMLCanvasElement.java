@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
 
 /**
@@ -34,6 +37,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * Returns the "width" property.
      * @return the "width" property
      */
+    @JsxGetter
     public int jsxGet_width() {
         return jsxGet_currentStyle().getCalculatedWidth(false, false);
     }
@@ -42,6 +46,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * Sets the "width" property.
      * @param width the "width" property
      */
+    @JsxSetter
     public void jsxSet_width(final String width) {
         getDomNodeOrDie().setAttribute("width", width);
     }
@@ -50,6 +55,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * Returns the "height" property.
      * @return the "height" property
      */
+    @JsxGetter
     public int jsxGet_height() {
         return jsxGet_currentStyle().getCalculatedHeight(false, false);
     }
@@ -58,6 +64,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * Sets the "height" property.
      * @param height the "height" property
      */
+    @JsxSetter
     public void jsxSet_height(final String height) {
         getDomNodeOrDie().setAttribute("height", height);
     }
@@ -68,6 +75,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * @return Returns an object that exposes an API for drawing on the canvas,
      * or null if the given context ID is not supported
      */
+    @JsxFunction
     public Object jsxFunction_getContext(final String contextId) {
         if ("2d".equals(contextId)) {
             final CanvasRenderingContext2D context = new CanvasRenderingContext2D();
@@ -84,6 +92,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * @param type the type (optional)
      * @return the data URL
      */
+    @JsxFunction
     public String jsxFunction_toDataURL(final String type) {
         return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAxUlEQVR4nO3BMQEAAADCoPVPbQhf"
             + "oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
