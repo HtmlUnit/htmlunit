@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+
 /**
  * A JavaScript object for a document.navigator.plugins.
  * @version $Revision$
@@ -34,6 +36,7 @@ public class PluginArray extends SimpleArray {
      * @param reloadDocuments reload yes / no
      * @see <a href="http://www.xulplanet.com/references/objref/PluginArray.html#method_refresh">XUL Planet</a>
      */
+    @JsxFunction
     public void jsxFunction_refresh(final boolean reloadDocuments) {
         // nothing
     }

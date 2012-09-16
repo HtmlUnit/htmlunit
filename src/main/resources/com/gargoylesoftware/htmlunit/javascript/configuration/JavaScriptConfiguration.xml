@@ -27,35 +27,9 @@
 
     <class extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.Attr"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomAttr">
-        <property name="expando" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="isId" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="name" writable="false"/>
-        <property name="ownerElement" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="schemaTypeInfo" notImplemented="true" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="specified" writable="false"/>
-        <property name="value"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.BoxObject" JSObject="true">
-        <property name="element" writable="false"/>
-        <property name="firstChild" writable="false"/>
-        <property name="height" writable="false"/>
-        <property name="lastChild" writable="false"/>
-        <property name="nextSibling" writable="false"/>
-        <property name="previousSibling" writable="false"/>
-        <property name="screenX" writable="false"/>
-        <property name="screenY" writable="false"/>
-        <property name="width" writable="false"/>
-        <property name="x" writable="false"/>
-        <property name="y" writable="false"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D" JSObject="true">
@@ -90,21 +64,10 @@
 
     <class extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomCharacterData">
-        <property name="data"/>
-        <property name="length" writable="false"/>
-        <function name="appendData"/>
-        <function name="deleteData"/>
-        <function name="insertData"/>
-        <function name="replaceData"/>
-        <function name="substringData"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.ClientRect"
         JSObject="true">
-        <property name="bottom"/>
-        <property name="left"/>
-        <property name="right"/>
-        <property name="top"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.ClipboardData"
@@ -114,30 +77,6 @@
 
     <class extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Comment"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomComment">
-        <property name="className" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="document" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="id" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="innerText">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="tagName" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="text" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <function name="getAttribute">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="getAttributeNode">
-            <browser name="Internet Explorer"/>
-        </function>
     </class>
 
     <class extends="CSSStyleDeclaration" classname="com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration"
@@ -145,18 +84,6 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Console" JSObject="true">
-        <function name="log"/>
-        <function name="info"/>
-        <function name="warn"/>
-        <function name="error"/>
-        <function name="debug"/>
-        <function name="trace"/>
-        <function name="dir"/>
-        <function name="group"/>
-        <function name="groupEnd"/>
-        <function name="groupCollapsed"/>
-        <function name="time"/>
-        <function name="timeEnd"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates" JSObject="true">
@@ -925,54 +852,6 @@
     </class>
 
     <class extends="EventNode" classname="com.gargoylesoftware.htmlunit.javascript.host.Document" JSObject="true">
-        <property name="defaultView" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="designMode">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms533720.aspx"
-                descr="MSDN documentation"/>
-        </property>
-        <property name="doctype" writable="false"/>
-        <property name="documentElement" writable="false"/>
-        <property name="implementation" writable="false"/>
-        <property name="location">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms535866.aspx"
-                descr="MSDN documentation"/>
-        </property>
-        <property name="referrer" writable="false"/>
-        <function name="captureEvents">
-            <browser name="Firefox"/>
-        </function>
-        <function name="createAttribute"/>
-        <function name="createComment"/>
-        <function name="createDocumentFragment"/>
-        <function name="createElement"/>
-        <function name="createElementNS">
-            <browser name="Firefox"/>
-            <browser name="Chrome"/>
-        </function>
-        <function name="createNSResolver">
-            <browser name="Firefox"/>
-        </function>
-        <function name="createTextNode"/>
-        <function name="evaluate">
-            <browser name="Firefox"/>
-        </function>
-        <function name="getBoxObjectFor">
-            <doclink
-                url="http://www.xulplanet.com/references/xpcomref/ifaces/nsIDOMNSDocument.html#method_getBoxObjectFor"
-                descr="XUL Planet"/>
-            <browser name="Firefox" max-version="3"/>
-        </function>
-        <function name="getElementsByTagName"/>
-        <function name="getElementsByTagNameNS">
-            <browser name="Firefox"/>
-        </function>
-        <function name="importNode">
-            <browser name="Firefox"/>
-        </function>
     </class>
 
     <class extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.DocumentFragment"
@@ -980,323 +859,55 @@
 
         <!-- TODO: In IE, DocumentFragment should extends HTMLDocument -->
 
-        <function name="createAttribute">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="createComment">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="createDocumentFragment">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="createElement">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="createTextNode">
-            <browser name="Internet Explorer"/>
-        </function>
     </class>
 
     <class extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.DocumentType"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomDocumentType">
-        <doclink
-            url="http://msdn.microsoft.com/en-us/library/ms762752.aspx"
-            descr="MSDN documentation"/>
-        <doclink
-            url="http://www.xulplanet.com/references/objref/DocumentType.html"
-            descr="XUL Planet"/>
-        <property name="entities" writable="false"/>
-        <property name="internalSubset" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="name" writable="false"/>
-        <property name="notations" writable="false"/>
-        <property name="publicId" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="systemId" writable="false">
-            <browser name="Firefox"/>
-        </property>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.DOMException" JSObject="true">
         <browser name="Firefox"/>
-        <constant name="DOMSTRING_SIZE_ERR"/>
-        <constant name="HIERARCHY_REQUEST_ERR"/>
-        <constant name="INDEX_SIZE_ERR"/>
-        <constant name="INUSE_ATTRIBUTE_ERR"/>
-        <constant name="INVALID_ACCESS_ERR"/>
-        <constant name="INVALID_CHARACTER_ERR"/>
-        <constant name="INVALID_MODIFICATION_ERR"/>
-        <constant name="INVALID_STATE_ERR"/>
-        <constant name="NAMESPACE_ERR"/>
-        <constant name="NOT_FOUND_ERR"/>
-        <constant name="NOT_SUPPORTED_ERR"/>
-        <constant name="NO_DATA_ALLOWED_ERR"/>
-        <constant name="NO_MODIFICATION_ALLOWED_ERR"/>
-        <constant name="SYNTAX_ERR"/>
-        <constant name="WRONG_DOCUMENT_ERR"/>
-        <property name="code" writable="false"/>
-        <property name="filename" writable="false"/>
-        <property name="lineNumber" writable="false"/>
-        <property name="message" writable="false"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.DOMImplementation"
         JSObject="true">
-        <function name="createDocument">
-            <browser name="Firefox"/>
-        </function>
-        <function name="hasFeature"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.DOMParser"
         jsConstructor="jsConstructor" JSObject="true">
-        <doclink
-            url="http://www.xulplanet.com/references/objref/DOMParser.html"
-            descr="XUL Planet"/>
         <browser name="Firefox"/>
-        <function name="parseFromBuffer" notImplemented="true"/>
-        <function name="parseFromStream" notImplemented="true"/>
-        <function name="parseFromString"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.DOMTokenList" JSObject="true">
-        <property name="length" writable="false"/>
-        <function name="add"/>
-        <function name="contains"/>
-        <function name="item"/>
-        <function name="remove"/>
-        <function name="toggle"/>
     </class>
 
     <class extends="EventNode" classname="com.gargoylesoftware.htmlunit.javascript.host.Element"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomElement">
-        <property name="baseURI" writable="false"/>
-        <property name="attributes" writable="false"/>
-        <property name="childElementCount" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="children" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="classList" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="firstElementChild" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="lastElementChild" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="nextElementSibling" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="previousElementSibling" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="tagName" writable="false"/>
-        <property name="text" writable="false">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms762687.aspx" descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </property>
-
-        <function name="getAttribute"/>
-        <function name="getAttributeNode"/>
-        <function name="getBoundingClientRect">
-            <doclink
-                url="http://msdn2.microsoft.com/en-us/library/ms536433.aspx"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="getElementsByTagName"/>
-        <function name="getElementsByTagNameNS">
-            <browser name="Firefox"/>
-        </function>
-        <function name="hasAttribute">
-            <browser name="Firefox"/>
-        </function>
-        <function name="removeAttribute"/>
-        <function name="selectNodes">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms754523.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="selectSingleNode">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms757846.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="setAttribute"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Enumerator"
         jsConstructor="jsConstructor" JSObject="true">
-        <doclink url="http://msdn.microsoft.com/en-us/library/6ch9zb09.aspx"
-                descr="MSDN documentation"/>
         <browser name="Internet Explorer"/>
-        <function name="atEnd"/>
-        <function name="item"/>
-        <function name="moveFirst"/>
-        <function name="moveNext"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Event" JSObject="true">
-        <doclink
-            url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event"
-            descr="W3C Document Object Model (DOM) Level 2"/>
-        <constant name="ABORT"><browser name="Firefox"/>        </constant>
-        <constant name="ALT_MASK"><browser name="Firefox"/></constant>
-        <constant name="AT_TARGET"><browser name="Firefox"/></constant>
-        <constant name="BACK"><browser name="Firefox"/></constant>
-        <constant name="BLUR"><browser name="Firefox"/></constant>
-        <constant name="BUBBLING_PHASE"><browser name="Firefox"/></constant>
-        <constant name="CAPTURING_PHASE"><browser name="Firefox"/></constant>
-        <constant name="CHANGE"><browser name="Firefox"/></constant>
-        <constant name="CLICK"><browser name="Firefox"/></constant>
-        <constant name="CONTROL_MASK"><browser name="Firefox"/></constant>
-        <constant name="DBLCLICK"><browser name="Firefox"/></constant>
-        <constant name="DRAGDROP"><browser name="Firefox"/></constant>
-        <constant name="ERROR"><browser name="Firefox"/></constant>
-        <constant name="FOCUS"><browser name="Firefox"/></constant>
-        <constant name="FORWARD"><browser name="Firefox"/></constant>
-        <constant name="HELP"><browser name="Firefox"/></constant>
-        <constant name="KEYDOWN"><browser name="Firefox"/></constant>
-        <constant name="KEYPRESS"><browser name="Firefox"/></constant>
-        <constant name="KEYUP"><browser name="Firefox"/></constant>
-        <constant name="LOAD"><browser name="Firefox"/></constant>
-        <constant name="LOAD"><browser name="Firefox"/></constant>
-        <constant name="LOCATE"><browser name="Firefox"/></constant>
-        <constant name="META_MASK"><browser name="Firefox"/></constant>
-        <constant name="MOUSEDOWN"><browser name="Firefox"/></constant>
-        <constant name="MOUSEDRAG"><browser name="Firefox"/></constant>
-        <constant name="MOUSEMOVE"><browser name="Firefox"/></constant>
-        <constant name="MOUSEOUT"><browser name="Firefox"/></constant>
-        <constant name="MOUSEOVER"><browser name="Firefox"/></constant>
-        <constant name="MOUSEUP"><browser name="Firefox"/></constant>
-        <constant name="MOVE"><browser name="Firefox"/></constant>
-        <constant name="RESET"><browser name="Firefox"/></constant>
-        <constant name="RESIZE"><browser name="Firefox"/></constant>
-        <constant name="SCROLL"><browser name="Firefox"/></constant>
-        <constant name="SELECT"><browser name="Firefox"/></constant>
-        <constant name="SHIFT_MASK"><browser name="Firefox"/></constant>
-        <constant name="SUBMIT"><browser name="Firefox"/></constant>
-        <constant name="TEXT"><browser name="Firefox"/></constant>
-        <constant name="UNLOAD"><browser name="Firefox"/></constant>
-        <constant name="XFER_DONE"><browser name="Firefox"/></constant>
-        <property name="altKey" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="bubbles" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="cancelable" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="cancelBubble"/>
-        <property name="ctrlKey" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="currentTarget" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="eventPhase" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="keyCode" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="propertyName" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="returnValue"/>
-        <property name="shiftKey" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="srcElement">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms534638.aspx"
-                descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="target" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="timeStamp" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="type"/>
-        <function name="initEvent">
-            <browser name="Firefox"/>
-        </function>
-        <function name="preventDefault">
-            <browser name="Firefox"/>
-        </function>
-        <function name="stopPropagation">
-            <browser name="Firefox"/>
-        </function>
     </class>
 
     <class extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.EventNode"
         JSObject="true">
-        <property name="onblur"/>
-        <property name="onclick"/>
-        <property name="oncontextmenu"/>
-        <property name="ondblclick"/>
-        <property name="onerror"/>
-        <property name="onfocus"/>
-        <property name="onfocusin">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="onfocusout">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="onkeydown"/>
-        <property name="onkeypress"/>
-        <property name="onkeyup"/>
-        <property name="onmousedown"/>
-        <property name="onmousemove"/>
-        <property name="onmouseout"/>
-        <property name="onmouseover"/>
-        <property name="onmouseup"/>
-        <property name="onpropertychange">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="onresize"/>
-        <function name="fireEvent">
-            <doclink
-                url="http://msdn2.microsoft.com/en-us/library/ms536423.aspx"
-                descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.External" JSObject="true">
         <doclink url="http://msdn.microsoft.com/en-us/library/ms535246.aspx" descr="MSDN Documentation"/>
         <browser name="Internet Explorer"/>
-        <function name="AutoCompleteSaveForm"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.FormChild"
         JSObject="false">
-        <property name="form" writable="false"/>
     </class>
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.FormField"
         JSObject="false">
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="disabled"/>
-        <property name="name"/>
-        <property name="onchange"/>
-        <property name="type" writable="false"/>
-        <property name="value"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation" JSObject="true">
@@ -1307,22 +918,6 @@
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.History"
         JSObject="true">
-        <property name="current" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="length" writable="false"/>
-        <property name="next" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="previous" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <function name="back"/>
-        <function name="forward"/>
-        <function name="go"/>
-        <function name="item">
-            <browser name="Firefox"/>
-        </function>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement"
@@ -1631,46 +1226,22 @@
     <class extends="UIEvent" classname="com.gargoylesoftware.htmlunit.javascript.host.HashChangeEvent" JSObject="true">
         <browser name="Internet Explorer" min-version="8"/>
         <browser name="Firefox"/>
-
-        <property name="newURL" writable="false"/>
-        <property name="oldURL" writable="false"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Location"
         JSObject="true">
-        <property name="hash"/>
-        <property name="host"/>
-        <property name="hostname"/>
-        <property name="href"/>
-        <property name="pathname"/>
-        <property name="port"/>
-        <property name="protocol"/>
-        <property name="search"/>
-
-        <function name="assign"/>
-        <function name="reload"/>
-        <function name="replace"/>
-        <function name="toString"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.MediaList"
         JSObject="true">
-        <property name="length" writable="false"/>
-        <property name="mediaText" writable="false"/>
-        <function name="item"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.MessageEvent" JSObject="true">
-        <property name="data" writable="false"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.MimeType"
         JSObject="true">
         <browser name="Firefox"/>
-        <property name="description" writable="false"/>
-        <property name="enabledPlugin" writable="false"/>
-        <property name="suffixes" writable="false"/>
-        <property name="type" writable="false"/>
     </class>
 
     <class extends="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.MimeTypeArray"
@@ -1678,36 +1249,6 @@
     </class>
 
     <class extends="UIEvent" classname="com.gargoylesoftware.htmlunit.javascript.host.MouseEvent" JSObject="true">
-        <doclink
-            url="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-MouseEvent"
-            descr="W3C Document Object Model (DOM) Level 2 - Mouse event types"/>
-        <property name="altKey" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="button"/>
-        <property name="clientX"/>
-        <property name="clientY"/>
-        <property name="ctrlKey" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="pageX" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="pageY" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="screenX" writable="false"/>
-        <property name="screenY" writable="false"/>
-        <property name="shiftKey" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="which" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <function name="initMouseEvent">
-            <browser name="Firefox"/>
-            <browser name="Chrome"/>
-        </function>
     </class>
 
     <class extends="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.MutationEvent" JSObject="true">
@@ -1723,249 +1264,46 @@
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Namespace"
         JSObject="true">
-        <doclink
-            url="http://msdn.microsoft.com/en-us/library/ms535854.aspx"
-            descr="MSDN documentation"/>
         <browser name="Internet Explorer"/>
-
-        <property name="name" writable="false"/>
-        <property name="urn"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection" JSObject="true">
         <browser name="Internet Explorer"/>
-        <property name="length" writable="false"/>
-        <function name="add"/>
-        <function name="item"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Navigator"
         JSObject="true">
-        <doclink
-            url="http://msdn.microsoft.com/en-us/library/ms535867.aspx"
-            descr="MSDN documentation"/>
-
-        <property name="appCodeName" writable="false"/>
-        <property name="appMinorVersion" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="appName" writable="false"/>
-        <property name="appVersion" writable="false"/>
-        <property name="browserLanguage" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="buildID" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="cookieEnabled" writable="false"/>
-        <property name="cpuClass" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="doNotTrack" writable="false">
-            <browser name="Firefox" min-version="10"/>
-        </property>
-        <property name="geolocation" writable="false">
-            <browser name="Internet Explorer" min-version="9"/>
-            <browser name="Firefox"/>
-            <browser name="Chrome"/>
-        </property>
-        <property name="language" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="mimeTypes" writable="false"/>
-        <property name="msDoNotTrack" writable="false">
-            <browser name="Internet Explorer" min-version="9"/>
-        </property>
-        <property name="onLine" writable="false"/>
-        <property name="oscpu" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="platform" writable="false"/>
-        <property name="plugins" writable="false"/>
-        <property name="product" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="productSub" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="systemLanguage" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="userAgent" writable="false"/>
-        <property name="userLanguage" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="vendor" writable="false">
-            <browser name="Firefox"/>
-            <browser name="Chrome"/>
-        </property>
-        <property name="vendorSub" writable="false">
-            <browser name="Firefox"/>
-            <browser name="Chrome"/>
-        </property>
-
-        <function name="javaEnabled"/>
-        <function name="taintEnabled"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Node" JSObject="true">
-        <constant name="ELEMENT_NODE"><browser name="Firefox"/></constant>
-        <constant name="ATTRIBUTE_NODE"><browser name="Firefox"/></constant>
-        <constant name="TEXT_NODE"><browser name="Firefox"/></constant>
-        <constant name="CDATA_SECTION_NODE"><browser name="Firefox"/></constant>
-        <constant name="ENTITY_REFERENCE_NODE"><browser name="Firefox"/></constant>
-        <constant name="ENTITY_NODE"><browser name="Firefox"/></constant>
-        <constant name="PROCESSING_INSTRUCTION_NODE"><browser name="Firefox"/></constant>
-        <constant name="COMMENT_NODE"><browser name="Firefox"/></constant>
-        <constant name="DOCUMENT_NODE"><browser name="Firefox"/></constant>
-        <constant name="DOCUMENT_TYPE_NODE"><browser name="Firefox"/></constant>
-        <constant name="DOCUMENT_FRAGMENT_NODE"><browser name="Firefox"/></constant>
-        <constant name="NOTATION_NODE"><browser name="Firefox"/></constant>
-        <constant name="DOCUMENT_POSITION_DISCONNECTED"><browser name="Firefox"/></constant>
-        <constant name="DOCUMENT_POSITION_PRECEDING"><browser name="Firefox"/></constant>
-        <constant name="DOCUMENT_POSITION_FOLLOWING"><browser name="Firefox"/></constant>
-        <constant name="DOCUMENT_POSITION_CONTAINS"><browser name="Firefox"/></constant>
-        <constant name="DOCUMENT_POSITION_CONTAINED_BY"><browser name="Firefox"/></constant>
-        <constant name="DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC"><browser name="Firefox"/></constant>
-        <property name="attributes" writable="false"/>
-        <property name="childNodes" writable="false"/>
-        <property name="firstChild" writable="false"/>
-        <property name="lastChild" writable="false"/>
-        <property name="localName" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="namespaceURI" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="nextSibling" writable="false"/>
-        <property name="nodeName" writable="false"/>
-        <property name="nodeType" writable="false"/>
-        <property name="nodeValue"/>
-        <property name="ownerDocument" writable="false"/>
-        <property name="parentElement" writable="false">
-            <browser name="Firefox" min-version="9"/>
-            <browser name="Chrome"/>
-        </property>
-        <property name="parentNode" writable="false"/>
-        <property name="prefix" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="previousSibling" writable="false"/>
-        <property name="textContent">
-            <browser name="Firefox"/>
-        </property>
-        <property name="xml" writable="false">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms755989.aspx"
-                descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </property>
-
-        <function name="addEventListener">
-            <doclink url="http://developer.mozilla.org/en/docs/DOM:element.addEventListener"
-                    descr="Mozilla documentation"/>
-            <browser name="Firefox"/>
-        </function>
-        <function name="appendChild"/>
-        <function name="attachEvent">
-            <doclink url="http://msdn.microsoft.com/en-us/library/ms536343.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="cloneNode"/>
-        <function name="compareDocumentPosition">
-            <browser name="Firefox"/>
-        </function>
-        <function name="detachEvent">
-            <doclink url="http://msdn.microsoft.com/en-us/library/ms536411.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="hasChildNodes"/>
-        <function name="insertBefore"/>
-        <function name="isSameNode">
-            <browser name="Firefox" max-version="9"/>
-        </function>
-        <function name="normalize"/>
-        <function name="removeChild"/>
-        <function name="removeEventListener">
-            <doclink url="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener"
-                    descr="Mozilla documentation"/>
-            <browser name="Firefox"/>
-        </function>
-        <function name="replaceChild"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.NodeFilter" JSObject="true">
-        <constant name="FILTER_ACCEPT"/>
-        <constant name="FILTER_REJECT"/>
-        <constant name="FILTER_SKIP"/>
-        <constant name="SHOW_ALL"/>
-        <constant name="SHOW_ATTRIBUTE"/>
-        <constant name="SHOW_CDATA_SECTION"/>
-        <constant name="SHOW_COMMENT"/>
-        <constant name="SHOW_DOCUMENT"/>
-        <constant name="SHOW_DOCUMENT_FRAGMENT"/>
-        <constant name="SHOW_DOCUMENT_TYPE"/>
-        <constant name="SHOW_ELEMENT"/>
-        <constant name="SHOW_ENTITY"/>
-        <constant name="SHOW_ENTITY_REFERENCE"/>
-        <constant name="SHOW_NOTATION"/>
-        <constant name="SHOW_PROCESSING_INSTRUCTION"/>
-        <constant name="SHOW_TEXT"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.NodeList" JSObject="true">
-        <property name="length" writable="false"/>
-        <function name="item"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.OfflineResourceList"
         JSObject="true">
         <browser name="Firefox"/>
-        <property name="length" writable="false"/>
-        <property name="oncached"/>
-        <property name="onchecking"/>
-        <property name="ondownloading"/>
-        <property name="onerror"/>
-        <property name="onnoupdate"/>
-        <property name="onprogress"/>
-        <property name="onupdateready"/>
-        <property name="status" writable="false"/>
-        <function name="add"/>
-        <function name="hasItem"/>
-        <function name="item"/>
-        <function name="remove"/>
-        <function name="swapCache"/>
-        <function name="update"/>
     </class>
 
     <class extends="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.Plugin"
         JSObject="true">
         <browser name="Firefox"/>
-        <property name="description" writable="false"/>
-        <property name="filename" writable="false"/>
-        <property name="name" writable="false"/>
     </class>
 
     <class extends="SimpleArray" classname="com.gargoylesoftware.htmlunit.javascript.host.PluginArray"
         JSObject="true">
-        <function name="refresh"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Popup" JSObject="true">
-        <doclink url="http://msdn.microsoft.com/en-us/library/ms535882.aspx" descr="MSDN documentation"/>
         <browser name="Internet Explorer"/>
-        <property name="document" writable="false"/>
-        <property name="isOpen" writable="false"/>
-        <function name="hide"/>
-        <function name="show"/>
     </class>
 
     <class extends="Node" classname="com.gargoylesoftware.htmlunit.javascript.host.ProcessingInstruction"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomProcessingInstruction">
-        <property name="data"/>
-        <property name="target" writable="false"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLProgressElement"
@@ -1978,170 +1316,26 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Range" JSObject="true">
-        <constant name="START_TO_START"/>
-        <constant name="START_TO_END"/>
-        <constant name="END_TO_END"/>
-        <constant name="END_TO_START"/>
-        <property name="collapsed" writable="false"/>
-        <property name="commonAncestorContainer" writable="false"/>
-        <property name="endContainer" writable="false"/>
-        <property name="endOffset" writable="false"/>
-        <property name="startContainer" writable="false"/>
-        <property name="startOffset" writable="false"/>
-
-        <function name="collapse"/>
-        <function name="compareBoundaryPoints"/>
-        <function name="createContextualFragment"/>
-        <function name="extractContents"/>
-        <function name="selectNode"/>
-        <function name="selectNodeContents"/>
-        <function name="setEnd"/>
-        <function name="setEndAfter"/>
-        <function name="setEndBefore"/>
-        <function name="setStart"/>
-        <function name="setStartAfter"/>
-        <function name="setStartBefore"/>
-        <function name="cloneContents"/>
-        <function name="deleteContents"/>
-        <function name="insertNode"/>
-        <function name="surroundContents"/>
-        <function name="compareBoundaryPoints"/>
-        <function name="cloneRange"/>
-        <function name="detach"/>
-        <function name="toString"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.RowContainer"
         JSObject="true">
-        <property name="align"/>
-        <property name="rows" writable="false"/>
-        <function name="deleteRow">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536408.aspx"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="insertRow">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536457.aspx"
-                descr="MSDN documentation"/>
-            <doclink
-                url="http://www.mozilla.org/docs/dom/domref/dom_html_ref31.html"
-                descr="Gecko DOM Reference"/>
-            <doclink
-                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-39872903"
-                descr="W3C Document Object Model (DOM) Level 2"/>
-        </function>
-        <function name="moveRow">
-            <browser name="Internet Explorer"/>
-        </function>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Screen" JSObject="true">
-        <doclink
-            url="http://msdn.microsoft.com/en-us/library/ms535868.aspx"
-            descr="MSDN documentation"/>
-        <doclink
-            url="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html"
-            descr="Mozilla documentation"/>
-
-        <property name="availHeight" writable="false"/>
-        <property name="availLeft" writable="false"/>
-        <property name="availTop" writable="false"/>
-        <property name="availWidth" writable="false"/>
-        <property name="bufferDepth"/>
-        <property name="colorDepth" writable="false"/>
-        <property name="deviceXDPI" writable="false"/>
-        <property name="deviceYDPI" writable="false"/>
-        <property name="fontSmoothingEnabled" writable="false"/>
-        <property name="height" writable="false"/>
-        <property name="left"/>
-        <property name="logicalXDPI" writable="false"/>
-        <property name="logicalYDPI" writable="false"/>
-        <property name="pixelDepth" writable="false"/>
-        <property name="top"/>
-        <property name="updateInterval"/>
-        <property name="width" writable="false"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Selection" JSObject="true">
-        <property name="anchorNode" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="anchorOffset" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="focusNode" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="focusOffset" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="isCollapsed" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="rangeCount" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="type" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <function name="addRange">
-            <browser name="Firefox"/>
-        </function>
-        <function name="collapse">
-            <browser name="Firefox"/>
-        </function>
-        <function name="collapseToEnd">
-            <browser name="Firefox"/>
-        </function>
-        <function name="collapseToStart">
-            <browser name="Firefox"/>
-        </function>
-        <function name="createRange">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="empty">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="extend">
-            <browser name="Firefox"/>
-        </function>
-        <function name="getRangeAt">
-            <browser name="Firefox"/>
-        </function>
-        <function name="removeAllRanges">
-            <browser name="Firefox"/>
-        </function>
-        <function name="removeRange">
-            <browser name="Firefox"/>
-        </function>
-        <function name="selectAllChildren">
-            <browser name="Firefox"/>
-        </function>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.SimpleArray"
         JSObject="false">
-        <property name="length" writable="false"/>
-        <function name="item"/>
-        <function name="namedItem"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.StaticNodeList" JSObject="true">
-        <property name="length" writable="false"/>
-        <function name="item"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Storage" JSObject="true">
-        <property name="length" writable="false"/>
-        <function name="clear">
-            <browser name="Internet Explorer" min-version="8"/>
-            <browser name="Firefox"/>
-        </function>
-        <function name="getItem"/>
-        <function name="key"/>
-        <function name="removeItem"/>
-        <function name="setItem"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList" JSObject="true">
@@ -2592,299 +1786,24 @@
 
     <class extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Text"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.DomText">
-        <property name="wholeText" writable="false">
-            <browser name="Firefox"/>
-            <browser name="Chrome"/>
-        </property>
-        <function name="splitText"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.TextRange" JSObject="true">
         <browser name="Internet Explorer"/>
-        <property name="htmlText" writable="false"/>
-        <property name="text"/>
-        <function name="collapse"/>
-        <function name="duplicate"/>
-        <function name="inRange"/>
-        <function name="moveEnd"/>
-        <function name="moveStart"/>
-        <function name="moveToElementText"/>
-        <function name="parentElement"/>
-        <function name="select"/>
-        <function name="setEndPoint"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.TreeWalker" JSObject="true">
-        <property name="currentNode"/>
-        <property name="expandEntityReferences" writable="false"/>
-        <property name="filter" writable="false"/>
-        <property name="root" writable="false"/>
-        <property name="whatToShow" writable="false"/>
-
-        <function name="firstChild"/>
-        <function name="lastChild"/>
-        <function name="nextNode"/>
-        <function name="nextSibling"/>
-        <function name="parentNode"/>
-        <function name="previousNode"/>
-        <function name="previousSibling"/>
     </class>
 
     <class extends="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.UIEvent" JSObject="true">
-        <doclink
-            url="http://www.w3.org/TR/DOM-Level-3-Events/events.html#Events-UIEvent"
-            descr="W3C Document Object Model (DOM) Level 3 - UI event types"/>
-        <property name="altKey" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="ctrlKey" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="detail" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="metaKey" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="shiftKey" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="view" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <function name="initUIEvent">
-            <browser name="Firefox"/>
-        </function>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.WebSocket"
         jsConstructor="jsConstructor" JSObject="true">
-        <doclink url="http://dev.w3.org/html5/websockets/" descr="W3C documentation"/>
         <browser name="Firefox"/>
-        <constant name="CONNECTING"/>
-        <constant name="OPEN"/>
-        <constant name="CLOSING"/>
-        <constant name="CLOSED"/>
-        <property name="onerror"/>
-        <property name="onopen"/>
-        <property name="onmessage"/>
-        <property name="onclose"/>
-        <property name="readyState" writable="false"/>
-        <function name="close"/>
-        <function name="send"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Window" JSObject="true">
-        <doclink url="http://msdn.microsoft.com/en-us/library/ms535873.aspx" descr="MSDN documentation"/>
-        <property name="applicationCache" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="clientInformation" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="clipboardData" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="closed" writable="false"/>
-        <property name="controllers">
-            <browser name="Firefox"/>
-        </property>
-        <property name="document" writable="false"/>
-        <property name="event" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="external" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="frameElement" writable="false"/>
-        <property name="frames" writable="false"/>
-        <property name="globalStorage" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="history" writable="false"/>
-        <property name="innerHeight" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="innerWidth" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="length" writable="false"/>
-        <property name="localStorage" writable="false">
-            <browser name="Internet Explorer" min-version="8"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="location"/>
-        <property name="console">
-            <browser name="Internet Explorer" min-version="9"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="mozInnerScreenX" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="mozInnerScreenY" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="mozPaintCount" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="name"/>
-        <property name="navigator" writable="false"/>
-        <property name="onbeforeunload"/>
-        <property name="onclick"/>
-        <property name="ondblclick"/>
-        <property name="onerror"/>
-        <property name="onload"/>
-        <property name="onhashchange">
-            <browser name="Internet Explorer" min-version="8"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="opener"/>
-        <property name="outerHeight" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="outerWidth" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="pageXOffset" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="pageYOffset" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="parent" writable="false"/>
-        <property name="screen" writable="false"/>
-        <property name="scrollX" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="scrollY" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="self" writable="false"/>
-        <property name="sessionStorage" writable="false">
-            <browser name="Internet Explorer" min-version="8"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="status"/>
-        <property name="top"/>
-        <property name="window" writable="false"/>
-
-        <function name="addEventListener">
-            <doclink url="http://developer.mozilla.org/en/docs/DOM:element.addEventListener"
-                    descr="Mozilla documentation"/>
-            <browser name="Firefox"/>
-        </function>
-        <function name="alert"/>
-        <function name="atob">
-            <browser name="Firefox"/>
-        </function>
-        <function name="attachEvent">
-            <doclink url="http://msdn.microsoft.com/en-us/library/ms536343.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="blur"/>
-        <function name="btoa">
-            <browser name="Firefox"/>
-        </function>
-        <function name="captureEvents">
-            <browser name="Firefox"/>
-        </function>
-        <function name="clearInterval">
-            <doclink url="http://msdn.microsoft.com/en-us/library/ms536353.aspx"
-                    descr="MSDN documentation"/>
-        </function>
-        <function name="clearTimeout"/>
-        <function name="close"/>
-        <function name="CollectGarbage">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="confirm"/>
-        <function name="createPopup">
-            <doclink url="http://msdn.microsoft.com/en-us/library/ms536392.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="detachEvent">
-            <doclink url="http://msdn.microsoft.com/en-us/library/ms536411.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="dump">
-            <browser name="Firefox"/>
-        </function>
-        <function name="execScript">
-            <doclink url="http://msdn.microsoft.com/en-us/library/ms536420.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="focus"/>
-        <function name="getComputedStyle">
-            <browser name="Firefox"/>
-        </function>
-        <function name="getSelection">
-            <browser name="Firefox"/>
-        </function>
-        <function name="moveBy"/>
-        <function name="moveTo"/>
-        <function name="open"/>
-        <function name="print"/>
-        <function name="prompt"/>
-        <function name="removeEventListener">
-            <doclink url="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener"
-                    descr="Mozilla documentation"/>
-            <browser name="Firefox"/>
-        </function>
-        <function name="resizeBy"/>
-        <function name="resizeTo"/>
-        <function name="ScriptEngine">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="ScriptEngineBuildVersion">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="ScriptEngineMajorVersion">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="ScriptEngineMinorVersion">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="scroll"/>
-        <function name="scrollBy"/>
-        <function name="scrollByLines">
-            <browser name="Firefox"/>
-        </function>
-        <function name="scrollByPages">
-            <browser name="Firefox"/>
-        </function>
-        <function name="scrollTo"/>
-        <function name="setInterval">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536749.aspx"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="setTimeout"/>
-        <function name="showModalDialog">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536759.aspx"
-                descr="MSDN documentation"/>
-            <doclink
-                url="https://developer.mozilla.org/en/DOM/window.showModalDialog"
-                descr="Mozilla documentation"/>
-            <browser name="Internet Explorer"/>
-            <browser name="Firefox"/>
-        </function>
-        <function name="showModelessDialog">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536761.aspx"
-                descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="stop">
-            <doclink
-                url="https://developer.mozilla.org/en/DOM/window.stop"
-                descr="Mozilla documentation"/>
-            <browser name="Firefox"/>
-        </function>
     </class>
 
     <class extends="Attr" classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLAttr"
@@ -2998,67 +1917,19 @@
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.XPathNSResolver"
         JSObject="true">
         <browser name="Firefox"/>
-        <function name="lookupNamespaceURI"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.XPathResult"
         JSObject="true">
         <browser name="Firefox"/>
-        <constant name="ANY_TYPE"/>
-        <constant name="NUMBER_TYPE"/>
-        <constant name="STRING_TYPE"/>
-        <constant name="BOOLEAN_TYPE"/>
-        <constant name="UNORDERED_NODE_ITERATOR_TYPE"/>
-        <constant name="ORDERED_NODE_ITERATOR_TYPE"/>
-        <constant name="UNORDERED_NODE_SNAPSHOT_TYPE"/>
-        <constant name="ORDERED_NODE_SNAPSHOT_TYPE"/>
-        <constant name="ANY_UNORDERED_NODE_TYPE"/>
-        <constant name="FIRST_ORDERED_NODE_TYPE"/>
-        <property name="booleanValue" writable="false"/>
-        <property name="numberValue" writable="false"/>
-        <property name="resultType" writable="false"/>
-        <property name="singleNodeValue" writable="false"/>
-        <property name="snapshotLength" writable="false"/>
-        <property name="stringValue" writable="false"/>
-        <function name="iterateNext"/>
-        <function name="snapshotItem"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.XSLTemplate" JSObject="true">
         <browser name="Internet Explorer"/>
-        <property name="stylesheet"/>
-        <function name="createProcessor"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.XSLTProcessor"
         jsConstructor="jsConstructor" JSObject="true">
-        <property name="input">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="output">
-            <browser name="Internet Explorer"/>
-        </property>
-        <function name="addParameter">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="getParameter">
-            <browser name="Firefox"/>
-        </function>
-        <function name="importStylesheet">
-            <browser name="Firefox"/>
-        </function>
-        <function name="setParameter">
-            <browser name="Firefox"/>
-        </function>
-        <function name="transform">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="transformToDocument">
-            <browser name="Firefox"/>
-        </function>
-        <function name="transformToFragment">
-            <browser name="Firefox"/>
-        </function>
     </class>
 
 </configuration>

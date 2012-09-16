@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -24,6 +27,9 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * A JavaScript object for a Selection.
@@ -58,6 +64,7 @@ public class Selection extends SimpleScriptable {
      * Returns the node in which the selection begins.
      * @return the node in which the selection begins
      */
+    @JsxGetter(@WebBrowser(FF))
     public Node jsxGet_anchorNode() {
         final Range last = getLastRange();
         if (last == null) {
@@ -70,6 +77,7 @@ public class Selection extends SimpleScriptable {
      * Returns the number of characters that the selection's anchor is offset within the anchor node.
      * @return the number of characters that the selection's anchor is offset within the anchor node
      */
+    @JsxGetter(@WebBrowser(FF))
     public int jsxGet_anchorOffset() {
         final Range last = getLastRange();
         if (last == null) {
@@ -82,6 +90,7 @@ public class Selection extends SimpleScriptable {
      * Returns the node in which the selection ends.
      * @return the node in which the selection ends
      */
+    @JsxGetter(@WebBrowser(FF))
     public Node jsxGet_focusNode() {
         final Range last = getLastRange();
         if (last == null) {
@@ -94,6 +103,7 @@ public class Selection extends SimpleScriptable {
      * Returns the number of characters that the selection's focus is offset within the focus node.
      * @return the number of characters that the selection's focus is offset within the focus node
      */
+    @JsxGetter(@WebBrowser(FF))
     public int jsxGet_focusOffset() {
         final Range last = getLastRange();
         if (last == null) {
@@ -106,6 +116,7 @@ public class Selection extends SimpleScriptable {
      * Returns a boolean indicating whether the selection's start and end points are at the same position.
      * @return a boolean indicating whether the selection's start and end points are at the same position
      */
+    @JsxGetter(@WebBrowser(FF))
     public boolean jsxGet_isCollapsed() {
         final List<Range> ranges = getRanges();
         return (ranges.isEmpty() || (ranges.size() == 1 && ranges.get(0).getCollapsed()));
@@ -115,6 +126,7 @@ public class Selection extends SimpleScriptable {
      * Returns the number of ranges in the selection.
      * @return the number of ranges in the selection
      */
+    @JsxGetter(@WebBrowser(FF))
     public int jsxGet_rangeCount() {
         return getRanges().size();
     }
@@ -123,6 +135,7 @@ public class Selection extends SimpleScriptable {
      * Returns the type of selection (IE only).
      * @return the type of selection
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_type() {
         return type_;
     }
@@ -131,6 +144,7 @@ public class Selection extends SimpleScriptable {
      * Creates a TextRange object from the current text selection (IE only).
      * @return the created TextRange object
      */
+    @JsxFunction(@WebBrowser(IE))
     public TextRange jsxFunction_createRange() {
         final TextRange range;
         final Range first = getFirstRange();
@@ -149,6 +163,7 @@ public class Selection extends SimpleScriptable {
      * Adds a range to the selection.
      * @param range the range to add
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_addRange(final com.gargoylesoftware.htmlunit.javascript.host.Range range) {
         getRanges().add(range.toW3C());
     }
@@ -157,6 +172,7 @@ public class Selection extends SimpleScriptable {
      * Removes a range from the selection.
      * @param range the range to remove
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_removeRange(final com.gargoylesoftware.htmlunit.javascript.host.Range range) {
         getRanges().remove(range.toW3C());
     }
@@ -164,6 +180,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Removes all ranges from the selection.
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_removeAllRanges() {
         getRanges().clear();
     }
@@ -174,6 +191,7 @@ public class Selection extends SimpleScriptable {
      * @param index the index of the range to return
      * @return the range at the specified index
      */
+    @JsxFunction(@WebBrowser(FF))
     public com.gargoylesoftware.htmlunit.javascript.host.Range jsxFunction_getRangeAt(final int index) {
         final List<Range> ranges = getRanges();
         if (index < 0 || index >= ranges.size()) {
@@ -193,6 +211,7 @@ public class Selection extends SimpleScriptable {
      * @param parentNode the caret location will be within this node
      * @param offset the caret will be placed this number of characters from the beginning of the parentNode's text
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_collapse(final Node parentNode, final int offset) {
         final List<Range> ranges = getRanges();
         ranges.clear();
@@ -202,6 +221,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Moves the anchor of the selection to the same point as the focus. The focus does not move.
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_collapseToEnd() {
         final Range last = getLastRange();
         if (last != null) {
@@ -215,6 +235,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Moves the focus of the selection to the same point at the anchor. The anchor does not move.
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_collapseToStart() {
         final Range first = getFirstRange();
         if (first != null) {
@@ -228,6 +249,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Cancels the current selection, sets the selection type to none, and sets the item property to null (IE only).
      */
+    @JsxFunction(@WebBrowser(IE))
     public void jsxFunction_empty() {
         type_ = "None";
     }
@@ -237,6 +259,7 @@ public class Selection extends SimpleScriptable {
      * @param parentNode the node within which the focus will be moved
      * @param offset the number of characters from the beginning of parentNode's text the focus will be placed
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_extend(final Node parentNode, final int offset) {
         final Range last = getLastRange();
         if (last != null) {
@@ -248,6 +271,7 @@ public class Selection extends SimpleScriptable {
      * Adds all the children of the specified node to the selection. The previous selection is lost.
      * @param parentNode all children of parentNode will be selected; parentNode itself is not part of the selection
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_selectAllChildren(final Node parentNode) {
         final List<Range> ranges = getRanges();
         ranges.clear();

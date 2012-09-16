@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 
 /**
  * A JavaScript object for MessageEvent.
@@ -47,6 +48,7 @@ public class MessageEvent extends SimpleScriptable {
      * Retrieves the data contained.
      * @return the data contained
      */
+    @JsxGetter
     public Object jsxGet_data() {
         return data_;
     }

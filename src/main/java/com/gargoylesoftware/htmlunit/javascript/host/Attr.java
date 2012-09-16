@@ -14,10 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * A JavaScript object for an Attribute.
@@ -53,6 +59,7 @@ public class Attr extends Node {
      * Returns <tt>true</tt> if this attribute is an ID.
      * @return <tt>true</tt> if this attribute is an ID
      */
+    @JsxGetter(@WebBrowser(FF))
     public boolean jsxGet_isId() {
         return getDomNodeOrDie().isId();
     }
@@ -61,6 +68,7 @@ public class Attr extends Node {
      * Returns <tt>true</tt> if arbitrary properties can be added to this attribute.
      * @return <tt>true</tt> if arbitrary properties can be added to this attribute
      */
+    @JsxGetter(@WebBrowser(IE))
     public boolean jsxGet_expando() {
         return true;
     }
@@ -69,6 +77,7 @@ public class Attr extends Node {
      * Returns the name of the attribute.
      * @return the name of the attribute
      */
+    @JsxGetter
     public String jsxGet_name() {
         return getDomNodeOrDie().getName();
     }
@@ -86,6 +95,7 @@ public class Attr extends Node {
      * Returns the owner element.
      * @return the owner element
      */
+    @JsxGetter(@WebBrowser(FF))
     public Object jsxGet_ownerElement() {
         final DomElement parent = getDomNodeOrDie().getOwnerElement();
         if (parent != null) {
@@ -107,6 +117,7 @@ public class Attr extends Node {
      * Returns <tt>true</tt> if this attribute has been specified.
      * @return <tt>true</tt> if this attribute has been specified
      */
+    @JsxGetter
     public boolean jsxGet_specified() {
         return getDomNodeOrDie().getSpecified();
     }
@@ -115,6 +126,7 @@ public class Attr extends Node {
      * Returns the value of this attribute.
      * @return the value of this attribute
      */
+    @JsxGetter
     public String jsxGet_value() {
         return getDomNodeOrDie().getValue();
     }
@@ -123,6 +135,7 @@ public class Attr extends Node {
      * Sets the value of this attribute.
      * @param value the new value of this attribute
      */
+    @JsxSetter
     public void jsxSet_value(final String value) {
         getDomNodeOrDie().setValue(value);
     }

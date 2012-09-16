@@ -15,6 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * <p>A collection of offline resources as defined in the
@@ -59,6 +62,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Returns the event listener to be called when fetching the application cache manifest and checking for updates.
      * @return the event listener to be called when fetching the application cache manifest and checking for updates
      */
+    @JsxGetter
     public Object jsxGet_onchecking() {
         return onchecking_;
     }
@@ -67,6 +71,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Sets the event listener to be called when fetching the application cache manifest and checking for updates.
      * @param o the event listener to be called when fetching the application cache manifest and checking for updates
      */
+    @JsxSetter
     public void jsxSet_onchecking(final Object o) {
         onchecking_ = o;
     }
@@ -75,6 +80,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Returns the event listener to be called when an error occurs during the caching process.
      * @return the event listener to be called when an error occurs during the caching process
      */
+    @JsxGetter
     public Object jsxGet_onerror() {
         return onerror_;
     }
@@ -83,6 +89,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Sets the event listener to be called when an error occurs during the caching process.
      * @param o the event listener to be called when an error occurs during the caching process
      */
+    @JsxSetter
     public void jsxSet_onerror(final Object o) {
         onerror_ = o;
     }
@@ -91,6 +98,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Returns the event listener to be called when there is no update to download.
      * @return the event listener to be called when there is no update to download
      */
+    @JsxGetter
     public Object jsxGet_onnoupdate() {
         return onnoupdate_;
     }
@@ -99,6 +107,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Sets the event listener to be called when there is no update to download.
      * @param o the event listener to be called when there is no update to download
      */
+    @JsxSetter
     public void jsxSet_onnoupdate(final Object o) {
         onnoupdate_ = o;
     }
@@ -107,6 +116,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Returns the event listener to be called when resources are being downloaded into the cache.
      * @return the event listener to be called when resources are being downloaded into the cache
      */
+    @JsxGetter
     public Object jsxGet_ondownloading() {
         return ondownloading_;
     }
@@ -115,6 +125,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Sets the event listener to be called when resources are being downloaded into the cache.
      * @param o the event listener to be called when resources are being downloaded into the cache
      */
+    @JsxSetter
     public void jsxSet_ondownloading(final Object o) {
         ondownloading_ = o;
     }
@@ -123,6 +134,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Returns the event listener to be called periodically throughout the download process.
      * @return the event listener to be called periodically throughout the download process
      */
+    @JsxGetter
     public Object jsxGet_onprogress() {
         return onprogress_;
     }
@@ -131,6 +143,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Sets the event listener to be called periodically throughout the download process.
      * @param o the event listener to be called periodically throughout the download process
      */
+    @JsxSetter
     public void jsxSet_onprogress(final Object o) {
         onprogress_ = o;
     }
@@ -139,6 +152,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Returns the event listener to be called when a resource update is ready.
      * @return the event listener to be called when a resource update is ready
      */
+    @JsxGetter
     public Object jsxGet_onupdateready() {
         return onupdateready_;
     }
@@ -147,6 +161,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Sets the event listener to be called when a resource update is ready.
      * @param o the event listener to be called when a resource update is ready
      */
+    @JsxSetter
     public void jsxSet_onupdateready(final Object o) {
         onupdateready_ = o;
     }
@@ -155,6 +170,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Returns the event listener to be called when caching is complete.
      * @return the event listener to be called when caching is complete
      */
+    @JsxGetter
     public Object jsxGet_oncached() {
         return oncached_;
     }
@@ -163,6 +179,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Sets the event listener to be called when caching is complete.
      * @param o the event listener to be called when caching is complete
      */
+    @JsxSetter
     public void jsxSet_oncached(final Object o) {
         oncached_ = o;
     }
@@ -171,6 +188,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Returns the status of the application cache.
      * @return the status of the application cache
      */
+    @JsxGetter
     public short jsxGet_status() {
         return status_;
     }
@@ -179,6 +197,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Returns the number of entries in the dynamically managed offline resource list.
      * @return the number of entries in the dynamically managed offline resource list
      */
+    @JsxGetter
     public int jsxGet_length() {
         return 0; // TODO: implement
     }
@@ -187,6 +206,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Adds an item to the dynamically managed entries. The resource will be fetched and added to the application cache.
      * @param uri the URI of the item to add to the dynamically managed entries
      */
+    @JsxFunction
     public void jsxFunction_add(final String uri) {
         // TODO: implement
     }
@@ -196,6 +216,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @param uri the URI to check
      * @return <tt>true</tt> if the specified URI represents a resource that's in the application cache's list
      */
+    @JsxFunction
     public boolean jsxFunction_hasItem(final String uri) {
         return false; // TODO: implement
     }
@@ -205,6 +226,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @param index the index of the cached item whose URI should be returned
      * @return the URI of the item at the specific offset into the list of cached resources
      */
+    @JsxFunction
     public String jsxFunction_item(final int index) {
         return null; // TODO: implement
     }
@@ -214,6 +236,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * to the given URI in the application cache, the cache entry is removed.
      * @param uri the URI to remove
      */
+    @JsxFunction
     public void jsxFunction_remove(final String uri) {
         // TODO: implement
     }
@@ -221,6 +244,7 @@ public class OfflineResourceList extends SimpleScriptable {
     /**
      * Swaps in the newest version of the application cache.
      */
+    @JsxFunction
     public void jsxFunction_swapCache() {
         // TODO: implement
     }
@@ -228,6 +252,7 @@ public class OfflineResourceList extends SimpleScriptable {
     /**
      * Begins the application cache update process.
      */
+    @JsxFunction
     public void jsxFunction_update() {
         // TODO: implement
     }

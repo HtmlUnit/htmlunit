@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
 
 /**
  * A dummy implementation of a JavaScript object for External.
@@ -27,6 +28,7 @@ public class External extends SimpleScriptable {
     /**
      * Empty implementation.
      */
+    @JsxFunction
     public void jsxFunction_AutoCompleteSaveForm() {
     }
 }

@@ -19,6 +19,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * Base class for all JavaScript object corresponding to form fields.
@@ -52,6 +54,7 @@ public class FormField extends FormChild {
      *
      * @return the value of this attribute
      */
+    @JsxGetter
     public String jsxGet_value() {
         return getDomNodeOrDie().getAttribute("value");
     }
@@ -61,6 +64,7 @@ public class FormField extends FormChild {
      *
      * @param newValue  the new value
      */
+    @JsxSetter
     public void jsxSet_value(final String newValue) {
         getDomNodeOrDie().setAttribute("value", newValue);
     }
@@ -70,6 +74,7 @@ public class FormField extends FormChild {
      *
      * @return the value of this attribute
      */
+    @JsxGetter
     public String jsxGet_name() {
         return getDomNodeOrDie().getAttribute("name");
     }
@@ -79,6 +84,7 @@ public class FormField extends FormChild {
      *
      * @param newName  the new name
      */
+    @JsxSetter
     public void jsxSet_name(final String newName) {
         getDomNodeOrDie().setAttribute("name", newName);
     }
@@ -88,6 +94,7 @@ public class FormField extends FormChild {
      *
      * @return the value of this attribute
      */
+    @JsxGetter
     public String jsxGet_type() {
         return getDomNodeOrDie().getAttribute("type");
     }
@@ -96,6 +103,7 @@ public class FormField extends FormChild {
      * Sets the <tt>onchange</tt> event handler for this element.
      * @param onchange the <tt>onchange</tt> event handler for this element
      */
+    @JsxSetter
     public void jsxSet_onchange(final Object onchange) {
         setEventHandlerProp("onchange", onchange);
     }
@@ -104,7 +112,26 @@ public class FormField extends FormChild {
      * Returns the <tt>onchange</tt> event handler for this element.
      * @return the <tt>onchange</tt> event handler for this element
      */
+    @JsxGetter
     public Function jsxGet_onchange() {
         return getEventHandler("onchange");
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter
+    public boolean jsxGet_disabled() {
+        return super.jsxGet_disabled();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter
+    public void jsxSet_disabled(final boolean disabled) {
+        super.jsxSet_disabled(disabled);
     }
 }

@@ -14,12 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
 import java.util.LinkedList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
@@ -122,6 +129,7 @@ public class MouseEvent extends UIEvent {
      * The horizontal coordinate at which the event occurred relative to the DOM implementation's client area.
      * @return the horizontal coordinate
      */
+    @JsxGetter
     public int jsxGet_clientX() {
         if (clientX_ == null) {
             clientX_ = Integer.valueOf(jsxGet_screenX());
@@ -133,6 +141,7 @@ public class MouseEvent extends UIEvent {
      * Sets the clientX value.
      * @param value the clientX value
      */
+    @JsxSetter
     public void jsxSet_clientX(final int value) {
         clientX_ = value;
     }
@@ -144,6 +153,7 @@ public class MouseEvent extends UIEvent {
      *
      * @return the horizontal coordinate
      */
+    @JsxGetter
     public int jsxGet_screenX() {
         if (screenX_ == null) {
             final HTMLElement target = (HTMLElement) jsxGet_target();
@@ -157,6 +167,7 @@ public class MouseEvent extends UIEvent {
      * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenX()})
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:event.pageX">Mozilla doc</a>
      */
+    @JsxGetter(@WebBrowser(FF))
     public int jsxGet_pageX() {
         return jsxGet_screenX();
     }
@@ -165,6 +176,7 @@ public class MouseEvent extends UIEvent {
      * The vertical coordinate at which the event occurred relative to the DOM implementation's client area.
      * @return the horizontal coordinate
      */
+    @JsxGetter
     public int jsxGet_clientY() {
         if (clientY_ == null) {
             clientY_ = Integer.valueOf(jsxGet_screenY());
@@ -176,6 +188,7 @@ public class MouseEvent extends UIEvent {
      * Sets the clientY value.
      * @param value the clientY value
      */
+    @JsxSetter
     public void jsxSet_clientY(final int value) {
         clientY_ = value;
     }
@@ -187,6 +200,7 @@ public class MouseEvent extends UIEvent {
      *
      * @return the vertical coordinate
      */
+    @JsxGetter
     public int jsxGet_screenY() {
         if (screenY_ == null) {
             final HTMLElement target = (HTMLElement) jsxGet_target();
@@ -200,6 +214,7 @@ public class MouseEvent extends UIEvent {
      * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenY()})
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:event.pageY">Mozilla doc</a>
      */
+    @JsxGetter(@WebBrowser(FF))
     public int jsxGet_pageY() {
         return jsxGet_screenY();
     }
@@ -208,6 +223,7 @@ public class MouseEvent extends UIEvent {
      * Gets the button code.
      * @return the button code
      */
+    @JsxGetter
     public int jsxGet_button() {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_116)) {
             // In IE7: oncontextmenu event.button is 0
@@ -226,6 +242,7 @@ public class MouseEvent extends UIEvent {
      * Sets the button code.
      * @param value the button code
      */
+    @JsxSetter
     public void jsxSet_button(int value) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_116)
                 && !TYPE_CLICK.equals(jsxGet_type())) {
@@ -253,6 +270,7 @@ public class MouseEvent extends UIEvent {
      * @see <a href="http://unixpapa.com/js/mouse.html">Javascript Madness: Mouse Events</a>
      * @return the button code
      */
+    @JsxGetter(@WebBrowser(FF))
     public int jsxGet_which() {
         return button_ + 1;
     }
@@ -276,6 +294,7 @@ public class MouseEvent extends UIEvent {
      * @param button what mouse button is pressed
      * @param relatedTarget is there a related target for the event
      */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public void jsxFunction_initMouseEvent(
             final String type,
             final boolean bubbles,
@@ -334,4 +353,29 @@ public class MouseEvent extends UIEvent {
             || TYPE_CONTEXT_MENU.equals(type);
     }
 
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter(@WebBrowser(FF))
+    public boolean jsxGet_altKey() {
+        return super.jsxGet_altKey();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter(@WebBrowser(FF))
+    public boolean jsxGet_ctrlKey() {
+        return super.jsxGet_ctrlKey();
+    }
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter(@WebBrowser(FF))
+    public boolean jsxGet_shiftKey() {
+        return super.jsxGet_shiftKey();
+    }
 }

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -22,6 +23,10 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -50,6 +55,7 @@ public class RowContainer extends HTMLElement {
      * Returns the rows in the element.
      * @return the rows in the element
      */
+    @JsxGetter
     public Object jsxGet_rows() {
         if (rows_ == null) {
             rows_ = new HTMLCollection(getDomNodeOrDie(), false, "rows") {
@@ -77,6 +83,7 @@ public class RowContainer extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536408.aspx">MSDN Documentation</a>
      * @param rowIndex the zero-based index of the row to delete
      */
+    @JsxFunction
     public void jsxFunction_deleteRow(int rowIndex) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final int rowCount = rows.jsxGet_length();
@@ -99,6 +106,7 @@ public class RowContainer extends HTMLElement {
      *        The default value is -1, which appends the new row to the end of the rows collection
      * @return the newly-created row
      */
+    @JsxFunction
     public Object jsxFunction_insertRow(final Object index) {
         int rowIndex = -1;
         if (index != Undefined.instance) {
@@ -154,6 +162,7 @@ public class RowContainer extends HTMLElement {
      * @param targetIndex the index to move the row to
      * @return the row that was moved
      */
+    @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_moveRow(final int sourceIndex, final int targetIndex) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final int rowCount = rows.jsxGet_length();
@@ -172,6 +181,7 @@ public class RowContainer extends HTMLElement {
      * Returns the value of the "align" property.
      * @return the value of the "align" property
      */
+    @JsxGetter
     public String jsxGet_align() {
         return getAlign(true);
     }
@@ -180,6 +190,7 @@ public class RowContainer extends HTMLElement {
      * Sets the value of the "align" property.
      * @param align the value of the "align" property
      */
+    @JsxSetter
     public void jsxSet_align(final String align) {
         setAlign(align, false);
     }

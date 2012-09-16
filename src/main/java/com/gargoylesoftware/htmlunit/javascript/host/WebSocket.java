@@ -29,6 +29,10 @@ import org.eclipse.jetty.websocket.WebSocketClientFactory;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * A JavaScript object for a WebSocket.
@@ -43,12 +47,16 @@ public class WebSocket extends SimpleScriptable {
     private static final Log LOG = LogFactory.getLog(WebSocket.class);
 
     /** The connection has not yet been established. */
+    @JsxConstant
     public static final int CONNECTING = 0;
     /** The WebSocket connection is established and communication is possible. */
+    @JsxConstant
     public static final int OPEN = 1;
     /** The connection is going through the closing handshake. */
+    @JsxConstant
     public static final int CLOSING = 2;
     /** The connection has been closed or could not be opened. */
+    @JsxConstant
     public static final int CLOSED = 3;
 
     private Function closeHandler_;
@@ -114,6 +122,7 @@ public class WebSocket extends SimpleScriptable {
      * Returns the event handler that fires on close.
      * @return the event handler that fires on close
      */
+    @JsxGetter
     public Function jsxGet_onclose() {
         return closeHandler_;
     }
@@ -122,6 +131,7 @@ public class WebSocket extends SimpleScriptable {
      * Sets the event handler that fires on close.
      * @param closeHandler the event handler that fires on close
      */
+    @JsxSetter
     public void jsxSet_onclose(final Function closeHandler) {
         closeHandler_ = closeHandler;
     }
@@ -130,6 +140,7 @@ public class WebSocket extends SimpleScriptable {
      * Returns the event handler that fires on error.
      * @return the event handler that fires on error
      */
+    @JsxGetter
     public Function jsxGet_onerror() {
         return errorHandler_;
     }
@@ -138,6 +149,7 @@ public class WebSocket extends SimpleScriptable {
      * Sets the event handler that fires on error.
      * @param errorHandler the event handler that fires on error
      */
+    @JsxSetter
     public void jsxSet_onerror(final Function errorHandler) {
         errorHandler_ = errorHandler;
     }
@@ -146,6 +158,7 @@ public class WebSocket extends SimpleScriptable {
      * Returns the event handler that fires on message.
      * @return the event handler that fires on message
      */
+    @JsxGetter
     public Function jsxGet_onmessage() {
         return messageHandler_;
     }
@@ -154,6 +167,7 @@ public class WebSocket extends SimpleScriptable {
      * Sets the event handler that fires on message.
      * @param messageHandler the event handler that fires on message
      */
+    @JsxSetter
     public void jsxSet_onmessage(final Function messageHandler) {
         messageHandler_ = messageHandler;
     }
@@ -162,6 +176,7 @@ public class WebSocket extends SimpleScriptable {
      * Returns the event handler that fires on open.
      * @return the event handler that fires on open
      */
+    @JsxGetter
     public Function jsxGet_onopen() {
         return openHandler_;
     }
@@ -170,6 +185,7 @@ public class WebSocket extends SimpleScriptable {
      * Sets the event handler that fires on open.
      * @param openHandler the event handler that fires on open
      */
+    @JsxSetter
     public void jsxSet_onopen(final Function openHandler) {
         openHandler_ = openHandler;
         fireOnOpen();
@@ -185,6 +201,7 @@ public class WebSocket extends SimpleScriptable {
      * </ul>
      * @return the current state of the connection
      */
+    @JsxGetter
     public int jsxGet_readyState() {
         return readyState_;
     }
@@ -195,6 +212,7 @@ public class WebSocket extends SimpleScriptable {
      * @param code A numeric value indicating the status code explaining why the connection is being closed
      * @param reason A human-readable string explaining why the connection is closing
      */
+    @JsxFunction
     public void jsxFunction_close(final Object code, final Object reason) {
         if (incomingConnection_ != null) {
             incomingConnection_.close();
@@ -208,6 +226,7 @@ public class WebSocket extends SimpleScriptable {
      * Transmits data to the server over the WebSocket connection.
      * @param content the body of the message being sent with the request
      */
+    @JsxFunction
     public void jsxFunction_send(final Object content) {
         try {
             if (content instanceof String) {

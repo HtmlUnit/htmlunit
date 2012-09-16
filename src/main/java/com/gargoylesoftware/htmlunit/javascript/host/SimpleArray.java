@@ -22,6 +22,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 
 /**
  * A JavaScript object for simple array allowing access per key and index (like {@link MimeTypeArray}).
@@ -46,6 +48,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
      * @param index the index
      * @return the item at the given position
      */
+    @JsxFunction
     public Object jsxFunction_item(final int index) {
         return elements_.get(index);
     }
@@ -82,6 +85,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
      * @param name the item name
      * @return the item with the given name
      */
+    @JsxFunction
     public Object jsxFunction_namedItem(final String name) {
         for (final Object element : elements_) {
             if (name.equals(getItemName(element))) {
@@ -105,6 +109,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
      * Gets the array size.
      * @return the number elements
      */
+    @JsxGetter
     public int jsxGet_length() {
         return elements_.size();
     }

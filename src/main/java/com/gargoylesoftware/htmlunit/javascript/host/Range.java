@@ -28,6 +28,9 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 /**
@@ -47,15 +50,19 @@ public class Range extends SimpleScriptable {
     private int startOffset_, endOffset_;
 
     /** Comparison mode for compareBoundaryPoints. */
+    @JsxConstant
     public static final short START_TO_START = 0;
 
     /** Comparison mode for compareBoundaryPoints. */
+    @JsxConstant
     public static final short START_TO_END = 1;
 
     /** Comparison mode for compareBoundaryPoints. */
+    @JsxConstant
     public static final short END_TO_END = 2;
 
     /** Comparison mode for compareBoundaryPoints. */
+    @JsxConstant
     public static final short END_TO_START = 3;
 
     /**
@@ -96,6 +103,7 @@ public class Range extends SimpleScriptable {
      * Gets the node within which the Range begins.
      * @return <code>undefined</code> if not initialized
      */
+    @JsxGetter
     public Object jsxGet_startContainer() {
         if (startContainer_ == null) {
             return Context.getUndefinedValue();
@@ -107,6 +115,7 @@ public class Range extends SimpleScriptable {
      * Gets the node within which the Range ends.
      * @return <code>undefined</code> if not initialized
      */
+    @JsxGetter
     public Object jsxGet_endContainer() {
         if (endContainer_ == null) {
             return Context.getUndefinedValue();
@@ -118,6 +127,7 @@ public class Range extends SimpleScriptable {
      * Gets the offset within the starting node of the Range.
      * @return <code>0</code> if not initialized
      */
+    @JsxGetter
     public int jsxGet_startOffset() {
         return startOffset_;
     }
@@ -126,6 +136,7 @@ public class Range extends SimpleScriptable {
      * Gets the offset within the end node of the Range.
      * @return <code>0</code> if not initialized
      */
+    @JsxGetter
     public int jsxGet_endOffset() {
         return endOffset_;
     }
@@ -135,6 +146,7 @@ public class Range extends SimpleScriptable {
      * @param refNode the reference node
      * @param offset the offset value within the node
      */
+    @JsxFunction
     public void jsxFunction_setStart(final Node refNode, final int offset) {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setStart() with a null node.");
@@ -147,6 +159,7 @@ public class Range extends SimpleScriptable {
      * Sets the start of the range to be after the node.
      * @param refNode the reference node
      */
+    @JsxFunction
     public void jsxFunction_setStartAfter(final Node refNode) {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setStartAfter() with a null node.");
@@ -159,6 +172,7 @@ public class Range extends SimpleScriptable {
      * Sets the start of the range to be before the node.
      * @param refNode the reference node
      */
+    @JsxFunction
     public void jsxFunction_setStartBefore(final Node refNode) {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setStartBefore() with a null node.");
@@ -181,6 +195,7 @@ public class Range extends SimpleScriptable {
      * Indicates if the range is collapsed.
      * @return <code>true</code> if the range is collapsed
      */
+    @JsxGetter
     public boolean jsxGet_collapsed() {
         return (startContainer_ == endContainer_ && startOffset_ == endOffset_);
     }
@@ -190,6 +205,7 @@ public class Range extends SimpleScriptable {
      * @param refNode the reference node
      * @param offset the offset value within the node
      */
+    @JsxFunction
     public void jsxFunction_setEnd(final Node refNode, final int offset) {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setEnd() with a null node.");
@@ -202,6 +218,7 @@ public class Range extends SimpleScriptable {
      * Sets the end of the range to be after the node.
      * @param refNode the reference node
      */
+    @JsxFunction
     public void jsxFunction_setEndAfter(final Node refNode) {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setEndAfter() with a null node.");
@@ -214,6 +231,7 @@ public class Range extends SimpleScriptable {
      * Sets the end of the range to be before the node.
      * @param refNode the reference node
      */
+    @JsxFunction
     public void jsxFunction_setEndBefore(final Node refNode) {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setEndBefore() with a null node.");
@@ -226,6 +244,7 @@ public class Range extends SimpleScriptable {
      * Select the contents within a node.
      * @param refNode Node to select from
      */
+    @JsxFunction
     public void jsxFunction_selectNodeContents(final Node refNode) {
         startContainer_ = refNode;
         startOffset_ = 0;
@@ -237,6 +256,7 @@ public class Range extends SimpleScriptable {
      * Selects a node and its contents.
      * @param refNode the node to select
      */
+    @JsxFunction
     public void jsxFunction_selectNode(final Node refNode) {
         jsxFunction_setStartBefore(refNode);
         jsxFunction_setEndAfter(refNode);
@@ -246,6 +266,7 @@ public class Range extends SimpleScriptable {
      * Collapse a Range onto one of its boundaries.
      * @param toStart if <code>true</code>, collapses the Range onto its start; else collapses it onto its end
      */
+    @JsxFunction
     public void jsxFunction_collapse(final boolean toStart) {
         if (toStart) {
             endContainer_ = startContainer_;
@@ -261,6 +282,7 @@ public class Range extends SimpleScriptable {
      * Returns the deepest common ancestor container of the Range's two boundary points.
      * @return the deepest common ancestor container of the Range's two boundary points
      */
+    @JsxGetter
     public Object jsxGet_commonAncestorContainer() {
         final Node ancestor = getCommonAncestor();
         if (ancestor == null) {
@@ -305,6 +327,7 @@ public class Range extends SimpleScriptable {
      * @return a document fragment
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:range.createContextualFragment">Mozilla documentation</a>
      */
+    @JsxFunction
     public Object jsxFunction_createContextualFragment(final String valueAsString) {
         final SgmlPage page = startContainer_.getDomNodeOrDie().getPage();
         final DomDocumentFragment fragment = new DomDocumentFragment(page);
@@ -324,6 +347,7 @@ public class Range extends SimpleScriptable {
      * Moves this range's contents from the document tree into a document fragment.
      * @return the new document fragment containing the range contents
      */
+    @JsxFunction
     public Object jsxFunction_extractContents() {
         return toW3C().extractContents().getScriptObject();
     }
@@ -344,6 +368,7 @@ public class Range extends SimpleScriptable {
      * @return -1, 0, or 1, indicating whether the corresponding boundary-point of range is respectively before,
      * equal to, or after the corresponding boundary-point of sourceRange.
      */
+    @JsxFunction
     public Object jsxFunction_compareBoundaryPoints(final int how, final Range sourceRange) {
         final Node nodeForThis;
         final int offsetForThis;
@@ -395,6 +420,7 @@ public class Range extends SimpleScriptable {
      * Returns a clone of the range in a document fragment.
      * @return a clone
      */
+    @JsxFunction
     public Object jsxFunction_cloneContents() {
         return toW3C().cloneContents().getScriptObject();
     }
@@ -402,6 +428,7 @@ public class Range extends SimpleScriptable {
     /**
      * Deletes the contents of the range.
      */
+    @JsxFunction
     public void jsxFunction_deleteContents() {
         toW3C().deleteContents();
     }
@@ -411,6 +438,7 @@ public class Range extends SimpleScriptable {
      * @param newNode The node to insert
      * @see <a href="https://developer.mozilla.org/en/DOM/range">https://developer.mozilla.org/en/DOM/range</a>
      */
+    @JsxFunction
     public void jsxFunction_insertNode(final Node newNode) {
         toW3C().insertNode(newNode.getDomNodeOrDie());
     }
@@ -419,6 +447,7 @@ public class Range extends SimpleScriptable {
      * Surrounds the contents of the range in a new node.
      * @param newNode The node to surround the range in
      */
+    @JsxFunction
     public void jsxFunction_surroundContents(final Node newNode) {
         toW3C().surroundContents(newNode.getDomNodeOrDie());
     }
@@ -427,6 +456,7 @@ public class Range extends SimpleScriptable {
      * Returns a clone of the range.
      * @return a clone of the range
      */
+    @JsxFunction
     public Object jsxFunction_cloneRange() {
         return new Range(toW3C().cloneRange());
     }
@@ -434,6 +464,7 @@ public class Range extends SimpleScriptable {
     /**
      * Releases Range from use to improve performance.
      */
+    @JsxFunction
     public void jsxFunction_detach() {
         // Java garbage collection should take care of this for us
     }
@@ -442,6 +473,7 @@ public class Range extends SimpleScriptable {
      * Returns the text of the Range.
      * @return the text
      */
+    @JsxFunction
     public Object jsxFunction_toString() {
         return toW3C().toString();
     }

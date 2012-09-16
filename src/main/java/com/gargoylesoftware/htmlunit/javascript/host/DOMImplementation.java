@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -36,6 +40,7 @@ public class DOMImplementation extends SimpleScriptable {
      * @param version the version number of the feature to test
      * @return true if the feature is implemented in the specified version, false otherwise
      */
+    @JsxFunction
     public boolean jsxFunction_hasFeature(final String feature, final String version) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_35)) {
             if ("HTML".equals(feature) && "1.0".equals(version)) {
@@ -69,6 +74,7 @@ public class DOMImplementation extends SimpleScriptable {
      * @return the newly created {@link XMLDocument}
      */
     //TODO: change doctype type to "DocType"
+    @JsxFunction(@WebBrowser(FF))
     public XMLDocument jsxFunction_createDocument(final String namespaceURI, final String qualifiedName,
             final Object doctype) {
         final XMLDocument document = new XMLDocument(getWindow().getWebWindow());

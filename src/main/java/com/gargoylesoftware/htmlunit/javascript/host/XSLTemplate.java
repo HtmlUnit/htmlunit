@@ -15,6 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * A JavaScript object for XSLTemplate.
@@ -31,6 +34,7 @@ public class XSLTemplate extends SimpleScriptable {
      * Sets the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
      * @param node the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template
      */
+    @JsxSetter
     public void jsxSet_stylesheet(final Node node) {
         stylesheet_ = node;
     }
@@ -39,6 +43,7 @@ public class XSLTemplate extends SimpleScriptable {
      * Returns the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template.
      * @return the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template
      */
+    @JsxGetter
     public Node jsxGet_stylesheet() {
         return stylesheet_;
     }
@@ -47,6 +52,7 @@ public class XSLTemplate extends SimpleScriptable {
      * Creates a rental-model XSLProcessor object that will use this template.
      * @return the XSLTProcessor
      */
+    @JsxFunction
     public XSLTProcessor jsxFunction_createProcessor() {
         final XSLTProcessor processor = new XSLTProcessor();
         processor.setPrototype(getPrototype(processor.getClass()));

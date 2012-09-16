@@ -33,6 +33,9 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -117,6 +120,7 @@ public class Location extends SimpleScriptable {
      * @throws IOException if loading the specified location fails
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536342.aspx">MSDN Documentation</a>
      */
+    @JsxFunction
     public void jsxFunction_assign(final String url) throws IOException {
         jsxSet_href(url);
     }
@@ -128,6 +132,7 @@ public class Location extends SimpleScriptable {
      * @throws IOException if there is a problem reloading the page
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536342.aspx">MSDN Documentation</a>
      */
+    @JsxFunction
     public void jsxFunction_reload(final boolean force) throws IOException {
         final String url = jsxGet_href();
         if (UNKNOWN.equals(url)) {
@@ -144,6 +149,7 @@ public class Location extends SimpleScriptable {
      * @throws IOException if loading the specified location fails
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536712.aspx">MSDN Documentation</a>
      */
+    @JsxFunction
     public void jsxFunction_replace(final String url) throws IOException {
         window_.getWebWindow().getHistory().removeCurrent();
         jsxSet_href(url);
@@ -153,6 +159,7 @@ public class Location extends SimpleScriptable {
      * Returns the location URL.
      * @return the location URL
      */
+    @JsxFunction
     public String jsxFunction_toString() {
         return jsxGet_href();
     }
@@ -162,6 +169,7 @@ public class Location extends SimpleScriptable {
      * @return the location URL
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_href() {
         final Page page = window_.getWebWindow().getEnclosedPage();
         if (page == null) {
@@ -195,6 +203,7 @@ public class Location extends SimpleScriptable {
      * @throws IOException if loading the specified location fails
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_href(final String newLocation) throws IOException {
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
@@ -234,6 +243,7 @@ public class Location extends SimpleScriptable {
      * @return the search portion of the location URL
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_search() {
         final String search = getUrl().getQuery();
         if (search == null) {
@@ -248,6 +258,7 @@ public class Location extends SimpleScriptable {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_search(final String search) throws Exception {
         setUrl(UrlUtils.getUrlWithNewQuery(getUrl(), search));
     }
@@ -257,6 +268,7 @@ public class Location extends SimpleScriptable {
      * @return the hash portion of the location URL
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_hash() {
         final boolean decodeHash = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED);
         String hash = hash_;
@@ -287,6 +299,7 @@ public class Location extends SimpleScriptable {
      * @param hash the new hash portion of the location URL
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_hash(String hash) {
         // IMPORTANT: This method must not call setUrl(), because
         // we must not hit the server just to change the hash!
@@ -329,6 +342,7 @@ public class Location extends SimpleScriptable {
      * @return the hostname portion of the location URL
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_hostname() {
         return getUrl().getHost();
     }
@@ -339,6 +353,7 @@ public class Location extends SimpleScriptable {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_hostname(final String hostname) throws Exception {
         setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
     }
@@ -348,6 +363,7 @@ public class Location extends SimpleScriptable {
      * @return the host portion of the location URL
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_host() {
         final URL url = getUrl();
         final int port = url.getPort();
@@ -365,6 +381,7 @@ public class Location extends SimpleScriptable {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_host(final String host) throws Exception {
         final String hostname;
         final int port;
@@ -387,6 +404,7 @@ public class Location extends SimpleScriptable {
      * @return the pathname portion of the location URL
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_pathname() {
         if (WebClient.URL_ABOUT_BLANK == getUrl()) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_EMPTY_PATH)) {
@@ -403,6 +421,7 @@ public class Location extends SimpleScriptable {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_pathname(final String pathname) throws Exception {
         setUrl(UrlUtils.getUrlWithNewPath(getUrl(), pathname));
     }
@@ -412,6 +431,7 @@ public class Location extends SimpleScriptable {
      * @return the port portion of the location URL
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_port() {
         final int port = getUrl().getPort();
         if (port == -1) {
@@ -426,6 +446,7 @@ public class Location extends SimpleScriptable {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_port(final String port) throws Exception {
         setUrl(UrlUtils.getUrlWithNewPort(getUrl(), Integer.parseInt(port)));
     }
@@ -435,6 +456,7 @@ public class Location extends SimpleScriptable {
      * @return the protocol portion of the location URL, including the trailing ':'
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_protocol() {
         return getUrl().getProtocol() + ":";
     }
@@ -445,6 +467,7 @@ public class Location extends SimpleScriptable {
      * @throws Exception if an error occurs
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_protocol(final String protocol) throws Exception {
         setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), protocol));
     }

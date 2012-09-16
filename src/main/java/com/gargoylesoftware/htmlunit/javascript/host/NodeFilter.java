@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxConstant;
 
 /**
  * A NodeFilter.
@@ -29,48 +30,64 @@ public class NodeFilter extends SimpleScriptable {
     /**
      * Accept the node. TreeWalker navigation will return this node.
      */
+    @JsxConstant
     public static final short FILTER_ACCEPT = 1;
     /**
      * Reject the node. TreeWalker navigation will not return this node or
      * any of it's children.
      */
+    @JsxConstant
     public static final short FILTER_REJECT = 2;
     /**
      * Skip the node. TreeWalker navigation will not return this node, but WILL
      * still consider the children of this node.
      */
+    @JsxConstant
     public static final short FILTER_SKIP = 3;
 
     // Constants for whatToShow
     /** Show all nodes. */
+    @JsxConstant
     public static final long SHOW_ALL = 4294967295L;
     /** Show Element nodes. */
+    @JsxConstant
     public static final int SHOW_ELEMENT = 0x00000001;
     /** Show Attr nodes. Only useful when creating a TreeWalker with an
      * attribute node as its root. */
+    @JsxConstant
     public static final int SHOW_ATTRIBUTE = 0x00000002;
     /** Show Text nodes. */
+    @JsxConstant
     public static final int SHOW_TEXT = 0x00000004;
     /** Show CDATASection nodes. */
+    @JsxConstant
     public static final int SHOW_CDATA_SECTION = 0x00000008;
     /** Show EntityReference nodes. */
+    @JsxConstant
     public static final int SHOW_ENTITY_REFERENCE = 0x00000010;
     /** Show Entity nodes. */
+    @JsxConstant
     public static final int SHOW_ENTITY = 0x00000020;
     /** Show ProcessingInstruction nodes. */
+    @JsxConstant
     public static final int SHOW_PROCESSING_INSTRUCTION = 0x00000040;
     /** Show Comment nodes. */
+    @JsxConstant
     public static final int SHOW_COMMENT = 0x00000080;
     /** Show Document nodes. */
+    @JsxConstant
     public static final int SHOW_DOCUMENT = 0x00000100;
     /** Show DocumentType nodes. */
+    @JsxConstant
     public static final int SHOW_DOCUMENT_TYPE = 0x00000200;
     /** Show DocumentFragment nodes. */
+    @JsxConstant
     public static final int SHOW_DOCUMENT_FRAGMENT = 0x00000400;
     /**
      * Show Notation nodes. Only useful when creating a TreeWalker with a
      * Notation node as its root.
      */
+    @JsxConstant
     public static final int SHOW_NOTATION = 0x00000800;
 
     /**

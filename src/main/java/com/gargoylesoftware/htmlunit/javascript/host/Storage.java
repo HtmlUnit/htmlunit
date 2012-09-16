@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +27,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * The JavaScript object that represents a Storage.
@@ -71,6 +77,7 @@ public class Storage extends SimpleScriptable {
      * Returns the length property.
      * @return the length property
      */
+    @JsxGetter
     public int jsxGet_length() {
         return getMap().size();
     }
@@ -79,6 +86,7 @@ public class Storage extends SimpleScriptable {
      * Removes the specified key.
      * @param key the item key
      */
+    @JsxFunction
     public void jsxFunction_removeItem(final String key) {
         getMap().remove(key);
     }
@@ -88,6 +96,7 @@ public class Storage extends SimpleScriptable {
      * @param index the index
      * @return the key
      */
+    @JsxFunction
     public String jsxFunction_key(final int index) {
         int counter = 0;
         for (final String key : getMap().keySet()) {
@@ -107,6 +116,7 @@ public class Storage extends SimpleScriptable {
      * @param key the item key
      * @return the value
      */
+    @JsxFunction
     public Object jsxFunction_getItem(final String key) {
         return getMap().get(key);
     }
@@ -116,6 +126,7 @@ public class Storage extends SimpleScriptable {
      * @param key the item key
      * @param data the value
      */
+    @JsxFunction
     public void jsxFunction_setItem(final String key, final String data) {
         getMap().put(key, data);
     }
@@ -123,6 +134,7 @@ public class Storage extends SimpleScriptable {
     /**
      * Clears all items.
      */
+    @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
     public void jsxFunction_clear() {
         StorageImpl.getInstance().clear(type_, (HtmlPage) getWindow().getWebWindow().getEnclosedPage());
     }

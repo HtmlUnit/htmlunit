@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,6 +22,8 @@ import org.w3c.dom.NamedNodeMap;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * A JavaScript object for a DocumentType.
@@ -36,6 +39,7 @@ public class DocumentType extends Node {
      * Returns the name.
      * @return the name
      */
+    @JsxGetter
     public String jsxGet_name() {
         final String name = ((DomDocumentType) getDomNodeOrDie()).getName();
         if ("html".equals(name) && "FF3".equals(getBrowserVersion().getNickname())) {
@@ -56,6 +60,7 @@ public class DocumentType extends Node {
      * Returns the publicId.
      * @return the publicId
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_publicId() {
         return ((DomDocumentType) getDomNodeOrDie()).getPublicId();
     }
@@ -64,6 +69,7 @@ public class DocumentType extends Node {
      * Returns the systemId.
      * @return the systemId
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_systemId() {
         return ((DomDocumentType) getDomNodeOrDie()).getSystemId();
     }
@@ -72,6 +78,7 @@ public class DocumentType extends Node {
      * Returns the internal subset.
      * @return the internal subset
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_internalSubset() {
         final String subset = ((DomDocumentType) getDomNodeOrDie()).getInternalSubset();
         if (StringUtils.isNotEmpty(subset)) {
@@ -88,6 +95,7 @@ public class DocumentType extends Node {
      * Returns entities.
      * @return entities
      */
+    @JsxGetter
     public Object jsxGet_entities() {
         final NamedNodeMap entities = ((DomDocumentType) getDomNodeOrDie()).getEntities();
         if (null != entities) {
@@ -107,6 +115,7 @@ public class DocumentType extends Node {
      * Returns notations.
      * @return notations
      */
+    @JsxGetter
     public Object jsxGet_notations() {
         final NamedNodeMap notations = ((DomDocumentType) getDomNodeOrDie()).getNotations();
         if (null != notations) {

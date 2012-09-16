@@ -35,6 +35,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
@@ -340,6 +342,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      * @return the length of this element array
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>
      */
+    @JsxGetter
     public final int jsxGet_length() {
         return getElements().size();
     }
@@ -350,6 +353,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      * @return the element or elements corresponding to the specified index or key
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
      */
+    @JsxFunction
     public final Object jsxFunction_item(final Object index) {
         return nullIfNotFound(getIt(index));
     }

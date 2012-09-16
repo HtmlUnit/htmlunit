@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
 import java.io.IOException;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -22,6 +24,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * A JavaScript object for the client's browsing history.
@@ -90,6 +95,7 @@ public class History extends SimpleScriptable {
      * Returns the "length" property.
      * @return the "length" property
      */
+    @JsxGetter
     public int jsxGet_length() {
         final WebWindow w = getWindow().getWebWindow();
         return w.getHistory().getLength();
@@ -98,6 +104,7 @@ public class History extends SimpleScriptable {
     /**
      * JavaScript function "back".
      */
+    @JsxFunction
     public void jsxFunction_back() {
         final WebWindow w = getWindow().getWebWindow();
         try {
@@ -111,6 +118,7 @@ public class History extends SimpleScriptable {
     /**
      * JavaScript function "forward".
      */
+    @JsxFunction
     public void jsxFunction_forward() {
         final WebWindow w = getWindow().getWebWindow();
         try {
@@ -125,6 +133,7 @@ public class History extends SimpleScriptable {
      * JavaScript function "go".
      * @param relativeIndex the relative index
      */
+    @JsxFunction
     public void jsxFunction_go(final int relativeIndex) {
         final WebWindow w = getWindow().getWebWindow();
         try {
@@ -139,6 +148,7 @@ public class History extends SimpleScriptable {
      * Returns the "current" property.
      * @return the "current" property
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_current() {
         throw Context.reportRuntimeError("Permission denied to get property History.current");
     }
@@ -147,6 +157,7 @@ public class History extends SimpleScriptable {
      * Returns the "previous" property.
      * @return the "previous" property
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_previous() {
         throw Context.reportRuntimeError("Permission denied to get property History.previous");
     }
@@ -155,6 +166,7 @@ public class History extends SimpleScriptable {
      * Returns the "next" property.
      * @return the "next" property
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_next() {
         throw Context.reportRuntimeError("Permission denied to get property History.next");
     }
@@ -164,6 +176,7 @@ public class History extends SimpleScriptable {
      * @param index the index
      * @return the URL of the history item at the specified index
      */
+    @JsxFunction(@WebBrowser(FF))
     public String jsxFunction_item(final int index) {
         throw Context.reportRuntimeError("Permission denied to call method History.item");
     }

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 
 /**
  * JavaScript object representing the HashChangeEvent.
@@ -56,6 +57,7 @@ public class HashChangeEvent extends UIEvent {
      * Returns the old URL.
      * @return the old URL
      */
+    @JsxGetter
     public Object jsxGet_oldURL() {
         return oldURL_;
     }
@@ -64,6 +66,7 @@ public class HashChangeEvent extends UIEvent {
      * Returns the new URL.
      * @return the new URL
      */
+    @JsxGetter
     public Object jsxGet_newURL() {
         return newURL_;
     }

@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebConsole.Formatter;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
 
 /**
  * A JavaScript object for a console. This implementation simulates Firefox's console, which utilizes FireBug API.
@@ -62,6 +63,7 @@ public class Console extends SimpleScriptable {
      * @param args the arguments passed into the method
      * @param funObj the function
      */
+    @JsxFunction
     public static void jsxFunction_log(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
         final WebConsole webConsole = ((Console) thisObj).getWebConsole();
@@ -78,6 +80,7 @@ public class Console extends SimpleScriptable {
      * @param args the arguments passed into the method
      * @param funObj the function
      */
+    @JsxFunction
     public static void jsxFunction_info(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
         final WebConsole webConsole = ((Console) thisObj).getWebConsole();
@@ -94,6 +97,7 @@ public class Console extends SimpleScriptable {
      * @param args the arguments passed into the method
      * @param funObj the function
      */
+    @JsxFunction
     public static void jsxFunction_warn(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
         final WebConsole webConsole = ((Console) thisObj).getWebConsole();
@@ -110,6 +114,7 @@ public class Console extends SimpleScriptable {
      * @param args the arguments passed into the method
      * @param funObj the function
      */
+    @JsxFunction
     public static void jsxFunction_error(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
         final WebConsole webConsole = ((Console) thisObj).getWebConsole();
@@ -126,6 +131,7 @@ public class Console extends SimpleScriptable {
      * @param args the arguments passed into the method
      * @param funObj the function
      */
+    @JsxFunction
     public static void jsxFunction_debug(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
         final WebConsole webConsole = ((Console) thisObj).getWebConsole();
@@ -142,6 +148,7 @@ public class Console extends SimpleScriptable {
      * @param args the arguments passed into the method
      * @param funObj the function
      */
+    @JsxFunction
     public static void jsxFunction_trace(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
         final WebConsole webConsole = ((Console) thisObj).getWebConsole();
@@ -160,6 +167,7 @@ public class Console extends SimpleScriptable {
      * in the passed object, nor prints the details of objects or functions.
      * @param o the object to be printed
      */
+    @JsxFunction
     public void jsxFunction_dir(final Object o) {
         if (o instanceof ScriptableObject) {
             final ScriptableObject obj = (ScriptableObject) o;
@@ -189,6 +197,7 @@ public class Console extends SimpleScriptable {
     /**
      * Implementation of group. Currently missing.
      */
+    @JsxFunction
     public void jsxFunction_group() {
         // TODO not implemented
     }
@@ -196,6 +205,7 @@ public class Console extends SimpleScriptable {
     /**
      * Implementation of endGroup. Currently missing.
      */
+    @JsxFunction
     public void jsxFunction_groupEnd() {
         // TODO not implemented
     }
@@ -203,6 +213,7 @@ public class Console extends SimpleScriptable {
     /**
      * Implementation of groupCollapsed. Currently missing.
      */
+    @JsxFunction
     public void jsxFunction_groupCollapsed() {
          // TODO not implemented
     }
@@ -213,6 +224,7 @@ public class Console extends SimpleScriptable {
      * console.
      * @param timerName the name of the timer
      */
+    @JsxFunction
     public void jsxFunction_time(final String timerName) {
         if (!TIMERS.containsKey(timerName)) {
             TIMERS.put(timerName, Long.valueOf(System.currentTimeMillis()));
@@ -225,6 +237,7 @@ public class Console extends SimpleScriptable {
      * logged to the console.
      * @param timerName the name of the timer
      */
+    @JsxFunction
     public void jsxFunction_timeEnd(final String timerName) {
         final Long startTime = TIMERS.remove(timerName);
         if (startTime != null) {

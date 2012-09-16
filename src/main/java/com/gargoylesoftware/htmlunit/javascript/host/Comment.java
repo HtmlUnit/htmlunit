@@ -14,7 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * A JavaScript object for a Comment.
@@ -39,6 +45,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the element ID.
      * @return the ID of this element
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_id() {
         return "";
     }
@@ -47,6 +54,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the class defined for this element.
      * @return the class name
      */
+    @JsxGetter(@WebBrowser(IE))
     public Object jsxGet_className() {
         return "";
     }
@@ -55,6 +63,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the tag name of this element.
      * @return the tag name
      */
+    @JsxGetter(@WebBrowser(IE))
     public Object jsxGet_tagName() {
         return "!";
     }
@@ -63,6 +72,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the text of this element.
      * @return the text
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_text() {
         return "<!--" + jsxGet_data() + "-->";
     }
@@ -71,6 +81,7 @@ public final class Comment extends CharacterDataImpl {
      * Returns the document of this element.
      * @return the document
      */
+    @JsxGetter(@WebBrowser(IE))
     public Object jsxGet_document() {
         return getWindow().jsxGet_document();
     }
@@ -80,6 +91,7 @@ public final class Comment extends CharacterDataImpl {
      * @param attributeName the name of the attribute to retrieve
      * @return the attribute node for the specified attribute
      */
+    @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_getAttributeNode(final String attributeName) {
         return null;
     }
@@ -92,6 +104,7 @@ public final class Comment extends CharacterDataImpl {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429.aspx">MSDN Documentation</a>
      * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
      */
+    @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_getAttribute(final String attributeName, final Integer flags) {
         return null;
     }
@@ -100,6 +113,7 @@ public final class Comment extends CharacterDataImpl {
      * Gets the innerText attribute.
      * @return the innerText
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_innerText() {
         return "";
     }
@@ -108,6 +122,7 @@ public final class Comment extends CharacterDataImpl {
      * Currently does nothing.
      * @param value the new value for the contents of this node
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_innerText(final String value) {
         // nothing
     }

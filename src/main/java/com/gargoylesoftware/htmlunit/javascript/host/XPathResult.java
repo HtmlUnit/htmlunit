@@ -20,6 +20,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 
 /**
  * A JavaScript object for XPathResult.
@@ -34,44 +37,52 @@ public class XPathResult extends SimpleScriptable {
      * An evaluation of an XPath expression will never produce this type. If this type is requested,
      * then the evaluation returns whatever type naturally results from evaluation of the expression.
      */
+    @JsxConstant
     public static final int ANY_TYPE = 0;
 
     /**
      * The result is a number.
      */
+    @JsxConstant
     public static final int NUMBER_TYPE = 1;
 
     /**
      * The result is a string.
      */
+    @JsxConstant
     public static final int STRING_TYPE = 2;
 
     /**
      * The result is a boolean.
      */
+    @JsxConstant
     public static final int BOOLEAN_TYPE = 3;
 
     /**
      * The result is a node set that will be accessed iteratively, which may not produce nodes in a particular order.
      * This is the default type returned if the result is a node set and {@link #ANY_TYPE} is requested.
      */
+    @JsxConstant
     public static final int UNORDERED_NODE_ITERATOR_TYPE = 4;
 
     /**
      * The result is a node set that will be accessed iteratively, which will produce document-ordered nodes.
      */
+    @JsxConstant
     public static final int ORDERED_NODE_ITERATOR_TYPE = 5;
 
     /**
      * The result is a node set that will be accessed as a snapshot list of nodes
      * that may not be in a particular order.
      */
+    @JsxConstant
     public static final int UNORDERED_NODE_SNAPSHOT_TYPE = 6;
 
     /**
      * The result is a node set that will be accessed as a snapshot list of nodes
      * that will be in original document order.
      */
+    @JsxConstant
     public static final int ORDERED_NODE_SNAPSHOT_TYPE = 7;
 
     /**
@@ -79,6 +90,7 @@ public class XPathResult extends SimpleScriptable {
      * If there is more than one node in the actual result,
      * the single node returned might not be the first in document order.
      */
+    @JsxConstant
     public static final int ANY_UNORDERED_NODE_TYPE = 8;
 
     /**
@@ -86,6 +98,7 @@ public class XPathResult extends SimpleScriptable {
      * If there are more than one node in the actual result,
      * the single node returned will be the first in document order.
      */
+    @JsxConstant
     public static final int FIRST_ORDERED_NODE_TYPE = 9;
 
     private List<? extends Object> result_;
@@ -131,6 +144,7 @@ public class XPathResult extends SimpleScriptable {
      * The code representing the type of this result, as defined by the type constants.
      * @return the code representing the type of this result
      */
+    @JsxGetter
     public int jsxGet_resultType() {
         return resultType_;
     }
@@ -139,6 +153,7 @@ public class XPathResult extends SimpleScriptable {
      * The number of nodes in the result snapshot.
      * @return the number of nodes in the result snapshot
      */
+    @JsxGetter
     public int jsxGet_snapshotLength() {
         if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
             throw Context.reportRuntimeError("Cannot get snapshotLength for type: " + resultType_);
@@ -150,6 +165,7 @@ public class XPathResult extends SimpleScriptable {
      * The value of this single node result, which may be null.
      * @return the value of this single node result, which may be null
      */
+    @JsxGetter
     public Node jsxGet_singleNodeValue() {
         if (resultType_ != ANY_UNORDERED_NODE_TYPE && resultType_ != FIRST_ORDERED_NODE_TYPE) {
             throw Context.reportRuntimeError("Cannot get singleNodeValue for type: " + resultType_);
@@ -164,6 +180,7 @@ public class XPathResult extends SimpleScriptable {
      * Iterates and returns the next node from the node set or <code>null</code> if there are no more nodes.
      * @return the next node
      */
+    @JsxFunction
     public Node jsxFunction_iterateNext() {
         if (resultType_ != UNORDERED_NODE_ITERATOR_TYPE && resultType_ != ORDERED_NODE_ITERATOR_TYPE) {
             throw Context.reportRuntimeError("Cannot get iterateNext for type: " + resultType_);
@@ -180,6 +197,7 @@ public class XPathResult extends SimpleScriptable {
      * @param index Index into the snapshot collection
      * @return the node at the index<sup>th</sup> position in the NodeList, or null if that is not a valid index
      */
+    @JsxFunction
     public Node jsxFunction_snapshotItem(final int index) {
         if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
             throw Context.reportRuntimeError("Cannot get snapshotLength for type: " + resultType_);
@@ -194,6 +212,7 @@ public class XPathResult extends SimpleScriptable {
      * Returns the value of this number result.
      * @return the value of this number result
      */
+    @JsxGetter
     public double jsxGet_numberValue() {
         if (resultType_ != NUMBER_TYPE) {
             throw Context.reportRuntimeError("Cannot get numberValue for type: " + resultType_);
@@ -205,6 +224,7 @@ public class XPathResult extends SimpleScriptable {
      * Returns the value of this boolean result.
      * @return the value of this boolean result
      */
+    @JsxGetter
     public boolean jsxGet_booleanValue() {
         if (resultType_ != BOOLEAN_TYPE) {
             throw Context.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
@@ -216,6 +236,7 @@ public class XPathResult extends SimpleScriptable {
      * Returns the value of this string result.
      * @return the value of this string result
      */
+    @JsxGetter
     public String jsxGet_stringValue() {
         if (resultType_ != STRING_TYPE) {
             throw Context.reportRuntimeError("Cannot get stringValue for type: " + resultType_);

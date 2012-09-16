@@ -14,7 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * A JavaScript object for Text.
@@ -43,6 +49,7 @@ public class Text extends CharacterDataImpl {
      * @param offset the character position at which to split the Text node
      * @return the Text node that was split from this node
      */
+    @JsxFunction
     public Object jsxFunction_splitText(final int offset) {
         final DomText domText = (DomText) getDomNodeOrDie();
         return getScriptableFor(domText.splitText(offset));
@@ -52,6 +59,7 @@ public class Text extends CharacterDataImpl {
      * Returns wholeText value.
      * @return wholeText value
      */
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public String jsxGet_wholeText() {
         return ((DomText) getDomNodeOrDie()).getWholeText();
     }

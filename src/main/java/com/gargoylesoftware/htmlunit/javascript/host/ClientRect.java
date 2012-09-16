@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * Specifies a rectangle that contains a line of text in either an element or a TextRange object.
@@ -56,6 +58,7 @@ public class ClientRect extends SimpleScriptable {
      * Sets the bottom coordinate of the rectangle surrounding the object content.
      * @param bottom the bottom coordinate of the rectangle surrounding the object content
      */
+    @JsxSetter
     public void jsxSet_bottom(final int bottom) {
         bottom_ = bottom;
     }
@@ -64,6 +67,7 @@ public class ClientRect extends SimpleScriptable {
      * Returns the bottom coordinate of the rectangle surrounding the object content.
      * @return the bottom coordinate of the rectangle surrounding the object content
      */
+    @JsxGetter
     public int jsxGet_bottom() {
         return bottom_;
     }
@@ -72,6 +76,7 @@ public class ClientRect extends SimpleScriptable {
      * Sets the left coordinate of the rectangle surrounding the object content.
      * @param left the left coordinate of the rectangle surrounding the object content
      */
+    @JsxSetter
     public void jsxSet_left(final int left) {
         left_ = left;
     }
@@ -80,6 +85,7 @@ public class ClientRect extends SimpleScriptable {
      * Returns the left coordinate of the rectangle surrounding the object content.
      * @return the left coordinate of the rectangle surrounding the object content
      */
+    @JsxGetter
     public int jsxGet_left() {
         return left_;
     }
@@ -88,6 +94,7 @@ public class ClientRect extends SimpleScriptable {
      * Sets the right coordinate of the rectangle surrounding the object content.
      * @param right the right coordinate of the rectangle surrounding the object content
      */
+    @JsxSetter
     public void jsxSet_right(final int right) {
         right_ = right;
     }
@@ -96,6 +103,7 @@ public class ClientRect extends SimpleScriptable {
      * Returns the right coordinate of the rectangle surrounding the object content.
      * @return the right coordinate of the rectangle surrounding the object content
      */
+    @JsxGetter
     public int jsxGet_right() {
         return right_;
     }
@@ -104,6 +112,7 @@ public class ClientRect extends SimpleScriptable {
      * Sets the top coordinate of the rectangle surrounding the object content.
      * @param top the top coordinate of the rectangle surrounding the object content
      */
+    @JsxSetter
     public void jsxSet_top(final int top) {
         top_ = top;
     }
@@ -112,6 +121,7 @@ public class ClientRect extends SimpleScriptable {
      * Returns the top coordinate of the rectangle surrounding the object content.
      * @return the top coordinate of the rectangle surrounding the object content
      */
+    @JsxGetter
     public int jsxGet_top() {
         return top_;
     }

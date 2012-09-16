@@ -24,6 +24,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
@@ -77,6 +79,7 @@ public class Popup extends SimpleScriptable {
      * Returns the HTML document element in the popup.
      * @return the HTML document element in the popup
      */
+    @JsxGetter
     public Object jsxGet_document() {
         return document_;
     }
@@ -85,6 +88,7 @@ public class Popup extends SimpleScriptable {
      * Indicates if the popup is opened.
      * @return <code>true</code> if opened
      */
+    @JsxGetter
     public boolean jsxGet_isOpen() {
         return opened_;
     }
@@ -92,6 +96,7 @@ public class Popup extends SimpleScriptable {
     /**
      * Hides the popup.
      */
+    @JsxFunction
     public void jsxFunction_hide() {
         opened_ = false;
     }
@@ -99,6 +104,7 @@ public class Popup extends SimpleScriptable {
     /**
      * Shows the popup.
      */
+    @JsxFunction
     public void jsxFunction_show() {
         opened_ = true;
     }

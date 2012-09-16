@@ -14,9 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 
 /**
@@ -45,6 +52,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the property "appCodeName".
      * @return the property "appCodeName"
      */
+    @JsxGetter
     public String jsxGet_appCodeName() {
         return getBrowserVersion().getApplicationCodeName();
     }
@@ -53,6 +61,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the property "appMinorVersion".
      * @return the property "appMinorVersion"
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_appMinorVersion() {
         return getBrowserVersion().getApplicationMinorVersion();
     }
@@ -61,6 +70,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the property "appName".
      * @return the property "appName"
      */
+    @JsxGetter
     public String jsxGet_appName() {
         return getBrowserVersion().getApplicationName();
     }
@@ -69,6 +79,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the property "appVersion".
      * @return the property "appVersion"
      */
+    @JsxGetter
     public String jsxGet_appVersion() {
         return getBrowserVersion().getApplicationVersion();
     }
@@ -77,6 +88,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the language of the browser (for IE).
      * @return the language
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_browserLanguage() {
         return getBrowserVersion().getBrowserLanguage();
     }
@@ -85,6 +97,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the language of the browser (for Mozilla).
      * @return the language
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_language() {
         return getBrowserVersion().getBrowserLanguage();
     }
@@ -93,6 +106,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the property "cookieEnabled".
      * @return the property "cookieEnabled"
      */
+    @JsxGetter
     public boolean jsxGet_cookieEnabled() {
         return getWindow().getWebWindow().getWebClient().getCookieManager().isCookiesEnabled();
     }
@@ -101,6 +115,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the property "cpuClass".
      * @return the property "cpuClass"
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_cpuClass() {
         return getBrowserVersion().getCpuClass();
     }
@@ -109,6 +124,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the property "onLine".
      * @return the property "onLine"
      */
+    @JsxGetter
     public boolean jsxGet_onLine() {
         return getBrowserVersion().isOnLine();
     }
@@ -117,6 +133,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the property "platform".
      * @return the property "platform"
      */
+    @JsxGetter
     public String jsxGet_platform() {
         return getBrowserVersion().getPlatform();
     }
@@ -125,6 +142,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the property "product".
      * @return the property "product"
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_product() {
         return "Gecko";
     }
@@ -134,6 +152,7 @@ public final class Navigator extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en/navigator.productSub">Mozilla Doc</a>
      * @return false
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_productSub() {
         return "20100215";
     }
@@ -142,6 +161,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the property "systemLanguage".
      * @return the property "systemLanguage"
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_systemLanguage() {
         return getBrowserVersion().getSystemLanguage();
     }
@@ -150,6 +170,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the property "userAgent".
      * @return the property "userAgent"
      */
+    @JsxGetter
     public String jsxGet_userAgent() {
         return getBrowserVersion().getUserAgent();
     }
@@ -158,6 +179,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the property "userLanguage".
      * @return the property "userLanguage"
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_userLanguage() {
         return getBrowserVersion().getUserLanguage();
     }
@@ -166,6 +188,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns an empty array because HtmlUnit does not support embedded objects.
      * @return an empty array
      */
+    @JsxGetter
     public Object jsxGet_plugins() {
         initPlugins();
         return plugins_;
@@ -205,6 +228,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns an empty array because HtmlUnit does not support embedded objects.
      * @return an empty array
      */
+    @JsxGetter
     public Object jsxGet_mimeTypes() {
         initPlugins();
         return mimeTypes_;
@@ -214,6 +238,7 @@ public final class Navigator extends SimpleScriptable {
      * Indicates if Java is enabled.
      * @return true/false (see {@link com.gargoylesoftware.htmlunit.WebClientOptions#isAppletEnabled()}
      */
+    @JsxFunction
     public boolean jsxFunction_javaEnabled() {
         return getWindow().getWebWindow().getWebClient().getOptions().isAppletEnabled();
     }
@@ -222,6 +247,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns <tt>false</tt> always as data tainting support is not enabled in HtmlUnit.
      * @return false
      */
+    @JsxFunction
     public boolean jsxFunction_taintEnabled() {
         return false;
     }
@@ -230,6 +256,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the geolocation.
      * @return the geolocation
      */
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public Geolocation jsxGet_geolocation() {
         final Geolocation geolocation = new Geolocation();
         geolocation.setPrototype(getPrototype(geolocation.getClass()));
@@ -241,6 +268,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the buildID.
      * @return the buildID
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_buildID() {
         final BrowserVersion browser = getBrowserVersion();
         if ("FF3.6".equals(browser.getNickname())) {
@@ -253,6 +281,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the vendor.
      * @return the vendor
      */
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public String jsxGet_vendor() {
         final BrowserVersion browser = getBrowserVersion();
         if (browser.getNickname().startsWith("FF")) {
@@ -265,6 +294,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the vendorSub.
      * @return the vendorSub
      */
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public String jsxGet_vendorSub() {
         return "";
     }
@@ -273,6 +303,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the doNotTrack.
      * @return the doNotTrack
      */
+    @JsxGetter(@WebBrowser(value = FF, minVersion = 10))
     public String jsxGet_doNotTrack() {
         if (getWindow().getWebWindow().getWebClient().getOptions().isDoNotTrackEnabled()) {
             return "yes";
@@ -295,6 +326,7 @@ public final class Navigator extends SimpleScriptable {
      * Returns the oscpu.
      * @return the oscpu
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_oscpu() {
         return "Windows NT 6.1";
     }

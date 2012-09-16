@@ -20,6 +20,8 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 
 /**
  * A JavaScript object for DOMTokenList.
@@ -53,6 +55,7 @@ public final class DOMTokenList extends SimpleScriptable {
      * Returns the length property.
      * @return the length
      */
+    @JsxGetter
     public int jsxGet_length() {
         final String value = getDefaultValue(null);
         return value.split(" ").length;
@@ -75,6 +78,7 @@ public final class DOMTokenList extends SimpleScriptable {
      * Adds the specified token to the underlying string.
      * @param token the token to add
      */
+    @JsxFunction
     public void jsxFunction_add(final String token) {
         if (!jsxFunction_contains(token)) {
             final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
@@ -86,6 +90,7 @@ public final class DOMTokenList extends SimpleScriptable {
      * Removes the specified token from the underlying string.
      * @param token the token to remove
      */
+    @JsxFunction
     public void jsxFunction_remove(final String token) {
         if (jsxFunction_contains(token)) {
             final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
@@ -109,6 +114,7 @@ public final class DOMTokenList extends SimpleScriptable {
      * @param token the token to add or remove
      * @return whether the string now contains the token or not
      */
+    @JsxFunction
     public boolean jsxFunction_toggle(final String token) {
         if (jsxFunction_contains(token)) {
             jsxFunction_remove(token);
@@ -123,6 +129,7 @@ public final class DOMTokenList extends SimpleScriptable {
      * @param token the token to add
      * @return true if the underlying string contains token, otherwise false
      */
+    @JsxFunction
     public boolean jsxFunction_contains(final String token) {
         final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
         if (attr != null) {
@@ -137,6 +144,7 @@ public final class DOMTokenList extends SimpleScriptable {
      * @param index the index of the item
      * @return the item
      */
+    @JsxFunction
     public Object jsxFunction_item(final int index) {
         final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
         if (attr != null) {

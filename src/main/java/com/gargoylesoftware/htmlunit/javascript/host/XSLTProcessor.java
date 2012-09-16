@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +40,10 @@ import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -70,6 +77,7 @@ public class XSLTProcessor extends SimpleScriptable {
      *
      * @param style the root-node of an XSLT stylesheet (may be a document node or an element node)
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_importStylesheet(final Node style) {
         style_ = style;
     }
@@ -181,6 +189,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param localName the local name of the XSLT parameter
      * @param value the new value of the XSLT parameter
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_setParameter(final String namespaceURI, final String localName, final Object value) {
         parameters_.put(getQualifiedName(namespaceURI, localName), value);
     }
@@ -191,6 +200,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param localName the local name of the XSLT parameter
      * @return the value of the XSLT parameter
      */
+    @JsxFunction(@WebBrowser(FF))
     public Object jsxFunction_getParameter(final String namespaceURI, final String localName) {
         return parameters_.get(getQualifiedName(namespaceURI, localName));
     }
@@ -210,6 +220,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * Specifies which XML input tree to transform.
      * @param input the input tree
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_input(final Node input) {
         input_ = input;
     }
@@ -218,6 +229,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * Returns which XML input tree to transform.
      * @return which XML input tree to transform
      */
+    @JsxGetter(@WebBrowser(IE))
     public Node jsxGet_input() {
         return input_;
     }
@@ -226,6 +238,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * Sets the object to which to write the output of the transformation.
      * @param output the object to which to write the output of the transformation
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_output(final Object output) {
         output_ = output;
     }
@@ -234,6 +247,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * Gets a custom output to write the result of the transformation.
      * @return the output of the transformation
      */
+    @JsxGetter(@WebBrowser(IE))
     public Object jsxGet_output() {
         return output_;
     }
@@ -246,6 +260,7 @@ public class XSLTProcessor extends SimpleScriptable {
      *        To remove a parameter previously added to the processor, provide a value of Empty or Null instead.
      * @param namespaceURI an optional namespace
      */
+    @JsxFunction(@WebBrowser(IE))
     public void jsxFunction_addParameter(final String baseName, final Object parameter, final Object namespaceURI) {
         final String nsString;
         if (namespaceURI instanceof String) {
@@ -260,6 +275,7 @@ public class XSLTProcessor extends SimpleScriptable {
     /**
      * Starts the transformation process or resumes a previously failed transformation.
      */
+    @JsxFunction(@WebBrowser(IE))
     public void jsxFunction_transform() {
         final Node input = input_;
         final SgmlPage page = input.getDomNodeOrDie().getPage();

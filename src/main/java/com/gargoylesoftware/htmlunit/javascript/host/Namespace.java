@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * A JavaScript object for a Namespace.
@@ -57,6 +59,7 @@ public class Namespace extends SimpleScriptable {
      * Retrieves the name of the namespace.
      * @return the name
      */
+    @JsxGetter
     public String jsxGet_name() {
         return name_;
     }
@@ -65,6 +68,7 @@ public class Namespace extends SimpleScriptable {
      * Gets a Uniform Resource Name (URN) for a target document.
      * @return the URN
      */
+    @JsxGetter
     public String jsxGet_urn() {
         return urn_;
     }
@@ -73,6 +77,7 @@ public class Namespace extends SimpleScriptable {
      * Gets a Uniform Resource Name (URN) for a target document.
      * @param urn the Uniform Resource Name
      */
+    @JsxSetter
     public void jsxSet_urn(final String urn) {
         urn_ = urn;
     }

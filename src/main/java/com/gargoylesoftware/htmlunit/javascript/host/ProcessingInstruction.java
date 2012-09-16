@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * A JavaScript object for a ProcessingInstruction.
@@ -34,6 +36,7 @@ public final class ProcessingInstruction extends Node {
      * Returns the "target" attribute.
      * @return the target
      */
+    @JsxGetter
     public String jsxGet_target() {
         return ((DomProcessingInstruction) getDomNodeOrDie()).getTarget();
     }
@@ -42,6 +45,7 @@ public final class ProcessingInstruction extends Node {
      * Returns the "data" attribute.
      * @return the data
      */
+    @JsxGetter
     public String jsxGet_data() {
         return ((DomProcessingInstruction) getDomNodeOrDie()).getData();
     }
@@ -50,6 +54,7 @@ public final class ProcessingInstruction extends Node {
      * Sets the "data" attribute.
      * @param data the data
      */
+    @JsxSetter
     public void jsxSet_data(final String data) {
         ((DomProcessingInstruction) getDomNodeOrDie()).setData(data);
     }

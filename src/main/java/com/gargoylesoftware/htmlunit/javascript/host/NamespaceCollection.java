@@ -25,6 +25,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 /**
@@ -74,6 +76,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
      * @param url the URL of the namespace to add (optional)
      * @return the newly created namespace
      */
+    @JsxFunction
     public final Namespace jsxFunction_add(final String namespace, final String urn, final String url) {
         // TODO: should we add the namespace to the HtmlUnit DOM?
         final Namespace n = new Namespace(doc_, namespace, urn);
@@ -85,6 +88,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
      * Returns the length of this namespace collection.
      * @return the length of this namespace collection
      */
+    @JsxGetter
     public final int jsxGet_length() {
         return namespaces_.size();
     }
@@ -94,6 +98,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
      * @param index the index of the namespace (either the numeric index, or the name of the namespace)
      * @return the namespace at the specified index
      */
+    @JsxFunction
     public final Object jsxFunction_item(final Object index) {
         if (index instanceof Number) {
             final Number n = (Number) index;

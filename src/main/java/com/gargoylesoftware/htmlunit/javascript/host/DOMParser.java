@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 
 /**
@@ -41,6 +42,7 @@ public class DOMParser extends SimpleScriptable {
      *        either <tt>text/xml</tt>, <tt>application/xml</tt>, or <tt>application/xhtml+xml</tt>. Must not be NULL.
      * @return the generated document
      */
+    @JsxFunction
     public XMLDocument jsxFunction_parseFromString(final String str, final String contentType) {
         final XMLDocument document = new XMLDocument();
         document.setParentScope(getParentScope());

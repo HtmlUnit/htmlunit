@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,6 +42,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
@@ -83,6 +90,7 @@ public class Document extends EventNode {
      * Returns the value of the "location" property.
      * @return the value of the "location" property
      */
+    @JsxGetter
     public Location jsxGet_location() {
         return window_.jsxGet_location();
     }
@@ -95,6 +103,7 @@ public class Document extends EventNode {
      * @param location the location to navigate to
      * @throws IOException when location loading fails
      */
+    @JsxSetter
     public void jsxSet_location(final String location) throws IOException {
         window_.jsxSet_location(location);
     }
@@ -103,6 +112,7 @@ public class Document extends EventNode {
      * Returns the value of the "referrer" property.
      * @return the value of the "referrer" property
      */
+    @JsxGetter
     public String jsxGet_referrer() {
         final String referrer = getPage().getWebResponse().getWebRequest().getAdditionalHeaders().get("Referer");
         if (referrer == null) {
@@ -115,6 +125,7 @@ public class Document extends EventNode {
      * Gets the JavaScript property "documentElement" for the document.
      * @return the root node for the document
      */
+    @JsxGetter
     public Element jsxGet_documentElement() {
         final Object documentElement = getPage().getDocumentElement();
         if (documentElement == null) {
@@ -128,6 +139,7 @@ public class Document extends EventNode {
      * Gets the JavaScript property "doctype" for the document.
      * @return the DocumentType of the document
      */
+    @JsxGetter
     public SimpleScriptable jsxGet_doctype() {
         final Object documentType = getPage().getDoctype();
         if (documentType == null) {
@@ -140,6 +152,7 @@ public class Document extends EventNode {
      * Returns a value which indicates whether or not the document can be edited.
      * @return a value which indicates whether or not the document can be edited
      */
+    @JsxGetter
     public String jsxGet_designMode() {
         if (designMode_ == null) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_30)) {
@@ -161,6 +174,7 @@ public class Document extends EventNode {
      * Sets a value which indicates whether or not the document can be edited.
      * @param mode a value which indicates whether or not the document can be edited
      */
+    @JsxSetter
     public void jsxSet_designMode(final String mode) {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_31);
         if (ie) {
@@ -210,6 +224,7 @@ public class Document extends EventNode {
      * Gets the window in which this document is contained.
      * @return the window
      */
+    @JsxGetter(@WebBrowser(FF))
     public Object jsxGet_defaultView() {
         return getWindow();
     }
@@ -218,6 +233,7 @@ public class Document extends EventNode {
      * Creates a new document fragment.
      * @return a newly created document fragment
      */
+    @JsxFunction
     public Object jsxFunction_createDocumentFragment() {
         final DomDocumentFragment fragment = getDomNodeOrDie().getPage().createDomDocumentFragment();
         final DocumentFragment node = new DocumentFragment();
@@ -233,6 +249,7 @@ public class Document extends EventNode {
      * @param attributeName the name of the attribute to create
      * @return an attribute with the specified name
      */
+    @JsxFunction
     public Attr jsxFunction_createAttribute(final String attributeName) {
         return (Attr) getPage().createAttribute(attributeName).getScriptObject();
     }
@@ -256,6 +273,7 @@ public class Document extends EventNode {
      * @param deep Whether to recursively import the subtree under the specified node; or not
      * @return the imported node that belongs to this Document
      */
+    @JsxFunction(@WebBrowser(FF))
     public Object jsxFunction_importNode(final Node importedNode, final boolean deep) {
         DomNode domNode = importedNode.getDomNodeOrDie();
         domNode = domNode.cloneNode(deep);
@@ -270,6 +288,7 @@ public class Document extends EventNode {
      * Returns the implementation object of the current document.
      * @return implementation-specific object
      */
+    @JsxGetter
     public DOMImplementation jsxGet_implementation() {
         if (implementation_ == null) {
             implementation_ = new DOMImplementation();
@@ -284,6 +303,7 @@ public class Document extends EventNode {
      * @param type the type of events to capture
      * @see Window#jsxFunction_captureEvents(String)
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_captureEvents(final String type) {
         // Empty.
     }
@@ -295,6 +315,7 @@ public class Document extends EventNode {
      * @return an XPathNSResolver which resolves namespaces with respect to the definitions
      *         in scope for a specified node
      */
+    @JsxFunction(@WebBrowser(FF))
     public XPathNSResolver jsxFunction_createNSResolver(final Node nodeResolver) {
         final XPathNSResolver resolver = new XPathNSResolver();
         resolver.setElement(nodeResolver);
@@ -309,6 +330,7 @@ public class Document extends EventNode {
      * @param newData the string value for the text node
      * @return the new text node or NOT_FOUND if there is an error
      */
+    @JsxFunction
     public Object jsxFunction_createTextNode(final String newData) {
         Object result = NOT_FOUND;
         try {
@@ -337,6 +359,7 @@ public class Document extends EventNode {
      * @param comment the comment text
      * @return the new Comment
      */
+    @JsxFunction
     public Object jsxFunction_createComment(final String comment) {
         final DomNode domNode = new DomComment(getDomNodeOrDie().getPage(), comment);
         return getScriptableFor(domNode);
@@ -352,6 +375,7 @@ public class Document extends EventNode {
      * @param result the result object which may be reused and returned by this method
      * @return the result of the evaluation of the XPath expression
      */
+    @JsxFunction(@WebBrowser(FF))
     public XPathResult jsxFunction_evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
         XPathResult xPathResult = (XPathResult) result;
@@ -370,6 +394,7 @@ public class Document extends EventNode {
      * @param tagName the tag name
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
+    @JsxFunction
     public Object jsxFunction_createElement(String tagName) {
         Object result = NOT_FOUND;
         try {
@@ -420,6 +445,7 @@ public class Document extends EventNode {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public Object jsxFunction_createElementNS(final String namespaceURI, final String qualifiedName) {
         final org.w3c.dom.Element element;
         final BrowserVersion browserVersion = getBrowserVersion();
@@ -442,6 +468,7 @@ public class Document extends EventNode {
      * @param tagName the name to search for
      * @return all the descendant elements with the specified tag name
      */
+    @JsxFunction
     public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
         final String description = "Document.getElementsByTagName('" + tagName + "')";
 
@@ -479,6 +506,7 @@ public class Document extends EventNode {
      *                  which matches all elements.
      * @return a live NodeList of found elements in the order they appear in the tree
      */
+    @JsxFunction(@WebBrowser(FF))
     public Object jsxFunction_getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final String description = "Document.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
 

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
@@ -47,6 +48,7 @@ public class BoxObject extends SimpleScriptable {
      * Returns the element to which this box object corresponds.
      * @return the element to which this box object corresponds
      */
+    @JsxGetter
     public HTMLElement jsxGet_element() {
         return element_;
     }
@@ -55,6 +57,7 @@ public class BoxObject extends SimpleScriptable {
      * Returns this box object's element's first child.
      * @return this box object's element's first child
      */
+    @JsxGetter
     public Object jsxGet_firstChild() {
         return element_.jsxGet_firstChild();
     }
@@ -63,6 +66,7 @@ public class BoxObject extends SimpleScriptable {
      * Returns this box object's element's last child.
      * @return this box object's element's last child
      */
+    @JsxGetter
     public Object jsxGet_lastChild() {
         return element_.jsxGet_lastChild();
     }
@@ -71,6 +75,7 @@ public class BoxObject extends SimpleScriptable {
      * Returns this box object's element's next sibling.
      * @return this box object's element's next sibling
      */
+    @JsxGetter
     public Object jsxGet_nextSibling() {
         return element_.jsxGet_nextSibling();
     }
@@ -79,6 +84,7 @@ public class BoxObject extends SimpleScriptable {
      * Returns this box object's element's previous sibling.
      * @return this box object's element's previous sibling
      */
+    @JsxGetter
     public Object jsxGet_previousSibling() {
         return element_.jsxGet_previousSibling();
     }
@@ -87,6 +93,7 @@ public class BoxObject extends SimpleScriptable {
      * Returns the X position of this box object's element.
      * @return the X position of this box object's element
      */
+    @JsxGetter
     public int jsxGet_x() {
         return element_.getPosX();
     }
@@ -95,6 +102,7 @@ public class BoxObject extends SimpleScriptable {
      * Returns the Y position of this box object's element.
      * @return the Y position of this box object's element
      */
+    @JsxGetter
     public int jsxGet_y() {
         return element_.getPosY();
     }
@@ -105,6 +113,7 @@ public class BoxObject extends SimpleScriptable {
      *
      * @return the <tt>screenX</tt> property
      */
+    @JsxGetter
     public int jsxGet_screenX() {
         return jsxGet_x();
     }
@@ -116,6 +125,7 @@ public class BoxObject extends SimpleScriptable {
      *
      * @return the <tt>screenY</tt> property
      */
+    @JsxGetter
     public int jsxGet_screenY() {
         return jsxGet_y() + 121;
     }
@@ -124,6 +134,7 @@ public class BoxObject extends SimpleScriptable {
      * Returns the width of this box object's element, including padding, excluding margin and border.
      * @return the width of this box object's element, including padding, excluding margin and border
      */
+    @JsxGetter
     public int jsxGet_width() {
         return element_.jsxGet_clientWidth();
     }
@@ -132,6 +143,7 @@ public class BoxObject extends SimpleScriptable {
      * Returns the height of this box object's element, including padding, excluding margin and border.
      * @return the height of this box object's element, including padding, excluding margin and border
      */
+    @JsxGetter
     public int jsxGet_height() {
         return element_.jsxGet_clientHeight();
     }

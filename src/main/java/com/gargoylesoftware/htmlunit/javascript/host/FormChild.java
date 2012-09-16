@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
 
@@ -38,6 +39,7 @@ public class FormChild extends HTMLElement {
      *
      * @return the value of the JavaScript <tt>form</tt> attribute
      */
+    @JsxGetter
     public HTMLFormElement jsxGet_form() {
         final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
         if (form == null) {

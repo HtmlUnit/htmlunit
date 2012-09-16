@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 /**
@@ -47,6 +51,7 @@ public class DocumentFragment extends Node {
      * @param attributeName the name of the attribute to create
      * @return an attribute with the specified name
      */
+    @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_createAttribute(final String attributeName) {
         return getDocument().jsxFunction_createAttribute(attributeName);
     }
@@ -57,6 +62,7 @@ public class DocumentFragment extends Node {
      * @param tagName the tag name
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
+    @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_createElement(final String tagName) {
         return getDocument().jsxFunction_createElement(tagName);
     }
@@ -74,6 +80,7 @@ public class DocumentFragment extends Node {
      * @param comment the comment text
      * @return the new Comment
      */
+    @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_createComment(final String comment) {
         return getDocument().jsxFunction_createComment(comment);
     }
@@ -82,6 +89,7 @@ public class DocumentFragment extends Node {
      * Creates a new document fragment.
      * @return a newly created document fragment
      */
+    @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_createDocumentFragment() {
         return getDocument().jsxFunction_createDocumentFragment();
     }
@@ -92,6 +100,7 @@ public class DocumentFragment extends Node {
      * @param newData the string value for the text node
      * @return the new text node or NOT_FOUND if there is an error
      */
+    @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_createTextNode(final String newData) {
         return getDocument().jsxFunction_createTextNode(newData);
     }

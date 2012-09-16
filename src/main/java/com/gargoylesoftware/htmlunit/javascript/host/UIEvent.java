@@ -14,8 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * JavaScript object representing a UI event. For general information on which properties and functions should be
@@ -66,6 +71,7 @@ public class UIEvent extends Event {
      *
      * @return some detail information about the event, depending on the event type
      */
+    @JsxGetter(@WebBrowser(FF))
     public long jsxGet_detail() {
         return detail_;
     }
@@ -84,6 +90,7 @@ public class UIEvent extends Event {
      *
      * @return the view from which the event was generated
      */
+    @JsxGetter(@WebBrowser(FF))
     public Object jsxGet_view() {
         return getWindow();
     }
@@ -97,6 +104,7 @@ public class UIEvent extends Event {
      * @param view the view to use for this event
      * @param detail the detail to set for the event
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_initUIEvent(
             final String type,
             final boolean bubbles,
@@ -112,6 +120,7 @@ public class UIEvent extends Event {
      * Returns whether or not the "meta" key was pressed during the event firing.
      * @return whether or not the "meta" key was pressed during the event firing
      */
+    @JsxGetter(@WebBrowser(FF))
     public boolean jsxGet_metaKey() {
         return metaKey_;
     }
@@ -123,4 +132,29 @@ public class UIEvent extends Event {
         metaKey_ = metaKey;
     }
 
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter(@WebBrowser(FF))
+    public boolean jsxGet_altKey() {
+        return super.jsxGet_altKey();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter(@WebBrowser(FF))
+    public boolean jsxGet_ctrlKey() {
+        return super.jsxGet_ctrlKey();
+    }
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter(@WebBrowser(FF))
+    public boolean jsxGet_shiftKey() {
+        return super.jsxGet_shiftKey();
+    }
 }

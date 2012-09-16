@@ -21,6 +21,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 
 /**
  * A JavaScript object for a static NodeList.
@@ -65,6 +67,7 @@ public class StaticNodeList extends SimpleScriptable {
      * @param index the index or key corresponding to the element or elements to return
      * @return the element or elements corresponding to the specified index or key
      */
+    @JsxFunction
     public Node jsxFunction_item(final int index) {
         if (index < 0 || index >= jsxGet_length()) {
             return null;
@@ -76,6 +79,7 @@ public class StaticNodeList extends SimpleScriptable {
      * Returns the length of this element array.
      * @return the length of this element array
      */
+    @JsxGetter
     public int jsxGet_length() {
         return elements_.size();
     }

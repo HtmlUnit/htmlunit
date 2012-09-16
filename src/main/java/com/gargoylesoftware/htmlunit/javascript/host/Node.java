@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +42,11 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -65,54 +74,71 @@ public class Node extends SimpleScriptable {
     private EventListenersContainer eventListenersContainer_;
 
     /** @see org.w3c.dom.Node#ELEMENT_NODE */
+    @JsxConstant(@WebBrowser(FF))
     public static final short ELEMENT_NODE = org.w3c.dom.Node.ELEMENT_NODE;
 
     /** @see org.w3c.dom.Node#ATTRIBUTE_NODE */
+    @JsxConstant(@WebBrowser(FF))
     public static final short ATTRIBUTE_NODE = org.w3c.dom.Node.ATTRIBUTE_NODE;
 
     /** @see org.w3c.dom.Node#TEXT_NODE */
+    @JsxConstant(@WebBrowser(FF))
     public static final short TEXT_NODE = org.w3c.dom.Node.TEXT_NODE;
 
     /** @see org.w3c.dom.Node#CDATA_SECTION_NODE */
+    @JsxConstant(@WebBrowser(FF))
     public static final short CDATA_SECTION_NODE = org.w3c.dom.Node.CDATA_SECTION_NODE;
 
     /** @see org.w3c.dom.Node#ENTITY_REFERENCE_NODE */
+    @JsxConstant(@WebBrowser(FF))
     public static final short ENTITY_REFERENCE_NODE = org.w3c.dom.Node.ENTITY_REFERENCE_NODE;
 
     /** @see org.w3c.dom.Node#ENTITY_NODE */
+    @JsxConstant(@WebBrowser(FF))
     public static final short ENTITY_NODE = org.w3c.dom.Node.ENTITY_NODE;
 
     /** @see org.w3c.dom.Node#PROCESSING_INSTRUCTION_NODE */
+    @JsxConstant(@WebBrowser(FF))
     public static final short PROCESSING_INSTRUCTION_NODE = org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
 
     /** @see org.w3c.dom.Node#COMMENT_NODE */
+    @JsxConstant(@WebBrowser(FF))
     public static final short COMMENT_NODE = org.w3c.dom.Node.COMMENT_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_NODE */
+    @JsxConstant(@WebBrowser(FF))
     public static final short DOCUMENT_NODE = org.w3c.dom.Node.DOCUMENT_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_TYPE_NODE */
+    @JsxConstant(@WebBrowser(FF))
     public static final short DOCUMENT_TYPE_NODE = org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_FRAGMENT_NODE */
+    @JsxConstant(@WebBrowser(FF))
     public static final short DOCUMENT_FRAGMENT_NODE = org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
 
     /** @see org.w3c.dom.Node#NOTATION_NODE */
+    @JsxConstant(@WebBrowser(FF))
     public static final short NOTATION_NODE = org.w3c.dom.Node.NOTATION_NODE;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_DISCONNECTED */
+    @JsxConstant(@WebBrowser(FF))
     public static final short DOCUMENT_POSITION_DISCONNECTED = org.w3c.dom.Node.DOCUMENT_POSITION_DISCONNECTED;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_PRECEDING */
+    @JsxConstant(@WebBrowser(FF))
     public static final short DOCUMENT_POSITION_PRECEDING = org.w3c.dom.Node.DOCUMENT_POSITION_PRECEDING;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_FOLLOWING */
+    @JsxConstant(@WebBrowser(FF))
     public static final short DOCUMENT_POSITION_FOLLOWING = org.w3c.dom.Node.DOCUMENT_POSITION_FOLLOWING;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_CONTAINS */
+    @JsxConstant(@WebBrowser(FF))
     public static final short DOCUMENT_POSITION_CONTAINS = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINS;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_CONTAINED_BY */
+    @JsxConstant(@WebBrowser(FF))
     public static final short DOCUMENT_POSITION_CONTAINED_BY = org.w3c.dom.Node.DOCUMENT_POSITION_CONTAINED_BY;
 
     /** @see org.w3c.dom.Node#DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC */
@@ -130,6 +156,7 @@ public class Node extends SimpleScriptable {
      * Gets the JavaScript property "nodeType" for the current node.
      * @return the node type
      */
+    @JsxGetter
     public short jsxGet_nodeType() {
         return getDomNodeOrDie().getNodeType();
     }
@@ -138,6 +165,7 @@ public class Node extends SimpleScriptable {
      * Gets the JavaScript property "nodeName" for the current node.
      * @return the node name
      */
+    @JsxGetter
     public String jsxGet_nodeName() {
         return getDomNodeOrDie().getNodeName();
     }
@@ -146,6 +174,7 @@ public class Node extends SimpleScriptable {
      * Gets the JavaScript property "nodeValue" for the current node.
      * @return the node value
      */
+    @JsxGetter
     public String jsxGet_nodeValue() {
         return getDomNodeOrDie().getNodeValue();
     }
@@ -154,6 +183,7 @@ public class Node extends SimpleScriptable {
      * Sets the JavaScript property "nodeValue" for the current node.
      * @param newValue the new node value
      */
+    @JsxSetter
     public void jsxSet_nodeValue(final String newValue) {
         getDomNodeOrDie().setNodeValue(newValue);
     }
@@ -163,6 +193,7 @@ public class Node extends SimpleScriptable {
      * @param childObject the node to add to this node
      * @return the newly added child node
      */
+    @JsxFunction
     public Object jsxFunction_appendChild(final Object childObject) {
         Object appendedChild = null;
         if (childObject instanceof Node) {
@@ -263,6 +294,7 @@ public class Node extends SimpleScriptable {
      * @param deep if <tt>true</tt>, recursively clones all descendants
      * @return the newly cloned node
      */
+    @JsxFunction
     public Object jsxFunction_cloneNode(final boolean deep) {
         final DomNode domNode = getDomNodeOrDie();
         final DomNode clonedNode = domNode.cloneNode(deep);
@@ -301,6 +333,7 @@ public class Node extends SimpleScriptable {
      * @param function the function
      * @return the newly added child node
      */
+    @JsxFunction
     public static Object jsxFunction_insertBefore(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         return ((Node) thisObj).jsxFunction_insertBefore(args);
@@ -403,6 +436,7 @@ public class Node extends SimpleScriptable {
      *
      * @return whether this node is the same node as the given one
      */
+    @JsxFunction(@WebBrowser(value = FF, maxVersion = 3.6f))
     public boolean jsxFunction_isSameNode(final Object other) {
         return other == this;
     }
@@ -412,6 +446,7 @@ public class Node extends SimpleScriptable {
      * @param childObject the node to remove from this node
      * @return the removed child node
      */
+    @JsxFunction
     public Object jsxFunction_removeChild(final Object childObject) {
         Object removedChild = null;
 
@@ -430,6 +465,7 @@ public class Node extends SimpleScriptable {
      * Returns whether this node has any children.
      * @return boolean true if this node has any children, false otherwise
      */
+    @JsxFunction
     public boolean jsxFunction_hasChildNodes() {
         return getDomNodeOrDie().getChildren().iterator().hasNext();
     }
@@ -438,6 +474,7 @@ public class Node extends SimpleScriptable {
      * Returns the child nodes of the current element.
      * @return the child nodes of the current element
      */
+    @JsxGetter
     public NodeList jsxGet_childNodes() {
         if (childNodes_ == null) {
             final DomNode node = getDomNodeOrDie();
@@ -491,6 +528,7 @@ public class Node extends SimpleScriptable {
      * @param oldChildObject the node to remove as a child of this node
      * @return the removed child node
      */
+    @JsxFunction
     public Object jsxFunction_replaceChild(final Object newChildObject, final Object oldChildObject) {
         Object removedChild = null;
 
@@ -545,6 +583,7 @@ public class Node extends SimpleScriptable {
      * contains the current node.
      * @return the parent node
      */
+    @JsxGetter
     public Object jsxGet_parentNode() {
         return getJavaScriptNode(getDomNodeOrDie().getParentNode());
     }
@@ -555,6 +594,7 @@ public class Node extends SimpleScriptable {
      * @return the next sibling node or null if the current node has
      * no next sibling.
      */
+    @JsxGetter
     public Node jsxGet_nextSibling() {
         return getJavaScriptNode(getDomNodeOrDie().getNextSibling());
     }
@@ -565,6 +605,7 @@ public class Node extends SimpleScriptable {
      * @return the previous sibling node or null if the current node has
      * no previous sibling.
      */
+    @JsxGetter
     public Node jsxGet_previousSibling() {
         return getJavaScriptNode(getDomNodeOrDie().getPreviousSibling());
     }
@@ -575,6 +616,7 @@ public class Node extends SimpleScriptable {
      * @return the first child node or null if the current node has
      * no children.
      */
+    @JsxGetter
     public Node jsxGet_firstChild() {
         return getJavaScriptNode(getDomNodeOrDie().getFirstChild());
     }
@@ -585,6 +627,7 @@ public class Node extends SimpleScriptable {
      * @return the last child node or null if the current node has
      * no children.
      */
+    @JsxGetter
     public Node jsxGet_lastChild() {
         return getJavaScriptNode(getDomNodeOrDie().getLastChild());
     }
@@ -608,6 +651,7 @@ public class Node extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
      * @return <code>true</code> if the listener has been added
      */
+    @JsxFunction(@WebBrowser(IE))
     public boolean jsxFunction_attachEvent(final String type, final Function listener) {
         return getEventListenersContainer().addEventListener(StringUtils.substring(type, 2), listener, false);
     }
@@ -619,6 +663,7 @@ public class Node extends SimpleScriptable {
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.addEventListener">Mozilla documentation</a>
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_addEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
@@ -640,6 +685,7 @@ public class Node extends SimpleScriptable {
      * @param listener the event listener
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536411.aspx">MSDN documentation</a>
      */
+    @JsxFunction(@WebBrowser(IE))
     public void jsxFunction_detachEvent(final String type, final Function listener) {
         jsxFunction_removeEventListener(StringUtils.substring(type, 2), listener, false);
     }
@@ -651,6 +697,7 @@ public class Node extends SimpleScriptable {
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener">Mozilla documentation</a>
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_removeEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
@@ -811,6 +858,7 @@ public class Node extends SimpleScriptable {
      * Returns the owner document.
      * @return the document
      */
+    @JsxGetter
     public Object jsxGet_ownerDocument() {
         final Object document = getDomNodeOrDie().getOwnerDocument();
         if (document == null) {
@@ -823,6 +871,7 @@ public class Node extends SimpleScriptable {
      * Returns the namespace prefix.
      * @return the namespace prefix
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_prefix() {
         final DomNode domNode = getDomNodeOrDie();
         final String prefix = domNode.getPrefix();
@@ -837,6 +886,7 @@ public class Node extends SimpleScriptable {
      * Returns the local name of this element.
      * @return the local name of this element
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_localName() {
         return getDomNodeOrDie().getLocalName();
     }
@@ -845,6 +895,7 @@ public class Node extends SimpleScriptable {
      * Returns The URI that identifies an XML namespace.
      * @return the URI that identifies an XML namespace
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_namespaceURI() {
         final String namespaceURI = getDomNodeOrDie().getNamespaceURI();
         if (namespaceURI == null && getBrowserVersion()
@@ -874,6 +925,7 @@ public class Node extends SimpleScriptable {
      * @see <a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-compareDocumentPosition">DOM level 3</a>
      * @see org.w3c.dom.Node#compareDocumentPosition(org.w3c.dom.Node)
      */
+    @JsxFunction(@WebBrowser(FF))
     public short jsxFunction_compareDocumentPosition(final Node node) {
         return getDomNodeOrDie().compareDocumentPosition(node.getDomNodeOrDie());
     }
@@ -881,6 +933,7 @@ public class Node extends SimpleScriptable {
     /**
      * Merges adjacent TextNode objects to produce a normalized document object model.
      */
+    @JsxFunction
     public void jsxFunction_normalize() {
         getDomNodeOrDie().normalize();
     }
@@ -889,6 +942,7 @@ public class Node extends SimpleScriptable {
      * Represents the xml content of the node and its descendants.
      * @return the xml content of the node and its descendants
      */
+    @JsxGetter(@WebBrowser(IE))
     public Object jsxGet_xml() {
         final DomNode node = getDomNodeOrDie();
         if (node.getPage() instanceof XmlPage) {
@@ -911,6 +965,7 @@ public class Node extends SimpleScriptable {
      * Gets the textContent attribute.
      * @return the contents of this node as text
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_textContent() {
         return getDomNodeOrDie().getTextContent();
     }
@@ -919,6 +974,7 @@ public class Node extends SimpleScriptable {
      * Replace all children elements of this element with the supplied value.
      * @param value - the new value for the contents of this node
      */
+    @JsxSetter(@WebBrowser(FF))
     public void jsxSet_textContent(final Object value) {
         getDomNodeOrDie().setTextContent(value == null ? null : Context.toString(value));
     }
@@ -928,6 +984,7 @@ public class Node extends SimpleScriptable {
      * @return the parent element
      * @see #jsxGet_parentNode()
      */
+    @JsxGetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
     public Element jsxGet_parentElement() {
         final Node parent = getParent();
         if (!(parent instanceof Element)) {
@@ -941,6 +998,7 @@ public class Node extends SimpleScriptable {
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.attributes">Gecko DOM Reference</a>
      * @return the attributes of this XML element
      */
+    @JsxGetter
     public Object jsxGet_attributes() {
         return null;
     }

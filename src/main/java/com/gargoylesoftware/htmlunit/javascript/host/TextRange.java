@@ -25,6 +25,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
@@ -71,6 +74,7 @@ public class TextRange extends SimpleScriptable {
      * Retrieves the text contained within the range.
      * @return the text contained within the range
      */
+    @JsxGetter
     public String jsxGet_text() {
         return range_.toString();
     }
@@ -79,6 +83,7 @@ public class TextRange extends SimpleScriptable {
      * Sets the text contained within the range.
      * @param text the text contained within the range
      */
+    @JsxSetter
     public void jsxSet_text(final String text) {
         if (range_.getStartContainer() == range_.getEndContainer()
             && range_.getStartContainer() instanceof SelectableTextInput) {
@@ -93,6 +98,7 @@ public class TextRange extends SimpleScriptable {
      * Retrieves the HTML fragment contained within the range.
      * @return the HTML fragment contained within the range
      */
+    @JsxGetter
     public String jsxGet_htmlText() {
         final org.w3c.dom.Node node = range_.getCommonAncestorContainer();
         final HTMLElement element = (HTMLElement) getScriptableFor(node);
@@ -104,6 +110,7 @@ public class TextRange extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536416.aspx">MSDN documentation</a>
      * @return a duplicate of this TextRange instance
      */
+    @JsxFunction
     public Object jsxFunction_duplicate() {
         final TextRange range = new TextRange(range_.cloneRange());
         range.setParentScope(getParentScope());
@@ -121,6 +128,7 @@ public class TextRange extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536654.aspx">MSDN doc</a>
      * @return the parent element object if successful, or null otherwise.
      */
+    @JsxFunction
     public Object jsxFunction_parentElement() {
         final org.w3c.dom.Node parent = range_.getCommonAncestorContainer();
         return getScriptableFor(parent);
@@ -131,6 +139,7 @@ public class TextRange extends SimpleScriptable {
      * @param toStart indicates if collapse should be done to the start
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536371.aspx">MSDN doc</a>
      */
+    @JsxFunction
     public void jsxFunction_collapse(final boolean toStart) {
         range_.collapse(toStart);
     }
@@ -140,6 +149,7 @@ public class TextRange extends SimpleScriptable {
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536735.aspx">MSDN doc</a>
      */
+    @JsxFunction
     public void jsxFunction_select() {
         final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
         page.setSelectionRange(range_);
@@ -151,6 +161,7 @@ public class TextRange extends SimpleScriptable {
      * @param count the number of units to move
      * @return the number of units moved
      */
+    @JsxFunction
     public int jsxFunction_moveStart(final String unit, final Object count) {
         if (!"character".equals(unit)) {
             LOG.warn("moveStart('" + unit + "') is not yet supported");
@@ -175,6 +186,7 @@ public class TextRange extends SimpleScriptable {
      * @param count the number of units to move
      * @return the number of units moved
      */
+    @JsxFunction
     public int jsxFunction_moveEnd(final String unit, final Object count) {
         if (!"character".equals(unit)) {
             LOG.warn("moveEnd('" + unit + "') is not yet supported");
@@ -199,6 +211,7 @@ public class TextRange extends SimpleScriptable {
      * @param element the element to move to
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536630.aspx">MSDN Documentation</a>
      */
+    @JsxFunction
     public void jsxFunction_moveToElementText(final HTMLElement element) {
         range_.selectNode(element.getDomNodeOrDie());
     }
@@ -209,6 +222,7 @@ public class TextRange extends SimpleScriptable {
      * @return <code>true</code> if <code>other</code> is contained within current range
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536371.aspx">MSDN doc</a>
      */
+    @JsxFunction
     public boolean jsxFunction_inRange(final TextRange other) {
         final Range otherRange = other.range_;
 
@@ -242,6 +256,7 @@ public class TextRange extends SimpleScriptable {
      * @param other the other range
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536745.aspx">MSDN doc</a>
      */
+    @JsxFunction
     public void jsxFunction_setEndPoint(final String type, final TextRange other) {
         final Range otherRange = other.range_;
 

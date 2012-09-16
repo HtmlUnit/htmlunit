@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 
 /**
@@ -51,6 +53,7 @@ public class MediaList extends SimpleScriptable {
      * @param index the index or key corresponding to the element or elements to return
      * @return the element or elements corresponding to the specified index or key
      */
+    @JsxFunction
     public String jsxFunction_item(final int index) {
         if (index < 0 || index >= jsxGet_length()) {
             return null;
@@ -62,6 +65,7 @@ public class MediaList extends SimpleScriptable {
      * Returns the number of media in the list.
      * @return the number of media in the list
      */
+    @JsxGetter
     public int jsxGet_length() {
         return wrappedList_.getLength();
     }
@@ -71,6 +75,7 @@ public class MediaList extends SimpleScriptable {
      * This is a comma-separated list of media.
      * @return the parsable textual representation.
      */
+    @JsxGetter
     public String jsxGet_mediaText() {
         return wrappedList_.getMediaText();
     }

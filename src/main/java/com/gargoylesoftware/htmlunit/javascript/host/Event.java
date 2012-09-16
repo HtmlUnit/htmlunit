@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.util.LinkedList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -27,6 +30,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * JavaScript object representing an event that is passed into event handlers when they are
@@ -112,117 +120,155 @@ public class Event extends SimpleScriptable {
     public static final String TYPE_ERROR = "error";
 
     /** The first event phase: the capturing phase. */
+    @JsxConstant(@WebBrowser(FF))
     public static final short CAPTURING_PHASE = 1;
 
     /** The second event phase: at the event target. */
+    @JsxConstant(@WebBrowser(FF))
     public static final short AT_TARGET = 2;
 
     /** The third (and final) event phase: the bubbling phase. */
+    @JsxConstant(@WebBrowser(FF))
     public static final short BUBBLING_PHASE = 3;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int ABORT = 0x400000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int ALT_MASK = 0x1;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int BACK = 0x20000000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int BLUR = 0x2000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int CHANGE = 0x8000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int CLICK = 0x40;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int CONTROL_MASK = 0x2;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int DBLCLICK = 0x80;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int DRAGDROP = 0x800;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int ERROR = 0x800000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int FOCUS = 0x1000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int FORWARD = 0x8000000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int HELP = 0x10000000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int KEYDOWN = 0x100;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int KEYPRESS = 0x400;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int KEYUP = 0x200;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int LOAD = 0x80000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int LOCATE = 0x1000000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int META_MASK = 0x8;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int MOUSEDOWN = 0x1;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int MOUSEDRAG = 0x20;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int MOUSEMOVE = 0x10;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int MOUSEOUT = 0x8;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int MOUSEOVER = 0x4;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int MOUSEUP = 0x2;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int MOVE = 0x2000000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int RESET = 0x10000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int RESIZE = 0x4000000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int SCROLL = 0x40000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int SELECT = 0x4000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int SHIFT_MASK = 0x4;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int SUBMIT = 0x20000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int TEXT = 0x40000000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int UNLOAD = 0x100000;
 
     /** Constant. */
+    @JsxConstant(@WebBrowser(FF))
     public static final int XFER_DONE = 0x200000;
 
     private Object srcElement_;        // IE-only writable equivalent of target.
@@ -333,6 +379,7 @@ public class Event extends SimpleScriptable {
      * Returns the object that fired the event. This is an IE-only property.
      * @return the object that fired the event
      */
+    @JsxGetter(@WebBrowser(IE))
     public Object jsxGet_srcElement() {
         return srcElement_;
     }
@@ -341,6 +388,7 @@ public class Event extends SimpleScriptable {
      * Sets the object that fired the event. This is an IE-only property.
      * @param srcElement the object that fired the event
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_srcElement(final Object srcElement) {
         srcElement_ = srcElement;
     }
@@ -349,6 +397,7 @@ public class Event extends SimpleScriptable {
      * Returns the event target to which the event was originally dispatched.
      * @return the event target to which the event was originally dispatched
      */
+    @JsxGetter(@WebBrowser(FF))
     public Object jsxGet_target() {
         return target_;
     }
@@ -366,6 +415,7 @@ public class Event extends SimpleScriptable {
      * is useful during event capturing and event bubbling.
      * @return the current event target
      */
+    @JsxGetter(@WebBrowser(FF))
     public Object jsxGet_currentTarget() {
         return currentTarget_;
     }
@@ -382,6 +432,7 @@ public class Event extends SimpleScriptable {
      * Returns the event type.
      * @return the event type
      */
+    @JsxGetter
     public String jsxGet_type() {
         return type_;
     }
@@ -390,6 +441,7 @@ public class Event extends SimpleScriptable {
      * Sets the event type.
      * @param type the event type
      */
+    @JsxSetter
     public void jsxSet_type(final String type) {
         type_ = type;
     }
@@ -406,6 +458,7 @@ public class Event extends SimpleScriptable {
      * Returns the time at which this event was created.
      * @return the time at which this event was created
      */
+    @JsxGetter(@WebBrowser(FF))
     public long jsxGet_timeStamp() {
         return timeStamp_;
     }
@@ -422,6 +475,7 @@ public class Event extends SimpleScriptable {
      * Returns the key code associated with the event.
      * @return the key code associated with the event
      */
+    @JsxGetter(@WebBrowser(IE))
     public Object jsxGet_keyCode() {
         if (keyCode_ == null) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_155)) {
@@ -435,6 +489,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether SHIFT has been pressed during this event or not
      */
+    @JsxGetter(@WebBrowser(IE))
     public boolean jsxGet_shiftKey() {
         return shiftKey_;
     }
@@ -449,6 +504,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether CTRL has been pressed during this event or not
      */
+    @JsxGetter(@WebBrowser(IE))
     public boolean jsxGet_ctrlKey() {
         return ctrlKey_;
     }
@@ -463,6 +519,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether ALT has been pressed during this event or not
      */
+    @JsxGetter(@WebBrowser(IE))
     public boolean jsxGet_altKey() {
         return altKey_;
     }
@@ -477,6 +534,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return the current event phase for the event
      */
+    @JsxGetter(@WebBrowser(FF))
     public int jsxGet_eventPhase() {
         return eventPhase_;
     }
@@ -497,6 +555,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether or not this event bubbles
      */
+    @JsxGetter(@WebBrowser(FF))
     public boolean jsxGet_bubbles() {
         return bubbles_;
     }
@@ -504,6 +563,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return whether or not this event can be canceled
      */
+    @JsxGetter(@WebBrowser(FF))
     public boolean jsxGet_cancelable() {
         return cancelable_;
     }
@@ -511,6 +571,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return indicates if event propagation is stopped
      */
+    @JsxGetter
     public boolean jsxGet_cancelBubble() {
         return stopPropagation_;
     }
@@ -518,6 +579,7 @@ public class Event extends SimpleScriptable {
     /**
      * @param newValue indicates if event propagation is stopped
      */
+    @JsxSetter
     public void jsxSet_cancelBubble(final boolean newValue) {
         stopPropagation_ = newValue;
     }
@@ -525,6 +587,7 @@ public class Event extends SimpleScriptable {
     /**
      * Stops the event from propagating.
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_stopPropagation() {
         stopPropagation_ = true;
     }
@@ -541,6 +604,7 @@ public class Event extends SimpleScriptable {
      * Returns the return value associated with the event.
      * @return the return value associated with the event
      */
+    @JsxGetter
     public Object jsxGet_returnValue() {
         return returnValue_;
     }
@@ -549,6 +613,7 @@ public class Event extends SimpleScriptable {
      * Returns the property name associated with the event.
      * @return the property name associated with the event
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_propertyName() {
         return propertyName_;
     }
@@ -557,6 +622,7 @@ public class Event extends SimpleScriptable {
      * Sets the return value associated with the event.
      * @param returnValue the return value associated with the event
      */
+    @JsxSetter
     public void jsxSet_returnValue(final Object returnValue) {
         returnValue_ = returnValue;
     }
@@ -567,6 +633,7 @@ public class Event extends SimpleScriptable {
      * @param bubbles whether or not the event should bubble
      * @param cancelable whether or not the event the event should be cancelable
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_initEvent(final String type, final boolean bubbles, final boolean cancelable) {
         type_ = type;
         bubbles_ = bubbles;
@@ -578,6 +645,7 @@ public class Event extends SimpleScriptable {
      * Any default action associated with the event will not occur.
      * Calling this method for a non-cancelable event has no effect.
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_preventDefault() {
         preventDefault_ = true;
     }

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+
 /**
  * A JavaScript object for a document.navigator.plugins.
  * @version $Revision$
@@ -59,6 +61,7 @@ public class Plugin extends SimpleArray {
      * Gets the plugin's description.
      * @return the description
      */
+    @JsxGetter
     public String jsxGet_description() {
         return description_;
     }
@@ -67,6 +70,7 @@ public class Plugin extends SimpleArray {
      * Gets the plugin's file name.
      * @return the file name
      */
+    @JsxGetter
     public String jsxGet_filename() {
         return filename_;
     }
@@ -75,6 +79,7 @@ public class Plugin extends SimpleArray {
      * Gets the plugin's name.
      * @return the name
      */
+    @JsxGetter
     public String jsxGet_name() {
         return name_;
     }

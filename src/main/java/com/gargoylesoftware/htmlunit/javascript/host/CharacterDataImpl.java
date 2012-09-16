@@ -15,6 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * A JavaScript object for CharacterData.
@@ -35,6 +38,7 @@ public class CharacterDataImpl extends Node {
      * Gets the JavaScript property "data" for this character data.
      * @return the String of data
      */
+    @JsxGetter
     public Object jsxGet_data() {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         return domCharacterData.getData();
@@ -44,6 +48,7 @@ public class CharacterDataImpl extends Node {
      * Sets the JavaScript property "data" for this character data.
      * @param newValue the new String of data
      */
+    @JsxSetter
     public void jsxSet_data(final String newValue) {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         domCharacterData.setData(newValue);
@@ -53,6 +58,7 @@ public class CharacterDataImpl extends Node {
      * Gets the number of character in the character data.
      * @return the number of characters
      */
+    @JsxGetter
     public int jsxGet_length() {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         return domCharacterData.getLength();
@@ -62,6 +68,7 @@ public class CharacterDataImpl extends Node {
      * Append a string to character data.
      * @param arg the string to be appended to the character data
      */
+    @JsxFunction
     public void jsxFunction_appendData(final String arg) {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         domCharacterData.appendData(arg);
@@ -72,6 +79,7 @@ public class CharacterDataImpl extends Node {
      * @param offset the position of the first character to be deleted
      * @param count the number of characters to be deleted
      */
+    @JsxFunction
     public void jsxFunction_deleteData(final int offset, final int count) {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         domCharacterData.deleteData(offset, count);
@@ -83,6 +91,7 @@ public class CharacterDataImpl extends Node {
      * the string is to be inserted.
      * @param arg the string to insert
      */
+    @JsxFunction
     public void jsxFunction_insertData(final int offset, final String arg) {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         domCharacterData.insertData(offset, arg);
@@ -96,6 +105,7 @@ public class CharacterDataImpl extends Node {
      * @param arg the string that replaces the count characters beginning at
      * the character at offset.
      */
+    @JsxFunction
     public void jsxFunction_replaceData(final int offset, final int count, final String arg) {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         domCharacterData.replaceData(offset, count, arg);
@@ -108,6 +118,7 @@ public class CharacterDataImpl extends Node {
      * @return a string that consists of the count characters of the character
      *         data starting from the character at position offset
      */
+    @JsxFunction
     public String jsxFunction_substringData(final int offset, final int count) {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         return domCharacterData.substringData(offset, count);

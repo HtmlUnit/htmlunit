@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 
 /**
  * A JavaScript object for a document.navigator.mimeTypes elements.
@@ -55,6 +56,7 @@ public final class MimeType extends SimpleScriptable {
      * Returns the mime type's description.
      * @return the description
      */
+    @JsxGetter
     public String jsxGet_description() {
         return description_;
     }
@@ -63,6 +65,7 @@ public final class MimeType extends SimpleScriptable {
      * Returns the mime type's suffixes.
      * @return the suffixes
      */
+    @JsxGetter
     public String jsxGet_suffixes() {
         return suffixes_;
     }
@@ -71,6 +74,7 @@ public final class MimeType extends SimpleScriptable {
      * Returns the mime type's suffixes.
      * @return the suffixes
      */
+    @JsxGetter
     public String jsxGet_type() {
         return type_;
     }
@@ -79,6 +83,7 @@ public final class MimeType extends SimpleScriptable {
      * Returns the mime type's associated plugin.
      * @return the plugin
      */
+    @JsxGetter
     public Object jsxGet_enabledPlugin() {
         return enabledPlugin_;
     }
