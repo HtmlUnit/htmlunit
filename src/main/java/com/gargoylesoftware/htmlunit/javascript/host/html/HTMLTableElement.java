@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,10 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
 
 /**
@@ -52,6 +58,7 @@ public class HTMLTableElement extends RowContainer {
      * caption is declared in the table, this method returns the first one.
      * @return the table's caption element
      */
+    @JsxGetter
     public Object jsxGet_caption() {
         final List<HtmlElement> captions = getDomNodeOrDie().getHtmlElementsByTagName("caption");
         if (captions.isEmpty()) {
@@ -64,6 +71,7 @@ public class HTMLTableElement extends RowContainer {
      * Sets the caption.
      * @param o the caption
      */
+    @JsxSetter
     public void jsxSet_caption(final Object o) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_105)) {
             throw Context.reportRuntimeError("Can't set caption");
@@ -84,6 +92,7 @@ public class HTMLTableElement extends RowContainer {
      * tfoot is declared in the table, this method returns the first one.
      * @return the table's tfoot element
      */
+    @JsxGetter
     public Object jsxGet_tFoot() {
         final List<HtmlElement> tfoots = getDomNodeOrDie().getHtmlElementsByTagName("tfoot");
         if (tfoots.isEmpty()) {
@@ -96,6 +105,7 @@ public class HTMLTableElement extends RowContainer {
      * Sets the tFoot.
      * @param o the tFoot
      */
+    @JsxSetter
     public void jsxSet_tFoot(final Object o) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_106)) {
             throw Context.reportRuntimeError("Can't set tFoot");
@@ -117,6 +127,7 @@ public class HTMLTableElement extends RowContainer {
      * thead is declared in the table, this method returns the first one.
      * @return the table's thead element
      */
+    @JsxGetter
     public Object jsxGet_tHead() {
         final List<HtmlElement> theads = getDomNodeOrDie().getHtmlElementsByTagName("thead");
         if (theads.isEmpty()) {
@@ -129,6 +140,7 @@ public class HTMLTableElement extends RowContainer {
      * Sets the tHead.
      * @param o the tHead
      */
+    @JsxSetter
     public void jsxSet_tHead(final Object o) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_107)) {
             throw Context.reportRuntimeError("Can't set tHead");
@@ -149,6 +161,7 @@ public class HTMLTableElement extends RowContainer {
      * Returns the tbody's in the table.
      * @return the tbody's in the table
      */
+    @JsxGetter
     public Object jsxGet_tBodies() {
         if (tBodies_ == null) {
             final HtmlTable table = (HtmlTable) getDomNodeOrDie();
@@ -169,6 +182,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536381.aspx">MSDN Documentation</a>
      * @return a newly added caption if no caption exists, or the first existing caption
      */
+    @JsxFunction
     public Object jsxFunction_createCaption() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("caption"));
     }
@@ -180,6 +194,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536402.aspx">MSDN Documentation</a>
      * @return a newly added caption if no caption exists, or the first existing caption
      */
+    @JsxFunction
     public Object jsxFunction_createTFoot() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("tfoot"));
     }
@@ -191,6 +206,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536403.aspx">MSDN Documentation</a>
      * @return a newly added caption if no caption exists, or the first existing caption
      */
+    @JsxFunction
     public Object jsxFunction_createTHead() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("thead"));
     }
@@ -201,6 +217,7 @@ public class HTMLTableElement extends RowContainer {
      * method does nothing.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536405.aspx">MSDN Documentation</a>
      */
+    @JsxFunction
     public void jsxFunction_deleteCaption() {
         getDomNodeOrDie().removeChild("caption", 0);
     }
@@ -211,6 +228,7 @@ public class HTMLTableElement extends RowContainer {
      * elements, this method does nothing.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536409.aspx">MSDN Documentation</a>
      */
+    @JsxFunction
     public void jsxFunction_deleteTFoot() {
         getDomNodeOrDie().removeChild("tfoot", 0);
     }
@@ -221,6 +239,7 @@ public class HTMLTableElement extends RowContainer {
      * elements, this method does nothing.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536410.aspx">MSDN Documentation</a>
      */
+    @JsxFunction
     public void jsxFunction_deleteTHead() {
         getDomNodeOrDie().removeChild("thead", 0);
     }
@@ -230,6 +249,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536687.aspx">
      * MSDN Documentation</a>
      */
+    @JsxFunction(@WebBrowser(IE))
     public void jsxFunction_refresh() {
         // Empty: this method only affects rendering, which we don't care about.
     }
@@ -265,6 +285,7 @@ public class HTMLTableElement extends RowContainer {
      * Returns the <tt>width</tt> attribute.
      * @return the <tt>width</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_width() {
         return getDomNodeOrDie().getAttribute("width");
     }
@@ -273,6 +294,7 @@ public class HTMLTableElement extends RowContainer {
      * Sets the <tt>width</tt> attribute.
      * @param width the <tt>width</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_width(final String width) {
         getDomNodeOrDie().setAttribute("width", width);
     }
@@ -281,6 +303,7 @@ public class HTMLTableElement extends RowContainer {
      * Returns the <tt>cellSpacing</tt> attribute.
      * @return the <tt>cellSpacing</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_cellSpacing() {
         return getDomNodeOrDie().getAttribute("cellspacing");
     }
@@ -289,6 +312,7 @@ public class HTMLTableElement extends RowContainer {
      * Sets the <tt>cellSpacing</tt> attribute.
      * @param cellSpacing the <tt>cellSpacing</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_cellSpacing(final String cellSpacing) {
         getDomNodeOrDie().setAttribute("cellspacing", cellSpacing);
     }
@@ -297,6 +321,7 @@ public class HTMLTableElement extends RowContainer {
      * Returns the <tt>cellPadding</tt> attribute.
      * @return the <tt>cellPadding</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_cellPadding() {
         return getDomNodeOrDie().getAttribute("cellpadding");
     }
@@ -305,6 +330,7 @@ public class HTMLTableElement extends RowContainer {
      * Sets the <tt>cellPadding</tt> attribute.
      * @param cellPadding the <tt>cellPadding</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_cellPadding(final String cellPadding) {
         getDomNodeOrDie().setAttribute("cellpadding", cellPadding);
     }
@@ -313,6 +339,7 @@ public class HTMLTableElement extends RowContainer {
      * Gets the <tt>border</tt> attribute.
      * @return the <tt>border</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_border() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
@@ -322,6 +349,7 @@ public class HTMLTableElement extends RowContainer {
      * Sets the <tt>border</tt> attribute.
      * @param border the <tt>border</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
@@ -331,6 +359,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_bgColor() {
         return getDomNodeOrDie().getAttribute("bgColor");
     }
@@ -340,6 +369,7 @@ public class HTMLTableElement extends RowContainer {
      * @param bgColor the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_bgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
     }

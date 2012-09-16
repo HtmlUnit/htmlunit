@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
@@ -21,6 +23,9 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * The JavaScript object that represents an "HTMLScriptElement".
@@ -44,6 +49,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the <tt>src</tt> attribute.
      * @return the <tt>src</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_src() {
         return getDomNodeOrDie().getAttribute("src");
     }
@@ -52,6 +58,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the <tt>src</tt> attribute.
      * @param src the <tt>src</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_src(final String src) {
         getDomNodeOrDie().setAttribute("src", src);
     }
@@ -61,6 +68,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the <tt>text</tt> attribute
      */
     @Override
+    @JsxGetter
     public String jsxGet_text() {
         final StringBuilder scriptCode = new StringBuilder();
         for (final DomNode node : getDomNodeOrDie().getChildren()) {
@@ -76,6 +84,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the <tt>text</tt> attribute.
      * @param text the <tt>text</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_text(final String text) {
         final HtmlElement htmlElement = getDomNodeOrDie();
         htmlElement.removeAllChildren();
@@ -93,6 +102,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the <tt>type</tt> attribute.
      * @return the <tt>type</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_type() {
         return getDomNodeOrDie().getAttribute("type");
     }
@@ -101,6 +111,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the <tt>type</tt> attribute.
      * @param type the <tt>type</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_type(final String type) {
         getDomNodeOrDie().setAttribute("type", type);
     }
@@ -109,6 +120,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the event handler that fires on every state change.
      * @return the event handler that fires on every state change
      */
+    @JsxGetter(@WebBrowser(IE))
     public Object jsxGet_onreadystatechange() {
         return getEventHandlerProp("onreadystatechange");
     }
@@ -117,6 +129,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the event handler that fires on every state change.
      * @param handler the event handler that fires on every state change
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_onreadystatechange(final Object handler) {
         setEventHandlerProp("onreadystatechange", handler);
     }
@@ -125,6 +138,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the event handler that fires on load.
      * @return the event handler that fires on load
      */
+    @JsxGetter(@WebBrowser(FF))
     public Object jsxGet_onload() {
         return getEventHandlerProp("onload");
     }
@@ -133,6 +147,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the event handler that fires on load.
      * @param handler the event handler that fires on load
      */
+    @JsxSetter(@WebBrowser(FF))
     public void jsxSet_onload(final Object handler) {
         setEventHandlerProp("onload", handler);
     }
@@ -146,6 +161,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @see DomNode#READY_STATE_INTERACTIVE
      * @see DomNode#READY_STATE_COMPLETE
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_readyState() {
         return getDomNodeOrDie().getReadyState();
     }

@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
 
 /**
@@ -46,6 +48,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * Returns the value of the "vAlign" property.
      * @return the value of the "vAlign" property
      */
+    @JsxGetter
     public String jsxGet_vAlign() {
         return getVAlign(getValidVAlignValues(), VALIGN_DEFAULT_VALUE);
     }
@@ -54,6 +57,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * Sets the value of the "vAlign" property.
      * @param vAlign the value of the "vAlign" property
      */
+    @JsxSetter
     public void jsxSet_vAlign(final Object vAlign) {
         setVAlign(vAlign, getValidVAlignValues());
     }
@@ -77,6 +81,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * Returns the value of the "ch" property.
      * @return the value of the "ch" property
      */
+    @JsxGetter
     public String jsxGet_ch() {
         return getCh();
     }
@@ -85,6 +90,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * Sets the value of the "ch" property.
      * @param ch the value of the "ch" property
      */
+    @JsxSetter
     public void jsxSet_ch(final String ch) {
         setCh(ch);
     }
@@ -93,6 +99,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * Returns the value of the "chOff" property.
      * @return the value of the "chOff" property
      */
+    @JsxGetter
     public String jsxGet_chOff() {
         return getChOff();
     }
@@ -101,6 +108,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * Sets the value of the "chOff" property.
      * @param chOff the value of the "chOff" property
      */
+    @JsxSetter
     public void jsxSet_chOff(final String chOff) {
         setChOff(chOff);
     }

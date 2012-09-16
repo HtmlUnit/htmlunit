@@ -23,6 +23,8 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
@@ -97,6 +99,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @return the index of this cell within the parent row
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533549.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public Integer jsxGet_cellIndex() {
         final HtmlTableCell cell = (HtmlTableCell) getDomNodeOrDie();
         final HtmlTableRow row = cell.getEnclosingRow();
@@ -110,6 +113,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Returns the value of the <tt>abbr</tt> attribute.
      * @return the value of the <tt>abbr</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_abbr() {
         return getDomNodeOrDie().getAttribute("abbr");
     }
@@ -118,6 +122,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Sets the value of the <tt>abbr</tt> attribute.
      * @param abbr the value of the <tt>abbr</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_abbr(final String abbr) {
         getDomNodeOrDie().setAttribute("abbr", abbr);
     }
@@ -126,6 +131,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Returns the value of the <tt>axis</tt> attribute.
      * @return the value of the <tt>axis</tt> attribute
      */
+    @JsxGetter
     public String jsxGet_axis() {
         return getDomNodeOrDie().getAttribute("axis");
     }
@@ -134,6 +140,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Sets the value of the <tt>axis</tt> attribute.
      * @param axis the value of the <tt>axis</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_axis(final String axis) {
         getDomNodeOrDie().setAttribute("axis", axis);
     }
@@ -143,6 +150,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @return the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_bgColor() {
         return getDomNodeOrDie().getAttribute("bgColor");
     }
@@ -152,6 +160,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @param bgColor the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_bgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
     }
@@ -160,6 +169,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Returns the value of the <tt>colSpan</tt> attribute.
      * @return the value of the <tt>colSpan</tt> attribute
      */
+    @JsxGetter
     public int jsxGet_colSpan() {
         final String s = getDomNodeOrDie().getAttribute("colSpan");
         try {
@@ -174,6 +184,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Sets the value of the <tt>colSpan</tt> attribute.
      * @param colSpan the value of the <tt>colSpan</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_colSpan(final String colSpan) {
         String s;
         try {
@@ -198,6 +209,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Returns the value of the <tt>rowSpan</tt> attribute.
      * @return the value of the <tt>rowSpan</tt> attribute
      */
+    @JsxGetter
     public int jsxGet_rowSpan() {
         final String s = getDomNodeOrDie().getAttribute("rowSpan");
         try {
@@ -212,6 +224,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Sets the value of the <tt>rowSpan</tt> attribute.
      * @param rowSpan the value of the <tt>rowSpan</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_rowSpan(final String rowSpan) {
         String s;
         try {
@@ -237,6 +250,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @return the value of the <tt>noWrap</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public boolean jsxGet_noWrap() {
         return getDomNodeOrDie().hasAttribute("noWrap");
     }
@@ -246,6 +260,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @param noWrap the value of the <tt>noWrap</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_noWrap(final boolean noWrap) {
         if (noWrap) {
             final String value = (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_97) ? "true" : "");
@@ -272,6 +287,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Returns the value of the "width" property.
      * @return the value of the "width" property
      */
+    @JsxGetter
     public String jsxGet_width() {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_98);
         final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
@@ -282,6 +298,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Sets the value of the "width" property.
      * @param width the value of the "width" property
      */
+    @JsxSetter
     public void jsxSet_width(final String width) {
         setWidthOrHeight("width", width, !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_99));
     }
@@ -290,6 +307,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Returns the value of the "width" property.
      * @return the value of the "width" property
      */
+    @JsxGetter
     public String jsxGet_height() {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_100);
         final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
@@ -300,6 +318,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Sets the value of the "width" property.
      * @param width the value of the "width" property
      */
+    @JsxSetter
     public void jsxSet_height(final String width) {
         setWidthOrHeight("height", width, !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_101));
     }

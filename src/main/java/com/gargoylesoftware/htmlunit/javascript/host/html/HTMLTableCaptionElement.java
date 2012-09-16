@@ -14,7 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * The JavaScript object "HTMLTableCaptionElement".
@@ -41,6 +46,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      * Returns the value of the "align" property.
      * @return the value of the "align" property
      */
+    @JsxGetter
     public String jsxGet_align() {
         final boolean invalidValues = getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID);
         return getAlign(invalidValues);
@@ -50,6 +56,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      * Sets the value of the "align" property.
      * @param align the value of the "align" property
      */
+    @JsxSetter
     public void jsxSet_align(final String align) {
         setAlign(align, false);
     }
@@ -58,6 +65,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      * Returns the value of the "vAlign" property.
      * @return the value of the "vAlign" property
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_vAlign() {
         return getVAlign(getValidVAlignValues(), VALIGN_DEFAULT_VALUE);
     }
@@ -66,6 +74,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      * Sets the value of the "vAlign" property.
      * @param vAlign the value of the "vAlign" property
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_vAlign(final Object vAlign) {
         setVAlign(vAlign, getValidVAlignValues());
     }

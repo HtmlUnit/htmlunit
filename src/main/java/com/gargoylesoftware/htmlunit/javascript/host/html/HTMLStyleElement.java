@@ -14,12 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.io.StringReader;
 
 import org.w3c.css.sac.InputSource;
 
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 
 /**
@@ -45,6 +50,7 @@ public class HTMLStyleElement extends HTMLElement {
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLStyleElement.html">Mozilla doc</a>
      * @return the sheet
      */
+    @JsxGetter(@WebBrowser(FF))
     public CSSStyleSheet jsxGet_sheet() {
         if (sheet_ != null) {
             return sheet_;
@@ -73,6 +79,7 @@ public class HTMLStyleElement extends HTMLElement {
      * Gets the associated sheet (IE).
      * @return the sheet
      */
+    @JsxGetter(@WebBrowser(IE))
     public CSSStyleSheet jsxGet_styleSheet() {
         return jsxGet_sheet();
     }

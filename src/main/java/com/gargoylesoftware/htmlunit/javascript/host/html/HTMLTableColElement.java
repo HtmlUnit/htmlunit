@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * The JavaScript object "HTMLTableColElement".
@@ -37,6 +39,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * Returns the value of the "span" property.
      * @return the value of the "span" property
      */
+    @JsxGetter
     public int jsxGet_span() {
         final String span = getDomNodeOrDie().getAttribute("span");
         int i;
@@ -56,6 +59,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * Sets the value of the "span" property.
      * @param span the value of the "span" property
      */
+    @JsxSetter
     public void jsxSet_span(final Object span) {
         final double d = Context.toNumber(span);
         int i = (int) d;
@@ -75,6 +79,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * Returns the value of the "width" property.
      * @return the value of the "width" property
      */
+    @JsxGetter
     public String jsxGet_width() {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_103);
         final Boolean returnNegativeValues = ie ? Boolean.FALSE : null;
@@ -85,6 +90,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * Sets the value of the "width" property.
      * @param width the value of the "width" property
      */
+    @JsxSetter
     public void jsxSet_width(final Object width) {
         setWidthOrHeight("width", (width == null ? "" : Context.toString(width)), Boolean.FALSE);
     }

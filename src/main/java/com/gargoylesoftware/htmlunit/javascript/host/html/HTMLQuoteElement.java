@@ -14,6 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
+
 /**
  * The JavaScript object "HTMLQuoteElement".
  *
@@ -33,6 +39,7 @@ public class HTMLQuoteElement extends HTMLElement {
      * Returns the value of the "cite" property.
      * @return the value of the "cite" property
      */
+    @JsxGetter
     public String jsxGet_cite() {
         final String cite = getDomNodeOrDie().getAttribute("cite");
         return cite;
@@ -42,6 +49,7 @@ public class HTMLQuoteElement extends HTMLElement {
      * Returns the value of the "cite" property.
      * @param cite the value
      */
+    @JsxSetter
     public void jsxSet_cite(final String cite) {
         getDomNodeOrDie().setAttribute("cite", cite);
     }
@@ -50,6 +58,7 @@ public class HTMLQuoteElement extends HTMLElement {
      * Returns the value of the "dateTime" property.
      * @return the value of the "dateTime" property
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_dateTime() {
         final String cite = getDomNodeOrDie().getAttribute("datetime");
         return cite;
@@ -59,6 +68,7 @@ public class HTMLQuoteElement extends HTMLElement {
      * Returns the value of the "dateTime" property.
      * @param dateTime the value
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_dateTime(final String dateTime) {
         getDomNodeOrDie().setAttribute("datetime", dateTime);
     }

@@ -26,6 +26,9 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * A JavaScript object representing a TR.
@@ -51,6 +54,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @return the index of the row within the parent table
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534377.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public int jsxGet_rowIndex() {
         final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
         final HtmlTable table = row.getEnclosingTable();
@@ -67,6 +71,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-79105901">
      * DOM Level 1</a>
      */
+    @JsxGetter
     public int jsxGet_sectionRowIndex() {
         DomNode row = getDomNodeOrDie();
         final HtmlTable table = ((HtmlTableRow) row).getEnclosingTable();
@@ -92,6 +97,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * Returns the cells in the row.
      * @return the cells in the row
      */
+    @JsxGetter
     public Object jsxGet_cells() {
         if (cells_ == null) {
             final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
@@ -110,6 +116,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @return the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_bgColor() {
         return getDomNodeOrDie().getAttribute("bgColor");
     }
@@ -119,6 +126,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @param bgColor the value of the <tt>bgColor</tt> attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_bgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
     }
@@ -132,6 +140,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      *        The default value is -1, which appends the new cell to the end of the cells collection
      * @return the newly-created cell
      */
+    @JsxFunction
     public Object jsxFunction_insertCell(final Object index) {
         int position = -1;
         if (index != Undefined.instance) {
@@ -160,6 +169,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @see <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-11738598">W3C DOM Level2</a>
      * @param index specifies the cell to delete.
      */
+    @JsxFunction
     public void jsxFunction_deleteCell(final Object index) {
         int position = -1;
         if (index != Undefined.instance) {

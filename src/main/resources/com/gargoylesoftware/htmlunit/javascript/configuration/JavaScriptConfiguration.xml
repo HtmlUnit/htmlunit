@@ -1456,44 +1456,6 @@
 
     <class extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInput">
-        <property name="accessKey">
-            <browser name="Firefox"/>
-        </property>
-        <property name="align"/>
-        <property name="alt"/>
-        <property name="border">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="checked"/>
-        <property name="defaultChecked">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms533715.aspx"
-                descr="MSDN documentation"/>
-        </property>
-        <property name="defaultValue">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms533718.aspx"
-                descr="MSDN documentation"/>
-        </property>
-        <property name="maxLength"/>
-        <property name="readOnly"/>
-        <property name="selectionEnd">
-            <browser name="Firefox"/>
-        </property>
-        <property name="selectionStart">
-            <browser name="Firefox"/>
-        </property>
-        <property name="textLength" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="type"/>
-        <function name="click">
-            <browser name="Firefox"/>
-        </function>
-        <function name="select"/>
-        <function name="setSelectionRange">
-            <browser name="Firefox"/>
-        </function>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInsElement"
@@ -1572,39 +1534,14 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement"
         JSObject="true">
-        <property name="cite"/>
-        <property name="dateTime">
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement" JSObject="true"
         htmlClass="com.gargoylesoftware.htmlunit.html.HtmlScript" extends="HTMLElement">
-        <property name="onload">
-            <browser name="Firefox"/>
-        </property>
-        <property name="onreadystatechange">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="readyState" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="src"/>
-        <property name="text"/>
-        <property name="type"/>
     </class>
 
     <class extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlSelect">
-        <property name="length"/>
-        <property name="multiple"/>
-        <property name="options" writable="false"/>
-        <property name="selectedIndex"/>
-        <property name="size"/>
-
-        <function name="add"/>
-        <function name="item"/>
-        <function name="remove"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSourceElement"
@@ -1622,62 +1559,18 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement"
         JSObject="true">
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlStyle">
-        <property name="sheet" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="styleSheet" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCaptionElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCaption">
-        <property name="align"/>
-        <property name="vAlign">
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <class extends="HTMLTableComponent" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCellElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableCell">
-        <doclink
-            url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-82915075"
-            descr="W3C DOM Level 2"/>
-        <doclink
-            url="http://msdn.microsoft.com/en-us/library/ms535908.aspx"
-            descr="MSDN documentation (TH)"/>
-        <doclink
-            url="http://msdn.microsoft.com/en-us/library/ms535903.aspx"
-            descr="MSDN documentation (TD)"/>
-        <property name="abbr"/>
-        <property name="axis"/>
-        <property name="bgColor"/>
-        <property name="cellIndex" writable="false">
-            <doclink
-                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-80748363"
-                descr="W3C DOM Level 2"/>
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms533549.aspx"
-                descr="MSDN documentation"/>
-        </property>
-        <property name="colSpan"/>
-        <property name="height"/>
-        <property name="noWrap"/>
-        <property name="rowSpan"/>
-        <property name="width"/>
     </class>
 
     <!--
@@ -1685,112 +1578,18 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="HTMLTableComponent" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableColElement"
         JSObject="true">
-        <property name="span"/>
-        <property name="width"/>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableComponent"
         JSObject="false">
-        <property name="align"/>
-        <property name="ch"/>
-        <property name="chOff"/>
-        <property name="vAlign"/>
     </class>
 
     <class extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTable">
-        <property name="bgColor"/>
-        <property name="border"/>
-        <property name="caption"/>
-        <property name="cellPadding"/>
-        <property name="cellSpacing"/>
-        <property name="dataFld" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataFormatAs" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="dataSrc" notImplemented="true">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="tBodies" writable="false"/>
-        <property name="tFoot"/>
-        <property name="tHead"/>
-        <property name="width"/>
-
-        <function name="createCaption">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536381.aspx"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="createTFoot">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536402.aspx"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="createTHead">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536403.aspx"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="deleteCaption">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536405.aspx"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="deleteTFoot">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536409.aspx"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="deleteTHead">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536410.aspx"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="refresh">
-            <doclink
-                url="http://msdn2.microsoft.com/en-us/library/ms536687.aspx"
-                descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
     </class>
 
     <class extends="HTMLTableComponent" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableRowElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTableRow">
-        <doclink
-            url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-6986576"
-            descr="W3c DOM Level 2"/>
-        <doclink
-            url="http://msdn.microsoft.com/en-us/library/ms535911.aspx"
-            descr="MSDN documentation"/>
-        <property name="bgColor"/>
-        <property name="cells" writable="false"/>
-        <property name="rowIndex" writable="false">
-            <doclink
-                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-67347567"
-                descr="W3c DOM Level 2"/>
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms534377.aspx"
-                descr="MSDN documentation"/>
-        </property>
-        <property name="sectionRowIndex" writable="false"/>
-        <function name="deleteCell">
-            <doclink
-                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-11738598"
-                descr="W3c DOM Level 2"/>
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536406.aspx"
-                descr="MSDN documentation"/>
-        </function>
-        <function name="insertCell">
-            <doclink
-                url="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html#ID-68927016"
-                descr="W3c DOM Level 2"/>
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536455.aspx"
-                descr="MSDN documentation"/>
-        </function>
     </class>
 
     <!--
@@ -1798,42 +1597,14 @@
         configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
     <class extends="RowContainer" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElement"
         JSObject="true">
-        <property name="ch"/>
-        <property name="chOff"/>
-        <property name="vAlign"/>
     </class>
 
     <class extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTextArea">
-        <property name="accessKey">
-            <browser name="Firefox"/>
-        </property>
-        <property name="cols"/>
-        <property name="defaultValue">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms533718.aspx"
-                descr="MSDN documentation"/>
-        </property>
-        <property name="readOnly"/>
-        <property name="rows"/>
-        <property name="selectionEnd">
-            <browser name="Firefox"/>
-        </property>
-        <property name="selectionStart">
-            <browser name="Firefox"/>
-        </property>
-        <property name="textLength" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <function name="select"/>
-        <function name="setSelectionRange">
-            <browser name="Firefox"/>
-        </function>
     </class>
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlTitle">
-        <property name="text"/>
     </class>
 
     <class extends="HTMLListElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUListElement"

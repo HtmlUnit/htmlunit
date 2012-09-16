@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * The JavaScript object "HTMLTitleElement".
@@ -38,6 +40,7 @@ public class HTMLTitleElement extends HTMLElement {
      * @return the <tt>text</tt> attribute
      */
     @Override
+    @JsxGetter
     public String jsxGet_text() {
         final DomNode firstChild = getDomNodeOrDie().getFirstChild();
         if (firstChild != null) {
@@ -50,6 +53,7 @@ public class HTMLTitleElement extends HTMLElement {
      * Sets the <tt>text</tt> attribute.
      * @param text the <tt>text</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_text(final String text) {
         final DomNode htmlElement = getDomNodeOrDie();
         DomNode firstChild = htmlElement.getFirstChild();

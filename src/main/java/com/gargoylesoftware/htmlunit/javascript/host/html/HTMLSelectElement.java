@@ -25,6 +25,9 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.FormField;
 
 /**
@@ -71,6 +74,7 @@ public class HTMLSelectElement extends FormField {
      * Removes option at the specified index.
      * @param index the index of the item to remove
      */
+    @JsxFunction
     public void jsxFunction_remove(final int index) {
         put(index, null, null);
     }
@@ -81,6 +85,7 @@ public class HTMLSelectElement extends FormField {
      * @param arg2 for Firefox: the DomNode to insert the previous element before (null if at end),
      * for Internet Explorer: the index where the element should be placed (optional).
      */
+    @JsxFunction
     public void jsxFunction_add(final HTMLOptionElement newOptionObject, final Object arg2) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_INDEX)) {
             add_IE(newOptionObject, arg2);
@@ -116,6 +121,7 @@ public class HTMLSelectElement extends FormField {
      * @param index the position of the option to retrieve
      * @return the option
      */
+    @JsxFunction
     public HTMLOptionElement jsxFunction_item(final int index) {
         if (index < 0) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_ITEM_THROWS_IF_NEGATIVE)) {
@@ -235,6 +241,7 @@ public class HTMLSelectElement extends FormField {
      * Returns the value of the "options" property.
      * @return the options property
      */
+    @JsxGetter
     public HTMLOptionsCollection jsxGet_options() {
         if (optionsArray_ == null) {
             initialize();
@@ -246,6 +253,7 @@ public class HTMLSelectElement extends FormField {
      * Returns the value of the "selectedIndex" property.
      * @return the selectedIndex property
      */
+    @JsxGetter
     public int jsxGet_selectedIndex() {
         final HtmlSelect htmlSelect = getHtmlSelect();
         final List<HtmlOption> selectedOptions = htmlSelect.getSelectedOptions();
@@ -260,6 +268,7 @@ public class HTMLSelectElement extends FormField {
      * Sets the value of the "selectedIndex" property.
      * @param index the new value
      */
+    @JsxSetter
     public void jsxSet_selectedIndex(final int index) {
         final HtmlSelect htmlSelect = getHtmlSelect();
 
@@ -301,6 +310,7 @@ public class HTMLSelectElement extends FormField {
      * Returns the value of the "length" property.
      * @return the length property
      */
+    @JsxGetter
     public int jsxGet_length() {
         if (optionsArray_ == null) {
             initialize();
@@ -312,6 +322,7 @@ public class HTMLSelectElement extends FormField {
      * Removes options by reducing the "length" property.
      * @param newLength the new length property value
      */
+    @JsxSetter
     public void jsxSet_length(final int newLength) {
         if (optionsArray_ == null) {
             initialize();
@@ -368,6 +379,7 @@ public class HTMLSelectElement extends FormField {
      * Returns the <tt>size</tt> attribute.
      * @return the <tt>size</tt> attribute
      */
+    @JsxGetter
     public int jsxGet_size() {
         int size = 0;
         final String sizeAttribute = getDomNodeOrDie().getAttribute("size");
@@ -386,6 +398,7 @@ public class HTMLSelectElement extends FormField {
      * Sets the <tt>size</tt> attribute.
      * @param size the <tt>size</tt> attribute
      */
+    @JsxSetter
     public void jsxSet_size(final String size) {
         getDomNodeOrDie().setAttribute("size", size);
     }
@@ -394,6 +407,7 @@ public class HTMLSelectElement extends FormField {
      * Returns <tt>true</tt> if the <tt>multiple</tt> attribute is set.
      * @return <tt>true</tt> if the <tt>multiple</tt> attribute is set
      */
+    @JsxGetter
     public boolean jsxGet_multiple() {
         return getDomNodeOrDie().hasAttribute("multiple");
     }
@@ -402,6 +416,7 @@ public class HTMLSelectElement extends FormField {
      * Sets or clears the <tt>multiple</tt> attribute.
      * @param multiple <tt>true</tt> to set the <tt>multiple</tt> attribute, <tt>false</tt> to clear it
      */
+    @JsxSetter
     public void jsxSet_multiple(final boolean multiple) {
         if (multiple) {
             getDomNodeOrDie().setAttribute("multiple", "multiple");

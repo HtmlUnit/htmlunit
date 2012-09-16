@@ -14,12 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
 import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.FormField;
 
 /**
@@ -79,6 +85,7 @@ public class HTMLTextAreaElement extends FormField {
      * Returns the number of columns in this text area.
      * @return the number of columns in this text area
      */
+    @JsxGetter
     public int jsxGet_cols() {
         final String s = getDomNodeOrDie().getAttribute("cols");
         try {
@@ -96,6 +103,7 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the number of columns in this text area.
      * @param cols the number of columns in this text area
      */
+    @JsxSetter
     public void jsxSet_cols(final String cols) {
         int i;
         try {
@@ -117,6 +125,7 @@ public class HTMLTextAreaElement extends FormField {
      * Returns the number of rows in this text area.
      * @return the number of rows in this text area
      */
+    @JsxGetter
     public int jsxGet_rows() {
         int rows;
         try {
@@ -138,6 +147,7 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the number of rows in this text area.
      * @param rows the number of rows in this text area
      */
+    @JsxSetter
     public void jsxSet_rows(final String rows) {
         int i;
         try {
@@ -160,6 +170,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return the textarea's default value, used if the containing form gets reset
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533718.aspx">MSDN Documentation</a>
      */
+    @JsxGetter
     public String jsxGet_defaultValue() {
         String value = ((HtmlTextArea) getDomNodeOrDie()).getDefaultValue();
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.TEXTAREA_CRNL)) {
@@ -173,6 +184,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param defaultValue the textarea's default value, used if the containing form gets reset
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533718.aspx">MSDN Documentation</a>
      */
+    @JsxSetter
     public void jsxSet_defaultValue(final String defaultValue) {
         ((HtmlTextArea) getDomNodeOrDie()).setDefaultValue(defaultValue);
     }
@@ -181,6 +193,7 @@ public class HTMLTextAreaElement extends FormField {
      * Gets the value of "textLength" attribute.
      * @return the text length
      */
+    @JsxGetter(@WebBrowser(FF))
     public int jsxGet_textLength() {
         return jsxGet_value().length();
     }
@@ -189,6 +202,7 @@ public class HTMLTextAreaElement extends FormField {
      * Gets the value of "selectionStart" attribute.
      * @return the selection start
      */
+    @JsxGetter(@WebBrowser(FF))
     public int jsxGet_selectionStart() {
         return ((HtmlTextArea) getDomNodeOrDie()).getSelectionStart();
     }
@@ -197,6 +211,7 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the value of "selectionStart" attribute.
      * @param start selection start
      */
+    @JsxSetter(@WebBrowser(FF))
     public void jsxSet_selectionStart(final int start) {
         ((HtmlTextArea) getDomNodeOrDie()).setSelectionStart(start);
     }
@@ -205,6 +220,7 @@ public class HTMLTextAreaElement extends FormField {
      * Gets the value of "selectionEnd" attribute.
      * @return the selection end
      */
+    @JsxGetter(@WebBrowser(FF))
     public int jsxGet_selectionEnd() {
         return ((HtmlTextArea) getDomNodeOrDie()).getSelectionEnd();
     }
@@ -213,6 +229,7 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the value of "selectionEnd" attribute.
      * @param end selection end
      */
+    @JsxSetter(@WebBrowser(FF))
     public void jsxSet_selectionEnd(final int end) {
         ((HtmlTextArea) getDomNodeOrDie()).setSelectionEnd(end);
     }
@@ -222,6 +239,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param start the index of the first character to select
      * @param end the index of the character after the selection
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_setSelectionRange(final int start, final int end) {
         jsxSet_selectionStart(start);
         jsxSet_selectionEnd(end);
@@ -230,6 +248,7 @@ public class HTMLTextAreaElement extends FormField {
     /**
      * Selects this element.
      */
+    @JsxFunction
     public void jsxFunction_select() {
         ((HtmlTextArea) getDomNodeOrDie()).select();
     }
@@ -238,6 +257,7 @@ public class HTMLTextAreaElement extends FormField {
      * Gets the value of "readOnly" attribute.
      * @return the readOnly attribute
      */
+    @JsxGetter
     public boolean jsxGet_readOnly() {
         return ((HtmlTextArea) getDomNodeOrDie()).isReadOnly();
     }
@@ -246,8 +266,27 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the value of "readOnly" attribute.
      * @param readOnly the new value
      */
+    @JsxSetter
     public void jsxSet_readOnly(final boolean readOnly) {
         ((HtmlTextArea) getDomNodeOrDie()).setReadOnly(readOnly);
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter(@WebBrowser(FF))
+    public String jsxGet_accessKey() {
+        return super.jsxGet_accessKey();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter(@WebBrowser(FF))
+    public void jsxSet_accessKey(final String accessKey) {
+        super.jsxSet_accessKey(accessKey);
     }
 
 }

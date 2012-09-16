@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * Contains attributes common to various table components.
@@ -41,6 +43,7 @@ public class HTMLTableComponent extends HTMLElement {
      * Returns the value of the "align" property.
      * @return the value of the "align" property
      */
+    @JsxGetter
     public String jsxGet_align() {
         final boolean invalidValues = getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID);
         return getAlign(invalidValues);
@@ -50,6 +53,7 @@ public class HTMLTableComponent extends HTMLElement {
      * Sets the value of the "align" property.
      * @param align the value of the "align" property
      */
+    @JsxSetter
     public void jsxSet_align(final String align) {
         setAlign(align, false);
     }
@@ -58,6 +62,7 @@ public class HTMLTableComponent extends HTMLElement {
      * Returns the value of the "vAlign" property.
      * @return the value of the "vAlign" property
      */
+    @JsxGetter
     public String jsxGet_vAlign() {
         return getVAlign(getValidVAlignValues(), VALIGN_DEFAULT_VALUE);
     }
@@ -66,6 +71,7 @@ public class HTMLTableComponent extends HTMLElement {
      * Sets the value of the "vAlign" property.
      * @param vAlign the value of the "vAlign" property
      */
+    @JsxSetter
     public void jsxSet_vAlign(final Object vAlign) {
         setVAlign(vAlign, getValidVAlignValues());
     }
@@ -89,6 +95,7 @@ public class HTMLTableComponent extends HTMLElement {
      * Returns the value of the "ch" property.
      * @return the value of the "ch" property
      */
+    @JsxGetter
     public String jsxGet_ch() {
         return getCh();
     }
@@ -97,6 +104,7 @@ public class HTMLTableComponent extends HTMLElement {
      * Sets the value of the "ch" property.
      * @param ch the value of the "ch" property
      */
+    @JsxSetter
     public void jsxSet_ch(final String ch) {
         setCh(ch);
     }
@@ -105,6 +113,7 @@ public class HTMLTableComponent extends HTMLElement {
      * Returns the value of the "chOff" property.
      * @return the value of the "chOff" property
      */
+    @JsxGetter
     public String jsxGet_chOff() {
         return getChOff();
     }
@@ -113,6 +122,7 @@ public class HTMLTableComponent extends HTMLElement {
      * Sets the value of the "chOff" property.
      * @param chOff the value of the "chOff" property
      */
+    @JsxSetter
     public void jsxSet_chOff(final String chOff) {
         setChOff(chOff);
     }
