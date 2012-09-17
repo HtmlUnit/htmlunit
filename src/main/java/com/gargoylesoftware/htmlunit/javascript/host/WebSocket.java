@@ -29,10 +29,10 @@ import org.eclipse.jetty.websocket.WebSocketClientFactory;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxConstant;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 /**
  * A JavaScript object for a WebSocket.

@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 /**
  * A JavaScript object for a {@link org.w3c.dom.css.CSSCharsetRule}.

@@ -18,8 +18,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**

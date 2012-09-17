@@ -14,13 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import com.gargoylesoftware.htmlunit.html.DomText;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for Text.

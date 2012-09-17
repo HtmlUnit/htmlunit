@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxConstant;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 /**

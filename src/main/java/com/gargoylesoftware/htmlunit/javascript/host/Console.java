@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebConsole.Formatter;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 /**
  * A JavaScript object for a console. This implementation simulates Firefox's console, which utilizes FireBug API.

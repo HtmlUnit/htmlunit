@@ -12,24 +12,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.annotations;
+package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 /**
- * Represents a real browser family.
+ * Status for {@link CanSetReadOnly}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public enum BrowserName {
-//    Could be renamed 'Browser', but it is used by the test cases in BrowserRunner, which is heavily used
+public enum CanSetReadOnlyStatus {
+    /** Allow to set the value. */
+    YES,
 
-    /** Firefox. */
-    FF,
+    /** Ignore setting the value. */
+    IGNORE,
 
-    /** Internet Explorer. */
-    IE,
-
-    /** Chrome. */
-    CHROME
+    /** Throw a runtime exception. */
+    EXCEPTION
 }
-

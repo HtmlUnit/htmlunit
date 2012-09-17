@@ -24,8 +24,8 @@ import java.util.Set;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowsers;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowsers;
 
 /**
  * Objects of this class represent one specific version of a given browser. Predefined

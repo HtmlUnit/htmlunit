@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.annotations;
+package com.gargoylesoftware.htmlunit.javascript.configuration;
 
-import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -24,20 +24,34 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * An annotation to mark a Java field as JavaScript constant.
+ * An annotation to mark a Java class as JavaScript class.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface JsxConstant {
+@Target(ElementType.TYPE)
+public @interface JsxClass {
+
+    static final String EMPTY_DEFAULT = "~InTerNal_To_JsxClass#@$";
+
+    /** The JavaScript constructor (if any). */
+    String jsConstructor() default EMPTY_DEFAULT;
+
+    /** The DOM class (if any). */
+    Class<?> htmlClass() default Object.class;
+
+    /** Is JavaScript Object. */
+    boolean isJSObject() default false;
+
+    /** Extend (should be deducted from the super class). */
+    String extend() default EMPTY_DEFAULT;
 
     /** The {@link WebBrowser}s supported by this constant. */
-    WebBrowser[] value() default {
+    WebBrowser[] browsers() default {
         @WebBrowser(IE),
         @WebBrowser(FF),
         @WebBrowser(CHROME)
     };
-}
 
+}

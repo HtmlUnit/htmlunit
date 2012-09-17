@@ -19,8 +19,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 /**
  * The JavaScript object "HTMLBRElement".

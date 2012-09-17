@@ -12,7 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.annotations;
+package com.gargoylesoftware.htmlunit.javascript.configuration;
+
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -20,22 +24,20 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * An annotation to specify a range of browser, e.g. Firefox from version 3.6 to version 10.
+ * An annotation to mark a Java method as JavaScript getter.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.ANNOTATION_TYPE)
-public @interface WebBrowser {
+@Target(ElementType.METHOD)
+public @interface JsxGetter {
 
-    /** The browser name. */
-    BrowserName value();
-
-    /** The minimum version which supports this feature. */
-    float minVersion() default 0;
-
-    /** The maximum version which supports this feature. */
-    float maxVersion() default Float.MAX_VALUE;
+    /** The {@link WebBrowser}s supported by this getter. */
+    WebBrowser[] value() default {
+        @WebBrowser(IE),
+        @WebBrowser(FF),
+        @WebBrowser(CHROME)
+    };
 }
 

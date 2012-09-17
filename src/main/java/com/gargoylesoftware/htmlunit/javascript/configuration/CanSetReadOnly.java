@@ -12,21 +12,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.annotations;
+package com.gargoylesoftware.htmlunit.javascript.configuration;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * Status for {@link CanSetReadOnly}.
+ * An annotation to check of whether this getter read-only method allows to set the value,
+ * ignore it, or throw an exception.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public enum CanSetReadOnlyStatus {
-    /** Allow to set the value. */
-    YES,
-
-    /** Ignore setting the value. */
-    IGNORE,
-
-    /** Throw a runtime exception. */
-    EXCEPTION
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface CanSetReadOnly {
+    /** The status. */
+    CanSetReadOnlyStatus value() default CanSetReadOnlyStatus.YES;
 }
+

@@ -12,23 +12,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
-
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 /**
- * A dummy implementation of a JavaScript object for External.
+ * Represents a real browser family.
  *
  * @version $Revision$
- * @author Peter Faller
+ * @author Ahmed Ashour
  */
-public class External extends SimpleScriptable {
+public enum BrowserName {
+//    Could be renamed 'Browser', but it is used by the test cases in BrowserRunner, which is heavily used
 
-    /**
-     * Empty implementation.
-     */
-    @JsxFunction
-    public void jsxFunction_AutoCompleteSaveForm() {
-    }
+    /** Firefox. */
+    FF,
+
+    /** Internet Explorer. */
+    IE,
+
+    /** Chrome. */
+    CHROME
 }
+
