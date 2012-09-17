@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,10 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -87,6 +94,7 @@ public class XMLDocument extends Document {
      * Sets the <tt>async</tt> attribute.
      * @param async Whether or not to send the request to the server asynchronously
      */
+    @JsxSetter
     public void jsxSet_async(final boolean async) {
         async_ = async;
     }
@@ -95,6 +103,7 @@ public class XMLDocument extends Document {
      * Returns Whether or not to send the request to the server asynchronously.
      * @return the <tt>async</tt> attribute
      */
+    @JsxGetter
     public boolean jsxGet_async() {
         return async_;
     }
@@ -105,6 +114,7 @@ public class XMLDocument extends Document {
      * @param xmlSource a string containing a URL that specifies the location of the XML file
      * @return true if the load succeeded; false if the load failed
      */
+    @JsxFunction
     public boolean jsxFunction_load(final String xmlSource) {
         if (async_) {
             if (LOG.isDebugEnabled()) {
@@ -142,6 +152,7 @@ public class XMLDocument extends Document {
      *        This string can contain an entire XML document or a well-formed fragment.
      * @return true if the load succeeded; false if the load failed
      */
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public boolean jsxFunction_loadXML(final String strXML) {
         try {
             final WebWindow webWindow = getWindow().getWebWindow();
@@ -202,6 +213,7 @@ public class XMLDocument extends Document {
      * Gets the JavaScript property "parseError" for the document.
      * @return the ParserError object for the document
      */
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public XMLDOMParseError jsxGet_parseError() {
         if (parseError_ == null) {
             parseError_ = new XMLDOMParseError();
@@ -216,6 +228,7 @@ public class XMLDocument extends Document {
      * @return an XML representation of this node and all its descendants
      */
     @Override
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public String jsxGet_xml() {
         final XMLSerializer seralizer = new XMLSerializer();
         seralizer.setParentScope(getWindow());
@@ -227,6 +240,7 @@ public class XMLDocument extends Document {
      * Gets the current white space handling.
      * @return the current white space handling
      */
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public boolean jsxGet_preserveWhiteSpace() {
         return preserveWhiteSpace_;
     }
@@ -235,6 +249,7 @@ public class XMLDocument extends Document {
      * Specifies the white space handling.
      * @param preserveWhiteSpace white space handling
      */
+    @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public void jsxSet_preserveWhiteSpace(final boolean preserveWhiteSpace) {
         preserveWhiteSpace_ = preserveWhiteSpace;
     }
@@ -247,6 +262,7 @@ public class XMLDocument extends Document {
      * @param name the name of the property to be set
      * @param value the value of the specified property
      */
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public void jsxFunction_setProperty(final String name, final String value) {
         //empty implementation
     }
@@ -256,6 +272,7 @@ public class XMLDocument extends Document {
      * @param expression a string specifying an XPath expression
      * @return list of the found elements
      */
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public HTMLCollection jsxFunction_selectNodes(final String expression) {
         final boolean attributeChangeSensitive = expression.contains("@");
         final String description = "XMLDocument.selectNodes('" + expression + "')";
@@ -277,6 +294,7 @@ public class XMLDocument extends Document {
      * @return the first node that matches the given pattern-matching operation
      *         If no nodes match the expression, returns a null value.
      */
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public Object jsxFunction_selectSingleNode(final String expression) {
         final HTMLCollection collection = jsxFunction_selectNodes(expression);
         if (collection.jsxGet_length() > 0) {
@@ -289,6 +307,7 @@ public class XMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
         final DomNode firstChild = getDomNodeOrDie().getFirstChild();
         if (firstChild == null) {
@@ -311,6 +330,7 @@ public class XMLDocument extends Document {
      * @param id the ID to search for
      * @return the element with the specified ID, as long as it is an HTML element; <tt>null</tt> otherwise
      */
+    @JsxFunction
     public Object jsxFunction_getElementById(final String id) {
         final XmlPage xmlPage = (XmlPage) getDomNodeOrDie();
         final Object domElement = xmlPage.getFirstByXPath("//*[@id = \"" + id + "\"]");
@@ -332,6 +352,7 @@ public class XMLDocument extends Document {
      * @param id the ID to search for
      * @return null
      */
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public Object jsxFunction_nodeFromID(final String id) {
         return null;
     }
@@ -342,6 +363,7 @@ public class XMLDocument extends Document {
      * @param data the data
      * @return the new ProcessingInstruction
      */
+    @JsxFunction
     public Object jsxFunction_createProcessingInstruction(final String target, final String data) {
         final DomNode node = ((XmlPage) getPage()).createProcessingInstruction(target, data);
         return getScriptableFor(node);
@@ -352,6 +374,7 @@ public class XMLDocument extends Document {
      * @param data the data
      * @return the new CDATASection
      */
+    @JsxFunction
     public Object jsxFunction_createCDATASection(final String data) {
         final DomCDataSection node = ((XmlPage) getPage()).createCDATASection(data);
         return getScriptableFor(node);
@@ -367,6 +390,7 @@ public class XMLDocument extends Document {
      *        If the name parameter does not have a prefix, this is treated as the default namespace.
      * @return the newly created node
      */
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public Object jsxFunction_createNode(final Object type, final String name, final Object namespaceURI) {
         switch((short) Context.toNumber(type)) {
             case Node.ELEMENT_NODE:

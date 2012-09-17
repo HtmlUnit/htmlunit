@@ -149,6 +149,7 @@ public class UIEvent extends Event {
     public boolean jsxGet_ctrlKey() {
         return super.jsxGet_ctrlKey();
     }
+
     /**
      * {@inheritDoc} Overridden to modify browser configurations.
      */

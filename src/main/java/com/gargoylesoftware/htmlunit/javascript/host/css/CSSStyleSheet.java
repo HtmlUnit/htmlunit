@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,6 +76,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -599,6 +605,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * For Firefox.
      * @return the owner
      */
+    @JsxGetter(@WebBrowser(FF))
     public HTMLElement jsxGet_ownerNode() {
         return ownerNode_;
     }
@@ -607,6 +614,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * For Internet Explorer.
      * @return the owner
      */
+    @JsxGetter(@WebBrowser(IE))
     public HTMLElement jsxGet_owningElement() {
         return ownerNode_;
     }
@@ -615,6 +623,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * Retrieves the collection of rules defined in this style sheet.
      * @return the collection of rules defined in this style sheet
      */
+    @JsxGetter(@WebBrowser(IE))
     public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList jsxGet_rules() {
         return jsxGet_cssRules();
     }
@@ -623,6 +632,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * Returns the collection of rules defined in this style sheet.
      * @return the collection of rules defined in this style sheet
      */
+    @JsxGetter(@WebBrowser(FF))
     public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList jsxGet_cssRules() {
         if (cssRules_ == null) {
             cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
@@ -634,6 +644,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * Returns the URL of the stylesheet.
      * @return the URL of the stylesheet
      */
+    @JsxGetter
     public String jsxGet_href() {
         final BrowserVersion version = getBrowserVersion();
 
@@ -682,6 +693,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
      * @return the position of the inserted rule
      */
+    @JsxFunction(@WebBrowser(FF))
     public int jsxFunction_insertRule(final String rule, final int position) {
         try {
             return wrapped_.insertRule(rule, position);
@@ -696,6 +708,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @param position the position of the rule to be deleted
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
      */
+    @JsxFunction(@WebBrowser(FF))
     public void jsxFunction_deleteRule(final int position) {
         try {
             wrapped_.deleteRule(position);
@@ -712,6 +725,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @param rule the rule
      * @return always return -1 as of MSDN documentation
      */
+    @JsxFunction(@WebBrowser(IE))
     public int jsxFunction_addRule(final String selector, final String rule) {
         final String completeRule = selector + " {" + rule + "}";
         try {
@@ -728,6 +742,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @param position the position of the rule to be deleted
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531195(v=VS.85).aspx">MSDN</a>
      */
+    @JsxFunction(@WebBrowser(IE))
     public void jsxFunction_removeRule(final int position) {
         try {
             wrapped_.deleteRule(position);

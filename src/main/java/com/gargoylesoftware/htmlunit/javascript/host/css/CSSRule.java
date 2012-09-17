@@ -14,7 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * A JavaScript object for a CSSRule.
@@ -104,6 +109,7 @@ public class CSSRule extends SimpleScriptable {
      * Returns the type of the rule.
      * @return the type of the rule.
      */
+    @JsxGetter(@WebBrowser(FF))
     public short jsxGet_type() {
         return rule_.getType();
     }
@@ -113,6 +119,7 @@ public class CSSRule extends SimpleScriptable {
      * This reflects the current state of the rule and not its initial value.
      * @return the parsable textual representation of the rule.
      */
+    @JsxGetter(@WebBrowser(FF))
     public String jsxGet_cssText() {
         return rule_.getCssText();
     }
@@ -121,6 +128,7 @@ public class CSSRule extends SimpleScriptable {
      * Sets the parsable textual representation of the rule.
      * @param cssText the parsable textual representation of the rule
      */
+    @JsxSetter(@WebBrowser(FF))
     public void jsxSet_cssText(final String cssText) {
         rule_.setCssText(cssText);
     }
@@ -129,6 +137,7 @@ public class CSSRule extends SimpleScriptable {
      * Returns the style sheet that contains this rule.
      * @return the style sheet that contains this rule.
      */
+    @JsxGetter(@WebBrowser(FF))
     public CSSStyleSheet jsxGet_parentStyleSheet() {
         return stylesheet_;
     }
@@ -138,6 +147,7 @@ public class CSSRule extends SimpleScriptable {
      * this is the containing rule. If this rule is not nested inside any other rules, this returns <code>null</code>.
      * @return the parent rule
      */
+    @JsxGetter(@WebBrowser(FF))
     public CSSRule jsxGet_parentRule() {
         final org.w3c.dom.css.CSSRule parentRule = rule_.getParentRule();
         if (parentRule != null) {

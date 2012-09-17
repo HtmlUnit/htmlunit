@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 
 /**
  * A JavaScript object for a CSSRuleList.
@@ -57,6 +62,7 @@ public class CSSRuleList extends SimpleScriptable {
      * Returns the length of this list.
      * @return the length of this list.
      */
+    @JsxGetter
     public int jsxGet_length() {
         if (rules_ != null) {
             return rules_.getLength();
@@ -69,6 +75,7 @@ public class CSSRuleList extends SimpleScriptable {
      * @param index the index
      * @return the item in the given index
      */
+    @JsxFunction(@WebBrowser(FF))
     public Object jsxFunction_item(final int index) {
         return null;
     }

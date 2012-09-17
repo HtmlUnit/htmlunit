@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+
 /**
  * A JavaScript object for a {@link org.w3c.dom.css.CSSCharsetRule}.
  *
@@ -43,6 +46,7 @@ public class CSSCharsetRule extends CSSRule {
      * Returns the encoding of the charset rule.
      * @return the encoding of the charset rule
      */
+    @JsxGetter
     public String jsxGet_encoding() {
         return getCharsetRule().getEncoding();
     }
@@ -51,6 +55,7 @@ public class CSSCharsetRule extends CSSRule {
      * Sets the encoding of the charset rule.
      * @param encoding the encoding of the charset rule
      */
+    @JsxSetter
     public void jsxSet_encoding(final String encoding) {
         getCharsetRule().setEncoding(encoding);
     }

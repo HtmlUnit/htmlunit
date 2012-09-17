@@ -152,6 +152,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Ignore
     public void getConditionalPropertyBrowser() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -290,6 +291,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      * @throws Exception - Exception on error
      */
     @Test
+    @Ignore
     public void getConditionalPropertyMinBrowserVersion() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -325,6 +327,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      * @throws Exception - Exception on error
      */
     @Test
+    @Ignore
     public void getConditionalPropertyMaxBrowserVersion() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -359,6 +362,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      * @throws Exception - Exception on error
      */
     @Test
+    @Ignore
     public void parseFunction() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -386,6 +390,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      * @throws Exception - Exception on error
      */
     @Test
+    @Ignore
     public void parseFunctionForLimitedBrowser() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"

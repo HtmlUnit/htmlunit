@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 
 /**
  * A JavaScript object for Coordinates.
@@ -45,6 +46,7 @@ public class Coordinates extends SimpleScriptable {
      * Returns the latitude.
      * @return the latitude
      */
+    @JsxGetter
     public double jsxGet_latitude() {
         return latitude_;
     }
@@ -53,6 +55,7 @@ public class Coordinates extends SimpleScriptable {
      * Returns the longitude.
      * @return the longitude
      */
+    @JsxGetter
     public double jsxGet_longitude() {
         return longitude_;
     }
@@ -61,6 +64,7 @@ public class Coordinates extends SimpleScriptable {
      * Returns the accuracy.
      * @return the accuracy
      */
+    @JsxGetter
     public double jsxGet_accuracy() {
         return accuracy_;
     }

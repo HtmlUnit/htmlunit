@@ -22,6 +22,8 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 
@@ -120,6 +122,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param name attribute name
      * @return the attribute node, <code>null</code> if the attribute is not defined
      */
+    @JsxFunction
     public Object jsxFunction_getNamedItem(final String name) {
         final Object attr = getNamedItemWithoutSytheticClassAttr(name);
         if (null != attr) {
@@ -138,6 +141,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * Sets the specified attribute.
      * @param node the attribute
      */
+    @JsxFunction
     public void jsxFunction_setNamedItem(final Node node) {
         attributes_.setNamedItem(node.getDomNodeOrDie());
     }
@@ -146,6 +150,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * Removes the specified attribute.
      * @param name the name of the item to remove
      */
+    @JsxFunction
     public void jsxFunction_removeNamedItem(final String name) {
         attributes_.removeNamedItem(name);
     }
@@ -155,6 +160,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param index the index
      * @return the item at the specified index
      */
+    @JsxFunction
     public Object jsxFunction_item(int index) {
         final DomNode attr = (DomNode) attributes_.item(index);
         if (attr != null) {
@@ -191,6 +197,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * Returns the number of attributes in this named node map.
      * @return the number of attributes in this named node map
      */
+    @JsxGetter
     public int jsxGet_length() {
         int length = attributes_.getLength();
         if (useRecursiveAttributeForIE()) {

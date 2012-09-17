@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -44,6 +47,10 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
@@ -126,6 +133,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns the event handler that fires on every state change.
      * @return the event handler that fires on every state change
      */
+    @JsxGetter
     public Function jsxGet_onreadystatechange() {
         return stateChangeHandler_;
     }
@@ -134,6 +142,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sets the event handler that fires on every state change.
      * @param stateChangeHandler the event handler that fires on every state change
      */
+    @JsxSetter
     public void jsxSet_onreadystatechange(final Function stateChangeHandler) {
         stateChangeHandler_ = stateChangeHandler;
         if (state_ == STATE_LOADING) {
@@ -214,6 +223,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns the event handler that fires on load.
      * @return the event handler that fires on load
      */
+    @JsxGetter({ @WebBrowser(value = IE, maxVersion = 6), @WebBrowser(FF) })
     public Function jsxGet_onload() {
         return loadHandler_;
     }
@@ -222,6 +232,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sets the event handler that fires on load.
      * @param loadHandler the event handler that fires on load
      */
+    @JsxSetter({ @WebBrowser(value = IE, maxVersion = 6), @WebBrowser(FF) })
     public void jsxSet_onload(final Function loadHandler) {
         loadHandler_ = loadHandler;
     }
@@ -230,6 +241,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns the event handler that fires on error.
      * @return the event handler that fires on error
      */
+    @JsxGetter
     public Function jsxGet_onerror() {
         return errorHandler_;
     }
@@ -238,6 +250,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sets the event handler that fires on error.
      * @param errorHandler the event handler that fires on error
      */
+    @JsxSetter
     public void jsxSet_onerror(final Function errorHandler) {
         errorHandler_ = errorHandler;
     }
@@ -278,6 +291,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * </ul>
      * @return the current state of the HTTP request
      */
+    @JsxGetter
     public int jsxGet_readyState() {
         return state_;
     }
@@ -286,6 +300,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns a string version of the data retrieved from the server.
      * @return a string version of the data retrieved from the server
      */
+    @JsxGetter
     public String jsxGet_responseText() {
         if (webResponse_ != null) {
             return webResponse_.getContentAsString();
@@ -300,6 +315,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns a DOM-compatible document object version of the data retrieved from the server.
      * @return a DOM-compatible document object version of the data retrieved from the server
      */
+    @JsxGetter
     public Object jsxGet_responseXML() {
         if (webResponse_ == null) {
             return null; // send() has not been called
@@ -338,6 +354,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * or 200 for "OK".
      * @return the numeric status returned by the server
      */
+    @JsxGetter
     public int jsxGet_status() {
         if (webResponse_ != null) {
             return webResponse_.getStatusCode();
@@ -350,6 +367,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns the string message accompanying the status code, such as "Not Found" or "OK".
      * @return the string message accompanying the status code
      */
+    @JsxGetter
     public String jsxGet_statusText() {
         if (webResponse_ != null) {
             return webResponse_.getStatusMessage();
@@ -361,6 +379,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     /**
      * Cancels the current HTTP request.
      */
+    @JsxFunction
     public void jsxFunction_abort() {
         getWindow().getWebWindow().getJobManager().stopJob(threadID_);
     }
@@ -369,6 +388,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Returns the labels and values of all the HTTP headers.
      * @return the labels and values of all the HTTP headers
      */
+    @JsxFunction
     public String jsxFunction_getAllResponseHeaders() {
         if (webResponse_ != null) {
             final StringBuilder buffer = new StringBuilder();
@@ -386,6 +406,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param headerName the (case-insensitive) name of the header to retrieve
      * @return the value of the specified HTTP header
      */
+    @JsxFunction
     public String jsxFunction_getResponseHeader(final String headerName) {
         if (webResponse_ != null) {
             return webResponse_.getResponseHeaderValue(headerName);
@@ -402,6 +423,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param user If authentication is needed for the specified URL, the username to use to authenticate
      * @param password If authentication is needed for the specified URL, the password to use to authenticate
      */
+    @JsxFunction
     public void jsxFunction_open(final String method, final Object urlParam, final boolean async,
         final Object user, final Object password) {
         if (urlParam == null || "".equals(urlParam)) {
@@ -470,6 +492,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Sends the specified content to the server in an HTTP request and receives the response.
      * @param content the body of the message being sent with the request
      */
+    @JsxFunction
     public void jsxFunction_send(final Object content) {
         prepareRequest(content);
 
@@ -561,6 +584,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param name the name of the header being set
      * @param value the value of the header being set
      */
+    @JsxFunction
     public void jsxFunction_setRequestHeader(final String name, final String value) {
         if (!isAuthorizedHeader(name)) {
             LOG.warn("Ignoring XMLHttpRequest.setRequestHeader for " + name
@@ -600,6 +624,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param mimeType the type used to override that returned by the server (if any)
      * @see <a href="http://xulplanet.com/references/objref/XMLHttpRequest.html#method_overrideMimeType">XUL Planet</a>
      */
+    @JsxFunction({ @WebBrowser(value = IE, maxVersion = 6), @WebBrowser(FF) })
     public void jsxFunction_overrideMimeType(final String mimeType) {
         overriddenMimeType_ = mimeType;
     }

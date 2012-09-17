@@ -18,6 +18,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
@@ -51,6 +53,7 @@ public class CSSStyleRule extends CSSRule {
      * Returns the textual representation of the selector for the rule set.
      * @return the textual representation of the selector for the rule set
      */
+    @JsxGetter
     public String jsxGet_selectorText() {
         String selectorText = ((org.w3c.dom.css.CSSStyleRule) getRule()).getSelectorText();
         final Matcher m = SELECTOR_PARTS_PATTERN.matcher(selectorText);
@@ -82,6 +85,7 @@ public class CSSStyleRule extends CSSRule {
      * Sets the textual representation of the selector for the rule set.
      * @param selectorText the textual representation of the selector for the rule set
      */
+    @JsxSetter
     public void jsxSet_selectorText(final String selectorText) {
         ((org.w3c.dom.css.CSSStyleRule) getRule()).setSelectorText(selectorText);
     }
@@ -90,6 +94,7 @@ public class CSSStyleRule extends CSSRule {
      * Returns the declaration-block of this rule set.
      * @return the declaration-block of this rule set
      */
+    @JsxGetter
     public CSSStyleDeclaration jsxGet_style() {
         return new CSSStyleDeclaration(getParentScope(), ((org.w3c.dom.css.CSSStyleRule) getRule()).getStyle());
     }

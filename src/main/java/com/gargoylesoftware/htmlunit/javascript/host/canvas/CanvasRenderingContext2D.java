@@ -19,6 +19,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
 
 /**
  * A JavaScript object for a CanvasRenderingContext2D.
@@ -32,6 +35,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Returns the "fillStyle" property.
      * @return the "fillStyle" property
      */
+    @JsxGetter
     public Object jsxGet_fillStyle() {
         return null;
     }
@@ -41,6 +45,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param x the translation distance in the horizontal direction
      * @param y the translation distance in the vertical direction
      */
+    @JsxFunction
     public void jsxFunction_translate(final Object x, final Object y) {
       // empty
     }
@@ -50,6 +55,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param x the scale factor in the horizontal direction
      * @param y the scale factor in the vertical direction
      */
+    @JsxFunction
     public void jsxFunction_scale(final Object x, final Object y) {
       //empty
     }
@@ -58,6 +64,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Sets the "fillStyle" property.
      * @param fillStyle the "fillStyle" property
      */
+    @JsxSetter
     public void jsxSet_fillStyle(final Object fillStyle) {
         //empty
     }
@@ -66,6 +73,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Returns the "strokeStyle" property.
      * @return the "strokeStyle" property
      */
+    @JsxGetter
     public Object jsxGet_strokeStyle() {
         return null;
     }
@@ -74,6 +82,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Sets the "strokeStyle" property.
      * @param strokeStyle the "strokeStyle" property
      */
+    @JsxSetter
     public void jsxSet_strokeStyle(final Object strokeStyle) {
         //empty
     }
@@ -82,6 +91,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Returns the "lineWidth" property.
      * @return the "lineWidth" property
      */
+    @JsxGetter
     public double jsxGet_lineWidth() {
         return 0;
     }
@@ -90,6 +100,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Sets the "lineWidth" property.
      * @param lineWidth the "lineWidth" property
      */
+    @JsxSetter
     public void jsxSet_lineWidth(final Object lineWidth) {
         //empty
     }
@@ -98,6 +109,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Returns the "globalAlpha" property.
      * @return the "globalAlpha" property
      */
+    @JsxGetter
     public double jsxGet_globalAlpha() {
         return 0;
     }
@@ -106,6 +118,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Sets the "globalAlpha" property.
      * @param globalAlpha the "globalAlpha" property
      */
+    @JsxSetter
     public void jsxSet_globalAlpha(final Object globalAlpha) {
         //empty
     }
@@ -117,6 +130,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param w the width
      * @param h the height
      */
+    @JsxFunction
     public void jsxFunction_clearRect(final double x, final double y, final double w, final double h) {
         //empty
     }
@@ -128,6 +142,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param w the width
      * @param h the height
      */
+    @JsxFunction
     public void jsxFunction_fillRect(final double x, final double y, final double w, final double h) {
         //empty
     }
@@ -139,6 +154,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param w the width
      * @param h the height
      */
+    @JsxFunction
     public void jsxFunction_strokeRect(final double x, final double y, final double w, final double h) {
         //empty
     }
@@ -146,6 +162,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Begins the subpaths.
      */
+    @JsxFunction
     public void jsxFunction_beginPath() {
         //empty
     }
@@ -153,6 +170,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Closes the subpaths.
      */
+    @JsxFunction
     public void jsxFunction_closePath() {
         //empty
     }
@@ -162,6 +180,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param x the x
      * @param y the y
      */
+    @JsxFunction
     public void jsxFunction_moveTo(final double x, final double y) {
         //empty
     }
@@ -171,6 +190,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param x the x
      * @param y the y
      */
+    @JsxFunction
     public void jsxFunction_lineTo(final double x, final double y) {
         //empty
     }
@@ -178,6 +198,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Pushes state on state stack.
      */
+    @JsxFunction
     public void jsxFunction_save() {
         //empty
     }
@@ -185,6 +206,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Pops state stack and restore state.
      */
+    @JsxFunction
     public void jsxFunction_restore() {
         //empty
     }
@@ -198,6 +220,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param y1 the y1
      * @param r1 the r1
      */
+    @JsxFunction
     public void jsxFunction_createLinearGradient(final double x0, final double y0, final double r0, final double x1,
             final Object y1, final Object r1) {
         //empty
@@ -212,6 +235,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param endAngle the end angle
      * @param anticlockwise is anti-clockwise
      */
+    @JsxFunction
     public void jsxFunction_arc(final double x, final double y, final double radius, final double startAngle,
                 final double endAngle, final boolean anticlockwise) {
         //empty
@@ -225,6 +249,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param y2 the y2
      * @param radius the radius
      */
+    @JsxFunction
     public void jsxFunction_arcTo(final double x1, final double y1, final double x2, final double y2,
                 final double radius) {
         //empty
@@ -239,6 +264,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param x the x
      * @param y the y
      */
+    @JsxFunction
     public void jsxFunction_bezierCurveTo(final double cp1x, final double cp1y, final double cp2x, final double cp2y,
             final double x, final double y) {
         //empty
@@ -247,6 +273,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Fills the shape.
      */
+    @JsxFunction
     public void jsxFunction_fill() {
         //empty
     }
@@ -254,6 +281,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Calculates the strokes of all the subpaths of the current path.
      */
+    @JsxFunction
     public void jsxFunction_stroke() {
         //empty
     }
@@ -261,6 +289,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Creates a new clipping region.
      */
+    @JsxFunction
     public void jsxFunction_clip() {
         //empty
     }
@@ -272,6 +301,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param args the arguments passed into the method
      * @param function the function
      */
+    @JsxFunction
     public static void jsxFunction_drawImage(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         //empty

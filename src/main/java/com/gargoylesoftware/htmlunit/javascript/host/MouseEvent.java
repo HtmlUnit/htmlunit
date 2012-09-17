@@ -370,6 +370,7 @@ public class MouseEvent extends UIEvent {
     public boolean jsxGet_ctrlKey() {
         return super.jsxGet_ctrlKey();
     }
+
     /**
      * {@inheritDoc} Overridden to modify browser configurations.
      */

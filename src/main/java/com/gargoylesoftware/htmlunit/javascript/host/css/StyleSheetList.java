@@ -23,6 +23,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -97,6 +99,7 @@ public class StyleSheetList extends SimpleScriptable {
      *
      * @return the list's length
      */
+    @JsxGetter
     public int jsxGet_length() {
         return nodes_.jsxGet_length();
     }
@@ -107,6 +110,7 @@ public class StyleSheetList extends SimpleScriptable {
      * @param index the index of the style sheet to return
      * @return the style sheet at the specified index
      */
+    @JsxFunction
     public Object jsxFunction_item(final int index) {
         if (index < 0) {
             throw Context.reportRuntimeError("Invalid negative index: " + index);

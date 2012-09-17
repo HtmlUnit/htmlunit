@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
 
 /**
@@ -47,6 +48,7 @@ public class CSSMediaRule extends CSSRule {
      * Returns the media types that the imported CSS style sheet applies to.
      * @return the media types that the imported CSS style sheet applies to
      */
+    @JsxGetter
     public MediaList jsxGet_media() {
         if (media_ == null) {
             final CSSStyleSheet parent = jsxGet_parentStyleSheet();

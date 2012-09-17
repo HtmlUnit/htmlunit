@@ -89,8 +89,8 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param source the node to be transformed
      * @return the result of the transformation
      */
-    public XMLDocument jsxFunction_transformToDocument(
-            final Node source) {
+    @JsxFunction(@WebBrowser(FF))
+    public XMLDocument jsxFunction_transformToDocument(final Node source) {
         final XMLDocument doc = new XMLDocument();
         doc.setPrototype(getPrototype(doc.getClass()));
         doc.setParentScope(getParentScope());
@@ -153,8 +153,8 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param output This document is used to generate the output
      * @return the result of the transformation
      */
-    public DocumentFragment jsxFunction_transformToFragment(
-            final Node source, final Object output) {
+    @JsxFunction(@WebBrowser(FF))
+    public DocumentFragment jsxFunction_transformToFragment(final Node source, final Object output) {
         final SgmlPage page = ((Document) output).getDomNodeOrDie();
 
         final DomDocumentFragment fragment = page.createDomDocumentFragment();

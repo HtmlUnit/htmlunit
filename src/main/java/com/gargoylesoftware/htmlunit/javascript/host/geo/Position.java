@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 
 /**
  * A JavaScript object for Position.
@@ -41,6 +42,7 @@ public class Position extends SimpleScriptable {
      * Returns the coordinates.
      * @return the coordinates
      */
+    @JsxGetter
     public Coordinates jsxGet_coords() {
         return coordinates_;
     }

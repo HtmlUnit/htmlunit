@@ -33,29 +33,6 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D" JSObject="true">
-        <property name="fillStyle"/>
-        <property name="globalAlpha"/>
-        <property name="lineWidth"/>
-        <property name="strokeStyle"/>
-        <function name="arc"/>
-        <function name="arcTo"/>
-        <function name="beginPath"/>
-        <function name="bezierCurveTo"/>
-        <function name="clearRect"/>
-        <function name="clip"/>
-        <function name="closePath"/>
-        <function name="createLinearGradient"/>
-        <function name="drawImage"/>
-        <function name="fill"/>
-        <function name="fillRect"/>
-        <function name="lineTo"/>
-        <function name="moveTo"/>
-        <function name="restore"/>
-        <function name="save"/>
-        <function name="scale"/>
-        <function name="stroke"/>
-        <function name="strokeRect"/>
-        <function name="translate"/>
     </class>
 
     <class extends="Text" classname="com.gargoylesoftware.htmlunit.javascript.host.CDATASection"
@@ -87,768 +64,38 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates" JSObject="true">
-        <property name="accuracy" writable="false"/>
-        <property name="latitude" writable="false"/>
-        <property name="longitude" writable="false"/>
     </class>
 
     <class extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule" JSObject="true">
-        <property name="encoding"/>
     </class>
 
     <class extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule" JSObject="true">
-        <property name="href" writable="false"/>
-        <property name="media" writable="false"/>
-        <property name="styleSheet" writable="false"/>
     </class>
 
     <class extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSMediaRule" JSObject="true">
-        <property name="media" writable="false"/>
     </class>
 
     <class extends="CSSValue" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSPrimitiveValue" JSObject="true">
         <browser name="Firefox"/>
-        <constant name="CSS_UNKNOWN"/>
-        <constant name="CSS_NUMBER"/>
-        <constant name="CSS_PERCENTAGE"/>
-        <constant name="CSS_EMS"/>
-        <constant name="CSS_EXS"/>
-        <constant name="CSS_PX"/>
-        <constant name="CSS_CM"/>
-        <constant name="CSS_MM"/>
-        <constant name="CSS_IN"/>
-        <constant name="CSS_PT"/>
-        <constant name="CSS_PC"/>
-        <constant name="CSS_DEG"/>
-        <constant name="CSS_RAD"/>
-        <constant name="CSS_GRAD"/>
-        <constant name="CSS_MS"/>
-        <constant name="CSS_S"/>
-        <constant name="CSS_HZ"/>
-        <constant name="CSS_KHZ"/>
-        <constant name="CSS_DIMENSION"/>
-        <constant name="CSS_STRING"/>
-        <constant name="CSS_URI"/>
-        <constant name="CSS_IDENT"/>
-        <constant name="CSS_ATTR"/>
-        <constant name="CSS_COUNTER"/>
-        <constant name="CSS_RECT"/>
-        <constant name="CSS_RGBCOLOR"/>
-        <function name="getFloatValue"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule" JSObject="false">
-        <constant name="UNKNOWN_RULE"><browser name="Firefox"/></constant>
-        <constant name="STYLE_RULE"><browser name="Firefox"/></constant>
-        <constant name="CHARSET_RULE"><browser name="Firefox"/></constant>
-        <constant name="IMPORT_RULE"><browser name="Firefox"/></constant>
-        <constant name="MEDIA_RULE"><browser name="Firefox"/></constant>
-        <constant name="FONT_FACE_RULE"><browser name="Firefox"/></constant>
-        <constant name="PAGE_RULE"><browser name="Firefox"/></constant>
-        <property name="cssText">
-            <browser name="Firefox"/>
-        </property>
-        <property name="parentRule" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="parentStyleSheet" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="readOnly" notImplemented="true" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="type" writable="false">
-            <browser name="Firefox"/>
-        </property>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList" JSObject="true">
-        <property name="length" writable="false"/>
-        <function name="item">
-            <browser name="Firefox"/>
-        </function>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration" JSObject="true">
-        <property name="azimuth">
-            <browser name="Firefox"/>
-        </property>
-        <property name="background"/>
-        <property name="backgroundAttachment"/>
-        <property name="backgroundColor"/>
-        <property name="backgroundImage"/>
-        <property name="backgroundPosition"/>
-        <property name="backgroundPositionX">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="backgroundPositionY">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="backgroundRepeat"/>
-        <property name="behavior">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="border"/>
-        <property name="borderBottom"/>
-        <property name="borderBottomColor"/>
-        <property name="borderBottomStyle"/>
-        <property name="borderBottomWidth"/>
-        <property name="borderCollapse"/>
-        <property name="borderColor"/>
-        <property name="borderLeft"/>
-        <property name="borderLeftColor"/>
-        <property name="borderLeftStyle"/>
-        <property name="borderLeftWidth"/>
-        <property name="borderRight"/>
-        <property name="borderRightColor"/>
-        <property name="borderRightStyle"/>
-        <property name="borderRightWidth"/>
-        <property name="borderSpacing">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="borderStyle"/>
-        <property name="borderTop"/>
-        <property name="borderTopColor"/>
-        <property name="borderTopStyle"/>
-        <property name="borderTopWidth"/>
-        <property name="borderWidth"/>
-        <property name="bottom"/>
-        <property name="boxSizing">
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="captionSide">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="clear"/>
-        <property name="clip"/>
-        <property name="color"/>
-        <property name="content">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="counterIncrement">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="counterReset">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="cssFloat">
-            <browser name="Firefox"/>
-        </property>
-        <property name="cssText"/>
-        <property name="cue">
-            <browser name="Firefox"/>
-        </property>
-        <property name="cueAfter">
-            <browser name="Firefox"/>
-        </property>
-        <property name="cueBefore">
-            <browser name="Firefox"/>
-        </property>
-        <property name="cursor"/>
-        <property name="direction"/>
-        <property name="display"/>
-        <property name="elevation">
-            <browser name="Firefox"/>
-        </property>
-        <property name="emptyCells">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="filter">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="font"/>
-        <property name="fontFamily"/>
-        <property name="fontSize"/>
-        <property name="fontSizeAdjust">
-            <browser name="Firefox"/>
-        </property>
-        <property name="fontStretch">
-            <browser name="Firefox"/>
-        </property>
-        <property name="fontStyle"/>
-        <property name="fontVariant"/>
-        <property name="fontWeight"/>
-        <property name="height"/>
-        <property name="imeMode"/>
-        <property name="layoutFlow">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="layoutGrid">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="layoutGridChar">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="layoutGridLine">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="layoutGridMode">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="layoutGridType">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="left"/>
-        <property name="length" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="letterSpacing"/>
-        <property name="lineBreak">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="lineHeight"/>
-        <property name="listStyle"/>
-        <property name="listStyleImage"/>
-        <property name="listStylePosition"/>
-        <property name="listStyleType"/>
-        <property name="margin"/>
-        <property name="marginBottom"/>
-        <property name="marginLeft"/>
-        <property name="marginRight"/>
-        <property name="marginTop"/>
-        <property name="markerOffset">
-            <browser name="Firefox"/>
-        </property>
-        <property name="marks">
-            <browser name="Firefox"/>
-        </property>
-        <property name="maxHeight"/>
-        <property name="maxWidth"/>
-        <property name="minHeight"/>
-        <property name="minWidth"/>
-        <property name="MozAppearance">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBackgroundClip">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBackgroundInlinePolicy">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBackgroundOrigin">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBackgroundSize">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBinding">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderBottomColors">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderEnd">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderEndColor">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderEndStyle">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderEndWidth">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderImage">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderLeftColors">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderRadius">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderRadiusBottomleft">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderRadiusBottomright">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderRadiusTopleft">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderRadiusTopright">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderRightColors">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderStart">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderStartColor">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderStartStyle">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderStartWidth">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBorderTopColors">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBoxAlign">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBoxDirection">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBoxFlex">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBoxOrdinalGroup">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBoxOrient">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBoxPack">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBoxShadow">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozBoxSizing">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozColumnCount">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozColumnGap">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozColumnRule">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozColumnRuleColor">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozColumnRuleStyle">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozColumnRuleWidth">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozColumnWidth">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozFloatEdge">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozForceBrokenImageIcon">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozImageRegion">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozMarginEnd">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozMarginStart">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozOpacity">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozOutline">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozOutlineColor">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozOutlineOffset">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozOutlineRadius">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozOutlineRadiusBottomleft">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozOutlineRadiusBottomright">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozOutlineRadiusTopleft">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozOutlineRadiusTopright">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozOutlineStyle">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozOutlineWidth">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozPaddingEnd">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozPaddingStart">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozStackSizing">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozTransform">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozTransformOrigin">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozUserFocus">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozUserInput">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozUserModify">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozUserSelect">
-            <browser name="Firefox"/>
-        </property>
-        <property name="MozWindowShadow">
-            <browser name="Firefox"/>
-        </property>
-        <property name="msBlockProgression">
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="msInterpolationMode">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="opacity">
-            <browser name="Firefox"/>
-            <browser name="Chrome"/>
-        </property>
-        <property name="orphans">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="outline">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="outlineColor">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="outlineOffset">
-            <browser name="Firefox"/>
-        </property>
-        <property name="outlineStyle">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="outlineWidth">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="overflow"/>
-        <property name="overflowX"/>
-        <property name="overflowY"/>
-        <property name="padding"/>
-        <property name="paddingBottom"/>
-        <property name="paddingLeft"/>
-        <property name="paddingRight"/>
-        <property name="paddingTop"/>
-        <property name="page">
-            <browser name="Firefox"/>
-        </property>
-        <property name="pageBreakAfter"/>
-        <property name="pageBreakBefore"/>
-        <property name="pageBreakInside">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="pause">
-            <browser name="Firefox"/>
-        </property>
-        <property name="pauseAfter">
-            <browser name="Firefox"/>
-        </property>
-        <property name="pauseBefore">
-            <browser name="Firefox"/>
-        </property>
-        <property name="pitch">
-            <browser name="Firefox"/>
-        </property>
-        <property name="pitchRange">
-            <browser name="Firefox"/>
-        </property>
-        <property name="pointerEvents">
-            <browser name="Firefox"/>
-        </property>
-        <property name="pixelBottom">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="pixelLeft">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="pixelRight">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="pixelTop">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="posBottom">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="posHeight">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="position"/>
-        <property name="posLeft">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="posRight">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="posTop">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="posWidth">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="quotes">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="richness">
-            <browser name="Firefox"/>
-        </property>
-        <property name="right"/>
-        <property name="rubyAlign">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="rubyOverhang">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="rubyPosition">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="scrollbar3dLightColor">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="scrollbarArrowColor">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="scrollbarBaseColor">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="scrollbarDarkShadowColor">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="scrollbarFaceColor">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="scrollbarHighlightColor">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="scrollbarShadowColor">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="scrollbarTrackColor">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="size">
-            <browser name="Firefox"/>
-        </property>
-        <property name="speak">
-            <browser name="Firefox"/>
-        </property>
-        <property name="speakHeader">
-            <browser name="Firefox"/>
-        </property>
-        <property name="speakNumeral">
-            <browser name="Firefox"/>
-        </property>
-        <property name="speakPunctuation">
-            <browser name="Firefox"/>
-        </property>
-        <property name="speechRate">
-            <browser name="Firefox"/>
-        </property>
-        <property name="stress">
-            <browser name="Firefox"/>
-        </property>
-        <property name="styleFloat">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="tableLayout"/>
-        <property name="textAlign"/>
-        <property name="textAlignLast">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="textAutospace">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="textDecoration"/>
-        <property name="textDecorationBlink">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="textDecorationLineThrough">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="textDecorationNone">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="textDecorationOverline">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="textDecorationUnderline">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="textIndent"/>
-        <property name="textJustify">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="textJustifyTrim">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="textKashida">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="textKashidaSpace">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="textOverflow">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="textShadow">
-            <browser name="Firefox"/>
-        </property>
-        <property name="textTransform"/>
-        <property name="textUnderlinePosition">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="top"/>
-        <property name="unicodeBidi"/>
-        <property name="verticalAlign"/>
-        <property name="visibility"/>
-        <property name="voiceFamily">
-            <browser name="Firefox"/>
-        </property>
-        <property name="volume">
-            <browser name="Firefox"/>
-        </property>
-        <property name="whiteSpace"/>
-        <property name="widows">
-            <browser name="Firefox"/>
-            <browser name="Internet Explorer" min-version="8"/>
-        </property>
-        <property name="width"/>
-        <property name="wordBreak">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="wordSpacing"/>
-        <property name="wordWrap">
-            <browser name="Internet Explorer"/>
-            <browser name="Firefox"/>
-        </property>
-        <property name="writingMode">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="zIndex"/>
-        <property name="zoom">
-            <browser name="Internet Explorer"/>
-        </property>
-        <function name="getAttribute">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536429.aspx"
-                descr="MSDN Documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="getPropertyCSSValue">
-            <browser name="Firefox"/>
-        </function>
-        <function name="getPropertyValue">
-            <browser name="Firefox"/>
-        </function>
-        <function name="removeAttribute">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536696.aspx"
-                descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="removeExpression">
-            <doclink
-                url="http://msdn2.microsoft.com/en-us/library/aa358798.aspx"
-                descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-            <browser name="Firefox" min-version="10"/>
-        </function>
-        <function name="removeProperty">
-            <doclink
-                url="https://developer.mozilla.org/en/DOM/CSSStyleDeclaration#Methods"
-                descr="Gecko DOM reference"/>
-            <browser name="Firefox"/>
-            <browser name="Chrome"/>
-        </function>
-        <function name="setAttribute">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms536739.aspx"
-                descr="MSDN Documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="setExpression">
-            <doclink
-                url="http://msdn2.microsoft.com/en-us/library/ms531196.aspx"
-                descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-            <browser name="Firefox" min-version="10"/>
-        </function>
     </class>
 
     <class extends="CSSRule" classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule" JSObject="true">
-        <property name="selectorText"/>
-        <property name="style" writable="false"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet" JSObject="true">
-        <doclink
-            url="http://msdn2.microsoft.com/en-us/library/ms535871.aspx"
-            descr="MSDN documentation"/>
-        <property name="cssRules" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="href" writable="false"/>
-        <property name="ownerNode" writable="false">
-            <browser name="Firefox"/>
-        </property>
-        <property name="owningElement" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="rules" writable="false">
-            <browser name="Internet Explorer"/>
-        </property>
-        <function name="addRule">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="insertRule">
-            <browser name="Firefox"/>
-        </function>
-        <function name="removeRule">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="deleteRule">
-            <browser name="Firefox"/>
-        </function>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue" JSObject="true">
         <browser name="Firefox"/>
-        <constant name="CSS_INHERIT"/>
-        <constant name="CSS_PRIMITIVE_VALUE"/>
-        <constant name="CSS_VALUE_LIST"/>
-        <constant name="CSS_CUSTOM"/>
-        <property name="cssText" writable="false"/>
     </class>
 
     <class extends="EventNode" classname="com.gargoylesoftware.htmlunit.javascript.host.Document" JSObject="true">
@@ -911,9 +158,6 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation" JSObject="true">
-        <function name="getCurrentPosition"/>
-        <function name="watchPosition"/>
-        <function name="clearWatch"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.History"
@@ -997,9 +241,6 @@
 
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLEmbedElement"
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlEmbed">
-        <property name="align" notImplemented="true">
-            <browser name="Firefox"/>
-        </property>
     </class>
 
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFieldSetElement"
@@ -1255,11 +496,6 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.NamedNodeMap" JSObject="true">
-        <property name="length" writable="false"/>
-        <function name="getNamedItem"/>
-        <function name="item"/>
-        <function name="removeNamedItem"/>
-        <function name="setNamedItem"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Namespace"
@@ -1312,7 +548,6 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.geo.Position" JSObject="true">
-        <property name="coords" writable="false"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.Range" JSObject="true">
@@ -1339,8 +574,6 @@
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList" JSObject="true">
-        <property name="length" writable="false"/>
-        <function name="item"/>
     </class>
 
     <class extends="SVGElement" classname="com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAElement"
@@ -1808,77 +1041,15 @@
 
     <class extends="Attr" classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLAttr"
         JSObject="true">
-        <property name="text">
-            <doclink
-                url="http://msdn.microsoft.com/en-us/library/ms762687.aspx"
-                descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </property>
     </class>
 
     <class extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument"
         JSObject="true">
         <browser name="Firefox"/>
-        <property name="async">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms761398.aspx"
-                    descr="MSDN documentation"/>
-        </property>
-        <property name="parseError" writable="false">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms757019.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </property>
-        <property name="preserveWhiteSpace">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms761353.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </property>
-        <function name="createCDATASection"/>
-        <function name="createNode">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="createProcessingInstruction"/>
-        <function name="getElementById">
-            <browser name="Firefox"/>
-        </function>
-        <function name="load">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms762722.aspx"
-                    descr="MSDN documentation"/>
-        </function>
-        <function name="loadXML">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms754585.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="nodeFromID">
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="selectNodes">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms754523.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="selectSingleNode">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms757846.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
-        <function name="setProperty">
-            <doclink url="http://msdn2.microsoft.com/en-us/library/ms760290.aspx"
-                    descr="MSDN documentation"/>
-            <browser name="Internet Explorer"/>
-        </function>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDOMParseError" JSObject="true">
         <browser name="Internet Explorer"/>
-        <property name="errorCode" writable="false"/>
-        <property name="filepos" writable="false"/>
-        <property name="line" writable="false"/>
-        <property name="linepos" writable="false"/>
-        <property name="reason" writable="false"/>
-        <property name="srcText" writable="false"/>
-        <property name="url" writable="false"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest"
@@ -1887,31 +1058,11 @@
         <browser name="Firefox"/>
         <browser name="Chrome"/>
         <browser name="Internet Explorer" min-version="7"/>
-        <property name="onerror"/>
-        <property name="onload">
-            <browser name="Firefox"/>
-        </property>
-        <property name="onreadystatechange"/>
-        <property name="readyState" writable="false"/>
-        <property name="responseText" writable="false"/>
-        <property name="responseXML" writable="false"/>
-        <property name="status" writable="false"/>
-        <property name="statusText" writable="false"/>
-        <function name="abort"/>
-        <function name="getAllResponseHeaders"/>
-        <function name="getResponseHeader"/>
-        <function name="open"/>
-        <function name="overrideMimeType">
-            <browser name="Firefox"/>
-        </function>
-        <function name="send"/>
-        <function name="setRequestHeader"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer"
         jsConstructor="jsConstructor" JSObject="true">
         <browser name="Firefox"/>
-        <function name="serializeToString"/>
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.XPathNSResolver"

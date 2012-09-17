@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 
@@ -65,6 +66,7 @@ public class Geolocation extends SimpleScriptable {
      * @param errorCallback optional error callback
      * @param options optional options
      */
+    @JsxFunction
     public void jsxFunction_getCurrentPosition(final Function successCallback, final Object errorCallback,
             final Object options) {
         successHandler_ = successCallback;
@@ -94,6 +96,7 @@ public class Geolocation extends SimpleScriptable {
      * @param options optional options
      * @return the watch id
      */
+    @JsxFunction
     public int jsxFunction_watchPosition(final Function successCallback, final Object errorCallback,
             final Object options) {
         return 0;
@@ -103,6 +106,7 @@ public class Geolocation extends SimpleScriptable {
      * Clears the specified watch ID.
      * @param watchId the watch id
      */
+    @JsxFunction
     public void jsxFunction_clearWatch(final int watchId) {
     }
 

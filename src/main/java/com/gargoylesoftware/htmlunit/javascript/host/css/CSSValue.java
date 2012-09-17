@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 /**
@@ -29,6 +31,7 @@ public class CSSValue extends SimpleScriptable {
     /**
      * The value is inherited and the <code>cssText</code> contains "inherit".
      */
+    @JsxConstant
     public static final short CSS_INHERIT = org.w3c.dom.css.CSSValue.CSS_INHERIT;
 
     /**
@@ -37,6 +40,7 @@ public class CSSValue extends SimpleScriptable {
      * binding-specific casting methods on this instance of the
      * <code>CSSValue</code> interface.
      */
+    @JsxConstant
     public static final short CSS_PRIMITIVE_VALUE = org.w3c.dom.css.CSSValue.CSS_PRIMITIVE_VALUE;
 
     /**
@@ -45,11 +49,13 @@ public class CSSValue extends SimpleScriptable {
      * binding-specific casting methods on this instance of the
      * <code>CSSValue</code> interface.
      */
+    @JsxConstant
     public static final short CSS_VALUE_LIST = org.w3c.dom.css.CSSValue.CSS_VALUE_LIST;
 
     /**
      * The value is a custom value.
      */
+    @JsxConstant
     public static final short CSS_CUSTOM = org.w3c.dom.css.CSSValue.CSS_CUSTOM;
 
     /**
@@ -79,6 +85,7 @@ public class CSSValue extends SimpleScriptable {
      * A string representation of the current value.
      * @return the string representation
      */
+    @JsxGetter
     public String jsxGet_cssText() {
         return wrappedCssValue_.getCssText();
     }

@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.javascript.annotations.BrowserName.IE;
+
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.annotations.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
@@ -36,6 +41,7 @@ public class XMLAttr extends Attr {
      * Returns the text of this attribute.
      * @return the value of this attribute
      */
+    @JsxGetter(@WebBrowser(IE))
     public String jsxGet_text() {
         return jsxGet_value();
     }
@@ -44,6 +50,7 @@ public class XMLAttr extends Attr {
      * Sets the text of this attribute.
      * @param value the new value of this attribute
      */
+    @JsxSetter(@WebBrowser(IE))
     public void jsxSet_text(final String value) {
         jsxSet_value(value);
     }
