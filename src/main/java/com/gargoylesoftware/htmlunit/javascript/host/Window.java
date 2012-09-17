@@ -327,6 +327,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see com.gargoylesoftware.htmlunit.WebClientOptions#isPopupBlockerEnabled()
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536651.aspx">MSDN documentation</a>
      */
+    @JsxFunction
     public WindowProxy jsxFunction_open(final Object url, final Object name, final Object features,
             final Object replace) {
         String urlString = null;
