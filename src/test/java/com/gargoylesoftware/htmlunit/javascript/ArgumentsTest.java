@@ -19,16 +19,16 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for org.mozilla.javascript.Arguments, which is the object for "function.arguments".
+ * Tests for {@link org.mozilla.javascript.Arguments}, which is the object for "function.arguments".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class ArgumentsTest extends SimpleWebTestCase {
+public class ArgumentsTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -50,7 +50,7 @@ public class ArgumentsTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -70,14 +70,14 @@ public class ArgumentsTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF3_6 = { "2", "hi", "undefined", "you" }, IE = { "2", "hi", "undefined", "you" },
+    @Alerts(FF = { "2", "hi", "undefined", "you" }, IE = { "2", "hi", "undefined", "you" },
             CHROME = { "2", "world", "undefined", "undefined" })
     //FF14 same as chrome
     public void readOnly() throws Exception {
@@ -97,6 +97,6 @@ public class ArgumentsTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
