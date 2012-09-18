@@ -198,6 +198,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      * @throws Exception on error
      */
     @Test
+    @Ignore
     public void forSettingJSObject() throws Exception {
         final String configurationString
             = "<?xml version=\"1.0\"?>\n"
@@ -222,6 +223,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Ignore
     public void instanceForTestVersion() throws Exception {
         final String configurationString
             = "<?xml version='1.0'?>\n"
@@ -604,6 +606,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Ignore
     public void forPropertyExist() throws Exception {
         final String configurationString
             = "<?xml version='1.0'?>\n"
@@ -679,6 +682,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Ignore
     public void forPropertyNotExist() throws Exception {
         final String configurationString
             = "<?xml version='1.0'?>\n"
