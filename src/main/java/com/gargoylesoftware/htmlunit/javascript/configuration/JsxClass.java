@@ -33,7 +33,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface JsxClass {
 
-    static final String EMPTY_DEFAULT = "~InTerNal_To_JsxClass#@$";
+    /** Default string for empty value. */
+    String EMPTY_DEFAULT = "~InTerNal_To_JsxClass#@$";
 
     /** The JavaScript constructor (if any). */
     String jsConstructor() default EMPTY_DEFAULT;

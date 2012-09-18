@@ -16,10 +16,6 @@
         url="http://msdn.microsoft.com/en-us/library/ms533050.aspx"
         descr="HTML and DHTML Reference on MSDN"/>
 
-    <class extends="Element" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlElement">
-    </class>
-
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject"
         jsConstructor="jsConstructor" JSObject="true">
         <browser name="Internet Explorer"/>

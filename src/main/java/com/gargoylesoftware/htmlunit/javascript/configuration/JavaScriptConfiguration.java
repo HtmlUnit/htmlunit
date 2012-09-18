@@ -22,12 +22,17 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -93,6 +98,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableHeader;
 import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
@@ -334,6 +340,17 @@ public final class JavaScriptConfiguration {
             node = node.getNextSibling();
         }
 
+        String packageName = getClass().getPackage().getName();
+        packageName = packageName.substring(0, packageName.lastIndexOf('.'));
+        for (final String className : getClassesForPackage(packageName)) {
+            if (!className.contains("$")) {
+                final ClassConfiguration config = processClass(className, browser);
+                if (config != null) {
+                    classMap.put(config.getHostClass().getSimpleName(), config);
+                }
+            }
+        }
+
         // add properties and methods from the virtual classes directly to the classes that "inherit" from them
         for (final ClassConfiguration config : classMap.values()) {
             final String extendsClassName = config.getExtendedClassName();
@@ -353,6 +370,64 @@ public final class JavaScriptConfiguration {
         }
 
         return Collections.unmodifiableMap(classMap);
+    }
+
+    private ClassConfiguration processClass(final String className, final BrowserVersion browser) {
+        try {
+            final Class<?> klass = Class.forName(className);
+            final JsxClass jsxClass = klass.getAnnotation(JsxClass.class);
+            if (jsxClass != null) {
+                final String hostClassName = className;
+                final String jsConstructor = !JsxClass.EMPTY_DEFAULT.equals(jsxClass.jsConstructor())
+                        ? jsxClass.jsConstructor() : null;
+                final String extendsClassName = !JsxClass.EMPTY_DEFAULT.equals(jsxClass.extend())
+                        ? jsxClass.extend() : null;
+                final String htmlClassName = jsxClass.htmlClass() != Object.class
+                        ? jsxClass.htmlClass().getName() : "";
+                final boolean jsObjectFlag = jsxClass.isJSObject();
+                final ClassConfiguration classConfiguration = new ClassConfiguration(hostClassName, jsConstructor,
+                            extendsClassName, htmlClassName, jsObjectFlag);
+                final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
+                ClassnameMap_.put(hostClassName, simpleClassName);
+                if (browser != null) {
+                    final List<String> allGetters = new ArrayList<String>();
+                    final List<String> allSetters = new ArrayList<String>();
+                    for (final Method m : classConfiguration.getHostClass().getDeclaredMethods()) {
+                        final JsxGetter jsxGetter = m.getAnnotation(JsxGetter.class);
+                        if (jsxGetter != null && isSupported(jsxGetter.value(), browser)) {
+                            final String getter = m.getName().substring("jsxGet_".length());
+                            allGetters.add(getter);
+                        }
+
+                        final JsxSetter jsxSetter = m.getAnnotation(JsxSetter.class);
+                        if (jsxSetter != null && isSupported(jsxSetter.value(), browser)) {
+                            final String setter = m.getName().substring("jsxSet_".length());
+                            allSetters.add(setter);
+                        }
+
+                        final JsxFunction jsxFunction = m.getAnnotation(JsxFunction.class);
+                        if (jsxFunction != null && isSupported(jsxFunction.value(), browser)) {
+                            final String propertyName = m.getName().substring("jsxFunction_".length());
+                            classConfiguration.addFunction(propertyName);
+                        }
+                    }
+                    for (final Field f : classConfiguration.getHostClass().getDeclaredFields()) {
+                        final JsxConstant jsxConstant = f.getAnnotation(JsxConstant.class);
+                        if (jsxConstant != null && isSupported(jsxConstant.value(), browser)) {
+                            classConfiguration.addConstant(f.getName());
+                        }
+                    }
+                    for (final String getter : allGetters) {
+                        classConfiguration.addProperty(getter, true, allSetters.contains(getter));
+                    }
+                }
+                return classConfiguration;
+            }
+        }
+        catch (final Throwable t) {
+            //ignore
+        }
+        return null;
     }
 
     /**
@@ -721,5 +796,66 @@ public final class JavaScriptConfiguration {
         htmlJavaScriptMap_ = Collections.unmodifiableMap(map);
 
         return htmlJavaScriptMap_;
+    }
+
+    /**
+     * Return the classes inside the specified package and its sub-packages.
+     * @param packageName the package name
+     * @return a list of class names
+     */
+    public static List<String> getClassesForPackage(final String packageName) {
+        final List<String> list = new ArrayList<String>();
+
+        File directory = null;
+        final String relPath = packageName.replace('.', '/') + '/' + JavaScriptEngine.class.getSimpleName() + ".class";
+
+        final URL resource = ClassLoader.getSystemClassLoader().getResource(relPath);
+
+        if (resource == null) {
+            throw new RuntimeException("No resource for " + relPath);
+        }
+        final String fullPath = resource.getFile();
+
+        try {
+            directory = new File(resource.toURI()).getParentFile();
+        }
+        catch (final URISyntaxException e) {
+            throw new RuntimeException(packageName + " (" + resource + ") does not appear to be a valid URL", e);
+        }
+        catch (final IllegalArgumentException e) {
+            directory = null;
+        }
+
+        if (directory != null && directory.exists()) {
+            addClasses(directory, packageName, list);
+        }
+        else {
+            try {
+                final String jarPath = fullPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
+                final JarFile jarFile = new JarFile(jarPath);
+                for (final Enumeration<JarEntry> entries = jarFile.entries(); entries.hasMoreElements();) {
+                    final String entryName = entries.nextElement().getName();
+                    if (entryName.startsWith(relPath) && entryName.endsWith(".class")) {
+                        list.add(entryName.replace('/', '.').replace('\\', '.').replace(".class", ""));
+                    }
+                }
+            }
+            catch (final IOException e) {
+                throw new RuntimeException(packageName + " does not appear to be a valid package", e);
+            }
+        }
+        return list;
+    }
+
+    private static void addClasses(final File directory, final String packageName, final List<String> list) {
+        for (final File file: directory.listFiles()) {
+            final String name = file.getName();
+            if (name.endsWith(".class")) {
+                list.add(packageName + '.' + name.substring(0, name.length() - 6));
+            }
+            else if (file.isDirectory() && !".svn".equals(file.getName())) {
+                addClasses(file, packageName + '.' + file.getName(), list);
+            }
+        }
     }
 }
