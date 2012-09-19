@@ -742,7 +742,9 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 "User Agent" + RandomStringUtils.randomAlphanumeric(20),
                 1);
             JavaScriptConfiguration.getInstance(browserVersion);
-            LOG.info("count: " + count + "; memory stats: " + getMemoryStats());
+            if (LOG.isInfoEnabled()) {
+                LOG.info("count: " + count + "; memory stats: " + getMemoryStats());
+            }
         }
         System.gc();
     }
