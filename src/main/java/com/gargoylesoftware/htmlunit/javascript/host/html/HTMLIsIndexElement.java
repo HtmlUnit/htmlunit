@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.html.HtmlIsIndex;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 
 /**
@@ -22,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HTMLIsIndexElement.class, extend = "HTMLElement")
+@JsxClass(htmlClass = HtmlIsIndex.class, extend = "HTMLElement")
 public class HTMLIsIndexElement extends HTMLElement {
 
     /**

@@ -73,7 +73,8 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
  */
-@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 7), @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 7), @WebBrowser(FF), @WebBrowser(CHROME) },
+        jsConstructor = "jsConstructor")
 public class XMLHttpRequest extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(XMLHttpRequest.class);
@@ -124,6 +125,13 @@ public class XMLHttpRequest extends SimpleScriptable {
         caseSensitiveProperties_ = caseSensitiveProperties;
         state_ = STATE_UNINITIALIZED;
     }
+
+    /**
+     * JavaScript constructor.     
+     */     
+    public void jsConstructor() {   
+        // Empty.   
+    }   
 
     /**
      * Returns the event handler that fires on every state change.
