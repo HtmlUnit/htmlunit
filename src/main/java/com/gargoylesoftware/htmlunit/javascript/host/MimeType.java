@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for a document.navigator.mimeTypes elements.
@@ -25,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  *
  * @see <a href="http://www.xulplanet.com/references/objref/MimeType.html">XUL Planet</a>
  */
+@JsxClass(browsers = @WebBrowser(FF))
 public final class MimeType extends SimpleScriptable {
     private String description_;
     private String suffixes_;

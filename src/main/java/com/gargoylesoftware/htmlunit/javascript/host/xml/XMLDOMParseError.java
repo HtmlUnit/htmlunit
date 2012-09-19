@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for XMLDOMParseError.
@@ -24,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(browsers = @WebBrowser(IE))
 public class XMLDOMParseError extends SimpleScriptable {
 
     private int errorCode_;

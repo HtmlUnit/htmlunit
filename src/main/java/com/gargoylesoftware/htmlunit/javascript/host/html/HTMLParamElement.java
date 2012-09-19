@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.html.HtmlParameter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+
 /**
  * The JavaScript object "HTMLParamElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlParameter.class, extend = "HTMLElement")
 public class HTMLParamElement extends HTMLElement {
 
     /**

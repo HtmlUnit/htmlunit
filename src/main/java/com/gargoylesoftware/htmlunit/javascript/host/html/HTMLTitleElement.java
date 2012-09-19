@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.HtmlTitle;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
@@ -26,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  */
+@JsxClass(htmlClass = HtmlTitle.class, extend = "HTMLElement")
 public class HTMLTitleElement extends HTMLElement {
 
     /**

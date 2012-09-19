@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
@@ -29,7 +30,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
+@JsxClass(extend = "RowContainer")
 public class HTMLTableSectionElement extends RowContainer {
+    /*    Because it is associated with many HtmlClasses, the one-to-many
+    configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */
 
     /** The valid "vAlign" values for this element, when emulating IE. */
     private static final String[] VALIGN_VALID_VALUES_IE = {"top", "bottom", "middle", "baseline"};

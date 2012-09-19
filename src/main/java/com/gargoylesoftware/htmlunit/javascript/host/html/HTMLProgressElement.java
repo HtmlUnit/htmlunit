@@ -14,12 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
+import com.gargoylesoftware.htmlunit.html.HtmlProgress;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+
 /**
  * The JavaScript object "HTMLProgressElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlProgress.class, browsers = @WebBrowser(value = FF, minVersion = 10), extend = "HTMLElement")
 public class HTMLProgressElement extends HTMLElement {
 
     /**

@@ -14,15 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for XPathResult.
@@ -30,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(browsers = @WebBrowser(FF))
 public class XPathResult extends SimpleScriptable {
 
     /**

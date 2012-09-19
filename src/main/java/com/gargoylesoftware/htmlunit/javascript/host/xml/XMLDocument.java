@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -59,6 +61,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Sudhan Moghe
  * @author Ronald Brill
  */
+@JsxClass(browsers = @WebBrowser(FF), extend = "Document")
 public class XMLDocument extends Document {
 
     private static final Log LOG = LogFactory.getLog(XMLDocument.class);

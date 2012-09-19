@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+
 /**
  * A JavaScript object for a document.navigator.plugins.
  * @version $Revision$
@@ -21,6 +23,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  *
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
  */
+@JsxClass(extend = "SimpleArray")
 public class MimeTypeArray extends SimpleArray {
 
     /**

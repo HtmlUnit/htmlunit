@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+
 /**
  * The JavaScript object "HTMLUListElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlUnorderedList.class, extend = "HTMLListElement")
 public class HTMLUListElement extends HTMLListElement {
 
     /**

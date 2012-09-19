@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -49,6 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -71,6 +73,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
  */
+@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 7), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class XMLHttpRequest extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(XMLHttpRequest.class);
@@ -120,13 +123,6 @@ public class XMLHttpRequest extends SimpleScriptable {
     public XMLHttpRequest(final boolean caseSensitiveProperties) {
         caseSensitiveProperties_ = caseSensitiveProperties;
         state_ = STATE_UNINITIALIZED;
-    }
-
-    /**
-     * JavaScript constructor.
-     */
-    public void jsConstructor() {
-        // Empty.
     }
 
     /**

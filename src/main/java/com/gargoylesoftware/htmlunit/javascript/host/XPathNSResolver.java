@@ -14,9 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
@@ -25,6 +29,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(browsers = @WebBrowser(FF))
 public class XPathNSResolver extends SimpleScriptable {
 
     private Object element_;

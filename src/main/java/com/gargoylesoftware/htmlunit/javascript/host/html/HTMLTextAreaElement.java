@@ -22,6 +22,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -39,6 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
+@JsxClass(htmlClass = HtmlTextArea.class, extend = "FormField")
 public class HTMLTextAreaElement extends FormField {
 
     private static final Pattern NORMALIZE_VALUE_PATTERN = Pattern.compile("([^\\r])\\n");

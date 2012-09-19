@@ -14,8 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * JavaScript object representing the HashChangeEvent.
@@ -26,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @version $Revision$
  * @author Ronald Brill
  */
+@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) }, extend = "UIEvent")
 public class HashChangeEvent extends UIEvent {
 
     private Object oldURL_;

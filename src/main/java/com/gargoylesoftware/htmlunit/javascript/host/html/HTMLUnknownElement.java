@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -25,6 +27,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlUnknownElement.class, extend = "HTMLElement")
 public class HTMLUnknownElement extends HTMLElement {
 
     /**

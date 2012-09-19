@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -40,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlSelect.class, extend = "FormField")
 public class HTMLSelectElement extends FormField {
 
     private HTMLOptionsCollection optionsArray_;
@@ -48,13 +50,6 @@ public class HTMLSelectElement extends FormField {
      * Creates an instance.
      */
     public HTMLSelectElement() {
-    }
-
-    /**
-     * JavaScript constructor. This must be declared in every JavaScript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    public void jsConstructor() {
     }
 
     /**

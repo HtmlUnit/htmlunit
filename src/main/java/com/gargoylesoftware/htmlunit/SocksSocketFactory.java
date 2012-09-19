@@ -20,6 +20,7 @@ import java.net.Socket;
 
 import org.apache.http.HttpHost;
 import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.SchemeSocketFactory;
 import org.apache.http.params.HttpParams;
 
 /**

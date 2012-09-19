@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -38,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlTableRow.class, extend = "HTMLTableComponent")
 public class HTMLTableRowElement extends HTMLTableComponent {
 
     private HTMLCollection cells_; // has to be a member to have equality (==) working

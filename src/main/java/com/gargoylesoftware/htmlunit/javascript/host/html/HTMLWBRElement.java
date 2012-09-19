@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.html.HtmlWordBreak;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+
 /**
  * A JavaScript object for {@link com.gargoylesoftware.htmlunit.html.HtmlWordBreak}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlWordBreak.class, extend = "HTMLElement")
 public class HTMLWBRElement extends HTMLElement {
 
     /**

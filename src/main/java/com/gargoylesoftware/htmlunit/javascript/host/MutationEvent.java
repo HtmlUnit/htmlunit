@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+
 /**
  * JavaScript object representing a Mutation Event.
  * For general information on which properties and functions should be supported, see
@@ -23,6 +25,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(extend = "Event")
 public class MutationEvent extends Event {
 
 }

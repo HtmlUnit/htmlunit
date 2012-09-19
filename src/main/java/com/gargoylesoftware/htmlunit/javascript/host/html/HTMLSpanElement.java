@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSuperscript;
 import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 
 /**
@@ -54,7 +55,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
+@JsxClass(extend = "HTMLElement")
 public class HTMLSpanElement extends HTMLElement {
+    /*    Because it is associated with many HtmlClasses, the one-to-many
+    configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */
 
     /**
      * Creates an instance.

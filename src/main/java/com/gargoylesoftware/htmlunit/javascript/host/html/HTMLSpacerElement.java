@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.html.HtmlSpacer;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+
 /**
  * The JavaScript object "HTMLSpacerElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlSpacer.class, extend = "HTMLElement")
 public class HTMLSpacerElement extends HTMLElement {
 
     /**

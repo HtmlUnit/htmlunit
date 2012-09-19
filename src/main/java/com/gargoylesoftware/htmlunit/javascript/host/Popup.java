@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.History;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -25,8 +27,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 /**
@@ -38,6 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  * @author Ahmed Ashour
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535882.aspx">MSDN documentation</a>
  */
+@JsxClass(browsers = @WebBrowser(IE))
 public class Popup extends SimpleScriptable {
 
     private boolean opened_;

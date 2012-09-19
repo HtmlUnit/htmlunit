@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +27,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 /**
@@ -35,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  * @version $Revision$
  * @author Daniel Gredler
  */
+@JsxClass(browsers = @WebBrowser(IE))
 public class NamespaceCollection extends SimpleScriptable implements Function {
 
     /** The HTML document to which this namespace collection belongs. */
