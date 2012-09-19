@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -66,6 +67,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
+@JsxClass
 public class Node extends SimpleScriptable {
 
     /** "Live" child nodes collection; has to be a member to have equality (==) working. */

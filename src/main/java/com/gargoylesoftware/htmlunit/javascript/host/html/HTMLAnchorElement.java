@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -44,6 +45,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Sudhan Moghe
  * @author Daniel Gredler
  */
+@JsxClass(htmlClass = HtmlAnchor.class, extend = "HTMLElement")
 public class HTMLAnchorElement extends HTMLElement {
 
     /**

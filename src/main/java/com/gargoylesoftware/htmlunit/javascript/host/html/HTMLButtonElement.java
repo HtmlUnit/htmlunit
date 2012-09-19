@@ -22,6 +22,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -36,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlButton.class, extend = "FormField")
 public class HTMLButtonElement extends FormField {
 
     /**

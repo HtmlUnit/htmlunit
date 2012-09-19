@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.html.HtmlHead;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+
 /**
  * The JavaScript object "HTMLHeadElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlHead.class, extend = "HTMLElement")
 public class HTMLHeadElement extends HTMLElement {
 
     /**

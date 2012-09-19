@@ -18,6 +18,7 @@ import java.net.MalformedURLException;
 
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
@@ -28,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlLink.class, extend = "HTMLElement")
 public class HTMLLinkElement extends HTMLElement {
 
     /**

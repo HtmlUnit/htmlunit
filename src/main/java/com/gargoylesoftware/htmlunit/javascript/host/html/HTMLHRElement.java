@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.html.HtmlHorizontalRule;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+
 /**
  * The JavaScript object "HTMLHRElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlHorizontalRule.class, extend = "HTMLElement")
 public class HTMLHRElement extends HTMLElement {
 
     /**

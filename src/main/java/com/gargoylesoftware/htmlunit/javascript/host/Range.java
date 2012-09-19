@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -45,6 +46,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
  * @author Daniel Gredler
  * @author James Phillpotts
  */
+@JsxClass
 public class Range extends SimpleScriptable {
     private Node startContainer_, endContainer_;
     private int startOffset_, endOffset_;

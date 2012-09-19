@@ -16,196 +16,6 @@
         url="http://msdn.microsoft.com/en-us/library/ms533050.aspx"
         descr="HTML and DHTML Reference on MSDN"/>
 
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.External" JSObject="true">
-        <doclink url="http://msdn.microsoft.com/en-us/library/ms535246.aspx" descr="MSDN Documentation"/>
-        <browser name="Internet Explorer"/>
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation" JSObject="true">
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.History"
-        JSObject="true">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAnchor">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAppletElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlApplet">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAreaElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlArea">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAudioElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlAudio">
-        <browser name="Firefox"/>
-        <browser name="Chrome"/>
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBase">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBaseFont">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBody">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBRElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlBreak">
-    </class>
-
-    <class extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlButton">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlCanvas">
-        <browser name="Firefox"/>
-        <browser name="Chrome"/>
-    </class>
-
-    <class extends="NodeList" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection"
-        JSObject="true">
-    </class>
-
-    <class extends="HTMLCollection" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollectionTags"
-        JSObject="true">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDelElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDeletedText">
-    </class>
-
-    <class extends="HTMLListElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDirectoryElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDirectory">
-    </class>
-
-    <!--
-        Because it is associated with many HtmlClasses, the one-to-many
-        configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement"
-        JSObject="true">
-    </class>
-
-    <class extends="HTMLListElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDListElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlDefinitionList">
-    </class>
-
-    <class extends="Document" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument"
-        JSObject="true">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLEmbedElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlEmbed">
-    </class>
-
-    <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFieldSetElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFieldSet">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFontElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFont">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlForm">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrame">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlFrameSet">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHead">
-    </class>
-
-    <!--
-        Because it is associated with two HtmlClasses, the one-to-many
-        configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() -->
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadingElement"
-        JSObject="true">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHRElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHorizontalRule">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlHtml">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInlineFrame">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement"
-        jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlImage">
-    </class>
-
-    <class extends="FormField" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInput">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInsElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlInsertedText">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIsIndexElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlIsIndex">
-    </class>
-
-    <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLabel">
-    </class>
-
-    <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLegend">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlListItem">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlLink">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMap">
-    </class>
-
-    <class extends="HTMLListElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMenu">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlMeta">
-    </class>
-
-    <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlObject">
-    </class>
-
-    <class extends="HTMLListElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOListElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOrderedList">
-    </class>
-
-    <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptGroupElement"
-        JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOptionGroup">
-    </class>
-
     <class extends="FormChild" classname="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement"
         jsConstructor="jsConstructor" JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlOption">
     </class>
@@ -317,23 +127,9 @@
         JSObject="true" htmlClass="com.gargoylesoftware.htmlunit.html.HtmlWordBreak">
     </class>
 
-    <class extends="UIEvent" classname="com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent" JSObject="true">
-    </class>
-
     <class extends="UIEvent" classname="com.gargoylesoftware.htmlunit.javascript.host.HashChangeEvent" JSObject="true">
         <browser name="Internet Explorer" min-version="8"/>
         <browser name="Firefox"/>
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.Location"
-        JSObject="true">
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.MediaList"
-        JSObject="true">
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.MessageEvent" JSObject="true">
     </class>
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.MimeType"
@@ -363,19 +159,6 @@
         <browser name="Internet Explorer"/>
     </class>
 
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.Navigator"
-        JSObject="true">
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.Node" JSObject="true">
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.NodeFilter" JSObject="true">
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.NodeList" JSObject="true">
-    </class>
-
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.OfflineResourceList"
         JSObject="true">
         <browser name="Firefox"/>
@@ -403,29 +186,8 @@
         <browser name="Firefox" min-version="10"/>
     </class>
 
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.geo.Position" JSObject="true">
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.Range" JSObject="true">
-    </class>
-
     <class extends="HTMLElement" classname="com.gargoylesoftware.htmlunit.javascript.host.RowContainer"
         JSObject="true">
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.Screen" JSObject="true">
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.Selection" JSObject="true">
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.StaticNodeList" JSObject="true">
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.Storage" JSObject="true">
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList" JSObject="true">
     </class>
 
     <class extends="CharacterDataImpl" classname="com.gargoylesoftware.htmlunit.javascript.host.Text"
@@ -434,9 +196,6 @@
 
     <class classname="com.gargoylesoftware.htmlunit.javascript.host.TextRange" JSObject="true">
         <browser name="Internet Explorer"/>
-    </class>
-
-    <class classname="com.gargoylesoftware.htmlunit.javascript.host.TreeWalker" JSObject="true">
     </class>
 
     <class extends="Event" classname="com.gargoylesoftware.htmlunit.javascript.host.UIEvent" JSObject="true">

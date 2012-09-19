@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.NodeList;
@@ -50,6 +51,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
+@JsxClass(extend = "NodeList")
 public class HTMLCollection extends NodeList {
 
     /**

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
@@ -24,7 +25,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
+@JsxClass(extend = "HTMLElement")
 public class HTMLDivElement extends HTMLElement {
+/*    Because it is associated with many HtmlClasses, the one-to-many
+    configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */
 
     /**
      * Creates an instance.

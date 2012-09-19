@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 
 /**
@@ -25,6 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
  * @version $Revision$
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  */
+@JsxClass
 public class NodeFilter extends SimpleScriptable {
     // Constants returned by acceptNode
     /**

@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+
 /**
  * A JavaScript object for {@link com.gargoylesoftware.htmlunit.html.HtmlEmbed}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlEmbed.class, extend = "HTMLElement")
 public class HTMLEmbedElement extends HTMLElement {
 
     /**

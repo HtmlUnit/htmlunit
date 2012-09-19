@@ -79,6 +79,7 @@ import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -124,6 +125,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-7068919">
  * W3C DOM Level 1</a>
  */
+@JsxClass(extend = "Document")
 public class HTMLDocument extends Document implements ScriptableWithFallbackGetter {
 
     private static final Log LOG = LogFactory.getLog(HTMLDocument.class);

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 
 /**
  * An array of elements. It is very similar to {@link HTMLCollection}, but with 'tags' property for Firefox.
@@ -23,6 +24,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
+@JsxClass(extend = "HTMLCollection")
 public class HTMLCollectionTags extends HTMLCollection {
 
     /**

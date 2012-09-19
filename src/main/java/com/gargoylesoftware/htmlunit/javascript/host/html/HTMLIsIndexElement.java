@@ -14,12 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+
 /**
  * The JavaScript object "HTMLIsIndexElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HTMLIsIndexElement.class, extend = "HTMLElement")
 public class HTMLIsIndexElement extends HTMLElement {
 
     /**

@@ -19,6 +19,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -32,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlInlineFrame.class, jsConstructor = "jsConstructor", extend = "HTMLElement")
 public class HTMLIFrameElement extends HTMLElement {
 
     /**

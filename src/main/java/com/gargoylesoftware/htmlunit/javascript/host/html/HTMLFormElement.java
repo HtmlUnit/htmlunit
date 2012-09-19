@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -66,6 +67,7 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535249.aspx">MSDN documentation</a>
  */
+@JsxClass(htmlClass = HtmlForm.class, extend = "HTMLElement")
 public class HTMLFormElement extends HTMLElement implements Function {
 
     private HTMLCollection elements_; // has to be a member to have equality (==) working

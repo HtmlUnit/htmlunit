@@ -21,6 +21,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
@@ -30,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass
 public class StaticNodeList extends SimpleScriptable {
 
     private final List<Node> elements_;

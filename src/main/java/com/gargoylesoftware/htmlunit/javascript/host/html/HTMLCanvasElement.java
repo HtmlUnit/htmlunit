@@ -14,9 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
+import com.gargoylesoftware.htmlunit.html.HtmlCanvas;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
 
 /**
@@ -25,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingConte
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlCanvas.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) }, extend = "HTMLElement")
 public class HTMLCanvasElement extends HTMLElement {
 
     /**

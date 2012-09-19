@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 /**
@@ -25,6 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass
 public class MessageEvent extends SimpleScriptable {
 
     private Object data_;

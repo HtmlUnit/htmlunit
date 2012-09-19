@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.InputElementFactory;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -44,20 +45,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
+@JsxClass(htmlClass = HtmlInput.class, extend = "FormField")
 public class HTMLInputElement extends FormField {
 
     /**
      * Creates an instance.
      */
     public HTMLInputElement() {
-        // Empty.
-    }
-
-    /**
-     * JavaScript constructor. This must be declared in every JavaScript file
-     * because the rhino engine won't walk up the hierarchy looking for constructors.
-     */
-    public void jsConstructor() {
         // Empty.
     }
 

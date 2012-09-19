@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A dummy implementation of a JavaScript object for External.
@@ -23,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
  * @version $Revision$
  * @author Peter Faller
  */
+@JsxClass(browsers = @WebBrowser(IE))
 public class External extends SimpleScriptable {
 
     /**

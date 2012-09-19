@@ -19,6 +19,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.html.HtmlBreak;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
@@ -28,6 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = HtmlBreak.class, extend = "HTMLElement")
 public class HTMLBRElement extends HTMLElement {
 
     /** Valid values for the {@link #jsxGet_clear() clear} property. */

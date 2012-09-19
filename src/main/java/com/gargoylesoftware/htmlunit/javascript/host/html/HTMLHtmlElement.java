@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.html.HtmlHtml;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 
 /**
  * The JavaScript object "HTMLHtmlElement".
@@ -23,6 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
+@JsxClass(htmlClass = HtmlHtml.class, extend = "HTMLElement")
 public class HTMLHtmlElement extends HTMLElement {
 
     /**
