@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -45,6 +46,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author Marc Guillemot
  * @author Sudhan Moghe
  */
+@JsxClass(extend = "EventNode", htmlClass = DomElement.class)
 public class Element extends EventNode {
 
     private NamedNodeMap attributes_;

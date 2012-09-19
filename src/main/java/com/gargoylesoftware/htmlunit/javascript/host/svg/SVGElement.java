@@ -14,7 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.svg.SvgElement;
 
 /**
  * A JavaScript object for SVGElement.
@@ -22,6 +29,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = SvgElement.class, extend = "Element",
+    browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGElement extends Element {
 
     /**

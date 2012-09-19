@@ -14,12 +14,22 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.svg.SvgFeSpecularLighting;
+
 /**
  * A JavaScript object for SVGFESpecularLightingElement.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = SvgFeSpecularLighting.class, extend = "SVGElement",
+    browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFESpecularLightingElement extends SVGElement {
 
     /**

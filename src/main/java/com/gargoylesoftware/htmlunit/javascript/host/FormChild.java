@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
@@ -25,6 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
  * @version $Revision$
  * @author Daniel Gredler
  */
+@JsxClass(isJSObject = false, extend = "HTMLElement")
 public class FormChild extends HTMLElement {
 
     /**

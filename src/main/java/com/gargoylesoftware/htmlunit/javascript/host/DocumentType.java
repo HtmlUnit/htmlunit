@@ -22,6 +22,7 @@ import org.w3c.dom.NamedNodeMap;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -33,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms762752.aspx">MSDN documentation</a>
  * @see <a href="http://www.xulplanet.com/references/objref/DocumentType.html">XUL Planet</a>
  */
+@JsxClass(extend = "Node", htmlClass = DomDocumentType.class)
 public class DocumentType extends Node {
 
     /**

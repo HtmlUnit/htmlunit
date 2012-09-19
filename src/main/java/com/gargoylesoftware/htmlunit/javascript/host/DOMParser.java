@@ -14,8 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 
 /**
@@ -26,6 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
  *
  * @see <a href="http://www.xulplanet.com/references/objref/DOMParser.html">XUL Planet</a>
  */
+@JsxClass(browsers = @WebBrowser(FF), jsConstructor = "jsConstructor")
 public class DOMParser extends SimpleScriptable {
 
     /**

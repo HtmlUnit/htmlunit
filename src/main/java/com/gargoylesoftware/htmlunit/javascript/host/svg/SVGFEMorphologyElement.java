@@ -14,12 +14,22 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.svg.SvgFeMorphology;
+
 /**
  * A JavaScript object for SVGFEMorphologyElement.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(htmlClass = SvgFeMorphology.class, extend = "SVGElement",
+    browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEMorphologyElement extends SVGElement {
 
     /**
