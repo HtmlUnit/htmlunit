@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -74,6 +75,7 @@ import com.steadystate.css.parser.SACParserCSS21;
  * @author Sudhan Moghe
  * @author Ronald Brill
  */
+@JsxClass
 public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableWithFallbackGetter {
     /** Css important property constant. */
     protected static final String PRIORITY_IMPORTANT = "important";

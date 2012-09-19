@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import com.gargoylesoftware.htmlunit.html.DomCDataSection;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+
 /**
  * A JavaScript object for CDATASection.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass(extend = "Text", htmlClass = DomCDataSection.class)
 public final class CDATASection extends Text {
 
     /**

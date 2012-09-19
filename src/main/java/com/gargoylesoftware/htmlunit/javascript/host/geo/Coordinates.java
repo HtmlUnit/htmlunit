@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 /**
@@ -23,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
+@JsxClass
 public class Coordinates extends SimpleScriptable {
 
     private double latitude_;

@@ -76,6 +76,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -101,6 +102,7 @@ import com.steadystate.css.parser.selectors.PseudoClassConditionImpl;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
+@JsxClass
 public class CSSStyleSheet extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);

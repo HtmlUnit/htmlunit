@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Ahmed Ashour
  */
-@JsxClass(isJSObject = true, jsConstructor = "jsConstructor", browsers = @WebBrowser(IE))
+@JsxClass(jsConstructor = "jsConstructor", browsers = @WebBrowser(IE))
 public class ActiveXObject extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(ActiveXObject.class);

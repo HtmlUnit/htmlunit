@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -24,6 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @version $Revision$
  * @author Daniel Gredler
  */
+@JsxClass(extend = "CSSRule")
 public class CSSImportRule extends CSSRule {
 
     private MediaList media_;

@@ -18,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
@@ -29,6 +30,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
+@JsxClass(extend = "CSSRule")
 public class CSSStyleRule extends CSSRule {
     private static final Pattern SELECTOR_PARTS_PATTERN = Pattern.compile("[\\.#]?[a-zA-Z]+");
     private static final Pattern SELECTOR_REPLACE_PATTERN = Pattern.compile("\\*([\\.#])");
