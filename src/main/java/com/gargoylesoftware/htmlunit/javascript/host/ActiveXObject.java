@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import java.lang.reflect.Method;
 import java.util.Map;
 
@@ -31,6 +33,8 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
 
@@ -45,6 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Ahmed Ashour
  */
+@JsxClass(isJSObject = true, jsConstructor = "jsConstructor", browsers = @WebBrowser(IE))
 public class ActiveXObject extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(ActiveXObject.class);

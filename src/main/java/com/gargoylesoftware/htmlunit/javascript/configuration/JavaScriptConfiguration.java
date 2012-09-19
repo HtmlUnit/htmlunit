@@ -374,22 +374,25 @@ public final class JavaScriptConfiguration {
 
     private ClassConfiguration processClass(final String className, final BrowserVersion browser) {
         try {
-            final Class<?> klass = Class.forName(className);
-            final JsxClass jsxClass = klass.getAnnotation(JsxClass.class);
-            if (jsxClass != null) {
-                final String hostClassName = className;
-                final String jsConstructor = !JsxClass.EMPTY_DEFAULT.equals(jsxClass.jsConstructor())
-                        ? jsxClass.jsConstructor() : null;
-                final String extendsClassName = !JsxClass.EMPTY_DEFAULT.equals(jsxClass.extend())
-                        ? jsxClass.extend() : null;
-                final String htmlClassName = jsxClass.htmlClass() != Object.class
-                        ? jsxClass.htmlClass().getName() : "";
-                final boolean jsObjectFlag = jsxClass.isJSObject();
-                final ClassConfiguration classConfiguration = new ClassConfiguration(hostClassName, jsConstructor,
+            if (browser != null) {
+                final JsxClass jsxClass = Class.forName(className).getAnnotation(JsxClass.class);
+                if (jsxClass != null && isSupported(jsxClass.browsers(), browser)) {
+                    final String hostClassName = className;
+                    final String jsConstructor = !JsxClass.EMPTY_DEFAULT.equals(jsxClass.jsConstructor())
+                            ? jsxClass.jsConstructor() : "";
+
+                    final String extendsClassName = !JsxClass.EMPTY_DEFAULT.equals(jsxClass.extend())
+                            ? jsxClass.extend() : "";
+
+                    final String htmlClassName = jsxClass.htmlClass() != Object.class
+                            ? jsxClass.htmlClass().getName() : "";
+
+                    final boolean jsObjectFlag = jsxClass.isJSObject();
+                    final ClassConfiguration classConfiguration = new ClassConfiguration(hostClassName, jsConstructor,
                             extendsClassName, htmlClassName, jsObjectFlag);
-                final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
-                ClassnameMap_.put(hostClassName, simpleClassName);
-                if (browser != null) {
+
+                    final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
+                    ClassnameMap_.put(hostClassName, simpleClassName);
                     final List<String> allGetters = new ArrayList<String>();
                     final List<String> allSetters = new ArrayList<String>();
                     for (final Method m : classConfiguration.getHostClass().getDeclaredMethods()) {
@@ -420,8 +423,8 @@ public final class JavaScriptConfiguration {
                     for (final String getter : allGetters) {
                         classConfiguration.addProperty(getter, true, allSetters.contains(getter));
                     }
+                    return classConfiguration;
                 }
-                return classConfiguration;
             }
         }
         catch (final Throwable t) {

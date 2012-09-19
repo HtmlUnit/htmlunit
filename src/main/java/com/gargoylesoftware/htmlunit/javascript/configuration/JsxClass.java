@@ -43,7 +43,7 @@ public @interface JsxClass {
     Class<?> htmlClass() default Object.class;
 
     /** Is JavaScript Object. */
-    boolean isJSObject() default false;
+    boolean isJSObject() default true;
 
     /** Extend (should be deducted from the super class). */
     String extend() default EMPTY_DEFAULT;
