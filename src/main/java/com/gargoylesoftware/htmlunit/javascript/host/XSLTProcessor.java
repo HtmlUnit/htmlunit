@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -56,7 +57,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(jsConstructor = "jsConstructor")
+@JsxClass
 public class XSLTProcessor extends SimpleScriptable {
 
     private Node style_;
@@ -67,6 +68,7 @@ public class XSLTProcessor extends SimpleScriptable {
     /**
      * JavaScript constructor.
      */
+    @JsxConstructor
     public void jsConstructor() {
         // Empty
     }

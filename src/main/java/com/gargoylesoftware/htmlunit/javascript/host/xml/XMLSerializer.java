@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.*;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Document;
@@ -43,7 +44,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Darrell DeBoer
  * @author Ronald Brill
  */
-@JsxClass(browsers = @WebBrowser(FF), jsConstructor = "jsConstructor")
+@JsxClass(browsers = @WebBrowser(FF))
 public class XMLSerializer extends SimpleScriptable {
 
     // this is a bit strange but it is the way FF works
@@ -93,6 +94,7 @@ public class XMLSerializer extends SimpleScriptable {
     /**
      * JavaScript constructor.
      */
+    @JsxConstructor
     public void jsConstructor() {
         // Empty.
     }

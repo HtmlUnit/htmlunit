@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -46,7 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @see <a href="https://developer.mozilla.org/en/WebSockets/WebSockets_reference/WebSocket">Mozilla documentation</a>
  */
-@JsxClass(browsers = @WebBrowser(FF), jsConstructor = "jsConstructor")
+@JsxClass(browsers = @WebBrowser(FF))
 public class WebSocket extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(WebSocket.class);
@@ -107,6 +108,7 @@ public class WebSocket extends SimpleScriptable {
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
+    @JsxConstructor
     public static Scriptable jsConstructor(
             final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {

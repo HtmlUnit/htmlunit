@@ -32,8 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Ahmed Ashour
  */
 public final class ClassConfiguration {
-    private static final String GETTER_PREFIX = "jsxGet_";
-    private static final String SETTER_PREFIX = "jsxSet_";
     private static final String FUNCTION_PREFIX = "jsxFunction_";
 
     private Map<String, PropertyInfo> propertyMap_ = new HashMap<String, PropertyInfo>();
@@ -44,7 +42,7 @@ public final class ClassConfiguration {
     /**
      * The constructor method in the {@link #hostClass_}
      */
-    private final Method jsConstructor_;
+    private Method jsConstructor_;
     private final String htmlClassName_;
     private final boolean jsObject_;
 
@@ -52,13 +50,12 @@ public final class ClassConfiguration {
      * Constructor.
      *
      * @param hostClass - the class implementing this functionality
-     * @param jsConstructor the constructor of method <code>implementingClass</code>
      * @param htmlClassName the name of the HTML class that this object supports
      * @param jsObject boolean flag for if this object is a JavaScript object
      * @throws ClassNotFoundException - if the implementing class is not found
      */
-    public ClassConfiguration(final Class<? extends SimpleScriptable> hostClass, final String jsConstructor,
-        final String htmlClassName, final boolean jsObject)
+    public ClassConfiguration(final Class<? extends SimpleScriptable> hostClass, final String htmlClassName,
+            final boolean jsObject)
         throws ClassNotFoundException {
         final Class<?> superClass = hostClass.getSuperclass();
         if (superClass != SimpleScriptable.class) {
@@ -68,23 +65,6 @@ public final class ClassConfiguration {
             extendedClassName_ = "";
         }
         hostClass_ = hostClass;
-        if (jsConstructor != null && !jsConstructor.isEmpty()) {
-            Method foundCtor = null;
-            for (final Method method : hostClass_.getMethods()) {
-                if (method.getName().equals(jsConstructor)) {
-                    foundCtor = method;
-                    break;
-                }
-            }
-            if (foundCtor == null) {
-                throw new IllegalStateException("Constructor method \"" + jsConstructor
-                        + "\" in class \"" + hostClass.getName() + " is not found.");
-            }
-            jsConstructor_ = foundCtor;
-        }
-        else {
-            jsConstructor_ = null;
-        }
         jsObject_ = jsObject;
         if (htmlClassName != null && !htmlClassName.isEmpty()) {
             htmlClassName_ = htmlClassName;
@@ -94,39 +74,26 @@ public final class ClassConfiguration {
         }
     }
 
+    void setJSConstructor(final Method jsConstructor) {
+        if (jsConstructor_ != null) {
+            throw new IllegalStateException("Can not have two constructors.");
+        }
+        jsConstructor_ = jsConstructor;
+    }
+
     /**
      * Add the property to the configuration.
      * @param name name of the property
-     * @param readable flag for if the property is readable
-     * @param writable flag for if the property is writable
+     * @param getter the getter method
+     * @param setter the setter method
      */
-    public void addProperty(final String name, final boolean readable, final boolean writable) {
+    public void addProperty(final String name, final Method getter, final Method setter) {
         final PropertyInfo info = new PropertyInfo();
-        info.setReadable(readable);
-        info.setWritable(writable);
-        try {
-            if (readable) {
-                info.setReadMethod(hostClass_.getMethod(GETTER_PREFIX + name, (Class []) null));
-            }
+        if (getter != null) {
+            info.setReadMethod(getter);
         }
-        catch (final NoSuchMethodException e) {
-            throw new IllegalStateException("Method '" + GETTER_PREFIX + name + "' was not found for "
-                + name + " property in " + hostClass_.getName());
-        }
-        // For the setters, we have to loop through the methods since we do not know what type of argument
-        // the method takes.
-        if (writable) {
-            final String setMethodName = SETTER_PREFIX + name;
-            for (final Method method : hostClass_.getMethods()) {
-                if (method.getName().equals(setMethodName) && method.getParameterTypes().length == 1) {
-                    info.setWriteMethod(method);
-                    break;
-                }
-            }
-            if (info.getWriteMethod() == null) {
-                throw new IllegalStateException("Method '" + SETTER_PREFIX + name + "' was not found for " + name
-                    + " property in " + hostClass_.getName());
-            }
+        if (setter != null) {
+            info.setWriteMethod(setter);
         }
         propertyMap_.put(name, info);
     }
@@ -165,21 +132,13 @@ public final class ClassConfiguration {
 
     /**
      * Add the function to the configuration.
-     * @param name - Name of the function
+     * @param method the method
      */
-    public void addFunction(final String name) {
+    public void addFunction(final Method method) {
         final FunctionInfo info = new FunctionInfo();
-        final String setMethodName = FUNCTION_PREFIX + name;
-        for (final Method method : hostClass_.getMethods()) {
-            if (method.getName().equals(setMethodName)) {
-                info.setFunctionMethod(method);
-                break;
-            }
-        }
-        if (info.getFunctionMethod() == null) {
-            throw new IllegalStateException("Method '" + FUNCTION_PREFIX + name + "' was not found for " + name
-                + " function in " + hostClass_.getName());
-        }
+        info.setFunctionMethod(method);
+        String name = method.getName();
+        name = name.substring(FUNCTION_PREFIX.length());
         functionMap_.put(name, info);
     }
 
@@ -345,8 +304,6 @@ public final class ClassConfiguration {
      * methods that implement the get and set functions.
      */
     protected static class PropertyInfo {
-        private boolean readable_ = false;
-        private boolean writable_ = false;
         private boolean hasBrowsers_ = false;
         private Map<String, BrowserInfo> browserMap_;
         private Method readMethod_;
@@ -415,22 +372,8 @@ public final class ClassConfiguration {
                 }
 
             }
-            return (readable_ == info.readable_)
-                && (writable_ == info.writable_);
-        }
-
-        /**
-         * @param readable the readable to set
-         */
-        private void setReadable(final boolean readable) {
-            readable_ = readable;
-        }
-
-        /**
-         * @param writable the writable to set
-         */
-        private void setWritable(final boolean writable) {
-            writable_ = writable;
+            return ((readMethod_ == null) == (info.readMethod_ == null))
+                    && ((writeMethod_ == null) == (info.writeMethod_ == null));
         }
     }
 

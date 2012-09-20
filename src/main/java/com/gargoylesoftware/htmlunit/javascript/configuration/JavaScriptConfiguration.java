@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
@@ -187,39 +188,42 @@ public final class JavaScriptConfiguration {
                     final JsxClass jsxClass = klass.getAnnotation(JsxClass.class);
                     if (jsxClass != null && isSupported(jsxClass.browsers(), browser)) {
                         final String hostClassName = className;
-                        final String jsConstructor = !JsxClass.EMPTY_DEFAULT.equals(jsxClass.jsConstructor())
-                                ? jsxClass.jsConstructor() : "";
 
                         final String htmlClassName = jsxClass.htmlClass() != Object.class
                                 ? jsxClass.htmlClass().getName() : "";
 
                         final boolean jsObjectFlag = jsxClass.isJSObject();
                         @SuppressWarnings("unchecked")
-                        final ClassConfiguration classConfiguration =
-                            new ClassConfiguration((Class<? extends SimpleScriptable>) klass, jsConstructor,
+                        final ClassConfiguration classConfiguration = new ClassConfiguration(
+                                (Class<? extends SimpleScriptable>) klass,
                                 htmlClassName, jsObjectFlag);
 
                         final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
                         ClassnameMap_.put(hostClassName, simpleClassName);
-                        final List<String> allGetters = new ArrayList<String>();
-                        final List<String> allSetters = new ArrayList<String>();
+                        final Map<String, Method> allGetters = new HashMap<String, Method>();
+                        final Map<String, Method> allSetters = new HashMap<String, Method>();
                         for (final Method m : classConfiguration.getHostClass().getDeclaredMethods()) {
-                            final JsxGetter jsxGetter = m.getAnnotation(JsxGetter.class);
-                            if (jsxGetter != null && isSupported(jsxGetter.value(), browser)) {
-                                final String getter = m.getName().substring("jsxGet_".length());
-                                allGetters.add(getter);
-                            }
-
-                            final JsxSetter jsxSetter = m.getAnnotation(JsxSetter.class);
-                            if (jsxSetter != null && isSupported(jsxSetter.value(), browser)) {
-                                final String setter = m.getName().substring("jsxSet_".length());
-                                allSetters.add(setter);
-                            }
-
-                            final JsxFunction jsxFunction = m.getAnnotation(JsxFunction.class);
-                            if (jsxFunction != null && isSupported(jsxFunction.value(), browser)) {
-                                final String propertyName = m.getName().substring("jsxFunction_".length());
-                                classConfiguration.addFunction(propertyName);
+                            for (final Annotation annotation : m.getAnnotations()) {
+                                if (annotation instanceof JsxGetter) {
+                                    if (isSupported(((JsxGetter) annotation).value(), browser)) {
+                                        final String property = m.getName().substring("jsxGet_".length());
+                                        allGetters.put(property, m);
+                                    }
+                                }
+                                else if (annotation instanceof JsxSetter) {
+                                    if (isSupported(((JsxSetter) annotation).value(), browser)) {
+                                        final String property = m.getName().substring("jsxSet_".length());
+                                        allSetters.put(property, m);
+                                    }
+                                }
+                                else if (annotation instanceof JsxFunction) {
+                                    if (isSupported(((JsxFunction) annotation).value(), browser)) {
+                                        classConfiguration.addFunction(m);
+                                    }
+                                }
+                                else if (annotation instanceof JsxConstructor) {
+                                    classConfiguration.setJSConstructor(m);
+                                }
                             }
                         }
                         for (final Field f : classConfiguration.getHostClass().getDeclaredFields()) {
@@ -228,8 +232,9 @@ public final class JavaScriptConfiguration {
                                 classConfiguration.addConstant(f.getName());
                             }
                         }
-                        for (final String getter : allGetters) {
-                            classConfiguration.addProperty(getter, true, allSetters.contains(getter));
+                        for (final String property : allGetters.keySet()) {
+                            classConfiguration.addProperty(property,
+                                    allGetters.get(property), allSetters.get(property));
                         }
                         return classConfiguration;
                     }

@@ -108,7 +108,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "<img src='foo.gif' id='anImage'/>\n"
             + "</body></html>";
 
-        System.out.println(html);
         final WebDriver driver = loadPage2(html);
         final WebElement image = driver.findElement(By.id("anImage"));
         assertEquals(URL_FIRST + "bar.gif", image.getAttribute("src"));

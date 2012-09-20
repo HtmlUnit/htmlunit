@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,14 +35,13 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void testConfigurationSimplePropertyEquality() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
+        final Class<ConfigTestClass> klass = ConfigTestClass.class;
+        final ClassConfiguration config1 = new ClassConfiguration(klass, null, true);
+        final ClassConfiguration config2 = new ClassConfiguration(klass, null, true);
 
-        config1.addProperty("test", true, true);
+        config1.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
         Assert.assertFalse("Configs should not be equal", config1.equals(config2));
-        config2.addProperty("test", true, true);
+        config2.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
         assertTrue("Configs should now be equal", config1.equals(config2));
     }
 
@@ -54,14 +51,13 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void testConfigurationSimpleFunctionEquality() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
+        final Class<ConfigTestClass> klass = ConfigTestClass.class;
+        final ClassConfiguration config1 = new ClassConfiguration(klass, null, true);
+        final ClassConfiguration config2 = new ClassConfiguration(klass, null, true);
 
-        config1.addFunction("testFunction");
+        config1.addFunction(klass.getDeclaredMethod("jsxFunction_testFunction"));
         Assert.assertFalse("Configs should not be equal", config1.equals(config2));
-        config2.addFunction("testFunction");
+        config2.addFunction(klass.getDeclaredMethod("jsxFunction_testFunction"));
         assertTrue("Configs should now be equal", config1.equals(config2));
     }
 
@@ -71,14 +67,13 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void testConfigurationSimpleUnequalProperties() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
+        final Class<ConfigTestClass> klass = ConfigTestClass.class;
+        final ClassConfiguration config1 = new ClassConfiguration(klass, null, true);
+        final ClassConfiguration config2 = new ClassConfiguration(klass, null, true);
 
-        config1.addProperty("test", true, true);
+        config1.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
         Assert.assertFalse("Configs should not be equal", config1.equals(config2));
-        config2.addProperty("test", true, false);
+        config2.addProperty("test", klass.getMethod("jsxGet_test"), null);
         Assert.assertFalse("Configs should not be equal due to different property values", config1.equals(config2));
     }
 
@@ -87,8 +82,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void testForJSFlagTrue() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
+        final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class, null, true);
         assertTrue("JSObject Flag should have been set", config1.isJsObject());
     }
 
@@ -97,8 +91,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void testForJSFlagFalse() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, false);
+        final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class, null, false);
         Assert.assertFalse("JSObject Flag should not have been set", config1.isJsObject());
     }
 
@@ -108,13 +101,12 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void testConfigurationPropertyEqualityWithBrowser() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
+        final Class<ConfigTestClass> klass = ConfigTestClass.class;
+        final ClassConfiguration config1 = new ClassConfiguration(klass, null, true);
+        final ClassConfiguration config2 = new ClassConfiguration(klass, null, true);
 
-        config1.addProperty("test", true, true);
-        config2.addProperty("test", true, true);
+        config1.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
+        config2.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
         config1.setBrowser("test", "Netscape");
         Assert.assertFalse("Should not be equal with browser added", config1.equals(config2));
         config2.setBrowser("test", "Netscape");
@@ -127,51 +119,16 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void testConfigurationPropertyEqualityWithDifferentBrowsers() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
+        final Class<ConfigTestClass> klass = ConfigTestClass.class;
+        final ClassConfiguration config1 = new ClassConfiguration(klass, null, true);
+        final ClassConfiguration config2 = new ClassConfiguration(klass, null, true);
 
-        config1.addProperty("test", true, true);
-        config2.addProperty("test", true, true);
+        config1.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
+        config2.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
         config1.setBrowser("test", "Netscape");
         Assert.assertFalse("Should not be equal with browser added", config1.equals(config2));
         config2.setBrowser("test", "Microsoft Internet Explorer");
         Assert.assertFalse("Should be equal with different browser added", config1.equals(config2));
-    }
-
-    /**
-     * Test for throwing exception when setter method is not defined.
-     * @throws Exception - Exception on error
-     */
-    @Test
-    public void testNoSetterMethod() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
-        try {
-            config1.addProperty("getterOnly", true, true);
-            fail("Should produce an exception due to not finding the methods");
-        }
-        catch (final IllegalStateException e) {
-            assertTrue(true);
-        }
-    }
-
-    /**
-     * Test for throwing exception when setter method is not defined.
-     * @throws Exception - Exception on error
-     */
-    @Test
-    public void testNoFunctionMethod() throws Exception {
-        final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class, null, null, true);
-        try {
-            config1.addFunction("noTestFunction");
-            fail("Should produce an exception due to not finding the methods");
-        }
-        catch (final IllegalStateException e) {
-            assertTrue(true);
-        }
     }
 
     /**
@@ -203,7 +160,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
         /**
          * @param testFlag - test value
          */
-        public void jsxSet_test(final boolean testFlag) {
+        public void jsxSet_test(final Boolean testFlag) {
             test_ = testFlag;
         }
     }

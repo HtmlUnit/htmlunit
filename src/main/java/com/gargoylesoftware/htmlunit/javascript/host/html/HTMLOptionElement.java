@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
@@ -38,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlOption.class, jsConstructor = "jsConstructor")
+@JsxClass(htmlClass = HtmlOption.class)
 public class HTMLOptionElement extends FormChild {
 
     /**
@@ -56,6 +57,7 @@ public class HTMLOptionElement extends FormChild {
      * @param defaultSelected Whether the option is initially selected
      * @param selected the current selection state of the option
      */
+    @JsxConstructor
     public void jsConstructor(final String newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();

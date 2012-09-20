@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
@@ -49,7 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
  * @author <a href="mailto:bcurren@esomnie.com">Ben Curren</a>
  * @author Ahmed Ashour
  */
-@JsxClass(jsConstructor = "jsConstructor", browsers = @WebBrowser(IE))
+@JsxClass(browsers = @WebBrowser(IE))
 public class ActiveXObject extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(ActiveXObject.class);
@@ -69,6 +70,7 @@ public class ActiveXObject extends SimpleScriptable {
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
+    @JsxConstructor
     public static Scriptable jsConstructor(
             final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {

@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
@@ -46,7 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(htmlClass = HtmlImage.class, jsConstructor = "jsConstructor")
+@JsxClass(htmlClass = HtmlImage.class)
 public class HTMLImageElement extends HTMLElement {
     private static final Map<String, String> NORMALIZED_ALIGN_VALUES;
     static {
@@ -76,6 +77,7 @@ public class HTMLImageElement extends HTMLElement {
      * JavaScript constructor. This must be declared in every JavaScript file because
      * the Rhino engine won't walk up the hierarchy looking for constructors.
      */
+    @JsxConstructor
     public void jsConstructor() {
         instantiatedViaJavaScript_ = true;
         final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();

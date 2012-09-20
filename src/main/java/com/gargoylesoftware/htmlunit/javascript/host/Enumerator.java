@@ -20,6 +20,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
@@ -32,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
  * @author Ahmed Ashour
  * @see <a href="http://msdn.microsoft.com/en-us/library/6ch9zb09.aspx">MSDN Documentation</a>
  */
-@JsxClass(browsers = @WebBrowser(IE), jsConstructor = "jsConstructor")
+@JsxClass(browsers = @WebBrowser(IE))
 public class Enumerator extends SimpleScriptable {
 
     private int index_;
@@ -50,6 +51,7 @@ public class Enumerator extends SimpleScriptable {
      * JavaScript constructor.
      * @param o the object to enumerate over
      */
+    @JsxConstructor
     public void jsConstructor(final Object o) {
         if (o instanceof HTMLCollection) {
             collection_ = (HTMLCollection) o;
