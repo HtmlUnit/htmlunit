@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export JAVA_HOME=/usr/java/jdk1.6.0_33
+export JAVA_HOME=/usr/java/jdk1.6.0_35
 
 export M2_HOME=/opt/cruisecontrol/maven/apache-maven-3.0.4
 
