@@ -20,7 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.svg.SvgFeFuncGLight;
+import com.gargoylesoftware.htmlunit.svg.SvgFeFuncG;
 
 /**
  * A JavaScript object for SVGFEFuncGElement.
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeFuncGLight;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgFeFuncGLight.class,
+@JsxClass(htmlClass = SvgFeFuncG.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEFuncGElement extends SVGElement {
 

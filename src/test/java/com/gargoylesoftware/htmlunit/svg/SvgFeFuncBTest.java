@@ -27,19 +27,19 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 
 /**
- * Tests for {@link SvgFeFuncRLight}.
+ * Tests for {@link SvgFeFuncB}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class SvgFeFuncRLightTest extends WebDriverTestCase {
+public class SvgFeFuncBTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object SVGFEFuncRElement]",  IE = "[object HTMLGenericElement]")
+    @Alerts(FF = "[object SVGFEFuncBElement]", IE = "[object HTMLGenericElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -50,15 +50,15 @@ public class SvgFeFuncRLightTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
-            + "    <feFuncR id='myId'/>\n"
+            + "    <feFuncB id='myId'/>\n"
             + "  </svg>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            if ("[object SVGFEFuncRElement]".equals(getExpectedAlerts()[0])) {
-                assertTrue(SvgFeFuncRLight.class.isInstance(page.getElementById("myId")));
+            if ("[object SVGFEFuncBElement]".equals(getExpectedAlerts()[0])) {
+                assertTrue(SvgFeFuncB.class.isInstance(page.getElementById("myId")));
             }
             else {
                 assertTrue(HtmlUnknownElement.class.isInstance(page.getElementById("myId")));

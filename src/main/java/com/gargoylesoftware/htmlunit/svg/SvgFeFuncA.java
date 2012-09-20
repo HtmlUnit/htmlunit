@@ -20,15 +20,15 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 
 /**
- * Wrapper for the SVG element "feFuncB".
+ * Wrapper for the SVG element "feFuncA".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class SvgFeFuncBLight extends SvgElement {
+public class SvgFeFuncA extends SvgElement {
 
     /** The tag represented by this element. */
-    public static final String TAG_NAME = "feFuncB";
+    public static final String TAG_NAME = "feFuncA";
 
     /**
      * Creates a new instance.
@@ -38,7 +38,7 @@ public class SvgFeFuncBLight extends SvgElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    SvgFeFuncBLight(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    SvgFeFuncA(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

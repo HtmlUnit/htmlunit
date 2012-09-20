@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.html.DomAttr;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class SvgFeFuncGLight extends SvgElement {
+public class SvgFeFuncG extends SvgElement {
 
     /** The tag represented by this element. */
     public static final String TAG_NAME = "feFuncG";
@@ -38,7 +38,7 @@ public class SvgFeFuncGLight extends SvgElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    SvgFeFuncGLight(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    SvgFeFuncG(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }

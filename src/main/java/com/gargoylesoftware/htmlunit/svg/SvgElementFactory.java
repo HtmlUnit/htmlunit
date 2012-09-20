@@ -117,17 +117,17 @@ public class SvgElementFactory implements ElementFactory {
         else if (tagName.equalsIgnoreCase(SvgFeFlood.TAG_NAME)) {
             element = new SvgFeFlood(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equalsIgnoreCase(SvgFeFuncALight.TAG_NAME)) {
-            element = new SvgFeFuncALight(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equalsIgnoreCase(SvgFeFuncA.TAG_NAME)) {
+            element = new SvgFeFuncA(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equalsIgnoreCase(SvgFeFuncBLight.TAG_NAME)) {
-            element = new SvgFeFuncBLight(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equalsIgnoreCase(SvgFeFuncB.TAG_NAME)) {
+            element = new SvgFeFuncB(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equalsIgnoreCase(SvgFeFuncGLight.TAG_NAME)) {
-            element = new SvgFeFuncGLight(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equalsIgnoreCase(SvgFeFuncG.TAG_NAME)) {
+            element = new SvgFeFuncG(namespaceURI, qualifiedName, page, attributeMap);
         }
-        else if (tagName.equalsIgnoreCase(SvgFeFuncRLight.TAG_NAME)) {
-            element = new SvgFeFuncRLight(namespaceURI, qualifiedName, page, attributeMap);
+        else if (tagName.equalsIgnoreCase(SvgFeFuncR.TAG_NAME)) {
+            element = new SvgFeFuncR(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equalsIgnoreCase(SvgFeGaussianBlur.TAG_NAME)) {
             element = new SvgFeGaussianBlur(namespaceURI, qualifiedName, page, attributeMap);
