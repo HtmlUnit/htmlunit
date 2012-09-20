@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  */
-@JsxClass(htmlClass = DomAttr.class, extend = "Node")
+@JsxClass(htmlClass = DomAttr.class)
 public class Attr extends Node {
 
     /**

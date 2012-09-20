@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.svg.SvgSvg;
 
 /**
@@ -29,9 +28,9 @@ import com.gargoylesoftware.htmlunit.svg.SvgSvg;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgSvg.class, extend = "SVGElement",
+@JsxClass(htmlClass = SvgSvg.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGSVGElement extends Element {
+public class SVGSVGElement extends SVGElement {
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.

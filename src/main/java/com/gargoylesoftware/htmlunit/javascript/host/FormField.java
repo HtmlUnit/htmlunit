@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-@JsxClass(isJSObject = false, extend = "FormChild")
+@JsxClass(isJSObject = false)
 public class FormField extends FormChild {
 
     /**

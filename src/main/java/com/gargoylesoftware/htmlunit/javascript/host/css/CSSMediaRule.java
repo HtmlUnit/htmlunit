@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
  * @version $Revision$
  * @author Ronald Brill
  */
-@JsxClass(extend = "CSSRule")
+@JsxClass
 public class CSSMediaRule extends CSSRule {
 
     private MediaList media_;

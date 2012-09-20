@@ -127,11 +127,11 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     /**
-     * JavaScript constructor.     
-     */     
-    public void jsConstructor() {   
-        // Empty.   
-    }   
+     * JavaScript constructor.
+     */
+    public void jsConstructor() {
+        // Empty.
+    }
 
     /**
      * Returns the event handler that fires on every state change.

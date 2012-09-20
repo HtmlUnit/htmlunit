@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(extend = "HTMLTableComponent")
+@JsxClass
 public class HTMLTableColElement extends HTMLTableComponent {
     /*    Because it is associated with many HtmlClasses, the one-to-many
     configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */

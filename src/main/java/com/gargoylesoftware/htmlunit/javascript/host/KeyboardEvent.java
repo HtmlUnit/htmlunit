@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(extend = "UIEvent")
+@JsxClass
 public class KeyboardEvent extends UIEvent {
 
     /** Constant for DOM_VK_MULTIPLY. */

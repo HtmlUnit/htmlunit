@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Marc Guillemot
  */
-@JsxClass(extend = "CSSRule")
+@JsxClass
 public class CSSCharsetRule extends CSSRule {
 
     /**

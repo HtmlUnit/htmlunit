@@ -45,9 +45,6 @@ public @interface JsxClass {
     /** Is JavaScript Object. */
     boolean isJSObject() default true;
 
-    /** Extend (should be deducted from the super class). */
-    String extend() default EMPTY_DEFAULT;
-
     /** The {@link WebBrowser}s supported by this constant. */
     WebBrowser[] browsers() default {
         @WebBrowser(IE),

@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-@JsxClass(extend = "HTMLElement")
+@JsxClass
 public class HTMLDivElement extends HTMLElement {
 /*    Because it is associated with many HtmlClasses, the one-to-many
     configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */

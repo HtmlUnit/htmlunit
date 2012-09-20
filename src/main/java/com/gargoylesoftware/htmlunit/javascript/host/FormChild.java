@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
  * @version $Revision$
  * @author Daniel Gredler
  */
-@JsxClass(isJSObject = false, extend = "HTMLElement")
+@JsxClass(isJSObject = false)
 public class FormChild extends HTMLElement {
 
     /**

@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlSpacer.class, extend = "HTMLElement")
+@JsxClass(htmlClass = HtmlSpacer.class)
 public class HTMLSpacerElement extends HTMLElement {
 
     /**

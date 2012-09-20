@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @version $Revision$
  * @author Sudhan Moghe
  */
-@JsxClass(extend = "Attr")
+@JsxClass
 public class XMLAttr extends Attr {
 
     /**

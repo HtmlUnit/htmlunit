@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlTable.class, extend = "RowContainer")
+@JsxClass(htmlClass = HtmlTable.class)
 public class HTMLTableElement extends RowContainer {
 
     private HTMLCollection tBodies_; // has to be a member to have equality (==) working

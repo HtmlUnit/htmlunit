@@ -283,9 +283,6 @@ public class CodeStyleTest {
         processXML(new File("src/main/resources"), true);
         processXML(new File("src/assembly"), true);
         processXML(new File("src/changes"), true);
-        final String config = "src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration"
-            + "/JavaScriptConfiguration.xml";
-        vs85aspx(getLines(new File(config)), config);
     }
 
     private void processXML(final File dir, final boolean recursive) throws Exception {

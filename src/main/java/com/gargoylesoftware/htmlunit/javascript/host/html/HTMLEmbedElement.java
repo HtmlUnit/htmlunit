@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlEmbed.class, extend = "HTMLElement")
+@JsxClass(htmlClass = HtmlEmbed.class)
 public class HTMLEmbedElement extends HTMLElement {
 
     /**

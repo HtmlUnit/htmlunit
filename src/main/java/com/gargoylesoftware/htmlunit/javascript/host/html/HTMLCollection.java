@@ -51,7 +51,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-@JsxClass(extend = "NodeList")
+@JsxClass
 public class HTMLCollection extends NodeList {
 
     /**

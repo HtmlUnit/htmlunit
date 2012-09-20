@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  * @version $Revision$
  * @author Marc Guillemot
  */
-@JsxClass(extend = "CSSValue", browsers = @WebBrowser(FF))
+@JsxClass(browsers = @WebBrowser(FF))
 public class CSSPrimitiveValue extends CSSValue {
 
     /**

@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-@JsxClass(extend = "RowContainer")
+@JsxClass
 public class HTMLTableSectionElement extends RowContainer {
     /*    Because it is associated with many HtmlClasses, the one-to-many
     configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */

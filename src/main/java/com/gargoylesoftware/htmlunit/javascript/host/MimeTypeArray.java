@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  *
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
  */
-@JsxClass(extend = "SimpleArray")
+@JsxClass
 public class MimeTypeArray extends SimpleArray {
 
     /**

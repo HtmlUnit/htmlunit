@@ -61,7 +61,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Sudhan Moghe
  * @author Ronald Brill
  */
-@JsxClass(browsers = @WebBrowser(FF), extend = "Document")
+@JsxClass(browsers = @WebBrowser(FF))
 public class XMLDocument extends Document {
 
     private static final Log LOG = LogFactory.getLog(XMLDocument.class);

@@ -55,7 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-@JsxClass(extend = "HTMLElement")
+@JsxClass
 public class HTMLSpanElement extends HTMLElement {
     /*    Because it is associated with many HtmlClasses, the one-to-many
     configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */

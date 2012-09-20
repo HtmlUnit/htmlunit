@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-@JsxClass(htmlClass = HtmlStyle.class, extend = "HTMLElement")
+@JsxClass(htmlClass = HtmlStyle.class)
 public class HTMLStyleElement extends HTMLElement {
 
     private CSSStyleSheet sheet_;

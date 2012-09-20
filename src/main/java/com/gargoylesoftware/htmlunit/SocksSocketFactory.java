@@ -20,11 +20,10 @@ import java.net.Socket;
 
 import org.apache.http.HttpHost;
 import org.apache.http.conn.scheme.PlainSocketFactory;
-import org.apache.http.conn.scheme.SchemeSocketFactory;
 import org.apache.http.params.HttpParams;
 
 /**
- * SOCKS aware {@link SchemeSocketFactory}.
+ * SOCKS aware {@link org.apache.http.conn.scheme.SchemeSocketFactory}.
  *
  * @version $Revision$
  * @author Ahmed Ashour

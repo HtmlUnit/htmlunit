@@ -15,11 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
@@ -34,16 +30,8 @@ import java.util.WeakHashMap;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXParseException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
@@ -100,7 +88,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadingElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement;
@@ -110,7 +97,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElemen
 
 /**
  * A container for all the JavaScript configuration information.
- * TODO - Need to add the logic to support the browser and JavaScript conditionals in the Class elements.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
@@ -120,18 +106,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElemen
 public final class JavaScriptConfiguration {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptConfiguration.class);
-
-    /** The JavaScript configuration XML document. */
-    private static Document XmlDocument_;
-
-    /** Constant indicating that this function/property is used by the specified browser version. */
-    public static final int ENABLED   = 1;
-
-    /** Constant indicating that this function/property is not used by the specified browser version. */
-    public static final int DISABLED  = 2;
-
-    /** Constant indicating that this function/property is not defined in the configuration file. */
-    public static final int NOT_FOUND = 3;
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
     private static Map<BrowserVersion, JavaScriptConfiguration> ConfigurationMap_ =
@@ -148,87 +122,7 @@ public final class JavaScriptConfiguration {
      * @param browser the browser version to use
      */
     private JavaScriptConfiguration(final BrowserVersion browser) {
-        if (XmlDocument_ == null) {
-            loadConfiguration();
-        }
-        if (XmlDocument_ == null) {
-            throw new IllegalStateException("Configuration was not initialized - see log for details");
-        }
         configuration_ = buildUsageMap(browser);
-    }
-
-    /**
-     * Test for a configuration having been loaded for testing.
-     *
-     * @return boolean - true if the XmlDocument has been loaded;
-     */
-    protected static boolean isDocumentLoaded() {
-        return XmlDocument_ != null;
-    }
-
-    /**
-     * Resets this class to its initial state. This method is used for testing only.
-     */
-    protected static void resetClassForTesting() {
-        XmlDocument_ = null;
-        ConfigurationMap_ = new WeakHashMap<BrowserVersion, JavaScriptConfiguration>(11);
-    }
-
-    /**
-     * Sets the document configuration for testing.
-     * @param document - The configuration document
-     */
-    protected static void setXmlDocument(final Document document) {
-        XmlDocument_ = document;
-    }
-
-    /**
-     * Gets the configuration file and make it an input reader and then pass to the method to read the file.
-     */
-    protected static void loadConfiguration() {
-        try {
-            final Reader reader = getConfigurationFileAsReader();
-            if (reader == null) {
-                LOG.error("Unable to load JavaScriptConfiguration.xml");
-            }
-            else {
-                loadConfiguration(reader);
-                reader.close();
-            }
-        }
-        catch (final Exception e) {
-            LOG.error("Error when loading JavascriptConfiguration.xml", e);
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Loads the configuration from a supplied Reader.
-     *
-     * @param configurationReader - A reader pointing to the configuration
-     */
-    protected static void loadConfiguration(final Reader configurationReader) {
-        final InputSource inputSource = new InputSource(configurationReader);
-
-        try {
-            final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setNamespaceAware(true);
-            factory.setValidating(false);
-
-            final DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-            documentBuilder.setErrorHandler(new StrictErrorHandler());
-
-            XmlDocument_ = documentBuilder.parse(inputSource);
-        }
-        catch (final SAXParseException parseException) {
-            LOG.error("line=[" + parseException.getLineNumber()
-                + "] columnNumber=[" + parseException.getColumnNumber()
-                + "] systemId=[" + parseException.getSystemId()
-                + "] publicId=[" + parseException.getPublicId() + "]", parseException);
-        }
-        catch (final Exception e) {
-            LOG.error("Error when loading JavascriptConfiguration.xml", e);
-        }
     }
 
     /**
@@ -260,33 +154,6 @@ public final class JavaScriptConfiguration {
         return configuration;
     }
 
-    private static Reader getConfigurationFileAsReader() {
-        final Class<?> clazz = JavaScriptConfiguration.class;
-        final String name = clazz.getName().replace('.', '/') + ".xml";
-        InputStream inputStream = clazz.getClassLoader().getResourceAsStream(name);
-        if (inputStream == null) {
-            try {
-                final String localizedName = name.replace('/', File.separatorChar);
-                inputStream = new FileInputStream(localizedName);
-            }
-            catch (final IOException e) {
-                // Fall through
-            }
-        }
-
-        // If we are running maven tests then the path will be slightly different
-        if (inputStream == null) {
-            try {
-                final String localizedName = ("./src/java" + name).replace('/', File.separatorChar);
-                inputStream = new FileInputStream(localizedName);
-            }
-            catch (final IOException e) {
-                // Fall through
-            }
-        }
-        return new InputStreamReader(inputStream);
-    }
-
     /**
      * Gets all the configurations.
      * @return the class configurations
@@ -296,49 +163,7 @@ public final class JavaScriptConfiguration {
     }
 
     private Map<String, ClassConfiguration> buildUsageMap(final BrowserVersion browser) {
-        final Map<String, ClassConfiguration> classMap = new HashMap<String, ClassConfiguration>(30);
-        Node node = XmlDocument_.getDocumentElement().getFirstChild();
-
-        final Map<String, ClassConfiguration> virtualClasses = new HashMap<String, ClassConfiguration>();
-
-        while (node != null) {
-            if (node instanceof Element) {
-                final Element element = (Element) node;
-                if ("class".equals(element.getTagName())) {
-                    if (!testToExcludeElement(element, browser)) {
-                        final String hostClassName = element.getAttribute("classname");
-                        if (hostClassName.startsWith("#")) {
-                            // this is not a real class but a facility for configuration
-                            final String extendsClassName = element.getAttribute("extends");
-                            final ClassConfiguration parentConfig = classMap.get(extendsClassName);
-                            if (parentConfig == null) {
-                                throw new RuntimeException(extendsClassName
-                                    + " should be specified before " + hostClassName);
-                            }
-                            element.setAttribute("classname", parentConfig.getHostClass().getName());
-                        }
-
-                        try {
-                            final ClassConfiguration config = parseClassElement(element, browser);
-                            if (config != null) {
-                                if (hostClassName.startsWith("#")) {
-                                    virtualClasses.put(hostClassName, config);
-                                    element.setAttribute("classname", hostClassName); // restore it
-                                }
-                                else {
-                                    classMap.put(config.getHostClass().getSimpleName(), config);
-                                }
-                            }
-                        }
-                        catch (final ClassNotFoundException e) {
-                            throw new IllegalStateException("The class was not found for '"
-                                    + element.getAttribute("classname") + "'");
-                        }
-                    }
-                }
-            }
-            node = node.getNextSibling();
-        }
+        final Map<String, ClassConfiguration> classMap = new HashMap<String, ClassConfiguration>(100);
 
         String packageName = getClass().getPackage().getName();
         packageName = packageName.substring(0, packageName.lastIndexOf('.'));
@@ -351,79 +176,63 @@ public final class JavaScriptConfiguration {
             }
         }
 
-        // add properties and methods from the virtual classes directly to the classes that "inherit" from them
-        for (final ClassConfiguration config : classMap.values()) {
-            final String extendsClassName = config.getExtendedClassName();
-            if (extendsClassName.startsWith("#")) {
-                final ClassConfiguration virtualClassConfig = virtualClasses.get(extendsClassName);
-                if (virtualClassConfig == null) {
-                    throw new RuntimeException("Virtual config >" + extendsClassName + "< doesn't exist!");
-                }
-
-                config.addAllDefinitions(virtualClassConfig);
-                // only one level of virtual classes allowed
-                config.setExtendedClassName(virtualClassConfig.getExtendedClassName());
-            }
-            else if (!extendsClassName.isEmpty() && !classMap.keySet().contains(extendsClassName)) {
-                throw new RuntimeException(config.getHostClass() + " extends nonexistent '" + extendsClassName + '\'');
-            }
-        }
-
         return Collections.unmodifiableMap(classMap);
     }
 
     private ClassConfiguration processClass(final String className, final BrowserVersion browser) {
         try {
             if (browser != null) {
-                final JsxClass jsxClass = Class.forName(className).getAnnotation(JsxClass.class);
-                if (jsxClass != null && isSupported(jsxClass.browsers(), browser)) {
-                    final String hostClassName = className;
-                    final String jsConstructor = !JsxClass.EMPTY_DEFAULT.equals(jsxClass.jsConstructor())
-                            ? jsxClass.jsConstructor() : "";
+                final Class<?> klass = Class.forName(className);
+                if (SimpleScriptable.class.isAssignableFrom(klass)) {
+                    final JsxClass jsxClass = klass.getAnnotation(JsxClass.class);
+                    if (jsxClass != null && isSupported(jsxClass.browsers(), browser)) {
+                        final String hostClassName = className;
+                        final String jsConstructor = !JsxClass.EMPTY_DEFAULT.equals(jsxClass.jsConstructor())
+                                ? jsxClass.jsConstructor() : "";
 
-                    final String extendsClassName = !JsxClass.EMPTY_DEFAULT.equals(jsxClass.extend())
-                            ? jsxClass.extend() : "";
+                        final String htmlClassName = jsxClass.htmlClass() != Object.class
+                                ? jsxClass.htmlClass().getName() : "";
 
-                    final String htmlClassName = jsxClass.htmlClass() != Object.class
-                            ? jsxClass.htmlClass().getName() : "";
+                        final boolean jsObjectFlag = jsxClass.isJSObject();
+                        @SuppressWarnings("unchecked")
+                        final ClassConfiguration classConfiguration =
+                            new ClassConfiguration((Class<? extends SimpleScriptable>) klass, jsConstructor,
+                                htmlClassName, jsObjectFlag);
 
-                    final boolean jsObjectFlag = jsxClass.isJSObject();
-                    final ClassConfiguration classConfiguration = new ClassConfiguration(hostClassName, jsConstructor,
-                            extendsClassName, htmlClassName, jsObjectFlag);
+                        final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
+                        ClassnameMap_.put(hostClassName, simpleClassName);
+                        final List<String> allGetters = new ArrayList<String>();
+                        final List<String> allSetters = new ArrayList<String>();
+                        for (final Method m : classConfiguration.getHostClass().getDeclaredMethods()) {
+                            final JsxGetter jsxGetter = m.getAnnotation(JsxGetter.class);
+                            if (jsxGetter != null && isSupported(jsxGetter.value(), browser)) {
+                                final String getter = m.getName().substring("jsxGet_".length());
+                                allGetters.add(getter);
+                            }
 
-                    final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
-                    ClassnameMap_.put(hostClassName, simpleClassName);
-                    final List<String> allGetters = new ArrayList<String>();
-                    final List<String> allSetters = new ArrayList<String>();
-                    for (final Method m : classConfiguration.getHostClass().getDeclaredMethods()) {
-                        final JsxGetter jsxGetter = m.getAnnotation(JsxGetter.class);
-                        if (jsxGetter != null && isSupported(jsxGetter.value(), browser)) {
-                            final String getter = m.getName().substring("jsxGet_".length());
-                            allGetters.add(getter);
+                            final JsxSetter jsxSetter = m.getAnnotation(JsxSetter.class);
+                            if (jsxSetter != null && isSupported(jsxSetter.value(), browser)) {
+                                final String setter = m.getName().substring("jsxSet_".length());
+                                allSetters.add(setter);
+                            }
+
+                            final JsxFunction jsxFunction = m.getAnnotation(JsxFunction.class);
+                            if (jsxFunction != null && isSupported(jsxFunction.value(), browser)) {
+                                final String propertyName = m.getName().substring("jsxFunction_".length());
+                                classConfiguration.addFunction(propertyName);
+                            }
                         }
-
-                        final JsxSetter jsxSetter = m.getAnnotation(JsxSetter.class);
-                        if (jsxSetter != null && isSupported(jsxSetter.value(), browser)) {
-                            final String setter = m.getName().substring("jsxSet_".length());
-                            allSetters.add(setter);
+                        for (final Field f : classConfiguration.getHostClass().getDeclaredFields()) {
+                            final JsxConstant jsxConstant = f.getAnnotation(JsxConstant.class);
+                            if (jsxConstant != null && isSupported(jsxConstant.value(), browser)) {
+                                classConfiguration.addConstant(f.getName());
+                            }
                         }
-
-                        final JsxFunction jsxFunction = m.getAnnotation(JsxFunction.class);
-                        if (jsxFunction != null && isSupported(jsxFunction.value(), browser)) {
-                            final String propertyName = m.getName().substring("jsxFunction_".length());
-                            classConfiguration.addFunction(propertyName);
+                        for (final String getter : allGetters) {
+                            classConfiguration.addProperty(getter, true, allSetters.contains(getter));
                         }
+                        return classConfiguration;
                     }
-                    for (final Field f : classConfiguration.getHostClass().getDeclaredFields()) {
-                        final JsxConstant jsxConstant = f.getAnnotation(JsxConstant.class);
-                        if (jsxConstant != null && isSupported(jsxConstant.value(), browser)) {
-                            classConfiguration.addConstant(f.getName());
-                        }
-                    }
-                    for (final String getter : allGetters) {
-                        classConfiguration.addProperty(getter, true, allSetters.contains(getter));
-                    }
-                    return classConfiguration;
                 }
             }
         }
@@ -431,97 +240,6 @@ public final class JavaScriptConfiguration {
             //ignore
         }
         return null;
-    }
-
-    /**
-     * Parses the class element to build the class configuration.
-     * @param className the name of the class element
-     * @param element the element to parse
-     * @param browser the browser version under consideration
-     * @return the class element to build the class configuration
-     * @throws ClassNotFoundException if the specified class could not be found
-     */
-    private ClassConfiguration parseClassElement(final Element element,
-        final BrowserVersion browser) throws ClassNotFoundException {
-        final String notImplemented = element.getAttribute("notImplemented");
-        if ("true".equalsIgnoreCase(notImplemented)) {
-            return null;
-        }
-        final String hostClassName = element.getAttribute("classname");
-        final String jsConstructor = element.getAttribute("jsConstructor");
-        final String extendsClassName = element.getAttribute("extends");
-        final String htmlClassName = element.getAttribute("htmlClass");
-        boolean jsObjectFlag = false;
-        final String jsObjectStr = element.getAttribute("JSObject");
-        if ("true".equalsIgnoreCase(jsObjectStr)) {
-            jsObjectFlag = true;
-        }
-        final ClassConfiguration classConfiguration = new ClassConfiguration(hostClassName, jsConstructor,
-                    extendsClassName, htmlClassName, jsObjectFlag);
-        final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
-        ClassnameMap_.put(hostClassName, simpleClassName);
-        Node node = element.getFirstChild();
-        while (node != null) {
-            if (node instanceof Element) {
-                final Element childElement = (Element) node;
-                final String tagName = childElement.getTagName();
-                if ("property".equals(tagName)) {
-                    parsePropertyElement(classConfiguration, childElement, browser);
-                }
-                else if ("function".equals(tagName)) {
-                    parseFunctionElement(classConfiguration, childElement, browser);
-                }
-                else if ("constant".equals(tagName)) {
-                    parseConstantElement(classConfiguration, childElement, browser);
-                }
-                else if ("browser".equals(tagName)) {
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("browser tag not yet handled for class " + hostClassName);
-                    }
-                }
-                else if ("doclink".equals(tagName)) {
-                    // ignore this link
-                }
-                else {
-                    throw new IllegalStateException("Do not understand element type '"
-                        + tagName + "' in '" + hostClassName + "'");
-                }
-            }
-            node = node.getNextSibling();
-        }
-        if (browser != null) {
-            final List<String> allGetters = new ArrayList<String>();
-            final List<String> allSetters = new ArrayList<String>();
-            for (final Method m : classConfiguration.getHostClass().getDeclaredMethods()) {
-                final JsxGetter jsxGetter = m.getAnnotation(JsxGetter.class);
-                if (jsxGetter != null && isSupported(jsxGetter.value(), browser)) {
-                    final String getter = m.getName().substring("jsxGet_".length());
-                    allGetters.add(getter);
-                }
-
-                final JsxSetter jsxSetter = m.getAnnotation(JsxSetter.class);
-                if (jsxSetter != null && isSupported(jsxSetter.value(), browser)) {
-                    final String setter = m.getName().substring("jsxSet_".length());
-                    allSetters.add(setter);
-                }
-
-                final JsxFunction jsxFunction = m.getAnnotation(JsxFunction.class);
-                if (jsxFunction != null && isSupported(jsxFunction.value(), browser)) {
-                    final String propertyName = m.getName().substring("jsxFunction_".length());
-                    classConfiguration.addFunction(propertyName);
-                }
-            }
-            for (final Field f : classConfiguration.getHostClass().getDeclaredFields()) {
-                final JsxConstant jsxConstant = f.getAnnotation(JsxConstant.class);
-                if (jsxConstant != null && isSupported(jsxConstant.value(), browser)) {
-                    classConfiguration.addConstant(f.getName());
-                }
-            }
-            for (final String getter : allGetters) {
-                classConfiguration.addProperty(getter, true, allSetters.contains(getter));
-            }
-        }
-        return classConfiguration;
     }
 
     private static boolean isSupported(final WebBrowser[] browsers, final BrowserVersion browserVersion) {
@@ -546,142 +264,12 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Parse out the values for the property.
-     *
-     * @param classConfiguration the configuration that is being built
-     * @param element the property element
-     * @param browser the browser version under consideration
-     */
-    private void parsePropertyElement(final ClassConfiguration classConfiguration, final Element element,
-        final BrowserVersion browser) {
-        final String notImplemented = element.getAttribute("notImplemented");
-        if ("true".equalsIgnoreCase(notImplemented)) {
-            return;
-        }
-        if (testToExcludeElement(element, browser)) {
-            return;
-        }
-        final String propertyName = element.getAttribute("name");
-        boolean readable = false;
-        boolean writable = false;
-        final String readFlag = element.getAttribute("readable");
-        if ("true".equalsIgnoreCase(readFlag) || readFlag.isEmpty()) {
-            readable = true;
-        }
-        final String writeFlag = element.getAttribute("writable");
-        if ("true".equalsIgnoreCase(writeFlag) || writeFlag.isEmpty()) {
-            writable = true;
-        }
-        classConfiguration.addProperty(propertyName, readable, writable);
-    }
-
-    /**
-     * Parses out the values from the function element.
-     *
-     * @param classConfiguration the configuration that is being built
-     * @param element the function element
-     * @param browser the browser version under consideration
-     */
-    private void parseFunctionElement(final ClassConfiguration classConfiguration, final Element element,
-        final BrowserVersion browser) {
-        final String notImplemented = element.getAttribute("notImplemented");
-        if ("true".equalsIgnoreCase(notImplemented)) {
-            return;
-        }
-        final String propertyName = element.getAttribute("name");
-        if (testToExcludeElement(element, browser)) {
-            return;
-        }
-        classConfiguration.addFunction(propertyName);
-    }
-
-    /**
-     * Parses out the values for the constant.
-     *
-     * @param classConfiguration the configuration that is being built
-     * @param element the property element
-     * @param browser the browser version under consideration
-     */
-    private void parseConstantElement(final ClassConfiguration classConfiguration, final Element element,
-        final BrowserVersion browser) {
-        if (testToExcludeElement(element, browser)) {
-            return;
-        }
-        final String constantName = element.getAttribute("name");
-        classConfiguration.addConstant(constantName);
-    }
-
-    /**
-     * Test for the browser and JavaScript constraints. Returns true if any constraints are present
-     * and the browser does not meet the constraints.
-     * @param element the element to scan the children of
-     * @param browser the browser version under consideration
-     * @return true to exclude this element
-     */
-    private boolean testToExcludeElement(final Element element, final BrowserVersion browser) {
-        if (browser == null) {
-            return false;
-        }
-        Node node = element.getFirstChild();
-        boolean browserConstraint = false;
-        boolean allowBrowser = false;
-        while (node != null) {
-            if (node instanceof Element) {
-                final Element childElement = (Element) node;
-                if ("browser".equals(childElement.getTagName())) {
-                    browserConstraint = true;
-                    if (testToIncludeForBrowserConstraint(childElement, browser)) {
-                        allowBrowser = true;
-                    }
-                }
-            }
-            node = node.getNextSibling();
-        }
-        if (browserConstraint && !allowBrowser) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Gets the class configuration for the supplied JavaScript class name.
      * @param classname the js class name
      * @return the class configuration for the supplied JavaScript class name
      */
     public ClassConfiguration getClassConfiguration(final String classname) {
         return configuration_.get(classname);
-    }
-
-    private boolean testToIncludeForBrowserConstraint(final Element element, final BrowserVersion browser) {
-        if ((!browser.isIE() || !"Internet Explorer".equals(element.getAttribute("name")))
-            && (!browser.isFirefox() || !"Firefox".equals(element.getAttribute("name")))
-            && (!browser.isChrome() || !"Chrome".equals(element.getAttribute("name")))) {
-            return false;
-        }
-        final String max = element.getAttribute("max-version");
-        float maxVersion;
-        if (max.isEmpty()) {
-            maxVersion = 0;
-        }
-        else {
-            maxVersion = Float.parseFloat(max);
-        }
-        if (maxVersion > 0 && browser.getBrowserVersionNumeric() > maxVersion) {
-            return false;
-        }
-
-        float minVersion;
-        final String min = element.getAttribute("min-version");
-        if (min.isEmpty()) {
-            minVersion = 0;
-        }
-        else {
-            minVersion = Float.parseFloat(min);
-        }
-        if (minVersion > 0 && browser.getBrowserVersionNumeric() < minVersion) {
-            return false;
-        }
-        return true;
     }
 
     /**

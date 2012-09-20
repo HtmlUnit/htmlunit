@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeFuncRLight;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgFeFuncRLight.class, extend = "SVGElement",
+@JsxClass(htmlClass = SvgFeFuncRLight.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEFuncRElement extends SVGElement {
 

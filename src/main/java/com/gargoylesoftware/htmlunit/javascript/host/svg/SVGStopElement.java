@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgStop;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgStop.class, extend = "SVGElement",
+@JsxClass(htmlClass = SvgStop.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGStopElement extends SVGElement {
 

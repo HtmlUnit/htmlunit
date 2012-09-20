@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-@JsxClass(extend = "HTMLCollection")
+@JsxClass
 public class HTMLCollectionTags extends HTMLCollection {
 
     /**

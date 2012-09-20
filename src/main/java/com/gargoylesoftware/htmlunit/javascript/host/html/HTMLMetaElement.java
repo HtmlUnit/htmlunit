@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlMeta.class, extend = "HTMLElement")
+@JsxClass(htmlClass = HtmlMeta.class)
 public class HTMLMetaElement extends HTMLElement {
 
     /**

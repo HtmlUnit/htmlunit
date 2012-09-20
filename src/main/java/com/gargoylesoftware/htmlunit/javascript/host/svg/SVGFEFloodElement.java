@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeFlood;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgFeFlood.class, extend = "SVGElement",
+@JsxClass(htmlClass = SvgFeFlood.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEFloodElement extends SVGElement {
 

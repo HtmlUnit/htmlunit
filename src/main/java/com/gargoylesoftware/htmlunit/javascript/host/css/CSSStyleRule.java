@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-@JsxClass(extend = "CSSRule")
+@JsxClass
 public class CSSStyleRule extends CSSRule {
     private static final Pattern SELECTOR_PARTS_PATTERN = Pattern.compile("[\\.#]?[a-zA-Z]+");
     private static final Pattern SELECTOR_REPLACE_PATTERN = Pattern.compile("\\*([\\.#])");

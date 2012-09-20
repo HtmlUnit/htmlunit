@@ -56,13 +56,20 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass
+@JsxClass(jsConstructor = "jsConstructor")
 public class XSLTProcessor extends SimpleScriptable {
 
     private Node style_;
     private Node input_;
     private Object output_;
     private Map<String, Object> parameters_ = new HashMap<String, Object>();
+
+    /**
+     * JavaScript constructor.
+     */
+    public void jsConstructor() {
+        // Empty
+    }
 
     /**
      * Imports the specified stylesheet into this XSLTProcessor for transformations. The specified node

@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlOrderedList.class, extend = "HTMLListElement")
+@JsxClass(htmlClass = HtmlOrderedList.class)
 public class HTMLOListElement extends HTMLListElement {
 
     /**

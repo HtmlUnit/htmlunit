@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-@JsxClass(extend = "Node")
+@JsxClass
 public class EventNode extends Node {
 
     /**

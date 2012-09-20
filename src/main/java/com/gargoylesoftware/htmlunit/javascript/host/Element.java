@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author Marc Guillemot
  * @author Sudhan Moghe
  */
-@JsxClass(extend = "EventNode", htmlClass = DomElement.class)
+@JsxClass(htmlClass = DomElement.class)
 public class Element extends EventNode {
 
     private NamedNodeMap attributes_;

@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeImage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgFeImage.class, extend = "SVGElement",
+@JsxClass(htmlClass = SvgFeImage.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEImageElement extends SVGElement {
 

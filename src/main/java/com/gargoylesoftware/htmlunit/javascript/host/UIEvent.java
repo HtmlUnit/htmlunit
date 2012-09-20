@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  */
-@JsxClass(extend = "Event")
+@JsxClass
 public class UIEvent extends Event {
 
     /** Specifies some detail information about the event. */

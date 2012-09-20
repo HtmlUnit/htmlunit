@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgPath;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgPath.class, extend = "SVGElement",
+@JsxClass(htmlClass = SvgPath.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGPathElement extends SVGElement {
 

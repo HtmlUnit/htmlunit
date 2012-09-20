@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
  */
-@JsxClass(browsers = @WebBrowser(FF), extend = "SimpleArray")
+@JsxClass(browsers = @WebBrowser(FF))
 public class Plugin extends SimpleArray {
     private String description_;
     private String filename_;

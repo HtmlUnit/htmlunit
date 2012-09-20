@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgRect;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgRect.class, extend = "SVGElement",
+@JsxClass(htmlClass = SvgRect.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGRectElement extends SVGElement {
 

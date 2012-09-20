@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  */
-@JsxClass(htmlClass = HtmlTitle.class, extend = "HTMLElement")
+@JsxClass(htmlClass = HtmlTitle.class)
 public class HTMLTitleElement extends HTMLElement {
 
     /**

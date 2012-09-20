@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-@JsxClass(extend = "UIEvent")
+@JsxClass
 public class MouseEvent extends UIEvent {
 
     /** The click event type, triggered by "onclick" event handlers. */

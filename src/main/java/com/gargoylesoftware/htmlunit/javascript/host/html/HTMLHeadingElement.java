@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(extend = "HTMLElement")
+@JsxClass
 public class HTMLHeadingElement extends HTMLElement {
     /*    Because it is associated with many HtmlClasses, the one-to-many
     configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */

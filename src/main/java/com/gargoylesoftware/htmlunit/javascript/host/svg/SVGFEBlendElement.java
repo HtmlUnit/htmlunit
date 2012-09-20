@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeBlend;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgFeBlend.class, extend = "SVGElement",
+@JsxClass(htmlClass = SvgFeBlend.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEBlendElement extends SVGElement {
 

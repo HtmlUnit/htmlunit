@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeTile;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgFeTile.class, extend = "SVGElement",
+@JsxClass(htmlClass = SvgFeTile.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFETileElement extends SVGElement {
 

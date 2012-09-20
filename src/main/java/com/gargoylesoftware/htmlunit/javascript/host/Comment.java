@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Mirko Friedenhagen
  * @author Ahmed Ashour
  */
-@JsxClass(extend = "CharacterDataImpl", htmlClass = DomComment.class)
+@JsxClass(htmlClass = DomComment.class)
 public final class Comment extends CharacterDataImpl {
 
     /**

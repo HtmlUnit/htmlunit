@@ -20,6 +20,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 /**
  * Tests for {@link JavaScriptConfiguration}.
@@ -31,22 +32,15 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 public class ClassConfigurationTest extends SimpleWebTestCase {
 
     /**
-     * Constructor.
-     */
-    public ClassConfigurationTest() {
-        JavaScriptConfiguration.resetClassForTesting();
-    }
-
-    /**
      * Tests equality on a class configuration.
      * @throws Exception - Exception on error
      */
     @Test
     public void testConfigurationSimplePropertyEquality() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
         final ClassConfiguration config2 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
 
         config1.addProperty("test", true, true);
         Assert.assertFalse("Configs should not be equal", config1.equals(config2));
@@ -61,9 +55,9 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     @Test
     public void testConfigurationSimpleFunctionEquality() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
         final ClassConfiguration config2 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
 
         config1.addFunction("testFunction");
         Assert.assertFalse("Configs should not be equal", config1.equals(config2));
@@ -78,9 +72,9 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     @Test
     public void testConfigurationSimpleUnequalProperties() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
         final ClassConfiguration config2 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
 
         config1.addProperty("test", true, true);
         Assert.assertFalse("Configs should not be equal", config1.equals(config2));
@@ -94,7 +88,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     @Test
     public void testForJSFlagTrue() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
         assertTrue("JSObject Flag should have been set", config1.isJsObject());
     }
 
@@ -104,7 +98,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     @Test
     public void testForJSFlagFalse() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, false);
+            ConfigTestClass.class, null, null, false);
         Assert.assertFalse("JSObject Flag should not have been set", config1.isJsObject());
     }
 
@@ -115,9 +109,9 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     @Test
     public void testConfigurationPropertyEqualityWithBrowser() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
         final ClassConfiguration config2 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
 
         config1.addProperty("test", true, true);
         config2.addProperty("test", true, true);
@@ -134,9 +128,9 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     @Test
     public void testConfigurationPropertyEqualityWithDifferentBrowsers() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
         final ClassConfiguration config2 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
 
         config1.addProperty("test", true, true);
         config2.addProperty("test", true, true);
@@ -153,7 +147,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     @Test
     public void testNoSetterMethod() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
         try {
             config1.addProperty("getterOnly", true, true);
             fail("Should produce an exception due to not finding the methods");
@@ -170,7 +164,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     @Test
     public void testNoFunctionMethod() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(
-            ConfigTestClass.class.getName(), null, null, null, true);
+            ConfigTestClass.class, null, null, true);
         try {
             config1.addFunction("noTestFunction");
             fail("Should produce an exception due to not finding the methods");
@@ -183,7 +177,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     /**
      * Test class.
      */
-    protected class ConfigTestClass {
+    protected class ConfigTestClass extends SimpleScriptable {
         private boolean test_ = false;
 
         /**

@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlHead.class, extend = "HTMLElement")
+@JsxClass(htmlClass = HtmlHead.class)
 public class HTMLHeadElement extends HTMLElement {
 
     /**

@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@JsxClass(extend = "CSSStyleDeclaration")
+@JsxClass
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /** The number of (horizontal) pixels to assume that each character occupies. */

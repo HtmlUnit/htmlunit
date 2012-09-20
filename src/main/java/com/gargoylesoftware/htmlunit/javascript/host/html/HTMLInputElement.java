@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-@JsxClass(htmlClass = HtmlInput.class, extend = "FormField")
+@JsxClass(htmlClass = HtmlInput.class)
 public class HTMLInputElement extends FormField {
 
     /**

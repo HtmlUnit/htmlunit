@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
  *
  * @see <a href="http://www.xulplanet.com/references/objref/PluginArray.html">XUL Planet</a>
  */
-@JsxClass(extend = "SimpleArray")
+@JsxClass
 public class PluginArray extends SimpleArray {
     /**
      * Creates an instance. JavaScript objects must have a default constructor.

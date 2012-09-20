@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlAudio.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) }, extend = "HTMLElement")
+@JsxClass(htmlClass = HtmlAudio.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
 public class HTMLAudioElement extends HTMLElement {
 
 }

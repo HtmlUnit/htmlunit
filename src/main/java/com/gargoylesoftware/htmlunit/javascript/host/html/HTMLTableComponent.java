@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Daniel Gredler
  */
-@JsxClass(isJSObject = false, extend = "HTMLElement")
+@JsxClass(isJSObject = false)
 public class HTMLTableComponent extends HTMLElement {
 
     /** The valid "vAlign" values for this element, when emulating IE. */

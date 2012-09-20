@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeMerge;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgFeMerge.class, extend = "SVGElement",
+@JsxClass(htmlClass = SvgFeMerge.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEMergeElement extends SVGElement {
 

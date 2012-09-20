@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlInsertedText.class, extend = "HTMLElement")
+@JsxClass(htmlClass = HtmlInsertedText.class)
 public class HTMLInsElement extends HTMLElement {
 
     /**

@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlDirectory.class, extend = "HTMLListElement")
+@JsxClass(htmlClass = HtmlDirectory.class)
 public class HTMLDirectoryElement extends HTMLListElement {
 
     /**

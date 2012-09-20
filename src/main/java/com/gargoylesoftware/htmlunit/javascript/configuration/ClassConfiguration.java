@@ -51,19 +51,23 @@ public final class ClassConfiguration {
     /**
      * Constructor.
      *
-     * @param hostClassName - the fully qualified name of the class implementing this functionality
+     * @param hostClass - the class implementing this functionality
      * @param jsConstructor the constructor of method <code>implementingClass</code>
-     * @param extendedClassName - The name of the class that this class extends
      * @param htmlClassName the name of the HTML class that this object supports
      * @param jsObject boolean flag for if this object is a JavaScript object
      * @throws ClassNotFoundException - if the implementing class is not found
      */
-    @SuppressWarnings("unchecked")
-    public ClassConfiguration(final String hostClassName, final String jsConstructor,
-        final String extendedClassName, final String htmlClassName, final boolean jsObject)
+    public ClassConfiguration(final Class<? extends SimpleScriptable> hostClass, final String jsConstructor,
+        final String htmlClassName, final boolean jsObject)
         throws ClassNotFoundException {
-        extendedClassName_ = extendedClassName;
-        hostClass_ = (Class<? extends SimpleScriptable>) Class.forName(hostClassName);
+        final Class<?> superClass = hostClass.getSuperclass();
+        if (superClass != SimpleScriptable.class) {
+            extendedClassName_ = superClass.getSimpleName();
+        }
+        else {
+            extendedClassName_ = "";
+        }
+        hostClass_ = hostClass;
         if (jsConstructor != null && !jsConstructor.isEmpty()) {
             Method foundCtor = null;
             for (final Method method : hostClass_.getMethods()) {
@@ -74,7 +78,7 @@ public final class ClassConfiguration {
             }
             if (foundCtor == null) {
                 throw new IllegalStateException("Constructor method \"" + jsConstructor
-                        + "\" in class \"" + hostClassName + " is not found.");
+                        + "\" in class \"" + hostClass.getName() + " is not found.");
             }
             jsConstructor_ = foundCtor;
         }
@@ -177,20 +181,6 @@ public final class ClassConfiguration {
                 + " function in " + hostClass_.getName());
         }
         functionMap_.put(name, info);
-    }
-
-    /**
-     * Adds properties and function definitions from the provided configuration.
-     * @param virtualClassConfig the config to take definitions from.
-     */
-    void addAllDefinitions(final ClassConfiguration virtualClassConfig) {
-        if (!virtualClassConfig.getHostClass().isAssignableFrom(getHostClass())) {
-            throw new RuntimeException("Can't configure " + getHostClass() + " with info from "
-                + virtualClassConfig.getHostClass());
-        }
-        propertyMap_.putAll(virtualClassConfig.propertyMap_);
-        functionMap_.putAll(virtualClassConfig.functionMap_);
-        constants_.addAll(virtualClassConfig.constants_);
     }
 
     /**

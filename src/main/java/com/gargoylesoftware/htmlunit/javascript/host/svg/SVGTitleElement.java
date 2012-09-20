@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgTitle;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgTitle.class, extend = "SVGElement",
+@JsxClass(htmlClass = SvgTitle.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGTitleElement extends SVGElement {
 

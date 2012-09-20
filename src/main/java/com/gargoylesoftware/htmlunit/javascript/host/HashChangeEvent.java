@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ronald Brill
  */
-@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) }, extend = "UIEvent")
+@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
 public class HashChangeEvent extends UIEvent {
 
     private Object oldURL_;
