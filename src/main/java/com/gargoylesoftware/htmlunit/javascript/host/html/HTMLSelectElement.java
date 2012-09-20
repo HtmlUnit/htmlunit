@@ -95,8 +95,8 @@ public class HTMLSelectElement extends FormField {
      * {@inheritDoc}
      */
     @Override
-    public Object jsxFunction_appendChild(final Object childObject) {
-        final Object object = super.jsxFunction_appendChild(childObject);
+    public Object appendChild(final Object childObject) {
+        final Object object = super.appendChild(childObject);
         ensureSelectedIndex();
         return object;
     }
@@ -105,8 +105,8 @@ public class HTMLSelectElement extends FormField {
      * {@inheritDoc}
      */
     @Override
-    public Object jsxFunction_insertBefore(final Object[] args) {
-        final Object object = super.jsxFunction_insertBefore(args);
+    public Object _insertBefore(final Object[] args) {
+        final Object object = super._insertBefore(args);
         ensureSelectedIndex();
         return object;
     }

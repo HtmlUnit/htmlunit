@@ -407,7 +407,7 @@ public class Range extends SimpleScriptable {
             return Integer.valueOf(0);
         }
 
-        final byte nodeComparision = (byte) nodeForThis.jsxFunction_compareDocumentPosition(nodeForOther);
+        final byte nodeComparision = (byte) nodeForThis.compareDocumentPosition(nodeForOther);
         if ((nodeComparision & Node.DOCUMENT_POSITION_CONTAINED_BY) != 0) {
             return Integer.valueOf(-1 * containingMoficator);
         }

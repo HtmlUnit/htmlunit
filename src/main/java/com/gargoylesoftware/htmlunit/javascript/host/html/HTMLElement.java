@@ -736,13 +736,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public HTMLElement jsxFunction_removeNode(final boolean removeChildren) {
         final HTMLElement parent = (HTMLElement) jsxGet_parentElement();
         if (parent != null) {
-            parent.jsxFunction_removeChild(this);
+            parent.removeChild(this);
             if (!removeChildren) {
                 final NodeList collection = jsxGet_childNodes();
                 final int length = collection.jsxGet_length();
                 for (int i = 0; i < length; i++) {
                     final Node object = (Node) collection.jsxFunction_item(Integer.valueOf(0));
-                    parent.jsxFunction_appendChild(object);
+                    parent.appendChild(object);
                 }
             }
         }

@@ -985,10 +985,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * {@inheritDoc}
      */
     @Override
-    public Object jsxFunction_appendChild(final Object childObject) {
+    public Object appendChild(final Object childObject) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED)) {
             // We're emulating IE; we can allow insertion.
-            return super.jsxFunction_appendChild(childObject);
+            return super.appendChild(childObject);
         }
 
         // Firefox does not allow insertion at the document level.

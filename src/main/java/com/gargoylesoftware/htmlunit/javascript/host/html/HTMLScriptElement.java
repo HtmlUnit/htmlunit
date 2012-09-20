@@ -175,7 +175,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the newly added child node
      */
     @Override
-    public Object jsxFunction_appendChild(final Object childObject) {
+    public Object appendChild(final Object childObject) {
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION)) {
             throw Context.reportRuntimeError("Unexpected call to method or property access");
@@ -183,7 +183,7 @@ public class HTMLScriptElement extends HTMLElement {
 
         final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
         final boolean wasEmpty = tmpScript.getFirstChild() == null;
-        final Object result = super.jsxFunction_appendChild(childObject);
+        final Object result = super.appendChild(childObject);
 
         if (wasEmpty) {
             tmpScript.executeScriptIfNeeded();
@@ -198,11 +198,11 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the newly added child node
      */
     @Override
-    protected Object jsxFunction_insertBefore(final Object[] args) {
+    protected Object _insertBefore(final Object[] args) {
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION)) {
             throw Context.reportRuntimeError("Unexpected call to method or property access");
         }
-        return super.jsxFunction_insertBefore(args);
+        return super._insertBefore(args);
     }
 }

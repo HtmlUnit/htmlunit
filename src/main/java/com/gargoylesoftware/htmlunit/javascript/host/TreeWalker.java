@@ -462,7 +462,7 @@ public class TreeWalker extends SimpleScriptable {
         }
 
         Node follow = left;
-        while (follow.jsxFunction_hasChildNodes()) {
+        while (follow.hasChildNodes()) {
             final Node toFollow = getEquivalentLogical(follow.jsxGet_lastChild(), true);
             if (toFollow == null) {
                 break;

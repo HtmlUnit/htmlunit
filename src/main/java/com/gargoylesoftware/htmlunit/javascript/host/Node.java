@@ -197,7 +197,7 @@ public class Node extends SimpleScriptable {
      * @return the newly added child node
      */
     @JsxFunction
-    public Object jsxFunction_appendChild(final Object childObject) {
+    public Object appendChild(final Object childObject) {
         Object appendedChild = null;
         if (childObject instanceof Node) {
             final Node childNode = (Node) childObject;
@@ -298,7 +298,7 @@ public class Node extends SimpleScriptable {
      * @return the newly cloned node
      */
     @JsxFunction
-    public Object jsxFunction_cloneNode(final boolean deep) {
+    public Object cloneNode(final boolean deep) {
         final DomNode domNode = getDomNodeOrDie();
         final DomNode clonedNode = domNode.cloneNode(deep);
 
@@ -337,9 +337,9 @@ public class Node extends SimpleScriptable {
      * @return the newly added child node
      */
     @JsxFunction
-    public static Object jsxFunction_insertBefore(
+    public static Object insertBefore(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        return ((Node) thisObj).jsxFunction_insertBefore(args);
+        return ((Node) thisObj)._insertBefore(args);
     }
 
     /**
@@ -348,7 +348,7 @@ public class Node extends SimpleScriptable {
      * @param args the arguments
      * @return the newly added child node
      */
-    protected Object jsxFunction_insertBefore(final Object[] args) {
+    protected Object _insertBefore(final Object[] args) {
         final Object newChildObject = args[0];
         final Object refChildObject;
         if (args.length > 1) {
@@ -376,7 +376,7 @@ public class Node extends SimpleScriptable {
             if (newChildNode instanceof DomDocumentFragment) {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {
-                    jsxFunction_insertBefore(new Object[] {child.getScriptObject(), refChildObject});
+                    _insertBefore(new Object[] {child.getScriptObject(), refChildObject});
                 }
                 return newChildObject;
             }
@@ -440,7 +440,7 @@ public class Node extends SimpleScriptable {
      * @return whether this node is the same node as the given one
      */
     @JsxFunction(@WebBrowser(value = FF, maxVersion = 3.6f))
-    public boolean jsxFunction_isSameNode(final Object other) {
+    public boolean isSameNode(final Object other) {
         return other == this;
     }
 
@@ -450,7 +450,7 @@ public class Node extends SimpleScriptable {
      * @return the removed child node
      */
     @JsxFunction
-    public Object jsxFunction_removeChild(final Object childObject) {
+    public Object removeChild(final Object childObject) {
         Object removedChild = null;
 
         if (childObject instanceof Node) {
@@ -469,7 +469,7 @@ public class Node extends SimpleScriptable {
      * @return boolean true if this node has any children, false otherwise
      */
     @JsxFunction
-    public boolean jsxFunction_hasChildNodes() {
+    public boolean hasChildNodes() {
         return getDomNodeOrDie().getChildren().iterator().hasNext();
     }
 
@@ -532,7 +532,7 @@ public class Node extends SimpleScriptable {
      * @return the removed child node
      */
     @JsxFunction
-    public Object jsxFunction_replaceChild(final Object newChildObject, final Object oldChildObject) {
+    public Object replaceChild(final Object newChildObject, final Object oldChildObject) {
         Object removedChild = null;
 
         if (newChildObject instanceof DocumentFragment) {
@@ -541,15 +541,15 @@ public class Node extends SimpleScriptable {
             final Node refChildObject = ((Node) oldChildObject).jsxGet_nextSibling();
             for (final DomNode node : fragment.getDomNodeOrDie().getChildren()) {
                 if (firstNode == null) {
-                    jsxFunction_replaceChild(node.getScriptObject(), oldChildObject);
+                    replaceChild(node.getScriptObject(), oldChildObject);
                     firstNode = (Node) node.getScriptObject();
                 }
                 else {
-                    jsxFunction_insertBefore(new Object[] {node.getScriptObject(), refChildObject});
+                    _insertBefore(new Object[] {node.getScriptObject(), refChildObject});
                 }
             }
             if (firstNode == null) {
-                jsxFunction_removeChild(oldChildObject);
+                removeChild(oldChildObject);
             }
             removedChild = oldChildObject;
         }
@@ -655,7 +655,7 @@ public class Node extends SimpleScriptable {
      * @return <code>true</code> if the listener has been added
      */
     @JsxFunction(@WebBrowser(IE))
-    public boolean jsxFunction_attachEvent(final String type, final Function listener) {
+    public boolean attachEvent(final String type, final Function listener) {
         return getEventListenersContainer().addEventListener(StringUtils.substring(type, 2), listener, false);
     }
 
@@ -667,7 +667,7 @@ public class Node extends SimpleScriptable {
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.addEventListener">Mozilla documentation</a>
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_addEventListener(final String type, final Function listener, final boolean useCapture) {
+    public void addEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
 
@@ -689,8 +689,8 @@ public class Node extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536411.aspx">MSDN documentation</a>
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_detachEvent(final String type, final Function listener) {
-        jsxFunction_removeEventListener(StringUtils.substring(type, 2), listener, false);
+    public void detachEvent(final String type, final Function listener) {
+        removeEventListener(StringUtils.substring(type, 2), listener, false);
     }
 
     /**
@@ -701,7 +701,7 @@ public class Node extends SimpleScriptable {
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener">Mozilla documentation</a>
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_removeEventListener(final String type, final Function listener, final boolean useCapture) {
+    public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
 
@@ -929,7 +929,7 @@ public class Node extends SimpleScriptable {
      * @see org.w3c.dom.Node#compareDocumentPosition(org.w3c.dom.Node)
      */
     @JsxFunction(@WebBrowser(FF))
-    public short jsxFunction_compareDocumentPosition(final Node node) {
+    public short compareDocumentPosition(final Node node) {
         return getDomNodeOrDie().compareDocumentPosition(node.getDomNodeOrDie());
     }
 
@@ -937,7 +937,7 @@ public class Node extends SimpleScriptable {
      * Merges adjacent TextNode objects to produce a normalized document object model.
      */
     @JsxFunction
-    public void jsxFunction_normalize() {
+    public void normalize() {
         getDomNodeOrDie().normalize();
     }
 

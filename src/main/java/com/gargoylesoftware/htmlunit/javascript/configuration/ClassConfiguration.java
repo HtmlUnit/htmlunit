@@ -138,7 +138,9 @@ public final class ClassConfiguration {
         final FunctionInfo info = new FunctionInfo();
         info.setFunctionMethod(method);
         String name = method.getName();
-        name = name.substring(FUNCTION_PREFIX.length());
+        if (name.startsWith(FUNCTION_PREFIX)) {
+            name = name.substring(FUNCTION_PREFIX.length());
+        }
         functionMap_.put(name, info);
     }
 
