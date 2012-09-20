@@ -1318,7 +1318,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     final Iterator<HtmlElement> children = unknownElement.getHtmlElementDescendants().iterator();
                     if (children.hasNext()) {
                         final HtmlElement root = children.next();
-                        document.jsxFunction_loadXML(root.asXml().trim());
+                        document.loadXML(root.asXml().trim());
                     }
                     result = document;
                 }

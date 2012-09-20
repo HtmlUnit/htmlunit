@@ -236,7 +236,7 @@ public class Document extends EventNode {
      * @return a newly created document fragment
      */
     @JsxFunction
-    public Object jsxFunction_createDocumentFragment() {
+    public Object createDocumentFragment() {
         final DomDocumentFragment fragment = getDomNodeOrDie().getPage().createDomDocumentFragment();
         final DocumentFragment node = new DocumentFragment();
         node.setParentScope(getParentScope());
@@ -252,7 +252,7 @@ public class Document extends EventNode {
      * @return an attribute with the specified name
      */
     @JsxFunction
-    public Attr jsxFunction_createAttribute(final String attributeName) {
+    public Attr createAttribute(final String attributeName) {
         return (Attr) getPage().createAttribute(attributeName).getScriptObject();
     }
 
@@ -318,7 +318,7 @@ public class Document extends EventNode {
      *         in scope for a specified node
      */
     @JsxFunction(@WebBrowser(FF))
-    public XPathNSResolver jsxFunction_createNSResolver(final Node nodeResolver) {
+    public XPathNSResolver createNSResolver(final Node nodeResolver) {
         final XPathNSResolver resolver = new XPathNSResolver();
         resolver.setElement(nodeResolver);
         resolver.setParentScope(getWindow());
@@ -333,7 +333,7 @@ public class Document extends EventNode {
      * @return the new text node or NOT_FOUND if there is an error
      */
     @JsxFunction
-    public Object jsxFunction_createTextNode(final String newData) {
+    public Object createTextNode(final String newData) {
         Object result = NOT_FOUND;
         try {
             final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
@@ -362,7 +362,7 @@ public class Document extends EventNode {
      * @return the new Comment
      */
     @JsxFunction
-    public Object jsxFunction_createComment(final String comment) {
+    public Object createComment(final String comment) {
         final DomNode domNode = new DomComment(getDomNodeOrDie().getPage(), comment);
         return getScriptableFor(domNode);
     }
@@ -397,7 +397,7 @@ public class Document extends EventNode {
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
     @JsxFunction
-    public Object jsxFunction_createElement(String tagName) {
+    public Object createElement(String tagName) {
         Object result = NOT_FOUND;
         try {
             final BrowserVersion browserVersion = getBrowserVersion();
@@ -448,7 +448,7 @@ public class Document extends EventNode {
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public Object jsxFunction_createElementNS(final String namespaceURI, final String qualifiedName) {
+    public Object createElementNS(final String namespaceURI, final String qualifiedName) {
         final org.w3c.dom.Element element;
         final BrowserVersion browserVersion = getBrowserVersion();
         if (browserVersion.hasFeature(BrowserVersionFeatures.XUL_SUPPORT)
@@ -471,7 +471,7 @@ public class Document extends EventNode {
      * @return all the descendant elements with the specified tag name
      */
     @JsxFunction
-    public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
+    public HTMLCollection getElementsByTagName(final String tagName) {
         final String description = "Document.getElementsByTagName('" + tagName + "')";
 
         final HTMLCollection collection;
@@ -509,7 +509,7 @@ public class Document extends EventNode {
      * @return a live NodeList of found elements in the order they appear in the tree
      */
     @JsxFunction(@WebBrowser(FF))
-    public Object jsxFunction_getElementsByTagNameNS(final Object namespaceURI, final String localName) {
+    public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final String description = "Document.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
 
         final String prefix;

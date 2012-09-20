@@ -118,7 +118,7 @@ public class XMLDocument extends Document {
      * @return true if the load succeeded; false if the load failed
      */
     @JsxFunction
-    public boolean jsxFunction_load(final String xmlSource) {
+    public boolean load(final String xmlSource) {
         if (async_) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("XMLDocument.load(): 'async' is true, currently treated as false.");
@@ -156,7 +156,7 @@ public class XMLDocument extends Document {
      * @return true if the load succeeded; false if the load failed
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public boolean jsxFunction_loadXML(final String strXML) {
+    public boolean loadXML(final String strXML) {
         try {
             final WebWindow webWindow = getWindow().getWebWindow();
 
@@ -266,7 +266,7 @@ public class XMLDocument extends Document {
      * @param value the value of the specified property
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public void jsxFunction_setProperty(final String name, final String value) {
+    public void setProperty(final String name, final String value) {
         //empty implementation
     }
 
@@ -276,7 +276,7 @@ public class XMLDocument extends Document {
      * @return list of the found elements
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public HTMLCollection jsxFunction_selectNodes(final String expression) {
+    public HTMLCollection selectNodes(final String expression) {
         final boolean attributeChangeSensitive = expression.contains("@");
         final String description = "XMLDocument.selectNodes('" + expression + "')";
         final SgmlPage page = getPage();
@@ -298,8 +298,8 @@ public class XMLDocument extends Document {
      *         If no nodes match the expression, returns a null value.
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public Object jsxFunction_selectSingleNode(final String expression) {
-        final HTMLCollection collection = jsxFunction_selectNodes(expression);
+    public Object selectSingleNode(final String expression) {
+        final HTMLCollection collection = selectNodes(expression);
         if (collection.jsxGet_length() > 0) {
             return collection.get(0, collection);
         }
@@ -311,7 +311,7 @@ public class XMLDocument extends Document {
      */
     @Override
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public HTMLCollection jsxFunction_getElementsByTagName(final String tagName) {
+    public HTMLCollection getElementsByTagName(final String tagName) {
         final DomNode firstChild = getDomNodeOrDie().getFirstChild();
         if (firstChild == null) {
             return HTMLCollection.emptyCollection(getWindow());
@@ -334,7 +334,7 @@ public class XMLDocument extends Document {
      * @return the element with the specified ID, as long as it is an HTML element; <tt>null</tt> otherwise
      */
     @JsxFunction
-    public Object jsxFunction_getElementById(final String id) {
+    public Object getElementById(final String id) {
         final XmlPage xmlPage = (XmlPage) getDomNodeOrDie();
         final Object domElement = xmlPage.getFirstByXPath("//*[@id = \"" + id + "\"]");
         if (domElement == null) {
@@ -356,7 +356,7 @@ public class XMLDocument extends Document {
      * @return null
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public Object jsxFunction_nodeFromID(final String id) {
+    public Object nodeFromID(final String id) {
         return null;
     }
 
@@ -367,7 +367,7 @@ public class XMLDocument extends Document {
      * @return the new ProcessingInstruction
      */
     @JsxFunction
-    public Object jsxFunction_createProcessingInstruction(final String target, final String data) {
+    public Object createProcessingInstruction(final String target, final String data) {
         final DomNode node = ((XmlPage) getPage()).createProcessingInstruction(target, data);
         return getScriptableFor(node);
     }
@@ -378,7 +378,7 @@ public class XMLDocument extends Document {
      * @return the new CDATASection
      */
     @JsxFunction
-    public Object jsxFunction_createCDATASection(final String data) {
+    public Object createCDATASection(final String data) {
         final DomCDataSection node = ((XmlPage) getPage()).createCDATASection(data);
         return getScriptableFor(node);
     }
@@ -394,12 +394,12 @@ public class XMLDocument extends Document {
      * @return the newly created node
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public Object jsxFunction_createNode(final Object type, final String name, final Object namespaceURI) {
+    public Object createNode(final Object type, final String name, final Object namespaceURI) {
         switch((short) Context.toNumber(type)) {
             case Node.ELEMENT_NODE:
-                return jsxFunction_createElementNS((String) namespaceURI, name);
+                return createElementNS((String) namespaceURI, name);
             case Node.ATTRIBUTE_NODE:
-                return jsxFunction_createAttribute(name);
+                return createAttribute(name);
 
             default:
                 throw Context.reportRuntimeError("xmlDoc.createNode(): Unsupported type "

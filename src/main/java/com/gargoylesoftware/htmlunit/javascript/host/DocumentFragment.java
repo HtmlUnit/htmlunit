@@ -56,7 +56,7 @@ public class DocumentFragment extends Node {
      */
     @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_createAttribute(final String attributeName) {
-        return getDocument().jsxFunction_createAttribute(attributeName);
+        return getDocument().createAttribute(attributeName);
     }
 
     /**
@@ -67,7 +67,7 @@ public class DocumentFragment extends Node {
      */
     @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_createElement(final String tagName) {
-        return getDocument().jsxFunction_createElement(tagName);
+        return getDocument().createElement(tagName);
     }
 
     /**
@@ -85,7 +85,7 @@ public class DocumentFragment extends Node {
      */
     @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_createComment(final String comment) {
-        return getDocument().jsxFunction_createComment(comment);
+        return getDocument().createComment(comment);
     }
 
     /**
@@ -94,7 +94,7 @@ public class DocumentFragment extends Node {
      */
     @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_createDocumentFragment() {
-        return getDocument().jsxFunction_createDocumentFragment();
+        return getDocument().createDocumentFragment();
     }
 
     /**
@@ -105,6 +105,6 @@ public class DocumentFragment extends Node {
      */
     @JsxFunction(@WebBrowser(IE))
     public Object jsxFunction_createTextNode(final String newData) {
-        return getDocument().jsxFunction_createTextNode(newData);
+        return getDocument().createTextNode(newData);
     }
 }

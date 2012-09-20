@@ -1002,7 +1002,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the new HTML element, or NOT_FOUND if the tag is not supported
      */
     @Override
-    public Object jsxFunction_createElement(String tagName) {
+    public Object createElement(String tagName) {
         Object result = NOT_FOUND;
 
         // IE can handle HTML, but it takes only the first tag found
@@ -1010,7 +1010,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             final Matcher m = FIRST_TAG_PATTERN.matcher(tagName);
             if (m.find()) {
                 tagName = m.group(1);
-                result = super.jsxFunction_createElement(tagName);
+                result = super.createElement(tagName);
                 if (result == NOT_FOUND || m.group(2) == null) {
                     return result;
                 }
@@ -1027,7 +1027,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
         }
         else {
-            return super.jsxFunction_createElement(tagName);
+            return super.createElement(tagName);
         }
 
         return result;

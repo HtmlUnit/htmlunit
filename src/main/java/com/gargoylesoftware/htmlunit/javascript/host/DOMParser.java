@@ -54,7 +54,7 @@ public class DOMParser extends SimpleScriptable {
         final XMLDocument document = new XMLDocument();
         document.setParentScope(getParentScope());
         document.setPrototype(getPrototype(XMLDocument.class));
-        document.jsxFunction_loadXML(str);
+        document.loadXML(str);
         return document;
     }
 }

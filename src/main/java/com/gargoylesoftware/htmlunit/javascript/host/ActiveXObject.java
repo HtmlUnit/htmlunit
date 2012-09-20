@@ -256,7 +256,7 @@ public class ActiveXObject extends SimpleScriptable {
 
     private static void addFunction(final SimpleScriptable scriptable,
             final String jsMethodName) {
-        addFunction(scriptable, jsMethodName, "jsxFunction_" + jsMethodName);
+        addFunction(scriptable, jsMethodName, jsMethodName);
     }
 
     private static void addFunction(final SimpleScriptable scriptable,
