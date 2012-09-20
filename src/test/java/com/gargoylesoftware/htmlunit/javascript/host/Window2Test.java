@@ -14,13 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -45,7 +47,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(IE = { "not found", "true" },
             FF3_6 = { "found", "exception", "false" },
             FF = { "found", "true" })
-    @NotYetImplemented(Browser.FF3_6)
+    @NotYetImplemented(FF3_6)
     public void FF_controllers() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -104,7 +106,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "SGVsbG8gV29ybGQh", "Hello World!" })
     public void atob() throws Exception {
         final String html
@@ -137,7 +139,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     @Alerts(FF = { "java: undefined", "getClass: undefined" },
             FF10 = { "java: function", "getClass: undefined" },
             IE = { "java: undefined", "getClass: undefined" })
@@ -150,7 +152,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     @Alerts(FF3_6 = { "Packages: object", "XML: function", "XMLList: function",
                     "Namespace: function", "QName: function" },
             FF = { "Packages: function", "XML: function", "XMLList: function",
@@ -388,7 +390,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FF3_6)
+    @NotYetImplemented(FF3_6)
     @Alerts(IE = { "true", "true", "object" },
             FF3_6 = { "false", "false", "undefined" },
             FF = { "true", "true", "undefined" })
@@ -623,7 +625,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts(FF = { "true", "true", "true", "true", "true", "true" },
             FF10 = { "true", "true", "false", "true", "true", "true" })
     public void heightsAndWidths() throws Exception {

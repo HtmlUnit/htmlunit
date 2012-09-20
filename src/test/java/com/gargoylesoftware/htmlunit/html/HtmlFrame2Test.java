@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.net.URL;
 import java.util.List;
 
@@ -24,7 +26,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -166,7 +167,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void frameOnloadFrameInFrame() throws Exception {
         final URL urlFourth = new URL("http://127.0.0.1:" + PORT + "/fourth/");
 

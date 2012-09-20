@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -21,7 +23,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -80,7 +81,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             IE6 = "ab",
             IE7 = "ab",
             CHROME = "")
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     //TODO: Needs further investigation of clicking an option without clicking the select
     //See the first comment in http://code.google.com/p/selenium/issues/detail?id=2131#c1
     // Additionally, FF and Chrome drivers look buggy as they don't allow to capture

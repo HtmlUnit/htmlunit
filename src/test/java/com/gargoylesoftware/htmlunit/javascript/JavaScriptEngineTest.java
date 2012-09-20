@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -40,7 +41,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -988,7 +988,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void activeXObjectWithMap() throws Exception {
         final Map<String, String> activexToJavaMapping = new HashMap<String, String>();
         activexToJavaMapping.put(
@@ -1587,7 +1587,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     @Alerts(FF = { "0", "false", "0" },
             IE = { "1", "true", "1" })
     public void nativeFunction_toStringValue() throws Exception {

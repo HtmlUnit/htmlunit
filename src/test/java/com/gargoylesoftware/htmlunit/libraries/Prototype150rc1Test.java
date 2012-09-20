@@ -14,11 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -118,7 +119,7 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void selector() throws Exception {
         test("selector.html");
     }

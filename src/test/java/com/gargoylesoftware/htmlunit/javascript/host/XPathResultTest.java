@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
@@ -37,7 +38,7 @@ public class XPathResultTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "4", "1", "3" })
     public void resultType() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -72,7 +73,7 @@ public class XPathResultTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "7", "id1", "id2" })
     public void snapshotType() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -107,7 +108,7 @@ public class XPathResultTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "9", "id1" })
     public void singleNodeValue() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -140,7 +141,7 @@ public class XPathResultTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "id1", "id2" })
     public void iterateNext() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -177,7 +178,7 @@ public class XPathResultTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts("7")
     public void notOr() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"

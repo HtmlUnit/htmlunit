@@ -14,13 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -48,7 +50,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     @Alerts(IE = { "all node for body: DIV A IMG DIV ", "all node for testDiv: A IMG ",
             "all node for testA: IMG ", "all node for testImg: ", "all node for testDiv2: " })
     public void all_IndexByInt() throws Exception {
@@ -724,7 +726,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts(IE = {
             "body.cpuClass = undefined",
             "body.cpuClass = x86",
@@ -756,7 +758,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "body.isHomePage = undefined", "body.isHomePage = false", "body.isHomePage = undefined" })
     public void removeBehavior() throws Exception {
         final String html = "<html>\n"
@@ -782,7 +784,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "BR", "DIV", "2", "3" })
     public void children() throws Exception {
         final String html = "<html>\n"
@@ -1319,7 +1321,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("rgb(0, 0, 0)")
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void currentStyle() throws Exception {
         style("currentStyle");
     }
@@ -1329,7 +1331,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("")
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     public void runtimeStyle() throws Exception {
         style("runtimeStyle");
     }
@@ -1420,7 +1422,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Alerts(DEFAULT = { "400", "100" }, IE = { "402", "102" })
     @Test
-//    @NotYetImplemented({ Browser.FF, Browser.CHROME })
+//    @NotYetImplemented({ FF, CHROME })
     public void getBoundingClientRect2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1478,7 +1480,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     public void getClientRects() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1561,7 +1563,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "true", "true" })
     public void uniqueIDFormatIE() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1587,7 +1589,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     public void setExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1604,7 +1606,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     public void removeExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1670,7 +1672,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "undefined", "x86", "0", "undefined" })
     public void getComponentVersion() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1970,7 +1972,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "div2", "null", "div3", "div4", "div6", "div7", "null" })
     public void removeNode() throws Exception {
         final String html
@@ -2027,7 +2029,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts(IE = { "false,false,false,false,false,false,false", "false,false,false,false,false,true,true" })
     public void clearAttributes() throws Exception {
         final String html
@@ -2048,7 +2050,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void mergeAttributes() throws Exception {
         mergeAttributes("i2", "false,false,false,false,false,true,true", "i", "",
             "false,false,false,false,false,false,false", "i", "");
@@ -2106,7 +2108,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF3_6 = { "undefined", "true" }, CHROME = { "undefined", "true" },
             DEFAULT = "exception")
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     public void prototype_innerHTML() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"

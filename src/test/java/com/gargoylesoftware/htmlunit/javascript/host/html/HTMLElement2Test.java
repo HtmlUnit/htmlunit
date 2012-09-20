@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +25,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -116,7 +117,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "30", "30", "30" })
     public void offsetWidth_withEvent() throws Exception {
         final String html =

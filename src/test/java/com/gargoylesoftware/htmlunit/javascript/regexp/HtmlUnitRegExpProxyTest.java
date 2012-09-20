@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,7 +25,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -268,7 +269,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * - $$: should be replaced by $
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void computeReplacementValue() {
         final String theString = "hello";
         final Matcher matcher0group = Pattern.compile("h").matcher("hello");
@@ -295,7 +296,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @see #ignoreBackReferenceInCharacterClass()
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void removeBackReferencesInCharacterClasses() {
         assertEquals("(a)(b)[^c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[^\\2c]"));
         assertEquals("(a)(b)[c]", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("(a)(b)[\\2c]"));
@@ -307,7 +308,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @see #backslash()
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void unescapeIllegallyEscapedChars() {
         assertEquals("a", HtmlUnitRegExpProxy.jsRegExpToJavaRegExp("\\a"));
 

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER_8;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertNotNull;
@@ -55,7 +56,6 @@ import org.w3c.css.sac.ErrorHandler;
 
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
@@ -91,7 +91,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void testTests() throws Exception {
         testTests(new File("src/test/java"));
     }
@@ -145,7 +145,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void addRequestHeader_Cookie() throws Exception {
         final WebClient client = new WebClient();
         try {
@@ -1581,7 +1581,7 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void testGetPageWithStringArg() throws Exception {
         final URL[] calledUrls = {null};
         final WebClient wc = new WebClient() {

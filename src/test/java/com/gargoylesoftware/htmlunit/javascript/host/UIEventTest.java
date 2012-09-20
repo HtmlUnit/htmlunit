@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -86,7 +87,7 @@ public class UIEventTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts({ "click", "true", "true", "true", "7" })
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void initUIEvent() throws Exception {
         final String html = "<html><body><script>\n"
             + "  var e = document.createEvent('UIEvents');\n"

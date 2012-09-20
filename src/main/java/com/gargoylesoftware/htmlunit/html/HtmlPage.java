@@ -921,7 +921,7 @@ public class HtmlPage extends SgmlPage {
      * be achieved to execute JavaScript in the current page by entering "javascript:...some JS code..."
      * in the URL field of a native browser.</p>
      * <p><b>Note:</b> the provided code won't be executed if JavaScript has been disabled on the WebClient
-     * (see {@link WebClientOptions#isJavaScriptEnabled()}.</p>
+     * (see {@link com.gargoylesoftware.htmlunit.WebClientOptions#isJavaScriptEnabled()}.</p>
      * @param sourceCode the JavaScript code to execute
      * @return a ScriptResult which will contain both the current page (which may be different than
      * the previous page) and a JavaScript result object

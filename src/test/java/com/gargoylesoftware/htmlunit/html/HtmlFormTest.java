@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
@@ -32,7 +34,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -41,9 +42,9 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -1088,7 +1089,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.FF })
+    @Browsers({ FF })
     public void urlAfterSubmitWithAnchor() throws Exception {
         urlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
         urlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo#anchor");
@@ -1100,7 +1101,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE })
+    @Browsers({ IE })
     public void urlAfterSubmitWithAnchor_IE() throws Exception {
         urlAfterSubmit("get", "foo#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
         urlAfterSubmit("get", "foo?foo=12#anchor", "foo?textField=foo&nonAscii=Flo%DFfahrt&button=foo");
@@ -1541,7 +1542,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     public void encoding() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title>\n"

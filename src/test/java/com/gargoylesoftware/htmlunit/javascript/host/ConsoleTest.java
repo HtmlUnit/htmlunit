@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +23,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link Console}.
@@ -40,7 +41,7 @@ public class ConsoleTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void log() throws Exception {
         final WebConsole console = getWebClient().getWebConsole();
         final List<String> messages = new ArrayList<String>();

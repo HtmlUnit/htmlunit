@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +26,12 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Tests for {@link ActiveXObject}.
@@ -45,7 +47,7 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void xmlHttpRequestFlavours() throws Exception {
         assertFalse(ActiveXObject.isXMLHttpRequest(null));
         assertFalse(ActiveXObject.isXMLHttpRequest("foo"));
@@ -64,7 +66,7 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void xmlDocument() throws Exception {
         final String content = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -84,7 +86,7 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts("exception: Automation server can't create object for 'InternetExplorer.Application'.")
     @NotYetImplemented
     public void activex() throws Exception {
@@ -105,7 +107,7 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void activex2() throws Exception {
         if (!getBrowserVersion().isIE()) {
             throw new Exception();
@@ -168,7 +170,7 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void method() throws Exception {
         if (!getBrowserVersion().isIE()) {
             throw new Exception();
@@ -207,7 +209,7 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void setProperty() throws Exception {
         if (!getBrowserVersion().isIE()) {
             throw new Exception();

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
@@ -25,14 +27,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -208,7 +209,7 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "window capturing", "div capturing", "span capturing",
         "span bubbling", "div", "div bubbling", "window bubbling" })
     public void testFF_EventCapturingAndBubbling() throws Exception {
@@ -246,7 +247,7 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @NotYetImplemented // TODO: in IE no click event can be registered for the window
     @Alerts({ "span bubbling", "div", "div bubbling" })
     public void testIE_EventBubbling() throws Exception {
@@ -281,7 +282,7 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void testFF_StopPropagation() throws Exception {
         testFF_StopPropagation("stopPropagation()");
         testFF_StopPropagation("cancelBubble=true");
@@ -324,7 +325,7 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void testFF_StopPropagation_WithMultipleEventHandlers() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -398,7 +399,7 @@ public class Event3Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "capturing", "at target", "bubbling" })
     public void testEventPhase() throws Exception {
         final String html =

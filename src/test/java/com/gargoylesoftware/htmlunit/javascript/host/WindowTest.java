@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
@@ -34,7 +35,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.base.testing.EventCatcher;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -44,9 +44,9 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.PromptHandler;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowEvent;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
@@ -2240,7 +2240,7 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void showModelessDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"

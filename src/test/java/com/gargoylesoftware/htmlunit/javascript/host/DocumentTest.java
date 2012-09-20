@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +28,12 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -349,7 +353,7 @@ public class DocumentTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts(FF = { "Some:Div,Some:Div,myNS,Some,Div", "svg,svg,http://www.w3.org/2000/svg,null,svg" })
     public void createElementNS() throws Exception {
         final String html
@@ -1788,7 +1792,7 @@ public class DocumentTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "true", "object", "[object Event]", "true" })
     public void createEvent_FF_Event() throws Exception {
         createEvent_FF("Event");
@@ -1798,7 +1802,7 @@ public class DocumentTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "true", "object", "[object Event]", "true" })
     public void createEvent_FF_Events() throws Exception {
         createEvent_FF("Events");
@@ -1808,7 +1812,7 @@ public class DocumentTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "true", "object", "[object Event]", "true" })
     public void createEvent_FF_HTMLEvents() throws Exception {
         createEvent_FF("HTMLEvents");
@@ -1844,7 +1848,7 @@ public class DocumentTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts(FF = { "null", "null", "[object HTMLDivElement]" })
     public void createEvent_FF_Target() throws Exception {
         final String html =
@@ -1976,7 +1980,7 @@ public class DocumentTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts(FF = { "0", "1", "1" })
     public void designMode_createsSelectionRange() throws Exception {
         final String html1 = "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";
@@ -2059,7 +2063,7 @@ public class DocumentTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts("[object HTMLHeadingElement]")
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void evaluate_caseInsensitiveAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2079,7 +2083,7 @@ public class DocumentTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts("[object HTMLHtmlElement]")
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void evaluate_caseInsensitiveTagName() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2193,7 +2197,7 @@ public class DocumentTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE, Browser.FF3_6, Browser.FF10 })
+    @Browsers({ IE, FF3_6, FF10 })
     public void activeElement() throws Exception {
         final String html = "<html><head><script>\n"
             + "  alert(document.activeElement);"
@@ -2215,7 +2219,7 @@ public class DocumentTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE })
+    @Browsers({ IE })
     public void setActive() throws Exception {
         final String html = "<html><head><script>\n"
             + "  alert(document.activeElement);"
@@ -2242,7 +2246,7 @@ public class DocumentTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void captureEvents() throws Exception {
         final String content = "<html><head><title>foo</title>\n"
             + "<script>\n"

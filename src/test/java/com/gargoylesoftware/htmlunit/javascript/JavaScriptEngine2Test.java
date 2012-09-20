@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -22,7 +24,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -137,7 +138,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"in goo", "in hoo", "in foo" },
             FF = {"in goo", "in hoo", "foo error" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void functionDeclaredForwardInBlock() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"

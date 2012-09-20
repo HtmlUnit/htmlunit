@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -113,7 +114,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "false")
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void testReadOnly() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -177,7 +178,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Alerts(IE = { "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='rightCorner.gif',sizingMethod='crop')" },
             FF = { "undefined" },
             FF10 = { "" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void colon() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"

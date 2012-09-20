@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -107,7 +108,7 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "top" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "top" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
- * The runner for test methods that run without any browser ({@link BrowserRunner.Browser.NONE})
+ * The runner for test methods that run without any browser ({@link BrowserRunner.Browser#NONE})
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -96,7 +98,7 @@ class BrowserNoneClassRunner extends BlockJUnit4ClassRunner {
         for (int i = 0; i < methods.size(); i++) {
             final Method method = methods.get(i).getMethod();
             final Browsers browsers = method.getAnnotation(Browsers.class);
-            if (browsers == null || browsers.value()[0] != Browser.NONE) {
+            if (browsers == null || browsers.value()[0] != NONE) {
                 methods.remove(i--);
             }
         }
@@ -107,7 +109,7 @@ class BrowserNoneClassRunner extends BlockJUnit4ClassRunner {
         for (final Method method : klass.getMethods()) {
             if (method.getAnnotation(Test.class) != null) {
                 final Browsers browsers = method.getAnnotation(Browsers.class);
-                if (browsers != null && browsers.value()[0] == Browser.NONE) {
+                if (browsers != null && browsers.value()[0] == NONE) {
                     return true;
                 }
             }
@@ -123,7 +125,7 @@ class BrowserNoneClassRunner extends BlockJUnit4ClassRunner {
             final Browsers browsers = method.getAnnotation(Browsers.class);
             if (browsers != null) {
                 for (final Browser browser : browsers.value()) {
-                    if (browser == Browser.NONE && browsers.value().length > 1) {
+                    if (browser == NONE && browsers.value().length > 1) {
                         collectederrors.add(new Exception("Method " + method.getName()
                                 + "() cannot have Browser.NONE along with other Browsers."));
                     }

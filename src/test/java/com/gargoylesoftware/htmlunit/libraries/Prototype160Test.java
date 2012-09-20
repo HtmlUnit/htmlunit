@@ -14,11 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -37,7 +39,7 @@ public class Prototype160Test extends PrototypeTestBase {
      * For IE: 2 assertions pass whereas they shouldn't in testResponders
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void ajax() throws Exception {
         test("ajax.html");
     }
@@ -105,7 +107,7 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void form() throws Exception {
         test("form.html");
     }
@@ -165,7 +167,7 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF3_6)
+    @NotYetImplemented(FF3_6)
     public void unitTests() throws Exception {
         test("unit_tests.html");
     }

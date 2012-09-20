@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Method;
@@ -179,7 +180,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         for (int i = 0; i < methods.size(); i++) {
             final Method method = methods.get(i).getMethod();
             final Browsers browsers = method.getAnnotation(Browsers.class);
-            if (browsers != null && browsers.value()[0] == Browser.NONE) {
+            if (browsers != null && browsers.value()[0] == NONE) {
                 methods.remove(i--);
             }
         }
@@ -197,7 +198,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         for (final Method method : klass.getMethods()) {
             if (method.getAnnotation(Test.class) != null) {
                 final Browsers browsers = method.getAnnotation(Browsers.class);
-                if (browsers == null || browsers.value()[0] != Browser.NONE) {
+                if (browsers == null || browsers.value()[0] != NONE) {
                     return true;
                 }
             }

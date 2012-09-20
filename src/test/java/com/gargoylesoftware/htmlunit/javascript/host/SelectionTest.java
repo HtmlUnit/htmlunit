@@ -14,12 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -38,7 +40,7 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts(IE = "true")
     public void equality_IE() throws Exception {
         final String html = "<html><body><script>alert(document.selection==document.selection);</script></body></html>";
@@ -49,7 +51,7 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts(FF = "true")
     public void equality_FF() throws Exception {
         final String html = "<html><body><script>\n"
@@ -62,7 +64,7 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts(FF = { "0", "0", "0", "cdefg" })
     public void inputSelectionsAreIndependent() throws Exception {
         final String html = "<html><body onload='test()'>\n"
@@ -87,7 +89,7 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts(FF = {
             "1:null/0/null/0/true/undefined/0/",
             "2:s2/0/s2/1/false/undefined/1/xyz/xyz",
@@ -138,7 +140,7 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @NotYetImplemented
     @Alerts(FF3_6 = {
             "1:[object Text]/1/[object Text]/2/false/undefined/1/yzfo/yzfo",
@@ -195,7 +197,7 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts(FF = { "", "", "null", "null" })
     public void getSelection_display() throws Exception {
         final String html = "<html><body onload='test()'>\n"

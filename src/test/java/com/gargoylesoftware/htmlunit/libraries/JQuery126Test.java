@@ -14,13 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+
 import java.net.URL;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 
@@ -59,7 +60,7 @@ public class JQuery126Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented({ Browser.IE8 }) // IE8 needs the expectation file
+    @NotYetImplemented({ IE8 }) // IE8 needs the expectation file
     @Tries(3)
     public void test() throws Exception {
         startWebServer("src/test/resources/libraries/jquery/" + getVersion());

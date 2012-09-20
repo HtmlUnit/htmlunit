@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -23,7 +26,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -42,7 +44,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     @Alerts(IE = { "true", "false", "false", "false", "false", "false" },
             DEFAULT = { "true", "true", "true", "true", "true", "true" })
     public void checked_on_attachment() throws Exception {
@@ -104,7 +106,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "foo,change,", DEFAULT = "foo,change,boo,blur,")
-    @NotYetImplemented(Browser.CHROME)
+    @NotYetImplemented(CHROME)
     public void onchangeFires2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
@@ -36,7 +37,7 @@ public class EnumeratorTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "false", "[object]", "undefined", "undefined", "true" })
     public void basicEnumerator() throws Exception {
         final String html
@@ -61,7 +62,7 @@ public class EnumeratorTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "f t1 t2", "t1", "t2" })
     public void formEnumerator() throws Exception {
         final String html
@@ -79,7 +80,7 @@ public class EnumeratorTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "undefined", "text" })
     public void item() throws Exception {
         final String html

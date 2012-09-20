@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp.mozilla.js1_2;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -60,7 +61,7 @@ public class DigitTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = non_digits_expected, IE = non_digits_expected_ie)
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void test2() throws Exception {
         final String initialScript = "var non_digits = '" + non_digits + "'";
         test(initialScript, "non_digits.match(new RegExp('\\\\D+'))");
@@ -105,7 +106,7 @@ public class DigitTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = non_digits_expected, IE = non_digits_expected_ie)
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void test6() throws Exception {
         final String initialScript = "var s = '" + digits + non_digits + "'";
         test(initialScript, "s.match(new RegExp('\\\\D+'))");

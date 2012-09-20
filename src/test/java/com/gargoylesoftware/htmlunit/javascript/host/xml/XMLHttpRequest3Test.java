@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static org.junit.Assert.assertSame;
 
 import java.io.IOException;
@@ -31,7 +32,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
@@ -385,7 +385,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      * Regression test for bug 1209686 (onreadystatechange not called with partial data when emulating FF).
      * @throws Exception if an error occurs
      */
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Test
     @NotYetImplemented
     public void testStreaming() throws Exception {
@@ -455,7 +455,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "orsc1", "orsc1", "orsc2", "orsc3", "orsc4", "4", "<a>b</a>", "[object XMLHttpRequest]" })
     public void onload() throws Exception {
         final String html =

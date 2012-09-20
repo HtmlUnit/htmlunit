@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,7 +33,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -56,7 +57,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void basicBehavior() throws Exception {
         // Create a new cookie manager.
         final CookieManager mgr = new CookieManager();
@@ -193,7 +194,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void httpClientParsesCookiesQuotedValuesCorrectly() throws Exception {
         final Header header = new BasicHeader("Set-Cookie", "first=\"hello world\"");
         final BrowserCompatSpec spec = new BrowserCompatSpec();

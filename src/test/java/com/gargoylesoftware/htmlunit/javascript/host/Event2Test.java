@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -21,7 +23,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -43,7 +44,7 @@ public class Event2Test extends WebDriverTestCase {
             FF3_6 = { "click [select] [1]", "click [clickMe] [1]", "change [select] [-]" },
             IE8 = { "click [select] [1]", "click [clickMe] [1]", "change [select] [-]" },
             IE = { "change [select] [-]", "click [select] [-]" })
-    @NotYetImplemented(Browser.IE8)
+    @NotYetImplemented(IE8)
     public void optionClick() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'\n";
         final String secondSnippet = ">\n"

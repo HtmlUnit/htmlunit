@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;

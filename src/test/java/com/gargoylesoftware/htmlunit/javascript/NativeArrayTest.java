@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -38,7 +39,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     @Alerts(DEFAULT = { "1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9" },
             IE = { "1<>9", "9<>5", "9<>2", "9<>1", "1<>5", "5<>1", "5<>2", "5<>1", "1<>1", "1<>2", "2<>1", "1<>1" })
     public void sort() throws Exception {

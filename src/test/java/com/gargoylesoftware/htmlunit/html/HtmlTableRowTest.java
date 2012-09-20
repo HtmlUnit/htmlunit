@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
@@ -24,7 +25,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -234,7 +234,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * Ensure that a script can set the disabled property on a DOM node.
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     public void testCloneScriptCanSetDisabledOnCell() {
         final String cmd = "document.getElementById('cell').disabled='true'";
         page_.executeJavaScript(cmd);
@@ -271,7 +271,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      * that same attribute on the clone.
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     public void testCloneScriptSetDisabledIndependentOfOriginal() {
         final String cmd = "document.getElementById('cell').disabled = 'true'";
         page_.executeJavaScript(cmd);

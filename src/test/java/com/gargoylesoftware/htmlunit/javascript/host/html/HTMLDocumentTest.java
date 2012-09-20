@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument.EMPTY_COOKIE_NAME;
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 import static org.junit.Assert.fail;
@@ -33,7 +37,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -251,7 +254,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "[object HTMLDivElement]", "[object HTMLUnknownElement]", "[object Element]" })
     public void createDocumentNS() throws Exception {
         final String html = "<html>\n"
@@ -386,7 +389,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts("clicked")
     public void dispatchEvent() throws Exception {
         final String html =
@@ -753,7 +756,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * Test having &lt; and &gt; in attribute values.
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void canAlreadyBeParsed() {
         assertTrue(HTMLDocument.canAlreadyBeParsed("<p>hallo</p>"));
         assertTrue(HTMLDocument.canAlreadyBeParsed("<img src='foo' alt=\"<'>\"></img>"));
@@ -1054,7 +1057,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "0" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void getElementsByTagName3() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1145,7 +1148,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void buildCookie() throws Exception {
         final String domain = URL_FIRST.getHost();
         checkCookie(HTMLDocument.buildCookie("", URL_FIRST), EMPTY_COOKIE_NAME, "", "", domain, false, null);
@@ -1400,7 +1403,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "", "true" }, FF3_6 = { "", "false" }, IE = { })
-    @NotYetImplemented(Browser.FF3_6)
+    @NotYetImplemented(FF3_6)
 //            IE9 = {"", "true" }
     public void getSelection() throws Exception {
         final String html =

@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +26,12 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -171,7 +173,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts(FF = "true")
     public void contentDocument() throws Exception {
         final String html
@@ -537,7 +539,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
     @Test
     @Alerts(IE = { "[object]", "[object]", "undefined", "" },
             FF = { "[object HTMLIFrameElement]", "[object HTMLIFrameElement]", "", "" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void idByName() throws Exception {
         final String html
             = "<html><head>"

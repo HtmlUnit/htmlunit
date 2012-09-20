@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -39,7 +40,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(
             FF = { "", "", "", "", "" },
             IE = { "transparent", "none", "repeat", "0% 0%", "scroll" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void backgroundEmpty() throws Exception {
         background("");
     }
@@ -185,7 +186,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(
             FF = { "transparent", "none", "repeat", "0% 0%", "scroll" },
             IE = { "transparent", "none", "repeat", "undefined", "scroll" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void backgroundCssEmpty() throws Exception {
         backgroundCss("");
     }
@@ -197,7 +198,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(
             FF = { "rgb(255, 0, 0)", "none", "repeat", "0% 0%", "scroll" },
             IE = { "red", "none", "repeat", "undefined", "scroll" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void backgroundCssColorRed() throws Exception {
         backgroundCss("red");
     }
@@ -209,7 +210,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(
             FF = { "rgb(20, 40, 60)", "none", "repeat", "0% 0%", "scroll" },
             IE = { "rgb(20,40,60)", "none", "repeat", "undefined", "scroll" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void backgroundCssColorRgb() throws Exception {
         backgroundCss("rgb(20, 40, 60)");
     }
@@ -233,7 +234,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(
             FF = { "transparent", "none", "repeat-x", "0% 0%", "scroll" },
             IE = { "transparent", "none", "repeat-x", "undefined", "scroll" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void backgroundCssRepeat() throws Exception {
         backgroundCss("repeat-x");
     }
@@ -245,7 +246,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(
             FF = { "transparent", "none", "repeat", "20px 100%", "scroll" },
             IE = { "transparent", "none", "repeat", "undefined", "scroll" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void backgroundCssPosition() throws Exception {
         backgroundCss("20px 100%");
     }
@@ -257,7 +258,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(
             FF = { "transparent", "none", "repeat", "100% 100%", "scroll" },
             IE = { "transparent", "none", "repeat", "undefined", "scroll" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void backgroundCssPosition2() throws Exception {
         backgroundCss("bottom right");
     }
@@ -269,7 +270,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(
             FF = { "transparent", "none", "repeat", "0% 100%", "scroll" },
             IE = { "transparent", "none", "repeat", "undefined", "scroll" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void backgroundCssPosition3() throws Exception {
         backgroundCss("left bottom");
     }
@@ -281,7 +282,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(
             FF = { "transparent", "none", "repeat", "50% 0%", "scroll" },
             IE = { "transparent", "none", "repeat", "undefined", "scroll" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void backgroundCssPosition4() throws Exception {
         backgroundCss("top center");
     }
@@ -293,7 +294,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(
             FF = { "transparent", "none", "repeat", "0% 0%", "fixed" },
             IE = { "transparent", "none", "repeat", "undefined", "fixed" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void backgroundCssAttachment() throws Exception {
         backgroundCss("fixed");
     }
@@ -305,7 +306,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(
             FF = { "rgb(255, 204, 221)", "none", "repeat", "0% 0%", "scroll" },
             IE = { "#ffccdd", "none", "repeat", "undefined", "scroll" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void backgroundCssColorHex() throws Exception {
         backgroundCss("#ffccdd");
     }
@@ -329,7 +330,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(
             FF = { "rgb(255, 255, 255)", "none", "no-repeat", "20px 100px", "scroll" },
             IE = { "#fff", "none", "no-repeat", "undefined", "scroll" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void backgroundCssMixed2() throws Exception {
         backgroundCss("#fff no-repeat 20px 100px");
     }

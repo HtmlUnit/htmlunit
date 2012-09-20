@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -26,14 +28,13 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.util.Cookie;
@@ -53,7 +54,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     @Alerts(FF = { "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-" })
     public void readyState() throws Exception {
         final String html = "<html>\n"
@@ -113,7 +114,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
     * @throws Exception if the test fails
     */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "www.gargoylesoftware.com", "gargoylesoftware.com" })
     public void domainMixedCaseNetscape() throws Exception {
         final URL urlGargoyleUpperCase = new URL("http://WWW.GARGOYLESOFTWARE.COM/");

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
@@ -23,12 +24,11 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Test class for {@link HTMLParser}.
@@ -250,7 +250,7 @@ public class HTMLParserTest extends SimpleWebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     @Alerts(IE = {"HEAD", "Outer Html", "outerDiv" },
             FF = {"HEAD", "Outer Html", "HEAD", "Inner Html", "outerDiv" })
     public void completeHtmlInsideDiv() throws Exception {
@@ -299,7 +299,7 @@ public class HTMLParserTest extends SimpleWebTestCase {
      * @throws Exception failure
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     @Alerts(IE = {"HEAD", "Outer Html", "outerDiv" },
             FF = {"HEAD", "Outer Html", "HEAD", "Inner Html", "outerDiv" })
     public void writeCompleteHtmlInsideDIV() throws Exception {

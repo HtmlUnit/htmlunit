@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import java.net.URL;
 
 import org.junit.Test;
@@ -21,7 +23,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -222,7 +223,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", ".testStyleDef", ".testStyle" })
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void insertRuleLeadingWhitespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -296,7 +297,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     @Alerts(FF = { "true", "true", "false" }, IE = { "false", "false", "false" })
     public void css3_not() throws Exception {
         doTest(":not(span)", "<span id='elt2'></span>");

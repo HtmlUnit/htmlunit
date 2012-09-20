@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -116,7 +117,7 @@ public class DOMParserTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "5", "[object CDATASection]", "[object Comment]", "[object Element]", "[object ProcessingInstruction]",
         "[object Text]" })
     public void parseFromString_processingInstructionKept() throws Exception {

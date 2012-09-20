@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE7;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,7 +31,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -113,7 +116,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE6)
+    @NotYetImplemented(IE6)
     //TODO: This test fails with WebDriver with real FF3, but succeed if test is done outside WebDriver
     @Alerts(FF = "success", IE = "success",
             IE7 = "error: outlineWidth-error: outlineWidth-error: outlineWidth-error: outlineWidth-",
@@ -160,7 +163,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.IE7 })
+    @NotYetImplemented({ IE7 })
     public void properties() throws Exception {
         final Map<BrowserVersion, String[]> properties = new HashMap<BrowserVersion, String[]>();
         properties.put(BrowserVersion.INTERNET_EXPLORER_6, new String[]{
@@ -932,7 +935,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented({ Browser.IE7, Browser.IE8 })
+    @NotYetImplemented({ IE7, IE8 })
     public void properties2() throws Exception {
         final Map<BrowserVersion, String[]> properties = new HashMap<BrowserVersion, String[]>();
         properties.put(BrowserVersion.INTERNET_EXPLORER_6, new String[]{

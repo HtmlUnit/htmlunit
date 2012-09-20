@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +29,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -1228,7 +1229,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "function", IE = "string")
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     public void onchangeHandler() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

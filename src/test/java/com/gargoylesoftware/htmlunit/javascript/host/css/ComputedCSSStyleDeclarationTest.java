@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,7 +30,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -69,7 +72,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF3_6)
+    @Browsers(FF3_6)
     public void stringPropertiesFF3_6() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -175,7 +178,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({"", "", "auto", "pointer" })
     public void styleElement() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -210,7 +213,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({"", "", "pointer", "pointer" })
     public void styleElement2() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -240,7 +243,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "0", "number" })
     public void zIndex() throws Exception {
         final String html = "<html>\n"
@@ -554,7 +557,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "red", "blue" })
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"

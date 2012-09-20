@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+
 import java.util.List;
 
 import org.junit.Test;
@@ -22,7 +24,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -41,7 +42,7 @@ public class StorageTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "undefined", "undefined", "undefined" }, IE8 = { "undefined", "[object]", "[object]" },
             FF = { "[object StorageList]", "[object Storage]", "[object Storage]" })
-    @NotYetImplemented(Browser.FF3_6)
+    @NotYetImplemented(FF3_6)
     public void storage() throws Exception {
         final String html
             = "<html><head></head><body>\n"

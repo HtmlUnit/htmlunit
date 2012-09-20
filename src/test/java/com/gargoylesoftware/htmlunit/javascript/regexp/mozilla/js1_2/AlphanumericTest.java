@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp.mozilla.js1_2;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -54,7 +55,7 @@ public class AlphanumericTest extends WebDriverTestCase {
                 + "3A-3B-27-3C-2C-3E-2E-2F-3F-C-A-D-9-20-22-B-",
             IE =  "7E-60-21-40-23-24-25-5E-26-2A-28-29-2D-2B-3D-7B-5B-7D-5D-7C-5C-"
                 + "3A-3B-27-3C-2C-3E-2E-2F-3F-C-A-D-9-20-22-")
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void test2() throws Exception {
         test("'" + non_alphanumeric + "'.match(new RegExp('\\\\W+'))", true);
     }
@@ -65,7 +66,7 @@ public class AlphanumericTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "null", IE = "v")
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void test3() throws Exception {
         test("'" + non_alphanumeric + "'.match(new RegExp('\\\\w+'))", false);
     }
@@ -86,7 +87,7 @@ public class AlphanumericTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = alphanumeric, IE = "v" + alphanumeric)
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void test5() throws Exception {
         test("'" + non_alphanumeric + alphanumeric + "'.match(new RegExp('\\\\w+'))", false);
     }
@@ -100,7 +101,7 @@ public class AlphanumericTest extends WebDriverTestCase {
                 + "3A-3B-27-3C-2C-3E-2E-2F-3F-C-A-D-9-20-22-B-",
             IE =  "7E-60-21-40-23-24-25-5E-26-2A-28-29-2D-2B-3D-7B-5B-7D-5D-7C-5C-"
                 + "3A-3B-27-3C-2C-3E-2E-2F-3F-C-A-D-9-20-22-")
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void test6() throws Exception {
         test("'" + alphanumeric + non_alphanumeric + "'.match(new RegExp('\\\\W+'))", true);
     }
@@ -124,7 +125,7 @@ public class AlphanumericTest extends WebDriverTestCase {
                 + "3A-3B-27-3C-2C-3E-2E-2F-3F-C-A-D-9-20-22-B-",
             IE =  "7E-60-21-40-23-24-25-5E-26-2A-28-29-2D-2B-3D-7B-5B-7D-5D-7C-5C-"
                 + "3A-3B-27-3C-2C-3E-2E-2F-3F-C-A-D-9-20-22-")
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void test8() throws Exception {
         test("'" + alphanumeric + non_alphanumeric + "'.match(/\\W+/)", true);
     }

@@ -23,8 +23,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * <p>Tests for all the generated attribute accessors. This test case will

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
@@ -29,7 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.DefaultPageCreator.PageType;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -50,7 +50,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
      * Test for {@link DefaultPageCreator#determinePageType(String)}.
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void determinePageType() {
         assertEquals(PageType.HTML, DefaultPageCreator.determinePageType("text/html"));
 

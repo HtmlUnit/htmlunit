@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 
 import org.junit.Test;
@@ -21,7 +22,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -39,7 +39,7 @@ public class IEWeirdSyntaxTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     @Alerts(IE = { "1", "2" })
     public void semicolon_before_finally() throws Exception {
         doTestTryCatchFinally("", ";");
@@ -51,7 +51,7 @@ public class IEWeirdSyntaxTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     @Alerts(IE = { "1", "2" })
     public void semicolon_before_catch() throws Exception {
         doTestTryCatchFinally(";", "");
@@ -62,7 +62,7 @@ public class IEWeirdSyntaxTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     @Alerts(IE = { "1", "2" })
     public void semicolonAndComment_before_catchAndFinally() throws Exception {
         doTestTryCatchFinally("// comment\n;\n", "");
@@ -103,7 +103,7 @@ public class IEWeirdSyntaxTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void windowDotHandlerFunction() throws Exception {
         final String html = "<html><head><script>\n"
             + "function window.onload() {\n"

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -24,13 +25,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -104,7 +104,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts(IE = { "Old = <B id=innerNode>Old outerHTML</B>", "New = <B><I id=newElt>New cell value</I></B>", "I" })
     public void getSetOuterHTMLComplex() throws Exception {
         final String html = "<html>\n"
@@ -136,7 +136,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "outside", "1", "middle", "2", "3", "4" })
     public void insertAdjacentHTML() throws Exception {
         insertAdjacentHTML("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
@@ -183,7 +183,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "outside", "1", "middle", "2", "3", "4" })
     public void insertAdjacentElement() throws Exception {
         insertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
@@ -230,7 +230,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts(IE = { "isHomePage = false", "isHomePage = true", "isHomePage = true", "isHomePage = false" })
     public void addBehaviorDefaultHomePage() throws Exception {
         final URL url1 = URL_FIRST;
@@ -287,7 +287,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts(IE = { "Refused", "foo" })
     public void addBehaviorDefaultDownload() throws Exception {
         final URL url1 = new URL("http://htmlunit.sourceforge.net/");
@@ -570,7 +570,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void fireEvent_WithoutTemplate() throws Exception {
         final String html =
             "<html><body>\n"
@@ -589,7 +589,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void fireEvent_WithTemplate() throws Exception {
         final String html =
             "<html><body>\n"
@@ -620,7 +620,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({"body1", "button1", "text1", "[object]", "onfocus text2", "text2", "onfocus text1", "onfocus text2" })
     public void setActiveAndFocus() throws Exception {
         final WebClient webClient = getWebClient();

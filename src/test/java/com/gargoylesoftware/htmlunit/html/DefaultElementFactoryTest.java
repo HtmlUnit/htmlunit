@@ -14,7 +14,6 @@
  */
 
 package com.gargoylesoftware.htmlunit.html;
-
 import java.util.Iterator;
 
 import org.junit.Test;

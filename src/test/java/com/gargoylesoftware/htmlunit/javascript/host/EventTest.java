@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -21,7 +25,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -97,7 +100,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("defined")
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void testEventArgDefined() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -114,7 +117,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("pass")
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void testEventTargetSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -152,7 +155,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("pass")
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void testEventCurrentTargetSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -171,7 +174,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "[object Window]", "[object HTMLDivElement]" })
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void testCurrentTarget_sameListenerForEltAndWindow() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -329,7 +332,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF3_6)
+    @NotYetImplemented(FF3_6)
     @Alerts(DEFAULT = "null", FF3_6 = "undefined")
     public void testNullEventHandler() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -348,7 +351,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     @Alerts(FF = {"object", "false" },
             IE = {"object", "undefined" })
     public void testBubbles() throws Exception {
@@ -403,7 +406,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void testSetEventPhaseToInvalidValue() throws Exception {
         boolean thrown = false;
         try {
@@ -419,7 +422,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "click", "true", "true", "dblclick", "false", "false" })
     public void testInitEvent() throws Exception {
         final String html =
@@ -485,7 +488,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts("400000,1,20000000,2000,8000,40,2,80,800,800000,1000,8000000,10000000,100,400,200,80000,1000000,"
             + "8,1,20,10,8,4,2,2000000,10000,4000000,40000,4000,4,20000,100000,200000,")
     public void constants() throws Exception {
@@ -513,7 +516,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts("40000000")
     public void text() throws Exception {
         final String html =

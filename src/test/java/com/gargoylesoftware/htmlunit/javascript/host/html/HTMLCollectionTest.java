@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +25,12 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Tests for {@link HTMLCollection}.
@@ -62,7 +64,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     @Alerts(IE = "object", FF = "function")
     public void testToStringFunction() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -81,7 +83,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts({ "5", "6" })
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void getElements() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -219,7 +221,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(Browser.FF)
+    @NotYetImplemented(FF)
     @Alerts(IE = { "null", "null", "undefined", "null" },
             FF = { "null", "null", "undefined", "exception" })
     public void testOutOfBoundAccess() throws Exception {

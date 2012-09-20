@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,7 +32,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -192,7 +195,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "someAttr", "someValue", "someAttr=\"someValue\"" })
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void testResponseXML2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -437,7 +440,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts("0")
     public void testCaseSensitivity() throws Exception {
         final String html = "<html><head><script>\n"
@@ -455,7 +458,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts("2")
     public void testResponseXML_selectNodesIE() throws Exception {
         final String html =
@@ -493,7 +496,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "null", "myID", "blah", "span", "[object XMLDocument]" })
     public void testResponseXML_getElementById_FF() throws Exception {
         final String html =
@@ -733,7 +736,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts("0")
     public void caseSensitivity_activeX() throws Exception {
         final String html = "<html><head><script>\n"
@@ -768,7 +771,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void isAuthorizedHeader() throws Exception {
         assertTrue(XMLHttpRequest.isAuthorizedHeader("Foo"));
         assertTrue(XMLHttpRequest.isAuthorizedHeader("Content-Type"));

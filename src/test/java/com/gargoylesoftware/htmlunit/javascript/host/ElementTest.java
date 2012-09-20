@@ -14,16 +14,20 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link Element}.
@@ -86,7 +90,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "true", "1", "title" })
     public void selectNodes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -211,7 +215,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "book", "0", "1" })
     public void selectNode_root() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -279,7 +283,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts("false")
     public void hasAttribute() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -447,7 +451,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div"
                 })
-    @NotYetImplemented({ Browser.FF3_6, Browser.FF10 })
+    @NotYetImplemented({ FF3_6, FF10 })
     public void html_localName() throws Exception {
         html("localName");
     }
@@ -468,7 +472,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
                 })
-    @NotYetImplemented({ Browser.FF3_6, Browser.FF10 })
+    @NotYetImplemented({ FF3_6, FF10 })
     public void html_namespaceURI() throws Exception {
         html("namespaceURI");
     }
@@ -591,7 +595,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLUnknownElement],app:div",
                 "[object HTMLUnknownElement],another:div"
                 })
-    @NotYetImplemented({ Browser.FF3_6, Browser.FF10 })
+    @NotYetImplemented({ FF3_6, FF10 })
     public void namespace_localName() throws Exception {
         namespace("localName");
     }
@@ -616,7 +620,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
                 })
-    @NotYetImplemented({ Browser.FF3_6, Browser.FF10 })
+    @NotYetImplemented({ FF3_6, FF10 })
     public void namespace_namespaceURI() throws Exception {
         namespace("namespaceURI");
     }

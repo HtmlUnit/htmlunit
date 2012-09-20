@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +26,11 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -48,7 +50,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "", "cx" })
     public void stringValue_FF() throws Exception {
         test("", "selection", "x");
@@ -58,7 +60,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "[object]", "[object]" })
     public void stringValue_IE() throws Exception {
         test("", "selection", "x");
@@ -68,7 +70,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "null", "s1" })
     public void anchorNode() throws Exception {
         test("", "selection.anchorNode", "x ? x.parentNode.id : x");
@@ -78,7 +80,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "0", "2" })
     public void anchorOffset() throws Exception {
         test("", "selection.anchorOffset", "x");
@@ -88,7 +90,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "null", "s2" })
     public void focusNode() throws Exception {
         test("", "selection.focusNode", "x ? x.parentNode.id : x");
@@ -98,7 +100,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "0", "1" })
     public void focusOffset() throws Exception {
         test("", "selection.focusOffset", "x");
@@ -108,7 +110,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "true", "false" })
     public void isCollapsed() throws Exception {
         test("", "selection.isCollapsed", "x");
@@ -118,7 +120,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "0", "1" })
     public void rangeCount() throws Exception {
         test("", "selection.rangeCount", "x");
@@ -128,7 +130,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "0", "1" })
     public void rangeCount2() throws Exception {
         test("selection.collapseToEnd()", "selection.rangeCount", "x");
@@ -138,7 +140,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "null", "null" })
     public void removeAllRanges_anchorNode() throws Exception {
         test("selection.removeAllRanges()", "selection.anchorNode", "x ? x.parentNode.id : x");
@@ -148,7 +150,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "0", "0" })
     public void removeAllRanges_anchorOffset() throws Exception {
         test("selection.removeAllRanges()", "selection.anchorOffset", "x ? x.parentNode.id : x");
@@ -158,7 +160,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "null", "null" })
     public void removeAllRanges_focusNode() throws Exception {
         test("selection.removeAllRanges()", "selection.focusNode", "x ? x.parentNode.id : x");
@@ -168,7 +170,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "0", "0" })
     public void removeAllRanges_focusOffset() throws Exception {
         test("selection.removeAllRanges()", "selection.focusOffset", "x ? x.parentNode.id : x");
@@ -178,7 +180,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "null", "s1" })
     public void collapse() throws Exception {
         test("selection.collapse(s1, 1)", "selection.focusNode", "x ? x.id : x");
@@ -188,7 +190,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "null", "s2" })
     public void collapseToEnd() throws Exception {
         test("selection.collapseToEnd()", "selection.anchorNode", "x ? x.parentNode.id : x");
@@ -198,7 +200,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "null", "s1" })
     public void collapseToStart() throws Exception {
         test("selection.collapseToStart()", "selection.focusNode", "x ? x.parentNode.id : x");
@@ -208,7 +210,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "0", "2" })
     public void extend() throws Exception {
         test("selection.extend(s2, 2)", "selection.focusOffset", "x");
@@ -218,7 +220,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "0", "0" })
     public void selectAllChildren() throws Exception {
         test("selection.selectAllChildren(document.body)", "selection.anchorOffset", "x");
@@ -228,7 +230,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "none", "cx" })
     public void getRangeAt() throws Exception {
         test("", "selection.rangeCount > 0 ? selection.getRangeAt(0) : 'none'", "x");
@@ -238,7 +240,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "", "true" })
     public void getRangeAt_prototype() throws Exception {
         test("", "selection.rangeCount > 0 ? (selection.getRangeAt(0) instanceof Range) : ''", "x");
@@ -248,7 +250,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "None", "None" })
     public void empty() throws Exception {
         test("selection.empty()", "selection.type", "x");
@@ -258,7 +260,7 @@ public class Selection2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     @Alerts({ "[object]", "[object]" })
     public void createRange() throws Exception {
         test("", "selection.createRange()", "x");

@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -193,7 +197,7 @@ public class BrowserRunner extends Suite {
          * The browsers which the case succeeds (but fails with remaining ones).
          */
         Browser[] value() default {
-            Browser.IE, Browser.FF, Browser.CHROME
+            IE, FF, CHROME
         };
     }
 
@@ -250,7 +254,7 @@ public class BrowserRunner extends Suite {
          * The browsers with which the case is not yet implemented.
          */
         Browser[] value() default {
-            Browser.IE, Browser.FF, Browser.CHROME
+            IE, FF, CHROME
         };
     }
 

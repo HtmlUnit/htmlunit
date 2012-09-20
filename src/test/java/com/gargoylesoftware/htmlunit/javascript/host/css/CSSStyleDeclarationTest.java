@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -21,7 +25,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -210,7 +213,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts("blue")
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -228,7 +231,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "*blue* string", "" })
     public void removeProperty() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -248,7 +251,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "** string", "blue" })
     public void removePropertyUnknown() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -268,7 +271,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "** string", "blue" })
     public void removePropertyUndefined() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -288,7 +291,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "30px", "", "30px", "arial", "", "arial" })
     public void getPropertyValue_WithDash() throws Exception {
         final String html =
@@ -407,7 +410,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.IE, Browser.FF10 })
+    @Browsers({ IE, FF10 })
     public void setExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -424,7 +427,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ Browser.IE, Browser.FF10 })
+    @Browsers({ IE, FF10 })
     public void removeExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -826,7 +829,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({ "1px", "solid", "red" })
     public void border() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -1077,7 +1080,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void getAttribute() throws Exception {
         getAttribute("\"font\"", "");
         getAttribute("\"color\"", "green");
@@ -1103,7 +1106,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void setAttribute() throws Exception {
         setAttribute("'font', 'blah'", "green", "green");
         setAttribute("'color', 'red'", "green", "red");
@@ -1137,7 +1140,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void removeAttribute() throws Exception {
         removeAttribute("'font'", "green", "false", "green");
         removeAttribute("'color'", "green", "true", "");
@@ -1303,7 +1306,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts(FF = { "function", "before", "none", "after", "none" })
     @NotYetImplemented
     public void interceptSetter() throws Exception {

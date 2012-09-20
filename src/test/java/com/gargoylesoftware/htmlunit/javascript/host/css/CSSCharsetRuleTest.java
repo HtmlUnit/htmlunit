@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -38,7 +39,7 @@ public class CSSCharsetRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "1", "[object CSSCharsetRule]", "UTF-8" },
             IE = { "0", "undefined" })
-    @NotYetImplemented(Browser.IE) // TODO: check which IE versions support what
+    @NotYetImplemented(IE) // TODO: check which IE versions support what
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"

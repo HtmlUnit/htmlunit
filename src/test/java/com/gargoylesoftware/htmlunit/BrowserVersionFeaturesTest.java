@@ -14,12 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 
 /**
@@ -35,7 +35,7 @@ public class BrowserVersionFeaturesTest extends SimpleWebTestCase {
      * Test of alphabetical order.
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void lexicographicOrder() {
         String lastFeatureName = null;
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {

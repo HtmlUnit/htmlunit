@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -76,7 +77,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                     "absbottom", "absmiddle", "bottom", "texttop" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop" })
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

@@ -14,11 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -37,7 +39,7 @@ public class Popup2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE, Browser.FF10 })
+    @Browsers({ IE, FF10 })
     public void testPopup() throws Exception {
         final String html = "<html><head><title>First</title><body>\n"
             + "<script>\n"
@@ -57,7 +59,7 @@ public class Popup2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ Browser.IE, Browser.FF10 })
+    @Browsers({ IE, FF10 })
     public void testPopupBodyStyle() throws Exception {
         final String html = "<html><head><title>First</title><body>\n"
             + "<script language='javascript'>\n"

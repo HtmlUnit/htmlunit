@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
 import java.util.ArrayList;

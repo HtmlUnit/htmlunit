@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;

@@ -23,11 +23,11 @@ import org.apache.http.HttpStatus;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.HttpMethod;
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests for {@link WebConnectionWrapper}.

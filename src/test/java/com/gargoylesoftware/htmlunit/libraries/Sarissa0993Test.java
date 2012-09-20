@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
+
 import java.io.File;
 import java.io.StringReader;
 import java.util.List;
@@ -37,7 +39,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -199,7 +200,7 @@ public class Sarissa0993Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void xslt() throws Exception {
         final String input = "<root><element attribute=\"value\"/></root>";
         final String style = "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">\n"

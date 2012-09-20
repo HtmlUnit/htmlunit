@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -110,7 +111,7 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void getElementByTagNameNS_includesHtml() throws Exception {
         final String html
             = "<html><head><title>foo</title>"
@@ -132,7 +133,7 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "div1", "null", "2", "1" })
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void importNode_deep() throws Exception {
         importNode(true);
     }
@@ -142,7 +143,7 @@ public class Document2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "div1", "null", "0" })
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void importNode_notDeep() throws Exception {
         importNode(false);
     }
@@ -169,7 +170,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({"parent", "child" })
     public void importNodeWithNamespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
@@ -209,7 +210,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     @Alerts({"parent", "child", "child3" })
     public void importNodesWithNamespace() throws Exception {
         final MockWebConnection conn = getMockWebConnection();

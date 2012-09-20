@@ -14,12 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -77,7 +79,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers(Browser.IE)
+    @Browsers(IE)
     public void browserLanguage_IE() throws Exception {
         attribute("browserLanguage", getBrowserVersion().getBrowserLanguage());
     }
@@ -87,7 +89,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void browserLanguage_FF() throws Exception {
         attribute("browserLanguage", "undefined");
     }

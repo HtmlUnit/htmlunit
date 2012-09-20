@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
@@ -1202,7 +1202,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(Browser.IE)
+    @NotYetImplemented(IE)
     @Alerts(IE = { "1", "1" })
     public void onpropertychange2() throws Exception {
         final String html = "<html><head><script>\n"

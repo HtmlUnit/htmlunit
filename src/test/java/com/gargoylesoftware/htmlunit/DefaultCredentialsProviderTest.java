@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static org.junit.Assert.assertNotNull;
 
 import org.apache.http.auth.AuthScope;
@@ -22,7 +23,6 @@ import org.apache.http.impl.auth.BasicScheme;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -39,7 +39,7 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.NONE)
+    @Browsers(NONE)
     public void serialization() throws Exception {
         final String username = "foo";
         final String password = "password";

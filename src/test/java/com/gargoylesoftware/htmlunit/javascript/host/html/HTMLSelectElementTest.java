@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
@@ -24,7 +25,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -369,7 +369,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "4", "Four", "value4" })
-    @Browsers(Browser.FF)
+    @Browsers(FF)
     public void testAddOptionWithAddMethod_FF() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
