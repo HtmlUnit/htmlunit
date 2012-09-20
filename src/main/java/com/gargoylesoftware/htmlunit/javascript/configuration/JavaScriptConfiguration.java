@@ -431,7 +431,7 @@ public final class JavaScriptConfiguration {
                 final JarFile jarFile = new JarFile(jarPath);
                 for (final Enumeration<JarEntry> entries = jarFile.entries(); entries.hasMoreElements();) {
                     final String entryName = entries.nextElement().getName();
-                    if (entryName.startsWith(relPath) && entryName.endsWith(".class")) {
+                    if (entryName.endsWith(".class")) {
                         list.add(entryName.replace('/', '.').replace('\\', '.').replace(".class", ""));
                     }
                 }
