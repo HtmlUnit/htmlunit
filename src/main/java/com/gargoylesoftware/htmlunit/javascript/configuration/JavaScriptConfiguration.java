@@ -27,7 +27,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.WeakHashMap;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -110,7 +109,7 @@ public final class JavaScriptConfiguration {
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
     private static Map<BrowserVersion, JavaScriptConfiguration> ConfigurationMap_ =
-        new WeakHashMap<BrowserVersion, JavaScriptConfiguration>(11);
+        new HashMap<BrowserVersion, JavaScriptConfiguration>(11);
 
     private static Map<String, String> ClassnameMap_ = new HashMap<String, String>();
 
