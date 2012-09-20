@@ -79,4 +79,12 @@ public class DialogWindow extends WebWindowImpl {
         getWebClient().deregisterWebWindow(this);
     }
 
+    /**
+     * Returns a string representation of this object.
+     * @return a string representation of this object
+     */
+    @Override
+    public String toString() {
+        return "DialogWindow[name=\"" + getName() + "\"]";
+    }
 }
