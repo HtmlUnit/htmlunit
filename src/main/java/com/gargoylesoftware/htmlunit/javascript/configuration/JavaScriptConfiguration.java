@@ -427,7 +427,10 @@ public final class JavaScriptConfiguration {
         }
         else {
             try {
-                final String jarPath = fullPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
+                String jarPath = fullPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
+                if (System.getProperty("os.name").toLowerCase().contains("win")) {
+                    jarPath = jarPath.replace("%20", " ");
+                }
                 final JarFile jarFile = new JarFile(jarPath);
                 for (final Enumeration<JarEntry> entries = jarFile.entries(); entries.hasMoreElements();) {
                     final String entryName = entries.nextElement().getName();
