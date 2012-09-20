@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeColorMatrix;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgFeColorMatrix.class,
+@JsxClass(domClass = SvgFeColorMatrix.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEColorMatrixElement extends SVGElement {
 

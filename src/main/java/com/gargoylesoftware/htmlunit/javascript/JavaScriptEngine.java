@@ -746,7 +746,7 @@ public class JavaScriptEngine {
      * @return <code>null</code> if none found
      */
     public Class<? extends SimpleScriptable> getJavaScriptClass(final Class<?> c) {
-        return jsConfig_.getHtmlJavaScriptMapping().get(c);
+        return jsConfig_.getDomJavaScriptMapping().get(c);
     }
 
     /**

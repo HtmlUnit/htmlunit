@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgPolyline;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgPolyline.class,
+@JsxClass(domClass = SvgPolyline.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGPolylineElement extends SVGElement {
 

@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlBase.class)
+@JsxClass(domClass = HtmlBase.class)
 public class HTMLBaseElement extends HTMLElement {
 
     /**

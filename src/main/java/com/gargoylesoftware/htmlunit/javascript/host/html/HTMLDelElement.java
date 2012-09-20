@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlDeletedText.class)
+@JsxClass(domClass = HtmlDeletedText.class)
 public class HTMLDelElement extends HTMLElement {
 
     /**

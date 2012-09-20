@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlFieldSet.class)
+@JsxClass(domClass = HtmlFieldSet.class)
 public class HTMLFieldSetElement extends FormChild {
 
     /**

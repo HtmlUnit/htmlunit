@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgDesc;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgDesc.class,
+@JsxClass(domClass = SvgDesc.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGDescElement extends SVGElement {
 

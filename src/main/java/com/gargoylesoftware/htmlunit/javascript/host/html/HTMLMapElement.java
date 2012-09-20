@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlMap.class)
+@JsxClass(domClass = HtmlMap.class)
 public class HTMLMapElement extends HTMLElement {
     private HTMLCollection areas_;
 

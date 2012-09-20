@@ -497,7 +497,7 @@ class DefaultElementFactory implements ElementFactory {
         }
         final JavaScriptConfiguration config = page.getWebClient().getJavaScriptEngine().getJavaScriptConfiguration();
         if (!"td".equals(tagName) && !"th".equals(tagName)
-                && checkBrowserCompatibility && config.getHtmlJavaScriptMapping().get(element.getClass()) == null) {
+                && checkBrowserCompatibility && config.getDomJavaScriptMapping().get(element.getClass()) == null) {
             return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
         }
         return element;

@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeSpotLight;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = SvgFeSpotLight.class,
+@JsxClass(domClass = SvgFeSpotLight.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFESpotLightElement extends SVGElement {
 

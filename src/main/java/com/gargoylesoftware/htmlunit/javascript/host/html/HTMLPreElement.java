@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlPreformattedText.class)
+@JsxClass(domClass = HtmlPreformattedText.class)
 public class HTMLPreElement extends HTMLElement {
 
     /**

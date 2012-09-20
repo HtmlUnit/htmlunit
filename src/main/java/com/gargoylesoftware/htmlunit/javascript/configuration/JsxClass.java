@@ -34,7 +34,7 @@ import java.lang.annotation.Target;
 public @interface JsxClass {
 
     /** The DOM class (if any). */
-    Class<?> htmlClass() default Object.class;
+    Class<?> domClass() default Object.class;
 
     /** Is JavaScript Object. */
     boolean isJSObject() default true;

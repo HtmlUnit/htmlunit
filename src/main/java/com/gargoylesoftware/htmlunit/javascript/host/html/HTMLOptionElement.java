@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlOption.class)
+@JsxClass(domClass = HtmlOption.class)
 public class HTMLOptionElement extends FormChild {
 
     /**

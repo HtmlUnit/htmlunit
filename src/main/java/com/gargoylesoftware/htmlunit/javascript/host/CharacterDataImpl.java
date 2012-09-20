@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author David K. Taylor
  * @author Chris Erskine
  */
-@JsxClass(htmlClass = DomCharacterData.class)
+@JsxClass(domClass = DomCharacterData.class)
 public class CharacterDataImpl extends Node {
 
     /**

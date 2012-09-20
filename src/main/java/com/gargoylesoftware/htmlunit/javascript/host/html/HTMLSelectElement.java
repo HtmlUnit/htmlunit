@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlSelect.class)
+@JsxClass(domClass = HtmlSelect.class)
 public class HTMLSelectElement extends FormField {
 
     private HTMLOptionsCollection optionsArray_;
@@ -105,8 +105,8 @@ public class HTMLSelectElement extends FormField {
      * {@inheritDoc}
      */
     @Override
-    public Object _insertBefore(final Object[] args) {
-        final Object object = super._insertBefore(args);
+    public Object insertBeforeImpl(final Object[] args) {
+        final Object object = super.insertBeforeImpl(args);
         ensureSelectedIndex();
         return object;
     }

@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(htmlClass = HtmlWordBreak.class)
+@JsxClass(domClass = HtmlWordBreak.class)
 public class HTMLWBRElement extends HTMLElement {
 
     /**

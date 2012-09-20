@@ -339,7 +339,7 @@ public class Node extends SimpleScriptable {
     @JsxFunction
     public static Object insertBefore(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        return ((Node) thisObj)._insertBefore(args);
+        return ((Node) thisObj).insertBeforeImpl(args);
     }
 
     /**
@@ -348,7 +348,7 @@ public class Node extends SimpleScriptable {
      * @param args the arguments
      * @return the newly added child node
      */
-    protected Object _insertBefore(final Object[] args) {
+    protected Object insertBeforeImpl(final Object[] args) {
         final Object newChildObject = args[0];
         final Object refChildObject;
         if (args.length > 1) {
@@ -376,7 +376,7 @@ public class Node extends SimpleScriptable {
             if (newChildNode instanceof DomDocumentFragment) {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {
-                    _insertBefore(new Object[] {child.getScriptObject(), refChildObject});
+                    insertBeforeImpl(new Object[] {child.getScriptObject(), refChildObject});
                 }
                 return newChildObject;
             }
@@ -545,7 +545,7 @@ public class Node extends SimpleScriptable {
                     firstNode = (Node) node.getScriptObject();
                 }
                 else {
-                    _insertBefore(new Object[] {node.getScriptObject(), refChildObject});
+                    insertBeforeImpl(new Object[] {node.getScriptObject(), refChildObject});
                 }
             }
             if (firstNode == null) {

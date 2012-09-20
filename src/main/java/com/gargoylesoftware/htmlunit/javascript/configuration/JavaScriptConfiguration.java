@@ -34,6 +34,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
 import com.gargoylesoftware.htmlunit.html.HtmlAcronym;
 import com.gargoylesoftware.htmlunit.html.HtmlAddress;
@@ -50,7 +51,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlDefinition;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinitionTerm;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlEmphasis;
 import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlHeading1;
@@ -113,7 +113,7 @@ public final class JavaScriptConfiguration {
 
     private static Map<String, String> ClassnameMap_ = new HashMap<String, String>();
 
-    private Map<Class<? extends HtmlElement>, Class<? extends SimpleScriptable>> htmlJavaScriptMap_;
+    private Map<Class<? extends DomElement>, Class<? extends SimpleScriptable>> domJavaScriptMap_;
 
     private final Map<String, ClassConfiguration> configuration_;
 
@@ -188,14 +188,14 @@ public final class JavaScriptConfiguration {
                     if (jsxClass != null && isSupported(jsxClass.browsers(), browser)) {
                         final String hostClassName = className;
 
-                        final String htmlClassName = jsxClass.htmlClass() != Object.class
-                                ? jsxClass.htmlClass().getName() : "";
+                        final String domClassName = jsxClass.domClass() != Object.class
+                                ? jsxClass.domClass().getName() : "";
 
                         final boolean jsObjectFlag = jsxClass.isJSObject();
                         @SuppressWarnings("unchecked")
                         final ClassConfiguration classConfiguration = new ClassConfiguration(
                                 (Class<? extends SimpleScriptable>) klass,
-                                htmlClassName, jsObjectFlag);
+                                domClassName, jsObjectFlag);
 
                         final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
                         ClassnameMap_.put(hostClassName, simpleClassName);
@@ -269,11 +269,11 @@ public final class JavaScriptConfiguration {
 
     /**
      * Gets the class configuration for the supplied JavaScript class name.
-     * @param classname the js class name
+     * @param hostClassName the js class name
      * @return the class configuration for the supplied JavaScript class name
      */
-    public ClassConfiguration getClassConfiguration(final String classname) {
-        return configuration_.get(classname);
+    public ClassConfiguration getClassConfiguration(final String hostClassName) {
+        return configuration_.get(hostClassName);
     }
 
     /**
@@ -294,37 +294,37 @@ public final class JavaScriptConfiguration {
     }
 
     /**
-     * Returns an immutable map containing the HTML to JavaScript mappings. Keys are
-     * java classes for the various HTML classes (e.g. HtmlInput.class) and the values
+     * Returns an immutable map containing the DOM to JavaScript mappings. Keys are
+     * java classes for the various DOM classes (e.g. HtmlInput.class) and the values
      * are the JavaScript class names (e.g. "HTMLAnchorElement").
      * @return the mappings
      */
     @SuppressWarnings("unchecked")
-    public Map<Class<? extends HtmlElement>, Class<? extends SimpleScriptable>>
-    getHtmlJavaScriptMapping() {
-        if (htmlJavaScriptMap_ != null) {
-            return htmlJavaScriptMap_;
+    public Map<Class<? extends DomElement>, Class<? extends SimpleScriptable>>
+    getDomJavaScriptMapping() {
+        if (domJavaScriptMap_ != null) {
+            return domJavaScriptMap_;
         }
 
-        final Map<Class<? extends HtmlElement>, Class<? extends SimpleScriptable>> map =
-            new HashMap<Class<? extends HtmlElement>, Class<? extends SimpleScriptable>>();
+        final Map<Class<? extends DomElement>, Class<? extends SimpleScriptable>> map =
+            new HashMap<Class<? extends DomElement>, Class<? extends SimpleScriptable>>();
 
-        for (String jsClassname : configuration_.keySet()) {
-            ClassConfiguration classConfig = getClassConfiguration(jsClassname);
-            final String htmlClassname = classConfig.getHtmlClassname();
-            if (htmlClassname != null) {
+        for (String hostClassName : configuration_.keySet()) {
+            ClassConfiguration classConfig = getClassConfiguration(hostClassName);
+            final String domClassName = classConfig.getDomClassName();
+            if (domClassName != null) {
                 try {
-                    final Class<? extends HtmlElement> htmlClass =
-                        (Class<? extends HtmlElement>) Class.forName(htmlClassname);
+                    final Class<? extends DomElement> domClass =
+                        (Class<? extends DomElement>) Class.forName(domClassName);
                     // preload and validate that the class exists
                     if (LOG.isDebugEnabled()) {
-                        LOG.debug("Mapping " + htmlClass.getName() + " to " + jsClassname);
+                        LOG.debug("Mapping " + domClass.getName() + " to " + hostClassName);
                     }
                     while (!classConfig.isJsObject()) {
-                        jsClassname = classConfig.getExtendedClassName();
-                        classConfig = getClassConfiguration(jsClassname);
+                        hostClassName = classConfig.getExtendedClassName();
+                        classConfig = getClassConfiguration(hostClassName);
                     }
-                    map.put(htmlClass, classConfig.getHostClass());
+                    map.put(domClass, classConfig.getHostClass());
                 }
                 catch (final ClassNotFoundException e) {
                     throw new NoClassDefFoundError(e.getMessage());
@@ -388,9 +388,9 @@ public final class JavaScriptConfiguration {
         map.put(HtmlTableColumn.class, HTMLTableColElement.class);
         map.put(HtmlTableColumnGroup.class, HTMLTableColElement.class);
 
-        htmlJavaScriptMap_ = Collections.unmodifiableMap(map);
+        domJavaScriptMap_ = Collections.unmodifiableMap(map);
 
-        return htmlJavaScriptMap_;
+        return domJavaScriptMap_;
     }
 
     /**

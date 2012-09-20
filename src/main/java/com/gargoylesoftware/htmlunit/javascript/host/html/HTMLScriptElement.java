@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(htmlClass = HtmlScript.class)
+@JsxClass(domClass = HtmlScript.class)
 public class HTMLScriptElement extends HTMLElement {
 
     /**
@@ -198,11 +198,11 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the newly added child node
      */
     @Override
-    protected Object _insertBefore(final Object[] args) {
+    protected Object insertBeforeImpl(final Object[] args) {
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION)) {
             throw Context.reportRuntimeError("Unexpected call to method or property access");
         }
-        return super._insertBefore(args);
+        return super.insertBeforeImpl(args);
     }
 }

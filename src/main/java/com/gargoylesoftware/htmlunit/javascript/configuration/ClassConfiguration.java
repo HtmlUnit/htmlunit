@@ -43,18 +43,18 @@ public final class ClassConfiguration {
      * The constructor method in the {@link #hostClass_}
      */
     private Method jsConstructor_;
-    private final String htmlClassName_;
+    private final String domClassName_;
     private final boolean jsObject_;
 
     /**
      * Constructor.
      *
      * @param hostClass - the class implementing this functionality
-     * @param htmlClassName the name of the HTML class that this object supports
+     * @param domClassName the name of the DOM class that this object supports
      * @param jsObject boolean flag for if this object is a JavaScript object
      * @throws ClassNotFoundException - if the implementing class is not found
      */
-    public ClassConfiguration(final Class<? extends SimpleScriptable> hostClass, final String htmlClassName,
+    public ClassConfiguration(final Class<? extends SimpleScriptable> hostClass, final String domClassName,
             final boolean jsObject)
         throws ClassNotFoundException {
         final Class<?> superClass = hostClass.getSuperclass();
@@ -66,11 +66,11 @@ public final class ClassConfiguration {
         }
         hostClass_ = hostClass;
         jsObject_ = jsObject;
-        if (htmlClassName != null && !htmlClassName.isEmpty()) {
-            htmlClassName_ = htmlClassName;
+        if (domClassName != null && !domClassName.isEmpty()) {
+            domClassName_ = domClassName;
         }
         else {
-            htmlClassName_ = null;
+            domClassName_ = null;
         }
     }
 
@@ -288,10 +288,10 @@ public final class ClassConfiguration {
     }
 
     /**
-     * @return the htmlClassname
+     * @return the DOM class name
      */
-    public String getHtmlClassname() {
-        return htmlClassName_;
+    public String getDomClassName() {
+        return domClassName_;
     }
 
     /**
