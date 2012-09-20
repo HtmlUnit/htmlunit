@@ -404,7 +404,7 @@ public final class JavaScriptConfiguration {
         File directory = null;
         final String relPath = packageName.replace('.', '/') + '/' + JavaScriptEngine.class.getSimpleName() + ".class";
 
-        final URL resource = ClassLoader.getSystemClassLoader().getResource(relPath);
+        final URL resource = JavaScriptConfiguration.class.getClassLoader().getResource(relPath);
 
         if (resource == null) {
             throw new RuntimeException("No resource for " + relPath);
