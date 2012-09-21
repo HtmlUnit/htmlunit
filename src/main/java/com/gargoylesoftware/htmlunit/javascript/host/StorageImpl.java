@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Storage.Type;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 final class StorageImpl implements Serializable {
 
