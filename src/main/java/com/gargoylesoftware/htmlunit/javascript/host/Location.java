@@ -105,25 +105,13 @@ public class Location extends SimpleScriptable {
     }
 
     /**
-     * Returns the string value of the location, which is the full URL string.
-     * @return the full URL string
-     */
-    @Override
-    public String toString() {
-        if (window_ != null) {
-            return jsxGet_href();
-        }
-        return "[Uninitialized]";
-    }
-
-    /**
      * Loads the new HTML document corresponding to the specified URL.
      * @param url the location of the new HTML document to load
      * @throws IOException if loading the specified location fails
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536342.aspx">MSDN Documentation</a>
      */
     @JsxFunction
-    public void jsxFunction_assign(final String url) throws IOException {
+    public void assign(final String url) throws IOException {
         jsxSet_href(url);
     }
 
@@ -135,7 +123,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536342.aspx">MSDN Documentation</a>
      */
     @JsxFunction
-    public void jsxFunction_reload(final boolean force) throws IOException {
+    public void reload(final boolean force) throws IOException {
         final String url = jsxGet_href();
         if (UNKNOWN.equals(url)) {
             LOG.error("Unable to reload location: current URL is unknown.");
@@ -152,7 +140,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536712.aspx">MSDN Documentation</a>
      */
     @JsxFunction
-    public void jsxFunction_replace(final String url) throws IOException {
+    public void replace(final String url) throws IOException {
         window_.getWebWindow().getHistory().removeCurrent();
         jsxSet_href(url);
     }
@@ -162,8 +150,11 @@ public class Location extends SimpleScriptable {
      * @return the location URL
      */
     @JsxFunction
-    public String jsxFunction_toString() {
-        return jsxGet_href();
+    public String toString() {
+        if (window_ != null) {
+            return jsxGet_href();
+        }
+        return "";
     }
 
     /**

@@ -57,7 +57,7 @@ public class StaticNodeList extends SimpleScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         final StaticNodeList staticNodeList = (StaticNodeList) start;
-        final Object result = staticNodeList.jsxFunction_item(index);
+        final Object result = staticNodeList.item(index);
         if (null == result) {
             return NOT_FOUND;
         }
@@ -70,7 +70,7 @@ public class StaticNodeList extends SimpleScriptable {
      * @return the element or elements corresponding to the specified index or key
      */
     @JsxFunction
-    public Node jsxFunction_item(final int index) {
+    public Node item(final int index) {
         if (index < 0 || index >= jsxGet_length()) {
             return null;
         }

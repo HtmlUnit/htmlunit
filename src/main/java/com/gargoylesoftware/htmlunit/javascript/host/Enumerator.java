@@ -68,7 +68,7 @@ public class Enumerator extends SimpleScriptable {
      * @return whether the enumerator is at the end of the collection or not
      */
     @JsxFunction
-    public boolean jsxFunction_atEnd() {
+    public boolean atEnd() {
         return index_ >= collection_.getLength();
     }
 
@@ -77,8 +77,8 @@ public class Enumerator extends SimpleScriptable {
      * @return the current item in the collection
      */
     @JsxFunction
-    public Object jsxFunction_item() {
-        if (!jsxFunction_atEnd()) {
+    public Object item() {
+        if (!atEnd()) {
             SimpleScriptable scriptable = (SimpleScriptable) collection_.get(index_, collection_);
             scriptable = scriptable.clone();
             scriptable.setCaseSensitive(false);
@@ -91,7 +91,7 @@ public class Enumerator extends SimpleScriptable {
      * Resets the current item in the collection to the first item.
      */
     @JsxFunction
-    public void jsxFunction_moveFirst() {
+    public void moveFirst() {
         index_ = 0;
     }
 
@@ -99,7 +99,7 @@ public class Enumerator extends SimpleScriptable {
      * Moves the current item to the next item in the collection.
      */
     @JsxFunction
-    public void jsxFunction_moveNext() {
+    public void moveNext() {
         index_++;
     }
 }

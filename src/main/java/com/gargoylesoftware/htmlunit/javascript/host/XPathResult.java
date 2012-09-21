@@ -186,7 +186,7 @@ public class XPathResult extends SimpleScriptable {
      * @return the next node
      */
     @JsxFunction
-    public Node jsxFunction_iterateNext() {
+    public Node iterateNext() {
         if (resultType_ != UNORDERED_NODE_ITERATOR_TYPE && resultType_ != ORDERED_NODE_ITERATOR_TYPE) {
             throw Context.reportRuntimeError("Cannot get iterateNext for type: " + resultType_);
         }
@@ -203,7 +203,7 @@ public class XPathResult extends SimpleScriptable {
      * @return the node at the index<sup>th</sup> position in the NodeList, or null if that is not a valid index
      */
     @JsxFunction
-    public Node jsxFunction_snapshotItem(final int index) {
+    public Node snapshotItem(final int index) {
         if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
             throw Context.reportRuntimeError("Cannot get snapshotLength for type: " + resultType_);
         }

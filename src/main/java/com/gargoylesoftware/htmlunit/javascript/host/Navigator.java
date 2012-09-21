@@ -241,7 +241,7 @@ public final class Navigator extends SimpleScriptable {
      * @return true/false (see {@link com.gargoylesoftware.htmlunit.WebClientOptions#isAppletEnabled()}
      */
     @JsxFunction
-    public boolean jsxFunction_javaEnabled() {
+    public boolean javaEnabled() {
         return getWindow().getWebWindow().getWebClient().getOptions().isAppletEnabled();
     }
 
@@ -250,7 +250,7 @@ public final class Navigator extends SimpleScriptable {
      * @return false
      */
     @JsxFunction
-    public boolean jsxFunction_taintEnabled() {
+    public boolean taintEnabled() {
         return false;
     }
 

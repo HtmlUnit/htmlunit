@@ -81,8 +81,8 @@ public final class DOMTokenList extends SimpleScriptable {
      * @param token the token to add
      */
     @JsxFunction
-    public void jsxFunction_add(final String token) {
-        if (!jsxFunction_contains(token)) {
+    public void add(final String token) {
+        if (!contains(token)) {
             final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
             attr.setValue(attr.getValue() + ' ' + token);
         }
@@ -93,8 +93,8 @@ public final class DOMTokenList extends SimpleScriptable {
      * @param token the token to remove
      */
     @JsxFunction
-    public void jsxFunction_remove(final String token) {
-        if (jsxFunction_contains(token)) {
+    public void remove(final String token) {
+        if (contains(token)) {
             final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
             if (attr != null) {
                 final List<String> values = new ArrayList<String>(Arrays.asList(attr.getValue().split(" ")));
@@ -117,12 +117,12 @@ public final class DOMTokenList extends SimpleScriptable {
      * @return whether the string now contains the token or not
      */
     @JsxFunction
-    public boolean jsxFunction_toggle(final String token) {
-        if (jsxFunction_contains(token)) {
-            jsxFunction_remove(token);
+    public boolean toggle(final String token) {
+        if (contains(token)) {
+            remove(token);
             return false;
         }
-        jsxFunction_add(token);
+        add(token);
         return true;
     }
 
@@ -132,7 +132,7 @@ public final class DOMTokenList extends SimpleScriptable {
      * @return true if the underlying string contains token, otherwise false
      */
     @JsxFunction
-    public boolean jsxFunction_contains(final String token) {
+    public boolean contains(final String token) {
         final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
         if (attr != null) {
             final List<String> values = Arrays.asList(attr.getValue().split(" "));
@@ -147,7 +147,7 @@ public final class DOMTokenList extends SimpleScriptable {
      * @return the item
      */
     @JsxFunction
-    public Object jsxFunction_item(final int index) {
+    public Object item(final int index) {
         final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
         if (attr != null) {
             final List<String> values = Arrays.asList(attr.getValue().split(" "));

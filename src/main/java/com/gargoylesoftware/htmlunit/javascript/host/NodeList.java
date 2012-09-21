@@ -356,7 +356,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
      */
     @JsxFunction
-    public final Object jsxFunction_item(final Object index) {
+    public final Object item(final Object index) {
         return nullIfNotFound(getIt(index));
     }
 

@@ -102,7 +102,7 @@ public class Popup extends SimpleScriptable {
      * Hides the popup.
      */
     @JsxFunction
-    public void jsxFunction_hide() {
+    public void hide() {
         opened_ = false;
     }
 
@@ -110,7 +110,7 @@ public class Popup extends SimpleScriptable {
      * Shows the popup.
      */
     @JsxFunction
-    public void jsxFunction_show() {
+    public void show() {
         opened_ = true;
     }
 }

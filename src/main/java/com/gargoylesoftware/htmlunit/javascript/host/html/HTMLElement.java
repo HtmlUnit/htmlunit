@@ -556,7 +556,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * An IE-only method which clears all custom attributes.
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_clearAttributes() {
+    public void clearAttributes() {
         final HtmlElement node = getDomNodeOrDie();
 
         // Remove custom attributes defined directly in HTML.
@@ -591,7 +591,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param preserveIdentity if <tt>false</tt>, the <tt>name</tt> and <tt>id</tt> attributes are not copied
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_mergeAttributes(final HTMLElement source, final Object preserveIdentity) {
+    public void mergeAttributes(final HTMLElement source, final Object preserveIdentity) {
         final HtmlElement src = source.getDomNodeOrDie();
         final HtmlElement target = getDomNodeOrDie();
 
@@ -632,7 +632,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the specified attribute, <code>null</code> if the attribute is not defined
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public Object jsxFunction_getAttributeNodeNS(final String namespaceURI, final String localName) {
+    public Object getAttributeNodeNS(final String namespaceURI, final String localName) {
         return getDomNodeOrDie().getAttributeNodeNS(namespaceURI, localName).getScriptObject();
     }
 
@@ -643,7 +643,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public String jsxFunction_getAttributeNS(final String namespaceURI, final String localName) {
+    public String getAttributeNS(final String namespaceURI, final String localName) {
         return getDomNodeOrDie().getAttributeNS(namespaceURI, localName);
     }
 
@@ -657,7 +657,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return <code>true</code> if the node has this attribute
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public boolean jsxFunction_hasAttributeNS(final String namespaceURI, final String localName) {
+    public boolean hasAttributeNS(final String namespaceURI, final String localName) {
         return getDomNodeOrDie().hasAttributeNS(namespaceURI, localName);
     }
 
@@ -671,7 +671,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     @JsxFunction
-    public void jsxFunction_setAttribute(String name, final String value) {
+    public void setAttribute(String name, final String value) {
         name = fixAttributeName(name);
         getDomNodeOrDie().setAttribute(name, value);
 
@@ -702,7 +702,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value the new attribute value
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public void jsxFunction_setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
         getDomNodeOrDie().setAttributeNS(namespaceURI, qualifiedName, value);
     }
 
@@ -712,7 +712,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param localName the local name of the attribute to remove
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public void jsxFunction_removeAttributeNS(final String namespaceURI, final String localName) {
+    public void removeAttributeNS(final String namespaceURI, final String localName) {
         getDomNodeOrDie().removeAttributeNS(namespaceURI, localName);
     }
 
@@ -721,10 +721,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param attribute the attribute to remove
      */
     @JsxFunction
-    public void jsxFunction_removeAttributeNode(final Attr attribute) {
+    public void removeAttributeNode(final Attr attribute) {
         final String name = attribute.jsxGet_name();
         final String namespaceUri = attribute.jsxGet_namespaceURI();
-        jsxFunction_removeAttributeNS(namespaceUri, name);
+        removeAttributeNS(namespaceUri, name);
     }
 
     /**
@@ -733,7 +733,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return a reference to the object that is removed
      */
     @JsxFunction(@WebBrowser(IE))
-    public HTMLElement jsxFunction_removeNode(final boolean removeChildren) {
+    public HTMLElement removeNode(final boolean removeChildren) {
         final HTMLElement parent = (HTMLElement) jsxGet_parentElement();
         if (parent != null) {
             parent.removeChild(this);
@@ -741,7 +741,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 final NodeList collection = jsxGet_childNodes();
                 final int length = collection.jsxGet_length();
                 for (int i = 0; i < length; i++) {
-                    final Node object = (Node) collection.jsxFunction_item(Integer.valueOf(0));
+                    final Node object = (Node) collection.item(Integer.valueOf(0));
                     parent.appendChild(object);
                 }
             }
@@ -756,8 +756,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     @JsxFunction
-    public Object jsxFunction_getAttributeNode(final String attributeName) {
-        return ((NamedNodeMap) jsxGet_attributes()).jsxFunction_getNamedItem(attributeName);
+    public Object getAttributeNode(final String attributeName) {
+        return ((NamedNodeMap) jsxGet_attributes()).getNamedItem(attributeName);
     }
 
     /**
@@ -766,14 +766,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the replaced attribute node, if any
      */
     @JsxFunction
-    public Attr jsxFunction_setAttributeNode(final Attr newAtt) {
+    public Attr setAttributeNode(final Attr newAtt) {
         final String name = newAtt.jsxGet_name();
 
         final Attr replacedAtt;
         final boolean undefForClass = getBrowserVersion().
                 hasFeature(BrowserVersionFeatures.JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL);
         if (undefForClass) {
-            replacedAtt = (Attr) jsxFunction_getAttributeNode(name);
+            replacedAtt = (Attr) getAttributeNode(name);
         }
         else {
             final NamedNodeMap nodes = (NamedNodeMap) jsxGet_attributes();
@@ -799,7 +799,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return all the descendant elements with the specified class name
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public HTMLCollection jsxFunction_getElementsByClassName(final String className) {
+    public HTMLCollection getElementsByClassName(final String className) {
         final HtmlElement elt = getDomNodeOrDie();
         final String description = "HTMLElement.getElementsByClassName('" + className + "')";
         final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
@@ -846,7 +846,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public int jsxGet_clientHeight() {
         final boolean includePadding =
             !getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING);
-        final ComputedCSSStyleDeclaration style = getWindow().jsxFunction_getComputedStyle(this, null);
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         return style.getCalculatedHeight(false, includePadding);
     }
 
@@ -858,7 +858,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public int jsxGet_clientWidth() {
         final boolean includePadding =
             !getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING);
-        final ComputedCSSStyleDeclaration style = getWindow().jsxFunction_getComputedStyle(this, null);
+        final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         return style.getCalculatedWidth(false, includePadding);
     }
 
@@ -1164,7 +1164,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param text the HTML text to insert
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_insertAdjacentHTML(final String where, final String text) {
+    public void insertAdjacentHTML(final String where, final String text) {
         final Object[] values = getInsertAdjacentLocation(where);
         final DomNode node = (DomNode) values[0];
         final boolean append = ((Boolean) values[1]).booleanValue();
@@ -1184,7 +1184,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return an element object
      */
     @JsxFunction(@WebBrowser(IE))
-    public Object jsxFunction_insertAdjacentElement(final String where, final Object object) {
+    public Object insertAdjacentElement(final String where, final Object object) {
         if (object instanceof Node) {
             final DomNode childNode = ((Node) object).getDomNodeOrDie();
             final Object[] values = getInsertAdjacentLocation(where);
@@ -1204,8 +1204,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns where and how to add the new node.
-     * Used by {@link #jsxFunction_insertAdjacentHTML(String, String)} and
-     * {@link #jsxFunction_insertAdjacentElement(String, Object)}.
+     * Used by {@link #insertAdjacentHTML(String, String)} and
+     * {@link #insertAdjacentElement(String, Object)}.
      *
      * @param where specifies where to insert the element, using one of the following value:
      *        beforeBegin, afterBegin, beforeEnd, afterEnd
@@ -1274,7 +1274,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return an identifier that can be user later to detach the behavior from the element
      */
     @JsxFunction(@WebBrowser(IE))
-    public int jsxFunction_addBehavior(final String behavior) {
+    public int addBehavior(final String behavior) {
         // if behavior already defined, then nothing to do
         if (behaviors_.contains(behavior)) {
             return 0;
@@ -1327,7 +1327,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param id the identifier for the behavior to remove
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_removeBehavior(final int id) {
+    public void removeBehavior(final int id) {
         switch (id) {
             case BEHAVIOR_ID_CLIENT_CAPS:
                 delete("availHeight");
@@ -1460,7 +1460,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return whether or not Java is enabled
      */
     public boolean getJavaEnabled() {
-        return getWindow().jsxGet_navigator().jsxFunction_javaEnabled();
+        return getWindow().jsxGet_navigator().javaEnabled();
     }
 
     /**
@@ -1831,7 +1831,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * is just to prevent scripts that call that method from failing
      */
     @JsxFunction
-    public void jsxFunction_scrollIntoView() { }
+    public void scrollIntoView() { }
 
     /**
      * Retrieves a collection of rectangles that describes the layout of the contents of an object
@@ -1839,7 +1839,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return a collection of rectangles that describes the layout of the contents
      */
     @JsxFunction(@WebBrowser(IE))
-    public Object jsxFunction_getClientRects() {
+    public Object getClientRects() {
         return new NativeArray(0);
     }
 
@@ -1853,7 +1853,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param language specified the language used
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_setExpression(final String propertyName, final String expression, final String language) {
+    public void setExpression(final String propertyName, final String expression, final String language) {
         // Empty.
     }
 
@@ -1864,7 +1864,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return true if the expression was successfully removed
      */
     @JsxFunction(@WebBrowser(IE))
-    public boolean jsxFunction_removeExpression(final String propertyName) {
+    public boolean removeExpression(final String propertyName) {
         return true;
     }
 
@@ -1891,7 +1891,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public boolean jsxFunction_dispatchEvent(final Event event) {
+    public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
         final HtmlElement element = getDomNodeOrDie();
         ScriptResult result = null;
@@ -1930,7 +1930,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Remove focus from this element.
      */
     @JsxFunction
-    public void jsxFunction_blur() {
+    public void blur() {
         getDomNodeOrDie().blur();
     }
 
@@ -1939,7 +1939,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return a new TextRange object for this element
      */
     @JsxFunction(@WebBrowser(IE))
-    public Object jsxFunction_createTextRange() {
+    public Object createTextRange() {
         final TextRange range = new TextRange(this);
         range.setParentScope(getParentScope());
         range.setPrototype(getPrototype(range.getClass()));
@@ -1952,7 +1952,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return true if the element is contained within this object
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
-    public boolean jsxFunction_contains(final HTMLElement element) {
+    public boolean contains(final HTMLElement element) {
         for (HTMLElement parent = element; parent != null; parent = (HTMLElement) parent.jsxGet_parentElement()) {
             if (this == parent) {
                 return true;
@@ -1965,7 +1965,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * Sets the focus to this element.
      */
     @JsxFunction
-    public void jsxFunction_focus() {
+    public void focus() {
         getDomNodeOrDie().focus();
     }
 
@@ -1974,7 +1974,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536738.aspx">MSDN documentation</a>
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_setActive() {
+    public void setActive() {
         final Window window = getWindow();
         final HTMLDocument document = (HTMLDocument) window.getDocument();
         document.setActiveElement(this);
@@ -1992,7 +1992,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the static node list
      */
     @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public StaticNodeList jsxFunction_querySelectorAll(final String selectors) {
+    public StaticNodeList querySelectorAll(final String selectors) {
         try {
             final List<Node> nodes = new ArrayList<Node>();
             for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
@@ -2011,7 +2011,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
     @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public Node jsxFunction_querySelector(final String selectors) {
+    public Node querySelector(final String selectors) {
         try {
             final DomNode node = getDomNodeOrDie().querySelector(selectors);
             if (node != null) {
@@ -2089,7 +2089,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @throws IOException if this click triggers a page load that encounters problems
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_click() throws IOException {
+    public void click() throws IOException {
         getDomNodeOrDie().click();
     }
 
@@ -2188,7 +2188,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param scrollAction the type of scroll action to simulate
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_doScroll(final String scrollAction) {
+    public void doScroll(final String scrollAction) {
         if (((HtmlPage) getDomNodeOrDie().getPage()).isBeingParsed()) {
             throw Context.reportRuntimeError("The data necessary to complete this operation is not yet available.");
         }
@@ -2493,7 +2493,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter(@WebBrowser(IE))
     public ComputedCSSStyleDeclaration jsxGet_currentStyle() {
-        return getWindow().jsxFunction_getComputedStyle(this, null);
+        return getWindow().getComputedStyle(this, null);
     }
 
     /**
@@ -2730,7 +2730,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return an object that specifies the bounds of a collection of TextRectangle objects
      */
     @Override
-    public ClientRect jsxFunction_getBoundingClientRect() {
+    public ClientRect getBoundingClientRect() {
         int left = getPosX();
         int top = getPosY();
 
@@ -2789,8 +2789,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public boolean jsxFunction_hasAttribute(final String name) {
-        return super.jsxFunction_hasAttribute(name);
+    public boolean hasAttribute(final String name) {
+        return super.hasAttribute(name);
     }
 
     /**
@@ -2798,8 +2798,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     @JsxFunction
-    public Object jsxFunction_getAttribute(final String attributeName, final Integer flags) {
-        return super.jsxFunction_getAttribute(attributeName, flags);
+    public Object getAttribute(final String attributeName, final Integer flags) {
+        return super.getAttribute(attributeName, flags);
     }
 
     /**

@@ -165,7 +165,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (s.isEmpty() && isInheritable(name)) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent != null) {
-                s = getWindow().jsxFunction_getComputedStyle(parent, null).getStyleAttribute(name, null);
+                s = getWindow().getComputedStyle(parent, null).getStyleAttribute(name, null);
             }
         }
         return s;
@@ -1502,7 +1502,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             else if ("block".equals(display)) {
                 // Block elements take up 100% of the parent's width.
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
-                final String parentWidth = getWindow().jsxFunction_getComputedStyle(parentJS, null).jsxGet_width();
+                final String parentWidth = getWindow().getComputedStyle(parentJS, null).jsxGet_width();
                 if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO)
                         && "auto".equals(parentWidth)) {
                     width = Window.WINDOW_WIDTH;
@@ -2134,11 +2134,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String jsxFunction_getPropertyValue(final String name) {
+    public String getPropertyValue(final String name) {
         // need to invoke the getter to take care of the default value
         final Object property = getProperty(this, camelize(name));
         if (property == NOT_FOUND) {
-            return super.jsxFunction_getPropertyValue(name);
+            return super.getPropertyValue(name);
         }
         return Context.toString(property);
     }

@@ -212,7 +212,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @param uri the URI of the item to add to the dynamically managed entries
      */
     @JsxFunction
-    public void jsxFunction_add(final String uri) {
+    public void add(final String uri) {
         // TODO: implement
     }
 
@@ -222,7 +222,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @return <tt>true</tt> if the specified URI represents a resource that's in the application cache's list
      */
     @JsxFunction
-    public boolean jsxFunction_hasItem(final String uri) {
+    public boolean hasItem(final String uri) {
         return false; // TODO: implement
     }
 
@@ -232,7 +232,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @return the URI of the item at the specific offset into the list of cached resources
      */
     @JsxFunction
-    public String jsxFunction_item(final int index) {
+    public String item(final int index) {
         return null; // TODO: implement
     }
 
@@ -242,7 +242,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @param uri the URI to remove
      */
     @JsxFunction
-    public void jsxFunction_remove(final String uri) {
+    public void remove(final String uri) {
         // TODO: implement
     }
 
@@ -250,7 +250,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Swaps in the newest version of the application cache.
      */
     @JsxFunction
-    public void jsxFunction_swapCache() {
+    public void swapCache() {
         // TODO: implement
     }
 
@@ -258,7 +258,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * Begins the application cache update process.
      */
     @JsxFunction
-    public void jsxFunction_update() {
+    public void update() {
         // TODO: implement
     }
 

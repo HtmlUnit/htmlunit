@@ -74,7 +74,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     @Override
     public final Object get(final int index, final Scriptable start) {
         final NamedNodeMap startMap = (NamedNodeMap) start;
-        final Object response = startMap.jsxFunction_item(index);
+        final Object response = startMap.item(index);
         if (response != null) {
             return response;
         }
@@ -87,7 +87,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        final Object response = jsxFunction_getNamedItem(name);
+        final Object response = getNamedItem(name);
         if (response != null) {
             return response;
         }
@@ -102,7 +102,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
      * Gets the specified attribute but does not handle the synthetic class attribute for IE.
-     * @see #jsxFunction_getNamedItem(String)
+     * @see #getNamedItem(String)
      *
      * @param name attribute name
      * @return the attribute node, <code>null</code> if the attribute is not defined
@@ -125,7 +125,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @return the attribute node, <code>null</code> if the attribute is not defined
      */
     @JsxFunction
-    public Object jsxFunction_getNamedItem(final String name) {
+    public Object getNamedItem(final String name) {
         final Object attr = getNamedItemWithoutSytheticClassAttr(name);
         if (null != attr) {
             return attr;
@@ -144,7 +144,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param node the attribute
      */
     @JsxFunction
-    public void jsxFunction_setNamedItem(final Node node) {
+    public void setNamedItem(final Node node) {
         attributes_.setNamedItem(node.getDomNodeOrDie());
     }
 
@@ -153,7 +153,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @param name the name of the item to remove
      */
     @JsxFunction
-    public void jsxFunction_removeNamedItem(final String name) {
+    public void removeNamedItem(final String name) {
         attributes_.removeNamedItem(name);
     }
 
@@ -163,7 +163,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @return the item at the specified index
      */
     @JsxFunction
-    public Object jsxFunction_item(int index) {
+    public Object item(int index) {
         final DomNode attr = (DomNode) attributes_.item(index);
         if (attr != null) {
             return attr.getScriptObject();

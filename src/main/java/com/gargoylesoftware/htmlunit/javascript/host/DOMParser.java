@@ -50,7 +50,7 @@ public class DOMParser extends SimpleScriptable {
      * @return the generated document
      */
     @JsxFunction
-    public XMLDocument jsxFunction_parseFromString(final String str, final String contentType) {
+    public XMLDocument parseFromString(final String str, final String contentType) {
         final XMLDocument document = new XMLDocument();
         document.setParentScope(getParentScope());
         document.setPrototype(getPrototype(XMLDocument.class));

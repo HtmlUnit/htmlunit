@@ -32,8 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
  * @author Ahmed Ashour
  */
 public final class ClassConfiguration {
-    private static final String FUNCTION_PREFIX = "jsxFunction_";
-
     private Map<String, PropertyInfo> propertyMap_ = new HashMap<String, PropertyInfo>();
     private Map<String, FunctionInfo> functionMap_ = new HashMap<String, FunctionInfo>();
     private List<String> constants_ = new ArrayList<String>();
@@ -52,7 +50,6 @@ public final class ClassConfiguration {
      * @param hostClass - the class implementing this functionality
      * @param domClassName the name of the DOM class that this object supports
      * @param jsObject boolean flag for if this object is a JavaScript object
-     * @throws ClassNotFoundException - if the implementing class is not found
      */
     public ClassConfiguration(final Class<? extends SimpleScriptable> hostClass, final String domClassName,
             final boolean jsObject) {
@@ -136,11 +133,7 @@ public final class ClassConfiguration {
     public void addFunction(final Method method) {
         final FunctionInfo info = new FunctionInfo();
         info.setFunctionMethod(method);
-        String name = method.getName();
-        if (name.startsWith(FUNCTION_PREFIX)) {
-            name = name.substring(FUNCTION_PREFIX.length());
-        }
-        functionMap_.put(name, info);
+        functionMap_.put(method.getName(), info);
     }
 
     /**

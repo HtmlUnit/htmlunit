@@ -82,7 +82,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
      * @return the newly created namespace
      */
     @JsxFunction
-    public final Namespace jsxFunction_add(final String namespace, final String urn, final String url) {
+    public final Namespace add(final String namespace, final String urn, final String url) {
         // TODO: should we add the namespace to the HtmlUnit DOM?
         final Namespace n = new Namespace(doc_, namespace, urn);
         namespaces_.add(n);
@@ -104,7 +104,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
      * @return the namespace at the specified index
      */
     @JsxFunction
-    public final Object jsxFunction_item(final Object index) {
+    public final Object item(final Object index) {
         if (index instanceof Number) {
             final Number n = (Number) index;
             final int i = n.intValue();
@@ -139,7 +139,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
         if (args.length != 1) {
             return NOT_FOUND;
         }
-        return jsxFunction_item(args[0]);
+        return item(args[0]);
     }
 
     /** {@inheritDoc} */

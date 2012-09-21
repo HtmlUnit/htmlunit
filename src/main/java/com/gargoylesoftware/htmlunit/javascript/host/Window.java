@@ -202,7 +202,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param message the message
      */
     @JsxFunction
-    public void jsxFunction_alert(final Object message) {
+    public void alert(final Object message) {
         // use Object as parameter and perform String conversion by ourself
         // this allows to place breakpoint here and "see" the message object and its properties
         final String stringMessage = Context.toString(message);
@@ -221,7 +221,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the encoded string
      */
     @JsxFunction(@WebBrowser(FF))
-    public String jsxFunction_btoa(final String stringToEncode) {
+    public String btoa(final String stringToEncode) {
         return new String(Base64.encodeBase64(stringToEncode.getBytes()));
     }
 
@@ -231,7 +231,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the decoded value
      */
     @JsxFunction(@WebBrowser(FF))
-    public String jsxFunction_atob(final String encodedData) {
+    public String atob(final String encodedData) {
         return new String(Base64.decodeBase64(encodedData.getBytes()));
     }
 
@@ -241,7 +241,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return true if ok was pressed, false if cancel was pressed
      */
     @JsxFunction
-    public boolean jsxFunction_confirm(final String message) {
+    public boolean confirm(final String message) {
         final ConfirmHandler handler = getWebWindow().getWebClient().getConfirmHandler();
         if (handler == null) {
             LOG.warn("window.confirm(\""
@@ -257,7 +257,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return true if ok was pressed, false if cancel was pressed
      */
     @JsxFunction
-    public String jsxFunction_prompt(final String message) {
+    public String prompt(final String message) {
         final PromptHandler handler = getWebWindow().getWebClient().getPromptHandler();
         if (handler == null) {
             LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
@@ -330,7 +330,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536651.aspx">MSDN documentation</a>
      */
     @JsxFunction
-    public WindowProxy jsxFunction_open(final Object url, final Object name, final Object features,
+    public WindowProxy open(final Object url, final Object name, final Object features,
             final Object replace) {
         String urlString = null;
         if (url != Undefined.instance) {
@@ -391,7 +391,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the created popup
      */
     @JsxFunction(@WebBrowser(IE))
-    public Popup jsxFunction_createPopup() {
+    public Popup createPopup() {
         final Popup popup = new Popup();
         popup.setParentScope(this);
         popup.setPrototype(getPrototype(Popup.class));
@@ -429,7 +429,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the id of the created timer
      */
     @JsxFunction
-    public int jsxFunction_setTimeout(final Object code, int timeout, final Object language) {
+    public int setTimeout(final Object code, int timeout, final Object language) {
         if (timeout < MIN_TIMER_DELAY) {
             timeout = MIN_TIMER_DELAY;
         }
@@ -473,7 +473,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param timeoutId identifier for the timeout to clear (returned by <tt>setTimeout</tt>)
      */
     @JsxFunction
-    public void jsxFunction_clearTimeout(final int timeoutId) {
+    public void clearTimeout(final int timeoutId) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("clearTimeout(" + timeoutId + ")");
         }
@@ -608,9 +608,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param message the message to log
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_dump(final String message) {
+    public void dump(final String message) {
         if (console_ instanceof Console) {
-            Console.jsxFunction_log(null, console_, new Object[] {message}, null);
+            Console.log(null, console_, new Object[] {message}, null);
         }
     }
 
@@ -861,7 +861,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Sets the focus to this element.
      */
     @JsxFunction
-    public void jsxFunction_focus() {
+    public void focus() {
         webWindow_.getWebClient().setCurrentWindow(webWindow_);
     }
 
@@ -869,7 +869,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Removes focus from this element.
      */
     @JsxFunction
-    public void jsxFunction_blur() {
+    public void blur() {
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.blur() not implemented");
         }
@@ -879,7 +879,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Closes this window.
      */
     @JsxFunction
-    public void jsxFunction_close() {
+    public void close() {
         final WebWindow webWindow = getWebWindow();
         if (webWindow instanceof TopLevelWindow) {
             ((TopLevelWindow) webWindow).close();
@@ -905,7 +905,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical position
      */
     @JsxFunction
-    public void jsxFunction_moveTo(final int x, final int y) {
+    public void moveTo(final int x, final int y) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.moveTo() not implemented");
         }
@@ -917,7 +917,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical position
      */
     @JsxFunction
-    public void jsxFunction_moveBy(final int x, final int y) {
+    public void moveBy(final int x, final int y) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.moveBy() not implemented");
         }
@@ -929,7 +929,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param height the height offset
      */
     @JsxFunction
-    public void jsxFunction_resizeBy(final int width, final int height) {
+    public void resizeBy(final int width, final int height) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.resizeBy() not implemented");
         }
@@ -941,7 +941,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param height the height of the Window in pixel after resize
      */
     @JsxFunction
-    public void jsxFunction_resizeTo(final int width, final int height) {
+    public void resizeTo(final int width, final int height) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.resizeTo() not implemented");
         }
@@ -953,8 +953,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical position to scroll to
      */
     @JsxFunction
-    public void jsxFunction_scroll(final int x, final int y) {
-        jsxFunction_scrollTo(x, y);
+    public void scroll(final int x, final int y) {
+        scrollTo(x, y);
     }
 
     /**
@@ -963,7 +963,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical distance to scroll by
      */
     @JsxFunction
-    public void jsxFunction_scrollBy(final int x, final int y) {
+    public void scrollBy(final int x, final int y) {
         final HTMLElement body = ((HTMLDocument) document_).jsxGet_body();
         if (body != null) {
             body.jsxSet_scrollLeft(body.jsxGet_scrollLeft() + x);
@@ -976,7 +976,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param lines the number of lines to scroll down
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_scrollByLines(final int lines) {
+    public void scrollByLines(final int lines) {
         final HTMLElement body = ((HTMLDocument) document_).jsxGet_body();
         if (body != null) {
             body.jsxSet_scrollTop(body.jsxGet_scrollTop() + (19 * lines));
@@ -988,7 +988,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param pages the number of pages to scroll down
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_scrollByPages(final int pages) {
+    public void scrollByPages(final int pages) {
         final HTMLElement body = ((HTMLDocument) document_).jsxGet_body();
         if (body != null) {
             body.jsxSet_scrollTop(body.jsxGet_scrollTop() + (WINDOW_HEIGHT * pages));
@@ -1001,7 +1001,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param y the vertical position to scroll to
      */
     @JsxFunction
-    public void jsxFunction_scrollTo(final int x, final int y) {
+    public void scrollTo(final int x, final int y) {
         final HTMLElement body = ((HTMLDocument) document_).jsxGet_body();
         if (body != null) {
             body.jsxSet_scrollLeft(x);
@@ -1114,7 +1114,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return <code>true</code> if the listener has been added
      */
     @JsxFunction(@WebBrowser(IE))
-    public boolean jsxFunction_attachEvent(final String type, final Function listener) {
+    public boolean attachEvent(final String type, final Function listener) {
         return getEventListenersContainer().addEventListener(StringUtils.substring(type, 2), listener, false);
     }
 
@@ -1126,7 +1126,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.addEventListener">Mozilla documentation</a>
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_addEventListener(final String type, final Function listener, final boolean useCapture) {
+    public void addEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().addEventListener(type, listener, useCapture);
     }
 
@@ -1137,7 +1137,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536411.aspx">MSDN documentation</a>
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_detachEvent(final String type, final Function listener) {
+    public void detachEvent(final String type, final Function listener) {
         getEventListenersContainer().removeEventListener(StringUtils.substring(type, 2), listener, false);
     }
 
@@ -1149,7 +1149,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener">Mozilla documentation</a>
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_removeEventListener(final String type, final Function listener, final boolean useCapture) {
+    public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
         getEventListenersContainer().removeEventListener(type, listener, useCapture);
     }
 
@@ -1291,7 +1291,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                     result = getScriptableFor(elements.get(0));
                 }
                 else if (elements.size() > 1) {
-                    result = ((HTMLDocument) document_).jsxFunction_getElementsByName(name);
+                    result = ((HTMLDocument) document_).getElementsByName(name);
                 }
                 else {
                     // May be attempting to retrieve element by ID (try map-backed operation again instead of XPath).
@@ -1337,7 +1337,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         if (index >= frames.jsxGet_length()) {
             return Context.getUndefinedValue();
         }
-        return frames.jsxFunction_item(Integer.valueOf(index));
+        return frames.item(Integer.valueOf(index));
     }
 
     /**
@@ -1381,7 +1381,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536420.aspx">MSDN documentation</a>
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_execScript(final String script, final Object language) {
+    public void execScript(final String script, final Object language) {
         final String languageStr = Context.toString(language);
         if (language == Undefined.instance
             || "javascript".equalsIgnoreCase(languageStr) || "jscript".equalsIgnoreCase(languageStr)) {
@@ -1430,9 +1430,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the id of the created interval
      */
     @JsxFunction
-    public int jsxFunction_setInterval(final Object code, int timeout, final Object language) {
+    public int setInterval(final Object code, int timeout, final Object language) {
         if (timeout == 0 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_133)) {
-            return jsxFunction_setTimeout(code, timeout, language);
+            return setTimeout(code, timeout, language);
         }
 
         if (timeout < MIN_TIMER_DELAY) {
@@ -1470,7 +1470,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
      */
     @JsxFunction
-    public void jsxFunction_clearInterval(final int intervalID) {
+    public void clearInterval(final int intervalID) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("clearInterval(" + intervalID + ")");
         }
@@ -1524,7 +1524,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536672.aspx">MSDN documentation</a>
      */
     @JsxFunction
-    public void jsxFunction_print() {
+    public void print() {
         if (LOG.isDebugEnabled()) {
             LOG.debug("window.print() not implemented");
         }
@@ -1533,10 +1533,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * Does nothing special anymore... just like FF.
      * @param type the type of events to capture
-     * @see Document#jsxFunction_captureEvents(String)
+     * @see Document#captureEvents(String)
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_captureEvents(final String type) {
+    public void captureEvents(final String type) {
         // Empty.
     }
 
@@ -1544,7 +1544,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * An undocumented IE function.
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_CollectGarbage() {
+    public void CollectGarbage() {
         // Empty.
     }
 
@@ -1558,7 +1558,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the computed style
      */
     @JsxFunction(@WebBrowser(FF))
-    public ComputedCSSStyleDeclaration jsxFunction_getComputedStyle(final HTMLElement element, final String pseudo) {
+    public ComputedCSSStyleDeclaration getComputedStyle(final HTMLElement element, final String pseudo) {
         ComputedCSSStyleDeclaration style;
 
         synchronized (computedStyles_) {
@@ -1573,7 +1573,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         final StyleSheetList sheets = ((HTMLDocument) document_).jsxGet_styleSheets();
         for (int i = 0; i < sheets.jsxGet_length(); i++) {
-            final CSSStyleSheet sheet = (CSSStyleSheet) sheets.jsxFunction_item(i);
+            final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
             if (sheet.isActive()) {
                 if (LOG.isTraceEnabled()) {
                     LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + element);
@@ -1594,7 +1594,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the current selection
      */
     @JsxFunction(@WebBrowser(FF))
-    public Selection jsxFunction_getSelection() {
+    public Selection getSelection() {
         // return null if the window is in a frame that is not displayed
         if (webWindow_ instanceof FrameWindow) {
             final FrameWindow frameWindow = (FrameWindow) webWindow_;
@@ -1602,14 +1602,14 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 return null;
             }
         }
-        return getSelection();
+        return getSelectionImpl();
     }
 
     /**
      * Returns the current selection.
      * @return the current selection
      */
-    public Selection getSelection() {
+    public Selection getSelectionImpl() {
         if (selection_ == null) {
             selection_ = new Selection();
             selection_.setParentScope(this);
@@ -1628,7 +1628,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">Mozilla Documentation</a>
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF) })
-    public Object jsxFunction_showModalDialog(final String url, final Object arguments, final String features) {
+    public Object showModalDialog(final String url, final Object arguments, final String features) {
         final WebWindow ww = getWebWindow();
         final WebClient client = ww.getWebClient();
         try {
@@ -1655,7 +1655,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536761.aspx">MSDN Documentation</a>
      */
     @JsxFunction(@WebBrowser(IE))
-    public Object jsxFunction_showModelessDialog(final String url, final Object arguments, final String features) {
+    public Object showModelessDialog(final String url, final Object arguments, final String features) {
         final WebWindow ww = getWebWindow();
         final WebClient client = ww.getWebClient();
         try {
@@ -1835,7 +1835,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return "JScript"
      */
     @JsxFunction(@WebBrowser(IE))
-    public String jsxFunction_ScriptEngine() {
+    public String ScriptEngine() {
         return "JScript";
     }
 
@@ -1845,7 +1845,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the build version
      */
     @JsxFunction(@WebBrowser(IE))
-    public int jsxFunction_ScriptEngineBuildVersion() {
+    public int ScriptEngineBuildVersion() {
         return 12345;
     }
 
@@ -1855,7 +1855,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the major version
      */
     @JsxFunction(@WebBrowser(IE))
-    public int jsxFunction_ScriptEngineMajorVersion() {
+    public int ScriptEngineMajorVersion() {
         return 5;
     }
 
@@ -1865,7 +1865,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the minor version
      */
     @JsxFunction(@WebBrowser(IE))
-    public int jsxFunction_ScriptEngineMinorVersion() {
+    public int ScriptEngineMinorVersion() {
         return (int) getBrowserVersion().getBrowserVersionNumeric();
     }
 
@@ -1875,7 +1875,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="https://developer.mozilla.org/en/DOM/window.stop">window.stop</a>
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_stop() {
+    public void stop() {
         //empty
     }
 

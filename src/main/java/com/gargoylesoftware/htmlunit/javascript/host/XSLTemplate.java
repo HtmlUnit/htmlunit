@@ -62,7 +62,7 @@ public class XSLTemplate extends SimpleScriptable {
         final XSLTProcessor processor = new XSLTProcessor();
         processor.setPrototype(getPrototype(processor.getClass()));
         processor.setParentScope(getParentScope());
-        processor.jsxFunction_importStylesheet(stylesheet_);
+        processor.importStylesheet(stylesheet_);
         return processor;
     }
 }

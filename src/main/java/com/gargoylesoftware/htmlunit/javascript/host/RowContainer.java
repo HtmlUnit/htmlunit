@@ -86,7 +86,7 @@ public class RowContainer extends HTMLElement {
      * @param rowIndex the zero-based index of the row to delete
      */
     @JsxFunction
-    public void jsxFunction_deleteRow(int rowIndex) {
+    public void deleteRow(int rowIndex) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final int rowCount = rows.jsxGet_length();
         if (rowIndex == -1) {
@@ -94,7 +94,7 @@ public class RowContainer extends HTMLElement {
         }
         final boolean rowIndexValid = (rowIndex >= 0 && rowIndex < rowCount);
         if (rowIndexValid) {
-            final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(Integer.valueOf(rowIndex));
+            final SimpleScriptable row = (SimpleScriptable) rows.item(Integer.valueOf(rowIndex));
             row.getDomNodeOrDie().remove();
         }
     }
@@ -109,7 +109,7 @@ public class RowContainer extends HTMLElement {
      * @return the newly-created row
      */
     @JsxFunction
-    public Object jsxFunction_insertRow(final Object index) {
+    public Object insertRow(final Object index) {
         int rowIndex = -1;
         if (index != Undefined.instance) {
             rowIndex = (int) Context.toNumber(index);
@@ -145,7 +145,7 @@ public class RowContainer extends HTMLElement {
             getDomNodeOrDie().appendChild(newRow);
         }
         else {
-            final SimpleScriptable row = (SimpleScriptable) rows.jsxFunction_item(Integer.valueOf(index));
+            final SimpleScriptable row = (SimpleScriptable) rows.item(Integer.valueOf(index));
             // if at the end, then in the same "sub-container" as the last existing row
             if (index >= rowCount - 1) {
                 row.getDomNodeOrDie().getParentNode().appendChild(newRow);
@@ -165,14 +165,14 @@ public class RowContainer extends HTMLElement {
      * @return the row that was moved
      */
     @JsxFunction(@WebBrowser(IE))
-    public Object jsxFunction_moveRow(final int sourceIndex, final int targetIndex) {
+    public Object moveRow(final int sourceIndex, final int targetIndex) {
         final HTMLCollection rows = (HTMLCollection) jsxGet_rows();
         final int rowCount = rows.jsxGet_length();
         final boolean sourceIndexValid = (sourceIndex >= 0 && sourceIndex < rowCount);
         final boolean targetIndexValid = (targetIndex >= 0 && targetIndex < rowCount);
         if (sourceIndexValid && targetIndexValid) {
-            final SimpleScriptable sourceRow = (SimpleScriptable) rows.jsxFunction_item(Integer.valueOf(sourceIndex));
-            final SimpleScriptable targetRow = (SimpleScriptable) rows.jsxFunction_item(Integer.valueOf(targetIndex));
+            final SimpleScriptable sourceRow = (SimpleScriptable) rows.item(Integer.valueOf(sourceIndex));
+            final SimpleScriptable targetRow = (SimpleScriptable) rows.item(Integer.valueOf(targetIndex));
             targetRow.getDomNodeOrDie().insertBefore(sourceRow.getDomNodeOrDie());
             return sourceRow;
         }

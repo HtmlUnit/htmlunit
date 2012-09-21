@@ -382,7 +382,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Test that {@link HTMLElement#jsxFunction_getElementsByTagName} returns an associative array.
+     * Test that {@link HTMLElement#getElementsByTagName} returns an associative array.
      * Test for bug 1369514.
      * @throws Exception if the test fails
      */

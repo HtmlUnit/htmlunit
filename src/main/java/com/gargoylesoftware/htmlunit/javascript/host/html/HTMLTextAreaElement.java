@@ -242,7 +242,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param end the index of the character after the selection
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_setSelectionRange(final int start, final int end) {
+    public void setSelectionRange(final int start, final int end) {
         jsxSet_selectionStart(start);
         jsxSet_selectionEnd(end);
     }
@@ -251,7 +251,7 @@ public class HTMLTextAreaElement extends FormField {
      * Selects this element.
      */
     @JsxFunction
-    public void jsxFunction_select() {
+    public void select() {
         ((HtmlTextArea) getDomNodeOrDie()).select();
     }
 

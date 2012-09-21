@@ -369,7 +369,7 @@ public class EventNode extends Node {
      * @return <tt>true</tt> if the event fired successfully, <tt>false</tt> if it was canceled
      */
     @JsxFunction(@WebBrowser(IE))
-    public boolean jsxFunction_fireEvent(final String type, Event event) {
+    public boolean fireEvent(final String type, Event event) {
         if (event == null) {
             event = new MouseEvent();
         }

@@ -297,7 +297,7 @@ public class MouseEvent extends UIEvent {
      * @param relatedTarget is there a related target for the event
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public void jsxFunction_initMouseEvent(
+    public void initMouseEvent(
             final String type,
             final boolean bubbles,
             final boolean cancelable,
@@ -313,7 +313,7 @@ public class MouseEvent extends UIEvent {
             final boolean metaKey,
             final int button,
             final Object relatedTarget) {
-        jsxFunction_initUIEvent(type, bubbles, cancelable, view, detail);
+        initUIEvent(type, bubbles, cancelable, view, detail);
         screenX_ = Integer.valueOf(screenX);
         screenY_ = Integer.valueOf(screenY);
         clientX_ = Integer.valueOf(clientX);

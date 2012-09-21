@@ -113,7 +113,7 @@ public class StyleSheetList extends SimpleScriptable {
      * @return the style sheet at the specified index
      */
     @JsxFunction
-    public Object jsxFunction_item(final int index) {
+    public Object item(final int index) {
         if (index < 0) {
             throw Context.reportRuntimeError("Invalid negative index: " + index);
         }
@@ -121,7 +121,7 @@ public class StyleSheetList extends SimpleScriptable {
             return Context.getUndefinedValue();
         }
 
-        final HTMLElement element = (HTMLElement) nodes_.jsxFunction_item(Integer.valueOf(index));
+        final HTMLElement element = (HTMLElement) nodes_.item(Integer.valueOf(index));
 
         final CSSStyleSheet sheet;
         // <style type="text/css"> ... </style>
@@ -142,7 +142,7 @@ public class StyleSheetList extends SimpleScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         if (this == start) {
-            return jsxFunction_item(index);
+            return item(index);
         }
         return super.get(index, start);
     }

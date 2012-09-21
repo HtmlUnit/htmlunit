@@ -55,9 +55,9 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
         final ClassConfiguration config1 = new ClassConfiguration(klass, null, true);
         final ClassConfiguration config2 = new ClassConfiguration(klass, null, true);
 
-        config1.addFunction(klass.getDeclaredMethod("jsxFunction_testFunction"));
+        config1.addFunction(klass.getDeclaredMethod("testFunction"));
         Assert.assertFalse("Configs should not be equal", config1.equals(config2));
-        config2.addFunction(klass.getDeclaredMethod("jsxFunction_testFunction"));
+        config2.addFunction(klass.getDeclaredMethod("testFunction"));
         assertTrue("Configs should now be equal", config1.equals(config2));
     }
 
@@ -140,7 +140,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
         /**
          * Dummy function.
          */
-        public void jsxFunction_testFunction() {
+        public void testFunction() {
         }
 
         /**

@@ -48,7 +48,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param y the translation distance in the vertical direction
      */
     @JsxFunction
-    public void jsxFunction_translate(final Object x, final Object y) {
+    public void translate(final Object x, final Object y) {
       // empty
     }
 
@@ -58,7 +58,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param y the scale factor in the vertical direction
      */
     @JsxFunction
-    public void jsxFunction_scale(final Object x, final Object y) {
+    public void scale(final Object x, final Object y) {
       //empty
     }
 
@@ -133,7 +133,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param h the height
      */
     @JsxFunction
-    public void jsxFunction_clearRect(final double x, final double y, final double w, final double h) {
+    public void clearRect(final double x, final double y, final double w, final double h) {
         //empty
     }
 
@@ -145,7 +145,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param h the height
      */
     @JsxFunction
-    public void jsxFunction_fillRect(final double x, final double y, final double w, final double h) {
+    public void fillRect(final double x, final double y, final double w, final double h) {
         //empty
     }
 
@@ -157,7 +157,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param h the height
      */
     @JsxFunction
-    public void jsxFunction_strokeRect(final double x, final double y, final double w, final double h) {
+    public void strokeRect(final double x, final double y, final double w, final double h) {
         //empty
     }
 
@@ -165,7 +165,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Begins the subpaths.
      */
     @JsxFunction
-    public void jsxFunction_beginPath() {
+    public void beginPath() {
         //empty
     }
 
@@ -173,7 +173,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Closes the subpaths.
      */
     @JsxFunction
-    public void jsxFunction_closePath() {
+    public void closePath() {
         //empty
     }
 
@@ -183,7 +183,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param y the y
      */
     @JsxFunction
-    public void jsxFunction_moveTo(final double x, final double y) {
+    public void moveTo(final double x, final double y) {
         //empty
     }
 
@@ -193,7 +193,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param y the y
      */
     @JsxFunction
-    public void jsxFunction_lineTo(final double x, final double y) {
+    public void lineTo(final double x, final double y) {
         //empty
     }
 
@@ -201,7 +201,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Pushes state on state stack.
      */
     @JsxFunction
-    public void jsxFunction_save() {
+    public void save() {
         //empty
     }
 
@@ -209,7 +209,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Pops state stack and restore state.
      */
     @JsxFunction
-    public void jsxFunction_restore() {
+    public void restore() {
         //empty
     }
 
@@ -223,7 +223,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param r1 the r1
      */
     @JsxFunction
-    public void jsxFunction_createLinearGradient(final double x0, final double y0, final double r0, final double x1,
+    public void createLinearGradient(final double x0, final double y0, final double r0, final double x1,
             final Object y1, final Object r1) {
         //empty
     }
@@ -238,7 +238,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param anticlockwise is anti-clockwise
      */
     @JsxFunction
-    public void jsxFunction_arc(final double x, final double y, final double radius, final double startAngle,
+    public void arc(final double x, final double y, final double radius, final double startAngle,
                 final double endAngle, final boolean anticlockwise) {
         //empty
     }
@@ -252,7 +252,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param radius the radius
      */
     @JsxFunction
-    public void jsxFunction_arcTo(final double x1, final double y1, final double x2, final double y2,
+    public void arcTo(final double x1, final double y1, final double x2, final double y2,
                 final double radius) {
         //empty
     }
@@ -267,7 +267,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param y the y
      */
     @JsxFunction
-    public void jsxFunction_bezierCurveTo(final double cp1x, final double cp1y, final double cp2x, final double cp2y,
+    public void bezierCurveTo(final double cp1x, final double cp1y, final double cp2x, final double cp2y,
             final double x, final double y) {
         //empty
     }
@@ -276,7 +276,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Fills the shape.
      */
     @JsxFunction
-    public void jsxFunction_fill() {
+    public void fill() {
         //empty
     }
 
@@ -284,7 +284,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Calculates the strokes of all the subpaths of the current path.
      */
     @JsxFunction
-    public void jsxFunction_stroke() {
+    public void stroke() {
         //empty
     }
 
@@ -292,7 +292,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * Creates a new clipping region.
      */
     @JsxFunction
-    public void jsxFunction_clip() {
+    public void clip() {
         //empty
     }
 
@@ -304,7 +304,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param function the function
      */
     @JsxFunction
-    public static void jsxFunction_drawImage(
+    public static void drawImage(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         //empty
     }

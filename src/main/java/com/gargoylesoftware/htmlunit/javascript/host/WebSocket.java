@@ -220,7 +220,7 @@ public class WebSocket extends SimpleScriptable {
      * @param reason A human-readable string explaining why the connection is closing
      */
     @JsxFunction
-    public void jsxFunction_close(final Object code, final Object reason) {
+    public void close(final Object code, final Object reason) {
         if (incomingConnection_ != null) {
             incomingConnection_.close();
         }
@@ -234,7 +234,7 @@ public class WebSocket extends SimpleScriptable {
      * @param content the body of the message being sent with the request
      */
     @JsxFunction
-    public void jsxFunction_send(final Object content) {
+    public void send(final Object content) {
         try {
             if (content instanceof String) {
                 outgoingConnection_.sendMessage(content.toString());

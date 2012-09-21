@@ -105,7 +105,7 @@ public class XMLSerializer extends SimpleScriptable {
      * @return the serialized string
      */
     @JsxFunction
-    public String jsxFunction_serializeToString(Node root) {
+    public String serializeToString(Node root) {
         if (root == null) {
             return "";
         }

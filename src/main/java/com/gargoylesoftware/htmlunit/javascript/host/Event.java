@@ -590,7 +590,7 @@ public class Event extends SimpleScriptable {
      * Stops the event from propagating.
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_stopPropagation() {
+    public void stopPropagation() {
         stopPropagation_ = true;
     }
 
@@ -636,7 +636,7 @@ public class Event extends SimpleScriptable {
      * @param cancelable whether or not the event the event should be cancelable
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_initEvent(final String type, final boolean bubbles, final boolean cancelable) {
+    public void initEvent(final String type, final boolean bubbles, final boolean cancelable) {
         type_ = type;
         bubbles_ = bubbles;
         cancelable_ = cancelable;
@@ -648,7 +648,7 @@ public class Event extends SimpleScriptable {
      * Calling this method for a non-cancelable event has no effect.
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_preventDefault() {
+    public void preventDefault() {
         preventDefault_ = true;
     }
 

@@ -1584,8 +1584,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * Lifecycle method to support special processing for js method importNode.
      * @param doc the import target document
-     * @see Document#jsxFunction_importNode(
-     *             com.gargoylesoftware.htmlunit.javascript.host.Node, boolean)
+     * @see Document#importNode(com.gargoylesoftware.htmlunit.javascript.host.Node, boolean)
      * @see HtmlScript#processImportNode(Document)
      */
     public void processImportNode(final com.gargoylesoftware.htmlunit.javascript.host.Document doc) {

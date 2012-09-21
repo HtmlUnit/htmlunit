@@ -1082,7 +1082,7 @@ public abstract class HtmlElement extends DomElement {
         final WebClient webClient = page.getWebClient();
         if (webClient.getBrowserVersion().hasFeature(BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
             final HTMLElement jsElt = (HTMLElement) getScriptObject();
-            jsElt.jsxFunction_setActive();
+            jsElt.setActive();
         }
     }
 

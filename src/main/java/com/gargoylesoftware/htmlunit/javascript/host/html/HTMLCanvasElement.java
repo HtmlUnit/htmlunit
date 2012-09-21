@@ -83,7 +83,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * or null if the given context ID is not supported
      */
     @JsxFunction
-    public Object jsxFunction_getContext(final String contextId) {
+    public Object getContext(final String contextId) {
         if ("2d".equals(contextId)) {
             final CanvasRenderingContext2D context = new CanvasRenderingContext2D();
             context.setParentScope(getParentScope());
@@ -100,7 +100,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * @return the data URL
      */
     @JsxFunction
-    public String jsxFunction_toDataURL(final String type) {
+    public String toDataURL(final String type) {
         return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAxUlEQVR4nO3BMQEAAADCoPVPbQhf"
             + "oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
             + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"

@@ -115,7 +115,7 @@ public class TextRange extends SimpleScriptable {
      * @return a duplicate of this TextRange instance
      */
     @JsxFunction
-    public Object jsxFunction_duplicate() {
+    public Object duplicate() {
         final TextRange range = new TextRange(range_.cloneRange());
         range.setParentScope(getParentScope());
         range.setPrototype(getPrototype());
@@ -133,7 +133,7 @@ public class TextRange extends SimpleScriptable {
      * @return the parent element object if successful, or null otherwise.
      */
     @JsxFunction
-    public Object jsxFunction_parentElement() {
+    public Object parentElement() {
         final org.w3c.dom.Node parent = range_.getCommonAncestorContainer();
         return getScriptableFor(parent);
     }
@@ -144,7 +144,7 @@ public class TextRange extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536371.aspx">MSDN doc</a>
      */
     @JsxFunction
-    public void jsxFunction_collapse(final boolean toStart) {
+    public void collapse(final boolean toStart) {
         range_.collapse(toStart);
     }
 
@@ -154,7 +154,7 @@ public class TextRange extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536735.aspx">MSDN doc</a>
      */
     @JsxFunction
-    public void jsxFunction_select() {
+    public void select() {
         final HtmlPage page = (HtmlPage) getWindow().getDomNodeOrDie();
         page.setSelectionRange(range_);
     }
@@ -166,7 +166,7 @@ public class TextRange extends SimpleScriptable {
      * @return the number of units moved
      */
     @JsxFunction
-    public int jsxFunction_moveStart(final String unit, final Object count) {
+    public int moveStart(final String unit, final Object count) {
         if (!"character".equals(unit)) {
             LOG.warn("moveStart('" + unit + "') is not yet supported");
             return 0;
@@ -191,7 +191,7 @@ public class TextRange extends SimpleScriptable {
      * @return the number of units moved
      */
     @JsxFunction
-    public int jsxFunction_moveEnd(final String unit, final Object count) {
+    public int moveEnd(final String unit, final Object count) {
         if (!"character".equals(unit)) {
             LOG.warn("moveEnd('" + unit + "') is not yet supported");
             return 0;
@@ -216,7 +216,7 @@ public class TextRange extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536630.aspx">MSDN Documentation</a>
      */
     @JsxFunction
-    public void jsxFunction_moveToElementText(final HTMLElement element) {
+    public void moveToElementText(final HTMLElement element) {
         range_.selectNode(element.getDomNodeOrDie());
     }
 
@@ -227,7 +227,7 @@ public class TextRange extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536371.aspx">MSDN doc</a>
      */
     @JsxFunction
-    public boolean jsxFunction_inRange(final TextRange other) {
+    public boolean inRange(final TextRange other) {
         final Range otherRange = other.range_;
 
         final org.w3c.dom.Node start = range_.getStartContainer();
@@ -261,7 +261,7 @@ public class TextRange extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536745.aspx">MSDN doc</a>
      */
     @JsxFunction
-    public void jsxFunction_setEndPoint(final String type, final TextRange other) {
+    public void setEndPoint(final String type, final TextRange other) {
         final Range otherRange = other.range_;
 
         final org.w3c.dom.Node target;

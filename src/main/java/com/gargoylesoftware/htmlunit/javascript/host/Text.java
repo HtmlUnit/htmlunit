@@ -52,7 +52,7 @@ public class Text extends CharacterDataImpl {
      * @return the Text node that was split from this node
      */
     @JsxFunction
-    public Object jsxFunction_splitText(final int offset) {
+    public Object splitText(final int offset) {
         final DomText domText = (DomText) getDomNodeOrDie();
         return getScriptableFor(domText.splitText(offset));
     }

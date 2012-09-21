@@ -66,7 +66,7 @@ public class DOMParserTest extends WebDriverTestCase {
     }
 
     /**
-     * In 2.9-SNAPSHOT on 26.10.2010 this was causing an internal error in DOMParser.jsxFunction_parseFromString.
+     * In 2.9-SNAPSHOT on 26.10.2010 this was causing an internal error in DOMParser.parseFromString.
      * @throws Exception if the test fails
      */
     @Test

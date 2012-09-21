@@ -39,7 +39,7 @@ public class PluginArray extends SimpleArray {
      * @see <a href="http://www.xulplanet.com/references/objref/PluginArray.html#method_refresh">XUL Planet</a>
      */
     @JsxFunction
-    public void jsxFunction_refresh(final boolean reloadDocuments) {
+    public void refresh(final boolean reloadDocuments) {
         // nothing
     }
 

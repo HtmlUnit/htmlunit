@@ -92,7 +92,7 @@ public class HTMLButtonElement extends FormField {
      */
     @Override
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_click() throws IOException {
-        super.jsxFunction_click();
+    public void click() throws IOException {
+        super.click();
     }
 }

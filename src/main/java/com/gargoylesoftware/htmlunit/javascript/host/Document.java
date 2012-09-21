@@ -262,7 +262,7 @@ public class Document extends EventNode {
      * @param element target for BoxObject
      * @return the BoxObject
      */
-    public BoxObject jsxFunction_getBoxObjectFor(final HTMLElement element) {
+    public BoxObject getBoxObjectFor(final HTMLElement element) {
         return element.getBoxObject();
     }
 
@@ -276,7 +276,7 @@ public class Document extends EventNode {
      * @return the imported node that belongs to this Document
      */
     @JsxFunction(@WebBrowser(FF))
-    public Object jsxFunction_importNode(final Node importedNode, final boolean deep) {
+    public Object importNode(final Node importedNode, final boolean deep) {
         DomNode domNode = importedNode.getDomNodeOrDie();
         domNode = domNode.cloneNode(deep);
         domNode.processImportNode(this);
@@ -303,10 +303,10 @@ public class Document extends EventNode {
     /**
      * Does nothing special anymore... just like FF.
      * @param type the type of events to capture
-     * @see Window#jsxFunction_captureEvents(String)
+     * @see Window#captureEvents(String)
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_captureEvents(final String type) {
+    public void captureEvents(final String type) {
         // Empty.
     }
 
@@ -378,7 +378,7 @@ public class Document extends EventNode {
      * @return the result of the evaluation of the XPath expression
      */
     @JsxFunction(@WebBrowser(FF))
-    public XPathResult jsxFunction_evaluate(final String expression, final Node contextNode,
+    public XPathResult evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
         XPathResult xPathResult = (XPathResult) result;
         if (xPathResult == null) {

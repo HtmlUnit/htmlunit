@@ -124,7 +124,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
             }
         }
         final List<String> definedClasses = new ArrayList<String>();
-        for (final Class<?> klass : JavaScriptConfiguration.CLASSES_){
+        for (final Class<?> klass : JavaScriptConfiguration.CLASSES_) {
             definedClasses.add(klass.getName());
         }
         foundJsxClasses.removeAll(definedClasses);

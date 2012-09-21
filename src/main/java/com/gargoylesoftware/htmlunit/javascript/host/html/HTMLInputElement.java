@@ -125,7 +125,7 @@ public class HTMLInputElement extends FormField {
      * Select this element.
      */
     @JsxFunction
-    public void jsxFunction_select() {
+    public void select() {
         final HtmlInput input = getHtmlInputOrDie();
         if (input instanceof HtmlTextInput) {
             ((HtmlTextInput) getDomNodeOrDie()).select();
@@ -139,12 +139,12 @@ public class HTMLInputElement extends FormField {
      * {@inheritDoc}
      */
     @Override
-    public void jsxFunction_setAttribute(final String name, final String value) {
+    public void setAttribute(final String name, final String value) {
         if ("type".equals(name)) {
             jsxSet_type(value);
         }
         else {
-            super.jsxFunction_setAttribute(name, value);
+            super.setAttribute(name, value);
         }
     }
 
@@ -291,7 +291,7 @@ public class HTMLInputElement extends FormField {
      * @param end the index of the character after the selection
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_setSelectionRange(final int start, final int end) {
+    public void setSelectionRange(final int start, final int end) {
         jsxSet_selectionStart(start);
         jsxSet_selectionEnd(end);
     }
@@ -377,8 +377,8 @@ public class HTMLInputElement extends FormField {
      */
     @Override
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_click() throws IOException {
-        super.jsxFunction_click();
+    public void click() throws IOException {
+        super.click();
     }
 
     /**

@@ -61,7 +61,7 @@ public class Storage extends SimpleScriptable {
             super.put(name, start, value);
             return;
         }
-        jsxFunction_setItem(name, Context.toString(value));
+        setItem(name, Context.toString(value));
     }
 
     /**
@@ -72,7 +72,7 @@ public class Storage extends SimpleScriptable {
         if (type_ == null || RESERVED_NAMES_.contains(name)) {
             return super.get(name, start);
         }
-        return jsxFunction_getItem(name);
+        return getItem(name);
     }
 
     /**
@@ -89,7 +89,7 @@ public class Storage extends SimpleScriptable {
      * @param key the item key
      */
     @JsxFunction
-    public void jsxFunction_removeItem(final String key) {
+    public void removeItem(final String key) {
         getMap().remove(key);
     }
 
@@ -99,7 +99,7 @@ public class Storage extends SimpleScriptable {
      * @return the key
      */
     @JsxFunction
-    public String jsxFunction_key(final int index) {
+    public String key(final int index) {
         int counter = 0;
         for (final String key : getMap().keySet()) {
             if (counter++ == index) {
@@ -119,7 +119,7 @@ public class Storage extends SimpleScriptable {
      * @return the value
      */
     @JsxFunction
-    public Object jsxFunction_getItem(final String key) {
+    public Object getItem(final String key) {
         return getMap().get(key);
     }
 
@@ -129,7 +129,7 @@ public class Storage extends SimpleScriptable {
      * @param data the value
      */
     @JsxFunction
-    public void jsxFunction_setItem(final String key, final String data) {
+    public void setItem(final String key, final String data) {
         getMap().put(key, data);
     }
 
@@ -137,7 +137,7 @@ public class Storage extends SimpleScriptable {
      * Clears all items.
      */
     @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void jsxFunction_clear() {
+    public void clear() {
         StorageImpl.getInstance().clear(type_, (HtmlPage) getWindow().getWebWindow().getEnclosedPage());
     }
 

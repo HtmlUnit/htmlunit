@@ -34,6 +34,6 @@ public class External extends SimpleScriptable {
      * Empty implementation.
      */
     @JsxFunction
-    public void jsxFunction_AutoCompleteSaveForm() {
+    public void AutoCompleteSaveForm() {
     }
 }

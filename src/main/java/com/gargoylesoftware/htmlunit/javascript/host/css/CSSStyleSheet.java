@@ -696,7 +696,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @return the position of the inserted rule
      */
     @JsxFunction(@WebBrowser(FF))
-    public int jsxFunction_insertRule(final String rule, final int position) {
+    public int insertRule(final String rule, final int position) {
         try {
             return wrapped_.insertRule(rule, position);
         }
@@ -711,7 +711,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_deleteRule(final int position) {
+    public void deleteRule(final int position) {
         try {
             wrapped_.deleteRule(position);
         }
@@ -728,7 +728,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @return always return -1 as of MSDN documentation
      */
     @JsxFunction(@WebBrowser(IE))
-    public int jsxFunction_addRule(final String selector, final String rule) {
+    public int addRule(final String selector, final String rule) {
         final String completeRule = selector + " {" + rule + "}";
         try {
             wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
@@ -745,7 +745,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531195(v=VS.85).aspx">MSDN</a>
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_removeRule(final int position) {
+    public void removeRule(final int position) {
         try {
             wrapped_.deleteRule(position);
         }

@@ -107,13 +107,13 @@ public class UIEvent extends Event {
      * @param detail the detail to set for the event
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_initUIEvent(
+    public void initUIEvent(
             final String type,
             final boolean bubbles,
             final boolean cancelable,
             final Object view,
             final int detail) {
-        jsxFunction_initEvent(type, bubbles, cancelable);
+        initEvent(type, bubbles, cancelable);
         // Ignore the view parameter; we always use the window.
         setDetail(detail);
     }

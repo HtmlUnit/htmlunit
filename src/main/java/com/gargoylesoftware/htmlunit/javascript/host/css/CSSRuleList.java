@@ -78,7 +78,7 @@ public class CSSRuleList extends SimpleScriptable {
      * @return the item in the given index
      */
     @JsxFunction(@WebBrowser(FF))
-    public Object jsxFunction_item(final int index) {
+    public Object item(final int index) {
         return null;
     }
 

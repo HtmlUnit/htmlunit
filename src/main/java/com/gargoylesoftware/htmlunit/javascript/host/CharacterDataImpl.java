@@ -71,7 +71,7 @@ public class CharacterDataImpl extends Node {
      * @param arg the string to be appended to the character data
      */
     @JsxFunction
-    public void jsxFunction_appendData(final String arg) {
+    public void appendData(final String arg) {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         domCharacterData.appendData(arg);
     }
@@ -82,7 +82,7 @@ public class CharacterDataImpl extends Node {
      * @param count the number of characters to be deleted
      */
     @JsxFunction
-    public void jsxFunction_deleteData(final int offset, final int count) {
+    public void deleteData(final int offset, final int count) {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         domCharacterData.deleteData(offset, count);
     }
@@ -94,7 +94,7 @@ public class CharacterDataImpl extends Node {
      * @param arg the string to insert
      */
     @JsxFunction
-    public void jsxFunction_insertData(final int offset, final String arg) {
+    public void insertData(final int offset, final String arg) {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         domCharacterData.insertData(offset, arg);
     }
@@ -108,7 +108,7 @@ public class CharacterDataImpl extends Node {
      * the character at offset.
      */
     @JsxFunction
-    public void jsxFunction_replaceData(final int offset, final int count, final String arg) {
+    public void replaceData(final int offset, final int count, final String arg) {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         domCharacterData.replaceData(offset, count, arg);
     }
@@ -121,7 +121,7 @@ public class CharacterDataImpl extends Node {
      *         data starting from the character at position offset
      */
     @JsxFunction
-    public String jsxFunction_substringData(final int offset, final int count) {
+    public String substringData(final int offset, final int count) {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         return domCharacterData.substringData(offset, count);
     }

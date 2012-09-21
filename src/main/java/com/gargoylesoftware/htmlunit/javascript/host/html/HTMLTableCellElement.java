@@ -45,12 +45,12 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * {@inheritDoc}
      */
     @Override
-    public void jsxFunction_setAttribute(final String name, String value) {
+    public void setAttribute(final String name, String value) {
         if ("noWrap".equals(name) && value != null
                 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_92)) {
             value = "true";
         }
-        super.jsxFunction_setAttribute(name, value);
+        super.setAttribute(name, value);
     }
 
     /**

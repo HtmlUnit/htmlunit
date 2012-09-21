@@ -69,7 +69,7 @@ public class Geolocation extends SimpleScriptable {
      * @param options optional options
      */
     @JsxFunction
-    public void jsxFunction_getCurrentPosition(final Function successCallback, final Object errorCallback,
+    public void getCurrentPosition(final Function successCallback, final Object errorCallback,
             final Object options) {
         successHandler_ = successCallback;
         if (errorCallback instanceof Function) {
@@ -99,7 +99,7 @@ public class Geolocation extends SimpleScriptable {
      * @return the watch id
      */
     @JsxFunction
-    public int jsxFunction_watchPosition(final Function successCallback, final Object errorCallback,
+    public int watchPosition(final Function successCallback, final Object errorCallback,
             final Object options) {
         return 0;
     }
@@ -109,7 +109,7 @@ public class Geolocation extends SimpleScriptable {
      * @param watchId the watch id
      */
     @JsxFunction
-    public void jsxFunction_clearWatch(final int watchId) {
+    public void clearWatch(final int watchId) {
     }
 
     /**

@@ -83,7 +83,7 @@ public class HTMLTableElement extends RowContainer {
         }
 
         // remove old caption (if any)
-        jsxFunction_deleteCaption();
+        deleteCaption();
 
         final HTMLTableCaptionElement caption = (HTMLTableCaptionElement) o;
         getDomNodeOrDie().appendChild(caption.getDomNodeOrDie());
@@ -118,7 +118,7 @@ public class HTMLTableElement extends RowContainer {
         }
 
         // remove old caption (if any)
-        jsxFunction_deleteTFoot();
+        deleteTFoot();
 
         final HTMLTableSectionElement tfoot = (HTMLTableSectionElement) o;
         getDomNodeOrDie().appendChild(tfoot.getDomNodeOrDie());
@@ -153,7 +153,7 @@ public class HTMLTableElement extends RowContainer {
         }
 
         // remove old caption (if any)
-        jsxFunction_deleteTHead();
+        deleteTHead();
 
         final HTMLTableSectionElement thead = (HTMLTableSectionElement) o;
         getDomNodeOrDie().appendChild(thead.getDomNodeOrDie());
@@ -185,7 +185,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     @JsxFunction
-    public Object jsxFunction_createCaption() {
+    public Object createCaption() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("caption"));
     }
 
@@ -197,7 +197,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     @JsxFunction
-    public Object jsxFunction_createTFoot() {
+    public Object createTFoot() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("tfoot"));
     }
 
@@ -209,7 +209,7 @@ public class HTMLTableElement extends RowContainer {
      * @return a newly added caption if no caption exists, or the first existing caption
      */
     @JsxFunction
-    public Object jsxFunction_createTHead() {
+    public Object createTHead() {
         return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("thead"));
     }
 
@@ -220,7 +220,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536405.aspx">MSDN Documentation</a>
      */
     @JsxFunction
-    public void jsxFunction_deleteCaption() {
+    public void deleteCaption() {
         getDomNodeOrDie().removeChild("caption", 0);
     }
 
@@ -231,7 +231,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536409.aspx">MSDN Documentation</a>
      */
     @JsxFunction
-    public void jsxFunction_deleteTFoot() {
+    public void deleteTFoot() {
         getDomNodeOrDie().removeChild("tfoot", 0);
     }
 
@@ -242,7 +242,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536410.aspx">MSDN Documentation</a>
      */
     @JsxFunction
-    public void jsxFunction_deleteTHead() {
+    public void deleteTHead() {
         getDomNodeOrDie().removeChild("thead", 0);
     }
 
@@ -252,7 +252,7 @@ public class HTMLTableElement extends RowContainer {
      * MSDN Documentation</a>
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_refresh() {
+    public void refresh() {
         // Empty: this method only affects rendering, which we don't care about.
     }
 

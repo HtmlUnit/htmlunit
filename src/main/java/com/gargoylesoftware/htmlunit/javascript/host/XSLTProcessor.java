@@ -82,7 +82,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param style the root-node of an XSLT stylesheet (may be a document node or an element node)
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_importStylesheet(final Node style) {
+    public void importStylesheet(final Node style) {
         style_ = style;
     }
 
@@ -94,7 +94,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @return the result of the transformation
      */
     @JsxFunction(@WebBrowser(FF))
-    public XMLDocument jsxFunction_transformToDocument(final Node source) {
+    public XMLDocument transformToDocument(final Node source) {
         final XMLDocument doc = new XMLDocument();
         doc.setPrototype(getPrototype(doc.getClass()));
         doc.setParentScope(getParentScope());
@@ -158,7 +158,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @return the result of the transformation
      */
     @JsxFunction(@WebBrowser(FF))
-    public DocumentFragment jsxFunction_transformToFragment(final Node source, final Object output) {
+    public DocumentFragment transformToFragment(final Node source, final Object output) {
         final SgmlPage page = ((Document) output).getDomNodeOrDie();
 
         final DomDocumentFragment fragment = page.createDomDocumentFragment();
@@ -194,7 +194,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param value the new value of the XSLT parameter
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_setParameter(final String namespaceURI, final String localName, final Object value) {
+    public void setParameter(final String namespaceURI, final String localName, final Object value) {
         parameters_.put(getQualifiedName(namespaceURI, localName), value);
     }
 
@@ -205,7 +205,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @return the value of the XSLT parameter
      */
     @JsxFunction(@WebBrowser(FF))
-    public Object jsxFunction_getParameter(final String namespaceURI, final String localName) {
+    public Object getParameter(final String namespaceURI, final String localName) {
         return parameters_.get(getQualifiedName(namespaceURI, localName));
     }
 
@@ -265,7 +265,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param namespaceURI an optional namespace
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_addParameter(final String baseName, final Object parameter, final Object namespaceURI) {
+    public void addParameter(final String baseName, final Object parameter, final Object namespaceURI) {
         final String nsString;
         if (namespaceURI instanceof String) {
             nsString = (String) namespaceURI;
@@ -273,14 +273,14 @@ public class XSLTProcessor extends SimpleScriptable {
         else {
             nsString = null;
         }
-        jsxFunction_setParameter(nsString, baseName, parameter);
+        setParameter(nsString, baseName, parameter);
     }
 
     /**
      * Starts the transformation process or resumes a previously failed transformation.
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_transform() {
+    public void transform() {
         final Node input = input_;
         final SgmlPage page = input.getDomNodeOrDie().getPage();
 
@@ -309,7 +309,7 @@ public class XSLTProcessor extends SimpleScriptable {
             else {
                 //remove trailing "\r\n"
                 final String serializedString =
-                    serializer.jsxFunction_serializeToString((Node) child.getScriptObject());
+                    serializer.serializeToString((Node) child.getScriptObject());
                 output.append(serializedString.substring(0, serializedString.length() - 2));
             }
         }

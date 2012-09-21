@@ -594,7 +594,7 @@ public class KeyboardEvent extends UIEvent {
      * @param charCode the Unicode character associated with the depressed key otherwise zero
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_initKeyEvent(
+    public void initKeyEvent(
             final String type,
             final boolean bubbles,
             final boolean cancelable,
@@ -606,7 +606,7 @@ public class KeyboardEvent extends UIEvent {
             final int keyCode,
             final int charCode) {
 
-        jsxFunction_initUIEvent(type, bubbles, cancelable, view, 0);
+        initUIEvent(type, bubbles, cancelable, view, 0);
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
         setShiftKey(shiftKey);

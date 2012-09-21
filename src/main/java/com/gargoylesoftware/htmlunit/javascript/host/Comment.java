@@ -95,7 +95,7 @@ public final class Comment extends CharacterDataImpl {
      * @return the attribute node for the specified attribute
      */
     @JsxFunction(@WebBrowser(IE))
-    public Object jsxFunction_getAttributeNode(final String attributeName) {
+    public Object getAttributeNode(final String attributeName) {
         return null;
     }
 
@@ -108,7 +108,7 @@ public final class Comment extends CharacterDataImpl {
      * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
      */
     @JsxFunction(@WebBrowser(IE))
-    public Object jsxFunction_getAttribute(final String attributeName, final Integer flags) {
+    public Object getAttribute(final String attributeName, final Integer flags) {
         return null;
     }
 

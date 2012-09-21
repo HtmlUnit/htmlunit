@@ -143,7 +143,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @return the newly-created cell
      */
     @JsxFunction
-    public Object jsxFunction_insertCell(final Object index) {
+    public Object insertCell(final Object index) {
         int position = -1;
         if (index != Undefined.instance) {
             position = (int) Context.toNumber(index);
@@ -172,7 +172,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @param index specifies the cell to delete.
      */
     @JsxFunction
-    public void jsxFunction_deleteCell(final Object index) {
+    public void deleteCell(final Object index) {
         int position = -1;
         if (index != Undefined.instance) {
             position = (int) Context.toNumber(index);

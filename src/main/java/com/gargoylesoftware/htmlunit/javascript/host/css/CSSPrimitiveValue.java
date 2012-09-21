@@ -241,7 +241,7 @@ public class CSSPrimitiveValue extends CSSValue {
      * @return the value
      */
     @JsxFunction
-    public double jsxFunction_getFloatValue(final int unitType) {
+    public double getFloatValue(final int unitType) {
         return wrappedCssPrimitiveValue_.getFloatValue((short) unitType);
     }
 }

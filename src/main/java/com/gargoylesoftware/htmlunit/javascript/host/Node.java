@@ -952,7 +952,7 @@ public class Node extends SimpleScriptable {
             if (this instanceof Element) {
                 final XMLSerializer serializer = new XMLSerializer();
                 serializer.setParentScope(getParentScope());
-                String xml = serializer.jsxFunction_serializeToString(this);
+                String xml = serializer.serializeToString(this);
                 if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF)
                         && xml.endsWith("\r\n")) {
                     xml = xml.substring(0, xml.length() - 2);

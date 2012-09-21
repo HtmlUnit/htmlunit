@@ -290,7 +290,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Submits the form (at the end of the current script execution).
      */
     @JsxFunction
-    public void jsxFunction_submit() {
+    public void submit() {
         final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
         final WebClient webClient = page.getWebClient();
 
@@ -320,15 +320,15 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return an object or a collection of objects if successful, or null otherwise
      */
     @JsxFunction(@WebBrowser(IE))
-    public Object jsxFunction_item(final Object index, final Object subIndex) {
+    public Object item(final Object index, final Object subIndex) {
         if (index instanceof Number) {
-            return jsxGet_elements().jsxFunction_item(index);
+            return jsxGet_elements().item(index);
         }
 
         final String name = Context.toString(index);
         final Object response = getWithPreemption(name);
         if (subIndex instanceof Number && response instanceof HTMLCollection) {
-            return ((HTMLCollection) response).jsxFunction_item(subIndex);
+            return ((HTMLCollection) response).item(subIndex);
         }
 
         return response;
@@ -338,7 +338,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Resets this form.
      */
     @JsxFunction
-    public void jsxFunction_reset() {
+    public void reset() {
         getHtmlForm().reset();
     }
 

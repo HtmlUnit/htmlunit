@@ -268,7 +268,7 @@ public class HTMLCollection extends NodeList {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536634.aspx">MSDN doc</a>
      */
     @JsxFunction
-    public final Object jsxFunction_namedItem(final String name) {
+    public final Object namedItem(final String name) {
         return nullIfNotFound(getIt(name));
     }
 
@@ -277,7 +277,7 @@ public class HTMLCollection extends NodeList {
      * @return the next node in the collection
      */
     @JsxFunction(@WebBrowser(IE))
-    public Object jsxFunction_nextNode() {
+    public Object nextNode() {
         Object nextNode;
         final List<Object> elements = getElements();
         if (currentIndex_ >= 0 && currentIndex_ < elements.size()) {
@@ -291,10 +291,10 @@ public class HTMLCollection extends NodeList {
     }
 
     /**
-     * Resets the node iterator accessed via {@link #jsxFunction_nextNode()}.
+     * Resets the node iterator accessed via {@link #nextNode()}.
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_reset() {
+    public void reset() {
         currentIndex_ = 0;
     }
 
@@ -307,7 +307,7 @@ public class HTMLCollection extends NodeList {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536776.aspx">MSDN doc</a>
      */
     @JsxFunction(@WebBrowser(IE))
-    public Object jsxFunction_tags(final String tagName) {
+    public Object tags(final String tagName) {
         final String tagNameLC = tagName.toLowerCase();
         final HTMLCollection collection = new HTMLSubCollection(this, ".tags('" + tagName + "')") {
             @Override

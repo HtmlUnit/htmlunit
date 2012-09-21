@@ -56,7 +56,7 @@ public class MediaList extends SimpleScriptable {
      * @return the element or elements corresponding to the specified index or key
      */
     @JsxFunction
-    public String jsxFunction_item(final int index) {
+    public String item(final int index) {
         if (index < 0 || index >= jsxGet_length()) {
             return null;
         }

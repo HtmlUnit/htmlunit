@@ -43,7 +43,7 @@ public class DOMImplementation extends SimpleScriptable {
      * @return true if the feature is implemented in the specified version, false otherwise
      */
     @JsxFunction
-    public boolean jsxFunction_hasFeature(final String feature, final String version) {
+    public boolean hasFeature(final String feature, final String version) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_35)) {
             if ("HTML".equals(feature) && "1.0".equals(version)) {
                 return true;
@@ -77,7 +77,7 @@ public class DOMImplementation extends SimpleScriptable {
      */
     //TODO: change doctype type to "DocType"
     @JsxFunction(@WebBrowser(FF))
-    public XMLDocument jsxFunction_createDocument(final String namespaceURI, final String qualifiedName,
+    public XMLDocument createDocument(final String namespaceURI, final String qualifiedName,
             final Object doctype) {
         final XMLDocument document = new XMLDocument(getWindow().getWebWindow());
         document.setParentScope(getParentScope());

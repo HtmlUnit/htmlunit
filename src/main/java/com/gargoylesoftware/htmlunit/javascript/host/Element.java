@@ -58,7 +58,7 @@ public class Element extends EventNode {
      * @return list of the found elements
      */
     @JsxFunction(@WebBrowser(IE))
-    public HTMLCollection jsxFunction_selectNodes(final String expression) {
+    public HTMLCollection selectNodes(final String expression) {
         final DomElement domNode = getDomNodeOrDie();
         final boolean attributeChangeSensitive = expression.contains("@");
         final String description = "Element.selectNodes('" + expression + "')";
@@ -79,8 +79,8 @@ public class Element extends EventNode {
      *         If no nodes match the expression, returns a null value.
      */
     @JsxFunction(@WebBrowser(IE))
-    public Object jsxFunction_selectSingleNode(final String expression) {
-        final HTMLCollection collection = jsxFunction_selectNodes(expression);
+    public Object selectSingleNode(final String expression) {
+        final HTMLCollection collection = selectNodes(expression);
         if (collection.jsxGet_length() > 0) {
             return collection.get(0, collection);
         }
@@ -136,7 +136,7 @@ public class Element extends EventNode {
      * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
      */
     @JsxFunction
-    public Object jsxFunction_getAttribute(String attributeName, final Integer flags) {
+    public Object getAttribute(String attributeName, final Integer flags) {
         final boolean supportsFlags =
                 getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_GET_ATTRIBUTE_SUPPORTS_FLAGS);
         attributeName = fixAttributeName(attributeName);
@@ -181,7 +181,7 @@ public class Element extends EventNode {
      * @param value Value to set the attribute to
      */
     @JsxFunction
-    public void jsxFunction_setAttribute(final String name, final String value) {
+    public void setAttribute(final String name, final String value) {
         getDomNodeOrDie().setAttribute(name, value);
     }
 
@@ -191,7 +191,7 @@ public class Element extends EventNode {
      * @return all the descendant elements with the specified tag name
      */
     @JsxFunction
-    public Object jsxFunction_getElementsByTagName(final String tagName) {
+    public Object getElementsByTagName(final String tagName) {
         final String tagNameLC = tagName.toLowerCase();
 
         if (elementsByTagName_ == null) {
@@ -233,7 +233,7 @@ public class Element extends EventNode {
      * @return the XMLAttr node with the specified name or <code>null</code> if there is no such attribute
      */
     @JsxFunction
-    public Object jsxFunction_getAttributeNode(final String name) {
+    public Object getAttributeNode(final String name) {
         final Map<String, DomAttr> attributes = getDomNodeOrDie().getAttributesMap();
         for (final DomAttr attr : attributes.values()) {
             if (attr.getName().equals(name)) {
@@ -290,7 +290,7 @@ public class Element extends EventNode {
      * @return a live NodeList of found elements in the order they appear in the tree
      */
     @JsxFunction(@WebBrowser(FF))
-    public Object jsxFunction_getElementsByTagNameNS(final Object namespaceURI, final String localName) {
+    public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final String description = "Element.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
         final DomElement domNode = getDomNodeOrDie();
 
@@ -326,7 +326,7 @@ public class Element extends EventNode {
      * @return true if an attribute with the given name is specified on this element or has a default value
      */
     @JsxFunction(@WebBrowser(FF))
-    public boolean jsxFunction_hasAttribute(final String name) {
+    public boolean hasAttribute(final String name) {
         return getDomNodeOrDie().hasAttribute(name);
     }
 
@@ -344,7 +344,7 @@ public class Element extends EventNode {
      * @param name the name of the attribute to remove
      */
     @JsxFunction
-    public void jsxFunction_removeAttribute(final String name) {
+    public void removeAttribute(final String name) {
         getDomNodeOrDie().removeAttribute(name);
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_37)) {
             delete(name);
@@ -357,7 +357,7 @@ public class Element extends EventNode {
      * @return an object that specifies the bounds of a collection of TextRectangle objects
      */
     @JsxFunction
-    public ClientRect jsxFunction_getBoundingClientRect() {
+    public ClientRect getBoundingClientRect() {
         return null;
     }
 

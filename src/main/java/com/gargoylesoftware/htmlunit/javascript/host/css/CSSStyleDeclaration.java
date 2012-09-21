@@ -425,7 +425,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                     try {
                         final Object[] url = URL_FORMAT.parse(styleElement.getValue());
                         if (url.length > 0) {
-                            htmlElement.jsxFunction_addBehavior((String) url[0]);
+                            htmlElement.addBehavior((String) url[0]);
                             break;
                         }
                     }
@@ -1016,14 +1016,14 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         final HTMLElement htmlElement = (HTMLElement) jsElement_;
-        htmlElement.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_CLIENT_CAPS);
-        htmlElement.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_HOMEPAGE);
-        htmlElement.jsxFunction_removeBehavior(HTMLElement.BEHAVIOR_ID_DOWNLOAD);
+        htmlElement.removeBehavior(HTMLElement.BEHAVIOR_ID_CLIENT_CAPS);
+        htmlElement.removeBehavior(HTMLElement.BEHAVIOR_ID_HOMEPAGE);
+        htmlElement.removeBehavior(HTMLElement.BEHAVIOR_ID_DOWNLOAD);
         if (!behavior.isEmpty()) {
             try {
                 final Object[] url = URL_FORMAT.parse(behavior);
                 if (url.length > 0) {
-                    htmlElement.jsxFunction_addBehavior((String) url[0]);
+                    htmlElement.addBehavior((String) url[0]);
                 }
             }
             catch (final ParseException e) {
@@ -5570,7 +5570,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return empty string if nothing found
      */
     @JsxFunction(@WebBrowser(FF))
-    public String jsxFunction_getPropertyValue(final String name) {
+    public String getPropertyValue(final String name) {
         if (name != null && name.contains("-")) {
             final Object value = getProperty(this, camelize(name));
             if (value instanceof String) {
@@ -5586,7 +5586,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the value
      */
     @JsxFunction(@WebBrowser(FF))
-    public CSSValue jsxFunction_getPropertyCSSValue(final String name) {
+    public CSSValue getPropertyCSSValue(final String name) {
         LOG.info("getPropertyCSSValue(" + name + "): getPropertyCSSValue support is experimental");
         // following is a hack, just to have basic support for getPropertyCSSValue
         // TODO: rework the whole CSS processing here! we should *always* parse the style!
@@ -5629,7 +5629,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the value deleted
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public String jsxFunction_removeProperty(final String name) {
+    public String removeProperty(final String name) {
         return removeStyleAttribute(name);
     }
 
@@ -5643,7 +5643,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param language specified the language used
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
-    public void jsxFunction_setExpression(final String propertyName, final String expression, final String language) {
+    public void setExpression(final String propertyName, final String expression, final String language) {
         // Empty.
     }
 
@@ -5654,7 +5654,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return true if the expression was successfully removed
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
-    public boolean jsxFunction_removeExpression(final String propertyName) {
+    public boolean removeExpression(final String propertyName) {
         return true;
     }
 
@@ -5668,7 +5668,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the value of the specified attribute
      */
     @JsxFunction(@WebBrowser(IE))
-    public Object jsxFunction_getAttribute(final String name, final int flag) {
+    public Object getAttribute(final String name, final int flag) {
         if (flag == 1) {
             // Case-sensitive.
             return getStyleAttribute(name, null);
@@ -5693,7 +5693,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param flag 0 for case insensitive, 1 (default) for case sensitive
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_setAttribute(final String name, final String value, final Object flag) {
+    public void setAttribute(final String name, final String value, final Object flag) {
         int flagInt;
         if (flag == Undefined.instance) {
             flagInt = 1;
@@ -5727,7 +5727,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return <tt>true</tt> if the attribute was successfully removed, <tt>false</tt> otherwise
      */
     @JsxFunction(@WebBrowser(IE))
-    public boolean jsxFunction_removeAttribute(final String name, final Object flag) {
+    public boolean removeAttribute(final String name, final Object flag) {
         int flagInt;
         if (flag == Undefined.instance) {
             flagInt = 1;

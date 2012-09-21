@@ -304,7 +304,7 @@ public class HtmlScript extends HtmlElement {
             if ("window".equals(forr)) {
                 final Window window = (Window) getPage().getEnclosingWindow().getScriptObject();
                 final BaseFunction function = new EventHandler(this, event, scriptCode);
-                window.jsxFunction_attachEvent(event, function);
+                window.attachEvent(event, function);
             }
             else {
                 try {

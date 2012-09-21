@@ -57,11 +57,11 @@ public class HTMLListElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    public Object jsxFunction_getAttribute(final String attributeName, final Integer flags) {
+    public Object getAttribute(final String attributeName, final Integer flags) {
         if ("compact".equals(attributeName) && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_85)) {
             return jsxGet_compact();
         }
-        return super.jsxFunction_getAttribute(attributeName, flags);
+        return super.getAttribute(attributeName, flags);
     }
 
 }

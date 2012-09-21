@@ -251,7 +251,7 @@ public class TreeWalker extends SimpleScriptable {
      *          has no parent in the TreeWalker's logical view.
      */
     @JsxFunction
-    public Node jsxFunction_parentNode() {
+    public Node parentNode() {
         if (currentNode_ == root_) {
             return null;
         }
@@ -346,7 +346,7 @@ public class TreeWalker extends SimpleScriptable {
      *          visible children in the TreeWalker's logical view.
      */
     @JsxFunction
-    public Node jsxFunction_firstChild() {
+    public Node firstChild() {
         final Node newNode = getEquivalentLogical(currentNode_.jsxGet_firstChild(), false);
 
         if (newNode != null) {
@@ -365,7 +365,7 @@ public class TreeWalker extends SimpleScriptable {
      *          visible children in the TreeWalker's logical view.
      */
     @JsxFunction
-    public Node jsxFunction_lastChild() {
+    public Node lastChild() {
         final Node newNode = getEquivalentLogical(currentNode_.jsxGet_lastChild(), true);
 
         if (newNode != null) {
@@ -384,7 +384,7 @@ public class TreeWalker extends SimpleScriptable {
       *          previous sibling in the TreeWalker's logical view.
       */
     @JsxFunction
-    public Node jsxFunction_previousSibling() {
+    public Node previousSibling() {
         if (currentNode_ == root_) {
             return null;
         }
@@ -407,7 +407,7 @@ public class TreeWalker extends SimpleScriptable {
       *          next sibling in the TreeWalker's logical view.
       */
     @JsxFunction
-    public Node jsxFunction_nextSibling() {
+    public Node nextSibling() {
         if (currentNode_ == root_) {
             return null;
         }
@@ -432,7 +432,7 @@ public class TreeWalker extends SimpleScriptable {
      *          previous node in the TreeWalker's logical view.
      */
     @JsxFunction
-    public Node jsxFunction_previousNode() {
+    public Node previousNode() {
         final Node newNode = getPreviousNode(currentNode_);
 
         if (newNode != null) {
@@ -483,7 +483,7 @@ public class TreeWalker extends SimpleScriptable {
      *          next node in the TreeWalker's logical view.
      */
     @JsxFunction
-    public Node jsxFunction_nextNode() {
+    public Node nextNode() {
         final Node leftChild = getEquivalentLogical(currentNode_.jsxGet_firstChild(), false);
         if (leftChild != null) {
             currentNode_ = leftChild;

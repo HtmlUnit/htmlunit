@@ -70,7 +70,7 @@ public class HTMLSelectElement extends FormField {
      * @param index the index of the item to remove
      */
     @JsxFunction
-    public void jsxFunction_remove(final int index) {
+    public void remove(final int index) {
         put(index, null, null);
     }
 
@@ -81,12 +81,12 @@ public class HTMLSelectElement extends FormField {
      * for Internet Explorer: the index where the element should be placed (optional).
      */
     @JsxFunction
-    public void jsxFunction_add(final HTMLOptionElement newOptionObject, final Object arg2) {
+    public void add(final HTMLOptionElement newOptionObject, final Object arg2) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_INDEX)) {
             add_IE(newOptionObject, arg2);
         }
         else {
-            add(newOptionObject, arg2);
+            add_FF(newOptionObject, arg2);
         }
         ensureSelectedIndex();
     }
@@ -117,7 +117,7 @@ public class HTMLSelectElement extends FormField {
      * @return the option
      */
     @JsxFunction
-    public HTMLOptionElement jsxFunction_item(final int index) {
+    public HTMLOptionElement item(final int index) {
         if (index < 0) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_ITEM_THROWS_IF_NEGATIVE)) {
                 throw Context.reportRuntimeError("Invalid index for select node: " + index);
@@ -162,11 +162,11 @@ public class HTMLSelectElement extends FormField {
     }
 
     /**
-     * Adds a new item to the list (optionally) before the specified item in Mozilla way.
+     * Adds a new item to the list (optionally) before the specified item in Firefox way.
      * @param newOptionObject the DomNode to insert
      * @param beforeOptionObject the DomNode to insert the previous element before (null if at end)
      */
-    protected void add(final HTMLOptionElement newOptionObject, final Object beforeOptionObject) {
+    protected void add_FF(final HTMLOptionElement newOptionObject, final Object beforeOptionObject) {
         final HtmlOption beforeOption;
         if (beforeOptionObject == null) {
             beforeOption = null;

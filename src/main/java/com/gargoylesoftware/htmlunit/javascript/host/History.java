@@ -90,7 +90,7 @@ public class History extends SimpleScriptable {
         if (index < 0 || index >= h.jsxGet_length()) {
             return NOT_FOUND;
         }
-        return jsxFunction_item(index);
+        return item(index);
     }
 
     /**
@@ -107,7 +107,7 @@ public class History extends SimpleScriptable {
      * JavaScript function "back".
      */
     @JsxFunction
-    public void jsxFunction_back() {
+    public void back() {
         final WebWindow w = getWindow().getWebWindow();
         try {
             w.getHistory().back();
@@ -121,7 +121,7 @@ public class History extends SimpleScriptable {
      * JavaScript function "forward".
      */
     @JsxFunction
-    public void jsxFunction_forward() {
+    public void forward() {
         final WebWindow w = getWindow().getWebWindow();
         try {
             w.getHistory().forward();
@@ -136,7 +136,7 @@ public class History extends SimpleScriptable {
      * @param relativeIndex the relative index
      */
     @JsxFunction
-    public void jsxFunction_go(final int relativeIndex) {
+    public void go(final int relativeIndex) {
         final WebWindow w = getWindow().getWebWindow();
         try {
             w.getHistory().go(relativeIndex);
@@ -179,7 +179,7 @@ public class History extends SimpleScriptable {
      * @return the URL of the history item at the specified index
      */
     @JsxFunction(@WebBrowser(FF))
-    public String jsxFunction_item(final int index) {
+    public String item(final int index) {
         throw Context.reportRuntimeError("Permission denied to call method History.item");
     }
 

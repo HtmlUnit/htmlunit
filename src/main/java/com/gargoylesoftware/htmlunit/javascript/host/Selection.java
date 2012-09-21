@@ -147,7 +147,7 @@ public class Selection extends SimpleScriptable {
      * @return the created TextRange object
      */
     @JsxFunction(@WebBrowser(IE))
-    public TextRange jsxFunction_createRange() {
+    public TextRange createRange() {
         final TextRange range;
         final Range first = getFirstRange();
         if (first != null) {
@@ -166,7 +166,7 @@ public class Selection extends SimpleScriptable {
      * @param range the range to add
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_addRange(final com.gargoylesoftware.htmlunit.javascript.host.Range range) {
+    public void addRange(final com.gargoylesoftware.htmlunit.javascript.host.Range range) {
         getRanges().add(range.toW3C());
     }
 
@@ -175,7 +175,7 @@ public class Selection extends SimpleScriptable {
      * @param range the range to remove
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_removeRange(final com.gargoylesoftware.htmlunit.javascript.host.Range range) {
+    public void removeRange(final com.gargoylesoftware.htmlunit.javascript.host.Range range) {
         getRanges().remove(range.toW3C());
     }
 
@@ -183,7 +183,7 @@ public class Selection extends SimpleScriptable {
      * Removes all ranges from the selection.
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_removeAllRanges() {
+    public void removeAllRanges() {
         getRanges().clear();
     }
 
@@ -194,7 +194,7 @@ public class Selection extends SimpleScriptable {
      * @return the range at the specified index
      */
     @JsxFunction(@WebBrowser(FF))
-    public com.gargoylesoftware.htmlunit.javascript.host.Range jsxFunction_getRangeAt(final int index) {
+    public com.gargoylesoftware.htmlunit.javascript.host.Range getRangeAt(final int index) {
         final List<Range> ranges = getRanges();
         if (index < 0 || index >= ranges.size()) {
             throw Context.reportRuntimeError("Invalid range index: " + index);
@@ -214,7 +214,7 @@ public class Selection extends SimpleScriptable {
      * @param offset the caret will be placed this number of characters from the beginning of the parentNode's text
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_collapse(final Node parentNode, final int offset) {
+    public void collapse(final Node parentNode, final int offset) {
         final List<Range> ranges = getRanges();
         ranges.clear();
         ranges.add(new SimpleRange(parentNode.getDomNodeOrDie(), offset));
@@ -224,7 +224,7 @@ public class Selection extends SimpleScriptable {
      * Moves the anchor of the selection to the same point as the focus. The focus does not move.
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_collapseToEnd() {
+    public void collapseToEnd() {
         final Range last = getLastRange();
         if (last != null) {
             final List<Range> ranges = getRanges();
@@ -238,7 +238,7 @@ public class Selection extends SimpleScriptable {
      * Moves the focus of the selection to the same point at the anchor. The anchor does not move.
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_collapseToStart() {
+    public void collapseToStart() {
         final Range first = getFirstRange();
         if (first != null) {
             final List<Range> ranges = getRanges();
@@ -252,7 +252,7 @@ public class Selection extends SimpleScriptable {
      * Cancels the current selection, sets the selection type to none, and sets the item property to null (IE only).
      */
     @JsxFunction(@WebBrowser(IE))
-    public void jsxFunction_empty() {
+    public void empty() {
         type_ = "None";
     }
 
@@ -262,7 +262,7 @@ public class Selection extends SimpleScriptable {
      * @param offset the number of characters from the beginning of parentNode's text the focus will be placed
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_extend(final Node parentNode, final int offset) {
+    public void extend(final Node parentNode, final int offset) {
         final Range last = getLastRange();
         if (last != null) {
             last.setEnd(parentNode.getDomNodeOrDie(), offset);
@@ -274,7 +274,7 @@ public class Selection extends SimpleScriptable {
      * @param parentNode all children of parentNode will be selected; parentNode itself is not part of the selection
      */
     @JsxFunction(@WebBrowser(FF))
-    public void jsxFunction_selectAllChildren(final Node parentNode) {
+    public void selectAllChildren(final Node parentNode) {
         final List<Range> ranges = getRanges();
         ranges.clear();
         ranges.add(new SimpleRange(parentNode.getDomNodeOrDie()));

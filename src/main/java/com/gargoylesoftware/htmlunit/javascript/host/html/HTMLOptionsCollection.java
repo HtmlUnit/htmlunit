@@ -154,7 +154,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @return the object or NOT_FOUND
      */
     @JsxFunction
-    public Object jsxFunction_item(final int index) {
+    public Object item(final int index) {
         return get(index, null);
     }
 
@@ -259,7 +259,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @see #put(int, Scriptable, Object)
      */
     @JsxFunction
-    public void jsxFunction_add(final Object newOptionObject, final Object newIndex) {
+    public void add(final Object newOptionObject, final Object newIndex) {
         // If newIndex is undefined, then the item will be appended to the end of
         // the list
         int index = jsxGet_length();
@@ -279,7 +279,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @param index the option index
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
-    public void jsxFunction_remove(final int index) {
+    public void remove(final int index) {
         if (index < 0) {
             Context.reportRuntimeError("Invalid index: " + index);
         }
