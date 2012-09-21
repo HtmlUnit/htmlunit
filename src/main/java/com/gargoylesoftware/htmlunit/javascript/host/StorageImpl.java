@@ -58,7 +58,12 @@ final class StorageImpl implements Serializable {
     private transient Map<String, Map<String, String>> sessionStorage_
         = new HashMap<String, Map<String, String>>();
 
-    private StorageImpl() { }
+    /**
+     * Private constructor; singleton.
+     */
+    private StorageImpl() {
+        super();
+    }
 
     static StorageImpl getInstance() {
         return SINGLETON_;
@@ -79,9 +84,11 @@ final class StorageImpl implements Serializable {
     }
 
     void clear(final Type type, final HtmlPage page) {
+        final String key = getKey(type, page);
         final Map<String, Map<String, String>> storage = getStorage(type);
+
         synchronized (storage) {
-            storage.remove(getKey(type, page));
+            storage.remove(key);
         }
     }
 
