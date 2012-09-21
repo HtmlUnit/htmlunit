@@ -254,16 +254,10 @@ public class ActiveXObject extends SimpleScriptable {
         return document;
     }
 
-    private static void addFunction(final SimpleScriptable scriptable,
-            final String jsMethodName) {
-        addFunction(scriptable, jsMethodName, jsMethodName);
-    }
-
-    private static void addFunction(final SimpleScriptable scriptable,
-            final String jsMethodName, final String javaMethodName) {
-        final Method javaFunction = getMethod(scriptable.getClass(), javaMethodName);
+    private static void addFunction(final SimpleScriptable scriptable, final String methodName) {
+        final Method javaFunction = getMethod(scriptable.getClass(), methodName);
         final FunctionObject fo = new FunctionObject(null, javaFunction, scriptable);
-        scriptable.defineProperty(jsMethodName, fo, READONLY);
+        scriptable.defineProperty(methodName, fo, READONLY);
     }
 
     /**

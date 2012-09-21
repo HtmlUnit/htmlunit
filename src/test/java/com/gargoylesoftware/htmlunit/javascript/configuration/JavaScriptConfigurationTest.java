@@ -14,9 +14,20 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
+import static org.junit.Assert.fail;
+
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
@@ -25,6 +36,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Tests for {@link JavaScriptConfiguration}.
@@ -88,4 +100,100 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 Long.valueOf(used), Long.valueOf(free), Long.valueOf(total), Long.valueOf(max));
     }
 
+    /**
+     * Tests that all classes in *.javascript.* which have {@link JsxClass} annotation,
+     * are included in {@link JavaScriptConfiguration#CLASSES_}.
+     */
+    @Test
+    public void jsxClasses() {
+        String javaScriptPackageName = JavaScriptConfiguration.class.getPackage().getName();
+        javaScriptPackageName = javaScriptPackageName.substring(0, javaScriptPackageName.lastIndexOf('.'));
+        final List<String> foundJsxClasses = new ArrayList<String>();
+        for (final String className : getClassesForPackage(javaScriptPackageName)) {
+            if (!className.contains("$")) {
+                Class<?> klass = null;
+                try {
+                    klass = Class.forName(className);
+                }
+                catch (final Throwable t) {
+                    continue;
+                }
+                if (klass.getAnnotation(JsxClass.class) != null) {
+                    foundJsxClasses.add(className);
+                }
+            }
+        }
+        final List<String> definedClasses = new ArrayList<String>();
+        for (final Class<?> klass : JavaScriptConfiguration.CLASSES_){
+            definedClasses.add(klass.getName());
+        }
+        foundJsxClasses.removeAll(definedClasses);
+        if (!foundJsxClasses.isEmpty()) {
+            fail("Class " + foundJsxClasses.get(0) + " is not in JavaScriptConfiguration.CLASSES_");
+        }
+    }
+
+    /**
+     * Return the classes inside the specified package and its sub-packages.
+     * @param packageName the package name
+     * @return a list of class names
+     */
+    public static List<String> getClassesForPackage(final String packageName) {
+        final List<String> list = new ArrayList<String>();
+
+        File directory = null;
+        final String relPath = packageName.replace('.', '/') + '/' + JavaScriptEngine.class.getSimpleName() + ".class";
+
+        final URL resource = JavaScriptConfiguration.class.getClassLoader().getResource(relPath);
+
+        if (resource == null) {
+            throw new RuntimeException("No resource for " + relPath);
+        }
+        final String fullPath = resource.getFile();
+
+        try {
+            directory = new File(resource.toURI()).getParentFile();
+        }
+        catch (final URISyntaxException e) {
+            throw new RuntimeException(packageName + " (" + resource + ") does not appear to be a valid URL", e);
+        }
+        catch (final IllegalArgumentException e) {
+            directory = null;
+        }
+
+        if (directory != null && directory.exists()) {
+            addClasses(directory, packageName, list);
+        }
+        else {
+            try {
+                String jarPath = fullPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
+                if (System.getProperty("os.name").toLowerCase().contains("win")) {
+                    jarPath = jarPath.replace("%20", " ");
+                }
+                final JarFile jarFile = new JarFile(jarPath);
+                for (final Enumeration<JarEntry> entries = jarFile.entries(); entries.hasMoreElements();) {
+                    final String entryName = entries.nextElement().getName();
+                    if (entryName.endsWith(".class")) {
+                        list.add(entryName.replace('/', '.').replace('\\', '.').replace(".class", ""));
+                    }
+                }
+            }
+            catch (final IOException e) {
+                throw new RuntimeException(packageName + " does not appear to be a valid package", e);
+            }
+        }
+        return list;
+    }
+
+    private static void addClasses(final File directory, final String packageName, final List<String> list) {
+        for (final File file: directory.listFiles()) {
+            final String name = file.getName();
+            if (name.endsWith(".class")) {
+                list.add(packageName + '.' + name.substring(0, name.length() - 6));
+            }
+            else if (file.isDirectory() && !".svn".equals(file.getName())) {
+                addClasses(file, packageName + '.' + file.getName(), list);
+            }
+        }
+    }
 }

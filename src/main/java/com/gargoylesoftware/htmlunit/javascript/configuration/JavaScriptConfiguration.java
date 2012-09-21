@@ -14,21 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -86,14 +77,223 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableHeader;
 import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlUnderlined;
 import com.gargoylesoftware.htmlunit.html.HtmlVariable;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
+import com.gargoylesoftware.htmlunit.javascript.host.Attr;
+import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
+import com.gargoylesoftware.htmlunit.javascript.host.CDATASection;
+import com.gargoylesoftware.htmlunit.javascript.host.CharacterDataImpl;
+import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
+import com.gargoylesoftware.htmlunit.javascript.host.ClipboardData;
+import com.gargoylesoftware.htmlunit.javascript.host.Comment;
+import com.gargoylesoftware.htmlunit.javascript.host.Console;
+import com.gargoylesoftware.htmlunit.javascript.host.DOMException;
+import com.gargoylesoftware.htmlunit.javascript.host.DOMImplementation;
+import com.gargoylesoftware.htmlunit.javascript.host.DOMParser;
+import com.gargoylesoftware.htmlunit.javascript.host.DOMTokenList;
+import com.gargoylesoftware.htmlunit.javascript.host.Document;
+import com.gargoylesoftware.htmlunit.javascript.host.DocumentFragment;
+import com.gargoylesoftware.htmlunit.javascript.host.DocumentType;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.Enumerator;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.EventNode;
+import com.gargoylesoftware.htmlunit.javascript.host.External;
+import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
+import com.gargoylesoftware.htmlunit.javascript.host.FormField;
+import com.gargoylesoftware.htmlunit.javascript.host.HashChangeEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.History;
+import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.Location;
+import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
+import com.gargoylesoftware.htmlunit.javascript.host.MessageEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.MimeType;
+import com.gargoylesoftware.htmlunit.javascript.host.MimeTypeArray;
+import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.MutationEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.Namespace;
+import com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection;
+import com.gargoylesoftware.htmlunit.javascript.host.Navigator;
+import com.gargoylesoftware.htmlunit.javascript.host.Node;
+import com.gargoylesoftware.htmlunit.javascript.host.NodeFilter;
+import com.gargoylesoftware.htmlunit.javascript.host.NodeList;
+import com.gargoylesoftware.htmlunit.javascript.host.OfflineResourceList;
+import com.gargoylesoftware.htmlunit.javascript.host.Plugin;
+import com.gargoylesoftware.htmlunit.javascript.host.PluginArray;
+import com.gargoylesoftware.htmlunit.javascript.host.Popup;
+import com.gargoylesoftware.htmlunit.javascript.host.ProcessingInstruction;
+import com.gargoylesoftware.htmlunit.javascript.host.Range;
+import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
+import com.gargoylesoftware.htmlunit.javascript.host.Screen;
+import com.gargoylesoftware.htmlunit.javascript.host.Selection;
+import com.gargoylesoftware.htmlunit.javascript.host.SimpleArray;
+import com.gargoylesoftware.htmlunit.javascript.host.StaticNodeList;
+import com.gargoylesoftware.htmlunit.javascript.host.Storage;
+import com.gargoylesoftware.htmlunit.javascript.host.Text;
+import com.gargoylesoftware.htmlunit.javascript.host.TextRange;
+import com.gargoylesoftware.htmlunit.javascript.host.TreeWalker;
+import com.gargoylesoftware.htmlunit.javascript.host.UIEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.XPathNSResolver;
+import com.gargoylesoftware.htmlunit.javascript.host.XPathResult;
+import com.gargoylesoftware.htmlunit.javascript.host.XSLTProcessor;
+import com.gargoylesoftware.htmlunit.javascript.host.XSLTemplate;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSMediaRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSPrimitiveValue;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
+import com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates;
+import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
+import com.gargoylesoftware.htmlunit.javascript.host.geo.Position;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAppletElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAreaElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAudioElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBRElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollectionTags;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDListElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDelElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDirectoryElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLEmbedElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFieldSetElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFontElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHRElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadingElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInsElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIsIndexElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLListElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOListElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptGroupElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionsCollection;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParagraphElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParamElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLPreElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLProgressElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSourceElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpacerElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCaptionElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCellElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableColElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableComponent;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableRowElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUListElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLVideoElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLWBRElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAltGlyphElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateMotionElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateTransformElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGCircleElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGClipPathElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGDefsElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGDescElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGEllipseElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEBlendElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEColorMatrixElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEComponentTransferElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFECompositeElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEConvolveMatrixElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEDiffuseLightingElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEDisplacementMapElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEDistantLightElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEFloodElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEFuncAElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEFuncBElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEFuncGElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEFuncRElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEGaussianBlurElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEImageElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEMergeElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEMergeNodeElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEMorphologyElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEOffsetElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEPointLightElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFESpecularLightingElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFESpotLightElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFETileElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFETurbulenceElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFilterElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGForeignObjectElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGGElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGImageElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGLineElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGLinearGradientElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMarkerElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMaskElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMetadataElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMpathElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPathElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPatternElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolygonElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolylineElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRadialGradientElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRectElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGScriptElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSetElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGStopElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGStyleElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSwitchElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSymbolElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTSpanElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextPathElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTitleElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGUseElement;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLAttr;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDOMParseError;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
+import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer;
 
 /**
  * A container for all the JavaScript configuration information.
@@ -107,9 +307,64 @@ public final class JavaScriptConfiguration {
 
     private static final Log LOG = LogFactory.getLog(JavaScriptConfiguration.class);
 
+    @SuppressWarnings("unchecked")
+    static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
+        Attr.class, ActiveXObject.class, BoxObject.class, CDATASection.class, ClipboardData.class, //aaaaaaaaaaaaaaaaaa
+        CSSCharsetRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPrimitiveValue.class, CSSRule.class,
+        CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSValue.class,
+        CanvasRenderingContext2D.class, CharacterDataImpl.class, ClientRect.class, Comment.class,
+        ComputedCSSStyleDeclaration.class, Console.class, Coordinates.class, DOMException.class,
+        DOMImplementation.class, DOMParser.class, DOMTokenList.class, Document.class, DocumentFragment.class,
+        DocumentType.class, Element.class, Enumerator.class, Event.class, EventNode.class, External.class,
+        FormChild.class, FormField.class, Geolocation.class, History.class,
+        HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
+        HTMLBRElement.class, HTMLBaseElement.class, HTMLBaseFontElement.class,
+        HTMLBodyElement.class, HTMLButtonElement.class, HTMLCanvasElement.class, HTMLCollection.class,
+        HTMLCollectionTags.class, HTMLDListElement.class, HTMLDelElement.class, HTMLDirectoryElement.class,
+        HTMLDivElement.class, HTMLDocument.class, HTMLElement.class, HTMLEmbedElement.class, HTMLFieldSetElement.class,
+        HTMLFontElement.class, HTMLFormElement.class, HTMLFrameElement.class, HTMLFrameSetElement.class,
+        HTMLHRElement.class, HTMLHeadElement.class, HTMLHeadingElement.class, HTMLHtmlElement.class,
+        HTMLIFrameElement.class, HTMLImageElement.class, HTMLInputElement.class, HTMLInsElement.class,
+        HTMLIsIndexElement.class, HTMLLIElement.class, HTMLLabelElement.class, HTMLLegendElement.class,
+        HTMLLinkElement.class, HTMLListElement.class, HTMLMapElement.class, HTMLMenuElement.class,
+        HTMLMetaElement.class, HTMLOListElement.class, HTMLObjectElement.class, HTMLOptGroupElement.class,
+        HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLParagraphElement.class, HTMLParamElement.class,
+        HTMLPreElement.class, HTMLProgressElement.class, HTMLQuoteElement.class, HTMLScriptElement.class,
+        HTMLSelectElement.class, HTMLSourceElement.class, HTMLSpacerElement.class, HTMLSpanElement.class,
+        HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableCellElement.class, HTMLTableColElement.class,
+        HTMLTableComponent.class, HTMLTableElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,
+        HTMLTextAreaElement.class, HTMLTitleElement.class, HTMLUListElement.class, HTMLUnknownElement.class,
+        HTMLVideoElement.class, HTMLWBRElement.class, HashChangeEvent.class, History.class, KeyboardEvent.class,
+        Location.class, MediaList.class, MessageEvent.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
+        MutationEvent.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class, Navigator.class,
+        Node.class, NodeFilter.class, NodeList.class, OfflineResourceList.class,
+        Plugin.class, PluginArray.class, Popup.class, Position.class, ProcessingInstruction.class,
+        Range.class, RowContainer.class, SVGAElement.class, SVGAltGlyphElement.class, SVGAnimateElement.class,
+        SVGAnimateMotionElement.class, SVGAnimateTransformElement.class, SVGCircleElement.class,
+        SVGClipPathElement.class, SVGDefsElement.class, SVGDescElement.class, SVGElement.class,
+        SVGEllipseElement.class, SVGFEBlendElement.class, SVGFEColorMatrixElement.class,
+        SVGFEComponentTransferElement.class, SVGFECompositeElement.class, SVGFEConvolveMatrixElement.class,
+        SVGFEDiffuseLightingElement.class, SVGFEDisplacementMapElement.class, SVGFEDistantLightElement.class,
+        SVGFEFloodElement.class, SVGFEFuncAElement.class, SVGFEFuncBElement.class, SVGFEFuncGElement.class,
+        SVGFEFuncRElement.class, SVGFEGaussianBlurElement.class, SVGFEImageElement.class, SVGFEMergeElement.class,
+        SVGFEMergeNodeElement.class, SVGFEMorphologyElement.class, SVGFEOffsetElement.class,
+        SVGFEPointLightElement.class, SVGFESpecularLightingElement.class, SVGFESpotLightElement.class,
+        SVGFETileElement.class, SVGFETurbulenceElement.class, SVGFilterElement.class, SVGForeignObjectElement.class,
+        SVGGElement.class, SVGImageElement.class, SVGLineElement.class, SVGLinearGradientElement.class,
+        SVGMarkerElement.class, SVGMaskElement.class, SVGMetadataElement.class, SVGMpathElement.class,
+        SVGPathElement.class, SVGPatternElement.class, SVGPolygonElement.class, SVGPolylineElement.class,
+        SVGRadialGradientElement.class, SVGRectElement.class, SVGSVGElement.class, SVGScriptElement.class,
+        SVGSetElement.class, SVGStopElement.class, SVGStyleElement.class, SVGSwitchElement.class,
+        SVGSymbolElement.class, SVGTSpanElement.class, SVGTextElement.class, SVGTextPathElement.class,
+        SVGTitleElement.class, SVGUseElement.class, Screen.class, Selection.class, SimpleArray.class,
+        StaticNodeList.class, Storage.class, StyleSheetList.class, Text.class, TextRange.class, TreeWalker.class,
+        UIEvent.class, WebSocket.class, Window.class, XMLAttr.class, XMLDocument.class, XMLDOMParseError.class,
+        XMLHttpRequest.class, XMLSerializer.class, XPathNSResolver.class, XPathResult.class, XSLTProcessor.class,
+        XSLTemplate.class};
+
     /** Cache of browser versions and their corresponding JavaScript configurations. */
     private static Map<BrowserVersion, JavaScriptConfiguration> ConfigurationMap_ =
-        new HashMap<BrowserVersion, JavaScriptConfiguration>(11);
+        new HashMap<BrowserVersion, JavaScriptConfiguration>();
 
     private static Map<String, String> ClassnameMap_ = new HashMap<String, String>();
 
@@ -163,85 +418,69 @@ public final class JavaScriptConfiguration {
     }
 
     private Map<String, ClassConfiguration> buildUsageMap(final BrowserVersion browser) {
-        final Map<String, ClassConfiguration> classMap = new HashMap<String, ClassConfiguration>(100);
+        final Map<String, ClassConfiguration> classMap = new HashMap<String, ClassConfiguration>(CLASSES_.length);
 
-        String packageName = getClass().getPackage().getName();
-        packageName = packageName.substring(0, packageName.lastIndexOf('.'));
-        for (final String className : getClassesForPackage(packageName)) {
-            if (!className.contains("$")) {
-                final ClassConfiguration config = processClass(className, browser);
-                if (config != null) {
-                    classMap.put(config.getHostClass().getSimpleName(), config);
-                }
+        for (final Class<? extends SimpleScriptable> klass : CLASSES_) {
+            final ClassConfiguration config = processClass(klass, browser);
+            if (config != null) {
+                classMap.put(config.getHostClass().getSimpleName(), config);
             }
         }
-
         return Collections.unmodifiableMap(classMap);
     }
 
-    private ClassConfiguration processClass(final String className, final BrowserVersion browser) {
-        try {
-            if (browser != null) {
-                final Class<?> klass = Class.forName(className);
-                if (SimpleScriptable.class.isAssignableFrom(klass)) {
-                    final JsxClass jsxClass = klass.getAnnotation(JsxClass.class);
-                    if (jsxClass != null && isSupported(jsxClass.browsers(), browser)) {
-                        final String hostClassName = className;
+    private ClassConfiguration processClass(final Class<? extends SimpleScriptable> klass,
+            final BrowserVersion browser) {
+        if (browser != null) {
+            final JsxClass jsxClass = klass.getAnnotation(JsxClass.class);
+            if (jsxClass != null && isSupported(jsxClass.browsers(), browser)) {
+                final String hostClassName = klass.getName();
 
-                        final String domClassName = jsxClass.domClass() != Object.class
-                                ? jsxClass.domClass().getName() : "";
+                final String domClassName = jsxClass.domClass() != Object.class ? jsxClass.domClass().getName() : "";
 
-                        final boolean jsObjectFlag = jsxClass.isJSObject();
-                        @SuppressWarnings("unchecked")
-                        final ClassConfiguration classConfiguration = new ClassConfiguration(
-                                (Class<? extends SimpleScriptable>) klass,
-                                domClassName, jsObjectFlag);
+                final boolean isJsObject = jsxClass.isJSObject();
+                final ClassConfiguration classConfiguration = new ClassConfiguration(klass, domClassName, isJsObject);
 
-                        final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
-                        ClassnameMap_.put(hostClassName, simpleClassName);
-                        final Map<String, Method> allGetters = new HashMap<String, Method>();
-                        final Map<String, Method> allSetters = new HashMap<String, Method>();
-                        for (final Method m : classConfiguration.getHostClass().getDeclaredMethods()) {
-                            for (final Annotation annotation : m.getAnnotations()) {
-                                if (annotation instanceof JsxGetter) {
-                                    if (isSupported(((JsxGetter) annotation).value(), browser)) {
-                                        final String property = m.getName().substring("jsxGet_".length());
-                                        allGetters.put(property, m);
-                                    }
-                                }
-                                else if (annotation instanceof JsxSetter) {
-                                    if (isSupported(((JsxSetter) annotation).value(), browser)) {
-                                        final String property = m.getName().substring("jsxSet_".length());
-                                        allSetters.put(property, m);
-                                    }
-                                }
-                                else if (annotation instanceof JsxFunction) {
-                                    if (isSupported(((JsxFunction) annotation).value(), browser)) {
-                                        classConfiguration.addFunction(m);
-                                    }
-                                }
-                                else if (annotation instanceof JsxConstructor) {
-                                    classConfiguration.setJSConstructor(m);
-                                }
+                final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
+                ClassnameMap_.put(hostClassName, simpleClassName);
+                final Map<String, Method> allGetters = new HashMap<String, Method>();
+                final Map<String, Method> allSetters = new HashMap<String, Method>();
+                for (final Method method : classConfiguration.getHostClass().getDeclaredMethods()) {
+                    for (final Annotation annotation : method.getAnnotations()) {
+                        if (annotation instanceof JsxGetter) {
+                            if (isSupported(((JsxGetter) annotation).value(), browser)) {
+                                final String property = method.getName().substring("jsxGet_".length());
+                                allGetters.put(property, method);
                             }
                         }
-                        for (final Field f : classConfiguration.getHostClass().getDeclaredFields()) {
-                            final JsxConstant jsxConstant = f.getAnnotation(JsxConstant.class);
-                            if (jsxConstant != null && isSupported(jsxConstant.value(), browser)) {
-                                classConfiguration.addConstant(f.getName());
+                        else if (annotation instanceof JsxSetter) {
+                            if (isSupported(((JsxSetter) annotation).value(), browser)) {
+                                final String property = method.getName().substring("jsxSet_".length());
+                                allSetters.put(property, method);
                             }
                         }
-                        for (final String property : allGetters.keySet()) {
-                            classConfiguration.addProperty(property,
-                                    allGetters.get(property), allSetters.get(property));
+                        else if (annotation instanceof JsxFunction) {
+                            if (isSupported(((JsxFunction) annotation).value(), browser)) {
+                                classConfiguration.addFunction(method);
+                            }
                         }
-                        return classConfiguration;
+                        else if (annotation instanceof JsxConstructor) {
+                            classConfiguration.setJSConstructor(method);
+                        }
                     }
                 }
+                for (final Field field : classConfiguration.getHostClass().getDeclaredFields()) {
+                    final JsxConstant jsxConstant = field.getAnnotation(JsxConstant.class);
+                    if (jsxConstant != null && isSupported(jsxConstant.value(), browser)) {
+                        classConfiguration.addConstant(field.getName());
+                    }
+                }
+                for (final String property : allGetters.keySet()) {
+                    classConfiguration.addProperty(property,
+                            allGetters.get(property), allSetters.get(property));
+                }
+                return classConfiguration;
             }
-        }
-        catch (final Throwable t) {
-            //ignore
         }
         return null;
     }
@@ -391,69 +630,5 @@ public final class JavaScriptConfiguration {
         domJavaScriptMap_ = Collections.unmodifiableMap(map);
 
         return domJavaScriptMap_;
-    }
-
-    /**
-     * Return the classes inside the specified package and its sub-packages.
-     * @param packageName the package name
-     * @return a list of class names
-     */
-    public static List<String> getClassesForPackage(final String packageName) {
-        final List<String> list = new ArrayList<String>();
-
-        File directory = null;
-        final String relPath = packageName.replace('.', '/') + '/' + JavaScriptEngine.class.getSimpleName() + ".class";
-
-        final URL resource = JavaScriptConfiguration.class.getClassLoader().getResource(relPath);
-
-        if (resource == null) {
-            throw new RuntimeException("No resource for " + relPath);
-        }
-        final String fullPath = resource.getFile();
-
-        try {
-            directory = new File(resource.toURI()).getParentFile();
-        }
-        catch (final URISyntaxException e) {
-            throw new RuntimeException(packageName + " (" + resource + ") does not appear to be a valid URL", e);
-        }
-        catch (final IllegalArgumentException e) {
-            directory = null;
-        }
-
-        if (directory != null && directory.exists()) {
-            addClasses(directory, packageName, list);
-        }
-        else {
-            try {
-                String jarPath = fullPath.replaceFirst("[.]jar[!].*", ".jar").replaceFirst("file:", "");
-                if (System.getProperty("os.name").toLowerCase().contains("win")) {
-                    jarPath = jarPath.replace("%20", " ");
-                }
-                final JarFile jarFile = new JarFile(jarPath);
-                for (final Enumeration<JarEntry> entries = jarFile.entries(); entries.hasMoreElements();) {
-                    final String entryName = entries.nextElement().getName();
-                    if (entryName.endsWith(".class")) {
-                        list.add(entryName.replace('/', '.').replace('\\', '.').replace(".class", ""));
-                    }
-                }
-            }
-            catch (final IOException e) {
-                throw new RuntimeException(packageName + " does not appear to be a valid package", e);
-            }
-        }
-        return list;
-    }
-
-    private static void addClasses(final File directory, final String packageName, final List<String> list) {
-        for (final File file: directory.listFiles()) {
-            final String name = file.getName();
-            if (name.endsWith(".class")) {
-                list.add(packageName + '.' + name.substring(0, name.length() - 6));
-            }
-            else if (file.isDirectory() && !".svn".equals(file.getName())) {
-                addClasses(file, packageName + '.' + file.getName(), list);
-            }
-        }
     }
 }

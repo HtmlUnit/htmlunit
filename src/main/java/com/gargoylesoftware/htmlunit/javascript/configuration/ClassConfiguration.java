@@ -55,8 +55,7 @@ public final class ClassConfiguration {
      * @throws ClassNotFoundException - if the implementing class is not found
      */
     public ClassConfiguration(final Class<? extends SimpleScriptable> hostClass, final String domClassName,
-            final boolean jsObject)
-        throws ClassNotFoundException {
+            final boolean jsObject) {
         final Class<?> superClass = hostClass.getSuperclass();
         if (superClass != SimpleScriptable.class) {
             extendedClassName_ = superClass.getSimpleName();

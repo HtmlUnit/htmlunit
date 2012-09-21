@@ -385,7 +385,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * Cancels the current HTTP request.
      */
     @JsxFunction
-    public void jsxFunction_abort() {
+    public void abort() {
         getWindow().getWebWindow().getJobManager().stopJob(threadID_);
     }
 
@@ -394,7 +394,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return the labels and values of all the HTTP headers
      */
     @JsxFunction
-    public String jsxFunction_getAllResponseHeaders() {
+    public String getAllResponseHeaders() {
         if (webResponse_ != null) {
             final StringBuilder buffer = new StringBuilder();
             for (final NameValuePair header : webResponse_.getResponseHeaders()) {
@@ -412,7 +412,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return the value of the specified HTTP header
      */
     @JsxFunction
-    public String jsxFunction_getResponseHeader(final String headerName) {
+    public String getResponseHeader(final String headerName) {
         if (webResponse_ != null) {
             return webResponse_.getResponseHeaderValue(headerName);
         }
@@ -429,7 +429,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param password If authentication is needed for the specified URL, the password to use to authenticate
      */
     @JsxFunction
-    public void jsxFunction_open(final String method, final Object urlParam, final boolean async,
+    public void open(final String method, final Object urlParam, final boolean async,
         final Object user, final Object password) {
         if (urlParam == null || "".equals(urlParam)) {
             throw Context.reportRuntimeError("URL for XHR.open can't be empty!");
@@ -498,7 +498,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param content the body of the message being sent with the request
      */
     @JsxFunction
-    public void jsxFunction_send(final Object content) {
+    public void send(final Object content) {
         prepareRequest(content);
 
         final WebClient client = getWindow().getWebWindow().getWebClient();
@@ -590,7 +590,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param value the value of the header being set
      */
     @JsxFunction
-    public void jsxFunction_setRequestHeader(final String name, final String value) {
+    public void setRequestHeader(final String name, final String value) {
         if (!isAuthorizedHeader(name)) {
             LOG.warn("Ignoring XMLHttpRequest.setRequestHeader for " + name
                 + ": it is a restricted header");
@@ -630,7 +630,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @see <a href="http://xulplanet.com/references/objref/XMLHttpRequest.html#method_overrideMimeType">XUL Planet</a>
      */
     @JsxFunction({ @WebBrowser(value = IE, maxVersion = 6), @WebBrowser(FF) })
-    public void jsxFunction_overrideMimeType(final String mimeType) {
+    public void overrideMimeType(final String mimeType) {
         overriddenMimeType_ = mimeType;
     }
 
