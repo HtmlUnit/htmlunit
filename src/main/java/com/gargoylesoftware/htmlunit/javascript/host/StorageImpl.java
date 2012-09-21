@@ -64,23 +64,25 @@ final class StorageImpl implements Serializable {
         return SINGLETON_;
     }
 
-    void set(final Type type, final HtmlPage page, final String key, final String data) {
-        set(getStorage(type), getKey(type, page), key, data);
-    }
-
-    Map<String, String> getMap(final Type type, final HtmlPage page) {
-        final Map<String, Map<String, String>> storage = getStorage(type);
+    protected Map<String, String> getMap(final Type type, final HtmlPage page) {
         final String key = getKey(type, page);
-        Map<String, String> map = storage.get(key);
-        if (map == null) {
-            map = new LinkedHashMap<String, String>();
-            storage.put(key, map);
+        final Map<String, Map<String, String>> storage = getStorage(type);
+
+        synchronized (storage) {
+            Map<String, String> map = storage.get(key);
+            if (map == null) {
+                map = new LinkedHashMap<String, String>();
+                storage.put(key, map);
+            }
+            return map;
         }
-        return map;
     }
 
     void clear(final Type type, final HtmlPage page) {
-        getStorage(type).remove(getKey(type, page));
+        final Map<String, Map<String, String>> storage = getStorage(type);
+        synchronized (storage) {
+            storage.remove(getKey(type, page));
+        }
     }
 
     private String getKey(final Type type, final HtmlPage page) {
@@ -101,7 +103,7 @@ final class StorageImpl implements Serializable {
         }
     }
 
-    Map<String, Map<String, String>> getStorage(final Type type) {
+    private Map<String, Map<String, String>> getStorage(final Type type) {
         switch (type) {
             case GLOBAL_STORAGE:
                 return globalStorage_;
@@ -115,30 +117,6 @@ final class StorageImpl implements Serializable {
             default:
                 return null;
         }
-    }
-
-    private static void set(final Map<String, Map<String, String>> storage, final String url,
-            final String key, final String data) {
-        Map<String, String> map = storage.get(url);
-        if (map == null) {
-            map = new LinkedHashMap<String, String>();
-            storage.put(url, map);
-        }
-        map.put(key, data);
-        save();
-    }
-
-    String get(final Type type, final HtmlPage page, final String key) {
-        return get(getStorage(type), getKey(type, page), key);
-    }
-
-    private static String get(final Map<String, Map<String, String>> storage, final String url,
-            final String key) {
-        final Map<String, String> map = storage.get(url);
-        if (map != null) {
-            return map.get(key);
-        }
-        return null;
     }
 
     private static void save() {
