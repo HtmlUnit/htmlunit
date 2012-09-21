@@ -58,7 +58,7 @@ public class XSLTemplate extends SimpleScriptable {
      * @return the XSLTProcessor
      */
     @JsxFunction
-    public XSLTProcessor jsxFunction_createProcessor() {
+    public XSLTProcessor createProcessor() {
         final XSLTProcessor processor = new XSLTProcessor();
         processor.setPrototype(getPrototype(processor.getClass()));
         processor.setParentScope(getParentScope());

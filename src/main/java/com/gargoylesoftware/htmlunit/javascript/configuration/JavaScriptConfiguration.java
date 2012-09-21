@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -364,7 +365,7 @@ public final class JavaScriptConfiguration {
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
     private static Map<BrowserVersion, JavaScriptConfiguration> ConfigurationMap_ =
-        new HashMap<BrowserVersion, JavaScriptConfiguration>();
+        new WeakHashMap<BrowserVersion, JavaScriptConfiguration>();
 
     private static Map<String, String> ClassnameMap_ = new HashMap<String, String>();
 
