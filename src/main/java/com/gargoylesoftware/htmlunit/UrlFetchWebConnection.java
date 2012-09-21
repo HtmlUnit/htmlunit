@@ -87,7 +87,7 @@ public class UrlFetchWebConnection implements WebConnection {
         try {
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 //            connection.setUseCaches(false);
-            connection.setConnectTimeout(webClient_.getTimeout());
+            connection.setConnectTimeout(webClient_.getOptions().getTimeout());
 
             connection.addRequestProperty("User-Agent", webClient_.getBrowserVersion().getUserAgent());
             connection.setInstanceFollowRedirects(false);

@@ -32,6 +32,7 @@ import java.util.jar.JarFile;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -73,6 +74,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Ignore
     public void memoryLeak() throws Exception {
         long count = 0;
         while (count++ < 3000) {
