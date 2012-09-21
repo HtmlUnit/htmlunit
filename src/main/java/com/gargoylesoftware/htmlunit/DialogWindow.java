@@ -20,6 +20,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * A window opened in JavaScript via either <tt>window.showModalDialog</tt> or <tt>window.showModelessDialog</tt>.
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class DialogWindow extends WebWindowImpl {
 
@@ -75,6 +76,7 @@ public class DialogWindow extends WebWindowImpl {
      * Closes this window.
      */
     public void close() {
+        getJobManager().shutdown();
         destroyChildren();
         getWebClient().deregisterWebWindow(this);
     }
