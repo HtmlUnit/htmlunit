@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
  * @version $Revision$
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class JavaScriptConfigurationTest extends SimpleWebTestCase {
 
@@ -60,11 +61,14 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
         final Field field = JavaScriptConfiguration.class.getDeclaredField("ConfigurationMap_");
         field.setAccessible(true);
         final Map<?, ?> leakyMap = (Map<? , ?>) field.get(null);
+
+        // maybe some BrowserVersions are already known
+        final int knownBrowsers = leakyMap.size();
         for (int i = 0; i < 3; i++) {
             final BrowserVersion browserVersion = new BrowserVersion("App", "Version", "User agent", 1);
             JavaScriptConfiguration.getInstance(browserVersion);
         }
-        assertEquals(1, leakyMap.size());
+        assertEquals(knownBrowsers + 1, leakyMap.size());
     }
 
     /**
