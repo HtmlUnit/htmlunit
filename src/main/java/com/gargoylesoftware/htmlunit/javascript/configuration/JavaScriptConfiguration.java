@@ -364,10 +364,10 @@ public final class JavaScriptConfiguration {
         XSLTemplate.class};
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
-    private static Map<BrowserVersion, JavaScriptConfiguration> ConfigurationMap_ =
+    private static final Map<BrowserVersion, JavaScriptConfiguration> ConfigurationMap_ =
         new WeakHashMap<BrowserVersion, JavaScriptConfiguration>();
 
-    private static Map<String, String> ClassnameMap_ = new HashMap<String, String>();
+    private static final Map<String, String> ClassnameMap_ = new HashMap<String, String>();
 
     private Map<Class<? extends DomElement>, Class<? extends SimpleScriptable>> domJavaScriptMap_;
 
