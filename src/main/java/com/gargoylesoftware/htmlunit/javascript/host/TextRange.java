@@ -105,6 +105,9 @@ public class TextRange extends SimpleScriptable {
     @JsxGetter
     public String get_htmlText() {
         final org.w3c.dom.Node node = range_.getCommonAncestorContainer();
+        if (null == node) {
+            return "";
+        }
         final HTMLElement element = (HTMLElement) getScriptableFor(node);
         return element.get_outerHTML(); // TODO: not quite right, but good enough for now
     }

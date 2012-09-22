@@ -318,7 +318,7 @@ public class TextRangeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception", IE = "body")
-    public void createRange() throws Exception {
+    public void createRangeParentElement() throws Exception {
         final String html =
             "<html><body>\n"
             + "<script>\n"
@@ -326,6 +326,25 @@ public class TextRangeTest extends WebDriverTestCase {
             + "  s = document.selection.createRange();\n"
             + "  p = s.parentElement();\n"
             + "  alert(p.tagName);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "exception", IE = "")
+    public void createRangeHtmlText() throws Exception {
+        final String html =
+            "<html><body>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  s = document.selection.createRange();\n"
+            + "  t = s.htmlText;\n"
+            + "  alert(t);\n"
             + "} catch(e) { alert('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
