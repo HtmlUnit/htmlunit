@@ -64,7 +64,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * @param span the value of the "span" property
      */
     @JsxSetter
-    public void jsxSet_span(final Object span) {
+    public void set_span(final Object span) {
         final double d = Context.toNumber(span);
         int i = (int) d;
         if (i < 1) {
@@ -95,7 +95,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * @param width the value of the "width" property
      */
     @JsxSetter
-    public void jsxSet_width(final Object width) {
+    public void set_width(final Object width) {
         setWidthOrHeight("width", (width == null ? "" : Context.toString(width)), Boolean.FALSE);
     }
 

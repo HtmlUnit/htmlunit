@@ -56,7 +56,7 @@ public class HTMLTableComponent extends HTMLElement {
      * @param align the value of the "align" property
      */
     @JsxSetter
-    public void jsxSet_align(final String align) {
+    public void set_align(final String align) {
         setAlign(align, false);
     }
 
@@ -74,7 +74,7 @@ public class HTMLTableComponent extends HTMLElement {
      * @param vAlign the value of the "vAlign" property
      */
     @JsxSetter
-    public void jsxSet_vAlign(final Object vAlign) {
+    public void set_vAlign(final Object vAlign) {
         setVAlign(vAlign, getValidVAlignValues());
     }
 
@@ -107,7 +107,7 @@ public class HTMLTableComponent extends HTMLElement {
      * @param ch the value of the "ch" property
      */
     @JsxSetter
-    public void jsxSet_ch(final String ch) {
+    public void set_ch(final String ch) {
         setCh(ch);
     }
 
@@ -125,7 +125,7 @@ public class HTMLTableComponent extends HTMLElement {
      * @param chOff the value of the "chOff" property
      */
     @JsxSetter
-    public void jsxSet_chOff(final String chOff) {
+    public void set_chOff(final String chOff) {
         setChOff(chOff);
     }
 

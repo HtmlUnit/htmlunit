@@ -58,7 +58,7 @@ public class CSSCharsetRule extends CSSRule {
      * @param encoding the encoding of the charset rule
      */
     @JsxSetter
-    public void jsxSet_encoding(final String encoding) {
+    public void set_encoding(final String encoding) {
         getCharsetRule().setEncoding(encoding);
     }
 

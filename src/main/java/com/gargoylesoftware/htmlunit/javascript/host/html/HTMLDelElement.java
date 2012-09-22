@@ -50,7 +50,7 @@ public class HTMLDelElement extends HTMLElement {
      * @param cite the value
      */
     @JsxSetter
-    public void jsxSet_cite(final String cite) {
+    public void set_cite(final String cite) {
         getDomNodeOrDie().setAttribute("cite", cite);
     }
 
@@ -69,7 +69,7 @@ public class HTMLDelElement extends HTMLElement {
      * @param dateTime the value
      */
     @JsxSetter
-    public void jsxSet_dateTime(final String dateTime) {
+    public void set_dateTime(final String dateTime) {
         getDomNodeOrDie().setAttribute("datetime", dateTime);
     }
 }

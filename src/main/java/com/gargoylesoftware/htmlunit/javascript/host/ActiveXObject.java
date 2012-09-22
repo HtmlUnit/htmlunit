@@ -275,7 +275,7 @@ public class ActiveXObject extends SimpleScriptable {
         }
         String setterName = null;
         if (isSetter) {
-            setterName = "jsxSet_" + propertyName;
+            setterName = "set_" + propertyName;
         }
         addProperty(scriptable, propertyName, getterName, setterName);
     }

@@ -456,7 +456,7 @@ public final class JavaScriptConfiguration {
                         }
                         else if (annotation instanceof JsxSetter) {
                             if (isSupported(((JsxSetter) annotation).value(), browser)) {
-                                final String property = method.getName().substring("jsxSet_".length());
+                                final String property = method.getName().substring("set_".length());
                                 allSetters.put(property, method);
                             }
                         }

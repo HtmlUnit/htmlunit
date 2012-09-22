@@ -62,7 +62,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * @param vAlign the value of the "vAlign" property
      */
     @JsxSetter
-    public void jsxSet_vAlign(final Object vAlign) {
+    public void set_vAlign(final Object vAlign) {
         setVAlign(vAlign, getValidVAlignValues());
     }
 
@@ -95,7 +95,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * @param ch the value of the "ch" property
      */
     @JsxSetter
-    public void jsxSet_ch(final String ch) {
+    public void set_ch(final String ch) {
         setCh(ch);
     }
 
@@ -113,7 +113,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * @param chOff the value of the "chOff" property
      */
     @JsxSetter
-    public void jsxSet_chOff(final String chOff) {
+    public void set_chOff(final String chOff) {
         setChOff(chOff);
     }
 

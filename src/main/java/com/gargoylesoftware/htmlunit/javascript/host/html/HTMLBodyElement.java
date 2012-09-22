@@ -101,7 +101,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533070.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_aLink(final String aLink) {
+    public void set_aLink(final String aLink) {
         setColorAttribute("aLink", aLink);
     }
 
@@ -133,7 +133,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533498.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_background(final String background) {
+    public void set_background(final String background) {
         getDomNodeOrDie().setAttribute("background", background);
     }
 
@@ -153,7 +153,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_bgColor(final String bgColor) {
+    public void set_bgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
     }
 
@@ -173,7 +173,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534119.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_link(final String link) {
+    public void set_link(final String link) {
         setColorAttribute("link", link);
     }
 
@@ -194,7 +194,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_text(final String text) {
+    public void set_text(final String text) {
         setColorAttribute("text", text);
     }
 
@@ -214,7 +214,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_vLink(final String vLink) {
+    public void set_vLink(final String vLink) {
         setColorAttribute("vLink", vLink);
     }
 

@@ -751,7 +751,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
      */
     @JsxSetter
-    public void jsxSet_cookie(final String newCookie) {
+    public void set_cookie(final String newCookie) {
         final CookieManager cookieManager = getHtmlPage().getWebClient().getCookieManager();
         if (cookieManager.isCookiesEnabled()) {
             URL url = getHtmlPage().getWebResponse().getWebRequest().getUrl();
@@ -1278,7 +1278,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param title the new title
      */
     @JsxSetter
-    public void jsxSet_title(final String title) {
+    public void set_title(final String title) {
         getHtmlPage().setTitleText(title);
     }
 
@@ -1303,9 +1303,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_bgColor(final String color) {
+    public void set_bgColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
-        body.jsxSet_bgColor(color);
+        body.set_bgColor(color);
     }
 
     /**
@@ -1327,9 +1327,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param color the value of the <tt>alinkColor</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_alinkColor(final String color) {
+    public void set_alinkColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
-        body.jsxSet_aLink(color);
+        body.set_aLink(color);
     }
 
     /**
@@ -1351,9 +1351,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param color the value of the <tt>linkColor</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_linkColor(final String color) {
+    public void set_linkColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
-        body.jsxSet_link(color);
+        body.set_link(color);
     }
 
     /**
@@ -1375,9 +1375,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param color the value of the <tt>vlinkColor</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_vlinkColor(final String color) {
+    public void set_vlinkColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
-        body.jsxSet_vLink(color);
+        body.set_vLink(color);
     }
 
     /**
@@ -1399,9 +1399,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param color the value of the <tt>fgColor</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_fgColor(final String color) {
+    public void set_fgColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getHtmlPage().getBody().getScriptObject();
-        body.jsxSet_text(color);
+        body.set_text(color);
     }
 
     /**
@@ -1478,7 +1478,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param newDomain the new domain to set
      */
     @JsxSetter
-    public void jsxSet_domain(final String newDomain) {
+    public void set_domain(final String newDomain) {
         final BrowserVersion browserVersion = getBrowserVersion();
 
         // IE (at least 6) doesn't allow to set domain of about:blank
@@ -1905,7 +1905,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param head the head
      */
     @JsxSetter(@WebBrowser(value = FF, minVersion = 10))
-    public void jsxSet_head(final ScriptableObject head) {
+    public void set_head(final ScriptableObject head) {
         //ignore
     }
 

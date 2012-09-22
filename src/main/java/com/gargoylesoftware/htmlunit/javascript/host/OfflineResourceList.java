@@ -77,7 +77,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @param o the event listener to be called when fetching the application cache manifest and checking for updates
      */
     @JsxSetter
-    public void jsxSet_onchecking(final Object o) {
+    public void set_onchecking(final Object o) {
         onchecking_ = o;
     }
 
@@ -95,7 +95,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @param o the event listener to be called when an error occurs during the caching process
      */
     @JsxSetter
-    public void jsxSet_onerror(final Object o) {
+    public void set_onerror(final Object o) {
         onerror_ = o;
     }
 
@@ -113,7 +113,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @param o the event listener to be called when there is no update to download
      */
     @JsxSetter
-    public void jsxSet_onnoupdate(final Object o) {
+    public void set_onnoupdate(final Object o) {
         onnoupdate_ = o;
     }
 
@@ -131,7 +131,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @param o the event listener to be called when resources are being downloaded into the cache
      */
     @JsxSetter
-    public void jsxSet_ondownloading(final Object o) {
+    public void set_ondownloading(final Object o) {
         ondownloading_ = o;
     }
 
@@ -149,7 +149,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @param o the event listener to be called periodically throughout the download process
      */
     @JsxSetter
-    public void jsxSet_onprogress(final Object o) {
+    public void set_onprogress(final Object o) {
         onprogress_ = o;
     }
 
@@ -167,7 +167,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @param o the event listener to be called when a resource update is ready
      */
     @JsxSetter
-    public void jsxSet_onupdateready(final Object o) {
+    public void set_onupdateready(final Object o) {
         onupdateready_ = o;
     }
 
@@ -185,7 +185,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @param o the event listener to be called when caching is complete
      */
     @JsxSetter
-    public void jsxSet_oncached(final Object o) {
+    public void set_oncached(final Object o) {
         oncached_ = o;
     }
 

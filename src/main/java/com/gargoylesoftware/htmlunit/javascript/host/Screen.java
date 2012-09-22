@@ -110,7 +110,7 @@ public class Screen extends SimpleScriptable {
      * @param bufferDepth the <tt>bufferDepth</tt> property
      */
     @JsxSetter
-    public void jsxSet_bufferDepth(final int bufferDepth) {
+    public void set_bufferDepth(final int bufferDepth) {
         bufferDepth_ = bufferDepth;
     }
 
@@ -173,7 +173,7 @@ public class Screen extends SimpleScriptable {
      * @param left the <tt>left</tt> property
      */
     @JsxSetter
-    public void jsxSet_left(final int left) {
+    public void set_left(final int left) {
         left_ = left;
     }
 
@@ -218,7 +218,7 @@ public class Screen extends SimpleScriptable {
      * @param top the <tt>top</tt> property
      */
     @JsxSetter
-    public void jsxSet_top(final int top) {
+    public void set_top(final int top) {
         top_ = top;
     }
 
@@ -236,7 +236,7 @@ public class Screen extends SimpleScriptable {
      * @param updateInterval the <tt>updateInterval</tt> property
      */
     @JsxSetter
-    public void jsxSet_updateInterval(final int updateInterval) {
+    public void set_updateInterval(final int updateInterval) {
         updateInterval_ = updateInterval;
     }
 

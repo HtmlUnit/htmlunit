@@ -103,7 +103,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @param name the new value
      */
     @JsxSetter
-    public void jsxSet_name(final String name) {
+    public void set_name(final String name) {
         WebAssert.notNull("name", name);
         getHtmlForm().setNameAttribute(name);
     }
@@ -202,7 +202,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @param action the new value
      */
     @JsxSetter
-    public void jsxSet_action(final String action) {
+    public void set_action(final String action) {
         WebAssert.notNull("action", action);
         getHtmlForm().setActionAttribute(action);
     }
@@ -221,7 +221,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @param method the new value
      */
     @JsxSetter
-    public void jsxSet_method(final String method) {
+    public void set_method(final String method) {
         WebAssert.notNull("method", method);
         getHtmlForm().setMethodAttribute(method);
     }
@@ -249,7 +249,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @param onsubmit the <tt>onsubmit</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onsubmit(final Object onsubmit) {
+    public void set_onsubmit(final Object onsubmit) {
         setEventHandlerProp("onsubmit", onsubmit);
     }
 
@@ -258,7 +258,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @param target the new value
      */
     @JsxSetter
-    public void jsxSet_target(final String target) {
+    public void set_target(final String target) {
         WebAssert.notNull("target", target);
         getHtmlForm().setTargetAttribute(target);
     }
@@ -277,7 +277,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @param encoding the new value
      */
     @JsxSetter
-    public void jsxSet_encoding(final String encoding) {
+    public void set_encoding(final String encoding) {
         WebAssert.notNull("encoding", encoding);
         getHtmlForm().setEnctypeAttribute(encoding);
     }

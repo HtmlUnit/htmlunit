@@ -61,7 +61,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param src the <tt>src</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_src(final String src) {
+    public void set_src(final String src) {
         getDomNodeOrDie().setAttribute("src", src);
     }
 
@@ -87,7 +87,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param text the <tt>text</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_text(final String text) {
+    public void set_text(final String text) {
         final HtmlElement htmlElement = getDomNodeOrDie();
         htmlElement.removeAllChildren();
         final DomNode textChild = new DomText(htmlElement.getPage(), text);
@@ -114,7 +114,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param type the <tt>type</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_type(final String type) {
+    public void set_type(final String type) {
         getDomNodeOrDie().setAttribute("type", type);
     }
 
@@ -132,7 +132,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param handler the event handler that fires on every state change
      */
     @JsxSetter(@WebBrowser(IE))
-    public void jsxSet_onreadystatechange(final Object handler) {
+    public void set_onreadystatechange(final Object handler) {
         setEventHandlerProp("onreadystatechange", handler);
     }
 
@@ -150,7 +150,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @param handler the event handler that fires on load
      */
     @JsxSetter(@WebBrowser(FF))
-    public void jsxSet_onload(final Object handler) {
+    public void set_onload(final Object handler) {
         setEventHandlerProp("onload", handler);
     }
 

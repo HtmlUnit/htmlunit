@@ -41,7 +41,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onclick</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onclick(final Object handler) {
+    public void set_onclick(final Object handler) {
         setEventHandlerProp("onclick", handler);
     }
 
@@ -59,7 +59,7 @@ public class EventNode extends Node {
      * @param handler the <tt>ondblclick</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_ondblclick(final Object handler) {
+    public void set_ondblclick(final Object handler) {
         setEventHandlerProp("ondblclick", handler);
     }
 
@@ -77,7 +77,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onblur</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onblur(final Object handler) {
+    public void set_onblur(final Object handler) {
         setEventHandlerProp("onblur", handler);
     }
 
@@ -95,7 +95,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onfocus</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onfocus(final Object handler) {
+    public void set_onfocus(final Object handler) {
         setEventHandlerProp("onfocus", handler);
     }
 
@@ -113,7 +113,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onfocusin</tt> event handler for this element
      */
     @JsxSetter(@WebBrowser(IE))
-    public void jsxSet_onfocusin(final Object handler) {
+    public void set_onfocusin(final Object handler) {
         setEventHandlerProp("onfocusin", handler);
     }
 
@@ -131,7 +131,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onfocusout</tt> event handler for this element
      */
     @JsxSetter(@WebBrowser(IE))
-    public void jsxSet_onfocusout(final Object handler) {
+    public void set_onfocusout(final Object handler) {
         setEventHandlerProp("onfocusout", handler);
     }
 
@@ -149,7 +149,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onkeydown</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onkeydown(final Object handler) {
+    public void set_onkeydown(final Object handler) {
         setEventHandlerProp("onkeydown", handler);
     }
 
@@ -167,7 +167,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onkeypress</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onkeypress(final Object handler) {
+    public void set_onkeypress(final Object handler) {
         setEventHandlerProp("onkeypress", handler);
     }
 
@@ -185,7 +185,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onkeyup</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onkeyup(final Object handler) {
+    public void set_onkeyup(final Object handler) {
         setEventHandlerProp("onkeyup", handler);
     }
 
@@ -203,7 +203,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onmousedown</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onmousedown(final Object handler) {
+    public void set_onmousedown(final Object handler) {
         setEventHandlerProp("onmousedown", handler);
     }
 
@@ -221,7 +221,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onmousemove</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onmousemove(final Object handler) {
+    public void set_onmousemove(final Object handler) {
         setEventHandlerProp("onmousemove", handler);
     }
 
@@ -239,7 +239,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onmouseout</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onmouseout(final Object handler) {
+    public void set_onmouseout(final Object handler) {
         setEventHandlerProp("onmouseout", handler);
     }
 
@@ -257,7 +257,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onmouseover</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onmouseover(final Object handler) {
+    public void set_onmouseover(final Object handler) {
         setEventHandlerProp("onmouseover", handler);
     }
 
@@ -275,7 +275,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onmouseup</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onmouseup(final Object handler) {
+    public void set_onmouseup(final Object handler) {
         setEventHandlerProp("onmouseup", handler);
     }
 
@@ -293,7 +293,7 @@ public class EventNode extends Node {
      * @param handler the <tt>oncontextmenu</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_oncontextmenu(final Object handler) {
+    public void set_oncontextmenu(final Object handler) {
         setEventHandlerProp("oncontextmenu", handler);
     }
 
@@ -311,7 +311,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onresize</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onresize(final Object handler) {
+    public void set_onresize(final Object handler) {
         setEventHandlerProp("onresize", handler);
     }
 
@@ -329,7 +329,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onpropertychange</tt> event handler for this element
      */
     @JsxSetter(@WebBrowser(IE))
-    public void jsxSet_onpropertychange(final Object handler) {
+    public void set_onpropertychange(final Object handler) {
         setEventHandlerProp("onpropertychange", handler);
     }
 
@@ -347,7 +347,7 @@ public class EventNode extends Node {
      * @param handler the <tt>onerror</tt> event handler for this element
      */
     @JsxSetter
-    public void jsxSet_onerror(final Object handler) {
+    public void set_onerror(final Object handler) {
         setEventHandlerProp("onerror", handler);
     }
 
@@ -385,9 +385,9 @@ public class EventNode extends Node {
         event.setParentScope(getWindow());
 
         // These four properties have predefined values, independent of the template.
-        event.jsxSet_cancelBubble(false);
-        event.jsxSet_returnValue(Boolean.TRUE);
-        event.jsxSet_srcElement(this);
+        event.set_cancelBubble(false);
+        event.set_returnValue(Boolean.TRUE);
+        event.set_srcElement(this);
         event.setEventType(cleanedType);
 
         fireEvent(event);

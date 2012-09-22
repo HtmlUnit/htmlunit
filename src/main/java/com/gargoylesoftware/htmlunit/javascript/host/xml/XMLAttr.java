@@ -53,8 +53,8 @@ public class XMLAttr extends Attr {
      * @param value the new value of this attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void jsxSet_text(final String value) {
-        jsxSet_value(value);
+    public void set_text(final String value) {
+        set_value(value);
     }
 
     /**

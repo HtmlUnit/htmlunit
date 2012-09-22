@@ -53,7 +53,7 @@ public class HTMLFieldSetElement extends FormChild {
      * @param align the value of the <tt>align</tt> property
      */
     @JsxSetter(@WebBrowser(IE))
-    public void jsxSet_align(final String align) {
+    public void set_align(final String align) {
         setAlign(align, false);
     }
 

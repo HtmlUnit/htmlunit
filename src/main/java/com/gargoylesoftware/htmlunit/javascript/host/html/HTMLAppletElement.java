@@ -119,7 +119,7 @@ public class HTMLAppletElement extends HTMLElement {
      * @param alt the value
      */
     @JsxSetter
-    public void jsxSet_alt(final String alt) {
+    public void set_alt(final String alt) {
         getDomNodeOrDie().setAttribute("alt", alt);
     }
 
@@ -138,7 +138,7 @@ public class HTMLAppletElement extends HTMLElement {
      * @param border the "border" attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void jsxSet_border(final String border) {
+    public void set_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
 
@@ -156,7 +156,7 @@ public class HTMLAppletElement extends HTMLElement {
      * @param align the value of the "align" property
      */
     @JsxSetter
-    public void jsxSet_align(final String align) {
+    public void set_align(final String align) {
         setAlign(align, false);
     }
 }

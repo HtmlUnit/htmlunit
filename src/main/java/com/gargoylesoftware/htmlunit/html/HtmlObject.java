@@ -47,7 +47,7 @@ public class HtmlObject extends HtmlElement {
         if (attributes != null) {
             final DomAttr classid = attributes.get("classid");
             if (classid != null) {
-                ((HTMLObjectElement) getScriptObject()).jsxSet_classid(classid.getValue());
+                ((HTMLObjectElement) getScriptObject()).set_classid(classid.getValue());
             }
         }
     }

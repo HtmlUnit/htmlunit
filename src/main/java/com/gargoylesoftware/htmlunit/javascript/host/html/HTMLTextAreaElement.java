@@ -79,7 +79,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param value the new value
      */
     @Override
-    public void jsxSet_value(final String value) {
+    public void set_value(final String value) {
         ((HtmlTextArea) getDomNodeOrDie()).setText(value);
     }
 
@@ -106,7 +106,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param cols the number of columns in this text area
      */
     @JsxSetter
-    public void jsxSet_cols(final String cols) {
+    public void set_cols(final String cols) {
         int i;
         try {
             i = Float.valueOf(cols).intValue();
@@ -150,7 +150,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param rows the number of rows in this text area
      */
     @JsxSetter
-    public void jsxSet_rows(final String rows) {
+    public void set_rows(final String rows) {
         int i;
         try {
             i = new Float(rows).intValue();
@@ -187,7 +187,7 @@ public class HTMLTextAreaElement extends FormField {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533718.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_defaultValue(final String defaultValue) {
+    public void set_defaultValue(final String defaultValue) {
         ((HtmlTextArea) getDomNodeOrDie()).setDefaultValue(defaultValue);
     }
 
@@ -214,7 +214,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param start selection start
      */
     @JsxSetter(@WebBrowser(FF))
-    public void jsxSet_selectionStart(final int start) {
+    public void set_selectionStart(final int start) {
         ((HtmlTextArea) getDomNodeOrDie()).setSelectionStart(start);
     }
 
@@ -232,7 +232,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param end selection end
      */
     @JsxSetter(@WebBrowser(FF))
-    public void jsxSet_selectionEnd(final int end) {
+    public void set_selectionEnd(final int end) {
         ((HtmlTextArea) getDomNodeOrDie()).setSelectionEnd(end);
     }
 
@@ -243,8 +243,8 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxFunction(@WebBrowser(FF))
     public void setSelectionRange(final int start, final int end) {
-        jsxSet_selectionStart(start);
-        jsxSet_selectionEnd(end);
+        set_selectionStart(start);
+        set_selectionEnd(end);
     }
 
     /**
@@ -269,7 +269,7 @@ public class HTMLTextAreaElement extends FormField {
      * @param readOnly the new value
      */
     @JsxSetter
-    public void jsxSet_readOnly(final boolean readOnly) {
+    public void set_readOnly(final boolean readOnly) {
         ((HtmlTextArea) getDomNodeOrDie()).setReadOnly(readOnly);
     }
 
@@ -287,8 +287,8 @@ public class HTMLTextAreaElement extends FormField {
      */
     @Override
     @JsxSetter(@WebBrowser(FF))
-    public void jsxSet_accessKey(final String accessKey) {
-        super.jsxSet_accessKey(accessKey);
+    public void set_accessKey(final String accessKey) {
+        super.set_accessKey(accessKey);
     }
 
 }

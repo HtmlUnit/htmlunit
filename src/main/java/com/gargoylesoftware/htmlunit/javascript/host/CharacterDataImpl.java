@@ -51,7 +51,7 @@ public class CharacterDataImpl extends Node {
      * @param newValue the new String of data
      */
     @JsxSetter
-    public void jsxSet_data(final String newValue) {
+    public void set_data(final String newValue) {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         domCharacterData.setData(newValue);
     }

@@ -74,7 +74,7 @@ public class HTMLTableElement extends RowContainer {
      * @param o the caption
      */
     @JsxSetter
-    public void jsxSet_caption(final Object o) {
+    public void set_caption(final Object o) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_105)) {
             throw Context.reportRuntimeError("Can't set caption");
         }
@@ -108,7 +108,7 @@ public class HTMLTableElement extends RowContainer {
      * @param o the tFoot
      */
     @JsxSetter
-    public void jsxSet_tFoot(final Object o) {
+    public void set_tFoot(final Object o) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_106)) {
             throw Context.reportRuntimeError("Can't set tFoot");
         }
@@ -143,7 +143,7 @@ public class HTMLTableElement extends RowContainer {
      * @param o the tHead
      */
     @JsxSetter
-    public void jsxSet_tHead(final Object o) {
+    public void set_tHead(final Object o) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_107)) {
             throw Context.reportRuntimeError("Can't set tHead");
         }
@@ -297,7 +297,7 @@ public class HTMLTableElement extends RowContainer {
      * @param width the <tt>width</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_width(final String width) {
+    public void set_width(final String width) {
         getDomNodeOrDie().setAttribute("width", width);
     }
 
@@ -315,7 +315,7 @@ public class HTMLTableElement extends RowContainer {
      * @param cellSpacing the <tt>cellSpacing</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_cellSpacing(final String cellSpacing) {
+    public void set_cellSpacing(final String cellSpacing) {
         getDomNodeOrDie().setAttribute("cellspacing", cellSpacing);
     }
 
@@ -333,7 +333,7 @@ public class HTMLTableElement extends RowContainer {
      * @param cellPadding the <tt>cellPadding</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_cellPadding(final String cellPadding) {
+    public void set_cellPadding(final String cellPadding) {
         getDomNodeOrDie().setAttribute("cellpadding", cellPadding);
     }
 
@@ -352,7 +352,7 @@ public class HTMLTableElement extends RowContainer {
      * @param border the <tt>border</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_border(final String border) {
+    public void set_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
 
@@ -372,7 +372,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_bgColor(final String bgColor) {
+    public void set_bgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
     }
 

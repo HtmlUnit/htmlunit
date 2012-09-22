@@ -61,7 +61,7 @@ public class HTMLObjectElement extends FormChild {
      * @param alt the value
      */
     @JsxSetter(@WebBrowser(IE))
-    public void jsxSet_alt(final String alt) {
+    public void set_alt(final String alt) {
         getDomNodeOrDie().setAttribute("alt", alt);
     }
 
@@ -80,7 +80,7 @@ public class HTMLObjectElement extends FormChild {
      * @param border the "border" attribute
      */
     @JsxSetter
-    public void jsxSet_border(final String border) {
+    public void set_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
 
@@ -99,7 +99,7 @@ public class HTMLObjectElement extends FormChild {
      * @param classid the "classid" attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void jsxSet_classid(final String classid) {
+    public void set_classid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
         if (classid.indexOf(':') != -1 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_86)
                 && getWindow().getWebWindow().getWebClient().getOptions().isActiveXNative()

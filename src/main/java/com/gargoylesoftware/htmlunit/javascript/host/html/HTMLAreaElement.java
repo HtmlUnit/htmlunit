@@ -69,7 +69,7 @@ public class HTMLAreaElement extends HTMLElement {
      * @param alt the value
      */
     @JsxSetter
-    public void jsxSet_alt(final String alt) {
+    public void set_alt(final String alt) {
         getDomNodeOrDie().setAttribute("alt", alt);
     }
 
@@ -87,8 +87,8 @@ public class HTMLAreaElement extends HTMLElement {
      */
     @Override
     @JsxSetter(@WebBrowser(FF))
-    public void jsxSet_accessKey(final String accessKey) {
-        super.jsxSet_accessKey(accessKey);
+    public void set_accessKey(final String accessKey) {
+        super.set_accessKey(accessKey);
     }
 
 }

@@ -140,7 +140,7 @@ public class TreeWalker extends SimpleScriptable {
      *          <code>null</code>.
      */
     @JsxSetter
-    public void jsxSet_currentNode(final Node currentNode) throws DOMException {
+    public void set_currentNode(final Node currentNode) throws DOMException {
         if (currentNode == null) {
             throw new DOMException(DOMException.NOT_SUPPORTED_ERR,
                                    "currentNode cannot be set to null");

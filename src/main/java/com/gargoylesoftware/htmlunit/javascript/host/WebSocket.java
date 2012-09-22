@@ -139,7 +139,7 @@ public class WebSocket extends SimpleScriptable {
      * @param closeHandler the event handler that fires on close
      */
     @JsxSetter
-    public void jsxSet_onclose(final Function closeHandler) {
+    public void set_onclose(final Function closeHandler) {
         closeHandler_ = closeHandler;
     }
 
@@ -157,7 +157,7 @@ public class WebSocket extends SimpleScriptable {
      * @param errorHandler the event handler that fires on error
      */
     @JsxSetter
-    public void jsxSet_onerror(final Function errorHandler) {
+    public void set_onerror(final Function errorHandler) {
         errorHandler_ = errorHandler;
     }
 
@@ -175,7 +175,7 @@ public class WebSocket extends SimpleScriptable {
      * @param messageHandler the event handler that fires on message
      */
     @JsxSetter
-    public void jsxSet_onmessage(final Function messageHandler) {
+    public void set_onmessage(final Function messageHandler) {
         messageHandler_ = messageHandler;
     }
 
@@ -193,7 +193,7 @@ public class WebSocket extends SimpleScriptable {
      * @param openHandler the event handler that fires on open
      */
     @JsxSetter
-    public void jsxSet_onopen(final Function openHandler) {
+    public void set_onopen(final Function openHandler) {
         openHandler_ = openHandler;
         fireOnOpen();
     }

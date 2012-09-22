@@ -138,7 +138,7 @@ public class Attr extends Node {
      * @param value the new value of this attribute
      */
     @JsxSetter
-    public void jsxSet_value(final String value) {
+    public void set_value(final String value) {
         getDomNodeOrDie().setValue(value);
     }
 

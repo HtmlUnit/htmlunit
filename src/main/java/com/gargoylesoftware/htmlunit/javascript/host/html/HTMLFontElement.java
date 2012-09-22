@@ -51,7 +51,7 @@ public class HTMLFontElement extends HTMLElement {
      * @param color the "color" attribute
      */
     @JsxSetter
-    public void jsxSet_color(final String color) {
+    public void set_color(final String color) {
         getDomNodeOrDie().setAttribute("color", color);
     }
 
@@ -69,7 +69,7 @@ public class HTMLFontElement extends HTMLElement {
      * @param face the typeface family
      */
     @JsxSetter
-    public void jsxSet_face(final String face) {
+    public void set_face(final String face) {
         getDomNodeOrDie().setAttribute("face", face);
     }
 
@@ -87,7 +87,7 @@ public class HTMLFontElement extends HTMLElement {
      * @param size the "size" attribute
      */
     @JsxSetter
-    public void jsxSet_size(final int size) {
+    public void set_size(final int size) {
         getDomNodeOrDie().setAttribute("size", Context.toString(size));
     }
 }

@@ -131,7 +131,7 @@ public class CSSRule extends SimpleScriptable {
      * @param cssText the parsable textual representation of the rule
      */
     @JsxSetter(@WebBrowser(FF))
-    public void jsxSet_cssText(final String cssText) {
+    public void set_cssText(final String cssText) {
         rule_.setCssText(cssText);
     }
 

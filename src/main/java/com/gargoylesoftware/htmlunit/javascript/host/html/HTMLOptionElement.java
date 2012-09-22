@@ -99,7 +99,7 @@ public class HTMLOptionElement extends FormChild {
      * @param newValue the value property
      */
     @JsxSetter
-    public void jsxSet_value(final String newValue) {
+    public void set_value(final String newValue) {
         getDomNodeOrNull().setValueAttribute(newValue);
     }
 
@@ -126,7 +126,7 @@ public class HTMLOptionElement extends FormChild {
      * @param newText the text property
      */
     @JsxSetter
-    public void jsxSet_text(final String newText) {
+    public void set_text(final String newText) {
         getDomNodeOrNull().setText(newText);
     }
 
@@ -144,7 +144,7 @@ public class HTMLOptionElement extends FormChild {
      * @param selected the new selected property
      */
     @JsxSetter
-    public void jsxSet_selected(final boolean selected) {
+    public void set_selected(final boolean selected) {
         final HtmlOption optionNode = getDomNodeOrNull();
         final HtmlSelect enclosingSelect = optionNode.getEnclosingSelect();
         if (!selected && optionNode.isSelected()
@@ -183,7 +183,7 @@ public class HTMLOptionElement extends FormChild {
      * @param label the new label property
      */
     @JsxSetter
-    public void jsxSet_label(final String label) {
+    public void set_label(final String label) {
         getDomNodeOrNull().setLabelAttribute(label);
     }
 
@@ -201,7 +201,7 @@ public class HTMLOptionElement extends FormChild {
      */
     @Override
     @JsxSetter
-    public void jsxSet_disabled(final boolean disabled) {
-        super.jsxSet_disabled(disabled);
+    public void set_disabled(final boolean disabled) {
+        super.set_disabled(disabled);
     }
 }

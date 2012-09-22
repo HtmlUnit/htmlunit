@@ -54,7 +54,7 @@ public class HTMLLabelElement extends FormChild {
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms533872.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_htmlFor(final String id) {
+    public void set_htmlFor(final String id) {
         ((HtmlLabel) getDomNodeOrDie()).setAttribute("for", id);
     }
 
@@ -72,8 +72,8 @@ public class HTMLLabelElement extends FormChild {
      */
     @Override
     @JsxSetter(@WebBrowser(FF))
-    public void jsxSet_accessKey(final String accessKey) {
-        super.jsxSet_accessKey(accessKey);
+    public void set_accessKey(final String accessKey) {
+        super.set_accessKey(accessKey);
     }
 
 }

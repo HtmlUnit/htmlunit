@@ -57,7 +57,7 @@ public final class ProcessingInstruction extends Node {
      * @param data the data
      */
     @JsxSetter
-    public void jsxSet_data(final String data) {
+    public void set_data(final String data) {
         ((DomProcessingInstruction) getDomNodeOrDie()).setData(data);
     }
 

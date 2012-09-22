@@ -125,7 +125,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @param abbr the value of the <tt>abbr</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_abbr(final String abbr) {
+    public void set_abbr(final String abbr) {
         getDomNodeOrDie().setAttribute("abbr", abbr);
     }
 
@@ -143,7 +143,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @param axis the value of the <tt>axis</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_axis(final String axis) {
+    public void set_axis(final String axis) {
         getDomNodeOrDie().setAttribute("axis", axis);
     }
 
@@ -163,7 +163,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_bgColor(final String bgColor) {
+    public void set_bgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
     }
 
@@ -187,7 +187,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @param colSpan the value of the <tt>colSpan</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_colSpan(final String colSpan) {
+    public void set_colSpan(final String colSpan) {
         String s;
         try {
             final int i = (int) Double.parseDouble(colSpan);
@@ -227,7 +227,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @param rowSpan the value of the <tt>rowSpan</tt> attribute
      */
     @JsxSetter
-    public void jsxSet_rowSpan(final String rowSpan) {
+    public void set_rowSpan(final String rowSpan) {
         String s;
         try {
             final int i = (int) Double.parseDouble(rowSpan);
@@ -263,7 +263,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_noWrap(final boolean noWrap) {
+    public void set_noWrap(final boolean noWrap) {
         if (noWrap) {
             final String value = (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_97) ? "true" : "");
             getDomNodeOrDie().setAttribute("noWrap", value);
@@ -301,7 +301,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @param width the value of the "width" property
      */
     @JsxSetter
-    public void jsxSet_width(final String width) {
+    public void set_width(final String width) {
         setWidthOrHeight("width", width, !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_99));
     }
 
@@ -321,7 +321,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @param width the value of the "width" property
      */
     @JsxSetter
-    public void jsxSet_height(final String width) {
+    public void set_height(final String width) {
         setWidthOrHeight("height", width, !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_101));
     }
 

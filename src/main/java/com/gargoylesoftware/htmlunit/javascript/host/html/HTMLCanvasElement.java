@@ -54,7 +54,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * @param width the "width" property
      */
     @JsxSetter
-    public void jsxSet_width(final String width) {
+    public void set_width(final String width) {
         getDomNodeOrDie().setAttribute("width", width);
     }
 
@@ -72,7 +72,7 @@ public class HTMLCanvasElement extends HTMLElement {
      * @param height the "height" property
      */
     @JsxSetter
-    public void jsxSet_height(final String height) {
+    public void set_height(final String height) {
         getDomNodeOrDie().setAttribute("height", height);
     }
 

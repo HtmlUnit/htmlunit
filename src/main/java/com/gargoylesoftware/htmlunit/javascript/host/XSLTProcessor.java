@@ -225,7 +225,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param input the input tree
      */
     @JsxSetter(@WebBrowser(IE))
-    public void jsxSet_input(final Node input) {
+    public void set_input(final Node input) {
         input_ = input;
     }
 
@@ -243,7 +243,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @param output the object to which to write the output of the transformation
      */
     @JsxSetter(@WebBrowser(IE))
-    public void jsxSet_output(final Object output) {
+    public void set_output(final Object output) {
         output_ = output;
     }
 

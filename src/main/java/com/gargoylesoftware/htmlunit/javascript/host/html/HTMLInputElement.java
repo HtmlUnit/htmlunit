@@ -61,7 +61,7 @@ public class HTMLInputElement extends FormField {
      * @param newType the new type to set
      */
     @JsxSetter
-    public void jsxSet_type(final String newType) {
+    public void set_type(final String newType) {
         HtmlInput input = getHtmlInputOrDie();
 
         if (!input.getTypeAttribute().equalsIgnoreCase(newType)) {
@@ -96,7 +96,7 @@ public class HTMLInputElement extends FormField {
      * @param checked  True if this input should have the "checked" attribute set
      */
     @JsxSetter
-    public void jsxSet_checked(final boolean checked) {
+    public void set_checked(final boolean checked) {
         ((HtmlInput) getDomNodeOrDie()).setChecked(checked);
     }
 
@@ -134,14 +134,14 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Uses {@link #jsxSet_type(String)} if attribute's name is type to
+     * Uses {@link #set_type(String)} if attribute's name is type to
      * replace DOM node as well as long as we have subclasses of {@link HtmlInput}.
      * {@inheritDoc}
      */
     @Override
     public void setAttribute(final String name, final String value) {
         if ("type".equals(name)) {
-            jsxSet_type(value);
+            set_type(value);
         }
         else {
             super.setAttribute(name, value);
@@ -164,7 +164,7 @@ public class HTMLInputElement extends FormField {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533718.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_defaultValue(final String defaultValue) {
+    public void set_defaultValue(final String defaultValue) {
         ((HtmlInput) getDomNodeOrDie()).setDefaultValue(defaultValue);
     }
 
@@ -184,7 +184,7 @@ public class HTMLInputElement extends FormField {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533715.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void jsxSet_defaultChecked(final boolean defaultChecked) {
+    public void set_defaultChecked(final boolean defaultChecked) {
         ((HtmlInput) getDomNodeOrDie()).setDefaultChecked(defaultChecked);
     }
 
@@ -211,7 +211,7 @@ public class HTMLInputElement extends FormField {
      * @param start selection start
      */
     @JsxSetter(@WebBrowser(FF))
-    public void jsxSet_selectionStart(final int start) {
+    public void set_selectionStart(final int start) {
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionStart(start);
     }
 
@@ -229,7 +229,7 @@ public class HTMLInputElement extends FormField {
      * @param end selection end
      */
     @JsxSetter(@WebBrowser(FF))
-    public void jsxSet_selectionEnd(final int end) {
+    public void set_selectionEnd(final int end) {
         ((SelectableTextInput) getDomNodeOrDie()).setSelectionEnd(end);
     }
 
@@ -263,7 +263,7 @@ public class HTMLInputElement extends FormField {
      * @param length the new value
      */
     @JsxSetter
-    public void jsxSet_maxLength(final int length) {
+    public void set_maxLength(final int length) {
         getDomNodeOrDie().setAttribute("maxLength", Integer.toString(length));
     }
 
@@ -281,7 +281,7 @@ public class HTMLInputElement extends FormField {
      * @param readOnly the new value
      */
     @JsxSetter
-    public void jsxSet_readOnly(final boolean readOnly) {
+    public void set_readOnly(final boolean readOnly) {
         ((HtmlInput) getDomNodeOrDie()).setReadOnly(readOnly);
     }
 
@@ -292,8 +292,8 @@ public class HTMLInputElement extends FormField {
      */
     @JsxFunction(@WebBrowser(FF))
     public void setSelectionRange(final int start, final int end) {
-        jsxSet_selectionStart(start);
-        jsxSet_selectionEnd(end);
+        set_selectionStart(start);
+        set_selectionEnd(end);
     }
 
     /**
@@ -311,7 +311,7 @@ public class HTMLInputElement extends FormField {
      * @param alt the value
      */
     @JsxSetter
-    public void jsxSet_alt(final String alt) {
+    public void set_alt(final String alt) {
         getDomNodeOrDie().setAttribute("alt", alt);
     }
 
@@ -330,7 +330,7 @@ public class HTMLInputElement extends FormField {
      * @param border the "border" attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void jsxSet_border(final String border) {
+    public void set_border(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
 
@@ -348,7 +348,7 @@ public class HTMLInputElement extends FormField {
      * @param align the value of the "align" property
      */
     @JsxSetter
-    public void jsxSet_align(final String align) {
+    public void set_align(final String align) {
         final boolean ignoreIfNoError =
                 getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES);
         setAlign(align, ignoreIfNoError);
@@ -368,8 +368,8 @@ public class HTMLInputElement extends FormField {
      */
     @Override
     @JsxSetter(@WebBrowser(FF))
-    public void jsxSet_accessKey(final String accessKey) {
-        super.jsxSet_accessKey(accessKey);
+    public void set_accessKey(final String accessKey) {
+        super.set_accessKey(accessKey);
     }
 
     /**

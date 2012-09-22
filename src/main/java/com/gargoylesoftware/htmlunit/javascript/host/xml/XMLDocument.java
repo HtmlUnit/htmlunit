@@ -98,7 +98,7 @@ public class XMLDocument extends Document {
      * @param async Whether or not to send the request to the server asynchronously
      */
     @JsxSetter
-    public void jsxSet_async(final boolean async) {
+    public void set_async(final boolean async) {
         async_ = async;
     }
 
@@ -253,7 +253,7 @@ public class XMLDocument extends Document {
      * @param preserveWhiteSpace white space handling
      */
     @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public void jsxSet_preserveWhiteSpace(final boolean preserveWhiteSpace) {
+    public void set_preserveWhiteSpace(final boolean preserveWhiteSpace) {
         preserveWhiteSpace_ = preserveWhiteSpace;
     }
 

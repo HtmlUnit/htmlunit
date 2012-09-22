@@ -62,7 +62,7 @@ public class HTMLBRElement extends HTMLElement {
      * @param clear the value of the <tt>clear</tt> property
      */
     @JsxSetter
-    public void jsxSet_clear(final String clear) {
+    public void set_clear(final String clear) {
         if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)
                 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_43)) {
             throw Context.reportRuntimeError("Invalid clear property value: '" + clear + "'.");

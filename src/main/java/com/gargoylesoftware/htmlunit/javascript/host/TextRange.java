@@ -88,7 +88,7 @@ public class TextRange extends SimpleScriptable {
      * @param text the text contained within the range
      */
     @JsxSetter
-    public void jsxSet_text(final String text) {
+    public void set_text(final String text) {
         if (range_.getStartContainer() == range_.getEndContainer()
             && range_.getStartContainer() instanceof SelectableTextInput) {
             final SelectableTextInput input = (SelectableTextInput) range_.getStartContainer();
