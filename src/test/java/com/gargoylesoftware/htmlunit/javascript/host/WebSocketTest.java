@@ -55,9 +55,12 @@ public class WebSocketTest extends WebDriverTestCase {
 
             driver.findElement(By.id("username")).sendKeys("Browser");
             driver.findElement(By.id("joinB")).click();
-            Thread.sleep(500);
-
             final WebElement chatE = driver.findElement(By.id("chat"));
+            int counter = 0;
+            do {
+                Thread.sleep(500);
+            } while (chatE.getText().isEmpty() && counter++ < 4);
+
             assertEquals("Browser: has joined!", chatE.getText());
             driver.findElement(By.id("phrase")).sendKeys("Hope you are fine!");
             driver.findElement(By.id("sendB")).click();
