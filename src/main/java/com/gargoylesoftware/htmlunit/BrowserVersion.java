@@ -231,23 +231,24 @@ public class BrowserVersion implements Serializable {
     }
 
     private void initDefaultFeatures() {
+        final String expectedBrowserName;
+        if (isIE()) {
+            expectedBrowserName = "IE";
+        }
+        else if (isFirefox()) {
+            expectedBrowserName = "FF";
+        }
+        else {
+            expectedBrowserName = "CHROME";
+        }
+
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
             try {
                 final Field field = BrowserVersionFeatures.class.getField(feature.name());
                 final WebBrowsers webBrowsers = field.getAnnotation(WebBrowsers.class);
                 if (webBrowsers != null) {
                     for (final WebBrowser browser : webBrowsers.value()) {
-                        String expectedBrowserName;
-                        if (isIE()) {
-                            expectedBrowserName = "IE";
-                        }
-                        else if (isFirefox()) {
-                            expectedBrowserName = "FF";
-                        }
-                        else {
-                            expectedBrowserName = "CHROME";
-                        }
-                        if (browser.value().name().equals(expectedBrowserName)
+                        if (expectedBrowserName.equals(browser.value().name())
                                 && browser.minVersion() <= getBrowserVersionNumeric()
                                 && browser.maxVersion() >= getBrowserVersionNumeric()) {
                             features_.add(feature);
