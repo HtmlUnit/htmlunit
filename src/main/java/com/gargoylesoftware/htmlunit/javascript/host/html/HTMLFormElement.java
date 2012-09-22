@@ -94,7 +94,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String jsxGet_name() {
+    public String get_name() {
         return getHtmlForm().getNameAttribute();
     }
 
@@ -113,7 +113,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public HTMLCollection jsxGet_elements() {
+    public HTMLCollection get_elements() {
         if (elements_ == null) {
             final HtmlForm htmlForm = getHtmlForm();
 
@@ -173,8 +173,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public int jsxGet_length() {
-        final int all = jsxGet_elements().jsxGet_length();
+    public int get_length() {
+        final int all = get_elements().get_length();
         final int images = getHtmlForm().getElementsByAttribute("input", "type", "image").size();
         return all - images;
     }
@@ -184,7 +184,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String jsxGet_action() {
+    public String get_action() {
         String action = getHtmlForm().getActionAttribute();
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_169)) {
             try {
@@ -212,7 +212,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String jsxGet_method() {
+    public String get_method() {
         return getHtmlForm().getMethodAttribute();
     }
 
@@ -231,7 +231,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String jsxGet_target() {
+    public String get_target() {
         return getHtmlForm().getTargetAttribute();
     }
 
@@ -240,7 +240,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the <tt>onsubmit</tt> event handler for this element
      */
     @JsxGetter
-    public Object jsxGet_onsubmit() {
+    public Object get_onsubmit() {
         return getEventHandlerProp("onsubmit");
     }
 
@@ -268,7 +268,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String jsxGet_encoding() {
+    public String get_encoding() {
         return getHtmlForm().getEnctypeAttribute();
     }
 
@@ -302,7 +302,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         else {
             // download should be done ASAP, response will be loaded into a window later
             final WebRequest request = getHtmlForm().getWebRequest(null);
-            final String target = page.getResolvedTarget(jsxGet_target());
+            final String target = page.getResolvedTarget(get_target());
             final boolean isHashJump = HttpMethod.GET == request.getHttpMethod() && action.endsWith("#");
             webClient.download(page.getEnclosingWindow(), target, request,
                     isHashJump, "JS form.submit()");
@@ -322,7 +322,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @JsxFunction(@WebBrowser(IE))
     public Object item(final Object index, final Object subIndex) {
         if (index instanceof Number) {
-            return jsxGet_elements().item(index);
+            return get_elements().item(index);
         }
 
         final String name = Context.toString(index);
@@ -436,7 +436,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         if (getDomNodeOrNull() == null) {
             return NOT_FOUND; // typically for the prototype
         }
-        return jsxGet_elements().get(index, ((HTMLFormElement) start).jsxGet_elements());
+        return get_elements().get(index, ((HTMLFormElement) start).get_elements());
     }
 
     /**

@@ -52,7 +52,7 @@ public class Attr extends Node {
         final DomAttr domNode = getDomNodeOrDie();
         final DomElement parent = (DomElement) domNode.getParentNode();
         if (parent != null) {
-            domNode.setValue(parent.getAttribute(jsxGet_name()));
+            domNode.setValue(parent.getAttribute(get_name()));
         }
         domNode.remove();
     }
@@ -62,7 +62,7 @@ public class Attr extends Node {
      * @return <tt>true</tt> if this attribute is an ID
      */
     @JsxGetter(@WebBrowser(FF))
-    public boolean jsxGet_isId() {
+    public boolean get_isId() {
         return getDomNodeOrDie().isId();
     }
 
@@ -71,7 +71,7 @@ public class Attr extends Node {
      * @return <tt>true</tt> if arbitrary properties can be added to this attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean jsxGet_expando() {
+    public boolean get_expando() {
         return true;
     }
 
@@ -80,7 +80,7 @@ public class Attr extends Node {
      * @return the name of the attribute
      */
     @JsxGetter
-    public String jsxGet_name() {
+    public String get_name() {
         return getDomNodeOrDie().getName();
     }
 
@@ -89,8 +89,8 @@ public class Attr extends Node {
      * @return the value of this attribute
      */
     @Override
-    public String jsxGet_nodeValue() {
-        return jsxGet_value();
+    public String get_nodeValue() {
+        return get_value();
     }
 
     /**
@@ -98,7 +98,7 @@ public class Attr extends Node {
      * @return the owner element
      */
     @JsxGetter(@WebBrowser(FF))
-    public Object jsxGet_ownerElement() {
+    public Object get_ownerElement() {
         final DomElement parent = getDomNodeOrDie().getOwnerElement();
         if (parent != null) {
             return parent.getScriptObject();
@@ -111,7 +111,7 @@ public class Attr extends Node {
      * @return <code>null</code>
      */
     @Override
-    public Node jsxGet_parentNode() {
+    public Node get_parentNode() {
         return null;
     }
 
@@ -120,7 +120,7 @@ public class Attr extends Node {
      * @return <tt>true</tt> if this attribute has been specified
      */
     @JsxGetter
-    public boolean jsxGet_specified() {
+    public boolean get_specified() {
         return getDomNodeOrDie().getSpecified();
     }
 
@@ -129,7 +129,7 @@ public class Attr extends Node {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String jsxGet_value() {
+    public String get_value() {
         return getDomNodeOrDie().getValue();
     }
 
@@ -146,20 +146,20 @@ public class Attr extends Node {
      * {@inheritDoc}
      */
     @Override
-    public Node jsxGet_firstChild() {
-        return jsxGet_lastChild();
+    public Node get_firstChild() {
+        return get_lastChild();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Node jsxGet_lastChild() {
+    public Node get_lastChild() {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL)) {
             return null;
         }
 
-        final DomText text = new DomText(getDomNodeOrDie().getPage(), jsxGet_nodeValue());
+        final DomText text = new DomText(getDomNodeOrDie().getPage(), get_nodeValue());
         return (Node) text.getScriptObject();
     }
 

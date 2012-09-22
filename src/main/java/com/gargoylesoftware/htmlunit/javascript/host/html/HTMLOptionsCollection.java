@@ -173,7 +173,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
         else {
             final HTMLOptionElement option = (HTMLOptionElement) newValue;
             final HtmlOption htmlOption = option.getDomNodeOrNull();
-            if (index >= jsxGet_length()) {
+            if (index >= get_length()) {
                 // Add a new option at the end.
                 htmlSelect_.appendOption(htmlOption);
             }
@@ -182,7 +182,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
                 htmlSelect_.replaceOption(index, htmlOption);
             }
         }
-        if (jsxGet_length() == 1 && !htmlSelect_.isMultipleSelectEnabled()) {
+        if (get_length() == 1 && !htmlSelect_.isMultipleSelectEnabled()) {
             ((HTMLSelectElement) htmlSelect_.getScriptObject()).jsxSet_selectedIndex(0);
         }
     }
@@ -193,7 +193,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     * @return the number of elements in the array
     */
     @JsxGetter
-    public int jsxGet_length() {
+    public int get_length() {
         return htmlSelect_.getOptionSize();
     }
 
@@ -262,7 +262,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
     public void add(final Object newOptionObject, final Object newIndex) {
         // If newIndex is undefined, then the item will be appended to the end of
         // the list
-        int index = jsxGet_length();
+        int index = get_length();
 
         // If newIndex was specified, then use it
         if (newIndex instanceof Number) {
@@ -284,7 +284,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
             Context.reportRuntimeError("Invalid index: " + index);
         }
 
-        if (index < jsxGet_length()) {
+        if (index < get_length()) {
             htmlSelect_.removeOption(index);
         }
     }

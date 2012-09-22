@@ -271,7 +271,7 @@ public class ActiveXObject extends SimpleScriptable {
             final boolean isGetter, final boolean isSetter) {
         String getterName = null;
         if (isGetter) {
-            getterName = "jsxGet_" + propertyName;
+            getterName = "get_" + propertyName;
         }
         String setterName = null;
         if (isSetter) {

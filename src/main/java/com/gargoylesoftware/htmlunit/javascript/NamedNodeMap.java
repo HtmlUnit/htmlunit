@@ -200,7 +200,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
      * @return the number of attributes in this named node map
      */
     @JsxGetter
-    public int jsxGet_length() {
+    public int get_length() {
         int length = attributes_.getLength();
         if (useRecursiveAttributeForIE()) {
             length += getRecursiveAttributesLength();

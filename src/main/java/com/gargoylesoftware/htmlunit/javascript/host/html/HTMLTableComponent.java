@@ -46,7 +46,7 @@ public class HTMLTableComponent extends HTMLElement {
      * @return the value of the "align" property
      */
     @JsxGetter
-    public String jsxGet_align() {
+    public String get_align() {
         final boolean invalidValues = getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID);
         return getAlign(invalidValues);
     }
@@ -65,7 +65,7 @@ public class HTMLTableComponent extends HTMLElement {
      * @return the value of the "vAlign" property
      */
     @JsxGetter
-    public String jsxGet_vAlign() {
+    public String get_vAlign() {
         return getVAlign(getValidVAlignValues(), VALIGN_DEFAULT_VALUE);
     }
 
@@ -98,7 +98,7 @@ public class HTMLTableComponent extends HTMLElement {
      * @return the value of the "ch" property
      */
     @JsxGetter
-    public String jsxGet_ch() {
+    public String get_ch() {
         return getCh();
     }
 
@@ -116,7 +116,7 @@ public class HTMLTableComponent extends HTMLElement {
      * @return the value of the "chOff" property
      */
     @JsxGetter
-    public String jsxGet_chOff() {
+    public String get_chOff() {
         return getChOff();
     }
 

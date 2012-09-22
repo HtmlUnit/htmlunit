@@ -40,6 +40,6 @@ public class MimeTypeArray extends SimpleArray {
      */
     @Override
     protected String getItemName(final Object element) {
-        return ((MimeType) element).jsxGet_type();
+        return ((MimeType) element).get_type();
     }
 }

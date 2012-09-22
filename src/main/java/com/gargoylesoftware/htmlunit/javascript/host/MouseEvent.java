@@ -132,9 +132,9 @@ public class MouseEvent extends UIEvent {
      * @return the horizontal coordinate
      */
     @JsxGetter
-    public int jsxGet_clientX() {
+    public int get_clientX() {
         if (clientX_ == null) {
-            clientX_ = Integer.valueOf(jsxGet_screenX());
+            clientX_ = Integer.valueOf(get_screenX());
         }
         return clientX_.intValue();
     }
@@ -156,9 +156,9 @@ public class MouseEvent extends UIEvent {
      * @return the horizontal coordinate
      */
     @JsxGetter
-    public int jsxGet_screenX() {
+    public int get_screenX() {
         if (screenX_ == null) {
-            final HTMLElement target = (HTMLElement) jsxGet_target();
+            final HTMLElement target = (HTMLElement) get_target();
             screenX_ = Integer.valueOf(target.getPosX() + 10);
         }
         return screenX_.intValue();
@@ -166,12 +166,12 @@ public class MouseEvent extends UIEvent {
 
     /**
      * Returns the horizontal coordinate of the event relative to whole document..
-     * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenX()})
+     * @return the horizontal coordinate (currently the same as {@link #get_screenX()})
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:event.pageX">Mozilla doc</a>
      */
     @JsxGetter(@WebBrowser(FF))
-    public int jsxGet_pageX() {
-        return jsxGet_screenX();
+    public int get_pageX() {
+        return get_screenX();
     }
 
     /**
@@ -179,9 +179,9 @@ public class MouseEvent extends UIEvent {
      * @return the horizontal coordinate
      */
     @JsxGetter
-    public int jsxGet_clientY() {
+    public int get_clientY() {
         if (clientY_ == null) {
-            clientY_ = Integer.valueOf(jsxGet_screenY());
+            clientY_ = Integer.valueOf(get_screenY());
         }
         return clientY_.intValue();
     }
@@ -203,9 +203,9 @@ public class MouseEvent extends UIEvent {
      * @return the vertical coordinate
      */
     @JsxGetter
-    public int jsxGet_screenY() {
+    public int get_screenY() {
         if (screenY_ == null) {
-            final HTMLElement target = (HTMLElement) jsxGet_target();
+            final HTMLElement target = (HTMLElement) get_target();
             screenY_ = Integer.valueOf(target.getPosY() + 10);
         }
         return screenY_.intValue();
@@ -213,12 +213,12 @@ public class MouseEvent extends UIEvent {
 
     /**
      * Returns the vertical coordinate of the event relative to the whole document.
-     * @return the horizontal coordinate (currently the same as {@link #jsxGet_screenY()})
+     * @return the horizontal coordinate (currently the same as {@link #get_screenY()})
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:event.pageY">Mozilla doc</a>
      */
     @JsxGetter(@WebBrowser(FF))
-    public int jsxGet_pageY() {
-        return jsxGet_screenY();
+    public int get_pageY() {
+        return get_screenY();
     }
 
     /**
@@ -226,13 +226,13 @@ public class MouseEvent extends UIEvent {
      * @return the button code
      */
     @JsxGetter
-    public int jsxGet_button() {
+    public int get_button() {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_116)) {
             // In IE7: oncontextmenu event.button is 0
-            if (jsxGet_type().equals(TYPE_CONTEXT_MENU)) {
+            if (get_type().equals(TYPE_CONTEXT_MENU)) {
                 return 0;
             }
-            if (jsxGet_type().equals(TYPE_CLICK)) {
+            if (get_type().equals(TYPE_CLICK)) {
                 return button_;
             }
             return buttonCodeToIE[button_];
@@ -247,7 +247,7 @@ public class MouseEvent extends UIEvent {
     @JsxSetter
     public void jsxSet_button(int value) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_116)
-                && !TYPE_CLICK.equals(jsxGet_type())) {
+                && !TYPE_CLICK.equals(get_type())) {
             switch (value) {
                 case 1:
                     value = 0;
@@ -273,7 +273,7 @@ public class MouseEvent extends UIEvent {
      * @return the button code
      */
     @JsxGetter(@WebBrowser(FF))
-    public int jsxGet_which() {
+    public int get_which() {
         return button_ + 1;
     }
 
@@ -360,8 +360,8 @@ public class MouseEvent extends UIEvent {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public boolean jsxGet_altKey() {
-        return super.jsxGet_altKey();
+    public boolean get_altKey() {
+        return super.get_altKey();
     }
 
     /**
@@ -369,8 +369,8 @@ public class MouseEvent extends UIEvent {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public boolean jsxGet_ctrlKey() {
-        return super.jsxGet_ctrlKey();
+    public boolean get_ctrlKey() {
+        return super.get_ctrlKey();
     }
 
     /**
@@ -378,7 +378,7 @@ public class MouseEvent extends UIEvent {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public boolean jsxGet_shiftKey() {
-        return super.jsxGet_shiftKey();
+    public boolean get_shiftKey() {
+        return super.get_shiftKey();
     }
 }

@@ -44,7 +44,7 @@ public class HTMLFieldSetElement extends FormChild {
      * @return the value of the <tt>align</tt> property
      */
     @JsxGetter(@WebBrowser(IE))
-    public String jsxGet_align() {
+    public String get_align() {
         return getAlign(false);
     }
 

@@ -94,7 +94,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
      * @return the length of this namespace collection
      */
     @JsxGetter
-    public final int jsxGet_length() {
+    public final int get_length() {
         return namespaces_.size();
     }
 
@@ -127,7 +127,7 @@ public class NamespaceCollection extends SimpleScriptable implements Function {
     @Override
     public Object get(final String name, final Scriptable start) {
         for (final Namespace n : namespaces_) {
-            if (StringUtils.equals(n.jsxGet_name(), name)) {
+            if (StringUtils.equals(n.get_name(), name)) {
                 return n;
             }
         }

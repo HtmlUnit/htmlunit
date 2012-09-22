@@ -450,7 +450,7 @@ public class HTMLCollection extends NodeList {
      */
     @Override
     public int getLength() {
-        return jsxGet_length();
+        return get_length();
     }
 
     /**

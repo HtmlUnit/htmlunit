@@ -267,7 +267,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
         }
 
         final Event optionClickEvent = new MouseEvent(this, MouseEvent.TYPE_CLICK,
-                event.jsxGet_shiftKey(), event.jsxGet_ctrlKey(), event.jsxGet_altKey(),
+                event.get_shiftKey(), event.get_ctrlKey(), event.get_altKey(),
             MouseEvent.BUTTON_LEFT);
         return super.doClickFireClickEvent(optionClickEvent);
     }

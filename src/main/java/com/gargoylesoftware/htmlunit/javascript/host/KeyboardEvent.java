@@ -521,7 +521,7 @@ public class KeyboardEvent extends UIEvent {
         super(domNode, type);
         int keyCode = 0;
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_113)) {
-            if (jsxGet_type().equals(Event.TYPE_KEY_PRESS)) {
+            if (get_type().equals(Event.TYPE_KEY_PRESS)) {
                 keyCode = Integer.valueOf(character);
                 setKeyCode(keyCode);
             }
@@ -531,7 +531,7 @@ public class KeyboardEvent extends UIEvent {
             }
         }
         else {
-            if (jsxGet_type().equals(Event.TYPE_KEY_PRESS) && character >= 33 && character <= 126) {
+            if (get_type().equals(Event.TYPE_KEY_PRESS) && character >= 33 && character <= 126) {
                 charCode_ = character;
             }
             else {
@@ -563,7 +563,7 @@ public class KeyboardEvent extends UIEvent {
             throw new IllegalArgumentException("Please use the 'char' constructor instead of int");
         }
         setKeyCode(keyCode);
-        if (jsxGet_type().equals(Event.TYPE_KEY_PRESS)) {
+        if (get_type().equals(Event.TYPE_KEY_PRESS)) {
             which_ = 0;
         }
         else {
@@ -620,7 +620,7 @@ public class KeyboardEvent extends UIEvent {
      * @return the char code associated with the event
      */
     @JsxGetter(@WebBrowser(FF))
-    public int jsxGet_charCode() {
+    public int get_charCode() {
         return charCode_;
     }
 
@@ -629,7 +629,7 @@ public class KeyboardEvent extends UIEvent {
      * @return the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed
      */
     @JsxGetter(@WebBrowser(FF))
-    public Object jsxGet_which() {
+    public Object get_which() {
         return which_;
     }
 
@@ -664,7 +664,7 @@ public class KeyboardEvent extends UIEvent {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public Object jsxGet_keyCode() {
-        return super.jsxGet_keyCode();
+    public Object get_keyCode() {
+        return super.get_keyCode();
     }
 }

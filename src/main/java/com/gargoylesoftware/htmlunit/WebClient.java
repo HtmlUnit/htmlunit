@@ -872,7 +872,7 @@ public class WebClient implements Serializable {
             if (jsWindow != null) {
                 if (getBrowserVersion().hasFeature(BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
                     final HTMLElement activeElement =
-                            (HTMLElement) ((HTMLDocument) jsWindow.getDocument()).jsxGet_activeElement();
+                            (HTMLElement) ((HTMLDocument) jsWindow.getDocument()).get_activeElement();
                     if (activeElement != null) {
                         ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
                     }
@@ -1909,7 +1909,7 @@ public class WebClient implements Serializable {
                 final BaseFrameElement frameElement = fw.getFrameElement();
                 if (frameElement.isDisplayed()) {
                     final ScriptableObject scriptableObject = frameElement.getScriptObject();
-                    final ComputedCSSStyleDeclaration style = ((HTMLElement) scriptableObject).jsxGet_currentStyle();
+                    final ComputedCSSStyleDeclaration style = ((HTMLElement) scriptableObject).get_currentStyle();
                     use = (style.getCalculatedWidth(false, false) != 0)
                         && (style.getCalculatedHeight(false, false) != 0);
                 }
@@ -2248,7 +2248,7 @@ public class WebClient implements Serializable {
                 // update location.hash
                 final Window jsWindow = (Window) window.getScriptObject();
                 if (null != jsWindow) {
-                    final Location location = jsWindow.jsxGet_location();
+                    final Location location = jsWindow.get_location();
                     location.jsxSet_hash(downloadedResponse.urlWithOnlyHashChange_.getRef());
                 }
             }

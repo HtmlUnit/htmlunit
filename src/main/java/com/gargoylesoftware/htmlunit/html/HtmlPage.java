@@ -1299,14 +1299,14 @@ public class HtmlPage extends SgmlPage {
     }
 
     private boolean isOnbeforeunloadAccepted(final HtmlPage page, final Event event) {
-        if (event.jsxGet_type().equals(Event.TYPE_BEFORE_UNLOAD) && event.jsxGet_returnValue() != null) {
+        if (event.get_type().equals(Event.TYPE_BEFORE_UNLOAD) && event.get_returnValue() != null) {
             final OnbeforeunloadHandler handler = getWebClient().getOnbeforeunloadHandler();
             if (handler == null) {
                 LOG.warn("document.onbeforeunload() returned a string in event.returnValue,"
                         + " but no onbeforeunload handler installed.");
             }
             else {
-                final String message = Context.toString(event.jsxGet_returnValue());
+                final String message = Context.toString(event.get_returnValue());
                 return handler.handleEvent(page, message);
             }
         }

@@ -59,7 +59,7 @@ public class HTMLAreaElement extends HTMLElement {
      * @return the value of the "alt" property
      */
     @JsxGetter
-    public String jsxGet_alt() {
+    public String get_alt() {
         final String alt = getDomNodeOrDie().getAttribute("alt");
         return alt;
     }
@@ -78,8 +78,8 @@ public class HTMLAreaElement extends HTMLElement {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public String jsxGet_accessKey() {
-        return super.jsxGet_accessKey();
+    public String get_accessKey() {
+        return super.get_accessKey();
     }
 
     /**

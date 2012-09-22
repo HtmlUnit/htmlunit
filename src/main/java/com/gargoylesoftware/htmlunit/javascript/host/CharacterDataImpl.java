@@ -41,7 +41,7 @@ public class CharacterDataImpl extends Node {
      * @return the String of data
      */
     @JsxGetter
-    public Object jsxGet_data() {
+    public Object get_data() {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         return domCharacterData.getData();
     }
@@ -61,7 +61,7 @@ public class CharacterDataImpl extends Node {
      * @return the number of characters
      */
     @JsxGetter
-    public int jsxGet_length() {
+    public int get_length() {
         final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
         return domCharacterData.getLength();
     }

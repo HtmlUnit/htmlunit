@@ -69,7 +69,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the value of this link's <tt>href</tt> property
      */
     @JsxGetter
-    public String jsxGet_href() {
+    public String get_href() {
         final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
         final String hrefAttr = anchor.getHrefAttribute();
 
@@ -99,7 +99,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the name property
      */
     @JsxGetter
-    public String jsxGet_name() {
+    public String get_name() {
         return getDomNodeOrDie().getAttribute("name");
     }
 
@@ -117,7 +117,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the href property
      */
     @JsxGetter
-    public String jsxGet_target() {
+    public String get_target() {
         return getDomNodeOrDie().getAttribute("target");
     }
 
@@ -153,7 +153,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the rel property
      */
     @JsxGetter
-    public String jsxGet_rel() {
+    public String get_rel() {
         return ((HtmlAnchor) getDomNodeOrDie()).getRelAttribute();
     }
 
@@ -171,7 +171,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the rev property
      */
     @JsxGetter
-    public String jsxGet_rev() {
+    public String get_rev() {
         return ((HtmlAnchor) getDomNodeOrDie()).getRevAttribute();
     }
 
@@ -183,7 +183,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String jsxGet_search() throws Exception {
+    public String get_search() throws Exception {
         final String query = getUrl().getQuery();
         if (query == null) {
             return "";
@@ -221,7 +221,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String jsxGet_hash() throws Exception {
+    public String get_hash() throws Exception {
         final String hash = getUrl().getRef();
         if (hash == null) {
             return "";
@@ -247,7 +247,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String jsxGet_host() throws Exception {
+    public String get_host() throws Exception {
         final URL url = getUrl();
         final int port = url.getPort();
         final String host = url.getHost();
@@ -289,7 +289,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String jsxGet_hostname() throws Exception {
+    public String get_hostname() throws Exception {
         return getUrl().getHost();
     }
 
@@ -311,7 +311,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String jsxGet_pathname() throws Exception {
+    public String get_pathname() throws Exception {
         return getUrl().getPath();
     }
 
@@ -333,7 +333,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String jsxGet_port() throws Exception {
+    public String get_port() throws Exception {
         final int port = getUrl().getPort();
         if (port == -1) {
             return "";
@@ -359,7 +359,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String jsxGet_protocol() throws Exception {
+    public String get_protocol() throws Exception {
         return getUrl().getProtocol() + ":";
     }
 
@@ -432,8 +432,8 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public String jsxGet_accessKey() {
-        return super.jsxGet_accessKey();
+    public String get_accessKey() {
+        return super.get_accessKey();
     }
 
     /**

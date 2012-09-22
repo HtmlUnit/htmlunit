@@ -58,7 +58,7 @@ public final class DOMTokenList extends SimpleScriptable {
      * @return the length
      */
     @JsxGetter
-    public int jsxGet_length() {
+    public int get_length() {
         final String value = getDefaultValue(null);
         return value.split(" ").length;
     }

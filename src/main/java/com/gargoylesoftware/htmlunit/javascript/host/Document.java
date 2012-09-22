@@ -93,8 +93,8 @@ public class Document extends EventNode {
      * @return the value of the "location" property
      */
     @JsxGetter
-    public Location jsxGet_location() {
-        return window_.jsxGet_location();
+    public Location get_location() {
+        return window_.get_location();
     }
 
     /**
@@ -115,7 +115,7 @@ public class Document extends EventNode {
      * @return the value of the "referrer" property
      */
     @JsxGetter
-    public String jsxGet_referrer() {
+    public String get_referrer() {
         final String referrer = getPage().getWebResponse().getWebRequest().getAdditionalHeaders().get("Referer");
         if (referrer == null) {
             return "";
@@ -128,7 +128,7 @@ public class Document extends EventNode {
      * @return the root node for the document
      */
     @JsxGetter
-    public Element jsxGet_documentElement() {
+    public Element get_documentElement() {
         final Object documentElement = getPage().getDocumentElement();
         if (documentElement == null) {
             // for instance with an XML document with parsing error
@@ -142,7 +142,7 @@ public class Document extends EventNode {
      * @return the DocumentType of the document
      */
     @JsxGetter
-    public SimpleScriptable jsxGet_doctype() {
+    public SimpleScriptable get_doctype() {
         final Object documentType = getPage().getDoctype();
         if (documentType == null) {
             return null;
@@ -155,7 +155,7 @@ public class Document extends EventNode {
      * @return a value which indicates whether or not the document can be edited
      */
     @JsxGetter
-    public String jsxGet_designMode() {
+    public String get_designMode() {
         if (designMode_ == null) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_30)) {
                 if (getWindow().getWebWindow() instanceof FrameWindow) {
@@ -227,7 +227,7 @@ public class Document extends EventNode {
      * @return the window
      */
     @JsxGetter(@WebBrowser(FF))
-    public Object jsxGet_defaultView() {
+    public Object get_defaultView() {
         return getWindow();
     }
 
@@ -291,7 +291,7 @@ public class Document extends EventNode {
      * @return implementation-specific object
      */
     @JsxGetter
-    public DOMImplementation jsxGet_implementation() {
+    public DOMImplementation get_implementation() {
         if (implementation_ == null) {
             implementation_ = new DOMImplementation();
             implementation_.setParentScope(getWindow());

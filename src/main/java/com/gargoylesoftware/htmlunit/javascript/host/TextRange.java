@@ -79,7 +79,7 @@ public class TextRange extends SimpleScriptable {
      * @return the text contained within the range
      */
     @JsxGetter
-    public String jsxGet_text() {
+    public String get_text() {
         return range_.toString();
     }
 
@@ -103,10 +103,10 @@ public class TextRange extends SimpleScriptable {
      * @return the HTML fragment contained within the range
      */
     @JsxGetter
-    public String jsxGet_htmlText() {
+    public String get_htmlText() {
         final org.w3c.dom.Node node = range_.getCommonAncestorContainer();
         final HTMLElement element = (HTMLElement) getScriptableFor(node);
-        return element.jsxGet_outerHTML(); // TODO: not quite right, but good enough for now
+        return element.get_outerHTML(); // TODO: not quite right, but good enough for now
     }
 
     /**

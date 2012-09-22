@@ -35,7 +35,7 @@ public class HTMLListElement extends HTMLElement {
      * @return the value of the <tt>compact</tt> attribute
      */
     @JsxGetter
-    public boolean jsxGet_compact() {
+    public boolean get_compact() {
         return getDomNodeOrDie().hasAttribute("compact");
     }
 
@@ -59,7 +59,7 @@ public class HTMLListElement extends HTMLElement {
     @Override
     public Object getAttribute(final String attributeName, final Integer flags) {
         if ("compact".equals(attributeName) && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_85)) {
-            return jsxGet_compact();
+            return get_compact();
         }
         return super.getAttribute(attributeName, flags);
     }

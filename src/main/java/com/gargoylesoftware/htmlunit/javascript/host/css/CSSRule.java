@@ -112,7 +112,7 @@ public class CSSRule extends SimpleScriptable {
      * @return the type of the rule.
      */
     @JsxGetter(@WebBrowser(FF))
-    public short jsxGet_type() {
+    public short get_type() {
         return rule_.getType();
     }
 
@@ -122,7 +122,7 @@ public class CSSRule extends SimpleScriptable {
      * @return the parsable textual representation of the rule.
      */
     @JsxGetter(@WebBrowser(FF))
-    public String jsxGet_cssText() {
+    public String get_cssText() {
         return rule_.getCssText();
     }
 
@@ -140,7 +140,7 @@ public class CSSRule extends SimpleScriptable {
      * @return the style sheet that contains this rule.
      */
     @JsxGetter(@WebBrowser(FF))
-    public CSSStyleSheet jsxGet_parentStyleSheet() {
+    public CSSStyleSheet get_parentStyleSheet() {
         return stylesheet_;
     }
 
@@ -150,7 +150,7 @@ public class CSSRule extends SimpleScriptable {
      * @return the parent rule
      */
     @JsxGetter(@WebBrowser(FF))
-    public CSSRule jsxGet_parentRule() {
+    public CSSRule get_parentRule() {
         final org.w3c.dom.css.CSSRule parentRule = rule_.getParentRule();
         if (parentRule != null) {
             return CSSRule.create(stylesheet_, parentRule);

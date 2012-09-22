@@ -65,7 +65,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>availHeight</tt> property
      */
     @JsxGetter
-    public int jsxGet_availHeight() {
+    public int get_availHeight() {
         return height_;
     }
 
@@ -74,7 +74,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>availLeft</tt> property
      */
     @JsxGetter
-    public int jsxGet_availLeft() {
+    public int get_availLeft() {
         return left_;
     }
 
@@ -83,7 +83,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>availTop</tt> property
      */
     @JsxGetter
-    public int jsxGet_availTop() {
+    public int get_availTop() {
         return top_;
     }
 
@@ -92,7 +92,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>availWidth</tt> property
      */
     @JsxGetter
-    public int jsxGet_availWidth() {
+    public int get_availWidth() {
         return width_;
     }
 
@@ -101,7 +101,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>bufferDepth</tt> property
      */
     @JsxGetter
-    public int jsxGet_bufferDepth() {
+    public int get_bufferDepth() {
         return bufferDepth_;
     }
 
@@ -119,7 +119,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>colorDepth</tt> property
      */
     @JsxGetter
-    public int jsxGet_colorDepth() {
+    public int get_colorDepth() {
         return colorDepth_;
     }
 
@@ -128,7 +128,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>deviceXDPI</tt> property
      */
     @JsxGetter
-    public int jsxGet_deviceXDPI() {
+    public int get_deviceXDPI() {
         return dpi_;
     }
 
@@ -137,7 +137,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>deviceYDPI</tt> property
      */
     @JsxGetter
-    public int jsxGet_deviceYDPI() {
+    public int get_deviceYDPI() {
         return dpi_;
     }
 
@@ -146,7 +146,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>fontSmoothingEnabled</tt> property
      */
     @JsxGetter
-    public boolean jsxGet_fontSmoothingEnabled() {
+    public boolean get_fontSmoothingEnabled() {
         return fontSmoothingEnabled_;
     }
 
@@ -155,7 +155,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>height</tt> property
      */
     @JsxGetter
-    public int jsxGet_height() {
+    public int get_height() {
         return height_;
     }
 
@@ -164,7 +164,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>left</tt> property
      */
     @JsxGetter
-    public int jsxGet_left() {
+    public int get_left() {
         return left_;
     }
 
@@ -182,7 +182,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>logicalXDPI</tt> property
      */
     @JsxGetter
-    public int jsxGet_logicalXDPI() {
+    public int get_logicalXDPI() {
         return dpi_;
     }
 
@@ -191,7 +191,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>logicalYDPI</tt> property
      */
     @JsxGetter
-    public int jsxGet_logicalYDPI() {
+    public int get_logicalYDPI() {
         return dpi_;
     }
 
@@ -200,7 +200,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>pixelDepth</tt> property
      */
     @JsxGetter
-    public int jsxGet_pixelDepth() {
+    public int get_pixelDepth() {
         return colorDepth_;
     }
 
@@ -209,7 +209,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>top</tt> property
      */
     @JsxGetter
-    public int jsxGet_top() {
+    public int get_top() {
         return top_;
     }
 
@@ -227,7 +227,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>updateInterval</tt> property
      */
     @JsxGetter
-    public int jsxGet_updateInterval() {
+    public int get_updateInterval() {
         return updateInterval_;
     }
 
@@ -245,7 +245,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>width</tt> property
      */
     @JsxGetter
-    public int jsxGet_width() {
+    public int get_width() {
         return width_;
     }
 }

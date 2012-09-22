@@ -57,7 +57,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534377.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public int jsxGet_rowIndex() {
+    public int get_rowIndex() {
         final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
         final HtmlTable table = row.getEnclosingTable();
         if (table == null) { // a not attached document.createElement('TR')
@@ -74,7 +74,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * DOM Level 1</a>
      */
     @JsxGetter
-    public int jsxGet_sectionRowIndex() {
+    public int get_sectionRowIndex() {
         DomNode row = getDomNodeOrDie();
         final HtmlTable table = ((HtmlTableRow) row).getEnclosingTable();
         if (table == null) { // a not attached document.createElement('TR')
@@ -100,7 +100,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @return the cells in the row
      */
     @JsxGetter
-    public Object jsxGet_cells() {
+    public Object get_cells() {
         if (cells_ == null) {
             final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
             cells_ = new HTMLCollection(row, false, "cells") {
@@ -119,7 +119,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String jsxGet_bgColor() {
+    public String get_bgColor() {
         return getDomNodeOrDie().getAttribute("bgColor");
     }
 

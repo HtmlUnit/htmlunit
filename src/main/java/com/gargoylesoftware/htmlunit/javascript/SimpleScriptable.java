@@ -451,7 +451,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
                     name, getClassName(), Context.toString(value));
         }
         try {
-            final Method m = getClass().getMethod("jsxGet_" + name);
+            final Method m = getClass().getMethod("get_" + name);
             switch (m.getAnnotation(CanSetReadOnly.class).value()) {
                 case YES:
                     return true;

@@ -345,7 +345,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>
      */
     @JsxGetter
-    public final int jsxGet_length() {
+    public final int get_length() {
         return getElements().size();
     }
 
@@ -564,7 +564,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      * {@inheritDoc}
      */
     public int getLength() {
-        return jsxGet_length();
+        return get_length();
     }
 
     /**

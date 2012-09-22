@@ -59,7 +59,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
 
     @JsxGetter
-    public String jsxGet_rows() {
+    public String get_rows() {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         return htmlFrameSet.getRowsAttribute();
     }
@@ -83,7 +83,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * @return the cols attribute value
      */
     @JsxGetter
-    public String jsxGet_cols() {
+    public String get_cols() {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         return htmlFrameSet.getColsAttribute();
     }
@@ -93,7 +93,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * @return the "border" attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String jsxGet_border() {
+    public String get_border() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
     }

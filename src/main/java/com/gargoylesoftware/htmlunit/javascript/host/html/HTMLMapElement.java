@@ -45,7 +45,7 @@ public class HTMLMapElement extends HTMLElement {
      * @return the value of this attribute
      */
     @JsxGetter
-    public HTMLCollection jsxGet_areas() {
+    public HTMLCollection get_areas() {
         if (areas_ == null) {
             final HtmlMap map = (HtmlMap) getDomNodeOrDie();
             areas_ = new HTMLCollection(map, false, "HTMLMapElement.areas") {

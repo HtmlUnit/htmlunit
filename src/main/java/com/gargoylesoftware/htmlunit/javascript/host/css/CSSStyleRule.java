@@ -56,7 +56,7 @@ public class CSSStyleRule extends CSSRule {
      * @return the textual representation of the selector for the rule set
      */
     @JsxGetter
-    public String jsxGet_selectorText() {
+    public String get_selectorText() {
         String selectorText = ((org.w3c.dom.css.CSSStyleRule) getRule()).getSelectorText();
         final Matcher m = SELECTOR_PARTS_PATTERN.matcher(selectorText);
         final StringBuffer sb = new StringBuffer();
@@ -97,7 +97,7 @@ public class CSSStyleRule extends CSSRule {
      * @return the declaration-block of this rule set
      */
     @JsxGetter
-    public CSSStyleDeclaration jsxGet_style() {
+    public CSSStyleDeclaration get_style() {
         return new CSSStyleDeclaration(getParentScope(), ((org.w3c.dom.css.CSSStyleRule) getRule()).getStyle());
     }
 }

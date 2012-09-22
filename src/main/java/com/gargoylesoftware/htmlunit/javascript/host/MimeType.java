@@ -62,7 +62,7 @@ public final class MimeType extends SimpleScriptable {
      * @return the description
      */
     @JsxGetter
-    public String jsxGet_description() {
+    public String get_description() {
         return description_;
     }
 
@@ -71,7 +71,7 @@ public final class MimeType extends SimpleScriptable {
      * @return the suffixes
      */
     @JsxGetter
-    public String jsxGet_suffixes() {
+    public String get_suffixes() {
         return suffixes_;
     }
 
@@ -80,7 +80,7 @@ public final class MimeType extends SimpleScriptable {
      * @return the suffixes
      */
     @JsxGetter
-    public String jsxGet_type() {
+    public String get_type() {
         return type_;
     }
 
@@ -89,7 +89,7 @@ public final class MimeType extends SimpleScriptable {
      * @return the plugin
      */
     @JsxGetter
-    public Object jsxGet_enabledPlugin() {
+    public Object get_enabledPlugin() {
         return enabledPlugin_;
     }
 }

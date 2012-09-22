@@ -64,7 +64,7 @@ public class Namespace extends SimpleScriptable {
      * @return the name
      */
     @JsxGetter
-    public String jsxGet_name() {
+    public String get_name() {
         return name_;
     }
 
@@ -73,7 +73,7 @@ public class Namespace extends SimpleScriptable {
      * @return the URN
      */
     @JsxGetter
-    public String jsxGet_urn() {
+    public String get_urn() {
         return urn_;
     }
 

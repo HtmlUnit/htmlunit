@@ -44,8 +44,8 @@ public class XMLAttr extends Attr {
      * @return the value of this attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String jsxGet_text() {
-        return jsxGet_value();
+    public String get_text() {
+        return get_value();
     }
 
     /**
@@ -61,10 +61,10 @@ public class XMLAttr extends Attr {
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_xml() {
-        final StringBuilder sb = new StringBuilder(jsxGet_name());
+    public String get_xml() {
+        final StringBuilder sb = new StringBuilder(get_name());
         sb.append('=').append('"');
-        sb.append(StringUtils.escapeXmlAttributeValue(jsxGet_value()));
+        sb.append(StringUtils.escapeXmlAttributeValue(get_value()));
         sb.append('"');
         return sb.toString();
     }

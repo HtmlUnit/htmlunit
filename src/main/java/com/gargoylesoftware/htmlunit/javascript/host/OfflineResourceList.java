@@ -68,7 +68,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @return the event listener to be called when fetching the application cache manifest and checking for updates
      */
     @JsxGetter
-    public Object jsxGet_onchecking() {
+    public Object get_onchecking() {
         return onchecking_;
     }
 
@@ -86,7 +86,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @return the event listener to be called when an error occurs during the caching process
      */
     @JsxGetter
-    public Object jsxGet_onerror() {
+    public Object get_onerror() {
         return onerror_;
     }
 
@@ -104,7 +104,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @return the event listener to be called when there is no update to download
      */
     @JsxGetter
-    public Object jsxGet_onnoupdate() {
+    public Object get_onnoupdate() {
         return onnoupdate_;
     }
 
@@ -122,7 +122,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @return the event listener to be called when resources are being downloaded into the cache
      */
     @JsxGetter
-    public Object jsxGet_ondownloading() {
+    public Object get_ondownloading() {
         return ondownloading_;
     }
 
@@ -140,7 +140,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @return the event listener to be called periodically throughout the download process
      */
     @JsxGetter
-    public Object jsxGet_onprogress() {
+    public Object get_onprogress() {
         return onprogress_;
     }
 
@@ -158,7 +158,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @return the event listener to be called when a resource update is ready
      */
     @JsxGetter
-    public Object jsxGet_onupdateready() {
+    public Object get_onupdateready() {
         return onupdateready_;
     }
 
@@ -176,7 +176,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @return the event listener to be called when caching is complete
      */
     @JsxGetter
-    public Object jsxGet_oncached() {
+    public Object get_oncached() {
         return oncached_;
     }
 
@@ -194,7 +194,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @return the status of the application cache
      */
     @JsxGetter
-    public short jsxGet_status() {
+    public short get_status() {
         return status_;
     }
 
@@ -203,7 +203,7 @@ public class OfflineResourceList extends SimpleScriptable {
      * @return the number of entries in the dynamically managed offline resource list
      */
     @JsxGetter
-    public int jsxGet_length() {
+    public int get_length() {
         return 0; // TODO: implement
     }
 

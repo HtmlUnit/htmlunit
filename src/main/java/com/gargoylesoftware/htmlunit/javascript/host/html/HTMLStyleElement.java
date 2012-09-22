@@ -53,7 +53,7 @@ public class HTMLStyleElement extends HTMLElement {
      * @return the sheet
      */
     @JsxGetter(@WebBrowser(FF))
-    public CSSStyleSheet jsxGet_sheet() {
+    public CSSStyleSheet get_sheet() {
         if (sheet_ != null) {
             return sheet_;
         }
@@ -82,7 +82,7 @@ public class HTMLStyleElement extends HTMLElement {
      * @return the sheet
      */
     @JsxGetter(@WebBrowser(IE))
-    public CSSStyleSheet jsxGet_styleSheet() {
-        return jsxGet_sheet();
+    public CSSStyleSheet get_styleSheet() {
+        return get_sheet();
     }
 }

@@ -62,7 +62,7 @@ public class Text extends CharacterDataImpl {
      * @return wholeText value
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public String jsxGet_wholeText() {
+    public String get_wholeText() {
         return ((DomText) getDomNodeOrDie()).getWholeText();
     }
 }

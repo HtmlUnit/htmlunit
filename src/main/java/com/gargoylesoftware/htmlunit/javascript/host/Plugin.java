@@ -59,7 +59,7 @@ public class Plugin extends SimpleArray {
      */
     @Override
     protected String getItemName(final Object element) {
-        return ((MimeType) element).jsxGet_type();
+        return ((MimeType) element).get_type();
     }
 
     /**
@@ -67,7 +67,7 @@ public class Plugin extends SimpleArray {
      * @return the description
      */
     @JsxGetter
-    public String jsxGet_description() {
+    public String get_description() {
         return description_;
     }
 
@@ -76,7 +76,7 @@ public class Plugin extends SimpleArray {
      * @return the file name
      */
     @JsxGetter
-    public String jsxGet_filename() {
+    public String get_filename() {
         return filename_;
     }
 
@@ -85,7 +85,7 @@ public class Plugin extends SimpleArray {
      * @return the name
      */
     @JsxGetter
-    public String jsxGet_name() {
+    public String get_name() {
         return name_;
     }
 }

@@ -109,7 +109,7 @@ public class HTMLAppletElement extends HTMLElement {
      * @return the value of the "alt" property
      */
     @JsxGetter
-    public String jsxGet_alt() {
+    public String get_alt() {
         final String alt = getDomNodeOrDie().getAttribute("alt");
         return alt;
     }
@@ -128,7 +128,7 @@ public class HTMLAppletElement extends HTMLElement {
      * @return the "border" attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String jsxGet_border() {
+    public String get_border() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
     }
@@ -147,7 +147,7 @@ public class HTMLAppletElement extends HTMLElement {
      * @return the value of the "align" property
      */
     @JsxGetter
-    public String jsxGet_align() {
+    public String get_align() {
         return getAlign(true);
     }
 

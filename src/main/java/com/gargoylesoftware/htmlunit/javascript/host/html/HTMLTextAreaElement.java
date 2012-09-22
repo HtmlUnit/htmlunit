@@ -57,7 +57,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return the type of this input
      */
     @Override
-    public String jsxGet_type() {
+    public String get_type() {
         return "textarea";
     }
 
@@ -66,7 +66,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return the value of the "value" attribute
      */
     @Override
-    public String jsxGet_value() {
+    public String get_value() {
         String value = ((HtmlTextArea) getDomNodeOrDie()).getText();
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.TEXTAREA_CRNL)) {
             value = NORMALIZE_VALUE_PATTERN.matcher(value).replaceAll("$1\r\n");
@@ -88,7 +88,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return the number of columns in this text area
      */
     @JsxGetter
-    public int jsxGet_cols() {
+    public int get_cols() {
         final String s = getDomNodeOrDie().getAttribute("cols");
         try {
             return Integer.parseInt(s);
@@ -128,7 +128,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return the number of rows in this text area
      */
     @JsxGetter
-    public int jsxGet_rows() {
+    public int get_rows() {
         int rows;
         try {
             final String s = getDomNodeOrDie().getAttribute("rows");
@@ -173,7 +173,7 @@ public class HTMLTextAreaElement extends FormField {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533718.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String jsxGet_defaultValue() {
+    public String get_defaultValue() {
         String value = ((HtmlTextArea) getDomNodeOrDie()).getDefaultValue();
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.TEXTAREA_CRNL)) {
             value = NORMALIZE_VALUE_PATTERN.matcher(value).replaceAll("$1\r\n");
@@ -196,8 +196,8 @@ public class HTMLTextAreaElement extends FormField {
      * @return the text length
      */
     @JsxGetter(@WebBrowser(FF))
-    public int jsxGet_textLength() {
-        return jsxGet_value().length();
+    public int get_textLength() {
+        return get_value().length();
     }
 
     /**
@@ -205,7 +205,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return the selection start
      */
     @JsxGetter(@WebBrowser(FF))
-    public int jsxGet_selectionStart() {
+    public int get_selectionStart() {
         return ((HtmlTextArea) getDomNodeOrDie()).getSelectionStart();
     }
 
@@ -223,7 +223,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return the selection end
      */
     @JsxGetter(@WebBrowser(FF))
-    public int jsxGet_selectionEnd() {
+    public int get_selectionEnd() {
         return ((HtmlTextArea) getDomNodeOrDie()).getSelectionEnd();
     }
 
@@ -260,7 +260,7 @@ public class HTMLTextAreaElement extends FormField {
      * @return the readOnly attribute
      */
     @JsxGetter
-    public boolean jsxGet_readOnly() {
+    public boolean get_readOnly() {
         return ((HtmlTextArea) getDomNodeOrDie()).isReadOnly();
     }
 
@@ -278,8 +278,8 @@ public class HTMLTextAreaElement extends FormField {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public String jsxGet_accessKey() {
-        return super.jsxGet_accessKey();
+    public String get_accessKey() {
+        return super.get_accessKey();
     }
 
     /**

@@ -74,7 +74,7 @@ public class History extends SimpleScriptable {
     public boolean has(final int index, final Scriptable start) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_157)) {
             final History h = (History) start;
-            if (index >= 0 && index < h.jsxGet_length()) {
+            if (index >= 0 && index < h.get_length()) {
                 return true;
             }
         }
@@ -87,7 +87,7 @@ public class History extends SimpleScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         final History h = (History) start;
-        if (index < 0 || index >= h.jsxGet_length()) {
+        if (index < 0 || index >= h.get_length()) {
             return NOT_FOUND;
         }
         return item(index);
@@ -98,7 +98,7 @@ public class History extends SimpleScriptable {
      * @return the "length" property
      */
     @JsxGetter
-    public int jsxGet_length() {
+    public int get_length() {
         final WebWindow w = getWindow().getWebWindow();
         return w.getHistory().getLength();
     }
@@ -151,7 +151,7 @@ public class History extends SimpleScriptable {
      * @return the "current" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public String jsxGet_current() {
+    public String get_current() {
         throw Context.reportRuntimeError("Permission denied to get property History.current");
     }
 
@@ -160,7 +160,7 @@ public class History extends SimpleScriptable {
      * @return the "previous" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public String jsxGet_previous() {
+    public String get_previous() {
         throw Context.reportRuntimeError("Permission denied to get property History.previous");
     }
 
@@ -169,7 +169,7 @@ public class History extends SimpleScriptable {
      * @return the "next" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public String jsxGet_next() {
+    public String get_next() {
         throw Context.reportRuntimeError("Permission denied to get property History.next");
     }
 

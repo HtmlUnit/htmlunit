@@ -40,7 +40,7 @@ public class HTMLInsElement extends HTMLElement {
      * @return the value of the "cite" property
      */
     @JsxGetter
-    public String jsxGet_cite() {
+    public String get_cite() {
         final String cite = getDomNodeOrDie().getAttribute("cite");
         return cite;
     }
@@ -59,7 +59,7 @@ public class HTMLInsElement extends HTMLElement {
      * @return the value of the "dateTime" property
      */
     @JsxGetter
-    public String jsxGet_dateTime() {
+    public String get_dateTime() {
         final String cite = getDomNodeOrDie().getAttribute("datetime");
         return cite;
     }

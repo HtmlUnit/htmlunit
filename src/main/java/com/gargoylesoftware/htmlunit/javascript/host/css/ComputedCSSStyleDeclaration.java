@@ -281,16 +281,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_backgroundAttachment() {
-        return defaultIfEmpty(super.jsxGet_backgroundAttachment(), "scroll");
+    public String get_backgroundAttachment() {
+        return defaultIfEmpty(super.get_backgroundAttachment(), "scroll");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_backgroundColor() {
-        String value = super.jsxGet_backgroundColor();
+    public String get_backgroundColor() {
+        String value = super.get_backgroundColor();
         if (StringUtils.isEmpty(value)) {
             value = "transparent";
         }
@@ -305,8 +305,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_backgroundImage() {
-        return defaultIfEmpty(super.jsxGet_backgroundImage(), "none");
+    public String get_backgroundImage() {
+        return defaultIfEmpty(super.get_backgroundImage(), "none");
     }
 
     /**
@@ -314,8 +314,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the style attribute
      */
     @Override
-    public String jsxGet_backgroundPosition() {
-        String bg = super.jsxGet_backgroundPosition();
+    public String get_backgroundPosition() {
+        String bg = super.get_backgroundPosition();
         if (StringUtils.isNotBlank(bg)) {
             bg = StringUtils.replace(bg, "left", "0%");
             bg = StringUtils.replace(bg, "right", "100%");
@@ -332,216 +332,216 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_backgroundRepeat() {
-        return defaultIfEmpty(super.jsxGet_backgroundRepeat(), "repeat");
+    public String get_backgroundRepeat() {
+        return defaultIfEmpty(super.get_backgroundRepeat(), "repeat");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderBottomColor() {
-        return defaultIfEmpty(super.jsxGet_borderBottomColor(), "rgb(0, 0, 0)");
+    public String get_borderBottomColor() {
+        return defaultIfEmpty(super.get_borderBottomColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderBottomStyle() {
-        return defaultIfEmpty(super.jsxGet_borderBottomStyle(), "none");
+    public String get_borderBottomStyle() {
+        return defaultIfEmpty(super.get_borderBottomStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderBottomWidth() {
-        return pixelString(defaultIfEmpty(super.jsxGet_borderBottomWidth(), "0px"));
+    public String get_borderBottomWidth() {
+        return pixelString(defaultIfEmpty(super.get_borderBottomWidth(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderCollapse() {
-        return defaultIfEmpty(super.jsxGet_borderCollapse(), "separate");
+    public String get_borderCollapse() {
+        return defaultIfEmpty(super.get_borderCollapse(), "separate");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderLeftColor() {
-        return defaultIfEmpty(super.jsxGet_borderLeftColor(), "rgb(0, 0, 0)");
+    public String get_borderLeftColor() {
+        return defaultIfEmpty(super.get_borderLeftColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderLeftStyle() {
-        return defaultIfEmpty(super.jsxGet_borderLeftStyle(), "none");
+    public String get_borderLeftStyle() {
+        return defaultIfEmpty(super.get_borderLeftStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderLeftWidth() {
-        return pixelString(defaultIfEmpty(super.jsxGet_borderLeftWidth(), "0px"));
+    public String get_borderLeftWidth() {
+        return pixelString(defaultIfEmpty(super.get_borderLeftWidth(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderRightColor() {
-        return defaultIfEmpty(super.jsxGet_borderRightColor(), "rgb(0, 0, 0)");
+    public String get_borderRightColor() {
+        return defaultIfEmpty(super.get_borderRightColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderRightStyle() {
-        return defaultIfEmpty(super.jsxGet_borderRightStyle(), "none");
+    public String get_borderRightStyle() {
+        return defaultIfEmpty(super.get_borderRightStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderRightWidth() {
-        return pixelString(defaultIfEmpty(super.jsxGet_borderRightWidth(), "0px"));
+    public String get_borderRightWidth() {
+        return pixelString(defaultIfEmpty(super.get_borderRightWidth(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderSpacing() {
-        return defaultIfEmpty(super.jsxGet_borderSpacing(), "0px 0px");
+    public String get_borderSpacing() {
+        return defaultIfEmpty(super.get_borderSpacing(), "0px 0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderTopColor() {
-        return defaultIfEmpty(super.jsxGet_borderTopColor(), "rgb(0, 0, 0)");
+    public String get_borderTopColor() {
+        return defaultIfEmpty(super.get_borderTopColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderTopStyle() {
-        return defaultIfEmpty(super.jsxGet_borderTopStyle(), "none");
+    public String get_borderTopStyle() {
+        return defaultIfEmpty(super.get_borderTopStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_borderTopWidth() {
-        return pixelString(defaultIfEmpty(super.jsxGet_borderTopWidth(), "0px"));
+    public String get_borderTopWidth() {
+        return pixelString(defaultIfEmpty(super.get_borderTopWidth(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_bottom() {
-        return defaultIfEmpty(super.jsxGet_bottom(), "auto");
+    public String get_bottom() {
+        return defaultIfEmpty(super.get_bottom(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_captionSide() {
-        return defaultIfEmpty(super.jsxGet_captionSide(), "top");
+    public String get_captionSide() {
+        return defaultIfEmpty(super.get_captionSide(), "top");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_clear() {
-        return defaultIfEmpty(super.jsxGet_clear(), "none");
+    public String get_clear() {
+        return defaultIfEmpty(super.get_clear(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_clip() {
-        return defaultIfEmpty(super.jsxGet_clip(), "auto");
+    public String get_clip() {
+        return defaultIfEmpty(super.get_clip(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_content() {
-        return defaultIfEmpty(super.jsxGet_content(), "none");
+    public String get_content() {
+        return defaultIfEmpty(super.get_content(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_color() {
-        return defaultIfEmpty(super.jsxGet_color(), "rgb(0, 0, 0)");
+    public String get_color() {
+        return defaultIfEmpty(super.get_color(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_counterIncrement() {
-        return defaultIfEmpty(super.jsxGet_counterIncrement(), "none");
+    public String get_counterIncrement() {
+        return defaultIfEmpty(super.get_counterIncrement(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_counterReset() {
-        return defaultIfEmpty(super.jsxGet_counterReset(), "none");
+    public String get_counterReset() {
+        return defaultIfEmpty(super.get_counterReset(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_cssFloat() {
-        return defaultIfEmpty(super.jsxGet_cssFloat(), "none");
+    public String get_cssFloat() {
+        return defaultIfEmpty(super.get_cssFloat(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_cursor() {
-        return defaultIfEmpty(super.jsxGet_cursor(), "auto");
+    public String get_cursor() {
+        return defaultIfEmpty(super.get_cursor(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_direction() {
-        return defaultIfEmpty(super.jsxGet_direction(), "ltr");
+    public String get_direction() {
+        return defaultIfEmpty(super.get_direction(), "ltr");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_display() {
-        return defaultIfEmpty(super.jsxGet_display(), getDefaultStyleDisplay());
+    public String get_display() {
+        return defaultIfEmpty(super.get_display(), getDefaultStyleDisplay());
     }
 
     private String getDefaultStyleDisplay() {
@@ -561,7 +561,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
             defaultDisplays_ = Collections.unmodifiableMap(map);
         }
-        final String defaultValue = defaultDisplays_.get(getElement().jsxGet_tagName());
+        final String defaultValue = defaultDisplays_.get(getElement().get_tagName());
         if (defaultValue == null) {
             return "block";
         }
@@ -572,28 +572,28 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_emptyCells() {
-        return defaultIfEmpty(super.jsxGet_emptyCells(), "-moz-show-background");
+    public String get_emptyCells() {
+        return defaultIfEmpty(super.get_emptyCells(), "-moz-show-background");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_fontFamily() {
-        return defaultIfEmpty(super.jsxGet_fontFamily(), "serif");
+    public String get_fontFamily() {
+        return defaultIfEmpty(super.get_fontFamily(), "serif");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_fontSize() {
-        String value = super.jsxGet_fontSize();
+    public String get_fontSize() {
+        String value = super.get_fontSize();
         if (value.isEmpty()) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent != null) {
-                value = parent.jsxGet_currentStyle().jsxGet_fontSize();
+                value = parent.get_currentStyle().get_fontSize();
             }
         }
         if (value.isEmpty()) {
@@ -606,52 +606,52 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_fontSizeAdjust() {
-        return defaultIfEmpty(super.jsxGet_fontSizeAdjust(), "none");
+    public String get_fontSizeAdjust() {
+        return defaultIfEmpty(super.get_fontSizeAdjust(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_fontStretch() {
+    public String get_fontStretch() {
         String defaultStretch = "";
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL)) {
             defaultStretch = "normal";
         }
-        return defaultIfEmpty(super.jsxGet_fontStretch(), defaultStretch);
+        return defaultIfEmpty(super.get_fontStretch(), defaultStretch);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_fontStyle() {
-        return defaultIfEmpty(super.jsxGet_fontStyle(), "normal");
+    public String get_fontStyle() {
+        return defaultIfEmpty(super.get_fontStyle(), "normal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_fontVariant() {
-        return defaultIfEmpty(super.jsxGet_fontVariant(), "normal");
+    public String get_fontVariant() {
+        return defaultIfEmpty(super.get_fontVariant(), "normal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_fontWeight() {
-        return defaultIfEmpty(super.jsxGet_fontWeight(), "400");
+    public String get_fontWeight() {
+        return defaultIfEmpty(super.get_fontWeight(), "400");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_height() {
+    public String get_height() {
         return pixelString(getElement(), new CssValue(Window.WINDOW_HEIGHT) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
                 return defaultIfEmpty(style.getStyleAttribute("height", null), "362px");
@@ -663,763 +663,763 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_imeMode() {
-        return defaultIfEmpty(super.jsxGet_imeMode(), "auto");
+    public String get_imeMode() {
+        return defaultIfEmpty(super.get_imeMode(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_left() {
-        return defaultIfEmpty(super.jsxGet_left(), "auto");
+    public String get_left() {
+        return defaultIfEmpty(super.get_left(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_letterSpacing() {
-        return defaultIfEmpty(super.jsxGet_letterSpacing(), "normal");
+    public String get_letterSpacing() {
+        return defaultIfEmpty(super.get_letterSpacing(), "normal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_lineHeight() {
-        return defaultIfEmpty(super.jsxGet_lineHeight(), "20px");
+    public String get_lineHeight() {
+        return defaultIfEmpty(super.get_lineHeight(), "20px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_listStyleImage() {
-        return defaultIfEmpty(super.jsxGet_listStyleImage(), "none");
+    public String get_listStyleImage() {
+        return defaultIfEmpty(super.get_listStyleImage(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_listStylePosition() {
-        return defaultIfEmpty(super.jsxGet_listStylePosition(), "outside");
+    public String get_listStylePosition() {
+        return defaultIfEmpty(super.get_listStylePosition(), "outside");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_listStyleType() {
-        return defaultIfEmpty(super.jsxGet_listStyleType(), "disc");
+    public String get_listStyleType() {
+        return defaultIfEmpty(super.get_listStyleType(), "disc");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_marginBottom() {
-        return pixelString(defaultIfEmpty(super.jsxGet_marginBottom(), "0px"));
+    public String get_marginBottom() {
+        return pixelString(defaultIfEmpty(super.get_marginBottom(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_marginLeft() {
-        return pixelString(defaultIfEmpty(super.jsxGet_marginLeft(), "0px"));
+    public String get_marginLeft() {
+        return pixelString(defaultIfEmpty(super.get_marginLeft(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_marginRight() {
-        return pixelString(defaultIfEmpty(super.jsxGet_marginRight(), "0px"));
+    public String get_marginRight() {
+        return pixelString(defaultIfEmpty(super.get_marginRight(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_marginTop() {
-        return pixelString(defaultIfEmpty(super.jsxGet_marginTop(), "0px"));
+    public String get_marginTop() {
+        return pixelString(defaultIfEmpty(super.get_marginTop(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_markerOffset() {
-        return defaultIfEmpty(super.jsxGet_markerOffset(), "auto");
+    public String get_markerOffset() {
+        return defaultIfEmpty(super.get_markerOffset(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_maxHeight() {
-        return defaultIfEmpty(super.jsxGet_maxHeight(), "none");
+    public String get_maxHeight() {
+        return defaultIfEmpty(super.get_maxHeight(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_maxWidth() {
-        return defaultIfEmpty(super.jsxGet_maxWidth(), "none");
+    public String get_maxWidth() {
+        return defaultIfEmpty(super.get_maxWidth(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_minHeight() {
-        return defaultIfEmpty(super.jsxGet_minHeight(), "0px");
+    public String get_minHeight() {
+        return defaultIfEmpty(super.get_minHeight(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_minWidth() {
-        return defaultIfEmpty(super.jsxGet_minWidth(), "0px");
+    public String get_minWidth() {
+        return defaultIfEmpty(super.get_minWidth(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozAppearance() {
-        return defaultIfEmpty(super.jsxGet_MozAppearance(), "none");
+    public String get_MozAppearance() {
+        return defaultIfEmpty(super.get_MozAppearance(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBackgroundClip() {
-        return defaultIfEmpty(super.jsxGet_MozBackgroundClip(), "border");
+    public String get_MozBackgroundClip() {
+        return defaultIfEmpty(super.get_MozBackgroundClip(), "border");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBackgroundInlinePolicy() {
-        return defaultIfEmpty(super.jsxGet_MozBackgroundInlinePolicy(), "continuous");
+    public String get_MozBackgroundInlinePolicy() {
+        return defaultIfEmpty(super.get_MozBackgroundInlinePolicy(), "continuous");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBackgroundOrigin() {
-        return defaultIfEmpty(super.jsxGet_MozBackgroundOrigin(), "padding");
+    public String get_MozBackgroundOrigin() {
+        return defaultIfEmpty(super.get_MozBackgroundOrigin(), "padding");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBackgroundSize() {
-        return defaultIfEmpty(super.jsxGet_MozBackgroundSize(), "auto auto");
+    public String get_MozBackgroundSize() {
+        return defaultIfEmpty(super.get_MozBackgroundSize(), "auto auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBinding() {
-        return defaultIfEmpty(super.jsxGet_MozBinding(), "none");
+    public String get_MozBinding() {
+        return defaultIfEmpty(super.get_MozBinding(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBorderBottomColors() {
-        return defaultIfEmpty(super.jsxGet_MozBorderBottomColors(), "none");
+    public String get_MozBorderBottomColors() {
+        return defaultIfEmpty(super.get_MozBorderBottomColors(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBorderImage() {
-        return defaultIfEmpty(super.jsxGet_MozBorderImage(), "none");
+    public String get_MozBorderImage() {
+        return defaultIfEmpty(super.get_MozBorderImage(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBorderLeftColors() {
-        return defaultIfEmpty(super.jsxGet_MozBorderLeftColors(), "none");
+    public String get_MozBorderLeftColors() {
+        return defaultIfEmpty(super.get_MozBorderLeftColors(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBorderRadiusBottomleft() {
-        return defaultIfEmpty(super.jsxGet_MozBorderRadiusBottomleft(), "0px");
+    public String get_MozBorderRadiusBottomleft() {
+        return defaultIfEmpty(super.get_MozBorderRadiusBottomleft(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBorderRadiusBottomright() {
-        return defaultIfEmpty(super.jsxGet_MozBorderRadiusBottomright(), "0px");
+    public String get_MozBorderRadiusBottomright() {
+        return defaultIfEmpty(super.get_MozBorderRadiusBottomright(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBorderRadiusTopleft() {
-        return defaultIfEmpty(super.jsxGet_MozBorderRadiusTopleft(), "0px");
+    public String get_MozBorderRadiusTopleft() {
+        return defaultIfEmpty(super.get_MozBorderRadiusTopleft(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBorderRadiusTopright() {
-        return defaultIfEmpty(super.jsxGet_MozBorderRadiusTopright(), "0px");
+    public String get_MozBorderRadiusTopright() {
+        return defaultIfEmpty(super.get_MozBorderRadiusTopright(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBorderRightColors() {
-        return defaultIfEmpty(super.jsxGet_MozBorderRightColors(), "none");
+    public String get_MozBorderRightColors() {
+        return defaultIfEmpty(super.get_MozBorderRightColors(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBorderTopColors() {
-        return defaultIfEmpty(super.jsxGet_MozBorderTopColors(), "none");
+    public String get_MozBorderTopColors() {
+        return defaultIfEmpty(super.get_MozBorderTopColors(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBoxAlign() {
-        return defaultIfEmpty(super.jsxGet_MozBoxAlign(), "stretch");
+    public String get_MozBoxAlign() {
+        return defaultIfEmpty(super.get_MozBoxAlign(), "stretch");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBoxDirection() {
-        return defaultIfEmpty(super.jsxGet_MozBoxDirection(), "normal");
+    public String get_MozBoxDirection() {
+        return defaultIfEmpty(super.get_MozBoxDirection(), "normal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBoxFlex() {
-        return defaultIfEmpty(super.jsxGet_MozBoxFlex(), "0");
+    public String get_MozBoxFlex() {
+        return defaultIfEmpty(super.get_MozBoxFlex(), "0");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBoxOrdinalGroup() {
-        return defaultIfEmpty(super.jsxGet_MozBoxOrdinalGroup(), "1");
+    public String get_MozBoxOrdinalGroup() {
+        return defaultIfEmpty(super.get_MozBoxOrdinalGroup(), "1");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBoxOrient() {
-        return defaultIfEmpty(super.jsxGet_MozBoxOrient(), "horizontal");
+    public String get_MozBoxOrient() {
+        return defaultIfEmpty(super.get_MozBoxOrient(), "horizontal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBoxShadow() {
-        return defaultIfEmpty(super.jsxGet_MozBoxShadow(), "none");
+    public String get_MozBoxShadow() {
+        return defaultIfEmpty(super.get_MozBoxShadow(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBoxPack() {
-        return defaultIfEmpty(super.jsxGet_MozBoxPack(), "start");
+    public String get_MozBoxPack() {
+        return defaultIfEmpty(super.get_MozBoxPack(), "start");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozBoxSizing() {
-        return defaultIfEmpty(super.jsxGet_MozBoxSizing(), "content-box");
+    public String get_MozBoxSizing() {
+        return defaultIfEmpty(super.get_MozBoxSizing(), "content-box");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozColumnCount() {
-        return defaultIfEmpty(super.jsxGet_MozColumnCount(), "auto");
+    public String get_MozColumnCount() {
+        return defaultIfEmpty(super.get_MozColumnCount(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozColumnGap() {
-        return defaultIfEmpty(super.jsxGet_MozColumnGap(), "16px");
+    public String get_MozColumnGap() {
+        return defaultIfEmpty(super.get_MozColumnGap(), "16px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozColumnRuleColor() {
-        return defaultIfEmpty(super.jsxGet_MozColumnRuleColor(), "rgb(0, 0, 0)");
+    public String get_MozColumnRuleColor() {
+        return defaultIfEmpty(super.get_MozColumnRuleColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozColumnRuleStyle() {
-        return defaultIfEmpty(super.jsxGet_MozColumnRuleStyle(), "none");
+    public String get_MozColumnRuleStyle() {
+        return defaultIfEmpty(super.get_MozColumnRuleStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozColumnRuleWidth() {
-        return defaultIfEmpty(super.jsxGet_MozColumnRuleWidth(), "0px");
+    public String get_MozColumnRuleWidth() {
+        return defaultIfEmpty(super.get_MozColumnRuleWidth(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozColumnWidth() {
-        return defaultIfEmpty(super.jsxGet_MozColumnWidth(), "auto");
+    public String get_MozColumnWidth() {
+        return defaultIfEmpty(super.get_MozColumnWidth(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozFloatEdge() {
-        return defaultIfEmpty(super.jsxGet_MozFloatEdge(), "content-box");
+    public String get_MozFloatEdge() {
+        return defaultIfEmpty(super.get_MozFloatEdge(), "content-box");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozForceBrokenImageIcon() {
-        return defaultIfEmpty(super.jsxGet_MozForceBrokenImageIcon(), "0");
+    public String get_MozForceBrokenImageIcon() {
+        return defaultIfEmpty(super.get_MozForceBrokenImageIcon(), "0");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozImageRegion() {
-        return defaultIfEmpty(super.jsxGet_MozImageRegion(), "auto");
+    public String get_MozImageRegion() {
+        return defaultIfEmpty(super.get_MozImageRegion(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozOpacity() {
-        return defaultIfEmpty(super.jsxGet_MozOpacity(), "1");
+    public String get_MozOpacity() {
+        return defaultIfEmpty(super.get_MozOpacity(), "1");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozOutlineColor() {
-        return defaultIfEmpty(super.jsxGet_MozOutlineColor(), "rgb(0, 0, 0)");
+    public String get_MozOutlineColor() {
+        return defaultIfEmpty(super.get_MozOutlineColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozOutlineOffset() {
-        return defaultIfEmpty(super.jsxGet_MozOutlineOffset(), "0px");
+    public String get_MozOutlineOffset() {
+        return defaultIfEmpty(super.get_MozOutlineOffset(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozOutlineRadiusBottomleft() {
-        return defaultIfEmpty(super.jsxGet_MozOutlineRadiusBottomleft(), "0px");
+    public String get_MozOutlineRadiusBottomleft() {
+        return defaultIfEmpty(super.get_MozOutlineRadiusBottomleft(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozOutlineRadiusBottomright() {
-        return defaultIfEmpty(super.jsxGet_MozOutlineRadiusBottomright(), "0px");
+    public String get_MozOutlineRadiusBottomright() {
+        return defaultIfEmpty(super.get_MozOutlineRadiusBottomright(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozOutlineRadiusTopleft() {
-        return defaultIfEmpty(super.jsxGet_MozOutlineRadiusTopleft(), "0px");
+    public String get_MozOutlineRadiusTopleft() {
+        return defaultIfEmpty(super.get_MozOutlineRadiusTopleft(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozOutlineRadiusTopright() {
-        return defaultIfEmpty(super.jsxGet_MozOutlineRadiusTopright(), "0px");
+    public String get_MozOutlineRadiusTopright() {
+        return defaultIfEmpty(super.get_MozOutlineRadiusTopright(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozOutlineStyle() {
-        return defaultIfEmpty(super.jsxGet_MozOutlineStyle(), "none");
+    public String get_MozOutlineStyle() {
+        return defaultIfEmpty(super.get_MozOutlineStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozOutlineWidth() {
-        return defaultIfEmpty(super.jsxGet_MozOutlineWidth(), "0px");
+    public String get_MozOutlineWidth() {
+        return defaultIfEmpty(super.get_MozOutlineWidth(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozStackSizing() {
-        return defaultIfEmpty(super.jsxGet_MozStackSizing(), "stretch-to-fit");
+    public String get_MozStackSizing() {
+        return defaultIfEmpty(super.get_MozStackSizing(), "stretch-to-fit");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozTransform() {
-        return defaultIfEmpty(super.jsxGet_MozTransform(), "none");
+    public String get_MozTransform() {
+        return defaultIfEmpty(super.get_MozTransform(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozTransformOrigin() {
-        return defaultIfEmpty(super.jsxGet_MozTransformOrigin(), "50% 50%");
+    public String get_MozTransformOrigin() {
+        return defaultIfEmpty(super.get_MozTransformOrigin(), "50% 50%");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozUserFocus() {
-        return defaultIfEmpty(super.jsxGet_MozUserFocus(), "none");
+    public String get_MozUserFocus() {
+        return defaultIfEmpty(super.get_MozUserFocus(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozUserInput() {
-        return defaultIfEmpty(super.jsxGet_MozUserInput(), "auto");
+    public String get_MozUserInput() {
+        return defaultIfEmpty(super.get_MozUserInput(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozUserModify() {
-        return defaultIfEmpty(super.jsxGet_MozUserModify(), "read-only");
+    public String get_MozUserModify() {
+        return defaultIfEmpty(super.get_MozUserModify(), "read-only");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozUserSelect() {
-        return defaultIfEmpty(super.jsxGet_MozUserSelect(), "auto");
+    public String get_MozUserSelect() {
+        return defaultIfEmpty(super.get_MozUserSelect(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_MozWindowShadow() {
-        return defaultIfEmpty(super.jsxGet_MozWindowShadow(), "default");
+    public String get_MozWindowShadow() {
+        return defaultIfEmpty(super.get_MozWindowShadow(), "default");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_opacity() {
-        return defaultIfEmpty(super.jsxGet_opacity(), "1");
+    public String get_opacity() {
+        return defaultIfEmpty(super.get_opacity(), "1");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_outlineColor() {
-        return defaultIfEmpty(super.jsxGet_outlineColor(), "rgb(0, 0, 0)");
+    public String get_outlineColor() {
+        return defaultIfEmpty(super.get_outlineColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_outlineOffset() {
-        return defaultIfEmpty(super.jsxGet_outlineOffset(), "0px");
+    public String get_outlineOffset() {
+        return defaultIfEmpty(super.get_outlineOffset(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_outlineStyle() {
-        return defaultIfEmpty(super.jsxGet_outlineStyle(), "none");
+    public String get_outlineStyle() {
+        return defaultIfEmpty(super.get_outlineStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_outlineWidth() {
-        return defaultIfEmpty(super.jsxGet_outlineWidth(), "0px");
+    public String get_outlineWidth() {
+        return defaultIfEmpty(super.get_outlineWidth(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_overflow() {
-        return defaultIfEmpty(super.jsxGet_overflow(), "visible");
+    public String get_overflow() {
+        return defaultIfEmpty(super.get_overflow(), "visible");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_overflowX() {
-        return defaultIfEmpty(super.jsxGet_overflowX(), "visible");
+    public String get_overflowX() {
+        return defaultIfEmpty(super.get_overflowX(), "visible");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_overflowY() {
-        return defaultIfEmpty(super.jsxGet_overflowY(), "visible");
+    public String get_overflowY() {
+        return defaultIfEmpty(super.get_overflowY(), "visible");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_pageBreakAfter() {
-        return defaultIfEmpty(super.jsxGet_pageBreakAfter(), "auto");
+    public String get_pageBreakAfter() {
+        return defaultIfEmpty(super.get_pageBreakAfter(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_pageBreakBefore() {
-        return defaultIfEmpty(super.jsxGet_pageBreakBefore(), "auto");
+    public String get_pageBreakBefore() {
+        return defaultIfEmpty(super.get_pageBreakBefore(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_paddingBottom() {
-        return pixelString(defaultIfEmpty(super.jsxGet_paddingBottom(), "0px"));
+    public String get_paddingBottom() {
+        return pixelString(defaultIfEmpty(super.get_paddingBottom(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_paddingLeft() {
-        return pixelString(defaultIfEmpty(super.jsxGet_paddingLeft(), "0px"));
+    public String get_paddingLeft() {
+        return pixelString(defaultIfEmpty(super.get_paddingLeft(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_paddingRight() {
-        return pixelString(defaultIfEmpty(super.jsxGet_paddingRight(), "0px"));
+    public String get_paddingRight() {
+        return pixelString(defaultIfEmpty(super.get_paddingRight(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_paddingTop() {
-        return pixelString(defaultIfEmpty(super.jsxGet_paddingTop(), "0px"));
+    public String get_paddingTop() {
+        return pixelString(defaultIfEmpty(super.get_paddingTop(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_pointerEvents() {
-        return defaultIfEmpty(super.jsxGet_pointerEvents(), "auto");
+    public String get_pointerEvents() {
+        return defaultIfEmpty(super.get_pointerEvents(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_position() {
-        return defaultIfEmpty(super.jsxGet_position(), "static");
+    public String get_position() {
+        return defaultIfEmpty(super.get_position(), "static");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_right() {
-        return defaultIfEmpty(super.jsxGet_right(), "auto");
+    public String get_right() {
+        return defaultIfEmpty(super.get_right(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_tableLayout() {
-        return defaultIfEmpty(super.jsxGet_tableLayout(), "auto");
+    public String get_tableLayout() {
+        return defaultIfEmpty(super.get_tableLayout(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_textAlign() {
-        return defaultIfEmpty(super.jsxGet_textAlign(), "start");
+    public String get_textAlign() {
+        return defaultIfEmpty(super.get_textAlign(), "start");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_textDecoration() {
-        return defaultIfEmpty(super.jsxGet_textDecoration(), "none");
+    public String get_textDecoration() {
+        return defaultIfEmpty(super.get_textDecoration(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_textIndent() {
-        return defaultIfEmpty(super.jsxGet_textIndent(), "0px");
+    public String get_textIndent() {
+        return defaultIfEmpty(super.get_textIndent(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_textShadow() {
+    public String get_textShadow() {
         String shadow = "";
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.CSS_TEXT_SHADOW_DEFAULT_NONE)) {
             shadow = "none";
         }
-        return defaultIfEmpty(super.jsxGet_textShadow(), shadow);
+        return defaultIfEmpty(super.get_textShadow(), shadow);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_textTransform() {
-        return defaultIfEmpty(super.jsxGet_textTransform(), "none");
+    public String get_textTransform() {
+        return defaultIfEmpty(super.get_textTransform(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_top() {
-        return defaultIfEmpty(super.jsxGet_top(), "auto");
+    public String get_top() {
+        return defaultIfEmpty(super.get_top(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_unicodeBidi() {
+    public String get_unicodeBidi() {
         String unicodeBidi = "embed";
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.CSS_UNICODE_BIDI_DEFAULT_NORMAL)) {
             unicodeBidi = "normal";
         }
 
-        return defaultIfEmpty(super.jsxGet_unicodeBidi(), unicodeBidi);
+        return defaultIfEmpty(super.get_unicodeBidi(), unicodeBidi);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_verticalAlign() {
-        return defaultIfEmpty(super.jsxGet_verticalAlign(), "baseline");
+    public String get_verticalAlign() {
+        return defaultIfEmpty(super.get_verticalAlign(), "baseline");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_visibility() {
-        return defaultIfEmpty(super.jsxGet_visibility(), "visible");
+    public String get_visibility() {
+        return defaultIfEmpty(super.get_visibility(), "visible");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_whiteSpace() {
-        return defaultIfEmpty(super.jsxGet_whiteSpace(), "normal");
+    public String get_whiteSpace() {
+        return defaultIfEmpty(super.get_whiteSpace(), "normal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_width() {
-        if ("none".equals(jsxGet_display())) {
+    public String get_width() {
+        if ("none".equals(get_display())) {
             return "auto";
         }
         final String defaultWidth;
@@ -1478,14 +1478,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
 
-        final String display = jsxGet_display();
+        final String display = get_display();
         if ("none".equals(display)) {
             width_ = Integer.valueOf(0);
             return 0;
         }
 
         int width;
-        final String styleWidth = super.jsxGet_width();
+        final String styleWidth = super.get_width();
         final DomNode parent = node.getParentNode();
         if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
             // hack: TODO find a way to specify default values for different tags
@@ -1494,7 +1494,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
 
             // Width not explicitly set.
-            final String cssFloat = jsxGet_cssFloat();
+            final String cssFloat = get_cssFloat();
             if ("right".equals(cssFloat) || "left".equals(cssFloat)) {
                 // We're floating; simplistic approximation: text content * pixels per character.
                 width = getDomNodeOrDie().getTextContent().length() * PIXELS_PER_CHAR;
@@ -1502,7 +1502,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             else if ("block".equals(display)) {
                 // Block elements take up 100% of the parent's width.
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
-                final String parentWidth = getWindow().getComputedStyle(parentJS, null).jsxGet_width();
+                final String parentWidth = getWindow().getComputedStyle(parentJS, null).get_width();
                 if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO)
                         && "auto".equals(parentWidth)) {
                     width = Window.WINDOW_WIDTH;
@@ -1510,7 +1510,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 else {
                     width = pixelValue(parentJS, new CssValue(Window.WINDOW_WIDTH) {
                         @Override public String get(final ComputedCSSStyleDeclaration style) {
-                            return style.jsxGet_width();
+                            return style.get_width();
                         }
                     });
                 }
@@ -1543,7 +1543,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         for (final DomNode child : getDomNodeOrDie().getChildren()) {
             if (child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
-                final int w = e.jsxGet_currentStyle().getCalculatedWidth(true, true);
+                final int w = e.get_currentStyle().getCalculatedWidth(true, true);
                 width += w;
             }
             else if (child.getScriptObject() instanceof Text) {
@@ -1588,7 +1588,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final int contentHeight = getContentHeight();
         final boolean useDefaultHeight = getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN);
-        final boolean explicitHeightSpecified = super.jsxGet_height().length() > 0;
+        final boolean explicitHeightSpecified = super.get_height().length() > 0;
 
         int height;
         if (contentHeight > 0
@@ -1622,7 +1622,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
 
-        if ("none".equals(jsxGet_display())) {
+        if ("none".equals(get_display())) {
             height2_ = Integer.valueOf(0);
             return 0;
         }
@@ -1632,7 +1632,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return Window.WINDOW_HEIGHT;
         }
 
-        final boolean explicitHeightSpecified = super.jsxGet_height().length() > 0;
+        final boolean explicitHeightSpecified = super.get_height().length() > 0;
 
         int defaultHeight = 20;
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_15)) {
@@ -1676,7 +1676,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         for (final DomNode child : node.getChildren()) {
             if (child.mayBeDisplayed() && child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
-                final ComputedCSSStyleDeclaration style = e.jsxGet_currentStyle();
+                final ComputedCSSStyleDeclaration style = e.get_currentStyle();
                 final String pos = style.getPositionWithInheritance();
                 if ("static".equals(pos) || "relative".equals(pos)) {
                     lastFlowing = e;
@@ -1695,7 +1695,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         int max = 0;
         for (final HTMLElement e : relevant) {
-            final ComputedCSSStyleDeclaration style = e.jsxGet_currentStyle();
+            final ComputedCSSStyleDeclaration style = e.get_currentStyle();
             final int h = style.getTop(true, false, false) + style.getCalculatedHeight(true, true);
             if (h > max) {
                 max = h;
@@ -1713,7 +1713,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public boolean isScrollable(final boolean horizontal) {
         final boolean scrollable;
         final Element node = getElement();
-        final String overflow = jsxGet_overflow();
+        final String overflow = get_overflow();
         if (horizontal) {
             // TODO: inherit, overflow-x
             scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || "auto".equals(overflow))
@@ -1768,7 +1768,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 }
                 if (prev != null) {
                     final HTMLElement e = (HTMLElement) ((HtmlElement) prev).getScriptObject();
-                    final ComputedCSSStyleDeclaration style = e.jsxGet_currentStyle();
+                    final ComputedCSSStyleDeclaration style = e.get_currentStyle();
                     top = style.getTop(true, false, false) + style.getCalculatedHeight(true, true);
                 }
                 // If the position is relative, we also need to add the specified "top" displacement.
@@ -1783,12 +1783,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         if (includeMargin) {
-            final int margin = pixelValue(jsxGet_marginTop());
+            final int margin = pixelValue(get_marginTop());
             top += margin;
         }
 
         if (includeBorder) {
-            final int border = pixelValue(jsxGet_borderTopWidth());
+            final int border = pixelValue(get_borderTopWidth());
             top += border;
         }
 
@@ -1825,13 +1825,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         else if ("absolute".equals(p) && !"auto".equals(r)) {
             // Need to calculate the horizontal displacement caused by *all* siblings.
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-            final int parentWidth = parent.jsxGet_currentStyle().getCalculatedWidth(false, false);
+            final int parentWidth = parent.get_currentStyle().getCalculatedWidth(false, false);
             left = parentWidth - pixelValue(r);
         }
         else if ("fixed".equals(p) && "auto".equals(l)) {
             // Fixed to the location at which the browser puts it via normal element flowing.
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-            left = pixelValue(parent.jsxGet_currentStyle().getLeftWithInheritance());
+            left = pixelValue(parent.get_currentStyle().getLeftWithInheritance());
         }
         else if ("static".equals(p)) {
             // We need to calculate the horizontal displacement caused by *previous* siblings.
@@ -1839,12 +1839,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             for (DomNode n = getDomNodeOrDie(); n != null; n = n.getPreviousSibling()) {
                 if (n.getScriptObject() instanceof HTMLElement) {
                     final HTMLElement e = (HTMLElement) n.getScriptObject();
-                    final String d = e.jsxGet_currentStyle().jsxGet_display();
+                    final String d = e.get_currentStyle().get_display();
                     if ("block".equals(d)) {
                         break;
                     }
                     else if (!"none".equals(d)) {
-                        left += e.jsxGet_currentStyle().getCalculatedWidth(true, true);
+                        left += e.get_currentStyle().getCalculatedWidth(true, true);
                     }
                 }
                 else if (n.getScriptObject() instanceof Text) {
@@ -1866,7 +1866,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         if (includeBorder) {
-            final int border = pixelValue(jsxGet_borderLeftWidth());
+            final int border = pixelValue(get_borderLeftWidth());
             left += border;
         }
 
@@ -1883,11 +1883,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS <tt>position</tt> attribute, replacing inherited values with the actual parent values
      */
     public String getPositionWithInheritance() {
-        String p = jsxGet_position();
+        String p = get_position();
         if ("inherit".equals(p)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                p = (parent != null ? parent.jsxGet_currentStyle().getPositionWithInheritance() : "static");
+                p = (parent != null ? parent.get_currentStyle().getPositionWithInheritance() : "static");
             }
             else {
                 p = "static";
@@ -1901,11 +1901,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS <tt>left</tt> attribute, replacing inherited values with the actual parent values
      */
     public String getLeftWithInheritance() {
-        String left = jsxGet_left();
+        String left = get_left();
         if ("inherit".equals(left)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                left = (parent != null ? parent.jsxGet_currentStyle().getLeftWithInheritance() : "auto");
+                left = (parent != null ? parent.get_currentStyle().getLeftWithInheritance() : "auto");
             }
             else {
                 left = "auto";
@@ -1919,11 +1919,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS <tt>right</tt> attribute, replacing inherited values with the actual parent values
      */
     public String getRightWithInheritance() {
-        String right = jsxGet_right();
+        String right = get_right();
         if ("inherit".equals(right)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                right = (parent != null ? parent.jsxGet_currentStyle().getRightWithInheritance() : "auto");
+                right = (parent != null ? parent.get_currentStyle().getRightWithInheritance() : "auto");
             }
             else {
                 right = "auto";
@@ -1937,11 +1937,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS <tt>top</tt> attribute, replacing inherited values with the actual parent values
      */
     public String getTopWithInheritance() {
-        String top = jsxGet_top();
+        String top = get_top();
         if ("inherit".equals(top)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                top = (parent != null ? parent.jsxGet_currentStyle().getTopWithInheritance() : "auto");
+                top = (parent != null ? parent.get_currentStyle().getTopWithInheritance() : "auto");
             }
             else {
                 top = "auto";
@@ -1955,11 +1955,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS <tt>bottom</tt> attribute, replacing inherited values with the actual parent values
      */
     public String getBottomWithInheritance() {
-        String bottom = jsxGet_bottom();
+        String bottom = get_bottom();
         if ("inherit".equals(bottom)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                bottom = (parent != null ? parent.jsxGet_currentStyle().getBottomWithInheritance() : "auto");
+                bottom = (parent != null ? parent.get_currentStyle().getBottomWithInheritance() : "auto");
             }
             else {
                 bottom = "auto";
@@ -1973,7 +1973,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the value in pixels
      */
     public int getMarginLeft() {
-        return pixelValue(jsxGet_marginLeft());
+        return pixelValue(get_marginLeft());
     }
 
     /**
@@ -1981,7 +1981,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the value in pixels
      */
     public int getMarginRight() {
-        return pixelValue(jsxGet_marginRight());
+        return pixelValue(get_marginRight());
     }
 
     /**
@@ -1989,7 +1989,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the value in pixels
      */
     public int getMarginTop() {
-        return pixelValue(jsxGet_marginTop());
+        return pixelValue(get_marginTop());
     }
 
     /**
@@ -1997,7 +1997,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the value in pixels
      */
     public int getMarginBottom() {
-        return pixelValue(jsxGet_marginBottom());
+        return pixelValue(get_marginBottom());
     }
 
     /**
@@ -2005,7 +2005,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the value in pixels
      */
     public int getPaddingLeft() {
-        return pixelValue(jsxGet_paddingLeft());
+        return pixelValue(get_paddingLeft());
     }
 
     /**
@@ -2013,7 +2013,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the value in pixels
      */
     public int getPaddingRight() {
-        return pixelValue(jsxGet_paddingRight());
+        return pixelValue(get_paddingRight());
     }
 
     /**
@@ -2021,7 +2021,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the value in pixels
      */
     public int getPaddingTop() {
-        return pixelValue(jsxGet_paddingTop());
+        return pixelValue(get_paddingTop());
     }
 
     /**
@@ -2029,13 +2029,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the value in pixels
      */
     public int getPaddingBottom() {
-        return pixelValue(jsxGet_paddingBottom());
+        return pixelValue(get_paddingBottom());
     }
 
     private int getPaddingHorizontal() {
         if (paddingHorizontal_ == null) {
             paddingHorizontal_ =
-                Integer.valueOf("none".equals(jsxGet_display()) ? 0 : getPaddingLeft() + getPaddingRight());
+                Integer.valueOf("none".equals(get_display()) ? 0 : getPaddingLeft() + getPaddingRight());
         }
         return paddingHorizontal_.intValue();
     }
@@ -2043,7 +2043,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private int getPaddingVertical() {
         if (paddingVertical_ == null) {
             paddingVertical_ =
-                Integer.valueOf("none".equals(jsxGet_display()) ? 0 : getPaddingTop() + getPaddingBottom());
+                Integer.valueOf("none".equals(get_display()) ? 0 : getPaddingTop() + getPaddingBottom());
         }
         return paddingVertical_.intValue();
     }
@@ -2053,7 +2053,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the value in pixels
      */
     public int getBorderLeft() {
-        return pixelValue(jsxGet_borderLeftWidth());
+        return pixelValue(get_borderLeftWidth());
     }
 
     /**
@@ -2061,7 +2061,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the value in pixels
      */
     public int getBorderRight() {
-        return pixelValue(jsxGet_borderRightWidth());
+        return pixelValue(get_borderRightWidth());
     }
 
     /**
@@ -2069,7 +2069,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the value in pixels
      */
     public int getBorderTop() {
-        return pixelValue(jsxGet_borderTopWidth());
+        return pixelValue(get_borderTopWidth());
     }
 
     /**
@@ -2077,13 +2077,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the value in pixels
      */
     public int getBorderBottom() {
-        return pixelValue(jsxGet_borderBottomWidth());
+        return pixelValue(get_borderBottomWidth());
     }
 
     private int getBorderHorizontal() {
         if (borderHorizontal_ == null) {
             borderHorizontal_ =
-                Integer.valueOf("none".equals(jsxGet_display()) ? 0 : getBorderLeft() + getBorderRight());
+                Integer.valueOf("none".equals(get_display()) ? 0 : getBorderLeft() + getBorderRight());
         }
         return borderHorizontal_.intValue();
     }
@@ -2091,7 +2091,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private int getBorderVertical() {
         if (borderVertical_ == null) {
             borderVertical_ =
-                Integer.valueOf("none".equals(jsxGet_display()) ? 0 : getBorderTop() + getBorderBottom());
+                Integer.valueOf("none".equals(get_display()) ? 0 : getBorderTop() + getBorderBottom());
         }
         return borderVertical_.intValue();
     }
@@ -2100,30 +2100,30 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_wordSpacing() {
+    public String get_wordSpacing() {
         String wordSpacing = "0px";
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.CSS_WORD_SPACING_DEFAULT_NORMAL)) {
             wordSpacing = "normal";
         }
 
-        return defaultIfEmpty(super.jsxGet_wordSpacing(), wordSpacing);
+        return defaultIfEmpty(super.get_wordSpacing(), wordSpacing);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_wordWrap() {
-        return defaultIfEmpty(super.jsxGet_wordWrap(), "normal");
+    public String get_wordWrap() {
+        return defaultIfEmpty(super.get_wordWrap(), "normal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Object jsxGet_zIndex() {
-        final Object response = super.jsxGet_zIndex();
+    public Object get_zIndex() {
+        final Object response = super.get_zIndex();
         if (response.toString().isEmpty()) {
             return "auto";
         }

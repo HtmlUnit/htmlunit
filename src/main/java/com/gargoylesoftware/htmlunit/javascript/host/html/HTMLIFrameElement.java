@@ -47,7 +47,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String jsxGet_src() {
+    public String get_src() {
         return getFrame().getSrcAttribute();
     }
 
@@ -57,8 +57,8 @@ public class HTMLIFrameElement extends HTMLElement {
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">Gecko DOM Reference</a>
      */
     @JsxGetter(@WebBrowser(FF))
-    public DocumentProxy jsxGet_contentDocument() {
-        return ((Window) getFrame().getEnclosedWindow().getScriptObject()).jsxGet_document();
+    public DocumentProxy get_contentDocument() {
+        return ((Window) getFrame().getEnclosedWindow().getScriptObject()).get_document();
     }
 
     /**
@@ -69,7 +69,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533692.aspx">MSDN documentation</a>
      */
     @JsxGetter
-    public Window jsxGet_contentWindow() {
+    public Window get_contentWindow() {
         return (Window) getFrame().getEnclosedWindow().getScriptObject();
     }
 
@@ -87,7 +87,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String jsxGet_name() {
+    public String get_name() {
         return getFrame().getNameAttribute();
     }
 
@@ -118,7 +118,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return the <tt>onload</tt> event handler for this element
      */
     @JsxGetter
-    public Object jsxGet_onload() {
+    public Object get_onload() {
         return getEventHandlerProp("onload");
     }
 
@@ -127,7 +127,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return the "border" attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String jsxGet_border() {
+    public String get_border() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
     }
@@ -146,7 +146,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return the value of the "align" property
      */
     @JsxGetter
-    public String jsxGet_align() {
+    public String get_align() {
         return getAlign(true);
     }
 
@@ -164,7 +164,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return the value of the "width" property
      */
     @JsxGetter
-    public String jsxGet_width() {
+    public String get_width() {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_IFRAME_GET_WIDTH_NEGATIVE_VALUES);
         final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("width", returnNegativeValues);
@@ -184,7 +184,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @return the value of the "width" property
      */
     @JsxGetter
-    public String jsxGet_height() {
+    public String get_height() {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_IFRAME_GET_HEIGHT_NEGATIVE_VALUES);
         final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("height", returnNegativeValues);

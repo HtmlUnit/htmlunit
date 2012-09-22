@@ -42,13 +42,13 @@ public class HTMLUnknownElement extends HTMLElement {
      * @return the node name
      */
     @Override
-    public String jsxGet_nodeName() {
+    public String get_nodeName() {
         final Page page = getDomNodeOrDie().getPage();
         if (page instanceof XmlPage || (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_112)
             && ((HtmlPage) page).getNamespaces().containsKey(getDomNodeOrDie().getPrefix()))) {
             return getDomNodeOrDie().getLocalName();
         }
-        return super.jsxGet_nodeName();
+        return super.get_nodeName();
     }
 
     /**

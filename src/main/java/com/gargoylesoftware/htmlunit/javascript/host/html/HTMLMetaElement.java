@@ -43,7 +43,7 @@ public class HTMLMetaElement extends HTMLElement {
      * @return the charset attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String jsxGet_charset() {
+    public String get_charset() {
         return "";
     }
 
@@ -61,7 +61,7 @@ public class HTMLMetaElement extends HTMLElement {
      * @return the content attribute
      */
     @JsxGetter
-    public String jsxGet_content() {
+    public String get_content() {
         return getDomNodeOrDie().getAttribute("content");
     }
 
@@ -79,7 +79,7 @@ public class HTMLMetaElement extends HTMLElement {
      * @return the http-equiv attribute
      */
     @JsxGetter
-    public String jsxGet_httpEquiv() {
+    public String get_httpEquiv() {
         return getDomNodeOrDie().getAttribute("http-equiv");
     }
 
@@ -97,7 +97,7 @@ public class HTMLMetaElement extends HTMLElement {
      * @return the name attribute
      */
     @JsxGetter
-    public String jsxGet_name() {
+    public String get_name() {
         return getDomNodeOrDie().getAttribute("name");
     }
 
@@ -115,7 +115,7 @@ public class HTMLMetaElement extends HTMLElement {
      * @return the scheme attribute
      */
     @JsxGetter
-    public String jsxGet_scheme() {
+    public String get_scheme() {
         return getDomNodeOrDie().getAttribute("scheme");
     }
 
@@ -133,7 +133,7 @@ public class HTMLMetaElement extends HTMLElement {
      * @return the url attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String jsxGet_url() {
+    public String get_url() {
         return "";
     }
 

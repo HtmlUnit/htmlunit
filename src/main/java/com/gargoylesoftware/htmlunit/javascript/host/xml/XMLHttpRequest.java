@@ -139,7 +139,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return the event handler that fires on every state change
      */
     @JsxGetter
-    public Function jsxGet_onreadystatechange() {
+    public Function get_onreadystatechange() {
         return stateChangeHandler_;
     }
 
@@ -229,7 +229,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return the event handler that fires on load
      */
     @JsxGetter({ @WebBrowser(value = IE, maxVersion = 6), @WebBrowser(FF) })
-    public Function jsxGet_onload() {
+    public Function get_onload() {
         return loadHandler_;
     }
 
@@ -247,7 +247,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return the event handler that fires on error
      */
     @JsxGetter
-    public Function jsxGet_onerror() {
+    public Function get_onerror() {
         return errorHandler_;
     }
 
@@ -297,7 +297,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return the current state of the HTTP request
      */
     @JsxGetter
-    public int jsxGet_readyState() {
+    public int get_readyState() {
         return state_;
     }
 
@@ -306,7 +306,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return a string version of the data retrieved from the server
      */
     @JsxGetter
-    public String jsxGet_responseText() {
+    public String get_responseText() {
         if (webResponse_ != null) {
             return webResponse_.getContentAsString();
         }
@@ -321,7 +321,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return a DOM-compatible document object version of the data retrieved from the server
      */
     @JsxGetter
-    public Object jsxGet_responseXML() {
+    public Object get_responseXML() {
         if (webResponse_ == null) {
             return null; // send() has not been called
         }
@@ -360,7 +360,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return the numeric status returned by the server
      */
     @JsxGetter
-    public int jsxGet_status() {
+    public int get_status() {
         if (webResponse_ != null) {
             return webResponse_.getStatusCode();
         }
@@ -373,7 +373,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return the string message accompanying the status code
      */
     @JsxGetter
-    public String jsxGet_statusText() {
+    public String get_statusText() {
         if (webResponse_ != null) {
             return webResponse_.getStatusMessage();
         }

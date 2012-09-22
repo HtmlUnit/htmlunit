@@ -85,7 +85,7 @@ public class HTMLOptionElement extends FormChild {
      * @return the value property
      */
     @JsxGetter
-    public String jsxGet_value() {
+    public String get_value() {
         String value = getDomNodeOrNull().getAttribute("value");
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED
                 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_170)) {
@@ -109,7 +109,7 @@ public class HTMLOptionElement extends FormChild {
      */
     @Override
     @JsxGetter
-    public String jsxGet_text() {
+    public String get_text() {
         return getDomNodeOrNull().getText();
     }
 
@@ -135,7 +135,7 @@ public class HTMLOptionElement extends FormChild {
      * @return the text property
      */
     @JsxGetter
-    public boolean jsxGet_selected() {
+    public boolean get_selected() {
         return getDomNodeOrNull().isSelected();
     }
 
@@ -165,7 +165,7 @@ public class HTMLOptionElement extends FormChild {
      * @return the text property
      */
     @JsxGetter
-    public boolean jsxGet_defaultSelected() {
+    public boolean get_defaultSelected() {
         return getDomNodeOrNull().isDefaultSelected();
     }
 
@@ -174,7 +174,7 @@ public class HTMLOptionElement extends FormChild {
      * @return the label property
      */
     @JsxGetter
-    public String jsxGet_label() {
+    public String get_label() {
         return getDomNodeOrNull().getLabelAttribute();
     }
 
@@ -192,8 +192,8 @@ public class HTMLOptionElement extends FormChild {
      */
     @Override
     @JsxGetter
-    public boolean jsxGet_disabled() {
-        return super.jsxGet_disabled();
+    public boolean get_disabled() {
+        return super.get_disabled();
     }
 
     /**

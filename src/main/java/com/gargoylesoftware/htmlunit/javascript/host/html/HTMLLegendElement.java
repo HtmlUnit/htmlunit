@@ -44,8 +44,8 @@ public class HTMLLegendElement extends FormChild {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public String jsxGet_accessKey() {
-        return super.jsxGet_accessKey();
+    public String get_accessKey() {
+        return super.get_accessKey();
     }
 
     /**

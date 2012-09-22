@@ -127,7 +127,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
             // try to get the js representation
             asString = Context.toString(arg);
             if (arg instanceof Event) {
-                asString += "<" + ((Event) arg).jsxGet_type() + ">";
+                asString += "<" + ((Event) arg).get_type() + ">";
             }
         }
         catch (final Throwable e) {

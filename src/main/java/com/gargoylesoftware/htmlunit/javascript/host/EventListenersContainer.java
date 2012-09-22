@@ -160,7 +160,7 @@ public class EventListenersContainer implements Serializable {
             return null;
         }
         ScriptResult allResult = null;
-        final List<Function> handlers = getHandlers(event.jsxGet_type(), useCapture);
+        final List<Function> handlers = getHandlers(event.get_type(), useCapture);
         if (handlers != null && !handlers.isEmpty()) {
             final boolean ie = jsNode_.getWindow().getWebWindow().getWebClient()
                     .getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_40);
@@ -179,7 +179,7 @@ public class EventListenersContainer implements Serializable {
                         allResult = result;
                     }
                     else {
-                        final Object eventReturnValue = event.jsxGet_returnValue();
+                        final Object eventReturnValue = event.get_returnValue();
                         if (eventReturnValue instanceof Boolean && !((Boolean) eventReturnValue).booleanValue()) {
                             allResult = new ScriptResult(Boolean.FALSE, page);
                         }
@@ -196,12 +196,12 @@ public class EventListenersContainer implements Serializable {
         if (!event.applies(node)) {
             return null;
         }
-        final Function handler = getEventHandler(event.jsxGet_type());
+        final Function handler = getEventHandler(event.get_type());
         if (handler != null) {
             event.setCurrentTarget(jsNode_);
             final HtmlPage page = (HtmlPage) node.getPage();
             if (LOG.isDebugEnabled()) {
-                LOG.debug("Executing " + event.jsxGet_type() + " handler for " + node);
+                LOG.debug("Executing " + event.get_type() + " handler for " + node);
             }
             return page.executeJavaScriptFunctionIfPossible(handler, jsNode_, propHandlerArgs, node);
         }

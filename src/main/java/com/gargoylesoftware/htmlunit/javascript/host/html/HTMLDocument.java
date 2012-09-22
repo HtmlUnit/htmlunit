@@ -305,7 +305,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the JavaScript attribute "forms"
      */
     @JsxGetter
-    public Object jsxGet_forms() {
+    public Object get_forms() {
         if (forms_ == null) {
             final HtmlPage page = getHtmlPage();
             final boolean allowFunctionCall =
@@ -336,7 +336,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of this attribute
      */
     @JsxGetter
-    public Object jsxGet_links() {
+    public Object get_links() {
         if (links_ == null) {
             links_ = new HTMLCollection(getDomNodeOrDie(), true, "HTMLDocument.links") {
                 @Override
@@ -364,7 +364,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the date as string
      */
     @JsxGetter
-    public String jsxGet_lastModified() {
+    public String get_lastModified() {
         if (lastModified_ == null) {
             final WebResponse webResponse = getPage().getWebResponse();
             String stringDate = webResponse.getResponseHeaderValue("Last-Modified");
@@ -390,7 +390,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the JavaScript attribute "namespaces"
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object jsxGet_namespaces() {
+    public Object get_namespaces() {
         if (namespaces_ == null) {
             namespaces_ = new NamespaceCollection(this);
         }
@@ -405,7 +405,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of this attribute
      */
     @JsxGetter
-    public Object jsxGet_anchors() {
+    public Object get_anchors() {
         if (anchors_ == null) {
             final boolean checkId =
                 getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID);
@@ -448,7 +448,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of this attribute
      */
     @JsxGetter
-    public Object jsxGet_applets() {
+    public Object get_applets() {
         if (applets_ == null) {
             applets_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.applets") {
                 @Override
@@ -710,7 +710,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the cookie attribute
      */
     @JsxGetter
-    public String jsxGet_cookie() {
+    public String get_cookie() {
         final HtmlPage page = getHtmlPage();
 
         URL url = page.getWebResponse().getWebRequest().getUrl();
@@ -741,7 +741,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the "compatMode" attribute
      */
     @JsxGetter
-    public String jsxGet_compatMode() {
+    public String get_compatMode() {
         return getHtmlPage().isQuirksMode() ? "BackCompat" : "CSS1Compat";
     }
 
@@ -844,7 +844,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the "images" property
      */
     @JsxGetter
-    public Object jsxGet_images() {
+    public Object get_images() {
         if (images_ == null) {
             images_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.images") {
                 @Override
@@ -861,7 +861,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the "URL" property
      */
     @JsxGetter
-    public String jsxGet_URL() {
+    public String get_URL() {
         return getHtmlPage().getWebResponse().getWebRequest().getUrl().toExternalForm();
     }
 
@@ -871,7 +871,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return an auto-generated, unique identifier for the object
      */
     @JsxGetter(@WebBrowser(IE))
-    public String jsxGet_uniqueID() {
+    public String get_uniqueID() {
         if (uniqueID_ == null) {
             uniqueID_ = "ms__id" + UniqueID_Counter_++;
         }
@@ -883,7 +883,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the "all" property
      */
     @JsxGetter
-    public HTMLCollection jsxGet_all() {
+    public HTMLCollection get_all() {
         if (all_ == null) {
             all_ = new HTMLCollectionTags(getDomNodeOrDie(), "HTMLDocument.all") {
                 @Override
@@ -977,7 +977,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the window
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object jsxGet_parentWindow() {
+    public Object get_parentWindow() {
         return getWindow();
     }
 
@@ -1102,7 +1102,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction(@WebBrowser(FF))
     public HTMLCollection getElementsByClassName(final String className) {
-        return ((HTMLElement) jsxGet_documentElement()).getElementsByClassName(className);
+        return ((HTMLElement) get_documentElement()).getElementsByClassName(className);
     }
 
     /**
@@ -1205,7 +1205,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
         };
 
-        final int length = collection.jsxGet_length();
+        final int length = collection.get_length();
         if (length == 0) {
             return NOT_FOUND;
         }
@@ -1233,7 +1233,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
     @JsxGetter
-    public HTMLElement jsxGet_body() {
+    public HTMLElement get_body() {
         final HtmlPage page = getHtmlPage();
         // for IE, the body of a not yet loaded page is null whereas it already exists for FF
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_61)
@@ -1256,7 +1256,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return this document's <tt>head</tt> element
      */
     @JsxGetter(@WebBrowser(value = FF, minVersion = 10))
-    public HTMLElement jsxGet_head() {
+    public HTMLElement get_head() {
         final HtmlElement head = getHtmlPage().getHead();
         if (head != null) {
             return (HTMLElement) head.getScriptObject();
@@ -1269,7 +1269,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return this document's title
      */
     @JsxGetter
-    public String jsxGet_title() {
+    public String get_title() {
         return getHtmlPage().getTitleText();
     }
 
@@ -1288,7 +1288,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String jsxGet_bgColor() {
+    public String get_bgColor() {
         String color = getHtmlPage().getBody().getAttribute("bgColor");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED
                 && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
@@ -1313,7 +1313,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the <tt>alinkColor</tt> attribute
      */
     @JsxGetter
-    public String jsxGet_alinkColor() {
+    public String get_alinkColor() {
         String color = getHtmlPage().getBody().getAttribute("aLink");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED
                 && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
@@ -1337,7 +1337,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the <tt>linkColor</tt> attribute
      */
     @JsxGetter
-    public String jsxGet_linkColor() {
+    public String get_linkColor() {
         String color = getHtmlPage().getBody().getAttribute("link");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED
                 && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
@@ -1361,7 +1361,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the <tt>vlinkColor</tt> attribute
      */
     @JsxGetter
-    public String jsxGet_vlinkColor() {
+    public String get_vlinkColor() {
         String color = getHtmlPage().getBody().getAttribute("vLink");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED
                 && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
@@ -1385,7 +1385,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the <tt>fgColor</tt> attribute
      */
     @JsxGetter
-    public String jsxGet_fgColor() {
+    public String get_fgColor() {
         String color = getHtmlPage().getBody().getAttribute("text");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED
                 && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
@@ -1414,7 +1414,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @see DomNode#READY_STATE_COMPLETE
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
-    public String jsxGet_readyState() {
+    public String get_readyState() {
         final DomNode node = getDomNodeOrDie();
         return node.getReadyState();
     }
@@ -1427,7 +1427,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * W3C documentation</a>
      */
     @JsxGetter
-    public String jsxGet_domain() {
+    public String get_domain() {
         if (domain_ == null) {
             URL url = getHtmlPage().getWebResponse().getWebRequest().getUrl();
             if (url == WebClient.URL_ABOUT_BLANK) {
@@ -1488,7 +1488,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     + newDomain + "\"");
         }
 
-        final String currentDomain = jsxGet_domain();
+        final String currentDomain = get_domain();
         if (currentDomain.equalsIgnoreCase(newDomain)) {
             return;
         }
@@ -1513,7 +1513,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the JavaScript attribute <tt>scripts</tt>
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
-    public Object jsxGet_scripts() {
+    public Object get_scripts() {
         if (scripts_ == null) {
             scripts_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.scripts") {
                 @Override
@@ -1530,7 +1530,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the JavaScript attribute <tt>selection</tt>
      */
     @JsxGetter(@WebBrowser(IE))
-    public Selection jsxGet_selection() {
+    public Selection get_selection() {
         return getWindow().getSelectionImpl();
     }
 
@@ -1540,8 +1540,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the live collection of frames contained by this document
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object jsxGet_frames() {
-        return getWindow().jsxGet_frames();
+    public Object get_frames() {
+        return getWindow().get_frames();
     }
 
     /**
@@ -1552,7 +1552,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return styleSheet collection
      */
     @JsxGetter
-    public StyleSheetList jsxGet_styleSheets() {
+    public StyleSheetList get_styleSheets() {
         if (styleSheets_ == null) {
             styleSheets_ = new StyleSheetList(this);
         }
@@ -1625,7 +1625,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_164) && (x <= 0 || y <= 0)) {
             return null;
         }
-        return jsxGet_body();
+        return get_body();
     }
 
     /**
@@ -1711,7 +1711,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxFunction
     public boolean queryCommandSupported(final String cmd) {
         final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_165);
-        final String mode = jsxGet_designMode();
+        final String mode = get_designMode();
         if (!ff) {
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
         }
@@ -1731,7 +1731,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxFunction
     public boolean queryCommandEnabled(final String cmd) {
         final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_165);
-        final String mode = jsxGet_designMode();
+        final String mode = get_designMode();
         if (!ff) {
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
         }
@@ -1771,7 +1771,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @return the value of the "activeElement" property
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
-    public Object jsxGet_activeElement() {
+    public Object get_activeElement() {
         if (activeElement_ == null) {
             final HtmlElement body = getHtmlPage().getBody();
             if (body != null) {
@@ -1794,11 +1794,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * {@inheritDoc}
      */
     @Override
-    public SimpleScriptable jsxGet_doctype() {
+    public SimpleScriptable get_doctype() {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCUMENT_DOCTYPE_NULL)) {
             return null;
         }
-        return super.jsxGet_doctype();
+        return super.get_doctype();
     }
 
     /**

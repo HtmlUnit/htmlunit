@@ -52,7 +52,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the <tt>src</tt> attribute
      */
     @JsxGetter
-    public String jsxGet_src() {
+    public String get_src() {
         return getDomNodeOrDie().getAttribute("src");
     }
 
@@ -71,7 +71,7 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @Override
     @JsxGetter
-    public String jsxGet_text() {
+    public String get_text() {
         final StringBuilder scriptCode = new StringBuilder();
         for (final DomNode node : getDomNodeOrDie().getChildren()) {
             if (node instanceof DomText) {
@@ -105,7 +105,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the <tt>type</tt> attribute
      */
     @JsxGetter
-    public String jsxGet_type() {
+    public String get_type() {
         return getDomNodeOrDie().getAttribute("type");
     }
 
@@ -123,7 +123,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the event handler that fires on every state change
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object jsxGet_onreadystatechange() {
+    public Object get_onreadystatechange() {
         return getEventHandlerProp("onreadystatechange");
     }
 
@@ -141,7 +141,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @return the event handler that fires on load
      */
     @JsxGetter(@WebBrowser(FF))
-    public Object jsxGet_onload() {
+    public Object get_onload() {
         return getEventHandlerProp("onload");
     }
 
@@ -164,7 +164,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @see DomNode#READY_STATE_COMPLETE
      */
     @JsxGetter(@WebBrowser(IE))
-    public String jsxGet_readyState() {
+    public String get_readyState() {
         return getDomNodeOrDie().getReadyState();
     }
 

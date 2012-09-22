@@ -120,7 +120,7 @@ public class HTMLSpanElement extends HTMLElement {
      * Returns the value of the "cite" property.
      * @return the value of the "cite" property
      */
-    public String jsxGet_cite() {
+    public String get_cite() {
         final String cite = getDomNodeOrDie().getAttribute("cite");
         return cite;
     }
@@ -137,7 +137,7 @@ public class HTMLSpanElement extends HTMLElement {
      * Returns the value of the "dateTime" property.
      * @return the value of the "dateTime" property
      */
-    public String jsxGet_dateTime() {
+    public String get_dateTime() {
         final String dateTime = getDomNodeOrDie().getAttribute("datetime");
         return dateTime;
     }

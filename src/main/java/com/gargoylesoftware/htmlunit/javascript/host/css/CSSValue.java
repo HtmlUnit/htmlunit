@@ -91,7 +91,7 @@ public class CSSValue extends SimpleScriptable {
      * @return the string representation
      */
     @JsxGetter
-    public String jsxGet_cssText() {
+    public String get_cssText() {
         return wrappedCssValue_.getCssText();
     }
 }

@@ -51,9 +51,9 @@ public class CSSMediaRule extends CSSRule {
      * @return the media types that the imported CSS style sheet applies to
      */
     @JsxGetter
-    public MediaList jsxGet_media() {
+    public MediaList get_media() {
         if (media_ == null) {
-            final CSSStyleSheet parent = jsxGet_parentStyleSheet();
+            final CSSStyleSheet parent = get_parentStyleSheet();
             final org.w3c.dom.stylesheets.MediaList ml = getMediaRule().getMedia();
             media_ = new MediaList(parent, ml);
         }

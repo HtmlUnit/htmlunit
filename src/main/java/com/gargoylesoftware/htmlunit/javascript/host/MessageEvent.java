@@ -51,7 +51,7 @@ public class MessageEvent extends SimpleScriptable {
      * @return the data contained
      */
     @JsxGetter
-    public Object jsxGet_data() {
+    public Object get_data() {
         return data_;
     }
 }

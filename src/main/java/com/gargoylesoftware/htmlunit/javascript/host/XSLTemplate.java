@@ -49,7 +49,7 @@ public class XSLTemplate extends SimpleScriptable {
      * @return the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template
      */
     @JsxGetter
-    public Node jsxGet_stylesheet() {
+    public Node get_stylesheet() {
         return stylesheet_;
     }
 

@@ -70,7 +70,7 @@ public class ClientRect extends SimpleScriptable {
      * @return the bottom coordinate of the rectangle surrounding the object content
      */
     @JsxGetter
-    public int jsxGet_bottom() {
+    public int get_bottom() {
         return bottom_;
     }
 
@@ -88,7 +88,7 @@ public class ClientRect extends SimpleScriptable {
      * @return the left coordinate of the rectangle surrounding the object content
      */
     @JsxGetter
-    public int jsxGet_left() {
+    public int get_left() {
         return left_;
     }
 
@@ -106,7 +106,7 @@ public class ClientRect extends SimpleScriptable {
      * @return the right coordinate of the rectangle surrounding the object content
      */
     @JsxGetter
-    public int jsxGet_right() {
+    public int get_right() {
         return right_;
     }
 
@@ -124,7 +124,7 @@ public class ClientRect extends SimpleScriptable {
      * @return the top coordinate of the rectangle surrounding the object content
      */
     @JsxGetter
-    public int jsxGet_top() {
+    public int get_top() {
         return top_;
     }
 }

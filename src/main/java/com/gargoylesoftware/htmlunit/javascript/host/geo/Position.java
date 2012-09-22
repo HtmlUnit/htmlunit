@@ -45,7 +45,7 @@ public class Position extends SimpleScriptable {
      * @return the coordinates
      */
     @JsxGetter
-    public Coordinates jsxGet_coords() {
+    public Coordinates get_coords() {
         return coordinates_;
     }
 }

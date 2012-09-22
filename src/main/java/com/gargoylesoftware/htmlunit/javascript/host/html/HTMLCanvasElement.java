@@ -45,8 +45,8 @@ public class HTMLCanvasElement extends HTMLElement {
      * @return the "width" property
      */
     @JsxGetter
-    public int jsxGet_width() {
-        return jsxGet_currentStyle().getCalculatedWidth(false, false);
+    public int get_width() {
+        return get_currentStyle().getCalculatedWidth(false, false);
     }
 
     /**
@@ -63,8 +63,8 @@ public class HTMLCanvasElement extends HTMLElement {
      * @return the "height" property
      */
     @JsxGetter
-    public int jsxGet_height() {
-        return jsxGet_currentStyle().getCalculatedHeight(false, false);
+    public int get_height() {
+        return get_currentStyle().getCalculatedHeight(false, false);
     }
 
     /**

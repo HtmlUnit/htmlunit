@@ -106,7 +106,7 @@ public class Range extends SimpleScriptable {
      * @return <code>undefined</code> if not initialized
      */
     @JsxGetter
-    public Object jsxGet_startContainer() {
+    public Object get_startContainer() {
         if (startContainer_ == null) {
             return Context.getUndefinedValue();
         }
@@ -118,7 +118,7 @@ public class Range extends SimpleScriptable {
      * @return <code>undefined</code> if not initialized
      */
     @JsxGetter
-    public Object jsxGet_endContainer() {
+    public Object get_endContainer() {
         if (endContainer_ == null) {
             return Context.getUndefinedValue();
         }
@@ -130,7 +130,7 @@ public class Range extends SimpleScriptable {
      * @return <code>0</code> if not initialized
      */
     @JsxGetter
-    public int jsxGet_startOffset() {
+    public int get_startOffset() {
         return startOffset_;
     }
 
@@ -139,7 +139,7 @@ public class Range extends SimpleScriptable {
      * @return <code>0</code> if not initialized
      */
     @JsxGetter
-    public int jsxGet_endOffset() {
+    public int get_endOffset() {
         return endOffset_;
     }
 
@@ -186,8 +186,8 @@ public class Range extends SimpleScriptable {
     private int getPositionInContainer(final Node refNode) {
         int i = 0;
         Node node = refNode;
-        while (node.jsxGet_previousSibling() != null) {
-            node = node.jsxGet_previousSibling();
+        while (node.get_previousSibling() != null) {
+            node = node.get_previousSibling();
             ++i;
         }
         return i;
@@ -198,7 +198,7 @@ public class Range extends SimpleScriptable {
      * @return <code>true</code> if the range is collapsed
      */
     @JsxGetter
-    public boolean jsxGet_collapsed() {
+    public boolean get_collapsed() {
         return (startContainer_ == endContainer_ && startOffset_ == endOffset_);
     }
 
@@ -251,7 +251,7 @@ public class Range extends SimpleScriptable {
         startContainer_ = refNode;
         startOffset_ = 0;
         endContainer_ = refNode;
-        endOffset_ = refNode.jsxGet_childNodes().jsxGet_length();
+        endOffset_ = refNode.get_childNodes().get_length();
     }
 
     /**
@@ -285,7 +285,7 @@ public class Range extends SimpleScriptable {
      * @return the deepest common ancestor container of the Range's two boundary points
      */
     @JsxGetter
-    public Object jsxGet_commonAncestorContainer() {
+    public Object get_commonAncestorContainer() {
         final Node ancestor = getCommonAncestor();
         if (ancestor == null) {
             return Context.getUndefinedValue();

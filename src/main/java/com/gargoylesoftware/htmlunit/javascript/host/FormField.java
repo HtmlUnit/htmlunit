@@ -57,7 +57,7 @@ public class FormField extends FormChild {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String jsxGet_value() {
+    public String get_value() {
         return getDomNodeOrDie().getAttribute("value");
     }
 
@@ -77,7 +77,7 @@ public class FormField extends FormChild {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String jsxGet_name() {
+    public String get_name() {
         return getDomNodeOrDie().getAttribute("name");
     }
 
@@ -97,7 +97,7 @@ public class FormField extends FormChild {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String jsxGet_type() {
+    public String get_type() {
         return getDomNodeOrDie().getAttribute("type");
     }
 
@@ -115,7 +115,7 @@ public class FormField extends FormChild {
      * @return the <tt>onchange</tt> event handler for this element
      */
     @JsxGetter
-    public Function jsxGet_onchange() {
+    public Function get_onchange() {
         return getEventHandler("onchange");
     }
 
@@ -124,8 +124,8 @@ public class FormField extends FormChild {
      */
     @Override
     @JsxGetter
-    public boolean jsxGet_disabled() {
-        return super.jsxGet_disabled();
+    public boolean get_disabled() {
+        return super.get_disabled();
     }
 
     /**

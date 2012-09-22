@@ -42,7 +42,7 @@ public class DocumentType extends Node {
      * @return the name
      */
     @JsxGetter
-    public String jsxGet_name() {
+    public String get_name() {
         final String name = ((DomDocumentType) getDomNodeOrDie()).getName();
         if ("html".equals(name) && "FF3".equals(getBrowserVersion().getNickname())) {
             return "HTML";
@@ -54,8 +54,8 @@ public class DocumentType extends Node {
      * {@inheritDoc}
      */
     @Override
-    public String jsxGet_nodeName() {
-        return jsxGet_name();
+    public String get_nodeName() {
+        return get_name();
     }
 
     /**
@@ -63,7 +63,7 @@ public class DocumentType extends Node {
      * @return the publicId
      */
     @JsxGetter(@WebBrowser(FF))
-    public String jsxGet_publicId() {
+    public String get_publicId() {
         return ((DomDocumentType) getDomNodeOrDie()).getPublicId();
     }
 
@@ -72,7 +72,7 @@ public class DocumentType extends Node {
      * @return the systemId
      */
     @JsxGetter(@WebBrowser(FF))
-    public String jsxGet_systemId() {
+    public String get_systemId() {
         return ((DomDocumentType) getDomNodeOrDie()).getSystemId();
     }
 
@@ -81,7 +81,7 @@ public class DocumentType extends Node {
      * @return the internal subset
      */
     @JsxGetter(@WebBrowser(FF))
-    public String jsxGet_internalSubset() {
+    public String get_internalSubset() {
         final String subset = ((DomDocumentType) getDomNodeOrDie()).getInternalSubset();
         if (StringUtils.isNotEmpty(subset)) {
             return subset;
@@ -98,7 +98,7 @@ public class DocumentType extends Node {
      * @return entities
      */
     @JsxGetter
-    public Object jsxGet_entities() {
+    public Object get_entities() {
         final NamedNodeMap entities = ((DomDocumentType) getDomNodeOrDie()).getEntities();
         if (null != entities) {
             return entities;
@@ -118,7 +118,7 @@ public class DocumentType extends Node {
      * @return notations
      */
     @JsxGetter
-    public Object jsxGet_notations() {
+    public Object get_notations() {
         final NamedNodeMap notations = ((DomDocumentType) getDomNodeOrDie()).getNotations();
         if (null != notations) {
             return notations;

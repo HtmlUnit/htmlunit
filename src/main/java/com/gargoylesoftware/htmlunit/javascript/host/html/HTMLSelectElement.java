@@ -125,7 +125,7 @@ public class HTMLSelectElement extends FormField {
             return null;
         }
 
-        final int length = jsxGet_length();
+        final int length = get_length();
         if (index > length) {
             return null;
         }
@@ -221,7 +221,7 @@ public class HTMLSelectElement extends FormField {
      * @return the type
      */
     @Override
-    public String jsxGet_type() {
+    public String get_type() {
         final String type;
         if (getHtmlSelect().isMultipleSelectEnabled()) {
             type = "select-multiple";
@@ -237,7 +237,7 @@ public class HTMLSelectElement extends FormField {
      * @return the options property
      */
     @JsxGetter
-    public HTMLOptionsCollection jsxGet_options() {
+    public HTMLOptionsCollection get_options() {
         if (optionsArray_ == null) {
             initialize();
         }
@@ -249,7 +249,7 @@ public class HTMLSelectElement extends FormField {
      * @return the selectedIndex property
      */
     @JsxGetter
-    public int jsxGet_selectedIndex() {
+    public int get_selectedIndex() {
         final HtmlSelect htmlSelect = getHtmlSelect();
         final List<HtmlOption> selectedOptions = htmlSelect.getSelectedOptions();
         if (selectedOptions.isEmpty()) {
@@ -292,13 +292,13 @@ public class HTMLSelectElement extends FormField {
      * @return the value
      */
     @Override
-    public String jsxGet_value() {
+    public String get_value() {
         final HtmlSelect htmlSelect = getHtmlSelect();
         final List<HtmlOption> selectedOptions = htmlSelect.getSelectedOptions();
         if (selectedOptions.isEmpty()) {
             return "";
         }
-        return ((HTMLOptionElement) selectedOptions.get(0).getScriptObject()).jsxGet_value();
+        return ((HTMLOptionElement) selectedOptions.get(0).getScriptObject()).get_value();
     }
 
     /**
@@ -306,11 +306,11 @@ public class HTMLSelectElement extends FormField {
      * @return the length property
      */
     @JsxGetter
-    public int jsxGet_length() {
+    public int get_length() {
         if (optionsArray_ == null) {
             initialize();
         }
-        return optionsArray_.jsxGet_length();
+        return optionsArray_.get_length();
     }
 
     /**
@@ -375,7 +375,7 @@ public class HTMLSelectElement extends FormField {
      * @return the <tt>size</tt> attribute
      */
     @JsxGetter
-    public int jsxGet_size() {
+    public int get_size() {
         int size = 0;
         final String sizeAttribute = getDomNodeOrDie().getAttribute("size");
         if (sizeAttribute != DomElement.ATTRIBUTE_NOT_DEFINED && sizeAttribute != DomElement.ATTRIBUTE_VALUE_EMPTY) {
@@ -403,7 +403,7 @@ public class HTMLSelectElement extends FormField {
      * @return <tt>true</tt> if the <tt>multiple</tt> attribute is set
      */
     @JsxGetter
-    public boolean jsxGet_multiple() {
+    public boolean get_multiple() {
         return getDomNodeOrDie().hasAttribute("multiple");
     }
 
@@ -426,7 +426,7 @@ public class HTMLSelectElement extends FormField {
         if (select.getOptionSize() == 0) {
             jsxSet_selectedIndex(-1);
         }
-        else if (jsxGet_selectedIndex() == -1) {
+        else if (get_selectedIndex() == -1) {
             jsxSet_selectedIndex(0);
         }
     }

@@ -61,7 +61,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's caption element
      */
     @JsxGetter
-    public Object jsxGet_caption() {
+    public Object get_caption() {
         final List<HtmlElement> captions = getDomNodeOrDie().getHtmlElementsByTagName("caption");
         if (captions.isEmpty()) {
             return null;
@@ -95,7 +95,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's tfoot element
      */
     @JsxGetter
-    public Object jsxGet_tFoot() {
+    public Object get_tFoot() {
         final List<HtmlElement> tfoots = getDomNodeOrDie().getHtmlElementsByTagName("tfoot");
         if (tfoots.isEmpty()) {
             return null;
@@ -113,7 +113,7 @@ public class HTMLTableElement extends RowContainer {
             throw Context.reportRuntimeError("Can't set tFoot");
         }
         else if (!(o instanceof HTMLTableSectionElement
-            && "TFOOT".equals(((HTMLTableSectionElement) o).jsxGet_tagName()))) {
+            && "TFOOT".equals(((HTMLTableSectionElement) o).get_tagName()))) {
             throw Context.reportRuntimeError("Not a tFoot");
         }
 
@@ -130,7 +130,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the table's thead element
      */
     @JsxGetter
-    public Object jsxGet_tHead() {
+    public Object get_tHead() {
         final List<HtmlElement> theads = getDomNodeOrDie().getHtmlElementsByTagName("thead");
         if (theads.isEmpty()) {
             return null;
@@ -148,7 +148,7 @@ public class HTMLTableElement extends RowContainer {
             throw Context.reportRuntimeError("Can't set tHead");
         }
         else if (!(o instanceof HTMLTableSectionElement
-            && "THEAD".equals(((HTMLTableSectionElement) o).jsxGet_tagName()))) {
+            && "THEAD".equals(((HTMLTableSectionElement) o).get_tagName()))) {
             throw Context.reportRuntimeError("Not a tHead");
         }
 
@@ -164,7 +164,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the tbody's in the table
      */
     @JsxGetter
-    public Object jsxGet_tBodies() {
+    public Object get_tBodies() {
         if (tBodies_ == null) {
             final HtmlTable table = (HtmlTable) getDomNodeOrDie();
             tBodies_ = new HTMLCollection(table, false, "HTMLTableElement.tBodies") {
@@ -288,7 +288,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the <tt>width</tt> attribute
      */
     @JsxGetter
-    public String jsxGet_width() {
+    public String get_width() {
         return getDomNodeOrDie().getAttribute("width");
     }
 
@@ -306,7 +306,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the <tt>cellSpacing</tt> attribute
      */
     @JsxGetter
-    public String jsxGet_cellSpacing() {
+    public String get_cellSpacing() {
         return getDomNodeOrDie().getAttribute("cellspacing");
     }
 
@@ -324,7 +324,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the <tt>cellPadding</tt> attribute
      */
     @JsxGetter
-    public String jsxGet_cellPadding() {
+    public String get_cellPadding() {
         return getDomNodeOrDie().getAttribute("cellpadding");
     }
 
@@ -342,7 +342,7 @@ public class HTMLTableElement extends RowContainer {
      * @return the <tt>border</tt> attribute
      */
     @JsxGetter
-    public String jsxGet_border() {
+    public String get_border() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
     }
@@ -362,7 +362,7 @@ public class HTMLTableElement extends RowContainer {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String jsxGet_bgColor() {
+    public String get_bgColor() {
         return getDomNodeOrDie().getAttribute("bgColor");
     }
 

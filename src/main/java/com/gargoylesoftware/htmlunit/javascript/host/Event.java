@@ -382,7 +382,7 @@ public class Event extends SimpleScriptable {
      * @return the object that fired the event
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object jsxGet_srcElement() {
+    public Object get_srcElement() {
         return srcElement_;
     }
 
@@ -400,7 +400,7 @@ public class Event extends SimpleScriptable {
      * @return the event target to which the event was originally dispatched
      */
     @JsxGetter(@WebBrowser(FF))
-    public Object jsxGet_target() {
+    public Object get_target() {
         return target_;
     }
 
@@ -418,7 +418,7 @@ public class Event extends SimpleScriptable {
      * @return the current event target
      */
     @JsxGetter(@WebBrowser(FF))
-    public Object jsxGet_currentTarget() {
+    public Object get_currentTarget() {
         return currentTarget_;
     }
 
@@ -435,7 +435,7 @@ public class Event extends SimpleScriptable {
      * @return the event type
      */
     @JsxGetter
-    public String jsxGet_type() {
+    public String get_type() {
         return type_;
     }
 
@@ -461,7 +461,7 @@ public class Event extends SimpleScriptable {
      * @return the time at which this event was created
      */
     @JsxGetter(@WebBrowser(FF))
-    public long jsxGet_timeStamp() {
+    public long get_timeStamp() {
         return timeStamp_;
     }
 
@@ -478,7 +478,7 @@ public class Event extends SimpleScriptable {
      * @return the key code associated with the event
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object jsxGet_keyCode() {
+    public Object get_keyCode() {
         if (keyCode_ == null) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_155)) {
                 return Integer.valueOf(0);
@@ -492,7 +492,7 @@ public class Event extends SimpleScriptable {
      * @return whether SHIFT has been pressed during this event or not
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean jsxGet_shiftKey() {
+    public boolean get_shiftKey() {
         return shiftKey_;
     }
 
@@ -507,7 +507,7 @@ public class Event extends SimpleScriptable {
      * @return whether CTRL has been pressed during this event or not
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean jsxGet_ctrlKey() {
+    public boolean get_ctrlKey() {
         return ctrlKey_;
     }
 
@@ -522,7 +522,7 @@ public class Event extends SimpleScriptable {
      * @return whether ALT has been pressed during this event or not
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean jsxGet_altKey() {
+    public boolean get_altKey() {
         return altKey_;
     }
 
@@ -537,7 +537,7 @@ public class Event extends SimpleScriptable {
      * @return the current event phase for the event
      */
     @JsxGetter(@WebBrowser(FF))
-    public int jsxGet_eventPhase() {
+    public int get_eventPhase() {
         return eventPhase_;
     }
 
@@ -558,7 +558,7 @@ public class Event extends SimpleScriptable {
      * @return whether or not this event bubbles
      */
     @JsxGetter(@WebBrowser(FF))
-    public boolean jsxGet_bubbles() {
+    public boolean get_bubbles() {
         return bubbles_;
     }
 
@@ -566,7 +566,7 @@ public class Event extends SimpleScriptable {
      * @return whether or not this event can be canceled
      */
     @JsxGetter(@WebBrowser(FF))
-    public boolean jsxGet_cancelable() {
+    public boolean get_cancelable() {
         return cancelable_;
     }
 
@@ -574,7 +574,7 @@ public class Event extends SimpleScriptable {
      * @return indicates if event propagation is stopped
      */
     @JsxGetter
-    public boolean jsxGet_cancelBubble() {
+    public boolean get_cancelBubble() {
         return stopPropagation_;
     }
 
@@ -607,7 +607,7 @@ public class Event extends SimpleScriptable {
      * @return the return value associated with the event
      */
     @JsxGetter
-    public Object jsxGet_returnValue() {
+    public Object get_returnValue() {
         return returnValue_;
     }
 
@@ -616,7 +616,7 @@ public class Event extends SimpleScriptable {
      * @return the property name associated with the event
      */
     @JsxGetter(@WebBrowser(IE))
-    public String jsxGet_propertyName() {
+    public String get_propertyName() {
         return propertyName_;
     }
 
@@ -674,7 +674,7 @@ public class Event extends SimpleScriptable {
     @Override
     public String toString() {
         final StringBuilder buffer = new StringBuilder("Event ");
-        buffer.append(jsxGet_type());
+        buffer.append(get_type());
         buffer.append(" (");
         buffer.append("Current Target: ");
         buffer.append(currentTarget_);
@@ -689,7 +689,7 @@ public class Event extends SimpleScriptable {
      * @return <code>false</code> if the event can't be applied
      */
     public boolean applies(final DomNode node) {
-        if (TYPE_BLUR.equals(jsxGet_type()) || TYPE_FOCUS.equals(jsxGet_type())) {
+        if (TYPE_BLUR.equals(get_type()) || TYPE_FOCUS.equals(get_type())) {
             return node instanceof SubmittableElement || node instanceof HtmlAnchor
                 || node instanceof HtmlArea;
         }

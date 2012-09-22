@@ -450,7 +450,7 @@ public final class JavaScriptConfiguration {
                     for (final Annotation annotation : method.getAnnotations()) {
                         if (annotation instanceof JsxGetter) {
                             if (isSupported(((JsxGetter) annotation).value(), browser)) {
-                                final String property = method.getName().substring("jsxGet_".length());
+                                final String property = method.getName().substring("get_".length());
                                 allGetters.put(property, method);
                             }
                         }

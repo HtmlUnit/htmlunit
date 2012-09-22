@@ -81,7 +81,7 @@ public class Element extends EventNode {
     @JsxFunction(@WebBrowser(IE))
     public Object selectSingleNode(final String expression) {
         final HTMLCollection collection = selectNodes(expression);
-        if (collection.jsxGet_length() > 0) {
+        if (collection.get_length() > 0) {
             return collection.get(0, collection);
         }
         return null;
@@ -92,8 +92,8 @@ public class Element extends EventNode {
      * @return the tag name
      */
     @JsxGetter
-    public String jsxGet_tagName() {
-        return jsxGet_nodeName();
+    public String get_tagName() {
+        return get_nodeName();
     }
 
     /**
@@ -103,7 +103,7 @@ public class Element extends EventNode {
      */
     @Override
     @JsxGetter
-    public Object jsxGet_attributes() {
+    public Object get_attributes() {
         if (attributes_ == null) {
             attributes_ = createAttributesObject();
         }
@@ -115,7 +115,7 @@ public class Element extends EventNode {
      * @return the Base URI as a string
      */
     @JsxGetter
-    public Object jsxGet_baseURI() {
+    public Object get_baseURI() {
         return getDomNodeOrDie().getPage().getUrl().toExternalForm();
     }
 
@@ -248,7 +248,7 @@ public class Element extends EventNode {
      * @return the text content of the node or the concatenated text representing the node and its descendants
      */
     @JsxGetter(@WebBrowser(IE))
-    public String jsxGet_text() {
+    public String get_text() {
         final StringBuilder buffer = new StringBuilder();
         toText(getDomNodeOrDie(), buffer);
         return buffer.toString();
@@ -366,7 +366,7 @@ public class Element extends EventNode {
      * @return the child element count
      */
     @JsxGetter(@WebBrowser(FF))
-    public int jsxGet_childElementCount() {
+    public int get_childElementCount() {
         return getDomNodeOrDie().getChildElementCount();
     }
 
@@ -375,7 +375,7 @@ public class Element extends EventNode {
      * @return the first element child
      */
     @JsxGetter(@WebBrowser(FF))
-    public Element jsxGet_firstElementChild() {
+    public Element get_firstElementChild() {
         final DomElement child = getDomNodeOrDie().getFirstElementChild();
         if (child != null) {
             return (Element) child.getScriptObject();
@@ -388,7 +388,7 @@ public class Element extends EventNode {
      * @return the last element child
      */
     @JsxGetter(@WebBrowser(FF))
-    public Element jsxGet_lastElementChild() {
+    public Element get_lastElementChild() {
         final DomElement child = getDomNodeOrDie().getLastElementChild();
         if (child != null) {
             return (Element) child.getScriptObject();
@@ -401,7 +401,7 @@ public class Element extends EventNode {
      * @return the next element sibling
      */
     @JsxGetter(@WebBrowser(FF))
-    public Element jsxGet_nextElementSibling() {
+    public Element get_nextElementSibling() {
         final DomElement child = getDomNodeOrDie().getNextElementSibling();
         if (child != null) {
             return (Element) child.getScriptObject();
@@ -414,7 +414,7 @@ public class Element extends EventNode {
      * @return the previous element sibling
      */
     @JsxGetter(@WebBrowser(FF))
-    public Element jsxGet_previousElementSibling() {
+    public Element get_previousElementSibling() {
         final DomElement child = getDomNodeOrDie().getPreviousElementSibling();
         if (child != null) {
             return (Element) child.getScriptObject();
@@ -453,7 +453,7 @@ public class Element extends EventNode {
      * @return the child at the given position
      */
     @JsxGetter(@WebBrowser(FF))
-    public HTMLCollection jsxGet_children() {
+    public HTMLCollection get_children() {
         final DomElement node = getDomNodeOrDie();
         final HTMLCollection collection = new HTMLCollection(node, false, "Element.children") {
             @Override
@@ -469,7 +469,7 @@ public class Element extends EventNode {
      * @return the token list of class attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public DOMTokenList jsxGet_classList() {
+    public DOMTokenList get_classList() {
         return null;
     }
 }

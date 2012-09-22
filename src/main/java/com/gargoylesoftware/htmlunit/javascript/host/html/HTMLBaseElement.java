@@ -40,7 +40,7 @@ public class HTMLBaseElement extends HTMLElement {
      * @return the value of the "href" property
      */
     @JsxGetter
-    public String jsxGet_href() {
+    public String get_href() {
         return getDomNodeOrDie().getAttribute("href");
     }
 
@@ -58,7 +58,7 @@ public class HTMLBaseElement extends HTMLElement {
      * @return the value of the "target" property
      */
     @JsxGetter
-    public String jsxGet_target() {
+    public String get_target() {
         return getDomNodeOrDie().getAttribute("target");
     }
 

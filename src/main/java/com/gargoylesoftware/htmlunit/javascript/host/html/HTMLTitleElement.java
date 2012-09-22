@@ -44,7 +44,7 @@ public class HTMLTitleElement extends HTMLElement {
      */
     @Override
     @JsxGetter
-    public String jsxGet_text() {
+    public String get_text() {
         final DomNode firstChild = getDomNodeOrDie().getFirstChild();
         if (firstChild != null) {
             return firstChild.getNodeValue();

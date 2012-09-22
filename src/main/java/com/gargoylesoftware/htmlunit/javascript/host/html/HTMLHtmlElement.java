@@ -37,20 +37,20 @@ public class HTMLHtmlElement extends HTMLElement {
 
     /** {@inheritDoc} */
     @Override
-    public Object jsxGet_parentNode() {
-        return getWindow().jsxGet_document();
+    public Object get_parentNode() {
+        return getWindow().get_document();
     }
 
     /** {@inheritDoc} */
     @Override
-    public int jsxGet_clientWidth() {
-        return getWindow().jsxGet_innerWidth();
+    public int get_clientWidth() {
+        return getWindow().get_innerWidth();
     }
 
     /** {@inheritDoc} */
     @Override
-    public int jsxGet_clientHeight() {
-        return getWindow().jsxGet_innerHeight();
+    public int get_clientHeight() {
+        return getWindow().get_innerHeight();
     }
 
     /**
@@ -58,11 +58,11 @@ public class HTMLHtmlElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    public int jsxGet_clientLeft() {
+    public int get_clientLeft() {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
             return 2;
         }
-        return super.jsxGet_clientLeft();
+        return super.get_clientLeft();
     }
 
     /**
@@ -70,11 +70,11 @@ public class HTMLHtmlElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    public int jsxGet_clientTop() {
+    public int get_clientTop() {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
             return 2;
         }
-        return super.jsxGet_clientTop();
+        return super.get_clientTop();
     }
 }
 

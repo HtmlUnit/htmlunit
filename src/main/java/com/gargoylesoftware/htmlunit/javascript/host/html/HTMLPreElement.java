@@ -43,7 +43,7 @@ public class HTMLPreElement extends HTMLElement {
      * @return the value of the "cite" property
      */
     @JsxGetter(@WebBrowser(IE))
-    public String jsxGet_cite() {
+    public String get_cite() {
         final String cite = getDomNodeOrDie().getAttribute("cite");
         return cite;
     }

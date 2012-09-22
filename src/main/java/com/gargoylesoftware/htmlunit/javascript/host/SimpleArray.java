@@ -112,7 +112,7 @@ public class SimpleArray extends SimpleScriptable implements ScriptableWithFallb
      * @return the number elements
      */
     @JsxGetter
-    public int jsxGet_length() {
+    public int get_length() {
         return elements_.size();
     }
 
