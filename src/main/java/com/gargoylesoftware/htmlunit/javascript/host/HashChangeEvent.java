@@ -64,7 +64,7 @@ public class HashChangeEvent extends UIEvent {
      * @return the old URL
      */
     @JsxGetter
-    public Object get_oldURL() {
+    public Object getOldURL() {
         return oldURL_;
     }
 
@@ -73,7 +73,7 @@ public class HashChangeEvent extends UIEvent {
      * @return the new URL
      */
     @JsxGetter
-    public Object get_newURL() {
+    public Object getNewURL() {
         return newURL_;
     }
 }

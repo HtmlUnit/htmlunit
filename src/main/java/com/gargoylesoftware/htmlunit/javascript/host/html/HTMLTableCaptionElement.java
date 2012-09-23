@@ -50,7 +50,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      * @return the value of the "align" property
      */
     @JsxGetter
-    public String get_align() {
+    public String getAlign() {
         final boolean invalidValues = getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID);
         return getAlign(invalidValues);
     }
@@ -69,7 +69,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      * @return the value of the "vAlign" property
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_vAlign() {
+    public String getVAlign() {
         return getVAlign(getValidVAlignValues(), VALIGN_DEFAULT_VALUE);
     }
 

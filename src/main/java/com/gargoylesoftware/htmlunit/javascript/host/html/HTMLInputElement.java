@@ -117,7 +117,7 @@ public class HTMLInputElement extends FormField {
      *@return the checked property
      */
     @JsxGetter
-    public boolean get_checked() {
+    public boolean getChecked() {
         return ((HtmlInput) getDomNodeOrDie()).isChecked();
     }
 
@@ -154,7 +154,7 @@ public class HTMLInputElement extends FormField {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533718.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_defaultValue() {
+    public String getDefaultValue() {
         return ((HtmlInput) getDomNodeOrDie()).getDefaultValue();
     }
 
@@ -174,7 +174,7 @@ public class HTMLInputElement extends FormField {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533715.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public boolean get_defaultChecked() {
+    public boolean getDefaultChecked() {
         return ((HtmlInput) getDomNodeOrDie()).isDefaultChecked();
     }
 
@@ -193,8 +193,8 @@ public class HTMLInputElement extends FormField {
      * @return the text length
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_textLength() {
-        return get_value().length();
+    public int getTextLength() {
+        return getValue().length();
     }
 
     /**
@@ -202,7 +202,7 @@ public class HTMLInputElement extends FormField {
      * @return the selection start
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_selectionStart() {
+    public int getSelectionStart() {
         return ((SelectableTextInput) getDomNodeOrDie()).getSelectionStart();
     }
 
@@ -220,7 +220,7 @@ public class HTMLInputElement extends FormField {
      * @return the selection end
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_selectionEnd() {
+    public int getSelectionEnd() {
         return ((SelectableTextInput) getDomNodeOrDie()).getSelectionEnd();
     }
 
@@ -253,7 +253,7 @@ public class HTMLInputElement extends FormField {
      * @return the max length
      */
     @JsxGetter
-    public int get_maxLength() {
+    public int getMaxLength() {
         final String attrValue = getDomNodeOrDie().getAttribute("maxLength");
         return NumberUtils.toInt(attrValue, -1);
     }
@@ -272,7 +272,7 @@ public class HTMLInputElement extends FormField {
      * @return the readOnly attribute
      */
     @JsxGetter
-    public boolean get_readOnly() {
+    public boolean getReadOnly() {
         return ((HtmlInput) getDomNodeOrDie()).isReadOnly();
     }
 
@@ -301,7 +301,7 @@ public class HTMLInputElement extends FormField {
      * @return the value of the "alt" property
      */
     @JsxGetter
-    public String get_alt() {
+    public String getAlt() {
         final String alt = getDomNodeOrDie().getAttribute("alt");
         return alt;
     }
@@ -320,7 +320,7 @@ public class HTMLInputElement extends FormField {
      * @return the "border" attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_border() {
+    public String getBorder() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
     }
@@ -339,7 +339,7 @@ public class HTMLInputElement extends FormField {
      * @return the value of the "align" property
      */
     @JsxGetter
-    public String get_align() {
+    public String getAlign() {
         return getAlign(true);
     }
 
@@ -359,8 +359,8 @@ public class HTMLInputElement extends FormField {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public String get_accessKey() {
-        return super.get_accessKey();
+    public String getAccessKey() {
+        return super.getAccessKey();
     }
 
     /**
@@ -386,8 +386,8 @@ public class HTMLInputElement extends FormField {
      */
     @Override
     @JsxGetter
-    public String get_type() {
-        return super.get_type();
+    public String getType() {
+        return super.getType();
     }
 
 }

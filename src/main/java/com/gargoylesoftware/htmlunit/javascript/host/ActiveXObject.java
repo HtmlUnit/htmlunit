@@ -269,13 +269,14 @@ public class ActiveXObject extends SimpleScriptable {
      */
     public static void addProperty(final SimpleScriptable scriptable, final String propertyName,
             final boolean isGetter, final boolean isSetter) {
+        final String initialUpper = Character.toUpperCase(propertyName.charAt(0)) + propertyName.substring(1);
         String getterName = null;
         if (isGetter) {
-            getterName = "get_" + propertyName;
+            getterName = "get" + initialUpper;
         }
         String setterName = null;
         if (isSetter) {
-            setterName = "set" + Character.toUpperCase(propertyName.charAt(0)) + propertyName.substring(1);
+            setterName = "set" + initialUpper;
         }
         addProperty(scriptable, propertyName, getterName, setterName);
     }

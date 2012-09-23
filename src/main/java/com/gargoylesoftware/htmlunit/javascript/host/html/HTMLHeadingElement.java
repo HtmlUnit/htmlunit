@@ -41,7 +41,7 @@ public class HTMLHeadingElement extends HTMLElement {
      * @return the value of the <tt>align</tt> property
      */
     @JsxGetter
-    public String get_align() {
+    public String getAlign() {
         return getAlign(false);
     }
 

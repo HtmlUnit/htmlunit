@@ -50,7 +50,7 @@ public class EventNode extends Node {
      * @return the <tt>onclick</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onclick() {
+    public Object getOnclick() {
         return getEventHandlerProp("onclick");
     }
 
@@ -68,7 +68,7 @@ public class EventNode extends Node {
      * @return the <tt>ondblclick</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_ondblclick() {
+    public Object getOndblclick() {
         return getEventHandlerProp("ondblclick");
     }
 
@@ -86,7 +86,7 @@ public class EventNode extends Node {
      * @return the <tt>onblur</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onblur() {
+    public Object getOnblur() {
         return getEventHandlerProp("onblur");
     }
 
@@ -104,7 +104,7 @@ public class EventNode extends Node {
      * @return the <tt>onfocus</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onfocus() {
+    public Object getOnfocus() {
         return getEventHandlerProp("onfocus");
     }
 
@@ -122,7 +122,7 @@ public class EventNode extends Node {
      * @return the <tt>onfocusin</tt> event handler for this element
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object get_onfocusin() {
+    public Object getOnfocusin() {
         return getEventHandlerProp("onfocusin");
     }
 
@@ -140,7 +140,7 @@ public class EventNode extends Node {
      * @return the <tt>onfocusout</tt> event handler for this element
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object get_onfocusout() {
+    public Object getOnfocusout() {
         return getEventHandlerProp("onfocusout");
     }
 
@@ -158,7 +158,7 @@ public class EventNode extends Node {
      * @return the <tt>onkeydown</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onkeydown() {
+    public Object getOnkeydown() {
         return getEventHandlerProp("onkeydown");
     }
 
@@ -176,7 +176,7 @@ public class EventNode extends Node {
      * @return the <tt>onkeypress</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onkeypress() {
+    public Object getOnkeypress() {
         return getEventHandlerProp("onkeypress");
     }
 
@@ -194,7 +194,7 @@ public class EventNode extends Node {
      * @return the <tt>onkeyup</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onkeyup() {
+    public Object getOnkeyup() {
         return getEventHandlerProp("onkeyup");
     }
 
@@ -212,7 +212,7 @@ public class EventNode extends Node {
      * @return the <tt>onmousedown</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onmousedown() {
+    public Object getOnmousedown() {
         return getEventHandlerProp("onmousedown");
     }
 
@@ -230,7 +230,7 @@ public class EventNode extends Node {
      * @return the <tt>onmousemove</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onmousemove() {
+    public Object getOnmousemove() {
         return getEventHandlerProp("onmousemove");
     }
 
@@ -248,7 +248,7 @@ public class EventNode extends Node {
      * @return the <tt>onmouseout</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onmouseout() {
+    public Object getOnmouseout() {
         return getEventHandlerProp("onmouseout");
     }
 
@@ -266,7 +266,7 @@ public class EventNode extends Node {
      * @return the <tt>onmouseover</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onmouseover() {
+    public Object getOnmouseover() {
         return getEventHandlerProp("onmouseover");
     }
 
@@ -284,7 +284,7 @@ public class EventNode extends Node {
      * @return the <tt>onmouseup</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onmouseup() {
+    public Object getOnmouseup() {
         return getEventHandlerProp("onmouseup");
     }
 
@@ -302,7 +302,7 @@ public class EventNode extends Node {
      * @return the <tt>oncontextmenu</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_oncontextmenu() {
+    public Object getOncontextmenu() {
         return getEventHandlerProp("oncontextmenu");
     }
 
@@ -320,7 +320,7 @@ public class EventNode extends Node {
      * @return the <tt>onresize</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onresize() {
+    public Object getOnresize() {
         return getEventHandlerProp("onresize");
     }
 
@@ -338,7 +338,7 @@ public class EventNode extends Node {
      * @return the <tt>onpropertychange</tt> event handler for this element
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object get_onpropertychange() {
+    public Object getOnpropertychange() {
         return getEventHandlerProp("onpropertychange");
     }
 
@@ -356,7 +356,7 @@ public class EventNode extends Node {
      * @return the <tt>onerror</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onerror() {
+    public Object getOnerror() {
         return getEventHandlerProp("onerror");
     }
 
@@ -391,7 +391,7 @@ public class EventNode extends Node {
         event.setEventType(cleanedType);
 
         fireEvent(event);
-        return ((Boolean) event.get_returnValue()).booleanValue();
+        return ((Boolean) event.getReturnValue()).booleanValue();
     }
 
 }

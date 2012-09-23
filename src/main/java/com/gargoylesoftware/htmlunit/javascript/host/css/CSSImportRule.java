@@ -53,7 +53,7 @@ public class CSSImportRule extends CSSRule {
      * @return the URL of the imported style sheet
      */
     @JsxGetter
-    public String get_href() {
+    public String getHref() {
         return getImportRule().getHref();
     }
 
@@ -62,9 +62,9 @@ public class CSSImportRule extends CSSRule {
      * @return the media types that the imported CSS style sheet applies to
      */
     @JsxGetter
-    public MediaList get_media() {
+    public MediaList getMedia() {
         if (media_ == null) {
-            final CSSStyleSheet parent = get_parentStyleSheet();
+            final CSSStyleSheet parent = getParentStyleSheet();
             final org.w3c.dom.stylesheets.MediaList ml = getImportRule().getMedia();
             media_ = new MediaList(parent, ml);
         }
@@ -76,10 +76,10 @@ public class CSSImportRule extends CSSRule {
      * @return the style sheet referred to by this rule
      */
     @JsxGetter
-    public CSSStyleSheet get_styleSheet() {
+    public CSSStyleSheet getStyleSheet() {
         if (importedStylesheet_ == null) {
-            final CSSStyleSheet owningSheet = get_parentStyleSheet();
-            final HTMLElement ownerNode = owningSheet.get_ownerNode();
+            final CSSStyleSheet owningSheet = getParentStyleSheet();
+            final HTMLElement ownerNode = owningSheet.getOwnerNode();
             final org.w3c.dom.css.CSSStyleSheet importedStylesheet = getImportRule().getStyleSheet();
             importedStylesheet_ = new CSSStyleSheet(ownerNode, importedStylesheet, owningSheet.getUri());
         }

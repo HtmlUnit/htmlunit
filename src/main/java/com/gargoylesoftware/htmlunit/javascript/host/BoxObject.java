@@ -51,7 +51,7 @@ public class BoxObject extends SimpleScriptable {
      * @return the element to which this box object corresponds
      */
     @JsxGetter
-    public HTMLElement get_element() {
+    public HTMLElement getElement() {
         return element_;
     }
 
@@ -60,8 +60,8 @@ public class BoxObject extends SimpleScriptable {
      * @return this box object's element's first child
      */
     @JsxGetter
-    public Object get_firstChild() {
-        return element_.get_firstChild();
+    public Object getFirstChild() {
+        return element_.getFirstChild();
     }
 
     /**
@@ -69,8 +69,8 @@ public class BoxObject extends SimpleScriptable {
      * @return this box object's element's last child
      */
     @JsxGetter
-    public Object get_lastChild() {
-        return element_.get_lastChild();
+    public Object getLastChild() {
+        return element_.getLastChild();
     }
 
     /**
@@ -78,8 +78,8 @@ public class BoxObject extends SimpleScriptable {
      * @return this box object's element's next sibling
      */
     @JsxGetter
-    public Object get_nextSibling() {
-        return element_.get_nextSibling();
+    public Object getNextSibling() {
+        return element_.getNextSibling();
     }
 
     /**
@@ -87,8 +87,8 @@ public class BoxObject extends SimpleScriptable {
      * @return this box object's element's previous sibling
      */
     @JsxGetter
-    public Object get_previousSibling() {
-        return element_.get_previousSibling();
+    public Object getPreviousSibling() {
+        return element_.getPreviousSibling();
     }
 
     /**
@@ -96,7 +96,7 @@ public class BoxObject extends SimpleScriptable {
      * @return the X position of this box object's element
      */
     @JsxGetter
-    public int get_x() {
+    public int getX() {
         return element_.getPosX();
     }
 
@@ -105,7 +105,7 @@ public class BoxObject extends SimpleScriptable {
      * @return the Y position of this box object's element
      */
     @JsxGetter
-    public int get_y() {
+    public int getY() {
         return element_.getPosY();
     }
 
@@ -116,8 +116,8 @@ public class BoxObject extends SimpleScriptable {
      * @return the <tt>screenX</tt> property
      */
     @JsxGetter
-    public int get_screenX() {
-        return get_x();
+    public int getScreenX() {
+        return getX();
     }
 
     /**
@@ -128,8 +128,8 @@ public class BoxObject extends SimpleScriptable {
      * @return the <tt>screenY</tt> property
      */
     @JsxGetter
-    public int get_screenY() {
-        return get_y() + 121;
+    public int getScreenY() {
+        return getY() + 121;
     }
 
     /**
@@ -137,8 +137,8 @@ public class BoxObject extends SimpleScriptable {
      * @return the width of this box object's element, including padding, excluding margin and border
      */
     @JsxGetter
-    public int get_width() {
-        return element_.get_clientWidth();
+    public int getWidth() {
+        return element_.getClientWidth();
     }
 
     /**
@@ -146,8 +146,8 @@ public class BoxObject extends SimpleScriptable {
      * @return the height of this box object's element, including padding, excluding margin and border
      */
     @JsxGetter
-    public int get_height() {
-        return element_.get_clientHeight();
+    public int getHeight() {
+        return element_.getClientHeight();
     }
 
 }

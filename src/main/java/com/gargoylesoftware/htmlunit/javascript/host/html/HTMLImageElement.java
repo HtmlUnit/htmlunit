@@ -103,7 +103,7 @@ public class HTMLImageElement extends HTMLElement {
      * @return the value of the <tt>src</tt> attribute
      */
     @JsxGetter
-    public String get_src() {
+    public String getSrc() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         final String src = img.getSrcAttribute();
         if (instantiatedViaJavaScript_ && "".equals(src)) {
@@ -135,7 +135,7 @@ public class HTMLImageElement extends HTMLElement {
      * @return the <tt>onload</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onload() {
+    public Object getOnload() {
         return getEventHandlerProp("onload");
     }
 
@@ -160,7 +160,7 @@ public class HTMLImageElement extends HTMLElement {
      * @return the value of the "alt" property
      */
     @JsxGetter
-    public String get_alt() {
+    public String getAlt() {
         final String alt = getDomNodeOrDie().getAttribute("alt");
         return alt;
     }
@@ -179,7 +179,7 @@ public class HTMLImageElement extends HTMLElement {
      * @return the "border" attribute
      */
     @JsxGetter
-    public String get_border() {
+    public String getBorder() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
     }
@@ -198,7 +198,7 @@ public class HTMLImageElement extends HTMLElement {
      * @return the value of the "align" property
      */
     @JsxGetter
-    public String get_align() {
+    public String getAlign() {
         final boolean acceptArbitraryValues =
                 getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
 
@@ -242,7 +242,7 @@ public class HTMLImageElement extends HTMLElement {
      * @return the value of the "width" property
      */
     @JsxGetter
-    public int get_width() {
+    public int getWidth() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         final String width = img.getWidthAttribute();
         try {
@@ -267,7 +267,7 @@ public class HTMLImageElement extends HTMLElement {
      * @return the value of the "height" property
      */
     @JsxGetter
-    public int get_height() {
+    public int getHeight() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         final String height = img.getHeightAttribute();
         try {

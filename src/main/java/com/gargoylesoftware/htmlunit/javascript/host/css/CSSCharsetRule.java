@@ -49,7 +49,7 @@ public class CSSCharsetRule extends CSSRule {
      * @return the encoding of the charset rule
      */
     @JsxGetter
-    public String get_encoding() {
+    public String getEncoding() {
         return getCharsetRule().getEncoding();
     }
 

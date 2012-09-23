@@ -53,7 +53,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * @return the value of the "vAlign" property
      */
     @JsxGetter
-    public String get_vAlign() {
+    public String getVAlign() {
         return getVAlign(getValidVAlignValues(), VALIGN_DEFAULT_VALUE);
     }
 
@@ -86,8 +86,8 @@ public class HTMLTableSectionElement extends RowContainer {
      * @return the value of the "ch" property
      */
     @JsxGetter
-    public String get_ch() {
-        return getCh();
+    public String getCh() {
+        return super.getCh();
     }
 
     /**
@@ -96,7 +96,7 @@ public class HTMLTableSectionElement extends RowContainer {
      */
     @JsxSetter
     public void setCh(final String ch) {
-        setCh(ch);
+        super.setCh(ch);
     }
 
     /**
@@ -104,8 +104,8 @@ public class HTMLTableSectionElement extends RowContainer {
      * @return the value of the "chOff" property
      */
     @JsxGetter
-    public String get_chOff() {
-        return getChOff();
+    public String getChOff() {
+        return super.getChOff();
     }
 
     /**
@@ -114,7 +114,7 @@ public class HTMLTableSectionElement extends RowContainer {
      */
     @JsxSetter
     public void setChOff(final String chOff) {
-        setChOff(chOff);
+        super.setChOff(chOff);
     }
 
 }

@@ -160,7 +160,7 @@ public class Node extends SimpleScriptable {
      * @return the node type
      */
     @JsxGetter
-    public short get_nodeType() {
+    public short getNodeType() {
         return getDomNodeOrDie().getNodeType();
     }
 
@@ -169,7 +169,7 @@ public class Node extends SimpleScriptable {
      * @return the node name
      */
     @JsxGetter
-    public String get_nodeName() {
+    public String getNodeName() {
         return getDomNodeOrDie().getNodeName();
     }
 
@@ -178,7 +178,7 @@ public class Node extends SimpleScriptable {
      * @return the node value
      */
     @JsxGetter
-    public String get_nodeValue() {
+    public String getNodeValue() {
         return getDomNodeOrDie().getNodeValue();
     }
 
@@ -478,7 +478,7 @@ public class Node extends SimpleScriptable {
      * @return the child nodes of the current element
      */
     @JsxGetter
-    public NodeList get_childNodes() {
+    public NodeList getChildNodes() {
         if (childNodes_ == null) {
             final DomNode node = getDomNodeOrDie();
             final boolean isXmlPage = node.getOwnerDocument() instanceof XmlPage;
@@ -538,7 +538,7 @@ public class Node extends SimpleScriptable {
         if (newChildObject instanceof DocumentFragment) {
             final DocumentFragment fragment = (DocumentFragment) newChildObject;
             Node firstNode = null;
-            final Node refChildObject = ((Node) oldChildObject).get_nextSibling();
+            final Node refChildObject = ((Node) oldChildObject).getNextSibling();
             for (final DomNode node : fragment.getDomNodeOrDie().getChildren()) {
                 if (firstNode == null) {
                     replaceChild(node.getScriptObject(), oldChildObject);
@@ -587,7 +587,7 @@ public class Node extends SimpleScriptable {
      * @return the parent node
      */
     @JsxGetter
-    public Object get_parentNode() {
+    public Object getParentNode() {
         return getJavaScriptNode(getDomNodeOrDie().getParentNode());
     }
 
@@ -598,7 +598,7 @@ public class Node extends SimpleScriptable {
      * no next sibling.
      */
     @JsxGetter
-    public Node get_nextSibling() {
+    public Node getNextSibling() {
         return getJavaScriptNode(getDomNodeOrDie().getNextSibling());
     }
 
@@ -609,7 +609,7 @@ public class Node extends SimpleScriptable {
      * no previous sibling.
      */
     @JsxGetter
-    public Node get_previousSibling() {
+    public Node getPreviousSibling() {
         return getJavaScriptNode(getDomNodeOrDie().getPreviousSibling());
     }
 
@@ -620,7 +620,7 @@ public class Node extends SimpleScriptable {
      * no children.
      */
     @JsxGetter
-    public Node get_firstChild() {
+    public Node getFirstChild() {
         return getJavaScriptNode(getDomNodeOrDie().getFirstChild());
     }
 
@@ -631,7 +631,7 @@ public class Node extends SimpleScriptable {
      * no children.
      */
     @JsxGetter
-    public Node get_lastChild() {
+    public Node getLastChild() {
         return getJavaScriptNode(getDomNodeOrDie().getLastChild());
     }
 
@@ -862,7 +862,7 @@ public class Node extends SimpleScriptable {
      * @return the document
      */
     @JsxGetter
-    public Object get_ownerDocument() {
+    public Object getOwnerDocument() {
         final Object document = getDomNodeOrDie().getOwnerDocument();
         if (document == null) {
             return null;
@@ -875,7 +875,7 @@ public class Node extends SimpleScriptable {
      * @return the namespace prefix
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_prefix() {
+    public String getPrefix() {
         final DomNode domNode = getDomNodeOrDie();
         final String prefix = domNode.getPrefix();
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_125)
@@ -890,7 +890,7 @@ public class Node extends SimpleScriptable {
      * @return the local name of this element
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_localName() {
+    public String getLocalName() {
         return getDomNodeOrDie().getLocalName();
     }
 
@@ -899,7 +899,7 @@ public class Node extends SimpleScriptable {
      * @return the URI that identifies an XML namespace
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_namespaceURI() {
+    public String getNamespaceURI() {
         final String namespaceURI = getDomNodeOrDie().getNamespaceURI();
         if (namespaceURI == null && getBrowserVersion()
                 .hasFeature(BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
@@ -946,7 +946,7 @@ public class Node extends SimpleScriptable {
      * @return the xml content of the node and its descendants
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object get_xml() {
+    public Object getXml() {
         final DomNode node = getDomNodeOrDie();
         if (node.getPage() instanceof XmlPage) {
             if (this instanceof Element) {
@@ -969,7 +969,7 @@ public class Node extends SimpleScriptable {
      * @return the contents of this node as text
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_textContent() {
+    public String getTextContent() {
         return getDomNodeOrDie().getTextContent();
     }
 
@@ -985,10 +985,10 @@ public class Node extends SimpleScriptable {
     /**
      * Gets the JavaScript property "parentElement".
      * @return the parent element
-     * @see #get_parentNode()
+     * @see #getParentNode()
      */
     @JsxGetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
-    public Element get_parentElement() {
+    public Element getParentElement() {
         final Node parent = getParent();
         if (!(parent instanceof Element)) {
             return null;
@@ -1002,7 +1002,7 @@ public class Node extends SimpleScriptable {
      * @return the attributes of this XML element
      */
     @JsxGetter
-    public Object get_attributes() {
+    public Object getAttributes() {
         return null;
     }
 

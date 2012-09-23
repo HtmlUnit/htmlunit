@@ -59,7 +59,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @return the href property
      */
     @JsxGetter
-    public String get_href() {
+    public String getHref() {
         final HtmlLink link = (HtmlLink) getDomNodeOrDie();
         final String href = link.getHrefAttribute();
         if (href.isEmpty()) {
@@ -87,7 +87,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @return the rel property
      */
     @JsxGetter
-    public String get_rel() {
+    public String getRel() {
         return ((HtmlLink) getDomNodeOrDie()).getRelAttribute();
     }
 
@@ -105,7 +105,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @return the rev property
      */
     @JsxGetter
-    public String get_rev() {
+    public String getRev() {
         return ((HtmlLink) getDomNodeOrDie()).getRevAttribute();
     }
 
@@ -123,7 +123,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @return the type property
      */
     @JsxGetter
-    public String get_type() {
+    public String getType() {
         return ((HtmlLink) getDomNodeOrDie()).getTypeAttribute();
     }
 

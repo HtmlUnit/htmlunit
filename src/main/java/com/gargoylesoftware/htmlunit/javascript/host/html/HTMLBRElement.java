@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 @JsxClass(domClass = HtmlBreak.class)
 public class HTMLBRElement extends HTMLElement {
 
-    /** Valid values for the {@link #get_clear() clear} property. */
+    /** Valid values for the {@link #getClear() clear} property. */
     private static final String[] VALID_CLEAR_VALUES = new String[] {"left", "right", "all", "none"};
 
     /**
@@ -48,7 +48,7 @@ public class HTMLBRElement extends HTMLElement {
      * @return the value of the <tt>clear</tt> property
      */
     @JsxGetter
-    public String get_clear() {
+    public String getClear() {
         final String clear = getDomNodeOrDie().getAttribute("clear");
         if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)
                 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_42)) {

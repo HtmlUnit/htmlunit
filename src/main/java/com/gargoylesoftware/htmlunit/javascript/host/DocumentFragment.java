@@ -40,10 +40,10 @@ public class DocumentFragment extends Node {
      * {@inheritDoc}
      */
     @Override
-    public Object get_xml() {
-        final Node node = get_firstChild();
+    public Object getXml() {
+        final Node node = getFirstChild();
         if (node != null) {
-            return node.get_xml();
+            return node.getXml();
         }
         return "";
     }

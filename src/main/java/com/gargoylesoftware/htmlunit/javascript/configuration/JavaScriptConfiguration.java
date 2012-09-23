@@ -449,8 +449,16 @@ public final class JavaScriptConfiguration {
                 for (final Method method : classConfiguration.getHostClass().getDeclaredMethods()) {
                     for (final Annotation annotation : method.getAnnotations()) {
                         if (annotation instanceof JsxGetter) {
-                            if (isSupported(((JsxGetter) annotation).value(), browser)) {
-                                final String property = method.getName().substring("get_".length());
+                            final JsxGetter jsxGetter = (JsxGetter) annotation;
+                            if (isSupported(jsxGetter.value(), browser)) {
+                                String property;
+                                if (jsxGetter.propertyName().isEmpty()) {
+                                    property = method.getName().substring(3);
+                                    property = Character.toLowerCase(property.charAt(0)) + property.substring(1);
+                                }
+                                else {
+                                    property = jsxGetter.propertyName();
+                                }
                                 allGetters.put(property, method);
                             }
                         }

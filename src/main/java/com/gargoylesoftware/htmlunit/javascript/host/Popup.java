@@ -85,7 +85,7 @@ public class Popup extends SimpleScriptable {
      * @return the HTML document element in the popup
      */
     @JsxGetter
-    public Object get_document() {
+    public Object getDocument() {
         return document_;
     }
 
@@ -94,7 +94,7 @@ public class Popup extends SimpleScriptable {
      * @return <code>true</code> if opened
      */
     @JsxGetter
-    public boolean get_isOpen() {
+    public boolean getIsOpen() {
         return opened_;
     }
 

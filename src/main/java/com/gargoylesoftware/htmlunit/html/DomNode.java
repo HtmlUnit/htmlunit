@@ -683,8 +683,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             for (final Node node : getAncestors(true)) {
                 final ScriptableObject scriptableObject = ((DomNode) node).getScriptObject();
                 if (scriptableObject instanceof HTMLElement) {
-                    final CSSStyleDeclaration style = ((HTMLElement) scriptableObject).get_currentStyle();
-                    final String display = style.get_display();
+                    final CSSStyleDeclaration style = ((HTMLElement) scriptableObject).getCurrentStyle();
+                    final String display = style.getDisplay();
                     if ("none".equals(display)) {
                         return false;
                     }
@@ -698,8 +698,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             do {
                 final ScriptableObject scriptableObject = node.getScriptObject();
                 if (scriptableObject instanceof HTMLElement) {
-                    final CSSStyleDeclaration style = ((HTMLElement) scriptableObject).get_currentStyle();
-                    final String visibility = style.get_visibility();
+                    final CSSStyleDeclaration style = ((HTMLElement) scriptableObject).getCurrentStyle();
+                    final String visibility = style.getVisibility();
                     if (visibility.length() > 0) {
                         if ("visible".equals(visibility)) {
                             return true;

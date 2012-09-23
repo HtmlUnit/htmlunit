@@ -42,7 +42,7 @@ public class HTMLBaseFontElement extends HTMLElement {
      * @return the "color" attribute
      */
     @JsxGetter
-    public String get_color() {
+    public String getColor() {
         return getDomNodeOrDie().getAttribute("color");
     }
 
@@ -60,7 +60,7 @@ public class HTMLBaseFontElement extends HTMLElement {
      * @return the typeface family
      */
     @JsxGetter
-    public String get_face() {
+    public String getFace() {
         return getDomNodeOrDie().getAttribute("face");
     }
 
@@ -78,7 +78,7 @@ public class HTMLBaseFontElement extends HTMLElement {
      * @return the "size" attribute
      */
     @JsxGetter
-    public int get_size() {
+    public int getSize() {
         return (int) Context.toNumber(getDomNodeOrDie().getAttribute("size"));
     }
 

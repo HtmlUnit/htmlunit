@@ -40,8 +40,8 @@ public class HTMLOptGroupElement extends HTMLElement {
      */
     @Override
     @JsxGetter
-    public boolean get_disabled() {
-        return super.get_disabled();
+    public boolean getDisabled() {
+        return super.getDisabled();
     }
 
     /**

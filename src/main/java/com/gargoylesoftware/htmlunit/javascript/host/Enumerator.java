@@ -56,7 +56,7 @@ public class Enumerator extends SimpleScriptable {
             collection_ = (HTMLCollection) o;
         }
         else if (o instanceof HTMLFormElement) {
-            collection_ = ((HTMLFormElement) o).get_elements();
+            collection_ = ((HTMLFormElement) o).getElements();
         }
         else {
             throw new IllegalArgumentException(String.valueOf(o));

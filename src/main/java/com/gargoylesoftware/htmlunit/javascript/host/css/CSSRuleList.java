@@ -65,7 +65,7 @@ public class CSSRuleList extends SimpleScriptable {
      * @return the length of this list.
      */
     @JsxGetter
-    public int get_length() {
+    public int getLength() {
         if (rules_ != null) {
             return rules_.getLength();
         }
@@ -89,7 +89,7 @@ public class CSSRuleList extends SimpleScriptable {
     public Object[] getIds() {
         final List<String> idList = new ArrayList<String>();
 
-        final int length = get_length();
+        final int length = getLength();
         if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_21)) {
             for (int i = 0; i < length; i++) {
                 idList.add(Integer.toString(i));
@@ -118,7 +118,7 @@ public class CSSRuleList extends SimpleScriptable {
         }
         try {
             final int index = Integer.parseInt(name);
-            final int length = get_length();
+            final int length = getLength();
             if (index >= 0 && index < length) {
                 return true;
             }
@@ -134,7 +134,7 @@ public class CSSRuleList extends SimpleScriptable {
      */
     @Override
     public Object get(final int index, final Scriptable start) {
-        if (index < 0 || get_length() <= index) {
+        if (index < 0 || getLength() <= index) {
             return NOT_FOUND;
         }
         return CSSRule.create(stylesheet_, rules_.item(index));

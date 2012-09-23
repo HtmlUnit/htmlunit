@@ -58,7 +58,7 @@ public class RowContainer extends HTMLElement {
      * @return the rows in the element
      */
     @JsxGetter
-    public Object get_rows() {
+    public Object getRows() {
         if (rows_ == null) {
             rows_ = new HTMLCollection(getDomNodeOrDie(), false, "rows") {
                 @Override
@@ -87,8 +87,8 @@ public class RowContainer extends HTMLElement {
      */
     @JsxFunction
     public void deleteRow(int rowIndex) {
-        final HTMLCollection rows = (HTMLCollection) get_rows();
-        final int rowCount = rows.get_length();
+        final HTMLCollection rows = (HTMLCollection) getRows();
+        final int rowCount = rows.getLength();
         if (rowIndex == -1) {
             rowIndex = rowCount - 1;
         }
@@ -114,8 +114,8 @@ public class RowContainer extends HTMLElement {
         if (index != Undefined.instance) {
             rowIndex = (int) Context.toNumber(index);
         }
-        final HTMLCollection rows = (HTMLCollection) get_rows();
-        final int rowCount = rows.get_length();
+        final HTMLCollection rows = (HTMLCollection) getRows();
+        final int rowCount = rows.getLength();
         final int r;
         if (rowIndex == -1 || rowIndex == rowCount) {
             r = Math.max(0, rowCount - 1);
@@ -138,8 +138,8 @@ public class RowContainer extends HTMLElement {
      * @return the inserted row
      */
     public Object insertRow(final int index) {
-        final HTMLCollection rows = (HTMLCollection) get_rows();
-        final int rowCount = rows.get_length();
+        final HTMLCollection rows = (HTMLCollection) getRows();
+        final int rowCount = rows.getLength();
         final DomElement newRow = ((HtmlPage) getDomNodeOrDie().getPage()).createElement("tr");
         if (rowCount == 0) {
             getDomNodeOrDie().appendChild(newRow);
@@ -166,8 +166,8 @@ public class RowContainer extends HTMLElement {
      */
     @JsxFunction(@WebBrowser(IE))
     public Object moveRow(final int sourceIndex, final int targetIndex) {
-        final HTMLCollection rows = (HTMLCollection) get_rows();
-        final int rowCount = rows.get_length();
+        final HTMLCollection rows = (HTMLCollection) getRows();
+        final int rowCount = rows.getLength();
         final boolean sourceIndexValid = (sourceIndex >= 0 && sourceIndex < rowCount);
         final boolean targetIndexValid = (targetIndex >= 0 && targetIndex < rowCount);
         if (sourceIndexValid && targetIndexValid) {
@@ -184,7 +184,7 @@ public class RowContainer extends HTMLElement {
      * @return the value of the "align" property
      */
     @JsxGetter
-    public String get_align() {
+    public String getAlign() {
         return getAlign(true);
     }
 

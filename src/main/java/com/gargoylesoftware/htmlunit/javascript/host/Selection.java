@@ -67,7 +67,7 @@ public class Selection extends SimpleScriptable {
      * @return the node in which the selection begins
      */
     @JsxGetter(@WebBrowser(FF))
-    public Node get_anchorNode() {
+    public Node getAnchorNode() {
         final Range last = getLastRange();
         if (last == null) {
             return null;
@@ -80,7 +80,7 @@ public class Selection extends SimpleScriptable {
      * @return the number of characters that the selection's anchor is offset within the anchor node
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_anchorOffset() {
+    public int getAnchorOffset() {
         final Range last = getLastRange();
         if (last == null) {
             return 0;
@@ -93,7 +93,7 @@ public class Selection extends SimpleScriptable {
      * @return the node in which the selection ends
      */
     @JsxGetter(@WebBrowser(FF))
-    public Node get_focusNode() {
+    public Node getFocusNode() {
         final Range last = getLastRange();
         if (last == null) {
             return null;
@@ -106,7 +106,7 @@ public class Selection extends SimpleScriptable {
      * @return the number of characters that the selection's focus is offset within the focus node
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_focusOffset() {
+    public int getFocusOffset() {
         final Range last = getLastRange();
         if (last == null) {
             return 0;
@@ -119,7 +119,7 @@ public class Selection extends SimpleScriptable {
      * @return a boolean indicating whether the selection's start and end points are at the same position
      */
     @JsxGetter(@WebBrowser(FF))
-    public boolean get_isCollapsed() {
+    public boolean getIsCollapsed() {
         final List<Range> ranges = getRanges();
         return (ranges.isEmpty() || (ranges.size() == 1 && ranges.get(0).getCollapsed()));
     }
@@ -129,7 +129,7 @@ public class Selection extends SimpleScriptable {
      * @return the number of ranges in the selection
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_rangeCount() {
+    public int getRangeCount() {
         return getRanges().size();
     }
 
@@ -138,7 +138,7 @@ public class Selection extends SimpleScriptable {
      * @return the type of selection
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_type() {
+    public String getType() {
         return type_;
     }
 

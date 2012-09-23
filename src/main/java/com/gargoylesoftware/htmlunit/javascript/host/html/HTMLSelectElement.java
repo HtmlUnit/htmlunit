@@ -125,7 +125,7 @@ public class HTMLSelectElement extends FormField {
             return null;
         }
 
-        final int length = get_length();
+        final int length = getLength();
         if (index > length) {
             return null;
         }
@@ -221,7 +221,7 @@ public class HTMLSelectElement extends FormField {
      * @return the type
      */
     @Override
-    public String get_type() {
+    public String getType() {
         final String type;
         if (getHtmlSelect().isMultipleSelectEnabled()) {
             type = "select-multiple";
@@ -237,7 +237,7 @@ public class HTMLSelectElement extends FormField {
      * @return the options property
      */
     @JsxGetter
-    public HTMLOptionsCollection get_options() {
+    public HTMLOptionsCollection getOptions() {
         if (optionsArray_ == null) {
             initialize();
         }
@@ -249,7 +249,7 @@ public class HTMLSelectElement extends FormField {
      * @return the selectedIndex property
      */
     @JsxGetter
-    public int get_selectedIndex() {
+    public int getSelectedIndex() {
         final HtmlSelect htmlSelect = getHtmlSelect();
         final List<HtmlOption> selectedOptions = htmlSelect.getSelectedOptions();
         if (selectedOptions.isEmpty()) {
@@ -292,13 +292,13 @@ public class HTMLSelectElement extends FormField {
      * @return the value
      */
     @Override
-    public String get_value() {
+    public String getValue() {
         final HtmlSelect htmlSelect = getHtmlSelect();
         final List<HtmlOption> selectedOptions = htmlSelect.getSelectedOptions();
         if (selectedOptions.isEmpty()) {
             return "";
         }
-        return ((HTMLOptionElement) selectedOptions.get(0).getScriptObject()).get_value();
+        return ((HTMLOptionElement) selectedOptions.get(0).getScriptObject()).getValue();
     }
 
     /**
@@ -306,11 +306,11 @@ public class HTMLSelectElement extends FormField {
      * @return the length property
      */
     @JsxGetter
-    public int get_length() {
+    public int getLength() {
         if (optionsArray_ == null) {
             initialize();
         }
-        return optionsArray_.get_length();
+        return optionsArray_.getLength();
     }
 
     /**
@@ -375,7 +375,7 @@ public class HTMLSelectElement extends FormField {
      * @return the <tt>size</tt> attribute
      */
     @JsxGetter
-    public int get_size() {
+    public int getSize() {
         int size = 0;
         final String sizeAttribute = getDomNodeOrDie().getAttribute("size");
         if (sizeAttribute != DomElement.ATTRIBUTE_NOT_DEFINED && sizeAttribute != DomElement.ATTRIBUTE_VALUE_EMPTY) {
@@ -403,7 +403,7 @@ public class HTMLSelectElement extends FormField {
      * @return <tt>true</tt> if the <tt>multiple</tt> attribute is set
      */
     @JsxGetter
-    public boolean get_multiple() {
+    public boolean getMultiple() {
         return getDomNodeOrDie().hasAttribute("multiple");
     }
 
@@ -426,7 +426,7 @@ public class HTMLSelectElement extends FormField {
         if (select.getOptionSize() == 0) {
             setSelectedIndex(-1);
         }
-        else if (get_selectedIndex() == -1) {
+        else if (getSelectedIndex() == -1) {
             setSelectedIndex(0);
         }
     }

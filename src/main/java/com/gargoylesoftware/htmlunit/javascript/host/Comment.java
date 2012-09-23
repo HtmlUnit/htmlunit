@@ -49,7 +49,7 @@ public final class Comment extends CharacterDataImpl {
      * @return the ID of this element
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_id() {
+    public String getId() {
         return "";
     }
 
@@ -57,8 +57,8 @@ public final class Comment extends CharacterDataImpl {
      * Returns the class defined for this element.
      * @return the class name
      */
-    @JsxGetter(@WebBrowser(IE))
-    public Object get_className() {
+    @JsxGetter(value = @WebBrowser(IE), propertyName = "className")
+    public Object getClassName_js() {
         return "";
     }
 
@@ -67,7 +67,7 @@ public final class Comment extends CharacterDataImpl {
      * @return the tag name
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object get_tagName() {
+    public Object getTagName() {
         return "!";
     }
 
@@ -76,8 +76,8 @@ public final class Comment extends CharacterDataImpl {
      * @return the text
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_text() {
-        return "<!--" + get_data() + "-->";
+    public String getText() {
+        return "<!--" + getData() + "-->";
     }
 
     /**
@@ -85,8 +85,8 @@ public final class Comment extends CharacterDataImpl {
      * @return the document
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object get_document() {
-        return getWindow().get_document();
+    public Object getDocument() {
+        return getWindow().getDocument_js();
     }
 
     /**
@@ -117,7 +117,7 @@ public final class Comment extends CharacterDataImpl {
      * @return the innerText
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_innerText() {
+    public String getInnerText() {
         return "";
     }
 

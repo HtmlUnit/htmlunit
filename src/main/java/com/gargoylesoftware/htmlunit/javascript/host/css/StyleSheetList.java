@@ -102,8 +102,8 @@ public class StyleSheetList extends SimpleScriptable {
      * @return the list's length
      */
     @JsxGetter
-    public int get_length() {
-        return nodes_.get_length();
+    public int getLength() {
+        return nodes_.getLength();
     }
 
     /**
@@ -117,7 +117,7 @@ public class StyleSheetList extends SimpleScriptable {
         if (index < 0) {
             throw Context.reportRuntimeError("Invalid negative index: " + index);
         }
-        else if (index >= nodes_.get_length()) {
+        else if (index >= nodes_.getLength()) {
             return Context.getUndefinedValue();
         }
 
@@ -126,7 +126,7 @@ public class StyleSheetList extends SimpleScriptable {
         final CSSStyleSheet sheet;
         // <style type="text/css"> ... </style>
         if (element instanceof HTMLStyleElement) {
-            sheet = ((HTMLStyleElement) element).get_sheet();
+            sheet = ((HTMLStyleElement) element).getSheet();
         }
         else {
             // <link rel="stylesheet" type="text/css" href="..." />

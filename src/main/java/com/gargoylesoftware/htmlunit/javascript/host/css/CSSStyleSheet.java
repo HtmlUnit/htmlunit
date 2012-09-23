@@ -608,7 +608,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @return the owner
      */
     @JsxGetter(@WebBrowser(FF))
-    public HTMLElement get_ownerNode() {
+    public HTMLElement getOwnerNode() {
         return ownerNode_;
     }
 
@@ -617,7 +617,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @return the owner
      */
     @JsxGetter(@WebBrowser(IE))
-    public HTMLElement get_owningElement() {
+    public HTMLElement getOwningElement() {
         return ownerNode_;
     }
 
@@ -626,8 +626,8 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @return the collection of rules defined in this style sheet
      */
     @JsxGetter(@WebBrowser(IE))
-    public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList get_rules() {
-        return get_cssRules();
+    public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getRules() {
+        return getCssRules();
     }
 
     /**
@@ -635,7 +635,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @return the collection of rules defined in this style sheet
      */
     @JsxGetter(@WebBrowser(FF))
-    public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList get_cssRules() {
+    public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getCssRules() {
         if (cssRules_ == null) {
             cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
         }
@@ -647,7 +647,7 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @return the URL of the stylesheet
      */
     @JsxGetter
-    public String get_href() {
+    public String getHref() {
         final BrowserVersion version = getBrowserVersion();
 
         if (ownerNode_ != null) {

@@ -38,7 +38,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @return the "fillStyle" property
      */
     @JsxGetter
-    public Object get_fillStyle() {
+    public Object getFillStyle() {
         return null;
     }
 
@@ -76,7 +76,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @return the "strokeStyle" property
      */
     @JsxGetter
-    public Object get_strokeStyle() {
+    public Object getStrokeStyle() {
         return null;
     }
 
@@ -94,7 +94,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @return the "lineWidth" property
      */
     @JsxGetter
-    public double get_lineWidth() {
+    public double getLineWidth() {
         return 0;
     }
 
@@ -112,7 +112,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @return the "globalAlpha" property
      */
     @JsxGetter
-    public double get_globalAlpha() {
+    public double getGlobalAlpha() {
         return 0;
     }
 

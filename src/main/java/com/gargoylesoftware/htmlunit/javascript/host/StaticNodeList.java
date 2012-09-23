@@ -71,7 +71,7 @@ public class StaticNodeList extends SimpleScriptable {
      */
     @JsxFunction
     public Node item(final int index) {
-        if (index < 0 || index >= get_length()) {
+        if (index < 0 || index >= getLength()) {
             return null;
         }
         return elements_.get(index);
@@ -82,7 +82,7 @@ public class StaticNodeList extends SimpleScriptable {
      * @return the length of this element array
      */
     @JsxGetter
-    public int get_length() {
+    public int getLength() {
         return elements_.size();
     }
 

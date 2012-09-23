@@ -80,7 +80,7 @@ public class Storage extends SimpleScriptable {
      * @return the length property
      */
     @JsxGetter
-    public int get_length() {
+    public int getLength() {
         return getMap().size();
     }
 

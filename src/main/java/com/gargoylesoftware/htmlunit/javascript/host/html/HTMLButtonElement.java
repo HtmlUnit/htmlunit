@@ -65,7 +65,7 @@ public class HTMLButtonElement extends FormField {
      */
     @Override
     @JsxGetter
-    public String get_type() {
+    public String getType() {
         return ((HtmlButton) getDomNodeOrDie()).getTypeAttribute();
     }
 
@@ -74,8 +74,8 @@ public class HTMLButtonElement extends FormField {
      */
     @Override
     @JsxGetter
-    public String get_accessKey() {
-        return super.get_accessKey();
+    public String getAccessKey() {
+        return super.getAccessKey();
     }
 
     /**

@@ -110,10 +110,10 @@ public class XMLSerializer extends SimpleScriptable {
             return "";
         }
         if (root instanceof Document) {
-            root = ((Document) root).get_documentElement();
+            root = ((Document) root).getDocumentElement();
         }
         else if (root instanceof DocumentFragment) {
-            root = root.get_firstChild();
+            root = root.getFirstChild();
         }
         if (root instanceof Element) {
             final StringBuilder buffer = new StringBuilder();

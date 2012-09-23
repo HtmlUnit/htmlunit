@@ -37,20 +37,20 @@ public class HTMLHtmlElement extends HTMLElement {
 
     /** {@inheritDoc} */
     @Override
-    public Object get_parentNode() {
-        return getWindow().get_document();
+    public Object getParentNode() {
+        return getWindow().getDocument_js();
     }
 
     /** {@inheritDoc} */
     @Override
-    public int get_clientWidth() {
-        return getWindow().get_innerWidth();
+    public int getClientWidth() {
+        return getWindow().getInnerWidth();
     }
 
     /** {@inheritDoc} */
     @Override
-    public int get_clientHeight() {
-        return getWindow().get_innerHeight();
+    public int getClientHeight() {
+        return getWindow().getInnerHeight();
     }
 
     /**
@@ -58,11 +58,11 @@ public class HTMLHtmlElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    public int get_clientLeft() {
+    public int getClientLeft() {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
             return 2;
         }
-        return super.get_clientLeft();
+        return super.getClientLeft();
     }
 
     /**
@@ -70,11 +70,11 @@ public class HTMLHtmlElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    public int get_clientTop() {
+    public int getClientTop() {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
             return 2;
         }
-        return super.get_clientTop();
+        return super.getClientTop();
     }
 }
 

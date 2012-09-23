@@ -340,12 +340,10 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
     }
 
     /**
-     * Returns the length of this element array.
-     * @return the length of this element array
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>
+     * {@inheritDoc}
      */
     @JsxGetter
-    public final int get_length() {
+    public final int getLength() {
         return getElements().size();
     }
 
@@ -558,13 +556,6 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
                 cachedElements_ = null;
             }
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public int getLength() {
-        return get_length();
     }
 
     /**

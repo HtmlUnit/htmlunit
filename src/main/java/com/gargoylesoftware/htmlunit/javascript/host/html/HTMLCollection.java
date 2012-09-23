@@ -446,14 +446,6 @@ public class HTMLCollection extends NodeList {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getLength() {
-        return get_length();
-    }
-
-    /**
      * Gets the scriptable for the provided element that may already be the right scriptable.
      * @param object the object for which to get the scriptable
      * @return the scriptable

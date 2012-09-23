@@ -57,7 +57,7 @@ public class MediaList extends SimpleScriptable {
      */
     @JsxFunction
     public String item(final int index) {
-        if (index < 0 || index >= get_length()) {
+        if (index < 0 || index >= getLength()) {
             return null;
         }
         return wrappedList_.item(index);
@@ -68,7 +68,7 @@ public class MediaList extends SimpleScriptable {
      * @return the number of media in the list
      */
     @JsxGetter
-    public int get_length() {
+    public int getLength() {
         return wrappedList_.getLength();
     }
 
@@ -78,7 +78,7 @@ public class MediaList extends SimpleScriptable {
      * @return the parsable textual representation.
      */
     @JsxGetter
-    public String get_mediaText() {
+    public String getMediaText() {
         return wrappedList_.getMediaText();
     }
 }

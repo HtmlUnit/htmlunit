@@ -50,6 +50,6 @@ public class PluginArray extends SimpleArray {
      */
     @Override
     protected String getItemName(final Object element) {
-        return ((Plugin) element).get_name();
+        return ((Plugin) element).getName();
     }
 }

@@ -39,7 +39,7 @@ public final class ProcessingInstruction extends Node {
      * @return the target
      */
     @JsxGetter
-    public String get_target() {
+    public String getTarget() {
         return ((DomProcessingInstruction) getDomNodeOrDie()).getTarget();
     }
 
@@ -48,7 +48,7 @@ public final class ProcessingInstruction extends Node {
      * @return the data
      */
     @JsxGetter
-    public String get_data() {
+    public String getData() {
         return ((DomProcessingInstruction) getDomNodeOrDie()).getData();
     }
 

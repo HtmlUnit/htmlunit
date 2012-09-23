@@ -99,7 +99,7 @@ public class Location extends SimpleScriptable {
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         if (hint == null || String.class.equals(hint)) {
-            return get_href();
+            return getHref();
         }
         return super.getDefaultValue(hint);
     }
@@ -124,7 +124,7 @@ public class Location extends SimpleScriptable {
      */
     @JsxFunction
     public void reload(final boolean force) throws IOException {
-        final String url = get_href();
+        final String url = getHref();
         if (UNKNOWN.equals(url)) {
             LOG.error("Unable to reload location: current URL is unknown.");
         }
@@ -152,7 +152,7 @@ public class Location extends SimpleScriptable {
     @JsxFunction
     public String toString() {
         if (window_ != null) {
-            return get_href();
+            return getHref();
         }
         return "";
     }
@@ -163,7 +163,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_href() {
+    public String getHref() {
         final Page page = window_.getWebWindow().getEnclosedPage();
         if (page == null) {
             return UNKNOWN;
@@ -237,7 +237,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_search() {
+    public String getSearch() {
         final String search = getUrl().getQuery();
         if (search == null) {
             return "";
@@ -262,7 +262,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_hash() {
+    public String getHash() {
         final boolean decodeHash = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED);
         String hash = hash_;
         if (decodeHash && hash_ != null) {
@@ -336,7 +336,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_hostname() {
+    public String getHostname() {
         return getUrl().getHost();
     }
 
@@ -357,7 +357,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_host() {
+    public String getHost() {
         final URL url = getUrl();
         final int port = url.getPort();
         final String host = url.getHost();
@@ -398,7 +398,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_pathname() {
+    public String getPathname() {
         if (WebClient.URL_ABOUT_BLANK == getUrl()) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_EMPTY_PATH)) {
                 return "";
@@ -425,7 +425,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_port() {
+    public String getPort() {
         final int port = getUrl().getPort();
         if (port == -1) {
             return "";
@@ -450,7 +450,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_protocol() {
+    public String getProtocol() {
         return getUrl().getProtocol() + ":";
     }
 

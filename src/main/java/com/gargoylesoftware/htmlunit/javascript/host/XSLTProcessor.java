@@ -234,7 +234,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @return which XML input tree to transform
      */
     @JsxGetter(@WebBrowser(IE))
-    public Node get_input() {
+    public Node getInput() {
         return input_;
     }
 
@@ -252,7 +252,7 @@ public class XSLTProcessor extends SimpleScriptable {
      * @return the output of the transformation
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object get_output() {
+    public Object getOutput() {
         return output_;
     }
 

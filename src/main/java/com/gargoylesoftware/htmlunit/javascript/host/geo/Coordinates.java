@@ -49,7 +49,7 @@ public class Coordinates extends SimpleScriptable {
      * @return the latitude
      */
     @JsxGetter
-    public double get_latitude() {
+    public double getLatitude() {
         return latitude_;
     }
 
@@ -58,7 +58,7 @@ public class Coordinates extends SimpleScriptable {
      * @return the longitude
      */
     @JsxGetter
-    public double get_longitude() {
+    public double getLongitude() {
         return longitude_;
     }
 
@@ -67,7 +67,7 @@ public class Coordinates extends SimpleScriptable {
      * @return the accuracy
      */
     @JsxGetter
-    public double get_accuracy() {
+    public double getAccuracy() {
         return accuracy_;
     }
 

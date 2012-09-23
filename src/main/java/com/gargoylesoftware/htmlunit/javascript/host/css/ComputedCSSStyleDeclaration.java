@@ -281,16 +281,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String get_backgroundAttachment() {
-        return defaultIfEmpty(super.get_backgroundAttachment(), "scroll");
+    public String getBackgroundAttachment() {
+        return defaultIfEmpty(super.getBackgroundAttachment(), "scroll");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_backgroundColor() {
-        String value = super.get_backgroundColor();
+    public String getBackgroundColor() {
+        String value = super.getBackgroundColor();
         if (StringUtils.isEmpty(value)) {
             value = "transparent";
         }
@@ -305,8 +305,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String get_backgroundImage() {
-        return defaultIfEmpty(super.get_backgroundImage(), "none");
+    public String getBackgroundImage() {
+        return defaultIfEmpty(super.getBackgroundImage(), "none");
     }
 
     /**
@@ -314,8 +314,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the style attribute
      */
     @Override
-    public String get_backgroundPosition() {
-        String bg = super.get_backgroundPosition();
+    public String getBackgroundPosition() {
+        String bg = super.getBackgroundPosition();
         if (StringUtils.isNotBlank(bg)) {
             bg = StringUtils.replace(bg, "left", "0%");
             bg = StringUtils.replace(bg, "right", "100%");
@@ -332,216 +332,216 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String get_backgroundRepeat() {
-        return defaultIfEmpty(super.get_backgroundRepeat(), "repeat");
+    public String getBackgroundRepeat() {
+        return defaultIfEmpty(super.getBackgroundRepeat(), "repeat");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderBottomColor() {
-        return defaultIfEmpty(super.get_borderBottomColor(), "rgb(0, 0, 0)");
+    public String getBorderBottomColor() {
+        return defaultIfEmpty(super.getBorderBottomColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderBottomStyle() {
-        return defaultIfEmpty(super.get_borderBottomStyle(), "none");
+    public String getBorderBottomStyle() {
+        return defaultIfEmpty(super.getBorderBottomStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderBottomWidth() {
-        return pixelString(defaultIfEmpty(super.get_borderBottomWidth(), "0px"));
+    public String getBorderBottomWidth() {
+        return pixelString(defaultIfEmpty(super.getBorderBottomWidth(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderCollapse() {
-        return defaultIfEmpty(super.get_borderCollapse(), "separate");
+    public String getBorderCollapse() {
+        return defaultIfEmpty(super.getBorderCollapse(), "separate");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderLeftColor() {
-        return defaultIfEmpty(super.get_borderLeftColor(), "rgb(0, 0, 0)");
+    public String getBorderLeftColor() {
+        return defaultIfEmpty(super.getBorderLeftColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderLeftStyle() {
-        return defaultIfEmpty(super.get_borderLeftStyle(), "none");
+    public String getBorderLeftStyle() {
+        return defaultIfEmpty(super.getBorderLeftStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderLeftWidth() {
-        return pixelString(defaultIfEmpty(super.get_borderLeftWidth(), "0px"));
+    public String getBorderLeftWidth() {
+        return pixelString(defaultIfEmpty(super.getBorderLeftWidth(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderRightColor() {
-        return defaultIfEmpty(super.get_borderRightColor(), "rgb(0, 0, 0)");
+    public String getBorderRightColor() {
+        return defaultIfEmpty(super.getBorderRightColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderRightStyle() {
-        return defaultIfEmpty(super.get_borderRightStyle(), "none");
+    public String getBorderRightStyle() {
+        return defaultIfEmpty(super.getBorderRightStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderRightWidth() {
-        return pixelString(defaultIfEmpty(super.get_borderRightWidth(), "0px"));
+    public String getBorderRightWidth() {
+        return pixelString(defaultIfEmpty(super.getBorderRightWidth(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderSpacing() {
-        return defaultIfEmpty(super.get_borderSpacing(), "0px 0px");
+    public String getBorderSpacing() {
+        return defaultIfEmpty(super.getBorderSpacing(), "0px 0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderTopColor() {
-        return defaultIfEmpty(super.get_borderTopColor(), "rgb(0, 0, 0)");
+    public String getBorderTopColor() {
+        return defaultIfEmpty(super.getBorderTopColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderTopStyle() {
-        return defaultIfEmpty(super.get_borderTopStyle(), "none");
+    public String getBorderTopStyle() {
+        return defaultIfEmpty(super.getBorderTopStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_borderTopWidth() {
-        return pixelString(defaultIfEmpty(super.get_borderTopWidth(), "0px"));
+    public String getBorderTopWidth() {
+        return pixelString(defaultIfEmpty(super.getBorderTopWidth(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_bottom() {
-        return defaultIfEmpty(super.get_bottom(), "auto");
+    public String getBottom() {
+        return defaultIfEmpty(super.getBottom(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_captionSide() {
-        return defaultIfEmpty(super.get_captionSide(), "top");
+    public String getCaptionSide() {
+        return defaultIfEmpty(super.getCaptionSide(), "top");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_clear() {
-        return defaultIfEmpty(super.get_clear(), "none");
+    public String getClear() {
+        return defaultIfEmpty(super.getClear(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_clip() {
-        return defaultIfEmpty(super.get_clip(), "auto");
+    public String getClip() {
+        return defaultIfEmpty(super.getClip(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_content() {
-        return defaultIfEmpty(super.get_content(), "none");
+    public String getContent() {
+        return defaultIfEmpty(super.getContent(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_color() {
-        return defaultIfEmpty(super.get_color(), "rgb(0, 0, 0)");
+    public String getColor() {
+        return defaultIfEmpty(super.getColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_counterIncrement() {
-        return defaultIfEmpty(super.get_counterIncrement(), "none");
+    public String getCounterIncrement() {
+        return defaultIfEmpty(super.getCounterIncrement(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_counterReset() {
-        return defaultIfEmpty(super.get_counterReset(), "none");
+    public String getCounterReset() {
+        return defaultIfEmpty(super.getCounterReset(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_cssFloat() {
-        return defaultIfEmpty(super.get_cssFloat(), "none");
+    public String getCssFloat() {
+        return defaultIfEmpty(super.getCssFloat(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_cursor() {
-        return defaultIfEmpty(super.get_cursor(), "auto");
+    public String getCursor() {
+        return defaultIfEmpty(super.getCursor(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_direction() {
-        return defaultIfEmpty(super.get_direction(), "ltr");
+    public String getDirection() {
+        return defaultIfEmpty(super.getDirection(), "ltr");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_display() {
-        return defaultIfEmpty(super.get_display(), getDefaultStyleDisplay());
+    public String getDisplay() {
+        return defaultIfEmpty(super.getDisplay(), getDefaultStyleDisplay());
     }
 
     private String getDefaultStyleDisplay() {
@@ -561,7 +561,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
             defaultDisplays_ = Collections.unmodifiableMap(map);
         }
-        final String defaultValue = defaultDisplays_.get(getElement().get_tagName());
+        final String defaultValue = defaultDisplays_.get(getElement().getTagName());
         if (defaultValue == null) {
             return "block";
         }
@@ -572,28 +572,28 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String get_emptyCells() {
-        return defaultIfEmpty(super.get_emptyCells(), "-moz-show-background");
+    public String getEmptyCells() {
+        return defaultIfEmpty(super.getEmptyCells(), "-moz-show-background");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_fontFamily() {
-        return defaultIfEmpty(super.get_fontFamily(), "serif");
+    public String getFontFamily() {
+        return defaultIfEmpty(super.getFontFamily(), "serif");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_fontSize() {
-        String value = super.get_fontSize();
+    public String getFontSize() {
+        String value = super.getFontSize();
         if (value.isEmpty()) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent != null) {
-                value = parent.get_currentStyle().get_fontSize();
+                value = parent.getCurrentStyle().getFontSize();
             }
         }
         if (value.isEmpty()) {
@@ -606,52 +606,52 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String get_fontSizeAdjust() {
-        return defaultIfEmpty(super.get_fontSizeAdjust(), "none");
+    public String getFontSizeAdjust() {
+        return defaultIfEmpty(super.getFontSizeAdjust(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_fontStretch() {
+    public String getFontStretch() {
         String defaultStretch = "";
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL)) {
             defaultStretch = "normal";
         }
-        return defaultIfEmpty(super.get_fontStretch(), defaultStretch);
+        return defaultIfEmpty(super.getFontStretch(), defaultStretch);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_fontStyle() {
-        return defaultIfEmpty(super.get_fontStyle(), "normal");
+    public String getFontStyle() {
+        return defaultIfEmpty(super.getFontStyle(), "normal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_fontVariant() {
-        return defaultIfEmpty(super.get_fontVariant(), "normal");
+    public String getFontVariant() {
+        return defaultIfEmpty(super.getFontVariant(), "normal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_fontWeight() {
-        return defaultIfEmpty(super.get_fontWeight(), "400");
+    public String getFontWeight() {
+        return defaultIfEmpty(super.getFontWeight(), "400");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_height() {
+    public String getHeight() {
         return pixelString(getElement(), new CssValue(Window.WINDOW_HEIGHT) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
                 return defaultIfEmpty(style.getStyleAttribute("height", null), "362px");
@@ -663,763 +663,763 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String get_imeMode() {
-        return defaultIfEmpty(super.get_imeMode(), "auto");
+    public String getImeMode() {
+        return defaultIfEmpty(super.getImeMode(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_left() {
-        return defaultIfEmpty(super.get_left(), "auto");
+    public String getLeft() {
+        return defaultIfEmpty(super.getLeft(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_letterSpacing() {
-        return defaultIfEmpty(super.get_letterSpacing(), "normal");
+    public String getLetterSpacing() {
+        return defaultIfEmpty(super.getLetterSpacing(), "normal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_lineHeight() {
-        return defaultIfEmpty(super.get_lineHeight(), "20px");
+    public String getLineHeight() {
+        return defaultIfEmpty(super.getLineHeight(), "20px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_listStyleImage() {
-        return defaultIfEmpty(super.get_listStyleImage(), "none");
+    public String getListStyleImage() {
+        return defaultIfEmpty(super.getListStyleImage(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_listStylePosition() {
-        return defaultIfEmpty(super.get_listStylePosition(), "outside");
+    public String getListStylePosition() {
+        return defaultIfEmpty(super.getListStylePosition(), "outside");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_listStyleType() {
-        return defaultIfEmpty(super.get_listStyleType(), "disc");
+    public String getListStyleType() {
+        return defaultIfEmpty(super.getListStyleType(), "disc");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_marginBottom() {
-        return pixelString(defaultIfEmpty(super.get_marginBottom(), "0px"));
+    public String getMarginBottom() {
+        return pixelString(defaultIfEmpty(super.getMarginBottom(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_marginLeft() {
-        return pixelString(defaultIfEmpty(super.get_marginLeft(), "0px"));
+    public String getMarginLeft() {
+        return pixelString(defaultIfEmpty(super.getMarginLeft(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_marginRight() {
-        return pixelString(defaultIfEmpty(super.get_marginRight(), "0px"));
+    public String getMarginRight() {
+        return pixelString(defaultIfEmpty(super.getMarginRight(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_marginTop() {
-        return pixelString(defaultIfEmpty(super.get_marginTop(), "0px"));
+    public String getMarginTop() {
+        return pixelString(defaultIfEmpty(super.getMarginTop(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_markerOffset() {
-        return defaultIfEmpty(super.get_markerOffset(), "auto");
+    public String getMarkerOffset() {
+        return defaultIfEmpty(super.getMarkerOffset(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_maxHeight() {
-        return defaultIfEmpty(super.get_maxHeight(), "none");
+    public String getMaxHeight() {
+        return defaultIfEmpty(super.getMaxHeight(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_maxWidth() {
-        return defaultIfEmpty(super.get_maxWidth(), "none");
+    public String getMaxWidth() {
+        return defaultIfEmpty(super.getMaxWidth(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_minHeight() {
-        return defaultIfEmpty(super.get_minHeight(), "0px");
+    public String getMinHeight() {
+        return defaultIfEmpty(super.getMinHeight(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_minWidth() {
-        return defaultIfEmpty(super.get_minWidth(), "0px");
+    public String getMinWidth() {
+        return defaultIfEmpty(super.getMinWidth(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozAppearance() {
-        return defaultIfEmpty(super.get_MozAppearance(), "none");
+    public String getMozAppearance() {
+        return defaultIfEmpty(super.getMozAppearance(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBackgroundClip() {
-        return defaultIfEmpty(super.get_MozBackgroundClip(), "border");
+    public String getMozBackgroundClip() {
+        return defaultIfEmpty(super.getMozBackgroundClip(), "border");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBackgroundInlinePolicy() {
-        return defaultIfEmpty(super.get_MozBackgroundInlinePolicy(), "continuous");
+    public String getMozBackgroundInlinePolicy() {
+        return defaultIfEmpty(super.getMozBackgroundInlinePolicy(), "continuous");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBackgroundOrigin() {
-        return defaultIfEmpty(super.get_MozBackgroundOrigin(), "padding");
+    public String getMozBackgroundOrigin() {
+        return defaultIfEmpty(super.getMozBackgroundOrigin(), "padding");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBackgroundSize() {
-        return defaultIfEmpty(super.get_MozBackgroundSize(), "auto auto");
+    public String getMozBackgroundSize() {
+        return defaultIfEmpty(super.getMozBackgroundSize(), "auto auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBinding() {
-        return defaultIfEmpty(super.get_MozBinding(), "none");
+    public String getMozBinding() {
+        return defaultIfEmpty(super.getMozBinding(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBorderBottomColors() {
-        return defaultIfEmpty(super.get_MozBorderBottomColors(), "none");
+    public String getMozBorderBottomColors() {
+        return defaultIfEmpty(super.getMozBorderBottomColors(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBorderImage() {
-        return defaultIfEmpty(super.get_MozBorderImage(), "none");
+    public String getMozBorderImage() {
+        return defaultIfEmpty(super.getMozBorderImage(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBorderLeftColors() {
-        return defaultIfEmpty(super.get_MozBorderLeftColors(), "none");
+    public String getMozBorderLeftColors() {
+        return defaultIfEmpty(super.getMozBorderLeftColors(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBorderRadiusBottomleft() {
-        return defaultIfEmpty(super.get_MozBorderRadiusBottomleft(), "0px");
+    public String getMozBorderRadiusBottomleft() {
+        return defaultIfEmpty(super.getMozBorderRadiusBottomleft(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBorderRadiusBottomright() {
-        return defaultIfEmpty(super.get_MozBorderRadiusBottomright(), "0px");
+    public String getMozBorderRadiusBottomright() {
+        return defaultIfEmpty(super.getMozBorderRadiusBottomright(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBorderRadiusTopleft() {
-        return defaultIfEmpty(super.get_MozBorderRadiusTopleft(), "0px");
+    public String getMozBorderRadiusTopleft() {
+        return defaultIfEmpty(super.getMozBorderRadiusTopleft(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBorderRadiusTopright() {
-        return defaultIfEmpty(super.get_MozBorderRadiusTopright(), "0px");
+    public String getMozBorderRadiusTopright() {
+        return defaultIfEmpty(super.getMozBorderRadiusTopright(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBorderRightColors() {
-        return defaultIfEmpty(super.get_MozBorderRightColors(), "none");
+    public String getMozBorderRightColors() {
+        return defaultIfEmpty(super.getMozBorderRightColors(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBorderTopColors() {
-        return defaultIfEmpty(super.get_MozBorderTopColors(), "none");
+    public String getMozBorderTopColors() {
+        return defaultIfEmpty(super.getMozBorderTopColors(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBoxAlign() {
-        return defaultIfEmpty(super.get_MozBoxAlign(), "stretch");
+    public String getMozBoxAlign() {
+        return defaultIfEmpty(super.getMozBoxAlign(), "stretch");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBoxDirection() {
-        return defaultIfEmpty(super.get_MozBoxDirection(), "normal");
+    public String getMozBoxDirection() {
+        return defaultIfEmpty(super.getMozBoxDirection(), "normal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBoxFlex() {
-        return defaultIfEmpty(super.get_MozBoxFlex(), "0");
+    public String getMozBoxFlex() {
+        return defaultIfEmpty(super.getMozBoxFlex(), "0");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBoxOrdinalGroup() {
-        return defaultIfEmpty(super.get_MozBoxOrdinalGroup(), "1");
+    public String getMozBoxOrdinalGroup() {
+        return defaultIfEmpty(super.getMozBoxOrdinalGroup(), "1");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBoxOrient() {
-        return defaultIfEmpty(super.get_MozBoxOrient(), "horizontal");
+    public String getMozBoxOrient() {
+        return defaultIfEmpty(super.getMozBoxOrient(), "horizontal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBoxShadow() {
-        return defaultIfEmpty(super.get_MozBoxShadow(), "none");
+    public String getMozBoxShadow() {
+        return defaultIfEmpty(super.getMozBoxShadow(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBoxPack() {
-        return defaultIfEmpty(super.get_MozBoxPack(), "start");
+    public String getMozBoxPack() {
+        return defaultIfEmpty(super.getMozBoxPack(), "start");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozBoxSizing() {
-        return defaultIfEmpty(super.get_MozBoxSizing(), "content-box");
+    public String getMozBoxSizing() {
+        return defaultIfEmpty(super.getMozBoxSizing(), "content-box");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozColumnCount() {
-        return defaultIfEmpty(super.get_MozColumnCount(), "auto");
+    public String getMozColumnCount() {
+        return defaultIfEmpty(super.getMozColumnCount(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozColumnGap() {
-        return defaultIfEmpty(super.get_MozColumnGap(), "16px");
+    public String getMozColumnGap() {
+        return defaultIfEmpty(super.getMozColumnGap(), "16px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozColumnRuleColor() {
-        return defaultIfEmpty(super.get_MozColumnRuleColor(), "rgb(0, 0, 0)");
+    public String getMozColumnRuleColor() {
+        return defaultIfEmpty(super.getMozColumnRuleColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozColumnRuleStyle() {
-        return defaultIfEmpty(super.get_MozColumnRuleStyle(), "none");
+    public String getMozColumnRuleStyle() {
+        return defaultIfEmpty(super.getMozColumnRuleStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozColumnRuleWidth() {
-        return defaultIfEmpty(super.get_MozColumnRuleWidth(), "0px");
+    public String getMozColumnRuleWidth() {
+        return defaultIfEmpty(super.getMozColumnRuleWidth(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozColumnWidth() {
-        return defaultIfEmpty(super.get_MozColumnWidth(), "auto");
+    public String getMozColumnWidth() {
+        return defaultIfEmpty(super.getMozColumnWidth(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozFloatEdge() {
-        return defaultIfEmpty(super.get_MozFloatEdge(), "content-box");
+    public String getMozFloatEdge() {
+        return defaultIfEmpty(super.getMozFloatEdge(), "content-box");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozForceBrokenImageIcon() {
-        return defaultIfEmpty(super.get_MozForceBrokenImageIcon(), "0");
+    public String getMozForceBrokenImageIcon() {
+        return defaultIfEmpty(super.getMozForceBrokenImageIcon(), "0");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozImageRegion() {
-        return defaultIfEmpty(super.get_MozImageRegion(), "auto");
+    public String getMozImageRegion() {
+        return defaultIfEmpty(super.getMozImageRegion(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozOpacity() {
-        return defaultIfEmpty(super.get_MozOpacity(), "1");
+    public String getMozOpacity() {
+        return defaultIfEmpty(super.getMozOpacity(), "1");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozOutlineColor() {
-        return defaultIfEmpty(super.get_MozOutlineColor(), "rgb(0, 0, 0)");
+    public String getMozOutlineColor() {
+        return defaultIfEmpty(super.getMozOutlineColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozOutlineOffset() {
-        return defaultIfEmpty(super.get_MozOutlineOffset(), "0px");
+    public String getMozOutlineOffset() {
+        return defaultIfEmpty(super.getMozOutlineOffset(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozOutlineRadiusBottomleft() {
-        return defaultIfEmpty(super.get_MozOutlineRadiusBottomleft(), "0px");
+    public String getMozOutlineRadiusBottomleft() {
+        return defaultIfEmpty(super.getMozOutlineRadiusBottomleft(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozOutlineRadiusBottomright() {
-        return defaultIfEmpty(super.get_MozOutlineRadiusBottomright(), "0px");
+    public String getMozOutlineRadiusBottomright() {
+        return defaultIfEmpty(super.getMozOutlineRadiusBottomright(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozOutlineRadiusTopleft() {
-        return defaultIfEmpty(super.get_MozOutlineRadiusTopleft(), "0px");
+    public String getMozOutlineRadiusTopleft() {
+        return defaultIfEmpty(super.getMozOutlineRadiusTopleft(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozOutlineRadiusTopright() {
-        return defaultIfEmpty(super.get_MozOutlineRadiusTopright(), "0px");
+    public String getMozOutlineRadiusTopright() {
+        return defaultIfEmpty(super.getMozOutlineRadiusTopright(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozOutlineStyle() {
-        return defaultIfEmpty(super.get_MozOutlineStyle(), "none");
+    public String getMozOutlineStyle() {
+        return defaultIfEmpty(super.getMozOutlineStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozOutlineWidth() {
-        return defaultIfEmpty(super.get_MozOutlineWidth(), "0px");
+    public String getMozOutlineWidth() {
+        return defaultIfEmpty(super.getMozOutlineWidth(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozStackSizing() {
-        return defaultIfEmpty(super.get_MozStackSizing(), "stretch-to-fit");
+    public String getMozStackSizing() {
+        return defaultIfEmpty(super.getMozStackSizing(), "stretch-to-fit");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozTransform() {
-        return defaultIfEmpty(super.get_MozTransform(), "none");
+    public String getMozTransform() {
+        return defaultIfEmpty(super.getMozTransform(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozTransformOrigin() {
-        return defaultIfEmpty(super.get_MozTransformOrigin(), "50% 50%");
+    public String getMozTransformOrigin() {
+        return defaultIfEmpty(super.getMozTransformOrigin(), "50% 50%");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozUserFocus() {
-        return defaultIfEmpty(super.get_MozUserFocus(), "none");
+    public String getMozUserFocus() {
+        return defaultIfEmpty(super.getMozUserFocus(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozUserInput() {
-        return defaultIfEmpty(super.get_MozUserInput(), "auto");
+    public String getMozUserInput() {
+        return defaultIfEmpty(super.getMozUserInput(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozUserModify() {
-        return defaultIfEmpty(super.get_MozUserModify(), "read-only");
+    public String getMozUserModify() {
+        return defaultIfEmpty(super.getMozUserModify(), "read-only");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozUserSelect() {
-        return defaultIfEmpty(super.get_MozUserSelect(), "auto");
+    public String getMozUserSelect() {
+        return defaultIfEmpty(super.getMozUserSelect(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_MozWindowShadow() {
-        return defaultIfEmpty(super.get_MozWindowShadow(), "default");
+    public String getMozWindowShadow() {
+        return defaultIfEmpty(super.getMozWindowShadow(), "default");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_opacity() {
-        return defaultIfEmpty(super.get_opacity(), "1");
+    public String getOpacity() {
+        return defaultIfEmpty(super.getOpacity(), "1");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_outlineColor() {
-        return defaultIfEmpty(super.get_outlineColor(), "rgb(0, 0, 0)");
+    public String getOutlineColor() {
+        return defaultIfEmpty(super.getOutlineColor(), "rgb(0, 0, 0)");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_outlineOffset() {
-        return defaultIfEmpty(super.get_outlineOffset(), "0px");
+    public String getOutlineOffset() {
+        return defaultIfEmpty(super.getOutlineOffset(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_outlineStyle() {
-        return defaultIfEmpty(super.get_outlineStyle(), "none");
+    public String getOutlineStyle() {
+        return defaultIfEmpty(super.getOutlineStyle(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_outlineWidth() {
-        return defaultIfEmpty(super.get_outlineWidth(), "0px");
+    public String getOutlineWidth() {
+        return defaultIfEmpty(super.getOutlineWidth(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_overflow() {
-        return defaultIfEmpty(super.get_overflow(), "visible");
+    public String getOverflow() {
+        return defaultIfEmpty(super.getOverflow(), "visible");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_overflowX() {
-        return defaultIfEmpty(super.get_overflowX(), "visible");
+    public String getOverflowX() {
+        return defaultIfEmpty(super.getOverflowX(), "visible");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_overflowY() {
-        return defaultIfEmpty(super.get_overflowY(), "visible");
+    public String getOverflowY() {
+        return defaultIfEmpty(super.getOverflowY(), "visible");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_pageBreakAfter() {
-        return defaultIfEmpty(super.get_pageBreakAfter(), "auto");
+    public String getPageBreakAfter() {
+        return defaultIfEmpty(super.getPageBreakAfter(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_pageBreakBefore() {
-        return defaultIfEmpty(super.get_pageBreakBefore(), "auto");
+    public String getPageBreakBefore() {
+        return defaultIfEmpty(super.getPageBreakBefore(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_paddingBottom() {
-        return pixelString(defaultIfEmpty(super.get_paddingBottom(), "0px"));
+    public String getPaddingBottom() {
+        return pixelString(defaultIfEmpty(super.getPaddingBottom(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_paddingLeft() {
-        return pixelString(defaultIfEmpty(super.get_paddingLeft(), "0px"));
+    public String getPaddingLeft() {
+        return pixelString(defaultIfEmpty(super.getPaddingLeft(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_paddingRight() {
-        return pixelString(defaultIfEmpty(super.get_paddingRight(), "0px"));
+    public String getPaddingRight() {
+        return pixelString(defaultIfEmpty(super.getPaddingRight(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_paddingTop() {
-        return pixelString(defaultIfEmpty(super.get_paddingTop(), "0px"));
+    public String getPaddingTop() {
+        return pixelString(defaultIfEmpty(super.getPaddingTop(), "0px"));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_pointerEvents() {
-        return defaultIfEmpty(super.get_pointerEvents(), "auto");
+    public String getPointerEvents() {
+        return defaultIfEmpty(super.getPointerEvents(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_position() {
-        return defaultIfEmpty(super.get_position(), "static");
+    public String getPosition() {
+        return defaultIfEmpty(super.getPosition(), "static");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_right() {
-        return defaultIfEmpty(super.get_right(), "auto");
+    public String getRight() {
+        return defaultIfEmpty(super.getRight(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_tableLayout() {
-        return defaultIfEmpty(super.get_tableLayout(), "auto");
+    public String getTableLayout() {
+        return defaultIfEmpty(super.getTableLayout(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_textAlign() {
-        return defaultIfEmpty(super.get_textAlign(), "start");
+    public String getTextAlign() {
+        return defaultIfEmpty(super.getTextAlign(), "start");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_textDecoration() {
-        return defaultIfEmpty(super.get_textDecoration(), "none");
+    public String getTextDecoration() {
+        return defaultIfEmpty(super.getTextDecoration(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_textIndent() {
-        return defaultIfEmpty(super.get_textIndent(), "0px");
+    public String getTextIndent() {
+        return defaultIfEmpty(super.getTextIndent(), "0px");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_textShadow() {
+    public String getTextShadow() {
         String shadow = "";
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.CSS_TEXT_SHADOW_DEFAULT_NONE)) {
             shadow = "none";
         }
-        return defaultIfEmpty(super.get_textShadow(), shadow);
+        return defaultIfEmpty(super.getTextShadow(), shadow);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_textTransform() {
-        return defaultIfEmpty(super.get_textTransform(), "none");
+    public String getTextTransform() {
+        return defaultIfEmpty(super.getTextTransform(), "none");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_top() {
-        return defaultIfEmpty(super.get_top(), "auto");
+    public String getTop() {
+        return defaultIfEmpty(super.getTop(), "auto");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_unicodeBidi() {
+    public String getUnicodeBidi() {
         String unicodeBidi = "embed";
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.CSS_UNICODE_BIDI_DEFAULT_NORMAL)) {
             unicodeBidi = "normal";
         }
 
-        return defaultIfEmpty(super.get_unicodeBidi(), unicodeBidi);
+        return defaultIfEmpty(super.getUnicodeBidi(), unicodeBidi);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_verticalAlign() {
-        return defaultIfEmpty(super.get_verticalAlign(), "baseline");
+    public String getVerticalAlign() {
+        return defaultIfEmpty(super.getVerticalAlign(), "baseline");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_visibility() {
-        return defaultIfEmpty(super.get_visibility(), "visible");
+    public String getVisibility() {
+        return defaultIfEmpty(super.getVisibility(), "visible");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_whiteSpace() {
-        return defaultIfEmpty(super.get_whiteSpace(), "normal");
+    public String getWhiteSpace() {
+        return defaultIfEmpty(super.getWhiteSpace(), "normal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_width() {
-        if ("none".equals(get_display())) {
+    public String getWidth() {
+        if ("none".equals(getDisplay())) {
             return "auto";
         }
         final String defaultWidth;
@@ -1478,14 +1478,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
 
-        final String display = get_display();
+        final String display = getDisplay();
         if ("none".equals(display)) {
             width_ = Integer.valueOf(0);
             return 0;
         }
 
         int width;
-        final String styleWidth = super.get_width();
+        final String styleWidth = super.getWidth();
         final DomNode parent = node.getParentNode();
         if (StringUtils.isEmpty(styleWidth) && parent instanceof HtmlElement) {
             // hack: TODO find a way to specify default values for different tags
@@ -1494,7 +1494,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
 
             // Width not explicitly set.
-            final String cssFloat = get_cssFloat();
+            final String cssFloat = getCssFloat();
             if ("right".equals(cssFloat) || "left".equals(cssFloat)) {
                 // We're floating; simplistic approximation: text content * pixels per character.
                 width = getDomNodeOrDie().getTextContent().length() * PIXELS_PER_CHAR;
@@ -1502,7 +1502,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             else if ("block".equals(display)) {
                 // Block elements take up 100% of the parent's width.
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
-                final String parentWidth = getWindow().getComputedStyle(parentJS, null).get_width();
+                final String parentWidth = getWindow().getComputedStyle(parentJS, null).getWidth();
                 if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO)
                         && "auto".equals(parentWidth)) {
                     width = Window.WINDOW_WIDTH;
@@ -1510,7 +1510,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 else {
                     width = pixelValue(parentJS, new CssValue(Window.WINDOW_WIDTH) {
                         @Override public String get(final ComputedCSSStyleDeclaration style) {
-                            return style.get_width();
+                            return style.getWidth();
                         }
                     });
                 }
@@ -1543,7 +1543,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         for (final DomNode child : getDomNodeOrDie().getChildren()) {
             if (child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
-                final int w = e.get_currentStyle().getCalculatedWidth(true, true);
+                final int w = e.getCurrentStyle().getCalculatedWidth(true, true);
                 width += w;
             }
             else if (child.getScriptObject() instanceof Text) {
@@ -1588,7 +1588,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final int contentHeight = getContentHeight();
         final boolean useDefaultHeight = getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN);
-        final boolean explicitHeightSpecified = super.get_height().length() > 0;
+        final boolean explicitHeightSpecified = super.getHeight().length() > 0;
 
         int height;
         if (contentHeight > 0
@@ -1622,7 +1622,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
 
-        if ("none".equals(get_display())) {
+        if ("none".equals(getDisplay())) {
             height2_ = Integer.valueOf(0);
             return 0;
         }
@@ -1632,7 +1632,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return Window.WINDOW_HEIGHT;
         }
 
-        final boolean explicitHeightSpecified = super.get_height().length() > 0;
+        final boolean explicitHeightSpecified = super.getHeight().length() > 0;
 
         int defaultHeight = 20;
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_15)) {
@@ -1676,7 +1676,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         for (final DomNode child : node.getChildren()) {
             if (child.mayBeDisplayed() && child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
-                final ComputedCSSStyleDeclaration style = e.get_currentStyle();
+                final ComputedCSSStyleDeclaration style = e.getCurrentStyle();
                 final String pos = style.getPositionWithInheritance();
                 if ("static".equals(pos) || "relative".equals(pos)) {
                     lastFlowing = e;
@@ -1695,7 +1695,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         int max = 0;
         for (final HTMLElement e : relevant) {
-            final ComputedCSSStyleDeclaration style = e.get_currentStyle();
+            final ComputedCSSStyleDeclaration style = e.getCurrentStyle();
             final int h = style.getTop(true, false, false) + style.getCalculatedHeight(true, true);
             if (h > max) {
                 max = h;
@@ -1713,7 +1713,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public boolean isScrollable(final boolean horizontal) {
         final boolean scrollable;
         final Element node = getElement();
-        final String overflow = get_overflow();
+        final String overflow = getOverflow();
         if (horizontal) {
             // TODO: inherit, overflow-x
             scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || "auto".equals(overflow))
@@ -1768,7 +1768,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 }
                 if (prev != null) {
                     final HTMLElement e = (HTMLElement) ((HtmlElement) prev).getScriptObject();
-                    final ComputedCSSStyleDeclaration style = e.get_currentStyle();
+                    final ComputedCSSStyleDeclaration style = e.getCurrentStyle();
                     top = style.getTop(true, false, false) + style.getCalculatedHeight(true, true);
                 }
                 // If the position is relative, we also need to add the specified "top" displacement.
@@ -1783,17 +1783,17 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         if (includeMargin) {
-            final int margin = pixelValue(get_marginTop());
+            final int margin = pixelValue(getMarginTop());
             top += margin;
         }
 
         if (includeBorder) {
-            final int border = pixelValue(get_borderTopWidth());
+            final int border = pixelValue(getBorderTopWidth());
             top += border;
         }
 
         if (includePadding) {
-            final int padding = getPaddingTop();
+            final int padding = getPaddingTopValue();
             top += padding;
         }
 
@@ -1825,13 +1825,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         else if ("absolute".equals(p) && !"auto".equals(r)) {
             // Need to calculate the horizontal displacement caused by *all* siblings.
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-            final int parentWidth = parent.get_currentStyle().getCalculatedWidth(false, false);
+            final int parentWidth = parent.getCurrentStyle().getCalculatedWidth(false, false);
             left = parentWidth - pixelValue(r);
         }
         else if ("fixed".equals(p) && "auto".equals(l)) {
             // Fixed to the location at which the browser puts it via normal element flowing.
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-            left = pixelValue(parent.get_currentStyle().getLeftWithInheritance());
+            left = pixelValue(parent.getCurrentStyle().getLeftWithInheritance());
         }
         else if ("static".equals(p)) {
             // We need to calculate the horizontal displacement caused by *previous* siblings.
@@ -1839,12 +1839,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             for (DomNode n = getDomNodeOrDie(); n != null; n = n.getPreviousSibling()) {
                 if (n.getScriptObject() instanceof HTMLElement) {
                     final HTMLElement e = (HTMLElement) n.getScriptObject();
-                    final String d = e.get_currentStyle().get_display();
+                    final String d = e.getCurrentStyle().getDisplay();
                     if ("block".equals(d)) {
                         break;
                     }
                     else if (!"none".equals(d)) {
-                        left += e.get_currentStyle().getCalculatedWidth(true, true);
+                        left += e.getCurrentStyle().getCalculatedWidth(true, true);
                     }
                 }
                 else if (n.getScriptObject() instanceof Text) {
@@ -1861,17 +1861,17 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         if (includeMargin) {
-            final int margin = getMarginLeft();
+            final int margin = getMarginLeftValue();
             left += margin;
         }
 
         if (includeBorder) {
-            final int border = pixelValue(get_borderLeftWidth());
+            final int border = pixelValue(getBorderLeftWidth());
             left += border;
         }
 
         if (includePadding) {
-            final int padding = getPaddingLeft();
+            final int padding = getPaddingLeftValue();
             left += padding;
         }
 
@@ -1883,11 +1883,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS <tt>position</tt> attribute, replacing inherited values with the actual parent values
      */
     public String getPositionWithInheritance() {
-        String p = get_position();
+        String p = getPosition();
         if ("inherit".equals(p)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                p = (parent != null ? parent.get_currentStyle().getPositionWithInheritance() : "static");
+                p = (parent != null ? parent.getCurrentStyle().getPositionWithInheritance() : "static");
             }
             else {
                 p = "static";
@@ -1901,11 +1901,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS <tt>left</tt> attribute, replacing inherited values with the actual parent values
      */
     public String getLeftWithInheritance() {
-        String left = get_left();
+        String left = getLeft();
         if ("inherit".equals(left)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                left = (parent != null ? parent.get_currentStyle().getLeftWithInheritance() : "auto");
+                left = (parent != null ? parent.getCurrentStyle().getLeftWithInheritance() : "auto");
             }
             else {
                 left = "auto";
@@ -1919,11 +1919,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS <tt>right</tt> attribute, replacing inherited values with the actual parent values
      */
     public String getRightWithInheritance() {
-        String right = get_right();
+        String right = getRight();
         if ("inherit".equals(right)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                right = (parent != null ? parent.get_currentStyle().getRightWithInheritance() : "auto");
+                right = (parent != null ? parent.getCurrentStyle().getRightWithInheritance() : "auto");
             }
             else {
                 right = "auto";
@@ -1937,11 +1937,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS <tt>top</tt> attribute, replacing inherited values with the actual parent values
      */
     public String getTopWithInheritance() {
-        String top = get_top();
+        String top = getTop();
         if ("inherit".equals(top)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                top = (parent != null ? parent.get_currentStyle().getTopWithInheritance() : "auto");
+                top = (parent != null ? parent.getCurrentStyle().getTopWithInheritance() : "auto");
             }
             else {
                 top = "auto";
@@ -1955,11 +1955,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the CSS <tt>bottom</tt> attribute, replacing inherited values with the actual parent values
      */
     public String getBottomWithInheritance() {
-        String bottom = get_bottom();
+        String bottom = getBottom();
         if ("inherit".equals(bottom)) {
             if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-                bottom = (parent != null ? parent.get_currentStyle().getBottomWithInheritance() : "auto");
+                bottom = (parent != null ? parent.getCurrentStyle().getBottomWithInheritance() : "auto");
             }
             else {
                 bottom = "auto";
@@ -1972,70 +1972,70 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * Gets the left margin of the element.
      * @return the value in pixels
      */
-    public int getMarginLeft() {
-        return pixelValue(get_marginLeft());
+    public int getMarginLeftValue() {
+        return pixelValue(getMarginLeft());
     }
 
     /**
      * Gets the right margin of the element.
      * @return the value in pixels
      */
-    public int getMarginRight() {
-        return pixelValue(get_marginRight());
+    public int getMarginRightValue() {
+        return pixelValue(getMarginRight());
     }
 
     /**
      * Gets the top margin of the element.
      * @return the value in pixels
      */
-    public int getMarginTop() {
-        return pixelValue(get_marginTop());
+    public int getMarginTopValue() {
+        return pixelValue(getMarginTop());
     }
 
     /**
      * Gets the bottom margin of the element.
      * @return the value in pixels
      */
-    public int getMarginBottom() {
-        return pixelValue(get_marginBottom());
+    public int getMarginBottomValue() {
+        return pixelValue(getMarginBottom());
     }
 
     /**
      * Gets the left padding of the element.
      * @return the value in pixels
      */
-    public int getPaddingLeft() {
-        return pixelValue(get_paddingLeft());
+    public int getPaddingLeftValue() {
+        return pixelValue(getPaddingLeft());
     }
 
     /**
      * Gets the right padding of the element.
      * @return the value in pixels
      */
-    public int getPaddingRight() {
-        return pixelValue(get_paddingRight());
+    public int getPaddingRightValue() {
+        return pixelValue(getPaddingRight());
     }
 
     /**
      * Gets the top padding of the element.
      * @return the value in pixels
      */
-    public int getPaddingTop() {
-        return pixelValue(get_paddingTop());
+    public int getPaddingTopValue() {
+        return pixelValue(getPaddingTop());
     }
 
     /**
      * Gets the bottom padding of the element.
      * @return the value in pixels
      */
-    public int getPaddingBottom() {
-        return pixelValue(get_paddingBottom());
+    public int getPaddingBottomValue() {
+        return pixelValue(getPaddingBottom());
     }
 
     private int getPaddingHorizontal() {
         if (paddingHorizontal_ == null) {
             paddingHorizontal_ =
-                Integer.valueOf("none".equals(get_display()) ? 0 : getPaddingLeft() + getPaddingRight());
+                Integer.valueOf("none".equals(getDisplay()) ? 0 : getPaddingLeftValue() + getPaddingRightValue());
         }
         return paddingHorizontal_.intValue();
     }
@@ -2043,7 +2043,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private int getPaddingVertical() {
         if (paddingVertical_ == null) {
             paddingVertical_ =
-                Integer.valueOf("none".equals(get_display()) ? 0 : getPaddingTop() + getPaddingBottom());
+                Integer.valueOf("none".equals(getDisplay()) ? 0 : getPaddingTopValue() + getPaddingBottomValue());
         }
         return paddingVertical_.intValue();
     }
@@ -2052,38 +2052,38 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * Gets the size of the left border of the element.
      * @return the value in pixels
      */
-    public int getBorderLeft() {
-        return pixelValue(get_borderLeftWidth());
+    public int getBorderLeftValue() {
+        return pixelValue(getBorderLeftWidth());
     }
 
     /**
      * Gets the size of the right border of the element.
      * @return the value in pixels
      */
-    public int getBorderRight() {
-        return pixelValue(get_borderRightWidth());
+    public int getBorderRightValue() {
+        return pixelValue(getBorderRightWidth());
     }
 
     /**
      * Gets the size of the top border of the element.
      * @return the value in pixels
      */
-    public int getBorderTop() {
-        return pixelValue(get_borderTopWidth());
+    public int getBorderTopValue() {
+        return pixelValue(getBorderTopWidth());
     }
 
     /**
      * Gets the size of the bottom border of the element.
      * @return the value in pixels
      */
-    public int getBorderBottom() {
-        return pixelValue(get_borderBottomWidth());
+    public int getBorderBottomValue() {
+        return pixelValue(getBorderBottomWidth());
     }
 
     private int getBorderHorizontal() {
         if (borderHorizontal_ == null) {
             borderHorizontal_ =
-                Integer.valueOf("none".equals(get_display()) ? 0 : getBorderLeft() + getBorderRight());
+                Integer.valueOf("none".equals(getDisplay()) ? 0 : getBorderLeftValue() + getBorderRightValue());
         }
         return borderHorizontal_.intValue();
     }
@@ -2091,7 +2091,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private int getBorderVertical() {
         if (borderVertical_ == null) {
             borderVertical_ =
-                Integer.valueOf("none".equals(get_display()) ? 0 : getBorderTop() + getBorderBottom());
+                Integer.valueOf("none".equals(getDisplay()) ? 0 : getBorderTopValue() + getBorderBottomValue());
         }
         return borderVertical_.intValue();
     }
@@ -2100,30 +2100,30 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String get_wordSpacing() {
+    public String getWordSpacing() {
         String wordSpacing = "0px";
         if (getBrowserVersion().hasFeature(
                 BrowserVersionFeatures.CSS_WORD_SPACING_DEFAULT_NORMAL)) {
             wordSpacing = "normal";
         }
 
-        return defaultIfEmpty(super.get_wordSpacing(), wordSpacing);
+        return defaultIfEmpty(super.getWordSpacing(), wordSpacing);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String get_wordWrap() {
-        return defaultIfEmpty(super.get_wordWrap(), "normal");
+    public String getWordWrap() {
+        return defaultIfEmpty(super.getWordWrap(), "normal");
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Object get_zIndex() {
-        final Object response = super.get_zIndex();
+    public Object getZIndex() {
+        final Object response = super.getZIndex();
         if (response.toString().isEmpty()) {
             return "auto";
         }

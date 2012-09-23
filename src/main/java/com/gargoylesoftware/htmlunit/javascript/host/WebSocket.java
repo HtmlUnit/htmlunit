@@ -130,7 +130,7 @@ public class WebSocket extends SimpleScriptable {
      * @return the event handler that fires on close
      */
     @JsxGetter
-    public Function get_onclose() {
+    public Function getOnclose() {
         return closeHandler_;
     }
 
@@ -148,7 +148,7 @@ public class WebSocket extends SimpleScriptable {
      * @return the event handler that fires on error
      */
     @JsxGetter
-    public Function get_onerror() {
+    public Function getOnerror() {
         return errorHandler_;
     }
 
@@ -166,7 +166,7 @@ public class WebSocket extends SimpleScriptable {
      * @return the event handler that fires on message
      */
     @JsxGetter
-    public Function get_onmessage() {
+    public Function getOnmessage() {
         return messageHandler_;
     }
 
@@ -184,7 +184,7 @@ public class WebSocket extends SimpleScriptable {
      * @return the event handler that fires on open
      */
     @JsxGetter
-    public Function get_onopen() {
+    public Function getOnopen() {
         return openHandler_;
     }
 
@@ -209,7 +209,7 @@ public class WebSocket extends SimpleScriptable {
      * @return the current state of the connection
      */
     @JsxGetter
-    public int get_readyState() {
+    public int getReadyState() {
         return readyState_;
     }
 

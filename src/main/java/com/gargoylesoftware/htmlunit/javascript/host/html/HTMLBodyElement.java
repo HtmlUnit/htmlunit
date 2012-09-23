@@ -81,7 +81,7 @@ public class HTMLBodyElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    public HTMLElement get_offsetParent() {
+    public HTMLElement getOffsetParent_js() {
         return null;
     }
 
@@ -91,7 +91,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533070.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_aLink() {
+    public String getALink() {
         return getDomNodeOrDie().getAttribute("aLink");
     }
 
@@ -111,7 +111,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533498.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_background() {
+    public String getBackground() {
         final HtmlElement node = getDomNodeOrDie();
         String background = node.getAttribute("background");
         if (background != DomElement.ATTRIBUTE_NOT_DEFINED
@@ -143,7 +143,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_bgColor() {
+    public String getBgColor() {
         return getDomNodeOrDie().getAttribute("bgColor");
     }
 
@@ -163,7 +163,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534119.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_link() {
+    public String getLink() {
         return getDomNodeOrDie().getAttribute("link");
     }
 
@@ -184,7 +184,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @Override
     @JsxGetter
-    public String get_text() {
+    public String getText() {
         return getDomNodeOrDie().getAttribute("text");
     }
 
@@ -204,7 +204,7 @@ public class HTMLBodyElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534677.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_vLink() {
+    public String getVLink() {
         return getDomNodeOrDie().getAttribute("vLink");
     }
 

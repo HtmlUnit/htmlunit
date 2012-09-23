@@ -44,7 +44,7 @@ public class XMLDOMParseError extends SimpleScriptable {
      * @return the error code of the last parse error
      */
     @JsxGetter
-    public int get_errorCode() {
+    public int getErrorCode() {
         return errorCode_;
     }
 
@@ -53,7 +53,7 @@ public class XMLDOMParseError extends SimpleScriptable {
      * @return the absolute file position where the error occurred
      */
     @JsxGetter
-    public int get_filepos() {
+    public int getFilepos() {
         return filepos_;
     }
 
@@ -62,7 +62,7 @@ public class XMLDOMParseError extends SimpleScriptable {
      * @return the line number that contains the error
      */
     @JsxGetter
-    public int get_line() {
+    public int getLine() {
         return line_;
     }
 
@@ -71,7 +71,7 @@ public class XMLDOMParseError extends SimpleScriptable {
      * @return the character position within the line where the error occurred
      */
     @JsxGetter
-    public int get_linepos() {
+    public int getLinepos() {
         return linepos_;
     }
 
@@ -80,7 +80,7 @@ public class XMLDOMParseError extends SimpleScriptable {
      * @return the reason for the error
      */
     @JsxGetter
-    public String get_reason() {
+    public String getReason() {
         return reason_;
     }
 
@@ -89,7 +89,7 @@ public class XMLDOMParseError extends SimpleScriptable {
      * @return the full text of the line containing the error
      */
     @JsxGetter
-    public String get_srcText() {
+    public String getSrcText() {
         return srcText_;
     }
 
@@ -98,7 +98,7 @@ public class XMLDOMParseError extends SimpleScriptable {
      * @return the URL of the XML document containing the last error
      */
     @JsxGetter
-    public String get_url() {
+    public String getUrl() {
         return url_;
     }
 

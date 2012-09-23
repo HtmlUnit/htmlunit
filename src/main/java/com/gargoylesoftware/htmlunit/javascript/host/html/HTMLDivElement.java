@@ -42,7 +42,7 @@ public class HTMLDivElement extends HTMLElement {
      * @return the value of the "align" property
      */
     @JsxGetter
-    public String get_align() {
+    public String getAlign() {
         return getAlign(true);
     }
 

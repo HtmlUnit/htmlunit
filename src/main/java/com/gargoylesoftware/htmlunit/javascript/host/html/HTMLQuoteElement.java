@@ -44,7 +44,7 @@ public class HTMLQuoteElement extends HTMLElement {
      * @return the value of the "cite" property
      */
     @JsxGetter
-    public String get_cite() {
+    public String getCite() {
         final String cite = getDomNodeOrDie().getAttribute("cite");
         return cite;
     }
@@ -63,7 +63,7 @@ public class HTMLQuoteElement extends HTMLElement {
      * @return the value of the "dateTime" property
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_dateTime() {
+    public String getDateTime() {
         final String cite = getDomNodeOrDie().getAttribute("datetime");
         return cite;
     }

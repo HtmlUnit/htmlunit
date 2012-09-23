@@ -42,7 +42,7 @@ public class FormChild extends HTMLElement {
      * @return the value of the JavaScript <tt>form</tt> attribute
      */
     @JsxGetter
-    public HTMLFormElement get_form() {
+    public HTMLFormElement getForm() {
         final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
         if (form == null) {
             return null;

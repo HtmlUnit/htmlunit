@@ -65,7 +65,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>availHeight</tt> property
      */
     @JsxGetter
-    public int get_availHeight() {
+    public int getAvailHeight() {
         return height_;
     }
 
@@ -74,7 +74,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>availLeft</tt> property
      */
     @JsxGetter
-    public int get_availLeft() {
+    public int getAvailLeft() {
         return left_;
     }
 
@@ -83,7 +83,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>availTop</tt> property
      */
     @JsxGetter
-    public int get_availTop() {
+    public int getAvailTop() {
         return top_;
     }
 
@@ -92,7 +92,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>availWidth</tt> property
      */
     @JsxGetter
-    public int get_availWidth() {
+    public int getAvailWidth() {
         return width_;
     }
 
@@ -101,7 +101,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>bufferDepth</tt> property
      */
     @JsxGetter
-    public int get_bufferDepth() {
+    public int getBufferDepth() {
         return bufferDepth_;
     }
 
@@ -119,7 +119,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>colorDepth</tt> property
      */
     @JsxGetter
-    public int get_colorDepth() {
+    public int getColorDepth() {
         return colorDepth_;
     }
 
@@ -128,7 +128,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>deviceXDPI</tt> property
      */
     @JsxGetter
-    public int get_deviceXDPI() {
+    public int getDeviceXDPI() {
         return dpi_;
     }
 
@@ -137,7 +137,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>deviceYDPI</tt> property
      */
     @JsxGetter
-    public int get_deviceYDPI() {
+    public int getDeviceYDPI() {
         return dpi_;
     }
 
@@ -146,7 +146,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>fontSmoothingEnabled</tt> property
      */
     @JsxGetter
-    public boolean get_fontSmoothingEnabled() {
+    public boolean getFontSmoothingEnabled() {
         return fontSmoothingEnabled_;
     }
 
@@ -155,7 +155,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>height</tt> property
      */
     @JsxGetter
-    public int get_height() {
+    public int getHeight() {
         return height_;
     }
 
@@ -164,7 +164,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>left</tt> property
      */
     @JsxGetter
-    public int get_left() {
+    public int getLeft() {
         return left_;
     }
 
@@ -182,7 +182,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>logicalXDPI</tt> property
      */
     @JsxGetter
-    public int get_logicalXDPI() {
+    public int getLogicalXDPI() {
         return dpi_;
     }
 
@@ -191,7 +191,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>logicalYDPI</tt> property
      */
     @JsxGetter
-    public int get_logicalYDPI() {
+    public int getLogicalYDPI() {
         return dpi_;
     }
 
@@ -200,7 +200,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>pixelDepth</tt> property
      */
     @JsxGetter
-    public int get_pixelDepth() {
+    public int getPixelDepth() {
         return colorDepth_;
     }
 
@@ -209,7 +209,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>top</tt> property
      */
     @JsxGetter
-    public int get_top() {
+    public int getTop() {
         return top_;
     }
 
@@ -227,7 +227,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>updateInterval</tt> property
      */
     @JsxGetter
-    public int get_updateInterval() {
+    public int getUpdateInterval() {
         return updateInterval_;
     }
 
@@ -245,7 +245,7 @@ public class Screen extends SimpleScriptable {
      * @return the <tt>width</tt> property
      */
     @JsxGetter
-    public int get_width() {
+    public int getWidth() {
         return width_;
     }
 }

@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
@@ -450,24 +451,33 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
             throw ScriptRuntime.typeError3("msg.set.prop.no.setter",
                     name, getClassName(), Context.toString(value));
         }
-        try {
-            final Method m = getClass().getMethod("get_" + name);
-            switch (m.getAnnotation(CanSetReadOnly.class).value()) {
-                case YES:
-                    return true;
-                case IGNORE:
-                    return false;
-                case EXCEPTION:
-                    throw ScriptRuntime.typeError3("msg.set.prop.no.setter",
-                            name, getClassName(), Context.toString(value));
-                default:
+        for (final Method m : getClass().getMethods()) {
+            final JsxGetter jsxGetter = m.getAnnotation(JsxGetter.class);
+            if (jsxGetter != null) {
+                String methodProperty;
+                if (jsxGetter.propertyName().isEmpty()) {
+                    methodProperty = m.getName().substring(3);
+                    methodProperty = Character.toLowerCase(methodProperty.charAt(0)) + methodProperty.substring(1);
+                }
+                else {
+                    methodProperty = jsxGetter.propertyName();
+                }
+                if (methodProperty.equals(name)) {
+                    final CanSetReadOnly canSetReadOnly = m.getAnnotation(CanSetReadOnly.class);
+                    if (canSetReadOnly != null) {
+                        switch (canSetReadOnly.value()) {
+                            case YES:
+                                return true;
+                            case IGNORE:
+                                return false;
+                            case EXCEPTION:
+                                throw ScriptRuntime.typeError3("msg.set.prop.no.setter",
+                                    name, getClassName(), Context.toString(value));
+                            default:
+                        }
+                    }
+                }
             }
-        }
-        catch (final NullPointerException e) {
-            //ignore
-        }
-        catch (final NoSuchMethodException e) {
-            //ignore
         }
         return true;
     }

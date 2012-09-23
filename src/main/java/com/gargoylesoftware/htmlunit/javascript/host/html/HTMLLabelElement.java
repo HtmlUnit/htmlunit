@@ -44,7 +44,7 @@ public class HTMLLabelElement extends FormChild {
      * @return the identifier of the element to which the label element is assigned
      */
     @JsxGetter
-    public String get_htmlFor() {
+    public String getHtmlFor() {
         return ((HtmlLabel) getDomNodeOrDie()).getForAttribute();
     }
 
@@ -63,8 +63,8 @@ public class HTMLLabelElement extends FormChild {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public String get_accessKey() {
-        return super.get_accessKey();
+    public String getAccessKey() {
+        return super.getAccessKey();
     }
 
     /**

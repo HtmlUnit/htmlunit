@@ -150,7 +150,7 @@ public class XPathResult extends SimpleScriptable {
      * @return the code representing the type of this result
      */
     @JsxGetter
-    public int get_resultType() {
+    public int getResultType() {
         return resultType_;
     }
 
@@ -159,7 +159,7 @@ public class XPathResult extends SimpleScriptable {
      * @return the number of nodes in the result snapshot
      */
     @JsxGetter
-    public int get_snapshotLength() {
+    public int getSnapshotLength() {
         if (resultType_ != UNORDERED_NODE_SNAPSHOT_TYPE && resultType_ != ORDERED_NODE_SNAPSHOT_TYPE) {
             throw Context.reportRuntimeError("Cannot get snapshotLength for type: " + resultType_);
         }
@@ -171,7 +171,7 @@ public class XPathResult extends SimpleScriptable {
      * @return the value of this single node result, which may be null
      */
     @JsxGetter
-    public Node get_singleNodeValue() {
+    public Node getSingleNodeValue() {
         if (resultType_ != ANY_UNORDERED_NODE_TYPE && resultType_ != FIRST_ORDERED_NODE_TYPE) {
             throw Context.reportRuntimeError("Cannot get singleNodeValue for type: " + resultType_);
         }
@@ -218,7 +218,7 @@ public class XPathResult extends SimpleScriptable {
      * @return the value of this number result
      */
     @JsxGetter
-    public double get_numberValue() {
+    public double getNumberValue() {
         if (resultType_ != NUMBER_TYPE) {
             throw Context.reportRuntimeError("Cannot get numberValue for type: " + resultType_);
         }
@@ -230,7 +230,7 @@ public class XPathResult extends SimpleScriptable {
      * @return the value of this boolean result
      */
     @JsxGetter
-    public boolean get_booleanValue() {
+    public boolean getBooleanValue() {
         if (resultType_ != BOOLEAN_TYPE) {
             throw Context.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
         }
@@ -242,7 +242,7 @@ public class XPathResult extends SimpleScriptable {
      * @return the value of this string result
      */
     @JsxGetter
-    public String get_stringValue() {
+    public String getStringValue() {
         if (resultType_ != STRING_TYPE) {
             throw Context.reportRuntimeError("Cannot get stringValue for type: " + resultType_);
         }

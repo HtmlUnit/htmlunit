@@ -57,13 +57,13 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * {@inheritDoc}
      */
     @Override
-    public int get_offsetHeight() {
+    public int getOffsetHeight() {
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
         if (isAncestorOfEventTarget(event)) {
-            return super.get_offsetHeight();
+            return super.getOffsetHeight();
         }
 
-        final ComputedCSSStyleDeclaration style = get_currentStyle();
+        final ComputedCSSStyleDeclaration style = getCurrentStyle();
         final boolean includeBorder = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_93);
         return style.getCalculatedHeight(includeBorder, true);
     }
@@ -72,15 +72,15 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * {@inheritDoc}
      */
     @Override
-    public int get_offsetWidth() {
-        float w = super.get_offsetWidth();
+    public int getOffsetWidth() {
+        float w = super.getOffsetWidth();
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
         if (isAncestorOfEventTarget(event)) {
             return (int) w;
         }
 
-        final ComputedCSSStyleDeclaration style = get_currentStyle();
-        if ("collapse".equals(style.get_borderCollapse())) {
+        final ComputedCSSStyleDeclaration style = getCurrentStyle();
+        if ("collapse".equals(style.getBorderCollapse())) {
             final HtmlTableRow row = getRow();
             if (row != null) {
                 final HtmlElement thiz = getDomNodeOrDie();
@@ -88,8 +88,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
                 final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_94);
                 final boolean leftmost = (cells.indexOf(thiz) == 0);
                 final boolean rightmost = (cells.indexOf(thiz) == cells.size() - 1);
-                w -= ((ie && leftmost ? 0 : 0.5) * style.getBorderLeft());
-                w -= ((ie && rightmost ? 0 : 0.5) * style.getBorderRight());
+                w -= ((ie && leftmost ? 0 : 0.5) * style.getBorderLeftValue());
+                w -= ((ie && rightmost ? 0 : 0.5) * style.getBorderRightValue());
             }
         }
 
@@ -102,7 +102,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533549.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public Integer get_cellIndex() {
+    public Integer getCellIndex() {
         final HtmlTableCell cell = (HtmlTableCell) getDomNodeOrDie();
         final HtmlTableRow row = cell.getEnclosingRow();
         if (row == null) { // a not attached document.createElement('TD')
@@ -116,7 +116,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @return the value of the <tt>abbr</tt> attribute
      */
     @JsxGetter
-    public String get_abbr() {
+    public String getAbbr() {
         return getDomNodeOrDie().getAttribute("abbr");
     }
 
@@ -134,7 +134,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @return the value of the <tt>axis</tt> attribute
      */
     @JsxGetter
-    public String get_axis() {
+    public String getAxis() {
         return getDomNodeOrDie().getAttribute("axis");
     }
 
@@ -153,7 +153,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public String get_bgColor() {
+    public String getBgColor() {
         return getDomNodeOrDie().getAttribute("bgColor");
     }
 
@@ -172,7 +172,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @return the value of the <tt>colSpan</tt> attribute
      */
     @JsxGetter
-    public int get_colSpan() {
+    public int getColSpan() {
         final String s = getDomNodeOrDie().getAttribute("colSpan");
         try {
             return Integer.parseInt(s);
@@ -212,7 +212,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @return the value of the <tt>rowSpan</tt> attribute
      */
     @JsxGetter
-    public int get_rowSpan() {
+    public int getRowSpan() {
         final String s = getDomNodeOrDie().getAttribute("rowSpan");
         try {
             return Integer.parseInt(s);
@@ -253,7 +253,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
      */
     @JsxGetter
-    public boolean get_noWrap() {
+    public boolean getNoWrap() {
         return getDomNodeOrDie().hasAttribute("noWrap");
     }
 
@@ -289,8 +289,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Returns the value of the "width" property.
      * @return the value of the "width" property
      */
-    @JsxGetter
-    public String get_width() {
+    @JsxGetter(propertyName = "width")
+    public String getWidth_js() {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_98);
         final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("width", returnNegativeValues);
@@ -309,8 +309,8 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Returns the value of the "width" property.
      * @return the value of the "width" property
      */
-    @JsxGetter
-    public String get_height() {
+    @JsxGetter(propertyName = "height")
+    public String getHeight_js() {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_100);
         final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("height", returnNegativeValues);

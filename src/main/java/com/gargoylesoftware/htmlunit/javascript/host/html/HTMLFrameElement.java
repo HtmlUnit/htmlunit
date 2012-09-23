@@ -47,7 +47,7 @@ public class HTMLFrameElement extends HTMLElement {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String get_src() {
+    public String getSrc() {
         return getFrame().getSrcAttribute();
     }
 
@@ -57,8 +57,8 @@ public class HTMLFrameElement extends HTMLElement {
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_frame_ref4.html">Gecko DOM Reference</a>
      */
     @JsxGetter(@WebBrowser(FF))
-    public DocumentProxy get_contentDocument() {
-        return ((Window) getFrame().getEnclosedWindow().getScriptObject()).get_document();
+    public DocumentProxy getContentDocument() {
+        return ((Window) getFrame().getEnclosedWindow().getScriptObject()).getDocument_js();
     }
 
     /**
@@ -68,7 +68,7 @@ public class HTMLFrameElement extends HTMLElement {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533692.aspx">MSDN documentation</a>
      */
     @JsxGetter
-    public WindowProxy get_contentWindow() {
+    public WindowProxy getContentWindow() {
         return Window.getProxy(getFrame().getEnclosedWindow());
     }
 
@@ -86,7 +86,7 @@ public class HTMLFrameElement extends HTMLElement {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String get_name() {
+    public String getName() {
         return getFrame().getNameAttribute();
     }
 
@@ -117,7 +117,7 @@ public class HTMLFrameElement extends HTMLElement {
      * @return the <tt>onload</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onload() {
+    public Object getOnload() {
         return getEventHandlerProp("onload");
     }
 
@@ -126,7 +126,7 @@ public class HTMLFrameElement extends HTMLElement {
      * @return the "border" attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_border() {
+    public String getBorder() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
     }

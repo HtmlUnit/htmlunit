@@ -42,7 +42,7 @@ public class DocumentType extends Node {
      * @return the name
      */
     @JsxGetter
-    public String get_name() {
+    public String getName() {
         final String name = ((DomDocumentType) getDomNodeOrDie()).getName();
         if ("html".equals(name) && "FF3".equals(getBrowserVersion().getNickname())) {
             return "HTML";
@@ -54,8 +54,8 @@ public class DocumentType extends Node {
      * {@inheritDoc}
      */
     @Override
-    public String get_nodeName() {
-        return get_name();
+    public String getNodeName() {
+        return getName();
     }
 
     /**
@@ -63,7 +63,7 @@ public class DocumentType extends Node {
      * @return the publicId
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_publicId() {
+    public String getPublicId() {
         return ((DomDocumentType) getDomNodeOrDie()).getPublicId();
     }
 
@@ -72,7 +72,7 @@ public class DocumentType extends Node {
      * @return the systemId
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_systemId() {
+    public String getSystemId() {
         return ((DomDocumentType) getDomNodeOrDie()).getSystemId();
     }
 
@@ -81,7 +81,7 @@ public class DocumentType extends Node {
      * @return the internal subset
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_internalSubset() {
+    public String getInternalSubset() {
         final String subset = ((DomDocumentType) getDomNodeOrDie()).getInternalSubset();
         if (StringUtils.isNotEmpty(subset)) {
             return subset;
@@ -98,7 +98,7 @@ public class DocumentType extends Node {
      * @return entities
      */
     @JsxGetter
-    public Object get_entities() {
+    public Object getEntities() {
         final NamedNodeMap entities = ((DomDocumentType) getDomNodeOrDie()).getEntities();
         if (null != entities) {
             return entities;
@@ -118,7 +118,7 @@ public class DocumentType extends Node {
      * @return notations
      */
     @JsxGetter
-    public Object get_notations() {
+    public Object getNotations() {
         final NamedNodeMap notations = ((DomDocumentType) getDomNodeOrDie()).getNotations();
         if (null != notations) {
             return notations;

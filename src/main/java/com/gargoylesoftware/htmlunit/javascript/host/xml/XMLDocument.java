@@ -107,7 +107,7 @@ public class XMLDocument extends Document {
      * @return the <tt>async</tt> attribute
      */
     @JsxGetter
-    public boolean get_async() {
+    public boolean getAsync() {
         return async_;
     }
 
@@ -133,7 +133,7 @@ public class XMLDocument extends Document {
             return true;
         }
         catch (final IOException e) {
-            final XMLDOMParseError parseError = get_parseError();
+            final XMLDOMParseError parseError = getParseError();
             parseError.setErrorCode(-1);
             parseError.setFilepos(1);
             parseError.setLine(1);
@@ -217,7 +217,7 @@ public class XMLDocument extends Document {
      * @return the ParserError object for the document
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public XMLDOMParseError get_parseError() {
+    public XMLDOMParseError getParseError() {
         if (parseError_ == null) {
             parseError_ = new XMLDOMParseError();
             parseError_.setPrototype(getPrototype(parseError_.getClass()));
@@ -232,11 +232,11 @@ public class XMLDocument extends Document {
      */
     @Override
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public String get_xml() {
+    public String getXml() {
         final XMLSerializer seralizer = new XMLSerializer();
         seralizer.setParentScope(getWindow());
         seralizer.setPrototype(getPrototype(seralizer.getClass()));
-        return seralizer.serializeToString(get_documentElement());
+        return seralizer.serializeToString(getDocumentElement());
     }
 
     /**
@@ -244,7 +244,7 @@ public class XMLDocument extends Document {
      * @return the current white space handling
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public boolean get_preserveWhiteSpace() {
+    public boolean getPreserveWhiteSpace() {
         return preserveWhiteSpace_;
     }
 
@@ -300,7 +300,7 @@ public class XMLDocument extends Document {
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(CHROME) })
     public Object selectSingleNode(final String expression) {
         final HTMLCollection collection = selectNodes(expression);
-        if (collection.get_length() > 0) {
+        if (collection.getLength() > 0) {
             return collection.get(0, collection);
         }
         return null;

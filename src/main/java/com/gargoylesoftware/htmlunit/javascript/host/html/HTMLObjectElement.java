@@ -51,7 +51,7 @@ public class HTMLObjectElement extends FormChild {
      * @return the value of the "alt" property
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_alt() {
+    public String getAlt() {
         final String alt = getDomNodeOrDie().getAttribute("alt");
         return alt;
     }
@@ -70,7 +70,7 @@ public class HTMLObjectElement extends FormChild {
      * @return the "border" attribute
      */
     @JsxGetter
-    public String get_border() {
+    public String getBorder() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
     }
@@ -89,7 +89,7 @@ public class HTMLObjectElement extends FormChild {
      * @return the "classid" attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_classid() {
+    public String getClassid() {
         final String classid = getDomNodeOrDie().getAttribute("classid");
         return classid;
     }

@@ -44,7 +44,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * @return the value of the "span" property
      */
     @JsxGetter
-    public int get_span() {
+    public int getSpan() {
         final String span = getDomNodeOrDie().getAttribute("span");
         int i;
         try {
@@ -83,8 +83,8 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * Returns the value of the "width" property.
      * @return the value of the "width" property
      */
-    @JsxGetter
-    public String get_width() {
+    @JsxGetter(propertyName = "width")
+    public String getWidth_js() {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_103);
         final Boolean returnNegativeValues = ie ? Boolean.FALSE : null;
         return getWidthOrHeight("width", returnNegativeValues);

@@ -270,8 +270,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the JavaScript property "document".
      * @return the document
      */
-    @JsxGetter
-    public DocumentProxy get_document() {
+    @JsxGetter(propertyName = "document")
+    public DocumentProxy getDocument_js() {
         return documentProxy_;
     }
 
@@ -288,7 +288,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the application cache
      */
     @JsxGetter(@WebBrowser(FF))
-    public OfflineResourceList get_applicationCache() {
+    public OfflineResourceList getApplicationCache() {
         return applicationCache_;
     }
 
@@ -297,7 +297,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the current event, or <tt>null</tt> if no event is currently available
      */
     @JsxGetter(@WebBrowser(IE))
-    public Object get_event() {
+    public Object getEvent() {
         return currentEvent_;
     }
 
@@ -485,7 +485,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the navigator
      */
     @JsxGetter
-    public Navigator get_navigator() {
+    public Navigator getNavigator() {
         return navigator_;
     }
 
@@ -494,7 +494,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the client information
      */
     @JsxGetter(@WebBrowser(IE))
-    public Navigator get_clientInformation() {
+    public Navigator getClientInformation() {
         return navigator_;
     }
 
@@ -503,7 +503,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the ClipboardData
      */
     @JsxGetter(@WebBrowser(IE))
-    public ClipboardData get_clipboardData() {
+    public ClipboardData getClipboardData() {
         final ClipboardData clipboardData = new ClipboardData();
         clipboardData.setParentScope(this);
         clipboardData.setPrototype(getPrototype(clipboardData.getClass()));
@@ -514,8 +514,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the window property. This is a synonym for "self".
      * @return the window property (a reference to <tt>this</tt>)
      */
-    @JsxGetter
-    public WindowProxy get_window() {
+    @JsxGetter(propertyName = "window")
+    public WindowProxy getWindow_js() {
         return windowProxy_;
     }
 
@@ -524,7 +524,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return this
      */
     @JsxGetter
-    public WindowProxy get_self() {
+    public WindowProxy getSelf() {
         return windowProxy_;
     }
 
@@ -533,7 +533,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the localStorage property
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public Storage get_localStorage() {
+    public Storage getLocalStorage() {
         final Storage storage = new Storage();
         storage.setParentScope(this);
         storage.setPrototype(getPrototype(storage.getClass()));
@@ -546,7 +546,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the sessionStorage property
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public Storage get_sessionStorage() {
+    public Storage getSessionStorage() {
         final Storage storage = new Storage();
         storage.setParentScope(this);
         storage.setPrototype(getPrototype(storage.getClass()));
@@ -559,7 +559,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the globalStorage property
      */
     @JsxGetter(@WebBrowser(FF))
-    public StorageList get_globalStorage() {
+    public StorageList getGlobalStorage() {
         final StorageList list = new StorageList();
         list.setParentScope(this);
         list.setPrototype(getPrototype(list.getClass()));
@@ -571,7 +571,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the location property
      */
     @JsxGetter
-    public Location get_location() {
+    public Location getLocation() {
         return location_;
     }
 
@@ -590,7 +590,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the console property
      */
     @JsxGetter(@WebBrowser(FF))
-    public ScriptableObject get_console() {
+    public ScriptableObject getConsole() {
         return console_;
     }
 
@@ -619,7 +619,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the screen property
      */
     @JsxGetter
-    public Screen get_screen() {
+    public Screen getScreen() {
         return screen_;
     }
 
@@ -628,7 +628,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the "history" property
      */
     @JsxGetter
-    public History get_history() {
+    public History getHistory() {
         return history_;
     }
 
@@ -637,7 +637,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the "external" property
      */
     @JsxGetter(@WebBrowser(IE))
-    public External get_external() {
+    public External getExternal() {
         final External external = new External();
         external.setParentScope(this);
         external.setPrototype(getPrototype(external.getClass()));
@@ -747,7 +747,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of "top"
      */
     @JsxGetter
-    public Object get_top() {
+    public Object getTop() {
         if (top_ != NOT_FOUND) {
             return top_;
         }
@@ -770,7 +770,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of window.parent
      */
     @JsxGetter
-    public WindowProxy get_parent() {
+    public WindowProxy getParent() {
         final WebWindow parent = webWindow_.getParentWindow();
         return getProxy(parent);
     }
@@ -780,7 +780,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of window.opener, <tt>null</tt> for a top level window
      */
     @JsxGetter
-    public Object get_opener() {
+    public Object getOpener() {
         Object opener = opener_;
         if (opener instanceof Window) {
             opener = ((Window) opener).windowProxy_;
@@ -811,7 +811,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return <code>null</code> for a top level window
      */
     @JsxGetter
-    public Object get_frameElement() {
+    public Object getFrameElement() {
         final WebWindow window = getWebWindow();
         if (window instanceof FrameWindow) {
             return ((FrameWindow) window).getFrameElement().getScriptObject();
@@ -823,8 +823,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the value of the frames property.
      * @return the value of the frames property
      */
-    @JsxGetter
-    public WindowProxy get_frames() {
+    @JsxGetter(propertyName = "frames")
+    public WindowProxy getFrames_js() {
         return windowProxy_;
     }
 
@@ -833,8 +833,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the number of frames contained by this window
      */
     @JsxGetter
-    public int get_length() {
-        return getFrames().get_length();
+    public int getLength() {
+        return getFrames().getLength();
     }
 
     /**
@@ -893,9 +893,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Indicates if this window is closed.
      * @return <code>true</code> if this window is closed
      */
-    @CanSetReadOnly(CanSetReadOnlyStatus.IGNORE)
     @JsxGetter
-    public boolean get_closed() {
+    @CanSetReadOnly(CanSetReadOnlyStatus.IGNORE)
+    public boolean getClosed() {
         return !getWebWindow().getWebClient().getWebWindows().contains(getWebWindow());
     }
 
@@ -964,10 +964,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction
     public void scrollBy(final int x, final int y) {
-        final HTMLElement body = ((HTMLDocument) document_).get_body();
+        final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
-            body.setScrollLeft(body.get_scrollLeft() + x);
-            body.setScrollTop(body.get_scrollTop() + y);
+            body.setScrollLeft(body.getScrollLeft() + x);
+            body.setScrollTop(body.getScrollTop() + y);
         }
     }
 
@@ -977,9 +977,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction(@WebBrowser(FF))
     public void scrollByLines(final int lines) {
-        final HTMLElement body = ((HTMLDocument) document_).get_body();
+        final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
-            body.setScrollTop(body.get_scrollTop() + (19 * lines));
+            body.setScrollTop(body.getScrollTop() + (19 * lines));
         }
     }
 
@@ -989,9 +989,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction(@WebBrowser(FF))
     public void scrollByPages(final int pages) {
-        final HTMLElement body = ((HTMLDocument) document_).get_body();
+        final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
-            body.setScrollTop(body.get_scrollTop() + (WINDOW_HEIGHT * pages));
+            body.setScrollTop(body.getScrollTop() + (WINDOW_HEIGHT * pages));
         }
     }
 
@@ -1002,7 +1002,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction
     public void scrollTo(final int x, final int y) {
-        final HTMLElement body = ((HTMLDocument) document_).get_body();
+        final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
             body.setScrollLeft(x);
             body.setScrollTop(y);
@@ -1033,7 +1033,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the onclick property
      */
     @JsxGetter
-    public Object get_onclick() {
+    public Object getOnclick() {
         return getEventListenersContainer().getEventHandlerProp("click");
     }
 
@@ -1052,7 +1052,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the ondblclick property
      */
     @JsxGetter
-    public Object get_ondblclick() {
+    public Object getOndblclick() {
         return getEventListenersContainer().getEventHandlerProp("dblclick");
     }
 
@@ -1061,7 +1061,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the onload property
      */
     @JsxGetter
-    public Object get_onload() {
+    public Object getOnload() {
         final Object onload = getEventListenersContainer().getEventHandlerProp("load");
         if (onload == null) {
             // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
@@ -1082,7 +1082,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the onhashchange property
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public Object get_onhashchange() {
+    public Object getOnhashchange() {
         return getEventListenersContainer().getEventHandlerProp(Event.TYPE_HASH_CHANGE);
     }
 
@@ -1158,7 +1158,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of the window's <tt>name</tt> property
      */
     @JsxGetter
-    public String get_name() {
+    public String getName() {
         return webWindow_.getName();
     }
 
@@ -1176,7 +1176,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of the window's <tt>onbeforeunload</tt> property
      */
     @JsxGetter
-    public Object get_onbeforeunload() {
+    public Object getOnbeforeunload() {
         return getHandlerForJavaScript(Event.TYPE_BEFORE_UNLOAD);
     }
 
@@ -1194,7 +1194,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of the window's <tt>onerror</tt> property
      */
     @JsxGetter
-    public Object get_onerror() {
+    public Object getOnerror() {
         return getHandlerForJavaScript(Event.TYPE_ERROR);
     }
 
@@ -1212,7 +1212,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param e the error that needs to be reported
      */
     public void triggerOnError(final ScriptException e) {
-        final Object o = get_onerror();
+        final Object o = getOnerror();
         if (o instanceof Function) {
             final Function f = (Function) o;
             final String msg = e.getMessage();
@@ -1334,7 +1334,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     @Override
     public Object get(final int index, final Scriptable start) {
         final HTMLCollection frames = getFrames();
-        if (index >= frames.get_length()) {
+        if (index >= frames.getLength()) {
             return Context.getUndefinedValue();
         }
         return frames.item(Integer.valueOf(index));
@@ -1401,7 +1401,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the status line text
      */
     @JsxGetter
-    public String get_status() {
+    public String getStatus() {
         return status_;
     }
 
@@ -1483,7 +1483,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref28.html">Mozilla doc</a>
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_innerWidth() {
+    public int getInnerWidth() {
         return WINDOW_WIDTH;
     }
 
@@ -1493,7 +1493,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref79.html">Mozilla doc</a>
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_outerWidth() {
+    public int getOuterWidth() {
         return WINDOW_WIDTH + 8;
     }
 
@@ -1503,7 +1503,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref27.html">Mozilla doc</a>
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_innerHeight() {
+    public int getInnerHeight() {
         return WINDOW_HEIGHT;
     }
 
@@ -1513,7 +1513,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_outerHeight() {
+    public int getOuterHeight() {
         return WINDOW_HEIGHT + 150;
     }
 
@@ -1568,11 +1568,11 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             return style;
         }
 
-        final CSSStyleDeclaration original = element.get_style();
+        final CSSStyleDeclaration original = element.getStyle();
         style = new ComputedCSSStyleDeclaration(original);
 
-        final StyleSheetList sheets = ((HTMLDocument) document_).get_styleSheets();
-        for (int i = 0; i < sheets.get_length(); i++) {
+        final StyleSheetList sheets = ((HTMLDocument) document_).getStyleSheets();
+        for (int i = 0; i < sheets.getLength(); i++) {
             final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
             if (sheet.isActive()) {
                 if (LOG.isTraceEnabled()) {
@@ -1676,7 +1676,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return some object
      */
     @JsxGetter(@WebBrowser(FF))
-    public Object get_controllers() {
+    public Object getControllers() {
         return controllers_;
     }
 
@@ -1694,7 +1694,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of "mozInnerScreenX" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_mozInnerScreenX() {
+    public int getMozInnerScreenX() {
         return 0;
     }
 
@@ -1703,7 +1703,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of "mozInnerScreenY" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_mozInnerScreenY() {
+    public int getMozInnerScreenY() {
         return 82;
     }
 
@@ -1712,7 +1712,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of "mozPaintCount" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_mozPaintCount() {
+    public int getMozPaintCount() {
         return 23;
     }
 
@@ -1884,7 +1884,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of "pageXOffset" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_pageXOffset() {
+    public int getPageXOffset() {
         return 0;
     }
 
@@ -1893,7 +1893,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of "pageYOffset" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_pageYOffset() {
+    public int getPageYOffset() {
         return 0;
     }
 
@@ -1902,7 +1902,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of "scrollX" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_scrollX() {
+    public int getScrollX() {
         return 0;
     }
 
@@ -1911,7 +1911,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the value of "scrollY" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_scrollY() {
+    public int getScrollY() {
         return 0;
     }
 

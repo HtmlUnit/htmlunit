@@ -74,7 +74,7 @@ public class History extends SimpleScriptable {
     public boolean has(final int index, final Scriptable start) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_157)) {
             final History h = (History) start;
-            if (index >= 0 && index < h.get_length()) {
+            if (index >= 0 && index < h.getLength()) {
                 return true;
             }
         }
@@ -87,7 +87,7 @@ public class History extends SimpleScriptable {
     @Override
     public Object get(final int index, final Scriptable start) {
         final History h = (History) start;
-        if (index < 0 || index >= h.get_length()) {
+        if (index < 0 || index >= h.getLength()) {
             return NOT_FOUND;
         }
         return item(index);
@@ -98,7 +98,7 @@ public class History extends SimpleScriptable {
      * @return the "length" property
      */
     @JsxGetter
-    public int get_length() {
+    public int getLength() {
         final WebWindow w = getWindow().getWebWindow();
         return w.getHistory().getLength();
     }
@@ -151,7 +151,7 @@ public class History extends SimpleScriptable {
      * @return the "current" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_current() {
+    public String getCurrent() {
         throw Context.reportRuntimeError("Permission denied to get property History.current");
     }
 
@@ -160,7 +160,7 @@ public class History extends SimpleScriptable {
      * @return the "previous" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_previous() {
+    public String getPrevious() {
         throw Context.reportRuntimeError("Permission denied to get property History.previous");
     }
 
@@ -169,7 +169,7 @@ public class History extends SimpleScriptable {
      * @return the "next" property
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_next() {
+    public String getNext() {
         throw Context.reportRuntimeError("Permission denied to get property History.next");
     }
 

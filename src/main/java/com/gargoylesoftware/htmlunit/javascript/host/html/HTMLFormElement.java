@@ -94,7 +94,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String get_name() {
+    public String getName() {
         return getHtmlForm().getNameAttribute();
     }
 
@@ -113,7 +113,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public HTMLCollection get_elements() {
+    public HTMLCollection getElements() {
         if (elements_ == null) {
             final HtmlForm htmlForm = getHtmlForm();
 
@@ -168,13 +168,13 @@ public class HTMLFormElement extends HTMLElement implements Function {
 
     /**
      * Returns the value of the JavaScript attribute "length".
-     * Does not count input type=image elements as browsers (IE6, Mozilla 1.7) do
+     * Does not count input type=image elements as browsers (IE6, Firfox 1.7) do
      * (cf <a href="http://msdn.microsoft.com/en-us/library/ms534101.aspx">MSDN doc</a>)
      * @return the value of this attribute
      */
     @JsxGetter
-    public int get_length() {
-        final int all = get_elements().get_length();
+    public int getLength() {
+        final int all = getElements().getLength();
         final int images = getHtmlForm().getElementsByAttribute("input", "type", "image").size();
         return all - images;
     }
@@ -184,7 +184,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String get_action() {
+    public String getAction() {
         String action = getHtmlForm().getActionAttribute();
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_169)) {
             try {
@@ -212,7 +212,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String get_method() {
+    public String getMethod() {
         return getHtmlForm().getMethodAttribute();
     }
 
@@ -231,7 +231,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String get_target() {
+    public String getTarget() {
         return getHtmlForm().getTargetAttribute();
     }
 
@@ -240,7 +240,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the <tt>onsubmit</tt> event handler for this element
      */
     @JsxGetter
-    public Object get_onsubmit() {
+    public Object getOnsubmit() {
         return getEventHandlerProp("onsubmit");
     }
 
@@ -268,7 +268,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this attribute
      */
     @JsxGetter
-    public String get_encoding() {
+    public String getEncoding() {
         return getHtmlForm().getEnctypeAttribute();
     }
 
@@ -302,7 +302,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         else {
             // download should be done ASAP, response will be loaded into a window later
             final WebRequest request = getHtmlForm().getWebRequest(null);
-            final String target = page.getResolvedTarget(get_target());
+            final String target = page.getResolvedTarget(getTarget());
             final boolean isHashJump = HttpMethod.GET == request.getHttpMethod() && action.endsWith("#");
             webClient.download(page.getEnclosingWindow(), target, request,
                     isHashJump, "JS form.submit()");
@@ -322,7 +322,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @JsxFunction(@WebBrowser(IE))
     public Object item(final Object index, final Object subIndex) {
         if (index instanceof Number) {
-            return get_elements().item(index);
+            return getElements().item(index);
         }
 
         final String name = Context.toString(index);
@@ -436,7 +436,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         if (getDomNodeOrNull() == null) {
             return NOT_FOUND; // typically for the prototype
         }
-        return get_elements().get(index, ((HTMLFormElement) start).get_elements());
+        return getElements().get(index, ((HTMLFormElement) start).getElements());
     }
 
     /**

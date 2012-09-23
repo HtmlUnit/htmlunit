@@ -107,7 +107,7 @@ public class DOMException extends SimpleScriptable {
      * @return the exception code
      */
     @JsxGetter
-    public Object get_code() {
+    public Object getCode() {
         if (code_ == -1) {
             return Context.getUndefinedValue();
         }
@@ -119,7 +119,7 @@ public class DOMException extends SimpleScriptable {
      * @return the exception message
      */
     @JsxGetter
-    public Object get_message() {
+    public Object getMessage() {
         if (message_ == null) {
             return Context.getUndefinedValue();
         }
@@ -131,7 +131,7 @@ public class DOMException extends SimpleScriptable {
      * @return the line of the exception
      */
     @JsxGetter
-    public Object get_lineNumber() {
+    public Object getLineNumber() {
         if (lineNumber_ == -1) {
             return Context.getUndefinedValue();
         }
@@ -143,7 +143,7 @@ public class DOMException extends SimpleScriptable {
      * @return the name of the source file
      */
     @JsxGetter
-    public Object get_filename() {
+    public Object getFilename() {
         if (fileName_ == null) {
             return Context.getUndefinedValue();
         }

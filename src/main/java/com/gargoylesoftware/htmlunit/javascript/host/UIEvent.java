@@ -74,7 +74,7 @@ public class UIEvent extends Event {
      * @return some detail information about the event, depending on the event type
      */
     @JsxGetter(@WebBrowser(FF))
-    public long get_detail() {
+    public long getDetail() {
         return detail_;
     }
 
@@ -93,7 +93,7 @@ public class UIEvent extends Event {
      * @return the view from which the event was generated
      */
     @JsxGetter(@WebBrowser(FF))
-    public Object get_view() {
+    public Object getView() {
         return getWindow();
     }
 
@@ -123,7 +123,7 @@ public class UIEvent extends Event {
      * @return whether or not the "meta" key was pressed during the event firing
      */
     @JsxGetter(@WebBrowser(FF))
-    public boolean get_metaKey() {
+    public boolean getMetaKey() {
         return metaKey_;
     }
 
@@ -139,8 +139,8 @@ public class UIEvent extends Event {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public boolean get_altKey() {
-        return super.get_altKey();
+    public boolean getAltKey() {
+        return super.getAltKey();
     }
 
     /**
@@ -148,8 +148,8 @@ public class UIEvent extends Event {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public boolean get_ctrlKey() {
-        return super.get_ctrlKey();
+    public boolean getCtrlKey() {
+        return super.getCtrlKey();
     }
 
     /**
@@ -157,7 +157,7 @@ public class UIEvent extends Event {
      */
     @Override
     @JsxGetter(@WebBrowser(FF))
-    public boolean get_shiftKey() {
-        return super.get_shiftKey();
+    public boolean getShiftKey() {
+        return super.getShiftKey();
     }
 }

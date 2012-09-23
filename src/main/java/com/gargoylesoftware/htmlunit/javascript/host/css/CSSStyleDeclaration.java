@@ -737,7 +737,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_azimuth() {
+    public String getAzimuth() {
         return getStyleAttribute(AZIMUTH, null);
     }
 
@@ -755,7 +755,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_background() {
+    public String getBackground() {
         return getStyleAttribute(BACKGROUND, null);
     }
 
@@ -773,7 +773,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_backgroundAttachment() {
+    public String getBackgroundAttachment() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -809,7 +809,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_backgroundColor() {
+    public String getBackgroundColor() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -847,7 +847,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_backgroundImage() {
+    public String getBackgroundImage() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -883,7 +883,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_backgroundPosition() {
+    public String getBackgroundPosition() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -925,7 +925,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_backgroundPositionX() {
+    public String getBackgroundPositionX() {
         return getStyleAttribute(BACKGROUND_POSITION_X, null);
     }
 
@@ -943,7 +943,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_backgroundPositionY() {
+    public String getBackgroundPositionY() {
         return getStyleAttribute(BACKGROUND_POSITION_Y, null);
     }
 
@@ -961,7 +961,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_backgroundRepeat() {
+    public String getBackgroundRepeat() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -997,7 +997,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the object's behavior
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_behavior() {
+    public String getBehavior() {
         return getStyleAttribute(BEHAVIOR, null);
     }
 
@@ -1037,7 +1037,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_border() {
+    public String getBorder() {
         return getStyleAttribute(BORDER, null);
     }
 
@@ -1055,7 +1055,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderBottom() {
+    public String getBorderBottom() {
         return getStyleAttribute(BORDER_BOTTOM, null);
     }
 
@@ -1073,7 +1073,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderBottomColor() {
+    public String getBorderBottomColor() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -1106,7 +1106,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderBottomStyle() {
+    public String getBorderBottomStyle() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -1139,7 +1139,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderBottomWidth() {
+    public String getBorderBottomWidth() {
         return getBorderWidth(Shorthand.BOTTOM);
     }
 
@@ -1157,7 +1157,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderCollapse() {
+    public String getBorderCollapse() {
         return getStyleAttribute(BORDER_COLLAPSE, null);
     }
 
@@ -1175,7 +1175,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderColor() {
+    public String getBorderColor() {
         return getStyleAttribute(BORDER_COLOR, null);
     }
 
@@ -1193,7 +1193,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderLeft() {
+    public String getBorderLeft() {
         return getStyleAttribute(BORDER_LEFT, null);
     }
 
@@ -1211,7 +1211,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderLeftColor() {
+    public String getBorderLeftColor() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -1244,7 +1244,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderLeftStyle() {
+    public String getBorderLeftStyle() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -1277,7 +1277,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderLeftWidth() {
+    public String getBorderLeftWidth() {
         return getBorderWidth(Shorthand.LEFT);
     }
 
@@ -1329,7 +1329,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderRight() {
+    public String getBorderRight() {
         return getStyleAttribute(BORDER_RIGHT, null);
     }
 
@@ -1347,7 +1347,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderRightColor() {
+    public String getBorderRightColor() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -1380,7 +1380,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderRightStyle() {
+    public String getBorderRightStyle() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -1413,7 +1413,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderRightWidth() {
+    public String getBorderRightWidth() {
         return getBorderWidth(Shorthand.RIGHT);
     }
 
@@ -1431,7 +1431,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_borderSpacing() {
+    public String getBorderSpacing() {
         return getStyleAttribute(BORDER_SPACING, null);
     }
 
@@ -1449,7 +1449,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderStyle() {
+    public String getBorderStyle() {
         return getStyleAttribute(BORDER_STYLE, null);
     }
 
@@ -1467,7 +1467,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderTop() {
+    public String getBorderTop() {
         return getStyleAttribute(BORDER_TOP, null);
     }
 
@@ -1485,7 +1485,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderTopColor() {
+    public String getBorderTopColor() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -1518,7 +1518,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderTopStyle() {
+    public String getBorderTopStyle() {
         Map<String, StyleElement> style = null;
         if (styleDeclaration_ == null) {
             style = getStyleMap();
@@ -1551,7 +1551,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderTopWidth() {
+    public String getBorderTopWidth() {
         return getBorderWidth(Shorthand.TOP);
     }
 
@@ -1569,7 +1569,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_borderWidth() {
+    public String getBorderWidth() {
         return getStyleAttribute(BORDER_WIDTH, null);
     }
 
@@ -1587,7 +1587,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_bottom() {
+    public String getBottom() {
         return getStyleAttribute(BOTTOM, null);
     }
 
@@ -1605,7 +1605,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(value = IE, minVersion = 8))
-    public String get_boxSizing() {
+    public String getBoxSizing() {
         return getStyleAttribute(BOX_SIZING, null);
     }
 
@@ -1623,7 +1623,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_captionSide() {
+    public String getCaptionSide() {
         return getStyleAttribute(CAPTION_SIDE, null);
     }
 
@@ -1641,7 +1641,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_clear() {
+    public String getClear() {
         return getStyleAttribute(CLEAR, null);
     }
 
@@ -1659,7 +1659,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_clip() {
+    public String getClip() {
         return getStyleAttribute(CLIP, null);
     }
 
@@ -1677,7 +1677,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_color() {
+    public String getColor() {
         return getStyleAttribute(COLOR, null);
     }
 
@@ -1695,7 +1695,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_content() {
+    public String getContent() {
         return getStyleAttribute(CONTENT, null);
     }
 
@@ -1713,7 +1713,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_counterIncrement() {
+    public String getCounterIncrement() {
         return getStyleAttribute(COUNTER_INCREMENT, null);
     }
 
@@ -1731,7 +1731,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_counterReset() {
+    public String getCounterReset() {
         return getStyleAttribute(COUNTER_RESET, null);
     }
 
@@ -1749,7 +1749,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_cssFloat() {
+    public String getCssFloat() {
         return getStyleAttribute(FLOAT, null);
     }
 
@@ -1767,7 +1767,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the actual text of the style
      */
     @JsxGetter
-    public String get_cssText() {
+    public String getCssText() {
         return jsElement_.getDomNodeOrDie().getAttribute("style");
     }
 
@@ -1785,7 +1785,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_cue() {
+    public String getCue() {
         return getStyleAttribute(CUE, null);
     }
 
@@ -1803,7 +1803,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_cueAfter() {
+    public String getCueAfter() {
         return getStyleAttribute(CUE_AFTER, null);
     }
 
@@ -1821,7 +1821,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_cueBefore() {
+    public String getCueBefore() {
         return getStyleAttribute(CUE_BEFORE, null);
     }
 
@@ -1839,7 +1839,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_cursor() {
+    public String getCursor() {
         return getStyleAttribute(CURSOR, null);
     }
 
@@ -1857,7 +1857,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_direction() {
+    public String getDirection() {
         return getStyleAttribute(DIRECTION, null);
     }
 
@@ -1875,7 +1875,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_display() {
+    public String getDisplay() {
         return getStyleAttribute(DISPLAY, null);
     }
 
@@ -1893,7 +1893,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_elevation() {
+    public String getElevation() {
         return getStyleAttribute(ELEVATION, null);
     }
 
@@ -1911,7 +1911,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_emptyCells() {
+    public String getEmptyCells() {
         return getStyleAttribute(EMPTY_CELLS, null);
     }
 
@@ -1931,7 +1931,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the object's filter
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_filter() {
+    public String getFilter() {
         return getStyleAttribute(FILTER, null);
     }
 
@@ -1951,7 +1951,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_font() {
+    public String getFont() {
         return getStyleAttribute(FONT, null);
     }
 
@@ -1969,7 +1969,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_fontFamily() {
+    public String getFontFamily() {
         return getStyleAttribute(FONT_FAMILY, null);
     }
 
@@ -1987,7 +1987,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_fontSize() {
+    public String getFontSize() {
         return getStyleAttribute(FONT_SIZE, null);
     }
 
@@ -2005,7 +2005,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_fontSizeAdjust() {
+    public String getFontSizeAdjust() {
         return getStyleAttribute(FONT_SIZE_ADJUST, null);
     }
 
@@ -2023,7 +2023,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_fontStretch() {
+    public String getFontStretch() {
         return getStyleAttribute(FONT_STRETCH, null);
     }
 
@@ -2041,7 +2041,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_fontStyle() {
+    public String getFontStyle() {
         return getStyleAttribute(FONT_STYLE, null);
     }
 
@@ -2059,7 +2059,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_fontVariant() {
+    public String getFontVariant() {
         return getStyleAttribute(FONT_VARIANT, null);
     }
 
@@ -2077,7 +2077,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_fontWeight() {
+    public String getFontWeight() {
         return getStyleAttribute(FONT_WEIGHT, null);
     }
 
@@ -2095,7 +2095,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_height() {
+    public String getHeight() {
         return getStyleAttribute(HEIGHT, null);
     }
 
@@ -2113,7 +2113,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_imeMode() {
+    public String getImeMode() {
         return getStyleAttribute(IME_MODE, null);
     }
 
@@ -2131,7 +2131,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_layoutFlow() {
+    public String getLayoutFlow() {
         return getStyleAttribute(LAYOUT_FLOW, null);
     }
 
@@ -2149,7 +2149,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_layoutGrid() {
+    public String getLayoutGrid() {
         return getStyleAttribute(LAYOUT_GRID, null);
     }
 
@@ -2167,7 +2167,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_layoutGridChar() {
+    public String getLayoutGridChar() {
         return getStyleAttribute(LAYOUT_GRID_CHAR, null);
     }
 
@@ -2185,7 +2185,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_layoutGridLine() {
+    public String getLayoutGridLine() {
         return getStyleAttribute(LAYOUT_GRID_LINE, null);
     }
 
@@ -2203,7 +2203,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_layoutGridMode() {
+    public String getLayoutGridMode() {
         return getStyleAttribute(LAYOUT_GRID_MODE, null);
     }
 
@@ -2221,7 +2221,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_layoutGridType() {
+    public String getLayoutGridType() {
         return getStyleAttribute(LAYOUT_GRID_TYPE, null);
     }
 
@@ -2239,7 +2239,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_left() {
+    public String getLeft() {
         return getStyleAttribute(LEFT, null);
     }
 
@@ -2257,7 +2257,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the length
      */
     @JsxGetter(@WebBrowser(FF))
-    public int get_length() {
+    public int getLength() {
         return 0;
     }
 
@@ -2266,7 +2266,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_letterSpacing() {
+    public String getLetterSpacing() {
         return getStyleAttribute(LETTER_SPACING, null);
     }
 
@@ -2284,7 +2284,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_lineBreak() {
+    public String getLineBreak() {
         return getStyleAttribute(LINE_BREAK, null);
     }
 
@@ -2302,7 +2302,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_lineHeight() {
+    public String getLineHeight() {
         return getStyleAttribute(LINE_HEIGHT, null);
     }
 
@@ -2320,7 +2320,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_listStyle() {
+    public String getListStyle() {
         return getStyleAttribute(LIST_STYLE, null);
     }
 
@@ -2338,7 +2338,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_listStyleImage() {
+    public String getListStyleImage() {
         return getStyleAttribute(LIST_STYLE_IMAGE, null);
     }
 
@@ -2356,7 +2356,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_listStylePosition() {
+    public String getListStylePosition() {
         return getStyleAttribute(LIST_STYLE_POSITION, null);
     }
 
@@ -2374,7 +2374,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_listStyleType() {
+    public String getListStyleType() {
         return getStyleAttribute(LIST_STYLE_TYPE, null);
     }
 
@@ -2392,7 +2392,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_margin() {
+    public String getMargin() {
         return getStyleAttribute(MARGIN, null);
     }
 
@@ -2410,7 +2410,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_marginBottom() {
+    public String getMarginBottom() {
         return getStyleAttribute(MARGIN_BOTTOM, MARGIN, Shorthand.BOTTOM);
     }
 
@@ -2428,7 +2428,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_marginLeft() {
+    public String getMarginLeft() {
         return getStyleAttribute(MARGIN_LEFT, MARGIN, Shorthand.LEFT);
     }
 
@@ -2446,7 +2446,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_marginRight() {
+    public String getMarginRight() {
         return getStyleAttribute(MARGIN_RIGHT, MARGIN, Shorthand.RIGHT);
     }
 
@@ -2464,7 +2464,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_marginTop() {
+    public String getMarginTop() {
         return getStyleAttribute(MARGIN_TOP, MARGIN, Shorthand.TOP);
     }
 
@@ -2482,7 +2482,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_markerOffset() {
+    public String getMarkerOffset() {
         return getStyleAttribute(MARKER_OFFSET, null);
     }
 
@@ -2500,7 +2500,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_marks() {
+    public String getMarks() {
         return getStyleAttribute(MARKS, null);
     }
 
@@ -2518,7 +2518,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_maxHeight() {
+    public String getMaxHeight() {
         return getStyleAttribute(MAX_HEIGHT, null);
     }
 
@@ -2536,7 +2536,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_maxWidth() {
+    public String getMaxWidth() {
         return getStyleAttribute(MAX_WIDTH, null);
     }
 
@@ -2554,7 +2554,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_minHeight() {
+    public String getMinHeight() {
         return getStyleAttribute(MIN_HEIGHT, null);
     }
 
@@ -2572,7 +2572,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_minWidth() {
+    public String getMinWidth() {
         return getStyleAttribute(MIN_WIDTH, null);
     }
 
@@ -2589,8 +2589,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozAppearance" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozAppearance() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozAppearance")
+    public String getMozAppearance() {
         return getStyleAttribute(MOZ_APPEARANCE, null);
     }
 
@@ -2607,8 +2607,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBackgroundClip" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBackgroundClip() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBackgroundClip")
+    public String getMozBackgroundClip() {
         return getStyleAttribute(MOZ_BACKGROUND_CLIP, null);
     }
 
@@ -2625,8 +2625,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBackgroundInlinePolicy" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBackgroundInlinePolicy() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBackgroundInlinePolicy")
+    public String getMozBackgroundInlinePolicy() {
         return getStyleAttribute(MOZ_BACKGROUND_INLINE_POLICY, null);
     }
 
@@ -2643,8 +2643,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBackgroundOrigin" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBackgroundOrigin() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBackgroundOrigin")
+    public String getMozBackgroundOrigin() {
         return getStyleAttribute(MOZ_BACKGROUND_ORIGIN, null);
     }
 
@@ -2661,8 +2661,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBackgroundSize" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBackgroundSize() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBackgroundSize")
+    public String getMozBackgroundSize() {
         return getStyleAttribute(MOZ_BACKGROUND_SIZE, null);
     }
 
@@ -2679,8 +2679,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBinding" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBinding() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBinding")
+    public String getMozBinding() {
         return getStyleAttribute(MOZ_BINDING, null);
     }
 
@@ -2697,8 +2697,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderBottomColors" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderBottomColors() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderBottomColors")
+    public String getMozBorderBottomColors() {
         return getStyleAttribute(MOZ_BORDER_BOTTOM_COLORS, null);
     }
 
@@ -2715,8 +2715,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderEnd" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderEnd() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderEnd")
+    public String getMozBorderEnd() {
         return getStyleAttribute(MOZ_BORDER_END, null);
     }
 
@@ -2733,8 +2733,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderEndColor" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderEndColor() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderEndColor")
+    public String getMozBorderEndColor() {
         return getStyleAttribute(MOZ_BORDER_END_COLOR, null);
     }
 
@@ -2751,8 +2751,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderEndStyle" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderEndStyle() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderEndStyle")
+    public String getMozBorderEndStyle() {
         return getStyleAttribute(MOZ_BORDER_END_STYLE, null);
     }
 
@@ -2769,8 +2769,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderEndWidth" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderEndWidth() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderEndWidth")
+    public String getMozBorderEndWidth() {
         return getStyleAttribute(MOZ_BORDER_END_WIDTH, null);
     }
 
@@ -2787,8 +2787,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderImage" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderImage() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderImage")
+    public String getMozBorderImage() {
         return getStyleAttribute(MOZ_BORDER_IMAGE, null);
     }
 
@@ -2805,8 +2805,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderLeftColors" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderLeftColors() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderLeftColors")
+    public String getMozBorderLeftColors() {
         return getStyleAttribute(MOZ_BORDER_LEFT_COLORS, null);
     }
 
@@ -2823,8 +2823,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderRadius" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderRadius() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderRadius")
+    public String getMozBorderRadius() {
         return getStyleAttribute(MOZ_BORDER_RADIUS, null);
     }
 
@@ -2841,8 +2841,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderRadiusBottomleft" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderRadiusBottomleft() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusBottomleft")
+    public String getMozBorderRadiusBottomleft() {
         return getStyleAttribute(MOZ_BORDER_RADIUS_BOTTOMLEFT, null);
     }
 
@@ -2859,8 +2859,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderRadiusBottomright" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderRadiusBottomright() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusBottomright")
+    public String getMozBorderRadiusBottomright() {
         return getStyleAttribute(MOZ_BORDER_RADIUS_BOTTOMRIGHT, null);
     }
 
@@ -2877,8 +2877,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderRadiusTopleft" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderRadiusTopleft() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusTopleft")
+    public String getMozBorderRadiusTopleft() {
         return getStyleAttribute(MOZ_BORDER_RADIUS_TOPLEFT, null);
     }
 
@@ -2895,8 +2895,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderRadiusTopright" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderRadiusTopright() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusTopright")
+    public String getMozBorderRadiusTopright() {
         return getStyleAttribute(MOZ_BORDER_RADIUS_TOPRIGHT, null);
     }
 
@@ -2913,8 +2913,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderRightColors" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderRightColors() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderRightColors")
+    public String getMozBorderRightColors() {
         return getStyleAttribute(MOZ_BORDER_RIGHT_COLORS, null);
     }
 
@@ -2931,8 +2931,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderStart" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderStart() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderStart")
+    public String getMozBorderStart() {
         return getStyleAttribute(MOZ_BORDER_START, null);
     }
 
@@ -2949,8 +2949,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderStartColor" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderStartColor() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderStartColor")
+    public String getMozBorderStartColor() {
         return getStyleAttribute(MOZ_BORDER_START_COLOR, null);
     }
 
@@ -2967,8 +2967,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderStartStyle" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderStartStyle() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderStartStyle")
+    public String getMozBorderStartStyle() {
         return getStyleAttribute(MOZ_BORDER_START_STYLE, null);
     }
 
@@ -2985,8 +2985,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderStartWidth" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderStartWidth() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderStartWidth")
+    public String getMozBorderStartWidth() {
         return getStyleAttribute(MOZ_BORDER_START_WIDTH, null);
     }
 
@@ -3003,8 +3003,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBorderTopColors" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBorderTopColors() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderTopColors")
+    public String getMozBorderTopColors() {
         return getStyleAttribute(MOZ_BORDER_TOP_COLORS, null);
     }
 
@@ -3021,8 +3021,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBoxAlign" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBoxAlign() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxAlign")
+    public String getMozBoxAlign() {
         return getStyleAttribute(MOZ_BOX_ALIGN, null);
     }
 
@@ -3039,8 +3039,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBoxDirection" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBoxDirection() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxDirection")
+    public String getMozBoxDirection() {
         return getStyleAttribute(MOZ_BOX_DIRECTION, null);
     }
 
@@ -3057,8 +3057,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBoxFlex" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBoxFlex() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxFlex")
+    public String getMozBoxFlex() {
         return getStyleAttribute(MOZ_BOX_FLEX, null);
     }
 
@@ -3075,8 +3075,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBoxOrdinalGroup" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBoxOrdinalGroup() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxOrdinalGroup")
+    public String getMozBoxOrdinalGroup() {
         return getStyleAttribute(MOZ_BOX_ORDINAL_GROUP, null);
     }
 
@@ -3093,8 +3093,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBoxOrient" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBoxOrient() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxOrient")
+    public String getMozBoxOrient() {
         return getStyleAttribute(MOZ_BOX_ORIENT, null);
     }
 
@@ -3111,8 +3111,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBoxPack" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBoxPack() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxPack")
+    public String getMozBoxPack() {
         return getStyleAttribute(MOZ_BOX_PACK, null);
     }
 
@@ -3129,8 +3129,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBoxShadow" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBoxShadow() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxShadow")
+    public String getMozBoxShadow() {
         return getStyleAttribute(MOZ_BOX_SHADOW, null);
     }
 
@@ -3147,8 +3147,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozBoxSizing" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozBoxSizing() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxSizing")
+    public String getMozBoxSizing() {
         return getStyleAttribute(MOZ_BOX_SIZING, null);
     }
 
@@ -3165,8 +3165,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozColumnCount" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozColumnCount() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnCount")
+    public String getMozColumnCount() {
         return getStyleAttribute(MOZ_COLUMN_COUNT, null);
     }
 
@@ -3183,8 +3183,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozColumnGap" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozColumnGap() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnGap")
+    public String getMozColumnGap() {
         return getStyleAttribute(MOZ_COLUMN_GAP, null);
     }
 
@@ -3201,8 +3201,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozColumnRule" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozColumnRule() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnRule")
+    public String getMozColumnRule() {
         return getStyleAttribute(MOZ_COLUMN_RULE, null);
     }
 
@@ -3219,8 +3219,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozColumnRuleColor" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozColumnRuleColor() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnRuleColor")
+    public String getMozColumnRuleColor() {
         return getStyleAttribute(MOZ_COLUMN_RULE_COLOR, null);
     }
 
@@ -3237,8 +3237,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozColumnRuleStyle" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozColumnRuleStyle() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnRuleStyle")
+    public String getMozColumnRuleStyle() {
         return getStyleAttribute(MOZ_COLUMN_RULE_STYLE, null);
     }
 
@@ -3255,8 +3255,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozColumnRuleWidth" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozColumnRuleWidth() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnRuleWidth")
+    public String getMozColumnRuleWidth() {
         return getStyleAttribute(MOZ_COLUMN_RULE_WIDTH, null);
     }
 
@@ -3273,8 +3273,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozColumnWidth" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozColumnWidth() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnWidth")
+    public String getMozColumnWidth() {
         return getStyleAttribute(MOZ_COLUMN_WIDTH, null);
     }
 
@@ -3291,8 +3291,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozFloatEdge" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozFloatEdge() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozFloatEdge")
+    public String getMozFloatEdge() {
         return getStyleAttribute(MOZ_FLOAT_EDGE, null);
     }
 
@@ -3309,8 +3309,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozForceBrokenImageIcon" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozForceBrokenImageIcon() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozForceBrokenImageIcon")
+    public String getMozForceBrokenImageIcon() {
         return getStyleAttribute(MOZ_FORCE_BROKEN_IMAGE_ICON, null);
     }
 
@@ -3327,8 +3327,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozImageRegion" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozImageRegion() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozImageRegion")
+    public String getMozImageRegion() {
         return getStyleAttribute(MOZ_IMAGE_REGION, null);
     }
 
@@ -3345,8 +3345,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozMarginEnd" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozMarginEnd() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozMarginEnd")
+    public String getMozMarginEnd() {
         return getStyleAttribute(MOZ_MARGIN_END, null);
     }
 
@@ -3363,8 +3363,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozMarginStart" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozMarginStart() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozMarginStart")
+    public String getMozMarginStart() {
         return getStyleAttribute(MOZ_MARGIN_START, null);
     }
 
@@ -3381,8 +3381,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozOpacity" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozOpacity() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOpacity")
+    public String getMozOpacity() {
         return getStyleAttribute(MOZ_OPACITY, null);
     }
 
@@ -3399,8 +3399,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozOutline" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozOutline() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutline")
+    public String getMozOutline() {
         return getStyleAttribute(MOZ_OUTLINE, null);
     }
 
@@ -3417,8 +3417,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozOutlineColor" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozOutlineColor() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineColor")
+    public String getMozOutlineColor() {
         return getStyleAttribute(MOZ_OUTLINE_COLOR, null);
     }
 
@@ -3435,8 +3435,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozOutlineOffset" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozOutlineOffset() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineOffset")
+    public String getMozOutlineOffset() {
         return getStyleAttribute(MOZ_OUTLINE_OFFSET, null);
     }
 
@@ -3453,8 +3453,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozOutlineRadius" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozOutlineRadius() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadius")
+    public String getMozOutlineRadius() {
         return getStyleAttribute(MOZ_OUTLINE_RADIUS, null);
     }
 
@@ -3471,8 +3471,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozOutlineRadiusBottomleft" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozOutlineRadiusBottomleft() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusBottomleft")
+    public String getMozOutlineRadiusBottomleft() {
         return getStyleAttribute(MOZ_OUTLINE_RADIUS_BOTTOMLEFT, null);
     }
 
@@ -3489,8 +3489,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozOutlineRadiusBottomright" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozOutlineRadiusBottomright() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusBottomright")
+    public String getMozOutlineRadiusBottomright() {
         return getStyleAttribute(MOZ_OUTLINE_RADIUS_BOTTOMRIGHT, null);
     }
 
@@ -3507,8 +3507,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozOutlineRadiusTopleft" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozOutlineRadiusTopleft() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusTopleft")
+    public String getMozOutlineRadiusTopleft() {
         return getStyleAttribute(MOZ_OUTLINE_RADIUS_TOPLEFT, null);
     }
 
@@ -3525,8 +3525,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozOutlineRadiusTopright" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozOutlineRadiusTopright() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusTopright")
+    public String getMozOutlineRadiusTopright() {
         return getStyleAttribute(MOZ_OUTLINE_RADIUS_TOPRIGHT, null);
     }
 
@@ -3543,8 +3543,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozOutlineStyle" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozOutlineStyle() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineStyle")
+    public String getMozOutlineStyle() {
         return getStyleAttribute(MOZ_OUTLINE_STYLE, null);
     }
 
@@ -3561,8 +3561,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozOutlineWidth" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozOutlineWidth() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineWidth")
+    public String getMozOutlineWidth() {
         return getStyleAttribute(MOZ_OUTLINE_WIDTH, null);
     }
 
@@ -3579,8 +3579,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozPaddingEnd" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozPaddingEnd() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozPaddingEnd")
+    public String getMozPaddingEnd() {
         return getStyleAttribute(MOZ_PADDING_END, null);
     }
 
@@ -3597,8 +3597,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozPaddingStart" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozPaddingStart() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozPaddingStart")
+    public String getMozPaddingStart() {
         return getStyleAttribute(MOZ_PADDING_START, null);
     }
 
@@ -3615,8 +3615,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozStackSizing" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozStackSizing() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozStackSizing")
+    public String getMozStackSizing() {
         return getStyleAttribute(MOZ_STACK_SIZING, null);
     }
 
@@ -3633,8 +3633,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozTransform" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozTransform() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozTransform")
+    public String getMozTransform() {
         return getStyleAttribute(MOZ_TRANSFORM, null);
     }
 
@@ -3651,8 +3651,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozTransformOrigin" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozTransformOrigin() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozTransformOrigin")
+    public String getMozTransformOrigin() {
         return getStyleAttribute(MOZ_TRANSFORM_ORIGIN, null);
     }
 
@@ -3669,8 +3669,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozUserFocus" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozUserFocus() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozUserFocus")
+    public String getMozUserFocus() {
         return getStyleAttribute(MOZ_USER_FOCUS, null);
     }
 
@@ -3687,8 +3687,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozUserInput" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozUserInput() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozUserInput")
+    public String getMozUserInput() {
         return getStyleAttribute(MOZ_USER_INPUT, null);
     }
 
@@ -3705,8 +3705,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozUserModify" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozUserModify() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozUserModify")
+    public String getMozUserModify() {
         return getStyleAttribute(MOZ_USER_MODIFY, null);
     }
 
@@ -3723,8 +3723,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozUserSelect" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozUserSelect() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozUserSelect")
+    public String getMozUserSelect() {
         return getStyleAttribute(MOZ_USER_SELECT, null);
     }
 
@@ -3741,8 +3741,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Gets the "MozWindowShadow" style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(FF))
-    public String get_MozWindowShadow() {
+    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozWindowShadow")
+    public String getMozWindowShadow() {
         return getStyleAttribute(MOZ_WINDOW_SHADOW, null);
     }
 
@@ -3760,7 +3760,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(value = IE, minVersion = 8))
-    public String get_msBlockProgression() {
+    public String getMsBlockProgression() {
         return getStyleAttribute(MS_BLOCK_PROGRESSION, null);
     }
 
@@ -3778,7 +3778,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_msInterpolationMode() {
+    public String getMsInterpolationMode() {
         return getStyleAttribute(MS_INTERPOLATION_MODE, null);
     }
 
@@ -3796,7 +3796,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public String get_opacity() {
+    public String getOpacity() {
         final String opacity = getStyleAttribute(OPACITY, null);
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OPACITY_ACCEPTS_ARBITRARY_VALUES)) {
             return opacity;
@@ -3850,7 +3850,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_orphans() {
+    public String getOrphans() {
         return getStyleAttribute(ORPHANS, null);
     }
 
@@ -3868,7 +3868,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_outline() {
+    public String getOutline() {
         return getStyleAttribute(OUTLINE, null);
     }
 
@@ -3886,7 +3886,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_outlineColor() {
+    public String getOutlineColor() {
         return getStyleAttribute(OUTLINE_COLOR, null);
     }
 
@@ -3904,7 +3904,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_outlineOffset() {
+    public String getOutlineOffset() {
         return getStyleAttribute(OUTLINE_OFFSET, null);
     }
 
@@ -3922,7 +3922,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_outlineStyle() {
+    public String getOutlineStyle() {
         return getStyleAttribute(OUTLINE_STYLE, null);
     }
 
@@ -3940,7 +3940,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_outlineWidth() {
+    public String getOutlineWidth() {
         return getStyleAttribute(OUTLINE_WIDTH, null);
     }
 
@@ -3958,7 +3958,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_overflow() {
+    public String getOverflow() {
         return getStyleAttribute(OVERFLOW, null);
     }
 
@@ -3976,7 +3976,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_overflowX() {
+    public String getOverflowX() {
         return getStyleAttribute(OVERFLOW_X, null);
     }
 
@@ -3994,7 +3994,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_overflowY() {
+    public String getOverflowY() {
         return getStyleAttribute(OVERFLOW_Y, null);
     }
 
@@ -4012,7 +4012,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_padding() {
+    public String getPadding() {
         return getStyleAttribute(PADDING, null);
     }
 
@@ -4030,7 +4030,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_paddingBottom() {
+    public String getPaddingBottom() {
         return getStyleAttribute(PADDING_BOTTOM, PADDING, Shorthand.BOTTOM);
     }
 
@@ -4048,7 +4048,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_paddingLeft() {
+    public String getPaddingLeft() {
         return getStyleAttribute(PADDING_LEFT, PADDING, Shorthand.LEFT);
     }
 
@@ -4066,7 +4066,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_paddingRight() {
+    public String getPaddingRight() {
         return getStyleAttribute(PADDING_RIGHT, PADDING, Shorthand.RIGHT);
     }
 
@@ -4084,7 +4084,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_paddingTop() {
+    public String getPaddingTop() {
         return getStyleAttribute(PADDING_TOP, PADDING, Shorthand.TOP);
     }
 
@@ -4102,7 +4102,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_page() {
+    public String getPage() {
         return getStyleAttribute(PAGE, null);
     }
 
@@ -4120,7 +4120,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_pageBreakAfter() {
+    public String getPageBreakAfter() {
         return getStyleAttribute(PAGE_BREAK_AFTER, null);
     }
 
@@ -4138,7 +4138,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_pageBreakBefore() {
+    public String getPageBreakBefore() {
         return getStyleAttribute(PAGE_BREAK_BEFORE, null);
     }
 
@@ -4156,7 +4156,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_pageBreakInside() {
+    public String getPageBreakInside() {
         return getStyleAttribute(PAGE_BREAK_INSIDE, null);
     }
 
@@ -4174,7 +4174,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_pause() {
+    public String getPause() {
         return getStyleAttribute(PAUSE, null);
     }
 
@@ -4192,7 +4192,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_pauseAfter() {
+    public String getPauseAfter() {
         return getStyleAttribute(PAUSE_AFTER, null);
     }
 
@@ -4210,7 +4210,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_pauseBefore() {
+    public String getPauseBefore() {
         return getStyleAttribute(PAUSE_BEFORE, null);
     }
 
@@ -4228,7 +4228,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_pitch() {
+    public String getPitch() {
         return getStyleAttribute(PITCH, null);
     }
 
@@ -4246,7 +4246,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_pitchRange() {
+    public String getPitchRange() {
         return getStyleAttribute(PITCH_RANGE, null);
     }
 
@@ -4264,7 +4264,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_pointerEvents() {
+    public String getPointerEvents() {
         return getStyleAttribute(POINTER_EVENTS, null);
     }
 
@@ -4282,8 +4282,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public int get_pixelBottom() {
-        return pixelValue(get_bottom());
+    public int getPixelBottom() {
+        return pixelValue(getBottom());
     }
 
     /**
@@ -4300,8 +4300,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public int get_pixelLeft() {
-        return pixelValue(get_left());
+    public int getPixelLeft() {
+        return pixelValue(getLeft());
     }
 
     /**
@@ -4318,8 +4318,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public int get_pixelRight() {
-        return pixelValue(get_right());
+    public int getPixelRight() {
+        return pixelValue(getRight());
     }
 
     /**
@@ -4336,8 +4336,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public int get_pixelTop() {
-        return pixelValue(get_top());
+    public int getPixelTop() {
+        return pixelValue(getTop());
     }
 
     /**
@@ -4354,7 +4354,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public int get_posBottom() {
+    public int getPosBottom() {
         return 0;
     }
 
@@ -4372,7 +4372,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public int get_posHeight() {
+    public int getPosHeight() {
         return 0;
     }
 
@@ -4390,7 +4390,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_position() {
+    public String getPosition() {
         return getStyleAttribute(POSITION, null);
     }
 
@@ -4408,7 +4408,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public int get_posLeft() {
+    public int getPosLeft() {
         return 0;
     }
 
@@ -4426,7 +4426,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public int get_posRight() {
+    public int getPosRight() {
         return 0;
     }
 
@@ -4444,7 +4444,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public int get_posTop() {
+    public int getPosTop() {
         return 0;
     }
 
@@ -4462,7 +4462,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public int get_posWidth() {
+    public int getPosWidth() {
         return 0;
     }
 
@@ -4480,7 +4480,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_quotes() {
+    public String getQuotes() {
         return getStyleAttribute(QUOTES, null);
     }
 
@@ -4498,7 +4498,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_richness() {
+    public String getRichness() {
         return getStyleAttribute(RICHNESS, null);
     }
 
@@ -4516,7 +4516,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_right() {
+    public String getRight() {
         return getStyleAttribute(RIGHT, null);
     }
 
@@ -4534,7 +4534,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_rubyAlign() {
+    public String getRubyAlign() {
         return getStyleAttribute(RUBY_ALIGN, null);
     }
 
@@ -4552,7 +4552,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_rubyOverhang() {
+    public String getRubyOverhang() {
         return getStyleAttribute(RUBY_OVERHANG, null);
     }
 
@@ -4570,7 +4570,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_rubyPosition() {
+    public String getRubyPosition() {
         return getStyleAttribute(RUBY_POSITION, null);
     }
 
@@ -4588,7 +4588,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_scrollbar3dLightColor() {
+    public String getScrollbar3dLightColor() {
         return getStyleAttribute(SCROLLBAR3D_LIGHT_COLOR, null);
     }
 
@@ -4606,7 +4606,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_scrollbarArrowColor() {
+    public String getScrollbarArrowColor() {
         return getStyleAttribute(SCROLLBAR_ARROW_COLOR, null);
     }
 
@@ -4624,7 +4624,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_scrollbarBaseColor() {
+    public String getScrollbarBaseColor() {
         return getStyleAttribute(SCROLLBAR_BASE_COLOR, null);
     }
 
@@ -4642,7 +4642,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_scrollbarDarkShadowColor() {
+    public String getScrollbarDarkShadowColor() {
         return getStyleAttribute(SCROLLBAR_DARK_SHADOW_COLOR, null);
     }
 
@@ -4660,7 +4660,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_scrollbarFaceColor() {
+    public String getScrollbarFaceColor() {
         return getStyleAttribute(SCROLLBAR_FACE_COLOR, null);
     }
 
@@ -4678,7 +4678,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_scrollbarHighlightColor() {
+    public String getScrollbarHighlightColor() {
         return getStyleAttribute(SCROLLBAR_HIGHLIGHT_COLOR, null);
     }
 
@@ -4696,7 +4696,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_scrollbarShadowColor() {
+    public String getScrollbarShadowColor() {
         return getStyleAttribute(SCROLLBAR_SHADOW_COLOR, null);
     }
 
@@ -4714,7 +4714,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_scrollbarTrackColor() {
+    public String getScrollbarTrackColor() {
         return getStyleAttribute(SCROLLBAR_TRACK_COLOR, null);
     }
 
@@ -4732,7 +4732,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_size() {
+    public String getSize() {
         return getStyleAttribute(SIZE, null);
     }
 
@@ -4750,7 +4750,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_speak() {
+    public String getSpeak() {
         return getStyleAttribute(SPEAK, null);
     }
 
@@ -4768,7 +4768,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_speakHeader() {
+    public String getSpeakHeader() {
         return getStyleAttribute(SPEAK_HEADER, null);
     }
 
@@ -4786,7 +4786,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_speakNumeral() {
+    public String getSpeakNumeral() {
         return getStyleAttribute(SPEAK_NUMERAL, null);
     }
 
@@ -4804,7 +4804,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_speakPunctuation() {
+    public String getSpeakPunctuation() {
         return getStyleAttribute(SPEAK_PUNCTUATION, null);
     }
 
@@ -4822,7 +4822,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_speechRate() {
+    public String getSpeechRate() {
         return getStyleAttribute(SPEECH_RATE, null);
     }
 
@@ -4840,7 +4840,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_stress() {
+    public String getStress() {
         return getStyleAttribute(STRESS, null);
     }
 
@@ -4858,7 +4858,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_styleFloat() {
+    public String getStyleFloat() {
         return getStyleAttribute(FLOAT, null);
     }
 
@@ -4876,7 +4876,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_tableLayout() {
+    public String getTableLayout() {
         return getStyleAttribute(TABLE_LAYOUT, null);
     }
 
@@ -4894,7 +4894,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_textAlign() {
+    public String getTextAlign() {
         return getStyleAttribute(TEXT_ALIGN, null);
     }
 
@@ -4912,7 +4912,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_textAlignLast() {
+    public String getTextAlignLast() {
         return getStyleAttribute(TEXT_ALIGN_LAST, null);
     }
 
@@ -4930,7 +4930,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_textAutospace() {
+    public String getTextAutospace() {
         return getStyleAttribute(TEXT_AUTOSPACE, null);
     }
 
@@ -4948,7 +4948,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_textDecoration() {
+    public String getTextDecoration() {
         return getStyleAttribute(TEXT_DECORATION, null);
     }
 
@@ -4966,7 +4966,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean get_textDecorationBlink() {
+    public boolean getTextDecorationBlink() {
         return false;
     }
 
@@ -4984,7 +4984,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean get_textDecorationLineThrough() {
+    public boolean getTextDecorationLineThrough() {
         return false;
     }
 
@@ -5002,7 +5002,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean get_textDecorationNone() {
+    public boolean getTextDecorationNone() {
         return false;
     }
 
@@ -5020,7 +5020,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean get_textDecorationOverline() {
+    public boolean getTextDecorationOverline() {
         return false;
     }
 
@@ -5038,7 +5038,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public boolean get_textDecorationUnderline() {
+    public boolean getTextDecorationUnderline() {
         return false;
     }
 
@@ -5056,7 +5056,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_textIndent() {
+    public String getTextIndent() {
         return getStyleAttribute(TEXT_INDENT, null);
     }
 
@@ -5074,7 +5074,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_textJustify() {
+    public String getTextJustify() {
         return getStyleAttribute(TEXT_JUSTIFY, null);
     }
 
@@ -5092,7 +5092,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_textJustifyTrim() {
+    public String getTextJustifyTrim() {
         return getStyleAttribute(TEXT_JUSTIFY_TRIM, null);
     }
 
@@ -5110,7 +5110,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_textKashida() {
+    public String getTextKashida() {
         return getStyleAttribute(TEXT_KASHIDA, null);
     }
 
@@ -5128,7 +5128,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_textKashidaSpace() {
+    public String getTextKashidaSpace() {
         return getStyleAttribute(TEXT_KASHIDA_SPACE, null);
     }
 
@@ -5146,7 +5146,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_textOverflow() {
+    public String getTextOverflow() {
         return getStyleAttribute(TEXT_OVERFLOW, null);
     }
 
@@ -5164,7 +5164,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_textShadow() {
+    public String getTextShadow() {
         return getStyleAttribute(TEXT_SHADOW, null);
     }
 
@@ -5182,7 +5182,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_textTransform() {
+    public String getTextTransform() {
         return getStyleAttribute(TEXT_TRANSFORM, null);
     }
 
@@ -5200,7 +5200,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_textUnderlinePosition() {
+    public String getTextUnderlinePosition() {
         return getStyleAttribute(TEXT_UNDERLINE_POSITION, null);
     }
 
@@ -5218,7 +5218,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_top() {
+    public String getTop() {
         return getStyleAttribute(TOP, null);
     }
 
@@ -5236,7 +5236,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_unicodeBidi() {
+    public String getUnicodeBidi() {
         return getStyleAttribute(UNICODE_BIDI, null);
     }
 
@@ -5254,7 +5254,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_verticalAlign() {
+    public String getVerticalAlign() {
         return getStyleAttribute(VERTICAL_ALIGN, null);
     }
 
@@ -5272,7 +5272,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_visibility() {
+    public String getVisibility() {
         return getStyleAttribute(VISIBILITY, null);
     }
 
@@ -5290,7 +5290,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_voiceFamily() {
+    public String getVoiceFamily() {
         return getStyleAttribute(VOICE_FAMILY, null);
     }
 
@@ -5308,7 +5308,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(FF))
-    public String get_volume() {
+    public String getVolume() {
         return getStyleAttribute(VOLUME, null);
     }
 
@@ -5326,7 +5326,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_whiteSpace() {
+    public String getWhiteSpace() {
         return getStyleAttribute(WHITE_SPACE, null);
     }
 
@@ -5344,7 +5344,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String get_widows() {
+    public String getWidows() {
         return getStyleAttribute(WIDOWS, null);
     }
 
@@ -5362,7 +5362,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_width() {
+    public String getWidth() {
         return getStyleAttribute(WIDTH, null);
     }
 
@@ -5380,7 +5380,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_wordBreak() {
+    public String getWordBreak() {
         return getStyleAttribute(WORD_BREAK, null);
     }
 
@@ -5398,7 +5398,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public String get_wordSpacing() {
+    public String getWordSpacing() {
         return getStyleAttribute(WORD_SPACING, null);
     }
 
@@ -5416,7 +5416,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
-    public String get_wordWrap() {
+    public String getWordWrap() {
         return getStyleAttribute(WORD_WRAP, null);
     }
 
@@ -5434,7 +5434,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_writingMode() {
+    public String getWritingMode() {
         return getStyleAttribute(WRITING_MODE, null);
     }
 
@@ -5452,7 +5452,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter
-    public Object get_zIndex() {
+    public Object getZIndex() {
         final String value = getStyleAttribute(Z_INDEX, null);
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_TYPE_NUMBER)) {
             if (value == null
@@ -5551,7 +5551,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return the style attribute
      */
     @JsxGetter(@WebBrowser(IE))
-    public String get_zoom() {
+    public String getZoom() {
         return getStyleAttribute(ZOOM, null);
     }
 
@@ -6059,7 +6059,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
          * @return the CSS attribute value for the specified element
          */
         public final String get(final HTMLElement element) {
-            final ComputedCSSStyleDeclaration style = element.get_currentStyle();
+            final ComputedCSSStyleDeclaration style = element.getCurrentStyle();
             final String value = get(style);
             return value;
         }
