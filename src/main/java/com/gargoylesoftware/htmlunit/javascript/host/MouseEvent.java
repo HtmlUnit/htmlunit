@@ -144,7 +144,7 @@ public class MouseEvent extends UIEvent {
      * @param value the clientX value
      */
     @JsxSetter
-    public void set_clientX(final int value) {
+    public void setClientX(final int value) {
         clientX_ = value;
     }
 
@@ -191,7 +191,7 @@ public class MouseEvent extends UIEvent {
      * @param value the clientY value
      */
     @JsxSetter
-    public void set_clientY(final int value) {
+    public void setClientY(final int value) {
         clientY_ = value;
     }
 
@@ -245,7 +245,7 @@ public class MouseEvent extends UIEvent {
      * @param value the button code
      */
     @JsxSetter
-    public void set_button(int value) {
+    public void setButton(int value) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_116)
                 && !TYPE_CLICK.equals(get_type())) {
             switch (value) {

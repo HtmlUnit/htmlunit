@@ -89,7 +89,7 @@ public class Location extends SimpleScriptable {
     public void initialize(final Window window) {
         window_ = window;
         if (window_ != null && window_.getWebWindow().getEnclosedPage() != null) {
-            set_hash(window_.getWebWindow().getEnclosedPage().getWebResponse().getWebRequest().getUrl().getRef());
+            setHash(window_.getWebWindow().getEnclosedPage().getWebResponse().getWebRequest().getUrl().getRef());
         }
     }
 
@@ -112,7 +112,7 @@ public class Location extends SimpleScriptable {
      */
     @JsxFunction
     public void assign(final String url) throws IOException {
-        set_href(url);
+        setHref(url);
     }
 
     /**
@@ -129,7 +129,7 @@ public class Location extends SimpleScriptable {
             LOG.error("Unable to reload location: current URL is unknown.");
         }
         else {
-            set_href(url);
+            setHref(url);
         }
     }
 
@@ -142,7 +142,7 @@ public class Location extends SimpleScriptable {
     @JsxFunction
     public void replace(final String url) throws IOException {
         window_.getWebWindow().getHistory().removeCurrent();
-        set_href(url);
+        setHref(url);
     }
 
     /**
@@ -197,7 +197,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void set_href(final String newLocation) throws IOException {
+    public void setHref(final String newLocation) throws IOException {
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
@@ -226,7 +226,7 @@ public class Location extends SimpleScriptable {
                     newLocation.endsWith("#"), "JS set location");
         }
         catch (final MalformedURLException e) {
-            LOG.error("set_location('" + newLocation + "') Got MalformedURLException", e);
+            LOG.error("setLocation('" + newLocation + "') Got MalformedURLException", e);
             throw e;
         }
     }
@@ -252,7 +252,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534620.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void set_search(final String search) throws Exception {
+    public void setSearch(final String search) throws Exception {
         setUrl(UrlUtils.getUrlWithNewQuery(getUrl(), search));
     }
 
@@ -293,7 +293,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533775.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void set_hash(String hash) {
+    public void setHash(String hash) {
         // IMPORTANT: This method must not call setUrl(), because
         // we must not hit the server just to change the hash!
         if (hash != null) {
@@ -347,7 +347,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533785.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void set_hostname(final String hostname) throws Exception {
+    public void setHostname(final String hostname) throws Exception {
         setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
     }
 
@@ -375,7 +375,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533784.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void set_host(final String host) throws Exception {
+    public void setHost(final String host) throws Exception {
         final String hostname;
         final int port;
         final int index = host.indexOf(':');
@@ -415,7 +415,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534332.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void set_pathname(final String pathname) throws Exception {
+    public void setPathname(final String pathname) throws Exception {
         setUrl(UrlUtils.getUrlWithNewPath(getUrl(), pathname));
     }
 
@@ -440,7 +440,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534342.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void set_port(final String port) throws Exception {
+    public void setPort(final String port) throws Exception {
         setUrl(UrlUtils.getUrlWithNewPort(getUrl(), Integer.parseInt(port)));
     }
 
@@ -461,7 +461,7 @@ public class Location extends SimpleScriptable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534353.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void set_protocol(final String protocol) throws Exception {
+    public void setProtocol(final String protocol) throws Exception {
         setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), protocol));
     }
 

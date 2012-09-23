@@ -310,7 +310,7 @@ public final class JavaScriptConfiguration {
 
     @SuppressWarnings("unchecked")
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
-        Attr.class, ActiveXObject.class, BoxObject.class, CDATASection.class, ClipboardData.class, //aaaaaaaaaaaaaaaaaa
+        Attr.class, ActiveXObject.class, BoxObject.class, CDATASection.class, ClipboardData.class,
         CSSCharsetRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPrimitiveValue.class, CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSValue.class,
         CanvasRenderingContext2D.class, CharacterDataImpl.class, ClientRect.class, Comment.class,
@@ -455,8 +455,16 @@ public final class JavaScriptConfiguration {
                             }
                         }
                         else if (annotation instanceof JsxSetter) {
-                            if (isSupported(((JsxSetter) annotation).value(), browser)) {
-                                final String property = method.getName().substring("set_".length());
+                            final JsxSetter jsxSetter = (JsxSetter) annotation;
+                            if (isSupported(jsxSetter.value(), browser)) {
+                                String property;
+                                if (jsxSetter.propertyName().isEmpty()) {
+                                    property = method.getName().substring(3);
+                                    property = Character.toLowerCase(property.charAt(0)) + property.substring(1);
+                                }
+                                else {
+                                    property = jsxSetter.propertyName();
+                                }
                                 allSetters.put(property, method);
                             }
                         }

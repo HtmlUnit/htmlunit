@@ -581,8 +581,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @throws IOException when location loading fails
      */
     @JsxSetter
-    public void set_location(final String newLocation) throws IOException {
-        location_.set_href(newLocation);
+    public void setLocation(final String newLocation) throws IOException {
+        location_.setHref(newLocation);
     }
 
     /**
@@ -599,7 +599,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param console the console
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_console(final ScriptableObject console) {
+    public void setConsole(final ScriptableObject console) {
         console_ = console;
     }
 
@@ -761,7 +761,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param o the new value
      */
     @JsxSetter
-    public void set_top(final Object o) {
+    public void setTop(final Object o) {
         top_ = o;
     }
 
@@ -793,7 +793,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param newValue the new value
      */
     @JsxSetter
-    public void set_opener(Object newValue) {
+    public void setOpener(Object newValue) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED)
                 && newValue != opener_) {
             if (opener_ == null || newValue == null || newValue == Context.getUndefinedValue()) {
@@ -966,8 +966,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public void scrollBy(final int x, final int y) {
         final HTMLElement body = ((HTMLDocument) document_).get_body();
         if (body != null) {
-            body.set_scrollLeft(body.get_scrollLeft() + x);
-            body.set_scrollTop(body.get_scrollTop() + y);
+            body.setScrollLeft(body.get_scrollLeft() + x);
+            body.setScrollTop(body.get_scrollTop() + y);
         }
     }
 
@@ -979,7 +979,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public void scrollByLines(final int lines) {
         final HTMLElement body = ((HTMLDocument) document_).get_body();
         if (body != null) {
-            body.set_scrollTop(body.get_scrollTop() + (19 * lines));
+            body.setScrollTop(body.get_scrollTop() + (19 * lines));
         }
     }
 
@@ -991,7 +991,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public void scrollByPages(final int pages) {
         final HTMLElement body = ((HTMLDocument) document_).get_body();
         if (body != null) {
-            body.set_scrollTop(body.get_scrollTop() + (WINDOW_HEIGHT * pages));
+            body.setScrollTop(body.get_scrollTop() + (WINDOW_HEIGHT * pages));
         }
     }
 
@@ -1004,8 +1004,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public void scrollTo(final int x, final int y) {
         final HTMLElement body = ((HTMLDocument) document_).get_body();
         if (body != null) {
-            body.set_scrollLeft(x);
-            body.set_scrollTop(y);
+            body.setScrollLeft(x);
+            body.setScrollTop(y);
         }
     }
 
@@ -1014,7 +1014,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param newOnload the new handler
      */
     @JsxSetter
-    public void set_onload(final Object newOnload) {
+    public void setOnload(final Object newOnload) {
         getEventListenersContainer().setEventHandlerProp("load", newOnload);
     }
 
@@ -1023,7 +1023,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param newOnload the new handler
      */
     @JsxSetter
-    public void set_onclick(final Object newOnload) {
+    public void setOnclick(final Object newOnload) {
         getEventListenersContainer().setEventHandlerProp("click", newOnload);
     }
 
@@ -1042,7 +1042,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param newHandler the new handler
      */
     @JsxSetter
-    public void set_ondblclick(final Object newHandler) {
+    public void setOndblclick(final Object newHandler) {
         getEventListenersContainer().setEventHandlerProp("dblclick", newHandler);
     }
 
@@ -1091,7 +1091,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param newHandler the new handler
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_onhashchange(final Object newHandler) {
+    public void setOnhashchange(final Object newHandler) {
         getEventListenersContainer().setEventHandlerProp(Event.TYPE_HASH_CHANGE, newHandler);
     }
 
@@ -1167,7 +1167,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param name the value of the window's <tt>name</tt> property
      */
     @JsxSetter
-    public void set_name(final String name) {
+    public void setName(final String name) {
         webWindow_.setName(name);
     }
 
@@ -1185,7 +1185,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param onbeforeunload the value of the window's <tt>onbeforeunload</tt> property
      */
     @JsxSetter
-    public void set_onbeforeunload(final Object onbeforeunload) {
+    public void setOnbeforeunload(final Object onbeforeunload) {
         setHandlerForJavaScript(Event.TYPE_BEFORE_UNLOAD, onbeforeunload);
     }
 
@@ -1203,7 +1203,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param onerror the value of the window's <tt>onerror</tt> property
      */
     @JsxSetter
-    public void set_onerror(final Object onerror) {
+    public void setOnerror(final Object onerror) {
         setHandlerForJavaScript(Event.TYPE_ERROR, onerror);
     }
 
@@ -1410,7 +1410,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param message the status line text
      */
     @JsxSetter
-    public void set_status(final String message) {
+    public void setStatus(final String message) {
         status_ = message;
 
         final StatusHandler statusHandler = webWindow_.getWebClient().getStatusHandler();
@@ -1685,7 +1685,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param value the new value
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_controllers(final Object value) {
+    public void setControllers(final Object value) {
         controllers_ = value;
     }
 

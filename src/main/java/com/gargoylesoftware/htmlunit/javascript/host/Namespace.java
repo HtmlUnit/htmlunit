@@ -82,7 +82,7 @@ public class Namespace extends SimpleScriptable {
      * @param urn the Uniform Resource Name
      */
     @JsxSetter
-    public void set_urn(final String urn) {
+    public void setUrn(final String urn) {
         urn_ = urn;
     }
 }

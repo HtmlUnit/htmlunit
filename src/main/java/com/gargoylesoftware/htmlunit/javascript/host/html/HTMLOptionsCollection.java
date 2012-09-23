@@ -183,7 +183,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
             }
         }
         if (get_length() == 1 && !htmlSelect_.isMultipleSelectEnabled()) {
-            ((HTMLSelectElement) htmlSelect_.getScriptObject()).set_selectedIndex(0);
+            ((HTMLSelectElement) htmlSelect_.getScriptObject()).setSelectedIndex(0);
         }
     }
 
@@ -204,7 +204,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @param newLength the new length property value
      */
     @JsxSetter
-    public void set_length(final int newLength) {
+    public void setLength(final int newLength) {
         final int currentLength = htmlSelect_.getOptionSize();
         if (currentLength > newLength) {
             htmlSelect_.setOptionSize(newLength);

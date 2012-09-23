@@ -88,7 +88,7 @@ public class CSSStyleRule extends CSSRule {
      * @param selectorText the textual representation of the selector for the rule set
      */
     @JsxSetter
-    public void set_selectorText(final String selectorText) {
+    public void setSelectorText(final String selectorText) {
         ((org.w3c.dom.css.CSSStyleRule) getRule()).setSelectorText(selectorText);
     }
 

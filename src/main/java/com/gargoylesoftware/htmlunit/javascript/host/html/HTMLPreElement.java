@@ -53,7 +53,7 @@ public class HTMLPreElement extends HTMLElement {
      * @param cite the value
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_cite(final String cite) {
+    public void setCite(final String cite) {
         getDomNodeOrDie().setAttribute("cite", cite);
     }
 }

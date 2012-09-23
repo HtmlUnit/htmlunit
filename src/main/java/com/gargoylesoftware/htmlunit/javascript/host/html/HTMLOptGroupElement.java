@@ -49,8 +49,8 @@ public class HTMLOptGroupElement extends HTMLElement {
      */
     @Override
     @JsxSetter
-    public void set_disabled(final boolean disabled) {
-        super.set_disabled(disabled);
+    public void setDisabled(final boolean disabled) {
+        super.setDisabled(disabled);
     }
 
 }

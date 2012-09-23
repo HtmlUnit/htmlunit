@@ -39,5 +39,8 @@ public @interface JsxSetter {
         @WebBrowser(FF),
         @WebBrowser(CHROME)
     };
+
+    /** The JavaScript setter property name. */
+    String propertyName() default "";
 }
 

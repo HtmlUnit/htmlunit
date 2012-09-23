@@ -52,7 +52,7 @@ public class HTMLMetaElement extends HTMLElement {
      * @param charset the charset attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_charset(final String charset) {
+    public void setCharset(final String charset) {
         //empty
     }
 
@@ -70,7 +70,7 @@ public class HTMLMetaElement extends HTMLElement {
      * @param content the content attribute
      */
     @JsxSetter
-    public void set_content(final String content) {
+    public void setContent(final String content) {
         getDomNodeOrDie().setAttribute("content", content);
     }
 
@@ -88,7 +88,7 @@ public class HTMLMetaElement extends HTMLElement {
      * @param httpEquiv the http-equiv attribute
      */
     @JsxSetter
-    public void set_httpEquiv(final String httpEquiv) {
+    public void setHttpEquiv(final String httpEquiv) {
         getDomNodeOrDie().setAttribute("http-equiv", httpEquiv);
     }
 
@@ -106,7 +106,7 @@ public class HTMLMetaElement extends HTMLElement {
      * @param name the name attribute
      */
     @JsxSetter
-    public void set_name(final String name) {
+    public void setName(final String name) {
         getDomNodeOrDie().setAttribute("name", name);
     }
 
@@ -124,7 +124,7 @@ public class HTMLMetaElement extends HTMLElement {
      * @param scheme the scheme attribute
      */
     @JsxSetter
-    public void set_scheme(final String scheme) {
+    public void setScheme(final String scheme) {
         getDomNodeOrDie().setAttribute("scheme", scheme);
     }
 
@@ -142,7 +142,7 @@ public class HTMLMetaElement extends HTMLElement {
      * @param url the url attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_url(final String url) {
+    public void setUrl(final String url) {
         //empty
     }
 

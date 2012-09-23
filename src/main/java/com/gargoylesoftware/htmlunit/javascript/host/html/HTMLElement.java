@@ -409,7 +409,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param newId the new identifier of this element
      */
     @JsxSetter
-    public void set_id(final String newId) {
+    public void setId(final String newId) {
         getDomNodeOrDie().setId(newId);
     }
 
@@ -427,7 +427,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param newTitle the new identifier of this element
      */
     @JsxSetter
-    public void set_title(final String newTitle) {
+    public void setTitle(final String newTitle) {
         getDomNodeOrDie().setAttribute("title", newTitle);
     }
 
@@ -454,7 +454,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param disabled True if this is to be disabled
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_disabled(final boolean disabled) {
+    public void setDisabled(final boolean disabled) {
         final HtmlElement element = getDomNodeOrDie();
         if (disabled) {
             element.setAttribute("disabled", "disabled");
@@ -867,7 +867,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param className the new class name
      */
     @JsxSetter
-    public void set_className(final String className) {
+    public void setClassName(final String className) {
         getDomNodeOrDie().setAttribute("class", className);
     }
 
@@ -981,7 +981,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value the new value for the contents of this node
      */
     @JsxSetter
-    public void set_innerHTML(final Object value) {
+    public void setInnerHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_70);
 
@@ -1013,11 +1013,11 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value the new value for the contents of this node
      */
     @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public void set_innerText(final String value) {
-        setInnerText(Context.toString(value));
+    public void setInnerText(final String value) {
+        setInnerTextImpl(Context.toString(value));
     }
 
-    private void setInnerText(final String value) {
+    private void setInnerTextImpl(final String value) {
         final DomNode domNode = getDomNodeOrDie();
 
         if (INNER_TEXT_READONLY.contains(domNode.getNodeName())) {
@@ -1043,8 +1043,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value the new value for the contents of this node
      */
     @Override
-    public void set_textContent(final Object value) {
-        setInnerText(value == null ? null : Context.toString(value));
+    public void setTextContent(final Object value) {
+        setInnerTextImpl(value == null ? null : Context.toString(value));
     }
 
     /**
@@ -1054,7 +1054,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
      */
     @JsxSetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
-    public void set_outerHTML(final String value) {
+    public void setOuterHTML(final String value) {
         final DomNode domNode = getDomNodeOrDie();
 
         if (OUTER_HTML_READONLY.contains(domNode.getNodeName())) {
@@ -1726,7 +1726,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param scroll the scrollTop value for this element
      */
     @JsxSetter
-    public void set_scrollTop(final int scroll) {
+    public void setScrollTop(final int scroll) {
         scrollTop_ = scroll;
     }
 
@@ -1755,7 +1755,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param scroll the scrollLeft value for this element
      */
     @JsxSetter
-    public void set_scrollLeft(final int scroll) {
+    public void setScrollLeft(final int scroll) {
         scrollLeft_ = scroll;
     }
 
@@ -1807,7 +1807,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534658.aspx">MSDN documentation</a>
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_tagUrn(final String tagUrn) {
+    public void setTagUrn(final String tagUrn) {
         throw Context.reportRuntimeError("Error trying to set tagUrn to '" + tagUrn + "'.");
     }
 
@@ -2107,7 +2107,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param spellcheck the "spellcheck" property
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_spellcheck(final boolean spellcheck) {
+    public void setSpellcheck(final boolean spellcheck) {
         getDomNodeOrDie().setAttribute("spellcheck", Boolean.toString(spellcheck));
     }
 
@@ -2125,7 +2125,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param lang the "lang" property
      */
     @JsxSetter
-    public void set_lang(final String lang) {
+    public void setLang(final String lang) {
         getDomNodeOrDie().setAttribute("lang", lang);
     }
 
@@ -2143,7 +2143,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param language the "language" property
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_language(final String language) {
+    public void setLanguage(final String language) {
         getDomNodeOrDie().setAttribute("language", language);
     }
 
@@ -2161,7 +2161,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param dir the "dir" property
      */
     @JsxSetter
-    public void set_dir(final String dir) {
+    public void setDir(final String dir) {
         getDomNodeOrDie().setAttribute("dir", dir);
     }
 
@@ -2179,7 +2179,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param tabIndex the "tabIndex" property
      */
     @JsxSetter
-    public void set_tabIndex(final int tabIndex) {
+    public void setTabIndex(final int tabIndex) {
         getDomNodeOrDie().setAttribute("tabindex", Integer.toString(tabIndex));
     }
 
@@ -2209,7 +2209,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param accessKey the "accessKey" property
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_accessKey(final String accessKey) {
+    public void setAccessKey(final String accessKey) {
         getDomNodeOrDie().setAttribute("accesskey", accessKey);
     }
 

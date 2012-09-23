@@ -53,8 +53,8 @@ public class HTMLLegendElement extends FormChild {
      */
     @Override
     @JsxSetter(@WebBrowser(FF))
-    public void set_accessKey(final String accessKey) {
-        super.set_accessKey(accessKey);
+    public void setAccessKey(final String accessKey) {
+        super.setAccessKey(accessKey);
     }
 
 }

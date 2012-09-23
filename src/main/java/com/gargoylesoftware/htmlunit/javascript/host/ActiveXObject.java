@@ -275,16 +275,16 @@ public class ActiveXObject extends SimpleScriptable {
         }
         String setterName = null;
         if (isSetter) {
-            setterName = "set_" + propertyName;
+            setterName = "set" + Character.toUpperCase(propertyName.charAt(0)) + propertyName.substring(1);
         }
         addProperty(scriptable, propertyName, getterName, setterName);
     }
 
     static void addProperty(final SimpleScriptable scriptable, final String propertyName,
-            final String getterName, final String setterName) {
+            final String getterMethodName, final String setterMethodName) {
         scriptable.defineProperty(propertyName, null,
-                getMethod(scriptable.getClass(), getterName),
-                getMethod(scriptable.getClass(), setterName), PERMANENT);
+                getMethod(scriptable.getClass(), getterMethodName),
+                getMethod(scriptable.getClass(), setterMethodName), PERMANENT);
     }
 
     /**

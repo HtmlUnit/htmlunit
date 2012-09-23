@@ -60,7 +60,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      * @param align the value of the "align" property
      */
     @JsxSetter
-    public void set_align(final String align) {
+    public void setAlign(final String align) {
         setAlign(align, false);
     }
 
@@ -78,7 +78,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      * @param vAlign the value of the "vAlign" property
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_vAlign(final Object vAlign) {
+    public void setVAlign(final Object vAlign) {
         setVAlign(vAlign, getValidVAlignValues());
     }
 

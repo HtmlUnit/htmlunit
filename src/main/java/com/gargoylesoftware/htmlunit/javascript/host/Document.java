@@ -106,8 +106,8 @@ public class Document extends EventNode {
      * @throws IOException when location loading fails
      */
     @JsxSetter
-    public void set_location(final String location) throws IOException {
-        window_.set_location(location);
+    public void setLocation(final String location) throws IOException {
+        window_.setLocation(location);
     }
 
     /**
@@ -177,7 +177,7 @@ public class Document extends EventNode {
      * @param mode a value which indicates whether or not the document can be edited
      */
     @JsxSetter
-    public void set_designMode(final String mode) {
+    public void setDesignMode(final String mode) {
         final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_31);
         if (ie) {
             if (!"on".equalsIgnoreCase(mode) && !"off".equalsIgnoreCase(mode) && !"inherit".equalsIgnoreCase(mode)) {

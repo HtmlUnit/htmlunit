@@ -77,7 +77,7 @@ public class HTMLFrameElement extends HTMLElement {
      * @param src the new value
      */
     @JsxSetter
-    public void set_src(final String src) {
+    public void setSrc(final String src) {
         getFrame().setSrcAttribute(src);
     }
 
@@ -95,7 +95,7 @@ public class HTMLFrameElement extends HTMLElement {
      * @param name the new value
      */
     @JsxSetter
-    public void set_name(final String name) {
+    public void setName(final String name) {
         getFrame().setNameAttribute(name);
     }
 
@@ -108,7 +108,7 @@ public class HTMLFrameElement extends HTMLElement {
      * @param eventHandler the <tt>onload</tt> event handler for this element
      */
     @JsxSetter
-    public void set_onload(final Object eventHandler) {
+    public void setOnload(final Object eventHandler) {
         setEventHandlerProp("onload", eventHandler);
     }
 
@@ -136,7 +136,7 @@ public class HTMLFrameElement extends HTMLElement {
      * @param border the "border" attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_border(final String border) {
+    public void setBorder(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
 }

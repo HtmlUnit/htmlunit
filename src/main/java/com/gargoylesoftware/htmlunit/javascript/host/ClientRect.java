@@ -61,7 +61,7 @@ public class ClientRect extends SimpleScriptable {
      * @param bottom the bottom coordinate of the rectangle surrounding the object content
      */
     @JsxSetter
-    public void set_bottom(final int bottom) {
+    public void setBottom(final int bottom) {
         bottom_ = bottom;
     }
 
@@ -79,7 +79,7 @@ public class ClientRect extends SimpleScriptable {
      * @param left the left coordinate of the rectangle surrounding the object content
      */
     @JsxSetter
-    public void set_left(final int left) {
+    public void setLeft(final int left) {
         left_ = left;
     }
 
@@ -97,7 +97,7 @@ public class ClientRect extends SimpleScriptable {
      * @param right the right coordinate of the rectangle surrounding the object content
      */
     @JsxSetter
-    public void set_right(final int right) {
+    public void setRight(final int right) {
         right_ = right;
     }
 
@@ -115,7 +115,7 @@ public class ClientRect extends SimpleScriptable {
      * @param top the top coordinate of the rectangle surrounding the object content
      */
     @JsxSetter
-    public void set_top(final int top) {
+    public void setTop(final int top) {
         top_ = top;
     }
 

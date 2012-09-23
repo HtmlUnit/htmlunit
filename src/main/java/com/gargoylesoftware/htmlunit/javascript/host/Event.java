@@ -391,7 +391,7 @@ public class Event extends SimpleScriptable {
      * @param srcElement the object that fired the event
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_srcElement(final Object srcElement) {
+    public void setSrcElement(final Object srcElement) {
         srcElement_ = srcElement;
     }
 
@@ -444,7 +444,7 @@ public class Event extends SimpleScriptable {
      * @param type the event type
      */
     @JsxSetter
-    public void set_type(final String type) {
+    public void setType(final String type) {
         type_ = type;
     }
 
@@ -582,7 +582,7 @@ public class Event extends SimpleScriptable {
      * @param newValue indicates if event propagation is stopped
      */
     @JsxSetter
-    public void set_cancelBubble(final boolean newValue) {
+    public void setCancelBubble(final boolean newValue) {
         stopPropagation_ = newValue;
     }
 
@@ -625,7 +625,7 @@ public class Event extends SimpleScriptable {
      * @param returnValue the return value associated with the event
      */
     @JsxSetter
-    public void set_returnValue(final Object returnValue) {
+    public void setReturnValue(final Object returnValue) {
         returnValue_ = returnValue;
     }
 

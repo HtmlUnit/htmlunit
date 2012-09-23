@@ -78,7 +78,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @param src the new value
      */
     @JsxSetter
-    public void set_src(final String src) {
+    public void setSrc(final String src) {
         getFrame().setSrcAttribute(src);
     }
 
@@ -96,7 +96,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @param name the new value
      */
     @JsxSetter
-    public void set_name(final String name) {
+    public void setName(final String name) {
         getFrame().setNameAttribute(name);
     }
 
@@ -109,7 +109,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @param eventHandler the <tt>onload</tt> event handler for this element
      */
     @JsxSetter
-    public void set_onload(final Object eventHandler) {
+    public void setOnload(final Object eventHandler) {
         setEventHandlerProp("onload", eventHandler);
     }
 
@@ -137,7 +137,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @param border the "border" attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_border(final String border) {
+    public void setBorder(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
 
@@ -155,7 +155,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @param align the value of the "align" property
      */
     @JsxSetter
-    public void set_align(final String align) {
+    public void setAlign(final String align) {
         setAlign(align, false);
     }
 
@@ -175,7 +175,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @param width the value of the "width" property
      */
     @JsxSetter
-    public void set_width(final String width) {
+    public void setWidth(final String width) {
         setWidthOrHeight("width", width, Boolean.TRUE);
     }
 
@@ -195,7 +195,7 @@ public class HTMLIFrameElement extends HTMLElement {
      * @param width the value of the "width" property
      */
     @JsxSetter
-    public void set_height(final String width) {
+    public void setHeight(final String width) {
         setWidthOrHeight("height", width, Boolean.TRUE);
     }
 

@@ -148,7 +148,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param stateChangeHandler the event handler that fires on every state change
      */
     @JsxSetter
-    public void set_onreadystatechange(final Function stateChangeHandler) {
+    public void setOnreadystatechange(final Function stateChangeHandler) {
         stateChangeHandler_ = stateChangeHandler;
         if (state_ == STATE_LOADING) {
             setState(state_, null);
@@ -238,7 +238,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param loadHandler the event handler that fires on load
      */
     @JsxSetter({ @WebBrowser(value = IE, maxVersion = 6), @WebBrowser(FF) })
-    public void set_onload(final Function loadHandler) {
+    public void setOnload(final Function loadHandler) {
         loadHandler_ = loadHandler;
     }
 
@@ -256,7 +256,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @param errorHandler the event handler that fires on error
      */
     @JsxSetter
-    public void set_onerror(final Function errorHandler) {
+    public void setOnerror(final Function errorHandler) {
         errorHandler_ = errorHandler;
     }
 

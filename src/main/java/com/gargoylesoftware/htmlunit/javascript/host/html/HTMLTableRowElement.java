@@ -129,7 +129,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
     @JsxSetter
-    public void set_bgColor(final String bgColor) {
+    public void setBgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
     }
 

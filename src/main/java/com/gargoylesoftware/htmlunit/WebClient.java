@@ -2249,7 +2249,7 @@ public class WebClient implements Serializable {
                 final Window jsWindow = (Window) window.getScriptObject();
                 if (null != jsWindow) {
                     final Location location = jsWindow.get_location();
-                    location.set_hash(downloadedResponse.urlWithOnlyHashChange_.getRef());
+                    location.setHash(downloadedResponse.urlWithOnlyHashChange_.getRef());
                 }
             }
             else {

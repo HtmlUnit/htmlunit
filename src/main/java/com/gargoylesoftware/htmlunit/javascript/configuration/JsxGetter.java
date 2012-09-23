@@ -39,5 +39,8 @@ public @interface JsxGetter {
         @WebBrowser(FF),
         @WebBrowser(CHROME)
     };
+
+    /** The JavaScript getter property name. */
+    String propertyName() default "";
 }
 

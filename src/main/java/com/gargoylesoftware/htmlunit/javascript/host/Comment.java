@@ -126,7 +126,7 @@ public final class Comment extends CharacterDataImpl {
      * @param value the new value for the contents of this node
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_innerText(final String value) {
+    public void setInnerText(final String value) {
         // nothing
     }
 

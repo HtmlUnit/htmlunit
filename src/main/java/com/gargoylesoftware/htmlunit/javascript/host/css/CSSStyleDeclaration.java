@@ -746,7 +746,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param azimuth the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_azimuth(final String azimuth) {
+    public void setAzimuth(final String azimuth) {
         setStyleAttribute(AZIMUTH, azimuth);
     }
 
@@ -764,7 +764,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param background the new attribute
      */
     @JsxSetter
-    public void set_background(final String background) {
+    public void setBackground(final String background) {
         setStyleAttribute(BACKGROUND, background);
     }
 
@@ -800,7 +800,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param backgroundAttachment the new attribute
      */
     @JsxSetter
-    public void set_backgroundAttachment(final String backgroundAttachment) {
+    public void setBackgroundAttachment(final String backgroundAttachment) {
         setStyleAttribute(BACKGROUND_ATTACHMENT, backgroundAttachment);
     }
 
@@ -838,7 +838,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param backgroundColor the new attribute
      */
     @JsxSetter
-    public void set_backgroundColor(final String backgroundColor) {
+    public void setBackgroundColor(final String backgroundColor) {
         setStyleAttribute(BACKGROUND_COLOR, backgroundColor);
     }
 
@@ -874,7 +874,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param backgroundImage the new attribute
      */
     @JsxSetter
-    public void set_backgroundImage(final String backgroundImage) {
+    public void setBackgroundImage(final String backgroundImage) {
         setStyleAttribute(BACKGROUND_IMAGE, backgroundImage);
     }
 
@@ -916,7 +916,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param backgroundPosition the new attribute
      */
     @JsxSetter
-    public void set_backgroundPosition(final String backgroundPosition) {
+    public void setBackgroundPosition(final String backgroundPosition) {
         setStyleAttribute(BACKGROUND_POSITION, backgroundPosition);
     }
 
@@ -934,7 +934,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param backgroundPositionX the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_backgroundPositionX(final String backgroundPositionX) {
+    public void setBackgroundPositionX(final String backgroundPositionX) {
         setStyleAttribute(BACKGROUND_POSITION_X, backgroundPositionX);
     }
 
@@ -952,7 +952,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param backgroundPositionY the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_backgroundPositionY(final String backgroundPositionY) {
+    public void setBackgroundPositionY(final String backgroundPositionY) {
         setStyleAttribute(BACKGROUND_POSITION_Y, backgroundPositionY);
     }
 
@@ -988,7 +988,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param backgroundRepeat the new attribute
      */
     @JsxSetter
-    public void set_backgroundRepeat(final String backgroundRepeat) {
+    public void setBackgroundRepeat(final String backgroundRepeat) {
         setStyleAttribute(BACKGROUND_REPEAT, backgroundRepeat);
     }
 
@@ -1006,7 +1006,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param behavior the new behavior
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_behavior(final String behavior) {
+    public void setBehavior(final String behavior) {
         setStyleAttribute(BEHAVIOR, behavior);
 
         // many methods/properties need to be moved from HTMLElement to Element
@@ -1046,7 +1046,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param border the new attribute
      */
     @JsxSetter
-    public void set_border(final String border) {
+    public void setBorder(final String border) {
         setStyleAttribute(BORDER, border);
     }
 
@@ -1064,7 +1064,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderBottom the new attribute
      */
     @JsxSetter
-    public void set_borderBottom(final String borderBottom) {
+    public void setBorderBottom(final String borderBottom) {
         setStyleAttribute(BORDER_BOTTOM, borderBottom);
     }
 
@@ -1097,7 +1097,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderBottomColor the new attribute
      */
     @JsxSetter
-    public void set_borderBottomColor(final String borderBottomColor) {
+    public void setBorderBottomColor(final String borderBottomColor) {
         setStyleAttribute(BORDER_BOTTOM_COLOR, borderBottomColor);
     }
 
@@ -1130,7 +1130,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderBottomStyle the new attribute
      */
     @JsxSetter
-    public void set_borderBottomStyle(final String borderBottomStyle) {
+    public void setBorderBottomStyle(final String borderBottomStyle) {
         setStyleAttribute(BORDER_BOTTOM_STYLE, borderBottomStyle);
     }
 
@@ -1148,7 +1148,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderBottomWidth the new attribute
      */
     @JsxSetter
-    public void set_borderBottomWidth(final String borderBottomWidth) {
+    public void setBorderBottomWidth(final String borderBottomWidth) {
         setStyleAttributePixel(BORDER_BOTTOM_WIDTH, borderBottomWidth);
     }
 
@@ -1166,7 +1166,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderCollapse the new attribute
      */
     @JsxSetter
-    public void set_borderCollapse(final String borderCollapse) {
+    public void setBorderCollapse(final String borderCollapse) {
         setStyleAttribute(BORDER_COLLAPSE, borderCollapse);
     }
 
@@ -1184,7 +1184,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderColor the new attribute
      */
     @JsxSetter
-    public void set_borderColor(final String borderColor) {
+    public void setBorderColor(final String borderColor) {
         setStyleAttribute(BORDER_COLOR, borderColor);
     }
 
@@ -1202,7 +1202,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderLeft the new attribute
      */
     @JsxSetter
-    public void set_borderLeft(final String borderLeft) {
+    public void setBorderLeft(final String borderLeft) {
         setStyleAttribute(BORDER_LEFT, borderLeft);
     }
 
@@ -1235,7 +1235,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderLeftColor the new attribute
      */
     @JsxSetter
-    public void set_borderLeftColor(final String borderLeftColor) {
+    public void setBorderLeftColor(final String borderLeftColor) {
         setStyleAttribute(BORDER_LEFT_COLOR, borderLeftColor);
     }
 
@@ -1268,7 +1268,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderLeftStyle the new attribute
      */
     @JsxSetter
-    public void set_borderLeftStyle(final String borderLeftStyle) {
+    public void setBorderLeftStyle(final String borderLeftStyle) {
         setStyleAttribute(BORDER_LEFT_STYLE, borderLeftStyle);
     }
 
@@ -1320,7 +1320,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderLeftWidth the new attribute
      */
     @JsxSetter
-    public void set_borderLeftWidth(final String borderLeftWidth) {
+    public void setBorderLeftWidth(final String borderLeftWidth) {
         setStyleAttributePixel(BORDER_LEFT_WIDTH, borderLeftWidth);
     }
 
@@ -1338,7 +1338,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderRight the new attribute
      */
     @JsxSetter
-    public void set_borderRight(final String borderRight) {
+    public void setBorderRight(final String borderRight) {
         setStyleAttribute(BORDER_RIGHT, borderRight);
     }
 
@@ -1371,7 +1371,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderRightColor the new attribute
      */
     @JsxSetter
-    public void set_borderRightColor(final String borderRightColor) {
+    public void setBorderRightColor(final String borderRightColor) {
         setStyleAttribute(BORDER_RIGHT_COLOR, borderRightColor);
     }
 
@@ -1404,7 +1404,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderRightStyle the new attribute
      */
     @JsxSetter
-    public void set_borderRightStyle(final String borderRightStyle) {
+    public void setBorderRightStyle(final String borderRightStyle) {
         setStyleAttribute(BORDER_RIGHT_STYLE, borderRightStyle);
     }
 
@@ -1422,7 +1422,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderRightWidth the new attribute
      */
     @JsxSetter
-    public void set_borderRightWidth(final String borderRightWidth) {
+    public void setBorderRightWidth(final String borderRightWidth) {
         setStyleAttributePixel(BORDER_RIGHT_WIDTH, borderRightWidth);
     }
 
@@ -1440,7 +1440,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderSpacing the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_borderSpacing(final String borderSpacing) {
+    public void setBorderSpacing(final String borderSpacing) {
         setStyleAttribute(BORDER_SPACING, borderSpacing);
     }
 
@@ -1458,7 +1458,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderStyle the new attribute
      */
     @JsxSetter
-    public void set_borderStyle(final String borderStyle) {
+    public void setBorderStyle(final String borderStyle) {
         setStyleAttribute(BORDER_STYLE, borderStyle);
     }
 
@@ -1476,7 +1476,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderTop the new attribute
      */
     @JsxSetter
-    public void set_borderTop(final String borderTop) {
+    public void setBorderTop(final String borderTop) {
         setStyleAttribute(BORDER_TOP, borderTop);
     }
 
@@ -1509,7 +1509,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderTopColor the new attribute
      */
     @JsxSetter
-    public void set_borderTopColor(final String borderTopColor) {
+    public void setBorderTopColor(final String borderTopColor) {
         setStyleAttribute(BORDER_TOP_COLOR, borderTopColor);
     }
 
@@ -1542,7 +1542,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderTopStyle the new attribute
      */
     @JsxSetter
-    public void set_borderTopStyle(final String borderTopStyle) {
+    public void setBorderTopStyle(final String borderTopStyle) {
         setStyleAttribute(BORDER_TOP_STYLE, borderTopStyle);
     }
 
@@ -1560,7 +1560,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderTopWidth the new attribute
      */
     @JsxSetter
-    public void set_borderTopWidth(final String borderTopWidth) {
+    public void setBorderTopWidth(final String borderTopWidth) {
         setStyleAttributePixel(BORDER_TOP_WIDTH, borderTopWidth);
     }
 
@@ -1578,7 +1578,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param borderWidth the new attribute
      */
     @JsxSetter
-    public void set_borderWidth(final String borderWidth) {
+    public void setBorderWidth(final String borderWidth) {
         setStyleAttribute(BORDER_WIDTH, borderWidth);
     }
 
@@ -1596,7 +1596,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param bottom the new attribute
      */
     @JsxSetter
-    public void set_bottom(final String bottom) {
+    public void setBottom(final String bottom) {
         setStyleAttributePixel(BOTTOM, bottom);
     }
 
@@ -1614,7 +1614,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param boxSizing the new attribute
      */
     @JsxSetter(@WebBrowser(value = IE, minVersion = 8))
-    public void set_boxSizing(final String boxSizing) {
+    public void setBoxSizing(final String boxSizing) {
         setStyleAttribute(BOX_SIZING, boxSizing);
     }
 
@@ -1632,7 +1632,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param captionSide the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_captionSide(final String captionSide) {
+    public void setCaptionSide(final String captionSide) {
         setStyleAttribute(CAPTION_SIDE, captionSide);
     }
 
@@ -1650,7 +1650,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param clear the new attribute
      */
     @JsxSetter
-    public void set_clear(final String clear) {
+    public void setClear(final String clear) {
         setStyleAttribute(CLEAR, clear);
     }
 
@@ -1668,7 +1668,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param clip the new attribute
      */
     @JsxSetter
-    public void set_clip(final String clip) {
+    public void setClip(final String clip) {
         setStyleAttribute(CLIP, clip);
     }
 
@@ -1686,7 +1686,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param color the new attribute
      */
     @JsxSetter
-    public void set_color(final String color) {
+    public void setColor(final String color) {
         setStyleAttribute(COLOR, color);
     }
 
@@ -1704,7 +1704,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param content the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_content(final String content) {
+    public void setContent(final String content) {
         setStyleAttribute(CONTENT, content);
     }
 
@@ -1722,7 +1722,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param counterIncrement the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_counterIncrement(final String counterIncrement) {
+    public void setCounterIncrement(final String counterIncrement) {
         setStyleAttribute(COUNTER_INCREMENT, counterIncrement);
     }
 
@@ -1740,7 +1740,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param counterReset the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_counterReset(final String counterReset) {
+    public void setCounterReset(final String counterReset) {
         setStyleAttribute(COUNTER_RESET, counterReset);
     }
 
@@ -1758,7 +1758,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param value the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_cssFloat(final String value) {
+    public void setCssFloat(final String value) {
         setStyleAttribute(FLOAT, value);
     }
 
@@ -1776,7 +1776,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param value the new text
      */
     @JsxSetter
-    public void set_cssText(final String value) {
+    public void setCssText(final String value) {
         jsElement_.getDomNodeOrDie().setAttribute("style", value);
     }
 
@@ -1794,7 +1794,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param cue the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_cue(final String cue) {
+    public void setCue(final String cue) {
         setStyleAttribute(CUE, cue);
     }
 
@@ -1812,7 +1812,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param cueAfter the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_cueAfter(final String cueAfter) {
+    public void setCueAfter(final String cueAfter) {
         setStyleAttribute(CUE_AFTER, cueAfter);
     }
 
@@ -1830,7 +1830,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param cueBefore the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_cueBefore(final String cueBefore) {
+    public void setCueBefore(final String cueBefore) {
         setStyleAttribute(CUE_BEFORE, cueBefore);
     }
 
@@ -1848,7 +1848,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param cursor the new attribute
      */
     @JsxSetter
-    public void set_cursor(final String cursor) {
+    public void setCursor(final String cursor) {
         setStyleAttribute(CURSOR, cursor);
     }
 
@@ -1866,7 +1866,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param direction the new attribute
      */
     @JsxSetter
-    public void set_direction(final String direction) {
+    public void setDirection(final String direction) {
         setStyleAttribute(DIRECTION, direction);
     }
 
@@ -1884,7 +1884,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param display the new attribute
      */
     @JsxSetter
-    public void set_display(final String display) {
+    public void setDisplay(final String display) {
         setStyleAttribute(DISPLAY, display);
     }
 
@@ -1902,7 +1902,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param elevation the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_elevation(final String elevation) {
+    public void setElevation(final String elevation) {
         setStyleAttribute(ELEVATION, elevation);
     }
 
@@ -1920,7 +1920,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param emptyCells the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_emptyCells(final String emptyCells) {
+    public void setEmptyCells(final String emptyCells) {
         setStyleAttribute(EMPTY_CELLS, emptyCells);
     }
 
@@ -1942,7 +1942,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param filter the new filter
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_filter(final String filter) {
+    public void setFilter(final String filter) {
         setStyleAttribute(FILTER, filter);
     }
 
@@ -1960,7 +1960,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param font the new attribute
      */
     @JsxSetter
-    public void set_font(final String font) {
+    public void setFont(final String font) {
         setStyleAttribute(FONT, font);
     }
 
@@ -1978,7 +1978,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param fontFamily the new attribute
      */
     @JsxSetter
-    public void set_fontFamily(final String fontFamily) {
+    public void setFontFamily(final String fontFamily) {
         setStyleAttribute(FONT_FAMILY, fontFamily);
     }
 
@@ -1996,7 +1996,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param fontSize the new attribute
      */
     @JsxSetter
-    public void set_fontSize(final String fontSize) {
+    public void setFontSize(final String fontSize) {
         setStyleAttributePixel(FONT_SIZE, fontSize);
     }
 
@@ -2014,7 +2014,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param fontSizeAdjust the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_fontSizeAdjust(final String fontSizeAdjust) {
+    public void setFontSizeAdjust(final String fontSizeAdjust) {
         setStyleAttribute(FONT_SIZE_ADJUST, fontSizeAdjust);
     }
 
@@ -2032,7 +2032,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param fontStretch the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_fontStretch(final String fontStretch) {
+    public void setFontStretch(final String fontStretch) {
         setStyleAttribute(FONT_STRETCH, fontStretch);
     }
 
@@ -2050,7 +2050,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param fontStyle the new attribute
      */
     @JsxSetter
-    public void set_fontStyle(final String fontStyle) {
+    public void setFontStyle(final String fontStyle) {
         setStyleAttribute(FONT_STYLE, fontStyle);
     }
 
@@ -2068,7 +2068,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param fontVariant the new attribute
      */
     @JsxSetter
-    public void set_fontVariant(final String fontVariant) {
+    public void setFontVariant(final String fontVariant) {
         setStyleAttribute(FONT_VARIANT, fontVariant);
     }
 
@@ -2086,7 +2086,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param fontWeight the new attribute
      */
     @JsxSetter
-    public void set_fontWeight(final String fontWeight) {
+    public void setFontWeight(final String fontWeight) {
         setStyleAttribute(FONT_WEIGHT, fontWeight);
     }
 
@@ -2104,7 +2104,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param height the new attribute
      */
     @JsxSetter
-    public void set_height(final String height) {
+    public void setHeight(final String height) {
         setStyleAttributePixel(HEIGHT, height);
     }
 
@@ -2122,7 +2122,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param imeMode the new attribute
      */
     @JsxSetter
-    public void set_imeMode(final String imeMode) {
+    public void setImeMode(final String imeMode) {
         setStyleAttribute(IME_MODE, imeMode);
     }
 
@@ -2140,7 +2140,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param layoutFlow the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_layoutFlow(final String layoutFlow) {
+    public void setLayoutFlow(final String layoutFlow) {
         setStyleAttribute(LAYOUT_FLOW, layoutFlow);
     }
 
@@ -2158,7 +2158,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param layoutGrid the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_layoutGrid(final String layoutGrid) {
+    public void setLayoutGrid(final String layoutGrid) {
         setStyleAttribute(LAYOUT_GRID_CHAR, layoutGrid);
     }
 
@@ -2176,7 +2176,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param layoutGridChar the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_layoutGridChar(final String layoutGridChar) {
+    public void setLayoutGridChar(final String layoutGridChar) {
         setStyleAttribute(LAYOUT_GRID_CHAR, layoutGridChar);
     }
 
@@ -2194,7 +2194,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param layoutGridLine the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_layoutGridLine(final String layoutGridLine) {
+    public void setLayoutGridLine(final String layoutGridLine) {
         setStyleAttribute(LAYOUT_GRID_LINE, layoutGridLine);
     }
 
@@ -2212,7 +2212,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param layoutGridMode the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_layoutGridMode(final String layoutGridMode) {
+    public void setLayoutGridMode(final String layoutGridMode) {
         setStyleAttribute(LAYOUT_GRID_MODE, layoutGridMode);
     }
 
@@ -2230,7 +2230,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param layoutGridType the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_layoutGridType(final String layoutGridType) {
+    public void setLayoutGridType(final String layoutGridType) {
         setStyleAttribute(LAYOUT_GRID_TYPE, layoutGridType);
     }
 
@@ -2248,7 +2248,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param left the new attribute
      */
     @JsxSetter
-    public void set_left(final String left) {
+    public void setLeft(final String left) {
         setStyleAttributePixel(LEFT, left);
     }
 
@@ -2275,7 +2275,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param letterSpacing the new attribute
      */
     @JsxSetter
-    public void set_letterSpacing(final String letterSpacing) {
+    public void setLetterSpacing(final String letterSpacing) {
         setStyleAttributePixel(LETTER_SPACING, letterSpacing);
     }
 
@@ -2293,7 +2293,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param lineBreak the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_lineBreak(final String lineBreak) {
+    public void setLineBreak(final String lineBreak) {
         setStyleAttribute(LINE_BREAK, lineBreak);
     }
 
@@ -2311,7 +2311,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param lineHeight the new attribute
      */
     @JsxSetter
-    public void set_lineHeight(final String lineHeight) {
+    public void setLineHeight(final String lineHeight) {
         setStyleAttribute(LINE_HEIGHT, lineHeight);
     }
 
@@ -2329,7 +2329,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param listStyle the new attribute
      */
     @JsxSetter
-    public void set_listStyle(final String listStyle) {
+    public void setListStyle(final String listStyle) {
         setStyleAttribute(LIST_STYLE, listStyle);
     }
 
@@ -2347,7 +2347,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param listStyleImage the new attribute
      */
     @JsxSetter
-    public void set_listStyleImage(final String listStyleImage) {
+    public void setListStyleImage(final String listStyleImage) {
         setStyleAttribute(LIST_STYLE_IMAGE, listStyleImage);
     }
 
@@ -2365,7 +2365,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param listStylePosition the new attribute
      */
     @JsxSetter
-    public void set_listStylePosition(final String listStylePosition) {
+    public void setListStylePosition(final String listStylePosition) {
         setStyleAttribute(LIST_STYLE_POSITION, listStylePosition);
     }
 
@@ -2383,7 +2383,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param listStyleType the new attribute
      */
     @JsxSetter
-    public void set_listStyleType(final String listStyleType) {
+    public void setListStyleType(final String listStyleType) {
         setStyleAttribute(LIST_STYLE_TYPE, listStyleType);
     }
 
@@ -2401,7 +2401,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param margin the new attribute
      */
     @JsxSetter
-    public void set_margin(final String margin) {
+    public void setMargin(final String margin) {
         setStyleAttribute(MARGIN, margin);
     }
 
@@ -2419,7 +2419,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param marginBottom the new attribute
      */
     @JsxSetter
-    public void set_marginBottom(final String marginBottom) {
+    public void setMarginBottom(final String marginBottom) {
         setStyleAttributePixel(MARGIN_BOTTOM, marginBottom);
     }
 
@@ -2437,7 +2437,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param marginLeft the new attribute
      */
     @JsxSetter
-    public void set_marginLeft(final String marginLeft) {
+    public void setMarginLeft(final String marginLeft) {
         setStyleAttributePixel(MARGIN_LEFT, marginLeft);
     }
 
@@ -2455,7 +2455,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param marginRight the new attribute
      */
     @JsxSetter
-    public void set_marginRight(final String marginRight) {
+    public void setMarginRight(final String marginRight) {
         setStyleAttributePixel(MARGIN_RIGHT, marginRight);
     }
 
@@ -2473,7 +2473,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param marginTop the new attribute
      */
     @JsxSetter
-    public void set_marginTop(final String marginTop) {
+    public void setMarginTop(final String marginTop) {
         setStyleAttributePixel(MARGIN_TOP, marginTop);
     }
 
@@ -2491,7 +2491,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param markerOffset the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_markerOffset(final String markerOffset) {
+    public void setMarkerOffset(final String markerOffset) {
         setStyleAttribute(MARKER_OFFSET, markerOffset);
     }
 
@@ -2509,7 +2509,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param marks the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_marks(final String marks) {
+    public void setMarks(final String marks) {
         setStyleAttribute(MARKS, marks);
     }
 
@@ -2527,7 +2527,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param maxHeight the new attribute
      */
     @JsxSetter
-    public void set_maxHeight(final String maxHeight) {
+    public void setMaxHeight(final String maxHeight) {
         setStyleAttributePixel(MAX_HEIGHT, maxHeight);
     }
 
@@ -2545,7 +2545,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param maxWidth the new attribute
      */
     @JsxSetter
-    public void set_maxWidth(final String maxWidth) {
+    public void setMaxWidth(final String maxWidth) {
         setStyleAttributePixel(MAX_WIDTH, maxWidth);
     }
 
@@ -2563,7 +2563,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param minHeight the new attribute
      */
     @JsxSetter
-    public void set_minHeight(final String minHeight) {
+    public void setMinHeight(final String minHeight) {
         setStyleAttributePixel(MIN_HEIGHT, minHeight);
     }
 
@@ -2581,7 +2581,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param minWidth the new attribute
      */
     @JsxSetter
-    public void set_minWidth(final String minWidth) {
+    public void setMinWidth(final String minWidth) {
         setStyleAttributePixel(MIN_WIDTH, minWidth);
     }
 
@@ -2598,8 +2598,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozAppearance" style attribute.
      * @param mozAppearance the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozAppearance(final String mozAppearance) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozAppearance")
+    public void setMozAppearance(final String mozAppearance) {
         setStyleAttribute(MOZ_APPEARANCE, mozAppearance);
     }
 
@@ -2616,8 +2616,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBackgroundClip" style attribute.
      * @param mozBackgroundClip the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBackgroundClip(final String mozBackgroundClip) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBackgroundClip")
+    public void setMozBackgroundClip(final String mozBackgroundClip) {
         setStyleAttribute(MOZ_BACKGROUND_CLIP, mozBackgroundClip);
     }
 
@@ -2634,8 +2634,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBackgroundInlinePolicy" style attribute.
      * @param mozBackgroundInlinePolicy the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBackgroundInlinePolicy(final String mozBackgroundInlinePolicy) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBackgroundInlinePolicy")
+    public void setMozBackgroundInlinePolicy(final String mozBackgroundInlinePolicy) {
         setStyleAttribute(MOZ_BACKGROUND_INLINE_POLICY, mozBackgroundInlinePolicy);
     }
 
@@ -2652,8 +2652,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBackgroundOrigin" style attribute.
      * @param mozBackgroundOrigin the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBackgroundOrigin(final String mozBackgroundOrigin) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBackgroundOrigin")
+    public void setMozBackgroundOrigin(final String mozBackgroundOrigin) {
         setStyleAttribute(MOZ_BACKGROUND_ORIGIN, mozBackgroundOrigin);
     }
 
@@ -2670,8 +2670,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBackgroundSize" style attribute.
      * @param mozBackgroundSize the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBackgroundSize(final String mozBackgroundSize) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBackgroundSize")
+    public void setMozBackgroundSize(final String mozBackgroundSize) {
         setStyleAttribute(MOZ_BACKGROUND_SIZE, mozBackgroundSize);
     }
 
@@ -2688,8 +2688,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBinding" style attribute.
      * @param mozBinding the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBinding(final String mozBinding) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBinding")
+    public void setMozBinding(final String mozBinding) {
         setStyleAttribute(MOZ_BINDING, mozBinding);
     }
 
@@ -2706,8 +2706,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderBottomColors" style attribute.
      * @param mozBorderBottomColors the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderBottomColors(final String mozBorderBottomColors) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderBottomColors")
+    public void setMozBorderBottomColors(final String mozBorderBottomColors) {
         setStyleAttribute(MOZ_BORDER_BOTTOM_COLORS, mozBorderBottomColors);
     }
 
@@ -2724,8 +2724,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderEnd" style attribute.
      * @param mozBorderEnd the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderEnd(final String mozBorderEnd) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderEnd")
+    public void setMozBorderEnd(final String mozBorderEnd) {
         setStyleAttribute(MOZ_BORDER_END, mozBorderEnd);
     }
 
@@ -2742,8 +2742,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderEndColor" style attribute.
      * @param mozBorderEndColor the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderEndColor(final String mozBorderEndColor) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderEndColor")
+    public void setMozBorderEndColor(final String mozBorderEndColor) {
         setStyleAttribute(MOZ_BORDER_END_COLOR, mozBorderEndColor);
     }
 
@@ -2760,8 +2760,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderEndStyle" style attribute.
      * @param mozBorderEndStyle the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderEndStyle(final String mozBorderEndStyle) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderEndStyle")
+    public void setMozBorderEndStyle(final String mozBorderEndStyle) {
         setStyleAttribute(MOZ_BORDER_END_STYLE, mozBorderEndStyle);
     }
 
@@ -2778,8 +2778,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderEndWidth" style attribute.
      * @param mozBorderEndWidth the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderEndWidth(final String mozBorderEndWidth) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderEndWidth")
+    public void setMozBorderEndWidth(final String mozBorderEndWidth) {
         setStyleAttribute(MOZ_BORDER_END_WIDTH, mozBorderEndWidth);
     }
 
@@ -2796,8 +2796,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderImage" style attribute.
      * @param mozBorderImage the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderImage(final String mozBorderImage) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderImage")
+    public void setMozBorderImage(final String mozBorderImage) {
         setStyleAttribute(MOZ_BORDER_IMAGE, mozBorderImage);
     }
 
@@ -2814,8 +2814,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderLeftColors" style attribute.
      * @param mozBorderLeftColors the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderLeftColors(final String mozBorderLeftColors) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderLeftColors")
+    public void setMozBorderLeftColors(final String mozBorderLeftColors) {
         setStyleAttribute(MOZ_BORDER_LEFT_COLORS, mozBorderLeftColors);
     }
 
@@ -2832,8 +2832,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderRadius" style attribute.
      * @param mozBorderRadius the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderRadius(final String mozBorderRadius) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderRadius")
+    public void setMozBorderRadius(final String mozBorderRadius) {
         setStyleAttribute(MOZ_BORDER_RADIUS, mozBorderRadius);
     }
 
@@ -2850,8 +2850,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderRadiusBottomleft" style attribute.
      * @param mozBorderRadiusBottomleft the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderRadiusBottomleft(final String mozBorderRadiusBottomleft) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusBottomleft")
+    public void setMozBorderRadiusBottomleft(final String mozBorderRadiusBottomleft) {
         setStyleAttribute(MOZ_BORDER_RADIUS_BOTTOMLEFT, mozBorderRadiusBottomleft);
     }
 
@@ -2868,8 +2868,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderRadiusBottomright" style attribute.
      * @param mozBorderRadiusBottomright the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderRadiusBottomright(final String mozBorderRadiusBottomright) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusBottomright")
+    public void setMozBorderRadiusBottomright(final String mozBorderRadiusBottomright) {
         setStyleAttribute(MOZ_BORDER_RADIUS_BOTTOMRIGHT, mozBorderRadiusBottomright);
     }
 
@@ -2886,8 +2886,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderRadiusTopleft" style attribute.
      * @param mozBorderRadiusTopleft the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderRadiusTopleft(final String mozBorderRadiusTopleft) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusTopleft")
+    public void setMozBorderRadiusTopleft(final String mozBorderRadiusTopleft) {
         setStyleAttribute(MOZ_BORDER_RADIUS_TOPLEFT, mozBorderRadiusTopleft);
     }
 
@@ -2904,8 +2904,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderRadiusTopright" style attribute.
      * @param mozBorderRadiusTopright the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderRadiusTopright(final String mozBorderRadiusTopright) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusTopright")
+    public void setMozBorderRadiusTopright(final String mozBorderRadiusTopright) {
         setStyleAttribute(MOZ_BORDER_RADIUS_TOPRIGHT, mozBorderRadiusTopright);
     }
 
@@ -2922,8 +2922,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderRightColors" style attribute.
      * @param mozBorderRightColors the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderRightColors(final String mozBorderRightColors) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderRightColors")
+    public void setMozBorderRightColors(final String mozBorderRightColors) {
         setStyleAttribute(MOZ_BORDER_RIGHT_COLORS, mozBorderRightColors);
     }
 
@@ -2940,8 +2940,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderStart" style attribute.
      * @param mozBorderStart the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderStart(final String mozBorderStart) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderStart")
+    public void setMozBorderStart(final String mozBorderStart) {
         setStyleAttribute(MOZ_BORDER_START, mozBorderStart);
     }
 
@@ -2958,8 +2958,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderStartColor" style attribute.
      * @param mozBorderStartColor the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderStartColor(final String mozBorderStartColor) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderStartColor")
+    public void setMozBorderStartColor(final String mozBorderStartColor) {
         setStyleAttribute(MOZ_BORDER_START_COLOR, mozBorderStartColor);
     }
 
@@ -2976,8 +2976,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderStartStyle" style attribute.
      * @param mozBorderStartStyle the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderStartStyle(final String mozBorderStartStyle) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderStartStyle")
+    public void setMozBorderStartStyle(final String mozBorderStartStyle) {
         setStyleAttribute(MOZ_BORDER_START_STYLE, mozBorderStartStyle);
     }
 
@@ -2994,8 +2994,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderStartWidth" style attribute.
      * @param mozBorderStartWidth the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderStartWidth(final String mozBorderStartWidth) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderStartWidth")
+    public void setMozBorderStartWidth(final String mozBorderStartWidth) {
         setStyleAttribute(MOZ_BORDER_START_WIDTH, mozBorderStartWidth);
     }
 
@@ -3012,8 +3012,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBorderTopColors" style attribute.
      * @param mozBorderTopColors the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBorderTopColors(final String mozBorderTopColors) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderTopColors")
+    public void setMozBorderTopColors(final String mozBorderTopColors) {
         setStyleAttribute(MOZ_BORDER_TOP_COLORS, mozBorderTopColors);
     }
 
@@ -3030,8 +3030,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBoxAlign" style attribute.
      * @param mozBoxAlign the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBoxAlign(final String mozBoxAlign) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxAlign")
+    public void setMozBoxAlign(final String mozBoxAlign) {
         setStyleAttribute(MOZ_BOX_ALIGN, mozBoxAlign);
     }
 
@@ -3048,8 +3048,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBoxDirection" style attribute.
      * @param mozBoxDirection the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBoxDirection(final String mozBoxDirection) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxDirection")
+    public void setMozBoxDirection(final String mozBoxDirection) {
         setStyleAttribute(MOZ_BOX_DIRECTION, mozBoxDirection);
     }
 
@@ -3066,8 +3066,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBoxFlex" style attribute.
      * @param mozBoxFlex the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBoxFlex(final String mozBoxFlex) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxFlex")
+    public void setMozBoxFlex(final String mozBoxFlex) {
         setStyleAttribute(MOZ_BOX_FLEX, mozBoxFlex);
     }
 
@@ -3084,8 +3084,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBoxOrdinalGroup" style attribute.
      * @param mozBoxOrdinalGroup the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBoxOrdinalGroup(final String mozBoxOrdinalGroup) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxOrdinalGroup")
+    public void setMozBoxOrdinalGroup(final String mozBoxOrdinalGroup) {
         setStyleAttribute(MOZ_BOX_ORDINAL_GROUP, mozBoxOrdinalGroup);
     }
 
@@ -3102,8 +3102,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBoxOrient" style attribute.
      * @param mozBoxOrient the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBoxOrient(final String mozBoxOrient) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxOrient")
+    public void setMozBoxOrient(final String mozBoxOrient) {
         setStyleAttribute(MOZ_BOX_ORIENT, mozBoxOrient);
     }
 
@@ -3120,8 +3120,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBoxPack" style attribute.
      * @param mozBoxPack the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBoxPack(final String mozBoxPack) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxPack")
+    public void setMozBoxPack(final String mozBoxPack) {
         setStyleAttribute(MOZ_BOX_PACK, mozBoxPack);
     }
 
@@ -3138,8 +3138,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBoxShadow" style attribute.
      * @param mozBoxShadow the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBoxShadow(final String mozBoxShadow) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxShadow")
+    public void setMozBoxShadow(final String mozBoxShadow) {
         setStyleAttribute(MOZ_BOX_SHADOW, mozBoxShadow);
     }
 
@@ -3156,8 +3156,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozBoxSizing" style attribute.
      * @param mozBoxSizing the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozBoxSizing(final String mozBoxSizing) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxSizing")
+    public void setMozBoxSizing(final String mozBoxSizing) {
         setStyleAttribute(MOZ_BOX_SIZING, mozBoxSizing);
     }
 
@@ -3174,8 +3174,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozColumnCount" style attribute.
      * @param mozColumnCount the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozColumnCount(final String mozColumnCount) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnCount")
+    public void setMozColumnCount(final String mozColumnCount) {
         setStyleAttribute(MOZ_COLUMN_COUNT, mozColumnCount);
     }
 
@@ -3192,8 +3192,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozColumnGap" style attribute.
      * @param mozColumnGap the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozColumnGap(final String mozColumnGap) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnGap")
+    public void setMozColumnGap(final String mozColumnGap) {
         setStyleAttribute(MOZ_COLUMN_GAP, mozColumnGap);
     }
 
@@ -3210,8 +3210,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozColumnRule" style attribute.
      * @param mozColumnRule the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozColumnRule(final String mozColumnRule) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnRule")
+    public void setMozColumnRule(final String mozColumnRule) {
         setStyleAttribute(MOZ_COLUMN_RULE, mozColumnRule);
     }
 
@@ -3228,8 +3228,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozColumnRuleColor" style attribute.
      * @param mozColumnRuleColor the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozColumnRuleColor(final String mozColumnRuleColor) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnRuleColor")
+    public void setMozColumnRuleColor(final String mozColumnRuleColor) {
         setStyleAttribute(MOZ_COLUMN_RULE_COLOR, mozColumnRuleColor);
     }
 
@@ -3246,8 +3246,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozColumnRuleStyle" style attribute.
      * @param mozColumnRuleStyle the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozColumnRuleStyle(final String mozColumnRuleStyle) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnRuleStyle")
+    public void setMozColumnRuleStyle(final String mozColumnRuleStyle) {
         setStyleAttribute(MOZ_COLUMN_RULE_STYLE, mozColumnRuleStyle);
     }
 
@@ -3264,8 +3264,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozColumnRuleWidth" style attribute.
      * @param mozColumnRuleWidth the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozColumnRuleWidth(final String mozColumnRuleWidth) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnRuleWidth")
+    public void setMozColumnRuleWidth(final String mozColumnRuleWidth) {
         setStyleAttribute(MOZ_COLUMN_RULE_WIDTH, mozColumnRuleWidth);
     }
 
@@ -3282,8 +3282,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozColumnWidth" style attribute.
      * @param mozColumnWidth the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozColumnWidth(final String mozColumnWidth) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnWidth")
+    public void setMozColumnWidth(final String mozColumnWidth) {
         setStyleAttribute(MOZ_COLUMN_WIDTH, mozColumnWidth);
     }
 
@@ -3300,8 +3300,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozFloatEdge" style attribute.
      * @param mozFloatEdge the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozFloatEdge(final String mozFloatEdge) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozFloatEdge")
+    public void setMozFloatEdge(final String mozFloatEdge) {
         setStyleAttribute(MOZ_FLOAT_EDGE, mozFloatEdge);
     }
 
@@ -3318,8 +3318,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozForceBrokenImageIcon" style attribute.
      * @param mozForceBrokenImageIcon the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozForceBrokenImageIcon(final String mozForceBrokenImageIcon) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozForceBrokenImageIcon")
+    public void setMozForceBrokenImageIcon(final String mozForceBrokenImageIcon) {
         setStyleAttribute(MOZ_FORCE_BROKEN_IMAGE_ICON, mozForceBrokenImageIcon);
     }
 
@@ -3336,8 +3336,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozImageRegion" style attribute.
      * @param mozImageRegion the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozImageRegion(final String mozImageRegion) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozImageRegion")
+    public void setMozImageRegion(final String mozImageRegion) {
         setStyleAttribute(MOZ_IMAGE_REGION, mozImageRegion);
     }
 
@@ -3354,8 +3354,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozMarginEnd" style attribute.
      * @param mozMarginEnd the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozMarginEnd(final String mozMarginEnd) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozMarginEnd")
+    public void setMozMarginEnd(final String mozMarginEnd) {
         setStyleAttribute(MOZ_MARGIN_END, mozMarginEnd);
     }
 
@@ -3372,8 +3372,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozMarginStart" style attribute.
      * @param mozMarginStart the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozMarginStart(final String mozMarginStart) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozMarginStart")
+    public void setMozMarginStart(final String mozMarginStart) {
         setStyleAttribute(MOZ_MARGIN_START, mozMarginStart);
     }
 
@@ -3390,8 +3390,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozOpacity" style attribute.
      * @param mozOpacity the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozOpacity(final String mozOpacity) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOpacity")
+    public void setMozOpacity(final String mozOpacity) {
         setStyleAttribute(MOZ_OPACITY, mozOpacity);
     }
 
@@ -3408,8 +3408,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozOutline" style attribute.
      * @param mozOutline the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozOutline(final String mozOutline) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutline")
+    public void setMozOutline(final String mozOutline) {
         setStyleAttribute(MOZ_OUTLINE, mozOutline);
     }
 
@@ -3426,8 +3426,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozOutlineColor" style attribute.
      * @param mozOutlineColor the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozOutlineColor(final String mozOutlineColor) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineColor")
+    public void setMozOutlineColor(final String mozOutlineColor) {
         setStyleAttribute(MOZ_OUTLINE_COLOR, mozOutlineColor);
     }
 
@@ -3444,8 +3444,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozOutlineOffset" style attribute.
      * @param mozOutlineOffset the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozOutlineOffset(final String mozOutlineOffset) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineOffset")
+    public void setMozOutlineOffset(final String mozOutlineOffset) {
         setStyleAttribute(MOZ_OUTLINE_OFFSET, mozOutlineOffset);
     }
 
@@ -3462,8 +3462,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozOutlineRadius" style attribute.
      * @param mozOutlineRadius the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozOutlineRadius(final String mozOutlineRadius) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadius")
+    public void setMozOutlineRadius(final String mozOutlineRadius) {
         setStyleAttribute(MOZ_OUTLINE_RADIUS, mozOutlineRadius);
     }
 
@@ -3480,8 +3480,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozOutlineRadiusBottomleft" style attribute.
      * @param mozOutlineRadiusBottomleft the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozOutlineRadiusBottomleft(final String mozOutlineRadiusBottomleft) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusBottomleft")
+    public void setMozOutlineRadiusBottomleft(final String mozOutlineRadiusBottomleft) {
         setStyleAttribute(MOZ_OUTLINE_RADIUS_BOTTOMLEFT, mozOutlineRadiusBottomleft);
     }
 
@@ -3498,8 +3498,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozOutlineRadiusBottomright" style attribute.
      * @param mozOutlineRadiusBottomright the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozOutlineRadiusBottomright(final String mozOutlineRadiusBottomright) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusBottomright")
+    public void setMozOutlineRadiusBottomright(final String mozOutlineRadiusBottomright) {
         setStyleAttribute(MOZ_OUTLINE_RADIUS_BOTTOMRIGHT, mozOutlineRadiusBottomright);
     }
 
@@ -3516,8 +3516,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozOutlineRadiusTopleft" style attribute.
      * @param mozOutlineRadiusTopleft the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozOutlineRadiusTopleft(final String mozOutlineRadiusTopleft) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusTopleft")
+    public void setMozOutlineRadiusTopleft(final String mozOutlineRadiusTopleft) {
         setStyleAttribute(MOZ_OUTLINE_RADIUS_TOPLEFT, mozOutlineRadiusTopleft);
     }
 
@@ -3534,8 +3534,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozOutlineRadiusTopright" style attribute.
      * @param mozOutlineRadiusTopright the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozOutlineRadiusTopright(final String mozOutlineRadiusTopright) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusTopright")
+    public void setMozOutlineRadiusTopright(final String mozOutlineRadiusTopright) {
         setStyleAttribute(MOZ_OUTLINE_RADIUS_TOPRIGHT, mozOutlineRadiusTopright);
     }
 
@@ -3552,8 +3552,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozOutlineStyle" style attribute.
      * @param mozOutlineStyle the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozOutlineStyle(final String mozOutlineStyle) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineStyle")
+    public void setMozOutlineStyle(final String mozOutlineStyle) {
         setStyleAttribute(MOZ_OUTLINE_STYLE, mozOutlineStyle);
     }
 
@@ -3570,8 +3570,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozOutlineWidth" style attribute.
      * @param mozOutlineWidth the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozOutlineWidth(final String mozOutlineWidth) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineWidth")
+    public void setMozOutlineWidth(final String mozOutlineWidth) {
         setStyleAttribute(MOZ_OUTLINE_WIDTH, mozOutlineWidth);
     }
 
@@ -3588,8 +3588,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozPaddingEnd" style attribute.
      * @param mozPaddingEnd the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozPaddingEnd(final String mozPaddingEnd) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozPaddingEnd")
+    public void setMozPaddingEnd(final String mozPaddingEnd) {
         setStyleAttribute(MOZ_PADDING_END, mozPaddingEnd);
     }
 
@@ -3606,8 +3606,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozPaddingStart" style attribute.
      * @param mozPaddingStart the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozPaddingStart(final String mozPaddingStart) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozPaddingStart")
+    public void setMozPaddingStart(final String mozPaddingStart) {
         setStyleAttribute(MOZ_PADDING_START, mozPaddingStart);
     }
 
@@ -3624,8 +3624,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozStackSizing" style attribute.
      * @param mozStackSizing the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozStackSizing(final String mozStackSizing) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozStackSizing")
+    public void setMozStackSizing(final String mozStackSizing) {
         setStyleAttribute(MOZ_STACK_SIZING, mozStackSizing);
     }
 
@@ -3642,8 +3642,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozTransform" style attribute.
      * @param mozTransform the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozTransform(final String mozTransform) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozTransform")
+    public void setMozTransform(final String mozTransform) {
         setStyleAttribute(MOZ_TRANSFORM, mozTransform);
     }
 
@@ -3660,8 +3660,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozTransformOrigin" style attribute.
      * @param mozTransformOrigin the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozTransformOrigin(final String mozTransformOrigin) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozTransformOrigin")
+    public void setMozTransformOrigin(final String mozTransformOrigin) {
         setStyleAttribute(MOZ_TRANSFORM_ORIGIN, mozTransformOrigin);
     }
 
@@ -3678,8 +3678,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozUserFocus" style attribute.
      * @param mozUserFocus the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozUserFocus(final String mozUserFocus) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozUserFocus")
+    public void setMozUserFocus(final String mozUserFocus) {
         setStyleAttribute(MOZ_USER_FOCUS, mozUserFocus);
     }
 
@@ -3696,8 +3696,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozUserInput" style attribute.
      * @param mozUserInput the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozUserInput(final String mozUserInput) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozUserInput")
+    public void setMozUserInput(final String mozUserInput) {
         setStyleAttribute(MOZ_USER_INPUT, mozUserInput);
     }
 
@@ -3714,8 +3714,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozUserModify" style attribute.
      * @param mozUserModify the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozUserModify(final String mozUserModify) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozUserModify")
+    public void setMozUserModify(final String mozUserModify) {
         setStyleAttribute(MOZ_USER_MODIFY, mozUserModify);
     }
 
@@ -3732,8 +3732,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozUserSelect" style attribute.
      * @param mozUserSelect the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozUserSelect(final String mozUserSelect) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozUserSelect")
+    public void setMozUserSelect(final String mozUserSelect) {
         setStyleAttribute(MOZ_USER_SELECT, mozUserSelect);
     }
 
@@ -3750,8 +3750,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * Sets the "MozWindowShadow" style attribute.
      * @param mozWindowShadow the new attribute
      */
-    @JsxSetter(@WebBrowser(FF))
-    public void set_MozWindowShadow(final String mozWindowShadow) {
+    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozWindowShadow")
+    public void setMozWindowShadow(final String mozWindowShadow) {
         setStyleAttribute(MOZ_WINDOW_SHADOW, mozWindowShadow);
     }
 
@@ -3769,7 +3769,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param msBlockProgression the new attribute
      */
     @JsxSetter(@WebBrowser(value = IE, minVersion = 8))
-    public void set_msBlockProgression(final String msBlockProgression) {
+    public void setMsBlockProgression(final String msBlockProgression) {
         setStyleAttribute(MS_BLOCK_PROGRESSION, msBlockProgression);
     }
 
@@ -3787,7 +3787,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param msInterpolationMode the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_msInterpolationMode(final String msInterpolationMode) {
+    public void setMsInterpolationMode(final String msInterpolationMode) {
         setStyleAttribute(MS_INTERPOLATION_MODE, msInterpolationMode);
     }
 
@@ -3825,7 +3825,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param opacity the new attribute
      */
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    public void set_opacity(final String opacity) {
+    public void setOpacity(final String opacity) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OPACITY_ACCEPTS_ARBITRARY_VALUES)) {
             setStyleAttribute(OPACITY, opacity);
             return;
@@ -3859,7 +3859,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param orphans the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_orphans(final String orphans) {
+    public void setOrphans(final String orphans) {
         setStyleAttribute(ORPHANS, orphans);
     }
 
@@ -3877,7 +3877,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param outline the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_outline(final String outline) {
+    public void setOutline(final String outline) {
         setStyleAttribute(OUTLINE, outline);
     }
 
@@ -3895,7 +3895,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param outlineColor the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_outlineColor(final String outlineColor) {
+    public void setOutlineColor(final String outlineColor) {
         setStyleAttribute(OUTLINE_COLOR, outlineColor);
     }
 
@@ -3913,7 +3913,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param outlineOffset the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_outlineOffset(final String outlineOffset) {
+    public void setOutlineOffset(final String outlineOffset) {
         setStyleAttribute(OUTLINE_OFFSET, outlineOffset);
     }
 
@@ -3931,7 +3931,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param outlineStyle the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_outlineStyle(final String outlineStyle) {
+    public void setOutlineStyle(final String outlineStyle) {
         setStyleAttribute(OUTLINE_STYLE, outlineStyle);
     }
 
@@ -3949,7 +3949,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param outlineWidth the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_outlineWidth(final String outlineWidth) {
+    public void setOutlineWidth(final String outlineWidth) {
         setStyleAttributePixel(OUTLINE_WIDTH, outlineWidth);
     }
 
@@ -3967,7 +3967,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param overflow the new attribute
      */
     @JsxSetter
-    public void set_overflow(final String overflow) {
+    public void setOverflow(final String overflow) {
         setStyleAttribute(OVERFLOW, overflow);
     }
 
@@ -3985,7 +3985,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param overflowX the new attribute
      */
     @JsxSetter
-    public void set_overflowX(final String overflowX) {
+    public void setOverflowX(final String overflowX) {
         setStyleAttribute(OVERFLOW_X, overflowX);
     }
 
@@ -4003,7 +4003,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param overflowY the new attribute
      */
     @JsxSetter
-    public void set_overflowY(final String overflowY) {
+    public void setOverflowY(final String overflowY) {
         setStyleAttribute(OVERFLOW_Y, overflowY);
     }
 
@@ -4021,7 +4021,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param padding the new attribute
      */
     @JsxSetter
-    public void set_padding(final String padding) {
+    public void setPadding(final String padding) {
         setStyleAttribute(PADDING, padding);
     }
 
@@ -4039,7 +4039,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param paddingBottom the new attribute
      */
     @JsxSetter
-    public void set_paddingBottom(final String paddingBottom) {
+    public void setPaddingBottom(final String paddingBottom) {
         setStyleAttributePixel(PADDING_BOTTOM, paddingBottom);
     }
 
@@ -4057,7 +4057,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param paddingLeft the new attribute
      */
     @JsxSetter
-    public void set_paddingLeft(final String paddingLeft) {
+    public void setPaddingLeft(final String paddingLeft) {
         setStyleAttributePixel(PADDING_LEFT, paddingLeft);
     }
 
@@ -4075,7 +4075,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param paddingRight the new attribute
      */
     @JsxSetter
-    public void set_paddingRight(final String paddingRight) {
+    public void setPaddingRight(final String paddingRight) {
         setStyleAttributePixel(PADDING_RIGHT, paddingRight);
     }
 
@@ -4093,7 +4093,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param paddingTop the new attribute
      */
     @JsxSetter
-    public void set_paddingTop(final String paddingTop) {
+    public void setPaddingTop(final String paddingTop) {
         setStyleAttributePixel(PADDING_TOP, paddingTop);
     }
 
@@ -4111,7 +4111,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param page the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_page(final String page) {
+    public void setPage(final String page) {
         setStyleAttribute(PAGE, page);
     }
 
@@ -4129,7 +4129,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pageBreakAfter the new attribute
      */
     @JsxSetter
-    public void set_pageBreakAfter(final String pageBreakAfter) {
+    public void setPageBreakAfter(final String pageBreakAfter) {
         setStyleAttribute(PAGE_BREAK_AFTER, pageBreakAfter);
     }
 
@@ -4147,7 +4147,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pageBreakBefore the new attribute
      */
     @JsxSetter
-    public void set_pageBreakBefore(final String pageBreakBefore) {
+    public void setPageBreakBefore(final String pageBreakBefore) {
         setStyleAttribute(PAGE_BREAK_BEFORE, pageBreakBefore);
     }
 
@@ -4165,7 +4165,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pageBreakInside the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_pageBreakInside(final String pageBreakInside) {
+    public void setPageBreakInside(final String pageBreakInside) {
         setStyleAttribute(PAGE_BREAK_INSIDE, pageBreakInside);
     }
 
@@ -4183,7 +4183,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pause the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_pause(final String pause) {
+    public void setPause(final String pause) {
         setStyleAttribute(PAUSE, pause);
     }
 
@@ -4201,7 +4201,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pauseAfter the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_pauseAfter(final String pauseAfter) {
+    public void setPauseAfter(final String pauseAfter) {
         setStyleAttribute(PAUSE_AFTER, pauseAfter);
     }
 
@@ -4219,7 +4219,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pauseBefore the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_pauseBefore(final String pauseBefore) {
+    public void setPauseBefore(final String pauseBefore) {
         setStyleAttribute(PAUSE_BEFORE, pauseBefore);
     }
 
@@ -4237,7 +4237,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pitch the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_pitch(final String pitch) {
+    public void setPitch(final String pitch) {
         setStyleAttribute(PITCH, pitch);
     }
 
@@ -4255,7 +4255,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pitchRange the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_pitchRange(final String pitchRange) {
+    public void setPitchRange(final String pitchRange) {
         setStyleAttribute(PITCH_RANGE, pitchRange);
     }
 
@@ -4273,7 +4273,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pointerEvents the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_pointerEvents(final String pointerEvents) {
+    public void setPointerEvents(final String pointerEvents) {
         setStyleAttribute(POINTER_EVENTS, pointerEvents);
     }
 
@@ -4291,8 +4291,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pixelBottom the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_pixelBottom(final int pixelBottom) {
-        set_bottom(pixelBottom + "px");
+    public void setPixelBottom(final int pixelBottom) {
+        setBottom(pixelBottom + "px");
     }
 
     /**
@@ -4309,8 +4309,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pixelLeft the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_pixelLeft(final int pixelLeft) {
-        set_left(pixelLeft + "px");
+    public void setPixelLeft(final int pixelLeft) {
+        setLeft(pixelLeft + "px");
     }
 
     /**
@@ -4327,8 +4327,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pixelRight the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_pixelRight(final int pixelRight) {
-        set_right(pixelRight + "px");
+    public void setPixelRight(final int pixelRight) {
+        setRight(pixelRight + "px");
     }
 
     /**
@@ -4345,8 +4345,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param pixelTop the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_pixelTop(final int pixelTop) {
-        set_top(pixelTop + "px");
+    public void setPixelTop(final int pixelTop) {
+        setTop(pixelTop + "px");
     }
 
     /**
@@ -4363,7 +4363,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param posBottom the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_posBottom(final int posBottom) {
+    public void setPosBottom(final int posBottom) {
         // Empty.
     }
 
@@ -4381,7 +4381,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param posHeight the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_posHeight(final int posHeight) {
+    public void setPosHeight(final int posHeight) {
         // Empty.
     }
 
@@ -4399,7 +4399,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param position the new attribute
      */
     @JsxSetter
-    public void set_position(final String position) {
+    public void setPosition(final String position) {
         setStyleAttribute(POSITION, position);
     }
 
@@ -4417,7 +4417,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param posLeft the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_posLeft(final int posLeft) {
+    public void setPosLeft(final int posLeft) {
         // Empty.
     }
 
@@ -4435,7 +4435,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param posRight the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_posRight(final int posRight) {
+    public void setPosRight(final int posRight) {
         // Empty.
     }
 
@@ -4453,7 +4453,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param posTop the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_posTop(final int posTop) {
+    public void setPosTop(final int posTop) {
         // Empty.
     }
 
@@ -4471,7 +4471,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param posWidth the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_posWidth(final int posWidth) {
+    public void setPosWidth(final int posWidth) {
         // Empty.
     }
 
@@ -4489,7 +4489,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param quotes the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_quotes(final String quotes) {
+    public void setQuotes(final String quotes) {
         setStyleAttribute(QUOTES, quotes);
     }
 
@@ -4507,7 +4507,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param richness the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_richness(final String richness) {
+    public void setRichness(final String richness) {
         setStyleAttribute(RICHNESS, richness);
     }
 
@@ -4525,7 +4525,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param right the new attribute
      */
     @JsxSetter
-    public void set_right(final String right) {
+    public void setRight(final String right) {
         setStyleAttributePixel(RIGHT, right);
     }
 
@@ -4543,7 +4543,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param rubyAlign the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_rubyAlign(final String rubyAlign) {
+    public void setRubyAlign(final String rubyAlign) {
         setStyleAttribute(RUBY_ALIGN, rubyAlign);
     }
 
@@ -4561,7 +4561,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param rubyOverhang the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_rubyOverhang(final String rubyOverhang) {
+    public void setRubyOverhang(final String rubyOverhang) {
         setStyleAttribute(RUBY_OVERHANG, rubyOverhang);
     }
 
@@ -4579,7 +4579,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param rubyPosition the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_rubyPosition(final String rubyPosition) {
+    public void setRubyPosition(final String rubyPosition) {
         setStyleAttribute(RUBY_POSITION, rubyPosition);
     }
 
@@ -4597,7 +4597,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param scrollbar3dLightColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_scrollbar3dLightColor(final String scrollbar3dLightColor) {
+    public void setScrollbar3dLightColor(final String scrollbar3dLightColor) {
         setStyleAttribute(SCROLLBAR3D_LIGHT_COLOR, scrollbar3dLightColor);
     }
 
@@ -4615,7 +4615,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param scrollbarArrowColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_scrollbarArrowColor(final String scrollbarArrowColor) {
+    public void setScrollbarArrowColor(final String scrollbarArrowColor) {
         setStyleAttribute(SCROLLBAR_ARROW_COLOR, scrollbarArrowColor);
     }
 
@@ -4633,7 +4633,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param scrollbarBaseColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_scrollbarBaseColor(final String scrollbarBaseColor) {
+    public void setScrollbarBaseColor(final String scrollbarBaseColor) {
         setStyleAttribute(SCROLLBAR_BASE_COLOR, scrollbarBaseColor);
     }
 
@@ -4651,7 +4651,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param scrollbarDarkShadowColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_scrollbarDarkShadowColor(final String scrollbarDarkShadowColor) {
+    public void setScrollbarDarkShadowColor(final String scrollbarDarkShadowColor) {
         setStyleAttribute(SCROLLBAR_DARK_SHADOW_COLOR, scrollbarDarkShadowColor);
     }
 
@@ -4669,7 +4669,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param scrollbarFaceColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_scrollbarFaceColor(final String scrollbarFaceColor) {
+    public void setScrollbarFaceColor(final String scrollbarFaceColor) {
         setStyleAttribute(SCROLLBAR_FACE_COLOR, scrollbarFaceColor);
     }
 
@@ -4687,7 +4687,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param scrollbarHighlightColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_scrollbarHighlightColor(final String scrollbarHighlightColor) {
+    public void setScrollbarHighlightColor(final String scrollbarHighlightColor) {
         setStyleAttribute(SCROLLBAR_HIGHLIGHT_COLOR, scrollbarHighlightColor);
     }
 
@@ -4705,7 +4705,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param scrollbarShadowColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_scrollbarShadowColor(final String scrollbarShadowColor) {
+    public void setScrollbarShadowColor(final String scrollbarShadowColor) {
         setStyleAttribute(SCROLLBAR_SHADOW_COLOR, scrollbarShadowColor);
     }
 
@@ -4723,7 +4723,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param scrollbarTrackColor the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_scrollbarTrackColor(final String scrollbarTrackColor) {
+    public void setScrollbarTrackColor(final String scrollbarTrackColor) {
         setStyleAttribute(SCROLLBAR_TRACK_COLOR, scrollbarTrackColor);
     }
 
@@ -4741,7 +4741,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param size the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_size(final String size) {
+    public void setSize(final String size) {
         setStyleAttribute(SIZE, size);
     }
 
@@ -4759,7 +4759,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param speak the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_speak(final String speak) {
+    public void setSpeak(final String speak) {
         setStyleAttribute(SPEAK, speak);
     }
 
@@ -4777,7 +4777,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param speakHeader the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_speakHeader(final String speakHeader) {
+    public void setSpeakHeader(final String speakHeader) {
         setStyleAttribute(SPEAK_HEADER, speakHeader);
     }
 
@@ -4795,7 +4795,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param speakNumeral the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_speakNumeral(final String speakNumeral) {
+    public void setSpeakNumeral(final String speakNumeral) {
         setStyleAttribute(SPEAK_NUMERAL, speakNumeral);
     }
 
@@ -4813,7 +4813,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param speakPunctuation the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_speakPunctuation(final String speakPunctuation) {
+    public void setSpeakPunctuation(final String speakPunctuation) {
         setStyleAttribute(SPEAK_PUNCTUATION, speakPunctuation);
     }
 
@@ -4831,7 +4831,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param speechRate the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_speechRate(final String speechRate) {
+    public void setSpeechRate(final String speechRate) {
         setStyleAttribute(SPEECH_RATE, speechRate);
     }
 
@@ -4849,7 +4849,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param stress the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_stress(final String stress) {
+    public void setStress(final String stress) {
         setStyleAttribute(STRESS, stress);
     }
 
@@ -4867,7 +4867,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param value the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_styleFloat(final String value) {
+    public void setStyleFloat(final String value) {
         setStyleAttribute(FLOAT, value);
     }
 
@@ -4885,7 +4885,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param tableLayout the new attribute
      */
     @JsxSetter
-    public void set_tableLayout(final String tableLayout) {
+    public void setTableLayout(final String tableLayout) {
         setStyleAttribute(TABLE_LAYOUT, tableLayout);
     }
 
@@ -4903,7 +4903,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textAlign the new attribute
      */
     @JsxSetter
-    public void set_textAlign(final String textAlign) {
+    public void setTextAlign(final String textAlign) {
         setStyleAttribute(TEXT_ALIGN, textAlign);
     }
 
@@ -4921,7 +4921,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textAlignLast the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textAlignLast(final String textAlignLast) {
+    public void setTextAlignLast(final String textAlignLast) {
         setStyleAttribute(TEXT_ALIGN_LAST, textAlignLast);
     }
 
@@ -4939,7 +4939,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textAutospace the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textAutospace(final String textAutospace) {
+    public void setTextAutospace(final String textAutospace) {
         setStyleAttribute(TEXT_AUTOSPACE, textAutospace);
     }
 
@@ -4957,7 +4957,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textDecoration the new attribute
      */
     @JsxSetter
-    public void set_textDecoration(final String textDecoration) {
+    public void setTextDecoration(final String textDecoration) {
         setStyleAttribute(TEXT_DECORATION, textDecoration);
     }
 
@@ -4975,7 +4975,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textDecorationBlink the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textDecorationBlink(final boolean textDecorationBlink) {
+    public void setTextDecorationBlink(final boolean textDecorationBlink) {
         // Empty.
     }
 
@@ -4993,7 +4993,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textDecorationLineThrough the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textDecorationLineThrough(final boolean textDecorationLineThrough) {
+    public void setTextDecorationLineThrough(final boolean textDecorationLineThrough) {
         // Empty.
     }
 
@@ -5011,7 +5011,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textDecorationNone the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textDecorationNone(final boolean textDecorationNone) {
+    public void setTextDecorationNone(final boolean textDecorationNone) {
         // Empty.
     }
 
@@ -5029,7 +5029,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textDecorationOverline the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textDecorationOverline(final boolean textDecorationOverline) {
+    public void setTextDecorationOverline(final boolean textDecorationOverline) {
         // Empty.
     }
 
@@ -5047,7 +5047,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textDecorationUnderline the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textDecorationUnderline(final boolean textDecorationUnderline) {
+    public void setTextDecorationUnderline(final boolean textDecorationUnderline) {
         // Empty.
     }
 
@@ -5065,7 +5065,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textIndent the new attribute
      */
     @JsxSetter
-    public void set_textIndent(final String textIndent) {
+    public void setTextIndent(final String textIndent) {
         setStyleAttributePixel(TEXT_INDENT, textIndent);
     }
 
@@ -5083,7 +5083,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textJustify the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textJustify(final String textJustify) {
+    public void setTextJustify(final String textJustify) {
         setStyleAttribute(TEXT_JUSTIFY, textJustify);
     }
 
@@ -5101,7 +5101,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textJustifyTrim the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textJustifyTrim(final String textJustifyTrim) {
+    public void setTextJustifyTrim(final String textJustifyTrim) {
         setStyleAttribute(TEXT_JUSTIFY_TRIM, textJustifyTrim);
     }
 
@@ -5119,7 +5119,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textKashida the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textKashida(final String textKashida) {
+    public void setTextKashida(final String textKashida) {
         setStyleAttribute(TEXT_KASHIDA, textKashida);
     }
 
@@ -5137,7 +5137,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textKashidaSpace the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textKashidaSpace(final String textKashidaSpace) {
+    public void setTextKashidaSpace(final String textKashidaSpace) {
         setStyleAttribute(TEXT_KASHIDA_SPACE, textKashidaSpace);
     }
 
@@ -5155,7 +5155,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textOverflow the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textOverflow(final String textOverflow) {
+    public void setTextOverflow(final String textOverflow) {
         setStyleAttribute(TEXT_OVERFLOW, textOverflow);
     }
 
@@ -5173,7 +5173,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textShadow the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_textShadow(final String textShadow) {
+    public void setTextShadow(final String textShadow) {
         setStyleAttribute(TEXT_SHADOW, textShadow);
     }
 
@@ -5191,7 +5191,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textTransform the new attribute
      */
     @JsxSetter
-    public void set_textTransform(final String textTransform) {
+    public void setTextTransform(final String textTransform) {
         setStyleAttribute(TEXT_TRANSFORM, textTransform);
     }
 
@@ -5209,7 +5209,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param textUnderlinePosition the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_textUnderlinePosition(final String textUnderlinePosition) {
+    public void setTextUnderlinePosition(final String textUnderlinePosition) {
         setStyleAttribute(TEXT_UNDERLINE_POSITION, textUnderlinePosition);
     }
 
@@ -5227,7 +5227,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param top the new attribute
      */
     @JsxSetter
-    public void set_top(final String top) {
+    public void setTop(final String top) {
         setStyleAttributePixel(TOP, top);
     }
 
@@ -5245,7 +5245,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param unicodeBidi the new attribute
      */
     @JsxSetter
-    public void set_unicodeBidi(final String unicodeBidi) {
+    public void setUnicodeBidi(final String unicodeBidi) {
         setStyleAttribute(UNICODE_BIDI, unicodeBidi);
     }
 
@@ -5263,7 +5263,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param verticalAlign the new attribute
      */
     @JsxSetter
-    public void set_verticalAlign(final String verticalAlign) {
+    public void setVerticalAlign(final String verticalAlign) {
         setStyleAttributePixel(VERTICAL_ALIGN, verticalAlign);
     }
 
@@ -5281,7 +5281,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param visibility the new attribute
      */
     @JsxSetter
-    public void set_visibility(final String visibility) {
+    public void setVisibility(final String visibility) {
         setStyleAttribute(VISIBILITY, visibility);
     }
 
@@ -5299,7 +5299,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param voiceFamily the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_voiceFamily(final String voiceFamily) {
+    public void setVoiceFamily(final String voiceFamily) {
         setStyleAttribute(VOICE_FAMILY, voiceFamily);
     }
 
@@ -5317,7 +5317,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param volume the new attribute
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_volume(final String volume) {
+    public void setVolume(final String volume) {
         setStyleAttribute(VOLUME, volume);
     }
 
@@ -5335,7 +5335,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param whiteSpace the new attribute
      */
     @JsxSetter
-    public void set_whiteSpace(final String whiteSpace) {
+    public void setWhiteSpace(final String whiteSpace) {
         setStyleAttribute(WHITE_SPACE, whiteSpace);
     }
 
@@ -5353,7 +5353,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param widows the new attribute
      */
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void set_widows(final String widows) {
+    public void setWidows(final String widows) {
         setStyleAttribute(WIDOWS, widows);
     }
 
@@ -5371,7 +5371,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param width the new attribute
      */
     @JsxSetter
-    public void set_width(final String width) {
+    public void setWidth(final String width) {
         setStyleAttributePixel(WIDTH, width);
     }
 
@@ -5389,7 +5389,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param wordBreak the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_wordBreak(final String wordBreak) {
+    public void setWordBreak(final String wordBreak) {
         setStyleAttribute(WORD_BREAK, wordBreak);
     }
 
@@ -5407,7 +5407,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param wordSpacing the new attribute
      */
     @JsxSetter
-    public void set_wordSpacing(final String wordSpacing) {
+    public void setWordSpacing(final String wordSpacing) {
         setStyleAttributePixel(WORD_SPACING, wordSpacing);
     }
 
@@ -5425,7 +5425,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param wordWrap the new attribute
      */
     @JsxSetter({ @WebBrowser(IE), @WebBrowser(FF) })
-    public void set_wordWrap(final String wordWrap) {
+    public void setWordWrap(final String wordWrap) {
         setStyleAttribute(WORD_WRAP, wordWrap);
     }
 
@@ -5443,7 +5443,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param writingMode the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_writingMode(final String writingMode) {
+    public void setWritingMode(final String writingMode) {
         setStyleAttribute(WRITING_MODE, writingMode);
     }
 
@@ -5484,7 +5484,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param zIndex the new attribute
      */
     @JsxSetter
-    public void set_zIndex(final Object zIndex) {
+    public void setZIndex(final Object zIndex) {
         if (zIndex == null
                 && getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR)) {
             throw new EvaluatorException("Null is invalid for z-index.");
@@ -5560,7 +5560,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param zoom the new attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_zoom(final String zoom) {
+    public void setZoom(final String zoom) {
         setStyleAttribute(ZOOM, zoom);
     }
 

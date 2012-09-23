@@ -45,7 +45,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * @param rows the rows attribute value
      */
     @JsxSetter
-    public void set_rows(final String rows) {
+    public void setRows(final String rows) {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         if (htmlFrameSet != null) {
             htmlFrameSet.setAttribute("rows", rows);
@@ -70,7 +70,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * @param cols the cols attribute value
      */
     @JsxSetter
-    public void set_cols(final String cols) {
+    public void setCols(final String cols) {
         final HtmlFrameSet htmlFrameSet = (HtmlFrameSet) getDomNodeOrNull();
         if (htmlFrameSet != null) {
             htmlFrameSet.setAttribute("cols", cols);
@@ -103,7 +103,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * @param border the "border" attribute
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_border(final String border) {
+    public void setBorder(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
 }

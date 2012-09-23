@@ -49,7 +49,7 @@ public class HTMLBaseElement extends HTMLElement {
      * @param href the value of the "href" property
      */
     @JsxSetter
-    public void set_href(final String href) {
+    public void setHref(final String href) {
         getDomNodeOrDie().setAttribute("href", href);
     }
 
@@ -67,7 +67,7 @@ public class HTMLBaseElement extends HTMLElement {
      * @param target the value of the "target" property
      */
     @JsxSetter
-    public void set_target(final String target) {
+    public void setTarget(final String target) {
         getDomNodeOrDie().setAttribute("target", target);
     }
 

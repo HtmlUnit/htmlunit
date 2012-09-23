@@ -187,7 +187,7 @@ public class Node extends SimpleScriptable {
      * @param newValue the new node value
      */
     @JsxSetter
-    public void set_nodeValue(final String newValue) {
+    public void setNodeValue(final String newValue) {
         getDomNodeOrDie().setNodeValue(newValue);
     }
 
@@ -978,7 +978,7 @@ public class Node extends SimpleScriptable {
      * @param value - the new value for the contents of this node
      */
     @JsxSetter(@WebBrowser(FF))
-    public void set_textContent(final Object value) {
+    public void setTextContent(final Object value) {
         getDomNodeOrDie().setTextContent(value == null ? null : Context.toString(value));
     }
 

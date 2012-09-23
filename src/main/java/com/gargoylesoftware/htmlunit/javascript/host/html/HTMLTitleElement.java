@@ -57,7 +57,7 @@ public class HTMLTitleElement extends HTMLElement {
      * @param text the <tt>text</tt> attribute
      */
     @JsxSetter
-    public void set_text(final String text) {
+    public void setText(final String text) {
         final DomNode htmlElement = getDomNodeOrDie();
         DomNode firstChild = htmlElement.getFirstChild();
         if (firstChild == null) {

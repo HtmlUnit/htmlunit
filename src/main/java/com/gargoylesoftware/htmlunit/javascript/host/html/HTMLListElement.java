@@ -44,7 +44,7 @@ public class HTMLListElement extends HTMLElement {
      * @param compact the value of the <tt>compact</tt> attribute
      */
     @JsxSetter
-    public void set_compact(final Object compact) {
+    public void setCompact(final Object compact) {
         if (Context.toBoolean(compact)) {
             getDomNodeOrDie().setAttribute("compact", "");
         }

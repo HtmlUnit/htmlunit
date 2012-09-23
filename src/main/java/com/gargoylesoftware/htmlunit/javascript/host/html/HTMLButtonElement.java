@@ -49,11 +49,11 @@ public class HTMLButtonElement extends FormField {
     /**
      * Sets the value of the attribute "type".
      * <p>Note that there is no GUI change in the shape of the button,
-     * so we don't treat it like {@link HTMLInputElement#set_type(String)}.</p>
+     * so we don't treat it like {@link HTMLInputElement#setType(String)}.</p>
      * @param newType the new type to set
      */
     @JsxSetter
-    public void set_type(final String newType) {
+    public void setType(final String newType) {
         if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_44)) {
             throw Context.reportRuntimeError("Object doesn't support this action");
         }
@@ -83,8 +83,8 @@ public class HTMLButtonElement extends FormField {
      */
     @Override
     @JsxSetter
-    public void set_accessKey(final String accessKey) {
-        super.set_accessKey(accessKey);
+    public void setAccessKey(final String accessKey) {
+        super.setAccessKey(accessKey);
     }
 
     /**

@@ -264,7 +264,7 @@ public class HTMLSelectElement extends FormField {
      * @param index the new value
      */
     @JsxSetter
-    public void set_selectedIndex(final int index) {
+    public void setSelectedIndex(final int index) {
         final HtmlSelect htmlSelect = getHtmlSelect();
 
         if (index != 0 && getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD)
@@ -318,11 +318,11 @@ public class HTMLSelectElement extends FormField {
      * @param newLength the new length property value
      */
     @JsxSetter
-    public void set_length(final int newLength) {
+    public void setLength(final int newLength) {
         if (optionsArray_ == null) {
             initialize();
         }
-        optionsArray_.set_length(newLength);
+        optionsArray_.setLength(newLength);
     }
 
     /**
@@ -366,7 +366,7 @@ public class HTMLSelectElement extends FormField {
      * @param newValue the value of the option to select
      */
     @Override
-    public void set_value(final String newValue) {
+    public void setValue(final String newValue) {
         getHtmlSelect().setSelectedAttribute(newValue, true);
     }
 
@@ -394,7 +394,7 @@ public class HTMLSelectElement extends FormField {
      * @param size the <tt>size</tt> attribute
      */
     @JsxSetter
-    public void set_size(final String size) {
+    public void setSize(final String size) {
         getDomNodeOrDie().setAttribute("size", size);
     }
 
@@ -412,7 +412,7 @@ public class HTMLSelectElement extends FormField {
      * @param multiple <tt>true</tt> to set the <tt>multiple</tt> attribute, <tt>false</tt> to clear it
      */
     @JsxSetter
-    public void set_multiple(final boolean multiple) {
+    public void setMultiple(final boolean multiple) {
         if (multiple) {
             getDomNodeOrDie().setAttribute("multiple", "multiple");
         }
@@ -424,10 +424,10 @@ public class HTMLSelectElement extends FormField {
     private void ensureSelectedIndex() {
         final HtmlSelect select = getHtmlSelect();
         if (select.getOptionSize() == 0) {
-            set_selectedIndex(-1);
+            setSelectedIndex(-1);
         }
         else if (get_selectedIndex() == -1) {
-            set_selectedIndex(0);
+            setSelectedIndex(0);
         }
     }
 

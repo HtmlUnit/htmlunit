@@ -91,7 +91,7 @@ public class HTMLImageElement extends HTMLElement {
      * @param src the <tt>src</tt> attribute value
      */
     @JsxSetter
-    public void set_src(final String src) {
+    public void setSrc(final String src) {
         final HtmlElement img = getDomNodeOrDie();
         img.setAttribute("src", src);
         getWindow().getWebWindow().getWebClient()
@@ -124,7 +124,7 @@ public class HTMLImageElement extends HTMLElement {
      * @param onloadHandler the <tt>onload</tt> event handler for this element
      */
     @JsxSetter
-    public void set_onload(final Object onloadHandler) {
+    public void setOnload(final Object onloadHandler) {
         setEventHandlerProp("onload", onloadHandler);
         getWindow().getWebWindow().getWebClient()
             .getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction(getDomNodeOrDie().getPage()));
@@ -170,7 +170,7 @@ public class HTMLImageElement extends HTMLElement {
      * @param alt the value
      */
     @JsxSetter
-    public void set_alt(final String alt) {
+    public void setAlt(final String alt) {
         getDomNodeOrDie().setAttribute("alt", alt);
     }
 
@@ -189,7 +189,7 @@ public class HTMLImageElement extends HTMLElement {
      * @param border the "border" attribute
      */
     @JsxSetter
-    public void set_border(final String border) {
+    public void setBorder(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
 
@@ -219,7 +219,7 @@ public class HTMLImageElement extends HTMLElement {
      * @param align the value of the "align" property
      */
     @JsxSetter
-    public void set_align(String align) {
+    public void setAlign(String align) {
         align = align.toLowerCase();
         final boolean acceptArbitraryValues =
                 getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
@@ -258,7 +258,7 @@ public class HTMLImageElement extends HTMLElement {
      * @param width the value of the "width" property
      */
     @JsxSetter
-    public void set_width(final String width) {
+    public void setWidth(final String width) {
         getDomNodeOrDie().setAttribute("width", width);
     }
 
@@ -283,7 +283,7 @@ public class HTMLImageElement extends HTMLElement {
      * @param height the value of the "height" property
      */
     @JsxSetter
-    public void set_height(final String height) {
+    public void setHeight(final String height) {
         getDomNodeOrDie().setAttribute("height", height);
     }
 }

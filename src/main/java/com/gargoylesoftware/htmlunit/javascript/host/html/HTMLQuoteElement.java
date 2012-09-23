@@ -54,7 +54,7 @@ public class HTMLQuoteElement extends HTMLElement {
      * @param cite the value
      */
     @JsxSetter
-    public void set_cite(final String cite) {
+    public void setCite(final String cite) {
         getDomNodeOrDie().setAttribute("cite", cite);
     }
 
@@ -73,7 +73,7 @@ public class HTMLQuoteElement extends HTMLElement {
      * @param dateTime the value
      */
     @JsxSetter(@WebBrowser(IE))
-    public void set_dateTime(final String dateTime) {
+    public void setDateTime(final String dateTime) {
         getDomNodeOrDie().setAttribute("datetime", dateTime);
     }
 }

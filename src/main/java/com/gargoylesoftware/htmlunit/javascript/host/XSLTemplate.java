@@ -40,7 +40,7 @@ public class XSLTemplate extends SimpleScriptable {
      * @param node the Extensible Stylesheet Language (XSL) style sheet to compile into an XSL template
      */
     @JsxSetter
-    public void set_stylesheet(final Node node) {
+    public void setStylesheet(final Node node) {
         stylesheet_ = node;
     }
 

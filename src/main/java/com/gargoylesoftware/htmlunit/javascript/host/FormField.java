@@ -67,7 +67,7 @@ public class FormField extends FormChild {
      * @param newValue  the new value
      */
     @JsxSetter
-    public void set_value(final String newValue) {
+    public void setValue(final String newValue) {
         getDomNodeOrDie().setAttribute("value", newValue);
     }
 
@@ -87,7 +87,7 @@ public class FormField extends FormChild {
      * @param newName  the new name
      */
     @JsxSetter
-    public void set_name(final String newName) {
+    public void setName(final String newName) {
         getDomNodeOrDie().setAttribute("name", newName);
     }
 
@@ -106,7 +106,7 @@ public class FormField extends FormChild {
      * @param onchange the <tt>onchange</tt> event handler for this element
      */
     @JsxSetter
-    public void set_onchange(final Object onchange) {
+    public void setOnchange(final Object onchange) {
         setEventHandlerProp("onchange", onchange);
     }
 
@@ -133,7 +133,7 @@ public class FormField extends FormChild {
      */
     @Override
     @JsxSetter
-    public void set_disabled(final boolean disabled) {
-        super.set_disabled(disabled);
+    public void setDisabled(final boolean disabled) {
+        super.setDisabled(disabled);
     }
 }

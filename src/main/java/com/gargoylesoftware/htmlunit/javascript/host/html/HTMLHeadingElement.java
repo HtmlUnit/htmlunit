@@ -50,7 +50,7 @@ public class HTMLHeadingElement extends HTMLElement {
      * @param align the value of the <tt>align</tt> property
      */
     @JsxSetter
-    public void set_align(final String align) {
+    public void setAlign(final String align) {
         setAlign(align, false);
     }
 }
