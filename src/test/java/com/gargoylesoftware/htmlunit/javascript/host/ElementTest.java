@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ElementTest extends WebDriverTestCase {
@@ -790,34 +791,6 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "button", "getAttributeNS() not supported" }, DEFAULT = { "button", "", "false", "true" })
-    public void attributeNS() throws Exception {
-        final String html
-            = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var e = document.getElementById('foo');\n"
-            + "    alert(e.getAttribute('type'));\n"
-            + "    try {\n"
-            + "      alert(e.getAttributeNS('bar', 'type'));\n"
-            + "      alert(e.hasAttributeNS('bar', 'type'));\n"
-            + "      e.removeAttributeNS('bar', 'type');\n"
-            + "      alert(e.hasAttribute('type'));\n"
-            + "    } catch (e) {alert('getAttributeNS() not supported')}\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input id='foo' type='button' value='someValue'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(IE = "exception occured",
             FF = { "prototype found", "" })
     public void enumeratedProperties() throws Exception {
@@ -1069,6 +1042,37 @@ public class ElementTest extends WebDriverTestCase {
             + "</script></head><body onload='test()' class='a b c'>\n"
             + "  <div id='myId'>abcd</div>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests the usage of getAttributeNS, setAttributeNS, removeAttributeNS
+     * and hasAttributeNS methods on elements under Firefox.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Browsers(FF)
+    @Alerts({ "test value", "true", "false", "finished" })
+    public void attributeNS() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var doc = document.implementation.createDocument(\"\", \"\", null);\n"
+            + "        var element = doc.createElementNS(\'uri:test\', \'test:element\');\n"
+            + "        element.setAttributeNS(\'uri:test\', \'test:attribute\', 'test value');\n"
+            + "        alert(element.getAttributeNS(\'uri:test\', \'attribute\'));\n"
+            + "        alert(element.hasAttributeNS(\'uri:test\', \'attribute\'));\n"
+            + "        element.removeAttributeNS(\'uri:test\', \'attribute\');\n"
+            + "        alert(element.hasAttributeNS(\'uri:test\', \'attribute\'));\n"
+            + "        alert('finished');\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
 
         loadPageWithAlerts2(html);
     }

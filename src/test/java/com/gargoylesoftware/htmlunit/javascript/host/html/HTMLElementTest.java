@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Ethan Glasser-Camp
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLElementTest extends WebDriverTestCase {
@@ -2178,4 +2179,31 @@ public class HTMLElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "button", "getAttributeNS() not supported" }, DEFAULT = { "button", "", "false", "true" })
+    public void attributeNS() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('foo');\n"
+            + "    alert(e.getAttribute('type'));\n"
+            + "    try {\n"
+            + "      alert(e.getAttributeNS('bar', 'type'));\n"
+            + "      alert(e.hasAttributeNS('bar', 'type'));\n"
+            + "      e.removeAttributeNS('bar', 'type');\n"
+            + "      alert(e.hasAttribute('type'));\n"
+            + "    } catch (e) {alert('getAttributeNS() not supported')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='foo' type='button' value='someValue'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

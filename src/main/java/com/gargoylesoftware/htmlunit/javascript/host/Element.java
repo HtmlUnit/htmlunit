@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -45,6 +46,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 @JsxClass(domClass = DomElement.class)
 public class Element extends EventNode {
@@ -471,5 +473,51 @@ public class Element extends EventNode {
     @JsxGetter(@WebBrowser(FF))
     public DOMTokenList getClassList() {
         return null;
+    }
+
+    /**
+     * Gets the specified attribute.
+     * @param namespaceURI the namespace URI
+     * @param localName the local name of the attribute to look for
+     * @return the value of the specified attribute, <code>null</code> if the attribute is not defined
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    public String getAttributeNS(final String namespaceURI, final String localName) {
+        return getDomNodeOrDie().getAttributeNS(namespaceURI, localName);
+    }
+
+    /**
+     * Test for attribute.
+     * See also <a href="http://www.w3.org/TR/2000/REC-DOM-Level-2-Core-20001113/core.html#ID-ElHasAttrNS">
+     * the DOM reference</a>
+     *
+     * @param namespaceURI the namespace URI
+     * @param localName the local name of the attribute to look for
+     * @return <code>true</code> if the node has this attribute
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    public boolean hasAttributeNS(final String namespaceURI, final String localName) {
+        return getDomNodeOrDie().hasAttributeNS(namespaceURI, localName);
+    }
+
+    /**
+     * Sets the specified attribute.
+     * @param namespaceURI the namespace URI
+     * @param qualifiedName the qualified name of the attribute to look for
+     * @param value the new attribute value
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
+        getDomNodeOrDie().setAttributeNS(namespaceURI, qualifiedName, value);
+    }
+
+    /**
+     * Removes the specified attribute.
+     * @param namespaceURI the namespace URI of the attribute to remove
+     * @param localName the local name of the attribute to remove
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    public void removeAttributeNS(final String namespaceURI, final String localName) {
+        getDomNodeOrDie().removeAttributeNS(namespaceURI, localName);
     }
 }
