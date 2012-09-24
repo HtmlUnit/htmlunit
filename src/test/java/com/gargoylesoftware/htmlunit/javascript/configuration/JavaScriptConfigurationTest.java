@@ -211,10 +211,10 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
             for (final Method method : klass.getMethods()) {
                 final String methodName = method.getName();
                 if (method.getAnnotation(JsxGetter.class) != null && methodName.startsWith("set")) {
-                    fail("Method " + methodName + " in " + klass.getSimpleName() + " should start with \"get\"");
+                    fail("Method " + methodName + " in " + klass.getSimpleName() + " should not start with \"set\"");
                 }
                 if (method.getAnnotation(JsxSetter.class) != null && methodName.startsWith("get")) {
-                    fail("Method " + methodName + " in " + klass.getSimpleName() + " should start with \"set\"");
+                    fail("Method " + methodName + " in " + klass.getSimpleName() + " should not start with \"get\"");
                 }
             }
         }
