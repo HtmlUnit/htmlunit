@@ -1,0 +1,33 @@
+Passed: 31
+Failed: 0
+ok - logLevelAtLeast false
+ok - logLevelAtLeast true
+ok - global logger installed
+ok - global log() put one message in queue
+ok - allMessages listener
+ok - info matches
+ok - level matches
+ok - getMessages() returns copy
+ok - allMessages listener
+ok - logDebug()
+ok - info matches
+ok - level matches
+ok - allMessages listener
+ok - logError()
+ok - info matches
+ok - level matches
+ok - allMessages listener
+ok - logWarning()
+ok - info matches
+ok - level matches
+ok - allMessages listener
+ok - logFatal()
+ok - fatalMessages listener
+ok - info matches
+ok - level matches
+ok - getMessages with limit returns latest
+ok - firstTwo
+ok - clear removes existing messages
+ok - baseLog converts level
+ok - baseLog converts ad-hoc level
+ok - test suite finished!

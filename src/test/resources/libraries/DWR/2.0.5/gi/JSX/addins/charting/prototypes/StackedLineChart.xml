@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Line - Stacked]]></name>
+ <icon><![CDATA[icons/stackedLine.gif]]></icon>
+ <description><![CDATA[a sample line chart of type 'Stacked']]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.LineChart">
+   <dynamics/>
+   <variants alpha="1" borderAlpha="1" borderWidth="1" jsxheight="300" jsxleft="0" jsxrelativeposition="1" jsxtop="0" jsxwidth="400" loadState="1"/>
+   <strings borderColor="#999999" dataPadding="14 10 6 6" jsxbgcolor="#FFFFFF" jsxname="stackedLineChart" jsxxml="&lt;data jsxid=&quot;jsxroot&quot;&gt;&lt;record year=&quot;1990&quot; x1=&quot;0.6&quot; x2=&quot;2.4&quot;/&gt; &lt;record year=&quot;1991&quot; x1=&quot;0.4&quot; x2=&quot;3.0&quot;/&gt; &lt;record year=&quot;1992&quot; x1=&quot;0.8&quot; x2=&quot;0.4&quot;/&gt; &lt;record year=&quot;1993&quot; x1=&quot;0.9&quot; x2=&quot;6.5&quot;/&gt; &lt;record year=&quot;1994&quot; x1=&quot;0.7&quot; x2=&quot;4.5&quot;/&gt; &lt;/data&gt;" legendPlacement="right" titlePlacement="top" type="stacked"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants jsxfontsize="14" labelRotation="0"/>
+     <strings jsxbgcolor="#666666" jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="title" jsxpadding="4 0 0 0" jsxtext="Stacked Line Chart" jsxtextalign="center"/>
+    </object>
+    <object type="jsx3.chart.CategoryAxis">
+     <dynamics/>
+     <variants horizontal="1" labelGap="3" minorTickDivisions="4" minorTickLength="2" numCategories="5" numSeries="2" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" categoryField="year" jsxname="xAxis" labelPlacement="axis" labelStyle="font-size: 8px; font-family: Verdana;" minorTickPlacement="outside" tickAlignment="between" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0" preferredHeight="14"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="xTitle" jsxtext="Year" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.LinearAxis">
+     <dynamics/>
+     <variants autoAdjust="1" baseAtZero="1" displayWidth="15" horizontal="0" labelGap="3" minorTickDivisions="4" minorTickLength="3" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" jsxname="yAxis" labelFunction="jsx3.chart.Axis.percent" labelPlacement="axis" labelStyle="font-size: 8px; font-family: Verdana; text-align: right;" minorTickPlacement="none" minorTickStroke="#000000 1 1" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="270"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="ytitle" jsxtext="GDP Growth" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.GridLines">
+     <dynamics/>
+     <variants fillH="['#EEEEEE','#FFFFFF']" horizontalAbove="1" inForeground="0" strokeMinorH="['#000000 1 .05']" useXPrimary="1" useYPrimary="1"/>
+     <strings borderStroke="#CCCCCC 1" jsxname="grid"/>
+    </object>
+    <object type="jsx3.chart.LineSeries">
+     <dynamics/>
+     <variants index="0" interpolateValues="1" usePrimaryX="1" usePrimaryY="1"/>
+     <strings form="segment" jsxname="series1" pointGradient="#66CCFF 225" pointRenderer="jsx3.chart.PointRenderer.DIAMOND" pointStroke="#336699" seriesName="Hours" stroke="#336699" tooltipFunction="jsx3.chart.LineSeries.tooltip" yField="x1"/>
+    </object>
+    <object type="jsx3.chart.LineSeries">
+     <dynamics/>
+     <variants index="1" interpolateValues="1" usePrimaryX="1" usePrimaryY="1"/>
+     <strings form="segment" jsxname="series2" pointGradient="#CCFF00 225" pointRenderer="jsx3.chart.PointRenderer.DIAMOND" pointStroke="#33CC66" seriesName="Productivity" stroke="#33CC66" tooltipFunction="jsx3.chart.LineSeries.tooltip" yField="x2"/>
+    </object>
+    <object type="jsx3.chart.Legend">
+     <dynamics/>
+     <variants boxHeight="13" boxSpace="6" lineHeight="20" preferredWidth="110" titleSpace="8"/>
+     <strings backgroundStroke="#BBBBBB" jsxmargin="10 10 10 4" jsxname="legend" jsxpadding="4 4 0 4" labelStyle="font-size: 9px; font-weight: bold;"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="legendTitle" jsxtext="Legend" jsxtextalign="center"/>
+      </object>
+    </object>
+  </object>
+</serialization>

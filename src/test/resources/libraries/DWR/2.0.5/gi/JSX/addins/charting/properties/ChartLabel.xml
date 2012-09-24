@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+	<record group="object" include="master.xml"/>
+	
+	<record group="1" jsxid="position" jsxtext="Positioning">
+		<record disallow="[^0-9]" docdefault="Automatically calculated from size of font and padding" docgetter="getPreferredWidth" docsetter="setPreferredWidth" eval="1" jsxexecute="objJSX.preferredWidth=vntValue;objJSX.onResize();" jsxid="preferredWidth" jsxmask="jsxtext" jsxtext="Width" jsxtip="Sets the preferred width of this component in pixels. If the title placement is right or left, only width is considered and height is ignored."/>
+		<record disallow="[^0-9]" docdefault="Automatically calculated from size of font and padding" docgetter="getPreferredHeight" docsetter="setPreferredHeight" eval="1" jsxexecute="objJSX.preferredHeight=vntValue;objJSX.onResize();" jsxid="preferredHeight" jsxmask="jsxtext" jsxtext="Height" jsxtip="Sets the preferred height of this component in pixels. If the title placement is top or bottom, only height is considered and width is ignored."/>
+	</record>
+	
+	<record group="1" jsxid="chartlabel" jsxtext="ChartLabel">
+		<record docdefault="Empty" docgetter="getText" docsetter="setText" eval="0" jsxid="jsxtext" jsxmask="jsxtext" jsxtext="Text" jsxtip="Sets the text to display in this component."/>
+		<record disallow="[^0-9]" docdefault="NONE (&lt;code&gt;jsx3.chart.ChartLabel.ROTATION_NORMAL&lt;/code&gt;)" docgetter="getLabelRotation" docsetter="setLabelRotation" eval="1" jsxexecute="objJSX.labelRotation=vntValue;objJSX.onResize();" jsxid="labelRotation" jsxmask="jsxselect" jsxtext="Rotation" jsxtip="Sets the rotation of this component.">
+			<enum jsxid="jsx3.chart.ChartLabel.ROTATION_NORMAL" jsxtext="NONE"/>
+			<enum jsxid="jsx3.chart.ChartLabel.ROTATION_CW" jsxtext="CLOCKWISE"/>
+			<enum jsxid="jsx3.chart.ChartLabel.ROTATION_CCW" jsxtext="COUNTER-CLOCKWISE"/>
+		</record>
+	</record>
+	
+	<record group="font" include="master.xml">
+		<record docgetter="getClassName" docsetter="setClassName" eval="0" jsxid="jsxclassname" jsxmask="jsxtext" jsxtext="CSS Class" jsxtip="Sets the CSS class to use to format this label text. Do not include the leading dot (.) when entering the name."/>
+	</record>
+	
+	<record group="1" jsxid="box" jsxtext="Box">
+		<record disallow="'" docdefault="Empty" docgetter="getBackgroundColor" docsetter="setBackgroundColor" eval="0" jsxid="jsxbgcolor" jsxmask="jsxcolor" jsxtext="BG Color" jsxtip="Sets the background fill color of this label box. Accepts valid CSS values, such as predefined color names, RGB, or hexadecimal values. For example, &lt;code&gt;red&lt;/code&gt;, &lt;code&gt;rgb(255,0,0)&lt;/code&gt;, or &lt;code&gt;#ff0000&lt;/code&gt;."/>
+		<record disallow="'" docdefault="Emtpy" docgetter="getBorderStroke" docsetter="setBorderStroke" eval="0" jsxid="borderStroke" jsxmask="jsxtext" jsxtext="Border Stroke" jsxtip="Sets the vector stroke outlining this label box, specified as &lt;i&gt;color width alpha&lt;/i&gt;. For example, &lt;code&gt;black 1 1&lt;/code&gt;."/>
+		<record disallow="[^0-9\.]" docdefault="&lt;code&gt;1&lt;code&gt;" docgetter="getAlpha" docsetter="setAlpha" eval="1" jsxid="alpha" jsxmask="jsxtext" jsxtext="BG Alpha" jsxtip="Sets the alpha of the background fill (&lt;code&gt;0.0 - 1.0&lt;/code&gt;)."/>
+		<record docdefault="left (&lt;code&gt;jsx3.gui.Block.ALIGNLEFT&lt;/code&gt;)" docgetter="getTextAlign" docsetter="setTextAlign" eval="0" jsxid="jsxtextalign" jsxmask="jsxselect" jsxtext="Text Align" jsxtip="Sets the text alignment for the label text.">
+			<enum jsxid="jsx3.gui.Block.ALIGNLEFT" jsxtext="left"/>
+			<enum jsxid="jsx3.gui.Block.ALIGNRIGHT" jsxtext="right"/>
+			<enum jsxid="jsx3.gui.Block.ALIGNCENTER" jsxtext="center"/>
+		</record>
+		<record disallow="'" docdefault="&lt;code&gt;0&lt;code&gt;" docgetter="getPadding" docsetter="setPadding" eval="0" jsxexecute="objJSX.jsxpadding=vntValue;objJSX.onResize();" jsxid="jsxpadding" jsxmask="jsxtext" jsxtext="Padding" jsxtip="Sets the white-space gap between this label box and the label text. Specified as either one or four pixel values (top, right, bottom, and left). For example, &lt;code&gt;2&lt;/code&gt; or &lt;code&gt;4 2 4 2&lt;/code&gt;. CSS syntax is also supported but reduces performance."/>
+	</record>
+
+	<record group="component" include="master.xml"/>
+	<record group="interaction_menuonly" include="master.xml"/>
+</data>

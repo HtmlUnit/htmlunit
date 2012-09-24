@@ -1,0 +1,11 @@
+9 tests, 39 assertions, 0 failures, 0 errors
+Status	Test	Message
+testClassCreate	passed	8 assertions, 0 failures, 0 errors
+testClassInstantiation	passed	5 assertions, 0 failures, 0 errors
+testInheritance	passed	5 assertions, 0 failures, 0 errors
+testSuperclassMethodCall	passed	4 assertions, 0 failures, 0 errors
+testClassAddMethods	passed	6 assertions, 0 failures, 0 errors
+testBaseClassWithMixin	passed	2 assertions, 0 failures, 0 errors
+testSubclassWithMixin	passed	1 assertions, 0 failures, 0 errors
+testSubclassWithMixins	passed	3 assertions, 0 failures, 0 errors
+testClassWithToStringAndValueOfMethods	passed	5 assertions, 0 failures, 0 errors

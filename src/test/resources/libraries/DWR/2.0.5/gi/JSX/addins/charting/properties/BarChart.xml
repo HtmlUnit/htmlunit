@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+	<record group="object" include="master.xml"/>
+	<record group="position" include="master.xml"/>
+	
+	<record group="1" jsxid="barchart" jsxtext="BarChart">
+		<record docdefault="clustered (&lt;code&gt;jsx3.chart.BCChart.TYPE_CLUSTERED&lt;/code&gt;)" docgetter="getType" docsetter="setType" eval="0" jsxexecute="objJSX.setType(vntValue);objJSX.repaint();" jsxid="type" jsxmask="jsxselect" jsxtext="Type" jsxtip="Sets the type of bar chart." nullable="0">
+			<enum jsxid="jsx3.chart.BCChart.TYPE_CLUSTERED" jsxtext="clustered"/>
+			<enum jsxid="jsx3.chart.BCChart.TYPE_STACKED" jsxtext="stacked"/>
+			<enum jsxid="jsx3.chart.BCChart.TYPE_STACKED100" jsxtext="stacked 100%"/>
+		</record>
+		<record disallow="[^\.0-9\-]" docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getSeriesOverlap" docsetter="setSeriesOverlap" eval="1" jsxid="seriesOverlap" jsxmask="jsxtext" jsxtext="Bar Overlap" jsxtip="Sets the amount of overlap between bars in the same category as a multiple of the bar height (&lt;code&gt;-0.5 - 0.5&lt;/code&gt;)."/>
+		<record disallow="[^\.0-9]" docdefault="&lt;code&gt;1&lt;/code&gt;" docgetter="getCategoryCoverage" docsetter="setCategoryCoverage" eval="1" jsxid="categoryCoverage" jsxmask="jsxtext" jsxtext="Bar Coverage" jsxtip="Sets the fraction of the height of a category occupied by bars (&lt;code&gt;0.0 - 1.0&lt;/code&gt;)."/>
+	</record>
+	
+	<record group="blockx" include="master.xml"/>
+	<record group="background" include="master.xml"/>
+	<record group="chart" include="master.xml"/>
+	<record group="interaction_menuonly" include="master.xml"/>
+</data>

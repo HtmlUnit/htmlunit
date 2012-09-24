@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+	<record group="object" include="master.xml"/>
+	
+	<record group="axis" include="master.xml">
+		<record docgetter="getCategoryField" docsetter="setCategoryField" eval="0" jsxid="categoryField" jsxmask="jsxtext" jsxtext="Label Field" jsxtip="Sets the attribute of the data provider containing the category label value." validate="^([_a-zA-Z]\w*|)$"/>
+		<record disallow="[^0-9\.]" docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getPaddingLow" docsetter="setPaddingLow" eval="1" jsxexecute="objJSX.paddingLow=vntValue;objJSX.getChart().repaint();" jsxid="paddingLow" jsxmask="jsxtext" jsxtext="Padding Low" jsxtip="Sets the padding before the first category, as a multiple of a category width."/>
+		<record disallow="[^0-9\.]" docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getPaddingHigh" docsetter="setPaddingHigh" eval="1" jsxexecute="objJSX.paddingHigh=vntValue;objJSX.getChart().repaint();" jsxid="paddingHigh" jsxmask="jsxtext" jsxtext="Padding High" jsxtip="Sets the padding after the last category, as a multiple of a category width."/>
+		<record docdefault="between (&lt;code&gt;jsx3.chart.CategoryAxis.TICKS_BETWEEN&lt;/code&gt;)" docgetter="getTickAlignment" docsetter="setTickAlignment" eval="0" jsxexecute="objJSX.tickAlignment=vntValue;objJSX.getChart().repaint();" jsxid="tickAlignment" jsxmask="jsxselect" jsxtext="Mj Tick Alignment" jsxtip="Sets the method for aligning major ticks with respect to each category. If set to between, midpoint of the category is between two major ticks. If set to aligned, midpoint of the category is aligned with a major tick." nullable="0">
+			<enum jsxid="jsx3.chart.CategoryAxis.TICKS_ALIGNED" jsxtext="aligned"/>
+			<enum jsxid="jsx3.chart.CategoryAxis.TICKS_BETWEEN" jsxtext="between"/>
+		</record>
+	</record>
+
+	<record group="axisticks" include="master.xml"/>
+	<record group="axislabels" include="master.xml"/>
+	<record group="interaction_menuonly" include="master.xml"/>
+</data>

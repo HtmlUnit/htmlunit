@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Column]]></name>
+ <icon><![CDATA[icons/clusteredColumn.gif]]></icon>
+ <description><![CDATA[a sample column chart of type 'Clustered']]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.ColumnChart">
+   <dynamics/>
+   <variants alpha="1" borderAlpha="1" borderWidth="1" categoryCoverage="0.55" jsxheight="300" jsxleft="0" jsxrelativeposition="1" jsxtop="0" jsxwidth="400" loadState="1" seriesOverlap="-0.2"/>
+   <strings borderColor="#999999" dataPadding="14 10 6 6" jsxbgcolor="#FFFFFF" jsxname="columnChart" jsxxml="&lt;data jsxid=&quot;jsxroot&quot;&gt;&lt;record cat=&quot;2001&quot; s1=&quot;-7&quot; s2=&quot;5&quot;/&gt; &lt;record cat=&quot;2002&quot; s1=&quot;15&quot; s2=&quot;10&quot;/&gt;&lt;record cat=&quot;2003&quot; s1=&quot;8&quot; s2=&quot;4&quot;/&gt;&lt;record cat=&quot;2004&quot; s1=&quot;3&quot; s2=&quot;3&quot;/&gt;&lt;record cat=&quot;2005*&quot; s1=&quot;6&quot; s2=&quot;3&quot;/&gt;&lt;record cat=&quot;2006*&quot; s1=&quot;8&quot; s2=&quot;4&quot;/&gt;&lt;/data&gt;" legendPlacement="right" titlePlacement="top" type="clustered"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants jsxfontsize="14" labelRotation="0"/>
+     <strings jsxbgcolor="#666666" jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="title" jsxpadding="4 0 0 0" jsxtext="Clustered Column Chart" jsxtextalign="center"/>
+    </object>
+    <object type="jsx3.chart.CategoryAxis">
+     <dynamics/>
+     <variants horizontal="1" labelGap="3" minorTickDivisions="4" minorTickLength="3" numCategories="6" numSeries="2" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" categoryField="cat" jsxname="xAxis" labelPlacement="low" labelStyle="font-size: 8px; font-family: Verdana;" minorTickPlacement="none" minorTickStroke="#000000 1 1" tickAlignment="between" tickPlacement="outside" tickStroke="#000000 1 1"/>
+    </object>
+    <object type="jsx3.chart.LinearAxis">
+     <dynamics/>
+     <variants autoAdjust="1" baseAtZero="1" displayWidth="15" horizontal="0" labelGap="3" minorTickDivisions="4" minorTickLength="2" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" jsxname="yAxis" labelFunction="jsx3.chart.Axis.percent" labelPlacement="axis" labelStyle="font-size: 8px; font-family: Verdana; text-align: right;" minorTickPlacement="outside" minorTickStroke="#666666 1" tickAlignment="aligned" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants labelRotation="270"/>
+       <strings jsxname="yTitle" jsxtext="Estimated Returns"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.GridLines">
+     <dynamics/>
+     <variants horizontalAbove="1" inForeground="1" strokeMajorH="['#FFFFFF 1 1']" useXPrimary="1" useYPrimary="1"/>
+     <strings borderStroke="#CCCCCC 1" jsxname="fgGrid"/>
+    </object>
+    <object type="jsx3.chart.ColumnSeries">
+     <dynamics/>
+     <variants index="0" usePrimaryX="1" usePrimaryY="1"/>
+     <strings fill="#FF3366" jsxname="series1" seriesName="Shares" tooltipFunction="jsx3.chart.ColumnSeries.tooltip" yField="s1"/>
+    </object>
+    <object type="jsx3.chart.ColumnSeries">
+     <dynamics/>
+     <variants index="1" usePrimaryX="1" usePrimaryY="1"/>
+     <strings fill="#33CC99" jsxname="series2" seriesName="Bonds" tooltipFunction="jsx3.chart.ColumnSeries.tooltip" yField="s2"/>
+    </object>
+    <object type="jsx3.chart.Legend">
+     <dynamics/>
+     <variants boxHeight="10" boxSpace="6" lineHeight="22" titleSpace="8"/>
+     <strings backgroundStroke="#BBBBBB" jsxmargin="10 10 10 4" jsxname="legend" jsxpadding="4 4 0 4" labelStyle="font-size: 10px; font-weight: bold;"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="legendTitle" jsxtext="Legend" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.GridLines">
+     <dynamics/>
+     <variants fillV="['#E8E8E8 1']" horizontalAbove="1" strokeMinorH="['#DDDDDD']" useXPrimary="1" useYPrimary="1"/>
+     <strings borderStroke="#CCCCCC 1" jsxname="bgGrid"/>
+    </object>
+  </object>
+</serialization>

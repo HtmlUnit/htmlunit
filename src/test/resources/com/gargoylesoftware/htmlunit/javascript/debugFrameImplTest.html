@@ -1,0 +1,45 @@
+<html>
+<head>
+	<script>
+var foo = {}
+foo.bar = function() { 
+document.body.innerHTML += ". ";
+}
+
+var foo1 = {}
+foo1.prototype = foo
+foo1.prototype.bli = function(x) { 
+document.body.innerHTML += "0 ";
+}
+
+HTMLElement.prototype.myFunction = function() {};
+
+function test(text)
+{
+	foo.bar();
+	foo.bli(foo.bar);
+	foo.bli("".split);
+	document.body.myFunction();
+	try
+	{
+		throwMe({})
+	}
+	catch (e)
+	{
+		// nothing
+	}
+		
+}
+
+function throwMe(x)
+{
+	throw x;
+}
+
+</script>
+</head>
+<body onload="test()">
+
+
+</body>
+</html>

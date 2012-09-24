@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Prototype Unit test file</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script src="../../dist/prototype.js" type="text/javascript"></script>
+  <script src="../lib/unittest.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="../test.css" type="text/css" />
+  <style type="text/css" media="screen">
+  /* <![CDATA[ */
+    #testcss1 { font-size:11px; color: #f00; }
+    #testcss2 { font-size:12px; color: #0f0; display: none; }
+    #style_test_1 { cursor: pointer }
+    div.style-test { margin-left: 1px }
+  /* ]]> */
+  </style>
+</head>
+<body>
+<h1>Prototype Unit test file</h1>
+<p>
+  Test of functions in dom.js
+</p>
+
+<!-- Log output -->
+<div id="testlog"> </div>
+
+<div>
+  <table>
+    <tbody id="table">
+      <tr>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td id="a_cell">First Row</td>
+      </tr>
+      <tr id="second_row">
+        <td>Second Row</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p class="test">Test paragraph outside of container</p>
+
+<div id="container">
+  <p class="test" id="intended">Test paragraph 1 inside of container</p>
+  <p class="test">Test paragraph 2 inside of container</p>
+  <p class="test">Test paragraph 3 inside of container</p>
+  <p class="test">Test paragraph 4 inside of container</p>
+</div>
+
+<div id="testdiv">to be updated</div>
+
+<div id="element_with_visible_overflow" style="overflow:visible">V</div>
+<div id="element_with_hidden_overflow" style="overflow:hidden">H</div>
+<div id="element_with_scroll_overflow" style="overflow:scroll">S</div>
+
+<div id="element_extend_test"> </div>
+
+<div id="test_whitespace"> <span> </span>
+
+
+<div><div></div> </div><span> </span>
+</div>
+
+<div id="nav_tests_isolator">
+  <div id="nav_test_first_sibling"></div>
+  <div></div>
+  <p id="nav_test_p" class="test"></p>
+  <span id="nav_test_prev_sibling"></span>
+  
+  <ul id="navigation_test" style="display: none">
+    <li class="first"><em>A</em></li>
+    <li><em class="dim">B</em></li>
+    <li id="navigation_test_c">
+    <em>C</em>
+    <ul>
+      <li><em class="dim">E</em></li>
+      <li id="navigation_test_f"><em>F</em></li>
+    </ul>
+    </li>
+    <li class="last"><em>D</em></li>
+  </ul>
+  
+  <div id="navigation_test_next_sibling"></div>
+  
+  <p></p>
+</div>
+
+<div id="class_names">
+  <p class="A">
+  <ul class="A B" id="class_names_ul">
+    <li class="C"></li>
+    <li class="A C"></li>
+  </ul>
+  <div class="B C D"></div>
+</div>
+
+<div id="style_test_1" style="display:none;"></div>
+<div id="style_test_2" class="style-test" style="font-size:11px;"></div>
+
+<div id="style_test_3">blah</div>
+
+<!-- Tests follow -->
+<script type="text/javascript" language="javascript" charset="utf-8">
+// <![CDATA[
+
+  var testVar = 'to be updated';
+
+  new Test.Unit.Runner({
+
+    testDollarFunction: function() { with(this) {
+      assertIdentical(undefined, $());
+      assertIdentical(undefined, $('noWayThisIDExists'));
+      assertIdentical(document.getElementById('testdiv'), $('testdiv'));
+      assertEnumEqual([ $('testdiv'), $('container') ], $('testdiv', 'container'));
+      assertEnumEqual([ $('testdiv'), undefined, $('container') ],
+        $('testdiv', 'noWayThisIDExists', 'container'));
+      var elt = $('testdiv');
+      assertIdentical(elt, $(elt));
+      assertRespondsTo('hide', elt);
+    }},
+    
+    testGetElementsByClassName: function() {with(this) {
+      assertElementsMatch(document.getElementsByClassName('A'), 'p.A', 'ul#class_names_ul.A', 'li.A.C');
+      assertElementsMatch(document.getElementsByClassName('A', 'class_names_ul'), 'li.A.C');
+      assertElementsMatch(document.getElementsByClassName('B', 'class_names'), 'ul#class_names_ul.A.B', 'div.B.C.D');
+      assertElementsMatch(document.getElementsByClassName('B', 'class_names_ul'));
+    }},
+    
+    testInsertWithTR: function() {with(this) {
+      new Insertion.After('second_row', '<tr id="third_row"><td>Third Row</td></tr>');
+      assert($('second_row').childOf('table'));
+    }},
+    
+    testElementUpdate: function() {with(this) {
+      $('testdiv').update('hello from div!');
+      assertEqual('hello from div!', $('testdiv').innerHTML);
+      
+      Element.update('testdiv', 'another hello from div!');
+      assertEqual('another hello from div!', $('testdiv').innerHTML);
+      
+      Element.update('testdiv', 123);
+      assertEqual('123', $('testdiv').innerHTML)
+      
+      Element.update('testdiv');
+      assertEqual('', $('testdiv').innerHTML)
+    }},
+
+    testElementUpdateWithScript: function() {with(this) {
+      $('testdiv').update('hello from div!<script>testVar="hello!"</'+'script>');
+      assertEqual('hello from div!',$('testdiv').innerHTML);
+      wait(100,function(){
+        assertEqual('hello!',testVar);
+        
+        Element.update('testdiv','another hello from div!\n<script>testVar="another hello!"</'+'script>\nhere it goes');
+        
+        // note: IE normalizes whitespace (like line breaks) to single spaces, thus the match test
+        assertMatch(/^another hello from div!\s+here it goes$/,$('testdiv').innerHTML);
+        wait(100,function(){
+          assertEqual('another hello!',testVar);
+        });
+      });
+    }},
+    
+    testElementUpdateInTableRow: function() {with(this) {
+      $('second_row').update('<td id="i_am_a_td">test</td>');
+      assertEqual('test',$('i_am_a_td').innerHTML);
+
+      Element.update('second_row','<td id="i_am_a_td">another <span>test</span></td>');
+      assertEqual('another <span>test</span>',$('i_am_a_td').innerHTML.toLowerCase());
+    }},
+    
+    testElementUpdateInTableCell: function() {with(this) {
+      Element.update('a_cell','another <span>test</span>');
+      assertEqual('another <span>test</span>',$('a_cell').innerHTML.toLowerCase());
+    }},
+    
+    testElementUpdateInTable: function() {with(this) {
+      Element.update('table','<tr><td>boo!</td></tr>');
+      assertMatch(/^<tr>\s*<td>boo!<\/td><\/tr>$/,$('table').innerHTML.toLowerCase());
+    }},
+    
+    testElementSelectorMethod: function() {with(this) {
+      var testSelector = $('container').getElementsBySelector('p.test');
+      assertEqual(testSelector.length, 4);
+      assertEqual(testSelector[0], $('intended'));
+      assertEqual(testSelector[0], $$('#container p.test')[0]);
+    }},
+       
+    testElementClassNameMethod: function() {with(this) {
+      var testClassNames = $('container').getElementsByClassName('test');
+      var testSelector = $('container').getElementsBySelector('p.test');
+      assertEqual(testClassNames[0], $('intended'));
+      assertEqual(testClassNames.length, 4);
+      assertEqual(testSelector[3], testClassNames[3]);
+      assertEqual(testClassNames.length, testSelector.length);
+    }},
+    
+    testElementAncestors: function() {with(this) {
+      var ancestors = $('navigation_test_f').ancestors();
+      assertElementsMatch(ancestors, 'ul', 'li', 'ul#navigation_test',
+        'div#nav_tests_isolator', 'body', 'html');
+      assertElementsMatch(ancestors.last().ancestors());
+    }},
+    
+    testElementDescendants: function() {with(this) {
+      assertElementsMatch($('navigation_test').descendants(), 
+        'li', 'em', 'li', 'em.dim', 'li', 'em', 'ul', 'li',
+        'em.dim', 'li#navigation_test_f', 'em', 'li', 'em');
+      assertElementsMatch($('navigation_test_f').descendants(), 'em');
+    }},
+    
+    testElementPreviousSiblings: function() {with(this) {
+      assertElementsMatch($('navigation_test').previousSiblings(),
+        'span#nav_test_prev_sibling', 'p.test', 'div', 'div#nav_test_first_sibling');
+      assertElementsMatch($('navigation_test_f').previousSiblings(), 'li');
+    }},
+    
+    testElementNextSiblings: function() {with(this) {
+      assertElementsMatch($('navigation_test').nextSiblings(),
+        'div#navigation_test_next_sibling', 'p');
+      assertElementsMatch($('navigation_test_f').nextSiblings());
+    }},
+    
+    testElementSiblings: function() {with(this) {
+      assertElementsMatch($('navigation_test').siblings(),
+        'div#nav_test_first_sibling', 'div', 'p.test',
+        'span#nav_test_prev_sibling', 'div#navigation_test_next_sibling', 'p');
+    }},
+    
+    testElementUp: function() {with(this) {
+      var element = $('navigation_test_f');
+      assertElementMatches(element.up(), 'ul');
+      assertElementMatches(element.up(0), 'ul');
+      assertElementMatches(element.up(1), 'li');
+      assertElementMatches(element.up(2), 'ul#navigation_test');
+      assertElementsMatch(element.up('li').siblings(), 'li.first', 'li', 'li.last');
+      assertElementMatches(element.up('ul', 1), 'ul#navigation_test');
+      assertEqual(undefined, element.up('garbage'));
+      assertEqual(undefined, element.up(6));
+    }},
+    
+    testElementDown: function() {with(this) {
+      var element = $('navigation_test');
+      assertElementMatches(element.down(), 'li.first');
+      assertElementMatches(element.down(0), 'li.first');
+      assertElementMatches(element.down(1), 'em');
+      assertElementMatches(element.down('li', 5), 'li.last');
+      assertElementMatches(element.down('ul').down('li', 1), 'li#navigation_test_f');
+    }},
+    
+    testElementPrevious: function() {with(this) {
+      var element = $('navigation_test').down('li.last');
+      assertElementMatches(element.previous(), 'li#navigation_test_c');
+      assertElementMatches(element.previous(1), 'li');
+      assertElementMatches(element.previous('.first'), 'li.first');
+      assertEqual(undefined, element.previous(3));
+      assertEqual(undefined, $('navigation_test').down().previous());
+    }},
+    
+    testElementNext: function() {with(this) {
+      var element = $('navigation_test').down('li.first');
+      assertElementMatches(element.next(), 'li');
+      assertElementMatches(element.next(1), 'li#navigation_test_c');
+      assertElementMatches(element.next(2), 'li.last');
+      assertElementMatches(element.next('.last'), 'li.last');
+      assertEqual(undefined, element.next(3));
+      assertEqual(undefined, element.next(2).next());
+    }},
+    
+    testElementInspect: function() {with(this) {
+      assertEqual('<ul id="navigation_test">', $('navigation_test').inspect());
+      assertEqual('<li class="first">', $('navigation_test').down().inspect());
+      assertEqual('<em>', $('navigation_test').down(1).inspect());
+    }},
+    
+    testElementMakeClipping: function() {with(this) {
+      var chained = Element.extend(document.createElement('DIV'));
+      assertEqual(chained, chained.makeClipping());
+      assertEqual(chained, chained.makeClipping());
+      assertEqual(chained, chained.makeClipping().makeClipping());
+      
+      assertEqual(chained, chained.undoClipping());
+      assertEqual(chained, chained.undoClipping());
+      assertEqual(chained, chained.undoClipping().makeClipping());
+      
+      ['hidden','visible','scroll'].each( function(overflowValue) {
+        var element = $('element_with_'+overflowValue+'_overflow');
+        
+        assertEqual(overflowValue, element.getStyle('overflow'));
+        element.makeClipping();
+        assertEqual('hidden', element.getStyle('overflow'));
+        element.undoClipping();
+        assertEqual(overflowValue, element.getStyle('overflow'));
+      });
+    }},
+    
+    testElementExtend: function() {with(this) {
+      var element = $('element_extend_test');
+      assertRespondsTo('show', element);
+      
+      var XHTML_TAGS = 
+        ('a abbr acronym address applet area '+
+        'b bdo big blockquote br button caption '+
+        'cite code col colgroup dd del dfn div dl dt '+
+        'em fieldset form h1 h2 h3 h4 h5 h6 hr '+
+        'i iframe img input ins kbd label legend li '+
+        'map object ol optgroup option p param pre q samp '+
+        'script select small span strong style sub sup '+
+        'table tbody td textarea tfoot th thead tr tt ul var').split(' ')
+        
+      XHTML_TAGS.each(function(tag) {
+        var element = document.createElement(tag);
+        assertEqual(element, Element.extend(element));
+        assertRespondsTo('show', element);
+      });
+      
+      [null,'','a','aa'].each(function(content) {
+        var textnode = document.createTextNode(content);
+        assertEqual(textnode, Element.extend(textnode));
+        assert(typeof textnode['show'] == 'undefined');
+      });
+    }},
+    
+    testElementCleanWhitespace: function() {with(this) {
+      Element.cleanWhitespace("test_whitespace");
+      assertEqual(3, $("test_whitespace").childNodes.length);
+      
+      assertEqual(1, $("test_whitespace").firstChild.nodeType);
+      assertEqual('SPAN', $("test_whitespace").firstChild.tagName);
+      
+      assertEqual(1, $("test_whitespace").firstChild.nextSibling.nodeType);
+      assertEqual('DIV', $("test_whitespace").firstChild.nextSibling.tagName);
+      
+      assertEqual(1, $("test_whitespace").firstChild.nextSibling.nextSibling.nodeType);
+      assertEqual('SPAN', $("test_whitespace").firstChild.nextSibling.nextSibling.tagName);
+      
+      var element = document.createElement('DIV');
+      element.appendChild(document.createTextNode(''));
+      element.appendChild(document.createTextNode(''));
+      assertEqual(2, element.childNodes.length);
+      Element.cleanWhitespace(element);
+      assertEqual(0, element.childNodes.length);
+    }},
+    
+    testElementSetStyle: function() { with(this) {
+      Element.setStyle('style_test_3',{ 'left': '2px' });
+      assertEqual('2px', $('style_test_3').style.left);
+      
+      Element.setStyle('style_test_3',{ marginTop: '1px' });
+      assertEqual('1px', $('style_test_3').style.marginTop);
+      
+      $('style_test_3').setStyle({ 'margin-top': '2px', left: '-1px' });
+      assertEqual('-1px', $('style_test_3').style.left);
+      assertEqual('2px', $('style_test_3').style.marginTop);
+    }},
+    
+    testElementGetStyle: function() { with(this) {
+      assertEqual("none",
+        $('style_test_1').getStyle('display'));
+      
+      // not displayed, so "null" ("auto" is tranlated to "null")
+      assertNull(Element.getStyle('style_test_1','width'));
+      
+      $('style_test_1').show();
+      
+      // from id rule
+      assertEqual("pointer",
+        Element.getStyle('style_test_1','cursor'));
+      
+      assertEqual("block",
+        Element.getStyle('style_test_2','display'));
+      assertNotNull(Element.getStyle('style_test_2','width'));
+      assertEqual("static",Element.getStyle('style_test_1','position'));
+      // from style
+      assertEqual("11px",
+        Element.getStyle('style_test_2','font-size'));
+      // from class
+      assertEqual("1px",
+        Element.getStyle('style_test_2','margin-left'));
+    }}
+    
+  }, 'testlog');
+
+// ]]>
+</script>
+</body>
+</html>

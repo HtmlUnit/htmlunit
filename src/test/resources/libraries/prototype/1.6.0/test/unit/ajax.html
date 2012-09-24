@@ -1,0 +1,383 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Prototype Unit test file</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script src="../../dist/prototype.js" type="text/javascript"></script>
+  <script src="../lib/unittest.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="../test.css" type="text/css" />
+  <style type="text/css" media="screen">
+  /* <![CDATA[ */
+    #testcss1 { font-size:11px; color: #f00; }
+    #testcss2 { font-size:12px; color: #0f0; display: none; }
+  /* ]]> */
+  </style>
+</head>
+<body>
+<h1>Prototype Unit test file</h1>
+<p>
+  Test of utility functions in ajax.js
+</p>
+
+<!-- Log output -->
+<div id="testlog"> </div>
+<div id="content"></div>
+<div id="content2" style="color:red"></div>
+
+<!-- Tests follow -->
+<script type="text/javascript" language="javascript" charset="utf-8">
+// <![CDATA[
+
+  var Fixtures = {
+    js: {
+      responseBody:   '$("content").update("<H2>Hello world!</H2>");', 
+      'Content-Type': '           text/javascript     '
+    },
+    
+    html: {
+      responseBody: "Pack my box with <em>five dozen</em> liquor jugs! " +
+        "Oh, how <strong>quickly</strong> daft jumping zebras vex..."
+    },
+    
+    xml: {
+      responseBody:   '<?xml version="1.0" encoding="UTF-8" ?><name attr="foo">bar</name>', 
+      'Content-Type': 'application/xml'
+    },
+    
+    json: {
+      responseBody:   '{\n\r"test": 123}', 
+      'Content-Type': 'application/json'
+    },
+    
+    jsonWithoutContentType: {
+      responseBody:   '{"test": 123}'
+    },
+    
+    invalidJson: {
+      responseBody:   '{});window.attacked = true;({}',
+      'Content-Type': 'application/json'
+    },
+    
+    headerJson: {
+      'X-JSON': '{"test": "hello #éà"}'
+    }
+  };
+  
+  var extendDefault = function(options) {
+    return Object.extend({
+      asynchronous: false,
+      method: 'get',
+      onException: function(e) { throw e }
+    }, options);
+  };
+
+  var responderCounter = 0;
+  
+  // lowercase comparison because of MSIE which presents HTML tags in uppercase
+  var sentence = ("Pack my box with <em>five dozen</em> liquor jugs! " +
+  "Oh, how <strong>quickly</strong> daft jumping zebras vex...").toLowerCase();
+  
+  var message = 'You must be running your tests from rake to test this feature.';
+  
+  new Test.Unit.Runner({
+    setup: function(){
+      $('content').update('');
+      $('content2').update('');
+    },
+    
+    teardown: function(){
+      // hack to cleanup responders
+      Ajax.Responders.responders = [Ajax.Responders.responders[0]];
+    },
+    
+    testSynchronousRequest: function() {with(this) {
+      assertEqual("", $("content").innerHTML);
+      
+      assertEqual(0, Ajax.activeRequestCount);
+      new Ajax.Request("fixtures/hello.js", {
+        asynchronous: false,
+        method: 'GET',
+        evalJS: 'force'
+      });
+      assertEqual(0, Ajax.activeRequestCount);
+      
+      var h2 = $("content").firstChild;
+      assertEqual("Hello world!", h2.innerHTML);
+    }},
+    
+    testAsynchronousRequest: function() {with(this) {
+      assertEqual("", $("content").innerHTML);
+      
+      new Ajax.Request("fixtures/hello.js", {
+        asynchronous: true,
+        method: 'get',
+        evalJS: 'force'
+      });
+      wait(1000, function() {
+        var h2 = $("content").firstChild;
+        assertEqual("Hello world!", h2.innerHTML);
+      });
+    }},
+    
+    testUpdater: function() {with(this) {
+      assertEqual("", $("content").innerHTML);
+      
+      new Ajax.Updater("content", "fixtures/content.html", { method:'get' });
+      
+      wait(1000, function() {
+        assertEqual(sentence, $("content").innerHTML.strip().toLowerCase());
+        
+        $('content').update('');
+        assertEqual("", $("content").innerHTML);
+         
+        new Ajax.Updater({ success:"content", failure:"content2" },
+          "fixtures/content.html", { method:'get', parameters:{ pet:'monkey' } });
+        
+        new Ajax.Updater("", "fixtures/content.html", { method:'get', parameters:"pet=monkey" });
+        
+        wait(1000, function() {
+          assertEqual(sentence, $("content").innerHTML.strip().toLowerCase());
+          assertEqual("", $("content2").innerHTML);
+        });
+      }); 
+    }},
+    
+    testUpdaterWithInsertion: function() {with(this) {
+      $('content').update();
+      new Ajax.Updater("content", "fixtures/content.html", { method:'get', insertion: Insertion.Top });
+      wait(1000, function() {
+        assertEqual(sentence, $("content").innerHTML.strip().toLowerCase());
+        $('content').update();
+        new Ajax.Updater("content", "fixtures/content.html", { method:'get', insertion: 'bottom' });      
+        wait(1000, function() {
+          assertEqual(sentence, $("content").innerHTML.strip().toLowerCase());
+          
+          $('content').update();
+          new Ajax.Updater("content", "fixtures/content.html", { method:'get', insertion: 'after' });      
+          wait(1000, function() {
+            assertEqual('five dozen', $("content").next().innerHTML.strip().toLowerCase());
+          });
+        });
+      });
+    }},
+       
+    testResponders: function(){with(this) {
+      // check for internal responder
+      assertEqual(1, Ajax.Responders.responders.length);
+      
+      var dummyResponder = {
+        onComplete: function(req) { /* dummy */ }
+      };
+      
+      Ajax.Responders.register(dummyResponder);
+      assertEqual(2, Ajax.Responders.responders.length);
+      
+      // don't add twice
+      Ajax.Responders.register(dummyResponder);
+      assertEqual(2, Ajax.Responders.responders.length);
+      
+      Ajax.Responders.unregister(dummyResponder);
+      assertEqual(1, Ajax.Responders.responders.length);
+      
+      var responder = {
+        onCreate:   function(req){ responderCounter++ },
+        onLoading:  function(req){ responderCounter++ },
+        onComplete: function(req){ responderCounter++ }
+      };
+      Ajax.Responders.register(responder);
+      
+      assertEqual(0, responderCounter);
+      assertEqual(0, Ajax.activeRequestCount);
+      new Ajax.Request("fixtures/content.html", { method:'get', parameters:"pet=monkey" });
+      assertEqual(1, responderCounter);
+      assertEqual(1, Ajax.activeRequestCount);
+      
+      wait(1000,function() {
+        assertEqual(3, responderCounter);
+        assertEqual(0, Ajax.activeRequestCount);
+      });
+    }},
+    
+    testEvalResponseShouldBeCalledBeforeOnComplete: function() {with(this) {
+      if (isRunningFromRake) {
+        assertEqual("", $("content").innerHTML);
+      
+        assertEqual(0, Ajax.activeRequestCount);
+        new Ajax.Request("fixtures/hello.js", extendDefault({
+          onComplete: function(response) { assertNotEqual("", $("content").innerHTML) }
+        }));
+        assertEqual(0, Ajax.activeRequestCount);
+      
+        var h2 = $("content").firstChild;
+        assertEqual("Hello world!", h2.innerHTML);
+      } else {
+        info(message);
+      }
+    }},
+    
+    testContentTypeSetForSimulatedVerbs: function() {with(this) {
+      if (isRunningFromRake) {
+        new Ajax.Request('/content-type', extendDefault({
+          method: 'put',
+          contentType: 'application/bogus',
+          onComplete: function(response) {
+            assertEqual('application/bogus; charset=UTF-8', response.responseText);
+          }
+        }));
+      } else {
+        info(message);
+      }
+    }},
+    
+    testOnCreateCallback: function() {with(this) {
+      new Ajax.Request("fixtures/content.html", extendDefault({
+        onCreate: function(transport) { assertEqual(0, transport.readyState) },
+        onComplete: function(transport) { assertNotEqual(0, transport.readyState) }
+      }));
+    }},
+    
+    testEvalJS: function() {with(this) {
+      if (isRunningFromRake) {
+        
+        $('content').update();
+        new Ajax.Request("/response", extendDefault({
+          parameters: Fixtures.js,
+          onComplete: function(transport) { 
+            var h2 = $("content").firstChild;
+            assertEqual("Hello world!", h2.innerHTML);
+          }
+        }));
+        
+        $('content').update();
+        new Ajax.Request("/response", extendDefault({
+          evalJS: false,
+          parameters: Fixtures.js,
+          onComplete: function(transport) { 
+            assertEqual("", $("content").innerHTML);
+          }
+        }));
+      } else {
+        info(message);
+      }
+      
+      $('content').update();
+      new Ajax.Request("fixtures/hello.js", extendDefault({
+        evalJS: 'force',
+        onComplete: function(transport) { 
+          var h2 = $("content").firstChild;
+          assertEqual("Hello world!", h2.innerHTML);
+        }
+      }));
+    }},
+
+    testCallbacks: function() {with(this) {
+      var options = extendDefault({
+        onCreate: function(transport) { assertInstanceOf(Ajax.Response, transport) }
+      });
+      
+      Ajax.Request.Events.each(function(state){
+        options['on' + state] = options.onCreate;
+      });
+
+      new Ajax.Request("fixtures/content.html", options);
+    }},
+
+    testResponseText: function() {with(this) {
+      new Ajax.Request("fixtures/empty.html", extendDefault({
+        onComplete: function(transport) { assertEqual('', transport.responseText) }
+      }));
+      
+      new Ajax.Request("fixtures/content.html", extendDefault({
+        onComplete: function(transport) { assertEqual(sentence, transport.responseText.toLowerCase()) }
+      }));
+    }},
+    
+    testResponseXML: function() {with(this) {
+      if (isRunningFromRake) {
+        new Ajax.Request("/response", extendDefault({
+          parameters: Fixtures.xml,
+          onComplete: function(transport) { 
+            assertEqual('foo', transport.responseXML.getElementsByTagName('name')[0].getAttribute('attr'))
+          }
+        }));
+      } else {
+        info(message);
+      }
+    }},
+        
+    testResponseJSON: function() {with(this) {
+      if (isRunningFromRake) {
+        new Ajax.Request("/response", extendDefault({
+          parameters: Fixtures.json,
+          onComplete: function(transport) { assertEqual(123, transport.responseJSON.test) }
+        }));
+      
+        new Ajax.Request("/response", extendDefault({
+          evalJSON: false,
+          parameters: Fixtures.json,
+          onComplete: function(transport) { assertNull(transport.responseJSON) }
+        }));
+      
+        new Ajax.Request("/response", extendDefault({
+          parameters: Fixtures.jsonWithoutContentType,
+          onComplete: function(transport) { assertNull(transport.responseJSON) }
+        }));
+      
+        new Ajax.Request("/response", extendDefault({
+          sanitizeJSON: true,
+          parameters: Fixtures.invalidJson,
+          onException: function(request, error) {
+            assert(error.message.include('Badly formed JSON string'));
+            assertInstanceOf(Ajax.Request, request);
+          }
+        }));
+      } else {
+        info(message);
+      }
+      
+      new Ajax.Request("fixtures/data.json", extendDefault({
+        evalJSON: 'force',
+        onComplete: function(transport) { assertEqual(123, transport.responseJSON.test) }
+      }));
+    }},
+    
+    testHeaderJSON: function() {with(this) {
+      if (isRunningFromRake) {
+        new Ajax.Request("/response", extendDefault({
+          parameters: Fixtures.headerJson,
+          onComplete: function(transport, json) {
+            assertEqual('hello #éà', transport.headerJSON.test);
+            assertEqual('hello #éà', json.test);
+          }
+        }));
+      
+        new Ajax.Request("/response", extendDefault({
+          onComplete: function(transport, json) { 
+            assertNull(transport.headerJSON)
+            assertNull(json)
+          }
+        }));
+      } else {
+        info(message);
+      }
+    }},
+    
+    testGetHeader: function() {with(this) {
+      if (isRunningFromRake) {
+       new Ajax.Request("/response", extendDefault({
+          parameters: { 'X-TEST': 'some value' },
+          onComplete: function(transport) {
+            assertEqual('some value', transport.getHeader('X-Test'));
+            assertNull(null, transport.getHeader('X-Inexistant'));
+          }
+        }));
+      } else {
+        info(message);
+      }
+    }}
+  }, 'testlog');
+// ]]>
+</script>
+</body>
+</html>

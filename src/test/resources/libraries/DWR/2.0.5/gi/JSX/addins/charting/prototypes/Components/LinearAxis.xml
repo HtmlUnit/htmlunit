@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Axis - Linear]]></name>
+ <icon><![CDATA[icons/linearAxis.gif]]></icon>
+ <description><![CDATA[an axis that displays a range of numerical values]]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.LinearAxis">
+   <dynamics/>
+   <variants autoAdjust="1" baseAtZero="1" horizontal="1" labelGap="3" minorTickDivisions="4" minorTickLength="2" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+   <strings axisStroke="#000000 1 1" jsxname="linearAxis" labelPlacement="axis" minorTickPlacement="outside" minorTickStroke="#999999 1" tickAlignment="aligned" tickPlacement="outside" tickStroke="#000000 1 1"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants alpha="1" jsxfontsize="12" labelRotation="0"/>
+     <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="linAxisTitle" jsxtext="Linear Axis" jsxtextalign="center"/>
+    </object>
+  </object>
+</serialization>

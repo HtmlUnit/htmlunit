@@ -1,0 +1,16 @@
+14 tests, 115 assertions, 0 failures, 0 errors
+Status	Test	Message
+testObjectExtend	passed	5 assertions, 0 failures, 0 errors
+testObjectToQueryString	passed	1 assertions, 0 failures, 0 errors
+testObjectClone	passed	4 assertions, 0 failures, 0 errors
+testObjectInspect	passed	6 assertions, 0 failures, 0 errors
+testObjectToJSON	passed	19 assertions, 0 failures, 0 errors
+testObjectToHTML	passed	7 assertions, 0 failures, 0 errors
+testObjectIsArray	passed	14 assertions, 0 failures, 0 errors
+testObjectIsHash	passed	10 assertions, 0 failures, 0 errors
+testObjectIsElement	passed	9 assertions, 0 failures, 0 errors
+testObjectIsFunction	passed	9 assertions, 0 failures, 0 errors
+testObjectIsString	passed	9 assertions, 0 failures, 0 errors
+testObjectIsNumber	passed	12 assertions, 0 failures, 0 errors
+testObjectIsUndefined	passed	8 assertions, 0 failures, 0 errors
+testDoesntExtendObjectPrototype	passed	2 assertions, 0 failures, 0 errors
