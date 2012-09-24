@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -60,7 +59,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "null", "null" })
-    @NotYetImplemented
     public void argumentsShouldBeNullOutsideFunction() throws Exception {
         final String html
             = "<html><body><script>\n"
