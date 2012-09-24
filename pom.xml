@@ -41,7 +41,7 @@
                     <headerLocation>${project.build.directory}/../LICENSE.txt</headerLocation>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
+                    <failsOnError>${project.version}</failsOnError>
                 </configuration>
             </plugin>
             <plugin>
@@ -199,6 +199,15 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+                <version>1.8</version>
+                <configuration>
+                    <tag>${project.name}-${project.version}</tag>
+                    <message>Release ${project.version}</message>
+                </configuration>
             </plugin>
         </plugins>
         <extensions>

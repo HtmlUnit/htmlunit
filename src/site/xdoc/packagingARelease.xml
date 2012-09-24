@@ -83,9 +83,10 @@
                         Add a new Group in SourceForge tracker system.
                     </li>
                     <li>
-                        Make sure everything is checked
-                        in and tag the repository (to https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/tags/) 
-                        with a name like this "HtmlUnit-2.0" that reflects the current build version.
+                        Make sure everything is checked in and tag the release:
+                    <source>
+mvn scm:tag
+</source>
                     </li>
                     <li>
                         Ensure HtmlUnit-related dependencies are 'tagged' in the repository.
