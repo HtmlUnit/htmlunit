@@ -30,7 +30,7 @@ mvn2home
         <!--  Note that if you need to run a single test, set flags="-Dtest=XYZ" not "-e -Dtest=XYZ" -->
         <maven2 mvnscript="&basedir;/htmlunit/cruisecontrol/checkout/cruise/mavenrunner.sh"
             pomfile="&basedir;/htmlunit/cruisecontrol/checkout/pom.xml"
-            flags="-e" goal="scm:update clean package checkstyle:checkstyle"/>
+            flags="-e -U" goal="scm:update clean package checkstyle:checkstyle"/>
     </schedule>
     <listeners>
         <currentbuildstatuslistener file="&basedir;/htmlunit/cruisecontrol/logs/status.txt"/>
