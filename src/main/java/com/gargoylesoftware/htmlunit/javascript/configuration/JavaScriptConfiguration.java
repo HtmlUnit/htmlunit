@@ -91,6 +91,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.XSLTProcessor;
 import com.gargoylesoftware.htmlunit.javascript.host.XSLTemplate;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSMediaRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSPrimitiveValue;
@@ -259,7 +260,8 @@ public final class JavaScriptConfiguration {
     @SuppressWarnings("unchecked")
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
         Attr.class, ActiveXObject.class, BoxObject.class, CDATASection.class, ClipboardData.class,
-        CSSCharsetRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPrimitiveValue.class, CSSRule.class,
+        CSSCharsetRule.class, CSSFontFaceRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPrimitiveValue.class,
+        CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSValue.class,
         CanvasRenderingContext2D.class, CharacterDataImpl.class, ClientRect.class, Comment.class,
         ComputedCSSStyleDeclaration.class, Console.class, Coordinates.class, DOMException.class,
