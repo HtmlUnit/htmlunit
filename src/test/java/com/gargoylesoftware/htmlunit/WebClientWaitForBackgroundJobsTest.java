@@ -254,6 +254,7 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Tries(3)
     public void waitWithsubWindows() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
