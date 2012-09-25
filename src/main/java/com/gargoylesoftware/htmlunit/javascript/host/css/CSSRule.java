@@ -91,7 +91,7 @@ public class CSSRule extends SimpleScriptable {
                 return new CSSMediaRule(stylesheet, (org.w3c.dom.css.CSSMediaRule) rule);
             default:
                 throw new UnsupportedOperationException("CSSRule "
-                    + rule.getClass().getName() + " is not yet supported.");
+                    + rule.getClass().getName() + " is not yet supported:" + rule.getCssText());
         }
     }
 
