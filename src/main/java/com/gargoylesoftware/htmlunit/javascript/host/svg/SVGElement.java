@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgElement;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgElement.class,
+@JsxClass(domClasses = SvgElement.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGElement extends Element {
 

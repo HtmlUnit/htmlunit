@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgMask;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgMask.class,
+@JsxClass(domClasses = SvgMask.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGMaskElement extends SVGElement {
 

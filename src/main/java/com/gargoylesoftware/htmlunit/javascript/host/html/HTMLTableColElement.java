@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import com.gargoylesoftware.htmlunit.html.HtmlTableColumn;
+import com.gargoylesoftware.htmlunit.html.HtmlTableColumnGroup;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -27,10 +29,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass
+@JsxClass(domClasses = { HtmlTableColumn.class, HtmlTableColumnGroup.class  })
 public class HTMLTableColElement extends HTMLTableComponent {
-    /*    Because it is associated with many HtmlClasses, the one-to-many
-    configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */
 
     /**
      * Creates an instance.

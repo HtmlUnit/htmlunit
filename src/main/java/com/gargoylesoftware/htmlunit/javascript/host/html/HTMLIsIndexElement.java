@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlIsIndex.class)
+@JsxClass(domClasses = HtmlIsIndex.class)
 public class HTMLIsIndexElement extends HTMLElement {
 
     /**

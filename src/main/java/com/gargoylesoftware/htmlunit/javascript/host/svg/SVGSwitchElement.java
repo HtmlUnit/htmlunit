@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgSwitch;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgSwitch.class,
+@JsxClass(domClasses = SvgSwitch.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGSwitchElement extends SVGElement {
 

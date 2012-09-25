@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
+import com.gargoylesoftware.htmlunit.html.HtmlMarquee;
+import com.gargoylesoftware.htmlunit.html.HtmlNoEmbed;
+import com.gargoylesoftware.htmlunit.html.HtmlNoFrames;
+import com.gargoylesoftware.htmlunit.html.HtmlNoScript;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -25,10 +30,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-@JsxClass
+@JsxClass(domClasses = { HtmlDivision.class, HtmlMarquee.class, HtmlNoEmbed.class, HtmlNoFrames.class,
+        HtmlNoScript.class })
 public class HTMLDivElement extends HTMLElement {
-/*    Because it is associated with many HtmlClasses, the one-to-many
-    configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */
 
     /**
      * Creates an instance.

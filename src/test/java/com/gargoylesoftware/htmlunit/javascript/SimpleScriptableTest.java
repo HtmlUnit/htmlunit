@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
@@ -91,8 +90,7 @@ public class SimpleScriptableTest extends SimpleWebTestCase {
     @Test
     public void htmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
         final JavaScriptConfiguration jsConfiguration = JavaScriptConfiguration.getInstance(getBrowserVersion());
-        final Map<Class<? extends DomElement>, Class<? extends SimpleScriptable>> map
-            = jsConfiguration.getDomJavaScriptMapping();
+        final Map<Class<?>, Class<? extends SimpleScriptable>> map = jsConfiguration.getDomJavaScriptMapping();
         String directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host";
         final Set<String> names = getFileNames(directoryName.replace('/', File.separatorChar));
         directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host/html";

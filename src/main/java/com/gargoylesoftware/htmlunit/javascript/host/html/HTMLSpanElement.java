@@ -20,6 +20,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
 import com.gargoylesoftware.htmlunit.html.HtmlAcronym;
 import com.gargoylesoftware.htmlunit.html.HtmlAddress;
+import com.gargoylesoftware.htmlunit.html.HtmlBackgroundSound;
 import com.gargoylesoftware.htmlunit.html.HtmlBidirectionalOverride;
 import com.gargoylesoftware.htmlunit.html.HtmlBig;
 import com.gargoylesoftware.htmlunit.html.HtmlBlink;
@@ -28,16 +29,20 @@ import com.gargoylesoftware.htmlunit.html.HtmlCenter;
 import com.gargoylesoftware.htmlunit.html.HtmlCitation;
 import com.gargoylesoftware.htmlunit.html.HtmlCode;
 import com.gargoylesoftware.htmlunit.html.HtmlDefinition;
+import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
+import com.gargoylesoftware.htmlunit.html.HtmlDefinitionTerm;
 import com.gargoylesoftware.htmlunit.html.HtmlEmphasis;
 import com.gargoylesoftware.htmlunit.html.HtmlExample;
 import com.gargoylesoftware.htmlunit.html.HtmlItalic;
 import com.gargoylesoftware.htmlunit.html.HtmlKeyboard;
 import com.gargoylesoftware.htmlunit.html.HtmlListing;
+import com.gargoylesoftware.htmlunit.html.HtmlMultiColumn;
 import com.gargoylesoftware.htmlunit.html.HtmlNoBreak;
 import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
 import com.gargoylesoftware.htmlunit.html.HtmlS;
 import com.gargoylesoftware.htmlunit.html.HtmlSample;
 import com.gargoylesoftware.htmlunit.html.HtmlSmall;
+import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlStrike;
 import com.gargoylesoftware.htmlunit.html.HtmlStrong;
 import com.gargoylesoftware.htmlunit.html.HtmlSubscript;
@@ -55,10 +60,14 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-@JsxClass
+@JsxClass(domClasses = { HtmlAbbreviated.class, HtmlAcronym.class, HtmlAddress.class, HtmlBackgroundSound.class,
+        HtmlBidirectionalOverride.class, HtmlBig.class, HtmlBold.class, HtmlBlink.class, HtmlCenter.class,
+        HtmlCitation.class, HtmlCode.class, HtmlDefinition.class, HtmlDefinitionDescription.class,
+        HtmlDefinitionTerm.class, HtmlEmphasis.class, HtmlItalic.class, HtmlKeyboard.class, HtmlListing.class,
+        HtmlMultiColumn.class, HtmlNoBreak.class, HtmlPlainText.class, HtmlS.class, HtmlSample.class,
+        HtmlSmall.class, HtmlSpan.class, HtmlStrike.class, HtmlStrong.class, HtmlSubscript.class,
+        HtmlSuperscript.class, HtmlTeletype.class, HtmlUnderlined.class, HtmlVariable.class, HtmlExample.class })
 public class HTMLSpanElement extends HTMLElement {
-    /*    Because it is associated with many HtmlClasses, the one-to-many
-    configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */
 
     /**
      * Creates an instance.

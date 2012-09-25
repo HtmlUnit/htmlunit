@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlLink.class)
+@JsxClass(domClasses = HtmlLink.class)
 public class HTMLLinkElement extends HTMLElement {
 
     /**

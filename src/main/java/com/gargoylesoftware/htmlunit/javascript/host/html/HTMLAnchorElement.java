@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Sudhan Moghe
  * @author Daniel Gredler
  */
-@JsxClass(domClass = HtmlAnchor.class)
+@JsxClass(domClasses = HtmlAnchor.class)
 public class HTMLAnchorElement extends HTMLElement {
 
     /**

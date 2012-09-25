@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlMenu.class)
+@JsxClass(domClasses = HtmlMenu.class)
 public class HTMLMenuElement extends HTMLListElement {
 
     /**

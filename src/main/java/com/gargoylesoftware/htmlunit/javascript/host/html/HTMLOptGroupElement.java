@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlOptionGroup.class)
+@JsxClass(domClasses = HtmlOptionGroup.class)
 public class HTMLOptGroupElement extends HTMLElement {
 
     /**

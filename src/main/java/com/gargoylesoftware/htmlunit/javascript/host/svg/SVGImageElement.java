@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgImage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgImage.class,
+@JsxClass(domClasses = SvgImage.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGImageElement extends SVGElement {
 

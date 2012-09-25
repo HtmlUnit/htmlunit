@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Bruce Chapman
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlFrameSet.class)
+@JsxClass(domClasses = HtmlFrameSet.class)
 public class HTMLFrameSetElement extends HTMLElement {
 
     /**

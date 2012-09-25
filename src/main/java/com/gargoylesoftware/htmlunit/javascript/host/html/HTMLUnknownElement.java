@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlUnknownElement.class)
+@JsxClass(domClasses = HtmlUnknownElement.class)
 public class HTMLUnknownElement extends HTMLElement {
 
     /**

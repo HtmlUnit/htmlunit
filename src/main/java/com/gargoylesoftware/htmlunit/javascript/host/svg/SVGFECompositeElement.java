@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeComposite;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgFeComposite.class,
+@JsxClass(domClasses = SvgFeComposite.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFECompositeElement extends SVGElement {
 

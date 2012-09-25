@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlVideo.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
+@JsxClass(domClasses = HtmlVideo.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
 public class HTMLVideoElement extends HTMLElement {
 
 }

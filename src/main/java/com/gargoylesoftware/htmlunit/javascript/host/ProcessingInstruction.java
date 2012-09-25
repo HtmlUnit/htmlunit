@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = DomProcessingInstruction.class)
+@JsxClass(domClasses = DomProcessingInstruction.class)
 public final class ProcessingInstruction extends Node {
 
     /**

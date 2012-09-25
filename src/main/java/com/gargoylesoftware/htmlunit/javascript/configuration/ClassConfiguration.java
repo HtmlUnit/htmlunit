@@ -41,17 +41,17 @@ public final class ClassConfiguration {
      * The constructor method in the {@link #hostClass_}
      */
     private Method jsConstructor_;
-    private final String domClassName_;
+    private final Class<?>[] domClasses_;
     private final boolean jsObject_;
 
     /**
      * Constructor.
      *
      * @param hostClass - the class implementing this functionality
-     * @param domClassName the name of the DOM class that this object supports
+     * @param domClasses the DOM classes that this object supports
      * @param jsObject boolean flag for if this object is a JavaScript object
      */
-    public ClassConfiguration(final Class<? extends SimpleScriptable> hostClass, final String domClassName,
+    public ClassConfiguration(final Class<? extends SimpleScriptable> hostClass, final Class<?>[] domClasses,
             final boolean jsObject) {
         final Class<?> superClass = hostClass.getSuperclass();
         if (superClass != SimpleScriptable.class) {
@@ -62,12 +62,7 @@ public final class ClassConfiguration {
         }
         hostClass_ = hostClass;
         jsObject_ = jsObject;
-        if (domClassName != null && !domClassName.isEmpty()) {
-            domClassName_ = domClassName;
-        }
-        else {
-            domClassName_ = null;
-        }
+        domClasses_ = domClasses;
     }
 
     void setJSConstructor(final Method jsConstructor) {
@@ -280,10 +275,12 @@ public final class ClassConfiguration {
     }
 
     /**
-     * @return the DOM class name
+     * Returns the DOM classes.
+     *
+     * @return the DOM classes
      */
-    public String getDomClassName() {
-        return domClassName_;
+    public Class<?>[] getDomClasses() {
+        return domClasses_;
     }
 
     /**

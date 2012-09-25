@@ -14,6 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.html.HtmlHeading1;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading2;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading3;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading4;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading5;
+import com.gargoylesoftware.htmlunit.html.HtmlHeading6;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -24,10 +30,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass
+@JsxClass(domClasses = { HtmlHeading1.class, HtmlHeading2.class, HtmlHeading3.class, HtmlHeading4.class,
+        HtmlHeading5.class, HtmlHeading6.class })
 public class HTMLHeadingElement extends HTMLElement {
-    /*    Because it is associated with many HtmlClasses, the one-to-many
-    configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */
 
     /**
      * Creates an instance.

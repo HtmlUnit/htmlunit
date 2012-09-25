@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeDiffuseLighting;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgFeDiffuseLighting.class,
+@JsxClass(domClasses = SvgFeDiffuseLighting.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEDiffuseLightingElement extends SVGElement {
 

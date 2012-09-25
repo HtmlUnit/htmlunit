@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlArea.class)
+@JsxClass(domClasses = HtmlArea.class)
 public class HTMLAreaElement extends HTMLElement {
 
     /**

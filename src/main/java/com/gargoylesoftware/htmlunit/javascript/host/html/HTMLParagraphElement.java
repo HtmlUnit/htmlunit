@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-@JsxClass(domClass = HtmlParagraph.class)
+@JsxClass(domClasses = HtmlParagraph.class)
 public class HTMLParagraphElement extends HTMLElement {
 
     /**

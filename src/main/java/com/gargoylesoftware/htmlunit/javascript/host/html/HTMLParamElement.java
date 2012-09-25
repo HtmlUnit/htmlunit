@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlParameter.class)
+@JsxClass(domClasses = HtmlParameter.class)
 public class HTMLParamElement extends HTMLElement {
 
     /**

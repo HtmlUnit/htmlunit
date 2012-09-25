@@ -111,7 +111,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
  * @author Sudhan Moghe
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlElement.class)
+@JsxClass(domClasses = HtmlElement.class)
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
     private static final Pattern PERCENT_VALUE = Pattern.compile("\\d+%");

@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlSelect.class)
+@JsxClass(domClasses = HtmlSelect.class)
 public class HTMLSelectElement extends FormField {
 
     private HTMLOptionsCollection optionsArray_;

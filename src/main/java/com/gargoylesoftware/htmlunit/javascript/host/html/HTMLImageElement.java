@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlImage.class)
+@JsxClass(domClasses = HtmlImage.class)
 public class HTMLImageElement extends HTMLElement {
     private static final Map<String, String> NORMALIZED_ALIGN_VALUES;
     static {

@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeSpecularLighting;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgFeSpecularLighting.class,
+@JsxClass(domClasses = SvgFeSpecularLighting.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFESpecularLightingElement extends SVGElement {
 

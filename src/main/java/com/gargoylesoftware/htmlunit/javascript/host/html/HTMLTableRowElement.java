@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlTableRow.class)
+@JsxClass(domClasses = HtmlTableRow.class)
 public class HTMLTableRowElement extends HTMLTableComponent {
 
     private HTMLCollection cells_; // has to be a member to have equality (==) working

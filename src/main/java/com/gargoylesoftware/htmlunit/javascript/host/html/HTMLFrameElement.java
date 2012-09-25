@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlFrame.class)
+@JsxClass(domClasses = HtmlFrame.class)
 public class HTMLFrameElement extends HTMLElement {
     /**
      * Creates an instance. A default constructor is required for all JavaScript objects.

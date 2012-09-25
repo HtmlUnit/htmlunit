@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-@JsxClass(domClass = HtmlHtml.class)
+@JsxClass(domClasses = HtmlHtml.class)
 public class HTMLHtmlElement extends HTMLElement {
 
     /**

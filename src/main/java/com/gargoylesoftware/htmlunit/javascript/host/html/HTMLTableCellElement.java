@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
  * @author Sudhan Moghe
  * @author Daniel Gredler
  */
-@JsxClass(domClass = HtmlTableCell.class)
+@JsxClass(domClasses = HtmlTableCell.class)
 public class HTMLTableCellElement extends HTMLTableComponent {
 
     /**

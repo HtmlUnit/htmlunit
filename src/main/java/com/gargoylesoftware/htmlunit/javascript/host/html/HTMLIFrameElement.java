@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
  * @author Chris Erskine
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlInlineFrame.class)
+@JsxClass(domClasses = HtmlInlineFrame.class)
 public class HTMLIFrameElement extends HTMLElement {
 
     /**

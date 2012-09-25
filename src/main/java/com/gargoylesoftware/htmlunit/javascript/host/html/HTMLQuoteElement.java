@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import com.gargoylesoftware.htmlunit.html.HtmlBlockQuote;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -27,10 +29,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass
+@JsxClass(domClasses = { HtmlInlineQuotation.class, HtmlBlockQuote.class })
 public class HTMLQuoteElement extends HTMLElement {
-    /*    Because it is associated with many HtmlClasses, the one-to-many
-    configurations are in JavaScriptConfiguration.getHtmlJavaScriptMapping() */
 
     /**
      * Creates an instance.

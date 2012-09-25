@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlHorizontalRule.class)
+@JsxClass(domClasses = HtmlHorizontalRule.class)
 public class HTMLHRElement extends HTMLElement {
 
     /**

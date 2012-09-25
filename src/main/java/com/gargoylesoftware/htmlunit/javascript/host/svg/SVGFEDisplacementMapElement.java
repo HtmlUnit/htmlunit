@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgFeDisplacementMap;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgFeDisplacementMap.class,
+@JsxClass(domClasses = SvgFeDisplacementMap.class,
     browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class SVGFEDisplacementMapElement extends SVGElement {
 

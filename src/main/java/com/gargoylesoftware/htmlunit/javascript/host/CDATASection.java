@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = DomCDataSection.class)
+@JsxClass(domClasses = DomCDataSection.class)
 public final class CDATASection extends Text {
 
     /**
