@@ -241,7 +241,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    protected Map<String, StyleElement> getStyleMap() {
+    public Map<String, StyleElement> getStyleMap() {
         final Map<String, StyleElement> styleMap = super.getStyleMap();
         if (localModifications_ != null) {
             for (final StyleElement localStyleMod : localModifications_.values()) {
