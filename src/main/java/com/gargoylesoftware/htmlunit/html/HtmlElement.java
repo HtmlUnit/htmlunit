@@ -491,6 +491,8 @@ public abstract class HtmlElement extends DomElement {
      * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>XXXXXXXXXXX</tt>
      * submits the enclosed form.
      *
+     * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
+     *
      * @param keyCode the key code wish to simulate typing
      * @return the page that occupies this window after typing
      * @exception IOException if an IO error occurs
@@ -504,6 +506,8 @@ public abstract class HtmlElement extends DomElement {
      * by this element's window after typing. Note that it may or may not be the same as the original page,
      * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>XXXXXXXXXXX</tt>
      * submits the enclosed form.
+     *
+     * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
      *
      * @param keyCode the key code wish to simulate typing
      * @param shiftKey <tt>true</tt> if SHIFT is pressed during the typing
