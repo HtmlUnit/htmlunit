@@ -142,7 +142,7 @@ public abstract class JQueryTestBase extends WebServerTestCase {
         if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
             final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
             final File f = new File(tmpDir,
-                "jquery" + getVersion() + '_' + getBrowserVersion().getNickname() + "_result.html");
+                "jQuery" + getVersion() + '_' + getBrowserVersion().getNickname() + "_result.html");
             FileUtils.writeStringToFile(f, page.asXml(), "UTF-8");
             LOG.info("Test result for "
                     + getVersion() + '_' + getBrowserVersion().getNickname()

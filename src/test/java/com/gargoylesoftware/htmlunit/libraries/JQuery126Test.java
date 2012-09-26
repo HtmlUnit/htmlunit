@@ -43,7 +43,7 @@ public class JQuery126Test extends JQueryTestBase {
     @Override
     protected String getExpectedPath() throws Exception {
         final String v = getVersion();
-        final String resource = "libraries/jquery/" + v + "/webServer." + getBrowserVersion().getNickname() + ".txt";
+        final String resource = "libraries/jQuery/" + v + "/webServer." + getBrowserVersion().getNickname() + ".txt";
         final URL url = getClass().getClassLoader().getResource(resource);
         return url.toURI().getPath();
     }

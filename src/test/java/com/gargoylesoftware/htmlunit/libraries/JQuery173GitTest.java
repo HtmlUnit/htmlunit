@@ -115,7 +115,7 @@ public class JQuery173GitTest extends WebServerTestCase {
      */
     @Test
     public void aaa_startSesrver() throws Exception {
-        SERVER_ = createWebServer("src/test/resources/libraries/jquery/" + getVersion(), null);
+        SERVER_ = createWebServer("src/test/resources/libraries/jQuery/" + getVersion(), null);
         WEBCLIENT_ = getWebClient();
     }
 
