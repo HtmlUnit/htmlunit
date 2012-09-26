@@ -54,7 +54,7 @@ public class JQuery126LocalTest extends JQueryTestBase {
     @Override
     protected String getUrl() {
         final String v = getVersion();
-        return getClass().getClassLoader().getResource("libraries/jquery/" + v + "/test/index.html").toExternalForm();
+        return getClass().getClassLoader().getResource("libraries/jQuery/" + v + "/test/index.html").toExternalForm();
     }
 
     /**

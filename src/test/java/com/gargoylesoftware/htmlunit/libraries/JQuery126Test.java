@@ -63,7 +63,7 @@ public class JQuery126Test extends JQueryTestBase {
     @NotYetImplemented({ IE8 }) // IE8 needs the expectation file
     @Tries(3)
     public void test() throws Exception {
-        startWebServer("src/test/resources/libraries/jquery/" + getVersion());
+        startWebServer("src/test/resources/libraries/jQuery/" + getVersion());
         runTest();
     }
 
