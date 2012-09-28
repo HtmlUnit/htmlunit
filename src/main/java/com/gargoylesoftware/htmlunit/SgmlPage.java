@@ -204,7 +204,11 @@ public abstract class SgmlPage extends DomNode implements Page, Document {
      */
     @Override
     public String asXml() {
-        return getDocumentElement().asXml();
+        final DomElement documentElement = getDocumentElement();
+        if (documentElement == null) {
+            return "";
+        }
+        return documentElement.asXml();
     }
 
     /**

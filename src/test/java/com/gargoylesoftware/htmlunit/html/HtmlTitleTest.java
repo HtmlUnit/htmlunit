@@ -136,7 +136,7 @@ public class HtmlTitleTest extends SimpleWebTestCase {
     }
 
     /**
-     * As of WebDriver 2.25.0, this can't be run with FirefoxDriver following exception occurs:
+     * As of WebDriver 2.25.0, this can't be run with FirefoxDriver as following exception occurs:
      * org.openqa.selenium.WebDriverException: waiting for doc.body failed.
      * @throws Exception if the test fails
      */
@@ -155,6 +155,7 @@ public class HtmlTitleTest extends SimpleWebTestCase {
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        final HtmlPage page = loadPageWithAlerts(html);
+        page.asXml(); // ensure that no NPE occurs here now
     }
 }
