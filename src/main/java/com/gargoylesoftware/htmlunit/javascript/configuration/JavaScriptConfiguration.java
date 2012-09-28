@@ -384,7 +384,18 @@ public final class JavaScriptConfiguration {
             final BrowserVersion browser) {
         if (browser != null) {
             final JsxClass jsxClass = klass.getAnnotation(JsxClass.class);
-            if (jsxClass != null && isSupported(jsxClass.browsers(), browser)) {
+            final String expectedBrowserName;
+            if (browser.isIE()) {
+                expectedBrowserName = "IE";
+            }
+            else if (browser.isFirefox()) {
+                expectedBrowserName = "FF";
+            }
+            else {
+                expectedBrowserName = "CHROME";
+            }
+            final float browserVersionNumeric = browser.getBrowserVersionNumeric();
+            if (jsxClass != null && isSupported(jsxClass.browsers(), expectedBrowserName, browserVersionNumeric)) {
                 final String hostClassName = klass.getName();
 
                 final Class<?>[] domClasses = jsxClass.domClasses();
@@ -400,7 +411,7 @@ public final class JavaScriptConfiguration {
                     for (final Annotation annotation : method.getAnnotations()) {
                         if (annotation instanceof JsxGetter) {
                             final JsxGetter jsxGetter = (JsxGetter) annotation;
-                            if (isSupported(jsxGetter.value(), browser)) {
+                            if (isSupported(jsxGetter.value(), expectedBrowserName, browserVersionNumeric)) {
                                 String property;
                                 if (jsxGetter.propertyName().isEmpty()) {
                                     property = method.getName().substring(3);
@@ -414,7 +425,7 @@ public final class JavaScriptConfiguration {
                         }
                         else if (annotation instanceof JsxSetter) {
                             final JsxSetter jsxSetter = (JsxSetter) annotation;
-                            if (isSupported(jsxSetter.value(), browser)) {
+                            if (isSupported(jsxSetter.value(), expectedBrowserName, browserVersionNumeric)) {
                                 String property;
                                 if (jsxSetter.propertyName().isEmpty()) {
                                     property = method.getName().substring(3);
@@ -427,7 +438,8 @@ public final class JavaScriptConfiguration {
                             }
                         }
                         else if (annotation instanceof JsxFunction) {
-                            if (isSupported(((JsxFunction) annotation).value(), browser)) {
+                            if (isSupported(((JsxFunction) annotation).value(),
+                                    expectedBrowserName, browserVersionNumeric)) {
                                 classConfiguration.addFunction(method);
                             }
                         }
@@ -438,7 +450,8 @@ public final class JavaScriptConfiguration {
                 }
                 for (final Field field : classConfiguration.getHostClass().getDeclaredFields()) {
                     final JsxConstant jsxConstant = field.getAnnotation(JsxConstant.class);
-                    if (jsxConstant != null && isSupported(jsxConstant.value(), browser)) {
+                    if (jsxConstant != null
+                            && isSupported(jsxConstant.value(), expectedBrowserName, browserVersionNumeric)) {
                         classConfiguration.addConstant(field.getName());
                     }
                 }
@@ -452,21 +465,12 @@ public final class JavaScriptConfiguration {
         return null;
     }
 
-    private static boolean isSupported(final WebBrowser[] browsers, final BrowserVersion browserVersion) {
+    private static boolean isSupported(final WebBrowser[] browsers, final String expectedBrowserName,
+            final float expectedVersionNumeric) {
         for (final WebBrowser browser : browsers) {
-            final String expectedBrowserName;
-            if (browserVersion.isIE()) {
-                expectedBrowserName = "IE";
-            }
-            else if (browserVersion.isFirefox()) {
-                expectedBrowserName = "FF";
-            }
-            else {
-                expectedBrowserName = "CHROME";
-            }
             if (browser.value().name().equals(expectedBrowserName)
-                    && browser.minVersion() <= browserVersion.getBrowserVersionNumeric()
-                    && browser.maxVersion() >= browserVersion.getBrowserVersionNumeric()) {
+                    && browser.minVersion() <= expectedVersionNumeric
+                    && browser.maxVersion() >= expectedVersionNumeric) {
                 return true;
             }
         }
