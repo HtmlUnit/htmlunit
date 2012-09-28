@@ -1,1 +1,0 @@
-You can add "php-cgi.exe" to this directory and re-deploy your web application.
