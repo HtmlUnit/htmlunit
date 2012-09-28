@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
@@ -132,5 +133,28 @@ public class HtmlTitleTest extends SimpleWebTestCase {
         assertEquals("Title", page.getTitleText());
         final MockWebConnection conn = (MockWebConnection) page.getWebClient().getWebConnection();
         assertEquals(1, conn.getRequestCount());
+    }
+
+    /**
+     * As of WebDriver 2.25.0, this can't be run with FirefoxDriver following exception occurs:
+     * org.openqa.selenium.WebDriverException: waiting for doc.body failed.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void titleAfterDeleteDocumentElement() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    document.documentElement.parentNode.removeChild(document.documentElement);"
+            + "    alert(document.title);\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
     }
 }

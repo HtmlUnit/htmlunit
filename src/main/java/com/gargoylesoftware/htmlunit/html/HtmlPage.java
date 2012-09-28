@@ -1202,6 +1202,9 @@ public class HtmlPage extends SgmlPage {
      * @return <code>null</code> if no child found
      */
     private DomElement getFirstChildElement(final DomElement startElement, final Class<?> clazz) {
+        if (startElement == null) {
+            return null;
+        }
         for (final DomElement element : startElement.getChildElements()) {
             if (clazz.isInstance(element)) {
                 return element;
@@ -1241,17 +1244,8 @@ public class HtmlPage extends SgmlPage {
         final Window jsWindow = (Window) window.getScriptObject();
         if (jsWindow != null) {
             final HtmlElement element = getDocumentElement();
-            if (element == null) { // should never occur but see bug 3039471
-                // try to give more information as we currently don't know when and why it occurs
-                final StringBuilder sb = new StringBuilder("No document element (");
-                sb.append(getUrl()).append(")\n");
-                try {
-                    sb.append(asXml());
-                }
-                catch (final Exception e) {
-                    // ignore
-                }
-                throw new NullPointerException(sb.toString());
+            if (element == null) { // happens for instance if document.documentElement has been removed from parent
+                return true;
             }
             final Event event = new Event(element, eventType);
             element.fireEvent(event);
@@ -2006,6 +2000,9 @@ public class HtmlPage extends SgmlPage {
      * @return a list of {@link HtmlMeta}
      */
     protected List<HtmlMeta> getMetaTags(final String httpEquiv) {
+        if (getDocumentElement() == null) {
+            return Collections.emptyList(); // weird case, for instance if document.documentElement has been removed
+        }
         final String nameLC = httpEquiv.toLowerCase();
         final List<HtmlMeta> tags = getDocumentElement().getHtmlElementsByTagName("meta");
         for (final Iterator<HtmlMeta> iter = tags.iterator(); iter.hasNext();) {
