@@ -2,6 +2,25 @@ This directory contains the resources necessary to run the jQuery JavaScript lib
 Each subdirectory corresponds to a specific version of the jQuery library.
 
 -------------------------
+For 1.8.2
+
+Get jQuery sources from https://github.com/jquery/jquery,
+test/qunit from https://github.com/jquery/qunit
+src/sizzle from https://github.com/jquery/sizzle
+
+    - Get JavaBridgeTemplate621.war from php-java-bridge.sourceforge.net
+    - Deploy to a web server
+    - cgi folder is created (e.g. WEB-INF/cgi/x86-windows)
+    - Get php-java-bridge_6.2.1_documentation.zip which contains php-cgi in its JavaBridge.war/WEB-INF/cgi
+    - Add jquery folder to the web app 
+
+    - In WEB-INF/web.xml: remove <welcome-file-list> section
+    - Due to issue mentioned in http://sourceforge.net/mailarchive/message.php?msg_id=29891268
+        - In jquery/test/unit/ajax.js:
+        - Change URL: "data/jsonp.php/??" to "data/jsonp.php"
+        - Change URL: "data/jsonp.php/???json=1" to "data/jsonp.php?json=1" 
+
+-------------------------
 For 1.7.3-git (16 July 2012)
 
 1.7.2 seems to have bigger need for PHP server, that's why git (snapshot) was used.
