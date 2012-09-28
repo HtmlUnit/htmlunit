@@ -24,14 +24,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * An annotation to specify the browsers supported for a {@link com.gargoylesoftware.htmlunit.BrowserVersionFeatures}.
+ * An annotation to mark a feature in {@link com.gargoylesoftware.htmlunit.BrowserVersionFeatures}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface WebBrowsers {
+public @interface BrowserFeature {
 
     /** The {@link WebBrowser}s supported by this feature. */
     WebBrowser[] value() default {

@@ -25,7 +25,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowsers;
+import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
 
 /**
  * Objects of this class represent one specific version of a given browser. Predefined
@@ -245,7 +245,7 @@ public class BrowserVersion implements Serializable {
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
             try {
                 final Field field = BrowserVersionFeatures.class.getField(feature.name());
-                final WebBrowsers webBrowsers = field.getAnnotation(WebBrowsers.class);
+                final BrowserFeature webBrowsers = field.getAnnotation(BrowserFeature.class);
                 if (webBrowsers != null) {
                     for (final WebBrowser browser : webBrowsers.value()) {
                         if (expectedBrowserName.equals(browser.value().name())

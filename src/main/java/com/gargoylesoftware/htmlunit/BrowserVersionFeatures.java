@@ -19,7 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowsers;
+import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
 
 /**
  * Constants of various features of each {@link BrowserVersion}.
@@ -38,73 +38,73 @@ public enum BrowserVersionFeatures {
      * href attribute. Clicking the link in IE force the load of page http://htmlunit.sourceforge.net/test/.
      * In Firefox the URL is unchanged.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     ANCHOR_EMPTY_HREF_NO_FILENAME,
 
     /** Indicates that a blur event should be triggered before an onchange event. */
     BLUR_BEFORE_ONCHANGE,
 
     /** If the "type" attribute of HtmlButton should be evaluated to 'button' if not specified. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     BUTTON_EMPTY_TYPE_BUTTON,
 
     /** Is canvas supported? */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     CANVAS,
 
     /** Indicates that the browser can inherit CSS property values. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     CAN_INHERIT_CSS_PROPERTY_VALUES,
 
     /** Indicates that the default value for height of elements is 15 instead of 20. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     CSS_DEFAULT_ELMENT_HEIGHT_15,
 
     /** Indicates that the default value for height of elements is used instance
      * of the calculated value, if the calculated value is smaller. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN,
 
     /** Indicates that the default value for width is 'auto'. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     CSS_DEFAULT_WIDTH_AUTO,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     CSS_DISPLAY_DEFAULT,
 
     /** Default is 'normal'. */
-    @WebBrowsers(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(FF))
     CSS_FONT_STRECH_DEFAULT_NORMAL,
 
     /** Indicates that the browser can surrounds image url's with quotes. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     CSS_IMAGE_URL_QUOTED,
 
     /** Indicates that only integers are allowed for pixel value. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     CSS_PIXEL_VALUES_INT_ONLY,
 
     /** Indicates that the :lang(..) selector is supported. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     CSS_SELECTOR_LANG,
 
     /**
      * Indicates that the pseudo classes 'root', 'enabled', 'disabled'
      * and 'checked' are supported.
      */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     CSS_SPECIAL_PSEUDO_CLASSES,
 
     /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets
      * you use CSS to attach a script to a specific element in order to implement
      * DHTML (Dynamic HTML) components.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     CSS_SUPPORTS_BEHAVIOR_PROPERTY,
 
     /** Default is 'none'. */
-    @WebBrowsers(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(FF))
     CSS_TEXT_SHADOW_DEFAULT_NONE,
 
     /** Default is 'normal'. */
@@ -114,499 +114,499 @@ public enum BrowserVersionFeatures {
     CSS_WORD_SPACING_DEFAULT_NORMAL,
 
     /** Values for the zIndex are rounded to integer. */
-    @WebBrowsers(@WebBrowser(value = IE, maxVersion = 7))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
     CSS_ZINDEX_ROUNDED,
 
     /** IE uses the type Number for the zIndex Values (instead of String). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     CSS_ZINDEX_TYPE_NUMBER,
 
     /** If values for the zIndex is undefined than set the zindex to the default value. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     CSS_ZINDEX_UNDEFINED_FORCES_RESET,
 
     /** If values for the zIndex is undefined or null than set the zindex throws an error. */
-    @WebBrowsers(@WebBrowser(value = IE, minVersion = 8))
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 8))
     CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR,
 
     /** */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     DIALOGWINDOW_REFERER,
 
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     DISPLAYED_COLLAPSE,
 
     /** */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     DOCTYPE_4_0_TRANSITIONAL_STANDARDS,
 
     /** DOCTYPE is a Comment from JavaScript perspective. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     DOCTYPE_IS_COMMENT,
 
     /** IE removes all child text nodes, but FF preserves the first. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     DOM_NORMALIZE_REMOVE_CHILDREN,
 
     /** Triggers "DOMContentLoaded" event. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_DOM_CONTENT_LOADED,
 
     /** Triggers "input" event. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_INPUT,
 
     /** Triggers "onchange" event handler on losing focus. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     EVENT_ONCHANGE_LOSING_FOCUS,
 
     /** Triggers "onclick" event handler also for the select option. */
-    @WebBrowsers({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO,
 
     /** Triggers "onerror" if external loading of an external javascript failed. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_ONERROR_EXTERNAL_JAVASCRIPT,
 
     /** Triggers "onload" event if external javascript successfully loaded. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_ONLOAD_EXTERNAL_JAVASCRIPT,
 
     /** Triggers "onload" event of the frameset before the one from the frames. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     EVENT_ONLOAD_FRAMESET_FIRST,
 
     /** Triggers "onload" event if an iframe was created by javascript and added to the page. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT,
 
     /** Triggers "onreadystatechange" event. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     EVENT_ONREADY_STATE_CHANGE,
 
     /** Triggers "propertychange" event. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     EVENT_PROPERTY_CHANGE,
 
     /** Indicates that document.execCommand() should throw an exception when called with an illegal command. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     EXECCOMMAND_THROWS_ON_WRONG_COMMAND,
 
     /** */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     FILEINPUT_EMPTY_DEFAULT_VALUE,
 
     /** Indicates if a form field is directly reachable by its new name once this has been changed. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     FORMFIELD_REACHABLE_BY_NEW_NAMES,
 
     /**
      * Special behavior of IE6; the URL submitted by a form with method type 'GET' has
      * a question mark at the end if there are no parameters.
      */
-    @WebBrowsers(@WebBrowser(value = IE, maxVersion = 6))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 6))
     FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK,
 
     /** Form submit is done without the hash part of the form action url. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     FORM_SUBMISSION_URL_WITHOUT_HASH,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_100,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_101,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_102,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_103,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_104,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_105,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_106,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_107,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_108,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_111,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_112,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_113,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_116,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_121,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_124,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_125,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_129,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_13,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_133,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_144,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_146,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_147,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_150,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_155,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_156,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_157,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_158,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_160,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_161,
 
     /** Was originally .isFirefox(). */
     GENERATED_162,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_164,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_165,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_167,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_169,
 
     /** Was originally .isIE(). */
     GENERATED_17,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_170,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_172,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_174,
 
     /** Was originally .isFirefox(). */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_176,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_2,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_21,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_3,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_30,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_31,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_32,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_35,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_37,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_40,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_41,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_42,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_43,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_44,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_45,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_47,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_48,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_49,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_50,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_51,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_53,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_55,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_57,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_59,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_60,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_61,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_63,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_65,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_66,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_69,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_70,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_71,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_72,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_73,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_74,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_75,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_80,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_81,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_85,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_86,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_88,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_90,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_91,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_92,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_93,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_94,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_95,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_96,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_97,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_98,
 
     /** Was originally .isIE(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     GENERATED_99,
 
     /** If the class name is [object GeoGeolocation]. */
-    @WebBrowsers(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(FF))
     GEO_GEOLOCATION,
 
     /** */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
 
     /** Indicates if HTML5 tags source, video and audio are recognized. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTML5_TAGS,
 
     /** */
-    @WebBrowsers(@WebBrowser(value = IE, minVersion = 7))
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 7))
     HTMLABBREVIATED,
 
     /** Indicates that comment nodes should be treated similar to elements, e.g. getElementsByTagName(). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     HTMLCOLLECTION_COMMENT_IS_ELEMENT,
 
     /** Allows multiple elements with the same 'id'. */
-    @WebBrowsers({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLCOLLECTION_IDENTICAL_IDS,
 
     /** Allow detection of object type for collection elements. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     HTMLCOLLECTION_OBJECT_DETECTION,
 
     /**
      * Supports Conditional Comments.
      * @see <a href="http://en.wikipedia.org/wiki/Conditional_comment">Conditional comment</a>
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     HTMLCONDITIONAL_COMMENTS,
 
     /** Do document.bgColor/.alinkColor/.vlinkColor/.linkColor have value by default. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     HTMLDOCUMENT_COLOR,
 
     /** Allows invalid 'align' values. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLELEMENT_ALIGN_INVALID,
 
     /** */
@@ -615,290 +615,290 @@ public enum BrowserVersionFeatures {
     /**
      * Indicates if a self-closing &lt;iframe/&gt; tag should be considered as an opening tag.
      **/
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLIFRAME_IGNORE_SELFCLOSING,
 
     /** */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLIMAGE_NAME_VALUE_PARAMS,
 
     /** */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLINPUT_DEFAULT_IS_CHECKED,
 
     /**
      * Set this property if the browser does NOT
      * support the disabling of an individual option group.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     HTMLOPTIONGROUP_NO_DISABLED,
 
     /** */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN,
 
     /** */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     HTMLOPTION_PREVENT_DISABLED,
 
     /** Un-selecting an option in a (single-value) select causes the first option to become selected. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLOPTION_UNSELECT_SELECTS_FIRST,
 
     /** Set this checked state back to default when added to page (IE). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED_TO_PAGE,
 
     /**
      * Set this property if the script tag supports the
      * types 'application/javascript' and 'application/x-javascript'.
      */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLSCRIPT_APPLICATION_JAVASCRIPT,
 
     /** Runs <script src="javascript:'[code]'">. */
-    @WebBrowsers(@WebBrowser(value = IE, maxVersion = 6))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 6))
     HTMLSCRIPT_SRC_JAVASCRIPT,
 
     /** Trims the value of the type attribute before to verify it. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLSCRIPT_TRIM_TYPE,
 
     /** Do not allow anything in color, but restrict to valid values only. */
-    @WebBrowsers({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 3.6f) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 3.6f) })
     HTML_COLOR_RESTRICT,
 
     /** HTMLCommentElement instead of Comment. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     HTML_COMMENT_ELEMENT,
 
     /** HTMLGenericElement instead of HTMLUnknownElement. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     HTML_GENERIC_ELEMENT,
 
     /** Indicates that "host" HTTP header should be the first. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTTP_HEADER_HOST_FIRST,
 
     /** Indicates that the browser should ignore contents of inner head elements. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     IGNORE_CONTENTS_OF_INNER_HEAD,
 
     /**
      * The function addEventListener or attachEvent(IE) accepts null as listener
      * instead of throwing an exception.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_ADD_EVENT_LISTENER_ACCEPTS_NULL_LISTENER,
 
     /** Setting the property align to arbitrary values is allowed. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_ALIGN_ACCEPTS_ARBITRARY_VALUES,
 
     /** Setting the property align of an input element ignores the value
      * if the value is one of center, justify, left or right.
      * For all other values an exception is still thrown.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_ALIGN_FOR_INPUT_IGNORES_VALUES,
 
     /**
      * Javascript property anchors includes all anchors with a name or an id property.
      * If not set name property is required
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_ANCHORS_REQUIRES_NAME_OR_ID,
 
     /** Indicates that the appendChild call create a DocumentFragment to be
      * the parentNode's parentNode if this was null. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT_IF_PARENT_IS_NULL,
 
     /** Indicates that the appendChild call throws no exception
      * if the provided note cannot be inserted. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE,
 
     /** Indicates that the class name of "arguments" object is "Object". */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_ARGUMENTS_IS_OBJECT,
 
     /** Indicates that the "arguments" object is read-only. */
-    @WebBrowsers(@WebBrowser(CHROME))
+    @BrowserFeature(@WebBrowser(CHROME))
     JS_ARGUMENTS_IS_READ_ONLY,
 
     /** Indicates that the attributes map contains empty attr
      * objects for all properties of the object (like IE does). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES,
 
     /** firstChild and lastChild returns null for Attr (like IE does). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
 
     /** Indicates that the getBoundingClientRect adds an offset of 2. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_BOUNDING_CLIENT_RECT_OFFSET_TWO,
 
     /** Indicates that the browser emulates the char attribute. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_CHAR_EMULATED,
 
     /** Indicates that the browser emulates the charOff attribute. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_CHAR_OFF_EMULATED,
 
     /** Indicates that the browser tries to convert the char attribute values
      * to integer. */
-    @WebBrowsers(@WebBrowser(value = FF, maxVersion = 3.6f))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
     JS_CHAR_OFF_INTEGER,
 
     /** Indicates that the browser returns a dot if the char attribute is not defined. */
-    @WebBrowsers(@WebBrowser(value = FF, maxVersion = 3.6f))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
     JS_CHAR_UNDEFINED_DOT,
 
     /** Indicates that the clientLeft and clientTop returning zero in all cases. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_CLIENT_LEFT_TOP_ZERO,
 
     /** Indicates that the cloneNode call copies all event listeners. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_CLONE_NODE_COPIES_EVENT_LISTENERS,
 
     /** */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_DEFERRED,
 
     /** Javascript doctyp.entities returns an empty string (IE). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_DOCTYPE_ENTITIES_EMPTY_STRING,
 
     /** Javascript doctyp.entities returns null (FF10). */
-    @WebBrowsers(@WebBrowser(value = FF, maxVersion = 3.6f))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
     JS_DOCTYPE_ENTITIES_NULL,
 
     /** Javascript doctyp.internalSubset returns an empty string (IE). */
     JS_DOCTYPE_INTERNALSUBSET_EMPTY_STRING,
 
     /** Javascript doctyp.notations returns an empty string (IE). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_DOCTYPE_NOTATIONS_EMPTY_STRING,
 
     /** Javascript doctyp.notations returns null (FF10). */
-    @WebBrowsers(@WebBrowser(value = FF, maxVersion = 3.6f))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
     JS_DOCTYPE_NOTATIONS_NULL,
 
     /** Javascript document.appendChild is allowed (IE). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_APPEND_CHILD_SUPPORTED,
 
     /** Javascript function document.createElement can process html code.
      * e.g. document.createElement("<INPUT TYPE='RADIO' NAME='RADIOTEST' VALUE='First Choice'>")
      * @see "http://msdn.microsoft.com/en-us/library/ms536389%28v=VS.85%29.aspx"
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX,
 
     /** Javascript document.doctype returns null (IE). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_DOCTYPE_NULL,
 
     /** Javascript property document.domain is lowercase. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_DOCUMENT_DOMAIN_IS_LOWERCASE,
 
     /** Javascript document.forms(...) supported (IE). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,
 
     /** Javascript property document.domain
      * doesn't allow to set domain of about:blank.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
 
     /** Enables Javascript ECMA5 functions (like Date.toISOString or Date.toJSON).
      */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_ECMA5_FUNCTIONS,
 
     /** Javascript calculation of element clientHeight/Width does not
      * include the padding.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_ELEMENT_EXTENT_WITHOUT_PADDING,
 
     /** Indicates that "eval" function should have access to the local function scope. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_EVAL_LOCAL_SCOPE,
 
     /** Javascript event aborted check is based on the event handler return value (IE);
      * (standards-compliant browsers doing this via preventDefault).
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE,
 
     /** Javascript event handlers declared as property on a node
      * don't receive the event as argument.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_EVENT_HANDLER_DECLARED_AS_PROPERTY_DONT_RECEIVE_EVENT,
 
     /** Do not send parameter in event handlers. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_EVENT_NO_PARAMETER,
 
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
-    @WebBrowsers({ @WebBrowser(value = IE, maxVersion = 6),
+    @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 6),
         @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW,
 
     /** Indicates if Function.bind is available. */
-    @WebBrowsers({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
     JS_FUNCTION_BIND,
 
     /** Indicates if the method toSource exists on the native objects. */
-    @WebBrowsers(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(FF))
     JS_FUNCTION_TOSOURCE,
 
     /** Indicates that the getAttribute method supports ie style flags. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_GET_ATTRIBUTE_SUPPORTS_FLAGS,
 
     /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB,
 
     /** Javascript function getElementById calls getElementByName if nothing found by id, only in quirks mode. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE,
 
     /** Javascript function getElementById compares the id's case sensitive. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
 
     /** Indicates that objects with prototype property available in window scope; Firefox does this. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE,
 
     /** Javascript method getHeight of IFrames may return negative values. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_IFRAME_GET_HEIGHT_NEGATIVE_VALUES,
 
     /** Javascript method getWidth of IFrames may return negative values. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_IFRAME_GET_WIDTH_NEGATIVE_VALUES,
 
     /** IE ignores the last line containing uncommented. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED,
 
     /** Indicates if multiple spaces are replaced by a single one when accessing innerHTML. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_INNER_HTML_REDUCE_WHITESPACES,
 
     /** Javascript function returning a length (e.g. getWidth) without 'px' at the end. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_LENGTH_WITHOUT_PX,
 
     /**
@@ -907,21 +907,21 @@ public enum BrowserVersionFeatures {
      * for url 'http://localhost/something/#%C3%BC'.<br>
      * IE evaluates to #%C3%BC.
      */
-    @WebBrowsers({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_LOCATION_HASH_IS_DECODED,
 
     /**
      * Indicates if the String representation of a native function begins and ends with a \n.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
 
     /** If <tt>true</tt>, Date.prototype.getYear subtracts 1900 only if 1900 <= date < 2000. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_NON_ECMA_GET_YEAR,
 
     /** "[object]" in quirks mode. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_OBJECT_IN_QUIRKS_MODE,
 
     /** Evaluates to "[object Element]". */
@@ -930,70 +930,70 @@ public enum BrowserVersionFeatures {
     /** Indicates that someObj.offsetParent throws an exception when called on an object that is not yet attached
      *  to the page's DOM.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_OFFSET_PARENT_THROWS_NOT_ATTACHED,
 
     /** Setting the property opacity of an css style declaration to arbitrary values is allowed.
      * FF accepts only valid floats.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_OPACITY_ACCEPTS_ARBITRARY_VALUES,
 
     /** If <tt>true</tt>, then treat <tt>__parent__</tt> and <tt>__proto__</tt> as special properties. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_PARENT_PROTO_PROPERTIES,
 
     /** Javascript script.text(...) reexecutes the script (IE). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT,
 
     /** Always execute the script if IE;
      *  in FF, only execute if the old "src" attribute was undefined
      *  and there was no inline code.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE,
 
     /** Javascript script.appendChild throws an error (IE6-IE8). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION,
 
     /** Javascript script.insertBefore throws an error (IE6-IE8). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION,
 
     /** Javascript script tags supports the 'for' and the 'event'
      * attribute (IE).
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_SCRIPT_SUPPORTS_FOR_AND_EVENT,
 
     /** Javascript script object supports the onreadystatechange event (IE). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE,
 
     /** Javascript selectorText property returns selectors in uppercase. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_SELECTOR_TEXT_UPPERCASE,
 
     /** Indicates if calling HTMLSelectElement.add the second parameter
      * is treated as index like IE does.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_ADD_SECOND_PARAM_IS_INDEX,
 
     /** Indicates if calling HTMLSelectElement.add without second parameter
      * throws an exception.
      */
-    @WebBrowsers(@WebBrowser(value = FF, maxVersion = 3.6f))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
     JS_SELECT_ADD_SECOND_PARAM_IS_REQUIRED,
 
     /** Indicates if calling HTMLSelectElement.item with a negative value should throw. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_ITEM_THROWS_IF_NEGATIVE,
 
     /** Indicates that select.options.childNodes is a valid property (IE). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY,
 
     /** Indicates if setting an out of bound value for HTMLSelectElement.selectedIndex should throw. */
@@ -1001,95 +1001,95 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that the set attribute method treads the synthetic
      * empty attr for 'class' (IE6/7) as a normal one. */
-    @WebBrowsers(@WebBrowser(value = IE, maxVersion = 7))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
     JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL,
 
     /** IE supports accessing unsupported style elements via getter
      * like val = elem.style.htmlunit;.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_STYLE_UNSUPPORTED_PROPERTY_GETTER,
 
     /** Indicates that table elements supports the values "top", "bottom", "middle", "baseline" (IE). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_VALIGN_SUPPORTS_IE_VALUES,
 
     /** Getting the property cols 20, if the defined value is not convertable into an integer (IE).
      * FF returns -1 in this case.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_TEXT_AREA_COLS_RETURNS_20,
 
     /** Setting the property cols throws an exception, if the provided value is not
      * convertible into an integer (IE).
      * FF ignores the provided value in this case and sets cols to 0.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
 
     /** Changing the opener of an window to something not null
      * is not valid (in FF).
      */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED,
 
     /** Window property not usable as function. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_WINDOW_IS_NOT_A_FUNCTION,
 
     /** Indicates that a xml attribute supports the text property. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_XML_ATTRIBUTE_HAS_TEXT_PROPERTY,
 
     /** Indicates that new XMLSerializer().serializeToString(..) adds the xhtml namespace to the root element. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE,
 
     /** Indicates that new XMLSerializer().serializeToString(..) always appends a CRLF at the end
      * of the produced string. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_XML_SERIALIZER_APPENDS_CRLF,
 
     /** Indicates that new XMLSerializer().serializeToString(..) transforms the node name to upper case. */
     JS_XML_SERIALIZER_NODE_AS_UPPERCASE,
 
     /** Indicates that new XMLSerializer().serializeToString(..) respects the XHTML definition for non empty tags. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_XML_SERIALIZER_NON_EMPTY_TAGS,
 
     /** Indicates that the browser uses the ActiveXObject for implementing XML support (IE). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
 
     /** With special keys [in .type(int)], should we trigger onkeypress event or not. */
-    @WebBrowsers(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(FF))
     KEYBOARD_EVENT_SPECIAL_KEYPRESS,
 
     /** Body of a &lt;noscript&gt; tag is not totally ignored but considered as a (not displayed) text node. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     NOSCRIPT_BODY_AS_TEXT,
 
     /** */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT,
 
     /** Wait for the whole page to load before initializing bodies for frames. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     PAGE_WAIT_LOAD_BEFORE_BODY,
 
     /** Supports 'data' protocol. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     PROTOCOL_DATA,
 
     /** Indicates .querySelectorAll() is not supported in quirks mode. */
-    @WebBrowsers(@WebBrowser(value = IE, minVersion = 8))
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 8))
     QUERYSELECTORALL_NOT_IN_QUIRKS,
 
     /**
      * Indicates that all options of a select are deselected,
      * if the select state is changed for an unknown option.
      */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN,
 
     /**
@@ -1098,106 +1098,106 @@ public enum BrowserVersionFeatures {
      * will be checked,
      * if not supported, an exception will be thrown.
      */
-    @WebBrowsers(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(FF))
     SET_READONLY_PROPERTIES,
 
     /** Indicates [object StorageObsolete] instead of [object Storage]. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     STORAGE_OBSOLETE,
 
     /** Indicates that string.trim(), .trimLeft() and .trimRight() are supported. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     STRING_TRIM,
 
     /**
      * Indicates that the href property for a &lt;link rel="stylesheet" type="text/css" href="..." /&gt;
      * is the fully qualified URL.
      */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     STYLESHEET_HREF_EXPANDURL,
 
     /** Indicates that the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is "". */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     STYLESHEET_HREF_STYLE_EMPTY,
 
     /** Indicates that the href property for a &lt;style type="text/css"&gt; ... &lt;/style&gt; is null. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     STYLESHEET_HREF_STYLE_NULL,
 
     /** Set the value attribute of a submit input to 'Submit Query' if no value attribute specified. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
 
     /** Indicates if SVG is supported. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     SVG,
 
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     TEXTAREA_CRNL,
 
     /** Indicates that the browser treats "position: fixed" as if it were "position: static". */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     TREATS_POSITION_FIXED_LIKE_POSITION_STATIC,
 
     /**
      * Indicates, that the pathname for the url 'about:blank' is empty;
      * instead of '/blank'.
      */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     URL_ABOUT_BLANK_HAS_EMPTY_PATH,
 
     /**
      * Indicates, that the browser supports username and password as
      * part of the url (e.g. http://john.smith:secret@localhost).
      */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     URL_AUTH_CREDENTIALS,
 
     /** Replace only ' ' with %20 when encode the query part of an url. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     URL_MINIMAL_QUERY_ENCODING,
 
     /** */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     URL_MISSING_SLASHES,
 
     /** */
-    @WebBrowsers({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(FF), @WebBrowser(CHROME) })
     WINDOW_ACTIVE_ELEMENT_FOCUSED,
 
     /** XMLHttpRequest does not trigger the error handler (IE). */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     XMLHTTPREQUEST_ERRORHANDLER_NOT_SUPPORTED,
 
     /** Indicates that 'this' corresponds to the handler function when a XMLHttpRequest handler is executed. */
     XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION,
 
     /** Indicates if a same origin check should be skipped. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     XMLHTTPREQUEST_IGNORE_SAME_ORIGIN,
 
     /** Indicates if a request to a about URL is allowed. */
-    @WebBrowsers(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(IE))
     XMLHTTPREQUEST_IGNORE_SAME_ORIGIN_TO_ABOUT,
 
     /** Indicates that the onreadystatechange handler is not triggered for sync requests. */
-    @WebBrowsers({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     XMLHTTPREQUEST_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED,
 
     /** Indicates that the onreadystatechange handler is triggered for sync requests for COMPLETED (4). */
-    @WebBrowsers({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
     XMLHTTPREQUEST_ONREADYSTATECANGE_SYNC_REQUESTS_TRIGGER_COMPLETED,
 
     /** Indicates that the onreadystatechange handler is triggered with an event parameter (FF). */
-    @WebBrowsers(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(FF))
     XMLHTTPREQUEST_ONREADYSTATECHANGE_WITH_EVENT_PARAM,
 
     /** Indicates that the onload handler is not triggered if completed (FF). */
-    @WebBrowsers(@WebBrowser(FF))
+    @BrowserFeature(@WebBrowser(FF))
     XMLHTTPREQUEST_TRIGGER_ONLOAD_ON_COMPLETED,
 
     /** Indicates if XUL is supported (FF only). */
-    @WebBrowsers(@WebBrowser(value = FF, maxVersion = 3.6f))
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
     XUL_SUPPORT;
 }
