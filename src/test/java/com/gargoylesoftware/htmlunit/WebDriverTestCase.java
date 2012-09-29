@@ -44,11 +44,9 @@ import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.DefaultServlet;
+import org.eclipse.jetty.server.handler.HandlerWrapper;
 import org.eclipse.jetty.util.security.Constraint;
-import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
-import org.eclipse.jetty.websocket.WebSocketHandler;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
@@ -352,53 +350,20 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Starts the web server on the default {@link #PORT}.
      * The given resourceBase is used to be the ROOT directory that serves the default context.
-     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
+     * <p><b>Don't forget to stop the returned Server after the test</b>
      *
      * @param resourceBase the base of resources for the default context
      * @param classpath additional classpath entries to add (may be null)
      * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
-     * @param handler websocket handler (can be null)
+     * @param handler wrapper for handler (can be null)
      * @throws Exception if the test fails
      */
     protected void startWebServer(final String resourceBase, final String[] classpath,
-            final Map<String, Class<? extends Servlet>> servlets, final WebSocketHandler handler) throws Exception {
+            final Map<String, Class<? extends Servlet>> servlets, final HandlerWrapper handler) throws Exception {
         stopWebServer();
         LAST_TEST_MockWebConnection_ = Boolean.FALSE;
-        STATIC_SERVER_ = new Server(PORT);
 
-        final WebAppContext context = new WebAppContext();
-        context.setContextPath("/");
-        context.setResourceBase(resourceBase);
-
-        if (servlets != null) {
-            for (final Map.Entry<String, Class<? extends Servlet>> entry : servlets.entrySet()) {
-                final String pathSpec = entry.getKey();
-                final Class<? extends Servlet> servlet = entry.getValue();
-                context.addServlet(servlet, pathSpec);
-
-                // disable defaults if someone likes to register his own root servlet
-                if ("/".equals(pathSpec)) {
-                    context.setDefaultsDescriptor(null);
-                    context.addServlet(DefaultServlet.class, "/favicon.ico");
-                }
-            }
-        }
-
-        final WebAppClassLoader loader = new WebAppClassLoader(context);
-        if (classpath != null) {
-            for (final String path : classpath) {
-                loader.addClassPath(path);
-            }
-        }
-        context.setClassLoader(loader);
-        if (handler != null) {
-            handler.setHandler(context);
-            STATIC_SERVER_.setHandler(handler);
-        }
-        else {
-            STATIC_SERVER_.setHandler(context);
-        }
-        STATIC_SERVER_.start();
+        STATIC_SERVER_ = WebServerTestCase.createWebServer(resourceBase, classpath, servlets, handler);
     }
 
     /**

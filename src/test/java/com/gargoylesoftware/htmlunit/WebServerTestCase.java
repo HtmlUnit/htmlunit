@@ -30,7 +30,9 @@ import org.eclipse.jetty.security.HashLoginService;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.HandlerWrapper;
 import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
@@ -105,21 +107,55 @@ public abstract class WebServerTestCase extends WebTestCase {
     /**
      * This is usually needed if you want to have a running server during many tests invocation.
      *
-     * Creates Starts the web server on the default {@link #PORT}.
+     * Creates and starts a web server on the default {@link #PORT}.
      * The given resourceBase is used to be the ROOT directory that serves the default context.
-     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
+     * <p><b>Don't forget to stop the returned Server after the test</b>
      *
      * @param resourceBase the base of resources for the default context
      * @param classpath additional classpath entries to add (may be null)
      * @return the newly created server
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
-    protected static Server createWebServer(final String resourceBase, final String[] classpath) throws Exception {
+    public static Server createWebServer(final String resourceBase, final String[] classpath) throws Exception {
+        return createWebServer(resourceBase, classpath, null, null);
+    }
+
+    /**
+     * This is usually needed if you want to have a running server during many tests invocation.
+     *
+     * Creates and starts a web server on the default {@link #PORT}.
+     * The given resourceBase is used to be the ROOT directory that serves the default context.
+     * <p><b>Don't forget to stop the returned Server after the test</b>
+     *
+     * @param resourceBase the base of resources for the default context
+     * @param classpath additional classpath entries to add (may be null)
+     * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
+     * @param handler wrapper for handler (can be null)
+     * @return the newly created server
+     * @throws Exception if an error occurs
+     */
+    public static Server createWebServer(final String resourceBase, final String[] classpath,
+            final Map<String, Class<? extends Servlet>> servlets, final HandlerWrapper handler) throws Exception {
         final Server server = new Server(PORT);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
         context.setResourceBase(resourceBase);
+
+        if (servlets != null) {
+            for (final Map.Entry<String, Class<? extends Servlet>> entry : servlets.entrySet()) {
+                final String pathSpec = entry.getKey();
+                final Class<? extends Servlet> servlet = entry.getValue();
+                context.addServlet(servlet, pathSpec);
+
+                // disable defaults if someone likes to register his own root servlet
+                if ("/".equals(pathSpec)) {
+                    context.setDefaultsDescriptor(null);
+                    context.addServlet(DefaultServlet.class, "/favicon.ico");
+                }
+            }
+        }
+
         final WebAppClassLoader loader = new WebAppClassLoader(context);
         if (classpath != null) {
             for (final String path : classpath) {
@@ -127,7 +163,13 @@ public abstract class WebServerTestCase extends WebTestCase {
             }
         }
         context.setClassLoader(loader);
-        server.setHandler(context);
+        if (handler != null) {
+            handler.setHandler(context);
+            server.setHandler(handler);
+        }
+        else {
+            server.setHandler(context);
+        }
         server.start();
         return server;
     }
