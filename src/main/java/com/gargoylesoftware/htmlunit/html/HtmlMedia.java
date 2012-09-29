@@ -19,26 +19,32 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
- * Wrapper for the HTML element "audio".
+ * HTML Media element, e.g. {@link HtmlAudio} or {@link HtmlVideo}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlAudio extends HtmlMedia {
-
-    /** The HTML tag represented by this element. */
-    public static final String TAG_NAME = "audio";
+public class HtmlMedia extends HtmlElement {
 
     /**
-     * Creates an instance of HtmlAudio
+     * Creates an instance.
      *
      * @param namespaceURI the URI that identifies an XML namespace
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element
      * @param attributes the initial attributes
      */
-    HtmlAudio(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlMedia(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
+    }
+
+    /**
+     * Determines whether the specified media type can be played back.
+     * @param type the type
+     * @return "probably", "maybe", or "". The current implementation returns ""
+     */
+    public String canPlayType(final String type) {
+        return "";
     }
 }

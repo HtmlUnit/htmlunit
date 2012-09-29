@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public class HtmlVideo extends HtmlElement {
+public class HtmlVideo extends HtmlMedia {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "video";

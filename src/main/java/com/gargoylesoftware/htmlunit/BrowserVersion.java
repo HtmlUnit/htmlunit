@@ -242,16 +242,16 @@ public class BrowserVersion implements Serializable {
             expectedBrowserName = "CHROME";
         }
 
-        for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
+        for (final BrowserVersionFeatures features : BrowserVersionFeatures.values()) {
             try {
-                final Field field = BrowserVersionFeatures.class.getField(feature.name());
-                final BrowserFeature webBrowsers = field.getAnnotation(BrowserFeature.class);
-                if (webBrowsers != null) {
-                    for (final WebBrowser browser : webBrowsers.value()) {
+                final Field field = BrowserVersionFeatures.class.getField(features.name());
+                final BrowserFeature browserFeature = field.getAnnotation(BrowserFeature.class);
+                if (browserFeature != null) {
+                    for (final WebBrowser browser : browserFeature.value()) {
                         if (expectedBrowserName.equals(browser.value().name())
                                 && browser.minVersion() <= getBrowserVersionNumeric()
                                 && browser.maxVersion() >= getBrowserVersionNumeric()) {
-                            features_.add(feature);
+                            features_.add(features);
                         }
                     }
                 }

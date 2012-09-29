@@ -14,20 +14,26 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-
-import com.gargoylesoftware.htmlunit.html.HtmlVideo;
+import com.gargoylesoftware.htmlunit.html.HtmlMedia;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 /**
- * The JavaScript object "HTMLVideoElement".
+ * The JavaScript object "HTMLMediaElement".
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-@JsxClass(domClasses = HtmlVideo.class, browsers = { @WebBrowser(FF), @WebBrowser(CHROME) })
-public class HTMLVideoElement extends HTMLMediaElement {
+@JsxClass(isJSObject = false)
+public class HTMLMediaElement extends HTMLElement {
 
+    /**
+     * Determines whether the specified media type can be played back.
+     * @param type the type
+     * @return "probably", "maybe", or ""
+     */
+    @JsxFunction
+    public String canPlayType(final String type) {
+        return ((HtmlMedia) getDomNodeOrDie()).canPlayType(type);
+    }
 }
