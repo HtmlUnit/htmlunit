@@ -16,19 +16,11 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
-import org.apache.commons.lang3.ClassUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,10 +28,8 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
  * Tests for {@link SimpleScriptable}.
@@ -82,149 +72,6 @@ public class SimpleScriptableTest extends SimpleWebTestCase {
         Assert.assertSame("focus not changed to textfield1",
                      page.getFormByName("form1").getInputByName("textfield1"),
                      page.getFocusedElement());
-    }
-
-    /**
-     * Test.
-     */
-    @Test
-    public void htmlJavaScriptMapping_AllJavaScriptClassesArePresent() {
-        final JavaScriptConfiguration jsConfiguration = JavaScriptConfiguration.getInstance(getBrowserVersion());
-        final Map<Class<?>, Class<? extends SimpleScriptable>> map = jsConfiguration.getDomJavaScriptMapping();
-        String directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host";
-        final Set<String> names = getFileNames(directoryName.replace('/', File.separatorChar));
-        directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host/html";
-        names.addAll(getFileNames(directoryName.replace('/', File.separatorChar)));
-        directoryName = "../../../src/main/java/com/gargoylesoftware/htmlunit/javascript/host/svg";
-        names.addAll(getFileNames(directoryName.replace('/', File.separatorChar)));
-
-        // Now pull out those names that we know don't have HTML equivalents
-        names.remove("ActiveXObject");
-        names.remove("ActiveXObjectImpl");
-        names.remove("BoxObject");
-        names.remove("ClientRect");
-        names.remove("ClipboardData");
-        names.remove("ComputedCSSStyleDeclaration");
-        names.remove("Console");
-        names.remove("CSSImportRule");
-        names.remove("CSSRule");
-        names.remove("CSSRuleList");
-        names.remove("CSSStyleDeclaration");
-        names.remove("CSSStyleRule");
-        names.remove("Document");
-        names.remove("DocumentProxy");
-        names.remove("DOMException");
-        names.remove("DOMImplementation");
-        names.remove("DOMParser");
-        names.remove("DOMTokenList");
-        names.remove("Enumerator");
-        names.remove("Event");
-        names.remove("EventNode");
-        names.remove("EventHandler");
-        names.remove("EventListenersContainer");
-        names.remove("External");
-        names.remove("FormChild");
-        names.remove("FormField");
-        names.remove("History");
-        names.remove("HashChangeEvent");
-        names.remove("HTMLCollection");
-        names.remove("HTMLCollectionTags");
-        names.remove("HTMLDocument");
-        names.remove("HTMLListElement");
-        names.remove("HTMLOptionsCollection");
-        names.remove("HTMLTableComponent");
-        names.remove("KeyboardEvent");
-        names.remove("JavaScriptBackgroundJob");
-        names.remove("Location");
-        names.remove("MediaList");
-        names.remove("MessageEvent");
-        names.remove("MimeType");
-        names.remove("MimeTypeArray");
-        names.remove("MouseEvent");
-        names.remove("MutationEvent");
-        names.remove("Namespace");
-        names.remove("NamespaceCollection");
-        names.remove("Navigator");
-        names.remove("Node");
-        names.remove("NodeFilter");
-        names.remove("NodeList");
-        names.remove("OfflineResourceList");
-        names.remove("Plugin");
-        names.remove("PluginArray");
-        names.remove("Popup");
-        names.remove("Range");
-        names.remove("RowContainer");
-        names.remove("Screen");
-        names.remove("ScoperFunctionObject");
-        names.remove("Selection");
-        names.remove("SimpleArray");
-        names.remove("StaticNodeList");
-        names.remove("Storage");
-        names.remove("StorageImpl");
-        names.remove("StorageList");
-        names.remove("StringCustom");
-        names.remove("StyleSheetList");
-        names.remove("TextRange");
-        names.remove("TreeWalker");
-        names.remove("UIEvent");
-        names.remove("WebSocket");
-        names.remove("Window");
-        names.remove("WindowProxy");
-        names.remove("XMLDocument");
-        names.remove("XMLDOMParseError");
-        names.remove("XMLHttpRequest");
-        names.remove("XMLSerializer");
-        names.remove("XPathNSResolver");
-        names.remove("XPathResult");
-        names.remove("XSLTProcessor");
-        names.remove("XSLTemplate");
-        names.remove("XMLAttr");
-
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML5_TAGS)) {
-            names.remove("HTMLAudioElement");
-            names.remove("HTMLSourceElement");
-            names.remove("HTMLVideoElement");
-        }
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.CANVAS)) {
-            names.remove("HTMLCanvasElement");
-        }
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.SVG)) {
-            for (final Iterator<String> iterator = names.iterator(); iterator.hasNext();) {
-                final String name = iterator.next();
-                if (name.startsWith("SVG")) {
-                    iterator.remove();
-                }
-            }
-        }
-        final String nickname = getBrowserVersion().getNickname();
-        if ("FF3.6".equals(nickname) || "IE6".equals(nickname) || "IE7".equals(nickname)
-                || "IE8".equals(nickname)) {
-            names.remove("HTMLProgressElement");
-        }
-
-        final Collection<String> hostClassNames = new ArrayList<String>();
-        for (final Class<? extends SimpleScriptable> clazz : map.values()) {
-            hostClassNames.add(ClassUtils.getShortClassName(clazz));
-        }
-        assertEquals(new TreeSet<String>(names).toString(), new TreeSet<String>(hostClassNames).toString());
-    }
-
-    private Set<String> getFileNames(final String directoryName) {
-        File directory = new File("." + File.separatorChar + directoryName);
-        if (!directory.exists()) {
-            directory = new File("./src/main/java/".replace('/', File.separatorChar) + directoryName);
-        }
-        assertTrue("directory exists", directory.exists());
-        assertTrue("is a directory", directory.isDirectory());
-
-        final Set<String> collection = new HashSet<String>();
-
-        for (final String name : directory.list()) {
-            if (name.endsWith(".java")) {
-                collection.add(name.substring(0, name.length() - 5));
-            }
-        }
-        return collection;
     }
 
     /**
