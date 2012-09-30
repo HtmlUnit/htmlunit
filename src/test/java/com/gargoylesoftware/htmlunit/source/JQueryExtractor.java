@@ -30,16 +30,25 @@ import org.apache.commons.io.FileUtils;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 
 /**
- * Extracts the needed expectation from the real browsers output.
+ * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish
+ * all the tests, then select all visible text and copy it to a local file.
  *
  * In IE8 raw file, test outputs should be manually separated in a new line.
+ *
+ * Steps to generate the tests:
+ * <ol>
+ *   <li>Call {@link #extractExpectations(File, File)}, where <tt>input</tt> is the raw file from the browser</li>
+ *   <li>Have a quick look on the output files, and compare them to verify there is only minimal differences</li>
+ *   <li>Rename all outputs to browser names e.g. "ie8.txt", "ff3.6.txt" etc</li>
+ *   <li>Put all outputs in one folder and call {@link #generateTestCases(File)}</li>
+ * </ol>
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
-public final class JQuery173Extractor {
+public final class JQueryExtractor {
 
-    private JQuery173Extractor() {
+    private JQueryExtractor() {
     }
 
     /**
@@ -62,6 +71,15 @@ public final class JQuery173Extractor {
                 writer.write(line + "\n");
                 testNumber++;
             }
+            else if (line.endsWith("Rerun")) {
+                if (line.indexOf("" + testNumber + '.', 4) != -1) {
+                    System.out.println("Incorrect line for test# " + testNumber + ", please correct it manually");
+                    break;
+                }
+                line = "" + testNumber + '.' + ' ' + line.substring(0, line.length() - 5);
+                writer.write(line + "\n");
+                testNumber++;
+            }
         }
         System.out.println("Last output #" + (testNumber - 1));
         reader.close();
@@ -75,7 +93,7 @@ public final class JQuery173Extractor {
      */
     public static void generateTestCases(final File dir) throws IOException {
         final Browser[] browsers = Browser.values();
-        // main browsers regardless of version e.g. FF
+        // main browsers regardless of version e.g. "FF"
         final List<String> mainNames = new ArrayList<String>();
         for (final Browser b : browsers) {
             final String name = b.name();
@@ -101,14 +119,14 @@ public final class JQuery173Extractor {
         for (final File file : dir.listFiles()) {
             if (file.isFile() && file.getName().endsWith(".txt")) {
                 for (final Browser b : browsers) {
-                    if (file.getName().equals(b.name().replace('_', '.') + ".txt")) {
+                    if (file.getName().equalsIgnoreCase(b.name().replace('_', '.') + ".txt")) {
                         browserExpectations.put(b.name(), FileUtils.readLines(file));
                     }
                 }
             }
         }
         int testNumber = 0;
-        while (true) {
+        while (testNumber < 10) {
             final Map<String, String> testExpectation = new HashMap<String, String>();
             for (final Browser b : browsers) {
                 final String name = b.name();

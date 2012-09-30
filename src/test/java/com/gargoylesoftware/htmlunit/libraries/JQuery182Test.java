@@ -129,4 +129,86 @@ public class JQuery182Test extends WebDriverTestCase {
     public void test_1() throws Exception {
         runTest(1);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("core: Basic requirements (0, 7, 7)")
+    public void test_2() throws Exception {
+        runTest(2);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("core: jQuery() (0, 31, 31)")
+    public void test_3() throws Exception {
+        runTest(3);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("core: selector state (0, 31, 31)")
+    public void test_4() throws Exception {
+        runTest(4);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("core: globalEval (0, 3, 3)")
+    public void test_5() throws Exception {
+        runTest(5);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("core: noConflict (0, 7, 7)")
+    public void test_6() throws Exception {
+        runTest(6);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("core: trim (0, 13, 13)")
+    public void test_7() throws Exception {
+        runTest(7);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("core: type (0, 23, 23)")
+    public void test_8() throws Exception {
+        runTest(8);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("core: isPlainObject (0, 15, 15)")
+    public void test_9() throws Exception {
+        runTest(9);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("core: isFunction (0, 19, 19)")
+    public void test_10() throws Exception {
+        runTest(10);
+    }
+
 }
