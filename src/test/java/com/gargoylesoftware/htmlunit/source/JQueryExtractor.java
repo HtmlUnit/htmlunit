@@ -126,7 +126,7 @@ public final class JQueryExtractor {
             }
         }
         int testNumber = 0;
-        while (testNumber < 10) {
+        while (true) {
             final Map<String, String> testExpectation = new HashMap<String, String>();
             for (final Browser b : browsers) {
                 final String name = b.name();
@@ -197,7 +197,7 @@ public final class JQueryExtractor {
                 }
             }
             System.out.println(")");
-            if (browsers.length - 1 > testExpectation.size()) {
+            if (browsers.length - mainNames.size() - 1 > testExpectation.size()) {
                 //there are @NYI
                 System.out.print("    @NotYetImplemented({ ");
                 boolean first = true;
