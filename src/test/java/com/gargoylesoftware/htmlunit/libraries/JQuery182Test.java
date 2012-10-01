@@ -571,4 +571,454 @@ public class JQuery182Test extends WebDriverTestCase {
         runTest(50);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"once\": true } ) - filter (0, 20, 20)")
+    public void test_51() throws Exception {
+        runTest(51);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"memory\" ) - no filter (0, 20, 20)")
+    public void test_52() throws Exception {
+        runTest(52);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true } ) - no filter (0, 20, 20)")
+    public void test_53() throws Exception {
+        runTest(53);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"memory\" ) - filter (0, 20, 20)")
+    public void test_54() throws Exception {
+        runTest(54);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true } ) - filter (0, 20, 20)")
+    public void test_55() throws Exception {
+        runTest(55);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"unique\" ) - no filter (0, 20, 20)")
+    public void test_56() throws Exception {
+        runTest(56);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"unique\": true } ) - no filter (0, 20, 20)")
+    public void test_57() throws Exception {
+        runTest(57);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"unique\" ) - filter (0, 20, 20)")
+    public void test_58() throws Exception {
+        runTest(58);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"unique\": true } ) - filter (0, 20, 20)")
+    public void test_59() throws Exception {
+        runTest(59);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"stopOnFalse\" ) - no filter (0, 20, 20)")
+    public void test_60() throws Exception {
+        runTest(60);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"stopOnFalse\": true } ) - no filter (0, 20, 20)")
+    public void test_61() throws Exception {
+        runTest(61);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"stopOnFalse\" ) - filter (0, 20, 20)")
+    public void test_62() throws Exception {
+        runTest(62);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"stopOnFalse\": true } ) - filter (0, 20, 20)")
+    public void test_63() throws Exception {
+        runTest(63);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"once memory\" ) - no filter (0, 20, 20)")
+    public void test_64() throws Exception {
+        runTest(64);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"memory\": true } ) - no filter (0, 20, 20)")
+    public void test_65() throws Exception {
+        runTest(65);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"once memory\" ) - filter (0, 20, 20)")
+    public void test_66() throws Exception {
+        runTest(66);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"memory\": true } ) - filter (0, 20, 20)")
+    public void test_67() throws Exception {
+        runTest(67);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"once unique\" ) - no filter (0, 20, 20)")
+    public void test_68() throws Exception {
+        runTest(68);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"unique\": true } ) - no filter (0, 20, 20)")
+    public void test_69() throws Exception {
+        runTest(69);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"once unique\" ) - filter (0, 20, 20)")
+    public void test_70() throws Exception {
+        runTest(70);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"unique\": true } ) - filter (0, 20, 20)")
+    public void test_71() throws Exception {
+        runTest(71);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"once stopOnFalse\" ) - no filter (0, 20, 20)")
+    public void test_72() throws Exception {
+        runTest(72);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"stopOnFalse\": true } ) - no filter (0, 20, 20)")
+    public void test_73() throws Exception {
+        runTest(73);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"once stopOnFalse\" ) - filter (0, 20, 20)")
+    public void test_74() throws Exception {
+        runTest(74);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"once\": true, \"stopOnFalse\": true } ) - filter (0, 20, 20)")
+    public void test_75() throws Exception {
+        runTest(75);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"memory unique\" ) - no filter (0, 20, 20)")
+    public void test_76() throws Exception {
+        runTest(76);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true, \"unique\": true } ) - no filter (0, 20, 20)")
+    public void test_77() throws Exception {
+        runTest(77);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"memory unique\" ) - filter (0, 20, 20)")
+    public void test_78() throws Exception {
+        runTest(78);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true, \"unique\": true } ) - filter (0, 20, 20)")
+    public void test_79() throws Exception {
+        runTest(79);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"memory stopOnFalse\" ) - no filter (0, 20, 20)")
+    public void test_80() throws Exception {
+        runTest(80);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true, \"stopOnFalse\": true } ) - no filter (0, 20, 20)")
+    public void test_81() throws Exception {
+        runTest(81);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"memory stopOnFalse\" ) - filter (0, 20, 20)")
+    public void test_82() throws Exception {
+        runTest(82);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"memory\": true, \"stopOnFalse\": true } ) - filter (0, 20, 20)")
+    public void test_83() throws Exception {
+        runTest(83);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"unique stopOnFalse\" ) - no filter (0, 20, 20)")
+    public void test_84() throws Exception {
+        runTest(84);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"unique\": true, \"stopOnFalse\": true } ) - no filter (0, 20, 20)")
+    public void test_85() throws Exception {
+        runTest(85);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( \"unique stopOnFalse\" ) - filter (0, 20, 20)")
+    public void test_86() throws Exception {
+        runTest(86);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( { \"unique\": true, \"stopOnFalse\": true } ) - filter (0, 20, 20)")
+    public void test_87() throws Exception {
+        runTest(87);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks( options ) - options are copied (0, 1, 1)")
+    public void test_88() throws Exception {
+        runTest(88);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks.fireWith - arguments are copied (0, 1, 1)")
+    public void test_89() throws Exception {
+        runTest(89);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks.remove - should remove all instances (0, 1, 1)")
+    public void test_90() throws Exception {
+        runTest(90);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("callbacks: jQuery.Callbacks() - adding a string doesn't cause a stack overflow (0, 1, 1)")
+    public void test_91() throws Exception {
+        runTest(91);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("deferred: jQuery.Deferred (0, 23, 23)")
+    public void test_92() throws Exception {
+        runTest(92);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("deferred: jQuery.Deferred - new operator (0, 23, 23)")
+    public void test_93() throws Exception {
+        runTest(93);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("deferred: jQuery.Deferred - chainability (0, 10, 10)")
+    public void test_94() throws Exception {
+        runTest(94);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("deferred: jQuery.Deferred.then - filtering (done) (0, 4, 4)")
+    public void test_95() throws Exception {
+        runTest(95);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("deferred: jQuery.Deferred.then - filtering (fail) (0, 4, 4)")
+    public void test_96() throws Exception {
+        runTest(96);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("deferred: jQuery.Deferred.then - filtering (progress) (0, 3, 3)")
+    public void test_97() throws Exception {
+        runTest(97);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("deferred: jQuery.Deferred.then - deferred (done) (0, 3, 3)")
+    public void test_98() throws Exception {
+        runTest(98);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("deferred: jQuery.Deferred.then - deferred (fail) (0, 3, 3)")
+    public void test_99() throws Exception {
+        runTest(99);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("deferred: jQuery.Deferred.then - deferred (progress) (0, 3, 3)")
+    public void test_100() throws Exception {
+        runTest(100);
+    }
+
 }
