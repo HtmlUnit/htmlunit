@@ -341,7 +341,7 @@ public class JavaScriptEngine {
      * @param config the configuration for the object
      * @param scriptable the object to configure
      */
-    private void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
+    private void configureConstantsPropertiesAndFunctions(final ClassConfiguration config, 
             final ScriptableObject scriptable) {
 
         // the constants
@@ -354,9 +354,12 @@ public class JavaScriptEngine {
             scriptable.defineProperty(propertyName, null, readMethod, writeMethod, ScriptableObject.EMPTY);
         }
 
-        int attributes = ScriptableObject.EMPTY;
-        if (webClient_.getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_147)) {
+        int attributes;
+        if (webClient_.getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DONT_ENUM_FUNCTIONS)) {
             attributes = ScriptableObject.DONTENUM;
+        }
+        else {
+            attributes = ScriptableObject.EMPTY;
         }
         // the functions
         for (final String functionName : config.functionKeys()) {

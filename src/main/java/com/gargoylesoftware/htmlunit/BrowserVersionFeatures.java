@@ -18,8 +18,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * Constants of various features of each {@link BrowserVersion}.
@@ -295,10 +295,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_146,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_147,
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
@@ -811,14 +807,15 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,
 
-    /** Javascript property document.domain
-     * doesn't allow to set domain of about:blank.
-     */
+    /** Javascript property document.domain doesn't allow to set domain of about:blank. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
 
-    /** Enables Javascript ECMA5 functions (like Date.toISOString or Date.toJSON).
-     */
+    /** Do not enumerate functions, see {@link net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#DONTENUM} */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_DONT_ENUM_FUNCTIONS,
+
+    /** Enables Javascript ECMA5 functions (like Date.toISOString or Date.toJSON). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_ECMA5_FUNCTIONS,
 
