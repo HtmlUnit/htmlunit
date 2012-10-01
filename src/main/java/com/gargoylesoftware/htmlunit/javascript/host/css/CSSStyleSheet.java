@@ -290,16 +290,18 @@ public class CSSStyleSheet extends SimpleScriptable {
         }
         catch (final IOException e) {
             // Got a basic IO error; behave nicely.
-            LOG.error("Exception loading " + url, e);
+            LOG.error("IOException loading " + url, e);
             final InputSource source = new InputSource(new StringReader(""));
             sheet = new CSSStyleSheet(element, source, uri);
         }
         catch (final RuntimeException e) {
             // Got something unexpected; we can throw an exception in this case.
+            LOG.error("RuntimeException loading " + url, e);
             throw Context.reportRuntimeError("Exception: " + e);
         }
         catch (final Exception e) {
             // Got something unexpected; we can throw an exception in this case.
+            LOG.error("Exception loading " + url, e);
             throw Context.reportRuntimeError("Exception: " + e);
         }
         return sheet;
