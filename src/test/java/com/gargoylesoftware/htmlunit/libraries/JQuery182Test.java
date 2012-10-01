@@ -31,6 +31,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
@@ -1274,6 +1275,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "data: JSON data- attributes can have newlines (0, 1, 1)",
         CHROME = "data: JSON data- attributes can have newlines (0, 1, 1)",
         IE = "data: Only check element attributes once when calling .data() - #8909 (0, 2, 2)")
+    @Tries(3)
     //needs correct expectations of IE6/IE7
     @NotYetImplemented(IE7)
     public void test_123() throws Exception {

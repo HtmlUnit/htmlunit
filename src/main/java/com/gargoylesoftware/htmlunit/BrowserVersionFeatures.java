@@ -811,7 +811,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
 
-    /** Do not enumerate functions, see {@link net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#DONTENUM} */
+    /** Don't enumerate functions, see {@link net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#DONTENUM}. */
     @BrowserFeature(@WebBrowser(IE))
     JS_DONT_ENUM_FUNCTIONS,
 

@@ -341,7 +341,7 @@ public class JavaScriptEngine {
      * @param config the configuration for the object
      * @param scriptable the object to configure
      */
-    private void configureConstantsPropertiesAndFunctions(final ClassConfiguration config, 
+    private void configureConstantsPropertiesAndFunctions(final ClassConfiguration config,
             final ScriptableObject scriptable) {
 
         // the constants
