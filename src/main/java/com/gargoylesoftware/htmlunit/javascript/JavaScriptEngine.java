@@ -267,8 +267,7 @@ public class JavaScriptEngine {
             removePrototypeProperties(window, "Date", "toISOString", "toJSON");
         }
 
-        // in IE, not all standard methods exists
-        if (browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_146)) {
+        if (!browserVersion.hasFeature(BrowserVersionFeatures.JS_DEFINE_GETTER)) {
             removePrototypeProperties(window, "Object", "__defineGetter__", "__defineSetter__", "__lookupGetter__",
                     "__lookupSetter__");
             removePrototypeProperties(window, "Array", "every", "filter", "forEach", "indexOf", "lastIndexOf", "map",
