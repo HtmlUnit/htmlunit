@@ -105,7 +105,7 @@ public final class JQueryExtractor {
         for (final Browser b : browsers) {
             final String name = b.name();
             for (final String mainName : mainNames) {
-                if (!name.equals(mainName) && mainName.startsWith(name)) {
+                if (!name.equals(mainName) && name.startsWith(mainName)) {
                     List<String> list = browserVersions.get(mainName);
                     if (list == null) {
                         list = new ArrayList<String>();
@@ -126,7 +126,7 @@ public final class JQueryExtractor {
             }
         }
         int testNumber = 0;
-        while (true) {
+        while (testNumber < 150) {
             final Map<String, String> testExpectation = new HashMap<String, String>();
             for (final Browser b : browsers) {
                 final String name = b.name();
@@ -143,7 +143,7 @@ public final class JQueryExtractor {
                 }
             }
             if (testExpectation.isEmpty()) {
-                break;
+                return;
             }
             System.out.println("    /**");
             System.out.println("     * @throws Exception if an error occurs");
@@ -170,6 +170,26 @@ public final class JQueryExtractor {
                 System.out.print("\"" + expectation + '"');
             }
             else {
+                for (final String main : browserVersions.keySet()) {
+                    final List<String> versionList = browserVersions.get(main);
+                    allSame = true;
+                    lastExpect = null;
+                    for (final String version : versionList) {
+                        final String expected = testExpectation.get(version);
+                        if (lastExpect == null) {
+                            lastExpect = expected;
+                        }
+                        else if (!expected.equals(lastExpect)) {
+                            allSame = false;
+                        }
+                    }
+                    if (allSame) {
+                        for (final String version : versionList) {
+                            testExpectation.remove(version);
+                        }
+                        testExpectation.put(main, lastExpect);
+                    }
+                }
                 boolean first = true;
                 boolean longLine = false;
                 for (final String browser : testExpectation.keySet()) {
@@ -183,12 +203,16 @@ public final class JQueryExtractor {
                         }
                     }
                     String expectation = testExpectation.get(browser);
-                    if (expectation.length() > 40) {
-                        expectation = expectation.substring(0, 40) + "\"\n            + \"" + expectation.substring(40);
+                    if (expectation.length() > 100) {
+                        expectation = expectation.substring(0, 100)
+                                + "\"\n            + \"" + expectation.substring(100);
                         longLine = true;
                     }
                     else {
                         longLine = false;
+                    }
+                    if (expectation.length() > 40) {
+                        longLine = true;
                     }
                     System.out.print(browser + " = \"" + expectation + '"');
                     if (first) {
@@ -197,24 +221,6 @@ public final class JQueryExtractor {
                 }
             }
             System.out.println(")");
-            if (browsers.length - mainNames.size() - 1 > testExpectation.size()) {
-                //there are @NYI
-                System.out.print("    @NotYetImplemented({ ");
-                boolean first = true;
-                for (final Browser b : browsers) {
-                    final String name = b.name();
-                    if (!mainNames.contains(name) && !"NONE".equals(name) && !testExpectation.containsKey(name)) {
-                        if (!first) {
-                            System.out.print(", ");
-                        }
-                        System.out.print(name);
-                        if (first) {
-                            first = false;
-                        }
-                    }
-                }
-                System.out.println(" })");
-            }
             System.out.println("    public void test_" + (testNumber + 1) + "() throws Exception {");
             System.out.println("        runTest(" + (testNumber + 1) + ");");
             System.out.println("    }");
@@ -222,4 +228,5 @@ public final class JQueryExtractor {
             testNumber++;
         }
     }
+
 }
