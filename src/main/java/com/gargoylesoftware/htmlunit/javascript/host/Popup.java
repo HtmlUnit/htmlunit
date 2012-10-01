@@ -125,6 +125,11 @@ class PopupPseudoWebWindow implements WebWindow {
     private Object scriptObject_;
     private Page enclosedPage_;
 
+    private int innerHeight_ = 605;
+    private int outerHeight_ = innerHeight_ + 150;
+    private int innerWidth_ = 1256;
+    private int outerWidth_ = innerWidth_ + 8;
+
     PopupPseudoWebWindow(final WebClient webClient) {
         webClient_ = webClient;
         webClient_.initialize(this);
@@ -214,4 +219,69 @@ class PopupPseudoWebWindow implements WebWindow {
     public boolean isClosed() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getInnerWidth() {
+        return innerWidth_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setInnerWidth(final int innerWidth) {
+        innerWidth_ = innerWidth;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getOuterWidth() {
+        return outerWidth_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setOuterWidth(final int outerWidth) {
+        outerWidth_ = outerWidth;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getInnerHeight() {
+        return innerHeight_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setInnerHeight(final int innerHeight) {
+        innerHeight_ = innerHeight;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getOuterHeight() {
+        return outerHeight_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setOuterHeight(final int outerHeight) {
+        outerHeight_ = outerHeight;
+    }
+
 }

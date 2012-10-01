@@ -120,12 +120,6 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     private static final Log LOG = LogFactory.getLog(Window.class);
 
-    /** HtmlUnit's "window" width, in pixels. */
-    public static final int WINDOW_WIDTH = 1256;
-
-    /** HtmlUnit's "window" height, in pixels. */
-    public static final int WINDOW_HEIGHT = 605;
-
     /**
      * The minimum delay that can be used with setInterval() or setTimeout(). Browser minimums are
      * usually in the 10ms to 15ms range, but there's really no reason for us to waste that much time.
@@ -991,7 +985,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public void scrollByPages(final int pages) {
         final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
-            body.setScrollTop(body.getScrollTop() + (WINDOW_HEIGHT * pages));
+            body.setScrollTop(body.getScrollTop() + (getInnerHeight() * pages));
         }
     }
 
@@ -1484,7 +1478,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter(@WebBrowser(FF))
     public int getInnerWidth() {
-        return WINDOW_WIDTH;
+        return getWebWindow().getInnerWidth();
     }
 
     /**
@@ -1494,7 +1488,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter(@WebBrowser(FF))
     public int getOuterWidth() {
-        return WINDOW_WIDTH + 8;
+        return getWebWindow().getOuterWidth();
     }
 
     /**
@@ -1504,7 +1498,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter(@WebBrowser(FF))
     public int getInnerHeight() {
-        return WINDOW_HEIGHT;
+        return getWebWindow().getInnerHeight();
     }
 
     /**
@@ -1514,7 +1508,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter(@WebBrowser(FF))
     public int getOuterHeight() {
-        return WINDOW_HEIGHT + 150;
+        return getWebWindow().getOuterHeight();
     }
 
     /**

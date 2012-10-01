@@ -2400,4 +2400,40 @@ public class WindowTest extends SimpleWebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "10", "20", "30", "40" },
+        IE = { "undefined", "undefined", "undefined", "undefined" })
+    public void mozillaViewportSetters() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + "alert(window.innerWidth);\n"
+                + "alert(window.innerHeight);\n"
+                + "alert(window.outerWidth);\n"
+                + "alert(window.outerHeight);\n"
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final WebClient client = getWebClient();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(html);
+        client.setWebConnection(webConnection);
+
+        final WebWindow topLevelWindow = client.getTopLevelWindows().get(0);
+        topLevelWindow.setInnerWidth(10);
+        topLevelWindow.setInnerHeight(20);
+        topLevelWindow.setOuterWidth(30);
+        topLevelWindow.setOuterHeight(40);
+        client.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
 }

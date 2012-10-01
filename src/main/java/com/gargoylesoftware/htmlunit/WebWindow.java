@@ -121,4 +121,59 @@ public interface WebWindow extends Serializable {
      */
     boolean isClosed();
 
+    /**
+     * Returns the width (in pixels) of the browser window viewport including, if rendered, the vertical scrollbar.
+     * @return the inner width.
+     */
+    int getInnerWidth();
+
+    /**
+     * Sets the width (in pixels) of the browser window viewport including, if rendered, the vertical scrollbar.
+     * @param innerWidth the inner width
+     */
+    void setInnerWidth(final int innerWidth);
+
+    /**
+     * Returns the width of the outside of the browser window.
+     * It represents the width of the whole browser window including sidebar (if expanded),
+     * window chrome and window resizing borders/handles.
+     * @return the outer width
+     */
+    int getOuterWidth();
+
+    /**
+     * Sets the width of the outside of the browser window.
+     * It represents the width of the whole browser window including sidebar (if expanded),
+     * window chrome and window resizing borders/handles.
+     * @param outerWidth the outer width
+     */
+    void setOuterWidth(final int outerWidth);
+
+    /**
+     * Returns the height (in pixels) of the browser window viewport including, if rendered, the horizontal scrollbar.
+     * @return a inner height
+     */
+    int getInnerHeight();
+
+    /**
+     * Sets the height (in pixels) of the browser window viewport including, if rendered, the horizontal scrollbar.
+     * @param innerHeight the inner height
+     */
+    void setInnerHeight(final int innerHeight);
+
+    /**
+     * Returns the height in pixels of the whole browser window.
+     * It represents the height of the whole browser window including sidebar (if expanded),
+     * window chrome and window resizing borders/handles.
+     * @return the outer height
+     */
+    int getOuterHeight();
+
+    /**
+     * Sets the height in pixels of the whole browser window.
+     * It represents the height of the whole browser window including sidebar (if expanded),
+     * window chrome and window resizing borders/handles.
+     * @param outerHeight the outer height
+     */
+    void setOuterHeight(final int outerHeight);
 }

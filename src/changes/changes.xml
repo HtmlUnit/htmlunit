@@ -9,6 +9,9 @@
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
             <action type="add" dev="asashour">
+                JavaScript: WebWindow: add getters and setters for window width and height.
+            </action>
+            <action type="add" dev="asashour">
                 JavaScript: add support for HTMLMediaElement.canPlayType().
             </action>
             <action type="fix" dev="mguillem" issue="3039471">
