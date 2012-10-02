@@ -761,6 +761,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_DEFERRED,
 
+    /** Object prototype supports <tt>__defineGetter__</tt> and similar properties. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    JS_DEFINE_GETTER,
+
     /** Javascript doctyp.entities returns an empty string (IE). */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCTYPE_ENTITIES_EMPTY_STRING,
@@ -908,10 +912,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
-
-    /** Object prototype supports <tt>__defineGetter__</tt> and similar properties. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    JS_DEFINE_GETTER,
 
     /** If <tt>true</tt>, Date.prototype.getYear subtracts 1900 only if 1900 <= date < 2000. */
     @BrowserFeature(@WebBrowser(IE))
