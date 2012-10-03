@@ -29,6 +29,8 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
+import com.gargoylesoftware.htmlunit.javascript.host.ArrayBuffer;
+import com.gargoylesoftware.htmlunit.javascript.host.ArrayBufferView;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.CDATASection;
@@ -53,6 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 import com.gargoylesoftware.htmlunit.javascript.host.FormField;
 import com.gargoylesoftware.htmlunit.javascript.host.HashChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.History;
+import com.gargoylesoftware.htmlunit.javascript.host.Int8Array;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
@@ -260,6 +263,7 @@ public final class JavaScriptConfiguration {
 
     @SuppressWarnings("unchecked")
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
+        ArrayBuffer.class, ArrayBufferView.class,
         Attr.class, ActiveXObject.class, BoxObject.class, CDATASection.class, ClipboardData.class,
         CSSCharsetRule.class, CSSFontFaceRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPrimitiveValue.class,
         CSSRule.class,
@@ -287,7 +291,9 @@ public final class JavaScriptConfiguration {
         HTMLStyleElement.class, HTMLTableCaptionElement.class, HTMLTableCellElement.class, HTMLTableColElement.class,
         HTMLTableComponent.class, HTMLTableElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,
         HTMLTextAreaElement.class, HTMLTitleElement.class, HTMLUListElement.class, HTMLUnknownElement.class,
-        HTMLVideoElement.class, HTMLWBRElement.class, HashChangeEvent.class, History.class, KeyboardEvent.class,
+        HTMLVideoElement.class, HTMLWBRElement.class, HashChangeEvent.class, History.class,
+        Int8Array.class,
+        KeyboardEvent.class,
         Location.class, MediaList.class, MessageEvent.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
         MutationEvent.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class, Navigator.class,
         Node.class, NodeFilter.class, NodeList.class, OfflineResourceList.class,
