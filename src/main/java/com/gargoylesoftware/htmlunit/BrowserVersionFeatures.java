@@ -825,6 +825,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_ELEMENT_EXTENT_WITHOUT_PADDING,
 
+    /** Indicates that 'exception' (technically NativeError) exposes "stack" property. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    JS_ERROR_STACK,
+
     /** Indicates that "eval" function should have access to the local function scope. */
     @BrowserFeature(@WebBrowser(IE))
     JS_EVAL_LOCAL_SCOPE,

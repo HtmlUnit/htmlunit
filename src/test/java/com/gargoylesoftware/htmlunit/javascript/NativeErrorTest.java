@@ -12,42 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.libraries;
-
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+package com.gargoylesoftware.htmlunit.javascript;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests of the source repository of <a href="http://code.google.com/webtoolkit">Google Web Toolkit</a>,
- * which are marked to fail with HtmlUnit.
- *
- * To generate the JavaScript, copy the test case to "Hello" GWT sample, compile it with "-style PRETTY"
- * by modifying "gwtc" target, and run "ant".  In generated ".nocache.js", search for "ie6" or "gecko1_8"
- * to know which JavaScript file corresponds to IE or FF respectively.
+ * Tests for NativeError.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class GWTSourceTest extends WebDriverTestCase {
+public class NativeErrorTest extends WebDriverTestCase {
 
     /**
-     * Test case for
-     * <a href="http://code.google.com/p/google-web-toolkit/source/browse/trunk/user/test/com/google/gwt/core/client/impl/StackTraceCreatorTest.java">StackTraceCreatorTest</a>.
-     *
-     * Test case to be moved to {@link com.gargoylesoftware.htmlunit.javascript.SimpleScriptableTest}
-     *
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(IE)
     @Alerts(IE = "undefined", FF = "true")
     public void stack() throws Exception {
         final String html
