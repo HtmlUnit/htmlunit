@@ -168,42 +168,6 @@
 			<xsl:apply-templates select="//testsuite/testcase[.//failure]"/>
 		</xsl:if>
 
-		<!-- Functional Tests -->
-
-		<!-- functional testing vars -->
-		<xsl:variable name="cases" select="//summary/testresult"/>
-		<xsl:variable name="steps" select="//summary/testresult/results/step"/>
-		<xsl:variable name="passed" select="$cases[@successful='yes']"/>
-		<xsl:variable name="failed" select="$cases[@successful='no']"/>
-
-		<h2>Functional Tests</h2>
-		<p>
-			<xsl:text>Szenarios:&space;</xsl:text>
-			<b>
-				<xsl:value-of select="count($cases)"/>
-			</b>
-			<xsl:text>, passed:&space;</xsl:text>
-			<b>
-				<xsl:value-of select="count($passed)"/>
-			</b>
-			<xsl:text>, failed:&space;</xsl:text>
-			<b>
-				<xsl:value-of select="count($failed)"/>
-			</b>
-			<xsl:text>, including&space;</xsl:text>
-			<b>
-				<xsl:value-of select="count($steps)"/>
-			</b>
-			<xsl:text>&space;single steps.</xsl:text>
-		</p>
-
-		<xsl:call-template name="colorBar">
-			<xsl:with-param name="success.count" select="count($passed)"/>
-			<xsl:with-param name="failed.count" select="count($failed)"/>
-			<xsl:with-param name="total.count" select="count($cases)"/>
-			<xsl:with-param name="tableID">ftests</xsl:with-param>
-		</xsl:call-template>
-
 		<h2>Modifications</h2>
 		<p>
 			<xsl:value-of select="count($modification.list)"/>
