@@ -110,6 +110,27 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
         loadPageWithAlerts(html, new URL("http://www.gargoylesoftware.com/"), -1);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "localhost", "gargoylesoftware.com" })
+    public void domainFromLocalhost() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.domain);\n"
+            + "    document.domain = 'gargoylesoftware.com';\n"
+            + "    alert(document.domain);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        loadPage(getWebClient(), html, collectedAlerts, new URL("http://localhost"));
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
+
   /**
     * @throws Exception if the test fails
     */

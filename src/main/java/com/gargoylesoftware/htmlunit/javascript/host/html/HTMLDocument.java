@@ -1484,8 +1484,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // IE (at least 6) doesn't allow to set domain of about:blank
         if (WebClient.URL_ABOUT_BLANK == getPage().getWebResponse().getWebRequest().getUrl()
             && browserVersion.hasFeature(BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK)) {
-            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from \"about:blank\" to: \""
-                    + newDomain + "\"");
+            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from \""
+                    + WebClient.URL_ABOUT_BLANK + "\" to: \""
+                    + newDomain + "\".");
         }
 
         final String currentDomain = getDomain();
@@ -1493,8 +1494,13 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return;
         }
 
-        if (newDomain.indexOf('.') == -1
-                || !currentDomain.toLowerCase().endsWith("." + newDomain.toLowerCase())) {
+        if (newDomain.indexOf('.') == -1) {
+            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from: \""
+                    + currentDomain + "\" to: \"" + newDomain + "\" (new domain has to contain a dot).");
+        }
+
+        if (currentDomain.indexOf('.') > -1
+                && !currentDomain.toLowerCase().endsWith("." + newDomain.toLowerCase())) {
             throw Context.reportRuntimeError("Illegal domain value, cannot set domain from: \""
                     + currentDomain + "\" to: \"" + newDomain + "\"");
         }
