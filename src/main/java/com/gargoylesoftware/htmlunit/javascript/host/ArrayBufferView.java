@@ -19,9 +19,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -55,8 +58,8 @@ public class ArrayBufferView extends SimpleScriptable {
         else if (object instanceof ArrayBufferView) {
             constructor((ArrayBufferView) object);
         }
-        else if (object instanceof ArrayBufferView) {
-            constructor((ArrayBuffer) object, byteOffset, length);
+        else if (object instanceof ArrayBuffer) {
+            constructorAll((ArrayBuffer) object, (Integer) byteOffset, (Integer) length);
         }
         else {
             Context.reportRuntimeError("Invalid type " + object.getClass().getName());
@@ -71,24 +74,21 @@ public class ArrayBufferView extends SimpleScriptable {
     private void constructor(final NativeArray array) {
         final int length = (int) array.getLength();
         initBuffer(length);
-        for (int i = 0; i < length; i++) {
-            buffer_.setByte(i, (Byte) ensureType(array.get(i)));
-        }
+        set(array, 0);
         byteLength_ = length;
     }
 
     private void constructor(final ArrayBufferView array) {
         final int length = array.getLength();
         initBuffer(length);
-        for (int i = 0; i < length; i++) {
-            buffer_.setByte(i, (Byte) ensureType(array.get(i)));
-        }
+        set(array, 0);
         byteLength_ = length;
     }
 
-    private void constructor(final ArrayBuffer buffer, final Object byteOffset, final Object length) {
-        final int byteLength = buffer.getByteLength();
-        initBuffer(byteLength);
+    private void constructorAll(final ArrayBuffer buffer, final int byteOffset, final int length) {
+        buffer_ = buffer;
+        byteOffset_ = byteOffset;
+        byteLength_ = length;
     }
 
     private void initBuffer(final int length) {
@@ -127,16 +127,40 @@ public class ArrayBufferView extends SimpleScriptable {
 
     /**
      * Returns the offset, in bytes, to the first byte of the view within the {@link ArrayBuffer}.
-     * @return the offet
+     * @return the offset
      */
     @JsxGetter
     public int getByteOffset() {
         return byteOffset_;
     }
 
+    /**
+     * Sets multiple values in the typed array, reading input values from a specified array.
+     * @param sourceArray the source array
+     * @param offset the offset into the target array at which to begin writing values from the source one
+     */
+    @JsxFunction
+    public void set(final ScriptableObject sourceArray, final int offset) {
+        final int length = ((Number) ScriptableObject.getProperty(sourceArray, "length")).intValue();
+        for (int i = 0; i < length; i++) {
+            put(i + offset, this, sourceArray.get(i));
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object get(final int index, final Scriptable start) {
-        return buffer_.getByte(index);
+        return buffer_.getByte(index + byteOffset_);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void put(final int index, final Scriptable start, final Object value) {
+        buffer_.setByte(index + byteOffset_, (Byte) ensureType(value));
     }
 
     /**
@@ -146,6 +170,29 @@ public class ArrayBufferView extends SimpleScriptable {
      */
     protected Object ensureType(final Object o) {
         return o;
+    }
+
+    /**
+     * Returns a new view on the ArrayBuffer store for this object.
+     * @param begin the offset to the first element in the array to be referenced by the new object
+     * @param end the end offset (exclusive), optional to return at the end.
+     * @return the newly created array
+     */
+    @JsxFunction
+    public ArrayBufferView subarray(final int begin, Object end) {
+        if (end == Undefined.instance) {
+            end = getLength();
+        }
+        try {
+            final ArrayBufferView object = getClass().newInstance();
+            object.setPrototype(getPrototype());
+            object.setParentScope(getParentScope());
+            object.constructorAll(getBuffer(), begin, ((Number) end).intValue() - begin);
+            return object;
+        }
+        catch (final Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
