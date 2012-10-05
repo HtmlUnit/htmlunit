@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -86,7 +83,6 @@ public class Int8ArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = "1")
-    @NotYetImplemented(FF10)
     public void constant() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

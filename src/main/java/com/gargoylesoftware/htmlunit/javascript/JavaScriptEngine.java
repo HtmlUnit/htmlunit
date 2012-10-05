@@ -243,8 +243,9 @@ public class JavaScriptEngine {
                 final String jsClassName = config.getHostClass().getSimpleName();
                 final Scriptable prototype = prototypesPerJSName.get(jsClassName);
                 if (prototype != null) {
-                    final FunctionObject jsCtor = new FunctionObject(jsClassName, jsConstructor, window);
-                    jsCtor.addAsConstructor(window, prototype);
+                    final FunctionObject functionObject = new FunctionObject(jsClassName, jsConstructor, window);
+                    functionObject.addAsConstructor(window, prototype);
+                    configureConstants(config, functionObject);
                 }
             }
         }
