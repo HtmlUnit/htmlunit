@@ -9,7 +9,7 @@
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
             <action type="fix" dev="rbri" issue="3411548">
-                JavaScript: document.domain now allowes the change from localhost to a different domain.
+                JavaScript: document.domain now allows the change from localhost to a different domain.
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: exception.stack should not be defined in IE.
