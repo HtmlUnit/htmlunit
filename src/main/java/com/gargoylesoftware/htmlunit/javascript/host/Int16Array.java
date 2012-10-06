@@ -17,6 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -29,11 +32,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
-public class Int8Array extends ArrayBufferView {
+public class Int16Array extends ArrayBufferView {
 
     /** The size, in bytes, of each array element. */
     @JsxConstant
-    public static final int BYTES_PER_ELEMENT = 1;
+    public static final int BYTES_PER_ELEMENT = 2;
 
     /**
      * {@inheritDoc}
@@ -48,7 +51,10 @@ public class Int8Array extends ArrayBufferView {
      */
     @Override
     protected byte[] toArray(final Number number) {
-        return new byte[] {number.byteValue()};
+        final ByteBuffer buff = ByteBuffer.allocate(2);
+        buff.order(ByteOrder.LITTLE_ENDIAN);
+        buff.putShort(number.shortValue());
+        return buff.array();
     }
 
     /**
@@ -56,7 +62,9 @@ public class Int8Array extends ArrayBufferView {
      */
     @Override
     protected Number fromArray(final byte[] array, final int offset) {
-        return array[offset];
+        final ByteBuffer buff = ByteBuffer.wrap(array);
+        buff.order(ByteOrder.LITTLE_ENDIAN);
+        return buff.getShort(offset);
     }
 
     /**

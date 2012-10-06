@@ -48,7 +48,7 @@ public class ArrayBufferView extends SimpleScriptable {
      * @param byteOffset optional byteOffset
      * @param length optional length
      */
-    public void constructor(final Object object, final Object byteOffset, final Object length) {
+    public void constructor(final Object object, Object byteOffset, Object length) {
         if (object instanceof Number) {
             constructor(((Number) object).intValue());
         }
@@ -59,7 +59,14 @@ public class ArrayBufferView extends SimpleScriptable {
             constructor((ArrayBufferView) object);
         }
         else if (object instanceof ArrayBuffer) {
-            constructorAll((ArrayBuffer) object, (Integer) byteOffset, (Integer) length);
+            final ArrayBuffer array = (ArrayBuffer) object;
+            if (byteOffset == Undefined.instance) {
+                byteOffset = 0;
+            }
+            if (length == Undefined.instance) {
+                length = array.getByteLength();
+            }
+            constructorAll(array, (Integer) byteOffset, (Integer) length);
         }
         else {
             Context.reportRuntimeError("Invalid type " + object.getClass().getName());
@@ -67,22 +74,20 @@ public class ArrayBufferView extends SimpleScriptable {
     }
 
     private void constructor(final int length) {
-        initBuffer(length);
-        byteLength_ = length;
+        byteLength_ = length * getBytesPerElement();
+        initBuffer(byteLength_);
     }
 
     private void constructor(final NativeArray array) {
-        final int length = (int) array.getLength();
-        initBuffer(length);
+        byteLength_ = (int) array.getLength() * getBytesPerElement();
+        initBuffer(byteLength_);
         set(array, 0);
-        byteLength_ = length;
     }
 
     private void constructor(final ArrayBufferView array) {
-        final int length = array.getLength();
-        initBuffer(length);
+        byteLength_ = array.getLength() * getBytesPerElement();
+        initBuffer(byteLength_);
         set(array, 0);
-        byteLength_ = length;
     }
 
     private void constructorAll(final ArrayBuffer buffer, final int byteOffset, final int length) {
@@ -91,9 +96,9 @@ public class ArrayBufferView extends SimpleScriptable {
         byteLength_ = length;
     }
 
-    private void initBuffer(final int length) {
+    private void initBuffer(final int lengthInBytes) {
         buffer_ = new ArrayBuffer();
-        buffer_.constructor(length);
+        buffer_.constructor(lengthInBytes);
         buffer_.setPrototype(getPrototype(buffer_.getClass()));
         buffer_.setParentScope(getParentScope());
     }
@@ -122,7 +127,7 @@ public class ArrayBufferView extends SimpleScriptable {
      */
     @JsxGetter
     public int getLength() {
-        return byteLength_;
+        return byteLength_ / getBytesPerElement();
     }
 
     /**
@@ -151,8 +156,9 @@ public class ArrayBufferView extends SimpleScriptable {
      * {@inheritDoc}
      */
     @Override
-    public Object get(final int index, final Scriptable start) {
-        return buffer_.getByte(index + byteOffset_);
+    public Number get(final int index, final Scriptable start) {
+        final int offset = index * getBytesPerElement() + byteOffset_;
+        return fromArray(buffer_.getBuffer(), offset);
     }
 
     /**
@@ -160,16 +166,26 @@ public class ArrayBufferView extends SimpleScriptable {
      */
     @Override
     public void put(final int index, final Scriptable start, final Object value) {
-        buffer_.setByte(index + byteOffset_, (Byte) ensureType(value));
+        buffer_.setBytes(index * getBytesPerElement() + byteOffset_ , toArray((Number) value));
     }
 
     /**
-     * Ensure the type.
-     * @param o the object
-     * @return the correct type
+     * Converts the provided number to byte array.
+     * @param number the number
+     * @return the byte array
      */
-    protected Object ensureType(final Object o) {
-        return o;
+    protected byte[] toArray(final Number number) {
+        return null;
+    }
+
+    /**
+     * Converts the provided byte array to number.
+     * @param array the array
+     * @param offset the offset
+     * @return the byte array
+     */
+    protected Number fromArray(final byte[] array, final int offset) {
+        return null;
     }
 
     /**
@@ -193,6 +209,14 @@ public class ArrayBufferView extends SimpleScriptable {
         catch (final Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Returns the size in bytes of an item in this array.
+     * @return the size of bytes of an item
+     */
+    protected int getBytesPerElement() {
+        return 1;
     }
 
 }

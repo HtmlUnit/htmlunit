@@ -56,8 +56,10 @@ public class ArrayBuffer extends SimpleScriptable {
         return buffer_[index];
     }
 
-    void setByte(final int index, final byte value) {
-        buffer_[index] = value;
+    void setBytes(final int index, final byte[] array) {
+        for (int i = array.length - 1; i >= 0; i--) {
+            buffer_[index + i] = array[i];
+        }
     }
 
     /**
@@ -68,4 +70,7 @@ public class ArrayBuffer extends SimpleScriptable {
         return "ArrayBuffer";
     }
 
+    byte[] getBuffer() {
+        return buffer_;
+    }
 }
