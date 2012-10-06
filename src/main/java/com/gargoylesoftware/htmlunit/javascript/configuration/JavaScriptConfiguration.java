@@ -96,6 +96,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float64Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int16Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int8Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint16Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule;
@@ -322,7 +326,8 @@ public final class JavaScriptConfiguration {
         SVGSymbolElement.class, SVGTSpanElement.class, SVGTextElement.class, SVGTextPathElement.class,
         SVGTitleElement.class, SVGUseElement.class, Screen.class, Selection.class, SimpleArray.class,
         StaticNodeList.class, Storage.class, StyleSheetList.class, Text.class, TextRange.class, TreeWalker.class,
-        UIEvent.class, WebSocket.class, Window.class, XMLAttr.class, XMLDocument.class, XMLDOMParseError.class,
+        UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class,
+        WebSocket.class, Window.class, XMLAttr.class, XMLDocument.class, XMLDOMParseError.class,
         XMLHttpRequest.class, XMLSerializer.class, XPathNSResolver.class, XPathResult.class, XSLTProcessor.class,
         XSLTemplate.class};
 
