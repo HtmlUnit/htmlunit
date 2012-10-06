@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
 import com.gargoylesoftware.htmlunit.javascript.host.HashChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.History;
 import com.gargoylesoftware.htmlunit.javascript.host.Int16Array;
+import com.gargoylesoftware.htmlunit.javascript.host.Int32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.Int8Array;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
@@ -293,7 +294,7 @@ public final class JavaScriptConfiguration {
         HTMLTableComponent.class, HTMLTableElement.class, HTMLTableRowElement.class, HTMLTableSectionElement.class,
         HTMLTextAreaElement.class, HTMLTitleElement.class, HTMLUListElement.class, HTMLUnknownElement.class,
         HTMLVideoElement.class, HTMLWBRElement.class, HashChangeEvent.class, History.class,
-        Int16Array.class, Int8Array.class,
+        Int16Array.class, Int32Array.class, Int8Array.class,
         KeyboardEvent.class,
         Location.class, MediaList.class, MessageEvent.class, MimeType.class, MimeTypeArray.class, MouseEvent.class,
         MutationEvent.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class, Navigator.class,

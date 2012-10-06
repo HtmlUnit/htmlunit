@@ -26,17 +26,17 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * Represents an array of twos-complement 16-bit signed integers.
+ * Represents an array of twos-complement 32-bit signed integers.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
-public class Int16Array extends ArrayBufferView {
+public class Int32Array extends ArrayBufferView {
 
     /** The size, in bytes, of each array element. */
     @JsxConstant
-    public static final int BYTES_PER_ELEMENT = 2;
+    public static final int BYTES_PER_ELEMENT = 4;
 
     /**
      * {@inheritDoc}
@@ -53,7 +53,7 @@ public class Int16Array extends ArrayBufferView {
     protected byte[] toArray(final Number number) {
         final ByteBuffer buff = ByteBuffer.allocate(BYTES_PER_ELEMENT);
         buff.order(ByteOrder.LITTLE_ENDIAN);
-        buff.putShort(number.shortValue());
+        buff.putInt(number.intValue());
         return buff.array();
     }
 
@@ -64,7 +64,7 @@ public class Int16Array extends ArrayBufferView {
     protected Number fromArray(final byte[] array, final int offset) {
         final ByteBuffer buff = ByteBuffer.wrap(array);
         buff.order(ByteOrder.LITTLE_ENDIAN);
-        return buff.getShort(offset);
+        return buff.getInt(offset);
     }
 
     /**

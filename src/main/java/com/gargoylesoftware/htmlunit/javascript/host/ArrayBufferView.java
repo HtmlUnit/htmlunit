@@ -158,7 +158,7 @@ public class ArrayBufferView extends SimpleScriptable {
     @Override
     public Number get(final int index, final Scriptable start) {
         final int offset = index * getBytesPerElement() + byteOffset_;
-        return fromArray(buffer_.getBuffer(), offset);
+        return fromArray(buffer_.getBytes(), offset);
     }
 
     /**

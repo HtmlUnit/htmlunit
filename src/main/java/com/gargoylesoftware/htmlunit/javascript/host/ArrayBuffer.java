@@ -16,10 +16,12 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -32,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
 public class ArrayBuffer extends SimpleScriptable {
 
-    private byte[] buffer_;
+    private byte[] bytes_;
 
     /**
      * The constructor.
@@ -40,7 +42,7 @@ public class ArrayBuffer extends SimpleScriptable {
      */
     @JsxConstructor
     public void constructor(final int length) {
-        buffer_ = new byte[length];
+        bytes_ = new byte[length];
     }
 
     /**
@@ -49,16 +51,35 @@ public class ArrayBuffer extends SimpleScriptable {
      */
     @JsxGetter
     public int getByteLength() {
-        return buffer_.length;
+        return bytes_.length;
+    }
+
+    /**
+     * Returns a new ArrayBuffer whose contents are a copy of this ArrayBuffer's bytes
+     * from begin, inclusive, up to end, exclusive.
+     * @param begin byte index to start slicing
+     * @param end (optional) byte index to end slicing
+     * @return the newly created ArrayBuffer
+     */
+    @JsxFunction
+    public ArrayBuffer slice(final int begin, Object end) {
+        if (end == Undefined.instance) {
+            end = getByteLength();
+        }
+        final byte[] byteArray = new byte[((Number) end).intValue() - begin];
+        System.arraycopy(bytes_, begin, byteArray, 0, byteArray.length);
+        final ArrayBuffer arrayBuffer = new ArrayBuffer();
+        arrayBuffer.bytes_ = byteArray;
+        return arrayBuffer;
     }
 
     byte getByte(final int index) {
-        return buffer_[index];
+        return bytes_[index];
     }
 
     void setBytes(final int index, final byte[] array) {
         for (int i = array.length - 1; i >= 0; i--) {
-            buffer_[index + i] = array[i];
+            bytes_[index + i] = array[i];
         }
     }
 
@@ -70,7 +91,7 @@ public class ArrayBuffer extends SimpleScriptable {
         return "ArrayBuffer";
     }
 
-    byte[] getBuffer() {
-        return buffer_;
+    byte[] getBytes() {
+        return bytes_;
     }
 }
