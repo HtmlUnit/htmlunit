@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,26 +22,29 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link ArrayBuffer}.
+ * Tests for {@link ArrayBufferView}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class ArrayBufferTest extends WebDriverTestCase {
+public class ArrayBufferViewTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = "5")
-    public void byteLength() throws Exception {
+    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "18", "93", "42" })
+    public void set_int8() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
-            + "    var buff = new ArrayBuffer(5);\n"
-            + "    alert(buff.byteLength);\n"
+            + "    var array = new Int8Array(10);\n"
+            + "    array.set(new Int8Array([18, 93, 42]), 3);\n"
+            + "    alert(array[3]);\n"
+            + "    alert(array[4]);\n"
+            + "    alert(array[5]);\n"
             + "  } catch(e) {\n"
             + "    alert('exception');\n"
             + "  }\n"
@@ -56,22 +59,19 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "1234", "1234", "6789", "1234" })
-    public void slice() throws Exception {
+    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "3", "2", "3", "-1" })
+    public void subarray_int8() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
-            + "    var buffer = new ArrayBuffer(12);\n"
-            + "    var x = new Int32Array(buffer);\n"
-            + "    x[1] = 1234;\n"
-            + "    var slice = buffer.slice(4);\n"
-            + "    var y = new Int32Array(slice);\n"
-            + "    alert(x[1]);\n"
+            + "    var x = new Int8Array([0, 1, 2, 3, 4, 5]);\n"
+            + "    var y = x.subarray(2, 5);\n"
+            + "    alert(y.length);\n"
             + "    alert(y[0]);\n"
-            + "    x[1] = 6789;\n"
-            + "    alert(x[1]);\n"
-            + "    alert(y[0]);\n"
+            + "    alert(y[1]);\n"
+            + "    y[0] = -1;\n"
+            + "    alert(x[2]);\n"
             + "  } catch(e) {\n"
             + "    alert('exception');\n"
             + "  }\n"

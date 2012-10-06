@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -26,17 +26,17 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * Represents an array of twos-complement 32-bit signed integers.
+ * Represents an array of 32-bit floating point numbers.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
-public class Int32Array extends ArrayBufferView {
+public class Float64Array extends ArrayBufferView {
 
     /** The size, in bytes, of each array element. */
     @JsxConstant
-    public static final int BYTES_PER_ELEMENT = 4;
+    public static final int BYTES_PER_ELEMENT = 8;
 
     /**
      * {@inheritDoc}
@@ -53,7 +53,7 @@ public class Int32Array extends ArrayBufferView {
     protected byte[] toArray(final Number number) {
         final ByteBuffer buff = ByteBuffer.allocate(BYTES_PER_ELEMENT);
         buff.order(ByteOrder.LITTLE_ENDIAN);
-        buff.putInt(number.intValue());
+        buff.putDouble(number.doubleValue());
         return buff.array();
     }
 
@@ -64,7 +64,7 @@ public class Int32Array extends ArrayBufferView {
     protected Number fromArray(final byte[] array, final int offset) {
         final ByteBuffer buff = ByteBuffer.wrap(array);
         buff.order(ByteOrder.LITTLE_ENDIAN);
-        return buff.getInt(offset);
+        return buff.getDouble(offset);
     }
 
     /**

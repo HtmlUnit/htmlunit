@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,25 +22,25 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link Int16Array}.
+ * Tests for {@link Int8Array}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class Int16ArrayTest extends WebDriverTestCase {
+public class Int8ArrayTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "[object ArrayBuffer]", "10", "0" })
+    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "[object ArrayBuffer]", "5", "0" })
     public void buffer() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
-            + "    var array = new Int16Array(5);\n"
+            + "    var array = new Int8Array(5);\n"
             + "    alert(array.buffer);\n"
             + "    alert(array.byteLength);\n"
             + "    alert(array.byteOffset);\n"
@@ -64,7 +64,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
-            + "    var array = new Int16Array([17, -45.3]);\n"
+            + "    var array = new Int8Array([17, -45.3]);\n"
             + "    alert(array[0]);\n"
             + "    alert(array[1]);\n"
             + "    alert(array.length);\n"
@@ -82,37 +82,13 @@ public class Int16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = "2")
+    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = "1")
     public void constant() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
-            + "    alert(Int16Array.BYTES_PER_ELEMENT);\n"
-            + "  } catch(e) {\n"
-            + "    alert('exception');\n"
-            + "  }\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "17", "0", "-45", "-1" })
-    public void bufferConstructor() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "function test() {\n"
-            + "  try {\n"
-            + "    var array = new Int16Array([17, -45.3]);\n"
-            + "    var array2 = new Int8Array(array.buffer);\n"
-            + "    for (var i = 0; i < array2.length; i++)\n"
-            + "      alert(array2[i]);\n"
+            + "    alert(Int8Array.BYTES_PER_ELEMENT);\n"
             + "  } catch(e) {\n"
             + "    alert('exception');\n"
             + "  }\n"

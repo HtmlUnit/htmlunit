@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,25 +22,25 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link Int32Array}.
+ * Tests for {@link Float32Array}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class Int32ArrayTest extends WebDriverTestCase {
+public class Float32ArrayTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "-121", "-42", "18", "0" , "-78", "-98", "67", "-1" })
+    @Alerts(IE = "exception", FF3_6 = "exception", DEFAULT = { "63", "-76", "-106", "73" , "79", "97", "60", "-53" })
     public void bufferConstructor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
-            + "    var array = new Int32Array([1234567, -12345678.9]);\n"
+            + "    var array = new Float32Array([1234567.8901, -12345678.90123]);\n"
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
             + "      alert(array2[i]);\n"

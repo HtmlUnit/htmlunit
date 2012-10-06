@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
-import com.gargoylesoftware.htmlunit.javascript.host.ArrayBuffer;
-import com.gargoylesoftware.htmlunit.javascript.host.ArrayBufferView;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.CDATASection;
@@ -55,9 +53,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 import com.gargoylesoftware.htmlunit.javascript.host.FormField;
 import com.gargoylesoftware.htmlunit.javascript.host.HashChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.History;
-import com.gargoylesoftware.htmlunit.javascript.host.Int16Array;
-import com.gargoylesoftware.htmlunit.javascript.host.Int32Array;
-import com.gargoylesoftware.htmlunit.javascript.host.Int8Array;
 import com.gargoylesoftware.htmlunit.javascript.host.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.MediaList;
@@ -94,6 +89,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.XPathNSResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathResult;
 import com.gargoylesoftware.htmlunit.javascript.host.XSLTProcessor;
 import com.gargoylesoftware.htmlunit.javascript.host.XSLTemplate;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferView;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float32Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float64Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int16Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int32Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int8Array;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCharsetRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule;
@@ -274,6 +276,7 @@ public final class JavaScriptConfiguration {
         ComputedCSSStyleDeclaration.class, Console.class, Coordinates.class, DOMException.class,
         DOMImplementation.class, DOMParser.class, DOMTokenList.class, Document.class, DocumentFragment.class,
         DocumentType.class, Element.class, Enumerator.class, Event.class, EventNode.class, External.class,
+        Float32Array.class, Float64Array.class,
         FormChild.class, FormField.class, Geolocation.class, History.class,
         HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
         HTMLBRElement.class, HTMLBaseElement.class, HTMLBaseFontElement.class,
