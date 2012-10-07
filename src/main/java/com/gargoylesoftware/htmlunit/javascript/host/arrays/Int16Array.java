@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
-public class Int16Array extends ArrayBufferView {
+public class Int16Array extends ArrayBufferViewBase {
 
     /** The size, in bytes, of each array element. */
     @JsxConstant

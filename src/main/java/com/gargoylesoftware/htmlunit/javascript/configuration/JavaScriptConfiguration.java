@@ -91,6 +91,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.XSLTProcessor;
 import com.gargoylesoftware.htmlunit.javascript.host.XSLTemplate;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferView;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.DataView;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float64Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int16Array;
@@ -271,13 +273,13 @@ public final class JavaScriptConfiguration {
 
     @SuppressWarnings("unchecked")
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
-        ArrayBuffer.class, ArrayBufferView.class,
+        ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
         Attr.class, ActiveXObject.class, BoxObject.class, CDATASection.class, ClipboardData.class,
         CSSCharsetRule.class, CSSFontFaceRule.class, CSSImportRule.class, CSSMediaRule.class, CSSPrimitiveValue.class,
         CSSRule.class,
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSValue.class,
         CanvasRenderingContext2D.class, CharacterDataImpl.class, ClientRect.class, Comment.class,
-        ComputedCSSStyleDeclaration.class, Console.class, Coordinates.class, DOMException.class,
+        ComputedCSSStyleDeclaration.class, Console.class, Coordinates.class, DataView.class, DOMException.class,
         DOMImplementation.class, DOMParser.class, DOMTokenList.class, Document.class, DocumentFragment.class,
         DocumentType.class, Element.class, Enumerator.class, Event.class, EventNode.class, External.class,
         Float32Array.class, Float64Array.class,

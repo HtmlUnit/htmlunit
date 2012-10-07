@@ -26,13 +26,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * Represents an array of 64-bit floating point numbers.
+ * Represents an array of 32-bit floating point numbers.
  *
  * @version $Revision$
  * @author Ahmed Ashour
  */
 @JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
-public class Float32Array extends ArrayBufferView {
+public class Float32Array extends ArrayBufferViewBase {
 
     /** The size, in bytes, of each array element. */
     @JsxConstant
