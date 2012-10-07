@@ -64,7 +64,7 @@ public class Uint32Array extends ArrayBufferViewBase {
     protected Long fromArray(final byte[] array, final int offset) {
         final ByteBuffer buff = ByteBuffer.wrap(array);
         buff.order(ByteOrder.LITTLE_ENDIAN);
-        return ((long) buff.getInt(offset)) & 0xFFFFFFFFL;
+        return buff.getInt(offset) & 0xFFFFFFFFL;
     }
 
     /**

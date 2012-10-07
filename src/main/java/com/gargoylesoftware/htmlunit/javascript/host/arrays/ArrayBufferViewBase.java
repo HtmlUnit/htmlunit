@@ -69,27 +69,31 @@ public class ArrayBufferViewBase extends ArrayBufferView {
     }
 
     private void constructor(final int length) {
-        byteLength_ = length * getBytesPerElement();
-        initBuffer(byteLength_);
+        final int byteLength = length * getBytesPerElement();
+        setByteLength(byteLength);
+        initBuffer(byteLength);
     }
 
     private void constructor(final NativeArray array) {
-        byteLength_ = (int) array.getLength() * getBytesPerElement();
-        initBuffer(byteLength_);
+        final int byteLength = (int) array.getLength() * getBytesPerElement();
+        setByteLength(byteLength);
+        initBuffer(byteLength);
         set(array, 0);
     }
 
     private void constructor(final ArrayBufferViewBase array) {
-        byteLength_ = array.getLength() * getBytesPerElement();
-        initBuffer(byteLength_);
+        final int byteLength = array.getLength() * getBytesPerElement();
+        setByteLength(byteLength);
+        initBuffer(byteLength);
         set(array, 0);
     }
 
     private void initBuffer(final int lengthInBytes) {
-        buffer_ = new ArrayBuffer();
-        buffer_.constructor(lengthInBytes);
-        buffer_.setPrototype(getPrototype(buffer_.getClass()));
-        buffer_.setParentScope(getParentScope());
+        final ArrayBuffer buffer = new ArrayBuffer();
+        buffer.constructor(lengthInBytes);
+        buffer.setPrototype(getPrototype(buffer.getClass()));
+        buffer.setParentScope(getParentScope());
+        setBuffer(buffer);
     }
 
     /**
@@ -98,7 +102,7 @@ public class ArrayBufferViewBase extends ArrayBufferView {
      */
     @JsxGetter
     public int getLength() {
-        return byteLength_ / getBytesPerElement();
+        return getByteLength() / getBytesPerElement();
     }
 
     /**
@@ -119,8 +123,8 @@ public class ArrayBufferViewBase extends ArrayBufferView {
      */
     @Override
     public Number get(final int index, final Scriptable start) {
-        final int offset = index * getBytesPerElement() + byteOffset_;
-        return fromArray(buffer_.getBytes(), offset);
+        final int offset = index * getBytesPerElement() + getByteOffset();
+        return fromArray(getBuffer().getBytes(), offset);
     }
 
     /**
@@ -128,7 +132,7 @@ public class ArrayBufferViewBase extends ArrayBufferView {
      */
     @Override
     public void put(final int index, final Scriptable start, final Object value) {
-        buffer_.setBytes(index * getBytesPerElement() + byteOffset_ , toArray((Number) value));
+        getBuffer().setBytes(index * getBytesPerElement() + getByteOffset() , toArray((Number) value));
     }
 
     /**

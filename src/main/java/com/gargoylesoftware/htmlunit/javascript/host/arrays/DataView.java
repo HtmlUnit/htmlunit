@@ -54,7 +54,7 @@ public class DataView extends ArrayBufferView {
      */
     @JsxFunction
     public byte getInt8(final int byteOffset) {
-        return buffer_.getBytes()[byteOffset_ + byteOffset];
+        return getBuffer().getBytes()[getByteOffset() + byteOffset];
     }
 
     /**
@@ -64,7 +64,8 @@ public class DataView extends ArrayBufferView {
      */
     @JsxFunction
     public void setInt8(final int byteOffset, final int value) {
-        buffer_.getBytes()[byteOffset_ + byteOffset] = (byte) value;
+        final byte[] array = getBuffer().getBytes();
+        array[getByteOffset() + byteOffset] = (byte) value;
     }
 
     /**
@@ -75,11 +76,11 @@ public class DataView extends ArrayBufferView {
      */
     @JsxFunction
     public short getInt16(final int byteOffset, final boolean littleEndian) {
-        final ByteBuffer buff = ByteBuffer.wrap(buffer_.getBytes());
+        final ByteBuffer buff = ByteBuffer.wrap(getBuffer().getBytes());
         if (littleEndian) {
             buff.order(ByteOrder.LITTLE_ENDIAN);
         }
-        return buff.getShort(byteOffset_ + byteOffset);
+        return buff.getShort(getByteOffset() + byteOffset);
     }
 
     /**
@@ -90,11 +91,11 @@ public class DataView extends ArrayBufferView {
      */
     @JsxFunction
     public void setInt16(final int byteOffset, final int value, final boolean littleEndian) {
-        final ByteBuffer buff = ByteBuffer.wrap(buffer_.getBytes());
+        final ByteBuffer buff = ByteBuffer.wrap(getBuffer().getBytes());
         if (littleEndian) {
             buff.order(ByteOrder.LITTLE_ENDIAN);
         }
-        buff.putShort(byteOffset_ + byteOffset, (short) value);
+        buff.putShort(getByteOffset() + byteOffset, (short) value);
     }
 
     /**
@@ -105,11 +106,11 @@ public class DataView extends ArrayBufferView {
      */
     @JsxFunction
     public int getInt32(final int byteOffset, final boolean littleEndian) {
-        final ByteBuffer buff = ByteBuffer.wrap(buffer_.getBytes());
+        final ByteBuffer buff = ByteBuffer.wrap(getBuffer().getBytes());
         if (littleEndian) {
             buff.order(ByteOrder.LITTLE_ENDIAN);
         }
-        return buff.getInt(byteOffset_ + byteOffset);
+        return buff.getInt(getByteOffset() + byteOffset);
     }
 
     /**
@@ -120,11 +121,83 @@ public class DataView extends ArrayBufferView {
      */
     @JsxFunction
     public void setInt32(final int byteOffset, final int value, final boolean littleEndian) {
-        final ByteBuffer buff = ByteBuffer.wrap(buffer_.getBytes());
+        final ByteBuffer buff = ByteBuffer.wrap(getBuffer().getBytes());
         if (littleEndian) {
             buff.order(ByteOrder.LITTLE_ENDIAN);
         }
-        buff.putInt(byteOffset_ + byteOffset, value);
+        buff.putInt(getByteOffset() + byteOffset, value);
+    }
+
+    /**
+     * Gets an unsigned 8-bit integer at the specified byte offset from the start of the view.
+     * @param byteOffset the byte offset
+     * @return the value
+     */
+    @JsxFunction
+    public int getUint8(final int byteOffset) {
+        return getBuffer().getBytes()[getByteOffset() + byteOffset] & 0xFF;
+    }
+
+    /**
+     * Sets the given unsigned 8-bit integer at the specified offset.
+     * @param byteOffset the byte offset
+     * @param value the value
+     */
+    @JsxFunction
+    public void setUint8(final int byteOffset, final int value) {
+        setInt8(byteOffset, value);
+    }
+
+    /**
+     * Gets an unsigned 16-bit integer at the specified byte offset from the start of the view.
+     * @param byteOffset the byte offset
+     * @param littleEndian whether the value is stored in little- or big-endian format
+     * @return the value
+     */
+    @JsxFunction
+    public int getUint16(final int byteOffset, final boolean littleEndian) {
+        final ByteBuffer buff = ByteBuffer.wrap(getBuffer().getBytes());
+        if (littleEndian) {
+            buff.order(ByteOrder.LITTLE_ENDIAN);
+        }
+        return buff.getShort(getByteOffset() + byteOffset) & 0xFFFF;
+    }
+
+    /**
+     * Sets the given unsigned 16-bit integer at the specified offset.
+     * @param byteOffset the byte offset
+     * @param value the value
+     * @param littleEndian whether the value is stored in little- or big-endian format
+     */
+    @JsxFunction
+    public void setUint16(final int byteOffset, final int value, final boolean littleEndian) {
+        setInt16(byteOffset, value, littleEndian);
+    }
+
+    /**
+     * Gets an unsigned 32-bit integer at the specified byte offset from the start of the view.
+     * @param byteOffset the byte offset
+     * @param littleEndian whether the value is stored in little- or big-endian format
+     * @return the value
+     */
+    @JsxFunction
+    public long getUint32(final int byteOffset, final boolean littleEndian) {
+        final ByteBuffer buff = ByteBuffer.wrap(getBuffer().getBytes());
+        if (littleEndian) {
+            buff.order(ByteOrder.LITTLE_ENDIAN);
+        }
+        return buff.getInt(getByteOffset() + byteOffset) & 0xFFFFFFFFL;
+    }
+
+    /**
+     * Sets the given unsigned 32-bit integer at the specified offset.
+     * @param byteOffset the byte offset
+     * @param value the value
+     * @param littleEndian whether the value is stored in little- or big-endian format
+     */
+    @JsxFunction
+    public void setUint32(final int byteOffset, final int value, final boolean littleEndian) {
+        setInt32(byteOffset, value, littleEndian);
     }
 
     /**
@@ -135,11 +208,11 @@ public class DataView extends ArrayBufferView {
      */
     @JsxFunction
     public float getFloat32(final int byteOffset, final boolean littleEndian) {
-        final ByteBuffer buff = ByteBuffer.wrap(buffer_.getBytes());
+        final ByteBuffer buff = ByteBuffer.wrap(getBuffer().getBytes());
         if (littleEndian) {
             buff.order(ByteOrder.LITTLE_ENDIAN);
         }
-        return buff.getFloat(byteOffset_ + byteOffset);
+        return buff.getFloat(getByteOffset() + byteOffset);
     }
 
     /**
@@ -150,11 +223,11 @@ public class DataView extends ArrayBufferView {
      */
     @JsxFunction
     public void setFloat32(final int byteOffset, final double value, final boolean littleEndian) {
-        final ByteBuffer buff = ByteBuffer.wrap(buffer_.getBytes());
+        final ByteBuffer buff = ByteBuffer.wrap(getBuffer().getBytes());
         if (littleEndian) {
             buff.order(ByteOrder.LITTLE_ENDIAN);
         }
-        buff.putFloat(byteOffset_ + byteOffset, (float) value);
+        buff.putFloat(getByteOffset() + byteOffset, (float) value);
     }
 
     /**
@@ -165,11 +238,11 @@ public class DataView extends ArrayBufferView {
      */
     @JsxFunction
     public double getFloat64(final int byteOffset, final boolean littleEndian) {
-        final ByteBuffer buff = ByteBuffer.wrap(buffer_.getBytes());
+        final ByteBuffer buff = ByteBuffer.wrap(getBuffer().getBytes());
         if (littleEndian) {
             buff.order(ByteOrder.LITTLE_ENDIAN);
         }
-        return buff.getDouble(byteOffset_ + byteOffset);
+        return buff.getDouble(getByteOffset() + byteOffset);
     }
 
     /**
@@ -180,10 +253,10 @@ public class DataView extends ArrayBufferView {
      */
     @JsxFunction
     public void setFloat64(final int byteOffset, final double value, final boolean littleEndian) {
-        final ByteBuffer buff = ByteBuffer.wrap(buffer_.getBytes());
+        final ByteBuffer buff = ByteBuffer.wrap(getBuffer().getBytes());
         if (littleEndian) {
             buff.order(ByteOrder.LITTLE_ENDIAN);
         }
-        buff.putDouble(byteOffset_ + byteOffset, value);
+        buff.putDouble(getByteOffset() + byteOffset, value);
     }
 }

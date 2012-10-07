@@ -31,15 +31,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(isJSObject = false, browsers = { @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
 public class ArrayBufferView extends SimpleScriptable {
 
-    protected ArrayBuffer buffer_;
-    protected int byteLength_;
-    protected int byteOffset_;
+    private ArrayBuffer buffer_;
+    private int byteLength_;
+    private int byteOffset_;
 
     /**
      * The constructor.
      * @param buffer the array buffer
-     * @param byteOffset
-     * @param length
+     * @param byteOffset the byte offset
+     * @param length the length
      */
     protected void constructor(final ArrayBuffer buffer, final int byteOffset, final int length) {
         buffer_ = buffer;
@@ -57,12 +57,28 @@ public class ArrayBufferView extends SimpleScriptable {
     }
 
     /**
+     * Sets the buffer.
+     * @param buffer the buffer
+     */
+    protected void setBuffer(final ArrayBuffer buffer) {
+        buffer_ = buffer;
+    }
+
+    /**
      * Returns the length, in bytes, of the view.
      * @return the length
      */
     @JsxGetter
     public int getByteLength() {
         return byteLength_;
+    }
+
+    /**
+     * Sets the bytes length.
+     * @param byteLength the bytes length
+     */
+    protected void setByteLength(final int byteLength) {
+        byteLength_ = byteLength;
     }
 
     /**
@@ -73,5 +89,4 @@ public class ArrayBufferView extends SimpleScriptable {
     public int getByteOffset() {
         return byteOffset_;
     }
-
 }
