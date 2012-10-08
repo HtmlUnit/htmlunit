@@ -288,8 +288,21 @@ public class JavaScriptEngine {
 
         NativeFunctionToStringFunction.installFix(window, webClient.getBrowserVersion());
 
+        if (browserVersion.hasFeature(BrowserVersionFeatures.JS_ALLOW_CONST_ASSIGNMENT)) {
+            makeConstWritable(window, "undefined", "NaN", "Infinity");
+        }
+
         window.setPrototypes(prototypes);
         window.initialize(webWindow);
+    }
+
+    private void makeConstWritable(final ScriptableObject scope, final String... constNames) {
+        for (final String name : constNames) {
+            final Object value = ScriptableObject.getProperty(scope, name);
+            ScriptableObject.defineProperty(
+                    scope, name, value,
+                    ScriptableObject.DONTENUM | ScriptableObject.PERMANENT);
+        }
     }
 
     /**
