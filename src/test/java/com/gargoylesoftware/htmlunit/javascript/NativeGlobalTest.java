@@ -50,4 +50,28 @@ public class NativeGlobalTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Test for re-declaration of constants.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "undefined", "NaN", "Infinity" },
+        FF3_6 =  { "true", "123", "NaN", "Infinity" },
+        IE =  { "true", "123", "NaN", "Infinity" })
+    public void redeclareConst() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "var undefined;\n"
+            + "var NaN;\n"
+            + "var Infinity;\n"
+            + "alert(window.foo == undefined);\n"
+            + "undefined = 123;\n"
+            + "alert(undefined);\n"
+            + "alert(NaN);\n"
+            + "alert(Infinity);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

@@ -9,6 +9,9 @@
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
             <action type="fix" dev="mguillem">
+                JavaScript: allow re-declaration of undefined, NaN and Infinity.
+            </action>
+            <action type="fix" dev="mguillem">
                 JavaScript: allow assignment to undefined, NaN and Infinity (FF3.6 and IE).
             </action>
             <action type="add" dev="asashour" issue="3564695">

@@ -1952,6 +1952,20 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
         return null;
     }
+
+    /**
+     * {@inheritDoc}
+     * Used to allow re-declaration of constants (eg: "var undefined;").
+     * @see NativeGlobalTest
+     */
+    @Override
+    public boolean isConst(final String name) {
+        if ("undefined".equals(name) || "Infinity".equals(name) || "NaN".equals(name)) {
+            return false;
+        }
+
+        return super.isConst(name);
+    }
 }
 
 class HTMLCollectionFrames extends HTMLCollection {
