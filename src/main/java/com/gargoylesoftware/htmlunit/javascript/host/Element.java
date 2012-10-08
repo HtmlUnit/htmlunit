@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
@@ -37,7 +36,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
-import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
  * A JavaScript object for {@link DomElement}.
@@ -67,8 +65,7 @@ public class Element extends EventNode {
         final HTMLCollection collection = new HTMLCollection(domNode, attributeChangeSensitive, description) {
             @Override
             protected List<Object> computeElements() {
-                final List<Object> list = new ArrayList<Object>(domNode.getByXPath(expression));
-                return list;
+                return new ArrayList<Object>(domNode.getByXPath(expression));
             }
         };
         return collection;
@@ -117,7 +114,7 @@ public class Element extends EventNode {
      * @return the Base URI as a string
      */
     @JsxGetter
-    public Object getBaseURI() {
+    public String getBaseURI() {
         return getDomNodeOrDie().getPage().getUrl().toExternalForm();
     }
 
@@ -294,26 +291,11 @@ public class Element extends EventNode {
     @JsxFunction(@WebBrowser(FF))
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final String description = "Element.getElementsByTagNameNS('" + namespaceURI + "', '" + localName + "')";
-        final DomElement domNode = getDomNodeOrDie();
 
-        final String prefix;
-        if (namespaceURI != null && !"*".equals("*")) {
-            prefix = XmlUtil.lookupPrefix(domNode, Context.toString(namespaceURI));
-        }
-        else {
-            prefix = null;
-        }
-
-        final HTMLCollection collection = new HTMLCollection(domNode, false, description) {
+        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false, description) {
             @Override
             protected boolean isMatching(final DomNode node) {
-                if (!localName.equals(node.getLocalName())) {
-                    return false;
-                }
-                if (prefix == null) {
-                    return true;
-                }
-                return true;
+                return localName.equals(node.getLocalName());
             }
         };
 
