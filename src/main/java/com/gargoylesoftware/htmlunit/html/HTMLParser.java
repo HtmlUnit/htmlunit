@@ -922,5 +922,56 @@ class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
             // this is a normal comment, not a conditional comment for IE
             super.scanComment();
         }
+
+        @Override
+        public String nextContent(final int len) throws IOException {
+            return super.nextContent(len);
+        }
+
+        @Override
+        public boolean scanMarkupContent(final XMLStringBuffer buffer, final char cend) throws IOException {
+            return super.scanMarkupContent(buffer, cend);
+        }
+    }
+
+    @Override
+    protected boolean skipMarkup(final boolean balance) throws IOException {
+        final ContentScannerForIE contentScanner = (ContentScannerForIE) fContentScanner;
+        final String s = contentScanner.nextContent(30);
+        if (s.startsWith("[if ") && s.contains("]>")) {
+            final String condition = StringUtils.substringBefore(s.substring(4), "]>");
+            try {
+                if (IEConditionalCommentExpressionEvaluator.evaluate(condition, contentScanner.browserVersion_)) {
+                    // skip until ">"
+                    for (int i = 0; i < condition.length() + 6; ++i) {
+                        read();
+                    }
+                    return true;
+                }
+                else {
+                    final XMLStringBuffer buffer = new XMLStringBuffer();
+                    int ch;
+                    while ((ch = read()) != -1) {
+                        buffer.append((char) ch);
+                        if (buffer.toString().endsWith("<![endif]>")) {
+                            final XMLStringBuffer trimmedBuffer
+                                = new XMLStringBuffer(buffer.ch, 0, buffer.length - 3);
+                            fDocumentHandler.comment(trimmedBuffer, locationAugs());
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (final Exception e) { // incorrect expression => handle it as plain text
+                // TODO: report it!
+                final XMLStringBuffer buffer = new XMLStringBuffer("<!--");
+                contentScanner.scanMarkupContent(buffer, '-');
+                buffer.append("-->");
+                fDocumentHandler.characters(buffer, locationAugs());
+                return true;
+            }
+
+        }
+        return super.skipMarkup(balance);
     }
 }
