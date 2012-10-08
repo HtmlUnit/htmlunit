@@ -874,6 +874,13 @@ class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
         protected void scanComment() throws IOException {
             final String s = nextContent(30); // [if ...
             if (s.startsWith("[if ") && s.contains("]>")) {
+                String commentTill = null;
+                if (s.contains("]><!-->")) {
+                    commentTill = "<![endif]-->";
+                }
+                else if (s.contains("]>-->")) {
+                    commentTill = "<!--<![endif]-->";
+                }
                 final String condition = StringUtils.substringBefore(s.substring(4), "]>");
                 try {
                     if (IEConditionalCommentExpressionEvaluator.evaluate(condition, browserVersion_)) {
@@ -881,7 +888,26 @@ class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
                         for (int i = 0; i < condition.length() + 6; ++i) {
                             read();
                         }
+                        if (s.contains("]><!-->")) {
+                            skip("<!-->", false);
+                        }
+                        else if (s.contains("]>-->")) {
+                            skip("-->", false);
+                        }
                         return;
+                    }
+                    else if (commentTill != null) {
+                        final XMLStringBuffer buffer = new XMLStringBuffer();
+                        int ch;
+                        while ((ch = read()) != -1) {
+                            buffer.append((char) ch);
+                            if (buffer.toString().endsWith(commentTill)) {
+                                final XMLStringBuffer trimmedBuffer
+                                    = new XMLStringBuffer(buffer.ch, 0, buffer.length - 3);
+                                fDocumentHandler.comment(trimmedBuffer, locationAugs());
+                                return;
+                            }
+                        }
                     }
                 }
                 catch (final Exception e) { // incorrect expression => handle it as plain text

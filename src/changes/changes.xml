@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
+            <action type="fix" dev="asashour" issue="3567961">
+                IE Conditional comments: handle "downlevel revealed" conditional cases.
+            </action>
             <action type="fix" dev="mguillem" issue="3529411">
                 JavaScript: allow re-declaration of undefined, NaN and Infinity.
             </action>

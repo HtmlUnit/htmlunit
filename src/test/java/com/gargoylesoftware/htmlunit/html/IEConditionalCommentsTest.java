@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE7;
 
@@ -156,7 +155,6 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE6 = { }, IE7 = { }, IE8 = "8+", DEFAULT = "8+")
-    @NotYetImplemented({ IE6, IE7 })
     public void downlevelRevealed2() throws Exception {
         final String html = "<html><head>"
             + "<!--[if gte IE 8]>-->\n"
@@ -171,7 +169,6 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE6 = { }, IE7 = { }, IE8 = "8+", DEFAULT = "8+")
-    @NotYetImplemented(IE)
     public void downlevelRevealed3() throws Exception {
         final String html = "<html><head>"
             + "<!--[if gte IE 8]><!-->\n"
