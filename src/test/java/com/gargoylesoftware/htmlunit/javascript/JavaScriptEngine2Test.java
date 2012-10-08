@@ -120,22 +120,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "123", FF10 = "undefined")
-    @NotYetImplemented
-    public void undefined() throws Exception {
-        final String html = "<html><head><script>\n"
-            + "var undefined = 123;\n"
-            + "alert(undefined);\n"
-            + "</script>\n"
-            + "</head><body></body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(IE = {"in goo", "in hoo", "in foo" },
             FF = {"in goo", "in hoo", "foo error" })
     @NotYetImplemented(IE)
