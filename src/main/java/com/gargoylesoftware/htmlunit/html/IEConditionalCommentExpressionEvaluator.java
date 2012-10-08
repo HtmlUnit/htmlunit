@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * @version $Revision$
  * @author Marc Guillemot
  */
-public final class IEConditionalCommentExpressionEvaluator {
+final class IEConditionalCommentExpressionEvaluator {
 
     /**
      * Hide constructor of utility class
