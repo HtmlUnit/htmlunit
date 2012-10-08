@@ -694,6 +694,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_ALIGN_FOR_INPUT_IGNORES_VALUES,
 
+    /** Top scope constants can be assign (and are not... constants).
+     */
+    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 3.6f), @WebBrowser(IE) })
+    JS_ALLOW_CONST_ASSIGNMENT,
+
     /**
      * Javascript property anchors includes all anchors with a name or an id property.
      * If not set name property is required
