@@ -28,8 +28,10 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link IEConditionalCommentExpressionEvaluator}.
  * Due to current implementation, conditional comment expressions get evaluated only when the simulated browser is IE.
+ *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCase {
@@ -44,7 +46,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if IE 5].
+     * Test for expression [if IE 5].
      */
     @Test
     @Alerts("false")
@@ -53,7 +55,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if IE 6].
+     * Test for expression [if IE 6].
      */
     @Test
     @Alerts(IE6 = "true", IE = "false")
@@ -62,7 +64,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if IE 7].
+     * Test for expression [if IE 7].
      */
     @Test
     @Alerts(IE7 = "true", IE = "false")
@@ -71,7 +73,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if IE 8].
+     * Test for expression [if IE 8].
      */
     @Test
     @Alerts(IE8 = "true", IE = "false")
@@ -89,7 +91,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if lt IE 5.5].
+     * Test for expression [if lt IE 5.5].
      */
     @Test
     @Alerts(IE = "false", FF = "true")
@@ -98,7 +100,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if lt IE 6].
+     * Test for expression [if lt IE 6].
      */
     @Test
     @Alerts("false")
@@ -107,7 +109,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if lt IE 7].
+     * Test for expression [if lt IE 7].
      */
     @Test
     @Alerts(IE6 = "true", IE = "false")
@@ -116,7 +118,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if lt IE 8].
+     * Test for expressios [if lt IE 8].
      */
     @Test
     @Alerts(IE6 = "true", IE7 = "true", IE = "false")
@@ -125,7 +127,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if lt IE 9].
+     * Test for expression [if lt IE 9].
      */
     @Test
     @Alerts("true")
@@ -134,7 +136,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if gt IE 5.5].
+     * Test for expression [if gt IE 5.5].
      */
     @Test
     @Alerts("true")
@@ -143,7 +145,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if gt IE 6].
+     * Test for expression [if gt IE 6].
      */
     @Test
     @Alerts(IE6 = "false", IE = "true")
@@ -152,7 +154,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if gt IE 7].
+     * Test for expression [if gt IE 7].
      */
     @Test
     @Alerts(IE8 = "true", IE = "false")
@@ -161,7 +163,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if gt IE 8].
+     * Test for expression [if gt IE 8].
      */
     @Test
     @Alerts("false")
@@ -170,7 +172,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if gte IE 5.5].
+     * Test for expression [if gte IE 5.5].
      */
     @Test
     @Alerts("true")
@@ -179,7 +181,7 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
     }
 
     /**
-     * Test for expressions [if gte IE 6].
+     * Test for expression [if gte IE 6].
      */
     @Test
     @Alerts("true")
@@ -351,11 +353,10 @@ public class IEConditionalCommentExpressionEvaluatorTest extends SimpleWebTestCa
 
     private void doTest(final String expression) {
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.isFirefox()) {
-            return;
-        }
-        final String expected = getExpectedAlerts()[0];
-        Assert.assertEquals(expression + " for " + browserVersion.getNickname(),
+        if (browserVersion.isIE()) {
+            final String expected = getExpectedAlerts()[0];
+            Assert.assertEquals(expression + " for " + browserVersion.getNickname(),
                 expected, Boolean.toString(evaluate(expression, browserVersion)));
+        }
     }
 }

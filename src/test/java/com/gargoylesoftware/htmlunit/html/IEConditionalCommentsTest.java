@@ -14,11 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE7;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -27,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class IEConditionalCommentsTest extends WebDriverTestCase {
@@ -110,7 +116,7 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "hello", "><" },
             IE6 = { "hello", ">ltIE8ltIE7<" },
             IE7 = { "hello", ">ltIE8<" },
-            IE8 = { "hello", "><" })
+            IE8 = { "hello", "><" })//IE9 = { "hello", ">endif<" }
     public void nested() throws Exception {
         final String html = "<html><body>\n"
             + "<script>alert('hello')</script>\n"
@@ -129,4 +135,50 @@ public class IEConditionalCommentsTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE6 = { }, IE7 = { }, IE8 = "8+", DEFAULT = "8+")
+    @NotYetImplemented({ IE6, IE7 })
+    public void downlevelRevealed1() throws Exception {
+        final String html = "<html><head>"
+            + "<![if gte IE 8]>\n"
+            + "<script>alert('8+')</script>\n"
+            + "<![endif]>\n"
+            + "</head><body></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE6 = { }, IE7 = { }, IE8 = "8+", DEFAULT = "8+")
+    @NotYetImplemented({ IE6, IE7 })
+    public void downlevelRevealed2() throws Exception {
+        final String html = "<html><head>"
+            + "<!--[if gte IE 8]>-->\n"
+            + "<script>alert('8+')</script>\n"
+            + "<!--<![endif]-->\n"
+            + "</head><body></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE6 = { }, IE7 = { }, IE8 = "8+", DEFAULT = "8+")
+    @NotYetImplemented(IE)
+    public void downlevelRevealed3() throws Exception {
+        final String html = "<html><head>"
+            + "<!--[if gte IE 8]><!-->\n"
+            + "<script>alert('8+')</script>\n"
+            + "<!--<![endif]-->\n"
+            + "</head><body></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }
