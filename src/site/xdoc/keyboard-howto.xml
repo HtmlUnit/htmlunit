@@ -40,6 +40,9 @@
                 HtmlPage.pressAccessKey(char).
             </p>
             <p>
+                To use special keys, you can use htmlElement.type(int) with KeyboardEvent.DOM_VK_PAGE_DOWN.
+            </p>
+            <p>
                 Finally, there is an assertion for testing that will verify that every tabbable element
                 has a defined tabindex attribute.  This is done with
                 WebAssert.assertAllTabIndexAttributesSet().
