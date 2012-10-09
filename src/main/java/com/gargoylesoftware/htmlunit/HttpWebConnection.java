@@ -25,6 +25,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -731,6 +732,7 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
      */
     private static final Comparator<Cookie> COOKIE_COMPARATOR = new CookiePathComparator();
 
+    private static final SimpleDateFormat INCORRECT_FORMAT = new SimpleDateFormat("EEE,dd MMM yyyy HH:mm:ss z");
     HtmlUnitBrowserCompatCookieSpec(final IncorrectnessListener incorrectnessListener) {
         super();
         final BasicPathHandler pathHandler = new BasicPathHandler() {
@@ -741,18 +743,30 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
         };
         registerAttribHandler(ClientCookie.PATH_ATTR, pathHandler);
 
-        final CookieAttributeHandler original = getAttribHandler(ClientCookie.EXPIRES_ATTR);
-        final CookieAttributeHandler wrapper = new CookieAttributeHandler() {
+        final CookieAttributeHandler originalExpiresHandler = getAttribHandler(ClientCookie.EXPIRES_ATTR);
+        final CookieAttributeHandler wrapperExpiresHandler = new CookieAttributeHandler() {
             public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
-                original.validate(cookie, origin);
+                originalExpiresHandler.validate(cookie, origin);
             }
 
             public void parse(final SetCookie cookie, String value) throws MalformedCookieException {
                 if (value.startsWith("\"") && value.endsWith("\"")) {
                     value = value.substring(1, value.length() - 1);
                 }
+                final int length = value.length();
+                if (value.endsWith("GMT") && length > 16 && !Character.isDigit(value.charAt(length - 16))) {
+                    //add "19" prefix to the year
+                    value = value.substring(0, length - 15) + "19" + value.substring(length - 15);
+                    try {
+                        INCORRECT_FORMAT.parse(value);
+                        value = value.substring(0, 4) + ' ' + value.substring(4);
+                    }
+                    catch (final Exception e) {
+                        //this is ok
+                    }
+                }
                 try {
-                    original.parse(cookie, value);
+                    originalExpiresHandler.parse(cookie, value);
                 }
                 catch (final MalformedCookieException e) {
                     incorrectnessListener.notify("Incorrect cookie expiration time: " + value, this);
@@ -760,10 +774,10 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
             }
 
             public boolean match(final Cookie cookie, final CookieOrigin origin) {
-                return original.match(cookie, origin);
+                return originalExpiresHandler.match(cookie, origin);
             }
         };
-        registerAttribHandler(ClientCookie.EXPIRES_ATTR, wrapper);
+        registerAttribHandler(ClientCookie.EXPIRES_ATTR, wrapperExpiresHandler);
 
         final CookieAttributeHandler httpOnlyHandler = new CookieAttributeHandler() {
             public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {

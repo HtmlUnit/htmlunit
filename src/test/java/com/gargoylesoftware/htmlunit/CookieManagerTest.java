@@ -269,13 +269,30 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "first=1; second=2; third=3",
-            CHROME = "third=3")
+    @Alerts(DEFAULT = "first=1; second=2; third=3", CHROME = "third=3")
     public void setCookieExpired_badDateFormat() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;expires=Dec-1-94 16:00:00"));
         responseHeader1.add(new NameValuePair("Set-Cookie", "second=2;expires=Dec-1-1994 16:00:00"));
         responseHeader1.add(new NameValuePair("Set-Cookie", "third=3;expires=Dec-1-2094 16:00:00"));
+        getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader1);
+
+        loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts
+    public void setCookieExpired_badDateFormat2() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;expires=Thu 01-Dec-94 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "second=2;expires=Thu 01 Dec 94 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "third=3;expires=Thu, 01-Dec-94 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "fourth=4;expires=Thu, 01 Dec 94 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "fifth=5;expires=Thu,01-Dec-94 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "sixth=6;expires=Thu,01 Dec 94 16:00:00 GMT"));
         getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader1);
 
         loadPageWithAlerts2(getDefaultUrl());
