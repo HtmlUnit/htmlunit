@@ -53,6 +53,25 @@
            		</ol>
        		</p>
             <p>
+                For SnapShots:
+                <ol>
+                    <li>
+                        Add parent to the pom.xml:
+<source><![CDATA[<parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+</parent>]]></source>
+                    </li>
+                    <li>
+                        Execute "mvn -Dmaven.test.skip=true deploy"
+                    </li>
+                    <li>
+                        Remove the parent project.
+                    </li>
+                </ol>
+            </p>
+            <p>
                 Now do this for each release:
                 <ol>
                     <li>
