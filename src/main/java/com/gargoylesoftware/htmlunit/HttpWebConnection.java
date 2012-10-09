@@ -754,10 +754,16 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
                     value = value.substring(1, value.length() - 1);
                 }
                 final int length = value.length();
+                if ("sixth".equals(cookie.getName())) {
+                    System.out.println("HtmlUnitBrowserCompatCookieSpec.log.1: " + value + "!");
+                }
                 if (value.endsWith("GMT") && length > 16 && !Character.isDigit(value.charAt(length - 16))) {
                     //add "19" prefix to the year
                     value = value.substring(0, length - 15) + "19" + value.substring(length - 15);
                     try {
+                        if ("sixth".equals(cookie.getName())) {
+                            System.out.println("HtmlUnitBrowserCompatCookieSpec.log.2: " + value + "!");
+                        }
                         INCORRECT_FORMAT.parse(value);
                         value = value.substring(0, 4) + ' ' + value.substring(4);
                     }
