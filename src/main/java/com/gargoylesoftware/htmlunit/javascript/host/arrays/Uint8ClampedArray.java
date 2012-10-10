@@ -38,6 +38,7 @@ public class Uint8ClampedArray extends ArrayBufferViewBase {
     /**
      * {@inheritDoc}
      */
+    @Override
     @JsxConstructor
     public void constructor(final Object object, final Object byteOffset, final Object length) {
         super.constructor(object, byteOffset, length);
