@@ -241,6 +241,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the "width" property.
      * @return the value of the "width" property
      */
+    @Override
     @JsxGetter
     public int getWidth() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
@@ -266,6 +267,7 @@ public class HTMLImageElement extends HTMLElement {
      * Returns the value of the "height" property.
      * @return the value of the "height" property
      */
+    @Override
     @JsxGetter
     public int getHeight() {
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();

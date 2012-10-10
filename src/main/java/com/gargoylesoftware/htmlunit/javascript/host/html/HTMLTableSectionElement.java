@@ -86,6 +86,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * Returns the value of the "ch" property.
      * @return the value of the "ch" property
      */
+    @Override
     @JsxGetter
     public String getCh() {
         return super.getCh();
@@ -95,6 +96,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * Sets the value of the "ch" property.
      * @param ch the value of the "ch" property
      */
+    @Override
     @JsxSetter
     public void setCh(final String ch) {
         super.setCh(ch);
@@ -104,6 +106,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * Returns the value of the "chOff" property.
      * @return the value of the "chOff" property
      */
+    @Override
     @JsxGetter
     public String getChOff() {
         return super.getChOff();
@@ -113,6 +116,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * Sets the value of the "chOff" property.
      * @param chOff the value of the "chOff" property
      */
+    @Override
     @JsxSetter
     public void setChOff(final String chOff) {
         super.setChOff(chOff);
