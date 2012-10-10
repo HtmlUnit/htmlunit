@@ -412,6 +412,7 @@ public class Element extends EventNode {
      * @return the parent element
      * @see #getParent()
      */
+    @Override
     public Element getParentElement() {
         Node parent = getParent();
         while (parent != null && !(parent instanceof Element)) {
