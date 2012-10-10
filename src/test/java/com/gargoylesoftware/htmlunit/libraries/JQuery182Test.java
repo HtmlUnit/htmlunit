@@ -16,12 +16,12 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE7;
 import static org.junit.Assert.fail;
 
 import org.eclipse.jetty.server.Server;
 import org.junit.After;
 import org.junit.ComparisonFailure;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -1277,9 +1277,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "data: JSON data- attributes can have newlines (0, 1, 1)",
         CHROME = "data: JSON data- attributes can have newlines (0, 1, 1)",
         IE = "data: Only check element attributes once when calling .data() - #8909 (0, 2, 2)")
-    @Tries(3)
-    //needs correct expectations of IE6/IE7
-    @NotYetImplemented(IE7)
+    @Ignore
     public void test_123() throws Exception {
         runTest(123);
     }
