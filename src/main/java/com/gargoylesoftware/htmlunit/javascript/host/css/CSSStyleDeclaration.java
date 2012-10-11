@@ -712,7 +712,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         final int pos = string.indexOf('-');
         if (pos == -1 || pos >= string.length() - 1) {
             // cache also this strings for performance
-            CamelizeCache_.put(string, result);
+            CamelizeCache_.put(string, string);
             return string;
         }
 
