@@ -38,12 +38,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
 
-    private final String str_ = "(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)";
-    private final String begin_ = "<div>bla</div>";
-    private final String end_ = "foo\n<span>bla2</span>";
-    private final String text_ = begin_ + "<script>var a = 123;</script>" + end_;
-    private final String expected_ = begin_ + end_;
-    private final String src_ = "var re = new RegExp(str, 'img');\n"
+    private static final String str_ = "(?:<script.*?>)((\\n|\\r|.)*?)(?:<\\/script>)";
+    private static final String begin_ = "<div>bla</div>";
+    private static final String end_ = "foo\n<span>bla2</span>";
+    private static final String text_ = begin_ + "<script>var a = 123;</script>" + end_;
+    private static final String expected_ = begin_ + end_;
+    private static final String src_ = "var re = new RegExp(str, 'img');\n"
         + "var s = text.replace(re, '');\n"
         + "if (s != expected)\n"
         + " throw 'Expected >' + expected + '< but got >' + s + '<';";
