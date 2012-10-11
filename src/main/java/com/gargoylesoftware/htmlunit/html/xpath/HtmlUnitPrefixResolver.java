@@ -62,9 +62,12 @@ final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
 
     private String getNamespace(final DomElement element, final String prefix) {
         final Map<String, DomAttr> attributes = element.getAttributesMap();
+        final String xmlns = "xmlns:";
+        final int xmlnsLength = xmlns.length();
+
         for (final String name : attributes.keySet()) {
-            if (name.startsWith("xmlns:")) {
-                if (name.substring("xmlns:".length()).equals(prefix)) {
+            if (name.startsWith(xmlns)) {
+                if (name.substring(xmlnsLength).equals(prefix)) {
                     return attributes.get(name).getValue();
                 }
             }
