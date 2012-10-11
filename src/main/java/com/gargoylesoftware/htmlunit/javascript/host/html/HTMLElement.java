@@ -739,11 +739,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
 
         final DomAttr newDomAttr = newAtt.getDomNodeOrDie();
-        if (null == newDomAttr) {
-            final String value = newAtt.getValue();
-            getDomNodeOrDie().setAttribute(name, value);
-            return replacedAtt;
-        }
         getDomNodeOrDie().setAttributeNode(newDomAttr);
         return replacedAtt;
     }
