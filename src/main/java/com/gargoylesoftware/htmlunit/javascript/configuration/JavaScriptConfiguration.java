@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.WeakHashMap;
 
 import org.apache.commons.logging.Log;
@@ -475,9 +476,10 @@ public final class JavaScriptConfiguration {
                         classConfiguration.addConstant(field.getName());
                     }
                 }
-                for (final String property : allGetters.keySet()) {
+                for (final Entry<String, Method> getterEntry : allGetters.entrySet()) {
+                    final String property = getterEntry.getKey();
                     classConfiguration.addProperty(property,
-                            allGetters.get(property), allSetters.get(property));
+                            getterEntry.getValue(), allSetters.get(property));
                 }
                 return classConfiguration;
             }
