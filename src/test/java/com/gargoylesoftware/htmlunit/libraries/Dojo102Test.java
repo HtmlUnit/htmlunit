@@ -21,9 +21,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.RetriesRunner;
-import com.gargoylesoftware.htmlunit.RetriesRunner.Retries;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Daniel Gredler
  * @author Ronald Brill
  */
-@RunWith(RetriesRunner.class)
+@RunWith(BrowserRunner.class)
 public class Dojo102Test extends WebServerTestCase {
 
     private WebClient client_;
@@ -62,7 +62,7 @@ public class Dojo102Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Retries(3)
+    @Tries(3)
     public void dojo() throws Exception {
         client_ = new WebClient(BrowserVersion.FIREFOX_3_6);
         final String url = "http://localhost:" + PORT + "/util/doh/runner.html";
