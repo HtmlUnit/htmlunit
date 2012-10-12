@@ -34,7 +34,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
@@ -87,23 +86,23 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     protected void runTest(final int testNumber) throws Exception {
-        final long endTime = System.currentTimeMillis() + 60 * 1000;
+        final long runTime = 60 * DEFAULT_WAIT_TIME;
+        final long endTime = System.currentTimeMillis() + runTime;
         try {
             getWebDriver().get("http://localhost:" + PORT + "/jquery/test/index.html?testNumber="
                     + testNumber);
-            WebElement element = null;
-            do {
-                if (element == null) {
-                    try {
-                        element = getWebDriver().findElement(By.id("qunit-test-output0"));
-                    }
-                    catch (final Exception e) {
-                        //ignore
-                    }
-                }
+
+            final WebElement status = getWebDriver().findElement(By.id("qunit-testresult"));
+            while (!status.getText().startsWith("Tests completed")) {
                 Thread.sleep(100);
-            } while (System.currentTimeMillis() < endTime && (element == null || !element.getText().contains(",")));
-            String result = element.getText();
+
+                if (System.currentTimeMillis() > endTime) {
+                    fail("Test #" + testNumber + " runs too long (longer than " + runTime / 1000 + "s)");
+                }
+            }
+
+            final WebElement output = getWebDriver().findElement(By.id("qunit-test-output0"));
+            String result = output.getText();
             result = result.substring(0, result.indexOf("Rerun")).trim();
             final String expected = getExpectedAlerts()[0];
             if (!expected.contains(result)) {
@@ -135,13 +134,13 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @AfterClass
     public static void stopServer() throws Exception {
+        shutDownAll();
         try {
             SERVER_.stop();
         }
         catch (final Exception e) {
             // ignore
         }
-        shutDownAll();
     }
 
     /**
@@ -788,7 +787,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"once stopOnFalse\" ) - no filter (0, 20, 20)")
-    @Tries(3)
     public void test_72() throws Exception {
         runTest(72);
     }
@@ -807,7 +805,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("callbacks: jQuery.Callbacks( \"once stopOnFalse\" ) - filter (0, 20, 20)")
-    @Tries(3)
     public void test_74() throws Exception {
         runTest(74);
     }
@@ -1537,7 +1534,6 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "attributes: attr(String, Object) - Loaded via XML document (0, 2, 2)",
         CHROME = "attributes: attr(String, Object) - Loaded via XML document (0, 2, 2)",
         IE = "attributes: attr(jquery_method) (0, 9, 9)")
-    @Tries(3)
     public void test_144() throws Exception {
         runTest(144);
     }
