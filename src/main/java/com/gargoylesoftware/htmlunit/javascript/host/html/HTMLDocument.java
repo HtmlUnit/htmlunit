@@ -1840,7 +1840,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return new StaticNodeList(nodes, this);
         }
         catch (final CSSException e) {
-            throw Context.reportRuntimeError("An invalid or illegal string was specified");
+            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+                    + selectors + "' error: " + e.getMessage() + ").");
         }
     }
 
@@ -1859,7 +1860,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             return null;
         }
         catch (final CSSException e) {
-            throw Context.reportRuntimeError("An invalid or illegal string was specified");
+            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+                    + selectors + "' error: " + e.getMessage() + ").");
         }
     }
 
