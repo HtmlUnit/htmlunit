@@ -651,8 +651,9 @@ public class Node extends SimpleScriptable {
      * Allows the registration of event listeners on the event target.
      * @param type the event type to listen for (like "onclick")
      * @param listener the event listener
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
      * @return <code>true</code> if the listener has been added
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536343.aspx">MSDN documentation</a>
+     * @see #addEventListener(String, Function, boolean)
      */
     @JsxFunction(@WebBrowser(IE))
     public boolean attachEvent(final String type, final Function listener) {
@@ -665,6 +666,7 @@ public class Node extends SimpleScriptable {
      * @param listener the event listener
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture
      * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.addEventListener">Mozilla documentation</a>
+     * @see #attachEvent(String, Function)
      */
     @JsxFunction(@WebBrowser(FF))
     public void addEventListener(final String type, final Function listener, final boolean useCapture) {
