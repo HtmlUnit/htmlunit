@@ -24,7 +24,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -201,10 +200,14 @@ public class ExtJS22Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Tries(3)
     public void grid_binding() throws Exception {
         final HtmlPage page = getPage("grid", "binding");
-        page.getWebClient().waitForBackgroundJavaScriptStartingBefore(2000);
+
+        // usually this need 1s but sometimes our build machine is slower
+        // this is not an performance test, we only like to ensure that all
+        // functionality is running
+        page.getWebClient().waitForBackgroundJavaScriptStartingBefore(10 * 1000); // 10s
+
         final HtmlElement detailPanel = page.getHtmlElementById("detailPanel");
         final HtmlDivision resultsDiv = detailPanel.getFirstByXPath("div/div");
         assertEquals("Please select a book to see additional details.", resultsDiv.asText());
