@@ -27,7 +27,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
@@ -105,7 +104,6 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Tries(3)
     public void setClearIntervalUsesManager() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -134,10 +132,10 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
         assertNotNull(jobManager);
         assertEquals(1, jobManager.getJobCount());
-        jobManager.waitForJobs(1000);
+        jobManager.waitForJobs(DEFAULT_WAIT_TIME);
         assertEquals(0, jobManager.getJobCount());
         assertEquals(Collections.nCopies(3, "blah"), collectedAlerts);
-        assertMaxTestRunTime(1000);
+        assertMaxTestRunTime(DEFAULT_WAIT_TIME);
     }
 
     /**
