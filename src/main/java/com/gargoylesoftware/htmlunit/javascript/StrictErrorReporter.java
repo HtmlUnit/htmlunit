@@ -28,6 +28,7 @@ import org.apache.commons.logging.LogFactory;
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class StrictErrorReporter implements ErrorReporter, Serializable {
 
@@ -83,7 +84,15 @@ public class StrictErrorReporter implements ErrorReporter, Serializable {
     private String format(
             final String prefix, final String message, final String sourceName,
             final int line, final String lineSource, final int lineOffset) {
-        return prefix + ": message=[" + message + "] sourceName=[" + sourceName + "] line=[" + line
-            + "] lineSource=[" + lineSource + "] lineOffset=[" + lineOffset + "]";
+        final StringBuilder result = new StringBuilder();
+        result.append(prefix);
+        result.append(": message=[").append(message);
+        result.append("] sourceName=[").append(sourceName);
+        result.append("] line=[").append(line);
+        result.append("] lineSource=[").append(lineSource);
+        result.append("] lineOffset=[").append(lineOffset);
+        result.append("]");
+
+        return result.toString();
     }
 }
