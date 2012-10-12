@@ -38,7 +38,7 @@ public final class Patch {
      * base. If you are calling this method from another project, this specifies HtmlUnit home folder.
      * @param patchPath the path to the patch
      * @param authorName the author name, e.g. "John Smith"
-     * @throws Exception if an exception occurs
+     * @throws IOException if an exception occurs
      */
     public static void checkAuthor(final String baseDir, final String patchPath, final String authorName)
         throws IOException {
@@ -77,12 +77,12 @@ public final class Patch {
     /**
      * Prints to <tt>System.out</tt> the "String html = ..." string from the actual HTML file.
      * @param htmlFile the path of the HTML file
-     * @throws Exception if
+     * @throws IOException if
      */
     public static void generateHtmlString(final File htmlFile) throws IOException {
         final List<String> lines = FileUtils.readLines(htmlFile);
         for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get(i).replace("\t", "    ").replace("\\", "\\\\").replace("\"", "\\\"");
+            final String line = lines.get(i).replace("\t", "    ").replace("\\", "\\\\").replace("\"", "\\\"");
             if (i == 0) {
                 System.out.println("        final String html = \"" + line + "\\n\"");
             }
