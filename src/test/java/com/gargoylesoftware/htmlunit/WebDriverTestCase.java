@@ -104,9 +104,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
-    private static final long DEFAULT_WAIT_TIME = Integer.parseInt(
-            System.getProperty("htmlunit.test.defaultwaittime", "1000"));;
-
     private static List<String> BROWSERS_PROPERTIES_;
     private static String FF3_6_BIN_;
     private static String FF10_BIN_;

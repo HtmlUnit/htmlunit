@@ -74,6 +74,13 @@ public abstract class WebTestCase {
     public static final int SOCKS_PROXY_PORT = Integer.parseInt(
             System.getProperty("htmlunit.test.socksproxy.port", "55555"));
 
+    /** The factor used to adjust the DEFAULT_WAIT_TIME (for slow systems like our build machine). */
+    protected static final long DEFAULT_WAIT_TIME_FACTOR = Integer.parseInt(
+            System.getProperty("htmlunit.test.defaultwaittimefactor", "4"));
+
+    /** The default time used to wait for the expected alerts. */
+    protected static final long DEFAULT_WAIT_TIME = 1000 * DEFAULT_WAIT_TIME_FACTOR;
+
     /** Constant for the URL which is used in the tests. */
     public static final URL URL_FIRST;
 

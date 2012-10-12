@@ -22,8 +22,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -62,18 +62,18 @@ public class Dojo102Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Tries(3)
+    @Browsers(Browser.FF3_6)
     public void dojo() throws Exception {
-        client_ = new WebClient(BrowserVersion.FIREFOX_3_6);
+        client_ = getWebClient();
         final String url = "http://localhost:" + PORT + "/util/doh/runner.html";
 
         final HtmlPage page = client_.getPage(url);
-        client_.waitForBackgroundJavaScript(10000);
+        client_.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
 
         final HtmlElement logBody = page.getHtmlElementById("logBody");
         DomNode lastChild = logBody.getLastChild();
         while (true) {
-            Thread.sleep(10000);
+            Thread.sleep(DEFAULT_WAIT_TIME);
             final DomNode newLastChild = logBody.getLastChild();
             if (lastChild != newLastChild) {
                 lastChild = newLastChild;
