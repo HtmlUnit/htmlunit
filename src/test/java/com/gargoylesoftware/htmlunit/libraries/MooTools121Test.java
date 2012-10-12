@@ -61,7 +61,8 @@ public class MooTools121Test extends SimpleWebTestCase {
         // usually this need 40s but sometimes our build machine is slower
         // this is not an performance test, we only like to ensure that all
         // functionality is running
-        client_.waitForBackgroundJavaScriptStartingBefore(4 * 60 * 1000); // 4min
+        final int jobCount = client_.waitForBackgroundJavaScriptStartingBefore(60 * DEFAULT_WAIT_TIME);
+        assertTrue("There are still " + jobCount + " jobs running", jobCount == 0);
 
         final String prevProgress = progress.asText();
 
