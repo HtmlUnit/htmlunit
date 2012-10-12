@@ -98,10 +98,15 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public abstract class WebDriverTestCase extends WebTestCase {
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
+
+    private static final long DEFAULT_WAIT_TIME = Integer.parseInt(
+            System.getProperty("htmlunit.test.defaultwaittime", "1000"));;
+
     private static List<String> BROWSERS_PROPERTIES_;
     private static String FF3_6_BIN_;
     private static String FF10_BIN_;
@@ -529,7 +534,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final String html) throws Exception {
-        return loadPageWithAlerts2(html, URL_FIRST, 1000);
+        return loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -551,7 +556,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final String html, final URL url) throws Exception {
-        return loadPageWithAlerts2(html, url, 1000);
+        return loadPageWithAlerts2(html, url, DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -602,7 +607,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected final WebDriver loadPageWithAlerts2(final String html,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
-        return loadPageWithAlerts2(html, getDefaultUrl(), 1000, servlets);
+        return loadPageWithAlerts2(html, getDefaultUrl(), DEFAULT_WAIT_TIME, servlets);
     }
 
     /**
