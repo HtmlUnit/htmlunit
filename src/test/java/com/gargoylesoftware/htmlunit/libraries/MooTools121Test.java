@@ -28,7 +28,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -49,7 +48,6 @@ public class MooTools121Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Tries(3)
     @SuppressWarnings("unchecked")
     public void mooTools() throws Exception {
         final String resource = "libraries/mootools/1.2.1/Specs/index.html";
@@ -60,7 +58,10 @@ public class MooTools121Test extends SimpleWebTestCase {
         final HtmlPage page = client_.getPage(url);
 
         final HtmlElement progress = page.getHtmlElementById("progress");
-        client_.waitForBackgroundJavaScriptStartingBefore(2000 * 100);
+        // usually this need 40s but sometimes our build machine is slower
+        // this is not an performance test, we only like to ensure that all
+        // functionality is running
+        client_.waitForBackgroundJavaScriptStartingBefore(4 * 60 * 1000); // 4min
 
         final String prevProgress = progress.asText();
 
