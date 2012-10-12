@@ -206,7 +206,7 @@ public class ExtJS22Test extends SimpleWebTestCase {
         // usually this need 1s but sometimes our build machine is slower
         // this is not an performance test, we only like to ensure that all
         // functionality is running
-        page.getWebClient().waitForBackgroundJavaScriptStartingBefore(10 * 1000); // 10s
+        page.getWebClient().waitForBackgroundJavaScriptStartingBefore(2 * DEFAULT_WAIT_TIME);
 
         final HtmlElement detailPanel = page.getHtmlElementById("detailPanel");
         final HtmlDivision resultsDiv = detailPanel.getFirstByXPath("div/div");
