@@ -158,4 +158,42 @@ class SelectorSpecificity implements Comparable<SelectorSpecificity> {
         }
         return 0;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + fieldA_;
+        result = prime * result + fieldB_;
+        result = prime * result + fieldC_;
+        result = prime * result + fieldD_;
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SelectorSpecificity other = (SelectorSpecificity) obj;
+        if (fieldA_ != other.fieldA_) {
+            return false;
+        }
+        if (fieldB_ != other.fieldB_) {
+            return false;
+        }
+        if (fieldC_ != other.fieldC_) {
+            return false;
+        }
+        if (fieldD_ != other.fieldD_) {
+            return false;
+        }
+        return true;
+    }
 }
