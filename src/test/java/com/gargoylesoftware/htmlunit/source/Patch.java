@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.source;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public final class Patch {
      * @throws Exception if an exception occurs
      */
     public static void checkAuthor(final String baseDir, final String patchPath, final String authorName)
-        throws Exception {
+        throws IOException {
         final List<String> errors = new ArrayList<String>();
         final List<String> lines = FileUtils.readLines(new File(patchPath));
         for (final String line : lines) {
@@ -69,8 +70,32 @@ public final class Patch {
             }
         }
         if (!errors.isEmpty()) {
-            throw new Exception("Total missing files: " + errors.size());
+            throw new RuntimeException("Total missing files: " + errors.size());
         }
     }
 
+    /**
+     * Prints to <tt>System.out</tt> the "String html = ..." string from the actual HTML file.
+     * @param htmlFile the path of the HTML file
+     * @throws Exception if
+     */
+    public static void generateHtmlString(final File htmlFile) throws IOException {
+        final List<String> lines = FileUtils.readLines(htmlFile);
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i).replace("\t", "    ").replace("\\", "\\\\").replace("\"", "\\\"");
+            if (i == 0) {
+                System.out.println("        final String html = \"" + line + "\\n\"");
+            }
+            else {
+                System.out.print("            + \"" + line);
+                if (i == lines.size() - 1) {
+                    System.out.print("\";");
+                }
+                else {
+                    System.out.print("\\n\"");
+                }
+                System.out.println();
+            }
+        }
+    }
 }
