@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -361,9 +362,10 @@ public class JavaScriptEngine {
         configureConstants(config, scriptable);
 
         // the properties
-        for (final String propertyName : config.propertyKeys()) {
-            final Method readMethod = config.getPropertyReadMethod(propertyName);
-            final Method writeMethod = config.getPropertyWriteMethod(propertyName);
+        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.propertyEntries()) {
+            final String propertyName = propertyEntry.getKey();
+            final Method readMethod = propertyEntry.getValue().getReadMethod();
+            final Method writeMethod = propertyEntry.getValue().getWriteMethod();
             scriptable.defineProperty(propertyName, null, readMethod, writeMethod, ScriptableObject.EMPTY);
         }
 
@@ -375,8 +377,9 @@ public class JavaScriptEngine {
             attributes = ScriptableObject.EMPTY;
         }
         // the functions
-        for (final String functionName : config.functionKeys()) {
-            final Method method = config.getFunctionMethod(functionName);
+        for (final Entry<String, Method> functionInfo : config.functionEntries()) {
+            final String functionName = functionInfo.getKey();
+            final Method method = functionInfo.getValue();
             final FunctionObject functionObject = new FunctionObject(functionName, method, scriptable);
             scriptable.defineProperty(functionName, functionObject, attributes);
         }

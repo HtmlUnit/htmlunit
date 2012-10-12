@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.lang.reflect.Method;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -243,10 +244,11 @@ public class ActiveXObject extends SimpleScriptable {
             for (final String function : classConfig.functionKeys()) {
                 addFunction(document, function);
             }
-            for (final String property : classConfig.propertyKeys()) {
-                addProperty(document, property,
-                        classConfig.getPropertyReadMethod(property) != null,
-                        classConfig.getPropertyWriteMethod(property) != null);
+            for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : classConfig.propertyEntries()) {
+                final String propertyName = propertyEntry.getKey();
+                final Method readMethod = propertyEntry.getValue().getReadMethod();
+                final Method writeMethod = propertyEntry.getValue().getWriteMethod();
+                addProperty(document, propertyName, readMethod != null, writeMethod != null);
             }
             className = classConfig.getExtendedClassName();
 

@@ -30,54 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 public class ClassConfigurationTest extends SimpleWebTestCase {
 
     /**
-     * Tests equality on a class configuration.
-     * @throws Exception - Exception on error
-     */
-    @Test
-    public void testConfigurationSimplePropertyEquality() throws Exception {
-        final Class<ConfigTestClass> klass = ConfigTestClass.class;
-        final ClassConfiguration config1 = new ClassConfiguration(klass, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration(klass, null, true);
-
-        config1.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
-        Assert.assertFalse("Configs should not be equal", config1.equals(config2));
-        config2.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
-        assertTrue("Configs should now be equal", config1.equals(config2));
-    }
-
-    /**
-     * Tests equality on a class configuration for function.
-     * @throws Exception - Exception on error
-     */
-    @Test
-    public void testConfigurationSimpleFunctionEquality() throws Exception {
-        final Class<ConfigTestClass> klass = ConfigTestClass.class;
-        final ClassConfiguration config1 = new ClassConfiguration(klass, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration(klass, null, true);
-
-        config1.addFunction(klass.getDeclaredMethod("testFunction"));
-        Assert.assertFalse("Configs should not be equal", config1.equals(config2));
-        config2.addFunction(klass.getDeclaredMethod("testFunction"));
-        assertTrue("Configs should now be equal", config1.equals(config2));
-    }
-
-    /**
-     * Tests equality on a class configuration.
-     * @throws Exception - Exception on error
-     */
-    @Test
-    public void testConfigurationSimpleUnequalProperties() throws Exception {
-        final Class<ConfigTestClass> klass = ConfigTestClass.class;
-        final ClassConfiguration config1 = new ClassConfiguration(klass, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration(klass, null, true);
-
-        config1.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
-        Assert.assertFalse("Configs should not be equal", config1.equals(config2));
-        config2.addProperty("test", klass.getMethod("jsxGet_test"), null);
-        Assert.assertFalse("Configs should not be equal due to different property values", config1.equals(config2));
-    }
-
-    /**
      * @throws Exception on error
      */
     @Test
@@ -93,42 +45,6 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     public void testForJSFlagFalse() throws Exception {
         final ClassConfiguration config1 = new ClassConfiguration(ConfigTestClass.class, null, false);
         Assert.assertFalse("JSObject Flag should not have been set", config1.isJsObject());
-    }
-
-    /**
-     * Tests equality on a class configuration.
-     * @throws Exception - Exception on error
-     */
-    @Test
-    public void testConfigurationPropertyEqualityWithBrowser() throws Exception {
-        final Class<ConfigTestClass> klass = ConfigTestClass.class;
-        final ClassConfiguration config1 = new ClassConfiguration(klass, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration(klass, null, true);
-
-        config1.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
-        config2.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
-        config1.setBrowser("test", "Netscape");
-        Assert.assertFalse("Should not be equal with browser added", config1.equals(config2));
-        config2.setBrowser("test", "Netscape");
-        assertTrue("Should be equal with browser added", config1.equals(config2));
-    }
-
-    /**
-     * Tests equality on a class configuration mis-matched browsers.
-     * @throws Exception - Exception on error
-     */
-    @Test
-    public void testConfigurationPropertyEqualityWithDifferentBrowsers() throws Exception {
-        final Class<ConfigTestClass> klass = ConfigTestClass.class;
-        final ClassConfiguration config1 = new ClassConfiguration(klass, null, true);
-        final ClassConfiguration config2 = new ClassConfiguration(klass, null, true);
-
-        config1.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
-        config2.addProperty("test", klass.getMethod("jsxGet_test"), klass.getMethod("jsxSet_test", Boolean.class));
-        config1.setBrowser("test", "Netscape");
-        Assert.assertFalse("Should not be equal with browser added", config1.equals(config2));
-        config2.setBrowser("test", "Microsoft Internet Explorer");
-        Assert.assertFalse("Should be equal with different browser added", config1.equals(config2));
     }
 
     /**
