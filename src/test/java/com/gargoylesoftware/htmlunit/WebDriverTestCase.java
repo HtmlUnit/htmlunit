@@ -109,7 +109,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String FF10_BIN_;
     private static String CHROME16_BIN_;
 
-    private static Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
+    /** The driver cache. */
+    protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
     private static Server STATIC_SERVER_;
     // second server for cross-origin tests.
     private static Server STATIC_SERVER2_;
