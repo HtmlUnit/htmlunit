@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -70,19 +69,12 @@ public class Dojo102Test extends WebServerTestCase {
         final HtmlPage page = client_.getPage(url);
         client_.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
 
-        final HtmlElement logBody = page.getHtmlElementById("logBody");
-        DomNode lastChild = logBody.getLastChild();
-        while (true) {
-            Thread.sleep(DEFAULT_WAIT_TIME);
-            final DomNode newLastChild = logBody.getLastChild();
-            if (lastChild != newLastChild) {
-                lastChild = newLastChild;
-            }
-            else {
-                break;
-            }
+        final HtmlElement status = page.getHtmlElementById("runningStatus");
+        while (!"Stopped".equals(status.asText())) {
+            client_.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
         }
 
+        final HtmlElement logBody = page.getHtmlElementById("logBody");
         final Iterator<DomElement> logs = logBody.getChildElements().iterator();
         eq("345 tests to run in 41 groups", logs);
         eq(GROUP_DELIMITER, logs);
