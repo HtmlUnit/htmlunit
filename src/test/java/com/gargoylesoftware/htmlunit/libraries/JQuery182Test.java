@@ -1276,7 +1276,6 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "data: JSON data- attributes can have newlines (0, 1, 1)",
         CHROME = "data: JSON data- attributes can have newlines (0, 1, 1)",
         IE = "data: Only check element attributes once when calling .data() - #8909 (0, 2, 2)")
-    @Ignore
     public void test_123() throws Exception {
         runTest(123);
     }
