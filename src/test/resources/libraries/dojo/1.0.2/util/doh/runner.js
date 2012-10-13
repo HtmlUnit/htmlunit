@@ -679,7 +679,7 @@ doh._runFixture = function(groupName, fixture){
 					// ret.cancel();
 					// retEnd();
 					ret.errback(new Error("test timeout in "+fixture.name.toString()));
-				}, fixture["timeout"]||4000);  // RBRi timeout changed from 2000 to 4000 because our build maschine is slow
+				}, (fixture["timeout"]||2000)*2);  // RBRi timeout doubled because our build maschine is slow
 
 				ret.addBoth(function(arg){
 					clearTimeout(timer);
