@@ -1263,7 +1263,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "data: Only check element attributes once when calling .data() - #8909 (0, 2, 2)",
         CHROME = "data: Only check element attributes once when calling .data() - #8909 (0, 2, 2)",
         IE = "data: Triggering the removeData should not throw exceptions. (#10080) (0, 1, 1)")
-    @NotYetImplemented(IE)
+    @Ignore
     public void test_122() throws Exception {
         runTest(122);
     }
