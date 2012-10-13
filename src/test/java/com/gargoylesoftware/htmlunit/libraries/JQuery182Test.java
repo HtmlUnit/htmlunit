@@ -20,8 +20,6 @@ import static org.junit.Assert.fail;
 
 import org.eclipse.jetty.server.Server;
 import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.ComparisonFailure;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -29,7 +27,6 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -49,6 +46,7 @@ import com.gargoylesoftware.htmlunit.WebServerTestCase;
 public class JQuery182Test extends WebDriverTestCase {
 
     private static Server SERVER_;
+    private static WebDriver WEBDRIVER_;
 
     /**
      * Returns the jQuery version being tested.
@@ -69,17 +67,6 @@ public class JQuery182Test extends WebDriverTestCase {
         // nothing
     }
 
-    @Override
-    protected WebDriver getWebDriver() {
-        final WebDriver driver = super.getWebDriver();
-
-        // cache driver instances also for HtmlUnit
-        if (driver instanceof HtmlUnitDriver) {
-            WEB_DRIVERS_.put(getBrowserVersion(), driver);
-        }
-        return driver;
-    }
-
     /**
      * Runs the specified test.
      * @param testNumber the test number
@@ -88,11 +75,12 @@ public class JQuery182Test extends WebDriverTestCase {
     protected void runTest(final int testNumber) throws Exception {
         final long runTime = 60 * DEFAULT_WAIT_TIME;
         final long endTime = System.currentTimeMillis() + runTime;
+
         try {
-            getWebDriver().get("http://localhost:" + PORT + "/jquery/test/index.html?testNumber="
+            WEBDRIVER_.get("http://localhost:" + PORT + "/jquery/test/index.html?testNumber="
                     + testNumber);
 
-            final WebElement status = getWebDriver().findElement(By.id("qunit-testresult"));
+            final WebElement status = WEBDRIVER_.findElement(By.id("qunit-testresult"));
             while (!status.getText().startsWith("Tests completed")) {
                 Thread.sleep(100);
 
@@ -101,7 +89,7 @@ public class JQuery182Test extends WebDriverTestCase {
                 }
             }
 
-            final WebElement output = getWebDriver().findElement(By.id("qunit-test-output0"));
+            final WebElement output = WEBDRIVER_.findElement(By.id("qunit-test-output0"));
             String result = output.getText();
             result = result.substring(0, result.indexOf("Rerun")).trim();
             final String expected = getExpectedAlerts()[0];
@@ -120,27 +108,23 @@ public class JQuery182Test extends WebDriverTestCase {
     }
 
     /**
-     * This initiates the server.
+     * This MUST be named 'aaa' so it runs at the very beginning. It initiates web client.
      * @throws Exception if an error occurs
      */
-    @BeforeClass
-    public static void startSesrver() throws Exception {
+    @Test
+    public void aaa_startSesrver() throws Exception {
         SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/jQuery/" + getVersion(), null);
+        WEBDRIVER_ = getWebDriver();
     }
 
     /**
-     * This closes the server and web client.
+     * This MUST have 'zzz' so it runs at the very end. It closes the server and web client.
      * @throws Exception if an error occurs
      */
-    @AfterClass
-    public static void stopServer() throws Exception {
-        shutDownAll();
-        try {
-            SERVER_.stop();
-        }
-        catch (final Exception e) {
-            // ignore
-        }
+    @Test
+    public void zzz_stopServer() throws Exception {
+        SERVER_.stop();
+        WEBDRIVER_.close();
     }
 
     /**
