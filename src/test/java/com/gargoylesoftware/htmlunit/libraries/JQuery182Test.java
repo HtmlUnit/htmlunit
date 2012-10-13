@@ -1289,6 +1289,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "queue: queue() with other types (0, 14, 14)",
         CHROME = "queue: queue() with other types (0, 14, 14)",
         IE = "data: JSON data- attributes can have newlines (0, 1, 1)")
+    @Ignore
     public void test_124() throws Exception {
         runTest(124);
     }
