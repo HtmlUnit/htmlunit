@@ -76,7 +76,7 @@ public abstract class WebTestCase {
 
     /** The factor used to adjust the DEFAULT_WAIT_TIME (for slow systems like our build machine). */
     protected static final long DEFAULT_WAIT_TIME_FACTOR = Integer.parseInt(
-            System.getProperty("htmlunit.test.defaultwaittimefactor", "4"));
+            System.getProperty("htmlunit.test.defaultwaittimefactor", "1"));
 
     /** The default time used to wait for the expected alerts. */
     protected static final long DEFAULT_WAIT_TIME = 1000 * DEFAULT_WAIT_TIME_FACTOR;
