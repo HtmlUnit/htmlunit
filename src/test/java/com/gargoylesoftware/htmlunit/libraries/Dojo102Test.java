@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * JavaScript library</a>.
  *
  * Timeout was changed in: /util/doh/runner.js, line # 682
- * 
+ *
  * TODO: add tests for IE6 and IE7
  *
  * @version $Revision$
