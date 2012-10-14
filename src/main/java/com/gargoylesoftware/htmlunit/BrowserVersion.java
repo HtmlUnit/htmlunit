@@ -120,7 +120,7 @@ public class BrowserVersion implements Serializable {
     /** Firefox Warning: experimental!!! */
     public static final BrowserVersion FIREFOX_10 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
-        "Mozilla/5.0 (Windows NT 6.1; rv:10.0.7) Gecko/20100101 Firefox/10.0.7",
+        "Mozilla/5.0 (Windows NT 6.1; rv:10.0.9) Gecko/20100101 Firefox/10.0.9",
         (float) 10.0, "FF10", null);
 
     /** Internet Explorer 6. */
