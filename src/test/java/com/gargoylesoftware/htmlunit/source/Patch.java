@@ -77,7 +77,7 @@ public final class Patch {
     /**
      * Prints to <tt>System.out</tt> the "String html = ..." string from the actual HTML file.
      * @param htmlFile the path of the HTML file
-     * @throws IOException if
+     * @throws IOException if an exception occurs
      */
     public static void generateHtmlString(final File htmlFile) throws IOException {
         final List<String> lines = FileUtils.readLines(htmlFile);

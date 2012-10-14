@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -606,6 +607,66 @@ public class EventTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "focus INPUT", "focus INPUT" }, CHROME = { "focus INPUT", "focus INPUT" })
+    public void document_input_focus() throws Exception {
+        document_input("focus");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "blur INPUT", CHROME = "blur INPUT")
+    public void document_input_blur() throws Exception {
+        document_input("blur");
+    }
+
+    private void document_input(final String event) throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    handle(document);\n"
+                + "  }\n"
+                + "  function handle(obj) {\n"
+                + "    if (obj.addEventListener)\n"
+                + "      obj.addEventListener('" + event + "', handler, true);\n"
+                + "    else\n"
+                + "      obj.attachEvent('on" + event + "', handler);\n"
+                + "  }\n"
+                + "  function handler(e) {\n"
+                + "    var src = e.srcElement;\n"
+                + "    if (!src)\n"
+                + "       src = e.target;\n"
+                + "    log(e.type + ' ' + src.nodeName);\n"
+                + "  }\n"
+                + "  function log(x) {\n"
+                + "    document.getElementById('log').value += x + '\\n';\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <div id=\"div\">\n"
+                + "    <input id=\"input1\" type=\"text\">\n"
+                + "    <input id=\"input2\" type=\"text\">\n"
+                + "  </div>\n"
+                + "<textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement logElement = driver.findElement(By.id("log"));
+        final String initialValue = logElement.getAttribute("value");
+        driver.findElement(By.id("input1")).click();
+        driver.findElement(By.id("input2")).click();
+        final String addedValue = logElement.getAttribute("value").substring(initialValue.length());
+        final String text = addedValue.trim().replaceAll("\r", "");
         assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
     }
 }

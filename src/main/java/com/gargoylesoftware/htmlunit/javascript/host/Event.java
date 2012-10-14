@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -690,6 +691,10 @@ public class Event extends SimpleScriptable {
      */
     public boolean applies(final DomNode node) {
         if (TYPE_BLUR.equals(getType()) || TYPE_FOCUS.equals(getType())) {
+            if (node instanceof HtmlPage
+                    && getBrowserVersion().hasFeature(BrowserVersionFeatures.EVENT_FOCUS_DOCUMENT_DESCENDANTS)) {
+                return true;
+            }
             return node instanceof SubmittableElement || node instanceof HtmlAnchor
                 || node instanceof HtmlArea;
         }

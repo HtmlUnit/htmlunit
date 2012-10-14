@@ -153,6 +153,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_DOM_CONTENT_LOADED,
 
+    /** Is setting 'focus' and 'blur' events of 'document', triggers the event for the descendants elements. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    EVENT_FOCUS_DOCUMENT_DESCENDANTS,
+
     /** Triggers "input" event. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_INPUT,
