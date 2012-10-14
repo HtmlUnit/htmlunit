@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_NAME_VALUE_PARAMS;
+
 import java.io.IOException;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -75,7 +76,7 @@ public class HtmlImageInput extends HtmlInput {
             final NameValuePair valueX = new NameValuePair(prefix + 'x', Integer.toString(xPosition_));
             final NameValuePair valueY = new NameValuePair(prefix + 'y', Integer.toString(yPosition_));
             if (prefix.length() > 0 && getPage().getWebClient().getBrowserVersion()
-                    .hasFeature(BrowserVersionFeatures.HTMLIMAGE_NAME_VALUE_PARAMS)
+                    .hasFeature(HTMLIMAGE_NAME_VALUE_PARAMS)
                     && getValueAttribute().length() > 0) {
                 return new NameValuePair[] {valueX, valueY,
                     new NameValuePair(getNameAttribute(), getValueAttribute()) };

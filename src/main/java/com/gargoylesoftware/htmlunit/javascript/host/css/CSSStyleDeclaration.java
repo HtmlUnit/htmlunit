@@ -14,6 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_IMAGE_URL_QUOTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PIXEL_VALUES_INT_ONLY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_ROUNDED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_NUMBER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_FORCES_RESET;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPACITY_ACCEPTS_ARBITRARY_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -44,7 +54,6 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.ErrorHandler;
 import org.w3c.css.sac.InputSource;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.ScriptableWithFallbackGetter;
@@ -418,7 +427,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
         // If an IE behavior was specified in the style, apply the behavior.
         if (element instanceof HTMLElement
-            && getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY)) {
+            && getBrowserVersion().hasFeature(CSS_SUPPORTS_BEHAVIOR_PROPERTY)) {
             final HTMLElement htmlElement = (HTMLElement) element;
             for (final StyleElement styleElement : getStyleMap().values()) {
                 if (BEHAVIOR.equals(styleElement.getName())) {
@@ -444,7 +453,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     public Object getWithFallback(final String name) {
         // TODO
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER)) {
+        if (getBrowserVersion().hasFeature(JS_STYLE_UNSUPPORTED_PROPERTY_GETTER)) {
             if (null != jsElement_) {
                 final Map<String, StyleElement> style = getStyleMap();
                 final StyleElement element = style.get(name);
@@ -3798,7 +3807,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public String getOpacity() {
         final String opacity = getStyleAttribute(OPACITY, null);
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OPACITY_ACCEPTS_ARBITRARY_VALUES)) {
+        if (getBrowserVersion().hasFeature(JS_OPACITY_ACCEPTS_ARBITRARY_VALUES)) {
             return opacity;
         }
 
@@ -3826,7 +3835,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      */
     @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public void setOpacity(final String opacity) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OPACITY_ACCEPTS_ARBITRARY_VALUES)) {
+        if (getBrowserVersion().hasFeature(JS_OPACITY_ACCEPTS_ARBITRARY_VALUES)) {
             setStyleAttribute(OPACITY, opacity);
             return;
         }
@@ -5454,7 +5463,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxGetter
     public Object getZIndex() {
         final String value = getStyleAttribute(Z_INDEX, null);
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_TYPE_NUMBER)) {
+        if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_NUMBER)) {
             if (value == null
                     || Context.getUndefinedValue().equals(value)
                     || StringUtils.isEmpty(value.toString())) {
@@ -5486,7 +5495,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter
     public void setZIndex(final Object zIndex) {
         if (zIndex == null
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR)) {
+                && getBrowserVersion().hasFeature(CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR)) {
             throw new EvaluatorException("Null is invalid for z-index.");
         }
 
@@ -5497,17 +5506,17 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
         // undefined
         if (Context.getUndefinedValue().equals(zIndex)) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR)) {
+            if (getBrowserVersion().hasFeature(CSS_ZINDEX_UNDEFINED_OR_NULL_THROWS_ERROR)) {
                 throw new EvaluatorException("Undefind is invalid for z-index.");
             }
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_UNDEFINED_FORCES_RESET)) {
+            if (getBrowserVersion().hasFeature(CSS_ZINDEX_UNDEFINED_FORCES_RESET)) {
                 setStyleAttribute(Z_INDEX, "");
             }
             return;
         }
 
         // numeric (IE)
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_TYPE_NUMBER)) {
+        if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_NUMBER)) {
             final Double d;
             if (zIndex instanceof Double) {
                 d = (Double) zIndex;
@@ -5520,7 +5529,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                     throw new WrappedException(e);
                 }
             }
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_ZINDEX_ROUNDED)) {
+            if (getBrowserVersion().hasFeature(CSS_ZINDEX_ROUNDED)) {
                 setStyleAttribute(Z_INDEX, Integer.toString(Math.round(d.floatValue() - 0.00001f)));
             }
             else {
@@ -5779,8 +5788,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
 
             tmpColor = com.gargoylesoftware.htmlunit.util.StringUtils.asColorHexadecimal(token);
             if (tmpColor != null) {
-                if (getBrowserVersion().
-                        hasFeature(BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB)) {
+                if (getBrowserVersion().hasFeature(JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB)) {
                     return com.gargoylesoftware.htmlunit.util.StringUtils.formatColor(tmpColor);
                 }
                 return token;
@@ -5797,7 +5805,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private String findImageUrl(final String text) {
         final Matcher m = URL_PATTERN.matcher(text);
         if (m.find()) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_IMAGE_URL_QUOTED)) {
+            if (getBrowserVersion().hasFeature(CSS_IMAGE_URL_QUOTED)) {
                 return "url(\"" + m.group(1) + "\")";
             }
             return "url(" + m.group(1) + ")";
@@ -6214,7 +6222,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
         try {
             final float floatValue = Float.parseFloat(value);
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_PIXEL_VALUES_INT_ONLY)) {
+            if (getBrowserVersion().hasFeature(CSS_PIXEL_VALUES_INT_ONLY)) {
                 value = Integer.toString((int) floatValue) + "px";
             }
             else {

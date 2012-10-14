@@ -14,11 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_42;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_43;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlBreak;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -51,7 +52,7 @@ public class HTMLBRElement extends HTMLElement {
     public String getClear() {
         final String clear = getDomNodeOrDie().getAttribute("clear");
         if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_42)) {
+                && getBrowserVersion().hasFeature(GENERATED_42)) {
             return "";
         }
         return clear;
@@ -63,8 +64,7 @@ public class HTMLBRElement extends HTMLElement {
      */
     @JsxSetter
     public void setClear(final String clear) {
-        if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_43)) {
+        if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear) && getBrowserVersion().hasFeature(GENERATED_43)) {
             throw Context.reportRuntimeError("Invalid clear property value: '" + clear + "'.");
         }
         getDomNodeOrDie().setAttribute("clear", clear);

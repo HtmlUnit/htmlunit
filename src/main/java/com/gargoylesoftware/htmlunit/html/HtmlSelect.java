@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,7 +26,6 @@ import java.util.Map;
 
 import org.w3c.dom.Node;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -259,8 +260,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             return (P) setSelectedAttribute(getOptionByValue(optionValue), isSelected);
         }
         catch (final ElementNotFoundException e) {
-            if (getPage().getWebClient().getBrowserVersion()
-                    .hasFeature(BrowserVersionFeatures.SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN)) {
+            if (getPage().getWebClient().getBrowserVersion().hasFeature(SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN)) {
                 for (final HtmlOption o : getSelectedOptions()) {
                     o.setSelected(false);
                 }

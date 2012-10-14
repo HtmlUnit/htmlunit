@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_21;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -90,7 +90,7 @@ public class CSSRuleList extends SimpleScriptable {
         final List<String> idList = new ArrayList<String>();
 
         final int length = getLength();
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_21)) {
+        if (!getBrowserVersion().hasFeature(GENERATED_21)) {
             for (int i = 0; i < length; i++) {
                 idList.add(Integer.toString(i));
             }

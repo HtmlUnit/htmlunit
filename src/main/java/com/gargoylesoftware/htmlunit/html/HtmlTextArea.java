@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DEFAULT_IS_CHECKED;
+
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,7 +24,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
@@ -176,8 +177,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         }
 
         // for FF, if value is still default value, change value too
-        if (getPage().getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.HTMLINPUT_DEFAULT_IS_CHECKED)
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED)
                 && getText().equals(getDefaultValue())) {
             setTextInternal(defaultValue);
         }

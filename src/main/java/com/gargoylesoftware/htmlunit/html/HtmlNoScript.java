@@ -14,11 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.NOSCRIPT_BODY_AS_TEXT;
+
 import java.util.Map;
 
 import org.w3c.dom.Node;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
@@ -53,7 +54,7 @@ public class HtmlNoScript extends HtmlElement {
     public DomNode appendChild(final Node node) {
         final WebClient webClient = getPage().getWebClient();
         if (!webClient.getOptions().isJavaScriptEnabled()
-            || webClient.getBrowserVersion().hasFeature(BrowserVersionFeatures.NOSCRIPT_BODY_AS_TEXT)) {
+            || webClient.getBrowserVersion().hasFeature(NOSCRIPT_BODY_AS_TEXT)) {
             return super.appendChild(node);
         }
         return null;

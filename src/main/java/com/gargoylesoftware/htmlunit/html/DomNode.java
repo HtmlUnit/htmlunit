@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DISPLAYED_COLLAPSE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOM_NORMALIZE_REMOVE_CHILDREN;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -42,7 +45,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.UserDataHandler;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -432,7 +434,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
             if (child instanceof DomText) {
                 final boolean removeChildTextNodes = getPage().getWebClient().getBrowserVersion()
-                    .hasFeature(BrowserVersionFeatures.DOM_NORMALIZE_REMOVE_CHILDREN);
+                    .hasFeature(DOM_NORMALIZE_REMOVE_CHILDREN);
                 final StringBuilder dataBuilder = new StringBuilder();
                 DomNode toRemove = child;
                 DomText firstText = null;
@@ -693,7 +695,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // visibility: iterate bottom to top, because children can override
             // the visibility used by parent nodes
             final boolean collapseInvisible = ((HtmlPage) page).getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.DISPLAYED_COLLAPSE);
+                .hasFeature(DISPLAYED_COLLAPSE);
             DomNode node = this;
             do {
                 final ScriptableObject scriptableObject = node.getScriptObject();

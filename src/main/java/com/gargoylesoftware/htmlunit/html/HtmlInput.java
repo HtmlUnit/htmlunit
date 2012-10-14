@@ -14,13 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DEFAULT_IS_CHECKED;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -356,7 +357,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     public void setDefaultValue(final String defaultValue) {
         final boolean modifyValue = getPage().getWebClient().getBrowserVersion()
-            .hasFeature(BrowserVersionFeatures.HTMLINPUT_DEFAULT_IS_CHECKED);
+            .hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED);
         setDefaultValue(defaultValue, modifyValue);
     }
 

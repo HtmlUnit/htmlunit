@@ -14,6 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_EXTERNAL_JAVASCRIPT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONREADY_STATE_CHANGE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_SRC_JAVASCRIPT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map;
@@ -193,7 +203,7 @@ public class HtmlScript extends HtmlElement {
         // special additional processing for the 'src'
         if (namespaceURI == null && "src".equals(qualifiedName)) {
             final boolean alwaysReexecute = getPage().getWebClient().getBrowserVersion().
-                hasFeature(BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
+                hasFeature(JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
 
             if (isDirectlyAttachedToPage()) {
                 // always execute if IE;
@@ -240,7 +250,7 @@ public class HtmlScript extends HtmlElement {
             @Override
             public void execute() {
                 final boolean onReady = getPage().getWebClient().getBrowserVersion()
-                        .hasFeature(BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE);
+                        .hasFeature(JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE);
                 if (onReady) {
                     if (!isDeferred()) {
                         if (SLASH_SLASH_COLON.equals(getSrcAttribute())) {
@@ -297,7 +307,7 @@ public class HtmlScript extends HtmlElement {
         }
 
         final boolean supportsEventFor = getPage().getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT);
+                .hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT);
         final String scriptCode = getScriptCode();
         if (supportsEventFor
                 && event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
@@ -367,7 +377,7 @@ public class HtmlScript extends HtmlElement {
         if (src != ATTRIBUTE_NOT_DEFINED) {
             if (src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // <script src="javascript:'[code]'"></script>
-                if (browser.hasFeature(BrowserVersionFeatures.HTMLSCRIPT_SRC_JAVASCRIPT)) {
+                if (browser.hasFeature(HTMLSCRIPT_SRC_JAVASCRIPT)) {
                     String code = StringUtils.removeStart(src, JavaScriptURLConnection.JAVASCRIPT_PREFIX).trim();
                     final int len = code.length();
                     if (len > 2) {
@@ -391,17 +401,14 @@ public class HtmlScript extends HtmlElement {
                     executed_ = true;
                     final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, getCharsetAttribute());
                     if (result == JavaScriptLoadResult.SUCCESS) {
-                        executeEventIfBrowserHasFeature(Event.TYPE_LOAD,
-                            BrowserVersionFeatures.EVENT_ONLOAD_EXTERNAL_JAVASCRIPT);
+                        executeEventIfBrowserHasFeature(Event.TYPE_LOAD, EVENT_ONLOAD_EXTERNAL_JAVASCRIPT);
                     }
                     else if (result == JavaScriptLoadResult.DOWNLOAD_ERROR) {
-                        executeEventIfBrowserHasFeature(Event.TYPE_ERROR,
-                            BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
+                        executeEventIfBrowserHasFeature(Event.TYPE_ERROR, EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
                     }
                 }
                 catch (final FailingHttpStatusCodeException e) {
-                    executeEventIfBrowserHasFeature(Event.TYPE_ERROR,
-                        BrowserVersionFeatures.EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
+                    executeEventIfBrowserHasFeature(Event.TYPE_ERROR, EVENT_ONERROR_EXTERNAL_JAVASCRIPT);
                     throw e;
                 }
             }
@@ -492,7 +499,7 @@ public class HtmlScript extends HtmlElement {
     boolean isJavaScript(String typeAttribute, final String languageAttribute) {
         final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
 
-        if (browserVersion.hasFeature(BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE)) {
+        if (browserVersion.hasFeature(HTMLSCRIPT_TRIM_TYPE)) {
             typeAttribute = typeAttribute.trim();
         }
 
@@ -502,8 +509,7 @@ public class HtmlScript extends HtmlElement {
                 return true;
             }
 
-            final boolean appJavascriptSupported = browserVersion
-                                .hasFeature(BrowserVersionFeatures.HTMLSCRIPT_APPLICATION_JAVASCRIPT);
+            final boolean appJavascriptSupported = browserVersion.hasFeature(HTMLSCRIPT_APPLICATION_JAVASCRIPT);
             if (appJavascriptSupported
                     && ("application/javascript".equalsIgnoreCase(typeAttribute)
                             || "application/ecmascript".equalsIgnoreCase(typeAttribute)
@@ -525,8 +531,7 @@ public class HtmlScript extends HtmlElement {
      * @param state this script ready state
      */
     protected void setAndExecuteReadyState(final String state) {
-        if (getPage().getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.EVENT_ONREADY_STATE_CHANGE)) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONREADY_STATE_CHANGE)) {
             setReadyState(state);
             final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
             final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);

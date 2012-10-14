@@ -14,11 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_158;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_41;
+
 import java.net.MalformedURLException;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -65,7 +67,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @Override
     public void setDefaults(final ComputedCSSStyleDeclaration style) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_41)) {
+        if (getBrowserVersion().hasFeature(GENERATED_41)) {
             style.setDefaultLocalStyleAttribute("margin", "15px 10px");
             style.setDefaultLocalStyleAttribute("padding", "0px");
         }
@@ -115,7 +117,7 @@ public class HTMLBodyElement extends HTMLElement {
         final HtmlElement node = getDomNodeOrDie();
         String background = node.getAttribute("background");
         if (background != DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_158)) {
+                && getBrowserVersion().hasFeature(GENERATED_158)) {
             try {
                 final HtmlPage page = (HtmlPage) node.getPage();
                 background = page.getFullyQualifiedUrl(background).toExternalForm();

@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_LANG;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SPECIAL_PSEUDO_CLASSES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EXPANDURL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_STYLE_EMPTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_STYLE_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -59,7 +64,6 @@ import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -438,7 +442,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 final ContentCondition cc = (ContentCondition) condition;
                 return element.asText().contains(cc.getData());
             case Condition.SAC_LANG_CONDITION:
-                if (!browserVersion.hasFeature(BrowserVersionFeatures.CSS_SELECTOR_LANG)) {
+                if (!browserVersion.hasFeature(CSS_SELECTOR_LANG)) {
                     return false;
                 }
                 final String lcLang = ((LangCondition) condition).getLang();
@@ -492,7 +496,7 @@ public class CSSStyleSheet extends SimpleScriptable {
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
             final AttributeCondition condition, final DomElement element) {
-        if (!browserVersion.hasFeature(BrowserVersionFeatures.CSS_SPECIAL_PSEUDO_CLASSES)) {
+        if (!browserVersion.hasFeature(CSS_SPECIAL_PSEUDO_CLASSES)) {
             return false;
         }
 
@@ -657,7 +661,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 final HtmlLink link = (HtmlLink) node;
                 final HtmlPage page = (HtmlPage) link.getPage();
                 final String href = link.getHrefAttribute();
-                if (!version.hasFeature(BrowserVersionFeatures.STYLESHEET_HREF_EXPANDURL)) {
+                if (!version.hasFeature(STYLESHEET_HREF_EXPANDURL)) {
                     // Don't expand relative URLs.
                     return href;
                 }
@@ -674,10 +678,10 @@ public class CSSStyleSheet extends SimpleScriptable {
         }
 
         // <style type="text/css"> ... </style>
-        if (version.hasFeature(BrowserVersionFeatures.STYLESHEET_HREF_STYLE_EMPTY)) {
+        if (version.hasFeature(STYLESHEET_HREF_STYLE_EMPTY)) {
             return "";
         }
-        else if (version.hasFeature(BrowserVersionFeatures.STYLESHEET_HREF_STYLE_NULL)) {
+        else if (version.hasFeature(STYLESHEET_HREF_STYLE_NULL)) {
             return null;
         }
         else {

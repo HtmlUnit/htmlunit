@@ -643,7 +643,7 @@ public enum BrowserVersionFeatures {
 
     /** Set this checked state back to default when added to page (IE). */
     @BrowserFeature(@WebBrowser(IE))
-    HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED_TO_PAGE,
+    HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED,
 
     /**
      * Set this property if the script tag supports the
@@ -877,7 +877,7 @@ public enum BrowserVersionFeatures {
 
     /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB,
+    JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB,
 
     /** Javascript function getElementById calls getElementByName if nothing found by id, only in quirks mode. */
     @BrowserFeature(@WebBrowser(IE))

@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTIONGROUP_NO_DISABLED;
+
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -57,8 +58,7 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
      *         when emulating IE)
      */
     public final boolean isDisabled() {
-        if (getPage().getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.HTMLOPTIONGROUP_NO_DISABLED)) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(HTMLOPTIONGROUP_NO_DISABLED)) {
             return false;
         }
         return hasAttribute("disabled");

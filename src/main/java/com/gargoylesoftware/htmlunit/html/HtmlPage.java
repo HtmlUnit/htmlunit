@@ -14,6 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BLUR_BEFORE_ONCHANGE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_4_0_TRANSITIONAL_STANDARDS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_FRAMESET_FIRST;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -51,7 +61,6 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.ranges.Range;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -201,15 +210,14 @@ public class HtmlPage extends SgmlPage {
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         }
 
-        if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED)) {
+        if (getWebClient().getBrowserVersion().hasFeature(EVENT_DOM_CONTENT_LOADED)) {
             executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         }
         executeDeferredScriptsIfNeeded();
         setReadyStateOnDeferredScriptsIfNeeded();
 
         // frame initialization has a different order
-        final boolean framesetFirst = getWebClient().getBrowserVersion().
-                hasFeature(BrowserVersionFeatures.EVENT_ONLOAD_FRAMESET_FIRST);
+        final boolean framesetFirst = getWebClient().getBrowserVersion().hasFeature(EVENT_ONLOAD_FRAMESET_FIRST);
         boolean isFrameWindow = enclosingWindow instanceof FrameWindow;
         if (isFrameWindow) {
             isFrameWindow = ((FrameWindow) enclosingWindow).getFrameElement() instanceof HtmlFrame;
@@ -639,7 +647,7 @@ public class HtmlPage extends SgmlPage {
                 final boolean frameSrcIsNotSet = (baseUrl == WebClient.URL_ABOUT_BLANK);
                 final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
                 final boolean jsFrameUseParentUrl = getWebClient().getBrowserVersion()
-                    .hasFeature(BrowserVersionFeatures.JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW);
+                    .hasFeature(JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW);
                 if (frameSrcIsNotSet || (frameSrcIsJs && jsFrameUseParentUrl)) {
                     baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse()
                         .getWebRequest().getUrl();
@@ -679,7 +687,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         // to handle http: and http:/ in FF (Bug 1714767)
-        if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.URL_MISSING_SLASHES)) {
+        if (getWebClient().getBrowserVersion().hasFeature(URL_MISSING_SLASHES)) {
             boolean incorrectnessNotified = false;
             while (relativeUrl.startsWith("http:") && !relativeUrl.startsWith("http://")) {
                 if (!incorrectnessNotified) {
@@ -1258,8 +1266,7 @@ public class HtmlPage extends SgmlPage {
         if (window instanceof FrameWindow) {
             if (Event.TYPE_LOAD.equals(eventType)) {
                 // FF always triggers this event for frame windows
-                if (!getWebClient().getBrowserVersion().hasFeature(
-                    BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT)) {
+                if (!getWebClient().getBrowserVersion().hasFeature(EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT)) {
                     final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
                     // IE triggers this event only in some cases
                     if (frame.wasCreatedByJavascript()) {
@@ -1403,7 +1410,7 @@ public class HtmlPage extends SgmlPage {
         if (!getWebClient().getOptions().isJavaScriptEnabled()) {
             return;
         }
-        if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DEFERRED)) {
+        if (getWebClient().getBrowserVersion().hasFeature(JS_DEFERRED)) {
             final HtmlElement doc = getDocumentElement();
             final List<HtmlElement> elements = doc.getHtmlElementsByTagName("script");
             for (final HtmlElement e : elements) {
@@ -1422,7 +1429,7 @@ public class HtmlPage extends SgmlPage {
      */
     private void setReadyStateOnDeferredScriptsIfNeeded() {
         if (getWebClient().getOptions().isJavaScriptEnabled() && getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.JS_DEFERRED)) {
+                .hasFeature(JS_DEFERRED)) {
             final List<HtmlElement> elements = getDocumentElement().getHtmlElementsByTagName("script");
             for (final HtmlElement e : elements) {
                 if (e instanceof HtmlScript) {
@@ -1956,7 +1963,7 @@ public class HtmlPage extends SgmlPage {
             }
 
             if (oldFocusedElement != null) {
-                if (getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.BLUR_BEFORE_ONCHANGE)) {
+                if (getWebClient().getBrowserVersion().hasFeature(BLUR_BEFORE_ONCHANGE)) {
                     oldFocusedElement.fireEvent(Event.TYPE_BLUR);
                     oldFocusedElement.removeFocus();
                 }
@@ -1970,7 +1977,7 @@ public class HtmlPage extends SgmlPage {
         elementWithFocus_ = newElement;
 
         if (elementWithFocus_ instanceof SelectableTextInput && getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT)) {
+                .hasFeature(PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT)) {
             final SelectableTextInput sti = (SelectableTextInput) elementWithFocus_;
             setSelectionRange(new SimpleRange(sti, sti.getSelectionStart(), sti, sti.getSelectionEnd()));
         }
@@ -2415,7 +2422,7 @@ public class HtmlPage extends SgmlPage {
                     if ("-//W3C//DTD HTML 4.01 Transitional//EN".equals(publicId)
                         || ("-//W3C//DTD HTML 4.0 Transitional//EN".equals(publicId)
                                 && getWebClient().getBrowserVersion()
-                                    .hasFeature(BrowserVersionFeatures.DOCTYPE_4_0_TRANSITIONAL_STANDARDS))) {
+                                    .hasFeature(DOCTYPE_4_0_TRANSITIONAL_STANDARDS))) {
                         quirks = false;
                     }
                 }

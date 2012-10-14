@@ -14,6 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_15;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_TEXT_SHADOW_DEFAULT_NONE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_UNICODE_BIDI_DEFAULT_NORMAL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_WORD_SPACING_DEFAULT_NORMAL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC;
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.util.Arrays;
@@ -30,7 +42,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.css.sac.Selector;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
@@ -293,8 +304,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (StringUtils.isEmpty(value)) {
             value = "transparent";
         }
-        else if (getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_RETURNS_RGB)) {
+        else if (getBrowserVersion().hasFeature(JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB)) {
             value = toRGBColor(value);
         }
         return value;
@@ -549,7 +559,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             map.put("A", "inline");
             map.put("CODE", "inline");
             map.put("SPAN", "inline");
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DISPLAY_DEFAULT)) {
+            if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
                 map.put("LI", "list-item");
                 map.put("TABLE", "table");
                 map.put("TBODY", "table-row-group");
@@ -615,8 +625,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getFontStretch() {
         String defaultStretch = "";
-        if (getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL)) {
+        if (getBrowserVersion().hasFeature(CSS_FONT_STRECH_DEFAULT_NORMAL)) {
             defaultStretch = "normal";
         }
         return defaultIfEmpty(super.getFontStretch(), defaultStretch);
@@ -1352,8 +1361,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getTextShadow() {
         String shadow = "";
-        if (getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.CSS_TEXT_SHADOW_DEFAULT_NONE)) {
+        if (getBrowserVersion().hasFeature(CSS_TEXT_SHADOW_DEFAULT_NONE)) {
             shadow = "none";
         }
         return defaultIfEmpty(super.getTextShadow(), shadow);
@@ -1381,8 +1389,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getUnicodeBidi() {
         String unicodeBidi = "embed";
-        if (getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.CSS_UNICODE_BIDI_DEFAULT_NORMAL)) {
+        if (getBrowserVersion().hasFeature(CSS_UNICODE_BIDI_DEFAULT_NORMAL)) {
             unicodeBidi = "normal";
         }
 
@@ -1423,7 +1430,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         final int windowWidth = getElement().getWindow().getWebWindow().getInnerWidth();
         final String defaultWidth;
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO)) {
+        if (getBrowserVersion().hasFeature(CSS_DEFAULT_WIDTH_AUTO)) {
             defaultWidth = "auto";
         }
         else {
@@ -1433,7 +1440,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
                 final String value = style.getStyleAttribute(WIDTH, null);
                 if (StringUtils.isEmpty(value)) {
-                    if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO)
+                    if (!getBrowserVersion().hasFeature(CSS_DEFAULT_WIDTH_AUTO)
                             && "absolute".equals(getStyleAttribute("position", null))) {
                         final DomNode domNode = getDomNodeOrDie();
                         final String content = domNode.getTextContent();
@@ -1505,7 +1512,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 // Block elements take up 100% of the parent's width.
                 final HTMLElement parentJS = (HTMLElement) parent.getScriptObject();
                 final String parentWidth = getWindow().getComputedStyle(parentJS, null).getWidth();
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO)
+                if (getBrowserVersion().hasFeature(CSS_DEFAULT_WIDTH_AUTO)
                         && "auto".equals(parentWidth)) {
                     width = windowWidth;
                 }
@@ -1588,8 +1595,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final int contentHeight = getContentHeight();
-        final boolean useDefaultHeight = getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN);
+        final boolean useDefaultHeight = getBrowserVersion().hasFeature(CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN);
         final boolean explicitHeightSpecified = super.getHeight().length() > 0;
 
         int height;
@@ -1639,7 +1645,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final boolean explicitHeightSpecified = super.getHeight().length() > 0;
 
         int defaultHeight = 20;
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_15)) {
+        if (getBrowserVersion().hasFeature(CSS_DEFAULT_ELMENT_HEIGHT_15)) {
             defaultHeight = 15;
         }
 
@@ -1651,8 +1657,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         });
 
-        final boolean useDefaultHeight = getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN);
+        final boolean useDefaultHeight = getBrowserVersion().hasFeature(CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN);
         if (height == 0 && !explicitHeightSpecified || (useDefaultHeight && height < defaultHeight)) {
             height = defaultHeight;
         }
@@ -1816,8 +1821,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final String l = getLeftWithInheritance();
         final String r = getRightWithInheritance();
 
-        if ("fixed".equals(p) && getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.TREATS_POSITION_FIXED_LIKE_POSITION_STATIC)) {
+        if ("fixed".equals(p) && getBrowserVersion().hasFeature(TREATS_POSITION_FIXED_LIKE_POSITION_STATIC)) {
             p = "static";
         }
 
@@ -1889,7 +1893,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getPositionWithInheritance() {
         String p = getPosition();
         if ("inherit".equals(p)) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
                 p = (parent != null ? parent.getCurrentStyle().getPositionWithInheritance() : "static");
             }
@@ -1907,7 +1911,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getLeftWithInheritance() {
         String left = getLeft();
         if ("inherit".equals(left)) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
                 left = (parent != null ? parent.getCurrentStyle().getLeftWithInheritance() : "auto");
             }
@@ -1925,7 +1929,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getRightWithInheritance() {
         String right = getRight();
         if ("inherit".equals(right)) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
                 right = (parent != null ? parent.getCurrentStyle().getRightWithInheritance() : "auto");
             }
@@ -1943,7 +1947,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getTopWithInheritance() {
         String top = getTop();
         if ("inherit".equals(top)) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
                 top = (parent != null ? parent.getCurrentStyle().getTopWithInheritance() : "auto");
             }
@@ -1961,7 +1965,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getBottomWithInheritance() {
         String bottom = getBottom();
         if ("inherit".equals(bottom)) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES)) {
+            if (getBrowserVersion().hasFeature(CAN_INHERIT_CSS_PROPERTY_VALUES)) {
                 final HTMLElement parent = (HTMLElement) getElement().getParentElement();
                 bottom = (parent != null ? parent.getCurrentStyle().getBottomWithInheritance() : "auto");
             }
@@ -2106,8 +2110,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getWordSpacing() {
         String wordSpacing = "0px";
-        if (getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.CSS_WORD_SPACING_DEFAULT_NORMAL)) {
+        if (getBrowserVersion().hasFeature(CSS_WORD_SPACING_DEFAULT_NORMAL)) {
             wordSpacing = "normal";
         }
 
@@ -2156,7 +2159,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @see #pixelString(HTMLElement, CSSStyleDeclaration.CssValue)
      */
     protected String pixelString(final String value) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX)) {
+        if (getBrowserVersion().hasFeature(JS_LENGTH_WITHOUT_PX)) {
             return value;
         }
         if (value.endsWith("px")) {
@@ -2176,7 +2179,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     protected String pixelString(final HTMLElement element, final CssValue value) {
         final String s = value.get(element);
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_LENGTH_WITHOUT_PX)) {
+        if (getBrowserVersion().hasFeature(JS_LENGTH_WITHOUT_PX)) {
             return s;
         }
         if (s.endsWith("px")) {

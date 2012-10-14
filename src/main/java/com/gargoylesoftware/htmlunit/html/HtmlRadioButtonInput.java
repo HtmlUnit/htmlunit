@@ -14,10 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DEFAULT_IS_CHECKED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED;
+
 import java.io.IOException;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -104,8 +107,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
             removeAttribute("checked");
         }
 
-        if (changed && !getPage().getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS)) {
+        if (changed && !getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
             final ScriptResult scriptResult = fireEvent(Event.TYPE_CHANGE);
             if (scriptResult != null) {
                 page = scriptResult.getNewPage();
@@ -142,8 +144,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     @Override
     protected void doClickFireChangeEvent() throws IOException {
-        if (!getPage().getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS)) {
+        if (!getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
             executeOnChangeHandlerIfAppropriate(this);
         }
     }
@@ -177,8 +178,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         defaultCheckedState_ = defaultChecked;
-        if (getPage().getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.HTMLINPUT_DEFAULT_IS_CHECKED)) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED)) {
             setChecked(defaultChecked);
         }
     }
@@ -206,7 +206,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     protected void onAddedToPage() {
         if (getPage().getWebClient().getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED_TO_PAGE)) {
+                HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED)) {
             setChecked(isDefaultChecked());
         }
     }
@@ -228,7 +228,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
         super.removeFocus();
 
         final boolean fireOnChange = getPage().getWebClient().getBrowserVersion()
-            .hasFeature(BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS);
+            .hasFeature(EVENT_ONCHANGE_LOSING_FOCUS);
         if (fireOnChange && valueAtFocus_ != isChecked()) {
             executeOnChangeHandlerIfAppropriate(this);
         }

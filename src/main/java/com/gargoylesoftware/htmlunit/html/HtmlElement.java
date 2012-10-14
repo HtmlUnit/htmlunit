@@ -14,6 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_INPUT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_PROPERTY_CHANGE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_TRIM_CLASS_ATTRIBUTE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -40,7 +47,6 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -103,8 +109,7 @@ public abstract class HtmlElement extends DomElement {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         attributeListeners_ = new ArrayList<HtmlAttributeChangeListener>();
-        if (page != null && page.getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.HTMLELEMENT_TRIM_CLASS_ATTRIBUTE)) {
+        if (page != null && page.getWebClient().getBrowserVersion().hasFeature(HTMLELEMENT_TRIM_CLASS_ATTRIBUTE)) {
             final String value = getAttribute("class");
             if (value != ATTRIBUTE_NOT_DEFINED) {
                 getAttributeNode("class").setValue(value.trim());
@@ -161,7 +166,7 @@ public abstract class HtmlElement extends DomElement {
             fireHtmlAttributeReplaced(htmlEvent);
             ((HtmlPage) getPage()).fireHtmlAttributeReplaced(htmlEvent);
         }
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.EVENT_PROPERTY_CHANGE)) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_PROPERTY_CHANGE)) {
             fireEvent(Event.createPropertyChangeEvent(this, qualifiedName));
         }
     }
@@ -459,7 +464,7 @@ public abstract class HtmlElement extends DomElement {
             doType(c, shiftKey, ctrlKey, altKey);
         }
 
-        if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.EVENT_INPUT)
+        if (page.getWebClient().getBrowserVersion().hasFeature(EVENT_INPUT)
             && (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
             || this instanceof HtmlPasswordInput)) {
@@ -473,7 +478,7 @@ public abstract class HtmlElement extends DomElement {
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
             if (!getPage().getWebClient().getBrowserVersion()
-                    .hasFeature(BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON)) {
+                    .hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
                 final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
                 if (submit != null) {
                     return submit.click();
@@ -531,7 +536,7 @@ public abstract class HtmlElement extends DomElement {
         final ScriptResult keyDownResult = fireEvent(keyDown);
 
         final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
-        if (browserVersion.hasFeature(BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS)) {
+        if (browserVersion.hasFeature(KEYBOARD_EVENT_SPECIAL_KEYPRESS)) {
             final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, keyCode, shiftKey, ctrlKey, altKey);
             final ScriptResult keyPressResult = fireEvent(keyPress);
         }
@@ -540,7 +545,7 @@ public abstract class HtmlElement extends DomElement {
         //    doType(keyCode, shiftKey, ctrlKey, altKey);
         //}
 
-        if (browserVersion.hasFeature(BrowserVersionFeatures.EVENT_INPUT)
+        if (browserVersion.hasFeature(EVENT_INPUT)
             && (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
             || this instanceof HtmlPasswordInput)) {
@@ -554,7 +559,7 @@ public abstract class HtmlElement extends DomElement {
 //        final HtmlForm form = getEnclosingForm();
 //        if (form != null && keyCode == '\n' && isSubmittableByEnter()) {
 //            if (!getPage().getWebClient().getBrowserVersion()
-//                    .hasFeature(BrowserVersionFeatures.BUTTON_EMPTY_TYPE_BUTTON)) {
+//                    .hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
 //                final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
 //                if (submit != null) {
 //                    return submit.click();
@@ -1084,7 +1089,7 @@ public abstract class HtmlElement extends DomElement {
         final HtmlPage page = (HtmlPage) getPage();
         page.setFocusedElement(this);
         final WebClient webClient = page.getWebClient();
-        if (webClient.getBrowserVersion().hasFeature(BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
+        if (webClient.getBrowserVersion().hasFeature(WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
             final HTMLElement jsElt = (HTMLElement) getScriptObject();
             jsElt.setActive();
         }

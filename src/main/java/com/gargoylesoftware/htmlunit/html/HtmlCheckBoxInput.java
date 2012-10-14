@@ -14,10 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DEFAULT_IS_CHECKED;
+
 import java.io.IOException;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
@@ -85,8 +87,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
             removeAttribute("checked");
         }
 
-        if (getPage().getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS)) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
             return getPage();
         }
         return executeOnChangeHandlerIfAppropriate(this);
@@ -124,8 +125,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     @Override
     protected void doClickFireChangeEvent() throws IOException {
-        if (!getPage().getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS)) {
+        if (!getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
             executeOnChangeHandlerIfAppropriate(this);
         }
     }
@@ -165,8 +165,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
     @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         defaultCheckedState_ = defaultChecked;
-        if (getPage().getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.HTMLINPUT_DEFAULT_IS_CHECKED)) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED)) {
             setChecked(defaultChecked);
         }
     }
@@ -196,8 +195,8 @@ public class HtmlCheckBoxInput extends HtmlInput {
     void removeFocus() {
         super.removeFocus();
 
-        final boolean fireOnChange = getPage().getWebClient().getBrowserVersion()
-            .hasFeature(BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS);
+        final boolean fireOnChange =
+                getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCHANGE_LOSING_FOCUS);
         if (fireOnChange && valueAtFocus_ != isChecked()) {
             executeOnChangeHandlerIfAppropriate(this);
         }

@@ -14,11 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
@@ -53,7 +54,7 @@ public class HtmlSubmitInput extends HtmlInput {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         if (getPage().getWebClient().getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED)
+                .hasFeature(SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED)
                 && !hasAttribute("value")) {
             setAttribute("value", DEFAULT_VALUE);
         }

@@ -14,11 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html.impl;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_13;
+
 import java.io.Serializable;
 
 import org.w3c.dom.ranges.Range;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -115,7 +116,7 @@ public class SelectionDelegate implements Serializable {
         final Page page = element_.getPage();
         if (page instanceof HtmlPage) {
             final HtmlPage htmlPage = (HtmlPage) page;
-            if (htmlPage.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_13)) {
+            if (htmlPage.getWebClient().getBrowserVersion().hasFeature(GENERATED_13)) {
                 htmlPage.setSelectionRange(selection_);
             }
         }

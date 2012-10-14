@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -102,7 +103,7 @@ public class HtmlAnchor extends HtmlElement {
         // fix for empty url
         if (StringUtils.isEmpty(href)) {
             final boolean dropFilename = page.getWebClient().getBrowserVersion().
-                                    hasFeature(BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME);
+                                    hasFeature(ANCHOR_EMPTY_HREF_NO_FILENAME);
             if (dropFilename) {
                 String path = url.getPath();
                 path = path.substring(0, path.lastIndexOf('/') + 1);

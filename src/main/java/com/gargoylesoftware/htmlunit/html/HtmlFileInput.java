@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FILEINPUT_EMPTY_DEFAULT_VALUE;
+
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -21,7 +23,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -54,7 +55,7 @@ public class HtmlFileInput extends HtmlInput {
         final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         setAttribute("value", "");
-        if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.FILEINPUT_EMPTY_DEFAULT_VALUE)) {
+        if (page.getWebClient().getBrowserVersion().hasFeature(FILEINPUT_EMPTY_DEFAULT_VALUE)) {
             setDefaultValue("");
         }
     }

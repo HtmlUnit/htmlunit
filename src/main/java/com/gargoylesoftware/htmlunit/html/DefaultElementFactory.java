@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CANVAS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_TAGS;
+
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,7 +24,6 @@ import java.util.Map;
 
 import org.xml.sax.Attributes;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
@@ -158,7 +160,7 @@ class DefaultElementFactory implements ElementFactory {
             element = new HtmlArea(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlAudio.TAG_NAME)) {
-            if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML5_TAGS)) {
+            if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
                 element = new HtmlAudio(namespaceURI, qualifiedName, page, attributeMap);
             }
             else {
@@ -199,7 +201,7 @@ class DefaultElementFactory implements ElementFactory {
             element = new HtmlButton(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlCanvas.TAG_NAME)) {
-            if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.CANVAS)) {
+            if (page.getWebClient().getBrowserVersion().hasFeature(CANVAS)) {
                 element = new HtmlCanvas(namespaceURI, qualifiedName, page, attributeMap);
             }
             else {
@@ -402,7 +404,7 @@ class DefaultElementFactory implements ElementFactory {
             element = new HtmlSmall(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlSource.TAG_NAME)) {
-            if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML5_TAGS)) {
+            if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
                 element = new HtmlSource(namespaceURI, qualifiedName, page, attributeMap);
             }
             else {
@@ -479,7 +481,7 @@ class DefaultElementFactory implements ElementFactory {
             element = new HtmlVariable(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlVideo.TAG_NAME)) {
-            if (page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML5_TAGS)) {
+            if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
                 element = new HtmlVideo(namespaceURI, qualifiedName, page, attributeMap);
             }
             else {

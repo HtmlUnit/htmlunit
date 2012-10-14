@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,7 +31,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -172,12 +174,12 @@ public class HtmlForm extends HtmlElement {
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "#");
             actionUrl = StringUtils.substringBefore(actionUrl, "?");
-            if (browser.hasFeature(BrowserVersionFeatures.FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK)
+            if (browser.hasFeature(FORM_SUBMISSION_URL_END_WITH_QUESTIONMARK)
                     || queryFromFields.length() > 0) {
                 actionUrl += "?" + queryFromFields;
             }
             if (anchor.length() > 0
-                    && !browser.hasFeature(BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH)) {
+                    && !browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)) {
                 actionUrl += "#" + anchor;
             }
             parameters.clear(); // parameters have been added to query
@@ -186,7 +188,7 @@ public class HtmlForm extends HtmlElement {
         try {
             if (actionUrl.isEmpty()) {
                 url = htmlPage.getWebResponse().getWebRequest().getUrl();
-                if (browser.hasFeature(BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH)) {
+                if (browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)) {
                     url = UrlUtils.getUrlWithNewRef(url, null);
                 }
             }
@@ -196,7 +198,7 @@ public class HtmlForm extends HtmlElement {
                     urlString = urlString.substring(0, urlString.indexOf('?'));
                 }
                 else if (urlString.indexOf('#') != -1
-                        && browser.hasFeature(BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH)) {
+                        && browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)) {
                     urlString = urlString.substring(0, urlString.indexOf('#'));
                 }
                 url = new URL(urlString + actionUrl);

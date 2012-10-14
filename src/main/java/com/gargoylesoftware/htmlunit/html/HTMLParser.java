@@ -14,6 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_2;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_3;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.IGNORE_CONTENTS_OF_INNER_HEAD;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_WAIT_LOAD_BEFORE_BODY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -50,7 +58,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -250,8 +257,7 @@ public final class HTMLParser {
     private static void addBodyToPageIfNecessary(
             final HtmlPage page, final boolean originalCall, final boolean checkInsideFrameOnly) {
         // IE waits for the whole page to load before initializing bodies for frames.
-        final boolean waitToLoad = page.getWebClient().getBrowserVersion()
-            .hasFeature(BrowserVersionFeatures.PAGE_WAIT_LOAD_BEFORE_BODY);
+        final boolean waitToLoad = page.getWebClient().getBrowserVersion().hasFeature(PAGE_WAIT_LOAD_BEFORE_BODY);
         if (page.getEnclosingWindow() instanceof FrameWindow && originalCall && waitToLoad) {
             return;
         }
@@ -335,7 +341,7 @@ public final class HTMLParser {
             || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
 
             if (SVG_NAMESPACE.equals(namespaceURI)
-                    && page.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.SVG)) {
+                    && page.getWebClient().getBrowserVersion().hasFeature(SVG)) {
                 return SVG_FACTORY;
             }
 
@@ -431,7 +437,7 @@ public final class HTMLParser {
                 setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
                 setFeature(FEATURE_PARSE_NOSCRIPT, !webClient.getOptions().isJavaScriptEnabled());
                 setFeature(HTMLScanner.ALLOW_SELFCLOSING_IFRAME,
-                    !webClient.getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING));
+                    !webClient.getBrowserVersion().hasFeature(HTMLIFRAME_IGNORE_SELFCLOSING));
 
                 setContentHandler(this);
                 setLexicalHandler(this); //comments and CDATA
@@ -449,7 +455,7 @@ public final class HTMLParser {
         private static XMLParserConfiguration createConfiguration(final WebClient webClient) {
             final BrowserVersion browserVersion = webClient.getBrowserVersion();
             // for IE we need a special scanner that will be able to understand conditional comments
-            if (browserVersion.hasFeature(BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS)) {
+            if (browserVersion.hasFeature(HTMLCONDITIONAL_COMMENTS)) {
                 return new HTMLConfiguration() {
                     @Override
                     protected HTMLScanner createDocumentScanner() {
@@ -494,7 +500,7 @@ public final class HTMLParser {
             }
 
             if (parsingInnerHead_ && page_.getWebClient().getBrowserVersion().hasFeature(
-                    BrowserVersionFeatures.IGNORE_CONTENTS_OF_INNER_HEAD)) {
+                    IGNORE_CONTENTS_OF_INNER_HEAD)) {
                 return;
             }
 
@@ -595,7 +601,7 @@ public final class HTMLParser {
                     parsingInnerHead_ = false;
                 }
                 if ("head".equals(tagLower) || page_.getWebClient().getBrowserVersion().hasFeature(
-                        BrowserVersionFeatures.IGNORE_CONTENTS_OF_INNER_HEAD)) {
+                        IGNORE_CONTENTS_OF_INNER_HEAD)) {
                     return;
                 }
             }
@@ -623,7 +629,7 @@ public final class HTMLParser {
         /** {@inheritDoc} */
         public void characters(final char[] ch, final int start, final int length) throws SAXException {
             if ((characters_ == null || characters_.length() == 0)
-                    && page_.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_2)
+                    && page_.getWebClient().getBrowserVersion().hasFeature(GENERATED_2)
                     && StringUtils.isBlank(new String(ch, start, length))) {
 
                 DomNode node = currentNode_.getLastChild();
@@ -736,7 +742,7 @@ public final class HTMLParser {
             handleCharacters();
             final String data = new String(ch, start, length);
             if (!data.startsWith("[CDATA")
-                    || !page_.getWebClient().getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_3)) {
+                    || !page_.getWebClient().getBrowserVersion().hasFeature(GENERATED_3)) {
                 final DomComment comment = new DomComment(page_, data);
                 currentNode_.appendChild(comment);
             }

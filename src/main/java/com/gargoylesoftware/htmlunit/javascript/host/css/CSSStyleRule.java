@@ -14,10 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTOR_TEXT_UPPERCASE;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -67,7 +68,7 @@ public class CSSStyleRule extends CSSRule {
                     && (('.' == fixedName.charAt(0)) || ('#' == fixedName.charAt(0)))) {
                 // nothing
             }
-            else if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECTOR_TEXT_UPPERCASE)) {
+            else if (getBrowserVersion().hasFeature(JS_SELECTOR_TEXT_UPPERCASE)) {
                 fixedName = fixedName.toUpperCase();
             }
             else {
