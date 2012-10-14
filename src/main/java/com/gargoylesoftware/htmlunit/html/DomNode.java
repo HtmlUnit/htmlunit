@@ -1530,7 +1530,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param selectors one or more CSS selectors separated by commas
      * @return list of all found nodes
      */
-    protected DomNodeList<DomNode> querySelectorAll(final String selectors) {
+    public DomNodeList<DomNode> querySelectorAll(final String selectors) {
         final List<DomNode> elements = new ArrayList<DomNode>();
         try {
             final WebClient webClient = getPage().getWebClient();
@@ -1580,7 +1580,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param selectors one or more CSS selectors separated by commas
      * @return null if no matches are found; otherwise, it returns the first matching element
      */
-    protected DomNode querySelector(final String selectors) {
+    public DomNode querySelector(final String selectors) {
         final DomNodeList<DomNode> list = querySelectorAll(selectors);
         if (!list.isEmpty()) {
             return list.get(0);

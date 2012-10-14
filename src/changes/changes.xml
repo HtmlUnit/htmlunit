@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
+            <action type="update" dev="asashour" issue="2781954">
+                DomNode: make .querySelectorAll() and .querySelector() public.
+            </action>
             <action type="fix" dev="asashour" issue="3388308">
                 JavaScript: 'focus' and 'blur' event is triggered for 'document' descendants (FF and Chrome).
             </action>

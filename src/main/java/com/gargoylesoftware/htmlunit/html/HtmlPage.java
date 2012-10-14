@@ -2435,27 +2435,6 @@ public class HtmlPage extends SgmlPage {
         return quirks;
     }
 
-    /**
-     * Retrieves all element nodes from descendants of the starting element node that match any selector
-     * within the supplied selector strings.
-     * @param selectors one or more CSS selectors separated by commas
-     * @return list of all found nodes
-     */
-    @Override
-    public DomNodeList<DomNode> querySelectorAll(final String selectors) {
-        return super.querySelectorAll(selectors);
-    }
-
-    /**
-     * Returns the first element within the document that matches the specified group of selectors.
-     * @param selectors one or more CSS selectors separated by commas
-     * @return null if no matches are found; otherwise, it returns the first matching element
-     */
-    @Override
-    public DomNode querySelector(final String selectors) {
-        return super.querySelector(selectors);
-    }
-
     @Override
     protected boolean isDirectlyAttachedToPage() {
         return true;
