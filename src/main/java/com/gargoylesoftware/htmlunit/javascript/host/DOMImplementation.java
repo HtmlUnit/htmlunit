@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_35;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -44,7 +44,7 @@ public class DOMImplementation extends SimpleScriptable {
      */
     @JsxFunction
     public boolean hasFeature(final String feature, final String version) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_35)) {
+        if (getBrowserVersion().hasFeature(GENERATED_35)) {
             if ("HTML".equals(feature) && "1.0".equals(version)) {
                 return true;
             }

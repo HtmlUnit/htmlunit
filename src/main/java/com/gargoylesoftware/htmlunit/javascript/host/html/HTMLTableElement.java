@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_105;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_106;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_107;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
@@ -21,7 +24,6 @@ import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
@@ -75,7 +77,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setCaption(final Object o) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_105)) {
+        if (getBrowserVersion().hasFeature(GENERATED_105)) {
             throw Context.reportRuntimeError("Can't set caption");
         }
         else if (!(o instanceof HTMLTableCaptionElement)) {
@@ -109,7 +111,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setTFoot(final Object o) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_106)) {
+        if (getBrowserVersion().hasFeature(GENERATED_106)) {
             throw Context.reportRuntimeError("Can't set tFoot");
         }
         else if (!(o instanceof HTMLTableSectionElement
@@ -144,7 +146,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxSetter
     public void setTHead(final Object o) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_107)) {
+        if (getBrowserVersion().hasFeature(GENERATED_107)) {
             throw Context.reportRuntimeError("Can't set tHead");
         }
         else if (!(o instanceof HTMLTableSectionElement

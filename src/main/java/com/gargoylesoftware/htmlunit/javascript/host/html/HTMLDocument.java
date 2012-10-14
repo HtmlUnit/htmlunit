@@ -14,6 +14,31 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_IS_COMMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_160;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_161;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_164;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_165;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_51;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_53;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_55;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_57;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_59;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_60;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_61;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_63;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOCTYPE_NULL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -51,7 +76,6 @@ import org.w3c.css.sac.CSSException;
 import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -269,8 +293,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     private DomNode getDomNodeOrNullFromRealDocument() {
         DomNode node = null;
-        final boolean ie = getWindow().getWebWindow().getWebClient()
-            .getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_51);
+        final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().hasFeature(GENERATED_51);
         if (ie) {
             final Scriptable scope = getParentScope();
             if (scope instanceof Window) {
@@ -308,8 +331,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public Object getForms() {
         if (forms_ == null) {
             final HtmlPage page = getHtmlPage();
-            final boolean allowFunctionCall =
-                    getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED);
+            final boolean allowFunctionCall = getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED);
 
             forms_ = new HTMLCollection(page, false, "HTMLDocument.forms") {
                 @Override
@@ -407,8 +429,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public Object getAnchors() {
         if (anchors_ == null) {
-            final boolean checkId =
-                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID);
+            final boolean checkId = getBrowserVersion().hasFeature(JS_ANCHORS_REQUIRES_NAME_OR_ID);
 
             anchors_ = new HTMLCollection(getDomNodeOrDie(), true, "HTMLDocument.anchors") {
                 @Override
@@ -523,7 +544,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         final Window window = getWindow(thisObj);
         final BrowserVersion browser = window.getWebWindow().getWebClient().getBrowserVersion();
-        if (browser.hasFeature(BrowserVersionFeatures.GENERATED_53)) {
+        if (browser.hasFeature(GENERATED_53)) {
             return (HTMLDocument) window.getDocument();
         }
         throw Context.reportRuntimeError("Function can't be used detached from document");
@@ -891,8 +912,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     return true;
                 }
             };
-            all_.setAvoidObjectDetection(
-                    !getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION));
+            all_.setAvoidObjectDetection(!getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
         }
         return all_;
     }
@@ -961,7 +981,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * Closes the document implicitly, i.e. flushes the <tt>document.write</tt> buffer (IE only).
      */
     private void implicitCloseIfNecessary() {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_55);
+        final boolean ie = getBrowserVersion().hasFeature(GENERATED_55);
         if (!writeInCurrentDocument_ && ie) {
             try {
                 close();
@@ -986,7 +1006,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public Object appendChild(final Object childObject) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED)) {
+        if (getBrowserVersion().hasFeature(JS_DOCUMENT_APPEND_CHILD_SUPPORTED)) {
             // We're emulating IE; we can allow insertion.
             return super.appendChild(childObject);
         }
@@ -1006,7 +1026,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         Object result = NOT_FOUND;
 
         // IE can handle HTML, but it takes only the first tag found
-        if (tagName.startsWith("<") && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_57)) {
+        if (tagName.startsWith("<") && getBrowserVersion().hasFeature(GENERATED_57)) {
             final Matcher m = FIRST_TAG_PATTERN.matcher(tagName);
             if (m.find()) {
                 tagName = m.group(1);
@@ -1059,8 +1079,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         implicitCloseIfNecessary();
         Object result = null;
         try {
-            final boolean caseSensitive =
-                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE);
+            final boolean caseSensitive = getBrowserVersion().hasFeature(JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE);
             final DomElement htmlElement = getHtmlPage().getElementById(id, caseSensitive);
             final Object jsElement = getScriptableFor(htmlElement);
             if (jsElement == NOT_FOUND) {
@@ -1077,7 +1096,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to null
             final BrowserVersion browser = getBrowserVersion();
-            if (browser.hasFeature(BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE)
+            if (browser.hasFeature(JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE)
                     && getHtmlPage().isQuirksMode()) {
                 final HTMLCollection elements = getElementsByName(id);
                 result = elements.get(0, elements);
@@ -1117,7 +1136,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxFunction
     public HTMLCollection getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_59)
+        if (getBrowserVersion().hasFeature(GENERATED_59)
                 && (StringUtils.isEmpty(elementName) || "null".equals(elementName))) {
             return HTMLCollection.emptyCollection(getWindow());
         }
@@ -1153,7 +1172,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @Override
     protected Object getWithPreemption(final String name) {
         final HtmlPage page = (HtmlPage) getDomNodeOrNull();
-        if (page == null || getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_160)) {
+        if (page == null || getBrowserVersion().hasFeature(GENERATED_160)) {
             return NOT_FOUND;
         }
         return getIt(name);
@@ -1162,7 +1181,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private Object getIt(final String name) {
         final HtmlPage page = (HtmlPage) getDomNodeOrNull();
 
-        final boolean isIE = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_60);
+        final boolean isIE = getBrowserVersion().hasFeature(GENERATED_60);
         final HTMLCollection collection = new HTMLCollection(page, true, "HTMLDocument." + name) {
             @Override
             protected List<Object> computeElements() {
@@ -1221,7 +1240,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_161)) {
+        if (getBrowserVersion().hasFeature(GENERATED_161)) {
             return getIt(name);
         }
         return NOT_FOUND;
@@ -1236,8 +1255,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public HTMLElement getBody() {
         final HtmlPage page = getHtmlPage();
         // for IE, the body of a not yet loaded page is null whereas it already exists for FF
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_61)
-                && (page.getEnclosingWindow() instanceof FrameWindow)) {
+        if (getBrowserVersion().hasFeature(GENERATED_61) && (page.getEnclosingWindow() instanceof FrameWindow)) {
             final HtmlPage enclosingPage = (HtmlPage) page.getEnclosingWindow().getParentWindow().getEnclosedPage();
             if (WebClient.URL_ABOUT_BLANK.equals(page.getWebResponse().getWebRequest().getUrl())
                     && enclosingPage.getReadyState() != DomNode.READY_STATE_COMPLETE) {
@@ -1290,8 +1308,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public String getBgColor() {
         String color = getHtmlPage().getBody().getAttribute("bgColor");
-        if (color == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
+        if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#ffffff";
         }
         return color;
@@ -1315,8 +1332,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public String getAlinkColor() {
         String color = getHtmlPage().getBody().getAttribute("aLink");
-        if (color == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
+        if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#0000ff";
         }
         return color;
@@ -1339,8 +1355,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public String getLinkColor() {
         String color = getHtmlPage().getBody().getAttribute("link");
-        if (color == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
+        if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#0000ff";
         }
         return color;
@@ -1363,8 +1378,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public String getVlinkColor() {
         String color = getHtmlPage().getBody().getAttribute("vLink");
-        if (color == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
+        if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#800080";
         }
         return color;
@@ -1387,8 +1401,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public String getFgColor() {
         String color = getHtmlPage().getBody().getAttribute("text");
-        if (color == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLDOCUMENT_COLOR)) {
+        if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#000000";
         }
         return color;
@@ -1441,7 +1454,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
             domain_ = url.getHost();
             final BrowserVersion browser = getBrowserVersion();
-            if (browser.hasFeature(BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
+            if (browser.hasFeature(JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
                 domain_ = domain_.toLowerCase();
             }
         }
@@ -1483,7 +1496,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
 
         // IE (at least 6) doesn't allow to set domain of about:blank
         if (WebClient.URL_ABOUT_BLANK == getPage().getWebResponse().getWebRequest().getUrl()
-            && browserVersion.hasFeature(BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK)) {
+            && browserVersion.hasFeature(JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK)) {
             throw Context.reportRuntimeError("Illegal domain value, cannot set domain from \""
                     + WebClient.URL_ABOUT_BLANK + "\" to: \""
                     + newDomain + "\".");
@@ -1506,7 +1519,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         // Netscape down shifts the case of the domain
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
+        if (getBrowserVersion().hasFeature(JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
             domain_ = newDomain.toLowerCase();
         }
         else {
@@ -1628,7 +1641,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxFunction
     public Object elementFromPoint(final int x, final int y) {
         // minimal implementation to make simple unit test happy for FF and IE
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_164) && (x <= 0 || y <= 0)) {
+        if (getBrowserVersion().hasFeature(GENERATED_164) && (x <= 0 || y <= 0)) {
             return null;
         }
         return getBody();
@@ -1716,7 +1729,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public boolean queryCommandSupported(final String cmd) {
-        final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_165);
+        final boolean ff = getBrowserVersion().hasFeature(GENERATED_165);
         final String mode = getDesignMode();
         if (!ff) {
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
@@ -1736,7 +1749,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public boolean queryCommandEnabled(final String cmd) {
-        final boolean ff = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_165);
+        final boolean ff = getBrowserVersion().hasFeature(GENERATED_165);
         final String mode = getDesignMode();
         if (!ff) {
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
@@ -1758,11 +1771,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_63);
+        final boolean ie = getBrowserVersion().hasFeature(GENERATED_63);
         if ((ie && !containsCaseInsensitive(EXECUTE_CMDS_IE, cmd))
             || (!ie && !containsCaseInsensitive(EXECUTE_CMDS_FF, cmd))) {
 
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND)) {
+            if (getBrowserVersion().hasFeature(EXECCOMMAND_THROWS_ON_WRONG_COMMAND)) {
                 throw Context.reportRuntimeError("document.execCommand(): invalid command '" + cmd + "'");
             }
             return false;
@@ -1801,7 +1814,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public SimpleScriptable getDoctype() {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCUMENT_DOCTYPE_NULL)) {
+        if (getBrowserVersion().hasFeature(JS_DOCUMENT_DOCTYPE_NULL)) {
             return null;
         }
         return super.getDoctype();
@@ -1876,7 +1889,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // => TODO: find a better way to handle this!
         if (response instanceof FunctionObject
             && ("querySelectorAll".equals(name) || "querySelector".equals(name))
-            && getBrowserVersion().hasFeature(BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS)
+            && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)
             && getHtmlPage().isQuirksMode()) {
             return NOT_FOUND;
         }
@@ -1898,8 +1911,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
-        if (domNode instanceof DomDocumentType
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.DOCTYPE_IS_COMMENT)) {
+        if (domNode instanceof DomDocumentType && getBrowserVersion().hasFeature(DOCTYPE_IS_COMMENT)) {
             final DomDocumentType docType = (DomDocumentType) domNode;
             final DomComment comment = new DomComment(getHtmlPage(), "DOCTYPE " + docType.getName() + " PUBLIC \""
                     + docType.getPublicId() + "\"      \"" + docType.getSystemId() + '"');

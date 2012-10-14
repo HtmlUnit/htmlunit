@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -179,7 +179,7 @@ public class NamedNodeMap extends SimpleScriptable implements ScriptableWithFall
     }
 
     private boolean useRecursiveAttributeForIE() {
-        return getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES)
+        return getBrowserVersion().hasFeature(JS_ATTRIBUTES_CONTAINS_EMPTY_ATTR_FOR_PROPERTIES)
             && getDomNodeOrDie() instanceof HtmlElement;
     }
 

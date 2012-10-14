@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO;
+
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 
@@ -59,7 +60,7 @@ public class HTMLHtmlElement extends HTMLElement {
      */
     @Override
     public int getClientLeft() {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
+        if (getBrowserVersion().hasFeature(JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
             return 2;
         }
         return super.getClientLeft();
@@ -71,7 +72,7 @@ public class HTMLHtmlElement extends HTMLElement {
      */
     @Override
     public int getClientTop() {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
+        if (getBrowserVersion().hasFeature(JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
             return 2;
         }
         return super.getClientTop();

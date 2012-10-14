@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_EMPTY_PATH;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -26,7 +30,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -171,8 +174,7 @@ public class Location extends SimpleScriptable {
         }
         try {
             URL url = page.getWebResponse().getWebRequest().getUrl();
-            final boolean encodeHash = getBrowserVersion().
-                    hasFeature(BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED);
+            final boolean encodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HASH_IS_DECODED);
             final String hash = getHash(encodeHash);
             if (hash != null) {
                 url = UrlUtils.getUrlWithNewRef(url, hash);
@@ -210,7 +212,7 @@ public class Location extends SimpleScriptable {
             // fix for empty url
             if (StringUtils.isEmpty(newLocation)) {
                 final boolean dropFilename = page.getWebClient().getBrowserVersion().
-                        hasFeature(BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME);
+                        hasFeature(ANCHOR_EMPTY_HREF_NO_FILENAME);
                 if (dropFilename) {
                     String path = url.getPath();
                     path = path.substring(0, path.lastIndexOf('/') + 1);
@@ -264,7 +266,7 @@ public class Location extends SimpleScriptable {
      */
     @JsxGetter
     public String getHash() {
-        final boolean decodeHash = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED);
+        final boolean decodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HASH_IS_DECODED);
         String hash = hash_;
         if (decodeHash && hash_ != null) {
             hash = decodeHash(hash);
@@ -401,7 +403,7 @@ public class Location extends SimpleScriptable {
     @JsxGetter
     public String getPathname() {
         if (WebClient.URL_ABOUT_BLANK == getUrl()) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_EMPTY_PATH)) {
+            if (getBrowserVersion().hasFeature(URL_ABOUT_BLANK_HAS_EMPTY_PATH)) {
                 return "";
             }
             return "/blank";

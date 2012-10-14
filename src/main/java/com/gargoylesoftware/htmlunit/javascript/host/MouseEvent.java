@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_116;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
@@ -21,7 +22,6 @@ import java.util.LinkedList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -227,7 +227,7 @@ public class MouseEvent extends UIEvent {
      */
     @JsxGetter
     public int getButton() {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_116)) {
+        if (getBrowserVersion().hasFeature(GENERATED_116)) {
             // In IE7: oncontextmenu event.button is 0
             if (getType().equals(TYPE_CONTEXT_MENU)) {
                 return 0;
@@ -246,7 +246,7 @@ public class MouseEvent extends UIEvent {
      */
     @JsxSetter
     public void setButton(int value) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_116)
+        if (getBrowserVersion().hasFeature(GENERATED_116)
                 && !TYPE_CLICK.equals(getType())) {
             switch (value) {
                 case 1:

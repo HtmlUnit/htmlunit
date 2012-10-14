@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_NODE_AS_UPPERCASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_NON_EMPTY_TAGS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.util.Arrays;
@@ -23,7 +27,6 @@ import java.util.Set;
 
 import org.w3c.dom.NamedNodeMap;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.*;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -118,13 +121,10 @@ public class XMLSerializer extends SimpleScriptable {
         if (root instanceof Element) {
             final StringBuilder buffer = new StringBuilder();
             final DomNode node = root.getDomNodeOrDie();
-            final boolean nodeNameAsUpperCase =
-                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SERIALIZER_NODE_AS_UPPERCASE)
+            final boolean nodeNameAsUpperCase = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_NODE_AS_UPPERCASE)
                 && (node.getPage() instanceof HtmlPage);
-            final boolean appendCrlf =
-                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF);
-            final boolean addXhtmlNamespace =
-                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE);
+            final boolean appendCrlf = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_APPENDS_CRLF);
+            final boolean addXhtmlNamespace = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE);
 
             String forcedNamespace = null;
             if (addXhtmlNamespace) {
@@ -216,8 +216,7 @@ public class XMLSerializer extends SimpleScriptable {
         }
         if (!startTagClosed) {
             final String tagName = nodeName.toLowerCase(Locale.ENGLISH);
-            final boolean nonEmptyTagsSupported =
-                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SERIALIZER_NON_EMPTY_TAGS);
+            final boolean nonEmptyTagsSupported = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_NON_EMPTY_TAGS);
             if (nonEmptyTagsSupported && NON_EMPTY_TAGS.contains(tagName)) {
                 buffer.append('>');
                 buffer.append("</").append(nodeName).append('>');

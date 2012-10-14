@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
+
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +24,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.xalan.xsltc.runtime.AttributeList;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -199,8 +200,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     @JsxGetter
     public String getAlign() {
-        final boolean acceptArbitraryValues =
-                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
+        final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
 
         final String align = getDomNodeOrDie().getAttribute("align");
         if (acceptArbitraryValues) {
@@ -221,8 +221,7 @@ public class HTMLImageElement extends HTMLElement {
     @JsxSetter
     public void setAlign(String align) {
         align = align.toLowerCase();
-        final boolean acceptArbitraryValues =
-                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
+        final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
         if (acceptArbitraryValues) {
             getDomNodeOrDie().setAttribute("align", align);
             return;

@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_IN_QUIRKS_MODE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SET_READONLY_PROPERTIES;
+
 import java.lang.reflect.Method;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -27,7 +30,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -281,7 +283,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         if (String.class.equals(hint) || hint == null) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OBJECT_IN_QUIRKS_MODE)) {
+            if (getBrowserVersion().hasFeature(JS_OBJECT_IN_QUIRKS_MODE)) {
                 final Page page = getWindow().getWebWindow().getEnclosedPage();
                 if (page instanceof HtmlPage && ((HtmlPage) page).isQuirksMode()) {
                     return "[object]";
@@ -447,7 +449,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
 
     @Override
     protected boolean isReadOnlySettable(final String name, final Object value) {
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.SET_READONLY_PROPERTIES)) {
+        if (!getBrowserVersion().hasFeature(SET_READONLY_PROPERTIES)) {
             throw ScriptRuntime.typeError3("msg.set.prop.no.setter",
                     name, getClassName(), Context.toString(value));
         }

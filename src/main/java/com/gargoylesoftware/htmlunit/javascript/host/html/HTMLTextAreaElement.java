@@ -14,13 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_111;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_174;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_COLS_RETURNS_20;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TEXTAREA_CRNL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -68,7 +72,7 @@ public class HTMLTextAreaElement extends FormField {
     @Override
     public String getValue() {
         String value = ((HtmlTextArea) getDomNodeOrDie()).getText();
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.TEXTAREA_CRNL)) {
+        if (getBrowserVersion().hasFeature(TEXTAREA_CRNL)) {
             value = NORMALIZE_VALUE_PATTERN.matcher(value).replaceAll("$1\r\n");
         }
         return value;
@@ -94,7 +98,7 @@ public class HTMLTextAreaElement extends FormField {
             return Integer.parseInt(s);
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_TEXT_AREA_COLS_RETURNS_20)) {
+            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_COLS_RETURNS_20)) {
                 return 20;
             }
             return -1;
@@ -115,7 +119,7 @@ public class HTMLTextAreaElement extends FormField {
             }
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION)) {
+            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
             i = 0;
@@ -135,7 +139,7 @@ public class HTMLTextAreaElement extends FormField {
             rows = Integer.parseInt(s);
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_174)) {
+            if (getBrowserVersion().hasFeature(GENERATED_174)) {
                 rows = -1;
             }
             else {
@@ -159,7 +163,7 @@ public class HTMLTextAreaElement extends FormField {
             }
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_111)) {
+            if (getBrowserVersion().hasFeature(GENERATED_111)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
             i = 0;
@@ -175,7 +179,7 @@ public class HTMLTextAreaElement extends FormField {
     @JsxGetter
     public String getDefaultValue() {
         String value = ((HtmlTextArea) getDomNodeOrDie()).getDefaultValue();
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.TEXTAREA_CRNL)) {
+        if (getBrowserVersion().hasFeature(TEXTAREA_CRNL)) {
             value = NORMALIZE_VALUE_PATTERN.matcher(value).replaceAll("$1\r\n");
         }
         return value;

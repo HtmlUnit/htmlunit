@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_102;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_103;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlTableColumn;
 import com.gargoylesoftware.htmlunit.html.HtmlTableColumnGroup;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -68,7 +69,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
         final double d = Context.toNumber(span);
         int i = (int) d;
         if (i < 1) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_102)) {
+            if (getBrowserVersion().hasFeature(GENERATED_102)) {
                 final Exception e = new Exception("Cannot set the span property to invalid value: " + span);
                 Context.throwAsScriptRuntimeEx(e);
             }
@@ -85,7 +86,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      */
     @JsxGetter(propertyName = "width")
     public String getWidth_js() {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_103);
+        final boolean ie = getBrowserVersion().hasFeature(GENERATED_103);
         final Boolean returnNegativeValues = ie ? Boolean.FALSE : null;
         return getWidthOrHeight("width", returnNegativeValues);
     }

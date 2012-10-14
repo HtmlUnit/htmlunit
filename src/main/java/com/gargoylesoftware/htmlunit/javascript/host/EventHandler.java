@@ -14,13 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_NO_PARAMETER;
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
@@ -48,7 +48,7 @@ public class EventHandler extends BaseFunction {
 
         final String functionSignature;
         if (node.getPage().getEnclosingWindow().getWebClient()
-                .getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_EVENT_NO_PARAMETER)) {
+                .getBrowserVersion().hasFeature(JS_EVENT_NO_PARAMETER)) {
             functionSignature = "function " + eventName + "()";
         }
         else {

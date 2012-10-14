@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -22,7 +23,6 @@ import java.io.IOException;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.InputElementFactory;
@@ -349,8 +349,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxSetter
     public void setAlign(final String align) {
-        final boolean ignoreIfNoError =
-                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES);
+        final boolean ignoreIfNoError = getBrowserVersion().hasFeature(JS_ALIGN_FOR_INPUT_IGNORES_VALUES);
         setAlign(align, ignoreIfNoError);
     }
 

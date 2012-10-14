@@ -14,10 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IFRAME_GET_HEIGHT_NEGATIVE_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IFRAME_GET_WIDTH_NEGATIVE_VALUES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -165,7 +166,7 @@ public class HTMLIFrameElement extends HTMLElement {
      */
     @JsxGetter(propertyName = "width")
     public String getWidth_js() {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_IFRAME_GET_WIDTH_NEGATIVE_VALUES);
+        final boolean ie = getBrowserVersion().hasFeature(JS_IFRAME_GET_WIDTH_NEGATIVE_VALUES);
         final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("width", returnNegativeValues);
     }
@@ -185,7 +186,7 @@ public class HTMLIFrameElement extends HTMLElement {
      */
     @JsxGetter(propertyName = "height")
     public String getHeight_js() {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_IFRAME_GET_HEIGHT_NEGATIVE_VALUES);
+        final boolean ie = getBrowserVersion().hasFeature(JS_IFRAME_GET_HEIGHT_NEGATIVE_VALUES);
         final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("height", returnNegativeValues);
     }

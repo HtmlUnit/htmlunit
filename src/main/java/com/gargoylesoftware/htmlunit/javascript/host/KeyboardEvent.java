@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_113;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
@@ -520,7 +520,7 @@ public class KeyboardEvent extends UIEvent {
             final boolean shiftKey, final boolean ctrlKey, final boolean altKey) {
         super(domNode, type);
         int keyCode = 0;
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_113)) {
+        if (getBrowserVersion().hasFeature(GENERATED_113)) {
             if (getType().equals(Event.TYPE_KEY_PRESS)) {
                 keyCode = Integer.valueOf(character);
                 setKeyCode(keyCode);

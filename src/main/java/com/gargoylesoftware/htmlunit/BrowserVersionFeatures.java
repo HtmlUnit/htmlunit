@@ -713,7 +713,7 @@ public enum BrowserVersionFeatures {
     /** Indicates that the appendChild call create a DocumentFragment to be
      * the parentNode's parentNode if this was null. */
     @BrowserFeature(@WebBrowser(IE))
-    JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT_IF_PARENT_IS_NULL,
+    JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT,
 
     /** Indicates that the appendChild call throws no exception
      * if the provided note cannot be inserted. */
@@ -852,7 +852,7 @@ public enum BrowserVersionFeatures {
      * don't receive the event as argument.
      */
     @BrowserFeature(@WebBrowser(IE))
-    JS_EVENT_HANDLER_DECLARED_AS_PROPERTY_DONT_RECEIVE_EVENT,
+    JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT,
 
     /** Do not send parameter in event handlers. */
     @BrowserFeature(@WebBrowser(IE))
@@ -1178,34 +1178,34 @@ public enum BrowserVersionFeatures {
 
     /** XMLHttpRequest does not trigger the error handler (IE). */
     @BrowserFeature(@WebBrowser(IE))
-    XMLHTTPREQUEST_ERRORHANDLER_NOT_SUPPORTED,
+    XHR_ERRORHANDLER_NOT_SUPPORTED,
 
     /** Indicates that 'this' corresponds to the handler function when a XMLHttpRequest handler is executed. */
-    XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION,
+    XHR_HANDLER_THIS_IS_FUNCTION,
 
     /** Indicates if a same origin check should be skipped. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    XMLHTTPREQUEST_IGNORE_SAME_ORIGIN,
+    XHR_IGNORE_SAME_ORIGIN,
 
     /** Indicates if a request to a about URL is allowed. */
     @BrowserFeature(@WebBrowser(IE))
-    XMLHTTPREQUEST_IGNORE_SAME_ORIGIN_TO_ABOUT,
+    XHR_IGNORE_SAME_ORIGIN_TO_ABOUT,
 
     /** Indicates that the onreadystatechange handler is not triggered for sync requests. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    XMLHTTPREQUEST_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED,
+    XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED,
 
     /** Indicates that the onreadystatechange handler is triggered for sync requests for COMPLETED (4). */
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
-    XMLHTTPREQUEST_ONREADYSTATECANGE_SYNC_REQUESTS_TRIGGER_COMPLETED,
+    XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED,
 
     /** Indicates that the onreadystatechange handler is triggered with an event parameter (FF). */
     @BrowserFeature(@WebBrowser(FF))
-    XMLHTTPREQUEST_ONREADYSTATECHANGE_WITH_EVENT_PARAM,
+    XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM,
 
     /** Indicates that the onload handler is not triggered if completed (FF). */
     @BrowserFeature(@WebBrowser(FF))
-    XMLHTTPREQUEST_TRIGGER_ONLOAD_ON_COMPLETED,
+    XHR_TRIGGER_ONLOAD_ON_COMPLETED,
 
     /** Indicates if XUL is supported (FF only). */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))

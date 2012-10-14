@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_30;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_31;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_32;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XUL_SUPPORT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
@@ -27,7 +32,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
@@ -157,7 +161,7 @@ public class Document extends EventNode {
     @JsxGetter
     public String getDesignMode() {
         if (designMode_ == null) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_30)) {
+            if (getBrowserVersion().hasFeature(GENERATED_30)) {
                 if (getWindow().getWebWindow() instanceof FrameWindow) {
                     designMode_ = "Inherit";
                 }
@@ -178,7 +182,7 @@ public class Document extends EventNode {
      */
     @JsxSetter
     public void setDesignMode(final String mode) {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_31);
+        final boolean ie = getBrowserVersion().hasFeature(GENERATED_31);
         if (ie) {
             if (!"on".equalsIgnoreCase(mode) && !"off".equalsIgnoreCase(mode) && !"inherit".equalsIgnoreCase(mode)) {
                 throw Context.reportRuntimeError("Invalid document.designMode value '" + mode + "'.");
@@ -405,7 +409,7 @@ public class Document extends EventNode {
             // FF supports document.createElement('div') or supports document.createElement('<div>')
             // but not document.createElement('<div name="test">')
             // IE supports also document.createElement('<div name="test">')
-            if (!browserVersion.hasFeature(BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX)
+            if (!browserVersion.hasFeature(JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX)
                   && tagName.startsWith("<") && tagName.endsWith(">")) {
                 tagName = tagName.substring(1, tagName.length() - 1);
 
@@ -451,7 +455,7 @@ public class Document extends EventNode {
     public Object createElementNS(final String namespaceURI, final String qualifiedName) {
         final org.w3c.dom.Element element;
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(BrowserVersionFeatures.XUL_SUPPORT)
+        if (browserVersion.hasFeature(XUL_SUPPORT)
                 && "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
             // simple hack, no need to implement the XUL objects (at least in a first time)
             element = new HtmlDivision(namespaceURI, qualifiedName, getPage(), null);
@@ -484,7 +488,7 @@ public class Document extends EventNode {
             };
         }
         else {
-            final boolean useLocalName = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_32);
+            final boolean useLocalName = getBrowserVersion().hasFeature(GENERATED_32);
             final String tagNameLC = tagName.toLowerCase();
 
             collection = new HTMLCollection(getDomNodeOrDie(), false, description) {

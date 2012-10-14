@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_HOST_FIRST;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_AUTH_CREDENTIALS;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -308,7 +312,7 @@ public class HttpWebConnection implements WebConnection {
             }
         }
 
-        if (webClient_.getBrowserVersion().hasFeature(BrowserVersionFeatures.HTTP_HEADER_HOST_FIRST)) {
+        if (webClient_.getBrowserVersion().hasFeature(HTTP_HEADER_HOST_FIRST)) {
             final int port = webRequest.getUrl().getPort();
             final StringBuilder host = new StringBuilder(webRequest.getUrl().getHost());
             if (port != 80 && port > 0) {
@@ -337,7 +341,7 @@ public class HttpWebConnection implements WebConnection {
         // if the used url contains credentials, we have to add this
         final Credentials requestUrlCredentials = webRequest.getUrlCredentials();
         if (null != requestUrlCredentials
-                && webClient_.getBrowserVersion().hasFeature(BrowserVersionFeatures.URL_AUTH_CREDENTIALS)) {
+                && webClient_.getBrowserVersion().hasFeature(URL_AUTH_CREDENTIALS)) {
             final URL requestUrl = webRequest.getUrl();
             final AuthScope authScope = new AuthScope(requestUrl.getHost(), requestUrl.getPort());
             // updating our client to keep the credentials for the next request
@@ -409,8 +413,7 @@ public class HttpWebConnection implements WebConnection {
                         new ByteArrayInputStream(pairWithFile.getData()), contentType, pairWithFile.getValue());
             }
 
-            if (webClient_.getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
+            if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
                 return new InputStreamBody(
                         new ByteArrayInputStream(pairWithFile.getData()), contentType, file.getAbsolutePath());
             }
@@ -435,8 +438,7 @@ public class HttpWebConnection implements WebConnection {
                 if (getFile() == null) {
                     return pairWithFile.getValue();
                 }
-                else if (webClient_.getBrowserVersion().hasFeature(
-                    BrowserVersionFeatures.HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
+                else if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
                     return getFile().getAbsolutePath();
                 }
                 else {

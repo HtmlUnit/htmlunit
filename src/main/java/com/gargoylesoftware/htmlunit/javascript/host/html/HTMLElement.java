@@ -14,6 +14,29 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_167;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_65;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_66;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_69;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_70;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_71;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_73;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_74;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_75;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_EMULATED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_OFF_EMULATED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_OFF_INTEGER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_UNDEFINED_DOT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENT_LEFT_TOP_ZERO;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -47,7 +70,6 @@ import org.w3c.css.sac.CSSException;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -470,7 +492,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @Override
     public String getNamespaceURI() {
         final HtmlElement domNode = getDomNodeOrDie();
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_65)) {
+        if (getBrowserVersion().hasFeature(GENERATED_65)) {
             return domNode.getNamespaceURI();
         }
         if (domNode.getPage() instanceof HtmlPage) {
@@ -540,7 +562,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     protected String fixAttributeName(final String attributeName) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_66)) {
+        if (getBrowserVersion().hasFeature(GENERATED_66)) {
             if ("className".equals(attributeName)) {
                 return "class";
             }
@@ -651,7 +673,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         getDomNodeOrDie().setAttribute(name, value);
 
         //FF: call corresponding event handler set_onxxx if found
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_167) && !name.isEmpty()) {
+        if (getBrowserVersion().hasFeature(GENERATED_167) && !name.isEmpty()) {
             try {
                 name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
                 final Method method = getClass().getMethod("set" + name, new Class[] {Object.class});
@@ -726,7 +748,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         final Attr replacedAtt;
         final boolean undefForClass = getBrowserVersion().
-                hasFeature(BrowserVersionFeatures.JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL);
+                hasFeature(JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL);
         if (undefForClass) {
             replacedAtt = (Attr) getAttributeNode(name);
         }
@@ -794,8 +816,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getClientHeight() {
-        final boolean includePadding =
-            !getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING);
+        final boolean includePadding = !getBrowserVersion().hasFeature(JS_ELEMENT_EXTENT_WITHOUT_PADDING);
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         return style.getCalculatedHeight(false, includePadding);
     }
@@ -806,8 +827,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getClientWidth() {
-        final boolean includePadding =
-            !getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING);
+        final boolean includePadding = !getBrowserVersion().hasFeature(JS_ELEMENT_EXTENT_WITHOUT_PADDING);
         final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(this, null);
         return style.getCalculatedWidth(false, includePadding);
     }
@@ -875,7 +895,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         else if (node instanceof DomCharacterData) {
             // Remove whitespace sequences, possibly escape XML characters.
             String s = node.getNodeValue();
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES)) {
+            if (getBrowserVersion().hasFeature(JS_INNER_HTML_REDUCE_WHITESPACES)) {
                 s = PRINT_NODE_PATTERN.matcher(s).replaceAll(" ");
             }
             if (html) {
@@ -886,7 +906,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         else if (html) {
             // Start the tag name. IE does it in uppercase, FF in lowercase.
             final HtmlElement element = (HtmlElement) node;
-            final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_69);
+            final boolean ie = getBrowserVersion().hasFeature(GENERATED_69);
             String tag = element.getTagName();
             if (ie) {
                 tag = tag.toUpperCase();
@@ -933,7 +953,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxSetter
     public void setInnerHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_70);
+        final boolean ie = getBrowserVersion().hasFeature(GENERATED_70);
 
         if (ie && INNER_HTML_READONLY_IN_IE.contains(domNode.getNodeName())) {
             throw Context.reportRuntimeError("innerHTML is read-only for tag " + domNode.getNodeName());
@@ -982,7 +1002,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         //if the parentNode has null parentNode in IE,
         //create a DocumentFragment to be the parentNode's parentNode.
-        if (domNode.getParentNode() == null && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_71)) {
+        if (domNode.getParentNode() == null && getBrowserVersion().hasFeature(GENERATED_71)) {
             final DomDocumentFragment fragment = ((HtmlPage) domNode.getPage()).createDomDocumentFragment();
             fragment.appendChild(domNode);
         }
@@ -1987,7 +2007,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // => TODO: find a better way to handle this!
         if (response instanceof FunctionObject
             && ("querySelectorAll".equals(name) || "querySelector".equals(name))
-            && getBrowserVersion().hasFeature(BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS)) {
+            && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
 
             final DomNode domNode = getDomNodeOrNull();
             if (null == domNode) {
@@ -2020,7 +2040,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     public String getPrefix() {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_73)) {
+        if (getBrowserVersion().hasFeature(GENERATED_73)) {
             return "";
         }
         return null;
@@ -2195,7 +2215,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
                 }
             }
             catch (final NumberFormatException e) {
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_74)) {
+                if (getBrowserVersion().hasFeature(GENERATED_74)) {
                     s = "";
                 }
             }
@@ -2215,7 +2235,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         if (value.endsWith("px")) {
             value = value.substring(0, value.length() - 2);
         }
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_75) && value.length() > 0) {
+        if (getBrowserVersion().hasFeature(GENERATED_75) && value.length() > 0) {
             boolean error = false;
             if (!PERCENT_VALUE.matcher(value).matches()) {
                 try {
@@ -2249,7 +2269,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected void setColorAttribute(final String name, final String value) {
         String s = value;
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_COLOR_RESTRICT) && !s.isEmpty()) {
+        if (getBrowserVersion().hasFeature(HTML_COLOR_RESTRICT) && !s.isEmpty()) {
             //For IE9, check HTMLElementTest#setColorAttribute
 
             s = null;
@@ -2291,8 +2311,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the "align" property
      */
     protected String getAlign(final boolean returnInvalidValues) {
-        final boolean acceptArbitraryValues =
-                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
+        final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
 
         final String align = getDomNodeOrDie().getAttribute("align");
         if (returnInvalidValues || acceptArbitraryValues
@@ -2313,8 +2332,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     protected void setAlign(String align, final boolean ignoreIfNoError) {
         align = align.toLowerCase();
-        final boolean acceptArbitraryValues =
-                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
+        final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
         if (acceptArbitraryValues
                 || "center".equals(align)
                 || "justify".equals(align)
@@ -2363,14 +2381,13 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the "ch" property
      */
     protected String getCh() {
-        final boolean emulated = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_EMULATED);
+        final boolean emulated = getBrowserVersion().hasFeature(JS_CHAR_EMULATED);
         if (emulated) {
             return ch_;
         }
 
         final String ch = getDomNodeOrDie().getAttribute("char");
-        if ((ch == DomElement.ATTRIBUTE_NOT_DEFINED)
-                && (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_UNDEFINED_DOT))) {
+        if ((ch == DomElement.ATTRIBUTE_NOT_DEFINED) && (getBrowserVersion().hasFeature(JS_CHAR_UNDEFINED_DOT))) {
             return ".";
         }
         return ch;
@@ -2381,7 +2398,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param ch the value of the "ch" property
      */
     protected void setCh(final String ch) {
-        final boolean emulated = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_EMULATED);
+        final boolean emulated = getBrowserVersion().hasFeature(JS_CHAR_EMULATED);
         if (emulated) {
             ch_ = ch;
         }
@@ -2395,7 +2412,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return the value of the "chOff" property
      */
     protected String getChOff() {
-        final boolean emulated = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_OFF_EMULATED);
+        final boolean emulated = getBrowserVersion().hasFeature(JS_CHAR_OFF_EMULATED);
         if (emulated) {
             return chOff_;
         }
@@ -2407,7 +2424,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param chOff the value of the "chOff" property
      */
     protected void setChOff(String chOff) {
-        final boolean emulated = getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_OFF_EMULATED);
+        final boolean emulated = getBrowserVersion().hasFeature(JS_CHAR_OFF_EMULATED);
         if (emulated) {
             chOff_ = chOff;
             return;
@@ -2415,7 +2432,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         try {
             final float f = Float.parseFloat(chOff);
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CHAR_OFF_INTEGER)) {
+            if (getBrowserVersion().hasFeature(JS_CHAR_OFF_INTEGER)) {
                 if (f < 0) {
                     chOff = "0";
                 }
@@ -2547,7 +2564,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public int getClientLeft() {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CLIENT_LEFT_TOP_ZERO)) {
+        if (getBrowserVersion().hasFeature(JS_CLIENT_LEFT_TOP_ZERO)) {
             return 0;
         }
         return getCurrentStyle().getBorderLeftValue();
@@ -2559,7 +2576,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter({ @WebBrowser(IE), @WebBrowser(FF) })
     public int getClientTop() {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CLIENT_LEFT_TOP_ZERO)) {
+        if (getBrowserVersion().hasFeature(JS_CLIENT_LEFT_TOP_ZERO)) {
             return 0;
         }
         return getCurrentStyle().getBorderTopValue();
@@ -2633,7 +2650,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         DomNode currentElement = getDomNodeOrDie();
 
         if (currentElement.getParentNode() == null) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED)) {
+            if (getBrowserVersion().hasFeature(JS_OFFSET_PARENT_THROWS_NOT_ATTACHED)) {
                 throw Context.reportRuntimeError("Unspecified error");
             }
             return null;
@@ -2643,7 +2660,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptObject();
         final ComputedCSSStyleDeclaration style = htmlElement.getCurrentStyle();
         final String position = style.getPositionWithInheritance();
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_72);
+        final boolean ie = getBrowserVersion().hasFeature(GENERATED_72);
         final boolean staticPos = "static".equals(position);
         final boolean fixedPos = "fixed".equals(position);
         final boolean useTables = ((ie && (staticPos || fixedPos)) || (!ie && staticPos));
@@ -2698,7 +2715,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             parentNode = elem.getParentNode();
         }
 
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
+        if (getBrowserVersion().hasFeature(JS_BOUNDING_CLIENT_RECT_OFFSET_TWO)) {
             left += 2;
             top += 2;
         }

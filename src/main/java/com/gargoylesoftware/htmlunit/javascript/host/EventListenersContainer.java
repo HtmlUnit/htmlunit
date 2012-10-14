@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_40;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ADD_EVENT_LISTENER_ACCEPTS_NULL_LISTENER;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +29,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
@@ -81,7 +83,7 @@ public class EventListenersContainer implements Serializable {
     public boolean addEventListener(final String type, final Function listener, final boolean useCapture) {
         if (null == listener) {
             final boolean accept = jsNode_.getWindow().getWebWindow().getWebClient()
-                    .getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_ADD_EVENT_LISTENER_ACCEPTS_NULL_LISTENER);
+                    .getBrowserVersion().hasFeature(JS_ADD_EVENT_LISTENER_ACCEPTS_NULL_LISTENER);
             if (accept) {
                 return true;
             }
@@ -163,7 +165,7 @@ public class EventListenersContainer implements Serializable {
         final List<Function> handlers = getHandlers(event.getType(), useCapture);
         if (handlers != null && !handlers.isEmpty()) {
             final boolean ie = jsNode_.getWindow().getWebWindow().getWebClient()
-                    .getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_40);
+                    .getBrowserVersion().hasFeature(GENERATED_40);
 
             event.setCurrentTarget(jsNode_);
             final HtmlPage page = (HtmlPage) node.getPage();

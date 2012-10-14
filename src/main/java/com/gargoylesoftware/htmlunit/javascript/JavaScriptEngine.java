@@ -14,6 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_144;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALLOW_CONST_ASSIGNMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DONT_ENUM_FUNCTIONS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ECMA5_FUNCTIONS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_BIND;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_TRIM;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.lang.reflect.Method;
@@ -36,7 +46,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -181,7 +190,7 @@ public class JavaScriptEngine {
 
         // remove some objects, that Rhino defines in top scope but that we don't want
         deleteProperties(window, "javax", "org", "com", "edu", "net", "JavaAdapter", "JavaImporter", "Continuation");
-        if (browserVersion.hasFeature(BrowserVersionFeatures.GENERATED_144)) {
+        if (browserVersion.hasFeature(GENERATED_144)) {
             deleteProperties(window, "Packages", "java", "getClass", "XML", "XMLList", "Namespace", "QName");
         }
 
@@ -189,7 +198,7 @@ public class JavaScriptEngine {
         final Scriptable fallbackCaller = new FallbackCaller();
         ScriptableObject.getObjectPrototype(window).setPrototype(fallbackCaller);
 
-        final boolean putPrototypeInWindowScope = browserVersion.hasFeature(BrowserVersionFeatures.JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE);
+        final boolean putPrototypeInWindowScope = browserVersion.hasFeature(JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE);
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final boolean isWindow = Window.class.getName().equals(config.getHostClass().getName());
             if (isWindow) {
@@ -253,7 +262,7 @@ public class JavaScriptEngine {
 
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
         removePrototypeProperties(window, "String", "equals", "equalsIgnoreCase");
-        if (browserVersion.hasFeature(BrowserVersionFeatures.STRING_TRIM)) {
+        if (browserVersion.hasFeature(STRING_TRIM)) {
             final ScriptableObject stringPrototype =
                 (ScriptableObject) ScriptableObject.getClassPrototype(window, "String");
             stringPrototype.defineFunctionProperties(new String[] {"trimLeft", "trimRight"},
@@ -262,14 +271,14 @@ public class JavaScriptEngine {
         else {
             removePrototypeProperties(window, "String", "trim");
         }
-        if (!browserVersion.hasFeature(BrowserVersionFeatures.JS_FUNCTION_BIND)) {
+        if (!browserVersion.hasFeature(JS_FUNCTION_BIND)) {
             removePrototypeProperties(window, "Function", "bind");
         }
-        if (!browserVersion.hasFeature(BrowserVersionFeatures.JS_ECMA5_FUNCTIONS)) {
+        if (!browserVersion.hasFeature(JS_ECMA5_FUNCTIONS)) {
             removePrototypeProperties(window, "Date", "toISOString", "toJSON");
         }
 
-        if (!browserVersion.hasFeature(BrowserVersionFeatures.JS_DEFINE_GETTER)) {
+        if (!browserVersion.hasFeature(JS_DEFINE_GETTER)) {
             removePrototypeProperties(window, "Object", "__defineGetter__", "__defineSetter__", "__lookupGetter__",
                     "__lookupSetter__");
             removePrototypeProperties(window, "Array", "every", "filter", "forEach", "indexOf", "lastIndexOf", "map",
@@ -277,7 +286,7 @@ public class JavaScriptEngine {
         }
 
         // only FF has toSource
-        if (!browserVersion.hasFeature(BrowserVersionFeatures.JS_FUNCTION_TOSOURCE)) {
+        if (!browserVersion.hasFeature(JS_FUNCTION_TOSOURCE)) {
             deleteProperties(window, "isXMLName", "uneval");
             removePrototypeProperties(window, "Object", "toSource");
             removePrototypeProperties(window, "Array", "toSource");
@@ -289,7 +298,7 @@ public class JavaScriptEngine {
 
         NativeFunctionToStringFunction.installFix(window, webClient.getBrowserVersion());
 
-        if (browserVersion.hasFeature(BrowserVersionFeatures.JS_ALLOW_CONST_ASSIGNMENT)) {
+        if (browserVersion.hasFeature(JS_ALLOW_CONST_ASSIGNMENT)) {
             makeConstWritable(window, "undefined", "NaN", "Infinity");
         }
 
@@ -370,7 +379,7 @@ public class JavaScriptEngine {
         }
 
         int attributes;
-        if (webClient_.getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DONT_ENUM_FUNCTIONS)) {
+        if (webClient_.getBrowserVersion().hasFeature(JS_DONT_ENUM_FUNCTIONS)) {
             attributes = ScriptableObject.DONTENUM;
         }
         else {

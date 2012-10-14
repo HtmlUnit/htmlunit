@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_ATTRIBUTE_HAS_TEXT_PROPERTY;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -28,7 +29,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Node;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -186,8 +186,7 @@ public class XMLDocument extends Document {
             scriptable = new Element();
         }
         else if (domNode instanceof DomAttr) {
-            if (getPage().getWebClient().getBrowserVersion().
-                    hasFeature(BrowserVersionFeatures.JS_XML_ATTRIBUTE_HAS_TEXT_PROPERTY)) {
+            if (getPage().getWebClient().getBrowserVersion().hasFeature(JS_XML_ATTRIBUTE_HAS_TEXT_PROPERTY)) {
                 scriptable = new XMLAttr();
             }
             else {

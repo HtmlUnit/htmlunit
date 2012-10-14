@@ -14,11 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_86;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlObject;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -101,7 +101,7 @@ public class HTMLObjectElement extends FormChild {
     @JsxSetter(@WebBrowser(IE))
     public void setClassid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
-        if (classid.indexOf(':') != -1 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_86)
+        if (classid.indexOf(':') != -1 && getBrowserVersion().hasFeature(GENERATED_86)
                 && getWindow().getWebWindow().getWebClient().getOptions().isActiveXNative()
                 && System.getProperty("os.name").contains("Windows")) {
             try {

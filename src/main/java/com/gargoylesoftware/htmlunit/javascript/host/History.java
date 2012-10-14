@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_156;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_157;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.io.IOException;
@@ -21,7 +23,6 @@ import java.io.IOException;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -53,7 +54,7 @@ public class History extends SimpleScriptable {
     @Override
     public Object[] getIds() {
         Object[] ids = super.getIds();
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_156)) {
+        if (getBrowserVersion().hasFeature(GENERATED_156)) {
             final int len = getWindow().getWebWindow().getHistory().getLength();
             if (len > 0) {
                 final Object[] allIds = new Object[ids.length + len];
@@ -72,7 +73,7 @@ public class History extends SimpleScriptable {
      */
     @Override
     public boolean has(final int index, final Scriptable start) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_157)) {
+        if (getBrowserVersion().hasFeature(GENERATED_157)) {
             final History h = (History) start;
             if (index >= 0 && index < h.getLength()) {
                 return true;

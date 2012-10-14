@@ -14,11 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -94,7 +96,7 @@ public class HTMLScriptElement extends HTMLElement {
         htmlElement.appendChild(textChild);
 
         final HtmlScript tmpScript = (HtmlScript) htmlElement;
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT)) {
+        if (getBrowserVersion().hasFeature(JS_SCRIPT_ALWAYS_REEXECUTE_ON_SET_TEXT)) {
             tmpScript.resetExecuted();
         }
         tmpScript.executeScriptIfNeeded();
@@ -176,8 +178,7 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @Override
     public Object appendChild(final Object childObject) {
-        if (getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION)) {
+        if (getBrowserVersion().hasFeature(JS_SCRIPT_APPEND_CHILD_THROWS_EXCEPTION)) {
             throw Context.reportRuntimeError("Unexpected call to method or property access");
         }
 
@@ -199,8 +200,7 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @Override
     protected Object insertBeforeImpl(final Object[] args) {
-        if (getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION)) {
+        if (getBrowserVersion().hasFeature(JS_SCRIPT_INSERT_BEFORE_THROWS_EXCEPTION)) {
             throw Context.reportRuntimeError("Unexpected call to method or property access");
         }
         return super.insertBeforeImpl(args);

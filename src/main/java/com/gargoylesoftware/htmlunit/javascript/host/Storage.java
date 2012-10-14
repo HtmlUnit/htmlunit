@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STORAGE_OBSOLETE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -24,7 +25,6 @@ import java.util.Map;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -147,7 +147,7 @@ public class Storage extends SimpleScriptable {
     @Override
     public String getClassName() {
         if (getWindow().getWebWindow() != null) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.STORAGE_OBSOLETE)) {
+            if (getBrowserVersion().hasFeature(STORAGE_OBSOLETE)) {
                 return "StorageObsolete";
             }
         }

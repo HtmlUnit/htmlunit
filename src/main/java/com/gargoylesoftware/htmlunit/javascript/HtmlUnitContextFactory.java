@@ -14,6 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_IS_OBJECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_IS_READ_ONLY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVAL_LOCAL_SCOPE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NON_ECMA_GET_YEAR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PARENT_PROTO_PROPERTIES;
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -26,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.WrapFactory;
 import net.sourceforge.htmlunit.corejs.javascript.debug.Debugger;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -144,7 +151,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
                     source = source.replaceFirst("<!--", "// <!--");
                 }
                 // IE ignores the last line containing uncommented -->
-                if (browserVersion_.hasFeature(BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED)
+                if (browserVersion_.hasFeature(JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED)
                         && sourceCodeTrimmed.endsWith("-->")) {
                     final int lastDoubleSlash = source.lastIndexOf("//");
                     final int lastNewLine = Math.max(source.lastIndexOf('\n'), source.lastIndexOf('\r'));
@@ -163,7 +170,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             //    .preProcess(page, source, sourceName, lineno, null);
 
             // PreProcess IE Conditional Compilation if needed
-            if (browserVersion_.hasFeature(BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS)) {
+            if (browserVersion_.hasFeature(HTMLCONDITIONAL_COMMENTS)) {
                 final ScriptPreProcessor ieCCPreProcessor = new IEConditionalCompilationScriptPreProcessor();
                 source = ieCCPreProcessor.preProcess(page, source, sourceName, lineno, null);
 //                sourceCode = IEWeirdSyntaxScriptPreProcessor.getInstance()
@@ -276,23 +283,23 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER:
                 return true;
             case Context.FEATURE_PARENT_PROTO_PROPERTIES:
-                return !browserVersion_.hasFeature(BrowserVersionFeatures.JS_PARENT_PROTO_PROPERTIES);
+                return !browserVersion_.hasFeature(JS_PARENT_PROTO_PROPERTIES);
             case Context.FEATURE_NON_ECMA_GET_YEAR:
-                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_NON_ECMA_GET_YEAR);
+                return browserVersion_.hasFeature(JS_NON_ECMA_GET_YEAR);
             case Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY:
                 return true;
             case Context.FEATURE_HTMLUNIT_JS_CATCH_JAVA_EXCEPTION:
                 return false;
             case Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_OBJECT:
-                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_ARGUMENTS_IS_OBJECT);
+                return browserVersion_.hasFeature(JS_ARGUMENTS_IS_OBJECT);
             case Context.FEATURE_HTMLUNIT_FUNCTION_NULL_SETTER:
                 return true;
             case Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_READ_ONLY:
-                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_ARGUMENTS_IS_READ_ONLY);
+                return browserVersion_.hasFeature(JS_ARGUMENTS_IS_READ_ONLY);
             case Context.FEATURE_HTMLUNIT_EVAL_LOCAL_SCOPE:
-                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_EVAL_LOCAL_SCOPE);
+                return browserVersion_.hasFeature(JS_EVAL_LOCAL_SCOPE);
             case Context.FEATURE_HTMLUNIT_ERROR_STACK:
-                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_ERROR_STACK);
+                return browserVersion_.hasFeature(JS_ERROR_STACK);
             default:
                 return super.hasFeature(cx, featureIndex);
         }

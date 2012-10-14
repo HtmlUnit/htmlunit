@@ -14,7 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_112;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_GENERIC_ELEMENT;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
@@ -44,7 +46,7 @@ public class HTMLUnknownElement extends HTMLElement {
     @Override
     public String getNodeName() {
         final Page page = getDomNodeOrDie().getPage();
-        if (page instanceof XmlPage || (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_112)
+        if (page instanceof XmlPage || (getBrowserVersion().hasFeature(GENERATED_112)
             && ((HtmlPage) page).getNamespaces().containsKey(getDomNodeOrDie().getPrefix()))) {
             return getDomNodeOrDie().getLocalName();
         }
@@ -56,8 +58,7 @@ public class HTMLUnknownElement extends HTMLElement {
      */
     @Override
     public String getClassName() {
-        if (getWindow().getWebWindow() != null
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_GENERIC_ELEMENT)) {
+        if (getWindow().getWebWindow() != null && getBrowserVersion().hasFeature(HTML_GENERIC_ELEMENT)) {
             return "HTMLGenericElement";
         }
         return super.getClassName();

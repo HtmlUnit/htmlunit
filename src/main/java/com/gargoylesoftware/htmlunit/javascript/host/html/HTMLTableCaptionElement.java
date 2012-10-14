@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_91;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.HtmlCaption;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -51,7 +52,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      */
     @JsxGetter
     public String getAlign() {
-        final boolean invalidValues = getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID);
+        final boolean invalidValues = getBrowserVersion().hasFeature(HTMLELEMENT_ALIGN_INVALID);
         return getAlign(invalidValues);
     }
 
@@ -88,7 +89,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      */
     private String[] getValidVAlignValues() {
         String[] valid;
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_91)) {
+        if (getBrowserVersion().hasFeature(GENERATED_91)) {
             valid = VALIGN_VALID_VALUES_IE;
         }
         else {

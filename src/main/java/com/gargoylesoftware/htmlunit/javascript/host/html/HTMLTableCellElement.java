@@ -14,11 +14,21 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_100;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_101;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_92;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_93;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_94;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_95;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_96;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_97;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_98;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_99;
+
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
@@ -46,8 +56,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @Override
     public void setAttribute(final String name, String value) {
-        if ("noWrap".equals(name) && value != null
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_92)) {
+        if ("noWrap".equals(name) && value != null && getBrowserVersion().hasFeature(GENERATED_92)) {
             value = "true";
         }
         super.setAttribute(name, value);
@@ -64,7 +73,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
         }
 
         final ComputedCSSStyleDeclaration style = getCurrentStyle();
-        final boolean includeBorder = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_93);
+        final boolean includeBorder = getBrowserVersion().hasFeature(GENERATED_93);
         return style.getCalculatedHeight(includeBorder, true);
     }
 
@@ -85,7 +94,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             if (row != null) {
                 final HtmlElement thiz = getDomNodeOrDie();
                 final List<HtmlTableCell> cells = row.getCells();
-                final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_94);
+                final boolean ie = getBrowserVersion().hasFeature(GENERATED_94);
                 final boolean leftmost = (cells.indexOf(thiz) == 0);
                 final boolean rightmost = (cells.indexOf(thiz) == cells.size() - 1);
                 w -= ((ie && leftmost ? 0 : 0.5) * style.getBorderLeftValue());
@@ -199,7 +208,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             }
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_95)) {
+            if (getBrowserVersion().hasFeature(GENERATED_95)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
             s = "1";
@@ -239,7 +248,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             }
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_96)) {
+            if (getBrowserVersion().hasFeature(GENERATED_96)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
             s = "1";
@@ -265,7 +274,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     @JsxSetter
     public void setNoWrap(final boolean noWrap) {
         if (noWrap) {
-            final String value = (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_97) ? "true" : "");
+            final String value = (getBrowserVersion().hasFeature(GENERATED_97) ? "true" : "");
             getDomNodeOrDie().setAttribute("noWrap", value);
         }
         else {
@@ -291,7 +300,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter(propertyName = "width")
     public String getWidth_js() {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_98);
+        final boolean ie = getBrowserVersion().hasFeature(GENERATED_98);
         final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("width", returnNegativeValues);
     }
@@ -302,7 +311,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxSetter
     public void setWidth(final String width) {
-        setWidthOrHeight("width", width, !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_99));
+        setWidthOrHeight("width", width, !getBrowserVersion().hasFeature(GENERATED_99));
     }
 
     /**
@@ -311,7 +320,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter(propertyName = "height")
     public String getHeight_js() {
-        final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_100);
+        final boolean ie = getBrowserVersion().hasFeature(GENERATED_100);
         final Boolean returnNegativeValues = ie ? Boolean.TRUE : null;
         return getWidthOrHeight("height", returnNegativeValues);
     }
@@ -322,7 +331,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxSetter
     public void setHeight(final String width) {
-        setWidthOrHeight("height", width, !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_101));
+        setWidthOrHeight("height", width, !getBrowserVersion().hasFeature(GENERATED_101));
     }
 
 }

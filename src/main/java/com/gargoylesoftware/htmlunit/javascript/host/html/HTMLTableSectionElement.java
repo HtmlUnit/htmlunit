@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES;
+
 import com.gargoylesoftware.htmlunit.html.HtmlTableBody;
 import com.gargoylesoftware.htmlunit.html.HtmlTableFooter;
 import com.gargoylesoftware.htmlunit.html.HtmlTableHeader;
@@ -73,7 +74,7 @@ public class HTMLTableSectionElement extends RowContainer {
      */
     private String[] getValidVAlignValues() {
         String[] valid;
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)) {
+        if (getBrowserVersion().hasFeature(JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)) {
             valid = VALIGN_VALID_VALUES_IE;
         }
         else {

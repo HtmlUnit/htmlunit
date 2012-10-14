@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_37;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ATTRIBUTE_SUPPORTS_FLAGS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -25,7 +27,6 @@ import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -136,8 +137,7 @@ public class Element extends EventNode {
      */
     @JsxFunction
     public Object getAttribute(String attributeName, final Integer flags) {
-        final boolean supportsFlags =
-                getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_GET_ATTRIBUTE_SUPPORTS_FLAGS);
+        final boolean supportsFlags = getBrowserVersion().hasFeature(JS_GET_ATTRIBUTE_SUPPORTS_FLAGS);
         attributeName = fixAttributeName(attributeName);
 
         Object value;
@@ -330,7 +330,7 @@ public class Element extends EventNode {
     @JsxFunction
     public void removeAttribute(final String name) {
         getDomNodeOrDie().removeAttribute(name);
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_37)) {
+        if (getBrowserVersion().hasFeature(GENERATED_37)) {
             delete(name);
         }
     }

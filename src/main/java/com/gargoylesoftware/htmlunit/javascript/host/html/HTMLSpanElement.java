@@ -14,8 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_90;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLABBREVIATED;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
 import com.gargoylesoftware.htmlunit.html.HtmlAcronym;
@@ -84,11 +86,11 @@ public class HTMLSpanElement extends HTMLElement {
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
         final BrowserVersion browser = getBrowserVersion();
-        if (!browser.hasFeature(BrowserVersionFeatures.GENERATED_90)) {
+        if (!browser.hasFeature(GENERATED_90)) {
             return;
         }
 
-        if ((domNode instanceof HtmlAbbreviated && browser.hasFeature(BrowserVersionFeatures.HTMLABBREVIATED))
+        if ((domNode instanceof HtmlAbbreviated && browser.hasFeature(HTMLABBREVIATED))
             || domNode instanceof HtmlAcronym
             || domNode instanceof HtmlBidirectionalOverride
             || domNode instanceof HtmlBig

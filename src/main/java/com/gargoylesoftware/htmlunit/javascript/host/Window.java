@@ -14,6 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_129;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_133;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_47;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_NOT_A_FUNCTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -46,7 +53,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -788,8 +794,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxSetter
     public void setOpener(Object newValue) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED)
-                && newValue != opener_) {
+        if (getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED) && newValue != opener_) {
             if (opener_ == null || newValue == null || newValue == Context.getUndefinedValue()) {
                 newValue = null;
             }
@@ -1219,7 +1224,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
     private Object getHandlerForJavaScript(final String eventName) {
         Object handler = getEventListenersContainer().getEventHandlerProp(eventName);
-        if (handler == null && !getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_129)) {
+        if (handler == null && !getBrowserVersion().hasFeature(GENERATED_129)) {
             handler = Scriptable.NOT_FOUND;
         }
         return handler;
@@ -1236,7 +1241,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * {@inheritDoc}
      */
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_WINDOW_IS_NOT_A_FUNCTION)) {
+        if (!getBrowserVersion().hasFeature(JS_WINDOW_IS_NOT_A_FUNCTION)) {
             throw Context.reportRuntimeError("Window is not a function.");
         }
         if (args.length > 0) {
@@ -1255,7 +1260,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * {@inheritDoc}
      */
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_WINDOW_IS_NOT_A_FUNCTION)) {
+        if (!getBrowserVersion().hasFeature(JS_WINDOW_IS_NOT_A_FUNCTION)) {
             throw Context.reportRuntimeError("Window is not a function.");
         }
         return null;
@@ -1304,7 +1309,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 result = getProxy(webWindow);
             }
             else if (result instanceof HTMLUnknownElement && getBrowserVersion()
-                    .hasFeature(BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
+                    .hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
                 final HtmlElement unknownElement = ((HTMLUnknownElement) result).getDomNodeOrDie();
                 if ("xml".equals(unknownElement.getNodeName())) {
                     final XMLDocument document = ActiveXObject.buildXMLDocument(getWebWindow());
@@ -1425,7 +1430,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction
     public int setInterval(final Object code, int timeout, final Object language) {
-        if (timeout == 0 && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_133)) {
+        if (timeout == 0 && getBrowserVersion().hasFeature(GENERATED_133)) {
             return setTimeout(code, timeout, language);
         }
 
@@ -1930,7 +1935,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     protected ScriptResult executeEvent(final Event event, final EventListenersContainer eventListenersContainer) {
         if (eventListenersContainer != null) {
             final boolean eventParam = getBrowserVersion().hasFeature(
-                    BrowserVersionFeatures.JS_EVENT_HANDLER_DECLARED_AS_PROPERTY_DONT_RECEIVE_EVENT);
+                    JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT);
             final Object[] args = new Object[] {event};
 
             // handlers declared as property on a node don't receive the event as argument for IE
@@ -1956,7 +1961,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     /**
      * {@inheritDoc}
      * Used to allow re-declaration of constants (eg: "var undefined;").
-     * @see NativeGlobalTest
+     * @see com.gargoylesoftware.htmlunit.javascript.NativeGlobalTest
      */
     @Override
     public boolean isConst(final String name) {
@@ -2006,7 +2011,7 @@ class HTMLCollectionFrames extends HTMLCollection {
                 }
                 return getScriptableForElement(window);
             }
-            else if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_47)
+            else if (getBrowserVersion().hasFeature(GENERATED_47)
                     && frameElt.getAttribute("id").equals(name)) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Property \"" + name + "\" evaluated (by id) to " + window);

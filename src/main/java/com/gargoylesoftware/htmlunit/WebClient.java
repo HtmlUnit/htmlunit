@@ -14,6 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_150;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PROTOCOL_DATA;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -418,7 +424,7 @@ public class WebClient implements Serializable {
             oldPage.cleanUp();
         }
         Page newPage = null;
-        if (windows_.contains(webWindow) || getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_150)) {
+        if (windows_.contains(webWindow) || getBrowserVersion().hasFeature(GENERATED_150)) {
             newPage = pageCreator_.createPage(webResponse, webWindow);
 
             if (windows_.contains(webWindow)) {
@@ -870,7 +876,7 @@ public class WebClient implements Serializable {
         if (enclosedPage instanceof HtmlPage) {
             final Window jsWindow = (Window) currentWindow_.getScriptObject();
             if (jsWindow != null) {
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
+                if (getBrowserVersion().hasFeature(WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
                     final HTMLElement activeElement =
                             (HTMLElement) ((HTMLDocument) jsWindow.getDocument()).getActiveElement();
                     if (activeElement != null) {
@@ -952,7 +958,7 @@ public class WebClient implements Serializable {
         if (url != null) {
             try {
                 final WebRequest request = new WebRequest(url);
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.DIALOGWINDOW_REFERER)
+                if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER)
                         && openerPage != null) {
                     final String referer = openerPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
                     request.setAdditionalHeader("Referer", referer);
@@ -1058,8 +1064,7 @@ public class WebClient implements Serializable {
 
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         final WebRequest request = new WebRequest(url);
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.DIALOGWINDOW_REFERER)
-                && openerPage != null) {
+        if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER) && openerPage != null) {
             final String referer = openerPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
             request.setAdditionalHeader("Referer", referer);
         }
@@ -1377,7 +1382,7 @@ public class WebClient implements Serializable {
             response = makeWebResponseForFileUrl(webRequest);
         }
         else if ("data".equals(protocol)) {
-            if (browserVersion_.hasFeature(BrowserVersionFeatures.PROTOCOL_DATA)) {
+            if (browserVersion_.hasFeature(PROTOCOL_DATA)) {
                 response = makeWebResponseForDataUrl(webRequest);
             }
             else {
@@ -1409,8 +1414,7 @@ public class WebClient implements Serializable {
         WebAssert.notNull("method", method);
         WebAssert.notNull("parameters", parameters);
 
-        url = UrlUtils.encodeUrl(url, getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING));
+        url = UrlUtils.encodeUrl(url, getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING));
         webRequest.setUrl(url);
 
         if (LOG.isDebugEnabled()) {

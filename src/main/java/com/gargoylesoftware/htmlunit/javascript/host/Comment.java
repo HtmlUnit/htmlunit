@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COMMENT_ELEMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -136,7 +136,7 @@ public final class Comment extends CharacterDataImpl {
     @Override
     public String getClassName() {
         if (getWindow().getWebWindow() != null
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTML_COMMENT_ELEMENT)) {
+                && getBrowserVersion().hasFeature(HTML_COMMENT_ELEMENT)) {
             return "HTMLCommentElement";
         }
         return super.getClassName();

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.IdFunctionObject;
@@ -21,7 +22,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 
 /**
  * Replacement (in fact a wrapper) for Rhino's native toString function on Function prototype
@@ -60,7 +60,7 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
         final ScriptableObject fnPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Function");
         final Function originalToString = (Function) ScriptableObject.getProperty(fnPrototype, "toString");
         final String separator;
-        if (browserVersion.hasFeature(BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE)) {
+        if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE)) {
             separator = "\n";
         }
         else {

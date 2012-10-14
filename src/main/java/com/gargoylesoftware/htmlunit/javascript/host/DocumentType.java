@@ -14,13 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_EMPTY_STRING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_NULL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_INTERNALSUBSET_EMPTY_STRING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_EMPTY_STRING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.NamedNodeMap;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -87,7 +91,7 @@ public class DocumentType extends Node {
             return subset;
         }
 
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCTYPE_INTERNALSUBSET_EMPTY_STRING)) {
+        if (getBrowserVersion().hasFeature(JS_DOCTYPE_INTERNALSUBSET_EMPTY_STRING)) {
             return "";
         }
         return null;
@@ -104,10 +108,10 @@ public class DocumentType extends Node {
             return entities;
         }
 
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_NULL)) {
+        if (getBrowserVersion().hasFeature(JS_DOCTYPE_ENTITIES_NULL)) {
             return null;
         }
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_EMPTY_STRING)) {
+        if (getBrowserVersion().hasFeature(JS_DOCTYPE_ENTITIES_EMPTY_STRING)) {
             return "";
         }
         return Context.getUndefinedValue();
@@ -124,10 +128,10 @@ public class DocumentType extends Node {
             return notations;
         }
 
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_NULL)) {
+        if (getBrowserVersion().hasFeature(JS_DOCTYPE_NOTATIONS_NULL)) {
             return null;
         }
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_EMPTY_STRING)) {
+        if (getBrowserVersion().hasFeature(JS_DOCTYPE_NOTATIONS_EMPTY_STRING)) {
             return "";
         }
         return Context.getUndefinedValue();

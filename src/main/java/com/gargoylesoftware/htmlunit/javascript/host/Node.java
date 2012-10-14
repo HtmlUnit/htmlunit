@@ -14,6 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_121;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_124;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_125;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_45;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -32,7 +41,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
@@ -205,8 +213,7 @@ public class Node extends SimpleScriptable {
             // is the node allowed here?
             if (!isNodeInsertable(childNode)) {
                 // IE silently ignores it
-                if (getBrowserVersion().hasFeature(
-                        BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE)) {
+                if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE)) {
                     return childObject;
                 }
 
@@ -230,7 +237,7 @@ public class Node extends SimpleScriptable {
             if (!(parentNode instanceof SgmlPage)
                     && !(this instanceof DocumentFragment) && parentNode.getParentNode() == null
                     && getBrowserVersion().hasFeature(
-                            BrowserVersionFeatures.JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT_IF_PARENT_IS_NULL)) {
+                            JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT)) {
                 final DomDocumentFragment fragment = parentNode.getPage().createDomDocumentFragment();
                 fragment.appendChild(parentNode);
             }
@@ -303,7 +310,7 @@ public class Node extends SimpleScriptable {
         final DomNode clonedNode = domNode.cloneNode(deep);
 
         final Node jsClonedNode = getJavaScriptNode(clonedNode);
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS)) {
+        if (getBrowserVersion().hasFeature(JS_CLONE_NODE_COPIES_EVENT_LISTENERS)) {
             // need to copy the event listener when they exist
             copyEventListenersWhenNeeded(domNode, clonedNode);
         }
@@ -366,8 +373,7 @@ public class Node extends SimpleScriptable {
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
                 // IE silently ignores it
-                if (getBrowserVersion().hasFeature(
-                        BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE)) {
+                if (getBrowserVersion().hasFeature(JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE)) {
                     return newChildNode;
                 }
                 throw Context.reportRuntimeError("Node cannot be inserted at the specified point in the hierarchy");
@@ -383,7 +389,7 @@ public class Node extends SimpleScriptable {
             final DomNode refChildNode;
             // IE accepts non standard calls with only one arg
             if (refChildObject == Undefined.instance) {
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_121)) {
+                if (getBrowserVersion().hasFeature(GENERATED_121)) {
                     if (args.length > 1) {
                         throw Context.reportRuntimeError("Invalid argument.");
                     }
@@ -419,8 +425,7 @@ public class Node extends SimpleScriptable {
             // if parentNode is null in IE, create a DocumentFragment to be the parentNode
             if (domNode.getParentNode() == null
                     && getWindow().getWebWindow().getWebClient().getBrowserVersion()
-                    .hasFeature(BrowserVersionFeatures.
-                            JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT_IF_PARENT_IS_NULL)) {
+                    .hasFeature(JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT)) {
                 final DomDocumentFragment fragment = domNode.getPage().createDomDocumentFragment();
                 fragment.appendChild(domNode);
             }
@@ -482,7 +487,7 @@ public class Node extends SimpleScriptable {
         if (childNodes_ == null) {
             final DomNode node = getDomNodeOrDie();
             final boolean isXmlPage = node.getOwnerDocument() instanceof XmlPage;
-            final boolean isIE = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_45);
+            final boolean isIE = getBrowserVersion().hasFeature(GENERATED_45);
             final Boolean xmlSpaceDefault = isXMLSpaceDefault(node);
             final boolean skipEmptyTextNode = isIE && isXmlPage && !Boolean.FALSE.equals(xmlSpaceDefault);
 
@@ -754,7 +759,7 @@ public class Node extends SimpleScriptable {
                 node = node.getParentNode();
             }
 
-            final boolean ie = getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_124);
+            final boolean ie = getBrowserVersion().hasFeature(GENERATED_124);
             for (int i = parents.size() - 1; i >= 0; i--) {
                 final DomNode curNode = parents.get(i);
                 final Node jsNode = (Node) curNode.getScriptObject();
@@ -880,7 +885,7 @@ public class Node extends SimpleScriptable {
     public String getPrefix() {
         final DomNode domNode = getDomNodeOrDie();
         final String prefix = domNode.getPrefix();
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_125)
+        if (getBrowserVersion().hasFeature(GENERATED_125)
                 && (prefix == null || domNode.getPage() instanceof HtmlPage)) {
             return "";
         }
@@ -903,8 +908,7 @@ public class Node extends SimpleScriptable {
     @JsxGetter(@WebBrowser(FF))
     public String getNamespaceURI() {
         final String namespaceURI = getDomNodeOrDie().getNamespaceURI();
-        if (namespaceURI == null && getBrowserVersion()
-                .hasFeature(BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
+        if (namespaceURI == null && getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
             return "";
         }
         return namespaceURI;
@@ -916,7 +920,7 @@ public class Node extends SimpleScriptable {
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)
+        if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)
                 && !(getDomNodeOrDie().getPage() instanceof HtmlPage)) {
             ActiveXObject.addProperty(this, "namespaceURI", true, false);
             ActiveXObject.addProperty(this, "prefix", true, false);
@@ -955,7 +959,7 @@ public class Node extends SimpleScriptable {
                 final XMLSerializer serializer = new XMLSerializer();
                 serializer.setParentScope(getParentScope());
                 String xml = serializer.serializeToString(this);
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SERIALIZER_APPENDS_CRLF)
+                if (getBrowserVersion().hasFeature(JS_XML_SERIALIZER_APPENDS_CRLF)
                         && xml.endsWith("\r\n")) {
                     xml = xml.substring(0, xml.length() - 2);
                 }

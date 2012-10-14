@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_85;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
@@ -58,7 +58,7 @@ public class HTMLListElement extends HTMLElement {
      */
     @Override
     public Object getAttribute(final String attributeName, final Integer flags) {
-        if ("compact".equals(attributeName) && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_85)) {
+        if ("compact".equals(attributeName) && getBrowserVersion().hasFeature(GENERATED_85)) {
             return getCompact();
         }
         return super.getAttribute(attributeName, flags);

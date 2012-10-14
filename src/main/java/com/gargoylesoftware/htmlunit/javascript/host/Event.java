@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_DOCUMENT_DESCENDANTS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_155;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -23,7 +26,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -481,7 +483,7 @@ public class Event extends SimpleScriptable {
     @JsxGetter(@WebBrowser(IE))
     public Object getKeyCode() {
         if (keyCode_ == null) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_155)) {
+            if (getBrowserVersion().hasFeature(GENERATED_155)) {
                 return Integer.valueOf(0);
             }
             return Undefined.instance;
@@ -662,8 +664,7 @@ public class Event extends SimpleScriptable {
      * @return <tt>true</tt> if this event has been aborted
      */
     public boolean isAborted(final ScriptResult result) {
-        final boolean checkReturnValue = getBrowserVersion().
-                hasFeature(BrowserVersionFeatures.JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE);
+        final boolean checkReturnValue = getBrowserVersion().hasFeature(JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE);
         return ScriptResult.isFalse(result)
                 || (!checkReturnValue && preventDefault_)
                 || (checkReturnValue && Boolean.FALSE.equals(returnValue_));
@@ -691,8 +692,7 @@ public class Event extends SimpleScriptable {
      */
     public boolean applies(final DomNode node) {
         if (TYPE_BLUR.equals(getType()) || TYPE_FOCUS.equals(getType())) {
-            if (node instanceof HtmlPage
-                    && getBrowserVersion().hasFeature(BrowserVersionFeatures.EVENT_FOCUS_DOCUMENT_DESCENDANTS)) {
+            if (node instanceof HtmlPage && getBrowserVersion().hasFeature(EVENT_FOCUS_DOCUMENT_DESCENDANTS)) {
                 return true;
             }
             return node instanceof SubmittableElement || node instanceof HtmlAnchor

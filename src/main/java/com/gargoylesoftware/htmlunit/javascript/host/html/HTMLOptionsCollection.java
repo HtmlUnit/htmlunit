@@ -14,13 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_88;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -137,7 +138,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
      * @return {@inheritDoc}
      */
     public Object getWithFallback(final String name) {
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY)
+        if (!getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_HAS_CHILDNODES_PROPERTY)
                 && "childNodes".equals(name)) {
             return NOT_FOUND;
         }
@@ -214,7 +215,7 @@ public class HTMLOptionsCollection extends SimpleScriptable implements Scriptabl
                 final HtmlOption option = (HtmlOption) HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
                         htmlSelect_.getPage(), HtmlOption.TAG_NAME, null);
                 htmlSelect_.appendOption(option);
-                if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_88)) {
+                if (!getBrowserVersion().hasFeature(GENERATED_88)) {
                     option.appendChild(new DomText(option.getPage(), ""));
                 }
             }

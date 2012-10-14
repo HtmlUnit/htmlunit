@@ -14,6 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ERRORHANDLER_NOT_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_HANDLER_THIS_IS_FUNCTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_SAME_ORIGIN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_SAME_ORIGIN_TO_ABOUT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_TRIGGER_ONLOAD_ON_COMPLETED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
@@ -40,7 +49,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -166,10 +174,9 @@ public class XMLHttpRequest extends SimpleScriptable {
 
         // Firefox doesn't trigger onreadystatechange handler for sync requests except for completed for FF10
         final boolean noTriggerForSync = getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.XMLHTTPREQUEST_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED);
+                XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED);
         final boolean triggerForSyncCompleted = (state == STATE_COMPLETED)
-            && getBrowserVersion().hasFeature(
-                        BrowserVersionFeatures.XMLHTTPREQUEST_ONREADYSTATECANGE_SYNC_REQUESTS_TRIGGER_COMPLETED);
+            && getBrowserVersion().hasFeature(XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED);
         if (stateChangeHandler_ != null && (async_ || !noTriggerForSync || triggerForSyncCompleted)) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
@@ -185,7 +192,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
 
             final Scriptable thisValue;
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.XMLHTTPREQUEST_HANDLER_THIS_IS_FUNCTION)) {
+            if (getBrowserVersion().hasFeature(XHR_HANDLER_THIS_IS_FUNCTION)) {
                 thisValue = stateChangeHandler_;
             }
             else {
@@ -196,8 +203,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                     LOG.debug("Calling onreadystatechange handler for state " + state);
                 }
                 Object[] params = ArrayUtils.EMPTY_OBJECT_ARRAY;
-                if (getBrowserVersion().hasFeature(
-                        BrowserVersionFeatures.XMLHTTPREQUEST_ONREADYSTATECHANGE_WITH_EVENT_PARAM)) {
+                if (getBrowserVersion().hasFeature(XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM)) {
                     params = new Object[1];
                     final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);
                     params[0] = event;
@@ -215,8 +221,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         }
 
         // Firefox has a separate onload handler, too.
-        final boolean triggerOnload = getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.XMLHTTPREQUEST_TRIGGER_ONLOAD_ON_COMPLETED);
+        final boolean triggerOnload = getBrowserVersion().hasFeature(XHR_TRIGGER_ONLOAD_ON_COMPLETED);
         if (triggerOnload && loadHandler_ != null && state == STATE_COMPLETED) {
             final Scriptable scope = loadHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
@@ -266,8 +271,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      *                if <tt>null</tt>, the current thread's context is used.
      */
     private void processError(Context context) {
-        if (errorHandler_ != null && !getBrowserVersion().hasFeature(
-                BrowserVersionFeatures.XMLHTTPREQUEST_ERRORHANDLER_NOT_SUPPORTED)) {
+        if (errorHandler_ != null && !getBrowserVersion().hasFeature(XHR_ERRORHANDLER_NOT_SUPPORTED)) {
             final Scriptable scope = errorHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
@@ -330,7 +334,7 @@ public class XMLHttpRequest extends SimpleScriptable {
             try {
                 final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow());
                 final XMLDocument doc;
-                if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
+                if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
                     doc = ActiveXObject.buildXMLDocument(getWindow().getWebWindow());
                 }
                 else {
@@ -481,11 +485,11 @@ public class XMLHttpRequest extends SimpleScriptable {
     }
 
     private boolean isSameOrigin(final URL originUrl, final URL newUrl) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.XMLHTTPREQUEST_IGNORE_SAME_ORIGIN)) {
+        if (getBrowserVersion().hasFeature(XHR_IGNORE_SAME_ORIGIN)) {
             return true;
         }
 
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.XMLHTTPREQUEST_IGNORE_SAME_ORIGIN_TO_ABOUT)
+        if (getBrowserVersion().hasFeature(XHR_IGNORE_SAME_ORIGIN_TO_ABOUT)
                 && "about".equals(newUrl.getProtocol())) {
             return true;
         }

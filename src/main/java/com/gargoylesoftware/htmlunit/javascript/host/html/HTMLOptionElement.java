@@ -14,9 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_170;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_UNSELECT_SELECTS_FIRST;
+
 import org.xml.sax.helpers.AttributesImpl;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
@@ -87,8 +89,7 @@ public class HTMLOptionElement extends FormChild {
     @JsxGetter
     public String getValue() {
         String value = getDomNodeOrNull().getAttribute("value");
-        if (value == DomElement.ATTRIBUTE_NOT_DEFINED
-                && getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_170)) {
+        if (value == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(GENERATED_170)) {
             value = getDomNodeOrNull().getText();
         }
         return value;
@@ -151,7 +152,7 @@ public class HTMLOptionElement extends FormChild {
                 && enclosingSelect != null && !enclosingSelect.isMultipleSelectEnabled()) {
 
             // un-selecting selected option has no effect in IE and selects first option in FF
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLOPTION_UNSELECT_SELECTS_FIRST)) {
+            if (getBrowserVersion().hasFeature(HTMLOPTION_UNSELECT_SELECTS_FIRST)) {
                 enclosingSelect.getOption(0).setSelected(true, false);
             }
         }

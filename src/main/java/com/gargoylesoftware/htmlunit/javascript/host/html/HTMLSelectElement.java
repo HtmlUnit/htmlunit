@@ -14,13 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_INDEX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_REQUIRED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_ITEM_THROWS_IF_NEGATIVE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD;
+
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
@@ -82,7 +86,7 @@ public class HTMLSelectElement extends FormField {
      */
     @JsxFunction
     public void add(final HTMLOptionElement newOptionObject, final Object arg2) {
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_INDEX)) {
+        if (getBrowserVersion().hasFeature(JS_SELECT_ADD_SECOND_PARAM_IS_INDEX)) {
             add_IE(newOptionObject, arg2);
         }
         else {
@@ -119,7 +123,7 @@ public class HTMLSelectElement extends FormField {
     @JsxFunction
     public HTMLOptionElement item(final int index) {
         if (index < 0) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_ITEM_THROWS_IF_NEGATIVE)) {
+            if (getBrowserVersion().hasFeature(JS_SELECT_ITEM_THROWS_IF_NEGATIVE)) {
                 throw Context.reportRuntimeError("Invalid index for select node: " + index);
             }
             return null;
@@ -172,7 +176,7 @@ public class HTMLSelectElement extends FormField {
             beforeOption = null;
         }
         else if (Context.getUndefinedValue().equals(beforeOptionObject)) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_ADD_SECOND_PARAM_IS_REQUIRED)) {
+            if (getBrowserVersion().hasFeature(JS_SELECT_ADD_SECOND_PARAM_IS_REQUIRED)) {
                 throw Context.reportRuntimeError("Not enough arguments [SelectElement.add]");
             }
             beforeOption = null;
@@ -267,7 +271,7 @@ public class HTMLSelectElement extends FormField {
     public void setSelectedIndex(final int index) {
         final HtmlSelect htmlSelect = getHtmlSelect();
 
-        if (index != 0 && getBrowserVersion().hasFeature(BrowserVersionFeatures.JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD)
+        if (index != 0 && getBrowserVersion().hasFeature(JS_SELECT_SELECTED_INDEX_THROWS_IF_BAD)
                 && (index < -1 || index >= htmlSelect.getOptionSize())) {
             throw Context.reportRuntimeError("Invalid index for select node: " + index);
         }

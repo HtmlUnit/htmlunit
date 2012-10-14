@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_169;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_80;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_81;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.net.MalformedURLException;
@@ -28,7 +32,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -186,7 +189,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @JsxGetter
     public String getAction() {
         String action = getHtmlForm().getActionAttribute();
-        if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_169)) {
+        if (getBrowserVersion().hasFeature(GENERATED_169)) {
             try {
                 action = ((HtmlPage) getHtmlForm().getPage()).getFullyQualifiedUrl(action).toExternalForm();
             }
@@ -414,7 +417,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
                 return true;
             }
 
-            if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES)) {
+            if (!getBrowserVersion().hasFeature(FORMFIELD_REACHABLE_BY_NEW_NAMES)) {
                 return false;
             }
             else if (name.equals(element.getAttribute("name"))
@@ -443,7 +446,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * {@inheritDoc}
      */
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_80)) {
+        if (!getBrowserVersion().hasFeature(GENERATED_80)) {
             throw Context.reportRuntimeError("Not a function.");
         }
         if (args.length > 0) {
@@ -462,7 +465,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * {@inheritDoc}
      */
     public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_81)) {
+        if (!getBrowserVersion().hasFeature(GENERATED_81)) {
             throw Context.reportRuntimeError("Not a function.");
         }
         return null;

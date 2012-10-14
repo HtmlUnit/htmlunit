@@ -14,6 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_48;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_49;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_50;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_IDENTICAL_IDS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.ArrayList;
@@ -24,7 +30,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -141,7 +146,7 @@ public class HTMLCollection extends NodeList {
         }
         for (final DomNode node : getCandidates()) {
             final boolean commentIncluded = node instanceof DomComment
-                    && getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT);
+                    && getBrowserVersion().hasFeature(HTMLCOLLECTION_COMMENT_IS_ELEMENT);
 
             if ((node instanceof DomElement || commentIncluded) && isMatching(node)) {
                 response.add(node);
@@ -197,7 +202,7 @@ public class HTMLCollection extends NodeList {
             if (next instanceof DomElement) {
                 final String id = ((DomElement) next).getAttribute("id");
                 if (name.equals(id)) {
-                    if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_IDENTICAL_IDS)) {
+                    if (!getBrowserVersion().hasFeature(HTMLCOLLECTION_IDENTICAL_IDS)) {
                         return getScriptableForElement(next);
                     }
                     matchingElements.add(next);
@@ -211,7 +216,7 @@ public class HTMLCollection extends NodeList {
         else if (!matchingElements.isEmpty()) {
             final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), matchingElements);
             collection.setAvoidObjectDetection(
-                    !getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION));
+                    !getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
             return collection;
         }
 
@@ -220,7 +225,7 @@ public class HTMLCollection extends NodeList {
             if (next instanceof DomElement) {
                 final String nodeName = ((DomElement) next).getAttribute("name");
                 if (name.equals(nodeName)) {
-                    if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_IDENTICAL_IDS)) {
+                    if (!getBrowserVersion().hasFeature(HTMLCOLLECTION_IDENTICAL_IDS)) {
                         return getScriptableForElement(next);
                     }
                     matchingElements.add(next);
@@ -238,8 +243,7 @@ public class HTMLCollection extends NodeList {
         // many elements => build a sub collection
         final DomNode domNode = getDomNodeOrNull();
         final HTMLCollection collection = new HTMLCollection(domNode, matchingElements);
-        collection.setAvoidObjectDetection(
-                !getBrowserVersion().hasFeature(BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION));
+        collection.setAvoidObjectDetection(!getBrowserVersion().hasFeature(HTMLCOLLECTION_OBJECT_DETECTION));
         return collection;
     }
 
@@ -252,7 +256,7 @@ public class HTMLCollection extends NodeList {
      */
     private Object nullIfNotFound(final Object object) {
         if (object == NOT_FOUND) {
-            if (getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_48)) {
+            if (getBrowserVersion().hasFeature(GENERATED_48)) {
                 return null;
             }
             return Context.getUndefinedValue();
@@ -366,7 +370,7 @@ public class HTMLCollection extends NodeList {
         if ("length".equals(name)) {
             return true;
         }
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_49)) {
+        if (!getBrowserVersion().hasFeature(GENERATED_49)) {
             final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
                     .getJavaScriptEngine().getJavaScriptConfiguration();
             for (final String functionName : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
@@ -393,7 +397,7 @@ public class HTMLCollection extends NodeList {
 
         final List<Object> elements = getElements();
 
-        if (!getBrowserVersion().hasFeature(BrowserVersionFeatures.GENERATED_50)) {
+        if (!getBrowserVersion().hasFeature(GENERATED_50)) {
             final int length = elements.size();
             for (int i = 0; i < length; i++) {
                 idList.add(Integer.toString(i));
