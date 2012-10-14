@@ -1191,13 +1191,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     XHR_IGNORE_SAME_ORIGIN_TO_ABOUT,
 
-    /** Indicates that the onreadystatechange handler is not triggered for sync requests. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED,
-
     /** Indicates that the onreadystatechange handler is triggered for sync requests for COMPLETED (4). */
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
     XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED,
+
+    /** Indicates that the onreadystatechange handler is not triggered for sync requests. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED,
 
     /** Indicates that the onreadystatechange handler is triggered with an event parameter (FF). */
     @BrowserFeature(@WebBrowser(FF))
