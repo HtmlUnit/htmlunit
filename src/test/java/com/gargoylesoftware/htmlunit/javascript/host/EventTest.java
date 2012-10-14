@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -562,5 +563,49 @@ public class EventTest extends WebDriverTestCase {
         driver.findElement(By.tagName("button")).click();
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    // FF with WebDriver results are different than being stand-alone
+    // http://code.google.com/p/selenium/issues/detail?id=4665
+    @Alerts(FF = { "activeElement BODY", "focus #document", "handler: activeElement BODY" },
+            IE = { "activeElement BODY" })
+    @NotYetImplemented(FF)
+    public void document_focus() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    handle(document);\n"
+                + "    log('activeElement ' + document.activeElement.nodeName);\n"
+                + "  }\n"
+                + "  function handle(obj) {\n"
+                + "    if (obj.addEventListener)\n"
+                + "      obj.addEventListener('focus', handler, true);\n"
+                + "    else\n"
+                + "      obj.attachEvent('onfocus', handler);\n"
+                + "  }\n"
+                + "  function handler(e) {\n"
+                + "    var src = e.srcElement;\n"
+                + "    if (!src)\n"
+                + "       src = e.target;\n"
+                + "    log(e.type + ' ' + src.nodeName);\n"
+                + "    log('handler: activeElement ' + document.activeElement.nodeName);\n"
+                + "  }\n"
+                + "  function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "<textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
     }
 }
