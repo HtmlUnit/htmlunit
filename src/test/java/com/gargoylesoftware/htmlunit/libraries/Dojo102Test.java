@@ -34,6 +34,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * Tests for compatibility with version 1.0.2 of the <a href="http://dojotoolkit.org/">Dojo
  * JavaScript library</a>.
  *
+ * Timeout was changed in: /util/doh/runner.js, line # 682
+ * 
  * TODO: add tests for IE6 and IE7
  *
  * @version $Revision$
