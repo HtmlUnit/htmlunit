@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
  *     pre.innerHTML = pre.innerHTML.replace('APPVERSION', navigator.appVersion);
  *     pre.innerHTML = pre.innerHTML.replace('USERAGENT', navigator.userAgent);
  *     var isMicrosoft = navigator.appName.indexOf('Microsoft') != -1;
- *     var numeric = isMicrosoft ? 9 : 15;
+ *     var numeric = isMicrosoft ? 9 : 16;
  *     pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
  *     var browser = isMicrosoft ? "INTERNET_EXPLORER_8" : "FIREFOX_10";
  *     pre.innerHTML = pre.innerHTML.replace('BROWSER', browser);
