@@ -538,7 +538,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
      * @param html the HTML to use
-     * @param maxWaitTime the maximum time to wait to get the alerts (im ms)
+     * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
      * @return the web driver
      * @throws Exception if something goes wrong
      */
@@ -561,7 +561,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
      * @param html the HTML to use
      * @param url the URL to use to load the page
-     * @param maxWaitTime the maximum time to wait to get the alerts (im ms)
+     * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
      * @return the web driver
      * @throws Exception if something goes wrong
      */
@@ -612,7 +612,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
      * @param html the HTML to use for the default page
      * @param url the URL to use to load the page
-     * @param maxWaitTime the maximum time to wait to get the alerts (in ms)
+     * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
      * @param servlets the additional servlets to configure with their mapping
      * @return the web driver
      * @throws Exception if something goes wrong
@@ -650,7 +650,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Same as {@link #loadPageWithAlerts2(URL)}, but using with timeout.
      * @param url the URL to use to load the page
-     * @param maxWaitTime the maximum time to wait to get the alerts (im ms)
+     * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
      * @return the web driver
      * @throws Exception if something goes wrong
      */
