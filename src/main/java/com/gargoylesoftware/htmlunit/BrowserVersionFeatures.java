@@ -1203,6 +1203,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM,
 
+    /** Indicates if a "Origin" header should be sent. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    XHR_ORIGIN_HEADER,
+
     /** Indicates that the onload handler is not triggered if completed (FF). */
     @BrowserFeature(@WebBrowser(FF))
     XHR_TRIGGER_ONLOAD_ON_COMPLETED,

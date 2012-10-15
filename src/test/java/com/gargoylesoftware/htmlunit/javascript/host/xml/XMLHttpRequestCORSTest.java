@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -32,7 +30,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
@@ -53,7 +50,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = {"4", "200", "No Origin!" }, DEFAULT = { "4", "200", "§§URL§§" })
-    @NotYetImplemented(FF)
     public void originHeader() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
         final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();

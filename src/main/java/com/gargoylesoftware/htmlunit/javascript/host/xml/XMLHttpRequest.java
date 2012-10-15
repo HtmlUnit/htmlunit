@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_SA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ORIGIN_HEADER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_TRIGGER_ONLOAD_ON_COMPLETED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -447,7 +448,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
             final URL originUrl = containingPage_.getWebResponse().getWebRequest().getUrl();
-            if (!isSameOrigin(originUrl, fullUrl)) {
+            if (!isAllowCrossDomainsFor(originUrl, fullUrl)) {
                 throw Context.reportRuntimeError("Access to restricted URI denied");
             }
 
@@ -455,6 +456,16 @@ public class XMLHttpRequest extends SimpleScriptable {
             request.setCharset("UTF-8");
             request.setAdditionalHeader("Referer", containingPage_.getWebResponse().getWebRequest().getUrl()
                     .toExternalForm());
+
+            if (!isSameOrigin(originUrl, fullUrl) && getBrowserVersion().hasFeature(XHR_ORIGIN_HEADER)) {
+                final StringBuilder origin = new StringBuilder().append(originUrl.getProtocol()).append("://")
+                        .append(originUrl.getHost());
+                if (originUrl.getPort() != -1) {
+                    origin.append(':').append(originUrl.getPort());
+                }
+                request.setAdditionalHeader("Origin", origin.toString());
+            }
+
             final HttpMethod submitMethod = HttpMethod.valueOf(method.toUpperCase());
             request.setHttpMethod(submitMethod);
             if (Undefined.instance != user || Undefined.instance != password) {
@@ -484,7 +495,10 @@ public class XMLHttpRequest extends SimpleScriptable {
         setState(STATE_LOADING, null);
     }
 
-    private boolean isSameOrigin(final URL originUrl, final URL newUrl) {
+    /**
+     * Used by IE6/7 only, to be removed when they are not supported.
+     */
+    private boolean isAllowCrossDomainsFor(final URL originUrl, final URL newUrl) {
         if (getBrowserVersion().hasFeature(XHR_IGNORE_SAME_ORIGIN)) {
             return true;
         }
@@ -495,6 +509,22 @@ public class XMLHttpRequest extends SimpleScriptable {
         }
 
         return originUrl.getHost().equals(newUrl.getHost());
+    }
+
+    private boolean isSameOrigin(final URL originUrl, final URL newUrl) {
+        if (!originUrl.getHost().equals(newUrl.getHost())) {
+            return false;
+        }
+        //
+        int originPort = originUrl.getPort();
+        if (originPort == -1) {
+            originPort = originUrl.getDefaultPort();
+        }
+        int newPort = newUrl.getPort();
+        if (newPort == -1) {
+            newPort = newUrl.getDefaultPort();
+        }
+        return originPort == newPort;
     }
 
     /**
