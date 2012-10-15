@@ -117,7 +117,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @throws Exception if an error occurs
      */
     public static Server createWebServer(final String resourceBase, final String[] classpath) throws Exception {
-        return createWebServer(resourceBase, classpath, null, null);
+        return createWebServer(PORT, resourceBase, classpath, null, null);
     }
 
     /**
@@ -127,6 +127,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * The given resourceBase is used to be the ROOT directory that serves the default context.
      * <p><b>Don't forget to stop the returned Server after the test</b>
      *
+     * @param port the port to which the server is bound
      * @param resourceBase the base of resources for the default context
      * @param classpath additional classpath entries to add (may be null)
      * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
@@ -134,9 +135,9 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @return the newly created server
      * @throws Exception if an error occurs
      */
-    public static Server createWebServer(final String resourceBase, final String[] classpath,
+    public static Server createWebServer(final int port, final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets, final HandlerWrapper handler) throws Exception {
-        final Server server = new Server(PORT);
+        final Server server = new Server(port);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");

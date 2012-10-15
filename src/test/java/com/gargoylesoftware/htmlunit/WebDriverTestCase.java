@@ -74,7 +74,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * Sample:
  * <pre>
    browsers=hu,ff3,ff3.6,ie8
-   ff3.bin=c:\\location_to_firefox.exe              [Windows]
+   ff3.bin=c:\\location_to_firefox.exe                [Windows]
    ff3.6.bin=/use/bin/firefox                         [Unix-like]
    chrome15.bin=/path/to/chromedriver                 [Unix-like]
  * </pre>
@@ -190,15 +190,15 @@ public abstract class WebDriverTestCase extends WebTestCase {
             driver.quit();
         }
         WEB_DRIVERS_.clear();
-        stopWebServer();
+        stopWebServers();
         LAST_TEST_MockWebConnection_ = null;
     }
 
     /**
-     * Stops the WebServer.
+     * Stops all WebServers.
      * @throws Exception if it fails
      */
-    protected static void stopWebServer() throws Exception {
+    protected static void stopWebServers() throws Exception {
         if (STATIC_SERVER_ != null) {
             STATIC_SERVER_.stop();
         }
@@ -271,7 +271,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected void startWebServer(final MockWebConnection mockConnection) throws Exception {
         if (Boolean.FALSE.equals(LAST_TEST_MockWebConnection_)) {
-            stopWebServer();
+            stopWebServers();
         }
         LAST_TEST_MockWebConnection_ = Boolean.TRUE;
         if (STATIC_SERVER_ == null) {
@@ -351,6 +351,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * Starts the <b>second</b> web server on the default {@link #PORT2}.
+     * The given resourceBase is used to be the ROOT directory that serves the default context.
+     * <p><b>Don't forget to stop the returned HttpServer after the test</b>
+     *
+     * @param resourceBase the base of resources for the default context
+     * @param classpath additional classpath entries to add (may be null)
+     * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
+     * @throws Exception if the test fails
+     */
+    protected void startWebServer2(final String resourceBase, final String[] classpath,
+            final Map<String, Class<? extends Servlet>> servlets) throws Exception {
+
+        STATIC_SERVER2_ = WebServerTestCase.createWebServer(PORT2, resourceBase, classpath, servlets, null);
+    }
+
+    /**
      * Starts the web server on the default {@link #PORT}.
      * The given resourceBase is used to be the ROOT directory that serves the default context.
      * <p><b>Don't forget to stop the returned Server after the test</b>
@@ -363,10 +379,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected void startWebServer(final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets, final HandlerWrapper handler) throws Exception {
-        stopWebServer();
+        stopWebServers();
         LAST_TEST_MockWebConnection_ = Boolean.FALSE;
 
-        STATIC_SERVER_ = WebServerTestCase.createWebServer(resourceBase, classpath, servlets, handler);
+        STATIC_SERVER_ = WebServerTestCase.createWebServer(PORT, resourceBase, classpath, servlets, handler);
     }
 
     /**
