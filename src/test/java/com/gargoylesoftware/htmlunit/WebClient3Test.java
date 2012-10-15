@@ -31,7 +31,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -172,7 +171,6 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Tries(3)
     public void clickReturnsWhenThePageHasBeenCompleteLoaded() throws Exception {
         final String firstContent = "<html><head>\n"
             + "<script>window.setInterval(\'',1);</script></head>\n"

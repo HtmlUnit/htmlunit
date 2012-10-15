@@ -1224,15 +1224,18 @@ public abstract class HtmlElement extends DomElement {
 
         final JavaScriptEngine jsEngine = page.getWebClient().getJavaScriptEngine();
         jsEngine.holdPosponedActions();
+        try {
+            final ScriptResult scriptResult = doClickFireClickEvent(event);
+            final boolean eventIsAborted = event.isAborted(scriptResult);
 
-        final ScriptResult scriptResult = doClickFireClickEvent(event);
-        final boolean eventIsAborted = event.isAborted(scriptResult);
-
-        final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
-        if (!pageAlreadyChanged && !stateUpdated && !eventIsAborted) {
-            changed = doClickStateUpdate();
+            final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
+            if (!pageAlreadyChanged && !stateUpdated && !eventIsAborted) {
+                changed = doClickStateUpdate();
+            }
         }
-        jsEngine.processPostponedActions();
+        finally {
+            jsEngine.processPostponedActions();
+        }
 
         if (changed) {
             doClickFireChangeEvent();

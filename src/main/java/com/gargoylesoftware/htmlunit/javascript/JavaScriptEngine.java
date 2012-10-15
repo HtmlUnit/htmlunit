@@ -94,7 +94,7 @@ public class JavaScriptEngine {
 
     private transient ThreadLocal<Boolean> javaScriptRunning_;
     private transient ThreadLocal<List<PostponedAction>> postponedActions_;
-    private transient ThreadLocal<Boolean> holdPostponedActions_;
+    private transient boolean holdPostponedActions_;
 
     /** The JavaScriptExecutor corresponding to all windows of this Web client */
     private transient JavaScriptExecutor javaScriptExecutor_;
@@ -611,7 +611,7 @@ public class JavaScriptEngine {
                         return null; // page has been unloaded
                     }
                     final Object response = doRun(cx);
-                    doProcessPostponedActions();
+                    doProcessPostponedActions(true);
                     return response;
                 }
             }
@@ -640,10 +640,12 @@ public class JavaScriptEngine {
         protected abstract String getSourceCode(final Context cx);
     }
 
-    private void doProcessPostponedActions() {
-        if (Boolean.TRUE.equals(holdPostponedActions_.get())) {
+    private synchronized void doProcessPostponedActions(final boolean respectHold) {
+        if (respectHold && holdPostponedActions_) {
             return;
         }
+
+        holdPostponedActions_ = false;
 
         try {
             getWebClient().loadDownloadedResponses();
@@ -656,8 +658,8 @@ public class JavaScriptEngine {
         }
 
         final List<PostponedAction> actions = postponedActions_.get();
-        postponedActions_.set(null);
         if (actions != null) {
+            postponedActions_.set(null);
             try {
                 for (final PostponedAction action : actions) {
                     // verify that the page that registered this PostponedAction is still alive
@@ -725,7 +727,7 @@ public class JavaScriptEngine {
      * Indicates that no postponed action should be executed.
      */
     public void holdPosponedActions() {
-        holdPostponedActions_.set(Boolean.TRUE);
+        holdPostponedActions_ = true;
     }
 
     /**
@@ -733,8 +735,7 @@ public class JavaScriptEngine {
      * Process postponed actions, if any.
      */
     public void processPostponedActions() {
-        holdPostponedActions_.set(Boolean.FALSE);
-        doProcessPostponedActions();
+        doProcessPostponedActions(false);
     }
 
     /**
@@ -748,7 +749,7 @@ public class JavaScriptEngine {
     private void initTransientFields() {
         javaScriptRunning_ = new ThreadLocal<Boolean>();
         postponedActions_ = new ThreadLocal<List<PostponedAction>>();
-        holdPostponedActions_ = new ThreadLocal<Boolean>();
+        holdPostponedActions_ = false;
     }
 
     private static class FallbackCaller extends ScriptableObject {
