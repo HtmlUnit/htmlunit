@@ -303,7 +303,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "ok", IE = "exception")
+    @Alerts(DEFAULT = "ok", IE6 = "exception", IE7 = "exception")
     public void sameOriginPolicy() throws Exception {
         sameOriginPolicy(URL_THIRD.toString());
     }
@@ -598,7 +598,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(IE = "exception", DEFAULT = { "ok", "4" })
+    @Alerts(IE6 = "exception", IE7 = "exception", DEFAULT = { "ok", "4" })
     public void sameOriginCorsSimple() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

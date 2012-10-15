@@ -1184,7 +1184,7 @@ public enum BrowserVersionFeatures {
     XHR_HANDLER_THIS_IS_FUNCTION,
 
     /** Indicates if a same origin check should be skipped. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 8) })
     XHR_IGNORE_SAME_ORIGIN,
 
     /** Indicates if a request to a about URL is allowed. */
