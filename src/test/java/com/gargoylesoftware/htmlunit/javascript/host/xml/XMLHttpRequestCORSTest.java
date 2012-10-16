@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +31,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
@@ -82,7 +85,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                     + "    xhr.send();\n"
                     + "    alert(xhr.readyState);\n"
                     + "    alert(xhr.status);\n"
-                    + "    alert(xhr.responseXML.childNodes[0].firstChild.nodeValue);"
+                    + "    alert(xhr.responseXML.firstChild.firstChild.nodeValue);"
                     + "  } catch(e) { alert(e) }\n"
                     + "}\n"
                     + "</script>\n"
@@ -171,4 +174,111 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void nonMatchingAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin("http://www.sourceforge.net");
     }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(IE = { "4", "200", "null", "null", "null", "null" },
+            DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" })
+    @NotYetImplemented(Browser.FF)
+    public void preflight() throws Exception {
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PINGOTHER";
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+        final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();
+        servlets1.put("/simple1", PreflightServlet.class);
+        startWebServer(".", null, servlets1);
+
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        servlets2.put("/simple2", PreflightServerServlet.class);
+        startWebServer2(".", null, servlets2);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/simple1");
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Servlet for {@link #preflight()}.
+     */
+    public static class PreflightServlet extends ServletContentWrapper {
+        /** Constructor. */
+        public PreflightServlet() {
+            super(getModifiedContent("<html><head>\n"
+                    + "<script>\n"
+                    + "var xhr = " + XHRInstantiation_ + ";\n"
+                    + "function test() {\n"
+                    + "  try {\n"
+                    + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
+                    + "    xhr.open('GET',  url, false);\n"
+                    + "    xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n"
+                    + "    xhr.send();\n"
+                    + "    alert(xhr.readyState);\n"
+                    + "    alert(xhr.status);\n"
+                    + "    alert(xhr.responseXML.firstChild.childNodes[0].firstChild.nodeValue);"
+                    + "    alert(xhr.responseXML.firstChild.childNodes[1].firstChild.nodeValue);"
+                    + "    alert(xhr.responseXML.firstChild.childNodes[2].firstChild.nodeValue);"
+                    + "    alert(xhr.responseXML.firstChild.childNodes[3].firstChild.nodeValue);"
+                    + "  } catch(e) { alert(e) }\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head>\n"
+                    + "<body onload='test()'></body></html>"));
+        }
+    }
+
+    /**
+     * Preflight CORS scenario Servlet.
+     */
+    public static class PreflightServerServlet extends HttpServlet {
+        private static String ACCESS_CONTROL_ALLOW_ORIGIN_;
+        private static String ACCESS_CONTROL_ALLOW_METHODS_;
+        private static String ACCESS_CONTROL_ALLOW_HEADERS_;
+        private String options_origin_;
+        private String options_method_;
+        private String options_headers_;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
+            if (ACCESS_CONTROL_ALLOW_ORIGIN_ != null) {
+                response.setHeader("Access-Control-Allow-Origin", ACCESS_CONTROL_ALLOW_ORIGIN_);
+            }
+            if (ACCESS_CONTROL_ALLOW_METHODS_ != null) {
+                response.setHeader("Access-Control-Allow-Methods", ACCESS_CONTROL_ALLOW_METHODS_);
+            }
+            if (ACCESS_CONTROL_ALLOW_HEADERS_ != null) {
+                response.setHeader("Access-Control-Allow-Headers", ACCESS_CONTROL_ALLOW_HEADERS_);
+            }
+            options_origin_ = request.getHeader("Origin");
+            options_method_ = request.getHeader("Access-Control-Request-Method");
+            options_headers_ = request.getHeader("Access-Control-Request-Headers");
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            if (ACCESS_CONTROL_ALLOW_ORIGIN_ != null) {
+                response.setHeader("Access-Control-Allow-Origin", ACCESS_CONTROL_ALLOW_ORIGIN_);
+            }
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/xml");
+            final Writer writer = response.getWriter();
+
+            final String origin = request.getHeader("Origin");
+            writer.write("<result>"
+                + "<origin>" + origin + "</origin>"
+                + "<options_origin>" + options_origin_ + "</options_origin>"
+                + "<options_method>" + options_method_ + "</options_method>"
+                + "<options_headers>" + options_headers_ + "</options_headers>"
+                + "</result>");
+        }
+    }
+
 }
