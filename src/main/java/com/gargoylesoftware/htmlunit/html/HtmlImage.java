@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author <a href="mailto:knut.johannes.dahle@gmail.com">Knut Johannes Dahle</a>
+ * @author Ronald Brill
  */
 public class HtmlImage extends HtmlElement {
 
@@ -115,7 +116,8 @@ public class HtmlImage extends HtmlElement {
      * handler the first time it is invoked.</p>
      */
     public void doOnLoad() {
-        if (!(getPage() instanceof HtmlPage)) {
+        final SgmlPage page = getPage();
+        if (!(page instanceof HtmlPage)) {
             return; // nothing to do if embedded in XML code
         }
 
@@ -124,8 +126,7 @@ public class HtmlImage extends HtmlElement {
         }
         onloadInvoked_ = true;
 
-        final HtmlPage htmlPage = (HtmlPage) getPage();
-        final WebClient client = htmlPage.getWebClient();
+        final WebClient client = page.getWebClient();
         if (!client.getOptions().isJavaScriptEnabled()) {
             return;
         }
@@ -151,6 +152,8 @@ public class HtmlImage extends HtmlElement {
                         scriptObject.executeEvent(event);
                     }
                 };
+
+                final HtmlPage htmlPage = (HtmlPage) getPage();
                 final String readyState = htmlPage.getReadyState();
                 if (READY_STATE_LOADING.equals(readyState)) {
                     htmlPage.addAfterLoadAction(action);
