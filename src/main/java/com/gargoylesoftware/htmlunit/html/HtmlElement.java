@@ -464,7 +464,8 @@ public abstract class HtmlElement extends DomElement {
             doType(c, shiftKey, ctrlKey, altKey);
         }
 
-        if (page.getWebClient().getBrowserVersion().hasFeature(EVENT_INPUT)
+        final WebClient webClient = page.getWebClient();
+        if (webClient.getBrowserVersion().hasFeature(EVENT_INPUT)
             && (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
             || this instanceof HtmlPasswordInput)) {
@@ -477,7 +478,7 @@ public abstract class HtmlElement extends DomElement {
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
-            if (!getPage().getWebClient().getBrowserVersion()
+            if (!webClient.getBrowserVersion()
                     .hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
                 final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
                 if (submit != null) {
@@ -485,9 +486,9 @@ public abstract class HtmlElement extends DomElement {
                 }
             }
             form.submit((SubmittableElement) this);
-            page.getWebClient().getJavaScriptEngine().processPostponedActions();
+            webClient.getJavaScriptEngine().processPostponedActions();
         }
-        return page.getWebClient().getCurrentWindow().getEnclosedPage();
+        return webClient.getCurrentWindow().getEnclosedPage();
     }
 
     /**
