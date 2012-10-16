@@ -593,19 +593,33 @@ public class XMLHttpRequest extends SimpleScriptable {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Web response loaded successfully.");
             }
-            if (overriddenMimeType_ == null) {
-                webResponse_ = webResponse;
+            boolean allowOriginResponse = true;
+            if (webRequest_.getAdditionalHeaders().get("Origin") != null) {
+                final String value = webResponse.getResponseHeaderValue("Access-Control-Allow-Origin");
+                allowOriginResponse = "*".equals(value);
             }
-            else {
-                webResponse_ = new WebResponseWrapper(webResponse) {
-                    @Override
-                    public String getContentType() {
-                        return overriddenMimeType_;
-                    }
-                };
+            if (allowOriginResponse) {
+                if (overriddenMimeType_ == null) {
+                    webResponse_ = webResponse;
+                }
+                else {
+                    webResponse_ = new WebResponseWrapper(webResponse) {
+                        @Override
+                        public String getContentType() {
+                            return overriddenMimeType_;
+                        }
+                    };
+                }
             }
             setState(STATE_INTERACTIVE, context);
             setState(STATE_COMPLETED, context);
+            if (!allowOriginResponse) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL " + webRequest_.getUrl());
+                }
+                Context.throwAsScriptRuntimeEx(
+                        new RuntimeException("No permitted \"Access-Control-Allow-Origin\" header."));
+            }
         }
         catch (final IOException e) {
             if (LOG.isDebugEnabled()) {

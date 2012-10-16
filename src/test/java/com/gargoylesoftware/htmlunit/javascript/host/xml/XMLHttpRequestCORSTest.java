@@ -49,15 +49,16 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(IE = {"4", "200", "No Origin!" }, DEFAULT = { "4", "200", "§§URL§§" })
+    @Alerts(IE = { "4", "200", "No Origin!" }, DEFAULT = { "4", "200", "§§URL§§" })
     public void originHeader() throws Exception {
+        SimpleCORSServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
         final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();
-        servlets1.put("/simple1", OriginHeader1Servlet.class);
+        servlets1.put("/simple1", OriginHeaderServlet.class);
         startWebServer(".", null, servlets1);
 
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
-        servlets2.put("/simple2", OriginHeader2Servlet.class);
+        servlets2.put("/simple2", SimpleCORSServlet.class);
         startWebServer2(".", null, servlets2);
 
         final WebDriver driver = getWebDriver();
@@ -68,9 +69,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     /**
      * Servlet for {@link #originHeader()}.
      */
-    public static class OriginHeader1Servlet extends ServletContentWrapper {
+    public static class OriginHeaderServlet extends ServletContentWrapper {
         /** Constructor. */
-        public OriginHeader1Servlet() {
+        public OriginHeaderServlet() {
             super(getModifiedContent("<html><head>\n"
                     + "<script>\n"
                     + "var xhr = " + XHRInstantiation_ + ";\n"
@@ -91,15 +92,18 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     }
 
     /**
-     * Servlet for {@link #originHeader()}.
+     * Simple CORS scenario Servlet.
      */
-    public static class OriginHeader2Servlet extends HttpServlet {
+    public static class SimpleCORSServlet extends HttpServlet {
+        private static String ACCESS_CONTROL_ALLOW_ORIGIN_;
         /**
          * {@inheritDoc}
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setHeader("Access-Control-Allow-Origin", "*");
+            if (ACCESS_CONTROL_ALLOW_ORIGIN_ != null) {
+                response.setHeader("Access-Control-Allow-Origin", ACCESS_CONTROL_ALLOW_ORIGIN_);
+            }
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/xml");
             String origin = request.getHeader("Origin");
@@ -109,4 +113,50 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             response.getWriter().write("<origin>" + origin + "</origin>");
         }
     }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(IE = { "4", "200" }, DEFAULT = { "exception", "4", "0" })
+    public void noAccessControlAllowOrigin() throws Exception {
+        SimpleCORSServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = null;
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+        final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();
+        servlets1.put("/simple1", NoAccessControlAllowOriginServlet.class);
+        startWebServer(".", null, servlets1);
+
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        servlets2.put("/simple2", SimpleCORSServlet.class);
+        startWebServer2(".", null, servlets2);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/simple1");
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Servlet for {@link #noAccessControlAllowOrigin()}.
+     */
+    public static class NoAccessControlAllowOriginServlet extends ServletContentWrapper {
+        /** Constructor. */
+        public NoAccessControlAllowOriginServlet() {
+            super(getModifiedContent("<html><head>\n"
+                    + "<script>\n"
+                    + "var xhr = " + XHRInstantiation_ + ";\n"
+                    + "function test() {\n"
+                    + "  try {\n"
+                    + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
+                    + "    xhr.open('GET',  url, false);\n"
+                    + "    xhr.send();\n"
+                    + "  } catch(e) { alert('exception') }\n"
+                    + "  alert(xhr.readyState);\n"
+                    + "  alert(xhr.status);\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head>\n"
+                    + "<body onload='test()'></body></html>"));
+        }
+    }
+
 }
