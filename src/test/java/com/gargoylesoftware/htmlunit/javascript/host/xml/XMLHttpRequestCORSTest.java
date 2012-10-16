@@ -120,10 +120,14 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "4", "200" }, DEFAULT = { "exception", "4", "0" })
     public void noAccessControlAllowOrigin() throws Exception {
-        SimpleCORSServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = null;
+        incorrectAccessControlAllowOrigin(null);
+    }
+
+    private void incorrectAccessControlAllowOrigin(final String header) throws Exception {
+        SimpleCORSServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = header;
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
         final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();
-        servlets1.put("/simple1", NoAccessControlAllowOriginServlet.class);
+        servlets1.put("/simple1", IncorrectAccessControlAllowOriginServlet.class);
         startWebServer(".", null, servlets1);
 
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
@@ -134,13 +138,12 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         driver.get("http://localhost:" + PORT + "/simple1");
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
-
     /**
      * Servlet for {@link #noAccessControlAllowOrigin()}.
      */
-    public static class NoAccessControlAllowOriginServlet extends ServletContentWrapper {
+    public static class IncorrectAccessControlAllowOriginServlet extends ServletContentWrapper {
         /** Constructor. */
-        public NoAccessControlAllowOriginServlet() {
+        public IncorrectAccessControlAllowOriginServlet() {
             super(getModifiedContent("<html><head>\n"
                     + "<script>\n"
                     + "var xhr = " + XHRInstantiation_ + ";\n"
@@ -159,4 +162,12 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(IE = { "4", "200" }, DEFAULT = { "exception", "4", "0" })
+    public void nonMatchingAccessControlAllowOrigin() throws Exception {
+        incorrectAccessControlAllowOrigin("http://www.sourceforge.net");
+    }
 }
