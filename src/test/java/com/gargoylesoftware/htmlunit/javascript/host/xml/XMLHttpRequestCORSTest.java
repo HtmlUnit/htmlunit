@@ -31,8 +31,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
@@ -181,7 +179,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "4", "200", "null", "null", "null", "null" },
             DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" })
-    @NotYetImplemented(Browser.FF)
     public void preflight() throws Exception {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";

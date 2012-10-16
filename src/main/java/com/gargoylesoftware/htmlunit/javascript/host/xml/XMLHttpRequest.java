@@ -36,6 +36,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map.Entry;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -466,8 +467,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 request.setAdditionalHeader("Origin", origin.toString());
             }
 
-            final HttpMethod submitMethod = HttpMethod.valueOf(method.toUpperCase());
-            request.setHttpMethod(submitMethod);
+            request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase()));
             if (Undefined.instance != user || Undefined.instance != password) {
                 String userCred = null;
                 String passwordCred = "";
@@ -589,12 +589,44 @@ public class XMLHttpRequest extends SimpleScriptable {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
             setState(STATE_LOADED, context);
+            final boolean crossOriginResourceSharing = webRequest_.getAdditionalHeaders().get("Origin") != null;
+            if (crossOriginResourceSharing && isPreflight()) {
+                final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
+                preflightRequest.setAdditionalHeader("Origin", webRequest_.getAdditionalHeaders().get("Origin"));
+                preflightRequest.setAdditionalHeader("Access-Control-Request-Method",
+                        webRequest_.getHttpMethod().name());
+                final StringBuilder builder = new StringBuilder();
+                for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
+                    final String name = header.getKey().toLowerCase();
+                    final String value = header.getKey().toLowerCase();
+                    if (isPreflightHeader(name, value)) {
+                        if (builder.length() != 0) {
+                            builder.append(' ');
+                        }
+                        builder.append(name);
+                    }
+                }
+                preflightRequest.setAdditionalHeader("Access-Control-Request-Headers", builder.toString());
+                final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
+                final String value = preflightResponse.getResponseHeaderValue("Access-Control-Allow-Origin");
+                if (!"*".equals(value)) {
+                    setState(STATE_INTERACTIVE, context);
+                    setState(STATE_COMPLETED, context);
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL "
+                                + webRequest_.getUrl());
+                    }
+                    Context.throwAsScriptRuntimeEx(
+                            new RuntimeException("No permitted \"Access-Control-Allow-Origin\" header."));
+                    return;
+                }
+            }
             final WebResponse webResponse = wc.loadWebResponse(webRequest_);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Web response loaded successfully.");
             }
             boolean allowOriginResponse = true;
-            if (webRequest_.getAdditionalHeaders().get("Origin") != null) {
+            if (crossOriginResourceSharing) {
                 final String value = webResponse.getResponseHeaderValue("Access-Control-Allow-Origin");
                 allowOriginResponse = "*".equals(value);
             }
@@ -629,6 +661,35 @@ public class XMLHttpRequest extends SimpleScriptable {
             setState(STATE_COMPLETED, context);
             processError(context);
         }
+    }
+
+    private boolean isPreflight() {
+        final HttpMethod method = webRequest_.getHttpMethod();
+        if (method != HttpMethod.GET && method != HttpMethod.PUT && method != HttpMethod.HEAD) {
+            return true;
+        }
+        for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
+            if (isPreflightHeader(header.getKey().toLowerCase(), header.getValue().toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param name header name (MUST be lower-case), for performance reasons
+     * @param value header value (MUST be lower-case), for performance reasons
+     */
+    private boolean isPreflightHeader(final String name, final String value) {
+        if ("content-type".equals(name)) {
+            return !"application/x-www-form-urlencoded".equals(value)
+                && !"multipart/form-data".equals(value) && !"text/plain".equals(value);
+        }
+        if (!"accept".equals(name) && !"accept-language".equals(name) && !"content-language".equals(name)
+                && !"referer".equals(name) && !"accept-encoding".equals(name) && !"origin".equals(name)) {
+            return true;
+        }
+        return false;
     }
 
     /**
