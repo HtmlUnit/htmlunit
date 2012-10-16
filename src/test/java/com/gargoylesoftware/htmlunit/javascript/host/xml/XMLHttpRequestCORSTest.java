@@ -138,6 +138,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         driver.get("http://localhost:" + PORT + "/simple1");
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
+
     /**
      * Servlet for {@link #noAccessControlAllowOrigin()}.
      */
