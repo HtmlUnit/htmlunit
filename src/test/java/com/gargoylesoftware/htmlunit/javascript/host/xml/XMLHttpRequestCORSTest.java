@@ -51,15 +51,15 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "4", "200", "No Origin!" }, DEFAULT = { "4", "200", "§§URL§§" })
-    public void originHeader() throws Exception {
-        SimpleCORSServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
+    public void simple() throws Exception {
+        SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
         final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();
-        servlets1.put("/simple1", OriginHeaderServlet.class);
+        servlets1.put("/simple1", SimpleServlet.class);
         startWebServer(".", null, servlets1);
 
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
-        servlets2.put("/simple2", SimpleCORSServlet.class);
+        servlets2.put("/simple2", SimpleServerServlet.class);
         startWebServer2(".", null, servlets2);
 
         final WebDriver driver = getWebDriver();
@@ -68,11 +68,11 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     }
 
     /**
-     * Servlet for {@link #originHeader()}.
+     * Servlet for {@link #simple()}.
      */
-    public static class OriginHeaderServlet extends ServletContentWrapper {
+    public static class SimpleServlet extends ServletContentWrapper {
         /** Constructor. */
-        public OriginHeaderServlet() {
+        public SimpleServlet() {
             super(getModifiedContent("<html><head>\n"
                     + "<script>\n"
                     + "var xhr = " + XHRInstantiation_ + ";\n"
@@ -95,7 +95,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     /**
      * Simple CORS scenario Servlet.
      */
-    public static class SimpleCORSServlet extends HttpServlet {
+    public static class SimpleServerServlet extends HttpServlet {
         private static String ACCESS_CONTROL_ALLOW_ORIGIN_;
         /**
          * {@inheritDoc}
@@ -125,14 +125,14 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     }
 
     private void incorrectAccessControlAllowOrigin(final String header) throws Exception {
-        SimpleCORSServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = header;
+        SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = header;
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
         final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();
         servlets1.put("/simple1", IncorrectAccessControlAllowOriginServlet.class);
         startWebServer(".", null, servlets1);
 
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
-        servlets2.put("/simple2", SimpleCORSServlet.class);
+        servlets2.put("/simple2", SimpleServerServlet.class);
         startWebServer2(".", null, servlets2);
 
         final WebDriver driver = getWebDriver();
