@@ -427,7 +427,7 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
 
         ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
         getMockWebConnection().setDefaultResponse("Hello World");
-        loadPageWithAlerts(html, URL_FIRST, 100);
+        loadPageWithAlerts(html, URL_FIRST, 200);
     }
 
     /**
