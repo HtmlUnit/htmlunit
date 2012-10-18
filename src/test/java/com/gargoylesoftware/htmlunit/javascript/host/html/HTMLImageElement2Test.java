@@ -23,7 +23,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -35,6 +34,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @version $Revision$
  * @author <a href="mailto:george@murnock.com">George Murnock</a>
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLImageElement2Test extends SimpleWebTestCase {
@@ -58,20 +58,12 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final WebClient client = getWebClient();
+        final MockWebConnection conn = getMockWebConnection();
         final URL imageUrl = new URL(getDefaultUrl(), "foo.png");
-
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(getDefaultUrl(), html);
         conn.setResponse(imageUrl, "foo", "image/png");
-        client.setWebConnection(conn);
 
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-
-        client.getPage(getDefaultUrl());
+        loadPageWithAlerts(html);
         assertEquals(imageUrl, conn.getLastWebRequest().getUrl());
-        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
@@ -89,20 +81,12 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
             + "i.onload = function(){alert(1);};\n"
             + "</script></body></html>";
 
-        final WebClient client = getWebClient();
-
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_SECOND, "foo", "image/png");
         conn.setResponse(URL_THIRD, "foo", "image/png");
-        client.setWebConnection(conn);
 
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-
-        client.getPage(URL_FIRST);
+        loadPageWithAlerts(html);
         assertEquals(URL_THIRD, conn.getLastWebRequest().getUrl());
-        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
@@ -123,23 +107,15 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
             + "    };\n"
             + "    i.src = '" + URL_THIRD + "';\n"
             + "  };\n"
-            + "  i.src = '" + URL_SECOND + "';\n"
+            + "  i.setAttribute('src','" + URL_SECOND + "');\n"
             + "  var t = setTimeout(function(){clearTimeout(t);}, 500);\n"
             + "</script></body></html>";
 
-        final WebClient client = getWebClient();
-
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_SECOND, "foo", "image/png");
         conn.setResponse(URL_THIRD, "foo", "image/png");
-        client.setWebConnection(conn);
 
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-
-        client.getPage(URL_FIRST);
-        client.waitForBackgroundJavaScript(1200);
+        loadPageWithAlerts(html);
 
         final List<String> requestedUrls = conn.getRequestedUrls(URL_FIRST);
         assertEquals(requestedUrls.size(), 3);
@@ -158,19 +134,12 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
     public void onLoad_notCalledWhenImageNotDownloaded() throws Exception {
         final String html = "<html><body><img src='" + URL_SECOND + "' onload='alert(1)'></body></html>";
 
-        final WebClient client = getWebClient();
-
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html);
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_SECOND, "foo", 404, "Not Found", "text/html", new ArrayList<NameValuePair>());
-        client.setWebConnection(conn);
 
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
+        loadPageWithAlerts(html);
 
-        client.getPage(URL_FIRST);
         assertEquals(URL_SECOND, conn.getLastWebRequest().getUrl());
-        assertEquals(getExpectedAlerts(), actual);
     }
 
     /**
@@ -183,20 +152,15 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
     public void onLoad_notDownloadedWhenJavascriptDisabled() throws Exception {
         final String html = "<html><body><img src='" + URL_SECOND + "' onload='alert(1)'></body></html>";
 
-        final WebClient client = getWebClient();
+        final WebClient client = getWebClientWithMockWebConnection();
         client.getOptions().setJavaScriptEnabled(false);
 
-        final MockWebConnection conn = new MockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(URL_SECOND, "foo", "image/png");
-        client.setWebConnection(conn);
 
-        final List<String> actual = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(actual));
-
-        client.getPage(URL_FIRST);
+        loadPageWithAlerts(html);
         assertEquals(URL_FIRST, conn.getLastWebRequest().getUrl());
-        assertEquals(getExpectedAlerts(), actual);
     }
 
 }

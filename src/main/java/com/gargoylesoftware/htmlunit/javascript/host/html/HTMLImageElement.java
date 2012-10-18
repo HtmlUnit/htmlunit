@@ -24,14 +24,12 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.xalan.xsltc.runtime.AttributeList;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -95,8 +93,6 @@ public class HTMLImageElement extends HTMLElement {
     public void setSrc(final String src) {
         final HtmlElement img = getDomNodeOrDie();
         img.setAttribute("src", src);
-        getWindow().getWebWindow().getWebClient()
-            .getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction(img.getPage()));
     }
 
     /**
@@ -127,8 +123,6 @@ public class HTMLImageElement extends HTMLElement {
     @JsxSetter
     public void setOnload(final Object onloadHandler) {
         setEventHandlerProp("onload", onloadHandler);
-        getWindow().getWebWindow().getWebClient()
-            .getJavaScriptEngine().addPostponedAction(new ImageOnLoadAction(getDomNodeOrDie().getPage()));
     }
 
     /**
@@ -138,22 +132,6 @@ public class HTMLImageElement extends HTMLElement {
     @JsxGetter
     public Object getOnload() {
         return getEventHandlerProp("onload");
-    }
-
-    /**
-     * Custom JavaScript postponed action which downloads the image and invokes the onload handler, if necessary.
-     */
-    private class ImageOnLoadAction extends PostponedAction {
-        public ImageOnLoadAction(final Page page) {
-            super(page);
-        }
-        @Override
-        public void execute() throws Exception {
-            final HtmlImage img = (HtmlImage) getDomNodeOrNull();
-            if (img != null) {
-                img.doOnLoad();
-            }
-        }
     }
 
     /**

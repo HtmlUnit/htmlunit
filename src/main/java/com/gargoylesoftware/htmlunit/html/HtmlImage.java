@@ -89,14 +89,33 @@ public class HtmlImage extends HtmlElement {
      */
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
-        if ("src".equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED && getPage() instanceof HtmlPage) {
+        final SgmlPage page = getPage();
+        if ("src".equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED && page instanceof HtmlPage) {
             final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
             if (!oldValue.equals(value)) {
+                super.setAttributeNS(namespaceURI, qualifiedName, value);
+
                 // onload handlers may need to be invoked again, and a new image may need to be downloaded
                 onloadInvoked_ = false;
                 downloaded_ = false;
+
+                final HtmlPage htmlPage = (HtmlPage) page;
+                final String readyState = htmlPage.getReadyState();
+                if (READY_STATE_LOADING.equals(readyState)) {
+                    final PostponedAction action = new PostponedAction(getPage()) {
+                        @Override
+                        public void execute() throws Exception {
+                            doOnLoad();
+                        }
+                    };
+                    htmlPage.addAfterLoadAction(action);
+                    return;
+                }
+                doOnLoad();
+                return;
             }
         }
+
         super.setAttributeNS(namespaceURI, qualifiedName, value);
     }
 
@@ -146,20 +165,21 @@ public class HtmlImage extends HtmlElement {
             if (ok) {
                 final Event event = new Event(this, Event.TYPE_LOAD);
                 final Node scriptObject = (Node) getScriptObject();
-                final PostponedAction action = new PostponedAction(getPage()) {
-                    @Override
-                    public void execute() throws Exception {
-                        scriptObject.executeEvent(event);
-                    }
-                };
 
                 final HtmlPage htmlPage = (HtmlPage) getPage();
                 final String readyState = htmlPage.getReadyState();
                 if (READY_STATE_LOADING.equals(readyState)) {
+                    final PostponedAction action = new PostponedAction(getPage()) {
+                        @Override
+                        public void execute() throws Exception {
+                            scriptObject.executeEvent(event);
+                        }
+                    };
                     htmlPage.addAfterLoadAction(action);
                 }
                 else {
-                    client.getJavaScriptEngine().addPostponedAction(action);
+                    // client.getJavaScriptEngine().addPostponedAction(action);
+                    scriptObject.executeEvent(event);
                 }
             }
             else {
