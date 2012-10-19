@@ -31,6 +31,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
@@ -128,7 +130,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = header;
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
         final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();
-        servlets1.put("/simple1", IncorrectAccessControlAllowOriginServlet.class);
+        servlets1.put("/simple1", UnauthorizedSimpleServlet.class);
         startWebServer(".", null, servlets1);
 
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
@@ -143,9 +145,9 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     /**
      * Servlet for {@link #noAccessControlAllowOrigin()}.
      */
-    public static class IncorrectAccessControlAllowOriginServlet extends ServletContentWrapper {
+    public static class UnauthorizedSimpleServlet extends ServletContentWrapper {
         /** Constructor. */
-        public IncorrectAccessControlAllowOriginServlet() {
+        public UnauthorizedSimpleServlet() {
             super(getModifiedContent("<html><head>\n"
                     + "<script>\n"
                     + "var xhr = " + XHRInstantiation_ + ";\n"
@@ -180,20 +182,46 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(IE = { "4", "200", "null", "null", "null", "null" },
             DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" })
     public void preflight() throws Exception {
-        PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PINGOTHER";
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
         final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();
-        servlets1.put("/simple1", PreflightServlet.class);
+        servlets1.put("/preflight1", PreflightServlet.class);
         startWebServer(".", null, servlets1);
 
         final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
-        servlets2.put("/simple2", PreflightServerServlet.class);
+        servlets2.put("/preflight2", PreflightServerServlet.class);
         startWebServer2(".", null, servlets2);
 
         final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/simple1");
+        driver.get("http://localhost:" + PORT + "/preflight1");
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Seems that "Access-Control-Allow-Methods" is not considered by FF.
+     * 
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(IE = { "4", "200", "null", "null", "null", "null" },
+            DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" })
+    public void preflight_incorrect_methods() throws Exception {
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = null;
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = "X-PINGOTHER";
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+        final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();
+        servlets1.put("/preflight1", PreflightServlet.class);
+        startWebServer(".", null, servlets1);
+
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        servlets2.put("/preflight2", PreflightServerServlet.class);
+        startWebServer2(".", null, servlets2);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/preflight1");
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
@@ -208,7 +236,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                     + "var xhr = " + XHRInstantiation_ + ";\n"
                     + "function test() {\n"
                     + "  try {\n"
-                    + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/simple2';\n"
+                    + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
                     + "    xhr.open('GET',  url, false);\n"
                     + "    xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n"
                     + "    xhr.send();\n"
@@ -275,6 +303,55 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "<options_method>" + options_method_ + "</options_method>"
                 + "<options_headers>" + options_headers_ + "</options_headers>"
                 + "</result>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(IE = { "4", "200" }, DEFAULT = { "exception", "4", "0" })
+    @NotYetImplemented(Browser.FF)
+    public void preflight_incorrect_headers() throws Exception {
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";
+        PreflightServerServlet.ACCESS_CONTROL_ALLOW_HEADERS_ = null;
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+        final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();
+        servlets1.put("/preflight1", UnauthorizedPreflightServlet.class);
+        startWebServer(".", null, servlets1);
+
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        servlets2.put("/preflight2", PreflightServerServlet.class);
+        startWebServer2(".", null, servlets2);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/preflight1");
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Servlet for unauthorized preflight requests.
+     */
+    public static class UnauthorizedPreflightServlet extends ServletContentWrapper {
+        /** Constructor. */
+        public UnauthorizedPreflightServlet() {
+            super(getModifiedContent("<html><head>\n"
+                    + "<script>\n"
+                    + "var xhr = " + XHRInstantiation_ + ";\n"
+                    + "function test() {\n"
+                    + "  try {\n"
+                    + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
+                    + "    xhr.open('GET',  url, false);\n"
+                    + "    xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n"
+                    + "    xhr.send();\n"
+                    + "  } catch(e) { alert('exception') }\n"
+                    + "  alert(xhr.readyState);\n"
+                    + "  alert(xhr.status);\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head>\n"
+                    + "<body onload='test()'></body></html>"));
         }
     }
 
