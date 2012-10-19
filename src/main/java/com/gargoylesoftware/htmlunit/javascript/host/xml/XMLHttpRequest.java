@@ -119,6 +119,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private String overriddenMimeType_;
     private HtmlPage containingPage_;
     private final boolean caseSensitiveProperties_;
+    private boolean withCredentials_;
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -761,6 +762,24 @@ public class XMLHttpRequest extends SimpleScriptable {
     @JsxFunction({ @WebBrowser(value = IE, maxVersion = 6), @WebBrowser(FF) })
     public void overrideMimeType(final String mimeType) {
         overriddenMimeType_ = mimeType;
+    }
+
+    /**
+     * Returns the "withCredentials" property.
+     * @return the "withCredentials" property
+     */
+    @JsxGetter
+    public boolean getWithCredentials() {
+        return withCredentials_;
+    }
+
+    /**
+     * Sets the "withCredentials" property.
+     * @param withCredentials the "withCredentials" property.
+     */
+    @JsxSetter
+    public void setWithCredentials(final boolean withCredentials) {
+        withCredentials_ = withCredentials;
     }
 
     /**

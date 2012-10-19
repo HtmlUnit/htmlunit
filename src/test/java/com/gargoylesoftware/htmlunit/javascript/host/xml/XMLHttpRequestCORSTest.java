@@ -352,4 +352,100 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         }
     }
 
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({ "4", "200" })
+    public void withCredentials() throws Exception {
+        WithCredentialsServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
+        WithCredentialsServerServlet.ACCESS_CONTROL_ALLOW_CREDENTIALS_ = "true";
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+        final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();
+        servlets1.put("/withCredentials1", WithCredentialsServlet.class);
+        startWebServer(".", null, servlets1);
+
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        servlets2.put("/withCredentials2", WithCredentialsServerServlet.class);
+        startWebServer2(".", null, servlets2);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/withCredentials1");
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Servlet for {@link #withCredentials()}.
+     */
+    public static class WithCredentialsServlet extends ServletContentWrapper {
+        /** Constructor. */
+        public WithCredentialsServlet() {
+            super(getModifiedContent("<html><head>\n"
+                    + "<script>\n"
+                    + "var xhr = " + XHRInstantiation_ + ";\n"
+                    + "function test() {\n"
+                    + "  try {\n"
+                    + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/withCredentials2';\n"
+                    + "    xhr.open('GET',  url, false);\n"
+                    + "    xhr.withCredentials = true;\n"
+                    + "    xhr.send();\n"
+                    + "  } catch(e) { alert(e) }\n"
+                    + "  alert(xhr.readyState);\n"
+                    + "  alert(xhr.status);\n"
+                    + "}\n"
+                    + "</script>\n"
+                    + "</head>\n"
+                    + "<body onload='test()'></body></html>"));
+        }
+    }
+
+    /**
+     * CORS "With Credentials" scenario Servlet.
+     */
+    public static class WithCredentialsServerServlet extends HttpServlet {
+        private static String ACCESS_CONTROL_ALLOW_ORIGIN_;
+        private static String ACCESS_CONTROL_ALLOW_CREDENTIALS_;
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            if (ACCESS_CONTROL_ALLOW_ORIGIN_ != null) {
+                response.setHeader("Access-Control-Allow-Origin", ACCESS_CONTROL_ALLOW_ORIGIN_);
+            }
+            if (ACCESS_CONTROL_ALLOW_CREDENTIALS_ != null) {
+                response.setHeader("Access-Control-Allow-Credentials", ACCESS_CONTROL_ALLOW_CREDENTIALS_);
+            }
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/xml");
+            String origin = request.getHeader("Origin");
+            if (origin == null) {
+                origin = "No Origin!";
+            }
+            response.getWriter().write("<origin>" + origin + "</origin>");
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({ "4", "200" })
+    public void withCredentials_no_header() throws Exception {
+        WithCredentialsServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";
+        WithCredentialsServerServlet.ACCESS_CONTROL_ALLOW_CREDENTIALS_ = null;
+        expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
+        final Map<String, Class<? extends Servlet>> servlets1 = new HashMap<String, Class<? extends Servlet>>();
+        servlets1.put("/withCredentials1", WithCredentialsServlet.class);
+        startWebServer(".", null, servlets1);
+
+        final Map<String, Class<? extends Servlet>> servlets2 = new HashMap<String, Class<? extends Servlet>>();
+        servlets2.put("/withCredentials2", WithCredentialsServerServlet.class);
+        startWebServer2(".", null, servlets2);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("http://localhost:" + PORT + "/withCredentials1");
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
 }
