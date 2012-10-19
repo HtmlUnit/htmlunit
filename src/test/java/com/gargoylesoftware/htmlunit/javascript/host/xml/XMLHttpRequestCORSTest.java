@@ -31,8 +31,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
@@ -201,7 +199,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
     /**
      * Seems that "Access-Control-Allow-Methods" is not considered by FF.
-     * 
+     *
      * @throws Exception if the test fails.
      */
     @Test
@@ -311,7 +309,6 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "4", "200" }, DEFAULT = { "exception", "4", "0" })
-    @NotYetImplemented(Browser.FF)
     public void preflight_incorrect_headers() throws Exception {
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "http://localhost:" + PORT;
         PreflightServerServlet.ACCESS_CONTROL_ALLOW_METHODS_ = "POST, GET, OPTIONS";

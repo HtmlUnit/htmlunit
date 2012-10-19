@@ -185,7 +185,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
             final int nbExecutions;
             if (async_ && STATE_LOADING == state) {
-                // quite strange but IE and Mozilla seem both to fire state loading twice
+                // quite strange but IE and FF seem both to fire state loading twice
                 // in async mode (at least with HTML of the unit tests)
                 nbExecutions = 2;
             }
@@ -608,13 +608,11 @@ public class XMLHttpRequest extends SimpleScriptable {
                 }
                 preflightRequest.setAdditionalHeader("Access-Control-Request-Headers", builder.toString());
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
-                final String value = preflightResponse.getResponseHeaderValue("Access-Control-Allow-Origin");
-                if (!"*".equals(value)) {
+                if (!isPreflightAuthorized(preflightResponse)) {
                     setState(STATE_INTERACTIVE, context);
                     setState(STATE_COMPLETED, context);
                     if (LOG.isDebugEnabled()) {
-                        LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL "
-                                + webRequest_.getUrl());
+                        LOG.debug("No permitted request for URL " + webRequest_.getUrl());
                     }
                     Context.throwAsScriptRuntimeEx(
                             new RuntimeException("No permitted \"Access-Control-Allow-Origin\" header."));
@@ -628,7 +626,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             boolean allowOriginResponse = true;
             if (crossOriginResourceSharing) {
                 final String value = webResponse.getResponseHeaderValue("Access-Control-Allow-Origin");
-                allowOriginResponse = "*".equals(value);
+                allowOriginResponse = "*".equals(value)
+                        || webRequest_.getAdditionalHeaders().get("Origin").equals(value);
             }
             if (allowOriginResponse) {
                 if (overriddenMimeType_ == null) {
@@ -674,6 +673,27 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
         }
         return false;
+    }
+
+    private boolean isPreflightAuthorized(final WebResponse preflightResponse) {
+        final String originHeader = preflightResponse.getResponseHeaderValue("Access-Control-Allow-Origin");
+        if (!"*".equals(originHeader) && !webRequest_.getAdditionalHeaders().get("Origin").equals(originHeader)) {
+            return false;
+        }
+        String headersHeader = preflightResponse.getResponseHeaderValue("Access-Control-Allow-Headers");
+        if (headersHeader == null) {
+            headersHeader = "";
+        }
+        else {
+            headersHeader = headersHeader.toLowerCase();
+        }
+        for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
+            if (isPreflightHeader(header.getKey().toLowerCase(), header.getValue().toLowerCase())
+                    && !headersHeader.contains(header.getKey().toLowerCase())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
