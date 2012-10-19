@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https">
+        <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https, CORS">
+            <action type="add" dev="asashour" issue="2817642">
+                HtmlEmbed: add saveAs(File).
+            </action>
+            <action type="add" dev="asashour" issue="3432380">
+                JavaScript: XMLHttpRequest: support Cross-Origin Resource Sharing (CORS).
+            </action>
             <action type="fix" dev="rbri" issue="3567013">
                 JavaScript: Image onload not called after src change (using setAttribute('src', ) instead of src property).
             </action>
