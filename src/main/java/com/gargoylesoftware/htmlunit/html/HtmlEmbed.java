@@ -62,7 +62,7 @@ public class HtmlEmbed extends HtmlElement {
 
         final URL url = page.getFullyQualifiedUrl(getAttribute("src"));
         final WebRequest request = new WebRequest(url);
-        request.setAdditionalHeader("Referer", page.getWebResponse().getWebRequest().getUrl().toExternalForm());
+        request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
         final WebResponse webResponse = webclient.loadWebResponse(request);
         final FileOutputStream fos = new FileOutputStream(file);
         IOUtils.copy(webResponse.getContentAsStream(), fos);

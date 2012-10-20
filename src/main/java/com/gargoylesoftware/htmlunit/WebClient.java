@@ -261,7 +261,7 @@ public class WebClient implements Serializable {
         final Page page = webWindow.getEnclosedPage();
 
         if (page != null) {
-            final URL prev = page.getWebResponse().getWebRequest().getUrl();
+            final URL prev = page.getUrl();
             final URL current = webRequest.getUrl();
             if (current.sameFile(prev) && current.getRef() != null
                 && !StringUtils.equals(current.getRef(), prev.getRef())) {
@@ -960,7 +960,7 @@ public class WebClient implements Serializable {
                 final WebRequest request = new WebRequest(url);
                 if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER)
                         && openerPage != null) {
-                    final String referer = openerPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
+                    final String referer = openerPage.getUrl().toExternalForm();
                     request.setAdditionalHeader("Referer", referer);
                 }
                 getPage(window, request);
@@ -1065,7 +1065,7 @@ public class WebClient implements Serializable {
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         final WebRequest request = new WebRequest(url);
         if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER) && openerPage != null) {
-            final String referer = openerPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
+            final String referer = openerPage.getUrl().toExternalForm();
             request.setAdditionalHeader("Referer", referer);
         }
 
@@ -1904,7 +1904,7 @@ public class WebClient implements Serializable {
             else if (window instanceof FrameWindow) {
                 final FrameWindow fw = (FrameWindow) window;
                 final String enclosingPageState = fw.getEnclosingPage().getDocumentElement().getReadyState();
-                final URL frameUrl = fw.getEnclosedPage().getWebResponse().getWebRequest().getUrl();
+                final URL frameUrl = fw.getEnclosedPage().getUrl();
                 if (!DomNode.READY_STATE_COMPLETE.equals(enclosingPageState) || frameUrl == URL_ABOUT_BLANK) {
                     return;
                 }
@@ -2172,7 +2172,7 @@ public class WebClient implements Serializable {
             if (page instanceof HtmlPage && !((HtmlPage) page).isOnbeforeunloadAccepted()) {
                 return;
             }
-            final URL current = page.getWebResponse().getWebRequest().getUrl();
+            final URL current = page.getUrl();
             if (!justHashJump && url.sameFile(current) && StringUtils.isNotEmpty(url.getRef())) {
                 justHashJump = true;
             }

@@ -93,8 +93,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         // Test that only one value for the radio button is being passed back to the server
         final HtmlPage secondPage = (HtmlPage) pushButton.click();
 
-        assertEquals("url", getDefaultUrl() + "?foo=2&button=foo",
-                secondPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals("url", getDefaultUrl() + "?foo=2&button=foo", secondPage.getUrl());
         Assert.assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 
@@ -956,8 +955,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlPage secondPage = (HtmlPage) page.getHtmlElementById("mySubmit").click();
 
         assertNotNull(secondPage);
-        assertEquals(page.getWebResponse().getWebRequest().getUrl() + "action.html?select=second+value",
-                secondPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals(page.getUrl() + "action.html?select=second+value", secondPage.getUrl());
     }
 
     /**
@@ -1130,7 +1128,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(getBrowserVersion(), html, null, url);
         final Page page2 = page.getHtmlElementById("submitButton").click();
 
-        assertEquals(expectedUrl, page2.getWebResponse().getWebRequest().getUrl());
+        assertEquals(expectedUrl, page2.getUrl());
     }
 
     /**
@@ -1235,7 +1233,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlPage firstPage = loadPage(html);
         final HtmlSubmitInput submitInput = firstPage.getHtmlElementById("myButton");
         final HtmlPage secondPage = submitInput.click();
-        assertEquals(URL_SECOND + "?Save=Submit+Query", secondPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals(URL_SECOND + "?Save=Submit+Query", secondPage.getUrl());
     }
 
     /**
@@ -1306,7 +1304,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         if (getBrowserVersion() == BrowserVersion.INTERNET_EXPLORER_6) {
             expectedURL += "?";
         }
-        assertEquals(expectedURL, secondPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals(expectedURL, secondPage.getUrl());
     }
 
     /**
@@ -1449,7 +1447,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         if (BrowserVersion.INTERNET_EXPLORER_6.equals(getBrowserVersion())) {
             expectedUrl += "?";
         }
-        assertEquals(expectedUrl, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(expectedUrl, page.getUrl());
     }
 
     /**
@@ -1471,7 +1469,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         if (BrowserVersion.INTERNET_EXPLORER_6.equals(getBrowserVersion())) {
             expectedUrl += "?";
         }
-        assertEquals(expectedUrl, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(expectedUrl, page.getUrl());
     }
 
     /**
@@ -1489,8 +1487,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "</form></body></html>";
         HtmlPage page = loadPage(html);
         page = page.<HtmlSubmitInput>getFirstByXPath("//input[2]").click();
-        assertEquals(getDefaultUrl() + "?myName=myValue",
-                page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(getDefaultUrl() + "?myName=myValue", page.getUrl());
     }
 
     /**
@@ -1526,7 +1523,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(html, "text/html", "ISO-8859-1");
 
         final HtmlPage page = client.getPage(url);
-        assertEquals(url.toExternalForm(), page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(url.toExternalForm(), page.getUrl());
         final HtmlPage linkPage = page.getHtmlElementById("myLink").click();
         final String linkSuffix;
         if (getBrowserVersion().isIE()) {
@@ -1535,7 +1532,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         else {
             linkSuffix = "bug.html?k%F6nig";
         }
-        assertEquals(url.toExternalForm() + linkSuffix, linkPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals(url.toExternalForm() + linkSuffix, linkPage.getUrl());
     }
 
     /**
@@ -1565,7 +1562,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(html, "text/html", "UTF-8");
 
         final HtmlPage page = client.getPage(url);
-        assertEquals(url.toExternalForm(), page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(url.toExternalForm(), page.getUrl());
         final HtmlPage submitPage = page.getHtmlElementById("mySubmit").click();
         final HtmlPage linkPage = page.getHtmlElementById("myLink").click();
         final String submitSuffix;
@@ -1578,7 +1575,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
             submitSuffix = "?par\u00F6m=Hello+G\u00FCnter";
             linkSuffix = "bug.html?h\u00F6=G\u00FCnter";
         }
-        assertEquals(url.toExternalForm() + submitSuffix, submitPage.getWebResponse().getWebRequest().getUrl());
-        assertEquals(url.toExternalForm() + linkSuffix, linkPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals(url.toExternalForm() + submitSuffix, submitPage.getUrl());
+        assertEquals(url.toExternalForm() + linkSuffix, linkPage.getUrl());
     }
 }

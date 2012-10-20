@@ -569,8 +569,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         final HtmlPage framePage = (HtmlPage) frame.getEnclosedPage();
 
         assertNotNull(frame);
-        assertEquals(frameURL.toExternalForm(),
-                framePage.getWebResponse().getWebRequest().getUrl().toExternalForm());
+        assertEquals(frameURL.toExternalForm(), framePage.getUrl().toExternalForm());
         assertEquals("frame", framePage.getTitleText());
     }
 

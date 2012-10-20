@@ -176,7 +176,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         assertEquals(0, history.getIndex());
         assertNull(history.getUrl(-1));
         assertEquals(URL_FIRST, history.getUrl(0));
-        assertEquals(URL_FIRST, window.getEnclosedPage().getWebResponse().getWebRequest().getUrl());
+        assertEquals(URL_FIRST, window.getEnclosedPage().getUrl());
         assertNull(history.getUrl(1));
 
         // Go to the second page.
@@ -186,7 +186,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         assertNull(history.getUrl(-1));
         assertEquals(URL_FIRST, history.getUrl(0));
         assertEquals(URL_SECOND, history.getUrl(1));
-        assertEquals(URL_SECOND, window.getEnclosedPage().getWebResponse().getWebRequest().getUrl());
+        assertEquals(URL_SECOND, window.getEnclosedPage().getUrl());
         assertNull(history.getUrl(2));
 
         // Go to the third page.
@@ -197,7 +197,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         assertEquals(URL_FIRST, history.getUrl(0));
         assertEquals(URL_SECOND, history.getUrl(1));
         assertEquals(URL_THIRD, history.getUrl(2));
-        assertEquals(URL_THIRD, window.getEnclosedPage().getWebResponse().getWebRequest().getUrl());
+        assertEquals(URL_THIRD, window.getEnclosedPage().getUrl());
         assertNull(history.getUrl(3));
 
         // Cycle around back to the first page.
@@ -209,7 +209,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         assertEquals(URL_SECOND, history.getUrl(1));
         assertEquals(URL_THIRD, history.getUrl(2));
         assertEquals(URL_FIRST, history.getUrl(3));
-        assertEquals(URL_FIRST, window.getEnclosedPage().getWebResponse().getWebRequest().getUrl());
+        assertEquals(URL_FIRST, window.getEnclosedPage().getUrl());
         assertNull(history.getUrl(4));
 
         // Go to a hash on the current page.
@@ -223,7 +223,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         assertEquals(URL_THIRD, history.getUrl(2));
         assertEquals(URL_FIRST, history.getUrl(3));
         assertEquals(firstUrlWithHash, history.getUrl(4));
-        assertEquals(firstUrlWithHash, window.getEnclosedPage().getWebResponse().getWebRequest().getUrl());
+        assertEquals(firstUrlWithHash, window.getEnclosedPage().getUrl());
         assertNull(history.getUrl(5));
 
         history.back().back();
@@ -235,7 +235,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         assertEquals(URL_THIRD, history.getUrl(2));
         assertEquals(URL_FIRST, history.getUrl(3));
         assertEquals(firstUrlWithHash, history.getUrl(4));
-        assertEquals(URL_THIRD, window.getEnclosedPage().getWebResponse().getWebRequest().getUrl());
+        assertEquals(URL_THIRD, window.getEnclosedPage().getUrl());
         assertNull(history.getUrl(5));
 
         history.forward();
@@ -247,7 +247,7 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         assertEquals(URL_THIRD, history.getUrl(2));
         assertEquals(URL_FIRST, history.getUrl(3));
         assertEquals(firstUrlWithHash, history.getUrl(4));
-        assertEquals(URL_FIRST, window.getEnclosedPage().getWebResponse().getWebRequest().getUrl());
+        assertEquals(URL_FIRST, window.getEnclosedPage().getUrl());
         assertNull(history.getUrl(5));
     }
 

@@ -78,8 +78,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = button.click();
 
-        assertEquals("url", getDefaultUrl() + "?select1=option2&button=foo",
-                secondPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals("url", getDefaultUrl() + "?select1=option2&button=foo", secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
@@ -111,7 +110,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = button.click();
 
-        assertEquals("url", getDefaultUrl() + "?button=foo", secondPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals("url", getDefaultUrl() + "?button=foo", secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
@@ -144,8 +143,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         // Test that the correct value is being passed back up to the server
         final HtmlPage secondPage = (HtmlPage) button.click();
 
-        assertEquals("url", getDefaultUrl() + "?select1=option3&button=foo",
-                secondPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals("url", getDefaultUrl() + "?select1=option3&button=foo", secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
@@ -180,7 +178,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         final HtmlPage secondPage = button.click();
 
         assertEquals("url", getDefaultUrl() + "?select1=option1&select1=option2&select1=option3&button=foo",
-                secondPage.getWebResponse().getWebRequest().getUrl());
+                secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertNotNull(secondPage);
     }
@@ -618,7 +616,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
 
         final HtmlOption option1 = page.getHtmlElementById("option1");
         final HtmlPage page2 = option1.click();
-        assertEquals("about:blank", page2.getWebResponse().getWebRequest().getUrl());
+        assertEquals("about:blank", page2.getUrl());
     }
 
     /**

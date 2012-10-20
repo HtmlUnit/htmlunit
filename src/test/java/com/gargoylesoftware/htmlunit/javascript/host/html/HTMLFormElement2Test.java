@@ -168,7 +168,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
         final HtmlPage page = loadPageWithAlerts(html);
         final Page page2 = page.getHtmlElementById("button1").click();
 
-        assertEquals(URL_THIRD.toExternalForm(), page2.getWebResponse().getWebRequest().getUrl());
+        assertEquals(URL_THIRD.toExternalForm(), page2.getUrl());
     }
 
     /**
@@ -249,7 +249,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
         final HtmlButton button = page.getHtmlElementById("button1");
         final HtmlPage secondPage = button.click();
         assertEquals("second", secondPage.getTitleText());
-        assertEquals(URL_SECOND + "?button1=", secondPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals(URL_SECOND + "?button1=", secondPage.getUrl());
     }
 
     /**

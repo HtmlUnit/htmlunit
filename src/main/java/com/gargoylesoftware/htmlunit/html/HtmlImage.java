@@ -393,7 +393,7 @@ public class HtmlImage extends HtmlElement {
 
             final URL url = page.getFullyQualifiedUrl(getSrcAttribute());
             final WebRequest request = new WebRequest(url);
-            request.setAdditionalHeader("Referer", page.getWebResponse().getWebRequest().getUrl().toExternalForm());
+            request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
             imageWebResponse_ = webclient.loadWebResponse(request);
             imageReader_ = null;
             downloaded_ = true;

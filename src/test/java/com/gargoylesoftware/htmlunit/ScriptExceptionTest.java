@@ -64,7 +64,7 @@ public final class ScriptExceptionTest extends SimpleWebTestCase {
             loadPage(getBrowserVersion(), html, null);
         }
         catch (final ScriptException e) {
-            assertEquals(getDefaultUrl(), e.getPage().getWebResponse().getWebRequest().getUrl());
+            assertEquals(getDefaultUrl(), e.getPage().getUrl());
         }
     }
 

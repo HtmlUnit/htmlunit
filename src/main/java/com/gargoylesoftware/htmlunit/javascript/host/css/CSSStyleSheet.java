@@ -214,8 +214,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 CSSStyleSheet sheet = imports_.get(importRule);
                 if (sheet == null) {
                     // TODO: surely wrong: in which case is it null and why?
-                    final String uri = (uri_ != null) ? uri_
-                        : e.getPage().getWebResponse().getWebRequest().getUrl().toExternalForm();
+                    final String uri = (uri_ != null) ? uri_ : e.getPage().getUrl().toExternalForm();
                     final String href = importRule.getHref();
                     final String url = UrlUtils.resolveUrl(uri, href);
                     sheet = loadStylesheet(getWindow(), ownerNode_, null, url);
@@ -251,7 +250,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         final HtmlLink link, final String url) {
         CSSStyleSheet sheet;
         final HtmlPage page = (HtmlPage) element.getDomNodeOrDie().getPage(); // fallback uri for exceptions
-        String uri = page.getWebResponse().getWebRequest().getUrl().toExternalForm();
+        String uri = page.getUrl().toExternalForm();
         try {
             // Retrieve the associated content and respect client settings regarding failing HTTP status codes.
             final WebRequest request;
@@ -263,7 +262,7 @@ public class CSSStyleSheet extends SimpleScriptable {
             else {
                 // Use href.
                 request = new WebRequest(new URL(url));
-                final String referer = page.getWebResponse().getWebRequest().getUrl().toExternalForm();
+                final String referer = page.getUrl().toExternalForm();
                 request.setAdditionalHeader("Referer", referer);
             }
 
@@ -687,7 +686,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         else {
             final DomNode node = ownerNode_.getDomNodeOrDie();
             final HtmlPage page = (HtmlPage) node.getPage();
-            final URL url = page.getWebResponse().getWebRequest().getUrl();
+            final URL url = page.getUrl();
             return url.toExternalForm();
         }
     }

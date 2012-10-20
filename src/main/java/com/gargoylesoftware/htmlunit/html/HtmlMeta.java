@@ -63,7 +63,7 @@ public class HtmlMeta extends HtmlElement {
         final String[] parts = COOKIES_SPLIT_PATTERN.split(getContentAttribute(), 0);
         final String name = StringUtils.substringBefore(parts[0], "=");
         final String value = StringUtils.substringAfter(parts[0], "=");
-        final URL url = getPage().getWebResponse().getWebRequest().getUrl();
+        final URL url = getPage().getUrl();
         final String host = url.getHost();
         final boolean secure = "https".equals(url.getProtocol());
         String path = null;

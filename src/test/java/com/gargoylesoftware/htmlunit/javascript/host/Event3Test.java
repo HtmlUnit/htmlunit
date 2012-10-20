@@ -545,7 +545,7 @@ public class Event3Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPageWithAlerts(html);
         final HtmlPage page2 = page.getHtmlElementById("mySubmit").click();
-        assertEquals(getDefaultUrl(), page2.getWebResponse().getWebRequest().getUrl());
+        assertEquals(getDefaultUrl(), page2.getUrl());
     }
 
 }

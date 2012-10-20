@@ -67,8 +67,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
 
         final Page secondPage = page.getHtmlElementById("mysubmit").click();
 
-        assertEquals("url", getDefaultUrl() + "?textArea1=" + expectedValue,
-                secondPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals("url", getDefaultUrl() + "?textArea1=" + expectedValue, secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 
@@ -91,8 +90,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
         textArea.setText("Flintstone");
         final Page secondPage = page.getHtmlElementById("mysubmit").click();
 
-        assertEquals("url", getDefaultUrl() + "?textArea1=Flintstone",
-                secondPage.getWebResponse().getWebRequest().getUrl());
+        assertEquals("url", getDefaultUrl() + "?textArea1=Flintstone", secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
     }
 

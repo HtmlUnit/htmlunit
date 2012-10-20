@@ -113,7 +113,7 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
         final HtmlForm form = page.getFormByName("form1");
         final HtmlSelect select = form.getSelectByName("select1");
         final Page page2 = select.setSelectedAttribute("option2", true);
-        assertEquals("http://first/", page2.getWebResponse().getWebRequest().getUrl());
+        assertEquals("http://first/", page2.getUrl());
     }
 
     /**
@@ -165,7 +165,7 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(getBrowserVersion(), html, null);
         final Page page2 = page.getHtmlElementById("testButton").click();
-        final URL url2 = page2.getWebResponse().getWebRequest().getUrl();
+        final URL url2 = page2.getUrl();
         assertTrue("Select in URL " + url2, url2.toExternalForm().contains("testSelect=testValue"));
     }
 

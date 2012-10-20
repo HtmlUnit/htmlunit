@@ -187,13 +187,13 @@ public class HtmlForm extends HtmlElement {
         URL url;
         try {
             if (actionUrl.isEmpty()) {
-                url = htmlPage.getWebResponse().getWebRequest().getUrl();
+                url = htmlPage.getUrl();
                 if (browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)) {
                     url = UrlUtils.getUrlWithNewRef(url, null);
                 }
             }
             else if (actionUrl.startsWith("?")) {
-                String urlString = htmlPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
+                String urlString = htmlPage.getUrl().toExternalForm();
                 if (urlString.indexOf('?') != -1) {
                     urlString = urlString.substring(0, urlString.indexOf('?'));
                 }
@@ -217,7 +217,7 @@ public class HtmlForm extends HtmlElement {
             request.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
         }
         request.setCharset(getSubmitCharset());
-        request.setAdditionalHeader("Referer", htmlPage.getWebResponse().getWebRequest().getUrl()
+        request.setAdditionalHeader("Referer", htmlPage.getUrl()
                 .toExternalForm());
         return request;
     }

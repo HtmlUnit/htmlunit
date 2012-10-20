@@ -116,13 +116,13 @@ public class HtmlAnchor extends HtmlElement {
         }
 
         final WebRequest webRequest = new WebRequest(url);
-        webRequest.setAdditionalHeader("Referer", page.getWebResponse().getWebRequest().getUrl().toExternalForm());
+        webRequest.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
         if (LOG.isDebugEnabled()) {
             LOG.debug(
                     "Getting page for " + url.toExternalForm()
                     + ", derived from href '" + href
                     + "', using the originating URL "
-                    + page.getWebResponse().getWebRequest().getUrl());
+                    + page.getUrl());
         }
         page.getWebClient().download(page.getEnclosingWindow(),
                 page.getResolvedTarget(getTargetAttribute()),

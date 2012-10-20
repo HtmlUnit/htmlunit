@@ -68,7 +68,7 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebWindow window = loadPage(getBrowserVersion(), content, null).getEnclosingWindow();
         assertEquals(0, window.getWebClient().waitForBackgroundJavaScriptStartingBefore(1000));
-        assertEquals("about:blank", window.getEnclosedPage().getWebResponse().getWebRequest().getUrl());
+        assertEquals("about:blank", window.getEnclosedPage().getUrl());
     }
 
 }

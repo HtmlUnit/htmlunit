@@ -780,7 +780,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final URL url = new URL(urlString);
         final HtmlPage page = client.getPage(new WebRequest(url, HttpMethod.POST));
 
-        assertEquals("http://first/?a=b", page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("http://first/?a=b", page.getUrl());
     }
 
     /**
@@ -803,7 +803,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage page = client.getPage(URL_FIRST);
         final Page page2 = page.getAnchors().get(0).click();
         final URL url2 = new URL(URL_FIRST, "foo.html?id=UYIUYTY//YTYUY..F");
-        assertEquals(url2.toExternalForm(), page2.getWebResponse().getWebRequest().getUrl());
+        assertEquals(url2.toExternalForm(), page2.getUrl());
     }
 
     /**
@@ -1228,7 +1228,7 @@ public class WebClientTest extends SimpleWebTestCase {
         webClient.getPage(URL_FIRST);
         assertEquals(null, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(0, webConnection.getLastWebRequest().getProxyPort());
-        assertEquals(location2, page2.getWebResponse().getWebRequest().getUrl());
+        assertEquals(location2, page2.getUrl());
 
         // Make sure default proxy settings are used.
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
@@ -1236,7 +1236,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final Page page1 = webClient.getPage(URL_FIRST);
         assertEquals(defaultProxyHost, webConnection.getLastWebRequest().getProxyHost());
         assertEquals(defaultProxyPort, webConnection.getLastWebRequest().getProxyPort());
-        assertEquals(URL_FIRST, page1.getWebResponse().getWebRequest().getUrl());
+        assertEquals(URL_FIRST, page1.getUrl());
 
         webClient.closeAllWindows();
     }
@@ -1702,7 +1702,7 @@ public class WebClientTest extends SimpleWebTestCase {
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         Page page = webClient.getPage("javascript:void(alert(document.location))");
-        assertEquals("about:blank", page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("about:blank", page.getUrl());
         assertEquals(new String[] {"about:blank"}, collectedAlerts);
         collectedAlerts.clear();
 
@@ -2078,7 +2078,7 @@ public class WebClientTest extends SimpleWebTestCase {
         client.getPage(URL_FIRST);
         assertEquals(2, client.getWebWindows().size());
         assertEquals(frameUrl,
-                client.getCurrentWindow().getEnclosedPage().getWebResponse().getWebRequest().getUrl());
+                client.getCurrentWindow().getEnclosedPage().getUrl());
 
         // loading a new page should be done in the top window
         client.getPage(URL_SECOND);
@@ -2165,7 +2165,7 @@ public class WebClientTest extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         final Page page = client.getPage(urlWithDirectoryUp);
-        assertEquals(url, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(url, page.getUrl());
     }
 
     /**

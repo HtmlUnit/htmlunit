@@ -166,8 +166,7 @@ public abstract class BaseFrameElement extends HtmlElement {
             }
             try {
                 final WebRequest request = new WebRequest(url);
-                request.setAdditionalHeader("Referer", getPage().getWebResponse().getWebRequest().getUrl()
-                        .toExternalForm());
+                request.setAdditionalHeader("Referer", getPage().getUrl().toExternalForm());
                 getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, request);
             }
             catch (final IOException e) {
@@ -184,7 +183,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     private boolean isAlreadyLoadedByAncestor(final URL url) {
         WebWindow window = getPage().getEnclosingWindow();
         while (window != null) {
-            if (url.sameFile(window.getEnclosedPage().getWebResponse().getWebRequest().getUrl())) {
+            if (url.sameFile(window.getEnclosedPage().getUrl())) {
                 return true;
             }
             if (window == window.getParentWindow()) {

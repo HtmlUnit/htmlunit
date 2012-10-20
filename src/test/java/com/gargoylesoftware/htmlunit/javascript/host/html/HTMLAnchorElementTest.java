@@ -140,7 +140,7 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
         final HtmlPage page1 = loadPageWithAlerts(html);
         final Page page2 = page1.getAnchorByHref("#").click();
 
-        assertEquals(getDefaultUrl() + "foo.html", page2.getWebResponse().getWebRequest().getUrl());
+        assertEquals(getDefaultUrl() + "foo.html", page2.getUrl());
     }
 
     /**

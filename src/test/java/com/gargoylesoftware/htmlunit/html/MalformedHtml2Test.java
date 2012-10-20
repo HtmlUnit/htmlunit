@@ -51,7 +51,7 @@ public class MalformedHtml2Test extends SimpleWebTestCase {
         else {
             query = "a=1%A9=2&prod=3";
         }
-        assertEquals(query, page2.getWebResponse().getWebRequest().getUrl().getQuery());
+        assertEquals(query, page2.getUrl().getQuery());
     }
 
     /**

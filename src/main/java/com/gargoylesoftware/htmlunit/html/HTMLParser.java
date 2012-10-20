@@ -133,7 +133,7 @@ public final class HTMLParser {
     public static void parseFragment(final DomNode parent, final DomNode context, final String source)
         throws SAXException, IOException {
         final HtmlPage page = (HtmlPage) parent.getPage();
-        final URL url = page.getWebResponse().getWebRequest().getUrl();
+        final URL url = page.getUrl();
 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, url, source);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);

@@ -65,47 +65,47 @@ public class HistoryTest extends WebServerTestCase {
         HtmlPage page = client.getPage(urlA);
         assertEquals(1, history.getLength());
         assertEquals(0, history.getIndex());
-        assertEquals(urlA, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlA, page.getUrl());
 
         page = page.getAnchorByName("b").click();
         assertEquals(2, history.getLength());
         assertEquals(1, history.getIndex());
-        assertEquals(urlB, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlB, page.getUrl());
 
         page = page.getAnchorByName("x").click();
         assertEquals(3, history.getLength());
         assertEquals(2, history.getIndex());
-        assertEquals(urlBX, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlBX, page.getUrl());
 
         page = page.getAnchorByName("back").click();
         assertEquals(3, history.getLength());
         assertEquals(1, history.getIndex());
-        assertEquals(urlB, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlB, page.getUrl());
 
         page = page.getAnchorByName("back").click();
         assertEquals(3, history.getLength());
         assertEquals(0, history.getIndex());
-        assertEquals(urlA, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlA, page.getUrl());
 
         page = page.getAnchorByName("forward").click();
         assertEquals(3, history.getLength());
         assertEquals(1, history.getIndex());
-        assertEquals(urlB, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlB, page.getUrl());
 
         page = page.getAnchorByName("c").click();
         assertEquals(3, history.getLength());
         assertEquals(2, history.getIndex());
-        assertEquals(urlC, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlC, page.getUrl());
 
         page = page.getAnchorByName("back").click();
         assertEquals(3, history.getLength());
         assertEquals(1, history.getIndex());
-        assertEquals(urlB, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlB, page.getUrl());
 
         page = page.getAnchorByName("forward").click();
         assertEquals(3, history.getLength());
         assertEquals(2, history.getIndex());
-        assertEquals(urlC, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlC, page.getUrl());
     }
 
     /**
@@ -125,42 +125,42 @@ public class HistoryTest extends WebServerTestCase {
         HtmlPage page = client.getPage(urlA);
         assertEquals(1, history.getLength());
         assertEquals(0, history.getIndex());
-        assertEquals(urlA, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlA, page.getUrl());
 
         page = page.getAnchorByName("b").click();
         assertEquals(2, history.getLength());
         assertEquals(1, history.getIndex());
-        assertEquals(urlB, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlB, page.getUrl());
 
         page = page.getAnchorByName("x").click();
         assertEquals(3, history.getLength());
         assertEquals(2, history.getIndex());
-        assertEquals(urlBX, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlBX, page.getUrl());
 
         page = page.getAnchorByName("minusTwo").click();
         assertEquals(3, history.getLength());
         assertEquals(0, history.getIndex());
-        assertEquals(urlA, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlA, page.getUrl());
 
         page = page.getAnchorByName("plusOne").click();
         assertEquals(3, history.getLength());
         assertEquals(1, history.getIndex());
-        assertEquals(urlB, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlB, page.getUrl());
 
         page = page.getAnchorByName("c").click();
         assertEquals(3, history.getLength());
         assertEquals(2, history.getIndex());
-        assertEquals(urlC, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlC, page.getUrl());
 
         page = page.getAnchorByName("minusOne").click();
         assertEquals(3, history.getLength());
         assertEquals(1, history.getIndex());
-        assertEquals(urlB, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlB, page.getUrl());
 
         page = page.getAnchorByName("plusTwo").click();
         assertEquals(3, history.getLength());
         assertEquals(1, history.getIndex());
-        assertEquals(urlB, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals(urlB, page.getUrl());
     }
 
     /**

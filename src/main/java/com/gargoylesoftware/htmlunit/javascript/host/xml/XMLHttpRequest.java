@@ -449,15 +449,14 @@ public class XMLHttpRequest extends SimpleScriptable {
 
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
-            final URL originUrl = containingPage_.getWebResponse().getWebRequest().getUrl();
+            final URL originUrl = containingPage_.getUrl();
             if (!isAllowCrossDomainsFor(originUrl, fullUrl)) {
                 throw Context.reportRuntimeError("Access to restricted URI denied");
             }
 
             final WebRequest request = new WebRequest(fullUrl);
             request.setCharset("UTF-8");
-            request.setAdditionalHeader("Referer", containingPage_.getWebResponse().getWebRequest().getUrl()
-                    .toExternalForm());
+            request.setAdditionalHeader("Referer", containingPage_.getUrl().toExternalForm());
 
             if (!isSameOrigin(originUrl, fullUrl) && getBrowserVersion().hasFeature(XHR_ORIGIN_HEADER)) {
                 final StringBuilder origin = new StringBuilder().append(originUrl.getProtocol()).append("://")

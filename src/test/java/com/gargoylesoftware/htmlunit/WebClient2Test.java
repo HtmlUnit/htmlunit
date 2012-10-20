@@ -82,31 +82,31 @@ public class WebClient2Test extends SimpleWebTestCase {
         else {
             expected = "?a=b%20c&d=%E9%E8";
         }
-        assertEquals("http://first/" + expected, page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("http://first/" + expected, page.getUrl());
 
         // with query string already encoded
         page = client.getPage("http://first?a=b%20c&d=%C3%A9%C3%A8");
-        assertEquals("http://first/?a=b%20c&d=%C3%A9%C3%A8", page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("http://first/?a=b%20c&d=%C3%A9%C3%A8", page.getUrl());
 
         // with query string partially encoded
         page = client.getPage("http://first?a=b%20c&d=e f");
-        assertEquals("http://first/?a=b%20c&d=e%20f", page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("http://first/?a=b%20c&d=e%20f", page.getUrl());
 
         // with anchor
         page = client.getPage("http://first?a=b c#myAnchor");
-        assertEquals("http://first/?a=b%20c#myAnchor", page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("http://first/?a=b%20c#myAnchor", page.getUrl());
 
         // with query string containing encoded "&", "=", "+", ",", and "$"
         page = client.getPage("http://first?a=%26%3D%20%2C%24");
-        assertEquals("http://first/?a=%26%3D%20%2C%24", page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("http://first/?a=%26%3D%20%2C%24", page.getUrl());
 
         // with character to encode in path
         page = client.getPage("http://first/page 1.html");
-        assertEquals("http://first/page%201.html", page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("http://first/page%201.html", page.getUrl());
 
         // with character to encode in path
         page = client.getPage("http://first/page 1.html");
-        assertEquals("http://first/page%201.html", page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("http://first/page%201.html", page.getUrl());
     }
 
     /**
@@ -126,14 +126,14 @@ public class WebClient2Test extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         HtmlPage page = client.getPage("http://www.somewhere.org/..");
-        assertEquals("http://www.somewhere.org/", page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("http://www.somewhere.org/", page.getUrl());
 
         page = client.getPage("http://www.somewhere.org/../test");
-        assertEquals("http://www.somewhere.org/test", page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("http://www.somewhere.org/test", page.getUrl());
 
         // many
         page = client.getPage("http://www.somewhere.org/../../..");
-        assertEquals("http://www.somewhere.org/", page.getWebResponse().getWebRequest().getUrl());
+        assertEquals("http://www.somewhere.org/", page.getUrl());
     }
 
     /**

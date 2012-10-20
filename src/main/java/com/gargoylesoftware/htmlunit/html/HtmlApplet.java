@@ -252,7 +252,7 @@ public class HtmlApplet extends HtmlElement {
 
             appletClassLoader_ = new AppletClassLoader();
 
-            final String documentUrl = page.getWebResponse().getWebRequest().getUrl().toExternalForm();
+            final String documentUrl = page.getUrl().toExternalForm();
             String baseUrl = UrlUtils.resolveUrl(documentUrl, ".");
             if (StringUtils.isNotEmpty(codebaseProperty)) {
                 // codebase can be relative to the page

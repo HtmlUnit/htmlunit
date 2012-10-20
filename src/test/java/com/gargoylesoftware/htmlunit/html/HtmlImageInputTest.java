@@ -88,7 +88,7 @@ public class HtmlImageInputTest extends SimpleWebTestCase {
 
         final HtmlImageInput imageInput = form.getInputByName("button");
         final HtmlPage secondPage = (HtmlPage) imageInput.click();
-        final String url = secondPage.getWebResponse().getWebRequest().getUrl().toExternalForm();
+        final String url = secondPage.getUrl().toExternalForm();
         assertTrue(url.endsWith("?button.x=0&button.y=0"));
     }
 

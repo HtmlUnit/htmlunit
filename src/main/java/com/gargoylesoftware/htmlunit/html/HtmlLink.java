@@ -177,7 +177,7 @@ public class HtmlLink extends HtmlElement {
         final HtmlPage page = (HtmlPage) getPage();
         final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
         final WebRequest request = new WebRequest(url);
-        request.setAdditionalHeader("Referer", page.getWebResponse().getWebRequest().getUrl().toExternalForm());
+        request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
         return request;
     }
 }

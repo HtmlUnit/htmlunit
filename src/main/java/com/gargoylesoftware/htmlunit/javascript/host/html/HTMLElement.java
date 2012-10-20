@@ -1555,7 +1555,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public void startDownload(final String uri, final Function callback) throws MalformedURLException {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         final URL url = page.getFullyQualifiedUrl(uri);
-        if (!page.getWebResponse().getWebRequest().getUrl().getHost().equals(url.getHost())) {
+        if (!page.getUrl().getHost().equals(url.getHost())) {
             throw Context.reportRuntimeError("Not authorized url: " + url);
         }
         final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
@@ -1578,7 +1578,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public boolean isHomePage(final String url) {
         try {
             final URL newUrl = new URL(url);
-            final URL currentUrl = getDomNodeOrDie().getPage().getWebResponse().getWebRequest().getUrl();
+            final URL currentUrl = getDomNodeOrDie().getPage().getUrl();
             final String home = getDomNodeOrDie().getPage().getEnclosingWindow()
                     .getWebClient().getOptions().getHomePage();
             final boolean sameDomains = newUrl.getHost().equalsIgnoreCase(currentUrl.getHost());

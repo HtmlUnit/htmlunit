@@ -92,7 +92,7 @@ public class Location extends SimpleScriptable {
     public void initialize(final Window window) {
         window_ = window;
         if (window_ != null && window_.getWebWindow().getEnclosedPage() != null) {
-            setHash(window_.getWebWindow().getEnclosedPage().getWebResponse().getWebRequest().getUrl().getRef());
+            setHash(window_.getWebWindow().getEnclosedPage().getUrl().getRef());
         }
     }
 
@@ -173,7 +173,7 @@ public class Location extends SimpleScriptable {
             return UNKNOWN;
         }
         try {
-            URL url = page.getWebResponse().getWebRequest().getUrl();
+            URL url = page.getUrl();
             final boolean encodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HASH_IS_DECODED);
             final String hash = getHash(encodeHash);
             if (hash != null) {
@@ -189,7 +189,7 @@ public class Location extends SimpleScriptable {
         }
         catch (final MalformedURLException e) {
             LOG.error(e.getMessage(), e);
-            return page.getWebResponse().getWebRequest().getUrl().toExternalForm();
+            return page.getUrl().toExternalForm();
         }
     }
 
@@ -473,7 +473,7 @@ public class Location extends SimpleScriptable {
      * @return this location's current URL
      */
     private URL getUrl() {
-        return window_.getWebWindow().getEnclosedPage().getWebResponse().getWebRequest().getUrl();
+        return window_.getWebWindow().getEnclosedPage().getUrl();
     }
 
     /**

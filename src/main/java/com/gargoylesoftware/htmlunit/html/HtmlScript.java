@@ -328,7 +328,7 @@ public class HtmlScript extends HtmlElement {
             }
         }
         else if (forr == ATTRIBUTE_NOT_DEFINED || "onload".equals(event)) {
-            final String url = getPage().getWebResponse().getWebRequest().getUrl().toExternalForm();
+            final String url = getPage().getUrl().toExternalForm();
             final int line1 = getStartLineNumber();
             final int line2 = getEndLineNumber();
             final int col1 = getStartColumnNumber();

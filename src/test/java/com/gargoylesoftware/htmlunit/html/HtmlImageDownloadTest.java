@@ -111,7 +111,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
     @Test
     public void getWebResponse() throws Exception {
         final HtmlImage htmlimage = getHtmlElementToTest("image1");
-        final URL url = htmlimage.getPage().getWebResponse().getWebRequest().getUrl();
+        final URL url = htmlimage.getPage().getUrl();
         Assert.assertNull(htmlimage.getWebResponse(false));
         final WebResponse resp = htmlimage.getWebResponse(true);
         Assert.assertNotNull(resp);

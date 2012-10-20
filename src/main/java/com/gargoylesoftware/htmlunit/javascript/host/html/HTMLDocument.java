@@ -734,7 +734,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public String getCookie() {
         final HtmlPage page = getHtmlPage();
 
-        URL url = page.getWebResponse().getWebRequest().getUrl();
+        URL url = page.getUrl();
         url = replaceForCookieIfNecessary(url);
 
         final StringBuilder buffer = new StringBuilder();
@@ -775,7 +775,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public void setCookie(final String newCookie) {
         final CookieManager cookieManager = getHtmlPage().getWebClient().getCookieManager();
         if (cookieManager.isCookiesEnabled()) {
-            URL url = getHtmlPage().getWebResponse().getWebRequest().getUrl();
+            URL url = getHtmlPage().getUrl();
             url = replaceForCookieIfNecessary(url);
             final Cookie cookie = buildCookie(newCookie, url);
             cookieManager.addCookie(cookie);
@@ -883,7 +883,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter(propertyName = "URL")
     public String getURL() {
-        return getHtmlPage().getWebResponse().getWebRequest().getUrl().toExternalForm();
+        return getHtmlPage().getUrl().toExternalForm();
     }
 
     /**
@@ -965,7 +965,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
         else {
             final HtmlPage page = getHtmlPage();
-            final URL url = page.getWebResponse().getWebRequest().getUrl();
+            final URL url = page.getUrl();
             final StringWebResponse webResponse = new StringWebResponse(writeBuffer_.toString(), url);
             webResponse.setFromJavascript(true);
             writeInCurrentDocument_ = true;
@@ -1257,7 +1257,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // for IE, the body of a not yet loaded page is null whereas it already exists for FF
         if (getBrowserVersion().hasFeature(GENERATED_61) && (page.getEnclosingWindow() instanceof FrameWindow)) {
             final HtmlPage enclosingPage = (HtmlPage) page.getEnclosingWindow().getParentWindow().getEnclosedPage();
-            if (WebClient.URL_ABOUT_BLANK.equals(page.getWebResponse().getWebRequest().getUrl())
+            if (WebClient.URL_ABOUT_BLANK.equals(page.getUrl())
                     && enclosingPage.getReadyState() != DomNode.READY_STATE_COMPLETE) {
                 return null;
             }
@@ -1442,11 +1442,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public String getDomain() {
         if (domain_ == null) {
-            URL url = getHtmlPage().getWebResponse().getWebRequest().getUrl();
+            URL url = getHtmlPage().getUrl();
             if (url == WebClient.URL_ABOUT_BLANK) {
                 final WebWindow w = getWindow().getWebWindow();
                 if (w instanceof FrameWindow) {
-                    url = ((FrameWindow) w).getEnclosingPage().getWebResponse().getWebRequest().getUrl();
+                    url = ((FrameWindow) w).getEnclosingPage().getUrl();
                 }
                 else {
                     return null;
@@ -1495,7 +1495,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final BrowserVersion browserVersion = getBrowserVersion();
 
         // IE (at least 6) doesn't allow to set domain of about:blank
-        if (WebClient.URL_ABOUT_BLANK == getPage().getWebResponse().getWebRequest().getUrl()
+        if (WebClient.URL_ABOUT_BLANK == getPage().getUrl()
             && browserVersion.hasFeature(JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK)) {
             throw Context.reportRuntimeError("Illegal domain value, cannot set domain from \""
                     + WebClient.URL_ABOUT_BLANK + "\" to: \""
