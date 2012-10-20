@@ -589,4 +589,23 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
         final HtmlPage framePage = (HtmlPage) frame.getEnclosedPage();
         assertEquals("foo", framePage.getBody().asText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void window() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "    var iframe = document.getElementById('myIFrame');\n"
+            + "    iframe.contentWindow.contents = 'something';\n"
+            + "    iframe.src = 'javascript:window[\\'contents\\']';\n"
+            + "}\n</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<iframe id='myIFrame' src='about:blank'></iframe></body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertFalse(((HtmlPage) page.getFrames().get(0).getEnclosedPage()).asText().isEmpty());
+    }
+
 }
