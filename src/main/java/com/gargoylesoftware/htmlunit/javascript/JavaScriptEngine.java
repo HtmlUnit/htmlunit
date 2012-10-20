@@ -606,14 +606,17 @@ public class JavaScriptEngine {
             try {
                 cx.putThreadLocal(KEY_STARTING_SCOPE, scope_);
                 cx.putThreadLocal(KEY_STARTING_PAGE, htmlPage_);
+                final Object response;
                 synchronized (htmlPage_) { // 2 scripts can't be executed in parallel for one page
                     if (htmlPage_ != htmlPage_.getEnclosingWindow().getEnclosedPage()) {
                         return null; // page has been unloaded
                     }
-                    final Object response = doRun(cx);
-                    doProcessPostponedActions(true);
-                    return response;
+                    response = doRun(cx);
                 }
+                // doProcessPostponedActions is synchronized
+                // moved out of the sync block to avoid deadlocks
+                doProcessPostponedActions(true);
+                return response;
             }
             catch (final Exception e) {
                 handleJavaScriptException(new ScriptException(htmlPage_, e, getSourceCode(cx)), true);
