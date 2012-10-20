@@ -1023,16 +1023,20 @@ public class WebClient implements Serializable {
         if (name == null || name.isEmpty() || "_self".equals(name)) {
             return opener;
         }
-        else if ("_parent".equals(name)) {
+
+        if ("_parent".equals(name)) {
             return opener.getParentWindow();
         }
-        else if ("_top".equals(name)) {
+
+        if ("_top".equals(name)) {
             return opener.getTopWindow();
         }
-        else if ("_blank".equals(name)) {
+
+        if ("_blank".equals(name)) {
             return null;
         }
-        else if (!name.isEmpty()) {
+
+        if (!name.isEmpty()) {
             try {
                 return getWebWindowByName(name);
             }
@@ -2123,6 +2127,7 @@ public class WebClient implements Serializable {
             urlWithOnlyHashChange_ = null;
             originalPage_ = new WeakReference<Page>(requestingWindow.getEnclosedPage());
         }
+
         LoadJob(final WebWindow requestingWindow, final String target, final URL urlWithOnlyHashChange) {
             requestingWindow_ = requestingWindow;
             target_ = target;
@@ -2130,6 +2135,7 @@ public class WebClient implements Serializable {
             urlWithOnlyHashChange_ = urlWithOnlyHashChange;
             originalPage_ = new WeakReference<Page>(requestingWindow.getEnclosedPage());
         }
+
         public boolean isOutdated() {
             if (target_ != null && !target_.isEmpty()) {
                 return false;
