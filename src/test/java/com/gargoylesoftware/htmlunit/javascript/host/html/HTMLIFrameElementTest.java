@@ -608,4 +608,25 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
         assertFalse(((HtmlPage) page.getFrames().get(0).getEnclosedPage()).asText().isEmpty());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void settingSrc() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "    var iframe = document.createElement('iframe');\n"
+            + "    var content = 'something';\n"
+            + "    iframe.src = 'about:blank';\n"
+            + "    document.body.appendChild(iframe);\n"
+            + "    iframe.contentWindow.document.open('text/html', 'replace');\n"
+            + "    iframe.contentWindow.document.write(content);\n"
+            + "    iframe.contentWindow.document.close();\n"
+            + "}\n</script></head>\n"
+            + "<body onload='test()'></body></html>";
+        final HtmlPage page = loadPageWithAlerts(html);
+        assertFalse(((HtmlPage) page.getFrames().get(0).getEnclosedPage()).asText().isEmpty());
+    }
+
 }

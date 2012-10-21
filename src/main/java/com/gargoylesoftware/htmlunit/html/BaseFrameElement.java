@@ -342,7 +342,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
-        if ("src".equals(qualifiedName)) {
+        if ("src".equals(qualifiedName) && !"about:blank".equals(attributeValue)) {
             final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
             // When src is set from a script, loading is postponed until script finishes
             // in fact this implementation is probably wrong: JavaScript URL should be
