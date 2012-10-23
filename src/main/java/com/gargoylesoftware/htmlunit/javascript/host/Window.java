@@ -162,6 +162,9 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private transient WeakHashMap<Node, ComputedCSSStyleDeclaration> computedStyles_ =
         new WeakHashMap<Node, ComputedCSSStyleDeclaration>();
 
+    private final Map<Type, Storage> storages_ = new HashMap<Storage.Type, Storage>();
+    private StorageList storageList_;
+
     /**
      * Restores the transient {@link #computedStyles_} map during deserialization.
      * @param stream the stream to read the object from
@@ -534,11 +537,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
     public Storage getLocalStorage() {
-        final Storage storage = new Storage();
-        storage.setParentScope(this);
-        storage.setPrototype(getPrototype(storage.getClass()));
-        storage.setType(Type.LOCAL_STORAGE);
-        return storage;
+        return getStorage(Type.LOCAL_STORAGE);
     }
 
     /**
@@ -547,10 +546,24 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
     public Storage getSessionStorage() {
-        final Storage storage = new Storage();
-        storage.setParentScope(this);
-        storage.setPrototype(getPrototype(storage.getClass()));
-        storage.setType(Type.SESSION_STORAGE);
+        return getStorage(Type.SESSION_STORAGE);
+    }
+
+    /**
+     * Gets the storage of the specified type.
+     * @param storageType the type
+     * @return the storage
+     */
+    public Storage getStorage(final Type storageType) {
+        Storage storage = storages_.get(storageType);
+        if (storage == null) {
+            storage = new Storage();
+            storage.setParentScope(this);
+            storage.setPrototype(getPrototype(Storage.class));
+            storage.setType(storageType);
+            storages_.put(storageType, storage);
+        }
+
         return storage;
     }
 
@@ -560,10 +573,12 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter(@WebBrowser(FF))
     public StorageList getGlobalStorage() {
-        final StorageList list = new StorageList();
-        list.setParentScope(this);
-        list.setPrototype(getPrototype(list.getClass()));
-        return list;
+        if (storageList_ == null) {
+            storageList_ = new StorageList();
+            storageList_.setParentScope(this);
+            storageList_.setPrototype(getPrototype(StorageList.class));
+        }
+        return storageList_;
     }
 
     /**

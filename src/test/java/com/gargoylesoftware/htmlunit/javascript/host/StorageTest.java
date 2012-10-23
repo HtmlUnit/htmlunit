@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class StorageTest extends WebDriverTestCase {
@@ -52,6 +53,21 @@ public class StorageTest extends WebDriverTestCase {
             + "  alert(window.sessionStorage);\n"
             + "</script>\n"
             + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "true", "true", "true" })
+    public void storageEquals() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "alert(window.globalStorage === window.globalStorage);\n"
+            + "alert(window.localStorage === window.localStorage);\n"
+            + "alert(window.sessionStorage === window.sessionStorage);\n"
+            + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
 

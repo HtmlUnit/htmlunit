@@ -29,21 +29,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.Storage.Type;
  */
 public class StorageList extends SimpleScriptable {
 
-    private Storage storage_;
-
     /**
      * {@inheritDoc}
      */
     @Override
     public Object get(final String name, final Scriptable start) {
         if (name.equals(((HtmlPage) getWindow().getWebWindow().getEnclosedPage()).getUrl().getHost())) {
-            if (storage_ == null) {
-                storage_ = new Storage();
-                storage_.setParentScope(getParentScope());
-                storage_.setPrototype(getPrototype(storage_.getClass()));
-                storage_.setType(Type.GLOBAL_STORAGE);
-            }
-            return storage_;
+            return getWindow().getStorage(Type.GLOBAL_STORAGE);
         }
         Context.reportError("Security error: can not access the specified host");
         return null;
