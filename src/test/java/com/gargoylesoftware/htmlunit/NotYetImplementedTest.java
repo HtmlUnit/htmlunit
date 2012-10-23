@@ -19,9 +19,19 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
+import org.tmatesoft.svn.core.SVNException;
+import org.tmatesoft.svn.core.SVNURL;
+import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
+import org.tmatesoft.svn.core.wc.ISVNOptions;
+import org.tmatesoft.svn.core.wc.ISVNPropertyHandler;
+import org.tmatesoft.svn.core.wc.SVNPropertyData;
+import org.tmatesoft.svn.core.wc.SVNRevision;
+import org.tmatesoft.svn.core.wc.SVNWCClient;
+import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 import com.gargoylesoftware.htmlunit.javascript.host.PropertiesTest;
 
@@ -136,6 +146,7 @@ public class NotYetImplementedTest {
     }
 
     private void save() throws Exception {
+        final long revision = getRevision();
         final StringBuilder builder = new StringBuilder();
         builder.append("<html><head></head><body>\n");
         builder.append("NotYetImplemented is a condition in which a test is known to fail with HtmlUnit.");
@@ -169,8 +180,8 @@ public class NotYetImplementedTest {
                 builder.append("</td>\n");
                 lastFile = file;
             }
-            builder.append("    <td><a href='http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/"
-                    + file + "?view=markup#l" + line + "'>").append(method).append("</a> ")
+            builder.append("    <td><a href='https://sourceforge.net/p/htmlunit/code/" + revision
+                    + "/tree/trunk/htmlunit/" + file + "?view=markup#l" + line + "'>").append(method).append("</a> ")
                     .append(browser).append("</td>\n");
             builder.append("    <td>").append(line).append("</td>\n");
             builder.append("    <td>").append(description).append("</td>\n");
@@ -181,4 +192,30 @@ public class NotYetImplementedTest {
                 builder.toString());
     }
 
+    private long getRevision() throws Exception {
+        final ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
+        final ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
+        final SVNWCClient svnWCClient_ = new SVNWCClient(authManager, options);
+        final AtomicLong value = new AtomicLong();
+        svnWCClient_.doGetRevisionProperty(new File("."), null, SVNRevision.BASE, new ISVNPropertyHandler() {
+
+            @Override
+            public void handleProperty(File path, SVNPropertyData property)
+                    throws SVNException {
+            }
+
+            @Override
+            public void handleProperty(SVNURL url, SVNPropertyData property)
+                    throws SVNException {
+            }
+
+            @Override
+            public void handleProperty(long revision, SVNPropertyData property)
+                    throws SVNException {
+                value.set(revision);
+            }
+            
+        });
+        return value.get();
+    }
 }
