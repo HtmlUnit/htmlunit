@@ -86,8 +86,9 @@ public class MemoryLeakDetector {
      * that the allocation doesn't get optimized away.
      *
      * @param bytes the size of the byte array to create
+     * @return the total allocated
      */
-    private void allocateMemory(final int bytes) {
+    private int allocateMemory(final int bytes) {
         final byte[] big = new byte[bytes];
         // Fight against clever compilers/JVMs that may not allocate
         // unless we actually use the elements of the array.
@@ -101,6 +102,7 @@ public class MemoryLeakDetector {
                 total -= big[i];
             }
         }
+        return total;
     }
 
 }
