@@ -77,7 +77,7 @@
 			<tr>
 				<th>Last log entry</th>
 				<td>
-					<xsl:value-of select="//modifications/modification[last()]/comment"/>
+					<xsl:value-of select="//modifications/modification[last()]/comment"/> (<xsl:value-of select="//modifications/modification[last()]/user"/>)
 				</td>
 			</tr>
 		</table>
@@ -256,11 +256,11 @@
 		</h4>
 
 		<p>
-			<xsl:text>Type:</xsl:text>
+			<xsl:text>Type:&space;</xsl:text>
 			<xsl:value-of select="node()/@type"/>
 		</p>
 		<p>
-			<xsl:text>Message:</xsl:text>
+			<xsl:text>Message:&space;</xsl:text>
 			<xsl:value-of select="node()/@message"/>
 		</p>
 
