@@ -25,6 +25,7 @@ import java.util.zip.InflaterInputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -88,32 +89,13 @@ public class WebResponseData implements Serializable {
         if (stream == null) {
             return null;
         }
-        String encoding = null;
-        for (final NameValuePair header : headers) {
-            final String headerName = header.getName().trim();
-            if ("content-encoding".equalsIgnoreCase(headerName)) {
-                encoding = header.getValue();
-                break;
-            }
-        }
+        final String encoding = getHeader(headers, "content-encoding");
         if (encoding != null) {
             // check content length
-            long contentLenght = -1;
-            for (final NameValuePair header : headers) {
-                final String headerName = header.getName().trim();
-                if ("content-length".equalsIgnoreCase(headerName)) {
-                    try {
-                        contentLenght = Long.parseLong(header.getValue());
-                        // don't wrap empty content
-                        if (contentLenght == 0) {
-                            return stream;
-                        }
-                    }
-                    catch (final NumberFormatException e) {
-                        // ignore
-                    }
-                    break;
-                }
+            final long contentLength = NumberUtils.toLong(getHeader(headers, "content-length"), -1);
+            // don't wrap empty content
+            if (contentLength == 0) {
+                return stream;
             }
 
             if (StringUtils.contains(encoding, "gzip")) {
@@ -124,6 +106,17 @@ public class WebResponseData implements Serializable {
             }
         }
         return stream;
+    }
+
+    private String getHeader(final List<NameValuePair> headers, final String name) {
+        for (final NameValuePair header : headers) {
+            final String headerName = header.getName().trim();
+            if (name.equalsIgnoreCase(headerName)) {
+                return header.getValue();
+            }
+        }
+
+        return null;
     }
 
     /**
