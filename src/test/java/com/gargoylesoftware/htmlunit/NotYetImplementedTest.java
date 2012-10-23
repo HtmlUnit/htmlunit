@@ -195,26 +195,22 @@ public class NotYetImplementedTest {
     private long getRevision() throws Exception {
         final ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
         final ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
-        final SVNWCClient svnWCClient_ = new SVNWCClient(authManager, options);
+        final SVNWCClient svnWCClient = new SVNWCClient(authManager, options);
         final AtomicLong value = new AtomicLong();
-        svnWCClient_.doGetRevisionProperty(new File("."), null, SVNRevision.BASE, new ISVNPropertyHandler() {
+        svnWCClient.doGetRevisionProperty(new File("."), null, SVNRevision.BASE, new ISVNPropertyHandler() {
 
             @Override
-            public void handleProperty(File path, SVNPropertyData property)
-                    throws SVNException {
+            public void handleProperty(final File path, final SVNPropertyData property) throws SVNException {
             }
 
             @Override
-            public void handleProperty(SVNURL url, SVNPropertyData property)
-                    throws SVNException {
+            public void handleProperty(final SVNURL url, final SVNPropertyData property) throws SVNException {
             }
 
             @Override
-            public void handleProperty(long revision, SVNPropertyData property)
-                    throws SVNException {
+            public void handleProperty(final long revision, final SVNPropertyData property) throws SVNException {
                 value.set(revision);
             }
-            
         });
         return value.get();
     }
