@@ -60,7 +60,7 @@ public class NotYetImplementedTest {
                 process(file);
             }
             else {
-                if (file.getName().endsWith(".java") && !"WebTestCase.java".equals(file.getName())
+                if (file.getName().endsWith(".java") && !"SimpleWebTestCase.java".equals(file.getName())
                         && !"NotYetImplementedTest.java".equals(file.getName())
                         && !"CodeStyleTest.java".equals(file.getName())) {
                     final List<String> lines = CodeStyleTest.getLines(file);
