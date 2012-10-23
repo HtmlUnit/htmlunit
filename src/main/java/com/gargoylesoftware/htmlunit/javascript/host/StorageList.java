@@ -17,9 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.StorageHolder.Type;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.Storage.Type;
 
 /**
  * The JavaScript object that represents a StorageList.

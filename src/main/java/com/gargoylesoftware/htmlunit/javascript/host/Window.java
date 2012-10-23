@@ -62,6 +62,7 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.StatusHandler;
+import com.gargoylesoftware.htmlunit.StorageHolder.Type;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -90,7 +91,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.javascript.host.Storage.Type;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
@@ -162,7 +162,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     private transient WeakHashMap<Node, ComputedCSSStyleDeclaration> computedStyles_ =
         new WeakHashMap<Node, ComputedCSSStyleDeclaration>();
 
-    private final Map<Type, Storage> storages_ = new HashMap<Storage.Type, Storage>();
+    private final Map<Type, Storage> storages_ = new HashMap<Type, Storage>();
     private StorageList storageList_;
 
     /**
@@ -557,10 +557,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     public Storage getStorage(final Type storageType) {
         Storage storage = storages_.get(storageType);
         if (storage == null) {
-            storage = new Storage();
-            storage.setParentScope(this);
-            storage.setPrototype(getPrototype(Storage.class));
-            storage.setType(storageType);
+            final WebWindow webWindow = getWebWindow();
+            final Map<String, String> store = webWindow.getWebClient().getStorageHolder().getStore(storageType,
+                webWindow.getEnclosedPage());
+            storage = new Storage(this, store);
             storages_.put(storageType, storage);
         }
 

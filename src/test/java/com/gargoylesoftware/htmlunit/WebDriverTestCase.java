@@ -216,7 +216,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
         useRealBrowser_ = useWebDriver;
     }
 
-    private WebDriver buildWebDriver() throws IOException {
+    /**
+     * Builds a new WebDriver instance.
+     * @return the instance
+     * @throws IOException in case of exception
+     */
+    protected WebDriver buildWebDriver() throws IOException {
         if (useRealBrowser_) {
             if (getBrowserVersion().isIE()) {
                 return new InternetExplorerDriver();

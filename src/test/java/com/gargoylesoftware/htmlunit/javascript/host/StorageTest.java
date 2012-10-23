@@ -21,6 +21,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -153,5 +154,45 @@ public class StorageTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Note that this test will work only with WebDriver instances that support starting 2 instances in parallel.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null", IE6 = { "exception", "exception" }, IE7 = { "exception", "exception" })
+    public void localStorageShouldNotBeShared() throws Exception {
+        final String html1 = "<html><body><script>\n"
+            + "try {\n"
+            + "  localStorage.clear();\n"
+            + "  localStorage.setItem('hello', 'I was here');\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
+        final WebDriver driver = loadPage2(html1);
+        final List<String> alerts = getCollectedAlerts(driver);
+
+        final String html2 = "<html><body><script>\n"
+            + "try {\n"
+            + "    alert(localStorage.getItem('hello'));\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
+        getMockWebConnection().setResponse(getDefaultUrl(), html2);
+
+        releaseResources();
+        // we have to control 2nd driver by ourself
+        WebDriver driver2 = null;
+        try {
+            driver2 = buildWebDriver();
+            driver2.get(getDefaultUrl().toString());
+            final List<String> newAlerts = getCollectedAlerts(driver2);
+            alerts.addAll(newAlerts);
+            assertEquals(getExpectedAlerts(), alerts);
+        }
+        finally {
+            if (!(driver2 instanceof HtmlUnitDriver)) {
+                driver2.quit();
+            }
+        }
     }
 }

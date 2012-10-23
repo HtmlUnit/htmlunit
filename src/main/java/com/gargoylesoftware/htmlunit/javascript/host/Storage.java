@@ -25,7 +25,6 @@ import java.util.Map;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -37,19 +36,33 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @JsxClass
 public class Storage extends SimpleScriptable {
 
-    static enum Type { GLOBAL_STORAGE, LOCAL_STORAGE, SESSION_STORAGE }
-
     private static List<String> RESERVED_NAMES_ = Arrays.asList("clear", "key", "getItem", "length", "removeItem",
         "setItem");
 
-    private Type type_;
+    private final Map<String, String> store_;
 
-    void setType(final Type type) {
-        type_ = type;
+    /**
+     * Public no-arg constructor only for the prototype.
+     */
+    @Deprecated
+    public Storage() {
+        store_ = null;
+    }
+
+    /**
+     * Constructor.
+     * @param window the parent scope
+     * @param store the storage itself
+     */
+    public Storage(final Window window, final Map<String, String> store) {
+        store_ = store;
+        setParentScope(window);
+        setPrototype(window.getPrototype(Storage.class));
     }
 
     /**
@@ -57,7 +70,7 @@ public class Storage extends SimpleScriptable {
      */
     @Override
     public void put(final String name, final Scriptable start, final Object value) {
-        if (type_ == null || RESERVED_NAMES_.contains(name)) {
+        if (store_ == null || RESERVED_NAMES_.contains(name)) {
             super.put(name, start, value);
             return;
         }
@@ -69,7 +82,7 @@ public class Storage extends SimpleScriptable {
      */
     @Override
     public Object get(final String name, final Scriptable start) {
-        if (type_ == null || RESERVED_NAMES_.contains(name)) {
+        if (store_ == null || RESERVED_NAMES_.contains(name)) {
             return super.get(name, start);
         }
         return getItem(name);
@@ -110,7 +123,7 @@ public class Storage extends SimpleScriptable {
     }
 
     private Map<String, String> getMap() {
-        return StorageImpl.getInstance().getMap(type_, (HtmlPage) getWindow().getWebWindow().getEnclosedPage());
+        return store_;
     }
 
     /**
@@ -138,7 +151,7 @@ public class Storage extends SimpleScriptable {
      */
     @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
     public void clear() {
-        StorageImpl.getInstance().clear(type_, (HtmlPage) getWindow().getWebWindow().getEnclosedPage());
+        getMap().clear();
     }
 
     /**

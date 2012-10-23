@@ -167,6 +167,7 @@ public class WebClient implements Serializable {
     private JavaScriptErrorListener javaScriptErrorListener_;
 
     private WebClientOptions options_ = new WebClientOptions();
+    private final StorageHolder storageHolder_ = new StorageHolder();
 
     /**
      * Creates a web client instance using the browser version returned by
@@ -2296,5 +2297,14 @@ public class WebClient implements Serializable {
      */
     public WebClientOptions getOptions() {
         return options_;
+    }
+
+    /**
+     * Gets the holder for the different storages.
+     * <p><span style="color:red">Experimental API: May be changed in next release!</span></p>
+     * @return the holder
+     */
+    public StorageHolder getStorageHolder() {
+        return storageHolder_;
     }
 }
