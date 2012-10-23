@@ -41,8 +41,112 @@ public class MockWebConnection implements WebConnection {
 
     private static final Log LOG = LogFactory.getLog(MockWebConnection.class);
 
-    private final Map<String, WebResponseData> responseMap_ = new HashMap<String, WebResponseData>(10);
-    private WebResponseData defaultResponse_;
+    /**
+     * Contains the raw data configured for a response.
+     */
+    public static class RawResponseData {
+        private final List<NameValuePair> headers_;
+        private final byte[] byteContent_;
+        private final String stringContent_;
+        private final int statusCode_;
+        private final String statusMessage_;
+        private String charset_;
+
+        RawResponseData(final byte[] byteContent, final int statusCode, final String statusMessage,
+                final String contentType, final List<NameValuePair> headers) {
+            byteContent_ = byteContent;
+            stringContent_ = null;
+            statusCode_ = statusCode;
+            statusMessage_ = statusMessage;
+            headers_ = compileHeaders(headers, contentType);
+        }
+
+        RawResponseData(final String stringContent, final String charset, final int statusCode,
+                final String statusMessage, final String contentType, final List<NameValuePair> headers) {
+            byteContent_ = null;
+            charset_ = charset;
+            stringContent_ = stringContent;
+            statusCode_ = statusCode;
+            statusMessage_ = statusMessage;
+            headers_ = compileHeaders(headers, contentType);
+        }
+
+        private List<NameValuePair> compileHeaders(final List<NameValuePair> headers, final String contentType) {
+            final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
+            if (headers != null) {
+                compiledHeaders.addAll(headers);
+            }
+            if (contentType != null) {
+                compiledHeaders.add(new NameValuePair("Content-Type", contentType));
+            }
+            return compiledHeaders;
+        }
+
+        WebResponseData asWebResponseData() {
+            final byte[] content;
+            if (byteContent_ != null) {
+                content = byteContent_;
+            }
+            else if (stringContent_ == null) {
+                content = new byte[] {};
+            }
+            else {
+                content = TextUtil.stringToByteArray(stringContent_, charset_);
+            }
+            return new WebResponseData(content, statusCode_, statusMessage_, headers_);
+        }
+
+        /**
+         * Gets the configured headers.
+         * @return the headers
+         */
+        public List<NameValuePair> getHeaders() {
+            return headers_;
+        }
+
+        /**
+         * Gets the configured content bytes.
+         * @return <code>null</code> if a String content has been configured
+         */
+        public byte[] getByteContent() {
+            return byteContent_;
+        }
+
+        /**
+         * Gets the configured content String.
+         * @return <code>null</code> if a byte content has been configured
+         */
+        public String getStringContent() {
+            return stringContent_;
+        }
+
+        /**
+         * Gets the configured status code.
+         * @return the status code
+         */
+        public int getStatusCode() {
+            return statusCode_;
+        }
+
+        /**
+         * Gets the configured status message.
+         * @return the message
+         */
+        public String getStatusMessage() {
+            return statusMessage_;
+        }
+
+        /**
+         * Gets the configured charset.
+         * @return <code>null</code> for byte content
+         */
+        public String getCharset() {
+            return charset_;
+        }
+    }
+
+    private final Map<String, RawResponseData> responseMap_ = new HashMap<String, RawResponseData>(10);
+    private RawResponseData defaultResponse_;
     private WebRequest lastRequest_;
     private int requestCount_ = 0;
     private final List<URL> requestedUrls_ = Collections.synchronizedList(new ArrayList<URL>());
@@ -51,6 +155,16 @@ public class MockWebConnection implements WebConnection {
      * {@inheritDoc}
      */
     public WebResponse getResponse(final WebRequest request) throws IOException {
+        final RawResponseData rawResponse = getRawResponse(request);
+        return new WebResponse(rawResponse.asWebResponseData(), request, 0);
+    }
+
+    /**
+     * Gets the raw response configured for the request.
+     * @param request the request
+     * @return the raw response
+     */
+    public RawResponseData getRawResponse(final WebRequest request) {
         final URL url = request.getUrl();
 
         if (LOG.isDebugEnabled()) {
@@ -61,17 +175,17 @@ public class MockWebConnection implements WebConnection {
         requestCount_++;
         requestedUrls_.add(url);
 
-        WebResponseData response = responseMap_.get(url.toExternalForm());
-        if (response == null) {
-            response = defaultResponse_;
-            if (response == null) {
+        RawResponseData rawResponse = responseMap_.get(url.toExternalForm());
+        if (rawResponse == null) {
+            rawResponse = defaultResponse_;
+            if (rawResponse == null) {
                 throw new IllegalStateException("No response specified that can handle URL ["
                     + url.toExternalForm()
                     + "]");
             }
         }
 
-        return new WebResponse(response, request, 0);
+        return rawResponse;
     }
 
     /**
@@ -118,19 +232,20 @@ public class MockWebConnection implements WebConnection {
      * @param statusCode the status code to return
      * @param statusMessage the status message to return
      * @param contentType the content type to return
-     * @param responseHeaders the response headers to return
+     * @param headers the response headers to return
      */
     public void setResponse(final URL url, final String content, final int statusCode,
             final String statusMessage, final String contentType,
-            final List<? extends NameValuePair> responseHeaders) {
+            final List<NameValuePair> headers) {
 
         setResponse(
                 url,
-                TextUtil.stringToByteArray(content),
+                content,
                 statusCode,
                 statusMessage,
                 contentType,
-                responseHeaders);
+                TextUtil.DEFAULT_CHARSET,
+                headers);
     }
 
     /**
@@ -141,19 +256,15 @@ public class MockWebConnection implements WebConnection {
      * @param statusMessage the status message to return
      * @param contentType the content type to return
      * @param charset the name of a supported charset
-     * @param responseHeaders the response headers to return
+     * @param headers the response headers to return
      */
     public void setResponse(final URL url, final String content, final int statusCode,
             final String statusMessage, final String contentType, final String charset,
-            final List<? extends NameValuePair> responseHeaders) {
+            final List<NameValuePair> headers) {
 
-        setResponse(
-                url,
-                TextUtil.stringToByteArray(content, charset),
-                statusCode,
-                statusMessage,
-                contentType,
-                responseHeaders);
+        final RawResponseData responseEntry = buildRawResponseData(content, charset, statusCode, statusMessage,
+                contentType, headers);
+        responseMap_.put(url.toExternalForm(), responseEntry);
     }
 
     /**
@@ -163,23 +274,29 @@ public class MockWebConnection implements WebConnection {
      * @param statusCode the status code to return
      * @param statusMessage the status message to return
      * @param contentType the content type to return
-     * @param responseHeaders the response headers to return
+     * @param headers the response headers to return
      */
     public void setResponse(final URL url, final byte[] content, final int statusCode,
             final String statusMessage, final String contentType,
-            final List<? extends NameValuePair> responseHeaders) {
+            final List<NameValuePair> headers) {
 
-        final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
-        if (contentType != null) {
-            compiledHeaders.add(new NameValuePair("Content-Type", contentType));
-        }
-        final WebResponseData responseEntry = buildWebResponseData(content, statusCode, statusMessage, compiledHeaders);
+        final RawResponseData responseEntry = buildRawResponseData(content, statusCode, statusMessage, contentType,
+            headers);
         responseMap_.put(url.toExternalForm(), responseEntry);
     }
 
-    private WebResponseData buildWebResponseData(final byte[] content, final int statusCode, final String statusMessage,
-            final List<NameValuePair> compiledHeaders) {
-        return new WebResponseData(content, statusCode, statusMessage, compiledHeaders);
+    private RawResponseData buildRawResponseData(final byte[] content, final int statusCode, final String statusMessage,
+            final String contentType, final List<NameValuePair> headers) {
+        return new RawResponseData(content, statusCode, statusMessage, contentType, headers);
+    }
+
+    private RawResponseData buildRawResponseData(final String content, String charset, final int statusCode,
+            final String statusMessage, final String contentType, final List<NameValuePair> headers) {
+
+        if (charset == null) {
+            charset = TextUtil.DEFAULT_CHARSET;
+        }
+        return new RawResponseData(content, charset, statusCode, statusMessage, contentType, headers);
     }
 
     /**
@@ -191,8 +308,7 @@ public class MockWebConnection implements WebConnection {
      * @param content the content to return
      */
     public void setResponse(final URL url, final String content) {
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
-        setResponse(url, content, 200, "OK", "text/html", emptyList);
+        setResponse(url, content, 200, "OK", "text/html", null);
     }
 
     /**
@@ -205,8 +321,7 @@ public class MockWebConnection implements WebConnection {
      * @param contentType the content type to return
      */
     public void setResponse(final URL url, final String content, final String contentType) {
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
-        setResponse(url, content, 200, "OK", contentType, emptyList);
+        setResponse(url, content, 200, "OK", contentType, null);
     }
 
     /**
@@ -220,8 +335,7 @@ public class MockWebConnection implements WebConnection {
      * @param charset the name of a supported charset
      */
     public void setResponse(final URL url, final String content, final String contentType, final String charset) {
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
-        setResponse(url, content, 200, "OK", contentType, charset, emptyList);
+        setResponse(url, content, 200, "OK", contentType, charset, null);
     }
 
     /**
@@ -249,7 +363,7 @@ public class MockWebConnection implements WebConnection {
     public void setDefaultResponse(final String content, final int statusCode,
             final String statusMessage, final String contentType) {
 
-        setDefaultResponse(TextUtil.stringToByteArray(content), statusCode, statusMessage, contentType);
+        defaultResponse_ = buildRawResponseData(content, null, statusCode, statusMessage, contentType, null);
     }
 
     /**
@@ -264,12 +378,7 @@ public class MockWebConnection implements WebConnection {
     public void setDefaultResponse(final byte[] content, final int statusCode,
             final String statusMessage, final String contentType) {
 
-        final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
-        if (contentType != null) {
-            compiledHeaders.add(new NameValuePair("Content-Type", contentType));
-        }
-        final WebResponseData responseEntry = buildWebResponseData(content, statusCode, statusMessage, compiledHeaders);
-        defaultResponse_ = responseEntry;
+        defaultResponse_ = buildRawResponseData(content, statusCode, statusMessage, contentType, null);
     }
 
     /**
@@ -290,8 +399,7 @@ public class MockWebConnection implements WebConnection {
      * @param contentType the content type to return
      */
     public void setDefaultResponse(final String content, final String contentType) {
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
-        setDefaultResponse(content, 200, "OK", contentType, emptyList);
+        setDefaultResponse(content, 200, "OK", contentType, null);
     }
 
     /**
@@ -303,8 +411,7 @@ public class MockWebConnection implements WebConnection {
      * @param charset the name of a supported charset
      */
     public void setDefaultResponse(final String content, final String contentType, final String charset) {
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
-        setDefaultResponse(content, 200, "OK", contentType, charset, emptyList);
+        setDefaultResponse(content, 200, "OK", contentType, charset, null);
     }
 
     /**
@@ -313,18 +420,13 @@ public class MockWebConnection implements WebConnection {
      * @param statusCode the status code to return
      * @param statusMessage the status message to return
      * @param contentType the content type to return
-     * @param responseHeaders the response headers to return
+     * @param headers the response headers to return
      */
     public void setDefaultResponse(final String content, final int statusCode,
             final String statusMessage, final String contentType,
-            final List<? extends NameValuePair> responseHeaders) {
+            final List<NameValuePair> headers) {
 
-        final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
-        if (contentType != null) {
-            compiledHeaders.add(new NameValuePair("Content-Type", contentType));
-        }
-        defaultResponse_ = buildWebResponseData(TextUtil.stringToByteArray(content),
-            statusCode, statusMessage, compiledHeaders);
+        defaultResponse_ = buildRawResponseData(content, null, statusCode, statusMessage, contentType, headers);
     }
 
     /**
@@ -334,16 +436,13 @@ public class MockWebConnection implements WebConnection {
      * @param statusMessage the status message to return
      * @param contentType the content type to return
      * @param charset the name of a supported charset
-     * @param responseHeaders the response headers to return
+     * @param headers the response headers to return
      */
     public void setDefaultResponse(final String content, final int statusCode,
             final String statusMessage, final String contentType, final String charset,
-            final List<? extends NameValuePair> responseHeaders) {
+            final List<NameValuePair> headers) {
 
-        final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>(responseHeaders);
-        compiledHeaders.add(new NameValuePair("Content-Type", contentType));
-        defaultResponse_ = buildWebResponseData(TextUtil.stringToByteArray(content, charset),
-            statusCode, statusMessage, compiledHeaders);
+        defaultResponse_ = buildRawResponseData(content, charset, statusCode, statusMessage, contentType, headers);
     }
 
     /**

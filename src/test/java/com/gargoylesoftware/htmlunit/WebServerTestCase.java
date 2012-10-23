@@ -56,7 +56,6 @@ public abstract class WebServerTestCase extends WebTestCase {
     private Server server_;
     private static Boolean LAST_TEST_MockWebConnection_;
     private static Server STATIC_SERVER_;
-    private boolean writeContentAsBytes_;
     private WebClient webClient_;
 
     /**
@@ -340,7 +339,6 @@ public abstract class WebServerTestCase extends WebTestCase {
             STATIC_SERVER_.start();
         }
         MockWebConnectionServlet.setMockconnection(mockConnection);
-        MockWebConnectionServlet.setWriteContentAsBytes(writeContentAsBytes_);
     }
 
     /**
@@ -398,15 +396,6 @@ public abstract class WebServerTestCase extends WebTestCase {
      */
     protected boolean isBasicAuthentication() {
         return false;
-    }
-
-    /**
-     * Indicates that MockWebConnectionServlet should send the configured content's bytes directly
-     * without modification.
-     * @param b the new value
-     */
-    public void setWriteContentAsBytes_(final boolean b) {
-        writeContentAsBytes_ = b;
     }
 
     /**

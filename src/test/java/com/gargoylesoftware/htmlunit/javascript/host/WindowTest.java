@@ -1601,7 +1601,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final EventCatcher eventCatcher = new EventCatcher();
 
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "image/gif", emptyList);
         webClient.setWebConnection(webConnection);
@@ -1646,7 +1646,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final EventCatcher eventCatcher = new EventCatcher();
 
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/plain", emptyList);
         webClient.setWebConnection(webConnection);
@@ -1691,7 +1691,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final EventCatcher eventCatcher = new EventCatcher();
 
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/xml", emptyList);
         webClient.setWebConnection(webConnection);
@@ -1736,7 +1736,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final EventCatcher eventCatcher = new EventCatcher();
 
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/javascript", emptyList);
         webClient.setWebConnection(webConnection);

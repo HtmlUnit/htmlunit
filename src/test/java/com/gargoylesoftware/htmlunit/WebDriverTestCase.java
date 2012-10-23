@@ -36,7 +36,6 @@ import javax.servlet.http.HttpServletResponse;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -63,6 +62,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
+import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -120,7 +120,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static String JSON_;
     private boolean useRealBrowser_;
-    private boolean writeContentAsBytes_;
     private static Boolean LAST_TEST_MockWebConnection_;
 
     private WebClient webClient_;
@@ -301,7 +300,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
             STATIC_SERVER_.start();
         }
         MockWebConnectionServlet.MockConnection_ = mockConnection;
-        MockWebConnectionServlet.WriteContentAsBytes_ = writeContentAsBytes_;
 
         if (STATIC_SERVER2_ == null && needThreeConnections()) {
             STATIC_SERVER2_ = new Server(PORT2);
@@ -390,14 +388,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     public static class MockWebConnectionServlet extends HttpServlet {
         private static MockWebConnection MockConnection_;
-        private static boolean WriteContentAsBytes_;
 
         static void setMockconnection(final MockWebConnection connection) {
             MockConnection_ = connection;
-        }
-
-        static void setWriteContentAsBytes(final boolean status) {
-            WriteContentAsBytes_ = status;
         }
 
         /**
@@ -468,35 +461,26 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 webRequest.setRequestParameters(requestParameters);
             }
 
-            final WebResponse resp = MockConnection_.getResponse(webRequest);
+            final RawResponseData resp = MockConnection_.getRawResponse(webRequest);
 
             // write WebResponse to HttpServletResponse
             response.setStatus(resp.getStatusCode());
 
-            for (final NameValuePair responseHeader : resp.getResponseHeaders()) {
+            for (final NameValuePair responseHeader : resp.getHeaders()) {
                 response.addHeader(responseHeader.getName(), responseHeader.getValue());
             }
 
-            if (WriteContentAsBytes_) {
-                IOUtils.copy(resp.getContentAsStream(), response.getOutputStream());
+            if (resp.getByteContent() != null) {
+                response.getOutputStream().write(resp.getByteContent());
             }
             else {
-                final String newContent = getModifiedContent(resp.getContentAsString());
-                final String contentCharset = resp.getContentCharset();
+                final String newContent = getModifiedContent(resp.getStringContent());
+                final String contentCharset = resp.getCharset();
                 response.setCharacterEncoding(contentCharset);
                 response.getWriter().print(newContent);
             }
             response.flushBuffer();
         }
-    }
-
-    /**
-     * Indicates that MockWebConnectionServlet should send the configured content's bytes directly
-     * without modification.
-     * @param b the new value
-     */
-    public void setWriteContentAsBytes_(final boolean b) {
-        writeContentAsBytes_ = b;
     }
 
     /**

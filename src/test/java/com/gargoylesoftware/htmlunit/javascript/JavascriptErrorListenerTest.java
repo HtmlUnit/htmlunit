@@ -76,7 +76,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         webClient.setJavaScriptErrorListener(null);
         final MockWebConnection webConnection = new MockWebConnection();
         final String errorContent = "<html><head><title>ERROR 500</title></head><body></body></html>";
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_SECOND, errorContent, 500, "BOOM", "text/html", emptyList);
 
         // test script exception

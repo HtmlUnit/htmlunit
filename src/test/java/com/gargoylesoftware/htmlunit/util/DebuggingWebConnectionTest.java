@@ -101,7 +101,7 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
         gzipOutputStream.close();
 
         final MockWebConnection mockConnection = new MockWebConnection();
-        final List<? extends NameValuePair> responseHeaders = Arrays.asList(
+        final List<NameValuePair> responseHeaders = Arrays.asList(
             new NameValuePair("Content-Encoding", "gzip"));
         mockConnection.setResponse(getDefaultUrl(), baos.toByteArray(), 200, "OK", "application/javascript",
             responseHeaders);

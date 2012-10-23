@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +64,6 @@ public class WebResponseTest extends WebServerTestCase {
         // see http://en.wikipedia.org/wiki/Byte_Order_Mark
         final byte[] script = getModifiedContent("alert('" + getExpectedAlerts()[0]  + "');").getBytes(encoding);
 
-        setWriteContentAsBytes_(true);
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setDefaultResponse(ArrayUtils.addAll(markerBytes, script), 200, "OK", "text/javascript");
         webConnection.setResponse(URL_FIRST, html);
@@ -89,8 +87,7 @@ public class WebResponseTest extends WebServerTestCase {
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, content.getBytes("UTF-8"), 200, "OK", "text/html", emptyList);
+        webConnection.setResponse(URL_FIRST, content.getBytes("UTF-8"), 200, "OK", "text/html", null);
         client.setWebConnection(webConnection);
         final WebRequest request = new WebRequest(URL_FIRST);
         request.setCharset("UTF-8");
@@ -118,8 +115,7 @@ public class WebResponseTest extends WebServerTestCase {
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
-        conn.setResponse(URL_FIRST, xml, HttpStatus.SC_OK, "OK", "text/xml; charset=\"ISO-8859-1\"", emptyList);
+        conn.setResponse(URL_FIRST, xml, HttpStatus.SC_OK, "OK", "text/xml; charset=\"ISO-8859-1\"", null);
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
     }

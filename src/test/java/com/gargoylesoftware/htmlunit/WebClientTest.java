@@ -1123,7 +1123,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<NameValuePair> emptyList = Collections.emptyList();
         webConnection.setResponse(URL_FIRST, firstContent, 500, "BOOM", "text/html", emptyList);
         webClient.setWebConnection(webConnection);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(true);

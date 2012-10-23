@@ -72,7 +72,7 @@ public class XMLDocument3Test extends SimpleWebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        final List<? extends NameValuePair> emptyList = Collections.emptyList();
+        final List<NameValuePair> emptyList = Collections.emptyList();
         conn.setResponse(URL_SECOND, xml.getBytes("UTF-8"), 200, "OK", "text/xml", emptyList);
         client.setWebConnection(conn);
 
