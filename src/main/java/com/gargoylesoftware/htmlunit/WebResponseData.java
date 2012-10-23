@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
 import org.apache.commons.io.IOUtils;
@@ -102,7 +103,20 @@ public class WebResponseData implements Serializable {
                 stream = new GZIPInputStream(stream);
             }
             else if (StringUtils.contains(encoding, "deflate")) {
-                stream = new InflaterInputStream(stream);
+                boolean zlibHeader = false;
+                if (stream.markSupported()) { // should be always the case as the content is in a byte[] or in a file
+                    stream.mark(2);
+                    final byte[] buffer = new byte[2];
+                    stream.read(buffer, 0, 2);
+                    zlibHeader = (((buffer[0] & 0xff) << 8) | (buffer[1] & 0xff)) == 0x789c;
+                    stream.reset();
+                }
+                if (zlibHeader) {
+                    stream = new InflaterInputStream(stream);
+                }
+                else {
+                    stream = new InflaterInputStream(stream, new Inflater(true));
+                }
             }
         }
         return stream;

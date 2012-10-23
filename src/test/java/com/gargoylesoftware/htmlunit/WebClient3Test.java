@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.zip.Deflater;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
@@ -409,6 +410,53 @@ public class WebClient3Test extends WebDriverTestCase {
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(new URL(getDefaultUrl() + "a%20b.js"), "alert('hello');", "text/javascript");
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test "deflate" encoding without ZLIB header and checksum fields.
+     * This was failing as of HtmlUnit-2.10.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("modified")
+    public void deflateCompressionGZipCompatible() throws Exception {
+        doTestDeflateCompression(true);
+    }
+
+    /**
+     * Test "deflate" encoding with ZLIB header and checksum fields.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("modified")
+    public void deflateCompressionNonGZipCompatible() throws Exception {
+        doTestDeflateCompression(false);
+    }
+
+    private void doTestDeflateCompression(final boolean gzipCompatibleCompression) throws Exception {
+        final byte[] input = "document.title = 'modified';".getBytes("UTF-8");
+
+        final byte[] buffer = new byte[100];
+        final Deflater deflater = new Deflater(Deflater.DEFAULT_COMPRESSION, gzipCompatibleCompression);
+        deflater.setInput(input);
+        deflater.finish();
+
+        final int compressedDataLength = deflater.deflate(buffer);
+        final byte[] content = new byte[compressedDataLength];
+        System.arraycopy(buffer, 0, content, 0, compressedDataLength);
+
+        final List<NameValuePair> headers = new ArrayList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Encoding", "deflate"));
+        headers.add(new NameValuePair("Content-Length", String.valueOf(compressedDataLength)));
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(URL_SECOND, content, 200, "OK", "text/javascript", headers);
+
+        final String html = "<html><head>"
+            + "<title>Hello world</title>"
+            + "<script src='" + URL_SECOND + "'></script>"
+            + "</head><body><script>alert(document.title)</script></body></html>";
         loadPageWithAlerts2(html);
     }
 }
