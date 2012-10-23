@@ -58,8 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *     pre.innerHTML = pre.innerHTML.replace('BROWSER', browser);
  * </script>
  * However, note that the constants are not enough to fully customize the browser,
- *   you also need to look into the {@link BrowserVersionFeatures}, and the
- *   <a href="http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/src/main/resources/com/gargoylesoftware/htmlunit/javascript/configuration/JavaScriptConfiguration.xml?view=markup">JavaScriptConfiguration.xml</a>
+ *   you also need to look into the {@link BrowserVersionFeatures} and the classes inside "javascript" package.
  *
  * @version $Revision$
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>

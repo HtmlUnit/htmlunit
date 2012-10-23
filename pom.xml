@@ -385,9 +385,9 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:svn:https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit</connection>
-        <developerConnection>scm:svn:https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit</developerConnection>
-        <url>http://htmlunit.svn.sourceforge.net/viewvc/htmlunit</url>
+        <connection>scm:svn:https://svn.code.sf.net/p/htmlunit/code/trunk/htmlunit</connection>
+        <developerConnection>scm:svn:https://svn.code.sf.net/p/htmlunit/code/trunk/htmlunit</developerConnection>
+        <url>https://sourceforge.net/p/htmlunit/code</url>
     </scm>
     <ciManagement>
         <system>Cruise Control</system>
