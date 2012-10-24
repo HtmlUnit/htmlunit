@@ -19,19 +19,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNURL;
-import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
-import org.tmatesoft.svn.core.wc.ISVNOptions;
-import org.tmatesoft.svn.core.wc.ISVNPropertyHandler;
-import org.tmatesoft.svn.core.wc.SVNPropertyData;
-import org.tmatesoft.svn.core.wc.SVNRevision;
-import org.tmatesoft.svn.core.wc.SVNWCClient;
-import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 import com.gargoylesoftware.htmlunit.javascript.host.PropertiesTest;
 
@@ -74,6 +64,7 @@ public class NotYetImplementedTest {
 
     private void process(final List<String> lines, final String path) {
         int index = 1;
+        String revision = "-1";
         for (final String line : lines) {
             if (line.contains("notYetImplemented()")) {
                 String methodName = null;
@@ -86,7 +77,7 @@ public class NotYetImplementedTest {
                 }
                 final int lineNumber = getLineNumber(lines, index);
                 final String description = getDescription(lines, index);
-                entries_.add(path + ';' + methodName + ';' + lineNumber + ';' + description);
+                entries_.add(path + ';' + revision + ';' + methodName + ';' + lineNumber + ';' + description);
             }
             else if (line.startsWith("    @NotYetImplemented")) {
                 final String browser;
@@ -107,7 +98,11 @@ public class NotYetImplementedTest {
                 }
                 final int lineNumber = getLineNumber(lines, index);
                 final String description = getDescription(lines, index);
-                entries_.add(path + ';' + methodName + ';' + lineNumber + ";" + browser + ';' + description);
+                entries_.add(path + ';' + revision + ';' + methodName + ';' + lineNumber + ";" + browser
+                        + ';' + description);
+            }
+            else if (line.startsWith(" * @version $Revision: ")) {
+                revision = line.substring(" * @version $Revision: ".length(), line.lastIndexOf(' '));
             }
             index++;
         }
@@ -146,7 +141,6 @@ public class NotYetImplementedTest {
     }
 
     private void save() throws Exception {
-        final long revision = getRevision();
         final StringBuilder builder = new StringBuilder();
         builder.append("<html><head></head><body>\n");
         builder.append("NotYetImplemented is a condition in which a test is known to fail with HtmlUnit.");
@@ -157,9 +151,10 @@ public class NotYetImplementedTest {
             final String[] values = entry.split(";");
             final String file = values[0];
             final String fileName = file.substring(file.lastIndexOf('/') + 1, file.length() - 5);
-            final String method = values[1];
-            final String line = values[2];
-            final String browser = values.length > 4 ? values[3] : "";
+            final String revision = values[1];
+            final String method = values[2];
+            final String line = values[3];
+            final String browser = values.length > 5 ? values[4] : "";
             final String description = entry.endsWith(";") ? "&nbsp;"
                     : values[values.length - 1].replace("__semicolon__", ";");
             builder.append("  <tr>\n");
@@ -181,7 +176,7 @@ public class NotYetImplementedTest {
                 lastFile = file;
             }
             builder.append("    <td><a href='https://sourceforge.net/p/htmlunit/code/" + revision
-                    + "/tree/trunk/htmlunit/" + file + "?view=markup#l" + line + "'>").append(method).append("</a> ")
+                    + "/tree/trunk/htmlunit/" + file + "#l" + line + "'>").append(method).append("</a> ")
                     .append(browser).append("</td>\n");
             builder.append("    <td>").append(line).append("</td>\n");
             builder.append("    <td>").append(description).append("</td>\n");
@@ -192,26 +187,4 @@ public class NotYetImplementedTest {
                 builder.toString());
     }
 
-    private long getRevision() throws Exception {
-        final ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-        final ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
-        final SVNWCClient svnWCClient = new SVNWCClient(authManager, options);
-        final AtomicLong value = new AtomicLong();
-        svnWCClient.doGetRevisionProperty(new File("."), null, SVNRevision.BASE, new ISVNPropertyHandler() {
-
-            @Override
-            public void handleProperty(final File path, final SVNPropertyData property) throws SVNException {
-            }
-
-            @Override
-            public void handleProperty(final SVNURL url, final SVNPropertyData property) throws SVNException {
-            }
-
-            @Override
-            public void handleProperty(final long revision, final SVNPropertyData property) throws SVNException {
-                value.set(revision);
-            }
-        });
-        return value.get();
-    }
 }
