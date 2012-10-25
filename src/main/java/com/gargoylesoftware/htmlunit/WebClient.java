@@ -52,6 +52,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
+import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
 import org.w3c.css.sac.ErrorHandler;
 
@@ -168,6 +169,9 @@ public class WebClient implements Serializable {
 
     private WebClientOptions options_ = new WebClientOptions();
     private final StorageHolder storageHolder_ = new StorageHolder();
+
+    private static final WebResponseData responseDataNoHttpResponse_ = new WebResponseData(
+        0, "No HTTP Response", Collections.<NameValuePair>emptyList());
 
     /**
      * Creates a web client instance using the browser version returned by
@@ -1476,7 +1480,12 @@ public class WebClient implements Serializable {
             webResponse = new WebResponseFromCache((WebResponse) fromCache, webRequest);
         }
         else {
-            webResponse = getWebConnection().getResponse(webRequest);
+            try {
+                webResponse = getWebConnection().getResponse(webRequest);
+            }
+            catch (final NoHttpResponseException e) {
+                return new WebResponse(responseDataNoHttpResponse_, webRequest, 0);
+            }
             getCache().cacheIfPossible(webRequest, webResponse, webResponse);
         }
 
@@ -2194,11 +2203,10 @@ public class WebClient implements Serializable {
                 final WebRequest otherRequest = loadJob.response_.getWebRequest();
                 final URL otherUrl = otherRequest.getUrl();
                 // TODO: investigate but it seems that IE considers query string too but not FF
-                if (url.getPath().equals(otherUrl.getPath())
-                    && url.getHost().equals(otherUrl.getHost())
-                    && url.getProtocol().equals(otherUrl.getProtocol())
-                    && url.getPort() == otherUrl.getPort()
-                    && request.getHttpMethod() == otherRequest.getHttpMethod()) {
+                if (url.getPath().equals(otherUrl.getPath()) // fail fast
+                    && url.toString().equals(otherUrl.toString())
+                    && request.getRequestParameters().equals(otherRequest.getRequestParameters())
+                    && StringUtils.equals(request.getRequestBody(), otherRequest.getRequestBody())) {
                     return; // skip it;
                 }
             }
@@ -2211,6 +2219,9 @@ public class WebClient implements Serializable {
         else {
             try {
                 final WebResponse response = loadWebResponse(request);
+                // check and report problems if needed
+                throwFailingHttpStatusCodeExceptionIfNecessary(response);
+
                 loadJob = new LoadJob(requestingWindow, target, response);
             }
             catch (final IOException e) {
@@ -2276,9 +2287,6 @@ public class WebClient implements Serializable {
                     if (scriptEngine_ != null) {
                         scriptEngine_.registerWindowAndMaybeStartEventLoop(win);
                     }
-
-                    // check and report problems if needed
-                    throwFailingHttpStatusCodeExceptionIfNecessary(downloadedResponse.response_);
 
                     if (pageBeforeLoad != win.getEnclosedPage()) {
                         updatedWindows.add(win);
