@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public abstract class HtmlInput extends HtmlElement implements DisabledElement, SubmittableElement,
     FormFieldWithNameHistory {
@@ -356,8 +357,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @see HtmlFileInput#setDefaultValue(String)
      */
     public void setDefaultValue(final String defaultValue) {
-        final boolean modifyValue = getPage().getWebClient().getBrowserVersion()
-            .hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED);
+        final boolean modifyValue = hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED);
         setDefaultValue(defaultValue, modifyValue);
     }
 

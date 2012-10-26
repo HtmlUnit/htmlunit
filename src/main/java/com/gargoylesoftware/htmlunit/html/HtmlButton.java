@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Dmitri Zoubkov
+ * @author Ronald Brill
  */
 public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement, FormFieldWithNameHistory {
 
@@ -203,7 +204,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     public final String getTypeAttribute() {
         String type = getAttribute("type");
         if (type == DomElement.ATTRIBUTE_NOT_DEFINED) {
-            if (getPage().getWebClient().getBrowserVersion().hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
+            if (hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
                 type = "button";
             }
             else {

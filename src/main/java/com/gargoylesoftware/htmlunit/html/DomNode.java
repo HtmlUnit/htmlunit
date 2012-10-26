@@ -45,6 +45,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.UserDataHandler;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -433,8 +434,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public void normalize() {
         for (DomNode child = getFirstChild(); child != null; child = child.getNextSibling()) {
             if (child instanceof DomText) {
-                final boolean removeChildTextNodes = getPage().getWebClient().getBrowserVersion()
-                    .hasFeature(DOM_NORMALIZE_REMOVE_CHILDREN);
+                final boolean removeChildTextNodes = hasFeature(DOM_NORMALIZE_REMOVE_CHILDREN);
                 final StringBuilder dataBuilder = new StringBuilder();
                 DomNode toRemove = child;
                 DomText firstText = null;
@@ -694,8 +694,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
             // visibility: iterate bottom to top, because children can override
             // the visibility used by parent nodes
-            final boolean collapseInvisible = ((HtmlPage) page).getWebClient().getBrowserVersion()
-                .hasFeature(DISPLAYED_COLLAPSE);
+            final boolean collapseInvisible = hasFeature(DISPLAYED_COLLAPSE);
             DomNode node = this;
             do {
                 final ScriptableObject scriptableObject = node.getScriptObject();
@@ -1606,5 +1605,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void processImportNode(final com.gargoylesoftware.htmlunit.javascript.host.Document doc) {
         // empty default impl
+    }
+
+    /**
+     * Helper for a common call sequence.
+     * @param feature the feature to check
+     * @return <code>true</code> if the currently emulated browser has this feature.
+     */
+    protected boolean hasFeature(final BrowserVersionFeatures feature) {
+        return getPage().getWebClient().getBrowserVersion().hasFeature(feature);
     }
 }

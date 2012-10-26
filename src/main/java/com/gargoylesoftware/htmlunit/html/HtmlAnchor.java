@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Dmitri Zoubkov
+ * @author Ronald Brill
  */
 public class HtmlAnchor extends HtmlElement {
 
@@ -102,8 +103,7 @@ public class HtmlAnchor extends HtmlElement {
         URL url = page.getFullyQualifiedUrl(href);
         // fix for empty url
         if (StringUtils.isEmpty(href)) {
-            final boolean dropFilename = page.getWebClient().getBrowserVersion().
-                                    hasFeature(ANCHOR_EMPTY_HREF_NO_FILENAME);
+            final boolean dropFilename = hasFeature(ANCHOR_EMPTY_HREF_NO_FILENAME);
             if (dropFilename) {
                 String path = url.getPath();
                 path = path.substring(0, path.lastIndexOf('/') + 1);

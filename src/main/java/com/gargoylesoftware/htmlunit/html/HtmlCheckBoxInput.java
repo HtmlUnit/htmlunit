@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Mike Bresnahan
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlCheckBoxInput extends HtmlInput {
 
@@ -87,7 +88,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
             removeAttribute("checked");
         }
 
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
+        if (hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
             return getPage();
         }
         return executeOnChangeHandlerIfAppropriate(this);
@@ -125,7 +126,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     @Override
     protected void doClickFireChangeEvent() throws IOException {
-        if (!getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
+        if (!hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
             executeOnChangeHandlerIfAppropriate(this);
         }
     }
@@ -165,7 +166,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
     @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         defaultCheckedState_ = defaultChecked;
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED)) {
+        if (hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED)) {
             setChecked(defaultChecked);
         }
     }
@@ -195,8 +196,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
     void removeFocus() {
         super.removeFocus();
 
-        final boolean fireOnChange =
-                getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCHANGE_LOSING_FOCUS);
+        final boolean fireOnChange = hasFeature(EVENT_ONCHANGE_LOSING_FOCUS);
         if (fireOnChange && valueAtFocus_ != isChecked()) {
             executeOnChangeHandlerIfAppropriate(this);
         }

@@ -166,7 +166,7 @@ public abstract class HtmlElement extends DomElement {
             fireHtmlAttributeReplaced(htmlEvent);
             ((HtmlPage) getPage()).fireHtmlAttributeReplaced(htmlEvent);
         }
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_PROPERTY_CHANGE)) {
+        if (hasFeature(EVENT_PROPERTY_CHANGE)) {
             fireEvent(Event.createPropertyChangeEvent(this, qualifiedName));
         }
     }
