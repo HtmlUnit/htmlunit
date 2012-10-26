@@ -1258,7 +1258,7 @@ public abstract class HtmlElement extends DomElement {
     protected boolean doClickStateUpdate() throws IOException {
         final DomNode parent = getParentNode();
 
-        // needed for instance to perform link doClickActoin when a nested element is clicked
+        // needed for instance to perform link doClickAction when a nested element is clicked
         // it should probably be changed to do this at the event level but currently
         // this wouldn't work with JS disabled as events are propagated in the host object tree.
         if (parent instanceof HtmlElement) {
