@@ -512,6 +512,7 @@ public class Location2Test extends WebDriverTestCase {
             + " }\n"
             + " window.onhashchange = locationHashChanged;\n"
             + "</script>\n"
+            + "</head>\n"
             + "<body>\n"
             + " <button id='click' onclick='location.hash=1'>change hash</button>\n"
             + "</body></html>";
@@ -519,5 +520,52 @@ public class Location2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("click")).click();
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testLocationAfterOpenClosePopup() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "  <title>test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var win = window.open('" + URL_SECOND.toExternalForm() + "','test','',true);\n"
+            + "      win.close();\n"
+            + "      location.href = 'test.html';\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <button id='click' onclick='test()'>Test</button>\n"
+            + "</body>\n"
+            + "</html>";
+        final String popup =
+                "<html>\n"
+              + "<head>\n"
+              + "  <title>popup with script</title>\n"
+              + "  <script>\n"
+              + "    alert('the root of all evil');\n"
+              + "  </script>\n"
+              + "</head>\n"
+              + "<body>Popup</body>\n"
+              + "</html>";
+        final String target =
+              "<html>\n"
+            + "<head>\n"
+            + "  <title>target</title>\n"
+            + "</head>\n"
+            + "<body>Target</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, popup);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "test.html"), target);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("click")).click();
+        assertEquals(new URL(URL_FIRST, "test.html").toExternalForm(), driver.getCurrentUrl());
     }
 }
