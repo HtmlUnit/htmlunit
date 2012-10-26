@@ -26,7 +26,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -1770,8 +1769,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * <p>Additionally, whenever a <tt>style</tt> node or a <tt>link</tt> node with <tt>rel=stylesheet</tt> is added or
      * removed, all elements should be removed from the computed style cache.</p>
      */
-    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener,
-        Serializable {
+    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
 
         /**
          * {@inheritDoc}
