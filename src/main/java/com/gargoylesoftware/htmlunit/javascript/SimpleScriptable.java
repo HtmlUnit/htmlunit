@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_IN_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SET_READONLY_PROPERTIES;
 
 import java.lang.reflect.Method;
+import java.util.Stack;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
@@ -323,7 +324,12 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      * or {@link JavaScriptEngine#execute}.
      */
     protected Scriptable getStartingScope() {
-        return (Scriptable) Context.getCurrentContext().getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+        final Stack<Scriptable> stack =
+                (Stack<Scriptable>) Context.getCurrentContext().getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+        if (null == stack) {
+            return null;
+        }
+        return stack.peek();
     }
 
     /**

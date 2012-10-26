@@ -36,6 +36,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 import java.util.Map.Entry;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -544,12 +545,27 @@ public class XMLHttpRequest extends SimpleScriptable {
         }
         else {
             // Create and start a thread in which to execute the request.
-            final Object startingScope = getWindow();
+            final Scriptable startingScope = getWindow();
             final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
             final ContextAction action = new ContextAction() {
                 public Object run(final Context cx) {
-                    cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, startingScope);
-                    doSend(cx);
+                    synchronized (cx) {
+                        Stack<Scriptable> stack =
+                                (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+                        if (null == stack) {
+                            stack = new Stack<Scriptable>();
+                            cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, stack);
+                        }
+                        stack.push(startingScope);
+                    }
+                    try {
+                        doSend(cx);
+                    }
+                    finally {
+                        final Stack<Scriptable> stack =
+                                (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+                        stack.pop();
+                    }
                     return null;
                 }
             };

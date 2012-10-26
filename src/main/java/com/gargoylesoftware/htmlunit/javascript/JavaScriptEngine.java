@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 import java.util.Map.Entry;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -604,14 +605,27 @@ public class JavaScriptEngine {
             javaScriptRunning_.set(Boolean.TRUE);
 
             try {
-                cx.putThreadLocal(KEY_STARTING_SCOPE, scope_);
-                cx.putThreadLocal(KEY_STARTING_PAGE, htmlPage_);
-                final Object response;
-                synchronized (htmlPage_) { // 2 scripts can't be executed in parallel for one page
-                    if (htmlPage_ != htmlPage_.getEnclosingWindow().getEnclosedPage()) {
-                        return null; // page has been unloaded
+                synchronized (cx) {
+                    Stack<Scriptable> stack = (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+                    if (null == stack) {
+                        stack = new Stack<Scriptable>();
+                        cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
                     }
-                    response = doRun(cx);
+                    stack.push(scope_);
+                }
+                final Object response;
+                try {
+                    cx.putThreadLocal(KEY_STARTING_PAGE, htmlPage_);
+                    synchronized (htmlPage_) { // 2 scripts can't be executed in parallel for one page
+                        if (htmlPage_ != htmlPage_.getEnclosingWindow().getEnclosedPage()) {
+                            return null; // page has been unloaded
+                        }
+                        response = doRun(cx);
+                    }
+                }
+                finally {
+                    final Stack<Scriptable> stack = (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+                    stack.pop();
                 }
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks
