@@ -954,17 +954,16 @@ class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
                     }
                     return true;
                 }
-                else {
-                    final XMLStringBuffer buffer = new XMLStringBuffer();
-                    int ch;
-                    while ((ch = read()) != -1) {
-                        buffer.append((char) ch);
-                        if (buffer.toString().endsWith("<![endif]>")) {
-                            final XMLStringBuffer trimmedBuffer
-                                = new XMLStringBuffer(buffer.ch, 0, buffer.length - 3);
-                            fDocumentHandler.comment(trimmedBuffer, locationAugs());
-                            return true;
-                        }
+
+                final XMLStringBuffer buffer = new XMLStringBuffer();
+                int ch;
+                while ((ch = read()) != -1) {
+                    buffer.append((char) ch);
+                    if (buffer.toString().endsWith("<![endif]>")) {
+                        final XMLStringBuffer trimmedBuffer
+                            = new XMLStringBuffer(buffer.ch, 0, buffer.length - 3);
+                        fDocumentHandler.comment(trimmedBuffer, locationAugs());
+                        return true;
                     }
                 }
             }
