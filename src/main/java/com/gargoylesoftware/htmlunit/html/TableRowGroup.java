@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public abstract class TableRowGroup extends HtmlElement {
 
@@ -45,8 +46,7 @@ public abstract class TableRowGroup extends HtmlElement {
     protected TableRowGroup(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-        final boolean invalidAlign = getPage().getWebClient().getBrowserVersion()
-            .hasFeature(HTMLELEMENT_ALIGN_INVALID);
+        final boolean invalidAlign = hasFeature(HTMLELEMENT_ALIGN_INVALID);
         if (invalidAlign && !hasAttribute("align")) {
             setAttribute("align", "left");
         }

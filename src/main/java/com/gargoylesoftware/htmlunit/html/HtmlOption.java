@@ -172,7 +172,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      *         when emulating IE)
      */
     public final boolean isDisabled() {
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(HTMLOPTION_PREVENT_DISABLED)) {
+        if (hasFeature(HTMLOPTION_PREVENT_DISABLED)) {
             return false;
         }
         return hasAttribute("disabled");
@@ -259,8 +259,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     @Override
     protected ScriptResult doClickFireClickEvent(final Event event) throws IOException {
         final ScriptResult scriptResult = super.doClickFireClickEvent(event);
-        final boolean triggerClickOption = getPage().getWebClient().getBrowserVersion()
-                .hasFeature(EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO);
+        final boolean triggerClickOption = hasFeature(EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO);
         if (!triggerClickOption) {
             return scriptResult;
         }
@@ -315,7 +314,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     public void setText(final String text) {
         if ((text == null || text.isEmpty())
-                && getPage().getWebClient().getBrowserVersion().hasFeature(HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN)) {
+                && hasFeature(HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN)) {
             removeAllChildren();
         }
         else {
@@ -356,6 +355,6 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     @Override
     protected boolean isStateUpdateFirst() {
-        return getPage().getWebClient().getBrowserVersion().hasFeature(GENERATED_103);
+        return hasFeature(GENERATED_103);
     }
 }

@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author David D. Kilzer
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
 
@@ -58,7 +59,7 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
      *         when emulating IE)
      */
     public final boolean isDisabled() {
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(HTMLOPTIONGROUP_NO_DISABLED)) {
+        if (hasFeature(HTMLOPTIONGROUP_NO_DISABLED)) {
             return false;
         }
         return hasAttribute("disabled");

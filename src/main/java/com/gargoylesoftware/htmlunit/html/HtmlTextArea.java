@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Amit Khanna
+ * @author Ronald Brill
  */
 public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement, SelectableTextInput,
     FormFieldWithNameHistory {
@@ -177,7 +178,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         }
 
         // for FF, if value is still default value, change value too
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED)
+        if (hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED)
                 && getText().equals(getDefaultValue())) {
             setTextInternal(defaultValue);
         }

@@ -202,8 +202,7 @@ public class HtmlScript extends HtmlElement {
 
         // special additional processing for the 'src'
         if (namespaceURI == null && "src".equals(qualifiedName)) {
-            final boolean alwaysReexecute = getPage().getWebClient().getBrowserVersion().
-                hasFeature(JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
+            final boolean alwaysReexecute = hasFeature(JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
 
             if (isDirectlyAttachedToPage()) {
                 // always execute if IE;
@@ -249,8 +248,7 @@ public class HtmlScript extends HtmlElement {
         final PostponedAction action = new PostponedAction(getPage()) {
             @Override
             public void execute() {
-                final boolean onReady = getPage().getWebClient().getBrowserVersion()
-                        .hasFeature(JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE);
+                final boolean onReady = hasFeature(JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE);
                 if (onReady) {
                     if (!isDeferred()) {
                         if (SLASH_SLASH_COLON.equals(getSrcAttribute())) {
@@ -306,8 +304,7 @@ public class HtmlScript extends HtmlElement {
             event = event.substring(0, event.length() - 2);
         }
 
-        final boolean supportsEventFor = getPage().getWebClient().getBrowserVersion()
-                .hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT);
+        final boolean supportsEventFor = hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT);
         final String scriptCode = getScriptCode();
         if (supportsEventFor
                 && event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
@@ -420,7 +417,7 @@ public class HtmlScript extends HtmlElement {
     }
 
     private void executeEventIfBrowserHasFeature(final String type, final BrowserVersionFeatures feature) {
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(feature)) {
+        if (hasFeature(feature)) {
             final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
             final Event event = new Event(HtmlScript.this, type);
             script.executeEvent(event);
@@ -531,7 +528,7 @@ public class HtmlScript extends HtmlElement {
      * @param state this script ready state
      */
     protected void setAndExecuteReadyState(final String state) {
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONREADY_STATE_CHANGE)) {
+        if (hasFeature(EVENT_ONREADY_STATE_CHANGE)) {
             setReadyState(state);
             final HTMLScriptElement script = (HTMLScriptElement) getScriptObject();
             final Event event = new Event(this, Event.TYPE_READY_STATE_CHANGE);

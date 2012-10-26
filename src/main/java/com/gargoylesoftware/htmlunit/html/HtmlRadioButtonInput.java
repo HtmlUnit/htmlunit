@@ -107,7 +107,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
             removeAttribute("checked");
         }
 
-        if (changed && !getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
+        if (changed && !hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
             final ScriptResult scriptResult = fireEvent(Event.TYPE_CHANGE);
             if (scriptResult != null) {
                 page = scriptResult.getNewPage();
@@ -144,7 +144,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     @Override
     protected void doClickFireChangeEvent() throws IOException {
-        if (!getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
+        if (!hasFeature(EVENT_ONCHANGE_LOSING_FOCUS)) {
             executeOnChangeHandlerIfAppropriate(this);
         }
     }
@@ -178,7 +178,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         defaultCheckedState_ = defaultChecked;
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED)) {
+        if (hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED)) {
             setChecked(defaultChecked);
         }
     }
@@ -205,8 +205,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     @Override
     protected void onAddedToPage() {
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(
-                HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED)) {
+        if (hasFeature(HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED)) {
             setChecked(isDefaultChecked());
         }
     }
@@ -227,8 +226,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     void removeFocus() {
         super.removeFocus();
 
-        final boolean fireOnChange = getPage().getWebClient().getBrowserVersion()
-            .hasFeature(EVENT_ONCHANGE_LOSING_FOCUS);
+        final boolean fireOnChange = hasFeature(EVENT_ONCHANGE_LOSING_FOCUS);
         if (fireOnChange && valueAtFocus_ != isChecked()) {
             executeOnChangeHandlerIfAppropriate(this);
         }
