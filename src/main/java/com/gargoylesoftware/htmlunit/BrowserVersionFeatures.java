@@ -56,6 +56,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     CAN_INHERIT_CSS_PROPERTY_VALUES,
 
+    /** The status/value update of a control is processed before the click event. */
+    @BrowserFeature(@WebBrowser(IE))
+    CONTROL_UPDATE_DONE_BEFORE_CLICK_EVENT_FIRED,
+
     /** Indicates that the default value for height of elements is 15 instead of 20. */
     @BrowserFeature(@WebBrowser(IE))
     CSS_DEFAULT_ELMENT_HEIGHT_15,
@@ -226,14 +230,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_102,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_103,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_104,
 
     /** Was originally .isIE(). */
@@ -325,9 +321,6 @@ public enum BrowserVersionFeatures {
     GENERATED_161,
 
     /** Was originally .isFirefox(). */
-    GENERATED_162,
-
-    /** Was originally .isFirefox(). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_164,
 
@@ -342,9 +335,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isFirefox(). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_169,
-
-    /** Was originally .isIE(). */
-    GENERATED_17,
 
     /** Was originally .isFirefox(). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -934,9 +924,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_OBJECT_IN_QUIRKS_MODE,
 
-    /** Evaluates to "[object Element]". */
-    JS_OBJECT_PREFIX,
-
     /** Indicates that someObj.offsetParent throws an exception when called on an object that is not yet attached
      *  to the page's DOM.
      */
@@ -1141,6 +1128,14 @@ public enum BrowserVersionFeatures {
     /** Indicates if SVG is supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     SVG,
+
+    /** Throws an exception if the value for column span is less than one. */
+    @BrowserFeature(@WebBrowser(IE))
+    TABLE_COLUMN_SPAN_THROWS_EXCEPTION_IF_LESS_THAN_ONE,
+
+    /** The width column property does not return negative values. */
+    @BrowserFeature(@WebBrowser(IE))
+    TABLE_COLUMN_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES,
 
     /** Indicates that "\n" are replaced by "\r\n" in textarea values. */
     @BrowserFeature(@WebBrowser(IE))

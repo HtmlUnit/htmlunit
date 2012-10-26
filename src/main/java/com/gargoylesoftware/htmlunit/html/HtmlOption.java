@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTROL_UPDATE_DONE_BEFORE_CLICK_EVENT_FIRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_103;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_PREVENT_DISABLED;
 
@@ -355,6 +355,6 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     @Override
     protected boolean isStateUpdateFirst() {
-        return hasFeature(GENERATED_103);
+        return hasFeature(CONTROL_UPDATE_DONE_BEFORE_CLICK_EVENT_FIRED);
     }
 }
