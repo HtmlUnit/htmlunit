@@ -123,6 +123,10 @@ public class HTMLImageElement extends HTMLElement {
     @JsxSetter
     public void setOnload(final Object onloadHandler) {
         setEventHandlerProp("onload", onloadHandler);
+
+        // maybe the onload handler was not called so far
+        final HtmlImage img = (HtmlImage) getDomNodeOrDie();
+        img.doOnLoad();
     }
 
     /**

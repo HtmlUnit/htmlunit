@@ -90,6 +90,36 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
     }
 
     /**
+     * Verifies that if an image is created if the page is already
+     * finished, the onload handler is called.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "1", "2" })
+    public void onLoad_calledWhenImageDownloaded_dynamic_twoSteps() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "  var i = document.createElement('img');\n"
+            + "  i.src = '" + URL_SECOND + "';\n"
+            + "  i.onload = function() {\n"
+            + "    alert(1);\n"
+            + "    var i2 = document.createElement('img');\n"
+            + "    i2.src = '" + URL_THIRD + "';\n"
+            + "    i2.onload = function() {\n"
+            + "      alert(2);\n"
+            + "    };\n"
+            + "  };\n"
+            + "</script></body></html>";
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(URL_SECOND, "foo", "image/png");
+        conn.setResponse(URL_THIRD, "foo", "image/png");
+
+        loadPageWithAlerts(html);
+        assertEquals(URL_THIRD, conn.getLastWebRequest().getUrl());
+    }
+
+    /**
      * Verifies that if an image has an <tt>onload</tt> attribute set from a script, it gets downloaded
      * and the <tt>onload</tt> handler gets invoked.
      * @throws Exception if an error occurs

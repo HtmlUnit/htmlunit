@@ -143,15 +143,16 @@ public class HtmlImage extends HtmlElement {
         if (onloadInvoked_) {
             return;
         }
-        onloadInvoked_ = true;
 
         final WebClient client = page.getWebClient();
         if (!client.getOptions().isJavaScriptEnabled()) {
+            onloadInvoked_ = true;
             return;
         }
 
-        if (hasEventHandlers("onload")) {
-            // An onload handler is defined; we need to download the image and then call the onload handler.
+        if (hasEventHandlers("onload") && getSrcAttribute().length() > 0) {
+            onloadInvoked_ = true;
+            // An onload handler and source are defined; we need to download the image and then call the onload handler.
             boolean ok;
             try {
                 downloadImageIfNeeded();
@@ -178,7 +179,6 @@ public class HtmlImage extends HtmlElement {
                     htmlPage.addAfterLoadAction(action);
                 }
                 else {
-                    // client.getJavaScriptEngine().addPostponedAction(action);
                     scriptObject.executeEvent(event);
                 }
             }
