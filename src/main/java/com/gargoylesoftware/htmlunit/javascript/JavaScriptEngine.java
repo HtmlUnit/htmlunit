@@ -605,14 +605,14 @@ public class JavaScriptEngine {
             javaScriptRunning_.set(Boolean.TRUE);
 
             try {
-                synchronized (cx) {
-                    Stack<Scriptable> stack = (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
-                    if (null == stack) {
-                        stack = new Stack<Scriptable>();
-                        cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
-                    }
-                    stack.push(scope_);
+                // KEY_STARTING_SCOPE maintanes a stack of scopes
+                Stack<Scriptable> stack = (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+                if (null == stack) {
+                    stack = new Stack<Scriptable>();
+                    cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
                 }
+                stack.push(scope_);
+
                 final Object response;
                 try {
                     cx.putThreadLocal(KEY_STARTING_PAGE, htmlPage_);
@@ -624,7 +624,6 @@ public class JavaScriptEngine {
                     }
                 }
                 finally {
-                    final Stack<Scriptable> stack = (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
                     stack.pop();
                 }
                 // doProcessPostponedActions is synchronized

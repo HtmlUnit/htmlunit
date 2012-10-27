@@ -549,21 +549,19 @@ public class XMLHttpRequest extends SimpleScriptable {
             final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
             final ContextAction action = new ContextAction() {
                 public Object run(final Context cx) {
-                    synchronized (cx) {
-                        Stack<Scriptable> stack =
-                                (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
-                        if (null == stack) {
-                            stack = new Stack<Scriptable>();
-                            cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, stack);
-                        }
-                        stack.push(startingScope);
+                    // KEY_STARTING_SCOPE maintanes a stack of scopes
+                    Stack<Scriptable> stack =
+                            (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+                    if (null == stack) {
+                        stack = new Stack<Scriptable>();
+                        cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, stack);
                     }
+                    stack.push(startingScope);
+
                     try {
                         doSend(cx);
                     }
                     finally {
-                        final Stack<Scriptable> stack =
-                                (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
                         stack.pop();
                     }
                     return null;
