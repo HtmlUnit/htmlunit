@@ -822,4 +822,46 @@ public class Window2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     * @see EventTest#firedEvent_equals_original_event()
+     */
+    @Test
+    @Alerts(FF = { "true", "I was here" }, IE = "undefined")
+    @NotYetImplemented(FF)
+    public void firedEvent_equals_original_event() throws Exception {
+        final String html =
+            "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var myEvent;\n"
+            + "  var listener = function(x) {\n"
+            + "    alert(x == myEvent);\n"
+            + "    x.foo = 'I was here'\n"
+            + "  }\n"
+            + "  \n"
+            + "  if (document.createEvent) {\n"
+            + "    window.addEventListener('click', listener, false);\n"
+            + "    myEvent = document.createEvent('HTMLEvents');\n"
+            + "    myEvent.initEvent('click', true, true);\n"
+            + "    window.dispatchEvent(myEvent);\n"
+            + "  }\n"
+            + "  else {\n"
+            + "    //window.attachEvent('onclick', listener);\n"
+            + "    //myEvent = document.createEventObject();\n"
+            + "    //myEvent.eventType = 'onclick';\n"
+            + "    //window.fireEvent(myEvent.eventType, myEvent);\n"
+            + "    alert(window.fireEvent);\n"
+            + "  }\n"
+            + "  if (myEvent)\n"
+            + "    alert(myEvent.foo);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<div id='myDiv'>toti</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
