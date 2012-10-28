@@ -167,7 +167,7 @@ public class MouseEvent extends UIEvent {
     /**
      * Returns the horizontal coordinate of the event relative to whole document..
      * @return the horizontal coordinate (currently the same as {@link #getScreenX()})
-     * @see <a href="http://developer.mozilla.org/en/docs/DOM:event.pageX">Mozilla doc</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/event.pageX">Mozilla doc</a>
      */
     @JsxGetter(@WebBrowser(FF))
     public int getPageX() {
@@ -214,7 +214,7 @@ public class MouseEvent extends UIEvent {
     /**
      * Returns the vertical coordinate of the event relative to the whole document.
      * @return the horizontal coordinate (currently the same as {@link #getScreenY()})
-     * @see <a href="http://developer.mozilla.org/en/docs/DOM:event.pageY">Mozilla doc</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/event.pageY">Mozilla doc</a>
      */
     @JsxGetter(@WebBrowser(FF))
     public int getPageY() {

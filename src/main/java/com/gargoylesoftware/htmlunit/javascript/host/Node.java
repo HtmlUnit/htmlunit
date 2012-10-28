@@ -670,7 +670,7 @@ public class Node extends SimpleScriptable {
      * @param type the event type to listen for (like "click")
      * @param listener the event listener
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture
-     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.addEventListener">Mozilla documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener">Mozilla documentation</a>
      * @see #attachEvent(String, Function)
      */
     @JsxFunction(@WebBrowser(FF))
@@ -705,7 +705,8 @@ public class Node extends SimpleScriptable {
      * @param type the event type to listen for (like "click")
      * @param listener the event listener
      * @param useCapture If <code>true</code>, indicates that the user wishes to initiate capture (not yet implemented)
-     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.removeEventListener">Mozilla documentation</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/element.removeEventListener">Mozilla
+     * documentation</a>
      */
     @JsxFunction(@WebBrowser(FF))
     public void removeEventListener(final String type, final Function listener, final boolean useCapture) {
@@ -1014,7 +1015,7 @@ public class Node extends SimpleScriptable {
 
     /**
      * Returns the attributes of this XML element.
-     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.attributes">Gecko DOM Reference</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.attributes">Gecko DOM Reference</a>
      * @return the attributes of this XML element
      */
     @JsxGetter

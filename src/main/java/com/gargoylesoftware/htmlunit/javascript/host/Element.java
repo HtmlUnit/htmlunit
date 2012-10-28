@@ -98,7 +98,7 @@ public class Element extends EventNode {
 
     /**
      * Returns the attributes of this XML element.
-     * @see <a href="http://developer.mozilla.org/en/docs/DOM:element.attributes">Gecko DOM Reference</a>
+     * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.attributes">Gecko DOM Reference</a>
      * @return the attributes of this XML element
      */
     @Override

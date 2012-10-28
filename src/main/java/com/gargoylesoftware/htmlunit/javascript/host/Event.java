@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 /**
  * JavaScript object representing an event that is passed into event handlers when they are
  * invoked. For general information on which properties and functions should be supported,
- * see <a href="http://developer.mozilla.org/en/docs/DOM:event">the mozilla docs</a>,
+ * see <a href="https://developer.mozilla.org/en-US/docs/DOM/event">the mozilla docs</a>,
  * <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-Event">the W3C DOM
  * Level 2 Event Documentation</a> or <a href="http://msdn2.microsoft.com/en-us/library/aa703876.aspx">IE's
  * IHTMLEventObj interface</a>.
