@@ -53,7 +53,7 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
                 + "  function test() {\n"
                 + "    document.onkeydown = checkEvent;\n"
                 + "    document.onkeyup = checkEvent;\n"
-                + "    document.onkeypress = checkEvent\n"
+                + "    document.onkeypress = checkEvent;\n"
                 + "  }\n"
                 + "\n"
                 + "  function checkEvent(e) {\n"

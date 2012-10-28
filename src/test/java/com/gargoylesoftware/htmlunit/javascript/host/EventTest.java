@@ -458,7 +458,7 @@ public class EventTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  var e = document.getElementById('myDiv');\n"
             + "  \n"
-            + "  var myEvent\n"
+            + "  var myEvent;\n"
             + "  var listener = function(x) { \n"
             + "    alert(x == myEvent);\n"
             + "    x.foo = 'I was here'\n"

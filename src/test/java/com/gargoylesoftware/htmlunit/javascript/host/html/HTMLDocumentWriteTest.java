@@ -265,7 +265,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTheFoo() {\n"
-            + "var d = document.writeln\n"
+            + "var d = document.writeln;\n"
             + "try {\n"
             + "  d('foo')\n"
             + "} catch (e) { alert('exception occurred') }\n"
