@@ -1853,7 +1853,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Dispatches an event into the event system (standards-conformant browsers only). See
-     * <a href="http://developer.mozilla.org/en/docs/DOM:element.dispatchEvent">the Gecko
+     * <a href="https://developer.mozilla.org/en-US/docs/DOM/element.dispatchEvent">the Gecko
      * DOM reference</a> for more information.
      *
      * @param event the event to be dispatched

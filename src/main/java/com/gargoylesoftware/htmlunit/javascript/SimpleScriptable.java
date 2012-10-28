@@ -394,7 +394,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      * Gets the browser version currently used.
      * @return the browser version
      */
-    protected BrowserVersion getBrowserVersion() {
+    public BrowserVersion getBrowserVersion() {
         final DomNode node = getDomNodeOrNull();
         if (node != null) {
             return node.getPage().getWebClient().getBrowserVersion();

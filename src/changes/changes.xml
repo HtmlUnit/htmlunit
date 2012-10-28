@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https, CORS">
+            <action type="add" dev="asashour" issue="1439">
+                JavaScript: implement window.dispatchEvent() (FF only).
+            </action>
             <action type="fix" dev="rbri" issue="1339">
                 JavaScript: Some more fixes for correct calling of the Image onload handler.
             </action>

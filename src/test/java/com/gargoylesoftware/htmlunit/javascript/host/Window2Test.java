@@ -828,7 +828,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "true", "I was here" }, IE = "undefined")
-    @NotYetImplemented(FF)
     public void firedEvent_equals_original_event() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"

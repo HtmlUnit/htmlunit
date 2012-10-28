@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HAND
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_NOT_A_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -1984,6 +1985,22 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         return super.isConst(name);
     }
+
+    /**
+     * Dispatches an event into the event system (standards-conformant browsers only). See
+     * <a href="https://developer.mozilla.org/en-US/docs/DOM/window.dispatchEvent">the Gecko
+     * DOM reference</a> for more information.
+     *
+     * @param event the event to be dispatched
+     * @return <tt>false</tt> if at least one of the event handlers which handled the event
+     *         called <tt>preventDefault</tt>; <tt>true</tt> otherwise
+     */
+    @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    public boolean dispatchEvent(final Event event) {
+        event.setTarget(this);
+        final ScriptResult result = Node.fireEvent(this, event);
+        return !event.isAborted(result);
+    }
 }
 
 class HTMLCollectionFrames extends HTMLCollection {
@@ -2047,4 +2064,5 @@ class HTMLCollectionFrames extends HTMLCollection {
             }
         }
     }
+
 }

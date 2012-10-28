@@ -733,7 +733,17 @@ public class Node extends SimpleScriptable {
      * @return the result
      */
     public ScriptResult fireEvent(final Event event) {
-        final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
+        return fireEvent(this, event);
+    }
+
+    /**
+     * Fires the event on the node with capturing and bubbling phase.
+     * @param scriptable the scriptable to fire the event
+     * @param event the event
+     * @return the result
+     */
+    public static ScriptResult fireEvent(final SimpleScriptable scriptable, final Event event) {
+        final HtmlPage page = (HtmlPage) scriptable.getDomNodeOrDie().getPage();
         final Window window = (Window) page.getEnclosingWindow().getScriptObject();
         final Object[] args = new Object[] {event};
 
@@ -744,7 +754,7 @@ public class Node extends SimpleScriptable {
 
         try {
             // window's listeners
-            final EventListenersContainer windowsListeners = getWindow().getEventListenersContainer();
+            final EventListenersContainer windowsListeners = scriptable.getWindow().getEventListenersContainer();
 
             // capturing phase
             event.setEventPhase(Event.CAPTURING_PHASE);
@@ -753,13 +763,13 @@ public class Node extends SimpleScriptable {
                 return result;
             }
             final List<DomNode> parents = new ArrayList<DomNode>();
-            DomNode node = getDomNodeOrDie();
+            DomNode node = scriptable.getDomNodeOrDie();
             while (node != null) {
                 parents.add(node);
                 node = node.getParentNode();
             }
 
-            final boolean ie = getBrowserVersion().hasFeature(GENERATED_124);
+            final boolean ie = scriptable.getBrowserVersion().hasFeature(GENERATED_124);
             for (int i = parents.size() - 1; i >= 0; i--) {
                 final DomNode curNode = parents.get(i);
                 final Node jsNode = (Node) curNode.getScriptObject();
@@ -784,7 +794,7 @@ public class Node extends SimpleScriptable {
 
             // bubbling phase
             event.setEventPhase(Event.AT_TARGET);
-            node = getDomNodeOrDie();
+            node = scriptable.getDomNodeOrDie();
             while (node != null) {
                 final Node jsNode = (Node) node.getScriptObject();
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
