@@ -364,7 +364,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
     public void locationAfterWrite() throws Exception {
         final String html =
               "<html><head><script>\n"
-            + "function test() { \n"
+            + "function test() {\n"
             + "  alert(document.location);\n"
             + "  document.open();\n"
             + "  document.write('<html><body onload=\"alert(document.location)\"></body></html>');\n"
@@ -384,7 +384,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
     public void newElementsAfterWrite() throws Exception {
         final String html =
               "<html><head><script>\n"
-            + "function test() { \n"
+            + "function test() {\n"
             + "  alert(document.title);\n"
             + "  document.open();\n"
             + "  document.write('<html><head><title>First</title></head>');"

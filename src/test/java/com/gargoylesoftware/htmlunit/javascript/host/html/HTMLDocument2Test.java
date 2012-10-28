@@ -287,7 +287,7 @@ public class HTMLDocument2Test extends SimpleWebTestCase {
             + "        crumbs = cookieSet[x].split('=');\n"
             + "        alert(crumbs[0]);\n"
             + "        alert(crumbs[1]);\n"
-            + "    } \n"
+            + "    }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";

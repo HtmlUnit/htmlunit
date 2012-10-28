@@ -504,7 +504,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                 + "<script>\n"
                 + "function details(_oInput) {\n"
                 + "  alert(_oInput.type + ': '\n"
-                + "  + _oInput.checked + ', ' \n"
+                + "  + _oInput.checked + ', '\n"
                 + "  + _oInput.defaultChecked + ', '\n"
                 + "  + ((String(_oInput.click).indexOf('function') != -1) ? 'function' : 'unknown') + ', '\n"
                 + "  + ((String(_oInput.select).indexOf('function') != -1) ? 'function' : 'unknown') + ', '\n"

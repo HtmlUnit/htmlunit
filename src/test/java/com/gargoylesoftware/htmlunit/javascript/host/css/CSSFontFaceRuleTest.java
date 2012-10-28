@@ -51,7 +51,7 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
             + "  alert(rule);\n"
             + "  alert(rule.type);\n"
             + "  alert(rule.cssText);\n"
-            + "} \n"
+            + "}\n"
             + "catch (e) { alert('exception'); }\n"
             + "</script></body></html>";
 

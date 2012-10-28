@@ -688,7 +688,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     public void javaScriptWrappedInHtmlComments2() throws Exception {
         final String html =
             "<html><head>\n"
-            + "<script><!-- \n"
+            + "<script><!--\n"
             + " alert('1')\n"
             + "--></script>\n"
             + "</head>\n"
@@ -838,7 +838,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final String jsContent
             = "function externalMethod() {\n"
             + "    alert('Got to external method');\n"
-            + "} \n"
+            + "}\n"
             + "externalMethod();\n";
 
         webConnection.setResponse(URL_FIRST, htmlContent);

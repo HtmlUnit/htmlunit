@@ -447,8 +447,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
         final String html =
               "<html><head>\n"
             + "<style>\n"
-            + ".dontDisplay { display: none } \n"
-            + ".hideMe { visibility: hidden } \n"
+            + ".dontDisplay { display: none }\n"
+            + ".hideMe { visibility: hidden }\n"
             + "</style>\n"
             + "<script>\n"
             + "  function test() {\n"

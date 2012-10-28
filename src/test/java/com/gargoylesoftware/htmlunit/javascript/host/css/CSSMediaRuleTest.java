@@ -56,7 +56,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
             + "      alert(mediaList.item(i));\n"
             + "    }\n"
             + "    alert(mediaList.mediaText);\n"
-            + "  } else {  // Internet Explorer \n"
+            + "  } else {// Internet Explorer\n"
             + "    alert('Your browser does not support this example!');\n"
             + "  }\n"
             + "</script>\n"

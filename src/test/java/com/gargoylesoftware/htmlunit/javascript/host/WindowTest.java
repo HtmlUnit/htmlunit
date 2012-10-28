@@ -1866,15 +1866,15 @@ public class WindowTest extends SimpleWebTestCase {
     @Alerts({ "elementValue", "elementValue", "elementValue" })
     public void evalScopeLocal() throws Exception {
         final String html = "<html><body><form id='formtest'><input id='element' value='elementValue'/></form>\n"
-            + "<script> \n"
+            + "<script>\n"
             + "var docPatate = 'patate';\n"
             + "function test() {\n"
-            + " var f = document.forms['formtest']; \n"
-            + " alert(eval(\"document.forms['formtest'].element.value\")); \n"
-            + " alert(f.element.value); \n"
-            + " alert(eval('f.element.value')); \n"
+            + " var f = document.forms['formtest'];\n"
+            + " alert(eval(\"document.forms['formtest'].element.value\"));\n"
+            + " alert(f.element.value);\n"
+            + " alert(eval('f.element.value'));\n"
             + "}\n"
-            + "test(); \n"
+            + "test();\n"
             + "</script>\n"
             + "</body></html>";
 

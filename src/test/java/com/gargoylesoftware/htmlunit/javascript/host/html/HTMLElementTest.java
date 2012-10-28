@@ -793,7 +793,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "function test() {\n"
             + "    var oDiv = document.getElementById('myDiv');\n"
-            + "    for (var i=0; i<oDiv.children.length; i++) \n"
+            + "    for (var i=0; i<oDiv.children.length; i++)\n"
             + "        alert(oDiv.children(i).tagName);\n"
             + "    var oCol = oDiv.children;\n"
             + "    alert(oCol.length);\n"

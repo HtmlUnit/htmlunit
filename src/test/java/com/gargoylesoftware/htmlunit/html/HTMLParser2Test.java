@@ -177,7 +177,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
                 + "         }\n"
                 + "       }\n"
                 + "     }\n"
-                + "   }   \n"
+                + "   }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "\n"

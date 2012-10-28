@@ -2201,7 +2201,7 @@ public class DocumentTest extends SimpleWebTestCase {
     public void activeElement() throws Exception {
         final String html = "<html><head><script>\n"
             + "  alert(document.activeElement);"
-            + "  function test() { \n"
+            + "  function test() {\n"
             + "     alert(document.activeElement.id);\n"
             + "  }\n"
             + "</script></head>\n"
@@ -2223,7 +2223,7 @@ public class DocumentTest extends SimpleWebTestCase {
     public void setActive() throws Exception {
         final String html = "<html><head><script>\n"
             + "  alert(document.activeElement);"
-            + "  function test() { \n"
+            + "  function test() {\n"
             + "     alert(document.activeElement.id);\n"
             + "     document.getElementById('text2').setActive();\n"
             + "     alert(document.activeElement.id);\n"
