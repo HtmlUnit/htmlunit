@@ -15,7 +15,9 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +26,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -154,4 +157,37 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void doubleSubmissionWithRedirect() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "function submitForm(btn) {\n"
+            + "  btn.form.submit();\n"
+            + "  btn.disabled = true;\n"
+            + "}\n"
+            + "</script>"
+            + "<form method='post' action='test'>\n"
+            + "  <input name='text' type='text'>\n"
+            + "  <input name='btn' type='submit' onclick='submitForm(this);'>\n"
+            + "</form>"
+            + "</body></html>";
+
+        final MockWebConnection mockWebConnection = getMockWebConnection();
+
+        final List<NameValuePair> redirectHeaders = Arrays.asList(new NameValuePair("Location", "/nextPage"));
+        mockWebConnection.setResponse(new URL(getDefaultUrl() + "test"), "", 302, "Found", null, redirectHeaders);
+
+        mockWebConnection.setResponse(new URL(getDefaultUrl() + "nextPage"),
+            "<html><head><title>next page</title></head></html>");
+
+        final WebDriver wd = loadPageWithAlerts2(html);
+        final WebElement input = wd.findElement(By.name("btn"));
+        input.click();
+
+        assertEquals("next page", wd.getTitle());
+        assertEquals(3, mockWebConnection.getRequestCount());
+    }
 }

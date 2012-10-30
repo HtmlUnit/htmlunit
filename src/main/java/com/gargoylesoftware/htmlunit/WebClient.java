@@ -2129,8 +2129,11 @@ public class WebClient implements Serializable {
         private final WebResponse response_;
         private final URL urlWithOnlyHashChange_;
         private final WeakReference<Page> originalPage_;
+        private final WebRequest request_;
 
-        LoadJob(final WebWindow requestingWindow, final String target, final WebResponse response) {
+        LoadJob(final WebRequest request, final WebWindow requestingWindow, final String target,
+                final WebResponse response) {
+            request_ = request;
             requestingWindow_ = requestingWindow;
             target_ = target;
             response_ = response;
@@ -2138,7 +2141,9 @@ public class WebClient implements Serializable {
             originalPage_ = new WeakReference<Page>(requestingWindow.getEnclosedPage());
         }
 
-        LoadJob(final WebWindow requestingWindow, final String target, final URL urlWithOnlyHashChange) {
+        LoadJob(final WebRequest request, final WebWindow requestingWindow, final String target,
+                final URL urlWithOnlyHashChange) {
+            request_ = request;
             requestingWindow_ = requestingWindow;
             target_ = target;
             response_ = null;
@@ -2200,7 +2205,7 @@ public class WebClient implements Serializable {
                 if (loadJob.response_ == null) {
                     continue;
                 }
-                final WebRequest otherRequest = loadJob.response_.getWebRequest();
+                final WebRequest otherRequest = loadJob.request_;
                 final URL otherUrl = otherRequest.getUrl();
                 // TODO: investigate but it seems that IE considers query string too but not FF
                 if (url.getPath().equals(otherUrl.getPath()) // fail fast
@@ -2214,7 +2219,7 @@ public class WebClient implements Serializable {
 
         final LoadJob loadJob;
         if (justHashJump) {
-            loadJob = new LoadJob(win, target, url);
+            loadJob = new LoadJob(request, win, target, url);
         }
         else {
             try {
@@ -2222,7 +2227,7 @@ public class WebClient implements Serializable {
                 // check and report problems if needed
                 throwFailingHttpStatusCodeExceptionIfNecessary(response);
 
-                loadJob = new LoadJob(requestingWindow, target, response);
+                loadJob = new LoadJob(request, requestingWindow, target, response);
             }
             catch (final IOException e) {
                 throw new RuntimeException(e);
