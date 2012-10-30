@@ -422,6 +422,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
         private void doService(final HttpServletRequest request, final HttpServletResponse response)
             throws Exception {
             final String url = request.getRequestURL().toString();
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(request.getMethod() + " " + url);
+            }
+
             if (url.endsWith("/favicon.ico")) {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 return;
