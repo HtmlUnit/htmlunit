@@ -379,7 +379,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     protected List<String> getCollectedAlerts(final HtmlPage page) {
         final ScriptResult result = page.executeJavaScript("top.__huCatchedAlerts;");
         final List<String> list = new ArrayList<String>();
-        final Object object = (Object) result.getJavaScriptResult();
+        final Object object = result.getJavaScriptResult();
         if (object != Undefined.instance) {
             final NativeArray arr = (NativeArray) object;
             for (int i = 0; i < arr.getLength(); i++) {
