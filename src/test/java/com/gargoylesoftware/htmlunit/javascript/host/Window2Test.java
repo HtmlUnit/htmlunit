@@ -857,7 +857,26 @@ public class Window2Test extends WebDriverTestCase {
             + "}\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "<div id='myDiv'>toti</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    @NotYetImplemented
+    public void thisStrictEquals() throws Exception {
+        final String html =
+            "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(this === window);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
