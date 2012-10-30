@@ -161,7 +161,10 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
      * @param mark the text
      * @throws IOException if a problem occurs writing the file
      */
-    public void addMark(final String mark) throws IOException {
+    public void addMark(String mark) throws IOException {
+        if (mark != null) {
+            mark = mark.replace("\"", "\\\"");
+        }
         appendToJSFile("tab[tab.length] = \"" + mark + "\";\n");
         LOG.info("--- " + mark + " ---");
     }
