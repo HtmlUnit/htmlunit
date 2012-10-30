@@ -414,9 +414,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                     && selects(browserVersion, cc1.getSecondCondition(), element);
             case Condition.SAC_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
-                //workaround for bug https://sourceforge.net/p/cssparser/bugs/34/
-                //getValue() != null should be removed
-                if (ac1.getSpecified() && ac1.getValue() != null) {
+                if (ac1.getSpecified()) {
                     return element.getAttribute(ac1.getLocalName()).equals(ac1.getValue());
                 }
                 return element.hasAttribute(ac1.getLocalName());
