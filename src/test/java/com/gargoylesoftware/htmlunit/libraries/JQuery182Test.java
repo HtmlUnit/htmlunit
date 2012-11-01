@@ -1041,7 +1041,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("deferred: jQuery.when (0, 34, 34)")
-    @NotYetImplemented
     public void test_102() throws Exception {
         runTest(102);
     }

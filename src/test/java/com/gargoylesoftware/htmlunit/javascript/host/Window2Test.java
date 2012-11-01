@@ -867,7 +867,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @NotYetImplemented
     public void thisStrictEquals() throws Exception {
         final String html =
             "<html><head><title>First</title>\n"
