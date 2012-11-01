@@ -357,8 +357,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     private static final List<String> OUTER_HTML_READONLY =
         Arrays.asList(new String[] {
-            "caption", "col", "colgroup", "frameset", "html",
-            "tbody", "td", "tfoot", "th", "thead", "tr"});
+            "body", "caption", "col", "colgroup", "frameset", "head",
+            "html", "tbody", "td", "tfoot", "th", "thead", "tr"});
 
     /**
      * Returns the value of the "all" property.

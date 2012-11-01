@@ -871,27 +871,36 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "Old = <TD id=innerNode>Old outerHTML</TD>", "exception" },
-            CHROME = { "Old = <td id=\"innerNode\">Old outerHTML</td>", "New = <td>test</td>" },
-            FF = { "Old = <td id=\"innerNode\">Old outerHTML</td>", "New = <td id=\"innerNode\">Old outerHTML</td>" })
-    public void setOuterHTMLAddToReadOnly() throws Exception {
+    @Alerts(IE = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" },
+            DEFAULT = { "-0", "-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9", "-10", "-11" })
+    public void setOuterHTMLToReadOnly() throws Exception {
         final String html =  "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
             + "    function doTest(){\n"
-            + "       var myNode = document.getElementById('myNode');\n"
-            + "       var innerNode = document.getElementById('innerNode');\n"
-            + "       alert('Old = ' + myNode.innerHTML);\n"
-            + "       try {\n"
-            + "           innerNode.outerHTML = '<td>test</td>';\n"
-            + "           alert('New = ' + myNode.innerHTML);\n"
-            + "       } catch(e) {alert('exception'); }\n"
+            + "      var nodeTypes = ['body', 'caption', 'col', 'colgroup', 'head', 'html',\n"
+            + "                       'tbody', 'td', 'tfoot', 'th', 'thead', 'tr'];\n"
+            + "      for (var i = 0; i < nodeTypes.length; i++) {\n"
+            + "        var nodeType = nodeTypes[i];\n"
+            + "        var myNode = document.getElementsByTagName(nodeType)[0];\n"
+            + "        try {\n"
+            + "          myNode.outerHTML = 'test';\n"
+            + "          alert('-' + i);\n"
+            + "        } catch(e) {alert(i); }\n"
+            + "      }\n"
             + "    }\n"
             + "    </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
-            + "    <table><tr id='myNode'><td id='innerNode'>Old outerHTML</td></tr></table>\n"
+            + "    <table>\n"
+            + "      <caption></caption>\n"
+            + "      <colgroup><col></colgroup>\n"
+            + "      <thead><tr><td></td><th></th></tr></thead>\n"
+            + "      <tbody></tbody>\n"
+            + "      <tfoot></tfoot>\n"
+            + "    </table>\n"
+            + "    </table>\n"
             + "</body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
