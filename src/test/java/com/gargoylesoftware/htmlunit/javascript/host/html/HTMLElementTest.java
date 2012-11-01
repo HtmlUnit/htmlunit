@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Sudhan Moghe
  * @author Ethan Glasser-Camp
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class HTMLElementTest extends WebDriverTestCase {
@@ -694,31 +695,352 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Test getting <code>outerHTML</code> of a <code>div</code> (block).
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "Old = <B id=innerNode>Old outerHTML</B>", "New = New cell value" },
-            CHROME = { "Old = <b id=\"innerNode\">Old outerHTML</b>", "New = New  cell value" },
-            FF = { "Old = undefined", "New = <b id=\"innerNode\">Old outerHTML</b>" })
-    public void getSetOuterHTMLSimple() throws Exception {
-        final String html = "<html>\n"
+    @Alerts(IE = { "Outer = <DIV id=myNode>New cell value</DIV>" },
+            CHROME = { "Outer = <div id=\"myNode\">New  cell value</div>" },
+            FF = { "Outer = undefined" })
+    public void getOuterHTMLFromBlock() throws Exception {
+        final String html = createPageForGetOuterHTML("div", "New  cell value", false);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test getting <code>outerHTML</code> of a <code>span</code> (inline).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Outer = <SPAN id=myNode>New cell value</SPAN>" },
+            CHROME = { "Outer = <span id=\"myNode\">New  cell value</span>" },
+            FF = { "Outer = undefined" })
+    public void getOuterHTMLFromInline() throws Exception {
+        final String html = createPageForGetOuterHTML("span", "New  cell value", false);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test getting <code>outerHTML</code> of a <code>br</code> (empty).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Outer = <BR id=myNode>" },
+            CHROME = { "Outer = <br id=\"myNode\">" },
+            FF = { "Outer = undefined" })
+    @NotYetImplemented(IE)
+    public void getOuterHTMLFromEmpty() throws Exception {
+        final String html = createPageForGetOuterHTML("br", "", true);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test getting <code>outerHTML</code> of an unclosed <code>p</code>.<br>
+     * Closing <code>p</code> is optional.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Outer = <P id=myNode>New cell value\n</P>" },
+            CHROME = { "Outer = <p id=\"myNode\">New  cell value\n</p>" },
+            FF = { "Outer = undefined" })
+    public void getOuterHTMLFromUnclosedParagraph() throws Exception {
+        final String html = createPageForGetOuterHTML("p", "New  cell value", true);
+        loadPageWithAlerts2(html);
+    }
+
+    private String createPageForGetOuterHTML(final String nodeTag, final String value, final boolean unclosed) {
+        return "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       var myNode = document.getElementById('myNode');\n"
+                + "       try {\n"
+                + "           alert('Outer = ' + myNode.outerHTML);\n"
+                + "       } catch(e) {alert('exception'); }\n"
+                + "    }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "    <" + nodeTag + " id='myNode'>" + value + (unclosed ? "" : "</" + nodeTag + ">") + "\n"
+                + "</body>\n"
+                + "</html>";
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> of a <code>div</code> (block) to a text.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = New cell value" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    public void setOuterHTMLAddTextToBlock() throws Exception {
+        final String html = createPageForSetOuterHTML("div", "New  cell value");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> of a <code>span</code> (inline) to a text.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = New cell value" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    public void setOuterHTMLAddTextToInline() throws Exception {
+        final String html = createPageForSetOuterHTML("span", "New  cell value");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> of a <code>div</code> (block) to a <code>div</code> (block).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV>test</DIV>" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    public void setOuterHTMLAddBlockToBlock() throws Exception {
+        final String html = createPageForSetOuterHTML("div", "<div>test</div>");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> of a <code>span</code> (inline) to a <code>div</code> (block).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV>test</DIV>" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    public void setOuterHTMLAddBlockToInline() throws Exception {
+        final String html = createPageForSetOuterHTML("span", "<div>test</div>");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> of a <code>span</code> (inline) to a <code>span</code> (inline).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <SPAN>test</SPAN>" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    public void setOuterHTMLAddInlineToInline() throws Exception {
+        final String html = createPageForSetOuterHTML("span", "<span>test</span>");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> of a <code>div</code> (block) to a <code>span</code> (inline).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <SPAN>test</SPAN>" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    public void setOuterHTMLAddInlineToBlock() throws Exception {
+        final String html = createPageForSetOuterHTML("div", "<span>test</span>");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> to a <code>br</code> (empty).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <BR>" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(IE)
+    public void setOuterHTMLAddEmpty() throws Exception {
+        final String html = createPageForSetOuterHTML("div", "<br>");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> to <code>tr</code> (read-only).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <TD id=innerNode>Old outerHTML</TD>", "exception" },
+            CHROME = { "Old = <td id=\"innerNode\">Old outerHTML</td>", "New = <td>test</td>" },
+            FF = { "Old = <td id=\"innerNode\">Old outerHTML</td>", "New = <td id=\"innerNode\">Old outerHTML</td>" })
+    public void setOuterHTMLAddToReadOnly() throws Exception {
+        final String html =  "<html>\n"
             + "<head>\n"
             + "    <title>test</title>\n"
             + "    <script>\n"
             + "    function doTest(){\n"
             + "       var myNode = document.getElementById('myNode');\n"
             + "       var innerNode = document.getElementById('innerNode');\n"
-            + "       alert('Old = ' + innerNode.outerHTML);\n"
-            + "       innerNode.outerHTML = 'New  cell value';\n"
-            + "       alert('New = ' + myNode.innerHTML);\n"
-            + "   }\n"
+            + "       alert('Old = ' + myNode.innerHTML);\n"
+            + "       try {\n"
+            + "           innerNode.outerHTML = '<td>test</td>';\n"
+            + "           alert('New = ' + myNode.innerHTML);\n"
+            + "       } catch(e) {alert('exception'); }\n"
+            + "    }\n"
             + "    </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
-            + "<p id='myNode'><b id='innerNode'>Old outerHTML</b></p>\n"
+            + "    <table><tr id='myNode'><td id='innerNode'>Old outerHTML</td></tr></table>\n"
             + "</body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> of a <code>p</code> to a <code>div</code> (block).<br>
+     * <code>p</code> allows no block elements inside.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(IE)
+    public void setOuterHTMLAddBlockToParagraph() throws Exception {
+        final String html = createPageForSetOuterHTML("p", "<div>test</div>");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> of a <code>p</code> to a <code>p</code>.<br>
+     * A following <code>p</code> closes the one before.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                        "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(IE)
+    public void setOuterHTMLAddParagraphToParagraph() throws Exception {
+        final String html = createPageForSetOuterHTML("p", "<p>test</p>");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> to an unclosed <code>p</code>.<br>
+     * Closing <code>p</code> is optional.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <P>test</P>" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <p>test</p>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    public void setOuterHTMLAddUnclosedParagraph() throws Exception {
+        final String html = createPageForSetOuterHTML("div", "<p>test");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> of an <code>a</code> to an <code>a</code>.<br>
+     * <code>a</code> allows no <code>a</code> inside.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                        "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(IE)
+    public void setOuterHTMLAddAnchorToAnchor() throws Exception {
+        final String html = createPageForSetOuterHTML("a", "<a>test</a>");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> to an XHTML self-closing <code>div</code> (block).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV></DIV>" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    public void setOuterHTMLAddSelfClosingBlock() throws Exception {
+        final String html = createPageForSetOuterHTML("div", "<div/>");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> to two XHTML self-closing <code>div</code> (block).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV></DIV><DIV></DIV>" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div><div></div>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(IE)
+    public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
+        final String html = createPageForSetOuterHTML("div", "<div/><div>");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> to an XHTML self-closing <code>span</code> (inline).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <SPAN></SPAN>" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span></span>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    public void setOuterHTMLAddSelfClosingInline() throws Exception {
+        final String html = createPageForSetOuterHTML("div", "<span/>");
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test setting <code>outerHTML</code> to an XHTML self-closing <code>br</code> (empty).
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <BR>" },
+            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>" },
+            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(IE)
+    public void setOuterHTMLAddSelfClosingEmpty() throws Exception {
+        final String html = createPageForSetOuterHTML("div", "<br/>");
+        loadPageWithAlerts2(html);
+    }
+
+    private String createPageForSetOuterHTML(final String nodeTag, final String newValue) {
+        return "<html>\n"
+            + "<head>\n"
+            + "    <title>test</title>\n"
+            + "    <script>\n"
+            + "    function doTest(){\n"
+            + "       var myNode = document.getElementById('myNode');\n"
+            + "       var innerNode = document.getElementById('innerNode');\n"
+            + "       alert('Old = ' + myNode.innerHTML);\n"
+            + "       try {\n"
+            + "           innerNode.outerHTML = '" + newValue + "';\n"
+            + "           alert('New = ' + myNode.innerHTML);\n"
+            + "       } catch(e) {alert('exception'); }\n"
+            + "    }\n"
+            + "    </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "    <" + nodeTag + " id='myNode'><span id='innerNode'>Old outerHTML</span></" + nodeTag + ">\n"
+            + "</body>\n"
+            + "</html>";
     }
 
     /**
