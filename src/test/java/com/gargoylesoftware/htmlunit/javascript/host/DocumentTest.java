@@ -1718,7 +1718,7 @@ public class DocumentTest extends SimpleWebTestCase {
     @Alerts(FF = { "[object HTMLDocument]", "[object HTMLBodyElement]",
             "true", "true", "true", "false", "true", "false" },
             IE = { "[object]", "[object]", "true", "true", "true", "true", "true", "true" })
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void documentCloneNode() throws Exception {
         final String html = "<html><body id='hello' onload='doTest()'>\n"
                 + "  <script id='jscript'>\n"
