@@ -354,10 +354,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_2,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_21,
 
     /** Was originally .isIE(). */
@@ -661,6 +657,10 @@ public enum BrowserVersionFeatures {
     /** HTMLGenericElement instead of HTMLUnknownElement. */
     @BrowserFeature(@WebBrowser(IE))
     HTML_GENERIC_ELEMENT,
+
+    /** Indicates that for some elements, the empty text after it should be removed. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLPARSER_REMOVE_EMPTY_CONTENT,
 
     /** Indicates that "host" HTTP header should be the first. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })

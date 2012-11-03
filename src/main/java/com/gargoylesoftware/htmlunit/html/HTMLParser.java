@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLPARSER_REMOVE_EMPTY_CONTENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.IGNORE_CONTENTS_OF_INNER_HEAD;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_WAIT_LOAD_BEFORE_BODY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG;
@@ -629,7 +629,7 @@ public final class HTMLParser {
         /** {@inheritDoc} */
         public void characters(final char[] ch, final int start, final int length) throws SAXException {
             if ((characters_ == null || characters_.length() == 0)
-                    && page_.getWebClient().getBrowserVersion().hasFeature(GENERATED_2)
+                    && page_.getWebClient().getBrowserVersion().hasFeature(HTMLPARSER_REMOVE_EMPTY_CONTENT)
                     && StringUtils.isBlank(new String(ch, start, length))) {
 
                 DomNode node = currentNode_.getLastChild();
