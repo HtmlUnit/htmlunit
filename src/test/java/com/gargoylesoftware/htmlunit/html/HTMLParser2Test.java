@@ -219,4 +219,226 @@ public class HTMLParser2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1" },
+            FF = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2" })
+    public void childNodes_p() throws Exception {
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  for (var i = 1; i <= 12; i++) {\n"
+            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<p id='p1'><input> </p>\n"
+            + "<p id='p2'> <input></p>\n"
+            + "<p id='p3'> <input> </p>\n"
+            + "<p id='p4'> <a></a> </p>\n"
+            + "<p id='p5'><a></a> </p>\n"
+            + "<p id='p6'> <a></a></p>\n"
+            + "<p id='p7'> <a href='hi'>there</a> </p>\n"
+            + "<p id='p8'><a href='hi'>there</a> </p>\n"
+            + "<p id='p9'> <a href='hi'>there</a></p>\n"
+            + "<p id='p10'> <a href='hi'></a> </p>\n"
+            + "<p id='p11'><a href='hi'></a> </p>\n"
+            + "<p id='p12'> <a href='hi'></a></p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1", "1" },
+            FF = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2", "3" })
+    public void childNodes_f() throws Exception {
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  for (var i = 1; i <= 13; i++) {\n"
+            + "    alert(document.getElementById('f' + i).childNodes.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form id='f1'><input> </form>\n"
+            + "<form id='f2'> <input></form>\n"
+            + "<form id='f3'> <input> </form>\n"
+            + "<form id='f4'> <a></a> </form>\n"
+            + "<form id='f5'><a></a> </form>\n"
+            + "<form id='f6'> <a></a></form>\n"
+            + "<form id='f7'> <a href='hi'>there</a> </form>\n"
+            + "<form id='f8'><a href='hi'>there</a> </form>\n"
+            + "<form id='f9'> <a href='hi'>there</a></form>\n"
+            + "<form id='f10'> <a href='hi'></a> </form>\n"
+            + "<form id='f11'><a href='hi'></a> </form>\n"
+            + "<form id='f12'> <a href='hi'></a></form>\n"
+            + "<form id='f13'> <div> </div> </form>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_span() throws Exception {
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<p id='p1'> <span></span> </p>\n"
+            + "<p id='p2'><span></span> </p>\n"
+            + "<p id='p3'> <span></span></p>\n"
+            + "<p id='p4'> <span>something</span> </p>\n"
+            + "<p id='p5'><span>something</span> </p>\n"
+            + "<p id='p6'> <span>something</span></p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_strong() throws Exception {
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<p id='p1'> <strong></strong> </p>\n"
+            + "<p id='p2'><strong></strong> </p>\n"
+            + "<p id='p3'> <strong></strong></p>\n"
+            + "<p id='p4'> <strong>something</strong> </p>\n"
+            + "<p id='p5'><strong>something</strong> </p>\n"
+            + "<p id='p6'> <strong>something</strong></p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_i() throws Exception {
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<p id='p1'> <i></i> </p>\n"
+            + "<p id='p2'><i></i> </p>\n"
+            + "<p id='p3'> <i></i></p>\n"
+            + "<p id='p4'> <i>something</i> </p>\n"
+            + "<p id='p5'><i>something</i> </p>\n"
+            + "<p id='p6'> <i>something</i></p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_b() throws Exception {
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<p id='p1'> <b></b> </p>\n"
+            + "<p id='p2'><b></b> </p>\n"
+            + "<p id='p3'> <b></b></p>\n"
+            + "<p id='p4'> <b>something</b> </p>\n"
+            + "<p id='p5'><b>something</b> </p>\n"
+            + "<p id='p6'> <b>something</b></p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_u() throws Exception {
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<p id='p1'> <u></u> </p>\n"
+            + "<p id='p2'><u></u> </p>\n"
+            + "<p id='p3'> <u></u></p>\n"
+            + "<p id='p4'> <u>something</u> </p>\n"
+            + "<p id='p5'><u>something</u> </p>\n"
+            + "<p id='p6'> <u>something</u></p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_font() throws Exception {
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<p id='p1'> <font></font> </p>\n"
+            + "<p id='p2'><font></font> </p>\n"
+            + "<p id='p3'> <font></font></p>\n"
+            + "<p id='p4'> <font>something</font> </p>\n"
+            + "<p id='p5'><font>something</font> </p>\n"
+            + "<p id='p6'> <font>something</font></p>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.11" date="???" description="Bugfixes, Java 6, HtmlPage.getElementById(), .type() special keys, initial WebSocket support, initial SVG support, primitive Geolocation support, SOCKS proxy for https, CORS">
+            <action type="fix" dev="asashour" issue="1451">
+                Properly handle spaces after "strong", "b", "i" and "u" elements.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: node.outerHtml not allowed for body and head nodes.
             </action>

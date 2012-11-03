@@ -658,9 +658,10 @@ public final class HTMLParser {
                 if (node instanceof HtmlInput) {
                     return false;
                 }
-                if (node instanceof HtmlAnchor || node instanceof HtmlSpan || node instanceof HtmlFont) {
-                    final DomNode anchorChild = node.getFirstChild();
-                    if (anchorChild != null) {
+                if (node instanceof HtmlAnchor || node instanceof HtmlSpan || node instanceof HtmlFont
+                        || node instanceof HtmlStrong || node instanceof HtmlBold
+                        || node instanceof HtmlItalic || node instanceof HtmlUnderlined) {
+                    if (node.getFirstChild() != null) {
                         return false;
                     }
                 }
