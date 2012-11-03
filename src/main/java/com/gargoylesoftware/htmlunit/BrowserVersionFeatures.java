@@ -627,6 +627,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLOPTION_UNSELECT_SELECTS_FIRST,
 
+    /** Indicates that for some elements, the empty text after it should be removed. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLPARSER_REMOVE_EMPTY_CONTENT,
+
     /** Set this checked state back to default when added to page (IE). */
     @BrowserFeature(@WebBrowser(IE))
     HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED,
@@ -657,10 +661,6 @@ public enum BrowserVersionFeatures {
     /** HTMLGenericElement instead of HTMLUnknownElement. */
     @BrowserFeature(@WebBrowser(IE))
     HTML_GENERIC_ELEMENT,
-
-    /** Indicates that for some elements, the empty text after it should be removed. */
-    @BrowserFeature(@WebBrowser(IE))
-    HTMLPARSER_REMOVE_EMPTY_CONTENT,
 
     /** Indicates that "host" HTTP header should be the first. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
