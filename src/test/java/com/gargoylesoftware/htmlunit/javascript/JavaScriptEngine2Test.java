@@ -168,4 +168,36 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "[object Window]", "[object Window]", "true",
+                "[object HTMLDocument]", "[object HTMLDocument]", "true" },
+            IE = { "undefined", "exception", "undefined", "exception" })
+    @NotYetImplemented(IE)
+    //TODO: in Rhino-fork, "constructor" should not be PERMANENT
+    public void constructor() throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "alert(window.constructor);\n"
+            + "try {\n"
+            + "  alert(Window);\n"
+            + "  alert(window.constructor === Window);\n"
+            + "} catch (e) {\n"
+            + "  alert('exception');\n"
+            + "}\n"
+            + "alert(document.constructor);\n"
+            + "try {\n"
+            + "  alert(HTMLDocument);\n"
+            + "  alert(document.constructor === HTMLDocument);\n"
+            + "} catch (e) {\n"
+            + "  alert('exception');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

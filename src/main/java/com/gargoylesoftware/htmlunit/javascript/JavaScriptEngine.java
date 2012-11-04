@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_144;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALLOW_CONST_ASSIGNMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CONSTRUCTOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DONT_ENUM_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ECMA5_FUNCTIONS;
@@ -31,8 +32,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 import java.util.Map.Entry;
+import java.util.Stack;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -188,6 +189,12 @@ public class JavaScriptEngine {
         final Map<String, Scriptable> prototypesPerJSName = new HashMap<String, Scriptable>();
         final Window window = new Window();
         context.initStandardObjects(window);
+        if (browserVersion.hasFeature(JS_CONSTRUCTOR)) {
+            defineConstructor(window, window, new Window());
+        }
+        else {
+            deleteProperties(window, "constructor");
+        }
 
         // remove some objects, that Rhino defines in top scope but that we don't want
         deleteProperties(window, "javax", "org", "com", "edu", "net", "JavaAdapter", "JavaImporter", "Continuation");
@@ -250,13 +257,23 @@ public class JavaScriptEngine {
 
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final Method jsConstructor = config.getJsConstructor();
-            if (jsConstructor != null) {
-                final String jsClassName = config.getHostClass().getSimpleName();
-                final Scriptable prototype = prototypesPerJSName.get(jsClassName);
-                if (prototype != null) {
+            final String jsClassName = config.getHostClass().getSimpleName();
+            final ScriptableObject prototype = (ScriptableObject) prototypesPerJSName.get(jsClassName);
+            if (prototype != null) {
+                if (jsConstructor != null) {
                     final FunctionObject functionObject = new FunctionObject(jsClassName, jsConstructor, window);
                     functionObject.addAsConstructor(window, prototype);
                     configureConstants(config, functionObject);
+                }
+                else {
+                    if (browserVersion.hasFeature(JS_CONSTRUCTOR)) {
+                        final Class<?> jsHostClass = config.getHostClass();
+                        final ScriptableObject constructor = (ScriptableObject) jsHostClass.newInstance();
+                        defineConstructor(window, prototype, constructor);
+                    }
+                    else {
+                        deleteProperties(prototype, "constructor");
+                    }
                 }
             }
         }
@@ -307,6 +324,13 @@ public class JavaScriptEngine {
         window.initialize(webWindow);
     }
 
+    private void defineConstructor(final Window window, final Scriptable prototype, final ScriptableObject constructor) {
+        constructor.setParentScope(window);
+        ScriptableObject.defineProperty(prototype, "constructor", constructor,
+                ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
+        window.defineProperty(constructor.getClassName(), constructor, ScriptableObject.DONTENUM);
+    }
+
     private void makeConstWritable(final ScriptableObject scope, final String... constNames) {
         for (final String name : constNames) {
             final Object value = ScriptableObject.getProperty(scope, name);
@@ -318,12 +342,12 @@ public class JavaScriptEngine {
 
     /**
      * Deletes the properties with the provided names.
-     * @param window the scope from which properties have to be removed
+     * @param scope the scope from which properties have to be removed
      * @param propertiesToDelete the list of property names
      */
-    private void deleteProperties(final Window window, final String... propertiesToDelete) {
+    private void deleteProperties(final ScriptableObject scope, final String... propertiesToDelete) {
         for (final String property : propertiesToDelete) {
-            window.delete(property);
+            scope.delete(property);
         }
     }
 

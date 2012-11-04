@@ -756,6 +756,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_CLONE_NODE_COPIES_EVENT_LISTENERS,
 
+    /** Indicates that "constructor" propery is defined, e.g. <tt>document.constructor</tt>. */
+    @BrowserFeature(@WebBrowser(FF))
+    JS_CONSTRUCTOR,
+
     /** */
     @BrowserFeature(@WebBrowser(IE))
     JS_DEFERRED,
