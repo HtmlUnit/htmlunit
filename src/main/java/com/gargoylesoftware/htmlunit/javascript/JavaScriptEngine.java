@@ -186,7 +186,7 @@ public class JavaScriptEngine {
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
         final Map<Class<? extends SimpleScriptable>, Scriptable> prototypes =
             new HashMap<Class<? extends SimpleScriptable>, Scriptable>();
-        final Map<String, Scriptable> prototypesPerJSName = new HashMap<String, Scriptable>();
+        final Map<String, ScriptableObject> prototypesPerJSName = new HashMap<String, ScriptableObject>();
         final Window window = new Window();
         context.initStandardObjects(window);
         if (browserVersion.hasFeature(JS_CONSTRUCTOR)) {
@@ -239,7 +239,7 @@ public class JavaScriptEngine {
 
         // once all prototypes have been build, it's possible to configure the chains
         final Scriptable objectPrototype = ScriptableObject.getObjectPrototype(window);
-        for (final Map.Entry<String, Scriptable> entry : prototypesPerJSName.entrySet()) {
+        for (final Map.Entry<String, ScriptableObject> entry : prototypesPerJSName.entrySet()) {
             final String name = entry.getKey();
             final ClassConfiguration config = jsConfig_.getClassConfiguration(name);
             Scriptable prototype = entry.getValue();
@@ -258,7 +258,7 @@ public class JavaScriptEngine {
         for (final ClassConfiguration config : jsConfig_.getAll()) {
             final Method jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getHostClass().getSimpleName();
-            final ScriptableObject prototype = (ScriptableObject) prototypesPerJSName.get(jsClassName);
+            final ScriptableObject prototype = prototypesPerJSName.get(jsClassName);
             if (prototype != null) {
                 if (jsConstructor != null) {
                     final FunctionObject functionObject = new FunctionObject(jsClassName, jsConstructor, window);
