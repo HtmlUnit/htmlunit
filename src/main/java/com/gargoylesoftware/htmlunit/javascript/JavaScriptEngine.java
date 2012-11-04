@@ -605,7 +605,8 @@ public class JavaScriptEngine {
             javaScriptRunning_.set(Boolean.TRUE);
 
             try {
-                // KEY_STARTING_SCOPE maintanes a stack of scopes
+                // KEY_STARTING_SCOPE maintains a stack of scopes
+                @SuppressWarnings("unchecked")
                 Stack<Scriptable> stack = (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
                 if (null == stack) {
                     stack = new Stack<Scriptable>();

@@ -549,7 +549,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             final ContextFactory cf = client.getJavaScriptEngine().getContextFactory();
             final ContextAction action = new ContextAction() {
                 public Object run(final Context cx) {
-                    // KEY_STARTING_SCOPE maintanes a stack of scopes
+                    // KEY_STARTING_SCOPE maintains a stack of scopes
+                    @SuppressWarnings("unchecked")
                     Stack<Scriptable> stack =
                             (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
                     if (null == stack) {

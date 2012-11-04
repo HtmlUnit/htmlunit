@@ -324,6 +324,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
      * or {@link JavaScriptEngine#execute}.
      */
     protected Scriptable getStartingScope() {
+        @SuppressWarnings("unchecked")
         final Stack<Scriptable> stack =
                 (Stack<Scriptable>) Context.getCurrentContext().getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
         if (null == stack) {
