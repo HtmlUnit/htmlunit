@@ -141,7 +141,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "java: undefined", "getClass: undefined" },
-            FF10 = { "java: function", "getClass: undefined" },//FF 16 gives 'undefined' for both
+            FF10 = { "java: function", "getClass: undefined" }, //FF 16 gives 'undefined' for both
             IE = { "java: undefined", "getClass: undefined" })
     @NotYetImplemented(FF10)
     public void rhino_lazilyNames2() throws Exception {
