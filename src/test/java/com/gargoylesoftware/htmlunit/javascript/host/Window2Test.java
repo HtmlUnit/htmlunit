@@ -156,7 +156,9 @@ public class Window2Test extends WebDriverTestCase {
     @NotYetImplemented(FF)
     @Alerts(FF3_6 = { "Packages: object", "XML: function", "XMLList: function",
                     "Namespace: function", "QName: function" },
-            FF = { "Packages: function", "XML: function", "XMLList: function",
+            FF10 = { "Packages: function", "XML: function", "XMLList: function",
+                            "Namespace: function", "QName: function" },
+            FF = { "Packages: undefined", "XML: function", "XMLList: function",
                             "Namespace: function", "QName: function" },
             IE = { "Packages: undefined", "XML: undefined", "XMLList: undefined",
             "Namespace: undefined", "QName: undefined" })
