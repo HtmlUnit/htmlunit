@@ -200,4 +200,45 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void packages() throws Exception {
+        object("Packages");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void java() throws Exception {
+        object("java");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void object_getClass() throws Exception {
+        object("window.getClass");
+    }
+
+    private void object(final String object) throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  alert(" + object + ");\n"
+            + "} catch (e) {\n"
+            + "  alert('exception');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

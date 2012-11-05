@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_144;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALLOW_CONST_ASSIGNMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CONSTRUCTOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
@@ -23,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ECMA5_FUNC
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_BIND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_TRIM;
 
 import java.io.IOException;
@@ -197,9 +197,10 @@ public class JavaScriptEngine {
         }
 
         // remove some objects, that Rhino defines in top scope but that we don't want
-        deleteProperties(window, "javax", "org", "com", "edu", "net", "JavaAdapter", "JavaImporter", "Continuation");
-        if (browserVersion.hasFeature(GENERATED_144)) {
-            deleteProperties(window, "Packages", "java", "getClass", "XML", "XMLList", "Namespace", "QName");
+        deleteProperties(window, "java", "javax", "org", "com", "edu", "net",
+                "JavaAdapter", "JavaImporter", "Continuation", "Packages", "getClass");
+        if (!browserVersion.hasFeature(JS_XML)) {
+            deleteProperties(window, "XML", "XMLList", "Namespace", "QName");
         }
 
         // put custom object to be called as very last prototype to call the fallback getter (if any)

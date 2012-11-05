@@ -290,10 +290,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_144,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_150,
 
     /** Was originally .isFirefox(). */
@@ -1037,6 +1033,10 @@ public enum BrowserVersionFeatures {
     /** Window property not usable as function. */
     @BrowserFeature(@WebBrowser(IE))
     JS_WINDOW_IS_NOT_A_FUNCTION,
+
+    /** Supports XML. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    JS_XML,
 
     /** Indicates that a xml attribute supports the text property. */
     @BrowserFeature(@WebBrowser(IE))
