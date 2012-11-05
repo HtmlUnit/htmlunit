@@ -995,7 +995,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div><div></div>" },
             FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(IE)
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
         loadPageWithAlerts2(html);

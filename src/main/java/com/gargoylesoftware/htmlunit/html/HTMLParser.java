@@ -151,6 +151,7 @@ public final class HTMLParser {
             ancestors.add(1, new QName(null, "body", null, null));
         }
 
+        domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);
         domBuilder.setProperty(HTMLTagBalancer.FRAGMENT_CONTEXT_STACK, ancestors.toArray(new QName[] {}));
 
         final XMLInputSource in = new XMLInputSource(null, url.toString(), null, new StringReader(source), null);
@@ -257,7 +258,7 @@ public final class HTMLParser {
     private static void addBodyToPageIfNecessary(
             final HtmlPage page, final boolean originalCall, final boolean checkInsideFrameOnly) {
         // IE waits for the whole page to load before initializing bodies for frames.
-        final boolean waitToLoad = page.getWebClient().getBrowserVersion().hasFeature(PAGE_WAIT_LOAD_BEFORE_BODY);
+        final boolean waitToLoad = page.hasFeature(PAGE_WAIT_LOAD_BEFORE_BODY);
         if (page.getEnclosingWindow() instanceof FrameWindow && originalCall && waitToLoad) {
             return;
         }
@@ -341,7 +342,7 @@ public final class HTMLParser {
             || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
 
             if (SVG_NAMESPACE.equals(namespaceURI)
-                    && page.getWebClient().getBrowserVersion().hasFeature(SVG)) {
+                    && page.hasFeature(SVG)) {
                 return SVG_FACTORY;
             }
 
@@ -499,7 +500,7 @@ public final class HTMLParser {
                 return;
             }
 
-            if (parsingInnerHead_ && page_.getWebClient().getBrowserVersion().hasFeature(
+            if (parsingInnerHead_ && page_.hasFeature(
                     IGNORE_CONTENTS_OF_INNER_HEAD)) {
                 return;
             }
@@ -600,8 +601,7 @@ public final class HTMLParser {
                 if ("head".equals(tagLower)) {
                     parsingInnerHead_ = false;
                 }
-                if ("head".equals(tagLower) || page_.getWebClient().getBrowserVersion().hasFeature(
-                        IGNORE_CONTENTS_OF_INNER_HEAD)) {
+                if ("head".equals(tagLower) || page_.hasFeature(IGNORE_CONTENTS_OF_INNER_HEAD)) {
                     return;
                 }
             }
@@ -629,7 +629,7 @@ public final class HTMLParser {
         /** {@inheritDoc} */
         public void characters(final char[] ch, final int start, final int length) throws SAXException {
             if ((characters_ == null || characters_.length() == 0)
-                    && page_.getWebClient().getBrowserVersion().hasFeature(HTMLPARSER_REMOVE_EMPTY_CONTENT)
+                    && page_.hasFeature(HTMLPARSER_REMOVE_EMPTY_CONTENT)
                     && StringUtils.isBlank(new String(ch, start, length))) {
 
                 DomNode node = currentNode_.getLastChild();
@@ -743,7 +743,7 @@ public final class HTMLParser {
             handleCharacters();
             final String data = new String(ch, start, length);
             if (!data.startsWith("[CDATA")
-                    || !page_.getWebClient().getBrowserVersion().hasFeature(GENERATED_3)) {
+                    || !page_.hasFeature(GENERATED_3)) {
                 final DomComment comment = new DomComment(page_, data);
                 currentNode_.appendChild(comment);
             }
