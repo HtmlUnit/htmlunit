@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 
 import org.apache.commons.lang3.StringUtils;
@@ -139,10 +140,10 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(FF)
     @Alerts(FF = { "java: undefined", "getClass: undefined" },
-            FF10 = { "java: function", "getClass: undefined" },
+            FF10 = { "java: function", "getClass: undefined" },//FF 16 gives 'undefined' for both
             IE = { "java: undefined", "getClass: undefined" })
+    @NotYetImplemented(FF10)
     public void rhino_lazilyNames2() throws Exception {
         doTestRhinoLazilyNames("java", "getClass");
     }
