@@ -270,6 +270,7 @@ public class JavaScriptEngine {
                         final Class<?> jsHostClass = config.getHostClass();
                         final ScriptableObject constructor = (ScriptableObject) jsHostClass.newInstance();
                         defineConstructor(window, prototype, constructor);
+                        configureConstants(config, constructor);
                     }
                     else {
                         deleteProperties(prototype, "constructor");
@@ -328,14 +329,15 @@ public class JavaScriptEngine {
         constructor.setParentScope(window);
         ScriptableObject.defineProperty(prototype, "constructor", constructor,
                 ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
+        ScriptableObject.defineProperty(constructor, "prototype", prototype,
+                ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
         window.defineProperty(constructor.getClassName(), constructor, ScriptableObject.DONTENUM);
     }
 
     private void makeConstWritable(final ScriptableObject scope, final String... constNames) {
         for (final String name : constNames) {
             final Object value = ScriptableObject.getProperty(scope, name);
-            ScriptableObject.defineProperty(
-                    scope, name, value,
+            ScriptableObject.defineProperty(scope, name, value,
                     ScriptableObject.DONTENUM | ScriptableObject.PERMANENT);
         }
     }
