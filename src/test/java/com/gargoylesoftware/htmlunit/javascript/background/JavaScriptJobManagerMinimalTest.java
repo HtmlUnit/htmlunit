@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Amit Manjhi
+ * @author Ronald Brill
  */
 public class JavaScriptJobManagerMinimalTest {
 
@@ -84,9 +85,9 @@ public class JavaScriptJobManagerMinimalTest {
         };
         manager_.addJob(job, page_);
         assertEquals(1, manager_.getJobCount());
-        final int remainingJobs = manager_.waitForJobs(1000);
+        final int remainingJobs = manager_.waitForJobs(1090);
         Assert.assertTrue("At least one remaining job expected.", remainingJobs >= 1);
-        Assert.assertTrue("Less than 11 jobs (" + count.intValue() + ") processed.", count.intValue() >= 10);
+        Assert.assertTrue("Less than 10 jobs (" + count.intValue() + ") processed.", count.intValue() >= 10);
     }
 
     /**
