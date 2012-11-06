@@ -84,10 +84,13 @@
                         Update the version number and release date in src/site/xdoc/index.xml
                     </li>
                     <li>
-                        Update the version number and release date in src/changes/changes.xml
+                        Update the release date in src/changes/changes.xml
                     </li>
                     <li>
                         Remove pom.xml reference to any snapshot repository (needed for Maven upload request).
+                    </li>
+                    <li>
+                        Remove &lt;repositories&gt; and &lt;pluginRepositories&gt; sections from pom.xml.
                     </li>
                     <li>
                         Build the zip files
