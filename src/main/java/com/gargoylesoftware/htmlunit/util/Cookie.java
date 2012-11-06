@@ -57,18 +57,6 @@ public class Cookie implements Serializable {
     private final boolean httponly_;
 
     /**
-     * Creates a new cookie with the specified name and value. The new cookie applies to all
-     * domains and all paths, never expires and is not secure.
-     * @param name the cookie name
-     * @param value the cookie name
-     * @deprecated as of 2.10, specify the domain
-     */
-    @Deprecated
-    public Cookie(final String name, final String value) {
-        this(null, name, value);
-    }
-
-    /**
      * Creates a new cookie with the specified name and value which applies to the specified domain.
      * The new cookie applies to all paths, never expires and is not secure.
      * @param domain the domain to which this cookie applies
