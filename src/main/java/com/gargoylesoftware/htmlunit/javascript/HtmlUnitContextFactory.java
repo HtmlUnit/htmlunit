@@ -34,6 +34,7 @@ import net.sourceforge.htmlunit.corejs.javascript.WrapFactory;
 import net.sourceforge.htmlunit.corejs.javascript.debug.Debugger;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -300,6 +301,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return browserVersion_.hasFeature(JS_EVAL_LOCAL_SCOPE);
             case Context.FEATURE_HTMLUNIT_ERROR_STACK:
                 return browserVersion_.hasFeature(JS_ERROR_STACK);
+            case Context.FEATURE_HTMLUNIT_CONSTRUCTOR:
+                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_CONSTRUCTOR);
             default:
                 return super.hasFeature(cx, featureIndex);
         }

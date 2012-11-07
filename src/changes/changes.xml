@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="remove" dev="asashour" issue="1420">
+                JavaScript: remove "constructor" property of host objects (IE).
+            </action>
             <action type="remove" dev="asashour">
                 Cookie: remove deprecated (String name, String value) constructor.
             </action>

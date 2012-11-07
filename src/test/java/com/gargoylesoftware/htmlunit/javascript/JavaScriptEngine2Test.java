@@ -174,10 +174,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "[object Window]", "[object Window]", "true",
-                "[object HTMLDocument]", "[object HTMLDocument]", "true" },
-            IE = { "undefined", "exception", "undefined", "exception" })
-    @NotYetImplemented(IE)
-    //TODO: in Rhino-fork, "constructor" should not be PERMANENT
+                "[object HTMLDocument]", "[object HTMLDocument]", "true", "function" },
+            IE = { "undefined", "exception", "undefined", "exception", "function" })
     public void constructor() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -195,6 +193,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "} catch (e) {\n"
             + "  alert('exception');\n"
             + "}\n"
+            + "alert(typeof new Object().constructor);\n"
             + "</script>\n"
             + "</body></html>";
 
