@@ -122,7 +122,7 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <mkdir dir="${basedir}/artifacts"/>
                                 <delete includeemptydirs="true">
                                     <fileset dir="${basedir}/artifacts" includes="**/*.jar"/>
@@ -137,7 +137,7 @@
                                 </copy>
                                 <move file="${basedir}/artifacts/${project.artifactId}-${project.version}-bin.zip"
                                     tofile="${basedir}/artifacts/${project.artifactId}-${project.version}-with-dependencies.zip"/>
-                            </tasks>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>
