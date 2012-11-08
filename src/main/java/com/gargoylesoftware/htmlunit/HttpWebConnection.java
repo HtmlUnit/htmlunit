@@ -373,9 +373,8 @@ public class HttpWebConnection implements WebConnection {
                 public boolean clearExpired(final Date date) {
                     return false;
                 }
-                @SuppressWarnings("unchecked")
                 public List<Cookie> getCookies() {
-                    return Collections.EMPTY_LIST;
+                    return Collections.<Cookie>emptyList();
                 }
             });
         }
