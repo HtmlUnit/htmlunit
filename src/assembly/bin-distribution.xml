@@ -9,10 +9,6 @@
         <file>
             <source>LICENSE.txt</source>
         </file>
-        <file>
-            <source>${basedir}/target/${project.artifactId}-${project.version}.${project.packaging}</source>
-            <outputDirectory>/lib</outputDirectory>
-        </file>
     </files>
     <fileSets>
         <fileSet>
