@@ -126,13 +126,15 @@ public class GAELoadPageTest {
      * Test that a JS job using setInterval is processed on GAE.
      * @throws IOException if fails to get page.
      * @throws FailingHttpStatusCodeException if fails to get page.
+     * @throws InterruptedException if wait fails
      */
     @Test
-    public void setInterval() throws FailingHttpStatusCodeException, IOException {
+    public void setInterval() throws FailingHttpStatusCodeException, IOException, InterruptedException {
+        final long timeout = 100L;
         final String html = "<html>\n"
             + "  <body>\n"
             + "    <script>\n"
-            + "      setInterval(\"alert('hello')\", 100);"
+            + "      setInterval(\"alert('hello')\", " + timeout + ");"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
@@ -144,21 +146,26 @@ public class GAELoadPageTest {
         client.setWebConnection(conn);
         client.getPage(FIRST_URL);
 
+        final long startTime = System.currentTimeMillis();
         assertEquals(0, collectedAlerts.size());
 
         // pump but not long enough
-        int executedJobs = client.getJavaScriptEngine().pumpEventLoop(50);
+        int executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout / 2);
         assertEquals(0, collectedAlerts.size());
 
         // pump a bit more
-        executedJobs = client.getJavaScriptEngine().pumpEventLoop(100);
-        assertEquals(Arrays.asList("hello"), collectedAlerts);
-        assertEquals(1, executedJobs);
+        executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout + 1);
+        long count = (System.currentTimeMillis() - startTime) / timeout;
+        count = Math.max(1, count);
+        assertEquals(count, collectedAlerts.size());
+        assertEquals(count, executedJobs);
 
         // pump even more
-        executedJobs = client.getJavaScriptEngine().pumpEventLoop(250);
-        assertEquals(Arrays.asList("hello", "hello", "hello"), collectedAlerts);
-        assertEquals(2, executedJobs);
+        executedJobs += client.getJavaScriptEngine().pumpEventLoop(timeout + 1);
+        count = (System.currentTimeMillis() - startTime) / timeout;
+        count = Math.max(2, count);
+        assertEquals(count , collectedAlerts.size());
+        assertEquals(count, executedJobs);
     }
 
     /**
@@ -168,11 +175,12 @@ public class GAELoadPageTest {
      */
     @Test
     public void setTimeout() throws FailingHttpStatusCodeException, IOException {
+        final long timeout = 400L;
         final String html = "<html>\n"
             + "  <body>\n"
             + "    <script>\n"
             + "      setTimeout(\"alert('hello')\", 0);"
-            + "      setTimeout(\"alert('hello again')\", 200);"
+            + "      setTimeout(\"alert('hello again')\", " + timeout + ");"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
@@ -184,15 +192,20 @@ public class GAELoadPageTest {
         client.setWebConnection(conn);
         client.getPage(FIRST_URL);
 
+        final long startTime = System.currentTimeMillis();
         int executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
         assertEquals(Arrays.asList("hello"), collectedAlerts);
         assertEquals(1, executedJobs);
 
-        executedJobs = client.getJavaScriptEngine().pumpEventLoop(100);
-        assertEquals(Arrays.asList("hello"), collectedAlerts);
-        assertEquals(0, executedJobs);
+        executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
 
-        executedJobs = client.getJavaScriptEngine().pumpEventLoop(200);
+        do {
+            assertEquals(Arrays.asList("hello"), collectedAlerts);
+            assertEquals(0, executedJobs);
+
+            executedJobs = client.getJavaScriptEngine().pumpEventLoop(100);
+        } while (System.currentTimeMillis() - startTime < timeout);
+
         assertEquals(Arrays.asList("hello", "hello again"), collectedAlerts);
         assertEquals(1, executedJobs);
     }
