@@ -2536,4 +2536,24 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "undefined", FF3_6 = "undefined", DEFAULT = "[object DOMStringMap]")
+    public void dataset() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.body.dataset);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

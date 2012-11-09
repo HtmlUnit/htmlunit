@@ -101,6 +101,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
+import com.gargoylesoftware.htmlunit.javascript.host.DOMStringMap;
 import com.gargoylesoftware.htmlunit.javascript.host.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -2797,4 +2798,14 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public Element getParentElement() {
         return super.getParentElement();
     }
+
+    /**
+     * Returns the "dataset" attribute.
+     * @return the "dataset" attribute
+     */
+    @JsxGetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    public DOMStringMap getDataset() {
+        return new DOMStringMap(this);
+    }
+
 }
