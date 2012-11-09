@@ -116,6 +116,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMImplementation;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMParser;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
@@ -281,7 +282,8 @@ public final class JavaScriptConfiguration {
         CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class, CSSStyleSheet.class, CSSValue.class,
         CanvasRenderingContext2D.class, CharacterDataImpl.class, ClientRect.class, Comment.class,
         ComputedCSSStyleDeclaration.class, Console.class, Coordinates.class, DataView.class, DOMException.class,
-        DOMImplementation.class, DOMParser.class, DOMTokenList.class, Document.class, DocumentFragment.class,
+        DOMImplementation.class, DOMParser.class, DOMStringMap.class,
+        DOMTokenList.class, Document.class, DocumentFragment.class,
         DocumentType.class, Element.class, Enumerator.class, Event.class, EventNode.class, External.class,
         Float32Array.class, Float64Array.class,
         FormChild.class, FormField.class, Geolocation.class, History.class,
