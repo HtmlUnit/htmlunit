@@ -44,7 +44,7 @@ public class CSSImportRule extends CSSRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSImportRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
+    protected CSSImportRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSImportRule rule) {
         super(stylesheet, rule);
     }
 

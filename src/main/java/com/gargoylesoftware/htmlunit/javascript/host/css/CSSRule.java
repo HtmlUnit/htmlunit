@@ -82,9 +82,9 @@ public class CSSRule extends SimpleScriptable {
     public static CSSRule create(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
         switch (rule.getType()) {
             case STYLE_RULE:
-                return new CSSStyleRule(stylesheet, rule);
+                return new CSSStyleRule(stylesheet, (org.w3c.dom.css.CSSStyleRule) rule);
             case IMPORT_RULE:
-                return new CSSImportRule(stylesheet, rule);
+                return new CSSImportRule(stylesheet, (org.w3c.dom.css.CSSImportRule) rule);
             case CHARSET_RULE:
                 return new CSSCharsetRule(stylesheet, (org.w3c.dom.css.CSSCharsetRule) rule);
             case MEDIA_RULE:

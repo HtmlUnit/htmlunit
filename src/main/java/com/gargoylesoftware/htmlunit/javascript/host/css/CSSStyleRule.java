@@ -48,7 +48,7 @@ public class CSSStyleRule extends CSSRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSStyleRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
+    protected CSSStyleRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSStyleRule rule) {
         super(stylesheet, rule);
     }
 
