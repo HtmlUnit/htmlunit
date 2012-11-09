@@ -9,7 +9,7 @@
     <body>
         <release version="2.12" date="???" description="Bugfixes">
             <action type="add" dev="asashour">
-                JavaScript: implement "dataset" property (FF).
+                JavaScript: implement property HTMLElement.dataset (FF10).
             </action>
             <action type="remove" dev="asashour" issue="1420">
                 JavaScript: remove "constructor" property of host objects (IE).
