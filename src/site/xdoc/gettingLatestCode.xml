@@ -57,7 +57,7 @@
             following commands.
             </p>
             <source><![CDATA[
-svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .]]></source>
+svn co http://svn.code.sf.net/p/htmlunit/code/trunk/htmlunit/ .]]></source>
         </section>
 
         <section name="Compiling the code">
@@ -128,7 +128,9 @@ svn co https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit .]]>
         <section name="Forked Rhino (core-js)">
             <p>
             You can get the source code from
-            <a href="http://repo2.maven.org/maven2/net/sourceforge/htmlunit/htmlunit-core-js/">Maven central repository</a>. 
+            <a href="http://search.maven.org/#browse|1126356811">Maven central repository</a>,
+            while the repository resides in
+            <a href="https://github.com/htmlunit">github</a>.
             </p>
         </section>
 
