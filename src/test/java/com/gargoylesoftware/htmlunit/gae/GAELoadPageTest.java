@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
  * @version $Revision$
  * @author Amit Manjhi
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(GAETestRunner.class)
 public class GAELoadPageTest {
@@ -144,9 +145,10 @@ public class GAELoadPageTest {
         final MockWebConnection conn = new MockWebConnection();
         conn.setDefaultResponse(html);
         client.setWebConnection(conn);
-        client.getPage(FIRST_URL);
 
         final long startTime = System.currentTimeMillis();
+        client.getPage(FIRST_URL);
+
         assertEquals(0, collectedAlerts.size());
 
         // pump but not long enough
@@ -190,9 +192,10 @@ public class GAELoadPageTest {
         final MockWebConnection conn = new MockWebConnection();
         conn.setDefaultResponse(html);
         client.setWebConnection(conn);
-        client.getPage(FIRST_URL);
 
         final long startTime = System.currentTimeMillis();
+        client.getPage(FIRST_URL);
+
         int executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
         assertEquals(Arrays.asList("hello"), collectedAlerts);
         assertEquals(1, executedJobs);
@@ -203,7 +206,7 @@ public class GAELoadPageTest {
             assertEquals(Arrays.asList("hello"), collectedAlerts);
             assertEquals(0, executedJobs);
 
-            executedJobs = client.getJavaScriptEngine().pumpEventLoop(100);
+            executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout / 10);
         }
 
         assertEquals(Arrays.asList("hello", "hello again"), collectedAlerts);
