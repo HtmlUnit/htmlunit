@@ -199,12 +199,12 @@ public class GAELoadPageTest {
 
         executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
 
-        do {
+        while (System.currentTimeMillis() - startTime < timeout) {
             assertEquals(Arrays.asList("hello"), collectedAlerts);
             assertEquals(0, executedJobs);
 
             executedJobs = client.getJavaScriptEngine().pumpEventLoop(100);
-        } while (System.currentTimeMillis() - startTime < timeout);
+        }
 
         assertEquals(Arrays.asList("hello", "hello again"), collectedAlerts);
         assertEquals(1, executedJobs);
