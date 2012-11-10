@@ -125,7 +125,7 @@ mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/stagin
 					and then go to <a href="https://oss.sonatype.org/index.html#stagingRepositories">Sonatype OSS staging repository</a> to close and release the artifacts.
                     </li>
                     <li>
-                        Delete online website javadoc.
+                        Delete online website (/home/project-web/htmlunit/htdocs).
                     </li>
                     <li>
                     	Create a shell to shell.sourceforge.net with your username and project group
