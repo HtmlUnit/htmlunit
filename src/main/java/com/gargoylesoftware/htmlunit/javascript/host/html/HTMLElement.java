@@ -871,7 +871,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
      * @return the contents of this node as HTML
      */
-    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 11) })
     public String getOuterHTML() {
         final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
