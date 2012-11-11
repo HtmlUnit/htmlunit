@@ -164,15 +164,15 @@
                 The unit tests of some well-known JavaScript libraries are included in HtmlUnit's own unit tests; based on these unit
                 tests, the following libraries are known to work well with HtmlUnit:
                 <ul>
-                    <li>jQuery 1.2.6: Full support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/JQuery126Test.java">here</a>)</li>
-                    <li>MochiKit 1.4.1: Full support (see unit tests <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/MochiKitTest.java">here</a>)</li>
+                    <li>jQuery 1.2.6: Full support (see unit test <a href="https://sourceforge.net/p/htmlunit/code/7717/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/JQuery182Test.java">here</a>)</li>
+                    <li>MochiKit 1.4.1: Full support (see unit tests <a href="https://sourceforge.net/p/htmlunit/code/7717/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/MochiKitTest.java">here</a>)</li>
                     <li>GWT 2.5.0: Full support (see unit test <a href="https://sourceforge.net/p/htmlunit/code/7717/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/GWT250Test.java">here</a>)</li>
-                    <li>Sarissa 0.9.9.3: Full support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/Sarissa0993Test.java">here</a>)</li>
-                    <li>MooTools 1.2.1: Full support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/MooTools121Test.java">here</a>)</li>
-                    <li>Prototype 1.6.0: Very good support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/Prototype160Test.java">here</a>)</li>
-                    <li>Ext JS 2.2: Very good support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/ExtJS22Test.java">here</a>)</li>
-                    <li>Dojo 1.0.2: Good support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/Dojo102Test.java">here</a>)</li>
-                    <li>YUI 2.3.0: Good support (see unit test <a href="https://htmlunit.svn.sourceforge.net/svnroot/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/YuiTest.java">here</a>)</li>
+                    <li>Sarissa 0.9.9.3: Full support (see unit test <a href="https://sourceforge.net/p/htmlunit/code/7717/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/Sarissa0993Test.java">here</a>)</li>
+                    <li>MooTools 1.2.1: Full support (see unit test <a href="https://sourceforge.net/p/htmlunit/code/7717/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/MooTools121Test.java">here</a>)</li>
+                    <li>Prototype 1.6.0: Very good support (see unit test <a href="https://sourceforge.net/p/htmlunit/code/7717/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/Prototype161Test.java">here</a>)</li>
+                    <li>Ext JS 2.2: Very good support (see unit test <a href="https://sourceforge.net/p/htmlunit/code/7717/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/ExtJS22Test.java">here</a>)</li>
+                    <li>Dojo 1.0.2: Good support (see unit test <a href="https://sourceforge.net/p/htmlunit/code/7717/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/Dojo102Test.java">here</a>)</li>
+                    <li>YUI 2.3.0: Good support (see unit test <a href="https://sourceforge.net/p/htmlunit/code/7717/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/YuiTest.java">here</a>)</li>
                 </ul>
             </p>
             <note title="Disabling JavaScript support">
