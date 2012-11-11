@@ -146,8 +146,8 @@ public class GAELoadPageTest {
         conn.setDefaultResponse(html);
         client.setWebConnection(conn);
 
-        final long startTime = System.currentTimeMillis();
         client.getPage(FIRST_URL);
+        final long startTime = System.currentTimeMillis();
 
         assertEquals(0, collectedAlerts.size());
 
@@ -192,8 +192,6 @@ public class GAELoadPageTest {
         final MockWebConnection conn = new MockWebConnection();
         conn.setDefaultResponse(html);
         client.setWebConnection(conn);
-
-        final long startTime = System.currentTimeMillis();
         client.getPage(FIRST_URL);
 
         int executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
@@ -201,11 +199,11 @@ public class GAELoadPageTest {
         assertEquals(1, executedJobs);
 
         executedJobs = client.getJavaScriptEngine().pumpEventLoop(20);
+        assertEquals(Arrays.asList("hello"), collectedAlerts);
+        assertEquals(0, executedJobs);
 
-        while (System.currentTimeMillis() - startTime < timeout) {
+        while (executedJobs < 1) {
             assertEquals(Arrays.asList("hello"), collectedAlerts);
-            assertEquals(0, executedJobs);
-
             executedJobs = client.getJavaScriptEngine().pumpEventLoop(timeout / 10);
         }
 
