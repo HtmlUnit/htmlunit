@@ -4,3 +4,5 @@ Each subdirectory corresponds to a specific version of GWT. Each of these subdir
 was created by downloading the distribution and copying the 'war' of sample directories.
 
 gwt-servlet.jar is added at parent directory to be reused by different samples.
+
+"Showcase" example original size is 92 MB, you can safely remove "showcase/deferredjs" and "WEB-INF/deploy".

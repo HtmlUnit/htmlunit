@@ -21,6 +21,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -38,6 +40,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlItalic;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 
 /**
@@ -107,6 +110,61 @@ public class GWT250Test extends WebServerTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void mail() throws Exception {
+        final HtmlPage page = loadGWTPage("Mail", null, "//div[@class='MGJ']");
+        Assert.assertSame(page.getEnclosingWindow(), page.getWebClient().getCurrentWindow());
+        final HtmlDivision cell = page.getFirstByXPath("//div[@class='MGJ']");
+        assertElementValue(cell, "Welcome back, foo@example.com");
+
+        final String[] selectedRow = {"markboland05", "mark@example.com", "URGENT -[Mon, 24 Apr 2006 02:17:27 +0000]"};
+
+        final List<?> selectedRowCells = page.getByXPath("//tr[@class='MKI']/td");
+        assertEquals(selectedRow.length, selectedRowCells.size());
+        for (int i = 0; i < selectedRow.length; i++) {
+            final HtmlTableDataCell selectedRowCell = (HtmlTableDataCell) selectedRowCells.get(i);
+            assertElementValue(selectedRowCell, selectedRow[i]);
+        }
+
+        verifyStartMailBody(page, "Dear Friend,",
+                "I am Mr. Mark Boland the Bank Manager of ABN AMRO BANK 101 Moorgate, London, EC2M 6SB.");
+
+        // click on email from Hollie Voss
+        final HtmlElement elt = page.getFirstByXPath("//td[text() = 'Hollie Voss']");
+        final HtmlPage page2 = elt.click();
+        Assert.assertSame(page, page2);
+        verifyStartMailBody(page, ">> Componentes e decodificadores; confira aqui;",
+                "http://br.geocities.com/listajohn/index.htm",
+                "THE GOVERNING AWARD");
+    }
+
+    private void verifyStartMailBody(final HtmlPage page, final String... details) {
+        final List<?> detailsCells = page.getByXPath("//div[@class='MGI']/text()");
+        for (int i = 0; i < details.length; i++) {
+            final DomText text = (DomText) detailsCells.get(i);
+            assertEquals(details[i], text.asText());
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void json() throws Exception {
+        final HtmlPage page = loadGWTPage("JSON", null, "//button");
+        final HtmlButton button = page.getFirstByXPath("//button");
+        button.click();
+
+        page.getWebClient().waitForBackgroundJavaScriptStartingBefore(2000);
+
+        final HtmlSpan span =
+            page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']/div/div/table//td[2]/div/span");
+        assertEquals("ResultSet", span.getFirstChild().getNodeValue());
+    }
+
+    /**
      * Returns the GWT directory being tested.
      * @return the GWT directory being tested
      */
@@ -173,6 +231,19 @@ public class GWT250Test extends WebServerTestCase {
             final HtmlTableDataCell cell = (HtmlTableDataCell) detailsCells.get(i);
             assertElementValue(cell, firstRow[i]);
         }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void showcase() throws Exception {
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadGWTPage("Showcase", collectedAlerts, "id('gwt-debug-cwCheckBox-Monday-label')");
+        assertEquals("Monday",
+            page.getHtmlElementById("gwt-debug-cwCheckBox-Monday-label").getFirstChild().getNodeValue());
+        assertEquals("Tuesday",
+            page.getHtmlElementById("gwt-debug-cwCheckBox-Tuesday-label").getFirstChild().getNodeValue());
     }
 
 }
