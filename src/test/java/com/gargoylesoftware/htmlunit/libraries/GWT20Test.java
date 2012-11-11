@@ -53,21 +53,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 public class GWT20Test extends WebServerTestCase {
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void hello() throws Exception {
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadGWTPage("Hello", collectedAlerts, "//button");
-        final HtmlButton button = page.getFirstByXPath("//button");
-        final DomText buttonLabel = (DomText) button.getChildren().iterator().next();
-        assertEquals("Click me", buttonLabel.getData());
-        button.click();
-        final String[] expectedAlerts = {"Hello, AJAX"};
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
      * Test value inside {@link HtmlDivision}, {@link HtmlInput} or {@link DomText}
      *
      * @param element the element to search in
@@ -162,31 +147,6 @@ public class GWT20Test extends WebServerTestCase {
         final HtmlSpan span =
             page.getFirstByXPath("//div[@class='JSON-JSONResponseObject']/div/div/table//td[2]/div/span");
         assertEquals("ResultSet", span.getFirstChild().getNodeValue());
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void dynaTable() throws Exception {
-        startWebServer("src/test/resources/libraries/GWT/" + getDirectory() + "/DynaTable",
-                new String[] {"src/test/resources/libraries/GWT/" + getDirectory() + "/gwt-servlet.jar"});
-
-        final WebClient client = getWebClient();
-
-        final String url = "http://localhost:" + PORT + "/DynaTable.html";
-        final HtmlPage page = client.getPage(url);
-        client.waitForBackgroundJavaScriptStartingBefore(2000);
-
-        final String[] firstRow = {"Inman Mendez",
-            "Majoring in Phrenology", "Mon 9:45-10:35, Tues 2:15-3:05, Fri 8:45-9:35, Fri 9:45-10:35"};
-
-        final List<?> detailsCells = page.getByXPath("//table[@class='table']//tr[2]/td");
-        assertEquals(firstRow.length, detailsCells.size());
-        for (int i = 0; i < firstRow.length; i++) {
-            final HtmlTableDataCell cell = (HtmlTableDataCell) detailsCells.get(i);
-            assertElementValue(cell, firstRow[i]);
-        }
     }
 
     /**
