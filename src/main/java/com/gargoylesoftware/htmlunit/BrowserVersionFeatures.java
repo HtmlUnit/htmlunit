@@ -857,6 +857,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
     JS_FUNCTION_BIND,
 
+    /**
+     * Indicates that function can be defined as
+     * <code>function object.property() {}</code> instead of <code>object.property = function() {}</code>.
+     */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_FUNCTION_OBJECT_METHOD,
+
     /** Indicates if the method toSource exists on the native objects. */
     @BrowserFeature(@WebBrowser(FF))
     JS_FUNCTION_TOSOURCE,

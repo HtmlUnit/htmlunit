@@ -303,6 +303,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return browserVersion_.hasFeature(JS_ERROR_STACK);
             case Context.FEATURE_HTMLUNIT_CONSTRUCTOR:
                 return browserVersion_.hasFeature(BrowserVersionFeatures.JS_CONSTRUCTOR);
+            case Context.FEATURE_HTMLUNIT_FUNCTION_OBJECT_METHOD:
+                return browserVersion_.hasFeature(BrowserVersionFeatures.JS_FUNCTION_OBJECT_METHOD);
             default:
                 return super.hasFeature(cx, featureIndex);
         }

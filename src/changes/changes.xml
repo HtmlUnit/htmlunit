@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: handle definition of "function object.property() {}" (IE).
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: implement property HTMLElement.dataset (FF10).
             </action>

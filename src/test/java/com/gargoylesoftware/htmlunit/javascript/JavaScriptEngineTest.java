@@ -1624,22 +1624,23 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
-    @Alerts(IE = { "1", "2" }, FF = { })
+    @Alerts(IE = { "1", "2" })
     public void function_object_method() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  try {\n"
-            + "    alert('1');\n"
-            + "    function document.onclick() {\n"
-            + "      alert('hi');\n"
-            + "    }\n"
-            + "    alert('2');\n"
-            + "  } catch(e) {alert(e)}\n"
-            + "</script></head><body>\n"
-            + "  <div id='myDiv'>Hello there</div>\n"
-            + "</body></html>";
+        if (getBrowserVersion().isIE()) {
+            final String html = "<html><head><title>foo</title><script>\n"
+                    + "  try {\n"
+                    + "    alert('1');\n"
+                    + "    function document.onclick() {\n"
+                    + "      alert('hi');\n"
+                    + "    }\n"
+                    + "    alert('2');\n"
+                    + "  } catch(e) {alert(e)}\n"
+                    + "</script></head><body>\n"
+                    + "  <div id='myDiv'>Hello there</div>\n"
+                    + "</body></html>";
 
-        loadPageWithAlerts(html);
+            loadPageWithAlerts(html);
+        }
     }
 
     /**
