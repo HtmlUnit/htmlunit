@@ -145,4 +145,27 @@ public class NativeFunctionTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Function properties "arguments" and "caller" were wrongly enumerated as of HtmlUnit-2.11.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("foo1 done")
+    public void in() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "function foo1() {\n"
+            + "  for (var i in foo1) {\n"
+            + "    alert(i);\n"
+            + "  };\n"
+            + "  alert('foo1 done');\n"
+            + "};\n"
+            + "function foo0() {\n"
+            + "  foo1();\n"
+            + "}\n"
+            + "foo0();\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
