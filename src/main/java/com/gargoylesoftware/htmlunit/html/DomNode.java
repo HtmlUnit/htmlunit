@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DISPLAYED_COLLAPSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOM_NORMALIZE_REMOVE_CHILDREN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.NODE_APPEND_CHILD_SELF_IGNORE;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,6 +31,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.w3c.css.sac.CSSException;
@@ -875,12 +877,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     public DomNode appendChild(final Node node) {
-//        if (node == this) {
-//            if (!hasFeature(NODE_APPEND_CHILD_SELF_IGNORE)) {
-//                Context.throwAsScriptRuntimeEx(new Exception("Can not add not to itself " + this));
-//            }
-//            return this;
-//        }
+        if (node == this) {
+            if (!hasFeature(NODE_APPEND_CHILD_SELF_IGNORE)) {
+                Context.throwAsScriptRuntimeEx(new Exception("Can not add not to itself " + this));
+            }
+            return this;
+        }
         final DomNode domNode = (DomNode) node;
 
         if (domNode instanceof DomDocumentFragment) {
