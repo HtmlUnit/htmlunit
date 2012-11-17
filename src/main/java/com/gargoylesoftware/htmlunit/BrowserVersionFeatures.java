@@ -1073,6 +1073,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     KEYBOARD_EVENT_SPECIAL_KEYPRESS,
 
+    /** If true, then silently ignore element.appendChild(element); */
+    @BrowserFeature(@WebBrowser(IE))
+    NODE_APPEND_CHILD_SELF_IGNORE,
+
     /** Body of a &lt;noscript&gt; tag is not totally ignored but considered as a (not displayed) text node. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     NOSCRIPT_BODY_AS_TEXT,

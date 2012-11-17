@@ -764,4 +764,28 @@ public class DomNodeTest extends SimpleWebTestCase {
         assertTrue(page.getElementById("d3").isDisplayed());
     }
 
+    /**
+     * Test for Bug #1253.
+     *
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = { "exception", "0" }, IE = {"true", "0" })
+    public void appendChild_recursive() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+                + "<script>\n"
+                + "function test(){\n"
+                + "  var e = document.createElement('div');\n"
+                + "  try {\n"
+                + "    alert(e.appendChild(e) === e);\n"
+                + "  } catch(e) {alert('exception');}\n"
+                + "  alert(e.childNodes.length);"
+                + "}\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
 }
