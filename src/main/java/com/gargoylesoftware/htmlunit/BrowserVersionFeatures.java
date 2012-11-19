@@ -858,6 +858,12 @@ public enum BrowserVersionFeatures {
     JS_FUNCTION_BIND,
 
     /**
+     * Indicates that function is defined even before its declaration, inside a block.
+     */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK,
+
+    /**
      * Indicates that function can be defined as
      * <code>function object.property() {}</code> instead of <code>object.property = function() {}</code>.
      */

@@ -122,7 +122,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"in goo", "in hoo", "in foo" },
             FF = {"in goo", "in hoo", "foo error" })
-    @NotYetImplemented(IE)
     public void functionDeclaredForwardInBlock() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
