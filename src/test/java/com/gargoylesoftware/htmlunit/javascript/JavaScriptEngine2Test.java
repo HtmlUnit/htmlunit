@@ -150,7 +150,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "undefined", "foo error" },
             IE = {"function foo() {}", "function foo() {}" })
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
