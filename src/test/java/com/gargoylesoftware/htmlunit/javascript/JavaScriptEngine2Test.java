@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -24,7 +22,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -148,8 +145,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "undefined", "foo error" },
-            IE = {"function foo() {}", "function foo() {}" })
-    @NotYetImplemented(IE)
+            IE = {"function foo() {\n}", "function foo() {\n}" })
+    // Real IE doesn't have the extra 'new line'
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
