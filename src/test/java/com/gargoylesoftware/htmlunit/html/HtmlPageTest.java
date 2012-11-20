@@ -686,7 +686,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void testRefresh_MetaTag_DefaultRefreshHandler() throws Exception {
-        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;URL=§§URL§§\">");
+        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"2;URL=§§URL§§\">");
     }
 
     /**
@@ -694,7 +694,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void testRefresh_MetaTag_caseSensitivity() throws Exception {
-        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3;Url=§§URL§§\">");
+        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"2;Url=§§URL§§\">");
     }
 
     /**
@@ -703,8 +703,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
      */
     @Test
     public void testRefresh_MetaTag_spaceSeparator() throws Exception {
-        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3 Url=§§URL§§\">");
-        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"3\nUrl=§§URL§§\">");
+        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"2 Url=§§URL§§\">");
+        testRefresh_MetaTag("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"2\nUrl=§§URL§§\">");
     }
 
     /**
@@ -886,7 +886,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections
-                .singletonList(new NameValuePair("Refresh", "3;URL=" + URL_SECOND + "")));
+                .singletonList(new NameValuePair("Refresh", "2;URL=" + URL_SECOND + "")));
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 
