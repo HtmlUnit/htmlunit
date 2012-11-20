@@ -164,7 +164,7 @@ public class WebClient implements Serializable {
     private ScriptPreProcessor scriptPreProcessor_;
 
     private Map<String, String> activeXObjectMap_ = Collections.emptyMap();
-    private RefreshHandler refreshHandler_ = new ImmediateRefreshHandler();
+    private RefreshHandler refreshHandler_ = new NiceRefreshHandler(2);
     private JavaScriptErrorListener javaScriptErrorListener_;
 
     private WebClientOptions options_ = new WebClientOptions();
@@ -1586,7 +1586,7 @@ public class WebClient implements Serializable {
      */
     public void setRefreshHandler(final RefreshHandler handler) {
         if (handler == null) {
-            refreshHandler_ = new ImmediateRefreshHandler();
+            refreshHandler_ = new NiceRefreshHandler(2);
         }
         else {
             refreshHandler_ = handler;
@@ -1594,8 +1594,9 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Returns the current refresh handler or null if one has not been set.
-     * @return the current RefreshHandler or null
+     * Returns the current refresh handler.
+     * The default refresh handler is a {@link NiceRefreshHandler NiceRefreshHandler(2)} (since HtmlUnit-2.12).
+     * @return the current RefreshHandler
      */
     public RefreshHandler getRefreshHandler() {
         return refreshHandler_;

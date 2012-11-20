@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="udpate" dev="mguillem" issue="1126">
+                Change default RefreshHander to a NiceRefreshHandler(2).
+            </action>
             <action type="fix" dev="asashour" issue="1459">
                 Support Internationalized Domain Name (IDN).
             </action>
