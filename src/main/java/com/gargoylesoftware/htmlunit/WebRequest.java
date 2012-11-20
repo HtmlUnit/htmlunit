@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
+import java.net.IDN;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -117,6 +118,15 @@ public class WebRequest implements Serializable {
             else if (path.contains("/.")) {
                 final String query = (url.getQuery() != null) ? "?" + url.getQuery() : "";
                 url = buildUrlWithNewFile(url, removeDots(path) + query);
+            }
+            final String idn = IDN.toASCII(url.getHost());
+            if (!idn.equals(url.getHost())) {
+                try {
+                    url = new URL(url.getProtocol(), idn, url.getPort(), url.getFile());
+                }
+                catch (final Exception e) {
+                    throw new RuntimeException("Cannot change hostname of URL: " + url.toExternalForm(), e);
+                }
             }
             url_ = url.toExternalForm();
 

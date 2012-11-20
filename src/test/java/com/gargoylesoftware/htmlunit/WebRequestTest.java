@@ -163,4 +163,16 @@ public class WebRequestTest {
         final WebRequest request = new WebRequest(url);
         assertEquals("gzip, deflate", request.getAdditionalHeaders().get("Accept-Encoding"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void idn() throws Exception {
+        final String internationalized = "\u0645\u0635\u0631";
+        final URL url = new URL("http://" + internationalized + ".com/" + internationalized);
+        final WebRequest request = new WebRequest(url);
+        final URL expected = new URL("http://xn--wgbh1c.com/" + internationalized);
+        assertEquals(expected, request.getUrl());
+    }
 }
