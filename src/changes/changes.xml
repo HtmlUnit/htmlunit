@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="udpate" dev="mguillem">
+                Change default network timeout from infinite wait to 90 seconds.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: function name referenced before its declaration should be visible (IE).
             </action>

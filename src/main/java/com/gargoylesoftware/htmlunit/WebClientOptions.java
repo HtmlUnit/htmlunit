@@ -42,7 +42,7 @@ public class WebClientOptions implements Serializable {
     private boolean activeXNative_;
     private String homePage_ = "http://htmlunit.sf.net/";
     private ProxyConfig proxyConfig_;
-    private int timeout_;
+    private int timeout_ = 90000; // like Firefox 16 default's value for network.http.connection-timeout
 
     private boolean useInsecureSSL_ = false; // default is secure SSL
 
@@ -342,7 +342,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Gets the timeout value for the {@link WebConnection}.
-     *
+     * The default timeout is 90 seconds (it was 0 up to HtmlUnit-2.11).
      * @return the timeout value in milliseconds
      * @see WebClientOptions#getTimeout(int)
      */
@@ -351,7 +351,7 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * <p>Sets the timeout of the {@link WebConnection}. Set to zero (the default) for an infinite wait.</p>
+     * <p>Sets the timeout of the {@link WebConnection}. Set to zero for an infinite wait.</p>
      *
      * <p>Note: The timeout is used twice. The first is for making the socket connection, the second is
      * for data retrieval. If the time is critical you must allow for twice the time specified here.</p>

@@ -1730,10 +1730,7 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * <p>Sets the timeout of the {@link WebConnection}. Set to zero (the default) for an infinite wait.</p>
-     *
-     * <p>Note: The timeout is used twice. The first is for making the socket connection, the second is
-     * for data retrieval. If the time is critical you must allow for twice the time specified here.</p>
+     * <p>Sets the timeout of the {@link WebConnection}.</p>
      *
      * @param timeout the value of the timeout in milliseconds
      * @deprecated as of 2.11, please use {@link #getOptions()}.{@link WebClientOptions#setTimeout setTimeout()}
