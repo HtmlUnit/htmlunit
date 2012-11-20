@@ -491,11 +491,7 @@ public final class HTMLParser {
 
             handleCharacters();
 
-            if (namespaceURI != null) {
-                namespaceURI = namespaceURI.trim();
-            }
             final String tagLower = localName.toLowerCase();
-
             if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
                 return;
             }
@@ -505,6 +501,9 @@ public final class HTMLParser {
                 return;
             }
 
+            if (namespaceURI != null) {
+                namespaceURI = namespaceURI.trim();
+            }
             if ("head".equals(tagLower)) {
                 if (headParsed_ || page_.isParsingHtmlSnippet()) {
                     parsingInnerHead_ = true;
@@ -568,7 +567,7 @@ public final class HTMLParser {
             if ("table".equals(currentNodeName) && "div".equals(newNodeName)) {
                 currentNode.insertBefore(newElement);
             }
-            else if ("title".equals(newNodeName) && head_ != null) {
+            else if (head_ != null && "title".equals(newNodeName)) {
                 head_.appendChild(newElement);
             }
             else {
@@ -658,12 +657,11 @@ public final class HTMLParser {
                 if (node instanceof HtmlInput) {
                     return false;
                 }
-                if (node instanceof HtmlAnchor || node instanceof HtmlSpan || node instanceof HtmlFont
+                if (node.getFirstChild() != null
+                    && (node instanceof HtmlAnchor || node instanceof HtmlSpan || node instanceof HtmlFont
                         || node instanceof HtmlStrong || node instanceof HtmlBold
-                        || node instanceof HtmlItalic || node instanceof HtmlUnderlined) {
-                    if (node.getFirstChild() != null) {
-                        return false;
-                    }
+                        || node instanceof HtmlItalic || node instanceof HtmlUnderlined)) {
+                    return false;
                 }
             }
             else {
@@ -807,6 +805,7 @@ public final class HTMLParser {
                 }
             }
         }
+
         /**
          * {@inheritDoc}
          */
