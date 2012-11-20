@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: element.outerHTML should not print end tag if it is forbidden.
+            </action>
             <action type="udpate" dev="mguillem" issue="1126">
                 Change default RefreshHander to a NiceRefreshHandler(2).
             </action>

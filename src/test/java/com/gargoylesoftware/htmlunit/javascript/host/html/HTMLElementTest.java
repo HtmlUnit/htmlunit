@@ -728,7 +728,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(IE = { "Outer = <BR id=myNode>" },
             CHROME = { "Outer = <br id=\"myNode\">" },
             FF = { "Outer = undefined" })
-    @NotYetImplemented(IE)
     public void getOuterHTMLFromEmpty() throws Exception {
         final String html = createPageForGetOuterHTML("br", "", true);
         loadPageWithAlerts2(html);
@@ -860,7 +859,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>" },
             FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(IE)
     public void setOuterHTMLAddEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br>");
         loadPageWithAlerts2(html);
@@ -1023,7 +1021,6 @@ public class HTMLElementTest extends WebDriverTestCase {
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>" },
             FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
-    @NotYetImplemented(IE)
     public void setOuterHTMLAddSelfClosingEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br/>");
         loadPageWithAlerts2(html);

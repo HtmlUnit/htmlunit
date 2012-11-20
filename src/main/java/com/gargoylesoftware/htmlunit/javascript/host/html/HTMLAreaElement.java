@@ -91,4 +91,11 @@ public class HTMLAreaElement extends HTMLElement {
         super.setAccessKey(accessKey);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

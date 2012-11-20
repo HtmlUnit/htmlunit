@@ -27,10 +27,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 public class HTMLIsIndexElement extends HTMLElement {
 
     /**
-     * Creates an instance.
+     * {@inheritDoc}
      */
-    public HTMLIsIndexElement() {
-        // Empty.
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
     }
-
 }

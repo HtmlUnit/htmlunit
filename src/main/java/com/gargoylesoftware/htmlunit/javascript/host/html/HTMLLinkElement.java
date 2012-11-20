@@ -139,4 +139,11 @@ public class HTMLLinkElement extends HTMLElement {
         return sheet_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

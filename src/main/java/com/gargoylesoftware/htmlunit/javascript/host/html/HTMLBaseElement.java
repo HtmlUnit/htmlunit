@@ -71,4 +71,11 @@ public class HTMLBaseElement extends HTMLElement {
         getDomNodeOrDie().setAttribute("target", target);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

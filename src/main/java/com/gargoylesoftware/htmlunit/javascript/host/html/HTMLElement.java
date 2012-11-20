@@ -933,8 +933,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             buffer.append(">");
             // Add the children.
             printChildren(buffer, node, html);
-            // Close the tag. IE does it in uppercase, FF in lowercase.
-            buffer.append("</").append(tag).append(">");
+            if (!((HTMLElement) node.getScriptObject()).isEndTagForbidden()) {
+                buffer.append("</").append(tag).append(">");
+            }
         }
         else {
             final HtmlElement element = (HtmlElement) node;
@@ -2808,4 +2809,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         return new DOMStringMap(this);
     }
 
+    /**
+     * Returns whether the end tag is forbidden or not.
+     * @see http://www.w3.org/TR/html4/index/elements.html
+     * @return whether the end tag is forbidden or not
+     */
+    protected boolean isEndTagForbidden() {
+        return false;
+    }
 }

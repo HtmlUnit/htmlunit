@@ -27,10 +27,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 public class HTMLHRElement extends HTMLElement {
 
     /**
-     * Creates an instance.
+     * {@inheritDoc}
      */
-    public HTMLHRElement() {
-        // Empty.
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
     }
-
 }

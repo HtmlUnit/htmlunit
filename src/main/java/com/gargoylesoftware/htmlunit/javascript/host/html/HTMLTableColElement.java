@@ -101,4 +101,11 @@ public class HTMLTableColElement extends HTMLTableComponent {
         setWidthOrHeight("width", (width == null ? "" : Context.toString(width)), Boolean.FALSE);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

@@ -70,4 +70,11 @@ public class HTMLBRElement extends HTMLElement {
         getDomNodeOrDie().setAttribute("clear", clear);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

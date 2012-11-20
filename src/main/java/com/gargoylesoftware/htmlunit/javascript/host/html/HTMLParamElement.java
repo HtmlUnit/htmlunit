@@ -27,9 +27,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 public class HTMLParamElement extends HTMLElement {
 
     /**
-     * Creates an instance.
+     * {@inheritDoc}
      */
-    public HTMLParamElement() {
-        // Empty.
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
     }
 }

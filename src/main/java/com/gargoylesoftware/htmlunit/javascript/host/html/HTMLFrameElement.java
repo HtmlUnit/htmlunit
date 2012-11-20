@@ -139,4 +139,12 @@ public class HTMLFrameElement extends HTMLElement {
     public void setBorder(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

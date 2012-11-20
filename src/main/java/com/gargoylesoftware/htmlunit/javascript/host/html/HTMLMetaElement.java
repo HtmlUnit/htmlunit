@@ -146,4 +146,11 @@ public class HTMLMetaElement extends HTMLElement {
         //empty
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

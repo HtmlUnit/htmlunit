@@ -90,4 +90,12 @@ public class HTMLBaseFontElement extends HTMLElement {
     public void setSize(final int size) {
         getDomNodeOrDie().setAttribute("size", Context.toString(Integer.valueOf(size)));
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

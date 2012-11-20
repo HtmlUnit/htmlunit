@@ -269,4 +269,12 @@ public class HTMLImageElement extends HTMLElement {
     public void setHeight(final String height) {
         getDomNodeOrDie().setAttribute("height", height);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

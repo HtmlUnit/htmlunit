@@ -389,4 +389,11 @@ public class HTMLInputElement extends FormField {
         return super.getType();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

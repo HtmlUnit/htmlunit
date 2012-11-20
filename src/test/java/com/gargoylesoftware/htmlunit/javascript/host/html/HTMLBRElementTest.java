@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class HTMLBRElementTest extends WebDriverTestCase {
@@ -88,4 +89,21 @@ public class HTMLBRElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "<br id=\"myId\">", FF3_6 = "undefined", FF10 = "undefined", IE = "<BR id=myId>")
+    public void outerHTML() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest(){\n"
+            + "    alert(document.getElementById('myId').outerHTML);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "  <br id='myId'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
