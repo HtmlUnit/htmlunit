@@ -424,8 +424,8 @@ public class JavaScriptEngine {
 
     private void configureConstants(final ClassConfiguration config,
             final ScriptableObject scriptable) {
+        final Class<?> linkedClass = config.getHostClass();
         for (final String constant : config.constants()) {
-            final Class<?> linkedClass = config.getHostClass();
             try {
                 final Object value = linkedClass.getField(constant).get(null);
                 scriptable.defineProperty(constant, value, ScriptableObject.EMPTY);
@@ -595,14 +595,10 @@ public class JavaScriptEngine {
     }
 
     private Scriptable getScope(final HtmlPage htmlPage, final DomNode htmlElement) {
-        final Scriptable scope;
         if (htmlElement != null) {
-            scope = htmlElement.getScriptObject();
+            return htmlElement.getScriptObject();
         }
-        else {
-            scope = (Window) htmlPage.getEnclosingWindow().getScriptObject();
-        }
-        return scope;
+        return (Window) htmlPage.getEnclosingWindow().getScriptObject();
     }
 
     /**

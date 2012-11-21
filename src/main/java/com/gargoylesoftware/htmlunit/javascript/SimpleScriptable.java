@@ -73,8 +73,9 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
         // If this object is not case-sensitive about property names, transform the property name accordingly.
         if (!caseSensitive_) {
             for (final Object o : getAllIds()) {
-                if (name.equalsIgnoreCase(Context.toString(o))) {
-                    name = Context.toString(o);
+                final String objectName = Context.toString(o);
+                if (name.equalsIgnoreCase(objectName)) {
+                    name = objectName;
                     break;
                 }
             }
