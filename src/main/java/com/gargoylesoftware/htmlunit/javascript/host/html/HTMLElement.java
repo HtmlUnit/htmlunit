@@ -66,6 +66,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.cyberneko.html.HTMLElements;
 import org.w3c.css.sac.CSSException;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -1033,8 +1034,26 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             throw Context.reportRuntimeError("outerHTML is read-only for tag " + domNode.getNodeName());
         }
 
-        final DomNode proxyNode = new ProxyDomNode(domNode.getPage(), domNode, false);
-        parseHtmlSnippet(proxyNode, false, value);
+        final DomDocumentFragment fragment = (DomDocumentFragment) domNode.getPage().createDocumentFragment();
+        parseHtmlSnippet(fragment, false, value);
+        DomNode child = fragment.getFirstChild();
+        if (child instanceof DomElement) {
+            final String parentName = domNode.getParentNode().getNodeName().toUpperCase();
+            final short[] closes = HTMLElements.getElement(child.getNodeName()).closes;
+            if (closes != null) {
+                for (final short close : closes) {
+                    if (HTMLElements.getElement(close).name.equals(parentName)) {
+                        throw Context.reportRuntimeError("outerHTML can not set '" + value
+                                + "' while its parent is " + domNode.getParentNode());
+                    }
+                }
+            }
+        }
+
+        while (child != null) {
+            domNode.insertBefore(child);
+            child = fragment.getFirstChild();
+        }
         domNode.remove();
     }
 

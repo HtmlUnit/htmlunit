@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour" issue="1452">
+                JavaScript: element.outerHTML should throw an error if the provided value closes the parent.
+            </action>
             <action type="fix" dev="asashour">
                 JavaScript: element.outerHTML should not print end tag if it is forbidden.
             </action>
