@@ -402,10 +402,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_47,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_48,
 
     /** Was originally .isIE(). */
@@ -1042,6 +1038,12 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED,
+
+    /** Support for accessing the frame of a window by id additionally
+     * to using the name (FF).
+     */
+    @BrowserFeature({ @WebBrowser(IE) })
+    JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID,
 
     /** Window property not usable as function. */
     @BrowserFeature(@WebBrowser(IE))

@@ -16,9 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_129;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_133;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_47;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_NOT_ALLOWED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_IS_NOT_A_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -442,7 +442,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         if (code == null) {
             throw Context.reportRuntimeError("Function not provided.");
         }
-        else if (code instanceof String) {
+
+        if (code instanceof String) {
             final String s = (String) code;
             final String description = "window.setTimeout(" + s + ", " + timeout + ")";
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
@@ -2042,7 +2043,7 @@ class HTMLCollectionFrames extends HTMLCollection {
                 }
                 return getScriptableForElement(window);
             }
-            else if (getBrowserVersion().hasFeature(GENERATED_47)
+            if (getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID)
                     && frameElt.getAttribute("id").equals(name)) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Property \"" + name + "\" evaluated (by id) to " + window);
