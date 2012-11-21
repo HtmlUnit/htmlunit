@@ -1682,8 +1682,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts({ "0", "0" })
     @Test
+    @Alerts({ "0", "0" })
     public void clientLeftTop() throws Exception {
         final String html = "<html><body>"
             + "<div id='div1'>hello</div><script>\n"
@@ -1698,8 +1698,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * Another nice feature of the IE.
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = { "0", "0" }, IE = { "2", "2" })
     @Test
+    @Alerts(DEFAULT = { "0", "0" }, IE = { "2", "2" })
     public void clientLeftTop_documentElement() throws Exception {
         final String html =
               "<!DOCTYPE HTML "
@@ -1717,8 +1717,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = { "4", "4" }, IE = { "0", "0" })
     @Test
+    @Alerts(DEFAULT = { "4", "4" }, IE = { "0", "0" })
     public void clientLeftTopWithBorder() throws Exception {
         final String html = "<html><body>"
             + "<div id='div1' style='border: 4px solid black;'>hello</div><script>\n"
@@ -1732,8 +1732,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = "[object ClientRect]", IE = "[object]")
     @Test
+    @Alerts(DEFAULT = "[object ClientRect]", IE = "[object]")
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body><div id='div1'>hello</div><script>\n"
             + "try {\n"
@@ -1748,9 +1748,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = { "400", "100" }, IE = { "402", "102" })
     @Test
-//    @NotYetImplemented({ FF, CHROME })
+    @Alerts(DEFAULT = { "400", "100" }, IE = { "402", "102" })
     public void getBoundingClientRect2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -1771,8 +1770,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = { "0", "100", "100", "50" }, IE = { "2", "102", "102", "52" })
     @Test
+    @Alerts(DEFAULT = { "0", "100", "100", "50" }, IE = { "2", "102", "102", "52" })
     public void getBoundingClientRect_Scroll() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
