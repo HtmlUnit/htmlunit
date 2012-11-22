@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *     pre.innerHTML = pre.innerHTML.replace('APPVERSION', navigator.appVersion);
  *     pre.innerHTML = pre.innerHTML.replace('USERAGENT', navigator.userAgent);
  *     var isMicrosoft = navigator.appName.indexOf('Microsoft') != -1;
- *     var numeric = isMicrosoft ? 9 : 16;
+ *     var numeric = isMicrosoft ? 9 : 17;
  *     pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
  *     var browser = isMicrosoft ? "INTERNET_EXPLORER_8" : "FIREFOX_10";
  *     pre.innerHTML = pre.innerHTML.replace('BROWSER', browser);
@@ -119,7 +119,7 @@ public class BrowserVersion implements Serializable {
     /** Firefox Warning: experimental!!! */
     public static final BrowserVersion FIREFOX_10 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
-        "Mozilla/5.0 (Windows NT 6.1; rv:10.0.10) Gecko/20100101 Firefox/10.0.10",
+        "Mozilla/5.0 (Windows NT 6.1; rv:10.0.11) Gecko/20100101 Firefox/10.0.11",
         (float) 10.0, "FF10", null);
 
     /** Internet Explorer 6. */
