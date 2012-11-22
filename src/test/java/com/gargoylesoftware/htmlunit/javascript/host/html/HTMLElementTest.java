@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -2432,7 +2433,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF3_6 = { "undefined", "true" }, CHROME = { "undefined", "true" },
             DEFAULT = "exception")
-    @NotYetImplemented(FF)
+    @NotYetImplemented(FF3_6)
     public void prototype_innerHTML() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
