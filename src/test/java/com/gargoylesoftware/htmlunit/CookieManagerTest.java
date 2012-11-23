@@ -281,6 +281,60 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /**
+     * Two digits years should be interpreted as 20xx if before 1970 and as 19xx otherwise.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("cookie1=1; cookie2=2; cookie3=3")
+    public void setCookieExpires_twoDigits() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun 01-Dec-68 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie2=2;expires=Thu 01-Dec-69 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie3=3;expires=Mon 31-Dec-69 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie4=4;expires=Thu 01-Jan-70 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie5=5;expires=Tue 01-Dec-70 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie6=6;expires=Wed 01-Dec-71 16:00:00 GMT"));
+        getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader1);
+
+        loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
+     * Two digits years should be interpreted as 20xx if before 1970 and as 19xx otherwise.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("cookie1=1; cookie2=2; cookie3=3")
+    public void setCookieExpires_twoDigits2() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun,01 Dec 68 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie2=2;expires=Thu,01 Dec 69 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie3=3;expires=Mon,31 Dec 69 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie4=4;expires=Thu,01 Jan 70 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie5=5;expires=Tue,01 Dec 70 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie6=6;expires=Wed,01 Dec 71 16:00:00 GMT"));
+        getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader1);
+
+        loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
+     * Two digits years should be interpreted as 20xx if before 1970 and as 19xx otherwise,
+     * even with a quite strange date format.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("cookie1=1")
+    public void setCookieExpires_badDateFormat() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie1=1;expires=Sun-01 Dec 68 16:00:00 GMT"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "cookie6=6;expires=Wed-01 Dec 71 16:00:00 GMT"));
+        getMockWebConnection().setResponse(getDefaultUrl(), HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader1);
+
+        loadPageWithAlerts2(getDefaultUrl());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                Cookies: use 1970 as two digits year start for the expiration date.
+            </action>
+            <action type="fix" dev="mguillem">
+                Cookies: accept more non standard date formats for the expiration date.
+            </action>
             <action type="fix" dev="asashour" issue="1463">
                 Properly handle spaces after "em" element.
             </action>

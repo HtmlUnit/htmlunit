@@ -29,14 +29,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -97,6 +96,8 @@ import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.impl.cookie.BasicPathHandler;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
+import org.apache.http.impl.cookie.DateParseException;
+import org.apache.http.impl.cookie.DateUtils;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
@@ -734,8 +735,26 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
      */
     private static final Comparator<Cookie> COOKIE_COMPARATOR = new CookiePathComparator();
 
-    private static final SimpleDateFormat INCORRECT_FORMAT
-        = new SimpleDateFormat("EEE,dd MMM yyyy HH:mm:ss z", Locale.US);
+    private static final Date DATE_1_1_1970;
+
+    static {
+        final Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(DateUtils.GMT);
+        calendar.set(1970, Calendar.JANUARY, 1, 0, 0, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        DATE_1_1_1970 = calendar.getTime();
+    }
+
+    // simplified patterns from BrowserCompatSpec, with yy patterns before similar yyyy patterns
+    private static final String[] DEFAULT_DATE_PATTERNS = new String[] {
+        "EEE dd MMM yy HH mm ss zzz",
+        "EEE dd MMM yyyy HH mm ss zzz",
+        "EEE MMM d HH mm ss yyyy",
+        "EEE dd MMM yy HH mm ss z ",
+        "EEE dd MMM yyyy HH mm ss z ",
+        "EEE dd MM yy HH mm ss z ",
+        "EEE dd MM yyyy HH mm ss z ",
+    };
 
     HtmlUnitBrowserCompatCookieSpec(final IncorrectnessListener incorrectnessListener) {
         super();
@@ -749,6 +768,7 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
 
         final CookieAttributeHandler originalExpiresHandler = getAttribHandler(ClientCookie.EXPIRES_ATTR);
         final CookieAttributeHandler wrapperExpiresHandler = new CookieAttributeHandler() {
+
             public void validate(final Cookie cookie, final CookieOrigin origin) throws MalformedCookieException {
                 originalExpiresHandler.validate(cookie, origin);
             }
@@ -757,22 +777,11 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
                 if (value.startsWith("\"") && value.endsWith("\"")) {
                     value = value.substring(1, value.length() - 1);
                 }
-                final int length = value.length();
-                if (value.endsWith("GMT") && length > 16 && !Character.isDigit(value.charAt(length - 16))) {
-                    //add "19" prefix to the year
-                    value = value.substring(0, length - 15) + "19" + value.substring(length - 15);
-                    try {
-                        INCORRECT_FORMAT.parse(value);
-                        value = value.substring(0, 4) + ' ' + value.substring(4);
-                    }
-                    catch (final Exception e) {
-                        //this is ok
-                    }
-                }
+                value = value.replaceAll("[ ,:-]+", " ");
                 try {
-                    originalExpiresHandler.parse(cookie, value);
+                    cookie.setExpiryDate(DateUtils.parseDate(value, DEFAULT_DATE_PATTERNS, DATE_1_1_1970));
                 }
-                catch (final MalformedCookieException e) {
+                catch (final DateParseException e) {
                     incorrectnessListener.notify("Incorrect cookie expiration time: " + value, this);
                 }
             }
