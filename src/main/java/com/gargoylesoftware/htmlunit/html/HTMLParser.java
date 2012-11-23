@@ -660,7 +660,8 @@ public final class HTMLParser {
                 if (node.getFirstChild() != null
                     && (node instanceof HtmlAnchor || node instanceof HtmlSpan || node instanceof HtmlFont
                         || node instanceof HtmlStrong || node instanceof HtmlBold
-                        || node instanceof HtmlItalic || node instanceof HtmlUnderlined)) {
+                        || node instanceof HtmlItalic || node instanceof HtmlUnderlined
+                        || node instanceof HtmlEmphasis)) {
                     return false;
                 }
             }

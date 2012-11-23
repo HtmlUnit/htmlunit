@@ -441,4 +441,28 @@ public class HTMLParser2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_em() throws Exception {
+        final String html = "<html><head><title>test_getChildNodes</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  for (var i = 1; i <= 6; i++) {\n"
+            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<p id='p1'> <em></em> </p>\n"
+            + "<p id='p2'><em></em> </p>\n"
+            + "<p id='p3'> <em></em></p>\n"
+            + "<p id='p4'> <em>something</em> </p>\n"
+            + "<p id='p5'><em>something</em> </p>\n"
+            + "<p id='p6'> <em>something</em></p>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
