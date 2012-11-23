@@ -658,10 +658,24 @@ public final class HTMLParser {
                     return false;
                 }
                 if (node.getFirstChild() != null
-                    && (node instanceof HtmlAnchor || node instanceof HtmlSpan || node instanceof HtmlFont
+                    && (node instanceof HtmlAnchor || node instanceof HtmlSpan
+                        || node instanceof HtmlFont
                         || node instanceof HtmlStrong || node instanceof HtmlBold
                         || node instanceof HtmlItalic || node instanceof HtmlUnderlined
-                        || node instanceof HtmlEmphasis)) {
+                        || node instanceof HtmlEmphasis
+                        || node instanceof HtmlAbbreviated || node instanceof HtmlAcronym
+                        || node instanceof HtmlBaseFont || node instanceof HtmlBidirectionalOverride
+                        || node instanceof HtmlBig || node instanceof HtmlBlink
+                        || node instanceof HtmlCitation || node instanceof HtmlCode
+                        || node instanceof HtmlDeletedText || node instanceof HtmlDefinition
+                        || node instanceof HtmlInsertedText || node instanceof HtmlKeyboard
+                        || node instanceof HtmlLabel || node instanceof HtmlMap
+                        || node instanceof HtmlNoBreak || node instanceof HtmlInlineQuotation
+                        || node instanceof HtmlS || node instanceof HtmlSample
+                        || node instanceof HtmlSmall || node instanceof HtmlStrike
+                        || node instanceof HtmlSubscript || node instanceof HtmlSuperscript
+                        || node instanceof HtmlTeletype || node instanceof HtmlVariable
+                        )) {
                     return false;
                 }
             }

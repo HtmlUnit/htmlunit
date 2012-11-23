@@ -15,7 +15,9 @@
                 Cookies: accept more non standard date formats for the expiration date.
             </action>
             <action type="fix" dev="asashour" issue="1463">
-                Properly handle spaces after "em" element.
+                Properly handle spaces after elements: "abbr", "acronym", "basefont", "bdo", "big", "blink", "cite",
+                "code", "del", "dfn", "em", "ins", "kbd", "label", "map", "nobr", "q", "s", "samp", "small", "strike",
+                "sub", "sup", "tt" and "var".
             </action>
             <action type="fix" dev="asashour" issue="1452">
                 JavaScript: element.outerHTML should throw an error if the provided value closes the parent.

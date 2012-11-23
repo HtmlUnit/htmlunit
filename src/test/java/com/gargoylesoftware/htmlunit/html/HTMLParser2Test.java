@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -226,7 +229,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "2", "1", "2", "1", "1", "1", "2", "2", "1", "1", "1", "1" },
             FF = { "2", "2", "3", "3", "2", "2", "3", "2", "2", "3", "2", "2" })
-    public void childNodes_p() throws Exception {
+    public void childNodes_p_parent() throws Exception {
         final String html = "<html><head><title>test_getChildNodes</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -286,183 +289,1041 @@ public class HTMLParser2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-    /**
-     * @throws Exception on test failure
-     */
-    @Test
-    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
-    public void childNodes_span() throws Exception {
-        final String html = "<html><head><title>test_getChildNodes</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  for (var i = 1; i <= 6; i++) {\n"
-            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
-            + "  }\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<p id='p1'> <span></span> </p>\n"
-            + "<p id='p2'><span></span> </p>\n"
-            + "<p id='p3'> <span></span></p>\n"
-            + "<p id='p4'> <span>something</span> </p>\n"
-            + "<p id='p5'><span>something</span> </p>\n"
-            + "<p id='p6'> <span>something</span></p>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    private String createHtmlForChildNodes(final String tagName) {
+        return "<html><head><title>test_getChildNodes</title>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  for (var i = 1; i <= 6; i++) {\n"
+                + "    alert(document.getElementById('p' + i).childNodes.length);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "<p id='p1'> <" + tagName + "></" + tagName + "> </p>\n"
+                + "<p id='p2'><" + tagName + "></" + tagName + "> </p>\n"
+                + "<p id='p3'> <" + tagName + "></" + tagName + "></p>\n"
+                + "<p id='p4'> <" + tagName + ">something</" + tagName + "> </p>\n"
+                + "<p id='p5'><" + tagName + ">something</" + tagName + "> </p>\n"
+                + "<p id='p6'> <" + tagName + ">something</" + tagName + "></p>\n"
+                + "</body></html>";
     }
 
     /**
-     * @throws Exception on test failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
-    public void childNodes_strong() throws Exception {
-        final String html = "<html><head><title>test_getChildNodes</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  for (var i = 1; i <= 6; i++) {\n"
-            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
-            + "  }\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<p id='p1'> <strong></strong> </p>\n"
-            + "<p id='p2'><strong></strong> </p>\n"
-            + "<p id='p3'> <strong></strong></p>\n"
-            + "<p id='p4'> <strong>something</strong> </p>\n"
-            + "<p id='p5'><strong>something</strong> </p>\n"
-            + "<p id='p6'> <strong>something</strong></p>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    public void childNodes_abbr() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("abbr"));
     }
 
     /**
-     * @throws Exception on test failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
-    public void childNodes_i() throws Exception {
-        final String html = "<html><head><title>test_getChildNodes</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  for (var i = 1; i <= 6; i++) {\n"
-            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
-            + "  }\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<p id='p1'> <i></i> </p>\n"
-            + "<p id='p2'><i></i> </p>\n"
-            + "<p id='p3'> <i></i></p>\n"
-            + "<p id='p4'> <i>something</i> </p>\n"
-            + "<p id='p5'><i>something</i> </p>\n"
-            + "<p id='p6'> <i>something</i></p>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    public void childNodes_acronym() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("acronym"));
     }
 
     /**
-     * @throws Exception on test failure
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_a() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("a"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_address() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("address"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented(IE)
+    public void childNodes_applet() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("applet"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @NotYetImplemented
+    public void childNodes_area() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("area"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented(IE)
+    public void childNodes_audio() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("audio"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @NotYetImplemented(IE)
+    public void childNodes_bgsound() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("bgsound"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "2" }, FF = { "3", "2", "2", "3", "2", "3" })
+    public void childNodes_base() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("base"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @NotYetImplemented(FF)
+    public void childNodes_basefont() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("basefont"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_bdo() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("bdo"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_big() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("big"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_blink() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("blink"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    public void childNodes_blockquote() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("blockquote"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "1", "1", "1" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented(FF)
+    public void childNodes_body() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("body"));
+    }
+
+    /**
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
     public void childNodes_b() throws Exception {
-        final String html = "<html><head><title>test_getChildNodes</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  for (var i = 1; i <= 6; i++) {\n"
-            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
-            + "  }\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<p id='p1'> <b></b> </p>\n"
-            + "<p id='p2'><b></b> </p>\n"
-            + "<p id='p3'> <b></b></p>\n"
-            + "<p id='p4'> <b>something</b> </p>\n"
-            + "<p id='p5'><b>something</b> </p>\n"
-            + "<p id='p6'> <b>something</b></p>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(createHtmlForChildNodes("b"));
     }
 
     /**
-     * @throws Exception on test failure
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "3", "3", "3" }, FF = { "4", "3", "3", "5", "4", "4" })
+    @NotYetImplemented
+    public void childNodes_br() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("br"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented(IE)
+    public void childNodes_button() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("button"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented(IE)
+    public void childNodes_canvas() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("canvas"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented(IE)
+    public void childNodes_caption() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("caption"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_center() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("center"));
+    }
+
+    /**
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
-    public void childNodes_u() throws Exception {
-        final String html = "<html><head><title>test_getChildNodes</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  for (var i = 1; i <= 6; i++) {\n"
-            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
-            + "  }\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<p id='p1'> <u></u> </p>\n"
-            + "<p id='p2'><u></u> </p>\n"
-            + "<p id='p3'> <u></u></p>\n"
-            + "<p id='p4'> <u>something</u> </p>\n"
-            + "<p id='p5'><u>something</u> </p>\n"
-            + "<p id='p6'> <u>something</u></p>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    public void childNodes_cite() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("cite"));
     }
 
     /**
-     * @throws Exception on test failure
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
-    public void childNodes_font() throws Exception {
-        final String html = "<html><head><title>test_getChildNodes</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  for (var i = 1; i <= 6; i++) {\n"
-            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
-            + "  }\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<p id='p1'> <font></font> </p>\n"
-            + "<p id='p2'><font></font> </p>\n"
-            + "<p id='p3'> <font></font></p>\n"
-            + "<p id='p4'> <font>something</font> </p>\n"
-            + "<p id='p5'><font>something</font> </p>\n"
-            + "<p id='p6'> <font>something</font></p>\n"
-            + "</body></html>";
-        loadPageWithAlerts2(html);
+    public void childNodes_code() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("code"));
     }
 
     /**
-     * @throws Exception on test failure
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_dfn() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("dfn"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_dd() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("dd"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_del() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("del"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_dir() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("dir"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    public void childNodes_div() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("div"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_dl() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("dl"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_dt() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("dt"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "3", "3", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @NotYetImplemented
+    public void childNodes_embed() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("embed"));
+    }
+
+    /**
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
     public void childNodes_em() throws Exception {
-        final String html = "<html><head><title>test_getChildNodes</title>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  for (var i = 1; i <= 6; i++) {\n"
-            + "    alert(document.getElementById('p' + i).childNodes.length);\n"
-            + "  }\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<p id='p1'> <em></em> </p>\n"
-            + "<p id='p2'><em></em> </p>\n"
-            + "<p id='p3'> <em></em></p>\n"
-            + "<p id='p4'> <em>something</em> </p>\n"
-            + "<p id='p5'><em>something</em> </p>\n"
-            + "<p id='p6'> <em>something</em></p>\n"
-            + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(createHtmlForChildNodes("em"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_fieldset() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("fieldset"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_font() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("font"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented(IE)
+    public void childNodes_form() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("form"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented
+    public void childNodes_frame() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("frame"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "1", "1", "3", "3", "2" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented
+    public void childNodes_frameset() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("frameset"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    public void childNodes_h1() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("h1"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    public void childNodes_h2() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("h2"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    public void childNodes_h3() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("h3"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    public void childNodes_h4() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("h4"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    public void childNodes_h5() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("h5"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    public void childNodes_h6() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("h6"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "1", "1", "1" }, FF = { "1", "1", "1", "1", "1", "1" })
+    public void childNodes_head() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("head"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    public void childNodes_hr() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("hr"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "1", "1", "1" }, FF = { "1", "1", "1", "1", "1", "1" })
+    public void childNodes_html() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_iframe() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("iframe"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_q() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("q"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "3", "3", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @NotYetImplemented(IE)
+    public void childNodes_img() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("img"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_ins() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("ins"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented(FF)
+    public void childNodes_isindex() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("isindex"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_i() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("i"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_kbd() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("kbd"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_label() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("label"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented
+    public void childNodes_legend() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("legend"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_listing() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("listing"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_li() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("li"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @NotYetImplemented(IE)
+    public void childNodes_link() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("link"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_map() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("map"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_marquee() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("marquee"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_menu() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("menu"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @NotYetImplemented(IE)
+    public void childNodes_meta() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("meta"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented(IE)
+    public void childNodes_multicol() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("multicol"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_nobr() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("nobr"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_noembed() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("noembed"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_noframes() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("noframes"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_noscript() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("noscript"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_object() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("object"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_ol() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("ol"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented
+    public void childNodes_optgroup() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("optgroup"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented
+    public void childNodes_option() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("option"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    public void childNodes_p() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("p"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @NotYetImplemented
+    public void childNodes_param() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("param"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0" }, FF = { "1" })
+    @NotYetImplemented
+    public void childNodes_plaintext() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("plaintext"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_pre() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("pre"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented(IE)
+    public void childNodes_progress() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("progress"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_s() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("s"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_samp() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("samp"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented
+    public void childNodes_script() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("script"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented(IE)
+    public void childNodes_select() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("select"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_small() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("small"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @NotYetImplemented
+    public void childNodes_source() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("source"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented
+    public void childNodes_spacer() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("spacer"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_span() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("span"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_strike() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("strike"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_strong() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("strong"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_style() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("style"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_sub() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("sub"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_sup() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("sup"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "1", "1", "1" }, FF = { "3", "2", "2", "3", "3", "2" })
+    @NotYetImplemented(FF)
+    public void childNodes_table() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("table"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented(IE)
+    public void childNodes_col() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("col"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented(IE)
+    public void childNodes_colgroup() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("colgroup"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented(IE)
+    public void childNodes_tbody() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("tbody"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented(IE)
+    public void childNodes_td() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("td"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented(IE)
+    public void childNodes_th() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("th"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented(IE)
+    public void childNodes_tr() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("tr"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented(IE)
+    public void childNodes_textarea() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("textarea"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented(IE)
+    public void childNodes_tfoot() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("tfoot"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "1", "1", "1", "1", "1", "1" })
+    @NotYetImplemented(IE)
+    public void childNodes_thead() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("thead"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_tt() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("tt"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented(FF)
+    public void childNodes_title() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("title"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_u() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("u"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_ul() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("ul"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "1", "1", "1", "2", "2", "1" }, FF = { "3", "2", "2", "3", "2", "2" })
+    public void childNodes_var() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("var"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented(IE)
+    public void childNodes_video() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("video"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "3" })
+    @NotYetImplemented(IE)
+    public void childNodes_wbr() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("wbr"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
+    @NotYetImplemented
+    public void childNodes_xmp() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("xmp"));
     }
 }
