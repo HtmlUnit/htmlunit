@@ -1760,18 +1760,6 @@ public class HtmlPage extends SgmlPage {
         }
     }
 
-    /**
-     * Checks whether the specified element is descendant of this HtmlPage or not.
-     */
-    private boolean isDescendant(final DomElement element) {
-        for (DomNode parent = element; parent != null; parent = parent.getParentNode()) {
-            if (parent == this) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private void addElement(final Map<String, List<DomElement>> map, final DomElement element,
             final String attribute, final boolean recurse) {
         final String value = element.getAttribute(attribute);

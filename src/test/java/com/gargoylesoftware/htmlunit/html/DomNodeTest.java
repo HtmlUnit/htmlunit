@@ -788,4 +788,31 @@ public class DomNodeTest extends SimpleWebTestCase {
         loadPageWithAlerts(html);
     }
 
+    /**
+     * Test for Bug #1253.
+     *
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({ "true", "exception", "1", "0" })
+    public void appendChild_recursive_parent() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+                + "<script>\n"
+                + "function test(){\n"
+                + "  var e1 = document.createElement('div');\n"
+                + "  var e2 = document.createElement('div');\n"
+                + "  try {\n"
+                + "    alert(e1.appendChild(e2) === e2);\n"
+                + "    alert(e2.appendChild(e1) === e1);\n"
+                + "  } catch(e) {alert('exception');}\n"
+                + "  alert(e1.childNodes.length);"
+                + "  alert(e2.childNodes.length);"
+                + "}\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
 }

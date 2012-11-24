@@ -884,6 +884,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             return this;
         }
         final DomNode domNode = (DomNode) node;
+        if (domNode.isDescendant(this)) {
+            Context.throwAsScriptRuntimeEx(new Exception("Can not add (grand)parent to itself " + this));
+        }
 
         if (domNode instanceof DomDocumentFragment) {
             final DomDocumentFragment fragment = (DomDocumentFragment) domNode;
@@ -1623,4 +1626,19 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     protected boolean hasFeature(final BrowserVersionFeatures feature) {
         return getPage().getWebClient().getBrowserVersion().hasFeature(feature);
     }
+
+    /**
+     * Checks whether the specified node is descendant of this node or not.
+     * @param node the node to check if it is descendant or not
+     * @return whether the specified node is descendant of this node or not
+     */
+    protected boolean isDescendant(final DomNode node) {
+        for (DomNode parent = node; parent != null; parent = parent.getParentNode()) {
+            if (parent == this) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
