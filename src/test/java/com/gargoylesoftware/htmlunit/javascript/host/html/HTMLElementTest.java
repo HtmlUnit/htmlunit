@@ -2550,4 +2550,47 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(" ")
+    @NotYetImplemented
+    public void setAttribute_className() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test(){\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.setAttribute('className', 't');"
+            + "    alert(div.className);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("t")
+    @NotYetImplemented(IE)
+    public void setAttribute_class() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test(){\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.setAttribute('class', 't');"
+            + "    alert(div.className);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
