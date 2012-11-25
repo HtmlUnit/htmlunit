@@ -48,6 +48,9 @@ public class WebSocketTest extends WebDriverTestCase {
     public void chat() throws Exception {
         //TODO: compatibility of FF and Chrome versions.
         if (getBrowserVersion().isFirefox()) {
+            final String firstResponse = "Browser: has joined!";
+            final String secondResponse = "Browser: Hope you are fine!";
+
             startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
                 null, null, new ChatWebSocketHandler());
             final WebDriver driver = getWebDriver();
@@ -58,15 +61,19 @@ public class WebSocketTest extends WebDriverTestCase {
             final WebElement chatE = driver.findElement(By.id("chat"));
             int counter = 0;
             do {
-                Thread.sleep(500);
-            } while (chatE.getText().isEmpty() && counter++ < 4);
+                Thread.sleep(100);
+            } while (chatE.getText().isEmpty() && counter++ < 10);
 
-            assertEquals("Browser: has joined!", chatE.getText());
+            assertEquals(firstResponse, chatE.getText());
+
             driver.findElement(By.id("phrase")).sendKeys("Hope you are fine!");
             driver.findElement(By.id("sendB")).click();
-            Thread.sleep(500);
+            counter = 0;
+            do {
+                Thread.sleep(100);
+            } while (!chatE.getText().contains(secondResponse) && counter++ < 10);
 
-            assertEquals("Browser: has joined!\nBrowser: Hope you are fine!", chatE.getText());
+            assertEquals(firstResponse + "\n" + secondResponse, chatE.getText());
         }
     }
 
