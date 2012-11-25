@@ -669,7 +669,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param value Value to set the attribute to
      */
     @Override
-    @JsxFunction
     public void setAttribute(String name, final String value) {
         name = fixAttributeName(name);
         getDomNodeOrDie().setAttribute(name, value);
