@@ -2632,4 +2632,60 @@ public class HTMLElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(FF = { "null", "", "null", "undefined" }, IE = { "", "", "null", "undefined" })
+    public void getAttribute2() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       var form = document.getElementById('testForm');\n"
+                + "       alert(form.getAttribute('target'));\n"
+                + "       alert(form.target);\n"
+                + "       alert(form.getAttribute('target222'));\n"
+                + "       alert(form.target222);\n"
+                + "   }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "<form id='testForm' action='#' method='get'>\n"
+                + "</form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({ "null", "", "null", "undefined" })
+    @NotYetImplemented(IE)
+    public void getAttribute2_standards() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html>\n"
+                + "<head>\n"
+                + "    <title>test</title>\n"
+                + "    <script>\n"
+                + "    function doTest(){\n"
+                + "       var form = document.getElementById('testForm');\n"
+                + "       alert(form.getAttribute('target'));\n"
+                + "       alert(form.target);\n"
+                + "       alert(form.getAttribute('target222'));\n"
+                + "       alert(form.target222);\n"
+                + "   }\n"
+                + "    </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "<form id='testForm' action='#' method='get'>\n"
+                + "</form>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
