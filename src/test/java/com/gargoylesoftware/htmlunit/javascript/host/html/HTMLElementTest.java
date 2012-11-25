@@ -2555,8 +2555,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(" ")
-    @NotYetImplemented
+    @Alerts("")
+    @NotYetImplemented(IE)
     public void setAttribute_className() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
