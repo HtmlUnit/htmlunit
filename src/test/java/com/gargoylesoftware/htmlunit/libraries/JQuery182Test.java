@@ -1080,7 +1080,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("support: A background on the testElement does not cause IE8 to crash (#9823) (0, 1, 1)")
-    @NotYetImplemented(IE)
     public void test_106() throws Exception {
         runTest(106);
     }
@@ -1504,6 +1503,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "attributes: attr(jquery_method) (0, 9, 9)",
         CHROME = "attributes: attr(jquery_method) (0, 9, 9)",
         IE = "attributes: attr(String, Object) (0, 81, 81)")
+    @NotYetImplemented(IE)
     public void test_143() throws Exception {
         runTest(143);
     }
@@ -1588,6 +1588,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "attributes: prop(String, Object) (0, 31, 31)",
         CHROME = "attributes: prop(String, Object) (0, 31, 31)",
         IE = "attributes: removeAttr(Multi String, variable space width) (0, 8, 8)")
+    @NotYetImplemented(IE)
     public void test_150() throws Exception {
         runTest(150);
     }

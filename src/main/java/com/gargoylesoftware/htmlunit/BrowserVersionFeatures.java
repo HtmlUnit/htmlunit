@@ -450,10 +450,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_66,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_69,
 
     /** Was originally .isIE(). */
@@ -582,6 +578,13 @@ public enum BrowserVersionFeatures {
     /** Allows invalid 'align' values. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLELEMENT_ALIGN_INVALID,
+
+    /**
+     * Indicates that attribute name should be fixed for get/setAttribute(), specifically "className" and "class",
+     * only in quirks mode.
+     */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE,
 
     /** */
     HTMLELEMENT_TRIM_CLASS_ATTRIBUTE,

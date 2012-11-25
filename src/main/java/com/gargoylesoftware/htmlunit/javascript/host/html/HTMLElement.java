@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_167;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_65;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_66;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_69;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_70;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_71;
@@ -564,7 +564,8 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     protected String fixAttributeName(final String attributeName) {
-        if (getBrowserVersion().hasFeature(GENERATED_66)) {
+        if (getBrowserVersion().hasFeature(HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE)
+                && ((HtmlPage) getDomNodeOrDie().getPage()).isQuirksMode()) {
             if ("className".equals(attributeName)) {
                 return "class";
             }

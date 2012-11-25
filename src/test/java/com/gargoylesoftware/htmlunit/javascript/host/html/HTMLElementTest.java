@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link HTMLElement}.
@@ -2555,14 +2556,53 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("")
-    @NotYetImplemented(IE)
+    @Alerts(IE = "t", FF = "")
     public void setAttribute_className() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test(){\n"
             + "    var div = document.createElement('div');\n"
-            + "    div.setAttribute('className', 't');"
+            + "    div.setAttribute('className', 't');\n"
+            + "    alert(div.className);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(IE = "", FF = "t")
+    public void setAttribute_class() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test(){\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.setAttribute('class', 't');\n"
+            + "    alert(div.className);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("")
+    public void setAttribute_className_standards() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+            + "<script>\n"
+            + "  function test(){\n"
+            + "    var div = document.createElement('div');\n"
+            + "    div.setAttribute('className', 't');\n"
             + "    alert(div.className);\n"
             + "  }\n"
             + "</script>\n"
@@ -2577,13 +2617,12 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("t")
-    @NotYetImplemented(IE)
-    public void setAttribute_class() throws Exception {
-        final String html = "<html><head>\n"
+    public void setAttribute_class_standards() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
             + "  function test(){\n"
             + "    var div = document.createElement('div');\n"
-            + "    div.setAttribute('class', 't');"
+            + "    div.setAttribute('class', 't');\n"
             + "    alert(div.className);\n"
             + "  }\n"
             + "</script>\n"

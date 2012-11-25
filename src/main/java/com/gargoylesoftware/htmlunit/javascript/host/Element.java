@@ -138,8 +138,8 @@ public class Element extends EventNode {
      */
     @JsxFunction
     public Object getAttribute(String attributeName, final Integer flags) {
-        final boolean supportsFlags = getBrowserVersion().hasFeature(JS_GET_ATTRIBUTE_SUPPORTS_FLAGS);
         attributeName = fixAttributeName(attributeName);
+        final boolean supportsFlags = getBrowserVersion().hasFeature(JS_GET_ATTRIBUTE_SUPPORTS_FLAGS);
 
         Object value;
         if (supportsFlags && flags != null && flags == 2 && "style".equalsIgnoreCase(attributeName)) {

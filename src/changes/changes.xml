@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: element.set/getAttribute() should fix the name (e.g. "className") only in Quirks mode (IE).
+            </action>
             <action type="fix" dev="mguillem">
                 Cookies: use 1970 as two digits year start for the expiration date.
             </action>
