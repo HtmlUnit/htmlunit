@@ -1067,10 +1067,10 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "support: body background is not lost if set prior to loading jQuery (#9238) (0, 2, 2)",
-        FF = "support: body background is not lost if set prior to loading jQuery (#9238) (0, 2, 2)",
+    @Alerts(DEFAULT = "support: body background is not lost if set prior to loading jQuery (#9238) (0, 2, 2)",
         IE = "support: body background is not lost if set prior to loading jQuery (#9238) (9, 1, 10)")
     @NotYetImplemented(IE)
+    // Real IE9 is same as DEFAULT, and HtmlUnit succeeds with it
     public void test_105() throws Exception {
         runTest(105);
     }
