@@ -2665,7 +2665,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "null", "", "null", "undefined" })
-    @NotYetImplemented(IE)
     public void getAttribute2_standards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html>\n"
                 + "<head>\n"

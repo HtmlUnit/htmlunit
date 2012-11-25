@@ -873,9 +873,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_FUNCTION_TOSOURCE,
 
-    /** Indicates that the getAttribute method supports ie style flags. */
+    /** Indicates that the getAttribute method supports IE style flags, only in quirks mode . */
     @BrowserFeature(@WebBrowser(IE))
-    JS_GET_ATTRIBUTE_SUPPORTS_FLAGS,
+    JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE,
 
     /** Javascript function getBackgroundColor of computed styles returns the color as rgb. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })

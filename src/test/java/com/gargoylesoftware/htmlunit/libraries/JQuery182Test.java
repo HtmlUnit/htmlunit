@@ -1457,7 +1457,6 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(FF3_6 = "attributes: attr(String) (0, 46, 46)", FF10 = "attributes: attr(String) in XML Files (0, 3, 3)",
         CHROME = "attributes: attr(String) in XML Files (0, 3, 3)",
         IE = "attributes: attr(String) (0, 46, 46)")
-    @NotYetImplemented(IE)
     public void test_139() throws Exception {
         runTest(139);
     }
@@ -1503,7 +1502,6 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "attributes: attr(jquery_method) (0, 9, 9)",
         CHROME = "attributes: attr(jquery_method) (0, 9, 9)",
         IE = "attributes: attr(String, Object) (0, 81, 81)")
-    @NotYetImplemented(IE)
     public void test_143() throws Exception {
         runTest(143);
     }
@@ -1562,7 +1560,6 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "attributes: removeAttr(String) in XML (0, 7, 7)",
         CHROME = "attributes: removeAttr(String) in XML (0, 7, 7)",
         IE = "attributes: removeAttr(String) (0, 12, 12)")
-    @NotYetImplemented(IE)
     public void test_148() throws Exception {
         runTest(148);
     }
@@ -1588,7 +1585,6 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "attributes: prop(String, Object) (0, 31, 31)",
         CHROME = "attributes: prop(String, Object) (0, 31, 31)",
         IE = "attributes: removeAttr(Multi String, variable space width) (0, 8, 8)")
-    @NotYetImplemented(IE)
     public void test_150() throws Exception {
         runTest(150);
     }
