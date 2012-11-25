@@ -138,6 +138,9 @@
                                 </copy>
                                 <move file="${basedir}/artifacts/${project.artifactId}-${project.version}-bin.zip"
                                     tofile="${basedir}/artifacts/${project.artifactId}-${project.version}-with-dependencies.zip"/>
+                                <zip update="true" destfile="${basedir}/artifacts/${project.artifactId}-${project.version}-with-dependencies.zip">
+                                    <zipfileset dir="." includes="pom.xml" prefix="${project.artifactId}-${project.version}"/>
+                                </zip>
                             </target>
                         </configuration>
                     </execution>
