@@ -226,10 +226,7 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
      * Removes an attribute specified by name from this element.
      * @param attributeName the attribute attributeName
      */
-    public void removeAttribute(String attributeName) {
-        if (this instanceof HtmlElement) {
-            attributeName = attributeName.toLowerCase();
-        }
+    public void removeAttribute(final String attributeName) {
         attributes_.remove(attributeName);
     }
 

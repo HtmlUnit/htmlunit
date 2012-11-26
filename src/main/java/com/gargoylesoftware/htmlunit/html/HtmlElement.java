@@ -215,7 +215,7 @@ public abstract class HtmlElement extends DomElement {
             ((HtmlPage) getPage()).removeMappedElement(this);
         }
 
-        super.removeAttribute(attributeName);
+        super.removeAttribute(attributeName.toLowerCase());
 
         if (getPage() instanceof HtmlPage) {
             ((HtmlPage) getPage()).addMappedElement(this);
