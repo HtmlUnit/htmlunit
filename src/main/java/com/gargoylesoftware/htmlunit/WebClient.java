@@ -46,7 +46,6 @@ import java.util.Stack;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.codec.DecoderException;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -1286,7 +1285,7 @@ public class WebClient implements Serializable {
             cleanUrl = UrlUtils.getUrlWithNewRef(cleanUrl, null);
         }
 
-        final File file = FileUtils.toFile(cleanUrl);
+        final File file = new File(cleanUrl.toExternalForm().substring(5));
         if (!file.exists()) {
             // construct 404
             final List<NameValuePair> compiledHeaders = new ArrayList<NameValuePair>();
