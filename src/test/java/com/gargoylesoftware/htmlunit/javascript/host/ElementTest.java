@@ -1076,4 +1076,45 @@ public class ElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "ab", "ab" })
+    public void removeAttribute_case_sensitive() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "        request.open('GET', 'foo.xml', false);\n"
+            + "        request.send('');\n"
+            + "        var doc = request.responseXML;\n"
+            + "        var e = doc.getElementsByTagName('title')[0];\n"
+            + "        alert(e.getAttribute('normal'));\n"
+            + "        e.removeAttribute('Normal');\n"
+            + "        alert(e.getAttribute('normal'));\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml
+            = "<books>\n"
+            + "  <book>\n"
+            + "    <title normal=\"ab\">Immortality</title>\n"
+            + "    <author>John Smith</author>\n"
+            + "  </book>\n"
+            + "</books>";
+
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        loadPageWithAlerts2(html);
+    }
 }

@@ -1411,7 +1411,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = "queue: .promise(obj) (0, 2, 2)", FF10 = "queue: delay() can be stopped (2, 3, 5)",
+    @Alerts(FF3_6 = "queue: .promise(obj) (0, 2, 2)", FF10 = "queue: delay() can be stopped (0, 3, 3)",
         CHROME = "queue: delay() can be stopped (0, 3, 3)", IE = "queue: .promise(obj) (0, 2, 2)")
     public void test_135() throws Exception {
         runTest(135);
@@ -1572,7 +1572,6 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "attributes: removeAttr(Multi String, variable space width) (0, 8, 8)",
         CHROME = "attributes: removeAttr(Multi String, variable space width) (0, 8, 8)",
         IE = "attributes: removeAttr(String) in XML (0, 7, 7)")
-    @NotYetImplemented
     public void test_149() throws Exception {
         runTest(149);
     }
