@@ -9,10 +9,10 @@
     <body>
         <release version="2.12" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
-                JavaScript: XML: element.removeAttribute() is case-sensitive. 
+                JavaScript: XML: element.removeAttribute() is case-sensitive.
             </action>
             <action type="fix" dev="asashour" issue="1464">
-                Correctly handle local file URL if it is in a separate driver (Windows). 
+                Correctly handle local file URL if it is in a separate driver (Windows).
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix the return value of element.getAttribute() in standards mode (IE).
