@@ -76,13 +76,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
     private HTMLCollection elements_; // has to be a member to have equality (==) working
 
     /**
-     * Creates an instance. A default constructor is required for all JavaScript objects.
-     */
-    public HTMLFormElement() {
-        // Empty.
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

@@ -51,12 +51,6 @@ public class HTMLSelectElement extends FormField {
     private HTMLOptionsCollection optionsArray_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLSelectElement() {
-    }
-
-    /**
      * Initialize the object.
      *
      */

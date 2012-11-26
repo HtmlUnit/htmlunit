@@ -365,6 +365,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         for (final HtmlOption option : getOptions()) {
             option.reset();
         }
+        onAllChildrenAddedToPage(false);
     }
 
     /**

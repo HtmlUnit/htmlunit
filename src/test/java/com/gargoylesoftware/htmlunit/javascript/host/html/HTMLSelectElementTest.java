@@ -48,7 +48,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "1" })
-    public void testGetSelectedIndex() throws Exception {
+    public void getSelectedIndex() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -73,7 +73,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "3", "1", "3", "2" })
-    public void testSetSelectedIndex() throws Exception {
+    public void setSelectedIndex() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -109,7 +109,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    public void testSelectedIndex2() throws Exception {
+    public void selectedIndex2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var oSelect = document.getElementById('main');\n"
@@ -133,7 +133,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "-1", "2", "-1", "-1" },
             IE = { "-1", "2", "-1", "-1" })
-    public void testSetSelectedIndexInvalidValue() throws Exception {
+    public void setSelectedIndexInvalidValue() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -166,7 +166,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "value1", "One", "value2", "Two", "value3", "Three" })
-    public void testGetOptions() throws Exception {
+    public void getOptions() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -194,7 +194,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "value1", "One", "value2", "Two", "value3", "Three" })
-    public void testGetOptionLabel() throws Exception {
+    public void getOptionLabel() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -222,7 +222,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "false", "true", "true", "false" })
-    public void testGetOptionSelected() throws Exception {
+    public void getOptionSelected() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -252,7 +252,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    public void testGetOptionByIndex() throws Exception {
+    public void getOptionByIndex() throws Exception {
         final String html
             = "<html><head><title>first</title><script language='JavaScript'>\n"
             //+ "//<!--"
@@ -275,7 +275,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("One")
-    public void testGetOptionByOptionIndex() throws Exception {
+    public void getOptionByOptionIndex() throws Exception {
         final String html
             = "<html><head><title>first</title><script language='JavaScript'>\n"
             //+ "//<!--"
@@ -302,7 +302,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "4", "Four", "value4" })
-    public void testAddOption() throws Exception {
+    public void addOption() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -331,7 +331,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "true", "4", "Four", "value4", "true", "3", "false" })
-    public void testAddOptionSelected() throws Exception {
+    public void addOptionSelected() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -370,7 +370,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts({ "4", "Four", "value4" })
     @Browsers(FF)
-    public void testAddOptionWithAddMethod_FF() throws Exception {
+    public void addOptionWithAddMethod_FF() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -401,7 +401,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF3_6 = "exception",
             DEFAULT = { "4", "Four", "value4", "Three b", "value3b" })
-    public void testAddOptionWithAddMethod_IE() throws Exception {
+    public void addOptionWithAddMethod_IE() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -436,7 +436,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "0", "exception" },
             FF = { "0", "test", "testValue" })
-    public void testAddOptionTooEmptySelectWithAddMethod_IE() throws Exception {
+    public void addOptionTooEmptySelectWithAddMethod_IE() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -466,7 +466,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF3_6 = { "0", "exception" },
             DEFAULT = { "0", "1" })
-    public void testAddWith1Arg() throws Exception {
+    public void addWith1Arg() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
@@ -495,7 +495,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", "Three", "value3" })
-    public void testRemoveOption() throws Exception {
+    public void removeOption() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -523,7 +523,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", "Three", "value3" })
-    public void testRemoveOptionWithRemoveMethod() throws Exception {
+    public void removeOptionWithRemoveMethod() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -583,7 +583,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    public void testClearOptions() throws Exception {
+    public void clearOptions() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -611,7 +611,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "2", "", "", "foo", "fooValue" })
-    public void testIncreaseOptionsSettingLength() throws Exception {
+    public void increaseOptionsSettingLength() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -643,7 +643,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "One", "value1" })
-    public void testOptionArrayHasItemMethod() throws Exception {
+    public void optionArrayHasItemMethod() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -708,7 +708,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "0", "1" })
-    public void testSetValue() throws Exception {
+    public void setValue() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -734,7 +734,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "exception", IE = { "2-2", "1-1", "2-2", "0-0", "2-2", "1-1" })
-    public void testOptionsDelegateToSelect() throws Exception {
+    public void optionsDelegateToSelect() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
@@ -773,7 +773,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", "b", "3", "c" })
-    public void testOptionsArrayAdd() throws Exception {
+    public void optionsArrayAdd() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
@@ -808,7 +808,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("-1")
-    public void testSelectedIndex() throws Exception {
+    public void selectedIndex() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
@@ -830,45 +830,45 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testDefaultSelectedValue_SizeNegativeOne() throws Exception {
-        testDefaultSelectedValue("-1", false, new String[] {"0", "true", "false", "false", "0"});
-        testDefaultSelectedValue("-1", true, new String[] {"0", "false", "false", "false", "-1"});
+    public void defaultSelectedValue_SizeNegativeOne() throws Exception {
+        defaultSelectedValue("-1", false, new String[] {"0", "true", "false", "false", "0"});
+        defaultSelectedValue("-1", true, new String[] {"0", "false", "false", "false", "-1"});
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testDefaultSelectedValue_SizeZero() throws Exception {
-        testDefaultSelectedValue("0", false, new String[] {"0", "true", "false", "false", "0"});
-        testDefaultSelectedValue("0", true, new String[] {"0", "false", "false", "false", "-1"});
+    public void defaultSelectedValue_SizeZero() throws Exception {
+        defaultSelectedValue("0", false, new String[] {"0", "true", "false", "false", "0"});
+        defaultSelectedValue("0", true, new String[] {"0", "false", "false", "false", "-1"});
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testDefaultSelectedValue_SizeOne() throws Exception {
-        testDefaultSelectedValue("1", false, new String[] {"1", "true", "false", "false", "0"});
-        testDefaultSelectedValue("1", true, new String[] {"1", "false", "false", "false", "-1"});
+    public void defaultSelectedValue_SizeOne() throws Exception {
+        defaultSelectedValue("1", false, new String[] {"1", "true", "false", "false", "0"});
+        defaultSelectedValue("1", true, new String[] {"1", "false", "false", "false", "-1"});
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testDefaultSelectedValue_SizeTwo() throws Exception {
-        testDefaultSelectedValue("2", false, "2", "false", "false", "false", "-1");
-        testDefaultSelectedValue("2", true, "2", "false", "false", "false", "-1");
+    public void defaultSelectedValue_SizeTwo() throws Exception {
+        defaultSelectedValue("2", false, "2", "false", "false", "false", "-1");
+        defaultSelectedValue("2", true, "2", "false", "false", "false", "-1");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void testDefaultSelectedValue_SizeInvalid() throws Exception {
-        testDefaultSelectedValue("x", false, "0", "true", "false", "false", "0");
-        testDefaultSelectedValue("x", true, "0", "false", "false", "false", "-1");
+    public void defaultSelectedValue_SizeInvalid() throws Exception {
+        defaultSelectedValue("x", false, "0", "true", "false", "false", "0");
+        defaultSelectedValue("x", true, "0", "false", "false", "false", "-1");
     }
 
     /**
@@ -879,7 +879,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @param expected the expected alerts
      * @throws Exception if the test fails
      */
-    private void testDefaultSelectedValue(final String size, final boolean multiple, final String... expected)
+    private void defaultSelectedValue(final String size, final boolean multiple, final String... expected)
         throws Exception {
 
         setExpectedAlerts(expected);
@@ -916,7 +916,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("5")
-    public void testSize() throws Exception {
+    public void size() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var select = document.getElementById('mySelect');\n"
@@ -934,7 +934,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "true", "false", "false" })
-    public void testMultiple() throws Exception {
+    public void multiple() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    alert(document.f['s1'].multiple);\n"
@@ -1154,6 +1154,36 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "    <option>One</option>\n"
             + "    <option selected value='two'>Two</option>\n"
             + "  </select>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "One", "Two", "One" })
+    public void valueAfterReset() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var form = document.getElementById('myForm');\n"
+            + "    var select = document.getElementById('mySelect');\n"
+            + "    alert(select.value);\n"
+            + "    select.options[1].selected = true;\n"
+            + "    alert(select.value);\n"
+            + "    form.reset();\n"
+            + "    alert(select.value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "<form id='myForm' name='myForm'>\n"
+            + "  <select id='mySelect'>\n"
+            + "    <option>One</option>\n"
+            + "    <option>Two</option>\n"
+            + "  </select>\n"
+            + "</form>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

@@ -1695,7 +1695,6 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "attributes: addClass(String) (0, 9, 9)",
         CHROME = "attributes: val(select) after form.reset() (Bug #2551) (0, 3, 3)",
         IE = "attributes: val(select) after form.reset() (Bug #2551) (0, 3, 3)")
-    @NotYetImplemented
     public void test_160() throws Exception {
         runTest(160);
     }

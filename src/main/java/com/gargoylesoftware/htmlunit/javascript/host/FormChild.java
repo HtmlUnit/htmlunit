@@ -30,13 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
 public class FormChild extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public FormChild() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the JavaScript <tt>form</tt> attribute.
      *
      * @return the value of the JavaScript <tt>form</tt> attribute
