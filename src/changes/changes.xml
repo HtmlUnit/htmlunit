@@ -9,6 +9,9 @@
     <body>
         <release version="2.12" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: correctly process null function handlers.
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: correct select.value after enclosing form.reset().
             </action>
             <action type="fix" dev="asashour">

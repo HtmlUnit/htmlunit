@@ -2364,7 +2364,6 @@ public class JQuery182Test extends WebDriverTestCase {
             + "(0, 3, 3)",
         IE = "event: on(beforeunload) creates/deletes window property instead of adding/removing event listener "
             + "(0, 3, 3)")
-    @NotYetImplemented
     public void test_217() throws Exception {
         runTest(217);
     }

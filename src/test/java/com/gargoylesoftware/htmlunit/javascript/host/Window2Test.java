@@ -884,4 +884,30 @@ public class Window2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "function", "null" }, FF3_6 = { "undefined", "function", "null" })
+    @NotYetImplemented(FF3_6)
+    public void onbeforeunload() throws Exception {
+        final String html =
+            "<html><head><title>First</title>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  alert(window.onbeforeunload);\n"
+            + "  var handle = function () {};\n"
+            + "  window.onbeforeunload = handle;\n"
+            + "  alert(typeof window.onbeforeunload);\n"
+            + "  window.onbeforeunload = null;\n"
+            + "  alert(window.onbeforeunload);\n"
+            + "  \n"
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

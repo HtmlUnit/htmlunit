@@ -278,10 +278,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_129,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_13,
 
     /** Was originally .isIE(). */
@@ -888,6 +884,10 @@ public enum BrowserVersionFeatures {
     /** Javascript function getElementById compares the id's case sensitive. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE,
+
+    /** Indicates that not defined function handler should be 'undefined', or 'null'. */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
+    JS_HANDLER_UNDEFINED,
 
     /** Indicates that objects with prototype property available in window scope; Firefox does this. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })

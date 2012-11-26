@@ -1180,11 +1180,12 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "<form id='myForm' name='myForm'>\n"
             + "  <select id='mySelect'>\n"
-            + "    <option>One</option>\n"
-            + "    <option>Two</option>\n"
+            + "    <option value='One'>One</option>\n"
+            + "    <option value='Two'>Two</option>\n"
             + "  </select>\n"
             + "</form>\n"
             + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 
