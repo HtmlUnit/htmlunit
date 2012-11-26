@@ -211,18 +211,21 @@ public abstract class HtmlElement extends DomElement {
     public final void removeAttribute(final String attributeName) {
         final String value = getAttribute(attributeName);
 
-        if (getPage() instanceof HtmlPage) {
-            ((HtmlPage) getPage()).removeMappedElement(this);
+        final Page page = getPage();
+        HtmlPage htmlPage = null;
+        if (page instanceof HtmlPage) {
+            htmlPage = (HtmlPage) page;
+            htmlPage.removeMappedElement(this);
         }
 
         super.removeAttribute(attributeName.toLowerCase());
 
-        if (getPage() instanceof HtmlPage) {
-            ((HtmlPage) getPage()).addMappedElement(this);
+        if (htmlPage != null) {
+            htmlPage.addMappedElement(this);
 
             final HtmlAttributeChangeEvent event = new HtmlAttributeChangeEvent(this, attributeName, value);
             fireHtmlAttributeRemoved(event);
-            ((HtmlPage) getPage()).fireHtmlAttributeRemoved(event);
+            htmlPage.fireHtmlAttributeRemoved(event);
         }
     }
 

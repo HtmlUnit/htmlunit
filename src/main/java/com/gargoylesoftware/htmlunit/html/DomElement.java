@@ -519,12 +519,13 @@ public class DomElement extends DomNamespaceNode implements Element, ElementTrav
 
         /** Constructor. */
         protected ChildElementsIterator() {
-            if (getFirstChild() != null) {
-                if (getFirstChild() instanceof DomElement) {
-                    nextElement_ = (DomElement) getFirstChild();
+            final DomNode child = getFirstChild();
+            if (child != null) {
+                if (child instanceof DomElement) {
+                    nextElement_ = (DomElement) child;
                 }
                 else {
-                    setNextElement(getFirstChild());
+                    setNextElement(child);
                 }
             }
         }
@@ -691,12 +692,12 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      * {@inheritDoc}
      */
     public DomAttr remove(final Object key) {
-        if (!(key instanceof String)) {
-            return null;
+        if (key instanceof String) {
+            final String name = fixName((String) key);
+            attrPositions_.remove(name);
+            return map_.remove(name);
         }
-        final String name = fixName((String) key);
-        attrPositions_.remove(name);
-        return map_.remove(name);
+        return null;
     }
 
     /**
@@ -721,22 +722,22 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      * {@inheritDoc}
      */
     public boolean containsKey(final Object key) {
-        if (!(key instanceof String)) {
-            return false;
+        if (key instanceof String) {
+            final String name = fixName((String) key);
+            return map_.containsKey(name);
         }
-        final String name = fixName((String) key);
-        return map_.containsKey(name);
+        return false;
     }
 
     /**
      * {@inheritDoc}
      */
     public DomAttr get(final Object key) {
-        if (!(key instanceof String)) {
-            return null;
+        if (key instanceof String) {
+            final String name = fixName((String) key);
+            return map_.get(name);
         }
-        final String name = fixName((String) key);
-        return map_.get(name);
+        return null;
     }
 
     /**
