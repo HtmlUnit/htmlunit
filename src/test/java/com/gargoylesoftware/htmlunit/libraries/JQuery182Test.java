@@ -1588,4 +1588,580 @@ public class JQuery182Test extends WebDriverTestCase {
         runTest(150);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: prop(String, Object) (0, 31, 31)",
+        FF10 = "attributes: prop('tabindex') (0, 8, 8)", CHROME = "attributes: prop('tabindex') (0, 8, 8)",
+        IE = "attributes: prop(String, Object) (0, 31, 31)")
+    public void test_151() throws Exception {
+        runTest(151);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: prop('tabindex') (0, 8, 8)", FF10 = "attributes: prop('tabindex', value) (0, 9, 9)",
+        CHROME = "attributes: prop('tabindex', value) (0, 9, 9)",
+        IE = "attributes: prop('tabindex') (0, 8, 8)")
+    public void test_152() throws Exception {
+        runTest(152);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: prop('tabindex', value) (0, 9, 9)",
+        FF10 = "attributes: removeProp(String) (0, 6, 6)", CHROME = "attributes: removeProp(String) (0, 6, 6)",
+        IE = "attributes: prop('tabindex', value) (0, 9, 9)")
+    public void test_153() throws Exception {
+        runTest(153);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: removeProp(String) (0, 6, 6)", FF10 = "attributes: val() (0, 26, 26)",
+        CHROME = "attributes: val() (0, 26, 26)", IE = "attributes: removeProp(String) (0, 6, 6)")
+    public void test_154() throws Exception {
+        runTest(154);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: val() (0, 26, 26)", FF10 = "attributes: val(String/Number) (0, 8, 8)",
+        CHROME = "attributes: val() respects numbers without exception (Bug #9319) (0, 4, 4)",
+        IE = "attributes: val() (0, 26, 26)")
+    public void test_155() throws Exception {
+        runTest(155);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: val(String/Number) (0, 8, 8)", FF10 = "attributes: val(Function) (0, 8, 8)",
+        CHROME = "attributes: val(String/Number) (0, 8, 8)", IE = "attributes: val(String/Number) (0, 8, 8)")
+    public void test_156() throws Exception {
+        runTest(156);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: val(Function) (0, 8, 8)",
+        FF10 = "attributes: val(Array of Numbers) (Bug #7123) (0, 4, 4)",
+        CHROME = "attributes: val(Function) (0, 8, 8)", IE = "attributes: val(Function) (0, 8, 8)")
+    public void test_157() throws Exception {
+        runTest(157);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: val(Array of Numbers) (Bug #7123) (0, 4, 4)",
+        FF10 = "attributes: val(Function) with incoming value (0, 10, 10)",
+        CHROME = "attributes: val(Array of Numbers) (Bug #7123) (0, 4, 4)",
+        IE = "attributes: val(Array of Numbers) (Bug #7123) (0, 4, 4)")
+    public void test_158() throws Exception {
+        runTest(158);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: val(Function) with incoming value (0, 10, 10)",
+        FF10 = "attributes: val(select) after form.reset() (Bug #2551) (0, 3, 3)",
+        CHROME = "attributes: val(Function) with incoming value (0, 10, 10)",
+        IE = "attributes: val(Function) with incoming value (0, 10, 10)")
+    public void test_159() throws Exception {
+        runTest(159);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: val(select) after form.reset() (Bug #2551) (0, 3, 3)",
+        FF10 = "attributes: addClass(String) (0, 9, 9)",
+        CHROME = "attributes: val(select) after form.reset() (Bug #2551) (0, 3, 3)",
+        IE = "attributes: val(select) after form.reset() (Bug #2551) (0, 3, 3)")
+    @NotYetImplemented
+    public void test_160() throws Exception {
+        runTest(160);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: addClass(String) (0, 9, 9)", FF10 = "attributes: addClass(Function) (0, 9, 9)",
+        CHROME = "attributes: addClass(String) (0, 9, 9)", IE = "attributes: addClass(String) (0, 9, 9)")
+    public void test_161() throws Exception {
+        runTest(161);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: addClass(Function) (0, 9, 9)",
+        FF10 = "attributes: addClass(Function) with incoming value (0, 48, 48)",
+        CHROME = "attributes: addClass(Function) (0, 9, 9)", IE = "attributes: addClass(Function) (0, 9, 9)")
+    public void test_162() throws Exception {
+        runTest(162);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: addClass(Function) with incoming value (0, 48, 48)",
+        FF10 = "attributes: removeClass(String) - simple (0, 7, 7)",
+        CHROME = "attributes: addClass(Function) with incoming value (0, 48, 48)",
+        IE = "attributes: addClass(Function) with incoming value (0, 48, 48)")
+    public void test_163() throws Exception {
+        runTest(163);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: removeClass(String) - simple (0, 7, 7)",
+        FF10 = "attributes: removeClass(Function) - simple (0, 7, 7)",
+        CHROME = "attributes: removeClass(String) - simple (0, 7, 7)",
+        IE = "attributes: removeClass(String) - simple (0, 7, 7)")
+    public void test_164() throws Exception {
+        runTest(164);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: removeClass(Function) - simple (0, 7, 7)",
+        FF10 = "attributes: removeClass(Function) with incoming value (0, 48, 48)",
+        CHROME = "attributes: removeClass(Function) - simple (0, 7, 7)",
+        IE = "attributes: removeClass(Function) - simple (0, 7, 7)")
+    public void test_165() throws Exception {
+        runTest(165);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: removeClass(Function) with incoming value (0, 48, 48)",
+        FF10 = "attributes: removeClass() removes duplicates (0, 1, 1)",
+        CHROME = "attributes: removeClass(Function) with incoming value (0, 48, 48)",
+        IE = "attributes: removeClass(Function) with incoming value (0, 48, 48)")
+    public void test_166() throws Exception {
+        runTest(166);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: removeClass() removes duplicates (0, 1, 1)",
+        FF10 = "attributes: toggleClass(String|boolean|undefined[, boolean]) (0, 17, 17)",
+        CHROME = "attributes: removeClass() removes duplicates (0, 1, 1)",
+        IE = "attributes: removeClass() removes duplicates (0, 1, 1)")
+    public void test_167() throws Exception {
+        runTest(167);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: toggleClass(String|boolean|undefined[, boolean]) (0, 17, 17)",
+        FF10 = "attributes: toggleClass(Function[, boolean]) (0, 17, 17)",
+        CHROME = "attributes: toggleClass(String|boolean|undefined[, boolean]) (0, 17, 17)",
+        IE = "attributes: toggleClass(String|boolean|undefined[, boolean]) (0, 17, 17)")
+    public void test_168() throws Exception {
+        runTest(168);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: toggleClass(Function[, boolean]) (0, 17, 17)",
+        FF10 = "attributes: toggleClass(Fucntion[, boolean]) with incoming value (0, 14, 14)",
+        CHROME = "attributes: toggleClass(Function[, boolean]) (0, 17, 17)",
+        IE = "attributes: toggleClass(Function[, boolean]) (0, 17, 17)")
+    public void test_169() throws Exception {
+        runTest(169);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: toggleClass(Fucntion[, boolean]) with incoming value (0, 14, 14)",
+        FF10 = "attributes: addClass, removeClass, hasClass (0, 17, 17)",
+        CHROME = "attributes: toggleClass(Fucntion[, boolean]) with incoming value (0, 14, 14)",
+        IE = "attributes: toggleClass(Fucntion[, boolean]) with incoming value (0, 14, 14)")
+    public void test_170() throws Exception {
+        runTest(170);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: addClass, removeClass, hasClass (0, 17, 17)",
+        FF10 = "attributes: contents().hasClass() returns correct values (0, 2, 2)",
+        CHROME = "attributes: addClass, removeClass, hasClass (0, 17, 17)",
+        IE = "attributes: addClass, removeClass, hasClass (0, 17, 17)")
+    public void test_171() throws Exception {
+        runTest(171);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: contents().hasClass() returns correct values (0, 2, 2)",
+        FF10 = "attributes: coords returns correct values in IE6/IE7, see #10828 (0, 2, 2)",
+        CHROME = "attributes: contents().hasClass() returns correct values (0, 2, 2)",
+        IE = "attributes: contents().hasClass() returns correct values (0, 2, 2)")
+    public void test_172() throws Exception {
+        runTest(172);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "attributes: coords returns correct values in IE6/IE7, see #10828 (0, 2, 2)",
+        FF10 = "event: null or undefined handler (0, 2, 2)",
+        CHROME = "attributes: coords returns correct values in IE6/IE7, see #10828 (0, 2, 2)",
+        IE = "attributes: coords returns correct values in IE6/IE7, see #10828 (0, 2, 2)")
+    public void test_173() throws Exception {
+        runTest(173);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: null or undefined handler (0, 2, 2)",
+        FF10 = "event: bind(),live(),delegate() with non-null,defined data (0, 3, 3)",
+        CHROME = "event: null or undefined handler (0, 2, 2)",
+        IE = "event: null or undefined handler (0, 2, 2)")
+    public void test_174() throws Exception {
+        runTest(174);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(),live(),delegate() with non-null,defined data (0, 3, 3)",
+        FF10 = "event: Handler changes and .trigger() order (0, 1, 1)",
+        CHROME = "event: bind(),live(),delegate() with non-null,defined data (0, 3, 3)",
+        IE = "event: bind(),live(),delegate() with non-null,defined data (0, 3, 3)")
+    public void test_175() throws Exception {
+        runTest(175);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: Handler changes and .trigger() order (0, 1, 1)",
+        FF10 = "event: bind(), with data (0, 4, 4)", CHROME = "event: Handler changes and .trigger() order (0, 1, 1)",
+        IE = "event: Handler changes and .trigger() order (0, 1, 1)")
+    public void test_176() throws Exception {
+        runTest(176);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), with data (0, 4, 4)", FF10 = "event: click(), with data (0, 3, 3)",
+    CHROME = "event: bind(), with data (0, 4, 4)", IE = "event: bind(), with data (0, 4, 4)")
+    public void test_177() throws Exception {
+        runTest(177);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: click(), with data (0, 3, 3)",
+    FF10 = "event: bind(), with data, trigger with data (0, 4, 4)",
+        CHROME = "event: click(), with data (0, 3, 3)", IE = "event: click(), with data (0, 3, 3)")
+    public void test_178() throws Exception {
+        runTest(178);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), with data, trigger with data (0, 4, 4)",
+        FF10 = "event: bind(), multiple events at once (0, 2, 2)",
+        CHROME = "event: bind(), with data, trigger with data (0, 4, 4)",
+        IE = "event: bind(), with data, trigger with data (0, 4, 4)")
+    public void test_179() throws Exception {
+        runTest(179);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), multiple events at once (0, 2, 2)",
+        FF10 = "event: bind(), five events at once (0, 1, 1)",
+        CHROME = "event: bind(), multiple events at once (0, 2, 2)",
+        IE = "event: bind(), multiple events at once (0, 2, 2)")
+    public void test_180() throws Exception {
+        runTest(180);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), five events at once (0, 1, 1)",
+        FF10 = "event: bind(), multiple events at once and namespaces (0, 7, 7)",
+        CHROME = "event: bind(), five events at once (0, 1, 1)",
+        IE = "event: bind(), five events at once (0, 1, 1)")
+    public void test_181() throws Exception {
+        runTest(181);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), multiple events at once and namespaces (0, 7, 7)",
+        FF10 = "event: bind(), namespace with special add (0, 27, 27)",
+        CHROME = "event: bind(), multiple events at once and namespaces (0, 7, 7)",
+        IE = "event: bind(), multiple events at once and namespaces (0, 7, 7)")
+    public void test_182() throws Exception {
+        runTest(182);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), namespace with special add (0, 27, 27)",
+        FF10 = "event: bind(), no data (0, 1, 1)", CHROME = "event: bind(), namespace with special add (0, 27, 27)",
+        IE = "event: bind(), namespace with special add (0, 27, 27)")
+    public void test_183() throws Exception {
+        runTest(183);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), no data (0, 1, 1)", FF10 = "event: bind/one/unbind(Object) (0, 6, 6)",
+        CHROME = "event: bind(), no data (0, 1, 1)", IE = "event: bind(), no data (0, 1, 1)")
+    public void test_184() throws Exception {
+        runTest(184);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind/one/unbind(Object) (0, 6, 6)",
+        FF10 = "event: live/die(Object), delegate/undelegate(String, Object) (0, 6, 6)",
+        CHROME = "event: bind/one/unbind(Object) (0, 6, 6)", IE = "event: bind/one/unbind(Object) (0, 6, 6)")
+    public void test_185() throws Exception {
+        runTest(185);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: live/die(Object), delegate/undelegate(String, Object) (0, 6, 6)",
+        FF10 = "event: live/delegate immediate propagation (0, 2, 2)",
+        CHROME = "event: live/die(Object), delegate/undelegate(String, Object) (0, 6, 6)",
+        IE = "event: live/die(Object), delegate/undelegate(String, Object) (0, 6, 6)")
+    public void test_186() throws Exception {
+        runTest(186);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: live/delegate immediate propagation (0, 2, 2)",
+        FF10 = "event: bind/delegate bubbling, isDefaultPrevented (0, 2, 2)",
+        CHROME = "event: live/delegate immediate propagation (0, 2, 2)",
+        IE = "event: live/delegate immediate propagation (0, 2, 2)")
+    public void test_187() throws Exception {
+        runTest(187);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind/delegate bubbling, isDefaultPrevented (0, 2, 2)",
+        FF10 = "event: bind(), iframes (0, 1, 1)",
+        CHROME = "event: bind/delegate bubbling, isDefaultPrevented (0, 2, 2)",
+        IE = "event: bind/delegate bubbling, isDefaultPrevented (0, 2, 2)")
+    public void test_188() throws Exception {
+        runTest(188);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), iframes (0, 1, 1)", FF10 = "event: bind(), trigger change on select (0, 5, 5)",
+        CHROME = "event: bind(), iframes (0, 1, 1)", IE = "event: bind(), iframes (0, 1, 1)")
+    public void test_189() throws Exception {
+        runTest(189);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), trigger change on select (0, 5, 5)",
+        FF10 = "event: bind(), namespaced events, cloned events (0, 18, 18)",
+        CHROME = "event: bind(), trigger change on select (0, 5, 5)",
+        IE = "event: bind(), trigger change on select (0, 5, 5)")
+    public void test_190() throws Exception {
+        runTest(190);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), namespaced events, cloned events (0, 18, 18)",
+        FF10 = "event: bind(), multi-namespaced events (0, 6, 6)",
+        CHROME = "event: bind(), namespaced events, cloned events (0, 18, 18)",
+        IE = "event: bind(), namespaced events, cloned events (0, 18, 18)")
+    public void test_191() throws Exception {
+        runTest(191);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), multi-namespaced events (0, 6, 6)",
+        FF10 = "event: bind(), with same function (0, 2, 2)",
+        CHROME = "event: bind(), multi-namespaced events (0, 6, 6)",
+        IE = "event: bind(), multi-namespaced events (0, 6, 6)")
+    public void test_192() throws Exception {
+        runTest(192);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), with same function (0, 2, 2)",
+        FF10 = "event: bind(), make sure order is maintained (0, 1, 1)",
+        CHROME = "event: bind(), with same function (0, 2, 2)",
+        IE = "event: bind(), with same function (0, 2, 2)")
+    public void test_193() throws Exception {
+        runTest(193);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), make sure order is maintained (0, 1, 1)",
+        FF10 = "event: bind(), with different this object (0, 4, 4)",
+        CHROME = "event: bind(), make sure order is maintained (0, 1, 1)",
+        IE = "event: bind(), make sure order is maintained (0, 1, 1)")
+    public void test_194() throws Exception {
+        runTest(194);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(), with different this object (0, 4, 4)",
+        FF10 = "event: bind(name, false), unbind(name, false) (0, 3, 3)",
+        CHROME = "event: bind(), with different this object (0, 4, 4)",
+        IE = "event: bind(), with different this object (0, 4, 4)")
+    public void test_195() throws Exception {
+        runTest(195);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind(name, false), unbind(name, false) (0, 3, 3)",
+        FF10 = "event: live(name, false), die(name, false) (0, 3, 3)",
+        CHROME = "event: bind(name, false), unbind(name, false) (0, 3, 3)",
+        IE = "event: bind(name, false), unbind(name, false) (0, 3, 3)")
+    public void test_196() throws Exception {
+        runTest(196);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: live(name, false), die(name, false) (0, 3, 3)",
+        FF10 = "event: delegate(selector, name, false), undelegate(selector, name, false) (0, 3, 3)",
+        CHROME = "event: live(name, false), die(name, false) (0, 3, 3)",
+        IE = "event: live(name, false), die(name, false) (0, 3, 3)")
+    public void test_197() throws Exception {
+        runTest(197);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: delegate(selector, name, false), undelegate(selector, name, false) (0, 3, 3)",
+        FF10 = "event: bind()/trigger()/unbind() on plain object (0, 7, 7)",
+        CHROME = "event: delegate(selector, name, false), undelegate(selector, name, false) (0, 3, 3)",
+        IE = "event: delegate(selector, name, false), undelegate(selector, name, false) (0, 3, 3)")
+    public void test_198() throws Exception {
+        runTest(198);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: bind()/trigger()/unbind() on plain object (0, 7, 7)",
+        FF10 = "event: unbind(type) (0, 1, 1)", CHROME = "event: bind()/trigger()/unbind() on plain object (0, 7, 7)",
+        IE = "event: bind()/trigger()/unbind() on plain object (0, 7, 7)")
+    public void test_199() throws Exception {
+        runTest(199);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: unbind(type) (0, 1, 1)", FF10 = "event: unbind(eventObject) (0, 4, 4)",
+        CHROME = "event: unbind(type) (0, 1, 1)", IE = "event: unbind(type) (0, 1, 1)")
+    public void test_200() throws Exception {
+        runTest(200);
+    }
+
 }
