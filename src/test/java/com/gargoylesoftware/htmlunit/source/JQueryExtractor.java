@@ -126,7 +126,7 @@ public final class JQueryExtractor {
             }
         }
         int testNumber = 0;
-        while (testNumber < 250) {
+        while (testNumber < 300) {
             final Map<String, String> testExpectation = new HashMap<String, String>();
             for (final Browser b : browsers) {
                 final String name = b.name();

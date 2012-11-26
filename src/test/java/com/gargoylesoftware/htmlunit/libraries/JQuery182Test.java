@@ -2735,4 +2735,549 @@ public class JQuery182Test extends WebDriverTestCase {
         runTest(250);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: jQuery ready (0, 10, 10)",
+    FF10 = "event: change handler should be detached from element (0, 2, 2)",
+        CHROME = "event: jQuery ready (0, 10, 10)", IE = "event: jQuery ready (0, 10, 10)")
+    public void test_251() throws Exception {
+        runTest(251);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: change handler should be detached from element (0, 2, 2)",
+        FF10 = "event: trigger click on checkbox, fires change event (0, 1, 1)",
+        CHROME = "event: change handler should be detached from element (0, 2, 2)",
+        IE = "event: change handler should be detached from element (0, 2, 2)")
+    public void test_252() throws Exception {
+        runTest(252);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "event: trigger click on checkbox, fires change event (0, 1, 1)",
+        FF10 = "selector - jQuery only: element - jQuery only (0, 7, 7)",
+        CHROME = "event: trigger click on checkbox, fires change event (0, 1, 1)",
+        IE = "event: trigger click on checkbox, fires change event (0, 1, 1)")
+    @NotYetImplemented(FF)
+    public void test_253() throws Exception {
+        runTest(253);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "selector - jQuery only: element - jQuery only (0, 7, 7)",
+        FF10 = "selector - jQuery only: class - jQuery only (0, 4, 4)",
+        CHROME = "selector - jQuery only: element - jQuery only (0, 7, 7)",
+        IE = "selector - jQuery only: element - jQuery only (0, 7, 7)")
+    public void test_254() throws Exception {
+        runTest(254);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "selector - jQuery only: class - jQuery only (0, 4, 4)",
+        FF10 = "selector - jQuery only: attributes - jQuery only (0, 2, 2)",
+        CHROME = "selector - jQuery only: class - jQuery only (0, 4, 4)",
+        IE = "selector - jQuery only: class - jQuery only (0, 4, 4)")
+    public void test_255() throws Exception {
+        runTest(255);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "selector - jQuery only: attributes - jQuery only (0, 2, 2)",
+        FF10 = "selector - jQuery only: pseudo - visibility (0, 9, 9)",
+        CHROME = "selector - jQuery only: attributes - jQuery only (0, 2, 2)",
+        IE = "selector - jQuery only: attributes - jQuery only (0, 2, 2)")
+    public void test_256() throws Exception {
+        runTest(256);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "selector - jQuery only: pseudo - visibility (0, 9, 9)",
+        FF10 = "selector - jQuery only: disconnected nodes (0, 4, 4)",
+        CHROME = "selector - jQuery only: pseudo - visibility (0, 9, 9)",
+        IE = "selector - jQuery only: pseudo - visibility (0, 9, 9)")
+    public void test_257() throws Exception {
+        runTest(257);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "selector - jQuery only: disconnected nodes (0, 4, 4)",
+        FF10 = "selector - jQuery only: attributes - jQuery.attr (0, 35, 35)",
+        CHROME = "selector - jQuery only: disconnected nodes (0, 4, 4)",
+        IE = "selector - jQuery only: disconnected nodes (0, 4, 4)")
+    public void test_258() throws Exception {
+        runTest(258);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "selector - jQuery only: attributes - jQuery.attr (0, 35, 35)",
+        FF10 = "selector - jQuery only: Sizzle cache collides with multiple Sizzles on a page (0, 3, 3)",
+        CHROME = "selector - jQuery only: attributes - jQuery.attr (0, 35, 35)",
+        IE = "selector - jQuery only: attributes - jQuery.attr (0, 35, 35)")
+    @NotYetImplemented
+    public void test_259() throws Exception {
+        runTest(259);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "selector - jQuery only: Sizzle cache collides with multiple Sizzles on a page (0, 3, 3)",
+        FF10 = "traversing: find(String) (0, 5, 5)",
+        CHROME = "selector - jQuery only: Sizzle cache collides with multiple Sizzles on a page (0, 3, 3)",
+        IE = "selector - jQuery only: Sizzle cache collides with multiple Sizzles on a page (0, 3, 3)")
+    @NotYetImplemented
+    public void test_260() throws Exception {
+        runTest(260);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: find(String) (0, 5, 5)", FF10 = "traversing: find(node|jQuery object) (0, 11, 11)",
+        CHROME = "traversing: find(String) (0, 5, 5)", IE = "traversing: find(String) (0, 5, 5)")
+    public void test_261() throws Exception {
+        runTest(261);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: find(node|jQuery object) (0, 11, 11)",
+        FF10 = "traversing: is(String|undefined) (0, 30, 30)",
+        CHROME = "traversing: find(node|jQuery object) (0, 11, 11)",
+        IE = "traversing: find(node|jQuery object) (0, 11, 11)")
+    public void test_262() throws Exception {
+        runTest(262);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: is(String|undefined) (0, 30, 30)",
+        FF10 = "traversing: is(jQuery) (0, 21, 21)", CHROME = "traversing: is(String|undefined) (0, 30, 30)",
+        IE = "traversing: is(String|undefined) (0, 30, 30)")
+    public void test_263() throws Exception {
+        runTest(263);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: is(jQuery) (0, 21, 21)",
+        FF10 = "traversing: is() with positional selectors (0, 23, 23)",
+        CHROME = "traversing: is(jQuery) (0, 21, 21)", IE = "traversing: is(jQuery) (0, 21, 21)")
+    public void test_264() throws Exception {
+        runTest(264);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: is() with positional selectors (0, 23, 23)",
+        FF10 = "traversing: index() (0, 2, 2)", CHROME = "traversing: is() with positional selectors (0, 23, 23)",
+        IE = "traversing: is() with positional selectors (0, 23, 23)")
+    public void test_265() throws Exception {
+        runTest(265);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: index() (0, 2, 2)", FF10 = "traversing: index(Object|String|undefined) (0, 16, 16)",
+        CHROME = "traversing: index() (0, 2, 2)", IE = "traversing: index() (0, 2, 2)")
+    public void test_266() throws Exception {
+        runTest(266);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: index(Object|String|undefined) (0, 16, 16)",
+        FF10 = "traversing: filter(Selector|undefined) (0, 9, 9)",
+        CHROME = "traversing: index(Object|String|undefined) (0, 16, 16)",
+        IE = "traversing: index(Object|String|undefined) (0, 16, 16)")
+    public void test_267() throws Exception {
+        runTest(267);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: filter(Selector|undefined) (0, 9, 9)",
+        FF10 = "traversing: filter(Function) (0, 2, 2)", CHROME = "traversing: filter(Selector|undefined) (0, 9, 9)",
+        IE = "traversing: filter(Selector|undefined) (0, 9, 9)")
+    public void test_268() throws Exception {
+        runTest(268);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: filter(Function) (0, 2, 2)",
+        FF10 = "traversing: filter(Element) (0, 1, 1)", CHROME = "traversing: filter(Function) (0, 2, 2)",
+        IE = "traversing: filter(Function) (0, 2, 2)")
+    public void test_269() throws Exception {
+        runTest(269);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: filter(Element) (0, 1, 1)", FF10 = "traversing: filter(Array) (0, 1, 1)",
+        CHROME = "traversing: filter(Element) (0, 1, 1)", IE = "traversing: filter(Element) (0, 1, 1)")
+    public void test_270() throws Exception {
+        runTest(270);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: filter(Array) (0, 1, 1)", FF10 = "traversing: filter(jQuery) (0, 1, 1)",
+        CHROME = "traversing: filter(Array) (0, 1, 1)", IE = "traversing: filter(Array) (0, 1, 1)")
+    public void test_271() throws Exception {
+        runTest(271);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: filter(jQuery) (0, 1, 1)",
+        FF10 = "traversing: filter() with positional selectors (0, 19, 19)",
+        CHROME = "traversing: filter(jQuery) (0, 1, 1)", IE = "traversing: filter(jQuery) (0, 1, 1)")
+    public void test_272() throws Exception {
+        runTest(272);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: filter() with positional selectors (0, 19, 19)",
+        FF10 = "traversing: closest() (0, 14, 14)",
+        CHROME = "traversing: filter() with positional selectors (0, 19, 19)",
+        IE = "traversing: filter() with positional selectors (0, 19, 19)")
+    public void test_273() throws Exception {
+        runTest(273);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: closest() (0, 14, 14)", FF10 = "traversing: closest(jQuery) (0, 8, 8)",
+        CHROME = "traversing: closest() (0, 14, 14)", IE = "traversing: closest() (0, 14, 14)")
+    public void test_274() throws Exception {
+        runTest(274);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: closest(jQuery) (0, 8, 8)", FF10 = "traversing: not(Selector|undefined) (0, 11, 11)",
+        CHROME = "traversing: closest(jQuery) (0, 8, 8)", IE = "traversing: closest(jQuery) (0, 8, 8)")
+    public void test_275() throws Exception {
+        runTest(275);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: not(Selector|undefined) (0, 11, 11)",
+        FF10 = "traversing: not(Element) (0, 1, 1)", CHROME = "traversing: not(Selector|undefined) (0, 11, 11)",
+        IE = "traversing: not(Selector|undefined) (0, 11, 11)")
+    public void test_276() throws Exception {
+        runTest(276);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: not(Element) (0, 1, 1)", FF10 = "traversing: not(Function) (0, 1, 1)",
+        CHROME = "traversing: not(Element) (0, 1, 1)", IE = "traversing: not(Element) (0, 1, 1)")
+    public void test_277() throws Exception {
+        runTest(277);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: not(Function) (0, 1, 1)", FF10 = "traversing: not(Array) (0, 2, 2)",
+        CHROME = "traversing: not(Function) (0, 1, 1)", IE = "traversing: not(Function) (0, 1, 1)")
+    public void test_278() throws Exception {
+        runTest(278);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: not(Array) (0, 2, 2)", FF10 = "traversing: not(jQuery) (0, 1, 1)",
+        CHROME = "traversing: not(Array) (0, 2, 2)", IE = "traversing: not(Array) (0, 2, 2)")
+    @NotYetImplemented(IE)
+    public void test_279() throws Exception {
+        runTest(279);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: not(jQuery) (0, 1, 1)", FF10 = "traversing: has(Element) (0, 3, 3)",
+        CHROME = "traversing: not(jQuery) (0, 1, 1)", IE = "traversing: not(jQuery) (0, 1, 1)")
+    public void test_280() throws Exception {
+        runTest(280);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: has(Element) (0, 3, 3)", FF10 = "traversing: has(Selector) (0, 5, 5)",
+        CHROME = "traversing: has(Element) (0, 3, 3)", IE = "traversing: has(Element) (0, 3, 3)")
+    public void test_281() throws Exception {
+        runTest(281);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: has(Selector) (0, 5, 5)", FF10 = "traversing: has(Arrayish) (0, 4, 4)",
+        CHROME = "traversing: has(Selector) (0, 5, 5)", IE = "traversing: has(Selector) (0, 5, 5)")
+    public void test_282() throws Exception {
+        runTest(282);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: has(Arrayish) (0, 4, 4)", FF10 = "traversing: addBack() (0, 5, 5)",
+        CHROME = "traversing: has(Arrayish) (0, 4, 4)", IE = "traversing: has(Arrayish) (0, 4, 4)")
+    public void test_283() throws Exception {
+        runTest(283);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: addBack() (0, 5, 5)", FF10 = "traversing: siblings([String]) (0, 7, 7)",
+        CHROME = "traversing: addBack() (0, 5, 5)", IE = "traversing: addBack() (0, 5, 5)")
+    public void test_284() throws Exception {
+        runTest(284);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: siblings([String]) (0, 7, 7)", FF10 = "traversing: children([String]) (0, 3, 3)",
+        CHROME = "traversing: siblings([String]) (0, 7, 7)", IE = "traversing: siblings([String]) (0, 7, 7)")
+    public void test_285() throws Exception {
+        runTest(285);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: children([String]) (0, 3, 3)", FF10 = "traversing: parent([String]) (0, 5, 5)",
+        CHROME = "traversing: children([String]) (0, 3, 3)", IE = "traversing: children([String]) (0, 3, 3)")
+    public void test_286() throws Exception {
+        runTest(286);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: parent([String]) (0, 5, 5)", FF10 = "traversing: parents([String]) (0, 5, 5)",
+        CHROME = "traversing: parent([String]) (0, 5, 5)", IE = "traversing: parent([String]) (0, 5, 5)")
+    public void test_287() throws Exception {
+        runTest(287);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: parents([String]) (0, 5, 5)", FF10 = "traversing: parentsUntil([String]) (0, 9, 9)",
+        CHROME = "traversing: parents([String]) (0, 5, 5)", IE = "traversing: parents([String]) (0, 5, 5)")
+    public void test_288() throws Exception {
+        runTest(288);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: parentsUntil([String]) (0, 9, 9)",
+        FF10 = "traversing: next([String]) (0, 5, 5)", CHROME = "traversing: parentsUntil([String]) (0, 9, 9)",
+        IE = "traversing: parentsUntil([String]) (0, 9, 9)")
+    public void test_289() throws Exception {
+        runTest(289);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: next([String]) (0, 5, 5)", FF10 = "traversing: prev([String]) (0, 4, 4)",
+        CHROME = "traversing: next([String]) (0, 5, 5)", IE = "traversing: next([String]) (0, 5, 5)")
+    public void test_290() throws Exception {
+        runTest(290);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: prev([String]) (0, 4, 4)", FF10 = "traversing: nextAll([String]) (0, 4, 4)",
+        CHROME = "traversing: prev([String]) (0, 4, 4)", IE = "traversing: prev([String]) (0, 4, 4)")
+    public void test_291() throws Exception {
+        runTest(291);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: nextAll([String]) (0, 4, 4)", FF10 = "traversing: prevAll([String]) (0, 4, 4)",
+        CHROME = "traversing: nextAll([String]) (0, 4, 4)", IE = "traversing: nextAll([String]) (0, 4, 4)")
+    public void test_292() throws Exception {
+        runTest(292);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: prevAll([String]) (0, 4, 4)", FF10 = "traversing: nextUntil([String]) (0, 11, 11)",
+        CHROME = "traversing: prevAll([String]) (0, 4, 4)", IE = "traversing: prevAll([String]) (0, 4, 4)")
+    public void test_293() throws Exception {
+        runTest(293);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: nextUntil([String]) (0, 11, 11)",
+        FF10 = "traversing: prevUntil([String]) (0, 10, 10)",
+        CHROME = "traversing: nextUntil([String]) (0, 11, 11)",
+        IE = "traversing: nextUntil([String]) (0, 11, 11)")
+    public void test_294() throws Exception {
+        runTest(294);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: prevUntil([String]) (0, 10, 10)",
+        FF10 = "traversing: contents() (0, 12, 12)", CHROME = "traversing: prevUntil([String]) (0, 10, 10)",
+        IE = "traversing: prevUntil([String]) (0, 10, 10)")
+    public void test_295() throws Exception {
+        runTest(295);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: contents() (0, 12, 12)",
+        FF10 = "traversing: add(String|Element|Array|undefined) (0, 16, 16)",
+        CHROME = "traversing: contents() (0, 12, 12)", IE = "traversing: contents() (0, 12, 12)")
+    public void test_296() throws Exception {
+        runTest(296);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: add(String|Element|Array|undefined) (0, 16, 16)",
+        FF10 = "traversing: add(String, Context) (0, 6, 6)",
+        CHROME = "traversing: add(String|Element|Array|undefined) (0, 16, 16)",
+        IE = "traversing: add(String|Element|Array|undefined) (0, 16, 16)")
+    public void test_297() throws Exception {
+        runTest(297);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: add(String, Context) (0, 6, 6)",
+        FF10 = "traversing: eq('-1') #10616 (0, 3, 3)", CHROME = "traversing: add(String, Context) (0, 6, 6)",
+        IE = "traversing: add(String, Context) (0, 6, 6)")
+    public void test_298() throws Exception {
+        runTest(298);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "traversing: eq('-1') #10616 (0, 3, 3)", FF10 = "manipulation: text() (0, 5, 5)",
+        CHROME = "traversing: eq('-1') #10616 (0, 3, 3)", IE = "traversing: eq('-1') #10616 (0, 3, 3)")
+    public void test_299() throws Exception {
+        runTest(299);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: text() (0, 5, 5)", FF10 = "manipulation: text(undefined) (0, 1, 1)",
+        CHROME = "manipulation: text() (0, 5, 5)", IE = "manipulation: text() (0, 5, 5)")
+    @NotYetImplemented(IE)
+    public void test_300() throws Exception {
+        runTest(300);
+    }
+
 }
