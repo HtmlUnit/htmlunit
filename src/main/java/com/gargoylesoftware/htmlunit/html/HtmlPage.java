@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CON
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_FRAMESET_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
@@ -62,6 +63,7 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.ranges.Range;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -185,7 +187,8 @@ public class HtmlPage extends SgmlPage {
     @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         final WebWindow enclosingWindow = getEnclosingWindow();
-        if (isQuirksMode()) {
+        final BrowserVersion browserVersion = getWebClient().getBrowserVersion();
+        if (!browserVersion.hasFeature(JS_DEFINE_GETTER) && isQuirksMode()) {
             removePrototypeProperties((Scriptable) enclosingWindow.getScriptObject(), "Array",
                 "every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce", "reduceRight", "some");
         }
@@ -215,14 +218,14 @@ public class HtmlPage extends SgmlPage {
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         }
 
-        if (getWebClient().getBrowserVersion().hasFeature(EVENT_DOM_CONTENT_LOADED)) {
+        if (browserVersion.hasFeature(EVENT_DOM_CONTENT_LOADED)) {
             executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         }
         executeDeferredScriptsIfNeeded();
         setReadyStateOnDeferredScriptsIfNeeded();
 
         // frame initialization has a different order
-        final boolean framesetFirst = getWebClient().getBrowserVersion().hasFeature(EVENT_ONLOAD_FRAMESET_FIRST);
+        final boolean framesetFirst = browserVersion.hasFeature(EVENT_ONLOAD_FRAMESET_FIRST);
         boolean isFrameWindow = enclosingWindow instanceof FrameWindow;
         if (isFrameWindow) {
             isFrameWindow = ((FrameWindow) enclosingWindow).getFrameElement() instanceof HtmlFrame;
