@@ -17,9 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -27,10 +24,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HTMLCollection}.
@@ -40,7 +34,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class HTMLCollectionTest extends SimpleWebTestCase {
+public class HTMLCollectionTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -56,7 +50,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
             + "<a href='bla.html'>link</a>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -75,7 +69,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
             + "<a href='bla.html'>link</a>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -95,43 +89,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "true", "1" })
-    public void testChildNodes() throws Exception {
-        final String firstContent = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var doc = createXmlDocument();\n"
-            + "    doc.async = false;\n"
-            + "    alert(doc.load('" + URL_SECOND + "'));\n"
-            + "    alert(doc.documentElement.childNodes.length);\n"
-            + "  }\n"
-            + "  function createXmlDocument() {\n"
-            + "    if (document.implementation && document.implementation.createDocument)\n"
-            + "      return document.implementation.createDocument('', '', null);\n"
-            + "    else if (window.ActiveXObject)\n"
-            + "      return new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        final String secondContent = "<title>Immortality</title>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final WebClient client = getWebClient();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-        final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, firstContent);
-        conn.setResponse(URL_SECOND, secondContent, "text/xml");
-        client.setWebConnection(conn);
-
-        client.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -157,7 +115,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
             + "<form name='myForm'></form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -193,7 +151,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -213,7 +171,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
             + "<form name='myForm'></form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -238,7 +196,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -256,7 +214,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -276,7 +234,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
             + "<body onload='test()'> <div id='myDiv'> <div> </div> <div> </div> </div> </body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -294,7 +252,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -312,7 +270,7 @@ public class HTMLCollectionTest extends SimpleWebTestCase {
             + "alert(hs['$h']);\n"
             + "alert(hs['$n']);\n"
             + "</script>";
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
 }
