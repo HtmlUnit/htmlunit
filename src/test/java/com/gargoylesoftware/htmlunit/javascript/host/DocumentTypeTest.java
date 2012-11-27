@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link DocumentType}.
@@ -134,7 +136,7 @@ public class DocumentTypeTest extends WebDriverTestCase {
             + "  <title>Test</title>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      if (document.body.parentElement)"
+            + "      if (document.body.parentElement)\n"
             + "        alert(document.body.parentElement.previousSibling);\n"
             + "    }\n"
             + "  </script>\n"
@@ -142,7 +144,32 @@ public class DocumentTypeTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
+        loadPageWithAlerts2(html);
+    }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE6 = { "[object]", "[object]" }, IE7 = { "[object]", "[object]" }, 
+            IE8 = { "[object]", "[object]" }, 
+            DEFAULT = { "[object DocumentType]",  "[object HTMLHtmlElement]"})
+    @NotYetImplemented(IE)
+    public void document_children() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html>\n"
+            + "<head>\n"
+            + "  <title>Test</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      for (var elem = document.firstChild; elem; elem = elem.nextSibling) {\n"
+            + "        alert(elem);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
         loadPageWithAlerts2(html);
     }
 }
