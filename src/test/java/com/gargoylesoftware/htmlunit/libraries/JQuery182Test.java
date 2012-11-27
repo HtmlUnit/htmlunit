@@ -3057,7 +3057,6 @@ public class JQuery182Test extends WebDriverTestCase {
     @Test
     @Alerts(FF3_6 = "traversing: not(Array) (0, 2, 2)", FF10 = "traversing: not(jQuery) (0, 1, 1)",
         CHROME = "traversing: not(Array) (0, 2, 2)", IE = "traversing: not(Array) (0, 2, 2)")
-    @NotYetImplemented(IE)
     public void test_279() throws Exception {
         runTest(279);
     }

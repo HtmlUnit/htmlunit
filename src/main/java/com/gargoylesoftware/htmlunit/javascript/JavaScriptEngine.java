@@ -301,8 +301,6 @@ public class JavaScriptEngine {
         if (!browserVersion.hasFeature(JS_DEFINE_GETTER)) {
             removePrototypeProperties(window, "Object", "__defineGetter__", "__defineSetter__", "__lookupGetter__",
                     "__lookupSetter__");
-            removePrototypeProperties(window, "Array", "every", "filter", "forEach", "indexOf", "lastIndexOf", "map",
-                    "reduce", "reduceRight", "some");
         }
 
         // only FF has toSource
@@ -356,12 +354,13 @@ public class JavaScriptEngine {
 
     /**
      * Removes prototype properties.
-     * @param window the scope
+     * @param scope the scope
      * @param className the class for which properties should be removed
      * @param properties the properties to remove
      */
-    private void removePrototypeProperties(final Window window, final String className, final String... properties) {
-        final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, className);
+    private void removePrototypeProperties(final Scriptable scope, final String className,
+            final String... properties) {
+        final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, className);
         for (final String property : properties) {
             prototype.delete(property);
         }

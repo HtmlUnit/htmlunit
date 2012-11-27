@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for {@link HTMLCollection}.
@@ -270,6 +271,50 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "alert(hs['$h']);\n"
             + "alert(hs['$n']);\n"
             + "</script>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "undefined", "undefined", "undefined" },
+        DEFAULT =  { "function", "function", "function", "function" })
+    public void array_prototype() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(typeof Object.prototype.__defineGetter__);\n"
+            + "    alert(typeof Object.prototype.__lookupGetter__);\n"
+            + "    alert(typeof Array.prototype.indexOf);\n"
+            + "    alert(typeof Array.prototype.map);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "undefined", "function", "function" },
+        DEFAULT =  { "function", "function", "function", "function" })
+    public void array_prototype_standards() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(typeof Object.prototype.__defineGetter__);\n"
+            + "    alert(typeof Object.prototype.__lookupGetter__);\n"
+            + "    alert(typeof Array.prototype.indexOf);\n"
+            + "    alert(typeof Array.prototype.map);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
         loadPageWithAlerts2(html);
     }
 

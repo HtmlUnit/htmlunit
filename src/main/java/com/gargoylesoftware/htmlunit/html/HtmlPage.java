@@ -41,6 +41,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -184,6 +185,10 @@ public class HtmlPage extends SgmlPage {
     @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         final WebWindow enclosingWindow = getEnclosingWindow();
+        if (isQuirksMode()) {
+            removePrototypeProperties((Scriptable) enclosingWindow.getScriptObject(), "Array",
+                "every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce", "reduceRight", "some");
+        }
         final boolean isAboutBlank = getUrl() == WebClient.URL_ABOUT_BLANK;
         if (isAboutBlank) {
             // a frame contains first a faked "about:blank" before its real content specified by src gets loaded
@@ -254,6 +259,20 @@ public class HtmlPage extends SgmlPage {
             throw new RuntimeException(e);
         }
         executeRefreshIfNeeded();
+    }
+
+    /**
+     * Removes prototype properties.
+     * @param scope the scope
+     * @param className the class for which properties should be removed
+     * @param properties the properties to remove
+     */
+    private void removePrototypeProperties(final Scriptable scope, final String className,
+            final String... properties) {
+        final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, className);
+        for (final String property : properties) {
+            prototype.delete(property);
+        }
     }
 
     /**

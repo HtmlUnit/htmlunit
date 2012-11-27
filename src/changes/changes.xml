@@ -9,6 +9,9 @@
     <body>
         <release version="2.12" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: properties of Array.prototype should be defined in standards mode (IE).
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: correctly process null function handlers.
             </action>
             <action type="fix" dev="asashour">
@@ -24,7 +27,7 @@
                 JavaScript: fix the return value of element.getAttribute() in standards mode (IE).
             </action>
             <action type="fix" dev="asashour">
-                JavaScript: element.set/getAttribute() should fix the name (e.g. "className") only in Quirks mode (IE).
+                JavaScript: element.set/getAttribute() should fix the name (e.g. "className") only in quirks mode (IE).
             </action>
             <action type="fix" dev="mguillem">
                 Cookies: use 1970 as two digits year start for the expiration date.
