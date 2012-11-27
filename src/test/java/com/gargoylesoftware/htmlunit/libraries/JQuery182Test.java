@@ -2766,7 +2766,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "selector - jQuery only: element - jQuery only (0, 7, 7)",
         CHROME = "event: trigger click on checkbox, fires change event (0, 1, 1)",
         IE = "event: trigger click on checkbox, fires change event (0, 1, 1)")
-    @NotYetImplemented(FF)
+    @NotYetImplemented(FF3_6)
     public void test_253() throws Exception {
         runTest(253);
     }
@@ -2840,6 +2840,7 @@ public class JQuery182Test extends WebDriverTestCase {
         CHROME = "selector - jQuery only: attributes - jQuery.attr (0, 35, 35)",
         IE = "selector - jQuery only: attributes - jQuery.attr (0, 35, 35)")
     @NotYetImplemented
+    // In /test/data/selector/html5_selector.html a reference to non existing iframe.html
     public void test_259() throws Exception {
         runTest(259);
     }
