@@ -127,7 +127,9 @@ public class DocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "[object HTMLCommentElement]", FF10 = "[object DocumentType]")
+    @Alerts(IE6 = "string", IE7 = "string", IE8 = "string", FF3_6 = { },
+        DEFAULT = "undefined")
+    @NotYetImplemented(IE)
     public void html_previousSibling() throws Exception {
         final String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\n"
             + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
@@ -136,8 +138,10 @@ public class DocumentTypeTest extends WebDriverTestCase {
             + "  <title>Test</title>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      if (document.body.parentElement)\n"
-            + "        alert(document.body.parentElement.previousSibling);\n"
+            + "      if (document.body.parentElement) {\n"
+            + "        //.text is defined for Comment in IE"
+            + "        alert(typeof document.body.parentElement.previousSibling.text);\n"
+            + "        }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -151,9 +155,9 @@ public class DocumentTypeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE6 = { "[object]", "[object]" }, IE7 = { "[object]", "[object]" }, 
-            IE8 = { "[object]", "[object]" }, 
-            DEFAULT = { "[object DocumentType]",  "[object HTMLHtmlElement]"})
+    @Alerts(IE6 = { "[object]", "[object]" }, IE7 = { "[object]", "[object]" },
+            IE8 = { "[object]", "[object]" },
+            DEFAULT = { "[object DocumentType]",  "[object HTMLHtmlElement]" })
     @NotYetImplemented(IE)
     public void document_children() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html>\n"
