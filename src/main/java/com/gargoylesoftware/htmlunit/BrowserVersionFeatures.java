@@ -446,10 +446,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_69,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_70,
 
     /** Was originally .isIE(). */
@@ -581,6 +577,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE,
+
+    /** Indicates that element.innerHTML/outerHTML the tag name is in upper case or not. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLELEMENT_OUTER_HTML_UPPER_CASE,
 
     /** */
     HTMLELEMENT_TRIM_CLASS_ATTRIBUTE,

@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_167;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_65;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_69;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_HTML_UPPER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_70;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_71;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
@@ -906,11 +906,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             buffer.append(s);
         }
         else if (html) {
-            // Start the tag name. IE does it in uppercase, FF in lowercase.
             final HtmlElement element = (HtmlElement) node;
-            final boolean ie = getBrowserVersion().hasFeature(GENERATED_69);
+            final boolean isUpperCase = getBrowserVersion().hasFeature(HTMLELEMENT_OUTER_HTML_UPPER_CASE);
             String tag = element.getTagName();
-            if (ie) {
+            if (isUpperCase) {
                 tag = tag.toUpperCase();
             }
             buffer.append("<").append(tag);
@@ -918,7 +917,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             for (final DomAttr attr : element.getAttributesMap().values()) {
                 final String name = attr.getName();
                 final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
-                final boolean quote = !ie
+                final boolean quote = !isUpperCase
                     || com.gargoylesoftware.htmlunit.util.StringUtils.containsWhitespace(value)
                     || value.isEmpty()
                     || (element instanceof HtmlAnchor && "href".equals(name));
