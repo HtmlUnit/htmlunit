@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.libraries;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE7;
 import static org.junit.Assert.fail;
 
 import org.eclipse.jetty.server.Server;
@@ -4266,6 +4268,7 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "css: internal ref to elem.runtimeStyle (bug #7608) (0, 1, 1)",
         CHROME = "css: :visible selector works properly on children with a hidden parent (bug #4512) (0, 1, 1)",
         IE = "css: jQuery.css(elem, 'height') doesn't clear radio buttons (bug #1095) (0, 4, 4)")
+    @NotYetImplemented(FF)
     public void test_385() throws Exception {
         runTest(385);
     }
@@ -4354,6 +4357,7 @@ public class JQuery182Test extends WebDriverTestCase {
             + "els, see #11311 (0, 1, 1)",
         CHROME = "css: can't get background-position in IE<9, see #10796 (0, 8, 8)",
         IE = "css: widows & orphans #8936 (0, 4, 4)")
+    @NotYetImplemented({ IE6, IE7 })
     public void test_392() throws Exception {
         runTest(392);
     }

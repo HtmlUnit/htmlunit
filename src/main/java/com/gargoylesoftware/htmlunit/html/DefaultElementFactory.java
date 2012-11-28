@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  */
 class DefaultElementFactory implements ElementFactory {
 
-    /* 
+    /*
      * Whenever you add a tag, please add corresponding test cases in the below:
      * There are few areas, where we iterate over all elements, you can search in the project for ("xmp")
      * For example HTMLParser2Test.childNodes_xmp
