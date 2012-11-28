@@ -43,6 +43,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  */
 class DefaultElementFactory implements ElementFactory {
 
+    /* 
+     * Whenever you add a tag, please add corresponding test cases in the below:
+     * There are few areas, where we iterate over all elements, you can search in the project for ("xmp")
+     * For example HTMLParser2Test.childNodes_xmp
+     * You can generate your own test cases by looking into TestSource.generateTestForHtmlElements
+     */
     static final List<String> SUPPORTED_TAGS_ = Arrays.asList(HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
         HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlApplet.TAG_NAME, HtmlArea.TAG_NAME, HtmlAudio.TAG_NAME,
             HtmlBackgroundSound.TAG_NAME, HtmlBase.TAG_NAME, HtmlBaseFont.TAG_NAME,
