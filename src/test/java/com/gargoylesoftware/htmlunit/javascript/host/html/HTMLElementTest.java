@@ -3678,4 +3678,31 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void outerHTML_xmp() throws Exception {
         loadPageWithAlerts2(outerHTML("xmp"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "DIV", "section", "<DIV></DIV>", "<section></section>" },
+            FF3_6 = { "DIV", "SECTION", "undefined", "undefined" },
+            FF10 = { "DIV", "SECTION", "undefined", "undefined" },
+            DEFAULT = { "DIV", "SECTION", "<div></div>", "<section></section>" })
+    @NotYetImplemented(IE)
+    public void nodeNameVsOuterElement() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.createElement('div').tagName);\n"
+            + "      alert(document.createElement('section').tagName);\n"
+            + "      alert(document.createElement('div').cloneNode( true ).outerHTML);\n"
+            + "      alert(document.createElement('section').cloneNode( true ).outerHTML);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
