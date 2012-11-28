@@ -9,6 +9,9 @@
     <body>
         <release version="2.12" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
+                JavaScript: fix handling relations of document type comment with &lt;html&gt; element (IE).
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: properties of Array.prototype should be defined in standards mode (IE).
             </action>
             <action type="fix" dev="asashour">

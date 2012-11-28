@@ -3275,7 +3275,6 @@ public class JQuery182Test extends WebDriverTestCase {
     @Test
     @Alerts(FF3_6 = "manipulation: text() (0, 5, 5)", FF10 = "manipulation: text(undefined) (0, 1, 1)",
         CHROME = "manipulation: text() (0, 5, 5)", IE = "manipulation: text() (0, 5, 5)")
-    @NotYetImplemented(IE)
     public void test_300() throws Exception {
         runTest(300);
     }

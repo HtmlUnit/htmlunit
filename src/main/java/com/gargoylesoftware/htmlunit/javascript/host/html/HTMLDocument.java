@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_IS_COMMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_160;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_161;
@@ -84,8 +83,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
-import com.gargoylesoftware.htmlunit.html.DomComment;
-import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
@@ -1911,12 +1908,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @Override
     public SimpleScriptable makeScriptableFor(final DomNode domNode) {
-        if (domNode instanceof DomDocumentType && getBrowserVersion().hasFeature(DOCTYPE_IS_COMMENT)) {
-            final DomDocumentType docType = (DomDocumentType) domNode;
-            final DomComment comment = new DomComment(getHtmlPage(), "DOCTYPE " + docType.getName() + " PUBLIC \""
-                    + docType.getPublicId() + "\"      \"" + docType.getSystemId() + '"');
-            return super.makeScriptableFor(comment);
-        }
         return super.makeScriptableFor(domNode);
     }
 

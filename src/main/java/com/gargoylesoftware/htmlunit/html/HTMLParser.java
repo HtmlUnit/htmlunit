@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_IS_COMMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_3;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCONDITIONAL_COMMENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING;
@@ -782,7 +783,16 @@ public final class HTMLParser {
         public void startDTD(final String name, final String publicId, final String systemId) {
             final DomDocumentType type = new DomDocumentType(page_, name, publicId, systemId);
             page_.setDocumentType(type);
-            page_.appendChild(type);
+
+            final Node child;
+            if (page_.getWebClient().getBrowserVersion().hasFeature(DOCTYPE_IS_COMMENT)) {
+                child = new DomComment(page_, "DOCTYPE " + name + " PUBLIC \""
+                        + publicId + "\"      \"" + systemId + '"');
+            }
+            else {
+                child = type;
+            }
+            page_.appendChild(child);
         }
 
         /** {@inheritDoc} */
