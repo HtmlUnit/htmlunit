@@ -3279,4 +3279,1183 @@ public class JQuery182Test extends WebDriverTestCase {
         runTest(300);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: text(undefined) (0, 1, 1)", FF10 = "manipulation: text(String) (0, 4, 4)",
+        CHROME = "manipulation: text(undefined) (0, 1, 1)", IE = "manipulation: text(undefined) (0, 1, 1)")
+    public void test_301() throws Exception {
+        runTest(301);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: text(String) (0, 4, 4)", FF10 = "manipulation: text(Function) (0, 4, 4)",
+        CHROME = "manipulation: text(String) (0, 4, 4)", IE = "manipulation: text(String) (0, 4, 4)")
+    public void test_302() throws Exception {
+        runTest(302);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: text(Function) (0, 4, 4)",
+        FF10 = "manipulation: text(Function) with incoming value (0, 2, 2)",
+        CHROME = "manipulation: text(Function) (0, 4, 4)", IE = "manipulation: text(Function) (0, 4, 4)")
+    public void test_303() throws Exception {
+        runTest(303);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: text(Function) with incoming value (0, 2, 2)",
+        FF10 = "manipulation: wrap(String|Element) (0, 19, 19)",
+        CHROME = "manipulation: text(Function) with incoming value (0, 2, 2)",
+        IE = "manipulation: text(Function) with incoming value (0, 2, 2)")
+    public void test_304() throws Exception {
+        runTest(304);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: wrap(String|Element) (0, 19, 19)",
+        FF10 = "manipulation: wrap(Function) (0, 19, 19)", CHROME = "manipulation: wrap(String|Element) (0, 19, 19)",
+        IE = "manipulation: wrap(String|Element) (0, 19, 19)")
+    public void test_305() throws Exception {
+        runTest(305);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: wrap(Function) (0, 19, 19)",
+        FF10 = "manipulation: wrap(Function) with index (#10177) (0, 6, 6)",
+        CHROME = "manipulation: wrap(Function) (0, 19, 19)", IE = "manipulation: wrap(Function) (0, 19, 19)")
+    public void test_306() throws Exception {
+        runTest(306);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: wrap(Function) with index (#10177) (0, 6, 6)",
+        FF10 = "manipulation: wrap(String) consecutive elements (#10177) (0, 12, 12)",
+        CHROME = "manipulation: wrap(Function) with index (#10177) (0, 6, 6)",
+        IE = "manipulation: wrap(Function) with index (#10177) (0, 6, 6)")
+    public void test_307() throws Exception {
+        runTest(307);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: wrap(String) consecutive elements (#10177) (0, 12, 12)",
+        FF10 = "manipulation: wrapAll(String|Element) (0, 8, 8)",
+        CHROME = "manipulation: wrap(String) consecutive elements (#10177) (0, 12, 12)",
+        IE = "manipulation: wrap(String) consecutive elements (#10177) (0, 12, 12)")
+    public void test_308() throws Exception {
+        runTest(308);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: wrapAll(String|Element) (0, 8, 8)",
+        FF10 = "manipulation: wrapInner(String|Element) (0, 11, 11)",
+        CHROME = "manipulation: wrapAll(String|Element) (0, 8, 8)",
+        IE = "manipulation: wrapAll(String|Element) (0, 8, 8)")
+    public void test_309() throws Exception {
+        runTest(309);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: wrapInner(String|Element) (0, 11, 11)",
+        FF10 = "manipulation: wrapInner(Function) (0, 11, 11)",
+        CHROME = "manipulation: wrapInner(String|Element) (0, 11, 11)",
+        IE = "manipulation: wrapInner(String|Element) (0, 11, 11)")
+    public void test_310() throws Exception {
+        runTest(310);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: wrapInner(Function) (0, 11, 11)",
+        FF10 = "manipulation: unwrap() (0, 9, 9)", CHROME = "manipulation: wrapInner(Function) (0, 11, 11)",
+        IE = "manipulation: wrapInner(Function) (0, 11, 11)")
+    public void test_311() throws Exception {
+        runTest(311);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: unwrap() (0, 9, 9)",
+        FF10 = "manipulation: append(String|Element|Array&lt;Element&gt;|jQuery) (0, 58, 58)",
+        CHROME = "manipulation: unwrap() (0, 9, 9)", IE = "manipulation: unwrap() (0, 9, 9)")
+    public void test_312() throws Exception {
+        runTest(312);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: append(String|Element|Array&lt;Element&gt;|jQuery) (0, 58, 58)",
+        FF10 = "manipulation: append(Function) (0, 58, 58)",
+        CHROME = "manipulation: append(String|Element|Array&lt;Element&gt;|jQuery) (0, 58, 58)",
+        IE = "manipulation: append(String|Element|Array&lt;Element&gt;|jQuery) (0, 58, 58)")
+    public void test_313() throws Exception {
+        runTest(313);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: append(Function) (0, 58, 58)",
+        FF10 = "manipulation: append(Function) with incoming value (0, 12, 12)",
+        CHROME = "manipulation: append(Function) (0, 58, 58)",
+        IE = "manipulation: append(Function) (0, 58, 58)")
+    public void test_314() throws Exception {
+        runTest(314);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: append(Function) with incoming value (0, 12, 12)",
+        FF10 = "manipulation: append the same fragment with events (Bug #6997, 5566) (0, 2, 2)",
+        CHROME = "manipulation: append(Function) with incoming value (0, 12, 12)",
+        IE = "manipulation: append(Function) with incoming value (0, 12, 12)")
+    public void test_315() throws Exception {
+        runTest(315);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: append the same fragment with events (Bug #6997, 5566) (0, 2, 2)",
+        FF10 = "manipulation: append HTML5 sectioning elements (Bug #6485) (0, 2, 2)",
+        CHROME = "manipulation: append the same fragment with events (Bug #6997, 5566) (0, 2, 2)",
+        IE = "manipulation: append the same fragment with events (Bug #6997, 5566) (0, 3, 3)")
+    public void test_316() throws Exception {
+        runTest(316);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: append HTML5 sectioning elements (Bug #6485) (0, 2, 2)",
+        FF10 = "manipulation: HTML5 Elements inherit styles from style rules (Bug #10501) (0, 1, 1)",
+        CHROME = "manipulation: append HTML5 sectioning elements (Bug #6485) (0, 2, 2)",
+        IE = "manipulation: append HTML5 sectioning elements (Bug #6485) (0, 2, 2)")
+    public void test_317() throws Exception {
+        runTest(317);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: HTML5 Elements inherit styles from style rules (Bug #10501) (0, 1, 1)",
+        FF10 = "manipulation: html5 clone() cannot use the fragment cache in IE (#6485) (0, 1, 1)",
+        CHROME = "manipulation: HTML5 Elements inherit styles from style rules (Bug #10501) (0, 1, 1)",
+        IE = "manipulation: HTML5 Elements inherit styles from style rules (Bug #10501) (0, 1, 1)")
+    public void test_318() throws Exception {
+        runTest(318);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: html5 clone() cannot use the fragment cache in IE (#6485) (0, 1, 1)",
+        FF10 = "manipulation: html(String) with HTML5 (Bug #6485) (0, 2, 2)",
+        CHROME = "manipulation: html5 clone() cannot use the fragment cache in IE (#6485) (0, 1, 1)",
+        IE = "manipulation: html5 clone() cannot use the fragment cache in IE (#6485) (0, 1, 1)")
+    public void test_319() throws Exception {
+        runTest(319);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: html(String) with HTML5 (Bug #6485) (0, 2, 2)",
+        FF10 = "manipulation: IE8 serialization bug (0, 2, 2)",
+        CHROME = "manipulation: html(String) with HTML5 (Bug #6485) (0, 2, 2)",
+        IE = "manipulation: html(String) with HTML5 (Bug #6485) (0, 2, 2)")
+    public void test_320() throws Exception {
+        runTest(320);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: IE8 serialization bug (0, 2, 2)",
+        FF10 = "manipulation: html() object element #10324 (0, 1, 1)",
+        CHROME = "manipulation: IE8 serialization bug (0, 2, 2)",
+        IE = "manipulation: IE8 serialization bug (0, 2, 2)")
+    public void test_321() throws Exception {
+        runTest(321);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: html() object element #10324 (0, 1, 1)",
+        FF10 = "manipulation: append(xml) (0, 1, 1)", CHROME = "manipulation: html() object element #10324 (0, 1, 1)",
+        IE = "manipulation: html() object element #10324 (0, 1, 1)")
+    public void test_322() throws Exception {
+        runTest(322);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: append(xml) (0, 1, 1)",
+        FF10 = "manipulation: appendTo(String|Element|Array&lt;Element&gt;|jQuery) (0, 17, 17)",
+        CHROME = "manipulation: append(xml) (0, 1, 1)", IE = "manipulation: append(xml) (0, 1, 1)")
+    public void test_323() throws Exception {
+        runTest(323);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: appendTo(String|Element|Array&lt;Element&gt;|jQuery) (0, 17, 17)",
+        FF10 = "manipulation: prepend(String|Element|Array&lt;Element&gt;|jQuery) (0, 6, 6)",
+        CHROME = "manipulation: appendTo(String|Element|Array&lt;Element&gt;|jQuery) (0, 17, 17)",
+        IE = "manipulation: appendTo(String|Element|Array&lt;Element&gt;|jQuery) (0, 17, 17)")
+    public void test_324() throws Exception {
+        runTest(324);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: prepend(String|Element|Array&lt;Element&gt;|jQuery) (0, 6, 6)",
+        FF10 = "manipulation: prepend(Function) (0, 6, 6)",
+        CHROME = "manipulation: prepend(String|Element|Array&lt;Element&gt;|jQuery) (0, 6, 6)",
+        IE = "manipulation: prepend(String|Element|Array&lt;Element&gt;|jQuery) (0, 6, 6)")
+    public void test_325() throws Exception {
+        runTest(325);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: prepend(Function) (0, 6, 6)",
+        FF10 = "manipulation: prepend(Function) with incoming value (0, 10, 10)",
+        CHROME = "manipulation: prepend(Function) (0, 6, 6)",
+        IE = "manipulation: prepend(Function) (0, 6, 6)")
+    public void test_326() throws Exception {
+        runTest(326);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: prepend(Function) with incoming value (0, 10, 10)",
+        FF10 = "manipulation: prependTo(String|Element|Array&lt;Element&gt;|jQuery) (0, 6, 6)",
+        CHROME = "manipulation: prepend(Function) with incoming value (0, 10, 10)",
+        IE = "manipulation: prepend(Function) with incoming value (0, 10, 10)")
+    public void test_327() throws Exception {
+        runTest(327);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: prependTo(String|Element|Array&lt;Element&gt;|jQuery) (0, 6, 6)",
+        FF10 = "manipulation: before(String|Element|Array&lt;Element&gt;|jQuery) (0, 7, 7)",
+        CHROME = "manipulation: prependTo(String|Element|Array&lt;Element&gt;|jQuery) (0, 6, 6)",
+        IE = "manipulation: prependTo(String|Element|Array&lt;Element&gt;|jQuery) (0, 6, 6)")
+    public void test_328() throws Exception {
+        runTest(328);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: before(String|Element|Array&lt;Element&gt;|jQuery) (0, 7, 7)",
+        FF10 = "manipulation: before(Function) (0, 7, 7)",
+        CHROME = "manipulation: before(String|Element|Array&lt;Element&gt;|jQuery) (0, 7, 7)",
+        IE = "manipulation: before(String|Element|Array&lt;Element&gt;|jQuery) (0, 7, 7)")
+    public void test_329() throws Exception {
+        runTest(329);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: before(Function) (0, 7, 7)",
+        FF10 = "manipulation: before and after w/ empty object (#10812) (0, 2, 2)",
+        CHROME = "manipulation: before(Function) (0, 7, 7)", IE = "manipulation: before(Function) (0, 7, 7)")
+    public void test_330() throws Exception {
+        runTest(330);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: before and after w/ empty object (#10812) (0, 2, 2)",
+        FF10 = "manipulation: before and after on disconnected node (#10517) (0, 2, 2)",
+        CHROME = "manipulation: before and after w/ empty object (#10812) (0, 2, 2)",
+        IE = "manipulation: before and after w/ empty object (#10812) (0, 2, 2)")
+    public void test_331() throws Exception {
+        runTest(331);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: before and after on disconnected node (#10517) (0, 2, 2)",
+        FF10 = "manipulation: insertBefore(String|Element|Array&lt;Element&gt;|jQuery) (0, 4, 4)",
+        CHROME = "manipulation: before and after on disconnected node (#10517) (0, 2, 2)",
+        IE = "manipulation: before and after on disconnected node (#10517) (0, 2, 2)")
+    public void test_332() throws Exception {
+        runTest(332);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: insertBefore(String|Element|Array&lt;Element&gt;|jQuery) (0, 4, 4)",
+        FF10 = "manipulation: after(String|Element|Array&lt;Element&gt;|jQuery) (0, 7, 7)",
+        CHROME = "manipulation: insertBefore(String|Element|Array&lt;Element&gt;|jQuery) (0, 4, 4)",
+        IE = "manipulation: insertBefore(String|Element|Array&lt;Element&gt;|jQuery) (0, 4, 4)")
+    public void test_333() throws Exception {
+        runTest(333);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: after(String|Element|Array&lt;Element&gt;|jQuery) (0, 7, 7)",
+        FF10 = "manipulation: after(Function) (0, 7, 7)",
+        CHROME = "manipulation: after(String|Element|Array&lt;Element&gt;|jQuery) (0, 7, 7)",
+        IE = "manipulation: after(String|Element|Array&lt;Element&gt;|jQuery) (0, 7, 7)")
+    public void test_334() throws Exception {
+        runTest(334);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: after(Function) (0, 7, 7)",
+        FF10 = "manipulation: insertAfter(String|Element|Array&lt;Element&gt;|jQuery) (0, 4, 4)",
+        CHROME = "manipulation: after(Function) (0, 7, 7)", IE = "manipulation: after(Function) (0, 7, 7)")
+    public void test_335() throws Exception {
+        runTest(335);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: insertAfter(String|Element|Array&lt;Element&gt;|jQuery) (0, 4, 4)",
+        FF10 = "manipulation: replaceWith(String|Element|Array&lt;Element&gt;|jQuery) (0, 22, 22)",
+        CHROME = "manipulation: insertAfter(String|Element|Array&lt;Element&gt;|jQuery) (0, 4, 4)",
+        IE = "manipulation: insertAfter(String|Element|Array&lt;Element&gt;|jQuery) (0, 4, 4)")
+    public void test_336() throws Exception {
+        runTest(336);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: replaceWith(String|Element|Array&lt;Element&gt;|jQuery) (0, 22, 22)",
+        FF10 = "manipulation: replaceWith(Function) (0, 23, 23)",
+        CHROME = "manipulation: replaceWith(String|Element|Array&lt;Element&gt;|jQuery) (0, 22, 22)",
+        IE = "manipulation: replaceWith(String|Element|Array&lt;Element&gt;|jQuery) (0, 22, 22)")
+    public void test_337() throws Exception {
+        runTest(337);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: replaceWith(Function) (0, 23, 23)",
+        FF10 = "manipulation: replaceWith(string) for more than one element (0, 3, 3)",
+        CHROME = "manipulation: replaceWith(Function) (0, 23, 23)",
+        IE = "manipulation: replaceWith(Function) (0, 23, 23)")
+    public void test_338() throws Exception {
+        runTest(338);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: replaceWith(string) for more than one element (0, 3, 3)",
+        FF10 = "manipulation: replaceAll(String|Element|Array&lt;Element&gt;|jQuery) (0, 10, 10)",
+        CHROME = "manipulation: replaceWith(string) for more than one element (0, 3, 3)",
+        IE = "manipulation: replaceWith(string) for more than one element (0, 3, 3)")
+    public void test_339() throws Exception {
+        runTest(339);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: replaceAll(String|Element|Array&lt;Element&gt;|jQuery) (0, 10, 10)",
+        FF10 = "manipulation: jQuery.clone() (#8017) (0, 2, 2)",
+        CHROME = "manipulation: replaceAll(String|Element|Array&lt;Element&gt;|jQuery) (0, 10, 10)",
+        IE = "manipulation: replaceAll(String|Element|Array&lt;Element&gt;|jQuery) (0, 10, 10)")
+    public void test_340() throws Exception {
+        runTest(340);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: jQuery.clone() (#8017) (0, 2, 2)",
+        FF10 = "manipulation: clone() (#8070) (0, 2, 2)", CHROME = "manipulation: jQuery.clone() (#8017) (0, 2, 2)",
+        IE = "manipulation: jQuery.clone() (#8017) (0, 2, 2)")
+    public void test_341() throws Exception {
+        runTest(341);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: clone() (#8070) (0, 2, 2)",
+        FF10 = "manipulation: clone() (0, 44, 44)", CHROME = "manipulation: clone() (#8070) (0, 2, 2)",
+        IE = "manipulation: clone() (#8070) (0, 2, 2)")
+    public void test_342() throws Exception {
+        runTest(342);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: clone() (0, 44, 44)",
+        FF10 = "manipulation: clone(script type=non-javascript) (#11359) (0, 3, 3)",
+        CHROME = "manipulation: clone() (0, 44, 44)", IE = "manipulation: clone() (0, 44, 44)")
+    public void test_343() throws Exception {
+        runTest(343);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: clone(script type=non-javascript) (#11359) (0, 3, 3)",
+        FF10 = "manipulation: clone(form element) (Bug #3879, #6655) (0, 5, 5)",
+        CHROME = "manipulation: clone(script type=non-javascript) (#11359) (0, 3, 3)",
+        IE = "manipulation: clone(script type=non-javascript) (#11359) (0, 3, 3)")
+    public void test_344() throws Exception {
+        runTest(344);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: clone(form element) (Bug #3879, #6655) (0, 5, 5)",
+        FF10 = "manipulation: clone(multiple selected options) (Bug #8129) (0, 1, 1)",
+        CHROME = "manipulation: clone(form element) (Bug #3879, #6655) (0, 5, 5)",
+        IE = "manipulation: clone(form element) (Bug #3879, #6655) (0, 5, 5)")
+    public void test_345() throws Exception {
+        runTest(345);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: clone(multiple selected options) (Bug #8129) (0, 1, 1)",
+        FF10 = "manipulation: clone() on XML nodes (0, 2, 2)",
+        CHROME = "manipulation: clone(multiple selected options) (Bug #8129) (0, 1, 1)",
+        IE = "manipulation: clone(multiple selected options) (Bug #8129) (0, 1, 1)")
+    public void test_346() throws Exception {
+        runTest(346);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: clone() on XML nodes (0, 2, 2)",
+        FF10 = "manipulation: clone() on local XML nodes with html5 nodename (0, 2, 2)",
+        CHROME = "manipulation: clone() on XML nodes (0, 2, 2)",
+        IE = "manipulation: clone() on XML nodes (0, 2, 2)")
+    public void test_347() throws Exception {
+        runTest(347);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: clone() on local XML nodes with html5 nodename (0, 2, 2)",
+        FF10 = "manipulation: html(undefined) (0, 1, 1)",
+        CHROME = "manipulation: clone() on local XML nodes with html5 nodename (0, 2, 2)",
+        IE = "manipulation: clone() on local XML nodes with html5 nodename (0, 2, 2)")
+    public void test_348() throws Exception {
+        runTest(348);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: html(undefined) (0, 1, 1)", FF10 = "manipulation: html() on empty set (0, 1, 1)",
+        CHROME = "manipulation: html(undefined) (0, 1, 1)", IE = "manipulation: html(undefined) (0, 1, 1)")
+    public void test_349() throws Exception {
+        runTest(349);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: html() on empty set (0, 1, 1)",
+        FF10 = "manipulation: html(String) (0, 35, 35)", CHROME = "manipulation: html() on empty set (0, 1, 1)",
+        IE = "manipulation: html() on empty set (0, 1, 1)")
+    public void test_350() throws Exception {
+        runTest(350);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: html(String) (0, 35, 35)", FF10 = "manipulation: html(Function) (0, 37, 37)",
+        CHROME = "manipulation: html(String) (0, 35, 35)", IE = "manipulation: html(String) (0, 35, 35)")
+    public void test_351() throws Exception {
+        runTest(351);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: html(Function) (0, 37, 37)",
+        FF10 = "manipulation: html(Function) with incoming value (0, 20, 20)",
+        CHROME = "manipulation: html(Function) (0, 37, 37)", IE = "manipulation: html(Function) (0, 37, 37)")
+    public void test_352() throws Exception {
+        runTest(352);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: html(Function) with incoming value (0, 20, 20)",
+        FF10 = "manipulation: remove() (0, 9, 9)",
+        CHROME = "manipulation: html(Function) with incoming value (0, 20, 20)",
+        IE = "manipulation: html(Function) with incoming value (0, 20, 20)")
+    public void test_353() throws Exception {
+        runTest(353);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: remove() (0, 9, 9)", FF10 = "manipulation: detach() (0, 9, 9)",
+        CHROME = "manipulation: remove() (0, 9, 9)", IE = "manipulation: remove() (0, 9, 9)")
+    public void test_354() throws Exception {
+        runTest(354);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: detach() (0, 9, 9)", FF10 = "manipulation: empty() (0, 3, 3)",
+        CHROME = "manipulation: detach() (0, 9, 9)", IE = "manipulation: detach() (0, 9, 9)")
+    public void test_355() throws Exception {
+        runTest(355);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: empty() (0, 3, 3)", FF10 = "manipulation: jQuery.cleanData (0, 14, 14)",
+        CHROME = "manipulation: empty() (0, 3, 3)", IE = "manipulation: empty() (0, 3, 3)")
+    public void test_356() throws Exception {
+        runTest(356);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: jQuery.cleanData (0, 14, 14)",
+        FF10 = "manipulation: jQuery.buildFragment - no plain-text caching (Bug #6779) (0, 1, 1)",
+        CHROME = "manipulation: jQuery.cleanData (0, 14, 14)",
+        IE = "manipulation: jQuery.cleanData (0, 14, 14)")
+    public void test_357() throws Exception {
+        runTest(357);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: jQuery.buildFragment - no plain-text caching (Bug #6779) (0, 1, 1)",
+        FF10 = "manipulation: jQuery.html - execute scripts escaped with html comment or CDATA (#9221) (0, 3, 3)",
+        CHROME = "manipulation: jQuery.buildFragment - no plain-text caching (Bug #6779) (0, 1, 1)",
+        IE = "manipulation: jQuery.buildFragment - no plain-text caching (Bug #6779) (0, 1, 1)")
+    public void test_358() throws Exception {
+        runTest(358);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: jQuery.html - execute scripts escaped with html comment or CDATA (#9221) (0, 3, 3)",
+        FF10 = "manipulation: jQuery.buildFragment - plain objects are not a document #8950 (0, 1, 1)",
+        CHROME = "manipulation: jQuery.html - execute scripts escaped with html comment or CDATA (#9221) (0, 3, 3)",
+        IE = "manipulation: jQuery.html - execute scripts escaped with html comment or CDATA (#9221) (0, 3, 3)")
+    public void test_359() throws Exception {
+        runTest(359);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: jQuery.buildFragment - plain objects are not a document #8950 (0, 1, 1)",
+        FF10 = "manipulation: jQuery.clone - no exceptions for object elements #9587 (0, 1, 1)",
+        CHROME = "manipulation: jQuery.buildFragment - plain objects are not a document #8950 (0, 1, 1)",
+        IE = "manipulation: jQuery.buildFragment - plain objects are not a document #8950 (0, 1, 1)")
+    public void test_360() throws Exception {
+        runTest(360);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: jQuery.clone - no exceptions for object elements #9587 (0, 1, 1)",
+        FF10 = "manipulation: jQuery(<tag>) & wrap[Inner/All]() handle unknown elems (#10667) (0, 2, 2)",
+        CHROME = "manipulation: jQuery.clone - no exceptions for object elements #9587 (0, 1, 1)",
+        IE = "manipulation: jQuery.clone - no exceptions for object elements #9587 (0, 1, 1)")
+    public void test_361() throws Exception {
+        runTest(361);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: jQuery(<tag>) & wrap[Inner/All]() handle unknown elems (#10667) (0, 2, 2)",
+        FF10 = "manipulation: Cloned, detached HTML5 elems (#10667,10670) (0, 7, 7)",
+        CHROME = "manipulation: jQuery(<tag>) & wrap[Inner/All]() handle unknown elems (#10667) (0, 2, 2)",
+        IE = "manipulation: jQuery(<tag>) & wrap[Inner/All]() handle unknown elems (#10667) (0, 2, 2)")
+    public void test_362() throws Exception {
+        runTest(362);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: Cloned, detached HTML5 elems (#10667,10670) (0, 7, 7)",
+        FF10 = "manipulation: jQuery.fragments cache expectations (0, 10, 10)",
+        CHROME = "manipulation: Cloned, detached HTML5 elems (#10667,10670) (0, 7, 7)",
+        IE = "manipulation: Cloned, detached HTML5 elems (#10667,10670) (0, 7, 7)")
+    @NotYetImplemented(IE)
+    public void test_363() throws Exception {
+        runTest(363);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: jQuery.fragments cache expectations (0, 10, 10)",
+        FF10 = "manipulation: Guard against exceptions when clearing safeChildNodes (0, 1, 1)",
+        CHROME = "manipulation: jQuery.fragments cache expectations (0, 10, 10)",
+        IE = "manipulation: jQuery.fragments cache expectations (0, 10, 10)")
+    public void test_364() throws Exception {
+        runTest(364);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: Guard against exceptions when clearing safeChildNodes (0, 1, 1)",
+        FF10 = "manipulation: Ensure oldIE creates a new set on appendTo (#8894) (0, 5, 5)",
+        CHROME = "manipulation: Guard against exceptions when clearing safeChildNodes (0, 1, 1)",
+        IE = "manipulation: Guard against exceptions when clearing safeChildNodes (0, 1, 1)")
+    public void test_365() throws Exception {
+        runTest(365);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: Ensure oldIE creates a new set on appendTo (#8894) (0, 5, 5)",
+        FF10 = "manipulation: html() - script exceptions bubble (#11743) (0, 2, 2)",
+        CHROME = "manipulation: Ensure oldIE creates a new set on appendTo (#8894) (0, 5, 5)",
+        IE = "manipulation: Ensure oldIE creates a new set on appendTo (#8894) (0, 5, 5)")
+    public void test_366() throws Exception {
+        runTest(366);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: html() - script exceptions bubble (#11743) (0, 2, 2)",
+        FF10 = "manipulation: checked state is cloned with clone() (0, 2, 2)",
+        CHROME = "manipulation: html() - script exceptions bubble (#11743) (0, 2, 2)",
+        IE = "manipulation: html() - script exceptions bubble (#11743) (0, 2, 2)")
+    public void test_367() throws Exception {
+        runTest(367);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: checked state is cloned with clone() (0, 2, 2)",
+        FF10 = "manipulation: manipulate mixed jQuery and text (#12384, #12346) (0, 2, 2)",
+        CHROME = "manipulation: checked state is cloned with clone() (0, 2, 2)",
+        IE = "manipulation: checked state is cloned with clone() (0, 2, 2)")
+    public void test_368() throws Exception {
+        runTest(368);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: manipulate mixed jQuery and text (#12384, #12346) (0, 2, 2)",
+        FF10 = "manipulation: buildFragment works even if document[0] is iframe's window object in IE9/10 (#12266) "
+            + "(0, 1, 1)",
+        CHROME = "manipulation: manipulate mixed jQuery and text (#12384, #12346) (0, 2, 2)",
+        IE = "manipulation: manipulate mixed jQuery and text (#12384, #12346) (0, 2, 2)")
+    public void test_369() throws Exception {
+        runTest(369);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "manipulation: buildFragment works even if document[0] is iframe's window object in IE9/10 "
+            + "(#12266) (0, 1, 1)",
+        FF10 = "css: css(String|Hash) (0, 46, 46)",
+        CHROME = "manipulation: buildFragment works even if document[0] is iframe's window object in IE9/10 (#12266) ("
+            + "0, 1, 1)",
+        IE = "manipulation: buildFragment works even if document[0] is iframe's window object in IE9/10 (#12266) ("
+            + "0, 1, 1)")
+    public void test_370() throws Exception {
+        runTest(370);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: css(String|Hash) (0, 46, 46)", FF10 = "css: css() explicit and relative values (0, 29, 29)",
+        CHROME = "css: css(String|Hash) (0, 46, 46)", IE = "css: css(String|Hash) (0, 46, 46)")
+    @NotYetImplemented
+    public void test_371() throws Exception {
+        runTest(371);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: css() explicit and relative values (0, 29, 29)",
+        FF10 = "css: css(String, Object) (0, 22, 22)", CHROME = "css: css() explicit and relative values (0, 29, 29)",
+        IE = "css: css() explicit and relative values (0, 29, 29)")
+    public void test_372() throws Exception {
+        runTest(372);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: css(String, Object) (0, 22, 22)", FF10 = "css: css(String, Function) (0, 3, 3)",
+        CHROME = "css: css(String, Object) (0, 22, 22)", IE = "css: css(String, Object) (0, 22, 22)")
+    public void test_373() throws Exception {
+        runTest(373);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: css(String, Function) (0, 3, 3)",
+        FF10 = "css: css(String, Function) with incoming value (0, 3, 3)",
+        CHROME = "css: css(String, Function) (0, 3, 3)", IE = "css: css(String, Object) for MSIE (0, 5, 5)")
+    public void test_374() throws Exception {
+        runTest(374);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: css(String, Function) with incoming value (0, 3, 3)",
+        FF10 = "css: css(Object) where values are Functions (0, 3, 3)",
+        CHROME = "css: css(String, Function) with incoming value (0, 3, 3)",
+        IE = "css: Setting opacity to 1 properly removes filter: style (#6652) (0, 2, 2)")
+    @NotYetImplemented(IE)
+    public void test_375() throws Exception {
+        runTest(375);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: css(Object) where values are Functions (0, 3, 3)",
+        FF10 = "css: css(Object) where values are Functions with incoming values (0, 3, 3)",
+        CHROME = "css: css(Object) where values are Functions (0, 3, 3)",
+        IE = "css: css(String, Function) (0, 3, 3)")
+    public void test_376() throws Exception {
+        runTest(376);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: css(Object) where values are Functions with incoming values (0, 3, 3)",
+        FF10 = "css: show(); hide() (0, 22, 22)",
+        CHROME = "css: css(Object) where values are Functions with incoming values (0, 3, 3)",
+        IE = "css: css(String, Function) with incoming value (0, 3, 3)")
+    public void test_377() throws Exception {
+        runTest(377);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: show(); hide() (0, 22, 22)",
+        FF10 = "css: show() resolves correct default display #8099 (0, 7, 7)",
+        CHROME = "css: show(); hide() (0, 22, 22)", IE = "css: css(Object) where values are Functions (0, 3, 3)")
+    public void test_378() throws Exception {
+        runTest(378);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: show() resolves correct default display #8099 (3, 4, 7)",
+        FF10 = "css: show() resolves correct default display, detached nodes (#10006) (0, 11, 11)",
+        CHROME = "css: show() resolves correct default display #8099 (0, 7, 7)",
+        IE = "css: css(Object) where values are Functions with incoming values (0, 3, 3)")
+    public void test_379() throws Exception {
+        runTest(379);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: show() resolves correct default display, detached nodes (#10006) (0, 11, 11)",
+        FF10 = "css: toggle() (0, 9, 9)",
+        CHROME = "css: show() resolves correct default display, detached nodes (#10006) (0, 11, 11)",
+        IE = "css: show(); hide() (0, 22, 22)")
+    public void test_380() throws Exception {
+        runTest(380);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: toggle() (0, 9, 9)", FF10 = "css: hide hidden elements (bug #7141) (0, 3, 3)",
+        CHROME = "css: toggle() (0, 9, 9)", IE = "css: show() resolves correct default display #8099 (2, 1, 3)")
+    @NotYetImplemented(IE)
+    public void test_381() throws Exception {
+        runTest(381);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: hide hidden elements (bug #7141) (0, 3, 3)",
+        FF10 = "css: jQuery.css(elem, 'height') doesn't clear radio buttons (bug #1095) (0, 4, 4)",
+        CHROME = "css: hide hidden elements (bug #7141) (0, 3, 3)",
+        IE = "css: show() resolves correct default display, detached nodes (#10006) (0, 11, 11)")
+    public void test_382() throws Exception {
+        runTest(382);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: jQuery.css(elem, 'height') doesn't clear radio buttons (bug #1095) (0, 4, 4)",
+        FF10 = "css: :visible selector works properly on table elements (bug #4512) (0, 1, 1)",
+        CHROME = "css: jQuery.css(elem, 'height') doesn't clear radio buttons (bug #1095) (0, 4, 4)",
+        IE = "css: toggle() (0, 9, 9)")
+    public void test_383() throws Exception {
+        runTest(383);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: :visible selector works properly on table elements (bug #4512) (0, 1, 1)",
+        FF10 = "css: :visible selector works properly on children with a hidden parent (bug #4512) (0, 1, 1)",
+        CHROME = "css: :visible selector works properly on table elements (bug #4512) (0, 1, 1)",
+        IE = "css: hide hidden elements (bug #7141) (0, 3, 3)")
+    public void test_384() throws Exception {
+        runTest(384);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: :visible selector works properly on children with a hidden parent (bug #4512) (0, 1, 1)",
+        FF10 = "css: internal ref to elem.runtimeStyle (bug #7608) (0, 1, 1)",
+        CHROME = "css: :visible selector works properly on children with a hidden parent (bug #4512) (0, 1, 1)",
+        IE = "css: jQuery.css(elem, 'height') doesn't clear radio buttons (bug #1095) (0, 4, 4)")
+    public void test_385() throws Exception {
+        runTest(385);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: internal ref to elem.runtimeStyle (bug #7608) (0, 1, 1)",
+        FF10 = "css: marginRight computed style (bug #3333) (0, 1, 1)",
+        CHROME = "css: internal ref to elem.runtimeStyle (bug #7608) (0, 1, 1)",
+        IE = "css: :visible selector works properly on table elements (bug #4512) (0, 1, 1)")
+    public void test_386() throws Exception {
+        runTest(386);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: marginRight computed style (bug #3333) (0, 1, 1)",
+        FF10 = "css: box model properties incorrectly returning % instead of px, see #10639 and #12088 (0, 2, 2)",
+        CHROME = "css: marginRight computed style (bug #3333) (0, 1, 1)",
+        IE = "css: :visible selector works properly on children with a hidden parent (bug #4512) (0, 1, 1)")
+    @NotYetImplemented(IE)
+    public void test_387() throws Exception {
+        runTest(387);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: box model properties incorrectly returning % instead of px, see #10639 and #12088 (0, 2, 2)",
+        FF10 = "css: jQuery.cssProps behavior, (bug #8402) (0, 2, 2)",
+        CHROME = "css: box model properties incorrectly returning % instead of px, see #10639 and #12088 (0, 2, 2)",
+        IE = "css: internal ref to elem.runtimeStyle (bug #7608) (0, 1, 1)")
+    @NotYetImplemented(FF)
+    public void test_388() throws Exception {
+        runTest(388);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: jQuery.cssProps behavior, (bug #8402) (0, 2, 2)",
+        FF10 = "css: widows & orphans #8936 (0, 4, 4)",
+        CHROME = "css: jQuery.cssProps behavior, (bug #8402) (0, 2, 2)",
+        IE = "css: marginRight computed style (bug #3333) (0, 1, 1)")
+    public void test_389() throws Exception {
+        runTest(389);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: widows & orphans #8936 (0, 4, 4)",
+        FF10 = "css: can't get css for disconnected in IE<9, see #10254 and #8388 (0, 2, 2)",
+        CHROME = "css: widows & orphans #8936 (0, 4, 4)",
+        IE = "css: box model properties incorrectly returning % instead of px, see #10639 and #12088 (0, 2, 2)")
+    @NotYetImplemented(IE)
+    public void test_390() throws Exception {
+        runTest(390);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: can't get css for disconnected in IE<9, see #10254 and #8388 (0, 2, 2)",
+        FF10 = "css: can't get background-position in IE<9, see #10796 (0, 8, 8)",
+        CHROME = "css: can't get css for disconnected in IE<9, see #10254 and #8388 (0, 2, 2)",
+        IE = "css: jQuery.cssProps behavior, (bug #8402) (0, 2, 2)")
+    public void test_391() throws Exception {
+        runTest(391);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: can't get background-position in IE<9, see #10796 (0, 8, 8)",
+        FF10 = "css: percentage properties for bottom and right in IE<9 should not be incorrectly transformed to pix"
+            + "els, see #11311 (0, 1, 1)",
+        CHROME = "css: can't get background-position in IE<9, see #10796 (0, 8, 8)",
+        IE = "css: widows & orphans #8936 (0, 4, 4)")
+    public void test_392() throws Exception {
+        runTest(392);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: percentage properties for bottom and right in IE<9 should not be incorrectly transformed "
+            + "to pixels, see #11311 (0, 1, 1)",
+        FF10 = "css: percentage properties for left and top should be transformed to pixels, see #9505 (0, 2, 2)",
+        CHROME = "css: percentage properties for bottom and right in IE<9 should not be incorrectly transformed "
+            + "to pixels, see #11311 (0, 1, 1)",
+        IE = "css: can't get css for disconnected in IE<9, see #10254 and #8388 (0, 2, 2)")
+    public void test_393() throws Exception {
+        runTest(393);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: percentage properties for left and top should be transformed to pixels, see #9505 (0, 2, 2)",
+        FF10 = "css: Do not append px to 'fill-opacity' #9548 (0, 1, 1)",
+        CHROME = "css: percentage properties for left and top should be transformed to pixels, see #9505 (0, 2, 2)",
+        IE = "css: can't get background-position in IE<9, see #10796 (0, 8, 8)")
+    @NotYetImplemented(FF)
+    public void test_394() throws Exception {
+        runTest(394);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: Do not append px to 'fill-opacity' #9548 (1, 0, 1)",
+        FF10 = "css: css('width') and css('height') should respect box-sizing, see #11004 (0, 4, 4)",
+        CHROME = "css: Do not append px to 'fill-opacity' #9548 (0, 1, 1)",
+        IE = "css: percentage properties for bottom and right in IE<9 should not be incorrectly transformed to pix"
+            + "els, see #11311 (0, 1, 1)")
+    public void test_395() throws Exception {
+        runTest(395);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: css('width') and css('height') should respect box-sizing, see #11004 (0, 4, 4)",
+        FF10 = "css: certain css values of 'normal' should be convertable to a number, see #8627 (0, 2, 2)",
+        CHROME = "css: css('width') and css('height') should respect box-sizing, see #11004 (0, 4, 4)",
+        IE = "css: percentage properties for left and top should be transformed to pixels, see #9505 (0, 2, 2)")
+    @NotYetImplemented(IE)
+    public void test_396() throws Exception {
+        runTest(396);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: certain css values of 'normal' should be convertable to a number, see #8627 (0, 2, 2)",
+        FF10 = "css: cssHooks - expand (0, 15, 15)",
+        CHROME = "css: certain css values of 'normal' should be convertable to a number, see #8627 (0, 2, 2)",
+        IE = "css: Do not append px to 'fill-opacity' #9548 (0, 1, 1)")
+    public void test_397() throws Exception {
+        runTest(397);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "css: cssHooks - expand (0, 15, 15)", FF10 = "serialize: jQuery.param() (0, 22, 22)",
+        CHROME = "css: cssHooks - expand (0, 15, 15)",
+        IE = "css: css('width') and css('height') should respect box-sizing, see #11004 (0, 4, 4)")
+    public void test_398() throws Exception {
+        runTest(398);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "serialize: jQuery.param() (0, 22, 22)",
+        FF10 = "serialize: jQuery.param() Constructed prop values (0, 4, 4)",
+        CHROME = "serialize: jQuery.param() (0, 22, 22)",
+        IE = "css: certain css values of 'normal' should be convertable to a number, see #8627 (0, 2, 2)")
+    public void test_399() throws Exception {
+        runTest(399);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "serialize: jQuery.param() Constructed prop values (0, 4, 4)",
+        FF10 = "serialize: serialize() (0, 5, 5)",
+        CHROME = "serialize: jQuery.param() Constructed prop values (0, 4, 4)",
+        IE = "css: cssHooks - expand (0, 15, 15)")
+    public void test_400() throws Exception {
+        runTest(400);
+    }
+
 }
