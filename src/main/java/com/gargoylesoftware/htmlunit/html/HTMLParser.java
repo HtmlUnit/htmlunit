@@ -785,7 +785,7 @@ public final class HTMLParser {
             page_.setDocumentType(type);
 
             final Node child;
-            if (page_.getWebClient().getBrowserVersion().hasFeature(DOCTYPE_IS_COMMENT)) {
+            if (page_.hasFeature(DOCTYPE_IS_COMMENT)) {
                 child = new DomComment(page_, "DOCTYPE " + name + " PUBLIC \""
                         + publicId + "\"      \"" + systemId + '"');
             }
