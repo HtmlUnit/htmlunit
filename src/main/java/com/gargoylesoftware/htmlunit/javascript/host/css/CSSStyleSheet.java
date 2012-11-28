@@ -474,6 +474,9 @@ public class CSSStyleSheet extends SimpleScriptable {
 
         final int attribLength = attribute.length();
         final int conditionLength = condition.length();
+        if (attribLength < conditionLength) {
+            return false;
+        }
         if (attribLength > conditionLength) {
             if (separator == attribute.charAt(conditionLength)
                     && attribute.startsWith(condition)) {
@@ -484,8 +487,8 @@ public class CSSStyleSheet extends SimpleScriptable {
                 return true;
             }
             if (attribLength + 1 > conditionLength) {
-                final StringBuilder tmp = new StringBuilder(separator);
-                tmp.append(condition).append(separator);
+                final StringBuilder tmp = new StringBuilder(conditionLength + 2);
+                tmp.append(separator).append(condition).append(separator);
                 return attribute.contains(tmp);
             }
             return false;
