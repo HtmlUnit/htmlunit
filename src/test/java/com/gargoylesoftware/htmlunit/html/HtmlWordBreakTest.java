@@ -36,9 +36,9 @@ public class HtmlWordBreakTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLWBRElement]",
+    @Alerts(FF3_6 = "[object HTMLWBRElement]",
             IE = "[object]",
-            CHROME = "[object HTMLElement]")
+            DEFAULT = "[object HTMLElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
