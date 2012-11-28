@@ -290,6 +290,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     private DomNode getDomNodeOrNullFromRealDocument() {
         DomNode node = null;
+        // don't use getBrowserVersion() here because this is called
+        // from getBrowserVersion() and will endless loop
         final boolean ie = getWindow().getWebWindow().getWebClient().getBrowserVersion().hasFeature(GENERATED_51);
         if (ie) {
             final Scriptable scope = getParentScope();
@@ -1450,8 +1452,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 }
             }
             domain_ = url.getHost();
-            final BrowserVersion browser = getBrowserVersion();
-            if (browser.hasFeature(JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
+            if (getBrowserVersion().hasFeature(JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
                 domain_ = domain_.toLowerCase();
             }
         }
@@ -1516,7 +1517,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         // Netscape down shifts the case of the domain
-        if (getBrowserVersion().hasFeature(JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
+        if (browserVersion.hasFeature(JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
             domain_ = newDomain.toLowerCase();
         }
         else {
@@ -1768,11 +1769,12 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
-        final boolean ie = getBrowserVersion().hasFeature(GENERATED_63);
+        final BrowserVersion browser = getBrowserVersion();
+        final boolean ie = browser.hasFeature(GENERATED_63);
         if ((ie && !containsCaseInsensitive(EXECUTE_CMDS_IE, cmd))
             || (!ie && !containsCaseInsensitive(EXECUTE_CMDS_FF, cmd))) {
 
-            if (getBrowserVersion().hasFeature(EXECCOMMAND_THROWS_ON_WRONG_COMMAND)) {
+            if (browser.hasFeature(EXECCOMMAND_THROWS_ON_WRONG_COMMAND)) {
                 throw Context.reportRuntimeError("document.execCommand(): invalid command '" + cmd + "'");
             }
             return false;
