@@ -2687,4 +2687,995 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    private String outerHTML(final String elementName) {
+        return "<html><head>\n"
+                + "  <script>\n"
+                + "    function test(){\n"
+                + "      var value = document.createElement('" + elementName + "').cloneNode(true).outerHTML;\n"
+                + "      while (value && (value.charAt(0) == '\\r' || value.charAt(0) == '\\n'))\n"
+                + "        value = value.substring(1);\n"
+                + "      alert(value);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<abbr></abbr>", IE = "<ABBR></ABBR>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_abbr() throws Exception {
+        loadPageWithAlerts2(outerHTML("abbr"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<acronym></acronym>", IE = "<ACRONYM></ACRONYM>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_acronym() throws Exception {
+        loadPageWithAlerts2(outerHTML("acronym"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<a></a>", IE = "<A></A>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_a() throws Exception {
+        loadPageWithAlerts2(outerHTML("a"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<address></address>", IE = "<ADDRESS></ADDRESS>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_address() throws Exception {
+        loadPageWithAlerts2(outerHTML("address"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<applet></applet>", IE = "<APPLET></APPLET>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_applet() throws Exception {
+        loadPageWithAlerts2(outerHTML("applet"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<area>", IE = "<AREA>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_area() throws Exception {
+        loadPageWithAlerts2(outerHTML("area"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<audio></audio>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(IE)
+    public void outerHTML_audio() throws Exception {
+        loadPageWithAlerts2(outerHTML("audio"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<bgsound>", IE = "<BGSOUND>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(IE)
+    public void outerHTML_bgsound() throws Exception {
+        loadPageWithAlerts2(outerHTML("bgsound"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<base>", IE = "<BASE>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_base() throws Exception {
+        loadPageWithAlerts2(outerHTML("base"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<basefont>", IE = "<BASEFONT></BASEFONT>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(IE)
+    public void outerHTML_basefont() throws Exception {
+        loadPageWithAlerts2(outerHTML("basefont"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<bdo></bdo>", IE = "<BDO></BDO>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_bdo() throws Exception {
+        loadPageWithAlerts2(outerHTML("bdo"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<big></big>", IE = "<BIG></BIG>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_big() throws Exception {
+        loadPageWithAlerts2(outerHTML("big"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<blink></blink>", IE = "<BLINK></BLINK>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_blink() throws Exception {
+        loadPageWithAlerts2(outerHTML("blink"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<blockquote></blockquote>", IE = "<BLOCKQUOTE></BLOCKQUOTE>",
+        FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_blockquote() throws Exception {
+        loadPageWithAlerts2(outerHTML("blockquote"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<body></body>", IE = "<BODY></BODY>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_body() throws Exception {
+        loadPageWithAlerts2(outerHTML("body"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<b></b>", IE = "<B></B>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_b() throws Exception {
+        loadPageWithAlerts2(outerHTML("b"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<br>", IE = "<BR>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_br() throws Exception {
+        loadPageWithAlerts2(outerHTML("br"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<button></button>", IE = "<BUTTON></BUTTON>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_button() throws Exception {
+        loadPageWithAlerts2(outerHTML("button"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<canvas></canvas>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(IE)
+    public void outerHTML_canvas() throws Exception {
+        loadPageWithAlerts2(outerHTML("canvas"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<caption></caption>", IE = "<CAPTION></CAPTION>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_caption() throws Exception {
+        loadPageWithAlerts2(outerHTML("caption"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<center></center>", IE = "<CENTER></CENTER>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_center() throws Exception {
+        loadPageWithAlerts2(outerHTML("center"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<cite></cite>", IE = "<CITE></CITE>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_cite() throws Exception {
+        loadPageWithAlerts2(outerHTML("cite"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<code></code>", IE = "<CODE></CODE>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_code() throws Exception {
+        loadPageWithAlerts2(outerHTML("code"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<dfn></dfn>", IE = "<DFN></DFN>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_dfn() throws Exception {
+        loadPageWithAlerts2(outerHTML("dfn"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<dd></dd>", IE = "<DD></DD>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_dd() throws Exception {
+        loadPageWithAlerts2(outerHTML("dd"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<del></del>", IE = "<DEL></DEL>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_del() throws Exception {
+        loadPageWithAlerts2(outerHTML("del"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<dir></dir>", IE = "<DIR></DIR>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_dir() throws Exception {
+        loadPageWithAlerts2(outerHTML("dir"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<div></div>", IE = "<DIV></DIV>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_div() throws Exception {
+        loadPageWithAlerts2(outerHTML("div"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<dl></dl>", IE = "<DL></DL>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_dl() throws Exception {
+        loadPageWithAlerts2(outerHTML("dl"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<dt></dt>", IE = "<DT></DT>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_dt() throws Exception {
+        loadPageWithAlerts2(outerHTML("dt"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<embed>", IE = "<EMBED>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(IE)
+    public void outerHTML_embed() throws Exception {
+        loadPageWithAlerts2(outerHTML("embed"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<em></em>", IE = "<EM></EM>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_em() throws Exception {
+        loadPageWithAlerts2(outerHTML("em"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<fieldset></fieldset>", IE = "<FIELDSET></FIELDSET>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_fieldset() throws Exception {
+        loadPageWithAlerts2(outerHTML("fieldset"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<font></font>", IE = "<FONT></FONT>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_font() throws Exception {
+        loadPageWithAlerts2(outerHTML("font"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<form></form>", IE = "<FORM></FORM>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_form() throws Exception {
+        loadPageWithAlerts2(outerHTML("form"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<frame>", IE = "<FRAME>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_frame() throws Exception {
+        loadPageWithAlerts2(outerHTML("frame"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<frameset></frameset>", IE = "<FRAMESET></FRAMESET>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_frameset() throws Exception {
+        loadPageWithAlerts2(outerHTML("frameset"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<h1></h1>", IE = "<H1></H1>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_h1() throws Exception {
+        loadPageWithAlerts2(outerHTML("h1"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<h2></h2>", IE = "<H2></H2>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_h2() throws Exception {
+        loadPageWithAlerts2(outerHTML("h2"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<h3></h3>", IE = "<H3></H3>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_h3() throws Exception {
+        loadPageWithAlerts2(outerHTML("h3"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<h4></h4>", IE = "<H4></H4>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_h4() throws Exception {
+        loadPageWithAlerts2(outerHTML("h4"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<h5></h5>", IE = "<H5></H5>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_h5() throws Exception {
+        loadPageWithAlerts2(outerHTML("h5"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<h6></h6>", IE = "<H6></H6>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_h6() throws Exception {
+        loadPageWithAlerts2(outerHTML("h6"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<head></head>", IE = "<HEAD></HEAD>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_head() throws Exception {
+        loadPageWithAlerts2(outerHTML("head"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<hr>", IE = "<HR>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_hr() throws Exception {
+        loadPageWithAlerts2(outerHTML("hr"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<html></html>", IE = "<HTML></HTML>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_html() throws Exception {
+        loadPageWithAlerts2(outerHTML("html"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<iframe></iframe>", IE = "<IFRAME></IFRAME>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_iframe() throws Exception {
+        loadPageWithAlerts2(outerHTML("iframe"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<q></q>", IE = "<Q></Q>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_q() throws Exception {
+        loadPageWithAlerts2(outerHTML("q"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<img>", IE = "<IMG>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_img() throws Exception {
+        loadPageWithAlerts2(outerHTML("img"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<ins></ins>", IE = "<INS></INS>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_ins() throws Exception {
+        loadPageWithAlerts2(outerHTML("ins"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<isindex></isindex>", IE = "<ISINDEX>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_isindex() throws Exception {
+        loadPageWithAlerts2(outerHTML("isindex"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<i></i>", IE = "<I></I>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_i() throws Exception {
+        loadPageWithAlerts2(outerHTML("i"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<kbd></kbd>", IE = "<KBD></KBD>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_kbd() throws Exception {
+        loadPageWithAlerts2(outerHTML("kbd"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<label></label>", IE = "<LABEL></LABEL>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_label() throws Exception {
+        loadPageWithAlerts2(outerHTML("label"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<legend></legend>", IE = "<LEGEND></LEGEND>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_legend() throws Exception {
+        loadPageWithAlerts2(outerHTML("legend"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<listing></listing>", IE = "<LISTING></LISTING>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_listing() throws Exception {
+        loadPageWithAlerts2(outerHTML("listing"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<li></li>", IE = "<LI></LI>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_li() throws Exception {
+        loadPageWithAlerts2(outerHTML("li"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<link>", IE = "<LINK>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_link() throws Exception {
+        loadPageWithAlerts2(outerHTML("link"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<map></map>", IE = "<MAP></MAP>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_map() throws Exception {
+        loadPageWithAlerts2(outerHTML("map"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<marquee></marquee>", IE = "<MARQUEE></MARQUEE>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_marquee() throws Exception {
+        loadPageWithAlerts2(outerHTML("marquee"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<menu></menu>", IE = "<MENU></MENU>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_menu() throws Exception {
+        loadPageWithAlerts2(outerHTML("menu"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<meta>", IE = "<META>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_meta() throws Exception {
+        loadPageWithAlerts2(outerHTML("meta"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<multicol></multicol>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(IE)
+    public void outerHTML_multicol() throws Exception {
+        loadPageWithAlerts2(outerHTML("multicol"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<nobr></nobr>", IE = "<NOBR></NOBR>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_nobr() throws Exception {
+        loadPageWithAlerts2(outerHTML("nobr"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<noembed></noembed>", IE = "<NOEMBED></NOEMBED>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_noembed() throws Exception {
+        loadPageWithAlerts2(outerHTML("noembed"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<noframes></noframes>", IE = "<NOFRAMES></NOFRAMES>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_noframes() throws Exception {
+        loadPageWithAlerts2(outerHTML("noframes"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<noscript></noscript>", IE = "<NOSCRIPT></NOSCRIPT>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_noscript() throws Exception {
+        loadPageWithAlerts2(outerHTML("noscript"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<object></object>", IE = "<OBJECT></OBJECT>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_object() throws Exception {
+        loadPageWithAlerts2(outerHTML("object"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<ol></ol>", IE = "<OL></OL>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_ol() throws Exception {
+        loadPageWithAlerts2(outerHTML("ol"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<optgroup></optgroup>", IE = "<OPTGROUP></OPTGROUP>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_optgroup() throws Exception {
+        loadPageWithAlerts2(outerHTML("optgroup"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<option></option>", IE = "<OPTION></OPTION>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_option() throws Exception {
+        loadPageWithAlerts2(outerHTML("option"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<p></p>", IE = "<P></P>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_p() throws Exception {
+        loadPageWithAlerts2(outerHTML("p"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<param>", IE = "<PARAM>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_param() throws Exception {
+        loadPageWithAlerts2(outerHTML("param"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<plaintext></plaintext>", IE = "<PLAINTEXT></PLAINTEXT>",
+        FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_plaintext() throws Exception {
+        loadPageWithAlerts2(outerHTML("plaintext"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<pre></pre>", IE = "<PRE></PRE>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_pre() throws Exception {
+        loadPageWithAlerts2(outerHTML("pre"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<progress></progress>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(IE)
+    public void outerHTML_progress() throws Exception {
+        loadPageWithAlerts2(outerHTML("progress"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<s></s>", IE = "<S></S>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_s() throws Exception {
+        loadPageWithAlerts2(outerHTML("s"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<samp></samp>", IE = "<SAMP></SAMP>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_samp() throws Exception {
+        loadPageWithAlerts2(outerHTML("samp"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<script></script>", IE = "<SCRIPT></SCRIPT>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_script() throws Exception {
+        loadPageWithAlerts2(outerHTML("script"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<select></select>", IE = "<SELECT></SELECT>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_select() throws Exception {
+        loadPageWithAlerts2(outerHTML("select"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<small></small>", IE = "<SMALL></SMALL>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_small() throws Exception {
+        loadPageWithAlerts2(outerHTML("small"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<source>", IE = "<source></source>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(IE)
+    public void outerHTML_source() throws Exception {
+        loadPageWithAlerts2(outerHTML("source"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<spacer></spacer>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(IE)
+    public void outerHTML_spacer() throws Exception {
+        loadPageWithAlerts2(outerHTML("spacer"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<span></span>", IE = "<SPAN></SPAN>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_span() throws Exception {
+        loadPageWithAlerts2(outerHTML("span"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<strike></strike>", IE = "<STRIKE></STRIKE>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_strike() throws Exception {
+        loadPageWithAlerts2(outerHTML("strike"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<strong></strong>", IE = "<STRONG></STRONG>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_strong() throws Exception {
+        loadPageWithAlerts2(outerHTML("strong"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<style></style>", IE = "<STYLE></STYLE>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_style() throws Exception {
+        loadPageWithAlerts2(outerHTML("style"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<sub></sub>", IE = "<SUB></SUB>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_sub() throws Exception {
+        loadPageWithAlerts2(outerHTML("sub"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<sup></sup>", IE = "<SUP></SUP>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_sup() throws Exception {
+        loadPageWithAlerts2(outerHTML("sup"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<table></table>", IE = "<TABLE></TABLE>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_table() throws Exception {
+        loadPageWithAlerts2(outerHTML("table"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<col>", IE = "<COL>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_col() throws Exception {
+        loadPageWithAlerts2(outerHTML("col"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<colgroup></colgroup>", IE = "<COLGROUP></COLGROUP>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(IE)
+    public void outerHTML_colgroup() throws Exception {
+        loadPageWithAlerts2(outerHTML("colgroup"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<tbody></tbody>", IE = "<TBODY></TBODY>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_tbody() throws Exception {
+        loadPageWithAlerts2(outerHTML("tbody"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<td></td>", IE = "<TD></TD>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_td() throws Exception {
+        loadPageWithAlerts2(outerHTML("td"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<th></th>", IE = "<TH></TH>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_th() throws Exception {
+        loadPageWithAlerts2(outerHTML("th"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<tr></tr>", IE = "<TR></TR>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_tr() throws Exception {
+        loadPageWithAlerts2(outerHTML("tr"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<textarea></textarea>", IE = "<TEXTAREA></TEXTAREA>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_textarea() throws Exception {
+        loadPageWithAlerts2(outerHTML("textarea"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<tfoot></tfoot>", IE = "<TFOOT></TFOOT>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_tfoot() throws Exception {
+        loadPageWithAlerts2(outerHTML("tfoot"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<thead></thead>", IE = "<THEAD></THEAD>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_thead() throws Exception {
+        loadPageWithAlerts2(outerHTML("thead"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<tt></tt>", IE = "<TT></TT>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_tt() throws Exception {
+        loadPageWithAlerts2(outerHTML("tt"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<title></title>", IE = "<TITLE></TITLE>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_title() throws Exception {
+        loadPageWithAlerts2(outerHTML("title"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<u></u>", IE = "<U></U>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_u() throws Exception {
+        loadPageWithAlerts2(outerHTML("u"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<ul></ul>", IE = "<UL></UL>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_ul() throws Exception {
+        loadPageWithAlerts2(outerHTML("ul"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<var></var>", IE = "<VAR></VAR>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_var() throws Exception {
+        loadPageWithAlerts2(outerHTML("var"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<video></video>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(IE)
+    public void outerHTML_video() throws Exception {
+        loadPageWithAlerts2(outerHTML("video"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<wbr>", IE = "<WBR>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(IE)
+    public void outerHTML_wbr() throws Exception {
+        loadPageWithAlerts2(outerHTML("wbr"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<xmp></xmp>", IE = "<XMP></XMP>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_xmp() throws Exception {
+        loadPageWithAlerts2(outerHTML("xmp"));
+    }
 }
