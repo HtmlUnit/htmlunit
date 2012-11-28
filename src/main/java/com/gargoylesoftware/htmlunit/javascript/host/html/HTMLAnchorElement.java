@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlAnchor.class)
 public class HTMLAnchorElement extends HTMLElement {
@@ -277,9 +278,8 @@ public class HTMLAnchorElement extends HTMLElement {
             hostname = host;
             port = -1;
         }
-        final URL url1 = UrlUtils.getUrlWithNewHost(getUrl(), hostname);
-        final URL url2 = UrlUtils.getUrlWithNewPort(url1, port);
-        setUrl(url2);
+        final URL url = UrlUtils.getUrlWithNewHostAndPort(getUrl(), hostname, port);
+        setUrl(url);
     }
 
     /**

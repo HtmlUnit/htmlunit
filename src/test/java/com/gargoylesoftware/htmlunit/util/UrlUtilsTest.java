@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Martin Tamme
  * @author Sudhan Moghe
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class UrlUtilsTest extends SimpleWebTestCase {
 
@@ -55,10 +56,26 @@ public class UrlUtilsTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void getUrlWithNewHostAndPort() throws Exception {
+        final URL a = new URL("http://my.home.com/index.html?query#ref");
+        URL b = UrlUtils.getUrlWithNewHostAndPort(a, "your.home.com", 4711);
+        assertEquals("http://your.home.com:4711/index.html?query#ref", b.toExternalForm());
+
+        b = UrlUtils.getUrlWithNewHostAndPort(a, "your.home.com", -1);
+        assertEquals("http://your.home.com/index.html?query#ref", b.toExternalForm());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void getUrlWithNewPort() throws Exception {
         final URL a = new URL("http://my.home.com/index.html?query#ref");
-        final URL b = UrlUtils.getUrlWithNewPort(a, 8080);
+        URL b = UrlUtils.getUrlWithNewPort(a, 8080);
         assertEquals("http://my.home.com:8080/index.html?query#ref", b.toExternalForm());
+
+        b = UrlUtils.getUrlWithNewPort(a, -1);
+        assertEquals("http://my.home.com/index.html?query#ref", b.toExternalForm());
     }
 
     /**
@@ -76,17 +93,30 @@ public class UrlUtilsTest extends SimpleWebTestCase {
      */
     @Test
     public void getUrlWithNewRef() throws Exception {
-        final URL a = new URL("http://my.home.com/index.html?query#ref");
-        final URL b = UrlUtils.getUrlWithNewRef(a, "abc");
+        URL a = new URL("http://my.home.com/index.html?query#ref");
+        URL b = UrlUtils.getUrlWithNewRef(a, "abc");
         assertEquals("http://my.home.com/index.html?query#abc", b.toExternalForm());
 
-        final URL c = new URL("http://my.home.com/#ref");
-        final URL d = UrlUtils.getUrlWithNewRef(c, "xyz");
-        assertEquals("http://my.home.com/#xyz", d.toExternalForm());
+        a = new URL("http://my.home.com/#ref");
+        b = UrlUtils.getUrlWithNewRef(a, "xyz");
+        assertEquals("http://my.home.com/#xyz", b.toExternalForm());
 
-        final URL e = new URL("http://my.home.com#ref");
-        final URL f = UrlUtils.getUrlWithNewRef(e, "xyz");
-        assertEquals("http://my.home.com#xyz", f.toExternalForm());
+        a = new URL("http://my.home.com#ref");
+        b = UrlUtils.getUrlWithNewRef(a, "xyz");
+        assertEquals("http://my.home.com#xyz", b.toExternalForm());
+
+        a = new URL("http://my.home.com");
+        b = UrlUtils.getUrlWithNewRef(a, "xyz");
+        assertEquals("http://my.home.com#xyz", b.toExternalForm());
+
+        a = new URL("http://my.home.com");
+        b = UrlUtils.getUrlWithNewRef(a, null);
+        assertEquals("http://my.home.com", b.toExternalForm());
+
+        a = new URL("http://my.home.com");
+        b = UrlUtils.getUrlWithNewRef(a, "");
+        assertEquals("http://my.home.com#", b.toExternalForm());
+
     }
 
     /**
@@ -94,9 +124,18 @@ public class UrlUtilsTest extends SimpleWebTestCase {
      */
     @Test
     public void getUrlWithNewQuery() throws Exception {
-        final URL a = new URL("http://my.home.com/index.html?query#ref");
-        final URL b = UrlUtils.getUrlWithNewQuery(a, "xyz");
+        URL a = new URL("http://my.home.com/index.html?query#ref");
+        URL b = UrlUtils.getUrlWithNewQuery(a, "xyz");
         assertEquals("http://my.home.com/index.html?xyz#ref", b.toExternalForm());
+
+        // DOS
+        a = new URL("file://c:/index.html?query");
+        b = UrlUtils.getUrlWithNewQuery(a, "xyz");
+        assertEquals("file://c:/index.html?xyz", b.toExternalForm());
+        // UNIX
+        a = new URL("file:///index.html?query");
+        b = UrlUtils.getUrlWithNewQuery(a, "xyz");
+        assertEquals("file:/index.html?xyz", b.toExternalForm());
     }
 
     /**

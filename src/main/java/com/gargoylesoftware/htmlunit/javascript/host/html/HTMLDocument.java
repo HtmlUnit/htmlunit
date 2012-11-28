@@ -800,7 +800,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final boolean file = "file".equals(protocol);
         if (file) {
             try {
-                url = UrlUtils.getUrlWithNewPort(UrlUtils.getUrlWithNewHost(url, "LOCAL_FILESYSTEM"), 0);
+                url = UrlUtils.getUrlWithNewHostAndPort(url, "LOCAL_FILESYSTEM", 0);
             }
             catch (final MalformedURLException e) {
                 throw new RuntimeException(e);
