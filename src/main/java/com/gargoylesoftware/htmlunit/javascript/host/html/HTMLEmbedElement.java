@@ -18,7 +18,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 
 /**
- * A JavaScript object for {@link com.gargoylesoftware.htmlunit.html.HtmlEmbed}.
+ * A JavaScript object for {@link HtmlEmbed}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
@@ -26,4 +26,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlEmbed.class)
 public class HTMLEmbedElement extends HTMLElement {
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isEndTagForbidden() {
+        return true;
+    }
 }

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASEFONT_END_TAG_FORBIDDEN;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBaseFont;
@@ -89,6 +90,6 @@ public class HTMLBaseFontElement extends HTMLElement {
      */
     @Override
     protected boolean isEndTagForbidden() {
-        return true;
+        return getBrowserVersion().hasFeature(HTMLBASEFONT_END_TAG_FORBIDDEN);
     }
 }

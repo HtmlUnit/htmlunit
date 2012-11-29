@@ -99,6 +99,6 @@ public class HTMLTableColElement extends HTMLTableComponent {
      */
     @Override
     protected boolean isEndTagForbidden() {
-        return true;
+        return getDomNodeOrDie() instanceof HtmlTableColumn;
     }
 }

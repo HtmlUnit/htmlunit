@@ -152,4 +152,14 @@ public class HTMLSpanElement extends HTMLElement {
     public void setDateTime(final String dateTime) {
         getDomNodeOrDie().setAttribute("datetime", dateTime);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isLowerCaseInOuterHtml() {
+        if (getDomNodeOrDie() instanceof HtmlMultiColumn) {
+            return true;
+        }
+        return super.isLowerCaseInOuterHtml();
+    }
 }

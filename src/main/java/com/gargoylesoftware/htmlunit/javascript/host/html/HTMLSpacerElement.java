@@ -26,4 +26,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlSpacer.class)
 public class HTMLSpacerElement extends HTMLElement {
 
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isLowerCaseInOuterHtml() {
+        return true;
+    }
 }

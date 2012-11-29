@@ -544,6 +544,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 7))
     HTMLABBREVIATED,
 
+    /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden}
+     * return <code>true</code>. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    HTMLBASEFONT_END_TAG_FORBIDDEN,
+
     /** [object HTMLBGSoundElement]. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLBGSOUND,

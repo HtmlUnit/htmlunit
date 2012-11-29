@@ -2788,7 +2788,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<basefont>", IE = "<BASEFONT></BASEFONT>", FF3_6 = "undefined", FF10 = "undefined")
-    @NotYetImplemented(IE)
     public void outerHTML_basefont() throws Exception {
         loadPageWithAlerts2(outerHTML("basefont"));
     }
@@ -2979,7 +2978,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<embed>", IE = "<EMBED>", FF3_6 = "undefined", FF10 = "undefined")
-    @NotYetImplemented(IE)
     public void outerHTML_embed() throws Exception {
         loadPageWithAlerts2(outerHTML("embed"));
     }
@@ -3268,7 +3266,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<multicol></multicol>", FF3_6 = "undefined", FF10 = "undefined")
-    @NotYetImplemented(IE)
     public void outerHTML_multicol() throws Exception {
         loadPageWithAlerts2(outerHTML("multicol"));
     }
@@ -3450,7 +3447,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<spacer></spacer>", FF3_6 = "undefined", FF10 = "undefined")
-    @NotYetImplemented(IE)
     public void outerHTML_spacer() throws Exception {
         loadPageWithAlerts2(outerHTML("spacer"));
     }
@@ -3532,7 +3528,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<colgroup></colgroup>", IE = "<COLGROUP></COLGROUP>", FF3_6 = "undefined", FF10 = "undefined")
-    @NotYetImplemented(IE)
     public void outerHTML_colgroup() throws Exception {
         loadPageWithAlerts2(outerHTML("colgroup"));
     }
@@ -3659,7 +3654,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<wbr>", IE = "<WBR>", FF3_6 = "undefined", FF10 = "undefined")
-    @NotYetImplemented(IE)
     public void outerHTML_wbr() throws Exception {
         loadPageWithAlerts2(outerHTML("wbr"));
     }

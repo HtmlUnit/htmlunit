@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                JavaScript: .outerHTML of "basefont", "col", "embed" and "wbr" have forbidden end tag (FF).
+            </action>
             <action type="fix" dev="mguillem">
                 Escape "%%" in query string to avoid IllegalArgumentException.
             </action>
@@ -15,7 +18,7 @@
                 JavaScript: initial support for HTMLBGSoundElement (IE).
             </action>
             <action type="fix" dev="asashour">
-                JavaScript: HTMLElement.outerHTML use lower case for unknown elements (IE).
+                JavaScript: HTMLElement.outerHTML use lower case for unknown, "spacer" and "multicol" elements (IE).
             </action>
             <action type="fix" dev="rbri">
                 Fix URL manipulation (UrlUtils) for file URLs containing drive letter.
