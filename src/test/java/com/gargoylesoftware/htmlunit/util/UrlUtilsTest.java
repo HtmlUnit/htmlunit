@@ -116,7 +116,6 @@ public class UrlUtilsTest extends SimpleWebTestCase {
         a = new URL("http://my.home.com");
         b = UrlUtils.getUrlWithNewRef(a, "");
         assertEquals("http://my.home.com#", b.toExternalForm());
-
     }
 
     /**
