@@ -8,7 +8,10 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
-            <action type="fix" dev="rbri">
+            <action type="add" dev="asashour">
+                JavaScript: initial support for HTMLBGSoundElement (IE).
+            </action>
+            <action type="fix" dev="asashour">
                 JavaScript: HTMLElement.outerHTML to have lower cases for unknown elements (IE).
             </action>
             <action type="fix" dev="rbri">

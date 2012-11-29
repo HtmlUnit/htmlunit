@@ -125,6 +125,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAppletElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAreaElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAudioElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBGSoundElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBRElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement;
@@ -288,7 +289,7 @@ public final class JavaScriptConfiguration {
         Float32Array.class, Float64Array.class,
         FormChild.class, FormField.class, Geolocation.class, History.class,
         HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,
-        HTMLBRElement.class, HTMLBaseElement.class, HTMLBaseFontElement.class,
+        HTMLBRElement.class, HTMLBaseElement.class, HTMLBaseFontElement.class, HTMLBGSoundElement.class,
         HTMLBodyElement.class, HTMLButtonElement.class, HTMLCanvasElement.class, HTMLCollection.class,
         HTMLCollectionTags.class, HTMLDListElement.class, HTMLDelElement.class, HTMLDirectoryElement.class,
         HTMLDivElement.class, HTMLDocument.class, HTMLElement.class, HTMLEmbedElement.class, HTMLFieldSetElement.class,

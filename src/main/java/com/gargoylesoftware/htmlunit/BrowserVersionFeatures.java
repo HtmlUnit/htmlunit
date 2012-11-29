@@ -544,6 +544,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 7))
     HTMLABBREVIATED,
 
+    /** [object HTMLBGSoundElement]. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLBGSOUND,
+
     /** Indicates that comment nodes should be treated similar to elements, e.g. getElementsByTagName(). */
     @BrowserFeature(@WebBrowser(IE))
     HTMLCOLLECTION_COMMENT_IS_ELEMENT,

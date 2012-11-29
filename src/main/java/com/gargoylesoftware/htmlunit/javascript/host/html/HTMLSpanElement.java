@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
 import com.gargoylesoftware.htmlunit.html.HtmlAcronym;
 import com.gargoylesoftware.htmlunit.html.HtmlAddress;
-import com.gargoylesoftware.htmlunit.html.HtmlBackgroundSound;
 import com.gargoylesoftware.htmlunit.html.HtmlBidirectionalOverride;
 import com.gargoylesoftware.htmlunit.html.HtmlBig;
 import com.gargoylesoftware.htmlunit.html.HtmlBlink;
@@ -62,7 +61,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  */
-@JsxClass(domClasses = { HtmlAbbreviated.class, HtmlAcronym.class, HtmlAddress.class, HtmlBackgroundSound.class,
+@JsxClass(domClasses = { HtmlAbbreviated.class, HtmlAcronym.class, HtmlAddress.class,
         HtmlBidirectionalOverride.class, HtmlBig.class, HtmlBold.class, HtmlBlink.class, HtmlCenter.class,
         HtmlCitation.class, HtmlCode.class, HtmlDefinition.class, HtmlDefinitionDescription.class,
         HtmlDefinitionTerm.class, HtmlEmphasis.class, HtmlItalic.class, HtmlKeyboard.class, HtmlListing.class,

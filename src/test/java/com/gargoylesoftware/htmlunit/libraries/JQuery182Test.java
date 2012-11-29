@@ -3911,7 +3911,6 @@ public class JQuery182Test extends WebDriverTestCase {
     @Test
     @Alerts(FF3_6 = "manipulation: detach() (0, 9, 9)", FF10 = "manipulation: empty() (0, 3, 3)",
         CHROME = "manipulation: detach() (0, 9, 9)", IE = "manipulation: detach() (0, 9, 9)")
-    @NotYetImplemented(IE)
     public void test_355() throws Exception {
         runTest(355);
     }

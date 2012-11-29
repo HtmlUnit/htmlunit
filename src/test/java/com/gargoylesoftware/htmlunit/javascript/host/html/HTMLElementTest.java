@@ -2770,7 +2770,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<bgsound>", IE = "<BGSOUND>", FF3_6 = "undefined", FF10 = "undefined")
-    @NotYetImplemented(IE)
     public void outerHTML_bgsound() throws Exception {
         loadPageWithAlerts2(outerHTML("bgsound"));
     }
