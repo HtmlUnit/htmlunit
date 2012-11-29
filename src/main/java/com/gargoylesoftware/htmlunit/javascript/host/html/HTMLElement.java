@@ -907,9 +907,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         }
         else if (html) {
             final HtmlElement element = (HtmlElement) node;
+            final HTMLElement scriptObject = (HTMLElement) node.getScriptObject();
             final boolean isUpperCase = getBrowserVersion().hasFeature(HTMLELEMENT_OUTER_HTML_UPPER_CASE);
             String tag = element.getTagName();
-            if (isUpperCase) {
+            if (isUpperCase && !scriptObject.isLowerCaseInOuterHtml()) {
                 tag = tag.toUpperCase();
             }
             buffer.append("<").append(tag);
@@ -933,7 +934,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             buffer.append(">");
             // Add the children.
             printChildren(buffer, node, html);
-            if (!((HTMLElement) node.getScriptObject()).isEndTagForbidden()) {
+            if (!scriptObject.isEndTagForbidden()) {
                 buffer.append("</").append(tag).append(">");
             }
         }
@@ -2833,6 +2834,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @return whether the end tag is forbidden or not
      */
     protected boolean isEndTagForbidden() {
+        return false;
+    }
+
+    /**
+     * Returns whether the tag is lower case in .outerHTML/.innerHTML.
+     * It seems to be a feature for HTML5 elements for IE.
+     * @return whether the tag is lower case in .outerHTML/.innerHTML
+     */
+    protected boolean isLowerCaseInOuterHtml() {
         return false;
     }
 }

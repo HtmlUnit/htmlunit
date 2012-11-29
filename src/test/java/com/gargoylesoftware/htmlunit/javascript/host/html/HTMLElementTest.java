@@ -2761,7 +2761,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<audio></audio>", FF3_6 = "undefined", FF10 = "undefined")
-    @NotYetImplemented(IE)
     public void outerHTML_audio() throws Exception {
         loadPageWithAlerts2(outerHTML("audio"));
     }
@@ -2873,7 +2872,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<canvas></canvas>", FF3_6 = "undefined", FF10 = "undefined")
-    @NotYetImplemented(IE)
     public void outerHTML_canvas() throws Exception {
         loadPageWithAlerts2(outerHTML("canvas"));
     }
@@ -3390,7 +3388,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<progress></progress>", FF3_6 = "undefined", FF10 = "undefined")
-    @NotYetImplemented(IE)
     public void outerHTML_progress() throws Exception {
         loadPageWithAlerts2(outerHTML("progress"));
     }
@@ -3445,7 +3442,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<source>", IE = "<source></source>", FF3_6 = "undefined", FF10 = "undefined")
-    @NotYetImplemented(IE)
     public void outerHTML_source() throws Exception {
         loadPageWithAlerts2(outerHTML("source"));
     }
@@ -3655,7 +3651,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<video></video>", FF3_6 = "undefined", FF10 = "undefined")
-    @NotYetImplemented(IE)
     public void outerHTML_video() throws Exception {
         loadPageWithAlerts2(outerHTML("video"));
     }
@@ -3677,6 +3672,15 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "<xmp></xmp>", IE = "<XMP></XMP>", FF3_6 = "undefined", FF10 = "undefined")
     public void outerHTML_xmp() throws Exception {
         loadPageWithAlerts2(outerHTML("xmp"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<abcdefg></abcdefg>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_arbitrary() throws Exception {
+        loadPageWithAlerts2(outerHTML("abcdefg"));
     }
 
     /**

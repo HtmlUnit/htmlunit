@@ -3911,6 +3911,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Test
     @Alerts(FF3_6 = "manipulation: detach() (0, 9, 9)", FF10 = "manipulation: empty() (0, 3, 3)",
         CHROME = "manipulation: detach() (0, 9, 9)", IE = "manipulation: detach() (0, 9, 9)")
+    @NotYetImplemented(IE)
     public void test_355() throws Exception {
         runTest(355);
     }
@@ -4005,7 +4006,6 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "manipulation: jQuery.fragments cache expectations (0, 10, 10)",
         CHROME = "manipulation: Cloned, detached HTML5 elems (#10667,10670) (0, 7, 7)",
         IE = "manipulation: Cloned, detached HTML5 elems (#10667,10670) (0, 7, 7)")
-    @NotYetImplemented(IE)
     public void test_363() throws Exception {
         runTest(363);
     }

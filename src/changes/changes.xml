@@ -9,6 +9,9 @@
     <body>
         <release version="2.12" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                JavaScript: HTMLElement.outerHTML to have lower cases for unknown elements (IE).
+            </action>
+            <action type="fix" dev="rbri">
                 Fix URL manipulation (UrlUtils) for file url's containing drive letter.
             </action>
             <action type="fix" dev="asashour">

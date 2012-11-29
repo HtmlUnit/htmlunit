@@ -33,13 +33,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class HTMLUnknownElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLUnknownElement() {
-        // Empty.
-    }
-
-    /**
      * Gets the JavaScript property "nodeName" for the current node.
      * @return the node name
      */
@@ -62,5 +55,12 @@ public class HTMLUnknownElement extends HTMLElement {
             return "HTMLGenericElement";
         }
         return super.getClassName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isLowerCaseInOuterHtml() {
+        return true;
     }
 }
