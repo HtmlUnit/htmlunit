@@ -32,6 +32,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -164,6 +165,42 @@ public class WebClient3Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
 
         loadPage2("", new URL(getDefaultUrl(), "foo?a=<b>i</b>"));
+    }
+
+    /**
+     * Was causing a "java.net.URISyntaxException: Malformed escape pair"
+     * as of HtmlUnit-2.12-SNAPSHOT on Nov. 29, 2012.
+     * HtmlUnit now escapes the "%%" to "%25%25" to build a valid URL but FF doesn't care
+     * and sends the invalid "%%" sequence as it.
+     * This will be quite difficult to simulate FF here as HttpClient's HttpRequestBase
+     * uses URI and "%%" can't be part of the query string for a URI.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    public void escapeRequestQuery2a() throws Exception {
+        getMockWebConnection().setDefaultResponse("");
+
+        final URL url = new URL(getDefaultUrl(), "foo.png?cb=%%RANDOM_NUMBER%%");
+        loadPage2("", url);
+
+        assertEquals(url, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * Was causing a "java.net.URISyntaxException: Malformed escape pair"
+     * as of HtmlUnit-2.12-SNAPSHOT on Nov. 29, 2012.
+     * This is a simplified version of {@link #escapeRequestQuery2a()} only testing
+     * that no exception is thrown. The request performed is not fully correct.
+     * This test can be removed once {@link #escapeRequestQuery2a()} runs correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void escapeRequestQuery2b() throws Exception {
+        getMockWebConnection().setDefaultResponse("");
+
+        final URL url = new URL(getDefaultUrl(), "foo.png?cb=%%RANDOM_NUMBER%%");
+        loadPage2("", url);
     }
 
     /**

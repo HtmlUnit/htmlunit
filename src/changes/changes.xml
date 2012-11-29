@@ -8,14 +8,17 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                Escape "%%" in query string to avoid IllegalArgumentException.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: initial support for HTMLBGSoundElement (IE).
             </action>
             <action type="fix" dev="asashour">
-                JavaScript: HTMLElement.outerHTML to have lower cases for unknown elements (IE).
+                JavaScript: HTMLElement.outerHTML use lower case for unknown elements (IE).
             </action>
             <action type="fix" dev="rbri">
-                Fix URL manipulation (UrlUtils) for file url's containing drive letter.
+                Fix URL manipulation (UrlUtils) for file URLs containing drive letter.
             </action>
             <action type="fix" dev="asashour">
                 JavaScript: fix handling relations of document type comment with &lt;html&gt; element (IE).

@@ -161,7 +161,7 @@ public class HttpWebConnection implements WebConnection {
             }
             catch (final URISyntaxException e) {
                 throw new IOException("Unable to create URI from URL: " + url.toExternalForm()
-                        + " (reason: " + e.getMessage() + ")");
+                        + " (reason: " + e.getMessage() + ")", e);
             }
             final HttpHost hostConfiguration = getHostConfiguration(request);
             setProxy(httpClient, request);
@@ -247,7 +247,7 @@ public class HttpWebConnection implements WebConnection {
         // URIUtils.createURI is deprecated but as of httpclient-4.2.1, URIBuilder doesn't work here as it encodes path
         // what shouldn't happen here
         URI uri = URIUtils.createURI(url.getProtocol(), url.getHost(), url.getPort(), url.getPath(),
-                url.getQuery(), null);
+                escapeQuery(url.getQuery()), null);
         final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
         if (!(httpMethod instanceof HttpEntityEnclosingRequest)) {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
@@ -380,6 +380,13 @@ public class HttpWebConnection implements WebConnection {
             });
         }
         return httpMethod;
+    }
+
+    private String escapeQuery(final String query) {
+        if (query == null) {
+            return null;
+        }
+        return query.replace("%%", "%25%25");
     }
 
     private Charset getCharset(final String charset, final List<NameValuePair> pairs) {

@@ -421,7 +421,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         private void doService(final HttpServletRequest request, final HttpServletResponse response)
             throws Exception {
-            final String url = request.getRequestURL().toString();
+            String url = request.getRequestURL().toString();
             if (LOG.isDebugEnabled()) {
                 LOG.debug(request.getMethod() + " " + url);
             }
@@ -440,6 +440,28 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 Thread.sleep(ms);
             }
 
+            // copy parameters
+            final List<NameValuePair> requestParameters = new ArrayList<NameValuePair>();
+            try {
+                for (final Enumeration<String> paramNames = request.getParameterNames();
+                        paramNames.hasMoreElements();) {
+                    final String name = paramNames.nextElement();
+                    final String[] values = request.getParameterValues(name);
+                    for (final String value : values) {
+                        requestParameters.add(new NameValuePair(name, value));
+                    }
+                }
+            }
+            catch (final IllegalArgumentException e) {
+                // Jetty 8.1.7 throws it in getParameterNames for a query like "cb=%%RANDOM_NUMBER%%"
+                // => we should use a more low level test server
+                requestParameters.clear();
+                final String query = request.getQueryString();
+                if (query != null) {
+                    url += "?" + query;
+                }
+            }
+
             final URL requestedUrl = new URL(url);
             final WebRequest webRequest = new WebRequest(requestedUrl);
             webRequest.setHttpMethod(HttpMethod.valueOf(request.getMethod()));
@@ -449,16 +471,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 final String headerName = en.nextElement();
                 final String headerValue = request.getHeader(headerName);
                 webRequest.setAdditionalHeader(headerName, headerValue);
-            }
-
-            // copy parameters
-            final List<NameValuePair> requestParameters = new ArrayList<NameValuePair>();
-            for (final Enumeration<String> paramNames = request.getParameterNames(); paramNames.hasMoreElements();) {
-                final String name = paramNames.nextElement();
-                final String[] values = request.getParameterValues(name);
-                for (final String value : values) {
-                    requestParameters.add(new NameValuePair(name, value));
-                }
             }
 
             if ("PUT".equals(request.getMethod()) && request.getContentLength() > 0) {
