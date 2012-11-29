@@ -344,7 +344,7 @@ public class WebClientOptions implements Serializable {
      * Gets the timeout value for the {@link WebConnection}.
      * The default timeout is 90 seconds (it was 0 up to HtmlUnit-2.11).
      * @return the timeout value in milliseconds
-     * @see WebClientOptions#getTimeout(int)
+     * @see WebClientOptions#setTimeout(int)
      */
     public int getTimeout() {
         return timeout_;

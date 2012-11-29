@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
- * A JavaScript object for {@link com.gargoylesoftware.htmlunit.html.HtmlInlineFrame}.
+ * A JavaScript object for {@link HtmlInlineFrame}.
  *
  * @version $Revision$
  * @author Marc Guillemot

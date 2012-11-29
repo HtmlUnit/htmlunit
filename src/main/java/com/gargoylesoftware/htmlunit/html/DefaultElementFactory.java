@@ -29,9 +29,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
 
 /**
  * Element factory which creates elements by calling the constructor on a
- * given {@link com.gargoylesoftware.htmlunit.html.HtmlElement} subclass.
+ * given {@link HtmlElement} subclass.
  * The constructor is expected to take 2 arguments of type
- * {@link com.gargoylesoftware.htmlunit.html.HtmlPage} and {@link java.util.Map}
+ * {@link HtmlPage} and {@link java.util.Map}
  * where the first one is the owning page of the element, the second one is a map
  * holding the initial attributes for the element.
  *

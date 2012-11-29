@@ -215,7 +215,7 @@ public class HtmlTable extends HtmlElement {
      * Returns a list of tables bodies defined in this table. If no bodies were defined
      * then an empty list will be returned.
      *
-     * @return a list of {@link com.gargoylesoftware.htmlunit.html.HtmlTableBody} objects
+     * @return a list of {@link HtmlTableBody} objects
      */
     public List<HtmlTableBody> getBodies() {
         final List<HtmlTableBody> bodies = new ArrayList<HtmlTableBody>();

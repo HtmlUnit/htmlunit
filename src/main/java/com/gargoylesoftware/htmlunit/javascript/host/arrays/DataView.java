@@ -37,7 +37,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class DataView extends ArrayBufferView {
 
     /**
-     * {@inheritDoc}
+     * JavaScript constructor.
+     * @param array the array
+     * @param byteOffset the byte offset
+     * @param length the length
      */
     @JsxConstructor
     protected void constructor(final ArrayBuffer array, final int byteOffset, Object length) {

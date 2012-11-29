@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
 
 /**
- * A JavaScript object for {@link com.gargoylesoftware.htmlunit.html.HtmlCanvas}.
+ * A JavaScript object for {@link HtmlCanvas}.
  *
  * @version $Revision$
  * @author Ahmed Ashour

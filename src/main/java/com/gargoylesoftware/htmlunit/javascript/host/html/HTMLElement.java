@@ -2830,7 +2830,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
     /**
      * Returns whether the end tag is forbidden or not.
-     * @see http://www.w3.org/TR/html4/index/elements.html
+     * @see <a href="http://www.w3.org/TR/html4/index/elements.html">HTML 4 specs</a>
      * @return whether the end tag is forbidden or not
      */
     protected boolean isEndTagForbidden() {

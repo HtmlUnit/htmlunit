@@ -26,9 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.RowContainer;
 
 /**
  * A JavaScript object representing "HTMLTableSectionElement", it is used by
- * {@link com.gargoylesoftware.htmlunit.html.HtmlTableBody},
- * {@link com.gargoylesoftware.htmlunit.html.HtmlTableHeader}, and
- * {@link com.gargoylesoftware.htmlunit.html.HtmlTableFooter}.
+ * {@link HtmlTableBody}, {@link HtmlTableHeader}, and {@link HtmlTableFooter}.
  *
  * @version $Revision$
  * @author Daniel Gredler
