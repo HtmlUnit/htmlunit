@@ -29,13 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLDelElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLDelElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the "cite" property.
      * @return the value of the "cite" property
      */

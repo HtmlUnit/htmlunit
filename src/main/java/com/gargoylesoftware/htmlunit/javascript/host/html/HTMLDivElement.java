@@ -35,13 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLDivElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLDivElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the "align" property.
      * @return the value of the "align" property
      */

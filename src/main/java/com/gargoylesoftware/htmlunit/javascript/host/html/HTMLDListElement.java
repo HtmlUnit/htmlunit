@@ -26,11 +26,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlDefinitionList.class)
 public class HTMLDListElement extends HTMLListElement {
 
-    /**
-     * Creates an instance.
-     */
-    public HTMLDListElement() {
-        // Empty.
-    }
-
 }

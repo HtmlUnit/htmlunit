@@ -30,13 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLParagraphElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLParagraphElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the "align" property.
      * @return the value of the "align" property
      */

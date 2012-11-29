@@ -35,12 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingConte
 public class HTMLCanvasElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLCanvasElement() {
-    }
-
-    /**
      * Returns the "width" property.
      * @return the "width" property
      */

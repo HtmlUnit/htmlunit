@@ -66,15 +66,7 @@ public class HTMLImageElement extends HTMLElement {
     private boolean instantiatedViaJavaScript_ = false;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLImageElement() {
-        // Empty.
-    }
-
-    /**
-     * JavaScript constructor. This must be declared in every JavaScript file because
-     * the Rhino engine won't walk up the hierarchy looking for constructors.
+     * JavaScript constructor.
      */
     @JsxConstructor
     public void jsConstructor() {

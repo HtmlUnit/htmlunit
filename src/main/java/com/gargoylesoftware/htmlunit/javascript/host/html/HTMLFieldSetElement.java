@@ -33,13 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 public class HTMLFieldSetElement extends FormChild {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLFieldSetElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the <tt>align</tt> property.
      * @return the value of the <tt>align</tt> property
      */

@@ -34,13 +34,6 @@ public class HTMLMapElement extends HTMLElement {
     private HTMLCollection areas_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLMapElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the JavaScript attribute "areas".
      * @return the value of this attribute
      */

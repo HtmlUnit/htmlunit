@@ -49,13 +49,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
 public class HTMLInputElement extends FormField {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLInputElement() {
-        // Empty.
-    }
-
-    /**
      * Sets the value of the attribute "type".
      * Note: this replace the DOM node with a new one.
      * @param newType the new type to set

@@ -26,11 +26,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlHead.class)
 public class HTMLHeadElement extends HTMLElement {
 
-    /**
-     * Creates an instance.
-     */
-    public HTMLHeadElement() {
-        // Empty.
-    }
-
 }

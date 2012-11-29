@@ -33,13 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class HTMLFrameSetElement extends HTMLElement {
 
     /**
-     * Creates a new frameset instance.
-     */
-    public HTMLFrameSetElement() {
-        // Empty.
-    }
-
-    /**
      * Sets the rows property.
      *
      * @param rows the rows attribute value

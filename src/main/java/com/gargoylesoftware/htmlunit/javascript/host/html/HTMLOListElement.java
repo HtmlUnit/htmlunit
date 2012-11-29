@@ -26,11 +26,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlOrderedList.class)
 public class HTMLOListElement extends HTMLListElement {
 
-    /**
-     * Creates an instance.
-     */
-    public HTMLOListElement() {
-        // Empty.
-    }
-
 }

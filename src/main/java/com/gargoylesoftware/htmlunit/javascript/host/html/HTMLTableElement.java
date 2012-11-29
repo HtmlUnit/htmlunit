@@ -52,12 +52,6 @@ public class HTMLTableElement extends RowContainer {
     private HTMLCollection tBodies_; // has to be a member to have equality (==) working
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTableElement() {
-    }
-
-    /**
      * Returns the table's caption element, or <tt>null</tt> if none exists. If more than one
      * caption is declared in the table, this method returns the first one.
      * @return the table's caption element

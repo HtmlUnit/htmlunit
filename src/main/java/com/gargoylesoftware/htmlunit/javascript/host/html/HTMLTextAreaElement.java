@@ -50,13 +50,6 @@ public class HTMLTextAreaElement extends FormField {
     private static final Pattern NORMALIZE_VALUE_PATTERN = Pattern.compile("([^\\r])\\n");
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTextAreaElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the type of this input.
      * @return the type of this input
      */

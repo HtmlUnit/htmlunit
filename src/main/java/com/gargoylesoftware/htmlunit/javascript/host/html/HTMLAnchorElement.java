@@ -50,13 +50,6 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 public class HTMLAnchorElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLAnchorElement() {
-        // Empty.
-    }
-
-    /**
      * Sets the <tt>href</tt> property.
      * @param href the <tt>href</tt> property value
      */

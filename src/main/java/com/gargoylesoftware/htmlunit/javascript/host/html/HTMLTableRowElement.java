@@ -47,13 +47,6 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     private HTMLCollection cells_; // has to be a member to have equality (==) working
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTableRowElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the index of the row within the parent table.
      * @return the index of the row within the parent table
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534377.aspx">MSDN Documentation</a>

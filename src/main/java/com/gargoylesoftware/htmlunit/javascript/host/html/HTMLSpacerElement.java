@@ -26,10 +26,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlSpacer.class)
 public class HTMLSpacerElement extends HTMLElement {
 
-    /**
-     * Creates an instance.
-     */
-    public HTMLSpacerElement() {
-        // Empty.
-    }
 }

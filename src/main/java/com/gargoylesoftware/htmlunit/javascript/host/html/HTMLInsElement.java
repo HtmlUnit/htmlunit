@@ -29,13 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLInsElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLInsElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the "cite" property.
      * @return the value of the "cite" property
      */

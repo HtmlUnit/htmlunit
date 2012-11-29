@@ -26,10 +26,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlWordBreak.class)
 public class HTMLWBRElement extends HTMLElement {
 
-    /**
-     * Creates an instance.
-     */
-    public HTMLWBRElement() {
-        // Empty.
-    }
 }

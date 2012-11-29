@@ -37,13 +37,6 @@ public class HTMLTableComponent extends HTMLElement {
     private static final String VALIGN_DEFAULT_VALUE = "top";
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTableComponent() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the "align" property.
      * @return the value of the "align" property
      */

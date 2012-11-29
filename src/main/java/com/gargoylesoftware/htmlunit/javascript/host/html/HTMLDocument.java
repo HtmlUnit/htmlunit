@@ -241,13 +241,6 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     /**
-     * Creates a new instance. JavaScript objects must have a default constructor.
-     */
-    public HTMLDocument() {
-        // Empty.
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

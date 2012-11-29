@@ -35,13 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLHeadingElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLHeadingElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the <tt>align</tt> property.
      * @return the value of the <tt>align</tt> property
      */

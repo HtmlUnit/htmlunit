@@ -29,13 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLOptGroupElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLOptGroupElement() {
-        // Empty.
-    }
-
-    /**
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override

@@ -26,11 +26,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlMenu.class)
 public class HTMLMenuElement extends HTMLListElement {
 
-    /**
-     * Creates an instance.
-     */
-    public HTMLMenuElement() {
-        // Empty.
-    }
-
 }

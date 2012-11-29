@@ -39,13 +39,6 @@ public class HTMLLinkElement extends HTMLElement {
     private CSSStyleSheet sheet_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLLinkElement() {
-        // Empty.
-    }
-
-    /**
      * Sets the href property.
      * @param href href attribute value
      */

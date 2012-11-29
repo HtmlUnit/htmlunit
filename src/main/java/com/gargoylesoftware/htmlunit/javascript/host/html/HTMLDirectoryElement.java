@@ -26,11 +26,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlDirectory.class)
 public class HTMLDirectoryElement extends HTMLListElement {
 
-    /**
-     * Creates an instance.
-     */
-    public HTMLDirectoryElement() {
-        // Empty.
-    }
-
 }

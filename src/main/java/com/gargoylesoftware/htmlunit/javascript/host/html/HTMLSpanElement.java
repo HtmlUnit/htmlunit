@@ -71,13 +71,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 public class HTMLSpanElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLSpanElement() {
-        // Empty.
-    }
-
-    /**
      * Sets the DOM node that corresponds to this JavaScript object.
      * @param domNode the DOM node
      */

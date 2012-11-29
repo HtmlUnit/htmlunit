@@ -32,13 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class HTMLPreElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLPreElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the "cite" property.
      * @return the value of the "cite" property
      */

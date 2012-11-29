@@ -29,13 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlHtml.class)
 public class HTMLHtmlElement extends HTMLElement {
 
-    /**
-     * Creates an instance.
-     */
-    public HTMLHtmlElement() {
-        // Empty.
-    }
-
     /** {@inheritDoc} */
     @Override
     public Object getParentNode() {

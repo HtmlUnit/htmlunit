@@ -32,13 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLTitleElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTitleElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the <tt>text</tt> attribute.
      * @return the <tt>text</tt> attribute
      */

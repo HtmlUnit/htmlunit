@@ -33,13 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class HTMLQuoteElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLQuoteElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the "cite" property.
      * @return the value of the "cite" property
      */

@@ -45,15 +45,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 public class HTMLOptionElement extends FormChild {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLOptionElement() {
-        // Empty.
-    }
-
-    /**
-     * JavaScript constructor. This must be declared in every JavaScript file because
-     * the rhino engine won't walk up the hierarchy looking for constructors.
+     * JavaScript constructor.
      * @param newText the text
      * @param newValue the value
      * @param defaultSelected Whether the option is initially selected

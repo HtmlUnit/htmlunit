@@ -26,11 +26,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlUnorderedList.class)
 public class HTMLUListElement extends HTMLListElement {
 
-    /**
-     * Creates an instance.
-     */
-    public HTMLUListElement() {
-        // Empty.
-    }
-
 }

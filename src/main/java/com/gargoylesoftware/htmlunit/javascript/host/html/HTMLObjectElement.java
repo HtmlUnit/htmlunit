@@ -40,13 +40,6 @@ public class HTMLObjectElement extends FormChild {
     private SimpleScriptable wrappedActiveX_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLObjectElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the "alt" property.
      * @return the value of the "alt" property
      */

@@ -41,13 +41,6 @@ public class HTMLStyleElement extends HTMLElement {
     private CSSStyleSheet sheet_;
 
     /**
-     * Creates an instance.
-     */
-    public HTMLStyleElement() {
-        // Empty.
-    }
-
-    /**
      * Gets the associated sheet.
      * @see <a href="http://www.xulplanet.com/references/objref/HTMLStyleElement.html">Mozilla doc</a>
      * @return the sheet

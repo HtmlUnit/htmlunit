@@ -41,12 +41,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
 public class HTMLButtonElement extends FormField {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLButtonElement() {
-    }
-
-    /**
      * Sets the value of the attribute "type".
      * <p>Note that there is no GUI change in the shape of the button,
      * so we don't treat it like {@link HTMLInputElement#setType(String)}.</p>

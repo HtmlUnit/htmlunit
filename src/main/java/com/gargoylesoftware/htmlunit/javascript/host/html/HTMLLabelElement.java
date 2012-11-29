@@ -33,13 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 public class HTMLLabelElement extends FormChild {
 
     /**
-     * Creates an instance. JavaScript objects must have a default constructor.
-     */
-    public HTMLLabelElement() {
-        // Empty.
-    }
-
-    /**
      * Retrieves the object to which the given label object is assigned.
      * @return the identifier of the element to which the label element is assigned
      */

@@ -33,13 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class HTMLAreaElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLAreaElement() {
-        // Empty.
-    }
-
-    /**
      * Calls for instance for implicit conversion to string.
      * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#getDefaultValue(java.lang.Class)
      * @param hint the type hint

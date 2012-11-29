@@ -29,10 +29,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 @JsxClass(domClasses = HtmlProgress.class, browsers = @WebBrowser(value = FF, minVersion = 10))
 public class HTMLProgressElement extends HTMLElement {
 
-    /**
-     * Creates an instance.
-     */
-    public HTMLProgressElement() {
-        // Empty.
-    }
 }

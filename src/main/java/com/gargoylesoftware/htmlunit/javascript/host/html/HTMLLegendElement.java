@@ -33,13 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormChild;
 public class HTMLLegendElement extends FormChild {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLLegendElement() {
-        // Empty.
-    }
-
-    /**
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override

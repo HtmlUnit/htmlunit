@@ -44,13 +44,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class HTMLAppletElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLAppletElement() {
-        // Empty.
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

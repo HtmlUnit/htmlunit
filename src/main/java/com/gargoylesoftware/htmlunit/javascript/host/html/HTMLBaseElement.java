@@ -29,13 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLBaseElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLBaseElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the "href" property.
      * @return the value of the "href" property
      */

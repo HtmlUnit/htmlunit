@@ -32,13 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class HTMLMetaElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLMetaElement() {
-        // Empty.
-    }
-
-    /**
      * Returns "charset" attribute.
      * @return the charset attribute
      */

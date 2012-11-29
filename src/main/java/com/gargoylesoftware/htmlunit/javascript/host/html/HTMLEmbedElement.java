@@ -26,10 +26,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlEmbed.class)
 public class HTMLEmbedElement extends HTMLElement {
 
-    /**
-     * Creates an instance.
-     */
-    public HTMLEmbedElement() {
-        // Empty.
-    }
 }

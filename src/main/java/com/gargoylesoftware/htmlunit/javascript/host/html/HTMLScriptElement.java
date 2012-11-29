@@ -43,13 +43,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class HTMLScriptElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLScriptElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the <tt>src</tt> attribute.
      * @return the <tt>src</tt> attribute
      */

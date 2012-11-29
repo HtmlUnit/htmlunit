@@ -40,13 +40,6 @@ public class HTMLTableCaptionElement extends HTMLElement {
     private static final String VALIGN_DEFAULT_VALUE = "";
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTableCaptionElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the "align" property.
      * @return the value of the "align" property
      */

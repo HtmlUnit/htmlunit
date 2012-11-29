@@ -38,13 +38,6 @@ public class HTMLBRElement extends HTMLElement {
     private static final String[] VALID_CLEAR_VALUES = new String[] {"left", "right", "all", "none"};
 
     /**
-     * Creates an instance.
-     */
-    public HTMLBRElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the <tt>clear</tt> property.
      * @return the value of the <tt>clear</tt> property
      */

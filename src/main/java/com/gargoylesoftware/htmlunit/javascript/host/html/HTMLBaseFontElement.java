@@ -31,13 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLBaseFontElement extends HTMLElement {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLBaseFontElement() {
-        // Empty.
-    }
-
-    /**
      * Gets the "color" attribute.
      * @return the "color" attribute
      */

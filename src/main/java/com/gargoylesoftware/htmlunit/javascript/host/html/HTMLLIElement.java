@@ -26,11 +26,4 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 @JsxClass(domClasses = HtmlListItem.class)
 public class HTMLLIElement extends HTMLElement {
 
-    /**
-     * Creates an instance.
-     */
-    public HTMLLIElement() {
-        // Empty.
-    }
-
 }

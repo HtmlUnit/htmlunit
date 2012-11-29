@@ -35,13 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 public class HTMLTableColElement extends HTMLTableComponent {
 
     /**
-     * Creates an instance.
-     */
-    public HTMLTableColElement() {
-        // Empty.
-    }
-
-    /**
      * Returns the value of the "span" property.
      * @return the value of the "span" property
      */
