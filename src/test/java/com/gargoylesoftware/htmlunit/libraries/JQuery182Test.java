@@ -24,7 +24,6 @@ import static org.junit.Assert.fail;
 import org.eclipse.jetty.server.Server;
 import org.junit.After;
 import org.junit.ComparisonFailure;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -1264,7 +1263,6 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "data: Only check element attributes once when calling .data() - #8909 (0, 2, 2)",
         CHROME = "data: Only check element attributes once when calling .data() - #8909 (0, 2, 2)",
         IE = "data: Triggering the removeData should not throw exceptions. (#10080) (0, 1, 1)")
-    @Ignore
     public void test_122() throws Exception {
         runTest(122);
     }
@@ -4552,6 +4550,7 @@ public class JQuery182Test extends WebDriverTestCase {
         CHROME = "ajax: jQuery.ajax() - error callbacks (0, 8, 8)",
         IE = "ajax: jQuery.ajax() - success callbacks (very late binding) (0, 8, 8)")
     @NotYetImplemented(FF)
+    //fails in real FF17
     public void test_408() throws Exception {
         runTest(408);
     }
@@ -4577,6 +4576,7 @@ public class JQuery182Test extends WebDriverTestCase {
         CHROME = "ajax: jQuery.ajax() - textStatus and errorThrown values (0, 4, 4)",
         IE = "ajax: jQuery.ajax() - error callbacks (0, 8, 8)")
     @NotYetImplemented(IE)
+    //fails in real IE9
     public void test_410() throws Exception {
         runTest(410);
     }
@@ -5037,6 +5037,602 @@ public class JQuery182Test extends WebDriverTestCase {
         IE = "ajax: load() - callbacks get the correct parameters (0, 8, 8)")
     public void test_450() throws Exception {
         runTest(450);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.getScript(String, Function) - with callback (0, 3, 3)",
+        FF10 = "ajax: jQuery.getScript(String, Function) - no callback (0, 1, 1)",
+        CHROME = "ajax: jQuery.getScript(String, Function) - with callback (0, 3, 3)",
+        IE = "ajax: jQuery.get(String, Function) - data in ajaxSettings (#8277) (0, 1, 1)")
+    public void test_451() throws Exception {
+        runTest(451);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.getScript(String, Function) - no callback (0, 1, 1)",
+        FF10 = "ajax: jQuery.ajax() - JSONP, Same Domain (0, 24, 24)",
+        CHROME = "ajax: jQuery.getScript(String, Function) - no callback (0, 1, 1)",
+        IE = "ajax: jQuery.get(String, Hash, Function) - parse xml and use text() on nodes (0, 2, 2)")
+    public void test_452() throws Exception {
+        runTest(452);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - JSONP, Same Domain (0, 24, 24)",
+        FF10 = "ajax: jQuery.ajax() - JSONP, Cross Domain (0, 24, 24)",
+        CHROME = "ajax: jQuery.ajax() - JSONP, Same Domain (0, 24, 24)",
+        IE = "ajax: jQuery.getScript(String, Function) - with callback (0, 3, 3)")
+    public void test_453() throws Exception {
+        runTest(453);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - JSONP, Cross Domain (0, 24, 24)",
+        FF10 = "ajax: jQuery.ajax() - script, Remote (0, 2, 2)",
+        CHROME = "ajax: jQuery.ajax() - JSONP, Cross Domain (0, 24, 24)",
+        IE = "ajax: jQuery.getScript(String, Function) - no callback (0, 1, 1)")
+    public void test_454() throws Exception {
+        runTest(454);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - script, Remote (0, 2, 2)",
+        FF10 = "ajax: jQuery.ajax() - script, Remote with POST (0, 3, 3)",
+        CHROME = "ajax: jQuery.ajax() - script, Remote (0, 2, 2)",
+        IE = "ajax: jQuery.ajax() - JSONP, Same Domain (0, 24, 24)")
+    public void test_455() throws Exception {
+        runTest(455);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - script, Remote with POST (0, 3, 3)",
+        FF10 = "ajax: jQuery.ajax() - script, Remote with scheme-less URL (0, 2, 2)",
+        CHROME = "ajax: jQuery.ajax() - script, Remote with POST (0, 3, 3)",
+        IE = "ajax: jQuery.ajax() - JSONP, Cross Domain (0, 24, 24)")
+    public void test_456() throws Exception {
+        runTest(456);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - script, Remote with scheme-less URL (0, 2, 2)",
+        FF10 = "ajax: jQuery.ajax() - malformed JSON (0, 2, 2)",
+        CHROME = "ajax: jQuery.ajax() - script, Remote with scheme-less URL (0, 2, 2)",
+        IE = "ajax: jQuery.ajax() - script, Remote (0, 2, 2)")
+    public void test_457() throws Exception {
+        runTest(457);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - malformed JSON (0, 2, 2)",
+        FF10 = "ajax: jQuery.ajax() - script, throws exception (#11743) (0, 1, 1)",
+        CHROME = "ajax: jQuery.ajax() - malformed JSON (0, 2, 2)",
+        IE = "ajax: jQuery.ajax() - script, Remote with POST (0, 3, 3)")
+    public void test_458() throws Exception {
+        runTest(458);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - script, throws exception (#11743) (0, 1, 1)",
+        FF10 = "ajax: jQuery.ajax() - script by content-type (0, 2, 2)",
+        CHROME = "ajax: jQuery.ajax() - script, throws exception (#11743) (0, 1, 1)",
+        IE = "ajax: jQuery.ajax() - script, Remote with scheme-less URL (0, 2, 2)")
+    public void test_459() throws Exception {
+        runTest(459);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - script by content-type (0, 2, 2)",
+        FF10 = "ajax: jQuery.ajax() - json by content-type (0, 5, 5)",
+        CHROME = "ajax: jQuery.ajax() - script by content-type (0, 2, 2)",
+        IE = "ajax: jQuery.ajax() - malformed JSON (0, 2, 2)")
+    public void test_460() throws Exception {
+        runTest(460);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - json by content-type (0, 5, 5)",
+        FF10 = "ajax: jQuery.ajax() - json by content-type disabled with options (0, 6, 6)",
+        CHROME = "ajax: jQuery.ajax() - json by content-type (0, 5, 5)",
+        IE = "ajax: jQuery.ajax() - script, throws exception (#11743) (0, 1, 1)")
+    public void test_461() throws Exception {
+        runTest(461);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - json by content-type disabled with options (0, 6, 6)",
+        FF10 = "ajax: jQuery.getJSON(String, Hash, Function) - JSON array (0, 5, 5)",
+        CHROME = "ajax: jQuery.ajax() - json by content-type disabled with options (0, 6, 6)",
+        IE = "ajax: jQuery.ajax() - script by content-type (0, 2, 2)")
+    public void test_462() throws Exception {
+        runTest(462);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.getJSON(String, Hash, Function) - JSON array (0, 5, 5)",
+        FF10 = "ajax: jQuery.getJSON(String, Function) - JSON object (0, 2, 2)",
+        CHROME = "ajax: jQuery.getJSON(String, Hash, Function) - JSON array (0, 5, 5)",
+        IE = "ajax: jQuery.ajax() - json by content-type (0, 5, 5)")
+    public void test_463() throws Exception {
+        runTest(463);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.getJSON(String, Function) - JSON object (0, 2, 2)",
+        FF10 = "ajax: jQuery.getJSON - Using Native JSON (0, 2, 2)",
+        CHROME = "ajax: jQuery.getJSON(String, Function) - JSON object (0, 2, 2)",
+        IE = "ajax: jQuery.ajax() - json by content-type disabled with options (0, 6, 6)")
+    public void test_464() throws Exception {
+        runTest(464);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.getJSON - Using Native JSON (0, 2, 2)",
+        FF10 = "ajax: jQuery.getJSON(String, Function) - JSON object with absolute url to local content (0, 2, 2)",
+        CHROME = "ajax: jQuery.getJSON - Using Native JSON (0, 2, 2)",
+        IE = "ajax: jQuery.getJSON(String, Hash, Function) - JSON array (0, 5, 5)")
+    public void test_465() throws Exception {
+        runTest(465);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.getJSON(String, Function) - JSON object with absolute url to local content "
+            + "(0, 2, 2)",
+        FF10 = "ajax: jQuery.post - data (0, 3, 3)",
+        CHROME = "ajax: jQuery.getJSON(String, Function) - JSON object with absolute url to local content (0, 2, 2)",
+        IE = "ajax: jQuery.getJSON(String, Function) - JSON object (0, 2, 2)")
+    public void test_466() throws Exception {
+        runTest(466);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.post - data (0, 3, 3)",
+        FF10 = "ajax: jQuery.post(String, Hash, Function) - simple with xml (0, 4, 4)",
+        CHROME = "ajax: jQuery.post - data (0, 3, 3)", IE = "ajax: jQuery.getJSON - Using Native JSON (0, 2, 2)")
+    public void test_467() throws Exception {
+        runTest(467);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.post(String, Hash, Function) - simple with xml (0, 4, 4)",
+        FF10 = "ajax: jQuery.ajaxSetup({timeout: Number}) - with global timeout (0, 1, 1)",
+        CHROME = "ajax: jQuery.post(String, Hash, Function) - simple with xml (0, 4, 4)",
+        IE = "ajax: jQuery.getJSON(String, Function) - JSON object with absolute url to local content (0, 2, 2)")
+    public void test_468() throws Exception {
+        runTest(468);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajaxSetup({timeout: Number}) - with global timeout (0, 1, 1)",
+        FF10 = "ajax: jQuery.ajaxSetup({timeout: Number}) with localtimeout (0, 1, 1)",
+        CHROME = "ajax: jQuery.ajaxSetup({timeout: Number}) - with global timeout (0, 1, 1)",
+        IE = "ajax: jQuery.post - data (0, 3, 3)")
+    @NotYetImplemented(FF)
+    public void test_469() throws Exception {
+        runTest(469);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajaxSetup({timeout: Number}) with localtimeout (0, 1, 1)",
+        FF10 = "ajax: jQuery.ajax - simple get (0, 1, 1)",
+        CHROME = "ajax: jQuery.ajaxSetup({timeout: Number}) with localtimeout (0, 1, 1)",
+        IE = "ajax: jQuery.post(String, Hash, Function) - simple with xml (0, 4, 4)")
+    public void test_470() throws Exception {
+        runTest(470);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - simple get (0, 1, 1)", FF10 = "ajax: jQuery.ajax - simple post (0, 1, 1)",
+        CHROME = "ajax: jQuery.ajax - simple get (0, 1, 1)",
+        IE = "ajax: jQuery.ajaxSetup({timeout: Number}) - with global timeout (0, 1, 1)")
+    @NotYetImplemented(IE)
+    public void test_471() throws Exception {
+        runTest(471);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - simple post (0, 1, 1)",
+        FF10 = "ajax: ajaxSetup() (0, 1, 1)", CHROME = "ajax: jQuery.ajax - simple post (0, 1, 1)",
+        IE = "ajax: jQuery.ajaxSetup({timeout: Number}) with localtimeout (0, 1, 1)")
+    public void test_472() throws Exception {
+        runTest(472);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: ajaxSetup() (0, 1, 1)",
+        FF10 = "ajax: data option: evaluate function values (#2806) (0, 1, 1)",
+        CHROME = "ajax: ajaxSetup() (0, 1, 1)", IE = "ajax: jQuery.ajax - simple get (0, 1, 1)")
+    public void test_473() throws Exception {
+        runTest(473);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: data option: evaluate function values (#2806) (0, 1, 1)",
+        FF10 = "ajax: data option: empty bodies for non-GET requests (0, 1, 1)",
+        CHROME = "ajax: data option: evaluate function values (#2806) (0, 1, 1)",
+        IE = "ajax: jQuery.ajax - simple post (0, 1, 1)")
+    public void test_474() throws Exception {
+        runTest(474);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: data option: empty bodies for non-GET requests (0, 1, 1)",
+        FF10 = "ajax: jQuery.ajax - If-Modified-Since support (cache) (0, 3, 3)",
+        CHROME = "ajax: data option: empty bodies for non-GET requests (0, 1, 1)",
+        IE = "ajax: ajaxSetup() (0, 1, 1)")
+    public void test_475() throws Exception {
+        runTest(475);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - If-Modified-Since support (cache) (0, 3, 3)",
+        FF10 = "ajax: jQuery.ajax - Etag support (cache) (0, 3, 3)",
+        CHROME = "ajax: jQuery.ajax - If-Modified-Since support (cache) (0, 3, 3)",
+        IE = "ajax: data option: evaluate function values (#2806) (0, 1, 1)")
+    public void test_476() throws Exception {
+        runTest(476);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - Etag support (cache) (0, 3, 3)",
+        FF10 = "ajax: jQuery.ajax - If-Modified-Since support (no cache) (0, 3, 3)",
+        CHROME = "ajax: jQuery.ajax - Etag support (cache) (0, 3, 3)",
+        IE = "ajax: data option: empty bodies for non-GET requests (0, 1, 1)")
+    public void test_477() throws Exception {
+        runTest(477);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - If-Modified-Since support (no cache) (0, 3, 3)",
+        FF10 = "ajax: jQuery.ajax - Etag support (no cache) (0, 3, 3)",
+        CHROME = "ajax: jQuery.ajax - If-Modified-Since support (no cache) (0, 3, 3)",
+        IE = "ajax: jQuery.ajax - If-Modified-Since support (cache) (0, 3, 3)")
+    public void test_478() throws Exception {
+        runTest(478);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - Etag support (no cache) (0, 3, 3)",
+        FF10 = "ajax: jQuery ajax - failing cross-domain (0, 2, 2)",
+        CHROME = "ajax: jQuery.ajax - Etag support (no cache) (0, 3, 3)",
+        IE = "ajax: jQuery.ajax - Etag support (cache) (0, 3, 3)")
+    public void test_479() throws Exception {
+        runTest(479);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery ajax - failing cross-domain (0, 2, 2)",
+        FF10 = "ajax: jQuery ajax - atom+xml (0, 1, 1)", CHROME = "ajax: jQuery ajax - failing cross-domain (0, 2, 2)",
+        IE = "ajax: jQuery.ajax - If-Modified-Since support (no cache) (0, 3, 3)")
+    @NotYetImplemented(FF)
+    public void test_480() throws Exception {
+        runTest(480);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery ajax - atom+xml (0, 1, 1)",
+        FF10 = "ajax: jQuery.ajax - Location object as url (#7531) (0, 1, 1)",
+        CHROME = "ajax: jQuery ajax - atom+xml (0, 1, 1)",
+        IE = "ajax: jQuery.ajax - Etag support (no cache) (0, 3, 3)")
+    public void test_481() throws Exception {
+        runTest(481);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - Location object as url (#7531) (0, 1, 1)",
+        FF10 = "ajax: jQuery.ajax - Context with circular references (#9887) (0, 2, 2)",
+        CHROME = "ajax: jQuery.ajax - Location object as url (#7531) (0, 1, 1)",
+        IE = "ajax: jQuery ajax - failing cross-domain (0, 2, 2)")
+    @NotYetImplemented(IE)
+    public void test_482() throws Exception {
+        runTest(482);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - Context with circular references (#9887) (0, 2, 2)",
+        FF10 = "ajax: jQuery.ajax - statusText (0, 3, 3)",
+        CHROME = "ajax: jQuery.ajax - Context with circular references (#9887) (0, 2, 2)",
+        IE = "ajax: jQuery ajax - atom+xml (0, 1, 1)")
+    public void test_483() throws Exception {
+        runTest(483);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - statusText (0, 3, 3)", FF10 = "ajax: jQuery.ajax - statusCode (0, 20, 20)",
+        CHROME = "ajax: jQuery.ajax - statusText (0, 3, 3)",
+        IE = "ajax: jQuery.ajax - Location object as url (#7531) (0, 1, 1)")
+    public void test_484() throws Exception {
+        runTest(484);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - statusCode (0, 20, 20)",
+        FF10 = "ajax: jQuery.ajax - transitive conversions (0, 8, 8)",
+        CHROME = "ajax: jQuery.ajax - statusCode (0, 20, 20)",
+        IE = "ajax: jQuery.ajax - Context with circular references (#9887) (0, 2, 2)")
+    public void test_485() throws Exception {
+        runTest(485);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - transitive conversions (0, 8, 8)",
+        FF10 = "ajax: jQuery.ajax - overrideMimeType (0, 2, 2)",
+        CHROME = "ajax: jQuery.ajax - transitive conversions (0, 8, 8)",
+        IE = "ajax: jQuery.ajax - statusText (0, 3, 3)")
+    public void test_486() throws Exception {
+        runTest(486);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - overrideMimeType (0, 2, 2)",
+        FF10 = "ajax: jQuery.ajax - abort in prefilter (0, 1, 1)",
+        CHROME = "ajax: jQuery.ajax - overrideMimeType (0, 2, 2)",
+        IE = "ajax: jQuery.ajax - statusCode (0, 20, 20)")
+    public void test_487() throws Exception {
+        runTest(487);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - abort in prefilter (0, 1, 1)",
+        FF10 = "ajax: jQuery.ajax - loading binary data shouldn't throw an exception in IE (#11426) (0, 1, 1)",
+        CHROME = "ajax: jQuery.ajax - abort in prefilter (0, 1, 1)",
+        IE = "ajax: jQuery.ajax - transitive conversions (0, 8, 8)")
+    public void test_488() throws Exception {
+        runTest(488);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - loading binary data shouldn't throw an exception in IE (#11426) (0, 1, 1)",
+        FF10 = "ajax: jQuery.domManip - no side effect because of ajaxSetup or global events (#11264) (0, 1, 1)",
+        CHROME = "ajax: jQuery.ajax - loading binary data shouldn't throw an exception in IE (#11426) (0, 1, 1)",
+        IE = "ajax: jQuery.ajax - overrideMimeType (0, 2, 2)")
+    public void test_489() throws Exception {
+        runTest(489);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.domManip - no side effect because of ajaxSetup or global events (#11264) (0, 1, 1)",
+        FF10 = "ajax: jQuery.domManip - script in comments are properly evaluated (#11402) (0, 2, 2)",
+        CHROME = "ajax: jQuery.domManip - no side effect because of ajaxSetup or global events (#11264) (0, 1, 1)",
+        IE = "ajax: jQuery.ajax - abort in prefilter (0, 1, 1)")
+    public void test_490() throws Exception {
+        runTest(490);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.domManip - script in comments are properly evaluated (#11402) (0, 2, 2)",
+        FF10 = "ajax: jQuery.ajax - active counter (0, 1, 1)",
+        CHROME = "ajax: jQuery.domManip - script in comments are properly evaluated (#11402) (0, 2, 2)",
+        IE = "ajax: jQuery.ajax - loading binary data shouldn't throw an exception in IE (#11426) (0, 1, 1)")
+    public void test_491() throws Exception {
+        runTest(491);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - active counter (0, 1, 1)",
+        FF10 = "effects: sanity check (0, 1, 1)", CHROME = "ajax: jQuery.ajax - active counter (0, 1, 1)",
+        IE = "ajax: jQuery.domManip - no side effect because of ajaxSetup or global events (#11264) (0, 1, 1)")
+    public void test_492() throws Exception {
+        runTest(492);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "effects: sanity check (0, 1, 1)", FF10 = "effects: show() (0, 26, 26)",
+        CHROME = "effects: sanity check (0, 1, 1)",
+        IE = "ajax: jQuery.domManip - script in comments are properly evaluated (#11402) (0, 2, 2)")
+    public void test_493() throws Exception {
+        runTest(493);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "effects: show() (0, 26, 26)", FF10 = "effects: show(Number) - other displays (0, 15, 15)",
+        CHROME = "effects: show() (0, 26, 26)", IE = "ajax: jQuery.ajax - active counter (0, 1, 1)")
+    public void test_494() throws Exception {
+        runTest(494);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "effects: show(Number) - other displays (0, 15, 15)",
+        FF10 = "effects: Persist correct display value (0, 3, 3)",
+        CHROME = "effects: show(Number) - other displays (0, 15, 15)",
+        IE = "effects: sanity check (0, 1, 1)")
+    public void test_495() throws Exception {
+        runTest(495);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "effects: Persist correct display value (0, 3, 3)",
+        FF10 = "effects: animate(Hash, Object, Function) (0, 1, 1)",
+        CHROME = "effects: Persist correct display value (0, 3, 3)",
+        IE = "effects: show() (0, 26, 26)")
+    public void test_496() throws Exception {
+        runTest(496);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "effects: animate(Hash, Object, Function) (0, 1, 1)",
+        FF10 = "effects: animate negative height (0, 1, 1)",
+        CHROME = "effects: animate(Hash, Object, Function) (0, 1, 1)",
+        IE = "effects: show(Number) - other displays (0, 15, 15)")
+    public void test_497() throws Exception {
+        runTest(497);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "effects: animate negative height (0, 1, 1)",
+        FF10 = "effects: animate negative margin (0, 1, 1)",
+        CHROME = "effects: animate negative height (0, 1, 1)",
+        IE = "effects: Persist correct display value (0, 3, 3)")
+    public void test_498() throws Exception {
+        runTest(498);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "effects: animate negative margin (0, 1, 1)",
+        FF10 = "effects: animate negative margin with px (0, 1, 1)",
+        CHROME = "effects: animate negative margin (0, 1, 1)",
+        IE = "effects: animate(Hash, Object, Function) (0, 1, 1)")
+    public void test_499() throws Exception {
+        runTest(499);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "effects: animate negative margin with px (0, 1, 1)",
+        FF10 = "effects: animate negative padding (0, 1, 1)",
+        CHROME = "effects: animate negative margin with px (0, 1, 1)",
+        IE = "effects: animate negative height (0, 1, 1)")
+    @NotYetImplemented(IE)
+    public void test_500() throws Exception {
+        runTest(500);
     }
 
 }
