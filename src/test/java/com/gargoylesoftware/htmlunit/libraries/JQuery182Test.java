@@ -4461,4 +4461,582 @@ public class JQuery182Test extends WebDriverTestCase {
         runTest(400);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "serialize: serialize() (0, 5, 5)", FF10 = "ajax: jQuery.ajax() - success callbacks (0, 8, 8)",
+        CHROME = "serialize: serialize() (0, 5, 5)", IE = "serialize: jQuery.param() (0, 22, 22)")
+    public void test_401() throws Exception {
+        runTest(401);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - success callbacks (0, 8, 8)",
+        FF10 = "ajax: jQuery.ajax() - success callbacks - (url, options) syntax (0, 8, 8)",
+        CHROME = "ajax: jQuery.ajax() - success callbacks (0, 8, 8)",
+        IE = "serialize: jQuery.param() Constructed prop values (0, 4, 4)")
+    public void test_402() throws Exception {
+        runTest(402);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - success callbacks - (url, options) syntax (0, 8, 8)",
+        FF10 = "ajax: jQuery.ajax() - success callbacks (late binding) (0, 8, 8)",
+        CHROME = "ajax: jQuery.ajax() - success callbacks - (url, options) syntax (0, 8, 8)",
+        IE = "serialize: serialize() (0, 5, 5)")
+    public void test_403() throws Exception {
+        runTest(403);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - success callbacks (late binding) (0, 8, 8)",
+        FF10 = "ajax: jQuery.ajax() - success callbacks (oncomplete binding) (0, 8, 8)",
+        CHROME = "ajax: jQuery.ajax() - success callbacks (late binding) (0, 8, 8)",
+        IE = "ajax: jQuery.ajax() - success callbacks (0, 8, 8)")
+    public void test_404() throws Exception {
+        runTest(404);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - success callbacks (oncomplete binding) (0, 8, 8)",
+        FF10 = "ajax: jQuery.ajax() - success callbacks (very late binding) (0, 8, 8)",
+        CHROME = "ajax: jQuery.ajax() - success callbacks (oncomplete binding) (0, 8, 8)",
+        IE = "ajax: jQuery.ajax() - success callbacks - (url, options) syntax (0, 8, 8)")
+    public void test_405() throws Exception {
+        runTest(405);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - success callbacks (very late binding) (0, 8, 8)",
+        FF10 = "ajax: jQuery.ajax() - success callbacks (order) (0, 1, 1)",
+        CHROME = "ajax: jQuery.ajax() - success callbacks (very late binding) (0, 8, 8)",
+        IE = "ajax: jQuery.ajax() - success callbacks (late binding) (0, 8, 8)")
+    public void test_406() throws Exception {
+        runTest(406);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - success callbacks (order) (0, 1, 1)",
+        FF10 = "ajax: jQuery.ajax() - error callbacks (0, 8, 8)",
+        CHROME = "ajax: jQuery.ajax() - success callbacks (order) (0, 1, 1)",
+        IE = "ajax: jQuery.ajax() - success callbacks (oncomplete binding) (0, 8, 8)")
+    public void test_407() throws Exception {
+        runTest(407);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - error callbacks (0, 8, 8)",
+        FF10 = "ajax: jQuery.ajax - multiple method signatures introduced in 1.5 ( #8107) (0, 4, 4)",
+        CHROME = "ajax: jQuery.ajax() - error callbacks (0, 8, 8)",
+        IE = "ajax: jQuery.ajax() - success callbacks (very late binding) (0, 8, 8)")
+    @NotYetImplemented(FF)
+    public void test_408() throws Exception {
+        runTest(408);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - multiple method signatures introduced in 1.5 ( #8107) (0, 4, 4)",
+        FF10 = "ajax: jQuery.ajax() - textStatus and errorThrown values (0, 4, 4)",
+        CHROME = "ajax: jQuery.ajax - multiple method signatures introduced in 1.5 ( #8107) (0, 4, 4)",
+        IE = "ajax: jQuery.ajax() - success callbacks (order) (0, 1, 1)")
+    public void test_409() throws Exception {
+        runTest(409);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - textStatus and errorThrown values (0, 4, 4)",
+        FF10 = "ajax: jQuery.ajax() - responseText on error (0, 1, 1)",
+        CHROME = "ajax: jQuery.ajax() - textStatus and errorThrown values (0, 4, 4)",
+        IE = "ajax: jQuery.ajax() - error callbacks (0, 8, 8)")
+    @NotYetImplemented(IE)
+    public void test_410() throws Exception {
+        runTest(410);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - responseText on error (0, 1, 1)",
+        FF10 = "ajax: .ajax() - retry with jQuery.ajax( this ) (0, 2, 2)",
+        CHROME = "ajax: jQuery.ajax() - responseText on error (0, 1, 1)",
+        IE = "ajax: jQuery.ajax - multiple method signatures introduced in 1.5 ( #8107) (0, 4, 4)")
+    public void test_411() throws Exception {
+        runTest(411);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: .ajax() - retry with jQuery.ajax( this ) (0, 2, 2)",
+        FF10 = "ajax: .ajax() - headers (0, 4, 4)",
+        CHROME = "ajax: .ajax() - retry with jQuery.ajax( this ) (0, 2, 2)",
+        IE = "ajax: jQuery.ajax() - textStatus and errorThrown values (0, 4, 4)")
+    public void test_412() throws Exception {
+        runTest(412);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: .ajax() - headers (0, 4, 4)", FF10 = "ajax: .ajax() - Accept header (0, 1, 1)",
+        CHROME = "ajax: .ajax() - headers (0, 4, 4)", IE = "ajax: jQuery.ajax() - responseText on error (0, 1, 1)")
+    public void test_413() throws Exception {
+        runTest(413);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: .ajax() - Accept header (0, 1, 1)", FF10 = "ajax: .ajax() - contentType (0, 2, 2)",
+        CHROME = "ajax: .ajax() - Accept header (0, 1, 1)",
+        IE = "ajax: .ajax() - retry with jQuery.ajax( this ) (0, 2, 2)")
+    public void test_414() throws Exception {
+        runTest(414);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: .ajax() - contentType (0, 2, 2)", FF10 = "ajax: .ajax() - protocol-less urls (0, 1, 1)",
+        CHROME = "ajax: .ajax() - contentType (0, 2, 2)", IE = "ajax: .ajax() - headers (0, 4, 4)")
+    public void test_415() throws Exception {
+        runTest(415);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: .ajax() - protocol-less urls (0, 1, 1)",
+        FF10 = "ajax: .ajax() - hash (0, 3, 3)", CHROME = "ajax: .ajax() - protocol-less urls (0, 1, 1)",
+        IE = "ajax: .ajax() - Accept header (0, 1, 1)")
+    public void test_416() throws Exception {
+        runTest(416);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: .ajax() - hash (0, 3, 3)", FF10 = "ajax: jQuery ajax - cross-domain detection (0, 6, 6)",
+        CHROME = "ajax: .ajax() - hash (0, 3, 3)", IE = "ajax: .ajax() - contentType (0, 2, 2)")
+    public void test_417() throws Exception {
+        runTest(417);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery ajax - cross-domain detection (0, 6, 6)",
+        FF10 = "ajax: .load() - 404 error callbacks (0, 6, 6)",
+        CHROME = "ajax: jQuery ajax - cross-domain detection (0, 6, 6)",
+        IE = "ajax: .ajax() - protocol-less urls (0, 1, 1)")
+    public void test_418() throws Exception {
+        runTest(418);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: .load() - 404 error callbacks (0, 6, 6)",
+        FF10 = "ajax: jQuery.ajax() - abort (0, 8, 8)", CHROME = "ajax: .load() - 404 error callbacks (0, 6, 6)",
+        IE = "ajax: .ajax() - hash (0, 3, 3)")
+    public void test_419() throws Exception {
+        runTest(419);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - abort (0, 8, 8)", FF10 = "ajax: Ajax events with context (0, 14, 14)",
+        CHROME = "ajax: jQuery.ajax() - abort (0, 8, 8)", IE = "ajax: jQuery ajax - cross-domain detection (0, 6, 6)")
+    public void test_420() throws Exception {
+        runTest(420);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: Ajax events with context (0, 14, 14)",
+        FF10 = "ajax: jQuery.ajax context modification (0, 1, 1)",
+        CHROME = "ajax: Ajax events with context (0, 14, 14)",
+        IE = "ajax: .load() - 404 error callbacks (0, 6, 6)")
+    public void test_421() throws Exception {
+        runTest(421);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax context modification (0, 1, 1)",
+        FF10 = "ajax: jQuery.ajax context modification through ajaxSetup (0, 4, 4)",
+        CHROME = "ajax: jQuery.ajax context modification (0, 1, 1)",
+        IE = "ajax: jQuery.ajax() - abort (0, 8, 8)")
+    public void test_422() throws Exception {
+        runTest(422);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax context modification through ajaxSetup (0, 4, 4)",
+        FF10 = "ajax: jQuery.ajax() - disabled globals (0, 3, 3)",
+        CHROME = "ajax: jQuery.ajax context modification through ajaxSetup (0, 4, 4)",
+        IE = "ajax: Ajax events with context (0, 14, 14)")
+    public void test_423() throws Exception {
+        runTest(423);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax() - disabled globals (0, 3, 3)",
+        FF10 = "ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (0, 3, 3)",
+        CHROME = "ajax: jQuery.ajax() - disabled globals (0, 3, 3)",
+        IE = "ajax: jQuery.ajax context modification (0, 1, 1)")
+    public void test_424() throws Exception {
+        runTest(424);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (0, 3, 3)",
+        FF10 = "ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (over JSONP) (0, 3, 3)",
+        CHROME = "ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (0, 3, 3)",
+        IE = "ajax: jQuery.ajax context modification through ajaxSetup (0, 4, 4)")
+    public void test_425() throws Exception {
+        runTest(425);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (over JSONP) "
+            + "(0, 3, 3)",
+        FF10 = "ajax: jQuery.ajax - HEAD requests (2, 0, 2)",
+        CHROME = "ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (over JSONP) (0, 3, 3)",
+        IE = "ajax: jQuery.ajax() - disabled globals (0, 3, 3)")
+    public void test_426() throws Exception {
+        runTest(426);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - HEAD requests (2, 0, 2)",
+        FF10 = "ajax: jQuery.ajax - beforeSend (0, 1, 1)", CHROME = "ajax: jQuery.ajax - HEAD requests (2, 0, 2)",
+        IE = "ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (0, 3, 3)")
+    public void test_427() throws Exception {
+        runTest(427);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - beforeSend (0, 1, 1)",
+        FF10 = "ajax: jQuery.ajax - beforeSend, cancel request (#2688) (0, 2, 2)",
+        CHROME = "ajax: jQuery.ajax - beforeSend (0, 1, 1)",
+        IE = "ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (over JSONP) (0, 3, 3)")
+    public void test_428() throws Exception {
+        runTest(428);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - beforeSend, cancel request (#2688) (0, 2, 2)",
+        FF10 = "ajax: jQuery.ajax - beforeSend, cancel request manually (0, 2, 2)",
+        CHROME = "ajax: jQuery.ajax - beforeSend, cancel request (#2688) (0, 2, 2)",
+        IE = "ajax: jQuery.ajax - HEAD requests (2, 0, 2)")
+    public void test_429() throws Exception {
+        runTest(429);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - beforeSend, cancel request manually (0, 2, 2)",
+        FF10 = "ajax: jQuery.ajax - dataType html (0, 5, 5)",
+        CHROME = "ajax: jQuery.ajax - beforeSend, cancel request manually (0, 2, 2)",
+        IE = "ajax: jQuery.ajax - beforeSend (0, 1, 1)")
+    public void test_430() throws Exception {
+        runTest(430);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.ajax - dataType html (0, 5, 5)",
+        FF10 = "ajax: synchronous request (0, 1, 1)", CHROME = "ajax: jQuery.ajax - dataType html (0, 5, 5)",
+        IE = "ajax: jQuery.ajax - beforeSend, cancel request (#2688) (0, 2, 2)")
+    public void test_431() throws Exception {
+        runTest(431);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: synchronous request (0, 1, 1)",
+        FF10 = "ajax: synchronous request with callbacks (0, 2, 2)",
+        CHROME = "ajax: synchronous request (0, 1, 1)",
+        IE = "ajax: jQuery.ajax - beforeSend, cancel request manually (0, 2, 2)")
+    public void test_432() throws Exception {
+        runTest(432);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: synchronous request with callbacks (0, 2, 2)",
+        FF10 = "ajax: pass-through request object (0, 8, 8)",
+        CHROME = "ajax: synchronous request with callbacks (0, 2, 2)",
+        IE = "ajax: jQuery.ajax - dataType html (0, 5, 5)")
+    public void test_433() throws Exception {
+        runTest(433);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: pass-through request object (0, 8, 8)",
+        FF10 = "ajax: ajax cache (0, 18, 18)", CHROME = "ajax: pass-through request object (0, 8, 8)",
+        IE = "ajax: synchronous request (0, 1, 1)")
+    public void test_434() throws Exception {
+        runTest(434);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: ajax cache (0, 18, 18)", FF10 = "ajax: load(String) (0, 2, 2)",
+        CHROME = "ajax: ajax cache (0, 18, 18)", IE = "ajax: synchronous request with callbacks (0, 2, 2)")
+    public void test_435() throws Exception {
+        runTest(435);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load(String) (0, 2, 2)", FF10 = "ajax: load(String,null) (0, 2, 2)",
+        CHROME = "ajax: load(String) (0, 2, 2)", IE = "ajax: pass-through request object (0, 8, 8)")
+    public void test_436() throws Exception {
+        runTest(436);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load(String,null) (0, 2, 2)", FF10 = "ajax: load(String,undefined) (0, 2, 2)",
+        CHROME = "ajax: load(String,null) (0, 2, 2)", IE = "ajax: ajax cache (0, 18, 18)")
+    public void test_437() throws Exception {
+        runTest(437);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load(String,undefined) (0, 2, 2)", FF10 = "ajax: load('url selector') (0, 1, 1)",
+        CHROME = "ajax: load(String,undefined) (0, 2, 2)", IE = "ajax: load(String) (0, 2, 2)")
+    public void test_438() throws Exception {
+        runTest(438);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load('url selector') (0, 1, 1)",
+        FF10 = "ajax: load(String, Function) with ajaxSetup on dataType json, see #2046 (0, 1, 1)",
+        CHROME = "ajax: load('url selector') (0, 1, 1)", IE = "ajax: load(String,null) (0, 2, 2)")
+    public void test_439() throws Exception {
+        runTest(439);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load(String, Function) with ajaxSetup on dataType json, see #2046 (0, 1, 1)",
+        FF10 = "ajax: load(String, Function) - simple: inject text into DOM (0, 2, 2)",
+        CHROME = "ajax: load(String, Function) with ajaxSetup on dataType json, see #2046 (0, 1, 1)",
+        IE = "ajax: load(String,undefined) (0, 2, 2)")
+    public void test_440() throws Exception {
+        runTest(440);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load(String, Function) - simple: inject text into DOM (0, 2, 2)",
+        FF10 = "ajax: load(String, Function) - check scripts (0, 7, 7)",
+        CHROME = "ajax: load(String, Function) - simple: inject text into DOM (0, 2, 2)",
+        IE = "ajax: load('url selector') (0, 1, 1)")
+    public void test_441() throws Exception {
+        runTest(441);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load(String, Function) - check scripts (0, 7, 7)",
+        FF10 = "ajax: load(String, Function) - check file with only a script tag (0, 3, 3)",
+        CHROME = "ajax: load(String, Function) - check scripts (0, 7, 7)",
+        IE = "ajax: load(String, Function) with ajaxSetup on dataType json, see #2046 (0, 1, 1)")
+    public void test_442() throws Exception {
+        runTest(442);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load(String, Function) - check file with only a script tag (0, 3, 3)",
+        FF10 = "ajax: load(String, Function) - dataFilter in ajaxSettings (0, 2, 2)",
+        CHROME = "ajax: load(String, Function) - check file with only a script tag (0, 3, 3)",
+        IE = "ajax: load(String, Function) - simple: inject text into DOM (0, 2, 2)")
+    public void test_443() throws Exception {
+        runTest(443);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load(String, Function) - dataFilter in ajaxSettings (0, 2, 2)",
+        FF10 = "ajax: load(String, Object, Function) (0, 2, 2)",
+        CHROME = "ajax: load(String, Function) - dataFilter in ajaxSettings (0, 2, 2)",
+        IE = "ajax: load(String, Function) - check scripts (0, 7, 7)")
+    public void test_444() throws Exception {
+        runTest(444);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load(String, Object, Function) (0, 2, 2)",
+        FF10 = "ajax: load(String, String, Function) (0, 2, 2)",
+        CHROME = "ajax: load(String, Object, Function) (0, 2, 2)",
+        IE = "ajax: load(String, Function) - check file with only a script tag (0, 3, 3)")
+    public void test_445() throws Exception {
+        runTest(445);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load(String, String, Function) (0, 2, 2)",
+        FF10 = "ajax: load() - data specified in ajaxSettings is merged in (#10524) (0, 1, 1)",
+        CHROME = "ajax: load(String, String, Function) (0, 2, 2)",
+        IE = "ajax: load(String, Function) - dataFilter in ajaxSettings (0, 2, 2)")
+    public void test_446() throws Exception {
+        runTest(446);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load() - data specified in ajaxSettings is merged in (#10524) (0, 1, 1)",
+        FF10 = "ajax: load() - callbacks get the correct parameters (0, 8, 8)",
+        CHROME = "ajax: load() - data specified in ajaxSettings is merged in (#10524) (0, 1, 1)",
+        IE = "ajax: load(String, Object, Function) (0, 2, 2)")
+    public void test_447() throws Exception {
+        runTest(447);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: load() - callbacks get the correct parameters (0, 8, 8)",
+        FF10 = "ajax: jQuery.get(String, Function) - data in ajaxSettings (#8277) (0, 1, 1)",
+        CHROME = "ajax: load() - callbacks get the correct parameters (0, 8, 8)",
+        IE = "ajax: load(String, String, Function) (0, 2, 2)")
+    public void test_448() throws Exception {
+        runTest(448);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.get(String, Function) - data in ajaxSettings (#8277) (0, 1, 1)",
+        FF10 = "ajax: jQuery.get(String, Hash, Function) - parse xml and use text() on nodes (0, 2, 2)",
+        CHROME = "ajax: jQuery.get(String, Function) - data in ajaxSettings (#8277) (0, 1, 1)",
+        IE = "ajax: load() - data specified in ajaxSettings is merged in (#10524) (0, 1, 1)")
+    public void test_449() throws Exception {
+        runTest(449);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = "ajax: jQuery.get(String, Hash, Function) - parse xml and use text() on nodes (0, 2, 2)",
+        FF10 = "ajax: jQuery.getScript(String, Function) - with callback (0, 3, 3)",
+        CHROME = "ajax: jQuery.get(String, Hash, Function) - parse xml and use text() on nodes (0, 2, 2)",
+        IE = "ajax: load() - callbacks get the correct parameters (0, 8, 8)")
+    public void test_450() throws Exception {
+        runTest(450);
+    }
+
 }
