@@ -651,7 +651,9 @@ public class JavaScriptEngine {
                 }
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks
-                doProcessPostponedActions(true);
+                if (!holdPostponedActions_) {
+                    doProcessPostponedActions();
+                }
                 return response;
             }
             catch (final Exception e) {
@@ -679,11 +681,7 @@ public class JavaScriptEngine {
         protected abstract String getSourceCode(final Context cx);
     }
 
-    private synchronized void doProcessPostponedActions(final boolean respectHold) {
-        if (respectHold && holdPostponedActions_) {
-            return;
-        }
-
+    private synchronized void doProcessPostponedActions() {
         holdPostponedActions_ = false;
 
         try {
@@ -774,7 +772,7 @@ public class JavaScriptEngine {
      * Process postponed actions, if any.
      */
     public void processPostponedActions() {
-        doProcessPostponedActions(false);
+        doProcessPostponedActions();
     }
 
     /**
