@@ -133,6 +133,7 @@ public class HttpWebConnection implements WebConnection {
     private String virtualHost_;
     private final CookieSpecFactory htmlUnitCookieSpecFactory_;
     private final WebClientOptions usedOptions_ = new WebClientOptions();
+    private List<File> temporaryFiles_;
 
     /**
      * Creates a new HTTP web connection instance.
@@ -655,7 +656,7 @@ public class HttpWebConnection implements WebConnection {
             return new DownloadedContent.InMemory(new byte[] {});
         }
 
-        return downloadContent(httpEntity.getContent());
+        return downloadContent(this, httpEntity.getContent());
     }
 
     /**
@@ -665,6 +666,11 @@ public class HttpWebConnection implements WebConnection {
      * @throws IOException in case of read issues
      */
     public static DownloadedContent downloadContent(final InputStream is) throws IOException {
+        return downloadContent(null, is);
+    }
+
+    private static DownloadedContent downloadContent(final HttpWebConnection connection, final InputStream is)
+        throws IOException {
         if (is == null) {
             return new DownloadedContent.InMemory(new byte[] {});
         }
@@ -683,6 +689,12 @@ public class HttpWebConnection implements WebConnection {
                     bos.writeTo(fos); // what we have already read
                     IOUtils.copyLarge(is, fos); // what remains from the server response
                     fos.close();
+                    if (connection != null) {
+                        if (connection.temporaryFiles_ == null) {
+                            connection.temporaryFiles_ = new ArrayList<File>();
+                        }
+                        connection.temporaryFiles_.add(file);
+                    }
                     return new DownloadedContent.OnFile(file, true);
                 }
             }
@@ -725,6 +737,11 @@ public class HttpWebConnection implements WebConnection {
         if (httpClient_ != null) {
             httpClient_.getConnectionManager().shutdown();
             httpClient_ = null;
+        }
+        if (temporaryFiles_ != null) {
+            for (final File file : temporaryFiles_) {
+                file.delete();
+            }
         }
     }
 }

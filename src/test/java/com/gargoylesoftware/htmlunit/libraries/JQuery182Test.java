@@ -5391,7 +5391,7 @@ public class JQuery182Test extends WebDriverTestCase {
 //     */
 //    @Test
 //    @Alerts(FF3_6 = "ajax: jQuery ajax - failing cross-domain (0, 2, 2)",
-//        FF10 = "ajax: jQuery ajax - atom+xml (0, 1, 1)", CHROME = "ajax: jQuery ajax - failing cross-domain (0, 2, 2)",
+//FF10 = "ajax: jQuery ajax - atom+xml (0, 1, 1)", CHROME = "ajax: jQuery ajax - failing cross-domain (0, 2, 2)",
 //        IE = "ajax: jQuery.ajax - If-Modified-Since support (no cache) (0, 3, 3)")
 //    @NotYetImplemented(FF)
 //    public void test_480() throws Exception {
