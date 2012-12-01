@@ -529,7 +529,7 @@ public class WebClient implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      *
      * <p>Throws a {@link FailingHttpStatusCodeException} if the request's status code indicates a request
-     * failure and {@link #isThrowExceptionOnFailingStatusCode()} returns <tt>true</tt>.
+     * failure and {@link WebClientOptions#isThrowExceptionOnFailingStatusCode()} returns <tt>true</tt>.
      *
      * @param webResponse the response which may trigger a {@link FailingHttpStatusCodeException}
      */
@@ -1496,7 +1496,7 @@ public class WebClient implements Serializable {
         else if (status >= HttpStatus.SC_MOVED_PERMANENTLY
             && status <= HttpStatus.SC_TEMPORARY_REDIRECT
             && status != HttpStatus.SC_NOT_MODIFIED
-            && isRedirectEnabled()) {
+            && getOptions().isRedirectEnabled()) {
 
             final URL newUrl;
             String locationString = null;

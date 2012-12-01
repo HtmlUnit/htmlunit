@@ -50,7 +50,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      * results in a {@link FailingHttpStatusCodeException}, depending on how the client has been
      * configured.
      *
-     * @see WebClient#isThrowExceptionOnFailingStatusCode()
+     * @see com.gargoylesoftware.htmlunit.WebClientOptions#isThrowExceptionOnFailingStatusCode()
      * @throws Exception if an error occurs
      */
     @Test
