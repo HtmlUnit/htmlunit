@@ -60,6 +60,7 @@ public interface DownloadedContent extends Serializable {
     static class OnFile implements DownloadedContent {
         private final File file_;
         private boolean temporary_;
+
         /**
          * @param file the file
          * @param temporary if true, the file will be deleted when cleanUp() is called.
@@ -71,6 +72,7 @@ public interface DownloadedContent extends Serializable {
         public InputStream getInputStream() throws FileNotFoundException {
             return new FileInputStream(file_);
         }
+
         public void cleanUp() {
             if (temporary_) {
                 FileUtils.deleteQuietly(file_);
