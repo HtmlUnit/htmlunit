@@ -109,7 +109,7 @@ public abstract class HtmlElement extends DomElement {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         attributeListeners_ = new ArrayList<HtmlAttributeChangeListener>();
-        if (page != null && page.getWebClient().getBrowserVersion().hasFeature(HTMLELEMENT_TRIM_CLASS_ATTRIBUTE)) {
+        if (page != null && hasFeature(HTMLELEMENT_TRIM_CLASS_ATTRIBUTE)) {
             final String value = getAttribute("class");
             if (value != ATTRIBUTE_NOT_DEFINED) {
                 getAttributeNode("class").setValue(value.trim());
@@ -468,7 +468,8 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final WebClient webClient = page.getWebClient();
-        if (webClient.getBrowserVersion().hasFeature(EVENT_INPUT)
+        final BrowserVersion browserVersion = webClient.getBrowserVersion();
+        if (browserVersion.hasFeature(EVENT_INPUT)
             && (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
             || this instanceof HtmlPasswordInput)) {
@@ -481,8 +482,7 @@ public abstract class HtmlElement extends DomElement {
 
         final HtmlForm form = getEnclosingForm();
         if (form != null && c == '\n' && isSubmittableByEnter()) {
-            if (!webClient.getBrowserVersion()
-                    .hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
+            if (!browserVersion.hasFeature(BUTTON_EMPTY_TYPE_BUTTON)) {
                 final HtmlSubmitInput submit = form.getFirstByXPath(".//input[@type='submit']");
                 if (submit != null) {
                     return submit.click();
@@ -1092,8 +1092,7 @@ public abstract class HtmlElement extends DomElement {
     public void focus() {
         final HtmlPage page = (HtmlPage) getPage();
         page.setFocusedElement(this);
-        final WebClient webClient = page.getWebClient();
-        if (webClient.getBrowserVersion().hasFeature(WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
+        if (hasFeature(WINDOW_ACTIVE_ELEMENT_FOCUSED)) {
             final HTMLElement jsElt = (HTMLElement) getScriptObject();
             jsElt.setActive();
         }

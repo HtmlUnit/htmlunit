@@ -55,7 +55,7 @@ public class HtmlFileInput extends HtmlInput {
         final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
         setAttribute("value", "");
-        if (page.getWebClient().getBrowserVersion().hasFeature(FILEINPUT_EMPTY_DEFAULT_VALUE)) {
+        if (hasFeature(FILEINPUT_EMPTY_DEFAULT_VALUE)) {
             setDefaultValue("");
         }
     }

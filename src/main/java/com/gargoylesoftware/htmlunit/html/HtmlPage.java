@@ -668,8 +668,7 @@ public class HtmlPage extends SgmlPage {
             if (frame) {
                 final boolean frameSrcIsNotSet = (baseUrl == WebClient.URL_ABOUT_BLANK);
                 final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
-                final boolean jsFrameUseParentUrl = getWebClient().getBrowserVersion()
-                    .hasFeature(JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW);
+                final boolean jsFrameUseParentUrl = hasFeature(JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW);
                 if (frameSrcIsNotSet || (frameSrcIsJs && jsFrameUseParentUrl)) {
                     baseUrl = ((HtmlPage) window.getTopWindow().getEnclosedPage()).getWebResponse()
                         .getWebRequest().getUrl();
@@ -1432,7 +1431,7 @@ public class HtmlPage extends SgmlPage {
         if (!getWebClient().getOptions().isJavaScriptEnabled()) {
             return;
         }
-        if (getWebClient().getBrowserVersion().hasFeature(JS_DEFERRED)) {
+        if (hasFeature(JS_DEFERRED)) {
             final HtmlElement doc = getDocumentElement();
             final List<HtmlElement> elements = doc.getHtmlElementsByTagName("script");
             for (final HtmlElement e : elements) {
@@ -1450,8 +1449,7 @@ public class HtmlPage extends SgmlPage {
      * Sets the ready state on any deferred scripts, if necessary.
      */
     private void setReadyStateOnDeferredScriptsIfNeeded() {
-        if (getWebClient().getOptions().isJavaScriptEnabled() && getWebClient().getBrowserVersion()
-                .hasFeature(JS_DEFERRED)) {
+        if (getWebClient().getOptions().isJavaScriptEnabled() && hasFeature(JS_DEFERRED)) {
             final List<HtmlElement> elements = getDocumentElement().getHtmlElementsByTagName("script");
             for (final HtmlElement e : elements) {
                 if (e instanceof HtmlScript) {
@@ -1973,7 +1971,7 @@ public class HtmlPage extends SgmlPage {
             }
 
             if (oldFocusedElement != null) {
-                if (getWebClient().getBrowserVersion().hasFeature(BLUR_BEFORE_ONCHANGE)) {
+                if (hasFeature(BLUR_BEFORE_ONCHANGE)) {
                     oldFocusedElement.fireEvent(Event.TYPE_BLUR);
                     oldFocusedElement.removeFocus();
                 }
@@ -2431,8 +2429,7 @@ public class HtmlPage extends SgmlPage {
                 else if ("http://www.w3.org/TR/html4/loose.dtd".equals(systemId)) {
                     if ("-//W3C//DTD HTML 4.01 Transitional//EN".equals(publicId)
                         || ("-//W3C//DTD HTML 4.0 Transitional//EN".equals(publicId)
-                                && getWebClient().getBrowserVersion()
-                                    .hasFeature(DOCTYPE_4_0_TRANSITIONAL_STANDARDS))) {
+                                && hasFeature(DOCTYPE_4_0_TRANSITIONAL_STANDARDS))) {
                         quirks = false;
                     }
                 }
