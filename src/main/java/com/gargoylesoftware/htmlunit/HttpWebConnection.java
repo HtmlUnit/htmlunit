@@ -742,6 +742,7 @@ public class HttpWebConnection implements WebConnection {
             for (final File file : temporaryFiles_) {
                 file.delete();
             }
+            temporaryFiles_ = null;
         }
     }
 }
