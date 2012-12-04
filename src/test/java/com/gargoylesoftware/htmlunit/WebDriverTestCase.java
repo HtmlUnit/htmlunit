@@ -76,20 +76,19 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
    browsers=hu,ff3,ff3.6,ie8
    ff3.bin=c:\\location_to_firefox.exe                [Windows]
    ff3.6.bin=/use/bin/firefox                         [Unix-like]
-   chrome15.bin=/path/to/chromedriver                 [Unix-like]
+   chrome16.bin=/path/to/chromedriver                 [Unix-like]
  * </pre>
  * The file should contain four properties: "browsers", "ff3.bin", "ff3.6.bin", and "chrome15.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
  *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ff3", "hu-ff3.6",
- *   "ff3", "ff3.6", "ie6", "ie7", "ie8", which will be used to driver real browsers,
+ *   "ff3", "ff3.6", "ie6", "ie7", "ie8", "chrome16", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
  *   <li>ff3.bin: is the location of the FF3 binary, in Windows use double back-slashes</li>
  *   <li>ff3.6.bin: is the location of the FF3.6 binary, in Windows use double back-slashes</li>
- *   <li>chrome15.bin: is the location of the ChromeDriver binary (see
- *   <a href="http://code.google.com/p/selenium/downloads/detail?name=chromedriver%20downloads.txt">
- *   WebDriver downloads</a></li>
+ *   <li>chrome16.bin: is the location of the ChromeDriver binary (see
+ *   <a href="http://code.google.com/p/chromedriver/downloads/list">Chrome Driver downloads</a></li>
  * </ul>
  * </p>
  * <p>For IE, please download <a href="http://code.google.com/p/selenium/downloads/list">IEDriverServer.exe</a>
