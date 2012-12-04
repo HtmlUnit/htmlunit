@@ -634,9 +634,9 @@ public class JavaScriptEngine {
                     stack = new Stack<Scriptable>();
                     cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
                 }
-                stack.push(scope_);
 
                 final Object response;
+                stack.push(scope_);
                 try {
                     cx.putThreadLocal(KEY_STARTING_PAGE, htmlPage_);
                     synchronized (htmlPage_) { // 2 scripts can't be executed in parallel for one page
@@ -649,6 +649,7 @@ public class JavaScriptEngine {
                 finally {
                     stack.pop();
                 }
+
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks
                 if (!holdPostponedActions_) {
@@ -681,7 +682,7 @@ public class JavaScriptEngine {
         protected abstract String getSourceCode(final Context cx);
     }
 
-    private synchronized void doProcessPostponedActions() {
+    private void doProcessPostponedActions() {
         holdPostponedActions_ = false;
 
         try {
