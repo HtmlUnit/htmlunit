@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="fix" dev="asashour">
+                Fix a potential ConcurrentModificationException, on calling WebClient.getWebWindows().
+            </action>
             <action type="fix" dev="asashour" issue="1344">
                 WebClient.closeAllWindows() to delete all temporary created big files.
             </action>
