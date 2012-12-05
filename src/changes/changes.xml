@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="add" dev="mguillem">
+                Add BrowserVersion.clone().
+            </action>
             <action type="fix" dev="asashour">
                 Fix a potential ConcurrentModificationException, on calling WebClient.getWebWindows().
             </action>

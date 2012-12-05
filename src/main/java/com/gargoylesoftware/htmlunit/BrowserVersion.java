@@ -547,4 +547,32 @@ public class BrowserVersion implements Serializable {
     public String getNickname() {
         return nickname_;
     }
+
+    /**
+     * Creates and return a copy of this object. Current instance and cloned
+     * object can be modified independently.
+     * @return a clone of this instance.
+     */
+    @Override
+    protected BrowserVersion clone() {
+        final BrowserVersion clone = new BrowserVersion(getApplicationName(), getApplicationVersion(),
+                getUserAgent(), getBrowserVersionNumeric(), getNickname(), null);
+
+        clone.setApplicationCodeName(getApplicationCodeName());
+        clone.setApplicationMinorVersion(getApplicationMinorVersion());
+        clone.setBrowserLanguage(getBrowserLanguage());
+        clone.setCpuClass(getCpuClass());
+        clone.setOnLine(isOnLine());
+        clone.setPlatform(getPlatform());
+        clone.setSystemLanguage(getSystemLanguage());
+        clone.setUserLanguage(getUserLanguage());
+
+        for (final PluginConfiguration pluginConf : getPlugins()) {
+            clone.getPlugins().add(pluginConf.clone());
+        }
+
+        clone.features_.addAll(features_);
+
+        return clone;
+    }
 }

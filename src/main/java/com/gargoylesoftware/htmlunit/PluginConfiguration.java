@@ -99,6 +99,19 @@ public class PluginConfiguration implements Serializable {
     }
 
     /**
+     * Creates and return a copy of this object. Current instance and cloned
+     * object can be modified independently.
+     * @return a clone of this instance.
+     */
+    @Override
+    public PluginConfiguration clone() {
+        final PluginConfiguration clone = new PluginConfiguration(getName(), getDescription(), getFilename());
+        clone.getMimeTypes().addAll(getMimeTypes());
+
+        return clone;
+    }
+
+    /**
      * Holds information about a single mime type associated with a plugin.
      */
     public static class MimeType implements Serializable {
