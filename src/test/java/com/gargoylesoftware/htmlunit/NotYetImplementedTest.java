@@ -53,7 +53,7 @@ public class NotYetImplementedTest {
                 if (file.getName().endsWith(".java") && !"SimpleWebTestCase.java".equals(file.getName())
                         && !"NotYetImplementedTest.java".equals(file.getName())
                         && !"CodeStyleTest.java".equals(file.getName())) {
-                    final List<String> lines = CodeStyleTest.getLines(file);
+                    final List<String> lines = FileUtils.readLines(file);
                     final String relativePath = file.getAbsolutePath().substring(
                         new File(".").getAbsolutePath().length() - 1).replace('\\', '/');
                     process(lines, relativePath);

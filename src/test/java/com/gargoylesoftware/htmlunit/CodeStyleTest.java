@@ -16,9 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static org.junit.Assert.fail;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,6 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.junit.After;
@@ -99,7 +98,7 @@ public class CodeStyleTest {
                 process(file);
             }
             else if (file.getName().endsWith(".java")) {
-                final List<String> lines = getLines(file);
+                final List<String> lines = FileUtils.readLines(file);
                 final String relativePath = file.getAbsolutePath().substring(
                                 new File(".").getAbsolutePath().length() - 1);
                 openingCurlyBracket(lines, relativePath);
@@ -257,23 +256,6 @@ public class CodeStyleTest {
     }
 
     /**
-     * Reads the given file as lines.
-     * @param file file to read
-     * @return the list of lines
-     * @throws IOException if an error occurs
-     */
-    static List<String> getLines(final File file) throws IOException {
-        final List<String> rv = new ArrayList<String>();
-        final BufferedReader reader = new BufferedReader(new FileReader(file));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            rv.add(line);
-        }
-        reader.close();
-        return rv;
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -294,7 +276,7 @@ public class CodeStyleTest {
             }
             else {
                 if (file.getName().endsWith(".xml")) {
-                    final List<String> lines = getLines(file);
+                    final List<String> lines = FileUtils.readLines(file);
                     final String relativePath = file.getAbsolutePath().substring(
                         new File(".").getAbsolutePath().length() - 1);
                     mixedIndentation(lines, relativePath);
@@ -348,7 +330,7 @@ public class CodeStyleTest {
      * Checks the year in LICENSE.txt.
      */
     private void licenseYear() throws IOException {
-        final List<String> lines = getLines(new File("LICENSE.txt"));
+        final List<String> lines = FileUtils.readLines(new File("LICENSE.txt"));
         if (!lines.get(1).contains("Copyright (c) 2002-" + Calendar.getInstance().get(Calendar.YEAR))) {
             addFailure("Incorrect year in LICENSE.txt");
         }
@@ -358,7 +340,8 @@ public class CodeStyleTest {
      * Checks the year in the {@link Version}.
      */
     private void versionYear() throws IOException {
-        final List<String> lines = getLines(new File("src/main/java/com/gargoylesoftware/htmlunit/Version.java"));
+        final List<String> lines =
+                FileUtils.readLines(new File("src/main/java/com/gargoylesoftware/htmlunit/Version.java"));
         for (final String line : lines) {
             if (line.contains("return \"Copyright (c) 2002-" + Calendar.getInstance().get(Calendar.YEAR))) {
                 return;
