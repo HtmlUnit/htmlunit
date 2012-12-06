@@ -67,6 +67,7 @@ public interface DownloadedContent extends Serializable {
          */
         public OnFile(final File file, final boolean temporary) {
             file_ = file;
+            temporary_ = temporary;
         }
 
         public InputStream getInputStream() throws FileNotFoundException {
