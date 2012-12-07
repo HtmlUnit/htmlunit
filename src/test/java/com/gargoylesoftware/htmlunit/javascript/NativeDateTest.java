@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class NativeDateTest extends WebDriverTestCase {
@@ -127,4 +128,23 @@ public class NativeDateTest extends WebDriverTestCase {
 
         return html;
     }
+
+    /**
+     * Test for bug <a href="https://sourceforge.net/p/htmlunit/bugs/1467/">1467</a>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Saturday, January 01, 2000")
+    public void toLocaleDateString() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "    alert(new Date(2000, 0, 1).toLocaleDateString());\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
