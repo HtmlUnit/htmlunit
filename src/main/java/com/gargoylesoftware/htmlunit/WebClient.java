@@ -428,28 +428,26 @@ public class WebClient implements Serializable {
             oldPage.cleanUp();
         }
         Page newPage = null;
-        synchronized (windows_) {
-            if (windows_.contains(webWindow) || getBrowserVersion().hasFeature(GENERATED_150)) {
-                newPage = pageCreator_.createPage(webResponse, webWindow);
+        if (windows_.contains(webWindow) || getBrowserVersion().hasFeature(GENERATED_150)) {
+            newPage = pageCreator_.createPage(webResponse, webWindow);
 
-                if (windows_.contains(webWindow)) {
-                    fireWindowContentChanged(new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage));
+            if (windows_.contains(webWindow)) {
+                fireWindowContentChanged(new WebWindowEvent(webWindow, WebWindowEvent.CHANGE, oldPage, newPage));
 
-                    // The page being loaded may already have been replaced by another page via JavaScript code.
-                    if (webWindow.getEnclosedPage() == newPage) {
-                        newPage.initialize();
-                        // hack: onload should be fired the same way for all type of pages
-                        // here is a hack to handle non HTML pages
-                        if (webWindow instanceof FrameWindow && !(newPage instanceof HtmlPage)) {
-                            final FrameWindow fw = (FrameWindow) webWindow;
-                            final BaseFrameElement frame = fw.getFrameElement();
-                            if (frame.hasEventHandlers("onload")) {
-                                if (LOG.isDebugEnabled()) {
-                                    LOG.debug("Executing onload handler for " + frame);
-                                }
-                                final Event event = new Event(frame, Event.TYPE_LOAD);
-                                ((Node) frame.getScriptObject()).executeEvent(event);
+                // The page being loaded may already have been replaced by another page via JavaScript code.
+                if (webWindow.getEnclosedPage() == newPage) {
+                    newPage.initialize();
+                    // hack: onload should be fired the same way for all type of pages
+                    // here is a hack to handle non HTML pages
+                    if (webWindow instanceof FrameWindow && !(newPage instanceof HtmlPage)) {
+                        final FrameWindow fw = (FrameWindow) webWindow;
+                        final BaseFrameElement frame = fw.getFrameElement();
+                        if (frame.hasEventHandlers("onload")) {
+                            if (LOG.isDebugEnabled()) {
+                                LOG.debug("Executing onload handler for " + frame);
                             }
+                            final Event event = new Event(frame, Event.TYPE_LOAD);
+                            ((Node) frame.getScriptObject()).executeEvent(event);
                         }
                     }
                 }
@@ -1156,11 +1154,9 @@ public class WebClient implements Serializable {
     public WebWindow getWebWindowByName(final String name) throws WebWindowNotFoundException {
         WebAssert.notNull("name", name);
 
-        synchronized (windows_) {
-            for (final WebWindow webWindow : windows_) {
-                if (webWindow.getName().equals(name)) {
-                    return webWindow;
-                }
+        for (final WebWindow webWindow : windows_) {
+            if (webWindow.getName().equals(name)) {
+                return webWindow;
             }
         }
 
@@ -1211,9 +1207,7 @@ public class WebClient implements Serializable {
      */
     public void registerWebWindow(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
-        synchronized (windows_) {
-            windows_.add(webWindow);
-        }
+        windows_.add(webWindow);
     }
 
     /**
@@ -1225,9 +1219,7 @@ public class WebClient implements Serializable {
      */
     public void deregisterWebWindow(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
-        synchronized (windows_) {
-            windows_.remove(webWindow);
-        }
+        windows_.remove(webWindow);
         fireWindowClosed(new WebWindowEvent(webWindow, WebWindowEvent.CLOSE, webWindow.getEnclosedPage(), null));
     }
 
@@ -2003,20 +1995,18 @@ public class WebClient implements Serializable {
     public int waitForBackgroundJavaScript(final long timeoutMillis) {
         int count = 0;
         final long endTime = System.currentTimeMillis() + timeoutMillis;
-        synchronized (windows_) {
-            for (Iterator<WebWindow> i = windows_.iterator(); i.hasNext();) {
-                final WebWindow window;
-                try {
-                    window = i.next();
-                }
-                catch (final ConcurrentModificationException e) {
-                    i = windows_.iterator();
-                    count = 0;
-                    continue;
-                }
-                final long newTimeout = endTime - System.currentTimeMillis();
-                count += window.getJobManager().waitForJobs(newTimeout);
+        for (Iterator<WebWindow> i = windows_.iterator(); i.hasNext();) {
+            final WebWindow window;
+            try {
+                window = i.next();
             }
+            catch (final ConcurrentModificationException e) {
+                i = windows_.iterator();
+                count = 0;
+                continue;
+            }
+            final long newTimeout = endTime - System.currentTimeMillis();
+            count += window.getJobManager().waitForJobs(newTimeout);
         }
         if (count != getAggregateJobCount()) {
             final long newTimeout = endTime - System.currentTimeMillis();
@@ -2052,20 +2042,18 @@ public class WebClient implements Serializable {
     public int waitForBackgroundJavaScriptStartingBefore(final long delayMillis) {
         int count = 0;
         final long endTime = System.currentTimeMillis() + delayMillis;
-        synchronized (windows_) {
-            for (Iterator<WebWindow> i = windows_.iterator(); i.hasNext();) {
-                final WebWindow window;
-                try {
-                    window = i.next();
-                }
-                catch (final ConcurrentModificationException e) {
-                    i = windows_.iterator();
-                    count = 0;
-                    continue;
-                }
-                final long newDelay = endTime - System.currentTimeMillis();
-                count += window.getJobManager().waitForJobsStartingBefore(newDelay);
+        for (Iterator<WebWindow> i = windows_.iterator(); i.hasNext();) {
+            final WebWindow window;
+            try {
+                window = i.next();
             }
+            catch (final ConcurrentModificationException e) {
+                i = windows_.iterator();
+                count = 0;
+                continue;
+            }
+            final long newDelay = endTime - System.currentTimeMillis();
+            count += window.getJobManager().waitForJobsStartingBefore(newDelay);
         }
         if (count != getAggregateJobCount()) {
             final long newDelay = endTime - System.currentTimeMillis();
@@ -2100,19 +2088,17 @@ public class WebClient implements Serializable {
      */
     private int getAggregateJobCount() {
         int count = 0;
-        synchronized (windows_) {
-            for (Iterator<WebWindow> i = windows_.iterator(); i.hasNext();) {
-                final WebWindow window;
-                try {
-                    window = i.next();
-                }
-                catch (final ConcurrentModificationException e) {
-                    i = windows_.iterator();
-                    count = 0;
-                    continue;
-                }
-                count += window.getJobManager().getJobCount();
+        for (Iterator<WebWindow> i = windows_.iterator(); i.hasNext();) {
+            final WebWindow window;
+            try {
+                window = i.next();
             }
+            catch (final ConcurrentModificationException e) {
+                i = windows_.iterator();
+                count = 0;
+                continue;
+            }
+            count += window.getJobManager().getJobCount();
         }
         return count;
     }
