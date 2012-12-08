@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptF
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.StringCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -320,6 +321,9 @@ public class JavaScriptEngine {
             makeConstWritable(window, "undefined", "NaN", "Infinity");
         }
 
+        final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Date");
+        datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString"},
+                DateCustom.class, ScriptableObject.EMPTY);
         window.setPrototypes(prototypes);
         window.initialize(webWindow);
     }
