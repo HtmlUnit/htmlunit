@@ -116,11 +116,21 @@ public class BrowserVersion implements Serializable {
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.28) Gecko/20120306 Firefox/3.6.28",
         (float) 3.6, "FF3.6", null);
 
-    /** Firefox Warning: experimental!!! */
+    /**
+     * Firefox 10. Warning: experimental!!!.
+     * @deprecated as of 2.12
+     */
+    @Deprecated
     public static final BrowserVersion FIREFOX_10 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; rv:10.0.11) Gecko/20100101 Firefox/10.0.11",
         (float) 10.0, "FF10", null);
+
+    /** Firefox 17 ESR. Work In Progress!!! */
+    public static final BrowserVersion FIREFOX_17 = new BrowserVersion(
+        NETSCAPE, "5.0 (Windows)",
+        "Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0",
+        (float) 17.0, "FF17", null);
 
     /**
      * Internet Explorer 6.
@@ -145,6 +155,11 @@ public class BrowserVersion implements Serializable {
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 8.0; Windows NT 6.0)",
         "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)", 8, "IE8", null);
 
+    /** Internet Explorer 9. Work In Progress!!! */
+    public static final BrowserVersion INTERNET_EXPLORER_9 = new BrowserVersion(
+        INTERNET_EXPLORER, "5.0 (compatible; MSIE 9.0; Windows NT 6.1)",
+        "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1)", 9, "IE9", null);
+
     /** Chrome 16. Warning: highly experimental!!! */
     public static final BrowserVersion CHROME_16 = new BrowserVersion(
         "Netscape", "5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.7"
@@ -161,9 +176,11 @@ public class BrowserVersion implements Serializable {
         INTERNET_EXPLORER_6.initDefaultFeatures();
         INTERNET_EXPLORER_7.initDefaultFeatures();
         INTERNET_EXPLORER_8.initDefaultFeatures();
+        INTERNET_EXPLORER_9.initDefaultFeatures();
 
         FIREFOX_3_6.initDefaultFeatures();
         FIREFOX_10.initDefaultFeatures();
+        FIREFOX_17.initDefaultFeatures();
 
         final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
             "Shockwave Flash 9.0 r31", "libflashplayer.so");
@@ -171,6 +188,7 @@ public class BrowserVersion implements Serializable {
             "Shockwave Flash", "swf"));
         FIREFOX_3_6.getPlugins().add(flash);
         FIREFOX_10.getPlugins().add(flash);
+        FIREFOX_17.getPlugins().add(flash);
 
         CHROME_16.initDefaultFeatures();
         CHROME_16.setApplicationCodeName("Mozilla");
@@ -309,7 +327,7 @@ public class BrowserVersion implements Serializable {
 
     /**
      * Returns <tt>true</tt> if this <tt>BrowserVersion</tt> instance represents some
-     * version of Firefox like {@link #FIREFOX_3_6} or {@link #FIREFOX_10}.
+     * version of Firefox like {@link #FIREFOX_3_6} or {@link #FIREFOX_17}.
      * @return whether or not this version is a version of a Firefox browser
      */
     public final boolean isFirefox() {

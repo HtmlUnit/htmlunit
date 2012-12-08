@@ -81,7 +81,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * The file should contain four properties: "browsers", "ff3.bin", "ff3.6.bin", and "chrome15.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
- *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ff3", "hu-ff3.6",
+ *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ff3", "hu-ff3.6", "hu-ff17",
  *   "ff3", "ff3.6", "ie6", "ie7", "ie8", "chrome16", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
@@ -106,6 +106,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static List<String> BROWSERS_PROPERTIES_;
     private static String FF3_6_BIN_;
     private static String FF10_BIN_;
+    private static String FF17_BIN_;
     private static String CHROME16_BIN_;
 
     /** The driver cache. */
@@ -143,6 +144,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                             .replaceAll(" ", "").toLowerCase().split(","));
                     FF3_6_BIN_ = properties.getProperty("ff3.6.bin");
                     FF10_BIN_ = properties.getProperty("ff10.bin");
+                    FF17_BIN_ = properties.getProperty("ff17.bin");
                     CHROME16_BIN_ = properties.getProperty("chrome16.bin");
                 }
             }
@@ -245,6 +247,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             else if (getBrowserVersion() == BrowserVersion.FIREFOX_10) {
                 ffBinary = FF10_BIN_;
+            }
+            else if (getBrowserVersion() == BrowserVersion.FIREFOX_17) {
+                ffBinary = FF17_BIN_;
             }
             if (ffBinary != null) {
                 return new FirefoxDriver(new FirefoxBinary(new File(ffBinary)), new FirefoxProfile());

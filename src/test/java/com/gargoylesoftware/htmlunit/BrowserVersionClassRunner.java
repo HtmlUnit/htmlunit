@@ -78,11 +78,17 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
                     expectedAlerts = firstDefined(alerts.IE8(), alerts.IE(), alerts.DEFAULT());
                 }
+                else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_9) {
+                    expectedAlerts = firstDefined(alerts.IE9(), alerts.IE(), alerts.DEFAULT());
+                }
                 else if (browserVersion_ == BrowserVersion.FIREFOX_3_6) {
                     expectedAlerts = firstDefined(alerts.FF3_6(), alerts.FF(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX_10) {
                     expectedAlerts = firstDefined(alerts.FF10(), alerts.FF(), alerts.DEFAULT());
+                }
+                else if (browserVersion_ == BrowserVersion.FIREFOX_17) {
+                    expectedAlerts = firstDefined(alerts.FF17(), alerts.FF(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.CHROME_16) {
                     expectedAlerts = firstDefined(alerts.CHROME16(), alerts.CHROME(), alerts.DEFAULT());
@@ -240,6 +246,12 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     }
                     break;
 
+                case IE9:
+                    if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_9) {
+                        return true;
+                    }
+                    break;
+
                 case FF:
                     if (browserVersion_.isFirefox()) {
                         return true;
@@ -254,6 +266,12 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
                 case FF10:
                     if (browserVersion_ == BrowserVersion.FIREFOX_10) {
+                        return true;
+                    }
+                    break;
+
+                case FF17:
+                    if (browserVersion_ == BrowserVersion.FIREFOX_17) {
                         return true;
                     }
                     break;

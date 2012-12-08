@@ -73,6 +73,9 @@ public class BrowserRunner extends Suite {
             if (/* browsers.contains("hu") ||*/ browsers.contains("hu-ff10")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_10, false));
             }
+            if (/* browsers.contains("hu") ||*/ browsers.contains("hu-ff17")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_17, false));
+            }
             if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie6")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
             }
@@ -81,6 +84,9 @@ public class BrowserRunner extends Suite {
             }
             if (browsers.contains("hu") || browsers.contains("hu-ie8")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, false));
+            }
+            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie9")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_9, false));
             }
             // in a first time, chrome can be specified but is not integrated in the default run
             if (/*browsers.contains("hu") || */browsers.contains("hu-chrome16")) {
@@ -168,6 +174,9 @@ public class BrowserRunner extends Suite {
         /** Internet Explorer 8. */
         IE8,
 
+        /** Internet Explorer 9. */
+        IE9,
+
         /** All versions of Firefox. */
         FF,
 
@@ -176,6 +185,9 @@ public class BrowserRunner extends Suite {
 
         /** Firefox 10. */
         FF10,
+
+        /** Firefox 17. */
+        FF17,
 
         /**
          * Not Browser-specific, it will run only once. Don't use this with other Browsers.
@@ -223,6 +235,9 @@ public class BrowserRunner extends Suite {
         /** Alerts for Internet Explorer 8. If not defined, {@link #IE()} is used. */
         String[] IE8() default {EMPTY_DEFAULT };
 
+        /** Alerts for Internet Explorer 9. If not defined, {@link #IE()} is used. */
+        String[] IE9() default {EMPTY_DEFAULT };
+
         /** Alerts for any Firefox, it can be overridden by specific FF version. */
         String[] FF() default {EMPTY_DEFAULT };
 
@@ -231,6 +246,9 @@ public class BrowserRunner extends Suite {
 
         /** Alerts for Firefox 10. If not defined, {@link #FF()} is used. */
         String[] FF10() default {EMPTY_DEFAULT };
+
+        /** Alerts for Firefox 17. If not defined, {@link #FF()} is used. */
+        String[] FF17() default {EMPTY_DEFAULT };
 
         /** Alerts for any Chrome If not defined, it can be overridden by a specific chrome version. */
         String[] CHROME() default{EMPTY_DEFAULT };
