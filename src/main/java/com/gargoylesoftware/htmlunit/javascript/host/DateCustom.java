@@ -18,6 +18,7 @@ import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -47,7 +48,7 @@ public final class DateCustom {
     public static String toLocaleDateString(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         if (LOCAL_DATE_FORMAT_ == null) {
-            LOCAL_DATE_FORMAT_ = new SimpleDateFormat("EEEE, MMMM dd, yyyy");
+            LOCAL_DATE_FORMAT_ = new SimpleDateFormat("EEEE, MMMM dd, yyyy", Locale.US);
         }
         initDateField(thisObj);
         try {
