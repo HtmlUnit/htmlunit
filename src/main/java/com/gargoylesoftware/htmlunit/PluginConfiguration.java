@@ -26,7 +26,7 @@ import java.util.Set;
  * @author Marc Guillemot
  * @see <a href="http://www.xulplanet.com/references/objref/Plugin.html">XUL Planet Documentation</a>
  */
-public class PluginConfiguration implements Serializable {
+public class PluginConfiguration implements Serializable, Cloneable {
 
     private final String description_;
     private final String filename_;
