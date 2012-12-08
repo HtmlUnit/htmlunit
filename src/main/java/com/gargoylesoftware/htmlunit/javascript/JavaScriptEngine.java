@@ -323,7 +323,7 @@ public class JavaScriptEngine {
 
         final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Date");
         datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString"},
-                DateCustom.class, ScriptableObject.EMPTY);
+                DateCustom.class, ScriptableObject.DONTENUM);
         window.setPrototypes(prototypes);
         window.initialize(webWindow);
     }

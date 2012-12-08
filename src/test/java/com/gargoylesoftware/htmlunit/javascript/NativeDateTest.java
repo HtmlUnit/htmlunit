@@ -147,4 +147,22 @@ public class NativeDateTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void toLocaleDateString_enumerable() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "    var date = new Date(2000, 0, 1);\n"
+            + "    for (var x in date) {\n"
+            + "      alert(x);\n"
+            + "    }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
