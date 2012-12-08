@@ -73,10 +73,10 @@ public class BrowserRunner extends Suite {
             if (/* browsers.contains("hu") ||*/ browsers.contains("hu-ff10")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_10, false));
             }
-            if (browsers.contains("hu") || browsers.contains("hu-ie6")) {
+            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie6")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, false));
             }
-            if (browsers.contains("hu") || browsers.contains("hu-ie7")) {
+            if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie7")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_7, false));
             }
             if (browsers.contains("hu") || browsers.contains("hu-ie8")) {

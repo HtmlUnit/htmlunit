@@ -122,12 +122,20 @@ public class BrowserVersion implements Serializable {
         "Mozilla/5.0 (Windows NT 6.1; rv:10.0.11) Gecko/20100101 Firefox/10.0.11",
         (float) 10.0, "FF10", null);
 
-    /** Internet Explorer 6. */
+    /**
+     * Internet Explorer 6.
+     * @deprecated as of 2.12
+     */
+    @Deprecated
     public static final BrowserVersion INTERNET_EXPLORER_6 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 6.0b; Windows 98)",
         "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)", 6, "IE6", null);
 
-    /** Internet Explorer 7. */
+    /**
+     * Internet Explorer 7.
+     * @deprecated as of 2.12
+     */
+    @Deprecated
     public static final BrowserVersion INTERNET_EXPLORER_7 = new BrowserVersion(
         INTERNET_EXPLORER, "4.0 (compatible; MSIE 7.0; Windows NT 5.1)",
         "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)", 7, "IE7", null);
@@ -146,7 +154,7 @@ public class BrowserVersion implements Serializable {
         16, "Chrome16", null);
 
     /** The default browser version. */
-    private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_7;
+    private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_8;
 
     /** Register plugins for the browser versions. */
     static {
