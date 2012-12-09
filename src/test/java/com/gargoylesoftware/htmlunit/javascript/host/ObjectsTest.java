@@ -45,17 +45,17 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 @RunWith(Parameterized.class)
 public class ObjectsTest extends SimpleWebTestCase {
 
-    private static List<String> IE6_;
-    private static List<String> IE7_;
     private static List<String> IE8_;
+    private static List<String> IE9_;
     private static List<String> FF3_6_;
     private static List<String> FF10_;
+    private static List<String> FF17_;
 
-    private static List<String> IE6_SIMULATED_;
-    private static List<String> IE7_SIMULATED_;
     private static List<String> IE8_SIMULATED_;
+    private static List<String> IE9_SIMULATED_;
     private static List<String> FF3_6_SIMULATED_;
     private static List<String> FF10_SIMULATED_;
+    private static List<String> FF17_SIMULATED_;
 
     private final String name_;
     private final BrowserVersion browserVersion_;
@@ -67,32 +67,32 @@ public class ObjectsTest extends SimpleWebTestCase {
      */
     @Parameters
     public static Collection<Object[]> data() throws Exception {
-        IE6_ = getObjects(BrowserVersion.INTERNET_EXPLORER_6);
-        IE7_ = getObjects(BrowserVersion.INTERNET_EXPLORER_7);
         IE8_ = getObjects(BrowserVersion.INTERNET_EXPLORER_8);
+        IE9_ = getObjects(BrowserVersion.INTERNET_EXPLORER_9);
         FF3_6_ = getObjects(BrowserVersion.FIREFOX_3_6);
         FF10_ = getObjects(BrowserVersion.FIREFOX_10);
-        Assert.assertEquals(IE6_.size(), IE7_.size());
-        Assert.assertEquals(IE6_.size(), IE8_.size());
-        Assert.assertEquals(IE6_.size(), FF3_6_.size());
-        Assert.assertEquals(IE6_.size(), FF10_.size());
-        IE6_SIMULATED_ = getSimulatedObjects(BrowserVersion.INTERNET_EXPLORER_6);
-        IE7_SIMULATED_ = getSimulatedObjects(BrowserVersion.INTERNET_EXPLORER_7);
+        FF17_ = getObjects(BrowserVersion.FIREFOX_17);
+        Assert.assertEquals(IE8_.size(), IE9_.size());
+        Assert.assertEquals(IE8_.size(), FF3_6_.size());
+        Assert.assertEquals(IE8_.size(), FF10_.size());
+        Assert.assertEquals(IE8_.size(), FF17_.size());
         IE8_SIMULATED_ = getSimulatedObjects(BrowserVersion.INTERNET_EXPLORER_8);
+        IE9_SIMULATED_ = getSimulatedObjects(BrowserVersion.INTERNET_EXPLORER_9);
         FF3_6_SIMULATED_ = getSimulatedObjects(BrowserVersion.FIREFOX_3_6);
         FF10_SIMULATED_ = getSimulatedObjects(BrowserVersion.FIREFOX_10);
-        Assert.assertEquals(IE6_SIMULATED_.size(), IE7_SIMULATED_.size());
-        Assert.assertEquals(IE6_SIMULATED_.size(), IE8_SIMULATED_.size());
-        Assert.assertEquals(IE6_SIMULATED_.size(), FF3_6_SIMULATED_.size());
-        Assert.assertEquals(IE6_SIMULATED_.size(), FF10_SIMULATED_.size());
+        FF17_SIMULATED_ = getSimulatedObjects(BrowserVersion.FIREFOX_17);
+        Assert.assertEquals(IE8_SIMULATED_.size(), IE9_SIMULATED_.size());
+        Assert.assertEquals(IE8_SIMULATED_.size(), FF3_6_SIMULATED_.size());
+        Assert.assertEquals(IE8_SIMULATED_.size(), FF10_SIMULATED_.size());
+        Assert.assertEquals(IE8_SIMULATED_.size(), FF17_SIMULATED_.size());
         final Collection<Object[]> list = new ArrayList<Object[]>();
-        for (final String line : IE6_) {
+        for (final String line : IE8_) {
             final String name = line.substring(0, line.indexOf(':'));
-            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_6});
-            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_7});
-            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
+//            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_8});
+//            list.add(new Object[] {name, BrowserVersion.INTERNET_EXPLORER_9});
             list.add(new Object[] {name, BrowserVersion.FIREFOX_3_6});
-            // list.add(new Object[] {name, BrowserVersion.FIREFOX_10});
+//            list.add(new Object[] {name, BrowserVersion.FIREFOX_10});
+//            list.add(new Object[] {name, BrowserVersion.FIREFOX_17});
         }
         return list;
     }
@@ -128,17 +128,13 @@ public class ObjectsTest extends SimpleWebTestCase {
     public void test() {
         final List<String> realList;
         final List<String> simulatedList;
-        if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_6) {
-            realList = IE6_;
-            simulatedList = IE6_SIMULATED_;
-        }
-        else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_7) {
-            realList = IE7_;
-            simulatedList = IE7_SIMULATED_;
-        }
-        else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
+        if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_8) {
             realList = IE8_;
             simulatedList = IE8_SIMULATED_;
+        }
+        else if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER_9) {
+            realList = IE9_;
+            simulatedList = IE9_SIMULATED_;
         }
         else if (browserVersion_ == BrowserVersion.FIREFOX_3_6) {
             realList = FF3_6_;
@@ -147,6 +143,10 @@ public class ObjectsTest extends SimpleWebTestCase {
         else if (browserVersion_ == BrowserVersion.FIREFOX_10) {
             realList = FF10_;
             simulatedList = FF10_SIMULATED_;
+        }
+        else if (browserVersion_ == BrowserVersion.FIREFOX_17) {
+            realList = FF17_;
+            simulatedList = FF17_SIMULATED_;
         }
         else {
             fail("Unknown BrowserVersion " + browserVersion_);
