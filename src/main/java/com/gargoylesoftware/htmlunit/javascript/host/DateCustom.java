@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_LOCATE_TIME_24;
+
 import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -50,20 +52,38 @@ public final class DateCustom {
         if (LOCAL_DATE_FORMAT_ == null) {
             LOCAL_DATE_FORMAT_ = new SimpleDateFormat("EEEE, MMMM dd, yyyy", Locale.US);
         }
-        initDateField(thisObj);
-        try {
-            final double value = (Double) DATE_FIELD_.get(thisObj);
-            return LOCAL_DATE_FORMAT_.format(new Date((long) value));
-        }
-        catch (final Exception e) {
-            throw Context.throwAsScriptRuntimeEx(e);
-        }
+        return LOCAL_DATE_FORMAT_.format(new Date(getDateValue(thisObj)));
     }
 
-    private static void initDateField(final Scriptable thisObj) {
+    /**
+     * Converts a date to a string, returning the "time" portion using the current locale's conventions.
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     * @return converted string
+     */
+    public static String toLocaleTimeString(
+            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+        final String formatString;
+        if (((Window) thisObj.getParentScope()).getWebWindow().getWebClient().getBrowserVersion()
+                .hasFeature(JS_DATE_LOCATE_TIME_24)) {
+            formatString = "HH:mm:ss";
+        }
+        else {
+            formatString = "hh:mm:ss a";
+        }
+        final DateFormat format =  new SimpleDateFormat(formatString, Locale.US);
+        return format.format(new Date(getDateValue(thisObj)));
+    }
+
+    private static long getDateValue(final Scriptable thisObj) {
         try {
-            DATE_FIELD_ = thisObj.getClass().getDeclaredField("date");
-            DATE_FIELD_.setAccessible(true);
+            if (DATE_FIELD_ == null) {
+                DATE_FIELD_ = thisObj.getClass().getDeclaredField("date");
+                DATE_FIELD_.setAccessible(true);
+            }
+            return ((Double) DATE_FIELD_.get(thisObj)).longValue();
         }
         catch (final Exception e) {
             throw Context.throwAsScriptRuntimeEx(e);

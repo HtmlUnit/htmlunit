@@ -88,7 +88,6 @@ public class BrowserRunner extends Suite {
             if (/*browsers.contains("hu") ||*/ browsers.contains("hu-ie9")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_9, false));
             }
-            // in a first time, chrome can be specified but is not integrated in the default run
             if (/*browsers.contains("hu") || */browsers.contains("hu-chrome")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
             }
@@ -100,6 +99,9 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ff10")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_10, true));
                 }
+                if (browsers.contains("ff17")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_17, true));
+                }
                 if (browsers.contains("ie6")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_6, true));
                 }
@@ -109,8 +111,11 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ie8")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_8, true));
                 }
-                if (browsers.contains("chrome16")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME_16, true));
+                if (browsers.contains("ie9")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_9, true));
+                }
+                if (browsers.contains("chrome")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, true));
                 }
             }
         }

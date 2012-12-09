@@ -151,7 +151,7 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void toLocaleDateString_enumerable() throws Exception {
+    public void enumerable() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -165,4 +165,22 @@ public class NativeDateTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "12:00:00 AM", CHROME = "00:00:00")
+    public void toLocaleTimeString() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "    alert(new Date(2000, 0, 1).toLocaleTimeString());\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

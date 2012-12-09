@@ -760,6 +760,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     JS_CONSTRUCTOR,
 
+    /** Is Date.toLocaleTimeString() in 24-hour format. */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_DATE_LOCATE_TIME_24,
+
     /** */
     @BrowserFeature(@WebBrowser(IE))
     JS_DEFERRED,
