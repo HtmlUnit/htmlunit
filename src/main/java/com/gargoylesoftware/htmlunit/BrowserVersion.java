@@ -160,13 +160,25 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER, "5.0 (compatible; MSIE 9.0; Windows NT 6.1)",
         "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1)", 9, "IE9", null);
 
-    /** Chrome 16. Warning: highly experimental!!! */
+    /**
+     * Chrome 16.
+     * @deprecated as of 2.12
+     */
+    @Deprecated
     public static final BrowserVersion CHROME_16 = new BrowserVersion(
         "Netscape", "5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.7"
         + " (KHTML, like Gecko) Chrome/16.0.912.63 Safari/535.7",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/535.7"
         + " (KHTML, like Gecko) Chrome/16.0.912.63 Safari/535.7",
         16, "Chrome16", null);
+
+    /** Latest Chrome. Work In Progress!!! */
+    public static final BrowserVersion CHROME = new BrowserVersion(
+        "Netscape", "5.0 (Windows NT 6.1) AppleWebKit/537.11"
+        + " (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11",
+        "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11"
+        + " (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11",
+        23, "Chrome", null);
 
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = INTERNET_EXPLORER_8;
@@ -195,6 +207,11 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME_16.setPlatform("MacIntel");
         CHROME_16.setCpuClass(null);
         CHROME_16.setBrowserLanguage("undefined");
+        CHROME.initDefaultFeatures();
+        CHROME.setApplicationCodeName("Mozilla");
+        CHROME.setPlatform("MacIntel");
+        CHROME.setCpuClass(null);
+        CHROME.setBrowserLanguage("undefined");
         // there are other issues with Chrome; a different productSub, etc.
     }
 

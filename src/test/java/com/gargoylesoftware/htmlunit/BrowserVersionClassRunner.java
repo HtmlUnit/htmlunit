@@ -90,8 +90,8 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 else if (browserVersion_ == BrowserVersion.FIREFOX_17) {
                     expectedAlerts = firstDefined(alerts.FF17(), alerts.FF(), alerts.DEFAULT());
                 }
-                else if (browserVersion_ == BrowserVersion.CHROME_16) {
-                    expectedAlerts = firstDefined(alerts.CHROME16(), alerts.CHROME(), alerts.DEFAULT());
+                else if (browserVersion_ == BrowserVersion.CHROME) {
+                    expectedAlerts = firstDefined(alerts.CHROME(), alerts.DEFAULT());
                 }
             }
         }
@@ -278,12 +278,6 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
                 case CHROME:
                     if (browserVersion_.isChrome()) {
-                        return true;
-                    }
-                    break;
-
-                case CHROME16:
-                    if (browserVersion_ == BrowserVersion.CHROME_16) {
                         return true;
                     }
                     break;

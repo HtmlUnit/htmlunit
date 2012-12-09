@@ -89,8 +89,8 @@ public class BrowserRunner extends Suite {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER_9, false));
             }
             // in a first time, chrome can be specified but is not integrated in the default run
-            if (/*browsers.contains("hu") || */browsers.contains("hu-chrome16")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME_16, false));
+            if (/*browsers.contains("hu") || */browsers.contains("hu-chrome")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
             }
 
             if (WebDriverTestCase.class.isAssignableFrom(klass)) {
@@ -156,11 +156,8 @@ public class BrowserRunner extends Suite {
      * @see Browsers
      */
     public enum Browser {
-        /** all versions of Chrome. */
+        /** Latest version of Chrome. */
         CHROME,
-
-        /** Chrome 16. */
-        CHROME16,
 
         /** All versions of Internet Explorer. */
         IE,
@@ -250,11 +247,8 @@ public class BrowserRunner extends Suite {
         /** Alerts for Firefox 17. If not defined, {@link #FF()} is used. */
         String[] FF17() default {EMPTY_DEFAULT };
 
-        /** Alerts for any Chrome If not defined, it can be overridden by a specific chrome version. */
+        /** Alerts for latest Chrome. */
         String[] CHROME() default{EMPTY_DEFAULT };
-
-        /** Alerts for Chrome 16. If not defined, {@link #CHROME()} is used. */
-        String[] CHROME16() default{EMPTY_DEFAULT };
 
         /** The default alerts, if nothing more specific is defined. */
         String[] DEFAULT() default{EMPTY_DEFAULT };

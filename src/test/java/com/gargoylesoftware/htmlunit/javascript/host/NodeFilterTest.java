@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME16;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,7 +61,7 @@ public class NodeFilterTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(CHROME16)
+    @NotYetImplemented(CHROME)
     @Alerts(DEFAULT = "-1", FF3_6 = "4294967295", FF10 = "4294967295", IE = "exception")
     public void constants_SHOW_ALL() throws Exception {
         final String html = "<html><head>\n"

@@ -76,18 +76,18 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
    browsers=hu,ff3,ff3.6,ie8
    ff3.bin=c:\\location_to_firefox.exe                [Windows]
    ff3.6.bin=/use/bin/firefox                         [Unix-like]
-   chrome16.bin=/path/to/chromedriver                 [Unix-like]
+   chrome.bin=/path/to/chromedriver                 [Unix-like]
  * </pre>
- * The file should contain four properties: "browsers", "ff3.bin", "ff3.6.bin", and "chrome15.bin".
+ * The file should contain four properties: "browsers", "ff3.bin", "ff3.6.bin", and "chrome.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
  *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ff3", "hu-ff3.6", "hu-ff17",
- *   "ff3", "ff3.6", "ie6", "ie7", "ie8", "chrome16", which will be used to driver real browsers,
+ *   "ff3", "ff3.6", "ie6", "ie7", "ie8", "chrome", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
  *   <li>ff3.bin: is the location of the FF3 binary, in Windows use double back-slashes</li>
  *   <li>ff3.6.bin: is the location of the FF3.6 binary, in Windows use double back-slashes</li>
- *   <li>chrome16.bin: is the location of the ChromeDriver binary (see
+ *   <li>chrome.bin: is the location of the ChromeDriver binary (see
  *   <a href="http://code.google.com/p/chromedriver/downloads/list">Chrome Driver downloads</a></li>
  * </ul>
  * </p>
@@ -107,7 +107,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String FF3_6_BIN_;
     private static String FF10_BIN_;
     private static String FF17_BIN_;
-    private static String CHROME16_BIN_;
+    private static String CHROME_BIN_;
 
     /** The driver cache. */
     protected static final Map<BrowserVersion, WebDriver> WEB_DRIVERS_ = new HashMap<BrowserVersion, WebDriver>();
@@ -145,7 +145,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     FF3_6_BIN_ = properties.getProperty("ff3.6.bin");
                     FF10_BIN_ = properties.getProperty("ff10.bin");
                     FF17_BIN_ = properties.getProperty("ff17.bin");
-                    CHROME16_BIN_ = properties.getProperty("chrome16.bin");
+                    CHROME_BIN_ = properties.getProperty("chrome.bin");
                 }
             }
             catch (final Exception e) {
@@ -227,10 +227,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (getBrowserVersion().isIE()) {
                 return new InternetExplorerDriver();
             }
-            if (BrowserVersion.CHROME_16.equals(getBrowserVersion())) {
+            if (BrowserVersion.CHROME.equals(getBrowserVersion())) {
                 if (CHROME_SERVICE_ == null) {
                     CHROME_SERVICE_ = new ChromeDriverService.Builder()
-                        .usingDriverExecutable(new File(CHROME16_BIN_))
+                        .usingDriverExecutable(new File(CHROME_BIN_))
                         .usingAnyFreePort()
                         .build();
                     CHROME_SERVICE_.start();
