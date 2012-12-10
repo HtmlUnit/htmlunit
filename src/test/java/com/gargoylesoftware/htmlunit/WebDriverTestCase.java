@@ -73,20 +73,20 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * "test.properties" in the HtmlUnit root directory.
  * Sample:
  * <pre>
-   browsers=hu,ff3,ff3.6,ie8
-   ff3.bin=c:\\location_to_firefox.exe                [Windows]
-   ff3.6.bin=/use/bin/firefox                         [Unix-like]
-   chrome.bin=/path/to/chromedriver                 [Unix-like]
+   browsers=hu,ff17,ie9
+   ff3.6.bin=c:\\location_to_firefox.exe                [Windows]
+   ff17.bin=/use/bin/firefox                            [Unix-like]
+   chrome.bin=/path/to/chromedriver                     [Unix-like]
  * </pre>
  * The file should contain four properties: "browsers", "ff3.bin", "ff3.6.bin", and "chrome.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
- *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ff3", "hu-ff3.6", "hu-ff17",
- *   "ff3", "ff3.6", "ie6", "ie7", "ie8", "chrome", which will be used to driver real browsers,
+ *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ie9", "hu-ff3.6", "hu-ff17",
+ *   "ff3.6", "ie6", "ie7", "ie8", "ie9", "chrome", which will be used to driver real browsers,
  *   note that you can't define more than one IE as there is no standard way
  *   to have multiple IEs on the same machine</li>
- *   <li>ff3.bin: is the location of the FF3 binary, in Windows use double back-slashes</li>
  *   <li>ff3.6.bin: is the location of the FF3.6 binary, in Windows use double back-slashes</li>
+ *   <li>ff17.bin: is the location of the FF17 binary, in Windows use double back-slashes</li>
  *   <li>chrome.bin: is the location of the ChromeDriver binary (see
  *   <a href="http://code.google.com/p/chromedriver/downloads/list">Chrome Driver downloads</a></li>
  * </ul>

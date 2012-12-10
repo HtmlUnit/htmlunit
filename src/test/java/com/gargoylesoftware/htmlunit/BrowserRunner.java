@@ -43,9 +43,9 @@ import org.junit.runners.Suite;
  * public class SomeTest extends WebTestCase {
  *
  *    &#064;Test
- *    &#064;Browsers({Browser.FIREFOX_2})
+ *    &#064;Browsers({Browser.FF17})
  *    public void test() {
- *       //your test case that succeeds with only Firefox 2
+ *       //your test case that succeeds with only Firefox 17
  *    }
  * }
  * </pre>
