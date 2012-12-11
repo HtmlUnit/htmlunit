@@ -40,6 +40,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                         "absbottom", "absmiddle", "baseline", "texttop", "wrong", "" },
             FF10 = { "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
+            FF17 = { "left", "right", "bottom", "middle", "top",
+                    "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
             IE = { "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                 "undefined", "undefined", "undefined", "undefined", "undefined" })
     @NotYetImplemented
