@@ -463,6 +463,7 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "supported", "onhashchange undefined  undefined" },
             FF10 = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
+            FF17 = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
             IE6 = { },
             IE7 = { },
             IE8 = { "supported", "onhashchange -" })
@@ -495,6 +496,7 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "supported", "onhashchange undefined  undefined" },
             FF10 = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
+            FF17 = { "supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/" },
             IE6 = { },
             IE7 = { },
             IE8 = { "supported", "onhashchange -" })
