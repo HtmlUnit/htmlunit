@@ -649,7 +649,9 @@ public abstract class HtmlElement extends DomElement {
      * @param <E> the sub-element type
      * @return the element in this element's page with the specified ID
      * @exception ElementNotFoundException if no element has the specified ID
+     * @deprecated as of 2.12, please use {@link HtmlPage#getHtmlElementById(String)}
      */
+    @Deprecated
     @SuppressWarnings("unchecked")
     public <E extends HtmlElement> E getElementById(final String id) throws ElementNotFoundException {
         return (E) ((HtmlPage) getPage()).getHtmlElementById(id);
@@ -672,7 +674,9 @@ public abstract class HtmlElement extends DomElement {
      *
      * @param id the id to search for
      * @return <tt>true</tt> if there is an element in this element's page with the specified ID
+     * @deprecated as of 2.12, please use {@link HtmlPage#getElementById(String)}
      */
+    @Deprecated
     public boolean hasHtmlElementWithId(final String id) {
         try {
             getElementById(id);

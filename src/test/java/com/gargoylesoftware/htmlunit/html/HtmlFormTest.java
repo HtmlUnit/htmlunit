@@ -839,9 +839,9 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
-        Assert.assertEquals("First textarea with name 'ta1'", form.getElementById("ta1_1"),
+        Assert.assertEquals("First textarea with name 'ta1'", page.getElementById("ta1_1"),
             form.getTextAreaByName("ta1"));
-        Assert.assertEquals("First textarea with name 'ta2'", form.getElementById("ta2_1"),
+        Assert.assertEquals("First textarea with name 'ta2'", page.getElementById("ta2_1"),
             form.getTextAreaByName("ta2"));
 
         try {
@@ -872,9 +872,9 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final HtmlForm form = page.getHtmlElementById("form1");
 
-        Assert.assertEquals("First button with name 'b1'", form.getElementById("b1_1"),
+        Assert.assertEquals("First button with name 'b1'", page.getElementById("b1_1"),
             form.getButtonByName("b1"));
-        Assert.assertEquals("First button with name 'b2'", form.getElementById("b2_1"),
+        Assert.assertEquals("First button with name 'b2'", page.getElementById("b2_1"),
             form.getButtonByName("b2"));
 
         try {
@@ -932,7 +932,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = getMockConnection(page);
 
         final HtmlPage secondPage =
-            (HtmlPage) page.getFormByName("form").getElementById("clickMe").click();
+            (HtmlPage) page.getHtmlElementById("clickMe").click();
 
         assertNotNull(secondPage);
         Assert.assertEquals("parameters", Collections.EMPTY_LIST, webConnection.getLastParameters());

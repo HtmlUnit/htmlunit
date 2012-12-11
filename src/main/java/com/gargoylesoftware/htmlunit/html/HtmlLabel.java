@@ -128,7 +128,7 @@ public class HtmlLabel extends HtmlElement {
         final String elementId = getForAttribute();
         if (!ATTRIBUTE_NOT_DEFINED.equals(elementId)) {
             try {
-                return getElementById(elementId);
+                return ((HtmlPage) getPage()).getHtmlElementById(elementId);
             }
             catch (final ElementNotFoundException e) {
                 return null;

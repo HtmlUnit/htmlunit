@@ -125,7 +125,7 @@ public class DisabledElementTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(BrowserVersion.FIREFOX_3_6, htmlContent, collectedAlerts);
 
         final HtmlForm form = page.getHtmlElementById("form1");
-        final DisabledElement element = (DisabledElement) form.getElementById("element1");
+        final DisabledElement element = (DisabledElement) page.getHtmlElementById("element1");
         assertEquals(expectedIsDisabled, element.isDisabled());
     }
 

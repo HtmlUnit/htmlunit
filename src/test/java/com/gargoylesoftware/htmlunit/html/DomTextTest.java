@@ -183,7 +183,7 @@ public class DomTextTest extends SimpleWebTestCase {
             + "<br><div id='tag'></div><br></body></html>";
         final HtmlPage page = loadPage(html);
 
-        final DomNode divNode = page.getDocumentElement().getElementById("tag");
+        final DomNode divNode = page.getElementById("tag");
 
         final DomText node = new DomText(page, "test split");
         divNode.insertBefore(node);
@@ -217,7 +217,7 @@ public class DomTextTest extends SimpleWebTestCase {
             + "<br><div id='tag'></div><br></body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode divNode = page.getDocumentElement().getElementById("tag");
+        final DomNode divNode = page.getElementById("tag");
 
         final DomText firstNode = new DomText(page, "test split");
         divNode.appendChild(firstNode);

@@ -52,7 +52,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentElement().getElementById("tag");
+        final DomNode node = page.getElementById("tag");
         Assert.assertTrue("Element should have attribute", node.hasAttributes());
     }
 
@@ -65,7 +65,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentElement().getElementById("tag");
+        final DomNode node = page.getElementById("tag");
         final DomNode parent = node.getParentNode();
         Assert.assertFalse("Element should not have attribute", parent.hasAttributes());
     }
@@ -79,7 +79,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentElement().getElementById("tag");
+        final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
         Assert.assertFalse("Text should not have attribute", child.hasAttributes());
     }
@@ -93,7 +93,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentElement().getElementById("tag");
+        final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
         Assert.assertEquals("Text should not have a prefix", null, child.getPrefix());
     }
@@ -107,7 +107,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentElement().getElementById("tag");
+        final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
         Assert.assertEquals("Text should not have a prefix", null, child.getNamespaceURI());
     }
@@ -121,7 +121,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentElement().getElementById("tag");
+        final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
         Assert.assertEquals("Text should not have a prefix", null, child.getLocalName());
     }
@@ -135,7 +135,7 @@ public class DomNodeTest extends SimpleWebTestCase {
         final String content = "<html><head></head><body id='tag'>text</body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentElement().getElementById("tag");
+        final DomNode node = page.getElementById("tag");
         final DomNode child = node.getFirstChild();
         child.setPrefix("bar"); // This does nothing.
         Assert.assertEquals("Text should not have a prefix", null, child.getPrefix());
@@ -154,7 +154,7 @@ public class DomNodeTest extends SimpleWebTestCase {
             + "</table></p></body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentElement().getElementById("tag");
+        final DomNode node = page.getElementById("tag");
         node.removeAllChildren();
         Assert.assertEquals("Did not remove all nodes", null, node.getFirstChild());
     }
@@ -169,7 +169,7 @@ public class DomNodeTest extends SimpleWebTestCase {
             + "<br><div id='tag'></div><br><div id='tag2'/></body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentElement().getElementById("tag");
+        final DomNode node = page.getElementById("tag");
 
         final DomNode previousSibling = node.getPreviousSibling();
         final DomNode nextSibling = node.getNextSibling();
@@ -208,7 +208,7 @@ public class DomNodeTest extends SimpleWebTestCase {
             + "<br><div id='tag'/></body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentElement().getElementById("tag");
+        final DomNode node = page.getElementById("tag");
 
         final AttributesImpl attributes = new AttributesImpl();
         attributes.addAttribute(null, "id", "id", null, "newElt");
@@ -247,7 +247,7 @@ public class DomNodeTest extends SimpleWebTestCase {
             + "<br><div><div id='tag'></div></div><br></body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentElement().getElementById("tag");
+        final DomNode node = page.getElementById("tag");
 
         final DomNode parent = node.getParentNode();
 
@@ -277,7 +277,7 @@ public class DomNodeTest extends SimpleWebTestCase {
             + "<br><div id='tag'></div><br></body></html>";
         final HtmlPage page = loadPage(content);
 
-        final DomNode node = page.getDocumentElement().getElementById("tag");
+        final DomNode node = page.getElementById("tag");
 
         final DomNode previousSibling = node.getPreviousSibling();
         final DomNode nextSibling = node.getNextSibling();

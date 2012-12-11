@@ -120,7 +120,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         final HtmlForm f = firstPage.getForms().get(0);
         final HtmlFileInput fileInput = f.getInputByName("image");
         fileInput.setValueAttribute(fileURL);
-        f.getElementById("clickMe").click();
+        firstPage.getHtmlElementById("clickMe").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertNotNull(pair.getFile());
         assertTrue(pair.getFile().length() != 0);
@@ -299,8 +299,7 @@ public class HtmlFileInputTest extends WebServerTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlForm f = firstPage.getForms().get(0);
-        f.getElementById("clickMe").click();
+        firstPage.getHtmlElementById("clickMe").click();
         final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
         assertEquals("image", pair.getName());
         assertNull(pair.getFile());

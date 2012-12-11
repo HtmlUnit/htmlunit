@@ -60,7 +60,7 @@ public class HtmlIsIndexTest extends SimpleWebTestCase {
         final HtmlIsIndex isInput = form.<HtmlIsIndex>getElementsByAttribute(
                 "isindex", "prompt", "enterSomeText").get(0);
         isInput.setValue("Flintstone");
-        final Page secondPage = form.getElementById("clickMe").click();
+        final Page secondPage = page.getHtmlElementById("clickMe").click();
 
         final List<NameValuePair> expectedParameters = new ArrayList<NameValuePair>();
         expectedParameters.add(new NameValuePair("enterSomeText", "Flintstone"));
