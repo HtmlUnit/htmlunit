@@ -220,8 +220,8 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "top", "baseline", "3", "middle", "8", "bottom" },
-            FF10 = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+    @Alerts(FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
+            FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
     public void vAlign() throws Exception {
         final String html
