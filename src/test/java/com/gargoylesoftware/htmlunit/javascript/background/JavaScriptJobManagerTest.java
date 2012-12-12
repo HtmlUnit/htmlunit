@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,8 +43,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 @RunWith(BrowserRunner.class)
 public class JavaScriptJobManagerTest extends SimpleWebTestCase {
-    private static final Log LOG = LogFactory.getLog(JavaScriptJobManagerTest.class);
-
     private long startTime_;
 
     private void startTimedTest() {
@@ -177,14 +173,7 @@ public class JavaScriptJobManagerTest extends SimpleWebTestCase {
         Assert.assertEquals("inner frame should show child thread", 1, mgr.getJobCount());
 
         final HtmlAnchor anchor = page.getHtmlElementById("clickme");
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("before click");
-        }
         final HtmlPage newPage = anchor.click();
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("after click");
-        }
-
         Assert.assertEquals("new page should load", "Third", newPage.getTitleText());
         Assert.assertEquals("frame should be gone", 0, newPage.getFrames().size());
 

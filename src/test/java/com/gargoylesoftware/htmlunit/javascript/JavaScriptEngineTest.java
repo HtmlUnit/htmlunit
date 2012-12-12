@@ -79,8 +79,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 @RunWith(BrowserRunner.class)
 public class JavaScriptEngineTest extends SimpleWebTestCase {
 
-    private static final Log LOG = LogFactory.getLog(JavaScriptEngineTest.class);
-
     /**
      * @throws Exception if the test fails
      */
@@ -343,9 +341,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug(page.asXml());
-        }
         assertEquals(expectedAlerts, collectedAlerts);
 
         assertNotNull(page.getHtmlElementById("script1"));

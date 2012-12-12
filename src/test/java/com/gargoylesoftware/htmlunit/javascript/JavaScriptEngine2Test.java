@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -22,6 +24,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -236,4 +239,21 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "undefined" }, DEFAULT = { "function", "function" })
+    @NotYetImplemented(IE)
+    public void inline() throws Exception {
+        final String html = "<html><head><script>\n"
+                + "alert(typeof Array.prototype.filter);\n"
+                + "  function test() {\n"
+                + "    alert(typeof Array.prototype.filter);\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
 }

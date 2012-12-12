@@ -79,8 +79,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 @RunWith(BrowserRunner.class)
 public class WindowTest extends SimpleWebTestCase {
 
-    private static final Log LOG = LogFactory.getLog(WindowTest.class);
-
     /**
      * @throws Exception if the test fails
      */
@@ -543,7 +541,6 @@ public class WindowTest extends SimpleWebTestCase {
             = "<html><head><title>First</title><script>function doTest(){alert('foo')}</script></head>\n"
             + "<body onload='doTest()'></body></html>";
 
-        LOG.warn("Warning for no alert handler expected next");
         final HtmlPage firstPage = loadPage(firstContent);
         assertEquals("First", firstPage.getTitleText());
     }
@@ -641,7 +638,6 @@ public class WindowTest extends SimpleWebTestCase {
             = "<html><head><title>First</title><script>function doTest(){alert(confirm('foo'))}</script>\n"
             + "</head><body onload='doTest()'></body></html>";
 
-        LOG.warn("Warning for no confirm handler expected next");
         final List<String> collectedAlerts = new ArrayList<String>();
         loadPage(html, collectedAlerts);
 
@@ -698,7 +694,6 @@ public class WindowTest extends SimpleWebTestCase {
 
         webConnection.setResponse(URL_FIRST, firstContent);
         webClient.setWebConnection(webConnection);
-        LOG.warn("Warning for no prompt handler expected next");
 
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
         assertEquals("First", firstPage.getTitleText());
