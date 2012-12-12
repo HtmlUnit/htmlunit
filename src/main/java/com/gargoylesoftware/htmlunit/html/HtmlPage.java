@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CON
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_FRAMESET_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
@@ -42,7 +41,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -187,11 +185,6 @@ public class HtmlPage extends SgmlPage {
     @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {
         final WebWindow enclosingWindow = getEnclosingWindow();
-        final BrowserVersion browserVersion = getWebClient().getBrowserVersion();
-        if (!browserVersion.hasFeature(JS_DEFINE_GETTER) && isQuirksMode()) {
-            removePrototypeProperties((Scriptable) enclosingWindow.getScriptObject(), "Array",
-                "every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce", "reduceRight", "some");
-        }
         final boolean isAboutBlank = getUrl() == WebClient.URL_ABOUT_BLANK;
         if (isAboutBlank) {
             // a frame contains first a faked "about:blank" before its real content specified by src gets loaded
@@ -218,6 +211,7 @@ public class HtmlPage extends SgmlPage {
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         }
 
+        final BrowserVersion browserVersion = getWebClient().getBrowserVersion();
         if (browserVersion.hasFeature(EVENT_DOM_CONTENT_LOADED)) {
             executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         }
@@ -262,20 +256,6 @@ public class HtmlPage extends SgmlPage {
             throw new RuntimeException(e);
         }
         executeRefreshIfNeeded();
-    }
-
-    /**
-     * Removes prototype properties.
-     * @param scope the scope
-     * @param className the class for which properties should be removed
-     * @param properties the properties to remove
-     */
-    private void removePrototypeProperties(final Scriptable scope, final String className,
-            final String... properties) {
-        final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, className);
-        for (final String property : properties) {
-            prototype.delete(property);
-        }
     }
 
     /**

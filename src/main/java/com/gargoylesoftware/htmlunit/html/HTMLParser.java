@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCONDITION
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIFRAME_IGNORE_SELFCLOSING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLPARSER_REMOVE_EMPTY_CONTENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.IGNORE_CONTENTS_OF_INNER_HEAD;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_WAIT_LOAD_BEFORE_BODY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG;
 
@@ -33,6 +34,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.xerces.parsers.AbstractSAXParser;
@@ -550,10 +554,31 @@ public final class HTMLParser {
             else if ("head".equals(tagLower)) {
                 head_ = (HtmlElement) newElement;
             }
-
+            else if ("html".equals(tagLower)) {
+                if (!page_.hasFeature(JS_DEFINE_GETTER) && page_.isQuirksMode()) {
+                    removePrototypeProperties((Scriptable) page_.getEnclosingWindow().getScriptObject(), "Array",
+                        "every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce",
+                        "reduceRight", "some");
+                }
+            }
             currentNode_ = newElement;
             stack_.push(currentNode_);
         }
+
+        /**
+         * Removes prototype properties.
+         * @param scope the scope
+         * @param className the class for which properties should be removed
+         * @param properties the properties to remove
+         */
+        private void removePrototypeProperties(final Scriptable scope, final String className,
+                final String... properties) {
+            final ScriptableObject prototype = (ScriptableObject) ScriptableObject.getClassPrototype(scope, className);
+            for (final String property : properties) {
+                prototype.delete(property);
+            }
+        }
+
 
         /**
          * Adds the new node to the right parent that is not necessary the currentNode in case
