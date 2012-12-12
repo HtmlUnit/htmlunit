@@ -109,7 +109,6 @@ public class CodeStyleTest {
                 lineBetweenMethods(lines, relativePath);
                 svnProperties(file, relativePath);
                 runWith(lines, relativePath);
-                twoEmptyLines(lines, relativePath);
                 vs85aspx(lines, relativePath);
                 deprecated(lines, relativePath);
                 staticJSMethod(lines, relativePath);
@@ -379,19 +378,6 @@ public class CodeStyleTest {
                     }
                 }
                 index++;
-            }
-        }
-    }
-
-    /**
-     * Verifies that no two empty contiguous lines.
-     */
-    private void twoEmptyLines(final List<String> lines, final String relativePath) {
-        for (int i = 1; i < lines.size(); i++) {
-            final String previousLine = lines.get(i - 1);
-            final String line = lines.get(i);
-            if (StringUtils.isBlank(previousLine) && StringUtils.isBlank(line)) {
-                addFailure("Two empty contiguous lines at " + relativePath + ", line: " + (i + 1));
             }
         }
     }
