@@ -168,7 +168,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = { "", "bla", "true" }, IE = "exception")
+    @Alerts(IE = "exception",
+            FF17 = { "null", "bla", "true" },
+            DEFAULT = { "", "bla", "true" })
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -247,6 +249,22 @@ public class HTMLElementTest extends WebDriverTestCase {
             "previousSibling=null",
             "specified=true",
             "value=bleh" },
+            FF17 = {
+            "null",
+            "expando=undefined",
+            "firstChild=null",
+            "lastChild=null",
+            "name=custom_attribute",
+            "nextSibling=null",
+            "nodeName=custom_attribute",
+            "nodeType=2",
+            "nodeValue=bleh",
+            "(ownerDocument==document)=true",
+            "parentNode=null",
+            "previousSibling=null",
+            "specified=true",
+            "value=bleh"
+            },
             DEFAULT = {
             "null",
             "expando=undefined",
@@ -621,7 +639,9 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "<DIV id=div><UL></UL></DIV>", "<UL></UL>", "" },
             CHROME = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "" },
-            FF = { "undefined", "<ul></ul>", "undefined" })
+            FF3_6 = { "undefined", "<ul></ul>", "undefined" },
+            FF10 = { "undefined", "<ul></ul>", "undefined" },
+            FF17 = { "<div id=\"div\"><ul></ul></div>", "<ul></ul>", "undefined" })
     public void getSetInnerHtmlEmptyTag_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -645,8 +665,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             CHROME = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "" },
             FF3_6 = { "undefined", "<span class=\"a b\"></span>", "undefined" },
             FF10 = { "undefined", "<span class=\"a b\"></span>", "undefined" },
-            FF = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined" }
-            )
+            FF17 = { "<div id=\"div\"><span class=\"a b\"></span></div>", "<span class=\"a b\"></span>", "undefined" })
     public void getSetInnerHtmlAttributeWithWhitespace_FF() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test() {\n"
@@ -702,8 +721,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Outer = <DIV id=myNode>New cell value</DIV>" },
-            CHROME = { "Outer = <div id=\"myNode\">New  cell value</div>" },
-            FF = { "Outer = undefined" })
+            DEFAULT = { "Outer = <div id=\"myNode\">New  cell value</div>" },
+            FF3_6 = { "Outer = undefined" },
+            FF10 = { "Outer = undefined" })
     public void getOuterHTMLFromBlock() throws Exception {
         final String html = createPageForGetOuterHTML("div", "New  cell value", false);
         loadPageWithAlerts2(html);
@@ -715,8 +735,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Outer = <SPAN id=myNode>New cell value</SPAN>" },
-            CHROME = { "Outer = <span id=\"myNode\">New  cell value</span>" },
-            FF = { "Outer = undefined" })
+            DEFAULT = { "Outer = <span id=\"myNode\">New  cell value</span>" },
+            FF3_6 = { "Outer = undefined" },
+            FF10 = { "Outer = undefined" })
     public void getOuterHTMLFromInline() throws Exception {
         final String html = createPageForGetOuterHTML("span", "New  cell value", false);
         loadPageWithAlerts2(html);
@@ -728,8 +749,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Outer = <BR id=myNode>" },
-            CHROME = { "Outer = <br id=\"myNode\">" },
-            FF = { "Outer = undefined" })
+            DEFAULT = { "Outer = <br id=\"myNode\">" },
+            FF3_6 = { "Outer = undefined" },
+            FF10 = { "Outer = undefined" })
     public void getOuterHTMLFromEmpty() throws Exception {
         final String html = createPageForGetOuterHTML("br", "", true);
         loadPageWithAlerts2(html);
@@ -742,8 +764,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Outer = <P id=myNode>New cell value\n</P>" },
-            CHROME = { "Outer = <p id=\"myNode\">New  cell value\n</p>" },
-            FF = { "Outer = undefined" })
+            DEFAULT = { "Outer = <p id=\"myNode\">New  cell value\n</p>" },
+            FF3_6 = { "Outer = undefined" },
+            FF10 = { "Outer = undefined" },
+            FF17 = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" })
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
         loadPageWithAlerts2(html);
@@ -774,8 +798,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = New cell value" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value" },
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
     public void setOuterHTMLAddTextToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "New  cell value");
@@ -788,8 +814,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = New cell value" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = New  cell value" },
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
     public void setOuterHTMLAddTextToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "New  cell value");
@@ -802,8 +830,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV>test</DIV>" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>" },
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
     public void setOuterHTMLAddBlockToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div>test</div>");
@@ -816,8 +846,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV>test</DIV>" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div>test</div>" },
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
     public void setOuterHTMLAddBlockToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "<div>test</div>");
@@ -830,8 +862,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <SPAN>test</SPAN>" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>" },
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
     public void setOuterHTMLAddInlineToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "<span>test</span>");
@@ -844,8 +878,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <SPAN>test</SPAN>" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span>test</span>" },
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
     public void setOuterHTMLAddInlineToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<span>test</span>");
@@ -858,8 +894,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <BR>" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>" },
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
     public void setOuterHTMLAddEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br>");
@@ -872,6 +910,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" },
+            FF17 = { "-0", "1", "2", "3", "-4", "5", "6", "7", "8", "9", "10", "11" },
             DEFAULT = { "-0", "-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9", "-10", "-11" })
     public void setOuterHTMLToReadOnly() throws Exception {
         final String html =  "<html>\n"
@@ -915,6 +954,8 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "exception" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF17 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <div>test</div>" },
             FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
     public void setOuterHTMLAddBlockToParagraph() throws Exception {
@@ -932,7 +973,9 @@ public class HTMLElementTest extends WebDriverTestCase {
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                         "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF17 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <p>test</p>" })
     public void setOuterHTMLAddParagraphToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<p>test</p>");
         loadPageWithAlerts2(html);
@@ -945,8 +988,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <P>test</P>" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <p>test</p>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <p>test</p>" },
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
     public void setOuterHTMLAddUnclosedParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<p>test");
@@ -963,7 +1008,9 @@ public class HTMLElementTest extends WebDriverTestCase {
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                         "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF17 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <a>test</a>" })
     public void setOuterHTMLAddAnchorToAnchor() throws Exception {
         final String html = createPageForSetOuterHTML("a", "<a>test</a>");
         loadPageWithAlerts2(html);
@@ -975,8 +1022,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV></DIV>" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div>" },
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
     public void setOuterHTMLAddSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/>");
@@ -990,8 +1039,12 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <DIV></DIV><DIV></DIV>" },
             CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <div></div><div></div>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
-                    "New = <span id=\"innerNode\">Old outerHTML</span>" })
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF17 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <div><div></div></div>" })
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
         loadPageWithAlerts2(html);
@@ -1003,8 +1056,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <SPAN></SPAN>" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span></span>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <span></span>" },
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
     public void setOuterHTMLAddSelfClosingInline() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<span/>");
@@ -1017,8 +1072,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "Old = <SPAN id=innerNode>Old outerHTML</SPAN>", "New = <BR>" },
-            CHROME = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>" },
-            FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+            DEFAULT = { "Old = <span id=\"innerNode\">Old outerHTML</span>", "New = <br>" },
+            FF3_6 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
+                    "New = <span id=\"innerNode\">Old outerHTML</span>" },
+            FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
     public void setOuterHTMLAddSelfClosingEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br/>");
@@ -2508,7 +2565,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "button", "getAttributeNS() not supported" }, DEFAULT = { "button", "", "false", "true" })
+    @Alerts(IE = { "button", "getAttributeNS() not supported" },
+            FF17 = { "button", "null", "false", "true" },
+            DEFAULT = { "button", "", "false", "true" })
     public void attributeNS() throws Exception {
         final String html
             = "<html><head>\n"
