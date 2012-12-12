@@ -417,11 +417,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      */
     @Override
     public boolean has(final int index, final Scriptable start) {
-        final List<Object> elements = getElements();
-        if (index >= 0 && index < elements.size()) {
-            return true;
-        }
-        return false;
+        return index >= 0 && index < getElements().size();
     }
 
     /**

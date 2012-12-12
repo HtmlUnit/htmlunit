@@ -113,11 +113,7 @@ public class CSSRuleList extends SimpleScriptable {
      */
     @Override
     public boolean has(final int index, final Scriptable start) {
-        final int length = getLength();
-        if (index >= 0 && index < length) {
-            return true;
-        }
-        return false;
+        return index >= 0 && index < getLength();
     }
 
     /**
