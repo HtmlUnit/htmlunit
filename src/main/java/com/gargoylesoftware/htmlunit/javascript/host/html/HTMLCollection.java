@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_48;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_49;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_50;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_COMMENT_IS_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_IDENTICAL_IDS;
@@ -344,43 +343,6 @@ public class HTMLCollection extends NodeList {
         }
 
         return super.equivalentValues(other);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean has(final String name, final Scriptable start) {
-        // let's Rhino work normally if current instance is the prototype
-        if (isPrototype()) {
-            return super.has(name, start);
-        }
-
-        try {
-            final int index = Integer.parseInt(name);
-            final List<Object> elements = getElements();
-            if (index >= 0 && index < elements.size()) {
-                return true;
-            }
-        }
-        catch (final NumberFormatException e) {
-            // Ignore.
-        }
-
-        if ("length".equals(name)) {
-            return true;
-        }
-        if (!getBrowserVersion().hasFeature(GENERATED_49)) {
-            final JavaScriptConfiguration jsConfig = getWindow().getWebWindow().getWebClient()
-                    .getJavaScriptEngine().getJavaScriptConfiguration();
-            for (final String functionName : jsConfig.getClassConfiguration(getClassName()).functionKeys()) {
-                if (name.equals(functionName)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return getWithPreemption(name) != NOT_FOUND;
     }
 
     /**

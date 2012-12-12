@@ -579,7 +579,6 @@ public final class HTMLParser {
             }
         }
 
-
         /**
          * Adds the new node to the right parent that is not necessary the currentNode in case
          * of malformed HTML code.

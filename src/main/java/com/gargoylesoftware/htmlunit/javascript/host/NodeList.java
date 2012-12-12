@@ -416,6 +416,18 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
      * {@inheritDoc}
      */
     @Override
+    public boolean has(final int index, final Scriptable start) {
+        final List<Object> elements = getElements();
+        if (index >= 0 && index < elements.size()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean has(final String name, final Scriptable start) {
         // let's Rhino work normally if current instance is the prototype
         if (isPrototype()) {
@@ -423,11 +435,7 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
         }
 
         try {
-            final int index = Integer.parseInt(name);
-            final List<Object> elements = getElements();
-            if (index >= 0 && index < elements.size()) {
-                return true;
-            }
+            return has(Integer.parseInt(name), start);
         }
         catch (final NumberFormatException e) {
             // Ignore.

@@ -318,4 +318,20 @@ public class HTMLCollectionTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void has() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    alert(0 in document.forms);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<form name='myForm'></form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

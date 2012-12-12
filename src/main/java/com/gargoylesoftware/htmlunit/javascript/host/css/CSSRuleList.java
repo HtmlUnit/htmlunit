@@ -109,6 +109,18 @@ public class CSSRuleList extends SimpleScriptable {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean has(final int index, final Scriptable start) {
+        final int length = getLength();
+        if (index >= 0 && index < length) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * {@inheritDoc}.
      */
     @Override
@@ -117,11 +129,7 @@ public class CSSRuleList extends SimpleScriptable {
             return true;
         }
         try {
-            final int index = Integer.parseInt(name);
-            final int length = getLength();
-            if (index >= 0 && index < length) {
-                return true;
-            }
+            return has(Integer.parseInt(name), start);
         }
         catch (final Exception e) {
             //ignore

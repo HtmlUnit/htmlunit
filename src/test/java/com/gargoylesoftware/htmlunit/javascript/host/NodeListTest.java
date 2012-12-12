@@ -49,4 +49,22 @@ public class NodeListTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("true")
+    public void has() throws Exception {
+        final String html = "<html><head><title>test</title>\n"
+                + "<script>\n"
+                + "  function test(){\n"
+                + "    alert(0 in document.body.parentNode.childNodes);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
