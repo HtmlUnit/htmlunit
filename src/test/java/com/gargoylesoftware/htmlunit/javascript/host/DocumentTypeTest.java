@@ -95,7 +95,7 @@ public class DocumentTypeTest extends WebDriverTestCase {
         FF = {
             "[object DocumentType]", "greeting,10,null,null,null,null",
             "greeting,MyIdentifier,hello.dtd,null,undefined,undefined" },
-        CHROME= {
+        CHROME = {
             "[object DocumentType]", "greeting,10,null,null,null,null",
             "greeting,MyIdentifier,hello.dtd,null,null,null" })
     @NotYetImplemented(CHROME)
