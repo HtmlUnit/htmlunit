@@ -26,6 +26,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+
 /**
  * Contains some missing features of Rhino NativeDate.
  *
@@ -36,7 +38,6 @@ public final class DateCustom {
 
     private DateCustom() { }
 
-    private static DateFormat LOCAL_DATE_FORMAT_;
     private static Field DATE_FIELD_;
 
     /**
@@ -49,10 +50,8 @@ public final class DateCustom {
      */
     public static String toLocaleDateString(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        if (LOCAL_DATE_FORMAT_ == null) {
-            LOCAL_DATE_FORMAT_ = new SimpleDateFormat("EEEE, MMMM dd, yyyy", Locale.US);
-        }
-        return LOCAL_DATE_FORMAT_.format(new Date(getDateValue(thisObj)));
+        final SimpleDateFormat format = new SimpleDateFormat("EEEE, MMMM dd, yyyy", getLocale(thisObj));
+        return format.format(new Date(getDateValue(thisObj)));
     }
 
     /**
@@ -73,7 +72,7 @@ public final class DateCustom {
         else {
             formatString = "hh:mm:ss a";
         }
-        final DateFormat format =  new SimpleDateFormat(formatString, Locale.US);
+        final DateFormat format =  new SimpleDateFormat(formatString, getLocale(thisObj));
         return format.format(new Date(getDateValue(thisObj)));
     }
 
@@ -88,5 +87,11 @@ public final class DateCustom {
         catch (final Exception e) {
             throw Context.throwAsScriptRuntimeEx(e);
         }
+    }
+
+    private static Locale getLocale(final Scriptable thisObj) {
+        final BrowserVersion broserVersion = ((Window) thisObj.getParentScope())
+                .getWebWindow().getWebClient().getBrowserVersion();
+        return new Locale(broserVersion.getSystemLanguage());
     }
 }
