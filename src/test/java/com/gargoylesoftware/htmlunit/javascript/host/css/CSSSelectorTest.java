@@ -40,16 +40,21 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0")
+    @Alerts("li2")
     @NotYetImplemented
-    public void css3() throws Exception {
+    public void nth_child() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('table:nth-child(1) td').length);\n"
+            + "  alert(document.querySelectorAll('li:nth-child(2)')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3'></li>\n"
+            + "</ul>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
