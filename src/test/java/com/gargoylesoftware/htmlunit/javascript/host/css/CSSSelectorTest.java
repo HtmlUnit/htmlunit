@@ -14,18 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.w3c.css.sac.CSSException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.DomNodeList;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Tests for CSS selectors.
@@ -33,9 +29,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @version $Revision$
  * @author Ronald Brill
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class CSSSelectorTest extends SimpleWebTestCase {
+public class CSSSelectorTest extends WebDriverTestCase {
 
     /**
      * Test for bug 3300434: CSS3 selector is not yet supported.
@@ -43,16 +40,19 @@ public class CSSSelectorTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("0")
     @NotYetImplemented
     public void css3() throws Exception {
         final String html
-            = "<html><body>"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  alert(document.querySelectorAll('table:nth-child(1) td').length);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(html);
-        final String selector = "table:nth-child(1) td";
-        final DomNodeList<DomNode> nodes = page.querySelectorAll(selector);
-        Assert.assertEquals(0, nodes.size());
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -60,11 +60,20 @@ public class CSSSelectorTest extends SimpleWebTestCase {
      *
      * @throws Exception if an error occurs
      */
-    @Test(expected = CSSException.class)
+    @Test
+    @Alerts("exception")
     public void invalid() throws Exception {
-        final String html = "<html><body></body></html>";
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    alert(document.querySelectorAll('td:gt(4)').length);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
 
-        final HtmlPage page = loadPage(html);
-        page.querySelectorAll("td:gt(4)");
+        loadPageWithAlerts2(html);
     }
 }
