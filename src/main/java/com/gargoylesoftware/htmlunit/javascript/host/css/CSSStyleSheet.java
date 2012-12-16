@@ -371,7 +371,10 @@ public class CSSStyleSheet extends SimpleScriptable {
                 return HtmlHtml.TAG_NAME.equalsIgnoreCase(element.getTagName());
             case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
                 final SiblingSelector ss = (SiblingSelector) selector;
-                final DomNode prev = element.getPreviousSibling();
+                DomNode prev = element.getPreviousSibling();
+                while (prev != null && !(prev instanceof HtmlElement)) {
+                    prev = prev.getPreviousSibling();
+                }
                 return prev instanceof HtmlElement
                     && selects(browserVersion, ss.getSelector(), (HtmlElement) prev)
                     && selects(browserVersion, ss.getSiblingSelector(), element);
@@ -827,6 +830,9 @@ public class CSSStyleSheet extends SimpleScriptable {
             case Selector.SAC_CHILD_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
                 return isValidSelector(ds.getAncestorSelector()) && isValidSelector(ds.getSimpleSelector());
+            case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
+                final SiblingSelector ss = (SiblingSelector) selector;
+                return isValidSelector(ss.getSelector()) && isValidSelector(ss.getSiblingSelector());
             default:
                 LOG.warn("Unhandled CSS selector type '" + selector.getSelectorType() + "'. Accepting it silently.");
                 return true; // at least in a first time to break less stuff

@@ -81,4 +81,30 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "1", "ul2" })
+    public void directAdjacentSelector() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var list = document.querySelectorAll('p+ul');\n"
+            + "    alert(list.length);\n"
+            + "    alert(list[0].id);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='ul1'></ul>\n"
+            + "  <p></p>\n"
+            + "  <ul id='ul2'></ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
