@@ -1505,40 +1505,6 @@ public class HtmlFormTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void linkUrlEncoding() throws Exception {
-        final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
-            + "  <meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "   <a href='bug.html?k\u00F6nig' id='myLink'>Click me</a>\n"
-            + "</body></html>";
-
-        final WebClient client = getWebClientWithMockWebConnection();
-        final List<String> collectedAlerts = new ArrayList<String>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final URL url = getDefaultUrl();
-        final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setDefaultResponse(html, "text/html", "ISO-8859-1");
-
-        final HtmlPage page = client.getPage(url);
-        assertEquals(url.toExternalForm(), page.getUrl());
-        final HtmlPage linkPage = page.getHtmlElementById("myLink").click();
-        final String linkSuffix;
-        if (getBrowserVersion().isIE()) {
-            linkSuffix = "bug.html?k\u00F6nig";
-        }
-        else {
-            linkSuffix = "bug.html?k%F6nig";
-        }
-        assertEquals(url.toExternalForm() + linkSuffix, linkPage.getUrl());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @NotYetImplemented(FF)
     public void encoding() throws Exception {
         final String html = "<html>\n"
