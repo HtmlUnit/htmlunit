@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -35,6 +39,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for a console. This implementation simulates Firefox's console, which utilizes FireBug API.
@@ -42,7 +47,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
  * @version $Revision$
  * @author Andrea Martino
  */
-@JsxClass
+@JsxClass(browsers = { @WebBrowser(value = FF, minVersion = 4), @WebBrowser(value = IE, minVersion = 9),
+        @WebBrowser(CHROME) })
 public class Console extends SimpleScriptable {
 
     private static final Map<String, Long> TIMERS = new HashMap<String, Long>();

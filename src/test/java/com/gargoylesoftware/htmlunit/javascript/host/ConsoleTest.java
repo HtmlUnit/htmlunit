@@ -20,68 +20,98 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link Console}.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
-@RunWith(BrowserRunner.class)
-public class ConsoleTest extends SimpleWebTestCase {
+@RunWith(Enclosed.class)
+public class ConsoleTest {
+    /**
+     * The tests running through WebDriver.
+     */
+    @RunWith(BrowserRunner.class)
+    public static class WebdriverBasedTests extends WebDriverTestCase {
+        /**
+         * @throws Exception if the test fails
+         */
+        @Test
+        @Alerts(DEFAULT = "false",
+            FF3_6 = "true", IE6 = "true", IE7 = "true", IE8 = "true")
+        public void undefined() throws Exception {
+            final String html
+                = "<html><body><script>\n"
+                + "alert(window.console == undefined)\n"
+                + "</script></body></html>";
+
+            loadPageWithAlerts2(html);
+        }
+    }
 
     /**
-     * @throws Exception if the test fails
+     * The tests NOT running through WebDriver.
      */
-    @Test
-    @Browsers(FF)
-    public void log() throws Exception {
-        final WebConsole console = getWebClient().getWebConsole();
-        final List<String> messages = new ArrayList<String>();
-        console.setLogger(new Logger() {
+    @RunWith(BrowserRunner.class)
+    public static class SimpleTests extends SimpleWebTestCase {
+        /**
+         * @throws Exception if the test fails
+         */
+        @Test
+        @Browsers(FF)
+        public void log() throws Exception {
+            final WebConsole console = getWebClient().getWebConsole();
+            final List<String> messages = new ArrayList<String>();
+            console.setLogger(new Logger() {
 
-            @Override
-            public void warn(final Object message) {
-            }
+                @Override
+                public void warn(final Object message) {
+                }
 
-            @Override
-            public void trace(final Object message) {
-            }
+                @Override
+                public void trace(final Object message) {
+                }
 
-            @Override
-            public void info(final Object message) {
-                messages.add("info: " + message);
-            }
+                @Override
+                public void info(final Object message) {
+                    messages.add("info: " + message);
+                }
 
-            @Override
-            public void error(final Object message) {
-            }
+                @Override
+                public void error(final Object message) {
+                }
 
-            @Override
-            public void debug(final Object message) {
-            }
-        });
+                @Override
+                public void debug(final Object message) {
+                }
+            });
 
-        final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "function test() {\n"
-            + "  if (window.console) {\n"
-            + "    var arr = ['one', 'two', 'three', document.body.children];\n"
-            + "    window.console.log(arr);\n"
-            + "    window.dump('hello');\n"
-            + "  }\n"
-            + "}\n"
-            + "</script></head><body onload='test()'></body></html>";
+            final String html
+                = "<html><head><title>foo</title><script>\n"
+                + "function test() {\n"
+                + "  if (window.console) {\n"
+                + "    var arr = ['one', 'two', 'three', document.body.children];\n"
+                + "    window.console.log(arr);\n"
+                + "    window.dump('hello');\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head><body onload='test()'></body></html>";
 
-        loadPage(html);
-        assertEquals("info: [\"one\", \"two\", \"three\", ({})]", messages.get(0));
-        assertEquals("info: hello", messages.get(1));
+            loadPage(html);
+            assertEquals("info: [\"one\", \"two\", \"three\", ({})]", messages.get(0));
+            assertEquals("info: hello", messages.get(1));
+        }
     }
 }
