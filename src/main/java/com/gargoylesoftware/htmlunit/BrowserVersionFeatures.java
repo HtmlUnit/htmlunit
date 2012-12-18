@@ -64,10 +64,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     CSS_DEFAULT_ELMENT_HEIGHT_15,
 
-    /** Indicates that the default value for height of elements is used instance
+    /** Indicates that the default value for height of elements is used instead
      * of the calculated value, if the calculated value is smaller. */
     @BrowserFeature(@WebBrowser(IE))
-    CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN,
+    CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN,
 
     /** Indicates that the default value for width is 'auto'. */
     @BrowserFeature(@WebBrowser(IE))

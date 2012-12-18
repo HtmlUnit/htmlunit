@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_15;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
@@ -1595,7 +1595,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final int contentHeight = getContentHeight();
-        final boolean useDefaultHeight = getBrowserVersion().hasFeature(CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN);
+        final boolean useDefaultHeight = getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN);
         final boolean explicitHeightSpecified = super.getHeight().length() > 0;
 
         int height;
@@ -1657,7 +1657,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         });
 
-        final boolean useDefaultHeight = getBrowserVersion().hasFeature(CSS_DEFAULT_ELMENT_HEIGHT_MARKS_MIN);
+        final boolean useDefaultHeight = getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN);
         if (height == 0 && !explicitHeightSpecified || (useDefaultHeight && height < defaultHeight)) {
             height = defaultHeight;
         }
