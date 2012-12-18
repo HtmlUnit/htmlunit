@@ -1472,4 +1472,85 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
+            FF = { "ISO-8859-1", "ISO-8859-1", "undefined", "undefined" },
+            CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" })
+    @NotYetImplemented(FF)
+    public void encoding2() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.inputEncoding);\n"
+            + "      alert(document.characterSet);\n"
+            + "      alert(document.charset);\n"
+            + "      alert(document.defaultCharset);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
+            FF = { "ISO-8859-1", "ISO-8859-1", "undefined", "undefined" },
+            CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" })
+    @NotYetImplemented(FF)
+    public void encoding3() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.inputEncoding);\n"
+            + "      alert(document.characterSet);\n"
+            + "      alert(document.charset);\n"
+            + "      alert(document.defaultCharset);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", "ISO-8859-1");
+        verifyAlerts(DEFAULT_WAIT_TIME, expectedAlerts, driver);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "undefined", "utf-8", "windows-1252" },
+            FF = { "UTF-8", "UTF-8", "undefined", "undefined" },
+            CHROME = { "UTF-8", "UTF-8", "UTF-8", "ISO-8859-1" })
+    public void encoding4() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.inputEncoding);\n"
+            + "      alert(document.characterSet);\n"
+            + "      alert(document.charset);\n"
+            + "      alert(document.defaultCharset);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", "ISO-8859-1");
+        verifyAlerts(DEFAULT_WAIT_TIME, expectedAlerts, driver);
+    }
 }
