@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CAN_INHERIT_CSS_PROPERTY_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_15;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_MARKS_MIN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_ELEMENT_HEIGHT_15;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DEFAULT_WIDTH_AUTO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DEFAULT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONT_STRECH_DEFAULT_NORMAL;
@@ -51,6 +51,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
 
 /**
  * A JavaScript object for a ComputedCSSStyleDeclaration.
@@ -1644,9 +1646,23 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         final boolean explicitHeightSpecified = super.getHeight().length() > 0;
 
-        int defaultHeight = 20;
-        if (getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_15)) {
+        final int defaultHeight;
+        if (getElement().getFirstChild() == null) {
+            if (getElement() instanceof HTMLIFrameElement) {
+                defaultHeight = 154;
+            }
+            else if (getElement() instanceof HTMLTextAreaElement) {
+                defaultHeight = 49;
+            }
+            else {
+                defaultHeight = 0;
+            }
+        }
+        else if (getBrowserVersion().hasFeature(CSS_DEFAULT_ELEMENT_HEIGHT_15)) {
             defaultHeight = 15;
+        }
+        else {
+            defaultHeight = 20;
         }
 
         final int defaultValue = getElement() instanceof HTMLCanvasElement ? 150 : windowHeight;

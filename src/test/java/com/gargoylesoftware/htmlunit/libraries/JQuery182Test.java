@@ -16,9 +16,12 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE7;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static org.junit.Assert.fail;
 
 import org.eclipse.jetty.server.Server;
@@ -1093,7 +1096,7 @@ public class JQuery182Test extends WebDriverTestCase {
     @Alerts(FF3_6 = "support: Verify that the support tests resolve as expected per browser (0, 30, 30)",
         FF10 = "data: expando (0, 1, 1)", CHROME = "data: expando (0, 1, 1)",
         IE = "support: Verify that the support tests resolve as expected per browser (6, 24, 30)")
-    @NotYetImplemented
+    @NotYetImplemented({ FF10, FF17, IE, CHROME })
     public void test_107() throws Exception {
         runTest(107);
     }

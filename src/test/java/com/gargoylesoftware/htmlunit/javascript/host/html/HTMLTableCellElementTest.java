@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -477,6 +479,27 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
             + "  <table><tr><td id='td'>a</td></tr></table>\n"
             + "  </body>\n"
             + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "0", IE = { "1" })
+    @NotYetImplemented(IE)
+    public void offsetHeight() throws Exception {
+        final String html =
+            "<html><body>\n"
+            + "<table><tr>\n"
+            + "<td style='padding:0' id='it'></td>\n"
+            + "<td style='display: none'>t</td>"
+            + "</tr></table>\n"
+            + "<script>\n"
+            + "var it = document.getElementById('it');\n"
+            + "alert(it.offsetHeight);\n"
+            + "</script>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 }
