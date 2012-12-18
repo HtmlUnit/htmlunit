@@ -221,7 +221,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "  <iframe name='secondFrame' id='secondFrame' src='" + URL_SECOND + "' />\n"
+            + "  <iframe name='secondFrame' id='secondFrame' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body>\n"
@@ -328,11 +328,11 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "  <iframe name='secondFrame' id='secondFrame' src='" + URL_SECOND + "' />\n"
+            + "  <iframe name='secondFrame' id='secondFrame' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body>\n"
-            + "  <iframe name='thirdFrame' id='thirdFrame' src='" + URL_THIRD + "' />\n"
+            + "  <iframe name='thirdFrame' id='thirdFrame' src='" + URL_THIRD + "'></iframe>\n"
             + "</body></html>";
         final String thirdContent
             = "<html><head><title>Third</title></head><body>\n"
@@ -395,11 +395,11 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "  <iframe name='secondFrame' id='secondFrame' src='" + URL_SECOND + "' />\n"
+            + "  <iframe name='secondFrame' id='secondFrame' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body>\n"
-            + "  <iframe name='thirdFrame' id='thirdFrame' src='" + URL_THIRD + "' />\n"
+            + "  <iframe name='thirdFrame' id='thirdFrame' src='" + URL_THIRD + "'></iframe>\n"
             + "</body></html>";
         final String thirdContent
             = "<html><head><title>Third</title></head><body>\n"
@@ -549,11 +549,11 @@ public class WindowTest extends SimpleWebTestCase {
     public void parentAndTop() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
-            + "  <iframe name='left' src='" + URL_SECOND + "' />\n"
+            + "  <iframe name='left' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
         final String secondContent
             = "<html><head><title>Second</title></head><body>\n"
-            + "  <iframe name='innermost' src='" + URL_THIRD + "' />\n"
+            + "  <iframe name='innermost' src='" + URL_THIRD + "'></iframe>\n"
             + "</body></html>";
         final String thirdContent
             = "<html><head><title>Third</title><script>\n"
@@ -800,14 +800,14 @@ public class WindowTest extends SimpleWebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body><script>\n"
             + "myVariable = 'first'"
-            + "  </script><iframe name='left' src='" + URL_SECOND + "' />\n"
+            + "  </script><iframe name='left' src='" + URL_SECOND + "'></iframe>\n"
             + "</body></html>";
         webConnection.setResponse(URL_FIRST, firstContent);
 
         final String secondContent
             = "<html><head><title>Second</title></head><body><script>\n"
             + "myVariable = 'second'"
-            + "  </script><iframe name='innermost' src='" + URL_THIRD + "' />\n"
+            + "  </script><iframe name='innermost' src='" + URL_THIRD + "'></iframe>\n"
             + "</body></html>";
         webConnection.setResponse(URL_SECOND, secondContent);
 
