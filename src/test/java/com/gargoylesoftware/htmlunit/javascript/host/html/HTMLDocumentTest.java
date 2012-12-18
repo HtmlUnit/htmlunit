@@ -1449,4 +1449,28 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "undefined", "iso-8859-1", "windows-1256" },
+            FF = { "ISO-8859-1", "ISO-8859-1", "undefined", "undefined" },
+            CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" })
+    @NotYetImplemented
+    public void encoding() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.inputEncoding);\n"
+            + "      alert(document.characterSet);\n"
+            + "      alert(document.charset);\n"
+            + "      alert(document.defaultCharset);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
