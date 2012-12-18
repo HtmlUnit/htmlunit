@@ -78,7 +78,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
    ff17.bin=/usr/bin/firefox                            [Unix-like]
    chrome.bin=/path/to/chromedriver                     [Unix-like]
  * </pre>
- * The file should contain four properties: "browsers", "ff3.6.bin", "ff3.17.bin", and "chrome.bin".
+ * The file should contain four properties: "browsers", "ff3.6.bin", "ff17.bin", and "chrome.bin".
  * <ul>
  *   <li>browsers: is a comma separated list contains any combination of "hu" (for HtmlUnit with all browser versions),
  *   "hu-ie6", "hu-ie7", "hu-ie8", "hu-ie9", "hu-ff3.6", "hu-ff17",
