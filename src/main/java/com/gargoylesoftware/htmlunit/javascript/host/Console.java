@@ -458,7 +458,7 @@ public class Console extends SimpleScriptable {
         }
 
         @Override
-        public String paramterAsString(final Object o) {
+        public String parameterAsString(final Object o) {
             if (o instanceof NativeArray) {
                 final StringBuffer sb = new StringBuffer();
                 for (int i = 0; i < ((NativeArray) o).size(); i++) {
@@ -473,7 +473,7 @@ public class Console extends SimpleScriptable {
         }
 
         @Override
-        public String paramterAsInteger(final Object o) {
+        public String parameterAsInteger(final Object o) {
             if (o instanceof Number) {
                 return Integer.toString(((Number) o).intValue());
             }
@@ -489,7 +489,7 @@ public class Console extends SimpleScriptable {
         }
 
         @Override
-        public String paramterAsFloat(final Object o) {
+        public String parameterAsFloat(final Object o) {
             if (o instanceof Number) {
                 return Float.toString(((Number) o).floatValue());
             }

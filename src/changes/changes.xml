@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                Fixed typo in method names of com.gargoylesoftware.htmlunit.WebConsole.Formatter.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: add document.charset, .characterSet, .defaultCharset and .inputEncoding.
             </action>

@@ -95,7 +95,7 @@ public class WebConsole {
          * @param o object to be printed using string format specifiers
          * @return a string representation of the passed object
          */
-        String paramterAsString(Object o);
+        String parameterAsString(Object o);
 
         /**
          * Function that is used to print an object as integer using
@@ -103,7 +103,7 @@ public class WebConsole {
          * @param o object to be printed using integer format specifiers
          * @return a string representation of the passed object
          */
-        String paramterAsInteger(Object o);
+        String parameterAsInteger(Object o);
 
         /**
          * Function that is used to print an object as float using
@@ -111,7 +111,7 @@ public class WebConsole {
          * @param o object to be printed using float format specifiers
          * @return a string representation of the passed object
          */
-        String paramterAsFloat(Object o);
+        String parameterAsFloat(Object o);
     }
 
     private Formatter formatter_ = new DefaultFormatter();
@@ -220,14 +220,14 @@ public class WebConsole {
                 switch (ch) {
                     case 'o':
                     case 's':
-                        replacement = formatter.paramterAsString(pop(args));
+                        replacement = formatter.parameterAsString(pop(args));
                         break;
                     case 'd':
                     case 'i':
-                        replacement = formatter.paramterAsInteger(pop(args));
+                        replacement = formatter.parameterAsInteger(pop(args));
                         break;
                     case 'f':
-                        replacement = formatter.paramterAsFloat(pop(args));
+                        replacement = formatter.parameterAsFloat(pop(args));
                         break;
                     default:
                         replacement = group;
@@ -263,11 +263,11 @@ public class WebConsole {
     private static class DefaultFormatter implements Formatter {
 
         public String printObject(final Object o) {
-            return paramterAsString(o);
+            return parameterAsString(o);
         }
 
         @Override
-        public String paramterAsString(final Object o) {
+        public String parameterAsString(final Object o) {
             if (o != null) {
                 return o.toString();
             }
@@ -275,7 +275,7 @@ public class WebConsole {
         }
 
         @Override
-        public String paramterAsInteger(final Object o) {
+        public String parameterAsInteger(final Object o) {
             if (o instanceof Number) {
                 return Integer.toString(((Number) o).intValue());
             }
@@ -291,7 +291,7 @@ public class WebConsole {
         }
 
         @Override
-        public String paramterAsFloat(final Object o) {
+        public String parameterAsFloat(final Object o) {
             if (o instanceof Number) {
                 return Float.toString(((Number) o).floatValue());
             }
