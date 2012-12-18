@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +23,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
@@ -70,7 +67,8 @@ public class ConsoleTest {
          * @throws Exception if the test fails
          */
         @Test
-        @Browsers(FF)
+        @Alerts(DEFAULT = { "info: [\"one\", \"two\", \"three\", ({})]", "info: hello" },
+            FF3_6 = "", IE6 = "", IE7 = "", IE8 = "")
         public void log() throws Exception {
             final WebConsole console = getWebClient().getWebConsole();
             final List<String> messages = new ArrayList<String>();
@@ -110,8 +108,7 @@ public class ConsoleTest {
                 + "</script></head><body onload='test()'></body></html>";
 
             loadPage(html);
-            assertEquals("info: [\"one\", \"two\", \"three\", ({})]", messages.get(0));
-            assertEquals("info: hello", messages.get(1));
+            assertEquals(getExpectedAlerts(), messages);
         }
     }
 }
