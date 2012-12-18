@@ -28,6 +28,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_60;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_61;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_63;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_APPEND_CHILD_SUPPORTED;
@@ -79,6 +80,7 @@ import com.gargoylesoftware.htmlunit.CookieManager;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -867,6 +869,49 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             };
         }
         return images_;
+    }
+
+    /**
+     * Returns a string representing the encoding under which the document was parsed.
+     * @return a string representing the encoding under which the document was parsed
+     */
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    public String getInputEncoding() {
+        return getHtmlPage().getPageEncoding();
+    }
+
+    /**
+     * Returns the character encoding of the current document.
+     * @return the character encoding of the current document
+     */
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    public String getCharacterSet() {
+        return getHtmlPage().getPageEncoding();
+    }
+
+    /**
+     * Retrieves the character set used to encode the document.
+     * @return the character set used to encode the document
+     */
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    public String getCharset() {
+        String charset = getHtmlPage().getPageEncoding();
+        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
+            charset = charset.toLowerCase();
+        }
+        return charset;
+    }
+
+    /**
+     * Gets the default character set from the current regional language settings.
+     * @return the default character set from the current regional language settings
+     */
+    @JsxGetter({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    public String getDefaultCharset() {
+        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
+            return "windows-1252";
+        }
+        return TextUtil.DEFAULT_CHARSET;
     }
 
     /**

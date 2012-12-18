@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="add" dev="asashour">
+                JavaScript: add document.charset, .characterSet, .defaultCharset and .inputEncoding.
+            </action>
             <action type="fix" dev="asashour">
                 CSS: fix DirectAdjacentSelector (E + F).
             </action>
