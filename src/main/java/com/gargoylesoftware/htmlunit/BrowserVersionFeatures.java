@@ -572,13 +572,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLCONDITIONAL_COMMENTS,
 
-    /** Do document.bgColor/.alinkColor/.vlinkColor/.linkColor have value by default. */
-    @BrowserFeature(@WebBrowser(IE))
-    HTMLDOCUMENT_COLOR,
-
     /** Is document.charset lower-case (and defaultCharset is 'windows-1252'). */
     @BrowserFeature(@WebBrowser(IE))
     HTMLDOCUMENT_CHARSET_LOWERCASE,
+
+    /** Do document.bgColor/.alinkColor/.vlinkColor/.linkColor have value by default. */
+    @BrowserFeature(@WebBrowser(IE))
+    HTMLDOCUMENT_COLOR,
 
     /** Allows invalid 'align' values. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
