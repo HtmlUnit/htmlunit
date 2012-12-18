@@ -75,7 +75,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * <pre>
    browsers=hu,ff17,ie9
    ff3.6.bin=c:\\location_to_firefox.exe                [Windows]
-   ff17.bin=/use/bin/firefox                            [Unix-like]
+   ff17.bin=/usr/bin/firefox                            [Unix-like]
    chrome.bin=/path/to/chromedriver                     [Unix-like]
  * </pre>
  * The file should contain four properties: "browsers", "ff3.bin", "ff3.6.bin", and "chrome.bin".
