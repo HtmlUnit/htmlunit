@@ -9,7 +9,7 @@
     <body>
         <release version="2.12" date="???" description="Bugfixes">
             <action type="update" dev="mguillem">
-                JavaScript: adjust availability of window.console (Firefox 4+, IE9+ and Chrome).   
+                JavaScript: adjust availability of window.console (Firefox 4+, IE9+ and Chrome).
             </action>
             <action type="fix" dev="mguillem">
                 Fixed typo in method names of com.gargoylesoftware.htmlunit.WebConsole.Formatter.
