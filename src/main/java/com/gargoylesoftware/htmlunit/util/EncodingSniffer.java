@@ -365,6 +365,7 @@ public final class EncodingSniffer {
                             if (charset == null) {
                                 continue;
                             }
+                            charset = charset.toUpperCase();
                         }
                         if (UTF16_BE.equalsIgnoreCase(charset) || UTF16_LE.equalsIgnoreCase(charset)) {
                             charset = UTF8;

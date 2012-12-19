@@ -1505,7 +1505,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
             FF = { "ISO-8859-1", "ISO-8859-1", "undefined", "undefined" },
             CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" })
-    @NotYetImplemented(FF)
     public void encoding3() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                Upper-case the charset detected from "meta" tag.
+            </action>
             <action type="update" dev="mguillem">
                 JavaScript: adjust availability of window.console (Firefox 4+, IE9+ and Chrome).
             </action>
