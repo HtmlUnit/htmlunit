@@ -1551,4 +1551,32 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", "ISO-8859-1");
         verifyAlerts(DEFAULT_WAIT_TIME, expectedAlerts, driver);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "undefined", "utf-8", "windows-1252" },
+            FF = { "UTF-8", "UTF-8", "undefined", "undefined" },
+            CHROME = { "UTF-8", "UTF-8", "UTF-8", "ISO-8859-1" })
+    public void encoding5() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<meta charset='UTF-8'>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.inputEncoding);\n"
+            + "      alert(document.characterSet);\n"
+            + "      alert(document.charset);\n"
+            + "      alert(document.defaultCharset);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <a id='myId' href='test?è=è'>test</a>"
+            + "</body></html>";
+
+        final String[] expectedAlerts = getExpectedAlerts();
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", "UTF-8");
+        verifyAlerts(DEFAULT_WAIT_TIME, expectedAlerts, driver);
+    }
 }

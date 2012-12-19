@@ -365,12 +365,12 @@ public final class EncodingSniffer {
                             if (charset == null) {
                                 continue;
                             }
-                            charset = charset.toUpperCase();
                         }
                         if (UTF16_BE.equalsIgnoreCase(charset) || UTF16_LE.equalsIgnoreCase(charset)) {
                             charset = UTF8;
                         }
                         if (isSupportedCharset(charset)) {
+                            charset = charset.toUpperCase();
                             if (LOG.isDebugEnabled()) {
                                 LOG.debug("Encoding found in meta tag: '" + charset + "'.");
                             }
