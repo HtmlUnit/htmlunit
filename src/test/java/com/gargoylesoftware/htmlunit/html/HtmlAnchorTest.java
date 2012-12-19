@@ -31,6 +31,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -436,6 +437,35 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
 
         final Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
         assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
+    }
+
+    /**
+     * FF behaves that strange.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "click", "href", "doubleClick" },
+            FF = { "click", "href", "click", "doubleClick", "href" })
+    @NotYetImplemented
+    public void doubleClick() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<body>\n"
+            + "  <a id=\"myAnchor\" "
+            +       "href=\"javascript:alert('href');\" "
+            +       "onClick=\"alert('click');\" "
+            +       "onDblClick=\"alert('doubleClick');\">foo</a>\n"
+            + "</body></html>";
+
+        final WebClient client = getWebClientWithMockWebConnection();
+        final List<String> collectedAlerts = new ArrayList<String>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final HtmlPage page = loadPage(html);
+        final HtmlAnchor anchor = page.getHtmlElementById("myAnchor");
+        anchor.dblClick();
+
+        assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 
     /**
