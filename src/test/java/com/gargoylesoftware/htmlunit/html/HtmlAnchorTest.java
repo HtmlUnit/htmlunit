@@ -31,6 +31,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -446,7 +447,7 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = { "click", "href", "doubleClick" },
             FF = { "click", "href", "click", "doubleClick", "href" })
-    @NotYetImplemented
+    @NotYetImplemented(Browser.FF)
     public void doubleClick() throws Exception {
         final String html =
               "<html>\n"
