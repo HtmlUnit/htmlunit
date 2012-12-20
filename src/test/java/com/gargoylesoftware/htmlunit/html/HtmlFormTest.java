@@ -1149,12 +1149,12 @@ public class HtmlFormTest extends SimpleWebTestCase {
      */
     @Test
     public void submitRequestCharset() throws Exception {
-        submitRequestCharset("utf-8", null, null, "utf-8");
-        submitRequestCharset(null, "utf-8", null, "utf-8");
-        submitRequestCharset("iso-8859-1", null, "utf-8", "utf-8");
-        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "utf-8");
-        submitRequestCharset("utf-8", null, "iso-8859-1 utf-8", "iso-8859-1");
-        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "utf-8");
+        submitRequestCharset("utf-8", null, null, "UTF-8");
+        submitRequestCharset(null, "utf-8", null, "UTF-8");
+        submitRequestCharset("iso-8859-1", null, "utf-8", "UTF-8");
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "UTF-8");
+        submitRequestCharset("utf-8", null, "iso-8859-1 utf-8", "ISO-8859-1");
+        submitRequestCharset("iso-8859-1", null, "utf-8, iso-8859-1", "UTF-8");
     }
 
     /**
@@ -1207,7 +1207,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(html, 200, "ok", contentType);
         final HtmlPage page = client.getPage(getDefaultUrl());
 
-        final String firstPageEncoding = StringUtils.defaultString(metaCharset, headerCharset);
+        final String firstPageEncoding = StringUtils.defaultString(metaCharset, headerCharset).toUpperCase();
         assertEquals(firstPageEncoding, page.getPageEncoding());
 
         final HtmlForm form = page.getFormByName("form1");

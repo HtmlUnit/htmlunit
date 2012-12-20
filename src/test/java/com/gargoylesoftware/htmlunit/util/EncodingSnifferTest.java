@@ -41,8 +41,8 @@ public class EncodingSnifferTest {
         testHeader(null, "foo", "bar");
         testHeader(null, "Content-Type", "blah");
         testHeader(null, "Content-Type", "text/html;charset=blah");
-        testHeader("utf-8", "Content-Type", "text/html;charset=utf-8");
-        testHeader("utf-8", "Content-Type", "text/html;charset=utf-8;");
+        testHeader("UTF-8", "Content-Type", "text/html;charset=utf-8");
+        testHeader("UTF-8", "Content-Type", "text/html;charset=utf-8;");
     }
 
     private void testHeader(final String expectedEncoding, final String headerName, final String headerValue) {
@@ -72,10 +72,10 @@ public class EncodingSnifferTest {
         testMeta(null, "<meta a='b'");
         testMeta(null, "<meta a='b' c=d e=\"f\"/>");
         testMeta(null, "<meta a='b' c=d e=\"f\" content='text/html; charset=blah' />");
-        testMeta("utf-8", "<meta a='b' c=d e=\"f\" content='text/html; charset=utf-8' />");
-        testMeta("utf-8", "abc <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>");
-        testMeta("utf-8", "abc <meta http-equiv='Content-Type' content='text/html; CHARSET=UTF-8'/>");
-        testMeta("utf-8", "abc <meta http-equiv='Content-Type' content='text/html; chArsEt=UtF-8'/>");
+        testMeta("UTF-8", "<meta a='b' c=d e=\"f\" content='text/html; charset=utf-8' />");
+        testMeta("UTF-8", "abc <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>");
+        testMeta("UTF-8", "abc <meta http-equiv='Content-Type' content='text/html; CHARSET=UTF-8'/>");
+        testMeta("UTF-8", "abc <meta http-equiv='Content-Type' content='text/html; chArsEt=UtF-8'/>");
     }
 
     private void testMeta(final String expectedEncoding, final String content) {

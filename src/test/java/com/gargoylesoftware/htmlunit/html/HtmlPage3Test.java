@@ -24,6 +24,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -93,4 +94,36 @@ public class HtmlPage3Test extends WebDriverTestCase {
         Assert.assertEquals("js", input.getAttribute("addedBy"));
         Assert.assertEquals("js", input.getAttribute("addedby"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "undefined", "undefined", "iso-8859-1", "windows-1252" },
+            FF = { "ISO-8859-1", "ISO-8859-1", "undefined", "undefined" },
+            CHROME = { "ISO-8859-1", "ISO-8859-1", "ISO-8859-1", "ISO-8859-1" })
+    public void getPageEncoding() throws Exception {
+        final String htmlContent = "<html><head>\n"
+            + "  <title>foo</title>\n"
+            + "  <meta http-equiv='Content-Type' content='text/html; charset=Shift_JIS'>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.inputEncoding);\n"
+            + "      alert(document.characterSet);\n"
+            + "      alert(document.charset);\n"
+            + "      alert(document.defaultCharset);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<table><tr><td>\n"
+            + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">\n"
+            + "<form name='form1'>\n"
+            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
+            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
+            + "</form>\n"
+            + "</td></tr></table>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(htmlContent);
+    }
+
 }

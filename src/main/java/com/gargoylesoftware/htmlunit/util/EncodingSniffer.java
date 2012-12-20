@@ -295,6 +295,7 @@ public final class EncodingSniffer {
                 final String value = pair.getValue();
                 encoding = extractEncodingFromContentType(value);
                 if (encoding != null) {
+                    encoding = encoding.toUpperCase();
                     break;
                 }
             }

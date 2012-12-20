@@ -230,7 +230,7 @@ public class HtmlForm extends HtmlElement {
      */
     private String getSubmitCharset() {
         if (getAcceptCharsetAttribute().length() > 0) {
-            return SUBMIT_CHARSET_PATTERN.matcher(getAcceptCharsetAttribute().trim()).replaceAll("");
+            return SUBMIT_CHARSET_PATTERN.matcher(getAcceptCharsetAttribute().trim()).replaceAll("").toUpperCase();
         }
         return getPage().getPageEncoding();
     }

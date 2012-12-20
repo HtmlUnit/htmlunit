@@ -607,28 +607,6 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void testGetPageEncoding() throws Exception {
-        final String htmlContent = "<html><head>\n"
-            + "<title>foo</title>\n"
-            + "<meta http-equiv='Content-Type' content='text/html ;charset=Shift_JIS'>\n"
-            + "</head><body>\n"
-            + "<table><tr><td>\n"
-            + "<meta name=vs_targetSchema content=\"http://schemas.microsoft.com/intellisense/ie5\">\n"
-            + "<form name='form1'>\n"
-            + "    <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "    <input type='text' name='textfield2' id='textfield2'/>\n"
-            + "</form>\n"
-            + "</td></tr></table>\n"
-            + "</body></html>";
-        final HtmlPage page = loadPage(htmlContent);
-
-        assertEquals("shift_jis", page.getPageEncoding());
-    }
-
-    /**
      * Verifies that an empty charset in a content-type meta tag is ignored. See bug 2484753.
      * @throws Exception if an error occurs
      */

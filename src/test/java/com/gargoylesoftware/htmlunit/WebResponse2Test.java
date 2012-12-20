@@ -40,7 +40,7 @@ public class WebResponse2Test extends SimpleWebTestCase {
             + "<body>foo</body>\n"
             + "</html>";
         final HtmlPage page = loadPage(html);
-        assertEquals("utf-8", page.getWebResponse().getContentCharsetOrNull());
+        assertEquals("UTF-8", page.getWebResponse().getContentCharsetOrNull());
         assertEquals(html, page.getWebResponse().getContentAsString());
     }
 
