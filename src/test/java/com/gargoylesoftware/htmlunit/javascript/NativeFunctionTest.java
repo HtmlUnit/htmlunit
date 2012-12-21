@@ -168,4 +168,24 @@ public class NativeFunctionTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Function defined in a scope should not overwrite function in top level scope.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void definitionInScope() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "var $ = function() { return 1; };\n"
+            + "var ori = $;\n"
+            + "function foo() {\n"
+            + "  var $ = function $() { return 2; };\n"
+            + "};\n"
+            + "foo();\n"
+            + "alert(ori == $);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
