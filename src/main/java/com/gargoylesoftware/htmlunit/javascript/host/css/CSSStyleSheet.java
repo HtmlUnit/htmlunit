@@ -93,9 +93,13 @@ import com.steadystate.css.dom.CSSMediaRuleImpl;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACParserCSS21;
+import com.steadystate.css.parser.SACParserCSS3;
 import com.steadystate.css.parser.SelectorListImpl;
+import com.steadystate.css.parser.selectors.GeneralAdjacentSelectorImpl;
+import com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl;
 import com.steadystate.css.parser.selectors.PseudoClassConditionImpl;
+import com.steadystate.css.parser.selectors.SubstringAttributeConditionImpl;
+import com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl;
 
 /**
  * A JavaScript object for a Stylesheet.
@@ -331,6 +335,17 @@ public class CSSStyleSheet extends SimpleScriptable {
      */
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
             final DomElement element) {
+        if (selector instanceof GeneralAdjacentSelectorImpl) {
+            final SiblingSelector ss = (SiblingSelector) selector;
+            for (DomNode prev = element.getPreviousSibling(); prev != null; prev = prev.getPreviousSibling()) {
+                if (prev instanceof HtmlElement
+                    && selects(browserVersion, ss.getSelector(), (HtmlElement) prev)
+                    && selects(browserVersion, ss.getSiblingSelector(), element)) {
+                    return true;
+                }
+            }
+            return false;
+        }
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
                 return true;
@@ -402,6 +417,18 @@ public class CSSStyleSheet extends SimpleScriptable {
      * @return <tt>true</tt> if it does apply, <tt>false</tt> if it doesn't apply
      */
     static boolean selects(final BrowserVersion browserVersion, final Condition condition, final DomElement element) {
+        if (condition instanceof PrefixAttributeConditionImpl) {
+            final AttributeCondition ac = (AttributeCondition) condition;
+            return element.getAttribute(ac.getLocalName()).startsWith(ac.getValue());
+        }
+        if (condition instanceof SuffixAttributeConditionImpl) {
+            final AttributeCondition ac = (AttributeCondition) condition;
+            return element.getAttribute(ac.getLocalName()).endsWith(ac.getValue());
+        }
+        if (condition instanceof SubstringAttributeConditionImpl) {
+            final AttributeCondition ac = (AttributeCondition) condition;
+            return element.getAttribute(ac.getLocalName()).contains(ac.getValue());
+        }
         switch (condition.getConditionType()) {
             case Condition.SAC_ID_CONDITION:
                 final AttributeCondition ac4 = (AttributeCondition) condition;
@@ -578,7 +605,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         org.w3c.dom.css.CSSStyleSheet ss;
         try {
             final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
+            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
             parser.setErrorHandler(errorHandler);
             ss = parser.parseStyleSheet(source, null, null);
         }
@@ -605,7 +632,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         SelectorList selectors;
         try {
             final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
+            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
             parser.setErrorHandler(errorHandler);
             selectors = parser.parseSelectors(source);
             // in case of error parseSelectors returns null

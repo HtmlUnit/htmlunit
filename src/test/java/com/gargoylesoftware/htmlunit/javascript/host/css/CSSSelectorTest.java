@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class CSSSelectorTest extends WebDriverTestCase {
 
     /**
-     * Test for bug 1287: CSS3 selector is not yet supported.
+     * Test for bug 1287.
      *
      * @throws Exception if an error occurs
      */
@@ -163,4 +163,109 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "1", "thing1" })
+    public void prefixAttribute() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var list = document.querySelectorAll('[id^=\"thing\"]');\n"
+            + "    alert(list.length);\n"
+            + "    alert(list[0].id);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='something'></ul>\n"
+            + "  <p></p>\n"
+            + "  <ul id='thing1'></ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "1", "something" })
+    public void suffixAttribute() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var list = document.querySelectorAll('[id$=\"thing\"]');\n"
+            + "    alert(list.length);\n"
+            + "    alert(list[0].id);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='something'></ul>\n"
+            + "  <p></p>\n"
+            + "  <ul id='thing2'></ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "2", "something", "thing2" })
+    public void substringAttribute() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var list = document.querySelectorAll('[id*=\"thing\"]');\n"
+            + "    alert(list.length);\n"
+            + "    alert(list[0].id);\n"
+            + "    alert(list[1].id);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='something'></ul>\n"
+            + "  <p></p>\n"
+            + "  <ul id='thing2'></ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "1", "ul2" })
+    public void generalAdjacentSelector() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var list = document.querySelectorAll('div~ul');\n"
+            + "    alert(list.length);\n"
+            + "    alert(list[0].id);\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <p></p>\n"
+            + "  <ul id='ul2'></ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
