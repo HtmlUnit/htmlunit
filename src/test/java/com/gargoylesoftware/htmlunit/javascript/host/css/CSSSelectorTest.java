@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -35,13 +34,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 public class CSSSelectorTest extends WebDriverTestCase {
 
     /**
-     * Test for bug 3300434: CSS3 selector is not yet supported.
+     * Test for bug 1287: CSS3 selector is not yet supported.
      *
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("li2")
-    @NotYetImplemented
     public void nth_child() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -54,6 +52,64 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <li id='li1'></li>\n"
             + "  <li id='li2'></li>\n"
             + "  <li id='li3'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("exception")
+    public void nth_child_no_argument() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    alert(document.querySelectorAll('li:nth-child()'));\n"
+            + "  } catch (e) {alert('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "li1", "li4", "li7", "li10" })
+    public void nth_child_equation() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('li:nth-child(3n+1)');\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    alert(list[i].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3'></li>\n"
+            + "  <li id='li4'></li>\n"
+            + "  <li id='li5'></li>\n"
+            + "  <li id='li6'></li>\n"
+            + "  <li id='li7'></li>\n"
+            + "  <li id='li8'></li>\n"
+            + "  <li id='li9'></li>\n"
+            + "  <li id='li10'></li>\n"
             + "</ul>\n"
             + "</body></html>";
 

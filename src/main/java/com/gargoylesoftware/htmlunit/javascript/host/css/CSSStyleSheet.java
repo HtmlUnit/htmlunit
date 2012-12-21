@@ -519,6 +519,51 @@ public class CSSStyleSheet extends SimpleScriptable {
             return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
                 || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked());
         }
+        else if (value.startsWith("nth-child(")) {
+            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+            int index = 0;
+            for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
+                if (n instanceof DomElement) {
+                    index++;
+                }
+            }
+            return getNth(nth, index);
+        }
+        return false;
+    }
+
+    private static boolean getNth(final String nth, final int index) {
+        if ("odd".equalsIgnoreCase(nth)) {
+            return index % 2 == 1;
+        }
+        else if ("even".equalsIgnoreCase(nth)) {
+            return index % 2 == 0;
+        }
+        final int nIndex = nth.indexOf('n');
+        final int a;
+        if (nIndex != -1) {
+            String value = nth.substring(0, nIndex).trim();
+            if (value.startsWith("+")) {
+                value = value.substring(1);
+            }
+            a = Integer.parseInt(value);
+        }
+        else {
+            a = 0;
+        }
+        String value = nth.substring(nIndex + 1).trim();
+        if (value.startsWith("+")) {
+            value = value.substring(1);
+        }
+        final int b = Integer.parseInt(value);
+        if (a == 0) {
+            return index == b;
+        }
+        for (int n = 0; a * n + b <= index; n++) {
+            if (a * n + b == index) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -850,7 +895,14 @@ public class CSSStyleSheet extends SimpleScriptable {
                 return true;
             case Condition.SAC_PSEUDO_CLASS_CONDITION:
                 final PseudoClassConditionImpl pcc = (PseudoClassConditionImpl) condition;
-                return PSEUDO_CLASSES.contains(pcc.getValue());
+                String value = pcc.getValue();
+                if (value.endsWith(")")) {
+                    if (value.endsWith("()")) {
+                        return false;
+                    }
+                    value = value.substring(0, value.indexOf('(') + 1) + ')';
+                }
+                return PSEUDO_CLASSES.contains(value);
             default:
                 LOG.warn("Unhandled CSS condition type '" + condition.getConditionType() + "'. Accepting it silently.");
                 return true;
