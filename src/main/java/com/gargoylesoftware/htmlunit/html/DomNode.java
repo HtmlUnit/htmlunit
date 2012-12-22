@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACParserCSS3;
+import com.steadystate.css.parser.SACParserCSS21;
 
 /**
  * Base class for nodes in the HTML DOM tree. This class is modeled after the
@@ -1558,7 +1558,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     errorOccured.set(true);
                 }
             };
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+            final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
             parser.setErrorHandler(errorHandler);
             final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
             // in case of error parseSelectors returns null

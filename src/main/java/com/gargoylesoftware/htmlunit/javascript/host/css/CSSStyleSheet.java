@@ -93,7 +93,7 @@ import com.steadystate.css.dom.CSSMediaRuleImpl;
 import com.steadystate.css.dom.CSSStyleRuleImpl;
 import com.steadystate.css.dom.CSSStyleSheetImpl;
 import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACParserCSS3;
+import com.steadystate.css.parser.SACParserCSS21;
 import com.steadystate.css.parser.SelectorListImpl;
 import com.steadystate.css.parser.selectors.GeneralAdjacentSelectorImpl;
 import com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl;
@@ -605,7 +605,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         org.w3c.dom.css.CSSStyleSheet ss;
         try {
             final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+            final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
             parser.setErrorHandler(errorHandler);
             ss = parser.parseStyleSheet(source, null, null);
         }
@@ -632,7 +632,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         SelectorList selectors;
         try {
             final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+            final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
             parser.setErrorHandler(errorHandler);
             selectors = parser.parseSelectors(source);
             // in case of error parseSelectors returns null
