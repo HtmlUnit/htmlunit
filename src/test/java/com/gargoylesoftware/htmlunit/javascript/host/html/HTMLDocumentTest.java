@@ -1606,4 +1606,30 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", "UTF-8");
         verifyAlerts(DEFAULT_WAIT_TIME, expectedAlerts, driver);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void encoding7() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<meta charset='UTF-8'>\n"
+            + "</head><body>\n"
+            + "  <a id='myId' href='test?\u00E8=\u00E8'>test</a>"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", "UTF-8");
+        driver.findElement(By.id("myId")).click();
+        String actualQuery = driver.getCurrentUrl();
+        actualQuery = actualQuery.substring(actualQuery.indexOf('?'));
+        final String expectedQuery;
+        if (getBrowserVersion().isIE()) {
+            expectedQuery = "?\u00E8=\u00E8";
+        }
+        else {
+            expectedQuery = "?%C3%A8=%C3%A8";
+        }
+        assertTrue(actualQuery.endsWith(expectedQuery));
+    }
 }

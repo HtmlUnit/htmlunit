@@ -1422,7 +1422,8 @@ public class WebClient implements Serializable {
         WebAssert.notNull("method", method);
         WebAssert.notNull("parameters", parameters);
 
-        url = UrlUtils.encodeUrl(url, getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING));
+        url = UrlUtils.encodeUrl(url, getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING),
+                webRequest.getCharset());
         webRequest.setUrl(url);
 
         if (LOG.isDebugEnabled()) {

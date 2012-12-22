@@ -19,6 +19,7 @@ import java.net.URL;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.TextUtil;
 
 /**
  * Tests for {@link UrlUtils}.
@@ -230,7 +231,8 @@ public class UrlUtilsTest extends SimpleWebTestCase {
     @Test
     public void percent() throws Exception {
         final URL url = new URL("http://localhost/bug%21.html");
-        assertEquals("http://localhost/bug%21.html", UrlUtils.encodeUrl(url, false).toExternalForm());
+        assertEquals("http://localhost/bug%21.html",
+                UrlUtils.encodeUrl(url, false, TextUtil.DEFAULT_CHARSET).toExternalForm());
     }
 
     /**

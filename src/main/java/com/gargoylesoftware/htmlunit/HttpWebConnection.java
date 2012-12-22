@@ -241,7 +241,7 @@ public class HttpWebConnection implements WebConnection {
         // URLs; because of this we allow some Unicode chars in URLs. However, at this point we're
         // handing things over the HttpClient, and HttpClient will blow up if we leave these Unicode
         // chars in the URL.
-        final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false);
+        final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false, webRequest.getCharset());
 
         final String charset = webRequest.getCharset();
         // URIUtils.createURI is deprecated but as of httpclient-4.2.1, URIBuilder doesn't work here as it encodes path

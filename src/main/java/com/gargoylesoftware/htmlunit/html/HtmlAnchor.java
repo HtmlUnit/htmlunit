@@ -116,6 +116,7 @@ public class HtmlAnchor extends HtmlElement {
         }
 
         final WebRequest webRequest = new WebRequest(url);
+        webRequest.setCharset(page.getPageEncoding());
         webRequest.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
         if (LOG.isDebugEnabled()) {
             LOG.debug(

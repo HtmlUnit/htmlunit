@@ -22,6 +22,7 @@ import java.util.BitSet;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.net.URLCodec;
 
+import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebAssert;
 
 /**
@@ -203,8 +204,25 @@ public final class UrlUtils {
      * @param url the URL to encode
      * @param minimalQueryEncoding whether or not to perform minimal query encoding, like IE does
      * @return the encoded URL
+     * @deprecated as of 2.12, please use {@link #encodeUrl(URL, boolean, String)} instead
      */
+    @Deprecated
     public static URL encodeUrl(final URL url, final boolean minimalQueryEncoding) {
+        return encodeUrl(url, minimalQueryEncoding, TextUtil.DEFAULT_CHARSET);
+    }
+
+    /**
+     * <p>Encodes illegal characters in the specified URL's path, query string and anchor according to the URL
+     * encoding rules observed in real browsers.</p>
+     *
+     * <p>For example, this method changes <tt>"http://first/?a=b c"</tt> to <tt>"http://first/?a=b%20c"</tt>.</p>
+     *
+     * @param url the URL to encode
+     * @param minimalQueryEncoding whether or not to perform minimal query encoding, like IE does
+     * @param charset the charset
+     * @return the encoded URL
+     */
+    public static URL encodeUrl(final URL url, final boolean minimalQueryEncoding, final String charset) {
         final String p = url.getProtocol();
         if ("javascript".equalsIgnoreCase(p) || "about".equalsIgnoreCase(p) || "data".equalsIgnoreCase(p)) {
             // Special exception.
@@ -213,7 +231,7 @@ public final class UrlUtils {
         try {
             String path = url.getPath();
             if (path != null) {
-                path = encode(path, PATH_ALLOWED_CHARS, "utf-8");
+                path = encode(path, PATH_ALLOWED_CHARS, "UTF-8");
             }
             String query = url.getQuery();
             if (query != null) {
@@ -221,12 +239,12 @@ public final class UrlUtils {
                     query = org.apache.commons.lang3.StringUtils.replace(query, " ", "%20");
                 }
                 else {
-                    query = encode(query, QUERY_ALLOWED_CHARS, "windows-1252");
+                    query = encode(query, QUERY_ALLOWED_CHARS, charset);
                 }
             }
             String anchor = url.getRef();
             if (anchor != null) {
-                anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, "utf-8");
+                anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, "UTF-8");
             }
             return createNewUrl(url.getProtocol(), url.getHost(), url.getPort(), path, anchor, query);
         }
@@ -244,7 +262,7 @@ public final class UrlUtils {
      */
     public static String encodeAnchor(String anchor) {
         if (anchor != null) {
-            anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, "utf-8");
+            anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, "UTF-8");
         }
         return anchor;
     }
