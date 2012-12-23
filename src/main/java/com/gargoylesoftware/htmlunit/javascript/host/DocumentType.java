@@ -47,11 +47,7 @@ public class DocumentType extends Node {
      */
     @JsxGetter
     public String getName() {
-        final String name = ((DomDocumentType) getDomNodeOrDie()).getName();
-        if ("html".equals(name)) {
-            return name.toUpperCase();
-        }
-        return name;
+        return ((DomDocumentType) getDomNodeOrDie()).getName();
     }
 
     /**
