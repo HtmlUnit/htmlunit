@@ -153,6 +153,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     DOM_NORMALIZE_REMOVE_CHILDREN,
 
+    /** If document.implementation.hasFeature() supports only "HTML". */
+    @BrowserFeature(@WebBrowser(IE))
+    DOMIMPLEMENTATION_ONLY_HTML,
+
     /** Triggers "DOMContentLoaded" event. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_DOM_CONTENT_LOADED,
@@ -363,10 +367,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
     GENERATED_32,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_35,
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))

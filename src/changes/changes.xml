@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="add" dev="asashour">
+                JavaScript: add document.implementation.createDocument for Chrome.
+            </action>
             <action type="update" dev="asashour">
                 UrlUtils: deprecate encodeUrl(URL, boolean).
             </action>

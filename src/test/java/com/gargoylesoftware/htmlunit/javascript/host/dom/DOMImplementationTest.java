@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -69,6 +70,16 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "CSS3 1.0: false", "CSS3 2.0: false", "CSS3 3.0: false" },
+            IE = { "CSS3 1.0: false", "CSS3 2.0: false", "CSS3 3.0: false" })
+    public void hasFeature_CSS3() throws Exception {
+        hasFeature("CSS3", "['1.0', '2.0', '3.0']");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "XPath 3.0: true",
             IE = "XPath 3.0: false")
     public void hasFeature_XPath() throws Exception {
@@ -97,13 +108,13 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
-    @Alerts("[object XMLDocument]")
+    @Browsers({ FF, CHROME })
+    @Alerts(FF = "[object XMLDocument]", CHROME = "[object Document]")
+    @NotYetImplemented(CHROME)
     public void createDocument() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
-            + "    var doc = document.implementation.createDocument('', '', null);\n"
-            + "    alert(doc);\n"
+            + "    alert(document.implementation.createDocument('', '', null));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
