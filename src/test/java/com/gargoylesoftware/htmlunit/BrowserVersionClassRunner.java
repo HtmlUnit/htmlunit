@@ -340,7 +340,6 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return result;
     }
 
-    @SuppressWarnings("deprecation")
     private Statement withMethodRules(final FrameworkMethod method, final Object target, Statement result) {
         final List<TestRule> testRules = getTestRules(target);
         for (final org.junit.rules.MethodRule each : getMethodRules(target)) {
@@ -351,7 +350,6 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return result;
     }
 
-    @SuppressWarnings("deprecation")
     private List<org.junit.rules.MethodRule> getMethodRules(final Object target) {
         return rules(target);
     }

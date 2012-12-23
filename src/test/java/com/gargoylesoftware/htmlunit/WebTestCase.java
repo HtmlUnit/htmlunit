@@ -229,7 +229,7 @@ public abstract class WebTestCase {
      * Facility method to avoid having to create explicitly a list from
      * a String[] (for example when testing received alerts).
      * Transforms the String[] to a List before calling
-     * {@link junit.framework.Assert#assertEquals(java.lang.Object, java.lang.Object)}.
+     * {@link org.junit.Assert#assertEquals(java.lang.Object, java.lang.Object)}.
      * @param expected the expected strings
      * @param actual the collection of strings to test
      */
@@ -241,7 +241,7 @@ public abstract class WebTestCase {
      * Facility method to avoid having to create explicitly a list from
      * a String[] (for example when testing received alerts).
      * Transforms the String[] to a List before calling
-     * {@link junit.framework.Assert#assertEquals(java.lang.String, java.lang.Object, java.lang.Object)}.
+     * {@link org.junit.Assert#assertEquals(java.lang.String, java.lang.Object, java.lang.Object)}.
      * @param message the message to display if assertion fails
      * @param expected the expected strings
      * @param actual the collection of strings to test

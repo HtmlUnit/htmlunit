@@ -20,8 +20,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 
-import junit.framework.AssertionFailedError;
-
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Test;
@@ -74,7 +72,7 @@ public class MooTools121Test extends SimpleWebTestCase {
             for (HtmlElement failure : failures) {
                 sb.append(failure.asXml()).append("\n\n");
             }
-            throw new AssertionFailedError(sb.toString());
+            throw new AssertionError(sb.toString());
         }
 
         assertEquals("364", page.getElementById("total_examples").asText());
