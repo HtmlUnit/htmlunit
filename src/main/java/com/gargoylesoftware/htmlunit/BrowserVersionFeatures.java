@@ -149,13 +149,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     DOCTYPE_IS_COMMENT,
 
-    /** IE removes all child text nodes, but FF preserves the first. */
-    @BrowserFeature(@WebBrowser(IE))
-    DOM_NORMALIZE_REMOVE_CHILDREN,
-
     /** If document.implementation.hasFeature() supports only "HTML". */
     @BrowserFeature(@WebBrowser(IE))
     DOMIMPLEMENTATION_ONLY_HTML,
+
+    /** IE removes all child text nodes, but FF preserves the first. */
+    @BrowserFeature(@WebBrowser(IE))
+    DOM_NORMALIZE_REMOVE_CHILDREN,
 
     /** Triggers "DOMContentLoaded" event. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
