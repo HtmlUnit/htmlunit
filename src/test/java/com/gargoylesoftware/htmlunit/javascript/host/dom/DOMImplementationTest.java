@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
@@ -22,7 +23,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link DOMImplementation}.
@@ -32,13 +33,13 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class DOMImplementationTest extends SimpleWebTestCase {
+public class DOMImplementationTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "HTML 1.0: true", "HTML 2.0: true", "HTML 3.0: false" },
+    @Alerts(DEFAULT = { "HTML 1.0: true", "HTML 2.0: true", "HTML 3.0: false" },
             IE = { "HTML 1.0: true", "HTML 2.0: false", "HTML 3.0: false" })
     public void hasFeature_HTML() throws Exception {
         hasFeature("HTML", "['1.0', '2.0', '3.0']");
@@ -48,7 +49,7 @@ public class DOMImplementationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "XML 1.0: true", "XML 2.0: true", "XML 3.0: false" },
+    @Alerts(DEFAULT = { "XML 1.0: true", "XML 2.0: true", "XML 3.0: false" },
             IE = { "XML 1.0: false", "XML 2.0: false", "XML 3.0: false" })
     public void hasFeature_XML() throws Exception {
         hasFeature("XML", "['1.0', '2.0', '3.0']");
@@ -58,7 +59,7 @@ public class DOMImplementationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "CSS2 1.0: false", "CSS2 2.0: true", "CSS2 3.0: false" },
+    @Alerts(DEFAULT = { "CSS2 1.0: false", "CSS2 2.0: true", "CSS2 3.0: false" },
             IE = { "CSS2 1.0: false", "CSS2 2.0: false", "CSS2 3.0: false" })
     public void hasFeature_CSS2() throws Exception {
         hasFeature("CSS2", "['1.0', '2.0', '3.0']");
@@ -68,7 +69,7 @@ public class DOMImplementationTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "XPath 3.0: true",
+    @Alerts(DEFAULT = "XPath 3.0: true",
             IE = "XPath 3.0: false")
     public void hasFeature_XPath() throws Exception {
         hasFeature("XPath", "['3.0']");
@@ -89,7 +90,7 @@ public class DOMImplementationTest extends SimpleWebTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -107,14 +108,14 @@ public class DOMImplementationTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
+    @Browsers({ FF, CHROME })
     @Alerts("mydoc")
     public void createDocument_qualifiedName() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -125,6 +126,6 @@ public class DOMImplementationTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts(html);
+        loadPageWithAlerts2(html);
     }
 }
