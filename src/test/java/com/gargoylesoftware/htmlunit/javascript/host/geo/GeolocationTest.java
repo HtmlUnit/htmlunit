@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -53,9 +54,12 @@ public class GeolocationTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "12.34567891 98.76543211")
+    @Alerts(DEFAULT = "12.34567891 98.76543211", IE = { })
     @NotYetImplemented(FF) //since it runs on Windows only (for now)
     public void getCurrentPosition_enabled() throws Exception {
+        if (getBrowserVersion().isFirefox() && GEOLOCATION_IGNORE) {
+            Assert.fail("To succeed!");
+        }
         getCurrentPosition(true);
     }
 

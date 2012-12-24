@@ -78,6 +78,10 @@ public abstract class WebTestCase {
     public static final boolean SOCKS_PROXY_SKIP = Boolean.valueOf(
             System.getProperty("htmlunit.test.socksproxy.skip", "false"));
 
+    /** Succeeds the SOCKS proxy tests (for windows) . */
+    public static final boolean GEOLOCATION_IGNORE = Boolean.valueOf(
+            System.getProperty("htmlunit.test.geolocation.ignore", "false"));
+
     /** The factor used to adjust the DEFAULT_WAIT_TIME (for slow systems like our build machine). */
     protected static final long DEFAULT_WAIT_TIME_FACTOR = Integer.parseInt(
             System.getProperty("htmlunit.test.defaultwaittimefactor", "1"));
