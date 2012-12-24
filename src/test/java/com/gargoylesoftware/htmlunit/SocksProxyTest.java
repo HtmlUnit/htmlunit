@@ -47,7 +47,9 @@ public class SocksProxyTest extends WebServerTestCase {
      */
     @Test
     public void http() throws Exception {
-        doHttpTest(getWebClientWithSocksProxy());
+        if (!SOCKS_PROXY_SKIP) {
+            doHttpTest(getWebClientWithSocksProxy());
+        }
     }
 
     /**
@@ -73,7 +75,9 @@ public class SocksProxyTest extends WebServerTestCase {
      */
     @Test
     public void https() throws Exception {
-        doHttpsTest(getWebClientWithSocksProxy());
+        if (!SOCKS_PROXY_SKIP) {
+            doHttpsTest(getWebClientWithSocksProxy());
+        }
     }
 
     /**

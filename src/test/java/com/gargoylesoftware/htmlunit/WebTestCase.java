@@ -74,6 +74,10 @@ public abstract class WebTestCase {
     public static final int SOCKS_PROXY_PORT = Integer.parseInt(
             System.getProperty("htmlunit.test.socksproxy.port", "55555"));
 
+    /** Skips the SOCKS proxy tests. */
+    public static final boolean SOCKS_PROXY_SKIP = Boolean.valueOf(
+            System.getProperty("htmlunit.test.socksproxy.skip", "false"));
+
     /** The factor used to adjust the DEFAULT_WAIT_TIME (for slow systems like our build machine). */
     protected static final long DEFAULT_WAIT_TIME_FACTOR = Integer.parseInt(
             System.getProperty("htmlunit.test.defaultwaittimefactor", "1"));
