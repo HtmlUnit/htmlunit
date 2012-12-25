@@ -820,11 +820,9 @@ public class WebClientTest extends SimpleWebTestCase {
         final String htmlContent = "<html><head><title>foo</title></head><body></body></html>";
         final File currentDirectory = new File((new File("")).getAbsolutePath());
         final File tmpFile = File.createTempFile("test", ".html", currentDirectory);
-        System.out.println("Temporary file created: " + tmpFile.getAbsolutePath());
         tmpFile.deleteOnExit();
         final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
         FileUtils.writeStringToFile(tmpFile, htmlContent, encoding);
-        System.out.println("Temporary file exists: " + tmpFile.exists());
 
         // Test a normal file URL.
 

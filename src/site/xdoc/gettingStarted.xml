@@ -55,7 +55,7 @@ public void homePage() throws Exception {
             <source><![CDATA[
 @Test
 public void homePage_Firefox() throws Exception {
-    final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_10);
+    final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_17);
     final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
     Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
 
