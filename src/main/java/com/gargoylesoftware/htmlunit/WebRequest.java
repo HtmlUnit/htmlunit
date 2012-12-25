@@ -185,6 +185,9 @@ public class WebRequest implements Serializable {
             if (url.getRef() != null) {
                 newFile += '#' + url.getRef();
             }
+            if ("file".equals(url.getProtocol()) && url.getAuthority().endsWith(":")) {
+                newFile = ":" + newFile;
+            }
             url = new URL(url.getProtocol(), url.getHost(), url.getPort(), newFile);
         }
         catch (final Exception e) {
