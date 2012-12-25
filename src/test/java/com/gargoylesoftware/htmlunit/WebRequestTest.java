@@ -185,6 +185,7 @@ public class WebRequestTest {
         final WebRequest request = new WebRequest(url);
         assertEquals(url.toExternalForm(), request.getUrl().toExternalForm());
     }
+
     /**
      * @throws Exception if the test fails
      */

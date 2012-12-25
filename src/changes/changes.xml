@@ -9,7 +9,7 @@
     <body>
         <release version="2.12" date="???" description="Bugfixes">
             <action type="fix" dev="asashour">
-                Fix URL handling of local files in windows, if they have folders starting with dot.
+                Fix URL handling of local files in Windows, if they have folders starting with dot.
             </action>
             <action type="add" dev="asashour">
                 JavaScript: add document.implementation.createDocument for Chrome.
