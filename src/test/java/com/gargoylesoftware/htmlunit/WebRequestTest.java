@@ -185,4 +185,13 @@ public class WebRequestTest {
         final WebRequest request = new WebRequest(url);
         assertEquals(url.toExternalForm(), request.getUrl().toExternalForm());
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void hiddenFileInWindows2() throws Exception {
+        final URL url = new URL("file:/c:/testing/.hidden/folder");
+        final WebRequest request = new WebRequest(url);
+        assertEquals(url.toExternalForm(), request.getUrl().toExternalForm());
+    }
 }
