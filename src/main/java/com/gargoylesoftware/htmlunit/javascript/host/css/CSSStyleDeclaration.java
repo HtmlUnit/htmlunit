@@ -69,7 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 import com.steadystate.css.dom.CSSValueImpl;
 import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACParserCSS21;
+import com.steadystate.css.parser.SACParserCSS3;
 
 /**
  * A JavaScript object for a CSSStyleDeclaration.
@@ -5607,7 +5607,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             final InputSource source = new InputSource(new StringReader(styleAttribute));
             source.setURI(uri);
             final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS21());
+            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
             parser.setErrorHandler(errorHandler);
             try {
                 styleDeclaration_ = parser.parseStyleDeclaration(source);

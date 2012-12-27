@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -32,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 public class CSSFontFaceRule extends CSSRule {
 
     private static final Pattern REPLACEMENT_1 = Pattern.compile("font-family: ([^;]*);");
-    private static final Pattern REPLACEMENT_2 = Pattern.compile("src: ([^;]*);");
+    private static final Pattern REPLACEMENT_2 = Pattern.compile("src: url\\(([^;]*)\\);");
 
     /**
      * Creates a new instance. JavaScript objects must have a default constructor.
@@ -47,7 +49,7 @@ public class CSSFontFaceRule extends CSSRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSFontFaceRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
+    protected CSSFontFaceRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSFontFaceRule rule) {
         super(stylesheet, rule);
     }
 
@@ -61,9 +63,9 @@ public class CSSFontFaceRule extends CSSRule {
     @JsxGetter(@WebBrowser(BrowserName.FF))
     public String getCssText() {
         String cssText = super.getCssText();
-        cssText = cssText.replace("{ ", "{\n  ");
-        cssText = cssText.replace("; }", ";\n}");
-        cssText = cssText.replace("; ", ";\n  ");
+        cssText = StringUtils.replace(cssText, "{", "{\n  ");
+        cssText = StringUtils.replace(cssText, "}", ";\n}");
+        cssText = StringUtils.replace(cssText, "; ", ";\n  ");
         cssText = REPLACEMENT_1.matcher(cssText).replaceFirst("font-family: \"$1\";");
         cssText = REPLACEMENT_2.matcher(cssText).replaceFirst("src: url(\"$1\");");
         return cssText;

@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -41,7 +42,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("li2")
-    @NotYetImplemented
+    @NotYetImplemented(Browser.IE)
     public void nth_child() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -90,7 +91,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "li1", "li4", "li7", "li10" })
-    @NotYetImplemented
+    @NotYetImplemented(Browser.IE)
     public void nth_child_equation() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -172,7 +173,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "thing1" })
-    @NotYetImplemented
     public void prefixAttribute() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -199,7 +199,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "something" })
-    @NotYetImplemented
     public void suffixAttribute() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -226,7 +225,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", "something", "thing2" })
-    @NotYetImplemented
     public void substringAttribute() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -254,7 +252,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "1", "ul2" })
-    @NotYetImplemented
     public void generalAdjacentSelector() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"

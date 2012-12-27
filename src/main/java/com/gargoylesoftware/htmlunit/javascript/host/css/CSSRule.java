@@ -92,10 +92,6 @@ public class CSSRule extends SimpleScriptable {
             case FONT_FACE_RULE:
                 return new CSSFontFaceRule(stylesheet, (org.w3c.dom.css.CSSFontFaceRule) rule);
             default:
-                if (rule.getCssText().startsWith("@font-face")) {
-                    // hack for the lack of support for @font-face in the SACParserCSS21 we currently use
-                    return new CSSFontFaceRule(stylesheet, rule);
-                }
                 throw new UnsupportedOperationException("CSSRule "
                     + rule.getClass().getName() + " is not yet supported:" + rule.getCssText());
         }
