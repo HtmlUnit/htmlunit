@@ -859,9 +859,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "3", "div1" },
-            IE = "undefined",
-            IE8 = { "3", "div1" })
+    @Alerts(DEFAULT = { "3", "div1" }, IE8 = "undefined")
     public void querySelectorAll() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
             + "<style>\n"

@@ -1880,7 +1880,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param selectors the selectors
      * @return the static node list
      */
-    @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    @JsxFunction({ @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF) })
     public StaticNodeList querySelectorAll(final String selectors) {
         try {
             final List<Node> nodes = new ArrayList<Node>();

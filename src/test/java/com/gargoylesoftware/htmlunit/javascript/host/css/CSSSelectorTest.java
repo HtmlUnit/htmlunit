@@ -19,8 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -41,13 +39,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("li2")
-    @NotYetImplemented(Browser.IE)
+    @Alerts(DEFAULT = "li2", IE8 = { })
     public void nth_child() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('li:nth-child(2)')[0].id);\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "   alert(document.querySelectorAll('li:nth-child(2)')[0].id);\n"
+            + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -90,15 +89,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "li1", "li4", "li7", "li10" })
-    @NotYetImplemented(Browser.IE)
+    @Alerts(DEFAULT = { "li1", "li4", "li7", "li10" }, IE8 = { })
     public void nth_child_equation() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
-            + "  var list = document.querySelectorAll('li:nth-child(3n+1)');\n"
-            + "  for (var i = 0 ; i < list.length; i++) {\n"
-            + "    alert(list[i].id);\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    var list = document.querySelectorAll('li:nth-child(3n+1)');\n"
+            + "    for (var i = 0 ; i < list.length; i++) {\n"
+            + "      alert(list[i].id);\n"
+            + "    }\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -146,16 +146,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "ul2" })
+    @Alerts(DEFAULT = { "1", "ul2" }, IE8 = { })
     public void directAdjacentSelector() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
-            + "  try {\n"
+            + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('p+ul');\n"
             + "    alert(list.length);\n"
             + "    alert(list[0].id);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -172,16 +172,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "thing1" })
+    @Alerts(DEFAULT = { "1", "thing1" }, IE8 = { })
     public void prefixAttribute() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
-            + "  try {\n"
+            + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('[id^=\"thing\"]');\n"
             + "    alert(list.length);\n"
             + "    alert(list[0].id);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -198,16 +198,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "something" })
+    @Alerts(DEFAULT = { "1", "something" }, IE8 = { })
     public void suffixAttribute() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
-            + "  try {\n"
+            + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('[id$=\"thing\"]');\n"
             + "    alert(list.length);\n"
             + "    alert(list[0].id);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -224,17 +224,17 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "2", "something", "thing2" })
+    @Alerts(DEFAULT = { "2", "something", "thing2" }, IE8 = { })
     public void substringAttribute() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
-            + "  try {\n"
+            + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('[id*=\"thing\"]');\n"
             + "    alert(list.length);\n"
             + "    alert(list[0].id);\n"
             + "    alert(list[1].id);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -251,16 +251,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "1", "ul2" })
+    @Alerts(DEFAULT = { "1", "ul2" }, IE8 = { })
     public void generalAdjacentSelector() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
             + "function test() {\n"
-            + "  try {\n"
+            + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('div~ul');\n"
             + "    alert(list.length);\n"
             + "    alert(list[0].id);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
