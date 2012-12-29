@@ -233,7 +233,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.12.4</version>
+                        <version>2.13</version>
                         <configuration>
                             <argLine>-Xmx512m -Xms128m</argLine>
                             <systemPropertyVariables>
@@ -256,7 +256,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.12.4</version>
+                        <version>2.13</version>
                         <configuration>
                             <excludes>
                                 <exclude>**/libraries/*.java</exclude>
@@ -290,7 +290,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.12.4</version>
+                        <version>2.13</version>
                         <configuration>
                             <includes>
                                 <include>**/libraries/*.java</include>
@@ -369,7 +369,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.12.4</version>
+                <version>2.13</version>
                 <configuration>
                     <showSuccess>false</showSuccess>
                 </configuration>
