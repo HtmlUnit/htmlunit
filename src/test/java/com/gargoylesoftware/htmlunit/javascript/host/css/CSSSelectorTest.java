@@ -281,4 +281,246 @@ public class CSSSelectorTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "li3", IE8 = { })
+    @NotYetImplemented(IE8)
+    public void nth_last_child() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "   alert(document.querySelectorAll('li:nth-last-child(1)')[0].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "id3", IE8 = { })
+    @NotYetImplemented(IE8)
+    public void nth_of_type() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "   alert(document.querySelectorAll('p:nth-of-type(2)')[0].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<section>\n"
+            + "  <h1 id='id11'></h1>\n"
+            + "  <p id='id2'></p>\n"
+            + "  <p id='id3'></p>\n"
+            + "</section>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "id3", IE8 = { })
+    @NotYetImplemented(IE8)
+    public void nth_last_of_type() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "   alert(document.querySelectorAll('p:nth-last-of-type(1)')[0].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<section>\n"
+            + "  <h1 id='id1'></h1>\n"
+            + "  <p  id='id2'></p>\n"
+            + "  <p  id='id3'></p>\n"
+            + "</section>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "li1", IE8 = { })
+    @NotYetImplemented(IE8)
+    public void first_child() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "   alert(document.querySelectorAll('li:first-child')[0].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "li3", IE8 = { })
+    @NotYetImplemented(IE8)
+    public void last_child() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "   alert(document.querySelectorAll('li:last-child')[0].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "id2", IE8 = { })
+    @NotYetImplemented(IE8)
+    public void first_of_type() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "   alert(document.querySelectorAll('p:first-of-type')[0].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<section>\n"
+            + "  <h1 id='id1'></h1>\n"
+            + "  <p  id='id2'></p>\n"
+            + "  <h1 id='id3'></h1>\n"
+            + "  <p  id='id4'></p>\n"
+            + "  <h1 id='id5'></h1>\n"
+            + "</section>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "id4", IE8 = { })
+    @NotYetImplemented(IE8)
+    public void last_of_type() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "   alert(document.querySelectorAll('p:last-of-type')[0].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<section>\n"
+            + "  <h1 id='id1'></h1>\n"
+            + "  <p  id='id2'></p>\n"
+            + "  <h1 id='id3'></h1>\n"
+            + "  <p  id='id4'></p>\n"
+            + "  <h1 id='id5'></h1>\n"
+            + "</section>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "id3", IE8 = { })
+    @NotYetImplemented(IE8)
+    public void only_child() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "   alert(document.querySelectorAll('h1:only-child')[0].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<section>\n"
+            + "  <h1 id='id1'></h1>\n"
+            + "  <p  id='id2'></p>\n"
+            + "</section>\n"
+            + "<section>\n"
+            + "  <h1 id='id3'></h1>\n"
+            + "</section>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "id3", IE8 = { })
+    @NotYetImplemented(IE8)
+    public void only_of_type() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "   alert(document.querySelectorAll('p:only-of-type')[0].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<section>\n"
+            + "  <p  id='id1'></p>\n"
+            + "  <p  id='id2'></p>\n"
+            + "</section>\n"
+            + "<section>\n"
+            + "  <p  id='id3'></p>\n"
+            + "</section>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
