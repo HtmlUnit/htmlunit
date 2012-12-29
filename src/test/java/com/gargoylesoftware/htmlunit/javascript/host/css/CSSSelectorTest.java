@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -40,6 +43,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "li2", IE8 = { })
+    @NotYetImplemented(IE8)
     public void nth_child() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -147,6 +151,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "ul2" }, IE8 = { })
+    @NotYetImplemented(IE8)
     public void directAdjacentSelector() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -173,6 +178,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "thing1" }, IE8 = { })
+    @NotYetImplemented(IE8)
     public void prefixAttribute() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -199,6 +205,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "something" }, IE8 = { })
+    @NotYetImplemented(IE8)
     public void suffixAttribute() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -225,6 +232,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "2", "something", "thing2" }, IE8 = { })
+    @NotYetImplemented(IE8)
     public void substringAttribute() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -252,6 +260,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "1", "ul2" }, IE8 = { })
+    @NotYetImplemented(IE8)
     public void generalAdjacentSelector() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
