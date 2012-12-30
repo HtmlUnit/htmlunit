@@ -1002,7 +1002,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "div1", "null" },
-            IE = "undefined", IE8 = { "div1", "null" })
+            IE6 = "undefined", IE7 = "undefined")
     public void querySelector() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
             + "<style>\n"

@@ -131,9 +131,7 @@ public class CSSStyleSheet extends SimpleScriptable {
     private String uri_;
 
     private static final Collection<String> PSEUDO_CLASSES = Arrays.asList("link", "visited", "hover", "active",
-        "focus", "target", "lang", "disabled", "enabled", "checked", "indeterminated", "root",
-        "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()", 
-        "first-child", "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty");
+        "focus", "target", "lang", "disabled", "checked", "indeterminated", "root", "nth-child()");
 
     /**
      * Creates a new empty stylesheet.
@@ -548,40 +546,6 @@ public class CSSStyleSheet extends SimpleScriptable {
             return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
                 || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked());
         }
-        else if ("first-child".equals(value)) {
-            for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        else if ("last-child".equals(value)) {
-            for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        else if ("first-of-type".equals(value)) {
-            final String type = element.getNodeName();
-            for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        else if ("last-of-type".equals(value)) {
-            final String type = element.getNodeName();
-            for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    return false;
-                }
-            }
-            return true;
-        }
         else if (value.startsWith("nth-child(")) {
             final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
             int index = 0;
@@ -591,65 +555,6 @@ public class CSSStyleSheet extends SimpleScriptable {
                 }
             }
             return getNth(nth, index);
-        }
-        else if (value.startsWith("nth-last-child(")) {
-            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            int index = 0;
-            for (DomNode n = element; n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement) {
-                    index++;
-                }
-            }
-            return getNth(nth, index);
-        }
-        else if (value.startsWith("nth-of-type(")) {
-            final String type = element.getNodeName();
-            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            int index = 0;
-            for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    index++;
-                }
-            }
-            return getNth(nth, index);
-        }
-        else if (value.startsWith("nth-last-of-type(")) {
-            final String type = element.getNodeName();
-            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-            int index = 0;
-            for (DomNode n = element; n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    index++;
-                }
-            }
-            return getNth(nth, index);
-        }
-        else if ("only-child".equals(value)) {
-            for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement) {
-                    return false;
-                }
-            }
-            for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        else if ("only-of-type".equals(value)) {
-            final String type = element.getNodeName();
-            for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    return false;
-                }
-            }
-            for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                    return false;
-                }
-            }
-            return true;
         }
         return false;
     }

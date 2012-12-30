@@ -286,7 +286,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "li3", IE8 = { })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented
     public void nth_last_child() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -312,7 +312,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "id3", IE8 = { })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented
     public void nth_of_type() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -338,7 +338,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "id3", IE8 = { })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented
     public void nth_last_of_type() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -364,7 +364,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "li1", IE8 = { })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented
     public void first_child() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -390,7 +390,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "li3", IE8 = { })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented
     public void last_child() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -416,7 +416,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "id2", IE8 = { })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented
     public void first_of_type() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -444,7 +444,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "id4", IE8 = { })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented
     public void last_of_type() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -472,7 +472,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "id3", IE8 = { })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented
     public void only_child() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
@@ -500,7 +500,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "id3", IE8 = { })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented
     public void only_of_type() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
