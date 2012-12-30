@@ -16,14 +16,14 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_167;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_65;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_HTML_UPPER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_70;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_71;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_72;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_73;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_74;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_75;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_OUTER_HTML_UPPER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_RESTRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDING_CLIENT_RECT_OFFSET_TWO;
@@ -2028,16 +2028,9 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // => TODO: find a better way to handle this!
         if (response instanceof FunctionObject
             && ("querySelectorAll".equals(name) || "querySelector".equals(name))
-            && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-
-            final DomNode domNode = getDomNodeOrNull();
-            if (null == domNode) {
-                return response;
-            }
-            final SgmlPage sgmlPage = domNode.getPage();
-            if ((sgmlPage instanceof HtmlPage) && ((HtmlPage) sgmlPage).isQuirksMode()) {
-                return NOT_FOUND;
-            }
+            && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)
+            && ((HTMLDocument) ((Window) getParentScope()).getDocument()).getDocumentMode() < 8) {
+            return NOT_FOUND;
         }
 
         return response;

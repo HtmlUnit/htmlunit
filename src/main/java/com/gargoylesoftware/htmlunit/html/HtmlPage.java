@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BLUR_BEFORE_ONCHANGE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_4_0_TRANSITIONAL_STANDARDS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_FRAMESET_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
@@ -86,6 +85,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 /**
@@ -2397,29 +2397,7 @@ public class HtmlPage extends SgmlPage {
      * @return true for quirks mode, false for standards mode
      */
     public boolean isQuirksMode() {
-        boolean quirks = true;
-        final DocumentType docType = getDoctype();
-        if (docType != null) {
-            final String publicId = docType.getPublicId();
-            final String systemId = docType.getSystemId();
-            if (systemId != null) {
-                if ("http://www.w3.org/TR/html4/strict.dtd".equals(systemId)) {
-                    quirks = false;
-                }
-                else if ("http://www.w3.org/TR/html4/loose.dtd".equals(systemId)) {
-                    if ("-//W3C//DTD HTML 4.01 Transitional//EN".equals(publicId)
-                        || ("-//W3C//DTD HTML 4.0 Transitional//EN".equals(publicId)
-                                && hasFeature(DOCTYPE_4_0_TRANSITIONAL_STANDARDS))) {
-                        quirks = false;
-                    }
-                }
-                else if ("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd".equals(systemId)
-                    || "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd".equals(systemId)) {
-                    quirks = false;
-                }
-            }
-        }
-        return quirks;
+        return ((HTMLDocument) getScriptObject()).getDocumentMode() == 5;
     }
 
     @Override

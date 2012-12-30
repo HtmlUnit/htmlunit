@@ -9,6 +9,7 @@
     <suppress checks="FileLength" files="CSSStyleDeclaration.java"/>
     <suppress checks="FileLength" files="DocumentTest.java"/>
     <suppress checks="FileLength" files="JQuery182Test.java"/>
+    <suppress checks="FileLength" files="HTMLDocument.java"/>
     <suppress checks="FileLength" files="HTMLElement.java"/>
     <suppress checks="FileLength" files="HTMLElementTest.java"/>
     <suppress checks="FileLength" files="HtmlPage.java"/>

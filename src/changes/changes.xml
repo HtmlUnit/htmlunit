@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes">
+            <action type="update" dev="asashour">
+                JavaScript: fix document/element . querySelectorAll()/querySelector() (IE8).
+            </action>
+            <action type="add" dev="asashour">
+                JavaScript: add document.documentMode (IE).
+            </action>
             <action type="fix" dev="asashour">
                 Fix URL handling of local files in Windows, if they have folders starting with dot.
             </action>

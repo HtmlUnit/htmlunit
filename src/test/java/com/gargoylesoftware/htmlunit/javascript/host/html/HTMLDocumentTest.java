@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import static com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument.EMPTY_COOKIE_NAME;
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
@@ -861,7 +860,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "3", "div1" }, IE8 = "undefined")
-    @NotYetImplemented(IE8)
     public void querySelectorAll() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
             + "<style>\n"
@@ -1002,7 +1000,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "div1", "null" },
-            IE6 = "undefined", IE7 = "undefined")
+            IE6 = "undefined", IE7 = "undefined", IE8 = "undefined")
     public void querySelector() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>Test</title>\n"
             + "<style>\n"
@@ -1639,7 +1637,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "5", "BackCompat", "undefined", "undefined" },
             DEFAULT = { "undefined", "BackCompat", "function", "function" })
-    @NotYetImplemented(IE)
     public void documentMode() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1664,7 +1661,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(IE8 = { "7", "CSS1Compat", "undefined", "undefined" },
             IE9 = { "9", "CSS1Compat", "function", "function" },
             DEFAULT = { "undefined", "CSS1Compat", "function", "function" })
-    @NotYetImplemented(IE)
     public void documentMode_standards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html>\n"
             + "<head>\n"
@@ -1689,7 +1685,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(IE8 = { "8", "CSS1Compat", "false", "false" },
             IE9 = { "9", "CSS1Compat", "false", "false" },
             DEFAULT = { "undefined", "BackCompat", "false", "false" })
-    @NotYetImplemented(IE)
     public void documentMode_standards_8() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1707,16 +1702,16 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
     @Test
     @Alerts(IE8 = { "8", "CSS1Compat", "false", "false" },
             IE9 = { "9", "CSS1Compat", "false", "false" },
-            DEFAULT = { "undefined", "BackCompat", "false", "false" })
-    @NotYetImplemented(IE)
-    public void documentMode_standards_9() throws Exception {
-        final String html = "<html>\n"
+            DEFAULT = { "undefined", "CSS1Compat", "false", "false" })
+    public void documentMode_standards_8_prefix() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html>\n"
             + "<head>\n"
             + "  <meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
             + "  <script>\n"
@@ -1725,6 +1720,57 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      alert(document.compatMode);\n"
             + "      alert(!document.querySelectorAll);\n"
             + "      alert(!document.createElement('div').querySelector);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE8 = { "8", "CSS1Compat", "false", "false" },
+            IE9 = { "9", "CSS1Compat", "false", "false" },
+            DEFAULT = { "undefined", "BackCompat", "false", "false" })
+    public void documentMode_standards_9() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.documentMode);\n"
+            + "      alert(document.compatMode);\n"
+            + "      alert(!document.querySelectorAll);\n"
+            + "      alert(!document.createElement('div').querySelector);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE8 = { "7", "CSS1Compat", "undefined", "undefined" },
+            IE9 = { "9", "CSS1Compat", "function", "function" },
+            DEFAULT = { "undefined", "CSS1Compat", "function", "function" })
+    @NotYetImplemented
+    public void documentMode_html5() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.documentMode);\n"
+            + "      alert(document.compatMode);\n"
+            + "      alert(typeof document.querySelectorAll);\n"
+            + "      alert(typeof document.createElement('div').querySelector);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"

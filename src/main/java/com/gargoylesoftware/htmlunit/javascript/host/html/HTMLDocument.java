@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_4_0_TRANSITIONAL_STANDARDS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EXECCOMMAND_THROWS_ON_WRONG_COMMAND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_160;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_161;
@@ -74,6 +75,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.CSSException;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.DocumentType;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CookieManager;
@@ -95,6 +97,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import com.gargoylesoftware.htmlunit.html.HtmlMeta;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
@@ -758,6 +761,65 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public String getCompatMode() {
         return getHtmlPage().isQuirksMode() ? "BackCompat" : "CSS1Compat";
+    }
+
+    /**
+     * Returns the "documentMode" attribute.
+     * @return the "documentMode" attribute
+     */
+    @JsxGetter(@WebBrowser(value = IE, minVersion = 8))
+    public int getDocumentMode() {
+        final HtmlPage page = getHtmlPage();
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
+            final HtmlMeta meta = page.getFirstByXPath("//meta[@http-equiv='X-UA-Compatible']");
+            if (meta != null) {
+                final String content = meta.getContentAttribute();
+                if (content.startsWith("IE=")) {
+                    try {
+                        final int value = Integer.parseInt(content.substring(3).trim());
+                        final int version = (int) browserVersion.getBrowserVersionNumeric();
+                        if (value > version) {
+                            return version;
+                        }
+                        return value;
+                    }
+                    catch (final Exception e) {
+                        // ignore
+                    }
+                }
+            }
+        }
+        boolean quirks = true;
+        final DocumentType docType = page.getDoctype();
+        if (docType != null) {
+            final String publicId = docType.getPublicId();
+            final String systemId = docType.getSystemId();
+            if (systemId != null) {
+                if ("http://www.w3.org/TR/html4/strict.dtd".equals(systemId)) {
+                    quirks = false;
+                }
+                else if ("http://www.w3.org/TR/html4/loose.dtd".equals(systemId)) {
+                    if ("-//W3C//DTD HTML 4.01 Transitional//EN".equals(publicId)
+                        || ("-//W3C//DTD HTML 4.0 Transitional//EN".equals(publicId)
+                                && browserVersion.hasFeature(DOCTYPE_4_0_TRANSITIONAL_STANDARDS))) {
+                        quirks = false;
+                    }
+                }
+                else if ("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd".equals(systemId)
+                    || "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd".equals(systemId)) {
+                    quirks = false;
+                }
+            }
+        }
+        if (quirks) {
+            return 5;
+        }
+        final float version = browserVersion.getBrowserVersionNumeric();
+        if (version == 8) {
+            return 7;
+        }
+        return 9;
     }
 
     /**
@@ -1927,7 +1989,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         if (response instanceof FunctionObject
             && ("querySelectorAll".equals(name) || "querySelector".equals(name))
             && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)
-            && getHtmlPage().isQuirksMode()) {
+            && ((HTMLDocument) ((Window) getParentScope()).getDocument()).getDocumentMode() < 8) {
             return NOT_FOUND;
         }
 

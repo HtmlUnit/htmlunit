@@ -97,7 +97,7 @@ public enum BrowserVersionFeatures {
      * Indicates that the pseudo classes 'root', 'enabled', 'disabled'
      * and 'checked' are supported.
      */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 9) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 8) })
     CSS_SPECIAL_PSEUDO_CLASSES,
 
     /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets

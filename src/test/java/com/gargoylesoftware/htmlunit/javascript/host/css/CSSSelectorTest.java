@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -42,11 +40,11 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "li2", IE8 = { })
-    @NotYetImplemented(IE8)
+    @Alerts("li2")
     public void nth_child() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "   alert(document.querySelectorAll('li:nth-child(2)')[0].id);\n"
@@ -150,11 +148,11 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "ul2" }, IE8 = { })
-    @NotYetImplemented(IE8)
+    @Alerts({ "1", "ul2" })
     public void directAdjacentSelector() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('p+ul');\n"
@@ -177,11 +175,11 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "thing1" }, IE8 = { })
-    @NotYetImplemented(IE8)
+    @Alerts({ "1", "thing1" })
     public void prefixAttribute() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('[id^=\"thing\"]');\n"
@@ -204,11 +202,11 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "something" }, IE8 = { })
-    @NotYetImplemented(IE8)
+    @Alerts({ "1", "something" })
     public void suffixAttribute() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('[id$=\"thing\"]');\n"
@@ -231,11 +229,11 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "2", "something", "thing2" }, IE8 = { })
-    @NotYetImplemented(IE8)
+    @Alerts({ "2", "something", "thing2" })
     public void substringAttribute() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('[id*=\"thing\"]');\n"
@@ -259,11 +257,11 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "ul2" }, IE8 = { })
-    @NotYetImplemented(IE8)
+    @Alerts({ "1", "ul2" })
     public void generalAdjacentSelector() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "    var list = document.querySelectorAll('div~ul');\n"
@@ -285,11 +283,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "li3", IE8 = { })
+    @Alerts("li3")
     @NotYetImplemented
     public void nth_last_child() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "   alert(document.querySelectorAll('li:nth-last-child(1)')[0].id);\n"
@@ -311,11 +310,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id3", IE8 = { })
+    @Alerts("id3")
     @NotYetImplemented
     public void nth_of_type() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "   alert(document.querySelectorAll('p:nth-of-type(2)')[0].id);\n"
@@ -337,11 +337,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id3", IE8 = { })
+    @Alerts("id3")
     @NotYetImplemented
     public void nth_last_of_type() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "   alert(document.querySelectorAll('p:nth-last-of-type(1)')[0].id);\n"
@@ -363,11 +364,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "li1", IE8 = { })
+    @Alerts("li1")
     @NotYetImplemented
     public void first_child() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "   alert(document.querySelectorAll('li:first-child')[0].id);\n"
@@ -389,11 +391,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "li3", IE8 = { })
+    @Alerts("li3")
     @NotYetImplemented
     public void last_child() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "   alert(document.querySelectorAll('li:last-child')[0].id);\n"
@@ -415,11 +418,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id2", IE8 = { })
+    @Alerts("id2")
     @NotYetImplemented
     public void first_of_type() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "   alert(document.querySelectorAll('p:first-of-type')[0].id);\n"
@@ -443,11 +447,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id4", IE8 = { })
+    @Alerts("id4")
     @NotYetImplemented
     public void last_of_type() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "   alert(document.querySelectorAll('p:last-of-type')[0].id);\n"
@@ -471,11 +476,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id3", IE8 = { })
+    @Alerts("id3")
     @NotYetImplemented
     public void only_child() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "   alert(document.querySelectorAll('h1:only-child')[0].id);\n"
@@ -499,11 +505,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id3", IE8 = { })
+    @Alerts("id3")
     @NotYetImplemented
     public void only_of_type() throws Exception {
-        final String html
-            = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>First</title><script>\n"
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "   alert(document.querySelectorAll('p:only-of-type')[0].id);\n"
