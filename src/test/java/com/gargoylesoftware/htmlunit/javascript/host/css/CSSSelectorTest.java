@@ -40,14 +40,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("li2")
+    @Alerts(DEFAULT = "li2", IE = "exception")
     public void nth_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
-            + "   alert(document.querySelectorAll('li:nth-child(2)')[0].id);\n"
+            + "    try {\n"
+            + "      alert(document.querySelectorAll('li:nth-child(2)')[0].id);\n"
+            + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
