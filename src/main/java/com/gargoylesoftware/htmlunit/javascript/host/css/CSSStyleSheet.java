@@ -662,6 +662,9 @@ public class CSSStyleSheet extends SimpleScriptable {
             }
             return true;
         }
+        else if ("empty".equals(value)) {
+            return element.getFirstChild() == null;
+        }
         return false;
     }
 
