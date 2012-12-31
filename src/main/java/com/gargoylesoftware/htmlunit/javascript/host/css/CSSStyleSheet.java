@@ -29,6 +29,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -131,8 +132,17 @@ public class CSSStyleSheet extends SimpleScriptable {
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;
 
-    private static final Collection<String> PSEUDO_CLASSES = Arrays.asList("link", "visited", "hover", "active",
-        "focus", "target", "lang", "disabled", "checked", "indeterminated", "root", "nth-child()");
+    private static final Collection<String> CSS2_PSEUDO_CLASSES = Arrays.asList("link", "visited", "hover", "active",
+        "focus", "lang", "first-child");
+
+    private static final Collection<String> CSS3_PSEUDO_CLASSES = new ArrayList<String>(Arrays.asList(
+            "checked", "disabled", "indeterminated", "root", "target",
+            "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
+            "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty"));
+
+    static {
+        CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
+    }
 
     /**
      * Creates a new empty stylesheet.
@@ -531,7 +541,7 @@ public class CSSStyleSheet extends SimpleScriptable {
             final AttributeCondition condition, final DomElement element) {
         if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)
                 && ((HTMLDocument) ((Window) element.getScriptObject().getParentScope()).getDocument())
-                    .getDocumentMode() < 9) {
+                    .getDocumentMode() < 8) {
             return false;
         }
 
@@ -549,6 +559,40 @@ public class CSSStyleSheet extends SimpleScriptable {
             return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
                 || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked());
         }
+        else if ("first-child".equals(value)) {
+            for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
+                if (n instanceof DomElement) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        else if ("last-child".equals(value)) {
+            for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+                if (n instanceof DomElement) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        else if ("first-of-type".equals(value)) {
+            final String type = element.getNodeName();
+            for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
+                if (n instanceof DomElement && n.getNodeName().equals(type)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        else if ("last-of-type".equals(value)) {
+            final String type = element.getNodeName();
+            for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+                if (n instanceof DomElement && n.getNodeName().equals(type)) {
+                    return false;
+                }
+            }
+            return true;
+        }
         else if (value.startsWith("nth-child(")) {
             final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
             int index = 0;
@@ -558,6 +602,65 @@ public class CSSStyleSheet extends SimpleScriptable {
                 }
             }
             return getNth(nth, index);
+        }
+        else if (value.startsWith("nth-last-child(")) {
+            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+            int index = 0;
+            for (DomNode n = element; n != null; n = n.getNextSibling()) {
+                if (n instanceof DomElement) {
+                    index++;
+                }
+            }
+            return getNth(nth, index);
+        }
+        else if (value.startsWith("nth-of-type(")) {
+            final String type = element.getNodeName();
+            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+            int index = 0;
+            for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
+                if (n instanceof DomElement && n.getNodeName().equals(type)) {
+                    index++;
+                }
+            }
+            return getNth(nth, index);
+        }
+        else if (value.startsWith("nth-last-of-type(")) {
+            final String type = element.getNodeName();
+            final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
+            int index = 0;
+            for (DomNode n = element; n != null; n = n.getNextSibling()) {
+                if (n instanceof DomElement && n.getNodeName().equals(type)) {
+                    index++;
+                }
+            }
+            return getNth(nth, index);
+        }
+        else if ("only-child".equals(value)) {
+            for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
+                if (n instanceof DomElement) {
+                    return false;
+                }
+            }
+            for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+                if (n instanceof DomElement) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        else if ("only-of-type".equals(value)) {
+            final String type = element.getNodeName();
+            for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
+                if (n instanceof DomElement && n.getNodeName().equals(type)) {
+                    return false;
+                }
+            }
+            for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
+                if (n instanceof DomElement && n.getNodeName().equals(type)) {
+                    return false;
+                }
+            }
+            return true;
         }
         return false;
     }
@@ -883,42 +986,53 @@ public class CSSStyleSheet extends SimpleScriptable {
     /**
      * Validates the list of selectors.
      * @param selectorList the selectors
+     * @param documentMode see {@link HTMLDocument#getDocumentMode()}
      * @throws CSSException if a selector is invalid
      */
-    public static void validateSelectors(final SelectorList selectorList) throws CSSException {
+    public static void validateSelectors(final SelectorList selectorList, final int documentMode) throws CSSException {
         for (int i = 0; i < selectorList.getLength(); ++i) {
             final Selector item = selectorList.item(i);
-            if (!isValidSelector(item)) {
+            if (!isValidSelector(item, documentMode)) {
                 throw new CSSException("Invalid selector: " + item);
             }
         }
     }
 
-    private static boolean isValidSelector(final Selector selector) {
+    /**
+     * @param documentMode see {@link HTMLDocument#getDocumentMode()}
+     */
+    private static boolean isValidSelector(final Selector selector, final int documentMode) {
         switch (selector.getSelectorType()) {
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 return true;
             case Selector.SAC_CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
-                return isValidSelector(conditional.getSimpleSelector()) && isValidSelector(conditional.getCondition());
+                return isValidSelector(conditional.getSimpleSelector(), documentMode)
+                        && isValidSelector(conditional.getCondition(), documentMode);
             case Selector.SAC_DESCENDANT_SELECTOR:
             case Selector.SAC_CHILD_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
-                return isValidSelector(ds.getAncestorSelector()) && isValidSelector(ds.getSimpleSelector());
+                return isValidSelector(ds.getAncestorSelector(), documentMode)
+                        && isValidSelector(ds.getSimpleSelector(), documentMode);
             case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
                 final SiblingSelector ss = (SiblingSelector) selector;
-                return isValidSelector(ss.getSelector()) && isValidSelector(ss.getSiblingSelector());
+                return isValidSelector(ss.getSelector(), documentMode)
+                        && isValidSelector(ss.getSiblingSelector(), documentMode);
             default:
                 LOG.warn("Unhandled CSS selector type '" + selector.getSelectorType() + "'. Accepting it silently.");
                 return true; // at least in a first time to break less stuff
         }
     }
 
-    private static boolean isValidSelector(final Condition condition) {
+    /**
+     * @param documentMode see {@link HTMLDocument#getDocumentMode()}
+     */
+    private static boolean isValidSelector(final Condition condition, final int documentMode) {
         switch (condition.getConditionType()) {
             case Condition.SAC_AND_CONDITION:
                 final CombinatorCondition cc1 = (CombinatorCondition) condition;
-                return isValidSelector(cc1.getFirstCondition()) && isValidSelector(cc1.getSecondCondition());
+                return isValidSelector(cc1.getFirstCondition(), documentMode)
+                        && isValidSelector(cc1.getSecondCondition(), documentMode);
             case Condition.SAC_ATTRIBUTE_CONDITION:
             case Condition.SAC_ID_CONDITION:
             case Condition.SAC_CLASS_CONDITION:
@@ -932,7 +1046,10 @@ public class CSSStyleSheet extends SimpleScriptable {
                     }
                     value = value.substring(0, value.indexOf('(') + 1) + ')';
                 }
-                return PSEUDO_CLASSES.contains(value);
+                if (documentMode < 9) {
+                    return CSS2_PSEUDO_CLASSES.contains(value);
+                }
+                return CSS3_PSEUDO_CLASSES.contains(value);
             default:
                 LOG.warn("Unhandled CSS condition type '" + condition.getConditionType() + "'. Accepting it silently.");
                 return true;

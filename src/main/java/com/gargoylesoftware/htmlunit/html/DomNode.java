@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DISPLAYED_COLLAPSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOM_NORMALIZE_REMOVE_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.NODE_APPEND_CHILD_SELF_IGNORE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -55,8 +56,10 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
@@ -1566,9 +1569,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 throw new CSSException("Invalid selectors: " + selectors);
             }
             if (null != selectorList) {
-                CSSStyleSheet.validateSelectors(selectorList);
-
                 final BrowserVersion browserVersion = webClient.getBrowserVersion();
+                final int documentMode;
+                if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
+                    documentMode = ((HTMLDocument) ((Window) getScriptObject().getParentScope()).getDocument())
+                            .getDocumentMode();
+                }
+                else {
+                    documentMode = 9;
+                }
+                CSSStyleSheet.validateSelectors(selectorList, documentMode);
+
                 for (final HtmlElement child : getHtmlElementDescendants()) {
                     for (int i = 0; i < selectorList.getLength(); i++) {
                         final Selector selector = selectorList.item(i);
