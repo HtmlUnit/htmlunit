@@ -93,13 +93,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     CSS_SELECTOR_LANG,
 
-    /**
-     * Indicates that the pseudo classes 'root', 'enabled', 'disabled'
-     * and 'checked' are supported.
-     */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 8) })
-    CSS_SPECIAL_PSEUDO_CLASSES,
-
     /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets
      * you use CSS to attach a script to a specific element in order to implement
      * DHTML (Dynamic HTML) components.

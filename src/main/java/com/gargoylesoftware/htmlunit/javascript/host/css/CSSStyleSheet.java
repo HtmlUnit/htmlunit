@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_LANG;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SPECIAL_PSEUDO_CLASSES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EXPANDURL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_STYLE_EMPTY;
@@ -530,9 +529,6 @@ public class CSSStyleSheet extends SimpleScriptable {
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
             final AttributeCondition condition, final DomElement element) {
-        if (!browserVersion.hasFeature(CSS_SPECIAL_PSEUDO_CLASSES)) {
-            return false;
-        }
         if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)
                 && ((HTMLDocument) ((Window) element.getScriptObject().getParentScope()).getDocument())
                     .getDocumentMode() < 9) {
