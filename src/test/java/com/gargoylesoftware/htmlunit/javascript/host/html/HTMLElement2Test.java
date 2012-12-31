@@ -868,8 +868,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "3", "div1" },
-            IE = "undefined", IE8 = { "3", "div1" })
+    @Alerts(FF = { "3", "div1" }, IE = "undefined")
     public void querySelectorAll() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<style>\n"
@@ -901,9 +900,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "1", "p1" },
-            IE6 = "undefined",
-            IE7 = "undefined")
+    @Alerts(DEFAULT = { "1", "p1" }, IE = "undefined")
     public void querySelectorAllOnDisconnectedElement() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<script>\n"

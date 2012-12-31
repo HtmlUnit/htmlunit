@@ -543,7 +543,8 @@ public class CodeStyleTest {
     private void browserVersion_isIE(final List<String> lines, final String relativePath) {
         if (relativePath.replace('\\', '/').contains("src/main/java")
                 && !relativePath.contains("JavaScriptConfiguration")
-                && !relativePath.contains("BrowserVersionFeatures")) {
+                && !relativePath.contains("BrowserVersionFeatures")
+                && !relativePath.contains("HTMLDocument")) {
             int index = 1;
             for (final String line : lines) {
                 if ((line.contains(".isIE()") || line.contains(".isFirefox()"))) {
