@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -542,7 +545,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id1", IE8 = "exception")
+    @Alerts(DEFAULT = "id2", IE8 = "exception")
     public void empty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
@@ -556,8 +559,34 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <p id='id1'></p>\n"
-            + "  <p id='id2'>Hello, World!</p>\n"
+            + "  <p id='id1'>Hello, World!</p>\n"
+            + "  <p id='id2'></p>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "id2", IE8 = "exception")
+    @NotYetImplemented(FF)
+    public void not() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      alert(document.querySelectorAll('input:not([type=\"file\"])')[0].id);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='id1' type='file'>\n"
+            + "  <input id='id2'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

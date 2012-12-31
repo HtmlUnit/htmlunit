@@ -36,6 +36,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -45,6 +46,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.AttributeCondition;
 import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
 import org.w3c.css.sac.ConditionalSelector;
@@ -136,7 +138,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         "focus", "lang", "first-child");
 
     private static final Collection<String> CSS3_PSEUDO_CLASSES = new ArrayList<String>(Arrays.asList(
-            "checked", "disabled", "indeterminated", "root", "target",
+            "checked", "disabled", "indeterminated", "root", "target", "not()",
             "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
             "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty"));
 
@@ -664,6 +666,38 @@ public class CSSStyleSheet extends SimpleScriptable {
         }
         else if ("empty".equals(value)) {
             return element.getFirstChild() == null;
+        }
+        else if (value.startsWith("not(")) {
+            final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
+            final AtomicBoolean errorOccured = new AtomicBoolean(false);
+            final ErrorHandler errorHandler = new ErrorHandler() {
+                public void warning(final CSSParseException exception) throws CSSException {
+                    // ignore
+                }
+
+                public void fatalError(final CSSParseException exception) throws CSSException {
+                    errorOccured.set(true);
+                }
+
+                public void error(final CSSParseException exception) throws CSSException {
+                    errorOccured.set(true);
+                }
+            };
+            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+            parser.setErrorHandler(errorHandler);
+            try {
+                final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
+                if (errorOccured.get() || selectorList == null || selectorList.getLength() != 1) {
+                    throw new CSSException("Invalid selectors: " + selectors);
+                }
+
+                validateSelectors(selectorList, 9);
+
+                return !CSSStyleSheet.selects(browserVersion, selectorList.item(0), element);
+            }
+            catch (final IOException e) {
+                throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
+            }
         }
         return false;
     }
