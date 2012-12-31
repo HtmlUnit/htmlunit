@@ -23,7 +23,6 @@ import org.w3c.css.sac.Selector;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -197,9 +196,9 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void selects_pseudoClass_negation() throws Exception {
-        testSelects(":not(div)", true, false, true);
+        final boolean css3 = !getBrowserVersion().isIE();
+        testSelects(":not(div)", css3, false, css3);
     }
 
     private void testSelects(final String css, final boolean selectBody, final boolean selectDivD,
