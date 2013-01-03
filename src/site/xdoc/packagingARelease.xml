@@ -97,9 +97,17 @@
                         <source>mvn -up clean site package</source>
                     </li>
                     <li>
-                        Upload the two zip files (htmlunit-x.x-bin.zip and htmlunit-x.x-src.zip) to
+                        Upload the two zip files (htmlunit-x.y-bin.zip and htmlunit-x.y-src.zip) to
                         <a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/">SourceForge</a>,
                         and make sure the binary file is the default download for all platforms.
+                    </li>
+                    <li>
+                        Build the OSGi bundle
+                        <source>mvn -Dmaven.test.skip=true org.apache.felix:maven-bundle-plugin:bundle</source>
+                    </li>
+                    <li>
+                        Rename 'htmlunit-x.y.jar' to 'htmlunit-x.y-OSGi.jar',
+                        and upload it to SourceForge files.
                     </li>
                     <li>
                         Add a new Milestone in SourceForge bugs system.
