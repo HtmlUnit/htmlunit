@@ -123,6 +123,10 @@ svn co http://svn.code.sf.net/p/htmlunit/code/trunk/htmlunit/ .]]></source>
             <p>
                 This will generate a jar file of the test sources.
             </p>
+            <source>mvn org.apache.felix:maven-bundle-plugin:bundle</source>
+            <p>
+                This will generate an OSGi bundle.
+            </p>
         </section>
 
         <section name="Forked Rhino (core-js)">
