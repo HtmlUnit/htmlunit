@@ -112,7 +112,8 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             return PageType.HTML;
         }
 
-        if ("text/javascript".equals(contentType) || "application/x-javascript".equals(contentType)) {
+        if ("text/javascript".equals(contentType) || "application/x-javascript".equals(contentType)
+                || "application/javascript".equals(contentType)) {
             return PageType.JAVASCRIPT;
         }
 

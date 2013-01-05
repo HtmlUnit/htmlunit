@@ -56,6 +56,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
 
         assertEquals(PageType.JAVASCRIPT, DefaultPageCreator.determinePageType("text/javascript"));
         assertEquals(PageType.JAVASCRIPT, DefaultPageCreator.determinePageType("application/x-javascript"));
+        assertEquals(PageType.JAVASCRIPT, DefaultPageCreator.determinePageType("application/javascript"));
 
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("text/xml"));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/xml"));
