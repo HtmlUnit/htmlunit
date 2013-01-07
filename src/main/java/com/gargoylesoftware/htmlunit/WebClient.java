@@ -495,7 +495,7 @@ public class WebClient implements Serializable {
         final String contentType = webResponse.getContentType();
         final int statusCode = webResponse.getStatusCode();
         final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES);
-        if (getPrintContentOnFailingStatusCode() && !successful) {
+        if (getOptions().getPrintContentOnFailingStatusCode() && !successful) {
             LOG.info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
             LOG.info(webResponse.getContentAsString());
         }
