@@ -181,6 +181,16 @@ public class HttpWebConnection implements WebConnection {
                     throw s;
                 }
             }
+            catch (final Error e) {
+                // in case a StackOverflowError occurs while the connection is leased, it won't get released.
+                // Calling code may catch the StackOverflowError, but due to the leak, the httpClient_ may
+                // come out of connections and throw a ConnectionPoolTimeoutException.
+                // => best solution, discard the HttpClient instance.
+                synchronized (this) {
+                    httpClient_ = null;
+                }
+                throw e;
+            }
 
             final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
             final long endTime = System.currentTimeMillis();
