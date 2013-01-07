@@ -23,6 +23,8 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 /**
  * Set of tests for ill formed HTML code.
@@ -181,7 +183,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     * @throws Exception if an error occurs
     */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented({ IE, FF3_6 })
     @Alerts(FF3_6 = "1", IE = "0")
     public void missingSingleQuote() throws Exception {
         final String html = "<html><body>"
@@ -196,7 +198,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     * @throws Exception if an error occurs
     */
     @Test
-    @NotYetImplemented
+    @NotYetImplemented({ IE, FF3_6 })
     @Alerts(FF3_6 = "1", IE = "0")
     public void missingDoubleQuote() throws Exception {
         final String html = "<html><body>"
