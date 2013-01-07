@@ -149,7 +149,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final List<String> actualAlerts = getCollectedAlerts(driver);
 
-        // tested with real ff and ie6; running in selenium returns different results
+        // tested with real ff17 and ie6; running in selenium returns different results
         Assert.assertEquals(3, actualAlerts.size());
 
         // ignore order of frame windows
@@ -197,7 +197,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final List<String> actualAlerts = getCollectedAlerts(driver);
 
-        // tested with real ff and ie6; running in selenium returns different results
+        // tested with real ff17 and ie6; running in selenium returns different results
         Assert.assertEquals(4, actualAlerts.size());
 
         // ignore order of frame windows
@@ -206,7 +206,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             Assert.assertEquals("first", actualAlerts.get(0));
         }
         else {
-            // returns 'second' 'fourth' 'third' 'first'
+            // returns 'first' at last
             Assert.assertEquals("first", actualAlerts.get(3));
         }
     }
