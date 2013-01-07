@@ -43,7 +43,7 @@ public class DataView extends ArrayBufferView {
      * @param length the length
      */
     @JsxConstructor
-    protected void constructor(final ArrayBuffer array, final int byteOffset, Object length) {
+    public void constructor(final ArrayBuffer array, final int byteOffset, Object length) {
         if (length == Undefined.instance) {
             length = array.getByteLength();
         }
