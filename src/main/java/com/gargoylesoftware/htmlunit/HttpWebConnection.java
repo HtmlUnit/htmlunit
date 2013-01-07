@@ -556,6 +556,7 @@ public class HttpWebConnection implements WebConnection {
 
         final PoolingClientConnectionManager connectionManager =
             new PoolingClientConnectionManager(schemeRegistry);
+        connectionManager.setDefaultMaxPerRoute(6);
 
         final DefaultHttpClient httpClient = new DefaultHttpClient(connectionManager, httpParams);
         httpClient.setCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));

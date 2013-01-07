@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
+            <action type="update" dev="mguillem">
+                Set max number of simultaneous connections per server to 6.
+            </action>
             <action type="fix" dev="asashour" issue="1471">
                 Handle pages with "application/javascript" content type as JavaScriptPage.
             </action>
