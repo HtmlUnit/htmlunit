@@ -22,6 +22,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -91,7 +93,10 @@ public class HtmlHeading2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @NotYetImplemented({ Browser.CHROME, Browser.FF17 })
     @Alerts(DEFAULT = { "center", "8", "foo" },
+            CHROME = { "CenTer", "8", "foo" },
+            FF17 = { "CenTer", "8", "foo" },
             IE = { "center", "error", "center", "error", "center" })
     public void setAlign() throws Exception {
         final String html
