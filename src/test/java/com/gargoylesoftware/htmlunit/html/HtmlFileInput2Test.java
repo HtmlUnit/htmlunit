@@ -271,25 +271,6 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void unknownFile() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
-        servlets.put("/upload1", Upload1Servlet.class);
-        servlets.put("/upload2", PrintRequestServlet.class);
-        startWebServer("./", new String[0], servlets);
-
-        final WebDriver driver = getWebDriver();
-        driver.get("http://localhost:" + PORT + "/upload1");
-        driver.findElement(By.name("myInput")).sendKeys("unknown.txt");
-        driver.findElement(By.id("mySubmit")).click();
-
-        assertTrue(driver.getPageSource()
-                .contains("Content-Disposition: form-data; name=\"myInput\"; filename=\"unknown.txt\""));
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
     public void chunked() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/upload1", Upload1Servlet.class);
