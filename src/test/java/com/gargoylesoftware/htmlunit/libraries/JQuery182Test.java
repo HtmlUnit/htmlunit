@@ -4149,7 +4149,6 @@ public class JQuery182Test extends WebDriverTestCase {
         FF10 = "css: css(Object) where values are Functions (0, 3, 3)",
         CHROME = "css: css(String, Function) with incoming value (0, 3, 3)",
         IE = "css: Setting opacity to 1 properly removes filter: style (#6652) (0, 2, 2)")
-    @NotYetImplemented(IE)
     public void test_375() throws Exception {
         runTest(375);
     }
