@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -39,14 +36,17 @@ public class Popup2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ IE, FF10 })
+    @Alerts(DEFAULT = "exception", IE = "done")
     public void testPopup() throws Exception {
         final String html = "<html><head><title>First</title><body>\n"
             + "<script>\n"
+            + "try {\n"
             + "var oPopup = window.createPopup();\n"
             + "var oPopupBody = oPopup.document.body;\n"
             + "oPopupBody.innerHTML = 'bla bla';\n"
             + "oPopup.show(100, 100, 200, 50, document.body);\n"
+            + "alert('done');\n"
+            + "} catch(e) { alert('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -59,13 +59,16 @@ public class Popup2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers({ IE, FF10 })
+    @Alerts(DEFAULT = "exception", IE = "done")
     public void testPopupBodyStyle() throws Exception {
         final String html = "<html><head><title>First</title><body>\n"
             + "<script language='javascript'>\n"
+            + "try {\n"
             + "  popup = window.createPopup();\n"
             + "  popupBody = popup.document.body;\n"
             + "  popupBody.style.backgroundColor = '#7f7fff';\n"
+            + "  alert('done');\n"
+            + "} catch(e) { alert('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
 
