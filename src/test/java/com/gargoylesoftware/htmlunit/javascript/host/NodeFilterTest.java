@@ -62,7 +62,7 @@ public class NodeFilterTest extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(CHROME)
-    @Alerts(DEFAULT = "-1", FF3_6 = "4294967295", FF10 = "4294967295", IE = "exception")
+    @Alerts(CHROME = "-1", FF = "4294967295", IE = "exception")
     public void constants_SHOW_ALL() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
