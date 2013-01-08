@@ -98,6 +98,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "A", "A", "4294967295", "true" },
+            FF17 = { "A", "A", "4294967295", "false" },
             IE = "exception")
     public void getters2() throws Exception {
         final String script = "var theA = document.getElementById('theA');\n"
@@ -112,6 +113,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "DIV", "1", "true" },
+            FF17 = { "BODY", "DIV", "1", "false" },
             IE = "exception")
     public void firstChild() throws Exception {
         final String script =
@@ -127,6 +129,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "SPAN", "1", "true" },
+            FF17 = { "BODY", "SPAN", "1", "false" },
             IE = "exception")
     public void firstChild2() throws Exception {
         final String script =
@@ -143,6 +146,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "P", "1", "true" },
+            FF17 = { "BODY", "P", "1", "false" },
             IE = "exception")
     public void lastChild() throws Exception {
         final String script =
@@ -158,6 +162,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "SPAN", "1", "true" },
+            FF17 = { "BODY", "SPAN", "1", "false" },
             IE = "exception")
     public void lastChild2() throws Exception {
         final String script =
@@ -174,6 +179,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "BODY", "1", "true", "null" },
+            FF17 = { "BODY", "BODY", "1", "false", "null" },
             IE = "exception")
     public void parentNode() throws Exception {
         final String script =
@@ -191,6 +197,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "DIV", "1", "true" },
+            FF17 = { "BODY", "DIV", "1", "false" },
             IE = "exception")
     public void parentNode2() throws Exception {
         final String script =
@@ -207,6 +214,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "P", "1", "true", "null" },
+            FF17 = { "BODY", "P", "1", "false", "null" },
             IE = "exception")
     public void siblings() throws Exception {
         final String script =
@@ -224,6 +232,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "BODY", "DIV", "1", "true", "null" },
+            FF17 = { "BODY", "DIV", "1", "false", "null" },
             IE = "exception")
     public void siblings2() throws Exception {
         final String script1 =

@@ -1050,6 +1050,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
 
+    /** It looks likes TreeWalker.expandEntityReferences is always <code>false</code> for FF17.
+     */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 17))
+    JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE,
+
     /** Changing the opener of an window to something not null
      * is not valid (in FF).
      */

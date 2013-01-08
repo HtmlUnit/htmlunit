@@ -64,7 +64,7 @@ public class TreeWalker extends SimpleScriptable {
     public TreeWalker(final Node root,
                       final long whatToShow,
                       final NodeFilter filter,
-                      final Boolean expandEntityReferences) throws DOMException {
+                      final boolean expandEntityReferences) throws DOMException {
         if (root == null) {
             Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
                                    "root must not be null"));
@@ -72,7 +72,7 @@ public class TreeWalker extends SimpleScriptable {
         root_ = root;
         whatToShow_ = whatToShow;
         filter_ = filter;
-        expandEntityReferences_ = expandEntityReferences.booleanValue();
+        expandEntityReferences_ = expandEntityReferences;
         currentNode_ = root_;
     }
 
