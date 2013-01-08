@@ -481,4 +481,16 @@ public class Range extends SimpleScriptable {
     public String toString() {
         return toW3C().toString();
     }
+
+    @Override
+    protected Object equivalentValues(final Object value) {
+        if (!(value instanceof Range)) {
+            return false;
+        }
+        final Range other = (Range) value;
+        return startContainer_ == other.startContainer_
+                && endContainer_ == other.endContainer_
+                && startOffset_ == other.startOffset_
+                && endOffset_ == other.endOffset_;
+    }
 }
