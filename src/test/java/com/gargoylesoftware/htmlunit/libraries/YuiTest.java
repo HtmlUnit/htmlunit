@@ -20,42 +20,45 @@ import static org.junit.Assert.fail;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import org.junit.After;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlSpan;
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for compatibility with the <a href="http://developer.yahoo.com/yui/">YUI JavaScript library</a>.
  *
- * TODO: add tests for IE6 and IE7
- *
  * @version $Revision$
  * @author Rob Di Marco
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
-public class YuiTest extends SimpleWebTestCase {
+@RunWith(BrowserRunner.class)
+public class YuiTest extends WebDriverTestCase {
+    private static final Log LOG = LogFactory.getLog(YuiTest.class);
 
-    private static final long DEFAULT_TIME_TO_WAIT = 3 * 60 * 1000L;
     private static final String BASE_FILE_PATH = "libraries/yui/2.3.0/tests/";
-    private final List<String> emptyList_ = Collections.emptyList();
-    private WebClient client_;
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
     public void logger() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "logger.html", emptyList_);
+        doTest("logger.html");
     }
 
     /**
@@ -63,7 +66,7 @@ public class YuiTest extends SimpleWebTestCase {
      */
     @Test
     public void animation() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "animation.html", emptyList_);
+        doTest("animation.html");
     }
 
     /**
@@ -71,10 +74,7 @@ public class YuiTest extends SimpleWebTestCase {
      */
     @Test
     public void tabView() throws Exception {
-        // The tabview YUI test has a background thread that runs. We want to set the
-        // maximum wait time to 5 seconds as that gives enough time for execution without
-        // causing the test to run forever.
-        doTest(BrowserVersion.FIREFOX_3_6, "tabview.html", emptyList_, null, 5 * 1000);
+        doTest("tabview.html");
     }
 
     /**
@@ -82,39 +82,39 @@ public class YuiTest extends SimpleWebTestCase {
      */
     @Test
     public void dateMath() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "datemath.html", emptyList_, "btnRun");
+        doTest("datemath.html", "btnRun");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @NotYetImplemented(Browser.IE8)
     public void calendar() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "calendar.html", emptyList_, "btnRun");
+        doTest("calendar.html", "btnRun");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @NotYetImplemented(Browser.IE8)
     public void colorPicker() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "colorpicker.html", emptyList_);
+        doTest("colorpicker.html");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Ignore
     public void config() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
         // Test currently commented out as there are problems with the YUI test.
         // A bug has been filed against YUI regarding the problems with the test.
         // See http://sourceforge.net/tracker/index.php?func=detail&aid=1788014&group_id=165715&atid=836476
         // for more details.
         fail("YUI test has a bug that causes this to fail.");
-        //doTest(BrowserVersion.FIREFOX_3_6, "config.html", Collections.EMPTY_LIST);
+        //doTest("config.html");
     }
 
     /**
@@ -122,7 +122,26 @@ public class YuiTest extends SimpleWebTestCase {
      */
     @Test
     public void dataSource() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "datasource.html", emptyList_, "btnRun");
+        doTest("datasource.html", "btnRun");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented(Browser.IE8)
+    public void dom() throws Exception {
+        doTest("dom.html");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE8 = { "test_startDrag", "test_dragOver", "test_containerScroll" })
+    @NotYetImplemented(Browser.IE8)
+    public void dragDrop() throws Exception {
+        doTest("dragdrop.html", Arrays.asList(getExpectedAlerts()));
     }
 
     /**
@@ -130,45 +149,25 @@ public class YuiTest extends SimpleWebTestCase {
      */
     @Test
     public void dataTable() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "datatable.html", emptyList_, "btnRun");
+        doTest("datatable.html", "btnRun");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    public void dom() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "dom.html", emptyList_);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void dragDrop() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "dragdrop.html", emptyList_);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
+    @NotYetImplemented
     public void editor() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        doTest(BrowserVersion.FIREFOX_3_6, "editor.html", emptyList_);
+        doTest("editor.html", Arrays.asList("test_createlink"));
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @NotYetImplemented
     public void yuiLoaderRollup() throws Exception {
-        if (notYetImplemented()) {
-            return;
-        }
-        doTest(BrowserVersion.FIREFOX_3_6, "yuiloader_rollup.html", emptyList_);
+        doTest("yuiloader_rollup.html");
     }
 
     /**
@@ -177,7 +176,7 @@ public class YuiTest extends SimpleWebTestCase {
     @Test
     public void yuiLoaderConfig() throws Exception {
         // The "test_page_modules" test fails in FF, too, so it's OK.
-        doTest(BrowserVersion.FIREFOX_3_6, "yuiloader_config.html", Arrays.asList("test_page_modules"));
+        doTest("yuiloader_config.html", Arrays.asList("test_page_modules"));
     }
 
     /**
@@ -185,81 +184,87 @@ public class YuiTest extends SimpleWebTestCase {
      */
     @Test
     public void yuiLoader() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "yuiloader.html", emptyList_);
+        doTest("yuiloader.html");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(IE8 = "testConstructor", FF = { "testConstructor", "testProperties" })
+    @NotYetImplemented(Browser.FF)
     public void module() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "module.html", Collections.singletonList("testConstructor"));
+        doTest("module.html", Arrays.asList(getExpectedAlerts()));
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @NotYetImplemented(Browser.IE8)
     public void imageLoader() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "imageloader.html", emptyList_);
+        doTest("imageloader.html");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @NotYetImplemented(Browser.IE8)
     public void element() throws Exception {
-        doTest(BrowserVersion.FIREFOX_3_6, "element.html", emptyList_);
+        doTest("element.html");
+    }
+
+    private void doTest(final String fileName, final String buttonToClick) throws Exception {
+        doTest(fileName, Collections.<String>emptyList(), buttonToClick, 0);
+    }
+
+    private void doTest(final String fileName) throws Exception {
+        doTest(fileName, Collections.<String>emptyList(), null, 0);
+    }
+
+    private void doTest(final String fileName, final List<String> knownFailingTests) throws Exception {
+        doTest(fileName, knownFailingTests, null, 0);
     }
 
     /**
-     * TODO: get rid of the known failing test list, eventually
      */
-    private void doTest(final BrowserVersion version, final String fileName, final List<String> knownFailingTests)
-        throws Exception {
-        doTest(version, fileName, knownFailingTests, null);
-    }
-
-    /**
-     * TODO: get rid of the known failing test list, eventually
-     */
-    private void doTest(final BrowserVersion version, final String fileName, final List<String> knownFailingTests,
-            final String buttonToPush) throws Exception {
-        doTest(version, fileName, knownFailingTests, buttonToPush, DEFAULT_TIME_TO_WAIT);
-    }
-
-    /**
-     * TODO: get rid of the known failing test list, eventually
-     */
-    private void doTest(final BrowserVersion version, final String fileName, final List<String> knownFailingTests,
+    private void doTest(final String fileName, final List<String> knownFailingTests,
             final String buttonToPush, final long timeToWait) throws Exception {
 
         final URL url = getClass().getClassLoader().getResource(BASE_FILE_PATH + fileName);
         assertNotNull(url);
 
-        client_ = new WebClient(version);
-        final HtmlPage page = (HtmlPage) client_.getPage(url);
-        final HtmlElement doc = page.getDocumentElement();
+        final WebDriver driver = getWebDriver();
+        driver.get(url.toString());
 
         if (buttonToPush != null) {
-            final HtmlButtonInput button = page.getHtmlElementById(buttonToPush);
-            button.click();
+            driver.findElement(By.id(buttonToPush)).click();
         }
 
-        client_.waitForBackgroundJavaScript(timeToWait);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        final WebElement logDiv = driver.findElement(By.className("yui-log-bd"));
+        final WebElement lastMessage = logDiv.findElement(
+            By.xpath("pre[last() and contains(string(.), 'Testing completed')]"));
 
-        final List<?> tests = doc.getByXPath("//span[@class='pass' or @class='fail']");
-        if (tests.size() == 0) {
+        LOG.info(lastMessage.getText());
+
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        final List<WebElement> tests = driver.findElements(By.xpath("//p[span[@class='pass' or @class='fail']]"));
+        if (tests.isEmpty()) {
             fail("No tests were executed!");
         }
 
-        for (final Iterator<?> i = tests.iterator(); i.hasNext();) {
-            final HtmlSpan span = (HtmlSpan) i.next();
-            final String testResult = span.getNextSibling().asText();
-            final int colonIdx = testResult.indexOf(":");
-            assertTrue(colonIdx > 0 && colonIdx < testResult.length() - 1);
-            final String result = span.asText();
-            final String testName = testResult.substring(0, colonIdx).trim();
+        for (final WebElement pre : tests) {
+            final String[] parts;
+            try {
+                parts = pre.getText().split(" ");
+            }
+            catch (final StaleElementReferenceException e) {
+                continue; // happens for FF17 on imageLoader test
+            }
+            final String result = parts[0];
+            final String testName = parts[1].substring(0, parts[1].length() - 1);
             if ("pass".equalsIgnoreCase(result)) {
                 assertTrue("Test case '" + testName + "' is in the known failing list, but passes!", !knownFailingTests
                                 .contains(testName));
@@ -268,17 +273,6 @@ public class YuiTest extends SimpleWebTestCase {
                 assertTrue("Test case '" + testName + "' is not in the known failing list, but fails!",
                                 knownFailingTests.contains(testName));
             }
-        }
-    }
-
-    /**
-     * Performs post-test deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void tearDown() throws Exception {
-        if (client_ != null) {
-            client_.closeAllWindows();
         }
     }
 }
