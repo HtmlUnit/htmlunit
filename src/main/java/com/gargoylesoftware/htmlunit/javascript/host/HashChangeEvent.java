@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -30,12 +31,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Marc Guillemot
  */
-@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
 public class HashChangeEvent extends UIEvent {
 
-    private Object oldURL_;
-    private Object newURL_;
+    private String oldURL_;
+    private String newURL_;
 
     /**
      * Creates a new UI event instance.
@@ -53,7 +55,7 @@ public class HashChangeEvent extends UIEvent {
      * @param newUrl the new url
      */
     public HashChangeEvent(final SimpleScriptable scriptable, final String type,
-            final Object oldUrl, final Object newUrl) {
+            final String oldUrl, final String newUrl) {
         super(scriptable, type);
         oldURL_ = oldUrl;
         newURL_ = newUrl;
@@ -63,7 +65,7 @@ public class HashChangeEvent extends UIEvent {
      * Returns the old URL.
      * @return the old URL
      */
-    @JsxGetter
+    @JsxGetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
     public Object getOldURL() {
         return oldURL_;
     }
@@ -72,7 +74,7 @@ public class HashChangeEvent extends UIEvent {
      * Returns the new URL.
      * @return the new URL
      */
-    @JsxGetter
+    @JsxGetter({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
     public Object getNewURL() {
         return newURL_;
     }

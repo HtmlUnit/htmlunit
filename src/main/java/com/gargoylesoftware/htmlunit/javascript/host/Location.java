@@ -24,8 +24,6 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -305,11 +303,13 @@ public class Location extends SimpleScriptable {
             }
         }
         final boolean hasChanged = hash != null && !hash.equals(hash_);
+        final String oldUrl = getHref();
         hash_ = hash;
+        final String newUrl = getHref();
 
         if (hasChanged) {
             final HashChangeEvent event = new HashChangeEvent(getWindow(), Event.TYPE_HASH_CHANGE,
-                    Undefined.instance, Undefined.instance);
+                    oldUrl, newUrl);
             getWindow().executeEvent(event);
         }
     }

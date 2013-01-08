@@ -23,6 +23,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -467,6 +469,7 @@ public class Location2Test extends WebDriverTestCase {
             IE6 = { },
             IE7 = { },
             IE8 = { "supported", "onhashchange -" })
+    @NotYetImplemented({ Browser.FF10, Browser.FF17 })
     public void onHashChange() throws Exception {
         final String html =
             "<html><head>\n"
