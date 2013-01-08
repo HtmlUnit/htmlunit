@@ -38,7 +38,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false", FF10 = "exception")
+    @Alerts(DEFAULT = "exception", FF3_6 = "false", IE = "false")
     public void createElementWithAngleBrackets() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -57,8 +57,8 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "DIV", "exception" },
-            FF10 = "exception",
+    @Alerts(FF3_6 = { "DIV", "exception" },
+            DEFAULT = "exception",
             IE = { "DIV", "false", "mySelect", "0", "OPTION", "myOption", "0" })
     public void createElementWithHtml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
