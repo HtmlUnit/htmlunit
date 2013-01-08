@@ -153,14 +153,12 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(FF)
+    @NotYetImplemented({ FF3_6, FF10 })
     @Alerts(FF3_6 = { "Packages: object", "XML: function", "XMLList: function",
                     "Namespace: function", "QName: function" },
             FF10 = { "Packages: function", "XML: function", "XMLList: function",
                             "Namespace: function", "QName: function" },
-            FF = { "Packages: undefined", "XML: function", "XMLList: function",
-                            "Namespace: function", "QName: function" },
-            IE = { "Packages: undefined", "XML: undefined", "XMLList: undefined",
+            DEFAULT = { "Packages: undefined", "XML: undefined", "XMLList: undefined",
             "Namespace: undefined", "QName: undefined" })
     public void rhino_lazilyNames3() throws Exception {
         doTestRhinoLazilyNames("Packages", "XML", "XMLList", "Namespace", "QName");
@@ -394,9 +392,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(FF3_6)
-    @Alerts(IE = { "true", "true", "object" },
-            FF3_6 = { "false", "false", "undefined" },
-            FF = { "true", "true", "undefined" })
+    @Alerts(DEFAULT = { "true", "true", "object" },
+            FF3_6 = { "false", "false", "undefined" })
     public void onbeforeunload_notDefined() throws Exception {
         onbeforeunload("onbeforeunload", null);
     }
