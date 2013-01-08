@@ -572,7 +572,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * Returns the globalStorage property.
      * @return the globalStorage property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(@WebBrowser(value = FF, maxVersion = 10))
     public StorageList getGlobalStorage() {
         if (storageList_ == null) {
             storageList_ = new StorageList();
