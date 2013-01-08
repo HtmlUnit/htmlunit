@@ -758,7 +758,7 @@ public enum BrowserVersionFeatures {
     JS_CONSTRUCTOR,
 
     /** Is Date.toLocaleTimeString() in 24-hour format. */
-    @BrowserFeature(@WebBrowser(CHROME))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 17) })
     JS_DATE_LOCATE_TIME_24,
 
     /** */

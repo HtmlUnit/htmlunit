@@ -170,7 +170,7 @@ public class NativeDateTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12:00:00 AM", CHROME = "00:00:00")
+    @Alerts(DEFAULT = "12:00:00 AM", FF17 = "00:00:00", CHROME = "00:00:00")
     public void toLocaleTimeString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
