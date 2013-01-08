@@ -15,8 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import java.net.URL;
@@ -401,42 +399,6 @@ public class DocumentTest extends SimpleWebTestCase {
         assertEquals((short) 3, div1.getNodeType());
         assertEquals("Some Text", div1.getNodeValue());
         assertEquals("#text", div1.getNodeName());
-    }
-
-    /**
-     * Verifies that when we create a text node and append it to an existing DOM node,
-     * its <tt>outerHTML</tt>, <tt>innerHTML</tt> and <tt>innerText</tt> properties are
-     * properly escaped.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(FF = { "<p>a & b</p> &amp; \u0162 \" '",
-                "<p>a & b</p> &amp; \u0162 \" '",
-                "undefined",
-                "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                "undefined" },
-            IE = { "<p>a & b</p> &amp; \u0162 \" '",
-                "<p>a & b</p> &amp; \u0162 \" '",
-                "<DIV id=div>&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</DIV>",
-                "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
-                "<p>a & b</p> &amp; \u0162 \" '" })
-    public void createTextNodeWithHtml_FF() throws Exception {
-        final String html = "<html><body onload='test()'><script>\n"
-            + "   function test() {\n"
-            + "      var node = document.createTextNode('<p>a & b</p> &amp; \\u0162 \" \\'');\n"
-            + "      alert(node.data);\n"
-            + "      alert(node.nodeValue);\n"
-            + "      var div = document.getElementById('div');\n"
-            + "      div.appendChild(node);\n"
-            + "      alert(div.outerHTML);\n"
-            + "      alert(div.innerHTML);\n"
-            + "      alert(div.innerText);\n"
-            + "   };\n"
-            + "</script>\n"
-            + "<div id='div'></div>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts(html);
     }
 
     /**
@@ -2191,28 +2153,6 @@ public class DocumentTest extends SimpleWebTestCase {
                 + "</body>\n" + "</html>";
 
         loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers({ IE, FF3_6, FF10 })
-    public void activeElement() throws Exception {
-        final String html = "<html><head><script>\n"
-            + "  alert(document.activeElement);"
-            + "  function test() {\n"
-            + "     alert(document.activeElement.id);\n"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body>\n"
-            + "<input id='text1' onclick='test()'>\n"
-            + "</body></html>";
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-        final HtmlTextInput text1 = page.getHtmlElementById("text1");
-        text1.click();
-        assertEquals(new String[]{"null", "text1"}, collectedAlerts);
     }
 
     /**

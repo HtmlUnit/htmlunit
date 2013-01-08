@@ -18,6 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -247,5 +249,68 @@ public class Document2Test extends WebDriverTestCase {
             + "</body></html>\n";
 
         loadPageWithAlerts2(html, 200);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "null", "text1" })
+    public void activeElement() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  alert(document.activeElement);"
+            + "  function test() {\n"
+            + "     alert(document.activeElement.id);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<input id='text1' onclick='test()'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("text1")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Verifies that when we create a text node and append it to an existing DOM node,
+     * its <tt>outerHTML</tt>, <tt>innerHTML</tt> and <tt>innerText</tt> properties are
+     * properly escaped.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "<p>a & b</p> &amp; \u0162 \" '",
+                "<p>a & b</p> &amp; \u0162 \" '",
+                "undefined",
+                "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
+                "undefined" },
+            FF17 = { "<p>a & b</p> &amp; \u0162 \" '",
+                    "<p>a & b</p> &amp; \u0162 \" '",
+                    "<div id=\"div\">&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</div>",
+                    "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
+                    "undefined" },
+            IE = { "<p>a & b</p> &amp; \u0162 \" '",
+                "<p>a & b</p> &amp; \u0162 \" '",
+                "<DIV id=div>&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '</DIV>",
+                "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
+                "<p>a & b</p> &amp; \u0162 \" '" })
+    public void createTextNodeWithHtml_FF() throws Exception {
+        final String html = "<html><body onload='test()'><script>\n"
+            + "   function test() {\n"
+            + "      var node = document.createTextNode('<p>a & b</p> &amp; \\u0162 \" \\'');\n"
+            + "      alert(node.data);\n"
+            + "      alert(node.nodeValue);\n"
+            + "      var div = document.getElementById('div');\n"
+            + "      div.appendChild(node);\n"
+            + "      alert(div.outerHTML);\n"
+            + "      alert(div.innerHTML);\n"
+            + "      alert(div.innerText);\n"
+            + "   };\n"
+            + "</script>\n"
+            + "<div id='div'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 }
