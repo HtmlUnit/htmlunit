@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -34,7 +36,8 @@ public class NativeErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "undefined", FF = "true")
+    @Alerts(IE = "undefined", FF = "true", FF17 = "false")
+    @NotYetImplemented(Browser.FF17)
     public void stack() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
