@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.net.ConnectException;
 import java.net.SocketException;
 import java.net.URL;
@@ -25,12 +23,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -54,9 +49,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Ahmed Ashour
  */
 public abstract class SimpleWebTestCase extends WebTestCase {
-
-    /** Logging support. */
-    private static final Log LOG = LogFactory.getLog(SimpleWebTestCase.class);
 
     private WebClient webClient_;
 
@@ -211,89 +203,6 @@ public abstract class SimpleWebTestCase extends WebTestCase {
     protected static final MockWebConnection getMockConnection(final HtmlPage page) {
         return (MockWebConnection) page.getWebClient().getWebConnection();
     }
-
-    /**
-     * Runs the calling JUnit test again and fails only if it already runs.<br/>
-     * This is helpful for tests that don't currently work but should work one day,
-     * when the tested functionality has been implemented.<br/>
-     * The right way to use it is:
-     * <pre>
-     * public void testXXX() {
-     *   if (notYetImplemented()) {
-     *       return;
-     *   }
-     *
-     *   ... the real (now failing) unit test
-     * }
-     * </pre>
-     * @return <tt>false</tt> when not itself already in the call stack
-     */
-    protected boolean notYetImplemented() {
-        setGenerateTest_notYetImplemented(true);
-        if (notYetImplementedFlag.get() != null) {
-            return false;
-        }
-        notYetImplementedFlag.set(Boolean.TRUE);
-
-        final Method testMethod = findRunningJUnitTestMethod();
-        try {
-            LOG.info("Running " + testMethod.getName() + " as not yet implemented");
-            testMethod.invoke(this, (Object[]) new Class[] {});
-            Assert.fail(testMethod.getName() + " is marked as not implemented but already works");
-        }
-        catch (final Exception e) {
-            LOG.info(testMethod.getName() + " fails which is normal as it is not yet implemented");
-            // method execution failed, it is really "not yet implemented"
-        }
-        finally {
-            notYetImplementedFlag.set(null);
-        }
-
-        return true;
-    }
-
-    /**
-     * Finds from the call stack the active running JUnit test case
-     * @return the test case method
-     * @throws RuntimeException if no method could be found
-     */
-    private Method findRunningJUnitTestMethod() {
-        final Class<?> cl = getClass();
-        final Class<?>[] args = new Class[] {};
-
-        // search the initial junit test
-        final Throwable t = new Exception();
-        for (int i = t.getStackTrace().length - 1; i >= 0; i--) {
-            final StackTraceElement element = t.getStackTrace()[i];
-            if (element.getClassName().equals(cl.getName())) {
-                try {
-                    final Method m = cl.getMethod(element.getMethodName(), args);
-                    if (isPublicTestMethod(m)) {
-                        return m;
-                    }
-                }
-                catch (final Exception e) {
-                    // can't access, ignore it
-                }
-            }
-        }
-
-        throw new RuntimeException("No JUnit test case method found in call stack");
-    }
-
-    /**
-     * From Junit. Test if the method is a junit test.
-     * @param method the method
-     * @return <code>true</code> if this is a junit test
-     */
-    private boolean isPublicTestMethod(final Method method) {
-        return method.getParameterTypes().length == 0
-            && (method.getName().startsWith("test") || method.getAnnotation(Test.class) != null)
-            && method.getReturnType() == Void.TYPE
-            && Modifier.isPublic(method.getModifiers());
-    }
-
-    private static final ThreadLocal<Boolean> notYetImplementedFlag = new ThreadLocal<Boolean>();
 
     /**
      * Load the specified resource for the supported browsers and tests
