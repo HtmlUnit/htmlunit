@@ -43,7 +43,8 @@ public class StorageTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "undefined", "undefined", "undefined" }, IE8 = { "undefined", "[object]", "[object]" },
-            FF = { "[object StorageList]", "[object Storage]", "[object Storage]" })
+            FF = { "[object StorageList]", "[object Storage]", "[object Storage]" },
+            FF17 = { "undefined", "[object Storage]", "[object Storage]" })
     @NotYetImplemented(FF3_6)
     public void storage() throws Exception {
         final String html
@@ -139,7 +140,8 @@ public class StorageTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object StorageObsolete]", "error" })
+    @Alerts(FF3_6 = { "[object StorageObsolete]", "error" },
+            FF10 = { "[object StorageObsolete]", "error" })
     public void globalStorage() throws Exception {
         final String html
             = "<html><head></head><body>\n"
