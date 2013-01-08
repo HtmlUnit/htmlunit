@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -37,8 +39,11 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented({ Browser.FF10, Browser.FF17 })
     @Alerts(FF3_6 = "[object ComputedCSSStyleDeclaration]",
-            FF = "[object CSSStyleDeclaration]",
+            FF10 = "[object CSSStyleDeclaration]",
+            FF17 = "[object CSS2Properties]",
+            CHROME = "[object CSSStyleDeclaration]",
             IE = "exception")
     public void getComputedStyleOnChild() throws Exception {
         final String html = "<html><head><style>\n"
