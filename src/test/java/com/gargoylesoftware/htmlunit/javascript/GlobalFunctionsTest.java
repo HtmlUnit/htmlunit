@@ -73,6 +73,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "isXMLName: function", "uneval: function" },
+            FF17 = { "isXMLName: undefined", "uneval: function" },
             DEFAULT = { "isXMLName: undefined", "uneval: undefined" })
     public void methods_different() throws Exception {
         final String[] methods = {"isXMLName", "uneval"};

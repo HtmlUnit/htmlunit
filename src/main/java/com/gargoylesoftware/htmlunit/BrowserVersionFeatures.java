@@ -872,6 +872,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK,
 
+    /** Indicates if the method isXmlName exists in the window scope. */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 10))
+    JS_FUNCTION_ISXMLNAME,
+
     /**
      * Indicates that function can be defined as
      * <code>function object.property() {}</code> instead of <code>object.property = function() {}</code>.
