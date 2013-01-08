@@ -15,8 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -452,7 +450,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement],div",
                 "[object HTMLUnknownElement],app:div"
                 })
-    @NotYetImplemented({ FF3_6, FF10 })
+    @NotYetImplemented(FF)
     public void html_localName() throws Exception {
         html("localName");
     }
@@ -473,7 +471,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLDivElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
                 })
-    @NotYetImplemented({ FF3_6, FF10 })
+    @NotYetImplemented(FF)
     public void html_namespaceURI() throws Exception {
         html("namespaceURI");
     }
@@ -596,7 +594,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLUnknownElement],app:div",
                 "[object HTMLUnknownElement],another:div"
                 })
-    @NotYetImplemented({ FF3_6, FF10 })
+    @NotYetImplemented(FF)
     public void namespace_localName() throws Exception {
         namespace("localName");
     }
@@ -621,7 +619,7 @@ public class ElementTest extends WebDriverTestCase {
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml",
                 "[object HTMLUnknownElement],http://www.w3.org/1999/xhtml"
                 })
-    @NotYetImplemented({ FF3_6, FF10 })
+    @NotYetImplemented(FF)
     public void namespace_namespaceURI() throws Exception {
         namespace("namespaceURI");
     }
