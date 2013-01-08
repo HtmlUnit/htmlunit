@@ -2249,26 +2249,6 @@ public class WindowTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = { "undefined", "function", "3" },
-            IE = { "null", "function", "3" })
-    public void onError() throws Exception {
-        final String html
-            = "<script>\n"
-            + "alert(window.onerror);\n"
-            + "window.onerror=function(){alert(arguments.length);};\n"
-            + "alert(typeof window.onerror);\n"
-            + "try { alert(undef); } catch(e) { /* caught, so won't trigger onerror */ }\n"
-            + "alert(undef);\n"
-            + "</script>";
-
-        getWebClientWithMockWebConnection().getOptions().setThrowExceptionOnScriptError(false);
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * Regression test for https://sf.net/tracker/index.php?func=detail&aid=1153708&group_id=47038&atid=448266
      * and https://bugzilla.mozilla.org/show_bug.cgi?id=443491.
      * @throws Exception if the test fails

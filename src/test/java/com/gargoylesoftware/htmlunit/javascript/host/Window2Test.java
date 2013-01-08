@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -936,6 +937,29 @@ public class Window2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF3_6 = { "undefined", "function", "3" },
+            DEFAULT = { "null", "function", "3" })
+    public void onError() throws Exception {
+        final String html
+            = "<script>\n"
+            + "alert(window.onerror);\n"
+            + "window.onerror=function(){alert(arguments.length);};\n"
+            + "alert(typeof window.onerror);\n"
+            + "try { alert(undef); } catch(e) { /* caught, so won't trigger onerror */ }\n"
+            + "alert(undef);\n"
+            + "</script>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                .getOptions().setThrowExceptionOnScriptError(false);
+        }
         loadPageWithAlerts2(html);
     }
 }
