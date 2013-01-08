@@ -671,7 +671,7 @@ public enum BrowserVersionFeatures {
      * The function addEventListener or attachEvent(IE) accepts null as listener
      * instead of throwing an exception.
      */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 17) })
     JS_ADD_EVENT_LISTENER_ACCEPTS_NULL_LISTENER,
 
     /** Setting the property align to arbitrary values is allowed. */
@@ -798,6 +798,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX,
+
+    /** Javascript function document.createElement accepts only tag names. */
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 4), @WebBrowser(CHROME) })
+    JS_DOCUMENT_CREATE_ELEMENT_STRICT,
 
     /** Javascript document.doctype returns null (IE). */
     @BrowserFeature(@WebBrowser(IE))

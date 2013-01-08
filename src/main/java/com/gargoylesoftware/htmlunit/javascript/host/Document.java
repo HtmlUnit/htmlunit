@@ -32,6 +32,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
@@ -407,10 +408,16 @@ public class Document extends EventNode {
         try {
             final BrowserVersion browserVersion = getBrowserVersion();
 
-            // FF supports document.createElement('div') or supports document.createElement('<div>')
+            // FF3.6 supports document.createElement('div') or supports document.createElement('<div>')
             // but not document.createElement('<div name="test">')
             // IE supports also document.createElement('<div name="test">')
-            if (!browserVersion.hasFeature(JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX)
+            // FF4+ doesn't support document.createElement('<div>')
+            if (browserVersion.hasFeature(BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_STRICT)
+                  && (tagName.contains("<") || tagName.contains(">"))) {
+                LOG.info("createElement: String contains an invalid character: " + tagName);
+                throw Context.reportRuntimeError("String contains an invalid character");
+            }
+            else if (!browserVersion.hasFeature(JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX)
                   && tagName.startsWith("<") && tagName.endsWith(">")) {
                 tagName = tagName.substring(1, tagName.length() - 1);
 
