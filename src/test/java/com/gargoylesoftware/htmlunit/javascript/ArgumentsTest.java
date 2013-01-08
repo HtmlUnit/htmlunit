@@ -97,8 +97,8 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "2", "hi", "undefined", "you" }, IE = { "2", "hi", "undefined", "you" },
+            FF17  = { "2", "world", "undefined", "undefined" },
             CHROME = { "2", "world", "undefined", "undefined" })
-    //FF14 same as chrome
     public void readOnly() throws Exception {
         final String html
             = "<html><head><script>\n"

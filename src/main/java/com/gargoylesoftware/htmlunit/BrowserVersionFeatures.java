@@ -712,7 +712,7 @@ public enum BrowserVersionFeatures {
     JS_ARGUMENTS_IS_OBJECT,
 
     /** Indicates that the "arguments" object is read-only. */
-    @BrowserFeature(@WebBrowser(CHROME))
+    @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 17) })
     JS_ARGUMENTS_IS_READ_ONLY,
 
     /** Indicates that the attributes map contains empty attr
