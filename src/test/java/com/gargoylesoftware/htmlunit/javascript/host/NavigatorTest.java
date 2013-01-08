@@ -290,7 +290,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF10 = "20120713134347", FF3_6 = "20120306064154", DEFAULT = "undefined")
+    @Alerts(FF10 = "20120713134347", FF3_6 = "20120306064154", FF17 = "20121129151842", DEFAULT = "undefined")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
