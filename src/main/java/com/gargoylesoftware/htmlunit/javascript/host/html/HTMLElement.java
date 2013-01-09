@@ -1822,7 +1822,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * is just to prevent scripts that call that method from failing
      */
     @JsxFunction
-    public void scrollIntoView() { }
+    public void scrollIntoView() { /* do nothing at the moment */ }
 
     /**
      * Retrieves a collection of rectangles that describes the layout of the contents of an object
