@@ -75,7 +75,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testAsyncUse() throws Exception {
+    public void asyncUse() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -198,7 +198,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testNoParallelJSExecutionInPage() throws Exception {
+    public void noParallelJSExecutionInPage() throws Exception {
         final String content = "<html><head><script>\n"
             + "function getXMLHttpRequest() {\n"
             + " if (window.XMLHttpRequest)\n"
@@ -253,7 +253,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void testMethods() throws Exception {
+    public void methods() throws Exception {
         testMethod(HttpMethod.GET);
         testMethod(HttpMethod.HEAD);
         testMethod(HttpMethod.DELETE);
@@ -300,7 +300,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testXMLHttpRequestWithDomChangeListenerDeadlock() throws Exception {
+    public void xmlHttpRequestWithDomChangeListenerDeadlock() throws Exception {
         final String content
             = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -388,7 +388,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     @Browsers(FF)
     @Test
     @NotYetImplemented
-    public void testStreaming() throws Exception {
+    public void streaming() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
         servlets.put("/test", StreamingServlet.class);
 
