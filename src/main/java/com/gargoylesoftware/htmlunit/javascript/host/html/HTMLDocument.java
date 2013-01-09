@@ -39,6 +39,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_F
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -1781,7 +1782,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public Object createTreeWalker(final Node root, final double whatToShow, final Scriptable filter,
-            final boolean expandEntityReferences) throws DOMException {
+            boolean expandEntityReferences) throws DOMException {
 
         // seems that Rhino doesn't like long as parameter type
         final long whatToShowL = Double.valueOf(whatToShow).longValue();
@@ -1803,7 +1804,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             };
         }
 
-        final TreeWalker t = new TreeWalker(root, whatToShowL, filterWrapper, Boolean.valueOf(expandEntityReferences));
+        if (getBrowserVersion().hasFeature(JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE)) {
+            expandEntityReferences = false;
+        }
+
+        final TreeWalker t = new TreeWalker(root, whatToShowL, filterWrapper, expandEntityReferences);
         t.setParentScope(getWindow(this));
         t.setPrototype(staticGetPrototype(getWindow(this), TreeWalker.class));
         return t;
