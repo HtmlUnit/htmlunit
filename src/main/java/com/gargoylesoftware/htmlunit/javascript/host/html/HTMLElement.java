@@ -564,13 +564,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @Override
     protected String fixAttributeName(final String attributeName) {
-        if (getBrowserVersion().hasFeature(HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE)
-                && ((HtmlPage) getDomNodeOrDie().getPage()).isQuirksMode()) {
-            if ("className".equals(attributeName)) {
-                return "class";
-            }
-            if ("class".equals(attributeName)) {
-                return "_class"; // attribute should not be retrieved with "class"
+        if (getBrowserVersion().hasFeature(HTMLELEMENT_ATTRIBUTE_FIX_IN_QUIRKS_MODE)) {
+            final SgmlPage page = getDomNodeOrDie().getPage();
+            if (page instanceof HtmlPage && ((HtmlPage) page).isQuirksMode()) {
+                if ("className".equals(attributeName)) {
+                    return "class";
+                }
+                if ("class".equals(attributeName)) {
+                    return "_class"; // attribute should not be retrieved with "class"
+                }
             }
         }
 
