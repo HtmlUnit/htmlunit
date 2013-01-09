@@ -38,7 +38,7 @@ public class XMLHttpRequest4Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSetLocation() throws Exception {
+    public void setLocation() throws Exception {
         final String content =
               "<html>\n"
             + "  <head>\n"
