@@ -322,7 +322,7 @@ public class DomNodeTest extends SimpleWebTestCase {
     public void testGetByXPath() throws Exception {
         final String htmlContent
             = "<html><head><title>my title</title></head><body>\n"
-            + "<div id='d1'><ul><li>foo 1</li><li>foo 2</li></li></div>\n"
+            + "<div id='d1'><ul><li>foo 1</li><li>foo 2</li></ul></div>\n"
             + "<div><span>bla</span></div>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
@@ -405,7 +405,7 @@ public class DomNodeTest extends SimpleWebTestCase {
     public void testGetFirstByXPath() throws Exception {
         final String htmlContent
             = "<html><head><title>my title</title></head><body>\n"
-            + "<div id='d1'><ul><li>foo 1</li><li>foo 2</li></li></div>\n"
+            + "<div id='d1'><ul><li>foo 1</li><li>foo 2</li></ul></div>\n"
             + "<div><span>bla</span></div>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
