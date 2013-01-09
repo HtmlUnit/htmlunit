@@ -322,7 +322,7 @@ public class DomNodeTest extends SimpleWebTestCase {
     public void testGetByXPath() throws Exception {
         final String htmlContent
             = "<html><head><title>my title</title></head><body>\n"
-            + "<p id='p1'><ul><li>foo 1</li><li>foo 2</li></li></p>\n"
+            + "<div id='d1'><ul><li>foo 1</li><li>foo 2</li></li></div>\n"
             + "<div><span>bla</span></div>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
@@ -338,13 +338,13 @@ public class DomNodeTest extends SimpleWebTestCase {
         assertEquals(0, head.getByXPath("/title").size());
         assertEquals(results, head.getByXPath("title"));
 
-        final HtmlParagraph p = page.getFirstByXPath("//p");
-        assertSame(p, page.getHtmlElementById("p1"));
-        final List<?> lis = p.getByXPath("ul/li");
+        final HtmlElement div = page.getFirstByXPath("//div");
+        assertSame(div, page.getHtmlElementById("d1"));
+        final List<?> lis = div.getByXPath("ul/li");
         assertEquals(2, lis.size());
         assertEquals(lis, page.getByXPath("//ul/li"));
 
-        assertEquals(2, p.<Number>getFirstByXPath("count(//li)").intValue());
+        assertEquals(2, div.<Number>getFirstByXPath("count(//li)").intValue());
     }
 
     /**
@@ -405,7 +405,7 @@ public class DomNodeTest extends SimpleWebTestCase {
     public void testGetFirstByXPath() throws Exception {
         final String htmlContent
             = "<html><head><title>my title</title></head><body>\n"
-            + "<p id='p1'><ul><li>foo 1</li><li>foo 2</li></li></p>\n"
+            + "<div id='d1'><ul><li>foo 1</li><li>foo 2</li></li></div>\n"
             + "<div><span>bla</span></div>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
@@ -419,12 +419,12 @@ public class DomNodeTest extends SimpleWebTestCase {
         assertNull(head.getFirstByXPath("/title"));
         assertSame(title, head.getFirstByXPath("title"));
 
-        final HtmlParagraph p = (HtmlParagraph) page.getFirstByXPath("//p");
-        assertSame(p, page.getHtmlElementById("p1"));
-        final HtmlListItem listItem = (HtmlListItem) p.getFirstByXPath("ul/li");
+        final HtmlElement div = page.getFirstByXPath("//div");
+        assertSame(div, page.getHtmlElementById("d1"));
+        final HtmlListItem listItem = (HtmlListItem) div.getFirstByXPath("ul/li");
         assertSame(listItem, page.getFirstByXPath("//ul/li"));
 
-        assertEquals(2, ((Number) p.getFirstByXPath("count(//li)")).intValue());
+        assertEquals(2, ((Number) div.getFirstByXPath("count(//li)")).intValue());
     }
 
     /**

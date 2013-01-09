@@ -340,7 +340,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_address() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("address"));
     }
@@ -504,7 +503,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_center() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("center"));
     }
@@ -541,7 +539,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_dd() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("dd"));
     }
@@ -560,7 +557,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_dir() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("dir"));
     }
@@ -579,7 +575,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_dl() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("dl"));
     }
@@ -589,7 +584,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_dt() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("dt"));
     }
@@ -618,7 +612,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_fieldset() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("fieldset"));
     }
@@ -832,7 +825,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_listing() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("listing"));
     }
@@ -842,7 +834,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_li() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("li"));
     }
@@ -880,7 +871,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_menu() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("menu"));
     }
@@ -955,7 +945,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_ol() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("ol"));
     }
@@ -1014,7 +1003,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_pre() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("pre"));
     }
@@ -1283,7 +1271,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_ul() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("ul"));
     }
@@ -1322,7 +1309,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "0", "0", "0", "0", "0", "0" }, FF = { "1", "0", "1", "1", "0", "1" })
-    @NotYetImplemented
     public void childNodes_xmp() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("xmp"));
     }

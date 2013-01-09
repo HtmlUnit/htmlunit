@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
+            <action type="fix" dev="asashour">
+                Some more elements close "p": address, center, dd, dir, dl, dt, fieldset, listing, li, menu,
+                ol, pre, ul and xmp.
+            </action>
             <action type="update" dev="mguillem">
                 Set max number of simultaneous connections per server to 6.
             </action>

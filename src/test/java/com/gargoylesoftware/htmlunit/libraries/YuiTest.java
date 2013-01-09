@@ -227,8 +227,6 @@ public class YuiTest extends WebDriverTestCase {
         doTest(fileName, knownFailingTests, null, 0);
     }
 
-    /**
-     */
     private void doTest(final String fileName, final List<String> knownFailingTests,
             final String buttonToPush, final long timeToWait) throws Exception {
 
