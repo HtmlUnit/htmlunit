@@ -61,7 +61,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Tries(3)
-    public void testSyncUse() throws Exception {
+    public void syncUse() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -129,7 +129,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRelativeUrl() throws Exception {
+    public void relativeUrl() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -168,7 +168,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("bla bla")
-    public void testResponseText_NotXml() throws Exception {
+    public void responseText_NotXml() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -196,7 +196,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts({ "1", "someAttr", "someValue", "someAttr=\"someValue\"" })
     @Browsers(IE)
-    public void testResponseXML2() throws Exception {
+    public void responseXML2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -229,7 +229,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSendNull() throws Exception {
+    public void sendNull() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -254,8 +254,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSendGETWithContent() throws Exception {
-        testSend("'foo'");
+    public void sendGETWithContent() throws Exception {
+        send("'foo'");
     }
 
     /**
@@ -263,14 +263,14 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSendNoArg() throws Exception {
-        testSend("");
+    public void sendNoArg() throws Exception {
+        send("");
     }
 
     /**
      * @throws Exception if the test fails
      */
-    private void testSend(final String sendArg) throws Exception {
+    private void send(final String sendArg) throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -296,7 +296,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testResponseNotInWindow() throws Exception {
+    public void responseNotInWindow() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -324,7 +324,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "false" }, IE = { "true", "exception" }, IE6 = "exception")
-    public void testOverrideMimeType() throws Exception {
+    public void overrideMimeType() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "function test() {\n"
@@ -359,7 +359,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "ibcdefg", "xxxxxfg" }, FF3_6 = { })
-    public void testReplaceOnTextData() throws Exception {
+    public void replaceOnTextData() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -410,7 +410,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testRefererHeader() throws Exception {
+    public void refererHeader() throws Exception {
         final String html = "<html><head><script>\n"
             + "function getXMLHttpRequest() {\n"
             + " if (window.XMLHttpRequest)\n"
@@ -442,7 +442,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Browsers(IE)
     @Alerts("0")
-    public void testCaseSensitivity() throws Exception {
+    public void caseSensitivity() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  var req = new ActiveXObject('MSXML2.XmlHttp');\n"
@@ -460,7 +460,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Browsers(IE)
     @Alerts("2")
-    public void testResponseXML_selectNodesIE() throws Exception {
+    public void responseXML_selectNodesIE() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -498,7 +498,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Browsers(FF)
     @Alerts({ "null", "myID", "blah", "span", "[object XMLDocument]" })
-    public void testResponseXML_getElementById_FF() throws Exception {
+    public void responseXML_getElementById_FF() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -548,7 +548,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                     "[object HTMLSpanElement]", "[object Document]", "undefined" },
             IE = { "[object]", "[object]", "[object]",
             "<body xmlns=\"http://www.w3.org/1999/xhtml\"><span id=\"out\">Hello Bob Dole!</span></body>" })
-    public void testResponseXML_getElementById() throws Exception {
+    public void responseXML_getElementById() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
@@ -597,7 +597,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("ol\u00E9")
-    public void testDefaultEncodingIsUTF8() throws Exception {
+    public void defaultEncodingIsUTF8() throws Exception {
         final String html =
               "<html>\n"
             + "  <head>\n"
