@@ -2511,8 +2511,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = {"", "#0000aa", "#000000", "#ffebcd", "#ab00e0", "#b00e00" },
-//            IE9 = {"", "#0000aa", "#0", "blanchedalmond", "#ab00e", "#b00e0" },
-            FF = {"", "#0000aa", "x", "BlanchedAlmond", "aBlue", "bluex" },
+            IE9 = {"", "#0000aa", "#0", "blanchedalmond", "#ab00e", "#b00e0" },
+            DEFAULT = {"", "#0000aa", "x", "BlanchedAlmond", "aBlue", "bluex" },
             FF3_6 = {"", "#0000aa", "#000000", "#ffebcd", "#ab00e0", "#b00e00" })
     public void setColorAttribute() throws Exception {
         final String html =
@@ -2635,7 +2635,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(IE = "", FF = "t")
+    @Alerts(IE = "", DEFAULT = "t")
     public void setAttribute_class() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2695,7 +2695,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = { "null", "", "null", "undefined" }, IE = { "", "", "null", "undefined" })
+    @Alerts(DEFAULT = { "null", "", "null", "undefined" }, IE = { "", "", "null", "undefined" })
     public void getAttribute2() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -3761,4 +3761,38 @@ public class HTMLElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void getAttribute_in_xml() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
+            + "    text += '<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://myNS\">\\n';\n"
+            + "    text += '  <xsl:template match=\"/\">\\n';\n"
+            + "    text += \"  <html xmlns='http://www.w3.org/1999/xhtml'>\\n\";\n"
+            + "    text += '    <body>\\n';\n"
+            + "    text += '    </body>\\n';\n"
+            + "    text += '  </html>\\n';\n"
+            + "    text += '  </xsl:template>\\n';\n"
+            + "    text += '</xsl:stylesheet>';\n"
+            + "    if (window.ActiveXObject) {\n"
+            + "      var doc=new ActiveXObject('Microsoft.XMLDOM');\n"
+            + "      doc.async=false;\n"
+            + "      doc.loadXML(text);\n"
+            + "    } else {\n"
+            + "      var parser=new DOMParser();\n"
+            + "      var doc=parser.parseFromString(text,'text/xml');\n"
+            + "    }\n"
+            + "    try {\n"
+            + "    alert(doc.documentElement.getElementsByTagName('html').item(0).getAttribute('hi'));\n"
+            + "    } catch (e) { alert('exception'); }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

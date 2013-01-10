@@ -195,7 +195,7 @@ public class Element extends EventNode {
      * @return all the descendant elements with the specified tag name
      */
     @JsxFunction
-    public Object getElementsByTagName(final String tagName) {
+    public HTMLCollection getElementsByTagName(final String tagName) {
         final String tagNameLC = tagName.toLowerCase();
 
         if (elementsByTagName_ == null) {
