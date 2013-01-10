@@ -3765,8 +3765,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("null")
-    public void getAttribute_in_xml() throws Exception {
+    @Alerts({ "null", "ho" })
+    public void getSetAttribute_in_xml() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var text='<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n';\n"
@@ -3787,7 +3787,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      var doc=parser.parseFromString(text,'text/xml');\n"
             + "    }\n"
             + "    try {\n"
-            + "    alert(doc.documentElement.getElementsByTagName('html').item(0).getAttribute('hi'));\n"
+            + "      var elem = doc.documentElement.getElementsByTagName('html').item(0);\n"
+            + "      alert(elem.getAttribute('hi'));\n"
+            + "      elem.setAttribute('hi', 'ho');\n"
+            + "      alert(elem.getAttribute('hi'));\n"
             + "    } catch (e) { alert('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
