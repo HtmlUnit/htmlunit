@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 /**
  * Tests for {@link History}.
  *
- * @version $Revision: 7931 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
