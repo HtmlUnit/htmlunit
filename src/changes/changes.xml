@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
+            <action type="fix" dev="mguillem">
+                JavaScript: ignore invalid indexes for History.go.
+            </action>
             <action type="fix" dev="asashour">
                 Some more elements to close "p": address, center, dd, dir, dl, dt, fieldset, listing, li, menu,
                 ol, pre, ul and xmp.

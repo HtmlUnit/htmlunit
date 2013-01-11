@@ -131,8 +131,8 @@ public class History implements Serializable {
         final int i = index_ + relativeIndex;
         if (i < urls_.size() && i >= 0) {
             index_ = i;
+            goToUrlAtCurrentIndex();
         }
-        goToUrlAtCurrentIndex();
         return this;
     }
 
