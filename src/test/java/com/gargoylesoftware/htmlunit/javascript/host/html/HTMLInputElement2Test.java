@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -61,4 +64,29 @@ public class HTMLInputElement2Test extends SimpleWebTestCase {
         assertEquals("me te", input.getSelectedText());
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("initial")
+    public void focus() throws Exception {
+        final String html = "<html><body>\n"
+            + "<iframe name='theFrame' src='" + URL_SECOND + "'></iframe>\n"
+            + "</body></html>";
+        final String frame = "<html><body>\n"
+            + "<input id='input' value='initial' onfocus='alert(this.value)'>\n"
+            + "<div id='div'>click me</div>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, frame);
+
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(html, collectedAlerts);
+        final HtmlPage framePage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
+
+        framePage.getHtmlElementById("input").type("foo");
+
+        framePage.getHtmlElementById("div").click();
+        assertEquals(getExpectedAlerts(), collectedAlerts);
+    }
 }

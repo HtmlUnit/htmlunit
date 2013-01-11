@@ -452,6 +452,9 @@ public abstract class HtmlElement extends DomElement {
             return getPage();
         }
 
+        // make enclosing window the current one
+        getPage().getWebClient().setCurrentWindow(getPage().getEnclosingWindow());
+
         final HtmlPage page = (HtmlPage) getPage();
         if (page.getFocusedElement() != this) {
             focus();
