@@ -1644,12 +1644,29 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getOffsetHeight() {
+        if (isDislayNone()) {
+            return 0;
+        }
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
         if (isAncestorOfEventTarget(event)) {
             // compute appropriate offset height to pretend mouse event was produced within this element
             return event.getClientY() - getPosY() + 50;
         }
         return getCurrentStyle().getCalculatedHeight(true, true);
+    }
+
+    private boolean isDislayNone() {
+        // if a parent is display:none there's nothing that a child can do to override it
+        HTMLElement element = this;
+        while (element != null) {
+            final CSSStyleDeclaration style = element.getCurrentStyle();
+            final String display = style.getDisplay();
+            if ("none".equals(display)) {
+                return true;
+            }
+            element = element.getParentHTMLElement();
+        }
+        return false;
     }
 
     /**
@@ -1662,6 +1679,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      */
     @JsxGetter
     public int getOffsetWidth() {
+        if (isDislayNone()) {
+            return 0;
+        }
+
         final MouseEvent event = MouseEvent.getCurrentMouseEvent();
         if (isAncestorOfEventTarget(event)) {
             // compute appropriate offset width to pretend mouse event was produced within this element

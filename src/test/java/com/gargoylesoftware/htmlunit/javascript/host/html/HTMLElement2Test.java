@@ -442,7 +442,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "30px", "46", "55px", "71", "71", "0", "0" })
+    @Alerts({ "30px", "46", "55px", "71", "71", "0", "0", "0", "0" })
     public void offsetWidthAndHeight() throws Exception {
         final String html =
               "<html><head>\n"
@@ -464,11 +464,14 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "    e.className = 'dontDisplay';\n"
             + "    alert(e.offsetHeight);\n"
             + "    alert(e.offsetWidth);\n"
+            + "    var nested = document.getElementById('nested');\n"
+            + "    alert(nested.offsetHeight);\n"
+            + "    alert(nested.offsetWidth);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <div id='myDiv' style='border: 3px solid #fff; padding: 5px;'></div>\n"
+            + "  <div id='myDiv' style='border: 3px solid #fff; padding: 5px;'><div id='nested'>hello</div></div>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

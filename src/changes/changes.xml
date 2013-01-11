@@ -9,6 +9,8 @@
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
             <action type="fix" dev="mguillem">
+                JavaScript: elements nested within an element with "display: none" have offsetHeight = offsetWidth = 0.
+            <action type="fix" dev="mguillem">
                 JavaScript: fixed wrong trigger of focus event in special cases when field loses focus.
             </action>
             <action type="fix" dev="mguillem">
