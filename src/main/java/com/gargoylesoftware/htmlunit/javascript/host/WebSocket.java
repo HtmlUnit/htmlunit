@@ -251,6 +251,9 @@ public class WebSocket extends SimpleScriptable {
 
     private void fireOnOpen() {
         final Scriptable scope = openHandler_.getParentScope();
+        if (openHandler_ == null) {
+            return;
+        }
         final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
         jsEngine.callFunction(containingPage_, openHandler_, scope, WebSocket.this,
                 ArrayUtils.EMPTY_OBJECT_ARRAY);
@@ -264,6 +267,9 @@ public class WebSocket extends SimpleScriptable {
         }
 
         public void onClose(final int closeCode, final String message) {
+            if (closeHandler_ == null) {
+                return;
+            }
             final Scriptable scope = closeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
             jsEngine.callFunction(containingPage_, closeHandler_, scope, WebSocket.this,
@@ -271,6 +277,9 @@ public class WebSocket extends SimpleScriptable {
         }
 
         public void onMessage(final String data) {
+            if (messageHandler_ == null) {
+                return;
+            }
             final Scriptable scope = messageHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
             final MessageEvent event = new MessageEvent(data);
@@ -280,6 +289,9 @@ public class WebSocket extends SimpleScriptable {
         }
 
         public void onMessage(final byte[] data, final int offset, final int length) {
+            if (messageHandler_ == null) {
+                return;
+            }
             final Scriptable scope = messageHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
             jsEngine.callFunction(containingPage_, messageHandler_, scope, WebSocket.this,
