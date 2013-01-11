@@ -33,6 +33,8 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class PostponedActionTest extends WebDriverTestCase {
 
     /**
+     * Note that this test doesn't work in FF17 through WebDriver but is correct
+     * when executed manually.
      * @throws Exception if the test fails
      */
     @Test

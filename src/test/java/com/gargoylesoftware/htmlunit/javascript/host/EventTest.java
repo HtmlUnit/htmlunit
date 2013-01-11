@@ -195,7 +195,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "true", FF10 = "", FF3_6 = "error")
+    @Alerts(IE = "true", FF = "", FF3_6 = "error")
     public void testAddEventListener_HandlerNull() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -614,7 +614,8 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "focus INPUT", "focus INPUT" }, CHROME = { "focus INPUT", "focus INPUT" })
+    @NotYetImplemented(FF)
+    @Alerts(FF = { "focus #document", "focus INPUT", "focus INPUT" }, CHROME = { "focus INPUT", "focus INPUT" })
     public void document_input_focus() throws Exception {
         document_input("focus");
     }
