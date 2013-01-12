@@ -226,7 +226,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private String domain_;
     private String uniqueID_;
     private String lastModified_;
-    private int documentMode_;
+    private int documentMode_ = -1;
 
     private boolean closePostponedAction_;
 
@@ -771,9 +771,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter(@WebBrowser(value = IE, minVersion = 8))
     public int getDocumentMode() {
-        if (documentMode_ != -1) {
-            return documentMode_;
-        }
+//        if (documentMode_ != -1) {
+//            return documentMode_;
+//        }
 
         final HtmlPage page = getHtmlPage();
         final BrowserVersion browserVersion = getBrowserVersion();
