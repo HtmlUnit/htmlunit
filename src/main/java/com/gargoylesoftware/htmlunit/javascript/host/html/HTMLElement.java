@@ -102,6 +102,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.BoxObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
+import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
@@ -2050,10 +2051,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // IE8 support .querySelector(All) but not in quirks mode
         // => TODO: find a better way to handle this!
         if (response instanceof FunctionObject
-            && ("querySelectorAll".equals(name) || "querySelector".equals(name))
-            && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)
-            && ((HTMLDocument) ((Window) getParentScope()).getDocument()).getDocumentMode() < 8) {
-            return NOT_FOUND;
+                && ("querySelectorAll".equals(name) || "querySelector".equals(name))
+                && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
+            final Document doc = getWindow().getDocument();
+            if ((doc instanceof HTMLDocument) && ((HTMLDocument) doc).getDocumentMode() < 8) {
+                return NOT_FOUND;
+            }
         }
 
         return response;

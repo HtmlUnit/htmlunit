@@ -39,6 +39,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -541,10 +542,11 @@ public class CSSStyleSheet extends SimpleScriptable {
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
             final AttributeCondition condition, final DomElement element) {
-        if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)
-                && ((HTMLDocument) ((Window) element.getScriptObject().getParentScope()).getDocument())
-                    .getDocumentMode() < 8) {
-            return false;
+        if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
+            final ScriptableObject sobj = element.getPage().getScriptObject();
+            if (sobj instanceof HTMLDocument && ((HTMLDocument) sobj).getDocumentMode() < 8) {
+                return false;
+            }
         }
 
         final String value = condition.getValue();

@@ -226,6 +226,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     private String domain_;
     private String uniqueID_;
     private String lastModified_;
+    private int documentMode_;
 
     private boolean closePostponedAction_;
 
@@ -770,6 +771,10 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxGetter(@WebBrowser(value = IE, minVersion = 8))
     public int getDocumentMode() {
+        if (documentMode_ != -1) {
+            return documentMode_;
+        }
+
         final HtmlPage page = getHtmlPage();
         final BrowserVersion browserVersion = getBrowserVersion();
         if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
@@ -781,9 +786,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                         final int value = Integer.parseInt(content.substring(3).trim());
                         final int version = (int) browserVersion.getBrowserVersionNumeric();
                         if (value > version) {
-                            return version;
+                            documentMode_ = version;
+                            return documentMode_;
                         }
-                        return value;
+                        documentMode_ = value;
+                        return documentMode_;
                     }
                     catch (final Exception e) {
                         // ignore
@@ -791,6 +798,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                 }
             }
         }
+
         boolean quirks = true;
         final DocumentType docType = page.getDoctype();
         if (docType != null) {
@@ -814,13 +822,16 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
         }
         if (quirks) {
-            return 5;
+            documentMode_ = 5;
+            return documentMode_;
         }
         final float version = browserVersion.getBrowserVersionNumeric();
         if (version == 8) {
-            return 7;
+            documentMode_ = 7;
+            return documentMode_;
         }
-        return 9;
+        documentMode_ = 9;
+        return documentMode_;
     }
 
     /**
@@ -1993,9 +2004,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // => TODO: find a better way to handle this!
         if (response instanceof FunctionObject
             && ("querySelectorAll".equals(name) || "querySelector".equals(name))
-            && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)
-            && ((HTMLDocument) ((Window) getParentScope()).getDocument()).getDocumentMode() < 8) {
-            return NOT_FOUND;
+            && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
+            final ScriptableObject sobj = getPage().getScriptObject();
+            if ((sobj instanceof HTMLDocument) && ((HTMLDocument) sobj).getDocumentMode() < 8) {
+                return NOT_FOUND;
+            }
         }
 
         return response;

@@ -56,7 +56,6 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -1570,13 +1569,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             }
             if (null != selectorList) {
                 final BrowserVersion browserVersion = webClient.getBrowserVersion();
-                final int documentMode;
+                int documentMode = 9;
                 if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-                    documentMode = ((HTMLDocument) ((Window) getScriptObject().getParentScope()).getDocument())
-                            .getDocumentMode();
-                }
-                else {
-                    documentMode = 9;
+                    final ScriptableObject sobj = getPage().getScriptObject();
+                    if (sobj instanceof HTMLDocument) {
+                        documentMode = ((HTMLDocument) sobj).getDocumentMode();
+                    }
                 }
                 CSSStyleSheet.validateSelectors(selectorList, documentMode);
 
