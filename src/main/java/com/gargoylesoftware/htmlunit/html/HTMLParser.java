@@ -63,6 +63,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -70,6 +71,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
 
@@ -501,8 +503,7 @@ public final class HTMLParser {
                 return;
             }
 
-            if (parsingInnerHead_ && page_.hasFeature(
-                    IGNORE_CONTENTS_OF_INNER_HEAD)) {
+            if (parsingInnerHead_ && page_.hasFeature(IGNORE_CONTENTS_OF_INNER_HEAD)) {
                 return;
             }
 
@@ -559,6 +560,30 @@ public final class HTMLParser {
                     removePrototypeProperties((Scriptable) page_.getEnclosingWindow().getScriptObject(), "Array",
                         "every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce",
                         "reduceRight", "some");
+                }
+            }
+            else if ("meta".equals(tagLower)) {
+                // i like the IE
+                if (page_.hasFeature(BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS)) {
+                    // TODO use different feature
+                    final HtmlMeta meta = (HtmlMeta) newElement;
+                    if ("X-UA-Compatible".equals(meta.getHttpEquivAttribute())) {
+                        final String content = meta.getContentAttribute();
+                        if (content.startsWith("IE=")) {
+                            try {
+                                int value = Integer.parseInt(content.substring(3).trim());
+                                final int version = (int) page_.getWebClient().getBrowserVersion().
+                                        getBrowserVersionNumeric();
+                                if (value > version) {
+                                    value = version;
+                                }
+                                ((HTMLDocument) page_.getScriptObject()).forceDocumentMode(value);
+                            }
+                            catch (final Exception e) {
+                                // ignore
+                            }
+                        }
+                    }
                 }
             }
             currentNode_ = newElement;
