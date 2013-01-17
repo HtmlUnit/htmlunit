@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIFRAME_IG
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLPARSER_REMOVE_EMPTY_CONTENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.IGNORE_CONTENTS_OF_INNER_HEAD;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFINE_GETTER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.META_X_UA_COMPATIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_WAIT_LOAD_BEFORE_BODY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG;
 
@@ -63,7 +64,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.ObjectInstantiationException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -557,6 +557,8 @@ public final class HTMLParser {
             }
             else if ("html".equals(tagLower)) {
                 if (!page_.hasFeature(JS_DEFINE_GETTER) && page_.isQuirksMode()) {
+                    // this is not really correct; a following meta tag may disable the quirks
+                    // mode; but at the moment i have no idea for a better place for this
                     removePrototypeProperties((Scriptable) page_.getEnclosingWindow().getScriptObject(), "Array",
                         "every", "filter", "forEach", "indexOf", "lastIndexOf", "map", "reduce",
                         "reduceRight", "some");
@@ -564,8 +566,7 @@ public final class HTMLParser {
             }
             else if ("meta".equals(tagLower)) {
                 // i like the IE
-                if (page_.hasFeature(BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-                    // TODO use different feature
+                if (page_.hasFeature(META_X_UA_COMPATIBLE)) {
                     final HtmlMeta meta = (HtmlMeta) newElement;
                     if ("X-UA-Compatible".equals(meta.getHttpEquivAttribute())) {
                         final String content = meta.getContentAttribute();

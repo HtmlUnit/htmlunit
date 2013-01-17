@@ -795,7 +795,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
      *
-     * Called from the HTMLParser if a 'X-UA-Compatible' metatag found.
+     * Called from the HTMLParser if a 'X-UA-Compatible' meta tag found.
      * @param documentMode the mode forced by the meta tag
      */
     public void forceDocumentMode(final int documentMode) {
@@ -803,8 +803,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     private boolean isQuirksDocType(final BrowserVersion browserVersion) {
-        final HtmlPage page = getHtmlPage();
-        final DocumentType docType = page.getDoctype();
+        final DocumentType docType = getHtmlPage().getDoctype();
         if (docType != null) {
             final String systemId = docType.getSystemId();
             if (systemId != null) {

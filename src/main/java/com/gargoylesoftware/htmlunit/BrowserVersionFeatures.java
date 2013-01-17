@@ -1107,6 +1107,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     KEYBOARD_EVENT_SPECIAL_KEYPRESS,
 
+    /**
+     * Indicates that the browser considers the meta X-UA-Compatible when determining
+     * compatibility/quirks mode.
+     */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 8))
+    META_X_UA_COMPATIBLE,
+
     /** If true, then silently ignore element.appendChild(element). */
     @BrowserFeature(@WebBrowser(IE))
     NODE_APPEND_CHILD_SELF_IGNORE,
