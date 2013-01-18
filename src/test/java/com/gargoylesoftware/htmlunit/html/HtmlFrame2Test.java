@@ -22,11 +22,13 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -252,5 +254,36 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             + "</html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Was failing as of HtmlUnit-2.11.
+     * @see <a href="sourceforge.net/p/htmlunit/bugs/1443/">Bug 1443</a>
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("foo")
+    public void onloadInNavigatedFrame() throws Exception {
+        final String html = "<html><head><title>first</title></head>\n"
+            + "<frameset cols='20%,80%'>\n"
+            + "    <frame src='frame1.html' id='frame1'>\n"
+            + "</frameset></html>";
+
+        final String firstHtml = "<html><body>\n"
+                + "<a id='a1' href='frame2.html'>hello</a>\n"
+                + "</body></html>";
+
+        final String secondHtml = "<html><body onload='alert(\"foo\")'></body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(new URL(getDefaultUrl(), "frame1.html"), firstHtml);
+        webConnection.setResponse(new URL(getDefaultUrl(), "frame2.html"), secondHtml);
+
+        final WebDriver driver = loadPage2(html);
+        driver.switchTo().frame(0);
+
+        driver.findElement(By.id("a1")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 }

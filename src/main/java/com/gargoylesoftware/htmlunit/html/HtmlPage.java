@@ -221,11 +221,13 @@ public class HtmlPage extends SgmlPage {
         // frame initialization has a different order
         final boolean framesetFirst = browserVersion.hasFeature(EVENT_ONLOAD_FRAMESET_FIRST);
         boolean isFrameWindow = enclosingWindow instanceof FrameWindow;
+        boolean isFirstPageInFrameWindow = false;
         if (isFrameWindow) {
             isFrameWindow = ((FrameWindow) enclosingWindow).getFrameElement() instanceof HtmlFrame;
+            isFirstPageInFrameWindow = enclosingWindow.getHistory().getLength() <= 2; // first is always about:blank
         }
 
-        if (framesetFirst && !isFrameWindow) {
+        if ((framesetFirst && !isFrameWindow) || (isFrameWindow && !isFirstPageInFrameWindow)) {
             executeEventHandlersIfNeeded(Event.TYPE_LOAD);
         }
 
