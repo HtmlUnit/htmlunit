@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @JsxClass
 public class CanvasRenderingContext2D extends SimpleScriptable {
@@ -269,6 +270,19 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     @JsxFunction
     public void bezierCurveTo(final double cp1x, final double cp1y, final double cp2x, final double cp2y,
             final double x, final double y) {
+        //empty
+    }
+
+    /**
+     * Draws a quadratic Bézier curve.
+     * @param controlPointX the x-coordinate of the control point
+     * @param controlPointY the y-coordinate of the control point
+     * @param endPointX the x-coordinate of the end point
+     * @param endPointY the y-coordinate of the end point
+     */
+    @JsxFunction
+    public void quadraticCurveTo(final double controlPointX, final double controlPointY,
+            final double endPointX, final double endPointY) {
         //empty
     }
 
