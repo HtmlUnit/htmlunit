@@ -86,6 +86,20 @@ public class DOMImplementationTest extends WebDriverTestCase {
         hasFeature("XPath", "['3.0']");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: true",
+                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
+                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" },
+            IE = { "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: false",
+                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: false",
+                "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: false" })
+    public void hasFeature_SVG_BasicStructure() throws Exception {
+        hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "['1.0', '1.1', '1.2']");
+    }
+
     private void hasFeature(final String feature, final String versions) throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

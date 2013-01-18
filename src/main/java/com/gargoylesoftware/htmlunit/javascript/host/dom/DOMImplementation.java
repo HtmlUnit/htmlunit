@@ -63,6 +63,10 @@ public class DOMImplementation extends SimpleScriptable {
             else if ("XPath".equals(feature) && "3.0".equals(version)) {
                 return true;
             }
+            else if ("http://www.w3.org/TR/SVG11/feature#BasicStructure".equals(feature)
+                    && ("1.0".equals(version) || "1.1".equals(version))) {
+                return true;
+            }
             //TODO: other features.
         }
         return false;
