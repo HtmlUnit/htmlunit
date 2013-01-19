@@ -114,6 +114,7 @@ import com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class CSSStyleSheet extends SimpleScriptable {
@@ -706,11 +707,14 @@ public class CSSStyleSheet extends SimpleScriptable {
 
     private static boolean getNth(final String nth, final int index) {
         if ("odd".equalsIgnoreCase(nth)) {
-            return index % 2 == 1;
+            return index % 2 != 0;
         }
-        else if ("even".equalsIgnoreCase(nth)) {
+
+        if ("even".equalsIgnoreCase(nth)) {
             return index % 2 == 0;
         }
+
+        // an+b
         final int nIndex = nth.indexOf('n');
         final int a;
         if (nIndex != -1) {
@@ -731,12 +735,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         if (a == 0) {
             return index == b;
         }
-        for (int n = 0; a * n + b <= index; n++) {
-            if (a * n + b == index) {
-                return true;
-            }
-        }
-        return false;
+        return (index - b) % a == 0;
     }
 
     /**
