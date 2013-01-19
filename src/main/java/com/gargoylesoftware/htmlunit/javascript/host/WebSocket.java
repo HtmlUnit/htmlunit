@@ -250,10 +250,10 @@ public class WebSocket extends SimpleScriptable {
     }
 
     private void fireOnOpen() {
-        final Scriptable scope = openHandler_.getParentScope();
         if (openHandler_ == null) {
             return;
         }
+        final Scriptable scope = openHandler_.getParentScope();
         final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
         jsEngine.callFunction(containingPage_, openHandler_, scope, WebSocket.this,
                 ArrayUtils.EMPTY_OBJECT_ARRAY);
