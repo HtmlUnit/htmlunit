@@ -404,7 +404,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 while (prev != null && !(prev instanceof HtmlElement)) {
                     prev = prev.getPreviousSibling();
                 }
-                return prev instanceof HtmlElement
+                return prev != null
                     && selects(browserVersion, ss.getSelector(), (HtmlElement) prev)
                     && selects(browserVersion, ss.getSiblingSelector(), element);
             case Selector.SAC_NEGATIVE_SELECTOR:
