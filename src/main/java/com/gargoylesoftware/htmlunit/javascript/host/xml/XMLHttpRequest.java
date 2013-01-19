@@ -616,7 +616,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 final StringBuilder builder = new StringBuilder();
                 for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
                     final String name = header.getKey().toLowerCase();
-                    final String value = header.getKey().toLowerCase();
+                    final String value = header.getValue().toLowerCase();
                     if (isPreflightHeader(name, value)) {
                         if (builder.length() != 0) {
                             builder.append(' ');
