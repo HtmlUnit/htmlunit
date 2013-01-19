@@ -154,8 +154,10 @@ public class WebClient implements Serializable {
     private OnbeforeunloadHandler onbeforeunloadHandler_;
     private Cache cache_ = new Cache();
 
+    /** "about:blank". */
+    public static final String ABOUT_BLANK = "about:blank";
     /** URL for "about:blank". */
-    public static final URL URL_ABOUT_BLANK = UrlUtils.toUrlSafe("about:blank");
+    public static final URL URL_ABOUT_BLANK = UrlUtils.toUrlSafe(ABOUT_BLANK);
 
     /** Singleton {@link WebResponse} for "about:blank". */
     private static final WebResponse WEB_RESPONSE_FOR_ABOUT_BLANK = new StringWebResponse("", URL_ABOUT_BLANK);

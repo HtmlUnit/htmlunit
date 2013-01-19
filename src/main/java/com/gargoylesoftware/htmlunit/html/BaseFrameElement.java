@@ -102,7 +102,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     public void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
         if (source.isEmpty()) {
-            source = "about:blank";
+            source = WebClient.ABOUT_BLANK;
         }
 
         loadInnerPageIfPossible(source);
@@ -342,7 +342,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
-        if ("src".equals(qualifiedName) && !"about:blank".equals(attributeValue)) {
+        if ("src".equals(qualifiedName) && !WebClient.ABOUT_BLANK.equals(attributeValue)) {
             final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
             // When src is set from a script, loading is postponed until script finishes
             // in fact this implementation is probably wrong: JavaScript URL should be
