@@ -146,7 +146,7 @@ public class ActiveXObject extends SimpleScriptable {
             return false;
         }
         name = name.toLowerCase();
-        return "Microsoft.XMLHTTP".equalsIgnoreCase(name) || name.startsWith("Msxml2.XMLHTTP".toLowerCase());
+        return "microsoft.xmlhttp".equals(name) || name.startsWith("msxml2.xmlhttp");
     }
 
     /**
