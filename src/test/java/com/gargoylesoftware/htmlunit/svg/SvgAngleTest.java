@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 /**
  * Tests for {@link SvgAngle}.
  *
- * @version $Revision: 7931 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
