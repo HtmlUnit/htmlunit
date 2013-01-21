@@ -18,75 +18,61 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for compatibility with version 1.2.1 of the <a href="http://mootools.net/">MooTools JavaScript library</a>.
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class MooTools121Test extends SimpleWebTestCase {
-
-    private WebClient client_;
+public class MooTools121Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
+    @Alerts(FF17 = "should return the function bound to an object with multiple arguments",
+            CHROME = "should return the function bound to an object with multiple arguments")
     @Test
-    @SuppressWarnings("unchecked")
     public void mooTools() throws Exception {
         final String resource = "libraries/mootools/1.2.1/Specs/index.html";
         final URL url = getClass().getClassLoader().getResource(resource);
         assertNotNull(url);
 
-        client_ = getWebClient();
-        final HtmlPage page = client_.getPage(url);
+        final WebDriver driver = getWebDriver();
+        driver.get(url.toExternalForm());
 
-        final HtmlElement progress = page.getHtmlElementById("progress");
+        driver.manage().timeouts().implicitlyWait(60 * DEFAULT_WAIT_TIME_FACTOR, TimeUnit.SECONDS);
+        driver.findElement(By.xpath("id('progress')[text() = '100']"));
         // usually this need 40s but sometimes our build machine is slower
         // this is not an performance test, we only like to ensure that all
         // functionality is running
-        final int jobCount = client_.waitForBackgroundJavaScriptStartingBefore(60 * DEFAULT_WAIT_TIME);
-        assertTrue("There are still " + jobCount + " jobs running", jobCount == 0);
 
-        final String prevProgress = progress.asText();
-
-        FileUtils.writeStringToFile(new File("/tmp/mootols.html"), page.asXml());
-        final String xpath = "//ul[@class='specs']/li[@class!='success']";
-        final List<HtmlElement> failures = (List<HtmlElement>) page.getByXPath(xpath);
-        if (!failures.isEmpty()) {
-            final StringBuilder sb = new StringBuilder();
-            for (HtmlElement failure : failures) {
-                sb.append(failure.asXml()).append("\n\n");
-            }
-            throw new AssertionError(sb.toString());
+        final List<WebElement> failed = driver.findElements(By.xpath("//li[@class = 'exception']/h4"));
+        final List<String> failures = new ArrayList<String>();
+        for (final WebElement elt : failed) {
+            failures.add(elt.getText());
         }
+        FileUtils.writeStringToFile(new File("/tmp/mootols.html"), driver.getPageSource());
+        assertEquals(getExpectedAlerts(), failures);
 
-        assertEquals("364", page.getElementById("total_examples").asText());
-        assertEquals("0", page.getElementById("total_failures").asText());
-        assertEquals("0", page.getElementById("total_errors").asText());
-        assertEquals("100", prevProgress);
+        assertEquals("364", driver.findElement(By.id("total_examples")).getText());
+        assertEquals(String.valueOf(getExpectedAlerts().length), driver.findElement(By.id("total_failures")).getText());
+        assertEquals("0", driver.findElement(By.id("total_errors")).getText());
     }
-
-    /**
-     * Performs post-test deconstruction.
-     */
-    @After
-    public void tearDown() {
-        client_.closeAllWindows();
-    }
-
 }
