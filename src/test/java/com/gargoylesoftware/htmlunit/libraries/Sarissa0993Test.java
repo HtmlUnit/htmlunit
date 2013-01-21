@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 
-import java.io.File;
 import java.io.StringReader;
 import java.util.List;
 
@@ -27,148 +26,62 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.html.DomText;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlButton;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for 0.9.9.3 version of <a href="http://sarissa.sourceforge.net">Sarissa</a>.
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class Sarissa0993Test extends WebServerTestCase {
-
-    private static final Log LOG = LogFactory.getLog(Sarissa0993Test.class);
-
-    private static HtmlPage Page_;
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Before
-    public void init() throws Exception {
-        try {
-            getBrowserVersion();
-        }
-        catch (final Exception e) {
-            return;
-        }
-        startWebServer("src/test/resources/libraries/sarissa/" + getVersion());
-        if (Page_ == null) {
-            final WebClient client = getWebClient();
-            final String url = "http://localhost:" + PORT + "/test/testsarissa.html";
-            Page_ = client.getPage(url);
-            Page_.<HtmlButton>getFirstByXPath("//button").click();
-
-            // dump the result page
-            if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
-                final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
-                final File f = new File(tmpDir, "sarissa0993_result.html");
-                FileUtils.writeStringToFile(f, Page_.asXml(), "UTF-8");
-                LOG.info("Test result written to: " + f.getAbsolutePath());
-            }
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected WebClient createNewWebClient() {
-        return new WebClient(BrowserVersion.getDefault());
-    }
-
-    /**
-     * Returns the Sarissa version being tested.
-     *
-     * @return the Sarissa version being tested
-     */
-    protected String getVersion() {
-        return "0.9.9.3";
-    }
+public class Sarissa0993Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
     public void sarissa() throws Exception {
-        test("SarissaTestCase");
+        startWebServer("src/test/resources/libraries/sarissa/0.9.9.3", null, null);
+        final String url = "http://localhost:" + PORT + "/test/testsarissa.html";
+
+        final WebDriver driver = getWebDriver();
+        driver.get(url);
+
+        driver.findElement(By.xpath("//button")).click();
+
+        // the HtmlUnitDriver doesn't yet support alert()
+        if (!(driver instanceof HtmlUnitDriver)) {
+            driver.switchTo().alert().dismiss();
+        }
+
+        verify(driver, "SarissaTestCase");
+        verify(driver, "XmlHttpRequestTestCase");
+        verify(driver, "XMLSerializerTestCase");
+        verify(driver, "DOMParserTestCase");
+        verify(driver, "XMLDocumentTestCase");
+        verify(driver, "XMLElementTestCase");
+        verify(driver, "XSLTProcessorTestCase", "++++F+++");
     }
 
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void xmlHttpRequest() throws Exception {
-        test("XmlHttpRequestTestCase");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void xmlSerializer() throws Exception {
-        test("XMLSerializerTestCase");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void domParser() throws Exception {
-        test("DOMParserTestCase");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void xmlDocument() throws Exception {
-        test("XMLDocumentTestCase");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void xmlElement() throws Exception {
-        test("XMLElementTestCase");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void xsltProcessor() throws Exception {
-        test("XSLTProcessorTestCase", "++++F+++");
-    }
-
-    private void test(final String testName) throws Exception {
-        final List<?> divList =
-            Page_.getByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']/../div[last()]");
+    private void verify(final WebDriver driver, final String testName) throws Exception {
+        final List<WebElement> divList =
+            driver.findElements(By.xpath("//div[@class='placeholder']/a[@name='#" + testName + "']/../div[last()]"));
         assertEquals(1, divList.size());
-        final HtmlDivision div = (HtmlDivision) divList.get(0);
-        assertEquals("OK!", div.asText());
+        final WebElement div = divList.get(0);
+        assertEquals("OK!", div.getText());
     }
 
     /**
@@ -176,24 +89,13 @@ public class Sarissa0993Test extends WebServerTestCase {
      *
      * @param expectedResult in the form of "+++F+++" (see the results in a real browser)
      */
-    private void test(final String testName, final String expectedResult) throws Exception {
-        final HtmlAnchor anchor =
-            Page_.getFirstByXPath("//div[@class='placeholder']/a[@name='#" + testName + "']");
-        final StringBuilder builder = new StringBuilder();
-        for (Node node = anchor.getNextSibling().getNextSibling(); node instanceof DomText;
-            node = node.getNextSibling()) {
-            builder.append(((DomText) node).asText());
-        }
-        assertEquals(expectedResult, builder.toString());
-    }
+    private void verify(final WebDriver driver, final String testName, final String expectedResult) throws Exception {
+        final WebElement div =
+            driver.findElement(By.xpath("//div[@class='placeholder' and a[@name='#" + testName + "']]"));
 
-    /**
-     * Performs deconstruction.
-     * @throws Exception if an error occurs
-     */
-    @AfterClass
-    public static void clean() throws Exception {
-        Page_ = null;
+        String text = div.getText();
+        text = text.substring(0, text.indexOf(String.valueOf(expectedResult.length()))).trim();
+        assertEquals(testName + " Results\n" + expectedResult, text);
     }
 
     /**
