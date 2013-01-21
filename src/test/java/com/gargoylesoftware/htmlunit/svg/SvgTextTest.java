@@ -65,4 +65,24 @@ public class SvgTextTest extends WebDriverTestCase {
             }
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "16px", IE = "exception")
+    public void getFontSize() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body>\n"
+            + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
+            + "    <text id='myId'/>\n"
+            + "  </svg>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  alert(window.getComputedStyle(document.getElementById('myId'), null).fontSize);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

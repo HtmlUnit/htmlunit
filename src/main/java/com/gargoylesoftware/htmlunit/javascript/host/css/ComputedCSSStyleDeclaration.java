@@ -602,7 +602,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getFontSize() {
         String value = super.getFontSize();
         if (value.isEmpty()) {
-            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            final Element parent = getElement().getParentElement();
             if (parent != null) {
                 value = parent.getCurrentStyle().getFontSize();
             }
