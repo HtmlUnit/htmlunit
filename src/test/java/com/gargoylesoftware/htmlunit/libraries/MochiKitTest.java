@@ -16,17 +16,21 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
-import org.junit.After;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for compatibility with <a href="http://mochikit.com">MochiKit</a>.
@@ -38,16 +42,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class MochiKitTest extends LibraryTestCase {
+public class MochiKitTest extends WebDriverTestCase {
 
     private static final String BASE_FILE_PATH = "libraries/MochiKit/1.4.1";
-    private WebClient webClient_;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getLibraryDir() {
+    private String getLibraryDir() {
         return BASE_FILE_PATH;
     }
 
@@ -143,6 +142,7 @@ public class MochiKitTest extends LibraryTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented(Browser.FF17)
     public void style() throws Exception {
         doTest("Style");
     }
@@ -160,29 +160,48 @@ public class MochiKitTest extends LibraryTestCase {
             + "/tests/test_MochiKit-" + testName + ".html");
         assertNotNull(url);
 
-        webClient_ = getWebClient();
-        final HtmlPage page = webClient_.getPage(url);
-        webClient_.waitForBackgroundJavaScriptStartingBefore(2000);
+        final WebDriver driver = getWebDriver();
+        driver.get(url.toExternalForm());
 
         // make single test results visible
-        ((HtmlElement) page.getFirstByXPath("//a[text() = 'Toggle passed tests']")).click();
-        ((HtmlElement) page.getFirstByXPath("//a[text() = 'Toggle failed tests']")).click();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElement(By.linkText("Toggle passed tests")).click();
+        driver.findElement(By.linkText("Toggle failed tests")).click();
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
         final String expected = loadExpectation("test-" + testName);
-        final HtmlDivision div = page.getFirstByXPath("//div[@class = 'tests_report']");
+        final WebElement div = driver.findElement(By.xpath("//div[@class = 'tests_report']"));
 
         assertNotNull(div);
-        assertEquals(expected.trim(), div.asText().trim());
+        final String actual = div.getText().trim().replace("\n\n",  "\n");
+        assertEquals(expected.trim(), actual);
     }
 
     /**
-     * Closes the open windows.
+     * Loads an expectation file for the given test in the library folder.
+     * @param testName the base name for the file
+     * @return the content of the file
+     * @throws Exception in case of error
      */
-    @After
-    public void tearDown() {
-        if (webClient_ != null) {
-            webClient_.closeAllWindows();
-        }
+    private String loadExpectation(final String testName) throws Exception {
+        final URL url = getExpectationsResource(testName);
+        assertNotNull(url);
+        final File file = new File(url.toURI());
+
+        return FileUtils.readFileToString(file, "UTF-8");
     }
 
+    private URL getExpectationsResource(final String testName) {
+        final String browserSpecificResource = getLibraryDir() + "/" + testName
+                + "." + getBrowserVersion().getNickname() + ".expected.txt";
+
+        final URL url = getClass().getClassLoader().getResource(browserSpecificResource);
+        if (url != null) {
+            return url;
+        }
+
+        // fall back: expectations for all browsers
+        final String resource = getLibraryDir() + "/" + testName + ".expected.txt";
+        return getClass().getClassLoader().getResource(resource);
+    }
 }
