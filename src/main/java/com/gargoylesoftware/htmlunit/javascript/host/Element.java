@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
@@ -55,6 +56,14 @@ public class Element extends EventNode {
 
     private NamedNodeMap attributes_;
     private Map<String, HTMLCollection> elementsByTagName_; // for performance and for equality (==)
+    private CSSStyleDeclaration style_;
+
+    @Override
+    public void setDomNode(final DomNode domNode) {
+        super.setDomNode(domNode);
+
+        style_ = new CSSStyleDeclaration(this);
+    }
 
     /**
      * Applies the specified XPath expression to this node's context and returns the generated list of matching nodes.
@@ -507,5 +516,32 @@ public class Element extends EventNode {
     @JsxFunction({ @WebBrowser(FF), @WebBrowser(CHROME) })
     public void removeAttributeNS(final String namespaceURI, final String localName) {
         getDomNodeOrDie().removeAttributeNS(namespaceURI, localName);
+    }
+
+    /**
+     * Returns the style object for this element.
+     * @return the style object for this element
+     */
+    @JsxGetter
+    public CSSStyleDeclaration getStyle() {
+        return style_;
+    }
+
+    /**
+     * Returns the runtime style object for this element.
+     * @return the runtime style object for this element
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public CSSStyleDeclaration getRuntimeStyle() {
+        return style_;
+    }
+
+    /**
+     * Returns the current (calculated) style object for this element.
+     * @return the current (calculated) style object for this element
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public ComputedCSSStyleDeclaration getCurrentStyle() {
+        return getWindow().getComputedStyle(this, null);
     }
 }

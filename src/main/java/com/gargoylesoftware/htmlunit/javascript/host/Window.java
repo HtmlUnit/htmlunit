@@ -1576,7 +1576,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @return the computed style
      */
     @JsxFunction(@WebBrowser(FF))
-    public ComputedCSSStyleDeclaration getComputedStyle(final HTMLElement element, final String pseudo) {
+    public ComputedCSSStyleDeclaration getComputedStyle(final Element element, final String pseudo) {
         ComputedCSSStyleDeclaration style;
 
         synchronized (computedStyles_) {

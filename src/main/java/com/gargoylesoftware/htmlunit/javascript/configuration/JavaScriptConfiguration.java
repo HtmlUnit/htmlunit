@@ -195,6 +195,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLVideoElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLWBRElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAltGlyphElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAngle;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateMotionElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateTransformElement;
@@ -236,6 +237,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGLineElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGLinearGradientElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMarkerElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMaskElement;
+import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMatrix;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMetadataElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMpathElement;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPathElement;
@@ -313,7 +315,8 @@ public final class JavaScriptConfiguration {
         MutationEvent.class, NamedNodeMap.class, Namespace.class, NamespaceCollection.class, Navigator.class,
         Node.class, NodeFilter.class, NodeList.class, OfflineResourceList.class,
         Plugin.class, PluginArray.class, Popup.class, Position.class, ProcessingInstruction.class,
-        Range.class, RowContainer.class, SVGAElement.class, SVGAltGlyphElement.class, SVGAnimateElement.class,
+        Range.class, RowContainer.class,
+        SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimateElement.class,
         SVGAnimateMotionElement.class, SVGAnimateTransformElement.class, SVGCircleElement.class,
         SVGClipPathElement.class, SVGDefsElement.class, SVGDescElement.class, SVGElement.class,
         SVGEllipseElement.class, SVGFEBlendElement.class, SVGFEColorMatrixElement.class,
@@ -325,7 +328,7 @@ public final class JavaScriptConfiguration {
         SVGFEPointLightElement.class, SVGFESpecularLightingElement.class, SVGFESpotLightElement.class,
         SVGFETileElement.class, SVGFETurbulenceElement.class, SVGFilterElement.class, SVGForeignObjectElement.class,
         SVGGElement.class, SVGImageElement.class, SVGLineElement.class, SVGLinearGradientElement.class,
-        SVGMarkerElement.class, SVGMaskElement.class, SVGMetadataElement.class, SVGMpathElement.class,
+        SVGMarkerElement.class, SVGMaskElement.class, SVGMatrix.class, SVGMetadataElement.class, SVGMpathElement.class,
         SVGPathElement.class, SVGPatternElement.class, SVGPolygonElement.class, SVGPolylineElement.class,
         SVGRadialGradientElement.class, SVGRectElement.class, SVGSVGElement.class, SVGScriptElement.class,
         SVGSetElement.class, SVGStopElement.class, SVGStyleElement.class, SVGSwitchElement.class,

@@ -177,7 +177,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     private int scrollLeft_;
     private int scrollTop_;
     private String uniqueID_;
-    private CSSStyleDeclaration style_;
 
     static {
         COLORS_MAP_IE.put("AliceBlue", "#F0F8FF");
@@ -387,8 +386,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
-
-        style_ = new CSSStyleDeclaration(this);
 
         /**
          * Convert JavaScript snippets defined in the attribute map to executable event handlers.
@@ -2497,15 +2494,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     }
 
     /**
-     * Returns the current (calculated) style object for this element.
-     * @return the current (calculated) style object for this element
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public ComputedCSSStyleDeclaration getCurrentStyle() {
-        return getWindow().getComputedStyle(this, null);
-    }
-
-    /**
      * Returns this element's <tt>offsetLeft</tt>, which is the calculated left position of this
      * element relative to the <tt>offsetParent</tt>.
      *
@@ -2764,24 +2752,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         textRectangle.setParentScope(getWindow());
         textRectangle.setPrototype(getPrototype(textRectangle.getClass()));
         return textRectangle;
-    }
-
-    /**
-     * Returns the style object for this element.
-     * @return the style object for this element
-     */
-    @JsxGetter
-    public CSSStyleDeclaration getStyle() {
-        return style_;
-    }
-
-    /**
-     * Returns the runtime style object for this element.
-     * @return the runtime style object for this element
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public CSSStyleDeclaration getRuntimeStyle() {
-        return style_;
     }
 
     /**

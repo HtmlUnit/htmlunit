@@ -64,4 +64,63 @@ public class SvgSvgTest extends WebDriverTestCase {
             }
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void style() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body>\n"
+            + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
+            + "  </svg>\n"
+            + "<script>\n"
+            + "    alert(document.getElementById('myId').style == undefined);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "function", "function" }, IE = { "undefined", "undefined" })
+    public void functions() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body>\n"
+            + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
+            + "  </svg>\n"
+            + "<script>\n"
+            + "  var svg =  document.getElementById('myId');\n"
+            + "  alert(typeof svg.getScreenCTM);\n"
+            + "  alert(typeof svg.createSVGMatrix);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object SVGMatrix]", IE = "exception")
+    public void getScreenCTM() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body>\n"
+            + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
+            + "  </svg>\n"
+            + "<script>\n"
+            + "  var svg =  document.getElementById('myId');\n"
+            + "  try {\n"
+            + "    alert(svg.getScreenCTM());\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

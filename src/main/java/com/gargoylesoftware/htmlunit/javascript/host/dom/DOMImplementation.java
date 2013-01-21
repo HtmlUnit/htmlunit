@@ -67,6 +67,10 @@ public class DOMImplementation extends SimpleScriptable {
                     && ("1.0".equals(version) || "1.1".equals(version))) {
                 return true;
             }
+            else if ("http://www.w3.org/TR/SVG11/feature#Shape".equals(feature)
+                    && ("1.0".equals(version) || "1.1".equals(version))) {
+                return true;
+            }
             //TODO: other features.
         }
         return false;

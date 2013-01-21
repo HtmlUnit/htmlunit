@@ -175,7 +175,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     protected String getStyleAttribute(final String name, final Map<String, StyleElement> styleMap) {
         String s = super.getStyleAttribute(name, null);
         if (s.isEmpty() && isInheritable(name)) {
-            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            final Element parent = getElement().getParentElement();
             if (parent != null) {
                 s = getWindow().getComputedStyle(parent, null).getStyleAttribute(name, null);
             }
@@ -2193,7 +2193,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the specified length CSS attribute value as a pixel length value
      * @see #pixelString(String)
      */
-    protected String pixelString(final HTMLElement element, final CssValue value) {
+    protected String pixelString(final Element element, final CssValue value) {
         final String s = value.get(element);
         if (getBrowserVersion().hasFeature(JS_LENGTH_WITHOUT_PX)) {
             return s;

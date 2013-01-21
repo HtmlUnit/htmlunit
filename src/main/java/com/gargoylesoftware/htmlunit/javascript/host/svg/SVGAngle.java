@@ -18,43 +18,43 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
-import com.gargoylesoftware.htmlunit.svg.SvgSvg;
 
 /**
- * A JavaScript object for SVGSVGElement.
+ * A JavaScript object for SVGAngle.
  *
- * @version $Revision$
- * @author Ahmed Ashour
+ * @version $Revision: 7931 $
+ * @author Marc Guillemot
  */
-@JsxClass(domClasses = SvgSvg.class,
-    browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
-public class SVGSVGElement extends SVGElement {
+@JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 9), @WebBrowser(FF), @WebBrowser(CHROME) })
+public class SVGAngle extends SimpleScriptable {
+
+    /** Invalid unit type. */
+    @JsxConstant
+    public static final short SVG_ANGLETYPE_UNKNOWN = 0;
+
+    /** Unspecified unit type. */
+    @JsxConstant
+    public static final short SVG_ANGLETYPE_UNSPECIFIED = 1;
+
+    /** Degree unit type. */
+    @JsxConstant
+    public static final short SVG_ANGLETYPE_DEG = 2;
+
+    /** Radian unit type. */
+    @JsxConstant
+    public static final short SVG_ANGLETYPE_RAD = 3;
+
+    /** Grad unit type. */
+    @JsxConstant
+    public static final short SVG_ANGLETYPE_GRAD = 4;
 
     /**
      * Creates an instance. JavaScript objects must have a default constructor.
      */
-    public SVGSVGElement() {
-        // nothing
-    }
-
-    /**
-     * Creates a new {@link SVGMatrix}.
-     * @return the new matrix
-     */
-    @JsxFunction
-    public SVGMatrix createSVGMatrix() {
-        return new SVGMatrix(getWindow());
-    }
-
-    /**
-     * Creates a new {@link SVGMatrix}.
-     * @return the new matrix
-     */
-    @JsxFunction
-    public SVGMatrix getScreenCTM() {
-        return new SVGMatrix(getWindow());
+    public SVGAngle() {
     }
 }

@@ -282,6 +282,23 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "[object SVGSVGElement]", IE = "exception")
+    public void createDocumentNS_svg() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  var elt = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
+            + "  alert(elt);\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "exception", FF = "Hello", FF10 = "exception")
     public void createDocumentNS_xul() throws Exception {
         final String html = "<html><body>\n"

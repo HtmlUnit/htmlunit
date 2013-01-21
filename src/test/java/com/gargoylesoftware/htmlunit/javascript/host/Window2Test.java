@@ -1008,4 +1008,25 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * JS code was throwing an exception as of 2.12-SNAPSHOT from 21.01.2013 due to the incorrect signature
+     * of getComputedStyle.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "rgb(0, 0, 0)", IE = "exception")
+    public void getComputedStyle_svg() throws Exception {
+        final String html = "<html><body>\n"
+            + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'></svg>\n"
+            + "<script>\n"
+            + "  var e = document.getElementById('myId');\n"
+            + "  try {\n"
+            + "    alert(window.getComputedStyle(e, null).color);\n"
+            + "  } catch(e) { alert('exception') }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

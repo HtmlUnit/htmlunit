@@ -8,6 +8,16 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
+            <action type="add" dev="mguillem">
+                JavaScript: added basic support for SVGAngle and SVGMatrix.
+            </action>
+            <action type="fix" dev="mguillem">
+                JavaScript: HTMLDocument.createElementNS can create SVG elements.
+            </action>
+            <action type="add" dev="mguillem">
+                JavaScript: add support for SVGSVGElement's style property and basic support
+                for methods createSVGMatrix and getScreenCTM.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: add support for CanvasRenderingContext2D.quadraticCurveTo (FF).
             </action>

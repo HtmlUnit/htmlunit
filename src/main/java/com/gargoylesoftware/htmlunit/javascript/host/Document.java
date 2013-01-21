@@ -468,7 +468,8 @@ public class Document extends EventNode {
             // simple hack, no need to implement the XUL objects (at least in a first time)
             element = new HtmlDivision(namespaceURI, qualifiedName, getPage(), null);
         }
-        else if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI)) {
+        else if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI)
+                || HTMLParser.SVG_NAMESPACE.equals(namespaceURI)) {
             element = getPage().createElementNS(namespaceURI, qualifiedName);
         }
         else {
