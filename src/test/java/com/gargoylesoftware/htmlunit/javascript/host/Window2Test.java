@@ -962,4 +962,49 @@ public class Window2Test extends WebDriverTestCase {
         }
         loadPageWithAlerts2(html);
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "rgb(0, 0, 0)", IE = "exception")
+    public void getComputedStyle() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='myDiv'></div>\n"
+            + "<script>\n"
+            + "  var e = document.getElementById('myDiv');\n"
+            + "  try {\n"
+            + "    alert(window.getComputedStyle(e, null).color);\n"
+            + "  } catch(e) { alert('exception') }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "red", IE = "exception")
+    public void getComputedStyle_WithComputedColor() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <style>div.x { color: red; }</style>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('d');\n"
+            + "    try {\n"
+            + "    alert(window.getComputedStyle(e, '').color);\n"
+            + "    } catch(e) { alert('exception') }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "    <div id='d' class='x'>foo bar</div>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
