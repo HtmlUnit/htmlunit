@@ -19,18 +19,18 @@ import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlSpan;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * <p>Tests for compatibility with <a href="http://tinymce.moxiecode.com/">TinyMCE</a>.</p>
@@ -41,9 +41,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class TinyMceTest extends SimpleWebTestCase {
+public class TinyMceTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -63,29 +64,30 @@ public class TinyMceTest extends SimpleWebTestCase {
         test("basic", 89, 0);
     }
 
-    @SuppressWarnings("unchecked")
     private void test(final String fileName, final int expectedTotal, final int expectedFailed) throws Exception {
         final URL url = getClass().getClassLoader().getResource("libraries/tinymce/3.2.7/tests/" + fileName + ".html");
         assertNotNull(url);
 
-        final WebClient client = getWebClient();
-        final HtmlPage page = (HtmlPage) client.getPage(url);
-        client.waitForBackgroundJavaScript(5000L);
+        final WebDriver driver = getWebDriver();
+        driver.get(url.toExternalForm());
 
-        final HtmlElement result = page.getHtmlElementById("testresult");
-        final HtmlSpan totalSpan = result.getFirstByXPath("span[@class='all']");
-        final int total = Integer.parseInt(totalSpan.asText());
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        final WebElement result = driver.findElement(By.id("testresult"));
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+
+        final WebElement totalSpan = result.findElement(By.xpath("./span[@class='all']"));
+        final int total = Integer.parseInt(totalSpan.getText());
         assertEquals(expectedTotal, total);
 
-        final List<HtmlElement> failures = (List<HtmlElement>) page.getByXPath("//li[@class='fail']");
+        final List<WebElement> failures = driver.findElements(By.xpath("//li[@class='fail']"));
         final StringBuilder msg = new StringBuilder();
-        for (HtmlElement failure : failures) {
-            msg.append(failure.asXml());
+        for (WebElement failure : failures) {
+            msg.append(failure.getText());
             msg.append("\n\n");
         }
 
-        final HtmlSpan failedSpan = result.getFirstByXPath("span[@class='bad']");
-        final int failed = Integer.parseInt(failedSpan.asText());
+        final WebElement failedSpan = result.findElement(By.xpath("./span[@class='bad']"));
+        final int failed = Integer.parseInt(failedSpan.getText());
         Assert.assertEquals(msg.toString(), expectedFailed, failed);
     }
 
