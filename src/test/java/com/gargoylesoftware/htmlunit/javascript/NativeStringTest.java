@@ -75,14 +75,15 @@ public class NativeStringTest extends WebDriverTestCase {
 
     /**
      * Test for the methods with different expectations depending on the browsers.
+     * Function contains is introduced in FF18.
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "toSource: function", "trim: function" },
-            IE = { "toSource: undefined", "trim: undefined" },
-            CHROME = { "toSource: undefined", "trim: function" })
+    @Alerts(FF = { "contains: undefined", "toSource: function", "trim: function" },
+            IE = { "contains: undefined", "toSource: undefined", "trim: undefined" },
+            CHROME = { "contains: undefined", "toSource: undefined", "trim: function" })
     public void methods_differences() throws Exception {
-        final String[] methods = {"toSource", "trim" };
+        final String[] methods = {"contains", "toSource", "trim" };
         final String html = NativeDateTest.createHTMLTestMethods("'hello'", methods);
         loadPageWithAlerts2(html);
     }
