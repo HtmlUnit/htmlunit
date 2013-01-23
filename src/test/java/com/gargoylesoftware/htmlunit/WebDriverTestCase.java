@@ -50,6 +50,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -545,6 +546,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
         startWebServer(mockWebConnection);
 
         final WebDriver driver = getWebDriver();
+        if (!(driver instanceof HtmlUnitDriver)) {
+            driver.manage().window().setSize(new Dimension(1272, 768));
+        }
         driver.get(url.toExternalForm());
 
         return driver;

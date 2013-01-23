@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF10;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -25,6 +25,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -70,6 +71,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "black", "pink" })
+    @NotYetImplemented(FF17)
     public void style_MultipleCssAttributes() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -83,9 +85,14 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<div id='div1' style='color: black;background:blue;foo:bar'>foo</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals(
-            "color: pink; background: blue; foo: bar;",
-            driver.findElement(By.id("div1")).getAttribute("style"));
+        final String expected;
+        if ("FF17".equals(getBrowserVersion().getNickname())) {
+            expected = "color: pink; background: none repeat scroll 0% 0% blue;";
+        }
+        else {
+            expected = "color: pink; background: blue; foo: bar;";
+        }
+        assertEquals(expected, driver.findElement(By.id("div1")).getAttribute("style"));
     }
 
     /**
@@ -213,13 +220,15 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
-    @Alerts("blue")
+    @Alerts(FF = "blue", FF17 = "none repeat scroll 0% 0% blue", IE = "exception")
+    @NotYetImplemented(FF17)
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
+            + "  try {\n"
             + "    var oDiv1 = document.getElementById('div1');\n"
             + "    alert(oDiv1.style.getPropertyValue('background'));\n"
+            + "  } catch(e) { alert('exception'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -317,7 +326,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "" }, IE = {"", "alpha(opacity=50)" }, FF = {"undefined", "undefined" })
+    @Alerts(DEFAULT = { "", "" }, IE = {"", "alpha(opacity=50)" }, FF3_6 = {"undefined", "undefined" })
+    @NotYetImplemented(FF17)
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
             + "   function test(){\n"
@@ -410,13 +420,16 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ IE, FF10 })
+    @Alerts(FF = { "undefined", "exception" }, IE = "function")
     public void setExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
+            + "function test() {\n"
+            + "  try {\n"
             + "     var div1 = document.getElementById('div1');\n"
+            + "     alert(typeof div1.style.setExpression);\n"
             + "     div1.style.setExpression('title','id');\n"
-            + "  }\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
@@ -427,14 +440,17 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers({ IE, FF10 })
+    @Alerts(FF = { "undefined", "exception" }, IE = "function")
     public void removeExpression() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
+            + "function test() {\n"
+            + "  try {\n"
             + "     var div1 = document.getElementById('div1');\n"
+            + "     alert(typeof div1.style.removeExpression);\n"
             + "     div1.style.setExpression('title','id');\n"
             + "     div1.style.removeExpression('title');"
-            + "  }\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
@@ -1306,12 +1322,13 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(FF)
-    @Alerts(FF = { "function", "before", "none", "after", "none" })
-    @NotYetImplemented
+    @Alerts(DEFAULT = { "function", "before", "none", "after", "none" },
+        FF17 = { "undefined", "none" },
+        IE = "exception")
+    @NotYetImplemented(Browser.FF)
     public void interceptSetter() throws Exception {
         final String html = "<html><body><div id='d'>foo</div><script>\n"
-            + "\n"
+            + "try {\n"
             + "var css = window.CSSStyleDeclaration;\n"
             + "var oldDisplay = css.prototype.__lookupSetter__('display');\n"
             + "alert(typeof oldDisplay);\n"
@@ -1322,6 +1339,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "var div = document.getElementById('d');\n"
             + "div.style.display = 'none';\n"
             + "alert(div.style.display);\n"
+            + "} catch(e) { alert('exception'); }\n"
             + "\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);

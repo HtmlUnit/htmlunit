@@ -105,9 +105,6 @@ public enum BrowserVersionFeatures {
     CSS_TEXT_SHADOW_DEFAULT_NONE,
 
     /** Default is 'normal'. */
-    CSS_UNICODE_BIDI_DEFAULT_NORMAL,
-
-    /** Default is 'normal'. */
     CSS_WORD_SPACING_DEFAULT_NORMAL,
 
     /** Values for the zIndex are rounded to integer. */

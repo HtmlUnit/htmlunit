@@ -554,6 +554,7 @@ public class CodeStyleTest {
                 if (line.contains(".getBrowserVersionNumeric()")
                         && !relativePath.contains("IEConditionalCommentExpressionEvaluator")
                         && !relativePath.contains("IEConditionalCompilationScriptPreProcessor")
+                        && !relativePath.contains("BrowserConfiguration")
                         && !relativePath.contains("Window.java")) {
                     addFailure(".getBrowserVersionNumeric() should not be used, please use .hasFeature(): "
                             + relativePath + ", line: " + index);

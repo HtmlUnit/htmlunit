@@ -33,8 +33,10 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -64,6 +66,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
@@ -89,7 +92,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     /** Css important property constant. */
     protected static final String PRIORITY_IMPORTANT = "important";
 
-    private static final String AZIMUTH = "azimuth";
     private static final String BACKGROUND = "background";
     private static final String BACKGROUND_ATTACHMENT = "background-attachment";
     private static final String BACKGROUND_COLOR = "background-color";
@@ -130,15 +132,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String CONTENT = "content";
     private static final String COUNTER_INCREMENT = "counter-increment";
     private static final String COUNTER_RESET = "counter-reset";
-    private static final String CUE = "cue";
-    private static final String CUE_AFTER = "cue-after";
-    private static final String CUE_BEFORE = "cue-before";
     private static final String CURSOR = "cursor";
     private static final String DIRECTION = "direction";
     private static final String DISPLAY = "display";
-    private static final String ELEVATION = "elevation";
     private static final String EMPTY_CELLS = "empty-cells";
-    private static final String FILTER = "filter";
     private static final String FONT = "font";
     private static final String FONT_FAMILY = "font-family";
     private static final String FONT_SIZE = "font-size";
@@ -158,7 +155,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String LEFT = "left";
     private static final String LETTER_SPACING = "letter-spacing";
     private static final String LINE_BREAK = "line-break";
-    private static final String LINE_HEIGHT = "line-height";
     private static final String LIST_STYLE = "list-style";
     private static final String LIST_STYLE_IMAGE = "list-style-image";
     private static final String LIST_STYLE_POSITION = "list-style-position";
@@ -174,71 +170,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String MAX_WIDTH = "max-width";
     private static final String MIN_HEIGHT = "min-height";
     private static final String MIN_WIDTH = "min-width";
-    private static final String MOZ_APPEARANCE = "-moz-appearance";
-    private static final String MOZ_BACKGROUND_CLIP = "-moz-background-clip";
-    private static final String MOZ_BACKGROUND_INLINE_POLICY = "-moz-background-inline-policy";
-    private static final String MOZ_BACKGROUND_ORIGIN = "-moz-background-origin";
-    private static final String MOZ_BACKGROUND_SIZE = "-moz-background-size";
-    private static final String MOZ_BINDING = "-moz-binding";
-    private static final String MOZ_BORDER_BOTTOM_COLORS = "-moz-border-bottom-colors";
-    private static final String MOZ_BORDER_END = "-moz-border-end";
-    private static final String MOZ_BORDER_END_COLOR = "-moz-border-end-color";
-    private static final String MOZ_BORDER_END_STYLE = "-moz-border-end-style";
-    private static final String MOZ_BORDER_END_WIDTH = "-moz-border-end-width";
-    private static final String MOZ_BORDER_IMAGE = "-moz-border-image";
-    private static final String MOZ_BORDER_LEFT_COLORS = "-moz-border-left-colors";
-    private static final String MOZ_BORDER_RADIUS = "-moz-border-radius";
-    private static final String MOZ_BORDER_RADIUS_BOTTOMLEFT = "-moz-border-radius-bottomleft";
-    private static final String MOZ_BORDER_RADIUS_BOTTOMRIGHT = "-moz-border-radius-bottomright";
-    private static final String MOZ_BORDER_RADIUS_TOPLEFT = "-moz-border-radius-topleft";
-    private static final String MOZ_BORDER_RADIUS_TOPRIGHT = "-moz-border-radius-topright";
-    private static final String MOZ_BORDER_RIGHT_COLORS = "-moz-border-right-colors";
-    private static final String MOZ_BORDER_START = "-moz-border-start";
-    private static final String MOZ_BORDER_START_COLOR = "-moz-border-start-color";
-    private static final String MOZ_BORDER_START_STYLE = "-moz-border-start-style";
-    private static final String MOZ_BORDER_START_WIDTH = "-moz-border-start-width";
-    private static final String MOZ_BORDER_TOP_COLORS = "-moz-border-top-colors";
-    private static final String MOZ_BOX_ALIGN = "-moz-box-align";
-    private static final String MOZ_BOX_DIRECTION = "-moz-box-direction";
-    private static final String MOZ_BOX_FLEX = "-moz-box-flex";
-    private static final String MOZ_BOX_ORDINAL_GROUP = "-moz-box-ordinal-group";
-    private static final String MOZ_BOX_ORIENT = "-moz-box-orient";
-    private static final String MOZ_BOX_PACK = "-moz-box-pack";
-    private static final String MOZ_BOX_SHADOW = "-moz-box-shadow";
-    private static final String MOZ_BOX_SIZING = "-moz-box-sizing";
-    private static final String MOZ_COLUMN_COUNT = "-moz-column-count";
-    private static final String MOZ_COLUMN_GAP = "-moz-column-gap";
-    private static final String MOZ_COLUMN_RULE = "-moz-column-rule";
-    private static final String MOZ_COLUMN_RULE_COLOR = "-moz-column-rule-color";
-    private static final String MOZ_COLUMN_RULE_STYLE = "-moz-column-rule-style";
-    private static final String MOZ_COLUMN_RULE_WIDTH = "-moz-column-rule-width";
-    private static final String MOZ_COLUMN_WIDTH = "-moz-column-width";
-    private static final String MOZ_FLOAT_EDGE = "-moz-float-edge";
-    private static final String MOZ_FORCE_BROKEN_IMAGE_ICON = "-moz-force-broken-image-icon";
-    private static final String MOZ_IMAGE_REGION = "-moz-image-region";
-    private static final String MOZ_MARGIN_END = "-moz-margin-end";
-    private static final String MOZ_MARGIN_START = "-moz-margin-start";
-    private static final String MOZ_OPACITY = "-moz-opacity";
-    private static final String MOZ_OUTLINE = "-moz-outline";
-    private static final String MOZ_OUTLINE_COLOR = "-moz-outline-color";
-    private static final String MOZ_OUTLINE_OFFSET = "-moz-outline-offset";
-    private static final String MOZ_OUTLINE_RADIUS = "-mz-outline-radius";
-    private static final String MOZ_OUTLINE_RADIUS_BOTTOMLEFT = "-moz-outline-radius-bottomleft";
-    private static final String MOZ_OUTLINE_RADIUS_BOTTOMRIGHT = "-moz-outline-radius-bottomright";
-    private static final String MOZ_OUTLINE_RADIUS_TOPLEFT = "-moz-outline-radius-topleft";
-    private static final String MOZ_OUTLINE_RADIUS_TOPRIGHT = "-moz-outline-radius-topright";
-    private static final String MOZ_OUTLINE_STYLE = "-moz-outline-style";
-    private static final String MOZ_OUTLINE_WIDTH = "-moz-outline-width";
-    private static final String MOZ_PADDING_END = "-moz-padding-end";
-    private static final String MOZ_PADDING_START = "-moz-padding-start";
-    private static final String MOZ_STACK_SIZING = "-moz-stack-sizing";
-    private static final String MOZ_TRANSFORM = "-moz-transform";
-    private static final String MOZ_TRANSFORM_ORIGIN = "-moz-transform-origin";
-    private static final String MOZ_USER_FOCUS = "-moz-user-focus";
-    private static final String MOZ_USER_INPUT = "-moz-user-input";
-    private static final String MOZ_USER_MODIFY = "-moz-user-modify";
-    private static final String MOZ_USER_SELECT = "-moz-user-select";
-    private static final String MOZ_WINDOW_SHADOW = "-moz-window-shadow";
     private static final String MS_BLOCK_PROGRESSION = "ms-block-progression";
     private static final String MS_INTERPOLATION_MODE = "ms-interpolation-mode";
     private static final String OPACITY = "opacity";
@@ -260,15 +191,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String PAGE_BREAK_AFTER = "page-break-after";
     private static final String PAGE_BREAK_BEFORE = "page-break-before";
     private static final String PAGE_BREAK_INSIDE = "page-break-inside";
-    private static final String PAUSE = "pause";
-    private static final String PAUSE_AFTER = "pause-after";
-    private static final String PAUSE_BEFORE = "pause-before";
-    private static final String PITCH = "pitch";
-    private static final String PITCH_RANGE = "pitch-range";
     private static final String POINTER_EVENTS = "pointer-events";
     private static final String POSITION = "position";
-    private static final String QUOTES = "quotes";
-    private static final String RICHNESS = "richness";
     private static final String RIGHT = "right";
     private static final String RUBY_ALIGN = "ruby-align";
     private static final String RUBY_OVERHANG = "ruby-overhang";
@@ -282,12 +206,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String SCROLLBAR_SHADOW_COLOR = "scrollbar-shadow-color";
     private static final String SCROLLBAR_TRACK_COLOR = "scrollbar-track-color";
     private static final String SIZE = "size";
-    private static final String SPEAK = "speak";
-    private static final String SPEAK_HEADER = "speak-header";
-    private static final String SPEAK_NUMERAL = "speak-numeral";
-    private static final String SPEAK_PUNCTUATION = "speak-punctuation";
-    private static final String SPEECH_RATE = "speech-rate";
-    private static final String STRESS = "stress";
     private static final String FLOAT = "float";
     private static final String TABLE_LAYOUT = "table-layout";
     private static final String TEXT_ALIGN = "text-align";
@@ -304,14 +222,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     private static final String TEXT_TRANSFORM = "text-transform";
     private static final String TEXT_UNDERLINE_POSITION = "text-underline-position";
     private static final String TOP = "top";
-    private static final String UNICODE_BIDI = "unicode-bidi";
     private static final String VERTICAL_ALIGN = "vertical-align";
     private static final String VISIBILITY = "visibility";
-    private static final String VOICE_FAMILY = "voice-family";
-    private static final String VOLUME = "volume";
     private static final String WHITE_SPACE = "white-space";
     private static final String WIDOWS = "widows";
-    private static final String WORD_BREAK = "word-break";
     private static final String WORD_SPACING = "word-spacing";
     private static final String WORD_WRAP = "word-wrap";
     private static final String WRITING_MODE = "writing-mode";
@@ -740,24 +654,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         CamelizeCache_.put(string, result);
 
         return result;
-    }
-
-    /**
-     * Gets the "azimuth" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getAzimuth() {
-        return getStyleAttribute(AZIMUTH, null);
-    }
-
-    /**
-     * Sets the "azimuth" style attribute.
-     * @param azimuth the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setAzimuth(final String azimuth) {
-        setStyleAttribute(AZIMUTH, azimuth);
     }
 
     /**
@@ -1791,60 +1687,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
-     * Gets the "cue" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getCue() {
-        return getStyleAttribute(CUE, null);
-    }
-
-    /**
-     * Sets the "cue" style attribute.
-     * @param cue the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setCue(final String cue) {
-        setStyleAttribute(CUE, cue);
-    }
-
-    /**
-     * Gets the "cueAfter" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getCueAfter() {
-        return getStyleAttribute(CUE_AFTER, null);
-    }
-
-    /**
-     * Sets the "cueAfter" style attribute.
-     * @param cueAfter the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setCueAfter(final String cueAfter) {
-        setStyleAttribute(CUE_AFTER, cueAfter);
-    }
-
-    /**
-     * Gets the "cueBefore" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getCueBefore() {
-        return getStyleAttribute(CUE_BEFORE, null);
-    }
-
-    /**
-     * Sets the "cueBefore" style attribute.
-     * @param cueBefore the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setCueBefore(final String cueBefore) {
-        setStyleAttribute(CUE_BEFORE, cueBefore);
-    }
-
-    /**
      * Gets the "cursor" style attribute.
      * @return the style attribute
      */
@@ -1899,24 +1741,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
-     * Gets the "elevation" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getElevation() {
-        return getStyleAttribute(ELEVATION, null);
-    }
-
-    /**
-     * Sets the "elevation" style attribute.
-     * @param elevation the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setElevation(final String elevation) {
-        setStyleAttribute(ELEVATION, elevation);
-    }
-
-    /**
      * Gets the "emptyCells" style attribute.
      * @return the style attribute
      */
@@ -1932,28 +1756,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
     public void setEmptyCells(final String emptyCells) {
         setStyleAttribute(EMPTY_CELLS, emptyCells);
-    }
-
-    /**
-     * Gets the object's filter (IE only). See the <a
-     * href="http://msdn2.microsoft.com/en-us/library/ms530752.aspx">MSDN documentation</a> for
-     * more information.
-     * @return the object's filter
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public String getFilter() {
-        return getStyleAttribute(FILTER, null);
-    }
-
-    /**
-     * Sets the object's filter (IE only). See the <a
-     * href="http://msdn2.microsoft.com/en-us/library/ms530752.aspx">MSDN documentation</a> for
-     * more information.
-     * @param filter the new filter
-     */
-    @JsxSetter(@WebBrowser(IE))
-    public void setFilter(final String filter) {
-        setStyleAttribute(FILTER, filter);
     }
 
     /**
@@ -2308,24 +2110,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
-     * Gets the "lineHeight" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter
-    public String getLineHeight() {
-        return getStyleAttribute(LINE_HEIGHT, null);
-    }
-
-    /**
-     * Sets the "lineHeight" style attribute.
-     * @param lineHeight the new attribute
-     */
-    @JsxSetter
-    public void setLineHeight(final String lineHeight) {
-        setStyleAttribute(LINE_HEIGHT, lineHeight);
-    }
-
-    /**
      * Gets the "listStyle" style attribute.
      * @return the style attribute
      */
@@ -2595,1174 +2379,73 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         setStyleAttributePixel(MIN_WIDTH, minWidth);
     }
 
-    /**
-     * Gets the "MozAppearance" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozAppearance")
-    public String getMozAppearance() {
-        return getStyleAttribute(MOZ_APPEARANCE, null);
-    }
-
-    /**
-     * Sets the "MozAppearance" style attribute.
-     * @param mozAppearance the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozAppearance")
-    public void setMozAppearance(final String mozAppearance) {
-        setStyleAttribute(MOZ_APPEARANCE, mozAppearance);
-    }
-
-    /**
-     * Gets the "MozBackgroundClip" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBackgroundClip")
-    public String getMozBackgroundClip() {
-        return getStyleAttribute(MOZ_BACKGROUND_CLIP, null);
-    }
-
-    /**
-     * Sets the "MozBackgroundClip" style attribute.
-     * @param mozBackgroundClip the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBackgroundClip")
-    public void setMozBackgroundClip(final String mozBackgroundClip) {
-        setStyleAttribute(MOZ_BACKGROUND_CLIP, mozBackgroundClip);
-    }
-
-    /**
-     * Gets the "MozBackgroundInlinePolicy" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBackgroundInlinePolicy")
-    public String getMozBackgroundInlinePolicy() {
-        return getStyleAttribute(MOZ_BACKGROUND_INLINE_POLICY, null);
-    }
-
-    /**
-     * Sets the "MozBackgroundInlinePolicy" style attribute.
-     * @param mozBackgroundInlinePolicy the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBackgroundInlinePolicy")
-    public void setMozBackgroundInlinePolicy(final String mozBackgroundInlinePolicy) {
-        setStyleAttribute(MOZ_BACKGROUND_INLINE_POLICY, mozBackgroundInlinePolicy);
-    }
-
-    /**
-     * Gets the "MozBackgroundOrigin" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBackgroundOrigin")
-    public String getMozBackgroundOrigin() {
-        return getStyleAttribute(MOZ_BACKGROUND_ORIGIN, null);
-    }
-
-    /**
-     * Sets the "MozBackgroundOrigin" style attribute.
-     * @param mozBackgroundOrigin the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBackgroundOrigin")
-    public void setMozBackgroundOrigin(final String mozBackgroundOrigin) {
-        setStyleAttribute(MOZ_BACKGROUND_ORIGIN, mozBackgroundOrigin);
-    }
-
-    /**
-     * Gets the "MozBackgroundSize" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBackgroundSize")
-    public String getMozBackgroundSize() {
-        return getStyleAttribute(MOZ_BACKGROUND_SIZE, null);
-    }
-
-    /**
-     * Sets the "MozBackgroundSize" style attribute.
-     * @param mozBackgroundSize the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBackgroundSize")
-    public void setMozBackgroundSize(final String mozBackgroundSize) {
-        setStyleAttribute(MOZ_BACKGROUND_SIZE, mozBackgroundSize);
-    }
-
-    /**
-     * Gets the "MozBinding" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBinding")
-    public String getMozBinding() {
-        return getStyleAttribute(MOZ_BINDING, null);
-    }
-
-    /**
-     * Sets the "MozBinding" style attribute.
-     * @param mozBinding the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBinding")
-    public void setMozBinding(final String mozBinding) {
-        setStyleAttribute(MOZ_BINDING, mozBinding);
-    }
-
-    /**
-     * Gets the "MozBorderBottomColors" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderBottomColors")
-    public String getMozBorderBottomColors() {
-        return getStyleAttribute(MOZ_BORDER_BOTTOM_COLORS, null);
-    }
-
-    /**
-     * Sets the "MozBorderBottomColors" style attribute.
-     * @param mozBorderBottomColors the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderBottomColors")
-    public void setMozBorderBottomColors(final String mozBorderBottomColors) {
-        setStyleAttribute(MOZ_BORDER_BOTTOM_COLORS, mozBorderBottomColors);
-    }
-
-    /**
-     * Gets the "MozBorderEnd" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderEnd")
-    public String getMozBorderEnd() {
-        return getStyleAttribute(MOZ_BORDER_END, null);
-    }
-
-    /**
-     * Sets the "MozBorderEnd" style attribute.
-     * @param mozBorderEnd the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderEnd")
-    public void setMozBorderEnd(final String mozBorderEnd) {
-        setStyleAttribute(MOZ_BORDER_END, mozBorderEnd);
-    }
-
-    /**
-     * Gets the "MozBorderEndColor" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderEndColor")
-    public String getMozBorderEndColor() {
-        return getStyleAttribute(MOZ_BORDER_END_COLOR, null);
-    }
-
-    /**
-     * Sets the "MozBorderEndColor" style attribute.
-     * @param mozBorderEndColor the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderEndColor")
-    public void setMozBorderEndColor(final String mozBorderEndColor) {
-        setStyleAttribute(MOZ_BORDER_END_COLOR, mozBorderEndColor);
-    }
-
-    /**
-     * Gets the "MozBorderEndStyle" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderEndStyle")
-    public String getMozBorderEndStyle() {
-        return getStyleAttribute(MOZ_BORDER_END_STYLE, null);
-    }
-
-    /**
-     * Sets the "MozBorderEndStyle" style attribute.
-     * @param mozBorderEndStyle the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderEndStyle")
-    public void setMozBorderEndStyle(final String mozBorderEndStyle) {
-        setStyleAttribute(MOZ_BORDER_END_STYLE, mozBorderEndStyle);
-    }
-
-    /**
-     * Gets the "MozBorderEndWidth" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderEndWidth")
-    public String getMozBorderEndWidth() {
-        return getStyleAttribute(MOZ_BORDER_END_WIDTH, null);
-    }
-
-    /**
-     * Sets the "MozBorderEndWidth" style attribute.
-     * @param mozBorderEndWidth the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderEndWidth")
-    public void setMozBorderEndWidth(final String mozBorderEndWidth) {
-        setStyleAttribute(MOZ_BORDER_END_WIDTH, mozBorderEndWidth);
-    }
-
-    /**
-     * Gets the "MozBorderImage" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderImage")
-    public String getMozBorderImage() {
-        return getStyleAttribute(MOZ_BORDER_IMAGE, null);
-    }
-
-    /**
-     * Sets the "MozBorderImage" style attribute.
-     * @param mozBorderImage the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderImage")
-    public void setMozBorderImage(final String mozBorderImage) {
-        setStyleAttribute(MOZ_BORDER_IMAGE, mozBorderImage);
-    }
-
-    /**
-     * Gets the "MozBorderLeftColors" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderLeftColors")
-    public String getMozBorderLeftColors() {
-        return getStyleAttribute(MOZ_BORDER_LEFT_COLORS, null);
-    }
-
-    /**
-     * Sets the "MozBorderLeftColors" style attribute.
-     * @param mozBorderLeftColors the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderLeftColors")
-    public void setMozBorderLeftColors(final String mozBorderLeftColors) {
-        setStyleAttribute(MOZ_BORDER_LEFT_COLORS, mozBorderLeftColors);
-    }
-
-    /**
-     * Gets the "MozBorderRadius" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderRadius")
-    public String getMozBorderRadius() {
-        return getStyleAttribute(MOZ_BORDER_RADIUS, null);
-    }
-
-    /**
-     * Sets the "MozBorderRadius" style attribute.
-     * @param mozBorderRadius the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderRadius")
-    public void setMozBorderRadius(final String mozBorderRadius) {
-        setStyleAttribute(MOZ_BORDER_RADIUS, mozBorderRadius);
-    }
-
-    /**
-     * Gets the "MozBorderRadiusBottomleft" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusBottomleft")
-    public String getMozBorderRadiusBottomleft() {
-        return getStyleAttribute(MOZ_BORDER_RADIUS_BOTTOMLEFT, null);
-    }
-
-    /**
-     * Sets the "MozBorderRadiusBottomleft" style attribute.
-     * @param mozBorderRadiusBottomleft the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusBottomleft")
-    public void setMozBorderRadiusBottomleft(final String mozBorderRadiusBottomleft) {
-        setStyleAttribute(MOZ_BORDER_RADIUS_BOTTOMLEFT, mozBorderRadiusBottomleft);
-    }
-
-    /**
-     * Gets the "MozBorderRadiusBottomright" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusBottomright")
-    public String getMozBorderRadiusBottomright() {
-        return getStyleAttribute(MOZ_BORDER_RADIUS_BOTTOMRIGHT, null);
-    }
-
-    /**
-     * Sets the "MozBorderRadiusBottomright" style attribute.
-     * @param mozBorderRadiusBottomright the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusBottomright")
-    public void setMozBorderRadiusBottomright(final String mozBorderRadiusBottomright) {
-        setStyleAttribute(MOZ_BORDER_RADIUS_BOTTOMRIGHT, mozBorderRadiusBottomright);
-    }
-
-    /**
-     * Gets the "MozBorderRadiusTopleft" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusTopleft")
-    public String getMozBorderRadiusTopleft() {
-        return getStyleAttribute(MOZ_BORDER_RADIUS_TOPLEFT, null);
-    }
-
-    /**
-     * Sets the "MozBorderRadiusTopleft" style attribute.
-     * @param mozBorderRadiusTopleft the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusTopleft")
-    public void setMozBorderRadiusTopleft(final String mozBorderRadiusTopleft) {
-        setStyleAttribute(MOZ_BORDER_RADIUS_TOPLEFT, mozBorderRadiusTopleft);
-    }
-
-    /**
-     * Gets the "MozBorderRadiusTopright" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusTopright")
-    public String getMozBorderRadiusTopright() {
-        return getStyleAttribute(MOZ_BORDER_RADIUS_TOPRIGHT, null);
-    }
-
-    /**
-     * Sets the "MozBorderRadiusTopright" style attribute.
-     * @param mozBorderRadiusTopright the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderRadiusTopright")
-    public void setMozBorderRadiusTopright(final String mozBorderRadiusTopright) {
-        setStyleAttribute(MOZ_BORDER_RADIUS_TOPRIGHT, mozBorderRadiusTopright);
-    }
-
-    /**
-     * Gets the "MozBorderRightColors" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderRightColors")
-    public String getMozBorderRightColors() {
-        return getStyleAttribute(MOZ_BORDER_RIGHT_COLORS, null);
-    }
-
-    /**
-     * Sets the "MozBorderRightColors" style attribute.
-     * @param mozBorderRightColors the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderRightColors")
-    public void setMozBorderRightColors(final String mozBorderRightColors) {
-        setStyleAttribute(MOZ_BORDER_RIGHT_COLORS, mozBorderRightColors);
-    }
-
-    /**
-     * Gets the "MozBorderStart" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderStart")
-    public String getMozBorderStart() {
-        return getStyleAttribute(MOZ_BORDER_START, null);
-    }
-
-    /**
-     * Sets the "MozBorderStart" style attribute.
-     * @param mozBorderStart the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderStart")
-    public void setMozBorderStart(final String mozBorderStart) {
-        setStyleAttribute(MOZ_BORDER_START, mozBorderStart);
-    }
-
-    /**
-     * Gets the "MozBorderStartColor" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderStartColor")
-    public String getMozBorderStartColor() {
-        return getStyleAttribute(MOZ_BORDER_START_COLOR, null);
-    }
-
-    /**
-     * Sets the "MozBorderStartColor" style attribute.
-     * @param mozBorderStartColor the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderStartColor")
-    public void setMozBorderStartColor(final String mozBorderStartColor) {
-        setStyleAttribute(MOZ_BORDER_START_COLOR, mozBorderStartColor);
-    }
-
-    /**
-     * Gets the "MozBorderStartStyle" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderStartStyle")
-    public String getMozBorderStartStyle() {
-        return getStyleAttribute(MOZ_BORDER_START_STYLE, null);
-    }
-
-    /**
-     * Sets the "MozBorderStartStyle" style attribute.
-     * @param mozBorderStartStyle the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderStartStyle")
-    public void setMozBorderStartStyle(final String mozBorderStartStyle) {
-        setStyleAttribute(MOZ_BORDER_START_STYLE, mozBorderStartStyle);
-    }
-
-    /**
-     * Gets the "MozBorderStartWidth" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderStartWidth")
-    public String getMozBorderStartWidth() {
-        return getStyleAttribute(MOZ_BORDER_START_WIDTH, null);
-    }
-
-    /**
-     * Sets the "MozBorderStartWidth" style attribute.
-     * @param mozBorderStartWidth the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderStartWidth")
-    public void setMozBorderStartWidth(final String mozBorderStartWidth) {
-        setStyleAttribute(MOZ_BORDER_START_WIDTH, mozBorderStartWidth);
-    }
-
-    /**
-     * Gets the "MozBorderTopColors" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBorderTopColors")
-    public String getMozBorderTopColors() {
-        return getStyleAttribute(MOZ_BORDER_TOP_COLORS, null);
-    }
-
-    /**
-     * Sets the "MozBorderTopColors" style attribute.
-     * @param mozBorderTopColors the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBorderTopColors")
-    public void setMozBorderTopColors(final String mozBorderTopColors) {
-        setStyleAttribute(MOZ_BORDER_TOP_COLORS, mozBorderTopColors);
-    }
-
-    /**
-     * Gets the "MozBoxAlign" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxAlign")
-    public String getMozBoxAlign() {
-        return getStyleAttribute(MOZ_BOX_ALIGN, null);
-    }
-
-    /**
-     * Sets the "MozBoxAlign" style attribute.
-     * @param mozBoxAlign the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxAlign")
-    public void setMozBoxAlign(final String mozBoxAlign) {
-        setStyleAttribute(MOZ_BOX_ALIGN, mozBoxAlign);
-    }
-
-    /**
-     * Gets the "MozBoxDirection" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxDirection")
-    public String getMozBoxDirection() {
-        return getStyleAttribute(MOZ_BOX_DIRECTION, null);
-    }
-
-    /**
-     * Sets the "MozBoxDirection" style attribute.
-     * @param mozBoxDirection the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxDirection")
-    public void setMozBoxDirection(final String mozBoxDirection) {
-        setStyleAttribute(MOZ_BOX_DIRECTION, mozBoxDirection);
-    }
-
-    /**
-     * Gets the "MozBoxFlex" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxFlex")
-    public String getMozBoxFlex() {
-        return getStyleAttribute(MOZ_BOX_FLEX, null);
-    }
-
-    /**
-     * Sets the "MozBoxFlex" style attribute.
-     * @param mozBoxFlex the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxFlex")
-    public void setMozBoxFlex(final String mozBoxFlex) {
-        setStyleAttribute(MOZ_BOX_FLEX, mozBoxFlex);
-    }
-
-    /**
-     * Gets the "MozBoxOrdinalGroup" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxOrdinalGroup")
-    public String getMozBoxOrdinalGroup() {
-        return getStyleAttribute(MOZ_BOX_ORDINAL_GROUP, null);
-    }
-
-    /**
-     * Sets the "MozBoxOrdinalGroup" style attribute.
-     * @param mozBoxOrdinalGroup the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxOrdinalGroup")
-    public void setMozBoxOrdinalGroup(final String mozBoxOrdinalGroup) {
-        setStyleAttribute(MOZ_BOX_ORDINAL_GROUP, mozBoxOrdinalGroup);
-    }
-
-    /**
-     * Gets the "MozBoxOrient" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxOrient")
-    public String getMozBoxOrient() {
-        return getStyleAttribute(MOZ_BOX_ORIENT, null);
-    }
-
-    /**
-     * Sets the "MozBoxOrient" style attribute.
-     * @param mozBoxOrient the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxOrient")
-    public void setMozBoxOrient(final String mozBoxOrient) {
-        setStyleAttribute(MOZ_BOX_ORIENT, mozBoxOrient);
-    }
-
-    /**
-     * Gets the "MozBoxPack" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxPack")
-    public String getMozBoxPack() {
-        return getStyleAttribute(MOZ_BOX_PACK, null);
-    }
-
-    /**
-     * Sets the "MozBoxPack" style attribute.
-     * @param mozBoxPack the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxPack")
-    public void setMozBoxPack(final String mozBoxPack) {
-        setStyleAttribute(MOZ_BOX_PACK, mozBoxPack);
-    }
-
-    /**
-     * Gets the "MozBoxShadow" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxShadow")
-    public String getMozBoxShadow() {
-        return getStyleAttribute(MOZ_BOX_SHADOW, null);
-    }
-
-    /**
-     * Sets the "MozBoxShadow" style attribute.
-     * @param mozBoxShadow the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxShadow")
-    public void setMozBoxShadow(final String mozBoxShadow) {
-        setStyleAttribute(MOZ_BOX_SHADOW, mozBoxShadow);
-    }
-
-    /**
-     * Gets the "MozBoxSizing" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozBoxSizing")
-    public String getMozBoxSizing() {
-        return getStyleAttribute(MOZ_BOX_SIZING, null);
-    }
-
-    /**
-     * Sets the "MozBoxSizing" style attribute.
-     * @param mozBoxSizing the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozBoxSizing")
-    public void setMozBoxSizing(final String mozBoxSizing) {
-        setStyleAttribute(MOZ_BOX_SIZING, mozBoxSizing);
-    }
-
-    /**
-     * Gets the "MozColumnCount" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnCount")
-    public String getMozColumnCount() {
-        return getStyleAttribute(MOZ_COLUMN_COUNT, null);
-    }
-
-    /**
-     * Sets the "MozColumnCount" style attribute.
-     * @param mozColumnCount the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnCount")
-    public void setMozColumnCount(final String mozColumnCount) {
-        setStyleAttribute(MOZ_COLUMN_COUNT, mozColumnCount);
-    }
-
-    /**
-     * Gets the "MozColumnGap" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnGap")
-    public String getMozColumnGap() {
-        return getStyleAttribute(MOZ_COLUMN_GAP, null);
-    }
-
-    /**
-     * Sets the "MozColumnGap" style attribute.
-     * @param mozColumnGap the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnGap")
-    public void setMozColumnGap(final String mozColumnGap) {
-        setStyleAttribute(MOZ_COLUMN_GAP, mozColumnGap);
-    }
-
-    /**
-     * Gets the "MozColumnRule" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnRule")
-    public String getMozColumnRule() {
-        return getStyleAttribute(MOZ_COLUMN_RULE, null);
-    }
-
-    /**
-     * Sets the "MozColumnRule" style attribute.
-     * @param mozColumnRule the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnRule")
-    public void setMozColumnRule(final String mozColumnRule) {
-        setStyleAttribute(MOZ_COLUMN_RULE, mozColumnRule);
-    }
-
-    /**
-     * Gets the "MozColumnRuleColor" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnRuleColor")
-    public String getMozColumnRuleColor() {
-        return getStyleAttribute(MOZ_COLUMN_RULE_COLOR, null);
-    }
-
-    /**
-     * Sets the "MozColumnRuleColor" style attribute.
-     * @param mozColumnRuleColor the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnRuleColor")
-    public void setMozColumnRuleColor(final String mozColumnRuleColor) {
-        setStyleAttribute(MOZ_COLUMN_RULE_COLOR, mozColumnRuleColor);
-    }
-
-    /**
-     * Gets the "MozColumnRuleStyle" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnRuleStyle")
-    public String getMozColumnRuleStyle() {
-        return getStyleAttribute(MOZ_COLUMN_RULE_STYLE, null);
-    }
-
-    /**
-     * Sets the "MozColumnRuleStyle" style attribute.
-     * @param mozColumnRuleStyle the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnRuleStyle")
-    public void setMozColumnRuleStyle(final String mozColumnRuleStyle) {
-        setStyleAttribute(MOZ_COLUMN_RULE_STYLE, mozColumnRuleStyle);
-    }
-
-    /**
-     * Gets the "MozColumnRuleWidth" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnRuleWidth")
-    public String getMozColumnRuleWidth() {
-        return getStyleAttribute(MOZ_COLUMN_RULE_WIDTH, null);
-    }
-
-    /**
-     * Sets the "MozColumnRuleWidth" style attribute.
-     * @param mozColumnRuleWidth the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnRuleWidth")
-    public void setMozColumnRuleWidth(final String mozColumnRuleWidth) {
-        setStyleAttribute(MOZ_COLUMN_RULE_WIDTH, mozColumnRuleWidth);
-    }
-
-    /**
-     * Gets the "MozColumnWidth" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozColumnWidth")
-    public String getMozColumnWidth() {
-        return getStyleAttribute(MOZ_COLUMN_WIDTH, null);
-    }
-
-    /**
-     * Sets the "MozColumnWidth" style attribute.
-     * @param mozColumnWidth the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozColumnWidth")
-    public void setMozColumnWidth(final String mozColumnWidth) {
-        setStyleAttribute(MOZ_COLUMN_WIDTH, mozColumnWidth);
-    }
-
-    /**
-     * Gets the "MozFloatEdge" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozFloatEdge")
-    public String getMozFloatEdge() {
-        return getStyleAttribute(MOZ_FLOAT_EDGE, null);
-    }
-
-    /**
-     * Sets the "MozFloatEdge" style attribute.
-     * @param mozFloatEdge the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozFloatEdge")
-    public void setMozFloatEdge(final String mozFloatEdge) {
-        setStyleAttribute(MOZ_FLOAT_EDGE, mozFloatEdge);
-    }
-
-    /**
-     * Gets the "MozForceBrokenImageIcon" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozForceBrokenImageIcon")
-    public String getMozForceBrokenImageIcon() {
-        return getStyleAttribute(MOZ_FORCE_BROKEN_IMAGE_ICON, null);
-    }
-
-    /**
-     * Sets the "MozForceBrokenImageIcon" style attribute.
-     * @param mozForceBrokenImageIcon the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozForceBrokenImageIcon")
-    public void setMozForceBrokenImageIcon(final String mozForceBrokenImageIcon) {
-        setStyleAttribute(MOZ_FORCE_BROKEN_IMAGE_ICON, mozForceBrokenImageIcon);
-    }
-
-    /**
-     * Gets the "MozImageRegion" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozImageRegion")
-    public String getMozImageRegion() {
-        return getStyleAttribute(MOZ_IMAGE_REGION, null);
-    }
-
-    /**
-     * Sets the "MozImageRegion" style attribute.
-     * @param mozImageRegion the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozImageRegion")
-    public void setMozImageRegion(final String mozImageRegion) {
-        setStyleAttribute(MOZ_IMAGE_REGION, mozImageRegion);
-    }
-
-    /**
-     * Gets the "MozMarginEnd" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozMarginEnd")
-    public String getMozMarginEnd() {
-        return getStyleAttribute(MOZ_MARGIN_END, null);
-    }
-
-    /**
-     * Sets the "MozMarginEnd" style attribute.
-     * @param mozMarginEnd the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozMarginEnd")
-    public void setMozMarginEnd(final String mozMarginEnd) {
-        setStyleAttribute(MOZ_MARGIN_END, mozMarginEnd);
-    }
-
-    /**
-     * Gets the "MozMarginStart" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozMarginStart")
-    public String getMozMarginStart() {
-        return getStyleAttribute(MOZ_MARGIN_START, null);
-    }
-
-    /**
-     * Sets the "MozMarginStart" style attribute.
-     * @param mozMarginStart the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozMarginStart")
-    public void setMozMarginStart(final String mozMarginStart) {
-        setStyleAttribute(MOZ_MARGIN_START, mozMarginStart);
-    }
-
-    /**
-     * Gets the "MozOpacity" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOpacity")
-    public String getMozOpacity() {
-        return getStyleAttribute(MOZ_OPACITY, null);
-    }
-
-    /**
-     * Sets the "MozOpacity" style attribute.
-     * @param mozOpacity the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOpacity")
-    public void setMozOpacity(final String mozOpacity) {
-        setStyleAttribute(MOZ_OPACITY, mozOpacity);
-    }
-
-    /**
-     * Gets the "MozOutline" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutline")
-    public String getMozOutline() {
-        return getStyleAttribute(MOZ_OUTLINE, null);
-    }
-
-    /**
-     * Sets the "MozOutline" style attribute.
-     * @param mozOutline the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutline")
-    public void setMozOutline(final String mozOutline) {
-        setStyleAttribute(MOZ_OUTLINE, mozOutline);
-    }
-
-    /**
-     * Gets the "MozOutlineColor" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineColor")
-    public String getMozOutlineColor() {
-        return getStyleAttribute(MOZ_OUTLINE_COLOR, null);
-    }
-
-    /**
-     * Sets the "MozOutlineColor" style attribute.
-     * @param mozOutlineColor the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineColor")
-    public void setMozOutlineColor(final String mozOutlineColor) {
-        setStyleAttribute(MOZ_OUTLINE_COLOR, mozOutlineColor);
-    }
-
-    /**
-     * Gets the "MozOutlineOffset" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineOffset")
-    public String getMozOutlineOffset() {
-        return getStyleAttribute(MOZ_OUTLINE_OFFSET, null);
-    }
-
-    /**
-     * Sets the "MozOutlineOffset" style attribute.
-     * @param mozOutlineOffset the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineOffset")
-    public void setMozOutlineOffset(final String mozOutlineOffset) {
-        setStyleAttribute(MOZ_OUTLINE_OFFSET, mozOutlineOffset);
-    }
-
-    /**
-     * Gets the "MozOutlineRadius" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadius")
-    public String getMozOutlineRadius() {
-        return getStyleAttribute(MOZ_OUTLINE_RADIUS, null);
-    }
-
-    /**
-     * Sets the "MozOutlineRadius" style attribute.
-     * @param mozOutlineRadius the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadius")
-    public void setMozOutlineRadius(final String mozOutlineRadius) {
-        setStyleAttribute(MOZ_OUTLINE_RADIUS, mozOutlineRadius);
-    }
-
-    /**
-     * Gets the "MozOutlineRadiusBottomleft" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusBottomleft")
-    public String getMozOutlineRadiusBottomleft() {
-        return getStyleAttribute(MOZ_OUTLINE_RADIUS_BOTTOMLEFT, null);
-    }
-
-    /**
-     * Sets the "MozOutlineRadiusBottomleft" style attribute.
-     * @param mozOutlineRadiusBottomleft the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusBottomleft")
-    public void setMozOutlineRadiusBottomleft(final String mozOutlineRadiusBottomleft) {
-        setStyleAttribute(MOZ_OUTLINE_RADIUS_BOTTOMLEFT, mozOutlineRadiusBottomleft);
-    }
-
-    /**
-     * Gets the "MozOutlineRadiusBottomright" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusBottomright")
-    public String getMozOutlineRadiusBottomright() {
-        return getStyleAttribute(MOZ_OUTLINE_RADIUS_BOTTOMRIGHT, null);
-    }
-
-    /**
-     * Sets the "MozOutlineRadiusBottomright" style attribute.
-     * @param mozOutlineRadiusBottomright the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusBottomright")
-    public void setMozOutlineRadiusBottomright(final String mozOutlineRadiusBottomright) {
-        setStyleAttribute(MOZ_OUTLINE_RADIUS_BOTTOMRIGHT, mozOutlineRadiusBottomright);
-    }
-
-    /**
-     * Gets the "MozOutlineRadiusTopleft" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusTopleft")
-    public String getMozOutlineRadiusTopleft() {
-        return getStyleAttribute(MOZ_OUTLINE_RADIUS_TOPLEFT, null);
-    }
-
-    /**
-     * Sets the "MozOutlineRadiusTopleft" style attribute.
-     * @param mozOutlineRadiusTopleft the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusTopleft")
-    public void setMozOutlineRadiusTopleft(final String mozOutlineRadiusTopleft) {
-        setStyleAttribute(MOZ_OUTLINE_RADIUS_TOPLEFT, mozOutlineRadiusTopleft);
-    }
-
-    /**
-     * Gets the "MozOutlineRadiusTopright" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusTopright")
-    public String getMozOutlineRadiusTopright() {
-        return getStyleAttribute(MOZ_OUTLINE_RADIUS_TOPRIGHT, null);
-    }
-
-    /**
-     * Sets the "MozOutlineRadiusTopright" style attribute.
-     * @param mozOutlineRadiusTopright the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineRadiusTopright")
-    public void setMozOutlineRadiusTopright(final String mozOutlineRadiusTopright) {
-        setStyleAttribute(MOZ_OUTLINE_RADIUS_TOPRIGHT, mozOutlineRadiusTopright);
-    }
-
-    /**
-     * Gets the "MozOutlineStyle" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineStyle")
-    public String getMozOutlineStyle() {
-        return getStyleAttribute(MOZ_OUTLINE_STYLE, null);
-    }
-
-    /**
-     * Sets the "MozOutlineStyle" style attribute.
-     * @param mozOutlineStyle the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineStyle")
-    public void setMozOutlineStyle(final String mozOutlineStyle) {
-        setStyleAttribute(MOZ_OUTLINE_STYLE, mozOutlineStyle);
-    }
-
-    /**
-     * Gets the "MozOutlineWidth" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozOutlineWidth")
-    public String getMozOutlineWidth() {
-        return getStyleAttribute(MOZ_OUTLINE_WIDTH, null);
-    }
-
-    /**
-     * Sets the "MozOutlineWidth" style attribute.
-     * @param mozOutlineWidth the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozOutlineWidth")
-    public void setMozOutlineWidth(final String mozOutlineWidth) {
-        setStyleAttribute(MOZ_OUTLINE_WIDTH, mozOutlineWidth);
-    }
-
-    /**
-     * Gets the "MozPaddingEnd" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozPaddingEnd")
-    public String getMozPaddingEnd() {
-        return getStyleAttribute(MOZ_PADDING_END, null);
-    }
-
-    /**
-     * Sets the "MozPaddingEnd" style attribute.
-     * @param mozPaddingEnd the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozPaddingEnd")
-    public void setMozPaddingEnd(final String mozPaddingEnd) {
-        setStyleAttribute(MOZ_PADDING_END, mozPaddingEnd);
-    }
-
-    /**
-     * Gets the "MozPaddingStart" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozPaddingStart")
-    public String getMozPaddingStart() {
-        return getStyleAttribute(MOZ_PADDING_START, null);
-    }
-
-    /**
-     * Sets the "MozPaddingStart" style attribute.
-     * @param mozPaddingStart the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozPaddingStart")
-    public void setMozPaddingStart(final String mozPaddingStart) {
-        setStyleAttribute(MOZ_PADDING_START, mozPaddingStart);
-    }
-
-    /**
-     * Gets the "MozStackSizing" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozStackSizing")
-    public String getMozStackSizing() {
-        return getStyleAttribute(MOZ_STACK_SIZING, null);
-    }
-
-    /**
-     * Sets the "MozStackSizing" style attribute.
-     * @param mozStackSizing the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozStackSizing")
-    public void setMozStackSizing(final String mozStackSizing) {
-        setStyleAttribute(MOZ_STACK_SIZING, mozStackSizing);
-    }
-
-    /**
-     * Gets the "MozTransform" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozTransform")
-    public String getMozTransform() {
-        return getStyleAttribute(MOZ_TRANSFORM, null);
-    }
-
-    /**
-     * Sets the "MozTransform" style attribute.
-     * @param mozTransform the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozTransform")
-    public void setMozTransform(final String mozTransform) {
-        setStyleAttribute(MOZ_TRANSFORM, mozTransform);
-    }
-
-    /**
-     * Gets the "MozTransformOrigin" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozTransformOrigin")
-    public String getMozTransformOrigin() {
-        return getStyleAttribute(MOZ_TRANSFORM_ORIGIN, null);
-    }
-
-    /**
-     * Sets the "MozTransformOrigin" style attribute.
-     * @param mozTransformOrigin the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozTransformOrigin")
-    public void setMozTransformOrigin(final String mozTransformOrigin) {
-        setStyleAttribute(MOZ_TRANSFORM_ORIGIN, mozTransformOrigin);
-    }
-
-    /**
-     * Gets the "MozUserFocus" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozUserFocus")
-    public String getMozUserFocus() {
-        return getStyleAttribute(MOZ_USER_FOCUS, null);
-    }
-
-    /**
-     * Sets the "MozUserFocus" style attribute.
-     * @param mozUserFocus the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozUserFocus")
-    public void setMozUserFocus(final String mozUserFocus) {
-        setStyleAttribute(MOZ_USER_FOCUS, mozUserFocus);
-    }
-
-    /**
-     * Gets the "MozUserInput" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozUserInput")
-    public String getMozUserInput() {
-        return getStyleAttribute(MOZ_USER_INPUT, null);
-    }
-
-    /**
-     * Sets the "MozUserInput" style attribute.
-     * @param mozUserInput the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozUserInput")
-    public void setMozUserInput(final String mozUserInput) {
-        setStyleAttribute(MOZ_USER_INPUT, mozUserInput);
-    }
-
-    /**
-     * Gets the "MozUserModify" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozUserModify")
-    public String getMozUserModify() {
-        return getStyleAttribute(MOZ_USER_MODIFY, null);
-    }
-
-    /**
-     * Sets the "MozUserModify" style attribute.
-     * @param mozUserModify the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozUserModify")
-    public void setMozUserModify(final String mozUserModify) {
-        setStyleAttribute(MOZ_USER_MODIFY, mozUserModify);
-    }
-
-    /**
-     * Gets the "MozUserSelect" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozUserSelect")
-    public String getMozUserSelect() {
-        return getStyleAttribute(MOZ_USER_SELECT, null);
-    }
-
-    /**
-     * Sets the "MozUserSelect" style attribute.
-     * @param mozUserSelect the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozUserSelect")
-    public void setMozUserSelect(final String mozUserSelect) {
-        setStyleAttribute(MOZ_USER_SELECT, mozUserSelect);
-    }
-
-    /**
-     * Gets the "MozWindowShadow" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(value = @WebBrowser(FF), propertyName = "MozWindowShadow")
-    public String getMozWindowShadow() {
-        return getStyleAttribute(MOZ_WINDOW_SHADOW, null);
-    }
-
-    /**
-     * Sets the "MozWindowShadow" style attribute.
-     * @param mozWindowShadow the new attribute
-     */
-    @JsxSetter(value = @WebBrowser(FF), propertyName = "MozWindowShadow")
-    public void setMozWindowShadow(final String mozWindowShadow) {
-        setStyleAttribute(MOZ_WINDOW_SHADOW, mozWindowShadow);
+    @Override
+    public Object get(final String name, final Scriptable start) {
+        if (this != start) {
+            return super.get(name, start);
+        }
+
+        final Definition style = StyleAttributes.getDefinition(name, getBrowserVersion());
+        if (style != null) {
+            return getStyleAttributeValue(style);
+        }
+
+        return super.get(name, start);
+    }
+
+    /**
+     * Get the value for the style attribute.
+     * @param style the style
+     * @return the value
+     */
+    protected String getStyleAttributeValue(final Definition style) {
+        return getStyleAttribute(style.getAttributeName(), null);
+    }
+
+    @Override
+    public void put(final String name, final Scriptable start, final Object value) {
+        if (this != start) {
+            super.put(name, start, value);
+            return;
+        }
+
+        final Definition style = StyleAttributes.getDefinition(name, getBrowserVersion());
+        if (style != null) {
+            final String stringValue = Context.toString(value);
+            setStyleAttribute(style.getPropertyName(), stringValue);
+            return;
+        }
+
+        super.put(name, start, value);
+    }
+
+    @Override
+    public boolean has(final String name, final Scriptable start) {
+        if (this != start) {
+            return super.has(name, start);
+        }
+
+        final Definition style = StyleAttributes.getDefinition(name, getBrowserVersion());
+        if (style != null) {
+            return true;
+        }
+
+        return super.has(name, start);
+    }
+
+    @Override
+    public Object[] getIds() {
+        final List<Object> ids = new ArrayList<Object>();
+        for (final Definition styleAttribute : StyleAttributes.getDefinitions(getBrowserVersion())) {
+            ids.add(styleAttribute.getPropertyName());
+        }
+        final Object[] normalIds = super.getIds();
+        for (final Object o : normalIds) {
+            if (!ids.contains(o)) {
+                ids.add(o);
+            }
+        }
+        return ids.toArray();
     }
 
     /**
@@ -4180,96 +2863,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
-     * Gets the "pause" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getPause() {
-        return getStyleAttribute(PAUSE, null);
-    }
-
-    /**
-     * Sets the "pause" style attribute.
-     * @param pause the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setPause(final String pause) {
-        setStyleAttribute(PAUSE, pause);
-    }
-
-    /**
-     * Gets the "pauseAfter" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getPauseAfter() {
-        return getStyleAttribute(PAUSE_AFTER, null);
-    }
-
-    /**
-     * Sets the "pauseAfter" style attribute.
-     * @param pauseAfter the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setPauseAfter(final String pauseAfter) {
-        setStyleAttribute(PAUSE_AFTER, pauseAfter);
-    }
-
-    /**
-     * Gets the "pauseBefore" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getPauseBefore() {
-        return getStyleAttribute(PAUSE_BEFORE, null);
-    }
-
-    /**
-     * Sets the "pauseBefore" style attribute.
-     * @param pauseBefore the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setPauseBefore(final String pauseBefore) {
-        setStyleAttribute(PAUSE_BEFORE, pauseBefore);
-    }
-
-    /**
-     * Gets the "pitch" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getPitch() {
-        return getStyleAttribute(PITCH, null);
-    }
-
-    /**
-     * Sets the "pitch" style attribute.
-     * @param pitch the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setPitch(final String pitch) {
-        setStyleAttribute(PITCH, pitch);
-    }
-
-    /**
-     * Gets the "pitchRange" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getPitchRange() {
-        return getStyleAttribute(PITCH_RANGE, null);
-    }
-
-    /**
-     * Sets the "pitchRange" style attribute.
-     * @param pitchRange the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setPitchRange(final String pitchRange) {
-        setStyleAttribute(PITCH_RANGE, pitchRange);
-    }
-
-    /**
      * Gets the "pointerEvents" style attribute.
      * @return the style attribute
      */
@@ -4483,42 +3076,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter(@WebBrowser(IE))
     public void setPosWidth(final int posWidth) {
         // Empty.
-    }
-
-    /**
-     * Gets the "quotes" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public String getQuotes() {
-        return getStyleAttribute(QUOTES, null);
-    }
-
-    /**
-     * Sets the "quotes" style attribute.
-     * @param quotes the new attribute
-     */
-    @JsxSetter({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
-    public void setQuotes(final String quotes) {
-        setStyleAttribute(QUOTES, quotes);
-    }
-
-    /**
-     * Gets the "richness" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getRichness() {
-        return getStyleAttribute(RICHNESS, null);
-    }
-
-    /**
-     * Sets the "richness" style attribute.
-     * @param richness the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setRichness(final String richness) {
-        setStyleAttribute(RICHNESS, richness);
     }
 
     /**
@@ -4753,114 +3310,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter(@WebBrowser(FF))
     public void setSize(final String size) {
         setStyleAttribute(SIZE, size);
-    }
-
-    /**
-     * Gets the "speak" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getSpeak() {
-        return getStyleAttribute(SPEAK, null);
-    }
-
-    /**
-     * Sets the "speak" style attribute.
-     * @param speak the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setSpeak(final String speak) {
-        setStyleAttribute(SPEAK, speak);
-    }
-
-    /**
-     * Gets the "speakHeader" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getSpeakHeader() {
-        return getStyleAttribute(SPEAK_HEADER, null);
-    }
-
-    /**
-     * Sets the "speakHeader" style attribute.
-     * @param speakHeader the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setSpeakHeader(final String speakHeader) {
-        setStyleAttribute(SPEAK_HEADER, speakHeader);
-    }
-
-    /**
-     * Gets the "speakNumeral" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getSpeakNumeral() {
-        return getStyleAttribute(SPEAK_NUMERAL, null);
-    }
-
-    /**
-     * Sets the "speakNumeral" style attribute.
-     * @param speakNumeral the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setSpeakNumeral(final String speakNumeral) {
-        setStyleAttribute(SPEAK_NUMERAL, speakNumeral);
-    }
-
-    /**
-     * Gets the "speakPunctuation" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getSpeakPunctuation() {
-        return getStyleAttribute(SPEAK_PUNCTUATION, null);
-    }
-
-    /**
-     * Sets the "speakPunctuation" style attribute.
-     * @param speakPunctuation the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setSpeakPunctuation(final String speakPunctuation) {
-        setStyleAttribute(SPEAK_PUNCTUATION, speakPunctuation);
-    }
-
-    /**
-     * Gets the "speechRate" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getSpeechRate() {
-        return getStyleAttribute(SPEECH_RATE, null);
-    }
-
-    /**
-     * Sets the "speechRate" style attribute.
-     * @param speechRate the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setSpeechRate(final String speechRate) {
-        setStyleAttribute(SPEECH_RATE, speechRate);
-    }
-
-    /**
-     * Gets the "stress" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getStress() {
-        return getStyleAttribute(STRESS, null);
-    }
-
-    /**
-     * Sets the "stress" style attribute.
-     * @param stress the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setStress(final String stress) {
-        setStyleAttribute(STRESS, stress);
     }
 
     /**
@@ -5242,24 +3691,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     }
 
     /**
-     * Gets the "unicodeBidi" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter
-    public String getUnicodeBidi() {
-        return getStyleAttribute(UNICODE_BIDI, null);
-    }
-
-    /**
-     * Sets the "unicodeBidi" style attribute.
-     * @param unicodeBidi the new attribute
-     */
-    @JsxSetter
-    public void setUnicodeBidi(final String unicodeBidi) {
-        setStyleAttribute(UNICODE_BIDI, unicodeBidi);
-    }
-
-    /**
      * Gets the "verticalAlign" style attribute.
      * @return the style attribute
      */
@@ -5293,42 +3724,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter
     public void setVisibility(final String visibility) {
         setStyleAttribute(VISIBILITY, visibility);
-    }
-
-    /**
-     * Gets the "voiceFamily" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getVoiceFamily() {
-        return getStyleAttribute(VOICE_FAMILY, null);
-    }
-
-    /**
-     * Sets the "voiceFamily" style attribute.
-     * @param voiceFamily the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setVoiceFamily(final String voiceFamily) {
-        setStyleAttribute(VOICE_FAMILY, voiceFamily);
-    }
-
-    /**
-     * Gets the "volume" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(FF))
-    public String getVolume() {
-        return getStyleAttribute(VOLUME, null);
-    }
-
-    /**
-     * Sets the "volume" style attribute.
-     * @param volume the new attribute
-     */
-    @JsxSetter(@WebBrowser(FF))
-    public void setVolume(final String volume) {
-        setStyleAttribute(VOLUME, volume);
     }
 
     /**
@@ -5383,24 +3778,6 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     @JsxSetter
     public void setWidth(final String width) {
         setStyleAttributePixel(WIDTH, width);
-    }
-
-    /**
-     * Gets the "wordBreak" style attribute.
-     * @return the style attribute
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public String getWordBreak() {
-        return getStyleAttribute(WORD_BREAK, null);
-    }
-
-    /**
-     * Sets the "wordBreak" style attribute.
-     * @param wordBreak the new attribute
-     */
-    @JsxSetter(@WebBrowser(IE))
-    public void setWordBreak(final String wordBreak) {
-        setStyleAttribute(WORD_BREAK, wordBreak);
     }
 
     /**
@@ -5652,7 +4029,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      *        Array references are not allowed on object properties included in this script.
      * @param language specified the language used
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
+    @JsxFunction(@WebBrowser(IE))
     public void setExpression(final String propertyName, final String expression, final String language) {
         // Empty.
     }
@@ -5663,7 +4040,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @param propertyName the name of the property from which to remove an expression
      * @return true if the expression was successfully removed
      */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
+    @JsxFunction(@WebBrowser(IE))
     public boolean removeExpression(final String propertyName) {
         return true;
     }
