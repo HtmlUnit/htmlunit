@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -612,5 +614,43 @@ public abstract class WebTestCase {
     @After
     public void releaseResources() {
         mockWebConnection_ = null;
+    }
+
+    /**
+     * Loads an expectation file for the specified browser search first for a browser specific resource
+     * and falling back in a general resource.
+     * @param resourcePrefix the start of the resource name
+     * @param resourceSuffix the end of the resource name
+     * @return the content of the file
+     * @throws Exception in case of error
+     */
+    protected String loadExpectation(final String resourcePrefix, final String resourceSuffix) throws Exception {
+        final URL url = getExpectationsResource(getClass(), getBrowserVersion(), resourcePrefix, resourceSuffix);
+        assertNotNull(url);
+        final File file = new File(url.toURI());
+
+        return FileUtils.readFileToString(file, "UTF-8");
+    }
+
+    private static URL getExpectationsResource(final Class<?> referenceClass, final BrowserVersion browserVersion,
+            final String resourcePrefix, final String resourceSuffix) {
+        final String browserSpecificResource = resourcePrefix + "." + browserVersion.getNickname() + resourceSuffix;
+
+        URL url = referenceClass.getResource(browserSpecificResource);
+        if (url != null) {
+            return url;
+        }
+
+        final String browserFamily = browserVersion.getNickname().replaceAll("[\\d\\.]", "");
+        final String browserFamilyResource = resourcePrefix + "." + browserFamily + resourceSuffix;
+
+        url = referenceClass.getResource(browserFamilyResource);
+        if (url != null) {
+            return url;
+        }
+
+        // fall back: expectations for all browsers
+        final String resource = resourcePrefix + resourceSuffix;
+        return referenceClass.getResource(resource);
     }
 }
