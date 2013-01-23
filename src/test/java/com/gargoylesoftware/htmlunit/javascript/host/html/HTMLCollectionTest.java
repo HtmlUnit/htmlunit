@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -98,7 +99,9 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = {"string 0", "string item", "string length", "string namedItem" },
+            FF17 = {"string 0", "string item", "string iterator", "string length", "string namedItem" },
             IE = {"string length", "string myForm" })
+    @NotYetImplemented(FF17)
     public void testFor_in() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -125,8 +128,11 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
             "string item", "string length", "string namedItem" },
+            FF17 = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
+                    "string item", "string iterator", "string length", "string namedItem" },
             IE = {"string 1", "string action", "string first_submit", "string length",
             "string second_submit", "string val1", "string val2" })
+    @NotYetImplemented(FF17)
     public void testFor_in2() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
