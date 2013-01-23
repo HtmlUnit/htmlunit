@@ -56,6 +56,9 @@ final class StyleAttributes {
             return null;
         }
         final Definition definition = styles_.get(propertyName);
+        if (definition == null) {
+            return null;
+        }
         if (!definition.isAvailable(browserVersion)) {
             return null;
         }
