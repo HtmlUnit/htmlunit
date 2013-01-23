@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ENCODING_NORMALIZED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_169;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_80;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_81;
@@ -265,7 +266,13 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @JsxGetter
     public String getEncoding() {
-        return getHtmlForm().getEnctypeAttribute();
+        final String encoding = getHtmlForm().getEnctypeAttribute();
+        if (getBrowserVersion().hasFeature(JS_FORM_ENCODING_NORMALIZED)) {
+            if (!"application/x-www-form-urlencoded".equals(encoding) && !"multipart/form-data".equals(encoding)) {
+                return "application/x-www-form-urlencoded";
+            }
+        }
+        return encoding;
     }
 
     /**

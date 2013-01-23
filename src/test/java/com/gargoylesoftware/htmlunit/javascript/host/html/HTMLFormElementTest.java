@@ -26,6 +26,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -174,6 +175,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "http://foo.com/", "mailto:me@bar.com", "mailto:me@bar.com" })
     public void actionProperty() throws Exception {
         doTestProperty("action", "action", "http://foo.com/", "mailto:me@bar.com");
     }
@@ -182,6 +184,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "myForm", "testForm", "testForm" })
     public void nameProperty() throws Exception {
         doTestProperty("name", "name", "myForm", "testForm");
     }
@@ -190,7 +193,18 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "multipart/form-data", "application/x-www-form-urlencoded", "application/x-www-form-urlencoded" })
     public void encodingProperty() throws Exception {
+        doTestProperty("encoding", "enctype", "multipart/form-data", "application/x-www-form-urlencoded");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "myEncoding", "newEncoding", "newEncoding" },
+            FF17 = { "application/x-www-form-urlencoded", "application/x-www-form-urlencoded", "newEncoding" })
+    public void encodingProperty_dummyValues() throws Exception {
         doTestProperty("encoding", "enctype", "myEncoding", "newEncoding");
     }
 
@@ -198,6 +212,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "get", "post", "post" })
     public void methodProperty() throws Exception {
         doTestProperty("method", "method", "get", "post");
     }
@@ -206,6 +221,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "_top", "_parent", "_parent" })
     public void targetProperty() throws Exception {
         doTestProperty("target", "target", "_top", "_parent");
     }
@@ -219,6 +235,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    alert(document.forms[0]." + jsProperty + ");\n"
             + "    document.forms[0]." + jsProperty + "='" + newValue + "';\n"
             + "    alert(document.forms[0]." + jsProperty + ");\n"
+            + "    alert(document.forms[0].getAttribute('" + htmlProperty + "'));\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
@@ -227,11 +244,13 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        setExpectedAlerts(oldValue, newValue);
         final WebDriver wd = loadPageWithAlerts2(html);
 
         final WebElement form = wd.findElement(By.xpath("//form"));
-        assertEquals(newValue, form.getAttribute(htmlProperty));
+        if (wd instanceof HtmlUnitDriver) {
+            // form.getAttribute("enctype") returns form.getAttribute("encoding") with the FF driver. Bug or feature?
+            assertEquals(getExpectedAlerts()[2], form.getAttribute(htmlProperty));
+        }
     }
 
     /**

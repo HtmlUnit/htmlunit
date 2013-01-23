@@ -854,6 +854,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_EVENT_NO_PARAMETER,
 
+    /** Indicates if form.encoding returns a recognized value when attribute is incorrect. */
+    @BrowserFeature(@WebBrowser(value = FF, minVersion = 17))
+    JS_FORM_ENCODING_NORMALIZED,
+
     /** Indicates that the URL of parent window is used to resolve URLs in frames with javascript src. */
     @BrowserFeature({ @WebBrowser(value = IE, maxVersion = 6),
         @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF), @WebBrowser(CHROME) })
