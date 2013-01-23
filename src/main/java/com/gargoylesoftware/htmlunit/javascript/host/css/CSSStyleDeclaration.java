@@ -2409,11 +2409,13 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             return;
         }
 
-        final Definition style = StyleAttributes.getDefinition(name, getBrowserVersion());
-        if (style != null) {
-            final String stringValue = Context.toString(value);
-            setStyleAttribute(style.getPropertyName(), stringValue);
-            return;
+        if (getDomNodeOrNull() != null) { // check if prototype or not
+            final Definition style = StyleAttributes.getDefinition(name, getBrowserVersion());
+            if (style != null) {
+                final String stringValue = Context.toString(value);
+                setStyleAttribute(style.getPropertyName(), stringValue);
+                return;
+            }
         }
 
         super.put(name, start, value);

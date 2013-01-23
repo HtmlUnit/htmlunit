@@ -52,6 +52,9 @@ final class StyleAttributes {
      * @return <code>null</code> if no definition exists for this browser version
      */
     public static Definition getDefinition(final String propertyName, final BrowserVersion browserVersion) {
+        if (browserVersion == null) {
+            return null;
+        }
         final Definition definition = styles_.get(propertyName);
         if (!definition.isAvailable(browserVersion)) {
             return null;
