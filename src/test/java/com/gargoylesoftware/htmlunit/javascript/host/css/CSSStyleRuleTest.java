@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -41,6 +42,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Alerts(FF3_6 = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px, ", "red" },
             FF = { "[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px, ", "red" },
             IE = { "[object]", "H1", "", "10px, ", "red" })
+    @NotYetImplemented(FF17)
     public void test() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -148,6 +150,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Alerts(FF3_6 = { "body", "h1", "a.foo", ".foo", ".foo .foo2", "#byId" },
             FF = { "BoDY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" },
             IE = { "BODY", "H1", "A.foo", ".foo", ".foo .foo2", "#byId" })
+    @NotYetImplemented(FF17)
     public void selectorText() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -176,9 +179,9 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='rightCorner.gif',sizingMethod='crop')" },
-            FF = { "undefined" },
+            FF3_6 = { "undefined" },
             DEFAULT = { "" })
-    @NotYetImplemented(IE)
+    @NotYetImplemented({ IE, FF17 })
     public void colon() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"
@@ -186,11 +189,13 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "(src='rightCorner.gif',sizingMethod='crop'); }\n"
                 + "</style>\n"
                 + "<script>\n"
-                + "  function test(){\n"
+                + "function test(){\n"
+                + "  try {\n"
                 + "    var sheet = document.styleSheets[0];\n"
                 + "    var rules = sheet.cssRules || sheet.rules;\n"
                 + "    alert(rules[0].style.filter);\n"
-                + "  }\n"
+                + "  } catch(e) { alert('exception'); }\n"
+                + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
