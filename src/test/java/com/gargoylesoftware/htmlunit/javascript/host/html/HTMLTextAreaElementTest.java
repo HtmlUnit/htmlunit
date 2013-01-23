@@ -24,6 +24,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -139,8 +140,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"undefined,undefined", "3,undefined", "3,10" },
             FF3_6 = {"11,11", "3,11", "3,10" },
-            FF10 = {"0,0", "3,3", "3,10" }
+            FF = {"0,0", "3,3", "3,10" }
             )
+    @NotYetImplemented(Browser.FF17)
     public void selection() throws Exception {
         selection(3, 10);
     }
@@ -151,7 +153,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"undefined,undefined", "-3,undefined", "-3,15" },
             FF3_6 = {"11,11", "0,11", "0,11" },
-            FF10 = {"0,0", "0,0", "0,11" })
+            FF = {"0,0", "0,0", "0,11" })
+    @NotYetImplemented(Browser.FF17)
     public void selection_outOfBounds() throws Exception {
         selection(-3, 15);
     }
@@ -162,7 +165,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"undefined,undefined", "10,undefined", "10,5" },
             FF3_6 = {"11,11", "10,11", "5,5" },
-            FF10 = {"0,0", "10,10", "5,5" })
+            FF = {"0,0", "10,10", "5,5" })
+    @NotYetImplemented(Browser.FF17)
     public void selection_reverseOrder() throws Exception {
         selection(10, 5);
     }
@@ -328,8 +332,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF3_6 = { "-1", "5", "8", "2", "0", "0", "0", "3" },
-            FF10 = { "20", "5", "8", "2", "error", "error", "8", "2", "20", "3" },
+            FF = { "20", "5", "8", "2", "error", "error", "8", "2", "20", "3" },
             IE = { "20", "5", "8", "2", "error", "error", "8", "2", "error", "8", "3" })
+    @NotYetImplemented(Browser.FF17)
     public void cols() throws Exception {
         final String html
             = "<html><body><textarea id='a1'>a1</textarea><textarea id='a2' cols='5'>a2</textarea><script>\n"
@@ -364,8 +369,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF3_6 = { "-1", "5", "8", "2", "0", "0", "0", "3" },
-            FF10 = { "2", "5", "8", "2", "error", "error", "8", "2", "2", "3" },
+            FF = { "2", "5", "8", "2", "error", "error", "8", "2", "2", "3" },
             IE = { "2", "5", "8", "2", "error", "error", "8", "2", "error", "8", "3" })
+    @NotYetImplemented(Browser.FF17)
     public void rows() throws Exception {
         final String html
             = "<html><body><textarea id='a1'>a1</textarea><textarea id='a2' rows='5'>a2</textarea><script>\n"
