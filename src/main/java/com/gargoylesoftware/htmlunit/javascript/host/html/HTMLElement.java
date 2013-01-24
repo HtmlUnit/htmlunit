@@ -386,6 +386,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @Override
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
+        setParentScope(getWindow().getDocument());
 
         /**
          * Convert JavaScript snippets defined in the attribute map to executable event handlers.

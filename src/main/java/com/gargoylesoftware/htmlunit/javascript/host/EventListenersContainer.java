@@ -205,7 +205,8 @@ public class EventListenersContainer implements Serializable {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Executing " + event.getType() + " handler for " + node);
             }
-            return page.executeJavaScriptFunctionIfPossible(handler, jsNode_, propHandlerArgs, node);
+            return page.executeJavaScriptFunctionIfPossible(handler, jsNode_,
+                    propHandlerArgs, page);
         }
         return null;
     }

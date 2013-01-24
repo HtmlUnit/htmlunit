@@ -14,11 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -744,5 +746,33 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "loaded", "loaded", "loaded" })
+    public void onLoadCalledEachTimeFrameContentChanges() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <body>\n"
+            + "    <iframe id='testFrame' onload='alert(\"loaded\");'></iframe>\n"
+            + "    <div id='d1' onclick='i.contentWindow.location.replace(\"blah.html\")'>1</div>\n"
+            + "    <div id='d2' onclick='i.contentWindow.location.href=\"blah.html\"'>2</div>\n"
+            + "    <script>var i = document.getElementById('testFrame')</script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String frameHtml = "<html><body>foo</body></html>";
+
+        getMockWebConnection().setDefaultResponse(frameHtml);
+
+        final WebDriver driver = loadPage2(html);
+
+        driver.findElement(By.id("d1")).click();
+        driver.findElement(By.id("d2")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 }

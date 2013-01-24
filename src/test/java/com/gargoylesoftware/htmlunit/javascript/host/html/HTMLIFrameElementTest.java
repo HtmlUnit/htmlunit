@@ -135,41 +135,6 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts({ "loaded", "loaded", "loaded" })
-    public void onLoadCalledEachTimeFrameContentChanges() throws Exception {
-        final String html =
-              "<html>\n"
-            + "  <body>\n"
-            + "    <iframe id='i' onload='alert(\"loaded\");'></iframe>\n"
-            + "    <div id='d1' onclick='i.contentWindow.location.replace(\"blah.html\")'>1</div>\n"
-            + "    <div id='d2' onclick='i.contentWindow.location.href=\"blah.html\"'>2</div>\n"
-            + "    <script>var i = document.getElementById(\"i\")</script>\n"
-            + "  </body>\n"
-            + "</html>";
-
-        final String frameHtml = "<html><body>foo</body></html>";
-
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-
-        webConnection.setDefaultResponse(frameHtml);
-        webConnection.setResponse(URL_FIRST, html);
-        webClient.setWebConnection(webConnection);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage page = webClient.getPage(URL_FIRST);
-        page.getHtmlElementById("d1").click();
-        page.getHtmlElementById("d2").click();
-
-        assertEquals(getExpectedAlerts(), collectedAlerts);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test

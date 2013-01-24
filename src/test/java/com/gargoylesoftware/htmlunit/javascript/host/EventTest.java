@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -272,7 +273,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("frame1")
-    public void testEventScope() throws Exception {
+    public void thisInEventHandler() throws Exception {
         final String html
             = "<html><head></head>\n"
             + "<body>\n"
@@ -534,12 +535,11 @@ public class EventTest extends WebDriverTestCase {
 
     /**
      * Regression test for bug
-     * <a href="http://sourceforge.net/tracker/?func=detail&aid=2851920&group_id=47038&atid=448266">2851920</a>.
+     * <a href="http://sourceforge.net/p/htmlunit/bugs/898/">898</a>.
      * Name resolution doesn't work the same in inline handlers than in "normal" JS code!
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     @Alerts(FF = { "form1 -> custom", "form2 -> [object HTMLFormElement]",
             "form1: [object HTMLFormElement]", "form2: [object HTMLFormElement]",
             "form1 -> custom", "form2 -> [object HTMLFormElement]" },
@@ -669,5 +669,123 @@ public class EventTest extends WebDriverTestCase {
         final String addedValue = logElement.getAttribute("value").substring(initialValue.length());
         final String text = addedValue.trim().replaceAll("\r", "");
         assertEquals(StringUtils.join(getExpectedAlerts(), "\n"), text);
+    }
+
+    /**
+     * Test that the parent scope of the event handler defined in HTML attributes is "document".
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "2from window", "1from document" },
+            IE = { "1from document", "3from window" })
+    public void eventHandlersParentScope() throws Exception {
+        final String html = "<html><body>\n"
+            + "<button name='button1' id='button1' onclick='alert(1 + foo)'>click me</button>\n"
+            + "<script>\n"
+            + "  if (window.addEventListener) {\n"
+            + "    window.addEventListener('click', function() { alert(2 + foo); }, true);\n"
+            + "  }\n"
+            + "  else if (window.attachEvent) {\n"
+            + "    window.attachEvent('onclick', function() { alert(3 + foo); });\n"
+            + "  }\n"
+            + "document.foo = 'from document';\n"
+            + "var foo = 'from window';\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("button1")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Test that the parent scopes chain for an event handler.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "from theField", "from theForm", "from document", "from window" })
+    public void eventHandlersParentScopeChain_formFields() throws Exception {
+        eventHandlersParentScopeChain("<button", "</button>");
+        eventHandlersParentScopeChain("<input type='text'", "");
+        eventHandlersParentScopeChain("<input type='submit' value='xxx'", "");
+        // case without value attribute was failing first with IE due to the way the value attribute was added
+        eventHandlersParentScopeChain("<input type='submit'", "");
+    }
+
+    /**
+     * Test that the parent scopes chain for an event handler.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "from theField", "from document", "from document", "from window" })
+    public void eventHandlersParentScopeChain_span() throws Exception {
+        eventHandlersParentScopeChain("<span", "</span>");
+    }
+
+    private void eventHandlersParentScopeChain(final String startTag, final String endTag) throws Exception {
+        final String html = "<html><body id='body'>\n"
+            + "<form id='theForm'>\n"
+            + "<div id='theDiv'>\n"
+            + startTag + " id='theField' onclick='alert(foo); return false;'>click me" + endTag + "\n"
+            + "</div>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + "var foo = 'from window';\n"
+            + "document.foo = 'from document';\n"
+            + "document.body.foo = 'from body';\n"
+            + "document.getElementById('theForm').foo = 'from theForm';\n"
+            + "document.getElementById('theDiv').foo = 'from theDiv';\n"
+            + "document.getElementById('theField').foo = 'from theField';\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement field = driver.findElement(By.id("theField"));
+        field.click();
+
+        final JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+
+        // remove property on field
+        jsExecutor.executeScript("delete document.getElementById('theField').foo");
+        field.click();
+
+        // remove property on form
+        jsExecutor.executeScript("delete document.getElementById('theForm').foo");
+        field.click();
+
+        // remove property on document
+        jsExecutor.executeScript("delete document.foo");
+        field.click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
+
+    /**
+     * Test that the function open resolves to document.open within a handler defined by an attribute.
+     * This was wrong (even in unit tests) up to HtmlUnit-2.12.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("from document")
+    public void eventHandlers_functionOpen() throws Exception {
+        final String html = "<html><body>\n"
+            + "<button id='button1' onclick='identify(open)'>click me</button>\n"
+            + "<script>\n"
+            + "function identify(fnOpen) {\n"
+            + "  var origin = 'unknown';\n"
+            + "  if (fnOpen === window.open) {\n"
+            + "    origin = 'from window';\n"
+            + "  }\n"
+            + "  else if (fnOpen === document.open) {\n"
+            + "    origin = 'from document';\n"
+            + "  }\n"
+            + "  alert(origin);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("button1")).click();
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 }

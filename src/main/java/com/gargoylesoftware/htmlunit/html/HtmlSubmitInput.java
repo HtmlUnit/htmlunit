@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
@@ -53,11 +54,31 @@ public class HtmlSubmitInput extends HtmlInput {
      */
     HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
-        if (hasFeature(SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED)
-                && !hasAttribute("value")) {
-            setAttribute("value", DEFAULT_VALUE);
+        super(namespaceURI, qualifiedName, page, addValueIfNeeded(page, attributes));
+    }
+
+    /**
+     * Add missing attribute if needed by fixing attribute map rather to add it afterwards as this second option
+     * triggers the instantiation of the script object at a time where the DOM node has not yet been added to its
+     * parent.
+     */
+    private static Map<String, DomAttr> addValueIfNeeded(final SgmlPage page,
+            final Map<String, DomAttr> attributes) {
+
+        final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
+        if (browserVersion.hasFeature(SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED)) {
+            for (final String key : attributes.keySet()) {
+                if ("value".equalsIgnoreCase(key)) {
+                    return attributes; // value attribute was specified
+                }
+            }
+
+            // value attribute was not specified, add it
+            final DomAttr newAttr = new DomAttr(page, null, "value", DEFAULT_VALUE, true);
+            attributes.put("value", newAttr);
         }
+
+        return attributes;
     }
 
     /**

@@ -121,7 +121,7 @@ public class WindowTest extends SimpleWebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"MyNewWindow\").focus(); "
+            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"MyNewWindow\").focus(); "
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -226,7 +226,7 @@ public class WindowTest extends SimpleWebTestCase {
         final String secondContent
             = "<html><head><title>Second</title></head><body>\n"
             + "  <a id='link' "
-            + "onClick='open(\"" + URL_THIRD + "\", \"_blank\").focus(); '>\n"
+            + "onClick='window.open(\"" + URL_THIRD + "\", \"_blank\").focus(); '>\n"
             + "Click me</a>\n"
             + "</body></html>";
         final String thirdContent
@@ -285,7 +285,7 @@ public class WindowTest extends SimpleWebTestCase {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"_self\"); "
+            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_self\"); "
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -336,7 +336,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "</body></html>";
         final String thirdContent
             = "<html><head><title>Third</title></head><body>\n"
-            + "    <a id='link' onClick='open(\"http://fourth\", \"_top\"); "
+            + "    <a id='link' onClick='window.open(\"http://fourth\", \"_top\"); "
             + "return false;'>Click me</a>\n"
             + "</body></html>";
         final String fourthContent = "<html><head><title>Fourth</title></head><body></body></html>";
@@ -403,7 +403,7 @@ public class WindowTest extends SimpleWebTestCase {
             + "</body></html>";
         final String thirdContent
             = "<html><head><title>Third</title></head><body>\n"
-            + "    <a id='link' onClick='open(\"http://fourth\", \"_parent\"); "
+            + "    <a id='link' onClick='window.open(\"http://fourth\", \"_parent\"); "
             + "return false;'>Click me</a>\n"
             + "</body></html>";
         final String fourthContent = "<html><head><title>Fourth</title></head><body></body></html>";
@@ -1579,7 +1579,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
+            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -1630,7 +1630,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
+            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -1675,7 +1675,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
+            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -1720,7 +1720,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
+            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";
@@ -1765,7 +1765,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final String firstContent = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1'>\n"
-            + "    <a id='link' onClick='open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
+            + "    <a id='link' onClick='window.open(\"" + URL_SECOND + "\", \"_blank\").focus(); return false;'"
             + "return false;'>Click me</a>\n"
             + "</form>\n"
             + "</body></html>";

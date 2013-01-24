@@ -627,7 +627,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "<select name='select1' id='select1' onchange='open(\"about:blank\", \"_blank\")'>\n"
+            + "<select name='select1' id='select1' onchange='window.open(\"about:blank\", \"_blank\")'>\n"
             + "     <option id='option1'>Option1</option>\n"
             + "     <option id='option2' selected>Number Two</option>\n"
             + "</select>\n"

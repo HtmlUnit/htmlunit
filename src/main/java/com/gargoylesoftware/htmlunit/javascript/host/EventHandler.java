@@ -75,6 +75,7 @@ public class EventHandler extends BaseFunction {
         if (realFunction_ == null) {
             realFunction_ = cx.compileFunction(jsObj, jsSnippet_, eventName_ + " event for " + node_
                 + " in " + node_.getPage().getUrl(), 0, null);
+            realFunction_.setParentScope(jsObj);
         }
 
         final Object result = realFunction_.call(cx, scope, thisObj, args);
