@@ -1166,11 +1166,11 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Browsers(NONE)
     public void buildCookie() throws Exception {
         final String domain = URL_FIRST.getHost();
-        checkCookie(HTMLDocument.buildCookie("", URL_FIRST), EMPTY_COOKIE_NAME, "", "", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto", URL_FIRST), EMPTY_COOKIE_NAME, "toto", "", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=", URL_FIRST), "toto", "", "", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "", domain, false, null);
-        checkCookie(HTMLDocument.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "", domain, true, null);
+        checkCookie(HTMLDocument.buildCookie("", URL_FIRST), EMPTY_COOKIE_NAME, "", "/", domain, false, null);
+        checkCookie(HTMLDocument.buildCookie("toto", URL_FIRST), EMPTY_COOKIE_NAME, "toto", "/", domain, false, null);
+        checkCookie(HTMLDocument.buildCookie("toto=", URL_FIRST), "toto", "", "/", domain, false, null);
+        checkCookie(HTMLDocument.buildCookie("toto=foo", URL_FIRST), "toto", "foo", "/", domain, false, null);
+        checkCookie(HTMLDocument.buildCookie("toto=foo;secure", URL_FIRST), "toto", "foo", "/", domain, true, null);
         checkCookie(HTMLDocument.buildCookie("toto=foo;path=/myPath;secure", URL_FIRST),
                 "toto", "foo", "/myPath", domain, true, null);
 
@@ -1186,7 +1186,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final String dateString = "Fri, 21 Jul 2006 20:47:11 UTC";
         final Date date = parseHttpDate(dateString);
         checkCookie(HTMLDocument.buildCookie("toto=foo; expires=" + dateString, URL_FIRST),
-                "toto", "foo", "", domain, false, date);
+                "toto", "foo", "/", domain, false, date);
     }
 
     private void checkCookie(final Cookie cookie, final String name, final String value,
