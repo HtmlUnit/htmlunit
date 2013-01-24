@@ -1029,4 +1029,25 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * This was causing HtmlUnit to hang as of HtmlUnit-2.12 snapshot from 24.01.2013 and probably since a very long
+     * time.
+     * The reason was that "top" evaluate to WindowProxy and "Object(top)" was setting the top scope as parentScope
+     * of the WindowProxy which was setting it on the Window where it should always be null.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void hangingObjectCallOnWindowProxy() throws Exception {
+        final String html = "<html><body>\n"
+            + "<iframe id='it'></iframe>;\n"
+            + "<script>\n"
+            + "  Object(top);\n"
+            + "  alert(window.foo);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

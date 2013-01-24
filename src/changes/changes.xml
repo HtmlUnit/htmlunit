@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
+            <action type="fix" dev="mguillem">
+                JavaScript: fixed hanging problem (infinite loop) after Object function was called with a window as parameter.
+            </action>
             <action type="fix" dev="mguillem" issue="1458">
                 JavaScript: determine default path for cookies set with document.cookie from current URL.
             </action>

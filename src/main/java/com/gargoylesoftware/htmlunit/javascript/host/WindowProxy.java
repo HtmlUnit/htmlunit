@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptableProxy;
 
@@ -43,4 +45,12 @@ public class WindowProxy extends SimpleScriptableProxy<Window> {
         return (Window) webWindow_.getScriptObject();
     }
 
+    /**
+     * Does nothing.
+     * @param parent the new parent scope
+     */
+    @Override
+    public void setParentScope(final Scriptable parent) {
+        // nothing as the window is the top level scope and its parent scope should stay null
+    }
 }
