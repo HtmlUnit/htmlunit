@@ -439,6 +439,7 @@ public class CookieManagerTest extends WebDriverTestCase {
     public void setCookieDifferentPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo/blah"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "second=2; path=/other/path"));
         responseHeader1.add(new NameValuePair("Location", "/foo/blah"));
 
         getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE);
@@ -474,5 +475,50 @@ public class CookieManagerTest extends WebDriverTestCase {
             assertTrue(mgr.getCookie("first").isHttpOnly());
             assertFalse(mgr.getCookie("second").isHttpOnly());
         }
+    }
+
+    /**
+     * A cookie set with document.cookie without path applies only for the current path
+     * and overrides cookie previously set for this path.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first=new")
+    public void cookieSetFromJSWithoutPathUsesCurrentLocation() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1"));
+
+        final String html = "<head><body><script>\n"
+            + "document.cookie = 'first=new';\n"
+            + "location.replace('/a/b/-');\n"
+            + "</script></body></html>";
+
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE);
+        final URL firstUrl = new URL(getDefaultUrl(), "/a/b");
+        getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", "text/html", responseHeader1);
+
+        loadPageWithAlerts2(firstUrl);
+    }
+
+    /**
+     * A cookie set with document.cookie without path applies only for the current path.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first=1")
+    public void cookieSetFromJSWithoutPathUsesCurrentLocation2() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<NameValuePair>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/c"));
+
+        final String html = "<head><body><script>\n"
+            + "document.cookie = 'first=new';\n"
+            + "location.replace('/c');\n"
+            + "</script></body></html>";
+
+        getMockWebConnection().setDefaultResponse(HTML_ALERT_COOKIE);
+        final URL firstUrl = new URL(getDefaultUrl(), "/a/b");
+        getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", "text/html", responseHeader1);
+
+        loadPageWithAlerts2(firstUrl);
     }
 }

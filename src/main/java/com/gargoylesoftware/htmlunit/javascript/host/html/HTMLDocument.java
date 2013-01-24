@@ -896,7 +896,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         // Default attribute values (note: HttpClient doesn't like null paths).
         final Map<String, Object> atts = new HashMap<String, Object>();
         atts.put("domain", currentURL.getHost());
-        atts.put("path", "");
+        atts.put("path", getDefaultCookiePath(currentURL));
 
         // Custom attribute values.
         while (st.hasMoreTokens()) {
@@ -921,6 +921,23 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         final Cookie cookie = new Cookie(domain, name, value, path, expires, secure);
 
         return cookie;
+    }
+
+    /**
+     * Same logic than in CookieSpecBase#getDefaultPath which is protected.
+     */
+    private static String getDefaultCookiePath(final URL url) {
+        String path = url.getPath();
+        final int lastSlashIndex = path.lastIndexOf('/');
+        if (lastSlashIndex >= 0) {
+            if (lastSlashIndex == 0) {
+                path = "/";
+            }
+            else {
+                path = path.substring(0, lastSlashIndex);
+            }
+        }
+        return path;
     }
 
     /**
