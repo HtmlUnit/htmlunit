@@ -19,6 +19,7 @@ import static org.junit.Assert.assertNotNull;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -167,11 +168,14 @@ public class MochiKitTest extends WebDriverTestCase {
         driver.findElement(By.linkText("Toggle failed tests")).click();
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
-        final String expected = loadExpectation(testName);
+        String expected = loadExpectation(testName);
+        expected = expected.trim();
+        expected = StringUtils.replace(expected, "\r\n", "\n");
         final WebElement div = driver.findElement(By.xpath("//div[@class = 'tests_report']"));
 
         assertNotNull(div);
-        final String actual = div.getText().trim().replace("\n\n",  "\n");
+        String actual = div.getText().trim();
+        actual = StringUtils.replace(actual, "\n\n", "\n");
         assertEquals(expected.trim(), actual);
     }
 
