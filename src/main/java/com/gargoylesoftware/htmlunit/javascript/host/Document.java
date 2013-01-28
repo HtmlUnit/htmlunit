@@ -463,8 +463,10 @@ public class Document extends EventNode {
     public Object createElementNS(final String namespaceURI, final String qualifiedName) {
         final org.w3c.dom.Element element;
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(XUL_SUPPORT)
-                && "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
+        if ("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
+            if (!browserVersion.hasFeature(XUL_SUPPORT)) {
+                throw Context.reportRuntimeError("XUL not available");
+            }
             // simple hack, no need to implement the XUL objects (at least in a first time)
             element = new HtmlDivision(namespaceURI, qualifiedName, getPage(), null);
         }

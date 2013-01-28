@@ -312,10 +312,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isFirefox(). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    GENERATED_165,
-
-    /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_167,
 
     /** Was originally .isFirefox(). */
@@ -970,6 +966,10 @@ public enum BrowserVersionFeatures {
     /** If <tt>true</tt>, then treat <tt>__parent__</tt> and <tt>__proto__</tt> as special properties. */
     @BrowserFeature(@WebBrowser(IE))
     JS_PARENT_PROTO_PROPERTIES,
+
+    /** Indicates that document.queryCommandSupported(..) is only available in design mode. */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
+    JS_QUERYCOMMAND_SUPPORTED_ONLY_DESIGNMODE,
 
     /** Javascript script.text(...) reexecutes the script (IE). */
     @BrowserFeature(@WebBrowser(IE))

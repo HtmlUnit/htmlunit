@@ -276,6 +276,15 @@ public class BrowserRunner extends Suite {
     }
 
     /**
+     * Indicates that the test runs manually in a real browser but not when using WebDriver to driver the browser.
+     * @see Browser
+     */
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public static @interface BuggyWebDriver {
+    }
+
+    /**
      * The number of tries that test will be executed.
      * The test will fail if and only if all trials failed.
      */

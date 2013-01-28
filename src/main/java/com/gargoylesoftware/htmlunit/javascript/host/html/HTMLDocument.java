@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EXECCOMMAND_T
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_160;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_161;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_164;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_165;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_51;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_53;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_55;
@@ -27,7 +26,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_57;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_59;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_60;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_61;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_63;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_OBJECT_DETECTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
@@ -39,6 +37,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_F
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_ALSO_BY_NAME_IN_QUICKS_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_ELEMENT_BY_ID_CASE_SENSITIVE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_QUERYCOMMAND_SUPPORTED_ONLY_DESIGNMODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
@@ -174,7 +173,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     private static final Map<String, Class<? extends Event>> SUPPORTED_EVENT_TYPE_MAP;
 
-    private static final List<String> EXECUTE_CMDS_IE = Arrays.asList(new String[] {
+    private static final List<String> EXECUTE_CMDS_IE = Arrays.asList(
         "2D-Position", "AbsolutePosition", "BackColor", "BackgroundImageCache" /* Undocumented */,
         "BlockDirLTR", "BlockDirRTL", "Bold", "BrowseMode", "ClearAuthenticationCache", "Copy", "CreateBookmark",
         "CreateLink", "Cut", "Delete", "DirLTR", "DirRTL",
@@ -191,17 +190,22 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         "SizeToControl", "SizeToControlHeight", "SizeToControlWidth", "Stop", "StopImage",
         "StrikeThrough", "Subscript", "Superscript", "UnBookmark", "Underline",
         "Undo", "Unlink", "Unselect"
-    });
+    );
 
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
-    private static final List<String> EXECUTE_CMDS_FF = Arrays.asList(new String[] {
+    private static final List<String> EXECUTE_CMDS_FF = Arrays.asList(
         "backColor", "bold", "contentReadOnly", "copy", "createLink", "cut", "decreaseFontSize", "delete",
         "fontName", "fontSize", "foreColor", "formatBlock", "heading", "hiliteColor", "increaseFontSize",
         "indent", "insertHorizontalRule", "insertHTML", "insertImage", "insertOrderedList", "insertUnorderedList",
         "insertParagraph", "italic", "justifyCenter", "justifyLeft", "justifyRight", "outdent", "paste", "redo",
         "removeFormat", "selectAll", "strikeThrough", "subscript", "superscript", "underline", "undo", "unlink",
         "useCSS", "styleWithCSS"
-    });
+    );
+
+    private static final List<String> EXECUTE_CMDS_FF17 = new ArrayList<String>(EXECUTE_CMDS_FF) { {
+            add("JustifyFull");
+        }
+    };
 
     /**
      * Static counter for {@link #uniqueID_}.
@@ -1855,16 +1859,24 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public boolean queryCommandSupported(final String cmd) {
-        final boolean ff = getBrowserVersion().hasFeature(GENERATED_165);
-        final String mode = getDesignMode();
-        if (!ff) {
+        if (getBrowserVersion().hasFeature(JS_QUERYCOMMAND_SUPPORTED_ONLY_DESIGNMODE)) {
+            final String mode = getDesignMode();
+            if (!"on".equals(mode)) {
+                final String msg = "queryCommandSupported() called while document.designMode='" + mode + "'.";
+                throw Context.reportRuntimeError(msg);
+            }
+        }
+        return hasCommand(cmd);
+    }
+
+    private boolean hasCommand(final String cmd) {
+        if (getBrowserVersion().isIE()) {
             return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
         }
-        if (!"on".equals(mode)) {
-            final String msg = "queryCommandSupported() called while document.designMode='" + mode + "'.";
-            throw Context.reportRuntimeError(msg);
+        else if ("FF3.6".equals(getBrowserVersion().getNickname())) {
+            return containsCaseInsensitive(EXECUTE_CMDS_FF, cmd);
         }
-        return containsCaseInsensitive(EXECUTE_CMDS_FF, cmd);
+        return containsCaseInsensitive(EXECUTE_CMDS_FF17, cmd);
     }
 
     /**
@@ -1875,16 +1887,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public boolean queryCommandEnabled(final String cmd) {
-        final boolean ff = getBrowserVersion().hasFeature(GENERATED_165);
-        final String mode = getDesignMode();
-        if (!ff) {
-            return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
+        if (getBrowserVersion().hasFeature(JS_QUERYCOMMAND_SUPPORTED_ONLY_DESIGNMODE)) {
+            final String mode = getDesignMode();
+            if (!"on".equals(mode)) {
+                final String msg = "queryCommandEnabled() called while document.designMode='" + mode + "'.";
+                throw Context.reportRuntimeError(msg);
+            }
         }
-        if (!"on".equals(mode)) {
-            final String msg = "queryCommandEnabled() called while document.designMode='" + mode + "'.";
-            throw Context.reportRuntimeError(msg);
-        }
-        return containsCaseInsensitive(EXECUTE_CMDS_FF, cmd);
+        return hasCommand(cmd);
     }
 
     /**
@@ -1897,12 +1907,8 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     @JsxFunction
     public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
-        final BrowserVersion browser = getBrowserVersion();
-        final boolean ie = browser.hasFeature(GENERATED_63);
-        if ((ie && !containsCaseInsensitive(EXECUTE_CMDS_IE, cmd))
-            || (!ie && !containsCaseInsensitive(EXECUTE_CMDS_FF, cmd))) {
-
-            if (browser.hasFeature(EXECCOMMAND_THROWS_ON_WRONG_COMMAND)) {
+        if (!hasCommand(cmd)) {
+            if (getBrowserVersion().hasFeature(EXECCOMMAND_THROWS_ON_WRONG_COMMAND)) {
                 throw Context.reportRuntimeError("document.execCommand(): invalid command '" + cmd + "'");
             }
             return false;

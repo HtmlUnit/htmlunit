@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -38,6 +39,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -299,7 +301,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception", FF = "Hello", FF10 = "exception")
+    @Alerts(DEFAULT = "exception", FF3_6 = "Hello", FF = "exception")
     public void createDocumentNS_xul() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -669,6 +671,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @BuggyWebDriver // tested with FF8, FF17, FF18
     @Alerts(FF = { "1", "[object HTMLBodyElement]" }, CHROME = { "0", "exception" }, IE = "exception")
     public void designMode_selectionRange_empty() throws Exception {
         designMode_selectionRange("");
@@ -678,6 +681,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @BuggyWebDriver // tested with FF8, FF17, FF18
     @Alerts(FF = { "1", "[object Text]" }, CHROME = { "0", "exception" }, IE = "exception")
     public void designMode_selectionRange_text() throws Exception {
         designMode_selectionRange("hello");
@@ -834,25 +838,56 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "exception", "0 commands supported" },
-            IE = { "Not supported: foo", "Not supported: 123", "78 commands supported" })
-    public void queryCommandSupported() throws Exception {
+    @Alerts(FF3_6 = { "exception", "0 commands supported" },
+            FF17 = { "32 commands supported", "not supported: foo, 123" },
+            IE = { "32 commands supported", "not supported: foo, 123" })
+    public void queryCommandSupported_common() throws Exception {
+        final String[] commands = {"BackColor", "Bold",
+            "Copy", "CreateLink", "Cut", "Delete",
+            "FontName", "FontSize", "ForeColor", "FormatBlock",
+            "Indent", "InsertHorizontalRule", "InsertImage", "InsertOrderedList",
+            "InsertParagraph", "InsertUnorderedList", "Italic",
+            "JustifyCenter", "JustifyFull", "JustifyLeft",  "JustifyRight",
+            "Outdent", "Paste", "Redo", "RemoveFormat",
+            "SelectAll", "StrikeThrough", "Subscript", "Superscript",
+            "Underline", "Undo", "Unlink",
+            "foo", "123" };
+        queryCommandSupported(commands);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF3_6 = { "exception", "0 commands supported" },
+            DEFAULT = { "0 commands supported" },
+            IE = { "46 commands supported" })
+    public void queryCommandSupported_disctinct() throws Exception {
+        final String[] commands = {"2D-Position", "AbsolutePosition",
+            "BlockDirLTR", "BlockDirRTL", "BrowseMode",
+            "ClearAuthenticationCache", "CreateBookmark",
+            "DirLTR", "DirRTL", "EditMode",
+            "InlineDirLTR", "InlineDirRTL", "InsertButton", "InsertFieldset",
+            "InsertIFrame", "InsertInputButton", "InsertInputCheckbox", "InsertInputFileUpload",
+            "InsertInputHidden", "InsertInputImage", "InsertInputPassword", "InsertInputRadio",
+            "InsertInputReset", "InsertInputSubmit", "InsertInputText", "InsertMarquee",
+            "InsertSelectDropdown", "InsertSelectListbox", "InsertTextArea",
+            "JustifyNone",
+            "LiveResize", "MultipleSelection", "Open", "OverWrite",
+            "PlayImage", "Print", "Refresh", "RemoveParaFormat",
+            "SaveAs", "SizeToControl", "SizeToControlHeight", "SizeToControlWidth", "Stop", "StopImage",
+            "UnBookmark", "Unselect"};
+
+        queryCommandSupported(commands);
+    }
+
+    private void queryCommandSupported(final String... commands) throws Exception {
+        final String jsCommandArray = "['" + StringUtils.join(commands, "', '") + "']";
         final String html = "<html><head><title>Test</title><script>\n"
             + "function doTest() {\n"
-            + "  var cmds = ['2D-Position', 'AbsolutePosition', 'BackColor', 'BlockDirLTR', 'BlockDirRTL', 'Bold', "
-            + "'BrowseMode', 'ClearAuthenticationCache', 'Copy', 'CreateBookmark', 'CreateLink', 'Cut', 'Delete', "
-            + "'DirLTR', 'DirRTL', 'EditMode', 'FontName', 'FontSize', 'ForeColor', 'FormatBlock', 'Indent', "
-            + "'InlineDirLTR', 'InlineDirRTL', 'InsertButton', 'InsertFieldset', 'InsertHorizontalRule', "
-            + "'InsertIFrame', 'InsertImage', 'InsertInputButton', 'InsertInputCheckbox', 'InsertInputFileUpload', "
-            + "'InsertInputHidden', 'InsertInputImage', 'InsertInputPassword', 'InsertInputRadio', "
-            + "'InsertInputReset', 'InsertInputSubmit', 'InsertInputText', 'InsertMarquee', 'InsertOrderedList', "
-            + "'InsertParagraph', 'InsertSelectDropdown', 'InsertSelectListbox', 'InsertTextArea', "
-            + "'InsertUnorderedList', 'Italic', 'JustifyCenter', 'JustifyFull', 'JustifyLeft', 'JustifyNone', "
-            + "'JustifyRight', 'LiveResize', 'MultipleSelection', 'Open', 'Outdent', 'OverWrite', 'Paste', "
-            + "'PlayImage', 'Print', 'Redo', 'Refresh', 'RemoveFormat', 'RemoveParaFormat', 'SaveAs', 'SelectAll', "
-            + "'SizeToControl', 'SizeToControlHeight', 'SizeToControlWidth', 'Stop', 'StopImage', 'StrikeThrough', "
-            + "'Subscript', 'Superscript', 'UnBookmark', 'Underline', 'Undo', 'Unlink', 'Unselect', 'foo', 123];\n"
+            + "  var cmds = " + jsCommandArray + ";\n"
             + "  var nbSupported = 0;\n"
+            + "  var cmdsNotSupported = [];\n"
             + "  try {\n"
             + "    for (var i=0; i<cmds.length; ++i) {\n"
             + "      var cmd = cmds[i];"
@@ -860,10 +895,12 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "      if (b)\n"
             + "        nbSupported++;\n"
             + "      else\n"
-            + "        alert('Not supported: ' + cmd);\n"
+            + "        cmdsNotSupported[cmdsNotSupported.length] = cmd;\n"
             + "    }"
             + "  } catch (e) { alert('exception'); }\n"
             + "  alert(nbSupported + ' commands supported');\n"
+            + "  if (nbSupported != 0 && cmdsNotSupported.length > 0)\n"
+            + "    alert('not supported: ' + cmdsNotSupported.join(', '));\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='log'></div>\n"
@@ -1358,7 +1395,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(IE = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#000000" },
 //            IE9 = {"#800080", "", "#0000aa", "#0000aa", "#000000", "#0" },
             FF3_6 = {"", "", "#0000aa", "#0000aa", "#000000", "#000000" },
-            FF = {"#800080", "", "#0000aa", "#0000aa", "x", "x" })
+            FF10 = {"#800080", "", "#0000aa", "#0000aa", "x", "x" },
+            FF17 = {"", "", "#0000aa", "#0000aa", "x", "x" })
     public void vlinkColor() throws Exception {
         final String html =
             "<html>\n"

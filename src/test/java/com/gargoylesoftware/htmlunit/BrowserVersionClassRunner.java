@@ -39,6 +39,7 @@ import org.junit.runners.model.Statement;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 
@@ -163,6 +164,9 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         }
         else if (isExpectedToFail(method)) {
             prefix = "(failure expected) ";
+        }
+        else if (realBrowser_ && isBuggyWebDriver(method)) {
+            prefix = "(buggy) ";
         }
 
         String browserString = browserVersion_.getNickname();
@@ -320,7 +324,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         final int tries;
 
         if (testCase instanceof WebDriverTestCase && realBrowser_) {
-            notYetImplemented = false;
+            notYetImplemented = isBuggyWebDriver(method);
             tries = 1;
         }
         else {
@@ -373,6 +377,11 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     private boolean isNotYetImplemented(final FrameworkMethod method) {
         final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
         return notYetImplementedBrowsers != null && isDefinedIn(notYetImplementedBrowsers.value());
+    }
+
+    private boolean isBuggyWebDriver(final FrameworkMethod method) {
+        final BuggyWebDriver buggyWebDriver = method.getAnnotation(BuggyWebDriver.class);
+        return buggyWebDriver != null;
     }
 
     private int getTries(final FrameworkMethod method) {
