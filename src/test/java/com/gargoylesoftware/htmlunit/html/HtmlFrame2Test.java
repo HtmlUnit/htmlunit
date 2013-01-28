@@ -104,8 +104,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     // real FF sometimes alerts 'third' before 'second'
     public void postponeLoading() throws Exception {
         final String html = "<FRAMESET onload=\"alert('parent ' + window.parent.frames.third.document.frm)\">\n"
-            + "  <FRAME name=second frameborder=0 src='" + URL_SECOND + "'>\n"
-            + "  <FRAME name=third frameborder=0 src='" + URL_THIRD + "'>\n"
+            + "  <FRAME name=second frameborder=0 src='second.html'>\n"
+            + "  <FRAME name=third frameborder=0 src='third.html'>\n"
             + "</FRAMESET>";
 
         final String secondHtml = "<html>\n"
@@ -120,8 +120,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
-        getMockWebConnection().setResponse(URL_THIRD, thirdHtml);
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "second.html"), secondHtml);
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "third.html"), thirdHtml);
         loadPageWithAlerts2(html);
     }
 
@@ -131,8 +131,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Test
     public void frameOnload() throws Exception {
         final String html = "<FRAMESET rows='50%,50%' onload=\"alert('first')\">\n"
-            + "  <FRAME name='second' src='" + URL_SECOND + "'>\n"
-            + "  <FRAME name='third' src='" + URL_THIRD + "'>\n"
+            + "  <FRAME name='second' src='second.html'>\n"
+            + "  <FRAME name='third' src='third.html'>\n"
             + "</FRAMESET>";
 
         final String secondHtml = "<html>\n"
@@ -145,8 +145,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
                 + "  <h1>third</h1>\n"
                 + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
-        getMockWebConnection().setResponse(URL_THIRD, thirdHtml);
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "second.html"), secondHtml);
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "third.html"), thirdHtml);
 
         final WebDriver driver = loadPage2(html);
         final List<String> actualAlerts = getCollectedAlerts(driver);
@@ -171,11 +171,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Test
     @NotYetImplemented(IE)
     public void frameOnloadFrameInFrame() throws Exception {
-        final URL urlFourth = new URL("http://127.0.0.1:" + PORT + "/fourth/");
-
         final String html = "<FRAMESET rows='50%,50%' onload=\"alert('first')\">\n"
-            + "  <FRAME name='second' src='" + URL_SECOND + "'>\n"
-            + "  <FRAME name='third' src='" + URL_THIRD + "'>\n"
+            + "  <FRAME name='second' src='second.html'>\n"
+            + "  <FRAME name='third' src='third.html'>\n"
             + "</FRAMESET>";
 
         final String secondHtml = "<html>\n"
@@ -184,7 +182,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final String thirdHtml = "<FRAMESET cols='100%' onload=\"alert('third')\">\n"
-                + "  <FRAME name='fourth' src='" + urlFourth + "'>\n"
+                + "  <FRAME name='fourth' src='fourth.html'>\n"
                 + "</FRAMESET>";
 
         final String fourthHtml = "<html>\n"
@@ -192,9 +190,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             + "  <h1>fourth</h1>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
-        getMockWebConnection().setResponse(URL_THIRD, thirdHtml);
-        getMockWebConnection().setResponse(urlFourth, fourthHtml);
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "second.html"), secondHtml);
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "third.html"), thirdHtml);
+        getMockWebConnection().setResponse(new URL(getDefaultUrl(), "fourth.html"), fourthHtml);
 
         final WebDriver driver = loadPage2(html);
         final List<String> actualAlerts = getCollectedAlerts(driver);
