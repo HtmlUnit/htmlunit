@@ -193,8 +193,7 @@ public class HTMLImageElement extends HTMLElement {
      * @param align the value of the "align" property
      */
     @JsxSetter
-    public void setAlign(String align) {
-        align = align.toLowerCase();
+    public void setAlign(final String align) {
         final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
         if (acceptArbitraryValues) {
             getDomNodeOrDie().setAttribute("align", align);

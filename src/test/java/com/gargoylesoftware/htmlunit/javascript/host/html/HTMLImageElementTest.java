@@ -20,8 +20,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -200,8 +202,11 @@ public class HTMLImageElementTest extends WebDriverTestCase {
                 "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", "" },
             FF10 = { "left", "right", "middle", "justify", "bottom", "middle",
                 "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
+            FF17 = { "left", "right", "middle", "justify", "bottom", "middle",
+                    "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", "" },
             IE = { "left", "right", "center", "", "bottom", "middle",
                 "top", "absBottom", "absMiddle", "baseline", "textTop", "", "" })
+    @NotYetImplemented(FF17)
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -232,13 +237,16 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "center", "justify",
+    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "center", "justify",
                 "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop" },
             FF10 = { "CenTer", "8", "foo", "left", "right", "middle", "justify",
+                "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop" },
+            FF17 = { "CenTer", "8", "foo", "left", "right", "middle", "justify",
                 "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop" },
             IE = { "center", "error", "center", "error", "center", "left", "right",
                 "center", "error", "center", "bottom", "middle", "top", "absBottom",
                 "absMiddle", "baseline", "textTop" })
+    @NotYetImplemented(FF17)
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
