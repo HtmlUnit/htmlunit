@@ -220,8 +220,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "blue", FF17 = "none repeat scroll 0% 0% blue", IE = "exception")
-    @NotYetImplemented(FF17)
+    @Alerts(FF = "none repeat scroll 0% 0% blue", IE = "exception")
+    @NotYetImplemented(FF)
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
