@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -112,7 +113,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         // just to avoid unused variable warning when the next line is commented
         getMockWebConnection().setResponse(getDefaultUrl(), html);
-        loadPage2(html);
+        // loadPage2(html);
+        Assert.fail("didn't run the real test as it causes a deadlock");
     }
 
     /**
