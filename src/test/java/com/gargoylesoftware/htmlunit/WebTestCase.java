@@ -629,7 +629,9 @@ public abstract class WebTestCase {
         assertNotNull(url);
         final File file = new File(url.toURI());
 
-        return FileUtils.readFileToString(file, "UTF-8");
+        String content = FileUtils.readFileToString(file, "UTF-8");
+        content = StringUtils.replace(content, "\r\n", "\n");
+        return content;
     }
 
     private static URL getExpectationsResource(final Class<?> referenceClass, final BrowserVersion browserVersion,
