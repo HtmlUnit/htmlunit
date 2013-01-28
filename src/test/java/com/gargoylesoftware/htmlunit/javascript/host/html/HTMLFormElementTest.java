@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 
 import java.net.URL;
 
@@ -1158,11 +1159,16 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Calling form.submit() immediately triggers a request but only the
+     * For FF3.6 and IE8: calling form.submit() immediately triggers a request but only the
      * last response for a page is parsed.
+     * For FF10+ and Chrome: only one request, the last one.
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "", "foo4", "script4.js" },
+            FF3_6 = { "", "foo0", "foo1", "foo2", "foo3", "foo4", "script4.js" },
+            IE = { "", "foo0", "foo1", "foo2", "foo3", "foo4", "script4.js" })
+    @NotYetImplemented(FF17)
     public void submitTriggersRequestNotParsed() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
@@ -1182,14 +1188,17 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             final String htmlX = "<html><head>\n"
                 + "<title>Page " + i + "</title>\n"
                 + "<script src='script" + i + ".js'></script>\n"
+                + "<script>alert('page" + i + "');</script>\n"
                 + "</head></html>";
             connection.setResponse(new URL(getDefaultUrl(), "foo" + i), htmlX);
             connection.setResponse(new URL(getDefaultUrl(), "script" + i + ".js"), "", JAVASCRIPT_MIME_TYPE);
         }
-        final WebDriver driver = loadPage2(html);
+        final String[] expectedRequests = getExpectedAlerts();
+
+        setExpectedAlerts("page4");
+        final WebDriver driver = loadPageWithAlerts2(html); // forces to wait, what is needed for FFdriver
 
         // NB: comparing the sequence order here is not 100% safe with a real browser
-        final String[] expectedRequests = {"", "foo0", "foo1", "foo2", "foo3", "foo4", "script4.js"};
         assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(getDefaultUrl()));
 
         assertEquals("Page 4", driver.getTitle());
