@@ -1045,6 +1045,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("foo1")
     public void target_changed_after_submit_call() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
@@ -1059,7 +1060,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "<div id='clickMe' onclick='test()'>click me</div></body></html>";
 
         getMockWebConnection().setDefaultResponse("<html><head><script>alert(window.name)</script></head></html>");
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
 
         try {
@@ -1070,7 +1071,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             // ok
         }
         driver.switchTo().window("foo1");
-        setExpectedAlerts("foo1");
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 

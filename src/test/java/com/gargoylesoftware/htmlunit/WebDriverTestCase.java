@@ -808,11 +808,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
             }
 
-            // reset cookies to have a clean state
-            driver.manage().deleteAllCookies();
+            driver.switchTo().window(currentWindow);
 
             // in the remaining window, load a blank page
             driver.get("about:blank");
+
+            driver.manage().deleteAllCookies();
         }
     }
 
