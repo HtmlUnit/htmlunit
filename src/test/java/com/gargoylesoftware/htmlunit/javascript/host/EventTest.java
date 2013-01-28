@@ -29,6 +29,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -570,10 +571,10 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    // FF with WebDriver results are different than being stand-alone
-    // http://code.google.com/p/selenium/issues/detail?id=4665
     @Alerts(FF = { "activeElement BODY", "focus #document", "handler: activeElement BODY" },
             IE = { "activeElement BODY" })
+    @BuggyWebDriver // FFDriver doesn't behave like "manually driven" FF
+    // http://code.google.com/p/selenium/issues/detail?id=4665
     @NotYetImplemented(FF)
     public void document_focus() throws Exception {
         final String html = "<html>\n"
@@ -614,8 +615,9 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented(FF)
-    @Alerts(FF = { "focus #document", "focus INPUT", "focus INPUT" }, CHROME = { "focus INPUT", "focus INPUT" })
+    @Alerts(DEFAULT = { "focus INPUT", "focus INPUT" }, IE = { })
+    @BuggyWebDriver // FirefoxDriver wrongly triggers "focus #document" when clicking the first element rather than
+    // when loading the page
     public void document_input_focus() throws Exception {
         document_input("focus");
     }
