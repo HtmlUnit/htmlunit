@@ -617,7 +617,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         // gets the collected alerts, waiting a bit if necessary
         List<String> actualAlerts = getCollectedAlerts(driver);
         final long maxWait = System.currentTimeMillis() + maxWaitTime;
-        while (actualAlerts.size() != expectedAlerts.length && System.currentTimeMillis() < maxWait) {
+        while (actualAlerts.size() < expectedAlerts.length && System.currentTimeMillis() < maxWait) {
             Thread.sleep(30);
             actualAlerts = getCollectedAlerts(driver);
         }
