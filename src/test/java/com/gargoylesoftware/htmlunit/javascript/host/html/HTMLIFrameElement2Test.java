@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -715,10 +714,9 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "bottom", "middle", "top" },
-            FF17 = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
+    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" })
-    @NotYetImplemented({ FF17, IE })
+    @NotYetImplemented(IE)
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

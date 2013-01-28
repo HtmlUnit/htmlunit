@@ -58,7 +58,7 @@ public class HTMLHeadingElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "center", "justify" },
+    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "center", "justify" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "center", "justify" })
     public void setAlign() throws Exception {
         final String html

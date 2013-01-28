@@ -2368,16 +2368,17 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param ignoreIfNoError if <tt>true</tt>, the invocation will be a no-op if it does not trigger an error
      *        (i.e., it will not actually set the align attribute)
      */
-    protected void setAlign(String align, final boolean ignoreIfNoError) {
-        align = align.toLowerCase();
+    protected void setAlign(final String align, final boolean ignoreIfNoError) {
+        final String alignLC = align.toLowerCase();
         final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
         if (acceptArbitraryValues
-                || "center".equals(align)
-                || "justify".equals(align)
-                || "left".equals(align)
-                || "right".equals(align)) {
+                || "center".equals(alignLC)
+                || "justify".equals(alignLC)
+                || "left".equals(alignLC)
+                || "right".equals(alignLC)) {
             if (!ignoreIfNoError) {
-                getDomNodeOrDie().setAttribute("align", align);
+                final String newValue = acceptArbitraryValues ? align : alignLC;
+                getDomNodeOrDie().setAttribute("align", newValue);
             }
             return;
         }

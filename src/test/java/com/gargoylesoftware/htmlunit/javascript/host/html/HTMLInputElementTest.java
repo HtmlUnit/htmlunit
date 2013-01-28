@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -293,19 +294,22 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("true")
     public void thisDotFormInOnClick() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>First</title></head>\n"
             + "<body>\n"
             + "<form name='form1'>\n"
             + "<input type='submit' id='clickMe' onClick=\"this.form.target='_blank'; return false;\">\n"
             + "</form>\n"
+            + "<script>\n"
+            + "alert(document.forms[0].target == '');\n"
+            + "</script>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertEquals("First", driver.getTitle());
+        final WebDriver driver = loadPageWithAlerts2(html);
 
-        assertEquals(null, driver.findElement(By.name("form1")).getAttribute("target"));
+        // HtmlUnitDriver is buggy, it returns null here
+//        assertEquals("", driver.findElement(By.name("form1")).getAttribute("target"));
 
         driver.findElement(By.id("clickMe")).click();
 
@@ -704,7 +708,10 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"text text", "password password", "hidden hidden",
             "checkbox checkbox", "radio radio", "file file", "checkbox checkbox" },
             FF10 = {"text TeXt", "password PassWord", "hidden Hidden",
+            "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" },
+            FF17 = {"text TeXt", "password PassWord", "hidden Hidden",
             "checkbox CheckBox", "radio rAdiO", "file FILE", "checkbox CHECKBOX" })
+    @NotYetImplemented(FF17)
     public void typeCase() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -790,7 +797,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "bottom", "middle", "top" },
+    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" })
     @NotYetImplemented(IE)
     public void setAlign() throws Exception {

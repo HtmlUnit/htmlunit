@@ -95,7 +95,7 @@ public class HTMLDivElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "justify", "center" },
+    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "justify", "center" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "justify", "center" })
     public void setAlign() throws Exception {
         final String html

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -68,7 +70,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "justify", "char", "center" },
+    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "justify", "char", "center" },
             IE = { "center", "error", "center", "error", "center", "left", "right",
                     "error", "right", "error", "right", "center" })
     @NotYetImplemented(IE)
@@ -223,9 +225,9 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
-            FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
+    @Alerts(FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
+    @NotYetImplemented(FF)
     public void vAlign() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -270,6 +272,7 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
     @Alerts(FF3_6 = { "50", "75%", "foo", "0", "20", "", "80", "40", "abc", "0", "30%", "33" },
             FF = { "50", "75%", "foo", "-7", "20.2", "", "80", "40", "abc", "-10", "30%", "33.3" },
             IE = { "50", "75%", "", "", "20", "", "error", "error", "80", "40", "", "", "30%", "33" })
+    @NotYetImplemented(FF17)
     public void width() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -327,7 +330,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "128", FF10 = "128px")
+    @Alerts(DEFAULT = "128", FF10 = "128px", FF17 = "128px")
+    @NotYetImplemented(FF17)
     public void width_px() throws Exception {
         final String html
             = "<html><head>"

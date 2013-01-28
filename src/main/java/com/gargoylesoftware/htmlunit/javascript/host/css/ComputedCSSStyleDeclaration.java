@@ -504,7 +504,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getColor() {
-        return defaultIfEmpty(super.getColor(), "rgb(0, 0, 0)");
+        String value = defaultIfEmpty(super.getColor(), "rgb(0, 0, 0)");
+        if (getBrowserVersion().hasFeature(JS_GET_BACKGROUND_COLOR_FOR_COMPUTED_STYLE_AS_RGB)) {
+            value = toRGBColor(value);
+        }
+        return value;
     }
 
     /**

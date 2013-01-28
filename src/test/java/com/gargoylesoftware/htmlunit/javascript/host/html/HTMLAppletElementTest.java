@@ -63,7 +63,7 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "center", "8", "foo", "left", "right", "bottom", "middle", "top" },
+    @Alerts(DEFAULT = { "CenTer", "8", "foo", "left", "right", "bottom", "middle", "top" },
             IE = { "center", "error", "center", "error", "center", "left", "right", "bottom", "middle", "top" })
     @NotYetImplemented(IE)
     public void setAlign() throws Exception {

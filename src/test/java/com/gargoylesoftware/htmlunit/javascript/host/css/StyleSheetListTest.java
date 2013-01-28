@@ -63,7 +63,7 @@ public class StyleSheetListTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "red", "red" }, IE = "exception")
+    @Alerts(FF = { "rgb(255, 0, 0)", "rgb(255, 0, 0)" }, IE = "exception")
     public void testGetComputedStyle_Link() throws Exception {
         final String html =
               "<html>\n"

@@ -986,7 +986,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "red", IE = "exception")
+    @Alerts(FF = "rgb(255, 0, 0)", IE = "exception")
     public void getComputedStyle_WithComputedColor() throws Exception {
         final String html =
               "<html>\n"
