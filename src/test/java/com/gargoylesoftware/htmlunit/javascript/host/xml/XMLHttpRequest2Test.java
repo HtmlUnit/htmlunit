@@ -28,14 +28,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -61,10 +59,13 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * Strangely, this test seem to fail even without the implementation of the "/setStateXX" handling
      * on the "server side".
      * Strange thing.
+     *
+     * Update 28.01.2013:
+     * no deadlock occur anymore (we use a single JS execution thread for a while). Activating the test as it may help.
+     *
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void deadlock() throws Exception {
         final String jsCallSynchXHR = "function callSynchXHR(url) {\n"
             + "  var xhr = " + XHRInstantiation_ + ";\n"
@@ -113,8 +114,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         // just to avoid unused variable warning when the next line is commented
         getMockWebConnection().setResponse(getDefaultUrl(), html);
-        // loadPageWithAlerts2(html);
-        Assert.fail("didn't run the real test as it causes a deadlock");
+        loadPage2(html);
     }
 
     /**
@@ -179,9 +179,9 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "exception", "exception", "pass", "pass" },
-            FF10 = { "pass", "pass", "pass", "pass" },
-            CHROME = { "pass", "pass", "pass", "pass" })
+    @Alerts(DEFAULT = { "pass", "pass", "pass", "pass" },
+            FF3_6 = { "exception", "exception", "pass", "pass" },
+            IE = { "exception", "exception", "pass", "pass" })
     public void openThrowOnEmptyUrl() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -200,7 +200,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
         final int expectedRequests;
-        if (getBrowserVersion().isChrome() || BrowserVersion.FIREFOX_10 == getBrowserVersion()) {
+        if ("pass".equals(getExpectedAlerts()[0])) {
             expectedRequests = 5;
         }
         else {
@@ -477,7 +477,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "1", "2", "3", "4" }, FF10 = "4", CHROME = "4")
+    @Alerts(DEFAULT = "4", IE = { "1", "2", "3", "4" }, FF3_6 = { })
     public void testOnreadystatechange_sync() throws Exception {
         final String html =
               "<html>\n"
@@ -516,7 +516,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF10 = "[object Event]#[object XMLHttpRequest]", IE = "no param")
+    @Alerts(FF3_6 = { }, FF = "[object Event]#[object XMLHttpRequest]", IE = "no param")
     public void testOnreadystatechangeSyncWithParam() throws Exception {
         final String html =
               "<html>\n"

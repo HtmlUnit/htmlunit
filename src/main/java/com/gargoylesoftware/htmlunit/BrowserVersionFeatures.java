@@ -1255,6 +1255,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(FF))
     XHR_ONREADYSTATECHANGE_WITH_EVENT_PARAM,
 
+    /** Indicates if an empty url is allowed as url param for the open method. */
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    XHR_OPEN_ALLOW_EMTPY_URL,
+
     /** Indicates if a "Origin" header should be sent. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     XHR_ORIGIN_HEADER,
