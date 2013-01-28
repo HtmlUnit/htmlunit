@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE8;
 
 import org.junit.Test;
@@ -23,6 +24,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -40,10 +42,11 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "click [select] [1]", "click [clickMe] [1]", "change [select] [-]" },
+    @Alerts(DEFAULT = { "change [select] [-]", "click [clickMe] [1]" },
             IE8 = { "click [select] [1]", "click [clickMe] [1]", "change [select] [-]" },
             IE = { "change [select] [-]", "click [select] [-]" })
-    @NotYetImplemented(IE8)
+    @NotYetImplemented({ FF, IE8 })
+    @BuggyWebDriver // FFDriver wrongly generates a "click [select] [1]" first that doesn't occur manually
     public void optionClick() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'\n";
         final String secondSnippet = ">\n"
