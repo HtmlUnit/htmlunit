@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,29 +30,28 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class PostponedActionTest extends WebDriverTestCase {
 
     /**
-     * Note that this test doesn't work in FF17 through WebDriver but is correct
-     * when executed manually.
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({ "before", "after", "second.html", "third.html" })
     public void loadingJavaScript() throws Exception {
-        final String firstContent = "<html>\n"
+        final String html = "<html>\n"
             + "<head><title>First Page</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert('before');\n"
             + "    var iframe2 = document.createElement('iframe');\n"
-            + "    iframe2.src = '" + URL_SECOND + "';\n"
+            + "    iframe2.src = 'frame2.html';\n"
             + "    document.body.appendChild(iframe2);\n"
             + "    var iframe3 = document.createElement('iframe');\n"
             + "    document.body.appendChild(iframe3);\n"
-            + "    iframe3.src = '" + URL_THIRD + "';\n"
+            + "    iframe3.src = 'frame3.html';\n"
             + "    alert('after');\n"
             + "}\n"
             + "</script>\n"
@@ -64,11 +65,10 @@ public class PostponedActionTest extends WebDriverTestCase {
             = "<script>alert('third.html');</script>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_FIRST, firstContent);
-        conn.setResponse(URL_SECOND, secondContent);
-        conn.setResponse(URL_THIRD, thirdContent);
+        conn.setResponse(new URL(getDefaultUrl(), "frame2.html"), secondContent);
+        conn.setResponse(new URL(getDefaultUrl(), "frame3.html"), thirdContent);
 
-        loadPageWithAlerts2(URL_FIRST);
+        loadPageWithAlerts2(html);
     }
 
     /**
