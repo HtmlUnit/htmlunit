@@ -60,12 +60,10 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * on the "server side".
      * Strange thing.
      *
-     * Update 28.01.2013:
-     * no deadlock occur anymore (we use a single JS execution thread for a while). Activating the test as it may help.
-     *
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented
     public void deadlock() throws Exception {
         final String jsCallSynchXHR = "function callSynchXHR(url) {\n"
             + "  var xhr = " + XHRInstantiation_ + ";\n"
