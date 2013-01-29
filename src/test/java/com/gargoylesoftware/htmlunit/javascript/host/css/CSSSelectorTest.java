@@ -589,9 +589,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
     }
 
     /**
-    *
-    * @throws Exception if an error occurs
-    */
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts(FF = { "0", "undefined", "1", "[object HTMLInputElement]", "id2" },
             DEFAULT = { "1", "[object HTMLHtmlElement]", "1", "[object HTMLInputElement]", "id2" })
