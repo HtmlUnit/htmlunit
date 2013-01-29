@@ -28,7 +28,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -61,10 +60,12 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * on the "server side".
      * Strange thing.
      *
+     * Update 28.01.2013:
+     * no deadlock occur anymore (we use a single JS execution thread for a while). Activating the test as it may help.
+     *
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void deadlock() throws Exception {
         final String jsCallSynchXHR = "function callSynchXHR(url) {\n"
             + "  var xhr = " + XHRInstantiation_ + ";\n"
@@ -113,8 +114,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         // just to avoid unused variable warning when the next line is commented
         getMockWebConnection().setResponse(getDefaultUrl(), html);
-        // loadPage2(html);
-        Assert.fail("didn't run the real test as it causes a deadlock");
+        loadPage2(html);
     }
 
     /**
