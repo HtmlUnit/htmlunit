@@ -829,6 +829,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
                     return false;
                 }
             }
+            else if (docType.getPublicId() == null) {
+                return false;
+            }
         }
         return true;
     }

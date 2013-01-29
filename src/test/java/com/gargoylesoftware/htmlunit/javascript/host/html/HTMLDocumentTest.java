@@ -142,6 +142,15 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("CSS1Compat")
+    public void compatMode_doctype_html() throws Exception {
+        compatMode("<!DOCTYPE html>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("BackCompat")
     public void compatMode_no_url() throws Exception {
         compatMode("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">");
@@ -1815,7 +1824,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Alerts(IE8 = { "7", "CSS1Compat", "undefined", "undefined" },
             IE9 = { "9", "CSS1Compat", "function", "function" },
             DEFAULT = { "undefined", "CSS1Compat", "function", "function" })
-    @NotYetImplemented
     public void documentMode_html5() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html>\n"
