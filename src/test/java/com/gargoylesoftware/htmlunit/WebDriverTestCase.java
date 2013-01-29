@@ -810,10 +810,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
             driver.switchTo().window(currentWindow);
 
+            driver.manage().deleteAllCookies();
+
             // in the remaining window, load a blank page
             driver.get("about:blank");
-
-            driver.manage().deleteAllCookies();
         }
     }
 
