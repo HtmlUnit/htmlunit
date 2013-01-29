@@ -772,6 +772,7 @@ class HtmlUnitBrowserCompatCookieSpec extends BrowserCompatSpec {
         "EEE dd MMM yyyy HH mm ss z ",
         "EEE dd MM yy HH mm ss z ",
         "EEE dd MM yyyy HH mm ss z ",
+        "d/M/yyyy",
     };
 
     HtmlUnitBrowserCompatCookieSpec(final IncorrectnessListener incorrectnessListener) {
