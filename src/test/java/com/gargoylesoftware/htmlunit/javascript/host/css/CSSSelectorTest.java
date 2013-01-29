@@ -588,4 +588,43 @@ public class CSSSelectorTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+    *
+    * @throws Exception if an error occurs
+    */
+    @Test
+    @Alerts(FF = { "0", "undefined", "1", "[object HTMLInputElement]", "id2" },
+            DEFAULT = { "1", "[object HTMLHtmlElement]", "1", "[object HTMLInputElement]", "id2" })
+    public void focus() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      found = document.querySelectorAll(':focus');\n"
+            + "      alert(found.length);\n"
+            + "      alert(found[0]);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "\n"
+            + "  document.getElementById('id2').focus();\n"
+            + "\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      found = document.querySelectorAll(':focus');\n"
+            + "      alert(found.length);\n"
+            + "      alert(found[0]);\n"
+            + "      alert(found[0].id);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='id1'>\n"
+            + "  <input id='id2'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

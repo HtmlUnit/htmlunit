@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
 import java.io.File;
@@ -675,7 +676,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         assertEquals(Collections.emptyList(), collectedAlerts);
 
         final HtmlSelect select = page.getHtmlElementById("select1");
-        assertNull(page.getFocusedElement());
+        assertNotSame(select, page.getFocusedElement());
         select.getOption(0).setSelected(true);
         assertSame(select, page.getFocusedElement());
 

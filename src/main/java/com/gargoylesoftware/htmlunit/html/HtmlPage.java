@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.BLUR_BEFORE_O
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_DOM_CONTENT_LOADED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_FRAMESET_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_HTML_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FRAME_RESOLVE_URL_WITH_PARENT_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
@@ -204,14 +205,19 @@ public class HtmlPage extends SgmlPage {
             }
         }
         loadFrames();
+
+        final BrowserVersion browserVersion = getWebClient().getBrowserVersion();
+
         // don't set the ready state if we really load the blank page into the window
         // see Node.initInlineFrameIfNeeded()
         if (!isAboutBlank) {
+            if (browserVersion.hasFeature(FOCUS_HTML_ELEMENT_AT_START)) {
+                elementWithFocus_ = getDocumentElement();
+            }
             setReadyState(READY_STATE_COMPLETE);
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         }
 
-        final BrowserVersion browserVersion = getWebClient().getBrowserVersion();
         if (browserVersion.hasFeature(EVENT_DOM_CONTENT_LOADED)) {
             executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         }

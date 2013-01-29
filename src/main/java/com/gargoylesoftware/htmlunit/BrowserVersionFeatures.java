@@ -199,6 +199,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     FILEINPUT_EMPTY_DEFAULT_VALUE,
 
+    /** For new pages the focus points to the html root node. */
+    @BrowserFeature(@WebBrowser(IE))
+    FOCUS_HTML_ELEMENT_AT_START,
+
     /** Indicates if a form field is directly reachable by its new name once this has been changed. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     FORMFIELD_REACHABLE_BY_NEW_NAMES,

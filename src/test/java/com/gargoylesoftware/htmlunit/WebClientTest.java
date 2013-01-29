@@ -925,10 +925,17 @@ public class WebClientTest extends SimpleWebTestCase {
         final List<String> collectedAlerts = new ArrayList<String>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        Assert.assertNull("original", page.getFocusedElement());
-        Assert.assertNull("next", page.tabToNextElement());
-        Assert.assertNull("previous", page.tabToPreviousElement());
-        Assert.assertNull("accesskey", page.pressAccessKey('a'));
+        HtmlElement focus = page.getFocusedElement();
+        Assert.assertTrue("original", (focus == null) || (focus == page.getDocumentElement()));
+
+        focus = page.tabToPreviousElement();
+        Assert.assertTrue("next", (focus == null) || (focus == page.getDocumentElement()));
+
+        focus = page.tabToNextElement();
+        Assert.assertTrue("previous", (focus == null) || (focus == page.getDocumentElement()));
+
+        focus = page.pressAccessKey('a');
+        Assert.assertTrue("accesskey", (focus == null) || (focus == page.getDocumentElement()));
 
         final List<?> expectedAlerts = Collections.EMPTY_LIST;
         assertEquals(expectedAlerts, collectedAlerts);
@@ -947,8 +954,10 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage page = getPageForKeyboardTest(webClient, new String[]{null});
         final HtmlElement element = page.getHtmlElementById("submit0");
 
-        Assert.assertNull("original", page.getFocusedElement());
-        Assert.assertNull("accesskey", page.pressAccessKey('x'));
+        HtmlElement focus = page.getFocusedElement();
+        Assert.assertTrue("original", (focus == null) || (focus == page.getDocumentElement()));
+        focus = page.pressAccessKey('x');
+        Assert.assertTrue("accesskey", (focus == null) || (focus == page.getDocumentElement()));
 
         Assert.assertEquals("next", element, page.tabToNextElement());
         Assert.assertEquals("nextAgain", element, page.tabToNextElement());

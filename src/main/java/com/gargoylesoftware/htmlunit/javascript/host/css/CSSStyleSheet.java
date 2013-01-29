@@ -70,6 +70,7 @@ import org.w3c.dom.css.CSSRuleList;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -559,6 +560,13 @@ public class CSSStyleSheet extends SimpleScriptable {
         }
         else if ("disabled".equals(value)) {
             return (element instanceof DisabledElement && ((DisabledElement) element).isDisabled());
+        }
+        else if ("focus".equals(value)) {
+            final SgmlPage page = element.getPage();
+            if (page instanceof HtmlPage) {
+                final HtmlElement focus = ((HtmlPage) page).getFocusedElement();
+                return element == focus;
+            }
         }
         else if ("checked".equals(value)) {
             return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())

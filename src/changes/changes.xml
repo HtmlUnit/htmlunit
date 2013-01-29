@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
+            <action type="fix" dev="rbri" issue="1478">
+                Support for CSS pseudo selector ':focus' added.
+            </action>
+            <action type="fix" dev="rbri">
+                When simulating IE, the initial focus for a page is on the html element.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: fixed hanging problem (infinite loop) after Object function was called with a window as parameter.
             </action>
