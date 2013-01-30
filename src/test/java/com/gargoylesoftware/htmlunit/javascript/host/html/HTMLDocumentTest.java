@@ -1841,4 +1841,21 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Was producing "TypeError: Object's getDefaultValue() method returned an object" due to Delegator not delegating
+     * getDefaultValue(hint) to delegee when hint is null.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void equalsString() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "  alert('foo' == document);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

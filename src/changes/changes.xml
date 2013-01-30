@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
+            <action type="fix" dev="mguillem" issue="1479">
+                JavaScript: fixed exception occurring while testing window or document == "some string".
+            </action>
             <action type="fix" dev="rbri" issue="1478">
                 Support for CSS pseudo selector ':focus' added.
             </action>
