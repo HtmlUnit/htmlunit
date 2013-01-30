@@ -282,6 +282,13 @@ public class BrowserRunner extends Suite {
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
     public static @interface BuggyWebDriver {
+
+        /**
+         * The browsers with which the case is failing.
+         */
+        Browser[] value() default {
+            IE, FF, CHROME
+        };
     }
 
     /**

@@ -381,7 +381,7 @@ class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
     private boolean isBuggyWebDriver(final FrameworkMethod method) {
         final BuggyWebDriver buggyWebDriver = method.getAnnotation(BuggyWebDriver.class);
-        return buggyWebDriver != null;
+        return buggyWebDriver != null && isDefinedIn(buggyWebDriver.value());
     }
 
     private int getTries(final FrameworkMethod method) {
