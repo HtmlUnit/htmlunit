@@ -599,6 +599,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @BuggyWebDriver({ Browser.FF10, Browser.FF17 })
     public void focus() throws Exception {
         final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
