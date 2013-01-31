@@ -41,7 +41,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "li2", IE8 = "exception")
+    @Alerts(DEFAULT = { "li2", "li1", "li2", "li1", "li3", "li1" }, IE8 = "exception")
     public void nth_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
@@ -50,6 +50,43 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  if (document.querySelectorAll) {\n"
             + "    try {\n"
             + "      alert(document.querySelectorAll('li:nth-child(2)')[0].id);\n"
+            + "      alert(document.querySelectorAll('li:nth-child(n)')[0].id);\n"
+            + "      alert(document.querySelectorAll('li:nth-child(2n)')[0].id);\n"
+            + "      alert(document.querySelectorAll('li:nth-child(2n+1)')[0].id);\n"
+            + "      alert(document.querySelectorAll('li:nth-child(2n+1)')[1].id);\n"
+            + "      alert(document.querySelectorAll('li:nth-child(2n-1)')[0].id);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul>\n"
+            + "  <li id='li1'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "1", "li2", "2", "li1", "li3" }, IE8 = "exception")
+    public void nth_child_even_odd() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      alert(document.querySelectorAll('li:nth-child(even)').length);\n"
+            + "      alert(document.querySelectorAll('li:nth-child(eVen)')[0].id);\n"
+            + "      alert(document.querySelectorAll('li:nth-child(odd)').length);\n"
+            + "      alert(document.querySelectorAll('li:nth-child(OdD)')[0].id);\n"
+            + "      alert(document.querySelectorAll('li:nth-child(ODD)')[1].id);\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "}\n"

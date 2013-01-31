@@ -43,6 +43,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.css.sac.AttributeCondition;
@@ -724,22 +725,20 @@ public class CSSStyleSheet extends SimpleScriptable {
 
         // an+b
         final int nIndex = nth.indexOf('n');
-        final int a;
+        int a = 0;
         if (nIndex != -1) {
             String value = nth.substring(0, nIndex).trim();
             if (value.startsWith("+")) {
                 value = value.substring(1);
             }
-            a = Integer.parseInt(value);
+            a = NumberUtils.toInt(value, 1);
         }
-        else {
-            a = 0;
-        }
+
         String value = nth.substring(nIndex + 1).trim();
         if (value.startsWith("+")) {
             value = value.substring(1);
         }
-        final int b = Integer.parseInt(value);
+        final int b = NumberUtils.toInt(value, 0);
         if (a == 0) {
             return index == b;
         }
