@@ -164,6 +164,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMediaElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMeterElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptGroupElement;
@@ -300,8 +301,8 @@ public final class JavaScriptConfiguration {
         HTMLIFrameElement.class, HTMLImageElement.class, HTMLInputElement.class, HTMLInsElement.class,
         HTMLIsIndexElement.class, HTMLLIElement.class, HTMLLabelElement.class, HTMLLegendElement.class,
         HTMLLinkElement.class, HTMLListElement.class, HTMLMapElement.class,
-        HTMLMediaElement.class, HTMLMenuElement.class,
-        HTMLMetaElement.class, HTMLOListElement.class, HTMLObjectElement.class, HTMLOptGroupElement.class,
+        HTMLMediaElement.class, HTMLMenuElement.class, HTMLMetaElement.class, HTMLMeterElement.class,
+        HTMLOListElement.class, HTMLObjectElement.class, HTMLOptGroupElement.class,
         HTMLOptionElement.class, HTMLOptionsCollection.class, HTMLParagraphElement.class, HTMLParamElement.class,
         HTMLPreElement.class, HTMLProgressElement.class, HTMLQuoteElement.class, HTMLScriptElement.class,
         HTMLSelectElement.class, HTMLSourceElement.class, HTMLSpacerElement.class, HTMLSpanElement.class,

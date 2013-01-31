@@ -60,4 +60,23 @@ public class HtmlProgressTest extends WebDriverTestCase {
             }
         }
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "number70", "number100" },
+            FF3_6 = { }, IE = { })
+    public void properties() throws Exception {
+        final String html = "<html><body>\n"
+            + "<progress id='it' value='70' max='100'>70%</progress>\n"
+            + "<script>\n"
+            + "var elt = document.getElementById('it');\n"
+            + "if (window.HTMLProgressElement) {\n"
+            + "  alert(typeof(elt.value) + elt.value);\n"
+            + "  alert(typeof(elt.max) + elt.max);\n"
+            + "}\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

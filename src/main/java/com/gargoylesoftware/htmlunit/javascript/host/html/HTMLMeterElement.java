@@ -14,22 +14,22 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
-import com.gargoylesoftware.htmlunit.html.HtmlProgress;
+import com.gargoylesoftware.htmlunit.html.HtmlMeter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
- * The JavaScript object "HTMLProgressElement".
+ * The JavaScript object "HTMLMeterElement".
  *
  * @version $Revision$
- * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-@JsxClass(domClasses = HtmlProgress.class, browsers = @WebBrowser(value = FF, minVersion = 10))
-public class HTMLProgressElement extends HTMLElement {
+@JsxClass(domClasses = HtmlMeter.class, browsers = { @WebBrowser(value = FF, minVersion = 16), @WebBrowser(CHROME) })
+public class HTMLMeterElement extends HTMLElement {
 
     /**
      * The getter for the "value" property.
@@ -41,12 +41,60 @@ public class HTMLProgressElement extends HTMLElement {
     }
 
     /**
+     * The getter for the "min" property.
+     * @return the value
+     */
+    @JsxGetter
+    public double getMin() {
+        return getAttributeAsDouble("min", 0);
+    }
+
+    /**
      * The getter for the "max" property.
      * @return the value
      */
     @JsxGetter
     public double getMax() {
         return getAttributeAsDouble("max", 1);
+    }
+
+    /**
+     * The getter for the "low" property.
+     * @return the value
+     */
+    @JsxGetter
+    public double getLow() {
+        final double val = getAttributeAsDouble("low", Double.MAX_VALUE);
+        if (val == Double.MAX_VALUE) {
+            return getMin();
+        }
+        return val;
+    }
+
+    /**
+     * The getter for the "high" property.
+     * @return the value
+     */
+    @JsxGetter
+    public double getHigh() {
+        final double val = getAttributeAsDouble("high", Double.MIN_VALUE);
+        if (val == Double.MIN_VALUE) {
+            return getMax();
+        }
+        return val;
+    }
+
+    /**
+     * The getter for the "optimum" property.
+     * @return the value
+     */
+    @JsxGetter
+    public double getOptimum() {
+        final double val = getAttributeAsDouble("optimum", Double.MAX_VALUE);
+        if (val == Double.MAX_VALUE) {
+            return getValue();
+        }
+        return val;
     }
 
     private double getAttributeAsDouble(final String attributeName, final double defaultValue) {

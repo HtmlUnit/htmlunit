@@ -72,7 +72,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlItalic.TAG_NAME, HtmlKeyboard.TAG_NAME, HtmlLabel.TAG_NAME,
             HtmlLegend.TAG_NAME, HtmlListing.TAG_NAME, HtmlListItem.TAG_NAME,
             HtmlLink.TAG_NAME, HtmlMap.TAG_NAME, HtmlMarquee.TAG_NAME,
-            HtmlMenu.TAG_NAME, HtmlMeta.TAG_NAME, HtmlMultiColumn.TAG_NAME,
+            HtmlMenu.TAG_NAME, HtmlMeta.TAG_NAME, HtmlMeter.TAG_NAME, HtmlMultiColumn.TAG_NAME,
             HtmlNoBreak.TAG_NAME, HtmlNoEmbed.TAG_NAME, HtmlNoFrames.TAG_NAME,
             HtmlNoScript.TAG_NAME, HtmlObject.TAG_NAME, HtmlOrderedList.TAG_NAME,
             HtmlOptionGroup.TAG_NAME, HtmlOption.TAG_NAME, HtmlParagraph.TAG_NAME,
@@ -351,6 +351,14 @@ class DefaultElementFactory implements ElementFactory {
         }
         else if (tagName.equals(HtmlMeta.TAG_NAME)) {
             element = new HtmlMeta(namespaceURI, qualifiedName, page, attributeMap);
+        }
+        else if (tagName.equals(HtmlMeter.TAG_NAME)) {
+            if (page.getWebClient().getBrowserVersion().hasFeature(HTML5_TAGS)) {
+                element = new HtmlMeter(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
         }
         else if (tagName.equals(HtmlMultiColumn.TAG_NAME)) {
             element = new HtmlMultiColumn(namespaceURI, qualifiedName, page, attributeMap);
