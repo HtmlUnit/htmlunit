@@ -332,10 +332,9 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxGetter
     public Object getForms() {
         if (forms_ == null) {
-            final HtmlPage page = getHtmlPage();
             final boolean allowFunctionCall = getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED);
 
-            forms_ = new HTMLCollection(page, false, "HTMLDocument.forms") {
+            forms_ = new HTMLCollection(getDomNodeOrDie(), false, "HTMLDocument.forms") {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     return node instanceof HtmlForm;
@@ -1983,7 +1982,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public StaticNodeList querySelectorAll(final String selectors) {
         try {
             final List<Node> nodes = new ArrayList<Node>();
-            for (final DomNode domNode : getHtmlPage().querySelectorAll(selectors)) {
+            for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
                 nodes.add((Node) domNode.getScriptObject());
             }
             return new StaticNodeList(nodes, this);
@@ -2002,7 +2001,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
     public Node querySelector(final String selectors) {
         try {
-            final DomNode node = getHtmlPage().querySelector(selectors);
+            final DomNode node = getDomNodeOrDie().querySelector(selectors);
             if (node != null) {
                 return (Node) node.getScriptObject();
             }
