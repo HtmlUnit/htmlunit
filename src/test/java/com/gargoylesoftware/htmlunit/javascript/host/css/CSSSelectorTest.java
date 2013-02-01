@@ -170,6 +170,36 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "1", "[object HTMLBodyElement]", "1", "0" })
+    public void childSelector_html_body() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      alert(document.querySelectorAll('html > body').length);\n"
+            + "      alert(document.querySelectorAll('html > body')[0]);\n"
+            + "      alert(document.querySelectorAll('  \\t\\r\\n  html > body  \\t\\r\\n  ').length);\n"
+
+            + "      elem = document.getElementById('root');\n"
+            + "      alert(elem.querySelectorAll('html > body').length);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='root'>\n"
+            + "</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("exception")
     public void nth_child_no_argument() throws Exception {
         final String html
@@ -387,7 +417,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "li3", IE8 = "exception")
+    @Alerts(DEFAULT = { "li3", "2", "li1", "li3" }, IE8 = "exception")
     public void nth_last_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
@@ -396,6 +426,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  if (document.querySelectorAll) {\n"
             + "    try {\n"
             + "      alert(document.querySelectorAll('li:nth-last-child(1)')[0].id);\n"
+
+            + "      alert(document.querySelectorAll('li:nth-last-child(odd)').length);\n"
+            + "      alert(document.querySelectorAll('li:nth-last-child(odd)')[0].id);\n"
+            + "      alert(document.querySelectorAll('li:nth-last-child(odd)')[1].id);\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "}\n"
@@ -406,6 +440,52 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <li id='li2'></li>\n"
             + "  <li id='li3'></li>\n"
             + "</ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "2", "div1", "div3", "2", "div1", "div3", "2", "div1", "div3", "0" },
+            IE8 = "exception")
+    public void nth_last_child2() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      alert(document.querySelectorAll('.nthchild1 > :nth-child(odd)').length);\n"
+            + "      alert(document.querySelectorAll('.nthchild1 > :nth-child(odd)')[0].id);\n"
+            + "      alert(document.querySelectorAll('.nthchild1 > :nth-child(odd)')[1].id);\n"
+
+            + "      elem = document.getElementById('root');\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)').length);\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)')[0].id);\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)')[1].id);\n"
+
+            + "      elem = document.getElementById('parent');\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)').length);\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)')[0].id);\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)')[1].id);\n"
+
+            + "      elem = document.getElementById('div1');\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)').length);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='root'>\n"
+            + " <div id='parent' class='nthchild1'>\n"
+            + "  <div id='div1'>1</div>\n"
+            + "  <div id='div2'>2</div>\n"
+            + "  <div id='div3'>3</div>\n"
+            + " </div>\n"
+            + "</div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
