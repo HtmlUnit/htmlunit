@@ -629,6 +629,15 @@ public class HTMLElementsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("1")
+    public void elementClosesItself_meter() throws Exception {
+        loadPageWithAlerts2(elementClosesItself("meter"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "1", IE = "0")
     @NotYetImplemented(IE)
     public void elementClosesItself_multicol() throws Exception {
