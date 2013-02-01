@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
@@ -27,7 +25,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -432,14 +429,13 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
     /**
      * This test is used to check that when a form having a target is submitted
      * and if the target is an iframe and the iframe has an onload event, then
-     * the onload event is called. This is a Firefox-specific test.
+     * the onload event is called.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(FF)
-    @Alerts({ "submit form", "submitted ok" })
-    public void submitWithTargetOnIFrameAndOnload_bubbling_FF() throws Exception {
+    @Alerts(FF = { "submit form", "listener: submitted ok" }, IE = { "submit form", "eventHandler: submitted ok" })
+    public void submitWithTargetOnIFrameAndOnload_bubbling() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
             + "<p>hello world</p>\n"
@@ -455,9 +451,16 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "  // is called for the submit and not for the page creation\n"
             + "  var t = setTimeout(function() {\n"
             + "    clearTimeout(t);\n"
-            + "    iframe.addEventListener('load', function() {\n"
-            + "      alert('submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
-            + "    }, true);\n"
+            + "    if (iframe.addEventListener) {\n"
+            + "      iframe.addEventListener('load', function() {\n"
+            + "        alert('listener: submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
+            + "      }, true);\n"
+            + "    }\n"
+            + "    else {\n"
+            + "      iframe.attachEvent('onload', function() {\n"
+            + "        alert('eventHandler: submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
+            + "      });\n"
+            + "    }\n"
             + "    alert('submit form');\n"
             + "    form.submit();\n"
             + "  }, 1000);\n"
@@ -469,46 +472,4 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
         getMockWebConnection().setDefaultResponse(html2);
         loadPageWithAlerts(html, getDefaultUrl(), 5000);
     }
-
-    /**
-     * This test is used to check that when a form having a target is submitted
-     * and if the target is an iframe and the iframe has an onload event, then
-     * the onload event is called. This is an IE-specific test.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(IE)
-    @Alerts({ "submit form", "submitted ok" })
-    public void submitWithTargetOnIFrameAndOnload_attached_IE() throws Exception {
-        final String html
-            = "<html><head><title>first</title></head><body>\n"
-            + "<p>hello world</p>\n"
-            + "<form id='form1' name='form1' method='get' action='" + URL_SECOND + "' target='frame'>\n"
-            + "    <input type='button' name='button1' />\n"
-            + "</form>\n"
-            + "<div style='display:none;'><iframe name='frame' id='frame'></iframe></div>\n"
-            + "<script>\n"
-            + "  // Get the form and set the target\n"
-            + "  var form = document.getElementById('form1');\n"
-            + "  var iframe = document.getElementById('frame');\n"
-            + "  // Finally submit the form with a delay to make sure that the onload of the iframe\n"
-            + "  // is called for the submit and not for the page creation\n"
-            + "  var t = setTimeout(function() {\n"
-            + "    clearTimeout(t);\n"
-            + "    iframe.attachEvent('onload', function() {\n"
-            + "      alert('submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
-            + "    });\n"
-            + "    alert('submit form');\n"
-            + "    form.submit();\n"
-            + "  }, 1000);\n"
-            + "</script>\n"
-            + "</body></html>";
-        final String html2
-            = "<?xml version='1.0'?>\n"
-            + "<html xmlns='http://www.w3.org/1999/xhtml'><body id='ok'><span id='result'>OK</span></html>";
-        getMockWebConnection().setDefaultResponse(html2);
-        loadPageWithAlerts(html, getDefaultUrl(), 5000);
-    }
-
 }
