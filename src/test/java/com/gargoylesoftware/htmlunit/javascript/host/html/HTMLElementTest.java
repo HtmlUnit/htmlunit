@@ -2177,7 +2177,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF3_6 = "exception",
-            DEFAULT = { "true", "true", "true", "false", "false", "false", "false", "true" })
+            DEFAULT = { "true", "true", "true", "false", "false", "false", "false", "true", "true", "false", "false" })
     public void contains() throws Exception {
         final String html
             = "<html><head>\n"
@@ -2186,6 +2186,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "try {\n"
             + "  var div1 = document.getElementById('div1');\n"
             + "  var div2 = document.getElementById('div2');\n"
+            + "  var text = div2.firstChild;\n"
             + "  var div3 = document.getElementById('div3');\n"
             + "  alert(div1.contains(div1));\n"
             + "  alert(div1.contains(div2));\n"
@@ -2195,11 +2196,14 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  alert(div3.contains(div1));\n"
             + "  alert(div4.contains(div1));\n"
             + "  alert(div2.contains(div3));\n"
+            + "  alert(div2.contains(text));\n"
+            + "  alert(div3.contains(text));\n"
+            + "  alert(text.contains(div3));\n"
             + "} catch(e) { alert('exception'); }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='div1'>\n"
-            + "  <div id='div2'>\n"
+            + "  <div id='div2'>hello\n"
             + "    <div id='div3'>\n"
             + "    </div>\n"
             + "  </div>\n"
@@ -2207,6 +2211,21 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<div id='div4'>\n"
             + "</div>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void contains_invalid_argument() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "try {\n"
+            + "  alert(document.body.contains([]));\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
 
         loadPageWithAlerts2(html);
     }

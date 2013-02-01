@@ -853,7 +853,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final StringBuilder buf = new StringBuilder();
 
         final String tagName = getTagName();
-        boolean isPlain = "SCRIPT".equals(tagName) || "STYLE".equals(tagName);
+        final boolean isPlain = "SCRIPT".equals(tagName) || "STYLE".equals(tagName);
 
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printChildren(buf, getDomNodeOrDie(), !isPlain);
@@ -1961,21 +1961,6 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         range.setParentScope(getParentScope());
         range.setPrototype(getPrototype(range.getClass()));
         return range;
-    }
-
-    /**
-     * Checks whether the given element is contained within this object.
-     * @param element element object that specifies the element to check
-     * @return true if the element is contained within this object
-     */
-    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
-    public boolean contains(final HTMLElement element) {
-        for (HTMLElement parent = element; parent != null; parent = (HTMLElement) parent.getParentElement()) {
-            if (this == parent) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

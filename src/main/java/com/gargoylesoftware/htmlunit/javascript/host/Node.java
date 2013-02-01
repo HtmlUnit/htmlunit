@@ -1023,4 +1023,21 @@ public class Node extends SimpleScriptable {
         return null;
     }
 
+    /**
+     * Checks whether the given element is contained within this object.
+     * @param element element object that specifies the element to check
+     * @return true if the element is contained within this object
+     */
+    @JsxFunction({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    public boolean contains(final Object element) {
+        if (!(element instanceof Node)) {
+            throw Context.reportRuntimeError("Could not convert JavaScript argument arg 0");
+        }
+        for (Node parent = (Node) element; parent != null; parent = parent.getParentElement()) {
+            if (this == parent) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
