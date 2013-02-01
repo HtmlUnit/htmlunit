@@ -458,22 +458,22 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  if (document.querySelectorAll) {\n"
             + "    try {\n"
-            + "      alert(document.querySelectorAll('.nthchild1 > :nth-child(odd)').length);\n"
-            + "      alert(document.querySelectorAll('.nthchild1 > :nth-child(odd)')[0].id);\n"
-            + "      alert(document.querySelectorAll('.nthchild1 > :nth-child(odd)')[1].id);\n"
+            + "      alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
+            + "      alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
+            + "      alert(document.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
 
             + "      elem = document.getElementById('root');\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)').length);\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)')[0].id);\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)')[1].id);\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
 
             + "      elem = document.getElementById('parent');\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)').length);\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)')[0].id);\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)')[1].id);\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[0].id);\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)')[1].id);\n"
 
             + "      elem = document.getElementById('div1');\n"
-            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-child(odd)').length);\n"
+            + "      alert(elem.querySelectorAll('.nthchild1 > :nth-last-child(odd)').length);\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "}\n"
@@ -815,22 +815,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "id1", "1", "id1" })
+    @Alerts(DEFAULT = { "1", "id1", }, IE = "exception")
     public void enabled() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll('input:enabled');\n"
-            + "      alert(found.length);\n"
-            + "      alert(found[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
-            + "\n"
-            + "  document.getElementById('id2').focus();\n"
-            + "\n"
             + "  if (document.querySelectorAll) {\n"
             + "    try {\n"
             + "      found = document.querySelectorAll('input:enabled');\n"
@@ -848,27 +838,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "1", "id2", "1", "id2" })
+    @Alerts(DEFAULT = { "1", "id2" }, IE = "exception")
     public void disabled() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
             + "<script>\n"
             + "function test() {\n"
-            + "  if (document.querySelectorAll) {\n"
-            + "    try {\n"
-            + "      found = document.querySelectorAll('input:disabled');\n"
-            + "      alert(found.length);\n"
-            + "      alert(found[0].id);\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "  }\n"
-            + "\n"
-            + "  document.getElementById('id2').focus();\n"
-            + "\n"
             + "  if (document.querySelectorAll) {\n"
             + "    try {\n"
             + "      found = document.querySelectorAll('input:disabled');\n"
