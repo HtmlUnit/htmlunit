@@ -14,9 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
+import org.w3c.css.sac.CSSException;
+
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
@@ -107,4 +116,47 @@ public class DocumentFragment extends Node {
     public Object createTextNode(final String newData) {
         return getDocument().createTextNode(newData);
     }
+
+    /**
+     * Retrieves all element nodes from descendants of the starting element node that match any selector
+     * within the supplied selector strings.
+     * The NodeList object returned by the querySelectorAll() method must be static, not live.
+     * @param selectors the selectors
+     * @return the static node list
+     */
+    @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    public StaticNodeList querySelectorAll(final String selectors) {
+        try {
+            final List<Node> nodes = new ArrayList<Node>();
+            for (final DomNode domNode : getDomNodeOrDie().querySelectorAll(selectors)) {
+                nodes.add((Node) domNode.getScriptObject());
+            }
+            return new StaticNodeList(nodes, this);
+        }
+        catch (final CSSException e) {
+            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+                    + selectors + "' error: " + e.getMessage() + ").");
+        }
+    }
+
+    /**
+     * Returns the first element within the document that matches the specified group of selectors.
+     * @param selectors the selectors
+     * @return null if no matches are found; otherwise, it returns the first matching element
+     */
+    @JsxFunction({ @WebBrowser(value = IE, minVersion = 8), @WebBrowser(FF) })
+    public Node querySelector(final String selectors) {
+        try {
+            final DomNode node = getDomNodeOrDie().querySelector(selectors);
+            if (node != null) {
+                return (Node) node.getScriptObject();
+            }
+            return null;
+        }
+        catch (final CSSException e) {
+            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+                    + selectors + "' error: " + e.getMessage() + ").");
+        }
+    }
+
 }

@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class DocumentFragmentTest extends WebDriverTestCase {
@@ -86,6 +87,37 @@ public class DocumentFragmentTest extends WebDriverTestCase {
             + "  <body onload='test()'>\n"
             + "  </body>\n"
             + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "1", "DIV", "DIV" })
+    public void querySelector() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var frag = document.createDocumentFragment();\n"
+            + "  var d = document.createElement('div');\n"
+            + "  frag.appendChild(d);\n"
+
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      alert(frag.querySelectorAll('div').length);\n"
+            + "      alert(frag.querySelectorAll('div')[0].tagName);\n"
+            + "      alert(frag.querySelector('div').tagName);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='root'>\n"
+            + "</div>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
