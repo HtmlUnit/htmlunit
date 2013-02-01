@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLStyleElementTest extends WebDriverTestCase {
@@ -73,6 +74,35 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "    rules = doc.styleSheets[0].rules;\n"
             + "  alert(rules.length);\n"
             + "}</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ ".a > .t { }", ".b > .t { }", ".c > .t { }" })
+    public void innerHtml() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>\n"
+
+            + "<style id='style_none'>.a > .t { }</style>\n"
+            + "<style type='text/test' id='style_text'>.b > .t { }</style>\n"
+            + "<style type='text/html' id='style_html'>.c > .t { }</style>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  style = document.getElementById('style_none');\n"
+            + "  alert(style.innerHTML);\n"
+            + "  style = document.getElementById('style_text');\n"
+            + "  alert(style.innerHTML);\n"
+            + "  style = document.getElementById('style_html');\n"
+            + "  alert(style.innerHTML);\n"
+            + "}\n"
+            + "</script>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
+            <action type="fix" dev="rbri">
+                Method innerHTML does not encode entities for style tags.
+            </action>
             <action type="add" dev="mguillem">
                 Initial support for HtmlMeter (FF 17).
             </action>

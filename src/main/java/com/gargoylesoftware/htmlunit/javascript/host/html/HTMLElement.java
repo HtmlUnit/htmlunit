@@ -851,8 +851,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     @JsxGetter
     public String getInnerHTML() {
         final StringBuilder buf = new StringBuilder();
+
+        final String tagName = getTagName();
+        boolean isPlain = "SCRIPT".equals(tagName) || "STYLE".equals(tagName);
+
         // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printChildren(buf, getDomNodeOrDie(), !"SCRIPT".equals(getTagName()));
+        printChildren(buf, getDomNodeOrDie(), !isPlain);
         return buf.toString();
     }
 
