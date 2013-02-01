@@ -4364,7 +4364,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         final String s = value.get(element);
         if (s.endsWith("%") || (s.isEmpty() && element instanceof HTMLHtmlElement)) {
             final int i = NumberUtils.toInt(TO_INT_PATTERN.matcher(s).replaceAll("$1"), 100);
-            final Element parent = (Element) element.getParentElement();
+            final Element parent = element.getParentElement();
             final int absoluteValue = (parent == null) ? value.getWindowDefaultValue() : pixelValue(parent, value);
             return (int) ((i / 100D) * absoluteValue);
         }
