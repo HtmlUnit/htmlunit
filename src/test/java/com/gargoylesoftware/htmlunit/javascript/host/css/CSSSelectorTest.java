@@ -340,6 +340,32 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({ "0" })
+    public void prefixAttributeEmpty() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    var list = document.querySelectorAll('[id^=\"\"]');\n"
+            + "    alert(list.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='something'></ul>\n"
+            + "  <p></p>\n"
+            + "  <ul id='thing1'></ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({ "1", "something" })
     public void suffixAttribute() throws Exception {
         final String html = "<html><head><title>First</title>\n"
@@ -350,6 +376,32 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "    var list = document.querySelectorAll('[id$=\"thing\"]');\n"
             + "    alert(list.length);\n"
             + "    alert(list[0].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='something'></ul>\n"
+            + "  <p></p>\n"
+            + "  <ul id='thing2'></ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "0" })
+    public void suffixAttributeEmpty() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    var list = document.querySelectorAll('[id$=\"\"]');\n"
+            + "    alert(list.length);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -391,6 +443,32 @@ public class CSSSelectorTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "0" })
+    public void substringAttributeEmpty() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    var list = document.querySelectorAll('[id*=\"\"]');\n"
+            + "    alert(list.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='something'></ul>\n"
+            + "  <p></p>\n"
+            + "  <ul id='thing2'></ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
     /**
      * @throws Exception if an error occurs
      */

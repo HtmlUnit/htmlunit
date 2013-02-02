@@ -436,15 +436,18 @@ public class CSSStyleSheet extends SimpleScriptable {
     static boolean selects(final BrowserVersion browserVersion, final Condition condition, final DomElement element) {
         if (condition instanceof PrefixAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
-            return element.getAttribute(ac.getLocalName()).startsWith(ac.getValue());
+            final String value = ac.getValue();
+            return !"".equals(value) && element.getAttribute(ac.getLocalName()).startsWith(value);
         }
         if (condition instanceof SuffixAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
-            return element.getAttribute(ac.getLocalName()).endsWith(ac.getValue());
+            final String value = ac.getValue();
+            return !"".equals(value) && element.getAttribute(ac.getLocalName()).endsWith(value);
         }
         if (condition instanceof SubstringAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
-            return element.getAttribute(ac.getLocalName()).contains(ac.getValue());
+            final String value = ac.getValue();
+            return !"".equals(value) && element.getAttribute(ac.getLocalName()).contains(value);
         }
         switch (condition.getConditionType()) {
             case Condition.SAC_ID_CONDITION:
