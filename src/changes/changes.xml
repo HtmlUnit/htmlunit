@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
+            <action type="fix" dev="rbri">
+                Support for CSS pseudo selector ':target' added.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: add DocumentFragment.querySelectorAll()/DocumentFragment.querySelector().
             </action>

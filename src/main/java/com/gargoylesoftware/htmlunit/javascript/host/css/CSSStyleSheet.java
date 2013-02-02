@@ -686,6 +686,10 @@ public class CSSStyleSheet extends SimpleScriptable {
         else if ("empty".equals(value)) {
             return element.getFirstChild() == null;
         }
+        else if ("target".equals(value)) {
+            final String ref = element.getPage().getUrl().getRef();
+            return StringUtils.isNotBlank(ref) && ref.equals(element.getId());
+        }
         else if (value.startsWith("not(")) {
             final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
             final AtomicBoolean errorOccured = new AtomicBoolean(false);

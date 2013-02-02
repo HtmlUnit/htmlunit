@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Tests for CSS selectors.
@@ -340,7 +341,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0" })
+    @Alerts("0")
     public void prefixAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
@@ -393,7 +394,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0" })
+    @Alerts("0")
     public void suffixAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
@@ -447,7 +448,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0" })
+    @Alerts("0")
     public void substringAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
@@ -501,7 +502,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "0" })
+    @Alerts("0")
     public void oneOfAttributeEmpty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
@@ -999,5 +1000,87 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "1", "id2" }, IE = "exception")
+    public void target() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      found = document.querySelectorAll(':target');\n"
+            + "      alert(found.length);\n"
+            + "      alert(found[0].id);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='id1' >\n"
+            + "  <input id='id2'>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        loadPageWithAlerts2(UrlUtils.getUrlWithNewRef(URL_FIRST, "id2"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "0" }, IE = "exception")
+    public void targetNoHash() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      found = document.querySelectorAll(':target');\n"
+            + "      alert(found.length);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='id1' >\n"
+            + "  <input id='id2'>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "0" }, IE = "exception")
+    public void targetUnknown() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    try {\n"
+            + "      found = document.querySelectorAll(':target');\n"
+            + "      alert(found.length);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='id1' >\n"
+            + "  <input id='id2'>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        loadPageWithAlerts2(UrlUtils.getUrlWithNewRef(URL_FIRST, "id3"));
     }
 }
