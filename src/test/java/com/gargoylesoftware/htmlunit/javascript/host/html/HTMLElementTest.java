@@ -519,7 +519,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("if (1 > 2 & 3 < 2) willNotHappen('yo');")
+    @Alerts(DEFAULT = "if (1 > 2 & 3 < 2) willNotHappen('yo');",
+            IE = "\r\nif (1 > 2 & 3 < 2) willNotHappen('yo');")
     public void getInnerHTML() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -3343,7 +3344,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<meter>", IE = "<METER>", FF3_6 = "undefined", FF10 = "undefined")
+    @Alerts(DEFAULT = "<meter></meter>", FF3_6 = "undefined", FF10 = "undefined")
     public void outerHTML_meter() throws Exception {
         loadPageWithAlerts2(outerHTML("meter"));
     }
