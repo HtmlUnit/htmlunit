@@ -728,10 +728,15 @@ public class CSSStyleSheet extends SimpleScriptable {
         int a = 0;
         if (nIndex != -1) {
             String value = nth.substring(0, nIndex).trim();
-            if (value.startsWith("+")) {
-                value = value.substring(1);
+            if ("-".equals(value)) {
+                a = -1;
             }
-            a = NumberUtils.toInt(value, 1);
+            else {
+                if (value.startsWith("+")) {
+                    value = value.substring(1);
+                }
+                a = NumberUtils.toInt(value, 1);
+            }
         }
 
         String value = nth.substring(nIndex + 1).trim();
@@ -740,9 +745,11 @@ public class CSSStyleSheet extends SimpleScriptable {
         }
         final int b = NumberUtils.toInt(value, 0);
         if (a == 0) {
-            return index == b;
+            return index == b && b > 0;
         }
-        return (index - b) % a == 0;
+
+        final double n = (index - b) / (double)a;
+        return (n >= 0) && (n % 1 == 0);
     }
 
     /**

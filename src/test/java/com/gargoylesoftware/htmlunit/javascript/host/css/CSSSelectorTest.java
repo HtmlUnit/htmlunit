@@ -105,7 +105,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "li2", "li1", "li2", "li1", "li3", "li1" }, IE8 = "exception")
+    @Alerts(DEFAULT = { "li2", "li1", "li2", "li1", "li3", "li1", "2", "li1", "li2" }, IE8 = "exception")
     public void nth_child() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
@@ -119,6 +119,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "      alert(document.querySelectorAll('li:nth-child(2n+1)')[0].id);\n"
             + "      alert(document.querySelectorAll('li:nth-child(2n+1)')[1].id);\n"
             + "      alert(document.querySelectorAll('li:nth-child(2n-1)')[0].id);\n"
+
+            + "      alert(document.querySelectorAll('li:nth-child(-n+2)').length);\n"
+            + "      alert(document.querySelectorAll('li:nth-child(-n+2)')[0].id);\n"
+            + "      alert(document.querySelectorAll('li:nth-child(-n+2)')[1].id);\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "}\n"
