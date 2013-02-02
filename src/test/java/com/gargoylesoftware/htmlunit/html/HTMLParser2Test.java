@@ -891,6 +891,16 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @Test
     @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
     @NotYetImplemented(IE)
+    public void childNodes_meter() throws Exception {
+        loadPageWithAlerts2(createHtmlForChildNodes("meter"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "2", "2", "2", "4", "4", "3" }, FF = { "3", "2", "2", "3", "2", "2" })
+    @NotYetImplemented(IE)
     public void childNodes_multicol() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("multicol"));
     }

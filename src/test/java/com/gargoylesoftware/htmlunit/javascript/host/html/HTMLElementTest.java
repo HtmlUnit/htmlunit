@@ -3343,6 +3343,15 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "<meter>", IE = "<METER>", FF3_6 = "undefined", FF10 = "undefined")
+    public void outerHTML_meter() throws Exception {
+        loadPageWithAlerts2(outerHTML("meter"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "<multicol></multicol>", FF3_6 = "undefined", FF10 = "undefined")
     public void outerHTML_multicol() throws Exception {
         loadPageWithAlerts2(outerHTML("multicol"));
