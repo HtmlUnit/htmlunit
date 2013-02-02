@@ -522,8 +522,12 @@ public class CSSStyleSheet extends SimpleScriptable {
         // || attribute.startsWith(condition + " ") || attriubte.endsWith(" " + condition)
         // || attribute.contains(" " + condition + " ");
 
-        final int attribLength = attribute.length();
         final int conditionLength = condition.length();
+        if (conditionLength < 1) {
+            return false;
+        }
+
+        final int attribLength = attribute.length();
         if (attribLength < conditionLength) {
             return false;
         }

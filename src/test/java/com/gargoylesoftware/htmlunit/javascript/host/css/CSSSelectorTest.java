@@ -443,7 +443,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
-
     /**
      * @throws Exception if an error occurs
      */
@@ -469,6 +468,61 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "2", "id1", "id2" })
+    public void oneOfAttribute() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    var list = document.querySelectorAll('[title~=\"w2\"]');\n"
+            + "    alert(list.length);\n"
+            + "    alert(list[0].id);\n"
+            + "    alert(list[1].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='id1' title='w1 w2 w3'></ul>\n"
+            + "  <p id='id2' title='w2'></p>\n"
+            + "  <ul id='id3' title='w1w2 w3'></ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "0" })
+    public void oneOfAttributeEmpty() throws Exception {
+        final String html = "<html><head><title>First</title>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=8'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  if (document.querySelectorAll) {\n"
+            + "    var list = document.querySelectorAll('[title~=\"\"]');\n"
+            + "    alert(list.length);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='id1' title='w1 w2 w3'></ul>\n"
+            + "  <p id='id2' title='w2'></p>\n"
+            + "  <ul id='id3' title='w1w2 w3'></ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
     /**
      * @throws Exception if an error occurs
      */
