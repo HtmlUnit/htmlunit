@@ -34,6 +34,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CHAR_UNDEF
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENT_LEFT_TOP_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_EXTENT_WITHOUT_PADDING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_REDUCE_WHITESPACES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
@@ -853,7 +854,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final StringBuilder buf = new StringBuilder();
 
         final String tagName = getTagName();
-        final boolean isPlain = "SCRIPT".equals(tagName) || "STYLE".equals(tagName);
+        boolean isPlain = "SCRIPT".equals(tagName);
+        if(isPlain && getBrowserVersion().hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE)) {
+            buf.append("\r\n");
+        }
+
+        isPlain = isPlain || "STYLE".equals(tagName);
 
         // we can't rely on DomNode.asXml because it adds indentation and new lines
         printChildren(buf, getDomNodeOrDie(), !isPlain);

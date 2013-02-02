@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLScriptElementTest extends WebDriverTestCase {
@@ -868,4 +869,34 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], webDriver.findElement(By.id("myTextarea")).getAttribute("value"));
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "function foo() { return a > b}", "function mce() { return a &gt; b}" },
+            IE = { "\r\nfunction foo() { return a > b}", "function mce() { return a &gt; b}" })
+    public void innerHtml() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>\n"
+
+            + "<script id='script1'>function foo() { return a > b}</script>\n"
+
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  script = document.getElementById('script1');\n"
+            + "  alert(script.innerHTML);\n"
+
+            + "  script = document.getElementById('mce');\n"
+            + "  alert(script.innerHTML);\n"
+
+            + "}\n"
+            + "</script>\n"
+            + "</head><body onload='doTest()'>\n"
+            // this is done by TinyMce
+            + "<script>document.write('<mce:script id=\"mce\">function mce() { return a > b}</mce:script>');</script>\n"
+
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
