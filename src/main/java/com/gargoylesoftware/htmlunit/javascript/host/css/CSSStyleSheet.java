@@ -759,7 +759,7 @@ public class CSSStyleSheet extends SimpleScriptable {
             return index == b && b > 0;
         }
 
-        final double n = (index - b) / (double)a;
+        final double n = (index - b) / (double) a;
         return (n >= 0) && (n % 1 == 0);
     }
 

@@ -855,7 +855,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         final String tagName = getTagName();
         boolean isPlain = "SCRIPT".equals(tagName);
-        if(isPlain && getBrowserVersion().hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE)) {
+        if (isPlain && getBrowserVersion().hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE)) {
             buf.append("\r\n");
         }
 
