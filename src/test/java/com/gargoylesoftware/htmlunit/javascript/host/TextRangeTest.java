@@ -317,7 +317,7 @@ public class TextRangeTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception", IE = "body")
+    @Alerts(DEFAULT = "exception", IE = "BODY")
     public void createRangeParentElement() throws Exception {
         final String html =
             "<html><body>\n"
