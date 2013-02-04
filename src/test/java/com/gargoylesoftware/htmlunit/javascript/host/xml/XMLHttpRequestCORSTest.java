@@ -50,6 +50,29 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
+    @Alerts(DEFAULT = "error", IE = { })
+    public void noCorsHeaderCallsErrorHandler() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "var xhr = " + XHRInstantiation_ + ";\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    var url = '" + URL_THIRD + "';\n"
+                + "    xhr.open('GET',  url, true);\n"
+                + "    xhr.onerror = function() { alert('error'); };\n"
+                + "    xhr.send();\n"
+                + "  } catch(e) { alert('exception'); }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
     @Alerts(IE = { "4", "200", "No Origin!" }, DEFAULT = { "4", "200", "§§URL§§" })
     public void simple() throws Exception {
         SimpleServerServlet.ACCESS_CONTROL_ALLOW_ORIGIN_ = "*";

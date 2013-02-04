@@ -336,6 +336,9 @@ public class XMLHttpRequest extends SimpleScriptable {
         if (webResponse_ == null) {
             return null; // send() has not been called
         }
+        if (webResponse_ instanceof NetworkErrorWebResponse) {
+            return null;
+        }
         final String contentType = webResponse_.getContentType();
         if (contentType.isEmpty() || contentType.contains("xml")) {
             try {
@@ -667,8 +670,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL " + webRequest_.getUrl());
                 }
-                Context.throwAsScriptRuntimeEx(
-                        new RuntimeException("No permitted \"Access-Control-Allow-Origin\" header."));
+                throw new IOException("No permitted \"Access-Control-Allow-Origin\" header.");
             }
         }
         catch (final IOException e) {
@@ -677,7 +679,12 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             webResponse_ = new NetworkErrorWebResponse(webRequest_);
             setState(STATE_COMPLETED, context);
-            processError(context);
+            if (async_) {
+                processError(context);
+            }
+            else {
+                Context.throwAsScriptRuntimeEx(e);
+            }
         }
     }
 

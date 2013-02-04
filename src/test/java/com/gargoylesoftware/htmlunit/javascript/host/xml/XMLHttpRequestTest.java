@@ -229,6 +229,34 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("received: null")
+    public void responseXML_siteNotExisting() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var request;\n"
+            + "  if (window.XMLHttpRequest)\n"
+            + "    request = new XMLHttpRequest();\n"
+            + "  else if (window.ActiveXObject)\n"
+            + "    request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+            + "try {\n"
+            + "  request.open('GET', 'http://this.doesnt.exist/foo.xml', false);\n"
+            + "  request.send('');\n"
+            + "} catch(e) {\n"
+            + "  alert('received: ' + request.responseXML);\n"
+            + "}\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void sendNull() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
