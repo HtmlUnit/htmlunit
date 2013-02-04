@@ -136,14 +136,14 @@ public class TextRange extends SimpleScriptable {
      * @return the parent element object if successful, or null otherwise.
      */
     @JsxFunction
-    public Object parentElement() {
+    public Node parentElement() {
         final org.w3c.dom.Node parent = range_.getCommonAncestorContainer();
         if (null == parent) {
             if (null == range_.getStartContainer() || null == range_.getEndContainer()) {
                 try {
                     final Window window = (Window) getParentScope();
                     final HtmlPage page = window.getDomNodeOrDie();
-                    return page.getBody();
+                    return (Node) getScriptableFor(page.getBody());
                 }
                 catch (final Exception e) {
                     // ok bad luck
@@ -151,7 +151,7 @@ public class TextRange extends SimpleScriptable {
             }
             return null;
         }
-        return getScriptableFor(parent);
+        return (Node) getScriptableFor(parent);
     }
 
     /**
