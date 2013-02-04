@@ -29,8 +29,10 @@ import java.util.List;
 import org.junit.runner.Runner;
 import org.junit.runner.manipulation.Filter;
 import org.junit.runner.manipulation.NoTestsRemainException;
+import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.Suite;
+import org.junit.runners.model.Statement;
 
 /**
  * The custom runner <code>BrowserRunner</code> implements browser parameterized
@@ -122,6 +124,11 @@ public class BrowserRunner extends Suite {
         if (BrowserNoneClassRunner.containsTestMethods(klass)) {
             runners_.add(new BrowserNoneClassRunner(klass));
         }
+    }
+
+    @Override
+    protected Statement classBlock(final RunNotifier notifier) {
+        return childrenInvoker(notifier);
     }
 
     /**
