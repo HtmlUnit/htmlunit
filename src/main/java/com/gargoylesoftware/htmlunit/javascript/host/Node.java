@@ -946,8 +946,11 @@ public class Node extends SimpleScriptable {
      * @see org.w3c.dom.Node#compareDocumentPosition(org.w3c.dom.Node)
      */
     @JsxFunction(@WebBrowser(FF))
-    public short compareDocumentPosition(final Node node) {
-        return getDomNodeOrDie().compareDocumentPosition(node.getDomNodeOrDie());
+    public short compareDocumentPosition(final Object node) {
+        if (!(node instanceof Node)) {
+            throw Context.reportRuntimeError("Could not convert JavaScript argument arg 0");
+        }
+        return getDomNodeOrDie().compareDocumentPosition(((Node) node).getDomNodeOrDie());
     }
 
     /**

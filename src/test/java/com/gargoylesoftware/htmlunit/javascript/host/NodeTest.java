@@ -617,7 +617,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Browsers(FF)
-    @Alerts({ "0", "20", "20", "4", "10", "10", "2", "20" })
+    @Alerts({ "0", "20", "20", "4", "10", "10", "2", "20", "exception" })
     public void compareDocumentPosition() throws Exception {
         final String html
             = "<html><head>\n"
@@ -634,6 +634,9 @@ public class NodeTest extends WebDriverTestCase {
             + "  alert(div3.compareDocumentPosition(div1));\n"
             + "  alert(div4.compareDocumentPosition(div1));\n"
             + "  alert(div2.compareDocumentPosition(div3));\n"
+            + "  try {\n"
+            + "    alert(div2.compareDocumentPosition({}));\n"
+            + "  } catch(e) { alert('exception'); }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='div1'>\n"
