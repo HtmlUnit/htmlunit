@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -21,6 +23,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -152,6 +155,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF3_6 = {"", "http://www.foo.com/blah.gif", "§§URL§§blah.gif" },
             DEFAULT = {"", "http://www.foo.com/blah.gif", "blah.gif" })
+    @NotYetImplemented(FF17)
     public void background() throws Exception {
         final String html =
             "<html>\n"

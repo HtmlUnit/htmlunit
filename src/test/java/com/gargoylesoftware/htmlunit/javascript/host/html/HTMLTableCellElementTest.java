@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -151,6 +152,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Alerts(FF3_6 = { "top", "baseline", "3", "middle", "8", "bottom" },
             FF = { "top", "baseline", "3", "middle", "8", "BOTtom" },
             IE = { "top", "baseline", "top", "error", "middle", "baseline", "bottom" })
+    @NotYetImplemented(FF17)
     public void vAlign() throws Exception {
         final String html
             = "<html><body><table>\n"
@@ -444,6 +446,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
     @Alerts(IE = { "100", "200", "400", "error", "400", "error", "400", "100", "10%" },
             FF3_6 = { "100", "200", "400", "abc", "0", "100", "10%" },
             FF = { "100px", "200px", "400", "abc", "-5", "100.2", "10%" })
+    @NotYetImplemented(FF17)
     public void width() throws Exception {
         final String html =
             "<html>\n"

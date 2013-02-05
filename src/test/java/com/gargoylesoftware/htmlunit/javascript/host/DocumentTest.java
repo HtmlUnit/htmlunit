@@ -1974,27 +1974,6 @@ public class DocumentTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF = { "error", "error", "true", "true", "true" },
-            IE = { "true", "true", "true", "true", "true" })
-    public void queryCommandEnabled() throws Exception {
-        final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe><script>\n"
-            + "function x() {\n"
-            + "var d = window.frames['f'].document;\n"
-            + "try { alert(d.queryCommandEnabled('SelectAll')); } catch(e) { alert('error'); }\n"
-            + "try { alert(d.queryCommandEnabled('sElectaLL')); } catch(e) { alert('error'); }\n"
-            + "d.designMode='on';\n"
-            + "alert(d.queryCommandEnabled('SelectAll'));\n"
-            + "alert(d.queryCommandEnabled('selectall'));\n"
-            + "alert(d.queryCommandEnabled('SeLeCtALL'));}\n"
-            + "</script></body></html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
      * Minimal test for <tt>execCommand</tt>.
      * @throws Exception if the test fails
      */

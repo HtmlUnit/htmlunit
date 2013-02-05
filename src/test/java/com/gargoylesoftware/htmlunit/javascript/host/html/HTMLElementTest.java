@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -171,6 +171,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(IE = "exception",
             FF17 = { "null", "bla", "true" },
             DEFAULT = { "", "bla", "true" })
+    @NotYetImplemented(FF17)
     public void getSetAttributeNS() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -281,6 +282,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             "specified=true",
             "value=bleh"
             })
+    @NotYetImplemented(FF17)
     public void getAttributeNode() throws Exception {
         final String html =
               "<html>\n"
@@ -769,6 +771,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             FF3_6 = { "Outer = undefined" },
             FF10 = { "Outer = undefined" },
             FF17 = { "Outer = <p id=\"myNode\">New  cell value\n\n</p>" })
+    @NotYetImplemented(FF17)
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
         loadPageWithAlerts2(html);
@@ -804,6 +807,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddTextToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "New  cell value");
         loadPageWithAlerts2(html);
@@ -820,6 +824,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddTextToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "New  cell value");
         loadPageWithAlerts2(html);
@@ -836,6 +841,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddBlockToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div>test</div>");
         loadPageWithAlerts2(html);
@@ -852,6 +858,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddBlockToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "<div>test</div>");
         loadPageWithAlerts2(html);
@@ -868,6 +875,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddInlineToInline() throws Exception {
         final String html = createPageForSetOuterHTML("span", "<span>test</span>");
         loadPageWithAlerts2(html);
@@ -884,6 +892,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddInlineToBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<span>test</span>");
         loadPageWithAlerts2(html);
@@ -900,6 +909,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br>");
         loadPageWithAlerts2(html);
@@ -913,6 +923,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(IE = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" },
             FF17 = { "-0", "1", "2", "3", "-4", "5", "6", "7", "8", "9", "10", "11" },
             DEFAULT = { "-0", "-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "-9", "-10", "-11" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLToReadOnly() throws Exception {
         final String html =  "<html>\n"
             + "<head>\n"
@@ -959,6 +970,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <div>test</div>" },
             FF = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddBlockToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<div>test</div>");
         loadPageWithAlerts2(html);
@@ -977,6 +989,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF17 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <p>test</p>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddParagraphToParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("p", "<p>test</p>");
         loadPageWithAlerts2(html);
@@ -994,6 +1007,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddUnclosedParagraph() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<p>test");
         loadPageWithAlerts2(html);
@@ -1012,6 +1026,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF17 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <a>test</a>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddAnchorToAnchor() throws Exception {
         final String html = createPageForSetOuterHTML("a", "<a>test</a>");
         loadPageWithAlerts2(html);
@@ -1028,6 +1043,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/>");
         loadPageWithAlerts2(html);
@@ -1046,6 +1062,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF17 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <div><div></div></div>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddMultipleSelfClosingBlock() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<div/><div>");
         loadPageWithAlerts2(html);
@@ -1062,6 +1079,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddSelfClosingInline() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<span/>");
         loadPageWithAlerts2(html);
@@ -1078,6 +1096,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     "New = <span id=\"innerNode\">Old outerHTML</span>" },
             FF10 = { "Old = <span id=\"innerNode\">Old outerHTML</span>",
                     "New = <span id=\"innerNode\">Old outerHTML</span>" })
+    @NotYetImplemented(FF17)
     public void setOuterHTMLAddSelfClosingEmpty() throws Exception {
         final String html = createPageForSetOuterHTML("div", "<br/>");
         loadPageWithAlerts2(html);
@@ -1111,29 +1130,23 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts(IE = {
+    @Alerts(DEFAULT = { "body.cpuClass = undefined", "exception" },
+            IE = {
             "body.cpuClass = undefined",
             "body.cpuClass = x86",
             "body.cpuClass = undefined" })
     public void addBehaviorDefaultClientCaps() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "    <title>Test</title>\n"
-            + "    <script>\n"
-            + "    function doTest() {\n"
-            + "       var body = document.body;\n"
-            + "       alert('body.cpuClass = ' + body.cpuClass);\n"
-            + "       var id = body.addBehavior('#default#clientCaps');\n"
-            + "       alert('body.cpuClass = ' + body.cpuClass);\n"
-            + "       var id2 = body.addBehavior('#default#clientCaps');\n"
-            + "       body.removeBehavior(id);\n"
-            + "       alert('body.cpuClass = ' + body.cpuClass);\n"
-            + "    }\n"
-            + "    </script>\n"
-            + "</head>\n"
-            + "<body onload='doTest()'>Test</body>\n"
-            + "</html>";
+        final String html = "<html><body><script>\n"
+            + "try {\n"
+            + "  var body = document.body;\n"
+            + "  alert('body.cpuClass = ' + body.cpuClass);\n"
+            + "  var id = body.addBehavior('#default#clientCaps');\n"
+            + "  alert('body.cpuClass = ' + body.cpuClass);\n"
+            + "  var id2 = body.addBehavior('#default#clientCaps');\n"
+            + "  body.removeBehavior(id);\n"
+            + "  alert('body.cpuClass = ' + body.cpuClass);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
 
@@ -1143,25 +1156,19 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "body.isHomePage = undefined", "body.isHomePage = false", "body.isHomePage = undefined" })
+    @Alerts(DEFAULT = { "body.isHomePage = undefined", "exception" },
+            IE = { "body.isHomePage = undefined", "body.isHomePage = false", "body.isHomePage = undefined" })
     public void removeBehavior() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "    <title>Test</title>\n"
-            + "    <script>\n"
-            + "    function doTest() {\n"
-            + "       var body = document.body;\n"
-            + "       alert('body.isHomePage = ' + body.isHomePage);\n"
-            + "       var id = body.addBehavior('#default#homePage');\n"
-            + "       alert('body.isHomePage = ' + body.isHomePage('not the home page'));\n"
-            + "       body.removeBehavior(id);\n"
-            + "       alert('body.isHomePage = ' + body.isHomePage);\n"
-            + "    }\n"
-            + "    </script>\n"
-            + "</head>\n"
-            + "<body onload='doTest()'>Test</body>\n"
-            + "</html>";
+        final String html = "<html><body><script>\n"
+            + "try {\n"
+            + "  var body = document.body;\n"
+            + "  alert('body.isHomePage = ' + body.isHomePage);\n"
+            + "  var id = body.addBehavior('#default#homePage');\n"
+            + "  alert('body.isHomePage = ' + body.isHomePage('not the home page'));\n"
+            + "  body.removeBehavior(id);\n"
+            + "  alert('body.isHomePage = ' + body.isHomePage);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
 
@@ -1169,27 +1176,22 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Browsers(IE)
-    @Alerts({ "BR", "DIV", "2", "3" })
+    @Alerts(DEFAULT = "exception", IE = { "BR", "DIV", "2", "3" })
+    @NotYetImplemented(FF)
     public void children() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "    var oDiv = document.getElementById('myDiv');\n"
-            + "    for (var i=0; i<oDiv.children.length; i++)\n"
-            + "        alert(oDiv.children(i).tagName);\n"
-            + "    var oCol = oDiv.children;\n"
-            + "    alert(oCol.length);\n"
-            + "    oDiv.insertAdjacentHTML('beforeEnd', '<br>');\n"
-            + "    alert(oCol.length);\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
+        final String html = "<html><body>\n"
             + "<div id='myDiv'><br/><div><span>test</span></div></div>\n"
-            + "</body>\n"
-            + "</html>";
+            + "<script>\n"
+            + "try {\n"
+            + "  var oDiv = document.getElementById('myDiv');\n"
+            + "  for (var i=0; i<oDiv.children.length; i++)\n"
+            + "    alert(oDiv.children(i).tagName);\n"
+            + "  var oCol = oDiv.children;\n"
+            + "  alert(oCol.length);\n"
+            + "  oDiv.insertAdjacentHTML('beforeEnd', '<br>');\n"
+            + "  alert(oCol.length);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
 
@@ -2511,7 +2513,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(FF3_6 = { "undefined", "true" }, CHROME = { "undefined", "true" },
             DEFAULT = "exception")
-    @NotYetImplemented(FF3_6)
+    @NotYetImplemented(FF)
     public void prototype_innerHTML() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -2588,6 +2590,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(IE = { "button", "getAttributeNS() not supported" },
             FF17 = { "button", "null", "false", "true" },
             DEFAULT = { "button", "", "false", "true" })
+    @NotYetImplemented(FF17)
     public void attributeNS() throws Exception {
         final String html
             = "<html><head>\n"
@@ -3237,6 +3240,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<isindex></isindex>", IE = "<ISINDEX>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(FF17)
     public void outerHTML_isindex() throws Exception {
         loadPageWithAlerts2(outerHTML("isindex"));
     }
@@ -3526,6 +3530,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<source>", IE = "<source></source>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(FF17)
     public void outerHTML_source() throws Exception {
         loadPageWithAlerts2(outerHTML("source"));
     }
@@ -3625,6 +3630,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<tbody></tbody>", IE = "<TBODY></TBODY>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(FF17)
     public void outerHTML_tbody() throws Exception {
         loadPageWithAlerts2(outerHTML("tbody"));
     }
@@ -3670,6 +3676,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<tfoot></tfoot>", IE = "<TFOOT></TFOOT>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(FF17)
     public void outerHTML_tfoot() throws Exception {
         loadPageWithAlerts2(outerHTML("tfoot"));
     }
@@ -3679,6 +3686,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<thead></thead>", IE = "<THEAD></THEAD>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(FF17)
     public void outerHTML_thead() throws Exception {
         loadPageWithAlerts2(outerHTML("thead"));
     }
@@ -3742,6 +3750,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "<wbr>", IE = "<WBR>", FF3_6 = "undefined", FF10 = "undefined")
+    @NotYetImplemented(FF17)
     public void outerHTML_wbr() throws Exception {
         loadPageWithAlerts2(outerHTML("wbr"));
     }

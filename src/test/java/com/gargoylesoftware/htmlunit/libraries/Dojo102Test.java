@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+
 import java.util.Iterator;
 
 import org.junit.After;
@@ -22,8 +24,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -63,7 +64,7 @@ public class Dojo102Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Browsers(Browser.FF3_6)
+    @NotYetImplemented(IE)
     public void dojo() throws Exception {
         client_ = getWebClient();
         final String url = "http://localhost:" + PORT + "/util/doh/runner.html";

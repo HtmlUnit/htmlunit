@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -68,6 +71,7 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
             IE = {"[object] ", "[object] undefined" },
             FF3_6 = {"[object HTMLSpanElement] undefined", "[object HTMLSpanElement] undefined" },
             FF = {"[object HTMLElement] undefined", "[object HTMLSpanElement] undefined" })
+    @NotYetImplemented(FF17)
     public void cite() throws Exception {
         final String html =
             "<html>\n"

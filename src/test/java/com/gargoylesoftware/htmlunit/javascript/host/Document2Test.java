@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +25,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -310,6 +312,29 @@ public class Document2Test extends WebDriverTestCase {
             + "</script>\n"
             + "<div id='div'></div>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "error", "error", "true", "true", "true" },
+            FF17 = { "error", "error", "false", "false", "false" },
+            IE = { "true", "true", "true", "true", "true" })
+    @NotYetImplemented(FF17)
+    public void queryCommandEnabled() throws Exception {
+        final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe><script>\n"
+            + "function x() {\n"
+            + "var d = window.frames['f'].document;\n"
+            + "try { alert(d.queryCommandEnabled('SelectAll')); } catch(e) { alert('error'); }\n"
+            + "try { alert(d.queryCommandEnabled('sElectaLL')); } catch(e) { alert('error'); }\n"
+            + "d.designMode='on';\n"
+            + "alert(d.queryCommandEnabled('SelectAll'));\n"
+            + "alert(d.queryCommandEnabled('selectall'));\n"
+            + "alert(d.queryCommandEnabled('SeLeCtALL'));}\n"
+            + "</script></body></html>";
 
         loadPageWithAlerts2(html);
     }
