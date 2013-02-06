@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -58,6 +59,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    ctx.lineTo(10, 10);\n"
             + "    ctx.quadraticCurveTo(0, 10, 15, 10);\n"
             + "    ctx.closePath();\n"
+            + "    ctx.rotate(1.234);\n"
             + "    alert('done');\n"
             + "  } catch(e) { alert('exception'); }\n"
             + "}\n"
@@ -65,6 +67,40 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = { "drawCustomFocusRing", "drawSystemFocusRing", "getLineDash", "scrollPathIntoView", "setLineDash",
+            "33 methods" },
+            IE = "exception")
+    public void methods() throws Exception {
+        final String[] methods = {"arc", "arcTo", "beginPath", "bezierCurveTo", "clearRect", "clip", "closePath",
+            "createImageData", "createLinearGradient", "createPattern", "createRadialGradient", "drawImage",
+            "drawCustomFocusRing", "drawSystemFocusRing", "fill", "fillRect", "fillText", "getImageData",
+            "getLineDash", "isPointInPath", "lineTo", "measureText", "moveTo", "putImageData", "quadraticCurveTo",
+            "rect", "restore", "rotate", "save", "scale", "scrollPathIntoView", "setLineDash", "setTransform",
+            "stroke", "strokeRect", "strokeText", "transform", "translate" };
+        final String html = "<html><body>\n"
+            + "<canvas id='myCanvas'></canvas>\n"
+            + "<script>\n"
+            + "  var canvas = document.getElementById('myCanvas');\n"
+            + "  var nbMethods = 0;\n"
+            + "  var methods = ['" + StringUtils.join(methods, "', '") + "'];\n"
+            + "  try {\n"
+            + "    var ctx = canvas.getContext('2d');\n"
+            + "    for (var i=0; i<methods.length; ++i) {\n"
+            + "      if (typeof ctx[methods[i]] == 'function')\n"
+            + "        nbMethods++;\n"
+            + "      else\n"
+            + "        alert(methods[i]);\n"
+            + "    }\n"
+            + "    alert(nbMethods + ' methods');\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
 }

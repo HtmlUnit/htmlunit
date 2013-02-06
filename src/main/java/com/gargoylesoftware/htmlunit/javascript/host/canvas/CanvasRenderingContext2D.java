@@ -322,4 +322,116 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         //empty
     }
+
+    /**
+     * Creates a new, blank ImageData object with the specified dimensions.
+     */
+    @JsxFunction
+    public void createImageData() {
+        //empty
+    }
+
+    /**
+     * Creates a pattern.
+     */
+    @JsxFunction
+    public void createPattern() {
+        //empty
+    }
+
+    /**
+     * Creates a gradient.
+     */
+    @JsxFunction
+    public void createRadialGradient() {
+        //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
+    @JsxFunction
+    public void fillText() {
+        //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
+    @JsxFunction
+    public void getImageData() {
+        //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
+    @JsxFunction
+    public void getLineData() {
+        //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
+    @JsxFunction
+    public void isPointInPath() {
+        //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
+    @JsxFunction
+    public void measureText() {
+        //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
+    @JsxFunction
+    public void putImageData() {
+        //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
+    @JsxFunction
+    public void rect() {
+        //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
+    @JsxFunction
+    public void rotate() {
+        //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
+    @JsxFunction
+    public void setTransform() {
+        //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
+    @JsxFunction
+    public void strokeText() {
+        //empty
+    }
+
+    /**
+     * Dummy placeholder.
+     */
+    @JsxFunction
+    public void transform() {
+        //empty
+    }
 }
