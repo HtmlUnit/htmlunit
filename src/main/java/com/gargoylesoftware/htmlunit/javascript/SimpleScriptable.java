@@ -491,4 +491,15 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
         }
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setParentScope(final Scriptable m) {
+        if (m == this) {
+            throw new IllegalArgumentException("Object can't be its own parentScope");
+        }
+        super.setParentScope(m);
+    }
 }
