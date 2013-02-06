@@ -9,8 +9,8 @@
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
             <action type="fix" dev="mguillem">
-                JavaScript: add empty implementations of CanvasRenderingContext2D methods createImageData, 
-                createPattern, createRadialGradient, fillText, getImageData, getLineData, isPointInPath, 
+                JavaScript: add empty implementations of CanvasRenderingContext2D methods createImageData,
+                createPattern, createRadialGradient, fillText, getImageData, getLineData, isPointInPath,
                 measureText, putImageData, rect, rotate, setTransform, strokeText, and transform (FF).
             </action>
             <action type="fix" dev="rbri">
