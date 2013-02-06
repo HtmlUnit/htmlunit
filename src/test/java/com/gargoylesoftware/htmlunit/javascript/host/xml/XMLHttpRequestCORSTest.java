@@ -176,7 +176,17 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(IE = { "4", "200", "null", "null", "null", "null" },
             DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" })
     public void preflight() throws Exception {
-        doPreflightTestAllowedMethods("POST, GET, OPTIONS");
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain");
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(IE = { "4", "200", "null", "null", "null", "null" },
+            DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" })
+    public void preflight_contentTypeWithCharset() throws Exception {
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain;charset=utf-8");
     }
 
     /**
@@ -188,10 +198,11 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(IE = { "4", "200", "null", "null", "null", "null" },
             DEFAULT = { "4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother" })
     public void preflight_incorrect_methods() throws Exception {
-        doPreflightTestAllowedMethods(null);
+        doPreflightTestAllowedMethods(null, "text/plain");
     }
 
-    private void doPreflightTestAllowedMethods(final String allowedMethods) throws Exception {
+    private void doPreflightTestAllowedMethods(final String allowedMethods, final String contentType)
+        throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT)); // url without trailing "/"
 
         final String html = "<html><head>\n"
@@ -202,7 +213,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             + "    var url = 'http://' + window.location.hostname + ':" + PORT2 + "/preflight2';\n"
             + "    xhr.open('GET',  url, false);\n"
             + "    xhr.setRequestHeader('X-PINGOTHER', 'pingpong');\n"
-            + "    xhr.setRequestHeader('Content-Type' , 'text/plain');"
+            + "    xhr.setRequestHeader('Content-Type' , '" + contentType + "');"
             + "    xhr.send();\n"
             + "    alert(xhr.readyState);\n"
             + "    alert(xhr.status);\n"

@@ -728,14 +728,19 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     private boolean isPreflightHeader(final String name, final String value) {
         if ("content-type".equals(name)) {
-            return !"application/x-www-form-urlencoded".equals(value)
-                && !"multipart/form-data".equals(value) && !"text/plain".equals(value);
-        }
-        if (!"accept".equals(name) && !"accept-language".equals(name) && !"content-language".equals(name)
-                && !"referer".equals(name) && !"accept-encoding".equals(name) && !"origin".equals(name)) {
+            if ("application/x-www-form-urlencoded".equals(value)
+                || "multipart/form-data".equals(value)
+                || "text/plain".equals(value)
+                || value.startsWith("text/plain;charset=")) {
+                return false;
+            }
             return true;
         }
-        return false;
+        if ("accept".equals(name) || "accept-language".equals(name) || "content-language".equals(name)
+                || "referer".equals(name) || "accept-encoding".equals(name) || "origin".equals(name)) {
+            return false;
+        }
+        return true;
     }
 
     /**
