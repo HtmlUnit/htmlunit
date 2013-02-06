@@ -371,6 +371,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected void startWebServer2(final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
 
+        if (STATIC_SERVER2_ != null) {
+            STATIC_SERVER2_.stop();
+        }
         STATIC_SERVER2_ = WebServerTestCase.createWebServer(PORT2, resourceBase, classpath, servlets, null);
     }
 
