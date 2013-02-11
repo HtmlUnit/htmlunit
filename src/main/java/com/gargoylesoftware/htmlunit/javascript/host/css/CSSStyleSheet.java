@@ -215,22 +215,27 @@ public class CSSStyleSheet extends SimpleScriptable {
         if (rules == null) {
             return;
         }
+
+        final BrowserVersion browser = getBrowserVersion();
         final DomElement e = element.getDomNodeOrDie();
-        for (int i = 0; i < rules.getLength(); i++) {
+        final int rulesLength = rules.getLength();
+        for (int i = 0; i < rulesLength; i++) {
             final CSSRule rule = rules.item(i);
-            if (rule.getType() == CSSRule.STYLE_RULE) {
+
+            final short ruleType = rule.getType();
+            if (CSSRule.STYLE_RULE == ruleType) {
                 final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
                 final SelectorList selectors = styleRule.getSelectors();
                 for (int j = 0; j < selectors.getLength(); j++) {
                     final Selector selector = selectors.item(j);
-                    final boolean selected = selects(selector, e);
+                    final boolean selected = selects(browser, selector, e);
                     if (selected) {
                         final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
                         style.applyStyleFromSelector(dec, selector);
                     }
                 }
             }
-            else if (rule.getType() == CSSRule.IMPORT_RULE) {
+            else if (CSSRule.IMPORT_RULE == ruleType) {
                 final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
                 CSSStyleSheet sheet = imports_.get(importRule);
                 if (sheet == null) {
@@ -248,7 +253,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                     sheet.modifyIfNecessary(style, element, sheetRules, alreadyProcessing);
                 }
             }
-            else if (rule.getType() == CSSRule.MEDIA_RULE) {
+            else if (CSSRule.MEDIA_RULE == ruleType) {
                 final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
                 final String media = mediaRule.getMedia().getMediaText();
                 if (isActive(media)) {

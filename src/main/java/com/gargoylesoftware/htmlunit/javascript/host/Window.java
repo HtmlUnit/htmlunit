@@ -119,6 +119,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author David D. Kilzer
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
@@ -1590,10 +1591,11 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         style = new ComputedCSSStyleDeclaration(original);
 
         final StyleSheetList sheets = ((HTMLDocument) document_).getStyleSheets();
+        boolean trace = LOG.isTraceEnabled();
         for (int i = 0; i < sheets.getLength(); i++) {
             final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
             if (sheet.isActive()) {
-                if (LOG.isTraceEnabled()) {
+                if (trace) {
                     LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + element);
                 }
                 sheet.modifyIfNecessary(style, element);
