@@ -37,6 +37,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.css.sac.Selector;
@@ -1295,15 +1296,18 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         ComputedCSSStyleDeclaration lastFlowing = null;
         final Set<ComputedCSSStyleDeclaration> styles = new HashSet<ComputedCSSStyleDeclaration>();
         for (final DomNode child : node.getChildren()) {
-            if (child.mayBeDisplayed() && child.getScriptObject() instanceof HTMLElement) {
-                final HTMLElement e = (HTMLElement) child.getScriptObject();
-                final ComputedCSSStyleDeclaration style = e.getCurrentStyle();
-                final String pos = style.getPositionWithInheritance();
-                if ("static".equals(pos) || "relative".equals(pos)) {
-                    lastFlowing = style;
-                }
-                else if ("absolute".equals(pos)) {
-                    styles.add(style);
+            if (child.mayBeDisplayed()) {
+                final ScriptableObject scriptObj = child.getScriptObject();
+                if (scriptObj instanceof HTMLElement) {
+                    final HTMLElement e = (HTMLElement) scriptObj;
+                    final ComputedCSSStyleDeclaration style = e.getCurrentStyle();
+                    final String pos = style.getPositionWithInheritance();
+                    if ("static".equals(pos) || "relative".equals(pos)) {
+                        lastFlowing = style;
+                    }
+                    else if ("absolute".equals(pos)) {
+                        styles.add(style);
+                    }
                 }
             }
         }
