@@ -1292,31 +1292,28 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
 
-        HTMLElement lastFlowing = null;
-        final Set<HTMLElement> independent = new HashSet<HTMLElement>();
+        ComputedCSSStyleDeclaration lastFlowing = null;
+        final Set<ComputedCSSStyleDeclaration> styles = new HashSet<ComputedCSSStyleDeclaration>();
         for (final DomNode child : node.getChildren()) {
             if (child.mayBeDisplayed() && child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
                 final ComputedCSSStyleDeclaration style = e.getCurrentStyle();
                 final String pos = style.getPositionWithInheritance();
                 if ("static".equals(pos) || "relative".equals(pos)) {
-                    lastFlowing = e;
+                    lastFlowing = style;
                 }
                 else if ("absolute".equals(pos)) {
-                    independent.add(e);
+                    styles.add(style);
                 }
             }
         }
 
-        final Set<HTMLElement> relevant = new HashSet<HTMLElement>();
-        relevant.addAll(independent);
         if (lastFlowing != null) {
-            relevant.add(lastFlowing);
+            styles.add(lastFlowing);
         }
 
         int max = 0;
-        for (final HTMLElement e : relevant) {
-            final ComputedCSSStyleDeclaration style = e.getCurrentStyle();
+        for (final ComputedCSSStyleDeclaration style : styles) {
             final int h = style.getTop(true, false, false) + style.getCalculatedHeight(true, true);
             if (h > max) {
                 max = h;
@@ -1459,12 +1456,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             for (DomNode n = getDomNodeOrDie(); n != null; n = n.getPreviousSibling()) {
                 if (n.getScriptObject() instanceof HTMLElement) {
                     final HTMLElement e = (HTMLElement) n.getScriptObject();
-                    final String d = e.getCurrentStyle().getDisplay();
+                    final ComputedCSSStyleDeclaration style = e.getCurrentStyle();
+                    final String d = style.getDisplay();
                     if ("block".equals(d)) {
                         break;
                     }
                     else if (!"none".equals(d)) {
-                        left += e.getCurrentStyle().getCalculatedWidth(true, true);
+                        left += style.getCalculatedWidth(true, true);
                     }
                 }
                 else if (n.getScriptObject() instanceof Text) {
