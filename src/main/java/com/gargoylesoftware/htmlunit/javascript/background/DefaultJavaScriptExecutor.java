@@ -135,15 +135,16 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
 
     /** Runs the eventLoop. */
     public void run() {
+        boolean trace = LOG.isTraceEnabled();
         // this has to be a multiple of 10ms
         // otherwise the VM has to fight with the OS to get such small periods
         final long sleepInterval = 10;
         while (!shutdown_ && webClient_.get() != null) {
-            if (LOG.isTraceEnabled()) {
+            if (trace) {
                 LOG.trace("started finding earliestJob at " + System.currentTimeMillis());
             }
             final JavaScriptJobManager jobManager = getJobManagerWithEarliestJob();
-            if (LOG.isTraceEnabled()) {
+            if (trace) {
                 LOG.trace("stopped finding earliestJob at " + System.currentTimeMillis());
             }
 
@@ -155,11 +156,11 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
                     // do we have to execute the earliest job
                     if (waitTime < 1) {
                         // execute the earliest job
-                        if (LOG.isTraceEnabled()) {
+                        if (trace) {
                             LOG.trace("started executing job at " + System.currentTimeMillis());
                         }
                         jobManager.runSingleJob(earliestJob);
-                        if (LOG.isTraceEnabled()) {
+                        if (trace) {
                             LOG.trace("stopped executing job at " + System.currentTimeMillis());
                         }
 
