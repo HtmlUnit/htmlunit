@@ -4359,7 +4359,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 4, 4")
+    @Alerts(DEFAULT = "0, 4, 4", FF3_6 = "2, 0, 2")
     public void ajax___ajax_____headers() throws Exception {
         runTest("ajax: .ajax() - headers");
     }
@@ -4369,7 +4369,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 1, 1")
+    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "3, 0, 3")
     public void ajax___ajax_____Accept_header() throws Exception {
         runTest("ajax: .ajax() - Accept header");
     }
@@ -4379,7 +4379,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 2, 2")
+    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "1, 0, 1")
     public void ajax___ajax_____contentType() throws Exception {
         runTest("ajax: .ajax() - contentType");
     }
@@ -4579,7 +4579,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 18, 18")
+    @Alerts(DEFAULT = "0, 18, 18", FF3_6 = "2, 6, 8")
     public void ajax__ajax_cache() throws Exception {
         runTest("ajax: ajax cache");
     }
@@ -4960,7 +4960,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 1, 1")
+    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
     public void ajax__ajaxSetup__() throws Exception {
         runTest("ajax: ajaxSetup()");
     }
