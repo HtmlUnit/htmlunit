@@ -4309,7 +4309,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented
+    @NotYetImplemented({ IE, FF17 })
     public void ajax__jQuery_ajax_____error_callbacks() throws Exception {
         runTest("ajax: jQuery.ajax() - error callbacks");
     }
@@ -4339,7 +4339,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 1, 1")
+    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
     public void ajax__jQuery_ajax_____responseText_on_error() throws Exception {
         runTest("ajax: jQuery.ajax() - responseText on error");
     }
@@ -4489,7 +4489,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 3, 3")
+    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "2, 0, 2")
     public void ajax__jQuery_ajax___xml__non_namespace_elements_inside_namespaced_elements__over_JSONP_() throws Exception {
         runTest("ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (over JSONP)");
     }
@@ -4759,7 +4759,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 24, 24")
+    @Alerts(DEFAULT = "0, 24, 24", FF3_6 = "17, 2, 19")
     public void ajax__jQuery_ajax_____JSONP__Same_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP, Same Domain");
     }
@@ -4769,7 +4769,8 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 24, 24")
+    @Alerts(DEFAULT = "0, 24, 24", FF3_6 = "18, 2, 20")
+    @NotYetImplemented(FF3_6)
     public void ajax__jQuery_ajax_____JSONP__Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP, Cross Domain");
     }
@@ -4829,7 +4830,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 2, 2")
+    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "1, 0, 1")
     public void ajax__jQuery_ajax_____script_by_content_type() throws Exception {
         runTest("ajax: jQuery.ajax() - script by content-type");
     }
@@ -4839,7 +4840,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 5, 5")
+    @Alerts(DEFAULT = "0, 5, 5", FF3_6 = "2, 0, 2")
     public void ajax__jQuery_ajax_____json_by_content_type() throws Exception {
         runTest("ajax: jQuery.ajax() - json by content-type");
     }
@@ -4849,7 +4850,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 6, 6")
+    @Alerts(DEFAULT = "0, 6, 6", FF3_6 = "2, 0, 2")
     public void ajax__jQuery_ajax_____json_by_content_type_disabled_with_options() throws Exception {
         runTest("ajax: jQuery.ajax() - json by content-type disabled with options");
     }
@@ -4940,7 +4941,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 1, 1")
+    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
     public void ajax__jQuery_ajax___simple_get() throws Exception {
         runTest("ajax: jQuery.ajax - simple get");
     }
@@ -4950,7 +4951,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 1, 1")
+    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
     public void ajax__jQuery_ajax___simple_post() throws Exception {
         runTest("ajax: jQuery.ajax - simple post");
     }
@@ -5041,7 +5042,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 1, 1")
+    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
     public void ajax__jQuery_ajax___atom_xml() throws Exception {
         runTest("ajax: jQuery ajax - atom+xml");
     }
@@ -5071,7 +5072,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 3, 3")
+    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "2, 0, 2")
     public void ajax__jQuery_ajax___statusText() throws Exception {
         runTest("ajax: jQuery.ajax - statusText");
     }
@@ -5091,7 +5092,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 8, 8")
+    @Alerts(DEFAULT = "0, 8, 8", FF3_6 = "1, 0, 1")
     public void ajax__jQuery_ajax___transitive_conversions() throws Exception {
         runTest("ajax: jQuery.ajax - transitive conversions");
     }
@@ -5101,7 +5102,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 2, 2")
+    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "1, 0, 1")
     public void ajax__jQuery_ajax___overrideMimeType() throws Exception {
         runTest("ajax: jQuery.ajax - overrideMimeType");
     }
