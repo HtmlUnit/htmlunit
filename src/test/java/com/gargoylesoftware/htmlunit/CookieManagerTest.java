@@ -184,7 +184,13 @@ public class CookieManagerTest extends WebDriverTestCase {
 
         driver.get(URL_SECOND.toExternalForm());
 
-        assertEquals("key=value; test=\"aa= xx==\"", getMockWebConnection().getLastAdditionalHeaders().get("Cookie"));
+
+        // strange check, but there is no order
+        final String lastCookies = getMockWebConnection().getLastAdditionalHeaders().get("Cookie");
+        assertEquals(26, lastCookies.length());
+        assertTrue("lastCookies: " + lastCookies, lastCookies.contains("key=value")
+                && lastCookies.contains("test=\"aa= xx==\"")
+                && lastCookies.contains("; "));
     }
 
     /**
@@ -468,7 +474,13 @@ public class CookieManagerTest extends WebDriverTestCase {
         driver.get(getDefaultUrl().toString() + "foo");
 
         final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals("first=1; second=2", lastHeaders.get("Cookie"));
+
+        // strange check, but there is no order
+        final String lastCookies = lastHeaders.get("Cookie");
+        assertEquals(17, lastCookies.length());
+        assertTrue("lastCookies: " + lastCookies, lastCookies.contains("first=1")
+                    && lastCookies.contains("second=2")
+                    && lastCookies.contains("; "));
 
         if (driver instanceof HtmlUnitDriver) {
             final CookieManager mgr = getWebWindowOf((HtmlUnitDriver) driver).getWebClient().getCookieManager();
