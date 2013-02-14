@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -89,7 +90,8 @@ public class CookieManager implements Serializable {
      * @return the currently configured cookies, in an unmodifiable set
      */
     public synchronized Set<Cookie> getCookies() {
-        return Collections.unmodifiableSet(cookies_);
+        final Set<Cookie> copy = new HashSet<Cookie>(cookies_);
+        return Collections.unmodifiableSet(copy);
     }
 
     /**

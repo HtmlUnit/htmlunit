@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -120,5 +121,32 @@ public class CookieManager2Test extends SimpleWebTestCase {
 
         final Set<Cookie> cookies = webClient.getCookieManager().getCookies(htmlPage.getUrl());
         assertTrue(cookies.toString(), cookies.isEmpty());
+    }
+
+    /**
+     * This was causing a ConcurrentModificationException.
+     * In "real life" the problem was arising due to changes to the cookies made from
+     * the JS processing thread.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getCookiesShouldReturnACopyOfCurentState() throws Exception {
+        final String html = "<html><body>"
+                + "<button id='it' onclick=\"document.cookie = 'foo=bla'\">click me</button>\n"
+                + "<script>\n"
+                + "document.cookie = 'cookie1=value1';\n"
+                + "</script></body></html>";
+
+        final WebClient webClient = getWebClient();
+
+        final HtmlPage page = loadPage(html);
+        final Set<Cookie> initialCookies = webClient.getCookieManager().getCookies();
+        assertEquals(1, initialCookies.size());
+        final Iterator<Cookie> iterator = initialCookies.iterator();
+
+        page.getHtmlElementById("it").click();
+        iterator.next(); // ConcurrentModificationException was here
+        assertEquals(1, initialCookies.size());
+        assertEquals(2, webClient.getCookieManager().getCookies().size());
     }
 }
