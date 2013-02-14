@@ -587,7 +587,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_________no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( \"\" ) - no filter");
     }
@@ -637,7 +637,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_____once___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true } ) - no filter");
     }
@@ -657,7 +657,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_____once___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true } ) - filter");
     }
@@ -677,7 +677,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_____memory___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"memory\": true } ) - no filter");
     }
@@ -697,7 +697,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_____memory___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"memory\": true } ) - filter");
     }
@@ -797,7 +797,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_____once___true___memory___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"memory\": true } ) - no filter");
     }
@@ -817,7 +817,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_____once___true___memory___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"memory\": true } ) - filter");
     }
@@ -837,7 +837,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_____once___true___unique___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"unique\": true } ) - no filter");
     }
@@ -877,7 +877,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_____once___true___stopOnFalse___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"stopOnFalse\": true } ) - no filter");
     }
@@ -897,7 +897,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_____once___true___stopOnFalse___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"stopOnFalse\": true } ) - filter");
     }
@@ -917,7 +917,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_____memory___true___unique___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"memory\": true, \"unique\": true } ) - no filter");
     }
@@ -937,7 +937,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_____memory___true___unique___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"memory\": true, \"unique\": true } ) - filter");
     }
@@ -977,7 +977,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks_____memory___true___stopOnFalse___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"memory\": true, \"stopOnFalse\": true } ) - filter");
     }
@@ -6391,7 +6391,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 178, 178")
+    @Alerts(DEFAULT = "0, 178, 178", FF3_6 = "2, 2, 4")
     @NotYetImplemented
     public void offset__absolute() throws Exception {
         runTest("offset: absolute");
