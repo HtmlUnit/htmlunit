@@ -4920,7 +4920,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
+    @NotYetImplemented({ IE, FF17 })
     public void ajax__jQuery_ajaxSetup__timeout__Number_____with_global_timeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({timeout: Number}) - with global timeout");
     }
@@ -4930,7 +4930,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 1, 1")
+    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
     public void ajax__jQuery_ajaxSetup__timeout__Number___with_localtimeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({timeout: Number}) with localtimeout");
     }
@@ -4970,7 +4970,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 1, 1")
+    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
     public void ajax__data_option__evaluate_function_values___2806_() throws Exception {
         runTest("ajax: data option: evaluate function values (#2806)");
     }
@@ -4980,7 +4980,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 1, 1")
+    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
     public void ajax__data_option__empty_bodies_for_non_GET_requests() throws Exception {
         runTest("ajax: data option: empty bodies for non-GET requests");
     }
@@ -4990,7 +4990,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 3, 3")
+    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "3, 0, 3")
     public void ajax__jQuery_ajax___If_Modified_Since_support__cache_() throws Exception {
         runTest("ajax: jQuery.ajax - If-Modified-Since support (cache)");
     }
@@ -5000,7 +5000,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 3, 3")
+    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "2, 0, 2")
     public void ajax__jQuery_ajax___Etag_support__cache_() throws Exception {
         runTest("ajax: jQuery.ajax - Etag support (cache)");
     }
@@ -5010,7 +5010,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 3, 3")
+    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "3, 0, 3")
     public void ajax__jQuery_ajax___If_Modified_Since_support__no_cache_() throws Exception {
         runTest("ajax: jQuery.ajax - If-Modified-Since support (no cache)");
     }
@@ -5020,7 +5020,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 3, 3")
+    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "2, 0, 2")
     public void ajax__jQuery_ajax___Etag_support__no_cache_() throws Exception {
         runTest("ajax: jQuery.ajax - Etag support (no cache)");
     }
