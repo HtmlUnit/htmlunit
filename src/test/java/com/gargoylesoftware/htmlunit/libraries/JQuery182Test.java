@@ -597,7 +597,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 20, 20")
+    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
     public void callbacks__jQuery_Callbacks__________no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { } ) - no filter");
     }
@@ -4679,7 +4679,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 2, 2")
+    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "2, 0, 2")
     public void ajax__load_String__Object__Function_() throws Exception {
         runTest("ajax: load(String, Object, Function)");
     }
@@ -4689,7 +4689,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 2, 2")
+    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "2, 0, 2")
     public void ajax__load_String__String__Function_() throws Exception {
         runTest("ajax: load(String, String, Function)");
     }
@@ -4719,7 +4719,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 1, 1")
+    @Alerts(DEFAULT ="0, 1, 1", FF3_6 = "1, 0, 1")
     public void ajax__jQuery_get_String__Function____data_in_ajaxSettings___8277_() throws Exception {
         runTest("ajax: jQuery.get(String, Function) - data in ajaxSettings (#8277)");
     }
@@ -4860,7 +4860,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 5, 5")
+    @Alerts(DEFAULT = "0, 5, 5", FF3_6 = "2, 0, 2")
     public void ajax__jQuery_getJSON_String__Hash__Function____JSON_array() throws Exception {
         runTest("ajax: jQuery.getJSON(String, Hash, Function) - JSON array");
     }
@@ -4870,7 +4870,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 2, 2")
+    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "2, 0, 2")
     public void ajax__jQuery_getJSON_String__Function____JSON_object() throws Exception {
         runTest("ajax: jQuery.getJSON(String, Function) - JSON object");
     }
@@ -4880,7 +4880,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 2, 2")
+    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "2, 0, 2")
     public void ajax__jQuery_getJSON___Using_Native_JSON() throws Exception {
         runTest("ajax: jQuery.getJSON - Using Native JSON");
     }
@@ -4890,7 +4890,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 2, 2")
+    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "2, 0, 2")
     public void ajax__jQuery_getJSON_String__Function____JSON_object_with_absolute_url_to_local_content() throws Exception {
         runTest("ajax: jQuery.getJSON(String, Function) - JSON object with absolute url to local content");
     }
@@ -4900,7 +4900,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 3, 3")
+    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "1, 0, 1")
     public void ajax__jQuery_post___data() throws Exception {
         runTest("ajax: jQuery.post - data");
     }
@@ -4910,7 +4910,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 4, 4")
+    @Alerts(DEFAULT = "0, 4, 4", FF3_6 = "2, 0, 2")
     public void ajax__jQuery_post_String__Hash__Function____simple_with_xml() throws Exception {
         runTest("ajax: jQuery.post(String, Hash, Function) - simple with xml");
     }
@@ -5132,7 +5132,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 1, 1")
+    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
     public void ajax__jQuery_domManip___no_side_effect_because_of_ajaxSetup_or_global_events___11264_() throws Exception {
         runTest("ajax: jQuery.domManip - no side effect because of ajaxSetup or global events (#11264)");
     }
