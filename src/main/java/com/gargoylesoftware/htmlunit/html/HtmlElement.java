@@ -854,6 +854,10 @@ public abstract class HtmlElement extends DomElement {
             return null;
         }
 
+        if (!event.applies(this)) {
+            return null;
+        }
+
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing " + event);
         }
@@ -1181,7 +1185,8 @@ public abstract class HtmlElement extends DomElement {
         mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
 
         // give focus to current element (if possible) or only remove it from previous one
-        final HtmlElement elementToFocus = this instanceof SubmittableElement ? this : null;
+        final HtmlElement elementToFocus = (this instanceof SubmittableElement || this instanceof HtmlAnchor)
+                ? this : null;
         ((HtmlPage) getPage()).setFocusedElement(elementToFocus);
 
         mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
