@@ -587,7 +587,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_________no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( \"\" ) - no filter");
     }
@@ -597,7 +597,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks__________no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { } ) - no filter");
     }
@@ -637,7 +637,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_____once___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true } ) - no filter");
     }
@@ -657,7 +657,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_____once___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true } ) - filter");
     }
@@ -677,7 +677,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_____memory___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"memory\": true } ) - no filter");
     }
@@ -697,7 +697,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_____memory___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"memory\": true } ) - filter");
     }
@@ -797,7 +797,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_____once___true___memory___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"memory\": true } ) - no filter");
     }
@@ -817,7 +817,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_____once___true___memory___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"memory\": true } ) - filter");
     }
@@ -837,7 +837,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_____once___true___unique___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"unique\": true } ) - no filter");
     }
@@ -877,7 +877,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_____once___true___stopOnFalse___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"stopOnFalse\": true } ) - no filter");
     }
@@ -897,7 +897,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_____once___true___stopOnFalse___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"stopOnFalse\": true } ) - filter");
     }
@@ -917,7 +917,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_____memory___true___unique___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"memory\": true, \"unique\": true } ) - no filter");
     }
@@ -937,7 +937,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_____memory___true___unique___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"memory\": true, \"unique\": true } ) - filter");
     }
@@ -977,7 +977,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 20, 20", FF3_6 = "2, 20, 22")
+    @Alerts("0, 20, 20")
     public void callbacks__jQuery_Callbacks_____memory___true___stopOnFalse___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { \"memory\": true, \"stopOnFalse\": true } ) - filter");
     }
@@ -4309,7 +4309,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented({ IE, FF17 })
+    @NotYetImplemented
     public void ajax__jQuery_ajax_____error_callbacks() throws Exception {
         runTest("ajax: jQuery.ajax() - error callbacks");
     }
@@ -4339,7 +4339,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
+    @Alerts("0, 1, 1")
     public void ajax__jQuery_ajax_____responseText_on_error() throws Exception {
         runTest("ajax: jQuery.ajax() - responseText on error");
     }
@@ -4359,7 +4359,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 4, 4", FF3_6 = "2, 0, 2")
+    @Alerts("0, 4, 4")
     public void ajax___ajax_____headers() throws Exception {
         runTest("ajax: .ajax() - headers");
     }
@@ -4369,7 +4369,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "3, 0, 3")
+    @Alerts("0, 1, 1")
     public void ajax___ajax_____Accept_header() throws Exception {
         runTest("ajax: .ajax() - Accept header");
     }
@@ -4379,7 +4379,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "1, 0, 1")
+    @Alerts("0, 2, 2")
     public void ajax___ajax_____contentType() throws Exception {
         runTest("ajax: .ajax() - contentType");
     }
@@ -4489,7 +4489,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "2, 0, 2")
+    @Alerts("0, 3, 3")
     public void ajax__jQuery_ajax___xml__non_namespace_elements_inside_namespaced_elements__over_JSONP_() throws Exception {
         runTest("ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (over JSONP)");
     }
@@ -4579,7 +4579,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 18, 18", FF3_6 = "2, 6, 8")
+    @Alerts("0, 18, 18")
     public void ajax__ajax_cache() throws Exception {
         runTest("ajax: ajax cache");
     }
@@ -4679,7 +4679,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "2, 0, 2")
+    @Alerts("0, 2, 2")
     public void ajax__load_String__Object__Function_() throws Exception {
         runTest("ajax: load(String, Object, Function)");
     }
@@ -4689,7 +4689,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "2, 0, 2")
+    @Alerts("0, 2, 2")
     public void ajax__load_String__String__Function_() throws Exception {
         runTest("ajax: load(String, String, Function)");
     }
@@ -4719,7 +4719,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT ="0, 1, 1", FF3_6 = "1, 0, 1")
+    @Alerts("0, 1, 1")
     public void ajax__jQuery_get_String__Function____data_in_ajaxSettings___8277_() throws Exception {
         runTest("ajax: jQuery.get(String, Function) - data in ajaxSettings (#8277)");
     }
@@ -4759,7 +4759,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 24, 24", FF3_6 = "17, 2, 19")
+    @Alerts("0, 24, 24")
     public void ajax__jQuery_ajax_____JSONP__Same_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP, Same Domain");
     }
@@ -4769,8 +4769,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 24, 24", FF3_6 = "18, 2, 20")
-    @NotYetImplemented(FF3_6)
+    @Alerts("0, 24, 24")
     public void ajax__jQuery_ajax_____JSONP__Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP, Cross Domain");
     }
@@ -4830,7 +4829,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "1, 0, 1")
+    @Alerts("0, 2, 2")
     public void ajax__jQuery_ajax_____script_by_content_type() throws Exception {
         runTest("ajax: jQuery.ajax() - script by content-type");
     }
@@ -4840,7 +4839,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 5, 5", FF3_6 = "2, 0, 2")
+    @Alerts("0, 5, 5")
     public void ajax__jQuery_ajax_____json_by_content_type() throws Exception {
         runTest("ajax: jQuery.ajax() - json by content-type");
     }
@@ -4850,7 +4849,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 6, 6", FF3_6 = "2, 0, 2")
+    @Alerts("0, 6, 6")
     public void ajax__jQuery_ajax_____json_by_content_type_disabled_with_options() throws Exception {
         runTest("ajax: jQuery.ajax() - json by content-type disabled with options");
     }
@@ -4860,7 +4859,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 5, 5", FF3_6 = "2, 0, 2")
+    @Alerts("0, 5, 5")
     public void ajax__jQuery_getJSON_String__Hash__Function____JSON_array() throws Exception {
         runTest("ajax: jQuery.getJSON(String, Hash, Function) - JSON array");
     }
@@ -4870,7 +4869,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "2, 0, 2")
+    @Alerts("0, 2, 2")
     public void ajax__jQuery_getJSON_String__Function____JSON_object() throws Exception {
         runTest("ajax: jQuery.getJSON(String, Function) - JSON object");
     }
@@ -4880,7 +4879,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "2, 0, 2")
+    @Alerts("0, 2, 2")
     public void ajax__jQuery_getJSON___Using_Native_JSON() throws Exception {
         runTest("ajax: jQuery.getJSON - Using Native JSON");
     }
@@ -4890,7 +4889,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "2, 0, 2")
+    @Alerts("0, 2, 2")
     public void ajax__jQuery_getJSON_String__Function____JSON_object_with_absolute_url_to_local_content() throws Exception {
         runTest("ajax: jQuery.getJSON(String, Function) - JSON object with absolute url to local content");
     }
@@ -4900,7 +4899,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "1, 0, 1")
+    @Alerts("0, 3, 3")
     public void ajax__jQuery_post___data() throws Exception {
         runTest("ajax: jQuery.post - data");
     }
@@ -4910,7 +4909,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 4, 4", FF3_6 = "2, 0, 2")
+    @Alerts("0, 4, 4")
     public void ajax__jQuery_post_String__Hash__Function____simple_with_xml() throws Exception {
         runTest("ajax: jQuery.post(String, Hash, Function) - simple with xml");
     }
@@ -4921,7 +4920,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented({ IE, FF17 })
+    @NotYetImplemented
     public void ajax__jQuery_ajaxSetup__timeout__Number_____with_global_timeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({timeout: Number}) - with global timeout");
     }
@@ -4931,7 +4930,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
+    @Alerts("0, 1, 1")
     public void ajax__jQuery_ajaxSetup__timeout__Number___with_localtimeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({timeout: Number}) with localtimeout");
     }
@@ -4941,7 +4940,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
+    @Alerts("0, 1, 1")
     public void ajax__jQuery_ajax___simple_get() throws Exception {
         runTest("ajax: jQuery.ajax - simple get");
     }
@@ -4951,7 +4950,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
+    @Alerts("0, 1, 1")
     public void ajax__jQuery_ajax___simple_post() throws Exception {
         runTest("ajax: jQuery.ajax - simple post");
     }
@@ -4961,7 +4960,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
+    @Alerts("0, 1, 1")
     public void ajax__ajaxSetup__() throws Exception {
         runTest("ajax: ajaxSetup()");
     }
@@ -4971,7 +4970,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
+    @Alerts("0, 1, 1")
     public void ajax__data_option__evaluate_function_values___2806_() throws Exception {
         runTest("ajax: data option: evaluate function values (#2806)");
     }
@@ -4981,7 +4980,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
+    @Alerts("0, 1, 1")
     public void ajax__data_option__empty_bodies_for_non_GET_requests() throws Exception {
         runTest("ajax: data option: empty bodies for non-GET requests");
     }
@@ -4991,7 +4990,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "3, 0, 3")
+    @Alerts("0, 3, 3")
     public void ajax__jQuery_ajax___If_Modified_Since_support__cache_() throws Exception {
         runTest("ajax: jQuery.ajax - If-Modified-Since support (cache)");
     }
@@ -5001,7 +5000,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "2, 0, 2")
+    @Alerts("0, 3, 3")
     public void ajax__jQuery_ajax___Etag_support__cache_() throws Exception {
         runTest("ajax: jQuery.ajax - Etag support (cache)");
     }
@@ -5011,7 +5010,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "3, 0, 3")
+    @Alerts("0, 3, 3")
     public void ajax__jQuery_ajax___If_Modified_Since_support__no_cache_() throws Exception {
         runTest("ajax: jQuery.ajax - If-Modified-Since support (no cache)");
     }
@@ -5021,7 +5020,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "2, 0, 2")
+    @Alerts("0, 3, 3")
     public void ajax__jQuery_ajax___Etag_support__no_cache_() throws Exception {
         runTest("ajax: jQuery.ajax - Etag support (no cache)");
     }
@@ -5042,7 +5041,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
+    @Alerts("0, 1, 1")
     public void ajax__jQuery_ajax___atom_xml() throws Exception {
         runTest("ajax: jQuery ajax - atom+xml");
     }
@@ -5072,7 +5071,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 3, 3", FF3_6 = "2, 0, 2")
+    @Alerts("0, 3, 3")
     public void ajax__jQuery_ajax___statusText() throws Exception {
         runTest("ajax: jQuery.ajax - statusText");
     }
@@ -5092,7 +5091,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 8, 8", FF3_6 = "1, 0, 1")
+    @Alerts("0, 8, 8")
     public void ajax__jQuery_ajax___transitive_conversions() throws Exception {
         runTest("ajax: jQuery.ajax - transitive conversions");
     }
@@ -5102,7 +5101,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 2, 2", FF3_6 = "1, 0, 1")
+    @Alerts("0, 2, 2")
     public void ajax__jQuery_ajax___overrideMimeType() throws Exception {
         runTest("ajax: jQuery.ajax - overrideMimeType");
     }
@@ -5132,7 +5131,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 1, 1", FF3_6 = "1, 0, 1")
+    @Alerts("0, 1, 1")
     public void ajax__jQuery_domManip___no_side_effect_because_of_ajaxSetup_or_global_events___11264_() throws Exception {
         runTest("ajax: jQuery.domManip - no side effect because of ajaxSetup or global events (#11264)");
     }
@@ -6391,7 +6390,7 @@ public class JQuery182Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 178, 178", FF3_6 = "2, 2, 4")
+    @Alerts("0, 178, 178")
     @NotYetImplemented
     public void offset__absolute() throws Exception {
         runTest("offset: absolute");
