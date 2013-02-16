@@ -1067,4 +1067,22 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Was producing "TypeError: Object's getDefaultValue() method returned an object" due to Delegator not delegating
+     * getDefaultValue(hint) to delegee when hint is null.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void equalsInt() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + "  var i = 0;\n"
+            + "  alert(i == window);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
