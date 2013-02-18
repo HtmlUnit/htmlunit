@@ -348,7 +348,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         if (features != Undefined.instance) {
             featuresString = Context.toString(features);
         }
-        final WebClient webClient = webWindow_.getWebClient();
+        final WebClient webClient = getWebWindow().getWebClient();
 
         if (webClient.getOptions().isPopupBlockerEnabled()) {
             if (LOG.isDebugEnabled()) {
@@ -375,9 +375,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         // if specified name is the name of an existing window, then hold it
         if (StringUtils.isEmpty(urlString) && !"".equals(windowName)) {
-            final WebWindow webWindow;
             try {
-                webWindow = webClient.getWebWindowByName(windowName);
+                final WebWindow webWindow = webClient.getWebWindowByName(windowName);
                 return getProxy(webWindow);
             }
             catch (final WebWindowNotFoundException e) {
@@ -409,7 +408,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         }
 
         try {
-            final Page page = webWindow_.getEnclosedPage();
+            final Page page = getWebWindow().getEnclosedPage();
             if (page != null && page instanceof HtmlPage) {
                 return ((HtmlPage) page).getFullyQualifiedUrl(urlString);
             }
@@ -437,19 +436,19 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         if (timeout < MIN_TIMER_DELAY) {
             timeout = MIN_TIMER_DELAY;
         }
-        final int id;
-        final WebWindow w = getWebWindow();
-        final Page page = (Page) getDomNodeOrNull();
         if (code == null) {
             throw Context.reportRuntimeError("Function not provided.");
         }
 
+        final int id;
+        final WebWindow webWindow = getWebWindow();
+        final Page page = (Page) getDomNodeOrNull();
         if (code instanceof String) {
             final String s = (String) code;
             final String description = "window.setTimeout(" + s + ", " + timeout + ")";
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                    createJavaScriptJob(timeout, null, description, w, s);
-            id = getWebWindow().getJobManager().addJob(job, page);
+                    createJavaScriptJob(timeout, null, description, webWindow, s);
+            id = webWindow.getJobManager().addJob(job, page);
         }
         else if (code instanceof Function) {
             final Function f = (Function) code;
@@ -463,8 +462,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
             final String description = "window.setTimeout(" + functionName + ", " + timeout + ")";
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                    createJavaScriptJob(timeout, null, description, w, f);
-            id = getWebWindow().getJobManager().addJob(job, page);
+                    createJavaScriptJob(timeout, null, description, webWindow, f);
+            id = webWindow.getJobManager().addJob(job, page);
         }
         else {
             throw Context.reportRuntimeError("Unknown type for function.");
@@ -673,7 +672,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         windowProxy_ = new WindowProxy(webWindow_);
 
-        if (webWindow.getEnclosedPage() instanceof XmlPage) {
+        final Page enclosedPage = webWindow.getEnclosedPage();
+        if (enclosedPage instanceof XmlPage) {
             document_ = new XMLDocument();
         }
         else {
@@ -683,8 +683,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         document_.setPrototype(getPrototype(document_.getClass()));
         document_.setWindow(this);
 
-        if (webWindow.getEnclosedPage() instanceof SgmlPage) {
-            final SgmlPage page = (SgmlPage) webWindow.getEnclosedPage();
+        if (enclosedPage instanceof SgmlPage) {
+            final SgmlPage page = (SgmlPage) enclosedPage;
             document_.setDomNode(page);
 
             final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
@@ -771,7 +771,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             return top_;
         }
 
-        final WebWindow top = webWindow_.getTopWindow();
+        final WebWindow top = getWebWindow().getTopWindow();
         return getProxy(top);
     }
 
@@ -790,7 +790,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter
     public WindowProxy getParent() {
-        final WebWindow parent = webWindow_.getParentWindow();
+        final WebWindow parent = getWebWindow().getParentWindow();
         return getProxy(parent);
     }
 
@@ -880,7 +880,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction
     public void focus() {
-        webWindow_.getWebClient().setCurrentWindow(webWindow_);
+        final WebWindow window = getWebWindow();
+        window.getWebClient().setCurrentWindow(window);
     }
 
     /**
@@ -914,7 +915,8 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     @JsxGetter
     @CanSetReadOnly(CanSetReadOnlyStatus.IGNORE)
     public boolean getClosed() {
-        return !getWebWindow().getWebClient().getWebWindows().contains(getWebWindow());
+        final WebWindow webWindow = getWebWindow();
+        return !webWindow.getWebClient().getWebWindows().contains(webWindow);
     }
 
     /**
@@ -1083,7 +1085,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final Object onload = getEventListenersContainer().getEventHandlerProp("load");
         if (onload == null) {
             // NB: for IE, the onload of window is the one of the body element but not for Mozilla.
-            final HtmlPage page = (HtmlPage) webWindow_.getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
             final HtmlElement body = page.getBody();
             if (body != null) {
                 final HTMLBodyElement b = (HTMLBodyElement) body.getScriptObject();
@@ -1178,7 +1180,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxGetter
     public String getName() {
-        return webWindow_.getName();
+        return getWebWindow().getName();
     }
 
      /**
@@ -1187,7 +1189,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxSetter
     public void setName(final String name) {
-        webWindow_.setName(name);
+        getWebWindow().setName(name);
     }
 
     /**
@@ -1251,7 +1253,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     }
 
     private void setHandlerForJavaScript(final String eventName, final Object handler) {
-        if (handler instanceof Function || handler == null) {
+        if (handler == null || handler instanceof Function) {
             getEventListenersContainer().setEventHandlerProp(eventName, handler);
         }
         // Otherwise, fail silently.
@@ -1269,7 +1271,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             if (arg instanceof String) {
                 return ScriptableObject.getProperty(this, (String) arg);
             }
-            else if (arg instanceof Number) {
+            if (arg instanceof Number) {
                 return ScriptableObject.getProperty(this, ((Number) arg).intValue());
             }
         }
@@ -1615,9 +1617,10 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction(@WebBrowser(FF))
     public Selection getSelection() {
+        final WebWindow webWindow = getWebWindow();
         // return null if the window is in a frame that is not displayed
-        if (webWindow_ instanceof FrameWindow) {
-            final FrameWindow frameWindow = (FrameWindow) webWindow_;
+        if (webWindow instanceof FrameWindow) {
+            final FrameWindow frameWindow = (FrameWindow) webWindow;
             if (!frameWindow.getFrameElement().isDisplayed()) {
                 return null;
             }
@@ -1649,11 +1652,11 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction({ @WebBrowser(IE), @WebBrowser(FF) })
     public Object showModalDialog(final String url, final Object arguments, final String features) {
-        final WebWindow ww = getWebWindow();
-        final WebClient client = ww.getWebClient();
+        final WebWindow webWindow = getWebWindow();
+        final WebClient client = webWindow.getWebClient();
         try {
             final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
-            final DialogWindow dialog = client.openDialogWindow(completeUrl, ww, arguments);
+            final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
             // TODO: Theoretically, we shouldn't return until the dialog window has been close()'ed...
             // But we have to return so that the window can be close()'ed...
             // Maybe we can use Rhino's continuation support to save state and restart when
@@ -1676,11 +1679,11 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      */
     @JsxFunction(@WebBrowser(IE))
     public Object showModelessDialog(final String url, final Object arguments, final String features) {
-        final WebWindow ww = getWebWindow();
-        final WebClient client = ww.getWebClient();
+        final WebWindow webWindow = getWebWindow();
+        final WebClient client = webWindow.getWebClient();
         try {
             final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
-            final DialogWindow dialog = client.openDialogWindow(completeUrl, ww, arguments);
+            final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
             final Window jsDialog = (Window) dialog.getScriptObject();
             return jsDialog;
         }
@@ -2006,6 +2009,16 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         event.setTarget(this);
         final ScriptResult result = Node.fireEvent(this, event);
         return !event.isAborted(result);
+    }
+
+    @JsxGetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    public Object getOnchange() {
+        return getHandlerForJavaScript(Event.TYPE_CHANGE);
+    }
+
+    @JsxSetter({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    public void setOnchange(final Object onchange) {
+        setHandlerForJavaScript(Event.TYPE_CHANGE, onchange);
     }
 }
 
