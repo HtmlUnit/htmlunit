@@ -348,14 +348,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_30,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
-    GENERATED_31,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_32,
 
     /** Was originally .isIE(). */
@@ -799,6 +791,10 @@ public enum BrowserVersionFeatures {
     /** Javascript function document.createElement accepts only tag names. */
     @BrowserFeature({ @WebBrowser(value = FF, minVersion = 4), @WebBrowser(CHROME) })
     JS_DOCUMENT_CREATE_ELEMENT_STRICT,
+
+    /** The browser supports the design mode 'Inherit' (IE). */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_DOCUMENT_DESIGN_MODE_INHERIT,
 
     /** Javascript document.doctype returns null (IE). */
     @BrowserFeature(@WebBrowser(IE))

@@ -14,8 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_30;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_31;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_32;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XUL_SUPPORT;
@@ -163,7 +162,7 @@ public class Document extends EventNode {
     @JsxGetter
     public String getDesignMode() {
         if (designMode_ == null) {
-            if (getBrowserVersion().hasFeature(GENERATED_30)) {
+            if (getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT)) {
                 if (getWindow().getWebWindow() instanceof FrameWindow) {
                     designMode_ = "Inherit";
                 }
@@ -184,16 +183,17 @@ public class Document extends EventNode {
      */
     @JsxSetter
     public void setDesignMode(final String mode) {
-        final boolean ie = getBrowserVersion().hasFeature(GENERATED_31);
-        if (ie) {
+        final boolean inherit = getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT);
+        if (inherit) {
             if (!"on".equalsIgnoreCase(mode) && !"off".equalsIgnoreCase(mode) && !"inherit".equalsIgnoreCase(mode)) {
                 throw Context.reportRuntimeError("Invalid document.designMode value '" + mode + "'.");
             }
-            else if (!(getWindow().getWebWindow() instanceof FrameWindow)) {
+            if (!(getWindow().getWebWindow() instanceof FrameWindow)) {
                 // IE ignores designMode changes for documents that aren't in frames.
                 return;
             }
-            else if ("on".equalsIgnoreCase(mode)) {
+            
+            if ("on".equalsIgnoreCase(mode)) {
                 designMode_ = "On";
             }
             else if ("off".equalsIgnoreCase(mode)) {
