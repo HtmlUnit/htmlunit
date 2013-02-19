@@ -1176,24 +1176,27 @@ public abstract class HtmlElement extends DomElement {
         throws IOException {
 
         // make enclosing window the current one
-        getPage().getWebClient().setCurrentWindow(getPage().getEnclosingWindow());
+        final SgmlPage page = getPage();
+        page.getWebClient().setCurrentWindow(page.getEnclosingWindow());
 
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return (P) getPage();
+            return (P) page;
         }
 
-        mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+        synchronized (page) {
+            mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
 
-        // give focus to current element (if possible) or only remove it from previous one
-        final HtmlElement elementToFocus = (this instanceof SubmittableElement || this instanceof HtmlAnchor)
-                ? this : null;
-        ((HtmlPage) getPage()).setFocusedElement(elementToFocus);
+            // give focus to current element (if possible) or only remove it from previous one
+            final HtmlElement elementToFocus = (this instanceof SubmittableElement || this instanceof HtmlAnchor)
+                    ? this : null;
+            ((HtmlPage) page).setFocusedElement(elementToFocus);
 
-        mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+            mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
 
-        final Event event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey, ctrlKey, altKey,
-                MouseEvent.BUTTON_LEFT);
-        return (P) click(event);
+            final Event event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                    ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+            return (P) click(event);
+        }
     }
 
     /**

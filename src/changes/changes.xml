@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
+            <action type="fix">
+                Fixed synchronization problem causing a task triggered by setTimeout to be executed to early, before event handlers.
+            </action>
             <action type="fix" dev="mguillem">
                 CookieManager: changed getCookies to return a copy of the current set of cookies to avoid ConcurrentModificationException.
             </action>

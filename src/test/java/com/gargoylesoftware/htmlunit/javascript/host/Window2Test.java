@@ -21,6 +21,8 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF3_6;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -1084,5 +1086,40 @@ public class Window2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * As of 2.12-SNAPSHOT on 19.02.2013, a task started by setTimeout in an event handler could be executed before
+     * all events handlers have been executed due to a missing synchronization.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setTimeoutShouldNotBeExecutedBeforeHandlers() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "function stop() {\n"
+            + "  window.stopIt = true;\n"
+            + "}\n"
+            + "for (var i=0; i<1000; ++i) {\n"
+            + "  var handler = function(e) {\n"
+            + "    if (window.stopIt) {\n"
+            + "      e.preventDefault ?  e.preventDefault() : e.returnValue = false;\n"
+            + "    }\n"
+            + "  }\n"
+            + "  if (window.addEventListener)\n"
+            + "    window.addEventListener('click', handler, false);\n"
+            + "  else\n"
+            + "    window.attachEvent('onclick', handler);\n"
+            + "}\n"
+            + "</script>\n"
+            + "<form action='page2' method='post'>\n"
+            + "<input id='it' type='submit' onclick='setTimeout(stop, 0)'>\n"
+            + "</form>"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("it")).click();
+
+        assertEquals(getDefaultUrl() + "page2", driver.getCurrentUrl());
     }
 }
