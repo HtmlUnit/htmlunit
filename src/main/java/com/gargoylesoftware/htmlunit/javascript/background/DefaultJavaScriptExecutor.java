@@ -135,7 +135,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
 
     /** Runs the eventLoop. */
     public void run() {
-        boolean trace = LOG.isTraceEnabled();
+        final boolean trace = LOG.isTraceEnabled();
         // this has to be a multiple of 10ms
         // otherwise the VM has to fight with the OS to get such small periods
         final long sleepInterval = 10;

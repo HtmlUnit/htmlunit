@@ -192,7 +192,7 @@ public class Document extends EventNode {
                 // IE ignores designMode changes for documents that aren't in frames.
                 return;
             }
-            
+
             if ("on".equalsIgnoreCase(mode)) {
                 designMode_ = "On";
             }

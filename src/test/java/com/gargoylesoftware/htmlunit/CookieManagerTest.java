@@ -184,7 +184,6 @@ public class CookieManagerTest extends WebDriverTestCase {
 
         driver.get(URL_SECOND.toExternalForm());
 
-
         // strange check, but there is no order
         final String lastCookies = getMockWebConnection().getLastAdditionalHeaders().get("Cookie");
         assertEquals(26, lastCookies.length());

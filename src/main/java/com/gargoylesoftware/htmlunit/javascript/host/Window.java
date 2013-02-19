@@ -1593,7 +1593,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         style = new ComputedCSSStyleDeclaration(original);
 
         final StyleSheetList sheets = ((HTMLDocument) document_).getStyleSheets();
-        boolean trace = LOG.isTraceEnabled();
+        final boolean trace = LOG.isTraceEnabled();
         for (int i = 0; i < sheets.getLength(); i++) {
             final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
             if (sheet.isActive()) {
