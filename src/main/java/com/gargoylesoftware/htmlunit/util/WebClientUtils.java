@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import javax.swing.JFrame;
+
 import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
 import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.Main;
 import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.ScopeProvider;
@@ -50,6 +52,7 @@ public final class WebClientUtils {
         final ScopeProvider sp = null;
         final HtmlUnitContextFactory cf = client.getJavaScriptEngine().getContextFactory();
         final Main main = Main.mainEmbedded(cf, sp, "HtmlUnit JavaScript Debugger");
+        main.getDebugFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         final SourceProvider sourceProvider = new SourceProvider() {
             public String getSource(final DebuggableScript script) {
