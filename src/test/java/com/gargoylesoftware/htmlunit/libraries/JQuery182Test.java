@@ -4309,7 +4309,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
-    @NotYetImplemented
     public void ajax__jQuery_ajax_____error_callbacks() throws Exception {
         runTest("ajax: jQuery.ajax() - error callbacks");
     }
@@ -4940,7 +4939,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
     public void ajax__jQuery_ajaxSetup__timeout__Number_____with_global_timeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({timeout: Number}) - with global timeout");
     }
