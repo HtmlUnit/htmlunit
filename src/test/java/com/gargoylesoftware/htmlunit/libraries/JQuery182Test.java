@@ -4340,6 +4340,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented
     public void ajax__jQuery_ajax_____responseText_on_error() throws Exception {
         runTest("ajax: jQuery.ajax() - responseText on error");
     }
@@ -4360,6 +4361,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
+    @NotYetImplemented
     public void ajax___ajax_____headers() throws Exception {
         runTest("ajax: .ajax() - headers");
     }
@@ -4370,6 +4372,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented
     public void ajax___ajax_____Accept_header() throws Exception {
         runTest("ajax: .ajax() - Accept header");
     }
@@ -4380,6 +4383,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented
     public void ajax___ajax_____contentType() throws Exception {
         runTest("ajax: .ajax() - contentType");
     }
@@ -4490,6 +4494,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
+    @NotYetImplemented
     public void ajax__jQuery_ajax___xml__non_namespace_elements_inside_namespaced_elements__over_JSONP_() throws Exception {
         runTest("ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (over JSONP)");
     }
@@ -4580,6 +4585,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 18, 18")
+    @NotYetImplemented
     public void ajax__ajax_cache() throws Exception {
         runTest("ajax: ajax cache");
     }
@@ -4680,6 +4686,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented
     public void ajax__load_String__Object__Function_() throws Exception {
         runTest("ajax: load(String, Object, Function)");
     }
@@ -4690,6 +4697,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented
     public void ajax__load_String__String__Function_() throws Exception {
         runTest("ajax: load(String, String, Function)");
     }
@@ -4720,6 +4728,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented
     public void ajax__jQuery_get_String__Function____data_in_ajaxSettings___8277_() throws Exception {
         runTest("ajax: jQuery.get(String, Function) - data in ajaxSettings (#8277)");
     }
@@ -4760,6 +4769,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 24, 24")
+    @NotYetImplemented
     public void ajax__jQuery_ajax_____JSONP__Same_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP, Same Domain");
     }
@@ -4770,6 +4780,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 24, 24")
+    @NotYetImplemented
     public void ajax__jQuery_ajax_____JSONP__Cross_Domain() throws Exception {
         runTest("ajax: jQuery.ajax() - JSONP, Cross Domain");
     }
@@ -4830,6 +4841,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented
     public void ajax__jQuery_ajax_____script_by_content_type() throws Exception {
         runTest("ajax: jQuery.ajax() - script by content-type");
     }
@@ -4840,6 +4852,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
+    @NotYetImplemented
     public void ajax__jQuery_ajax_____json_by_content_type() throws Exception {
         runTest("ajax: jQuery.ajax() - json by content-type");
     }
@@ -4850,6 +4863,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 6, 6")
+    @NotYetImplemented
     public void ajax__jQuery_ajax_____json_by_content_type_disabled_with_options() throws Exception {
         runTest("ajax: jQuery.ajax() - json by content-type disabled with options");
     }
@@ -4860,6 +4874,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 5, 5")
+    @NotYetImplemented
     public void ajax__jQuery_getJSON_String__Hash__Function____JSON_array() throws Exception {
         runTest("ajax: jQuery.getJSON(String, Hash, Function) - JSON array");
     }
@@ -4870,6 +4885,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented
     public void ajax__jQuery_getJSON_String__Function____JSON_object() throws Exception {
         runTest("ajax: jQuery.getJSON(String, Function) - JSON object");
     }
@@ -4880,6 +4896,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented
     public void ajax__jQuery_getJSON___Using_Native_JSON() throws Exception {
         runTest("ajax: jQuery.getJSON - Using Native JSON");
     }
@@ -4890,6 +4907,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented
     public void ajax__jQuery_getJSON_String__Function____JSON_object_with_absolute_url_to_local_content() throws Exception {
         runTest("ajax: jQuery.getJSON(String, Function) - JSON object with absolute url to local content");
     }
@@ -4900,6 +4918,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
+    @NotYetImplemented
     public void ajax__jQuery_post___data() throws Exception {
         runTest("ajax: jQuery.post - data");
     }
@@ -4910,6 +4929,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
+    @NotYetImplemented
     public void ajax__jQuery_post_String__Hash__Function____simple_with_xml() throws Exception {
         runTest("ajax: jQuery.post(String, Hash, Function) - simple with xml");
     }
@@ -4931,6 +4951,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented
     public void ajax__jQuery_ajaxSetup__timeout__Number___with_localtimeout() throws Exception {
         runTest("ajax: jQuery.ajaxSetup({timeout: Number}) with localtimeout");
     }
@@ -4941,6 +4962,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented
     public void ajax__jQuery_ajax___simple_get() throws Exception {
         runTest("ajax: jQuery.ajax - simple get");
     }
@@ -4951,6 +4973,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented
     public void ajax__jQuery_ajax___simple_post() throws Exception {
         runTest("ajax: jQuery.ajax - simple post");
     }
@@ -4961,6 +4984,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented
     public void ajax__ajaxSetup__() throws Exception {
         runTest("ajax: ajaxSetup()");
     }
@@ -4971,6 +4995,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented
     public void ajax__data_option__evaluate_function_values___2806_() throws Exception {
         runTest("ajax: data option: evaluate function values (#2806)");
     }
@@ -4981,6 +5006,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented
     public void ajax__data_option__empty_bodies_for_non_GET_requests() throws Exception {
         runTest("ajax: data option: empty bodies for non-GET requests");
     }
@@ -4991,6 +5017,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
+    @NotYetImplemented
     public void ajax__jQuery_ajax___If_Modified_Since_support__cache_() throws Exception {
         runTest("ajax: jQuery.ajax - If-Modified-Since support (cache)");
     }
@@ -5001,6 +5028,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
+    @NotYetImplemented
     public void ajax__jQuery_ajax___Etag_support__cache_() throws Exception {
         runTest("ajax: jQuery.ajax - Etag support (cache)");
     }
@@ -5011,6 +5039,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
+    @NotYetImplemented
     public void ajax__jQuery_ajax___If_Modified_Since_support__no_cache_() throws Exception {
         runTest("ajax: jQuery.ajax - If-Modified-Since support (no cache)");
     }
@@ -5021,6 +5050,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
+    @NotYetImplemented
     public void ajax__jQuery_ajax___Etag_support__no_cache_() throws Exception {
         runTest("ajax: jQuery.ajax - Etag support (no cache)");
     }
@@ -5042,6 +5072,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented
     public void ajax__jQuery_ajax___atom_xml() throws Exception {
         runTest("ajax: jQuery ajax - atom+xml");
     }
@@ -5072,6 +5103,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
+    @NotYetImplemented
     public void ajax__jQuery_ajax___statusText() throws Exception {
         runTest("ajax: jQuery.ajax - statusText");
     }
@@ -5092,6 +5124,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 8, 8")
+    @NotYetImplemented
     public void ajax__jQuery_ajax___transitive_conversions() throws Exception {
         runTest("ajax: jQuery.ajax - transitive conversions");
     }
@@ -5102,6 +5135,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
+    @NotYetImplemented
     public void ajax__jQuery_ajax___overrideMimeType() throws Exception {
         runTest("ajax: jQuery.ajax - overrideMimeType");
     }
@@ -5132,6 +5166,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
+    @NotYetImplemented
     public void ajax__jQuery_domManip___no_side_effect_because_of_ajaxSetup_or_global_events___11264_() throws Exception {
         runTest("ajax: jQuery.domManip - no side effect because of ajaxSetup or global events (#11264)");
     }
@@ -6824,7 +6859,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 42, 42")
-    @NotYetImplemented(FF17)
+    @NotYetImplemented
     public void Sizzle__selector__pseudo___misc() throws Exception {
         runTest("Sizzle: selector: pseudo - misc");
     }
