@@ -1122,4 +1122,43 @@ public class Window2Test extends WebDriverTestCase {
 
         assertEquals(getDefaultUrl() + "page2", driver.getCurrentUrl());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "null" },
+            FF3_6 = { "false", "undefined" },
+            IE = { "false", "undefined" })
+    public void onchange_noHandler() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "alert('onchange' in window);\n"
+            + "alert(window.onchange);\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "changed" },
+            FF3_6 = { },
+            IE = { })
+    public void onchange_withHandler() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<input id='it'/>\n"
+            + "<script>\n"
+            + "window.onchange = function() {\n"
+            + "  alert('changed');\n"
+            + "}\n"
+            + "</script></body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("it")).sendKeys("hello");
+        driver.findElement(By.tagName("body")).click();
+
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+    }
 }

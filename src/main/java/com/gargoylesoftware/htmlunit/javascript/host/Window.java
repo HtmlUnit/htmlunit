@@ -2010,6 +2010,24 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
         final ScriptResult result = Node.fireEvent(this, event);
         return !event.isAborted(result);
     }
+
+    /**
+     * Getter for the onchange event handler.
+     * @return the handler
+     */
+    @JsxGetter({@WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    public Object getOnchange() {
+        return getHandlerForJavaScript(Event.TYPE_CHANGE);
+    }
+
+    /**
+     * Setter for the onchange event handler.
+     * @param onchange the handler
+     */
+    @JsxSetter({@WebBrowser(value = FF, minVersion = 10), @WebBrowser(CHROME) })
+    public void setOnchange(final Object onchange) {
+        setHandlerForJavaScript(Event.TYPE_CHANGE, onchange);
+    }
 }
 
 class HTMLCollectionFrames extends HTMLCollection {

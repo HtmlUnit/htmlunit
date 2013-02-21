@@ -8,7 +8,10 @@
 
     <body>
         <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
-            <action type="fix">
+            <action type="fix" dev="mguillem" issue="1484" due-to="Hartmut Arlt">
+                JavaScript: add support for window.onchange handler (FF10+ and Chrome).
+            </action>
+            <action type="fix" dev="mguillem">
                 Fixed synchronization problem causing a task triggered by setTimeout to be executed to early, before event handlers.
             </action>
             <action type="fix" dev="mguillem">
