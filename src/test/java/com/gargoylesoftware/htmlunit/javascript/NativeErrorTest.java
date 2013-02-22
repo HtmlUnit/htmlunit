@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class NativeErrorTest extends WebDriverTestCase {
@@ -36,8 +37,7 @@ public class NativeErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "undefined", FF = "true", FF17 = "false")
-    @NotYetImplemented(Browser.FF17)
+    @Alerts(IE = "undefined", FF = "true")
     public void stack() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -45,8 +45,37 @@ public class NativeErrorTest extends WebDriverTestCase {
             + "  try {\n"
             + "    null.method();\n"
             + "  } catch (e) {\n"
-            + "    if (e.stack)\n"
-            + "      alert(e.stack.indexOf('test()@') != -1);\n"
+            + "    if (e.stack) {\n"
+            + "      var s = e.stack;\n"
+            + "      alert(s.indexOf('test()@') != -1 || s.indexOf('test@') != -1);\n"
+            + "    }\n"
+            + "    else\n"
+            + "      alert('undefined');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "undefined", FF = "true")
+    @NotYetImplemented(FF)
+    public void stackNewError() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    throw new Error();\n"
+            + "  } catch (e) {\n"
+            + "    if (e.stack) {\n"
+            + "      var s = e.stack;\n"
+            + "      alert(s.indexOf('test()@') != -1 || s.indexOf('test@') != -1);\n"
+            + "    }\n"
             + "    else\n"
             + "      alert('undefined');\n"
             + "  }\n"
