@@ -110,7 +110,11 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     private static final String PLATFORM_WIN32 = "Win32";
 
-    /** Firefox 3.6. */
+    /**
+     * Firefox 3.6.
+     * @deprecated as of 2.12. Use FF17 instead.
+     **/
+    @Deprecated
     public static final BrowserVersion FIREFOX_3_6 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows; en-US)",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.28) Gecko/20120306 Firefox/3.6.28",
@@ -118,7 +122,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /**
      * Firefox 10. Warning: experimental!!!.
-     * @deprecated as of 2.12
+     * @deprecated as of 2.12. Use FF17 instead.
      */
     @Deprecated
     public static final BrowserVersion FIREFOX_10 = new BrowserVersion(
@@ -126,7 +130,10 @@ public class BrowserVersion implements Serializable, Cloneable {
         "Mozilla/5.0 (Windows NT 6.1; rv:10.0.11) Gecko/20100101 Firefox/10.0.11",
         (float) 10.0, "FF10", null);
 
-    /** Firefox 17 ESR. Work In Progress!!! */
+    /**
+     * Firefox 17 ESR.
+     * @since 2.12
+     **/
     public static final BrowserVersion FIREFOX_17 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; rv:17.0) Gecko/20100101 Firefox/17.0",
