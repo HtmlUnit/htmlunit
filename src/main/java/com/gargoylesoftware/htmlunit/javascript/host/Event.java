@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_DOCUMENT_DESCENDANTS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_155;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_ABORTED_BY_RETURN_VALUE_FALSE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_KEY_CODE_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Brad Murray
  * @author Ahmed Ashour
  * @author Rob Di Marco
+ * @author Ronald Brill
  */
 @JsxClass
 public class Event extends SimpleScriptable {
@@ -483,10 +484,10 @@ public class Event extends SimpleScriptable {
     @JsxGetter(@WebBrowser(IE))
     public Object getKeyCode() {
         if (keyCode_ == null) {
-            if (getBrowserVersion().hasFeature(GENERATED_155)) {
-                return Integer.valueOf(0);
+            if (getBrowserVersion().hasFeature(JS_EVENT_KEY_CODE_UNDEFINED)) {
+                return Undefined.instance;
             }
-            return Undefined.instance;
+            return Integer.valueOf(0);
         }
         return keyCode_;
     }

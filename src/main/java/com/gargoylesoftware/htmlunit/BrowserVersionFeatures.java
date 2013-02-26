@@ -288,10 +288,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isFirefox(). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    GENERATED_155,
-
-    /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_156,
 
     /** Was originally .isFirefox(). */
@@ -845,6 +841,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_EVENT_HANDLER_AS_PROPERTY_DONT_RECEIVE_EVENT,
+
+    /** Javascript event.keyCode returns undefined instead of zero if the keyCode is not set. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_EVENT_KEY_CODE_UNDEFINED,
 
     /** Do not send parameter in event handlers. */
     @BrowserFeature(@WebBrowser(IE))
