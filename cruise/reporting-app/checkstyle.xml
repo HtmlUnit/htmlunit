@@ -62,7 +62,6 @@
         <module name="AvoidNestedBlocks"/>
 
         <!-- Checks for coding problems -->
-        <module name="DoubleCheckedLocking"/>
         <module name="HiddenField">
             <property name="tokens" value="VARIABLE_DEF"/>
         </module>
