@@ -764,7 +764,7 @@
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit-core-js</artifactId>
-            <version>2.12-SNAPSHOT</version>
+            <version>2.12</version>
         </dependency>
         <!-- This is an indirect dependency, used by Xalan and NekoHtml -->
         <dependency>
@@ -775,7 +775,7 @@
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
-            <version>1.9.18-SNAPSHOT</version>
+            <version>1.9.18</version>
             <exclusions>
                 <exclusion>
                     <groupId>xerces</groupId>
