@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.12" date="???" description="Bugfixes, CSS3 Selectors">
+        <release version="2.12" date="Mar 6, 2013" description="Bugfixes, CSS3 Selectors">
             <action type="update" dev="mguillem">
                 BrowserVersion: support FF17, deprecate FF3.6.
             </action>
@@ -79,6 +79,7 @@
             </action>
             <action type="fix" dev="mguillem">
                 JavaScript: elements nested within an element with "display: none" have offsetHeight = offsetWidth = 0.
+            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: fixed wrong trigger of focus event in special cases when field loses focus.
             </action>
