@@ -845,56 +845,13 @@ public class HtmlPage extends SgmlPage {
      * @param accessKey the key to look for
      * @return the HTML element that is assigned to the specified key or null
      *      if no elements can be found that match the specified key.
-     *
-     * @deprecated as of 2.11, use {@link #getHtmlElementByAccessKey(char)} instead
-     */
-    @Deprecated
-    public HtmlElement getElementByAccessKey(final char accessKey) {
-        return getHtmlElementByAccessKey(accessKey);
-    }
-
-    /**
-     * Returns the HTML element that is assigned to the specified access key. An
-     * access key (aka mnemonic key) is used for keyboard navigation of the
-     * page.<p>
-     *
-     * Only the following HTML elements may have <tt>accesskey</tt>s defined: A, AREA,
-     * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
-     *
-     * @param accessKey the key to look for
-     * @return the HTML element that is assigned to the specified key or null
-     *      if no elements can be found that match the specified key.
      */
     public HtmlElement getHtmlElementByAccessKey(final char accessKey) {
-        final List<HtmlElement> elements = getElementsByAccessKey(accessKey);
+        final List<HtmlElement> elements = getHtmlElementsByAccessKey(accessKey);
         if (elements.isEmpty()) {
             return null;
         }
         return elements.get(0);
-    }
-
-   /**
-    * Returns all the HTML elements that are assigned to the specified access key. An
-    * access key (aka mnemonic key) is used for keyboard navigation of the
-    * page.<p>
-    *
-    * The HTML specification seems to indicate that one accesskey cannot be used
-    * for multiple elements however Internet Explorer does seem to support this.
-    * It's worth noting that Mozilla does not support multiple elements with one
-    * access key so you are making your HTML browser specific if you rely on this
-    * feature.<p>
-    *
-    * Only the following HTML elements may have <tt>accesskey</tt>s defined: A, AREA,
-    * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
-    *
-    * @param accessKey the key to look for
-    * @return the elements that are assigned to the specified accesskey
-    *
-    * @deprecated as of 2.11, please use {@link #getHtmlElementsByAccessKey(char)} instead
-    */
-    @Deprecated
-    public List<HtmlElement> getElementsByAccessKey(final char accessKey) {
-        return getHtmlElementsByAccessKey(accessKey);
     }
 
     /**
@@ -1511,7 +1468,7 @@ public class HtmlPage extends SgmlPage {
      *         would only happen if the access key triggered a button which in turn caused a page load)
      */
     public HtmlElement pressAccessKey(final char accessKey) throws IOException {
-        final HtmlElement element = getElementByAccessKey(accessKey);
+        final HtmlElement element = getHtmlElementByAccessKey(accessKey);
         if (element != null) {
             element.focus();
             final Page newPage;
