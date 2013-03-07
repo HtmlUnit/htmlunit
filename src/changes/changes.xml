@@ -7,6 +7,11 @@
     </properties>
 
     <body>
+        <release version="2.13" date="???" description="Bugfixes">
+            <action type="remove" dev="asashour">
+                Remove deprecated BaseFrame.
+            </action>
+        </release>
         <release version="2.12" date="Mar 6, 2013" description="Bugfixes, CSS3 Selectors">
             <action type="update" dev="mguillem">
                 BrowserVersion: support FF17, deprecate FF3.6.

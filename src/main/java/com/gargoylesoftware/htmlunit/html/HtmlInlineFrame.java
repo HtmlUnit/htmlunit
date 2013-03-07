@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlInlineFrame extends BaseFrame {
+public class HtmlInlineFrame extends BaseFrameElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "iframe";

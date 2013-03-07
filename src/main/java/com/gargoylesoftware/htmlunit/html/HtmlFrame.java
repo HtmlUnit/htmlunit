@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  */
-public class HtmlFrame extends BaseFrame {
+public class HtmlFrame extends BaseFrameElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "frame";
