@@ -9,7 +9,16 @@
     <body>
         <release version="2.13" date="???" description="Bugfixes">
             <action type="remove" dev="asashour">
-                Remove deprecated BaseFrame, Htmlpage.getElementByAccessKey(), HtmlPage.getElementsByAccessKey()
+                WebClient: remove deprecated setPrintContentOnFailingStatusCode(), getPrintContentOnFailingStatusCode(),
+                setThrowExceptionOnFailingStatusCode(), isThrowExceptionOnFailingStatusCode(), setJavaScriptEnabled(),
+                isJavaScriptEnabled(), setCssEnabled(), isCssEnabled(), setAppletEnabled(), isAppletEnabled(),
+                setPopupBlockerEnabled(), isPopupBlockerEnabled(), getHomePage(), setHomePage(), getProxyConfig(),
+                setProxyConfig(), setRedirectEnabled(), isRedirectEnabled(), setUseInsecureSSL(), setActiveXNative(),
+                isActiveXNative(), getTimeout(), setTimeout(), isThrowExceptionOnScriptError(),
+                setThrowExceptionOnScriptError() and setSSLClientCertificate().
+            </action>
+            <action type="remove" dev="asashour">
+                Remove deprecated BaseFrame, Htmlpage.getElementByAccessKey(), HtmlPage.getElementsByAccessKey().
             </action>
         </release>
         <release version="2.12" date="Mar 6, 2013" description="Bugfixes, CSS3 Selectors">

@@ -31,7 +31,6 @@ import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
@@ -459,33 +458,6 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Specify whether or not the content of the resulting document will be
-     * printed to the console in the event of a failing response code.
-     * Successful response codes are in the range 200-299. The default is true.
-     *
-     * @param enabled True to enable this feature
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setPrintContentOnFailingStatusCode instead.
-     */
-    @Deprecated
-    public void setPrintContentOnFailingStatusCode(final boolean enabled) {
-        getOptions().setPrintContentOnFailingStatusCode(enabled);
-    }
-
-    /**
-     * Returns <tt>true</tt> if the content of the resulting document will be printed to
-     * the console in the event of a failing response code.
-     *
-     * @return <tt>true</tt> if the content of the resulting document will be printed to
-     *         the console in the event of a failing response code
-     * @see #setPrintContentOnFailingStatusCode
-     * @deprecated as of 2.11, please use {@link #getOptions()}.getPrintContentOnFailingStatusCode instead.
-     */
-    @Deprecated
-    public boolean getPrintContentOnFailingStatusCode() {
-        return getOptions().getPrintContentOnFailingStatusCode();
-    }
-
-    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      *
      * <p>Logs the response's content if its status code indicates a request failure and
@@ -501,30 +473,6 @@ public class WebClient implements Serializable {
             LOG.info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
             LOG.info(webResponse.getContentAsString());
         }
-    }
-
-    /**
-     * Specify whether or not an exception will be thrown in the event of a
-     * failing status code. Successful status codes are in the range 200-299.
-     * The default is true.
-     *
-     * @param enabled <tt>true</tt> to enable this feature
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setThrowExceptionOnFailingStatusCode instead.
-     */
-    @Deprecated
-    public void setThrowExceptionOnFailingStatusCode(final boolean enabled) {
-        getOptions().setThrowExceptionOnFailingStatusCode(enabled);
-    }
-
-    /**
-     * Returns <tt>true</tt> if an exception will be thrown in the event of a failing response code.
-     * @return <tt>true</tt> if an exception will be thrown in the event of a failing response code
-     * @see #setThrowExceptionOnFailingStatusCode
-     * @deprecated as of 2.11, please use {@link #getOptions()}.isThrowExceptionOnFailingStatusCode instead.
-     */
-    @Deprecated
-    public boolean isThrowExceptionOnFailingStatusCode() {
-        return getOptions().isThrowExceptionOnFailingStatusCode();
     }
 
     /**
@@ -606,139 +554,6 @@ public class WebClient implements Serializable {
             throw new NullPointerException("Can't set JavaScriptEngine to null");
         }
         scriptEngine_ = engine;
-    }
-
-    /**
-     * Enables/disables JavaScript support. By default, this property is enabled.
-     *
-     * @param enabled <tt>true</tt> to enable JavaScript support
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setJavaScriptEnabled instead.
-     */
-    @Deprecated
-    public void setJavaScriptEnabled(final boolean enabled) {
-        getOptions().setJavaScriptEnabled(enabled);
-    }
-
-    /**
-     * Returns <tt>true</tt> if JavaScript is enabled and the script engine was loaded successfully.
-     *
-     * @return <tt>true</tt> if JavaScript is enabled
-     * @deprecated as of 2.11, please use {@link #getOptions()}.isJavaScriptEnabled instead.
-     */
-    @Deprecated
-    public boolean isJavaScriptEnabled() {
-        return getOptions().isJavaScriptEnabled();
-    }
-
-    /**
-     * Enables/disables CSS support. By default, this property is enabled.
-     *
-     * @param enabled <tt>true</tt> to enable CSS support
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setCssEnabled instead.
-     */
-    @Deprecated
-    public void setCssEnabled(final boolean enabled) {
-        getOptions().setCssEnabled(enabled);
-    }
-
-    /**
-     * Returns <tt>true</tt> if CSS is enabled.
-     *
-     * @return <tt>true</tt> if CSS is enabled
-     * @deprecated as of 2.11, please use {@link #getOptions()}.isCssEnabled instead.
-     */
-    @Deprecated
-    public boolean isCssEnabled() {
-        return getOptions().isCssEnabled();
-    }
-
-    /**
-     * Enables/disables Applet support. By default, this property is disabled.<br/>
-     * <p>
-     * Note: as of HtmlUnit-2.4, Applet support is experimental and minimal
-     * </p>
-     * @param enabled <tt>true</tt> to enable Applet support
-     * @since HtmlUnit-2.4
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setAppletEnabled instead.
-     */
-    @Deprecated
-    public void setAppletEnabled(final boolean enabled) {
-        getOptions().setAppletEnabled(enabled);
-    }
-
-    /**
-     * Returns <tt>true</tt> if Applet are enabled.
-     *
-     * @return <tt>true</tt> if Applet is enabled
-     * @deprecated as of 2.11, please use {@link #getOptions()}.isAppletEnabled instead.
-     */
-    @Deprecated
-    public boolean isAppletEnabled() {
-        return getOptions().isAppletEnabled();
-    }
-
-    /**
-     * Enable/disable the popup window blocker. By default, the popup blocker is disabled, and popup
-     * windows are allowed. When set to <tt>true</tt>, <tt>window.open()</tt> has no effect and
-     * returns <tt>null</tt>.
-     *
-     * @param enabled <tt>true</tt> to enable the popup window blocker
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setPopupBlockerEnabled instead.
-     */
-    @Deprecated
-    public void setPopupBlockerEnabled(final boolean enabled) {
-        getOptions().setPopupBlockerEnabled(enabled);
-    }
-
-    /**
-     * Returns <tt>true</tt> if the popup window blocker is enabled.
-     *
-     * @return <tt>true</tt> if the popup window blocker is enabled
-     * @deprecated as of 2.11, please use {@link #getOptions()}.isPopupBlockerEnabled instead.
-     */
-    @Deprecated
-    public boolean isPopupBlockerEnabled() {
-        return getOptions().isPopupBlockerEnabled();
-    }
-
-    /**
-     * Returns the client's current homepage.
-     * @return the client's current homepage
-     * @deprecated as of 2.11, please use {@link #getOptions()}.getHomePage instead.
-     */
-    @Deprecated
-    public String getHomePage() {
-        return getOptions().getHomePage();
-    }
-
-    /**
-     * Sets the client's homepage.
-     * @param homePage the new homepage URL
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setHomePage instead.
-     */
-    @Deprecated
-    public void setHomePage(final String homePage) {
-        getOptions().setHomePage(homePage);
-    }
-
-    /**
-     * Returns the proxy configuration for this client.
-     * @return the proxy configuration for this client
-     * @deprecated as of 2.11, please use {@link #getOptions()}.getProxyConfig instead.
-     */
-    @Deprecated
-    public ProxyConfig getProxyConfig() {
-        return getOptions().getProxyConfig();
-    }
-
-    /**
-     * Sets the proxy configuration for this client.
-     * @param proxyConfig the proxy configuration for this client
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setProxyConfig instead.
-     */
-    @Deprecated
-    public void setProxyConfig(final ProxyConfig proxyConfig) {
-        getOptions().setProxyConfig(proxyConfig);
     }
 
     /**
@@ -1082,46 +897,6 @@ public class WebClient implements Serializable {
         getPage(window, request);
 
         return window;
-    }
-
-    /**
-     * Sets whether or not redirections will be followed automatically on receipt of a redirect
-     * status code from the server.
-     * @param enabled true to enable automatic redirection
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setRedirectEnabled instead.
-     */
-    @Deprecated
-    public void setRedirectEnabled(final boolean enabled) {
-        getOptions().setRedirectEnabled(enabled);
-    }
-
-    /**
-     * Returns whether or not redirections will be followed automatically on receipt of
-     * a redirect status code from the server.
-     * @return true if automatic redirection is enabled
-     * @deprecated as of 2.11, please use {@link #getOptions()}.isRedirectEnabled instead.
-     */
-    @Deprecated
-    public boolean isRedirectEnabled() {
-        return getOptions().isRedirectEnabled();
-    }
-
-    /**
-     * If set to <code>true</code>, the client will accept connections to any host, regardless of
-     * whether they have valid certificates or not. This is especially useful when you are trying to
-     * connect to a server with expired or corrupt certificates.
-     * <p>
-     * This method works only if {@link #getWebConnection()} returns an {@link HttpWebConnection}
-     * (which is the default) or a {@link com.gargoylesoftware.htmlunit.util.WebConnectionWrapper}
-     * wrapping an {@link HttpWebConnection}.
-     * </p>
-     * @param useInsecureSSL whether or not to use insecure SSL
-     * @throws GeneralSecurityException if a security error occurs
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setUseInsecureSSL instead.
-     */
-    @Deprecated
-    public void setUseInsecureSSL(final boolean useInsecureSSL) throws GeneralSecurityException {
-        getOptions().setUseInsecureSSL(useInsecureSSL);
     }
 
     /**
@@ -1640,29 +1415,6 @@ public class WebClient implements Serializable {
     }
 
     /**
-     * Sets whether to allow native ActiveX or no. Default value is false.
-     * Beware that you should never allow running native ActiveX components unless you fully trust
-     * the JavaScript code, as it is not controlled by the Java Virtual Machine.
-     *
-     * @param allow whether to allow or no
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setActiveXNative instead.
-     */
-    @Deprecated
-    public void setActiveXNative(final boolean allow) {
-        getOptions().setActiveXNative(allow);
-    }
-
-    /**
-     * Returns whether native ActiveX components are allowed or no.
-     * @return whether native ActiveX components are allowed or no
-     * @deprecated as of 2.11, please use {@link #getOptions()}.isActiveXNative instead.
-     */
-    @Deprecated
-    public boolean isActiveXNative() {
-        return getOptions().isActiveXNative();
-    }
-
-    /**
      * Sets the listener for messages generated by the HTML parser.
      * @param listener the new listener, <code>null</code> if messages should be totally ignored
      */
@@ -1717,53 +1469,6 @@ public class WebClient implements Serializable {
      */
     public long getJavaScriptTimeout() {
         return scriptEngine_.getContextFactory().getTimeout();
-    }
-
-    /**
-     * Gets the timeout value for the {@link WebConnection}.
-     *
-     * @return the timeout value in milliseconds
-     * @see WebClient#setTimeout(int)
-     * @deprecated as of 2.11, please use {@link #getOptions()}.{@link WebClientOptions#getTimeout getTimeout()}
-     * instead.
-     */
-    @Deprecated
-    public int getTimeout() {
-        return getOptions().getTimeout();
-    }
-
-    /**
-     * <p>Sets the timeout of the {@link WebConnection}.</p>
-     *
-     * @param timeout the value of the timeout in milliseconds
-     * @deprecated as of 2.11, please use {@link #getOptions()}.{@link WebClientOptions#setTimeout setTimeout()}
-     * instead.
-     */
-    @Deprecated
-    public void setTimeout(final int timeout) {
-        getOptions().setTimeout(timeout);
-    }
-
-    /**
-     * Indicates if an exception should be thrown when a script execution fails
-     * (the default) or if it should be caught and just logged to allow page
-     * execution to continue.
-     * @return <code>true</code> if an exception is thrown on script error (the default)
-     * @deprecated as of 2.11, please use {@link #getOptions()}.isThrowExceptionOnScriptError instead.
-     */
-    @Deprecated
-    public boolean isThrowExceptionOnScriptError() {
-        return getOptions().isThrowExceptionOnScriptError();
-    }
-
-    /**
-     * Changes the behavior of this webclient when a script error occurs.
-     * @param newValue indicates if exception should be thrown or not
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setThrowExceptionOnScriptError instead.
-     */
-    @Deprecated
-    public void setThrowExceptionOnScriptError(final boolean newValue) {
-        getOptions().setThrowExceptionOnScriptError(newValue);
     }
 
     /**
@@ -2063,26 +1768,6 @@ public class WebClient implements Serializable {
             return waitForBackgroundJavaScriptStartingBefore(newDelay);
         }
         return count;
-    }
-
-    /**
-     * Sets the SSL client certificate to use.
-     * The needed parameters are used to construct a {@link java.security.KeyStore}.
-     *
-     * If the web server requires Renegotiation, you have to set sytem property
-     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
-     * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
-     * TLS Renegotiation Issue</a>.
-     *
-     * @param certificateUrl the URL which locates the certificate
-     * @param certificatePassword the certificate password
-     * @param certificateType the type of certificate, usually "jks" or "pkcs12".
-     * @deprecated as of 2.11, please use {@link #getOptions()}.setSSLClientCertificate instead.
-     */
-    @Deprecated
-    public void setSSLClientCertificate(final URL certificateUrl, final String certificatePassword,
-            final String certificateType) {
-        getOptions().setSSLClientCertificate(certificateUrl, certificatePassword, certificateType);
     }
 
     /**
