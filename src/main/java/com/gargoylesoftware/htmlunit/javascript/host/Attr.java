@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -36,6 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Sudhan Moghe
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = DomAttr.class)
 public class Attr extends Node {
@@ -67,12 +70,16 @@ public class Attr extends Node {
     }
 
     /**
-     * Returns <tt>true</tt> if arbitrary properties can be added to this attribute.
-     * @return <tt>true</tt> if arbitrary properties can be added to this attribute
+     * Returns <tt>true</tt> if the attribute is an custom property.
+     * @return <tt>true</tt> if the attribute is an custom property
      */
     @JsxGetter(@WebBrowser(IE))
     public boolean getExpando() {
-        return true;
+        final Object owner = getOwnerElement();
+        if (null == owner) {
+            return false;
+        }
+        return !ScriptableObject.hasProperty((Scriptable) owner, getName());
     }
 
     /**

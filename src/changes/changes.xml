@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1493" due-to="Barry Pitman">
+                JavaScript: Attribute.expando now returns the correct value instead of the so far hard coded true (IE only).
+            </action>
             <action type="remove" dev="asashour">
                 WebClient: remove deprecated setPrintContentOnFailingStatusCode(), getPrintContentOnFailingStatusCode(),
                 setThrowExceptionOnFailingStatusCode(), isThrowExceptionOnFailingStatusCode(), setJavaScriptEnabled(),

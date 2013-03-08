@@ -132,8 +132,56 @@ public class AttrTest extends WebDriverTestCase {
             + "  alert(d.getAttributeNode('name').isId);\n"
             + "  alert(d.getAttributeNode('width').isId);\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<div iD='d' name='d' width='40'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<div iD='d' name='d' width='40'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = { "false", "true", "false", "true", "true" },
+            DEFAULT = { "undefined", "undefined", "undefined", "undefined", "undefined" })
+    public void expando() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  alert(d.attributes['id'].expando);\n"
+            + "  alert(d.attributes['name'].expando);\n"
+            + "  alert(d.attributes['style'].expando);\n"
+            + "  alert(d.attributes['custom'].expando);\n"
+            + "  alert(d.attributes['other'].expando);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d' name='d' style='display: block' custom='value' other></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Testcase for issue http://sourceforge.net/p/htmlunit/bugs/1493/.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "false", DEFAULT = "undefined")
+    public void expandoEvent() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var d = document.getElementById('d');\n"
+            + "  d.setAttribute('onfocusin', 't');\n"
+            + "  alert(d.attributes['onfocusin'].expando);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d'></div>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
