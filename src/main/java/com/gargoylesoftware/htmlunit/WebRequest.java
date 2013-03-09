@@ -81,6 +81,7 @@ public class WebRequest implements Serializable {
      *
      * @deprecated as of 2.13
      */
+    @Deprecated
     public WebRequest(final WebRequest originalRequest, final URL url) {
         this(url);
         setProxyHost(originalRequest.getProxyHost());
