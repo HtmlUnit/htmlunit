@@ -414,7 +414,8 @@ public class Document extends EventNode {
             // FF4+ doesn't support document.createElement('<div>')
             if (browserVersion.hasFeature(BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_STRICT)
                   && (tagName.contains("<") || tagName.contains(">"))) {
-                LOG.info("createElement: String contains an invalid character: " + tagName);
+                LOG.info("createElement: Provided string '"
+                            + tagName + "' contains an invalid character; '<' and '>' are not allowed");
                 throw Context.reportRuntimeError("String contains an invalid character");
             }
             else if (!browserVersion.hasFeature(JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX)
@@ -423,7 +424,7 @@ public class Document extends EventNode {
 
                 final Matcher matcher = TAG_NAME_PATTERN.matcher(tagName);
                 if (!matcher.matches()) {
-                    LOG.info("createElement: String contains an invalid character: ");
+                    LOG.info("createElement: Provided string '" + tagName + "' contains an invalid character");
                     throw Context.reportRuntimeError("String contains an invalid character");
                 }
             }
