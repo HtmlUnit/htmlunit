@@ -74,6 +74,21 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Instantiates a {@link WebRequest} for the specified URL using the proxy configuration from the
+     * specified original request.
+     * @param originalRequest the original request
+     * @param url the target URL
+     *
+     * @deprecated as of 2.13
+     */
+    public WebRequest(final WebRequest originalRequest, final URL url) {
+        this(url);
+        setProxyHost(originalRequest.getProxyHost());
+        setProxyPort(originalRequest.getProxyPort());
+        setSocksProxy(originalRequest.isSocksProxy());
+    }
+
+    /**
      * Instantiates a {@link WebRequest} for the specified URL using the specified HTTP submit method.
      * @param url the target URL
      * @param submitMethod the HTTP submit method to use
