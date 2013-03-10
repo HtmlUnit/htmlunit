@@ -1384,13 +1384,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Removes all of this node's children.
      */
     public void removeAllChildren() {
-        if (getFirstChild() == null) {
-            return;
-        }
-
-        for (final Iterator<DomNode> it = getChildren().iterator(); it.hasNext();) {
-            it.next().removeAllChildren();
-            it.remove();
+        while (getFirstChild() != null) {
+            getFirstChild().remove();
         }
     }
 

@@ -3836,4 +3836,22 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "[object Text]", "[object Text]" }, IE = { "[object]", "[object]" })
+    public void textContentShouldNotDetachNestedNode() throws Exception {
+        final String html = "<html><body><div><div id='it'>foo</div></div><script>\n"
+            + "try {\n"
+            + "  var elt = document.getElementById('it');\n"
+            + "  alert(elt.firstChild);\n"
+            + "  elt.parentNode.textContent = '';\n"
+            + "  alert(elt.firstChild);\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
