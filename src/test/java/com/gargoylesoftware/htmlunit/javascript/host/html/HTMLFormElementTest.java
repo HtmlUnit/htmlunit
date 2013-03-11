@@ -1103,6 +1103,22 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         enctypeTest("text/html", "get", null);
     }
 
+    /**
+     * Verify the default value of enctype for a newly created form element.
+     * A similar test is used by jQuery-1.9.1 in its "feature support" detection.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("application/x-www-form-urlencoded")
+    @NotYetImplemented
+    public void enctype_defaultValue() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "alert(document.createElement('form').enctype)\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
     private void enctypeTest(final String enctype, final String method, final String expectedCntType) throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
