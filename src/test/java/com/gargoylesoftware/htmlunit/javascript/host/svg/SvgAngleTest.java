@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.svg;
+package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAngle}.
+ * Tests for {@link SVGAngle}.
  *
  * @version $Revision$
  * @author Marc Guillemot
