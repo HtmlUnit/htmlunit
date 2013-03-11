@@ -139,7 +139,7 @@ mvn gpg:sign-and-deploy-file -Durl=https://oss.sonatype.org/service/local/stagin
                     </li>
                     <li>
                         Delete online website (/home/project-web/htmlunit/htdocs).
-                        <source>rm -rf /home/project-web/htmlunit/htdocs/apidocs</source>
+                        <source>rm -rf /home/project-web/htmlunit/htdocs/*</source>
                     </li>
                     <li>
                         Deploy the site documentation (skipping the tests again).
