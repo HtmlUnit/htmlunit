@@ -226,7 +226,8 @@ public abstract class WebServerTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}, but using WebServer instead.
+     * Defines the provided string as response for the provided URL and loads it using the currently
+     * configured browser version. Finally it extracts the captured alerts and verifies them.
      * @param html the HTML to use
      * @param url the URL to use to load the page
      * @return the page
@@ -238,7 +239,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}, but using WebServer instead.
+     * Same as {@link #loadPageWithAlerts(String, URL)}, but configuring the max wait time.
      * @param html the HTML to use
      * @param url the URL to use to load the page
      * @param maxWaitTime to wait to get the alerts (in ms)
@@ -264,7 +265,8 @@ public abstract class WebServerTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * Defines the provided string as response for the default URL and loads it using the currently
+     * configured browser version.
      * @param html the HTML to use
      * @return the page
      * @throws Exception if something goes wrong
@@ -274,7 +276,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * Same as {@link #loadPage(String)}... but defining the default URL.
      * @param html the HTML to use
      * @param url the url to use to load the page
      * @return the page
@@ -285,7 +287,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * Same as {@link #loadPage(String, URL)}... but defining content type and charset as well.
      * @param html the HTML to use
      * @param url the url to use to load the page
      * @param contentType the content type to return

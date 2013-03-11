@@ -255,7 +255,7 @@ public class WebClient implements Serializable {
      * @return the page returned by the server when the specified request was made in the specified window
      * @throws IOException if an IO error occurs
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
+     *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      *
      * @see WebRequest
      */
@@ -332,7 +332,7 @@ public class WebClient implements Serializable {
      * @param <P> the page type
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      */
     @SuppressWarnings("unchecked")
@@ -348,7 +348,7 @@ public class WebClient implements Serializable {
      * @param <P> the page type
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      * @throws MalformedURLException if no URL can be created from the provided string
      */
@@ -365,7 +365,7 @@ public class WebClient implements Serializable {
      * @param <P> the page type
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      */
     @SuppressWarnings("unchecked")
@@ -379,7 +379,7 @@ public class WebClient implements Serializable {
      * @param <P> the page type
      * @return the new page
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      * @see #getPage(WebWindow,WebRequest)
      */
@@ -402,7 +402,7 @@ public class WebClient implements Serializable {
      * @param webWindow the window that the new page will be placed within
      * @throws IOException if an IO error occurs
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *         {@link #setThrowExceptionOnFailingStatusCode(boolean)} is set to true
+     *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      * @return the newly created page
      * @see #setAttachmentHandler(AttachmentHandler)
      */
@@ -461,7 +461,7 @@ public class WebClient implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
      *
      * <p>Logs the response's content if its status code indicates a request failure and
-     * {@link #getPrintContentOnFailingStatusCode()} returns <tt>true</tt>.
+     * {@link WebClientOptions#getPrintContentOnFailingStatusCode()} returns <tt>true</tt>.
      *
      * @param webResponse the response whose content may be logged
      */

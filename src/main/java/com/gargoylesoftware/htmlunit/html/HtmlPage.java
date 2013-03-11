@@ -181,7 +181,8 @@ public class HtmlPage extends SgmlPage {
      * Initialize this page.
      * @throws IOException if an IO problem occurs
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     * {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
+     * {@link com.gargoylesoftware.htmlunit.WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set
+     * to true.
      */
     @Override
     public void initialize() throws IOException, FailingHttpStatusCodeException {

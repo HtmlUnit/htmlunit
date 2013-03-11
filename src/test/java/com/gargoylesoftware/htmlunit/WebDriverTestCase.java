@@ -523,7 +523,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * Same as {@link #loadPageWithAlerts2(String)}... but doesn't verify the alerts.
      * @param html the HTML to use
      * @param url the url to use to load the page
      * @return the web driver
@@ -534,7 +534,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}... but doesn't verify the alerts.
+     * Same as {@link #loadPageWithAlerts2(String)}... but doesn't verify the alerts.
      * @param html the HTML to use
      * @param url the url to use to load the page
      * @param contentType the content type to return
@@ -558,7 +558,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * Defines the provided HTML as the response for {@link #getDefaultUrl()}
+     * and loads the page with this URL using the current WebDriver version; finally, asserts that the
+     * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
      * @param html the HTML to use
      * @return the web driver
      * @throws Exception if something goes wrong
@@ -568,7 +570,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * Defines the provided HTML as the response for {@link #getDefaultUrl()}
+     * and loads the page with this URL using the current WebDriver version; finally, asserts that the
+     * alerts equal the expected alerts (in which "§§URL§§" has been expanded to the default URL).
      * @param html the HTML to use
      * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
      * @return the web driver
@@ -579,7 +583,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * Same as {@link #loadPageWithAlerts2(String)}, but specifying the default URL.
      * @param html the HTML to use
      * @param url the URL to use to load the page
      * @return the web driver
@@ -590,7 +594,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * Same as {@link #loadPageWithAlerts2(String, long)}, but specifying the default URL.
      * @param html the HTML to use
      * @param url the URL to use to load the page
      * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
@@ -629,7 +633,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * Same as {@link #loadPageWithAlerts2(String)} with additional servlet configuration.
      * @param html the HTML to use for the default response
      * @param servlets the additional servlets to configure with their mapping
      * @return the web driver
@@ -641,7 +645,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Same as {@link #loadPageWithAlerts(String)}, but using WebDriver instead.
+     * Same as {@link #loadPageWithAlerts2(String, URL, long)}, but with additional servlet configuration.
      * @param html the HTML to use for the default page
      * @param url the URL to use to load the page
      * @param maxWaitTime the maximum time to wait to get the alerts (in millis)

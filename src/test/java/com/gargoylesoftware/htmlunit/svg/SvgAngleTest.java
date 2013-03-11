@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Tests for {@link SVGAngle}.
+ * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAngle}.
  *
  * @version $Revision$
  * @author Marc Guillemot

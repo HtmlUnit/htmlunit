@@ -339,7 +339,7 @@
                         <link>http://docs.oracle.com/javase/6/docs/api/</link>
                         <link>http://commons.apache.org/logging/apidocs/</link>
                         <link>http://commons.apache.org/codec/apidocs/</link>
-                        <link>http://hc.apache.org/httpcomponents-client/httpclient/apidocs/</link>
+                        <link>http://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/</link>
                     </links>
                     <stylesheet>maven</stylesheet>
                 </configuration>

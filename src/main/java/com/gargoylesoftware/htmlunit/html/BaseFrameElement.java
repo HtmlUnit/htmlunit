@@ -97,8 +97,10 @@ public abstract class BaseFrameElement extends HtmlElement {
      * Called after the node for the &lt;frame&gt; or &lt;iframe&gt; has been added to the containing page.
      * The node needs to be added first to allow JavaScript in the frame to see the frame in the parent.
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
+     *      {@link com.gargoylesoftware.htmlunit.WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is
+     *      set to true
      */
+
     public void loadInnerPage() throws FailingHttpStatusCodeException {
         String source = getSrcAttribute();
         if (source.isEmpty()) {
