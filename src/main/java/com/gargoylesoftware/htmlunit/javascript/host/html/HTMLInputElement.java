@@ -23,7 +23,9 @@ import java.io.IOException;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
+import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.InputElementFactory;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
@@ -32,7 +34,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.FormField;
+import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 
 /**
  * The JavaScript object for form input elements (html tag &lt;input ...&gt;).
@@ -370,7 +374,18 @@ public class HTMLInputElement extends FormField {
     @Override
     @JsxFunction(@WebBrowser(FF))
     public void click() throws IOException {
-        super.click();
+        final HtmlInput domNode = (HtmlInput) getDomNodeOrDie();
+        final boolean originalState = domNode.isChecked();
+        final Event event = new MouseEvent(domNode, MouseEvent.TYPE_CLICK, false,
+                false, false, MouseEvent.BUTTON_LEFT);
+        domNode.click(event);
+
+        final boolean newState = domNode.isChecked();
+
+        if (originalState != newState
+            && (domNode instanceof HtmlCheckBoxInput || domNode instanceof HtmlRadioButtonInput)) {
+            domNode.fireEvent(Event.TYPE_CHANGE);
+        }
     }
 
     /**

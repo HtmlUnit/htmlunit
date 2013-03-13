@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: JS click() method triggers onchange handler on checkbox and radio button.
+            </action>
             <action type="fix" dev="mguillem" issue="1494">
                 DomNode.removeAllChildren should not detach nested children from their parent node.
             </action>

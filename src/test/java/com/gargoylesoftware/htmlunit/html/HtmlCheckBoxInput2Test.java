@@ -228,4 +228,22 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
         final WebElement checkbox = driver.findElement(By.id("checkbox"));
         assertFalse(checkbox.isSelected());
     }
+
+    /**
+     * Call to JS function click() should trigger the onchange handler but neither the onfocus handler
+     * nor the mousedown/up handlers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("changed")
+    public void clickShouldTriggerOnchange() throws Exception {
+        final String html = "<html><body>\n"
+            + "<input type='checkbox' id='it' onchange='alert(\"changed\")'"
+            + "onmousedown='alert(\"down\")' onmouseup='alert(\"up\")' onfocus='alert(\"focused\")'>Check me\n"
+            + "<script>\n"
+            + "var elt = document.getElementById('it');\n"
+            + "elt.click();\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

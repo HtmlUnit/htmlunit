@@ -2708,7 +2708,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented(FF)
     public void event__trigger_click_on_checkbox__fires_change_event() throws Exception {
         runTest("event: trigger click on checkbox, fires change event");
     }
