@@ -973,4 +973,25 @@ public class HTMLElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * querySelectorAll should return nodes matched by many rules only once.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = "1", IE = "undefined")
+    public void querySelectorAll_noDuplication() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div><span>First</span></div>\n"
+            + "<script>\n"
+            + "  if(document.body.querySelectorAll) {\n"
+            + "    var tags = document.body.querySelectorAll('span, div > span');\n"
+            + "    alert(tags.length);\n"
+            + "  }\n"
+            + "  else\n"
+            + "    alert('undefined');\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
