@@ -939,13 +939,20 @@ public class HTMLElement2Test extends WebDriverTestCase {
         for (final String selector : HTMLDocumentTest.JQUERY_CUSTOM_SELECTORS) {
             doTestQuerySelectorAll_badSelector(selector);
         }
+
+        // some other bad selectors tested in jQuery 1.8.2 tests
+        final String[] otherBadSelectors = {":nth-child(2n+-0)", ":nth-child(2+0)", ":nth-child(- 1n)",
+            ":nth-child(-1 n)" };
+        for (final String selector : otherBadSelectors) {
+            doTestQuerySelectorAll_badSelector(selector);
+        }
     }
 
     private void doTestQuerySelectorAll_badSelector(final String selector) throws Exception {
         final String html = "<html><body><div id='it'></div><script>\n"
             + "try {\n"
             + "  document.getElementById('it').querySelectorAll('" + selector + "');\n"
-            + "  alert('working');\n"
+            + "  alert('working: + " + selector + "');\n"
             + "} catch(e) { alert('exception'); }\n"
             + "</script></body></html>";
 

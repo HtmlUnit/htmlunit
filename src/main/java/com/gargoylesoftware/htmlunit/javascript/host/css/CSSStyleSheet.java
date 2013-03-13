@@ -1117,6 +1117,9 @@ public class CSSStyleSheet extends SimpleScriptable {
                 if (documentMode < 9) {
                     return CSS2_PSEUDO_CLASSES.contains(value);
                 }
+                if ("nth-child()".equals(value)) {
+                    return pcc.getValue().matches("nth-child(\\w*[-+]?\\d*n\\w*[+-]\\w\\d*\\w*)");
+                }
                 return CSS3_PSEUDO_CLASSES.contains(value);
             default:
                 LOG.warn("Unhandled CSS condition type '" + condition.getConditionType() + "'. Accepting it silently.");

@@ -6769,7 +6769,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
-    @NotYetImplemented(FF)
     public void Sizzle__selector__broken() throws Exception {
         runTest("Sizzle: selector: broken");
     }
