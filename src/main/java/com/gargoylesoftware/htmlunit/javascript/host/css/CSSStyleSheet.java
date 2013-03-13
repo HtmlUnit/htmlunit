@@ -1118,7 +1118,10 @@ public class CSSStyleSheet extends SimpleScriptable {
                     return CSS2_PSEUDO_CLASSES.contains(value);
                 }
                 if ("nth-child()".equals(value)) {
-                    return pcc.getValue().matches("nth-child(\\w*[-+]?\\d*n\\w*[+-]\\w\\d*\\w*)");
+                    final String arg = StringUtils.substringBetween(pcc.getValue(), "(", ")").trim();
+                    return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg)
+                            || arg.matches("\\d+")
+                            || arg.matches("[-+]?\\d*n\\w*([+-]\\w\\d*)?");
                 }
                 return CSS3_PSEUDO_CLASSES.contains(value);
             default:
