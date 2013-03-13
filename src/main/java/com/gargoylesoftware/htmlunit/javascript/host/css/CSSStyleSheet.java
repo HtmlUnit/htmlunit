@@ -37,6 +37,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Pattern;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -122,6 +123,8 @@ import com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl;
 public class CSSStyleSheet extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);
+    private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
+    private static final Pattern NTH_COMPLEX = Pattern.compile("[-+]?\\d*n\\w*([+-]\\w\\d*)?");
 
     /** The parsed stylesheet which this host object wraps. */
     private final org.w3c.dom.css.CSSStyleSheet wrapped_;
@@ -1120,8 +1123,8 @@ public class CSSStyleSheet extends SimpleScriptable {
                 if ("nth-child()".equals(value)) {
                     final String arg = StringUtils.substringBetween(pcc.getValue(), "(", ")").trim();
                     return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg)
-                            || arg.matches("\\d+")
-                            || arg.matches("[-+]?\\d*n\\w*([+-]\\w\\d*)?");
+                            || NTH_NUMERIC.matcher(arg).matches()
+                            || NTH_COMPLEX.matcher(arg).matches();
                 }
                 return CSS3_PSEUDO_CLASSES.contains(value);
             default:
