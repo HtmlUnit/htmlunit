@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -35,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
@@ -181,5 +183,49 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             driver.findElement(By.id("myInput")).click();
             assertEquals(getExpectedAlerts()[1], driver.getTitle());
         }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void preventDefault() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function handler(e) {\n"
+            + "    if (e)\n"
+            + "      e.preventDefault();\n"
+            + "    else\n"
+            + "      return false;\n"
+            + "  }\n"
+            + "  function init() {\n"
+            + "    document.getElementById('checkbox1').onclick = handler;\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='init()'>\n"
+            + "<input type='checkbox' id='checkbox1'/>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement checkbox = driver.findElement(By.id("checkbox1"));
+        checkbox.click();
+        assertFalse(checkbox.isSelected());
+    }
+
+    /**
+     * Verifies that a HtmlCheckBox is unchecked by default.
+     * The onClick tests make this assumption.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void defaultState() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
+            + "</form></body></html>";
+        final WebDriver driver = loadPage2(html);
+        final WebElement checkbox = driver.findElement(By.id("checkbox"));
+        assertFalse(checkbox.isSelected());
     }
 }

@@ -38,24 +38,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
 
     /**
-     * Verifies that a HtmlCheckBox is unchecked by default.
-     * The onClick tests make this assumption.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void defaultState() throws Exception {
-        final String html
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'>\n"
-            + "    <input type='checkbox' name='checkbox' id='checkbox'>Check me</input>\n"
-            + "</form></body></html>";
-        final HtmlPage page = loadPage(html);
-        final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox");
-
-        assertFalse(checkBox.isChecked());
-    }
-
-    /**
      * Tests onclick event handlers. Given an onclick handler that does not cause the form to submit, this test
      * verifies that HtmlCheckBix.click():
      * <ul>
@@ -130,31 +112,5 @@ public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
         assertEquals("uncheckedCheck me", page.asText());
         checkBox.setChecked(true);
         assertEquals("checked", checkBox.asText());
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    public void preventDefault() throws Exception {
-        final String html =
-              "<html><head><script>\n"
-            + "  function handler(e) {\n"
-            + "    if (e)\n"
-            + "      e.preventDefault();\n"
-            + "    else\n"
-            + "      return false;\n"
-            + "  }\n"
-            + "  function init() {\n"
-            + "    document.getElementById('checkbox1').onclick = handler;\n"
-            + "  }\n"
-            + "</script></head>\n"
-            + "<body onload='init()'>\n"
-            + "<input type='checkbox' id='checkbox1'/>\n"
-            + "</body></html>";
-        final HtmlPage page = loadPage(html);
-        final HtmlCheckBoxInput checkbox1 = page.getHtmlElementById("checkbox1");
-        checkbox1.click();
-        assertFalse(checkbox1.isChecked());
     }
 }
