@@ -982,7 +982,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * querySelectorAll should return nodes matched by many rules only once.
+     * Function querySelectorAll should return nodes matched by many rules only once.
      * @throws Exception if the test fails
      */
     @Test
