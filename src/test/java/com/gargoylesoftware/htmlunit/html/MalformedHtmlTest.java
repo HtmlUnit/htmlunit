@@ -234,4 +234,20 @@ public class MalformedHtmlTest extends WebDriverTestCase {
 
         assertEquals(getDefaultUrl() + "?FromDate=inFirst", driver.getCurrentUrl());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("2")
+    @NotYetImplemented
+    public void li_div_li() throws Exception {
+        final String html = "<html><body>\n"
+            + "<ul id='it'><li>item 1<div>in div</li><li>item2</li></ul>"
+            + "<script>\n"
+            + "alert(document.getElementById('it').childNodes.length);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
