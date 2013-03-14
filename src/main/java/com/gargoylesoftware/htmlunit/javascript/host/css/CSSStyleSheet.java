@@ -124,7 +124,7 @@ public class CSSStyleSheet extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);
     private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
-    private static final Pattern NTH_COMPLEX = Pattern.compile("[-+]?\\d*n\\w*([+-]\\w\\d*)?");
+    private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n\\w*([+-]\\w\\d*)?");
 
     /** The parsed stylesheet which this host object wraps. */
     private final org.w3c.dom.css.CSSStyleSheet wrapped_;

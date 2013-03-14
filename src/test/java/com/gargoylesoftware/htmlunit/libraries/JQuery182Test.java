@@ -108,6 +108,7 @@ public class JQuery182Test extends WebDriverTestCase {
             result = result.substring(0, result.indexOf("Rerun")).trim();
             final String expected = testName + " (" + getExpectedAlerts()[0] + ")";
             if (!expected.contains(result)) {
+                System.out.println("-> " + webdriver.findElement(By.id("qunit-tests")).getText());
                 fail(new ComparisonFailure("", expected, result).getMessage());
             }
         }
@@ -6769,6 +6770,7 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 21, 21")
+    @NotYetImplemented(FF)
     public void Sizzle__selector__broken() throws Exception {
         runTest("Sizzle: selector: broken");
     }

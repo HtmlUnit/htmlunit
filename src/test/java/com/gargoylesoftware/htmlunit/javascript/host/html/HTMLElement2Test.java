@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
@@ -941,18 +942,31 @@ public class HTMLElement2Test extends WebDriverTestCase {
         }
 
         // some other bad selectors tested in jQuery 1.8.2 tests
-        final String[] otherBadSelectors = {":nth-child(2n+-0)", ":nth-child(2+0)", ":nth-child(- 1n)",
-            ":nth-child(-1 n)" };
+        final String[] otherBadSelectors = {":nth-child(2n+-0)", ":nth-child(2+0)" };
         for (final String selector : otherBadSelectors) {
             doTestQuerySelectorAll_badSelector(selector);
         }
+    }
+
+    /**
+     * To be moved in the above test once it works.
+     * The problem is that spaces are trimmed in the value of PseudoClassConditionImpl
+     * and therefore the selector is not invalid anymore.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    @NotYetImplemented(FF)
+    public void querySelectorAll_badSelectorNYI() throws Exception {
+        doTestQuerySelectorAll_badSelector(":nth-child(- 1n)");
+        doTestQuerySelectorAll_badSelector(":nth-child(-1 n)");
     }
 
     private void doTestQuerySelectorAll_badSelector(final String selector) throws Exception {
         final String html = "<html><body><div id='it'></div><script>\n"
             + "try {\n"
             + "  document.getElementById('it').querySelectorAll('" + selector + "');\n"
-            + "  alert('working: + " + selector + "');\n"
+            + "  alert('working: " + selector + "');\n"
             + "} catch(e) { alert('exception'); }\n"
             + "</script></body></html>";
 
