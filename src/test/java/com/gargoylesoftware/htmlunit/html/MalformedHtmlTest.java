@@ -240,7 +240,6 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void li_div_li() throws Exception {
         final String html = "<html><body>\n"
             + "<ul id='it'><li>item 1<div>in div</li><li>item2</li></ul>"
