@@ -26,6 +26,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_S
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -151,7 +152,9 @@ public class HtmlPage extends SgmlPage {
     private boolean cleaning_;
     private HtmlBase base_;
     private URL baseUrl_;
-    private static final Comparator<DomElement> documentPositionComparator = new Comparator<DomElement>() {
+    private static final Comparator<DomElement> documentPositionComparator = new DocumentPositionComparator();
+
+    static class DocumentPositionComparator implements Comparator<DomElement>, Serializable {
         @Override
         public int compare(final DomElement elt1, final DomElement elt2) {
             final short relation = elt1.compareDocumentPosition(elt2);
@@ -164,7 +167,7 @@ public class HtmlPage extends SgmlPage {
 
             return -1;
         }
-    };
+    }
 
     /**
      * Creates an instance of HtmlPage.
