@@ -30,12 +30,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -135,8 +138,8 @@ public class HtmlPage extends SgmlPage {
 
     private HtmlUnitDOMBuilder builder_;
     private String originalCharset_;
-    private Map<String, List<DomElement>> idMap_ = new HashMap<String, List<DomElement>>();
-    private Map<String, List<DomElement>> nameMap_ = new HashMap<String, List<DomElement>>();
+    private Map<String, SortedSet<DomElement>> idMap_ = new HashMap<String, SortedSet<DomElement>>();
+    private Map<String, SortedSet<DomElement>> nameMap_ = new HashMap<String, SortedSet<DomElement>>();
     private HtmlElement elementWithFocus_;
     private int parserCount_;
     private int snippetParserCount_;
@@ -148,6 +151,20 @@ public class HtmlPage extends SgmlPage {
     private boolean cleaning_;
     private HtmlBase base_;
     private URL baseUrl_;
+    private static final Comparator<DomElement> documentPositionComparator = new Comparator<DomElement>() {
+        @Override
+        public int compare(final DomElement elt1, final DomElement elt2) {
+            final short relation = elt1.compareDocumentPosition(elt2);
+            if (relation == 0) {
+                return 0; // same node
+            }
+            if ((relation & DOCUMENT_POSITION_CONTAINS) != 0 || (relation & DOCUMENT_POSITION_PRECEDING) != 0) {
+                return 1;
+            }
+
+            return -1;
+        }
+    };
 
     /**
      * Creates an instance of HtmlPage.
@@ -1630,7 +1647,7 @@ public class HtmlPage extends SgmlPage {
     public <E extends DomElement> E getElementById(final String id, final boolean caseSensitive)
         throws ElementNotFoundException {
 
-        List<DomElement> elements = idMap_.get(id);
+        SortedSet<DomElement> elements = idMap_.get(id);
 
         // not found maybe we have to search case insensitive
         if (null == elements && !caseSensitive) {
@@ -1643,7 +1660,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         if (elements != null) {
-            return (E) elements.get(0);
+            return (E) elements.first();
         }
         throw new ElementNotFoundException("*", "id", id);
     }
@@ -1659,9 +1676,9 @@ public class HtmlPage extends SgmlPage {
      */
     @SuppressWarnings("unchecked")
     public <E extends DomElement> E getElementByName(final String name) throws ElementNotFoundException {
-        final List<DomElement> elements = nameMap_.get(name);
+        final SortedSet<DomElement> elements = nameMap_.get(name);
         if (elements != null) {
-            return (E) elements.get(0);
+            return (E) elements.first();
         }
         throw new ElementNotFoundException("*", "name", name);
     }
@@ -1675,9 +1692,9 @@ public class HtmlPage extends SgmlPage {
      * @return the elements with the specified name attribute
      */
     public List<DomElement> getElementsByName(final String name) {
-        final List<DomElement> list = nameMap_.get(name);
-        if (list != null) {
-            return Collections.unmodifiableList(list);
+        final SortedSet<DomElement> elements = nameMap_.get(name);
+        if (elements != null) {
+            return new ArrayList<DomElement>(elements);
         }
         return Collections.emptyList();
     }
@@ -1690,8 +1707,8 @@ public class HtmlPage extends SgmlPage {
      * @return the elements with the specified string for their name or ID
      */
     public List<DomElement> getElementsByIdAndOrName(final String idAndOrName) {
-        final List<DomElement> list1 = idMap_.get(idAndOrName);
-        final List<DomElement> list2 = nameMap_.get(idAndOrName);
+        final Collection<DomElement> list1 = idMap_.get(idAndOrName);
+        final Collection<DomElement> list2 = nameMap_.get(idAndOrName);
         final List<DomElement> list = new ArrayList<DomElement>();
         if (list1 != null) {
             list.addAll(list1);
@@ -1726,13 +1743,13 @@ public class HtmlPage extends SgmlPage {
         }
     }
 
-    private void addElement(final Map<String, List<DomElement>> map, final DomElement element,
+    private void addElement(final Map<String, SortedSet<DomElement>> map, final DomElement element,
             final String attribute, final boolean recurse) {
         final String value = element.getAttribute(attribute);
         if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
-            List<DomElement> elements = map.get(value);
+            SortedSet<DomElement> elements = map.get(value);
             if (elements == null) {
-                elements = new ArrayList<DomElement>();
+                elements = new TreeSet<DomElement>(documentPositionComparator);
                 elements.add(element);
                 map.put(value, elements);
             }
@@ -1768,11 +1785,11 @@ public class HtmlPage extends SgmlPage {
         }
     }
 
-    private void removeElement(final Map<String, List<DomElement>> map, final DomElement element, final String att,
-            final boolean recurse) {
+    private void removeElement(final Map<String, SortedSet<DomElement>> map, final DomElement element,
+            final String att, final boolean recurse) {
         final String value = element.getAttribute(att);
         if (!StringUtils.isEmpty(value)) {
-            final List<DomElement> elements = map.remove(value);
+            final SortedSet<DomElement> elements = map.remove(value);
             if (elements != null && (elements.size() != 1 || !elements.contains(element))) {
                 elements.remove(element);
                 map.put(value, elements);
@@ -2022,8 +2039,8 @@ public class HtmlPage extends SgmlPage {
     protected HtmlPage clone() {
         final HtmlPage result = (HtmlPage) super.clone();
         result.elementWithFocus_ = null;
-        result.idMap_ = new HashMap<String, List<DomElement>>();
-        result.nameMap_ = new HashMap<String, List<DomElement>>();
+        result.idMap_ = new HashMap<String, SortedSet<DomElement>>();
+        result.nameMap_ = new HashMap<String, SortedSet<DomElement>>();
         return result;
     }
 

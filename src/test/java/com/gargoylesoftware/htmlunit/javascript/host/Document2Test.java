@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Ronald Brill
+ * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
 public class Document2Test extends WebDriverTestCase {
@@ -442,4 +443,26 @@ public class Document2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "first", "newest" })
+    public void getElementById_alwaysFirstOneInDocumentOrder() throws Exception {
+        final String html = "<html><body>\n"
+            + "<span id='it' class='first'></span>\n"
+            + "<span id='it' class='second'></span>\n"
+            + "<script>\n"
+            + "alert(document.getElementById('it').className);\n"
+            + "var s = document.createElement('span');\n"
+            + "s.id = 'it';\n"
+            + "s.className = 'newest';\n"
+            + "document.body.insertBefore(s, document.body.firstChild);\n"
+            + "alert(document.getElementById('it').className);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

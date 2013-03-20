@@ -9,6 +9,9 @@
     <body>
         <release version="2.13" date="???" description="Bugfixes">
             <action type="fix" dev="mguillem">
+                HtmlPage.getElementById: always return the first element in document order (and not the first parsed one).
+            </action>
+            <action type="fix" dev="mguillem">
                 DomNode.querySelectorAll: return nodes matched by many selectors only once.
             </action>
             <action type="fix" dev="mguillem">
