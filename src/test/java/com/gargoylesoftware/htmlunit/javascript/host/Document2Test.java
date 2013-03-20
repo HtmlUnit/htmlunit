@@ -338,4 +338,108 @@ public class Document2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "bar", "null", "null" })
+    public void getElementById() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    alert(top.document.getElementById('input1').value);\n"
+            + "    alert(document.getElementById(''));\n"
+            + "    alert(document.getElementById('non existing'));\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form id='form1'>\n"
+            + "<input id='input1' name='foo' type='text' value='bar' />\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "bar", "null" })
+    public void getElementById_resetId() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var input1=top.document.getElementById('input1');\n"
+            + "    input1.id='newId';\n"
+            + "    alert(top.document.getElementById('newId').value);\n"
+            + "    alert(top.document.getElementById('input1'));\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form id='form1'>\n"
+            + "<input id='input1' name='foo' type='text' value='bar' />\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("bar")
+    public void getElementById_setNewId() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var div1 = document.getElementById('div1');\n"
+            + "    div1.firstChild.id='newId';\n"
+            + "    alert(document.getElementById('newId').value);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<form id='form1'>\n"
+            + "<div id='div1'><input name='foo' type='text' value='bar'></div>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Regression test for bug 740665.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("id1")
+    public void getElementById_divId() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function doTest() {\n"
+            + "    var element = document.getElementById('id1');\n"
+            + "    alert(element.id);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<div id='id1'></div></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Regression test for bug 740665.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("script1")
+    public void getElementById_scriptId() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script id='script1'>\n"
+            + "function doTest() {\n"
+            + "    alert(top.document.getElementById('script1').id);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
