@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -99,7 +101,7 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Alerts(FF = { "2", "hi", "undefined", "you" }, IE = { "2", "hi", "undefined", "you" },
             FF17  = { "2", "world", "undefined", "undefined" },
             CHROME = { "2", "world", "undefined", "undefined" })
-    public void readOnly() throws Exception {
+    public void readOnlyWhenAccessedThroughFunction() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
@@ -115,6 +117,45 @@ public class ArgumentsTest extends WebDriverTestCase {
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "2", "hi", "undefined", "you" })
+    @NotYetImplemented(Browser.FF17)
+    public void writableWithinFunction() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "function test1() {\n"
+            + "  arguments[1] = 'hi';\n"
+            + "  arguments[3] = 'you';\n"
+            + "  alert(arguments.length);\n"
+            + "  alert(arguments[1]);\n"
+            + "  alert(arguments[2]);\n"
+            + "  alert(arguments[3]);\n"
+            + "}\n"
+            + "test1('hello', 'world');\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true", FF17 = "false", CHROME = "false")
+    @NotYetImplemented(Browser.FF17)
+    public void argumentsEqualsFnArguments() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "function test1() {\n"
+            + "  alert(arguments == test1.arguments);\n"
+            + "}\n"
+            + "test1('hello', 'world');\n"
+            + "</script></body></html>";
 
         loadPageWithAlerts2(html);
     }
