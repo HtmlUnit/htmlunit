@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,7 +26,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -68,39 +66,6 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         page.getHtmlElementById("div1");
         page.getHtmlElementById("div2");
         page.getHtmlElementById("div3");
-    }
-
-    /**
-     * Regression test for bug 743241.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void write_LoadScript() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
-        webClient.setWebConnection(webConnection);
-
-        final String html
-            = "<html><head><title>First</title></head><body>\n"
-            + "<script src='http://script'></script>\n"
-            + "</form></body></html>";
-        webConnection.setResponse(URL_FIRST, html);
-
-        final String script = "document.write(\"<div id='div1'></div>\");\n";
-        webConnection.setResponse(new URL("http://script/"), script, JAVASCRIPT_MIME_TYPE);
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        final HtmlPage page = webClient.getPage(URL_FIRST);
-        assertEquals("First", page.getTitleText());
-
-        try {
-            page.getHtmlElementById("div1");
-        }
-        catch (final ElementNotFoundException e) {
-            fail("Element not written to page as expected");
-        }
     }
 
     /**

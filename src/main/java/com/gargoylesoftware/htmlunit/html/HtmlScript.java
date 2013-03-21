@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -248,22 +249,32 @@ public class HtmlScript extends HtmlElement {
         final PostponedAction action = new PostponedAction(getPage()) {
             @Override
             public void execute() {
-                final boolean onReady = hasFeature(JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE);
-                if (onReady) {
-                    if (!isDeferred()) {
-                        if (SLASH_SLASH_COLON.equals(getSrcAttribute())) {
-                            setAndExecuteReadyState(READY_STATE_COMPLETE);
-                            executeScriptIfNeeded();
-                        }
-                        else {
-                            setAndExecuteReadyState(READY_STATE_LOADING);
-                            executeScriptIfNeeded();
-                            setAndExecuteReadyState(READY_STATE_LOADED);
+                final HTMLDocument jsDoc = (HTMLDocument) ((Window) getPage().getEnclosingWindow().getScriptObject())
+                        .getDocument();
+                jsDoc.setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
+                        && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
+
+                try {
+                    final boolean onReady = hasFeature(JS_SCRIPT_SUPPORTS_ONREADYSTATECHANGE);
+                    if (onReady) {
+                        if (!isDeferred()) {
+                            if (SLASH_SLASH_COLON.equals(getSrcAttribute())) {
+                                setAndExecuteReadyState(READY_STATE_COMPLETE);
+                                executeScriptIfNeeded();
+                            }
+                            else {
+                                setAndExecuteReadyState(READY_STATE_LOADING);
+                                executeScriptIfNeeded();
+                                setAndExecuteReadyState(READY_STATE_LOADED);
+                            }
                         }
                     }
+                    else {
+                        executeScriptIfNeeded();
+                    }
                 }
-                else {
-                    executeScriptIfNeeded();
+                finally {
+                    jsDoc.setExecutingDynamicExternalPosponed(false);
                 }
             }
         };

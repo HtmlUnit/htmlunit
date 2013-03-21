@@ -551,6 +551,18 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         throw Context.reportRuntimeError("Function can't be used detached from document");
     }
 
+    private boolean executionExternalPostponed_ = false;
+
+    /**
+     * This a hack!!! A cleaner way is welcome.
+     * Handle a case where document.write is simply ignored.
+     * See HTMLDocumentWrite2Test.write_fromScriptAddedWithAppendChild_external.
+     * @param executing indicates if executing or not
+     */
+    public void setExecutingDynamicExternalPosponed(final boolean executing) {
+        executionExternalPostponed_ = executing;
+    }
+
     /**
      * JavaScript function "write".
      *
@@ -560,6 +572,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      * @param content the content to write
      */
     protected void write(final String content) {
+        // really strange: if called from an external script loaded as postponed action, write is ignored!!!
+        if (executionExternalPostponed_) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("skipping write for external posponed: " + content);
+            }
+            return;
+        }
+
         if (LOG.isDebugEnabled()) {
             LOG.debug("write: " + content);
         }

@@ -316,4 +316,70 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Regression test for bug 743241.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void write_LoadScript() throws Exception {
+        final String html
+            = "<html><head><title>First</title></head><body>\n"
+            + "<script src='script.js'></script>\n"
+            + "</form></body></html>";
+
+        final String script = "document.write(\"<div id='div1'>hello</div>\");\n";
+        getMockWebConnection().setDefaultResponse(script, JAVASCRIPT_MIME_TYPE);
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals("First", driver.getTitle());
+
+        assertEquals("hello", driver.findElement(By.id("div1")).getText());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = "exception")
+    public void write_fromScriptAddedWithAppendChild_inline() throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<div id='it'><script>\n"
+            + "try {\n"
+            + "  var s = document.createElement('script');\n"
+            + "  var t = document.createTextNode(\"document.write('in inline script'); document.title = 'done';\");\n"
+            + "  s.appendChild(t);\n"
+            + "  document.body.appendChild(s);\n"
+            + "} catch (e) { alert('exception'); }\n"
+            + "</script></div></body></html>";
+        final WebDriver driver = loadPageWithAlerts2(html);
+
+        if (getExpectedAlerts().length == 0) {
+            assertEquals("done", driver.getTitle());
+            assertEquals("in inline script", driver.findElement(By.id("it")).getText());
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void write_fromScriptAddedWithAppendChild_external() throws Exception {
+        final String html = "<html><head></head><body>\n"
+                + "<div id='it'>here</div><script>\n"
+                + "  var s = document.createElement('script');\n"
+                + "  s.src = 'foo.js'\n"
+                + "  document.body.appendChild(s);\n"
+                + "</script></body></html>";
+
+        final String js = "document.write('from external script');\n"
+                    + "document.title = 'done';";
+
+        getMockWebConnection().setDefaultResponse(js, JAVASCRIPT_MIME_TYPE);
+        final WebDriver driver = loadPage2(html);
+
+        assertEquals("done", driver.getTitle());
+        assertEquals("here", driver.findElement(By.id("it")).getText());
+        assertEquals("here", driver.findElement(By.tagName("body")).getText());
+    }
 }
