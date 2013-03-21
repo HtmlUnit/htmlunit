@@ -32,6 +32,8 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -121,7 +123,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
 
         webConnection.setDefaultResponse(frameContent);
         webConnection.setResponse(URL_FIRST, firstContent);
@@ -229,7 +231,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
         final String frame2 = "<html><head><script>alert(window.foo);</script></head></html>";
 
         final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
 
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setResponse(new URL(URL_FIRST, "1.html"), frame1);
@@ -263,7 +265,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
         final String thirdContent = "<html><head><title>Third</title></head><body></body></html>";
         final WebClient client = getWebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
@@ -313,7 +315,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         client.getOptions().setJavaScriptEnabled(false);
 
-        final MockWebConnection conn = new MockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse(html);
         client.setWebConnection(conn);
 
@@ -463,7 +465,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
             + "<body><script>alert(document.body);</script></html>";
 
         final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
+        final MockWebConnection webConnection = getMockWebConnection();
 
         webConnection.setResponse(URL_FIRST, html);
         webConnection.setDefaultResponse(frame);
@@ -540,7 +542,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
             + "</script></body></html>";
         final String html2 = "<html><body>foo</body></html>";
 
-        final MockWebConnection conn = new MockWebConnection();
+        final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, html);
         conn.setResponse(new URL(URL_FIRST, "frame.html"), html2);
 
@@ -594,4 +596,44 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
         assertFalse(((HtmlPage) page.getFrames().get(0).getEnclosedPage()).asText().isEmpty());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testRemoveFrameWindow() throws Exception {
+        final String index = "<html><head></head><body>"
+                + "<div id='content'>"
+                + "  <iframe name='content' src='second/'></iframe>"
+                + "</div>"
+                + "<button id='clickId' "
+                +     "onClick=\"document.getElementById('content').innerHTML = 'new content';\">Item</button>\n"
+                + "</body></html>";
+
+        final String frame1 = "<html><head></head><body>"
+                + "<p>frame content</p>"
+                + "</body></html>";
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = getMockWebConnection();
+
+        webConnection.setResponse(URL_SECOND, frame1);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = loadPage(index);
+
+        assertEquals("", page.getElementById("content").asText());
+        // check frame on page
+        List<FrameWindow> frames = page.getFrames();
+        assertEquals(1, frames.size());
+        assertEquals("frame content", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).asText());
+
+        // replace frame tag with javascript
+        ((HtmlElement) page.getElementById("clickId")).click();
+
+        assertEquals("new content", page.getElementById("content").asText());
+
+        // frame is still there
+        frames = page.getFrames();
+        assertEquals(0, frames.size());
+    }
 }

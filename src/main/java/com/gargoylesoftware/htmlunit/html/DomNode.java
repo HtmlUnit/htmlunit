@@ -1118,7 +1118,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Cuts off all relationships this node has with siblings and parents.
      */
-    private void basicRemove() {
+    protected void basicRemove() {
         if (parent_ != null && parent_.firstChild_ == this) {
             parent_.firstChild_ = nextSibling_;
         }
