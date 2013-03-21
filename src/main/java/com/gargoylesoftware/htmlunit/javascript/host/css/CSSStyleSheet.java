@@ -464,7 +464,7 @@ public class CSSStyleSheet extends SimpleScriptable {
                 return ac4.getValue().equals(element.getId());
             case Condition.SAC_CLASS_CONDITION:
                 final AttributeCondition ac3 = (AttributeCondition) condition;
-                final String v3 = ac3.getValue();
+                final String v3 = unescape(ac3.getValue());
                 final String a3 = element.getAttribute("class");
                 return selects(v3, a3, ' ');
             case Condition.SAC_AND_CONDITION:
@@ -474,10 +474,7 @@ public class CSSStyleSheet extends SimpleScriptable {
             case Condition.SAC_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
                 if (ac1.getSpecified()) {
-                    String value = ac1.getValue();
-                    if (value.contains("\\")) { // handle \[, \] and \. (are there others?)
-                        value = value.replaceAll("\\\\([\\[\\]\\.])", "$1");
-                    }
+                    final String value = unescape(ac1.getValue());
                     return element.getAttribute(ac1.getLocalName()).equals(value);
                 }
                 return element.hasAttribute(ac1.getLocalName());
@@ -528,6 +525,13 @@ public class CSSStyleSheet extends SimpleScriptable {
                 LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
                 return false;
         }
+    }
+
+    private static String unescape(final String value) {
+        if (value.indexOf('\\') == -1) {
+            return value;
+        }
+        return value.replaceAll("\\\\([\\[\\]\\.:])", "$1");
     }
 
     private static boolean selects(final String condition, final String attribute, final char separator) {

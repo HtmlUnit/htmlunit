@@ -1107,4 +1107,27 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "first", "second", "third" })
+    public void escapedClassName() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "</head><body>\n"
+            + "  <input id='first' class='foo[bar]'>\n"
+            + "  <input id='second' class='foo.bar'>\n"
+            + "  <input id='third' class='foo:bar'>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  alert(document.querySelectorAll('.foo\\\\[bar\\\\]')[0].id);\n"
+            + "  alert(document.querySelectorAll('.foo\\\\.bar')[0].id);\n"
+            + "  alert(document.querySelectorAll('.foo\\\\:bar')[0].id);\n"
+            + "} catch(e) {alert('exception')}\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
