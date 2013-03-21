@@ -474,7 +474,11 @@ public class CSSStyleSheet extends SimpleScriptable {
             case Condition.SAC_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
                 if (ac1.getSpecified()) {
-                    return element.getAttribute(ac1.getLocalName()).equals(ac1.getValue());
+                    String value = ac1.getValue();
+                    if (value.contains("\\")) { // handle \[, \] and \. (are there others?)
+                        value = value.replaceAll("\\\\([\\[\\]\\.])", "$1");
+                    }
+                    return element.getAttribute(ac1.getLocalName()).equals(value);
                 }
                 return element.hasAttribute(ac1.getLocalName());
             case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:

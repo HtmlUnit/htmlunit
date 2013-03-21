@@ -1086,4 +1086,25 @@ public class CSSSelectorTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(html);
         loadPageWithAlerts2(UrlUtils.getUrlWithNewRef(URL_FIRST, "id3"));
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "first", "second" }, IE8 = "exception")
+    public void escapedAttributeValue() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
+            + "</head><body>\n"
+            + "  <input id='first' name='foo[bar]'>\n"
+            + "  <input id='second' name='foo.bar'>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  alert(document.querySelectorAll('input[name=foo\\\\[bar\\\\]]')[0].id);\n"
+            + "  alert(document.querySelectorAll('input[name=foo\\\\.bar]')[0].id);\n"
+            + "} catch(e) {alert('exception')}\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
