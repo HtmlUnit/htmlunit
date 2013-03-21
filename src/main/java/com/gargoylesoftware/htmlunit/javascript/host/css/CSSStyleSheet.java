@@ -79,6 +79,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DisabledElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
@@ -692,7 +693,7 @@ public class CSSStyleSheet extends SimpleScriptable {
             return true;
         }
         else if ("empty".equals(value)) {
-            return element.getFirstChild() == null;
+            return isEmpty(element);
         }
         else if ("target".equals(value)) {
             final String ref = element.getPage().getUrl().getRef();
@@ -731,6 +732,15 @@ public class CSSStyleSheet extends SimpleScriptable {
             }
         }
         return false;
+    }
+
+    private static boolean isEmpty(final DomElement element) {
+        for (DomNode n = element.getFirstChild(); n != null; n = n.getNextSibling()) {
+            if (n instanceof DomElement || n instanceof DomText) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static boolean getNth(final String nth, final int index) {

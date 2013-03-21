@@ -862,7 +862,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "id2", IE8 = "exception")
+    @Alerts(DEFAULT = { "id2", "span1" }, IE8 = "exception")
     public void empty() throws Exception {
         final String html = "<html><head><title>First</title>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=9'>\n"
@@ -871,6 +871,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  if (document.querySelectorAll) {\n"
             + "    try {\n"
             + "      alert(document.querySelectorAll('p:empty')[0].id);\n"
+            + "      alert(document.querySelectorAll('span:empty')[0].id);\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "}\n"
@@ -878,6 +879,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <p id='id1'>Hello, World!</p>\n"
             + "  <p id='id2'></p>\n"
+            + "  <span id='span1'><!-- a comment --></span>\n"
+            + "  <span id='span2'>a text</span>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
