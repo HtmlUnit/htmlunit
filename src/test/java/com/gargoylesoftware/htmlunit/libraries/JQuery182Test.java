@@ -6780,7 +6780,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 31, 31")
-    @NotYetImplemented(FF17)
     public void Sizzle__selector__id() throws Exception {
         runTest("Sizzle: selector: id");
     }
@@ -6791,7 +6790,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 24, 24")
-    @NotYetImplemented(FF)
     public void Sizzle__selector__class() throws Exception {
         runTest("Sizzle: selector: class");
     }
@@ -6833,7 +6831,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 62, 62")
-    @NotYetImplemented(FF)
     public void Sizzle__selector__attributes() throws Exception {
         runTest("Sizzle: selector: attributes");
     }
@@ -6844,7 +6841,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 42, 42")
-    @NotYetImplemented(FF3_6)
     public void Sizzle__selector__pseudo___child() throws Exception {
         runTest("Sizzle: selector: pseudo - child");
     }
@@ -6876,7 +6872,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 33, 33")
-    @NotYetImplemented(FF17)
     public void Sizzle__selector__pseudo___position() throws Exception {
         runTest("Sizzle: selector: pseudo - position");
     }
