@@ -19,8 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -126,7 +124,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "2", "hi", "undefined", "you" })
-    @NotYetImplemented(Browser.FF17)
     public void writableWithinFunction() throws Exception {
         final String html = "<html><body><script>\n"
             + "function test1() {\n"
@@ -148,7 +145,6 @@ public class ArgumentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true", FF17 = "false", CHROME = "false")
-    @NotYetImplemented(Browser.FF17)
     public void argumentsEqualsFnArguments() throws Exception {
         final String html = "<html><body><script>\n"
             + "function test1() {\n"

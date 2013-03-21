@@ -696,9 +696,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_ARGUMENTS_IS_OBJECT,
 
-    /** Indicates that the "arguments" object is read-only. */
+    /** Indicates that "someFunction.arguments" is a read-only view of the function's argument. */
     @BrowserFeature({ @WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 17) })
-    JS_ARGUMENTS_IS_READ_ONLY,
+    JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION,
 
     /** Indicates that the attributes map contains empty attr
      * objects for all properties of the object (like IE does). */
