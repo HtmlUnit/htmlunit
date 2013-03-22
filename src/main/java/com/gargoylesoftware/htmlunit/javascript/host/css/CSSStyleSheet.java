@@ -126,6 +126,7 @@ public class CSSStyleSheet extends SimpleScriptable {
     private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);
     private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
     private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n\\w*([+-]\\w\\d*)?");
+    private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\]\\.:])");
 
     /** The parsed stylesheet which this host object wraps. */
     private final org.w3c.dom.css.CSSStyleSheet wrapped_;
@@ -531,7 +532,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         if (value.indexOf('\\') == -1) {
             return value;
         }
-        return value.replaceAll("\\\\([\\[\\]\\.:])", "$1");
+        return UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
     }
 
     private static boolean selects(final String condition, final String attribute, final char separator) {
