@@ -165,10 +165,7 @@ public abstract class WebWindowImpl implements WebWindow {
         childWindows_.add(child);
     }
 
-    /**
-     * Destroy our childs.
-     */
-    protected void destroyChildren() {
+    void destroyChildren() {
         if (LOG.isDebugEnabled()) {
             LOG.debug("destroyChildren");
         }

@@ -600,6 +600,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented
     public void testRemoveFrameWindow() throws Exception {
         final String index = "<html><head></head><body>"
                 + "<div id='content'>"

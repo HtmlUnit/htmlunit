@@ -8,9 +8,6 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
-            <action type="fix" dev="rbri" issue="1497">
-                JavaScript: Removing frame tag removes the associated FrameWindow also.
-            </action>
             <action type="fix" dev="mguillem">
                 HtmlPage.getElementById: always return the first element in document order (and not the first parsed one).
             </action>

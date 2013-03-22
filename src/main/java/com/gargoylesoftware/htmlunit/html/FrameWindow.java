@@ -131,18 +131,4 @@ public class FrameWindow extends WebWindowImpl {
     public String toString() {
         return "FrameWindow[name=\"" + getName() + "\"]";
     }
-
-    /**
-     * Closes this frame window.
-     */
-    public void close() {
-        setClosed();
-        final Page page = getEnclosedPage();
-        if (page != null) {
-            page.cleanUp();
-        }
-        getJobManager().shutdown();
-        destroyChildren();
-        getWebClient().deregisterWebWindow(this);
-    }
 }
