@@ -600,7 +600,6 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
     public void testRemoveFrameWindow() throws Exception {
         final String index = "<html><head></head><body>"
                 + "<div id='content'>"
@@ -633,7 +632,7 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
 
         assertEquals("new content", page.getElementById("content").asText());
 
-        // frame is still there
+        // frame has to be gone
         frames = page.getFrames();
         assertEquals(0, frames.size());
     }

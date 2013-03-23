@@ -408,4 +408,14 @@ public abstract class BaseFrameElement extends HtmlElement {
         ((BaseFrameElement) node).init();
         return node;
     }
+
+    /**
+     * Remove our window also.
+     * {@inheritDoc}
+     */
+    @Override
+    public void remove() {
+        super.remove();
+        ((FrameWindow) getEnclosedWindow()).close();
+    }
 }

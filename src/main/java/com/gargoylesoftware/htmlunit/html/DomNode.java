@@ -899,7 +899,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         else {
             // clean up the new node, in case it is being moved
             if (domNode != this && domNode.getParentNode() != null) {
-                domNode.remove();
+                domNode.detach();
             }
             // move the node
             basicAppend(domNode);
@@ -1098,9 +1098,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Removes this node from all relationships with other nodes.
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Detach this node from all relationships with other nodes.
+     * This is the first step of an move.
      */
-    public void remove() {
+    protected void detach() {
         final DomNode exParent = parent_;
         basicRemove();
 
@@ -1113,6 +1116,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             //ask ex-parent to fire event (because we don't have parent now)
             exParent.fireNodeDeleted(exParent, this);
         }
+    }
+
+    /**
+     * Removes this node from all relationships with other nodes.
+     */
+    public void remove() {
+        // same as detach for the moment
+        detach();
     }
 
     /**
