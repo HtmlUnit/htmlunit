@@ -64,6 +64,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "0", "null", "false", "# removed", "" })
+    @NotYetImplemented(Browser.FF)
     public void noAttribute() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -219,7 +220,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "exception", "3", "4", "true" })
+    @Alerts(FF = { "exception", "exception", "3", "4", "true" })
     @NotYetImplemented(Browser.FF)
     public void add() throws Exception {
         final String html
@@ -229,6 +230,9 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "    if (list) {\n"
             + "      try {\n"
             + "        list.add('ab\te');\n"
+            + "      } catch(e) { alert('exception');}\n"
+            + "      try {\n"
+            + "        list.add('');\n"
             + "      } catch(e) { alert('exception');}\n"
             + "      alert(list.length);\n"
             + "      list.add('##');\n"
@@ -249,7 +253,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts(FF = { "1", "2", "a \t #" })
     @NotYetImplemented(Browser.FF)
-    public void addSpace() throws Exception {
+    public void addWhitespaceAtEnd() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function test() {\n"
@@ -296,7 +300,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "exception", "3", "3", "2", "false" })
+    @Alerts(FF = { "exception", "exception", "3", "3", "2", "false" })
     @NotYetImplemented(Browser.FF)
     public void remove() throws Exception {
         final String html
@@ -306,6 +310,9 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "    if (list) {\n"
             + "      try {\n"
             + "        list.remove('ab\te');\n"
+            + "      } catch(e) { alert('exception');}\n"
+            + "      try {\n"
+            + "        list.remove('');\n"
             + "      } catch(e) { alert('exception');}\n"
             + "      alert(list.length);\n"
             + "      list.remove('##');\n"
@@ -351,7 +358,34 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "exception", "2", "true", "false", "1", "false", "true", "2", "true" })
+    @Alerts(FF = { "a \t c \n d  e", "4", "3", "a d  e" })
+    @NotYetImplemented(Browser.FF)
+    public void removeWhitespace() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "    var elem = document.getElementById('d1');\n"
+            + "    var list = elem.classList;\n"
+            + "    if (list) {\n"
+            + "      alert(elem.className);\n"
+            + "      alert(list.length);\n"
+            + "      list.remove('c');\n"
+            + "      alert(list.length);\n"
+            + "      alert(elem.className);\n"
+            + "    }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='d1' class='a \t c \n d  e'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "exception", "exception", "2", "true", "false", "1", "false", "true", "2", "true" })
     @NotYetImplemented(Browser.FF)
     public void toggle() throws Exception {
         final String html
@@ -361,6 +395,9 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "    if (list) {\n"
             + "      try {\n"
             + "        list.toggle('ab e');\n"
+            + "      } catch(e) { alert('exception');}\n"
+            + "      try {\n"
+            + "        list.toggle('');\n"
             + "      } catch(e) { alert('exception');}\n"
             + "      alert(list.length);\n"
             + "      alert(list.contains('e'));\n"
