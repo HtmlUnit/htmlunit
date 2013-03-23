@@ -63,7 +63,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0", "null", "false", "# removed" })
+    @Alerts(FF = { "0", "null", "false", "# removed", "" })
     public void noAttribute() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -74,6 +74,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "      alert(list.item(0));\n"
             + "      alert(list.contains('#'));\n"
             + "      list.remove('#'); alert('# removed');\n"
+            + "      alert(document.body.className);\n"
             + "    }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
@@ -86,7 +87,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0", "undefined", "1" })
+    @Alerts(FF = { "0", "undefined", "1", "#" })
     @NotYetImplemented(Browser.FF)
     public void noAttributeAdd() throws Exception {
         final String html
@@ -97,6 +98,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "      alert(list.length);\n"
             + "      alert(list.add('#'));\n"
             + "      alert(list.length);\n"
+            + "      alert(document.body.className);\n"
             + "    }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
@@ -109,7 +111,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "0", "true", "1" })
+    @Alerts(FF = { "0", "true", "1", "#" })
     @NotYetImplemented(Browser.FF)
     public void noAttributeToggle() throws Exception {
         final String html
@@ -120,6 +122,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "      alert(list.length);\n"
             + "      alert(list.toggle('#'));\n"
             + "      alert(list.length);\n"
+            + "      alert(document.body.className);\n"
             + "    }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
@@ -239,6 +242,32 @@ public class DOMTokenListTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(FF = { "1", "2", "a \t #" })
+    @NotYetImplemented(Browser.FF)
+    public void addSpace() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    if (list) {\n"
+            + "      alert(list.length);\n"
+            + "      list.add('#');\n"
+            + "      alert(list.length);\n"
+            + "      alert(document.getElementById('d1').className);\n"
+            + "    }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='d1' class='a \t '></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
     /**
      * @throws Exception if the test fails
      */
