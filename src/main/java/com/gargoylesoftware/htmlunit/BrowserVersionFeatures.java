@@ -1139,6 +1139,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 8))
     QUERYSELECTORALL_NOT_IN_QUIRKS,
 
+    /** Indicates that escaping in attrubute selectors is supported. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    SELECTOR_ATTRIBUTE_ESCAPING,
+
     /**
      * Indicates that all options of a select are deselected,
      * if the select state is changed for an unknown option.

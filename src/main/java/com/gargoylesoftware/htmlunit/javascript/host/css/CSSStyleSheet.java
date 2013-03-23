@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SELECTOR_LANG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SELECTOR_ATTRIBUTE_ESCAPING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EXPANDURL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_STYLE_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_STYLE_NULL;
@@ -465,7 +466,10 @@ public class CSSStyleSheet extends SimpleScriptable {
                 return ac4.getValue().equals(element.getId());
             case Condition.SAC_CLASS_CONDITION:
                 final AttributeCondition ac3 = (AttributeCondition) condition;
-                final String v3 = unescape(ac3.getValue());
+                String v3 = ac3.getValue();
+                if (v3.indexOf('\\') > -1) {
+                    v3 = UNESCAPE_SELECTOR.matcher(v3).replaceAll("$1");
+                }
                 final String a3 = element.getAttribute("class");
                 return selects(v3, a3, ' ');
             case Condition.SAC_AND_CONDITION:
@@ -475,7 +479,13 @@ public class CSSStyleSheet extends SimpleScriptable {
             case Condition.SAC_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
                 if (ac1.getSpecified()) {
-                    final String value = unescape(ac1.getValue());
+                    String value = ac1.getValue();
+                    if (value.indexOf('\\') > -1) {
+                        if (!browserVersion.hasFeature(SELECTOR_ATTRIBUTE_ESCAPING)) {
+                            throw new CSSException("Invalid selectors: '" + value + "'");
+                        }
+                        value = UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
+                    }
                     return element.getAttribute(ac1.getLocalName()).equals(value);
                 }
                 return element.hasAttribute(ac1.getLocalName());
@@ -526,13 +536,6 @@ public class CSSStyleSheet extends SimpleScriptable {
                 LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
                 return false;
         }
-    }
-
-    private static String unescape(final String value) {
-        if (value.indexOf('\\') == -1) {
-            return value;
-        }
-        return UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
     }
 
     private static boolean selects(final String condition, final String attribute, final char separator) {
