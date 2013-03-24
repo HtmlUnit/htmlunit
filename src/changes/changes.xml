@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: DOMTokenList now works like in FF (different from spec). Some NPE exceptions
+                are fixed, separator chars are fixed, and we are able to create an attribute if needed.
+            </action>
             <action type="fix" dev="rbri" issue="1497">
                 JavaScript: Removing frame tag removes the associated FrameWindow also.
             </action>

@@ -215,6 +215,29 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "false", "false", "false" })
+    public void containsSubstring() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    if (list) {\n"
+            + "      alert(list.contains('a'));\n"
+            + "      alert(list.contains('d'));\n"
+            + "      alert(list.contains('f'));\n"
+            + "    }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='d1' class='ab cde ef'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(FF = { "true", "true", "true", "true" })
     public void containsBorderCheck() throws Exception {
         final String html
