@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.gargoylesoftware.htmlunit.html.DomAttr;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -30,10 +34,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.Node;
  *
  * @version $Revision$
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public final class DOMTokenList extends SimpleScriptable {
 
+    private static final String WHITESPACE_CHARS = " \t\r\n\u000C";
     private String attributeName_;
 
     /**
@@ -61,7 +67,7 @@ public final class DOMTokenList extends SimpleScriptable {
     @JsxGetter
     public int getLength() {
         final String value = getDefaultValue(null);
-        return value.split(" ").length;
+        return StringUtils.split(value, WHITESPACE_CHARS).length;
     }
 
     /**
@@ -84,8 +90,12 @@ public final class DOMTokenList extends SimpleScriptable {
     @JsxFunction
     public void add(final String token) {
         if (!contains(token)) {
-            final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
-            attr.setValue(attr.getValue() + ' ' + token);
+            String value = getDefaultValue(null);
+            if (value.length() != 0 && !isWhitespache(value.charAt(value.length() - 1))) {
+                value = value + " ";
+            }
+            value = value + token;
+            updateAttribute(value);
         }
     }
 
@@ -95,20 +105,36 @@ public final class DOMTokenList extends SimpleScriptable {
      */
     @JsxFunction
     public void remove(final String token) {
-        if (contains(token)) {
-            final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
-            if (attr != null) {
-                final List<String> values = new ArrayList<String>(Arrays.asList(attr.getValue().split(" ")));
-                values.remove(token);
-                final StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < values.size(); i++) {
-                    builder.append(values.get(i));
-                    if (i < values.size() - 1) {
-                        builder.append(' ');
-                    }
-                }
-                attr.setValue(builder.toString());
+        if (StringUtils.isEmpty(token)) {
+            throw Context.reportRuntimeError("Empty imput not allowed");
+        }
+        if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
+            throw Context.reportRuntimeError("Empty imput not allowed");
+        }
+        String value = getDefaultValue(null);
+        int pos = position(value, token);
+        while (pos != -1) {
+            int from = pos;
+            int to = pos + token.length();
+
+            while (from > 0 && isWhitespache(value.charAt(from - 1))) {
+                from = from - 1;
             }
+            while (to < value.length() - 1 && isWhitespache(value.charAt(to))) {
+                to = to + 1;
+            }
+
+            final StringBuilder result = new StringBuilder();
+            if (from > 0) {
+                result.append(value.substring(0, from));
+                result.append(" ");
+            }
+            result.append(value.substring(to));
+
+            value = result.toString();
+            updateAttribute(value);
+
+            pos = position(value, token);
         }
     }
 
@@ -134,12 +160,13 @@ public final class DOMTokenList extends SimpleScriptable {
      */
     @JsxFunction
     public boolean contains(final String token) {
-        final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
-        if (attr != null) {
-            final List<String> values = Arrays.asList(attr.getValue().split(" "));
-            return values.contains(token);
+        if (StringUtils.isEmpty(token)) {
+            throw Context.reportRuntimeError("Empty imput not allowed");
         }
-        return false;
+        if (StringUtils.containsAny(token, WHITESPACE_CHARS)) {
+            throw Context.reportRuntimeError("Empty imput not allowed");
+        }
+        return position(getDefaultValue(null), token) > -1;
     }
 
     /**
@@ -149,13 +176,47 @@ public final class DOMTokenList extends SimpleScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
-        final DomAttr attr = (DomAttr) getDomNodeOrDie().getAttributes().getNamedItem(attributeName_);
-        if (attr != null) {
-            final List<String> values = Arrays.asList(attr.getValue().split(" "));
-            if (index < values.size()) {
-                return values.get(index);
-            }
+        if (index < 0) {
+            return null;
+        }
+        final String value = getDefaultValue(null);
+        final List<String> values = Arrays.asList(StringUtils.split(value, WHITESPACE_CHARS));
+        if (index < values.size()) {
+            return values.get(index);
         }
         return null;
+    }
+
+    private void updateAttribute(final String value) {
+        final HtmlElement domNode = (HtmlElement) getDomNodeOrDie();
+        DomAttr attr = (DomAttr) domNode.getAttributes().getNamedItem(attributeName_);
+        if (null == attr) {
+            attr = domNode.getPage().createAttribute(attributeName_);
+            domNode.setAttributeNode(attr);
+        }
+        attr.setValue(value);
+    }
+
+    private int position(final String value, final String token) {
+        final int pos = value.indexOf(token);
+        if (pos < 0) {
+            return -1;
+        }
+
+        // whitespace before
+        if (pos != 0 && !isWhitespache(value.charAt(pos - 1))) {
+            return -1;
+        }
+
+        // whitespace after
+        final int end = pos + token.length();
+        if (end != value.length() && !isWhitespache(value.charAt(end))) {
+            return -1;
+        }
+        return pos;
+    }
+
+    private boolean isWhitespache(final int ch) {
+        return WHITESPACE_CHARS.indexOf(ch) > -1;
     }
 }

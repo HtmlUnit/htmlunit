@@ -19,8 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -64,7 +62,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "0", "null", "false", "# removed", "" })
-    @NotYetImplemented(Browser.FF)
     public void noAttribute() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -89,7 +86,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "0", "undefined", "1", "#" })
-    @NotYetImplemented(Browser.FF)
     public void noAttributeAdd() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -113,7 +109,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "0", "true", "1", "#" })
-    @NotYetImplemented(Browser.FF)
     public void noAttributeToggle() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -137,7 +132,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "3", "0", "3", "8" })
-    @NotYetImplemented(Browser.FF)
     public void length() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -168,7 +162,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "a", "b", "c", "d", "\u000B", "e", "f", "g", "null", "null", "null" })
-    @NotYetImplemented(Browser.FF)
     public void item() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -194,8 +187,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "exception", "true", "false" })
-    @NotYetImplemented(Browser.FF)
+    @Alerts(FF = { "exception", "exception", "true", "false" })
     public void contains() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -204,6 +196,9 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "    if (list) {\n"
             + "      try {\n"
             + "        list.contains('ab\te');\n"
+            + "      } catch(e) { alert('exception');}\n"
+            + "      try {\n"
+            + "        list.contains('');\n"
             + "      } catch(e) { alert('exception');}\n"
             + "      alert(list.contains('c'));\n"
             + "      alert(list.contains('xyz'));\n"
@@ -220,8 +215,34 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(FF = { "true", "true", "true", "true" })
+    public void containsBorderCheck() throws Exception {
+        final String html
+            = "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "    var list = document.getElementById('d1').classList;\n"
+            + "    if (list) {\n"
+            + "      alert(list.contains('a'));\n"
+            + "      alert(list.contains('d'));\n"
+
+            + "      list = document.getElementById('d2').classList;\n"
+            + "      alert(list.contains('a'));\n"
+            + "      alert(list.contains('d'));\n"
+            + "    }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='d1' class='a \t c \n d'></div>\n"
+            + "  <div id='d2' class='  a \t c \n d\r'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(FF = { "exception", "exception", "3", "4", "true" })
-    @NotYetImplemented(Browser.FF)
     public void add() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -252,7 +273,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "1", "2", "a \t #" })
-    @NotYetImplemented(Browser.FF)
     public void addWhitespaceAtEnd() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -301,7 +321,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "exception", "exception", "3", "3", "2", "false" })
-    @NotYetImplemented(Browser.FF)
     public void remove() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -334,7 +353,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "3", "1", "false" })
-    @NotYetImplemented(Browser.FF)
     public void removeDuplicated() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -359,7 +377,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "a \t c \n d  e", "4", "3", "a d  e" })
-    @NotYetImplemented(Browser.FF)
     public void removeWhitespace() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -386,7 +403,6 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = { "exception", "exception", "2", "true", "false", "1", "false", "true", "2", "true" })
-    @NotYetImplemented(Browser.FF)
     public void toggle() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
