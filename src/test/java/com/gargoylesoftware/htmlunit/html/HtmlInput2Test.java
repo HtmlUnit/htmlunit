@@ -36,8 +36,8 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "null", "error", "function handler() { }", "onchange called", "null", "error" },
-            FF3_6 = { "undefined", "error", "function handler() {\n}", "onchange called", "null", "error" })
+    @Alerts(DEFAULT = { "null", "error", "handler", "null", "error" },
+            FF3_6 = { "undefined", "error", "handler", "null", "error" })
     @NotYetImplemented(Browser.FF3_6)
     public void onchangeDirectCall() throws Exception {
         final String html =
