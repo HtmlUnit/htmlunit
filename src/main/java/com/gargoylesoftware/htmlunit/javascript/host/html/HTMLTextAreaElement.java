@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_111;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_174;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_COLS_RETURNS_20;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_ROWS_RETURNS_2;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.TEXTAREA_CRNL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
@@ -108,7 +108,7 @@ public class HTMLTextAreaElement extends FormField {
         try {
             i = Float.valueOf(cols).intValue();
             if (i < 0) {
-                throw new NumberFormatException("New value for cols smaller than zero.");
+                throw new NumberFormatException("New value for cols '" + cols + "' is smaller than zero.");
             }
         }
         catch (final NumberFormatException e) {
@@ -126,20 +126,16 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxGetter
     public int getRows() {
-        int rows;
+        final String s = getDomNodeOrDie().getAttribute("rows");
         try {
-            final String s = getDomNodeOrDie().getAttribute("rows");
-            rows = Integer.parseInt(s);
+            return Integer.parseInt(s);
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(GENERATED_174)) {
-                rows = -1;
+            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_ROWS_RETURNS_2)) {
+                return 2;
             }
-            else {
-                rows = 2;
-            }
+            return -1;
         }
-        return rows;
     }
 
     /**
@@ -152,11 +148,11 @@ public class HTMLTextAreaElement extends FormField {
         try {
             i = new Float(rows).intValue();
             if (i < 0) {
-                throw new NumberFormatException();
+                throw new NumberFormatException("New value for rows '" + rows + "' is smaller than zero.");
             }
         }
         catch (final NumberFormatException e) {
-            if (getBrowserVersion().hasFeature(GENERATED_111)) {
+            if (getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
             i = 0;

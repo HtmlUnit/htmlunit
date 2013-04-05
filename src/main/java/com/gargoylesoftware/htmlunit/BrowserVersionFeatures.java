@@ -248,10 +248,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_111,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_112,
 
     /** Was originally .isIE(). */
@@ -325,10 +321,6 @@ public enum BrowserVersionFeatures {
     /** Was originally .isFirefox(). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_172,
-
-    /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    GENERATED_174,
 
     /** Was originally .isFirefox(). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -1042,11 +1034,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_TABLE_VALIGN_SUPPORTS_IE_VALUES,
 
-    /** Getting the property cols 20, if the defined value is not convertable into an integer (IE).
+    /** Getting the property cols returns 20, if the defined value is not convertible into an integer (IE).
      * FF returns -1 in this case.
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_TEXT_AREA_COLS_RETURNS_20,
+
+    /** Getting the property rows returns 2, if the defined value is not convertible into an integer (IE).
+     * FF returns -1 in this case.
+     */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_TEXT_AREA_ROWS_RETURNS_2,
 
     /** Setting the property cols throws an exception, if the provided value is not
      * convertible into an integer (IE).
@@ -1054,6 +1052,13 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(@WebBrowser(IE))
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
+
+    /** Setting the property rows throws an exception, if the provided value is not
+     * convertible into an integer (IE).
+     * FF ignores the provided value in this case and sets rows to 0.
+     */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
 
     /** It looks likes TreeWalker.expandEntityReferences is always <code>false</code> for FF17.
      */
