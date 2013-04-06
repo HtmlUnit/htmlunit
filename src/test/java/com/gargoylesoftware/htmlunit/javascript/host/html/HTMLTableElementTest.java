@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLTableElementTest extends WebDriverTestCase {
@@ -471,7 +472,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "table: [object]", "row: [object]", "cell: [object]" },
-            FF = { "table: [object HTMLTableElement]",
+            DEFAULT = { "table: [object HTMLTableElement]",
                     "row: [object HTMLTableRowElement]", "cell: [object HTMLTableCellElement]" })
     public void stringValues() throws Exception {
         final String html =
@@ -563,7 +564,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "hello", "left", "hi", "right" },
+    @Alerts(DEFAULT = {"", "hello", "left", "hi", "right" },
             IE = {"", "error", "", "left", "error", "left", "right" })
     public void align() throws Exception {
         final String html =
@@ -607,7 +608,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = {"", "#0000aa", "#000000" },
-            FF = {"", "#0000aa", "x" },
+            DEFAULT = {"", "#0000aa", "x" },
             FF3_6 = { "", "#0000aa", "#000000" })
     public void bgColor() throws Exception {
         final String html =

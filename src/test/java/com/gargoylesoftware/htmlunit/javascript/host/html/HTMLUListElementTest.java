@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLUListElementTest extends WebDriverTestCase {
@@ -40,7 +41,7 @@ public class HTMLUListElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLUListElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLUListElement]", IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -63,10 +64,10 @@ public class HTMLUListElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "false", "true", "true", "true", "null", "", "blah", "2",
+    @Alerts(DEFAULT = { "false", "true", "true", "true", "null", "", "blah", "2",
                    "true", "false", "true", "false", "", "null", "", "null" },
-        IE = { "false", "true", "true", "true", "false", "true", "true", "true",
-               "true", "false", "true", "false", "true", "false", "true", "false" })
+            IE = { "false", "true", "true", "true", "false", "true", "true", "true",
+                   "true", "false", "true", "false", "true", "false", "true", "false" })
     public void compact() throws Exception {
         final String html = "<html><body>\n"
             + "<ul id='u1'><li>a</li><li>b</li></ul>\n"
