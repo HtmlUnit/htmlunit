@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1476">
+                JavaScript: image.width() and image.height() are returning now the correct image size.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: DOMTokenList now works like in FF (different from spec). Some NPE exceptions
                 are fixed, separator chars are fixed, and we are able to create an attribute if needed.

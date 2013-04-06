@@ -14,17 +14,27 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HTMLImageElement}.
@@ -283,25 +293,25 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Test that image's width and height are numbers.
+     * Test image's width and height.
      * Regression test for bug
      * http://sourceforge.net/tracker/?func=detail&atid=448266&aid=2861064&group_id=47038
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "number: 300", "number: 200", "number", "number", "number", "number" })
-    public void testWidthHeight() throws Exception {
+    @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24" },
+            IE = { "number: 300", "number: 200", "number: 28", "number: 30", "number: 1", "number: 1" },
+            CHROME = { "number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0" })
+    public void testWidthHeightWithoutSource() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function showInfos(imageId) {\n"
             + "    var img = document.getElementById(imageId);\n"
-            + "    alert(typeof(img.width));\n"
-            + "    alert(typeof(img.height));\n"
+            + "    alert(typeof(img.width) + ': ' + img.width);\n"
+            + "    alert(typeof(img.height) + ': ' + img.height);\n"
             + "  }\n"
             + "  function test() {\n"
-            + "    var img1 = document.getElementById('myImage1');\n"
-            + "    alert(typeof(img1.width) + ': ' + img1.width);\n"
-            + "    alert(typeof(img1.height) + ': ' + img1.height);\n"
+            + "    showInfos('myImage1');\n"
             + "    showInfos('myImage2');\n"
             + "    showInfos('myImage3');\n"
             + "  }\n"
@@ -310,6 +320,79 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <img id='myImage1' width='300' height='200'>\n"
             + "  <img id='myImage2'>\n"
             + "  <img id='myImage3' width='hello' height='hello'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+   /**
+     * Test that image's width and height are numbers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" })
+    public void testWidthHeightWithSource() throws Exception {
+        getMockWebConnection().setDefaultResponse("");
+
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function showInfos(imageId) {\n"
+            + "    var img = document.getElementById(imageId);\n"
+            + "    alert(typeof(img.width) + ': ' + img.width);\n"
+            + "    alert(typeof(img.height) + ': ' + img.height);\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    showInfos('myImage1');\n"
+            + "    showInfos('myImage2');\n"
+            + "    showInfos('myImage3');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <img id='myImage1' src='" + URL_SECOND + "' width='300' height='200'>\n"
+            + "  <img id='myImage2' src='" + URL_SECOND + "' >\n"
+            + "  <img id='myImage3' src='" + URL_SECOND + "' width='hello' height='hello'>\n"
+            + "</body></html>";
+
+        final URL url = getClass().getClassLoader().getResource("testfiles/tiny-jpg.img");
+        final FileInputStream fis = new FileInputStream(new File(url.toURI()));
+        final byte[] directBytes = IOUtils.toByteArray(fis);
+        fis.close();
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        final List<NameValuePair> emptyList = Collections.emptyList();
+        webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test that image's width and height are numbers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24" },
+            IE = { "number: 300", "number: 200", "number: 1", "number: 1", "number: 1", "number: 1" },
+            CHROME = { "number: 300", "number: 200", "number: 18", "number: 20", "number: 18", "number: 20" })
+    public void testWidthHeightInvalidSource() throws Exception {
+        getMockWebConnection().setDefaultResponse("");
+
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function showInfos(imageId) {\n"
+            + "    var img = document.getElementById(imageId);\n"
+            + "    alert(typeof(img.width) + ': ' + img.width);\n"
+            + "    alert(typeof(img.height) + ': ' + img.height);\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    showInfos('myImage1');\n"
+            + "    showInfos('myImage2');\n"
+            + "    showInfos('myImage3');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <img id='myImage1' src='" + URL_SECOND + "' width='300' height='200'>\n"
+            + "  <img id='myImage2' src='" + URL_SECOND + "' >\n"
+            + "  <img id='myImage3' src='" + URL_SECOND + "' width='hello' height='hello'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

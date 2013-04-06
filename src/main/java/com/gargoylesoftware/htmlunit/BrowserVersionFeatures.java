@@ -912,6 +912,18 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED,
 
+    /** Getting the width and height of an image tag without a source returns 28x30;
+     * for invalid values returns 1 (IE).
+     */
+    @BrowserFeature(@WebBrowser(CHROME))
+    JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20x0,
+
+    /** Getting the width and height of an image tag without a source returns 28x30;
+     * for invalid values returns 1 (IE).
+     */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30x1,
+
     /** Indicates if multiple spaces are replaced by a single one when accessing innerHTML. */
     @BrowserFeature(@WebBrowser(IE))
     JS_INNER_HTML_REDUCE_WHITESPACES,
