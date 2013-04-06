@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLBodyElementTest extends WebDriverTestCase {
@@ -68,7 +69,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "exception", IE = "[object]")
+    @Alerts(DEFAULT = "exception", IE = "[object]")
     public void attachEvent() throws Exception {
         final String html =
             "<html>\n"
@@ -98,7 +99,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = "no",
+    @Alerts(DEFAULT = "no",
             IE = "yes")
     public void doScroll() throws Exception {
         final String html =
@@ -126,7 +127,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "#0000aa", "x" },
+    @Alerts(DEFAULT = {"", "#0000aa", "x" },
             FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" })
     public void aLink() throws Exception {
@@ -180,7 +181,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "#0000aa", "x" },
+    @Alerts(DEFAULT = {"", "#0000aa", "x" },
             FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" })
     public void bgColor() throws Exception {
@@ -207,7 +208,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "#0000aa", "x" },
+    @Alerts(DEFAULT = {"", "#0000aa", "x" },
             FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" })
     public void link() throws Exception {
@@ -234,7 +235,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "#0000aa", "x" },
+    @Alerts(DEFAULT = {"", "#0000aa", "x" },
             FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" })
     public void text() throws Exception {
@@ -261,7 +262,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = {"", "#0000aa", "x" },
+    @Alerts(DEFAULT = {"", "#0000aa", "x" },
             FF3_6 = {"", "#0000aa", "#000000" },
             IE = {"", "#0000aa", "#000000" })
     public void vLink() throws Exception {
