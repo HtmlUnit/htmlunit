@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLElement2Test extends WebDriverTestCase {
@@ -44,7 +45,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "HTML", "" }, FF = { "undefined", "undefined" })
+    @Alerts(IE = { "HTML", "" }, DEFAULT = { "undefined", "undefined" })
     public void scopeName() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -64,7 +65,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "blah", "http://www.blah.com/blah", "error" },
-            FF = { "undefined", "undefined", "undefined", "http://www.meh.com/meh" })
+            DEFAULT = { "undefined", "undefined", "undefined", "http://www.meh.com/meh" })
     public void scopeName2() throws Exception {
         final String html = "<html xmlns:blah='http://www.blah.com/blah'><head>\n"
             + "<script>\n"
@@ -400,7 +401,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "8", "8" }, IE = { "10", "15" })
+    @Alerts(DEFAULT = { "8", "8" }, IE = { "10", "15" })
     public void offsetTopAndLeftWhenParentIsBody() throws Exception {
         final String html
             = "<html>\n"
@@ -498,7 +499,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "0", "20" },
+    @Alerts(DEFAULT = { "0", "20" },
             FF17 = { "0", "19" },
             IE = { "15", "15" })
     @NotYetImplemented(FF17)
@@ -517,7 +518,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "77", "2", "5", "20", "50", "50", "20" },
+    @Alerts(DEFAULT = { "77", "2", "5", "20", "50", "50", "20" },
             FF17 = { "76", "2", "5", "20", "50", "50", "19" },
             IE = { "100", "15", "20", "20", "50", "50", "15" })
     @NotYetImplemented(FF17)
@@ -611,7 +612,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "something", "something" }, FF = { "something", "0" })
+    @Alerts(IE = { "something", "something" }, DEFAULT = { "something", "0" })
     public void textContent_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -639,7 +640,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = { "something", "null" }, FF = { "something", "0" })
+    @Alerts(IE = { "something", "null" }, DEFAULT = { "something", "0" })
     public void innerText_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -849,7 +850,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "true", "button", "error" }, FF = { "true", "button", "true", "button", "false" })
+    @Alerts(IE = { "true", "button", "error" }, DEFAULT = { "true", "button", "true", "button", "false" })
     public void removeAttributeNode() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -876,7 +877,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "3", "div1" }, IE = "undefined")
+    @Alerts(DEFAULT = { "3", "div1" }, IE = "undefined")
     public void querySelectorAll() throws Exception {
         final String html = "<html><head><title>Test</title>\n"
             + "<style>\n"
@@ -986,7 +987,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "1", IE = "undefined")
+    @Alerts(DEFAULT = "1", IE = "undefined")
     public void querySelectorAll_noDuplication() throws Exception {
         final String html = "<html><body>\n"
             + "<div><span>First</span></div>\n"

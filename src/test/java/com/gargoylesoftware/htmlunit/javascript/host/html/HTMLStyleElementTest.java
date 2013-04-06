@@ -36,7 +36,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(IE = { "[object]", "undefined", "[object]" },
-            FF = { "[object HTMLStyleElement]", "[object CSSStyleSheet]", "undefined" })
+            DEFAULT = { "[object HTMLStyleElement]", "[object CSSStyleSheet]", "undefined" })
     public void stylesheet() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

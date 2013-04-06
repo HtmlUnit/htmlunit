@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Chris Erskine
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLFormElementTest extends WebDriverTestCase {
@@ -866,7 +867,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = "radio")
+    @Alerts(DEFAULT = "exception", IE = "radio")
     public void item() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -892,7 +893,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = "2")
+    @Alerts(DEFAULT = "exception", IE = "2")
     public void item_many() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -919,7 +920,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = "radio2")
+    @Alerts(DEFAULT = "exception", IE = "radio2")
     public void item_many_subindex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -946,7 +947,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "exception", IE = "radio2")
+    @Alerts(DEFAULT = "exception", IE = "radio2")
     public void item_integer() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1225,7 +1226,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object HTMLInputElement]", "undefined", "[object HTMLInputElement]", "[object HTMLInputElement]" },
+    @Alerts(DEFAULT = { "[object HTMLInputElement]", "undefined",
+                        "[object HTMLInputElement]", "[object HTMLInputElement]" },
             IE = { "[object]", "undefined", "[object]", "undefined" })
     public void accessByNameAfterNameChange() throws Exception {
         final String html
@@ -1251,7 +1253,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = { "[object HTMLInputElement]", "[object HTMLInputElement]" },
+    @Alerts(DEFAULT = { "[object HTMLInputElement]", "[object HTMLInputElement]" },
         IE = { "[object]", "[object]" })
     public void lostChildrenFromElements() throws Exception {
         final String html
