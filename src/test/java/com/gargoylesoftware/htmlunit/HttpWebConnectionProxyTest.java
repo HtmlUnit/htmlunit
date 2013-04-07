@@ -43,9 +43,9 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
      */
     @Before
     public void setup() throws Exception {
-        startWebServer("./src/test/resources/testfiles/noproxyroot/");
+        startWebServer("src/test/resources/testfiles/noproxyroot/");
 
-        proxyWebServer_ = createWebServer(PORT2, "./src/test/resources/testfiles/proxyroot/", null, null, null);
+        proxyWebServer_ = createWebServer(PORT2, "src/test/resources/testfiles/proxyroot/", null, null, null);
         proxyWebServer_.start();
 
         final WebClient webClient = getWebClient();
