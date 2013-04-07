@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade commons-logging to 1.1.2.
+            </action>
             <action type="fix" dev="rbri" issue="1486" due-to="John J Murdoch">
                 Proxy configuration now respects the bypass host also after the proxy was used for another host before.
             </action>
