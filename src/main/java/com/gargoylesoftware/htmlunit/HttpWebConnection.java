@@ -54,7 +54,6 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpHead;
@@ -121,6 +120,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ahmed Ashour
  * @author Nicolas Belisle
  * @author Ronald Brill
+ * @author John J Murdoch
  */
 public class HttpWebConnection implements WebConnection {
 
@@ -164,7 +164,7 @@ public class HttpWebConnection implements WebConnection {
                         + " (reason: " + e.getMessage() + ")", e);
             }
             final HttpHost hostConfiguration = getHostConfiguration(request);
-            setProxy(httpClient, request);
+            setProxy(httpMethod, request);
             final long startTime = System.currentTimeMillis();
 
             HttpResponse httpResponse = null;
@@ -223,15 +223,15 @@ public class HttpWebConnection implements WebConnection {
         return hostConfiguration;
     }
 
-    private static void setProxy(final HttpClient httpClient, final WebRequest webRequest) {
+    private static void setProxy(final HttpUriRequest httpUriRequest, final WebRequest webRequest) {
         if (webRequest.getProxyHost() != null) {
             final HttpHost proxy = new HttpHost(webRequest.getProxyHost(), webRequest.getProxyPort());
-            final HttpParams httpClientParams = httpClient.getParams();
+            final HttpParams httpRequestParams = httpUriRequest.getParams();
             if (webRequest.isSocksProxy()) {
-                SocksSocketFactory.setSocksProxy(httpClientParams, proxy);
+                SocksSocketFactory.setSocksProxy(httpRequestParams, proxy);
             }
             else {
-                httpClientParams.setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
+                httpRequestParams.setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
             }
         }
     }
@@ -379,8 +379,8 @@ public class HttpWebConnection implements WebConnection {
         else {
             // Cookies are disabled.
             httpClient.setCookieStore(new CookieStore() {
-                public void addCookie(final Cookie cookie) { }
-                public void clear() { }
+                public void addCookie(final Cookie cookie) { /* empty */ }
+                public void clear() { /* empty */ }
                 public boolean clearExpired(final Date date) {
                     return false;
                 }

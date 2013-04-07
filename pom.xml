@@ -716,6 +716,9 @@
         <contributor>
             <name>Andrea Martino</name>
         </contributor>
+        <contributor>
+            <name>John J Murdoch</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
