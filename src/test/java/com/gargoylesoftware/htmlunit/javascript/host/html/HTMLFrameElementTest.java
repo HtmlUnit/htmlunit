@@ -27,7 +27,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browsers;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -47,22 +46,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLFrameElementTest extends SimpleWebTestCase {
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Frame2")
-    public void testFrameName() throws Exception {
-        final String html
-            = "<html><head><title>first</title></head>\n"
-            + "<frameset cols='20%,80%'>\n"
-            + "    <frame id='frame1'>\n"
-            + "    <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"
-            + "</frameset></html>";
-
-        loadPageWithAlerts(html);
-    }
 
     /**
      * Regression test for http://sourceforge.net/tracker/index.php?func=detail&aid=1101525&group_id=47038&atid=448266.
@@ -100,49 +83,6 @@ public class HTMLFrameElementTest extends SimpleWebTestCase {
         assertEquals("first", page.getTitleText());
 
         assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Browsers(FF)
-    @Alerts("true")
-    public void testContentDocument() throws Exception {
-        final String html
-            = "<html><head><title>first</title>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  alert(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
-                + "}\n"
-                + "</script></head>\n"
-                + "<frameset rows='*' onload='test()'>\n"
-                + "<frame name='foo' id='myFrame' src='about:blank'/>\n"
-                + "</frameset>\n"
-                + "</html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Alerts("true")
-    @Test
-    public void testContentWindow() throws Exception {
-        final String html
-            = "<html><head><title>first</title>\n"
-                + "<script>\n"
-                + "function test() {\n"
-                + "  alert(document.getElementById('myFrame').contentWindow == frames.foo);\n"
-                + "}\n"
-                + "</script></head>\n"
-                + "<frameset rows='*' onload='test()'>\n"
-                + "<frame name='foo' id='myFrame' src='about:blank'/>\n"
-                + "</frameset>\n"
-                + "</html>";
-
-        loadPageWithAlerts(html);
     }
 
     /**
@@ -198,65 +138,6 @@ public class HTMLFrameElementTest extends SimpleWebTestCase {
             + "</body></html>";
 
         getMockWebConnection().setResponse(new URL(getDefaultUrl() + "testFrame.html"), frameContent);
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * Regression test for bug 1192854.
-     * @throws Exception if the test fails
-     */
-    @Alerts({ "frame=OK", "frames.length=2", "frame=OK", "frames.length=0", "frame=OK", "frames.length=0" })
-    @Test
-    public void testFrameTag1192854() throws Exception {
-        final String html
-            = "<html>\n"
-            + "<script>\n"
-            + "var root=this;\n"
-            + "function listframes(frame) {\n"
-            + "  if (frame == null) {\n"
-            + "    alert('frame=null');\n"
-            + "  } else {\n"
-            + "    alert('frame=OK');\n"
-            + "    var len = frame.frames.length;\n"
-            + "    alert('frames.length=' + len);\n"
-            + "    for (var i=0; i<len; i++) {\n"
-            + "      listframes(frame.frames[i]);\n"
-            + "    }\n"
-            + "  }\n"
-            + "}\n"
-            + "document.write('<frameset id=\"frameset1\" "
-            + "rows=\"50,50\"><frame id=\"frame1-1\" "
-            + "src=\"about:blank\"><frame id=\"frame1-2\" "
-            + "src=\"about:blank\"></frameset>');\n"
-            + "listframes(root);\n"
-            + "</script>\n"
-            + "</html>";
-
-        loadPageWithAlerts(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({ "function handler() {\n}", "null" })
-    public void testOnloadNull() throws Exception {
-        final String html =
-            "<html><head>\n"
-            + "<script>\n"
-            + "  function handler() {}\n"
-            + "  function test() {\n"
-            + "    var iframe = document.getElementById('myFrame');\n"
-            + "    iframe.onload = handler;\n"
-            + "    alert(iframe.onload);\n"
-            + "    iframe.onload = null;\n"
-            + "    alert(iframe.onload);\n"
-            + "  }\n"
-            + "</script>\n"
-            + "<body onload=test()>\n"
-            + "  <iframe id='myFrame'></iframe>\n"
-            + "</body></html>";
-
         loadPageWithAlerts(html);
     }
 
