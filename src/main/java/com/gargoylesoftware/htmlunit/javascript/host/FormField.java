@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -99,24 +97,6 @@ public class FormField extends FormChild {
     @JsxGetter
     public String getType() {
         return getDomNodeOrDie().getAttribute("type");
-    }
-
-    /**
-     * Sets the <tt>onchange</tt> event handler for this element.
-     * @param onchange the <tt>onchange</tt> event handler for this element
-     */
-    @JsxSetter
-    public void setOnchange(final Object onchange) {
-        setEventHandlerProp("onchange", onchange);
-    }
-
-    /**
-     * Returns the <tt>onchange</tt> event handler for this element.
-     * @return the <tt>onchange</tt> event handler for this element
-     */
-    @JsxGetter
-    public Function getOnchange() {
-        return getEventHandler("onchange");
     }
 
     /**

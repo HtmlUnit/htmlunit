@@ -233,24 +233,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * Returns the <tt>onsubmit</tt> event handler for this element.
-     * @return the <tt>onsubmit</tt> event handler for this element
-     */
-    @JsxGetter
-    public Object getOnsubmit() {
-        return getEventHandlerProp("onsubmit");
-    }
-
-    /**
-     * Sets the <tt>onsubmit</tt> event handler for this element.
-     * @param onsubmit the <tt>onsubmit</tt> event handler for this element
-     */
-    @JsxSetter
-    public void setOnsubmit(final Object onsubmit) {
-        setEventHandlerProp("onsubmit", onsubmit);
-    }
-
-    /**
      * Sets the value of the JavaScript attribute "target".
      * @param target the new value
      */

@@ -2839,4 +2839,40 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     protected boolean isLowerCaseInOuterHtml() {
         return false;
     }
+
+    /**
+     * Sets the <tt>onchange</tt> event handler for this element.
+     * @param onchange the <tt>onchange</tt> event handler for this element
+     */
+    @JsxSetter
+    public void setOnchange(final Object onchange) {
+        setEventHandlerProp("onchange", onchange);
+    }
+
+    /**
+     * Returns the <tt>onchange</tt> event handler for this element.
+     * @return the <tt>onchange</tt> event handler for this element
+     */
+    @JsxGetter
+    public Function getOnchange() {
+        return getEventHandler("onchange");
+    }
+
+    /**
+     * Returns the <tt>onsubmit</tt> event handler for this element.
+     * @return the <tt>onsubmit</tt> event handler for this element
+     */
+    @JsxGetter
+    public Object getOnsubmit() {
+        return getEventHandlerProp("onsubmit");
+    }
+
+    /**
+     * Sets the <tt>onsubmit</tt> event handler for this element.
+     * @param onsubmit the <tt>onsubmit</tt> event handler for this element
+     */
+    @JsxSetter
+    public void setOnsubmit(final Object onsubmit) {
+        setEventHandlerProp("onsubmit", onsubmit);
+    }
 }

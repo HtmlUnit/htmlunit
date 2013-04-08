@@ -126,4 +126,25 @@ public class HTMLDivElementTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * A similar test is used by jQuery-1.4.1 to detect browser capacities.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "null", "true", "null", "true" })
+    public void handlers() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<div id='d1'></div>\n"
+            + "<script>\n"
+            + "var d = document.getElementById('d1');\n"
+            + "alert(d.onchange);\n"
+            + "alert('onchange' in d);\n"
+            + "alert(d.onsubmit);\n"
+            + "alert('onsubmit' in d);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
