@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 
 import java.net.URL;
@@ -1275,7 +1274,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(FF = "function", IE = "string")
-    @NotYetImplemented(FF)
     public void onchangeHandler() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

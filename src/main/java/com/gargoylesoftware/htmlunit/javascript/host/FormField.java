@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * Base class for all JavaScript object corresponding to form fields.
@@ -97,6 +101,24 @@ public class FormField extends FormChild {
     @JsxGetter
     public String getType() {
         return getDomNodeOrDie().getAttribute("type");
+    }
+
+    /**
+     * Sets the <tt>onchange</tt> event handler for this element.
+     * @param onchange the <tt>onchange</tt> event handler for this element
+     */
+    @JsxSetter(@WebBrowser(value = IE))
+    public void setOnchange(final Object onchange) {
+        setEventHandlerProp("onchange", onchange);
+    }
+
+    /**
+     * Returns the <tt>onchange</tt> event handler for this element.
+     * @return the <tt>onchange</tt> event handler for this element
+     */
+    @JsxGetter(@WebBrowser(value = IE))
+    public Function getOnchange() {
+        return getEventHandler("onchange");
     }
 
     /**

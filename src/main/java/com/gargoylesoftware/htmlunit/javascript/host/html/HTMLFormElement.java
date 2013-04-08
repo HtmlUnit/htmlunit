@@ -15,10 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ENCODING_NORMALIZED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_169;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_80;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_81;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ENCODING_NORMALIZED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.net.MalformedURLException;
@@ -230,6 +230,24 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @JsxGetter
     public String getTarget() {
         return getHtmlForm().getTargetAttribute();
+    }
+
+    /**
+     * Returns the <tt>onsubmit</tt> event handler for this element.
+     * @return the <tt>onsubmit</tt> event handler for this element
+     */
+    @JsxGetter(@WebBrowser(value = IE))
+    public Object getOnsubmit() {
+        return getEventHandlerProp("onsubmit");
+    }
+
+    /**
+     * Sets the <tt>onsubmit</tt> event handler for this element.
+     * @param onsubmit the <tt>onsubmit</tt> event handler for this element
+     */
+    @JsxSetter(@WebBrowser(value = IE))
+    public void setOnsubmit(final Object onsubmit) {
+        setEventHandlerProp("onsubmit", onsubmit);
     }
 
     /**
