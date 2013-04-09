@@ -494,6 +494,11 @@ public class JavaScriptEngine {
 
         WebAssert.notNull("sourceCode", sourceCode);
 
+        if (LOG.isTraceEnabled()) {
+            final String newline = System.getProperty("line.separator");
+            LOG.trace("Javascript compile " + sourceName + newline + sourceCode + newline);
+        }
+
         final Scriptable scope = getScope(htmlPage, null);
         final String source = sourceCode;
         final ContextAction action = new HtmlUnitContextAction(scope, htmlPage) {
