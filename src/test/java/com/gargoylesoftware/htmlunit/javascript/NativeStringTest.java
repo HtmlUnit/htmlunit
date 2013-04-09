@@ -92,16 +92,15 @@ public class NativeStringTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = "", DEFAULT = { "2", "3", "4" })
+    @Alerts(IE8 = "", DEFAULT = "2")
     public void trim() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
             + "    var string = ' hi  ';\n"
             + "    if (''.trim) {\n"
             + "      alert(string.trim().length);\n"
-            + "      alert(string.trimRight().length);\n"
-            + "      alert(string.trimLeft().length);\n"
             + "    }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
@@ -110,4 +109,45 @@ public class NativeStringTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "", DEFAULT = "3")
+    public void trimRight() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "    var string = ' hi  ';\n"
+            + "    if (''.trimRight) {\n"
+            + "      alert(string.trimRight().length);\n"
+            + "    }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(IE = "", DEFAULT = "4")
+    public void trimLeft() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "    var string = ' hi  ';\n"
+            + "    if (''.trimLeft) {\n"
+            + "      alert(string.trimLeft().length);\n"
+            + "    }\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

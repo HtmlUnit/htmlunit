@@ -25,6 +25,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_T
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HAS_OBJECT_WITH_PROTOTYPE_PROPERTY_IN_WINDOW_SCOPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_TRIM;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_TRIM_LEFT_RIGHT;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -284,15 +285,16 @@ public class JavaScriptEngine {
 
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
         removePrototypeProperties(window, "String", "equals", "equalsIgnoreCase");
-        if (browserVersion.hasFeature(STRING_TRIM)) {
+        if (!browserVersion.hasFeature(STRING_TRIM)) {
+            removePrototypeProperties(window, "String", "trim");
+        }
+        if (browserVersion.hasFeature(STRING_TRIM_LEFT_RIGHT)) {
             final ScriptableObject stringPrototype =
                 (ScriptableObject) ScriptableObject.getClassPrototype(window, "String");
             stringPrototype.defineFunctionProperties(new String[] {"trimLeft", "trimRight"},
                 StringCustom.class, ScriptableObject.EMPTY);
         }
-        else {
-            removePrototypeProperties(window, "String", "trim");
-        }
+
         if (!browserVersion.hasFeature(JS_FUNCTION_BIND)) {
             removePrototypeProperties(window, "Function", "bind");
         }

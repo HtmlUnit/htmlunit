@@ -1180,9 +1180,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 10), @WebBrowser(CHROME) })
     STORAGE_OBSOLETE,
 
-    /** Indicates that string.trim(), .trimLeft() and .trimRight() are supported. */
+    /** Indicates that string.trim() is supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     STRING_TRIM,
+
+    /** Indicates that string.trimLeft() and .trimRight() are supported. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9), @WebBrowser(CHROME) })
+    STRING_TRIM_LEFT_RIGHT,
 
     /**
      * Indicates that the href property for a &lt;link rel="stylesheet" type="text/css" href="..." /&gt;
