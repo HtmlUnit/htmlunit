@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="mguillem">
+                JavaScript: load the source of a dynamically created HTML(I)FrameElement first when it is added to the DOM.
+            </action>
             <action type="fix" dev="rbri" issue="1501">
                 JavaScript: IE 9 supports String.trim().
             </action>

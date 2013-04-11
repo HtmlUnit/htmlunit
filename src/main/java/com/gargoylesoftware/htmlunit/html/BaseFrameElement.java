@@ -50,9 +50,10 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
 public abstract class BaseFrameElement extends HtmlElement {
 
     private static final Log LOG = LogFactory.getLog(BaseFrameElement.class);
-    private WebWindow enclosedWindow_;
+    private FrameWindow enclosedWindow_;
     private boolean contentLoaded_ = false;
     private boolean createdByJavascript_ = false;
+    private boolean loadSrcWhenAddedToPage_ = false;
 
     /**
      * Creates an instance of BaseFrame.
@@ -70,7 +71,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     private void init() {
-        WebWindow enclosedWindow = null;
+        FrameWindow enclosedWindow = null;
         try {
             if (getPage() instanceof HtmlPage) { // if loaded as part of XHR.responseXML, don't load content
                 enclosedWindow = new FrameWindow(this);
@@ -321,7 +322,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * Gets the window enclosed in this frame.
      * @return the window enclosed in this frame
      */
-    public WebWindow getEnclosedWindow() {
+    public FrameWindow getEnclosedWindow() {
         return enclosedWindow_;
     }
 
@@ -345,25 +346,43 @@ public abstract class BaseFrameElement extends HtmlElement {
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
 
         if ("src".equals(qualifiedName) && !WebClient.ABOUT_BLANK.equals(attributeValue)) {
-            final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
-            // When src is set from a script, loading is postponed until script finishes
-            // in fact this implementation is probably wrong: JavaScript URL should be
-            // first evaluated and only loading, when any, should be postponed.
-            if (!jsEngine.isScriptRunning() || attributeValue.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
-                loadInnerPageIfPossible(attributeValue);
+            if (isDirectlyAttachedToPage()) {
+                loadSrc();
             }
             else {
-                final String src = attributeValue;
-                final PostponedAction action = new PostponedAction(getPage()) {
-                    @Override
-                    public void execute() throws Exception {
-                        if (getSrcAttribute().equals(src)) {
-                            loadInnerPage();
-                        }
-                    }
-                };
-                jsEngine.addPostponedAction(action);
+                loadSrcWhenAddedToPage_ = true;
             }
+        }
+    }
+
+    private void loadSrc() {
+        loadSrcWhenAddedToPage_ = false;
+        final String src = getSrcAttribute();
+
+        final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
+        // When src is set from a script, loading is postponed until script finishes
+        // in fact this implementation is probably wrong: JavaScript URL should be
+        // first evaluated and only loading, when any, should be postponed.
+        if (!jsEngine.isScriptRunning() || src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+            loadInnerPageIfPossible(src);
+        }
+        else {
+            final PostponedAction action = new PostponedAction(getPage()) {
+                @Override
+                public void execute() throws Exception {
+                    if (getSrcAttribute().equals(src)) {
+                        loadInnerPage();
+                    }
+                }
+            };
+            jsEngine.addPostponedAction(action);
+        }
+    }
+
+    @Override
+    protected void onAddedToPage() {
+        if (loadSrcWhenAddedToPage_) {
+            loadSrc();
         }
     }
 

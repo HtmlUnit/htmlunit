@@ -830,6 +830,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         newnode.previousSibling_ = null;
         newnode.firstChild_ = null;
         newnode.scriptObject_ = null;
+        newnode.directlyAttachedToPage_ = false;
 
         // if deep, clone the kids too.
         if (deep) {
@@ -914,19 +915,20 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final boolean wasAlreadyAttached = domNode.isDirectlyAttachedToPage();
         domNode.directlyAttachedToPage_ = isDirectlyAttachedToPage();
 
-        // trigger events
-        if (!(this instanceof DomDocumentFragment) && (getPage() instanceof HtmlPage)) {
-            ((HtmlPage) getPage()).notifyNodeAdded(domNode);
-        }
-
-        // a node that is already "complete" (ie not being parsed) and not yet attached
-        if (!domNode.isBodyParsed() && isDirectlyAttachedToPage() && !wasAlreadyAttached) {
-            domNode.onAddedToPage();
-            for (final DomNode child : domNode.getDescendants()) {
-                child.directlyAttachedToPage_ = true;
-                child.onAllChildrenAddedToPage(true);
+        if (isDirectlyAttachedToPage()) {
+            // trigger events
+            if (!(this instanceof DomDocumentFragment) && (getPage() instanceof HtmlPage)) {
+                ((HtmlPage) getPage()).notifyNodeAdded(domNode);
             }
-            domNode.onAllChildrenAddedToPage(true);
+
+            // a node that is already "complete" (ie not being parsed) and not yet attached
+            if (!domNode.isBodyParsed() && !wasAlreadyAttached) {
+                for (final DomNode child : domNode.getDescendants()) {
+                    child.directlyAttachedToPage_ = true;
+                    child.onAllChildrenAddedToPage(true);
+                }
+                domNode.onAllChildrenAddedToPage(true);
+            }
         }
 
         fireNodeAdded(this, domNode);

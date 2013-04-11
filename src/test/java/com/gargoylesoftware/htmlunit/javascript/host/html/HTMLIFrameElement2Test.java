@@ -238,6 +238,23 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * A frame element that is not appended to the document should not be loaded.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("created")
+    public void documentCreateElement_noAppendNoLoad() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "var myFrame = document.createElement('iframe');\n"
+            + "myFrame.src = 'notExisting.html';\n"
+            + "alert('created');\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

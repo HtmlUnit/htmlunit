@@ -141,6 +141,7 @@ public class HtmlPage extends SgmlPage {
     private String originalCharset_;
     private Map<String, SortedSet<DomElement>> idMap_ = new HashMap<String, SortedSet<DomElement>>();
     private Map<String, SortedSet<DomElement>> nameMap_ = new HashMap<String, SortedSet<DomElement>>();
+    private SortedSet<BaseFrameElement> frameElements_ = new TreeSet<BaseFrameElement>(documentPositionComparator);
     private HtmlElement elementWithFocus_;
     private int parserCount_;
     private int snippetParserCount_;
@@ -1451,13 +1452,8 @@ public class HtmlPage extends SgmlPage {
      */
     public List<FrameWindow> getFrames() {
         final List<FrameWindow> list = new ArrayList<FrameWindow>();
-        final WebWindow enclosingWindow = getEnclosingWindow();
-        for (final WebWindow window : getWebClient().getWebWindows()) {
-            // quite strange but for a TopLevelWindow parent == self
-            if (enclosingWindow == window.getParentWindow()
-                    && enclosingWindow != window) {
-                list.add((FrameWindow) window);
-            }
+        for (final BaseFrameElement frameElement : frameElements_) {
+            list.add(frameElement.getEnclosedWindow());
         }
         return list;
     }
@@ -1740,10 +1736,8 @@ public class HtmlPage extends SgmlPage {
      * @param recurse indicates if children must be added too
      */
     void addMappedElement(final DomElement element, final boolean recurse) {
-        if (isDescendant(element)) {
-            addElement(idMap_, element, "id", recurse);
-            addElement(nameMap_, element, "name", recurse);
-        }
+        addElement(idMap_, element, "id", recurse);
+        addElement(nameMap_, element, "name", recurse);
     }
 
     private void addElement(final Map<String, SortedSet<DomElement>> map, final DomElement element,
@@ -1814,6 +1808,10 @@ public class HtmlPage extends SgmlPage {
         if (node instanceof DomElement) {
             addMappedElement((DomElement) node, true);
 
+            if (node instanceof BaseFrameElement) {
+                frameElements_.add((BaseFrameElement) node);
+            }
+
             if ("base".equals(node.getNodeName())) {
                 calculateBase();
             }
@@ -1846,6 +1844,11 @@ public class HtmlPage extends SgmlPage {
     void notifyNodeRemoved(final DomNode node) {
         if (node instanceof HtmlElement) {
             removeMappedElement((HtmlElement) node, true, true);
+
+            if (node instanceof BaseFrameElement) {
+                frameElements_.remove(node);
+            }
+
             if ("base".equals(node.getNodeName())) {
                 calculateBase();
             }
@@ -2056,13 +2059,6 @@ public class HtmlPage extends SgmlPage {
         final HtmlPage result = (HtmlPage) super.cloneNode(deep);
         final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptObject()).clone();
         jsObjClone.setDomNode(result);
-        if (deep) {
-            // fix up idMap_ and result's idMap_s
-            for (final HtmlElement child : result.getHtmlElementDescendants()) {
-                removeMappedElement(child);
-                result.addMappedElement(child);
-            }
-        }
         return result;
     }
 
