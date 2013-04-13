@@ -12,9 +12,6 @@
                 JavaScript: Starting with IE8 the radio button checked state is reseted to false
                 when adding to page.
             </action>
-            <action type="update" dev="rbri">
-                Upgrade Apache HttpClient to 4.2.4.
-            </action>
             <action type="fix" dev="mguillem">
                 JavaScript: load the source of a dynamically created HTML(I)FrameElement first when it is added to the DOM.
             </action>
