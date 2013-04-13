@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: Starting with IE8 the radio button checked state is reseted to false
+                when adding to page.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache HttpClient to 4.2.4.
             </action>

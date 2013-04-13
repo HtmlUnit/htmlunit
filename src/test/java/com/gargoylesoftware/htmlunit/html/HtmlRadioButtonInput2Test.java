@@ -42,7 +42,8 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "true", "false", "false", "false", "true", "true" })
+            IE = { "true", "false", "false", "false", "false", "false" },
+            IE6 = { "true", "false", "false", "false", "true", "true" })
     public void checked_on_attachment() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

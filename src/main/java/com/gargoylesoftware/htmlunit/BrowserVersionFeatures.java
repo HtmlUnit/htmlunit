@@ -605,9 +605,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLPARSER_REMOVE_EMPTY_CONTENT,
 
-    /** Set this checked state back to default when added to page (IE). */
-    @BrowserFeature(@WebBrowser(IE))
+    /** Set this checked state back to default when added to page (IE6). */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
     HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED,
+
+    /** Set this checked state to false when added to page (IE). */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 8))
+    HTMLRADIOINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED,
 
     /**
      * Set this property if the script tag supports the
