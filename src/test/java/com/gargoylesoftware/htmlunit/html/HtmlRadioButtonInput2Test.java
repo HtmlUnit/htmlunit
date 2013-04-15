@@ -73,6 +73,40 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
+            IE = { "false", "false", "false", "false", "false", "false" },
+            IE6 = { "false", "false", "false", "false", "true", "true" })
+    public void notchecked_on_attachment() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var input = document.createElement('input');\n"
+            + "      input.type = 'radio';\n"
+            + "      alert(input.checked);\n"
+            + "      document.body.appendChild(input);\n"
+            + "      alert(input.checked);\n"
+            + "      document.body.removeChild(input);\n"
+            + "      alert(input.checked);\n"
+            + "\n"
+            + "      input.defaultChecked = true;\n"
+            + "      alert(input.checked);\n"
+            + "      document.body.appendChild(input);\n"
+            + "      alert(input.checked);\n"
+            + "      document.body.removeChild(input);\n"
+            + "      alert(input.checked);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Regression test for bug 2956588.
      * As of HttmlUnit-2.8-SNAPSHOT on 26.02.10, reading responseXML with xhtml namespace
      * was causing ClassCastException for IE simulation when it contained a checked radio button.

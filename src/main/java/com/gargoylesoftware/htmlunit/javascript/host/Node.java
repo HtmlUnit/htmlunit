@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_121
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_124;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_125;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_45;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLRADIOINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_APPEND_CHILD_THROWS_NO_EXCEPTION_FOR_WRONG_NOTE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLONE_NODE_COPIES_EVENT_LISTENERS;
@@ -49,6 +50,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
@@ -233,6 +235,15 @@ public class Node extends SimpleScriptable {
             parentNode.appendChild(childDomNode);
             appendedChild = childObject;
 
+            // special hack for IE and radio buttons
+            // this can't be done in onAddedToPage() because
+            // it only happens when appendChild() is called.
+            if (childDomNode instanceof HtmlRadioButtonInput) {
+                HtmlRadioButtonInput radio = (HtmlRadioButtonInput) childDomNode;
+                if (getBrowserVersion().hasFeature(HTMLRADIOINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
+                    radio.setChecked(false);
+                }
+            }
             // if the parentNode has null parentNode in IE,
             // create a DocumentFragment to be the parentNode's parentNode.
             if (!(parentNode instanceof SgmlPage)
