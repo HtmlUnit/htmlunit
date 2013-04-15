@@ -145,8 +145,9 @@ public class NotYetImplementedTest {
         builder.append("<html><head></head><body>\n");
         builder.append("NotYetImplemented is a condition in which a test is known to fail with HtmlUnit.");
         builder.append("<table border='1'>\n");
-        builder.append("  <tr><th>File</th><th>Method</th><th>Line</th><th>Description</th></tr>\n");
+        builder.append("  <tr><th>File</th><th>#</th><th>Method</th><th>Line</th><th>Description</th></tr>\n");
         String lastFile = null;
+        int count = 0;
         for (final String entry : entries_) {
             final String[] values = entry.split(";");
             final String file = values[0];
@@ -175,6 +176,7 @@ public class NotYetImplementedTest {
                 builder.append("</td>\n");
                 lastFile = file;
             }
+            builder.append("    <td>").append(Integer.toString(count++)).append("</td>\n");
             builder.append("    <td><a href='https://sourceforge.net/p/htmlunit/code/" + revision
                     + "/tree/trunk/htmlunit/" + file + "#l" + line + "'>").append(method).append("</a> ")
                     .append(browser).append("</td>\n");
