@@ -183,6 +183,26 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT,
 
+    /** Does not trigger "onmousedown" event handler for the select options. */
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(IE) })
+    EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT,
+
+    /** Does not trigger "onmousedown" event handler for the select options. */
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10) })
+    EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT,
+
+    /** Does not trigger "onmousedown" event handler for the select options. */
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(value = FF, maxVersion = 3.6f) })
+    EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION,
+
+    /** Does not trigger "onmousedown" event handler for the select options. */
+    @BrowserFeature({ @WebBrowser(value = FF, maxVersion = 3.6f), @WebBrowser(IE), @WebBrowser(CHROME) })
+    EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT,
+
+    /** Does not trigger "onmouseup" event handler for the select options. */
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(CHROME) })
+    EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION,
+
     /** Triggers "onreadystatechange" event. */
     @BrowserFeature(@WebBrowser(IE))
     EVENT_ONREADY_STATE_CHANGE,

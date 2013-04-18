@@ -16,6 +16,14 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTROL_UPDATE_DONE_BEFORE_CLICK_EVENT_FIRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_OPTION_ALSO;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
+                    EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
+                    EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.
+                    EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_PREVENT_DISABLED;
 
@@ -232,6 +240,42 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     public final void setValueAttribute(final String newValue) {
         setAttribute("value", newValue);
+    }
+
+    /**
+     * Selects the option if it's not already selected.
+     * {@inheritDoc}
+     */
+    @Override
+    public Page mouseDown(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
+        Page page = null;
+        if (hasFeature(EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT)) {
+            page = getEnclosingSelect().mouseDown(shiftKey, ctrlKey, altKey, button);
+        }
+        if (hasFeature(EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT)) {
+            page = getEnclosingSelect().mouseUp(shiftKey, ctrlKey, altKey, button);
+        }
+
+        if (hasFeature(EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION)) {
+            return page;
+        }
+        return super.mouseDown(shiftKey, ctrlKey, altKey, button);
+    }
+
+    /**
+     * Selects the option if it's not already selected.
+     * {@inheritDoc}
+     */
+    @Override
+    public Page mouseUp(final boolean shiftKey, final boolean ctrlKey, final boolean altKey, final int button) {
+        Page page = null;
+        if (hasFeature(EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT)) {
+            page = getEnclosingSelect().mouseUp(shiftKey, ctrlKey, altKey, button);
+        }
+        if (hasFeature(EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION)) {
+            return page;
+        }
+        return super.mouseUp(shiftKey, ctrlKey, altKey, button);
     }
 
     /**
