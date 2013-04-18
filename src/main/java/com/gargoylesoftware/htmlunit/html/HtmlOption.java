@@ -48,6 +48,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class HtmlOption extends HtmlElement implements DisabledElement {
 
