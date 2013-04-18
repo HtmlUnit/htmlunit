@@ -239,7 +239,7 @@ public class Node extends SimpleScriptable {
             // this can't be done in onAddedToPage() because
             // it only happens when appendChild() is called.
             if (childDomNode instanceof HtmlRadioButtonInput) {
-                HtmlRadioButtonInput radio = (HtmlRadioButtonInput) childDomNode;
+                final HtmlRadioButtonInput radio = (HtmlRadioButtonInput) childDomNode;
                 if (getBrowserVersion().hasFeature(HTMLRADIOINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
                     radio.setChecked(false);
                 }
