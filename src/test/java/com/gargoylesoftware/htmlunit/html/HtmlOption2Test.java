@@ -38,10 +38,10 @@ public class HtmlOption2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "sDown,mousedown,sUp,mouseup,oDown,mousedown,sDown,mousedown,oUp,mouseup,sUp,mouseup,",
-            FF3_6 = "sUp,mouseup,oUp,mouseup,sUp,mouseup,",
-            IE = "sDown,mousedown,sUp,mouseup,",
-            CHROME = "sUp,mouseup,")
+    @Alerts(DEFAULT = "sDown,dDown,sUp,dUp,oDown,sDown,dDown,oUp,sUp,dUp,",
+            FF3_6 = "sUp,dUp,oUp,sUp,dUp,",
+            IE = "sDown,dDown,sUp,dUp,",
+            CHROME = "sUp,dUp,")
     public void onMouse() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -51,15 +51,19 @@ public class HtmlOption2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body>\n"
             + "  <form>\n"
+            + "    <div"
+                    + " onMouseDown='debug(\"dDown\");'"
+                    + " onMouseUp='debug(\"dUp\");'>\n"
             + "    <select name='select1' size='4'"
-                        + " onMouseDown='debug(\"sDown\");debug(event.type);'"
-                        + " onMouseUp='debug(\"sUp\");debug(event.type);'>\n"
+                        + " onMouseDown='debug(\"sDown\");'"
+                        + " onMouseUp='debug(\"sUp\");'>\n"
             + "      <option id='opt1' value='option1'>Option1</option>\n"
             + "      <option id='opt2' value='option2' selected='selected'>Option2</option>\n"
             + "      <option id='opt3' value='option3'"
-                        + " onMouseDown='debug(\"oDown\");debug(event.type);'"
-                        + " onMouseUp='debug(\"oUp\");debug(event.type);'>Option3</option>\n"
+                        + " onMouseDown='debug(\"oDown\");'"
+                        + " onMouseUp='debug(\"oUp\");'>Option3</option>\n"
             + "    </select>\n"
+            + "    </div>\n"
             + "  </form>\n"
             + "  <textarea id='myTextarea'></textarea>\n"
             + "</body></html>";
