@@ -69,6 +69,10 @@ public class HTMLInputElement extends FormField {
             final HtmlInput newInput = (HtmlInput) InputElementFactory.instance
                 .createElement(input.getPage(), "input", attributes);
 
+            if (input.wasCreatedByJavascript()) {
+                newInput.markAsCreatedByJavascript();
+            }
+
             if (input.getParentNode() != null) {
                 input.getParentNode().replaceChild(newInput, input);
             }

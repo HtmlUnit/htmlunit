@@ -52,6 +52,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     private String defaultValue_;
     private String originalName_;
     private Collection<String> previousNames_ = Collections.emptySet();
+    private boolean createdByJavascript_ = false;
 
     /**
      * Creates an instance.
@@ -522,5 +523,36 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     public Collection<String> getPreviousNames() {
         return previousNames_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Marks this frame as created by javascript. This is needed to handle
+     * some special IE behavior.
+     */
+    public void markAsCreatedByJavascript() {
+        createdByJavascript_ = true;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Unmarks this frame as created by javascript. This is needed to handle
+     * some special IE behavior.
+     */
+    public void unmarkAsCreatedByJavascript() {
+        createdByJavascript_ = false;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
+     * Returns true if this frame was created by javascript. This is needed to handle
+     * some special IE behavior.
+     * @return true or false
+     */
+    public boolean wasCreatedByJavascript() {
+        return createdByJavascript_;
     }
 }
