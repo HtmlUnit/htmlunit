@@ -79,7 +79,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
             IE = { "false", "false", "false", "false", "false", "false" },
             IE6 = { "false", "false", "false", "false", "true", "true" })
-    public void notchecked_on_attachment1() throws Exception {
+    public void notchecked_on_insertBefore() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
