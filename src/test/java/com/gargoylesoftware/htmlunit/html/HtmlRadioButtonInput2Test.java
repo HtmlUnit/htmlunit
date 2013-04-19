@@ -79,6 +79,81 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
             IE = { "false", "false", "false", "false", "false", "false" },
             IE6 = { "false", "false", "false", "false", "true", "true" })
+    public void notchecked_on_attachment1() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var input = document.createElement('input');\n"
+            + "      input.type = 'radio';\n"
+            + "      alert(input.checked);\n"
+            + "      var parent=document.getElementById('myDiv');\n"
+            + "      var after=document.getElementById('divAfter');\n"
+            + "      parent.insertBefore(input, after);\n"
+            + "      alert(input.checked);\n"
+            + "      parent.removeChild(input);\n"
+            + "      alert(input.checked);\n"
+            + "\n"
+            + "      input.defaultChecked = true;\n"
+            + "      alert(input.checked);\n"
+            + "      parent.insertBefore(input, after);\n"
+            + "      alert(input.checked);\n"
+            + "      parent.removeChild(input);\n"
+            + "      alert(input.checked);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='myDiv'><div id='divAfter'></div></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
+            IE = { "true", "false", "false", "false", "false", "false" },
+            IE6 = { "true", "false", "false", "false", "true", "true" })
+    public void checked_on_insertBefore() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var input = document.createElement('input');\n"
+            + "      input.type = 'radio';\n"
+            + "      input.checked = true;\n"
+            + "      alert(input.checked);\n"
+            + "      var parent=document.getElementById('myDiv');\n"
+            + "      var after=document.getElementById('divAfter');\n"
+            + "      parent.insertBefore(input, after);\n"
+            + "      alert(input.checked);\n"
+            + "      parent.removeChild(input);\n"
+            + "      alert(input.checked);\n"
+            + "\n"
+            + "      input.defaultChecked = true;\n"
+            + "      alert(input.checked);\n"
+            + "      parent.insertBefore(input, after);\n"
+            + "      alert(input.checked);\n"
+            + "      parent.removeChild(input);\n"
+            + "      alert(input.checked);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <div id='myDiv'><div id='divAfter'></div></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
+            IE = { "false", "false", "false", "false", "false", "false" },
+            IE6 = { "false", "false", "false", "false", "true", "true" })
     public void notchecked_on_attachment() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

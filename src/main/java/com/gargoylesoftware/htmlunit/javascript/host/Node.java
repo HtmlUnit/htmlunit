@@ -434,6 +434,16 @@ public class Node extends SimpleScriptable {
                 appendedChild = newChildObject;
             }
 
+            // special hack for IE and radio buttons
+            // this can't be done in onAddedToPage() because
+            // it only happens when appendChild() is called.
+            if (newChildNode instanceof HtmlRadioButtonInput) {
+                final HtmlRadioButtonInput radio = (HtmlRadioButtonInput) newChildNode;
+                if (getBrowserVersion().hasFeature(HTMLRADIOINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
+                    radio.setChecked(false);
+                }
+            }
+
             // if parentNode is null in IE, create a DocumentFragment to be the parentNode
             if (domNode.getParentNode() == null && getBrowserVersion()
                     .hasFeature(JS_APPEND_CHILD_CREATE_DOCUMENT_FRAGMENT_PARENT)) {
