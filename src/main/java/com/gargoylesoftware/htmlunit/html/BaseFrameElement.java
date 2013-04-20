@@ -423,9 +423,9 @@ public abstract class BaseFrameElement extends HtmlElement {
      */
     @Override
     public DomNode cloneNode(final boolean deep) {
-        final DomNode node = super.cloneNode(deep);
-        ((BaseFrameElement) node).init();
-        return node;
+        final BaseFrameElement clone = (BaseFrameElement) super.cloneNode(deep);
+        clone.init();
+        return clone;
     }
 
     /**
@@ -435,6 +435,6 @@ public abstract class BaseFrameElement extends HtmlElement {
     @Override
     public void remove() {
         super.remove();
-        ((FrameWindow) getEnclosedWindow()).close();
+        getEnclosedWindow().close();
     }
 }
