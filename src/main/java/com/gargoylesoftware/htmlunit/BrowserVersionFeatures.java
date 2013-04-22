@@ -602,6 +602,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLINPUT_DEFAULT_IS_CHECKED,
 
+    /** Set this checked state back to default when added to page (IE6). */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
+    HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED,
+
+    /** Set this checked state to false when added to page (IE). */
+    @BrowserFeature(@WebBrowser(value = IE, minVersion = 8))
+    HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED,
+
     /**
      * Set this property if the browser does NOT
      * support the disabling of an individual option group.
@@ -624,14 +632,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that for some elements, the empty text after it should be removed. */
     @BrowserFeature(@WebBrowser(IE))
     HTMLPARSER_REMOVE_EMPTY_CONTENT,
-
-    /** Set this checked state back to default when added to page (IE6). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
-    HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED,
-
-    /** Set this checked state to false when added to page (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 8))
-    HTMLRADIOINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED,
 
     /**
      * Set this property if the script tag supports the

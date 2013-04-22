@@ -16,8 +16,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DEFAULT_IS_CHECKED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLRADIOINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED;
 
 import java.io.IOException;
 import java.util.Map;
@@ -206,10 +206,10 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     @Override
     protected void onAddedToPage() {
-        if (hasFeature(HTMLRADIOINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED)) {
+        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED)) {
             setChecked(isDefaultChecked());
         }
-        if (wasCreatedByJavascript() && hasFeature(HTMLRADIOINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
+        if (wasCreatedByJavascript() && hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
             removeAttribute("checked");
         }
     }
