@@ -199,6 +199,18 @@ public class HtmlCheckBoxInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
+    public DomNode cloneNode(final boolean deep) {
+        final HtmlCheckBoxInput clone = (HtmlCheckBoxInput) super.cloneNode(deep);
+        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
+            clone.removeAttribute("checked");
+        }
+        return clone;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void focus() {
         super.focus();
         valueAtFocus_ = isChecked();
