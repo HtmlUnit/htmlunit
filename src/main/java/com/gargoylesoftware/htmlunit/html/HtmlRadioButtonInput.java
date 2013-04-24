@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
@@ -101,7 +102,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
                 form.setCheckedRadioButton(this);
             }
             else if (page instanceof HtmlPage) {
-                ((HtmlPage) page).setCheckedRadioButton(this);
+                setCheckedForPage((HtmlPage) page);
             }
         }
         else {
@@ -134,10 +135,43 @@ public class HtmlRadioButtonInput extends HtmlInput {
             form.setCheckedRadioButton(this);
         }
         else if (page instanceof HtmlPage) {
-            ((HtmlPage) page).setCheckedRadioButton(this);
+            setCheckedForPage((HtmlPage) page);
         }
         super.doClickStateUpdate();
         return changed;
+    }
+
+    /**
+     * Select the specified radio button in the page (outside any &lt;form&gt;).
+     *
+     * @param radioButtonInput the radio Button
+     */
+    @SuppressWarnings("unchecked")
+    private void setCheckedForPage(final HtmlPage htmlPage) {
+        // May be done in single XPath search?
+        final List<HtmlRadioButtonInput> pageInputs =
+            (List<HtmlRadioButtonInput>) htmlPage.getByXPath("//input[lower-case(@type)='radio' "
+                + "and @name='" + getNameAttribute() + "']");
+        final List<HtmlRadioButtonInput> formInputs =
+            (List<HtmlRadioButtonInput>) htmlPage.getByXPath("//form//input[lower-case(@type)='radio' "
+                + "and @name='" + getNameAttribute() + "']");
+
+        pageInputs.removeAll(formInputs);
+
+        boolean foundInPage = false;
+        for (final HtmlRadioButtonInput input : pageInputs) {
+            if (input == this) {
+                input.setAttribute("checked", "checked");
+                foundInPage = true;
+            }
+            else {
+                input.removeAttribute("checked");
+            }
+        }
+
+        if (!foundInPage && !formInputs.contains(this)) {
+            setAttribute("checked", "checked");
+        }
     }
 
     /**
@@ -159,6 +193,14 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     public String asText() {
         return super.asText();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void preventDefault() {
+        setChecked(!isChecked());
     }
 
     /**

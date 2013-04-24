@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -472,5 +473,100 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             driver.findElement(By.id("myInput")).click();
             assertEquals(getExpectedAlerts()[1], driver.getTitle());
         }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void preventDefault() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + "  function handler(e) {\n"
+            + "    if (e)\n"
+            + "      e.preventDefault();\n"
+            + "    else\n"
+            + "      return false;\n"
+            + "  }\n"
+            + "  function init() {\n"
+            + "    document.getElementById('radio1').onclick = handler;\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='init()'>\n"
+            + "  <input type='radio' id='radio1' name='radio1' />\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement radio = driver.findElement(By.id("radio1"));
+        radio.click();
+        assertFalse(radio.isSelected());
+    }
+
+    /**
+     * Verifies that a HtmlCheckBox is unchecked by default.
+     * The onClick tests make this assumption.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void defaultState() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "    <input type='radio' name='radio' id='radio'>Check me</input>\n"
+            + "</form></body></html>";
+        final WebDriver driver = loadPage2(html);
+        final WebElement radio = driver.findElement(By.id("radio"));
+        assertFalse(radio.isSelected());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "on", "on", "on", "on" })
+    public void defaultValue() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('rdo').value);\n"
+
+            + "    var input = document.createElement('input');\n"
+            + "    input.type = 'radio';\n"
+            + "    alert(input.value);\n"
+
+            + "    var builder = document.createElement('div');\n"
+            + "    builder.innerHTML = '<input type=\"radio\">';\n"
+            + "    var input = builder.firstChild;\n"
+            + "    alert(input.value);\n"
+
+            + "    input = input.cloneNode(false);\n"
+            + "    alert(input.value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='radio' id='rdo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Call to JS function click() should trigger the onchange handler but neither the onfocus handler
+     * nor the mousedown/up handlers.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("changed")
+    public void clickShouldTriggerOnchange() throws Exception {
+        final String html = "<html><body>\n"
+            + "<input type='radio' id='it' onchange='alert(\"changed\")'"
+            + "onmousedown='alert(\"down\")' onmouseup='alert(\"up\")' onfocus='alert(\"focused\")'>Check me\n"
+            + "<script>\n"
+            + "var elt = document.getElementById('it');\n"
+            + "elt.click();\n"
+            + "</script></body></html>";
+        loadPageWithAlerts2(html);
     }
 }

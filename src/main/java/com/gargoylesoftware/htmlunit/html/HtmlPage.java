@@ -1999,43 +1999,6 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Select the specified radio button in the page (outside any &lt;form&gt;).
-     *
-     * @param radioButtonInput the radio Button
-     */
-    @SuppressWarnings("unchecked")
-    void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
-        // May be done in single XPath search?
-        final List<HtmlRadioButtonInput> pageInputs =
-            (List<HtmlRadioButtonInput>) getByXPath("//input[lower-case(@type)='radio' "
-                + "and @name='" + radioButtonInput.getNameAttribute() + "']");
-        final List<HtmlRadioButtonInput> formInputs =
-            (List<HtmlRadioButtonInput>) getByXPath("//form//input[lower-case(@type)='radio' "
-                + "and @name='" + radioButtonInput.getNameAttribute() + "']");
-
-        pageInputs.removeAll(formInputs);
-
-        boolean found = false;
-        for (final HtmlRadioButtonInput input : pageInputs) {
-            if (input == radioButtonInput) {
-                input.setAttribute("checked", "checked");
-                found = true;
-            }
-            else {
-                input.removeAttribute("checked");
-            }
-        }
-        for (final HtmlRadioButtonInput input : formInputs) {
-            if (input == radioButtonInput) {
-                found = true;
-            }
-        }
-        if (!found) {
-            radioButtonInput.setAttribute("checked", "checked");
-        }
-    }
-
-    /**
      * Creates a clone of this instance, and clears cached state
      * to be not shared with the original.
      *
