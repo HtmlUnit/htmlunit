@@ -47,6 +47,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
 
     private boolean defaultCheckedState_;
     private boolean valueAtFocus_;
+    private boolean forceChecked_;
 
     /**
      * Creates an instance.
@@ -249,10 +250,15 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     protected void onAddedToPage() {
         if (hasFeature(HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED)) {
-            setChecked(isDefaultChecked());
+            reset();
         }
-        if (wasCreatedByJavascript() && hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
-            removeAttribute("checked");
+        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
+            if (wasCreatedByJavascript()) {
+                removeAttribute("checked");
+            }
+            else if (forceChecked_) {
+                setAttribute("checked", "checked");
+            }
         }
     }
 
@@ -264,6 +270,10 @@ public class HtmlRadioButtonInput extends HtmlInput {
         final HtmlRadioButtonInput clone = (HtmlRadioButtonInput) super.cloneNode(deep);
         if (hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
             clone.removeAttribute("checked");
+            clone.forceChecked_ = isDefaultChecked();
+        }
+        if (wasCreatedByJavascript()) {
+            clone.markAsCreatedByJavascript();
         }
         return clone;
     }

@@ -24,8 +24,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -495,7 +493,6 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
             IE = { "false", "true", "true", "true", "true", "true" })
-    @NotYetImplemented(Browser.IE)
     public void checked_cloneNode_appendChild_fromHtml() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -610,7 +607,6 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
             IE = { "false", "true", "true", "true", "true", "true" })
-    @NotYetImplemented(Browser.IE)
     public void checked_cloneNode_insertBefore_fromHtml() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
