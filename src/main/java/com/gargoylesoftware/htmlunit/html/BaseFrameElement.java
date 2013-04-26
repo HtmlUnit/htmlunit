@@ -381,6 +381,8 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     @Override
     protected void onAddedToPage() {
+        super.onAddedToPage();
+
         if (loadSrcWhenAddedToPage_) {
             loadSrc();
         }
