@@ -188,6 +188,28 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     @Override
     protected void onAddedToPage() {
+        super.onAddedToPage();
+
+        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED)) {
+            reset();
+        }
+        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
+            if (wasCreatedByJavascript()) {
+                removeAttribute("checked");
+            }
+            else if (forceChecked_) {
+                setAttribute("checked", "checked");
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onAddedToDocumentFragment() {
+        super.onAddedToDocumentFragment();
+
         if (hasFeature(HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED)) {
             reset();
         }

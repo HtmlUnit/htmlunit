@@ -930,6 +930,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 domNode.onAllChildrenAddedToPage(true);
             }
         }
+        if (this instanceof DomDocumentFragment) {
+            onAddedToDocumentFragment();
+        }
 
         fireNodeAdded(this, domNode);
     }
@@ -1199,6 +1202,20 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     protected void onAllChildrenAddedToPage(final boolean postponed) {
         // Empty by default.
+    }
+
+    /**
+     * Lifecycle method invoked whenever a node is added to a document fragment. Intended to
+     * be overridden by nodes which need to perform custom logic when they are
+     * added to a fragment. This method is recursive, so if you override it, please
+     * be sure to call <tt>super.onAddedToPage()</tt>.
+     */
+    protected void onAddedToDocumentFragment() {
+        if (firstChild_ != null) {
+            for (final DomNode child : getChildren()) {
+                child.onAddedToDocumentFragment();
+            }
+        }
     }
 
     /**
