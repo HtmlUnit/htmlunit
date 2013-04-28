@@ -249,6 +249,8 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     @Override
     protected void onAddedToPage() {
+        super.onAddedToPage();
+
         if (hasFeature(HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED)) {
             reset();
         }
@@ -256,10 +258,41 @@ public class HtmlRadioButtonInput extends HtmlInput {
             if (wasCreatedByJavascript()) {
                 removeAttribute("checked");
             }
-            else if (forceChecked_) {
-                setAttribute("checked", "checked");
+            else {
+                if (forceChecked_) {
+                    setAttribute("checked", "checked");
+                }
+                else {
+                    return;
+                }
             }
         }
+        setChecked(isChecked());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onAddedToDocumentFragment() {
+        super.onAddedToPage();
+
+        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED)) {
+            reset();
+        }
+        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
+            if (wasCreatedByJavascript()) {
+                removeAttribute("checked");
+            }
+            else {
+                if (forceChecked_) {
+                    setAttribute("checked", "checked");
+                    forceChecked_ = false;
+                }
+                return;
+            }
+        }
+        setChecked(isChecked());
     }
 
     /**

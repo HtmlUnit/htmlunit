@@ -188,95 +188,6 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
         performTest(false, false, true, true, true);
     }
 
-    private void performTest(final boolean checked,
-            final boolean appendChild,
-            final boolean fromHtml,
-            final boolean useFragment,
-            boolean cloneNode) throws Exception {
-        String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n";
-        if (fromHtml) {
-            html = html
-                + "      var builder = document.createElement('div');\n"
-                + "      builder.innerHTML = '<input type=\"checkbox\"";
-            if (checked) {
-                html = html + " checked";
-            }
-            html = html + ">';\n"
-                + "      var input = builder.firstChild;\n";
-        }
-        else {
-            html = html
-                + "      var input = document.createElement('input');\n"
-                + "      input.type = 'checkbox';\n";
-            if (checked) {
-                html = html + "      input.checked = true;\n";
-            }
-        }
-
-        if (cloneNode && !useFragment) {
-            html = html
-                    + "      input=input.cloneNode(true);\n";
-            cloneNode = false;
-        }
-        html = html
-            + "      alert(input.checked);\n"
-
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      var after=document.getElementById('divAfter');\n";
-        if (useFragment) {
-            html = html
-                    + "      var appendix=document.createDocumentFragment();\n"
-                    + "      appendix.appendChild(input);\n"
-                    + "      alert(input.checked);\n";
-        }
-        else {
-            html = html
-                    + "      var appendix=input\n";
-        }
-        if (appendChild) {
-            if (cloneNode) {
-                html = html + "      parent.appendChild(appendix.cloneNode(true));\n";
-            }
-            else {
-                html = html + "      parent.appendChild(appendix);\n";
-            }
-        }
-        else {
-            if (cloneNode) {
-                html = html + "      parent.insertBefore(appendix.cloneNode(true), after);\n";
-            }
-            else {
-                html = html + "      parent.insertBefore(appendix, after);\n";
-            }
-        }
-        html = html
-            + "      input = parent.getElementsByTagName('input')[0];\n"
-            + "      alert(input.checked);\n";
-        if (!useFragment) {
-            html = html
-                + "      parent.removeChild(input);\n"
-                + "      alert(input.checked);\n"
-                + "\n"
-                + "      input.defaultChecked = true;\n"
-                + "      alert(input.checked);\n"
-                + "      parent.appendChild(input);\n"
-                + "      alert(input.checked);\n"
-                + "      parent.removeChild(input);\n"
-                + "      alert(input.checked);\n";
-        }
-        html = html
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'><div id='divAfter'></div></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
     /**
      * @throws Exception if the test fails
      */
@@ -445,6 +356,95 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             IE6 = { "false", "false", "false", "false", "true", "true" })
     public void notchecked_insertBefore_fromHtml_cloneNode() throws Exception {
         performTest(false, false, true, false, true);
+    }
+
+    private void performTest(final boolean checked,
+            final boolean appendChild,
+            final boolean fromHtml,
+            final boolean useFragment,
+            boolean cloneNode) throws Exception {
+        String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n";
+        if (fromHtml) {
+            html = html
+                + "      var builder = document.createElement('div');\n"
+                + "      builder.innerHTML = '<input type=\"checkbox\"";
+            if (checked) {
+                html = html + " checked";
+            }
+            html = html + ">';\n"
+                + "      var input = builder.firstChild;\n";
+        }
+        else {
+            html = html
+                + "      var input = document.createElement('input');\n"
+                + "      input.type = 'checkbox';\n";
+            if (checked) {
+                html = html + "      input.checked = true;\n";
+            }
+        }
+
+        if (cloneNode && !useFragment) {
+            html = html
+                    + "      input=input.cloneNode(true);\n";
+            cloneNode = false;
+        }
+        html = html
+            + "      alert(input.checked);\n"
+
+            + "      var parent=document.getElementById('myDiv');\n"
+            + "      var after=document.getElementById('divAfter');\n";
+        if (useFragment) {
+            html = html
+                    + "      var appendix=document.createDocumentFragment();\n"
+                    + "      appendix.appendChild(input);\n"
+                    + "      alert(input.checked);\n";
+        }
+        else {
+            html = html
+                    + "      var appendix=input;\n";
+        }
+        if (appendChild) {
+            if (cloneNode) {
+                html = html + "      parent.appendChild(appendix.cloneNode(true));\n";
+            }
+            else {
+                html = html + "      parent.appendChild(appendix);\n";
+            }
+        }
+        else {
+            if (cloneNode) {
+                html = html + "      parent.insertBefore(appendix.cloneNode(true), after);\n";
+            }
+            else {
+                html = html + "      parent.insertBefore(appendix, after);\n";
+            }
+        }
+        html = html
+            + "      input = parent.getElementsByTagName('input')[0];\n"
+            + "      alert(input.checked);\n";
+        if (!useFragment) {
+            html = html
+                + "      parent.removeChild(input);\n"
+                + "      alert(input.checked);\n"
+                + "\n"
+                + "      input.defaultChecked = true;\n"
+                + "      alert(input.checked);\n"
+                + "      parent.appendChild(input);\n"
+                + "      alert(input.checked);\n"
+                + "      parent.removeChild(input);\n"
+                + "      alert(input.checked);\n";
+        }
+        html = html
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <form><div id='myDiv'><div id='divAfter'></div></div></form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 
     /**

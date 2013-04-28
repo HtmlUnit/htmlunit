@@ -42,148 +42,219 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "true", "false", "false", "false", "false", "false" },
+    @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "true", "false-true", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "true", "false", "false", "false", "true", "true" })
+    public void checked_appendChild_docFragment() throws Exception {
+        performTest(true, true, false, true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "false", "false", "false", "false", "true", "true" })
+    public void notchecked_appendChild_docFragment() throws Exception {
+        performTest(false, true, false, true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "true", "false-true", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "true", "false", "false", "false", "true", "true" })
+    public void checked_insertBefore_docFragment() throws Exception {
+        performTest(true, false, false, true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "false", "false", "false", "false", "true", "true" })
+    public void notchecked_insertBefore_docFragment() throws Exception {
+        performTest(false, false, false, true, false);
+    }
+
+    /**
+     * Verifies the behavior of 'checked' property on being attached to a page.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" })
+    public void checked_appendChild_fromHtml_docFragment() throws Exception {
+        performTest(true, true, true, true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "false", "false", "false", "false", "true", "true" })
+    public void notchecked_appendChild_fromHtml_docFragment() throws Exception {
+        performTest(false, true, true, true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" })
+    public void checked_insertBefore_fromHtml_docFragment() throws Exception {
+        performTest(true, false, true, true, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "false", "false", "false", "false", "true", "true" })
+    public void notchecked_insertBefore_fromHtml_docFragment() throws Exception {
+        performTest(false, false, true, true, false);
+    }
+
+    /**
+     * Verifies the behavior of 'checked' property on being attached to a page.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "true", "false-true", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "true", "false", "false", "false", "true", "true" })
+    public void checked_appendChild_docFragment_cloneNode() throws Exception {
+        performTest(true, true, false, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "false", "false", "false", "false", "true", "true" })
+    public void notchecked_appendChild_docFragment_cloneNode() throws Exception {
+        performTest(false, true, false, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "true", "false-true", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "false", "false", "false", "false", "true", "true" })
+    public void checked_insertBefore_docFragment_cloneNode() throws Exception {
+        performTest(true, false, false, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "false", "false", "false", "false", "true", "true" })
+    public void notchecked_insertBefore_docFragment_cloneNode() throws Exception {
+        performTest(false, false, false, true, true);
+    }
+
+    /**
+     * Verifies the behavior of 'checked' property on being attached to a page.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" })
+    public void checked_appendChild_fromHtml_docFragment_cloneNode() throws Exception {
+        performTest(true, true, true, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "false", "false", "false", "false", "true", "true" })
+    public void notchecked_appendChild_fromHtml_docFragment_cloneNode() throws Exception {
+        performTest(false, true, true, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true-true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "true", "true-true", "true-true", "true-true", "true-true", "true-true", "true-true" })
+    public void checked_insertBefore_fromHtml_docFragment_cloneNode() throws Exception {
+        performTest(true, false, true, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "false", "false", "false", "false", "true", "true" })
+    public void notchecked_insertBefore_fromHtml_docFragment_cloneNode() throws Exception {
+        performTest(false, false, true, true, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "true", "false-true", "false-true", "false-true", "false-true", "false-true" },
             IE6 = { "true", "false", "false", "false", "true", "true" })
     public void checked_appendChild() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var input = document.createElement('input');\n"
-            + "      input.type = 'radio';\n"
-            + "      input.checked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'></div></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        performTest(true, true, false, false, false);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true" },
             IE6 = { "false", "false", "false", "false", "true", "true" })
     public void notchecked_appendChild() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var input = document.createElement('input');\n"
-            + "      input.type = 'radio';\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        performTest(false, true, false, false, false);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
-            IE6 = { "false", "false", "false", "false", "true", "true" })
-    public void notchecked_insertBefore() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var input = document.createElement('input');\n"
-            + "      input.type = 'radio';\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      var after=document.getElementById('divAfter');\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'><div id='divAfter'></div></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "true", "false", "false", "false", "false", "false" },
+    @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "true", "false-true", "false-true", "false-true", "false-true", "false-true" },
             IE6 = { "true", "false", "false", "false", "true", "true" })
     public void checked_insertBefore() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var input = document.createElement('input');\n"
-            + "      input.type = 'radio';\n"
-            + "      input.checked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      var after=document.getElementById('divAfter');\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'><div id='divAfter'></div></div></form>\n"
-            + "</body></html>";
+        performTest(true, false, false, false, false);
+    }
 
-        loadPageWithAlerts2(html);
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true" },
+            IE6 = { "false", "false", "false", "false", "true", "true" })
+    public void notchecked_insertBefore() throws Exception {
+        performTest(false, false, false, false, false);
     }
 
     /**
@@ -191,146 +262,42 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" })
+    @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "true", "true-true", "true-true", "true-true", "true-true", "true-true" })
     public void checked_appendChild_fromHtml() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var builder = document.createElement('div');\n"
-            + "      builder.innerHTML = '<input type=\"radio\" checked>';\n"
-            + "      var input = builder.firstChild;\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'></div></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        performTest(true, true, true, false, false);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true" },
             IE6 = { "false", "false", "false", "false", "true", "true" })
     public void notchecked_appendChild_fromHtml() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var builder = document.createElement('div');\n"
-            + "      builder.innerHTML = '<input type=\"radio\">';\n"
-            + "      var input = builder.firstChild;\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        performTest(false, true, true, false, false);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
+    @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "true", "true-true", "true-true", "true-true", "true-true", "true-true" })
+    public void checked_insertBefore_fromHtml() throws Exception {
+        performTest(true, false, true, false, false);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true" },
             IE6 = { "false", "false", "false", "false", "true", "true" })
     public void notchecked_insertBefore_fromHtml() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var builder = document.createElement('div');\n"
-            + "      builder.innerHTML = '<input type=\"radio\">';\n"
-            + "      var input = builder.firstChild;\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      var after=document.getElementById('divAfter');\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'><div id='divAfter'></div></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" })
-    public void checked_insertBefore_fromHtml() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var builder = document.createElement('div');\n"
-            + "      builder.innerHTML = '<input type=\"radio\" checked>';\n"
-            + "      var input = builder.firstChild;\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      var after=document.getElementById('divAfter');\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'><div id='divAfter'></div></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        performTest(false, false, true, false, false);
     }
 
     /**
@@ -338,152 +305,44 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
+    @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true" },
             IE6 = { "true", "false", "false", "false", "true", "true" })
-    public void checked_cloneNode_appendChild() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var input = document.createElement('input');\n"
-            + "      input.type = 'radio';\n"
-            + "      input.checked = true;\n"
-            + "      input = input.cloneNode(false);\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'></div></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    public void checked_appendChild_cloneNode() throws Exception {
+        performTest(true, true, false, false, true);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true" },
             IE6 = { "false", "false", "false", "false", "true", "true" })
-    public void notchecked_cloneNode_appendChild() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var input = document.createElement('input');\n"
-            + "      input.type = 'radio';\n"
-            + "      input = input.cloneNode(false);\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    public void notchecked_appendChild_cloneNode() throws Exception {
+        performTest(false, true, false, false, true);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
+    @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true" },
             IE6 = { "false", "false", "false", "false", "true", "true" })
-    public void notchecked_cloneNode_insertBefore() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var input = document.createElement('input');\n"
-            + "      input.type = 'radio';\n"
-            + "      input = input.cloneNode(false);\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      var after=document.getElementById('divAfter');\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'><div id='divAfter'></div></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    public void checked_insertBefore_cloneNode() throws Exception {
+        performTest(true, false, false, false, true);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true" },
             IE6 = { "false", "false", "false", "false", "true", "true" })
-    public void checked_cloneNode_insertBefore() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var input = document.createElement('input');\n"
-            + "      input.type = 'radio';\n"
-            + "      input.checked = true;\n"
-            + "      input = input.cloneNode(false);\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      var after=document.getElementById('divAfter');\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'><div id='divAfter'></div></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    public void notchecked_insertBefore_cloneNode() throws Exception {
+        performTest(false, false, false, false, true);
     }
 
     /**
@@ -491,149 +350,129 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "false", "true", "true", "true", "true", "true" })
-    public void checked_cloneNode_appendChild_fromHtml() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var builder = document.createElement('div');\n"
-            + "      builder.innerHTML = '<input type=\"radio\" checked>';\n"
-            + "      var input = builder.firstChild;\n"
-            + "      input = input.cloneNode(false);\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'></div></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "false", "true-false", "true-false", "true-false", "true-false", "true-false" })
+    public void checked_appendChild_fromHtml_cloneNode() throws Exception {
+        performTest(true, true, true, false, true);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true" },
             IE6 = { "false", "false", "false", "false", "true", "true" })
-    public void notchecked_cloneNode_appendChild_fromHtml() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var builder = document.createElement('div');\n"
-            + "      builder.innerHTML = '<input type=\"radio\">';\n"
-            + "      var input = builder.firstChild;\n"
-            + "      input = input.cloneNode(false);\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.appendChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    public void notchecked_appendChild_fromHtml_cloneNode() throws Exception {
+        performTest(false, true, true, false, true);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
+    @Alerts(DEFAULT = { "true", "true-false", "true-false", "true-false", "true-false", "true-false" },
+            IE = { "false", "true-false", "true-false", "true-false", "true-false", "true-false" })
+    public void checked_insertBefore_fromHtml_cloneNode() throws Exception {
+        performTest(true, false, true, false, true);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false", "false-true", "false-true", "true-true", "true-false", "true-false" },
+            IE = { "false", "false-true", "false-true", "false-true", "false-true", "false-true" },
             IE6 = { "false", "false", "false", "false", "true", "true" })
-    public void notchecked_cloneNode_insertBefore_fromHtml() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      var builder = document.createElement('div');\n"
-            + "      builder.innerHTML = '<input type=\"radio\">';\n"
-            + "      var input = builder.firstChild;\n"
-            + "      input = input.cloneNode(false);\n"
-            + "      alert(input.checked);\n"
-            + "      var parent=document.getElementById('myDiv');\n"
-            + "      var after=document.getElementById('divAfter');\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "\n"
-            + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
-            + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'><div id='divAfter'></div></div></form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
+    public void notchecked_insertBefore_fromHtml_cloneNode() throws Exception {
+        performTest(false, false, true, false, true);
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "false", "true", "true", "true", "true", "true" })
-    public void checked_cloneNode_insertBefore_fromHtml() throws Exception {
-        final String html = "<html>\n"
+    private void performTest(final boolean checked,
+            final boolean appendChild,
+            final boolean fromHtml,
+            final boolean useFragment,
+            boolean cloneNode) throws Exception {
+        String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n"
-            + "      var builder = document.createElement('div');\n"
-            + "      builder.innerHTML = '<input type=\"radio\" checked>';\n"
-            + "      var input = builder.firstChild;\n"
-            + "      input = input.cloneNode(false);\n"
+            + "      var existing = document.getElementById('rad1');\n";
+        if (fromHtml) {
+            html = html
+                + "      var builder = document.createElement('div');\n"
+                + "      builder.innerHTML = '<input type=\"radio\" id=\"rad2\" name=\"radar\"";
+            if (checked) {
+                html = html + " checked";
+            }
+            html = html + ">';\n"
+                + "      var input = builder.firstChild;\n";
+        }
+        else {
+            html = html
+                + "      var input = document.createElement('input');\n"
+                + "      input.type = 'radio';\n"
+                + "      input.id = 'rad2';\n"
+                + "      input.name = 'radar';\n";
+            if (checked) {
+                html = html + "      input.checked = true;\n";
+            }
+        }
+
+        if (cloneNode && !useFragment) {
+            html = html
+                    + "      input=input.cloneNode(true);\n";
+            cloneNode = false;
+        }
+        html = html
             + "      alert(input.checked);\n"
+
             + "      var parent=document.getElementById('myDiv');\n"
-            + "      var after=document.getElementById('divAfter');\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
+            + "      var after=document.getElementById('divAfter');\n";
+        if (useFragment) {
+            html = html
+                    + "      var appendix=document.createDocumentFragment();\n"
+                    + "      appendix.appendChild(input);\n"
+                    + "      alert(input.checked + '-' + existing.checked);\n";
+        }
+        else {
+            html = html
+                    + "      var appendix=input;\n";
+        }
+        if (appendChild) {
+            if (cloneNode) {
+                html = html + "      parent.appendChild(appendix.cloneNode(true));\n";
+            }
+            else {
+                html = html + "      parent.appendChild(appendix);\n";
+            }
+        }
+        else {
+            if (cloneNode) {
+                html = html + "      parent.insertBefore(appendix.cloneNode(true), after);\n";
+            }
+            else {
+                html = html + "      parent.insertBefore(appendix, after);\n";
+            }
+        }
+        html = html
+            + "      input = document.getElementById('rad2');\n"
+            + "      alert(input.checked + '-' + existing.checked);\n"
             + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
+            + "      alert(input.checked + '-' + existing.checked);\n"
             + "\n"
             + "      input.defaultChecked = true;\n"
-            + "      alert(input.checked);\n"
-            + "      parent.insertBefore(input, after);\n"
-            + "      alert(input.checked);\n"
+            + "      alert(input.checked + '-' + existing.checked);\n"
+            + "      parent.appendChild(input);\n"
+            + "      alert(input.checked + '-' + existing.checked);\n"
             + "      parent.removeChild(input);\n"
-            + "      alert(input.checked);\n"
+            + "      alert(input.checked + '-' + existing.checked);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <form><div id='myDiv'><div id='divAfter'></div></div></form>\n"
+            + "  <form><div id='myDiv'>\n"
+            + "    <input type='radio' id='rad1' name='radar' checked>\n"
+            + "  <div id='divAfter'></div></div></form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
