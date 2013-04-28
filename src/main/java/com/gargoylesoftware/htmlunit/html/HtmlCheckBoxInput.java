@@ -171,6 +171,10 @@ public class HtmlCheckBoxInput extends HtmlInput {
         if (hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED)) {
             setChecked(defaultChecked);
         }
+        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
+            reset();
+            forceChecked_ = true;
+        }
     }
 
     /**
