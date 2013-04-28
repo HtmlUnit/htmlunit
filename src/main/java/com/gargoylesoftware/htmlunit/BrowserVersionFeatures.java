@@ -607,8 +607,8 @@ public enum BrowserVersionFeatures {
     HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED,
 
     /** Set this checked state to false when added to page (IE). */
-    @BrowserFeature(@WebBrowser(value = IE, minVersion = 8))
-    HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED,
+    @BrowserFeature(@WebBrowser(value = IE))
+    HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE,
 
     /**
      * Set this property if the browser does NOT

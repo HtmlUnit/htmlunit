@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 
 import java.util.Arrays;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -40,12 +41,21 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
 
+	@After
+	public void after() {
+		try {
+			shutDownAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true" },
-            IE = { "true", "false", "false" })
+    @Alerts(DEFAULT = { "true", "true", "true" })
     public void checked_appendChild_docFragment() throws Exception {
         performTest(true, true, false, true, false);
     }
@@ -63,8 +73,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true" },
-            IE = { "true", "false", "false" })
+    @Alerts(DEFAULT = { "true", "true", "true" })
     public void checked_insertBefore_docFragment() throws Exception {
         performTest(true, false, false, true, false);
     }
@@ -119,7 +128,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true" },
-            IE = { "true", "false", "false" })
+            IE = { "true", "true", "false" })
     public void checked_appendChild_docFragment_cloneNode() throws Exception {
         performTest(true, true, false, true, true);
     }
@@ -138,7 +147,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true" },
-            IE = { "true", "false", "false" })
+            IE = { "true", "true", "false" })
     public void checked_insertBefore_docFragment_cloneNode() throws Exception {
         performTest(true, false, false, true, true);
     }
@@ -192,9 +201,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "true", "false", "false", "false", "false", "false" },
-            IE6 = { "true", "false", "false", "false", "true", "true" })
+    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" })
     public void checked_appendChild() throws Exception {
         performTest(true, true, false, false, false);
     }
@@ -203,9 +210,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
-            IE6 = { "false", "false", "false", "false", "true", "true" })
+    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" })
     public void notchecked_appendChild() throws Exception {
         performTest(false, true, false, false, false);
     }
@@ -214,9 +219,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "true", "false", "false", "false", "false", "false" },
-            IE6 = { "true", "false", "false", "false", "true", "true" })
+    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" })
     public void checked_insertBefore() throws Exception {
         performTest(true, false, false, false, false);
     }
@@ -225,9 +228,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
-            IE6 = { "false", "false", "false", "false", "true", "true" })
+    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" })
     public void notchecked_insertBefore() throws Exception {
         performTest(false, false, false, false, false);
     }
@@ -245,9 +246,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
-            IE6 = { "false", "false", "false", "false", "true", "true" })
+    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" })
     public void notchecked_appendChild_fromHtml() throws Exception {
         performTest(false, true, true, false, false);
     }
@@ -265,9 +264,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
-            IE6 = { "false", "false", "false", "false", "true", "true" })
+    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" })
     public void notchecked_insertBefore_fromHtml() throws Exception {
         performTest(false, false, true, false, false);
     }
@@ -277,8 +274,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
-            IE6 = { "true", "false", "false", "false", "true", "true" })
+            IE = { "false", "false", "false", "true", "true", "true" })
     public void checked_appendChild_cloneNode() throws Exception {
         performTest(true, true, false, false, true);
     }
@@ -287,9 +283,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
-            IE6 = { "false", "false", "false", "false", "true", "true" })
+    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" })
     public void notchecked_appendChild_cloneNode() throws Exception {
         performTest(false, true, false, false, true);
     }
@@ -299,8 +293,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
-            IE6 = { "false", "false", "false", "false", "true", "true" })
+            IE = { "false", "false", "false", "true", "true", "true" })
     public void checked_insertBefore_cloneNode() throws Exception {
         performTest(true, false, false, false, true);
     }
@@ -309,9 +302,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
-            IE6 = { "false", "false", "false", "false", "true", "true" })
+    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" })
     public void notchecked_insertBefore_cloneNode() throws Exception {
         performTest(false, false, false, false, true);
     }
@@ -320,8 +311,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "false", "true", "true", "true", "true", "true" })
+    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" })
     public void checked_appendChild_fromHtml_cloneNode() throws Exception {
         performTest(true, true, true, false, true);
     }
@@ -330,9 +320,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
-            IE6 = { "false", "false", "false", "false", "true", "true" })
+    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" })
     public void notchecked_appendChild_fromHtml_cloneNode() throws Exception {
         performTest(false, true, true, false, true);
     }
@@ -341,9 +329,8 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" },
-            IE = { "false", "true", "true", "true", "true", "true" })
-    public void checked_cloneNode_insertBefore_fromHtml() throws Exception {
+    @Alerts(DEFAULT = { "true", "true", "true", "true", "true", "true" })
+    public void checked_insertBefore_fromHtml_cloneNode() throws Exception {
         performTest(true, false, true, false, true);
     }
 
@@ -351,9 +338,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" },
-            IE = { "false", "false", "false", "false", "false", "false" },
-            IE6 = { "false", "false", "false", "false", "true", "true" })
+    @Alerts(DEFAULT = { "false", "false", "false", "true", "true", "true" })
     public void notchecked_insertBefore_fromHtml_cloneNode() throws Exception {
         performTest(false, false, true, false, true);
     }
@@ -363,7 +348,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             final boolean fromHtml,
             final boolean useFragment,
             boolean cloneNode) throws Exception {
-        String html = "<html>\n"
+        String html = "<!DOCTYPE HTML>\n<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n";

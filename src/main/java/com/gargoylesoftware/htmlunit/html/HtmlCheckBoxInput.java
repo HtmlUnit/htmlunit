@@ -16,8 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DEFAULT_IS_CHECKED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE;
 
 import java.io.IOException;
 import java.util.Map;
@@ -190,16 +189,9 @@ public class HtmlCheckBoxInput extends HtmlInput {
     protected void onAddedToPage() {
         super.onAddedToPage();
 
-        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED)) {
+        if (forceChecked_) {
             reset();
-        }
-        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
-            if (wasCreatedByJavascript()) {
-                removeAttribute("checked");
-            }
-            else if (forceChecked_) {
-                setAttribute("checked", "checked");
-            }
+            forceChecked_ = wasCreatedByJavascript();
         }
     }
 
@@ -210,16 +202,9 @@ public class HtmlCheckBoxInput extends HtmlInput {
     protected void onAddedToDocumentFragment() {
         super.onAddedToDocumentFragment();
 
-        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED)) {
+        if (forceChecked_) {
             reset();
-        }
-        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
-            if (wasCreatedByJavascript()) {
-                removeAttribute("checked");
-            }
-            else if (forceChecked_) {
-                setAttribute("checked", "checked");
-            }
+            forceChecked_ = false;
         }
     }
 
@@ -229,12 +214,9 @@ public class HtmlCheckBoxInput extends HtmlInput {
     @Override
     public DomNode cloneNode(final boolean deep) {
         final HtmlCheckBoxInput clone = (HtmlCheckBoxInput) super.cloneNode(deep);
-        if (hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_ADDED)) {
+        if (wasCreatedByJavascript() && hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
             clone.removeAttribute("checked");
             clone.forceChecked_ = isDefaultChecked();
-        }
-        if (wasCreatedByJavascript()) {
-            clone.markAsCreatedByJavascript();
         }
         return clone;
     }
