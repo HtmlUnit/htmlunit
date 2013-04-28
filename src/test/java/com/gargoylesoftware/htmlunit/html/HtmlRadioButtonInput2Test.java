@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Arrays;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -39,16 +38,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
 
-	@After
-	public void after() {
-		try {
-			shutDownAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
     /**
      * @throws Exception if the test fails
      */
