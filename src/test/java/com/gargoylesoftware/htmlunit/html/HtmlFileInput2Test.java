@@ -41,6 +41,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlFileInput}.
@@ -299,5 +300,29 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             writer.write("TRANSFER_ENCODING:" + request.getHeader("TRANSFER-ENCODING"));
             writer.close();
         }
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "-initial", "-default" })
+    public void defaultValue() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var file = document.getElementById('testId');\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    file.defaultValue = 'default';\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='file' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 }

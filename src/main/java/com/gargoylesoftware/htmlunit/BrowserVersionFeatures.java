@@ -216,7 +216,7 @@ public enum BrowserVersionFeatures {
     EXECCOMMAND_THROWS_ON_WRONG_COMMAND,
 
     /** */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
     FILEINPUT_EMPTY_DEFAULT_VALUE,
 
     /** For new pages the focus points to the html root node. */
