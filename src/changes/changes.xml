@@ -9,6 +9,9 @@
     <body>
         <release version="2.13" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                The value of input controls changes when the defaultValue was changed in IE8ff.
+            </action>
+            <action type="fix" dev="rbri">
                 The default value of input-file is no longer empty in IE8ff.
             </action>
             <action type="fix" dev="rbri">

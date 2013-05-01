@@ -598,10 +598,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLIMAGE_NAME_VALUE_PARAMS,
 
-    /** */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    HTMLINPUT_DEFAULT_IS_CHECKED,
-
     /** Set this checked state back to default when added to page (IE6). */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
     HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED,
@@ -609,6 +605,14 @@ public enum BrowserVersionFeatures {
     /** Set this checked state to false when added to page (IE). */
     @BrowserFeature(@WebBrowser(value = IE))
     HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE,
+
+    /** Setting defaultCheced updates checked also. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 8), @WebBrowser(CHROME) })
+    HTMLINPUT_SET_DEFAULT_CHECKED_UPDATES_CHECKED,
+
+    /** Setting defaultValue updates the value also. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 8), @WebBrowser(CHROME) })
+    HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE,
 
     /**
      * Set this property if the browser does NOT
@@ -647,6 +651,10 @@ public enum BrowserVersionFeatures {
     /** Trims the value of the type attribute before to verify it. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLSCRIPT_TRIM_TYPE,
+
+    /** Setting defaultValue updates the value also. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE,
 
     /** Do not allow anything in color, but restrict to valid values only. */
     @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 3.6f) })

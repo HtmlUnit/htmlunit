@@ -265,7 +265,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final String[] expectedIE = {
             "before setting default values",               /* Before setting default values. */
             "text: initial1 initial1 false false",
-            "file:   false false",
+            "file:  initial2 false false",
             "image: initial3 initial3 false false",
             "radio: initial4 initial4 true true",
             "reset: initial5 initial5 false false",
@@ -276,26 +276,26 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             "checkbox: initial10 initial10 true true",
             "textarea: initial11 initial11 undefined undefined",
             "after setting default values",                /* After setting default values. */
-            "text: initial1 default1 false false",
+            "text: default1 default1 false false",
             "file:  default2 false false",
             "image: default3 default3 false false",
-            "radio: default4 default4 true false",
-            "reset: initial5 default5 false false",
-            "hidden: initial6 default6 false false",
-            "button: initial7 default7 false false",
-            "submit: initial8 default8 false false",
-            "password: initial9 default9 false false",
-            "checkbox: default10 default10 true false",
+            "radio: default4 default4 false false",
+            "reset: default5 default5 false false",
+            "hidden: default6 default6 false false",
+            "button: default7 default7 false false",
+            "submit: default8 default8 false false",
+            "password: default9 default9 false false",
+            "checkbox: default10 default10 false false",
             "textarea: initial11 default11 undefined undefined",
             "after resetting the form",                    /* After resetting the form. */
             "text: default1 default1 false false",
             "file:  default2 false false",
             "image: default3 default3 false false",
             "radio: default4 default4 false false",
-            "reset: initial5 default5 false false",
+            "reset: default5 default5 false false",
             "hidden: default6 default6 false false",
-            "button: initial7 default7 false false",
-            "submit: initial8 default8 false false",
+            "button: default7 default7 false false",
+            "submit: default8 default8 false false",
             "password: default9 default9 false false",
             "checkbox: default10 default10 false false",
             "textarea: default11 default11 undefined undefined" };
@@ -342,7 +342,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final String[] expectedAlerts = getBrowserVersion().isFirefox() ? expectedFF : expectedIE;
         setExpectedAlerts(expectedAlerts);
 
-        final String html = "<html>\n"
+        final String html = "<!DOCTYPE HTML>\n<html>\n"
             + "  <head>\n"
             + "    <title>Reset Test</title>\n"
             + "    <script>\n"

@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DEFAULT_IS_CHECKED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_DEFAULT_CHECKED_UPDATES_CHECKED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE;
 
 import java.io.IOException;
@@ -221,7 +221,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
     @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         defaultCheckedState_ = defaultChecked;
-        if (hasFeature(HTMLINPUT_DEFAULT_IS_CHECKED)) {
+        if (hasFeature(HTMLINPUT_SET_DEFAULT_CHECKED_UPDATES_CHECKED)) {
             setChecked(isDefaultChecked());
         }
         if (hasFeature(HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
