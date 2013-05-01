@@ -301,6 +301,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             writer.close();
         }
     }
+
     /**
      * @throws Exception if the test fails
      */
