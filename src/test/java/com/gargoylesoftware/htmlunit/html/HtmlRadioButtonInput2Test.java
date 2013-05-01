@@ -452,6 +452,76 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "true-true", "false-false", "true-true", "false-false", "false-false", "false-false" })
+    public void defaultChecked() throws Exception {
+        final String html =
+            "<!DOCTYPE HTML>\n<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      radio = document.getElementById('rad1');\n"
+            + "      radio2 = document.getElementById('rad2');\n"
+            + "      alert(radio.checked + '-' + radio.defaultChecked);\n"
+            + "      alert(radio2.checked + '-' + radio2.defaultChecked);\n"
+
+            + "      radio.defaultChecked = true;\n"
+            + "      alert(radio.checked + '-' + radio.defaultChecked);\n"
+            + "      alert(radio2.checked + '-' + radio2.defaultChecked);\n"
+
+            + "      radio.defaultChecked = false;\n"
+            + "      alert(radio.checked + '-' + radio.defaultChecked);\n"
+            + "      alert(radio2.checked + '-' + radio2.defaultChecked);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <form>"
+            + "    <input type='radio' id='rad1' name='radar' checked>\n"
+            + "    <input type='radio' id='rad2' name='radar'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "false-false", "false-false", "true-true", "false-false", "false-false", "false-false" })
+    public void defaultChecked_notchecked() throws Exception {
+        final String html =
+            "<!DOCTYPE HTML>\n<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      radio = document.getElementById('rad1');\n"
+            + "      radio2 = document.getElementById('rad2');\n"
+            + "      alert(radio.checked + '-' + radio.defaultChecked);\n"
+            + "      alert(radio2.checked + '-' + radio2.defaultChecked);\n"
+
+            + "      radio.defaultChecked = true;\n"
+            + "      alert(radio.checked + '-' + radio.defaultChecked);\n"
+            + "      alert(radio2.checked + '-' + radio2.defaultChecked);\n"
+
+            + "      radio.defaultChecked = false;\n"
+            + "      alert(radio.checked + '-' + radio.defaultChecked);\n"
+            + "      alert(radio2.checked + '-' + radio2.defaultChecked);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <form>"
+            + "    <input type='radio' id='rad1' name='radar'>\n"
+            + "    <input type='radio' id='rad2' name='radar'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Regression test for bug 2956588.
      * As of HttmlUnit-2.8-SNAPSHOT on 26.02.10, reading responseXML with xhtml namespace
      * was causing ClassCastException for IE simulation when it contained a checked radio button.

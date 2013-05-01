@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Checked state of radio buttons and checkboxes changes when setting defaultChecked in IE8ff.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade commons-codec to 1.8
             </action>

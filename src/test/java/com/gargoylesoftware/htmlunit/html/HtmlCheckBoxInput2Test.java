@@ -425,6 +425,42 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "true-true", "true-true", "false-false", "false-false", "true-true", "false-false" })
+    public void defaultChecked() throws Exception {
+        final String html =
+            "<!DOCTYPE HTML>\n<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      chkbox = document.getElementById('chkboxChecked');\n"
+            + "      alert(chkbox.checked + '-' + chkbox.defaultChecked);\n"
+            + "      chkbox.defaultChecked = true;\n"
+            + "      alert(chkbox.checked + '-' + chkbox.defaultChecked);\n"
+            + "      chkbox.defaultChecked = false;\n"
+            + "      alert(chkbox.checked + '-' + chkbox.defaultChecked);\n"
+
+            + "      chkbox = document.getElementById('chkboxNotChecked');\n"
+            + "      alert(chkbox.checked + '-' + chkbox.defaultChecked);\n"
+            + "      chkbox.defaultChecked = true;\n"
+            + "      alert(chkbox.checked + '-' + chkbox.defaultChecked);\n"
+            + "      chkbox.defaultChecked = false;\n"
+            + "      alert(chkbox.checked + '-' + chkbox.defaultChecked);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <form>"
+            + "    <input type='checkbox' id='chkboxChecked' checked>\n"
+            + "    <input type='checkbox' id='chkboxNotChecked'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "foo,change,", IE = { })
     public void onchangeFires() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
