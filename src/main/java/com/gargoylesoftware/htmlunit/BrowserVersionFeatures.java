@@ -759,10 +759,10 @@ public enum BrowserVersionFeatures {
     JS_CLIENT_LEFT_TOP_ZERO,
 
     /** Indicates that the cloneNode call copies all event listeners. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
     JS_CLONE_NODE_COPIES_EVENT_LISTENERS,
 
-    /** Indicates that "constructor" propery is defined, e.g. <tt>document.constructor</tt>. */
+    /** Indicates that "constructor" property is defined, e.g. <tt>document.constructor</tt>. */
     @BrowserFeature(@WebBrowser(FF))
     JS_CONSTRUCTOR,
 
