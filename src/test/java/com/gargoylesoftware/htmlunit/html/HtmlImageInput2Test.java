@@ -16,41 +16,19 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link HtmlHiddenInput}.
+ * Tests for {@link HtmlImageInput}.
  *
  * @version $Revision$
- * @author Marc Guillemot
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlHiddenInputTest extends WebDriverTestCase {
-
-    /**
-     * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void asText() throws Exception {
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<form id='form1'>\n"
-            + "    <input type='hidden' name='foo' id='foo' value='bla'>\n"
-            + "</form></body></html>";
-
-        final WebDriver driver = loadPage2(htmlContent);
-
-        final WebElement input = driver.findElement(By.id("foo"));
-        assertEquals("", input.getText());
-    }
+public class HtmlImageInput2Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -61,22 +39,22 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var hidden = document.getElementById('testId');\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue);\n"
+            + "    var image = document.getElementById('testId');\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
 
-            + "    hidden.value = 'some text';\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue);\n"
+            + "    image.value = 'some text';\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue);\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<form>\n"
-            + "  <input type='hidden' id='testId' value='initial'>\n"
+            + "  <input type='image' id='testId' value='initial'>\n"
             + "  <input type='reset' id='testReset'>\n"
             + "</form>\n"
             + "</body></html>";
@@ -93,21 +71,21 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var hidden = document.getElementById('testId');\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue);\n"
+            + "    var image = document.getElementById('testId');\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
 
-            + "    hidden.defaultValue = 'default';\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue);\n"
+            + "    image.defaultValue = 'default';\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
 
-            + "    hidden.value = 'some text';\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue);\n"
-            + "    hidden.defaultValue = 'newdefault';\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue);\n"
+            + "    image.value = 'some text';\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "    image.defaultValue = 'newdefault';\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<form>\n"
-            + "  <input type='hidden' id='testId' value='initial'>\n"
+            + "  <input type='image' id='testId' value='initial'>\n"
             + "</form>\n"
             + "</body></html>";
 

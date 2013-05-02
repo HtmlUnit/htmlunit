@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlSubmitInputTest extends WebDriverTestCase {
@@ -46,7 +47,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testSubmit() throws Exception {
+    public void submit() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' method='post'>\n"
@@ -71,7 +72,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "foo", "bar" })
-    public void testClick_onClick() throws Exception {
+    public void click_onClick() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\"); return false;'>\n"
@@ -90,7 +91,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testClick_onClick_JavascriptReturnsTrue() throws Exception {
+    public void click_onClick_JavascriptReturnsTrue() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body>\n"
             + "<form name='form1' method='get' action='foo.html'>\n"
@@ -114,7 +115,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    public void testOutsideForm() throws Exception {
+    public void outsideForm() throws Exception {
         final String html =
             "<html><head></head>\n"
             + "<body>\n"
@@ -189,5 +190,67 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
 
         assertEquals("next page", wd.getTitle());
         assertEquals(3, mockWebConnection.getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "initial-initial", "initial-initial", "some text-some text", "some text-some text" })
+    public void reset() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var submit = document.getElementById('testId');\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+
+            + "    submit.value = 'some text';\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='submit' id='testId' value='initial'>\n"
+            + "  <input type='reset' id='testReset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "initial-initial", "default-default", "some text-some text", "newdefault-newdefault" })
+    public void defaultValue() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var submit = document.getElementById('testId');\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+
+            + "    submit.defaultValue = 'default';\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+
+            + "    submit.value = 'some text';\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+            + "    submit.defaultValue = 'newdefault';\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='submit' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 }

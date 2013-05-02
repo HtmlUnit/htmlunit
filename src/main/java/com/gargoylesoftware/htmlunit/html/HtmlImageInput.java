@@ -144,4 +144,15 @@ public class HtmlImageInput extends HtmlInput {
         super.setDefaultValue(defaultValue);
         setValueAttribute(defaultValue);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+        if ("value".equals(qualifiedName)) {
+            setDefaultValue(attributeValue, false);
+        }
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+    }
 }

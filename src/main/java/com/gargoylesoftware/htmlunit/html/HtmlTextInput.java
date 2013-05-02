@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -30,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
 
@@ -175,5 +178,14 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return new HtmlTextInput(getNamespaceURI(), getQualifiedName(), getPage(), getAttributesMap());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setDefaultValue(final String defaultValue) {
+        boolean modifyValue = hasFeature(HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE);
+        modifyValue = modifyValue && getValueAttribute().equals(getDefaultValue());
+        setDefaultValue(defaultValue, modifyValue);
     }
 }

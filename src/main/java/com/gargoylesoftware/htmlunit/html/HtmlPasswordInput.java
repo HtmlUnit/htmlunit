@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE;
+
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
@@ -29,6 +31,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput {
 
@@ -173,5 +176,14 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
             setSelectionStart(attributeValue.length());
             setSelectionEnd(attributeValue.length());
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setDefaultValue(final String defaultValue) {
+        boolean modifyValue = hasFeature(HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE);
+        modifyValue = modifyValue && getValueAttribute().equals(getDefaultValue());
+        setDefaultValue(defaultValue, modifyValue);
     }
 }

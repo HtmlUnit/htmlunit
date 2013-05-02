@@ -46,6 +46,17 @@ public class HtmlHiddenInput extends HtmlInput {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+        if ("value".equals(qualifiedName)) {
+            setDefaultValue(attributeValue, false);
+        }
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+    }
+
+    /**
      * @see com.gargoylesoftware.htmlunit.html.HtmlInput#asText()
      * @return an empty string as an hidden field is not visible
      */

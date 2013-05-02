@@ -29,11 +29,44 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTextInput2Test extends WebDriverTestCase {
+
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "default-default" })
+    @Alerts({ "initial-initial", "initial-initial", "some text-initial", "some text-initial" })
+    public void reset() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('testId');\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    text.value = 'some text';\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='text' id='testId' value='initial'>\n"
+            + "  <input type='reset' id='testReset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "initial-initial", "default-default", "some text-default", "some text-newdefault" })
     public void defaultValue() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -42,6 +75,11 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
             + "    alert(text.value + '-' + text.defaultValue);\n"
 
             + "    text.defaultValue = 'default';\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    text.value = 'some text';\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    text.defaultValue = 'newdefault';\n"
             + "    alert(text.value + '-' + text.defaultValue);\n"
             + "  }\n"
             + "</script>\n"

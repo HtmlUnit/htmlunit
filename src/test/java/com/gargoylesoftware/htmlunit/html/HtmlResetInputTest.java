@@ -41,7 +41,8 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
     @Test
     public void reset() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+            = "<!DOCTYPE HTML>\n"
+            + "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='text' name='textfield1' id='textfield1' value='foo'/>\n"
             + "<input type='password' name='password1' id='password1' value='foo'/>\n"
@@ -94,9 +95,37 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
         assertFalse(page.<HtmlOption>getHtmlElementById("option2").isSelected());
         assertEquals("Foobar", page.<HtmlTextArea>getHtmlElementById("textarea1").getText());
         assertEquals("foo", page.<HtmlTextInput>getHtmlElementById("textfield1").getValueAttribute());
-        assertEquals("foo", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
+
+        // this is strange but this is the way the browsers are working
+        // com.gargoylesoftware.htmlunit.html.HtmlHiddenInputTest.reset()
+        assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
+
         assertEquals("foo", page.<HtmlPasswordInput>getHtmlElementById("password1").getValueAttribute());
         assertEquals("", page.<HtmlIsIndex>getHtmlElementById("isindex1").getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void resetClick_onClick() throws Exception {
+        final String htmlContent
+            = "<!DOCTYPE HTML>\n"
+            + "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
+            + "    <button type='reset' name='button' id='button' "
+            + "onClick='alert(\"foo\")'>Push me</button>\n"
+            + "</form></body></html>";
+        final List<String> collectedAlerts = new ArrayList<String>();
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
+        final HtmlButton button = page.getHtmlElementById("button");
+
+        final HtmlPage secondPage = button.click();
+
+        final String[] expectedAlerts = {"foo", "reset"};
+        assertEquals(expectedAlerts, collectedAlerts);
+
+        assertSame(page, secondPage);
     }
 
     /**

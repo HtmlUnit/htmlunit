@@ -149,4 +149,15 @@ public class HtmlSubmitInput extends HtmlInput {
         }
         return super.getSubmitKeyValuePairs();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+        if ("value".equals(qualifiedName)) {
+            setDefaultValue(attributeValue, false);
+        }
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+    }
 }

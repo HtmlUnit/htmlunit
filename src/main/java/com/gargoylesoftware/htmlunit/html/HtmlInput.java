@@ -353,7 +353,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * {@inheritDoc} Also sets the value attribute when emulating Netscape browsers.
+     * {@inheritDoc}
+     * Also sets the value attribute when emulating Netscape browsers.
      * @see SubmittableElement#setDefaultValue(String)
      * @see HtmlFileInput#setDefaultValue(String)
      */

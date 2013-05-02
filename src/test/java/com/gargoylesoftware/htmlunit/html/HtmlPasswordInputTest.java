@@ -26,6 +26,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlPasswordInput}.
@@ -161,5 +162,67 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         driver.findElement(By.id("b")).click();
         final String[] expectedAlerts2 = {"foo", "change", "boo", "blur", "boo", "blur"};
         assertEquals(expectedAlerts2, getCollectedAlerts(driver));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "initial-initial", "initial-initial", "some text-initial", "some text-initial" })
+    public void reset() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var password = document.getElementById('testId');\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+
+            + "    password.value = 'some text';\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='password' id='testId' value='initial'>\n"
+            + "  <input type='reset' id='testReset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "initial-initial", "default-default", "some text-default", "some text-newdefault" })
+    public void defaultValue() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var password = document.getElementById('testId');\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+
+            + "    password.defaultValue = 'default';\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+
+            + "    password.value = 'some text';\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "    password.defaultValue = 'newdefault';\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='password' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 }

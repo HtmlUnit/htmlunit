@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlResetInput extends HtmlInput {
 
@@ -67,4 +68,14 @@ public class HtmlResetInput extends HtmlInput {
         // Empty.
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+        if ("value".equals(qualifiedName)) {
+            setDefaultValue(attributeValue, false);
+        }
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+    }
 }
