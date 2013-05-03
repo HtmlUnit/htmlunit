@@ -748,6 +748,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "changed", IE = { })
     @NotYetImplemented(Browser.IE)
     public void clickShouldTriggerOnchange() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -759,12 +760,12 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
-	            + "<form>\n"
-	            + "  <input type='radio' id='it' onchange='alert(\"changed\")'"
-	            + "    onmousedown='alert(\"down\")' onmouseup='alert(\"up\")' onfocus='alert(\"focused\")'>Check me\n"
-	            + "  <input type='text' id='next'>\n"
-	            + "</form>\n"
-	            + "</body></html>";
+                + "<form>\n"
+                + "  <input type='radio' id='it' onchange='alert(\"changed\")'"
+                + "    onmousedown='alert(\"down\")' onmouseup='alert(\"up\")' onfocus='alert(\"focused\")'>Check me\n"
+                + "  <input type='text' id='next'>\n"
+                + "</form>\n"
+                + "</body></html>";
         loadPageWithAlerts2(html);
     }
 }
