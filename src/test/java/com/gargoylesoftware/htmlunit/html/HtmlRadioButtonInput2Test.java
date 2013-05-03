@@ -24,6 +24,8 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -746,15 +748,23 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("changed")
+    @NotYetImplemented(Browser.IE)
     public void clickShouldTriggerOnchange() throws Exception {
-        final String html = "<html><body>\n"
-            + "<input type='radio' id='it' onchange='alert(\"changed\")'"
-            + "onmousedown='alert(\"down\")' onmouseup='alert(\"up\")' onfocus='alert(\"focused\")'>Check me\n"
-            + "<script>\n"
-            + "var elt = document.getElementById('it');\n"
-            + "elt.click();\n"
-            + "</script></body></html>";
+        final String html = "<html><head><title>foo</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var elt = document.getElementById('it');\n"
+                + "    elt.click();\n"
+                + "    document.getElementById('next').focus();\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+	            + "<form>\n"
+	            + "  <input type='radio' id='it' onchange='alert(\"changed\")'"
+	            + "    onmousedown='alert(\"down\")' onmouseup='alert(\"up\")' onfocus='alert(\"focused\")'>Check me\n"
+	            + "  <input type='text' id='next'>\n"
+	            + "</form>\n"
+	            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 }
