@@ -553,11 +553,10 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "in click",
-            IE6 = { "in click", "in click", "in click" },
-            IE7 = { "in click", "in click", "in click" })
+            IE = { "in click", "in click", "in click" })
     public void testCloneNode_copiesListenerOnlyForIE() throws Exception {
         final String html =
-              "<!DOCTYPE HTML>\n<html>\n"
+              "<html>\n"
             + "  <head>\n"
             + "  <script type='text/javascript'>\n"
             + "    function go() {\n"
