@@ -36,7 +36,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "initial-initial", "initial-initial", "some text-some text", "some text-some text" })
     public void reset() throws Exception {
-        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+        final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var image = document.getElementById('testId');\n"
@@ -68,7 +68,7 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "initial-initial", "default-default", "some text-some text", "newdefault-newdefault" })
     public void defaultValue() throws Exception {
-        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+        final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var image = document.getElementById('testId');\n"

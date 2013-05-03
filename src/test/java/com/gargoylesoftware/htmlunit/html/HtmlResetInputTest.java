@@ -41,8 +41,7 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
     @Test
     public void reset() throws Exception {
         final String htmlContent
-            = "<!DOCTYPE HTML>\n"
-            + "<html><head><title>foo</title></head><body>\n"
+            = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
             + "<input type='text' name='textfield1' id='textfield1' value='foo'/>\n"
             + "<input type='password' name='password1' id='password1' value='foo'/>\n"
@@ -98,7 +97,12 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
 
         // this is strange but this is the way the browsers are working
         // com.gargoylesoftware.htmlunit.html.HtmlHiddenInputTest.reset()
-        assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
+        if (getBrowserVersion().isIE() && getBrowserVersion().getBrowserVersionNumeric() < 9) {
+        	assertEquals("foo", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
+        }
+        else {
+        	assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
+        }
 
         assertEquals("foo", page.<HtmlPasswordInput>getHtmlElementById("password1").getValueAttribute());
         assertEquals("", page.<HtmlIsIndex>getHtmlElementById("isindex1").getValue());
@@ -110,8 +114,7 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
     @Test
     public void resetClick_onClick() throws Exception {
         final String htmlContent
-            = "<!DOCTYPE HTML>\n"
-            + "<html><head><title>foo</title></head><body>\n"
+            = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")' onReset='alert(\"reset\")'>\n"
             + "    <button type='reset' name='button' id='button' "
             + "onClick='alert(\"foo\")'>Push me</button>\n"

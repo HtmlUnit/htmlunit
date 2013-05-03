@@ -216,7 +216,7 @@ public enum BrowserVersionFeatures {
     EXECCOMMAND_THROWS_ON_WRONG_COMMAND,
 
     /** */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 8))
     FILEINPUT_EMPTY_DEFAULT_VALUE,
 
     /** For new pages the focus points to the html root node. */
@@ -611,8 +611,12 @@ public enum BrowserVersionFeatures {
     HTMLINPUT_SET_DEFAULT_CHECKED_UPDATES_CHECKED,
 
     /** Setting defaultValue updates the value also. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 8), @WebBrowser(CHROME) })
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9), @WebBrowser(CHROME) })
     HTMLINPUT_SET_DEFAULT_VALUE_UPDATES_VALUE,
+
+    /** Setting value updates the defaultValue also. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9), @WebBrowser(CHROME) })
+    HTMLINPUT_SET_VALUE_UPDATES_DEFAULT_VALUE,
 
     /**
      * Set this property if the browser does NOT
