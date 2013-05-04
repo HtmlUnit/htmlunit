@@ -307,7 +307,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "-initial", "-default" },
-    		IE8 = { "-", "-default" })
+            IE8 = { "-", "-default" })
     public void defaultValue() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"

@@ -201,7 +201,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "initial-initial", "default-default", "some text-default", "some text-newdefault" },
-    		IE8 = { "initial-initial", "initial-default", "some text-default", "some text-newdefault" })
+            IE8 = { "initial-initial", "initial-default", "some text-default", "some text-newdefault" })
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

@@ -197,7 +197,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "initial-initial", "initial-initial", "some text-some text", "some text-some text" },
-    		IE8 = { "initial-initial", "initial-initial", "some text-initial", "some text-initial" })
+            IE8 = { "initial-initial", "initial-initial", "some text-initial", "some text-initial" })
     public void reset() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -230,7 +230,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "initial-initial", "default-default", "some text-some text", "newdefault-newdefault" },
-    		IE8 = { "initial-initial", "initial-default", "some text-default", "some text-newdefault" })
+            IE8 = { "initial-initial", "initial-default", "some text-default", "some text-newdefault" })
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

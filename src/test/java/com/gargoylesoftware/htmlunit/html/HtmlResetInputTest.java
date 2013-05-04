@@ -98,10 +98,10 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
         // this is strange but this is the way the browsers are working
         // com.gargoylesoftware.htmlunit.html.HtmlHiddenInputTest.reset()
         if (getBrowserVersion().isIE() && getBrowserVersion().getBrowserVersionNumeric() < 9) {
-        	assertEquals("foo", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
+            assertEquals("foo", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
         }
         else {
-        	assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
+            assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
         }
 
         assertEquals("foo", page.<HtmlPasswordInput>getHtmlElementById("password1").getValueAttribute());
