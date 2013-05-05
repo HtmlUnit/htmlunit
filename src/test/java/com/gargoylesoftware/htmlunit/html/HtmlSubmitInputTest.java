@@ -196,6 +196,41 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "-", "-", "-", "-" },
+            IE = { "Submit Query-", "Submit Query-", "Submit Query-", "Submit Query-" })
+    public void defaultValues() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('submit1');\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+
+            + "    input = document.createElement('input');\n"
+            + "    input.type = 'submit';\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+
+            + "    var builder = document.createElement('div');\n"
+            + "    builder.innerHTML = '<input type=\"submit\">';\n"
+            + "    input = builder.firstChild;\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+
+            + "    input = input.cloneNode(false);\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='submit' id='submit1'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
                 "newDefault-newDefault", "newDefault-newDefault" },
             IE = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",

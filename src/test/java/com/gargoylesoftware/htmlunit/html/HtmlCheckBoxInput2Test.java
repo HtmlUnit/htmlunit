@@ -614,29 +614,35 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "on", "on", "on", "on" })
-    public void defaultDefaultValue() throws Exception {
+    @Alerts(DEFAULT = { "on-", "on-", "on-", "on-", "on-" },
+            IE = { "on-", "on-", "on-", "on-", "on-on" })
+    public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('chkbox').value);\n"
+            + "    var input = document.getElementById('chkbox1');\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
 
-            + "    var input = document.createElement('input');\n"
+            + "    input = document.getElementById('chkbox2');\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+
+            + "    input = document.createElement('input');\n"
             + "    input.type = 'checkbox';\n"
-            + "    alert(input.value);\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"checkbox\">';\n"
-            + "    var input = builder.firstChild;\n"
-            + "    alert(input.value);\n"
+            + "    input = builder.firstChild;\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
 
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value);\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<form>\n"
-            + "  <input type='checkbox' id='chkbox'>\n"
+            + "  <input type='checkbox' id='chkbox1'>\n"
+            + "  <input type='checkbox' id='chkbox2' checked='true'>\n"
             + "</form>\n"
             + "</body></html>";
 

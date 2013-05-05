@@ -713,29 +713,35 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "on", "on", "on", "on" })
-    public void defaultDefaultValue() throws Exception {
+    @Alerts(DEFAULT = { "on-", "on-", "on-", "on-", "on-" },
+            IE = { "on-", "on-", "on-", "on-", "on-on" })
+    public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    alert(document.getElementById('rdo').value);\n"
+            + "    var input = document.getElementById('radio1');\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
 
-            + "    var input = document.createElement('input');\n"
+            + "    input = document.getElementById('radio2');\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+
+            + "    input = document.createElement('input');\n"
             + "    input.type = 'radio';\n"
-            + "    alert(input.value);\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"radio\">';\n"
-            + "    var input = builder.firstChild;\n"
-            + "    alert(input.value);\n"
+            + "    input = builder.firstChild;\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
 
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value);\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<form>\n"
-            + "  <input type='radio' id='rdo'>\n"
+            + "  <input type='radio' id='radio1'>\n"
+            + "  <input type='radio' id='radio2' checked='true'>\n"
             + "</form>\n"
             + "</body></html>";
 

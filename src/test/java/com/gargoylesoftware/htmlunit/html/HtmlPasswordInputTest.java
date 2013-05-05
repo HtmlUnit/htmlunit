@@ -168,6 +168,40 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "-", "-", "-", "-" })
+    public void defaultValues() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('password1');\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+
+            + "    input = document.createElement('input');\n"
+            + "    input.type = 'password';\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+
+            + "    var builder = document.createElement('div');\n"
+            + "    builder.innerHTML = '<input type=\"password\">';\n"
+            + "    input = builder.firstChild;\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+
+            + "    input = input.cloneNode(false);\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='password' id='password1'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({ "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
                 "newValue-newDefault", "newValue-newDefault" })
     public void resetByClick() throws Exception {
