@@ -615,7 +615,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "on", "on", "on", "on" })
-    public void defaultValue() throws Exception {
+    public void defaultDefaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -637,6 +637,113 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
             + "</head><body onload='test()'>\n"
             + "<form>\n"
             + "  <input type='checkbox' id='chkbox'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault" })
+    public void resetByClick() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var checkbox = document.getElementById('testId');\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+
+            + "    checkbox.value = 'newValue';\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+
+            + "    checkbox.defaultValue = 'newDefault';\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='checkbox' id='testId' name='radar' value='initial'>\n"
+            + "  <input type='reset' id='testReset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault" })
+    public void resetByJS() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var checkbox = document.getElementById('testId');\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+
+            + "    checkbox.value = 'newValue';\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+
+            + "    checkbox.defaultValue = 'newDefault';\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='checkbox' id='testId' name='radar' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault" })
+    public void defaultValue() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var checkbox = document.getElementById('testId');\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+
+            + "    checkbox.defaultValue = 'default';\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+
+            + "    checkbox.value = 'newValue';\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "    checkbox.defaultValue = 'newDefault';\n"
+            + "    alert(checkbox.value + '-' + checkbox.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='checkbox' id='testId' name='radar' value='initial'>\n"
             + "</form>\n"
             + "</body></html>";
 

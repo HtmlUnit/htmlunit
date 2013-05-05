@@ -34,6 +34,81 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "-", "-", "newValue-", "newValue-", "newValue-newDefault", "newValue-newDefault" })
+    public void resetByClick() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('testId');\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    text.value = 'newValue';\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    text.defaultValue = 'newDefault';\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <textarea id='testId' value='initial'></textarea>\n"
+            + "  <input type='reset' id='testReset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "-", "-", "newValue-", "newValue-", "newValue-newDefault", "newValue-newDefault" })
+    public void resetByJS() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('testId');\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    text.value = 'newValue';\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    text.defaultValue = 'newDefault';\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <textarea id='testId' value='initial'></textarea>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = { "-", "default-default", "some text-default", "some text-newdefault" },
             IE = { "-", "-default", "some text-default", "some text-newdefault" })
     public void defaultValue() throws Exception {

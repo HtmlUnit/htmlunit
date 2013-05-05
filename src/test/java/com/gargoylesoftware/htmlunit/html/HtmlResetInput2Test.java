@@ -34,8 +34,89 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "default-default", "some text-some text", "newdefault-newdefault" },
-            IE8 = { "initial-initial", "initial-default", "some text-default", "some text-newdefault" })
+    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault" },
+            IE = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault" })
+    public void resetByClick() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var reset = document.getElementById('testId');\n"
+            + "    alert(reset.value + '-' + reset.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(reset.value + '-' + reset.defaultValue);\n"
+
+            + "    reset.value = 'newValue';\n"
+            + "    alert(reset.value + '-' + reset.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(reset.value + '-' + reset.defaultValue);\n"
+
+            + "    reset.defaultValue = 'newDefault';\n"
+            + "    alert(reset.value + '-' + reset.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(reset.value + '-' + reset.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='reset' id='testId' value='initial'>\n"
+            + "  <input type='reset' id='testReset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault" },
+            IE = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault" })
+    public void resetByJS() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var reset = document.getElementById('testId');\n"
+            + "    alert(reset.value + '-' + reset.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(reset.value + '-' + reset.defaultValue);\n"
+
+            + "    reset.value = 'newValue';\n"
+            + "    alert(reset.value + '-' + reset.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(reset.value + '-' + reset.defaultValue);\n"
+
+            + "    reset.defaultValue = 'newDefault';\n"
+            + "    alert(reset.value + '-' + reset.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(reset.value + '-' + reset.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='reset' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "initial-initial", "default-default", "newValue-newValue", "newdefault-newdefault" },
+            IE8 = { "initial-initial", "initial-default", "newValue-default", "newValue-newdefault" })
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -46,7 +127,7 @@ public class HtmlResetInput2Test extends WebDriverTestCase {
             + "    reset.defaultValue = 'default';\n"
             + "    alert(reset.value + '-' + reset.defaultValue);\n"
 
-            + "    reset.value = 'some text';\n"
+            + "    reset.value = 'newValue';\n"
             + "    alert(reset.value + '-' + reset.defaultValue);\n"
             + "    reset.defaultValue = 'newdefault';\n"
             + "    alert(reset.value + '-' + reset.defaultValue);\n"

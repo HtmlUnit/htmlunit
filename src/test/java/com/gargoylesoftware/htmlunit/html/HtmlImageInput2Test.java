@@ -34,8 +34,9 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "some text-some text", "some text-some text" })
-    public void reset() throws Exception {
+    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault" })
+    public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -45,10 +46,16 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
             + "    document.getElementById('testReset').click;\n"
             + "    alert(image.value + '-' + image.defaultValue);\n"
 
-            + "    image.value = 'some text';\n"
+            + "    image.value = 'newValue';\n"
             + "    alert(image.value + '-' + image.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
+
+            + "    image.defaultValue = 'newDefault';\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
             + "    alert(image.value + '-' + image.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
@@ -66,7 +73,45 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "default-default", "some text-some text", "newdefault-newdefault" })
+    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault" })
+    public void resetByJS() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var image = document.getElementById('testId');\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
+
+            + "    image.value = 'newValue';\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
+
+            + "    image.defaultValue = 'newDefault';\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(image.value + '-' + image.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='image' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault" })
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -77,9 +122,9 @@ public class HtmlImageInput2Test extends WebDriverTestCase {
             + "    image.defaultValue = 'default';\n"
             + "    alert(image.value + '-' + image.defaultValue);\n"
 
-            + "    image.value = 'some text';\n"
+            + "    image.value = 'newValue';\n"
             + "    alert(image.value + '-' + image.defaultValue);\n"
-            + "    image.defaultValue = 'newdefault';\n"
+            + "    image.defaultValue = 'newDefault';\n"
             + "    alert(image.value + '-' + image.defaultValue);\n"
             + "  }\n"
             + "</script>\n"

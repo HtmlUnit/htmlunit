@@ -306,6 +306,71 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newDefault-newDefault", "newDefault-newDefault" },
+            IE = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" })
+    public void resetByClick() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var file = document.getElementById('testId');\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    file.defaultValue = 'newDefault';\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='text' id='testId' value='initial'>\n"
+            + "  <input type='reset' id='testReset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newDefault-newDefault", "newDefault-newDefault" },
+            IE = { "initial-initial", "initial-initial", "initial-newDefault", "initial-newDefault" })
+    public void resetByJS() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var file = document.getElementById('testId');\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    file.defaultValue = 'newDefault';\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(file.value + '-' + file.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='text' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = { "-initial", "-default" },
             IE8 = { "-", "-default" })
     public void defaultValue() throws Exception {

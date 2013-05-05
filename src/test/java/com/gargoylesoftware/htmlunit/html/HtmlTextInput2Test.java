@@ -34,8 +34,9 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "some text-initial", "some text-initial" })
-    public void reset() throws Exception {
+    @Alerts({ "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault" })
+    public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -45,10 +46,16 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
             + "    document.getElementById('testReset').click;\n"
             + "    alert(text.value + '-' + text.defaultValue);\n"
 
-            + "    text.value = 'some text';\n"
+            + "    text.value = 'newValue';\n"
             + "    alert(text.value + '-' + text.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    text.defaultValue = 'newDefault';\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
             + "    alert(text.value + '-' + text.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
@@ -66,8 +73,46 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "default-default", "some text-default", "some text-newdefault" },
-            IE8 = { "initial-initial", "initial-default", "some text-default", "some text-newdefault" })
+    @Alerts({ "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault" })
+    public void resetByJS() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('testId');\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    text.value = 'newValue';\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    text.defaultValue = 'newDefault';\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='text' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "initial-initial", "default-default", "newValue-default", "newValue-newDefault" },
+            IE8 = { "initial-initial", "initial-default", "newValue-default", "newValue-newDefault" })
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -78,9 +123,9 @@ public class HtmlTextInput2Test extends WebDriverTestCase {
             + "    text.defaultValue = 'default';\n"
             + "    alert(text.value + '-' + text.defaultValue);\n"
 
-            + "    text.value = 'some text';\n"
+            + "    text.value = 'newValue';\n"
             + "    alert(text.value + '-' + text.defaultValue);\n"
-            + "    text.defaultValue = 'newdefault';\n"
+            + "    text.defaultValue = 'newDefault';\n"
             + "    alert(text.value + '-' + text.defaultValue);\n"
             + "  }\n"
             + "</script>\n"

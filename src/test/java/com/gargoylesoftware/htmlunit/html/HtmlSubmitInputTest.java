@@ -196,9 +196,11 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "some text-some text", "some text-some text" },
-            IE8 = { "initial-initial", "initial-initial", "some text-initial", "some text-initial" })
-    public void reset() throws Exception {
+    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault" },
+            IE = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault" })
+    public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -208,10 +210,16 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
             + "    document.getElementById('testReset').click;\n"
             + "    alert(submit.value + '-' + submit.defaultValue);\n"
 
-            + "    submit.value = 'some text';\n"
+            + "    submit.value = 'newValue';\n"
             + "    alert(submit.value + '-' + submit.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+
+            + "    submit.defaultValue = 'newDefault';\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
             + "    alert(submit.value + '-' + submit.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
@@ -229,8 +237,48 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "default-default", "some text-some text", "newdefault-newdefault" },
-            IE8 = { "initial-initial", "initial-default", "some text-default", "some text-newdefault" })
+    @Alerts(DEFAULT = { "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault" },
+            IE = { "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault" })
+    public void resetByJS() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var submit = document.getElementById('testId');\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+
+            + "    submit.value = 'newValue';\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+
+            + "    submit.defaultValue = 'newDefault';\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(submit.value + '-' + submit.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='submit' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "initial-initial", "default-default", "newValue-newValue", "newdefault-newdefault" },
+            IE8 = { "initial-initial", "initial-default", "newValue-default", "newValue-newdefault" })
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -241,7 +289,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
             + "    submit.defaultValue = 'default';\n"
             + "    alert(submit.value + '-' + submit.defaultValue);\n"
 
-            + "    submit.value = 'some text';\n"
+            + "    submit.value = 'newValue';\n"
             + "    alert(submit.value + '-' + submit.defaultValue);\n"
             + "    submit.defaultValue = 'newdefault';\n"
             + "    alert(submit.value + '-' + submit.defaultValue);\n"

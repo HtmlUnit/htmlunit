@@ -714,7 +714,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({ "on", "on", "on", "on" })
-    public void defaultValue() throws Exception {
+    public void defaultDefaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -736,6 +736,113 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</head><body onload='test()'>\n"
             + "<form>\n"
             + "  <input type='radio' id='rdo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault" })
+    public void resetByClick() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var radio = document.getElementById('testId');\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+
+            + "    radio.value = 'newValue';\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+
+            + "    document.getElementById('testReset').click;\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+
+            + "    radio.defaultValue = 'newDefault';\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='radio' id='testId' name='radar' value='initial'>\n"
+            + "  <input type='reset' id='testReset'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "initial-initial", "initial-initial", "newValue-newValue", "newValue-newValue",
+                "newDefault-newDefault", "newDefault-newDefault" })
+    public void resetByJS() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var radio = document.getElementById('testId');\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+
+            + "    radio.value = 'newValue';\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+
+            + "    radio.defaultValue = 'newDefault';\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='radio' id='testId' name='radar' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "initial-initial", "default-default", "newValue-newValue", "newDefault-newDefault" })
+    public void defaultValue() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var radio = document.getElementById('testId');\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+
+            + "    radio.defaultValue = 'default';\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+
+            + "    radio.value = 'newValue';\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "    radio.defaultValue = 'newDefault';\n"
+            + "    alert(radio.value + '-' + radio.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='radio' id='testId' name='radar' value='initial'>\n"
             + "</form>\n"
             + "</body></html>";
 

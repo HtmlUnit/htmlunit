@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANGE_LOSING_FOCUS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_DEFAULT_CHECKED_UPDATES_CHECKED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_SET_VALUE_UPDATES_DEFAULT_VALUE;
 
 import java.io.IOException;
 import java.util.List;
@@ -306,5 +307,16 @@ public class HtmlRadioButtonInput extends HtmlInput {
             executeOnChangeHandlerIfAppropriate(this);
         }
         valueAtFocus_ = isChecked();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
+        if (hasFeature(HTMLINPUT_SET_VALUE_UPDATES_DEFAULT_VALUE) && "value".equals(qualifiedName)) {
+            setDefaultValue(attributeValue, false);
+        }
+        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
     }
 }

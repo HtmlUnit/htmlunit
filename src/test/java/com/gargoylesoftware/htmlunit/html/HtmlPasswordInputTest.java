@@ -168,8 +168,9 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "initial-initial", "initial-initial", "some text-initial", "some text-initial" })
-    public void reset() throws Exception {
+    @Alerts({ "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault" })
+    public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
@@ -179,10 +180,16 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "    document.getElementById('testReset').click;\n"
             + "    alert(password.value + '-' + password.defaultValue);\n"
 
-            + "    password.value = 'some text';\n"
+            + "    password.value = 'newValue';\n"
             + "    alert(password.value + '-' + password.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+
+            + "    password.defaultValue = 'newDefault';\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
             + "    alert(password.value + '-' + password.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
@@ -200,8 +207,46 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-initial", "default-default", "some text-default", "some text-newdefault" },
-            IE8 = { "initial-initial", "initial-default", "some text-default", "some text-newdefault" })
+    @Alerts({ "initial-initial", "initial-initial", "newValue-initial", "newValue-initial",
+                "newValue-newDefault", "newValue-newDefault" })
+    public void resetByJS() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var password = document.getElementById('testId');\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+
+            + "    password.value = 'newValue';\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+
+            + "    password.defaultValue = 'newDefault';\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+
+            + "    document.forms[0].reset;\n"
+            + "    alert(password.value + '-' + password.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='password' id='testId' value='initial'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "initial-initial", "default-default", "newValue-default", "newValue-newdefault" },
+            IE8 = { "initial-initial", "initial-default", "newValue-default", "newValue-newdefault" })
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -212,7 +257,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "    password.defaultValue = 'default';\n"
             + "    alert(password.value + '-' + password.defaultValue);\n"
 
-            + "    password.value = 'some text';\n"
+            + "    password.value = 'newValue';\n"
             + "    alert(password.value + '-' + password.defaultValue);\n"
             + "    password.defaultValue = 'newdefault';\n"
             + "    alert(password.value + '-' + password.defaultValue);\n"
