@@ -543,6 +543,22 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(IE))
     HTMLBGSOUND,
 
+    /** Set this checked state back to default when added to page (IE6). */
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
+    HTMLCHECKEDINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED,
+
+    /** Set this checked state to false when added to page (IE). */
+    @BrowserFeature(@WebBrowser(value = IE))
+    HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE,
+
+    /** Setting defaultCheced updates checked also. */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 8), @WebBrowser(CHROME) })
+    HTMLCHECKEDINPUT_SET_DEFAULT_CHECKED_UPDATES_CHECKED,
+
+    /** Set the default value based on the current value when clone (IE). */
+    @BrowserFeature(@WebBrowser(value = IE))
+    HTMLCHECKEDINPUT_SET_DEFAULT_VALUE_WHEN_CLONE,
+
     /** Indicates that comment nodes should be treated similar to elements, e.g. getElementsByTagName(). */
     @BrowserFeature(@WebBrowser(IE))
     HTMLCOLLECTION_COMMENT_IS_ELEMENT,
@@ -597,18 +613,6 @@ public enum BrowserVersionFeatures {
     /** */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLIMAGE_NAME_VALUE_PARAMS,
-
-    /** Set this checked state back to default when added to page (IE6). */
-    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
-    HTMLINPUT_SET_CHECKED_TO_DEFAULT_WHEN_ADDED,
-
-    /** Set this checked state to false when added to page (IE). */
-    @BrowserFeature(@WebBrowser(value = IE))
-    HTMLINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE,
-
-    /** Setting defaultCheced updates checked also. */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 8), @WebBrowser(CHROME) })
-    HTMLINPUT_SET_DEFAULT_CHECKED_UPDATES_CHECKED,
 
     /** Setting defaultValue updates the value also. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(value = IE, minVersion = 9), @WebBrowser(CHROME) })
@@ -1191,6 +1195,10 @@ public enum BrowserVersionFeatures {
     /** Indicates .querySelectorAll() is not supported in quirks mode. */
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 8))
     QUERYSELECTORALL_NOT_IN_QUIRKS,
+
+    /** Set the value attribute of a reset input to 'Reset' if no value attribute specified. */
+    @BrowserFeature(@WebBrowser(IE))
+    RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
 
     /** Indicates that escaping in attrubute selectors is supported. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })

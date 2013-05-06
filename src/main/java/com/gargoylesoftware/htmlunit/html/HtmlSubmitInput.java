@@ -56,6 +56,12 @@ public class HtmlSubmitInput extends HtmlInput {
     HtmlSubmitInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, addValueIfNeeded(page, attributes));
+
+        // fix the default value in case we have set it
+        if (hasFeature(SUBMITINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED)
+                && getAttribute("value") == DEFAULT_VALUE) {
+            setDefaultValue(ATTRIBUTE_NOT_DEFINED, false);
+        }
     }
 
     /**

@@ -306,7 +306,7 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({ "-", "-", "-", "-" })
+    @Alerts({ "-", "-", "-" })
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -322,7 +322,38 @@ public class HtmlFileInput2Test extends WebDriverTestCase {
             + "    builder.innerHTML = '<input type=\"file\">';\n"
             + "    input = builder.firstChild;\n"
             + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='file' id='file1'>\n"
+            + "</form>\n"
+            + "</body></html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "-", "-", "-" })
+    public void defaultValuesAfterClone() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('file1');\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    input = input.cloneNode(false);\n"
+
+            + "    input = document.createElement('input');\n"
+            + "    input.type = 'file';\n"
+            + "    input = input.cloneNode(false);\n"
+            + "    alert(input.value + '-' + input.defaultValue);\n"
+
+            + "    var builder = document.createElement('div');\n"
+            + "    builder.innerHTML = '<input type=\"file\">';\n"
+            + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
             + "    alert(input.value + '-' + input.defaultValue);\n"
             + "  }\n"
