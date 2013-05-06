@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FILEINPUT_EMP
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -53,11 +54,34 @@ public class HtmlFileInput extends HtmlInput {
      */
     HtmlFileInput(final String namespaceURI, final String qualifiedName, final SgmlPage page,
         final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
-        setAttribute("value", "");
+        super(namespaceURI, qualifiedName, page, addValueIfNeeded(page, attributes));
+
         if (hasFeature(FILEINPUT_EMPTY_DEFAULT_VALUE)) {
-            setDefaultValue("");
+            setDefaultValue("", false);
         }
+        else {
+            for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
+                if ("value".equalsIgnoreCase(entry.getKey())) {
+                    setDefaultValue(entry.getValue().getNodeValue(), false);
+                }
+            }
+        }
+    }
+
+    /**
+     * Add missing attribute if needed by fixing attribute map rather to add it afterwards as this second option
+     * triggers the instantiation of the script object at a time where the DOM node has not yet been added to its
+     * parent.
+     */
+    private static Map<String, DomAttr> addValueIfNeeded(final SgmlPage page,
+            final Map<String, DomAttr> attributes) {
+
+        // we need a copy here because we have to check attributes later again
+        final Map<String, DomAttr> result = new HashMap<String, DomAttr>(attributes);
+        final DomAttr newAttr = new DomAttr(page, null, "value", "", true);
+        result.put("value", newAttr);
+
+        return result;
     }
 
     /**

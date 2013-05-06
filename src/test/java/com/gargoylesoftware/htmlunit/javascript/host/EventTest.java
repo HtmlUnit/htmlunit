@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class EventTest extends WebDriverTestCase {
@@ -708,10 +709,26 @@ public class EventTest extends WebDriverTestCase {
     @Alerts({ "from theField", "from theForm", "from document", "from window" })
     public void eventHandlersParentScopeChain_formFields() throws Exception {
         eventHandlersParentScopeChain("<button", "</button>");
+
         eventHandlersParentScopeChain("<input type='text'", "");
+        eventHandlersParentScopeChain("<input type='password'", "");
+        eventHandlersParentScopeChain("<input type='hidden'", "");
+
+        eventHandlersParentScopeChain("<input type='checkbox'", "");
+        eventHandlersParentScopeChain("<input type='radio'", "");
+
+        eventHandlersParentScopeChain("<input type='file'", "");
+        eventHandlersParentScopeChain("<input type='image'", "");
+
+        eventHandlersParentScopeChain("<input type='button'", "");
+
         eventHandlersParentScopeChain("<input type='submit' value='xxx'", "");
         // case without value attribute was failing first with IE due to the way the value attribute was added
         eventHandlersParentScopeChain("<input type='submit'", "");
+
+        eventHandlersParentScopeChain("<input type='reset' value='xxx'", "");
+        // case without value attribute was failing first with IE due to the way the value attribute was added
+        eventHandlersParentScopeChain("<input type='reset'", "");
     }
 
     /**
@@ -725,19 +742,21 @@ public class EventTest extends WebDriverTestCase {
     }
 
     private void eventHandlersParentScopeChain(final String startTag, final String endTag) throws Exception {
-        final String html = "<html><body id='body'>\n"
+        final String html = "<html><html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body id='body'>\n"
             + "<form id='theForm'>\n"
-            + "<div id='theDiv'>\n"
-            + startTag + " id='theField' onclick='alert(foo); return false;'>click me" + endTag + "\n"
-            + "</div>\n"
+            + "  <div id='theDiv'>\n"
+            + "    " + startTag + " id='theField' onclick='alert(foo); return false;'>click me" + endTag + "\n"
+            + "  </div>\n"
             + "</form>\n"
             + "<script>\n"
-            + "var foo = 'from window';\n"
-            + "document.foo = 'from document';\n"
-            + "document.body.foo = 'from body';\n"
-            + "document.getElementById('theForm').foo = 'from theForm';\n"
-            + "document.getElementById('theDiv').foo = 'from theDiv';\n"
-            + "document.getElementById('theField').foo = 'from theField';\n"
+            + "  var foo = 'from window';\n"
+            + "  document.foo = 'from document';\n"
+            + "  document.body.foo = 'from body';\n"
+            + "  document.getElementById('theForm').foo = 'from theForm';\n"
+            + "  document.getElementById('theDiv').foo = 'from theDiv';\n"
+            + "  document.getElementById('theField').foo = 'from theField';\n"
             + "</script>\n"
             + "</body></html>";
 
