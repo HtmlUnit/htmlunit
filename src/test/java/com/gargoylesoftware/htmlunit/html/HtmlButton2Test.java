@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Brad Clarke
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlButton2Test extends WebDriverTestCase {

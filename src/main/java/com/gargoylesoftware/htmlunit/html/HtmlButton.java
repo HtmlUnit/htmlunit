@@ -97,6 +97,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     /**
      * {@inheritDoc}
      */
+    @Override
     public final boolean isDisabled() {
         return hasAttribute("disabled");
     }
@@ -104,6 +105,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     /**
      * {@inheritDoc}
      */
+    @Override
     public NameValuePair[] getSubmitKeyValuePairs() {
         return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};
     }
@@ -113,6 +115,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      *
      * @see SubmittableElement#reset()
      */
+    @Override
     public void reset() {
         if (LOG.isDebugEnabled()) {
             LOG.debug("reset() not implemented for this element");
@@ -124,6 +127,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      *
      * @see SubmittableElement#setDefaultValue(String)
      */
+    @Override
     public void setDefaultValue(final String defaultValue) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("setDefaultValue() not implemented for this element");
@@ -135,6 +139,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      *
      * @see SubmittableElement#getDefaultValue()
      */
+    @Override
     public String getDefaultValue() {
         if (LOG.isDebugEnabled()) {
             LOG.debug("getDefaultValue() not implemented for this element");
@@ -152,6 +157,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
      * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
      */
+    @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }
@@ -166,6 +172,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @see HtmlRadioButtonInput#isDefaultChecked()
      * @see HtmlCheckBoxInput#isDefaultChecked()
      */
+    @Override
     public boolean isDefaultChecked() {
         return false;
     }
