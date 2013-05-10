@@ -293,7 +293,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     @Override
     protected void onAddedToDocumentFragment() {
-        super.onAddedToPage();
+        super.onAddedToDocumentFragment();
         if (hasFeature(HTMLCHECKEDINPUT_SET_CHECKED_TO_FALSE_WHEN_CLONE)) {
             forceChecked_ = true;
         }
