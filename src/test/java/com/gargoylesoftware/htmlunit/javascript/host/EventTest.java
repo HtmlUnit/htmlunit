@@ -709,6 +709,8 @@ public class EventTest extends WebDriverTestCase {
     @Alerts({ "from theField", "from theForm", "from document", "from window" })
     public void eventHandlersParentScopeChain_formFields() throws Exception {
         eventHandlersParentScopeChain("<button", "</button>");
+        eventHandlersParentScopeChain("<select", "</select>");
+        eventHandlersParentScopeChain("<textarea", "</textarea>");
 
         eventHandlersParentScopeChain("<input type='text'", "");
         eventHandlersParentScopeChain("<input type='password'", "");
