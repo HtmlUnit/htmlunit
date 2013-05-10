@@ -203,9 +203,8 @@ public class HtmlScript extends HtmlElement {
 
         // special additional processing for the 'src'
         if (namespaceURI == null && "src".equals(qualifiedName)) {
-            final boolean alwaysReexecute = hasFeature(JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
-
             if (isDirectlyAttachedToPage()) {
+                final boolean alwaysReexecute = hasFeature(JS_SCRIPT_ALWAYS_REEXECUTE_ON_SRC_CHANGE);
                 // always execute if IE;
                 if (alwaysReexecute) {
                     resetExecuted();
