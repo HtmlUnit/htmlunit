@@ -133,10 +133,11 @@ public abstract class HtmlElement extends DomElement {
 
         final String oldAttributeValue = getAttribute(qualifiedName);
 
+        final HtmlPage htmlPage = (HtmlPage) getPage();
         final boolean mappedElement = isDirectlyAttachedToPage()
                     && HtmlPage.isMappedElement(getOwnerDocument(), qualifiedName);
         if (mappedElement) {
-            ((HtmlPage) getPage()).removeMappedElement(this);
+            htmlPage.removeMappedElement(this);
         }
 
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
@@ -146,7 +147,6 @@ public abstract class HtmlElement extends DomElement {
             return;
         }
 
-        final HtmlPage htmlPage = (HtmlPage) getPage();
         if (mappedElement) {
             htmlPage.addMappedElement(this);
         }
@@ -154,19 +154,15 @@ public abstract class HtmlElement extends DomElement {
         final HtmlAttributeChangeEvent htmlEvent;
         if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
             htmlEvent = new HtmlAttributeChangeEvent(this, qualifiedName, attributeValue);
+            fireHtmlAttributeAdded(htmlEvent);
+            htmlPage.fireHtmlAttributeAdded(htmlEvent);
         }
         else {
             htmlEvent = new HtmlAttributeChangeEvent(this, qualifiedName, oldAttributeValue);
+            fireHtmlAttributeReplaced(htmlEvent);
+            htmlPage.fireHtmlAttributeReplaced(htmlEvent);
         }
 
-        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
-            fireHtmlAttributeAdded(htmlEvent);
-            ((HtmlPage) getPage()).fireHtmlAttributeAdded(htmlEvent);
-        }
-        else {
-            fireHtmlAttributeReplaced(htmlEvent);
-            ((HtmlPage) getPage()).fireHtmlAttributeReplaced(htmlEvent);
-        }
         if (hasFeature(EVENT_PROPERTY_CHANGE)) {
             fireEvent(Event.createPropertyChangeEvent(this, qualifiedName));
         }
