@@ -917,8 +917,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         if (isDirectlyAttachedToPage()) {
             // trigger events
-            if (!(this instanceof DomDocumentFragment) && (getPage() instanceof HtmlPage)) {
-                ((HtmlPage) getPage()).notifyNodeAdded(domNode);
+            final Page page = getPage();
+            if (page instanceof HtmlPage) {
+                ((HtmlPage) page).notifyNodeAdded(domNode);
             }
 
             // a node that is already "complete" (ie not being parsed) and not yet attached
@@ -930,6 +931,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 domNode.onAllChildrenAddedToPage(true);
             }
         }
+
         if (this instanceof DomDocumentFragment) {
             onAddedToDocumentFragment();
         }
@@ -1208,7 +1210,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Lifecycle method invoked whenever a node is added to a document fragment. Intended to
      * be overridden by nodes which need to perform custom logic when they are
      * added to a fragment. This method is recursive, so if you override it, please
-     * be sure to call <tt>super.onAddedToPage()</tt>.
+     * be sure to call <tt>super.onAddedToDocumentFragment()</tt>.
      */
     protected void onAddedToDocumentFragment() {
         if (firstChild_ != null) {
