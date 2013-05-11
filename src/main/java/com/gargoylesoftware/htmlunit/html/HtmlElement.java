@@ -40,6 +40,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
@@ -131,21 +132,23 @@ public abstract class HtmlElement extends DomElement {
     public void setAttributeNS(final String namespaceURI, final String qualifiedName,
             final String attributeValue) {
 
-        final String oldAttributeValue = getAttribute(qualifiedName);
+        // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
+        final Document ownerDoc = getOwnerDocument();
+        if (!(ownerDoc instanceof HtmlPage)) {
+            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
+            return;
+        }
 
+        final String oldAttributeValue = getAttribute(qualifiedName);
         final HtmlPage htmlPage = (HtmlPage) getPage();
         final boolean mappedElement = isDirectlyAttachedToPage()
-                    && HtmlPage.isMappedElement(getOwnerDocument(), qualifiedName);
+                    && HtmlPage.isMappedElement(ownerDoc, qualifiedName);
         if (mappedElement) {
+            // cast is save here because isMappedElement checks for HtmlPage
             htmlPage.removeMappedElement(this);
         }
 
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
-
-        // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
-        if (!(getOwnerDocument() instanceof HtmlPage)) {
-            return;
-        }
 
         if (mappedElement) {
             htmlPage.addMappedElement(this);
