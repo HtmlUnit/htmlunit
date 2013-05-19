@@ -1324,4 +1324,33 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void childNodes_xmp() throws Exception {
         loadPageWithAlerts2(createHtmlForChildNodes("xmp"));
     }
+
+    /**
+     * conditional comments are removed from the dom.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = { "<!--[if gt IE 11]><br><![endif]-->", "<!--[if lt IE 11]><br><![endif]-->" },
+            IE = { "", "<BR>" })
+    @NotYetImplemented(IE)
+    public void ieConditionalCommentsNotInDom() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "try {\n"
+            + "  var tmp = document.getElementById('my1');\n"
+            + "  alert(tmp.innerHTML)\n"
+            + "  tmp = document.getElementById('my2');\n"
+            + "  alert(tmp.innerHTML)\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='my1'><!--[if gt IE 11]><br><![endif]--></div>\n"
+            + "  <div id='my2'><!--[if lt IE 11]><br><![endif]--></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

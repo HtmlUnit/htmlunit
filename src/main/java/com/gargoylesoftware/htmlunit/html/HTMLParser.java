@@ -977,7 +977,7 @@ class HTMLScannerForIE extends org.cyberneko.html.HTMLScanner {
                         }
                         return;
                     }
-                    else if (commentTill != null) {
+                    if (commentTill != null) {
                         final XMLStringBuffer buffer = new XMLStringBuffer();
                         int ch;
                         while ((ch = read()) != -1) {
