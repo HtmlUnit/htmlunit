@@ -1326,7 +1326,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     }
 
     /**
-     * conditional comments are removed from the dom.
+     * Conditional comments are removed from the dom.
      * @throws Exception on test failure
      */
     @Test
