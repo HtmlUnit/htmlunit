@@ -857,13 +857,32 @@ public class WebClient implements Serializable {
             return null;
         }
 
-        if (!name.isEmpty()) {
-            try {
-                return getWebWindowByName(name);
+        // first search for frame windows inside our window hierarchy
+        WebWindow window = opener;
+        while (true) {
+            final Page page = window.getEnclosedPage();
+            if (page instanceof HtmlPage) {
+                try {
+                    final FrameWindow frame = ((HtmlPage) page).getFrameByName(name);
+                    return frame;
+                }
+                catch (final ElementNotFoundException e) {
+                    // Fall through
+                }
             }
-            catch (final WebWindowNotFoundException e) {
-                // Fall through - a new window will be created below
+
+            if (window == window.getParentWindow()) {
+                // TODO: should getParentWindow() return null on top windows?
+                break;
             }
+            window = window.getParentWindow();
+        }
+
+        try {
+            return getWebWindowByName(name);
+        }
+        catch (final WebWindowNotFoundException e) {
+            // Fall through - a new window will be created below
         }
         return null;
     }
