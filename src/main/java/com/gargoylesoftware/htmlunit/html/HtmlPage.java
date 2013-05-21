@@ -1736,8 +1736,10 @@ public class HtmlPage extends SgmlPage {
      * @param recurse indicates if children must be added too
      */
     void addMappedElement(final DomElement element, final boolean recurse) {
-        addElement(idMap_, element, "id", recurse);
-        addElement(nameMap_, element, "name", recurse);
+        if (isDescendant(element)) {
+            addElement(idMap_, element, "id", recurse);
+            addElement(nameMap_, element, "name", recurse);
+        }
     }
 
     private void addElement(final Map<String, SortedSet<DomElement>> map, final DomElement element,
