@@ -184,11 +184,11 @@ public enum BrowserVersionFeatures {
     EVENT_ONLOAD_IFRAME_CREATED_BY_JAVASCRIPT,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10), @WebBrowser(IE) })
+    @BrowserFeature({ @WebBrowser(IE) })
     EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
-    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 10) })
+    @BrowserFeature({ })
     EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT,
 
     /** Does not trigger "onmousedown" event handler for the select options. */
