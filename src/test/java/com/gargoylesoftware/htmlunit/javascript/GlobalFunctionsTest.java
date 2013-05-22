@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class GlobalFunctionsTest extends WebDriverTestCase {
@@ -78,6 +79,29 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     public void methods_different() throws Exception {
         final String[] methods = {"isXMLName", "uneval"};
         final String html = NativeDateTest.createHTMLTestMethods("this", methods);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test case for #1439
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "http%3A%2F%2Fw3schools.com%2Fmy%20test.asp%3Fname%3Dst%C3%A5le%26car%3Dsaab",
+                "%E6%B5%8B%E8%A9%A6" })
+    public void encodeURIComponent() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var uri='http://w3schools.com/my test.asp?name=st\u00E5le&car=saab';\n"
+            + "  alert(encodeURIComponent(uri));\n"
+
+            + "  uri='\\u6D4B\\u8A66';\n"
+            + "  alert(encodeURIComponent(uri));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 }
