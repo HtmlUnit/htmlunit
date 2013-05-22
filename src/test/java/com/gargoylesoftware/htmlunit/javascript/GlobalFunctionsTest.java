@@ -83,7 +83,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     }
 
     /**
-     * Test case for #1439
+     * Test case for #1439.
      * @throws Exception if the test fails
      */
     @Test
