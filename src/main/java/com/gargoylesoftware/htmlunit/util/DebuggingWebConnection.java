@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -182,8 +183,12 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         final File f = createFile(request.getUrl(), extension);
         final InputStream input = response.getContentAsStream();
         final OutputStream output = new FileOutputStream(f);
+        int length = 0;
         try {
-            IOUtils.copy(response.getContentAsStream(), output);
+            length = IOUtils.copy(input, output);
+        }
+        catch (final EOFException e) {
+            // ignore
         }
         finally {
             IOUtils.closeQuietly(input);
@@ -203,8 +208,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         }
         buffer.append("url: '" + escapeJSString(url.toString()) + "', ");
         buffer.append("loadTime: " + response.getLoadTime() + ", ");
-        final byte[] bytes = IOUtils.toByteArray(response.getContentAsStream());
-        buffer.append("responseSize: " + ((bytes == null) ? 0 : bytes.length) + ", ");
+        buffer.append("responseSize: " + length + ", ");
         buffer.append("responseHeaders: " + nameValueListToJsMap(response.getResponseHeaders()));
         buffer.append("};\n");
         appendToJSFile(buffer.toString());
