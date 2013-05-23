@@ -44,4 +44,9 @@ public class HtmlDefinitionDescription extends HtmlElement {
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
     }
+
+    @Override
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
+    }
 }

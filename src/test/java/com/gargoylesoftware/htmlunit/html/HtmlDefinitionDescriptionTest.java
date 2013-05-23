@@ -21,24 +21,24 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
- * Tests for {@link HtmlParagraph}.
+ * Tests for {@link HtmlDefinitionDescription}.
  *
- * @version $Revision$
+ * @version $Revision: 7931 $
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
-public class HtmlParagraphTest extends SimpleWebTestCase {
+public class HtmlDefinitionDescriptionTest extends SimpleWebTestCase {
     /**
      * @throws Exception if the test fails
      */
     @Test
     public void asXml_emptyTag() throws Exception {
         final String html = "<html><body>\n"
-            + "<p id='foo'></p>\n"
+            + "<dd id='foo'></dd>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
         final HtmlElement element = page.getHtmlElementById("foo");
-        assertTrue(element.asXml().contains("</p>"));
+        assertTrue(element.asXml().contains("</dd>"));
     }
 }

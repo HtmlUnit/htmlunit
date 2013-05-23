@@ -65,4 +65,9 @@ public class HtmlParagraph extends HtmlElement {
     protected boolean isBlock() {
         return true;
     }
+
+    @Override
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
+    }
 }

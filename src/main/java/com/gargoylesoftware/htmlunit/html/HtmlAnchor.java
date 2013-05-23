@@ -310,4 +310,9 @@ public class HtmlAnchor extends HtmlElement {
         final WebWindow newWindow = getPage().getWebClient().openWindow(target, windowName);
         return newWindow.getEnclosedPage();
     }
+
+    @Override
+    protected boolean isEmptyXmlTagExpanded() {
+        return true;
+    }
 }

@@ -653,4 +653,18 @@ public class HtmlAnchorTest extends SimpleWebTestCase {
         final HtmlPage page2 = span.click();
         assertEquals(new URL(getDefaultUrl(), "page2.html"), page2.getUrl());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asXml_emptyTag() throws Exception {
+        final String html = "<html><body>\n"
+            + "<a name='foo'></a>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlAnchor htmlAnchor = page.getAnchorByName("foo");
+        assertTrue(htmlAnchor.asXml().contains("</a>"));
+    }
 }
