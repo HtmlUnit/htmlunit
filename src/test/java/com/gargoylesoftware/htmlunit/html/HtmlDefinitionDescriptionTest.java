@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 /**
  * Tests for {@link HtmlDefinitionDescription}.
  *
- * @version $Revision: 7931 $
+ * @version $Revision$
  * @author Marc Guillemot
  */
 @RunWith(BrowserRunner.class)
