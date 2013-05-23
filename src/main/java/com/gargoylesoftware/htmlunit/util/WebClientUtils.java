@@ -57,7 +57,7 @@ public final class WebClientUtils {
         final SourceProvider sourceProvider = new SourceProvider() {
             public String getSource(final DebuggableScript script) {
                 String sourceName = script.getSourceName();
-                if (sourceName.endsWith("(eval)")) {
+                if (sourceName.endsWith("(eval)") || sourceName.endsWith("(Function)")) {
                     return null; // script is result of eval call. Rhino already knows the source and we don't
                 }
                 if (sourceName.startsWith("script in ")) {
