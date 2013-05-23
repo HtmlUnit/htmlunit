@@ -18,6 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -2027,6 +2029,48 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<body onload='foo()'><div id='d' onclick='alert(\"clicked\")'>foo</div></body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "page2 loaded", IE = "exception")
+    public void dispatchEvent_submitOnForm() throws Exception {
+        final String html = "<html><head><title>page 1</title></head><body>\n"
+            + "<form action='page2' id='theForm'><span id='foo'/></form>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  var e = document.createEvent('HTMLEvents');\n"
+            + "  e.initEvent('submit', true, false);\n"
+            + "  document.getElementById('theForm').dispatchEvent(e);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        final String page2 = "<html><body><script>alert('page2 loaded');</script></body></html>";
+
+        getMockWebConnection().setResponse(new URL(getDefaultUrl() + "page2"), page2);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = "exception")
+    public void dispatchEvent_submitOnFormChild() throws Exception {
+        final String html = "<html><head><title>page 1</title></head><body>\n"
+            + "<form action='page2'><span id='foo'/></form>\n"
+            + "<script>\n"
+            + "try {\n"
+            + "  var e = document.createEvent('HTMLEvents');\n"
+            + "  e.initEvent('submit', true, false);\n"
+            + "  document.getElementById('foo').dispatchEvent(e);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        final WebDriver webDriver = loadPageWithAlerts2(html);
+        assertEquals("page 1", webDriver.getTitle());
     }
 
     /**

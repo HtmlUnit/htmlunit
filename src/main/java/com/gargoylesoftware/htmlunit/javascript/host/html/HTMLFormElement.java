@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.host.Event;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 /**
@@ -471,4 +472,12 @@ public class HTMLFormElement extends HTMLElement implements Function {
         return null;
     }
 
+    @Override
+    public boolean dispatchEvent(final Event event) {
+        if (event.getType().equals(Event.TYPE_SUBMIT)) {
+            submit();
+            return true;
+        }
+        return super.dispatchEvent(event);
+    }
 }
