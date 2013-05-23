@@ -27,6 +27,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.ErrorReporter;
 import net.sourceforge.htmlunit.corejs.javascript.Evaluator;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -61,6 +62,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     private Debugger debugger_;
     private final ErrorReporter errorReporter_;
     private final WrapFactory wrapFactory_ = new HtmlUnitWrapFactory();
+    private boolean deminifyFunctionCode_ = false;
 
     /**
      * Creates a new instance of HtmlUnitContextFactory.
@@ -113,6 +115,24 @@ public class HtmlUnitContextFactory extends ContextFactory {
      */
     public Debugger getDebugger() {
         return debugger_;
+    }
+
+    /**
+     * Configures if the code of <code>new Function("...some code...")</code> should be deminified to be more readable
+     * when using the debugger. This is a small performance cost.
+     * @param deminify the new value
+     */
+    public void setDeminifyFunctionCode(final boolean deminify) {
+        deminifyFunctionCode_ = deminify;
+    }
+
+    /**
+     * Indicates code of calls like <code>new Function("...some code...")</code> should be deminified to be more
+     * readable when using the debugger.
+     * @return the de-minify status
+     */
+    public boolean isDeminifyFunctionCode() {
+        return deminifyFunctionCode_;
     }
 
     /**
@@ -180,6 +200,20 @@ public class HtmlUnitContextFactory extends ContextFactory {
 
             return super.compileString(source, compiler, compilationErrorReporter,
                     sourceName, lineno, securityDomain);
+        }
+
+        @Override
+        protected Function compileFunction(final Scriptable scope, String source,
+                final Evaluator compiler, final ErrorReporter compilationErrorReporter,
+                final String sourceName, final int lineno, final Object securityDomain) {
+
+            if (deminifyFunctionCode_) {
+                final Function f = super.compileFunction(scope, source, compiler,
+                        compilationErrorReporter, sourceName, lineno, securityDomain);
+                source = decompileFunction(f, 4).trim().replace("\n    ", "\n");
+            }
+            return super.compileFunction(scope, source, compiler,
+                    compilationErrorReporter, sourceName, lineno, securityDomain);
         }
     }
 
