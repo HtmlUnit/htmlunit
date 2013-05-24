@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -142,22 +141,6 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
         // top frame
         assertEquals("Top Page", driver.getTitle());
         assertEquals("Body of top frame", driver.findElement(By.id("content")).getText());
-
-        // start REMOVE ME
-        // because of the return value change done for
-        // com.gargoylesoftware.htmlunit.html.BaseFrameElement.getEnclosedWindow()
-        // this test does not work with the current selenium driver
-        // this hack is only to inform us, if selenium uses the latest htmlunit
-        // then we can remove this
-        try {
-            driver.switchTo().frame("id-left");
-            Assert.fail("Switching the frame seems to work now in selenium. Please remove this code.");
-        }
-        catch (final NoSuchMethodError e) {
-            // expected, no chance to implement the test without this
-            return;
-        }
-        // end REMOVE ME
 
         // left frame
         driver.switchTo().frame("id-left");
