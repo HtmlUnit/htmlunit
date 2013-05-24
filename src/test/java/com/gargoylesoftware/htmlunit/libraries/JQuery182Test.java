@@ -4371,7 +4371,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
     public void ajax___ajax_____Accept_header() throws Exception {
         runTest("ajax: .ajax() - Accept header");
     }
