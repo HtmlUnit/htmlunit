@@ -4723,7 +4723,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
     public void ajax__jQuery_get_String__Function____data_in_ajaxSettings___8277_() throws Exception {
         runTest("ajax: jQuery.get(String, Function) - data in ajaxSettings (#8277)");
     }
@@ -4891,7 +4890,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
     public void ajax__jQuery_getJSON___Using_Native_JSON() throws Exception {
         runTest("ajax: jQuery.getJSON - Using Native JSON");
     }
@@ -4902,7 +4900,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
     public void ajax__jQuery_getJSON_String__Function____JSON_object_with_absolute_url_to_local_content() throws Exception {
         runTest("ajax: jQuery.getJSON(String, Function) - JSON object with absolute url to local content");
     }
@@ -4913,7 +4910,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented
     public void ajax__jQuery_post___data() throws Exception {
         runTest("ajax: jQuery.post - data");
     }
@@ -4924,7 +4920,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented
     public void ajax__jQuery_post_String__Hash__Function____simple_with_xml() throws Exception {
         runTest("ajax: jQuery.post(String, Hash, Function) - simple with xml");
     }
