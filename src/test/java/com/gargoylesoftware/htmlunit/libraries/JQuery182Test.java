@@ -4360,7 +4360,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 4, 4")
-    @NotYetImplemented
     public void ajax___ajax_____headers() throws Exception {
         runTest("ajax: .ajax() - headers");
     }
@@ -4381,7 +4380,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
     public void ajax___ajax_____contentType() throws Exception {
         runTest("ajax: .ajax() - contentType");
     }
@@ -4695,7 +4693,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
     public void ajax__load_String__String__Function_() throws Exception {
         runTest("ajax: load(String, String, Function)");
     }
@@ -4959,7 +4956,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
     public void ajax__jQuery_ajax___simple_get() throws Exception {
         runTest("ajax: jQuery.ajax - simple get");
     }
@@ -4970,7 +4966,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
     public void ajax__jQuery_ajax___simple_post() throws Exception {
         runTest("ajax: jQuery.ajax - simple post");
     }
@@ -5025,7 +5020,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented
     public void ajax__jQuery_ajax___Etag_support__cache_() throws Exception {
         runTest("ajax: jQuery.ajax - Etag support (cache)");
     }
@@ -5047,7 +5041,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented
     public void ajax__jQuery_ajax___Etag_support__no_cache_() throws Exception {
         runTest("ajax: jQuery.ajax - Etag support (no cache)");
     }
@@ -5069,7 +5062,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 1, 1")
-    @NotYetImplemented
     public void ajax__jQuery_ajax___atom_xml() throws Exception {
         runTest("ajax: jQuery ajax - atom+xml");
     }
@@ -5100,7 +5092,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented
     public void ajax__jQuery_ajax___statusText() throws Exception {
         runTest("ajax: jQuery.ajax - statusText");
     }
