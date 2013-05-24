@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.apache.commons.lang3.StringUtils;
@@ -500,9 +499,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "0", "20" },
-            FF17 = { "0", "19" },
             IE = { "15", "15" })
-    @NotYetImplemented(FF17)
     public void offsetHeight_explicitHeightZero() throws Exception {
         final String html
             = "<html><body>\n"
@@ -519,9 +516,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "77", "2", "5", "20", "50", "50", "20" },
-            FF17 = { "76", "2", "5", "20", "50", "50", "19" },
             IE = { "100", "15", "20", "20", "50", "50", "15" })
-    @NotYetImplemented(FF17)
     public void offsetHeight_calculatedBasedOnChildren() throws Exception {
         final String html
             = "<html>\n"
