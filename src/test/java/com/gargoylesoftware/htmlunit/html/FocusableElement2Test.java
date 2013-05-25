@@ -23,6 +23,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -221,7 +222,7 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver
+    @BuggyWebDriver(Browser.IE)
     @Alerts({ "input1", "focus1", "div", "input2", "blur1", "focus2" })
     public void focusOnNonFocusableElementShouldNotChangeCurrentFocus() throws Exception {
         final String html = "<html><body>\n"
