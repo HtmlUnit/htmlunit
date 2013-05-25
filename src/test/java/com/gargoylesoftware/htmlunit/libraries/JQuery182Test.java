@@ -4490,7 +4490,6 @@ public class JQuery182Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("0, 3, 3")
-    @NotYetImplemented
     public void ajax__jQuery_ajax___xml__non_namespace_elements_inside_namespaced_elements__over_JSONP_() throws Exception {
         runTest("ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (over JSONP)");
     }
