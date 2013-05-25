@@ -131,6 +131,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     DISPLAYED_COLLAPSE,
 
+    /** FF 3.6 has a much lager menu bar. */
+    @BrowserFeature({ @WebBrowser(value = FF, minVersion = 3.6f, maxVersion = 3.6f) })
+    DISPLAY_LARGE_MENU_BAR,
+
     /** */
     @BrowserFeature(@WebBrowser(IE))
     DOCTYPE_4_0_TRANSITIONAL_STANDARDS,

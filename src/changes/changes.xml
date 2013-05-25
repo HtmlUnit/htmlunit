@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Adjust the window.outherHeight for the newer FF versions.
+            </action>
             <action type="fix" dev="rbri" issue="1488">
                 Use the correct frame/iframe for a given target if more than one exists for the given name.
             </action>
