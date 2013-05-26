@@ -14,12 +14,20 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -31,6 +39,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public final class HtmlInput2Test extends WebDriverTestCase {
+    private static final String TEST_ID = "clickId";
 
     /**
      * @throws Exception if the test fails
@@ -68,5 +77,139 @@ public final class HtmlInput2Test extends WebDriverTestCase {
             + "  <input id='myInput'>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for the right event sequence when clicking.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "mousedown; onfocus; mouseup; onclick;", "" })
+    public void clickButtonEventSequence() throws Exception {
+        testClickEventSequence("<input type='button' id='" + TEST_ID + "'>Check", false);
+    }
+
+    /**
+     * Test for the right event sequence when clicking.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "mousedown; onfocus; mouseup; onclick;", "" })
+    public void clickImageEventSequence() throws Exception {
+        testClickEventSequence("<input type='image' id='" + TEST_ID + "'>Check", true);
+    }
+
+    /**
+     * Test for the right event sequence when clicking.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @BuggyWebDriver(Browser.IE)
+    @Alerts(DEFAULT = { "mousedown; onfocus; mouseup; onclick; onchange;", "" },
+            IE = { "mousedown; onfocus; mouseup; onclick;", "onchange;" })
+    public void clickCheckboxEventSequence() throws Exception {
+        testClickEventSequence("<input type='checkbox' id='" + TEST_ID + "'>Check", false);
+    }
+
+    /**
+     * Test for the right event sequence when clicking.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "mousedown; onfocus; mouseup; onclick;", "" })
+    public void clickPasswordEventSequence() throws Exception {
+        testClickEventSequence("<input type='password' id='" + TEST_ID + "'>Check", false);
+    }
+
+    /**
+     * Test for the right event sequence when clicking.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @BuggyWebDriver(Browser.IE)
+    @Alerts(DEFAULT = { "mousedown; onfocus; mouseup; onclick; onchange;", "" },
+            IE = { "mousedown; onfocus; mouseup; onclick;", "onchange;" })
+    public void clickRadioEventSequence() throws Exception {
+        testClickEventSequence("<input type='radio' name='test' id='" + TEST_ID + "'>Check", false);
+    }
+
+    /**
+     * Test for the right event sequence when clicking.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "mousedown; onfocus; mouseup; onclick;", "" })
+    public void clickResetEventSequence() throws Exception {
+        testClickEventSequence("<input type='reset' id='" + TEST_ID + "'>Check", true);
+    }
+
+    /**
+     * Test for the right event sequence when clicking.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({ "mousedown; onfocus; mouseup; onclick;", "" })
+    public void clickTextEventSequence() throws Exception {
+        testClickEventSequence("<input type='text' id='" + TEST_ID + "'>Check", false);
+    }
+
+    /**
+     * Test for the right event sequence when clicking.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @BuggyWebDriver
+//    @NotYetImplemented
+    @Alerts({ "mousedown; onfocus; mouseup; onchange; onclick;", "" })
+    public void clickOptionEventSequence() throws Exception {
+        testClickEventSequence("<select size='2'><option id='" + TEST_ID + "'>1</option></select>", false);
+    }
+
+    private void testClickEventSequence(final String input, final boolean onClickRetFalse) throws Exception {
+        final String events = " onmousedown=\"log('mousedown')\" onmouseup=\"log('mouseup')\" "
+                + "onfocus=\"log('onfocus')\" onchange=\"log('onchange')\" "
+                + "onclick=\"log('onclick')\"";
+        String tag = StringUtils.replaceOnce(input, ">", events + ">");
+        if (onClickRetFalse) {
+            tag = StringUtils.replaceOnce(tag, "onclick')", "onclick');return false;");
+        }
+
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  function log(x) {\n"
+                + "    document.getElementById('log_').value += x + '; ';\n"
+                + "  }\n"
+                + "</script>\n"
+
+                + "</head>\n<body>\n"
+                + "<form>\n"
+                + "  <textarea id='log_' rows='4' cols='50'></textarea>\n"
+                + tag + "\n"
+                + "  <input type='text' id='next'>\n"
+                + "</form>\n"
+
+                + "</body></html>";
+
+        final List<String> alerts = new LinkedList<String>();
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement log = driver.findElement(By.id("log_"));
+
+        driver.findElement(By.id(TEST_ID)).click();
+        alerts.add(log.getAttribute("value").trim());
+
+        log.clear();
+        driver.findElement(By.id("next")).click();
+
+        alerts.add(log.getAttribute("value").trim());
+        assertEquals(getExpectedAlerts(), alerts);
     }
 }
