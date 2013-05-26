@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLICK_CHECKBOX_TRIGGERS_NO_CHANGE_EVENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
@@ -387,7 +388,9 @@ public class HTMLInputElement extends FormField {
         final boolean newState = domNode.isChecked();
 
         if (originalState != newState
-            && (domNode instanceof HtmlCheckBoxInput || domNode instanceof HtmlRadioButtonInput)) {
+            && (domNode instanceof HtmlRadioButtonInput
+                    || (domNode instanceof HtmlCheckBoxInput
+                            && !getBrowserVersion().hasFeature(JS_CLICK_CHECKBOX_TRIGGERS_NO_CHANGE_EVENT)))) {
             domNode.fireEvent(Event.TYPE_CHANGE);
         }
     }
