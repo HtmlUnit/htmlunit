@@ -538,13 +538,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(@WebBrowser(value = IE, minVersion = 7))
     HTMLABBREVIATED,
 
-    /** Supports basefont. */
-    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 3.6f) })
-    HTMLBASEFONT_SUPPORTED,
-
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden}. */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     HTMLBASEFONT_END_TAG_FORBIDDEN,
+
+    /** Supports basefont. */
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, maxVersion = 3.6f) })
+    HTMLBASEFONT_SUPPORTED,
 
     /** [object HTMLBGSoundElement]. */
     @BrowserFeature(@WebBrowser(IE))
@@ -768,6 +768,11 @@ public enum BrowserVersionFeatures {
     /** Indicates that the browser returns a dot if the char attribute is not defined. */
     @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
     JS_CHAR_UNDEFINED_DOT,
+
+    /** Indicates that the click method call does not trigger the onchange
+     * event handlers for checkboxes. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_CLICK_CHECKBOX_TRIGGERS_NO_CHANGE_EVENT,
 
     /** Indicates that the clientLeft and clientTop returning zero in all cases. */
     @BrowserFeature(@WebBrowser(IE))

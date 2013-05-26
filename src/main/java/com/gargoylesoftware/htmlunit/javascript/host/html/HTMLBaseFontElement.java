@@ -40,7 +40,8 @@ public class HTMLBaseFontElement extends HTMLElement {
      */
     @JsxGetter
     public String getColor() {
-        return getDomNodeOrDie().getAttribute("color");
+        final HtmlBaseFont base = (HtmlBaseFont) getDomNodeOrDie();
+        return base.getColorAttribute();
     }
 
     /**
@@ -58,7 +59,8 @@ public class HTMLBaseFontElement extends HTMLElement {
      */
     @JsxGetter
     public String getFace() {
-        return getDomNodeOrDie().getAttribute("face");
+        final HtmlBaseFont base = (HtmlBaseFont) getDomNodeOrDie();
+        return base.getFaceAttribute();
     }
 
     /**
@@ -76,7 +78,8 @@ public class HTMLBaseFontElement extends HTMLElement {
      */
     @JsxGetter
     public int getSize() {
-        return (int) Context.toNumber(getDomNodeOrDie().getAttribute("size"));
+        final HtmlBaseFont base = (HtmlBaseFont) getDomNodeOrDie();
+        return (int) Context.toNumber(base.getSizeAttribute());
     }
 
     /**

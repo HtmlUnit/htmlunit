@@ -42,9 +42,6 @@ public class HtmlBaseFont extends HtmlElement {
     HtmlBaseFont(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page, attributes);
-        if (ATTRIBUTE_NOT_DEFINED == getSizeAttribute()) {
-            setAttribute("size", "3");
-        }
     }
 
     /**
@@ -66,7 +63,11 @@ public class HtmlBaseFont extends HtmlElement {
      * @return the value of the attribute "size" or an empty string if that attribute isn't defined
      */
     public final String getSizeAttribute() {
-        return getAttribute("size");
+        final String size = getAttribute("size");
+        if (ATTRIBUTE_NOT_DEFINED == size) {
+            return "3";
+        }
+        return size;
     }
 
     /**

@@ -69,6 +69,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
         HtmlSmall.class, HtmlSpan.class, HtmlStrike.class, HtmlStrong.class, HtmlSubscript.class,
         HtmlSuperscript.class, HtmlTeletype.class, HtmlUnderlined.class, HtmlVariable.class, HtmlExample.class })
 public class HTMLSpanElement extends HTMLElement {
+    private boolean endTagForbidden_;
 
     /**
      * Sets the DOM node that corresponds to this JavaScript object.
@@ -79,6 +80,10 @@ public class HTMLSpanElement extends HTMLElement {
         super.setDomNode(domNode);
         final BrowserVersion browser = getBrowserVersion();
         if (!browser.hasFeature(GENERATED_90)) {
+            if ("basefont".equalsIgnoreCase(domNode.getLocalName())) {
+                endTagForbidden_ = true;
+            }
+
             return;
         }
 
@@ -161,5 +166,14 @@ public class HTMLSpanElement extends HTMLElement {
             return true;
         }
         return super.isLowerCaseInOuterHtml();
+    }
+
+    /**
+     * Returns whether the end tag is forbidden or not.
+     * @see <a href="http://www.w3.org/TR/html4/index/elements.html">HTML 4 specs</a>
+     * @return whether the end tag is forbidden or not
+     */
+    protected boolean isEndTagForbidden() {
+        return endTagForbidden_;
     }
 }
