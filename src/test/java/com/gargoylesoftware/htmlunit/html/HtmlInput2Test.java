@@ -167,7 +167,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      */
     @Test
     @BuggyWebDriver
-//    @NotYetImplemented
+    @NotYetImplemented
     @Alerts({ "mousedown; onfocus; mouseup; onchange; onclick;", "" })
     public void clickOptionEventSequence() throws Exception {
         testClickEventSequence("<select size='2'><option id='" + TEST_ID + "'>1</option></select>", false);
