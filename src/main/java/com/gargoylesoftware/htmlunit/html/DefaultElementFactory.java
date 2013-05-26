@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CANVAS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML5_TAGS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASEFONT_SUPPORTED;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -180,7 +181,12 @@ class DefaultElementFactory implements ElementFactory {
             element = new HtmlBase(namespaceURI, qualifiedName, page, attributeMap);
         }
         else if (tagName.equals(HtmlBaseFont.TAG_NAME)) {
-            element = new HtmlBaseFont(namespaceURI, qualifiedName, page, attributeMap);
+            if (page.getWebClient().getBrowserVersion().hasFeature(HTMLBASEFONT_SUPPORTED)) {
+                element = new HtmlBaseFont(namespaceURI, qualifiedName, page, attributeMap);
+            }
+            else {
+                element = new HtmlSpan(namespaceURI, qualifiedName, page, attributeMap);
+            }
         }
         else if (tagName.equals(HtmlBidirectionalOverride.TAG_NAME)) {
             element = new HtmlBidirectionalOverride(namespaceURI, qualifiedName, page, attributeMap);

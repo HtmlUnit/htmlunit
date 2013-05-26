@@ -9,6 +9,9 @@
     <body>
         <release version="2.13" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Basefont support removed from Firefox after 3.6.
+            </action>
+            <action type="fix" dev="rbri">
                 Adjust the window.outherHeight for the newer FF versions.
             </action>
             <action type="fix" dev="rbri" issue="1488">
