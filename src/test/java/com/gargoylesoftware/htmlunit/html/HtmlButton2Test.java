@@ -21,6 +21,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -64,17 +66,15 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "-undefined", "-", "-" },
-            IE = { "OK-undefined", "-", "-" })
+    @Alerts(DEFAULT = { "-undefined", "-undefined", "-" })
     public void defaultValues() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var input = document.getElementById('button1');\n"
             + "    alert(input.value + '-' + input.defaultValue);\n"
 
-            + "    input = document.createElement('input');\n"
-            + "    input.type = 'button';\n"
+            + "    input = document.createElement('button');\n"
             + "    alert(input.value + '-' + input.defaultValue);\n"
 
             + "    var builder = document.createElement('div');\n"
@@ -98,7 +98,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts({ "-undefined", "-", "-" })
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var input = document.getElementById('button1');\n"
@@ -131,11 +131,9 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
-                "newValue-newDefault", "newValue-newDefault" },
-            IE = { "OK-undefined", "OK-undefined", "newValue-undefined", "newValue-undefined",
                 "newValue-newDefault", "newValue-newDefault" })
     public void resetByClick() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var button = document.getElementById('testId');\n"
@@ -172,11 +170,9 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = { "initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
-                "newValue-newDefault", "newValue-newDefault" },
-            IE = { "OK-undefined", "OK-undefined", "newValue-undefined", "newValue-undefined",
                 "newValue-newDefault", "newValue-newDefault" })
     public void resetByJS() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var button = document.getElementById('testId');\n"
@@ -211,10 +207,9 @@ public class HtmlButton2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = { "initial-undefined", "initial-default", "newValue-default", "newValue-newDefault" },
-            IE8 = { "OK-undefined", "OK-default", "newValue-default", "newValue-newDefault" })
+    @Alerts(DEFAULT = { "initial-undefined", "initial-default", "newValue-default", "newValue-newDefault" })
     public void defaultValue() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var button = document.getElementById('testId');\n"
@@ -227,6 +222,94 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "    alert(button.value + '-' + button.defaultValue);\n"
             + "    button.defaultValue = 'newDefault';\n"
             + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <button id='testId' value='initial'>OK</button>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "initial-OK", "newValue-OK", "newValue-OK" })
+    public void innerHtml() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var button = document.getElementById('testId');\n"
+            + "    alert(button.value + '-' + button.innerHTML);\n"
+
+            + "    button.value = 'newValue';\n"
+            + "    alert(button.value + '-' + button.innerHTML);\n"
+
+            + "    button.innerHtml = 'Cancel';\n"
+            + "    alert(button.value + '-' + button.innerHTML);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <button id='testId' value='initial'>OK</button>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "initial-undefined", "newValue-undefined", "newValue-Cancel" },
+            IE8 = { "initial-OK", "newValue-OK", "newValue-Cancel" })
+    public void innerText() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var button = document.getElementById('testId');\n"
+            + "    alert(button.value + '-' + button.innerText);\n"
+
+            + "    button.value = 'newValue';\n"
+            + "    alert(button.value + '-' + button.innerText);\n"
+
+            + "    button.innerText = 'Cancel';\n"
+            + "    alert(button.value + '-' + button.innerText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <button id='testId' value='initial'>OK</button>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented(Browser.IE8)
+    @Alerts(DEFAULT = { "initial-initial-OK", "newValue-newValue-OK", "newValue-newValue-OK" },
+            IE8 = { "initial-initial-OK", "newValue--OK", "newValue--OK" })
+    public void valueAttributeNode() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var button = document.getElementById('testId');\n"
+            + "    var attr = button.getAttributeNode('value');\n"
+            + "    alert(attr.value + '-' + button.value + '-' + button.innerHTML);\n"
+
+            + "    attr.value = 'newValue';\n"
+            + "    alert(attr.value + '-' + button.value + '-' + button.innerHTML);\n"
+
+            + "    button.innerHtml = 'Cancel';\n"
+            + "    alert(attr.value + '-' + button.value + '-' + button.innerHTML);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"

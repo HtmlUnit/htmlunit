@@ -753,7 +753,7 @@ public enum BrowserVersionFeatures {
     JS_BUTTON_SET_TYPE_THROWS_EXCEPTION,
 
     /** IE uses the content of a button tag as value instead of the attribute. */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
     JS_BUTTON_USE_CONTENT_AS_VALUE,
 
     /** Indicates that the browser emulates the char attribute. */
