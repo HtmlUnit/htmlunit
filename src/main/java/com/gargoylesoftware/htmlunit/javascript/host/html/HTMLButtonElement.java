@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_44;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BUTTON_SET_TYPE_THROWS_EXCEPTION;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BUTTON_USE_CONTENT_AS_VALUE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 
 import java.io.IOException;
@@ -36,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FormField;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClasses = HtmlButton.class)
 public class HTMLButtonElement extends FormField {
@@ -48,7 +50,7 @@ public class HTMLButtonElement extends FormField {
      */
     @JsxSetter
     public void setType(final String newType) {
-        if (getBrowserVersion().hasFeature(GENERATED_44)) {
+        if (getBrowserVersion().hasFeature(JS_BUTTON_SET_TYPE_THROWS_EXCEPTION)) {
             throw Context.reportRuntimeError("Object doesn't support this action");
         }
         getDomNodeOrDie().setAttribute("type", newType);
@@ -61,6 +63,30 @@ public class HTMLButtonElement extends FormField {
     @JsxGetter
     public String getType() {
         return ((HtmlButton) getDomNodeOrDie()).getTypeAttribute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter
+    public String getValue() {
+        if (getBrowserVersion().hasFeature(JS_BUTTON_USE_CONTENT_AS_VALUE)) {
+            return getText();
+        }
+        return super.getValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter
+    public void setValue(final String newValue) {
+        if (getBrowserVersion().hasFeature(JS_BUTTON_USE_CONTENT_AS_VALUE)) {
+            setInnerText(newValue);
+        }
+        super.setValue(newValue);
     }
 
     /**

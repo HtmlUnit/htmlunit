@@ -49,10 +49,12 @@ public class HtmlIsIndex2Test extends WebDriverTestCase {
             + "    alert(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form id='form1' method='post'>\n"
-            + "<isindex id='myId' prompt='enterSomeText'></isindex>\n"
-            + "</form></body></html>";
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form id='form1' method='post'>\n"
+            + "    <isindex id='myId' prompt='enterSomeText'></isindex>\n"
+            + "  </form>\n"
+            + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {

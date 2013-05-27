@@ -21,8 +21,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -68,7 +66,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "-undefined", "-", "-" },
             IE = { "OK-undefined", "-", "-" })
-    @NotYetImplemented(Browser.IE)
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -137,7 +134,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
                 "newValue-newDefault", "newValue-newDefault" },
             IE = { "OK-undefined", "OK-undefined", "newValue-undefined", "newValue-undefined",
                 "newValue-newDefault", "newValue-newDefault" })
-    @NotYetImplemented(Browser.IE)
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -179,7 +175,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
                 "newValue-newDefault", "newValue-newDefault" },
             IE = { "OK-undefined", "OK-undefined", "newValue-undefined", "newValue-undefined",
                 "newValue-newDefault", "newValue-newDefault" })
-    @NotYetImplemented(Browser.IE)
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -218,7 +213,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = { "initial-undefined", "initial-default", "newValue-default", "newValue-newDefault" },
             IE8 = { "OK-undefined", "OK-default", "newValue-default", "newValue-newDefault" })
-    @NotYetImplemented(Browser.IE)
     public void defaultValue() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

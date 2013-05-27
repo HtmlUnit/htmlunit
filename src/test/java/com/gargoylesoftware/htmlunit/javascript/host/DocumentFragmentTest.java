@@ -48,16 +48,16 @@ public class DocumentFragmentTest extends WebDriverTestCase {
             IE = "exception")
     public void getComputedStyleOnChild() throws Exception {
         final String html = "<html><head><style>\n"
-            + "body > div { background-color: green#FF0000; }\n"
+            + "  body > div { background-color: green#FF0000; }\n"
             + "</style></head>\n"
             + "<body>\n"
             + "<script>\n"
-            + "try {\n"
-            + "  var frag = document.createDocumentFragment();\n"
-            + "  var d = document.createElement('div');\n"
-            + "  frag.appendChild(d);\n"
-            + "  alert(window.getComputedStyle(d, null));\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "  try {\n"
+            + "    var frag = document.createDocumentFragment();\n"
+            + "    var d = document.createElement('div');\n"
+            + "    frag.appendChild(d);\n"
+            + "    alert(window.getComputedStyle(d, null));\n"
+            + "  } catch (e) { alert('exception'); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";

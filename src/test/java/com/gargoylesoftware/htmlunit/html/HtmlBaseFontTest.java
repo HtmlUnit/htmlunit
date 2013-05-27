@@ -34,7 +34,9 @@ public class HtmlBaseFontTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = "[object HTMLBaseFontElement]", IE = "[object]")
+    @Alerts(DEFAULT = "[object HTMLSpanElement]",
+            FF3_6 = "[object HTMLBaseFontElement]",
+            IE = "[object]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -47,6 +49,8 @@ public class HtmlBaseFontTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(HtmlBaseFont.class.isInstance(page.getHtmlElementById("myId")));
+        if (getBrowserVersion().isIE()) {
+            assertTrue(HtmlBaseFont.class.isInstance(page.getHtmlElementById("myId")));
+        }
     }
 }

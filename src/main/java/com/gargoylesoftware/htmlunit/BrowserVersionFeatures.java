@@ -384,10 +384,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isIE(). */
     @BrowserFeature(@WebBrowser(IE))
-    GENERATED_44,
-
-    /** Was originally .isIE(). */
-    @BrowserFeature(@WebBrowser(IE))
     GENERATED_45,
 
     /** Was originally .isIE(). */
@@ -751,6 +747,14 @@ public enum BrowserVersionFeatures {
     /** Indicates that the getBoundingClientRect adds an offset of 2. */
     @BrowserFeature(@WebBrowser(IE))
     JS_BOUNDING_CLIENT_RECT_OFFSET_TWO,
+
+    /** Trying to change the type of a button element throws an exception (IE). */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_BUTTON_SET_TYPE_THROWS_EXCEPTION,
+
+    /** IE uses the content of a button tag as value instead of the attribute. */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_BUTTON_USE_CONTENT_AS_VALUE,
 
     /** Indicates that the browser emulates the char attribute. */
     @BrowserFeature(@WebBrowser(IE))
