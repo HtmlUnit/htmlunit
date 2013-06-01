@@ -1105,27 +1105,41 @@ public enum BrowserVersionFeatures {
     /** Getting the property cols returns 20, if the defined value is not convertible into an integer (IE).
      * FF returns -1 in this case.
      */
-    @BrowserFeature(@WebBrowser(IE))
-    JS_TEXT_AREA_COLS_RETURNS_20,
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
+    JS_TEXT_AREA_COLS_RETURNS_MINUS1,
 
     /** Getting the property rows returns 2, if the defined value is not convertible into an integer (IE).
      * FF returns -1 in this case.
      */
+    @BrowserFeature(@WebBrowser(value = FF, maxVersion = 3.6f))
+    JS_TEXT_AREA_ROWS_RETURNS_MINUS1,
+
+    /** Setting the property cols throws an exception, if the provided value is less
+     * than 0 (IE).
+     * FF ignores the provided value in this case.
+     */
     @BrowserFeature(@WebBrowser(IE))
-    JS_TEXT_AREA_ROWS_RETURNS_2,
+    JS_TEXT_AREA_SET_COLS_NEGATIVE_THROWS_EXCEPTION,
 
     /** Setting the property cols throws an exception, if the provided value is not
      * convertible into an integer (IE).
      * FF ignores the provided value in this case and sets cols to 0.
      */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
+
+    /** Setting the property rows throws an exception, if the provided value is less
+     * than 0 (IE).
+     * FF ignores the provided value in this case.
+     */
+    @BrowserFeature(@WebBrowser(IE))
+    JS_TEXT_AREA_SET_ROWS_NEGATIVE_THROWS_EXCEPTION,
 
     /** Setting the property rows throws an exception, if the provided value is not
      * convertible into an integer (IE).
      * FF ignores the provided value in this case and sets rows to 0.
      */
-    @BrowserFeature(@WebBrowser(IE))
+    @BrowserFeature({ @WebBrowser(IE), @WebBrowser(value = FF, minVersion = 10) })
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
 
     /** It looks likes TreeWalker.expandEntityReferences is always <code>false</code> for FF17.
