@@ -25,6 +25,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -44,8 +45,9 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("SELECT;")
+    @BuggyWebDriver(Browser.IE)
     //TODO: WebDriver tests passes even with HtmlUnit direct usage fails!
-    public void click() throws Exception {
+    public void clickSelect() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
                 + "  function log(x) {\n"
@@ -73,7 +75,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                 + "<body onload='init()'>\n"
                 + "<form>\n"
                 + "  <textarea id='log_' rows='4' cols='50'></textarea>\n"
-                + "  <select id='s'>\n"
+                + "  <select id='s' size='7'>\n"
                 + "    <option value='opt-a'>A</option>\n"
                 + "    <option id='opt-b' value='b'>B</option>\n"
                 + "    <option value='opt-c'>C</option>\n"
@@ -151,10 +153,50 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented
-    @BuggyWebDriver
+    @BuggyWebDriver(Browser.FF)
     @Alerts(DEFAULT = "onchange-select; onclick-option; onclick-select;",
             IE = "onchange-select; onclick-select;")
-    public void clickOptionEventSequence() throws Exception {
+    public void clickOptionEventSequence1() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  function log(x) {\n"
+                + "    document.getElementById('log_').value += x + '; ';\n"
+                + "  }\n"
+                + "</script></head>\n"
+
+                + "<body onload='init()'>\n"
+                + "<form>\n"
+                + "  <textarea id='log_' rows='4' cols='50'></textarea>\n"
+                + "  <select id='s' size='2' onclick=\"log('onclick-select')\""
+                        + " onchange=\"log('onchange-select')\">\n"
+                + "    <option id='clickId' value='a' onclick=\"log('onclick-option')\""
+                        + " onchange=\"log('onchange-option')\">A</option>\n"
+                + "  </select>\n"
+                + "</form>\n"
+
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        driver.findElement(By.id("clickId")).click();
+
+        final List<String> alerts = new LinkedList<String>();
+        final WebElement log = driver.findElement(By.id("log_"));
+        alerts.add(log.getAttribute("value").trim());
+        assertEquals(getExpectedAlerts(), alerts);
+    }
+
+    /**
+     * Test for the right event sequence when clicking.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @BuggyWebDriver(Browser.FF)
+    @Alerts(DEFAULT = "change-SELECT; click-OPTION; click-OPTION;",
+            IE = "change-SELECT; click-SELECT;")
+    public void clickOptionEventSequence2() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function log(x) {\n"
@@ -163,10 +205,79 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
 
                 + "  function init() {\n"
                 + "    var s = document.getElementById('s');\n"
+                + "    var o = document.getElementById('clickId');\n"
                 + "    if (s.addEventListener) {\n"
                 + "      s.addEventListener('click', handle, false);\n"
+                + "      s.addEventListener('change', handle, false);\n"
+                + "      o.addEventListener('click', handle, false);\n"
+                + "      o.addEventListener('change', handle, false);\n"
                 + "    } else if (s.attachEvent) {\n"
                 + "      s.attachEvent('onclick', handle);\n"
+                + "      s.attachEvent('onchange', handle);\n"
+                + "      o.attachEvent('onclick', handle);\n"
+                + "      o.attachEvent('onchange', handle);\n"
+                + "    }\n"
+                + "  }\n"
+
+                + "  function handle(event) {\n"
+                + "    if (event.target) {\n"
+                + "      log(event.type + '-' + event.target.nodeName);\n"
+                + "    } else {\n"
+                + "      log(event.type + '-' + event.srcElement.nodeName);\n"
+                + "    }\n"
+                + "  }\n"
+                + "</script></head>\n"
+
+                + "<body onload='init()'>\n"
+                + "<form>\n"
+                + "  <textarea id='log_' rows='4' cols='50'></textarea>\n"
+                + "  <select id='s' size='2' >\n"
+                + "    <option id='clickId' value='a' >A</option>\n"
+                + "  </select>\n"
+                + "</form>\n"
+
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        driver.findElement(By.id("clickId")).click();
+
+        final List<String> alerts = new LinkedList<String>();
+        final WebElement log = driver.findElement(By.id("log_"));
+        alerts.add(log.getAttribute("value").trim());
+        assertEquals(getExpectedAlerts(), alerts);
+    }
+
+    /**
+     * Test for the right event sequence when clicking.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented
+    @BuggyWebDriver(Browser.FF)
+    @Alerts(DEFAULT = "onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;",
+            IE = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
+    public void clickOptionEventSequence3() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  function log(x) {\n"
+                + "    document.getElementById('log_').value += x + '; ';\n"
+                + "  }\n"
+
+                + "  function init() {\n"
+                + "    var s = document.getElementById('s');\n"
+                + "    var o = document.getElementById('clickId');\n"
+                + "    if (s.addEventListener) {\n"
+                + "      s.addEventListener('click', handle, false);\n"
+                + "      s.addEventListener('change', handle, false);\n"
+                + "      o.addEventListener('click', handle, false);\n"
+                + "      o.addEventListener('change', handle, false);\n"
+                + "    } else if (s.attachEvent) {\n"
+                + "      s.attachEvent('onclick', handle);\n"
+                + "      s.attachEvent('onchange', handle);\n"
+                + "      o.attachEvent('onclick', handle);\n"
+                + "      o.attachEvent('onchange', handle);\n"
                 + "    }\n"
                 + "  }\n"
 
