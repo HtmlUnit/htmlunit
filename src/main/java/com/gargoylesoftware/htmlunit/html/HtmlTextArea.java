@@ -127,7 +127,6 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @param newValue the new value
      */
     public final void setText(final String newValue) {
-        initDefaultValue();
         setTextInternal(newValue);
 
         HtmlInput.executeOnChangeHandlerIfAppropriate(this);
