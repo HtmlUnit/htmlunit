@@ -278,19 +278,22 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Alerts(IE = { " foo \r\n bar ", " foo \r\n bar " },
             FF = { " foo \n bar ", " foo \n bar " })
     public void defaultValue() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    var t = document.getElementById('textArea');\n"
-            + "    alert(t.defaultValue);\n"
-            + "    alert(t.value);\n"
-            + "  }\n"
-            + "</script>\n"
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var t = document.getElementById('textArea');\n"
+            + "      alert(t.defaultValue);\n"
+            + "      alert(t.value);\n"
+            + "    }\n"
+            + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "<form id='form1'>\n"
-            + "<textarea id='textArea'>\n foo \n bar </textarea>\n"
-            + "</form></body></html>";
+            + "  <form id='form1'>\n"
+            + "    <textarea id='textArea'>\n foo \n bar </textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
@@ -302,8 +305,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Alerts({ "true", "false" })
     public void readOnly() throws Exception {
         final String html
-            = "<html><head>\n"
-            + "<script>\n"
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "  <script>\n"
             + "  function test() {\n"
             + "    var t = document.getElementById('textArea');\n"
             + "    alert(t.readOnly);\n"
@@ -313,9 +317,10 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "<form id='form1'>\n"
-            + "<textarea id='textArea' readonly>\n foo \n bar </textarea>\n"
-            + "</form></body></html>";
+            + "  <form id='form1'>\n"
+            + "    <textarea id='textArea' readonly>\n foo \n bar </textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
@@ -327,23 +332,36 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Alerts({ "", "A", "a", "A", "a8", "8Afoo", "8", "@" })
     public void accessKey() throws Exception {
         final String html
-            = "<html><body><textarea id='a1'>a1</textarea><textarea id='a2' accesskey='A'>a2</textarea><script>\n"
-            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
-            + "a1.accessKey = 'a';\n"
-            + "a2.accessKey = 'A';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
-            + "a1.accessKey = 'a8';\n"
-            + "a2.accessKey = '8Afoo';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
-            + "a1.accessKey = '8';\n"
-            + "a2.accessKey = '@';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
-            + "</script></body></html>";
+            = "<html>\n"
+            + "<head><title>foo</title></head>\n"
+            + "<body>\n"
+            + "  <textarea id='a1'>a1</textarea>\n"
+            + "  <textarea id='a2' accesskey='A'>a2</textarea>\n"
+
+            + "  <script>\n"
+            + "    var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+            + "    alert(a1.accessKey);\n"
+            + "    alert(a2.accessKey);\n"
+
+            + "    a1.accessKey = 'a';\n"
+            + "    alert(a1.accessKey);\n"
+
+            + "    a1.accessKey = 'A';\n"
+            + "    alert(a1.accessKey);\n"
+
+            + "    a1.accessKey = 'a8';\n"
+            + "    alert(a1.accessKey);\n"
+
+            + "    a1.accessKey = '8Afoo';\n"
+            + "    alert(a1.accessKey);\n"
+
+            + "    a1.accessKey = '8';\n"
+            + "    alert(a1.accessKey);\n"
+
+            + "    a1.accessKey = '@';\n"
+            + "    alert(a1.accessKey);\n"
+            + "  </script>\n"
+            + "</body></html>";
         loadPageWithAlerts2(html);
     }
 
