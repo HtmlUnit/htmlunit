@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Bruce Faulkner
  * @author Ahmed Ashour
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLSelectElementTest extends WebDriverTestCase {
@@ -1162,6 +1163,31 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(IE = { "two", "" }, FF = { "two", "two" })
+    public void valueNull() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var select = document.getElementById('mySelect');\n"
+            + "    alert(select.value);\n"
+            + "    select.value = null;\n"
+            + "    alert(select.value);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='mySelect'>\n"
+            + "    <option>One</option>\n"
+            + "    <option selected value='two'>Two</option>\n"
+            + "  </select>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({ "One", "Two", "One" })
     public void valueAfterReset() throws Exception {
         final String html =
@@ -1188,5 +1214,4 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
-
 }

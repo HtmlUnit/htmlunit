@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF17;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
@@ -839,26 +840,104 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     public void accessKey() throws Exception {
         final String html
             = "<html><body>\n"
-            + "<input id='a1'>\n"
-            + "<input id='a2' accesskey='A'>\n"
-            + "<script>\n"
-            + "var a1 = document.getElementById('a1');\n"
-            + "var a2 = document.getElementById('a2');\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
-            + "a1.accessKey = 'a';\n"
-            + "a2.accessKey = 'A';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
-            + "a1.accessKey = 'a8';\n"
-            + "a2.accessKey = '8Afoo';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
-            + "a1.accessKey = '8';\n"
-            + "a2.accessKey = '@';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "  <input id='a1'>\n"
+            + "  <input id='a2' accesskey='A'>\n"
+            + "  <script>\n"
+            + "    var a1 = document.getElementById('a1');\n"
+            + "    var a2 = document.getElementById('a2');\n"
+            + "    alert(a1.accessKey);\n"
+            + "    alert(a2.accessKey);\n"
+
+            + "    a1.accessKey = 'a';\n"
+            + "    alert(a1.accessKey);\n"
+
+            + "    a1.accessKey = 'A';\n"
+            + "    alert(a1.accessKey);\n"
+
+            + "    a1.accessKey = 'a8';\n"
+            + "    alert(a1.accessKey);\n"
+
+            + "    a1.accessKey = '8Afoo';\n"
+            + "    alert(a1.accessKey);\n"
+
+            + "    a1.accessKey = '8';\n"
+            + "    alert(a1.accessKey);\n"
+
+            + "    a1.accessKey = '@';\n"
+            + "    alert(a1.accessKey);\n"
             + "</script></body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "test", "4", "42", "2", "[object HTMLInputElement]", "25" },
+            IE = { "test", "4", "42", "2", "[object]", "8" })
+    public void getAttributeAndSetValue() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head><title>foo</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var t = document.getElementById('t');\n"
+            + "        t.value = 'test';\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+
+            + "        t.value = 42;\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+
+            + "        t.value = document.getElementById('t');\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <input id='t'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "4", "", "0" },
+            IE = { "null", "4", "null", "4" })
+    @NotYetImplemented(FF)
+    public void getAttributeAndSetValueNull() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head><title>foo</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var t = document.getElementById('t');\n"
+            + "        t.value = 'null';\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+
+            + "        t.value = null;\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <input id='t'>\n"
+            + "  </body>\n"
+            + "</html>";
+
         loadPageWithAlerts2(html);
     }
 }

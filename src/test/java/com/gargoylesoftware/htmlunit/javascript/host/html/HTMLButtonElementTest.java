@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -27,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLButtonElementTest extends WebDriverTestCase {
@@ -82,4 +86,47 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "4", "", "0", "42", "2", "[object HTMLButtonElement]", "26" },
+            IE = { "null", "4", "null", "4", "42", "2", "[object]", "8" })
+    @NotYetImplemented(FF)
+    public void getAttributeAndSetValue() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head><title>foo</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var t = document.getElementById('t');\n"
+            + "        t.value = 'null';\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+
+            + "        t.value = null;\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+
+            + "        t.value = 42;\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+
+            + "        t.value = document.getElementById('t');\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <button id='t'>abc</button>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

@@ -501,8 +501,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = { "null", "4", "null", "4" }, FF = { "null", "4", "", "0" })
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = { "test", "4", "42", "2", "[object HTMLTextAreaElement]", "28" },
+            IE = { "test", "4", "42", "2", "[object]", "8" })
     public void getAttributeAndSetValue() throws Exception {
         final String html =
             "<html>\n"
@@ -510,12 +510,17 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "    <script>\n"
             + "      function test() {\n"
             + "        var t = document.getElementById('t');\n"
-            + "        t.value = 'null';\n"
+            + "        t.value = 'test';\n"
             + "        alert(t.value);\n"
             + "        if (t.value != null)\n"
             + "          alert(t.value.length);\n"
-            + "\n"
-            + "        t.value = null;\n"
+
+            + "        t.value = 42;\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+
+            + "        t.value = document.getElementById('t');\n"
             + "        alert(t.value);\n"
             + "        if (t.value != null)\n"
             + "          alert(t.value.length);\n"
@@ -530,4 +535,37 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "4", "", "0" },
+            IE = { "null", "4", "null", "4" })
+    @NotYetImplemented(FF)
+    public void getAttributeAndSetValueNull() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head><title>foo</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var t = document.getElementById('t');\n"
+            + "        t.value = 'null';\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+
+            + "        t.value = null;\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <textarea id='t'>abc</textarea>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
