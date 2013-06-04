@@ -65,6 +65,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cyberneko.html.HTMLElements;
@@ -678,8 +679,10 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         name = fixAttributeName(name);
         getDomNodeOrDie().setAttribute(name, value);
 
-        //FF: call corresponding event handler set_onxxx if found
-        if (getBrowserVersion().hasFeature(JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS) && !name.isEmpty()) {
+        // FF: call corresponding event handler setOnxxx if found
+        if (getBrowserVersion().hasFeature(JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS)
+                && !name.isEmpty()
+                && StringUtils.startsWithIgnoreCase(name, "on")) {
             try {
                 name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
                 final Method method = getClass().getMethod("set" + name, new Class[] {Object.class});
