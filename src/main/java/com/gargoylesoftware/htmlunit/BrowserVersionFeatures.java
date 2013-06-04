@@ -332,10 +332,6 @@ public enum BrowserVersionFeatures {
 
     /** Was originally .isFirefox(). */
     @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
-    GENERATED_167,
-
-    /** Was originally .isFirefox(). */
-    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
     GENERATED_169,
 
     /** Was originally .isFirefox(). */
@@ -1091,6 +1087,11 @@ public enum BrowserVersionFeatures {
      * empty attr for 'class' (IE6/7) as a normal one. */
     @BrowserFeature(@WebBrowser(value = IE, maxVersion = 7))
     JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL,
+
+    /** Indicates that the set attribute method is able to update the event handlers also.
+     * e.g. element.setAttribute("onclick", "test(1);"); */
+    @BrowserFeature({ @WebBrowser(FF), @WebBrowser(CHROME) })
+    JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS,
 
     /** IE supports accessing unsupported style elements via getter
      * like val = elem.style.htmlunit;.
