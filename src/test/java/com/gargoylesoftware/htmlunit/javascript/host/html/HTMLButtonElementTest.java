@@ -90,10 +90,48 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "null", "4", "", "0", "42", "2", "[object HTMLButtonElement]", "26" },
-            IE = { "null", "4", "null", "4", "42", "2", "[object]", "8" })
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = { "test", "4", "42", "2", "[object HTMLButtonElement]", "26" },
+            IE = { "test", "4", "42", "2", "[object]", "8" })
     public void getAttributeAndSetValue() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head><title>foo</title>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var t = document.getElementById('t');\n"
+            + "        t.value = 'test';\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+
+            + "        t.value = 42;\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+
+            + "        t.value = document.getElementById('t');\n"
+            + "        alert(t.value);\n"
+            + "        if (t.value != null)\n"
+            + "          alert(t.value.length);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <button id='t'>abc</button>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "4", "", "0" },
+            IE = { "null", "4", "null", "4" })
+    @NotYetImplemented(FF)
+    public void getAttributeAndSetValueNull() throws Exception {
         final String html =
             "<html>\n"
             + "  <head><title>foo</title>\n"
@@ -106,16 +144,6 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "          alert(t.value.length);\n"
 
             + "        t.value = null;\n"
-            + "        alert(t.value);\n"
-            + "        if (t.value != null)\n"
-            + "          alert(t.value.length);\n"
-
-            + "        t.value = 42;\n"
-            + "        alert(t.value);\n"
-            + "        if (t.value != null)\n"
-            + "          alert(t.value.length);\n"
-
-            + "        t.value = document.getElementById('t');\n"
             + "        alert(t.value);\n"
             + "        if (t.value != null)\n"
             + "          alert(t.value.length);\n"
