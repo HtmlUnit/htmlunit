@@ -34,10 +34,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
-import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 /**
  * Tests for {@link HTMLElement}.
@@ -523,47 +520,6 @@ public class HTMLElement3Test extends SimpleWebTestCase {
         clientHashAnchor.click();
 
         assertEquals(expectedAlerts, clientCollectedAlertsHandler.getCollectedAlerts());
-    }
-
-    /**
-     * Tests setAttribute() with name of event handler.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void setAttribute_eventHandler() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    var text = document.getElementById('login');\n"
-            + "    var password = document.getElementById('password');\n"
-            + "    text.setAttribute('onfocus', \"alert('onfocus1');\");\n"
-            + "    text.setAttribute('onblur', \"alert('onblur1');\");\n"
-            + "    password.setAttribute('onfocus', \"alert('onfocus2');\");\n"
-            + "    password.setAttribute('onblur', \"alert('onblur2');\");\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "  <form>\n"
-            + "    <input type='text' id='login' name='login'>\n"
-            + "    <input type='password' id='password' name='password'>\n"
-            + "  </form>\n"
-            + "</body></html>";
-
-        final List<String> collectedAlerts = new ArrayList<String>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
-        final HtmlForm form = page.getForms().get(0);
-        final HtmlTextInput inputLogin = form.getInputByName("login");
-        final HtmlPasswordInput inputPassword = form.getInputByName("password");
-
-        inputLogin.focus();
-        inputPassword.focus();
-
-        final int expectedAlertNumber;
-        if (getBrowserVersion().isIE()) {
-            expectedAlertNumber = 0;
-        }
-        else {
-            expectedAlertNumber = 3;
-        }
-        assertEquals(expectedAlertNumber, collectedAlerts.size());
     }
 
     /**

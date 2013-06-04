@@ -22,6 +22,7 @@ import java.net.URL;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By.ById;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -323,6 +324,41 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         final WebDriver webDriver = loadPageWithAlerts2(html);
         assertEquals("test", webDriver.getTitle());
+    }
+
+    /**
+     * Tests setAttribute() with name of event handler.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "onfocus1", "onclick1", "onblur1", "onfocus2" },
+            IE = { })
+    public void setAttribute_eventHandler() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('login');\n"
+            + "    var password = document.getElementById('password');\n"
+
+            + "    text.setAttribute('onclick', \"alert('onclick1');\");\n"
+            + "    text.setAttribute('onFocus', \"alert('onfocus1');\");\n"
+            + "    text.setAttribute('ONBLUR', \"alert('onblur1');\");\n"
+
+            + "    password.setAttribute('onfocus', \"alert('onfocus2');\");\n"
+            + "    password.setAttribute('onblur', \"alert('onblur2');\");\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input type='text' id='login' name='login'>\n"
+            + "    <input type='password' id='password' name='password'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+
+        webDriver.findElement(new ById("login")).click();
+        webDriver.findElement(new ById("password")).click();
+
+        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
     }
 
     /**
