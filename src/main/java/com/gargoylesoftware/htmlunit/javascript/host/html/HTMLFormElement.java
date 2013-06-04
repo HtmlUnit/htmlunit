@@ -474,10 +474,11 @@ public class HTMLFormElement extends HTMLElement implements Function {
 
     @Override
     public boolean dispatchEvent(final Event event) {
+        final boolean result = super.dispatchEvent(event);
+
         if (event.getType().equals(Event.TYPE_SUBMIT)) {
             submit();
-            return true;
         }
-        return super.dispatchEvent(event);
+        return result;
     }
 }

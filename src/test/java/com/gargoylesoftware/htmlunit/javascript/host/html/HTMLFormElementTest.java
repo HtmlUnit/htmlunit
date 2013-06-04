@@ -1109,4 +1109,33 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "in listener", "page2 loaded" }, IE = "exception")
+    public void dispatchEventSubmitTriggersHandlers() throws Exception {
+        // use an iframe to capture alerts among 2 pages
+        final String container = "<html><body><iframe src='page1'></iframe></body></html>\n";
+        final String page1 = "<html><body>\n"
+            + "<form action='page2' id='theForm'><span id='foo'/></form>\n"
+            + "<script>\n"
+            + "function listener(e) {\n"
+            + "  alert('in listener');\n"
+            + "}\n"
+            + "try {\n"
+            + "  document.forms[0].addEventListener('submit', listener, true);\n"
+            + "  var e = document.createEvent('HTMLEvents');\n"
+            + "  e.initEvent('submit', true, false);\n"
+            + "  document.getElementById('theForm').dispatchEvent(e);\n"
+            + "} catch(e) { alert('exception'); }\n"
+            + "</script></body></html>";
+
+        final String page2 = "<html><body><script>alert('page2 loaded');</script></body></html>";
+
+        getMockWebConnection().setResponse(new URL(getDefaultUrl() + "page1"), page1);
+        getMockWebConnection().setResponse(new URL(getDefaultUrl() + "page2"), page2);
+        loadPageWithAlerts2(container);
+    }
 }
