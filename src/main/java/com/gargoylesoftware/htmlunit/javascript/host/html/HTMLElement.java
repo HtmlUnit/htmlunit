@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_65;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_70;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_71;
@@ -37,6 +36,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_THROWS_NOT_ATTACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_CONSIDERS_ATTR_FOR_CLASS_AS_REAL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -65,7 +65,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.cyberneko.html.HTMLElements;
@@ -143,6 +142,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 @JsxClass(domClasses = HtmlElement.class)
 public class HTMLElement extends Element implements ScriptableWithFallbackGetter {
 
+    private static final Class<?>[] METHOD_PARAMS_OBJECT = new Class[] {Object.class};
     private static final Pattern PERCENT_VALUE = Pattern.compile("\\d+%");
     /* http://msdn.microsoft.com/en-us/library/ie/aa358802.aspx */
     private static final Map<String, String> COLORS_MAP_IE = new HashMap<String, String>();
@@ -680,24 +680,25 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         getDomNodeOrDie().setAttribute(name, value);
 
         // FF: call corresponding event handler setOnxxx if found
-        if (getBrowserVersion().hasFeature(JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS)
-                && !name.isEmpty()
-                && StringUtils.startsWithIgnoreCase(name, "on")) {
-            try {
-                name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
-                final Method method = getClass().getMethod("set" + name, new Class[] {Object.class});
-                final String source = "function(){" + value + "}";
-                method.invoke(this, new Object[] {
-                        Context.getCurrentContext().compileFunction(getWindow(), source, "", 0, null)});
-            }
-            catch (final NoSuchMethodException e) {
-                //silently ignore
-            }
-            catch (final IllegalAccessException e) {
-                //silently ignore
-            }
-            catch (final InvocationTargetException e) {
-                throw new RuntimeException(e.getCause());
+        if (getBrowserVersion().hasFeature(JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS) && !name.isEmpty()) {
+            name = name.toLowerCase();
+            if (name.startsWith("on")) {
+                try {
+                    name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+                    final Method method = getClass().getMethod("set" + name, METHOD_PARAMS_OBJECT);
+                    final String source = "function(){" + value + "}";
+                    method.invoke(this, new Object[] {
+                            Context.getCurrentContext().compileFunction(getWindow(), source, "", 0, null)});
+                }
+                catch (final NoSuchMethodException e) {
+                    //silently ignore
+                }
+                catch (final IllegalAccessException e) {
+                    //silently ignore
+                }
+                catch (final InvocationTargetException e) {
+                    throw new RuntimeException(e.getCause());
+                }
             }
         }
     }
