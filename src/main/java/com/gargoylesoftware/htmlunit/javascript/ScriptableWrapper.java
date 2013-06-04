@@ -37,8 +37,12 @@ import org.w3c.dom.NodeList;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class ScriptableWrapper extends ScriptableObject {
+    private static final Class<?>[] METHOD_PARAMS_INT = new Class[] {Integer.TYPE};
+    private static final Class<?>[] METHOD_PARAMS_STRING = new Class[] {String.class};
+
     private final Map<String, Method> properties_ = new HashMap<String, Method>();
 
     private Method getByIndexMethod_;
@@ -69,28 +73,21 @@ public class ScriptableWrapper extends ScriptableObject {
                 // it seems that defineProperty with only accepts delegate if
                 // its method takes a ScriptableObject
                 // as parameter.
-                final Method length = javaObject.getClass().getMethod(
-                        "getLength", ArrayUtils.EMPTY_CLASS_ARRAY);
+                final Method length = javaObject.getClass().getMethod("getLength", ArrayUtils.EMPTY_CLASS_ARRAY);
                 properties_.put("length", length);
 
-                final Method item = javaObject.getClass().getMethod("item",
-                        new Class[] {Integer.TYPE});
-                defineProperty("item", new MethodWrapper("item", staticType, new Class[] {Integer.TYPE}),
-                        0);
+                final Method item = javaObject.getClass().getMethod("item", METHOD_PARAMS_INT);
+                defineProperty("item", new MethodWrapper("item", staticType, METHOD_PARAMS_INT), 0);
 
-                final Method toString = getClass().getMethod("jsToString",
-                        ArrayUtils.EMPTY_CLASS_ARRAY);
-                defineProperty("toString", new FunctionObject("toString",
-                        toString, this), 0);
+                final Method toString = getClass().getMethod("jsToString", ArrayUtils.EMPTY_CLASS_ARRAY);
+                defineProperty("toString", new FunctionObject("toString", toString, this), 0);
 
                 getByIndexMethod_ = item;
 
                 if (NamedNodeMap.class.equals(staticType)) {
-                    final Method getNamedItem = javaObject.getClass()
-                            .getMethod("getNamedItem",
-                                    new Class[] {String.class});
+                    final Method getNamedItem = javaObject.getClass().getMethod("getNamedItem", METHOD_PARAMS_STRING);
                     defineProperty("getNamedItem",
-                            new MethodWrapper("getNamedItem", staticType, new Class[] {String.class}), 0);
+                            new MethodWrapper("getNamedItem", staticType, METHOD_PARAMS_STRING), 0);
 
                     getByNameFallback_ = getNamedItem;
                 }
