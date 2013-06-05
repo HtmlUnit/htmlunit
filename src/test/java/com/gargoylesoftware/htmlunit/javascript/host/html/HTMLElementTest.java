@@ -362,6 +362,144 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "inform('newHandler')", "" },
+            IE = { "null", "inform('newHandler')", "null" })
+    @NotYetImplemented(FF)
+    public void setAttribute_eventHandlerNull() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('login');\n"
+            + "    var password = document.getElementById('password');\n"
+
+            + "    alert(text.getAttribute('onclick'));\n"
+            + "    text.setAttribute('onclick', \"inform('newHandler')\");\n"
+            + "    alert(text.getAttribute('onclick'));\n"
+
+            + "    text.setAttribute('onclick', null);\n"
+            + "    alert(text.getAttribute('onclick'));\n"
+            + "  }\n"
+            + "  function inform(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input type='text' id='login' name='login'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+
+        webDriver.findElement(new ById("login")).click();
+
+        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "inform('newHandler')", "" },
+            IE = { "null", "inform('newHandler')", "" })
+    public void setAttribute_eventHandlerEmptyString() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('login');\n"
+            + "    var password = document.getElementById('password');\n"
+
+            + "    alert(text.getAttribute('onclick'));\n"
+            + "    text.setAttribute('onclick', \"inform('newHandler')\");\n"
+            + "    alert(text.getAttribute('onclick'));\n"
+
+            + "    text.setAttribute('onclick', '');\n"
+            + "    alert(text.getAttribute('onclick'));\n"
+            + "  }\n"
+            + "  function inform(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input type='text' id='login' name='login'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+
+        webDriver.findElement(new ById("login")).click();
+
+        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "null", "inform('newHandler')", "undefined" },
+            IE = { "null", "inform('newHandler')", "undefined" })
+    public void setAttribute_eventHandlerUndefined() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('login');\n"
+            + "    var password = document.getElementById('password');\n"
+
+            + "    alert(text.getAttribute('onclick'));\n"
+            + "    text.setAttribute('onclick', \"inform('newHandler')\");\n"
+            + "    alert(text.getAttribute('onclick'));\n"
+
+            + "    text.setAttribute('onclick', undefined);\n"
+            + "    alert(text.getAttribute('onclick'));\n"
+            + "  }\n"
+            + "  function inform(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input type='text' id='login' name='login'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+
+        webDriver.findElement(new ById("login")).click();
+
+        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = { "inform(\"onclick\")", "inform('newHandler')", "newHandler" },
+            IE = { "function onclick()\n{\ninform(\"onclick\")\n}", "inform('newHandler')" })
+    @NotYetImplemented(IE)
+    public void getAttribute_eventHandler() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    var text = document.getElementById('login');\n"
+
+            + "    alert(text.getAttribute('onclick'));\n"
+            + "    text.setAttribute('onclick', \"inform('newHandler')\");\n"
+            + "    alert(text.getAttribute('onclick'));\n"
+            + "  }\n"
+            + "  function inform(msg) {\n"
+            + "    alert(msg);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input type='text' id='login' name='login' onclick='inform(\"onclick\")'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+
+        webDriver.findElement(new ById("login")).click();
+
+        verifyAlerts(DEFAULT_WAIT_TIME, getExpectedAlerts(), webDriver);
+    }
+
+    /**
      * @throws Exception on test failure
      */
     @Test
