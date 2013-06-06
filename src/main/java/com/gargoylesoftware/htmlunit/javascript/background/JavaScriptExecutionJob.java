@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ronald Brill
  * @see MemoryLeakTest
  */
 abstract class JavaScriptExecutionJob extends BasicJavaScriptJob {
@@ -75,7 +76,7 @@ abstract class JavaScriptExecutionJob extends BasicJavaScriptJob {
                 }
                 return;
             }
-            if (!w.getWebClient().getWebWindows().contains(w)) {
+            if (!w.getWebClient().containsWebWindow(w)) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Enclosing window is now closed. Execution cancelled.");
                 }

@@ -1366,6 +1366,16 @@ public class WebClient implements Serializable {
     }
 
     /**
+     * Returns true if the list of WebWindows contains the provided one.
+     *
+     * @param webWindow the window to check
+     * @return true or false
+     */
+    public boolean containsWebWindow(final WebWindow webWindow) {
+        return windows_.contains(webWindow);
+    }
+
+    /**
      * Returns an immutable list of open top level windows.
      * @return an immutable list of open top level windows
      * @see #getWebWindowByName(String)

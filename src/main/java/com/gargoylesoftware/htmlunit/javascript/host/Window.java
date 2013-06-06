@@ -916,7 +916,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
     @CanSetReadOnly(CanSetReadOnlyStatus.IGNORE)
     public boolean getClosed() {
         final WebWindow webWindow = getWebWindow();
-        return !webWindow.getWebClient().getWebWindows().contains(webWindow);
+        return !webWindow.getWebClient().containsWebWindow(webWindow);
     }
 
     /**
