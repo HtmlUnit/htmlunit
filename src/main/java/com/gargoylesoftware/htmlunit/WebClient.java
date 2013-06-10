@@ -1366,7 +1366,11 @@ public class WebClient implements Serializable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
+     *
      * Returns true if the list of WebWindows contains the provided one.
+     * This method is there to improve the performance of some internal checks because
+     * calling getWebWindows().contains(.) creates some objects without any need.
      *
      * @param webWindow the window to check
      * @return true or false
