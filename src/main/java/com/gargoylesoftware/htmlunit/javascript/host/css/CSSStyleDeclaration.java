@@ -340,21 +340,19 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         setDomNode(element.getDomNodeOrNull(), false);
 
         // If an IE behavior was specified in the style, apply the behavior.
-        if (element instanceof HTMLElement
-            && getBrowserVersion().hasFeature(CSS_SUPPORTS_BEHAVIOR_PROPERTY)) {
+        if (getBrowserVersion().hasFeature(CSS_SUPPORTS_BEHAVIOR_PROPERTY)
+            && element instanceof HTMLElement) {
             final HTMLElement htmlElement = (HTMLElement) element;
-            for (final StyleElement styleElement : getStyleMap().values()) {
-                if (BEHAVIOR.equals(styleElement.getName())) {
-                    try {
-                        final Object[] url = URL_FORMAT.parse(styleElement.getValue());
-                        if (url.length > 0) {
-                            htmlElement.addBehavior((String) url[0]);
-                            break;
-                        }
+            final StyleElement behavior = getStyleMap().get(BEHAVIOR);
+            if (null != behavior) {
+                try {
+                    final Object[] url = URL_FORMAT.parse(behavior.getValue());
+                    if (url.length > 0) {
+                        htmlElement.addBehavior((String) url[0]);
                     }
-                    catch (final ParseException e) {
-                        LOG.warn("Invalid behavior: '" + styleElement.getValue() + "'.");
-                    }
+                }
+                catch (final ParseException e) {
+                    LOG.warn("Invalid behavior: '" + behavior.getValue() + "'.");
                 }
             }
         }
