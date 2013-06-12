@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -546,6 +547,62 @@ public class WebClientWaitForBackgroundJobsTest extends SimpleWebTestCase {
         assertEquals("test", page.getTitleText());
         noOfJobs = client.waitForBackgroundJavaScriptStartingBefore(500);
         assertTrue(noOfJobs == 1 || noOfJobs == 2); // maybe one is running
+    }
+
+    /**
+     * Methods waitForBackgroundJavaScript[StartingBefore] should not look for running jobs only on the existing
+     * windows but as well on the ones that have been (freshly) closed.
+     * This test shows the case where a background job in a frame causes the window of this frame to be unregistered
+     * by the WebClient but this job should still be considered until it completes.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void jobsFromAClosedWindowShouldntBeIgnore() throws Exception {
+        final String html = "<html><head><title>page 1</title></head>\n"
+            + "<body>\n"
+            + "<iframe src='iframe.html'></iframe>\n"
+            + "</body></html>";
+
+        final String iframe = "<html><body>\n"
+                + "<script>\n"
+                + "setTimeout(function() { parent.location = '/page3.html'; }, 50);\n"
+                + "</script>\n"
+                + "</body></html>";
+        final String page3 = "<html><body><script>\n"
+                + "parent.location = '/delayedPage4.html';\n"
+                + "</script></body></html>";
+
+        final WebClient client = getWebClient();
+
+        final ThreadSynchronizer threadSynchronizer = new ThreadSynchronizer();
+
+        final MockWebConnection webConnection = new MockWebConnection() {
+            @Override
+            public WebResponse getResponse(final WebRequest request) throws IOException {
+                if (request.getUrl().toExternalForm().endsWith("/delayedPage4.html")) {
+                    threadSynchronizer.setState("/delayedPage4.html requested");
+                    threadSynchronizer.waitForState("ready to call waitForBGJS");
+                    threadSynchronizer.sleep(1000);
+                }
+                return super.getResponse(request);
+            }
+        };
+
+        webConnection.setDefaultResponse(html);
+        webConnection.setResponse(new URL(getDefaultUrl(), "iframe.html"), iframe);
+        webConnection.setResponse(new URL(getDefaultUrl(), "page3.html"), page3);
+        webConnection.setResponseAsGenericHtml(new URL(getDefaultUrl(), "delayedPage4.html"), "page 4");
+        client.setWebConnection(webConnection);
+
+        client.getPage(getDefaultUrl());
+
+        threadSynchronizer.waitForState("/delayedPage4.html requested");
+        threadSynchronizer.setState("ready to call waitForBGJS");
+        final int noOfJobs = client.waitForBackgroundJavaScriptStartingBefore(500);
+        assertEquals(0, noOfJobs);
+
+        final HtmlPage page = (HtmlPage) client.getCurrentWindow().getEnclosedPage();
+        assertEquals("page 4", page.getTitleText());
     }
 }
 
