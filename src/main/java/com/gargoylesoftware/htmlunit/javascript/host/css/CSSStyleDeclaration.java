@@ -279,6 +279,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
     /** The wrapped CSSStyleDeclaration (if created from CSSStyleRule). */
     private org.w3c.dom.css.CSSStyleDeclaration styleDeclaration_;
 
+    /** Cache for the styles. */
+    private String styleString_ = new String();
+    private Map<String, StyleElement> styleMap_;
+
     /** The current style element index. */
     private long currentElementIndex_;
 
@@ -561,10 +565,16 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return a sorted map containing style elements, keyed on style element name
      */
     protected Map<String, StyleElement> getStyleMap() {
-        final Map<String, StyleElement> styleMap = new LinkedHashMap<String, StyleElement>();
         final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
+        if (styleString_ == styleAttribute) {
+            return styleMap_;
+        }
+
+        final Map<String, StyleElement> styleMap = new LinkedHashMap<String, StyleElement>();
         if (DomElement.ATTRIBUTE_NOT_DEFINED == styleAttribute || DomElement.ATTRIBUTE_VALUE_EMPTY == styleAttribute) {
-            return styleMap;
+            styleMap_ = styleMap;
+            styleString_ = styleAttribute;
+            return styleMap_;
         }
 
         for (final String token : StringUtils.split(styleAttribute, ';')) {
@@ -583,7 +593,10 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
                 styleMap.put(key, element);
             }
         }
-        return styleMap;
+
+        styleMap_ = styleMap;
+        styleString_ = styleAttribute;
+        return styleMap_;
     }
 
     private void writeToElement(final Map<String, StyleElement> styleMap) {
