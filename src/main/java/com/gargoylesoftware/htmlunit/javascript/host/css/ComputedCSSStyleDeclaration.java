@@ -173,12 +173,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * Overridden because some CSS properties are inherited from parent elements.
      */
     @Override
-    protected String getStyleAttribute(final String name, final Map<String, StyleElement> styleMap) {
-        String s = super.getStyleAttribute(name, null);
+    protected String getStyleAttribute(final String name) {
+        String s = super.getStyleAttribute(name);
         if (s.isEmpty() && isInheritable(name)) {
             final Element parent = getElement().getParentElement();
             if (parent != null) {
-                s = getWindow().getComputedStyle(parent, null).getStyleAttribute(name, null);
+                s = getWindow().getComputedStyle(parent, null).getStyleAttribute(name);
             }
         }
         return s;
@@ -254,7 +254,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public Map<String, StyleElement> getStyleMap() {
+    protected Map<String, StyleElement> getStyleMap() {
         final Map<String, StyleElement> styleMap = super.getStyleMap();
         if (localModifications_ != null) {
             for (final StyleElement localStyleMod : localModifications_.values()) {
@@ -669,7 +669,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getHeight() {
         return pixelString(getElement(), new CssValue(getElement().getWindow().getWebWindow().getInnerHeight()) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
-                return defaultIfEmpty(style.getStyleAttribute("height", null), "362px");
+                return defaultIfEmpty(style.getStyleAttribute("height"), "362px");
             }
         });
     }
@@ -1037,10 +1037,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         return pixelString(getElement(), new CssValue(windowWidth) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
-                final String value = style.getStyleAttribute(WIDTH, null);
+                final String value = style.getStyleAttribute(WIDTH);
                 if (StringUtils.isEmpty(value)) {
                     if (!getBrowserVersion().hasFeature(CSS_DEFAULT_WIDTH_AUTO)
-                            && "absolute".equals(getStyleAttribute("position", null))) {
+                            && "absolute".equals(getStyleAttribute("position"))) {
                         final DomNode domNode = getDomNodeOrDie();
                         final String content = domNode.getTextContent();
                         // do this only for small content
@@ -1133,7 +1133,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
             width = pixelValue(getElement(), new CssValue(windowWidth) {
                 @Override public String get(final ComputedCSSStyleDeclaration style) {
-                    return style.getStyleAttribute(WIDTH, null);
+                    return style.getStyleAttribute(WIDTH);
                 }
             });
         }
@@ -1266,7 +1266,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         int height = pixelValue(getElement(), new CssValue(defaultValue) {
             @Override public String get(final ComputedCSSStyleDeclaration style) {
-                return style.getStyleAttribute("height", null);
+                return style.getStyleAttribute("height");
             }
         });
 
