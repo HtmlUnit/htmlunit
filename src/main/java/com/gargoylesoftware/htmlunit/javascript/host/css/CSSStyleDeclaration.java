@@ -347,16 +347,16 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         if (getBrowserVersion().hasFeature(CSS_SUPPORTS_BEHAVIOR_PROPERTY)
             && element instanceof HTMLElement) {
             final HTMLElement htmlElement = (HTMLElement) element;
-            final StyleElement behavior = getStyleMap().get(BEHAVIOR);
-            if (null != behavior) {
+            final String behavior = getStyleAttribute(BEHAVIOR);
+            if (StringUtils.isNotBlank(behavior)) {
                 try {
-                    final Object[] url = URL_FORMAT.parse(behavior.getValue());
+                    final Object[] url = URL_FORMAT.parse(behavior);
                     if (url.length > 0) {
                         htmlElement.addBehavior((String) url[0]);
                     }
                 }
                 catch (final ParseException e) {
-                    LOG.warn("Invalid behavior: '" + behavior.getValue() + "'.");
+                    LOG.warn("Invalid behavior: '" + behavior + "'.");
                 }
             }
         }
@@ -371,8 +371,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         // TODO
         if (getBrowserVersion().hasFeature(JS_STYLE_UNSUPPORTED_PROPERTY_GETTER)) {
             if (null != jsElement_) {
-                final Map<String, StyleElement> style = getStyleMap();
-                final StyleElement element = style.get(name);
+                final StyleElement element = getStyleMap().get(name);
                 if (element != null && element.getValue() != null) {
                     return element.getValue();
                 }
