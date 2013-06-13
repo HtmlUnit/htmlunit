@@ -244,8 +244,8 @@ public class NodeList extends SimpleScriptable implements Function, org.w3c.dom.
             return response;
         }
         for (final DomNode node : getCandidates()) {
-            final boolean commentIncluded = node instanceof DomComment
-                    && getBrowserVersion().hasFeature(HTMLCOLLECTION_COMMENT_IS_ELEMENT);
+            final boolean commentIncluded = getBrowserVersion().hasFeature(HTMLCOLLECTION_COMMENT_IS_ELEMENT)
+                    && node instanceof DomComment;
 
             if ((node instanceof DomElement || commentIncluded) && isMatching(node)) {
                 response.add(node);
