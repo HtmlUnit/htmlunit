@@ -371,7 +371,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         // TODO
         if (getBrowserVersion().hasFeature(JS_STYLE_UNSUPPORTED_PROPERTY_GETTER)) {
             if (null != jsElement_) {
-                final StyleElement element = getStyleMap().get(name);
+                final StyleElement element = getStyleElement(name);
                 if (element != null && element.getValue() != null) {
                     return element.getValue();
                 }
@@ -399,11 +399,38 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         if (styleDeclaration_ != null) {
             return styleDeclaration_.getPropertyValue(name);
         }
-        final StyleElement element = getStyleMap().get(name);
+        final StyleElement element = getStyleElement(name);
         if (element != null && element.getValue() != null) {
             return element.getValue();
         }
         return "";
+    }
+
+    /**
+     * Determines the StyleElement for the given name.
+     *
+     * @param name the name of the requested StyleElement
+     * @return the StyleElement or null if not found
+     */
+    protected StyleElement getStyleElement(final String name) {
+        return getStyleMap().get(name);
+    }
+
+    /**
+     * Determines the StyleElement for the given name.
+     * This ignores the case of the name.
+     *
+     * @param name the name of the requested StyleElement
+     * @return the StyleElement or null if not found
+     */
+    private StyleElement getStyleElementCaseInSensitive(final String name) {
+        final Map<String, StyleElement> map = getStyleMap();
+        for (final String key : map.keySet()) {
+            if (key.equalsIgnoreCase(name)) {
+                return map.get(key);
+            }
+        }
+        return null;
     }
 
     /**
@@ -441,9 +468,8 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
             value = value2;
         }
         else {
-            final Map<String, StyleElement> styleMap = getStyleMap();
-            final StyleElement element1 = styleMap.get(name1);
-            final StyleElement element2 = styleMap.get(name2);
+            final StyleElement element1 = getStyleElement(name1);
+            final StyleElement element2 = getStyleElement(name2);
 
             if (element1 == null && element2 == null) {
                 return "";
@@ -557,7 +583,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      *
      * @return a sorted map containing style elements, keyed on style element name
      */
-    protected Map<String, StyleElement> getStyleMap() {
+    private Map<String, StyleElement> getStyleMap() {
         final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
         if (styleString_ == styleAttribute) {
             return styleMap_;
@@ -3998,13 +4024,11 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
 
         // Case-insensitive.
-        final Map<String, StyleElement> map = getStyleMap();
-        for (final String key : map.keySet()) {
-            if (key.equalsIgnoreCase(name)) {
-                return map.get(key).getValue();
-            }
+        final StyleElement style = getStyleElementCaseInSensitive(name);
+        if (null == style) {
+            return "";
         }
-        return "";
+        return style.getValue();
     }
 
     /**
@@ -4026,11 +4050,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
         if (flagInt == 0) {
             // Case-insensitive.
-            final Map<String, StyleElement> map = getStyleMap();
-            for (final String key : map.keySet()) {
-                if (key.equalsIgnoreCase(name)) {
-                    setStyleAttribute(key, value);
-                }
+            final StyleElement style = getStyleElementCaseInSensitive(name);
+            if (null != style) {
+                setStyleAttribute(style.getName(), value);
             }
         }
         else {
@@ -4060,15 +4082,9 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         }
         if (flagInt == 0) {
             // Case-insensitive.
-            String lastName = null;
-            final Map<String, StyleElement> map = getStyleMap();
-            for (final String key : map.keySet()) {
-                if (key.equalsIgnoreCase(name)) {
-                    lastName = key;
-                }
-            }
-            if (lastName != null) {
-                removeStyleAttribute(lastName);
+            final StyleElement style = getStyleElementCaseInSensitive(name);
+            if (style != null) {
+                removeStyleAttribute(style.getName());
                 return true;
             }
             return false;
