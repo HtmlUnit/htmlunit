@@ -113,14 +113,37 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         "widows",
         "word-spacing"));
 
+    /** Maps element types to custom display types (display types that are not "block". */
+    private static final Map<String, String> DEFAULT_DISPLAYS;
+    private static final Map<String, String> DEFAULT_DISPLAYS_CSS;
+
+    static {
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("A", "inline");
+        map.put("CODE", "inline");
+        map.put("SPAN", "inline");
+        DEFAULT_DISPLAYS = Collections.unmodifiableMap(map);
+
+        map = new HashMap<String, String>();
+        map.put("A", "inline");
+        map.put("CODE", "inline");
+        map.put("SPAN", "inline");
+
+        map.put("LI", "list-item");
+        map.put("TABLE", "table");
+        map.put("TBODY", "table-row-group");
+        map.put("TD", "table-cell");
+        map.put("TH", "table-cell");
+        map.put("THEAD", "table-header-group");
+        map.put("TR", "table-row");
+        DEFAULT_DISPLAYS_CSS = Collections.unmodifiableMap(map);
+    }
+
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
      * map so that results are deterministic and thus easily testable.
      */
     private final SortedMap<String, StyleElement> localModifications_ = new TreeMap<String, StyleElement>();
-
-    /** Maps element types to custom display types (display types that are not "block". */
-    private Map<String, String> defaultDisplays_;
 
     /** The computed, cached width of the element to which this computed style belongs (no padding, borders, etc). */
     private Integer width_;
@@ -553,23 +576,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     private String getDefaultStyleDisplay() {
-        if (defaultDisplays_ == null) {
-            final Map<String, String> map = new HashMap<String, String>();
-            map.put("A", "inline");
-            map.put("CODE", "inline");
-            map.put("SPAN", "inline");
-            if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
-                map.put("LI", "list-item");
-                map.put("TABLE", "table");
-                map.put("TBODY", "table-row-group");
-                map.put("TD", "table-cell");
-                map.put("TH", "table-cell");
-                map.put("THEAD", "table-header-group");
-                map.put("TR", "table-row");
-            }
-            defaultDisplays_ = Collections.unmodifiableMap(map);
+        Map<String, String> map = DEFAULT_DISPLAYS;
+        if (getBrowserVersion().hasFeature(CSS_DISPLAY_DEFAULT)) {
+            map = DEFAULT_DISPLAYS_CSS;
         }
-        final String defaultValue = defaultDisplays_.get(getElement().getTagName());
+
+        final String defaultValue = map.get(getElement().getTagName());
         if (defaultValue == null) {
             return "block";
         }
