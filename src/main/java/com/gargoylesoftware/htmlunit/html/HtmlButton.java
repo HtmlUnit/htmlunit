@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -78,7 +79,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     protected boolean doClickStateUpdate() throws IOException {
-        final String type = getTypeAttribute().toLowerCase();
+        final String type = getTypeAttribute().toLowerCase(Locale.ENGLISH);
 
         final HtmlForm form = getEnclosingForm();
         if (form != null) {

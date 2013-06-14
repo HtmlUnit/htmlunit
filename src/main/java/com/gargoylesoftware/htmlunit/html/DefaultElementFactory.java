@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASEFONT_
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.xml.sax.Attributes;
@@ -130,10 +131,10 @@ class DefaultElementFactory implements ElementFactory {
         final String tagName;
         final int colonIndex = qualifiedName.indexOf(':');
         if (colonIndex == -1) {
-            tagName = qualifiedName.toLowerCase();
+            tagName = qualifiedName.toLowerCase(Locale.ENGLISH);
         }
         else {
-            tagName = qualifiedName.substring(colonIndex + 1).toLowerCase();
+            tagName = qualifiedName.substring(colonIndex + 1).toLowerCase(Locale.ENGLISH);
         }
 
 //        final Class<? extends HtmlElement> klass = JavaScriptConfiguration.getHtmlTagNameMapping().get(tagName);

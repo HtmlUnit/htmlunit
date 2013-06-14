@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -599,7 +600,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
         for (final String token : StringUtils.split(styleAttribute, ';')) {
             final int index = token.indexOf(":");
             if (index != -1) {
-                final String key = token.substring(0, index).trim().toLowerCase();
+                final String key = token.substring(0, index).trim().toLowerCase(Locale.ENGLISH);
                 String value = token.substring(index + 1).trim();
                 String priority = "";
                 if (StringUtils.endsWithIgnoreCase(value, "!important")) {
@@ -4234,7 +4235,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * @return whether the token is a reserved color keyword or not
      */
     private static boolean isColorKeyword(final String token) {
-        return CSSColors_.containsKey(token.toLowerCase());
+        return CSSColors_.containsKey(token.toLowerCase(Locale.ENGLISH));
     }
 
     /**
@@ -4244,7 +4245,7 @@ public class CSSStyleDeclaration extends SimpleScriptable implements ScriptableW
      * in the form "rgb(x, y, z)" otherwise
      */
     public static String toRGBColor(final String color) {
-        final String rgbValue = CSSColors_.get(color.toLowerCase());
+        final String rgbValue = CSSColors_.get(color.toLowerCase(Locale.ENGLISH));
         if (rgbValue != null) {
             return rgbValue;
         }

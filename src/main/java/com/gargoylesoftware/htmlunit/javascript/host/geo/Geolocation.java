@@ -22,6 +22,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
@@ -126,7 +127,7 @@ public class Geolocation extends SimpleScriptable {
     }
 
     private void doGetPosition() {
-        final String os = System.getProperty("os.name").toLowerCase();
+        final String os = System.getProperty("os.name").toLowerCase(Locale.ENGLISH);
         String wifiStringString = null;
         if (os.contains("win")) {
             wifiStringString = getWifiStringWindows();

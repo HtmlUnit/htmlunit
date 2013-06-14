@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -105,7 +106,7 @@ class XPathAdapter {
         final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(xpath);
         while (matcher.find()) {
             final String attribute = matcher.group(1);
-            xpath = xpath.replace(attribute, attribute.toLowerCase());
+            xpath = xpath.replace(attribute, attribute.toLowerCase(Locale.ENGLISH));
         }
         return xpath;
     }

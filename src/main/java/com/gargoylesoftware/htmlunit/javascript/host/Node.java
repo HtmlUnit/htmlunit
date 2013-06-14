@@ -29,6 +29,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -872,7 +873,9 @@ public class Node extends SimpleScriptable {
         if (eventListenersContainer_ == null) {
             return null;
         }
-        return eventListenersContainer_.getEventHandlerProp(StringUtils.substring(eventName.toLowerCase(), 2));
+
+        final String name = StringUtils.substring(eventName.toLowerCase(Locale.ENGLISH), 2);
+        return eventListenersContainer_.getEventHandlerProp(name);
     }
 
     /**

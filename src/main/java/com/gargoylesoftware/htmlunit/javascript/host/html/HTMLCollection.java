@@ -311,11 +311,10 @@ public class HTMLCollection extends NodeList {
      */
     @JsxFunction(@WebBrowser(IE))
     public Object tags(final String tagName) {
-        final String tagNameLC = tagName.toLowerCase();
         final HTMLCollection collection = new HTMLSubCollection(this, ".tags('" + tagName + "')") {
             @Override
             protected boolean isMatching(final DomNode node) {
-                return tagNameLC.equalsIgnoreCase(node.getLocalName());
+                return tagName.equalsIgnoreCase(node.getLocalName());
             }
         };
         return collection;

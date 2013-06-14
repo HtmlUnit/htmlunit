@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -95,13 +96,14 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         final StringBuilder sb = new StringBuilder();
         for (final Entry<String, String> headerEntry : headers.entrySet()) {
             final String headerName = headerEntry.getKey();
-            if (ignoredHeaders.contains(headerName.toLowerCase())) {
+            final String headerNameLower = headerName.toLowerCase(Locale.ENGLISH);
+            if (ignoredHeaders.contains(headerNameLower)) {
                 continue;
             }
             sb.append(headerName);
             sb.append(": ");
-            if (caseInsensitiveHeaders.contains(headerName.toLowerCase())) {
-                sb.append(headerEntry.getValue().toLowerCase());
+            if (caseInsensitiveHeaders.contains(headerNameLower)) {
+                sb.append(headerEntry.getValue().toLowerCase(Locale.ENGLISH));
             }
             else {
                 sb.append(headerEntry.getValue());

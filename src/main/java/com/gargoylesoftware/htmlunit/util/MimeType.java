@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -54,7 +55,7 @@ public final class MimeType {
      * @return <code>null</code> if none is known
      */
     public static String getFileExtension(final String contentType) {
-        final String value = type2extension.get(contentType.toLowerCase());
+        final String value = type2extension.get(contentType.toLowerCase(Locale.ENGLISH));
         if (value == null) {
             return "unknown";
         }

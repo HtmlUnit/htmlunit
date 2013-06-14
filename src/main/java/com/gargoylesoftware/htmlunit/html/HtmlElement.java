@@ -26,6 +26,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
@@ -193,7 +194,7 @@ public abstract class HtmlElement extends DomElement {
     @SuppressWarnings("unchecked")
     public final <E extends HtmlElement> List<E> getHtmlElementsByTagName(final String tagName) {
         final List<E> list = new ArrayList<E>();
-        final String lowerCaseTagName = tagName.toLowerCase();
+        final String lowerCaseTagName = tagName.toLowerCase(Locale.ENGLISH);
         final Iterable<HtmlElement> iterable = getHtmlElementDescendants();
         for (final HtmlElement element : iterable) {
             if (lowerCaseTagName.equals(element.getTagName())) {
@@ -218,7 +219,8 @@ public abstract class HtmlElement extends DomElement {
             htmlPage.removeMappedElement(this);
         }
 
-        super.removeAttribute(attributeName.toLowerCase());
+        // TODO is this toLowerCase call needed?
+        super.removeAttribute(attributeName.toLowerCase(Locale.ENGLISH));
 
         if (htmlPage != null) {
             htmlPage.addMappedElement(this);
@@ -306,12 +308,12 @@ public abstract class HtmlElement extends DomElement {
         final String prefix = getPrefix();
         if (prefix != null) {
             // create string builder only if needed (performance)
-            final StringBuilder name = new StringBuilder(prefix);
+            final StringBuilder name = new StringBuilder(prefix.toLowerCase(Locale.ENGLISH));
             name.append(':');
-            name.append(getLocalName());
-            return name.toString().toLowerCase();
+            name.append(getLocalName().toLowerCase(Locale.ENGLISH));
+            return name.toString();
         }
-        return getLocalName().toLowerCase();
+        return getLocalName().toLowerCase(Locale.ENGLISH);
     }
 
     /**
@@ -355,7 +357,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the first element with the specified tag name that is an ancestor to this element
      */
     public HtmlElement getEnclosingElement(final String tagName) {
-        final String tagNameLC = tagName.toLowerCase();
+        final String tagNameLC = tagName.toLowerCase(Locale.ENGLISH);
 
         for (DomNode currentNode = getParentNode(); currentNode != null; currentNode = currentNode.getParentNode()) {
             if (currentNode instanceof HtmlElement && currentNode.getNodeName().equals(tagNameLC)) {
@@ -706,7 +708,7 @@ public abstract class HtmlElement extends DomElement {
             final String attributeValue) {
 
         final List<E> list = new ArrayList<E>();
-        final String lowerCaseTagName = elementName.toLowerCase();
+        final String lowerCaseTagName = elementName.toLowerCase(Locale.ENGLISH);
 
         for (final HtmlElement next : getHtmlElementDescendants()) {
             if (next.getTagName().equals(lowerCaseTagName)) {

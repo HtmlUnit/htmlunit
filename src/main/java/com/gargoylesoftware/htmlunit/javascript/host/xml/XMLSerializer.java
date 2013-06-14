@@ -147,7 +147,7 @@ public class XMLSerializer extends SimpleScriptable {
             final String foredNamespace, final boolean nodeNameAsUpperCase, final boolean appendCrLf) {
         String nodeName = node.getNodeName();
         if (nodeNameAsUpperCase) {
-            nodeName = nodeName.toUpperCase();
+            nodeName = nodeName.toUpperCase(Locale.ENGLISH);
         }
         buffer.append('<').append(nodeName);
 

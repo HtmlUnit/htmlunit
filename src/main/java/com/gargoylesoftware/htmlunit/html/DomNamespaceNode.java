@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.Locale;
+
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
@@ -73,7 +75,7 @@ public abstract class DomNamespaceNode extends DomNode {
     public String getLocalName() {
         final boolean caseSensitive = getPage().hasCaseSensitiveTagNames();
         if (!caseSensitive && XPathUtils.isProcessingXPath()) { // and this method was called from Xalan
-            return localName_.toLowerCase();
+            return localName_.toLowerCase(Locale.ENGLISH);
         }
         return localName_;
     }

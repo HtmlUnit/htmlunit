@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.NONE;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -810,7 +811,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             "user-agent", "via" };
         for (final String header : headers) {
             assertFalse(XMLHttpRequest.isAuthorizedHeader(header));
-            assertFalse(XMLHttpRequest.isAuthorizedHeader(header.toUpperCase()));
+            assertFalse(XMLHttpRequest.isAuthorizedHeader(header.toUpperCase(Locale.ENGLISH)));
         }
         assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-"));
         assertFalse(XMLHttpRequest.isAuthorizedHeader("Proxy-Control"));

@@ -52,6 +52,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -513,14 +514,15 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
     public String getLocalName() {
         final DomNode domNode = getDomNodeOrDie();
         if (domNode.getPage() instanceof HtmlPage) {
-            final StringBuilder localName = new StringBuilder();
             final String prefix = domNode.getPrefix();
             if (prefix != null) {
-                localName.append(prefix);
+                // create string builder only if needed (performance)
+                final StringBuilder localName = new StringBuilder(prefix.toUpperCase(Locale.ENGLISH));
                 localName.append(':');
+                localName.append(domNode.getLocalName().toUpperCase(Locale.ENGLISH));
+                return localName.toString();
             }
-            localName.append(domNode.getLocalName());
-            return localName.toString().toUpperCase();
+            return domNode.getLocalName().toUpperCase(Locale.ENGLISH);
         }
         return domNode.getLocalName();
     }
@@ -557,7 +559,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         // can name be an attribute of current element?
         // first approximation: attribute are all lowercase
         // this should be improved because it's wrong. For instance: tabIndex, hideFocus, acceptCharset
-        return name.toLowerCase().equals(name);
+        return name.toLowerCase(Locale.ENGLISH).equals(name);
     }
 
     /**
@@ -681,7 +683,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
 
         // FF: call corresponding event handler setOnxxx if found
         if (getBrowserVersion().hasFeature(JS_SET_ATTRIBUTE_SUPPORTS_EVENT_HANDLERS) && !name.isEmpty()) {
-            name = name.toLowerCase();
+            name = name.toLowerCase(Locale.ENGLISH);
             if (name.startsWith("on")) {
                 try {
                     name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
@@ -928,7 +930,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             final boolean isUpperCase = getBrowserVersion().hasFeature(HTMLELEMENT_OUTER_HTML_UPPER_CASE);
             String tag = element.getTagName();
             if (isUpperCase && !scriptObject.isLowerCaseInOuterHtml()) {
-                tag = tag.toUpperCase();
+                tag = tag.toUpperCase(Locale.ENGLISH);
             }
             buffer.append("<").append(tag);
             // Add the attributes. IE does not use quotes, FF does.
@@ -1055,7 +1057,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         parseHtmlSnippet(fragment, false, value);
         DomNode child = fragment.getFirstChild();
         if (child instanceof DomElement) {
-            final String parentName = domNode.getParentNode().getNodeName().toUpperCase();
+            final String parentName = domNode.getParentNode().getNodeName().toUpperCase(Locale.ENGLISH);
             final short[] closes = HTMLElements.getElement(child.getNodeName()).closes;
             if (closes != null) {
                 for (final short close : closes) {
@@ -2075,7 +2077,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
         final DomNode domNode = getDomNodeOrDie();
         String nodeName = domNode.getNodeName();
         if (domNode.getPage() instanceof HtmlPage) {
-            nodeName = nodeName.toUpperCase();
+            nodeName = nodeName.toUpperCase(Locale.ENGLISH);
         }
         return nodeName;
     }
@@ -2320,12 +2322,12 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
             s = null;
             for (final String key : COLORS_MAP_IE.keySet()) {
                 if (key.equalsIgnoreCase(value)) {
-                    s = COLORS_MAP_IE.get(key).toLowerCase();
+                    s = COLORS_MAP_IE.get(key).toLowerCase(Locale.ENGLISH);
                     break;
                 }
             }
             if (s == null) {
-                s = value.toLowerCase();
+                s = value.toLowerCase(Locale.ENGLISH);
                 if (s.charAt(0) == '#') {
                     s = s.substring(1);
                 }
@@ -2376,7 +2378,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      *        (i.e., it will not actually set the align attribute)
      */
     protected void setAlign(final String align, final boolean ignoreIfNoError) {
-        final String alignLC = align.toLowerCase();
+        final String alignLC = align.toLowerCase(Locale.ENGLISH);
         final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
         if (acceptArbitraryValues
                 || "center".equals(alignLC)
@@ -2413,7 +2415,7 @@ public class HTMLElement extends Element implements ScriptableWithFallbackGetter
      * @param valid the valid values; if <tt>null</tt>, any value is valid
      */
     protected void setVAlign(final Object vAlign, final String[] valid) {
-        final String s = Context.toString(vAlign).toLowerCase();
+        final String s = Context.toString(vAlign).toLowerCase(Locale.ENGLISH);
         if (valid == null || ArrayUtils.contains(valid, s)) {
             getDomNodeOrDie().setAttribute("valign", s);
         }

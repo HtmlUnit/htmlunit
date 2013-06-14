@@ -147,7 +147,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * @return the new page object
      */
     public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final String contentType = determineContentType(webResponse.getContentType().toLowerCase(),
+        final String contentType = determineContentType(webResponse.getContentType().toLowerCase(Locale.ENGLISH),
             webResponse.getContentAsStream());
 
         final PageType pageType = determinePageType(contentType);

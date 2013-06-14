@@ -33,6 +33,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Stack;
 
@@ -359,7 +360,7 @@ public final class HTMLParser {
                 tagName = tagName.substring(index + 1);
             }
             else {
-                tagName = tagName.toLowerCase();
+                tagName = tagName.toLowerCase(Locale.ENGLISH);
             }
             final ElementFactory factory = ELEMENT_FACTORIES.get(tagName);
 
@@ -498,7 +499,7 @@ public final class HTMLParser {
 
             handleCharacters();
 
-            final String tagLower = localName.toLowerCase();
+            final String tagLower = localName.toLowerCase(Locale.ENGLISH);
             if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
                 return;
             }
@@ -641,7 +642,7 @@ public final class HTMLParser {
 
             handleCharacters();
 
-            final String tagLower = localName.toLowerCase();
+            final String tagLower = localName.toLowerCase(Locale.ENGLISH);
 
             if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
                 return;
@@ -869,7 +870,7 @@ public final class HTMLParser {
                 // add the attributes that don't already exist
                 final int length = attrs.getLength();
                 for (int i = 0; i < length; ++i) {
-                    final String attrName = attrs.getLocalName(i).toLowerCase();
+                    final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ENGLISH);
                     if (body_.getAttributes().getNamedItem(attrName) == null) {
                         body_.setAttribute(attrName, attrs.getValue(i));
                         if (attrName.startsWith("on") && body_.getScriptObject() != null) {

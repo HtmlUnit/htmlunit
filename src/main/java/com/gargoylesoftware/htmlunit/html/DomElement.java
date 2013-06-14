@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -623,7 +624,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
         if (caseSensitive_) {
             return name;
         }
-        return name.toLowerCase();
+        return name.toLowerCase(Locale.ENGLISH);
     }
 
     /**
@@ -682,10 +683,11 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      */
     public DomAttr put(final String key, final DomAttr value) {
         final String name = fixName(key);
-        if (!map_.containsKey(name)) {
+        final DomAttr previous = map_.put(name, value);
+        if (null == previous) {
             attrPositions_.add(name);
         }
-        return map_.put(name, value);
+        return previous;
     }
 
     /**

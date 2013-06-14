@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_32;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_EXTENDED_SYNTAX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XUL_SUPPORT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -505,15 +505,14 @@ public class Document extends EventNode {
         }
         else {
             final boolean useLocalName = getBrowserVersion().hasFeature(GENERATED_32);
-            final String tagNameLC = tagName.toLowerCase();
 
             collection = new HTMLCollection(getDomNodeOrDie(), false, description) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
                     if (useLocalName) {
-                        return tagNameLC.equalsIgnoreCase(node.getLocalName());
+                        return tagName.equalsIgnoreCase(node.getLocalName());
                     }
-                    return tagNameLC.equalsIgnoreCase(node.getNodeName());
+                    return tagName.equalsIgnoreCase(node.getNodeName());
                 }
             };
         }

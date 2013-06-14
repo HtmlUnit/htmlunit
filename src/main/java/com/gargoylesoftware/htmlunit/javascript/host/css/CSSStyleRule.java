@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTOR_TEXT_UPPERCASE;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -69,10 +70,10 @@ public class CSSStyleRule extends CSSRule {
                 // nothing
             }
             else if (getBrowserVersion().hasFeature(JS_SELECTOR_TEXT_UPPERCASE)) {
-                fixedName = fixedName.toUpperCase();
+                fixedName = fixedName.toUpperCase(Locale.ENGLISH);
             }
             else {
-                fixedName = fixedName.toLowerCase();
+                fixedName = fixedName.toLowerCase(Locale.ENGLISH);
             }
             fixedName = StringUtils.sanitizeForAppendReplacement(fixedName);
             m.appendReplacement(sb, fixedName);

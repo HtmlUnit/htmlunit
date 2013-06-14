@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -414,7 +415,7 @@ public class Console extends SimpleScriptable {
                         break;
                     default:
                         if (ch < ' ' || ch > '~') {
-                            sb.append("\\u" + Integer.toHexString(ch).toUpperCase());
+                            sb.append("\\u" + Integer.toHexString(ch).toUpperCase(Locale.ENGLISH));
                         }
                         else {
                             sb.append(ch);

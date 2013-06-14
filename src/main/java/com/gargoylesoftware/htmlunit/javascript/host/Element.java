@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -205,7 +206,7 @@ public class Element extends EventNode {
      */
     @JsxFunction
     public HTMLCollection getElementsByTagName(final String tagName) {
-        final String tagNameLC = tagName.toLowerCase();
+        final String tagNameLC = tagName.toLowerCase(Locale.ENGLISH);
 
         if (elementsByTagName_ == null) {
             elementsByTagName_ = new HashMap<String, HTMLCollection>();

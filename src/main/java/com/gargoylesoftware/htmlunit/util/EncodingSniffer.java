@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
@@ -174,10 +175,10 @@ public final class EncodingSniffer {
                 if (i != -1) {
                     value = value.substring(0, i);
                 }
-                value = value.trim();
+                value = value.trim().toLowerCase(Locale.ENGLISH);
                 boolean found = false;
                 for (String ending : contentTypeEndings) {
-                    if (value.toLowerCase().endsWith(ending.toLowerCase())) {
+                    if (value.endsWith(ending.toLowerCase(Locale.ENGLISH))) {
                         found = true;
                         break;
                     }
@@ -295,7 +296,7 @@ public final class EncodingSniffer {
                 final String value = pair.getValue();
                 encoding = extractEncodingFromContentType(value);
                 if (encoding != null) {
-                    encoding = encoding.toUpperCase();
+                    encoding = encoding.toUpperCase(Locale.ENGLISH);
                     break;
                 }
             }
@@ -371,7 +372,7 @@ public final class EncodingSniffer {
                             charset = UTF8;
                         }
                         if (isSupportedCharset(charset)) {
-                            charset = charset.toUpperCase();
+                            charset = charset.toUpperCase(Locale.ENGLISH);
                             if (LOG.isDebugEnabled()) {
                                 LOG.debug("Encoding found in meta tag: '" + charset + "'.");
                             }

@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
@@ -240,11 +241,12 @@ public class HTMLInputElement extends FormField {
      */
     @Override
     protected boolean isAttributeName(final String name) {
-        if ("maxlength".equals(name.toLowerCase())) {
+        final String nameLC = name.toLowerCase(Locale.ENGLISH);
+        if ("maxlength".equals(nameLC)) {
             return "maxLength".equals(name);
         }
 
-        if ("readOnly".equals(name.toLowerCase())) {
+        if ("readOnly".equals(nameLC)) {
             return "readOnly".equals(name);
         }
         return super.isAttributeName(name);

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 /**
  * A collection of constants that represent the various ways a form can be encoded when submitted.
@@ -53,7 +54,7 @@ public final class FormEncodingType implements Serializable {
      * @return the constant corresponding to the specified name, {@link #URL_ENCODED} if none match.
      */
     public static FormEncodingType getInstance(final String name) {
-        final String lowerCaseName = name.toLowerCase();
+        final String lowerCaseName = name.toLowerCase(Locale.ENGLISH);
 
         if (MULTIPART.getName().equals(lowerCaseName)) {
             return MULTIPART;

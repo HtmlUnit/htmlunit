@@ -37,6 +37,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -518,7 +519,7 @@ public class HtmlPage extends SgmlPage {
     @Override
     public DomElement createElement(String tagName) {
         if (tagName.indexOf(':') == -1) {
-            tagName = tagName.toLowerCase();
+            tagName = tagName.toLowerCase(Locale.ENGLISH);
         }
         return HTMLParser.getFactory(tagName).createElementNS(this, null, tagName, null, true);
     }
@@ -896,7 +897,7 @@ public class HtmlPage extends SgmlPage {
     public List<HtmlElement> getHtmlElementsByAccessKey(final char accessKey) {
         final List<HtmlElement> elements = new ArrayList<HtmlElement>();
 
-        final String searchString = Character.toString(accessKey).toLowerCase();
+        final String searchString = Character.toString(accessKey).toLowerCase(Locale.ENGLISH);
         final List<String> acceptableTagNames = Arrays.asList(
                 new String[]{"a", "area", "button", "input", "label", "legend", "textarea"});
 
@@ -1347,7 +1348,7 @@ public class HtmlPage extends SgmlPage {
                 LOG.error("Malformed refresh string (no valid number before ';') " + refreshString, e);
                 return;
             }
-            index = refreshString.toLowerCase().indexOf("url=", index);
+            index = refreshString.toLowerCase(Locale.ENGLISH).indexOf("url=", index);
             if (index == -1) {
                 LOG.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
                 return;
@@ -1989,11 +1990,11 @@ public class HtmlPage extends SgmlPage {
         if (getDocumentElement() == null) {
             return Collections.emptyList(); // weird case, for instance if document.documentElement has been removed
         }
-        final String nameLC = httpEquiv.toLowerCase();
+        final String nameLC = httpEquiv.toLowerCase(Locale.ENGLISH);
         final List<HtmlMeta> tags = getDocumentElement().getHtmlElementsByTagName("meta");
         for (final Iterator<HtmlMeta> iter = tags.iterator(); iter.hasNext();) {
             final HtmlMeta element = iter.next();
-            if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase())) {
+            if (!nameLC.equals(element.getHttpEquivAttribute().toLowerCase(Locale.ENGLISH))) {
                 iter.remove();
             }
         }

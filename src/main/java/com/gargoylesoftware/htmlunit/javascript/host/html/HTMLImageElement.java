@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDT
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -185,7 +186,7 @@ public class HTMLImageElement extends HTMLElement {
             return align;
         }
 
-        final String normalizedValue = NORMALIZED_ALIGN_VALUES.get(align.toLowerCase());
+        final String normalizedValue = NORMALIZED_ALIGN_VALUES.get(align.toLowerCase(Locale.ENGLISH));
         if (null != normalizedValue) {
             return normalizedValue;
         }
@@ -204,7 +205,7 @@ public class HTMLImageElement extends HTMLElement {
             return;
         }
 
-        final String normalizedValue = NORMALIZED_ALIGN_VALUES.get(align.toLowerCase());
+        final String normalizedValue = NORMALIZED_ALIGN_VALUES.get(align.toLowerCase(Locale.ENGLISH));
         if (null != normalizedValue) {
             getDomNodeOrDie().setAttribute("align", normalizedValue);
             return;

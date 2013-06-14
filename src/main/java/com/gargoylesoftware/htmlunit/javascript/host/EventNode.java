@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.Locale;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -375,7 +377,7 @@ public class EventNode extends Node {
         }
 
         // Create the event, whose class will depend on the type specified.
-        final String cleanedType = StringUtils.removeStart(type.toLowerCase(), "on");
+        final String cleanedType = StringUtils.removeStart(type.toLowerCase(Locale.ENGLISH), "on");
         if (MouseEvent.isMouseEvent(cleanedType)) {
             event.setPrototype(getPrototype(MouseEvent.class));
         }

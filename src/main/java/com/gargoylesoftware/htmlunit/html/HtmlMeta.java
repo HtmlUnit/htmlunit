@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -69,7 +70,7 @@ public class HtmlMeta extends HtmlElement {
         String path = null;
         Date expires = null;
         for (int i = 1; i < parts.length; i++) {
-            final String partName = StringUtils.substringBefore(parts[i], "=").trim().toLowerCase();
+            final String partName = StringUtils.substringBefore(parts[i], "=").trim().toLowerCase(Locale.ENGLISH);
             final String partValue = StringUtils.substringAfter(parts[i], "=").trim();
             if ("path".equals(partName)) {
                 path = partValue;

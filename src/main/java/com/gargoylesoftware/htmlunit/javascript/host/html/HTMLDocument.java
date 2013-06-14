@@ -43,7 +43,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
-import static com.gargoylesoftware.htmlunit.util.StringUtils.containsCaseInsensitive;
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 
 import java.io.IOException;
@@ -55,7 +54,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -173,39 +174,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
      */
     private static final Map<String, Class<? extends Event>> SUPPORTED_EVENT_TYPE_MAP;
 
-    private static final List<String> EXECUTE_CMDS_IE = Arrays.asList(
-        "2D-Position", "AbsolutePosition", "BackColor", "BackgroundImageCache" /* Undocumented */,
-        "BlockDirLTR", "BlockDirRTL", "Bold", "BrowseMode", "ClearAuthenticationCache", "Copy", "CreateBookmark",
-        "CreateLink", "Cut", "Delete", "DirLTR", "DirRTL",
-        "EditMode", "FontName", "FontSize", "ForeColor", "FormatBlock",
-        "Indent", "InlineDirLTR", "InlineDirRTL", "InsertButton", "InsertFieldset",
-        "InsertHorizontalRule", "InsertIFrame", "InsertImage", "InsertInputButton", "InsertInputCheckbox",
-        "InsertInputFileUpload", "InsertInputHidden", "InsertInputImage", "InsertInputPassword", "InsertInputRadio",
-        "InsertInputReset", "InsertInputSubmit", "InsertInputText", "InsertMarquee", "InsertOrderedList",
-        "InsertParagraph", "InsertSelectDropdown", "InsertSelectListbox", "InsertTextArea", "InsertUnorderedList",
-        "Italic", "JustifyCenter", "JustifyFull", "JustifyLeft", "JustifyNone",
-        "JustifyRight", "LiveResize", "MultipleSelection", "Open", "Outdent",
-        "OverWrite", "Paste", "PlayImage", "Print", "Redo",
-        "Refresh", "RemoveFormat", "RemoveParaFormat", "SaveAs", "SelectAll",
-        "SizeToControl", "SizeToControlHeight", "SizeToControlWidth", "Stop", "StopImage",
-        "StrikeThrough", "Subscript", "Superscript", "UnBookmark", "Underline",
-        "Undo", "Unlink", "Unselect"
-    );
-
+    // all as lowercase for performance
+    private static final Set<String> EXECUTE_CMDS_IE = new HashSet<String>();
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
-    private static final List<String> EXECUTE_CMDS_FF = Arrays.asList(
-        "backColor", "bold", "contentReadOnly", "copy", "createLink", "cut", "decreaseFontSize", "delete",
-        "fontName", "fontSize", "foreColor", "formatBlock", "heading", "hiliteColor", "increaseFontSize",
-        "indent", "insertHorizontalRule", "insertHTML", "insertImage", "insertOrderedList", "insertUnorderedList",
-        "insertParagraph", "italic", "justifyCenter", "justifyLeft", "justifyRight", "outdent", "paste", "redo",
-        "removeFormat", "selectAll", "strikeThrough", "subscript", "superscript", "underline", "undo", "unlink",
-        "useCSS", "styleWithCSS"
-    );
-
-    private static final List<String> EXECUTE_CMDS_FF17 = new ArrayList<String>(EXECUTE_CMDS_FF) { {
-            add("JustifyFull");
-        }
-    };
+    private static final Set<String> EXECUTE_CMDS_FF = new HashSet<String>();
+    private static final Set<String> EXECUTE_CMDS_FF17 = new HashSet<String>();
 
     /**
      * Static counter for {@link #uniqueID_}.
@@ -248,6 +221,44 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         eventMap.put("UIEvent", UIEvent.class);
         eventMap.put("UIEvents", UIEvent.class);
         SUPPORTED_EVENT_TYPE_MAP = Collections.unmodifiableMap(eventMap);
+
+        // commands
+        List<String> cmds = Arrays.asList(
+            "2D-Position", "AbsolutePosition", "BackColor", "BackgroundImageCache" /* Undocumented */,
+            "BlockDirLTR", "BlockDirRTL", "Bold", "BrowseMode", "ClearAuthenticationCache", "Copy", "CreateBookmark",
+            "CreateLink", "Cut", "Delete", "DirLTR", "DirRTL",
+            "EditMode", "FontName", "FontSize", "ForeColor", "FormatBlock",
+            "Indent", "InlineDirLTR", "InlineDirRTL", "InsertButton", "InsertFieldset",
+            "InsertHorizontalRule", "InsertIFrame", "InsertImage", "InsertInputButton", "InsertInputCheckbox",
+            "InsertInputFileUpload", "InsertInputHidden", "InsertInputImage", "InsertInputPassword", "InsertInputRadio",
+            "InsertInputReset", "InsertInputSubmit", "InsertInputText", "InsertMarquee", "InsertOrderedList",
+            "InsertParagraph", "InsertSelectDropdown", "InsertSelectListbox", "InsertTextArea", "InsertUnorderedList",
+            "Italic", "JustifyCenter", "JustifyFull", "JustifyLeft", "JustifyNone",
+            "JustifyRight", "LiveResize", "MultipleSelection", "Open", "Outdent",
+            "OverWrite", "Paste", "PlayImage", "Print", "Redo",
+            "Refresh", "RemoveFormat", "RemoveParaFormat", "SaveAs", "SelectAll",
+            "SizeToControl", "SizeToControlHeight", "SizeToControlWidth", "Stop", "StopImage",
+            "StrikeThrough", "Subscript", "Superscript", "UnBookmark", "Underline",
+            "Undo", "Unlink", "Unselect"
+        );
+        for (String cmd : cmds) {
+            EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ENGLISH));
+        }
+
+        cmds = Arrays.asList(
+            "backColor", "bold", "contentReadOnly", "copy", "createLink", "cut", "decreaseFontSize", "delete",
+            "fontName", "fontSize", "foreColor", "formatBlock", "heading", "hiliteColor", "increaseFontSize",
+            "indent", "insertHorizontalRule", "insertHTML", "insertImage", "insertOrderedList", "insertUnorderedList",
+            "insertParagraph", "italic", "justifyCenter", "justifyLeft", "justifyRight", "outdent", "paste", "redo",
+            "removeFormat", "selectAll", "strikeThrough", "subscript", "superscript", "underline", "undo", "unlink",
+            "useCSS", "styleWithCSS"
+        );
+        for (String cmd : cmds) {
+            EXECUTE_CMDS_FF.add(cmd.toLowerCase(Locale.ENGLISH));
+            EXECUTE_CMDS_FF17.add(cmd.toLowerCase(Locale.ENGLISH));
+        }
+
+        EXECUTE_CMDS_FF17.add("JustifyFull".toLowerCase(Locale.ENGLISH));
     }
 
     /**
@@ -929,10 +940,11 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             final String token = st.nextToken();
             final int indexEqual = token.indexOf('=');
             if (indexEqual > -1) {
-                atts.put(token.substring(0, indexEqual).toLowerCase().trim(), token.substring(indexEqual + 1).trim());
+                atts.put(token.substring(0, indexEqual).trim().toLowerCase(Locale.ENGLISH),
+                        token.substring(indexEqual + 1).trim());
             }
             else {
-                atts.put(token.toLowerCase().trim(), Boolean.TRUE);
+                atts.put(token.trim().toLowerCase(Locale.ENGLISH), Boolean.TRUE);
             }
         }
 
@@ -1009,7 +1021,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     public String getCharset() {
         String charset = getHtmlPage().getPageEncoding();
         if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            charset = charset.toLowerCase();
+            charset = charset.toLowerCase(Locale.ENGLISH);
         }
         return charset;
     }
@@ -1603,7 +1615,7 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
             }
             domain_ = url.getHost();
             if (getBrowserVersion().hasFeature(JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
-                domain_ = domain_.toLowerCase();
+                domain_ = domain_.toLowerCase(Locale.ENGLISH);
             }
         }
 
@@ -1661,14 +1673,14 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
         }
 
         if (currentDomain.indexOf('.') > -1
-                && !currentDomain.toLowerCase().endsWith("." + newDomain.toLowerCase())) {
+                && !currentDomain.toLowerCase(Locale.ENGLISH).endsWith("." + newDomain.toLowerCase(Locale.ENGLISH))) {
             throw Context.reportRuntimeError("Illegal domain value, cannot set domain from: \""
                     + currentDomain + "\" to: \"" + newDomain + "\"");
         }
 
         // Netscape down shifts the case of the domain
         if (browserVersion.hasFeature(JS_DOCUMENT_DOMAIN_IS_LOWERCASE)) {
-            domain_ = newDomain.toLowerCase();
+            domain_ = newDomain.toLowerCase(Locale.ENGLISH);
         }
         else {
             domain_ = newDomain;
@@ -1892,13 +1904,20 @@ public class HTMLDocument extends Document implements ScriptableWithFallbackGett
     }
 
     private boolean hasCommand(final String cmd) {
+        if (null == cmd) {
+            return false;
+        }
+
+        final String cmdLC = cmd.toLowerCase(Locale.ENGLISH);
         if (getBrowserVersion().isIE()) {
-            return containsCaseInsensitive(EXECUTE_CMDS_IE, cmd);
+            return EXECUTE_CMDS_IE.contains(cmdLC);
         }
         else if ("FF3.6".equals(getBrowserVersion().getNickname())) {
-            return containsCaseInsensitive(EXECUTE_CMDS_FF, cmd);
+            return EXECUTE_CMDS_FF.contains(cmdLC);
         }
-        return containsCaseInsensitive(EXECUTE_CMDS_FF17, cmd);
+        else {
+            return EXECUTE_CMDS_FF17.contains(cmdLC);
+        }
     }
 
     /**

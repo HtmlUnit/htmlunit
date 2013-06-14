@@ -37,6 +37,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Stack;
 
@@ -474,7 +475,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 request.setAdditionalHeader("Origin", origin.toString());
             }
 
-            request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase()));
+            request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ENGLISH)));
             if (Undefined.instance != user || Undefined.instance != password) {
                 String userCred = null;
                 String passwordCred = "";
@@ -619,8 +620,8 @@ public class XMLHttpRequest extends SimpleScriptable {
                         webRequest_.getHttpMethod().name());
                 final StringBuilder builder = new StringBuilder();
                 for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
-                    final String name = header.getKey().toLowerCase();
-                    final String value = header.getValue().toLowerCase();
+                    final String name = header.getKey().toLowerCase(Locale.ENGLISH);
+                    final String value = header.getValue().toLowerCase(Locale.ENGLISH);
                     if (isPreflightHeader(name, value)) {
                         if (builder.length() != 0) {
                             builder.append(' ');
@@ -694,7 +695,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             return true;
         }
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
-            if (isPreflightHeader(header.getKey().toLowerCase(), header.getValue().toLowerCase())) {
+            if (isPreflightHeader(header.getKey().toLowerCase(Locale.ENGLISH),
+                    header.getValue().toLowerCase(Locale.ENGLISH))) {
                 return true;
             }
         }
@@ -711,11 +713,12 @@ public class XMLHttpRequest extends SimpleScriptable {
             headersHeader = "";
         }
         else {
-            headersHeader = headersHeader.toLowerCase();
+            headersHeader = headersHeader.toLowerCase(Locale.ENGLISH);
         }
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
-            if (isPreflightHeader(header.getKey().toLowerCase(), header.getValue().toLowerCase())
-                    && !headersHeader.contains(header.getKey().toLowerCase())) {
+            final String key = header.getKey().toLowerCase(Locale.ENGLISH);
+            if (isPreflightHeader(key, header.getValue().toLowerCase(Locale.ENGLISH))
+                    && !headersHeader.contains(key)) {
                 return false;
             }
         }
@@ -772,7 +775,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      * @return <code>true</code> if the header can be set from JavaScript
      */
     static boolean isAuthorizedHeader(final String name) {
-        final String nameLowerCase = name.toLowerCase();
+        final String nameLowerCase = name.toLowerCase(Locale.ENGLISH);
         if (PROHIBITED_HEADERS_.contains(nameLowerCase)) {
             return false;
         }

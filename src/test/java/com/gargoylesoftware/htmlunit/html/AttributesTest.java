@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -140,7 +141,7 @@ public class AttributesTest extends TestCase {
                 && methodName.endsWith("Attribute")
                 && !EXCLUDED_METHODS.contains(methodName)) {
 
-                String attributeName = methodName.substring(3, methodName.length() - 9).toLowerCase();
+                String attributeName = methodName.substring(3, methodName.length() - 9).toLowerCase(Locale.ENGLISH);
                 if ("xmllang".equals(attributeName)) {
                     attributeName = "xml:lang";
                 }

@@ -18,6 +18,7 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 
@@ -223,7 +224,7 @@ public final class ProxyAutoConfig {
         }
         final Calendar calendar = Calendar.getInstance(timezone);
         for (int i = 0; i < 7; i++) {
-            final String day = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase();
+            final String day = new SimpleDateFormat("EEE").format(calendar.getTime()).toUpperCase(Locale.ENGLISH);
             if (day.equals(wd2)) {
                 return true;
             }

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -88,7 +89,7 @@ public final class InputElementFactory implements ElementFactory {
             type = "";
         }
         else {
-            type = type.toLowerCase();
+            type = type.toLowerCase(Locale.ENGLISH);
             attributeMap.get("type").setValue(type); // type value has to be lower case
         }
 

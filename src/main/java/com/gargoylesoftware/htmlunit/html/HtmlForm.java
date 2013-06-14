@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -229,8 +230,10 @@ public class HtmlForm extends HtmlElement {
      * @return the charset to use for the form submission
      */
     private String getSubmitCharset() {
-        if (getAcceptCharsetAttribute().length() > 0) {
-            return SUBMIT_CHARSET_PATTERN.matcher(getAcceptCharsetAttribute().trim()).replaceAll("").toUpperCase();
+        String charset = getAcceptCharsetAttribute();
+        if (charset.length() > 0) {
+            charset = charset.trim();
+            return SUBMIT_CHARSET_PATTERN.matcher(charset).replaceAll("").toUpperCase(Locale.ENGLISH);
         }
         return getPage().getPageEncoding();
     }
@@ -329,7 +332,7 @@ public class HtmlForm extends HtmlElement {
         }
 
         if (element instanceof HtmlInput) {
-            final String type = element.getAttribute("type").toLowerCase();
+            final String type = element.getAttribute("type").toLowerCase(Locale.ENGLISH);
             if ("radio".equals(type) || "checkbox".equals(type)) {
                 return element.hasAttribute("checked");
             }
@@ -361,7 +364,7 @@ public class HtmlForm extends HtmlElement {
         }
         if (element instanceof HtmlInput) {
             final HtmlInput input = (HtmlInput) element;
-            final String type = input.getTypeAttribute().toLowerCase();
+            final String type = input.getTypeAttribute().toLowerCase(Locale.ENGLISH);
             if ("submit".equals(type) || "image".equals(type) || "reset".equals(type) || "button".equals(type)) {
                 return false;
             }
@@ -402,7 +405,7 @@ public class HtmlForm extends HtmlElement {
             final String attributeValue) {
 
         final List<E> list = new ArrayList<E>();
-        final String lowerCaseTagName = elementName.toLowerCase();
+        final String lowerCaseTagName = elementName.toLowerCase(Locale.ENGLISH);
 
         for (final HtmlElement next : getFormHtmlElementDescendants()) {
             if (next.getTagName().equals(lowerCaseTagName)) {

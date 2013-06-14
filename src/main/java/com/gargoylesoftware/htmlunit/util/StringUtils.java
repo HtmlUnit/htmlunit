@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import java.awt.Color;
-import java.util.Collection;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -133,23 +132,6 @@ public final class StringUtils {
             }
         }
         return -1;
-    }
-
-    /**
-     * Returns <tt>true</tt> if the specified collection of strings contains the specified string, ignoring case.
-     *
-     * @param strings the strings to search
-     * @param string the string to search for
-     * @return <tt>true</tt> if the specified collection of strings contains the specified string, ignoring case
-     */
-    public static boolean containsCaseInsensitive(final Collection<String> strings, String string) {
-        string = string.toLowerCase();
-        for (final String s : strings) {
-            if (s.equalsIgnoreCase(string)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

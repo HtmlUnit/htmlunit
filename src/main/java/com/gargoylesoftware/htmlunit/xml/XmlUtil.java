@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -235,7 +236,7 @@ public final class XmlUtil {
             attributes.put(attribute.getNodeName(), xmlAttribute);
         }
         if (page instanceof HtmlPage) {
-            localName = localName.toUpperCase();
+            localName = localName.toUpperCase(Locale.ENGLISH);
         }
         final String qualifiedName;
         if (source.getPrefix() == null) {

@@ -21,6 +21,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
@@ -102,16 +103,17 @@ public class EventListenersContainer implements Serializable {
     }
 
     private Handlers getHandlersOrCreateIt(final String type) {
-        Handlers handlers = eventHandlers_.get(type.toLowerCase());
+        final String typeLC = type.toLowerCase(Locale.ENGLISH);
+        Handlers handlers = eventHandlers_.get(typeLC);
         if (handlers == null) {
             handlers = new Handlers();
-            eventHandlers_.put(type.toLowerCase(), handlers);
+            eventHandlers_.put(typeLC, handlers);
         }
         return handlers;
     }
 
     private List<Function> getHandlers(final String eventType, final boolean useCapture) {
-        final Handlers handlers = eventHandlers_.get(eventType.toLowerCase());
+        final Handlers handlers = eventHandlers_.get(eventType.toLowerCase(Locale.ENGLISH));
         if (handlers != null) {
             return handlers.getHandlers(useCapture);
         }
@@ -255,7 +257,7 @@ public class EventListenersContainer implements Serializable {
      * @return the handler function, <code>null</code> if the property is null or not a function
      */
     public Function getEventHandler(final String eventName) {
-        final Object handler = getEventHandlerProp(eventName.toLowerCase());
+        final Object handler = getEventHandlerProp(eventName.toLowerCase(Locale.ENGLISH));
         if (handler instanceof Function) {
             return (Function) handler;
         }

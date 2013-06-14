@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
 import java.lang.reflect.Method;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -145,7 +146,7 @@ public class ActiveXObject extends SimpleScriptable {
         if (name == null) {
             return false;
         }
-        name = name.toLowerCase();
+        name = name.toLowerCase(Locale.ENGLISH);
         return "microsoft.xmlhttp".equals(name) || name.startsWith("msxml2.xmlhttp");
     }
 
@@ -158,8 +159,8 @@ public class ActiveXObject extends SimpleScriptable {
         if (name == null) {
             return false;
         }
-        name = name.toLowerCase();
-        return "Microsoft.XMLDOM".equalsIgnoreCase(name)
+        name = name.toLowerCase(Locale.ENGLISH);
+        return "microsoft.xmldom".equals(name)
             || name.matches("msxml\\d*\\.domdocument.*")
             || name.matches("msxml\\d*\\.freethreadeddomdocument.*");
     }
@@ -173,7 +174,7 @@ public class ActiveXObject extends SimpleScriptable {
         if (name == null) {
             return false;
         }
-        name = name.toLowerCase();
+        name = name.toLowerCase(Locale.ENGLISH);
         return name.matches("msxml\\d*\\.xsltemplate.*");
     }
 

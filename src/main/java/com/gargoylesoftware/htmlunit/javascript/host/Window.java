@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
@@ -1825,7 +1826,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
                 return;
             }
             if (changed instanceof HtmlLink) {
-                final String rel = ((HtmlLink) changed).getRelAttribute().toLowerCase();
+                final String rel = ((HtmlLink) changed).getRelAttribute().toLowerCase(Locale.ENGLISH);
                 if ("stylesheet".equals(rel)) {
                     synchronized (computedStyles_) {
                         computedStyles_.clear();

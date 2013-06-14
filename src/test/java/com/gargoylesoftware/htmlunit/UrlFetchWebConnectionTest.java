@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -165,7 +166,7 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
             sb.append(headerEntry.getKey());
             sb.append(": ");
             if (caseInsensitiveHeaders.contains(headerEntry.getKey())) {
-                sb.append(headerEntry.getValue().toLowerCase());
+                sb.append(headerEntry.getValue().toLowerCase(Locale.ENGLISH));
             }
             else {
                 sb.append(headerEntry.getValue());

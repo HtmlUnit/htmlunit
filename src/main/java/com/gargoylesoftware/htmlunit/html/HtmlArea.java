@@ -20,6 +20,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -210,7 +211,7 @@ public class HtmlArea extends HtmlElement {
      * @return <code>true</code> if the point is contained in this area
      */
     boolean containsPoint(final int x, final int y) {
-        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), "rect").toLowerCase();
+        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), "rect").toLowerCase(Locale.ENGLISH);
 
         if ("default".equals(shape) && getCoordsAttribute() != null) {
             return true;
