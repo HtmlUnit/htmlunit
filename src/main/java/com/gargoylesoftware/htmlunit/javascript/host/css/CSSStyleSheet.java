@@ -30,9 +30,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -65,6 +63,7 @@ import org.w3c.css.sac.NegativeSelector;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 import org.w3c.css.sac.SiblingSelector;
+import org.w3c.css.sac.SimpleSelector;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSRule;
@@ -144,10 +143,11 @@ public class CSSStyleSheet extends SimpleScriptable {
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;
 
-    private static final Collection<String> CSS2_PSEUDO_CLASSES = Arrays.asList("link", "visited", "hover", "active",
-        "focus", "lang", "first-child");
+    private static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<String>(Arrays.asList(
+            "link", "visited", "hover", "active",
+            "focus", "lang", "first-child"));
 
-    private static final Collection<String> CSS3_PSEUDO_CLASSES = new ArrayList<String>(Arrays.asList(
+    private static final Set<String> CSS3_PSEUDO_CLASSES = new HashSet<String>(Arrays.asList(
             "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
             "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
             "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty"));
@@ -365,10 +365,12 @@ public class CSSStyleSheet extends SimpleScriptable {
             final DomElement element) {
         if (selector instanceof GeneralAdjacentSelectorImpl) {
             final SiblingSelector ss = (SiblingSelector) selector;
+            final Selector ssSelector = ss.getSelector();
+            final SimpleSelector ssSiblingSelector = ss.getSiblingSelector();
             for (DomNode prev = element.getPreviousSibling(); prev != null; prev = prev.getPreviousSibling()) {
                 if (prev instanceof HtmlElement
-                    && selects(browserVersion, ss.getSelector(), (HtmlElement) prev)
-                    && selects(browserVersion, ss.getSiblingSelector(), element)) {
+                    && selects(browserVersion, ssSelector, (HtmlElement) prev)
+                    && selects(browserVersion, ssSiblingSelector, element)) {
                     return true;
                 }
             }
@@ -393,8 +395,9 @@ public class CSSStyleSheet extends SimpleScriptable {
                 final DescendantSelector ds = (DescendantSelector) selector;
                 if (selects(browserVersion, ds.getSimpleSelector(), element)) {
                     DomNode ancestor = element.getParentNode();
+                    final Selector dsAncestorSelector = ds.getAncestorSelector();
                     while (ancestor instanceof HtmlElement) {
-                        if (selects(browserVersion, ds.getAncestorSelector(), (HtmlElement) ancestor)) {
+                        if (selects(browserVersion, dsAncestorSelector, (HtmlElement) ancestor)) {
                             return true;
                         }
                         ancestor = ancestor.getParentNode();
@@ -516,11 +519,12 @@ public class CSSStyleSheet extends SimpleScriptable {
                     return false;
                 }
                 final String lcLang = ((LangCondition) condition).getLang();
+                final int lcLangLength = lcLang.length();
                 for (DomNode node = element; node instanceof HtmlElement; node = node.getParentNode()) {
                     final String nodeLang = ((HtmlElement) node).getAttribute("lang");
                     // "en", "en-GB" should be matched by "en" but not "english"
                     if (nodeLang.startsWith(lcLang)
-                        && (nodeLang.length() == lcLang.length() || '-' == nodeLang.charAt(lcLang.length()))) {
+                        && (nodeLang.length() == lcLangLength || '-' == nodeLang.charAt(lcLangLength))) {
                         return true;
                     }
                 }
