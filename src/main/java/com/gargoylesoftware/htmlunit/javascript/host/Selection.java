@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.GENERATED_176
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -294,8 +295,11 @@ public class Selection extends SimpleScriptable {
      * @return the first selection range in the current document, by document position
      */
     private Range getFirstRange() {
+        // avoid concurrent modification exception
+        final List<Range> ranges = new ArrayList<Range>(getRanges());
+
         Range first = null;
-        for (final Range range : getRanges()) {
+        for (final Range range : ranges) {
             if (first == null) {
                 first = range;
             }
@@ -315,8 +319,11 @@ public class Selection extends SimpleScriptable {
      * @return the last selection range in the current document, by document position
      */
     private Range getLastRange() {
+        // avoid concurrent modification exception
+        final List<Range> ranges = new ArrayList<Range>(getRanges());
+
         Range last = null;
-        for (final Range range : getRanges()) {
+        for (final Range range : ranges) {
             if (last == null) {
                 last = range;
             }
