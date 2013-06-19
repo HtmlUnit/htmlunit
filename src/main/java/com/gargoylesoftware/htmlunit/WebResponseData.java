@@ -86,10 +86,18 @@ public class WebResponseData implements Serializable {
         downloadedContent_ = responseBody;
     }
 
-    private InputStream getStream(InputStream stream, final List<NameValuePair> headers) throws IOException {
+    private InputStream getStream(final DownloadedContent downloadedContent,
+                final List<NameValuePair> headers) throws IOException {
+
+        InputStream stream = downloadedContent_.getInputStream();
         if (stream == null) {
             return null;
         }
+
+        if (downloadedContent.isEmpty()) {
+            return stream;
+        }
+
         final String encoding = getHeader(headers, "content-encoding");
         if (encoding != null) {
             // check content length
@@ -153,7 +161,7 @@ public class WebResponseData implements Serializable {
      * @throws IOException in case of IO problems
      */
     public InputStream getInputStream() throws IOException {
-        return getStream(downloadedContent_.getInputStream(), getResponseHeaders());
+        return getStream(downloadedContent_, getResponseHeaders());
     }
 
     /**

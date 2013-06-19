@@ -30,6 +30,7 @@ import org.apache.commons.lang3.ArrayUtils;
  *
  * @version $Revision$
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public interface DownloadedContent extends Serializable {
     /**
@@ -37,6 +38,7 @@ public interface DownloadedContent extends Serializable {
      */
     static class InMemory implements DownloadedContent {
         private final byte[] bytes_;
+
         public InMemory(final byte[] byteArray) {
             if (byteArray == null) {
                 bytes_ = ArrayUtils.EMPTY_BYTE_ARRAY;
@@ -51,6 +53,11 @@ public interface DownloadedContent extends Serializable {
         }
 
         public void cleanUp() {
+            // nothing to do
+        }
+
+        public boolean isEmpty() {
+            return bytes_.length == 0;
         }
     }
 
@@ -79,6 +86,10 @@ public interface DownloadedContent extends Serializable {
                 FileUtils.deleteQuietly(file_);
             }
         }
+
+        public boolean isEmpty() {
+            return false;
+        }
     }
 
     /**
@@ -93,4 +104,9 @@ public interface DownloadedContent extends Serializable {
      */
     void cleanUp();
 
+    /**
+     * Returns true if the content is empty.
+     * @return true or false
+     */
+    boolean isEmpty();
 }

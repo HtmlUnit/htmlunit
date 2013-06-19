@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @version $Revision$
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class WebResponseDataTest extends WebServerTestCase {
@@ -72,11 +73,41 @@ public class WebResponseDataTest extends WebServerTestCase {
      */
     @Test
     public void testEmptyGZippedContent() throws Exception {
+        testEmptyGZippedContent(HttpStatus.SC_OK, 0, null);
+    }
+
+    /**
+     * Tests that empty gzipped content is handled correctly (bug #1510).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void contentLengthIsZero() throws Exception {
+        testEmptyGZippedContent(HttpStatus.SC_OK, 0, "text/html");
+    }
+
+    /**
+     * Tests that empty gzipped content is handled correctly (bug #1510).
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void contentLengthIsMissing() throws Exception {
+        testEmptyGZippedContent(HttpStatus.SC_NO_CONTENT, -1, null);
+    }
+
+    private void testEmptyGZippedContent(final int statusCode, final int contentLength,
+                final String contentType) throws Exception {
         final List<NameValuePair> headers = new ArrayList<NameValuePair>();
-        headers.add(new NameValuePair("Content-Length", "0"));
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
 
-        final WebResponseData data = new WebResponseData("".getBytes(), HttpStatus.SC_OK, "OK", headers);
+        if (contentLength != -1) {
+            headers.add(new NameValuePair("Content-Length", String.valueOf(contentLength)));
+        }
+
+        if (contentType != null) {
+            headers.add(new NameValuePair("Content-Type", contentType));
+        }
+
+        final WebResponseData data = new WebResponseData("".getBytes(), statusCode, "OK", headers);
         data.getBody();
     }
 
