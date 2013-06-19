@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.13" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1510">
+                Make the handling of empty responses more error proof.
+            </action>
             <action type="fix" dev="rbri">
                 Textarea cols() and rows() property processing fixed.
             </action>
