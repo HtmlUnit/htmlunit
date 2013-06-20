@@ -26,7 +26,6 @@ import java.util.zip.InflaterInputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -100,13 +99,6 @@ public class WebResponseData implements Serializable {
 
         final String encoding = getHeader(headers, "content-encoding");
         if (encoding != null) {
-            // check content length
-            final long contentLength = NumberUtils.toLong(getHeader(headers, "content-length"), -1);
-            // don't wrap empty content
-            if (contentLength == 0) {
-                return stream;
-            }
-
             if (StringUtils.contains(encoding, "gzip")) {
                 stream = new GZIPInputStream(stream);
             }
