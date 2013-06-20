@@ -64,11 +64,11 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     private static final String MSG_NO_CONTENT = "no Content";
     private static final String MSG_PROCESSING_ERROR = "error processing";
 
-    private static final String UNINITIALIZED = String.valueOf(XMLHttpRequest.STATE_UNINITIALIZED);
-    private static final String LOADING = String.valueOf(XMLHttpRequest.STATE_LOADING);
-    private static final String LOADED = String.valueOf(XMLHttpRequest.STATE_LOADED);
-    private static final String INTERACTIVE = String.valueOf(XMLHttpRequest.STATE_INTERACTIVE);
-    private static final String COMPLETED = String.valueOf(XMLHttpRequest.STATE_COMPLETED);
+    private static final String UNINITIALIZED = String.valueOf(XMLHttpRequest.STATE_UNSENT);
+    private static final String LOADING = String.valueOf(XMLHttpRequest.STATE_OPENED);
+    private static final String LOADED = String.valueOf(XMLHttpRequest.STATE_HEADERS_RECEIVED);
+    private static final String INTERACTIVE = String.valueOf(XMLHttpRequest.STATE_LOADING);
+    private static final String COMPLETED = String.valueOf(XMLHttpRequest.STATE_DONE);
 
     /**
      * Tests asynchronous use of XMLHttpRequest, using Mozilla style object creation.

@@ -86,6 +86,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Stuart Begg
  * @author Ronald Brill
  *
+ * @see <a href="http://www.w3.org/TR/XMLHttpRequest/">W3C XMLHttpRequest</a>
  * @see <a href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html">Safari documentation</a>
  */
 @JsxClass(browsers = { @WebBrowser(value = IE, minVersion = 7), @WebBrowser(FF), @WebBrowser(CHROME) })
@@ -94,15 +95,15 @@ public class XMLHttpRequest extends SimpleScriptable {
     private static final Log LOG = LogFactory.getLog(XMLHttpRequest.class);
 
     /** The object has been created, but not initialized (the open() method has not been called). */
-    public static final int STATE_UNINITIALIZED = 0;
+    public static final int STATE_UNSENT = 0;
     /** The object has been created, but the send() method has not been called. */
-    public static final int STATE_LOADING = 1;
+    public static final int STATE_OPENED = 1;
     /** The send() method has been called, but the status and headers are not yet available. */
-    public static final int STATE_LOADED = 2;
+    public static final int STATE_HEADERS_RECEIVED = 2;
     /** Some data has been received. */
-    public static final int STATE_INTERACTIVE = 3;
+    public static final int STATE_LOADING = 3;
     /** All the data has been received; the complete data is available in responseBody and responseText. */
-    public static final int STATE_COMPLETED = 4;
+    public static final int STATE_DONE = 4;
 
     private static final String[] ALL_PROPERTIES_ = {"onreadystatechange", "readyState", "responseText", "responseXML",
         "status", "statusText", "abort", "getAllResponseHeaders", "getResponseHeader", "open", "send",
@@ -138,7 +139,7 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     public XMLHttpRequest(final boolean caseSensitiveProperties) {
         caseSensitiveProperties_ = caseSensitiveProperties;
-        state_ = STATE_UNINITIALIZED;
+        state_ = STATE_UNSENT;
     }
 
     /**
@@ -165,7 +166,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     @JsxSetter
     public void setOnreadystatechange(final Function stateChangeHandler) {
         stateChangeHandler_ = stateChangeHandler;
-        if (state_ == STATE_LOADING) {
+        if (state_ == STATE_OPENED) {
             setState(state_, null);
         }
     }
@@ -183,14 +184,14 @@ public class XMLHttpRequest extends SimpleScriptable {
         // Firefox doesn't trigger onreadystatechange handler for sync requests except for completed for FF10
         final boolean noTriggerForSync = browser.hasFeature(
                 XHR_ONREADYSTATECANGE_SYNC_REQUESTS_NOT_TRIGGERED);
-        final boolean triggerForSyncCompleted = (state == STATE_COMPLETED)
+        final boolean triggerForSyncCompleted = (state == STATE_DONE)
             && browser.hasFeature(XHR_ONREADYSTATECANGE_SYNC_REQUESTS_COMPLETED);
         if (stateChangeHandler_ != null && (async_ || !noTriggerForSync || triggerForSyncCompleted)) {
             final Scriptable scope = stateChangeHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
 
             final int nbExecutions;
-            if (async_ && STATE_LOADING == state) {
+            if (async_ && STATE_OPENED == state) {
                 // quite strange but IE and FF seem both to fire state loading twice
                 // in async mode (at least with HTML of the unit tests)
                 nbExecutions = 2;
@@ -230,7 +231,7 @@ public class XMLHttpRequest extends SimpleScriptable {
 
         // Firefox has a separate onload handler, too.
         final boolean triggerOnload = browser.hasFeature(XHR_TRIGGER_ONLOAD_ON_COMPLETED);
-        if (triggerOnload && loadHandler_ != null && state == STATE_COMPLETED) {
+        if (triggerOnload && loadHandler_ != null && state == STATE_DONE) {
             final Scriptable scope = loadHandler_.getParentScope();
             final JavaScriptEngine jsEngine = containingPage_.getWebClient().getJavaScriptEngine();
             jsEngine.callFunction(containingPage_, loadHandler_, scope, this, ArrayUtils.EMPTY_OBJECT_ARRAY);
@@ -376,10 +377,14 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     @JsxGetter
     public int getStatus() {
+        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
+            return 0;
+        }
         if (webResponse_ != null) {
             return webResponse_.getStatusCode();
         }
-        LOG.error("XMLHttpRequest.status was retrieved before the response was available.");
+
+        LOG.error("XMLHttpRequest.status was retrieved without a response available.");
         return 0;
     }
 
@@ -389,10 +394,14 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     @JsxGetter
     public String getStatusText() {
+        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
+            return "";
+        }
         if (webResponse_ != null) {
             return webResponse_.getStatusMessage();
         }
-        LOG.error("XMLHttpRequest.statusText was retrieved before the response was available.");
+
+        LOG.error("XMLHttpRequest.statusText was retrieved without a response available.");
         return null;
     }
 
@@ -410,6 +419,9 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     @JsxFunction
     public String getAllResponseHeaders() {
+        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
+            return null;
+        }
         if (webResponse_ != null) {
             final StringBuilder buffer = new StringBuilder();
             for (final NameValuePair header : webResponse_.getResponseHeaders()) {
@@ -417,7 +429,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             }
             return buffer.toString();
         }
-        LOG.error("XMLHttpRequest.getAllResponseHeaders() was called before the response was available.");
+
+        LOG.error("XMLHttpRequest.getAllResponseHeaders() was called without a response available.");
         return null;
     }
 
@@ -428,10 +441,14 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     @JsxFunction
     public String getResponseHeader(final String headerName) {
+        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
+            return null;
+        }
         if (webResponse_ != null) {
             return webResponse_.getResponseHeaderValue(headerName);
         }
 
+        LOG.error("XMLHttpRequest.getAllResponseHeaders(..) was called without a response available.");
         return null;
     }
 
@@ -500,7 +517,7 @@ public class XMLHttpRequest extends SimpleScriptable {
         // Async stays a boolean.
         async_ = async;
         // Change the state!
-        setState(STATE_LOADING, null);
+        setState(STATE_OPENED, null);
     }
 
     /**
@@ -611,7 +628,7 @@ public class XMLHttpRequest extends SimpleScriptable {
     private void doSend(final Context context) {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
-            setState(STATE_LOADED, context);
+            setState(STATE_HEADERS_RECEIVED, context);
             final boolean crossOriginResourceSharing = webRequest_.getAdditionalHeaders().get("Origin") != null;
             if (crossOriginResourceSharing && isPreflight()) {
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
@@ -632,8 +649,8 @@ public class XMLHttpRequest extends SimpleScriptable {
                 preflightRequest.setAdditionalHeader("Access-Control-Request-Headers", builder.toString());
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
                 if (!isPreflightAuthorized(preflightResponse)) {
-                    setState(STATE_INTERACTIVE, context);
-                    setState(STATE_COMPLETED, context);
+                    setState(STATE_LOADING, context);
+                    setState(STATE_DONE, context);
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("No permitted request for URL " + webRequest_.getUrl());
                     }
@@ -665,8 +682,8 @@ public class XMLHttpRequest extends SimpleScriptable {
                     };
                 }
             }
-            setState(STATE_INTERACTIVE, context);
-            setState(STATE_COMPLETED, context);
+            setState(STATE_LOADING, context);
+            setState(STATE_DONE, context);
             if (!allowOriginResponse) {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL " + webRequest_.getUrl());
@@ -679,7 +696,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 LOG.debug("IOException: returning a network error response.", e);
             }
             webResponse_ = new NetworkErrorWebResponse(webRequest_);
-            setState(STATE_COMPLETED, context);
+            setState(STATE_DONE, context);
             if (async_) {
                 processError(context);
             }

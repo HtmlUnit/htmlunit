@@ -52,9 +52,9 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 @RunWith(BrowserRunner.class)
 public class XMLHttpRequestTest extends WebDriverTestCase {
 
-    private static final String UNINITIALIZED = String.valueOf(XMLHttpRequest.STATE_UNINITIALIZED);
-    private static final String LOADING = String.valueOf(XMLHttpRequest.STATE_LOADING);
-    private static final String COMPLETED = String.valueOf(XMLHttpRequest.STATE_COMPLETED);
+    private static final String UNINITIALIZED = String.valueOf(XMLHttpRequest.STATE_UNSENT);
+    private static final String LOADING = String.valueOf(XMLHttpRequest.STATE_OPENED);
+    private static final String COMPLETED = String.valueOf(XMLHttpRequest.STATE_DONE);
 
     /**
      * Tests synchronous use of XMLHttpRequest.
@@ -118,6 +118,60 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "          new ActiveXObject('Microsoft.XMLHTTP');\n"
             + "          alert('activeX created');\n"
             + "        }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0-", "0-" })
+    public void statusBeforeSend() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+
+            + "        alert(request.status + '-' + request.statusText);\n"
+            + "        request.open('GET', '/foo.xml', false);\n"
+            + "        alert(request.status + '-' + request.statusText);\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "null" })
+    public void responseHeaderBeforeSend() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "        var request;\n"
+            + "        if (window.XMLHttpRequest)\n"
+            + "          request = new XMLHttpRequest();\n"
+            + "        else if (window.ActiveXObject)\n"
+            + "          request = new ActiveXObject('Microsoft.XMLHTTP');\n"
+
+            + "        alert(request.getResponseHeader('content-length'));\n"
+            + "        request.open('GET', '/foo.xml', false);\n"
+            + "        alert(request.getResponseHeader('content-length'));\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body></body>\n"
