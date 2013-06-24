@@ -301,11 +301,11 @@ public class XMLHttpRequest extends SimpleScriptable {
     /**
      * Returns the current state of the HTTP request. The possible values are:
      * <ul>
-     *   <li>0 = uninitialized</li>
-     *   <li>1 = loading</li>
-     *   <li>2 = loaded</li>
-     *   <li>3 = interactive</li>
-     *   <li>4 = complete</li>
+     *   <li>0 = unsent</li>
+     *   <li>1 = opened</li>
+     *   <li>2 = headers_received</li>
+     *   <li>3 = loading</li>
+     *   <li>4 = done</li>
      * </ul>
      * @return the current state of the HTTP request
      */
@@ -628,7 +628,6 @@ public class XMLHttpRequest extends SimpleScriptable {
     private void doSend(final Context context) {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
-            setState(STATE_HEADERS_RECEIVED, context);
             final boolean crossOriginResourceSharing = webRequest_.getAdditionalHeaders().get("Origin") != null;
             if (crossOriginResourceSharing && isPreflight()) {
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
@@ -648,6 +647,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 }
                 preflightRequest.setAdditionalHeader("Access-Control-Request-Headers", builder.toString());
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
+                setState(STATE_HEADERS_RECEIVED, context);
                 if (!isPreflightAuthorized(preflightResponse)) {
                     setState(STATE_LOADING, context);
                     setState(STATE_DONE, context);
@@ -660,6 +660,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 }
             }
             final WebResponse webResponse = wc.loadWebResponse(webRequest_);
+            setState(STATE_HEADERS_RECEIVED, context);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Web response loaded successfully.");
             }
@@ -696,6 +697,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                 LOG.debug("IOException: returning a network error response.", e);
             }
             webResponse_ = new NetworkErrorWebResponse(webRequest_);
+            setState(STATE_HEADERS_RECEIVED, context);
             setState(STATE_DONE, context);
             if (async_) {
                 processError(context);
