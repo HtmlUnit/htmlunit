@@ -64,11 +64,11 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     private static final String MSG_NO_CONTENT = "no Content";
     private static final String MSG_PROCESSING_ERROR = "error processing";
 
-    private static final String UNINITIALIZED = String.valueOf(XMLHttpRequest.STATE_UNSENT);
-    private static final String LOADING = String.valueOf(XMLHttpRequest.STATE_OPENED);
-    private static final String LOADED = String.valueOf(XMLHttpRequest.STATE_HEADERS_RECEIVED);
-    private static final String INTERACTIVE = String.valueOf(XMLHttpRequest.STATE_LOADING);
-    private static final String COMPLETED = String.valueOf(XMLHttpRequest.STATE_DONE);
+    private static final String UNSENT = String.valueOf(XMLHttpRequest.STATE_UNSENT);
+    private static final String OPENED = String.valueOf(XMLHttpRequest.STATE_OPENED);
+    private static final String HEADERS_RECEIVED = String.valueOf(XMLHttpRequest.STATE_HEADERS_RECEIVED);
+    private static final String LOADING = String.valueOf(XMLHttpRequest.STATE_LOADING);
+    private static final String DONE = String.valueOf(XMLHttpRequest.STATE_DONE);
 
     /**
      * Tests asynchronous use of XMLHttpRequest, using Mozilla style object creation.
@@ -119,7 +119,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         client.getPage(URL_FIRST);
 
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
-        final String[] alerts = {UNINITIALIZED, LOADING, LOADING, LOADED, INTERACTIVE, COMPLETED, xml};
+        final String[] alerts = {UNSENT, OPENED, OPENED, HEADERS_RECEIVED, LOADING, DONE, xml};
         assertEquals(alerts, collectedAlerts);
     }
 
