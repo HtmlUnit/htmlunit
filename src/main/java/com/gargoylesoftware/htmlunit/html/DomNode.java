@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -684,6 +685,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
         final Page page = getPage();
         if (page instanceof HtmlPage && page.getEnclosingWindow().getWebClient().getOptions().isCssEnabled()) {
+            final LinkedList<CSSStyleDeclaration> styles = new LinkedList<CSSStyleDeclaration>();
+
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
             for (final Node node : getAncestors(true)) {
@@ -694,28 +697,24 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     if ("none".equals(display)) {
                         return false;
                     }
+                    styles.addFirst(style);
                 }
             }
+
+            final boolean collapseInvisible = hasFeature(DISPLAYED_COLLAPSE);
             // visibility: iterate bottom to top, because children can override
             // the visibility used by parent nodes
-            final boolean collapseInvisible = hasFeature(DISPLAYED_COLLAPSE);
-            DomNode node = this;
-            do {
-                final ScriptableObject scriptableObject = node.getScriptObject();
-                if (scriptableObject instanceof HTMLElement) {
-                    final CSSStyleDeclaration style = ((HTMLElement) scriptableObject).getCurrentStyle();
-                    final String visibility = style.getVisibility();
-                    if (visibility.length() > 0) {
-                        if ("visible".equals(visibility)) {
-                            return true;
-                        }
-                        else if ("hidden".equals(visibility) || (collapseInvisible && "collapse".equals(visibility))) {
-                            return false;
-                        }
+            for (CSSStyleDeclaration style : styles) {
+                final String visibility = style.getVisibility();
+                if (visibility.length() > 5) {
+                    if ("visible".equals(visibility)) {
+                        return true;
+                    }
+                    if ("hidden".equals(visibility) || (collapseInvisible && "collapse".equals(visibility))) {
+                        return false;
                     }
                 }
-                node = node.getParentNode();
-            } while (node != null);
+            }
         }
         return true;
     }
