@@ -654,8 +654,8 @@ public class XMLHttpRequest extends SimpleScriptable {
                 }
                 preflightRequest.setAdditionalHeader("Access-Control-Request-Headers", builder.toString());
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
-                setState(STATE_HEADERS_RECEIVED, context);
                 if (!isPreflightAuthorized(preflightResponse)) {
+                    setState(STATE_HEADERS_RECEIVED, context);
                     setState(STATE_LOADING, context);
                     setState(STATE_DONE, context);
                     if (LOG.isDebugEnabled()) {
@@ -667,7 +667,6 @@ public class XMLHttpRequest extends SimpleScriptable {
                 }
             }
             final WebResponse webResponse = wc.loadWebResponse(webRequest_);
-            setState(STATE_HEADERS_RECEIVED, context);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Web response loaded successfully.");
             }
@@ -690,6 +689,7 @@ public class XMLHttpRequest extends SimpleScriptable {
                     };
                 }
             }
+            setState(STATE_HEADERS_RECEIVED, context);
             setState(STATE_LOADING, context);
             setState(STATE_DONE, context);
             if (!allowOriginResponse) {
