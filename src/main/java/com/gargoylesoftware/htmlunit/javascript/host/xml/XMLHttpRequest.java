@@ -320,6 +320,9 @@ public class XMLHttpRequest extends SimpleScriptable {
      */
     @JsxGetter
     public String getResponseText() {
+        if (state_ == STATE_UNSENT || state_ == STATE_OPENED) {
+            return "";
+        }
         if (webResponse_ != null) {
             return webResponse_.getContentAsString();
         }
@@ -384,7 +387,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             return webResponse_.getStatusCode();
         }
 
-        LOG.error("XMLHttpRequest.status was retrieved without a response available.");
+        LOG.error("XMLHttpRequest.status was retrieved without a response available (readyState: "
+            + state_ + ").");
         return 0;
     }
 
@@ -401,7 +405,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             return webResponse_.getStatusMessage();
         }
 
-        LOG.error("XMLHttpRequest.statusText was retrieved without a response available.");
+        LOG.error("XMLHttpRequest.statusText was retrieved without a response available (readyState: "
+            + state_ + ").");
         return null;
     }
 
@@ -430,7 +435,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             return buffer.toString();
         }
 
-        LOG.error("XMLHttpRequest.getAllResponseHeaders() was called without a response available.");
+        LOG.error("XMLHttpRequest.getAllResponseHeaders() was called without a response available (readyState: "
+            + state_ + ").");
         return null;
     }
 
@@ -448,7 +454,8 @@ public class XMLHttpRequest extends SimpleScriptable {
             return webResponse_.getResponseHeaderValue(headerName);
         }
 
-        LOG.error("XMLHttpRequest.getAllResponseHeaders(..) was called without a response available.");
+        LOG.error("XMLHttpRequest.getAllResponseHeaders(..) was called without a response available (readyState: "
+            + state_ + ").");
         return null;
     }
 
