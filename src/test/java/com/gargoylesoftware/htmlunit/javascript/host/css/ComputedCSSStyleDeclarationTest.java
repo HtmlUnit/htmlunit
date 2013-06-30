@@ -246,10 +246,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF = { "inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none" },
-            IE = { "inline", "inline", "inline", "block", /* "none", */ "inline", "block", "block", "none" })
+    @Alerts(DEFAULT = { "inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none" },
+            IE = { "inline", "inline", "inline", "block", /* "none", */ "inline", "inline", "inline", "inline" })
     public void defaultDisplayValues_A() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
             + "    <a id='a'></a>\n"
             + "    <abbr id='abbr'></abbr>\n"
@@ -295,7 +295,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({ "inline", "inline", "inline", "block", "inline", "inline-block" })
     public void defaultDisplayValues_B() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
             + "    <b id='b'></b>\n"
             // + "    <bdi id='bdi'></bdi>\n"
@@ -332,7 +332,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({ "inline", "table-caption", "block", "inline", "inline", "table-column", "table-column-group" })
     public void defaultDisplayValues_C() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <canvas id='canvas'></canvas>\n"
             + "  <center id='center'></center>\n"
             + "  <code id='code'></code>\n"
@@ -378,7 +378,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({ "block", "inline", "inline", "block", "block", "block", "block" })
     public void defaultDisplayValues_D() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <datalist id='datalist'></datalist>\n"
 
             + "  <dl id='dl'>\n"
@@ -425,7 +425,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({ "inline", "inline" })
     public void defaultDisplayValues_E() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
             + "    <em id='em'></em>\n"
             + "  </p>\n"
@@ -451,9 +451,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "block", "block", "inline", "block", "block" })
+    @Alerts(DEFAULT = { "block", "block", "block", "inline", "block", "block" },
+            IE = { "block", "inline", "inline", "inline", "inline", "block" })
     public void defaultDisplayValues_F() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <form id='form'>\n"
             + "    <fieldset id='fieldset'></fieldset>\n"
             + "  </form>\n"
@@ -491,9 +492,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({ "block", "block", "block", "block", "block", "block", "block", "block" })
+    @Alerts(DEFAULT = { "block", "block", "block", "block", "block", "block", "block", "block" },
+            IE = { "block", "block", "block", "block", "block", "block", "inline", "block" })
     public void defaultDisplayValues_H() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <h1 id='h1'></h1>\n"
             + "  <h2 id='h2'></h2>\n"
             + "  <h3 id='h3'></h3>\n"

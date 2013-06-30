@@ -122,8 +122,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("A", "inline");
         map.put("ABBR", "inline");
         map.put("ACRONYM", "inline");
-        map.put("AREA", "none");
-        map.put("AUDIO", "none");
+        map.put("AREA", "inline");
+        map.put("ARTICLE", "inline");
+        map.put("ASIDE", "inline");
+        map.put("AUDIO", "inline");
         map.put("B", "inline");
         map.put("BDO", "inline");
         map.put("BIG", "inline");
@@ -139,12 +141,24 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("DFN", "inline");
         map.put("EM", "inline");
         map.put("EMBED", "inline");
+        map.put("FIGCAPTION", "inline");
+        map.put("FIGURE", "inline");
         map.put("FONT", "inline");
+        map.put("FOOTER", "inline");
+        map.put("HEADER", "inline");
         map.put("SPAN", "inline");
         DEFAULT_DISPLAYS = Collections.unmodifiableMap(map);
 
         map = new HashMap<String, String>(map);
+        map.put("AREA", "none");
+        map.put("ARTICLE", "block");
+        map.put("ASIDE", "block");
+        map.put("AUDIO", "none");
         map.put("CODE", "inline");
+        map.put("FIGCAPTION", "block");
+        map.put("FIGURE", "block");
+        map.put("FOOTER", "block");
+        map.put("HEADER", "block");
         map.put("SPAN", "inline");
 
         map.put("LI", "list-item");
