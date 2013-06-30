@@ -535,6 +535,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                         "inline", "inline", "inline", "inline" },
             IE = { "inline", "inline", "inline", "inline-block", "inline-block",
                     "inline-block", "inline-block", "inline-block", "inline-block", "inline" })
+    @NotYetImplemented
     public void defaultDisplayValues_I() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"

@@ -147,7 +147,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("FOOTER", "inline");
         map.put("HEADER", "inline");
         map.put("I", "inline");
-        map.put("IFRAME", "inline");
+        // map.put("IFRAME", "inline");
         map.put("IMG", "inline");
         map.put("INPUT", "inline-block");
         map.put("INS", "inline");
@@ -629,7 +629,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             map = DEFAULT_DISPLAYS_CSS;
         }
 
-        final String defaultValue = map.get(getElement().getTagName());
+        final String tagName = getElement().getTagName();
+        final String defaultValue = map.get(tagName);
         if (defaultValue == null) {
             return "block";
         }
@@ -1200,7 +1201,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public int getContentWidth() {
         int width = 0;
-        for (final DomNode child : getDomNodeOrDie().getChildren()) {
+        final DomNode domNode = getDomNodeOrDie();
+        final Iterable<DomNode> childs = domNode.getChildren();
+//        if (domNode instanceof BaseFrameElement) {
+//            final Page enclosedPage = ((BaseFrameElement) domNode).getEnclosedPage();
+//            if (enclosedPage instanceof HtmlPage) {
+//                final HtmlPage htmlPage = (HtmlPage) enclosedPage;
+//                childs = htmlPage.getChildren();
+//            }
+//        }
+        for (final DomNode child : childs) {
             if (child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
                 final int w = e.getCurrentStyle().getCalculatedWidth(true, true);
