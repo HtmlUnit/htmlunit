@@ -246,16 +246,300 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "block block block block block block block block block",
-            FF = "table table-header-group table-row-group table-cell table-row table-cell block list-item block")
-    public void defaultDisplayValues() throws Exception {
+    @Alerts(FF = { "inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none" },
+            IE = { "inline", "inline", "inline", "block", /* "none", */ "inline", "block", "block", "none" })
+    public void defaultDisplayValues_A() throws Exception {
+        final String html = "<html><body>\n"
+            + "  <p id='p'>\n"
+            + "    <a id='a'></a>\n"
+            + "    <abbr id='abbr'></abbr>\n"
+            + "    <acronym id='acronym'></acronym>\n"
+            + "    <address id='address'></address>\n"
+            + "    <article id='article'></article>\n"
+            + "    <aside id='aside'></aside>\n"
+            + "    <audio id='audio'></audio>\n"
+            + "  </p>\n"
+
+            // + "  <applet id='applet'></applet>\n"
+
+            + "  <img usemap='#imgmap'>\n"
+            + "    <map name='imgmap'>\n"
+            + "      <area id='area'>\n"
+            + "    </map>\n"
+            + "  </img>\n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    alert(x('a'));\n"
+            + "    alert(x('abbr'));\n"
+            + "    alert(x('acronym'));\n"
+            + "    alert(x('address'));\n"
+            // + "    alert(x('applet'));\n"
+            + "    alert(x('area'));\n"
+            + "    alert(x('article'));\n"
+            + "    alert(x('aside'));\n"
+            + "    alert(x('audio'));\n"
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "inline", "inline", "inline", "block", "inline", "inline-block" })
+    public void defaultDisplayValues_B() throws Exception {
+        final String html = "<html><body>\n"
+            + "  <p id='p'>\n"
+            + "    <b id='b'></b>\n"
+            // + "    <bdi id='bdi'></bdi>\n"
+            + "    <bdo id='bdo'></bdo>\n"
+            + "    <big id='big'></big>\n"
+            + "    <blockquote id='blockquote'></blockquote>\n"
+            + "    <br id='br'>\n"
+            + "    <button id='button' type='button'></button>\n"
+            + "  </p>\n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    alert(x('b'));\n"
+            // + "    alert(x('bdi'));\n"
+
+            + "    alert(x('bdo'));\n"
+            + "    alert(x('big'));\n"
+            + "    alert(x('blockquote'));\n"
+            + "    alert(x('br'));\n"
+            + "    alert(x('button'));\n"
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "inline", "table-caption", "block", "inline", "inline", "table-column", "table-column-group" })
+    public void defaultDisplayValues_C() throws Exception {
+        final String html = "<html><body>\n"
+            + "  <canvas id='canvas'></canvas>\n"
+            + "  <center id='center'></center>\n"
+            + "  <code id='code'></code>\n"
+
+            + "  <table>\n"
+            + "    <caption id='caption'></caption>\n"
+            + "    <colgroup id='colgroup'>\n"
+            + "      <col id='col'>\n"
+            + "    </colgroup>\n"
+            + "  </table>\n"
+
+            + "  <p id='p'>\n"
+            + "    <cite id='cite'></cite>\n"
+            + "  </p>\n"
+
+            + "  <menu>\n"
+            // + "    <command id='command'></command>\n"
+            + "  </menu>\n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    alert(x('canvas'));\n"
+            + "    alert(x('caption'));\n"
+            + "    alert(x('center'));\n"
+            + "    alert(x('cite'));\n"
+            + "    alert(x('code'));\n"
+            + "    alert(x('col'));\n"
+            + "    alert(x('colgroup'));\n"
+            // + "    alert(x('command'));\n"
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "inline", "inline", "block", "block", "block", "block" })
+    public void defaultDisplayValues_D() throws Exception {
+        final String html = "<html><body>\n"
+            + "  <datalist id='datalist'></datalist>\n"
+
+            + "  <dl id='dl'>\n"
+            + "    <dt id='dt'></dt>\n"
+            + "      <dd id='dd'><dd>\n"
+            + "  </dl>\n"
+
+            + "  <p id='p'>\n"
+            + "    <del id='del'></del>\n"
+            + "  </p>\n"
+
+            // + "  <details id='details'></details>\n"
+            + "  <dfn id='dfn'></dfn>\n"
+            // + "  <dialog id='dialog'></dialog>\n"
+            + "  <dir id='dir'></dir>\n"
+            + "  <dir id='div'></div>\n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            // + "    alert(x('datalist'));\n"
+            + "    alert(x('dd'));\n"
+            + "    alert(x('del'));\n"
+            // + "    alert(x('details'));\n"
+            + "    alert(x('dfn'));\n"
+            // + "    alert(x('dialog'));\n"
+            + "    alert(x('dir'));\n"
+            + "    alert(x('div'));\n"
+            + "    alert(x('dl'));\n"
+            + "    alert(x('dt'));\n"
+
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "inline", "inline" })
+    public void defaultDisplayValues_E() throws Exception {
+        final String html = "<html><body>\n"
+            + "  <p id='p'>\n"
+            + "    <em id='em'></em>\n"
+            + "  </p>\n"
+
+            + "  <embed id='embed'>\n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    alert(x('em'));\n"
+            + "    alert(x('embed'));\n"
+
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "block", "block", "inline", "block", "block" })
+    public void defaultDisplayValues_F() throws Exception {
+        final String html = "<html><body>\n"
+            + "  <form id='form'>\n"
+            + "    <fieldset id='fieldset'></fieldset>\n"
+            + "  </form>\n"
+
+            + "  <figure id='figure'>\n"
+            + "    <figcaption id='figcaption'></figcaption>\n"
+            + "  </figure>\n"
+
+            + "  <p id='p'>\n"
+            + "    <font id='font'></font>\n"
+            + "  </p>\n"
+
+            + "  <footer id='footer'></footer>\n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    alert(x('fieldset'));\n"
+            + "    alert(x('figcaption'));\n"
+            + "    alert(x('figure'));\n"
+            + "    alert(x('font'));\n"
+            + "    alert(x('footer'));\n"
+            + "    alert(x('form'));\n"
+
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({ "block", "block", "block", "block", "block", "block", "block", "block" })
+    public void defaultDisplayValues_H() throws Exception {
+        final String html = "<html><body>\n"
+            + "  <h1 id='h1'></h1>\n"
+            + "  <h2 id='h2'></h2>\n"
+            + "  <h3 id='h3'></h3>\n"
+            + "  <h4 id='h4'></h4>\n"
+            + "  <h5 id='h5'></h5>\n"
+            + "  <h6 id='h6'></h6>\n"
+
+            + "  <header id='header'></header>\n"
+            + "  <hr id='hr'>\n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    alert(x('h1'));\n"
+            + "    alert(x('h2'));\n"
+            + "    alert(x('h3'));\n"
+            + "    alert(x('h4'));\n"
+            + "    alert(x('h5'));\n"
+            + "    alert(x('h6'));\n"
+            + "    alert(x('header'));\n"
+            + "    alert(x('hr'));\n"
+
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(IE = "block block block block block block block block",
+            FF = "table table-header-group table-row-group table-cell table-row table-cell block list-item")
+    public void defaultDisplayValuesTable() throws Exception {
         final String html = "<html><body>\n"
             + "  <table id='table'>\n"
             + "    <thead id='thead'><tr id='tr'><th id='th'>header</th></tr></thead>\n"
             + "    <tbody id='tbody'><tr><td id='td'>body</td></tr></tbody>\n"
             + "  </table>\n"
+
             + "  <ul id='ul'><li id='li'>blah</li></ul>\n"
-            + "  <div id='div'></div>\n"
+
             + "  <script>\n"
             + "    function x(id) {\n"
             + "      var e = document.getElementById(id);\n"
@@ -264,7 +548,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  </script>\n"
             + "  <script>\n"
             + "    alert(x('table') + ' ' + x('thead') + ' ' + x('tbody') + ' ' + x('th') + ' ' + x('tr') +\n"
-            + "      ' ' + x('td') + ' ' + x('ul') + ' ' + x('li') + ' ' + x('div'));</script>\n"
+            + "      ' ' + x('td') + ' ' + x('ul') + ' ' + x('li'));\n"
+            + "  </script>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
     }

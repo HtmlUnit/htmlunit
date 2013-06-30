@@ -120,12 +120,30 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     static {
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("A", "inline");
+        map.put("ABBR", "inline");
+        map.put("ACRONYM", "inline");
+        map.put("AREA", "none");
+        map.put("AUDIO", "none");
+        map.put("B", "inline");
+        map.put("BDO", "inline");
+        map.put("BIG", "inline");
+        map.put("BR", "inline");
+        map.put("BUTTON", "inline-block");
+        map.put("CANVAS", "inline");
+        map.put("CAPTION", "table-caption");
+        map.put("CITE", "inline");
         map.put("CODE", "inline");
+        map.put("COL", "table-column");
+        map.put("COLGROUP", "table-column-group");
+        map.put("DEL", "inline");
+        map.put("DFN", "inline");
+        map.put("EM", "inline");
+        map.put("EMBED", "inline");
+        map.put("FONT", "inline");
         map.put("SPAN", "inline");
         DEFAULT_DISPLAYS = Collections.unmodifiableMap(map);
 
-        map = new HashMap<String, String>();
-        map.put("A", "inline");
+        map = new HashMap<String, String>(map);
         map.put("CODE", "inline");
         map.put("SPAN", "inline");
 
