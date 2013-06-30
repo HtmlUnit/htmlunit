@@ -531,10 +531,105 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "block block block block block block block block",
-            FF = "table table-header-group table-row-group table-cell table-row table-cell block list-item")
+    @Alerts(DEFAULT = { "inline", "inline", "inline", "inline", "inline", "inline",
+                        "inline", "inline", "inline", "inline" },
+            IE = { "inline", "inline", "inline", "inline-block", "inline-block",
+                    "inline-block", "inline-block", "inline-block", "inline-block", "inline" })
+    public void defaultDisplayValues_I() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
+            + "  <p id='p'>\n"
+            + "    <i id='i'></i>\n"
+            + "    <ins id='ins'></ins>\n"
+            + "  </p>\n"
+
+            + "  <iframe id='iframe'></iframe>\n"
+            + "  <img id='img'></img>\n"
+
+            + "  <form id='form'>\n"
+            + "    <input id='submit' type='submit'>\n"
+            + "    <input id='reset' type='reset'>\n"
+            + "    <input id='text' type='text'>\n"
+            + "    <input id='password' type='password'>\n"
+            + "    <input id='checkbox' type='checkbox'>\n"
+            + "    <input id='radio' type='radio'>\n"
+            + "  </form>\n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    alert(x('i'));\n"
+            + "    alert(x('iframe'));\n"
+            + "    alert(x('img'));\n"
+
+            + "    alert(x('submit'));\n"
+            + "    alert(x('reset'));\n"
+            + "    alert(x('text'));\n"
+            + "    alert(x('password'));\n"
+            + "    alert(x('checkbox'));\n"
+            + "    alert(x('radio'));\n"
+
+            + "    alert(x('ins'));\n"
+
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "inline", "inline", "inline", "block", "list-item" },
+            IE = { "inline", "inline", "inline", "inline", "list-item" })
+    public void defaultDisplayValues_KL() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
+            + "  <p id='p'>\n"
+            + "    <kbd id='kbd'></kbd>\n"
+            + "    <ins id='ins'></ins>\n"
+            + "  </p>\n"
+
+            + "  <ol>\n"
+            + "    <li id='li'></li>\n"
+            + "  </ol>\n"
+
+            + "  <form id='form'>\n"
+            + "    <keygen id='keygen'>\n"
+            + "    <label id='label'>\n"
+            + "    <fieldset id='fieldset'>\n"
+            + "      <legend id='legend'></legend>\n"
+            + "    </fieldset>\n"
+            + "  </form>\n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    alert(x('kbd'));\n"
+            + "    alert(x('keygen'));\n"
+
+            + "    alert(x('label'));\n"
+            + "    alert(x('legend'));\n"
+            + "    alert(x('li'));\n"
+
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("table table-header-group table-row-group table-cell table-row table-cell block list-item")
     public void defaultDisplayValuesTable() throws Exception {
-        final String html = "<html><body>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <table id='table'>\n"
             + "    <thead id='thead'><tr id='tr'><th id='th'>header</th></tr></thead>\n"
             + "    <tbody id='tbody'><tr><td id='td'>body</td></tr></tbody>\n"

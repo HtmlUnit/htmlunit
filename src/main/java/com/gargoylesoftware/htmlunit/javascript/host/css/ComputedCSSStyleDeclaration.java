@@ -146,7 +146,24 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("FONT", "inline");
         map.put("FOOTER", "inline");
         map.put("HEADER", "inline");
+        map.put("I", "inline");
+        map.put("IFRAME", "inline");
+        map.put("IMG", "inline");
+        map.put("INPUT", "inline-block");
+        map.put("INS", "inline");
+        map.put("KBD", "inline");
+        map.put("KEYGEN", "inline");
+        map.put("LABEL", "inline");
+        map.put("LEGEND", "inline");
+        map.put("LI", "list-item");
         map.put("SPAN", "inline");
+
+        map.put("TABLE", "table");
+        map.put("TBODY", "table-row-group");
+        map.put("TD", "table-cell");
+        map.put("TH", "table-cell");
+        map.put("THEAD", "table-header-group");
+        map.put("TR", "table-row");
         DEFAULT_DISPLAYS = Collections.unmodifiableMap(map);
 
         map = new HashMap<String, String>(map);
@@ -159,15 +176,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("FIGURE", "block");
         map.put("FOOTER", "block");
         map.put("HEADER", "block");
-        map.put("SPAN", "inline");
+        map.put("INPUT", "inline");
+        map.put("LEGEND", "block");
 
-        map.put("LI", "list-item");
-        map.put("TABLE", "table");
-        map.put("TBODY", "table-row-group");
-        map.put("TD", "table-cell");
-        map.put("TH", "table-cell");
-        map.put("THEAD", "table-header-group");
-        map.put("TR", "table-row");
         DEFAULT_DISPLAYS_CSS = Collections.unmodifiableMap(map);
     }
 
