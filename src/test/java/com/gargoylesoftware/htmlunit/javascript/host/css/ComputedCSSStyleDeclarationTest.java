@@ -627,6 +627,47 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = { "inline", "inline", "block", "inline-block" },
+            IE = { "inline", "inline", "block", "inline" })
+    public void defaultDisplayValues_M() throws Exception {
+        final String html = "<!DOCTYPE HTML>\n<html><body>\n"
+            + "  <img usemap='#imgmap'>\n"
+            + "    <map id='map' name='imgmap'>\n"
+            + "      <area id='area'>\n"
+            + "    </map>\n"
+            + "  </img>\n"
+
+            + "  <p id='p'>\n"
+            + "    <mark id='mark'></mark>\n"
+            + "  </p>\n"
+
+            + "  <menu id='menu'>\n"
+            + "    <li id='li'></li>\n"
+            + "  </menu>\n"
+
+            + "  <meter id='meter'></meter>\n"
+
+            + "  <script>\n"
+            + "    function x(id) {\n"
+            + "      var e = document.getElementById(id);\n"
+            + "      return e.currentStyle ? e.currentStyle.display : window.getComputedStyle(e, '').display;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    alert(x('map'));\n"
+            + "    alert(x('mark'));\n"
+            + "    alert(x('menu'));\n"
+            + "    alert(x('meter'));\n"
+
+            + "  </script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("table table-header-group table-row-group table-cell table-row table-cell block list-item")
     public void defaultDisplayValuesTable() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
