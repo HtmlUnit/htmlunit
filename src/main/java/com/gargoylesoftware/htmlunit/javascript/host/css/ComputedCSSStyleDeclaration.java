@@ -149,7 +149,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("I", "inline");
         // map.put("IFRAME", "inline");
         map.put("IMG", "inline");
-        map.put("INPUT", "inline-block");
+        // map.put("INPUT", "inline-block");
         map.put("INS", "inline");
         map.put("KBD", "inline");
         map.put("KEYGEN", "inline");
@@ -180,7 +180,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("FIGURE", "block");
         map.put("FOOTER", "block");
         map.put("HEADER", "block");
-        map.put("INPUT", "inline");
+        // map.put("INPUT", "inline");
         map.put("LEGEND", "block");
         map.put("METER", "inline-block");
 
