@@ -42,8 +42,11 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.css.sac.Selector;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -147,7 +150,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         map.put("FOOTER", "inline");
         map.put("HEADER", "inline");
         map.put("I", "inline");
-        // map.put("IFRAME", "inline");
+        map.put("IFRAME", "inline");
         map.put("IMG", "inline");
         // map.put("INPUT", "inline-block");
         map.put("INS", "inline");
@@ -1202,14 +1205,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public int getContentWidth() {
         int width = 0;
         final DomNode domNode = getDomNodeOrDie();
-        final Iterable<DomNode> childs = domNode.getChildren();
-//        if (domNode instanceof BaseFrameElement) {
-//            final Page enclosedPage = ((BaseFrameElement) domNode).getEnclosedPage();
-//            if (enclosedPage instanceof HtmlPage) {
-//                final HtmlPage htmlPage = (HtmlPage) enclosedPage;
-//                childs = htmlPage.getChildren();
-//            }
-//        }
+        Iterable<DomNode> childs = domNode.getChildren();
+        if (domNode instanceof BaseFrameElement) {
+            final Page enclosedPage = ((BaseFrameElement) domNode).getEnclosedPage();
+            if (enclosedPage instanceof HtmlPage) {
+                final HtmlPage htmlPage = (HtmlPage) enclosedPage;
+                childs = htmlPage.getChildren();
+            }
+        }
         for (final DomNode child : childs) {
             if (child.getScriptObject() instanceof HTMLElement) {
                 final HTMLElement e = (HTMLElement) child.getScriptObject();
