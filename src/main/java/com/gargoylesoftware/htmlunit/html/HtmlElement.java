@@ -41,7 +41,6 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
@@ -134,8 +133,8 @@ public abstract class HtmlElement extends DomElement {
             final String attributeValue) {
 
         // TODO: Clean up; this is a hack for HtmlElement living within an XmlPage.
-        final Document ownerDoc = getOwnerDocument();
-        if (!(ownerDoc instanceof HtmlPage)) {
+        final SgmlPage page = getPage();
+        if (page == null || !page.isHtmlPage()) {
             super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
             return;
         }
@@ -143,7 +142,7 @@ public abstract class HtmlElement extends DomElement {
         final String oldAttributeValue = getAttribute(qualifiedName);
         final HtmlPage htmlPage = (HtmlPage) getPage();
         final boolean mappedElement = isDirectlyAttachedToPage()
-                    && HtmlPage.isMappedElement(ownerDoc, qualifiedName);
+                    && HtmlPage.isMappedElement(htmlPage, qualifiedName);
         if (mappedElement) {
             // cast is save here because isMappedElement checks for HtmlPage
             htmlPage.removeMappedElement(this);

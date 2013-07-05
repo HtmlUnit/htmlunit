@@ -410,7 +410,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
 
         try {
             final Page page = getWebWindow().getEnclosedPage();
-            if (page != null && page instanceof HtmlPage) {
+            if (page != null && page.isHtmlPage()) {
                 return ((HtmlPage) page).getFullyQualifiedUrl(urlString);
             }
             return new URL(urlString);

@@ -864,7 +864,7 @@ public class WebClient implements Serializable {
         WebWindow window = opener;
         while (true) {
             final Page page = window.getEnclosedPage();
-            if (page instanceof HtmlPage) {
+            if (page != null && page.isHtmlPage()) {
                 try {
                     final FrameWindow frame = ((HtmlPage) page).getFrameByName(name);
                     return frame;

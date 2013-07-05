@@ -129,7 +129,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
             if (form != null) {
                 form.setCheckedRadioButton(this);
             }
-            else if (page instanceof HtmlPage) {
+            else if (page != null && page.isHtmlPage()) {
                 setCheckedForPage((HtmlPage) page);
             }
         }
@@ -162,7 +162,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
         if (form != null) {
             form.setCheckedRadioButton(this);
         }
-        else if (page instanceof HtmlPage) {
+        else if (page != null && page.isHtmlPage()) {
             setCheckedForPage((HtmlPage) page);
         }
         super.doClickStateUpdate();

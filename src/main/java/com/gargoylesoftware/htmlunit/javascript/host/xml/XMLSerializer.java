@@ -27,6 +27,7 @@ import java.util.Set;
 
 import org.w3c.dom.NamedNodeMap;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.*;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -121,14 +122,16 @@ public class XMLSerializer extends SimpleScriptable {
         if (root instanceof Element) {
             final StringBuilder buffer = new StringBuilder();
             final DomNode node = root.getDomNodeOrDie();
+            final SgmlPage page = node.getPage();
+            final boolean isHtmlPage = page != null && page.isHtmlPage();
             final boolean nodeNameAsUpperCase = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_NODE_AS_UPPERCASE)
-                && (node.getPage() instanceof HtmlPage);
+                && isHtmlPage;
             final boolean appendCrlf = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_APPENDS_CRLF);
             final boolean addXhtmlNamespace = getBrowserVersion().hasFeature(JS_XML_SERIALIZER_ADD_XHTML_NAMESPACE);
 
             String forcedNamespace = null;
             if (addXhtmlNamespace) {
-                if (node.getPage() instanceof HtmlPage) {
+                if (isHtmlPage) {
                     forcedNamespace = "http://www.w3.org/1999/xhtml";
                 }
             }

@@ -54,7 +54,6 @@ import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.ElementFactory;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br/>
@@ -235,7 +234,7 @@ public final class XmlUtil {
             final DomAttr xmlAttribute = new DomAttr(page, namespaceURI, qualifiedName, value, specified);
             attributes.put(attribute.getNodeName(), xmlAttribute);
         }
-        if (page instanceof HtmlPage) {
+        if (page != null && page.isHtmlPage()) {
             localName = localName.toUpperCase(Locale.ENGLISH);
         }
         final String qualifiedName;

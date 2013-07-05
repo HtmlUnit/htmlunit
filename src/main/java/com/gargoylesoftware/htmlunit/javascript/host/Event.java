@@ -693,7 +693,7 @@ public class Event extends SimpleScriptable {
      */
     public boolean applies(final DomNode node) {
         if (TYPE_BLUR.equals(getType()) || TYPE_FOCUS.equals(getType())) {
-            if (node instanceof HtmlPage && getBrowserVersion().hasFeature(EVENT_FOCUS_DOCUMENT_DESCENDANTS)) {
+            if (getBrowserVersion().hasFeature(EVENT_FOCUS_DOCUMENT_DESCENDANTS) && node instanceof HtmlPage) {
                 return true;
             }
             return node instanceof SubmittableElement || node instanceof HtmlAnchor
