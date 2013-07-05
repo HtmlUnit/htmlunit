@@ -760,8 +760,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public String asXml() {
         String charsetName = null;
-        if (getPage() instanceof HtmlPage) {
-            charsetName = ((HtmlPage) getPage()).getPageEncoding();
+        final SgmlPage page = getPage();
+        if (page != null && page.isHtmlPage()) {
+            charsetName = ((HtmlPage) page).getPageEncoding();
         }
         final StringWriter stringWriter = new StringWriter();
         final PrintWriter printWriter = new PrintWriter(stringWriter);
@@ -1113,8 +1114,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final DomNode exParent = parent_;
         basicRemove();
 
-        if (getPage() instanceof HtmlPage) {
-            ((HtmlPage) getPage()).notifyNodeRemoved(this);
+        final SgmlPage page = getPage();
+        if (page != null && page.isHtmlPage()) {
+            ((HtmlPage) page).notifyNodeRemoved(this);
         }
 
         if (exParent != null) {

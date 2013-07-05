@@ -90,7 +90,8 @@ public class HtmlImage extends HtmlElement {
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String value) {
         final SgmlPage page = getPage();
-        if ("src".equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED && page instanceof HtmlPage) {
+        if ("src".equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED
+                && page != null && page.isHtmlPage()) {
             final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
             if (!oldValue.equals(value)) {
                 super.setAttributeNS(namespaceURI, qualifiedName, value);
@@ -135,13 +136,13 @@ public class HtmlImage extends HtmlElement {
      * handler the first time it is invoked.</p>
      */
     public void doOnLoad() {
-        final SgmlPage page = getPage();
-        if (!(page instanceof HtmlPage)) {
-            return; // nothing to do if embedded in XML code
-        }
-
         if (onloadInvoked_) {
             return;
+        }
+
+        final SgmlPage page = getPage();
+        if (page == null || !page.isHtmlPage()) {
+            return; // nothing to do if embedded in XML code
         }
 
         final WebClient client = page.getWebClient();

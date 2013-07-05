@@ -144,9 +144,12 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
     @Override
     public void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue) {
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue);
-        if ("value".equals(qualifiedName) && getPage() instanceof HtmlPage) {
-            setSelectionStart(attributeValue.length());
-            setSelectionEnd(attributeValue.length());
+        if ("value".equals(qualifiedName)) {
+            final SgmlPage page = getPage();
+            if (page != null && page.isHtmlPage()) {
+                setSelectionStart(attributeValue.length());
+                setSelectionEnd(attributeValue.length());
+            }
         }
     }
 

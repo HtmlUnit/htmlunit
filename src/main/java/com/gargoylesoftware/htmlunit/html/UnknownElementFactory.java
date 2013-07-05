@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author David K. Taylor
+ * @author Ronald Brill
  */
 public final class UnknownElementFactory implements ElementFactory {
 
@@ -43,7 +44,7 @@ public final class UnknownElementFactory implements ElementFactory {
      */
     public HtmlElement createElement(final SgmlPage page, final String tagName, final Attributes attributes) {
         String namespace = null;
-        if (page instanceof HtmlPage && tagName.indexOf(':') != -1) {
+        if (page != null && page.isHtmlPage() && tagName.indexOf(':') != -1) {
             final HtmlPage htmlPage = (HtmlPage) page;
             final String prefix = tagName.substring(0, tagName.indexOf(':'));
             final Map<String, String> namespaces = htmlPage.getNamespaces();

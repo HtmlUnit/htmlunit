@@ -111,7 +111,7 @@ public abstract class BaseFrameElement extends HtmlElement {
         loadInnerPageIfPossible(source);
 
         final Page enclosedPage = getEnclosedPage();
-        if (enclosedPage instanceof HtmlPage) {
+        if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
             final JavaScriptEngine jsEngine = getPage().getWebClient().getJavaScriptEngine();
             if (jsEngine.isScriptRunning()) {

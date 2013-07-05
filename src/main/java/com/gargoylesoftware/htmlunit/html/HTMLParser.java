@@ -292,7 +292,7 @@ public final class HTMLParser {
         if (waitToLoad) {
             for (final FrameWindow frame : page.getFrames()) {
                 final Page containedPage = frame.getEnclosedPage();
-                if (containedPage instanceof HtmlPage) {
+                if (containedPage != null && containedPage.isHtmlPage()) {
                     addBodyToPageIfNecessary((HtmlPage) containedPage, false, false);
                 }
             }

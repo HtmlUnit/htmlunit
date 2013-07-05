@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Document;
  * @version $Revision$
  * @author David K. Taylor
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public abstract class DomNamespaceNode extends DomNode {
 
@@ -118,7 +119,7 @@ public abstract class DomNamespaceNode extends DomNode {
         // we have to drop the XHtmlNamespace because we did this already
         // for the html document itself
         final SgmlPage page = (SgmlPage) doc.getDomNodeOrDie();
-        if (page instanceof HtmlPage && !(page instanceof XHtmlPage)) {
+        if (page.isHtmlPage() && !(page instanceof XHtmlPage)) {
             if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI_)) {
                 namespaceURI_ = null;
             }

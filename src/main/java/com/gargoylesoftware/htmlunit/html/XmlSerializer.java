@@ -167,7 +167,7 @@ class XmlSerializer {
         final String suffix = getFileExtension(enclosedPage);
         final File file = createFile(srcAttr.getValue(), "." + suffix);
 
-        if (enclosedPage instanceof HtmlPage) {
+        if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             file.delete(); // TODO: refactor as it is stupid to create empty file at one place
             // and then to complain that it already exists
             ((HtmlPage) enclosedPage).save(file);
@@ -185,7 +185,7 @@ class XmlSerializer {
     }
 
     private String getFileExtension(final Page enclosedPage) {
-        if (enclosedPage instanceof HtmlPage) {
+        if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             return "html";
         }
 

@@ -214,7 +214,7 @@ public abstract class HtmlElement extends DomElement {
 
         final Page page = getPage();
         HtmlPage htmlPage = null;
-        if (page instanceof HtmlPage) {
+        if (page != null && page.isHtmlPage()) {
             htmlPage = (HtmlPage) page;
             htmlPage.removeMappedElement(this);
         }

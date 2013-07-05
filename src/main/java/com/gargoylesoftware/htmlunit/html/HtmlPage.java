@@ -263,7 +263,7 @@ public class HtmlPage extends SgmlPage {
         for (final FrameWindow frameWindow : getFrames()) {
             if (frameWindow.getFrameElement() instanceof HtmlFrame) {
                 final Page page = frameWindow.getEnclosedPage();
-                if (page instanceof HtmlPage) {
+                if (page != null && page.isHtmlPage()) {
                     ((HtmlPage) page).executeEventHandlersIfNeeded(Event.TYPE_LOAD);
                 }
             }
@@ -1436,13 +1436,11 @@ public class HtmlPage extends SgmlPage {
     public void deregisterFramesIfNeeded() {
         for (final WebWindow window : getFrames()) {
             getWebClient().deregisterWebWindow(window);
-            if (window.getEnclosedPage() instanceof HtmlPage) {
-                final HtmlPage page = (HtmlPage) window.getEnclosedPage();
-                if (page != null) {
-                    // seems quite silly, but for instance if the src attribute of an iframe is not
-                    // set, the error only occurs when leaving the page
-                    page.deregisterFramesIfNeeded();
-                }
+            final Page page = window.getEnclosedPage();
+            if (page != null && page.isHtmlPage()) {
+                // seems quite silly, but for instance if the src attribute of an iframe is not
+                // set, the error only occurs when leaving the page
+                ((HtmlPage) page).deregisterFramesIfNeeded();
             }
         }
     }
@@ -2350,6 +2348,11 @@ public class HtmlPage extends SgmlPage {
 
     @Override
     protected boolean isDirectlyAttachedToPage() {
+        return true;
+    }
+
+    @Override
+    public boolean isHtmlPage() {
         return true;
     }
 }
