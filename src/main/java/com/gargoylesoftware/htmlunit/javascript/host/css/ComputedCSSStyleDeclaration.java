@@ -1236,7 +1236,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         Iterable<DomNode> childs = domNode.getChildren();
         if (domNode instanceof BaseFrameElement) {
             final Page enclosedPage = ((BaseFrameElement) domNode).getEnclosedPage();
-            if (enclosedPage instanceof HtmlPage) {
+            if (enclosedPage != null && enclosedPage.isHtmlPage()) {
                 final HtmlPage htmlPage = (HtmlPage) enclosedPage;
                 childs = htmlPage.getChildren();
             }

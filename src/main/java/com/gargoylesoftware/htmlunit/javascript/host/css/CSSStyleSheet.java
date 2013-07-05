@@ -596,7 +596,7 @@ public class CSSStyleSheet extends SimpleScriptable {
         }
         else if ("focus".equals(value)) {
             final SgmlPage page = element.getPage();
-            if (page instanceof HtmlPage) {
+            if (page != null && page.isHtmlPage()) {
                 final HtmlElement focus = ((HtmlPage) page).getFocusedElement();
                 return element == focus;
             }
