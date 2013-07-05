@@ -153,7 +153,7 @@ public class Element extends EventNode {
         attributeName = fixAttributeName(attributeName);
         final Page page = getDomNodeOrDie().getPage();
         final boolean supportsFlags = getBrowserVersion().hasFeature(JS_GET_ATTRIBUTE_SUPPORTS_FLAGS_IN_QUIRKS_MODE)
-                && page instanceof HtmlPage && ((HtmlPage) page).isQuirksMode();
+                && page != null && page.isHtmlPage() && ((HtmlPage) page).isQuirksMode();
 
         Object value;
         if (supportsFlags && flags != null && flags == 2 && "style".equalsIgnoreCase(attributeName)) {

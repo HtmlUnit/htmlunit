@@ -52,7 +52,6 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -229,10 +228,12 @@ public class JavaScriptEngine {
                         // this obj won't have prototype, constants need to be configured on it again
                         configureConstants(config, obj);
 
-                        if (obj.getClass() == Element.class && webWindow.getEnclosedPage() instanceof HtmlPage) {
-                            final DomNode domNode =
-                                new HtmlDivision(null, "", (SgmlPage) webWindow.getEnclosedPage(), null);
-                            obj.setDomNode(domNode);
+                        if (obj.getClass() == Element.class) {
+                            final Page page = webWindow.getEnclosedPage();
+                            if (page != null && page.isHtmlPage()) {
+                                final DomNode domNode = new HtmlDivision(null, "", (HtmlPage) page, null);
+                                obj.setDomNode(domNode);
+                            }
                         }
                     }
                     prototypes.put(config.getHostClass(), prototype);

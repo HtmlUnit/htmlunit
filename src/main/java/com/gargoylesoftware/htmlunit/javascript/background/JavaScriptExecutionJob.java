@@ -85,7 +85,7 @@ abstract class JavaScriptExecutionJob extends BasicJavaScriptJob {
 
             // Verify that the current page is still available and a html page
             final Page enclosedPage = w.getEnclosedPage();
-            if (!(enclosedPage instanceof HtmlPage)) {
+            if (enclosedPage == null || !enclosedPage.isHtmlPage()) {
                 if (enclosedPage == null) {
                     if (LOG.isDebugEnabled()) {
                         LOG.debug("The page that originated this job doesn't exist anymore. Execution cancelled.");

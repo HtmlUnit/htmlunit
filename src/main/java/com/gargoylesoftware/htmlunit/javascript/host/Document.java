@@ -208,7 +208,7 @@ public class Document extends EventNode {
             if ("on".equalsIgnoreCase(mode)) {
                 designMode_ = "on";
                 final SgmlPage page = getPage();
-                if (page instanceof HtmlPage) {
+                if (page != null && page.isHtmlPage()) {
                     final HtmlPage htmlPage = (HtmlPage) page;
                     final DomNode child = htmlPage.getBody().getFirstChild();
                     final DomNode rangeNode = child == null ? htmlPage.getBody() : child;

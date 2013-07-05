@@ -691,7 +691,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
             final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
             page.addDomChangeListener(listener);
 
-            if (page instanceof HtmlPage) {
+            if (page.isHtmlPage()) {
                 ((HtmlPage) page).addHtmlAttributeChangeListener(listener);
             }
         }
@@ -741,7 +741,7 @@ public class Window extends SimpleScriptable implements ScriptableWithFallbackGe
      * @param enclosedPage the page containing the JavaScript
      */
     public void initialize(final Page enclosedPage) {
-        if (enclosedPage instanceof HtmlPage) {
+        if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
 
             // Windows don't have corresponding DomNodes so set the domNode

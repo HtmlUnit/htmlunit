@@ -392,8 +392,8 @@ public class HTMLAnchorElement extends HTMLElement {
 
         href = href.trim();
 
-        final SgmlPage sgmlPage = element.getPage();
-        if (!(sgmlPage instanceof HtmlPage)) {
+        final SgmlPage page = element.getPage();
+        if (page == null || !page.isHtmlPage()) {
             return href;
         }
 
@@ -409,8 +409,8 @@ public class HTMLAnchorElement extends HTMLElement {
             anchorPart = href.substring(indexAnchor);
         }
 
+        final HtmlPage htmlPage = (HtmlPage) page;
         try {
-            final HtmlPage htmlPage = (HtmlPage) sgmlPage;
             final String response =
                 htmlPage.getFullyQualifiedUrl(beforeAnchor).toExternalForm() + anchorPart;
             return response;

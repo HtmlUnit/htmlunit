@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
  * @author Chris Erskine
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class SimpleScriptable extends ScriptableObject implements Cloneable {
 
@@ -287,7 +288,7 @@ public class SimpleScriptable extends ScriptableObject implements Cloneable {
         if (String.class.equals(hint) || hint == null) {
             if (getBrowserVersion().hasFeature(JS_OBJECT_IN_QUIRKS_MODE)) {
                 final Page page = getWindow().getWebWindow().getEnclosedPage();
-                if (page instanceof HtmlPage && ((HtmlPage) page).isQuirksMode()) {
+                if (page != null && page.isHtmlPage() && ((HtmlPage) page).isQuirksMode()) {
                     return "[object]";
                 }
             }
