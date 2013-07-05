@@ -204,11 +204,15 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
     private void testSelects(final String css, final boolean selectBody, final boolean selectDivD,
         final boolean selectSpanS) throws Exception {
         final String html =
-              "<html><body id='b'><style></style>\n"
-            + "<div id='d' class='foo bar' lang='en-GB'>"
-            + "<span>x</span>"
-            + "<span id='s'>a</span>b</div>\n"
-            + "</body></html>";
+              "<html>\n"
+            + "  <body id='b'>\n"
+            + "    <style></style>\n"
+            + "    <div id='d' class='foo bar' lang='en-GB'>\n"
+            + "      <span>x</span>\n"
+            + "      <span id='s'>a</span>b\n"
+            + "    </div>\n"
+            + "  </body>"
+            + "</html>";
         final HtmlPage page = loadPage(html);
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptObject();
@@ -219,7 +223,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         assertEquals(selectSpanS, sheet.selects(selector, page.getHtmlElementById("s")));
     }
 
-    /**
+/**
      * Test for 3325124.
      * @throws Exception if the test fails
      */
