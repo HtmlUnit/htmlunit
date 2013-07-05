@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @version $Revision$
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class SelectionDelegate implements Serializable {
 
@@ -114,7 +115,7 @@ public class SelectionDelegate implements Serializable {
 
     private void makeThisTheOnlySelectionIfEmulatingIE() {
         final Page page = element_.getPage();
-        if (page instanceof HtmlPage) {
+        if (page != null && page.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) page;
             if (htmlPage.getWebClient().getBrowserVersion().hasFeature(GENERATED_13)) {
                 htmlPage.setSelectionRange(selection_);
